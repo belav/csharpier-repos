@@ -10,8 +10,10 @@ namespace System.Text.RegularExpressions
         /// <summary>
         /// Searches the input string for one or more occurrences of the text supplied in the given pattern.
         /// </summary>
-        public static bool IsMatch(string input, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern) =>
-            RegexCache.GetOrAdd(pattern).IsMatch(input);
+        public static bool IsMatch(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern
+        ) => RegexCache.GetOrAdd(pattern).IsMatch(input);
 
         /// <summary>
         /// Indicates whether the specified regular expression finds a match in the specified input span.
@@ -22,16 +24,21 @@ namespace System.Text.RegularExpressions
         /// <exception cref="ArgumentException">A regular expression parsing error occurred.</exception>
         /// <exception cref="ArgumentNullException"><paramref name="pattern"/> is <see langword="null"/></exception>
         /// <exception cref="RegexMatchTimeoutException">A time-out occurred.</exception>
-        public static bool IsMatch(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern) =>
-            RegexCache.GetOrAdd(pattern).IsMatch(input);
+        public static bool IsMatch(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern
+        ) => RegexCache.GetOrAdd(pattern).IsMatch(input);
 
         /// <summary>
         /// Searches the input string for one or more occurrences of the text
         /// supplied in the pattern parameter with matching options supplied in the options
         /// parameter.
         /// </summary>
-        public static bool IsMatch(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).IsMatch(input);
+        public static bool IsMatch(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options
+        ) => RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).IsMatch(input);
 
         /// <summary>
         /// Indicates whether the specified regular expression finds a match in the specified input span, using the specified matching options.
@@ -44,11 +51,18 @@ namespace System.Text.RegularExpressions
         /// <exception cref="ArgumentNullException"><paramref name="pattern"/> is <see langword="null"/></exception>
         /// <exception cref="RegexMatchTimeoutException">A time-out occurred.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="options"/> is not in a valid <see cref="RegexOptions"/> value.</exception>
-        public static bool IsMatch(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).IsMatch(input);
+        public static bool IsMatch(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options
+        ) => RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).IsMatch(input);
 
-        public static bool IsMatch(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).IsMatch(input);
+        public static bool IsMatch(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).IsMatch(input);
 
         /// <summary>
         /// Indicates whether the specified regular expression finds a match in the specified input span, using the specified matching options and time-out interval.
@@ -63,8 +77,12 @@ namespace System.Text.RegularExpressions
         /// <exception cref="RegexMatchTimeoutException">A time-out occurred.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="options"/> is not in a valid <see cref="RegexOptions"/> value or <paramref name="matchTimeout"/> is negative,
         /// zero, or greater than approximately 24 days.</exception>
-        public static bool IsMatch(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).IsMatch(input);
+        public static bool IsMatch(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).IsMatch(input);
 
         /// <summary>
         /// Searches the input string for one or more matches using the previous pattern,
@@ -77,7 +95,15 @@ namespace System.Text.RegularExpressions
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             }
 
-            return RunSingleMatch(RegexRunnerMode.ExistenceRequired, -1, input, 0, input.Length, RightToLeft ? input.Length : 0) is null;
+            return RunSingleMatch(
+                RegexRunnerMode.ExistenceRequired,
+                -1,
+                input,
+                0,
+                input.Length,
+                RightToLeft ? input.Length : 0
+            )
+                is null;
         }
 
         /// <summary>
@@ -91,7 +117,15 @@ namespace System.Text.RegularExpressions
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             }
 
-            return RunSingleMatch(RegexRunnerMode.ExistenceRequired, -1, input, 0, input.Length, startat) is null;
+            return RunSingleMatch(
+                RegexRunnerMode.ExistenceRequired,
+                -1,
+                input,
+                0,
+                input.Length,
+                startat
+            )
+                is null;
         }
 
         /// <summary>
@@ -117,19 +151,28 @@ namespace System.Text.RegularExpressions
         /// Searches the input string for one or more occurrences of the text
         /// supplied in the pattern parameter.
         /// </summary>
-        public static Match Match(string input, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern) =>
-            RegexCache.GetOrAdd(pattern).Match(input);
+        public static Match Match(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern
+        ) => RegexCache.GetOrAdd(pattern).Match(input);
 
         /// <summary>
         /// Searches the input string for one or more occurrences of the text
         /// supplied in the pattern parameter. Matching is modified with an option
         /// string.
         /// </summary>
-        public static Match Match(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Match(input);
+        public static Match Match(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options
+        ) => RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Match(input);
 
-        public static Match Match(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Match(input);
+        public static Match Match(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Match(input);
 
         /// <summary>
         /// Matches a regular expression with a string and returns
@@ -142,7 +185,14 @@ namespace System.Text.RegularExpressions
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             }
 
-            return RunSingleMatch(RegexRunnerMode.FullMatchRequired, -1, input, 0, input.Length, RightToLeft ? input.Length : 0)!;
+            return RunSingleMatch(
+                RegexRunnerMode.FullMatchRequired,
+                -1,
+                input,
+                0,
+                input.Length,
+                RightToLeft ? input.Length : 0
+            )!;
         }
 
         /// <summary>
@@ -156,7 +206,14 @@ namespace System.Text.RegularExpressions
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             }
 
-            return RunSingleMatch(RegexRunnerMode.FullMatchRequired, -1, input, 0, input.Length, startat)!;
+            return RunSingleMatch(
+                RegexRunnerMode.FullMatchRequired,
+                -1,
+                input,
+                0,
+                input.Length,
+                startat
+            )!;
         }
 
         /// <summary>
@@ -169,23 +226,39 @@ namespace System.Text.RegularExpressions
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.input);
             }
 
-            return RunSingleMatch(RegexRunnerMode.FullMatchRequired, -1, input, beginning, length, RightToLeft ? beginning + length : beginning)!;
+            return RunSingleMatch(
+                RegexRunnerMode.FullMatchRequired,
+                -1,
+                input,
+                beginning,
+                length,
+                RightToLeft ? beginning + length : beginning
+            )!;
         }
 
         /// <summary>
         /// Returns all the successful matches as if Match were called iteratively numerous times.
         /// </summary>
-        public static MatchCollection Matches(string input, [StringSyntax(StringSyntaxAttribute.Regex)] string pattern) =>
-            RegexCache.GetOrAdd(pattern).Matches(input);
+        public static MatchCollection Matches(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex)] string pattern
+        ) => RegexCache.GetOrAdd(pattern).Matches(input);
 
         /// <summary>
         /// Returns all the successful matches as if Match were called iteratively numerous times.
         /// </summary>
-        public static MatchCollection Matches(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options) =>
-            RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Matches(input);
+        public static MatchCollection Matches(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options
+        ) => RegexCache.GetOrAdd(pattern, options, s_defaultMatchTimeout).Matches(input);
 
-        public static MatchCollection Matches(string input, [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern, RegexOptions options, TimeSpan matchTimeout) =>
-            RegexCache.GetOrAdd(pattern, options, matchTimeout).Matches(input);
+        public static MatchCollection Matches(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.Regex, nameof(options))] string pattern,
+            RegexOptions options,
+            TimeSpan matchTimeout
+        ) => RegexCache.GetOrAdd(pattern, options, matchTimeout).Matches(input);
 
         /// <summary>
         /// Returns all the successful matches as if Match was called iteratively numerous times.

@@ -35,7 +35,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
         // DOTNET_ROOT must be set in order to run host process on .NET Core on machines (like CI)
         // that do not have the required version of the runtime installed globally.
-        // 
+        //
         // If it was not set the process would fail with exit code -2147450749:
         // "A fatal error occurred. The required library hostfxr.dll could not be found."
         //
@@ -61,10 +61,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
         protected AbstractInteractiveHostTests()
         {
-            Host = new InteractiveHost(typeof(CSharpReplServiceProvider), ".", millisecondsTimeout: -1, joinOutputWritingThreadsOnDisposal: true);
+            Host = new InteractiveHost(
+                typeof(CSharpReplServiceProvider),
+                ".",
+                millisecondsTimeout: -1,
+                joinOutputWritingThreadsOnDisposal: true
+            );
 
             Host.InteractiveHostProcessCreationFailed += (exception, exitCode) =>
-                Assert.False(true, (exception?.Message ?? "Host process terminated unexpectedly.") + $" Exit code: {exitCode?.ToString() ?? "<unknown>"}");
+                Assert.False(
+                    true,
+                    (exception?.Message ?? "Host process terminated unexpectedly.")
+                        + $" Exit code: {exitCode?.ToString() ?? "<unknown>"}"
+                );
 
             RedirectOutput();
         }
@@ -74,9 +83,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
         public async Task InitializeAsync()
         {
-            var initializationFileName = UseDefaultInitializationFile ? "CSharpInteractive.rsp" : null;
+            var initializationFileName = UseDefaultInitializationFile
+                ? "CSharpInteractive.rsp"
+                : null;
 
-            await Host.ResetAsync(InteractiveHostOptions.CreateFromDirectory(TestUtils.HostRootPath, initializationFileName, CultureInfo.InvariantCulture, CultureInfo.InvariantCulture, DefaultPlatform));
+            await Host.ResetAsync(
+                InteractiveHostOptions.CreateFromDirectory(
+                    TestUtils.HostRootPath,
+                    initializationFileName,
+                    CultureInfo.InvariantCulture,
+                    CultureInfo.InvariantCulture,
+                    DefaultPlatform
+                )
+            );
 
             // assert and remove logo:
             var output = SplitLines(await ReadOutputToEnd());
@@ -85,11 +104,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
             AssertEx.AssertEqualToleratingWhitespaceDifferences("", errorOutput);
 
             var expectedOutput = new List<string>();
-            expectedOutput.Add(string.Format(CSharpScriptingResources.LogoLine1, CommonCompiler.GetProductVersion(typeof(CSharpReplServiceProvider))));
+            expectedOutput.Add(
+                string.Format(
+                    CSharpScriptingResources.LogoLine1,
+                    CommonCompiler.GetProductVersion(typeof(CSharpReplServiceProvider))
+                )
+            );
 
             if (UseDefaultInitializationFile)
             {
-                expectedOutput.Add(string.Format(InteractiveHostResources.Loading_context_from_0, initializationFileName));
+                expectedOutput.Add(
+                    string.Format(
+                        InteractiveHostResources.Loading_context_from_0,
+                        initializationFileName
+                    )
+                );
             }
 
             expectedOutput.Add(InteractiveHostResources.Type_Sharphelp_for_more_information);
@@ -126,7 +155,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
         public static ImmutableArray<string> SplitLines(string text)
         {
-            return ImmutableArray.Create(text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
+            return ImmutableArray.Create(
+                text.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+            );
         }
 
         public async Task<bool> LoadReference(string reference)
@@ -156,7 +187,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
         {
             ClearOutput();
 
-            await Host.ResetAsync(InteractiveHostOptions.CreateFromDirectory(TestUtils.HostRootPath, initializationFileName: null, CultureInfo.InvariantCulture, CultureInfo.InvariantCulture, InteractiveHostPlatform.Desktop64));
+            await Host.ResetAsync(
+                InteractiveHostOptions.CreateFromDirectory(
+                    TestUtils.HostRootPath,
+                    initializationFileName: null,
+                    CultureInfo.InvariantCulture,
+                    CultureInfo.InvariantCulture,
+                    InteractiveHostPlatform.Desktop64
+                )
+            );
         }
 
         public async Task<string> ReadOutputToEnd(bool isError = false)
@@ -166,18 +205,27 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
 
             if (remoteService == null)
             {
-                Assert.True(false, @$"
+                Assert.True(
+                    false,
+                    @$"
 Remote service unavailable
 STDERR: {_synchronizedErrorOutput}
 STDOUT: {_synchronizedOutput}
-");
+"
+                );
             }
 
             var writer = isError ? _synchronizedErrorOutput : _synchronizedOutput;
             var markPrefix = '\uFFFF';
             var mark = markPrefix + Guid.NewGuid().ToString();
 
-            await remoteService!.JsonRpc.InvokeAsync(nameof(InteractiveHost.Service.RemoteConsoleWriteAsync), InteractiveHost.OutputEncoding.GetBytes(mark), isError).ConfigureAwait(false);
+            await remoteService!
+                .JsonRpc.InvokeAsync(
+                    nameof(InteractiveHost.Service.RemoteConsoleWriteAsync),
+                    InteractiveHost.OutputEncoding.GetBytes(mark),
+                    isError
+                )
+                .ConfigureAwait(false);
             while (true)
             {
                 var data = writer.Prefix(mark, ref _outputReadPosition[isError ? 0 : 1]);
@@ -191,14 +239,25 @@ STDOUT: {_synchronizedOutput}
         }
 
         public static (string Path, ImmutableArray<byte> Image) CompileLibrary(
-            TempDirectory dir, string fileName, string assemblyName, string source, params MetadataReference[] references)
+            TempDirectory dir,
+            string fileName,
+            string assemblyName,
+            string source,
+            params MetadataReference[] references
+        )
         {
             var file = dir.CreateFile(fileName);
             var compilation = CreateEmptyCompilation(
                 new[] { source },
                 assemblyName: assemblyName,
-                references: TargetFrameworkUtil.GetReferences(TargetFramework.NetStandard20, references),
-                options: fileName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase) ? TestOptions.ReleaseExe : TestOptions.ReleaseDll);
+                references: TargetFrameworkUtil.GetReferences(
+                    TargetFramework.NetStandard20,
+                    references
+                ),
+                options: fileName.EndsWith(".exe", StringComparison.OrdinalIgnoreCase)
+                    ? TestOptions.ReleaseExe
+                    : TestOptions.ReleaseDll
+            );
 
             var image = compilation.EmitToArray();
             file.WriteAllBytes(image);
@@ -206,14 +265,20 @@ STDOUT: {_synchronizedOutput}
             return (file.Path, image);
         }
 
-        public static string PrintSearchPaths(params string[] paths)
-            => paths.Length == 0 ? "SearchPaths { }" : $"SearchPaths {{ {string.Join(", ", paths.Select(p => "\"" + p.Replace("\\", "\\\\") + "\""))} }}";
+        public static string PrintSearchPaths(params string[] paths) =>
+            paths.Length == 0
+                ? "SearchPaths { }"
+                : $"SearchPaths {{ {string.Join(", ", paths.Select(p => "\"" + p.Replace("\\", "\\\\") + "\""))} }}";
 
         public async Task<string> GetHostRuntimeDirectoryAsync()
         {
             var remoteService = await Host.TryGetServiceAsync().ConfigureAwait(false);
             Assert.NotNull(remoteService);
-            return await remoteService!.JsonRpc.InvokeAsync<string>(nameof(InteractiveHost.Service.GetRuntimeDirectoryAsync)).ConfigureAwait(false);
+            return await remoteService!
+                .JsonRpc.InvokeAsync<string>(
+                    nameof(InteractiveHost.Service.GetRuntimeDirectoryAsync)
+                )
+                .ConfigureAwait(false);
         }
     }
 }

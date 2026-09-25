@@ -14,22 +14,25 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.ConvertToRecord), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.ConvertToRecord
+        ),
+        Shared
+    ]
     internal class CSharpConvertToRecordCodeFixProvider : CodeFixProvider
     {
         private const string CS8865 = nameof(CS8865); // Only records may inherit from records.
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpConvertToRecordCodeFixProvider()
-        {
-        }
+        public CSharpConvertToRecordCodeFixProvider() { }
 
-        public override FixAllProvider? GetFixAllProvider()
-            => null;
+        public override FixAllProvider? GetFixAllProvider() => null;
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(CS8865);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS8865);
 
         public override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -38,15 +41,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
             var cancellationToken = context.CancellationToken;
 
             // get the class declaration. The span should be on the base type in the base list
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var baseTypeSyntax = root.FindNode(span) as BaseTypeSyntax;
 
             var typeDeclaration = baseTypeSyntax?.GetAncestor<TypeDeclarationSyntax>();
             if (typeDeclaration == null)
                 return;
 
-            var action = await ConvertToRecordEngine.GetCodeActionAsync(
-                document, typeDeclaration, context.GetOptionsProvider(), cancellationToken).ConfigureAwait(false);
+            var action = await ConvertToRecordEngine
+                .GetCodeActionAsync(
+                    document,
+                    typeDeclaration,
+                    context.GetOptionsProvider(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (action != null)
                 context.RegisterCodeFix(action, context.Diagnostics);

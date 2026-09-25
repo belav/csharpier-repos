@@ -22,7 +22,11 @@
 
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Drawing.Point))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Drawing.PointF))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Drawing.Rectangle))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Drawing.RectangleF))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Drawing.Rectangle)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Drawing.RectangleF)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Drawing.Size))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Drawing.SizeF))]

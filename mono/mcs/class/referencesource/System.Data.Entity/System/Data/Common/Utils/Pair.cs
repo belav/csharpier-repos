@@ -10,10 +10,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Linq;
-
+using System.Text;
 
 namespace System.Data.Common.Utils
 {
@@ -36,25 +35,19 @@ namespace System.Data.Common.Utils
         #region Properties
         internal TFirst First
         {
-            get
-            {
-                return first;
-            }
+            get { return first; }
         }
 
         internal TSecond Second
         {
-            get
-            {
-                return second;
-            }
+            get { return second; }
         }
-        #endregion 
+        #endregion
 
         #region Methods
         public override int GetHashCode()
         {
-            return (first.GetHashCode()<<5) ^ second.GetHashCode();
+            return (first.GetHashCode() << 5) ^ second.GetHashCode();
         }
 
         public bool Equals(Pair<TFirst, TSecond> other)
@@ -75,7 +68,7 @@ namespace System.Data.Common.Utils
         {
             builder.Append("<");
             builder.Append(first.ToString());
-            builder.Append(", "+second.ToString());
+            builder.Append(", " + second.ToString());
             builder.Append(">");
         }
         #endregion
@@ -86,12 +79,15 @@ namespace System.Data.Common.Utils
             private PairComparer() { }
 
             internal static readonly PairComparer Instance = new PairComparer();
-            private static readonly EqualityComparer<TFirst> firstComparer = EqualityComparer<TFirst>.Default;
-            private static readonly EqualityComparer<TSecond> secondComparer = EqualityComparer<TSecond>.Default;
+            private static readonly EqualityComparer<TFirst> firstComparer =
+                EqualityComparer<TFirst>.Default;
+            private static readonly EqualityComparer<TSecond> secondComparer =
+                EqualityComparer<TSecond>.Default;
 
             public bool Equals(Pair<TFirst, TSecond> x, Pair<TFirst, TSecond> y)
             {
-                return firstComparer.Equals(x.First, y.First) && secondComparer.Equals(x.Second, y.Second);
+                return firstComparer.Equals(x.First, y.First)
+                    && secondComparer.Equals(x.Second, y.Second);
             }
 
             public int GetHashCode(Pair<TFirst, TSecond> source)
@@ -100,7 +96,4 @@ namespace System.Data.Common.Utils
             }
         }
     }
-
-    
-
 }

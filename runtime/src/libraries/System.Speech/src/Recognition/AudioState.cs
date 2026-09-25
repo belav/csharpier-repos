@@ -13,6 +13,6 @@ namespace System.Speech.Recognition
         Silence,
 
         // The audio input contains speech signal.
-        Speech
+        Speech,
     }
 }

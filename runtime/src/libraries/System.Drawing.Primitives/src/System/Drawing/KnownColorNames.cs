@@ -37,7 +37,6 @@ namespace System.Drawing
             "Window",
             "WindowFrame",
             "WindowText",
-
             // "Web" Colors, Part 1
             "Transparent",
             "AliceBlue",
@@ -180,7 +179,6 @@ namespace System.Drawing
             "WhiteSmoke",
             "Yellow",
             "YellowGreen",
-
             // "System" colors, Part 2
             "ButtonFace",
             "ButtonHighlight",
@@ -189,7 +187,6 @@ namespace System.Drawing
             "GradientInactiveCaption",
             "MenuBar",
             "MenuHighlight",
-
             // "Web" colors, Part 2
             "RebeccaPurple",
         };

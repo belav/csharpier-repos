@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,32 +30,36 @@ using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	public class ToolStripContentPanelRenderEventArgs : EventArgs
-	{
-		private Graphics graphics;
-		private bool handled;
-		private ToolStripContentPanel tool_strip_content_panel;
+    public class ToolStripContentPanelRenderEventArgs : EventArgs
+    {
+        private Graphics graphics;
+        private bool handled;
+        private ToolStripContentPanel tool_strip_content_panel;
 
-		public ToolStripContentPanelRenderEventArgs (Graphics g, ToolStripContentPanel contentPanel) : base ()
-		{
-			this.graphics = g;
-			this.tool_strip_content_panel = contentPanel;
-			this.handled = false;
-		}
+        public ToolStripContentPanelRenderEventArgs(Graphics g, ToolStripContentPanel contentPanel)
+            : base()
+        {
+            this.graphics = g;
+            this.tool_strip_content_panel = contentPanel;
+            this.handled = false;
+        }
 
-		#region Public Properties
-		public Graphics Graphics {
-			get { return this.graphics; }
-		}
+        #region Public Properties
+        public Graphics Graphics
+        {
+            get { return this.graphics; }
+        }
 
-		public bool Handled {
-			get { return this.handled; }
-			set { this.handled = value; }
-		}
+        public bool Handled
+        {
+            get { return this.handled; }
+            set { this.handled = value; }
+        }
 
-		public ToolStripContentPanel ToolStripContentPanel {
-			get { return this.tool_strip_content_panel; }
-		}
-		#endregion		
-	}
+        public ToolStripContentPanel ToolStripContentPanel
+        {
+            get { return this.tool_strip_content_panel; }
+        }
+        #endregion
+    }
 }

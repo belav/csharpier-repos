@@ -8,22 +8,39 @@ using System.Text.Json.Serialization.Metadata;
 
 namespace System.Text.Json.Serialization.Converters
 {
-    internal sealed class ImmutableDictionaryOfTKeyTValueConverterWithReflection<TCollection, TKey, TValue>
-        : ImmutableDictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>
+    internal sealed class ImmutableDictionaryOfTKeyTValueConverterWithReflection<
+        TCollection,
+        TKey,
+        TValue
+    > : ImmutableDictionaryOfTKeyTValueConverter<TCollection, TKey, TValue>
         where TCollection : IReadOnlyDictionary<TKey, TValue>
         where TKey : notnull
     {
-        [RequiresUnreferencedCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        [RequiresDynamicCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        public ImmutableDictionaryOfTKeyTValueConverterWithReflection()
-        {
-        }
+        [RequiresUnreferencedCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        [RequiresDynamicCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        public ImmutableDictionaryOfTKeyTValueConverterWithReflection() { }
 
-        [RequiresUnreferencedCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        [RequiresDynamicCode(IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage)]
-        internal override void ConfigureJsonTypeInfoUsingReflection(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        [RequiresUnreferencedCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        [RequiresDynamicCode(
+            IEnumerableConverterFactoryHelpers.ImmutableConvertersUnreferencedCodeMessage
+        )]
+        internal override void ConfigureJsonTypeInfoUsingReflection(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
-            jsonTypeInfo.CreateObjectWithArgs = DefaultJsonTypeInfoResolver.MemberAccessor.CreateImmutableDictionaryCreateRangeDelegate<TCollection, TKey, TValue>();
+            jsonTypeInfo.CreateObjectWithArgs =
+                DefaultJsonTypeInfoResolver.MemberAccessor.CreateImmutableDictionaryCreateRangeDelegate<
+                    TCollection,
+                    TKey,
+                    TValue
+                >();
         }
     }
 }

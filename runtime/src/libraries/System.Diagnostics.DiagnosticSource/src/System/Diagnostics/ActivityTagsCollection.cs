@@ -21,14 +21,13 @@ namespace System.Diagnostics
     /// </summary>
     public class ActivityTagsCollection : IDictionary<string, object?>
     {
-        private readonly List<KeyValuePair<string, object?>> _list = new List<KeyValuePair<string, object?>>();
+        private readonly List<KeyValuePair<string, object?>> _list =
+            new List<KeyValuePair<string, object?>>();
 
         /// <summary>
         /// Create a new instance of the collection.
         /// </summary>
-        public ActivityTagsCollection()
-        {
-        }
+        public ActivityTagsCollection() { }
 
         /// <summary>
         /// Create a new instance of the collection and store the input list items in the collection.
@@ -65,7 +64,6 @@ namespace System.Diagnostics
                 int index = FindIndex(key);
                 return index < 0 ? null : _list[index].Value;
             }
-
             set
             {
                 if (key == null)
@@ -197,12 +195,15 @@ namespace System.Diagnostics
         /// </summary>
         /// <param name="array">The array that is the destination of the elements copied from collection.</param>
         /// <param name="arrayIndex">The zero-based index in array at which copying begins.</param>
-        public void CopyTo(KeyValuePair<string, object?>[] array, int arrayIndex) => _list.CopyTo(array, arrayIndex);
+        public void CopyTo(KeyValuePair<string, object?>[] array, int arrayIndex) =>
+            _list.CopyTo(array, arrayIndex);
 
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
-        IEnumerator<KeyValuePair<string, object?>> IEnumerable<KeyValuePair<string, object?>>.GetEnumerator() => new Enumerator(_list);
+        IEnumerator<KeyValuePair<string, object?>> IEnumerable<
+            KeyValuePair<string, object?>
+        >.GetEnumerator() => new Enumerator(_list);
 
         /// <summary>
         /// Returns an enumerator that iterates through the collection.
@@ -284,12 +285,17 @@ namespace System.Diagnostics
         public struct Enumerator : IEnumerator<KeyValuePair<string, object?>>, IEnumerator
         {
             private List<KeyValuePair<string, object?>>.Enumerator _enumerator;
-            internal Enumerator(List<KeyValuePair<string, object?>> list) => _enumerator = list.GetEnumerator();
+
+            internal Enumerator(List<KeyValuePair<string, object?>> list) =>
+                _enumerator = list.GetEnumerator();
 
             public KeyValuePair<string, object?> Current => _enumerator.Current;
             object IEnumerator.Current => ((IEnumerator)_enumerator).Current;
+
             public void Dispose() => _enumerator.Dispose();
+
             public bool MoveNext() => _enumerator.MoveNext();
+
             void IEnumerator.Reset() => ((IEnumerator)_enumerator).Reset();
         }
     }

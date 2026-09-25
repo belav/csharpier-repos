@@ -12,11 +12,11 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         private class Comparer : IEqualityComparer<INamespaceSymbol?>
         {
-            public bool Equals(INamespaceSymbol? x, INamespaceSymbol? y)
-                => GetNameParts(x).SequenceEqual(GetNameParts(y));
+            public bool Equals(INamespaceSymbol? x, INamespaceSymbol? y) =>
+                GetNameParts(x).SequenceEqual(GetNameParts(y));
 
-            public int GetHashCode(INamespaceSymbol? obj)
-                => GetNameParts(obj).Aggregate(0, (a, v) => Hash.Combine(v, a));
+            public int GetHashCode(INamespaceSymbol? obj) =>
+                GetNameParts(obj).Aggregate(0, (a, v) => Hash.Combine(v, a));
         }
     }
 }

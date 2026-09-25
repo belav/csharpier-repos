@@ -21,7 +21,9 @@ namespace System.Net.Security.Tests
         {
             const string passedInMessage = "base was called";
 
-            AuthenticationException authenticationException = new AuthenticationException(passedInMessage);
+            AuthenticationException authenticationException = new AuthenticationException(
+                passedInMessage
+            );
 
             Assert.Equal(passedInMessage, authenticationException.Message);
         }
@@ -32,7 +34,10 @@ namespace System.Net.Security.Tests
             const string passedInMessage = "base was called";
             const string innerExceptionMessage = "this is the inner exception message";
 
-            AuthenticationException authenticationException = new AuthenticationException(passedInMessage, new Exception(innerExceptionMessage));
+            AuthenticationException authenticationException = new AuthenticationException(
+                passedInMessage,
+                new Exception(innerExceptionMessage)
+            );
 
             Assert.Equal(passedInMessage, authenticationException.Message);
             Assert.Equal(innerExceptionMessage, authenticationException.InnerException.Message);

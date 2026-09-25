@@ -32,216 +32,181 @@
 //
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Collections;
+using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
-	[DesignTimeVisible (false)]
-	[ToolboxItem (false)]
-	[ProvideProperty ("Location", typeof (IComponent))]
-	public class ComponentTray : ScrollableControl, IExtenderProvider
-	{
+    [DesignTimeVisible(false)]
+    [ToolboxItem(false)]
+    [ProvideProperty("Location", typeof(IComponent))]
+    public class ComponentTray : ScrollableControl, IExtenderProvider
+    {
+        private IServiceProvider _serviceProvider;
+        private IDesigner _mainDesigner = null;
+        private bool _showLargeIcons = false;
+        private bool _autoArrange = false;
 
-		private IServiceProvider _serviceProvider;
-		private IDesigner _mainDesigner = null;
-		private bool _showLargeIcons = false;
-		private bool _autoArrange = false;
+        public ComponentTray(IDesigner mainDesigner, IServiceProvider serviceProvider)
+        {
+            if (mainDesigner == null)
+            {
+                throw new ArgumentNullException("mainDesigner");
+            }
+            if (serviceProvider == null)
+            {
+                throw new ArgumentNullException("serviceProvider");
+            }
 
-		public ComponentTray (IDesigner mainDesigner, IServiceProvider serviceProvider)
-		{
-			if (mainDesigner == null) {
-				throw new ArgumentNullException ("mainDesigner");
-			}
-			if (serviceProvider == null) {
-				throw new ArgumentNullException ("serviceProvider");
-			}
+            _mainDesigner = mainDesigner;
+            _serviceProvider = serviceProvider;
+        }
 
-			_mainDesigner = mainDesigner;
-			_serviceProvider = serviceProvider;
-		}
+        public bool AutoArrange
+        {
+            get { return _autoArrange; }
+            set { _autoArrange = value; }
+        }
 
-		public bool AutoArrange {
-			get { return _autoArrange; }
-			set { _autoArrange = value; }
-		}
+        [MonoTODO]
+        public int ComponentCount
+        {
+            get { return 0; }
+        }
 
-		[MonoTODO]
-		public int ComponentCount {
-			get { return 0; }
-		}
+        public bool ShowLargeIcons
+        {
+            get { return _showLargeIcons; }
+            set { _showLargeIcons = value; }
+        }
 
-		public bool ShowLargeIcons {
-			get { return _showLargeIcons; }
-			set { _showLargeIcons = value; }
-		}
+        [MonoTODO]
+        public virtual void AddComponent(IComponent component) { }
 
+        protected virtual bool CanCreateComponentFromTool(ToolboxItem tool)
+        {
+            return true;
+        }
 
-		[MonoTODO]
-		public virtual void AddComponent (IComponent component)
-		{
-		}
+        protected virtual bool CanDisplayComponent(IComponent component)
+        {
+            return false;
+        }
 
-		protected virtual bool CanCreateComponentFromTool (ToolboxItem tool)
-		{
-			return true;
-		}
+        [MonoTODO]
+        public void CreateComponentFromTool(ToolboxItem tool) { }
 
-		protected virtual bool CanDisplayComponent (IComponent component)
-		{
-			return false;
-		}
+        [MonoTODO]
+        protected void DisplayError(Exception e) { }
 
-		[MonoTODO]
-		public void CreateComponentFromTool (ToolboxItem tool)
-		{
-		}
+        protected override void Dispose(bool disposing) { }
 
-		[MonoTODO]
-		protected void DisplayError (Exception e)
-		{
-		}
+        [Browsable(false)]
+        [Category("Layout")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [DesignOnly(true)]
+        [Localizable(false)]
+        [MonoTODO]
+        public Point GetLocation(IComponent receiver)
+        {
+            return new Point(0, 0);
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-		}
+        [MonoTODO]
+        public void SetLocation(IComponent receiver, Point location) { }
 
-		[Browsable (false)]
-		[Category ("Layout")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[DesignOnly (true)]
-		[Localizable (false)]
-		[MonoTODO]
-		public Point GetLocation (IComponent receiver)
-		{
-			return new Point (0,0);
-		}
+        [MonoTODO]
+        public IComponent GetNextComponent(IComponent component, bool forward)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void SetLocation (IComponent receiver, Point location)
-		{
-		}
+        [Browsable(false)]
+        [Category("Layout")]
+        [DesignOnly(true)]
+        [Localizable(false)]
+        [MonoTODO]
+        public Point GetTrayLocation(IComponent receiver)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public IComponent GetNextComponent (IComponent component, bool forward)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public bool IsTrayComponent(IComponent comp)
+        {
+            throw new NotImplementedException();
+        }
 
-		[Browsable (false)]
-		[Category ("Layout")]
-		[DesignOnly (true)]
-		[Localizable (false)]
-		[MonoTODO]
-		public Point GetTrayLocation (IComponent receiver)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void SetTrayLocation(IComponent receiver, Point location)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public bool IsTrayComponent (IComponent comp)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override void OnMouseDoubleClick(MouseEventArgs e) { }
 
-		[MonoTODO]
-		public void SetTrayLocation (IComponent receiver, Point location)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override void OnDragDrop(DragEventArgs de) { }
 
-		[MonoTODO]
-		protected override void OnMouseDoubleClick (MouseEventArgs e)
-		{
-		}
+        [MonoTODO]
+        protected override void OnDragEnter(DragEventArgs de) { }
 
-		[MonoTODO]
-		protected override void OnDragDrop (DragEventArgs de)
-		{
-		}
+        [MonoTODO]
+        protected override void OnDragLeave(EventArgs e) { }
 
-		[MonoTODO]
-		protected override void OnDragEnter (DragEventArgs de)
-		{
-		}
+        [MonoTODO]
+        protected override void OnDragOver(DragEventArgs de) { }
 
-		[MonoTODO]
-		protected override void OnDragLeave (EventArgs e)
-		{
-		}
+        [MonoTODO]
+        protected override void OnGiveFeedback(GiveFeedbackEventArgs gfevent) { }
 
-		[MonoTODO]
-		protected override void OnDragOver (DragEventArgs de)
-		{
-		}
+        [MonoTODO]
+        protected override void OnLayout(LayoutEventArgs levent) { }
 
-		[MonoTODO]
-		protected override void OnGiveFeedback (GiveFeedbackEventArgs gfevent)
-		{
-		}
+        [MonoTODO]
+        protected virtual void OnLostCapture() { }
 
-		[MonoTODO]
-		protected override void OnLayout (LayoutEventArgs levent)
-		{
-		}
+        [MonoTODO]
+        protected override void OnMouseDown(MouseEventArgs e) { }
 
-		[MonoTODO]
-		protected virtual void OnLostCapture ()
-		{
-		}
+        [MonoTODO]
+        protected override void OnMouseMove(MouseEventArgs e) { }
 
-		[MonoTODO]
-		protected override void OnMouseDown (MouseEventArgs e)
-		{
-		}
+        [MonoTODO]
+        protected override void OnMouseUp(MouseEventArgs e) { }
 
-		[MonoTODO]
-		protected override void OnMouseMove (MouseEventArgs e)
-		{
-		}
+        [MonoTODO]
+        protected override void OnPaint(PaintEventArgs pe) { }
 
-		[MonoTODO]
-		protected override void OnMouseUp (MouseEventArgs e)
-		{
-		}
+        [MonoTODO]
+        protected virtual void OnSetCursor() { }
 
-		[MonoTODO]
-		protected override void OnPaint (PaintEventArgs pe)
-		{
-		}
+        [MonoTODO]
+        public virtual void RemoveComponent(IComponent component) { }
 
-		[MonoTODO]
-		protected virtual void OnSetCursor ()
-		{
-		}
+        [MonoTODO]
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+        }
 
-		[MonoTODO]
-		public virtual void RemoveComponent (IComponent component)
-		{
-		}
+        bool IExtenderProvider.CanExtend(object component)
+        {
+            return false;
+        }
 
-		[MonoTODO]
-		protected override void WndProc (ref Message m)
-		{
-			base.WndProc (ref m);
-		}
-
-		bool IExtenderProvider.CanExtend (object component)
-		{
-			return false;
-		}
-
-		protected override object GetService (Type serviceType)
-		{
-			if (_serviceProvider != null) {
-				return _serviceProvider.GetService (serviceType);
-			}
-			return null;
-		}
-
-	}
+        protected override object GetService(Type serviceType)
+        {
+            if (_serviceProvider != null)
+            {
+                return _serviceProvider.GetService(serviceType);
+            }
+            return null;
+        }
+    }
 }

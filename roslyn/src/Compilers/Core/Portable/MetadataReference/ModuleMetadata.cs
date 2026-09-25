@@ -32,7 +32,14 @@ namespace Microsoft.CodeAnalysis
         private ModuleMetadata(PEReader peReader, Action? onDispose)
             : base(isImageOwner: true, id: MetadataId.CreateNewId())
         {
-            _module = new PEModule(this, peReader: peReader, metadataOpt: IntPtr.Zero, metadataSizeOpt: 0, includeEmbeddedInteropTypes: false, ignoreAssemblyRefs: false);
+            _module = new PEModule(
+                this,
+                peReader: peReader,
+                metadataOpt: IntPtr.Zero,
+                metadataSizeOpt: 0,
+                includeEmbeddedInteropTypes: false,
+                ignoreAssemblyRefs: false
+            );
             _onDispose = onDispose;
         }
 
@@ -41,10 +48,18 @@ namespace Microsoft.CodeAnalysis
             int size,
             Action? onDispose,
             bool includeEmbeddedInteropTypes,
-            bool ignoreAssemblyRefs)
+            bool ignoreAssemblyRefs
+        )
             : base(isImageOwner: true, id: MetadataId.CreateNewId())
         {
-            _module = new PEModule(this, peReader: null, metadataOpt: metadata, metadataSizeOpt: size, includeEmbeddedInteropTypes: includeEmbeddedInteropTypes, ignoreAssemblyRefs: ignoreAssemblyRefs);
+            _module = new PEModule(
+                this,
+                peReader: null,
+                metadataOpt: metadata,
+                metadataSizeOpt: size,
+                includeEmbeddedInteropTypes: includeEmbeddedInteropTypes,
+                ignoreAssemblyRefs: ignoreAssemblyRefs
+            );
             _onDispose = onDispose;
         }
 
@@ -68,8 +83,8 @@ namespace Microsoft.CodeAnalysis
         /// <param name="size">The size of the metadata block.</param>
         /// <exception cref="ArgumentNullException"><paramref name="metadata"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/> is not positive.</exception>
-        public static ModuleMetadata CreateFromMetadata(nint metadata, int size)
-            => CreateFromMetadataWorker(metadata, size, onDispose: null);
+        public static ModuleMetadata CreateFromMetadata(nint metadata, int size) =>
+            CreateFromMetadataWorker(metadata, size, onDispose: null);
 
         /// <summary>
         /// Create metadata module from a raw memory pointer to metadata directory of a PE image or .cormeta section of an object file.
@@ -84,7 +99,8 @@ namespace Microsoft.CodeAnalysis
         public static unsafe ModuleMetadata CreateFromMetadata(
             nint metadata,
             int size,
-            Action onDispose)
+            Action onDispose
+        )
         {
             if (onDispose is null)
                 throw new ArgumentNullException(nameof(onDispose));
@@ -95,7 +111,8 @@ namespace Microsoft.CodeAnalysis
         private static ModuleMetadata CreateFromMetadataWorker(
             nint metadata,
             int size,
-            Action? onDispose)
+            Action? onDispose
+        )
         {
             if (metadata == 0)
             {
@@ -104,17 +121,37 @@ namespace Microsoft.CodeAnalysis
 
             if (size <= 0)
             {
-                throw new ArgumentOutOfRangeException(CodeAnalysisResources.SizeHasToBePositive, nameof(size));
+                throw new ArgumentOutOfRangeException(
+                    CodeAnalysisResources.SizeHasToBePositive,
+                    nameof(size)
+                );
             }
 
-            return new ModuleMetadata(metadata, size, onDispose, includeEmbeddedInteropTypes: false, ignoreAssemblyRefs: false);
+            return new ModuleMetadata(
+                metadata,
+                size,
+                onDispose,
+                includeEmbeddedInteropTypes: false,
+                ignoreAssemblyRefs: false
+            );
         }
 
-        internal static ModuleMetadata CreateFromMetadata(IntPtr metadata, int size, bool includeEmbeddedInteropTypes, bool ignoreAssemblyRefs = false)
+        internal static ModuleMetadata CreateFromMetadata(
+            IntPtr metadata,
+            int size,
+            bool includeEmbeddedInteropTypes,
+            bool ignoreAssemblyRefs = false
+        )
         {
             Debug.Assert(metadata != IntPtr.Zero);
             Debug.Assert(size > 0);
-            return new ModuleMetadata(metadata, size, onDispose: null, includeEmbeddedInteropTypes, ignoreAssemblyRefs);
+            return new ModuleMetadata(
+                metadata,
+                size,
+                onDispose: null,
+                includeEmbeddedInteropTypes,
+                ignoreAssemblyRefs
+            );
         }
 
         /// <summary>
@@ -124,10 +161,14 @@ namespace Microsoft.CodeAnalysis
         /// <param name="size">The size of the image pointed to by <paramref name="peImage"/>.</param>
         /// <exception cref="ArgumentNullException"><paramref name="peImage"/> is null.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="size"/> is not positive.</exception>
-        public static unsafe ModuleMetadata CreateFromImage(nint peImage, int size)
-            => CreateFromImage((byte*)peImage, size, onDispose: null);
+        public static unsafe ModuleMetadata CreateFromImage(nint peImage, int size) =>
+            CreateFromImage((byte*)peImage, size, onDispose: null);
 
-        private static unsafe ModuleMetadata CreateFromImage(byte* peImage, int size, Action? onDispose)
+        private static unsafe ModuleMetadata CreateFromImage(
+            byte* peImage,
+            int size,
+            Action? onDispose
+        )
         {
             if (peImage == null)
             {
@@ -136,7 +177,10 @@ namespace Microsoft.CodeAnalysis
 
             if (size <= 0)
             {
-                throw new ArgumentOutOfRangeException(CodeAnalysisResources.SizeHasToBePositive, nameof(size));
+                throw new ArgumentOutOfRangeException(
+                    CodeAnalysisResources.SizeHasToBePositive,
+                    nameof(size)
+                );
             }
 
             return new ModuleMetadata(new PEReader(peImage, size), onDispose);
@@ -184,7 +228,10 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="ArgumentException">The stream doesn't support seek operations.</exception>
         public static ModuleMetadata CreateFromStream(Stream peStream, bool leaveOpen = false)
         {
-            return CreateFromStream(peStream, leaveOpen ? PEStreamOptions.LeaveOpen : PEStreamOptions.Default);
+            return CreateFromStream(
+                peStream,
+                leaveOpen ? PEStreamOptions.LeaveOpen : PEStreamOptions.Default
+            );
         }
 
         /// <summary>
@@ -214,10 +261,15 @@ namespace Microsoft.CodeAnalysis
 
             if (!peStream.CanRead || !peStream.CanSeek)
             {
-                throw new ArgumentException(CodeAnalysisResources.StreamMustSupportReadAndSeek, nameof(peStream));
+                throw new ArgumentException(
+                    CodeAnalysisResources.StreamMustSupportReadAndSeek,
+                    nameof(peStream)
+                );
             }
 
-            var prefetch = (options & (PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata)) != 0;
+            var prefetch =
+                (options & (PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata))
+                != 0;
 
             // If this stream is an UnmanagedMemoryStream, we can heavily optimize creating the metadata by directly
             // accessing the underlying memory. Note: we can only do this if the caller asked us not to prefetch the
@@ -236,12 +288,17 @@ namespace Microsoft.CodeAnalysis
                     return CreateFromImage(
                         unmanagedMemoryStream.PositionPointer,
                         (int)Math.Min(unmanagedMemoryStream.Length, int.MaxValue),
-                        onDispose);
+                        onDispose
+                    );
                 }
             }
 
-            // Workaround of issue https://github.com/dotnet/corefx/issues/1815: 
-            if (peStream.Length == 0 && (options & PEStreamOptions.PrefetchEntireImage) != 0 && (options & PEStreamOptions.PrefetchMetadata) != 0)
+            // Workaround of issue https://github.com/dotnet/corefx/issues/1815:
+            if (
+                peStream.Length == 0
+                && (options & PEStreamOptions.PrefetchEntireImage) != 0
+                && (options & PEStreamOptions.PrefetchMetadata) != 0
+            )
             {
                 // throws BadImageFormatException:
                 new PEHeaders(peStream);
@@ -266,7 +323,14 @@ namespace Microsoft.CodeAnalysis
         /// <exception cref="NotSupportedException">Reading from a file path is not supported by the platform.</exception>
         public static ModuleMetadata CreateFromFile(string path)
         {
-            return CreateFromStream(StandardFileSystem.Instance.OpenFileWithNormalizedException(path, FileMode.Open, FileAccess.Read, FileShare.Read));
+            return CreateFromStream(
+                StandardFileSystem.Instance.OpenFileWithNormalizedException(
+                    path,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read
+                )
+            );
         }
 
         /// <summary>
@@ -275,7 +339,7 @@ namespace Microsoft.CodeAnalysis
         /// <remarks>
         /// The resulting copy shares the metadata image and metadata information read from it with the original.
         /// It doesn't own the underlying metadata image and is not responsible for its disposal.
-        /// 
+        ///
         /// This is used, for example, when a metadata cache needs to return the cached metadata to its users
         /// while keeping the ownership of the cached metadata object.
         /// </remarks>
@@ -380,9 +444,19 @@ namespace Microsoft.CodeAnalysis
         /// <param name="filePath">Path describing the location of the metadata, or null if the metadata have no location.</param>
         /// <param name="display">Display string used in error messages to identity the reference.</param>
         /// <returns>A reference to the module metadata.</returns>
-        public PortableExecutableReference GetReference(DocumentationProvider? documentation = null, string? filePath = null, string? display = null)
+        public PortableExecutableReference GetReference(
+            DocumentationProvider? documentation = null,
+            string? filePath = null,
+            string? display = null
+        )
         {
-            return new MetadataImageReference(this, MetadataReferenceProperties.Module, documentation, filePath, display);
+            return new MetadataImageReference(
+                this,
+                MetadataReferenceProperties.Module,
+                documentation,
+                filePath,
+                display
+            );
         }
     }
 }

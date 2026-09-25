@@ -42,12 +42,14 @@ public class Startup
             var runtimeVersion =
                 typeof(object)
                     .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                    ?.InformationalVersion ?? "Unknown";
+                    ?.InformationalVersion
+                ?? "Unknown";
             Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");
             var aspNetCoreVersion =
                 typeof(HeaderNames)
                     .Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                    ?.InformationalVersion ?? "Unknown";
+                    ?.InformationalVersion
+                ?? "Unknown";
             Console.WriteLine($"AspNetCoreAppVersion: {aspNetCoreVersion}");
         });
 

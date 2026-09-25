@@ -19,6 +19,7 @@ namespace System.ServiceModel.Activation
 
         // Registration service binding settings
         public const int RegistrationMaxConcurrentSessions = int.MaxValue;
+
         // based on empirical observations, I've never seen it go over 9018 (seems to be ~8k plus soap goo)
         // we can be safer here, since we don't actually increase the memeory usage
         public const int RegistrationMaxReceivedMessageSize = 10000;
@@ -29,7 +30,8 @@ namespace System.ServiceModel.Activation
         public const int SharedConnectionBufferSize = 2500;
         public const int SharedMaxDrainSize = TransportDefaults.MaxDrainSize;
         public static readonly TimeSpan SharedSendTimeout = ServiceDefaults.SendTimeout;
-        public const int SharedMaxContentTypeSize = ConnectionOrientedTransportDefaults.MaxContentTypeSize;
+        public const int SharedMaxContentTypeSize =
+            ConnectionOrientedTransportDefaults.MaxContentTypeSize;
 
         // Internal listener global settings
         public const int MaxRetries = 5;
@@ -42,7 +44,8 @@ namespace System.ServiceModel.Activation
         public const string GlobalPrefix = "Global\\";
         public const string MsmqActivationServiceName = "NetMsmqActivator";
         public const string NamedPipeActivationServiceName = "NetPipeActivator";
-        public const string NamedPipeSharedMemoryName = NamedPipeActivationServiceName + "/endpoint";
+        public const string NamedPipeSharedMemoryName =
+            NamedPipeActivationServiceName + "/endpoint";
         public const string TcpActivationServiceName = "NetTcpActivator";
         public const string TcpPortSharingServiceName = "NetTcpPortSharing";
         public const string TcpSharedMemoryName = TcpPortSharingServiceName + "/endpoint";

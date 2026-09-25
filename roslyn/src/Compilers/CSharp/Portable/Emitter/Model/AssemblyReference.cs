@@ -6,11 +6,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Reflection;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Roslyn.Utilities;
-using System.Diagnostics;
-using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.CSharp.Emit
 {
@@ -40,12 +40,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         string Cci.INamedEntity.Name => Identity.Name;
 
-        Cci.IAssemblyReference Cci.IModuleReference.GetContainingAssembly(CodeAnalysis.Emit.EmitContext context)
+        Cci.IAssemblyReference Cci.IModuleReference.GetContainingAssembly(
+            CodeAnalysis.Emit.EmitContext context
+        )
         {
             return this;
         }
 
-        IEnumerable<Cci.ICustomAttribute> Cci.IReference.GetAttributes(CodeAnalysis.Emit.EmitContext context)
+        IEnumerable<Cci.ICustomAttribute> Cci.IReference.GetAttributes(
+            CodeAnalysis.Emit.EmitContext context
+        )
         {
             return SpecializedCollections.EmptyEnumerable<Cci.ICustomAttribute>();
         }

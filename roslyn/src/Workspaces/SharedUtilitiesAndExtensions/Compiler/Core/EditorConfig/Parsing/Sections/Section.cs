@@ -71,8 +71,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         /// <param name="language">The language to check support for.</param>
         /// <param name="matchKind">The criteria for which we consider a language a mache the default is <see cref="SectionMatch.ExactLanguageMatch"/>.</param>
         /// <returns>If this section is a match for the given language, meaning options can be added here.</returns>
-        public bool SupportsLanguage(Language language, SectionMatch matchKind = default)
-            => GetMatchKind(language).IsBetterOrEqualMatchThan(matchKind);
+        public bool SupportsLanguage(Language language, SectionMatch matchKind = default) =>
+            GetMatchKind(language).IsBetterOrEqualMatchThan(matchKind);
 
         /// <summary>
         /// Checks where this header supports the given file path for the given match criteria
@@ -84,8 +84,8 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
         /// If no file path was given in the operation that produces this section and a relative path comparison is required to check for support this method will return no match.
         /// </remarks>
         /// <returns>If this section is a match for the given file, meaning options can be added here.</returns>
-        public bool SupportsFilePath(string codeFilePath, SectionMatch matchKind = default)
-            => GetMatchKind(codeFilePath).IsBetterOrEqualMatchThan(matchKind);
+        public bool SupportsFilePath(string codeFilePath, SectionMatch matchKind = default) =>
+            GetMatchKind(codeFilePath).IsBetterOrEqualMatchThan(matchKind);
 
         public SectionMatch GetMatchKind(Language language)
         {
@@ -154,9 +154,15 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
 
             return matcher.GetPathMatchKind(relativePath);
 
-            static string GetPathRelativeToEditorconfig(string directoryContainingEditorconfig, string codeFilePath)
+            static string GetPathRelativeToEditorconfig(
+                string directoryContainingEditorconfig,
+                string codeFilePath
+            )
             {
-                var relativePath = PathUtilities.GetRelativePath(directoryContainingEditorconfig, codeFilePath);
+                var relativePath = PathUtilities.GetRelativePath(
+                    directoryContainingEditorconfig,
+                    codeFilePath
+                );
                 relativePath = relativePath.Replace("\\", "/");
                 if (!relativePath.StartsWith("/"))
                 {
@@ -167,18 +173,19 @@ namespace Microsoft.CodeAnalysis.EditorConfig.Parsing
             }
         }
 
-        public bool Equals(Section? other)
-            => ReferenceEquals(this, other) ||
-                          (other is not null &&
-                           StringComparer.OrdinalIgnoreCase.Equals(FilePath, other.FilePath) &&
-                           Span == other.Span &&
-                           Text == other.Text);
+        public bool Equals(Section? other) =>
+            ReferenceEquals(this, other)
+            || (
+                other is not null
+                && StringComparer.OrdinalIgnoreCase.Equals(FilePath, other.FilePath)
+                && Span == other.Span
+                && Text == other.Text
+            );
 
-        public override int GetHashCode()
-            => Hash.Combine(
+        public override int GetHashCode() =>
+            Hash.Combine(
                 StringComparer.OrdinalIgnoreCase.GetHashCode(FilePath ?? string.Empty),
-                Hash.Combine(
-                    Span.GetHashCode(),
-                    Text.GetHashCode()));
+                Hash.Combine(Span.GetHashCode(), Text.GetHashCode())
+            );
     }
 }

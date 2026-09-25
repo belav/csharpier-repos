@@ -281,9 +281,8 @@ public class TestServerTests
             {
                 var serverAddressesFeature =
                     applicationBuilder.ServerFeatures.Get<IServerAddressesFeature>();
-                Assert.Contains(
-                    serverAddressesFeature.Addresses,
-                    s => string.Equals(s, url, StringComparison.Ordinal)
+                Assert.Contains(serverAddressesFeature.Addresses, s =>
+                    string.Equals(s, url, StringComparison.Ordinal)
                 );
             });
 
@@ -711,8 +710,8 @@ public class TestServerTests
         HttpResponseMessage result = await server.CreateClient().GetAsync("/");
         Assert.Equal(HttpStatusCode.OK, result.StatusCode);
         server.Dispose();
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () => server.CreateClient().GetAsync("/")
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+            server.CreateClient().GetAsync("/")
         );
     }
 

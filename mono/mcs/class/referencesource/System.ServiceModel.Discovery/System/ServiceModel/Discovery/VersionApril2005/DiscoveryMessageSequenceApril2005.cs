@@ -10,7 +10,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
     using System.Xml.Serialization;
 
     [XmlSchemaProvider("GetSchema")]
-    [Fx.Tag.XamlVisible(false)]    
+    [Fx.Tag.XamlVisible(false)]
     public class DiscoveryMessageSequenceApril2005 : IXmlSerializable
     {
         DiscoveryMessageSequence discoveryMessageSequence;
@@ -25,7 +25,9 @@ namespace System.ServiceModel.Discovery.VersionApril2005
             this.discoveryMessageSequence = discoveryMessageSequence;
         }
 
-        public static DiscoveryMessageSequenceApril2005 FromDiscoveryMessageSequence(DiscoveryMessageSequence discoveryMessageSequence)
+        public static DiscoveryMessageSequenceApril2005 FromDiscoveryMessageSequence(
+            DiscoveryMessageSequence discoveryMessageSequence
+        )
         {
             if (discoveryMessageSequence == null)
             {
@@ -41,7 +43,10 @@ namespace System.ServiceModel.Discovery.VersionApril2005
                 throw FxTrace.Exception.ArgumentNull("schemaSet");
             }
 
-            return SchemaUtility.EnsureAppSequenceSchema(DiscoveryVersion.WSDiscoveryApril2005, schemaSet);
+            return SchemaUtility.EnsureAppSequenceSchema(
+                DiscoveryVersion.WSDiscoveryApril2005,
+                schemaSet
+            );
         }
 
         public DiscoveryMessageSequence ToDiscoveryMessageSequence()
@@ -51,10 +56,13 @@ namespace System.ServiceModel.Discovery.VersionApril2005
 
         public XmlSchema GetSchema()
         {
-            return null;    
+            return null;
         }
 
-        [Fx.Tag.InheritThrows(From = "ReadFrom", FromDeclaringType = typeof(DiscoveryMessageSequence))]
+        [Fx.Tag.InheritThrows(
+            From = "ReadFrom",
+            FromDeclaringType = typeof(DiscoveryMessageSequence)
+        )]
         public void ReadXml(XmlReader reader)
         {
             this.discoveryMessageSequence.ReadFrom(reader);
@@ -62,7 +70,7 @@ namespace System.ServiceModel.Discovery.VersionApril2005
 
         public void WriteXml(XmlWriter writer)
         {
-            this.discoveryMessageSequence.WriteTo(writer);            
-        }     
+            this.discoveryMessageSequence.WriteTo(writer);
+        }
     }
 }

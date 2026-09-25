@@ -15,13 +15,28 @@ namespace System.Security.Cryptography
         //
         // The delegate must instantiate a new CngKey, based on a new underlying NCryptKeyHandle, each time is called.
         //
-        public BasicSymmetricCipherNCrypt(Func<CngKey> cngKeyFactory, CipherMode cipherMode, int blockSizeInBytes, byte[]? iv, bool encrypting, int paddingSizeInBytes)
+        public BasicSymmetricCipherNCrypt(
+            Func<CngKey> cngKeyFactory,
+            CipherMode cipherMode,
+            int blockSizeInBytes,
+            byte[]? iv,
+            bool encrypting,
+            int paddingSizeInBytes
+        )
             : base(iv, blockSizeInBytes, paddingSizeInBytes)
         {
-            _cipher = new BasicSymmetricCipherLiteNCrypt(cngKeyFactory, cipherMode, blockSizeInBytes, iv, encrypting, paddingSizeInBytes);
+            _cipher = new BasicSymmetricCipherLiteNCrypt(
+                cngKeyFactory,
+                cipherMode,
+                blockSizeInBytes,
+                iv,
+                encrypting,
+                paddingSizeInBytes
+            );
         }
 
-        public sealed override int Transform(ReadOnlySpan<byte> input, Span<byte> output) => _cipher.Transform(input, output);
+        public sealed override int Transform(ReadOnlySpan<byte> input, Span<byte> output) =>
+            _cipher.Transform(input, output);
 
         public sealed override int TransformFinal(ReadOnlySpan<byte> input, Span<byte> output)
         {

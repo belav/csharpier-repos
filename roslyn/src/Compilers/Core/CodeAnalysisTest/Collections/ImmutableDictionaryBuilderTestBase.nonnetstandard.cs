@@ -18,8 +18,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void TryGetKey()
         {
-            var builder = Empty<int>(StringComparer.OrdinalIgnoreCase)
-                .Add("a", 1).ToBuilder();
+            var builder = Empty<int>(StringComparer.OrdinalIgnoreCase).Add("a", 1).ToBuilder();
             Assert.True(TryGetKeyHelper(builder, "a", out string actualKey));
             Assert.Equal("a", actualKey);
 

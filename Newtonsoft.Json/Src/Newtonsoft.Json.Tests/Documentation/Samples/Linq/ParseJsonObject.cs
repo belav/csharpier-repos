@@ -45,7 +45,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               CPU: 'Intel',
               Drives: [
                 'DVD read/writer',
@@ -65,13 +66,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""CPU"": ""Intel"",
   ""Drives"": [
     ""DVD read/writer"",
     ""500 gigabyte hard drive""
   ]
-}", o.ToString());
+}",
+                o.ToString()
+            );
         }
     }
 }

@@ -29,20 +29,27 @@ namespace Microsoft.Web.Mvc
                 if (properties.Length == 0)
                 {
                     throw new InvalidOperationException(
-                        String.Format(CultureInfo.CurrentCulture,
-                                      MvcResources.DynamicViewPage_NoProperties,
-                                      binder.Name));
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.DynamicViewPage_NoProperties,
+                            binder.Name
+                        )
+                    );
                 }
 
-                string propNames = properties.Select(p => p.Name)
+                string propNames = properties
+                    .Select(p => p.Name)
                     .OrderBy(name => name)
                     .Aggregate((left, right) => left + ", " + right);
 
                 throw new InvalidOperationException(
-                    String.Format(CultureInfo.CurrentCulture,
-                                  MvcResources.DynamicViewPage_PropertyDoesNotExist,
-                                  binder.Name,
-                                  propNames));
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.DynamicViewPage_PropertyDoesNotExist,
+                        binder.Name,
+                        propNames
+                    )
+                );
             }
 
             result = Wrap(propInfo.GetValue(_realObject, null));

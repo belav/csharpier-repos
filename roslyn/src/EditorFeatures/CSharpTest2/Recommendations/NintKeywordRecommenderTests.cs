@@ -15,5 +15,6 @@ public class NintKeywordRecommenderTests : NativeIntegerKeywordRecommenderTests
 {
     protected override string KeywordText => "nint";
 
-    private protected override AbstractNativeIntegerKeywordRecommender Recommender => new NintKeywordRecommender();
+    private protected override AbstractNativeIntegerKeywordRecommender Recommender =>
+        new NintKeywordRecommender();
 }

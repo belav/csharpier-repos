@@ -267,13 +267,10 @@ public class TestServer : IServer
         CancellationToken cancellationToken
     )
     {
-        _application = new ApplicationWrapper<TContext>(
-            application,
-            () =>
-            {
-                ObjectDisposedException.ThrowIf(_disposed, this);
-            }
-        );
+        _application = new ApplicationWrapper<TContext>(application, () =>
+        {
+            ObjectDisposedException.ThrowIf(_disposed, this);
+        });
 
         return Task.CompletedTask;
     }

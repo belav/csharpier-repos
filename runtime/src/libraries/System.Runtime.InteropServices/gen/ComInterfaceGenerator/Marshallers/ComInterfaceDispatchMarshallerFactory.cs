@@ -17,13 +17,16 @@ namespace Microsoft.Interop
     internal sealed class ComInterfaceDispatchMarshallerFactory : IMarshallingGeneratorFactory
     {
         private readonly IMarshallingGeneratorFactory _inner;
+
         public ComInterfaceDispatchMarshallerFactory(IMarshallingGeneratorFactory inner)
         {
             _inner = inner;
         }
 
-        public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context)
-            => info.MarshallingAttributeInfo is ComInterfaceDispatchMarshallingInfo ? ResolvedGenerator.Resolved(new Marshaller()) : _inner.Create(info, context);
+        public ResolvedGenerator Create(TypePositionInfo info, StubCodeContext context) =>
+            info.MarshallingAttributeInfo is ComInterfaceDispatchMarshallingInfo
+                ? ResolvedGenerator.Resolved(new Marshaller())
+                : _inner.Create(info, context);
 
         private sealed class Marshaller : IMarshallingGenerator
         {
@@ -31,8 +34,13 @@ namespace Microsoft.Interop
                 new PointerTypeInfo(
                     $"{TypeNames.GlobalAlias + TypeNames.System_Runtime_InteropServices_ComWrappers_ComInterfaceDispatch}*",
                     $"{TypeNames.System_Runtime_InteropServices_ComWrappers_ComInterfaceDispatch}*",
-                    IsFunctionPointer: false);
-            public IEnumerable<StatementSyntax> Generate(TypePositionInfo info, StubCodeContext context)
+                    IsFunctionPointer: false
+                );
+
+            public IEnumerable<StatementSyntax> Generate(
+                TypePositionInfo info,
+                StubCodeContext context
+            )
             {
                 if (context.CurrentStage != StubCodeContext.Stage.Unmarshal)
                 {
@@ -43,25 +51,49 @@ namespace Microsoft.Interop
 
                 // <managed> = ComWrappers.ComInterfaceDispatch.GetInstance<<managedType>>(<native>);
                 yield return ExpressionStatement(
-                    AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
+                    AssignmentExpression(
+                        SyntaxKind.SimpleAssignmentExpression,
                         IdentifierName(managed),
                         InvocationExpression(
-                            MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression,
+                            MemberAccessExpression(
+                                SyntaxKind.SimpleMemberAccessExpression,
                                 TypeSyntaxes.System_Runtime_InteropServices_ComWrappers_ComInterfaceDispatch,
                                 GenericName(
                                     Identifier("GetInstance"),
-                                    TypeArgumentList(SingletonSeparatedList(info.ManagedType.Syntax)))),
-                            ArgumentList(
-                                SingletonSeparatedList(
-                                    Argument(
-                                        IdentifierName(native)))))));
+                                    TypeArgumentList(
+                                        SingletonSeparatedList(info.ManagedType.Syntax)
+                                    )
+                                )
+                            ),
+                            ArgumentList(SingletonSeparatedList(Argument(IdentifierName(native))))
+                        )
+                    )
+                );
             }
 
-            public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) => SignatureBehavior.NativeType;
-            public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context) => ValueBoundaryBehavior.NativeIdentifier;
-            public ByValueMarshalKindSupport SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, TypePositionInfo info, StubCodeContext context, out GeneratorDiagnostic? diagnostic)
-                => ByValueMarshalKindSupportDescriptor.Default.GetSupport(marshalKind, info, context, out diagnostic);
-            public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) => true;
+            public SignatureBehavior GetNativeSignatureBehavior(TypePositionInfo info) =>
+                SignatureBehavior.NativeType;
+
+            public ValueBoundaryBehavior GetValueBoundaryBehavior(
+                TypePositionInfo info,
+                StubCodeContext context
+            ) => ValueBoundaryBehavior.NativeIdentifier;
+
+            public ByValueMarshalKindSupport SupportsByValueMarshalKind(
+                ByValueContentsMarshalKind marshalKind,
+                TypePositionInfo info,
+                StubCodeContext context,
+                out GeneratorDiagnostic? diagnostic
+            ) =>
+                ByValueMarshalKindSupportDescriptor.Default.GetSupport(
+                    marshalKind,
+                    info,
+                    context,
+                    out diagnostic
+                );
+
+            public bool UsesNativeIdentifier(TypePositionInfo info, StubCodeContext context) =>
+                true;
         }
     }
 }

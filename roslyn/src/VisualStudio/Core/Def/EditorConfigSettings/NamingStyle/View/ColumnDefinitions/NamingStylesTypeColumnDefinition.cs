@@ -22,9 +22,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NamingStylesTypeColumnDefinition()
-        {
-        }
+        public NamingStylesTypeColumnDefinition() { }
 
         public override string Name => Type;
         public override string DisplayName => ServicesVSResources.Type;
@@ -32,7 +30,12 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public override bool IsSortable => true;
         public override double MinWidth => 350;
 
-        public override bool TryCreateStringContent(ITableEntryHandle entry, bool truncatedText, bool singleColumnView, out string? content)
+        public override bool TryCreateStringContent(
+            ITableEntryHandle entry,
+            bool truncatedText,
+            bool singleColumnView,
+            out string? content
+        )
         {
             if (!entry.TryGetValue(Type, out NamingStyleSetting setting))
             {
@@ -47,7 +50,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public override bool TryCreateColumnContent(
             ITableEntryHandle entry,
             bool singleColumnView,
-            out FrameworkElement? content)
+            out FrameworkElement? content
+        )
         {
             if (!entry.TryGetValue(Type, out NamingStyleSetting setting))
             {

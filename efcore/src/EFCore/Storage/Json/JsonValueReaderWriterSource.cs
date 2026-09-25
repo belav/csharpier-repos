@@ -145,12 +145,13 @@ public class JsonValueReaderWriterSource : IJsonValueReaderWriterSource
 
         if (type.IsEnum)
         {
-            var readerWriterType =
-                (type.GetEnumUnderlyingType().IsSignedInteger()
+            var readerWriterType = (
+                type.GetEnumUnderlyingType().IsSignedInteger()
                     ? typeof(JsonSignedEnumReaderWriter<>)
-                    : typeof(JsonUnsignedEnumReaderWriter<>))
-                .MakeGenericType(type);
-            return (JsonValueReaderWriter?)readerWriterType.GetAnyProperty("Instance")!.GetValue(null);
+                    : typeof(JsonUnsignedEnumReaderWriter<>)
+            ).MakeGenericType(type);
+            return (JsonValueReaderWriter?)
+                readerWriterType.GetAnyProperty("Instance")!.GetValue(null);
         }
 
         return null;

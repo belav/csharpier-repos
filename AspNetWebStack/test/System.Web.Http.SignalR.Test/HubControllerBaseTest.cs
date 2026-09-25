@@ -16,7 +16,8 @@ namespace System.Web.Http
         {
             Assert.Throws<InvalidOperationException>(
                 () => new HubContextController(null).Clients,
-                "No hub context could be found for the HubController of type 'HubContextController'.");
+                "No hub context could be found for the HubController of type 'HubContextController'."
+            );
         }
 
         [Fact]
@@ -35,7 +36,8 @@ namespace System.Web.Http
         {
             Assert.Throws<InvalidOperationException>(
                 () => new HubContextController(null).Groups,
-                "No hub context could be found for the HubController of type 'HubContextController'.");
+                "No hub context could be found for the HubController of type 'HubContextController'."
+            );
         }
 
         [Fact]
@@ -62,8 +64,11 @@ namespace System.Web.Http
         {
             HubContextController controller = new HubContextController();
             controller.Configuration = new HttpConfiguration();
-            Mock<System.Web.Http.Dependencies.IDependencyResolver> mockDependencyResolver = new Mock<Dependencies.IDependencyResolver>();
-            mockDependencyResolver.Setup(mock => mock.GetService(typeof(IConnectionManager))).Returns(null);
+            Mock<System.Web.Http.Dependencies.IDependencyResolver> mockDependencyResolver =
+                new Mock<Dependencies.IDependencyResolver>();
+            mockDependencyResolver
+                .Setup(mock => mock.GetService(typeof(IConnectionManager)))
+                .Returns(null);
             controller.Configuration.DependencyResolver = mockDependencyResolver.Object;
 
             Assert.Same(GlobalHost.ConnectionManager, controller.GetConnectionManager());
@@ -75,8 +80,11 @@ namespace System.Web.Http
             HubContextController controller = new HubContextController();
             controller.Configuration = new HttpConfiguration();
             IConnectionManager connectionManager = new Mock<IConnectionManager>().Object;
-            Mock<System.Web.Http.Dependencies.IDependencyResolver> mockDependencyResolver = new Mock<Dependencies.IDependencyResolver>();
-            mockDependencyResolver.Setup(mock => mock.GetService(typeof(IConnectionManager))).Returns(connectionManager);
+            Mock<System.Web.Http.Dependencies.IDependencyResolver> mockDependencyResolver =
+                new Mock<Dependencies.IDependencyResolver>();
+            mockDependencyResolver
+                .Setup(mock => mock.GetService(typeof(IConnectionManager)))
+                .Returns(connectionManager);
             controller.Configuration.DependencyResolver = mockDependencyResolver.Object;
 
             Assert.Same(connectionManager, controller.GetConnectionManager());
@@ -93,10 +101,7 @@ namespace System.Web.Http
 
             protected override IHubContext HubContext
             {
-                get
-                {
-                    return _hubContext;
-                }
+                get { return _hubContext; }
             }
 
             public IConnectionManager GetConnectionManager()

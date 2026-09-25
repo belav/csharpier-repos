@@ -27,9 +27,9 @@ namespace System.Web.Razor.Test.Parser
                     factory.Code("    ").AsExpression(),
                     factory.CodeTransition(SyntaxConstants.TransitionString),
                     factory.Code("foo").AsExpression()
-                    ),
+                ),
                 factory.Markup("test")
-                );
+            );
             WhiteSpaceRewriter rewriter = new WhiteSpaceRewriter(new HtmlMarkupParser().BuildSpan);
 
             // Act
@@ -38,15 +38,18 @@ namespace System.Web.Razor.Test.Parser
             factory.Reset();
 
             // Assert
-            ParserTestBase.EvaluateParseTree(actual, new MarkupBlock(
-                                                         factory.Markup("test"),
-                                                         factory.Markup("    "),
-                                                         new ExpressionBlock(
-                                                             factory.CodeTransition(SyntaxConstants.TransitionString),
-                                                             factory.Code("foo").AsExpression()
-                                                             ),
-                                                         factory.Markup("test")
-                                                         ));
+            ParserTestBase.EvaluateParseTree(
+                actual,
+                new MarkupBlock(
+                    factory.Markup("test"),
+                    factory.Markup("    "),
+                    new ExpressionBlock(
+                        factory.CodeTransition(SyntaxConstants.TransitionString),
+                        factory.Code("foo").AsExpression()
+                    ),
+                    factory.Markup("test")
+                )
+            );
         }
     }
 }

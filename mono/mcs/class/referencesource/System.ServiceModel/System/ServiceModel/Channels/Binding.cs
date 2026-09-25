@@ -30,7 +30,10 @@ namespace System.ServiceModel.Channels
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("name", SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "name",
+                    SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty)
+                );
             }
             if (ns == null)
             {
@@ -46,7 +49,6 @@ namespace System.ServiceModel.Channels
             this.namespaceIdentifier = ns;
         }
 
-
         [DefaultValue(typeof(TimeSpan), ServiceDefaults.CloseTimeoutString)]
         public TimeSpan CloseTimeout
         {
@@ -55,11 +57,23 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.closeTimeout = value;
@@ -78,7 +92,10 @@ namespace System.ServiceModel.Channels
             set
             {
                 if (string.IsNullOrEmpty(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.SFXBindingNameCannotBeNullOrEmpty)
+                    );
 
                 this.name = value;
             }
@@ -110,11 +127,23 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.openTimeout = value;
@@ -129,11 +158,23 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.receiveTimeout = value;
@@ -144,10 +185,7 @@ namespace System.ServiceModel.Channels
 
         public MessageVersion MessageVersion
         {
-            get
-            {
-                return this.GetProperty<MessageVersion>(new BindingParameterCollection());
-            }
+            get { return this.GetProperty<MessageVersion>(new BindingParameterCollection()); }
         }
 
         [DefaultValue(typeof(TimeSpan), ServiceDefaults.SendTimeoutString)]
@@ -158,11 +196,23 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.sendTimeout = value;
@@ -174,86 +224,170 @@ namespace System.ServiceModel.Channels
             return this.BuildChannelFactory<TChannel>(new BindingParameterCollection(parameters));
         }
 
-        public virtual IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingParameterCollection parameters)
+        public virtual IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingParameterCollection parameters
+        )
         {
             EnsureInvariants();
             BindingContext context = new BindingContext(new CustomBinding(this), parameters);
             IChannelFactory<TChannel> channelFactory = context.BuildInnerChannelFactory<TChannel>();
             context.ValidateBindingElementsConsumed();
-            this.ValidateSecurityCapabilities(channelFactory.GetProperty<ISecurityCapabilities>(), parameters);
+            this.ValidateSecurityCapabilities(
+                channelFactory.GetProperty<ISecurityCapabilities>(),
+                parameters
+            );
 
             return channelFactory;
         }
 
-        void ValidateSecurityCapabilities(ISecurityCapabilities runtimeSecurityCapabilities, BindingParameterCollection parameters)
+        void ValidateSecurityCapabilities(
+            ISecurityCapabilities runtimeSecurityCapabilities,
+            BindingParameterCollection parameters
+        )
         {
-            ISecurityCapabilities bindingSecurityCapabilities = this.GetProperty<ISecurityCapabilities>(parameters);
+            ISecurityCapabilities bindingSecurityCapabilities =
+                this.GetProperty<ISecurityCapabilities>(parameters);
 
-            if (!SecurityCapabilities.IsEqual(bindingSecurityCapabilities, runtimeSecurityCapabilities))
+            if (
+                !SecurityCapabilities.IsEqual(
+                    bindingSecurityCapabilities,
+                    runtimeSecurityCapabilities
+                )
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR.GetString(SR.SecurityCapabilitiesMismatched, this)));
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecurityCapabilitiesMismatched, this)
+                    )
+                );
             }
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(params object[] parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
             return this.BuildChannelListener<TChannel>(new BindingParameterCollection(parameters));
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(Uri listenUriBaseAddress, params object[] parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            Uri listenUriBaseAddress,
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
-            return this.BuildChannelListener<TChannel>(listenUriBaseAddress, new BindingParameterCollection(parameters));
+            return this.BuildChannelListener<TChannel>(
+                listenUriBaseAddress,
+                new BindingParameterCollection(parameters)
+            );
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(Uri listenUriBaseAddress, string listenUriRelativeAddress, params object[] parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
-            return this.BuildChannelListener<TChannel>(listenUriBaseAddress, listenUriRelativeAddress, new BindingParameterCollection(parameters));
+            return this.BuildChannelListener<TChannel>(
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                new BindingParameterCollection(parameters)
+            );
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(Uri listenUriBaseAddress, string listenUriRelativeAddress, ListenUriMode listenUriMode, params object[] parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            ListenUriMode listenUriMode,
+            params object[] parameters
+        )
             where TChannel : class, IChannel
         {
-            return this.BuildChannelListener<TChannel>(listenUriBaseAddress, listenUriRelativeAddress, listenUriMode, new BindingParameterCollection(parameters));
+            return this.BuildChannelListener<TChannel>(
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                listenUriMode,
+                new BindingParameterCollection(parameters)
+            );
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingParameterCollection parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
             UriBuilder listenUriBuilder = new UriBuilder(this.Scheme, DnsCache.MachineName);
-            return this.BuildChannelListener<TChannel>(listenUriBuilder.Uri, String.Empty, ListenUriMode.Unique, parameters);
+            return this.BuildChannelListener<TChannel>(
+                listenUriBuilder.Uri,
+                String.Empty,
+                ListenUriMode.Unique,
+                parameters
+            );
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(Uri listenUriBaseAddress, BindingParameterCollection parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            Uri listenUriBaseAddress,
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
-            return this.BuildChannelListener<TChannel>(listenUriBaseAddress, String.Empty, ListenUriMode.Explicit, parameters);
+            return this.BuildChannelListener<TChannel>(
+                listenUriBaseAddress,
+                String.Empty,
+                ListenUriMode.Explicit,
+                parameters
+            );
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(Uri listenUriBaseAddress, string listenUriRelativeAddress, BindingParameterCollection parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
-            return this.BuildChannelListener<TChannel>(listenUriBaseAddress, listenUriRelativeAddress, ListenUriMode.Explicit, parameters);
+            return this.BuildChannelListener<TChannel>(
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                ListenUriMode.Explicit,
+                parameters
+            );
         }
 
-        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(Uri listenUriBaseAddress, string listenUriRelativeAddress, ListenUriMode listenUriMode, BindingParameterCollection parameters)
+        public virtual IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            Uri listenUriBaseAddress,
+            string listenUriRelativeAddress,
+            ListenUriMode listenUriMode,
+            BindingParameterCollection parameters
+        )
             where TChannel : class, IChannel
         {
             EnsureInvariants();
-            BindingContext context = new BindingContext(new CustomBinding(this), parameters, listenUriBaseAddress, listenUriRelativeAddress, listenUriMode);
-            IChannelListener<TChannel> channelListener = context.BuildInnerChannelListener<TChannel>();
+            BindingContext context = new BindingContext(
+                new CustomBinding(this),
+                parameters,
+                listenUriBaseAddress,
+                listenUriRelativeAddress,
+                listenUriMode
+            );
+            IChannelListener<TChannel> channelListener =
+                context.BuildInnerChannelListener<TChannel>();
             context.ValidateBindingElementsConsumed();
-            this.ValidateSecurityCapabilities(channelListener.GetProperty<ISecurityCapabilities>(), parameters);
+            this.ValidateSecurityCapabilities(
+                channelListener.GetProperty<ISecurityCapabilities>(),
+                parameters
+            );
 
             return channelListener;
         }
 
         public bool CanBuildChannelFactory<TChannel>(params object[] parameters)
         {
-            return this.CanBuildChannelFactory<TChannel>(new BindingParameterCollection(parameters));
+            return this.CanBuildChannelFactory<TChannel>(
+                new BindingParameterCollection(parameters)
+            );
         }
 
         public virtual bool CanBuildChannelFactory<TChannel>(BindingParameterCollection parameters)
@@ -262,12 +396,16 @@ namespace System.ServiceModel.Channels
             return context.CanBuildInnerChannelFactory<TChannel>();
         }
 
-        public bool CanBuildChannelListener<TChannel>(params object[] parameters) where TChannel : class, IChannel
+        public bool CanBuildChannelListener<TChannel>(params object[] parameters)
+            where TChannel : class, IChannel
         {
-            return this.CanBuildChannelListener<TChannel>(new BindingParameterCollection(parameters));
+            return this.CanBuildChannelListener<TChannel>(
+                new BindingParameterCollection(parameters)
+            );
         }
 
-        public virtual bool CanBuildChannelListener<TChannel>(BindingParameterCollection parameters) where TChannel : class, IChannel
+        public virtual bool CanBuildChannelListener<TChannel>(BindingParameterCollection parameters)
+            where TChannel : class, IChannel
         {
             BindingContext context = new BindingContext(new CustomBinding(this), parameters);
             return context.CanBuildInnerChannelListener<TChannel>();
@@ -304,30 +442,49 @@ namespace System.ServiceModel.Channels
             {
                 if (contractName == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.CustomBindingRequiresTransport, this.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.CustomBindingRequiresTransport, this.Name)
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                        SR.GetString(SR.SFxCustomBindingNeedsTransport1, contractName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxCustomBindingNeedsTransport1, contractName)
+                        )
+                    );
                 }
             }
             if (index != elements.Count - 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.TransportBindingElementMustBeLast, this.Name, transport.GetType().Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.TransportBindingElementMustBeLast,
+                            this.Name,
+                            transport.GetType().Name
+                        )
+                    )
+                );
             }
             if (string.IsNullOrEmpty(transport.Scheme))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.InvalidBindingScheme, transport.GetType().Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.InvalidBindingScheme, transport.GetType().Name)
+                    )
+                );
             }
 
             if (this.MessageVersion == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.MessageVersionMissingFromBinding, this.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.MessageVersionMissingFromBinding, this.Name)
+                    )
+                );
             }
         }
 
@@ -352,4 +509,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

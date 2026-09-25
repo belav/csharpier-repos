@@ -11,7 +11,10 @@ namespace System.Security.Permissions.Tests
         [Fact]
         public static void FileCodeGroupCallMethods()
         {
-            FileCodeGroup fcg = new FileCodeGroup(new GacMembershipCondition(), new FileIOPermissionAccess());
+            FileCodeGroup fcg = new FileCodeGroup(
+                new GacMembershipCondition(),
+                new FileIOPermissionAccess()
+            );
             CodeGroup cg = fcg.Copy();
             bool equals = fcg.Equals(new object());
             int hash = fcg.GetHashCode();
@@ -23,7 +26,10 @@ namespace System.Security.Permissions.Tests
         public static void FirstMatchCodeGroupCallMethods()
         {
 #pragma warning disable 618
-            FirstMatchCodeGroup fmcg = new FirstMatchCodeGroup(new GacMembershipCondition(), new PolicyStatement(new PermissionSet(new PermissionState())));
+            FirstMatchCodeGroup fmcg = new FirstMatchCodeGroup(
+                new GacMembershipCondition(),
+                new PolicyStatement(new PermissionSet(new PermissionState()))
+            );
 #pragma warning restore 618
             CodeGroup cg = fmcg.Copy();
             PolicyStatement ps = fmcg.Resolve(new Evidence());
@@ -50,7 +56,10 @@ namespace System.Security.Permissions.Tests
         public static void UnionCodeGroupCallMethods()
         {
 #pragma warning disable 618
-            UnionCodeGroup ucg = new UnionCodeGroup(new GacMembershipCondition(), new PolicyStatement(new PermissionSet(new PermissionState())));
+            UnionCodeGroup ucg = new UnionCodeGroup(
+                new GacMembershipCondition(),
+                new PolicyStatement(new PermissionSet(new PermissionState()))
+            );
 #pragma warning restore 618
             CodeGroup cg = ucg.Copy();
             PolicyStatement ps = ucg.Resolve(new Evidence());

@@ -11,14 +11,19 @@ namespace System.Net.Http
         [Fact]
         public void Ctor_ThrowsOnNullRange()
         {
-            Assert.ThrowsArgumentNull(() => new InvalidByteRangeException(contentRange: null), "contentRange");
+            Assert.ThrowsArgumentNull(
+                () => new InvalidByteRangeException(contentRange: null),
+                "contentRange"
+            );
         }
 
         [Fact]
         public void Ctor_SetsContentRange()
         {
             ContentRangeHeaderValue contentRange = new ContentRangeHeaderValue(0, 20, 100);
-            InvalidByteRangeException invalidByteRangeException = new InvalidByteRangeException(contentRange);
+            InvalidByteRangeException invalidByteRangeException = new InvalidByteRangeException(
+                contentRange
+            );
             Assert.Same(contentRange, invalidByteRangeException.ContentRange);
         }
     }

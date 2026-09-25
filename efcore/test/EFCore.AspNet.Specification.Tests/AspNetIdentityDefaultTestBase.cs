@@ -7,18 +7,36 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Microsoft.EntityFrameworkCore;
 
 public abstract class AspNetIdentityDefaultTestBase<TFixture>
-    : AspNetIdentityTestBase<TFixture, IdentityDbContext, IdentityUser, IdentityRole, string, IdentityUserClaim<string>,
-        IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>
-    where TFixture : AspNetIdentityTestBase<TFixture, IdentityDbContext, IdentityUser, IdentityRole, string, IdentityUserClaim<string>,
-        IdentityUserRole<string>, IdentityUserLogin<string>, IdentityRoleClaim<string>, IdentityUserToken<string>>.AspNetIdentityFixtureBase
+    : AspNetIdentityTestBase<
+        TFixture,
+        IdentityDbContext,
+        IdentityUser,
+        IdentityRole,
+        string,
+        IdentityUserClaim<string>,
+        IdentityUserRole<string>,
+        IdentityUserLogin<string>,
+        IdentityRoleClaim<string>,
+        IdentityUserToken<string>
+    >
+    where TFixture : AspNetIdentityTestBase<
+            TFixture,
+            IdentityDbContext,
+            IdentityUser,
+            IdentityRole,
+            string,
+            IdentityUserClaim<string>,
+            IdentityUserRole<string>,
+            IdentityUserLogin<string>,
+            IdentityRoleClaim<string>,
+            IdentityUserToken<string>
+        >.AspNetIdentityFixtureBase
 {
     protected AspNetIdentityDefaultTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override List<EntityTypeMapping> ExpectedMappings
-        => new()
+    protected override List<EntityTypeMapping> ExpectedMappings =>
+        new()
         {
             new EntityTypeMapping
             {
@@ -32,7 +50,7 @@ public abstract class AspNetIdentityDefaultTestBase<TFixture>
                     "Property: IdentityRole.Name (string) MaxLength(256)",
                     "Property: IdentityRole.NormalizedName (string) Index MaxLength(256)",
                 },
-                Indexes = { "{'NormalizedName'} Unique", },
+                Indexes = { "{'NormalizedName'} Unique" },
             },
             new EntityTypeMapping
             {
@@ -46,8 +64,11 @@ public abstract class AspNetIdentityDefaultTestBase<TFixture>
                     "Property: IdentityRoleClaim<string>.ClaimValue (string)",
                     "Property: IdentityRoleClaim<string>.RoleId (string) Required FK Index",
                 },
-                Indexes = { "{'RoleId'} ", },
-                FKs = { "ForeignKey: IdentityRoleClaim<string> {'RoleId'} -> IdentityRole {'Id'} Required Cascade", },
+                Indexes = { "{'RoleId'} " },
+                FKs =
+                {
+                    "ForeignKey: IdentityRoleClaim<string> {'RoleId'} -> IdentityRole {'Id'} Required Cascade",
+                },
             },
             new EntityTypeMapping
             {
@@ -72,10 +93,7 @@ public abstract class AspNetIdentityDefaultTestBase<TFixture>
                     "Property: IdentityUser.TwoFactorEnabled (bool) Required",
                     "Property: IdentityUser.UserName (string) MaxLength(256)",
                 },
-                Indexes =
-                {
-                    "{'NormalizedEmail'} ", "{'NormalizedUserName'} Unique",
-                },
+                Indexes = { "{'NormalizedEmail'} ", "{'NormalizedUserName'} Unique" },
             },
             new EntityTypeMapping
             {
@@ -89,14 +107,18 @@ public abstract class AspNetIdentityDefaultTestBase<TFixture>
                     "Property: IdentityUserClaim<string>.ClaimValue (string)",
                     "Property: IdentityUserClaim<string>.UserId (string) Required FK Index",
                 },
-                Indexes = { "{'UserId'} ", },
-                FKs = { "ForeignKey: IdentityUserClaim<string> {'UserId'} -> IdentityUser {'Id'} Required Cascade", },
+                Indexes = { "{'UserId'} " },
+                FKs =
+                {
+                    "ForeignKey: IdentityUserClaim<string> {'UserId'} -> IdentityUser {'Id'} Required Cascade",
+                },
             },
             new EntityTypeMapping
             {
                 Name = "Microsoft.AspNetCore.Identity.IdentityUserLogin<string>",
                 TableName = "AspNetUserLogins",
-                PrimaryKey = "Key: IdentityUserLogin<string>.LoginProvider, IdentityUserLogin<string>.ProviderKey PK",
+                PrimaryKey =
+                    "Key: IdentityUserLogin<string>.LoginProvider, IdentityUserLogin<string>.ProviderKey PK",
                 Properties =
                 {
                     "Property: IdentityUserLogin<string>.LoginProvider (string) Required PK AfterSave:Throw",
@@ -104,20 +126,24 @@ public abstract class AspNetIdentityDefaultTestBase<TFixture>
                     "Property: IdentityUserLogin<string>.ProviderDisplayName (string)",
                     "Property: IdentityUserLogin<string>.UserId (string) Required FK Index",
                 },
-                Indexes = { "{'UserId'} ", },
-                FKs = { "ForeignKey: IdentityUserLogin<string> {'UserId'} -> IdentityUser {'Id'} Required Cascade", },
+                Indexes = { "{'UserId'} " },
+                FKs =
+                {
+                    "ForeignKey: IdentityUserLogin<string> {'UserId'} -> IdentityUser {'Id'} Required Cascade",
+                },
             },
             new EntityTypeMapping
             {
                 Name = "Microsoft.AspNetCore.Identity.IdentityUserRole<string>",
                 TableName = "AspNetUserRoles",
-                PrimaryKey = "Key: IdentityUserRole<string>.UserId, IdentityUserRole<string>.RoleId PK",
+                PrimaryKey =
+                    "Key: IdentityUserRole<string>.UserId, IdentityUserRole<string>.RoleId PK",
                 Properties =
                 {
                     "Property: IdentityUserRole<string>.UserId (string) Required PK FK AfterSave:Throw",
                     "Property: IdentityUserRole<string>.RoleId (string) Required PK FK Index AfterSave:Throw",
                 },
-                Indexes = { "{'RoleId'} ", },
+                Indexes = { "{'RoleId'} " },
                 FKs =
                 {
                     "ForeignKey: IdentityUserRole<string> {'RoleId'} -> IdentityRole {'Id'} Required Cascade",
@@ -137,7 +163,10 @@ public abstract class AspNetIdentityDefaultTestBase<TFixture>
                     "Property: IdentityUserToken<string>.Name (string) Required PK AfterSave:Throw",
                     "Property: IdentityUserToken<string>.Value (string)",
                 },
-                FKs = { "ForeignKey: IdentityUserToken<string> {'UserId'} -> IdentityUser {'Id'} Required Cascade", },
+                FKs =
+                {
+                    "ForeignKey: IdentityUserToken<string> {'UserId'} -> IdentityUser {'Id'} Required Cascade",
+                },
             },
         };
 }

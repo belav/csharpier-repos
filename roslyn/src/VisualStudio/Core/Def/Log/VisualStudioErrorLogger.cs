@@ -14,14 +14,16 @@ using static Microsoft.CodeAnalysis.RoslynAssemblyHelper;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Log
 {
-    [ExportWorkspaceService(typeof(IErrorLoggerService), ServiceLayer.Host), Export(typeof(IErrorLoggerService)), Shared]
+    [
+        ExportWorkspaceService(typeof(IErrorLoggerService), ServiceLayer.Host),
+        Export(typeof(IErrorLoggerService)),
+        Shared
+    ]
     internal class VisualStudioErrorLogger : IErrorLoggerService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioErrorLogger()
-        {
-        }
+        public VisualStudioErrorLogger() { }
 
         public void LogException(object source, Exception exception)
         {
@@ -36,7 +38,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Log
 
         private static bool ShouldReportCrashDumps(object source) => HasRoslynPublicKey(source);
 
-        private static string ToLogFormat(Exception exception)
-            => exception.Message + Environment.NewLine + exception.StackTrace;
+        private static string ToLogFormat(Exception exception) =>
+            exception.Message + Environment.NewLine + exception.StackTrace;
     }
 }

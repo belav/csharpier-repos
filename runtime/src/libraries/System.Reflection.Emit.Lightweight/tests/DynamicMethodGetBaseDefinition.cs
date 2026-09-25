@@ -14,7 +14,13 @@ namespace System.Reflection.Emit.Tests
         {
             Type[] parameterTypes = new Type[] { typeof(TestClass), typeof(int) };
 
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), parameterTypes, typeof(TestClass), skipVisibility);
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                parameterTypes,
+                typeof(TestClass),
+                skipVisibility
+            );
             MethodInfo baseDefinition = method.GetBaseDefinition();
             Assert.Equal(method, baseDefinition);
         }
@@ -27,7 +33,13 @@ namespace System.Reflection.Emit.Tests
             Module module = typeof(TestClass).GetTypeInfo().Module;
             Type[] parameterTypes = new Type[] { typeof(TestClass), typeof(int) };
 
-            DynamicMethod method = new DynamicMethod("Method", typeof(int), parameterTypes, module, skipVisibility);
+            DynamicMethod method = new DynamicMethod(
+                "Method",
+                typeof(int),
+                parameterTypes,
+                module,
+                skipVisibility
+            );
             MethodInfo baseDefinition = method.GetBaseDefinition();
             Assert.Equal(method, baseDefinition);
         }

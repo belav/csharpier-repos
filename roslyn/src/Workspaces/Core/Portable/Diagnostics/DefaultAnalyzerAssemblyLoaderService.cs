@@ -14,16 +14,16 @@ namespace Microsoft.CodeAnalysis.Host
     internal sealed class DefaultAnalyzerAssemblyLoaderService : IAnalyzerAssemblyLoaderProvider
     {
         private readonly IAnalyzerAssemblyLoader _loader = new DefaultAnalyzerAssemblyLoader();
-        private readonly IAnalyzerAssemblyLoader _shadowCopyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
-            Path.Combine(Path.GetTempPath(), "CodeAnalysis", "WorkspacesAnalyzerShadowCopies"));
+        private readonly IAnalyzerAssemblyLoader _shadowCopyLoader =
+            DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
+                Path.Combine(Path.GetTempPath(), "CodeAnalysis", "WorkspacesAnalyzerShadowCopies")
+            );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultAnalyzerAssemblyLoaderService()
-        {
-        }
+        public DefaultAnalyzerAssemblyLoaderService() { }
 
-        public IAnalyzerAssemblyLoader GetLoader(in AnalyzerAssemblyLoaderOptions options)
-            => options.ShadowCopy ? _shadowCopyLoader : _loader;
+        public IAnalyzerAssemblyLoader GetLoader(in AnalyzerAssemblyLoaderOptions options) =>
+            options.ShadowCopy ? _shadowCopyLoader : _loader;
     }
 }

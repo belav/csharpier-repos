@@ -4,17 +4,17 @@
 
 namespace System.IdentityModel.Selectors
 {
-    using Microsoft.Win32.SafeHandles;
     using System.ComponentModel;
     using System.Diagnostics;
     using System.Runtime;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
     using System.Security.Permissions;
+    using Microsoft.Win32.SafeHandles;
 
     class X509CertificateStore
     {
@@ -22,8 +22,10 @@ namespace System.IdentityModel.Selectors
         string storeName;
         StoreLocation storeLocation;
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeCertStoreHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeCertStoreHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         public X509CertificateStore(StoreName storeName, StoreLocation storeLocation)
@@ -55,20 +57,34 @@ namespace System.IdentityModel.Selectors
                     this.storeName = "TrustedPublisher";
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("storeName", (int)storeName,
-                        typeof(StoreName)));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnumArgumentException(
+                            "storeName",
+                            (int)storeName,
+                            typeof(StoreName)
+                        )
+                    );
             }
 
-            if (storeLocation != StoreLocation.CurrentUser && storeLocation != StoreLocation.LocalMachine)
+            if (
+                storeLocation != StoreLocation.CurrentUser
+                && storeLocation != StoreLocation.LocalMachine
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("storeLocation", SR.GetString(SR.X509CertStoreLocationNotValid)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "storeLocation",
+                        SR.GetString(SR.X509CertStoreLocationNotValid)
+                    )
+                );
             }
             this.storeLocation = storeLocation;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeCertStoreHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeCertStoreHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         public void Close()
@@ -77,8 +93,10 @@ namespace System.IdentityModel.Selectors
             ((IDisposable)this.certStoreHandle).Dispose();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical type SafeCertStoreHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical type SafeCertStoreHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
         public void Open(OpenFlags openFlags)
@@ -86,25 +104,35 @@ namespace System.IdentityModel.Selectors
             DiagnosticUtility.DebugAssert(this.certStoreHandle.IsInvalid, "");
 
             uint dwOpenFlags = MapX509StoreFlags(this.storeLocation, openFlags);
-            SafeCertStoreHandle certStoreHandle = CAPI.CertOpenStore(new IntPtr(CAPI.CERT_STORE_PROV_SYSTEM),
-                                                       CAPI.X509_ASN_ENCODING | CAPI.PKCS_7_ASN_ENCODING,
-                                                       IntPtr.Zero,
-                                                       dwOpenFlags,
-                                                       this.storeName);
+            SafeCertStoreHandle certStoreHandle = CAPI.CertOpenStore(
+                new IntPtr(CAPI.CERT_STORE_PROV_SYSTEM),
+                CAPI.X509_ASN_ENCODING | CAPI.PKCS_7_ASN_ENCODING,
+                IntPtr.Zero,
+                dwOpenFlags,
+                this.storeName
+            );
 
             if (certStoreHandle == null || certStoreHandle.IsInvalid)
             {
                 int error = Marshal.GetLastWin32Error();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CryptographicException(error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CryptographicException(error)
+                );
             }
             this.certStoreHandle = certStoreHandle;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses critical types SafeCertContextHandle, SafeCertStoreHandle, SafeHGlobalHandle.",
-            Safe = "Performs a Demand for full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses critical types SafeCertContextHandle, SafeCertStoreHandle, SafeHGlobalHandle.",
+            Safe = "Performs a Demand for full trust."
+        )]
         [SecuritySafeCritical]
         [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-        public X509Certificate2Collection Find(X509FindType findType, object findValue, bool validOnly)
+        public X509Certificate2Collection Find(
+            X509FindType findType,
+            object findValue,
+            bool validOnly
+        )
         {
             DiagnosticUtility.DebugAssert(!this.certStoreHandle.IsInvalid, "");
 
@@ -123,7 +151,16 @@ namespace System.IdentityModel.Selectors
                     case X509FindType.FindBySubjectName:
                         strFindValue = findValue as string;
                         if (strFindValue == null)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.X509FindValueMismatch, findType, typeof(string), findValue.GetType())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(
+                                        SR.X509FindValueMismatch,
+                                        findType,
+                                        typeof(string),
+                                        findValue.GetType()
+                                    )
+                                )
+                            );
 
                         dwFindType = CAPI.CERT_FIND_SUBJECT_STR;
                         pvFindPara = SafeHGlobalHandle.AllocHGlobal(strFindValue);
@@ -135,7 +172,17 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.X509FindValueMismatchMulti, findType, typeof(string), typeof(byte[]), findValue.GetType())));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.X509FindValueMismatchMulti,
+                                            findType,
+                                            typeof(string),
+                                            typeof(byte[]),
+                                            findValue.GetType()
+                                        )
+                                    )
+                                );
 
                             bytes = SecurityUtils.DecodeHexString(strFindValue);
                         }
@@ -151,7 +198,16 @@ namespace System.IdentityModel.Selectors
 
                     case X509FindType.FindBySubjectDistinguishedName:
                         if (!(findValue is string))
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.X509FindValueMismatch, findType, typeof(string), findValue.GetType())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(
+                                        SR.X509FindValueMismatch,
+                                        findType,
+                                        typeof(string),
+                                        findValue.GetType()
+                                    )
+                                )
+                            );
 
                         dwFindType = CAPI.CERT_FIND_ANY;
                         break;
@@ -159,7 +215,16 @@ namespace System.IdentityModel.Selectors
                     case X509FindType.FindByIssuerName:
                         strFindValue = findValue as string;
                         if (strFindValue == null)
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.X509FindValueMismatch, findType, typeof(string), findValue.GetType())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(
+                                        SR.X509FindValueMismatch,
+                                        findType,
+                                        typeof(string),
+                                        findValue.GetType()
+                                    )
+                                )
+                            );
 
                         dwFindType = CAPI.CERT_FIND_ISSUER_STR;
                         pvFindPara = SafeHGlobalHandle.AllocHGlobal(strFindValue);
@@ -167,7 +232,16 @@ namespace System.IdentityModel.Selectors
 
                     case X509FindType.FindByIssuerDistinguishedName:
                         if (!(findValue is string))
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.X509FindValueMismatch, findType, typeof(string), findValue.GetType())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ArgumentException(
+                                    SR.GetString(
+                                        SR.X509FindValueMismatch,
+                                        findType,
+                                        typeof(string),
+                                        findValue.GetType()
+                                    )
+                                )
+                            );
 
                         dwFindType = CAPI.CERT_FIND_ANY;
                         break;
@@ -178,7 +252,17 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.X509FindValueMismatchMulti, findType, typeof(string), typeof(byte[]), findValue.GetType())));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.X509FindValueMismatchMulti,
+                                            findType,
+                                            typeof(string),
+                                            typeof(byte[]),
+                                            findValue.GetType()
+                                        )
+                                    )
+                                );
 
                             bytes = SecurityUtils.DecodeHexString(strFindValue);
 
@@ -201,10 +285,19 @@ namespace System.IdentityModel.Selectors
                         {
                             strFindValue = findValue as string;
                             if (strFindValue == null)
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.X509FindValueMismatchMulti, findType, typeof(string), typeof(byte[]), findValue.GetType())));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ArgumentException(
+                                        SR.GetString(
+                                            SR.X509FindValueMismatchMulti,
+                                            findType,
+                                            typeof(string),
+                                            typeof(byte[]),
+                                            findValue.GetType()
+                                        )
+                                    )
+                                );
 
                             bytes = SecurityUtils.DecodeHexString(strFindValue);
-
                         }
                         findValue = bytes;
                         dwFindType = CAPI.CERT_FIND_ANY;
@@ -224,18 +317,28 @@ namespace System.IdentityModel.Selectors
                 }
 
 #pragma warning suppress 56523 // We are not interested in CRYPT_E_NOT_FOUND error, it return null anyway.
-                pCertContext = CAPI.CertFindCertificateInStore(this.certStoreHandle,
-                                                               CAPI.X509_ASN_ENCODING | CAPI.PKCS_7_ASN_ENCODING,
-                                                               0,
-                                                               dwFindType,
-                                                               pvFindPara,
-                                                               pCertContext);
+                pCertContext = CAPI.CertFindCertificateInStore(
+                    this.certStoreHandle,
+                    CAPI.X509_ASN_ENCODING | CAPI.PKCS_7_ASN_ENCODING,
+                    0,
+                    dwFindType,
+                    pvFindPara,
+                    pCertContext
+                );
 
                 while (pCertContext != null && !pCertContext.IsInvalid)
                 {
                     X509Certificate2 cert;
-                    if (TryGetMatchingX509Certificate(pCertContext.DangerousGetHandle(), findType,
-                            dwFindType, findValue, validOnly, out cert))
+                    if (
+                        TryGetMatchingX509Certificate(
+                            pCertContext.DangerousGetHandle(),
+                            findType,
+                            dwFindType,
+                            findValue,
+                            validOnly,
+                            out cert
+                        )
+                    )
                     {
                         result.Add(cert);
                     }
@@ -249,12 +352,14 @@ namespace System.IdentityModel.Selectors
 #pragma warning suppress 56508 // CertFindCertificateInStore will release the prev one.
                         GC.SuppressFinalize(pCertContext);
 #pragma warning suppress 56523 // We are not interested in CRYPT_E_NOT_FOUND error, it return null anyway.
-                        pCertContext = CAPI.CertFindCertificateInStore(this.certStoreHandle,
-                                                                       CAPI.X509_ASN_ENCODING | CAPI.PKCS_7_ASN_ENCODING,
-                                                                       0,
-                                                                       dwFindType,
-                                                                       pvFindPara,
-                                                                       pCertContext);
+                        pCertContext = CAPI.CertFindCertificateInStore(
+                            this.certStoreHandle,
+                            CAPI.X509_ASN_ENCODING | CAPI.PKCS_7_ASN_ENCODING,
+                            0,
+                            dwFindType,
+                            pvFindPara,
+                            pCertContext
+                        );
                     }
                 }
             }
@@ -270,8 +375,14 @@ namespace System.IdentityModel.Selectors
             return result;
         }
 
-        bool TryGetMatchingX509Certificate(IntPtr certContext, X509FindType findType,
-            uint dwFindType, object findValue, bool validOnly, out X509Certificate2 cert)
+        bool TryGetMatchingX509Certificate(
+            IntPtr certContext,
+            X509FindType findType,
+            uint dwFindType,
+            object findValue,
+            bool validOnly,
+            out X509Certificate2 cert
+        )
         {
             cert = new X509Certificate2(certContext);
             if (dwFindType == CAPI.CERT_FIND_ANY)
@@ -279,7 +390,14 @@ namespace System.IdentityModel.Selectors
                 switch (findType)
                 {
                     case X509FindType.FindBySubjectDistinguishedName:
-                        if (0 != String.Compare((string)findValue, cert.SubjectName.Name, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            0
+                            != String.Compare(
+                                (string)findValue,
+                                cert.SubjectName.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             cert.Reset();
                             cert = null;
@@ -288,7 +406,14 @@ namespace System.IdentityModel.Selectors
                         break;
 
                     case X509FindType.FindByIssuerDistinguishedName:
-                        if (0 != String.Compare((string)findValue, cert.IssuerName.Name, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            0
+                            != String.Compare(
+                                (string)findValue,
+                                cert.IssuerName.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             cert.Reset();
                             cert = null;
@@ -307,8 +432,12 @@ namespace System.IdentityModel.Selectors
 
                     case X509FindType.FindBySubjectKeyIdentifier:
                         X509SubjectKeyIdentifierExtension skiExtension =
-                            cert.Extensions[CAPI.SubjectKeyIdentifierOid] as X509SubjectKeyIdentifierExtension;
-                        if (skiExtension == null || !BinaryMatches((byte[])findValue, skiExtension.RawData))
+                            cert.Extensions[CAPI.SubjectKeyIdentifierOid]
+                            as X509SubjectKeyIdentifierExtension;
+                        if (
+                            skiExtension == null
+                            || !BinaryMatches((byte[])findValue, skiExtension.RawData)
+                        )
                         {
                             cert.Reset();
                             cert = null;

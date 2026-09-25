@@ -1,19 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="IWebPartMenuUser.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Web.UI;
     using System.Web.UI.WebControls;
 
     /// <devdoc>
     /// </devdoc>
-    internal interface IWebPartMenuUser {
-
+    internal interface IWebPartMenuUser
+    {
         Style CheckImageStyle { get; }
 
         string CheckImageUrl { get; }

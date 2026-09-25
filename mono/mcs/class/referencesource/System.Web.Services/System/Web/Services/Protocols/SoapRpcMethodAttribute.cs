@@ -1,20 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapRpcMethodAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System;
-    using System.Web.Services.Description;
     using System.Runtime.InteropServices;
+    using System.Web.Services.Description;
 
     /// <include file='doc\SoapRpcMethodAttribute.uex' path='docs/doc[@for="SoapRpcMethodAttribute"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Method)]
-    public sealed class SoapRpcMethodAttribute : System.Attribute {
+    public sealed class SoapRpcMethodAttribute : System.Attribute
+    {
         string action;
         string requestName;
         string responseName;
@@ -23,19 +25,19 @@ namespace System.Web.Services.Protocols {
         bool oneWay;
         string binding;
         SoapBindingUse use = SoapBindingUse.Encoded;
-        
+
         /// <include file='doc\SoapRpcMethodAttribute.uex' path='docs/doc[@for="SoapRpcMethodAttribute.SoapRpcMethodAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapRpcMethodAttribute() {
-        }
+        public SoapRpcMethodAttribute() { }
 
         /// <include file='doc\SoapRpcMethodAttribute.uex' path='docs/doc[@for="SoapRpcMethodAttribute.SoapRpcMethodAttribute1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapRpcMethodAttribute(string action) {
+        public SoapRpcMethodAttribute(string action)
+        {
             this.action = action;
         }
 
@@ -43,7 +45,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Action {
+        public string Action
+        {
             get { return action; }
             set { action = value; }
         }
@@ -52,7 +55,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Binding {
+        public string Binding
+        {
             get { return binding == null ? string.Empty : binding; }
             set { binding = value; }
         }
@@ -61,7 +65,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool OneWay {
+        public bool OneWay
+        {
             get { return oneWay; }
             set { oneWay = value; }
         }
@@ -70,7 +75,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string RequestNamespace {
+        public string RequestNamespace
+        {
             get { return requestNamespace; }
             set { requestNamespace = value; }
         }
@@ -79,7 +85,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ResponseNamespace {
+        public string ResponseNamespace
+        {
             get { return responseNamespace; }
             set { responseNamespace = value; }
         }
@@ -88,7 +95,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string RequestElementName {
+        public string RequestElementName
+        {
             get { return requestName == null ? string.Empty : requestName; }
             set { requestName = value; }
         }
@@ -97,7 +105,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ResponseElementName {
+        public string ResponseElementName
+        {
             get { return responseName == null ? string.Empty : responseName; }
             set { responseName = value; }
         }
@@ -107,10 +116,10 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [ComVisible(false)]
-        public SoapBindingUse Use {
+        public SoapBindingUse Use
+        {
             get { return use; }
             set { use = value; }
         }
     }
-
 }

@@ -4,7 +4,6 @@
 
 namespace System.Activities.XamlIntegration
 {
-    using Microsoft.VisualBasic.Activities;
     using System;
     using System.Activities.Expressions;
     using System.Collections.Generic;
@@ -17,19 +16,16 @@ namespace System.Activities.XamlIntegration
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml.Linq;
+    using Microsoft.VisualBasic.Activities;
     using Microsoft.VisualBasic.Activities.XamlIntegration;
 
     public sealed class ActivityWithResultConverter : TypeConverterBase
     {
         public ActivityWithResultConverter()
-            : base(typeof(Activity<>), typeof(ExpressionConverterHelper<>))
-        {
-        }
+            : base(typeof(Activity<>), typeof(ExpressionConverterHelper<>)) { }
 
         public ActivityWithResultConverter(Type type)
-            : base(type, typeof(Activity<>), typeof(ExpressionConverterHelper<>))
-        {
-        }
+            : base(type, typeof(Activity<>), typeof(ExpressionConverterHelper<>)) { }
 
         internal static object GetRootTemplatedActivity(IServiceProvider serviceProvider)
         {
@@ -48,18 +44,30 @@ namespace System.Activities.XamlIntegration
                 return null;
             }
             IXamlSchemaContextProvider schemaContextProvider =
-                serviceProvider.GetService(typeof(IXamlSchemaContextProvider)) as IXamlSchemaContextProvider;
+                serviceProvider.GetService(typeof(IXamlSchemaContextProvider))
+                as IXamlSchemaContextProvider;
             if (schemaContextProvider == null)
             {
                 return null;
             }
-            XamlMember activityBody = GetXamlMember(schemaContextProvider.SchemaContext, typeof(Activity), "Implementation");
-            XamlMember dynamicActivityBody = GetXamlMember(schemaContextProvider.SchemaContext, typeof(DynamicActivity), "Implementation");
+            XamlMember activityBody = GetXamlMember(
+                schemaContextProvider.SchemaContext,
+                typeof(Activity),
+                "Implementation"
+            );
+            XamlMember dynamicActivityBody = GetXamlMember(
+                schemaContextProvider.SchemaContext,
+                typeof(DynamicActivity),
+                "Implementation"
+            );
             if (activityBody == null || dynamicActivityBody == null)
             {
                 return null;
             }
-            if (ambientProvider.GetFirstAmbientValue(null, activityBody, dynamicActivityBody) == null)
+            if (
+                ambientProvider.GetFirstAmbientValue(null, activityBody, dynamicActivityBody)
+                == null
+            )
             {
                 return null;
             }
@@ -67,7 +75,11 @@ namespace System.Activities.XamlIntegration
             return rootActivity;
         }
 
-        static XamlMember GetXamlMember(XamlSchemaContext schemaContext, Type type, string memberName)
+        static XamlMember GetXamlMember(
+            XamlSchemaContext schemaContext,
+            Type type,
+            string memberName
+        )
         {
             XamlType xamlType = schemaContext.GetXamlType(type);
             if (xamlType == null)
@@ -88,9 +100,7 @@ namespace System.Activities.XamlIntegration
             LocationHelper locationHelper; // true if we're dealing with a Location
 
             public ExpressionConverterHelper()
-                : this(TypeHelper.AreTypesCompatible(typeof(T), typeof(Location)))
-            {
-            }
+                : this(TypeHelper.AreTypesCompatible(typeof(T), typeof(Location))) { }
 
             public ExpressionConverterHelper(bool isLocationType)
             {
@@ -98,10 +108,18 @@ namespace System.Activities.XamlIntegration
 
                 if (isLocationType)
                 {
-                    Fx.Assert(this.valueType.IsGenericType && this.valueType.GetGenericArguments().Length == 1, "Should only get Location<T> here");
+                    Fx.Assert(
+                        this.valueType.IsGenericType
+                            && this.valueType.GetGenericArguments().Length == 1,
+                        "Should only get Location<T> here"
+                    );
                     this.valueType = this.valueType.GetGenericArguments()[0];
-                    Type concreteHelperType = LocationHelperType.MakeGenericType(typeof(T), this.valueType);
-                    this.locationHelper = (LocationHelper)Activator.CreateInstance(concreteHelperType);
+                    Type concreteHelperType = LocationHelperType.MakeGenericType(
+                        typeof(T),
+                        this.valueType
+                    );
+                    this.locationHelper = (LocationHelper)
+                        Activator.CreateInstance(concreteHelperType);
                 }
             }
 
@@ -118,7 +136,10 @@ namespace System.Activities.XamlIntegration
                 }
             }
 
-            public override Activity<T> ConvertFromString(string text, ITypeDescriptorContext context)
+            public override Activity<T> ConvertFromString(
+                string text,
+                ITypeDescriptorContext context
+            )
             {
                 if (IsExpression(text))
                 {
@@ -127,27 +148,29 @@ namespace System.Activities.XamlIntegration
 
                     if (this.locationHelper != null)
                     {
-                        // 
+                        //
                         return (Activity<T>)this.locationHelper.CreateExpression(expressionText);
                     }
                     else
                     {
-                        // 
-                        return new VisualBasicValue<T>()
-                        {
-                            ExpressionText = expressionText
-                        };
+                        //
+                        return new VisualBasicValue<T>() { ExpressionText = expressionText };
                     }
                 }
                 else
                 {
                     if (this.locationHelper != null)
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidLocationExpression));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(SR.InvalidLocationExpression)
+                        );
                     }
 
                     // look for "%[....]" escape pattern
-                    if (text.EndsWith("]", StringComparison.Ordinal) && LiteralEscapeRegex.IsMatch(text))
+                    if (
+                        text.EndsWith("]", StringComparison.Ordinal)
+                        && LiteralEscapeRegex.IsMatch(text)
+                    )
                     {
                         // strip off the very front-most '%' from the original string
                         text = text.Substring(1, text.Length - 1);
@@ -174,8 +197,11 @@ namespace System.Activities.XamlIntegration
 
             static bool IsExpression(string text)
             {
-                return (text.StartsWith("[", StringComparison.Ordinal) && text.EndsWith("]", StringComparison.Ordinal));
-            }            
+                return (
+                    text.StartsWith("[", StringComparison.Ordinal)
+                    && text.EndsWith("]", StringComparison.Ordinal)
+                );
+            }
 
             // to perform the generics dance around Locations we need these helpers
             abstract class LocationHelper
@@ -189,10 +215,10 @@ namespace System.Activities.XamlIntegration
                 {
                     return new VisualBasicReference<TLocationValue>()
                     {
-                        ExpressionText = expressionText
+                        ExpressionText = expressionText,
                     };
                 }
             }
-        } 
+        }
     }
 }

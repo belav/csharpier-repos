@@ -4,8 +4,8 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -19,24 +19,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             public BitVector InvertedCapturedMask = BitVector.Null;
 
             public LocalFunctionState(LocalState stateFromBottom, LocalState stateFromTop)
-                : base(stateFromBottom, stateFromTop)
-            { }
+                : base(stateFromBottom, stateFromTop) { }
         }
 
-        protected override LocalFunctionState CreateLocalFunctionState(LocalFunctionSymbol symbol)
-            => CreateLocalFunctionState();
+        protected override LocalFunctionState CreateLocalFunctionState(
+            LocalFunctionSymbol symbol
+        ) => CreateLocalFunctionState();
 
-        private LocalFunctionState CreateLocalFunctionState()
-            => new LocalFunctionState(
+        private LocalFunctionState CreateLocalFunctionState() =>
+            new LocalFunctionState(
                 // The bottom state should assume all variables, even new ones, are assigned
                 new LocalState(BitVector.AllSet(variableBySlot.Count), normalizeToBottom: true),
-                UnreachableState());
+                UnreachableState()
+            );
 
         protected override void VisitLocalFunctionUse(
             LocalFunctionSymbol localFunc,
             LocalFunctionState localFunctionState,
             SyntaxNode syntax,
-            bool isCall)
+            bool isCall
+        )
         {
             _usedLocalFunctions.Add(localFunc);
 
@@ -65,7 +67,11 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// in which case <see cref="LocalDataFlowPass{TLocalState, TLocalFunctionState}.VariableSlot(Symbol, int)"/>
         /// will not know which containing slot to look for.
         /// </remarks>
-        private void CheckIfAssignedDuringLocalFunctionReplay(Symbol symbol, SyntaxNode node, int slot)
+        private void CheckIfAssignedDuringLocalFunctionReplay(
+            Symbol symbol,
+            SyntaxNode node,
+            int slot
+        )
         {
             Debug.Assert(!IsConditionalState);
             if ((object)symbol != null)
@@ -84,7 +90,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                         // Local functions can "call forward" to after a variable has
                         // been declared but before it has been assigned, so we can never
                         // consider the declaration location when reporting errors.
-                        ReportUnassignedIfNotCapturedInLocalFunction(symbol, node, slot, skipIfUseBeforeDeclaration: false);
+                        ReportUnassignedIfNotCapturedInLocalFunction(
+                            symbol,
+                            node,
+                            slot,
+                            skipIfUseBeforeDeclaration: false
+                        );
                     }
                 }
             }
@@ -138,7 +149,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 #nullable enable
         private bool IsCapturedInLocalFunction(int slot)
         {
-            if (slot <= 0) return false;
+            if (slot <= 0)
+                return false;
 
             // Find the root slot, since that would be the only
             // slot, if any, that is captured in a local function
@@ -153,14 +165,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             return !(nearestLocalFunc is null) && Symbol.IsCaptured(rootSymbol, nearestLocalFunc);
         }
+
 #nullable disable
 
         private static LocalFunctionSymbol GetNearestLocalFunctionOpt(Symbol symbol)
         {
             while (symbol != null)
             {
-                if (symbol.Kind == SymbolKind.Method &&
-                    ((MethodSymbol)symbol).MethodKind == MethodKind.LocalFunction)
+                if (
+                    symbol.Kind == SymbolKind.Method
+                    && ((MethodSymbol)symbol).MethodKind == MethodKind.LocalFunction
+                )
                 {
                     return (LocalFunctionSymbol)symbol;
                 }
@@ -190,7 +205,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected override bool LocalFunctionEnd(
             LocalFunctionState savedState,
             LocalFunctionState currentState,
-            ref LocalState stateAtReturn)
+            ref LocalState stateAtReturn
+        )
         {
             if (currentState.CapturedMask.IsNull)
             {

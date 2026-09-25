@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,34 +33,33 @@
 using System;
 using System.Configuration;
 
-namespace System.Net.Configuration {
+namespace System.Net.Configuration
+{
+    public sealed class PerformanceCountersElement : ConfigurationElement
+    {
+        static ConfigurationProperty enabledProp;
+        static ConfigurationPropertyCollection properties;
 
-        public sealed class PerformanceCountersElement : ConfigurationElement
+        static PerformanceCountersElement()
         {
-                static ConfigurationProperty enabledProp;
-                static ConfigurationPropertyCollection properties;
+            enabledProp = new ConfigurationProperty("enabled", typeof(bool), false);
+            properties = new ConfigurationPropertyCollection();
 
-                static PerformanceCountersElement ()
-                {
-                        enabledProp = new ConfigurationProperty ("enabled", typeof (bool), false);
-                        properties = new ConfigurationPropertyCollection ();
-
-                        properties.Add (enabledProp);
-
-                }
-
-                [ConfigurationProperty ("enabled", DefaultValue = "False")]
-                public bool Enabled {
-                        get { return (bool) base [enabledProp];}
-                        set { base[enabledProp] = value; }
-                }
-
-                protected override ConfigurationPropertyCollection Properties {
-                        get { return properties; }
-                }
-
+            properties.Add(enabledProp);
         }
 
+        [ConfigurationProperty("enabled", DefaultValue = "False")]
+        public bool Enabled
+        {
+            get { return (bool)base[enabledProp]; }
+            set { base[enabledProp] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
 
 #endif

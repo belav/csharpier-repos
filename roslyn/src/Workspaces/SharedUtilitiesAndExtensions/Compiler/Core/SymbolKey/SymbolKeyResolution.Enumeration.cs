@@ -6,18 +6,18 @@ namespace Microsoft.CodeAnalysis
 {
     internal readonly partial struct SymbolKeyResolution
     {
-        public readonly struct Enumerable<TSymbol> where TSymbol : ISymbol
+        public readonly struct Enumerable<TSymbol>
+            where TSymbol : ISymbol
         {
             private readonly SymbolKeyResolution _resolution;
 
-            internal Enumerable(SymbolKeyResolution resolution)
-                => _resolution = resolution;
+            internal Enumerable(SymbolKeyResolution resolution) => _resolution = resolution;
 
-            public Enumerator<TSymbol> GetEnumerator()
-                => new(_resolution);
+            public Enumerator<TSymbol> GetEnumerator() => new(_resolution);
         }
 
-        public struct Enumerator<TSymbol> where TSymbol : ISymbol
+        public struct Enumerator<TSymbol>
+            where TSymbol : ISymbol
         {
             private readonly SymbolKeyResolution _symbolKeyResolution;
             private int _index;

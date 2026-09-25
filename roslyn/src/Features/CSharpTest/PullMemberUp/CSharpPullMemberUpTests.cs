@@ -4,42 +4,52 @@
 
 #nullable disable
 
+using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis.AddImport;
+using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeRefactorings;
+using Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp.Dialog;
 using Microsoft.CodeAnalysis.CSharp.CodeRefactorings.PullMemberUp;
 using Microsoft.CodeAnalysis.CSharp.CodeStyle;
+using Microsoft.CodeAnalysis.Editing;
 using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings;
+using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
 using Microsoft.CodeAnalysis.Test.Utilities;
-using Xunit;
-using System.Collections.Immutable;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CodeRefactorings.PullMemberUp.Dialog;
-using System.Collections.Generic;
 using Microsoft.CodeAnalysis.Test.Utilities.PullMemberUp;
 using Roslyn.Test.Utilities;
-using Microsoft.CodeAnalysis.Editing;
-using Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PullMemberUp
 {
     [Trait(Traits.Feature, Traits.Features.CodeActionsPullMemberUp)]
     public class CSharpPullMemberUpTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpPullMemberUpCodeRefactoringProvider((IPullMemberUpOptionsService)parameters.fixProviderData);
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) =>
+            new CSharpPullMemberUpCodeRefactoringProvider(
+                (IPullMemberUpOptionsService)parameters.fixProviderData
+            );
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions) => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         #region Quick Action
 
         private async Task TestQuickActionNotProvidedAsync(
             string initialMarkup,
-            TestParameters parameters = null)
+            TestParameters parameters = null
+        )
         {
             var service = new TestPullMemberUpService(null, null);
-            var parametersValue = (parameters ?? TestParameters.Default).WithFixProviderData(service);
+            var parametersValue = (parameters ?? TestParameters.Default).WithFixProviderData(
+                service
+            );
 
             using var workspace = CreateWorkspaceFromOptions(initialMarkup, parametersValue);
             var (actions, _) = await GetCodeActionsAsync(workspace, parametersValue);
@@ -61,7 +71,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PullMemberUp
         [Fact]
         public async Task TestNoRefactoringProvidedWhenNoOptionsService()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -83,7 +94,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestNoRefactoringProvidedWhenPullFieldInInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public interface ITestInterface
@@ -101,7 +113,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestNoRefactoringProvidedWhenMethodDeclarationAlreadyExistsInInterfaceViaQuickAction()
         {
-            var methodTest = @"
+            var methodTest =
+                @"
 namespace PushUpTest
 {
     public interface ITestInterface
@@ -123,7 +136,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestNoRefactoringProvidedWhenPropertyDeclarationAlreadyExistsInInterfaceViaQuickAction()
         {
-            var propertyTest1 = @"
+            var propertyTest1 =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -143,7 +157,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestNoRefactoringProvidedWhenEventDeclarationAlreadyExistsToInterfaceViaQuickAction()
         {
-            var eventTest = @"
+            var eventTest =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -163,7 +178,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestNoRefactoringProvidedInNestedTypesViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 namespace PushUpTest
 {
     public interface ITestInterface
@@ -185,7 +201,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullMethodUpToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -201,7 +218,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -224,7 +242,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullAbstractMethodToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public interface IInterface
@@ -237,7 +256,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public interface IInterface
@@ -256,7 +276,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullGenericsUpToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -272,7 +293,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -294,7 +316,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullSingleEventToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -318,7 +341,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -348,7 +372,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullOneEventFromMultipleEventsToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -362,7 +387,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -382,7 +408,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullPublicEventWithAccessorsToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -406,7 +433,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -436,7 +464,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullPropertyWithPrivateSetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -450,7 +479,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -470,7 +500,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullPropertyWithPrivateGetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -484,7 +515,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -504,7 +536,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullMemberFromInterfaceToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -518,7 +551,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -537,7 +571,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullIndexerWithOnlySetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -554,7 +589,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -578,7 +614,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullIndexerWithOnlyGetterToInterfaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -595,7 +632,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -619,7 +657,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullPropertyToInterfaceWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -638,7 +677,8 @@ public class Derived : IBase
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -666,7 +706,8 @@ public class Derived : IBase
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToInterfaceWithoutAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -690,7 +731,8 @@ public class Derived : IBase
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -721,7 +763,8 @@ public class Derived : IBase
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodWithNewReturnTypeToInterfaceWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -743,7 +786,8 @@ public class Derived : IBase
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -774,7 +818,8 @@ public class Derived : IBase
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodWithNewParamTypeToInterfaceWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -797,7 +842,8 @@ public class Derived : IBase
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -829,7 +875,8 @@ public class Derived : IBase
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullEventToInterfaceWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -858,7 +905,8 @@ public class Derived : IBase
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -896,7 +944,8 @@ public class Derived : IBase
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullPropertyToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -915,7 +964,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -941,7 +991,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullPropertyToClassWithAddUsingsViaQuickAction2()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">public class Base
@@ -959,7 +1010,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -985,7 +1037,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullPropertyToClassWithoutDuplicatingUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1006,7 +1059,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1033,7 +1087,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullPropertyWithNewBodyTypeToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1060,7 +1115,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -1094,7 +1150,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodWithNewNonDeclaredBodyTypeToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1116,7 +1173,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System.Linq;
@@ -1145,7 +1203,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithOverlappingUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1177,7 +1236,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1216,7 +1276,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithUnnecessaryFirstUsingViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1247,7 +1308,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System.Linq;
@@ -1283,7 +1345,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithUnusedBaseUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1309,7 +1372,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1342,7 +1406,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithRetainCommentsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1366,7 +1431,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1396,7 +1462,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithRetainPreImportCommentsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1418,7 +1485,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1447,7 +1515,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithRetainPostImportCommentsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1469,7 +1538,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1498,7 +1568,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithLambdaUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1523,7 +1594,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -1556,7 +1628,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithUnusedUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1582,7 +1655,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1615,7 +1689,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassKeepSystemFirstViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1650,7 +1725,8 @@ namespace A_TestNs2
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1692,7 +1768,8 @@ namespace A_TestNs2
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassKeepSystemFirstViaQuickAction2()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1726,7 +1803,8 @@ namespace A_TestNs2
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -1768,7 +1846,8 @@ namespace A_TestNs2
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithExtensionViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1809,7 +1888,8 @@ namespace TestNs2
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using TestNs2;
@@ -1857,7 +1937,8 @@ namespace TestNs2
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithExtensionViaQuickAction2()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1910,7 +1991,8 @@ namespace TestNs4
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using TestNs3;
@@ -1971,7 +2053,8 @@ namespace TestNs4
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithAliasUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -1997,7 +2080,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2031,7 +2115,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullPropertyToClassWithBaseAliasUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2056,7 +2141,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2088,7 +2174,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithMultipleNamespacedUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace TestNs1
 {
     using System;
@@ -2112,7 +2199,8 @@ namespace TestNs2
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 namespace TestNs1
 {
     using System;
@@ -2143,7 +2231,8 @@ namespace TestNs2
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithNestedNamespacedUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace TestNs1
 {
     namespace InnerNs1
@@ -2181,7 +2270,8 @@ namespace TestNs2
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 namespace TestNs1
 {
     namespace InnerNs1
@@ -2227,7 +2317,8 @@ namespace TestNs2
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithNewNamespaceUsingViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2254,7 +2345,8 @@ namespace X.Y
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using X.Y;
@@ -2288,7 +2380,8 @@ namespace X.Y
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithFileNamespaceUsingViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2312,7 +2405,8 @@ class Other
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using X.Y;
@@ -2343,7 +2437,8 @@ class Other
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithUnusedNamespaceUsingViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2370,7 +2465,8 @@ namespace X.Y
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2403,7 +2499,8 @@ namespace X.Y
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithMultipleNamespacesAndCommentsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 // comment 1
 
 namespace TestNs1
@@ -2430,7 +2527,8 @@ namespace TestNs2
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 // comment 1
 
 namespace TestNs1
@@ -2463,7 +2561,8 @@ namespace TestNs2
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithMultipleNamespacedUsingsAndCommentsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 // comment 1
 
 namespace TestNs1
@@ -2491,7 +2590,8 @@ namespace TestNs2
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 // comment 1
 
 namespace TestNs1
@@ -2526,7 +2626,8 @@ namespace TestNs2
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithNamespacedUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2557,7 +2658,8 @@ namespace ClassLibrary1
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2595,7 +2697,8 @@ namespace ClassLibrary1
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodToClassWithDuplicateNamespacedUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2627,7 +2730,8 @@ namespace ClassLibrary1
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2666,7 +2770,8 @@ namespace ClassLibrary1
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodWithNewReturnTypeToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2688,7 +2793,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -2717,7 +2823,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodWithNewParamTypeToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2740,7 +2847,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -2770,7 +2878,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullMethodWithNewBodyTypeToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2794,7 +2903,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -2825,7 +2935,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullEventToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2854,7 +2965,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -2890,7 +3002,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullFieldToClassWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2909,7 +3022,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System;
@@ -2935,7 +3049,8 @@ public class Derived : Base
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/46010")]
         public async Task TestPullFieldToClassNoConstructorWithAddUsingsViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -2954,7 +3069,8 @@ public class Derived : Base
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using System.Linq;
@@ -2980,7 +3096,8 @@ public class Derived : Base
         [Fact]
         public async Task TestNoRefactoringProvidedWhenPullOverrideMethodUpToClassViaQuickAction()
         {
-            var methodTest = @"
+            var methodTest =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3002,7 +3119,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestNoRefactoringProvidedWhenPullOverridePropertyUpToClassViaQuickAction()
         {
-            var propertyTest = @"
+            var propertyTest =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -3023,7 +3141,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestNoRefactoringProvidedWhenPullOverrideEventUpToClassViaQuickAction()
         {
-            var eventTest = @"
+            var eventTest =
+                @"
 using System;
 
 namespace PushUpTest
@@ -3066,7 +3185,8 @@ namespace PushUpTest
         {
             // Fields share the same name will be thought as 'override', since it will cause error
             // if two same name fields exist in one class
-            var fieldTest = @"
+            var fieldTest =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3085,7 +3205,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullMethodToOrdinaryClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3101,7 +3222,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3122,7 +3244,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullOneFieldsToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3135,7 +3258,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3153,7 +3277,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullGenericsUpToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -3169,7 +3294,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -3190,7 +3316,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullOneFieldFromMultipleFieldsToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3203,7 +3330,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3222,7 +3350,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullMiddleFieldWithValueToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3234,7 +3363,8 @@ namespace PushUpTest
         public int you, a[||]nd = 4000, someone = 10086;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3253,7 +3383,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullOneEventFromMultipleToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -3267,7 +3398,8 @@ namespace PushUpTest
         private static event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -3288,7 +3420,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullEventToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -3302,7 +3435,8 @@ namespace PushUpTest
         private static event EventHandler Eve[||]nt3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -3322,7 +3456,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullEventWithBodyToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -3346,7 +3481,8 @@ namespace PushUpTest
         };
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -3376,7 +3512,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullPropertyToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -3390,7 +3527,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -3409,7 +3547,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullIndexerToClassViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base 
@@ -3427,7 +3566,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -3450,7 +3590,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullMethodUpAcrossProjectViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -3477,7 +3618,8 @@ namespace Destination
   </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -3510,7 +3652,8 @@ namespace Destination
         [Fact]
         public async Task TestPullPropertyUpAcrossProjectViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -3538,7 +3681,8 @@ namespace Destination
   </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -3572,7 +3716,8 @@ namespace Destination
         [Fact]
         public async Task TestPullFieldUpAcrossProjectViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -3596,7 +3741,8 @@ namespace Destination
   </Project>
 </Workspace>";
 
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly1"" CommonReferences=""true"">
         <ProjectReference>CSAssembly2</ProjectReference>
@@ -3628,7 +3774,8 @@ namespace Destination
         {
             // Moving member from C# to Visual Basic is not supported currently since the FindMostRelevantDeclarationAsync method in
             // AbstractCodeGenerationService will return null.
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
@@ -3656,7 +3803,8 @@ namespace Destination
         [Fact]
         public async Task TestPullMethodUpToVBInterfaceViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
     <ProjectReference>VBAssembly</ProjectReference>
@@ -3684,7 +3832,8 @@ namespace Destination
         [Fact]
         public async Task TestPullFieldUpToVBClassViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
@@ -3710,7 +3859,8 @@ namespace Destination
         [Fact]
         public async Task TestPullPropertyUpToVBClassViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
   <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
     <ProjectReference>VBAssembly</ProjectReference>
@@ -3739,7 +3889,8 @@ public class TestClass : VBClass
         [Fact]
         public async Task TestPullPropertyUpToVBInterfaceViaQuickAction()
         {
-            var input = @"<Workspace>
+            var input =
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
         <Document>
@@ -3767,7 +3918,8 @@ public class TestClass : VBInterface
         [Fact]
         public async Task TestPullEventUpToVBClassViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
         <ProjectReference>VBAssembly</ProjectReference>
@@ -3792,7 +3944,8 @@ public class TestClass : VBInterface
         [Fact]
         public async Task TestPullEventUpToVBInterfaceViaQuickAction()
         {
-            var input = @"
+            var input =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""CSAssembly"" CommonReferences=""true"">
     <ProjectReference>VBAssembly</ProjectReference>
@@ -3817,7 +3970,8 @@ public class TestClass : VBInterface
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/55746")]
         public async Task TestPullMethodWithToClassWithAddUsingsInsideNamespaceViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -3845,7 +3999,8 @@ namespace N
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -3878,13 +4033,19 @@ namespace N
             await TestWithPullMemberDialogAsync(
                 testText,
                 expected,
-                options: Option(CSharpCodeStyleOptions.PreferredUsingDirectivePlacement, AddImportPlacement.InsideNamespace, CodeStyle.NotificationOption2.Silent));
+                options: Option(
+                    CSharpCodeStyleOptions.PreferredUsingDirectivePlacement,
+                    AddImportPlacement.InsideNamespace,
+                    CodeStyle.NotificationOption2.Silent
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/55746")]
         public async Task TestPullMethodWithToClassWithAddUsingsSystemUsingsLastViaQuickAction()
         {
-            var testText = @"
+            var testText =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">
@@ -3923,7 +4084,8 @@ namespace N2
     </Project>
 </Workspace>
 ";
-            var expected = @"
+            var expected =
+                @"
 <Workspace>
     <Project Language = ""C#""  LanguageVersion=""preview"" CommonReferences=""true"">
         <Document FilePath = ""File1.cs"">using N2;
@@ -3970,13 +4132,15 @@ namespace N2
                 options: new(GetLanguage())
                 {
                     { GenerationOptions.PlaceSystemNamespaceFirst, false },
-                });
+                }
+            );
         }
 
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullMethodToClassWithDirective()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -3987,7 +4151,8 @@ public class Bar : BaseClass
     public void G[||]oo() { }
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public void Goo() { }
@@ -4005,7 +4170,8 @@ public class Bar : BaseClass
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullMethodToClassBeforeDirective()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -4017,7 +4183,8 @@ public class Bar : BaseClass
     public void Goo() { }
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public void Hello() { }
@@ -4035,7 +4202,8 @@ public class Bar : BaseClass
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullMethodToClassBeforeDirective2()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -4048,7 +4216,8 @@ public class Bar : BaseClass
     public void G[||]oo() { }
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
 
@@ -4068,7 +4237,8 @@ public class Bar : BaseClass
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullFieldToClassBeforeDirective1()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -4080,7 +4250,8 @@ public class Bar : BaseClass
     public int Goo = 10;
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int bar = 10;
@@ -4098,7 +4269,8 @@ public class Bar : BaseClass
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullFieldToClassBeforeDirective2()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -4110,7 +4282,8 @@ public class Bar : BaseClass
     public int Go[||]o = 10;
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 10;
@@ -4129,7 +4302,8 @@ public class Bar : BaseClass
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullFieldToClassBeforeDirective()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -4140,7 +4314,8 @@ public class Bar : BaseClass
     public int G[||]oo = 100, Hoo;
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 100;
@@ -4158,7 +4333,8 @@ public class Bar : BaseClass
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullEventToClassBeforeDirective()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 public class BaseClass
 {
@@ -4170,7 +4346,8 @@ public class Bar : BaseClass
     public event EventHandler e[||]1;
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 public class BaseClass
 {
@@ -4189,7 +4366,8 @@ public class Bar : BaseClass
         [Fact, WorkItem(55746, "https://github.com/dotnet/roslyn/issues/51531")]
         public Task TestPullPropertyToClassBeforeDirective()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -4200,7 +4378,8 @@ public class Bar : BaseClass
     public int Go[||]o => 1;
     #endregion
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo => 1;
@@ -4234,7 +4413,7 @@ public class Bar : BaseClass
                 {
                     $$public int I => 1;
                 }
-                
+
                 public class Derived : BaseClass
                 {
                 }
@@ -4254,19 +4433,26 @@ public class Bar : BaseClass
             string destinationName = null,
             int index = 0,
             TestParameters parameters = null,
-            OptionsCollection options = null)
+            OptionsCollection options = null
+        )
         {
             var service = new TestPullMemberUpService(selection, destinationName);
 
             return TestInRegularAndScript1Async(
-                initialMarkUp, expectedResult,
-                (parameters ?? TestParameters.Default).WithFixProviderData(service).WithOptions(options).WithIndex(index));
+                initialMarkUp,
+                expectedResult,
+                (parameters ?? TestParameters.Default)
+                    .WithFixProviderData(service)
+                    .WithOptions(options)
+                    .WithIndex(index)
+            );
         }
 
         [Fact]
         public async Task PullPartialMethodUpToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4289,7 +4475,8 @@ namespace PushUpTest
     {
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4320,7 +4507,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullExtendedPartialMethodUpToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4343,7 +4531,8 @@ namespace PushUpTest
     {
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4374,7 +4563,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullMultipleNonPublicMethodsToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4398,7 +4588,8 @@ namespace PushUpTest
         {}
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4431,7 +4622,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullMultipleNonPublicEventsToInterface()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4445,7 +4637,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4469,7 +4662,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullMethodToInnerInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4483,7 +4677,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4505,7 +4700,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullDifferentMembersFromClassToPartialInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4535,7 +4731,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4579,7 +4776,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestPullAsyncMethod()
         {
-            var testText = @"
+            var testText =
+                @"
 using System.Threading.Tasks;
 
 internal interface IPullUp { }
@@ -4591,7 +4789,8 @@ internal class PullUp : IPullUp
         await Task.Delay(1000);
     }
 }";
-            var expectedText = @"
+            var expectedText =
+                @"
 using System.Threading.Tasks;
 
 internal interface IPullUp
@@ -4612,7 +4811,8 @@ internal class PullUp : IPullUp
         [Fact]
         public async Task PullMethodWithAbstractOptionToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -4628,7 +4828,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public abstract class Base
@@ -4644,13 +4845,19 @@ namespace PushUpTest
         }
     }
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("TestMethod", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("TestMethod", true) },
+                index: 1
+            );
         }
 
         [Fact]
         public async Task PullAbstractMethodToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class Base
@@ -4663,7 +4870,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public abstract class Base
@@ -4675,13 +4883,19 @@ namespace PushUpTest
     {
     }
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("TestMethod", true) }, index: 0);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("TestMethod", true) },
+                index: 0
+            );
         }
 
         [Fact]
         public async Task PullMultipleEventsToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4694,7 +4908,8 @@ namespace PushUpTest
         private static event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4715,7 +4930,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullMultipleAbstractEventsToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4728,7 +4944,8 @@ namespace PushUpTest
         protected abstract event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4752,7 +4969,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullAbstractEventToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4765,7 +4983,8 @@ namespace PushUpTest
         private static abstract event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4780,13 +4999,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event3", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event3", false) }
+            );
         }
 
         [Fact]
         public async Task PullNonPublicEventToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4799,7 +5023,8 @@ namespace PushUpTest
         private event EventHandler Eve[||]nt3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4814,13 +5039,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event3", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event3", false) }
+            );
         }
 
         [Fact]
         public async Task PullSingleNonPublicEventToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4833,7 +5063,8 @@ namespace PushUpTest
         protected event EventHandler Eve[||]nt3;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4848,13 +5079,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event3", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event3", false) }
+            );
         }
 
         [Fact]
         public async Task TestPullNonPublicEventWithAddAndRemoveMethodToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4878,7 +5114,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4903,13 +5140,18 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event1", false) });
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event1", false) }
+            );
         }
 
         [Fact]
         public async Task PullFieldsToClassViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4922,7 +5164,8 @@ namespace PushUpTest
         public int i, [||]j = 10, k = 100;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4944,7 +5187,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullNonPublicPropertyWithArrowToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4957,7 +5201,8 @@ namespace PushUpTest
         private double Test[||]Property => 2.717;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4978,7 +5223,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullNonPublicPropertyToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -4995,7 +5241,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -5020,7 +5267,8 @@ namespace PushUpTest
         [Fact]
         public async Task PullNonPublicPropertyWithSingleAccessorToInterfaceViaDialog()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -5036,7 +5284,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -5060,7 +5309,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34268")]
         public async Task TestPullPropertyToAbstractClassViaDialogWithMakeAbstractOption()
         {
-            var testText = @"
+            var testText =
+                @"
 abstract class B
 {
 }
@@ -5069,7 +5319,8 @@ class D : B
 {
     int [||]X => 7;
 }";
-            var expected = @"
+            var expected =
+                @"
 abstract class B
 {
     private abstract int X { get; }
@@ -5079,13 +5330,19 @@ class D : B
 {
     override int X => 7;
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, selection: new[] { ("X", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                selection: new[] { ("X", true) },
+                index: 1
+            );
         }
 
         [Fact]
         public async Task PullEventUpToAbstractClassViaDialogWithMakeAbstractOption()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -5098,7 +5355,8 @@ namespace PushUpTest
         private event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -5112,13 +5370,19 @@ namespace PushUpTest
         private event EventHandler Event1, Eve[||]nt3, Event4;
     }
 }";
-            await TestWithPullMemberDialogAsync(testText, expected, selection: new[] { ("Event3", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                selection: new[] { ("Event3", true) },
+                index: 1
+            );
         }
 
         [Fact]
         public async Task TestPullEventWithAddAndRemoveMethodToClassViaDialogWithMakeAbstractOption()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -5142,7 +5406,8 @@ namespace PushUpTest
     }
 }";
 
-            var expected = @"
+            var expected =
+                @"
 using System;
 namespace PushUpTest
 {
@@ -5167,7 +5432,12 @@ namespace PushUpTest
     }
 }";
 
-            await TestWithPullMemberDialogAsync(testText, expected, new (string, bool)[] { ("Event1", true) }, index: 1);
+            await TestWithPullMemberDialogAsync(
+                testText,
+                expected,
+                new (string, bool)[] { ("Event1", true) },
+                index: 1
+            );
         }
 
         #endregion Dialog
@@ -5176,7 +5446,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestArgsIsPartOfHeader()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5196,7 +5467,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5223,7 +5495,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretBeforeAttributes()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5243,7 +5516,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5270,7 +5544,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringCaretBetweenAttributes()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5296,7 +5571,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionWithAttributes1()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5314,7 +5590,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5339,7 +5616,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionWithAttributes2()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5357,7 +5635,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5382,7 +5661,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionWithAttributes3()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5401,7 +5681,8 @@ namespace PushUpTest
         |]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5426,7 +5707,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringInAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5450,7 +5732,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringSelectionAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5476,7 +5759,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringCaretInAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5502,7 +5786,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringCaretBetweenAttributeLists()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5528,7 +5813,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringSelectionAttributeList2()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5554,7 +5840,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestMissingRefactoringSelectAttributeList()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5578,7 +5865,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretLocAfterAttributes1()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5596,7 +5884,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5621,7 +5910,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretLocAfterAttributes2()
         {
-            var testText = @"
+            var testText =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5643,7 +5933,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 using System;
 
 namespace PushUpTest
@@ -5672,7 +5963,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringCaretLoc1()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5686,7 +5978,8 @@ namespace PushUpTest
         }
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5707,7 +6000,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelection()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5721,7 +6015,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5742,7 +6037,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionComments()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5757,7 +6053,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5779,7 +6076,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionComments2()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5796,7 +6094,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5820,7 +6119,8 @@ namespace PushUpTest
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35180")]
         public async Task TestRefactoringSelectionComments3()
         {
-            var testText = @"
+            var testText =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5837,7 +6137,8 @@ namespace PushUpTest
         }|]
     }
 }";
-            var expected = @"
+            var expected =
+                @"
 namespace PushUpTest
 {
     public class A
@@ -5861,7 +6162,8 @@ namespace PushUpTest
         [Fact]
         public async Task TestRefactoringSelectionFieldKeyword1_NoAction()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -5876,7 +6178,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionFieldKeyword2()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -5885,7 +6188,8 @@ public class Bar : BaseClass
 {
     pub[||]lic int Goo = 10;
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 10;
@@ -5900,7 +6204,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionFieldAfterSemicolon()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -5909,7 +6214,8 @@ public class Bar : BaseClass
 {
     public int Goo = 10;[||]
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 10;
@@ -5924,7 +6230,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionFieldEntireDeclaration()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -5933,7 +6240,8 @@ public class Bar : BaseClass
 {
     [|public int Goo = 10;|]
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 10;
@@ -5948,7 +6256,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionMultipleFieldsInDeclaration1()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -5957,7 +6266,8 @@ public class Bar : BaseClass
 {
     [|public int Goo = 10, Foo = 9;|]
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 10;
@@ -5973,7 +6283,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionMultipleFieldsInDeclaration2()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -5982,7 +6293,8 @@ public class Bar : BaseClass
 {
     public int Go[||]o = 10, Foo = 9;
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 10;
@@ -5998,7 +6310,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionMultipleFieldsInDeclaration3()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -6007,7 +6320,8 @@ public class Bar : BaseClass
 {
     public int Goo = 10, [||]Foo = 9;
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Foo = 9;
@@ -6023,7 +6337,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionMultipleMembers1()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -6037,7 +6352,8 @@ public class Bar : BaseClass
         return 5;
     }|]
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
     public int Goo = 10;
@@ -6059,7 +6375,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionMultipleMembers2()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -6074,7 +6391,8 @@ public class Bar : BaseClass
 
     public int Goo = 10, Foo = 9;|]
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
 
@@ -6098,7 +6416,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionMultipleMembers3()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -6113,7 +6432,8 @@ public class Bar : BaseClass
 
     public int Go|]o = 10, Foo = 9;
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
 
@@ -6135,7 +6455,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionMultipleMembers4()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -6150,7 +6471,8 @@ public class Bar : BaseClass
 
     public int Goo = 10, F|]oo = 9;
 }";
-            var expected = @"
+            var expected =
+                @"
 public class BaseClass
 {
 
@@ -6174,7 +6496,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionIncompleteField_NoAction1()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -6190,7 +6513,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionIncompleteField_NoAction2()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }
@@ -6206,7 +6530,8 @@ public class Bar : BaseClass
         [Fact]
         public async Task TestRefactoringSelectionIncompleteMethod_NoAction()
         {
-            var text = @"
+            var text =
+                @"
 public class BaseClass
 {
 }

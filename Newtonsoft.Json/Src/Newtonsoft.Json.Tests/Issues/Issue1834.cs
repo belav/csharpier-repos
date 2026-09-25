@@ -30,13 +30,14 @@ using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.Serialization;
-#if !(NET20 || NET35 || NET40 || PORTABLE40)
-using System.Threading.Tasks;
-#endif
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json.Serialization;
 using Newtonsoft.Json.Utilities;
+#if !(NET20 || NET35 || NET40 || PORTABLE40)
+using System.Threading.Tasks;
+#endif
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -54,7 +55,9 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test()
         {
             string json = "{'foo':'test!'}";
-            ItemWithJsonConstructor c = JsonConvert.DeserializeObject<ItemWithJsonConstructor>(json);
+            ItemWithJsonConstructor c = JsonConvert.DeserializeObject<ItemWithJsonConstructor>(
+                json
+            );
 
             Assert.IsNull(c.ExtensionData);
         }
@@ -63,7 +66,8 @@ namespace Newtonsoft.Json.Tests.Issues
         public void Test_UnsetRequired()
         {
             string json = "{'foo':'test!'}";
-            ItemWithJsonConstructorAndDefaultValue c = JsonConvert.DeserializeObject<ItemWithJsonConstructorAndDefaultValue>(json);
+            ItemWithJsonConstructorAndDefaultValue c =
+                JsonConvert.DeserializeObject<ItemWithJsonConstructorAndDefaultValue>(json);
 
             Assert.IsNull(c.ExtensionData);
         }
@@ -97,7 +101,11 @@ namespace Newtonsoft.Json.Tests.Issues
             [JsonProperty("foo")]
             public string Foo { get; set; }
 
-            [JsonProperty(PropertyName = "bar", Required = Required.Default, DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate)]
+            [JsonProperty(
+                PropertyName = "bar",
+                Required = Required.Default,
+                DefaultValueHandling = DefaultValueHandling.IgnoreAndPopulate
+            )]
             [System.ComponentModel.DefaultValue("default")]
             public string Bar { get; set; }
         }

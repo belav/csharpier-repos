@@ -21,7 +21,12 @@ namespace System.ConfigurationTests
         {
             Exception inner = new Exception();
 #pragma warning disable CS0618
-            ConfigurationException obsolete = new ConfigurationException("mymessage", inner, "myfilename", 42);
+            ConfigurationException obsolete = new ConfigurationException(
+                "mymessage",
+                inner,
+                "myfilename",
+                42
+            );
 #pragma warning restore CS0618
             var result = ExceptionUtil.WrapAsConfigException(null, obsolete, null);
             Assert.NotNull(result);
@@ -88,7 +93,10 @@ namespace System.ConfigurationTests
             ArgumentException e = ExceptionUtil.ParameterInvalid("foo");
             Assert.NotNull(e);
             Assert.Equal("foo", e.ParamName);
-            Assert.StartsWith(SR.Format(SR.GetResourceString("Parameter_Invalid", null), "foo"), e.Message);
+            Assert.StartsWith(
+                SR.Format(SR.GetResourceString("Parameter_Invalid", null), "foo"),
+                e.Message
+            );
         }
 
         [Fact]
@@ -97,7 +105,10 @@ namespace System.ConfigurationTests
             ArgumentException e = ExceptionUtil.ParameterNullOrEmpty("foo");
             Assert.NotNull(e);
             Assert.Equal("foo", e.ParamName);
-            Assert.StartsWith(SR.Format(SR.GetResourceString("Parameter_NullOrEmpty", null), "foo"), e.Message);
+            Assert.StartsWith(
+                SR.Format(SR.GetResourceString("Parameter_NullOrEmpty", null), "foo"),
+                e.Message
+            );
         }
 
         [Fact]
@@ -106,7 +117,10 @@ namespace System.ConfigurationTests
             ArgumentException e = ExceptionUtil.PropertyInvalid("foo");
             Assert.NotNull(e);
             Assert.Equal("foo", e.ParamName);
-            Assert.StartsWith(SR.Format(SR.GetResourceString("Property_Invalid", null), "foo"), e.Message);
+            Assert.StartsWith(
+                SR.Format(SR.GetResourceString("Property_Invalid", null), "foo"),
+                e.Message
+            );
         }
 
         [Fact]
@@ -115,7 +129,10 @@ namespace System.ConfigurationTests
             ArgumentException e = ExceptionUtil.PropertyNullOrEmpty("foo");
             Assert.NotNull(e);
             Assert.Equal("foo", e.ParamName);
-            Assert.StartsWith(SR.Format(SR.GetResourceString("Property_NullOrEmpty", null), "foo"), e.Message);
+            Assert.StartsWith(
+                SR.Format(SR.GetResourceString("Property_NullOrEmpty", null), "foo"),
+                e.Message
+            );
         }
 
         [Fact]
@@ -123,7 +140,10 @@ namespace System.ConfigurationTests
         {
             InvalidOperationException e = ExceptionUtil.UnexpectedError("foo");
             Assert.NotNull(e);
-            Assert.StartsWith(SR.Format(SR.GetResourceString("Unexpected_Error", null), "foo"), e.Message);
+            Assert.StartsWith(
+                SR.Format(SR.GetResourceString("Unexpected_Error", null), "foo"),
+                e.Message
+            );
         }
     }
 }

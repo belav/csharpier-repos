@@ -26,54 +26,59 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace Mono.Cecil.Metadata {
+namespace Mono.Cecil.Metadata
+{
+    using System.Collections;
+    using System.Text;
 
-	using System.Collections;
-	using System.Text;
+    internal class StringsHeap : MetadataHeap
+    {
+        IDictionary m_strings;
 
-	internal class StringsHeap : MetadataHeap {
+        public string this[uint index]
+        {
+            get
+            {
+                string str = m_strings[index] as string;
+                if (str == null)
+                {
+                    str = ReadStringAt(index);
+                    m_strings[index] = str;
+                }
+                return str;
+            }
+            set { m_strings[index] = value; }
+        }
 
-		IDictionary m_strings;
+        internal StringsHeap(MetadataStream stream)
+            : base(stream, MetadataStream.Strings)
+        {
+            m_strings = new Hashtable();
+        }
 
-		public string this [uint index] {
-			get {
-				string str = m_strings [index] as string;
-				if (str == null) {
-					str = ReadStringAt (index);
-					m_strings [index] = str;
-				}
-				return str;
-			}
-			set { m_strings [index] = value; }
-		}
+        string ReadStringAt(uint index)
+        {
+            byte[] data = this.Data;
+            int heap_length = data.Length;
 
-		internal StringsHeap (MetadataStream stream) : base (stream, MetadataStream.Strings)
-		{
-			m_strings = new Hashtable ();
-		}
+            if (index > heap_length - 1)
+                return string.Empty;
 
-		string ReadStringAt (uint index)
-		{
-			byte [] data = this.Data;
-			int heap_length = data.Length;
+            int length = 0;
+            for (int i = (int)index; i < heap_length; i++)
+            {
+                if (data[i] == 0)
+                    break;
 
-			if (index > heap_length - 1)
-				return string.Empty;
+                length++;
+            }
 
-			int length = 0;
-			for (int i = (int) index; i < heap_length; i++) {
-				if (data [i] == 0)
-					break;
+            return Encoding.UTF8.GetString(data, (int)index, length);
+        }
 
-				length++;
-			}
-
-			return Encoding.UTF8.GetString (data, (int) index, length);
-		}
-
-		public override void Accept (IMetadataVisitor visitor)
-		{
-			visitor.VisitStringsHeap (this);
-		}
-	}
+        public override void Accept(IMetadataVisitor visitor)
+        {
+            visitor.VisitStringsHeap(this);
+        }
+    }
 }

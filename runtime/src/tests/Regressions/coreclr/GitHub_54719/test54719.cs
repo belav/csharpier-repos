@@ -5,6 +5,7 @@ using System;
 using Xunit;
 
 public class IA { }
+
 public class IB { }
 
 public abstract class Base
@@ -12,12 +13,16 @@ public abstract class Base
     public abstract IA Key { get; }
     public abstract IB Value { get; }
 }
+
 public sealed class Derived : Base<IB>
 {
     public class A : IA { }
+
     public sealed override A Key => default;
 }
-public abstract class Base<B> : Base where B : IB
+
+public abstract class Base<B> : Base
+    where B : IB
 {
     public sealed override B Value => null;
 }

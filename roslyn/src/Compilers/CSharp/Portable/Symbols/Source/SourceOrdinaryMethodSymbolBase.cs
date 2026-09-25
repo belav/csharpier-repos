@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// on any specific kind of syntax node associated with it. Any syntax node is good enough
     /// for it.
     /// </summary>
-    internal abstract class SourceOrdinaryMethodSymbolBase : SourceOrdinaryMethodOrUserDefinedOperatorSymbol
+    internal abstract class SourceOrdinaryMethodSymbolBase
+        : SourceOrdinaryMethodOrUserDefinedOperatorSymbol
     {
         private readonly string _name;
 
@@ -31,25 +32,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             Location location,
             CSharpSyntaxNode syntax,
             bool isIterator,
-            (DeclarationModifiers declarationModifiers, Flags flags) modifiersAndFlags) :
-            base(containingType,
-                 syntax.GetReference(),
-                 location,
-                 isIterator: isIterator,
-                 modifiersAndFlags)
+            (DeclarationModifiers declarationModifiers, Flags flags) modifiersAndFlags
+        )
+            : base(
+                containingType,
+                syntax.GetReference(),
+                location,
+                isIterator: isIterator,
+                modifiersAndFlags
+            )
         {
             _name = name;
         }
 
         protected sealed override void LazyAsyncMethodChecks(CancellationToken cancellationToken)
         {
-            Debug.Assert(this.IsPartial == state.HasComplete(CompletionPart.FinishMethodChecks),
-                "Partial methods complete method checks during construction.  " +
-                "Other methods can't complete method checks before executing this method.");
+            Debug.Assert(
+                this.IsPartial == state.HasComplete(CompletionPart.FinishMethodChecks),
+                "Partial methods complete method checks during construction.  "
+                    + "Other methods can't complete method checks before executing this method."
+            );
 
             if (!this.IsAsync)
             {
-                CompleteAsyncMethodChecks(diagnosticsOpt: null, cancellationToken: cancellationToken);
+                CompleteAsyncMethodChecks(
+                    diagnosticsOpt: null,
+                    cancellationToken: cancellationToken
+                );
                 return;
             }
 
@@ -60,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             diagnostics.Free();
         }
 
-        private void CompleteAsyncMethodChecks(BindingDiagnosticBag diagnosticsOpt, CancellationToken cancellationToken)
+        private void CompleteAsyncMethodChecks(
+            BindingDiagnosticBag diagnosticsOpt,
+            CancellationToken cancellationToken
+        )
         {
             if (state.NotePartComplete(CompletionPart.StartAsyncMethodChecks))
             {
@@ -82,21 +94,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public abstract override ImmutableArray<TypeParameterSymbol> TypeParameters { get; }
 
-        public abstract override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken));
+        public abstract override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        );
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         protected abstract override SourceMemberMethodSymbol BoundAttributesSource { get; }
 
-        internal abstract override OneOrMany<SyntaxList<AttributeListSyntax>> GetAttributeDeclarations();
+        internal abstract override OneOrMany<
+            SyntaxList<AttributeListSyntax>
+        > GetAttributeDeclarations();
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
@@ -106,8 +124,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 // we'll issue CS1112 error in those cases and won't generate IL.
                 var compilation = this.DeclaringCompilation;
 
-                AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(
-                    WellKnownMember.System_Runtime_CompilerServices_ExtensionAttribute__ctor));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_Runtime_CompilerServices_ExtensionAttribute__ctor
+                    )
+                );
             }
         }
     }

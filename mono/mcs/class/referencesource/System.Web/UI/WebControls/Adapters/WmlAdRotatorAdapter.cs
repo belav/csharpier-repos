@@ -6,7 +6,8 @@
 
 #if WMLSUPPORT
 
-namespace System.Web.UI.WebControls.Adapters {
+namespace System.Web.UI.WebControls.Adapters
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
@@ -17,17 +18,21 @@ namespace System.Web.UI.WebControls.Adapters {
     using System.Web.UI;
     using System.Web.UI.Adapters;
 
-    public class WmlAdRotatorAdapter : AdRotatorAdapter {
+    public class WmlAdRotatorAdapter : AdRotatorAdapter
+    {
         private bool _firstTimeRender = true;
         private bool _wmlTopOfForm;
 
-        protected internal override void Render(HtmlTextWriter writer) {
-            WmlTextWriter wmlWriter = (WmlTextWriter) writer;
-            if (wmlWriter.AnalyzeMode) {
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            WmlTextWriter wmlWriter = (WmlTextWriter)writer;
+            if (wmlWriter.AnalyzeMode)
+            {
                 return;
             }
 
-            if (Control.DoPostCacheSubstitutionAsNeeded(writer)) {
+            if (Control.DoPostCacheSubstitutionAsNeeded(writer))
+            {
                 return;
             }
 
@@ -38,10 +43,12 @@ namespace System.Web.UI.WebControls.Adapters {
             // e.g. If the ad is at the beginning of the form, we need to
             // call the method below to explicitly write out a <p> tag for
             // a valid WML output.
-            if (_wmlTopOfForm) {
+            if (_wmlTopOfForm)
+            {
                 wmlWriter.BeginRender();
             }
-            if (_firstTimeRender) {
+            if (_firstTimeRender)
+            {
                 _wmlTopOfForm = wmlWriter.TopOfForm;
                 _firstTimeRender = false;
             }
@@ -51,5 +58,4 @@ namespace System.Web.UI.WebControls.Adapters {
     }
 }
 
-#endif 
-
+#endif

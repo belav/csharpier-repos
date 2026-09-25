@@ -13,7 +13,10 @@ internal class CustomExportAssemblyLoader : IAssemblyLoader
     /// <summary>
     /// Cache assemblies that are already loaded by AssemblyName comparison
     /// </summary>
-    private readonly Dictionary<AssemblyName, Assembly> _loadedAssemblies = new Dictionary<AssemblyName, Assembly>(AssemblyNameComparer.Instance);
+    private readonly Dictionary<AssemblyName, Assembly> _loadedAssemblies = new Dictionary<
+        AssemblyName,
+        Assembly
+    >(AssemblyNameComparer.Instance);
 
     /// <summary>
     /// Base directory to search for <see cref="Assembly.LoadFrom(string)"/> if initial load fails
@@ -43,10 +46,13 @@ internal class CustomExportAssemblyLoader : IAssemblyLoader
             }
             catch (FileNotFoundException) when (assemblyName.Name is not null)
             {
-                var filePath = Path.Combine(_baseDirectory, assemblyName.Name)
-                    + (assemblyName.Name.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
-                        ? ""
-                        : ".dll");
+                var filePath =
+                    Path.Combine(_baseDirectory, assemblyName.Name)
+                    + (
+                        assemblyName.Name.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                            ? ""
+                            : ".dll"
+                    );
 
                 value = Assembly.LoadFrom(filePath);
 

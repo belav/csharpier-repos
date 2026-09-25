@@ -8,9 +8,14 @@ namespace System.Collections.Generic
 {
     public static partial class CollectionExtensions
     {
-        public static RuntimeAssetGroup? GetDefaultGroup(this IEnumerable<RuntimeAssetGroup> self) => GetGroup(self, string.Empty);
+        public static RuntimeAssetGroup? GetDefaultGroup(
+            this IEnumerable<RuntimeAssetGroup> self
+        ) => GetGroup(self, string.Empty);
 
-        public static RuntimeAssetGroup? GetRuntimeGroup(this IEnumerable<RuntimeAssetGroup> self, string runtime)
+        public static RuntimeAssetGroup? GetRuntimeGroup(
+            this IEnumerable<RuntimeAssetGroup> self,
+            string runtime
+        )
         {
             if (string.IsNullOrEmpty(runtime))
             {
@@ -19,13 +24,22 @@ namespace System.Collections.Generic
             return GetGroup(self, runtime);
         }
 
-        private static RuntimeAssetGroup? GetGroup(IEnumerable<RuntimeAssetGroup> groups, string runtime)
+        private static RuntimeAssetGroup? GetGroup(
+            IEnumerable<RuntimeAssetGroup> groups,
+            string runtime
+        )
         {
             return groups.FirstOrDefault(g => g.Runtime == runtime);
         }
 
-        public static IEnumerable<string> GetDefaultAssets(this IEnumerable<RuntimeAssetGroup> self) => GetAssets(self, string.Empty);
-        public static IEnumerable<string> GetRuntimeAssets(this IEnumerable<RuntimeAssetGroup> self, string runtime)
+        public static IEnumerable<string> GetDefaultAssets(
+            this IEnumerable<RuntimeAssetGroup> self
+        ) => GetAssets(self, string.Empty);
+
+        public static IEnumerable<string> GetRuntimeAssets(
+            this IEnumerable<RuntimeAssetGroup> self,
+            string runtime
+        )
         {
             if (string.IsNullOrEmpty(runtime))
             {
@@ -34,7 +48,10 @@ namespace System.Collections.Generic
             return GetAssets(self, runtime);
         }
 
-        private static IEnumerable<string> GetAssets(IEnumerable<RuntimeAssetGroup> groups, string runtime)
+        private static IEnumerable<string> GetAssets(
+            IEnumerable<RuntimeAssetGroup> groups,
+            string runtime
+        )
         {
             foreach (RuntimeAssetGroup group in groups)
             {
@@ -48,8 +65,14 @@ namespace System.Collections.Generic
             }
         }
 
-        public static IEnumerable<RuntimeFile> GetDefaultRuntimeFileAssets(this IEnumerable<RuntimeAssetGroup> self) => GetRuntimeFiles(self, string.Empty);
-        public static IEnumerable<RuntimeFile> GetRuntimeFileAssets(this IEnumerable<RuntimeAssetGroup> self, string runtime)
+        public static IEnumerable<RuntimeFile> GetDefaultRuntimeFileAssets(
+            this IEnumerable<RuntimeAssetGroup> self
+        ) => GetRuntimeFiles(self, string.Empty);
+
+        public static IEnumerable<RuntimeFile> GetRuntimeFileAssets(
+            this IEnumerable<RuntimeAssetGroup> self,
+            string runtime
+        )
         {
             if (string.IsNullOrEmpty(runtime))
             {
@@ -58,7 +81,10 @@ namespace System.Collections.Generic
             return GetRuntimeFiles(self, runtime);
         }
 
-        private static IEnumerable<RuntimeFile> GetRuntimeFiles(IEnumerable<RuntimeAssetGroup> groups, string runtime)
+        private static IEnumerable<RuntimeFile> GetRuntimeFiles(
+            IEnumerable<RuntimeAssetGroup> groups,
+            string runtime
+        )
         {
             foreach (RuntimeAssetGroup group in groups)
             {

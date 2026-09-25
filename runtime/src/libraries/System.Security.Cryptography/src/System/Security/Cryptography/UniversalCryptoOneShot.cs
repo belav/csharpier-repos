@@ -15,7 +15,8 @@ namespace System.Security.Cryptography
             PaddingMode paddingMode,
             ReadOnlySpan<byte> input,
             Span<byte> output,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             if (input.Length % cipher.PaddingSizeInBytes != 0)
                 throw new CryptographicException(SR.Cryptography_PartialBlock);
@@ -38,7 +39,11 @@ namespace System.Security.Cryptography
                     // "extra padded" CFB data can still be decrypted. The .NET Framework always padded CFB8 to the
                     // block size, not the feedback size. We want the one-shot to be able to continue to decrypt
                     // those ciphertexts, so for CFB8 we are more lenient on the number of allowed padding bytes.
-                    bytesWritten = SymmetricPadding.GetPaddingLength(transformBuffer, paddingMode, cipher.BlockSizeInBytes);
+                    bytesWritten = SymmetricPadding.GetPaddingLength(
+                        transformBuffer,
+                        paddingMode,
+                        cipher.BlockSizeInBytes
+                    );
 
                     // Zero out the padding so that the buffer does not contain the padding data "after" the bytesWritten.
                     CryptographicOperations.ZeroMemory(transformBuffer.Slice(bytesWritten));
@@ -57,8 +62,10 @@ namespace System.Security.Cryptography
             // The second condition is where the output length is short by more than a whole block.
             // All valid padding is at most one complete block. If the difference between the
             // output and the input is more than a whole block then we know the output is too small.
-            if (!SymmetricPadding.DepaddingRequired(paddingMode) ||
-                input.Length - cipher.BlockSizeInBytes > output.Length)
+            if (
+                !SymmetricPadding.DepaddingRequired(paddingMode)
+                || input.Length - cipher.BlockSizeInBytes > output.Length
+            )
             {
                 bytesWritten = 0;
                 return false;
@@ -79,7 +86,8 @@ namespace System.Security.Cryptography
                 int depaddedLength = SymmetricPadding.GetPaddingLength(
                     stackBuffer.Slice(0, stackTransformFinal),
                     paddingMode,
-                    cipher.BlockSizeInBytes);
+                    cipher.BlockSizeInBytes
+                );
                 Span<byte> writtenDepadded = stackBuffer.Slice(0, depaddedLength);
 
                 if (output.Length < depaddedLength)
@@ -130,7 +138,8 @@ namespace System.Security.Cryptography
                     int depaddedLength = SymmetricPadding.GetPaddingLength(
                         stackBuffer.Slice(0, finalTransformWritten),
                         paddingMode,
-                        cipher.BlockSizeInBytes);
+                        cipher.BlockSizeInBytes
+                    );
                     Span<byte> depaddedFinalTransform = stackBuffer.Slice(0, depaddedLength);
 
                     if (output.Length - writtenToOutput < depaddedLength)
@@ -172,7 +181,11 @@ namespace System.Security.Cryptography
                     // "extra padded" CFB data can still be decrypted. The .NET Framework always padded CFB8 to the
                     // block size, not the feedback size. We want the one-shot to be able to continue to decrypt
                     // those ciphertexts, so for CFB8 we are more lenient on the number of allowed padding bytes.
-                    int unpaddedLength = SymmetricPadding.GetPaddingLength(decryptedBuffer, paddingMode, cipher.BlockSizeInBytes); // validates padding
+                    int unpaddedLength = SymmetricPadding.GetPaddingLength(
+                        decryptedBuffer,
+                        paddingMode,
+                        cipher.BlockSizeInBytes
+                    ); // validates padding
 
                     if (unpaddedLength > output.Length)
                     {
@@ -197,9 +210,14 @@ namespace System.Security.Cryptography
             PaddingMode paddingMode,
             ReadOnlySpan<byte> input,
             Span<byte> output,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
-            int ciphertextLength = SymmetricPadding.GetCiphertextLength(input.Length, cipher.PaddingSizeInBytes, paddingMode);
+            int ciphertextLength = SymmetricPadding.GetCiphertextLength(
+                input.Length,
+                cipher.PaddingSizeInBytes,
+                paddingMode
+            );
 
             if (output.Length < ciphertextLength)
             {
@@ -210,7 +228,12 @@ namespace System.Security.Cryptography
             // Copy the input to the output, and apply padding if required. This will not throw since the
             // output length has already been checked, and PadBlock will not copy from input to output
             // until it has checked that it will be able to apply padding correctly.
-            int padWritten = SymmetricPadding.PadBlock(input, output, cipher.PaddingSizeInBytes, paddingMode);
+            int padWritten = SymmetricPadding.PadBlock(
+                input,
+                output,
+                cipher.PaddingSizeInBytes,
+                paddingMode
+            );
 
             // Do an in-place encrypt. All of our implementations support this, either natively
             // or making a temporary buffer themselves if in-place is not supported by the native

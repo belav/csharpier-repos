@@ -11,8 +11,8 @@ namespace Microsoft.CodeAnalysis
 {
     internal static class GlyphTags
     {
-        public static ImmutableArray<string> GetTags(Glyph glyph)
-            => glyph switch
+        public static ImmutableArray<string> GetTags(Glyph glyph) =>
+            glyph switch
             {
                 Glyph.Assembly => WellKnownTagArrays.Assembly,
                 Glyph.BasicFile => WellKnownTagArrays.VisualBasicFile,

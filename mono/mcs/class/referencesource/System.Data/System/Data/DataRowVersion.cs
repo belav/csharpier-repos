@@ -7,14 +7,16 @@
 // <owner current="false" primary="false">jasonzhu</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System.Configuration.Assemblies;
     using System.Diagnostics;
 
-    public enum DataRowVersion {
-        Original =  0x0100,
-        Current  =  0x0200,
-        Proposed =  0x0400,
-        Default  = Proposed | Current,
+    public enum DataRowVersion
+    {
+        Original = 0x0100,
+        Current = 0x0200,
+        Proposed = 0x0400,
+        Default = Proposed | Current,
     }
 }

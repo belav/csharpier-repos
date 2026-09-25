@@ -21,62 +21,67 @@ public abstract class ConcurrencyDetectorTestBase<TFixture> : IClassFixture<TFix
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Find(bool async)
-        => ConcurrencyDetectorTest(async c => async ? await c.Products.FindAsync(1) : c.Products.Find(1));
+    public virtual Task Find(bool async) =>
+        ConcurrencyDetectorTest(async c =>
+            async ? await c.Products.FindAsync(1) : c.Products.Find(1)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Count(bool async)
-        => ConcurrencyDetectorTest(async c => async ? await c.Products.CountAsync() : c.Products.Count());
+    public virtual Task Count(bool async) =>
+        ConcurrencyDetectorTest(async c =>
+            async ? await c.Products.CountAsync() : c.Products.Count()
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task First(bool async)
-        => ConcurrencyDetectorTest(
-            async c => async
+    public virtual Task First(bool async) =>
+        ConcurrencyDetectorTest(async c =>
+            async
                 ? await c.Products.OrderBy(p => p.Id).FirstAsync()
-                : c.Products.OrderBy(p => p.Id).First());
+                : c.Products.OrderBy(p => p.Id).First()
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Last(bool async)
-        => ConcurrencyDetectorTest(
-            async c => async
+    public virtual Task Last(bool async) =>
+        ConcurrencyDetectorTest(async c =>
+            async
                 ? await c.Products.OrderBy(p => p.Id).LastAsync()
-                : c.Products.OrderBy(p => p.Id).Last());
+                : c.Products.OrderBy(p => p.Id).Last()
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Single(bool async)
-        => ConcurrencyDetectorTest(
-            async c => async
-                ? await c.Products.SingleAsync(p => p.Id == 1)
-                : c.Products.Single(p => p.Id == 1));
+    public virtual Task Single(bool async) =>
+        ConcurrencyDetectorTest(async c =>
+            async ? await c.Products.SingleAsync(p => p.Id == 1) : c.Products.Single(p => p.Id == 1)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Any(bool async)
-        => ConcurrencyDetectorTest(
-            async c => async
-                ? await c.Products.AnyAsync(p => p.Id < 10)
-                : c.Products.Any(p => p.Id < 10));
+    public virtual Task Any(bool async) =>
+        ConcurrencyDetectorTest(async c =>
+            async ? await c.Products.AnyAsync(p => p.Id < 10) : c.Products.Any(p => p.Id < 10)
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task ToList(bool async)
-        => ConcurrencyDetectorTest(async c => async ? await c.Products.ToListAsync() : c.Products.ToList());
+    public virtual Task ToList(bool async) =>
+        ConcurrencyDetectorTest(async c =>
+            async ? await c.Products.ToListAsync() : c.Products.ToList()
+        );
 
-    protected abstract Task ConcurrencyDetectorTest(Func<ConcurrencyDetectorDbContext, Task<object>> test);
+    protected abstract Task ConcurrencyDetectorTest(
+        Func<ConcurrencyDetectorDbContext, Task<object>> test
+    );
 
-    protected ConcurrencyDetectorDbContext CreateContext()
-        => Fixture.CreateContext();
+    protected ConcurrencyDetectorDbContext CreateContext() => Fixture.CreateContext();
 
     public class ConcurrencyDetectorDbContext : DbContext
     {
         public ConcurrencyDetectorDbContext(DbContextOptions<ConcurrencyDetectorDbContext> options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         public DbSet<Product> Products { get; set; }
 
@@ -93,17 +98,21 @@ public abstract class ConcurrencyDetectorTestBase<TFixture> : IClassFixture<TFix
         public string Name { get; set; }
     }
 
-    public abstract class ConcurrencyDetectorFixtureBase : SharedStoreFixtureBase<ConcurrencyDetectorDbContext>
+    public abstract class ConcurrencyDetectorFixtureBase
+        : SharedStoreFixtureBase<ConcurrencyDetectorDbContext>
     {
-        protected override string StoreName
-            => "ConcurrencyDetector";
+        protected override string StoreName => "ConcurrencyDetector";
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
-            => modelBuilder.Entity<Product>().Property(p => p.Id).ValueGeneratedNever();
+        protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context) =>
+            modelBuilder.Entity<Product>().Property(p => p.Id).ValueGeneratedNever();
 
-        protected override void Seed(ConcurrencyDetectorDbContext context)
-            => ConcurrencyDetectorDbContext.Seed(context);
+        protected override void Seed(ConcurrencyDetectorDbContext context) =>
+            ConcurrencyDetectorDbContext.Seed(context);
     }
 
-    public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+    public static IEnumerable<object[]> IsAsyncData = new[]
+    {
+        new object[] { false },
+        new object[] { true },
+    };
 }

@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Threading;
 using Microsoft.Win32.SafeHandles;
 using Xunit;
 
@@ -20,8 +20,15 @@ public class BindHandleInvalid3
     }
 
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-    public static extern IntPtr CreateFile(String FileName, uint Access, uint Share, int Atts, uint Dispo, uint Flags, int Template);
-
+    public static extern IntPtr CreateFile(
+        String FileName,
+        uint Access,
+        uint Share,
+        int Atts,
+        uint Dispo,
+        uint Flags,
+        int Template
+    );
 
     int RunTest()
     {
@@ -29,9 +36,13 @@ public class BindHandleInvalid3
         {
             try
             {
-                using (SafeFileHandle sfh = new SafeFileHandle(CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x80, 0), true))
+                using (
+                    SafeFileHandle sfh = new SafeFileHandle(
+                        CreateFile("test.txt", 0x40000000, 0, 0, 2, 0x80, 0),
+                        true
+                    )
+                )
                 {
-
                     ThreadPool.BindHandle(sfh);
                 }
             }
@@ -44,7 +55,9 @@ public class BindHandleInvalid3
                 }
                 else
                 {
-                    Console.WriteLine($"Got wrong error - HResult: 0x{ex.HResult:x}, Exception: {ex}");
+                    Console.WriteLine(
+                        $"Got wrong error - HResult: 0x{ex.HResult:x}, Exception: {ex}"
+                    );
                 }
             }
         }
@@ -58,6 +71,4 @@ public class BindHandleInvalid3
         Console.WriteLine("Didn't get argument null exception");
         return (99);
     }
-
-
 }

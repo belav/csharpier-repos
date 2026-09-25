@@ -62,7 +62,6 @@ namespace System.ComponentModel.Composition
                 {
                     finalizerCalled = true;
                 }
-
             });
 
             catalog.Dispose();
@@ -101,7 +100,12 @@ namespace System.ComponentModel.Composition
 
         private IQueryable<ComposablePartDefinition> GetPartDefinitions(ExportDefinition definition)
         {
-            var partDefinition = PartDefinitionFactory.Create(null, () => null, Enumerable.Empty<ImportDefinition>(), new ExportDefinition[] { definition });
+            var partDefinition = PartDefinitionFactory.Create(
+                null,
+                () => null,
+                Enumerable.Empty<ImportDefinition>(),
+                new ExportDefinition[] { definition }
+            );
 
             return new ComposablePartDefinition[] { partDefinition }.AsQueryable();
         }

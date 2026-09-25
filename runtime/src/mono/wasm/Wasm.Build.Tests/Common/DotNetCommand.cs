@@ -10,7 +10,13 @@ namespace Wasm.Build.Tests
         private BuildEnvironment _buildEnvironment;
         private bool _useDefaultArgs;
 
-        public DotNetCommand(BuildEnvironment buildEnv, ITestOutputHelper _testOutput, bool useDefaultArgs=true, string label="") : base(buildEnv.DotNet, _testOutput, label)
+        public DotNetCommand(
+            BuildEnvironment buildEnv,
+            ITestOutputHelper _testOutput,
+            bool useDefaultArgs = true,
+            string label = ""
+        )
+            : base(buildEnv.DotNet, _testOutput, label)
         {
             _buildEnvironment = buildEnv;
             _useDefaultArgs = useDefaultArgs;
@@ -18,9 +24,9 @@ namespace Wasm.Build.Tests
                 WithEnvironmentVariables(buildEnv.EnvVars);
         }
 
-        protected override string GetFullArgs(params string[] args)
-            => _useDefaultArgs
-                    ? $"{string.Join(" ", args)} {_buildEnvironment.DefaultBuildArgs}"
-                    : string.Join(" ", args);
+        protected override string GetFullArgs(params string[] args) =>
+            _useDefaultArgs
+                ? $"{string.Join(" ", args)} {_buildEnvironment.DefaultBuildArgs}"
+                : string.Join(" ", args);
     }
 }

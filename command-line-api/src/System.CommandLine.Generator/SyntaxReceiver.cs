@@ -12,13 +12,20 @@ namespace System.CommandLine.Generator
 {
     internal class SyntaxReceiver : ISyntaxContextReceiver
     {
-        private static readonly string _nameOfExtensionMethodAnchorType = "global::System.CommandLine.CliCommand";
+        private static readonly string _nameOfExtensionMethodAnchorType =
+            "global::System.CommandLine.CliCommand";
 
         public HashSet<DelegateInvocation> Invocations { get; } = new();
 
         public void OnVisitSyntaxNode(GeneratorSyntaxContext context)
         {
-            if (context.Node is not InvocationExpressionSyntax { Expression: MemberAccessExpressionSyntax memberAccess } invocationExpression)
+            if (
+                context.Node
+                is not InvocationExpressionSyntax
+                {
+                    Expression: MemberAccessExpressionSyntax memberAccess
+                } invocationExpression
+            )
             {
                 return;
             }
@@ -28,12 +35,19 @@ namespace System.CommandLine.Generator
                 return;
             }
 
-            if (context.SemanticModel.GetSymbolInfo(invocationExpression) is not { Symbol: IMethodSymbol invokeMethodSymbol })
+            if (
+                context.SemanticModel.GetSymbolInfo(invocationExpression)
+                is not { Symbol: IMethodSymbol invokeMethodSymbol }
+            )
             {
                 return;
             }
 
-            if (invokeMethodSymbol.ReceiverType?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) != _nameOfExtensionMethodAnchorType)
+            if (
+                invokeMethodSymbol.ReceiverType?.ToDisplayString(
+                    SymbolDisplayFormat.FullyQualifiedFormat
+                ) != _nameOfExtensionMethodAnchorType
+            )
             {
                 return;
             }
@@ -44,33 +58,38 @@ namespace System.CommandLine.Generator
             }
 
             SymbolEqualityComparer symbolEqualityComparer = SymbolEqualityComparer.Default;
-            WellKnownTypes wellKnownTypes = new(context.SemanticModel.Compilation, symbolEqualityComparer);
+            WellKnownTypes wellKnownTypes = new(
+                context.SemanticModel.Compilation,
+                symbolEqualityComparer
+            );
 
             var delegateParameters = Array.Empty<ISymbol>();
 
             //Check for model binding condition
-            if (invokeMethodSymbol.TypeArguments[0] is INamedTypeSymbol { TypeArguments: { Length: > 0 } } namedDelegateType)
+            if (
+                invokeMethodSymbol.TypeArguments[0] is INamedTypeSymbol
+                {
+                    TypeArguments: { Length: > 0 }
+                } namedDelegateType
+            )
             {
                 if (namedDelegateType.DelegateInvokeMethod?.ReturnsVoid == false)
                 {
-                    delegateParameters = namedDelegateType.TypeArguments
-                                                          .Take(namedDelegateType.TypeArguments.Length - 1)
-                                                          .Cast<ISymbol>()
-                                                          .ToArray();
+                    delegateParameters = namedDelegateType
+                        .TypeArguments.Take(namedDelegateType.TypeArguments.Length - 1)
+                        .Cast<ISymbol>()
+                        .ToArray();
                 }
                 else
                 {
-                    delegateParameters = namedDelegateType.TypeArguments
-                                                          .Cast<ISymbol>()
-                                                          .ToArray();
+                    delegateParameters = namedDelegateType.TypeArguments.Cast<ISymbol>().ToArray();
                 }
             }
 
-            var symbols = invocationExpression.ArgumentList
-                                              .Arguments
-                                              .Skip(1)
-                                              .Select(x => context.SemanticModel.GetSymbolInfo(x.Expression).Symbol)
-                                              .ToArray();
+            var symbols = invocationExpression
+                .ArgumentList.Arguments.Skip(1)
+                .Select(x => context.SemanticModel.GetSymbolInfo(x.Expression).Symbol)
+                .ToArray();
 
             if (symbols.Any(x => x is null))
             {
@@ -79,13 +98,21 @@ namespace System.CommandLine.Generator
 
             IReadOnlyList<Parameter> givenParameters = GetParameters(symbols!);
             ITypeSymbol delegateType = invokeMethodSymbol.TypeArguments[0];
-            ReturnPattern returnPattern = GetReturnPattern(delegateType, context.SemanticModel.Compilation);
+            ReturnPattern returnPattern = GetReturnPattern(
+                delegateType,
+                context.SemanticModel.Compilation
+            );
 
             if (IsMatch(delegateParameters, givenParameters, wellKnownTypes))
             {
-
                 var invocation = new DelegateInvocation(delegateType, returnPattern, 1);
-                foreach (var parameter in PopulateParameters(delegateParameters, givenParameters, wellKnownTypes))
+                foreach (
+                    var parameter in PopulateParameters(
+                        delegateParameters,
+                        givenParameters,
+                        wellKnownTypes
+                    )
+                )
                 {
                     invocation.Parameters.Add(parameter);
                 }
@@ -94,16 +121,28 @@ namespace System.CommandLine.Generator
             }
             else if (delegateParameters[0] is INamedTypeSymbol modelType)
             {
-                foreach (var ctor in modelType.Constructors.OrderByDescending(x => x.Parameters.Length))
+                foreach (
+                    var ctor in modelType.Constructors.OrderByDescending(x => x.Parameters.Length)
+                )
                 {
-                    var targetTypes =
-                        ctor.Parameters.Select(x => x.Type)
-                            .Concat(delegateParameters.Skip(1))
-                            .ToArray();
+                    var targetTypes = ctor
+                        .Parameters.Select(x => x.Type)
+                        .Concat(delegateParameters.Skip(1))
+                        .ToArray();
                     if (IsMatch(targetTypes, givenParameters, wellKnownTypes))
                     {
-                        var invocation = new ConstructorModelBindingInvocation(ctor, returnPattern, delegateType);
-                        foreach (var parameter in PopulateParameters(targetTypes, givenParameters, wellKnownTypes))
+                        var invocation = new ConstructorModelBindingInvocation(
+                            ctor,
+                            returnPattern,
+                            delegateType
+                        );
+                        foreach (
+                            var parameter in PopulateParameters(
+                                targetTypes,
+                                givenParameters,
+                                wellKnownTypes
+                            )
+                        )
                         {
                             invocation.Parameters.Add(parameter);
                         }
@@ -117,14 +156,20 @@ namespace System.CommandLine.Generator
             static bool IsMatch(
                 IReadOnlyList<ISymbol> targetSymbols,
                 IReadOnlyList<Parameter> providedSymbols,
-                WellKnownTypes knownTypes)
+                WellKnownTypes knownTypes
+            )
             {
                 SymbolEqualityComparer symbolEqualityComparer = SymbolEqualityComparer.Default;
                 int j = 0;
                 for (int i = 0; i < targetSymbols.Count; i++)
                 {
-                    if (j < providedSymbols.Count &&
-                        symbolEqualityComparer.Equals(providedSymbols[j].ValueType, targetSymbols[i]))
+                    if (
+                        j < providedSymbols.Count
+                        && symbolEqualityComparer.Equals(
+                            providedSymbols[j].ValueType,
+                            targetSymbols[i]
+                        )
+                    )
                     {
                         j++;
                         //TODO: Handle the case where there are more provided symbols than needed
@@ -142,7 +187,8 @@ namespace System.CommandLine.Generator
         private static IReadOnlyList<Parameter> PopulateParameters(
             IReadOnlyList<ISymbol> symbols,
             IReadOnlyList<Parameter> givenParameters,
-            WellKnownTypes knownTypes)
+            WellKnownTypes knownTypes
+        )
         {
             List<Parameter> parameters = new(givenParameters);
             for (int i = 0; i < symbols.Count; i++)
@@ -176,7 +222,9 @@ namespace System.CommandLine.Generator
                 ILocalSymbol local => FromTypeSymbol(local.Type),
                 INamedTypeSymbol namedType => FromNamedTypeSymbol(namedType),
                 IMethodSymbol methodSymbol => FromTypeSymbol(methodSymbol.ReturnType),
-                _ => throw new NotImplementedException($"Cannot convert from '{argumentSymbol?.Kind}' {argumentSymbol?.ToDisplayString()}")
+                _ => throw new NotImplementedException(
+                    $"Cannot convert from '{argumentSymbol?.Kind}' {argumentSymbol?.ToDisplayString()}"
+                ),
             };
 
             Parameter FromNamedTypeSymbol(INamedTypeSymbol namedTypeSymbol)
@@ -185,12 +233,20 @@ namespace System.CommandLine.Generator
                 {
                     if (namedTypeSymbol.Name == "CliOption")
                     {
-                        return new OptionParameter(localName, namedTypeSymbol, namedTypeSymbol.TypeArguments[0]);
+                        return new OptionParameter(
+                            localName,
+                            namedTypeSymbol,
+                            namedTypeSymbol.TypeArguments[0]
+                        );
                     }
 
                     if (namedTypeSymbol.Name == "CliArgument")
                     {
-                        return new ArgumentParameter(localName, namedTypeSymbol, namedTypeSymbol.TypeArguments[0]);
+                        return new ArgumentParameter(
+                            localName,
+                            namedTypeSymbol,
+                            namedTypeSymbol.TypeArguments[0]
+                        );
                     }
                 }
 
@@ -202,15 +258,25 @@ namespace System.CommandLine.Generator
                 return typeSymbol switch
                 {
                     INamedTypeSymbol namedType => FromNamedTypeSymbol(namedType),
-                    _ => throw new NotImplementedException($"Cannot convert from type symbol '{typeSymbol?.Kind}' {typeSymbol?.ToDisplayString()}")
+                    _ => throw new NotImplementedException(
+                        $"Cannot convert from type symbol '{typeSymbol?.Kind}' {typeSymbol?.ToDisplayString()}"
+                    ),
                 };
             }
         }
 
-        private static ReturnPattern GetReturnPattern(ITypeSymbol delegateType, Compilation compilation)
+        private static ReturnPattern GetReturnPattern(
+            ITypeSymbol delegateType,
+            Compilation compilation
+        )
         {
             ITypeSymbol? returnType = null;
-            if (delegateType is INamedTypeSymbol { DelegateInvokeMethod: { ReturnsVoid: false } delegateInvokeMethod })
+            if (
+                delegateType is INamedTypeSymbol
+                {
+                    DelegateInvokeMethod: { ReturnsVoid: false } delegateInvokeMethod
+                }
+            )
             {
                 returnType = delegateInvokeMethod.ReturnType;
             }
@@ -229,18 +295,26 @@ namespace System.CommandLine.Generator
             }
 
             //TODO: what about other awaitables?
-            INamedTypeSymbol taskType = compilation.GetTypeByMetadataName("System.Threading.Tasks.Task")
-                                        ?? throw new InvalidOperationException("Failed to find Task");
+            INamedTypeSymbol taskType =
+                compilation.GetTypeByMetadataName("System.Threading.Tasks.Task")
+                ?? throw new InvalidOperationException("Failed to find Task");
             if (symbolEqualityComparer.Equals(returnType, taskType))
             {
                 return ReturnPattern.AwaitFunction;
             }
 
-            INamedTypeSymbol taskOfTType = compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1")
-                                           ?? throw new InvalidOperationException("Failed to find Task<T>");
+            INamedTypeSymbol taskOfTType =
+                compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1")
+                ?? throw new InvalidOperationException("Failed to find Task<T>");
 
-            if (returnType is INamedTypeSymbol { TypeArguments: { Length: 1 } } namedReturnType && symbolEqualityComparer.Equals(namedReturnType.TypeArguments[0], intType) &&
-                symbolEqualityComparer.Equals(namedReturnType.ConstructUnboundGenericType(), taskOfTType.ConstructUnboundGenericType()))
+            if (
+                returnType is INamedTypeSymbol { TypeArguments: { Length: 1 } } namedReturnType
+                && symbolEqualityComparer.Equals(namedReturnType.TypeArguments[0], intType)
+                && symbolEqualityComparer.Equals(
+                    namedReturnType.ConstructUnboundGenericType(),
+                    taskOfTType.ConstructUnboundGenericType()
+                )
+            )
             {
                 return ReturnPattern.AwaitFunctionReturnValue;
             }

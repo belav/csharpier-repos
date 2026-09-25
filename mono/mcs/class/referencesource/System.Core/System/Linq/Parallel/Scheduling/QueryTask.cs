@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -11,23 +11,22 @@
 //
 // =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
+using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Diagnostics.Contracts;
 
 namespace System.Linq.Parallel
 {
     // To disable exception marshaling (e.g. for debugging purposes), uncomment this symbol
     // or recompile PLINQ passing the symbol on the cmd-line, i.e. csc.exe ... /d:LET_...
     //#define LET_ASYNC_EXCEPTIONS_CRASH
-    
+
     /// <summary>
     /// Simple abstract task representation, allowing either synchronous and asynchronous
     /// execution. Subclasses override the Work API to implement the logic.
     /// </summary>
     internal abstract class QueryTask
     {
-
         protected int m_taskIndex; // The unique id of this task.
         protected QueryTaskGroupState m_groupState; // State shared among the tasks.
 
@@ -46,8 +45,8 @@ namespace System.Linq.Parallel
         // A static function used by s_runTaskSynchronouslyDelegate, which is used by RunSynchronously
         //
 
-        private static void RunTaskSynchronously(object o) 
-        { 
+        private static void RunTaskSynchronously(object o)
+        {
             ((QueryTask)o).BaseWork(null);
         }
 
@@ -63,9 +62,20 @@ namespace System.Linq.Parallel
 
         internal Task RunSynchronously(TaskScheduler taskScheduler)
         {
-            Contract.Assert(taskScheduler == TaskScheduler.Default, "PLINQ queries can currently execute only on the default scheduler.");
-            TraceHelpers.TraceInfo("[timing]: {0}: Running work synchronously", DateTime.Now.Ticks, m_taskIndex);
-            Task task = new Task(s_runTaskSynchronouslyDelegate, this, TaskCreationOptions.AttachedToParent);
+            Contract.Assert(
+                taskScheduler == TaskScheduler.Default,
+                "PLINQ queries can currently execute only on the default scheduler."
+            );
+            TraceHelpers.TraceInfo(
+                "[timing]: {0}: Running work synchronously",
+                DateTime.Now.Ticks,
+                m_taskIndex
+            );
+            Task task = new Task(
+                s_runTaskSynchronouslyDelegate,
+                this,
+                TaskCreationOptions.AttachedToParent
+            );
             task.RunSynchronously(taskScheduler);
             return task;
         }
@@ -81,10 +91,23 @@ namespace System.Linq.Parallel
 
         internal Task RunAsynchronously(TaskScheduler taskScheduler)
         {
-            Contract.Assert(taskScheduler == TaskScheduler.Default, "PLINQ queries can currently execute only on the default scheduler.");
+            Contract.Assert(
+                taskScheduler == TaskScheduler.Default,
+                "PLINQ queries can currently execute only on the default scheduler."
+            );
 
-            TraceHelpers.TraceInfo("[timing]: {0}: Queue work {1} to occur asynchronously", DateTime.Now.Ticks, m_taskIndex);
-            return Task.Factory.StartNew(s_baseWorkDelegate, this, new CancellationToken(), TaskCreationOptions.AttachedToParent | TaskCreationOptions.PreferFairness, taskScheduler);
+            TraceHelpers.TraceInfo(
+                "[timing]: {0}: Queue work {1} to occur asynchronously",
+                DateTime.Now.Ticks,
+                m_taskIndex
+            );
+            return Task.Factory.StartNew(
+                s_baseWorkDelegate,
+                this,
+                new CancellationToken(),
+                TaskCreationOptions.AttachedToParent | TaskCreationOptions.PreferFairness,
+                taskScheduler
+            );
         }
 
         //-----------------------------------------------------------------------------------
@@ -95,7 +118,11 @@ namespace System.Linq.Parallel
         private void BaseWork(object unused)
         {
             Contract.Assert(unused == null);
-            TraceHelpers.TraceInfo("[timing]: {0}: Start work {1}", DateTime.Now.Ticks, m_taskIndex);
+            TraceHelpers.TraceInfo(
+                "[timing]: {0}: Start work {1}",
+                DateTime.Now.Ticks,
+                m_taskIndex
+            );
 
 #if !FEATURE_PAL && !SILVERLIGHT    // PAL doesn't support  eventing
             PlinqEtwProvider.Log.ParallelQueryFork(m_groupState.QueryId);
@@ -107,11 +134,9 @@ namespace System.Linq.Parallel
             }
             finally
             {
-
 #if !FEATURE_PAL && !SILVERLIGHT    // PAL doesn't support  eventing
                 PlinqEtwProvider.Log.ParallelQueryJoin(m_groupState.QueryId);
 #endif
-
             }
 
             TraceHelpers.TraceInfo("[timing]: {0}: End work {1}", DateTime.Now.Ticks, m_taskIndex);
@@ -122,6 +147,5 @@ namespace System.Linq.Parallel
         //
 
         protected abstract void Work();
-
     }
 }

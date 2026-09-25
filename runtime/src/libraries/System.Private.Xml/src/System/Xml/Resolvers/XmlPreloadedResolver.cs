@@ -75,9 +75,7 @@ namespace System.Xml.Resolvers
             private readonly int _length;
 
             internal ByteArrayChunk(byte[] array)
-                : this(array, 0, array.Length)
-            {
-            }
+                : this(array, 0, array.Length) { }
 
             internal ByteArrayChunk(byte[] array, int offset, int length)
             {
@@ -132,43 +130,69 @@ namespace System.Xml.Resolvers
         //
         // Static/constant fiels
         //
-        private static readonly XmlKnownDtdData[] s_xhtml10_Dtd = new XmlKnownDtdData[] {
-            new XmlKnownDtdData( "-//W3C//DTD XHTML 1.0 Strict//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd", "xhtml1-strict.dtd" ),
-            new XmlKnownDtdData( "-//W3C//DTD XHTML 1.0 Transitional//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd", "xhtml1-transitional.dtd" ),
-            new XmlKnownDtdData( "-//W3C//DTD XHTML 1.0 Frameset//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd", "xhtml1-frameset.dtd" ),
-            new XmlKnownDtdData( "-//W3C//ENTITIES Latin 1 for XHTML//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent", "xhtml-lat1.ent" ),
-            new XmlKnownDtdData( "-//W3C//ENTITIES Symbols for XHTML//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent", "xhtml-symbol.ent" ),
-            new XmlKnownDtdData( "-//W3C//ENTITIES Special for XHTML//EN", "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent", "xhtml-special.ent" ),
+        private static readonly XmlKnownDtdData[] s_xhtml10_Dtd = new XmlKnownDtdData[]
+        {
+            new XmlKnownDtdData(
+                "-//W3C//DTD XHTML 1.0 Strict//EN",
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd",
+                "xhtml1-strict.dtd"
+            ),
+            new XmlKnownDtdData(
+                "-//W3C//DTD XHTML 1.0 Transitional//EN",
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd",
+                "xhtml1-transitional.dtd"
+            ),
+            new XmlKnownDtdData(
+                "-//W3C//DTD XHTML 1.0 Frameset//EN",
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd",
+                "xhtml1-frameset.dtd"
+            ),
+            new XmlKnownDtdData(
+                "-//W3C//ENTITIES Latin 1 for XHTML//EN",
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml-lat1.ent",
+                "xhtml-lat1.ent"
+            ),
+            new XmlKnownDtdData(
+                "-//W3C//ENTITIES Symbols for XHTML//EN",
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml-symbol.ent",
+                "xhtml-symbol.ent"
+            ),
+            new XmlKnownDtdData(
+                "-//W3C//ENTITIES Special for XHTML//EN",
+                "http://www.w3.org/TR/xhtml1/DTD/xhtml-special.ent",
+                "xhtml-special.ent"
+            ),
         };
 
-        private static readonly XmlKnownDtdData[] s_rss091_Dtd = new XmlKnownDtdData[] {
-            new XmlKnownDtdData( "-//Netscape Communications//DTD RSS 0.91//EN", "http://my.netscape.com/publish/formats/rss-0.91.dtd", "rss-0.91.dtd" ),
+        private static readonly XmlKnownDtdData[] s_rss091_Dtd = new XmlKnownDtdData[]
+        {
+            new XmlKnownDtdData(
+                "-//Netscape Communications//DTD RSS 0.91//EN",
+                "http://my.netscape.com/publish/formats/rss-0.91.dtd",
+                "rss-0.91.dtd"
+            ),
         };
 
         //
         // Constructors
         //
         public XmlPreloadedResolver()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public XmlPreloadedResolver(XmlKnownDtds preloadedDtds)
-            : this(null, preloadedDtds, null)
-        {
-        }
+            : this(null, preloadedDtds, null) { }
 
         public XmlPreloadedResolver(XmlResolver? fallbackResolver)
-            : this(fallbackResolver, XmlKnownDtds.All, null)
-        {
-        }
+            : this(fallbackResolver, XmlKnownDtds.All, null) { }
 
         public XmlPreloadedResolver(XmlResolver? fallbackResolver, XmlKnownDtds preloadedDtds)
-            : this(fallbackResolver, preloadedDtds, null)
-        {
-        }
+            : this(fallbackResolver, preloadedDtds, null) { }
 
-        public XmlPreloadedResolver(XmlResolver? fallbackResolver, XmlKnownDtds preloadedDtds, IEqualityComparer<Uri>? uriComparer)
+        public XmlPreloadedResolver(
+            XmlResolver? fallbackResolver,
+            XmlKnownDtds preloadedDtds,
+            IEqualityComparer<Uri>? uriComparer
+        )
         {
             _fallbackResolver = fallbackResolver;
             _mappings = new Dictionary<Uri, PreloadedData>(16, uriComparer);
@@ -193,12 +217,18 @@ namespace System.Xml.Resolvers
             // 1) special-case well-known public IDs
             // 2) To make FxCop happy we need to use StartsWith() overload that takes StringComparison ->
             //   .StartsWith(string) is equal to .StartsWith(string, StringComparison.CurrentCulture);
-            if (relativeUri != null && relativeUri.StartsWith("-//", StringComparison.CurrentCulture))
+            if (
+                relativeUri != null
+                && relativeUri.StartsWith("-//", StringComparison.CurrentCulture)
+            )
             {
                 // 1) XHTML 1.0 public IDs
                 // 2) To make FxCop happy we need to use StartsWith() overload that takes StringComparison ->
                 //   .StartsWith(string) is equal to .StartsWith(string, StringComparison.CurrentCulture);
-                if ((_preloadedDtds & XmlKnownDtds.Xhtml10) != 0 && relativeUri.StartsWith("-//W3C//", StringComparison.CurrentCulture))
+                if (
+                    (_preloadedDtds & XmlKnownDtds.Xhtml10) != 0
+                    && relativeUri.StartsWith("-//W3C//", StringComparison.CurrentCulture)
+                )
                 {
                     for (int i = 0; i < s_xhtml10_Dtd.Length; i++)
                     {
@@ -237,7 +267,11 @@ namespace System.Xml.Resolvers
                 throw new XmlException(SR.Format(SR.Xml_CannotResolveUrl, absoluteUri));
             }
 
-            if (ofObjectToReturn == null || ofObjectToReturn == typeof(Stream) || ofObjectToReturn == typeof(object))
+            if (
+                ofObjectToReturn == null
+                || ofObjectToReturn == typeof(Stream)
+                || ofObjectToReturn == typeof(object)
+            )
             {
                 return data.AsStream();
             }

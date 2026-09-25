@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="ItemPager.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Item pager, a class that provides state as items of a control are paginated.
      *
@@ -21,12 +20,19 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\ItemPager.uex' path='docs/doc[@for="ItemPager"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ItemPager
     {
-
         private MobileControl _control;
         private int _firstPageItemCount;
         private int _fullPageItemCount;
@@ -35,12 +41,16 @@ namespace System.Web.UI.MobileControls
         private int _lastPage;
 
         /// <include file='doc\ItemPager.uex' path='docs/doc[@for="ItemPager.ItemPager"]/*' />
-        public ItemPager()
-        {
-        }
+        public ItemPager() { }
 
         /// <include file='doc\ItemPager.uex' path='docs/doc[@for="ItemPager.ItemPager1"]/*' />
-        public ItemPager(ControlPager pager, MobileControl control, int itemCount, int itemsPerPage, int itemWeight)
+        public ItemPager(
+            ControlPager pager,
+            MobileControl control,
+            int itemCount,
+            int itemsPerPage,
+            int itemWeight
+        )
         {
             _control = control;
 
@@ -64,7 +74,10 @@ namespace System.Web.UI.MobileControls
                     pager.PageCount += numberOfPages - 1;
                     if (numberOfPages > 1)
                     {
-                        pager.RemainingWeight = Math.Max(0, pager.PageWeight - _lastPageItemCount * itemWeight);
+                        pager.RemainingWeight = Math.Max(
+                            0,
+                            pager.PageWeight - _lastPageItemCount * itemWeight
+                        );
                     }
                     _lastPage = _firstPage + numberOfPages - 1;
                 }
@@ -81,22 +94,22 @@ namespace System.Web.UI.MobileControls
                 {
                     _firstPageItemCount = pager.RemainingWeight / itemWeight;
                     int remainingItemCount = itemCount - _firstPageItemCount;
-                    _fullPageItemCount  = Math.Max(1, pager.PageWeight / itemWeight);
+                    _fullPageItemCount = Math.Max(1, pager.PageWeight / itemWeight);
                     int fullPageCount = remainingItemCount / _fullPageItemCount;
-                    _lastPageItemCount  = remainingItemCount % _fullPageItemCount;
-    
+                    _lastPageItemCount = remainingItemCount % _fullPageItemCount;
+
                     _firstPage = pager.PageCount;
-    
+
                     //  increment for first page
                     pager.PageCount++;
                     pager.RemainingWeight = pager.PageWeight;
-    
+
                     //  increment for full pages
                     pager.PageCount += fullPageCount;
-    
+
                     //  remove remaining weight for last page
                     pager.RemainingWeight -= _lastPageItemCount * itemWeight;
-    
+
                     //  correct if first page is empty
                     if (_firstPageItemCount == 0)
                     {
@@ -163,7 +176,5 @@ namespace System.Web.UI.MobileControls
                 }
             }
         }
-
     }
-
 }

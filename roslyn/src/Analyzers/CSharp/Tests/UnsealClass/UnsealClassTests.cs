@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpUnsealClassCodeFixProvider>;
+        CSharpUnsealClassCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUnsealClass)]
     public sealed class UnsealClassTests
@@ -21,61 +22,70 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
         [Fact]
         public async Task RemovedFromSealedClass()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 sealed class C
                 {
                 }
                 class D : {|CS0509:C|}
                 {
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                 }
                 class D : C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task RemovedFromSealedClassWithOtherModifiersPreserved()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public sealed unsafe class C
                 {
                 }
                 class D : {|CS0509:C|}
                 {
                 }
-                """, """
+                """,
+                """
                 public unsafe class C
                 {
                 }
                 class D : C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task RemovedFromSealedClassWithConstructedGeneric()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 sealed class C<T>
                 {
                 }
                 class D : {|CS0509:C<int>|}
                 {
                 }
-                """, """
+                """,
+                """
                 class C<T>
                 {
                 }
                 class D : C<int>
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -164,7 +174,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
         [Fact]
         public async Task RemovedFromAllPartialClassDeclarationsInSameFile()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public sealed partial class C
                 {
                 }
@@ -177,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
                 class D : {|CS0509:C|}
                 {
                 }
-                """, """
+                """,
+                """
                 public partial class C
                 {
                 }
@@ -190,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
                 class D : C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -236,14 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
 
             await new VerifyCS.Test
             {
-                TestState =
-                {
-                    Sources = { document1, document2, document3 }
-                },
-                FixedState =
-                {
-                    Sources = { fixedDocument1, fixedDocument2, fixedDocument3 }
-                }
+                TestState = { Sources = { document1, document2, document3 } },
+                FixedState = { Sources = { fixedDocument1, fixedDocument2, fixedDocument3 } },
             }.RunAsync();
         }
 
@@ -278,11 +285,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
                     AdditionalProjectReferences = { "Project2" },
                     AdditionalProjects =
                     {
-                        ["Project2", LanguageNames.VisualBasic] =
-                        {
-                            Sources = { vbDocument }
-                        }
-                    }
+                        ["Project2", LanguageNames.VisualBasic] = { Sources = { vbDocument } },
+                    },
                 },
                 FixedState =
                 {
@@ -290,12 +294,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UnsealClass
                     AdditionalProjectReferences = { "Project2" },
                     AdditionalProjects =
                     {
-                        ["Project2", LanguageNames.VisualBasic] =
-                        {
-                            Sources = { fixedVBDocument }
-                        }
-                    }
-                }
+                        ["Project2", LanguageNames.VisualBasic] = { Sources = { fixedVBDocument } },
+                    },
+                },
             }.RunAsync();
         }
     }

@@ -18,7 +18,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
         protected internal const string ApplyThirdPartyFixersId = nameof(ApplyThirdPartyFixersId);
         protected internal const string ApplyAllAnalyzerFixersId = nameof(ApplyAllAnalyzerFixersId);
 
-        internal static EnabledDiagnosticOptions AdjustDiagnosticOptions(EnabledDiagnosticOptions enabledDiagnostics, Func<string, bool> isFixIdEnabled)
+        internal static EnabledDiagnosticOptions AdjustDiagnosticOptions(
+            EnabledDiagnosticOptions enabledDiagnostics,
+            Func<string, bool> isFixIdEnabled
+        )
         {
             if (!isFixIdEnabled(ApplyAllAnalyzerFixersId))
             {
@@ -44,7 +47,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                     isFormatDocumentEnabled,
                     isApplyThirdPartyFixersEnabled,
                     enabledDiagnosticSets.ToImmutableArray(),
-                    new OrganizeUsingsSet(isRemoveUnusedUsingsEnabled, isSortUsingsEnabled));
+                    new OrganizeUsingsSet(isRemoveUnusedUsingsEnabled, isSortUsingsEnabled)
+                );
             }
             else
             {
@@ -69,7 +73,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeCleanup
                     enabledDiagnostics.FormatDocument,
                     enabledDiagnostics.RunThirdPartyFixers,
                     enabledDiagnosticSets.ToImmutableArray(),
-                    enabledDiagnostics.OrganizeUsings);
+                    enabledDiagnostics.OrganizeUsings
+                );
             }
         }
     }

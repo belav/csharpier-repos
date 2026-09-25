@@ -28,15 +28,14 @@
 
 using System.Reflection;
 
-[assembly: AssemblyTitle ("Mono C# Compiler")]
-[assembly: AssemblyProduct ("Mono C# Compiler")]
-[assembly: AssemblyCopyright ("2001 - 2009 Novell, Inc.")]
-[assembly: AssemblyCompany ("Novell, Inc.")]
-[assembly: AssemblyCulture ("")]
-[assembly: AssemblyConfiguration ("")]
+[assembly: AssemblyTitle("Mono C# Compiler")]
+[assembly: AssemblyProduct("Mono C# Compiler")]
+[assembly: AssemblyCopyright("2001 - 2009 Novell, Inc.")]
+[assembly: AssemblyCompany("Novell, Inc.")]
+[assembly: AssemblyCulture("")]
+[assembly: AssemblyConfiguration("")]
 
-[assembly: AssemblyVersion (Consts.MonoVersion)]
-[assembly: AssemblyFileVersion (Consts.FxFileVersion)]
+[assembly: AssemblyVersion(Consts.MonoVersion)]
+[assembly: AssemblyFileVersion(Consts.FxFileVersion)]
 
-[assembly: AssemblyDescription ("Mono C# Compiler")]
-
+[assembly: AssemblyDescription("Mono C# Compiler")]

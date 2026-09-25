@@ -17,9 +17,7 @@ namespace Microsoft.Cci
     internal sealed class TypeReferenceIndexer : ReferenceIndexerBase
     {
         internal TypeReferenceIndexer(EmitContext context)
-            : base(context)
-        {
-        }
+            : base(context) { }
 
         public override void Visit(CommonPEModuleBuilder module)
         {
@@ -31,40 +29,24 @@ namespace Microsoft.Cci
             this.Visit(module.GetSourceModuleAttributes());
         }
 
-        protected override void RecordAssemblyReference(IAssemblyReference assemblyReference)
-        {
-        }
+        protected override void RecordAssemblyReference(IAssemblyReference assemblyReference) { }
 
-        protected override void RecordFileReference(IFileReference fileReference)
-        {
-        }
+        protected override void RecordFileReference(IFileReference fileReference) { }
 
-        protected override void RecordModuleReference(IModuleReference moduleReference)
-        {
-        }
+        protected override void RecordModuleReference(IModuleReference moduleReference) { }
 
-        public override void Visit(IPlatformInvokeInformation platformInvokeInformation)
-        {
-        }
+        public override void Visit(IPlatformInvokeInformation platformInvokeInformation) { }
 
-        protected override void ProcessMethodBody(IMethodDefinition method)
-        {
-        }
+        protected override void ProcessMethodBody(IMethodDefinition method) { }
 
-        protected override void RecordTypeReference(ITypeReference typeReference)
-        {
-        }
+        protected override void RecordTypeReference(ITypeReference typeReference) { }
 
-        protected override void ReserveFieldToken(IFieldReference fieldReference)
-        {
-        }
+        protected override void ReserveFieldToken(IFieldReference fieldReference) { }
 
-        protected override void ReserveMethodToken(IMethodReference methodReference)
-        {
-        }
+        protected override void ReserveMethodToken(IMethodReference methodReference) { }
 
-        protected override void RecordTypeMemberReference(ITypeMemberReference typeMemberReference)
-        {
-        }
+        protected override void RecordTypeMemberReference(
+            ITypeMemberReference typeMemberReference
+        ) { }
     }
 }

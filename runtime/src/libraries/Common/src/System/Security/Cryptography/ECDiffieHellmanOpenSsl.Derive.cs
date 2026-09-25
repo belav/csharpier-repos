@@ -18,7 +18,8 @@ namespace System.Security.Cryptography
             ECDiffieHellmanPublicKey otherPartyPublicKey,
             HashAlgorithmName hashAlgorithm,
             byte[]? secretPrepend,
-            byte[]? secretAppend)
+            byte[]? secretAppend
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
@@ -30,7 +31,8 @@ namespace System.Security.Cryptography
                 hashAlgorithm,
                 secretPrepend,
                 secretAppend,
-                DeriveSecretAgreement);
+                DeriveSecretAgreement
+            );
         }
 
         public override byte[] DeriveKeyFromHmac(
@@ -38,7 +40,8 @@ namespace System.Security.Cryptography
             HashAlgorithmName hashAlgorithm,
             byte[]? hmacKey,
             byte[]? secretPrepend,
-            byte[]? secretAppend)
+            byte[]? secretAppend
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
             ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
@@ -51,10 +54,15 @@ namespace System.Security.Cryptography
                 hmacKey,
                 secretPrepend,
                 secretAppend,
-                DeriveSecretAgreement);
+                DeriveSecretAgreement
+            );
         }
 
-        public override byte[] DeriveKeyTls(ECDiffieHellmanPublicKey otherPartyPublicKey, byte[] prfLabel, byte[] prfSeed)
+        public override byte[] DeriveKeyTls(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            byte[] prfLabel,
+            byte[] prfSeed
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
             ArgumentNullException.ThrowIfNull(prfLabel);
@@ -66,11 +74,14 @@ namespace System.Security.Cryptography
                 otherPartyPublicKey,
                 prfLabel,
                 prfSeed,
-                DeriveSecretAgreement);
+                DeriveSecretAgreement
+            );
         }
 
         /// <inheritdoc />
-        public override byte[] DeriveRawSecretAgreement(ECDiffieHellmanPublicKey otherPartyPublicKey)
+        public override byte[] DeriveRawSecretAgreement(
+            ECDiffieHellmanPublicKey otherPartyPublicKey
+        )
         {
             ArgumentNullException.ThrowIfNull(otherPartyPublicKey);
             ThrowIfDisposed();
@@ -83,7 +94,10 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Get the secret agreement generated between two parties
         /// </summary>
-        private byte[]? DeriveSecretAgreement(ECDiffieHellmanPublicKey otherPartyPublicKey, IncrementalHash? hasher)
+        private byte[]? DeriveSecretAgreement(
+            ECDiffieHellmanPublicKey otherPartyPublicKey,
+            IncrementalHash? hasher
+        )
         {
             Debug.Assert(otherPartyPublicKey != null);
             Debug.Assert(_key is not null); // Callers should validate prior.
@@ -92,17 +106,17 @@ namespace System.Security.Cryptography
             // which will throw an OpenSslCryptoException if no private key is available
             ECParameters thisKeyExplicit = ExportExplicitParameters(true);
             bool thisIsNamed = Interop.Crypto.EcKeyHasCurveName(_key.Value);
-            ECDiffieHellmanOpenSslPublicKey? otherKey = otherPartyPublicKey as ECDiffieHellmanOpenSslPublicKey;
+            ECDiffieHellmanOpenSslPublicKey? otherKey =
+                otherPartyPublicKey as ECDiffieHellmanOpenSslPublicKey;
             bool disposeOtherKey = false;
 
             if (otherKey == null)
             {
                 disposeOtherKey = true;
 
-                ECParameters otherParameters =
-                    thisIsNamed
-                        ? otherPartyPublicKey.ExportParameters()
-                        : otherPartyPublicKey.ExportExplicitParameters();
+                ECParameters otherParameters = thisIsNamed
+                    ? otherPartyPublicKey.ExportParameters()
+                    : otherPartyPublicKey.ExportExplicitParameters();
 
                 otherKey = new ECDiffieHellmanOpenSslPublicKey(otherParameters);
             }
@@ -118,7 +132,10 @@ namespace System.Security.Cryptography
             {
                 if (otherKey.KeySize != KeySize)
                 {
-                    throw new ArgumentException(SR.Cryptography_ArgECDHKeySizeMismatch, nameof(otherPartyPublicKey));
+                    throw new ArgumentException(
+                        SR.Cryptography_ArgECDHKeySizeMismatch,
+                        nameof(otherPartyPublicKey)
+                    );
                 }
 
                 if (otherIsNamed == thisIsNamed)
@@ -145,9 +162,20 @@ namespace System.Security.Cryptography
                     theirKey = otherKey.DuplicateKeyHandle();
                 }
 
-                using (SafeEvpPKeyCtxHandle ctx = Interop.Crypto.EvpPKeyCtxCreate(ourKey, theirKey, out uint secretLengthU))
+                using (
+                    SafeEvpPKeyCtxHandle ctx = Interop.Crypto.EvpPKeyCtxCreate(
+                        ourKey,
+                        theirKey,
+                        out uint secretLengthU
+                    )
+                )
                 {
-                    if (ctx == null || ctx.IsInvalid || secretLengthU == 0 || secretLengthU > int.MaxValue)
+                    if (
+                        ctx == null
+                        || ctx.IsInvalid
+                        || secretLengthU == 0
+                        || secretLengthU > int.MaxValue
+                    )
                     {
                         throw Interop.Crypto.CreateOpenSslCryptographicException();
                     }

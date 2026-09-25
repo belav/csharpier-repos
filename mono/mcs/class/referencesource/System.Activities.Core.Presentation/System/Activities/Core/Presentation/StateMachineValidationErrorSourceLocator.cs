@@ -11,7 +11,10 @@ namespace System.Activities.Core.Presentation
 
     internal class StateMachineValidationErrorSourceLocator : IValidationErrorSourceLocator
     {
-        public List<object> FindSourceDetailFromActivity(Activity errorSource, object errorSourceDetail)
+        public List<object> FindSourceDetailFromActivity(
+            Activity errorSource,
+            object errorSourceDetail
+        )
         {
             if (errorSourceDetail == null)
             {
@@ -67,7 +70,10 @@ namespace System.Activities.Core.Presentation
             return path;
         }
 
-        private static List<object> FindDescendentFromStateMachine(StateMachine machine, object descendent)
+        private static List<object> FindDescendentFromStateMachine(
+            StateMachine machine,
+            object descendent
+        )
         {
             List<object> path = new List<object>();
             path.Add(machine);
@@ -147,6 +153,6 @@ namespace System.Activities.Core.Presentation
 
             path.Add(descendent);
             return path;
-        }       
+        }
     }
 }

@@ -15,15 +15,18 @@ namespace System.IdentityModel
     {
 #pragma warning disable 1591
         public const string Namespace = "http://www.w3.org/2000/09/xmldsig#";
-        public const string Prefix    = "ds";
+        public const string Prefix = "ds";
 
         public static class Algorithms
         {
             // Canonicalization.
             public const string ExcC14N = "http://www.w3.org/2001/10/xml-exc-c14n#";
-            public const string ExcC14NWithComments = "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
+            public const string ExcC14NWithComments =
+                "http://www.w3.org/2001/10/xml-exc-c14n#WithComments";
+
             // Message Digest
             public const string Sha1 = Namespace + "sha1";
+
             // Enveloped Signature.
             public const string EnvelopedSignature = Namespace + "enveloped-signature";
         }

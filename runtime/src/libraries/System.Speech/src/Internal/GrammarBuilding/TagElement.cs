@@ -62,7 +62,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return tag;
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             // Create the children elements
             IItem item = parent as IItem;
@@ -94,10 +99,7 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal override string DebugSummary
         {
-            get
-            {
-                return base.DebugSummary + " {" + _value + "}";
-            }
+            get { return base.DebugSummary + " {" + _value + "}"; }
         }
 
         #endregion

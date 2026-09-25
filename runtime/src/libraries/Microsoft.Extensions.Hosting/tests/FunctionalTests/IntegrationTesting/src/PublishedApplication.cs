@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.Extensions.Hosting.IntegrationTesting
 {
-    public class PublishedApplication: IDisposable
+    public class PublishedApplication : IDisposable
     {
         private readonly ILogger _logger;
 
@@ -25,7 +25,8 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 () => Directory.Delete(Path, true),
                 e => _logger.LogWarning($"Failed to delete directory : {e.Message}"),
                 retryCount: 3,
-                retryDelayMilliseconds: 100);
+                retryDelayMilliseconds: 100
+            );
         }
     }
 }

@@ -1,16 +1,14 @@
 using System;
 
 [AttributeUsage(AttributeTargets.All)]
-public class TestAttribute: Attribute
-{
-}
+public class TestAttribute : Attribute { }
 
 [type: Obsolete]
-
-public class C {
+public class C
+{
     [return: Test]
     [Test]
-    void Method () {}
-    
-    public static void Main () {}
+    void Method() { }
+
+    public static void Main() { }
 }

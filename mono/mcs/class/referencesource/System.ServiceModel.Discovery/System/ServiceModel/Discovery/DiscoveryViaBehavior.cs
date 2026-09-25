@@ -24,11 +24,7 @@ namespace System.ServiceModel.Discovery
 
         public Uri Via
         {
-            get
-            {
-                return this.via;
-            }
-
+            get { return this.via; }
             set
             {
                 if (value == null)
@@ -40,11 +36,15 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint endpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime)
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint endpoint,
+            ClientRuntime clientRuntime
+        )
         {
             if (clientRuntime == null)
             {
@@ -54,14 +54,14 @@ namespace System.ServiceModel.Discovery
             clientRuntime.Via = Via;
         }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
-            // no op on the service side. 
+            // no op on the service side.
         }
 
-        void IEndpointBehavior.Validate(ServiceEndpoint endpoint)
-        {
-        }
+        void IEndpointBehavior.Validate(ServiceEndpoint endpoint) { }
     }
 }
-

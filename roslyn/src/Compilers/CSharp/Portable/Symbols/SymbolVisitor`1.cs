@@ -12,9 +12,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public virtual TResult Visit(Symbol symbol)
         {
-            return (object)symbol == null
-                ? default(TResult)
-                : symbol.Accept(this);
+            return (object)symbol == null ? default(TResult) : symbol.Accept(this);
         }
 
         public virtual TResult DefaultVisit(Symbol symbol)

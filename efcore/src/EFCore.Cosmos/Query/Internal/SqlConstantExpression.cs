@@ -24,7 +24,10 @@ public class SqlConstantExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SqlConstantExpression(ConstantExpression constantExpression, CoreTypeMapping? typeMapping)
+    public SqlConstantExpression(
+        ConstantExpression constantExpression,
+        CoreTypeMapping? typeMapping
+    )
         : base(constantExpression.Type, typeMapping)
     {
         _constantExpression = constantExpression;
@@ -36,8 +39,7 @@ public class SqlConstantExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object? Value
-        => _constantExpression.Value;
+    public virtual object? Value => _constantExpression.Value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,8 +47,8 @@ public class SqlConstantExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual SqlExpression ApplyTypeMapping(CoreTypeMapping? typeMapping)
-        => new SqlConstantExpression(_constantExpression, typeMapping ?? TypeMapping);
+    public virtual SqlExpression ApplyTypeMapping(CoreTypeMapping? typeMapping) =>
+        new SqlConstantExpression(_constantExpression, typeMapping ?? TypeMapping);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -54,8 +56,7 @@ public class SqlConstantExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,12 +64,10 @@ public class SqlConstantExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override void Print(ExpressionPrinter expressionPrinter)
-        => Print(Value, expressionPrinter);
+    protected override void Print(ExpressionPrinter expressionPrinter) =>
+        Print(Value, expressionPrinter);
 
-    private void Print(
-        object? value,
-        ExpressionPrinter expressionPrinter)
+    private void Print(object? value, ExpressionPrinter expressionPrinter)
     {
         if (value is IEnumerable enumerable and not (string or byte[]))
         {
@@ -95,8 +94,7 @@ public class SqlConstantExpression : SqlExpression
     private JToken? GenerateJToken(object? value, CoreTypeMapping? typeMapping)
     {
         var mappingClrType = typeMapping?.ClrType.UnwrapNullableType() ?? Type;
-        if (value?.GetType().IsInteger() == true
-            && mappingClrType.IsEnum)
+        if (value?.GetType().IsInteger() == true && mappingClrType.IsEnum)
         {
             value = Enum.ToObject(mappingClrType, value);
         }
@@ -121,15 +119,16 @@ public class SqlConstantExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is SqlConstantExpression sqlConstantExpression
-                && Equals(sqlConstantExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is SqlConstantExpression sqlConstantExpression && Equals(sqlConstantExpression)
+        );
 
-    private bool Equals(SqlConstantExpression sqlConstantExpression)
-        => base.Equals(sqlConstantExpression)
-            && (Value?.Equals(sqlConstantExpression.Value) ?? sqlConstantExpression.Value == null);
+    private bool Equals(SqlConstantExpression sqlConstantExpression) =>
+        base.Equals(sqlConstantExpression)
+        && (Value?.Equals(sqlConstantExpression.Value) ?? sqlConstantExpression.Value == null);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -137,6 +136,5 @@ public class SqlConstantExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Value);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Value);
 }

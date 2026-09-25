@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Compilers.CSharp.UnitTests
 {
     public class NameAttributeValueParsingTests : ParsingTests
     {
-        public NameAttributeValueParsingTests(ITestOutputHelper output) : base(output) { }
+        public NameAttributeValueParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions options)
         {

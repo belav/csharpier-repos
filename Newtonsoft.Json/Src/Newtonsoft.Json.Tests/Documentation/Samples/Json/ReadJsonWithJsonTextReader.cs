@@ -45,7 +45,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Json
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
                'CPU': 'Intel',
                'PSU': '500W',
                'Drives': [

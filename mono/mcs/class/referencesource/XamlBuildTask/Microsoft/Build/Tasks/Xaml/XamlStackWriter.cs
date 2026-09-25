@@ -8,9 +8,9 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using System.Runtime;
     using System.Text;
     using System.Xaml;
-    using System.Runtime;
     using XamlBuildTask;
 
     internal enum XamlStackFrameType
@@ -18,7 +18,7 @@ namespace Microsoft.Build.Tasks.Xaml
         None,
         Object,
         GetObject,
-        Member
+        Member,
     }
 
     internal struct XamlStackFrame
@@ -102,15 +102,20 @@ namespace Microsoft.Build.Tasks.Xaml
         }
     }
 
-
     internal class XamlStackWriter : XamlWriter
     {
         List<XamlStackFrame> _stack = new List<XamlStackFrame>();
 
         // the stack writer does not care about schema context
-        public override XamlSchemaContext SchemaContext { get { return null; } }
+        public override XamlSchemaContext SchemaContext
+        {
+            get { return null; }
+        }
 
-        public int Depth { get { return _stack.Count; } }
+        public int Depth
+        {
+            get { return _stack.Count; }
+        }
 
         public XamlStackFrame TopFrame
         {
@@ -126,7 +131,6 @@ namespace Microsoft.Build.Tasks.Xaml
             return _stack[ndx - 1];
         }
 
-
         public override void WriteEndMember()
         {
             if (TopFrame.FrameType != XamlStackFrameType.Member)
@@ -138,8 +142,10 @@ namespace Microsoft.Build.Tasks.Xaml
 
         public override void WriteEndObject()
         {
-            if (TopFrame.FrameType != XamlStackFrameType.Object &&
-                TopFrame.FrameType != XamlStackFrameType.GetObject)
+            if (
+                TopFrame.FrameType != XamlStackFrameType.Object
+                && TopFrame.FrameType != XamlStackFrameType.GetObject
+            )
             {
                 throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnexpectedXaml));
             }
@@ -161,7 +167,9 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (property == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnexpectedXamlValueNull("property")));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UnexpectedXamlValueNull("property"))
+                );
             }
             SetTopFrame(property);
             _stack.Add(XamlStackFrame.ForMember(property));
@@ -171,7 +179,9 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (type == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnexpectedXamlValueNull("type")));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.UnexpectedXamlValueNull("type"))
+                );
             }
             SetTopFrame();
             _stack.Add(XamlStackFrame.ForObject(type));
@@ -197,9 +207,13 @@ namespace Microsoft.Build.Tasks.Xaml
 
         private void SetTopFrame(XamlMember member)
         {
-            if (Depth > 0 &&
-                (TopFrame.FrameType == XamlStackFrameType.GetObject ||
-                 TopFrame.FrameType == XamlStackFrameType.Object))
+            if (
+                Depth > 0
+                && (
+                    TopFrame.FrameType == XamlStackFrameType.GetObject
+                    || TopFrame.FrameType == XamlStackFrameType.Object
+                )
+            )
             {
                 TopFrame.Set(member);
             }

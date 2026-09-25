@@ -28,15 +28,21 @@ public class TestOutputLogger : ILogger
         return true;
     }
 
-    public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+    public void Log<TState>(
+        LogLevel logLevel,
+        EventId eventId,
+        TState state,
+        Exception? exception,
+        Func<TState, Exception?, string> formatter
+    )
     {
-        _testOutputHelper.WriteLine($"[{DateTime.UtcNow:hh:mm:ss.fff}][{logLevel}]{formatter(state, exception)}");
+        _testOutputHelper.WriteLine(
+            $"[{DateTime.UtcNow:hh:mm:ss.fff}][{logLevel}]{formatter(state, exception)}"
+        );
     }
 
     private sealed class NoOpDisposable : IDisposable
     {
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

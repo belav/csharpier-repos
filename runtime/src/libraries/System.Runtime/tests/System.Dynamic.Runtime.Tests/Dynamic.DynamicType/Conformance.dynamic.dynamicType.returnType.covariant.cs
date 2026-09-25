@@ -25,10 +25,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             }
         }
 
-        protected abstract object this[string s]
-        {
-            get;
-        }
+        protected abstract object this[string s] { get; }
 
         internal virtual List<object> this[bool b]
         {
@@ -39,30 +36,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             }
         }
 
-        public abstract Dictionary<object, Dictionary<string, List<object>>> this[char c]
-        {
-            get;
-        }
+        public abstract Dictionary<object, Dictionary<string, List<object>>> this[char c] { get; }
 
         public virtual object[] this[float f]
         {
             get
             {
                 Test.Called = "base";
-                return new object[]
-                {
-                }
-
-                ;
+                return new object[] { };
             }
         }
 
         public virtual object this[decimal d]
         {
-            get
-            {
-                return new object();
-            }
+            get { return new object(); }
         }
     }
 
@@ -202,12 +189,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             get
             {
                 Test.Called = "2derivedget";
-                return new object[]
-                {
-                3, 4
-                }
-
-                ;
+                return new object[] { 3, 4 };
             }
         }
 
@@ -284,6 +266,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -292,7 +275,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derive1Dynamic der1 = new Derive1Dynamic();
             Derive2Object der2 = new Derive2Object();
             /// =============================================
@@ -389,8 +373,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.indexer003.indexer003
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -410,7 +392,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseGet";
                 return storage;
             }
-
             set
             {
                 Test.Called = "baseSet";
@@ -428,7 +409,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "DerGet";
                 return storage;
             }
-
             set
             {
                 Test.Called = "DerSet";
@@ -446,7 +426,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "Der2Get";
                 return storage;
             }
-
             set
             {
                 Test.Called = "Der2Set";
@@ -458,6 +437,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -466,7 +446,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derive1Dynamic der = new Derive1Dynamic();
             test++;
             //test the right method was called
@@ -503,8 +484,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.integeregererface001.integeregererface001
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -520,31 +499,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         //methods
         dynamic RetObj();
         List<dynamic> RetListObj();
-        //properties
-        dynamic Prop1
-        {
-            get;
-            set;
-        }
 
-        Dictionary<string, dynamic> Prop2
-        {
-            get;
-            set;
-        }
+        //properties
+        dynamic Prop1 { get; set; }
+
+        Dictionary<string, dynamic> Prop2 { get; set; }
 
         //indexers
-        dynamic this[float f]
-        {
-            get;
-            set;
-        }
+        dynamic this[float f] { get; set; }
 
-        Stack<dynamic> this[string s]
-        {
-            get;
-            set;
-        }
+        Stack<dynamic> this[string s] { get; set; }
     }
 
     public class RetObjBase : IRetObj
@@ -558,12 +522,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public virtual List<object> RetListObj()
         {
             Test.Called = "baseRetListObj";
-            return new List<object>()
-            {
-            2
-            }
-
-            ;
+            return new List<object>() { 2 };
         }
 
         public virtual object Prop1
@@ -573,11 +532,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseProp1Get";
                 return 1;
             }
-
-            set
-            {
-                Test.Called = "baseProp1Set";
-            }
+            set { Test.Called = "baseProp1Set"; }
         }
 
         public virtual Dictionary<string, object> Prop2
@@ -587,11 +542,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseProp2Get";
                 return new Dictionary<string, object>();
             }
-
-            set
-            {
-                Test.Called = "baseProp2Set";
-            }
+            set { Test.Called = "baseProp2Set"; }
         }
 
         public virtual object this[float f]
@@ -601,11 +552,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseindex1Get";
                 return "";
             }
-
-            set
-            {
-                Test.Called = "baseindex1Set";
-            }
+            set { Test.Called = "baseindex1Set"; }
         }
 
         public virtual Stack<object> this[string s]
@@ -615,11 +562,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseindex2Get";
                 return new Stack<object>();
             }
-
-            set
-            {
-                Test.Called = "baseindex2Set";
-            }
+            set { Test.Called = "baseindex2Set"; }
         }
     }
 
@@ -634,12 +577,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public override List<dynamic> RetListObj()
         {
             Test.Called = "derivedRetListObj";
-            return new List<dynamic>()
-            {
-            3
-            }
-
-            ;
+            return new List<dynamic>() { 3 };
         }
 
         public override dynamic Prop1
@@ -649,11 +587,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "derivedProp1Get";
                 return 1;
             }
-
-            set
-            {
-                Test.Called = "derivedProp1Set";
-            }
+            set { Test.Called = "derivedProp1Set"; }
         }
 
         public override Dictionary<string, dynamic> Prop2
@@ -663,11 +597,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "derivedProp2Get";
                 return new Dictionary<string, dynamic>();
             }
-
-            set
-            {
-                Test.Called = "derivedProp2Set";
-            }
+            set { Test.Called = "derivedProp2Set"; }
         }
 
         public override dynamic this[float f]
@@ -677,11 +607,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "derivedindex1Get";
                 return "";
             }
-
-            set
-            {
-                Test.Called = "derivedindex1Set";
-            }
+            set { Test.Called = "derivedindex1Set"; }
         }
 
         public override Stack<dynamic> this[string s]
@@ -693,17 +619,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 ss.Push(1);
                 return ss;
             }
-
-            set
-            {
-                Test.Called = "derivedindex2Set";
-            }
+            set { Test.Called = "derivedindex2Set"; }
         }
     }
 
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -712,7 +635,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             ///calling off the class object
             RetObjDerived der = new RetObjDerived();
             //---
@@ -898,8 +822,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.integeregererface003.integeregererface003
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -915,31 +837,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         //methods
         dynamic RetObj();
         List<dynamic> RetListObj();
-        //properties
-        dynamic Prop1
-        {
-            get;
-            set;
-        }
 
-        Dictionary<string, dynamic> Prop2
-        {
-            get;
-            set;
-        }
+        //properties
+        dynamic Prop1 { get; set; }
+
+        Dictionary<string, dynamic> Prop2 { get; set; }
 
         //indexers
-        dynamic this[float f]
-        {
-            get;
-            set;
-        }
+        dynamic this[float f] { get; set; }
 
-        Stack<dynamic> this[string s]
-        {
-            get;
-            set;
-        }
+        Stack<dynamic> this[string s] { get; set; }
     }
 
     public class RetObjBase : IRetObj
@@ -953,12 +860,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         List<object> IRetObj.RetListObj()
         {
             Test.Called = "baseRetListObj";
-            return new List<object>()
-            {
-            2
-            }
-
-            ;
+            return new List<object>() { 2 };
         }
 
         object IRetObj.Prop1
@@ -968,11 +870,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseProp1Get";
                 return 1;
             }
-
-            set
-            {
-                Test.Called = "baseProp1Set";
-            }
+            set { Test.Called = "baseProp1Set"; }
         }
 
         Dictionary<string, object> IRetObj.Prop2
@@ -982,11 +880,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseProp2Get";
                 return new Dictionary<string, object>();
             }
-
-            set
-            {
-                Test.Called = "baseProp2Set";
-            }
+            set { Test.Called = "baseProp2Set"; }
         }
 
         object IRetObj.this[float f]
@@ -996,11 +890,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseindex1Get";
                 return "";
             }
-
-            set
-            {
-                Test.Called = "baseindex1Set";
-            }
+            set { Test.Called = "baseindex1Set"; }
         }
 
         Stack<object> IRetObj.this[string s]
@@ -1010,17 +900,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseindex2Get";
                 return new Stack<object>();
             }
-
-            set
-            {
-                Test.Called = "baseindex2Set";
-            }
+            set { Test.Called = "baseindex2Set"; }
         }
     }
 
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1029,7 +916,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             ///calling off the class object
             RetObjBase bas = new RetObjBase();
             //calling off the interface object
@@ -1127,8 +1015,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.integeregererface004.integeregererface004
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -1184,7 +1070,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derived der = new Derived();
             test++;
             var x = der.Method();
@@ -1219,8 +1106,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.method001.method001
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -1240,6 +1125,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         }
 
         protected abstract object RetObject2();
+
         internal virtual List<object> RetListObject()
         {
             Test.Called = "base";
@@ -1247,14 +1133,10 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         }
 
         public abstract Dictionary<object, Dictionary<string, List<object>>> RetComplex();
+
         public virtual object[] RetArray()
         {
-            return new object[]
-            {
-            1
-            }
-
-            ;
+            return new object[] { 1 };
         }
 
         public virtual object NewMethod()
@@ -1379,12 +1261,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public override object[] RetArray()
         {
             Test.Called = "2derived";
-            return new object[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            return new object[] { 1, 2, 3 };
         }
 
         public override object RetObject()
@@ -1445,6 +1322,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1453,7 +1331,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derive1Dynamic der1 = new Derive1Dynamic();
             Derive2Object der2 = new Derive2Object();
             /// =============================================
@@ -1550,8 +1429,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.method003.method003
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -1591,6 +1468,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1599,7 +1477,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derive1Dynamic der = new Derive1Dynamic();
             test++;
             //test the right method was called
@@ -1634,8 +1513,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.method004.method004
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -1654,7 +1531,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             return default(T);
         }
 
-        public virtual T RetObjectConstr<U>(U u) where U : T
+        public virtual T RetObjectConstr<U>(U u)
+            where U : T
         {
             Test.Called = "baseConstr";
             return default(U);
@@ -1685,12 +1563,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         internal override List<dynamic> RetListObject<U>()
         {
             Test.Called = "der1";
-            return new List<dynamic>()
-            {
-            1
-            }
-
-            ;
+            return new List<dynamic>() { 1 };
         }
 
         public override Dictionary<dynamic, Dictionary<U, List<dynamic>>> RetComplex<U>()
@@ -1717,12 +1590,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         internal override List<object> RetListObject<U>()
         {
             Test.Called = "der2";
-            return new List<object>()
-            {
-            1
-            }
-
-            ;
+            return new List<object>() { 1 };
         }
 
         public override Dictionary<object, Dictionary<U, List<object>>> RetComplex<U>()
@@ -1735,6 +1603,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -1743,7 +1612,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             // -----
             // Instantiate the dynamic class
             // ---=
@@ -1837,8 +1707,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.property001.property001
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -1860,10 +1728,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             }
         }
 
-        protected abstract object Prop2
-        {
-            get;
-        }
+        protected abstract object Prop2 { get; }
 
         internal virtual List<object> Prop3
         {
@@ -1874,30 +1739,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             }
         }
 
-        public abstract Dictionary<object, Dictionary<string, List<object>>> Prop4
-        {
-            get;
-        }
+        public abstract Dictionary<object, Dictionary<string, List<object>>> Prop4 { get; }
 
         public virtual object Prop5
         {
-            get
-            {
-                return new object();
-            }
+            get { return new object(); }
         }
 
         public virtual object[] Prop6
         {
-            get
-            {
-                return new object[]
-                {
-                1, 2, 3
-                }
-
-                ;
-            }
+            get { return new object[] { 1, 2, 3 }; }
         }
     }
 
@@ -2037,12 +1888,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             get
             {
                 Test.Called = "2derivedget";
-                return new object[]
-                {
-                1, 2
-                }
-
-                ;
+                return new object[] { 1, 2 };
             }
         }
 
@@ -2119,6 +1965,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2127,7 +1974,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derive1Dynamic der1 = new Derive1Dynamic();
             Derive2Object der2 = new Derive2Object();
             /// =============================================
@@ -2224,8 +2072,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.property003.property003
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -2245,7 +2091,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "baseGet";
                 return storage;
             }
-
             set
             {
                 Test.Called = "baseSet";
@@ -2263,7 +2108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "DerGet";
                 return storage;
             }
-
             set
             {
                 Test.Called = "DerSet";
@@ -2281,7 +2125,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called = "Der2Get";
                 return storage;
             }
-
             set
             {
                 Test.Called = "Der2Set";
@@ -2293,6 +2136,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2301,7 +2145,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derive1Dynamic der = new Derive1Dynamic();
             test++;
             //test the right method was called
@@ -2338,8 +2183,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.usage001.usage001
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -2361,11 +2204,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public virtual List<object> MethodGeneric()
         {
             Test.Called += "BaseML";
-            return new List<object>()
-            {
-            new Base()}
-
-            ;
+            return new List<object>() { new Base() };
         }
 
         public virtual List<object> this[int x]
@@ -2373,17 +2212,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             get
             {
                 Test.Called += "BaseGetIL";
-                return new List<object>()
-                {
-                new Base()}
-
-                ;
+                return new List<object>() { new Base() };
             }
-
-            set
-            {
-                Test.Called += "BaseSetIL";
-            }
+            set { Test.Called += "BaseSetIL"; }
         }
 
         public virtual object[] Prop
@@ -2391,17 +2222,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             get
             {
                 Test.Called += "BaseGetP";
-                return new object[]
-                {
-                new Base()}
-
-                ;
+                return new object[] { new Base() };
             }
-
-            set
-            {
-                Test.Called += "BaseSetP";
-            }
+            set { Test.Called += "BaseSetP"; }
         }
 
         public virtual object Prop2
@@ -2411,11 +2234,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "BaseGetP2";
                 return new Base();
             }
-
-            set
-            {
-                Test.Called += "BaseSetP2";
-            }
+            set { Test.Called += "BaseSetP2"; }
         }
     }
 
@@ -2430,11 +2249,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         public override List<dynamic> MethodGeneric()
         {
             Test.Called += "DerivedML";
-            return new List<dynamic>()
-            {
-            new Derived()}
-
-            ;
+            return new List<dynamic>() { new Derived() };
         }
 
         public override List<dynamic> this[int x]
@@ -2442,17 +2257,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             get
             {
                 Test.Called += "DerivedGetIL";
-                return new List<dynamic>()
-                {
-                new Derived()}
-
-                ;
+                return new List<dynamic>() { new Derived() };
             }
-
-            set
-            {
-                Test.Called += "DerivedSetIL";
-            }
+            set { Test.Called += "DerivedSetIL"; }
         }
 
         public override dynamic[] Prop
@@ -2460,17 +2267,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             get
             {
                 Test.Called += "DerivedGetP";
-                return new dynamic[]
-                {
-                new Derived()}
-
-                ;
+                return new dynamic[] { new Derived() };
             }
-
-            set
-            {
-                Test.Called += "DerivedSetP";
-            }
+            set { Test.Called += "DerivedSetP"; }
         }
 
         public override dynamic Prop2
@@ -2480,17 +2279,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "DerivedGetP2";
                 return new Derived();
             }
-
-            set
-            {
-                Test.Called += "DerivedSetP2";
-            }
+            set { Test.Called += "DerivedSetP2"; }
         }
     }
 
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2499,7 +2295,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derived der = new Derived();
             test++;
             Test.Called = string.Empty;
@@ -2568,8 +2365,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.usage003.usage003
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -2588,11 +2383,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "BaseGetP";
                 return new Base();
             }
-
-            set
-            {
-                Test.Called += "BaseSetP";
-            }
+            set { Test.Called += "BaseSetP"; }
         }
     }
 
@@ -2605,17 +2396,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "DerivedGetP";
                 return new Derived();
             }
-
-            set
-            {
-                Test.Called += "DerivedSetP";
-            }
+            set { Test.Called += "DerivedSetP"; }
         }
     }
 
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2624,40 +2412,25 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derived d = new Derived();
             //implicitly typed array initializers
             test++;
             Test.Called = string.Empty;
-            var x = new[]
-            {
-            d.Prop
-            }
-
-            ;
+            var x = new[] { d.Prop };
             var y = x[0].Prop;
             if (Test.Called == "DerivedGetPDerivedGetP")
                 success++;
             test++;
             Base b = new Base();
             Test.Called = string.Empty;
-            var z = new[]
-            {
-            d.Prop, b.Prop
-            }
-
-            ;
+            var z = new[] { d.Prop, b.Prop };
             var t = x[0].Prop;
             if (Test.Called == "DerivedGetPBaseGetPDerivedGetP")
                 success++;
             //member initializer of anon type
-            var a1 = new
-            {
-                d = d.Prop,
-                b = b.Prop
-            }
-
-            ;
+            var a1 = new { d = d.Prop, b = b.Prop };
             test++;
             Test.Called = string.Empty;
             var r1 = a1.d.Prop;
@@ -2668,8 +2441,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.usage004.usage004
 {
@@ -2691,11 +2462,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "BaseGetI";
                 return new Base();
             }
-
-            set
-            {
-                Test.Called += "BaseSetI";
-            }
+            set { Test.Called += "BaseSetI"; }
         }
     }
 
@@ -2708,17 +2475,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "DerivedGetI";
                 return new Derived();
             }
-
-            set
-            {
-                Test.Called += "DerivedSetI";
-            }
+            set { Test.Called += "DerivedSetI"; }
         }
     }
 
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2727,7 +2491,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derived d = new Derived();
             //is
             test++;
@@ -2752,8 +2517,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.usage005.usage005
 {
@@ -2781,11 +2544,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "BaseGetI";
                 return new Base();
             }
-
-            set
-            {
-                Test.Called += "BaseSetI";
-            }
+            set { Test.Called += "BaseSetI"; }
         }
     }
 
@@ -2798,17 +2557,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
                 Test.Called += "DerivedGetI";
                 return new Derived();
             }
-
-            set
-            {
-                Test.Called += "DerivedSetI";
-            }
+            set { Test.Called += "DerivedSetI"; }
         }
     }
 
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2817,7 +2573,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Base b = new Derived();
             //ext method on object
             test++;
@@ -2843,8 +2600,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.usage006.usage006
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -2867,7 +2622,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
             return new Derived();
         }
 
-        public static implicit operator int (Derived d)
+        public static implicit operator int(Derived d)
         {
             return 10;
         }
@@ -2876,6 +2631,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Test
     {
         public static string Called;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -2884,7 +2640,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derived d = new Derived();
             //Conversion is applied
             test++;
@@ -2897,8 +2654,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.errorverifier.errorverifier
 {
@@ -3019,6 +2774,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
         RefReadonlyLocal, // Cannot pass '{0}' as a ref or out argument because it is read-only
         ReturnNotLValue, // Cannot modify the return value of '{0}' because it is not a variable
         BadArgExtraRef, // Argument '{0}' should not be passed with the '{1}' keyword
+
         // DelegateOnConditional, // Cannot create delegate with '{0}' because it has a Conditional attribute (REMOVED)
         BadArgRef, // Argument '{0}' must be passed with the '{1}' keyword
         AssgReadonly2, // Members of readonly field '{0}' cannot be modified (except in a constructor or a variable initializer)
@@ -3045,44 +2801,59 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public enum RuntimeErrorId
     {
         None,
+
         // RuntimeBinderInternalCompilerException
         InternalCompilerError, // An unexpected exception occurred while binding a dynamic operation
+
         // ArgumentException
         BindRequireArguments, // Cannot bind call with no calling object
+
         // RuntimeBinderException
         BindCallFailedOverloadResolution, // Overload resolution failed
+
         // ArgumentException
         BindBinaryOperatorRequireTwoArguments, // Binary operators must be invoked with two arguments
+
         // ArgumentException
         BindUnaryOperatorRequireOneArgument, // Unary operators must be invoked with one argument
+
         // RuntimeBinderException
         BindPropertyFailedMethodGroup, // The name '{0}' is bound to a method and cannot be used like a property
+
         // RuntimeBinderException
         BindPropertyFailedEvent, // The event '{0}' can only appear on the left hand side of += or -=
+
         // RuntimeBinderException
         BindInvokeFailedNonDelegate, // Cannot invoke a non-delegate type
+
         // ArgumentException
         BindImplicitConversionRequireOneArgument, // Implicit conversion takes exactly one argument
+
         // ArgumentException
         BindExplicitConversionRequireOneArgument, // Explicit conversion takes exactly one argument
+
         // ArgumentException
         BindBinaryAssignmentRequireTwoArguments, // Binary operators cannot be invoked with one argument
+
         // RuntimeBinderException
         BindBinaryAssignmentFailedNullReference, // Cannot perform member assignment on a null reference
+
         // RuntimeBinderException
         NullReferenceOnMemberException, // Cannot perform runtime binding on a null reference
+
         // RuntimeBinderException
         BindCallToConditionalMethod, // Cannot dynamically invoke method '{0}' because it has a Conditional attribute
+
         // RuntimeBinderException
         BindToVoidMethodButExpectResult, // Cannot implicitly convert type 'void' to 'object'
+
         // EE?
         EmptyDynamicView, // No further information on this object could be discovered
+
         // MissingMemberException
         GetValueonWriteOnlyProperty, // Write Only properties are not supported
     }
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.usage007.usage007
 {
@@ -3096,6 +2867,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Base
     {
         protected int storage = 4;
+
         public virtual object M()
         {
             return 1;
@@ -3103,33 +2875,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public virtual object P
         {
-            get
-            {
-                return storage * 2;
-            }
-
-            set
-            {
-                storage = (int)value * 2;
-            }
+            get { return storage * 2; }
+            set { storage = (int)value * 2; }
         }
 
-        public virtual object P2
-        {
-            get;
-            set;
-        }
+        public virtual object P2 { get; set; }
 
         public virtual object this[int x]
         {
-            get
-            {
-                return null;
-            }
-
-            set
-            {
-            }
+            get { return null; }
+            set { }
         }
     }
 
@@ -3142,62 +2897,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public override dynamic P
         {
-            get
-            {
-                return storage;
-            }
-
-            set
-            {
-                storage = (int)value;
-            }
+            get { return storage; }
+            set { storage = (int)value; }
         }
 
         private dynamic _P2_Storage;
         public override dynamic P2
         {
-            get
-            {
-                return _P2_Storage;
-            }
-
-            set
-            {
-                _P2_Storage = value;
-            }
+            get { return _P2_Storage; }
+            set { _P2_Storage = value; }
         }
 
         public override dynamic this[int x]
         {
-            get
-            {
-                return x;
-            }
-
-            set
-            {
-            }
+            get { return x; }
+            set { }
         }
 
         //Some operators
         public static dynamic operator +(Derived d, int x)
         {
-            return new Derived()
-            {
-                P = d.P + x
-            }
-
-            ;
+            return new Derived() { P = d.P + x };
         }
 
         public static Derived operator ++(Derived d)
         {
-            return new Derived()
-            {
-                P = d.P + 1
-            }
-
-            ;
+            return new Derived() { P = d.P + 1 };
         }
     }
 
@@ -3227,8 +2952,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.covariant.usage008.usage008
 {
     // <Title>Covariant return type for dynamic/object</Title>
@@ -3241,6 +2964,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
     public class Base
     {
         protected int storage = 4;
+
         public virtual object M()
         {
             return 1;
@@ -3248,33 +2972,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public virtual object P
         {
-            get
-            {
-                return storage * 2;
-            }
-
-            set
-            {
-                storage = (int)value * 2;
-            }
+            get { return storage * 2; }
+            set { storage = (int)value * 2; }
         }
 
-        public virtual object P2
-        {
-            get;
-            set;
-        }
+        public virtual object P2 { get; set; }
 
         public virtual object this[int x]
         {
-            get
-            {
-                return null;
-            }
-
-            set
-            {
-            }
+            get { return null; }
+            set { }
         }
 
         public static object operator &(Base b, object o)
@@ -3292,62 +2999,32 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public override dynamic P
         {
-            get
-            {
-                return storage;
-            }
-
-            set
-            {
-                storage = (int)value;
-            }
+            get { return storage; }
+            set { storage = (int)value; }
         }
 
         private dynamic _P2_Storage;
         public override dynamic P2
         {
-            get
-            {
-                return _P2_Storage;
-            }
-
-            set
-            {
-                _P2_Storage = value;
-            }
+            get { return _P2_Storage; }
+            set { _P2_Storage = value; }
         }
 
         public override dynamic this[int x]
         {
-            get
-            {
-                return x;
-            }
-
-            set
-            {
-            }
+            get { return x; }
+            set { }
         }
 
         //Some operators
         public static dynamic operator +(Derived d, int x)
         {
-            return new Derived()
-            {
-                P = d.P + x
-            }
-
-            ;
+            return new Derived() { P = d.P + x };
         }
 
         public static Derived operator ++(Derived d)
         {
-            return new Derived()
-            {
-                P = d.P + 1
-            }
-
-            ;
+            return new Derived() { P = d.P + 1 };
         }
 
         public static bool operator ==(Derived d, dynamic x)
@@ -3391,7 +3068,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.returnType.
 
         public static int MainMethod(string[] args)
         {
-            int test = 0, success = 0;
+            int test = 0,
+                success = 0;
             Derived d = new Derived();
             //---- increments the result of a method call
             test++;

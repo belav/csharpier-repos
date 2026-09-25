@@ -1,12 +1,11 @@
 class Foo<T>
 {
-	public void Hello ()
-	{ }
+    public void Hello() { }
 
-	public void World (T t)
-	{
-		Hello ();
-	}
+    public void World(T t)
+    {
+        Hello();
+    }
 }
 
 //
@@ -21,15 +20,14 @@ class Foo<T>
 
 class Bar : Foo<Bar>
 {
-	public void Test ()
-	{
-		Hello ();
-		World (this);
-	}
+    public void Test()
+    {
+        Hello();
+        World(this);
+    }
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

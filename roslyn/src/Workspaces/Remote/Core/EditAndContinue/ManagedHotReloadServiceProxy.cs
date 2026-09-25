@@ -12,22 +12,48 @@ using Microsoft.ServiceHub.Framework;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue;
 
-internal sealed class ManagedHotReloadServiceProxy : BrokeredServiceProxy<IManagedHotReloadService>, IManagedHotReloadService
+internal sealed class ManagedHotReloadServiceProxy
+    : BrokeredServiceProxy<IManagedHotReloadService>,
+        IManagedHotReloadService
 {
     public ManagedHotReloadServiceProxy(IServiceBroker serviceBroker)
-        : base(serviceBroker, BrokeredServiceDescriptors.DebuggerManagedHotReloadService)
-    {
-    }
+        : base(serviceBroker, BrokeredServiceDescriptors.DebuggerManagedHotReloadService) { }
 
-    public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(CancellationToken cancellationToken)
-        => InvokeAsync((service, cancellationToken) => service.GetActiveStatementsAsync(cancellationToken), cancellationToken);
+    public ValueTask<ImmutableArray<ManagedActiveStatementDebugInfo>> GetActiveStatementsAsync(
+        CancellationToken cancellationToken
+    ) =>
+        InvokeAsync(
+            (service, cancellationToken) => service.GetActiveStatementsAsync(cancellationToken),
+            cancellationToken
+        );
 
-    public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(Guid module, CancellationToken cancellationToken)
-        => InvokeAsync((service, module, cancellationToken) => service.GetAvailabilityAsync(module, cancellationToken), module, cancellationToken);
+    public ValueTask<ManagedHotReloadAvailability> GetAvailabilityAsync(
+        Guid module,
+        CancellationToken cancellationToken
+    ) =>
+        InvokeAsync(
+            (service, module, cancellationToken) =>
+                service.GetAvailabilityAsync(module, cancellationToken),
+            module,
+            cancellationToken
+        );
 
-    public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(CancellationToken cancellationToken)
-        => InvokeAsync((service, cancellationToken) => service.GetCapabilitiesAsync(cancellationToken), cancellationToken);
+    public ValueTask<ImmutableArray<string>> GetCapabilitiesAsync(
+        CancellationToken cancellationToken
+    ) =>
+        InvokeAsync(
+            (service, cancellationToken) => service.GetCapabilitiesAsync(cancellationToken),
+            cancellationToken
+        );
 
-    public ValueTask PrepareModuleForUpdateAsync(Guid module, CancellationToken cancellationToken)
-        => InvokeAsync((service, module, cancellationToken) => service.PrepareModuleForUpdateAsync(module, cancellationToken), module, cancellationToken);
+    public ValueTask PrepareModuleForUpdateAsync(
+        Guid module,
+        CancellationToken cancellationToken
+    ) =>
+        InvokeAsync(
+            (service, module, cancellationToken) =>
+                service.PrepareModuleForUpdateAsync(module, cancellationToken),
+            module,
+            cancellationToken
+        );
 }

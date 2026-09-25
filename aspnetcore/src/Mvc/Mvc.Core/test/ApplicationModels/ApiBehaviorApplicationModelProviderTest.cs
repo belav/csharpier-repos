@@ -38,8 +38,8 @@ public class ApiBehaviorApplicationModelProviderTest
         var provider = GetProvider();
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () => provider.OnProvidersExecuting(context)
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.OnProvidersExecuting(context)
         );
         Assert.Equal(expected, ex.Message);
     }
@@ -218,9 +218,8 @@ public class ApiBehaviorApplicationModelProviderTest
 
         // Act & Assert
         var convention = (InferParameterBindingInfoConvention)
-            Assert.Single(
-                provider.ActionModelConventions,
-                c => c is InferParameterBindingInfoConvention
+            Assert.Single(provider.ActionModelConventions, c =>
+                c is InferParameterBindingInfoConvention
             );
         Assert.False(convention.IsInferForServiceParametersEnabled);
     }

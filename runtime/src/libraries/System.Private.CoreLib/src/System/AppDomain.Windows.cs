@@ -6,8 +6,14 @@ namespace System
     public sealed partial class AppDomain
     {
         public TimeSpan MonitoringTotalProcessorTime =>
-            Interop.Kernel32.GetProcessTimes(Interop.Kernel32.GetCurrentProcess(), out _, out _, out _, out long userTime100Nanoseconds) ?
-                new TimeSpan(userTime100Nanoseconds) :
-                TimeSpan.Zero;
+            Interop.Kernel32.GetProcessTimes(
+                Interop.Kernel32.GetCurrentProcess(),
+                out _,
+                out _,
+                out _,
+                out long userTime100Nanoseconds
+            )
+                ? new TimeSpan(userTime100Nanoseconds)
+                : TimeSpan.Zero;
     }
 }

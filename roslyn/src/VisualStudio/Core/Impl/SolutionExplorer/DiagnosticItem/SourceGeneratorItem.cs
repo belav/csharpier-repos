@@ -15,7 +15,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public SourceGeneratorIdentity Identity { get; }
         public AnalyzerReference AnalyzerReference { get; }
 
-        public SourceGeneratorItem(ProjectId projectId, ISourceGenerator generator, AnalyzerReference analyzerReference)
+        public SourceGeneratorItem(
+            ProjectId projectId,
+            ISourceGenerator generator,
+            AnalyzerReference analyzerReference
+        )
             : base(name: SourceGeneratorIdentity.GetGeneratorTypeName(generator))
         {
             ProjectId = projectId;

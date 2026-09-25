@@ -18,7 +18,9 @@ namespace System.Web.WebPages.Razor
     public class WebRazorHostFactory
     {
         private static ConcurrentDictionary<string, Func<WebRazorHostFactory>> _factories =
-            new ConcurrentDictionary<string, Func<WebRazorHostFactory>>(StringComparer.OrdinalIgnoreCase);
+            new ConcurrentDictionary<string, Func<WebRazorHostFactory>>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
         internal static Func<string, Type> TypeFactory = DefaultTypeFactory;
 
@@ -41,18 +43,36 @@ namespace System.Web.WebPages.Razor
         {
             if (String.IsNullOrEmpty(virtualPath))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "virtualPath"), "virtualPath");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "virtualPath"
+                    ),
+                    "virtualPath"
+                );
             }
 
-            return CreateHostFromConfigCore(GetRazorSection(virtualPath), virtualPath, physicalPath);
+            return CreateHostFromConfigCore(
+                GetRazorSection(virtualPath),
+                virtualPath,
+                physicalPath
+            );
         }
 
-        public static WebPageRazorHost CreateHostFromConfig(RazorWebSectionGroup config, string virtualPath)
+        public static WebPageRazorHost CreateHostFromConfig(
+            RazorWebSectionGroup config,
+            string virtualPath
+        )
         {
             return CreateHostFromConfig(config, virtualPath, null);
         }
 
-        public static WebPageRazorHost CreateHostFromConfig(RazorWebSectionGroup config, string virtualPath, string physicalPath)
+        public static WebPageRazorHost CreateHostFromConfig(
+            RazorWebSectionGroup config,
+            string virtualPath,
+            string physicalPath
+        )
         {
             if (config == null)
             {
@@ -60,13 +80,24 @@ namespace System.Web.WebPages.Razor
             }
             if (String.IsNullOrEmpty(virtualPath))
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Cannot_Be_Null_Or_Empty, "virtualPath"), "virtualPath");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                        "virtualPath"
+                    ),
+                    "virtualPath"
+                );
             }
 
             return CreateHostFromConfigCore(config, virtualPath, physicalPath);
         }
 
-        internal static WebPageRazorHost CreateHostFromConfigCore(RazorWebSectionGroup config, string virtualPath, string physicalPath)
+        internal static WebPageRazorHost CreateHostFromConfigCore(
+            RazorWebSectionGroup config,
+            string virtualPath,
+            string physicalPath
+        )
         {
             // Use the virtual path to select a host environment for the generated code
             // Do this check here because the App_Code host can't be overridden.
@@ -83,9 +114,16 @@ namespace System.Web.WebPages.Razor
             else
             {
                 WebRazorHostFactory factory = null;
-                if (config != null && config.Host != null && !String.IsNullOrEmpty(config.Host.FactoryType))
+                if (
+                    config != null
+                    && config.Host != null
+                    && !String.IsNullOrEmpty(config.Host.FactoryType)
+                )
                 {
-                    Func<WebRazorHostFactory> factoryCreator = _factories.GetOrAdd(config.Host.FactoryType, CreateFactory);
+                    Func<WebRazorHostFactory> factoryCreator = _factories.GetOrAdd(
+                        config.Host.FactoryType,
+                        CreateFactory
+                    );
                     Debug.Assert(factoryCreator != null); // CreateFactory should throw if there's an error creating the factory
                     factory = factoryCreator();
                 }
@@ -106,11 +144,16 @@ namespace System.Web.WebPages.Razor
             Type factoryType = TypeFactory(typeName);
             if (factoryType == null)
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                                  RazorWebResources.Could_Not_Locate_FactoryType,
-                                                                  typeName));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorWebResources.Could_Not_Locate_FactoryType,
+                        typeName
+                    )
+                );
             }
-            return Expression.Lambda<Func<WebRazorHostFactory>>(Expression.New(factoryType))
+            return Expression
+                .Lambda<Func<WebRazorHostFactory>>(Expression.New(factoryType))
                 .Compile();
         }
 
@@ -119,7 +162,11 @@ namespace System.Web.WebPages.Razor
             host.DefaultPageBaseClass = config.PageBaseType;
 
             // Add imports
-            foreach (string import in config.Namespaces.OfType<NamespaceInfo>().Select(ns => ns.Namespace))
+            foreach (
+                string import in config
+                    .Namespaces.OfType<NamespaceInfo>()
+                    .Select(ns => ns.Namespace)
+            )
             {
                 host.NamespaceImports.Add(import);
             }
@@ -135,8 +182,10 @@ namespace System.Web.WebPages.Razor
             // Get the individual sections (we can only use GetSection in medium trust) and then reconstruct the section group
             return new RazorWebSectionGroup()
             {
-                Host = (HostSection)WebConfigurationManager.GetSection(HostSection.SectionName, virtualPath),
-                Pages = (RazorPagesSection)WebConfigurationManager.GetSection(RazorPagesSection.SectionName, virtualPath)
+                Host = (HostSection)
+                    WebConfigurationManager.GetSection(HostSection.SectionName, virtualPath),
+                Pages = (RazorPagesSection)
+                    WebConfigurationManager.GetSection(RazorPagesSection.SectionName, virtualPath),
             };
         }
 

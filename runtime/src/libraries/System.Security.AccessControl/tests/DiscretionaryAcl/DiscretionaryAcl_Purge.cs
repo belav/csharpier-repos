@@ -10,9 +10,12 @@ namespace System.Security.AccessControl.Tests
 {
     public class DiscretionaryAcl_Purge
     {
-        private static bool TestPurge(DiscretionaryAcl discretionaryAcl, SecurityIdentifier sid, int aceCount)
+        private static bool TestPurge(
+            DiscretionaryAcl discretionaryAcl,
+            SecurityIdentifier sid,
+            int aceCount
+        )
         {
-
             KnownAce ace = null;
 
             discretionaryAcl.Purge(sid);
@@ -72,7 +75,9 @@ namespace System.Security.AccessControl.Tests
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             aceCount = 0;
             sidStr = "BG";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr)
+            );
 
             Assert.True(TestPurge(discretionaryAcl, sid, aceCount));
 
@@ -81,7 +86,9 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             sidStr = "BG";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr)
+            );
             //199 has all aceflags but inheritonly and inherited
             gAce = new CommonAce((AceFlags)199, AceQualifier.AccessAllowed, 1, sid, false, null);
             rawAcl.InsertAce(0, gAce);
@@ -98,7 +105,9 @@ namespace System.Security.AccessControl.Tests
             rawAcl = new RawAcl(revision, capacity);
             //199 has all aceflags but inheritedonly and inherited
             sidStr = "BG";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr)
+            );
             gAce = new CommonAce((AceFlags)199, AceQualifier.AccessDenied, 1, sid, false, null);
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
@@ -106,7 +115,9 @@ namespace System.Security.AccessControl.Tests
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             aceCount = 1;
             sidStr = "BA";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr)
+            );
 
             Assert.True(TestPurge(discretionaryAcl, sid, aceCount));
 
@@ -115,7 +126,9 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             sidStr = "BG";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr)
+            );
             //215 has all aceflags but inheritedonly
             gAce = new CommonAce((AceFlags)215, AceQualifier.AccessAllowed, 1, sid, false, null);
             rawAcl.InsertAce(0, gAce);
@@ -131,12 +144,36 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             sidStr = "BG";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr)
+            );
             //199 has all aceflags but inheritedonly and inherited
-            gAce = new CommonAce((AceFlags)(FlagsForAce.AuditFlags | FlagsForAce.OI | FlagsForAce.CI | FlagsForAce.NP), AceQualifier.AccessDenied, 1, sid, false, null);
+            gAce = new CommonAce(
+                (AceFlags)(
+                    FlagsForAce.AuditFlags | FlagsForAce.OI | FlagsForAce.CI | FlagsForAce.NP
+                ),
+                AceQualifier.AccessDenied,
+                1,
+                sid,
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             //215 has all aceflags but inheritedonly
-            gAce = new CommonAce((AceFlags)(FlagsForAce.AuditFlags | FlagsForAce.OI | FlagsForAce.CI | FlagsForAce.NP | FlagsForAce.IH), AceQualifier.AccessAllowed, 2, sid, false, null);
+            gAce = new CommonAce(
+                (AceFlags)(
+                    FlagsForAce.AuditFlags
+                    | FlagsForAce.OI
+                    | FlagsForAce.CI
+                    | FlagsForAce.NP
+                    | FlagsForAce.IH
+                ),
+                AceQualifier.AccessAllowed,
+                2,
+                sid,
+                false,
+                null
+            );
             rawAcl.InsertAce(1, gAce);
             isContainer = true;
             isDS = false;
@@ -150,7 +187,9 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             sidStr = "BG";
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sidStr)
+            );
             //207 has all AceFlags but inherited
             gAce = new CommonAce((AceFlags)207, AceQualifier.AccessAllowed, 1, sid, false, null);
             rawAcl.InsertAce(0, gAce);
@@ -176,18 +215,17 @@ namespace System.Security.AccessControl.Tests
             isContainer = false;
             isDS = false;
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG"));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+            );
             aceCount = 1;
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
             Assert.Throws<InvalidOperationException>(() =>
             {
-
                 TestPurge(discretionaryAcl, sid, aceCount);
-
             });
-
 
             //case 8,  1 explicit CompoundAce
             revision = 127;
@@ -197,7 +235,9 @@ namespace System.Security.AccessControl.Tests
             aceFlag = (AceFlags)207;
             accessMask = 1;
             compoundAceType = CompoundAceType.Impersonation;
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG"));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+            );
             gAce = new CompoundAce(aceFlag, accessMask, compoundAceType, sid);
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
@@ -209,24 +249,35 @@ namespace System.Security.AccessControl.Tests
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
             Assert.Throws<InvalidOperationException>(() =>
             {
-
                 TestPurge(discretionaryAcl, sid, aceCount);
-
             });
 
             //case 9, 1 explicit ObjectAce
             revision = 127;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG"));
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+            );
             //207 has all AceFlags but inherited
             aceFlag = (AceFlags)207;
             aceQualifier = AceQualifier.AccessAllowed;
             accessMask = 1;
-            objectAceFlag = ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
+            objectAceFlag =
+                ObjectAceFlags.ObjectAceTypePresent | ObjectAceFlags.InheritedObjectAceTypePresent;
             objectAceType = new Guid("11111111-1111-1111-1111-111111111111");
             inheritedObjectAceType = new Guid("22222222-2222-2222-2222-222222222222");
-            gAce = new ObjectAce(aceFlag, aceQualifier, accessMask, sid, objectAceFlag, objectAceType, inheritedObjectAceType, false, null);
+            gAce = new ObjectAce(
+                aceFlag,
+                aceQualifier,
+                accessMask,
+                sid,
+                objectAceFlag,
+                objectAceType,
+                inheritedObjectAceType,
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = true;
@@ -234,7 +285,6 @@ namespace System.Security.AccessControl.Tests
             aceCount = 0;
 
             Assert.True(TestPurge(discretionaryAcl, sid, aceCount));
-
         }
 
         [Fact]

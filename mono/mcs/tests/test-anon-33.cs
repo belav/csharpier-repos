@@ -9,27 +9,37 @@
 
 using System;
 
-delegate void Do ();
+delegate void Do();
 
-class T {
-        static void doit (int v) {
-                Console.WriteLine (v);
-        }
-        public static void Main () {
-                Do[] arr = new Do [5];
-                for (int i = 0; i < 5; ++i) {
-                        arr [i] = delegate {doit (i);};
-                }
-                for (int i = 0; i < 5; ++i) {
-                        arr [i] ();
-                }
+class T
 {
-                for (int j = 0; j < 5; ++j) {
-                        arr [j] = delegate {doit (j);};
-                }
-}
+    static void doit(int v)
+    {
+        Console.WriteLine(v);
+    }
+
+    public static void Main()
+    {
+        Do[] arr = new Do[5];
+        for (int i = 0; i < 5; ++i)
+        {
+            arr[i] = delegate
+            {
+                doit(i);
+            };
         }
-
+        for (int i = 0; i < 5; ++i)
+        {
+            arr[i]();
+        }
+        {
+            for (int j = 0; j < 5; ++j)
+            {
+                arr[j] = delegate
+                {
+                    doit(j);
+                };
+            }
+        }
+    }
 }
-
-

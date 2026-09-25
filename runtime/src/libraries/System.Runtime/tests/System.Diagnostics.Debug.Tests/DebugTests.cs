@@ -14,7 +14,10 @@ namespace System.Diagnostics.Tests
 
         static DebugTests()
         {
-            FieldInfo fieldInfo = typeof(Debug).GetField("s_provider", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo fieldInfo = typeof(Debug).GetField(
+                "s_provider",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             _debugOnlyProvider = (DebugProvider)fieldInfo.GetValue(null);
             // Triggers code to wire up TraceListeners with Debug
             Assert.Equal(1, Trace.Listeners.Count);
@@ -36,7 +39,10 @@ namespace System.Diagnostics.Tests
 
         protected void VerifyLogged(Action test, string expectedOutput)
         {
-            FieldInfo writeCoreHook = typeof(DebugProvider).GetField("s_WriteCore", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo writeCoreHook = typeof(DebugProvider).GetField(
+                "s_WriteCore",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
 
             // First use our test logger to verify the output
             var originalWriteCoreHook = writeCoreHook.GetValue(null);
@@ -60,13 +66,22 @@ namespace System.Diagnostics.Tests
 
         protected void VerifyAssert(Action test, params string[] expectedOutputStrings)
         {
-            FieldInfo writeCoreHook = typeof(DebugProvider).GetField("s_WriteCore", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo writeCoreHook = typeof(DebugProvider).GetField(
+                "s_WriteCore",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             var originalWriteCoreHook = writeCoreHook.GetValue(null);
             writeCoreHook.SetValue(null, new Action<string>(WriteLogger.s_instance.WriteCore));
 
-            FieldInfo failCoreHook = typeof(DebugProvider).GetField("s_FailCore", BindingFlags.Static | BindingFlags.NonPublic);
+            FieldInfo failCoreHook = typeof(DebugProvider).GetField(
+                "s_FailCore",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             var originalFailCoreHook = failCoreHook.GetValue(null);
-            failCoreHook.SetValue(null, new Action<string, string, string, string>(WriteLogger.s_instance.FailCore));
+            failCoreHook.SetValue(
+                null,
+                new Action<string, string, string, string>(WriteLogger.s_instance.FailCore)
+            );
 
             try
             {
@@ -75,9 +90,11 @@ namespace System.Diagnostics.Tests
                 for (int i = 0; i < expectedOutputStrings.Length; i++)
                 {
                     Assert.Contains(expectedOutputStrings[i], WriteLogger.s_instance.LoggedOutput);
-                    Assert.Contains(expectedOutputStrings[i], WriteLogger.s_instance.AssertUIOutput);
+                    Assert.Contains(
+                        expectedOutputStrings[i],
+                        WriteLogger.s_instance.AssertUIOutput
+                    );
                 }
-
             }
             finally
             {
@@ -102,7 +119,12 @@ namespace System.Diagnostics.Tests
                 AssertUIOutput = string.Empty;
             }
 
-            public void FailCore(string stackTrace, string message, string detailMessage, string errorSource)
+            public void FailCore(
+                string stackTrace,
+                string message,
+                string detailMessage,
+                string errorSource
+            )
             {
                 AssertUIOutput += stackTrace + message + detailMessage + errorSource;
             }

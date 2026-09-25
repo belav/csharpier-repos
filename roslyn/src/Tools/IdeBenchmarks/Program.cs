@@ -14,7 +14,6 @@ namespace IdeBenchmarks
 {
     internal class Program
     {
-
         public const string RoslynRootPathEnvVariableName = "ROSLYN_SOURCE_ROOT_PATH";
 
         public static string GetRoslynRootLocation([CallerFilePath] string sourceFilePath = "")
@@ -31,7 +30,10 @@ namespace IdeBenchmarks
             IConfig config = null;
 #endif
 
-            Environment.SetEnvironmentVariable(RoslynRootPathEnvVariableName, GetRoslynRootLocation());
+            Environment.SetEnvironmentVariable(
+                RoslynRootPathEnvVariableName,
+                GetRoslynRootLocation()
+            );
             new BenchmarkSwitcher(typeof(Program).Assembly).Run(args, config);
         }
     }

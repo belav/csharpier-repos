@@ -35,7 +35,10 @@ namespace System.Xml.Tests
             Type t = Type.GetType("System.Xml.LocalAppContextSwitches, System.Private.Xml");
             Assert.NotNull(t);
 
-            FieldInfo fi = t.GetField("s_allowDefaultResolver", BindingFlags.NonPublic | BindingFlags.Static);
+            FieldInfo fi = t.GetField(
+                "s_allowDefaultResolver",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Assert.NotNull(fi);
 
             fi.SetValue(null, 0);

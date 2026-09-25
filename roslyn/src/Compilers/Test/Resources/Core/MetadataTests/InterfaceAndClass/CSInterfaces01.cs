@@ -6,7 +6,14 @@ using System;
 
 namespace Metadata
 {
-    public enum EGoo { Zero, One, Two, Three }
+    public enum EGoo
+    {
+        Zero,
+        One,
+        Two,
+        Three,
+    }
+
     public delegate void DGoo<T>(T p1, T p2);
 
     public interface ICSProp

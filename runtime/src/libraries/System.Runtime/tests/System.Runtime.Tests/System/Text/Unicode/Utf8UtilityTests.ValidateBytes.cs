@@ -11,8 +11,14 @@ namespace System.Text.Unicode.Tests
 {
     public class Utf8UtilityTests
     {
-        private unsafe delegate byte* GetPointerToFirstInvalidByteDel(byte* pInputBuffer, int inputLength, out int utf16CodeUnitCountAdjustment, out int scalarCountAdjustment);
-        private static readonly Lazy<GetPointerToFirstInvalidByteDel> _getPointerToFirstInvalidByteFn = CreateGetPointerToFirstInvalidByteFn();
+        private unsafe delegate byte* GetPointerToFirstInvalidByteDel(
+            byte* pInputBuffer,
+            int inputLength,
+            out int utf16CodeUnitCountAdjustment,
+            out int scalarCountAdjustment
+        );
+        private static readonly Lazy<GetPointerToFirstInvalidByteDel> _getPointerToFirstInvalidByteFn =
+            CreateGetPointerToFirstInvalidByteFn();
 
         private const string X = "58"; // U+0058 LATIN CAPITAL LETTER X, 1 byte
         private const string Y = "59"; // U+0058 LATIN CAPITAL LETTER Y, 1 byte
@@ -30,14 +36,24 @@ namespace System.Text.Unicode.Tests
         [InlineData(X + E_ACUTE, 2, 0)]
         [InlineData(E_ACUTE + X, 2, 0)]
         [InlineData(EURO_SYMBOL, 1, 0)]
-        public void GetIndexOfFirstInvalidUtf8Sequence_WithSmallValidBuffers(string input, int expectedRuneCount, int expectedSurrogatePairCount)
+        public void GetIndexOfFirstInvalidUtf8Sequence_WithSmallValidBuffers(
+            string input,
+            int expectedRuneCount,
+            int expectedSurrogatePairCount
+        )
         {
             // These test cases are for the "slow processing" code path at the end of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less than 4 bytes.
 
             Assert.InRange(input.Length, 0, 6);
 
-            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(input, -1 /* expectedRetVal */, expectedRuneCount, expectedSurrogatePairCount);
+            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+                input,
+                -1 /* expectedRetVal */
+                ,
+                expectedRuneCount,
+                expectedSurrogatePairCount
+            );
         }
 
         [Theory]
@@ -59,19 +75,38 @@ namespace System.Text.Unicode.Tests
         [InlineData("E0C080", 0, 0, 0)] // [ E0 ] is improperly terminated
         [InlineData("ED7F80", 0, 0, 0)] // [ ED ] is improperly terminated
         [InlineData("EDA080", 0, 0, 0)] // [ ED A0 ... ] is surrogate
-        public void GetIndexOfFirstInvalidUtf8Sequence_WithSmallInvalidBuffers(string input, int expectedRetVal, int expectedRuneCount, int expectedSurrogatePairCount)
+        public void GetIndexOfFirstInvalidUtf8Sequence_WithSmallInvalidBuffers(
+            string input,
+            int expectedRetVal,
+            int expectedRuneCount,
+            int expectedSurrogatePairCount
+        )
         {
             // These test cases are for the "slow processing" code path at the end of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less than 4 bytes.
 
             Assert.InRange(input.Length, 0, 6);
 
-            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(input, expectedRetVal, expectedRuneCount, expectedSurrogatePairCount);
+            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+                input,
+                expectedRetVal,
+                expectedRuneCount,
+                expectedSurrogatePairCount
+            );
         }
 
         [Theory]
         [InlineData(E_ACUTE + "21222324" + "303132333435363738393A3B3C3D3E3F", 21, 0)] // Loop unrolling at end of buffer
-        [InlineData(E_ACUTE + "21222324" + "303132333435363738393A3B3C3D3E3F" + "3031323334353637" + E_ACUTE + "38393A3B3C3D3E3F", 38, 0)] // Loop unrolling interrupted by non-ASCII
+        [InlineData(
+            E_ACUTE
+                + "21222324"
+                + "303132333435363738393A3B3C3D3E3F"
+                + "3031323334353637"
+                + E_ACUTE
+                + "38393A3B3C3D3E3F",
+            38,
+            0
+        )] // Loop unrolling interrupted by non-ASCII
         [InlineData("212223" + E_ACUTE + "30313233", 8, 0)] // 3 ASCII bytes followed by non-ASCII
         [InlineData("2122" + E_ACUTE + "30313233", 7, 0)] // 2 ASCII bytes followed by non-ASCII
         [InlineData("21" + E_ACUTE + "30313233", 6, 0)] // 1 ASCII byte followed by non-ASCII
@@ -88,14 +123,24 @@ namespace System.Text.Unicode.Tests
         [InlineData(GRINNING_FACE + GRINNING_FACE, 2, 2)] // 2x 4-byte sequences, exercises 4-byte sequence processing
         [InlineData(GRINNING_FACE + "303132", 4, 1)] // single 4-byte sequence + 3 ASCII bytes, exercises 4-byte sequence processing and draining logic
         [InlineData("F09FA4B8" + "F09F8FBD" + "E2808D" + "E29980" + "EFB88F", 5, 2)] // U+1F938 U+1F3FD U+200D U+2640 U+FE0F WOMAN CARTWHEELING: MEDIUM SKIN TONE, exercising switching between multiple sequence lengths
-        public void GetIndexOfFirstInvalidUtf8Sequence_WithLargeValidBuffers(string input, int expectedRuneCount, int expectedSurrogatePairCount)
+        public void GetIndexOfFirstInvalidUtf8Sequence_WithLargeValidBuffers(
+            string input,
+            int expectedRuneCount,
+            int expectedSurrogatePairCount
+        )
         {
             // These test cases are for the "fast processing" code which is the main loop of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less >= 4 bytes.
 
             Assert.True(input.Length >= 8);
 
-            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(input, -1 /* expectedRetVal */, expectedRuneCount, expectedSurrogatePairCount);
+            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+                input,
+                -1 /* expectedRetVal */
+                ,
+                expectedRuneCount,
+                expectedSurrogatePairCount
+            );
         }
 
         [Theory]
@@ -129,14 +174,24 @@ namespace System.Text.Unicode.Tests
         [InlineData("3031" + "FD808080", 2, 2, 0)] // [ FD ] is always invalid
         [InlineData("3031" + "FE808080", 2, 2, 0)] // [ FE ] is always invalid
         [InlineData("3031" + "FF808080", 2, 2, 0)] // [ FF ] is always invalid
-        public void GetIndexOfFirstInvalidUtf8Sequence_WithLargeInvalidBuffers(string input, int expectedRetVal, int expectedRuneCount, int expectedSurrogatePairCount)
+        public void GetIndexOfFirstInvalidUtf8Sequence_WithLargeInvalidBuffers(
+            string input,
+            int expectedRetVal,
+            int expectedRuneCount,
+            int expectedSurrogatePairCount
+        )
         {
             // These test cases are for the "fast processing" code which is the main loop of GetIndexOfFirstInvalidUtf8Sequence,
             // so inputs should be less >= 4 bytes.
 
             Assert.True(input.Length >= 8);
 
-            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(input, expectedRetVal, expectedRuneCount, expectedSurrogatePairCount);
+            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+                input,
+                expectedRetVal,
+                expectedRuneCount,
+                expectedSurrogatePairCount
+            );
         }
 
         [Fact]
@@ -281,7 +336,10 @@ namespace System.Text.Unicode.Tests
 
             byte[] knownGoodBytes = Utf8Tests.DecodeHex(E_ACUTE);
 
-            byte[] toTest = invalidSequence.Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // at start of first DWORD
+            byte[] toTest = invalidSequence
+                .Concat(invalidSequence)
+                .Concat(knownGoodBytes)
+                .ToArray(); // at start of first DWORD
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 0, 0, 0);
 
             toTest = knownGoodBytes.Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // at end of first DWORD
@@ -290,10 +348,19 @@ namespace System.Text.Unicode.Tests
             // Run the same tests but with extra data at the beginning so that we're inside one of
             // the 2-byte processing "hot loop" code paths.
 
-            toTest = knownGoodBytes.Concat(knownGoodBytes).Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // at start of next DWORD
+            toTest = knownGoodBytes
+                .Concat(knownGoodBytes)
+                .Concat(invalidSequence)
+                .Concat(knownGoodBytes)
+                .ToArray(); // at start of next DWORD
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 4, 2, 0);
 
-            toTest = knownGoodBytes.Concat(knownGoodBytes).Concat(knownGoodBytes).Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // at end of next DWORD
+            toTest = knownGoodBytes
+                .Concat(knownGoodBytes)
+                .Concat(knownGoodBytes)
+                .Concat(invalidSequence)
+                .Concat(knownGoodBytes)
+                .ToArray(); // at end of next DWORD
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 6, 3, 0);
         }
 
@@ -303,7 +370,10 @@ namespace System.Text.Unicode.Tests
 
             byte[] knownGoodBytes = Utf8Tests.DecodeHex(EURO_SYMBOL);
 
-            byte[] toTest = invalidSequence.Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // at start of first DWORD
+            byte[] toTest = invalidSequence
+                .Concat(invalidSequence)
+                .Concat(knownGoodBytes)
+                .ToArray(); // at start of first DWORD
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 0, 0, 0);
 
             // Run the same tests but with extra data at the beginning so that we're inside one of
@@ -312,10 +382,19 @@ namespace System.Text.Unicode.Tests
             toTest = knownGoodBytes.Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // straddling first and second DWORDs
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 3, 1, 0);
 
-            toTest = knownGoodBytes.Concat(knownGoodBytes).Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // straddling second and third DWORDs
+            toTest = knownGoodBytes
+                .Concat(knownGoodBytes)
+                .Concat(invalidSequence)
+                .Concat(knownGoodBytes)
+                .ToArray(); // straddling second and third DWORDs
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 6, 2, 0);
 
-            toTest = knownGoodBytes.Concat(knownGoodBytes).Concat(knownGoodBytes).Concat(invalidSequence).Concat(knownGoodBytes).ToArray(); // at end of third DWORD
+            toTest = knownGoodBytes
+                .Concat(knownGoodBytes)
+                .Concat(knownGoodBytes)
+                .Concat(invalidSequence)
+                .Concat(knownGoodBytes)
+                .ToArray(); // at end of third DWORD
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 9, 3, 0);
         }
 
@@ -325,30 +404,58 @@ namespace System.Text.Unicode.Tests
 
             byte[] knownGoodBytes = Utf8Tests.DecodeHex(GRINNING_FACE);
 
-            byte[] toTest = invalidSequence.Concat(invalidSequence).Concat(knownGoodBytes).ToArray();
+            byte[] toTest = invalidSequence
+                .Concat(invalidSequence)
+                .Concat(knownGoodBytes)
+                .ToArray();
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 0, 0, 0);
 
             toTest = knownGoodBytes.Concat(invalidSequence).Concat(knownGoodBytes).ToArray();
             GetIndexOfFirstInvalidUtf8Sequence_Test_Core(toTest, 4, 1, 1);
         }
 
-        private static void GetIndexOfFirstInvalidUtf8Sequence_Test_Core(string inputHex, int expectedRetVal, int expectedRuneCount, int expectedSurrogatePairCount)
+        private static void GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+            string inputHex,
+            int expectedRetVal,
+            int expectedRuneCount,
+            int expectedSurrogatePairCount
+        )
         {
             byte[] inputBytes = Utf8Tests.DecodeHex(inputHex);
 
             // Run the test normally
-            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(inputBytes, expectedRetVal, expectedRuneCount, expectedSurrogatePairCount);
+            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+                inputBytes,
+                expectedRetVal,
+                expectedRuneCount,
+                expectedSurrogatePairCount
+            );
 
             // Then run the test with a bunch of ASCII data at the beginning (to exercise the vectorized code paths)
             inputBytes = Enumerable.Repeat((byte)'x', 128).Concat(inputBytes).ToArray();
-            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(inputBytes, (expectedRetVal < 0) ? expectedRetVal : (expectedRetVal + 128), expectedRuneCount + 128, expectedSurrogatePairCount);
+            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+                inputBytes,
+                (expectedRetVal < 0) ? expectedRetVal : (expectedRetVal + 128),
+                expectedRuneCount + 128,
+                expectedSurrogatePairCount
+            );
 
             // Then put a few more ASCII bytes at the beginning (to test that offsets are properly handled)
             inputBytes = Enumerable.Repeat((byte)'x', 7).Concat(inputBytes).ToArray();
-            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(inputBytes, (expectedRetVal < 0) ? expectedRetVal : (expectedRetVal + 135), expectedRuneCount + 135, expectedSurrogatePairCount);
+            GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+                inputBytes,
+                (expectedRetVal < 0) ? expectedRetVal : (expectedRetVal + 135),
+                expectedRuneCount + 135,
+                expectedSurrogatePairCount
+            );
         }
 
-        private static unsafe void GetIndexOfFirstInvalidUtf8Sequence_Test_Core(byte[] input, int expectedRetVal, int expectedRuneCount, int expectedSurrogatePairCount)
+        private static unsafe void GetIndexOfFirstInvalidUtf8Sequence_Test_Core(
+            byte[] input,
+            int expectedRetVal,
+            int expectedRuneCount,
+            int expectedSurrogatePairCount
+        )
         {
             // Arrange
 
@@ -363,13 +470,27 @@ namespace System.Text.Unicode.Tests
 
             fixed (byte* pInputBuffer = &MemoryMarshal.GetReference(boundedMemory.Span))
             {
-                byte* pFirstInvalidByte = _getPointerToFirstInvalidByteFn.Value(pInputBuffer, input.Length, out int utf16CodeUnitCountAdjustment, out int scalarCountAdjustment);
+                byte* pFirstInvalidByte = _getPointerToFirstInvalidByteFn.Value(
+                    pInputBuffer,
+                    input.Length,
+                    out int utf16CodeUnitCountAdjustment,
+                    out int scalarCountAdjustment
+                );
 
                 long ptrDiff = pFirstInvalidByte - pInputBuffer;
-                Assert.True((ulong)ptrDiff <= (uint)input.Length, "ptrDiff was outside expected range.");
+                Assert.True(
+                    (ulong)ptrDiff <= (uint)input.Length,
+                    "ptrDiff was outside expected range."
+                );
 
-                Assert.True(utf16CodeUnitCountAdjustment <= 0, "UTF-16 code unit count adjustment must be 0 or negative.");
-                Assert.True(scalarCountAdjustment <= 0, "Scalar count adjustment must be 0 or negative.");
+                Assert.True(
+                    utf16CodeUnitCountAdjustment <= 0,
+                    "UTF-16 code unit count adjustment must be 0 or negative."
+                );
+                Assert.True(
+                    scalarCountAdjustment <= 0,
+                    "Scalar count adjustment must be 0 or negative."
+                );
 
                 actualRetVal = (ptrDiff == input.Length) ? -1 : (int)ptrDiff;
 
@@ -398,21 +519,31 @@ namespace System.Text.Unicode.Tests
         {
             return new Lazy<GetPointerToFirstInvalidByteDel>(() =>
             {
-                Type utf8UtilityType = Type.GetType("System.Text.Unicode.Utf8Utility, System.Private.CoreLib");
+                Type utf8UtilityType = Type.GetType(
+                    "System.Text.Unicode.Utf8Utility, System.Private.CoreLib"
+                );
 
                 if (utf8UtilityType is null)
                 {
-                    throw new Exception("Couldn't find Utf8Utility type in System.Private.CoreLib.");
+                    throw new Exception(
+                        "Couldn't find Utf8Utility type in System.Private.CoreLib."
+                    );
                 }
 
-                MethodInfo methodInfo = utf8UtilityType.GetMethod("GetPointerToFirstInvalidByte", BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+                MethodInfo methodInfo = utf8UtilityType.GetMethod(
+                    "GetPointerToFirstInvalidByte",
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic
+                );
 
                 if (methodInfo is null)
                 {
-                    throw new Exception("Couldn't find GetPointerToFirstInvalidByte method on Utf8Utility.");
+                    throw new Exception(
+                        "Couldn't find GetPointerToFirstInvalidByte method on Utf8Utility."
+                    );
                 }
 
-                return (GetPointerToFirstInvalidByteDel)methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidByteDel));
+                return (GetPointerToFirstInvalidByteDel)
+                    methodInfo.CreateDelegate(typeof(GetPointerToFirstInvalidByteDel));
             });
         }
     }

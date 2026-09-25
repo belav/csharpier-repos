@@ -832,14 +832,11 @@ public class DfaMatcherTest
         // Assert
         Assert.Null(httpContext.GetEndpoint());
 
-        Assert.Collection(
-            sink.Writes,
-            (log) =>
-            {
-                Assert.Equal(1000, log.EventId);
-                Assert.Equal("No candidates found for the request path '/'", log.Message);
-            }
-        );
+        Assert.Collection(sink.Writes, (log) =>
+        {
+            Assert.Equal(1000, log.EventId);
+            Assert.Equal("No candidates found for the request path '/'", log.Message);
+        });
     }
 
     [Fact]

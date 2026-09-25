@@ -24,21 +24,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UseNameofInAttribute;
 /// Analyzer that looks for things like `NotNullIfNotNull("param")` and offers to use `NotNullIfNotNull(nameof(param))` instead.
 /// </summary>
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
-internal sealed class CSharpUseNameofInAttributeDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+internal sealed class CSharpUseNameofInAttributeDiagnosticAnalyzer
+    : AbstractBuiltInCodeStyleDiagnosticAnalyzer
 {
     public const string NameKey = nameof(NameKey);
 
     public CSharpUseNameofInAttributeDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.UseNameofInAttributeDiagnosticId,
-               EnforceOnBuildValues.UseNameofInAttribute,
-               option: null,
-               new LocalizableResourceString(
-                   nameof(CSharpAnalyzersResources.Use_nameof), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-    {
-    }
+        : base(
+            IDEDiagnosticIds.UseNameofInAttributeDiagnosticId,
+            EnforceOnBuildValues.UseNameofInAttribute,
+            option: null,
+            new LocalizableResourceString(
+                nameof(CSharpAnalyzersResources.Use_nameof),
+                CSharpAnalyzersResources.ResourceManager,
+                typeof(CSharpAnalyzersResources)
+            )
+        ) { }
 
-    public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-        => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+    public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+        DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
     protected override void InitializeWorker(AnalysisContext context)
     {
@@ -65,15 +69,17 @@ internal sealed class CSharpUseNameofInAttributeDiagnosticAnalyzer : AbstractBui
         if (attributeName is null)
             return;
 
-        if (attributeName
-                is not "NotNullIfNotNull"
+        if (
+            attributeName
+            is not "NotNullIfNotNull"
                 and not "NotNullIfNotNullAttribute"
                 and not "MemberNotNull"
                 and not "MemberNotNullAttribute"
                 and not "MemberNotNullWhen"
                 and not "MemberNotNullWhenAttribute"
                 and not "CallerArgumentExpression"
-                and not "CallerArgumentExpressionAttribute")
+                and not "CallerArgumentExpressionAttribute"
+        )
         {
             return;
         }
@@ -81,10 +87,18 @@ internal sealed class CSharpUseNameofInAttributeDiagnosticAnalyzer : AbstractBui
         INamedTypeSymbol? containingType = null;
         foreach (var argument in attribute.ArgumentList.Arguments)
         {
-            if (argument.Expression is not LiteralExpressionSyntax(SyntaxKind.StringLiteralExpression) and not InterpolatedStringExpressionSyntax)
+            if (
+                argument.Expression
+                is not LiteralExpressionSyntax
+                    (SyntaxKind.StringLiteralExpression)
+                    and not InterpolatedStringExpressionSyntax
+            )
                 continue;
 
-            var constantValue = semanticModel.GetConstantValue(argument.Expression, cancellationToken);
+            var constantValue = semanticModel.GetConstantValue(
+                argument.Expression,
+                cancellationToken
+            );
             if (constantValue.Value is not string stringValue)
                 continue;
 
@@ -99,16 +113,24 @@ internal sealed class CSharpUseNameofInAttributeDiagnosticAnalyzer : AbstractBui
 
             // Now, see if there are any parameters in scope with this same name.  If so, we can now suggest the user
             // just use `nameof(param)` instead of `"param"` in the attribute.
-            var symbols = semanticModel.LookupSymbols(argument.Expression.SpanStart, name: stringValue);
-            if (symbols.Any(s => s.IsAccessibleWithin(containingType)) ||
-                MatchesParameterOnContainer(attribute, stringValue))
+            var symbols = semanticModel.LookupSymbols(
+                argument.Expression.SpanStart,
+                name: stringValue
+            );
+            if (
+                symbols.Any(s => s.IsAccessibleWithin(containingType))
+                || MatchesParameterOnContainer(attribute, stringValue)
+            )
             {
-                context.ReportDiagnostic(DiagnosticHelper.Create(
-                    this.Descriptor,
-                    argument.Expression.GetLocation(),
-                    NotificationOption2.Suggestion,
-                    additionalLocations: null,
-                    ImmutableDictionary<string, string?>.Empty.Add(NameKey, stringValue)));
+                context.ReportDiagnostic(
+                    DiagnosticHelper.Create(
+                        this.Descriptor,
+                        argument.Expression.GetLocation(),
+                        NotificationOption2.Suggestion,
+                        additionalLocations: null,
+                        ImmutableDictionary<string, string?>.Empty.Add(NameKey, stringValue)
+                    )
+                );
             }
         }
     }

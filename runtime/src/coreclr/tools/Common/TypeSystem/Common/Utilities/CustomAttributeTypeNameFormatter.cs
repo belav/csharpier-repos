@@ -3,7 +3,6 @@
 
 using System;
 using System.Text;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.TypeSystem
@@ -16,9 +15,7 @@ namespace Internal.TypeSystem
     {
         private readonly IAssemblyDesc _relativeHomeAssembly;
 
-        public CustomAttributeTypeNameFormatter()
-        {
-        }
+        public CustomAttributeTypeNameFormatter() { }
 
         public CustomAttributeTypeNameFormatter(IAssemblyDesc relativeHomeAssembly)
         {
@@ -34,7 +31,11 @@ namespace Internal.TypeSystem
             AppendEscapedIdentifier(sb, assembly.GetName().Name);
         }
 
-        public override IAssemblyDesc AppendName(StringBuilder sb, ArrayType type, bool assemblyQualify)
+        public override IAssemblyDesc AppendName(
+            StringBuilder sb,
+            ArrayType type,
+            bool assemblyQualify
+        )
         {
             IAssemblyDesc homeAssembly = AppendName(sb, type.ElementType, false);
 
@@ -59,7 +60,11 @@ namespace Internal.TypeSystem
             return homeAssembly;
         }
 
-        public override IAssemblyDesc AppendName(StringBuilder sb, ByRefType type, bool assemblyQualify)
+        public override IAssemblyDesc AppendName(
+            StringBuilder sb,
+            ByRefType type,
+            bool assemblyQualify
+        )
         {
             IAssemblyDesc homeAssembly = AppendName(sb, type.ParameterType, false);
 
@@ -71,7 +76,11 @@ namespace Internal.TypeSystem
             return homeAssembly;
         }
 
-        public override IAssemblyDesc AppendName(StringBuilder sb, PointerType type, bool assemblyQualify)
+        public override IAssemblyDesc AppendName(
+            StringBuilder sb,
+            PointerType type,
+            bool assemblyQualify
+        )
         {
             IAssemblyDesc homeAssembly = AppendName(sb, type.ParameterType, false);
 
@@ -83,27 +92,47 @@ namespace Internal.TypeSystem
             return homeAssembly;
         }
 
-        public override IAssemblyDesc AppendName(StringBuilder sb, FunctionPointerType type, bool assemblyQualify)
+        public override IAssemblyDesc AppendName(
+            StringBuilder sb,
+            FunctionPointerType type,
+            bool assemblyQualify
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override IAssemblyDesc AppendName(StringBuilder sb, GenericParameterDesc type, bool assemblyQualify)
+        public override IAssemblyDesc AppendName(
+            StringBuilder sb,
+            GenericParameterDesc type,
+            bool assemblyQualify
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override IAssemblyDesc AppendName(StringBuilder sb, SignatureMethodVariable type, bool assemblyQualify)
+        public override IAssemblyDesc AppendName(
+            StringBuilder sb,
+            SignatureMethodVariable type,
+            bool assemblyQualify
+        )
         {
             throw new NotSupportedException();
         }
 
-        public override IAssemblyDesc AppendName(StringBuilder sb, SignatureTypeVariable type, bool assemblyQualify)
+        public override IAssemblyDesc AppendName(
+            StringBuilder sb,
+            SignatureTypeVariable type,
+            bool assemblyQualify
+        )
         {
             throw new NotSupportedException();
         }
 
-        protected override IAssemblyDesc AppendNameForInstantiatedType(StringBuilder sb, DefType type, bool assemblyQualify)
+        protected override IAssemblyDesc AppendNameForInstantiatedType(
+            StringBuilder sb,
+            DefType type,
+            bool assemblyQualify
+        )
         {
             IAssemblyDesc homeAssembly = AppendName(sb, type.GetTypeDefinition(), false);
 
@@ -127,7 +156,11 @@ namespace Internal.TypeSystem
             return homeAssembly;
         }
 
-        protected override IAssemblyDesc AppendNameForNamespaceType(StringBuilder sb, DefType type, bool assemblyQualify)
+        protected override IAssemblyDesc AppendNameForNamespaceType(
+            StringBuilder sb,
+            DefType type,
+            bool assemblyQualify
+        )
         {
             string ns = type.Namespace;
             if (ns.Length > 0)
@@ -150,7 +183,12 @@ namespace Internal.TypeSystem
             return null;
         }
 
-        protected override IAssemblyDesc AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType, bool assemblyQualify)
+        protected override IAssemblyDesc AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType,
+            bool assemblyQualify
+        )
         {
             IAssemblyDesc homeAssembly = AppendName(sb, containingType, false);
 
@@ -164,7 +202,19 @@ namespace Internal.TypeSystem
             return homeAssembly;
         }
 
-        private static char[] s_escapedChars = new char[] { ',', '=', '"', ']', '[', '*', '&', '+', '\\' };
+        private static char[] s_escapedChars = new char[]
+        {
+            ',',
+            '=',
+            '"',
+            ']',
+            '[',
+            '*',
+            '&',
+            '+',
+            '\\',
+        };
+
         private static void AppendEscapedIdentifier(StringBuilder sb, string identifier)
         {
             if (identifier.IndexOfAny(s_escapedChars) < 0)
@@ -173,7 +223,10 @@ namespace Internal.TypeSystem
                 foreach (char escapedChar in s_escapedChars)
                 {
                     string escapedCharString = new string(escapedChar, 1);
-                    escapedIdentifier = escapedIdentifier.Replace(escapedCharString, "\\" + escapedCharString);
+                    escapedIdentifier = escapedIdentifier.Replace(
+                        escapedCharString,
+                        "\\" + escapedCharString
+                    );
                 }
                 sb.Append(escapedIdentifier);
             }

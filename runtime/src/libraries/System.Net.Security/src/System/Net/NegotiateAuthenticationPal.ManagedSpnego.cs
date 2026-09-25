@@ -41,7 +41,7 @@ namespace System.Net
             private enum NegotiationToken
             {
                 NegTokenInit = 0,
-                NegTokenResp = 1
+                NegTokenResp = 1,
             }
 
             private enum NegTokenInit
@@ -49,7 +49,7 @@ namespace System.Net
                 MechTypes = 0,
                 ReqFlags = 1,
                 MechToken = 2,
-                MechListMIC = 3
+                MechListMIC = 3,
             }
 
             private enum NegTokenResp
@@ -57,28 +57,36 @@ namespace System.Net
                 NegState = 0,
                 SupportedMech = 1,
                 ResponseToken = 2,
-                MechListMIC = 3
+                MechListMIC = 3,
             }
 
             private enum NegState
             {
-                Unknown = -1,           // Internal. Not in RFC.
+                Unknown = -1, // Internal. Not in RFC.
                 AcceptCompleted = 0,
                 AcceptIncomplete = 1,
                 Reject = 2,
-                RequestMic = 3
+                RequestMic = 3,
             }
 
-            public override bool IsAuthenticated => _isAuthenticated && _mechanism?.IsAuthenticated == true;
+            public override bool IsAuthenticated =>
+                _isAuthenticated && _mechanism?.IsAuthenticated == true;
             public override bool IsSigned => _mechanism?.IsSigned ?? false;
             public override bool IsEncrypted => _mechanism?.IsEncrypted ?? false;
-            public override bool IsMutuallyAuthenticated => _mechanism?.IsMutuallyAuthenticated ?? false;
+            public override bool IsMutuallyAuthenticated =>
+                _mechanism?.IsMutuallyAuthenticated ?? false;
             public override string Package => _mechanism?.Package ?? NegotiationInfoClass.Negotiate;
             public override string? TargetName => _clientOptions.TargetName;
-            public override IIdentity RemoteIdentity => _mechanism?.RemoteIdentity ?? throw new InvalidOperationException();
-            public override System.Security.Principal.TokenImpersonationLevel ImpersonationLevel => _mechanism?.ImpersonationLevel ?? System.Security.Principal.TokenImpersonationLevel.Impersonation;
+            public override IIdentity RemoteIdentity =>
+                _mechanism?.RemoteIdentity ?? throw new InvalidOperationException();
+            public override System.Security.Principal.TokenImpersonationLevel ImpersonationLevel =>
+                _mechanism?.ImpersonationLevel
+                ?? System.Security.Principal.TokenImpersonationLevel.Impersonation;
 
-            public ManagedSpnegoNegotiateAuthenticationPal(NegotiateAuthenticationClientOptions clientOptions, bool supportKerberos = false)
+            public ManagedSpnegoNegotiateAuthenticationPal(
+                NegotiateAuthenticationClientOptions clientOptions,
+                bool supportKerberos = false
+            )
             {
                 Debug.Assert(clientOptions.Package == NegotiationInfoClass.Negotiate);
                 _clientOptions = clientOptions;
@@ -94,7 +102,10 @@ namespace System.Net
                 _isAuthenticated = false;
             }
 
-            public override unsafe byte[]? GetOutgoingBlob(ReadOnlySpan<byte> incomingBlob, out NegotiateAuthenticationStatusCode statusCode)
+            public override unsafe byte[]? GetOutgoingBlob(
+                ReadOnlySpan<byte> incomingBlob,
+                out NegotiateAuthenticationStatusCode statusCode
+            )
             {
                 //Console.WriteLine($"ManagedSpnegoNegotiateAuthenticationPal.GetOutgoingBlob > {Convert.ToBase64String(incomingBlob)}");
 
@@ -115,29 +126,37 @@ namespace System.Net
 
             private NegotiateAuthenticationPal CreateMechanismForPackage(string packageName)
             {
-                return NegotiateAuthenticationPal.Create(new NegotiateAuthenticationClientOptions
-                {
-                    Package = packageName,
-                    Credential = _clientOptions.Credential,
-                    TargetName = _clientOptions.TargetName,
-                    Binding = _clientOptions.Binding,
-                    RequiredProtectionLevel = _clientOptions.RequiredProtectionLevel,
-                    RequireMutualAuthentication = _clientOptions.RequireMutualAuthentication,
-                    AllowedImpersonationLevel = _clientOptions.AllowedImpersonationLevel,
-                });
+                return NegotiateAuthenticationPal.Create(
+                    new NegotiateAuthenticationClientOptions
+                    {
+                        Package = packageName,
+                        Credential = _clientOptions.Credential,
+                        TargetName = _clientOptions.TargetName,
+                        Binding = _clientOptions.Binding,
+                        RequiredProtectionLevel = _clientOptions.RequiredProtectionLevel,
+                        RequireMutualAuthentication = _clientOptions.RequireMutualAuthentication,
+                        AllowedImpersonationLevel = _clientOptions.AllowedImpersonationLevel,
+                    }
+                );
             }
 
             private IEnumerable<KeyValuePair<string, string>> EnumerateMechanisms()
             {
                 if (_supportKerberos)
                 {
-                    yield return new KeyValuePair<string, string>(NegotiationInfoClass.Kerberos, KerberosOid);
+                    yield return new KeyValuePair<string, string>(
+                        NegotiationInfoClass.Kerberos,
+                        KerberosOid
+                    );
                 }
 
                 yield return new KeyValuePair<string, string>(NegotiationInfoClass.NTLM, NtlmOid);
             }
 
-            private byte[]? CreateSpNegoNegotiateMessage(ReadOnlySpan<byte> incomingBlob, out NegotiateAuthenticationStatusCode statusCode)
+            private byte[]? CreateSpNegoNegotiateMessage(
+                ReadOnlySpan<byte> incomingBlob,
+                out NegotiateAuthenticationStatusCode statusCode
+            )
             {
                 AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
                 using (writer.PushSequence(new Asn1Tag(TagClass.Application, 0)))
@@ -153,7 +172,14 @@ namespace System.Net
                     //    mechListMIC[3] OCTET STRING  OPTIONAL,
                     //    ...
                     // }
-                    using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenInit)))
+                    using (
+                        writer.PushSequence(
+                            new Asn1Tag(
+                                TagClass.ContextSpecific,
+                                (int)NegotiationToken.NegTokenInit
+                            )
+                        )
+                    )
                     {
                         using (writer.PushSequence())
                         {
@@ -164,25 +190,49 @@ namespace System.Net
                             //   --[RFC2743]
                             //
                             // MechTypeList::= SEQUENCE OF MechType
-                            using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechTypes)))
+                            using (
+                                writer.PushSequence(
+                                    new Asn1Tag(
+                                        TagClass.ContextSpecific,
+                                        (int)NegTokenInit.MechTypes
+                                    )
+                                )
+                            )
                             {
                                 AsnWriter mechListWriter = new AsnWriter(AsnEncodingRules.DER);
 
                                 using (mechListWriter.PushSequence())
                                 {
-                                    foreach (KeyValuePair<string, string> packageAndOid in EnumerateMechanisms())
+                                    foreach (
+                                        KeyValuePair<
+                                            string,
+                                            string
+                                        > packageAndOid in EnumerateMechanisms()
+                                    )
                                     {
                                         if (_optimisticMechanism == null)
                                         {
-                                            _optimisticMechanism = CreateMechanismForPackage(packageAndOid.Key);
-                                            mechBlob = _optimisticMechanism.GetOutgoingBlob(incomingBlob, out statusCode);
-                                            if (statusCode != NegotiateAuthenticationStatusCode.ContinueNeeded &&
-                                                statusCode != NegotiateAuthenticationStatusCode.Completed)
+                                            _optimisticMechanism = CreateMechanismForPackage(
+                                                packageAndOid.Key
+                                            );
+                                            mechBlob = _optimisticMechanism.GetOutgoingBlob(
+                                                incomingBlob,
+                                                out statusCode
+                                            );
+                                            if (
+                                                statusCode
+                                                    != NegotiateAuthenticationStatusCode.ContinueNeeded
+                                                && statusCode
+                                                    != NegotiateAuthenticationStatusCode.Completed
+                                            )
                                             {
                                                 mechBlob = null;
                                                 _optimisticMechanism?.Dispose();
                                                 _optimisticMechanism = null;
-                                                if (statusCode != NegotiateAuthenticationStatusCode.Unsupported)
+                                                if (
+                                                    statusCode
+                                                    != NegotiateAuthenticationStatusCode.Unsupported
+                                                )
                                                 {
                                                     return null;
                                                 }
@@ -200,7 +250,14 @@ namespace System.Net
 
                             if (mechBlob != null)
                             {
-                                using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechToken)))
+                                using (
+                                    writer.PushSequence(
+                                        new Asn1Tag(
+                                            TagClass.ContextSpecific,
+                                            (int)NegTokenInit.MechToken
+                                        )
+                                    )
+                                )
                                 {
                                     writer.WriteOctetString(mechBlob);
                                 }
@@ -213,7 +270,10 @@ namespace System.Net
                 return writer.Encode();
             }
 
-            private byte[]? ProcessSpNegoChallenge(ReadOnlySpan<byte> challenge, out NegotiateAuthenticationStatusCode statusCode)
+            private byte[]? ProcessSpNegoChallenge(
+                ReadOnlySpan<byte> challenge,
+                out NegotiateAuthenticationStatusCode statusCode
+            )
             {
                 NegState state = NegState.Unknown;
                 string? mech = null;
@@ -223,7 +283,9 @@ namespace System.Net
                 try
                 {
                     AsnValueReader reader = new AsnValueReader(challenge, AsnEncodingRules.DER);
-                    AsnValueReader challengeReader = reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp));
+                    AsnValueReader challengeReader = reader.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)
+                    );
                     reader.ThrowIfNotEmpty();
 
                     // NegTokenResp ::= SEQUENCE {
@@ -243,30 +305,72 @@ namespace System.Net
 
                     challengeReader = challengeReader.ReadSequence();
 
-                    if (challengeReader.HasData && challengeReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)))
+                    if (
+                        challengeReader.HasData
+                        && challengeReader
+                            .PeekTag()
+                            .HasSameClassAndValue(
+                                new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)
+                            )
+                    )
                     {
-                        AsnValueReader valueReader = challengeReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState));
+                        AsnValueReader valueReader = challengeReader.ReadSequence(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)
+                        );
                         state = valueReader.ReadEnumeratedValue<NegState>();
                         valueReader.ThrowIfNotEmpty();
                     }
 
-                    if (challengeReader.HasData && challengeReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.SupportedMech)))
+                    if (
+                        challengeReader.HasData
+                        && challengeReader
+                            .PeekTag()
+                            .HasSameClassAndValue(
+                                new Asn1Tag(
+                                    TagClass.ContextSpecific,
+                                    (int)NegTokenResp.SupportedMech
+                                )
+                            )
+                    )
                     {
-                        AsnValueReader valueReader = challengeReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.SupportedMech));
+                        AsnValueReader valueReader = challengeReader.ReadSequence(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.SupportedMech)
+                        );
                         mech = valueReader.ReadObjectIdentifier();
                         valueReader.ThrowIfNotEmpty();
                     }
 
-                    if (challengeReader.HasData && challengeReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)))
+                    if (
+                        challengeReader.HasData
+                        && challengeReader
+                            .PeekTag()
+                            .HasSameClassAndValue(
+                                new Asn1Tag(
+                                    TagClass.ContextSpecific,
+                                    (int)NegTokenResp.ResponseToken
+                                )
+                            )
+                    )
                     {
-                        AsnValueReader valueReader = challengeReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken));
+                        AsnValueReader valueReader = challengeReader.ReadSequence(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)
+                        );
                         blob = valueReader.ReadOctetString();
                         valueReader.ThrowIfNotEmpty();
                     }
 
-                    if (challengeReader.HasData && challengeReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)))
+                    if (
+                        challengeReader.HasData
+                        && challengeReader
+                            .PeekTag()
+                            .HasSameClassAndValue(
+                                new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)
+                            )
+                    )
                     {
-                        AsnValueReader valueReader = challengeReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC));
+                        AsnValueReader valueReader = challengeReader.ReadSequence(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)
+                        );
                         mechListMIC = valueReader.ReadOctetString();
                         valueReader.ThrowIfNotEmpty();
                     }
@@ -284,7 +388,7 @@ namespace System.Net
                 {
                     NtlmOid => NegotiationInfoClass.NTLM,
                     KerberosOid => NegotiationInfoClass.Kerberos,
-                    _ => null
+                    _ => null,
                 };
 
                 if (_mechanism is null)
@@ -310,8 +414,7 @@ namespace System.Net
                 }
                 else
                 {
-                    if (requestedPackage != null &&
-                        _mechanism.Package != requestedPackage)
+                    if (requestedPackage != null && _mechanism.Package != requestedPackage)
                     {
                         statusCode = NegotiateAuthenticationStatusCode.InvalidToken;
                         return null;
@@ -323,8 +426,10 @@ namespace System.Net
                     // Process decoded blob.
                     byte[]? response = _mechanism.GetOutgoingBlob(blob, out statusCode);
 
-                    if (statusCode != NegotiateAuthenticationStatusCode.ContinueNeeded &&
-                        statusCode != NegotiateAuthenticationStatusCode.Completed)
+                    if (
+                        statusCode != NegotiateAuthenticationStatusCode.ContinueNeeded
+                        && statusCode != NegotiateAuthenticationStatusCode.Completed
+                    )
                     {
                         return null;
                     }
@@ -333,20 +438,42 @@ namespace System.Net
                     {
                         AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
 
-                        using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)))
+                        using (
+                            writer.PushSequence(
+                                new Asn1Tag(
+                                    TagClass.ContextSpecific,
+                                    (int)NegotiationToken.NegTokenResp
+                                )
+                            )
+                        )
                         {
                             using (writer.PushSequence())
                             {
-                                using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)))
+                                using (
+                                    writer.PushSequence(
+                                        new Asn1Tag(
+                                            TagClass.ContextSpecific,
+                                            (int)NegTokenResp.ResponseToken
+                                        )
+                                    )
+                                )
                                 {
                                     writer.WriteOctetString(response);
                                 }
 
                                 if (statusCode == NegotiateAuthenticationStatusCode.Completed)
                                 {
-                                    using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)))
+                                    using (
+                                        writer.PushSequence(
+                                            new Asn1Tag(
+                                                TagClass.ContextSpecific,
+                                                (int)NegTokenResp.MechListMIC
+                                            )
+                                        )
+                                    )
                                     {
-                                        ArrayBufferWriter<byte> micBuffer = new ArrayBufferWriter<byte>();
+                                        ArrayBufferWriter<byte> micBuffer =
+                                            new ArrayBufferWriter<byte>();
                                         _mechanism.GetMIC(_spnegoMechList, micBuffer);
                                         writer.WriteOctetString(micBuffer.WrittenSpan);
                                     }
@@ -354,8 +481,12 @@ namespace System.Net
                             }
                         }
 
-                        statusCode = state == NegState.RequestMic ? NegotiateAuthenticationStatusCode.ContinueNeeded : NegotiateAuthenticationStatusCode.Completed;
-                        _isAuthenticated = statusCode == NegotiateAuthenticationStatusCode.Completed;
+                        statusCode =
+                            state == NegState.RequestMic
+                                ? NegotiateAuthenticationStatusCode.ContinueNeeded
+                                : NegotiateAuthenticationStatusCode.Completed;
+                        _isAuthenticated =
+                            statusCode == NegotiateAuthenticationStatusCode.Completed;
                         return writer.Encode();
                     }
                 }
@@ -372,8 +503,7 @@ namespace System.Net
                 // - https://github.com/dotnet/runtime/issues/88874
                 // - https://krbdev.mit.edu/rt/Ticket/Display.html?id=6726
                 // - https://www.ibm.com/support/pages/apar/IV74044
-                if (mechListMIC != null &&
-                    !mechListMIC.AsSpan().SequenceEqual(blob.AsSpan()))
+                if (mechListMIC != null && !mechListMIC.AsSpan().SequenceEqual(blob.AsSpan()))
                 {
                     if (_spnegoMechList == null || state != NegState.AcceptCompleted)
                     {
@@ -391,17 +521,23 @@ namespace System.Net
                 }
 
                 _isAuthenticated = state == NegState.AcceptCompleted || state == NegState.Reject;
-                statusCode = state switch {
+                statusCode = state switch
+                {
                     NegState.AcceptCompleted => NegotiateAuthenticationStatusCode.Completed,
                     NegState.AcceptIncomplete => NegotiateAuthenticationStatusCode.ContinueNeeded,
                     NegState.Reject => NegotiateAuthenticationStatusCode.UnknownCredentials,
-                    _ => NegotiateAuthenticationStatusCode.GenericFailure
+                    _ => NegotiateAuthenticationStatusCode.GenericFailure,
                 };
 
                 return null;
             }
 
-            public override NegotiateAuthenticationStatusCode Wrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, bool requestEncryption, out bool isEncrypted)
+            public override NegotiateAuthenticationStatusCode Wrap(
+                ReadOnlySpan<byte> input,
+                IBufferWriter<byte> outputWriter,
+                bool requestEncryption,
+                out bool isEncrypted
+            )
             {
                 if (_mechanism is null || !_isAuthenticated)
                 {
@@ -411,7 +547,11 @@ namespace System.Net
                 return _mechanism.Wrap(input, outputWriter, requestEncryption, out isEncrypted);
             }
 
-            public override NegotiateAuthenticationStatusCode Unwrap(ReadOnlySpan<byte> input, IBufferWriter<byte> outputWriter, out bool wasEncrypted)
+            public override NegotiateAuthenticationStatusCode Unwrap(
+                ReadOnlySpan<byte> input,
+                IBufferWriter<byte> outputWriter,
+                out bool wasEncrypted
+            )
             {
                 if (_mechanism is null || !_isAuthenticated)
                 {
@@ -421,14 +561,24 @@ namespace System.Net
                 return _mechanism.Unwrap(input, outputWriter, out wasEncrypted);
             }
 
-            public override NegotiateAuthenticationStatusCode UnwrapInPlace(Span<byte> input, out int unwrappedOffset, out int unwrappedLength, out bool wasEncrypted)
+            public override NegotiateAuthenticationStatusCode UnwrapInPlace(
+                Span<byte> input,
+                out int unwrappedOffset,
+                out int unwrappedLength,
+                out bool wasEncrypted
+            )
             {
                 if (_mechanism is null || !_isAuthenticated)
                 {
                     throw new InvalidOperationException(SR.net_auth_noauth);
                 }
 
-                return _mechanism.UnwrapInPlace(input, out unwrappedOffset, out unwrappedLength, out wasEncrypted);
+                return _mechanism.UnwrapInPlace(
+                    input,
+                    out unwrappedOffset,
+                    out unwrappedLength,
+                    out wasEncrypted
+                );
             }
 
             public override bool VerifyMIC(ReadOnlySpan<byte> message, ReadOnlySpan<byte> signature)

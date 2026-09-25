@@ -10,11 +10,20 @@ namespace System.Linq.Tests
 {
     public partial class GroupByTests : EnumerableTests
     {
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         [MemberData(nameof(DebuggerAttributesValid_Data))]
-        public void DebuggerAttributesValid<TKey, TElement>(IGrouping<TKey, TElement> grouping, string keyString)
+        public void DebuggerAttributesValid<TKey, TElement>(
+            IGrouping<TKey, TElement> grouping,
+            string keyString
+        )
         {
-            Assert.Equal($"Key = {keyString}", DebuggerAttributes.ValidateDebuggerDisplayReferences(grouping));
+            Assert.Equal(
+                $"Key = {keyString}",
+                DebuggerAttributes.ValidateDebuggerDisplayReferences(grouping)
+            );
 
             object proxyObject = DebuggerAttributes.GetProxyObject(grouping);
 
@@ -22,16 +31,22 @@ namespace System.Linq.Tests
             Assert.Empty(DebuggerAttributes.GetDebuggerVisibleFields(proxyObject.GetType()));
 
             // Validate proxy properties
-            IEnumerable<PropertyInfo> properties = DebuggerAttributes.GetDebuggerVisibleProperties(proxyObject.GetType());
+            IEnumerable<PropertyInfo> properties = DebuggerAttributes.GetDebuggerVisibleProperties(
+                proxyObject.GetType()
+            );
             Assert.Equal(2, properties.Count());
 
             // Key
-            TKey key = (TKey)properties.Single(property => property.Name == "Key").GetValue(proxyObject);
+            TKey key = (TKey)
+                properties.Single(property => property.Name == "Key").GetValue(proxyObject);
             Assert.Equal(grouping.Key, key);
 
             // Values
             PropertyInfo valuesProperty = properties.Single(property => property.Name == "Values");
-            Assert.Equal(DebuggerBrowsableState.RootHidden, DebuggerAttributes.GetDebuggerBrowsableState(valuesProperty));
+            Assert.Equal(
+                DebuggerBrowsableState.RootHidden,
+                DebuggerAttributes.GetDebuggerBrowsableState(valuesProperty)
+            );
             TElement[] values = (TElement[])valuesProperty.GetValue(proxyObject);
             Assert.IsType<TElement[]>(values); // Arrays can be covariant / of assignment-compatible types
             Assert.Equal(grouping, values);
@@ -42,11 +57,31 @@ namespace System.Linq.Tests
         {
             IEnumerable<int> source = new[] { 1 };
             yield return new object[] { source.GroupBy(i => i).Single(), "1" };
-            yield return new object[] { source.GroupBy(i => i.ToString(), i => i).Single(), @"""1""" };
-            yield return new object[] { source.GroupBy(i => TimeSpan.FromSeconds(i), i => i).Single(), "{00:00:01}" };
+            yield return new object[]
+            {
+                source.GroupBy(i => i.ToString(), i => i).Single(),
+                @"""1""",
+            };
+            yield return new object[]
+            {
+                source.GroupBy(i => TimeSpan.FromSeconds(i), i => i).Single(),
+                "{00:00:01}",
+            };
 
-            yield return new object[] { new string[] { null }.GroupBy(x => x).Single(), "null" };
-            yield return new object[] { new int?[] { null }.GroupBy(x => x).Single(), "null" };
+            yield return new object[]
+            {
+                new string[] { null }
+                    .GroupBy(x => x)
+                    .Single(),
+                "null",
+            };
+            yield return new object[]
+            {
+                new int?[] { null }
+                    .GroupBy(x => x)
+                    .Single(),
+                "null",
+            };
         }
     }
 }

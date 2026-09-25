@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
     using System.Drawing;
@@ -14,9 +14,8 @@ namespace System.Web.UI.WebControls {
     // Identical to the 'literal' control, but used for localization
 
     [
-    Designer("System.Web.UI.Design.WebControls.LocalizeDesigner, " + AssemblyRef.SystemDesign),
-    ToolboxBitmap(typeof(Localize)),
+        Designer("System.Web.UI.Design.WebControls.LocalizeDesigner, " + AssemblyRef.SystemDesign),
+        ToolboxBitmap(typeof(Localize)),
     ]
-    public class Localize : Literal {
-    }
+    public class Localize : Literal { }
 }

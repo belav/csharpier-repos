@@ -16,7 +16,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new ComplexModelDtoResult("some string", null),
-                "validationNode");
+                "validationNode"
+            );
         }
 
         [Fact]

@@ -13,11 +13,16 @@ using Xunit.Abstractions;
 namespace System.Xml.XslCompiledTransformApiTests
 {
     //[TestCase(Name = "Xml 4th Errata tests for XslCompiledTransform", Params = new object[] { 300 })]
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsReflectionEmitSupported)
+    )]
     public class Errata4 : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
-        public Errata4(ITestOutputHelper output) : base(output)
+
+        public Errata4(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -79,7 +84,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
         #region private const string createElementsXsltAndXpath = ...
 
-        private const string createElementsXsltAndXpath = @" <xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"">
+        private const string createElementsXsltAndXpath =
+            @" <xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"">
   <xsl:output method=""xml"" indent=""yes""/>
 
   <xsl:param name=""mode""/>
@@ -107,7 +113,8 @@ namespace System.Xml.XslCompiledTransformApiTests
 
         #region private const string createElementsXsltInline = ...
 
-        private const string createElementsXsltInline = @" <xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"" xmlns:a=""foo"">
+        private const string createElementsXsltInline =
+            @" <xsl:stylesheet version=""1.0"" xmlns:xsl=""http://www.w3.org/1999/XSL/Transform"" xmlns:a=""foo"">
   <xsl:output method=""xml"" indent=""yes""/>
   <xsl:template match=""/*"">
     <xsl:element name=""{0}"">
@@ -148,34 +155,55 @@ namespace System.Xml.XslCompiledTransformApiTests
         {
             bool isValidChar = (bool)param0;
             CharType charType = (CharType)param1;
-            var startChars = new CharType[] { CharType.NameStartChar, CharType.NameStartSurrogateHighChar, CharType.NameStartSurrogateLowChar };
+            var startChars = new CharType[]
+            {
+                CharType.NameStartChar,
+                CharType.NameStartSurrogateHighChar,
+                CharType.NameStartSurrogateLowChar,
+            };
 
-            string charsToChooseFrom = isValidChar ? UnicodeCharHelper.GetValidCharacters(charType) : UnicodeCharHelper.GetInvalidCharacters(charType);
+            string charsToChooseFrom = isValidChar
+                ? UnicodeCharHelper.GetValidCharacters(charType)
+                : UnicodeCharHelper.GetInvalidCharacters(charType);
             Assert.True(charsToChooseFrom.Length > 0);
 
-            foreach (bool enableDebug in new bool[] { /*true,*/ false }) // XSLT debugging not supported in Core
+            foreach (
+                bool enableDebug in new bool[]
+                { /*true,*/
+                    false,
+                }
+            ) // XSLT debugging not supported in Core
             {
                 XslCompiledTransform transf = new XslCompiledTransform(enableDebug);
-                using (XmlReader r = XmlReader.Create(new StringReader(createElementsXsltAndXpath))) transf.Load(r);
+                using (XmlReader r = XmlReader.Create(new StringReader(createElementsXsltAndXpath)))
+                    transf.Load(r);
 
                 for (int i = 0; i < charsToChooseFrom.Length; i++)
                 {
                     XsltArgumentList arguments = new XsltArgumentList();
-                    arguments.AddParam("mode", "", Array.Exists(startChars, x => x == charType) ? "start" : "middle");
+                    arguments.AddParam(
+                        "mode",
+                        "",
+                        Array.Exists(startChars, x => x == charType) ? "start" : "middle"
+                    );
                     string strToInject = GenerateStringToInject(charsToChooseFrom, i, charType);
-                    if (strToInject[0] == ':') continue;
+                    if (strToInject[0] == ':')
+                        continue;
                     arguments.AddParam("char", "", strToInject);
                     StringBuilder sb = new StringBuilder();
 
                     try
                     {
-                        using (XmlReader r = XmlReader.Create(new StringReader("<root/>"))) transf.Transform(r, arguments, new StringWriter(sb));
+                        using (XmlReader r = XmlReader.Create(new StringReader("<root/>")))
+                            transf.Transform(r, arguments, new StringWriter(sb));
                         Assert.True(isValidChar);
                     }
                     catch (Exception)
                     {
-                        if (isValidChar) throw;
-                        else continue; //exception expected -> continue
+                        if (isValidChar)
+                            throw;
+                        else
+                            continue; //exception expected -> continue
                     }
                 }
             }
@@ -211,12 +239,24 @@ namespace System.Xml.XslCompiledTransformApiTests
             int numOfRepeat = 300; // from the test case
             bool isValidChar = (bool)param0;
             CharType charType = (CharType)param1;
-            var startChars = new CharType[] { CharType.NameStartChar, CharType.NameStartSurrogateHighChar, CharType.NameStartSurrogateLowChar };
+            var startChars = new CharType[]
+            {
+                CharType.NameStartChar,
+                CharType.NameStartSurrogateHighChar,
+                CharType.NameStartSurrogateLowChar,
+            };
 
-            string charsToChooseFrom = isValidChar ? UnicodeCharHelper.GetValidCharacters(charType) : UnicodeCharHelper.GetInvalidCharacters(charType);
+            string charsToChooseFrom = isValidChar
+                ? UnicodeCharHelper.GetValidCharacters(charType)
+                : UnicodeCharHelper.GetInvalidCharacters(charType);
             Assert.True(charsToChooseFrom.Length > 0);
 
-            foreach (bool enableDebug in new bool[] { /*true,*/ false }) // XSLT debugging not supported in Core
+            foreach (
+                bool enableDebug in new bool[]
+                { /*true,*/
+                    false,
+                }
+            ) // XSLT debugging not supported in Core
             {
                 foreach (string name in FuzzNames(!isValidChar, charType, numOfRepeat))
                 {
@@ -224,24 +264,36 @@ namespace System.Xml.XslCompiledTransformApiTests
 
                     try
                     {
-                        using (XmlReader r = XmlReader.Create(new StringReader(string.Format(createElementsXsltInline, name)))) transf.Load(r);
+                        using (
+                            XmlReader r = XmlReader.Create(
+                                new StringReader(string.Format(createElementsXsltInline, name))
+                            )
+                        )
+                            transf.Load(r);
                         Assert.True(isValidChar);
                     }
                     catch (Exception)
                     {
-                        if (isValidChar) throw;
-                        else continue; //exception expected -> continue
+                        if (isValidChar)
+                            throw;
+                        else
+                            continue; //exception expected -> continue
                     }
 
                     // if loading of the stylesheet passed, then we should be able to provide
                     StringBuilder sb = new StringBuilder();
-                    using (XmlReader r = XmlReader.Create(new StringReader("<root/>"))) transf.Transform(r, null, new StringWriter(sb));
+                    using (XmlReader r = XmlReader.Create(new StringReader("<root/>")))
+                        transf.Transform(r, null, new StringWriter(sb));
                 }
             }
             return;
         }
 
-        private string GenerateStringToInject(string charsToChooseFrom, int position, CharType charType)
+        private string GenerateStringToInject(
+            string charsToChooseFrom,
+            int position,
+            CharType charType
+        )
         {
             char charToInject = charsToChooseFrom[position];
             switch (charType)
@@ -308,8 +360,10 @@ namespace System.Xml.XslCompiledTransformApiTests
                 }
                 catch (XsltException)
                 {
-                    if (isValidChar) throw;
-                    else continue; //exception expected -> continue
+                    if (isValidChar)
+                        throw;
+                    else
+                        continue; //exception expected -> continue
                 }
 
                 XmlDocument xmlDoc = new XmlDocument();
@@ -334,12 +388,15 @@ namespace System.Xml.XslCompiledTransformApiTests
             return;
         }
 
-        private IEnumerable<string> FuzzNames(bool useInvalidCharacters, CharType charType, int namesCount)
+        private IEnumerable<string> FuzzNames(
+            bool useInvalidCharacters,
+            CharType charType,
+            int namesCount
+        )
         {
-            string chars =
-                useInvalidCharacters ?
-                UnicodeCharHelper.GetInvalidCharacters(charType) :
-                UnicodeCharHelper.GetValidCharacters(charType);
+            string chars = useInvalidCharacters
+                ? UnicodeCharHelper.GetInvalidCharacters(charType)
+                : UnicodeCharHelper.GetValidCharacters(charType);
 
             for (int i = 0; i < namesCount; i++)
             {

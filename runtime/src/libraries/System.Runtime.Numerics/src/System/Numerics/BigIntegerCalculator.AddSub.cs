@@ -21,7 +21,13 @@ namespace System.Numerics
             Debug.Assert(left.Length >= 1);
             Debug.Assert(bits.Length == left.Length + 1);
 
-            Add(left, bits, ref MemoryMarshal.GetReference(bits), startIndex: 0, initialCarry: right);
+            Add(
+                left,
+                bits,
+                ref MemoryMarshal.GetReference(bits),
+                startIndex: 0,
+                initialCarry: right
+            );
         }
 
         public static void Add(ReadOnlySpan<uint> left, ReadOnlySpan<uint> right, Span<uint> bits)
@@ -71,13 +77,13 @@ namespace System.Numerics
             // Same as above, but we're writing the result directly to a and
             // stop execution, if we're out of b and c is already 0.
 
-            for ( ; i < right.Length; i++)
+            for (; i < right.Length; i++)
             {
                 long digit = (Unsafe.Add(ref leftPtr, i) + carry) + right[i];
                 Unsafe.Add(ref leftPtr, i) = unchecked((uint)digit);
                 carry = digit >> 32;
             }
-            for ( ; carry != 0 && i < left.Length; i++)
+            for (; carry != 0 && i < left.Length; i++)
             {
                 long digit = left[i] + carry;
                 left[i] = (uint)digit;
@@ -93,10 +99,20 @@ namespace System.Numerics
             Debug.Assert(left[0] >= right || left.Length >= 2);
             Debug.Assert(bits.Length == left.Length);
 
-            Subtract(left, bits, ref MemoryMarshal.GetReference(bits), startIndex: 0, initialCarry: -right);
+            Subtract(
+                left,
+                bits,
+                ref MemoryMarshal.GetReference(bits),
+                startIndex: 0,
+                initialCarry: -right
+            );
         }
 
-        public static void Subtract(ReadOnlySpan<uint> left, ReadOnlySpan<uint> right, Span<uint> bits)
+        public static void Subtract(
+            ReadOnlySpan<uint> left,
+            ReadOnlySpan<uint> right,
+            Span<uint> bits
+        )
         {
             Debug.Assert(right.Length >= 1);
             Debug.Assert(left.Length >= right.Length);
@@ -162,7 +178,13 @@ namespace System.Numerics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Add(ReadOnlySpan<uint> left, Span<uint> bits, ref uint resultPtr, int startIndex, long initialCarry)
+        private static void Add(
+            ReadOnlySpan<uint> left,
+            Span<uint> bits,
+            ref uint resultPtr,
+            int startIndex,
+            long initialCarry
+        )
         {
             // Executes the addition for one big and one 32-bit integer.
             // Thus, we've similar code than below, but there is no loop for
@@ -184,7 +206,7 @@ namespace System.Numerics
             }
             else
             {
-                for (; i < left.Length;)
+                for (; i < left.Length; )
                 {
                     carry += left[i];
                     Unsafe.Add(ref resultPtr, i) = unchecked((uint)carry);
@@ -209,7 +231,13 @@ namespace System.Numerics
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Subtract(ReadOnlySpan<uint> left, Span<uint> bits, ref uint resultPtr, int startIndex, long initialCarry)
+        private static void Subtract(
+            ReadOnlySpan<uint> left,
+            Span<uint> bits,
+            ref uint resultPtr,
+            int startIndex,
+            long initialCarry
+        )
         {
             // Executes the addition for one big and one 32-bit integer.
             // Thus, we've similar code than below, but there is no loop for
@@ -229,7 +257,7 @@ namespace System.Numerics
             }
             else
             {
-                for (; i < left.Length;)
+                for (; i < left.Length; )
                 {
                     carry += left[i];
                     Unsafe.Add(ref resultPtr, i) = unchecked((uint)carry);

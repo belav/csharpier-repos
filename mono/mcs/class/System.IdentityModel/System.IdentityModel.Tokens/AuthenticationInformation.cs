@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,18 @@ using System.IdentityModel.Tokens;
 
 namespace System.Security.Claims
 {
-	public class AuthenticationInformation
-	{
-		private Collection<AuthenticationContext> authorizationContexts = new Collection<AuthenticationContext> ();
+    public class AuthenticationInformation
+    {
+        private Collection<AuthenticationContext> authorizationContexts =
+            new Collection<AuthenticationContext>();
 
-		public String Address { get; set; }
-		public Collection<AuthenticationContext> AuthorizationContexts { get { return authorizationContexts; } }
-		public String DnsName { get; set; }
-		public Nullable<DateTime> NotOnOrAfter { get; set; }
-		public String Session { get; set; }
-	}
+        public String Address { get; set; }
+        public Collection<AuthenticationContext> AuthorizationContexts
+        {
+            get { return authorizationContexts; }
+        }
+        public String DnsName { get; set; }
+        public Nullable<DateTime> NotOnOrAfter { get; set; }
+        public String Session { get; set; }
+    }
 }

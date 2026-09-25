@@ -13,7 +13,6 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
 
-
     delegate IConnectionOrientedTransportFactorySettings TransportSettingsCallback(Uri via);
     delegate void ConnectionClosedCallback(InitialServerConnectionReader connectionReader);
 
@@ -28,13 +27,23 @@ namespace System.ServiceModel.Channels
         ConnectionClosedCallback closedCallback;
         bool isClosed;
 
-        protected InitialServerConnectionReader(IConnection connection, ConnectionClosedCallback closedCallback)
-            : this(connection, closedCallback,
-            ConnectionOrientedTransportDefaults.MaxViaSize, ConnectionOrientedTransportDefaults.MaxContentTypeSize)
-        {
-        }
+        protected InitialServerConnectionReader(
+            IConnection connection,
+            ConnectionClosedCallback closedCallback
+        )
+            : this(
+                connection,
+                closedCallback,
+                ConnectionOrientedTransportDefaults.MaxViaSize,
+                ConnectionOrientedTransportDefaults.MaxContentTypeSize
+            ) { }
 
-        protected InitialServerConnectionReader(IConnection connection, ConnectionClosedCallback closedCallback, int maxViaSize, int maxContentTypeSize)
+        protected InitialServerConnectionReader(
+            IConnection connection,
+            ConnectionClosedCallback closedCallback,
+            int maxViaSize,
+            int maxContentTypeSize
+        )
         {
             if (connection == null)
             {
@@ -59,15 +68,8 @@ namespace System.ServiceModel.Channels
 
         public Action ConnectionDequeuedCallback
         {
-            get
-            {
-                return this.connectionDequeuedCallback;
-            }
-
-            set
-            {
-                this.connectionDequeuedCallback = value;
-            }
+            get { return this.connectionDequeuedCallback; }
+            set { this.connectionDequeuedCallback = value; }
         }
 
         public Action GetConnectionDequeuedCallback()
@@ -84,18 +86,12 @@ namespace System.ServiceModel.Channels
 
         protected int MaxContentTypeSize
         {
-            get
-            {
-                return maxContentTypeSize;
-            }
+            get { return maxContentTypeSize; }
         }
 
         protected int MaxViaSize
         {
-            get
-            {
-                return maxViaSize;
-            }
+            get { return maxViaSize; }
         }
 
         object ThisLock
@@ -119,7 +115,10 @@ namespace System.ServiceModel.Channels
             }
             catch (CommunicationException communicationException)
             {
-                DiagnosticUtility.TraceHandledException(communicationException, TraceEventType.Information);
+                DiagnosticUtility.TraceHandledException(
+                    communicationException,
+                    TraceEventType.Information
+                );
             }
             catch (TimeoutException timeoutException)
             {
@@ -127,7 +126,10 @@ namespace System.ServiceModel.Channels
                 {
                     TD.CloseTimeout(timeoutException.Message);
                 }
-                DiagnosticUtility.TraceHandledException(timeoutException, TraceEventType.Information);
+                DiagnosticUtility.TraceHandledException(
+                    timeoutException,
+                    TraceEventType.Information
+                );
             }
         }
 
@@ -176,8 +178,13 @@ namespace System.ServiceModel.Channels
                 {
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.ChannelConnectionDropped,
-                            SR.GetString(SR.TraceCodeChannelConnectionDropped), this, e);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.ChannelConnectionDropped,
+                            SR.GetString(SR.TraceCodeChannelConnectionDropped),
+                            this,
+                            e
+                        );
                     }
                 }
 
@@ -232,9 +239,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal static void SendFault(IConnection connection, string faultString, byte[] drainBuffer, TimeSpan sendTimeout, int maxRead)
+        internal static void SendFault(
+            IConnection connection,
+            string faultString,
+            byte[] drainBuffer,
+            TimeSpan sendTimeout,
+            int maxRead
+        )
         {
-
             if (TD.ConnectionReaderSendFaultIsEnabled())
             {
                 TD.ConnectionReaderSendFault(faultString);
@@ -244,7 +256,13 @@ namespace System.ServiceModel.Channels
             TimeoutHelper timeoutHelper = new TimeoutHelper(sendTimeout);
             try
             {
-                connection.Write(encodedFault.EncodedBytes, 0, encodedFault.EncodedBytes.Length, true, timeoutHelper.RemainingTime());
+                connection.Write(
+                    encodedFault.EncodedBytes,
+                    0,
+                    encodedFault.EncodedBytes.Length,
+                    true,
+                    timeoutHelper.RemainingTime()
+                );
                 connection.Shutdown(timeoutHelper.RemainingTime());
             }
             catch (CommunicationException e)
@@ -267,11 +285,16 @@ namespace System.ServiceModel.Channels
             // make sure we read until EOF or a quota is hit
             int read = 0;
             int readTotal = 0;
-            for (;;)
+            for (; ; )
             {
                 try
                 {
-                    read = connection.Read(drainBuffer, 0, drainBuffer.Length, timeoutHelper.RemainingTime());
+                    read = connection.Read(
+                        drainBuffer,
+                        0,
+                        drainBuffer.Length,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 catch (CommunicationException e)
                 {
@@ -304,10 +327,21 @@ namespace System.ServiceModel.Channels
             ConnectionUtilities.CloseNoThrow(connection, timeoutHelper.RemainingTime());
         }
 
-        public static IAsyncResult BeginUpgradeConnection(IConnection connection, StreamUpgradeAcceptor upgradeAcceptor,
-            IDefaultCommunicationTimeouts defaultTimeouts, AsyncCallback callback, object state)
+        public static IAsyncResult BeginUpgradeConnection(
+            IConnection connection,
+            StreamUpgradeAcceptor upgradeAcceptor,
+            IDefaultCommunicationTimeouts defaultTimeouts,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new UpgradeConnectionAsyncResult(connection, upgradeAcceptor, defaultTimeouts, callback, state);
+            return new UpgradeConnectionAsyncResult(
+                connection,
+                upgradeAcceptor,
+                defaultTimeouts,
+                callback,
+                state
+            );
         }
 
         public static IConnection EndUpgradeConnection(IAsyncResult result)
@@ -316,7 +350,11 @@ namespace System.ServiceModel.Channels
             return UpgradeConnectionAsyncResult.End(result);
         }
 
-        public static IConnection UpgradeConnection(IConnection connection, StreamUpgradeAcceptor upgradeAcceptor, IDefaultCommunicationTimeouts defaultTimeouts)
+        public static IConnection UpgradeConnection(
+            IConnection connection,
+            StreamUpgradeAcceptor upgradeAcceptor,
+            IDefaultCommunicationTimeouts defaultTimeouts
+        )
         {
             ConnectionStream connectionStream = new ConnectionStream(connection, defaultTimeouts);
             Stream stream = upgradeAcceptor.AcceptUpgrade(connectionStream);
@@ -324,9 +362,14 @@ namespace System.ServiceModel.Channels
             {
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information,
-                        TraceCode.StreamSecurityUpgradeAccepted, SR.GetString(SR.TraceCodeStreamSecurityUpgradeAccepted),
-                        new StringTraceRecord("Type", upgradeAcceptor.GetType().ToString()), connection, null);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.StreamSecurityUpgradeAccepted,
+                        SR.GetString(SR.TraceCodeStreamSecurityUpgradeAccepted),
+                        new StringTraceRecord("Type", upgradeAcceptor.GetType().ToString()),
+                        connection,
+                        null
+                    );
                 }
             }
 
@@ -336,20 +379,30 @@ namespace System.ServiceModel.Channels
         class UpgradeConnectionAsyncResult : AsyncResult
         {
             ConnectionStream connectionStream;
-            static AsyncCallback onAcceptUpgrade = Fx.ThunkCallback(new AsyncCallback(OnAcceptUpgrade));
+            static AsyncCallback onAcceptUpgrade = Fx.ThunkCallback(
+                new AsyncCallback(OnAcceptUpgrade)
+            );
             IConnection connection;
             StreamUpgradeAcceptor upgradeAcceptor;
 
-            public UpgradeConnectionAsyncResult(IConnection connection,
-                StreamUpgradeAcceptor upgradeAcceptor, IDefaultCommunicationTimeouts defaultTimeouts,
-                AsyncCallback callback, object state)
+            public UpgradeConnectionAsyncResult(
+                IConnection connection,
+                StreamUpgradeAcceptor upgradeAcceptor,
+                IDefaultCommunicationTimeouts defaultTimeouts,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.upgradeAcceptor = upgradeAcceptor;
                 this.connectionStream = new ConnectionStream(connection, defaultTimeouts);
                 bool completeSelf = false;
 
-                IAsyncResult result = upgradeAcceptor.BeginAcceptUpgrade(connectionStream, onAcceptUpgrade, this);
+                IAsyncResult result = upgradeAcceptor.BeginAcceptUpgrade(
+                    connectionStream,
+                    onAcceptUpgrade,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -365,7 +418,8 @@ namespace System.ServiceModel.Channels
 
             public static IConnection End(IAsyncResult result)
             {
-                UpgradeConnectionAsyncResult thisPtr = AsyncResult.End<UpgradeConnectionAsyncResult>(result);
+                UpgradeConnectionAsyncResult thisPtr =
+                    AsyncResult.End<UpgradeConnectionAsyncResult>(result);
                 return thisPtr.connection;
             }
 
@@ -384,9 +438,14 @@ namespace System.ServiceModel.Channels
                     {
                         if (DiagnosticUtility.ShouldTraceInformation && endSucceeded)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
-                                TraceCode.StreamSecurityUpgradeAccepted, SR.GetString(SR.TraceCodeStreamSecurityUpgradeAccepted),
-                                new StringTraceRecord("Type", upgradeAcceptor.GetType().ToString()), this, null);
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
+                                TraceCode.StreamSecurityUpgradeAccepted,
+                                SR.GetString(SR.TraceCodeStreamSecurityUpgradeAccepted),
+                                new StringTraceRecord("Type", upgradeAcceptor.GetType().ToString()),
+                                this,
+                                null
+                            );
                         }
                     }
                 }
@@ -398,7 +457,8 @@ namespace System.ServiceModel.Channels
                 if (result.CompletedSynchronously)
                     return;
 
-                UpgradeConnectionAsyncResult thisPtr = (UpgradeConnectionAsyncResult)result.AsyncState;
+                UpgradeConnectionAsyncResult thisPtr = (UpgradeConnectionAsyncResult)
+                    result.AsyncState;
                 Exception completionException = null;
                 try
                 {

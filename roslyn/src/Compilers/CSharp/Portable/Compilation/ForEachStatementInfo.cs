@@ -62,14 +62,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// Initializes a new instance of the <see cref="ForEachStatementInfo" /> structure.
         /// </summary>
-        internal ForEachStatementInfo(bool isAsync,
-                                      IMethodSymbol getEnumeratorMethod,
-                                      IMethodSymbol moveNextMethod,
-                                      IPropertySymbol currentProperty,
-                                      IMethodSymbol disposeMethod,
-                                      ITypeSymbol elementType,
-                                      Conversion elementConversion,
-                                      Conversion currentConversion)
+        internal ForEachStatementInfo(
+            bool isAsync,
+            IMethodSymbol getEnumeratorMethod,
+            IMethodSymbol moveNextMethod,
+            IPropertySymbol currentProperty,
+            IMethodSymbol disposeMethod,
+            ITypeSymbol elementType,
+            Conversion elementConversion,
+            Conversion currentConversion
+        )
         {
             this.IsAsynchronous = isAsync;
             this.GetEnumeratorMethod = getEnumeratorMethod;
@@ -100,14 +102,28 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override int GetHashCode()
         {
-            return Hash.Combine(IsAsynchronous,
-                   Hash.Combine(GetEnumeratorMethod,
-                   Hash.Combine(MoveNextMethod,
-                   Hash.Combine(CurrentProperty,
-                   Hash.Combine(DisposeMethod,
-                   Hash.Combine(ElementType,
-                   Hash.Combine(ElementConversion.GetHashCode(),
-                                CurrentConversion.GetHashCode())))))));
+            return Hash.Combine(
+                IsAsynchronous,
+                Hash.Combine(
+                    GetEnumeratorMethod,
+                    Hash.Combine(
+                        MoveNextMethod,
+                        Hash.Combine(
+                            CurrentProperty,
+                            Hash.Combine(
+                                DisposeMethod,
+                                Hash.Combine(
+                                    ElementType,
+                                    Hash.Combine(
+                                        ElementConversion.GetHashCode(),
+                                        CurrentConversion.GetHashCode()
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            );
         }
     }
 }

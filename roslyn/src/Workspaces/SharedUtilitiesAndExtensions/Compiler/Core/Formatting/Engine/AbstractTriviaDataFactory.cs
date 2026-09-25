@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.Formatting
         protected readonly SyntaxFormattingOptions Options;
 
         private readonly Whitespace[] _spaces;
-        private readonly Whitespace?[,] _whitespaces = new Whitespace[LineBreakCacheSize, IndentationLevelCacheSize];
+        private readonly Whitespace?[,] _whitespaces = new Whitespace[
+            LineBreakCacheSize,
+            IndentationLevelCacheSize
+        ];
 
         protected AbstractTriviaDataFactory(TreeData treeInfo, SyntaxFormattingOptions options)
         {
@@ -30,7 +33,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             _spaces = new Whitespace[SpaceCacheSize];
             for (var i = 0; i < SpaceCacheSize; i++)
             {
-                _spaces[i] = new Whitespace(Options, space: i, elastic: false, language: treeInfo.Root.Language);
+                _spaces[i] = new Whitespace(
+                    Options,
+                    space: i,
+                    elastic: false,
+                    language: treeInfo.Root.Language
+                );
             }
         }
 
@@ -41,7 +49,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             // if result has elastic trivia in them, never use cache
             if (elastic)
             {
-                return new Whitespace(this.Options, space, elastic: true, language: this.TreeInfo.Root.Language);
+                return new Whitespace(
+                    this.Options,
+                    space,
+                    elastic: true,
+                    language: this.TreeInfo.Root.Language
+                );
             }
 
             if (space < SpaceCacheSize)
@@ -50,10 +63,20 @@ namespace Microsoft.CodeAnalysis.Formatting
             }
 
             // create a new space
-            return new Whitespace(this.Options, space, elastic: false, language: this.TreeInfo.Root.Language);
+            return new Whitespace(
+                this.Options,
+                space,
+                elastic: false,
+                language: this.TreeInfo.Root.Language
+            );
         }
 
-        protected TriviaData GetWhitespaceTriviaData(int lineBreaks, int indentation, bool useTriviaAsItIs, bool elastic)
+        protected TriviaData GetWhitespaceTriviaData(
+            int lineBreaks,
+            int indentation,
+            bool useTriviaAsItIs,
+            bool elastic
+        )
         {
             Contract.ThrowIfFalse(lineBreaks >= 0);
             Contract.ThrowIfFalse(indentation >= 0);
@@ -63,11 +86,12 @@ namespace Microsoft.CodeAnalysis.Formatting
             //  #2. analysis (Item1) didn't find anything preventing us from using cache such as trailing whitespace before new line
             //  #3. number of line breaks (Item2) are under cache capacity (line breaks)
             //  #4. indentation (Item3) is aligned to indentation level
-            var canUseCache = !elastic &&
-                              useTriviaAsItIs &&
-                              lineBreaks > 0 &&
-                              lineBreaks <= LineBreakCacheSize &&
-                              indentation % Options.IndentationSize == 0;
+            var canUseCache =
+                !elastic
+                && useTriviaAsItIs
+                && lineBreaks > 0
+                && lineBreaks <= LineBreakCacheSize
+                && indentation % Options.IndentationSize == 0;
 
             if (canUseCache)
             {
@@ -80,23 +104,46 @@ namespace Microsoft.CodeAnalysis.Formatting
                 }
             }
 
-            return
-                useTriviaAsItIs
-                    ? new Whitespace(this.Options, lineBreaks, indentation, elastic, language: this.TreeInfo.Root.Language)
-                    : new ModifiedWhitespace(this.Options, lineBreaks, indentation, elastic, language: this.TreeInfo.Root.Language);
+            return useTriviaAsItIs
+                ? new Whitespace(
+                    this.Options,
+                    lineBreaks,
+                    indentation,
+                    elastic,
+                    language: this.TreeInfo.Root.Language
+                )
+                : new ModifiedWhitespace(
+                    this.Options,
+                    lineBreaks,
+                    indentation,
+                    elastic,
+                    language: this.TreeInfo.Root.Language
+                );
         }
 
         private void EnsureWhitespaceTriviaInfo(int lineIndex, int indentationLevel)
         {
             Contract.ThrowIfFalse(lineIndex is >= 0 and < LineBreakCacheSize);
-            Contract.ThrowIfFalse(indentationLevel >= 0 && indentationLevel < _whitespaces.Length / _whitespaces.Rank);
+            Contract.ThrowIfFalse(
+                indentationLevel >= 0 && indentationLevel < _whitespaces.Length / _whitespaces.Rank
+            );
 
             // set up caches
             if (_whitespaces[lineIndex, indentationLevel] == null)
             {
                 var indentation = indentationLevel * Options.IndentationSize;
-                var triviaInfo = new Whitespace(Options, lineBreaks: lineIndex + 1, indentation: indentation, elastic: false, language: this.TreeInfo.Root.Language);
-                Interlocked.CompareExchange(ref _whitespaces[lineIndex, indentationLevel], triviaInfo, null);
+                var triviaInfo = new Whitespace(
+                    Options,
+                    lineBreaks: lineIndex + 1,
+                    indentation: indentation,
+                    elastic: false,
+                    language: this.TreeInfo.Root.Language
+                );
+                Interlocked.CompareExchange(
+                    ref _whitespaces[lineIndex, indentationLevel],
+                    triviaInfo,
+                    null
+                );
             }
         }
 

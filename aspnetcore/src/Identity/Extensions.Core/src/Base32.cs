@@ -23,50 +23,46 @@ internal static class Base32
         // which will either be removed due to integer division truncation if the length was already a multiple of 5
         // or it will increase the divided length by 1 meaning that a 1-4 byte length chunk will be 1 instead of 0
         // so the padding is now included in our string length calculation
-        return string.Create(
-            ((length + 4) / 5) * 8,
-            0,
-            static (buffer, _) =>
+        return string.Create(((length + 4) / 5) * 8, 0, static (buffer, _) =>
+        {
+            Span<byte> bytes = stackalloc byte[length];
+            RandomNumberGenerator.Fill(bytes);
+
+            var index = 0;
+            for (int offset = 0; offset < bytes.Length; )
             {
-                Span<byte> bytes = stackalloc byte[length];
-                RandomNumberGenerator.Fill(bytes);
+                byte a,
+                    b,
+                    c,
+                    d,
+                    e,
+                    f,
+                    g,
+                    h;
+                int numCharsToOutput = GetNextGroup(
+                    bytes,
+                    ref offset,
+                    out a,
+                    out b,
+                    out c,
+                    out d,
+                    out e,
+                    out f,
+                    out g,
+                    out h
+                );
 
-                var index = 0;
-                for (int offset = 0; offset < bytes.Length; )
-                {
-                    byte a,
-                        b,
-                        c,
-                        d,
-                        e,
-                        f,
-                        g,
-                        h;
-                    int numCharsToOutput = GetNextGroup(
-                        bytes,
-                        ref offset,
-                        out a,
-                        out b,
-                        out c,
-                        out d,
-                        out e,
-                        out f,
-                        out g,
-                        out h
-                    );
-
-                    buffer[index + 7] = ((numCharsToOutput >= 8) ? _base32Chars[h] : '=');
-                    buffer[index + 6] = ((numCharsToOutput >= 7) ? _base32Chars[g] : '=');
-                    buffer[index + 5] = ((numCharsToOutput >= 6) ? _base32Chars[f] : '=');
-                    buffer[index + 4] = ((numCharsToOutput >= 5) ? _base32Chars[e] : '=');
-                    buffer[index + 3] = ((numCharsToOutput >= 4) ? _base32Chars[d] : '=');
-                    buffer[index + 2] = (numCharsToOutput >= 3) ? _base32Chars[c] : '=';
-                    buffer[index + 1] = (numCharsToOutput >= 2) ? _base32Chars[b] : '=';
-                    buffer[index] = (numCharsToOutput >= 1) ? _base32Chars[a] : '=';
-                    index += 8;
-                }
+                buffer[index + 7] = ((numCharsToOutput >= 8) ? _base32Chars[h] : '=');
+                buffer[index + 6] = ((numCharsToOutput >= 7) ? _base32Chars[g] : '=');
+                buffer[index + 5] = ((numCharsToOutput >= 6) ? _base32Chars[f] : '=');
+                buffer[index + 4] = ((numCharsToOutput >= 5) ? _base32Chars[e] : '=');
+                buffer[index + 3] = ((numCharsToOutput >= 4) ? _base32Chars[d] : '=');
+                buffer[index + 2] = (numCharsToOutput >= 3) ? _base32Chars[c] : '=';
+                buffer[index + 1] = (numCharsToOutput >= 2) ? _base32Chars[b] : '=';
+                buffer[index] = (numCharsToOutput >= 1) ? _base32Chars[a] : '=';
+                index += 8;
             }
-        );
+        });
     }
 #endif
 

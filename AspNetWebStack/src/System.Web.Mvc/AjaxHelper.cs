@@ -13,11 +13,13 @@ namespace System.Web.Mvc
         private DynamicViewDataDictionary _dynamicViewDataDictionary;
 
         public AjaxHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-            : this(viewContext, viewDataContainer, RouteTable.Routes)
-        {
-        }
+            : this(viewContext, viewDataContainer, RouteTable.Routes) { }
 
-        public AjaxHelper(ViewContext viewContext, IViewDataContainer viewDataContainer, RouteCollection routeCollection)
+        public AjaxHelper(
+            ViewContext viewContext,
+            IViewDataContainer viewDataContainer,
+            RouteCollection routeCollection
+        )
         {
             if (viewContext == null)
             {
@@ -72,7 +74,11 @@ namespace System.Web.Mvc
 
         public IViewDataContainer ViewDataContainer { get; internal set; }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "Instance method for consistency with other helpers.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "Instance method for consistency with other helpers."
+        )]
         public string JavaScriptStringEncode(string message)
         {
             if (String.IsNullOrEmpty(message))

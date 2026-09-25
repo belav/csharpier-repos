@@ -28,9 +28,7 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentNullException"><paramref name="archiveStream"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="archiveStream"/> does not support writing.</exception>
         public TarWriter(Stream archiveStream)
-            : this(archiveStream, TarEntryFormat.Pax, leaveOpen: false)
-        {
-        }
+            : this(archiveStream, TarEntryFormat.Pax, leaveOpen: false) { }
 
         /// <summary>
         /// Initializes a <see cref="TarWriter"/> instance that can write tar entries to the specified stream and optionally leaves the stream open upon disposal of this instance. When using this constructor, the format of the resulting archive is <see cref="TarEntryFormat.Pax"/>.
@@ -40,9 +38,7 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentNullException"><paramref name="archiveStream"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="archiveStream"/> is unwritable.</exception>
         public TarWriter(Stream archiveStream, bool leaveOpen = false)
-            : this(archiveStream, TarEntryFormat.Pax, leaveOpen)
-        {
-        }
+            : this(archiveStream, TarEntryFormat.Pax, leaveOpen) { }
 
         /// <summary>
         /// Initializes a <see cref="TarWriter"/> instance that can write tar entries to the specified stream, optionally leaves the stream open upon disposal of
@@ -56,7 +52,11 @@ namespace System.Formats.Tar
         /// <exception cref="ArgumentNullException"><paramref name="archiveStream"/> is <see langword="null"/>.</exception>
         /// <exception cref="ArgumentException"><paramref name="archiveStream"/> is unwritable.</exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="format"/> is either <see cref="TarEntryFormat.Unknown"/>, or not one of the other enum values.</exception>
-        public TarWriter(Stream archiveStream, TarEntryFormat format = TarEntryFormat.Pax, bool leaveOpen = false)
+        public TarWriter(
+            Stream archiveStream,
+            TarEntryFormat format = TarEntryFormat.Pax,
+            bool leaveOpen = false
+        )
         {
             ArgumentNullException.ThrowIfNull(archiveStream);
 
@@ -65,7 +65,13 @@ namespace System.Formats.Tar
                 throw new ArgumentException(SR.IO_NotSupported_UnwritableStream);
             }
 
-            if (format is not TarEntryFormat.V7 and not TarEntryFormat.Ustar and not TarEntryFormat.Pax and not TarEntryFormat.Gnu)
+            if (
+                format
+                is not TarEntryFormat.V7
+                    and not TarEntryFormat.Ustar
+                    and not TarEntryFormat.Pax
+                    and not TarEntryFormat.Gnu
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(format));
             }
@@ -135,7 +141,10 @@ namespace System.Formats.Tar
         /// <exception cref="IOException">An I/O problem occurred.</exception>
         public void WriteEntry(string fileName, string? entryName)
         {
-            (string fullPath, string actualEntryName) = ValidateWriteEntryArguments(fileName, entryName);
+            (string fullPath, string actualEntryName) = ValidateWriteEntryArguments(
+                fileName,
+                entryName
+            );
             ReadFileFromDiskAndWriteToArchiveStreamAsEntry(fullPath, actualEntryName);
         }
 
@@ -149,19 +158,33 @@ namespace System.Formats.Tar
         /// <exception cref="ObjectDisposedException">The archive stream is disposed.</exception>
         /// <exception cref="ArgumentException"><paramref name="fileName"/> or <paramref name="entryName"/> is <see langword="null"/> or empty.</exception>
         /// <exception cref="IOException">An I/O problem occurred.</exception>
-        public Task WriteEntryAsync(string fileName, string? entryName, CancellationToken cancellationToken = default)
+        public Task WriteEntryAsync(
+            string fileName,
+            string? entryName,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
                 return Task.FromCanceled(cancellationToken);
             }
 
-            (string fullPath, string actualEntryName) = ValidateWriteEntryArguments(fileName, entryName);
-            return ReadFileFromDiskAndWriteToArchiveStreamAsEntryAsync(fullPath, actualEntryName, cancellationToken);
+            (string fullPath, string actualEntryName) = ValidateWriteEntryArguments(
+                fileName,
+                entryName
+            );
+            return ReadFileFromDiskAndWriteToArchiveStreamAsEntryAsync(
+                fullPath,
+                actualEntryName,
+                cancellationToken
+            );
         }
 
         // Reads an entry from disk and writes it into the archive stream.
-        private void ReadFileFromDiskAndWriteToArchiveStreamAsEntry(string fullPath, string entryName)
+        private void ReadFileFromDiskAndWriteToArchiveStreamAsEntry(
+            string fullPath,
+            string entryName
+        )
         {
             TarEntry entry = ConstructEntryForWriting(fullPath, entryName, FileOptions.None);
 
@@ -170,11 +193,19 @@ namespace System.Formats.Tar
         }
 
         // Asynchronously reads an entry from disk and writes it into the archive stream.
-        private async Task ReadFileFromDiskAndWriteToArchiveStreamAsEntryAsync(string fullPath, string entryName, CancellationToken cancellationToken)
+        private async Task ReadFileFromDiskAndWriteToArchiveStreamAsEntryAsync(
+            string fullPath,
+            string entryName,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            TarEntry entry = ConstructEntryForWriting(fullPath, entryName, FileOptions.Asynchronous);
+            TarEntry entry = ConstructEntryForWriting(
+                fullPath,
+                entryName,
+                FileOptions.Asynchronous
+            );
 
             await WriteEntryAsync(entry, cancellationToken).ConfigureAwait(false);
             if (entry._header._dataStream != null)
@@ -294,7 +325,11 @@ namespace System.Formats.Tar
                 case TarEntryFormat.Pax:
                     if (entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes)
                     {
-                        entry._header.WriteAsPaxGlobalExtendedAttributes(_archiveStream, buffer, _nextGlobalExtendedAttributesEntryNumber++);
+                        entry._header.WriteAsPaxGlobalExtendedAttributes(
+                            _archiveStream,
+                            buffer,
+                            _nextGlobalExtendedAttributesEntryNumber++
+                        );
                     }
                     else
                     {
@@ -315,7 +350,10 @@ namespace System.Formats.Tar
         }
 
         // Portion of the WriteEntryAsync(TarEntry, CancellationToken) method containing awaits.
-        private async Task WriteEntryAsyncInternal(TarEntry entry, CancellationToken cancellationToken)
+        private async Task WriteEntryAsyncInternal(
+            TarEntry entry,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -325,11 +363,34 @@ namespace System.Formats.Tar
 
             Task task = entry.Format switch
             {
-                TarEntryFormat.V7 => entry._header.WriteAsV7Async(_archiveStream, buffer, cancellationToken),
-                TarEntryFormat.Ustar => entry._header.WriteAsUstarAsync(_archiveStream, buffer, cancellationToken),
-                TarEntryFormat.Pax when entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes => entry._header.WriteAsPaxGlobalExtendedAttributesAsync(_archiveStream, buffer, _nextGlobalExtendedAttributesEntryNumber++, cancellationToken),
-                TarEntryFormat.Pax => entry._header.WriteAsPaxAsync(_archiveStream, buffer, cancellationToken),
-                TarEntryFormat.Gnu => entry._header.WriteAsGnuAsync(_archiveStream, buffer, cancellationToken),
+                TarEntryFormat.V7 => entry._header.WriteAsV7Async(
+                    _archiveStream,
+                    buffer,
+                    cancellationToken
+                ),
+                TarEntryFormat.Ustar => entry._header.WriteAsUstarAsync(
+                    _archiveStream,
+                    buffer,
+                    cancellationToken
+                ),
+                TarEntryFormat.Pax
+                    when entry._header._typeFlag is TarEntryType.GlobalExtendedAttributes =>
+                    entry._header.WriteAsPaxGlobalExtendedAttributesAsync(
+                        _archiveStream,
+                        buffer,
+                        _nextGlobalExtendedAttributesEntryNumber++,
+                        cancellationToken
+                    ),
+                TarEntryFormat.Pax => entry._header.WriteAsPaxAsync(
+                    _archiveStream,
+                    buffer,
+                    cancellationToken
+                ),
+                TarEntryFormat.Gnu => entry._header.WriteAsGnuAsync(
+                    _archiveStream,
+                    buffer,
+                    cancellationToken
+                ),
                 _ => throw new InvalidDataException(SR.Format(SR.TarInvalidFormat, Format)),
             };
             await task.ConfigureAwait(false);
@@ -360,7 +421,9 @@ namespace System.Formats.Tar
             byte[] twoEmptyRecords = ArrayPool<byte>.Shared.Rent(TwoRecordSize);
             Array.Clear(twoEmptyRecords, 0, TwoRecordSize);
 
-            await _archiveStream.WriteAsync(twoEmptyRecords.AsMemory(0, TwoRecordSize), cancellationToken: default).ConfigureAwait(false);
+            await _archiveStream
+                .WriteAsync(twoEmptyRecords.AsMemory(0, TwoRecordSize), cancellationToken: default)
+                .ConfigureAwait(false);
 
             ArrayPool<byte>.Shared.Return(twoEmptyRecords);
         }
@@ -371,16 +434,24 @@ namespace System.Formats.Tar
             ArgumentException.ThrowIfNullOrEmpty(fileName);
 
             string fullPath = Path.GetFullPath(fileName);
-            string? actualEntryName = string.IsNullOrEmpty(entryName) ? Path.GetFileName(fileName) : entryName;
+            string? actualEntryName = string.IsNullOrEmpty(entryName)
+                ? Path.GetFileName(fileName)
+                : entryName;
 
             return (fullPath, actualEntryName);
         }
 
         private void ValidateStreamsSeekability(TarEntry entry)
         {
-            if (!_archiveStream.CanSeek && entry._header._dataStream != null && !entry._header._dataStream.CanSeek)
+            if (
+                !_archiveStream.CanSeek
+                && entry._header._dataStream != null
+                && !entry._header._dataStream.CanSeek
+            )
             {
-                throw new IOException(SR.Format(SR.TarStreamSeekabilityUnsupportedCombination, entry.Name));
+                throw new IOException(
+                    SR.Format(SR.TarStreamSeekabilityUnsupportedCombination, entry.Name)
+                );
             }
         }
 

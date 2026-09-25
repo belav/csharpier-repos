@@ -12,8 +12,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
     {
         private readonly ComHandle<object, object> _comHandle;
 
-        public ParentHandle(T parent)
-            => _comHandle = new ComHandle<object, object>(parent);
+        public ParentHandle(T parent) => _comHandle = new ComHandle<object, object>(parent);
 
         public T Value
         {

@@ -9,9 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// </summary>
 /// <typeparam name="TOwnerEntity">The entity type owning the relationship.</typeparam>
 /// <typeparam name="TDependentEntity">The dependent entity type of the relationship.</typeparam>
-public class OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity> :
-    OwnedNavigationViewBuilder,
-    IInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>
+public class OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity>
+    : OwnedNavigationViewBuilder,
+        IInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>
     where TOwnerEntity : class
     where TDependentEntity : class
 {
@@ -24,14 +24,13 @@ public class OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity> :
     [EntityFrameworkInternal]
     public OwnedNavigationViewBuilder(
         in StoreObjectIdentifier storeObject,
-        OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder)
-        : base(storeObject, ownedNavigationBuilder)
-    {
-    }
+        OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> ownedNavigationBuilder
+    )
+        : base(storeObject, ownedNavigationBuilder) { }
 
-    private OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> OwnedNavigationBuilder
-        => (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)((IInfrastructure<OwnedNavigationBuilder>)this)
-            .GetInfrastructure();
+    private OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> OwnedNavigationBuilder =>
+        (OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>)
+            ((IInfrastructure<OwnedNavigationBuilder>)this).GetInfrastructure();
 
     /// <summary>
     ///     Maps the property to a column on the current view and returns an object that can be used
@@ -41,9 +40,11 @@ public class OwnedNavigationViewBuilder<TOwnerEntity, TDependentEntity> :
     ///     A lambda expression representing the property to be configured (<c>blog => blog.Url</c>).
     /// </param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(Expression<Func<TDependentEntity, TProperty>> propertyExpression)
-        => new(StoreObject, OwnedNavigationBuilder.Property(propertyExpression));
+    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(
+        Expression<Func<TDependentEntity, TProperty>> propertyExpression
+    ) => new(StoreObject, OwnedNavigationBuilder.Property(propertyExpression));
 
-    OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> IInfrastructure<OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>>.Instance
-        => OwnedNavigationBuilder;
+    OwnedNavigationBuilder<TOwnerEntity, TDependentEntity> IInfrastructure<
+        OwnedNavigationBuilder<TOwnerEntity, TDependentEntity>
+    >.Instance => OwnedNavigationBuilder;
 }

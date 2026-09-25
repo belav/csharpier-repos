@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,209 +32,223 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class TestImage : Image
+    {
+        public string Tag
+        {
+            get { return base.TagName; }
+        }
 
-	public class TestImage : Image {
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-		public string Tag {
-			get { return base.TagName; }
-		}
+        public string Render()
+        {
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
+        }
+    }
 
-		public StateBag StateBag {
-			get { return base.ViewState; }
-		}
+    public class PokerImage : Image
+    {
+        public PokerImage()
+        {
+            TrackViewState();
+        }
 
-		public string Render ()
-		{
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-	}
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
 
-	public class PokerImage : Image
-	{
-		public PokerImage () {
-			TrackViewState ();
-		}
+        public void LoadState(object state)
+        {
+            LoadViewState(state);
+        }
+    }
 
-		public object SaveState () {
-			return SaveViewState ();
-		}
+    [TestFixture]
+    public class ImageTest
+    {
+        private const string imageUrl = "http://www.mono-project.com/stylesheets/images.wiki.png";
 
-		public void LoadState (object state) {
-			LoadViewState (state);
-		}
-	}
+        [Test]
+        public void DefaultProperties()
+        {
+            TestImage i = new TestImage();
+            Assert.AreEqual(0, i.Attributes.Count, "Attributes.Count");
 
-	[TestFixture]
-	public class ImageTest {
+            Assert.AreEqual(String.Empty, i.AlternateText, "AlternateText");
+            Assert.IsTrue(i.Enabled, "Enabled");
+            Assert.IsNotNull(i.Font, "Font");
+            Assert.AreEqual(ImageAlign.NotSet, i.ImageAlign, "ImageAlign");
+            Assert.AreEqual(String.Empty, i.ImageUrl, "ImageUrl");
+            // this was added in Fx 1.1 SP1
+            Assert.AreEqual(String.Empty, i.DescriptionUrl, "DescriptionUrl");
+            Assert.IsFalse(i.GenerateEmptyAlternateText, "GenerateEmptyAlternateText");
+            Assert.AreEqual("img", i.Tag, "TagName");
+            Assert.AreEqual(0, i.Attributes.Count, "Attributes.Count-2");
+        }
 
-		private const string imageUrl = "http://www.mono-project.com/stylesheets/images.wiki.png";
+        [Test]
+        public void ViewStateTest()
+        {
+            PokerImage src = new PokerImage();
+            src.Enabled = false;
 
-		[Test]
-		public void DefaultProperties ()
-		{
-			TestImage i = new TestImage ();
-			Assert.AreEqual (0, i.Attributes.Count, "Attributes.Count");
+            PokerImage dest = new PokerImage();
+            dest.LoadState(src.SaveState());
 
-			Assert.AreEqual (String.Empty, i.AlternateText, "AlternateText");
-			Assert.IsTrue (i.Enabled, "Enabled");
-			Assert.IsNotNull (i.Font, "Font");
-			Assert.AreEqual (ImageAlign.NotSet, i.ImageAlign, "ImageAlign");
-			Assert.AreEqual (String.Empty, i.ImageUrl, "ImageUrl");
-			// this was added in Fx 1.1 SP1
-			Assert.AreEqual (String.Empty, i.DescriptionUrl, "DescriptionUrl");
-			Assert.IsFalse (i.GenerateEmptyAlternateText, "GenerateEmptyAlternateText");
-			Assert.AreEqual ("img", i.Tag, "TagName");
-			Assert.AreEqual (0, i.Attributes.Count, "Attributes.Count-2");
-		}
+            Assert.AreEqual(false, dest.Enabled, "Enabled");
+        }
 
-		[Test]
-		public void ViewStateTest () {
+        [Test]
+        public void NullProperties()
+        {
+            TestImage i = new TestImage();
+            i.AlternateText = null;
+            Assert.AreEqual(String.Empty, i.AlternateText, "AlternateText");
+            i.Enabled = true;
+            Assert.IsTrue(i.Enabled, "Enabled");
+            i.ImageAlign = ImageAlign.NotSet;
+            Assert.AreEqual(ImageAlign.NotSet, i.ImageAlign, "ImageAlign");
+            i.ImageUrl = null;
+            Assert.AreEqual(String.Empty, i.ImageUrl, "ImageUrl");
+            i.DescriptionUrl = null;
 
-			PokerImage src = new PokerImage ();
-			src.Enabled = false;
+            Assert.AreEqual(0, i.Attributes.Count, "Attributes.Count");
+            Assert.AreEqual(1, i.StateBag.Count, "ViewState.Count-1");
+            i.GenerateEmptyAlternateText = false;
+            Assert.AreEqual(2, i.StateBag.Count, "ViewState.Count-2");
+        }
 
-			PokerImage dest = new PokerImage ();
-			dest.LoadState (src.SaveState ());
+        [Test]
+        public void CleanProperties()
+        {
+            TestImage i = new TestImage();
+            i.AlternateText = "alt";
+            Assert.AreEqual("alt", i.AlternateText, "AlternateText");
+            i.Enabled = false;
+            i.ImageAlign = ImageAlign.Top;
+            i.ImageUrl = imageUrl;
+            i.DescriptionUrl = "http://www.mono-project.com/";
+            i.GenerateEmptyAlternateText = true;
+            Assert.AreEqual(5, i.StateBag.Count, "ViewState.Count");
+            Assert.AreEqual(0, i.Attributes.Count, "Attributes.Count");
 
-			Assert.AreEqual (false, dest.Enabled, "Enabled");
-		}
+            i.AlternateText = null;
+            i.Enabled = true;
+            i.ImageAlign = ImageAlign.NotSet;
+            i.ImageUrl = null;
+            i.DescriptionUrl = null;
+            i.GenerateEmptyAlternateText = false;
+            // ImageAlign and GenerateEmptyAlternateText can't be removed by returning to default value
+            Assert.AreEqual(2, i.StateBag.Count, "ViewState.Count-2");
+            Assert.AreEqual(ImageAlign.NotSet, i.StateBag["ImageAlign"], "ImageAlign");
+            Assert.IsFalse(
+                (bool)i.StateBag["GenerateEmptyAlternateText"],
+                "GenerateEmptyAlternateText"
+            );
+            Assert.AreEqual(0, i.Attributes.Count, "Attributes.Count-2");
+        }
 
-		[Test]
-		public void NullProperties ()
-		{
-			TestImage i = new TestImage ();
-			i.AlternateText = null;
-			Assert.AreEqual (String.Empty, i.AlternateText, "AlternateText");
-			i.Enabled = true;
-			Assert.IsTrue (i.Enabled, "Enabled");
-			i.ImageAlign = ImageAlign.NotSet;
-			Assert.AreEqual (ImageAlign.NotSet, i.ImageAlign, "ImageAlign");
-			i.ImageUrl = null;
-			Assert.AreEqual (String.Empty, i.ImageUrl, "ImageUrl");
-			i.DescriptionUrl = null;
+        [Test]
+        // LAMESPEC: 2.0 beta2 documents this as an ArgumentException
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ImageAlign_Invalid()
+        {
+            Image i = new Image();
+            i.ImageAlign = (ImageAlign)Int32.MinValue;
+        }
 
-			Assert.AreEqual (0, i.Attributes.Count, "Attributes.Count");
-			Assert.AreEqual (1, i.StateBag.Count, "ViewState.Count-1");
-			i.GenerateEmptyAlternateText = false;
-			Assert.AreEqual (2, i.StateBag.Count, "ViewState.Count-2");
-		}
+        [Test]
+        public void RenderEnabled()
+        {
+            TestImage img = new TestImage();
+            img.Enabled = false;
 
-		[Test]
-		public void CleanProperties ()
-		{
-			TestImage i = new TestImage ();
-			i.AlternateText = "alt";
-			Assert.AreEqual ("alt", i.AlternateText, "AlternateText");
-			i.Enabled = false;
-			i.ImageAlign = ImageAlign.Top;
-			i.ImageUrl = imageUrl;
-			i.DescriptionUrl = "http://www.mono-project.com/";
-			i.GenerateEmptyAlternateText = true;
-			Assert.AreEqual (5, i.StateBag.Count, "ViewState.Count");
-			Assert.AreEqual (0, i.Attributes.Count, "Attributes.Count");
+            string html = img.Render();
+            Assert.IsTrue(html.IndexOf(" class=\"aspNetDisabled\"") > 0, "#");
+        }
 
-			i.AlternateText = null;
-			i.Enabled = true;
-			i.ImageAlign = ImageAlign.NotSet;
-			i.ImageUrl = null;
-			i.DescriptionUrl = null;
-			i.GenerateEmptyAlternateText = false;
-			// ImageAlign and GenerateEmptyAlternateText can't be removed by returning to default value
-			Assert.AreEqual (2, i.StateBag.Count, "ViewState.Count-2");
-			Assert.AreEqual (ImageAlign.NotSet, i.StateBag["ImageAlign"], "ImageAlign");
-			Assert.IsFalse ((bool)i.StateBag["GenerateEmptyAlternateText"], "GenerateEmptyAlternateText");
-			Assert.AreEqual (0, i.Attributes.Count, "Attributes.Count-2");
-		}
+        [Test]
+        public void Render()
+        {
+            TestImage i = new TestImage();
+            // fx 2.0 (beta2) like to add: style="border-width:0px;",
+            // while 1.x adds: border="0". Both aren't coming from Image
+            // so we're testing subparts of the string here
+            string s = i.Render();
+            Assert.IsTrue(i.Render().IndexOf(" src=\"\"") > 0, "src");
 
-		[Test]
-		// LAMESPEC: 2.0 beta2 documents this as an ArgumentException
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void ImageAlign_Invalid ()
-		{
-			Image i = new Image ();
-			i.ImageAlign = (ImageAlign)Int32.MinValue;
-		}
+            i.GenerateEmptyAlternateText = true;
+            s = i.Render();
+            Assert.IsTrue(
+                i.Render().IndexOf(" alt=\"\"") > 0,
+                "alt/GenerateEmptyAlternateText-true"
+            );
 
-		[Test]
-		public void RenderEnabled () {
-			TestImage img = new TestImage ();
-			img.Enabled = false;
+            i.GenerateEmptyAlternateText = false;
+            s = i.Render();
+            Assert.IsTrue(
+                i.Render().IndexOf(" alt=\"\"") < 0,
+                "alt/GenerateEmptyAlternateText-false"
+            );
 
-			string html = img.Render ();
-			Assert.IsTrue (html.IndexOf (" class=\"aspNetDisabled\"") > 0, "#");
-		}
+            i.AlternateText = "alt";
+            s = i.Render();
+            Assert.IsTrue(i.Render().IndexOf(" alt=\"alt\"") > 0, "alt");
+            i.AlternateText = String.Empty;
+            s = i.Render();
+            Assert.IsTrue(s.IndexOf(" class=\"aspNetDisabled\"") < 0, "enabled");
+            i.Enabled = false;
+            s = i.Render();
+            Assert.IsTrue(s.IndexOf(" class=\"aspNetDisabled\"") > 0, "disabled");
+            i.Enabled = true;
 
-		[Test]
-		public void Render ()
-		{
-			TestImage i = new TestImage ();
-			// fx 2.0 (beta2) like to add: style="border-width:0px;", 
-			// while 1.x adds: border="0". Both aren't coming from Image
-			// so we're testing subparts of the string here
-			string s = i.Render ();
-			Assert.IsTrue (i.Render ().IndexOf (" src=\"\"") > 0, "src");
+            // note: align is in mixed-case in 1.x so we lower everything to test
+            i.ImageAlign = ImageAlign.AbsBottom;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"absbottom\"") > 0, "absbottom");
+            i.ImageAlign = ImageAlign.AbsMiddle;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"absmiddle\"") > 0, "absmiddle");
+            i.ImageAlign = ImageAlign.Baseline;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"baseline\"") > 0, "baseline");
+            i.ImageAlign = ImageAlign.Bottom;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"bottom\"") > 0, "bottom");
+            i.ImageAlign = ImageAlign.Left;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"left\"") > 0, "left");
+            i.ImageAlign = ImageAlign.Middle;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"middle\"") > 0, "middle");
+            i.ImageAlign = ImageAlign.Right;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"right\"") > 0, "right");
+            i.ImageAlign = ImageAlign.TextTop;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"texttop\"") > 0, "texttop");
+            i.ImageAlign = ImageAlign.Top;
+            s = i.Render();
+            Assert.IsTrue(i.Render().ToLower().IndexOf(" align=\"top\"") > 0, "top");
 
-			i.GenerateEmptyAlternateText = true;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().IndexOf (" alt=\"\"") > 0, "alt/GenerateEmptyAlternateText-true");
+            i.ImageAlign = ImageAlign.NotSet;
+            s = i.Render();
+            Assert.IsTrue(i.Render().IndexOf(" align=\"") < 0, "align/none");
 
-			i.GenerateEmptyAlternateText = false;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().IndexOf (" alt=\"\"") < 0, "alt/GenerateEmptyAlternateText-false");
-
-			i.AlternateText = "alt";
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().IndexOf (" alt=\"alt\"") > 0, "alt");
-			i.AlternateText = String.Empty;
-			s = i.Render ();
-			Assert.IsTrue (s.IndexOf (" class=\"aspNetDisabled\"") < 0, "enabled");
-			i.Enabled = false;
-			s = i.Render ();
-			Assert.IsTrue (s.IndexOf (" class=\"aspNetDisabled\"") > 0, "disabled");
-			i.Enabled = true;
-
-			// note: align is in mixed-case in 1.x so we lower everything to test
-			i.ImageAlign = ImageAlign.AbsBottom;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"absbottom\"") > 0, "absbottom");
-			i.ImageAlign = ImageAlign.AbsMiddle;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"absmiddle\"") > 0, "absmiddle");
-			i.ImageAlign = ImageAlign.Baseline;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"baseline\"") > 0, "baseline");
-			i.ImageAlign = ImageAlign.Bottom;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"bottom\"") > 0, "bottom");
-			i.ImageAlign = ImageAlign.Left;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"left\"") > 0, "left");
-			i.ImageAlign = ImageAlign.Middle;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"middle\"") > 0, "middle");
-			i.ImageAlign = ImageAlign.Right;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"right\"") > 0, "right");
-			i.ImageAlign = ImageAlign.TextTop;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"texttop\"") > 0, "texttop");
-			i.ImageAlign = ImageAlign.Top;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().ToLower ().IndexOf (" align=\"top\"") > 0, "top");
-
-			i.ImageAlign = ImageAlign.NotSet;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().IndexOf (" align=\"") < 0, "align/none");
-
-			i.ImageUrl = imageUrl;
-			s = i.Render ();
-			Assert.IsTrue (i.Render ().IndexOf (" src=\"" + imageUrl + "\"") > 0, "ImageUrl");
-		}
-	}
+            i.ImageUrl = imageUrl;
+            s = i.Render();
+            Assert.IsTrue(i.Render().IndexOf(" src=\"" + imageUrl + "\"") > 0, "ImageUrl");
+        }
+    }
 }

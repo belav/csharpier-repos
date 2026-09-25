@@ -13,9 +13,7 @@ namespace System.Activities.XamlIntegration
     {
         IList<LocationReference> locationReferences;
 
-        public ExpressionTreeRewriter()
-        {
-        }
+        public ExpressionTreeRewriter() { }
 
         public ExpressionTreeRewriter(IList<LocationReference> locationReferences)
         {
@@ -28,15 +26,17 @@ namespace System.Activities.XamlIntegration
             if (node.Expression != null && node.Expression.NodeType == ExpressionType.Constant)
             {
                 ConstantExpression constExpr = (ConstantExpression)node.Expression;
-                if (typeof(CompiledDataContext).IsAssignableFrom(constExpr.Type) && 
-                    this.TryRewriteMemberExpressionNode(node, out newNode))
+                if (
+                    typeof(CompiledDataContext).IsAssignableFrom(constExpr.Type)
+                    && this.TryRewriteMemberExpressionNode(node, out newNode)
+                )
                 {
                     return newNode;
                 }
             }
-            
+
             return base.VisitMember(node);
-        }       
+        }
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
@@ -46,7 +46,10 @@ namespace System.Activities.XamlIntegration
                 ILocationReferenceWrapper inlinedReference = (ILocationReferenceWrapper)node.Value;
                 if (inlinedReference != null)
                 {
-                    newNode = Expression.Constant(inlinedReference.LocationReference, typeof(LocationReference));
+                    newNode = Expression.Constant(
+                        inlinedReference.LocationReference,
+                        typeof(LocationReference)
+                    );
                     return newNode;
                 }
             }
@@ -65,11 +68,15 @@ namespace System.Activities.XamlIntegration
                     {
                         if (locationReference is ILocationReferenceWrapper)
                         {
-                            newNode = ExpressionUtilities.CreateIdentifierExpression(((ILocationReferenceWrapper)locationReference).LocationReference);
+                            newNode = ExpressionUtilities.CreateIdentifierExpression(
+                                ((ILocationReferenceWrapper)locationReference).LocationReference
+                            );
                         }
                         else
                         {
-                            newNode = ExpressionUtilities.CreateIdentifierExpression(locationReference);
+                            newNode = ExpressionUtilities.CreateIdentifierExpression(
+                                locationReference
+                            );
                         }
                         return true;
                     }

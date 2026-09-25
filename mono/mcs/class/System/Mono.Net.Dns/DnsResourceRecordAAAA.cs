@@ -23,12 +23,11 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace Mono.Net.Dns {
-	class DnsResourceRecordAAAA : DnsResourceRecordIPAddress {
-		internal DnsResourceRecordAAAA (DnsResourceRecord rr)
-			: base (rr, 16)
-		{
-		}
-	}
+namespace Mono.Net.Dns
+{
+    class DnsResourceRecordAAAA : DnsResourceRecordIPAddress
+    {
+        internal DnsResourceRecordAAAA(DnsResourceRecord rr)
+            : base(rr, 16) { }
+    }
 }
-

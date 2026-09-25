@@ -13,7 +13,8 @@ class Program
 
     static int Main()
     {
-        GetIntDelegate d = (GetIntDelegate)Delegate.CreateDelegate(typeof(GetIntDelegate), typeof(Derived), "GetInt");
+        GetIntDelegate d = (GetIntDelegate)
+            Delegate.CreateDelegate(typeof(GetIntDelegate), typeof(Derived), "GetInt");
 
         int result = d();
         if (result != 42)

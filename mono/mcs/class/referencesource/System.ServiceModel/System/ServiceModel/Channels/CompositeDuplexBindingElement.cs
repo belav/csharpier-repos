@@ -12,14 +12,11 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Security;
     using System.Xml;
 
-
     public sealed class CompositeDuplexBindingElement : BindingElement, IPolicyExportExtension
     {
         Uri clientBaseAddress;
 
-        public CompositeDuplexBindingElement()
-        {
-        }
+        public CompositeDuplexBindingElement() { }
 
         CompositeDuplexBindingElement(CompositeDuplexBindingElement elementToBeCloned)
             : base(elementToBeCloned)
@@ -30,15 +27,8 @@ namespace System.ServiceModel.Channels
         [DefaultValue(null)]
         public Uri ClientBaseAddress
         {
-            get
-            {
-                return this.clientBaseAddress;
-            }
-
-            set
-            {
-                this.clientBaseAddress = value;
-            }
+            get { return this.clientBaseAddress; }
+            set { this.clientBaseAddress = value; }
         }
 
         public override BindingElement Clone()
@@ -46,7 +36,9 @@ namespace System.ServiceModel.Channels
             return new CompositeDuplexBindingElement(this);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -55,14 +47,18 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IOutputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             return context.BuildInnerChannelFactory<TChannel>();
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -71,8 +67,10 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) != typeof(IInputChannel))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel",
-                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             if (context.ListenUriBaseAddress == null)
@@ -85,7 +83,7 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    // 
+                    //
 #pragma warning suppress 56506 // Microsoft, context.Binding will never be null.
                     context.ListenUriRelativeAddress = String.Empty;
                     context.ListenUriMode = ListenUriMode.Unique;
@@ -120,8 +118,10 @@ namespace System.ServiceModel.Channels
         ChannelProtectionRequirements GetProtectionRequirements()
         {
             ChannelProtectionRequirements result = new ChannelProtectionRequirements();
-            XmlQualifiedName refPropHeaderName = new XmlQualifiedName(XD.UtilityDictionary.UniqueEndpointHeaderName.Value,
-                    XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value);
+            XmlQualifiedName refPropHeaderName = new XmlQualifiedName(
+                XD.UtilityDictionary.UniqueEndpointHeaderName.Value,
+                XD.UtilityDictionary.UniqueEndpointHeaderNamespace.Value
+            );
             MessagePartSpecification headerParts = new MessagePartSpecification(refPropHeaderName);
             headerParts.MakeReadOnly();
             result.IncomingSignatureParts.AddParts(headerParts);
@@ -137,14 +137,22 @@ namespace System.ServiceModel.Channels
             }
             if (typeof(T) == typeof(ISecurityCapabilities))
             {
-                ISecurityCapabilities lowerCapabilities = context.GetInnerProperty<ISecurityCapabilities>();
+                ISecurityCapabilities lowerCapabilities =
+                    context.GetInnerProperty<ISecurityCapabilities>();
                 if (lowerCapabilities != null)
                 {
                     // composite duplex cannot ensure that messages it receives are from the part it sends
                     // messages to. So it cannot offer server auth
-                    return (T)(object)(new SecurityCapabilities(lowerCapabilities.SupportsClientAuthentication,
-                        false, lowerCapabilities.SupportsClientWindowsIdentity, lowerCapabilities.SupportedRequestProtectionLevel,
-                        System.Net.Security.ProtectionLevel.None));
+                    return (T)
+                        (object)(
+                            new SecurityCapabilities(
+                                lowerCapabilities.SupportsClientAuthentication,
+                                false,
+                                lowerCapabilities.SupportsClientWindowsIdentity,
+                                lowerCapabilities.SupportedRequestProtectionLevel,
+                                System.Net.Security.ProtectionLevel.None
+                            )
+                        );
                 }
                 else
                 {
@@ -154,7 +162,10 @@ namespace System.ServiceModel.Channels
             else if (typeof(T) == typeof(ChannelProtectionRequirements))
             {
                 ChannelProtectionRequirements myRequirements = this.GetProtectionRequirements();
-                myRequirements.Add(context.GetInnerProperty<ChannelProtectionRequirements>() ?? new ChannelProtectionRequirements());
+                myRequirements.Add(
+                    context.GetInnerProperty<ChannelProtectionRequirements>()
+                        ?? new ChannelProtectionRequirements()
+                );
                 return (T)(object)myRequirements;
             }
             else
@@ -179,19 +190,27 @@ namespace System.ServiceModel.Channels
             return (this.clientBaseAddress == duplex.clientBaseAddress);
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
 
-            exporter.State[typeof(SupportedAddressingMode).Name] = SupportedAddressingMode.NonAnonymous;
+            exporter.State[typeof(SupportedAddressingMode).Name] =
+                SupportedAddressingMode.NonAnonymous;
             context.GetBindingAssertions().Add(CreateCompositeDuplexAssertion());
         }
 
         static XmlElement CreateCompositeDuplexAssertion()
         {
             XmlDocument doc = new XmlDocument();
-            return doc.CreateElement(TransportPolicyConstants.CompositeDuplexPrefix, TransportPolicyConstants.CompositeDuplex, TransportPolicyConstants.CompositeDuplexNamespace);
+            return doc.CreateElement(
+                TransportPolicyConstants.CompositeDuplexPrefix,
+                TransportPolicyConstants.CompositeDuplex,
+                TransportPolicyConstants.CompositeDuplexNamespace
+            );
         }
     }
 }

@@ -8,23 +8,29 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.QueryRewriting
 {
-    internal class RewritingSimplifier<T_Tile> where T_Tile : class
+    internal class RewritingSimplifier<T_Tile>
+        where T_Tile : class
     {
         private readonly T_Tile m_originalRewriting;
         private readonly T_Tile m_toAvoid;
         private readonly RewritingProcessor<T_Tile> m_qp;
-        private readonly Dictionary<T_Tile, TileOpKind> m_usedViews = new Dictionary<T_Tile, TileOpKind>();
+        private readonly Dictionary<T_Tile, TileOpKind> m_usedViews =
+            new Dictionary<T_Tile, TileOpKind>();
 
         // used for join/antisemijoin simplification
-        private RewritingSimplifier(T_Tile originalRewriting, T_Tile toAvoid, Dictionary<T_Tile, TileOpKind> usedViews,
-                                     RewritingProcessor<T_Tile> qp)
+        private RewritingSimplifier(
+            T_Tile originalRewriting,
+            T_Tile toAvoid,
+            Dictionary<T_Tile, TileOpKind> usedViews,
+            RewritingProcessor<T_Tile> qp
+        )
         {
             m_originalRewriting = originalRewriting;
             m_toAvoid = toAvoid;
@@ -33,7 +39,12 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // used for union simplification
-        private RewritingSimplifier(T_Tile rewriting, T_Tile toFill, T_Tile toAvoid, RewritingProcessor<T_Tile> qp)
+        private RewritingSimplifier(
+            T_Tile rewriting,
+            T_Tile toFill,
+            T_Tile toAvoid,
+            RewritingProcessor<T_Tile> qp
+        )
         {
             m_originalRewriting = toFill;
             m_toAvoid = toAvoid;
@@ -43,9 +54,19 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // called for top query only
-        internal static bool TrySimplifyUnionRewriting(ref T_Tile rewriting, T_Tile toFill, T_Tile toAvoid, RewritingProcessor<T_Tile> qp)
+        internal static bool TrySimplifyUnionRewriting(
+            ref T_Tile rewriting,
+            T_Tile toFill,
+            T_Tile toAvoid,
+            RewritingProcessor<T_Tile> qp
+        )
         {
-            RewritingSimplifier<T_Tile> simplifier = new RewritingSimplifier<T_Tile>(rewriting, toFill, toAvoid, qp);
+            RewritingSimplifier<T_Tile> simplifier = new RewritingSimplifier<T_Tile>(
+                rewriting,
+                toFill,
+                toAvoid,
+                qp
+            );
             // gather all unioned subqueries
             T_Tile simplifiedRewriting;
             if (simplifier.SimplifyRewriting(out simplifiedRewriting))
@@ -57,9 +78,19 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // modifies usedViews - removes all redundant views from it
-        internal static bool TrySimplifyJoinRewriting(ref T_Tile rewriting, T_Tile toAvoid, Dictionary<T_Tile, TileOpKind> usedViews, RewritingProcessor<T_Tile> qp)
+        internal static bool TrySimplifyJoinRewriting(
+            ref T_Tile rewriting,
+            T_Tile toAvoid,
+            Dictionary<T_Tile, TileOpKind> usedViews,
+            RewritingProcessor<T_Tile> qp
+        )
         {
-            RewritingSimplifier<T_Tile> simplifier = new RewritingSimplifier<T_Tile>(rewriting, toAvoid, usedViews, qp);
+            RewritingSimplifier<T_Tile> simplifier = new RewritingSimplifier<T_Tile>(
+                rewriting,
+                toAvoid,
+                usedViews,
+                qp
+            );
             T_Tile simplifiedRewriting;
             if (simplifier.SimplifyRewriting(out simplifiedRewriting))
             {
@@ -115,7 +146,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                     case TileOpKind.Join:
                     case TileOpKind.Union:
                         remainingViews.Remove(usedView);
-                        if (SimplifyRewritingOnce(usedView, remainingViews, out simplifiedRewriting))
+                        if (
+                            SimplifyRewritingOnce(usedView, remainingViews, out simplifiedRewriting)
+                        )
                         {
                             return true;
                         }
@@ -128,8 +161,11 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
         }
 
         // remainingViews may contain either unions only or intersections + differences
-        private bool SimplifyRewritingOnce(T_Tile newRewriting, HashSet<T_Tile> remainingViews,
-                                           out T_Tile simplifiedRewriting)
+        private bool SimplifyRewritingOnce(
+            T_Tile newRewriting,
+            HashSet<T_Tile> remainingViews,
+            out T_Tile simplifiedRewriting
+        )
         {
             simplifiedRewriting = null;
             if (remainingViews.Count == 0)
@@ -151,8 +187,9 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                         isDisposable = m_qp.IsContainedIn(m_originalRewriting, newRewriting);
                         break;
                     default: // intersection
-                        isDisposable = m_qp.IsContainedIn(m_originalRewriting, newRewriting) &&
-                                       m_qp.IsDisjointFrom(m_toAvoid, newRewriting);
+                        isDisposable =
+                            m_qp.IsContainedIn(m_originalRewriting, newRewriting)
+                            && m_qp.IsDisjointFrom(m_toAvoid, newRewriting);
                         break;
                 }
                 if (isDisposable)
@@ -180,12 +217,20 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 if (count++ < halfCount)
                 {
                     firstHalf.Add(remainingView);
-                    firstHalfRewriting = GetRewritingHalf(firstHalfRewriting, remainingView, viewKind);
+                    firstHalfRewriting = GetRewritingHalf(
+                        firstHalfRewriting,
+                        remainingView,
+                        viewKind
+                    );
                 }
                 else // add to second half
                 {
                     secondHalf.Add(remainingView);
-                    secondHalfRewriting = GetRewritingHalf(secondHalfRewriting, remainingView, viewKind);
+                    secondHalfRewriting = GetRewritingHalf(
+                        secondHalfRewriting,
+                        remainingView,
+                        viewKind
+                    );
                 }
             }
             // now, call recursively
@@ -193,17 +238,26 @@ namespace System.Data.Mapping.ViewGeneration.QueryRewriting
                 || SimplifyRewritingOnce(secondHalfRewriting, firstHalf, out simplifiedRewriting);
         }
 
-        private T_Tile GetRewritingHalf(T_Tile halfRewriting, T_Tile remainingView, TileOpKind viewKind)
+        private T_Tile GetRewritingHalf(
+            T_Tile halfRewriting,
+            T_Tile remainingView,
+            TileOpKind viewKind
+        )
         {
             switch (viewKind)
             {
                 case TileOpKind.Join:
-                    halfRewriting = m_qp.Join(halfRewriting, remainingView); break;
+                    halfRewriting = m_qp.Join(halfRewriting, remainingView);
+                    break;
                 case TileOpKind.AntiSemiJoin:
-                    halfRewriting = m_qp.AntiSemiJoin(halfRewriting, remainingView); break;
+                    halfRewriting = m_qp.AntiSemiJoin(halfRewriting, remainingView);
+                    break;
                 case TileOpKind.Union:
-                    halfRewriting = m_qp.Union(halfRewriting, remainingView); break;
-                default: Debug.Fail("unexpected"); break;
+                    halfRewriting = m_qp.Union(halfRewriting, remainingView);
+                    break;
+                default:
+                    Debug.Fail("unexpected");
+                    break;
             }
             return halfRewriting;
         }

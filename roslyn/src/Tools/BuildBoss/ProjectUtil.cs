@@ -27,13 +27,13 @@ namespace BuildBoss
         public bool IsNewSdk => GetTargetFramework() != null || GetTargetFrameworks() != null;
 
         internal bool IsTestProject => IsUnitTestProject || IsIntegrationTestProject;
-        internal bool IsUnitTestProject => Path.GetFileNameWithoutExtension(Key.FilePath).EndsWith(".UnitTests");
-        internal bool IsIntegrationTestProject => Path.GetFileNameWithoutExtension(Key.FilePath).EndsWith(".IntegrationTests");
+        internal bool IsUnitTestProject =>
+            Path.GetFileNameWithoutExtension(Key.FilePath).EndsWith(".UnitTests");
+        internal bool IsIntegrationTestProject =>
+            Path.GetFileNameWithoutExtension(Key.FilePath).EndsWith(".IntegrationTests");
 
         internal ProjectUtil(string filePath)
-            : this(new ProjectKey(filePath), XDocument.Load(filePath))
-        {
-        }
+            : this(new ProjectKey(filePath), XDocument.Load(filePath)) { }
 
         internal ProjectUtil(ProjectKey key, XDocument document)
         {
@@ -41,14 +41,19 @@ namespace BuildBoss
             Document = document;
             Namespace = document.Root.Name.Namespace;
             Manager = new XmlNamespaceManager(new NameTable());
-            Manager.AddNamespace("mb", Namespace == XNamespace.None ? "" : SharedUtil.MSBuildNamespaceUriRaw);
+            Manager.AddNamespace(
+                "mb",
+                Namespace == XNamespace.None ? "" : SharedUtil.MSBuildNamespaceUriRaw
+            );
 
             OutputType = FindSingleProperty("OutputType")?.Value.Trim().ToLowerInvariant();
         }
 
-        internal XElement GetTargetFramework() => Document.XPathSelectElements("//mb:TargetFramework", Manager).FirstOrDefault();
+        internal XElement GetTargetFramework() =>
+            Document.XPathSelectElements("//mb:TargetFramework", Manager).FirstOrDefault();
 
-        internal XElement GetTargetFrameworks() => Document.XPathSelectElements("//mb:TargetFrameworks", Manager).FirstOrDefault();
+        internal XElement GetTargetFrameworks() =>
+            Document.XPathSelectElements("//mb:TargetFrameworks", Manager).FirstOrDefault();
 
         internal IEnumerable<string> GetAllTargetFrameworks()
         {
@@ -61,7 +66,9 @@ namespace BuildBoss
             var targetFrameworks = GetTargetFrameworks();
             if (targetFrameworks != null)
             {
-                var all = targetFrameworks.Value.ToString().Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
+                var all = targetFrameworks
+                    .Value.ToString()
+                    .Split(new[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
                 return all;
             }
 
@@ -99,17 +106,27 @@ namespace BuildBoss
 
         internal List<ProjectReferenceEntry> GetDeclaredProjectReferences()
         {
-            var references = Document.XPathSelectElements("//mb:ItemGroup/mb:ProjectReference", Manager);
+            var references = Document.XPathSelectElements(
+                "//mb:ItemGroup/mb:ProjectReference",
+                Manager
+            );
             var list = new List<ProjectReferenceEntry>();
             var directory = Path.GetDirectoryName(Key.FilePath);
             foreach (var r in references)
             {
-                // Make sure to check for references that exist only for ordering purposes.  They don't count as 
+                // Make sure to check for references that exist only for ordering purposes.  They don't count as
                 // actual references.
-                var referenceOutputAssemblyValue = r.Element(Namespace.GetName("ReferenceOutputAssembly"))?.Value ?? r.Attribute(XName.Get("ReferenceOutputAssembly"))?.Value;
+                var referenceOutputAssemblyValue =
+                    r.Element(Namespace.GetName("ReferenceOutputAssembly"))?.Value
+                    ?? r.Attribute(XName.Get("ReferenceOutputAssembly"))?.Value;
                 if (referenceOutputAssemblyValue != null)
                 {
-                    if (bool.TryParse(referenceOutputAssemblyValue.Trim().ToLower(), out var isRealReference) && !isRealReference)
+                    if (
+                        bool.TryParse(
+                            referenceOutputAssemblyValue.Trim().ToLower(),
+                            out var isRealReference
+                        ) && !isRealReference
+                    )
                     {
                         continue;
                     }
@@ -133,7 +150,12 @@ namespace BuildBoss
         internal List<PackageReference> GetPackageReferences()
         {
             var list = new List<PackageReference>();
-            foreach (var packageRef in Document.XPathSelectElements("//mb:ItemGroup/mb:PackageReference", Manager))
+            foreach (
+                var packageRef in Document.XPathSelectElements(
+                    "//mb:ItemGroup/mb:PackageReference",
+                    Manager
+                )
+            )
             {
                 list.Add(GetPackageReference(packageRef));
             }
@@ -143,7 +165,8 @@ namespace BuildBoss
 
         internal PackageReference GetPackageReference(XElement element)
         {
-            var name = element.Attribute("Include")?.Value ?? element.Attribute("Update")?.Value ?? "";
+            var name =
+                element.Attribute("Include")?.Value ?? element.Attribute("Update")?.Value ?? "";
             var version = element.Attribute("Version");
             if (version != null)
             {
@@ -174,11 +197,14 @@ namespace BuildBoss
         {
             var targetAssembly = element.Attribute("Include")?.Value.Trim();
             var key = element.Attribute("Key")?.Value.Trim();
-            var loadsWithinVisualStudio = element.Attribute("LoadsWithinVisualStudio")?.Value.Trim();
+            var loadsWithinVisualStudio = element
+                .Attribute("LoadsWithinVisualStudio")
+                ?.Value.Trim();
             var workItem = element.Attribute("WorkItem")?.Value.Trim();
             return new InternalsVisibleTo(targetAssembly, key, loadsWithinVisualStudio, workItem);
         }
 
-        internal XElement FindSingleProperty(string localName) => GetAllPropertyGroupElements().SingleOrDefault(x => x.Name.LocalName == localName);
+        internal XElement FindSingleProperty(string localName) =>
+            GetAllPropertyGroupElements().SingleOrDefault(x => x.Name.LocalName == localName);
     }
 }

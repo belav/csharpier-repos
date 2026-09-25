@@ -22,9 +22,7 @@ public class DbContextOptions<TContext> : DbContextOptions
     ///     <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> or use a <see cref="DbContextOptionsBuilder{TContext}" />
     ///     to create instances of this class and it is not designed to be directly constructed in your application code.
     /// </summary>
-    public DbContextOptions()
-    {
-    }
+    public DbContextOptions() { }
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="DbContextOptions{TContext}" /> class. You normally override
@@ -32,17 +30,16 @@ public class DbContextOptions<TContext> : DbContextOptions
     ///     to create instances of this class and it is not designed to be directly constructed in your application code.
     /// </summary>
     /// <param name="extensions">The extensions that store the configured options.</param>
-    public DbContextOptions(
-        IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
-        : base(extensions)
-    {
-    }
+    public DbContextOptions(IReadOnlyDictionary<Type, IDbContextOptionsExtension> extensions)
+        : base(extensions) { }
 
     private DbContextOptions(
-        ImmutableSortedDictionary<Type, (IDbContextOptionsExtension Extension, int Ordinal)> extensions)
-        : base(extensions)
-    {
-    }
+        ImmutableSortedDictionary<
+            Type,
+            (IDbContextOptionsExtension Extension, int Ordinal)
+        > extensions
+    )
+        : base(extensions) { }
 
     /// <inheritdoc />
     public override DbContextOptions WithExtension<TExtension>(TExtension extension)
@@ -60,6 +57,5 @@ public class DbContextOptions<TContext> : DbContextOptions
     /// <summary>
     ///     The type of context that these options are for (<typeparamref name="TContext" />).
     /// </summary>
-    public override Type ContextType
-        => typeof(TContext);
+    public override Type ContextType => typeof(TContext);
 }

@@ -32,7 +32,6 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <summary>
         /// Indicates an <see cref="IForEachLoopOperation"/> in C# or VB.
         /// </summary>
-        ForEach = 0x4
+        ForEach = 0x4,
     }
 }
-

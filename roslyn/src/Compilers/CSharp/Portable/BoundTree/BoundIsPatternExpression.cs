@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     this.WhenTrueLabel,
                     this.WhenFalseLabel,
                     BindingDiagnosticBag.Discarded,
-                    forLowering: true);
+                    forLowering: true
+                );
                 Debug.Assert(!decisionDag.ContainsAnySynthesizedNodes());
             }
 

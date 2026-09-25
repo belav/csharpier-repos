@@ -4,22 +4,24 @@
 
 namespace System.ServiceModel.Discovery.VersionCD1
 {
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Runtime;
 
-    sealed class ProbeRequestResponseCD1AsyncResult : ProbeRequestResponseAsyncResult<ProbeMessageCD1, ProbeMatchesMessageCD1>
+    sealed class ProbeRequestResponseCD1AsyncResult
+        : ProbeRequestResponseAsyncResult<ProbeMessageCD1, ProbeMatchesMessageCD1>
     {
-        internal ProbeRequestResponseCD1AsyncResult(ProbeMessageCD1 probeMessage,
+        internal ProbeRequestResponseCD1AsyncResult(
+            ProbeMessageCD1 probeMessage,
             IDiscoveryServiceImplementation discoveryServiceImpl,
             AsyncCallback callback,
-            object state)
-            : base(probeMessage, discoveryServiceImpl, callback, state)
-        {
-        }
+            object state
+        )
+            : base(probeMessage, discoveryServiceImpl, callback, state) { }
 
         public static ProbeMatchesMessageCD1 End(IAsyncResult result)
         {
-            ProbeRequestResponseCD1AsyncResult thisPtr = AsyncResult.End<ProbeRequestResponseCD1AsyncResult>(result);
+            ProbeRequestResponseCD1AsyncResult thisPtr =
+                AsyncResult.End<ProbeRequestResponseCD1AsyncResult>(result);
             return thisPtr.End();
         }
 
@@ -31,7 +33,7 @@ namespace System.ServiceModel.Discovery.VersionCD1
                 {
                     TD.DiscoveryMessageWithNoContent(null, ProtocolStrings.TracingStrings.Probe);
                 }
-                
+
                 return false;
             }
             return true;
@@ -44,7 +46,8 @@ namespace System.ServiceModel.Discovery.VersionCD1
 
         protected override ProbeMatchesMessageCD1 GetProbeResponse(
             DiscoveryMessageSequence discoveryMessageSequence,
-            Collection<EndpointDiscoveryMetadata> matchingEndpoints)
+            Collection<EndpointDiscoveryMetadata> matchingEndpoints
+        )
         {
             return ProbeMatchesMessageCD1.Create(discoveryMessageSequence, matchingEndpoints);
         }

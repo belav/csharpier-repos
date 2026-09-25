@@ -14,17 +14,17 @@ using Microsoft.CodeAnalysis.Organizing.Organizers;
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
     [ExportSyntaxNodeOrganizer(LanguageNames.CSharp), Shared]
-    internal class IndexerDeclarationOrganizer : AbstractSyntaxNodeOrganizer<IndexerDeclarationSyntax>
+    internal class IndexerDeclarationOrganizer
+        : AbstractSyntaxNodeOrganizer<IndexerDeclarationSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public IndexerDeclarationOrganizer()
-        {
-        }
+        public IndexerDeclarationOrganizer() { }
 
         protected override IndexerDeclarationSyntax Organize(
             IndexerDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return syntax.Update(
                 attributeLists: syntax.AttributeLists,
@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
                 parameterList: syntax.ParameterList,
                 accessorList: syntax.AccessorList,
                 expressionBody: syntax.ExpressionBody,
-                semicolonToken: syntax.SemicolonToken);
+                semicolonToken: syntax.SemicolonToken
+            );
         }
     }
 }

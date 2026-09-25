@@ -8,7 +8,6 @@ using Xunit;
 // Test long and ulong shifts by 0, 32 and 64 constants that can be optimized.
 namespace ShiftTest
 {
-
     public class ulong64Test
     {
         static int shiftByZero(ulong arg)

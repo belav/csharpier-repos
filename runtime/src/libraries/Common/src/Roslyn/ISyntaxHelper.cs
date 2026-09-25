@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
@@ -33,8 +32,15 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
         /// <summary>
         /// <paramref name="node"/> must be a compilation unit or namespace block.
         /// </summary>
-        void AddAliases(SyntaxNode node, ref ValueListBuilder<(string aliasName, string symbolName)> aliases, bool global);
-        void AddAliases(CompilationOptions options, ref ValueListBuilder<(string aliasName, string symbolName)> aliases);
+        void AddAliases(
+            SyntaxNode node,
+            ref ValueListBuilder<(string aliasName, string symbolName)> aliases,
+            bool global
+        );
+        void AddAliases(
+            CompilationOptions options,
+            ref ValueListBuilder<(string aliasName, string symbolName)> aliases
+        );
 
         bool ContainsGlobalAliases(SyntaxNode root);
     }
@@ -53,13 +59,25 @@ namespace Microsoft.CodeAnalysis.DotnetRuntime.Extensions
         public abstract SyntaxNode GetNameOfAttribute(SyntaxNode node);
 
         public abstract bool IsAttributeList(SyntaxNode node);
-        public abstract SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(SyntaxNode node);
-        public abstract void AddAttributeTargets(SyntaxNode node, ref ValueListBuilder<SyntaxNode> targets);
+        public abstract SeparatedSyntaxList<SyntaxNode> GetAttributesOfAttributeList(
+            SyntaxNode node
+        );
+        public abstract void AddAttributeTargets(
+            SyntaxNode node,
+            ref ValueListBuilder<SyntaxNode> targets
+        );
 
         public abstract bool IsLambdaExpression(SyntaxNode node);
 
-        public abstract void AddAliases(SyntaxNode node, ref ValueListBuilder<(string aliasName, string symbolName)> aliases, bool global);
-        public abstract void AddAliases(CompilationOptions options, ref ValueListBuilder<(string aliasName, string symbolName)> aliases);
+        public abstract void AddAliases(
+            SyntaxNode node,
+            ref ValueListBuilder<(string aliasName, string symbolName)> aliases,
+            bool global
+        );
+        public abstract void AddAliases(
+            CompilationOptions options,
+            ref ValueListBuilder<(string aliasName, string symbolName)> aliases
+        );
 
         public abstract bool ContainsGlobalAliases(SyntaxNode root);
     }

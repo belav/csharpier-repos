@@ -8,43 +8,55 @@ namespace System.Memory.Tests.SequenceReader
 {
     public class ArrayByte : SingleSegment<byte>
     {
-        public ArrayByte() : base(ReadOnlySequenceFactory<byte>.ArrayFactory, s_byteInputData) { }
+        public ArrayByte()
+            : base(ReadOnlySequenceFactory<byte>.ArrayFactory, s_byteInputData) { }
     }
 
     public class ArrayChar : SingleSegment<char>
     {
-        public ArrayChar() : base(ReadOnlySequenceFactory<char>.ArrayFactory, s_charInputData) { }
+        public ArrayChar()
+            : base(ReadOnlySequenceFactory<char>.ArrayFactory, s_charInputData) { }
     }
 
     public class MemoryByte : SingleSegment<byte>
     {
-        public MemoryByte() : base(ReadOnlySequenceFactory<byte>.MemoryFactory, s_byteInputData) { }
+        public MemoryByte()
+            : base(ReadOnlySequenceFactory<byte>.MemoryFactory, s_byteInputData) { }
     }
 
     public class MemoryChar : SingleSegment<char>
     {
-        public MemoryChar() : base(ReadOnlySequenceFactory<char>.MemoryFactory, s_charInputData) { }
+        public MemoryChar()
+            : base(ReadOnlySequenceFactory<char>.MemoryFactory, s_charInputData) { }
     }
 
     public class SingleSegmentByte : SingleSegment<byte>
     {
-        public SingleSegmentByte() : base(s_byteInputData) { }
+        public SingleSegmentByte()
+            : base(s_byteInputData) { }
     }
 
     public class SingleSegmentChar : SingleSegment<char>
     {
-        public SingleSegmentChar() : base(s_charInputData) { }
+        public SingleSegmentChar()
+            : base(s_charInputData) { }
     }
 
-    public abstract class SingleSegment<T> : ReaderBasicTests<T> where T : unmanaged, IEquatable<T>
+    public abstract class SingleSegment<T> : ReaderBasicTests<T>
+        where T : unmanaged, IEquatable<T>
     {
-        public SingleSegment(T[] inputData) : base(ReadOnlySequenceFactory<T>.SingleSegmentFactory, inputData) { }
-        internal SingleSegment(ReadOnlySequenceFactory<T> factory, T[] inputData) : base(factory, inputData) { }
+        public SingleSegment(T[] inputData)
+            : base(ReadOnlySequenceFactory<T>.SingleSegmentFactory, inputData) { }
+
+        internal SingleSegment(ReadOnlySequenceFactory<T> factory, T[] inputData)
+            : base(factory, inputData) { }
 
         [Fact]
         public void AdvanceSingleBufferSkipsValues()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(SequenceFactory.Create(GetInputData(5)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                SequenceFactory.Create(GetInputData(5))
+            );
             Assert.Equal(5, reader.Length);
             Assert.Equal(5, reader.Remaining);
             Assert.Equal(0, reader.Consumed);
@@ -73,7 +85,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryReadReturnsValueAndAdvances()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(2)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(2))
+            );
             Assert.Equal(2, reader.Length);
             Assert.Equal(2, reader.Remaining);
             Assert.Equal(0, reader.Consumed);
@@ -150,22 +164,40 @@ namespace System.Memory.Tests.SequenceReader
 
     public class SegmentPerByte : ReaderBasicTests<byte>
     {
-        public SegmentPerByte() : base(ReadOnlySequenceFactory<byte>.SegmentPerItemFactory, s_byteInputData) { }
+        public SegmentPerByte()
+            : base(ReadOnlySequenceFactory<byte>.SegmentPerItemFactory, s_byteInputData) { }
     }
 
     public class SegmentPerChar : ReaderBasicTests<char>
     {
-        public SegmentPerChar() : base(ReadOnlySequenceFactory<char>.SegmentPerItemFactory, s_charInputData) { }
+        public SegmentPerChar()
+            : base(ReadOnlySequenceFactory<char>.SegmentPerItemFactory, s_charInputData) { }
     }
 
-    public abstract class ReaderBasicTests<T> where T : unmanaged, IEquatable<T>
+    public abstract class ReaderBasicTests<T>
+        where T : unmanaged, IEquatable<T>
     {
         internal static byte[] s_byteInputData = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-        internal static char[] s_charInputData = new char[] { '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A' };
+        internal static char[] s_charInputData = new char[]
+        {
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'A',
+        };
         private T[] _inputData;
 
         internal ReadOnlySequenceFactory<T> Factory { get; }
-        protected ReadOnlySpan<T> InputData { get => _inputData; }
+        protected ReadOnlySpan<T> InputData
+        {
+            get => _inputData;
+        }
 
         public T[] GetInputData(int count) => InputData.Slice(0, count).ToArray();
 
@@ -178,7 +210,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekReturnsWithoutMoving()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(2)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(2))
+            );
             Assert.Equal(0, reader.Consumed);
             Assert.Equal(2, reader.Remaining);
             Assert.True(reader.TryPeek(out T value));
@@ -194,7 +228,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekOffset()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(10)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(10))
+            );
             Assert.True(reader.TryRead(out T first));
             Assert.Equal(InputData[0], first);
             Assert.True(reader.TryRead(out T second));
@@ -213,7 +249,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekOffset_AfterEnd()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(2)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(2))
+            );
             Assert.True(reader.TryRead(out T first));
             Assert.Equal(InputData[0], first);
 
@@ -228,7 +266,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekOffset_RemainsZeroOffsetZero()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(1)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(1))
+            );
             Assert.True(reader.TryRead(out T first));
             Assert.Equal(InputData[0], first);
             Assert.Equal(0, reader.Remaining);
@@ -239,7 +279,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekOffset_Empty()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(0)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(0))
+            );
             Assert.False(reader.TryPeek(0, out T defaultValue));
             Assert.Equal(default, defaultValue);
         }
@@ -256,7 +298,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(last);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, last, last.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                last,
+                last.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             // Move by 2 element
@@ -298,7 +345,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(last);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, last, last.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                last,
+                last.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             Assert.True(reader.TryPeek(0, out T firstElement));
@@ -316,7 +368,9 @@ namespace System.Memory.Tests.SequenceReader
         {
             ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(10)));
+                SequenceReader<T> reader = new SequenceReader<T>(
+                    Factory.CreateWithContent(GetInputData(10))
+                );
                 reader.TryPeek(-1, out _);
             });
 
@@ -326,7 +380,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void CursorIsCorrectAtEnd()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(2)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(2))
+            );
             reader.TryRead(out T _);
             reader.TryRead(out T _);
             Assert.True(reader.End);
@@ -342,7 +398,9 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(GetInputData(2)), 0, 2);
             first.SetNext(last);
 
-            SequenceReader<T> reader = new SequenceReader<T>(new ReadOnlySequence<T>(first, first.Start, last, last.Start));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                new ReadOnlySequence<T>(first, first.Start, last, last.Start)
+            );
             reader.TryRead(out T _);
             reader.TryRead(out T _);
             reader.TryRead(out T _);
@@ -354,7 +412,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekReturnsDefaultInTheEnd()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(2)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(2))
+            );
             Assert.True(reader.TryRead(out T value));
             Assert.Equal(InputData[0], value);
             Assert.True(reader.TryRead(out value));
@@ -366,7 +426,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void AdvanceToEndThenPeekReturnsDefault()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(5)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(5))
+            );
             reader.Advance(5);
             Assert.True(reader.End);
             Assert.False(reader.TryPeek(out T value));
@@ -376,7 +438,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void AdvancingPastLengthThrows()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(GetInputData(5)));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(GetInputData(5))
+            );
             try
             {
                 reader.Advance(6);
@@ -419,7 +483,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void TryPeekGoesToEndIfAllEmptySegments()
         {
-            ReadOnlySequence<T> buffer = SequenceFactory.Create(new[] { new T[] { }, new T[] { }, new T[] { }, new T[] { } });
+            ReadOnlySequence<T> buffer = SequenceFactory.Create(
+                new[] { new T[] { }, new T[] { }, new T[] { }, new T[] { } }
+            );
             SequenceReader<T> reader = new SequenceReader<T>(buffer);
 
             Assert.False(reader.TryPeek(out T value));
@@ -518,7 +584,9 @@ namespace System.Memory.Tests.SequenceReader
         [Fact]
         public void WorksWithEmptyBuffer()
         {
-            SequenceReader<T> reader = new SequenceReader<T>(Factory.CreateWithContent(new T[] { }));
+            SequenceReader<T> reader = new SequenceReader<T>(
+                Factory.CreateWithContent(new T[] { })
+            );
 
             Assert.Equal(0, reader.CurrentSpanIndex);
             Assert.Equal(0, reader.CurrentSpan.Length);
@@ -532,13 +600,15 @@ namespace System.Memory.Tests.SequenceReader
             Assert.True(reader.End);
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(0, false),
             InlineData(5, false),
             InlineData(10, false),
             InlineData(11, true),
             InlineData(12, true),
-            InlineData(15, true)]
+            InlineData(15, true)
+        ]
         public void ReturnsCorrectCursor(int takes, bool end)
         {
             ReadOnlySequence<T> readableBuffer = Factory.CreateWithContent(GetInputData(10));
@@ -584,10 +654,7 @@ namespace System.Memory.Tests.SequenceReader
             Assert.Equal(buffer.Length, reader.Consumed);
         }
 
-        [Theory,
-            InlineData(1),
-            InlineData(2),
-            InlineData(3)]
+        [Theory, InlineData(1), InlineData(2), InlineData(3)]
         public void Advance_PositionIsCorrect(int advanceBy)
         {
             // Check that advancing through the reader gives the same position
@@ -660,7 +727,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(last);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, last, last.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                last,
+                last.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             reader.AdvanceToEnd();
@@ -692,7 +764,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(second);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, third, third.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                third,
+                third.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             reader.AdvanceToEnd();
@@ -720,7 +797,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(last);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, last, last.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                last,
+                last.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             reader.AdvanceToEnd();
@@ -778,7 +860,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(last);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, last, last.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                last,
+                last.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             reader.AdvanceToEnd();
@@ -808,7 +895,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(last);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, last, last.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                last,
+                last.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             Assert.Equal(sequence, reader.UnreadSequence);
@@ -837,7 +929,12 @@ namespace System.Memory.Tests.SequenceReader
             first.SetMemory(new OwnedArray<T>(data.Slice(0, 5).ToArray()), 0, 5);
             first.SetNext(second);
 
-            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(first, first.Start, third, third.End);
+            ReadOnlySequence<T> sequence = new ReadOnlySequence<T>(
+                first,
+                first.Start,
+                third,
+                third.End
+            );
             SequenceReader<T> reader = new SequenceReader<T>(sequence);
 
             // Drain until the expected end of data with simple read
@@ -868,7 +965,10 @@ namespace System.Memory.Tests.SequenceReader
                     Span<T> bufferSlice = buffer.Slice(0, j);
                     bufferSlice.Clear();
                     Assert.True(reader.TryCopyTo(bufferSlice));
-                    Assert.Equal(Math.Min(bufferSlice.Length, content.Length - i), bufferSlice.Length);
+                    Assert.Equal(
+                        Math.Min(bufferSlice.Length, content.Length - i),
+                        bufferSlice.Length
+                    );
 
                     Assert.True(bufferSlice.SequenceEqual(content.AsSpan(i, j)));
                 }

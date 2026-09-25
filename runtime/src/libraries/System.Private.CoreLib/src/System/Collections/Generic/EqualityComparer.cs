@@ -8,7 +8,9 @@ using System.Runtime.Serialization;
 namespace System.Collections.Generic
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract partial class EqualityComparer<T> : IEqualityComparer, IEqualityComparer<T>
     {
         // public static EqualityComparer<T> Default is runtime-specific
@@ -25,7 +27,10 @@ namespace System.Collections.Generic
         /// </param>
         /// <returns>The new comparer.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="equals"/> delegate was null.</exception>
-        public static EqualityComparer<T> Create(Func<T?, T?, bool> equals, Func<T, int>? getHashCode = null)
+        public static EqualityComparer<T> Create(
+            Func<T?, T?, bool> equals,
+            Func<T, int>? getHashCode = null
+        )
         {
             ArgumentNullException.ThrowIfNull(equals);
 
@@ -39,18 +44,27 @@ namespace System.Collections.Generic
 
         int IEqualityComparer.GetHashCode(object? obj)
         {
-            if (obj == null) return 0;
-            if (obj is T) return GetHashCode((T)obj);
-            ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidArgumentForComparison);
+            if (obj == null)
+                return 0;
+            if (obj is T)
+                return GetHashCode((T)obj);
+            ThrowHelper.ThrowArgumentException(
+                ExceptionResource.Argument_InvalidArgumentForComparison
+            );
             return 0;
         }
 
         bool IEqualityComparer.Equals(object? x, object? y)
         {
-            if (x == y) return true;
-            if (x == null || y == null) return false;
-            if ((x is T) && (y is T)) return Equals((T)x, (T)y);
-            ThrowHelper.ThrowArgumentException(ExceptionResource.Argument_InvalidArgumentForComparison);
+            if (x == y)
+                return true;
+            if (x == null || y == null)
+                return false;
+            if ((x is T) && (y is T))
+                return Equals((T)x, (T)y);
+            ThrowHelper.ThrowArgumentException(
+                ExceptionResource.Argument_InvalidArgumentForComparison
+            );
             return false;
         }
 
@@ -94,16 +108,14 @@ namespace System.Collections.Generic
             _getHashCode = getHashCode;
         }
 
-        public override bool Equals(T? x, T? y) =>
-            _equals(x, y);
+        public override bool Equals(T? x, T? y) => _equals(x, y);
 
-        public override int GetHashCode([DisallowNull] T obj) =>
-            _getHashCode(obj);
+        public override int GetHashCode([DisallowNull] T obj) => _getHashCode(obj);
 
         public override bool Equals(object? obj) =>
-            obj is DelegateEqualityComparer<T> other &&
-            _equals == other._equals &&
-            _getHashCode == other._getHashCode;
+            obj is DelegateEqualityComparer<T> other
+            && _equals == other._equals
+            && _getHashCode == other._getHashCode;
 
         public override int GetHashCode() =>
             HashCode.Combine(_equals.GetHashCode(), _getHashCode.GetHashCode());
@@ -112,41 +124,49 @@ namespace System.Collections.Generic
     // The methods in this class look identical to the inherited methods, but the calls
     // to Equal bind to IEquatable<T>.Equals(T) instead of Object.Equals(Object)
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class GenericEqualityComparer<T> : EqualityComparer<T> where T : IEquatable<T>?
+    public sealed partial class GenericEqualityComparer<T> : EqualityComparer<T>
+        where T : IEquatable<T>?
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public override bool Equals(T? x, T? y)
         {
             if (x != null)
             {
-                if (y != null) return x.Equals(y);
+                if (y != null)
+                    return x.Equals(y);
                 return false;
             }
-            if (y != null) return false;
+            if (y != null)
+                return false;
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode([DisallowNull] T obj) =>
-            obj?.GetHashCode() ?? 0;
+        public override int GetHashCode([DisallowNull] T obj) => obj?.GetHashCode() ?? 0;
 
         // Equals method for the comparer itself.
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?>, ISerializable where T : struct
+    public sealed partial class NullableEqualityComparer<T> : EqualityComparer<T?>, ISerializable
+        where T : struct
     {
         public NullableEqualityComparer() { }
+
         private NullableEqualityComparer(SerializationInfo info, StreamingContext context) { }
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (!typeof(T).IsAssignableTo(typeof(IEquatable<T>)))
@@ -161,27 +181,29 @@ namespace System.Collections.Generic
         {
             if (x.HasValue)
             {
-                if (y.HasValue) return EqualityComparer<T>.Default.Equals(x.value, y.value);
+                if (y.HasValue)
+                    return EqualityComparer<T>.Default.Equals(x.value, y.value);
                 return false;
             }
-            if (y.HasValue) return false;
+            if (y.HasValue)
+                return false;
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode(T? obj) =>
-            obj.GetHashCode();
+        public override int GetHashCode(T? obj) => obj.GetHashCode();
 
         // Equals method for the comparer itself.
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
     public sealed partial class ObjectEqualityComparer<T> : EqualityComparer<T>
     {
@@ -190,50 +212,52 @@ namespace System.Collections.Generic
         {
             if (x != null)
             {
-                if (y != null) return x.Equals(y);
+                if (y != null)
+                    return x.Equals(y);
                 return false;
             }
-            if (y != null) return false;
+            if (y != null)
+                return false;
             return true;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode([DisallowNull] T obj) =>
-            obj?.GetHashCode() ?? 0;
+        public override int GetHashCode([DisallowNull] T obj) => obj?.GetHashCode() ?? 0;
 
         // Equals method for the comparer itself.
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
     public sealed partial class ByteEqualityComparer : EqualityComparer<byte>
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals(byte x, byte y) =>
-            x == y;
+        public override bool Equals(byte x, byte y) => x == y;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode(byte b) =>
-            b.GetHashCode();
+        public override int GetHashCode(byte b) => b.GetHashCode();
 
         // Equals method for the comparer itself.
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     // Needs to be public to support binary serialization compatibility
-    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>, ISerializable where T : struct, Enum
+    public sealed partial class EnumEqualityComparer<T> : EqualityComparer<T>, ISerializable
+        where T : struct, Enum
     {
         public EnumEqualityComparer() { }
 
@@ -252,14 +276,12 @@ namespace System.Collections.Generic
         // public override bool Equals(T x, T y) is runtime-specific
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override int GetHashCode(T obj) =>
-            obj.GetHashCode();
+        public override int GetHashCode(T obj) => obj.GetHashCode();
 
         // Equals method for the comparer itself.
         public override bool Equals([NotNullWhen(true)] object? obj) =>
             obj != null && GetType() == obj.GetType();
 
-        public override int GetHashCode() =>
-            GetType().GetHashCode();
+        public override int GetHashCode() => GetType().GetHashCode();
     }
 }

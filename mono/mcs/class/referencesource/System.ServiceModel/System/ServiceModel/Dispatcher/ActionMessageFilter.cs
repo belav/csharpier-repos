@@ -4,11 +4,11 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Channels;
 
     [DataContract]
     public class ActionMessageFilter : MessageFilter
@@ -25,10 +25,7 @@ namespace System.ServiceModel.Dispatcher
                 actions.Keys.CopyTo(act, 0);
                 return act;
             }
-            set
-            {
-                Init(value);
-            }
+            set { Init(value); }
         }
 
         public ActionMessageFilter(params string[] actions)
@@ -45,7 +42,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (actions.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ActionFilterEmptyList), "actions"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.ActionFilterEmptyList), "actions")
+                );
             }
 
             this.actions = new Dictionary<string, int>();
@@ -65,7 +64,9 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.actionSet == null)
                 {
-                    this.actionSet = new ReadOnlyCollection<string>(new List<string>(this.actions.Keys));
+                    this.actionSet = new ReadOnlyCollection<string>(
+                        new List<string>(this.actions.Keys)
+                    );
                 }
                 return this.actionSet;
             }

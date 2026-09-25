@@ -8,12 +8,12 @@ namespace System.ComponentModel
 {
     using System.Security.Permissions;
     using System.Threading;
-    
+
     [HostProtection(SharedState = true)]
     public sealed class AsyncOperation
     {
         private SynchronizationContext syncContext;
-        private object userSuppliedState; 
+        private object userSuppliedState;
         private bool alreadyCompleted;
 
         /// <summary>
@@ -47,10 +47,7 @@ namespace System.ComponentModel
         /// <include file='doc\AsyncOperation.uex' path='docs/doc[@for="AsyncOperation.SynchronizationContext"]/*' />
         public SynchronizationContext SynchronizationContext
         {
-            get
-            {
-                return syncContext;
-            }
+            get { return syncContext; }
         }
 
         public void Post(SendOrPostCallback d, object arg)
@@ -89,7 +86,9 @@ namespace System.ComponentModel
         {
             if (alreadyCompleted)
             {
-                throw new InvalidOperationException(SR.GetString(SR.Async_OperationAlreadyCompleted));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Async_OperationAlreadyCompleted)
+                );
             }
         }
 
@@ -104,11 +103,13 @@ namespace System.ComponentModel
         /// <summary>
         ///     Only for use by AsyncOperationManager to create new AsyncOperation objects
         /// </summary>
-        internal static AsyncOperation CreateOperation(object userSuppliedState, SynchronizationContext syncContext)
+        internal static AsyncOperation CreateOperation(
+            object userSuppliedState,
+            SynchronizationContext syncContext
+        )
         {
-            AsyncOperation newOp = new AsyncOperation(userSuppliedState, syncContext); 
+            AsyncOperation newOp = new AsyncOperation(userSuppliedState, syncContext);
             return newOp;
         }
     }
 }
-

@@ -4,15 +4,29 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor
-     | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Assembly,
-    AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class IsolatedStorageFilePermissionAttribute : IsolatedStoragePermissionAttribute
     {
-        public IsolatedStorageFilePermissionAttribute(SecurityAction action) : base(action) { }
-        public override IPermission CreatePermission() { return null; }
-    }
+        public IsolatedStorageFilePermissionAttribute(SecurityAction action)
+            : base(action) { }
 
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
+    }
 }

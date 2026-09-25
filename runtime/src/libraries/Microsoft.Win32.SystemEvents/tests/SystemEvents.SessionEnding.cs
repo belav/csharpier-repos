@@ -14,15 +14,30 @@ namespace Microsoft.Win32.SystemEventsTests
             return SendMessage(User32.WM_QUERYENDSESSION, IntPtr.Zero, (IntPtr)lParam);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         [InlineData(User32.ENDSESSION_LOGOFF, SessionEndReasons.Logoff)]
-        [InlineData(User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL, SessionEndReasons.Logoff)]
-        [InlineData(User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CLOSEAPP, SessionEndReasons.Logoff)]
-        [InlineData(User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP, SessionEndReasons.Logoff)]
+        [InlineData(
+            User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL,
+            SessionEndReasons.Logoff
+        )]
+        [InlineData(
+            User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CLOSEAPP,
+            SessionEndReasons.Logoff
+        )]
+        [InlineData(
+            User32.ENDSESSION_LOGOFF | User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP,
+            SessionEndReasons.Logoff
+        )]
         [InlineData(0, SessionEndReasons.SystemShutdown)]
         [InlineData(User32.ENDSESSION_CRITICAL, SessionEndReasons.SystemShutdown)]
         [InlineData(User32.ENDSESSION_CLOSEAPP, SessionEndReasons.SystemShutdown)]
-        [InlineData(User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP, SessionEndReasons.SystemShutdown)]
+        [InlineData(
+            User32.ENDSESSION_CRITICAL | User32.ENDSESSION_CLOSEAPP,
+            SessionEndReasons.SystemShutdown
+        )]
         public void SignalsSessionEnding(int lParam, SessionEndReasons reason)
         {
             bool signaled = false;
@@ -48,7 +63,10 @@ namespace Microsoft.Win32.SystemEventsTests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void CancelSessionEnding()
         {
             bool shouldCancel = false;

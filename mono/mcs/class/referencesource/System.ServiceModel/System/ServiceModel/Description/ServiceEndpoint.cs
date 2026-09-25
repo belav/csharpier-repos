@@ -35,10 +35,14 @@ namespace System.ServiceModel.Description
             this.contract = contract;
         }
 
-        public ServiceEndpoint(ContractDescription contract, Binding binding, EndpointAddress address)
+        public ServiceEndpoint(
+            ContractDescription contract,
+            Binding binding,
+            EndpointAddress address
+        )
         {
             if (contract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contract");            
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contract");
 
             this.contract = contract;
             this.binding = binding;
@@ -89,11 +93,7 @@ namespace System.ServiceModel.Description
             }
         }
 
-        public bool IsSystemEndpoint
-        {
-            get;
-            set;
-        }
+        public bool IsSystemEndpoint { get; set; }
 
         public string Name
         {
@@ -106,7 +106,12 @@ namespace System.ServiceModel.Description
                 else if (binding != null)
                 {
                     // Microsoft: composing names have potential problem of generating name that looks like an encoded name, consider avoiding '_'
-                    return String.Format(CultureInfo.InvariantCulture, "{0}_{1}", new XmlName(Binding.Name).EncodedName, Contract.Name);
+                    return String.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}_{1}",
+                        new XmlName(Binding.Name).EncodedName,
+                        Contract.Name
+                    );
                 }
                 else
                 {
@@ -115,13 +120,16 @@ namespace System.ServiceModel.Description
             }
             set
             {
-                name = new XmlName(value, true /*isEncoded*/);
+                name = new XmlName(
+                    value,
+                    true /*isEncoded*/
+                );
             }
         }
 
         public Uri ListenUri
         {
-            get 
+            get
             {
                 if (this.listenUri == null)
                 {
@@ -143,7 +151,10 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.UriMustBeAbsolute));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.UriMustBeAbsolute)
+                    );
                 }
                 this.listenUri = value;
             }
@@ -156,7 +167,9 @@ namespace System.ServiceModel.Description
             {
                 if (!ListenUriModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.listenUriMode = value;
             }
@@ -164,25 +177,17 @@ namespace System.ServiceModel.Description
 
         internal string Id
         {
-            get 
-            { 
+            get
+            {
                 if (id == null)
                     id = Guid.NewGuid().ToString();
-                return id; 
+                return id;
             }
         }
 
-        internal Uri UnresolvedAddress
-        {
-            get;
-            set;
-        }
+        internal Uri UnresolvedAddress { get; set; }
 
-        internal Uri UnresolvedListenUri
-        {
-            get;
-            set;
-        }
+        internal Uri UnresolvedListenUri { get; set; }
 
         // This method ensures that the description object graph is structurally sound and that none
         // of the fundamental SFx framework assumptions have been violated.
@@ -190,11 +195,19 @@ namespace System.ServiceModel.Description
         {
             if (Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.AChannelServiceEndpointSBindingIsNull0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.AChannelServiceEndpointSBindingIsNull0)
+                    )
+                );
             }
             if (Contract == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.AChannelServiceEndpointSContractIsNull0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.AChannelServiceEndpointSContractIsNull0)
+                    )
+                );
             }
             this.Contract.EnsureInvariants();
             this.Binding.EnsureInvariants(this.Contract.Name);
@@ -210,7 +223,7 @@ namespace System.ServiceModel.Description
             Validate(runOperationValidators, true);
         }
 
-        internal bool IsFullyConfigured 
+        internal bool IsFullyConfigured
         {
             get { return this.isEndpointFullyConfigured; }
             set { this.isEndpointFullyConfigured = value; }
@@ -226,7 +239,7 @@ namespace System.ServiceModel.Description
             return this.IsSystemEndpoint;
         }
 
-        // This method runs validators (both builtin and ones in description).  
+        // This method runs validators (both builtin and ones in description).
         // Precondition: EnsureInvariants() should already have been called.
         void Validate(bool runOperationValidators, bool isForService)
         {
@@ -246,7 +259,10 @@ namespace System.ServiceModel.Description
 #pragma warning restore 0618
                 (TransactionValidationBehavior.Instance as IEndpointBehavior).Validate(this);
                 (SecurityValidationBehavior.Instance as IEndpointBehavior).Validate(this);
-                (System.ServiceModel.MsmqIntegration.MsmqIntegrationValidationBehavior.Instance as IEndpointBehavior).Validate(this);
+                (
+                    System.ServiceModel.MsmqIntegration.MsmqIntegrationValidationBehavior.Instance
+                    as IEndpointBehavior
+                ).Validate(this);
             }
             for (int j = 0; j < this.Behaviors.Count; j++)
             {

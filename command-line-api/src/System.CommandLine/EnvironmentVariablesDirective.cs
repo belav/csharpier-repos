@@ -14,9 +14,8 @@ namespace System.CommandLine
         private CliAction? _action;
 
         /// <inheritdoc />
-        public EnvironmentVariablesDirective() : base("env")
-        {
-        }
+        public EnvironmentVariablesDirective()
+            : base("env") { }
 
         /// <inheritdoc />
         public override CliAction? Action
@@ -54,11 +53,16 @@ namespace System.CommandLine
 
                     if (indexOfSeparator > 0)
                     {
-                        ReadOnlySpan<char> variable = parsedValue.AsSpan(0, indexOfSeparator).Trim();
+                        ReadOnlySpan<char> variable = parsedValue
+                            .AsSpan(0, indexOfSeparator)
+                            .Trim();
 
                         if (!variable.IsEmpty)
                         {
-                            string value = parsedValue.AsSpan(indexOfSeparator + 1).Trim().ToString();
+                            string value = parsedValue
+                                .AsSpan(indexOfSeparator + 1)
+                                .Trim()
+                                .ToString();
 
                             Environment.SetEnvironmentVariable(variable.ToString(), value);
                         }

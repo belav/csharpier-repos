@@ -24,7 +24,8 @@ namespace System.Collections.Immutable
         /// <summary>
         /// The default empty node.
         /// </summary>
-        internal static readonly SortedInt32KeyNode<TValue> EmptyNode = new SortedInt32KeyNode<TValue>();
+        internal static readonly SortedInt32KeyNode<TValue> EmptyNode =
+            new SortedInt32KeyNode<TValue>();
 
         /// <summary>
         /// The Int32 key associated with this node.
@@ -76,7 +77,13 @@ namespace System.Collections.Immutable
         /// <param name="left">The left.</param>
         /// <param name="right">The right.</param>
         /// <param name="frozen">Whether this node is prefrozen.</param>
-        private SortedInt32KeyNode(int key, TValue value, SortedInt32KeyNode<TValue> left, SortedInt32KeyNode<TValue> right, bool frozen = false)
+        private SortedInt32KeyNode(
+            int key,
+            TValue value,
+            SortedInt32KeyNode<TValue> left,
+            SortedInt32KeyNode<TValue> right,
+            bool frozen = false
+        )
         {
             Requires.NotNull(left, nameof(left));
             Requires.NotNull(right, nameof(right));
@@ -97,32 +104,50 @@ namespace System.Collections.Immutable
         /// <value>
         /// <c>true</c> if this instance is empty; otherwise, <c>false</c>.
         /// </value>
-        public bool IsEmpty { get { return _left == null; } }
+        public bool IsEmpty
+        {
+            get { return _left == null; }
+        }
 
         /// <summary>
         /// Gets the height of the tree beneath this node.
         /// </summary>
-        public int Height { get { return _height; } }
+        public int Height
+        {
+            get { return _height; }
+        }
 
         /// <summary>
         /// Gets the left branch of this node.
         /// </summary>
-        public SortedInt32KeyNode<TValue>? Left { get { return _left; } }
+        public SortedInt32KeyNode<TValue>? Left
+        {
+            get { return _left; }
+        }
 
         /// <summary>
         /// Gets the right branch of this node.
         /// </summary>
-        public SortedInt32KeyNode<TValue>? Right { get { return _right; } }
+        public SortedInt32KeyNode<TValue>? Right
+        {
+            get { return _right; }
+        }
 
         /// <summary>
         /// Gets the left branch of this node.
         /// </summary>
-        IBinaryTree? IBinaryTree.Left { get { return _left; } }
+        IBinaryTree? IBinaryTree.Left
+        {
+            get { return _left; }
+        }
 
         /// <summary>
         /// Gets the right branch of this node.
         /// </summary>
-        IBinaryTree? IBinaryTree.Right { get { return _right; } }
+        IBinaryTree? IBinaryTree.Right
+        {
+            get { return _right; }
+        }
 
         /// <summary>
         /// Gets the number of elements contained by this node and below.
@@ -173,11 +198,24 @@ namespace System.Collections.Immutable
         /// <param name="valueComparer">The value comparer.</param>
         /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
         /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
-        internal SortedInt32KeyNode<TValue> SetItem(int key, TValue value, IEqualityComparer<TValue> valueComparer, out bool replacedExistingValue, out bool mutated)
+        internal SortedInt32KeyNode<TValue> SetItem(
+            int key,
+            TValue value,
+            IEqualityComparer<TValue> valueComparer,
+            out bool replacedExistingValue,
+            out bool mutated
+        )
         {
             Requires.NotNull(valueComparer, nameof(valueComparer));
 
-            return this.SetOrAdd(key, value, valueComparer, true, out replacedExistingValue, out mutated);
+            return this.SetOrAdd(
+                key,
+                value,
+                valueComparer,
+                true,
+                out replacedExistingValue,
+                out mutated
+            );
         }
 
         /// <summary>
@@ -325,7 +363,9 @@ namespace System.Collections.Immutable
                 return tree;
             }
 
-            SortedInt32KeyNode<TValue> rotatedRightChild = tree.Mutate(right: RotateRight(tree._right));
+            SortedInt32KeyNode<TValue> rotatedRightChild = tree.Mutate(
+                right: RotateRight(tree._right)
+            );
             return RotateLeft(rotatedRightChild);
         }
 
@@ -418,7 +458,14 @@ namespace System.Collections.Immutable
         /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
         /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
         /// <returns>The new AVL tree.</returns>
-        private SortedInt32KeyNode<TValue> SetOrAdd(int key, TValue value, IEqualityComparer<TValue> valueComparer, bool overwriteExistingValue, out bool replacedExistingValue, out bool mutated)
+        private SortedInt32KeyNode<TValue> SetOrAdd(
+            int key,
+            TValue value,
+            IEqualityComparer<TValue> valueComparer,
+            bool overwriteExistingValue,
+            out bool replacedExistingValue,
+            out bool mutated
+        )
         {
             // Arg validation skipped in this private method because it's recursive and the tax
             // of revalidating arguments on each recursive call is significant.
@@ -434,7 +481,14 @@ namespace System.Collections.Immutable
                 SortedInt32KeyNode<TValue> result = this;
                 if (key > _key)
                 {
-                    SortedInt32KeyNode<TValue> newRight = _right!.SetOrAdd(key, value, valueComparer, overwriteExistingValue, out replacedExistingValue, out mutated);
+                    SortedInt32KeyNode<TValue> newRight = _right!.SetOrAdd(
+                        key,
+                        value,
+                        valueComparer,
+                        overwriteExistingValue,
+                        out replacedExistingValue,
+                        out mutated
+                    );
                     if (mutated)
                     {
                         result = this.Mutate(right: newRight);
@@ -442,7 +496,14 @@ namespace System.Collections.Immutable
                 }
                 else if (key < _key)
                 {
-                    SortedInt32KeyNode<TValue> newLeft = _left!.SetOrAdd(key, value, valueComparer, overwriteExistingValue, out replacedExistingValue, out mutated);
+                    SortedInt32KeyNode<TValue> newLeft = _left!.SetOrAdd(
+                        key,
+                        value,
+                        valueComparer,
+                        overwriteExistingValue,
+                        out replacedExistingValue,
+                        out mutated
+                    );
                     if (mutated)
                     {
                         result = this.Mutate(left: newLeft);
@@ -543,7 +604,6 @@ namespace System.Collections.Immutable
             }
         }
 
-
         /// <summary>
         /// Creates a node mutation, either by mutating this node (if not yet frozen) or by creating a clone of this node
         /// with the described changes.
@@ -551,12 +611,20 @@ namespace System.Collections.Immutable
         /// <param name="left">The left branch of the mutated node.</param>
         /// <param name="right">The right branch of the mutated node.</param>
         /// <returns>The mutated (or created) node.</returns>
-        private SortedInt32KeyNode<TValue> Mutate(SortedInt32KeyNode<TValue>? left = null, SortedInt32KeyNode<TValue>? right = null)
+        private SortedInt32KeyNode<TValue> Mutate(
+            SortedInt32KeyNode<TValue>? left = null,
+            SortedInt32KeyNode<TValue>? right = null
+        )
         {
             Debug.Assert(_right != null && _left != null);
             if (_frozen)
             {
-                return new SortedInt32KeyNode<TValue>(_key, _value!, left ?? _left, right ?? _right);
+                return new SortedInt32KeyNode<TValue>(
+                    _key,
+                    _value!,
+                    left ?? _left,
+                    right ?? _right
+                );
             }
             else
             {

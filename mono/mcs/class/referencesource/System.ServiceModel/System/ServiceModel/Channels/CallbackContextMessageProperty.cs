@@ -11,10 +11,10 @@ namespace System.ServiceModel.Channels
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Net;
+    using System.Runtime;
     using System.Runtime.Serialization;
     using System.Threading;
     using System.Xml;
-    using System.Runtime;
 
     [Serializable]
     public class CallbackContextMessageProperty : IMessageProperty
@@ -33,25 +33,36 @@ namespace System.ServiceModel.Channels
         // if this constructor is used, the listen address will have to be provided later by setting it in the ContextBindingElement
         // CallbackContextMessageProperty will flow on the wire only if listenaddress is set.
         public CallbackContextMessageProperty(IDictionary<string, string> context)
-            : this((EndpointAddress)null, context)
-        {
-        }
+            : this((EndpointAddress)null, context) { }
 
-        public CallbackContextMessageProperty(string listenAddress, IDictionary<string, string> context)
-            : this(new Uri(listenAddress), context)
-        {
-        }
+        public CallbackContextMessageProperty(
+            string listenAddress,
+            IDictionary<string, string> context
+        )
+            : this(new Uri(listenAddress), context) { }
 
-        public CallbackContextMessageProperty(Uri listenAddress, IDictionary<string, string> context)
-            : this(new EndpointAddress(listenAddress), context)
-        {
-        }
+        public CallbackContextMessageProperty(
+            Uri listenAddress,
+            IDictionary<string, string> context
+        )
+            : this(new EndpointAddress(listenAddress), context) { }
 
-        public CallbackContextMessageProperty(EndpointAddress listenAddress, IDictionary<string, string> context)
+        public CallbackContextMessageProperty(
+            EndpointAddress listenAddress,
+            IDictionary<string, string> context
+        )
         {
-            if (listenAddress != null && listenAddress.Headers.FindHeader(ContextMessageHeader.ContextHeaderName, ContextMessageHeader.ContextHeaderNamespace) != null)
+            if (
+                listenAddress != null
+                && listenAddress.Headers.FindHeader(
+                    ContextMessageHeader.ContextHeaderName,
+                    ContextMessageHeader.ContextHeaderNamespace
+                ) != null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.ListenAddressAlreadyContainsContext));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.ListenAddressAlreadyContainsContext)
+                );
             }
             this.listenAddress = listenAddress;
             this.context = context;
@@ -68,10 +79,7 @@ namespace System.ServiceModel.Channels
 
         public static string Name
         {
-            get
-            {
-                return PropertyName;
-            }
+            get { return PropertyName; }
         }
 
         public EndpointAddress CallbackAddress
@@ -88,10 +96,7 @@ namespace System.ServiceModel.Channels
 
         public IDictionary<string, string> Context
         {
-            get
-            {
-                return this.context;
-            }
+            get { return this.context; }
         }
 
         public EndpointAddress CreateCallbackAddress(Uri listenAddress)
@@ -104,7 +109,10 @@ namespace System.ServiceModel.Channels
             return CreateCallbackAddress(new EndpointAddress(listenAddress), this.context);
         }
 
-        static EndpointAddress CreateCallbackAddress(EndpointAddress listenAddress, IDictionary<string, string> context)
+        static EndpointAddress CreateCallbackAddress(
+            EndpointAddress listenAddress,
+            IDictionary<string, string> context
+        )
         {
             if (listenAddress == null)
             {
@@ -119,7 +127,10 @@ namespace System.ServiceModel.Channels
             return builder.ToEndpointAddress();
         }
 
-        public static bool TryGet(Message message, out CallbackContextMessageProperty contextMessageProperty)
+        public static bool TryGet(
+            Message message,
+            out CallbackContextMessageProperty contextMessageProperty
+        )
         {
             if (message == null)
             {
@@ -129,7 +140,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out contextMessageProperty);
         }
 
-        public static bool TryGet(MessageProperties properties, out CallbackContextMessageProperty contextMessageProperty)
+        public static bool TryGet(
+            MessageProperties properties,
+            out CallbackContextMessageProperty contextMessageProperty
+        )
         {
             if (properties == null)
             {
@@ -181,9 +195,15 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        [SuppressMessage(FxCop.Category.Design, FxCop.Rule.AvoidOutParameters,
-            Justification = "The method needs to return two objects with one parsing")]
-        public void GetListenAddressAndContext(out EndpointAddress listenAddress, out IDictionary<string, string> context)
+        [SuppressMessage(
+            FxCop.Category.Design,
+            FxCop.Rule.AvoidOutParameters,
+            Justification = "The method needs to return two objects with one parsing"
+        )]
+        public void GetListenAddressAndContext(
+            out EndpointAddress listenAddress,
+            out IDictionary<string, string> context
+        )
         {
             // we expect the callback address to be already set when this is called
             if (this.CallbackAddress == null)
@@ -195,11 +215,18 @@ namespace System.ServiceModel.Channels
             int contextHeaderIndex = -1;
             for (int i = 0; i < builder.Headers.Count; ++i)
             {
-                if (builder.Headers[i].Name == ContextMessageHeader.ContextHeaderName && builder.Headers[i].Namespace == ContextMessageHeader.ContextHeaderNamespace)
+                if (
+                    builder.Headers[i].Name == ContextMessageHeader.ContextHeaderName
+                    && builder.Headers[i].Namespace == ContextMessageHeader.ContextHeaderNamespace
+                )
                 {
                     if (contextHeader != null)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.MultipleContextHeadersFoundInCallbackAddress)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ProtocolException(
+                                SR.GetString(SR.MultipleContextHeadersFoundInCallbackAddress)
+                            )
+                        );
                     }
                     contextHeader = builder.Headers[i];
                     contextHeaderIndex = i;
@@ -209,7 +236,12 @@ namespace System.ServiceModel.Channels
             {
                 builder.Headers.RemoveAt(contextHeaderIndex);
             }
-            context = (contextHeader != null) ? ContextMessageHeader.ParseContextHeader(contextHeader.GetAddressHeaderReader()).Context : null;
+            context =
+                (contextHeader != null)
+                    ? ContextMessageHeader
+                        .ParseContextHeader(contextHeader.GetAddressHeaderReader())
+                        .Context
+                    : null;
             listenAddress = builder.ToEndpointAddress();
         }
     }

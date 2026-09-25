@@ -20,9 +20,7 @@ public class DelegatingDbContextLogger : IDbContextLogger
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public DelegatingDbContextLogger(
-        Action<EventData> logger,
-        Func<EventId, LogLevel, bool> filter)
+    public DelegatingDbContextLogger(Action<EventData> logger, Func<EventId, LogLevel, bool> filter)
     {
         _logger = logger;
         _filter = filter;
@@ -34,8 +32,7 @@ public class DelegatingDbContextLogger : IDbContextLogger
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Log(EventData eventData)
-        => _logger(eventData);
+    public virtual void Log(EventData eventData) => _logger(eventData);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -43,6 +40,5 @@ public class DelegatingDbContextLogger : IDbContextLogger
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool ShouldLog(EventId eventId, LogLevel logLevel)
-        => _filter(eventId, logLevel);
+    public virtual bool ShouldLog(EventId eventId, LogLevel logLevel) => _filter(eventId, logLevel);
 }

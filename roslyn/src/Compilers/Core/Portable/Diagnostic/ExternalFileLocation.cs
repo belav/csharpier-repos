@@ -14,28 +14,40 @@ namespace Microsoft.CodeAnalysis
     internal sealed class ExternalFileLocation : Location, IEquatable<ExternalFileLocation?>
     {
         private readonly TextSpan _sourceSpan;
-        private readonly FileLinePositionSpan _lineSpan, _mappedLineSpan;
+        private readonly FileLinePositionSpan _lineSpan,
+            _mappedLineSpan;
 
-        internal ExternalFileLocation(string filePath, TextSpan sourceSpan, LinePositionSpan lineSpan)
+        internal ExternalFileLocation(
+            string filePath,
+            TextSpan sourceSpan,
+            LinePositionSpan lineSpan
+        )
         {
             _sourceSpan = sourceSpan;
             _lineSpan = new FileLinePositionSpan(filePath, lineSpan);
             _mappedLineSpan = _lineSpan;
         }
 
-        internal ExternalFileLocation(string filePath, TextSpan sourceSpan, LinePositionSpan lineSpan, string mappedFilePath, LinePositionSpan mappedLineSpan)
+        internal ExternalFileLocation(
+            string filePath,
+            TextSpan sourceSpan,
+            LinePositionSpan lineSpan,
+            string mappedFilePath,
+            LinePositionSpan mappedLineSpan
+        )
         {
             _sourceSpan = sourceSpan;
             _lineSpan = new FileLinePositionSpan(filePath, lineSpan);
-            _mappedLineSpan = new FileLinePositionSpan(mappedFilePath, mappedLineSpan, hasMappedPath: true);
+            _mappedLineSpan = new FileLinePositionSpan(
+                mappedFilePath,
+                mappedLineSpan,
+                hasMappedPath: true
+            );
         }
 
         public override TextSpan SourceSpan
         {
-            get
-            {
-                return _sourceSpan;
-            }
+            get { return _sourceSpan; }
         }
 
         public override FileLinePositionSpan GetLineSpan()
@@ -50,10 +62,7 @@ namespace Microsoft.CodeAnalysis
 
         public override LocationKind Kind
         {
-            get
-            {
-                return LocationKind.ExternalFile;
-            }
+            get { return LocationKind.ExternalFile; }
         }
 
         public override bool Equals(object? obj)
@@ -76,8 +85,10 @@ namespace Microsoft.CodeAnalysis
 
         public override int GetHashCode()
         {
-            return Hash.Combine(_lineSpan.GetHashCode(),
-                Hash.Combine(_mappedLineSpan.GetHashCode(), _sourceSpan.GetHashCode()));
+            return Hash.Combine(
+                _lineSpan.GetHashCode(),
+                Hash.Combine(_mappedLineSpan.GetHashCode(), _sourceSpan.GetHashCode())
+            );
         }
     }
 }

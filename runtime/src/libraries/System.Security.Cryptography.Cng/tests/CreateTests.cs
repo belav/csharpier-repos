@@ -12,9 +12,7 @@ namespace System.Security.Cryptography.Cng.Tests
         public static void CreateEmphemeral_Default()
         {
             CngAlgorithm alg = CngAlgorithm.ECDiffieHellmanP256;
-            using (CngKey key = CngKey.Create(alg, null, null))
-            {
-            }
+            using (CngKey key = CngKey.Create(alg, null, null)) { }
         }
 
         [Fact]
@@ -24,11 +22,21 @@ namespace System.Security.Cryptography.Cng.Tests
             CngKeyCreationParameters p = new CngKeyCreationParameters();
             p.ExportPolicy = CngExportPolicies.AllowExport;
             p.KeyUsage = CngKeyUsages.KeyAgreement;
-            p.UIPolicy = new CngUIPolicy(CngUIProtectionLevels.None, "MyFriendlyName", "MyDescription", "MyUseContext", "MyCreationTitle");
+            p.UIPolicy = new CngUIPolicy(
+                CngUIProtectionLevels.None,
+                "MyFriendlyName",
+                "MyDescription",
+                "MyUseContext",
+                "MyCreationTitle"
+            );
             byte[] myPropValue1 = "23afbc".HexToByteArray();
-            p.Parameters.Add(new CngProperty("MyProp1", myPropValue1, CngPropertyOptions.CustomProperty));
+            p.Parameters.Add(
+                new CngProperty("MyProp1", myPropValue1, CngPropertyOptions.CustomProperty)
+            );
             byte[] myPropValue2 = "8765".HexToByteArray();
-            p.Parameters.Add(new CngProperty("MyProp2", myPropValue2, CngPropertyOptions.CustomProperty));
+            p.Parameters.Add(
+                new CngProperty("MyProp2", myPropValue2, CngPropertyOptions.CustomProperty)
+            );
 
             using (CngKey key = CngKey.Create(alg, null, p))
             {
@@ -42,10 +50,18 @@ namespace System.Security.Cryptography.Cng.Tests
                 Assert.Equal("MyUseContext", uiPolicy.UseContext);
                 Assert.Equal("MyCreationTitle", uiPolicy.CreationTitle);
 
-                byte[] propValue1Actual = key.GetProperty("MyProp1", CngPropertyOptions.CustomProperty).GetValue();
+                byte[] propValue1Actual = key.GetProperty(
+                        "MyProp1",
+                        CngPropertyOptions.CustomProperty
+                    )
+                    .GetValue();
                 Assert.Equal<byte>(myPropValue1, propValue1Actual);
 
-                byte[] propValue2Actual = key.GetProperty("MyProp2", CngPropertyOptions.CustomProperty).GetValue();
+                byte[] propValue2Actual = key.GetProperty(
+                        "MyProp2",
+                        CngPropertyOptions.CustomProperty
+                    )
+                    .GetValue();
                 Assert.Equal<byte>(myPropValue2, propValue2Actual);
             }
         }

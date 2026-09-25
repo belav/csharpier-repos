@@ -13,90 +13,90 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
     public class DisableKeywordRecommenderTests : KeywordRecommenderTests
     {
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31130")]
-        public async Task TestAfterNullable()
-            => await VerifyKeywordAsync(@"#nullable $$");
+        public async Task TestAfterNullable() => await VerifyKeywordAsync(@"#nullable $$");
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31130")]
         public async Task TestNotAfterNullableAndNewline()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 #nullable 
                 $$
 
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
-        public async Task TestNotAfterHash()
-            => await VerifyAbsenceAsync(@"#$$");
+        public async Task TestNotAfterHash() => await VerifyAbsenceAsync(@"#$$");
 
         [Fact]
-        public async Task TestNotAfterPragma()
-            => await VerifyAbsenceAsync(@"#pragma $$");
+        public async Task TestNotAfterPragma() => await VerifyAbsenceAsync(@"#pragma $$");
 
         [Fact]
         public async Task TestAfterPragmaWarning()
         {
-            await VerifyKeywordAsync(
-@"#pragma warning $$");
+            await VerifyKeywordAsync(@"#pragma warning $$");
         }
     }
 }

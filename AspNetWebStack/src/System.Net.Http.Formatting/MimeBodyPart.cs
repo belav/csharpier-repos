@@ -30,7 +30,11 @@ namespace System.Net.Http
         /// <param name="streamProvider">The stream provider.</param>
         /// <param name="maxBodyPartHeaderSize">The max length of the MIME header within each MIME body part.</param>
         /// <param name="parentContent">The part's parent content</param>
-        public MimeBodyPart(MultipartStreamProvider streamProvider, int maxBodyPartHeaderSize, HttpContent parentContent)
+        public MimeBodyPart(
+            MultipartStreamProvider streamProvider,
+            int maxBodyPartHeaderSize,
+            HttpContent parentContent
+        )
         {
             Contract.Assert(streamProvider != null);
             Contract.Assert(parentContent != null);
@@ -41,7 +45,8 @@ namespace System.Net.Http
             HeaderParser = new InternetMessageFormatHeaderParser(
                 _headers,
                 maxBodyPartHeaderSize,
-                ignoreHeaderValidation: true);
+                ignoreHeaderValidation: true
+            );
         }
 
         /// <summary>
@@ -98,10 +103,18 @@ namespace System.Net.Http
         /// </summary>
         /// <param name="segment">The current segment to be written to the part's output stream.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
-        public async Task WriteSegment(ArraySegment<byte> segment, CancellationToken cancellationToken)
+        public async Task WriteSegment(
+            ArraySegment<byte> segment,
+            CancellationToken cancellationToken
+        )
         {
             var stream = GetOutputStream();
-            await stream.WriteAsync(segment.Array, segment.Offset, segment.Count, cancellationToken);
+            await stream.WriteAsync(
+                segment.Array,
+                segment.Offset,
+                segment.Count,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -118,17 +131,29 @@ namespace System.Net.Http
                 }
                 catch (Exception e)
                 {
-                    throw Error.InvalidOperation(e, Properties.Resources.ReadAsMimeMultipartStreamProviderException, _streamProvider.GetType().Name);
+                    throw Error.InvalidOperation(
+                        e,
+                        Properties.Resources.ReadAsMimeMultipartStreamProviderException,
+                        _streamProvider.GetType().Name
+                    );
                 }
 
                 if (_outputStream == null)
                 {
-                    throw Error.InvalidOperation(Properties.Resources.ReadAsMimeMultipartStreamProviderNull, _streamProvider.GetType().Name, _streamType.Name);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.ReadAsMimeMultipartStreamProviderNull,
+                        _streamProvider.GetType().Name,
+                        _streamType.Name
+                    );
                 }
 
                 if (!_outputStream.CanWrite)
                 {
-                    throw Error.InvalidOperation(Properties.Resources.ReadAsMimeMultipartStreamProviderReadOnly, _streamProvider.GetType().Name, _streamType.Name);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.ReadAsMimeMultipartStreamProviderReadOnly,
+                        _streamProvider.GetType().Name,
+                        _streamType.Name
+                    );
                 }
                 _content = new StreamContent(_outputStream);
             }

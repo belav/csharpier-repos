@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
         public ExternalFilePeekableItem(
             FileLinePositionSpan span,
             IPeekRelationship relationship,
-            IPeekResultFactory peekResultFactory)
+            IPeekResultFactory peekResultFactory
+        )
             : base(peekResultFactory)
         {
             _span = span;
@@ -31,24 +32,36 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Peek
             get { return SpecializedCollections.SingletonEnumerable(_relationship); }
         }
 
-        public override IPeekResultSource GetOrCreateResultSource(string relationshipName)
-            => new ResultSource(this);
+        public override IPeekResultSource GetOrCreateResultSource(string relationshipName) =>
+            new ResultSource(this);
 
         private sealed class ResultSource : IPeekResultSource
         {
             private readonly ExternalFilePeekableItem _peekableItem;
 
-            public ResultSource(ExternalFilePeekableItem peekableItem)
-                => _peekableItem = peekableItem;
+            public ResultSource(ExternalFilePeekableItem peekableItem) =>
+                _peekableItem = peekableItem;
 
-            public void FindResults(string relationshipName, IPeekResultCollection resultCollection, CancellationToken cancellationToken, IFindPeekResultsCallback callback)
+            public void FindResults(
+                string relationshipName,
+                IPeekResultCollection resultCollection,
+                CancellationToken cancellationToken,
+                IFindPeekResultsCallback callback
+            )
             {
                 if (relationshipName != _peekableItem._relationship.Name)
                 {
                     return;
                 }
 
-                resultCollection.Add(PeekHelpers.CreateDocumentPeekResult(_peekableItem._span.Path, _peekableItem._span.Span, _peekableItem._span.Span, _peekableItem.PeekResultFactory));
+                resultCollection.Add(
+                    PeekHelpers.CreateDocumentPeekResult(
+                        _peekableItem._span.Path,
+                        _peekableItem._span.Span,
+                        _peekableItem._span.Span,
+                        _peekableItem.PeekResultFactory
+                    )
+                );
             }
         }
     }

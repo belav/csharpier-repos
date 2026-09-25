@@ -37,7 +37,8 @@ public class InMemoryTable<TKey> : IInMemoryTable
         IEntityType entityType,
         IInMemoryTable? baseTable,
         bool sensitiveLoggingEnabled,
-        bool nullabilityCheckEnabled)
+        bool nullabilityCheckEnabled
+    )
     {
         BaseTable = baseTable;
         _keyValueFactory = entityType.FindPrimaryKey()!.GetPrincipalKeyValueFactory<TKey>();
@@ -49,8 +50,7 @@ public class InMemoryTable<TKey> : IInMemoryTable
 
         foreach (var property in properties)
         {
-            var converter = property.GetValueConverter()
-                ?? property.FindTypeMapping()?.Converter;
+            var converter = property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
 
             if (converter != null)
             {
@@ -83,7 +83,8 @@ public class InMemoryTable<TKey> : IInMemoryTable
     /// </summary>
     public virtual InMemoryIntegerValueGenerator<TProperty> GetIntegerValueGenerator<TProperty>(
         IProperty property,
-        IReadOnlyList<IInMemoryTable> tables)
+        IReadOnlyList<IInMemoryTable> tables
+    )
     {
         _integerGenerators ??= new Dictionary<int, IInMemoryIntegerValueGenerator>();
 
@@ -111,8 +112,7 @@ public class InMemoryTable<TKey> : IInMemoryTable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<object?[]> Rows
-        => _rows.Values;
+    public virtual IEnumerable<object?[]> Rows => _rows.Values;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -152,8 +152,8 @@ public class InMemoryTable<TKey> : IInMemoryTable
         return rows;
     }
 
-    private static List<ValueComparer> GetKeyComparers(IEnumerable<IProperty> properties)
-        => properties.Select(p => p.GetKeyValueComparer()).ToList();
+    private static List<ValueComparer> GetKeyComparers(IEnumerable<IProperty> properties) =>
+        properties.Select(p => p.GetKeyValueComparer()).ToList();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -161,7 +161,10 @@ public class InMemoryTable<TKey> : IInMemoryTable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Create(IUpdateEntry entry, IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+    public virtual void Create(
+        IUpdateEntry entry,
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
     {
         var properties = entry.EntityType.GetFlattenedProperties().ToList();
         var row = new object?[properties.Count];
@@ -169,7 +172,11 @@ public class InMemoryTable<TKey> : IInMemoryTable
 
         for (var index = 0; index < properties.Count; index++)
         {
-            var propertyValue = SnapshotValue(properties[index], properties[index].GetKeyValueComparer(), entry);
+            var propertyValue = SnapshotValue(
+                properties[index],
+                properties[index].GetKeyValueComparer(),
+                entry
+            );
 
             row[properties[index].GetIndex()] = propertyValue;
             HasNullabilityError(properties[index], propertyValue, nullabilityErrors);
@@ -191,7 +198,10 @@ public class InMemoryTable<TKey> : IInMemoryTable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Delete(IUpdateEntry entry, IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+    public virtual void Delete(
+        IUpdateEntry entry,
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
     {
         var key = CreateKey(entry);
 
@@ -202,7 +212,12 @@ public class InMemoryTable<TKey> : IInMemoryTable
 
             for (var index = 0; index < properties.Count; index++)
             {
-                IsConcurrencyConflict(entry, properties[index], row[properties[index].GetIndex()], concurrencyConflicts);
+                IsConcurrencyConflict(
+                    entry,
+                    properties[index],
+                    row[properties[index].GetIndex()],
+                    concurrencyConflicts
+                );
             }
 
             if (concurrencyConflicts.Count > 0)
@@ -215,8 +230,15 @@ public class InMemoryTable<TKey> : IInMemoryTable
         else
         {
             var entries = new[] { entry };
-            var exception = new DbUpdateConcurrencyException(InMemoryStrings.UpdateConcurrencyException, entries);
-            if (!updateLogger.OptimisticConcurrencyException(entry.Context, entries, exception, null).IsSuppressed)
+            var exception = new DbUpdateConcurrencyException(
+                InMemoryStrings.UpdateConcurrencyException,
+                entries
+            );
+            if (
+                !updateLogger
+                    .OptimisticConcurrencyException(entry.Context, entries, exception, null)
+                    .IsSuppressed
+            )
             {
                 throw exception;
             }
@@ -227,23 +249,31 @@ public class InMemoryTable<TKey> : IInMemoryTable
         IUpdateEntry entry,
         IProperty property,
         object? rowValue,
-        Dictionary<IProperty, object?> concurrencyConflicts)
+        Dictionary<IProperty, object?> concurrencyConflicts
+    )
     {
         if (property.IsConcurrencyToken)
         {
             var comparer = property.GetKeyValueComparer();
             var originalValue = entry.GetOriginalValue(property);
 
-            var converter = property.GetValueConverter()
-                ?? property.FindTypeMapping()?.Converter;
+            var converter = property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
 
             if (converter != null)
             {
                 rowValue = converter.ConvertFromProvider(rowValue);
             }
 
-            if ((comparer != null && !comparer.Equals(rowValue, originalValue))
-                || (comparer == null && !StructuralComparisons.StructuralEqualityComparer.Equals(rowValue, originalValue)))
+            if (
+                (comparer != null && !comparer.Equals(rowValue, originalValue))
+                || (
+                    comparer == null
+                    && !StructuralComparisons.StructuralEqualityComparer.Equals(
+                        rowValue,
+                        originalValue
+                    )
+                )
+            )
             {
                 concurrencyConflicts.Add(property, rowValue);
 
@@ -260,7 +290,10 @@ public class InMemoryTable<TKey> : IInMemoryTable
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Update(IUpdateEntry entry, IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+    public virtual void Update(
+        IUpdateEntry entry,
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
     {
         var key = CreateKey(entry);
 
@@ -275,7 +308,14 @@ public class InMemoryTable<TKey> : IInMemoryTable
             for (var index = 0; index < valueBuffer.Length; index++)
             {
                 var propertyIndex = properties[index].GetIndex();
-                if (IsConcurrencyConflict(entry, properties[index], row[propertyIndex], concurrencyConflicts))
+                if (
+                    IsConcurrencyConflict(
+                        entry,
+                        properties[index],
+                        row[propertyIndex],
+                        concurrencyConflicts
+                    )
+                )
                 {
                     continue;
                 }
@@ -307,8 +347,15 @@ public class InMemoryTable<TKey> : IInMemoryTable
         else
         {
             var entries = new[] { entry };
-            var exception = new DbUpdateConcurrencyException(InMemoryStrings.UpdateConcurrencyException, entries);
-            if (!updateLogger.OptimisticConcurrencyException(entry.Context, entries, exception, null).IsSuppressed)
+            var exception = new DbUpdateConcurrencyException(
+                InMemoryStrings.UpdateConcurrencyException,
+                entries
+            );
+            if (
+                !updateLogger
+                    .OptimisticConcurrencyException(entry.Context, entries, exception, null)
+                    .IsSuppressed
+            )
             {
                 throw exception;
             }
@@ -334,15 +381,17 @@ public class InMemoryTable<TKey> : IInMemoryTable
         }
     }
 
-    private TKey CreateKey(IUpdateEntry entry)
-        => _keyValueFactory.CreateFromCurrentValues(entry)!;
+    private TKey CreateKey(IUpdateEntry entry) => _keyValueFactory.CreateFromCurrentValues(entry)!;
 
-    private static object? SnapshotValue(IProperty property, ValueComparer? comparer, IUpdateEntry entry)
+    private static object? SnapshotValue(
+        IProperty property,
+        ValueComparer? comparer,
+        IUpdateEntry entry
+    )
     {
         var value = SnapshotValue(comparer, entry.GetCurrentValue(property));
 
-        var converter = property.GetValueConverter()
-            ?? property.FindTypeMapping()?.Converter;
+        var converter = property.GetValueConverter() ?? property.FindTypeMapping()?.Converter;
 
         if (converter != null)
         {
@@ -352,13 +401,14 @@ public class InMemoryTable<TKey> : IInMemoryTable
         return value;
     }
 
-    private static object? SnapshotValue(ValueComparer? comparer, object? value)
-        => comparer == null ? value : comparer.Snapshot(value);
+    private static object? SnapshotValue(ValueComparer? comparer, object? value) =>
+        comparer == null ? value : comparer.Snapshot(value);
 
     private bool HasNullabilityError(
         IProperty property,
         object? propertyValue,
-        IList<IProperty> nullabilityErrors)
+        IList<IProperty> nullabilityErrors
+    )
     {
         if (!_nullabilityCheckEnabled)
         {
@@ -377,7 +427,8 @@ public class InMemoryTable<TKey> : IInMemoryTable
 
     private void ThrowNullabilityErrorException(
         IUpdateEntry entry,
-        IList<IProperty> nullabilityErrors)
+        IList<IProperty> nullabilityErrors
+    )
     {
         if (_sensitiveLoggingEnabled)
         {
@@ -385,15 +436,19 @@ public class InMemoryTable<TKey> : IInMemoryTable
                 InMemoryStrings.NullabilityErrorExceptionSensitive(
                     nullabilityErrors.Format(),
                     entry.EntityType.DisplayName(),
-                    entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties)),
-                new[] { entry });
+                    entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties)
+                ),
+                new[] { entry }
+            );
         }
 
         throw new DbUpdateException(
             InMemoryStrings.NullabilityErrorException(
                 nullabilityErrors.Format(),
-                entry.EntityType.DisplayName()),
-            new[] { entry });
+                entry.EntityType.DisplayName()
+            ),
+            new[] { entry }
+        );
     }
 
     /// <summary>
@@ -405,31 +460,43 @@ public class InMemoryTable<TKey> : IInMemoryTable
     protected virtual void ThrowUpdateConcurrencyException(
         IUpdateEntry entry,
         Dictionary<IProperty, object?> concurrencyConflicts,
-        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger)
+        IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger
+    )
     {
         var entries = new[] { entry };
 
-        var exception =
-            _sensitiveLoggingEnabled
-                ? new DbUpdateConcurrencyException(
-                    InMemoryStrings.UpdateConcurrencyTokenExceptionSensitive(
-                        entry.EntityType.DisplayName(),
-                        entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties),
-                        entry.BuildOriginalValuesString(concurrencyConflicts.Keys),
-                        "{"
+        var exception = _sensitiveLoggingEnabled
+            ? new DbUpdateConcurrencyException(
+                InMemoryStrings.UpdateConcurrencyTokenExceptionSensitive(
+                    entry.EntityType.DisplayName(),
+                    entry.BuildCurrentValuesString(entry.EntityType.FindPrimaryKey()!.Properties),
+                    entry.BuildOriginalValuesString(concurrencyConflicts.Keys),
+                    "{"
                         + string.Join(
                             ", ",
-                            concurrencyConflicts.Select(
-                                c => c.Key.Name + ": " + Convert.ToString(c.Value, CultureInfo.InvariantCulture)))
-                        + "}"),
-                    entries)
-                : new DbUpdateConcurrencyException(
-                    InMemoryStrings.UpdateConcurrencyTokenException(
-                        entry.EntityType.DisplayName(),
-                        concurrencyConflicts.Keys.Format()),
-                    entries);
+                            concurrencyConflicts.Select(c =>
+                                c.Key.Name
+                                + ": "
+                                + Convert.ToString(c.Value, CultureInfo.InvariantCulture)
+                            )
+                        )
+                        + "}"
+                ),
+                entries
+            )
+            : new DbUpdateConcurrencyException(
+                InMemoryStrings.UpdateConcurrencyTokenException(
+                    entry.EntityType.DisplayName(),
+                    concurrencyConflicts.Keys.Format()
+                ),
+                entries
+            );
 
-        if (!updateLogger.OptimisticConcurrencyException(entry.Context, entries, exception, null).IsSuppressed)
+        if (
+            !updateLogger
+                .OptimisticConcurrencyException(entry.Context, entries, exception, null)
+                .IsSuppressed
+        )
         {
             throw exception;
         }

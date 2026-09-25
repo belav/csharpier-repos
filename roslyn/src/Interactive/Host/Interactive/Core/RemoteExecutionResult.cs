@@ -18,13 +18,14 @@ namespace Microsoft.CodeAnalysis.Interactive
             public string WorkingDirectory = null!;
             public RemoteInitializationResult.Data? InitializationResult;
 
-            public RemoteExecutionResult Deserialize()
-                => new RemoteExecutionResult(
+            public RemoteExecutionResult Deserialize() =>
+                new RemoteExecutionResult(
                     Success,
                     SourcePaths.ToImmutableArray(),
                     ReferencePaths.ToImmutableArray(),
                     WorkingDirectory,
-                    InitializationResult?.Deserialize());
+                    InitializationResult?.Deserialize()
+                );
         }
 
         public readonly bool Success;
@@ -51,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             ImmutableArray<string> sourcePaths,
             ImmutableArray<string> referencePaths,
             string workingDirectory,
-            RemoteInitializationResult? initializationResult)
+            RemoteInitializationResult? initializationResult
+        )
         {
             Success = success;
             SourcePaths = sourcePaths;
@@ -60,8 +62,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             InitializationResult = initializationResult;
         }
 
-        public Data Serialize()
-            => new Data()
+        public Data Serialize() =>
+            new Data()
             {
                 Success = Success,
                 SourcePaths = SourcePaths.ToArray(),

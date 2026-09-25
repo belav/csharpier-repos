@@ -30,75 +30,77 @@
 using System;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class TableRowCollection_GetEnumerator_
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class TableRowCollection_GetEnumerator_ : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
-			base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-			System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
-			tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
-			tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
+            base.GHTTestBegin((HtmlForm)this.FindControl("Form1"));
 
+            System.Web.UI.WebControls.Table tbl = new System.Web.UI.WebControls.Table();
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
+            tbl.Rows.Add(new System.Web.UI.WebControls.TableRow());
+            tbl.Rows[tbl.Rows.Count - 1].ID = tbl.Rows.Count.ToString();
 
-			System.Collections.IEnumerator Ienm = tbl.Rows.GetEnumerator();
+            System.Collections.IEnumerator Ienm = tbl.Rows.GetEnumerator();
 
-			try 
-			{
-				base.GHTSubTestBegin("IEnumerator - get");
-				base.GHTSubTestAddResult("IEnumerator=null? " + ((Ienm == null) ? "True" : "False"));
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
+            try
+            {
+                base.GHTSubTestBegin("IEnumerator - get");
+                base.GHTSubTestAddResult(
+                    "IEnumerator=null? " + ((Ienm == null) ? "True" : "False")
+                );
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
 
-			try 
-			{
-				base.GHTSubTestBegin("Using IEnumerator");
-				while ( Ienm.MoveNext() )
-					base.GHTSubTestAddResult(" RowId = " + ((System.Web.UI.WebControls.TableRow)Ienm.Current).ID);
-			}
-			catch (Exception ex) 
-			{
-				base.GHTSubTestUnexpectedExceptionCaught(ex);
-			}
-			base.GHTSubTestEnd();
-			base.GHTTestEnd();
-		}
-	}
+            try
+            {
+                base.GHTSubTestBegin("Using IEnumerator");
+                while (Ienm.MoveNext())
+                    base.GHTSubTestAddResult(
+                        " RowId = " + ((System.Web.UI.WebControls.TableRow)Ienm.Current).ID
+                    );
+            }
+            catch (Exception ex)
+            {
+                base.GHTSubTestUnexpectedExceptionCaught(ex);
+            }
+            base.GHTSubTestEnd();
+            base.GHTTestEnd();
+        }
+    }
 }

@@ -7,6 +7,6 @@ namespace System.Security.Authentication.ExtendedProtection
     {
         Never,
         WhenSupported,
-        Always
+        Always,
     }
 }

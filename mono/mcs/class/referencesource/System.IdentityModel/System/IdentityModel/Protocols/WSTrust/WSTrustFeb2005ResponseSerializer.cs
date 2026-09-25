@@ -21,7 +21,10 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <returns>RequestSecurityTokenResponse object if the deserialization was successful</returns>
         /// <exception cref="ArgumentNullException">The given reader or context parameter is null</exception>
         /// <exception cref="WSTrustSerializationException">There was an error parsing the RSTR</exception>
-        public override RequestSecurityTokenResponse ReadXml(XmlReader reader, WSTrustSerializationContext context)
+        public override RequestSecurityTokenResponse ReadXml(
+            XmlReader reader,
+            WSTrustSerializationContext context
+        )
         {
             if (reader == null)
             {
@@ -33,7 +36,12 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            return WSTrustSerializationHelper.CreateResponse(reader, context, this, WSTrustConstantsAdapter.TrustFeb2005);
+            return WSTrustSerializationHelper.CreateResponse(
+                reader,
+                context,
+                this,
+                WSTrustConstantsAdapter.TrustFeb2005
+            );
         }
 
         /// <summary>
@@ -44,7 +52,11 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">Either reader or rstr or context parameter is null.</exception>
         /// <exception cref="WSTrustSerializationException">Unable to deserialize the current parameter.</exception>
-        public override void ReadXmlElement(XmlReader reader, RequestSecurityTokenResponse rstr, WSTrustSerializationContext context)
+        public override void ReadXmlElement(
+            XmlReader reader,
+            RequestSecurityTokenResponse rstr,
+            WSTrustSerializationContext context
+        )
         {
             if (reader == null)
             {
@@ -61,17 +73,26 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            WSTrustSerializationHelper.ReadRSTRXml(reader, rstr, context, WSTrustConstantsAdapter.TrustFeb2005);
+            WSTrustSerializationHelper.ReadRSTRXml(
+                reader,
+                rstr,
+                context,
+                WSTrustConstantsAdapter.TrustFeb2005
+            );
         }
 
         /// <summary>
-        /// Writes out the supported elements on the response object. 
+        /// Writes out the supported elements on the response object.
         /// </summary>
         /// <param name="rstr">The response instance</param>
         /// <param name="writer">The writer to write to</param>
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">Either rstr or writer or context parameter is null.</exception>
-        public override void WriteKnownResponseElement(RequestSecurityTokenResponse rstr, XmlWriter writer, WSTrustSerializationContext context)
+        public override void WriteKnownResponseElement(
+            RequestSecurityTokenResponse rstr,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        )
         {
             if (rstr == null)
             {
@@ -88,7 +109,13 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            WSTrustSerializationHelper.WriteKnownResponseElement(rstr, writer, context, this, WSTrustConstantsAdapter.TrustFeb2005);
+            WSTrustSerializationHelper.WriteKnownResponseElement(
+                rstr,
+                writer,
+                context,
+                this,
+                WSTrustConstantsAdapter.TrustFeb2005
+            );
         }
 
         /// <summary>
@@ -98,7 +125,11 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="writer">XML writer to serialize into</param>
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">The response or writer or context parameter is null.</exception>
-        public override void WriteXml(RequestSecurityTokenResponse response, XmlWriter writer, WSTrustSerializationContext context)
+        public override void WriteXml(
+            RequestSecurityTokenResponse response,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        )
         {
             if (response == null)
             {
@@ -115,7 +146,13 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            WSTrustSerializationHelper.WriteResponse(response, writer, context, this, WSTrustConstantsAdapter.TrustFeb2005);
+            WSTrustSerializationHelper.WriteResponse(
+                response,
+                writer,
+                context,
+                this,
+                WSTrustConstantsAdapter.TrustFeb2005
+            );
         }
 
         /// <summary>
@@ -128,7 +165,13 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="context">Current Serialization context.</param>
         /// <exception cref="ArgumentNullException">Either writer or rstr or context is null.</exception>
         /// <exception cref="ArgumentException">elementName is null or an empty string.</exception>
-        public override void WriteXmlElement(XmlWriter writer, string elementName, object elementValue, RequestSecurityTokenResponse rstr, WSTrustSerializationContext context)
+        public override void WriteXmlElement(
+            XmlWriter writer,
+            string elementName,
+            object elementValue,
+            RequestSecurityTokenResponse rstr,
+            WSTrustSerializationContext context
+        )
         {
             if (writer == null)
             {
@@ -150,7 +193,13 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
 
-            WSTrustSerializationHelper.WriteRSTRXml(writer, elementName, elementValue, context, WSTrustConstantsAdapter.TrustFeb2005);
+            WSTrustSerializationHelper.WriteRSTRXml(
+                writer,
+                elementName,
+                elementValue,
+                context,
+                WSTrustConstantsAdapter.TrustFeb2005
+            );
         }
 
         /// <summary>
@@ -170,7 +219,10 @@ namespace System.IdentityModel.Protocols.WSTrust
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            return reader.IsStartElement(WSTrustFeb2005Constants.ElementNames.RequestSecurityTokenResponse, WSTrustFeb2005Constants.NamespaceURI);
+            return reader.IsStartElement(
+                WSTrustFeb2005Constants.ElementNames.RequestSecurityTokenResponse,
+                WSTrustFeb2005Constants.NamespaceURI
+            );
         }
     }
 }

@@ -8,9 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query;
 
 public class QueryCompilationSqliteTests : QueryCompilationTests
 {
-    public override IServiceCollection AddProviderServices(IServiceCollection services)
-        => services.AddEntityFrameworkSqlite();
+    public override IServiceCollection AddProviderServices(IServiceCollection services) =>
+        services.AddEntityFrameworkSqlite();
 
-    public override OrdersFixtureBase CreateFixture()
-        => new OrdersSqliteFixture("Perf_Query_Compilation");
+    public override OrdersFixtureBase CreateFixture() =>
+        new OrdersSqliteFixture("Perf_Query_Compilation");
 }

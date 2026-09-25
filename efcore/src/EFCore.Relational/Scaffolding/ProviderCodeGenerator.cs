@@ -64,7 +64,8 @@ public abstract class ProviderCodeGenerator : IProviderConfigurationCodeGenerato
     /// <returns>The code fragment.</returns>
     public abstract MethodCallCodeFragment GenerateUseProvider(
         string connectionString,
-        MethodCallCodeFragment? providerOptions);
+        MethodCallCodeFragment? providerOptions
+    );
 
     /// <summary>
     ///     Generates a method chain to configure additional context options.
@@ -89,6 +90,6 @@ public abstract class ProviderCodeGenerator : IProviderConfigurationCodeGenerato
     }
 
     /// <inheritdoc />
-    public virtual MethodCallCodeFragment GenerateUseProvider(string connectionString)
-        => ((IProviderConfigurationCodeGenerator)this).GenerateUseProviderInternal(connectionString);
+    public virtual MethodCallCodeFragment GenerateUseProvider(string connectionString) =>
+        ((IProviderConfigurationCodeGenerator)this).GenerateUseProviderInternal(connectionString);
 }

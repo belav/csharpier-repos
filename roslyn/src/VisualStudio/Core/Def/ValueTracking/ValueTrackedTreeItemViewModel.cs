@@ -6,15 +6,15 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Classification;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
 using Microsoft.CodeAnalysis.Navigation;
 using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Shared.Extensions;
+using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.CodeAnalysis.ValueTracking;
 using Microsoft.VisualStudio.Language.Intellisense;
 using Microsoft.VisualStudio.Shell;
-using Microsoft.CodeAnalysis.Classification;
-using Microsoft.CodeAnalysis.Shared.TestHooks;
 using Microsoft.VisualStudio.Utilities;
 using Roslyn.Utilities;
 
@@ -53,21 +53,22 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             string fileName,
             ImmutableArray<TreeItemViewModel> children,
             IAsynchronousOperationListener listener,
-            IUIThreadOperationExecutor threadOperationExecutor)
+            IUIThreadOperationExecutor threadOperationExecutor
+        )
             : base(
-                  trackedItem.Span,
-                  trackedItem.SourceText,
-                  trackedItem.DocumentId,
-                  fileName,
-                  trackedItem.Glyph,
-                  classifiedSpans,
-                  treeViewModel,
-                  glyphService,
-                  threadingContext,
-                  solution.Workspace,
-                  children)
+                trackedItem.Span,
+                trackedItem.SourceText,
+                trackedItem.DocumentId,
+                fileName,
+                trackedItem.Glyph,
+                classifiedSpans,
+                treeViewModel,
+                glyphService,
+                threadingContext,
+                solution.Workspace,
+                children
+            )
         {
-
             _trackedItem = trackedItem;
             _solution = solution;
             _glyphService = glyphService;
@@ -99,14 +100,19 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             IThreadingContext threadingContext,
             IAsynchronousOperationListener listener,
             IUIThreadOperationExecutor threadOperationExecutor,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = solution.GetRequiredDocument(item.DocumentId);
             var fileName = document.FilePath ?? document.Name;
 
             var options = globalOptions.GetClassificationOptions(document.Project.Language);
-            var documentSpan = await ClassifiedSpansAndHighlightSpanFactory.GetClassifiedDocumentSpanAsync(document, item.Span, options, cancellationToken).ConfigureAwait(false);
-            var classificationResult = await ClassifiedSpansAndHighlightSpanFactory.ClassifyAsync(documentSpan, options, cancellationToken).ConfigureAwait(false);
+            var documentSpan = await ClassifiedSpansAndHighlightSpanFactory
+                .GetClassifiedDocumentSpanAsync(document, item.Span, options, cancellationToken)
+                .ConfigureAwait(false);
+            var classificationResult = await ClassifiedSpansAndHighlightSpanFactory
+                .ClassifyAsync(documentSpan, options, cancellationToken)
+                .ConfigureAwait(false);
             var classifiedSpans = classificationResult.ClassifiedSpans;
 
             return new ValueTrackedTreeItemViewModel(
@@ -121,7 +127,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
                 fileName,
                 children,
                 listener,
-                threadOperationExecutor);
+                threadOperationExecutor
+            );
         }
 
         private void CalculateChildren()
@@ -140,29 +147,33 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
             var computingItem = new ComputingTreeViewItem();
             ChildItems.Add(computingItem);
 
-            Task.Run(async () =>
-            {
-                try
+            Task.Run(
+                async () =>
                 {
-                    var children = await CalculateChildrenAsync(ThreadingContext.DisposalToken).ConfigureAwait(false);
-
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                    ChildItems.Clear();
-
-                    foreach (var child in children)
+                    try
                     {
-                        ChildItems.Add(child);
+                        var children = await CalculateChildrenAsync(ThreadingContext.DisposalToken)
+                            .ConfigureAwait(false);
+
+                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                        ChildItems.Clear();
+
+                        foreach (var child in children)
+                        {
+                            ChildItems.Add(child);
+                        }
                     }
-                }
-                finally
-                {
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                    TreeViewModel.LoadingCount--;
-                    _childrenCalculated = true;
-                    IsLoading = false;
-                }
-            }, ThreadingContext.DisposalToken);
+                    finally
+                    {
+                        await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                        TreeViewModel.LoadingCount--;
+                        _childrenCalculated = true;
+                        IsLoading = false;
+                    }
+                },
+                ThreadingContext.DisposalToken
+            );
         }
 
         public override void NavigateTo()
@@ -174,7 +185,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
         private async Task NavigateToAsync()
         {
             using var context = _threadOperationExecutor.BeginExecute(
-                ServicesVSResources.Value_Tracking, ServicesVSResources.Navigating, allowCancellation: true, showProgress: false);
+                ServicesVSResources.Value_Tracking,
+                ServicesVSResources.Navigating,
+                allowCancellation: true,
+                showProgress: false
+            );
 
             var navigationService = Workspace.Services.GetService<IDocumentNavigationService>();
             if (navigationService is null)
@@ -182,20 +197,46 @@ namespace Microsoft.VisualStudio.LanguageServices.ValueTracking
 
             // While navigating do not activate the tab, which will change focus from the tool window
             var options = new NavigationOptions(PreferProvisionalTab: true, ActivateTab: false);
-            await navigationService.TryNavigateToSpanAsync(
-                this.ThreadingContext, Workspace, DocumentId, _trackedItem.Span, options, context.UserCancellationToken).ConfigureAwait(false);
+            await navigationService
+                .TryNavigateToSpanAsync(
+                    this.ThreadingContext,
+                    Workspace,
+                    DocumentId,
+                    _trackedItem.Span,
+                    options,
+                    context.UserCancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private async Task<ImmutableArray<TreeItemViewModel>> CalculateChildrenAsync(CancellationToken cancellationToken)
+        private async Task<ImmutableArray<TreeItemViewModel>> CalculateChildrenAsync(
+            CancellationToken cancellationToken
+        )
         {
-            var valueTrackedItems = await _valueTrackingService.TrackValueSourceAsync(
-                _solution, _trackedItem, cancellationToken).ConfigureAwait(false);
+            var valueTrackedItems = await _valueTrackingService
+                .TrackValueSourceAsync(_solution, _trackedItem, cancellationToken)
+                .ConfigureAwait(false);
 
-            return await valueTrackedItems.SelectAsArrayAsync(static (item, self, cancellationToken) =>
-                CreateAsync(
-                    self._solution, item, children: ImmutableArray<TreeItemViewModel>.Empty,
-                    self.TreeViewModel, self._glyphService, self._valueTrackingService, self._globalOptions,
-                    self.ThreadingContext, self._listener, self._threadOperationExecutor, cancellationToken), this, cancellationToken).ConfigureAwait(false);
+            return await valueTrackedItems
+                .SelectAsArrayAsync(
+                    static (item, self, cancellationToken) =>
+                        CreateAsync(
+                            self._solution,
+                            item,
+                            children: ImmutableArray<TreeItemViewModel>.Empty,
+                            self.TreeViewModel,
+                            self._glyphService,
+                            self._valueTrackingService,
+                            self._globalOptions,
+                            self.ThreadingContext,
+                            self._listener,
+                            self._threadOperationExecutor,
+                            cancellationToken
+                        ),
+                    this,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

@@ -2,15 +2,13 @@
 
 class N
 {
-	public static void Foo ()
-	{
-	}
+    public static void Foo() { }
 }
 
 class X
 {
-	public static void Main ()
-	{
-		N.Foo ();
-	}
+    public static void Main()
+    {
+        N.Foo();
+    }
 }

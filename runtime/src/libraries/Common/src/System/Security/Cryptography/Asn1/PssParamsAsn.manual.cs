@@ -8,8 +8,7 @@ namespace System.Security.Cryptography.Asn1
 {
     internal partial struct PssParamsAsn
     {
-        internal RSASignaturePadding GetSignaturePadding(
-            int? digestValueLength = null)
+        internal RSASignaturePadding GetSignaturePadding(int? digestValueLength = null)
         {
             if (TrailerField != 1)
             {
@@ -20,7 +19,8 @@ namespace System.Security.Cryptography.Asn1
             {
                 throw new CryptographicException(
                     SR.Cryptography_Pkcs_PssParametersMgfNotSupported,
-                    MaskGenAlgorithm.Algorithm);
+                    MaskGenAlgorithm.Algorithm
+                );
             }
 
             if (MaskGenAlgorithm.Parameters == null)
@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.Asn1
 
             AlgorithmIdentifierAsn mgfParams = AlgorithmIdentifierAsn.Decode(
                 MaskGenAlgorithm.Parameters.Value,
-                AsnEncodingRules.DER);
+                AsnEncodingRules.DER
+            );
 
             if (mgfParams.Algorithm != HashAlgorithm.Algorithm)
             {
@@ -38,7 +39,9 @@ namespace System.Security.Cryptography.Asn1
                     SR.Format(
                         SR.Cryptography_Pkcs_PssParametersMgfHashMismatch,
                         mgfParams.Algorithm,
-                        HashAlgorithm.Algorithm));
+                        HashAlgorithm.Algorithm
+                    )
+                );
             }
 
             int saltSize = digestValueLength.GetValueOrDefault();
@@ -54,7 +57,9 @@ namespace System.Security.Cryptography.Asn1
                     SR.Format(
                         SR.Cryptography_Pkcs_PssParametersSaltMismatch,
                         SaltLength,
-                        HashAlgorithm.Algorithm));
+                        HashAlgorithm.Algorithm
+                    )
+                );
             }
 
             // When RSASignaturePadding supports custom salt sizes this return will look different.

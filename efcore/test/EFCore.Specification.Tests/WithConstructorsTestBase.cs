@@ -22,17 +22,18 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
     protected TFixture Fixture { get; }
 
-    protected DbContext CreateContext()
-        => Fixture.CreateContext();
+    protected DbContext CreateContext() => Fixture.CreateContext();
 
-    protected virtual void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-    {
-    }
+    protected virtual void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) { }
 
     [ConditionalFact]
-    public virtual void Query_and_update_using_constructors_with_property_parameters()
-        => TestHelpers.ExecuteWithStrategyInTransaction(
-            CreateContext, UseTransaction,
+    public virtual void Query_and_update_using_constructors_with_property_parameters() =>
+        TestHelpers.ExecuteWithStrategyInTransaction(
+            CreateContext,
+            UseTransaction,
             context =>
             {
                 var blog = context.Set<Blog>().Include(e => e.Posts).Single();
@@ -60,7 +61,11 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             },
             context =>
             {
-                var blogs = context.Set<Blog>().Include(e => e.Posts).OrderBy(e => e.Title).ToList();
+                var blogs = context
+                    .Set<Blog>()
+                    .Include(e => e.Posts)
+                    .OrderBy(e => e.Title)
+                    .ToList();
 
                 Assert.Equal(2, blogs.Count);
 
@@ -86,7 +91,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
                 Assert.StartsWith("Olive", posts[2].Title);
                 Assert.StartsWith("Yes", posts[2].Content);
-            });
+            }
+        );
 
     [ConditionalFact]
     public virtual void Query_with_keyless_type()
@@ -104,7 +110,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using (var context = CreateContext())
         {
             Assert.Same(context, context.Set<HasContext<DbContext>>().Single().Context);
-            Assert.Same(context, context.Set<HasContext<WithConstructorsContext>>().Single().Context);
+            Assert.Same(
+                context,
+                context.Set<HasContext<WithConstructorsContext>>().Single().Context
+            );
             Assert.Null(context.Set<HasContext<OtherContext>>().Single().Context);
         }
 
@@ -112,7 +121,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using (var context = CreateContext())
         {
             Assert.Same(context, context.Set<HasContext<DbContext>>().Single().Context);
-            Assert.Same(context, context.Set<HasContext<WithConstructorsContext>>().Single().Context);
+            Assert.Same(
+                context,
+                context.Set<HasContext<WithConstructorsContext>>().Single().Context
+            );
             Assert.Null(context.Set<HasContext<OtherContext>>().Single().Context);
         }
     }
@@ -123,7 +135,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using (var context = CreateContext())
         {
             Assert.Same(context, context.Set<HasContextProperty<DbContext>>().Single().Context);
-            Assert.Same(context, context.Set<HasContextProperty<WithConstructorsContext>>().Single().Context);
+            Assert.Same(
+                context,
+                context.Set<HasContextProperty<WithConstructorsContext>>().Single().Context
+            );
             Assert.Null(context.Set<HasContextProperty<OtherContext>>().Single().Context);
         }
 
@@ -131,7 +146,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using (var context = CreateContext())
         {
             Assert.Same(context, context.Set<HasContextProperty<DbContext>>().Single().Context);
-            Assert.Same(context, context.Set<HasContextProperty<WithConstructorsContext>>().Single().Context);
+            Assert.Same(
+                context,
+                context.Set<HasContextProperty<WithConstructorsContext>>().Single().Context
+            );
             Assert.Null(context.Set<HasContextProperty<OtherContext>>().Single().Context);
         }
     }
@@ -187,7 +205,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     [ConditionalFact]
     public virtual void Attaching_entity_sets_context()
     {
-        int id1, id2, id3;
+        int id1,
+            id2,
+            id3;
         using (var context = CreateContext())
         {
             id1 = context.Set<HasContextProperty<DbContext>>().Single().Id;
@@ -217,7 +237,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using var context = CreateContext();
         Assert.Same(
             context.Model.FindEntityType(typeof(HasEntityType)),
-            context.Set<HasEntityType>().Single().GetEntityType());
+            context.Set<HasEntityType>().Single().GetEntityType()
+        );
     }
 
     [ConditionalFact]
@@ -226,7 +247,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using var context = CreateContext();
         Assert.Same(
             context.Model.FindEntityType(typeof(HasEntityTypeProperty)),
-            context.Set<HasEntityTypeProperty>().Single().EntityType);
+            context.Set<HasEntityTypeProperty>().Single().EntityType
+        );
     }
 
     [ConditionalFact]
@@ -237,7 +259,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using (var context = CreateContext())
         {
             entity = context.Set<HasEntityTypePc>().Single();
-            Assert.Same(context.Model.FindEntityType(typeof(HasEntityTypePc)), entity.GetEntityType());
+            Assert.Same(
+                context.Model.FindEntityType(typeof(HasEntityTypePc)),
+                entity.GetEntityType()
+            );
             Assert.False(entity.SetterCalled);
 
             context.Entry(entity).State = EntityState.Detached;
@@ -251,7 +276,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             context.Attach(entity);
 
             Assert.True(entity.SetterCalled);
-            Assert.Same(context.Model.FindEntityType(typeof(HasEntityTypePc)), entity.GetEntityType());
+            Assert.Same(
+                context.Model.FindEntityType(typeof(HasEntityTypePc)),
+                entity.GetEntityType()
+            );
         }
     }
 
@@ -270,7 +298,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
             context.Attach(entity);
 
-            Assert.Same(context.Model.FindEntityType(typeof(HasEntityTypeProperty)), entity.EntityType);
+            Assert.Same(
+                context.Model.FindEntityType(typeof(HasEntityTypeProperty)),
+                entity.EntityType
+            );
         }
     }
 
@@ -280,7 +311,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using var context = CreateContext();
         Assert.Same(
             context.GetService<IStateManager>(),
-            context.Set<HasStateManager>().Single().GetStateManager());
+            context.Set<HasStateManager>().Single().GetStateManager()
+        );
     }
 
     [ConditionalFact]
@@ -289,7 +321,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         using var context = CreateContext();
         Assert.Same(
             context.GetService<IStateManager>(),
-            context.Set<HasStateManagerProperty>().Single().StateManager);
+            context.Set<HasStateManagerProperty>().Single().StateManager
+        );
     }
 
     [ConditionalFact]
@@ -457,7 +490,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     [ConditionalFact]
     public virtual void Attaching_entity_sets_lazy_loader()
     {
-        int id, fk;
+        int id,
+            fk;
         using (var context = CreateContext())
         {
             var post = context.Set<LazyPropertyPost>().OrderBy(e => e.Id).First();
@@ -526,7 +560,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     [ConditionalFact]
     public virtual void Attaching_entity_sets_lazy_loader_field()
     {
-        int id, fk;
+        int id,
+            fk;
         using (var context = CreateContext())
         {
             var post = context.Set<LazyFieldPost>().OrderBy(e => e.Id).First();
@@ -574,7 +609,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     [ConditionalFact]
     public virtual void Attaching_entity_sets_lazy_loader_delegate()
     {
-        int id, fk;
+        int id,
+            fk;
         using (var context = CreateContext())
         {
             var post = context.Set<LazyPcsPost>().OrderBy(e => e.Id).First();
@@ -740,7 +776,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         using (var context = CreateContext())
         {
-            Assert.Equal(title, context.Set<BlogAsImmutableRecord>().Single(e => e.BlogId == blogId).Title);
+            Assert.Equal(
+                title,
+                context.Set<BlogAsImmutableRecord>().Single(e => e.BlogId == blogId).Title
+            );
         }
     }
 
@@ -749,37 +788,27 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     {
         private readonly int _blogId;
 
-        private Blog(
-            int blogId,
-            string title,
-            int? monthlyRevenue)
+        private Blog(int blogId, string title, int? monthlyRevenue)
         {
             _blogId = blogId;
             Title = title;
             MonthlyRevenue = monthlyRevenue;
         }
 
-        public Blog(
-            string title,
-            int? monthlyRevenue = null)
-            : this(0, title, monthlyRevenue)
-        {
-        }
+        public Blog(string title, int? monthlyRevenue = null)
+            : this(0, title, monthlyRevenue) { }
 
         public string Title { get; }
         public int? MonthlyRevenue { get; set; }
 
         public IEnumerable<Post> Posts { get; } = new List<Post>();
 
-        public void AddPost(Post post)
-            => ((List<Post>)Posts).Add(post);
+        public void AddPost(Post post) => ((List<Post>)Posts).Add(post);
     }
 
     protected class BlogQuery
     {
-        public BlogQuery(
-            string title,
-            int? monthlyRevenue)
+        public BlogQuery(string title, int? monthlyRevenue)
         {
             Title = title;
             MonthlyRevenue = monthlyRevenue;
@@ -793,20 +822,14 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     {
         private readonly int _id;
 
-        private Post(
-            int id,
-            string title,
-            string content)
+        private Post(int id, string title, string content)
         {
             _id = id;
             Title = title;
             Content = content;
         }
 
-        public Post(
-            string title,
-            string content,
-            Blog blog = null)
+        public Post(string title, string content, Blog blog = null)
             : this(0, title, content)
         {
             Blog = blog;
@@ -822,9 +845,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     protected class HasContext<TContext>
         where TContext : DbContext
     {
-        public HasContext()
-        {
-        }
+        public HasContext() { }
 
         private HasContext(TContext context, int id)
         {
@@ -858,9 +879,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private TContext _context;
         private bool _setterCalled;
 
-        public HasContextPc()
-        {
-        }
+        public HasContextPc() { }
 
         private HasContextPc(TContext context, int id)
         {
@@ -885,20 +904,16 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         }
 
         // ReSharper disable once ConvertToAutoPropertyWithPrivateSetter
-        public bool SetterCalled
-            => _setterCalled;
+        public bool SetterCalled => _setterCalled;
 
-        public TContext GetContext()
-            => Context;
+        public TContext GetContext() => Context;
     }
 
     protected class HasEntityType
     {
         private readonly IEntityType _entityType;
 
-        public HasEntityType()
-        {
-        }
+        public HasEntityType() { }
 
         private HasEntityType(IEntityType entityType)
         {
@@ -909,8 +924,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public IEntityType GetEntityType()
-            => _entityType;
+        public IEntityType GetEntityType() => _entityType;
     }
 
     protected class HasEntityTypeProperty
@@ -927,9 +941,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private IEntityType _entityType;
         private bool _setterCalled;
 
-        public HasEntityTypePc()
-        {
-        }
+        public HasEntityTypePc() { }
 
         private HasEntityTypePc(IEntityType entityType)
         {
@@ -951,20 +963,16 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         }
 
         // ReSharper disable once ConvertToAutoPropertyWithPrivateSetter
-        public bool SetterCalled
-            => _setterCalled;
+        public bool SetterCalled => _setterCalled;
 
-        public IEntityType GetEntityType()
-            => EntityType;
+        public IEntityType GetEntityType() => EntityType;
     }
 
     protected class HasStateManager
     {
         private readonly IStateManager _stateManager;
 
-        public HasStateManager()
-        {
-        }
+        public HasStateManager() { }
 
         private HasStateManager(IStateManager stateManager)
         {
@@ -975,8 +983,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public IStateManager GetStateManager()
-            => _stateManager;
+        public IStateManager GetStateManager() => _stateManager;
     }
 
     protected class HasStateManagerProperty
@@ -992,11 +999,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     {
         private IStateManager _stateManager;
         private bool _setterCalled;
+
         // ReSharper disable once ConvertToAutoProperty
 
-        public HasStateManagerPc()
-        {
-        }
+        public HasStateManagerPc() { }
 
         private HasStateManagerPc(IStateManager stateManager)
         {
@@ -1018,11 +1024,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         }
 
         // ReSharper disable once ConvertToAutoPropertyWithPrivateSetter
-        public bool SetterCalled
-            => _setterCalled;
+        public bool SetterCalled => _setterCalled;
 
-        public IStateManager GetStateManager()
-            => StateManager;
+        public IStateManager GetStateManager() => StateManager;
     }
 
     protected class LazyBlog
@@ -1030,9 +1034,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly ILazyLoader _loader;
         private ICollection<LazyPost> _lazyPosts = new List<LazyPost>();
 
-        public LazyBlog()
-        {
-        }
+        public LazyBlog() { }
 
         private LazyBlog(ILazyLoader loader)
         {
@@ -1043,11 +1045,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyPost post)
-            => _lazyPosts.Add(post);
+        public void AddPost(LazyPost post) => _lazyPosts.Add(post);
 
-        public IEnumerable<LazyPost> LazyPosts
-            => _loader.Load(this, ref _lazyPosts);
+        public IEnumerable<LazyPost> LazyPosts => _loader.Load(this, ref _lazyPosts);
     }
 
     protected class LazyPost
@@ -1055,9 +1055,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly ILazyLoader _loader;
         private LazyBlog _lazyBlog;
 
-        public LazyPost()
-        {
-        }
+        public LazyPost() { }
 
         private LazyPost(ILazyLoader loader)
         {
@@ -1085,11 +1083,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyPropertyPost post)
-            => _lazyPropertyPosts.Add(post);
+        public void AddPost(LazyPropertyPost post) => _lazyPropertyPosts.Add(post);
 
-        public IEnumerable<LazyPropertyPost> LazyPropertyPosts
-            => Loader.Load(this, ref _lazyPropertyPosts);
+        public IEnumerable<LazyPropertyPost> LazyPropertyPosts =>
+            Loader.Load(this, ref _lazyPropertyPosts);
     }
 
     protected class LazyPropertyPost
@@ -1108,8 +1105,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             set => _lazyPropertyBlog = value;
         }
 
-        public ILazyLoader GetLoader()
-            => Loader;
+        public ILazyLoader GetLoader() => Loader;
     }
 
     protected class LazyFieldBlog
@@ -1126,11 +1122,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyFieldPost post)
-            => _lazyFieldPosts.Add(post);
+        public void AddPost(LazyFieldPost post) => _lazyFieldPosts.Add(post);
 
-        public IEnumerable<LazyFieldPost> LazyFieldPosts
-            => _loader.Load(this, ref _lazyFieldPosts);
+        public IEnumerable<LazyFieldPost> LazyFieldPosts => _loader.Load(this, ref _lazyFieldPosts);
     }
 
     protected class LazyFieldPost
@@ -1153,8 +1147,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             set => _lazyFieldBlog = value;
         }
 
-        public ILazyLoader GetLoader()
-            => _loader;
+        public ILazyLoader GetLoader() => _loader;
     }
 
     protected class LazyPsBlog
@@ -1167,11 +1160,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyPsPost post)
-            => _lazyPsPosts.Add(post);
+        public void AddPost(LazyPsPost post) => _lazyPsPosts.Add(post);
 
-        public IEnumerable<LazyPsPost> LazyPsPosts
-            => LazyLoader.Load(this, ref _lazyPsPosts);
+        public IEnumerable<LazyPsPost> LazyPsPosts => LazyLoader.Load(this, ref _lazyPsPosts);
     }
 
     protected class LazyPsPost
@@ -1193,7 +1184,8 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
     protected class LazyAsyncPsBlog
     {
-        private readonly ICollection<LazyAsyncPsPost> _lazyAsyncPsPosts = new List<LazyAsyncPsPost>();
+        private readonly ICollection<LazyAsyncPsPost> _lazyAsyncPsPosts =
+            new List<LazyAsyncPsPost>();
 
         private Func<object, CancellationToken, string, Task> LazyLoader { get; set; }
 
@@ -1201,18 +1193,18 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyAsyncPsPost post)
-            => _lazyAsyncPsPosts.Add(post);
+        public void AddPost(LazyAsyncPsPost post) => _lazyAsyncPsPosts.Add(post);
 
-        public async Task<IEnumerable<LazyAsyncPsPost>> LoadPostsAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<LazyAsyncPsPost>> LoadPostsAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             await LazyLoader(this, cancellationToken, nameof(LazyAsyncPsPosts));
 
             return LazyAsyncPsPosts;
         }
 
-        public IEnumerable<LazyAsyncPsPost> LazyAsyncPsPosts
-            => _lazyAsyncPsPosts;
+        public IEnumerable<LazyAsyncPsPost> LazyAsyncPsPosts => _lazyAsyncPsPosts;
     }
 
     protected class LazyAsyncPsPost
@@ -1222,7 +1214,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         public int Id { get; set; }
         public bool Filler { get; set; }
 
-        public async Task<LazyAsyncPsBlog> LoadBlogAsync(CancellationToken cancellationToken = default)
+        public async Task<LazyAsyncPsBlog> LoadBlogAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             await LazyLoader(this, cancellationToken, nameof(LazyAsyncPsBlog));
 
@@ -1237,9 +1231,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private ICollection<LazyPcPost> _lazyPcPosts = new List<LazyPcPost>();
         private ILazyLoader _loader;
 
-        public LazyPcBlog()
-        {
-        }
+        public LazyPcBlog() { }
 
         private LazyPcBlog(ILazyLoader loader)
         {
@@ -1264,11 +1256,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyPcPost post)
-            => _lazyPcPosts.Add(post);
+        public void AddPost(LazyPcPost post) => _lazyPcPosts.Add(post);
 
-        public IEnumerable<LazyPcPost> LazyPcPosts
-            => Loader.Load(this, ref _lazyPcPosts);
+        public IEnumerable<LazyPcPost> LazyPcPosts => Loader.Load(this, ref _lazyPcPosts);
     }
 
     protected class LazyPcPost
@@ -1276,9 +1266,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private LazyPcBlog _lazyPcBlog;
         private ILazyLoader _loader;
 
-        public LazyPcPost()
-        {
-        }
+        public LazyPcPost() { }
 
         private LazyPcPost(ILazyLoader loader)
         {
@@ -1315,9 +1303,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private ICollection<LazyPcsPost> _lazyPcsPosts = new List<LazyPcsPost>();
         private Action<object, string> _loader;
 
-        public LazyPcsBlog()
-        {
-        }
+        public LazyPcsBlog() { }
 
         private LazyPcsBlog(Action<object, string> lazyLoader)
         {
@@ -1342,11 +1328,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyPcsPost post)
-            => _lazyPcsPosts.Add(post);
+        public void AddPost(LazyPcsPost post) => _lazyPcsPosts.Add(post);
 
-        public IEnumerable<LazyPcsPost> LazyPcsPosts
-            => LazyLoader.Load(this, ref _lazyPcsPosts);
+        public IEnumerable<LazyPcsPost> LazyPcsPosts => LazyLoader.Load(this, ref _lazyPcsPosts);
     }
 
     protected class LazyPcsPost
@@ -1354,9 +1338,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private LazyPcsBlog _lazyPcsBlog;
         private Action<object, string> _loader;
 
-        public LazyPcsPost()
-        {
-        }
+        public LazyPcsPost() { }
 
         private LazyPcsPost(Action<object, string> lazyLoader)
         {
@@ -1387,8 +1369,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             set => _lazyPcsBlog = value;
         }
 
-        public Action<object, string> GetLoader()
-            => _loader;
+        public Action<object, string> GetLoader() => _loader;
     }
 
     protected class LazyPocoBlog
@@ -1396,9 +1377,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly Action<object, string> _loader;
         private ICollection<LazyPocoPost> _lazyPocoPosts = new List<LazyPocoPost>();
 
-        public LazyPocoBlog()
-        {
-        }
+        public LazyPocoBlog() { }
 
         private LazyPocoBlog(Action<object, string> lazyLoader)
         {
@@ -1409,11 +1388,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyPocoPost post)
-            => _lazyPocoPosts.Add(post);
+        public void AddPost(LazyPocoPost post) => _lazyPocoPosts.Add(post);
 
-        public IEnumerable<LazyPocoPost> LazyPocoPosts
-            => _loader.Load(this, ref _lazyPocoPosts);
+        public IEnumerable<LazyPocoPost> LazyPocoPosts => _loader.Load(this, ref _lazyPocoPosts);
     }
 
     protected class LazyPocoPost
@@ -1421,9 +1398,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly Action<object, string> _loader;
         private LazyPocoBlog _lazyPocoBlog;
 
-        public LazyPocoPost()
-        {
-        }
+        public LazyPocoPost() { }
 
         private LazyPocoPost(Action<object, string> lazyLoader)
         {
@@ -1444,11 +1419,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
     protected class LazyAsyncPocoBlog
     {
         private readonly Func<object, CancellationToken, string, Task> _loader;
-        private readonly ICollection<LazyAsyncPocoPost> _lazyAsyncPocoPosts = new List<LazyAsyncPocoPost>();
+        private readonly ICollection<LazyAsyncPocoPost> _lazyAsyncPocoPosts =
+            new List<LazyAsyncPocoPost>();
 
-        public LazyAsyncPocoBlog()
-        {
-        }
+        public LazyAsyncPocoBlog() { }
 
         private LazyAsyncPocoBlog(Func<object, CancellationToken, string, Task> lazyLoader)
         {
@@ -1459,27 +1433,25 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyAsyncPocoPost post)
-            => _lazyAsyncPocoPosts.Add(post);
+        public void AddPost(LazyAsyncPocoPost post) => _lazyAsyncPocoPosts.Add(post);
 
-        public async Task<IEnumerable<LazyAsyncPocoPost>> LoadPostsAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<LazyAsyncPocoPost>> LoadPostsAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             await _loader(this, cancellationToken, nameof(LazyAsyncPocoPosts));
 
             return LazyAsyncPocoPosts;
         }
 
-        public IEnumerable<LazyAsyncPocoPost> LazyAsyncPocoPosts
-            => _lazyAsyncPocoPosts;
+        public IEnumerable<LazyAsyncPocoPost> LazyAsyncPocoPosts => _lazyAsyncPocoPosts;
     }
 
     protected class LazyAsyncPocoPost
     {
         private readonly Func<object, CancellationToken, string, Task> _loader;
 
-        public LazyAsyncPocoPost()
-        {
-        }
+        public LazyAsyncPocoPost() { }
 
         private LazyAsyncPocoPost(Func<object, CancellationToken, string, Task> lazyLoader)
         {
@@ -1490,7 +1462,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public async Task<LazyAsyncPocoBlog> LoadBlogAsync(CancellationToken cancellationToken = default)
+        public async Task<LazyAsyncPocoBlog> LoadBlogAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             await _loader(this, cancellationToken, nameof(LazyAsyncPocoBlog));
 
@@ -1505,9 +1479,7 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         private readonly ILazyLoader _loader;
         private readonly ICollection<LazyAsyncPost> _lazyAsyncPosts = new List<LazyAsyncPost>();
 
-        public LazyAsyncBlog()
-        {
-        }
+        public LazyAsyncBlog() { }
 
         private LazyAsyncBlog(ILazyLoader loader)
         {
@@ -1518,27 +1490,25 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public void AddPost(LazyAsyncPost post)
-            => _lazyAsyncPosts.Add(post);
+        public void AddPost(LazyAsyncPost post) => _lazyAsyncPosts.Add(post);
 
-        public async Task<IEnumerable<LazyAsyncPost>> LoadPostsAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<LazyAsyncPost>> LoadPostsAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             await _loader.LoadAsync(this, cancellationToken, nameof(LazyAsyncPosts));
 
             return LazyAsyncPosts;
         }
 
-        public IEnumerable<LazyAsyncPost> LazyAsyncPosts
-            => _lazyAsyncPosts;
+        public IEnumerable<LazyAsyncPost> LazyAsyncPosts => _lazyAsyncPosts;
     }
 
     protected class LazyAsyncPost
     {
         private readonly ILazyLoader _loader;
 
-        public LazyAsyncPost()
-        {
-        }
+        public LazyAsyncPost() { }
 
         private LazyAsyncPost(ILazyLoader loader)
         {
@@ -1549,7 +1519,9 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
         public bool Filler { get; set; }
 
-        public async Task<LazyAsyncBlog> LoadBlogAsync(CancellationToken cancellationToken = default)
+        public async Task<LazyAsyncBlog> LoadBlogAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             await _loader.LoadAsync(this, cancellationToken, nameof(LazyAsyncBlog));
 
@@ -1561,17 +1533,10 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
 
     protected record BlogAsImmutableRecord
     {
-        public BlogAsImmutableRecord(
-            string title,
-            int? monthlyRevenue = null)
-            : this(0, title, monthlyRevenue)
-        {
-        }
+        public BlogAsImmutableRecord(string title, int? monthlyRevenue = null)
+            : this(0, title, monthlyRevenue) { }
 
-        private BlogAsImmutableRecord(
-            int blogId,
-            string title,
-            int? monthlyRevenue)
+        private BlogAsImmutableRecord(int blogId, string title, int? monthlyRevenue)
         {
             BlogId = blogId;
             Title = title;
@@ -1585,44 +1550,37 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
         public int? MonthlyRevenue { get; init; }
     }
 
-    public class OtherContext : DbContext
-    {
-    }
+    public class OtherContext : DbContext { }
 
     public class WithConstructorsContext : PoolableDbContext
     {
         public WithConstructorsContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
     }
 
-    public abstract class WithConstructorsFixtureBase : SharedStoreFixtureBase<WithConstructorsContext>
+    public abstract class WithConstructorsFixtureBase
+        : SharedStoreFixtureBase<WithConstructorsContext>
     {
-        protected override string StoreName
-            => "WithConstructors";
+        protected override string StoreName => "WithConstructors";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {
-            modelBuilder.Entity<Blog>(
-                b =>
-                {
-                    b.Property(e => e.Title);
-                });
+            modelBuilder.Entity<Blog>(b =>
+            {
+                b.Property(e => e.Title);
+            });
 
-            modelBuilder.Entity<BlogQuery>(
-                b =>
-                {
-                    b.HasNoKey();
-                    b.Property(e => e.Title);
-                });
+            modelBuilder.Entity<BlogQuery>(b =>
+            {
+                b.HasNoKey();
+                b.Property(e => e.Title);
+            });
 
-            modelBuilder.Entity<Post>(
-                b =>
-                {
-                    b.HasKey("_id");
-                    b.Property(e => e.Title);
-                });
+            modelBuilder.Entity<Post>(b =>
+            {
+                b.HasKey("_id");
+                b.Property(e => e.Title);
+            });
 
             modelBuilder.Entity<HasContext<DbContext>>();
             modelBuilder.Entity<HasContext<WithConstructorsContext>>();
@@ -1667,39 +1625,46 @@ public abstract class WithConstructorsTestBase<TFixture> : IClassFixture<TFixtur
             var post1 = new Post(
                 "Golden Toasters Rock",
                 "Smaller than the Black Library Dog, and more chewy.",
-                blog);
+                blog
+            );
 
             var post2 = new Post(
                 "Baxter is not a dog",
                 "He is a cat. Who eats dog food. And wags his tail.",
-                blog);
+                blog
+            );
 
             context.AddRange(blog, post1, post2);
 
             context.AddRange(
                 new HasContext<DbContext>(),
                 new HasContext<WithConstructorsContext>(),
-                new HasContext<OtherContext>());
+                new HasContext<OtherContext>()
+            );
 
             context.AddRange(
                 new HasContextProperty<DbContext>(),
                 new HasContextProperty<WithConstructorsContext>(),
-                new HasContextProperty<OtherContext>());
+                new HasContextProperty<OtherContext>()
+            );
 
             context.AddRange(
                 new HasContextPc<DbContext>(),
                 new HasContextPc<WithConstructorsContext>(),
-                new HasContextPc<OtherContext>());
+                new HasContextPc<OtherContext>()
+            );
 
             context.AddRange(
                 new HasEntityType(),
                 new HasEntityTypeProperty(),
-                new HasEntityTypePc());
+                new HasEntityTypePc()
+            );
 
             context.AddRange(
                 new HasStateManager(),
                 new HasStateManagerProperty(),
-                new HasStateManagerPc());
+                new HasStateManagerPc()
+            );
 
             var lazyBlog = new LazyBlog();
             lazyBlog.AddPost(new LazyPost());

@@ -7,18 +7,19 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
-using System.Data.Common;
 using System.Collections.Generic;
-using System.Text;
+using System.Data.Common;
+using System.Data.Common.CommandTrees;
+using System.Data.Common.Utils;
+using System.Data.EntityClient;
+using System.Data.Metadata.Edm;
+using System.Data.Objects;
 using System.Diagnostics;
 using System.Globalization;
-using System.Data.Common.Utils;
-using System.Data.Common.CommandTrees;
-using System.Data.Objects;
 using System.Linq;
-using System.Data.EntityClient;
+using System.Text;
 using System.Threading;
+
 namespace System.Data.Mapping.Update.Internal
 {
     internal enum UpdateCommandKind
@@ -62,29 +63,29 @@ namespace System.Data.Mapping.Update.Internal
         /// </summary>
         internal virtual EntitySet Table
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
         /// Gets type of command.
         /// </summary>
-        internal abstract UpdateCommandKind Kind
-        {
-            get;
-        }
+        internal abstract UpdateCommandKind Kind { get; }
 
         /// <summary>
         /// Gets original values of row/entity handled by this command.
         /// </summary>
-        internal PropagatorResult OriginalValues { get { return m_originalValues; } }
+        internal PropagatorResult OriginalValues
+        {
+            get { return m_originalValues; }
+        }
 
         /// <summary>
         /// Gets current values of row/entity handled by this command.
         /// </summary>
-        internal PropagatorResult CurrentValues { get { return m_currentValues; } }
+        internal PropagatorResult CurrentValues
+        {
+            get { return m_currentValues; }
+        }
 
         /// <summary>
         /// Yields all state entries contributing to this command. Used for error reporting.
@@ -97,11 +98,13 @@ namespace System.Data.Mapping.Update.Internal
         /// Determines model level dependencies for the current command. Dependencies are based
         /// on the model operations performed by the command (adding or deleting entities or relationships).
         /// </summary>
-        internal void GetRequiredAndProducedEntities(UpdateTranslator translator,
+        internal void GetRequiredAndProducedEntities(
+            UpdateTranslator translator,
             KeyToListMap<EntityKey, UpdateCommand> addedEntities,
             KeyToListMap<EntityKey, UpdateCommand> deletedEntities,
             KeyToListMap<EntityKey, UpdateCommand> addedRelationships,
-            KeyToListMap<EntityKey, UpdateCommand> deletedRelationships)
+            KeyToListMap<EntityKey, UpdateCommand> deletedRelationships
+        )
         {
             IList<IEntityStateEntry> stateEntries = GetStateEntries(translator);
 
@@ -141,13 +144,17 @@ namespace System.Data.Mapping.Update.Internal
                     bool isAdded = stateEntry.State == EntityState.Added;
                     if (isAdded || stateEntry.State == EntityState.Deleted)
                     {
-                        DbDataRecord record = isAdded ? (DbDataRecord)stateEntry.CurrentValues : stateEntry.OriginalValues;
+                        DbDataRecord record = isAdded
+                            ? (DbDataRecord)stateEntry.CurrentValues
+                            : stateEntry.OriginalValues;
                         Debug.Assert(2 == record.FieldCount, "non-binary relationship?");
                         EntityKey end1 = (EntityKey)record[0];
                         EntityKey end2 = (EntityKey)record[1];
 
                         // relationships require the entity when they're added and free the entity when they're deleted...
-                        KeyToListMap<EntityKey, UpdateCommand> affected = isAdded ? addedRelationships : deletedRelationships;
+                        KeyToListMap<EntityKey, UpdateCommand> affected = isAdded
+                            ? addedRelationships
+                            : deletedRelationships;
 
                         // both ends are being modified by the relationship
                         affected.Add(end1, this);
@@ -157,20 +164,39 @@ namespace System.Data.Mapping.Update.Internal
             }
         }
 
-        private void AddReferencedEntities(UpdateTranslator translator, PropagatorResult result, KeyToListMap<EntityKey, UpdateCommand> referencedEntities)
+        private void AddReferencedEntities(
+            UpdateTranslator translator,
+            PropagatorResult result,
+            KeyToListMap<EntityKey, UpdateCommand> referencedEntities
+        )
         {
             foreach (PropagatorResult property in result.GetMemberValues())
             {
-                if (property.IsSimple && property.Identifier != PropagatorResult.NullIdentifier &&
-                    (PropagatorFlags.ForeignKey == (property.PropagatorFlags & PropagatorFlags.ForeignKey)))
+                if (
+                    property.IsSimple
+                    && property.Identifier != PropagatorResult.NullIdentifier
+                    && (
+                        PropagatorFlags.ForeignKey
+                        == (property.PropagatorFlags & PropagatorFlags.ForeignKey)
+                    )
+                )
                 {
-                    foreach (int principal in translator.KeyManager.GetDirectReferences(property.Identifier))
+                    foreach (
+                        int principal in translator.KeyManager.GetDirectReferences(
+                            property.Identifier
+                        )
+                    )
                     {
                         PropagatorResult owner;
-                        if (translator.KeyManager.TryGetIdentifierOwner(principal, out owner) &&
-                            null != owner.StateEntry)
+                        if (
+                            translator.KeyManager.TryGetIdentifierOwner(principal, out owner)
+                            && null != owner.StateEntry
+                        )
                         {
-                            Debug.Assert(!owner.StateEntry.IsRelationship, "owner must not be a relationship");
+                            Debug.Assert(
+                                !owner.StateEntry.IsRelationship,
+                                "owner must not be a relationship"
+                            );
                             referencedEntities.Add(owner.StateEntry.EntityKey, this);
                         }
                     }
@@ -187,8 +213,12 @@ namespace System.Data.Mapping.Update.Internal
         /// OutputIdentifiers</param>
         /// <param name="generatedValues">Aggregator for server generated values.</param>
         /// <returns>Number of rows affected by the command.</returns>
-        internal abstract long Execute(UpdateTranslator translator, EntityConnection connection, Dictionary<int, object> identifierValues,
-            List<KeyValuePair<PropagatorResult, object>> generatedValues);
+        internal abstract long Execute(
+            UpdateTranslator translator,
+            EntityConnection connection,
+            Dictionary<int, object> identifierValues,
+            List<KeyValuePair<PropagatorResult, object>> generatedValues
+        );
 
         /// <summary>
         /// Implementation of CompareTo for concrete subclass of UpdateCommand.
@@ -197,16 +227,16 @@ namespace System.Data.Mapping.Update.Internal
 
         /// <summary>
         /// Provides a suggested ordering between two commands. Ensuring a consistent ordering is important to avoid deadlocks
-        /// between two clients because it means locks are acquired in the same order where possible. The ordering criteria are as 
+        /// between two clients because it means locks are acquired in the same order where possible. The ordering criteria are as
         /// follows (and are partly implemented in the CompareToType method). In some cases there are specific secondary
         /// reasons for the order (e.g. operator kind), but for the most case we just care that a consistent ordering
         /// is applied:
-        /// 
+        ///
         /// - The kind of command (dynamic or function). This is an arbitrary criteria.
         /// - The kind of operator (insert, update, delete). See <see cref="ModificationOperator"/> for details of the ordering.
         /// - The target of the modification (table for dynamic, set for function).
         /// - Primary key for the modification (table key for dynamic, entity keys for function).
-        /// 
+        ///
         /// If it is not possible to differentiate between two commands (e.g., where the user is inserting entities with server-generated
         /// primary keys and has not given explicit values), arbitrary ordering identifiers are assigned to the commands to
         /// ensure CompareTo is well-behaved (doesn't return 0 for different commands and suggests consistent ordering).
@@ -215,25 +245,37 @@ namespace System.Data.Mapping.Update.Internal
         {
             // If the commands are the same (by reference), return 0 immediately. Otherwise, we try to find (and eventually
             // force) an ordering between them by returning a value that is non-zero.
-            if (this.Equals(other)) { return 0; }
+            if (this.Equals(other))
+            {
+                return 0;
+            }
             Debug.Assert(null != other, "comparing to null UpdateCommand");
             int result = (int)this.Kind - (int)other.Kind;
-            if (0 != result) { return result; }
+            if (0 != result)
+            {
+                return result;
+            }
 
             // defer to specific type for other comparisons...
             result = CompareToType(other);
-            if (0 != result) { return result; }
-
+            if (0 != result)
+            {
+                return result;
+            }
             // if the commands are indistinguishable, assign arbitrary identifiers to them to ensure consistent ordering
             unchecked
             {
                 if (this.m_orderingIdentifier == 0)
                 {
-                    this.m_orderingIdentifier = Interlocked.Increment(ref s_orderingIdentifierCounter);
+                    this.m_orderingIdentifier = Interlocked.Increment(
+                        ref s_orderingIdentifierCounter
+                    );
                 }
                 if (other.m_orderingIdentifier == 0)
                 {
-                    other.m_orderingIdentifier = Interlocked.Increment(ref s_orderingIdentifierCounter);
+                    other.m_orderingIdentifier = Interlocked.Increment(
+                        ref s_orderingIdentifierCounter
+                    );
                 }
 
                 return this.m_orderingIdentifier - other.m_orderingIdentifier;

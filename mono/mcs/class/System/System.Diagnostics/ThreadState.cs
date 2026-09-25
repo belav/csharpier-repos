@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,15 +28,17 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Diagnostics {
-	public enum ThreadState {
-		Initialized=0,
-		Ready=1,
-		Running=2,
-		Standby=3,
-		Terminated=4,
-		Transition=6,
-		Unknown=7,
-		Wait=5,
-	}
+namespace System.Diagnostics
+{
+    public enum ThreadState
+    {
+        Initialized = 0,
+        Ready = 1,
+        Running = 2,
+        Standby = 3,
+        Terminated = 4,
+        Transition = 6,
+        Unknown = 7,
+        Wait = 5,
+    }
 }

@@ -24,7 +24,10 @@ namespace System.Web.Http.Cors
         /// or
         /// corsResult
         /// </exception>
-        public static void WriteCorsHeaders(this HttpResponseMessage response, CorsResult corsResult)
+        public static void WriteCorsHeaders(
+            this HttpResponseMessage response,
+            CorsResult corsResult
+        )
         {
             if (response == null)
             {

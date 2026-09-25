@@ -28,90 +28,90 @@
 //
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Collections;
+using System.Windows.Forms;
 
-	// Automatically reroutes Messages to the designer
-	//
-	
+// Automatically reroutes Messages to the designer
+//
+
 namespace System.Windows.Forms.Design
 {
+    internal class WndProcRouter : IWindowTarget, IDisposable
+    {
+        private IWindowTarget _oldTarget;
+        private IMessageReceiver _receiver;
+        private Control _control;
 
-	internal class WndProcRouter : IWindowTarget, IDisposable
-	{
-		private IWindowTarget _oldTarget;
-		private IMessageReceiver _receiver;
-		private Control _control;
-		
-		public WndProcRouter (Control control, IMessageReceiver receiver)
-		{
-			if (control == null)
-				throw new ArgumentNullException ("control");
-			if (receiver == null)
-				throw new ArgumentNullException ("receiver");
-			
-			_oldTarget = control.WindowTarget;
-			_control = control;
-			_receiver = receiver;
-		}
-		
-		public Control Control {
-			get { return _control; }
-		}
+        public WndProcRouter(Control control, IMessageReceiver receiver)
+        {
+            if (control == null)
+                throw new ArgumentNullException("control");
+            if (receiver == null)
+                throw new ArgumentNullException("receiver");
 
-		public IWindowTarget OldWindowTarget {
-			get { return _oldTarget; }
-		}
+            _oldTarget = control.WindowTarget;
+            _control = control;
+            _receiver = receiver;
+        }
 
-		// Route the message to the control
-		//
-		public void ToControl (ref Message m)
-		{
-			//Console.WriteLine ("Control: " + ((Native.Msg)m.Msg).ToString ());
-			if (_oldTarget != null)
-				_oldTarget.OnMessage (ref m);
-		}
-		
-		public void ToSystem (ref Message m)
-		{
-			//Console.WriteLine ("System: " + ((Native.Msg)m.Msg).ToString ());
-			Native.DefWndProc (ref m);
-		}
-		
-		// Just pass it to the old IWindowTarget
-		//
-		void IWindowTarget.OnHandleChange (IntPtr newHandle)
-		{
-			if (_oldTarget != null)
-				_oldTarget.OnHandleChange (newHandle);
-		}
+        public Control Control
+        {
+            get { return _control; }
+        }
 
-		// Route the msg to the designer if available, else to
-		// control itself.
-		//
-		void IWindowTarget.OnMessage (ref Message m)
-		{
-			//Console.WriteLine ("Message: " + ((Native.Msg)m.Msg).ToString ());
-			if (_receiver != null)
-				_receiver.WndProc (ref m);
-			else
-				this.ToControl (ref m);
-		}
+        public IWindowTarget OldWindowTarget
+        {
+            get { return _oldTarget; }
+        }
 
-		// Disposes and puts back the old IWindowTarget
-		//
-		public void Dispose ()
-		{
-			if (_control != null)
-				_control.WindowTarget = _oldTarget;
+        // Route the message to the control
+        //
+        public void ToControl(ref Message m)
+        {
+            //Console.WriteLine ("Control: " + ((Native.Msg)m.Msg).ToString ());
+            if (_oldTarget != null)
+                _oldTarget.OnMessage(ref m);
+        }
 
-			_control = null;
-			_oldTarget = null;
-		}
+        public void ToSystem(ref Message m)
+        {
+            //Console.WriteLine ("System: " + ((Native.Msg)m.Msg).ToString ());
+            Native.DefWndProc(ref m);
+        }
 
-	}
+        // Just pass it to the old IWindowTarget
+        //
+        void IWindowTarget.OnHandleChange(IntPtr newHandle)
+        {
+            if (_oldTarget != null)
+                _oldTarget.OnHandleChange(newHandle);
+        }
+
+        // Route the msg to the designer if available, else to
+        // control itself.
+        //
+        void IWindowTarget.OnMessage(ref Message m)
+        {
+            //Console.WriteLine ("Message: " + ((Native.Msg)m.Msg).ToString ());
+            if (_receiver != null)
+                _receiver.WndProc(ref m);
+            else
+                this.ToControl(ref m);
+        }
+
+        // Disposes and puts back the old IWindowTarget
+        //
+        public void Dispose()
+        {
+            if (_control != null)
+                _control.WindowTarget = _oldTarget;
+
+            _control = null;
+            _oldTarget = null;
+        }
+    }
 }

@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.BraceMatching
 
         protected AbstractBraceMatcher(
             BraceCharacterAndKind openBrace,
-            BraceCharacterAndKind closeBrace)
+            BraceCharacterAndKind closeBrace
+        )
         {
             _openBrace = openBrace;
             _closeBrace = closeBrace;
@@ -28,16 +29,20 @@ namespace Microsoft.CodeAnalysis.BraceMatching
         {
             var parent = token.Parent;
 
-            var braceTokens = (from child in parent.ChildNodesAndTokens()
-                               where child.IsToken
-                               let tok = child.AsToken()
-                               where tok.RawKind == _openBrace.Kind || tok.RawKind == _closeBrace.Kind
-                               where tok.Span.Length > 0
-                               select tok).ToList();
+            var braceTokens = (
+                from child in parent.ChildNodesAndTokens()
+                where child.IsToken
+                let tok = child.AsToken()
+                where tok.RawKind == _openBrace.Kind || tok.RawKind == _closeBrace.Kind
+                where tok.Span.Length > 0
+                select tok
+            ).ToList();
 
-            if (braceTokens.Count == 2 &&
-                braceTokens[0].RawKind == _openBrace.Kind &&
-                braceTokens[1].RawKind == _closeBrace.Kind)
+            if (
+                braceTokens.Count == 2
+                && braceTokens[0].RawKind == _openBrace.Kind
+                && braceTokens[1].RawKind == _closeBrace.Kind
+            )
             {
                 if (braceTokens[0] == token)
                 {
@@ -59,7 +64,8 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             Document document,
             int position,
             BraceMatchingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
@@ -88,10 +94,8 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             return null;
         }
 
-        protected virtual bool AllowedForToken(SyntaxToken token)
-            => true;
+        protected virtual bool AllowedForToken(SyntaxToken token) => true;
 
-        private bool IsBrace(char c)
-            => _openBrace.Character == c || _closeBrace.Character == c;
+        private bool IsBrace(char c) => _openBrace.Character == c || _closeBrace.Character == c;
     }
 }

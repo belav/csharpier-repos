@@ -15,7 +15,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         {
             None = 0,
             ExpandPredefinedTypes = 1 << 1,
-            SplitNamespaceAndType = 1 << 2
+            SplitNamespaceAndType = 1 << 2,
         }
     }
 }

@@ -16,9 +16,7 @@ public class ConstructorDescriptor : IMethodDescriptor
 
     private readonly ConstructorInfo _constructorInfo;
 
-    internal ConstructorDescriptor(
-        ConstructorInfo constructorInfo,
-        ModelDescriptor parent)
+    internal ConstructorDescriptor(ConstructorInfo constructorInfo, ModelDescriptor parent)
     {
         Parent = parent;
         _constructorInfo = constructorInfo;
@@ -29,8 +27,10 @@ public class ConstructorDescriptor : IMethodDescriptor
 
     /// <inheritdoc />
     public IReadOnlyList<ParameterDescriptor> ParameterDescriptors =>
-        _parameterDescriptors ??=
-            _constructorInfo.GetParameters().Select(p => new ParameterDescriptor(p, this)).ToList();
+        _parameterDescriptors ??= _constructorInfo
+            .GetParameters()
+            .Select(p => new ParameterDescriptor(p, this))
+            .ToList();
 
     internal object Invoke(IReadOnlyCollection<object?> parameters)
     {
@@ -38,6 +38,5 @@ public class ConstructorDescriptor : IMethodDescriptor
     }
 
     /// <inheritdoc />
-    public override string ToString() =>
-        $"{Parent} ({string.Join(", ", ParameterDescriptors)})";
+    public override string ToString() => $"{Parent} ({string.Join(", ", ParameterDescriptors)})";
 }

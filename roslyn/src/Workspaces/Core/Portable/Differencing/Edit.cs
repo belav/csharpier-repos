@@ -27,10 +27,14 @@ namespace Microsoft.CodeAnalysis.Differencing
             Debug.Assert((oldNode == null || oldNode.Equals(null)) == (kind == EditKind.Insert));
             Debug.Assert((newNode == null || newNode.Equals(null)) == (kind == EditKind.Delete));
 
-            Debug.Assert(comparer == null ||
-                         oldNode == null || oldNode.Equals(null) ||
-                         newNode == null || newNode.Equals(null) ||
-                         !comparer.TreesEqual(oldNode, newNode));
+            Debug.Assert(
+                comparer == null
+                    || oldNode == null
+                    || oldNode.Equals(null)
+                    || newNode == null
+                    || newNode.Equals(null)
+                    || !comparer.TreesEqual(oldNode, newNode)
+            );
 
             _comparer = comparer;
             _kind = kind;
@@ -41,37 +45,36 @@ namespace Microsoft.CodeAnalysis.Differencing
         public EditKind Kind => _kind;
 
         /// <summary>
-        /// Insert: 
+        /// Insert:
         /// default(TNode).
-        /// 
-        /// Delete: 
+        ///
+        /// Delete:
         /// Deleted node.
-        /// 
-        /// Move, Update: 
+        ///
+        /// Move, Update:
         /// Node in the old tree/sequence.
         /// </summary>
         public TNode OldNode => _oldNode;
 
         /// <summary>
-        /// Insert: 
+        /// Insert:
         /// Inserted node.
-        /// 
-        /// Delete: 
+        ///
+        /// Delete:
         /// default(TNode)
-        /// 
+        ///
         /// Move, Update:
         /// Node in the new tree/sequence.
         /// </summary>
         public TNode NewNode => _newNode;
 
-        public override bool Equals(object obj)
-            => obj is Edit<TNode> && Equals((Edit<TNode>)obj);
+        public override bool Equals(object obj) => obj is Edit<TNode> && Equals((Edit<TNode>)obj);
 
         public bool Equals(Edit<TNode> other)
         {
-            return _kind == other._kind
-                && (_oldNode == null) ? other._oldNode == null : _oldNode.Equals(other._oldNode)
-                && (_newNode == null) ? other._newNode == null : _newNode.Equals(other._newNode);
+            return _kind == other._kind && (_oldNode == null) ? other._oldNode == null
+                : _oldNode.Equals(other._oldNode) && (_newNode == null) ? other._newNode == null
+                : _newNode.Equals(other._newNode);
         }
 
         public override int GetHashCode()
@@ -103,17 +106,31 @@ namespace Microsoft.CodeAnalysis.Differencing
                     return result + " [" + _newNode.ToString() + "]" + DisplayPosition(_newNode);
 
                 case EditKind.Update:
-                    return result + " [" + _oldNode.ToString() + "]" + DisplayPosition(_oldNode) + " -> [" + _newNode.ToString() + "]" + DisplayPosition(_newNode);
+                    return result
+                        + " ["
+                        + _oldNode.ToString()
+                        + "]"
+                        + DisplayPosition(_oldNode)
+                        + " -> ["
+                        + _newNode.ToString()
+                        + "]"
+                        + DisplayPosition(_newNode);
 
                 case EditKind.Move:
                 case EditKind.Reorder:
-                    return result + " [" + _oldNode.ToString() + "]" + DisplayPosition(_oldNode) + " -> " + DisplayPosition(_newNode);
+                    return result
+                        + " ["
+                        + _oldNode.ToString()
+                        + "]"
+                        + DisplayPosition(_oldNode)
+                        + " -> "
+                        + DisplayPosition(_newNode);
             }
 
             return result;
         }
 
-        private string DisplayPosition(TNode node)
-            => (_comparer != null) ? "@" + _comparer.GetSpan(node).Start : "";
+        private string DisplayPosition(TNode node) =>
+            (_comparer != null) ? "@" + _comparer.GetSpan(node).Start : "";
     }
 }

@@ -63,10 +63,18 @@ public static class CriticalFinalizerTest
         int criticalFinalized = Critical.Finalized;
         int normalFinalizedBeforeFirstCritical = Critical.NormalFinalizedBeforeFirstCritical;
 
-        if (normalFinalized != Count || criticalFinalized != Count || normalFinalizedBeforeFirstCritical != Count)
+        if (
+            normalFinalized != Count
+            || criticalFinalized != Count
+            || normalFinalizedBeforeFirstCritical != Count
+        )
         {
-            Console.WriteLine($"Finalized {normalFinalized} {nameof(Normal)} and {criticalFinalized} {nameof(Critical)} objects.");
-            Console.WriteLine($"The first {nameof(Critical)} object was finalized after {normalFinalizedBeforeFirstCritical} {nameof(Normal)} objects.");
+            Console.WriteLine(
+                $"Finalized {normalFinalized} {nameof(Normal)} and {criticalFinalized} {nameof(Critical)} objects."
+            );
+            Console.WriteLine(
+                $"The first {nameof(Critical)} object was finalized after {normalFinalizedBeforeFirstCritical} {nameof(Normal)} objects."
+            );
             return 101;
         }
 

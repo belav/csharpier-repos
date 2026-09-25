@@ -15,7 +15,9 @@ public class SqlServerOutputClauseConventionTest
         var model = modelBuilder.Model;
 
         var entityType = model.FindEntityType(typeof(Order))!;
-        var tableIdentifier = StoreObjectIdentifier.Create(entityType, StoreObjectType.Table)!.Value;
+        var tableIdentifier = StoreObjectIdentifier
+            .Create(entityType, StoreObjectType.Table)!
+            .Value;
 
         Assert.True(entityType.IsSqlOutputClauseUsed(tableIdentifier));
     }
@@ -28,7 +30,9 @@ public class SqlServerOutputClauseConventionTest
 
         var entityTypeBuilder = modelBuilder.Entity<Order>();
         var entityType = model.FindEntityType(typeof(Order))!;
-        var tableIdentifier = StoreObjectIdentifier.Create(entityType, StoreObjectType.Table)!.Value;
+        var tableIdentifier = StoreObjectIdentifier
+            .Create(entityType, StoreObjectType.Table)!
+            .Value;
 
         Assert.True(entityType.IsSqlOutputClauseUsed(tableIdentifier));
 

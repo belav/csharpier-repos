@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
     internal abstract class AbstractSemanticModelReuseLanguageService<
         TMemberDeclarationSyntax,
         TBasePropertyDeclarationSyntax,
-        TAccessorDeclarationSyntax> : ISemanticModelReuseLanguageService, IDisposable
+        TAccessorDeclarationSyntax
+    > : ISemanticModelReuseLanguageService, IDisposable
         where TMemberDeclarationSyntax : SyntaxNode
         where TBasePropertyDeclarationSyntax : TMemberDeclarationSyntax
         where TAccessorDeclarationSyntax : SyntaxNode
@@ -25,20 +26,35 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
 
         public abstract SyntaxNode? TryGetContainingMethodBodyForSpeculation(SyntaxNode node);
 
-        protected abstract SemanticModel? TryGetSpeculativeSemanticModelWorker(SemanticModel previousSemanticModel, SyntaxNode previousBodyNode, SyntaxNode currentBodyNode);
-        protected abstract SyntaxList<TAccessorDeclarationSyntax> GetAccessors(TBasePropertyDeclarationSyntax baseProperty);
-        protected abstract TBasePropertyDeclarationSyntax GetBasePropertyDeclaration(TAccessorDeclarationSyntax accessor);
+        protected abstract SemanticModel? TryGetSpeculativeSemanticModelWorker(
+            SemanticModel previousSemanticModel,
+            SyntaxNode previousBodyNode,
+            SyntaxNode currentBodyNode
+        );
+        protected abstract SyntaxList<TAccessorDeclarationSyntax> GetAccessors(
+            TBasePropertyDeclarationSyntax baseProperty
+        );
+        protected abstract TBasePropertyDeclarationSyntax GetBasePropertyDeclaration(
+            TAccessorDeclarationSyntax accessor
+        );
 
         public void Dispose()
         {
-            Logger.Log(FunctionId.SemanticModelReuseLanguageService_TryGetSpeculativeSemanticModelAsync_Equivalent, KeyValueLogMessage.Create(m =>
-            {
-                foreach (var kv in _logAggregator)
-                    m[kv.Key.ToString()] = kv.Value.GetCount();
-            }));
+            Logger.Log(
+                FunctionId.SemanticModelReuseLanguageService_TryGetSpeculativeSemanticModelAsync_Equivalent,
+                KeyValueLogMessage.Create(m =>
+                {
+                    foreach (var kv in _logAggregator)
+                        m[kv.Key.ToString()] = kv.Value.GetCount();
+                })
+            );
         }
 
-        public async Task<SemanticModel?> TryGetSpeculativeSemanticModelAsync(SemanticModel previousSemanticModel, SyntaxNode currentBodyNode, CancellationToken cancellationToken)
+        public async Task<SemanticModel?> TryGetSpeculativeSemanticModelAsync(
+            SemanticModel previousSemanticModel,
+            SyntaxNode currentBodyNode,
+            CancellationToken cancellationToken
+        )
         {
             var previousSyntaxTree = previousSemanticModel.SyntaxTree;
             var currentSyntaxTree = currentBodyNode.SyntaxTree;
@@ -46,14 +62,21 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             // This operation is only valid if top-level equivalent trees were passed in.  If they're not equivalent
             // then something very bad happened as we did that document.Project.GetDependentSemanticVersionAsync was
             // still the same.  Log information so we can be alerted if this isn't being as successful as we expect.
-            var isEquivalentTo = previousSyntaxTree.IsEquivalentTo(currentSyntaxTree, topLevel: true);
+            var isEquivalentTo = previousSyntaxTree.IsEquivalentTo(
+                currentSyntaxTree,
+                topLevel: true
+            );
             _logAggregator.IncreaseCount(isEquivalentTo);
 
             if (!isEquivalentTo)
                 return null;
 
-            var previousRoot = await previousSemanticModel.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
-            var currentRoot = await currentBodyNode.SyntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
+            var previousRoot = await previousSemanticModel
+                .SyntaxTree.GetRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var currentRoot = await currentBodyNode
+                .SyntaxTree.GetRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var previousBodyNode = GetPreviousBodyNode(previousRoot, currentRoot, currentBodyNode);
 
             // Trivia is ignore when comparing two trees for equivalence at top level, since it has no effect to API shape
@@ -65,7 +88,7 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             //
             // class C {            void M() { return null; } }";
             //                               ^ it's unsafe to use the speculative model at this position, even though it's part of the
-            //                                 method body and after OriginalPositionForSpeculation. 
+            //                                 method body and after OriginalPositionForSpeculation.
 
             // Given that the common use case for us is continuously editing/typing inside a method body, we believe we can be conservative
             // in creating speculative model with those kind of trivia change, by requiring the method body block not to shift position,
@@ -73,10 +96,18 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             if (previousBodyNode.SpanStart != currentBodyNode.SpanStart)
                 return null;
 
-            return TryGetSpeculativeSemanticModelWorker(previousSemanticModel, previousBodyNode, currentBodyNode);
+            return TryGetSpeculativeSemanticModelWorker(
+                previousSemanticModel,
+                previousBodyNode,
+                currentBodyNode
+            );
         }
 
-        protected SyntaxNode GetPreviousBodyNode(SyntaxNode previousRoot, SyntaxNode currentRoot, SyntaxNode currentBodyNode)
+        protected SyntaxNode GetPreviousBodyNode(
+            SyntaxNode previousRoot,
+            SyntaxNode currentRoot,
+            SyntaxNode currentBodyNode
+        )
         {
             if (currentBodyNode is TAccessorDeclarationSyntax currentAccessor)
             {
@@ -84,11 +115,17 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 // to the current prop/event.
 
                 var currentContainer = GetBasePropertyDeclaration(currentAccessor);
-                var previousContainer = GetPreviousBodyNode(previousRoot, currentRoot, currentContainer);
+                var previousContainer = GetPreviousBodyNode(
+                    previousRoot,
+                    currentRoot,
+                    currentContainer
+                );
 
                 if (previousContainer is not TBasePropertyDeclarationSyntax previousMember)
                 {
-                    Debug.Fail("Previous container didn't map back to a normal accessor container.");
+                    Debug.Fail(
+                        "Previous container didn't map back to a normal accessor container."
+                    );
                     return null;
                 }
 
@@ -97,7 +134,9 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
 
                 if (currentAccessors.Count != previousAccessors.Count)
                 {
-                    Debug.Fail("Accessor count shouldn't have changed as there were no top level edits.");
+                    Debug.Fail(
+                        "Accessor count shouldn't have changed as there were no top level edits."
+                    );
                     return null;
                 }
 
@@ -116,7 +155,9 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
                 var previousMembers = this.SyntaxFacts.GetMethodLevelMembers(previousRoot);
                 if (currentMembers.Count != previousMembers.Count)
                 {
-                    Debug.Fail("Member count shouldn't have changed as there were no top level edits.");
+                    Debug.Fail(
+                        "Member count shouldn't have changed as there were no top level edits."
+                    );
                     return null;
                 }
 
@@ -132,7 +173,11 @@ namespace Microsoft.CodeAnalysis.SemanticModelReuse
             private readonly SyntaxTree _updatedSyntaxTree;
 #pragma warning restore IDE0052 // Remove unread private members
 
-            public NonEquivalentTreeException(string message, SyntaxTree originalSyntaxTree, SyntaxTree updatedSyntaxTree)
+            public NonEquivalentTreeException(
+                string message,
+                SyntaxTree originalSyntaxTree,
+                SyntaxTree updatedSyntaxTree
+            )
                 : base(message)
             {
                 _originalSyntaxTree = originalSyntaxTree;

@@ -19,35 +19,34 @@ namespace System.Net.Http
         /// <param name="content">The content used to initialize the <see cref="StringContent"/>.</param>
         /// <remarks>The media type for the <see cref="StringContent"/> created defaults to text/plain.</remarks>
         public StringContent(string content)
-            : this(content, DefaultStringEncoding, DefaultMediaType)
-        {
-        }
+            : this(content, DefaultStringEncoding, DefaultMediaType) { }
 
         /// <summary>Creates a new instance of the <see cref="StringContent"/> class.</summary>
         /// <param name="content">The content used to initialize the <see cref="StringContent"/>.</param>
         /// <param name="mediaType">The media type to use for the content.</param>
         public StringContent(string content, MediaTypeHeaderValue mediaType)
-            : this(content, DefaultStringEncoding, mediaType)
-        {
-        }
+            : this(content, DefaultStringEncoding, mediaType) { }
 
         /// <summary>Creates a new instance of the <see cref="StringContent"/> class.</summary>
         /// <param name="content">The content used to initialize the <see cref="StringContent"/>.</param>
         /// <param name="encoding">The encoding to use for the content.</param>
         /// <remarks>The media type for the <see cref="StringContent"/> created defaults to text/plain.</remarks>
         public StringContent(string content, Encoding? encoding)
-            : this(content, encoding, DefaultMediaType)
-        {
-        }
+            : this(content, encoding, DefaultMediaType) { }
 
         /// <summary>Creates a new instance of the <see cref="StringContent"/> class.</summary>
         /// <param name="content">The content used to initialize the <see cref="StringContent"/>.</param>
         /// <param name="encoding">The encoding to use for the content.</param>
         /// <param name="mediaType">The media type to use for the content.</param>
         public StringContent(string content, Encoding? encoding, string mediaType)
-            : this(content, encoding, new MediaTypeHeaderValue(mediaType ?? DefaultMediaType, (encoding ?? DefaultStringEncoding).WebName))
-        {
-        }
+            : this(
+                content,
+                encoding,
+                new MediaTypeHeaderValue(
+                    mediaType ?? DefaultMediaType,
+                    (encoding ?? DefaultStringEncoding).WebName
+                )
+            ) { }
 
         /// <summary>Creates a new instance of the <see cref="StringContent"/> class.</summary>
         /// <param name="content">The content used to initialize the <see cref="StringContent"/>.</param>
@@ -78,14 +77,21 @@ namespace System.Net.Http
         /// <param name="context">Information about the transport, like channel binding token. This parameter may be <see langword="null" />.</param>
         /// <param name="cancellationToken">The cancellation token to cancel the operation.</param>
         /// <returns>The task object representing the asynchronous operation.</returns>
-        protected override Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken) =>
+        protected override Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        ) =>
             // Only skip the original protected virtual SerializeToStreamAsync if this
             // isn't a derived type that may have overridden the behavior.
-            GetType() == typeof(StringContent) ? SerializeToStreamAsyncCore(stream, cancellationToken) :
-            base.SerializeToStreamAsync(stream, context, cancellationToken);
+            GetType() == typeof(StringContent)
+                ? SerializeToStreamAsyncCore(stream, cancellationToken)
+                : base.SerializeToStreamAsync(stream, context, cancellationToken);
 
         internal override Stream? TryCreateContentReadStream() =>
-            GetType() == typeof(StringContent) ? CreateMemoryStreamForByteArray() : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
-            null;
+            GetType() == typeof(StringContent)
+                ? CreateMemoryStreamForByteArray()
+                : // type check ensures we use possible derived type's CreateContentReadStreamAsync override
+                null;
     }
 }

@@ -15,36 +15,38 @@
 #if NETCOREAPP3_0_OR_GREATER
 
 using System.Reflection;
-
 using NUnit.Framework;
 
 namespace Castle.DynamicProxy.Tests
 {
-	[TestFixture]
-	public class DefaultInterfaceMembersTestCase : BasePEVerifyTestCase
-	{
-		[Test]
-		public void Can_proxy_interface_with_sealed_method()
-		{
-			_ = generator.CreateInterfaceProxyWithoutTarget<IHaveSealedMethod>();
-		}
+    [TestFixture]
+    public class DefaultInterfaceMembersTestCase : BasePEVerifyTestCase
+    {
+        [Test]
+        public void Can_proxy_interface_with_sealed_method()
+        {
+            _ = generator.CreateInterfaceProxyWithoutTarget<IHaveSealedMethod>();
+        }
 
-		[Test]
-		public void Can_invoke_sealed_method_in_proxied_interface()
-		{
-			var proxy = generator.CreateInterfaceProxyWithoutTarget<IHaveSealedMethod>();
-			var invokedMethod = proxy.SealedMethod();
-			Assert.AreEqual(typeof(IHaveSealedMethod).GetMethod(nameof(IHaveSealedMethod.SealedMethod)), invokedMethod);
-		}
+        [Test]
+        public void Can_invoke_sealed_method_in_proxied_interface()
+        {
+            var proxy = generator.CreateInterfaceProxyWithoutTarget<IHaveSealedMethod>();
+            var invokedMethod = proxy.SealedMethod();
+            Assert.AreEqual(
+                typeof(IHaveSealedMethod).GetMethod(nameof(IHaveSealedMethod.SealedMethod)),
+                invokedMethod
+            );
+        }
 
-		public interface IHaveSealedMethod
-		{
-			sealed MethodBase SealedMethod()
-			{
-				return MethodBase.GetCurrentMethod();
-			}
-		}
-	}
+        public interface IHaveSealedMethod
+        {
+            sealed MethodBase SealedMethod()
+            {
+                return MethodBase.GetCurrentMethod();
+            }
+        }
+    }
 }
 
 #endif

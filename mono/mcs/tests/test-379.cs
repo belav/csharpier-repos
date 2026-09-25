@@ -1,16 +1,16 @@
 using System;
 
-public class DeadCode {
+public class DeadCode
+{
+    public static void Main()
+    {
+        SomeFunc("...");
+    }
 
-	public static void Main ()
-	{
-		SomeFunc ("...");
-	}
-
-	static public string SomeFunc (string str)
-	{
-		return str;
-		int i = 0, pos = 0;
-	}
-
+    public static string SomeFunc(string str)
+    {
+        return str;
+        int i = 0,
+            pos = 0;
+    }
 }

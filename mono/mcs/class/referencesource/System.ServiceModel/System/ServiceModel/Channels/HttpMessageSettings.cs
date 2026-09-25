@@ -7,7 +7,7 @@ namespace System.ServiceModel.Channels
     using System.Net.Http;
 
     /// <summary>
-    /// A binding parameter that can be used with the HTTP Transport to 
+    /// A binding parameter that can be used with the HTTP Transport to
     /// specify the setting for HttpMessage support.
     /// </summary>
     public sealed class HttpMessageSettings : IEquatable<HttpMessageSettings>
@@ -21,9 +21,9 @@ namespace System.ServiceModel.Channels
 
         public bool Equals(HttpMessageSettings other)
         {
-            return other == null ?
-                false :
-                other.HttpMessagesSupported == this.HttpMessagesSupported;
+            return other == null
+                ? false
+                : other.HttpMessagesSupported == this.HttpMessagesSupported;
         }
-    } 
+    }
 }

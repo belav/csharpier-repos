@@ -20,21 +20,40 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         //
         // Candidates must pass this screen before we involve the binder.
         //
-        public static bool QualifiesBasedOnParameterCount(this MethodBase methodBase, BindingFlags bindingFlags, CallingConventions callConv, Type?[] argumentTypes)
+        public static bool QualifiesBasedOnParameterCount(
+            this MethodBase methodBase,
+            BindingFlags bindingFlags,
+            CallingConventions callConv,
+            Type?[] argumentTypes
+        )
         {
             Debug.Assert(methodBase is not null);
             Debug.Assert(argumentTypes is not null);
 #if DEBUG
-            bindingFlags &= ~(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.FlattenHierarchy | BindingFlags.IgnoreCase);
+            bindingFlags &= ~(
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly
+                | BindingFlags.FlattenHierarchy
+                | BindingFlags.IgnoreCase
+            );
 #endif
 
             #region Check CallingConvention
             if ((callConv & CallingConventions.Any) == 0)
             {
-                if ((callConv & CallingConventions.VarArgs) != 0 && (methodBase.CallingConvention & CallingConventions.VarArgs) == 0)
+                if (
+                    (callConv & CallingConventions.VarArgs) != 0
+                    && (methodBase.CallingConvention & CallingConventions.VarArgs) == 0
+                )
                     return false;
 
-                if ((callConv & CallingConventions.Standard) != 0 && (methodBase.CallingConvention & CallingConventions.Standard) == 0)
+                if (
+                    (callConv & CallingConventions.Standard) != 0
+                    && (methodBase.CallingConvention & CallingConventions.Standard) == 0
+                )
                     return false;
             }
             #endregion
@@ -47,7 +66,17 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                 #region Invoke Member, Get\Set & Create Instance specific case
                 // If the number of supplied arguments differs than the number in the signature AND
                 // we are not filtering for a dynamic call -- InvokeMethod or CreateInstance -- filter out the method.
-                if ((bindingFlags & (BindingFlags.InvokeMethod | BindingFlags.CreateInstance | BindingFlags.GetProperty | BindingFlags.SetProperty)) == 0)
+                if (
+                    (
+                        bindingFlags
+                        & (
+                            BindingFlags.InvokeMethod
+                            | BindingFlags.CreateInstance
+                            | BindingFlags.GetProperty
+                            | BindingFlags.SetProperty
+                        )
+                    ) == 0
+                )
                     return false;
 
                 bool testForParamArray = false;
@@ -70,7 +99,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                     #endregion
                 }
                 else
-                {// fewer supplied arguments than parameters, missing arguments could be optional
+                { // fewer supplied arguments than parameters, missing arguments could be optional
                     #region OptionalParamBinding
                     if ((bindingFlags & BindingFlags.OptionalParamBinding) == 0)
                     {
@@ -95,7 +124,8 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                         return false;
 
                     // The last argument of the signature could be a param array.
-                    bool shortByMoreThanOneSuppliedArgument = argumentTypes.Length < parameterInfos.Length - 1;
+                    bool shortByMoreThanOneSuppliedArgument =
+                        argumentTypes.Length < parameterInfos.Length - 1;
 
                     if (shortByMoreThanOneSuppliedArgument)
                         return false;
@@ -127,7 +157,10 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                         for (int i = 0; i < parameterInfos.Length; i++)
                         {
                             // a null argument type implies a null arg which is always a perfect match
-                            if (argumentTypes[i] is not null && !argumentTypes[i].MatchesParameterTypeExactly(parameterInfos[i]))
+                            if (
+                                argumentTypes[i] is not null
+                                && !argumentTypes[i].MatchesParameterTypeExactly(parameterInfos[i])
+                            )
                                 return false;
                         }
                     }
@@ -146,7 +179,11 @@ namespace System.Reflection.Runtime.BindingFlagSupport
         // - MethodImpls ignored. (I didn't say it made sense, this is just how the desktop api we're porting behaves.)
         // - Implemented interfaces ignores. (I didn't say it made sense, this is just how the desktop api we're porting behaves.)
         //
-        public static M GetImplicitlyOverriddenBaseClassMember<M>(this M member, MemberPolicies<M> policies) where M : MemberInfo
+        public static M GetImplicitlyOverriddenBaseClassMember<M>(
+            this M member,
+            MemberPolicies<M> policies
+        )
+            where M : MemberInfo
         {
             bool isVirtual;
             bool isNewSlot;
@@ -157,7 +194,7 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             }
             string name = member.Name;
             Type type = member.DeclaringType!;
-            for (;;)
+            for (; ; )
             {
                 Type? baseType = type.BaseType;
                 if (baseType == null)
@@ -172,7 +209,13 @@ namespace System.Reflection.Runtime.BindingFlagSupport
                         continue;
                     }
                     bool isCandidateVirtual;
-                    policies.GetMemberAttributes(member, out _, out _, out isCandidateVirtual, out _);
+                    policies.GetMemberAttributes(
+                        member,
+                        out _,
+                        out _,
+                        out isCandidateVirtual,
+                        out _
+                    );
                     if (!isCandidateVirtual)
                     {
                         continue;

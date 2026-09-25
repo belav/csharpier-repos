@@ -42,7 +42,10 @@ namespace System.Threading
     {
         #region Shared TimerQueue instances
         /// <summary>Mapping from a tick count to a time to use when debugging to translate tick count values.</summary>
-        internal static readonly (long TickCount, DateTime Time) s_tickCountToTimeMap = (TickCount64, DateTime.UtcNow);
+        internal static readonly (long TickCount, DateTime Time) s_tickCountToTimeMap = (
+            TickCount64,
+            DateTime.UtcNow
+        );
 
         public static TimerQueue[] Instances { get; } = CreateTimerQueues();
 
@@ -103,7 +106,8 @@ namespace System.Threading
             }
 
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-            public TimerQueueTimer[] Items => new List<TimerQueueTimer>(_queue.GetTimersForDebugger()).ToArray();
+            public TimerQueueTimer[] Items =>
+                new List<TimerQueueTimer>(_queue.GetTimersForDebugger()).ToArray();
         }
 
         #endregion
@@ -200,7 +204,10 @@ namespace System.Threading
                 {
                     while (timer != null)
                     {
-                        Debug.Assert(timer._dueTime != Timeout.UnsignedInfinite, "A timer in the list must have a valid due time.");
+                        Debug.Assert(
+                            timer._dueTime != Timeout.UnsignedInfinite,
+                            "A timer in the list must have a valid due time."
+                        );
 
                         // Save off the next timer to examine, in case our examination of this timer results
                         // in our deleting or moving it; we'll continue after with this saved next timer.
@@ -223,9 +230,10 @@ namespace System.Threading
                                 // avoid spinning without a delay.
                                 timer._startTicks = nowTicks;
                                 long elapsedForNextDueTime = elapsed - timer._dueTime;
-                                timer._dueTime = (elapsedForNextDueTime < timer._period) ?
-                                    timer._period - (uint)elapsedForNextDueTime :
-                                    1;
+                                timer._dueTime =
+                                    (elapsedForNextDueTime < timer._period)
+                                        ? timer._period - (uint)elapsedForNextDueTime
+                                        : 1;
 
                                 // Update the timer if this becomes the next timer to fire.
                                 if (timer._dueTime < nextTimerDuration)
@@ -242,7 +250,8 @@ namespace System.Threading
                                 // updated the due time appropriately so that we won't fire it again (it's also possible
                                 // but rare that we could be moving a timer from the long list to the short list here,
                                 // if the initial due time was set to be long but the timer then had a short period).
-                                bool targetShortList = (nowTicks + timer._dueTime) - _currentAbsoluteThreshold <= 0;
+                                bool targetShortList =
+                                    (nowTicks + timer._dueTime) - _currentAbsoluteThreshold <= 0;
                                 if (timer._short != targetShortList)
                                 {
                                     MoveTimerToCorrectList(timer, targetShortList);
@@ -262,7 +271,10 @@ namespace System.Threading
                             }
                             else
                             {
-                                ThreadPool.UnsafeQueueUserWorkItemInternal(timer, preferLocal: false);
+                                ThreadPool.UnsafeQueueUserWorkItemInternal(
+                                    timer,
+                                    preferLocal: false
+                                );
                             }
                         }
                         else
@@ -370,8 +382,14 @@ namespace System.Threading
 
         public void MoveTimerToCorrectList(TimerQueueTimer timer, bool shortList)
         {
-            Debug.Assert(timer._dueTime != Timeout.UnsignedInfinite, "Expected timer to be on a list.");
-            Debug.Assert(timer._short != shortList, "Unnecessary if timer is already on the right list.");
+            Debug.Assert(
+                timer._dueTime != Timeout.UnsignedInfinite,
+                "Expected timer to be on a list."
+            );
+            Debug.Assert(
+                timer._short != shortList,
+                "Unnecessary if timer is already on the right list."
+            );
 
             // Unlink it from whatever list it's on, change its list association, then re-link it.
             UnlinkTimer(timer);
@@ -485,20 +503,43 @@ namespace System.Threading
         internal bool _everQueued;
         private object? _notifyWhenNoCallbacksRunning; // may be either WaitHandle or Task
 
-        internal TimerQueueTimer(TimerCallback timerCallback, object? state, TimeSpan dueTime, TimeSpan period, bool flowExecutionContext) :
-            this(timerCallback, state, GetMilliseconds(dueTime), GetMilliseconds(period), flowExecutionContext)
-        {
-        }
+        internal TimerQueueTimer(
+            TimerCallback timerCallback,
+            object? state,
+            TimeSpan dueTime,
+            TimeSpan period,
+            bool flowExecutionContext
+        )
+            : this(
+                timerCallback,
+                state,
+                GetMilliseconds(dueTime),
+                GetMilliseconds(period),
+                flowExecutionContext
+            ) { }
 
-        private static uint GetMilliseconds(TimeSpan time, [CallerArgumentExpression(nameof(time))] string? parameter = null)
+        private static uint GetMilliseconds(
+            TimeSpan time,
+            [CallerArgumentExpression(nameof(time))] string? parameter = null
+        )
         {
             long tm = (long)time.TotalMilliseconds;
             ArgumentOutOfRangeException.ThrowIfLessThan(tm, -1, parameter);
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(tm, Timer.MaxSupportedTimeout, parameter);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                tm,
+                Timer.MaxSupportedTimeout,
+                parameter
+            );
             return (uint)tm;
         }
 
-        internal TimerQueueTimer(TimerCallback timerCallback, object? state, uint dueTime, uint period, bool flowExecutionContext)
+        internal TimerQueueTimer(
+            TimerCallback timerCallback,
+            object? state,
+            uint dueTime,
+            uint period,
+            bool flowExecutionContext
+        )
         {
             _timerCallback = timerCallback;
             _state = state;
@@ -508,7 +549,9 @@ namespace System.Threading
             {
                 _executionContext = ExecutionContext.Capture();
             }
-            _associatedTimerQueue = TimerQueue.Instances[(uint)Thread.GetCurrentProcessorId() % TimerQueue.Instances.Length];
+            _associatedTimerQueue = TimerQueue.Instances[
+                (uint)Thread.GetCurrentProcessorId() % TimerQueue.Instances.Length
+            ];
 
             // After the following statement, the timer may fire.  No more manipulation of timer state outside of
             // the lock is permitted beyond this point!
@@ -526,10 +569,25 @@ namespace System.Threading
                     typeName += ".";
                 }
 
-                return
-                    "DueTime = " + (_dueTime == Timeout.UnsignedInfinite ? "(not set)" : TimeSpan.FromMilliseconds(_dueTime)) + ", " +
-                    "Period = " + (_period == Timeout.UnsignedInfinite ? "(not set)" : TimeSpan.FromMilliseconds(_period)) + ", " +
-                    typeName + _timerCallback.Method.Name + "(" + (_state?.ToString() ?? "null") + ")";
+                return "DueTime = "
+                    + (
+                        _dueTime == Timeout.UnsignedInfinite
+                            ? "(not set)"
+                            : TimeSpan.FromMilliseconds(_dueTime)
+                    )
+                    + ", "
+                    + "Period = "
+                    + (
+                        _period == Timeout.UnsignedInfinite
+                            ? "(not set)"
+                            : TimeSpan.FromMilliseconds(_period)
+                    )
+                    + ", "
+                    + typeName
+                    + _timerCallback.Method.Name
+                    + "("
+                    + (_state?.ToString() ?? "null")
+                    + ")";
             }
         }
 
@@ -556,8 +614,20 @@ namespace System.Threading
                 }
                 else
                 {
-                    if (FrameworkEventSource.Log.IsEnabled(EventLevel.Informational, FrameworkEventSource.Keywords.ThreadTransfer))
-                        FrameworkEventSource.Log.ThreadTransferSendObj(this, 1, string.Empty, true, (int)dueTime, (int)period);
+                    if (
+                        FrameworkEventSource.Log.IsEnabled(
+                            EventLevel.Informational,
+                            FrameworkEventSource.Keywords.ThreadTransfer
+                        )
+                    )
+                        FrameworkEventSource.Log.ThreadTransferSendObj(
+                            this,
+                            1,
+                            string.Empty,
+                            true,
+                            (int)dueTime,
+                            (int)period
+                        );
                     success = _associatedTimerQueue.UpdateTimer(this, dueTime, period);
                 }
             }
@@ -627,7 +697,9 @@ namespace System.Threading
                         // returning false if you use it multiple times. Since first calling Timer.Dispose(WaitHandle)
                         // and then calling Timer.DisposeAsync is not something anyone is likely to or should do, we
                         // simplify by just failing in that case.
-                        var e = new InvalidOperationException(SR.InvalidOperation_TimerAlreadyClosed);
+                        var e = new InvalidOperationException(
+                            SR.InvalidOperation_TimerAlreadyClosed
+                        );
                         e.SetCurrentStackTrace();
                         return ValueTask.FromException(e);
                     }
@@ -646,15 +718,19 @@ namespace System.Threading
                 }
 
                 Debug.Assert(
-                    notifyWhenNoCallbacksRunning == null ||
-                    notifyWhenNoCallbacksRunning is Task);
+                    notifyWhenNoCallbacksRunning == null || notifyWhenNoCallbacksRunning is Task
+                );
 
                 // There are callbacks queued or running, so we need to store a Task
                 // that'll be used to signal the caller when all callbacks complete. Do so as long as
                 // there wasn't a previous CloseAsync call that did.
                 if (notifyWhenNoCallbacksRunning == null)
                 {
-                    var t = new Task((object?)null, TaskCreationOptions.RunContinuationsAsynchronously, true);
+                    var t = new Task(
+                        (object?)null,
+                        TaskCreationOptions.RunContinuationsAsynchronously,
+                        true
+                    );
                     _notifyWhenNoCallbacksRunning = t;
                     return new ValueTask(t);
                 }
@@ -686,7 +762,8 @@ namespace System.Threading
             lock (_associatedTimerQueue)
             {
                 _callbacksRunning--;
-                shouldSignal = _canceled && _callbacksRunning == 0 && _notifyWhenNoCallbacksRunning != null;
+                shouldSignal =
+                    _canceled && _callbacksRunning == 0 && _notifyWhenNoCallbacksRunning != null;
             }
 
             if (shouldSignal)
@@ -710,7 +787,12 @@ namespace System.Threading
 
         internal void CallCallback(bool isThreadPool)
         {
-            if (FrameworkEventSource.Log.IsEnabled(EventLevel.Informational, FrameworkEventSource.Keywords.ThreadTransfer))
+            if (
+                FrameworkEventSource.Log.IsEnabled(
+                    EventLevel.Informational,
+                    FrameworkEventSource.Keywords.ThreadTransfer
+                )
+            )
                 FrameworkEventSource.Log.ThreadTransferReceiveObj(this, 1, string.Empty);
 
             // Call directly if EC flow is suppressed
@@ -723,7 +805,12 @@ namespace System.Threading
             {
                 if (isThreadPool)
                 {
-                    ExecutionContext.RunFromThreadPoolDispatchLoop(Thread.CurrentThread, context, s_callCallbackInContext, this);
+                    ExecutionContext.RunFromThreadPoolDispatchLoop(
+                        Thread.CurrentThread,
+                        context,
+                        s_callCallbackInContext,
+                        this
+                    );
                 }
                 else
                 {
@@ -744,6 +831,7 @@ namespace System.Threading
             private readonly TimerQueueTimer _timer;
 
             public TimerDebuggerTypeProxy(Timer timer) => _timer = timer._timer._timer;
+
             public TimerDebuggerTypeProxy(TimerQueueTimer timer) => _timer = timer;
 
             public DateTime? EstimatedNextTimeUtc
@@ -756,17 +844,29 @@ namespace System.Threading
                         // able to translate from tick counts to times.  This is only approximate, for a variety of
                         // reasons (e.g. drift, clock changes, etc.), but when dump debugging we are unable to use
                         // TickCount in a meaningful way, so this at least provides a reasonable approximation.
-                        long msOffset = _timer._startTicks - TimerQueue.s_tickCountToTimeMap.TickCount + _timer._dueTime;
-                        return (TimerQueue.s_tickCountToTimeMap.Time + TimeSpan.FromMilliseconds(msOffset));
+                        long msOffset =
+                            _timer._startTicks
+                            - TimerQueue.s_tickCountToTimeMap.TickCount
+                            + _timer._dueTime;
+                        return (
+                            TimerQueue.s_tickCountToTimeMap.Time
+                            + TimeSpan.FromMilliseconds(msOffset)
+                        );
                     }
 
                     return null;
                 }
             }
 
-            public TimeSpan? DueTime => _timer._dueTime == Timeout.UnsignedInfinite ? null : TimeSpan.FromMilliseconds(_timer._dueTime);
+            public TimeSpan? DueTime =>
+                _timer._dueTime == Timeout.UnsignedInfinite
+                    ? null
+                    : TimeSpan.FromMilliseconds(_timer._dueTime);
 
-            public TimeSpan? Period => _timer._period == Timeout.UnsignedInfinite ? null : TimeSpan.FromMilliseconds(_timer._period);
+            public TimeSpan? Period =>
+                _timer._period == Timeout.UnsignedInfinite
+                    ? null
+                    : TimeSpan.FromMilliseconds(_timer._period);
 
             public TimerCallback Callback => _timer._timerCallback;
 
@@ -825,19 +925,16 @@ namespace System.Threading
 
         internal TimerHolder _timer;
 
-        public Timer(TimerCallback callback,
-                     object? state,
-                     int dueTime,
-                     int period) :
-                     this(callback, state, dueTime, period, flowExecutionContext: true)
-        {
-        }
+        public Timer(TimerCallback callback, object? state, int dueTime, int period)
+            : this(callback, state, dueTime, period, flowExecutionContext: true) { }
 
-        internal Timer(TimerCallback callback,
-                       object? state,
-                       int dueTime,
-                       int period,
-                       bool flowExecutionContext)
+        internal Timer(
+            TimerCallback callback,
+            object? state,
+            int dueTime,
+            int period,
+            bool flowExecutionContext
+        )
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(dueTime, -1);
             ArgumentOutOfRangeException.ThrowIfLessThan(period, -1);
@@ -845,35 +942,34 @@ namespace System.Threading
             TimerSetup(callback, state, (uint)dueTime, (uint)period, flowExecutionContext);
         }
 
-        public Timer(TimerCallback callback,
-                     object? state,
-                     TimeSpan dueTime,
-                     TimeSpan period)
+        public Timer(TimerCallback callback, object? state, TimeSpan dueTime, TimeSpan period)
         {
             long dueTm = (long)dueTime.TotalMilliseconds;
             ArgumentOutOfRangeException.ThrowIfLessThan(dueTm, -1, nameof(dueTime));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(dueTm, MaxSupportedTimeout, nameof(dueTime));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                dueTm,
+                MaxSupportedTimeout,
+                nameof(dueTime)
+            );
 
             long periodTm = (long)period.TotalMilliseconds;
             ArgumentOutOfRangeException.ThrowIfLessThan(periodTm, -1, nameof(period));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(periodTm, MaxSupportedTimeout, nameof(period));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                periodTm,
+                MaxSupportedTimeout,
+                nameof(period)
+            );
 
             TimerSetup(callback, state, (uint)dueTm, (uint)periodTm);
         }
 
         [CLSCompliant(false)]
-        public Timer(TimerCallback callback,
-                     object? state,
-                     uint dueTime,
-                     uint period)
+        public Timer(TimerCallback callback, object? state, uint dueTime, uint period)
         {
             TimerSetup(callback, state, dueTime, period);
         }
 
-        public Timer(TimerCallback callback,
-                     object? state,
-                     long dueTime,
-                     long period)
+        public Timer(TimerCallback callback, object? state, long dueTime, long period)
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(dueTime, -1);
             ArgumentOutOfRangeException.ThrowIfLessThan(period, -1);
@@ -886,23 +982,27 @@ namespace System.Threading
         public Timer(TimerCallback callback)
         {
             const uint DueTime = unchecked((uint)(-1)); // We want timer to be registered, but not activated.  Requires caller to call
-            const uint Period = unchecked((uint)(-1));  // Change after a timer instance is created.  This is to avoid the potential
-                                // for a timer to be fired before the returned value is assigned to the variable,
-                                // potentially causing the callback to reference a bogus value (if passing the timer to the callback).
+            const uint Period = unchecked((uint)(-1)); // Change after a timer instance is created.  This is to avoid the potential
+            // for a timer to be fired before the returned value is assigned to the variable,
+            // potentially causing the callback to reference a bogus value (if passing the timer to the callback).
 
             TimerSetup(callback, this, DueTime, Period);
         }
 
         [MemberNotNull(nameof(_timer))]
-        private void TimerSetup(TimerCallback callback,
-                                object? state,
-                                uint dueTime,
-                                uint period,
-                                bool flowExecutionContext = true)
+        private void TimerSetup(
+            TimerCallback callback,
+            object? state,
+            uint dueTime,
+            uint period,
+            bool flowExecutionContext = true
+        )
         {
             ArgumentNullException.ThrowIfNull(callback);
 
-            _timer = new TimerHolder(new TimerQueueTimer(callback, state, dueTime, period, flowExecutionContext));
+            _timer = new TimerHolder(
+                new TimerQueueTimer(callback, state, dueTime, period, flowExecutionContext)
+            );
         }
 
         public bool Change(int dueTime, int period)

@@ -81,7 +81,6 @@ namespace System
             return formattable.ToString(Globalization.CultureInfo.CurrentCulture);
         }
 
-        public override string ToString() =>
-            ToString(Globalization.CultureInfo.CurrentCulture);
+        public override string ToString() => ToString(Globalization.CultureInfo.CurrentCulture);
     }
 }

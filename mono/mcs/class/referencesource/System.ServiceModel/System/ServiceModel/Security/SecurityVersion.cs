@@ -5,18 +5,17 @@
 namespace System.ServiceModel.Security
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
-    using System.IO;
+    using System.Globalization;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
+    using System.IO;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security.Tokens;
     using System.Threading;
-    using System.Globalization;
-    using System.ServiceModel.Diagnostics;
     using System.Xml;
-
     using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
 
     public abstract class SecurityVersion
@@ -25,7 +24,11 @@ namespace System.ServiceModel.Security
         readonly XmlDictionaryString headerNamespace;
         readonly XmlDictionaryString headerPrefix;
 
-        internal SecurityVersion(XmlDictionaryString headerName, XmlDictionaryString headerNamespace, XmlDictionaryString headerPrefix)
+        internal SecurityVersion(
+            XmlDictionaryString headerName,
+            XmlDictionaryString headerNamespace,
+            XmlDictionaryString headerPrefix
+        )
         {
             this.headerName = headerName;
             this.headerNamespace = headerNamespace;
@@ -47,20 +50,11 @@ namespace System.ServiceModel.Security
             get { return this.headerPrefix; }
         }
 
-        internal abstract XmlDictionaryString FailedAuthenticationFaultCode
-        {
-            get;
-        }
+        internal abstract XmlDictionaryString FailedAuthenticationFaultCode { get; }
 
-        internal abstract XmlDictionaryString InvalidSecurityTokenFaultCode
-        {
-            get;
-        }
+        internal abstract XmlDictionaryString InvalidSecurityTokenFaultCode { get; }
 
-        internal abstract XmlDictionaryString InvalidSecurityFaultCode
-        {
-            get;
-        }
+        internal abstract XmlDictionaryString InvalidSecurityFaultCode { get; }
 
         internal virtual bool SupportsSignatureConfirmation
         {
@@ -82,28 +76,40 @@ namespace System.ServiceModel.Security
             get { return WSSecurity11; }
         }
 
-        internal abstract ReceiveSecurityHeader CreateReceiveSecurityHeader(Message message,
-            string actor, bool mustUnderstand, bool relay,
+        internal abstract ReceiveSecurityHeader CreateReceiveSecurityHeader(
+            Message message,
+            string actor,
+            bool mustUnderstand,
+            bool relay,
             SecurityStandardsManager standardsManager,
             SecurityAlgorithmSuite algorithmSuite,
             MessageDirection direction,
-            int headerIndex);
+            int headerIndex
+        );
 
-        internal abstract SendSecurityHeader CreateSendSecurityHeader(Message message,
-            string actor, bool mustUnderstand, bool relay,
+        internal abstract SendSecurityHeader CreateSendSecurityHeader(
+            Message message,
+            string actor,
+            bool mustUnderstand,
+            bool relay,
             SecurityStandardsManager standardsManager,
             SecurityAlgorithmSuite algorithmSuite,
-            MessageDirection direction);
+            MessageDirection direction
+        );
 
         internal bool DoesMessageContainSecurityHeader(Message message)
         {
-            return message.Headers.FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value) >= 0;
+            return message.Headers.FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value)
+                >= 0;
         }
 
         internal int FindIndexOfSecurityHeader(Message message, string[] actors)
         {
-            return message.Headers.FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value, actors);
-            
+            return message.Headers.FindHeader(
+                this.HeaderName.Value,
+                this.HeaderNamespace.Value,
+                actors
+            );
         }
 
         internal virtual bool IsReaderAtSignatureConfirmation(XmlDictionaryReader reader)
@@ -111,45 +117,74 @@ namespace System.ServiceModel.Security
             return false;
         }
 
-        internal virtual ISignatureValueSecurityElement ReadSignatureConfirmation(XmlDictionaryReader reader)
+        internal virtual ISignatureValueSecurityElement ReadSignatureConfirmation(
+            XmlDictionaryReader reader
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                SR.GetString(SR.SignatureConfirmationNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.SignatureConfirmationNotSupported))
+            );
         }
 
         // The security always look for Empty soap role.  If not found, we will also look for Ultimate actors (next incl).
         // In the future, till we support intermediary scenario, we should refactor this api to do not take actor parameter.
-        internal ReceiveSecurityHeader TryCreateReceiveSecurityHeader(Message message,
+        internal ReceiveSecurityHeader TryCreateReceiveSecurityHeader(
+            Message message,
             string actor,
             SecurityStandardsManager standardsManager,
-            SecurityAlgorithmSuite algorithmSuite, MessageDirection direction)
+            SecurityAlgorithmSuite algorithmSuite,
+            MessageDirection direction
+        )
         {
-            int headerIndex = message.Headers.FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value, actor);
+            int headerIndex = message.Headers.FindHeader(
+                this.HeaderName.Value,
+                this.HeaderNamespace.Value,
+                actor
+            );
             if (headerIndex < 0 && String.IsNullOrEmpty(actor))
             {
-                headerIndex = message.Headers.FindHeader(this.HeaderName.Value, this.HeaderNamespace.Value, message.Version.Envelope.UltimateDestinationActorValues);
+                headerIndex = message.Headers.FindHeader(
+                    this.HeaderName.Value,
+                    this.HeaderNamespace.Value,
+                    message.Version.Envelope.UltimateDestinationActorValues
+                );
             }
-            
+
             if (headerIndex < 0)
             {
                 return null;
             }
             MessageHeaderInfo headerInfo = message.Headers[headerIndex];
-            return CreateReceiveSecurityHeader(message,
-                headerInfo.Actor, headerInfo.MustUnderstand, headerInfo.Relay,
-                standardsManager, algorithmSuite,
-                direction, headerIndex);
+            return CreateReceiveSecurityHeader(
+                message,
+                headerInfo.Actor,
+                headerInfo.MustUnderstand,
+                headerInfo.Relay,
+                standardsManager,
+                algorithmSuite,
+                direction,
+                headerIndex
+            );
         }
 
-        internal virtual void WriteSignatureConfirmation(XmlDictionaryWriter writer, string id, byte[] signatureConfirmation)
+        internal virtual void WriteSignatureConfirmation(
+            XmlDictionaryWriter writer,
+            string id,
+            byte[] signatureConfirmation
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                SR.GetString(SR.SignatureConfirmationNotSupported)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.SignatureConfirmationNotSupported))
+            );
         }
 
         internal void WriteStartHeader(XmlDictionaryWriter writer)
         {
-            writer.WriteStartElement(this.HeaderPrefix.Value, this.HeaderName, this.HeaderNamespace);
+            writer.WriteStartElement(
+                this.HeaderPrefix.Value,
+                this.HeaderName,
+                this.HeaderNamespace
+            );
         }
 
         class SecurityVersion10 : SecurityVersion
@@ -157,9 +192,11 @@ namespace System.ServiceModel.Security
             static readonly SecurityVersion10 instance = new SecurityVersion10();
 
             protected SecurityVersion10()
-                : base(XD.SecurityJan2004Dictionary.Security, XD.SecurityJan2004Dictionary.Namespace, XD.SecurityJan2004Dictionary.Prefix)
-            {
-            }
+                : base(
+                    XD.SecurityJan2004Dictionary.Security,
+                    XD.SecurityJan2004Dictionary.Namespace,
+                    XD.SecurityJan2004Dictionary.Prefix
+                ) { }
 
             public static SecurityVersion10 Instance
             {
@@ -181,27 +218,48 @@ namespace System.ServiceModel.Security
                 get { return XD.SecurityJan2004Dictionary.InvalidSecurityFaultCode; }
             }
 
-            internal override SendSecurityHeader CreateSendSecurityHeader(Message message,
-                string actor, bool mustUnderstand, bool relay,
+            internal override SendSecurityHeader CreateSendSecurityHeader(
+                Message message,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
                 SecurityStandardsManager standardsManager,
                 SecurityAlgorithmSuite algorithmSuite,
-                MessageDirection direction)
+                MessageDirection direction
+            )
             {
-                return new WSSecurityOneDotZeroSendSecurityHeader(message, actor, mustUnderstand, relay, standardsManager, algorithmSuite, direction);
+                return new WSSecurityOneDotZeroSendSecurityHeader(
+                    message,
+                    actor,
+                    mustUnderstand,
+                    relay,
+                    standardsManager,
+                    algorithmSuite,
+                    direction
+                );
             }
 
-            internal override ReceiveSecurityHeader CreateReceiveSecurityHeader(Message message,
-                string actor, bool mustUnderstand, bool relay,
+            internal override ReceiveSecurityHeader CreateReceiveSecurityHeader(
+                Message message,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
                 SecurityStandardsManager standardsManager,
                 SecurityAlgorithmSuite algorithmSuite,
                 MessageDirection direction,
-                int headerIndex)
+                int headerIndex
+            )
             {
                 return new WSSecurityOneDotZeroReceiveSecurityHeader(
                     message,
-                    actor, mustUnderstand, relay,
+                    actor,
+                    mustUnderstand,
+                    relay,
                     standardsManager,
-                    algorithmSuite, headerIndex, direction);
+                    algorithmSuite,
+                    headerIndex,
+                    direction
+                );
             }
 
             public override string ToString()
@@ -215,11 +273,9 @@ namespace System.ServiceModel.Security
             static readonly SecurityVersion11 instance = new SecurityVersion11();
 
             SecurityVersion11()
-                : base()
-            {
-            }
+                : base() { }
 
-            public new static SecurityVersion11 Instance
+            public static new SecurityVersion11 Instance
             {
                 get { return instance; }
             }
@@ -229,39 +285,77 @@ namespace System.ServiceModel.Security
                 get { return true; }
             }
 
-            internal override ReceiveSecurityHeader CreateReceiveSecurityHeader(Message message,
-                string actor, bool mustUnderstand, bool relay,
+            internal override ReceiveSecurityHeader CreateReceiveSecurityHeader(
+                Message message,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
                 SecurityStandardsManager standardsManager,
                 SecurityAlgorithmSuite algorithmSuite,
                 MessageDirection direction,
-                int headerIndex)
+                int headerIndex
+            )
             {
                 return new WSSecurityOneDotOneReceiveSecurityHeader(
                     message,
-                    actor, mustUnderstand, relay,
+                    actor,
+                    mustUnderstand,
+                    relay,
                     standardsManager,
-                    algorithmSuite, headerIndex, direction);
+                    algorithmSuite,
+                    headerIndex,
+                    direction
+                );
             }
 
-            internal override SendSecurityHeader CreateSendSecurityHeader(Message message,
-                string actor, bool mustUnderstand, bool relay,
+            internal override SendSecurityHeader CreateSendSecurityHeader(
+                Message message,
+                string actor,
+                bool mustUnderstand,
+                bool relay,
                 SecurityStandardsManager standardsManager,
-                SecurityAlgorithmSuite algorithmSuite, MessageDirection direction)
+                SecurityAlgorithmSuite algorithmSuite,
+                MessageDirection direction
+            )
             {
-                return new WSSecurityOneDotOneSendSecurityHeader(message, actor, mustUnderstand, relay, standardsManager, algorithmSuite, direction);
+                return new WSSecurityOneDotOneSendSecurityHeader(
+                    message,
+                    actor,
+                    mustUnderstand,
+                    relay,
+                    standardsManager,
+                    algorithmSuite,
+                    direction
+                );
             }
 
             internal override bool IsReaderAtSignatureConfirmation(XmlDictionaryReader reader)
             {
-                return reader.IsStartElement(XD.SecurityXXX2005Dictionary.SignatureConfirmation, XD.SecurityXXX2005Dictionary.Namespace);
+                return reader.IsStartElement(
+                    XD.SecurityXXX2005Dictionary.SignatureConfirmation,
+                    XD.SecurityXXX2005Dictionary.Namespace
+                );
             }
 
-            internal override ISignatureValueSecurityElement ReadSignatureConfirmation(XmlDictionaryReader reader)
+            internal override ISignatureValueSecurityElement ReadSignatureConfirmation(
+                XmlDictionaryReader reader
+            )
             {
-                reader.MoveToStartElement(XD.SecurityXXX2005Dictionary.SignatureConfirmation, XD.SecurityXXX2005Dictionary.Namespace);
+                reader.MoveToStartElement(
+                    XD.SecurityXXX2005Dictionary.SignatureConfirmation,
+                    XD.SecurityXXX2005Dictionary.Namespace
+                );
                 bool isEmptyElement = reader.IsEmptyElement;
-                string id = XmlHelper.GetRequiredNonEmptyAttribute(reader, XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace);
-                byte[] signatureValue = XmlHelper.GetRequiredBase64Attribute(reader, XD.SecurityXXX2005Dictionary.ValueAttribute, null);
+                string id = XmlHelper.GetRequiredNonEmptyAttribute(
+                    reader,
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace
+                );
+                byte[] signatureValue = XmlHelper.GetRequiredBase64Attribute(
+                    reader,
+                    XD.SecurityXXX2005Dictionary.ValueAttribute,
+                    null
+                );
                 reader.ReadStartElement();
                 if (!isEmptyElement)
                 {
@@ -270,7 +364,11 @@ namespace System.ServiceModel.Security
                 return new SignatureConfirmationElement(id, signatureValue, this);
             }
 
-            internal override void WriteSignatureConfirmation(XmlDictionaryWriter writer, string id, byte[] signature)
+            internal override void WriteSignatureConfirmation(
+                XmlDictionaryWriter writer,
+                string id,
+                byte[] signature
+            )
             {
                 if (id == null)
                 {
@@ -280,8 +378,17 @@ namespace System.ServiceModel.Security
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("signature");
                 }
-                writer.WriteStartElement(XD.SecurityXXX2005Dictionary.Prefix.Value, XD.SecurityXXX2005Dictionary.SignatureConfirmation, XD.SecurityXXX2005Dictionary.Namespace);
-                writer.WriteAttributeString(XD.UtilityDictionary.Prefix.Value, XD.UtilityDictionary.IdAttribute, XD.UtilityDictionary.Namespace, id);
+                writer.WriteStartElement(
+                    XD.SecurityXXX2005Dictionary.Prefix.Value,
+                    XD.SecurityXXX2005Dictionary.SignatureConfirmation,
+                    XD.SecurityXXX2005Dictionary.Namespace
+                );
+                writer.WriteAttributeString(
+                    XD.UtilityDictionary.Prefix.Value,
+                    XD.UtilityDictionary.IdAttribute,
+                    XD.UtilityDictionary.Namespace,
+                    id
+                );
                 writer.WriteStartAttribute(XD.SecurityXXX2005Dictionary.ValueAttribute, null);
                 writer.WriteBase64(signature, 0, signature.Length);
                 writer.WriteEndAttribute();

@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,100 +35,123 @@ using System.Runtime.InteropServices;
 
 namespace System.Threading
 {
-	[ComVisible (true)]
-	public sealed class RegisteredWaitHandle
-		: MarshalByRefObject
-	{
-		WaitHandle _waitObject;
-		WaitOrTimerCallback _callback;
-		object _state;
-		WaitHandle _finalEvent;
-		ManualResetEvent _cancelEvent;
-		TimeSpan _timeout;
-		int _callsInProcess;
-		bool _executeOnlyOnce;
-		bool _unregistered;
+    [ComVisible(true)]
+    public sealed class RegisteredWaitHandle : MarshalByRefObject
+    {
+        WaitHandle _waitObject;
+        WaitOrTimerCallback _callback;
+        object _state;
+        WaitHandle _finalEvent;
+        ManualResetEvent _cancelEvent;
+        TimeSpan _timeout;
+        int _callsInProcess;
+        bool _executeOnlyOnce;
+        bool _unregistered;
 
-		internal RegisteredWaitHandle (WaitHandle waitObject, WaitOrTimerCallback callback, object state, TimeSpan timeout, bool executeOnlyOnce)
-		{
-			_waitObject = waitObject;
-			_callback = callback;
-			_state = state;
-			_timeout = timeout;
-			_executeOnlyOnce = executeOnlyOnce;
-			_finalEvent = null;
-			_cancelEvent = new ManualResetEvent (false);
-			_callsInProcess = 0;
-			_unregistered = false;
-		}
+        internal RegisteredWaitHandle(
+            WaitHandle waitObject,
+            WaitOrTimerCallback callback,
+            object state,
+            TimeSpan timeout,
+            bool executeOnlyOnce
+        )
+        {
+            _waitObject = waitObject;
+            _callback = callback;
+            _state = state;
+            _timeout = timeout;
+            _executeOnlyOnce = executeOnlyOnce;
+            _finalEvent = null;
+            _cancelEvent = new ManualResetEvent(false);
+            _callsInProcess = 0;
+            _unregistered = false;
+        }
 
-		internal void Wait (object state)
-		{
-			bool release = false;
-			try {
-				_waitObject.SafeWaitHandle.DangerousAddRef (ref release);
-				try {
-					WaitHandle[] waits = new WaitHandle[] {_waitObject, _cancelEvent};
-					do {
-						int signal = WaitHandle.WaitAny (waits, _timeout, false);
-						if (!_unregistered) {
-							lock (this) {
-								_callsInProcess++;
-							}
-							ThreadPool.QueueUserWorkItem (new WaitCallback (DoCallBack), (signal == WaitHandle.WaitTimeout));
-						}
-					} while (!_unregistered && !_executeOnlyOnce);
-				} catch {
-				}
+        internal void Wait(object state)
+        {
+            bool release = false;
+            try
+            {
+                _waitObject.SafeWaitHandle.DangerousAddRef(ref release);
+                try
+                {
+                    WaitHandle[] waits = new WaitHandle[] { _waitObject, _cancelEvent };
+                    do
+                    {
+                        int signal = WaitHandle.WaitAny(waits, _timeout, false);
+                        if (!_unregistered)
+                        {
+                            lock (this)
+                            {
+                                _callsInProcess++;
+                            }
+                            ThreadPool.QueueUserWorkItem(
+                                new WaitCallback(DoCallBack),
+                                (signal == WaitHandle.WaitTimeout)
+                            );
+                        }
+                    } while (!_unregistered && !_executeOnlyOnce);
+                }
+                catch { }
 
-				lock (this) {
-					_unregistered = true;
-					if (_callsInProcess == 0 && _finalEvent != null) {
-						NativeEventCalls.SetEvent (_finalEvent.SafeWaitHandle);
-						_finalEvent = null;
-					}
-				}
-			} catch (ObjectDisposedException) {
-				// Can happen if we called Unregister before we had time to execute Wait
-				if (release)
-					throw;
-			} finally {
-				if (release)
-					_waitObject.SafeWaitHandle.DangerousRelease ();
-			}
-		}
+                lock (this)
+                {
+                    _unregistered = true;
+                    if (_callsInProcess == 0 && _finalEvent != null)
+                    {
+                        NativeEventCalls.SetEvent(_finalEvent.SafeWaitHandle);
+                        _finalEvent = null;
+                    }
+                }
+            }
+            catch (ObjectDisposedException)
+            {
+                // Can happen if we called Unregister before we had time to execute Wait
+                if (release)
+                    throw;
+            }
+            finally
+            {
+                if (release)
+                    _waitObject.SafeWaitHandle.DangerousRelease();
+            }
+        }
 
-		private void DoCallBack (object timedOut)
-		{
-			try {
-				if (_callback != null)
-					_callback (_state, (bool)timedOut);
-			} finally {
-				lock (this)
-				{
-					_callsInProcess--;
-					if (_unregistered && _callsInProcess == 0 && _finalEvent != null) {
-						NativeEventCalls.SetEvent (_finalEvent.SafeWaitHandle);
-						_finalEvent = null;
-					}
-				}
-			}
-		}
+        private void DoCallBack(object timedOut)
+        {
+            try
+            {
+                if (_callback != null)
+                    _callback(_state, (bool)timedOut);
+            }
+            finally
+            {
+                lock (this)
+                {
+                    _callsInProcess--;
+                    if (_unregistered && _callsInProcess == 0 && _finalEvent != null)
+                    {
+                        NativeEventCalls.SetEvent(_finalEvent.SafeWaitHandle);
+                        _finalEvent = null;
+                    }
+                }
+            }
+        }
 
-		[ComVisible (true)]
-		public bool Unregister(WaitHandle waitObject) 
-		{
-			lock (this) 
-			{
-				if (_unregistered)
-					return false;
+        [ComVisible(true)]
+        public bool Unregister(WaitHandle waitObject)
+        {
+            lock (this)
+            {
+                if (_unregistered)
+                    return false;
 
-				_finalEvent = waitObject;
-				_unregistered = true;
-				_cancelEvent.Set();
+                _finalEvent = waitObject;
+                _unregistered = true;
+                _cancelEvent.Set();
 
-				return true;
-			}
-		}
-	}
+                return true;
+            }
+        }
+    }
 }

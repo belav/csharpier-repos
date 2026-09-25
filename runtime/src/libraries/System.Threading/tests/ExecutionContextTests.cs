@@ -70,31 +70,33 @@ namespace System.Threading.Tests
                 asyncLocal.Value = 1;
 
                 var asyncFlowControl = default(AsyncFlowControl);
-                Action<Action, Action> verifySuppressRestore =
-                    (suppressFlow, restoreFlow) =>
-                    {
-                        VerifyExecutionContextFlow(asyncLocal, 1);
-                        ExecutionContext executionContext2 = ExecutionContext.Capture();
+                Action<Action, Action> verifySuppressRestore = (suppressFlow, restoreFlow) =>
+                {
+                    VerifyExecutionContextFlow(asyncLocal, 1);
+                    ExecutionContext executionContext2 = ExecutionContext.Capture();
 
-                        suppressFlow();
-                        VerifyExecutionContextFlow(asyncLocal, 0);
-                        VerifyExecutionContext(executionContext2, asyncLocal, 1);
-                        executionContext2 = ExecutionContext.Capture();
+                    suppressFlow();
+                    VerifyExecutionContextFlow(asyncLocal, 0);
+                    VerifyExecutionContext(executionContext2, asyncLocal, 1);
+                    executionContext2 = ExecutionContext.Capture();
 
-                        restoreFlow();
-                        VerifyExecutionContextFlow(asyncLocal, 1);
-                        VerifyExecutionContext(executionContext2, asyncLocal, 0);
-                    };
+                    restoreFlow();
+                    VerifyExecutionContextFlow(asyncLocal, 1);
+                    VerifyExecutionContext(executionContext2, asyncLocal, 0);
+                };
 
                 verifySuppressRestore(
                     () => asyncFlowControl = ExecutionContext.SuppressFlow(),
-                    () => asyncFlowControl.Undo());
+                    () => asyncFlowControl.Undo()
+                );
                 verifySuppressRestore(
                     () => asyncFlowControl = ExecutionContext.SuppressFlow(),
-                    () => asyncFlowControl.Dispose());
+                    () => asyncFlowControl.Dispose()
+                );
                 verifySuppressRestore(
                     () => ExecutionContext.SuppressFlow(),
-                    () => ExecutionContext.RestoreFlow());
+                    () => ExecutionContext.RestoreFlow()
+                );
 
                 Assert.False(ExecutionContext.IsFlowSuppressed());
                 Assert.Throws<InvalidOperationException>(() => ExecutionContext.RestoreFlow());
@@ -150,18 +152,22 @@ namespace System.Threading.Tests
                 // flow is suppressed.
                 {
                     ExecutionContext executionContext = null;
-                    Action verifyCannotUndoAsyncFlowControlAfterChangingExecutionContext =
-                        () =>
-                        {
-                            ExecutionContext.Run(
-                                executionContext,
-                                state =>
-                                {
-                                    Assert.Throws<InvalidOperationException>(() => asyncFlowControl.Undo());
-                                    Assert.Throws<InvalidOperationException>(() => asyncFlowControl.Dispose());
-                                },
-                                null);
-                        };
+                    Action verifyCannotUndoAsyncFlowControlAfterChangingExecutionContext = () =>
+                    {
+                        ExecutionContext.Run(
+                            executionContext,
+                            state =>
+                            {
+                                Assert.Throws<InvalidOperationException>(() =>
+                                    asyncFlowControl.Undo()
+                                );
+                                Assert.Throws<InvalidOperationException>(() =>
+                                    asyncFlowControl.Dispose()
+                                );
+                            },
+                            null
+                        );
+                    };
 
                     executionContext = ExecutionContext.Capture();
                     asyncFlowControl = ExecutionContext.SuppressFlow();
@@ -195,7 +201,8 @@ namespace System.Threading.Tests
                         Assert.Equal(1, asyncLocal.Value);
                         VerifyExecutionContextFlow(asyncLocal, 1);
                     },
-                    null);
+                    null
+                );
                 Assert.Equal(1, asyncLocal.Value);
                 VerifyExecutionContextFlow(asyncLocal, 0);
                 ExecutionContext.RestoreFlow();
@@ -212,7 +219,8 @@ namespace System.Threading.Tests
                         Assert.Equal(1, asyncLocal.Value);
                         VerifyExecutionContextFlow(asyncLocal, 1);
                     },
-                    null);
+                    null
+                );
                 Assert.Equal(2, asyncLocal.Value);
                 VerifyExecutionContextFlow(asyncLocal, 0);
                 ExecutionContext.RestoreFlow();
@@ -223,10 +231,16 @@ namespace System.Threading.Tests
         private static void VerifyExecutionContext(
             ExecutionContext executionContext,
             AsyncLocal<int> asyncLocal,
-            int expectedValue)
+            int expectedValue
+        )
         {
             int actualValue = 0;
-            Action run = () => ExecutionContext.Run(executionContext, state => actualValue = asyncLocal.Value, null);
+            Action run = () =>
+                ExecutionContext.Run(
+                    executionContext,
+                    state => actualValue = asyncLocal.Value,
+                    null
+                );
             if (executionContext == null)
             {
                 Assert.Throws<InvalidOperationException>(() => run());
@@ -238,7 +252,10 @@ namespace System.Threading.Tests
             Assert.Equal(expectedValue, actualValue);
         }
 
-        private static void VerifyExecutionContextFlow(AsyncLocal<int> asyncLocal, int expectedValue)
+        private static void VerifyExecutionContextFlow(
+            AsyncLocal<int> asyncLocal,
+            int expectedValue
+        )
         {
             Assert.Equal(expectedValue == 0, ExecutionContext.IsFlowSuppressed());
             if (ExecutionContext.IsFlowSuppressed())
@@ -269,14 +286,17 @@ namespace System.Threading.Tests
         {
             ThreadTestHelpers.RunTestInBackgroundThread(() =>
             {
-                Action<AsyncFlowControl, AsyncFlowControl, bool> verifyEquality =
-                    (afc0, afc1, areExpectedToBeEqual) =>
-                    {
-                        Assert.Equal(areExpectedToBeEqual, afc0.Equals(afc1));
-                        Assert.Equal(areExpectedToBeEqual, afc0.Equals((object)afc1));
-                        Assert.Equal(areExpectedToBeEqual, afc0 == afc1);
-                        Assert.NotEqual(areExpectedToBeEqual, afc0 != afc1);
-                    };
+                Action<AsyncFlowControl, AsyncFlowControl, bool> verifyEquality = (
+                    afc0,
+                    afc1,
+                    areExpectedToBeEqual
+                ) =>
+                {
+                    Assert.Equal(areExpectedToBeEqual, afc0.Equals(afc1));
+                    Assert.Equal(areExpectedToBeEqual, afc0.Equals((object)afc1));
+                    Assert.Equal(areExpectedToBeEqual, afc0 == afc1);
+                    Assert.NotEqual(areExpectedToBeEqual, afc0 != afc1);
+                };
 
                 AsyncFlowControl asyncFlowControl0 = ExecutionContext.SuppressFlow();
                 ExecutionContext.RestoreFlow();
@@ -296,7 +316,9 @@ namespace System.Threading.Tests
                 verifyEquality(asyncFlowControl0, asyncFlowControl1, false);
                 verifyEquality(asyncFlowControl1, asyncFlowControl0, false);
 
-                ThreadTestHelpers.RunTestInBackgroundThread(() => asyncFlowControl1 = ExecutionContext.SuppressFlow());
+                ThreadTestHelpers.RunTestInBackgroundThread(() =>
+                    asyncFlowControl1 = ExecutionContext.SuppressFlow()
+                );
                 verifyEquality(asyncFlowControl0, asyncFlowControl1, false);
                 verifyEquality(asyncFlowControl1, asyncFlowControl0, false);
             });

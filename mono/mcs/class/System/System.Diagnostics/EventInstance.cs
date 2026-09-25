@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,53 +31,57 @@ using System.ComponentModel;
 
 namespace System.Diagnostics
 {
-	public class EventInstance
-	{
-		int _categoryId;
-		EventLogEntryType _entryType;
-		long _instanceId;
+    public class EventInstance
+    {
+        int _categoryId;
+        EventLogEntryType _entryType;
+        long _instanceId;
 
-		public EventInstance (long instanceId, int categoryId)
-			: this (instanceId, categoryId, EventLogEntryType.Information)
-		{
-		}
+        public EventInstance(long instanceId, int categoryId)
+            : this(instanceId, categoryId, EventLogEntryType.Information) { }
 
-		public EventInstance (long instanceId, int categoryId, EventLogEntryType entryType)
-		{
-			InstanceId = instanceId;
-			CategoryId = categoryId;
-			EntryType = entryType;
-		}
+        public EventInstance(long instanceId, int categoryId, EventLogEntryType entryType)
+        {
+            InstanceId = instanceId;
+            CategoryId = categoryId;
+            EntryType = entryType;
+        }
 
-		public int CategoryId
-		{
-			get { return _categoryId; }
-			set {
-				if (value < 0 || value > ushort.MaxValue)
-					throw new ArgumentOutOfRangeException ("value");
-				_categoryId = value; 
-			}
-		}
+        public int CategoryId
+        {
+            get { return _categoryId; }
+            set
+            {
+                if (value < 0 || value > ushort.MaxValue)
+                    throw new ArgumentOutOfRangeException("value");
+                _categoryId = value;
+            }
+        }
 
-		public EventLogEntryType EntryType
-		{
-			get { return _entryType; }
-			set {
-				if (!Enum.IsDefined (typeof (EventLogEntryType), value))
-					throw new InvalidEnumArgumentException("value", (int) value,
-						typeof(EventLogEntryType));
-				_entryType = value; 
-			}
-		}
+        public EventLogEntryType EntryType
+        {
+            get { return _entryType; }
+            set
+            {
+                if (!Enum.IsDefined(typeof(EventLogEntryType), value))
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(EventLogEntryType)
+                    );
+                _entryType = value;
+            }
+        }
 
-		public long InstanceId
-		{
-			get { return _instanceId; }
-			set {
-				if (value < 0 || value > uint.MaxValue)
-					throw new ArgumentOutOfRangeException ("value");
-				_instanceId = value;
-			}
-		}
-	}
+        public long InstanceId
+        {
+            get { return _instanceId; }
+            set
+            {
+                if (value < 0 || value > uint.MaxValue)
+                    throw new ArgumentOutOfRangeException("value");
+                _instanceId = value;
+            }
+        }
+    }
 }

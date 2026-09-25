@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,27 +27,19 @@ using System.Runtime.Serialization;
 
 namespace System.Xaml
 {
-	[Serializable]
-	public class XamlObjectWriterException : XamlException
-	{
-		public XamlObjectWriterException ()
-			: this ("XAML object writer error")
-		{
-		}
+    [Serializable]
+    public class XamlObjectWriterException : XamlException
+    {
+        public XamlObjectWriterException()
+            : this("XAML object writer error") { }
 
-		public XamlObjectWriterException (string message)
-			: this (message, null)
-		{
-		}
+        public XamlObjectWriterException(string message)
+            : this(message, null) { }
 
-		public XamlObjectWriterException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
+        public XamlObjectWriterException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		protected XamlObjectWriterException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        protected XamlObjectWriterException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+    }
 }

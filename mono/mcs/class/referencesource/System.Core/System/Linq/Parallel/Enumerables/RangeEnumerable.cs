@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -21,7 +21,6 @@ namespace System.Linq.Parallel
     /// </summary>
     internal class RangeEnumerable : ParallelQuery<int>, IParallelPartitionable<int>
     {
-
         private int m_from; // Lowest index to include.
         private int m_count; // Number of indices to include.
 
@@ -30,7 +29,7 @@ namespace System.Linq.Parallel
         //
 
         internal RangeEnumerable(int from, int count)
-            :base(QuerySettings.Empty)
+            : base(QuerySettings.Empty)
         {
             // Transform the from and to indices into low and highs.
             m_from = from;
@@ -49,14 +48,13 @@ namespace System.Linq.Parallel
 
             // Create individual partitions, carefully avoiding overflow
             int doneCount = 0;
-            QueryOperatorEnumerator<int, int>[] partitions = new QueryOperatorEnumerator<int, int>[partitionCount];
+            QueryOperatorEnumerator<int, int>[] partitions = new QueryOperatorEnumerator<int, int>[
+                partitionCount
+            ];
             for (int i = 0; i < partitionCount; i++)
             {
                 int partitionSize = (i < biggerPartitionCount) ? stride + 1 : stride;
-                partitions[i] = new RangeEnumerator(
-                    m_from + doneCount, 
-                    partitionSize, 
-                    doneCount);
+                partitions[i] = new RangeEnumerator(m_from + doneCount, partitionSize, doneCount);
                 doneCount += partitionSize;
             }
 
@@ -78,12 +76,11 @@ namespace System.Linq.Parallel
 
         class RangeEnumerator : QueryOperatorEnumerator<int, int>
         {
-
             private readonly int m_from; // The initial value.
             private readonly int m_count; // How many values to yield.
             private readonly int m_initialIndex; // The ordinal index of the first value in the range.
             private Shared<int> m_currentCount; // The 0-based index of the current value. [allocate in moveNext to avoid false-sharing]
-            
+
             //-----------------------------------------------------------------------------------
             // Creates a new enumerator.
             //
@@ -102,7 +99,7 @@ namespace System.Linq.Parallel
 
             internal override bool MoveNext(ref int currentElement, ref int currentKey)
             {
-                if( m_currentCount == null)
+                if (m_currentCount == null)
                     m_currentCount = new Shared<int>(-1);
 
                 // Calculate the next index and ensure it falls within our range.

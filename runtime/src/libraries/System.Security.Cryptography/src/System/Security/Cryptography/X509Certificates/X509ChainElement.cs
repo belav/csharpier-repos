@@ -13,7 +13,11 @@ namespace System.Security.Cryptography.X509Certificates
 {
     public class X509ChainElement
     {
-        internal X509ChainElement(X509Certificate2 certificate, X509ChainStatus[] chainElementStatus, string information)
+        internal X509ChainElement(
+            X509Certificate2 certificate,
+            X509ChainStatus[] chainElementStatus,
+            string information
+        )
         {
             Certificate = certificate;
             ChainElementStatus = chainElementStatus;

@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Remote
     #region FindReferences
 
     [DataContract]
-    internal sealed class SerializableSymbolAndProjectId(string symbolKeyData, ProjectId projectId) : IEquatable<SerializableSymbolAndProjectId>
+    internal sealed class SerializableSymbolAndProjectId(string symbolKeyData, ProjectId projectId)
+        : IEquatable<SerializableSymbolAndProjectId>
     {
         [DataMember(Order = 0)]
         public readonly string SymbolKeyData = symbolKeyData;
@@ -29,8 +30,7 @@ namespace Microsoft.CodeAnalysis.Remote
         [DataMember(Order = 1)]
         public readonly ProjectId ProjectId = projectId;
 
-        public override bool Equals(object? obj)
-            => Equals(obj as SerializableSymbolAndProjectId);
+        public override bool Equals(object? obj) => Equals(obj as SerializableSymbolAndProjectId);
 
         public bool Equals(SerializableSymbolAndProjectId? other)
         {
@@ -40,16 +40,18 @@ namespace Microsoft.CodeAnalysis.Remote
             if (this == other)
                 return true;
 
-            return this.ProjectId == other?.ProjectId &&
-                   this.SymbolKeyData == other?.SymbolKeyData;
+            return this.ProjectId == other?.ProjectId && this.SymbolKeyData == other?.SymbolKeyData;
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(this.SymbolKeyData, this.ProjectId.GetHashCode());
+        public override int GetHashCode() =>
+            Hash.Combine(this.SymbolKeyData, this.ProjectId.GetHashCode());
 
         [return: NotNullIfNotNull(nameof(alias))]
         public static SerializableSymbolAndProjectId? Dehydrate(
-            IAliasSymbol? alias, Document document, CancellationToken cancellationToken)
+            IAliasSymbol? alias,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return alias == null
                 ? null
@@ -57,20 +59,32 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public static SerializableSymbolAndProjectId Dehydrate(
-            Solution solution, ISymbol symbol, CancellationToken cancellationToken)
+            Solution solution,
+            ISymbol symbol,
+            CancellationToken cancellationToken
+        )
         {
             var project = solution.GetOriginatingProject(symbol);
-            Contract.ThrowIfNull(project, WorkspacesResources.Symbols_project_could_not_be_found_in_the_provided_solution);
+            Contract.ThrowIfNull(
+                project,
+                WorkspacesResources.Symbols_project_could_not_be_found_in_the_provided_solution
+            );
 
             return Create(symbol, project, cancellationToken);
         }
 
-        public static SerializableSymbolAndProjectId Create(ISymbol symbol, Project project, CancellationToken cancellationToken)
-            => new(symbol.GetSymbolKey(cancellationToken).ToString(), project.Id);
+        public static SerializableSymbolAndProjectId Create(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        ) => new(symbol.GetSymbolKey(cancellationToken).ToString(), project.Id);
 
         public static bool TryCreate(
-            ISymbol symbol, Solution solution, CancellationToken cancellationToken,
-            [NotNullWhen(true)] out SerializableSymbolAndProjectId? result)
+            ISymbol symbol,
+            Solution solution,
+            CancellationToken cancellationToken,
+            [NotNullWhen(true)] out SerializableSymbolAndProjectId? result
+        )
         {
             var project = solution.GetOriginatingProject(symbol);
             if (project == null)
@@ -83,8 +97,11 @@ namespace Microsoft.CodeAnalysis.Remote
         }
 
         public static bool TryCreate(
-            ISymbol symbol, Project project, CancellationToken cancellationToken,
-            [NotNullWhen(true)] out SerializableSymbolAndProjectId? result)
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken,
+            [NotNullWhen(true)] out SerializableSymbolAndProjectId? result
+        )
         {
             if (!SymbolKey.CanCreate(symbol, cancellationToken))
             {
@@ -92,28 +109,37 @@ namespace Microsoft.CodeAnalysis.Remote
                 return false;
             }
 
-            result = new SerializableSymbolAndProjectId(SymbolKey.CreateString(symbol, cancellationToken), project.Id);
+            result = new SerializableSymbolAndProjectId(
+                SymbolKey.CreateString(symbol, cancellationToken),
+                project.Id
+            );
             return true;
         }
 
         public async ValueTask<ISymbol?> TryRehydrateAsync(
-            Solution solution, CancellationToken cancellationToken)
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             var projectId = ProjectId;
             var project = solution.GetRequiredProject(projectId);
-            var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // The server and client should both be talking about the same compilation.  As such
             // locations in symbols are save to resolve as we rehydrate the SymbolKey.
-            var symbol = SymbolKey.ResolveString(
-                SymbolKeyData, compilation, out var failureReason, cancellationToken).GetAnySymbol();
+            var symbol = SymbolKey
+                .ResolveString(SymbolKeyData, compilation, out var failureReason, cancellationToken)
+                .GetAnySymbol();
 
             if (symbol == null)
             {
                 try
                 {
                     throw new InvalidOperationException(
-                        $"We should always be able to resolve a symbol back on the host side:\r\n'{project.Name}-{project.Language}'\r\n'{SymbolKeyData}'\r\n'{failureReason}'");
+                        $"We should always be able to resolve a symbol back on the host side:\r\n'{project.Name}-{project.Language}'\r\n'{SymbolKeyData}'\r\n'{failureReason}'"
+                    );
                 }
                 catch (Exception ex) when (FatalError.ReportAndCatch(ex))
                 {
@@ -133,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Remote
         bool isImplicit,
         SymbolUsageInfo symbolUsageInfo,
         ImmutableDictionary<string, string> additionalProperties,
-        CandidateReason candidateReason)
+        CandidateReason candidateReason
+    )
     {
         [DataMember(Order = 0)]
         public readonly DocumentId Document = document;
@@ -151,30 +178,49 @@ namespace Microsoft.CodeAnalysis.Remote
         public readonly SymbolUsageInfo SymbolUsageInfo = symbolUsageInfo;
 
         [DataMember(Order = 5)]
-        public readonly ImmutableDictionary<string, string> AdditionalProperties = additionalProperties;
+        public readonly ImmutableDictionary<string, string> AdditionalProperties =
+            additionalProperties;
 
         [DataMember(Order = 6)]
         public readonly CandidateReason CandidateReason = candidateReason;
 
         public static SerializableReferenceLocation Dehydrate(
-            ReferenceLocation referenceLocation, CancellationToken cancellationToken)
+            ReferenceLocation referenceLocation,
+            CancellationToken cancellationToken
+        )
         {
             return new SerializableReferenceLocation(
                 referenceLocation.Document.Id,
-                SerializableSymbolAndProjectId.Dehydrate(referenceLocation.Alias, referenceLocation.Document, cancellationToken),
+                SerializableSymbolAndProjectId.Dehydrate(
+                    referenceLocation.Alias,
+                    referenceLocation.Document,
+                    cancellationToken
+                ),
                 referenceLocation.Location.SourceSpan,
                 referenceLocation.IsImplicit,
                 referenceLocation.SymbolUsageInfo,
                 referenceLocation.AdditionalProperties,
-                referenceLocation.CandidateReason);
+                referenceLocation.CandidateReason
+            );
         }
 
         public async ValueTask<ReferenceLocation> RehydrateAsync(
-            Solution solution, CancellationToken cancellationToken)
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
-            var document = await solution.GetRequiredDocumentAsync(this.Document, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var aliasSymbol = await RehydrateAliasAsync(solution, cancellationToken).ConfigureAwait(false);
+            var document = await solution
+                .GetRequiredDocumentAsync(
+                    this.Document,
+                    includeSourceGenerated: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var aliasSymbol = await RehydrateAliasAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
             var additionalProperties = this.AdditionalProperties;
             return new ReferenceLocation(
                 document,
@@ -182,31 +228,39 @@ namespace Microsoft.CodeAnalysis.Remote
                 CodeAnalysis.Location.Create(syntaxTree, Location),
                 isImplicit: IsImplicit,
                 symbolUsageInfo: SymbolUsageInfo,
-                additionalProperties: additionalProperties ?? ImmutableDictionary<string, string>.Empty,
-                candidateReason: CandidateReason);
+                additionalProperties: additionalProperties
+                    ?? ImmutableDictionary<string, string>.Empty,
+                candidateReason: CandidateReason
+            );
         }
 
         private async Task<IAliasSymbol?> RehydrateAliasAsync(
-            Solution solution, CancellationToken cancellationToken)
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             if (Alias == null)
                 return null;
 
-            var symbol = await Alias.TryRehydrateAsync(solution, cancellationToken).ConfigureAwait(false);
+            var symbol = await Alias
+                .TryRehydrateAsync(solution, cancellationToken)
+                .ConfigureAwait(false);
             return symbol as IAliasSymbol;
         }
     }
 
     [DataContract]
-    internal class SerializableSymbolGroup(HashSet<SerializableSymbolAndProjectId> symbols) : IEquatable<SerializableSymbolGroup>
+    internal class SerializableSymbolGroup(HashSet<SerializableSymbolAndProjectId> symbols)
+        : IEquatable<SerializableSymbolGroup>
     {
         [DataMember(Order = 0)]
-        public readonly HashSet<SerializableSymbolAndProjectId> Symbols = new HashSet<SerializableSymbolAndProjectId>(symbols);
+        public readonly HashSet<SerializableSymbolAndProjectId> Symbols =
+            new HashSet<SerializableSymbolAndProjectId>(symbols);
 
         private int _hashCode;
 
-        public override bool Equals(object? obj)
-            => obj is SerializableSymbolGroup group && Equals(group);
+        public override bool Equals(object? obj) =>
+            obj is SerializableSymbolGroup group && Equals(group);
 
         public bool Equals(SerializableSymbolGroup? other)
         {
@@ -232,10 +286,19 @@ namespace Microsoft.CodeAnalysis.Remote
             return _hashCode;
         }
 
-        public static SerializableSymbolGroup Dehydrate(Solution solution, SymbolGroup group, CancellationToken cancellationToken)
+        public static SerializableSymbolGroup Dehydrate(
+            Solution solution,
+            SymbolGroup group,
+            CancellationToken cancellationToken
+        )
         {
-            return new SerializableSymbolGroup(new HashSet<SerializableSymbolAndProjectId>(
-                group.Symbols.Select(s => SerializableSymbolAndProjectId.Dehydrate(solution, s, cancellationToken))));
+            return new SerializableSymbolGroup(
+                new HashSet<SerializableSymbolAndProjectId>(
+                    group.Symbols.Select(s =>
+                        SerializableSymbolAndProjectId.Dehydrate(solution, s, cancellationToken)
+                    )
+                )
+            );
         }
     }
 

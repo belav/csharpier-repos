@@ -73,7 +73,14 @@ namespace System.Reflection.Internal.Tests
             var array = new byte[] { 1, 2, 3, 4 };
             using (var stream = new MemoryStream(array))
             {
-                using (var provider = new StreamMemoryBlockProvider(stream, 0, array.Length, leaveOpen: true))
+                using (
+                    var provider = new StreamMemoryBlockProvider(
+                        stream,
+                        0,
+                        array.Length,
+                        leaveOpen: true
+                    )
+                )
                 {
                     using (var block = provider.GetMemoryBlock())
                     {
@@ -98,7 +105,14 @@ namespace System.Reflection.Internal.Tests
                     Assert.Equal(3, stream.Position);
                 }
 
-                using (var provider = new StreamMemoryBlockProvider(stream, 0, array.Length, leaveOpen: false))
+                using (
+                    var provider = new StreamMemoryBlockProvider(
+                        stream,
+                        0,
+                        array.Length,
+                        leaveOpen: false
+                    )
+                )
                 {
                     using (var block = provider.GetMemoryBlock())
                     {
@@ -117,7 +131,12 @@ namespace System.Reflection.Internal.Tests
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34493", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34493",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void FileStream()
         {
             string filePath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
@@ -133,9 +152,25 @@ namespace System.Reflection.Internal.Tests
 
                 foreach (bool useAsync in new[] { true, false })
                 {
-                    using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, useAsync))
+                    using (
+                        var stream = new FileStream(
+                            filePath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read,
+                            4096,
+                            useAsync
+                        )
+                    )
                     {
-                        using (var provider = new StreamMemoryBlockProvider(stream, imageStart: 0, imageSize: array.Length, leaveOpen: false))
+                        using (
+                            var provider = new StreamMemoryBlockProvider(
+                                stream,
+                                imageStart: 0,
+                                imageSize: array.Length,
+                                leaveOpen: false
+                            )
+                        )
                         {
                             // large:
                             using (var block = provider.GetMemoryBlock())
@@ -153,7 +188,10 @@ namespace System.Reflection.Internal.Tests
                             {
                                 Assert.IsType<NativeHeapMemoryBlock>(block);
                                 Assert.Equal(2, block.Size);
-                                Assert.Equal(new byte[] { 0x12, 0x12 }, block.GetContentUnchecked(0, block.Size));
+                                Assert.Equal(
+                                    new byte[] { 0x12, 0x12 },
+                                    block.GetContentUnchecked(0, block.Size)
+                                );
                             }
 
                             Assert.Equal(3, stream.Position);
@@ -173,7 +211,8 @@ namespace System.Reflection.Internal.Tests
         {
             private int _i;
 
-            public TestSafeBuffer() : base(true)
+            public TestSafeBuffer()
+                : base(true)
             {
                 Initialize(10);
             }
@@ -188,6 +227,7 @@ namespace System.Reflection.Internal.Tests
         private class TestOnceDisposable : IDisposable
         {
             private int _i;
+
             public void Dispose() => Assert.Equal(1, Interlocked.Increment(ref _i));
         }
 
@@ -205,7 +245,12 @@ namespace System.Reflection.Internal.Tests
 
             for (int i = 0; i < memoryMappedBlocks.Length; i++)
             {
-                memoryMappedBlocks[i] = new MemoryMappedFileBlock(new TestOnceDisposable(), new TestSafeBuffer(), offset: 0, size: 1);
+                memoryMappedBlocks[i] = new MemoryMappedFileBlock(
+                    new TestOnceDisposable(),
+                    new TestSafeBuffer(),
+                    offset: 0,
+                    size: 1
+                );
             }
 
             for (int i = 0; i < memoryMappedBlocks.Length; i++)

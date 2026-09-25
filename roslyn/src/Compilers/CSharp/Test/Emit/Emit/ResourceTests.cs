@@ -7,6 +7,7 @@
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,7 +18,6 @@ using Microsoft.CodeAnalysis.Emit;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Globalization;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
 {
@@ -25,13 +25,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
     {
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr LoadLibraryEx(string lpFileName, IntPtr hFile, uint dwFlags);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool FreeLibrary([In] IntPtr hFile);
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes
+        )]
         public void DefaultVersionResource()
         {
-            string source = @"
+            string source =
+                @"
 public class Maine
 {
     public static void Main()
@@ -39,12 +44,19 @@ public class Maine
     }
 }
 ";
-            var c1 = CreateCompilation(source, assemblyName: "Win32VerNoAttrs", options: TestOptions.ReleaseExe);
+            var c1 = CreateCompilation(
+                source,
+                assemblyName: "Win32VerNoAttrs",
+                options: TestOptions.ReleaseExe
+            );
             var exe = Temp.CreateFile();
 
             using (FileStream output = exe.Open())
             {
-                c1.Emit(output, win32Resources: c1.CreateDefaultWin32Resources(true, false, null, null));
+                c1.Emit(
+                    output,
+                    win32Resources: c1.CreateDefaultWin32Resources(true, false, null, null)
+                );
             }
 
             c1 = null;
@@ -79,7 +91,7 @@ public class Maine
             }
 
             string expected =
-@"<?xml version=""1.0"" encoding=""utf-16""?>
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <VersionResource Size=""612"">
   <VS_FIXEDFILEINFO FileVersionMS=""00000000"" FileVersionLS=""00000000"" ProductVersionMS=""00000000"" ProductVersionLS=""00000000"" />
   <KeyValuePair Key=""FileDescription"" Value="" "" />
@@ -93,7 +105,8 @@ public class Maine
 
             Assert.Equal(expected, versionData);
 
-            expected = @"<?xml version=""1.0"" encoding=""utf-16""?>
+            expected =
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <ManifestResource Size=""490"">
   <Contents><![CDATA[<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
 
@@ -114,22 +127,30 @@ public class Maine
             //look at the same data through the FileVersion API.
             //If the codepage and resource language information is not
             //written correctly into the internal resource directory of
-            //the PE, then GetVersionInfo will fail to find the FileVersionInfo. 
+            //the PE, then GetVersionInfo will fail to find the FileVersionInfo.
             //Once upon a time in Roslyn, the codepage and lang info was not written correctly.
             var fileVer = FileVersionInfo.GetVersionInfo(exe.Path);
             Assert.Equal(" ", fileVer.LegalCopyright);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes
+        )]
         public void ResourcesInCoff()
         {
             //this is to test that resources coming from a COFF can be added to a binary.
-            string source = @"
+            string source =
+                @"
 class C
 {
 }
 ";
-            var c1 = CreateCompilation(source, assemblyName: "Win32WithCoff", options: TestOptions.ReleaseDll);
+            var c1 = CreateCompilation(
+                source,
+                assemblyName: "Win32WithCoff",
+                options: TestOptions.ReleaseDll
+            );
             var exe = Temp.CreateFile();
 
             using (FileStream output = exe.Open())
@@ -178,7 +199,7 @@ class C
             }
 
             string expected =
-@"<?xml version=""1.0"" encoding=""utf-16""?>
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <VersionResource Size=""1104"">
   <VS_FIXEDFILEINFO FileVersionMS=""000b0000"" FileVersionLS=""eacc0000"" ProductVersionMS=""000b0000"" ProductVersionLS=""eacc0000"" />
   <KeyValuePair Key=""CompanyName"" Value=""Microsoft Corporation"" />
@@ -196,7 +217,7 @@ class C
             //look at the same data through the FileVersion API.
             //If the codepage and resource language information is not
             //written correctly into the internal resource directory of
-            //the PE, then GetVersionInfo will fail to find the FileVersionInfo. 
+            //the PE, then GetVersionInfo will fail to find the FileVersionInfo.
             //Once upon a time in Roslyn, the codepage and lang info was not written correctly.
             var fileVer = FileVersionInfo.GetVersionInfo(exe.Path);
             Assert.Equal("Microsoft Corporation", fileVer.CompanyName);
@@ -207,26 +228,42 @@ class C
         {
             var c1 = CreateCompilation("");
 
-            var result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            var result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
-                    new ResourceDescription("r2", "file", () => { throw new Exception("bad stuff"); }, false)
-                });
+                    new ResourceDescription(
+                        "r2",
+                        "file",
+                        () =>
+                        {
+                            throw new Exception("bad stuff");
+                        },
+                        false
+                    ),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS1566: Error reading resource 'file' -- 'bad stuff'
                 Diagnostic(ErrorCode.ERR_CantReadResource).WithArguments("file", "bad stuff")
             );
 
-            result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
-                    new ResourceDescription("r2", "file", () => null, false)
-                });
+                    new ResourceDescription("r2", "file", () => null, false),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS1566: Error reading resource 'file' -- 'Resource data provider should return non-null stream'
-                Diagnostic(ErrorCode.ERR_CantReadResource).WithArguments("file", CodeAnalysisResources.ResourceDataProviderShouldReturnNonNullStream)
+                Diagnostic(ErrorCode.ERR_CantReadResource)
+                    .WithArguments(
+                        "file",
+                        CodeAnalysisResources.ResourceDataProviderShouldReturnNonNullStream
+                    )
             );
         }
 
@@ -237,12 +274,14 @@ class C
             var c1 = CreateCompilation("");
             Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
-            var result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            var result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
-                    new ResourceDescription("A", "y.goo", dataProvider, true)
-                });
+                    new ResourceDescription("A", "y.goo", dataProvider, true),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS1508: Resource identifier 'A' has already been used in this assembly
@@ -257,12 +296,21 @@ class C
             var c1 = CreateCompilation("");
             Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
-            var result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            var result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", dataProvider, true),
-                    new ResourceDescription("A", null, dataProvider, true, isEmbedded: true, checkArgs: true)
-                });
+                    new ResourceDescription(
+                        "A",
+                        null,
+                        dataProvider,
+                        true,
+                        isEmbedded: true,
+                        checkArgs: true
+                    ),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS1508: Resource identifier 'A' has already been used in this assembly
@@ -270,12 +318,28 @@ class C
             );
 
             // file name ignored for embedded manifest resources
-            result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
-                    new ResourceDescription("A", "x.goo", dataProvider, true, isEmbedded: true, checkArgs: true),
-                    new ResourceDescription("A", "x.goo", dataProvider, true, isEmbedded: false, checkArgs: true)
-                });
+                    new ResourceDescription(
+                        "A",
+                        "x.goo",
+                        dataProvider,
+                        true,
+                        isEmbedded: true,
+                        checkArgs: true
+                    ),
+                    new ResourceDescription(
+                        "A",
+                        "x.goo",
+                        dataProvider,
+                        true,
+                        isEmbedded: false,
+                        checkArgs: true
+                    ),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS1508: Resource identifier 'A' has already been used in this assembly
@@ -287,15 +351,21 @@ class C
         [Fact]
         public void CS7041_DuplicateManifestResourceFileName()
         {
-            var c1 = CSharpCompilation.Create("goo", references: new[] { MscorlibRef }, options: TestOptions.ReleaseDll);
+            var c1 = CSharpCompilation.Create(
+                "goo",
+                references: new[] { MscorlibRef },
+                options: TestOptions.ReleaseDll
+            );
             Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
-            var result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            var result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
-                    new ResourceDescription("B", "x.goo", dataProvider, true)
-                });
+                    new ResourceDescription("B", "x.goo", dataProvider, true),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
@@ -310,39 +380,69 @@ class C
             var c1 = CreateCompilation("");
             Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
-            var result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            var result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", dataProvider, true),
-                    new ResourceDescription("B", null, dataProvider, true, isEmbedded: true, checkArgs: true)
-                });
+                    new ResourceDescription(
+                        "B",
+                        null,
+                        dataProvider,
+                        true,
+                        isEmbedded: true,
+                        checkArgs: true
+                    ),
+                }
+            );
 
             result.Diagnostics.Verify();
 
             // file name ignored for embedded manifest resources
-            result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
-                    new ResourceDescription("A", "x.goo", dataProvider, true, isEmbedded: true, checkArgs: true),
-                    new ResourceDescription("B", "x.goo", dataProvider, true, isEmbedded: false, checkArgs: true)
-                });
+                    new ResourceDescription(
+                        "A",
+                        "x.goo",
+                        dataProvider,
+                        true,
+                        isEmbedded: true,
+                        checkArgs: true
+                    ),
+                    new ResourceDescription(
+                        "B",
+                        "x.goo",
+                        dataProvider,
+                        true,
+                        isEmbedded: false,
+                        checkArgs: true
+                    ),
+                }
+            );
 
             result.Diagnostics.Verify();
         }
 
-        [WorkItem(543501, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543501"), WorkItem(546297, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546297")]
+        [
+            WorkItem(543501, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543501"),
+            WorkItem(546297, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546297")
+        ]
         [Fact]
         public void CS1508_CS7041_DuplicateManifestResourceDiagnostics()
         {
             var c1 = CreateCompilation("");
             Func<Stream> dataProvider = () => new MemoryStream(new byte[] { });
 
-            var result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            var result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
-                    new ResourceDescription("A", "x.goo", dataProvider, true)
-                });
+                    new ResourceDescription("A", "x.goo", dataProvider, true),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS1508: Resource identifier 'A' has already been used in this assembly
@@ -351,13 +451,15 @@ class C
                 Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("x.goo")
             );
 
-            result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", "x.goo", dataProvider, true),
                     new ResourceDescription("B", "x.goo", dataProvider, true),
-                    new ResourceDescription("B", "y.goo", dataProvider, true)
-                });
+                    new ResourceDescription("B", "y.goo", dataProvider, true),
+                }
+            );
 
             result.Diagnostics.Verify(
                 // error CS7041: Each linked resource and module must have a unique filename. Filename 'x.goo' is specified more than once in this assembly
@@ -366,11 +468,13 @@ class C
                 Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("B")
             );
 
-            result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", "goo.dll", dataProvider, true),
-                });
+                }
+            );
 
             //make sure there's no problem when the name of the primary module conflicts with a file name of an added resource.
             result.Diagnostics.Verify();
@@ -379,16 +483,19 @@ class C
 
             c1 = CreateCompilation("", references: new[] { netModule1 });
 
-            result = c1.Emit(new MemoryStream(), manifestResources:
-                new[]
+            result = c1.Emit(
+                new MemoryStream(),
+                manifestResources: new[]
                 {
                     new ResourceDescription("A", "netmodule1.netmodule", dataProvider, true),
-                });
+                }
+            );
 
             // Native compiler gives CS0013 (FTL_MetadataEmitFailure) at Emit stage
             result.Diagnostics.Verify(
                 // error CS7041: Each linked resource and module must have a unique filename. Filename 'netmodule1.netmodule' is specified more than once in this assembly
-                Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique).WithArguments("netModule1.netmodule")
+                Diagnostic(ErrorCode.ERR_ResourceFileNameNotUnique)
+                    .WithArguments("netModule1.netmodule")
             );
         }
 
@@ -410,12 +517,23 @@ class C
             var arrayOfEmbeddedData = new byte[] { 1, 2, 3, 4, 5 };
             var resourceFileData = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var result = c1.Emit(output, manifestResources:
-                new ResourceDescription[]
+            var result = c1.Emit(
+                output,
+                manifestResources: new ResourceDescription[]
                 {
-                    new ResourceDescription(r1Name, () => new MemoryStream(arrayOfEmbeddedData), true),
-                    new ResourceDescription(r2Name, resourceFileName, () => new MemoryStream(resourceFileData), false)
-                });
+                    new ResourceDescription(
+                        r1Name,
+                        () => new MemoryStream(arrayOfEmbeddedData),
+                        true
+                    ),
+                    new ResourceDescription(
+                        r2Name,
+                        resourceFileName,
+                        () => new MemoryStream(resourceFileData),
+                        false
+                    ),
+                }
+            );
 
             Assert.True(result.Success);
 
@@ -425,7 +543,10 @@ class C
             Assert.Equal(2, resourceNames.Length);
 
             var rInfo = assembly.GetManifestResourceInfo(r1Name);
-            Assert.Equal(ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile, rInfo.ResourceLocation);
+            Assert.Equal(
+                ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile,
+                rInfo.ResourceLocation
+            );
 
             var rData = assembly.GetManifestResourceStream(r1Name);
             var rBytes = new byte[rData.Length];
@@ -443,7 +564,12 @@ class C
         {
             bool metadataOnly = false;
             Func<Compilation, Stream, ResourceDescription[], CodeAnalysis.Emit.EmitResult> emit;
-            emit = (c, s, r) => c.Emit(s, manifestResources: r, options: new EmitOptions(metadataOnly: metadataOnly));
+            emit = (c, s, r) =>
+                c.Emit(
+                    s,
+                    manifestResources: r,
+                    options: new EmitOptions(metadataOnly: metadataOnly)
+                );
 
             var sourceTree = SyntaxFactory.ParseSyntaxTree("");
 
@@ -452,7 +578,8 @@ class C
                 Guid.NewGuid().ToString(),
                 new[] { sourceTree },
                 new[] { MscorlibRef },
-                TestOptions.ReleaseModule);
+                TestOptions.ReleaseModule
+            );
 
             var resourceFileName = "RoslynResourceFile.goo";
             var output = new MemoryStream();
@@ -463,52 +590,101 @@ class C
             var arrayOfEmbeddedData = new byte[] { 1, 2, 3, 4, 5 };
             var resourceFileData = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var result = emit(c1, output,
+            var result = emit(
+                c1,
+                output,
                 new ResourceDescription[]
                 {
-                    new ResourceDescription(r1Name, () => new MemoryStream(arrayOfEmbeddedData), true),
-                    new ResourceDescription(r2Name, resourceFileName, () => new MemoryStream(resourceFileData), false)
-                });
+                    new ResourceDescription(
+                        r1Name,
+                        () => new MemoryStream(arrayOfEmbeddedData),
+                        true
+                    ),
+                    new ResourceDescription(
+                        r2Name,
+                        resourceFileName,
+                        () => new MemoryStream(resourceFileData),
+                        false
+                    ),
+                }
+            );
 
             Assert.False(result.Success);
-            Assert.NotEmpty(result.Diagnostics.Where(x => x.Code == (int)ErrorCode.ERR_CantRefResource));
+            Assert.NotEmpty(
+                result.Diagnostics.Where(x => x.Code == (int)ErrorCode.ERR_CantRefResource)
+            );
 
-            result = emit(c1, output,
+            result = emit(
+                c1,
+                output,
                 new ResourceDescription[]
                 {
-                    new ResourceDescription(r2Name, resourceFileName, () => new MemoryStream(resourceFileData), false),
-                    new ResourceDescription(r1Name, () => new MemoryStream(arrayOfEmbeddedData), true)
-                });
+                    new ResourceDescription(
+                        r2Name,
+                        resourceFileName,
+                        () => new MemoryStream(resourceFileData),
+                        false
+                    ),
+                    new ResourceDescription(
+                        r1Name,
+                        () => new MemoryStream(arrayOfEmbeddedData),
+                        true
+                    ),
+                }
+            );
 
             Assert.False(result.Success);
-            Assert.NotEmpty(result.Diagnostics.Where(x => x.Code == (int)ErrorCode.ERR_CantRefResource));
+            Assert.NotEmpty(
+                result.Diagnostics.Where(x => x.Code == (int)ErrorCode.ERR_CantRefResource)
+            );
 
-            result = emit(c1, output,
+            result = emit(
+                c1,
+                output,
                 new ResourceDescription[]
                 {
-                    new ResourceDescription(r2Name, resourceFileName, () => new MemoryStream(resourceFileData), false)
-                });
+                    new ResourceDescription(
+                        r2Name,
+                        resourceFileName,
+                        () => new MemoryStream(resourceFileData),
+                        false
+                    ),
+                }
+            );
 
             Assert.False(result.Success);
-            Assert.NotEmpty(result.Diagnostics.Where(x => x.Code == (int)ErrorCode.ERR_CantRefResource));
+            Assert.NotEmpty(
+                result.Diagnostics.Where(x => x.Code == (int)ErrorCode.ERR_CantRefResource)
+            );
 
             var c_mod1 = CSharpCompilation.Create(
                 Guid.NewGuid().ToString(),
                 new[] { sourceTree },
                 new[] { MscorlibRef },
-                TestOptions.ReleaseModule);
+                TestOptions.ReleaseModule
+            );
 
             var output_mod1 = new MemoryStream();
-            result = emit(c_mod1, output_mod1,
+            result = emit(
+                c_mod1,
+                output_mod1,
                 new ResourceDescription[]
                 {
-                    new ResourceDescription(r1Name, () => new MemoryStream(arrayOfEmbeddedData), true)
-                });
+                    new ResourceDescription(
+                        r1Name,
+                        () => new MemoryStream(arrayOfEmbeddedData),
+                        true
+                    ),
+                }
+            );
 
             Assert.True(result.Success);
             var mod1 = ModuleMetadata.CreateFromImage(output_mod1.ToImmutable());
             var ref_mod1 = mod1.GetReference();
-            Assert.Equal(ManifestResourceAttributes.Public, mod1.Module.GetEmbeddedResourcesOrThrow()[0].Attributes);
+            Assert.Equal(
+                ManifestResourceAttributes.Public,
+                mod1.Module.GetEmbeddedResourcesOrThrow()[0].Attributes
+            );
 
             {
                 var c2 = CreateCompilation(sourceTree, new[] { ref_mod1 }, TestOptions.ReleaseDll);
@@ -545,15 +721,23 @@ class C
                 Guid.NewGuid().ToString(),
                 new[] { sourceTree },
                 new[] { MscorlibRef },
-                TestOptions.ReleaseModule);
+                TestOptions.ReleaseModule
+            );
 
             var output_mod2 = new MemoryStream();
-            result = emit(c_mod2, output_mod2,
+            result = emit(
+                c_mod2,
+                output_mod2,
                 new ResourceDescription[]
                 {
-                    new ResourceDescription(r1Name, () => new MemoryStream(arrayOfEmbeddedData), true),
-                    new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), true)
-                });
+                    new ResourceDescription(
+                        r1Name,
+                        () => new MemoryStream(arrayOfEmbeddedData),
+                        true
+                    ),
+                    new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), true),
+                }
+            );
 
             Assert.True(result.Success);
             var ref_mod2 = ModuleMetadata.CreateFromImage(output_mod2.ToImmutable()).GetReference();
@@ -602,28 +786,45 @@ class C
                 Guid.NewGuid().ToString(),
                 new[] { sourceTree },
                 new[] { MscorlibRef },
-                TestOptions.ReleaseModule);
+                TestOptions.ReleaseModule
+            );
 
             var output_mod3 = new MemoryStream();
-            result = emit(c_mod3, output_mod3,
+            result = emit(
+                c_mod3,
+                output_mod3,
                 new ResourceDescription[]
                 {
-                    new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), false)
-                });
+                    new ResourceDescription(
+                        r2Name,
+                        () => new MemoryStream(resourceFileData),
+                        false
+                    ),
+                }
+            );
 
             Assert.True(result.Success);
             var mod3 = ModuleMetadata.CreateFromImage(output_mod3.ToImmutable());
             var ref_mod3 = mod3.GetReference();
-            Assert.Equal(ManifestResourceAttributes.Private, mod3.Module.GetEmbeddedResourcesOrThrow()[0].Attributes);
+            Assert.Equal(
+                ManifestResourceAttributes.Private,
+                mod3.Module.GetEmbeddedResourcesOrThrow()[0].Attributes
+            );
 
             {
                 var c4 = CreateCompilation(sourceTree, new[] { ref_mod3 }, TestOptions.ReleaseDll);
                 var output4 = new MemoryStream();
-                var result4 = c4.Emit(output4, manifestResources:
-                    new ResourceDescription[]
+                var result4 = c4.Emit(
+                    output4,
+                    manifestResources: new ResourceDescription[]
                     {
-                            new ResourceDescription(r1Name, () => new MemoryStream(arrayOfEmbeddedData), false)
-                    });
+                        new ResourceDescription(
+                            r1Name,
+                            () => new MemoryStream(arrayOfEmbeddedData),
+                            false
+                        ),
+                    }
+                );
 
                 Assert.True(result4.Success);
                 var assembly = System.Reflection.Assembly.ReflectionOnlyLoad(output4.ToArray());
@@ -642,7 +843,10 @@ class C
                 Assert.Equal(2, resourceNames.Length);
 
                 var rInfo = assembly.GetManifestResourceInfo(r1Name);
-                Assert.Equal(ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile, rInfo.ResourceLocation);
+                Assert.Equal(
+                    ResourceLocation.Embedded | ResourceLocation.ContainedInManifestFile,
+                    rInfo.ResourceLocation
+                );
 
                 var rData = assembly.GetManifestResourceStream(r1Name);
                 var rBytes = new byte[rData.Length];
@@ -660,7 +864,11 @@ class C
             }
 
             {
-                var c5 = CreateCompilation(sourceTree, new[] { ref_mod1, ref_mod3 }, TestOptions.ReleaseDll);
+                var c5 = CreateCompilation(
+                    sourceTree,
+                    new[] { ref_mod1, ref_mod3 },
+                    TestOptions.ReleaseDll
+                );
                 var output5 = new MemoryStream();
                 var result5 = emit(c5, output5, null);
 
@@ -704,7 +912,11 @@ class C
             }
 
             {
-                var c6 = CreateCompilation(sourceTree, new[] { ref_mod1, ref_mod2 }, TestOptions.ReleaseDll);
+                var c6 = CreateCompilation(
+                    sourceTree,
+                    new[] { ref_mod1, ref_mod2 },
+                    TestOptions.ReleaseDll
+                );
                 var output6 = new MemoryStream();
                 var result6 = emit(c6, output6, null);
 
@@ -717,15 +929,23 @@ class C
                     Assert.False(result6.Success);
                     result6.Diagnostics.Verify(
                         // error CS1508: Resource identifier 'some.dotted.NAME' has already been used in this assembly
-                        Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("some.dotted.NAME")
-                        );
+                        Diagnostic(ErrorCode.ERR_ResourceNotUnique)
+                            .WithArguments("some.dotted.NAME")
+                    );
                 }
 
-                result6 = emit(c6, output6,
+                result6 = emit(
+                    c6,
+                    output6,
                     new ResourceDescription[]
                     {
-                        new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), false)
-                    });
+                        new ResourceDescription(
+                            r2Name,
+                            () => new MemoryStream(resourceFileData),
+                            false
+                        ),
+                    }
+                );
 
                 if (metadataOnly)
                 {
@@ -736,28 +956,43 @@ class C
                     Assert.False(result6.Success);
                     result6.Diagnostics.Verify(
                         // error CS1508: Resource identifier 'some.dotted.NAME' has already been used in this assembly
-                        Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("some.dotted.NAME"),
+                        Diagnostic(ErrorCode.ERR_ResourceNotUnique)
+                            .WithArguments("some.dotted.NAME"),
                         // error CS1508: Resource identifier 'another.DoTtEd.NAME' has already been used in this assembly
-                        Diagnostic(ErrorCode.ERR_ResourceNotUnique).WithArguments("another.DoTtEd.NAME")
-                        );
+                        Diagnostic(ErrorCode.ERR_ResourceNotUnique)
+                            .WithArguments("another.DoTtEd.NAME")
+                    );
                 }
 
-                c6 = CreateCompilation(sourceTree, new[] { ref_mod1, ref_mod2 }, TestOptions.ReleaseModule);
+                c6 = CreateCompilation(
+                    sourceTree,
+                    new[] { ref_mod1, ref_mod2 },
+                    TestOptions.ReleaseModule
+                );
 
-                result6 = emit(c6, output6,
+                result6 = emit(
+                    c6,
+                    output6,
                     new ResourceDescription[]
                     {
-                        new ResourceDescription(r2Name, () => new MemoryStream(resourceFileData), false)
-                    });
+                        new ResourceDescription(
+                            r2Name,
+                            () => new MemoryStream(resourceFileData),
+                            false
+                        ),
+                    }
+                );
 
                 Assert.True(result6.Success);
             }
         }
 #endif
+
         [Fact]
         public void AddManagedLinkedResourceFail()
         {
-            string source = @"
+            string source =
+                @"
 public class Maine
 {
     static public void Main()
@@ -771,11 +1006,21 @@ public class Maine
 
             const string r2Name = "another.DoTtEd.NAME";
 
-            var result = c1.Emit(output, manifestResources:
-                new ResourceDescription[]
+            var result = c1.Emit(
+                output,
+                manifestResources: new ResourceDescription[]
                 {
-                    new ResourceDescription(r2Name, "nonExistent", () => { throw new NotSupportedException("error in data provider"); }, false)
-                });
+                    new ResourceDescription(
+                        r2Name,
+                        "nonExistent",
+                        () =>
+                        {
+                            throw new NotSupportedException("error in data provider");
+                        },
+                        false
+                    ),
+                }
+            );
 
             Assert.False(result.Success);
             Assert.Equal((int)ErrorCode.ERR_CantReadResource, result.Diagnostics.ToArray()[0].Code);
@@ -784,7 +1029,8 @@ public class Maine
         [Fact]
         public void AddManagedEmbeddedResourceFail()
         {
-            string source = @"
+            string source =
+                @"
 public class Maine
 {
     static public void Main()
@@ -798,20 +1044,26 @@ public class Maine
 
             const string r2Name = "another.DoTtEd.NAME";
 
-            var result = c1.Emit(output, manifestResources:
-                new ResourceDescription[]
+            var result = c1.Emit(
+                output,
+                manifestResources: new ResourceDescription[]
                 {
                     new ResourceDescription(r2Name, () => null, true),
-                });
+                }
+            );
 
             Assert.False(result.Success);
             Assert.Equal((int)ErrorCode.ERR_CantReadResource, result.Diagnostics.ToArray()[0].Code);
         }
 
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.TestExecutionNeedsDesktopTypes
+        )]
         public void ResourceWithAttrSettings()
         {
-            string source = @"
+            string source =
+                @"
 [assembly: System.Reflection.AssemblyVersion(""1.2.3.4"")]
 [assembly: System.Reflection.AssemblyFileVersion(""5.6.7.8"")]
 [assembly: System.Reflection.AssemblyTitle(""One Hundred Years of Solitude"")] 
@@ -829,12 +1081,19 @@ public class Maine
     }
 }
 ";
-            var c1 = CreateCompilation(source, assemblyName: "Win32VerAttrs", options: TestOptions.ReleaseExe);
+            var c1 = CreateCompilation(
+                source,
+                assemblyName: "Win32VerAttrs",
+                options: TestOptions.ReleaseExe
+            );
             var exeFile = Temp.CreateFile();
 
             using (FileStream output = exeFile.Open())
             {
-                c1.Emit(output, win32Resources: c1.CreateDefaultWin32Resources(true, false, null, null));
+                c1.Emit(
+                    output,
+                    win32Resources: c1.CreateDefaultWin32Resources(true, false, null, null)
+                );
             }
 
             c1 = null;
@@ -845,7 +1104,13 @@ public class Maine
             try
             {
                 lib = LoadLibraryEx(exeFile.Path, IntPtr.Zero, 0x00000002);
-                Assert.True(lib != IntPtr.Zero, String.Format("LoadLibrary failed with HResult: {0:X}", +Marshal.GetLastWin32Error()));
+                Assert.True(
+                    lib != IntPtr.Zero,
+                    String.Format(
+                        "LoadLibrary failed with HResult: {0:X}",
+                        +Marshal.GetLastWin32Error()
+                    )
+                );
 
                 //the manifest and version primitives are tested elsewhere. This is to test that the default
                 //values are passed to the primitives that assemble the resources.
@@ -863,7 +1128,7 @@ public class Maine
             }
 
             string expected =
-@"<?xml version=""1.0"" encoding=""utf-16""?>
+                @"<?xml version=""1.0"" encoding=""utf-16""?>
 <VersionResource Size=""964"">
   <VS_FIXEDFILEINFO FileVersionMS=""00050006"" FileVersionLS=""00070008"" ProductVersionMS=""00010002"" ProductVersionLS=""00030000"" />
   <KeyValuePair Key=""Comments"" Value=""A classic of magical realist literature"" />
@@ -891,21 +1156,24 @@ public class Maine
                 canSeek: true,
                 readFunc: backingStream.Read,
                 length: 6, // Lie about the length (> backingStream.Length)
-                getPosition: () => backingStream.Position);
+                getPosition: () => backingStream.Position
+            );
 
             var c1 = CreateCompilation("");
 
             using (new EnsureEnglishUICulture())
             {
-                var result = c1.Emit(new MemoryStream(), manifestResources:
-                    new[]
-                    {
-                        new ResourceDescription("res", () => stream, false)
-                    });
+                var result = c1.Emit(
+                    new MemoryStream(),
+                    manifestResources: new[] { new ResourceDescription("res", () => stream, false) }
+                );
 
                 result.Diagnostics.Verify(
                     // error CS1566: Error reading resource 'res' -- 'Resource stream ended at 4 bytes, expected 6 bytes.'
-                    Diagnostic(ErrorCode.ERR_CantReadResource).WithArguments("res", "Resource stream ended at 4 bytes, expected 6 bytes.").WithLocation(1, 1));
+                    Diagnostic(ErrorCode.ERR_CantReadResource)
+                        .WithArguments("res", "Resource stream ended at 4 bytes, expected 6 bytes.")
+                        .WithLocation(1, 1)
+                );
             }
         }
     }

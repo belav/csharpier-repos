@@ -13,10 +13,12 @@ namespace System.Reflection.Emit.Tests
         {
             Type[] mathArgs = { typeof(double), typeof(double) };
 
-            var powerOf = new DynamicMethod("PowerOf",
+            var powerOf = new DynamicMethod(
+                "PowerOf",
                 typeof(double),
                 mathArgs,
-                typeof(double).Module);
+                typeof(double).Module
+            );
 
             ILGenerator il = powerOf.GetILGenerator(256);
             il.Emit(OpCodes.Ldarg_0);
@@ -28,7 +30,13 @@ namespace System.Reflection.Emit.Tests
             powerOf.DefineParameter(2, ParameterAttributes.Out, "exponent");
 
             object[] invokeArgs = { 2, 5 };
-            object objRet = powerOf.Invoke(null, BindingFlags.ExactBinding, null, invokeArgs, new CultureInfo("en-us"));
+            object objRet = powerOf.Invoke(
+                null,
+                BindingFlags.ExactBinding,
+                null,
+                invokeArgs,
+                new CultureInfo("en-us")
+            );
 
             ParameterInfo[] parameters = powerOf.GetParameters();
 

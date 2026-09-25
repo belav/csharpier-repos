@@ -59,9 +59,9 @@ namespace System.Threading
         }
 
         public bool Unregister(WaitHandle waitObject) =>
-            ThreadPool.UseWindowsThreadPool ?
-            UnregisterWindowsThreadPool(waitObject) :
-            UnregisterPortableCore(waitObject);
+            ThreadPool.UseWindowsThreadPool
+                ? UnregisterWindowsThreadPool(waitObject)
+                : UnregisterPortableCore(waitObject);
 
         /// <summary>
         /// Perform the registered callback if the <see cref="UserUnregisterWaitHandle"/> has not been signaled.

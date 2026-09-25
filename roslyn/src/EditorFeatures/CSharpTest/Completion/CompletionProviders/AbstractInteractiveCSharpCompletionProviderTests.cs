@@ -8,9 +8,13 @@ using Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
-    public abstract class AbstractInteractiveCSharpCompletionProviderTests : AbstractCSharpCompletionProviderTests<InteractiveCSharpTestWorkspaceFixture>
+    public abstract class AbstractInteractiveCSharpCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests<InteractiveCSharpTestWorkspaceFixture>
     {
-        protected override TestWorkspace CreateWorkspace(string fileContents)
-            => InteractiveCSharpTestWorkspaceFixture.CreateInteractiveWorkspace(fileContents, composition: GetComposition());
+        protected override TestWorkspace CreateWorkspace(string fileContents) =>
+            InteractiveCSharpTestWorkspaceFixture.CreateInteractiveWorkspace(
+                fileContents,
+                composition: GetComposition()
+            );
     }
 }

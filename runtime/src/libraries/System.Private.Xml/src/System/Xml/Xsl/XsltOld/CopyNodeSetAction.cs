@@ -60,7 +60,10 @@ namespace System.Xml.Xsl.XsltOld
 
                         if (nodeType == XPathNodeType.Element || nodeType == XPathNodeType.Root)
                         {
-                            processor.PushActionFrame(CopyNamespacesAction.GetAction(), frame.NodeSet);
+                            processor.PushActionFrame(
+                                CopyNamespacesAction.GetAction(),
+                                frame.NodeSet
+                            );
                             frame.State = Namespaces;
                             break;
                         }
@@ -81,7 +84,10 @@ namespace System.Xml.Xsl.XsltOld
                     case Attributes:
                         if (frame.Node!.HasChildren)
                         {
-                            processor.PushActionFrame(GetAction(), frame.Node.SelectChildren(XPathNodeType.All));
+                            processor.PushActionFrame(
+                                GetAction(),
+                                frame.Node.SelectChildren(XPathNodeType.All)
+                            );
                             frame.State = Subtree;
                             break;
                         }

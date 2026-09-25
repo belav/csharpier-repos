@@ -12,7 +12,9 @@ namespace Microsoft.CodeAnalysis
     /// <summary>
     /// Information decoded from well-known custom attributes applied on a field.
     /// </summary>
-    internal class CommonFieldWellKnownAttributeData : WellKnownAttributeData, IMarshalAsAttributeTarget
+    internal class CommonFieldWellKnownAttributeData
+        : WellKnownAttributeData,
+            IMarshalAsAttributeTarget
     {
         public CommonFieldWellKnownAttributeData()
         {
@@ -20,7 +22,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         #region FieldOffsetAttribute
-        private int _offset;                    // may be Uninitialized
+        private int _offset; // may be Uninitialized
         private const int Uninitialized = -1;
 
         public void SetFieldOffset(int offset)
@@ -46,10 +48,7 @@ namespace Microsoft.CodeAnalysis
 
         public ConstantValue ConstValue
         {
-            get
-            {
-                return _constValue;
-            }
+            get { return _constValue; }
             set
             {
                 VerifySealed(expected: false);

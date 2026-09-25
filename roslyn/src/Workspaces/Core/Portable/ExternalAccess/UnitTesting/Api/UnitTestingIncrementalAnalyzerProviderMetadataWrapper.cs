@@ -13,11 +13,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         public UnitTestingIncrementalAnalyzerProviderMetadataWrapper(
             string name,
             bool highPriorityForActiveFile,
-            params string[] workspaceKinds)
-            => UnderlyingObject = new IncrementalAnalyzerProviderMetadata(name, highPriorityForActiveFile, workspaceKinds);
+            params string[] workspaceKinds
+        ) =>
+            UnderlyingObject = new IncrementalAnalyzerProviderMetadata(
+                name,
+                highPriorityForActiveFile,
+                workspaceKinds
+            );
 
-        internal UnitTestingIncrementalAnalyzerProviderMetadataWrapper(IncrementalAnalyzerProviderMetadata underlyingObject)
-            => UnderlyingObject = underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
+        internal UnitTestingIncrementalAnalyzerProviderMetadataWrapper(
+            IncrementalAnalyzerProviderMetadata underlyingObject
+        ) =>
+            UnderlyingObject =
+                underlyingObject ?? throw new ArgumentNullException(nameof(underlyingObject));
 
         internal IncrementalAnalyzerProviderMetadata UnderlyingObject { get; }
     }

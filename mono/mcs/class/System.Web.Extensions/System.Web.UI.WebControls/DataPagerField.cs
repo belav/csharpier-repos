@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -38,231 +38,271 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public abstract class DataPagerField : IStateManager
-	{
-		static readonly object FieldChangedEvent = new object ();
-		
-		EventHandlerList events;
-		StateBag _state = new StateBag ();
-		DataPager _dataPager;
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public abstract class DataPagerField : IStateManager
+    {
+        static readonly object FieldChangedEvent = new object();
 
-		bool _queryStringHandled;
-		bool _isTrackingViewState;
-		string _queryStringNavigateUrl;
+        EventHandlerList events;
+        StateBag _state = new StateBag();
+        DataPager _dataPager;
 
-		internal event EventHandler FieldChanged {
-			add { AddEventHandler (FieldChangedEvent, value); }
-			remove { RemoveEventHandler (FieldChangedEvent, value); }
-		}
-				
-		protected DataPagerField ()
-		{
-		}
+        bool _queryStringHandled;
+        bool _isTrackingViewState;
+        string _queryStringNavigateUrl;
 
-		protected internal DataPagerField CloneField ()
-		{
-			DataPagerField ret = CreateField ();
-			CopyProperties (ret);
+        internal event EventHandler FieldChanged
+        {
+            add { AddEventHandler(FieldChangedEvent, value); }
+            remove { RemoveEventHandler(FieldChangedEvent, value); }
+        }
 
-			return ret;
-		}
+        protected DataPagerField() { }
 
-		protected virtual void CopyProperties (DataPagerField newField)
-		{
-			// assuming we should copy only the public properties
-			newField.Visible = Visible;
-		}
+        protected internal DataPagerField CloneField()
+        {
+            DataPagerField ret = CreateField();
+            CopyProperties(ret);
 
-		public abstract void CreateDataPagers (DataPagerFieldItem container, int startRowIndex, int maximumRows,
-						       int totalRowCount, int fieldIndex);
+            return ret;
+        }
 
-		protected abstract DataPagerField CreateField ();
+        protected virtual void CopyProperties(DataPagerField newField)
+        {
+            // assuming we should copy only the public properties
+            newField.Visible = Visible;
+        }
 
-		protected string GetQueryStringNavigateUrl (int pageNumber)
-		{
-			if (_queryStringNavigateUrl == null && _dataPager != null) {
-				HttpContext ctx = HttpContext.Current;
-				HttpRequest req = ctx != null ? ctx.Request : null;
-				string queryFieldName = _dataPager.QueryStringField;
-				
-				if (req != null) {
-					StringBuilder sb = new StringBuilder (req.Path + "?");
-					NameValueCollection coll = req.QueryString;
-					
-					foreach (string k in coll.AllKeys) {
-						if (String.Compare (k, queryFieldName, StringComparison.OrdinalIgnoreCase) == 0)
-							continue;
-						sb.Append (HttpUtility.UrlEncode (k) + "=" + HttpUtility.UrlEncode (coll [k]) + "&");
-					}
+        public abstract void CreateDataPagers(
+            DataPagerFieldItem container,
+            int startRowIndex,
+            int maximumRows,
+            int totalRowCount,
+            int fieldIndex
+        );
 
-					sb.Append (queryFieldName + "=");
-					_queryStringNavigateUrl = sb.ToString ();
-				} else
-					_queryStringNavigateUrl = String.Empty;
-			}
+        protected abstract DataPagerField CreateField();
 
-			return _queryStringNavigateUrl + pageNumber.ToString (CultureInfo.InvariantCulture);
-		}
+        protected string GetQueryStringNavigateUrl(int pageNumber)
+        {
+            if (_queryStringNavigateUrl == null && _dataPager != null)
+            {
+                HttpContext ctx = HttpContext.Current;
+                HttpRequest req = ctx != null ? ctx.Request : null;
+                string queryFieldName = _dataPager.QueryStringField;
 
-		public abstract void HandleEvent (CommandEventArgs e);
+                if (req != null)
+                {
+                    StringBuilder sb = new StringBuilder(req.Path + "?");
+                    NameValueCollection coll = req.QueryString;
 
-		protected virtual void LoadViewState (Object savedState)
-		{
-			if (savedState == null)
-				return;
+                    foreach (string k in coll.AllKeys)
+                    {
+                        if (
+                            String.Compare(k, queryFieldName, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
+                            continue;
+                        sb.Append(
+                            HttpUtility.UrlEncode(k) + "=" + HttpUtility.UrlEncode(coll[k]) + "&"
+                        );
+                    }
 
-			((IStateManager) ViewState).LoadViewState (savedState);
-		}
-		
-		protected virtual void OnFieldChanged ()
-		{
-			InvokeEvent (FieldChangedEvent, EventArgs.Empty);
-		}
+                    sb.Append(queryFieldName + "=");
+                    _queryStringNavigateUrl = sb.ToString();
+                }
+                else
+                    _queryStringNavigateUrl = String.Empty;
+            }
 
-		protected virtual object SaveViewState ()
-		{
-			return ((IStateManager) ViewState).SaveViewState ();
-		}
+            return _queryStringNavigateUrl + pageNumber.ToString(CultureInfo.InvariantCulture);
+        }
 
-		protected virtual void TrackViewState ()
-		{
-			_isTrackingViewState = true;
-			((IStateManager)ViewState).TrackViewState ();
-		}
+        public abstract void HandleEvent(CommandEventArgs e);
 
-		protected DataPager DataPager {
-			get { return _dataPager; }
-		}
-		
-		protected bool QueryStringHandled {
-			get { return _queryStringHandled; }
-			set { _queryStringHandled = value; }
-		}
+        protected virtual void LoadViewState(Object savedState)
+        {
+            if (savedState == null)
+                return;
 
-		protected string QueryStringValue {
-			get {
-				if (_dataPager == null)
-					return String.Empty;
-				
-				HttpContext ctx = HttpContext.Current;
-				HttpRequest req = ctx != null ? ctx.Request : null;
+            ((IStateManager)ViewState).LoadViewState(savedState);
+        }
 
-				if (req == null)
-					return String.Empty;
+        protected virtual void OnFieldChanged()
+        {
+            InvokeEvent(FieldChangedEvent, EventArgs.Empty);
+        }
 
-				return req.QueryString [_dataPager.QueryStringField];
-			}
-		}
+        protected virtual object SaveViewState()
+        {
+            return ((IStateManager)ViewState).SaveViewState();
+        }
 
-		protected StateBag ViewState {
-			get { return _state; }
-		}
+        protected virtual void TrackViewState()
+        {
+            _isTrackingViewState = true;
+            ((IStateManager)ViewState).TrackViewState();
+        }
 
-		public bool Visible {
-			get {
-				object o = ViewState ["Visible"];
-				if (o == null)
-					return true;
+        protected DataPager DataPager
+        {
+            get { return _dataPager; }
+        }
 
-				return (bool) o;
-			}
-			
-			set {
-				if (value != Visible) {
-					ViewState ["Visible"] = value;
-					OnFieldChanged ();
-				}
-			}
-		}
+        protected bool QueryStringHandled
+        {
+            get { return _queryStringHandled; }
+            set { _queryStringHandled = value; }
+        }
 
-		protected bool IsTrackingViewState {
-			get { return _isTrackingViewState; }
-		}
-		
-		void IStateManager.TrackViewState ()
-		{
-			TrackViewState ();
-		}
+        protected string QueryStringValue
+        {
+            get
+            {
+                if (_dataPager == null)
+                    return String.Empty;
 
-		bool IStateManager.IsTrackingViewState {
-			get { return IsTrackingViewState; }
-		}
+                HttpContext ctx = HttpContext.Current;
+                HttpRequest req = ctx != null ? ctx.Request : null;
 
-		object IStateManager.SaveViewState ()
-		{
-			return SaveViewState ();
-		}
+                if (req == null)
+                    return String.Empty;
 
-		void IStateManager.LoadViewState (object state)
-		{
-			LoadViewState (state);
-		}
+                return req.QueryString[_dataPager.QueryStringField];
+            }
+        }
 
-		internal void SetDataPager (DataPager pager)
-		{
-			_dataPager = pager;
-		}
+        protected StateBag ViewState
+        {
+            get { return _state; }
+        }
 
-		internal bool GetQueryModeStartRowIndex (int totalRowCount, int maximumRows, ref int startRowIndex, ref bool setPagePropertiesNeeded)
-		{
-			bool queryMode = !String.IsNullOrEmpty (DataPager.QueryStringField);
-			if (!queryMode || QueryStringHandled)
-				return queryMode;
+        public bool Visible
+        {
+            get
+            {
+                object o = ViewState["Visible"];
+                if (o == null)
+                    return true;
 
-			QueryStringHandled = true;
+                return (bool)o;
+            }
+            set
+            {
+                if (value != Visible)
+                {
+                    ViewState["Visible"] = value;
+                    OnFieldChanged();
+                }
+            }
+        }
 
-			// We need to calculate the new start index since it is probably out
-			// of date because the GET parameter with the page number hasn't
-			// been processed yet
-			int pageNumber;
-			try {
-				pageNumber = Int32.Parse (QueryStringValue);
-			} catch {
-				// ignore
-				pageNumber = -1;
-			}
+        protected bool IsTrackingViewState
+        {
+            get { return _isTrackingViewState; }
+        }
 
-			if (pageNumber >= 0) {
-				pageNumber--; // we're zero-based since we're calculating
-				// the offset/index
-				if (pageNumber >= 0) {
-					// zero-based calculation again
-					int pageCount = (totalRowCount - 1) / maximumRows; 
-					if (pageNumber <= pageCount) {
-						startRowIndex = pageNumber * maximumRows;
-						setPagePropertiesNeeded = true;
-					}
-				}
-			}
+        void IStateManager.TrackViewState()
+        {
+            TrackViewState();
+        }
 
-			return true;
-		}
-		
-		void AddEventHandler (object key, EventHandler handler)
-		{
-			if (events == null)
-				events = new EventHandlerList ();
-			events.AddHandler (key, handler);
-		}
+        bool IStateManager.IsTrackingViewState
+        {
+            get { return IsTrackingViewState; }
+        }
 
-		void RemoveEventHandler (object key, EventHandler handler)
-		{
-			if (events == null)
-				return;
-			events.RemoveHandler (key, handler);
-		}
+        object IStateManager.SaveViewState()
+        {
+            return SaveViewState();
+        }
 
-		void InvokeEvent (object key, EventArgs args)
-		{
-			if (events == null)
-				return;
+        void IStateManager.LoadViewState(object state)
+        {
+            LoadViewState(state);
+        }
 
-			EventHandler eh = events [key] as EventHandler;
-			if (eh == null)
-				return;
-			eh (this, args);
-		}
-	}
+        internal void SetDataPager(DataPager pager)
+        {
+            _dataPager = pager;
+        }
+
+        internal bool GetQueryModeStartRowIndex(
+            int totalRowCount,
+            int maximumRows,
+            ref int startRowIndex,
+            ref bool setPagePropertiesNeeded
+        )
+        {
+            bool queryMode = !String.IsNullOrEmpty(DataPager.QueryStringField);
+            if (!queryMode || QueryStringHandled)
+                return queryMode;
+
+            QueryStringHandled = true;
+
+            // We need to calculate the new start index since it is probably out
+            // of date because the GET parameter with the page number hasn't
+            // been processed yet
+            int pageNumber;
+            try
+            {
+                pageNumber = Int32.Parse(QueryStringValue);
+            }
+            catch
+            {
+                // ignore
+                pageNumber = -1;
+            }
+
+            if (pageNumber >= 0)
+            {
+                pageNumber--; // we're zero-based since we're calculating
+                // the offset/index
+                if (pageNumber >= 0)
+                {
+                    // zero-based calculation again
+                    int pageCount = (totalRowCount - 1) / maximumRows;
+                    if (pageNumber <= pageCount)
+                    {
+                        startRowIndex = pageNumber * maximumRows;
+                        setPagePropertiesNeeded = true;
+                    }
+                }
+            }
+
+            return true;
+        }
+
+        void AddEventHandler(object key, EventHandler handler)
+        {
+            if (events == null)
+                events = new EventHandlerList();
+            events.AddHandler(key, handler);
+        }
+
+        void RemoveEventHandler(object key, EventHandler handler)
+        {
+            if (events == null)
+                return;
+            events.RemoveHandler(key, handler);
+        }
+
+        void InvokeEvent(object key, EventArgs args)
+        {
+            if (events == null)
+                return;
+
+            EventHandler eh = events[key] as EventHandler;
+            if (eh == null)
+                return;
+            eh(this, args);
+        }
+    }
 }

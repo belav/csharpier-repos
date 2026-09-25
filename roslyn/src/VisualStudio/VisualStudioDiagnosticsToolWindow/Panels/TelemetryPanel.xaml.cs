@@ -103,7 +103,11 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
 
                 RecordIfCodeAction(type, typeDiscovered);
 
-                foreach (var nestedTypeInfo in type.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic))
+                foreach (
+                    var nestedTypeInfo in type.GetNestedTypes(
+                        BindingFlags.Public | BindingFlags.NonPublic
+                    )
+                )
                 {
                     ScanType(nestedTypeInfo, typeDiscovered);
                 }
@@ -147,6 +151,7 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
             {
                 _action = disposeAction;
             }
+
             public void Dispose()
             {
                 _action?.Invoke();

@@ -1,18 +1,19 @@
 //------------------------------------------------------------------------------
 // <copyright file="SoapException.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Services.Protocols {
+namespace System.Web.Services.Protocols
+{
     using System;
     using System.Collections;
     using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.InteropServices;
-    using System.Runtime.Serialization;
 
     /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException"]/*' />
     /// <devdoc>
@@ -26,7 +27,8 @@ namespace System.Web.Services.Protocols {
     ///       is caught on the server and wrapped inside a new SoapException.</para>
     /// </devdoc>
     [Serializable]
-    public class SoapException : SystemException {
+    public class SoapException : SystemException
+    {
         XmlQualifiedName code = XmlQualifiedName.Empty;
         string actor;
         string role;
@@ -34,77 +36,110 @@ namespace System.Web.Services.Protocols {
         SoapFaultSubCode subCode;
         string lang;
 
-
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.ServerFaultCode"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly XmlQualifiedName ServerFaultCode = new XmlQualifiedName(Soap.Code.Server, Soap.Namespace);
+        public static readonly XmlQualifiedName ServerFaultCode = new XmlQualifiedName(
+            Soap.Code.Server,
+            Soap.Namespace
+        );
+
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.ClientFaultCode"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly XmlQualifiedName ClientFaultCode = new XmlQualifiedName(Soap.Code.Client, Soap.Namespace);
+        public static readonly XmlQualifiedName ClientFaultCode = new XmlQualifiedName(
+            Soap.Code.Client,
+            Soap.Namespace
+        );
+
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.VersionMismatchFaultCode"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly XmlQualifiedName VersionMismatchFaultCode = new XmlQualifiedName(Soap.Code.VersionMismatch, Soap.Namespace);
+        public static readonly XmlQualifiedName VersionMismatchFaultCode = new XmlQualifiedName(
+            Soap.Code.VersionMismatch,
+            Soap.Namespace
+        );
+
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.MustUnderstandFaultCode"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static readonly XmlQualifiedName MustUnderstandFaultCode = new XmlQualifiedName(Soap.Code.MustUnderstand, Soap.Namespace);
+        public static readonly XmlQualifiedName MustUnderstandFaultCode = new XmlQualifiedName(
+            Soap.Code.MustUnderstand,
+            Soap.Namespace
+        );
+
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.DetailElementName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         // NOTE, Microsoft: The SOAP 1.1 is unclear on whether the detail element can or should be qualified.
         // Based on consensus about the intent, we will not qualify it.
-        public static readonly XmlQualifiedName DetailElementName = new XmlQualifiedName(Soap.Element.FaultDetail, "");
+        public static readonly XmlQualifiedName DetailElementName = new XmlQualifiedName(
+            Soap.Element.FaultDetail,
+            ""
+        );
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsServerFaultCode"]/*' />
-        public static bool IsServerFaultCode(XmlQualifiedName code) {
+        public static bool IsServerFaultCode(XmlQualifiedName code)
+        {
             return code == ServerFaultCode || code == Soap12FaultCodes.ReceiverFaultCode;
         }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsClientFaultCode"]/*' />
-        public static bool IsClientFaultCode(XmlQualifiedName code) {
+        public static bool IsClientFaultCode(XmlQualifiedName code)
+        {
             return code == ClientFaultCode || code == Soap12FaultCodes.SenderFaultCode;
         }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsVersionMismatchFaultCode"]/*' />
-        public static bool IsVersionMismatchFaultCode(XmlQualifiedName code) {
-            return code == VersionMismatchFaultCode || code == Soap12FaultCodes.VersionMismatchFaultCode;
+        public static bool IsVersionMismatchFaultCode(XmlQualifiedName code)
+        {
+            return code == VersionMismatchFaultCode
+                || code == Soap12FaultCodes.VersionMismatchFaultCode;
         }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.IsMustUnderstandFaultCode"]/*' />
-        public static bool IsMustUnderstandFaultCode(XmlQualifiedName code) {
-            return code == MustUnderstandFaultCode || code == Soap12FaultCodes.MustUnderstandFaultCode;
+        public static bool IsMustUnderstandFaultCode(XmlQualifiedName code)
+        {
+            return code == MustUnderstandFaultCode
+                || code == Soap12FaultCodes.MustUnderstandFaultCode;
         }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException9"]/*' />
-        public SoapException() : base(null) {
-        }
+        public SoapException()
+            : base(null) { }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException"]/*' />
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to
         /// <paramref name="code"/> and <see cref='System.Web.Services.Protocols.SoapException.Actor'/> to <paramref name="actor"/>.</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, string actor) : base(message) { 
+        public SoapException(string message, XmlQualifiedName code, string actor)
+            : base(message)
+        {
             this.code = code;
             this.actor = actor;
         }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException1"]/*' />
         /// <devdoc>
-        /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to 
-        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to <paramref name="code, 
+        /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to
+        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to <paramref name="code,
         ///    "/><see cref='System.Web.Services.Protocols.SoapException.Actor'/> to <paramref name="actor
         ///    "/>and <see cref='System.Exception.InnerException'/> to <paramref name="innerException"/> .</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, string actor, Exception innerException) : base(message, innerException) { 
+        public SoapException(
+            string message,
+            XmlQualifiedName code,
+            string actor,
+            Exception innerException
+        )
+            : base(message, innerException)
+        {
             this.code = code;
             this.actor = actor;
         }
@@ -113,21 +148,25 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to
         /// <paramref name="message "/>and<paramref name=" "/>
-        /// <see cref='System.Web.Services.Protocols.SoapException.Code'/> 
+        /// <see cref='System.Web.Services.Protocols.SoapException.Code'/>
         /// to <paramref name="code"/>.</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code) : base(message) { 
+        public SoapException(string message, XmlQualifiedName code)
+            : base(message)
+        {
             this.code = code;
         }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.SoapException3"]/*' />
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.Services.Protocols.SoapException'/> class, setting <see cref='System.Exception.Message'/> to
-        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to <paramref name="code "/>and 
-        /// <see cref='System.Exception.InnerException'/> 
+        /// <paramref name="message"/>, <see cref='System.Web.Services.Protocols.SoapException.Code'/> to <paramref name="code "/>and
+        /// <see cref='System.Exception.InnerException'/>
         /// to <paramref name="innerException"/>.</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, Exception innerException) : base(message, innerException) { 
+        public SoapException(string message, XmlQualifiedName code, Exception innerException)
+            : base(message, innerException)
+        {
             this.code = code;
         }
 
@@ -135,7 +174,14 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, string actor, System.Xml.XmlNode detail) : base(message) {
+        public SoapException(
+            string message,
+            XmlQualifiedName code,
+            string actor,
+            System.Xml.XmlNode detail
+        )
+            : base(message)
+        {
             this.code = code;
             this.actor = actor;
             this.detail = detail;
@@ -145,7 +191,15 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, string actor, System.Xml.XmlNode detail, Exception innerException) : base(message, innerException) {
+        public SoapException(
+            string message,
+            XmlQualifiedName code,
+            string actor,
+            System.Xml.XmlNode detail,
+            Exception innerException
+        )
+            : base(message, innerException)
+        {
             this.code = code;
             this.actor = actor;
             this.detail = detail;
@@ -155,7 +209,9 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, SoapFaultSubCode subCode) : base(message) {
+        public SoapException(string message, XmlQualifiedName code, SoapFaultSubCode subCode)
+            : base(message)
+        {
             this.code = code;
             this.subCode = subCode;
         }
@@ -164,7 +220,17 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, string actor, string role, System.Xml.XmlNode detail, SoapFaultSubCode subCode, Exception innerException) : base(message, innerException) {
+        public SoapException(
+            string message,
+            XmlQualifiedName code,
+            string actor,
+            string role,
+            System.Xml.XmlNode detail,
+            SoapFaultSubCode subCode,
+            Exception innerException
+        )
+            : base(message, innerException)
+        {
             this.code = code;
             this.actor = actor;
             this.role = role;
@@ -176,7 +242,18 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public SoapException(string message, XmlQualifiedName code, string actor, string role, string lang, System.Xml.XmlNode detail, SoapFaultSubCode subCode, Exception innerException) : base(message, innerException) {
+        public SoapException(
+            string message,
+            XmlQualifiedName code,
+            string actor,
+            string role,
+            string lang,
+            System.Xml.XmlNode detail,
+            SoapFaultSubCode subCode,
+            Exception innerException
+        )
+            : base(message, innerException)
+        {
             this.code = code;
             this.actor = actor;
             this.role = role;
@@ -185,12 +262,14 @@ namespace System.Web.Services.Protocols {
             this.subCode = subCode;
         }
 
-        protected SoapException(SerializationInfo info, StreamingContext context) : base(info, context) {
+        protected SoapException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
             IDictionary list = base.Data;
             code = (XmlQualifiedName)list["code"];
             actor = (string)list["actor"];
             role = (string)list["role"];
-            
+
             // Bug: 323493: XmlNode is not serializable, and I don't think we want to really want to create
             // an XmlDocument just to read a XmlNode from string to get the deserialized instance back.
             // detail = (XmlNode)list["detail"];
@@ -204,7 +283,8 @@ namespace System.Web.Services.Protocols {
         ///    The piece of code that caused the exception.
         ///    Typically, an URL to a Web Service Method.
         /// </devdoc>
-        public string Actor {
+        public string Actor
+        {
             get { return actor == null ? string.Empty : actor; }
         }
 
@@ -212,7 +292,8 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>The type of error that occurred.</para>
         /// </devdoc>
-        public XmlQualifiedName Code {    
+        public XmlQualifiedName Code
+        {
             get { return code; }
         }
 
@@ -221,10 +302,9 @@ namespace System.Web.Services.Protocols {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public System.Xml.XmlNode Detail {
-            get {
-                return detail;
-            }
+        public System.Xml.XmlNode Detail
+        {
+            get { return detail; }
         }
 
         /// <include file='doc\SoapException.uex' path='docs/doc[@for="SoapException.Lang"]/*' />
@@ -232,7 +312,8 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [ComVisible(false)]
-        public string Lang {
+        public string Lang
+        {
             get { return lang == null ? string.Empty : lang; }
         }
 
@@ -243,7 +324,8 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [ComVisible(false)]
-        public string Node {
+        public string Node
+        {
             get { return actor == null ? string.Empty : actor; }
         }
 
@@ -252,7 +334,8 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [ComVisible(false)]
-        public string Role {
+        public string Role
+        {
             get { return role == null ? string.Empty : role; }
         }
 
@@ -261,60 +344,123 @@ namespace System.Web.Services.Protocols {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [ComVisible(false)]
-        public SoapFaultSubCode SubCode {
-            get {
-                return subCode; 
-            }
+        public SoapFaultSubCode SubCode
+        {
+            get { return subCode; }
         }
 
         // helper function that allows us to pass dummy subCodes around but clear them before they get to the user
-        internal void ClearSubCode() {
+        internal void ClearSubCode()
+        {
             if (subCode != null)
                 subCode = subCode.SubCode;
         }
 
-        [SecurityPermissionAttribute(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
+        [SecurityPermissionAttribute(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
             IDictionary list = Data;
             list["code"] = Code;
             list["actor"] = Actor;
             list["role"] = Role;
-            
+
             // Bug: 323493: XmlNode is not serializable, and I don't think we want to really want to create
             // an XmlDocument just to read a XmlNode from string to get the deserialized instance back.
             // list["detail"] = Detail;
-            
+
             list["subCode"] = SubCode;
             list["lang"] = Lang;
 
             base.GetObjectData(info, context);
         }
 
-        static SoapException CreateSuppressedException(SoapProtocolVersion soapVersion, string message, Exception innerException) {
-            return new SoapException(Res.GetString(Res.WebSuppressedExceptionMessage), 
-                soapVersion == SoapProtocolVersion.Soap12 
-                ? new XmlQualifiedName(Soap12.Code.Receiver, Soap12.Namespace) 
-                : new XmlQualifiedName(Soap.Code.Server, Soap.Namespace));
+        static SoapException CreateSuppressedException(
+            SoapProtocolVersion soapVersion,
+            string message,
+            Exception innerException
+        )
+        {
+            return new SoapException(
+                Res.GetString(Res.WebSuppressedExceptionMessage),
+                soapVersion == SoapProtocolVersion.Soap12
+                    ? new XmlQualifiedName(Soap12.Code.Receiver, Soap12.Namespace)
+                    : new XmlQualifiedName(Soap.Code.Server, Soap.Namespace)
+            );
         }
 
-        internal static SoapException Create(SoapProtocolVersion soapVersion, string message, XmlQualifiedName code, 
-                                                       string actor, string role, System.Xml.XmlNode detail,
-                                                       SoapFaultSubCode subCode, Exception innerException) {
-            if (System.Web.Services.Configuration.WebServicesSection.Current.Diagnostics.SuppressReturningExceptions) {
-                return CreateSuppressedException(soapVersion, Res.GetString(Res.WebSuppressedExceptionMessage), innerException);
+        internal static SoapException Create(
+            SoapProtocolVersion soapVersion,
+            string message,
+            XmlQualifiedName code,
+            string actor,
+            string role,
+            System.Xml.XmlNode detail,
+            SoapFaultSubCode subCode,
+            Exception innerException
+        )
+        {
+            if (
+                System
+                    .Web
+                    .Services
+                    .Configuration
+                    .WebServicesSection
+                    .Current
+                    .Diagnostics
+                    .SuppressReturningExceptions
+            )
+            {
+                return CreateSuppressedException(
+                    soapVersion,
+                    Res.GetString(Res.WebSuppressedExceptionMessage),
+                    innerException
+                );
             }
-            else {
-                return new SoapException(message, code, actor, role, detail, subCode, innerException);
+            else
+            {
+                return new SoapException(
+                    message,
+                    code,
+                    actor,
+                    role,
+                    detail,
+                    subCode,
+                    innerException
+                );
             }
         }
-        internal static SoapException Create(SoapProtocolVersion soapVersion, string message, XmlQualifiedName code, Exception innerException) { 
-            if (System.Web.Services.Configuration.WebServicesSection.Current.Diagnostics.SuppressReturningExceptions) {
-                return CreateSuppressedException(soapVersion, Res.GetString(Res.WebSuppressedExceptionMessage), innerException);
+
+        internal static SoapException Create(
+            SoapProtocolVersion soapVersion,
+            string message,
+            XmlQualifiedName code,
+            Exception innerException
+        )
+        {
+            if (
+                System
+                    .Web
+                    .Services
+                    .Configuration
+                    .WebServicesSection
+                    .Current
+                    .Diagnostics
+                    .SuppressReturningExceptions
+            )
+            {
+                return CreateSuppressedException(
+                    soapVersion,
+                    Res.GetString(Res.WebSuppressedExceptionMessage),
+                    innerException
+                );
             }
-            else {
+            else
+            {
                 return new SoapException(message, code, innerException);
             }
         }
     }
 }
-

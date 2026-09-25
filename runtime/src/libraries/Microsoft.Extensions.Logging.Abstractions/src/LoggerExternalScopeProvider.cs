@@ -16,8 +16,7 @@ namespace Microsoft.Extensions.Logging
         /// <summary>
         /// Creates a new <see cref="LoggerExternalScopeProvider"/>.
         /// </summary>
-        public LoggerExternalScopeProvider()
-        { }
+        public LoggerExternalScopeProvider() { }
 
         /// <inheritdoc />
         public void ForEachScope<TState>(Action<object?, TState> callback, TState state)

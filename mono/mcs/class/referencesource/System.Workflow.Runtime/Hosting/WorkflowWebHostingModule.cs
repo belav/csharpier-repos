@@ -18,11 +18,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
-using System.Diagnostics;
-using System.Web;
 using System.Collections.Specialized;
+using System.Diagnostics;
+using System.Text;
 using System.Threading;
+using System.Web;
 
 #endregion
 
@@ -31,14 +31,20 @@ namespace System.Workflow.Runtime.Hosting
     /// <summary>
     /// Cookie based rotuing module implementation
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowWebHostingModule : IHttpModule
     {
         HttpApplication currentApplication;
 
         public WorkflowWebHostingModule()
         {
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "Workflow Web Hosting Module Created");            
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Workflow Web Hosting Module Created"
+            );
         }
 
         /// <summary>
@@ -47,7 +53,11 @@ namespace System.Workflow.Runtime.Hosting
         /// <param name="application"></param>
         void IHttpModule.Init(HttpApplication application)
         {
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "Workflow Web Hosting Module Initialized");
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Workflow Web Hosting Module Initialized"
+            );
 
             this.currentApplication = application;
 
@@ -56,21 +66,27 @@ namespace System.Workflow.Runtime.Hosting
             application.AcquireRequestState += this.OnAcquireRequestState;
         }
 
-        void IHttpModule.Dispose()
-        {
-
-        }
+        void IHttpModule.Dispose() { }
 
         void OnAcquireRequestState(Object sender, EventArgs e)
         {
             //Performs Cookie based routing.
-            WorkflowTrace.Host.TraceEvent(TraceEventType.Information, 0, "WebHost Module Routing Begin");
+            WorkflowTrace.Host.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "WebHost Module Routing Begin"
+            );
 
-            HttpCookie routingCookie = HttpContext.Current.Request.Cookies.Get("WF_WorkflowInstanceId");
+            HttpCookie routingCookie = HttpContext.Current.Request.Cookies.Get(
+                "WF_WorkflowInstanceId"
+            );
 
             if (routingCookie != null)
             {
-                HttpContext.Current.Items.Add("__WorkflowInstanceId__", new Guid(routingCookie.Value));
+                HttpContext.Current.Items.Add(
+                    "__WorkflowInstanceId__",
+                    new Guid(routingCookie.Value)
+                );
             }
             //else no routing information found, it could be activation request or non workflow based request.
         }
@@ -90,7 +106,7 @@ namespace System.Workflow.Runtime.Hosting
                     cookie.Value = workflowInstanceId.ToString();
                     HttpContext.Current.Response.Cookies.Add(cookie);
                 }
-            }            
-        }        
-    }   
+            }
+        }
+    }
 }

@@ -9,13 +9,27 @@ namespace Microsoft.Web.Mvc.ModelBinding
 {
     public sealed class TypeConverterModelBinder : IExtensibleModelBinder
     {
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "The exception is recorded to be acted upon later.")]
-        [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)", Justification = "The ValueProviderResult already has the necessary context to perform a culture-aware conversion.")]
-        public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "The exception is recorded to be acted upon later."
+        )]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1304:SpecifyCultureInfo",
+            MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)",
+            Justification = "The ValueProviderResult already has the necessary context to perform a culture-aware conversion."
+        )]
+        public bool BindModel(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
             ModelBinderUtil.ValidateBindingContext(bindingContext);
 
-            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
+                bindingContext.ModelName
+            );
             if (valueProviderResult == null)
             {
                 return false; // no entry
@@ -32,10 +46,17 @@ namespace Microsoft.Web.Mvc.ModelBinding
                 if (IsFormatException(ex))
                 {
                     // there was a type conversion failure
-                    string errorString = ModelBinderConfig.TypeConversionErrorMessageProvider(controllerContext, bindingContext.ModelMetadata, valueProviderResult.AttemptedValue);
+                    string errorString = ModelBinderConfig.TypeConversionErrorMessageProvider(
+                        controllerContext,
+                        bindingContext.ModelMetadata,
+                        valueProviderResult.AttemptedValue
+                    );
                     if (errorString != null)
                     {
-                        bindingContext.ModelState.AddModelError(bindingContext.ModelName, errorString);
+                        bindingContext.ModelState.AddModelError(
+                            bindingContext.ModelName,
+                            errorString
+                        );
                     }
                 }
                 else

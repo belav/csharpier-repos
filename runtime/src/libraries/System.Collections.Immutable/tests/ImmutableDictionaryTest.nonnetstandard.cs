@@ -21,18 +21,29 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumeratorWithHashCollisionsTest()
         {
-            ImmutableDictionary<int, GenericParameterHelper> emptyMap = Empty<int, GenericParameterHelper>(new BadHasher<int>());
+            ImmutableDictionary<int, GenericParameterHelper> emptyMap = Empty<
+                int,
+                GenericParameterHelper
+            >(new BadHasher<int>());
             this.EnumeratorTestHelper(emptyMap);
         }
 
-        internal override IBinaryTree GetRootNode<TKey, TValue>(IImmutableDictionary<TKey, TValue> dictionary)
+        internal override IBinaryTree GetRootNode<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> dictionary
+        )
         {
             return ((ImmutableDictionary<TKey, TValue>)dictionary).Root;
         }
 
-        private void EmptyTestHelperHash<TKey, TValue>(IImmutableDictionary<TKey, TValue> empty, TKey someKey)
+        private void EmptyTestHelperHash<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> empty,
+            TKey someKey
+        )
         {
-            Assert.Same(EqualityComparer<TKey>.Default, ((IHashKeyCollection<TKey>)empty).KeyComparer);
+            Assert.Same(
+                EqualityComparer<TKey>.Default,
+                ((IHashKeyCollection<TKey>)empty).KeyComparer
+            );
         }
     }
 }

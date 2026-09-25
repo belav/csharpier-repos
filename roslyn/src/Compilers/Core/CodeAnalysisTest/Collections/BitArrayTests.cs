@@ -25,9 +25,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 for (int b = -1; b < 2; b++) // number of bits more or less than that number of words
                 {
                     int n = BitVector.BitsPerWord * a + b;
-                    if (n < 0) continue;
+                    if (n < 0)
+                        continue;
                     BitVector arr = BitVector.AllSet(n);
-                    if (n > 0) Assert.True(arr[n - 1]);
+                    if (n > 0)
+                        Assert.True(arr[n - 1]);
                     Assert.False(arr[n]);
                 }
             }
@@ -76,10 +78,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         private void CheckIntersectionCore(int capacity, Random r)
         {
-            BitVector b1 = BitVector.Empty, b2 = BitVector.Empty;
+            BitVector b1 = BitVector.Empty,
+                b2 = BitVector.Empty;
             b1.EnsureCapacity(capacity);
             b2.EnsureCapacity(capacity);
-            bool[] a1 = new bool[capacity], a2 = new bool[capacity];
+            bool[] a1 = new bool[capacity],
+                a2 = new bool[capacity];
             for (int i = 0; i < capacity; i++)
             {
                 b1[i] = a1[i] = r.NextBool();
@@ -117,13 +121,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         private void CheckUnionCore(int capacity1, int capacity2, Random r)
         {
-            BitVector b1 = BitVector.Empty, b2 = BitVector.Empty;
+            BitVector b1 = BitVector.Empty,
+                b2 = BitVector.Empty;
             b1.EnsureCapacity(capacity1);
             b2.EnsureCapacity(capacity2);
 
             var maxCapacity = Math.Max(capacity1, capacity2);
             bool[] a1 = new bool[maxCapacity],
-                   a2 = new bool[maxCapacity];
+                a2 = new bool[maxCapacity];
 
             for (int i = 0; i < capacity1; i++)
             {

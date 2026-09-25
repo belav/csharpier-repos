@@ -16,7 +16,7 @@ namespace Roslyn.Test.Utilities
             ThrowOnSetPosition,
             ThrowOnWrite,
             ThrowOnSetLength,
-            CancelOnWrite
+            CancelOnWrite,
         }
 
         public BreakHowType BreakHow;
@@ -37,24 +37,16 @@ namespace Roslyn.Test.Utilities
             get { return true; }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override long Length
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override long Position
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
             set
             {
                 if (BreakHow == BreakHowType.ThrowOnSetPosition)

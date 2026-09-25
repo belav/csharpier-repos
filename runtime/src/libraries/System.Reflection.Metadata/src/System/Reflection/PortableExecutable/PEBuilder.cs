@@ -45,7 +45,14 @@ namespace System.Reflection.PortableExecutable
             public readonly int SizeOfRawData;
             public readonly int PointerToRawData;
 
-            public SerializedSection(BlobBuilder builder, string name, SectionCharacteristics characteristics, int relativeVirtualAddress, int sizeOfRawData, int pointerToRawData)
+            public SerializedSection(
+                BlobBuilder builder,
+                string name,
+                SectionCharacteristics characteristics,
+                int relativeVirtualAddress,
+                int sizeOfRawData,
+                int pointerToRawData
+            )
             {
                 Name = name;
                 Characteristics = characteristics;
@@ -58,7 +65,10 @@ namespace System.Reflection.PortableExecutable
             public int VirtualSize => Builder.Count;
         }
 
-        protected PEBuilder(PEHeaderBuilder header, Func<IEnumerable<Blob>, BlobContentId>? deterministicIdProvider)
+        protected PEBuilder(
+            PEHeaderBuilder header,
+            Func<IEnumerable<Blob>, BlobContentId>? deterministicIdProvider
+        )
         {
             if (header is null)
             {
@@ -76,7 +86,9 @@ namespace System.Reflection.PortableExecutable
             var sections = _lazySections.Value;
             if (sections.IsDefault)
             {
-                throw new InvalidOperationException(SR.Format(SR.MustNotReturnNull, nameof(CreateSections)));
+                throw new InvalidOperationException(
+                    SR.Format(SR.MustNotReturnNull, nameof(CreateSections))
+                );
             }
 
             return sections;
@@ -131,7 +143,10 @@ namespace System.Reflection.PortableExecutable
 
             foreach (var section in sections)
             {
-                var builder = SerializeSection(section.Name, new SectionLocation(nextRva, nextPointer));
+                var builder = SerializeSection(
+                    section.Name,
+                    new SectionLocation(nextRva, nextPointer)
+                );
 
                 var serialized = new SerializedSection(
                     builder,
@@ -139,11 +154,15 @@ namespace System.Reflection.PortableExecutable
                     section.Characteristics,
                     relativeVirtualAddress: nextRva,
                     sizeOfRawData: BitArithmetic.Align(builder.Count, Header.FileAlignment),
-                    pointerToRawData: nextPointer);
+                    pointerToRawData: nextPointer
+                );
 
                 result.Add(serialized);
 
-                nextRva = BitArithmetic.Align(serialized.RelativeVirtualAddress + serialized.VirtualSize, Header.SectionAlignment);
+                nextRva = BitArithmetic.Align(
+                    serialized.RelativeVirtualAddress + serialized.VirtualSize,
+                    Header.SectionAlignment
+                );
                 nextPointer = serialized.PointerToRawData + serialized.SizeOfRawData;
             }
 
@@ -167,29 +186,142 @@ namespace System.Reflection.PortableExecutable
         internal const int DosHeaderSize = 0x80;
 
         private static ReadOnlySpan<byte> DosHeader => // DosHeaderSize
-        [
-            0x4d, 0x5a, 0x90, 0x00, 0x03, 0x00, 0x00, 0x00,
-            0x04, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00, 0x00,
-            0xb8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x40, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-            0x00, 0x00, 0x00, 0x00,
+            [
+                0x4d,
+                0x5a,
+                0x90,
+                0x00,
+                0x03,
+                0x00,
+                0x00,
+                0x00,
+                0x04,
+                0x00,
+                0x00,
+                0x00,
+                0xff,
+                0xff,
+                0x00,
+                0x00,
+                0xb8,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x40,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x80,
+                0x00,
+                0x00,
+                0x00, // NT Header offset (0x80 == DosHeader.Length)
+                0x0e,
+                0x1f,
+                0xba,
+                0x0e,
+                0x00,
+                0xb4,
+                0x09,
+                0xcd,
+                0x21,
+                0xb8,
+                0x01,
+                0x4c,
+                0xcd,
+                0x21,
+                0x54,
+                0x68,
+                0x69,
+                0x73,
+                0x20,
+                0x70,
+                0x72,
+                0x6f,
+                0x67,
+                0x72,
+                0x61,
+                0x6d,
+                0x20,
+                0x63,
+                0x61,
+                0x6e,
+                0x6e,
+                0x6f,
+                0x74,
+                0x20,
+                0x62,
+                0x65,
+                0x20,
+                0x72,
+                0x75,
+                0x6e,
+                0x20,
+                0x69,
+                0x6e,
+                0x20,
+                0x44,
+                0x4f,
+                0x53,
+                0x20,
+                0x6d,
+                0x6f,
+                0x64,
+                0x65,
+                0x2e,
+                0x0d,
+                0x0d,
+                0x0a,
+                0x24,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+            ];
 
-            0x80, 0x00, 0x00, 0x00, // NT Header offset (0x80 == DosHeader.Length)
-
-            0x0e, 0x1f, 0xba, 0x0e, 0x00, 0xb4, 0x09, 0xcd,
-            0x21, 0xb8, 0x01, 0x4c, 0xcd, 0x21, 0x54, 0x68,
-            0x69, 0x73, 0x20, 0x70, 0x72, 0x6f, 0x67, 0x72,
-            0x61, 0x6d, 0x20, 0x63, 0x61, 0x6e, 0x6e, 0x6f,
-            0x74, 0x20, 0x62, 0x65, 0x20, 0x72, 0x75, 0x6e,
-            0x20, 0x69, 0x6e, 0x20, 0x44, 0x4f, 0x53, 0x20,
-            0x6d, 0x6f, 0x64, 0x65, 0x2e, 0x0d, 0x0d, 0x0a,
-            0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-        ];
-
-        private void WriteCoffHeader(BlobBuilder builder, ImmutableArray<SerializedSection> sections, out Blob stampFixup)
+        private void WriteCoffHeader(
+            BlobBuilder builder,
+            ImmutableArray<SerializedSection> sections,
+            out Blob stampFixup
+        )
         {
             // Machine
             builder.WriteUInt16((ushort)(Header.Machine == 0 ? Machine.I386 : Header.Machine));
@@ -219,33 +351,56 @@ namespace System.Reflection.PortableExecutable
             builder.WriteUInt16((ushort)Header.ImageCharacteristics);
         }
 
-        private void WritePEHeader(BlobBuilder builder, PEDirectoriesBuilder directories, ImmutableArray<SerializedSection> sections)
+        private void WritePEHeader(
+            BlobBuilder builder,
+            PEDirectoriesBuilder directories,
+            ImmutableArray<SerializedSection> sections
+        )
         {
             builder.WriteUInt16((ushort)(Header.Is32Bit ? PEMagic.PE32 : PEMagic.PE32Plus));
             builder.WriteByte(Header.MajorLinkerVersion);
             builder.WriteByte(Header.MinorLinkerVersion);
 
             // SizeOfCode:
-            builder.WriteUInt32((uint)SumRawDataSizes(sections, SectionCharacteristics.ContainsCode));
+            builder.WriteUInt32(
+                (uint)SumRawDataSizes(sections, SectionCharacteristics.ContainsCode)
+            );
 
             // SizeOfInitializedData:
-            builder.WriteUInt32((uint)SumRawDataSizes(sections, SectionCharacteristics.ContainsInitializedData));
+            builder.WriteUInt32(
+                (uint)SumRawDataSizes(sections, SectionCharacteristics.ContainsInitializedData)
+            );
 
             // SizeOfUninitializedData:
-            builder.WriteUInt32((uint)SumRawDataSizes(sections, SectionCharacteristics.ContainsUninitializedData));
+            builder.WriteUInt32(
+                (uint)SumRawDataSizes(sections, SectionCharacteristics.ContainsUninitializedData)
+            );
 
             // AddressOfEntryPoint:
             builder.WriteUInt32((uint)directories.AddressOfEntryPoint);
 
             // BaseOfCode:
             int codeSectionIndex = IndexOfSection(sections, SectionCharacteristics.ContainsCode);
-            builder.WriteUInt32((uint)(codeSectionIndex != -1 ? sections[codeSectionIndex].RelativeVirtualAddress : 0));
+            builder.WriteUInt32(
+                (uint)(
+                    codeSectionIndex != -1 ? sections[codeSectionIndex].RelativeVirtualAddress : 0
+                )
+            );
 
             if (Header.Is32Bit)
             {
                 // BaseOfData:
-                int dataSectionIndex = IndexOfSection(sections, SectionCharacteristics.ContainsInitializedData);
-                builder.WriteUInt32((uint)(dataSectionIndex != -1 ? sections[dataSectionIndex].RelativeVirtualAddress : 0));
+                int dataSectionIndex = IndexOfSection(
+                    sections,
+                    SectionCharacteristics.ContainsInitializedData
+                );
+                builder.WriteUInt32(
+                    (uint)(
+                        dataSectionIndex != -1
+                            ? sections[dataSectionIndex].RelativeVirtualAddress
+                            : 0
+                    )
+                );
 
                 builder.WriteUInt32((uint)Header.ImageBase);
             }
@@ -269,10 +424,22 @@ namespace System.Reflection.PortableExecutable
 
             // SizeOfImage:
             var lastSection = sections[sections.Length - 1];
-            builder.WriteUInt32((uint)BitArithmetic.Align(lastSection.RelativeVirtualAddress + lastSection.VirtualSize, Header.SectionAlignment));
+            builder.WriteUInt32(
+                (uint)
+                    BitArithmetic.Align(
+                        lastSection.RelativeVirtualAddress + lastSection.VirtualSize,
+                        Header.SectionAlignment
+                    )
+            );
 
             // SizeOfHeaders:
-            builder.WriteUInt32((uint)BitArithmetic.Align(Header.ComputeSizeOfPEHeaders(sections.Length), Header.FileAlignment));
+            builder.WriteUInt32(
+                (uint)
+                    BitArithmetic.Align(
+                        Header.ComputeSizeOfPEHeaders(sections.Length),
+                        Header.FileAlignment
+                    )
+            );
 
             // Checksum:
             // Shall be zero for strong name signing.
@@ -342,7 +509,10 @@ namespace System.Reflection.PortableExecutable
             builder.WriteUInt64(0);
         }
 
-        private static void WriteSectionHeaders(BlobBuilder builder, ImmutableArray<SerializedSection> serializedSections)
+        private static void WriteSectionHeaders(
+            BlobBuilder builder,
+            ImmutableArray<SerializedSection> serializedSections
+        )
         {
             foreach (var serializedSection in serializedSections)
             {
@@ -350,7 +520,10 @@ namespace System.Reflection.PortableExecutable
             }
         }
 
-        private static void WriteSectionHeader(BlobBuilder builder, SerializedSection serializedSection)
+        private static void WriteSectionHeader(
+            BlobBuilder builder,
+            SerializedSection serializedSection
+        )
         {
             if (serializedSection.VirtualSize == 0)
             {
@@ -389,7 +562,10 @@ namespace System.Reflection.PortableExecutable
             builder.WriteUInt32((uint)serializedSection.Characteristics);
         }
 
-        private static int IndexOfSection(ImmutableArray<SerializedSection> sections, SectionCharacteristics characteristics)
+        private static int IndexOfSection(
+            ImmutableArray<SerializedSection> sections,
+            SectionCharacteristics characteristics
+        )
         {
             for (int i = 0; i < sections.Length; i++)
             {
@@ -402,7 +578,10 @@ namespace System.Reflection.PortableExecutable
             return -1;
         }
 
-        private static int SumRawDataSizes(ImmutableArray<SerializedSection> sections, SectionCharacteristics characteristics)
+        private static int SumRawDataSizes(
+            ImmutableArray<SerializedSection> sections,
+            SectionCharacteristics characteristics
+        )
         {
             int result = 0;
             for (int i = 0; i < sections.Length; i++)
@@ -417,7 +596,12 @@ namespace System.Reflection.PortableExecutable
         }
 
         // internal for testing
-        internal static IEnumerable<Blob> GetContentToSign(BlobBuilder peImage, int peHeadersSize, int peHeaderAlignment, Blob strongNameSignatureFixup)
+        internal static IEnumerable<Blob> GetContentToSign(
+            BlobBuilder peImage,
+            int peHeadersSize,
+            int peHeaderAlignment,
+            Blob strongNameSignatureFixup
+        )
         {
             // Signed content includes
             // - PE header without its alignment padding
@@ -458,8 +642,14 @@ namespace System.Reflection.PortableExecutable
                     }
                     else if (blob.Buffer == strongNameSignatureFixup.Buffer)
                     {
-                        yield return GetPrefixBlob(new Blob(blob.Buffer, blobStart, blobLength), strongNameSignatureFixup);
-                        yield return GetSuffixBlob(new Blob(blob.Buffer, blobStart, blobLength), strongNameSignatureFixup);
+                        yield return GetPrefixBlob(
+                            new Blob(blob.Buffer, blobStart, blobLength),
+                            strongNameSignatureFixup
+                        );
+                        yield return GetSuffixBlob(
+                            new Blob(blob.Buffer, blobStart, blobLength),
+                            strongNameSignatureFixup
+                        );
                         break;
                     }
                     else
@@ -472,11 +662,21 @@ namespace System.Reflection.PortableExecutable
         }
 
         // internal for testing
-        internal static Blob GetPrefixBlob(Blob container, Blob blob) => new Blob(container.Buffer, container.Start, blob.Start - container.Start);
-        internal static Blob GetSuffixBlob(Blob container, Blob blob) => new Blob(container.Buffer, blob.Start + blob.Length, container.Start + container.Length - blob.Start - blob.Length);
+        internal static Blob GetPrefixBlob(Blob container, Blob blob) =>
+            new Blob(container.Buffer, container.Start, blob.Start - container.Start);
+
+        internal static Blob GetSuffixBlob(Blob container, Blob blob) =>
+            new Blob(
+                container.Buffer,
+                blob.Start + blob.Length,
+                container.Start + container.Length - blob.Start - blob.Length
+            );
 
         // internal for testing
-        internal static IEnumerable<Blob> GetContentToChecksum(BlobBuilder peImage, Blob checksumFixup)
+        internal static IEnumerable<Blob> GetContentToChecksum(
+            BlobBuilder peImage,
+            Blob checksumFixup
+        )
         {
             foreach (var blob in peImage.GetBlobs())
             {
@@ -492,13 +692,24 @@ namespace System.Reflection.PortableExecutable
             }
         }
 
-        internal void Sign(BlobBuilder peImage, Blob strongNameSignatureFixup, Func<IEnumerable<Blob>, byte[]> signatureProvider)
+        internal void Sign(
+            BlobBuilder peImage,
+            Blob strongNameSignatureFixup,
+            Func<IEnumerable<Blob>, byte[]> signatureProvider
+        )
         {
             Debug.Assert(peImage != null);
             Debug.Assert(signatureProvider != null);
 
             int peHeadersSize = Header.ComputeSizeOfPEHeaders(GetSections().Length);
-            byte[] signature = signatureProvider(GetContentToSign(peImage, peHeadersSize, Header.FileAlignment, strongNameSignatureFixup));
+            byte[] signature = signatureProvider(
+                GetContentToSign(
+                    peImage,
+                    peHeadersSize,
+                    Header.FileAlignment,
+                    strongNameSignatureFixup
+                )
+            );
 
             // signature may be shorter (the rest of the reserved space is padding):
             if (signature == null || signature.Length > strongNameSignatureFixup.Length)
@@ -517,7 +728,8 @@ namespace System.Reflection.PortableExecutable
         // internal for testing
         internal static uint CalculateChecksum(BlobBuilder peImage, Blob checksumFixup)
         {
-            return CalculateChecksum(GetContentToChecksum(peImage, checksumFixup)) + (uint)peImage.Count;
+            return CalculateChecksum(GetContentToChecksum(peImage, checksumFixup))
+                + (uint)peImage.Count;
         }
 
         private static unsafe uint CalculateChecksum(IEnumerable<Blob> blobs)

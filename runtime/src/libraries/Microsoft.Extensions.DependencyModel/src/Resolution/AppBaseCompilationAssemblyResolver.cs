@@ -16,21 +16,23 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         private readonly DependencyContextPaths _dependencyContextPaths;
 
         public AppBaseCompilationAssemblyResolver()
-            : this(FileSystemWrapper.Default)
-        {
-        }
+            : this(FileSystemWrapper.Default) { }
 
         public AppBaseCompilationAssemblyResolver(string basePath)
-            : this(FileSystemWrapper.Default, basePath, DependencyContextPaths.Current)
-        {
-        }
+            : this(FileSystemWrapper.Default, basePath, DependencyContextPaths.Current) { }
 
         internal AppBaseCompilationAssemblyResolver(IFileSystem fileSystem)
-            : this(fileSystem, ApplicationEnvironment.ApplicationBasePath, DependencyContextPaths.Current)
-        {
-        }
+            : this(
+                fileSystem,
+                ApplicationEnvironment.ApplicationBasePath,
+                DependencyContextPaths.Current
+            ) { }
 
-        internal AppBaseCompilationAssemblyResolver(IFileSystem fileSystem, string basePath, DependencyContextPaths dependencyContextPaths)
+        internal AppBaseCompilationAssemblyResolver(
+            IFileSystem fileSystem,
+            string basePath,
+            DependencyContextPaths dependencyContextPaths
+        )
         {
             ThrowHelper.ThrowIfNull(fileSystem);
             ThrowHelper.ThrowIfNull(basePath);
@@ -45,15 +47,30 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
         {
             ThrowHelper.ThrowIfNull(library);
 
-            bool isProject = string.Equals(library.Type, "project", StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(library.Type, "msbuildproject", StringComparison.OrdinalIgnoreCase);
+            bool isProject =
+                string.Equals(library.Type, "project", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(
+                    library.Type,
+                    "msbuildproject",
+                    StringComparison.OrdinalIgnoreCase
+                );
 
-            bool isPackage = string.Equals(library.Type, "package", StringComparison.OrdinalIgnoreCase);
-            bool isReferenceAssembly = string.Equals(library.Type, "referenceassembly", StringComparison.OrdinalIgnoreCase);
-            if (!isProject &&
-                !isPackage &&
-                !isReferenceAssembly &&
-                !string.Equals(library.Type, "reference", StringComparison.OrdinalIgnoreCase))
+            bool isPackage = string.Equals(
+                library.Type,
+                "package",
+                StringComparison.OrdinalIgnoreCase
+            );
+            bool isReferenceAssembly = string.Equals(
+                library.Type,
+                "referenceassembly",
+                StringComparison.OrdinalIgnoreCase
+            );
+            if (
+                !isProject
+                && !isPackage
+                && !isReferenceAssembly
+                && !string.Equals(library.Type, "reference", StringComparison.OrdinalIgnoreCase)
+            )
             {
                 return false;
             }
@@ -67,10 +84,7 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 return false;
             }
 
-            var directories = new List<string>()
-            {
-                _basePath
-            };
+            var directories = new List<string>() { _basePath };
 
             if (isPublished)
             {
@@ -101,7 +115,14 @@ namespace Microsoft.Extensions.DependencyModel.Resolution
                 foreach (string directory in directories)
                 {
                     string fullName;
-                    if (ResolverUtils.TryResolveAssemblyFile(_fileSystem, directory, assemblyFile, out fullName))
+                    if (
+                        ResolverUtils.TryResolveAssemblyFile(
+                            _fileSystem,
+                            directory,
+                            assemblyFile,
+                            out fullName
+                        )
+                    )
                     {
                         paths.Add(fullName);
                         resolved = true;

@@ -25,9 +25,11 @@ namespace XLinqTests
 
         private const string TestSaveFileName = "testSave";
 
-        private const string xml = "<PurchaseOrder><Item price=\"100\">Motor<![CDATA[cdata]]><elem>innertext</elem>text<?pi pi pi?></Item></PurchaseOrder>";
+        private const string xml =
+            "<PurchaseOrder><Item price=\"100\">Motor<![CDATA[cdata]]><elem>innertext</elem>text<?pi pi pi?></Item></PurchaseOrder>";
 
-        private const string xmlForXElementWriteContent = "<Item price=\"100\">Motor<![CDATA[cdata]]><elem>innertext</elem>text<?pi pi pi?></Item>";
+        private const string xmlForXElementWriteContent =
+            "<Item price=\"100\">Motor<![CDATA[cdata]]><elem>innertext</elem>text<?pi pi pi?></Item>";
 
         #endregion
 
@@ -50,30 +52,127 @@ namespace XLinqTests
 
         public static string[] GetExpectedXml()
         {
-            string[] xml = { "text", "", "    ", "<!--comment1 comment1 -->", "<!---->", "<!--     -->", "<?pi1 pi1 pi1 ?>", "<?pi1?>", "<?pi1      ?>", "<![CDATA[cdata cdata ]]>", "<![CDATA[]]>", "<![CDATA[     ]]>", "<elem attr=\"val\">text<!--comm--><?pi hffgg?><![CDATA[jfggr]]></elem>" };
+            string[] xml =
+            {
+                "text",
+                "",
+                "    ",
+                "<!--comment1 comment1 -->",
+                "<!---->",
+                "<!--     -->",
+                "<?pi1 pi1 pi1 ?>",
+                "<?pi1?>",
+                "<?pi1      ?>",
+                "<![CDATA[cdata cdata ]]>",
+                "<![CDATA[]]>",
+                "<![CDATA[     ]]>",
+                "<elem attr=\"val\">text<!--comm--><?pi hffgg?><![CDATA[jfggr]]></elem>",
+            };
             return xml;
         }
 
         public static object[] GetObjects()
         {
-            object[] objects = { new XText("text"), new XText(""), new XText("    "), new XComment("comment1 comment1 "), new XComment(""), new XComment("     "), new XProcessingInstruction("pi1", "pi1 pi1 "), new XProcessingInstruction("pi1", ""), new XProcessingInstruction("pi1", "     "), new XCData("cdata cdata "), new XCData(""), new XCData("     "), new XElement("elem", new XAttribute("attr", "val"), new XText("text"), new XComment("comm"), new XProcessingInstruction("pi", "hffgg"), new XCData("jfggr")) };
+            object[] objects =
+            {
+                new XText("text"),
+                new XText(""),
+                new XText("    "),
+                new XComment("comment1 comment1 "),
+                new XComment(""),
+                new XComment("     "),
+                new XProcessingInstruction("pi1", "pi1 pi1 "),
+                new XProcessingInstruction("pi1", ""),
+                new XProcessingInstruction("pi1", "     "),
+                new XCData("cdata cdata "),
+                new XCData(""),
+                new XCData("     "),
+                new XElement(
+                    "elem",
+                    new XAttribute("attr", "val"),
+                    new XText("text"),
+                    new XComment("comm"),
+                    new XProcessingInstruction("pi", "hffgg"),
+                    new XCData("jfggr")
+                ),
+            };
             return objects;
         }
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(writer_5) { Attribute = new VariationAttribute("Write and valIdate XDocumentType") { Priority = 0 } });
-            AddChild(new TestVariation(writer_18) { Attribute = new VariationAttribute("WriteTo after WriteState = Error") { Param = "WriteTo", Priority = 2 } });
-            AddChild(new TestVariation(writer_18) { Attribute = new VariationAttribute("Save after WriteState = Error") { Param = "Save", Priority = 2 } });
-            AddChild(new TestVariation(writer_20) { Attribute = new VariationAttribute("XDocument: Null parameters for Save") { Priority = 1 } });
-            AddChild(new TestVariation(writer_21) { Attribute = new VariationAttribute("XElement: Null parameters for Save") { Priority = 1 } });
-            AddChild(new TestVariation(writer_23) { Attribute = new VariationAttribute("XDocument: Null parameters for WriteTo") { Priority = 1 } });
-            AddChild(new TestVariation(writer_24) { Attribute = new VariationAttribute("XElement: Null parameters for WriteTo") { Priority = 1 } });
+            AddChild(
+                new TestVariation(writer_5)
+                {
+                    Attribute = new VariationAttribute("Write and valIdate XDocumentType")
+                    {
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(writer_18)
+                {
+                    Attribute = new VariationAttribute("WriteTo after WriteState = Error")
+                    {
+                        Param = "WriteTo",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(writer_18)
+                {
+                    Attribute = new VariationAttribute("Save after WriteState = Error")
+                    {
+                        Param = "Save",
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(writer_20)
+                {
+                    Attribute = new VariationAttribute("XDocument: Null parameters for Save")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(writer_21)
+                {
+                    Attribute = new VariationAttribute("XElement: Null parameters for Save")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(writer_23)
+                {
+                    Attribute = new VariationAttribute("XDocument: Null parameters for WriteTo")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(writer_24)
+                {
+                    Attribute = new VariationAttribute("XElement: Null parameters for WriteTo")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
         }
 
         public Encoding[] GetEncodings()
         {
-            Encoding[] encodings = { Encoding.UTF8
+            Encoding[] encodings =
+            {
+                Encoding.UTF8,
                 //Encoding.Unicode,
                 //Encoding.BigEndianUnicode,
             };
@@ -122,9 +221,7 @@ namespace XLinqTests
                             }
                             throw new TestException(TestResult.Failed, "");
                         }
-                        catch (InvalidOperationException)
-                        {
-                        }
+                        catch (InvalidOperationException) { }
                     }
                     finally
                     {
@@ -151,9 +248,7 @@ namespace XLinqTests
                     doc.Save((TextWriter)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
             try
             {
@@ -167,9 +262,7 @@ namespace XLinqTests
                     doc.Save((TextWriter)null, SaveOptions.DisableFormatting);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
             try
             {
@@ -183,9 +276,7 @@ namespace XLinqTests
                     doc.Save((TextWriter)null, SaveOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
             //save with XmlWriter
             try
@@ -200,9 +291,7 @@ namespace XLinqTests
                     doc.Save((XmlWriter)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
         }
 
@@ -216,26 +305,20 @@ namespace XLinqTests
                 doc.Save((TextWriter)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
             try
             {
                 doc.Save((TextWriter)null, SaveOptions.DisableFormatting);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 doc.Save((TextWriter)null, SaveOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             //save with XmlWriter
             try
@@ -243,9 +326,7 @@ namespace XLinqTests
                 doc.Save((XmlWriter)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument: Null parameters for WriteTo")]
@@ -257,9 +338,7 @@ namespace XLinqTests
                 doc.WriteTo(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
         }
 
         //[Variation(Priority = 1, Desc = "XElement: Null parameters for WriteTo")]
@@ -271,9 +350,7 @@ namespace XLinqTests
                 doc.WriteTo(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
         }
 
         //[Variation(Priority = 0, Desc = "Write and valIdate XDocumentType")]
@@ -350,8 +427,12 @@ namespace XLinqTests
 
             TextWriter tw = new StreamWriter(FilePathUtil.getStream(GenerateTestFileName(count++)));
             xmlWriters.Add(new CoreXml.Test.XLinq.CustomWriter(tw, ws)); // CustomWriter
-            xmlWriters.Add(XmlWriter.Create(FilePathUtil.getStream(GenerateTestFileName(count++)), s)); // Factory XmlWriter
-            xmlWriters.Add(XmlWriter.Create(FilePathUtil.getStream(GenerateTestFileName(count++)), ws)); // Factory Writer
+            xmlWriters.Add(
+                XmlWriter.Create(FilePathUtil.getStream(GenerateTestFileName(count++)), s)
+            ); // Factory XmlWriter
+            xmlWriters.Add(
+                XmlWriter.Create(FilePathUtil.getStream(GenerateTestFileName(count++)), ws)
+            ); // Factory Writer
 
             return xmlWriters;
         }
@@ -376,22 +457,46 @@ namespace XLinqTests
                 if (doc is XDocument)
                 {
                     ((XDocument)doc).Save(FilePathUtil.getStream(file0));
-                    ((XDocument)doc).Save(FilePathUtil.getStream(file1), SaveOptions.DisableFormatting);
+                    ((XDocument)doc).Save(
+                        FilePathUtil.getStream(file1),
+                        SaveOptions.DisableFormatting
+                    );
                     ((XDocument)doc).Save(FilePathUtil.getStream(file2), SaveOptions.None);
                 }
                 else if (doc is XElement)
                 {
                     ((XElement)doc).Save(FilePathUtil.getStream(file0));
-                    ((XElement)doc).Save(FilePathUtil.getStream(file1), SaveOptions.DisableFormatting);
+                    ((XElement)doc).Save(
+                        FilePathUtil.getStream(file1),
+                        SaveOptions.DisableFormatting
+                    );
                     ((XElement)doc).Save(FilePathUtil.getStream(file2), SaveOptions.None);
                 }
                 else
                 {
                     TestLog.Compare(false, "Wrong object");
                 }
-                TestLog.Compare(_diff.Compare(FilePathUtil.getStream(BaseSaveFileName), FilePathUtil.getStream(file0)), "Save failed:encoding " + encoding);
-                TestLog.Compare(_diff.Compare(FilePathUtil.getStream(BaseSaveFileName), FilePathUtil.getStream(file1)), "Save(preserveWhitespace true) failed:encoding " + encoding);
-                TestLog.Compare(_diff.Compare(FilePathUtil.getStream(BaseSaveFileName), FilePathUtil.getStream(file2)), "Save(preserveWhitespace false) " + encoding);
+                TestLog.Compare(
+                    _diff.Compare(
+                        FilePathUtil.getStream(BaseSaveFileName),
+                        FilePathUtil.getStream(file0)
+                    ),
+                    "Save failed:encoding " + encoding
+                );
+                TestLog.Compare(
+                    _diff.Compare(
+                        FilePathUtil.getStream(BaseSaveFileName),
+                        FilePathUtil.getStream(file1)
+                    ),
+                    "Save(preserveWhitespace true) failed:encoding " + encoding
+                );
+                TestLog.Compare(
+                    _diff.Compare(
+                        FilePathUtil.getStream(BaseSaveFileName),
+                        FilePathUtil.getStream(file2)
+                    ),
+                    "Save(preserveWhitespace false) " + encoding
+                );
             }
         }
 
@@ -428,9 +533,27 @@ namespace XLinqTests
                     w1.Dispose();
                     w2.Dispose();
 
-                    TestLog.Compare(_diff.Compare(FilePathUtil.getStream(BaseSaveFileName), FilePathUtil.getStream(file0)), "TextWriter failed:encoding " + encoding);
-                    TestLog.Compare(_diff.Compare(FilePathUtil.getStream(BaseSaveFileName), FilePathUtil.getStream(file1)), "TextWriter(preserveWhtsp=true) failed:encoding " + encoding);
-                    TestLog.Compare(_diff.Compare(FilePathUtil.getStream(BaseSaveFileName), FilePathUtil.getStream(file2)), "TextWriter(preserveWhtsp=false) failed:encoding " + encoding);
+                    TestLog.Compare(
+                        _diff.Compare(
+                            FilePathUtil.getStream(BaseSaveFileName),
+                            FilePathUtil.getStream(file0)
+                        ),
+                        "TextWriter failed:encoding " + encoding
+                    );
+                    TestLog.Compare(
+                        _diff.Compare(
+                            FilePathUtil.getStream(BaseSaveFileName),
+                            FilePathUtil.getStream(file1)
+                        ),
+                        "TextWriter(preserveWhtsp=true) failed:encoding " + encoding
+                    );
+                    TestLog.Compare(
+                        _diff.Compare(
+                            FilePathUtil.getStream(BaseSaveFileName),
+                            FilePathUtil.getStream(file2)
+                        ),
+                        "TextWriter(preserveWhtsp=false) failed:encoding " + encoding
+                    );
                 }
             }
         }
@@ -523,7 +646,11 @@ namespace XLinqTests
             }
 
             TestLog.Compare(toString, expectedXml, "Test ToString failed");
-            TestLog.Compare(xml, expectedXml, "Test .ToString(SaveOptions.DisableFormatting) failed");
+            TestLog.Compare(
+                xml,
+                expectedXml,
+                "Test .ToString(SaveOptions.DisableFormatting) failed"
+            );
         }
         #endregion
     }

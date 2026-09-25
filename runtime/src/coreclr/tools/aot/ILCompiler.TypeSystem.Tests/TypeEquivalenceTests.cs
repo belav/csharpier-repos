@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Reflection.Metadata;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,7 +16,9 @@ namespace TypeSystemTests
         class Logger : ITestOutputHelper
         {
             void ITestOutputHelper.WriteLine(string message) => Console.WriteLine(message);
-            void ITestOutputHelper.WriteLine(string format, params object[] args) => Console.WriteLine(format, args);
+
+            void ITestOutputHelper.WriteLine(string format, params object[] args) =>
+                Console.WriteLine(format, args);
         }
 
         public static void NotQuiteMain()
@@ -26,6 +27,7 @@ namespace TypeSystemTests
             tests.TestTypesWhichShouldMatch();
         }
     }
+
     public class TypeEquivalenceTests
     {
         private TestTypeSystemContext _context;
@@ -51,21 +53,38 @@ namespace TypeSystemTests
             var systemModule = _context.CreateModuleForSimpleName("CoreTestAssembly");
             _context.SetSystemModule(systemModule);
 
-            _testModule1 = (EcmaModule)_context.CreateModuleForSimpleName("TypeEquivalenceAssembly1");
-            _testModule2 = (EcmaModule)_context.CreateModuleForSimpleName("TypeEquivalenceAssembly2");
+            _testModule1 = (EcmaModule)
+                _context.CreateModuleForSimpleName("TypeEquivalenceAssembly1");
+            _testModule2 = (EcmaModule)
+                _context.CreateModuleForSimpleName("TypeEquivalenceAssembly2");
 
             _referenceType = systemModule.GetType("Canonicalization", "ReferenceType");
             _otherReferenceType = systemModule.GetType("Canonicalization", "OtherReferenceType");
             _structType = systemModule.GetType("Canonicalization", "StructType");
             _otherStructType = systemModule.GetType("Canonicalization", "OtherStructType");
-            _genericReferenceType = systemModule.GetType("Canonicalization", "GenericReferenceType`1");
+            _genericReferenceType = systemModule.GetType(
+                "Canonicalization",
+                "GenericReferenceType`1"
+            );
             _genericStructType = systemModule.GetType("Canonicalization", "GenericStructType`1");
-            _genericReferenceTypeWithThreeParams = systemModule.GetType("Canonicalization", "GenericReferenceTypeWithThreeParams`3");
-            _genericStructTypeWithThreeParams = systemModule.GetType("Canonicalization", "GenericStructTypeWithThreeParams`3");
-            _interfaceGenericType = systemModule.GetType("Canonicalization", "InterfaceGenericType`1");
+            _genericReferenceTypeWithThreeParams = systemModule.GetType(
+                "Canonicalization",
+                "GenericReferenceTypeWithThreeParams`3"
+            );
+            _genericStructTypeWithThreeParams = systemModule.GetType(
+                "Canonicalization",
+                "GenericStructTypeWithThreeParams`3"
+            );
+            _interfaceGenericType = systemModule.GetType(
+                "Canonicalization",
+                "InterfaceGenericType`1"
+            );
         }
 
-        private IEnumerable<TypeDefinitionHandle> GetAllNestedTypes(MetadataReader metadataReader, TypeDefinition typeDef)
+        private IEnumerable<TypeDefinitionHandle> GetAllNestedTypes(
+            MetadataReader metadataReader,
+            TypeDefinition typeDef
+        )
         {
             foreach (var nestedHandle in typeDef.GetNestedTypes())
             {
@@ -78,7 +97,10 @@ namespace TypeSystemTests
             }
         }
 
-        private IEnumerable<TypeDefinitionHandle> GetAllTypesInNamespace(EcmaModule module, string @namespace)
+        private IEnumerable<TypeDefinitionHandle> GetAllTypesInNamespace(
+            EcmaModule module,
+            string @namespace
+        )
         {
             var metadataReader = module.MetadataReader;
             foreach (var typeDefHandle in metadataReader.TypeDefinitions)
@@ -100,26 +122,50 @@ namespace TypeSystemTests
             }
         }
 
-        private static bool IsEqualCustomAttributeName(CustomAttributeHandle attributeHandle, MetadataReader metadataReader,
-            string attributeNamespace, string attributeName)
+        private static bool IsEqualCustomAttributeName(
+            CustomAttributeHandle attributeHandle,
+            MetadataReader metadataReader,
+            string attributeNamespace,
+            string attributeName
+        )
         {
-            StringHandle namespaceHandle, nameHandle;
-            if (!metadataReader.GetAttributeNamespaceAndName(attributeHandle, out namespaceHandle, out nameHandle))
+            StringHandle namespaceHandle,
+                nameHandle;
+            if (
+                !metadataReader.GetAttributeNamespaceAndName(
+                    attributeHandle,
+                    out namespaceHandle,
+                    out nameHandle
+                )
+            )
                 return false;
 
             return metadataReader.StringComparer.Equals(namespaceHandle, attributeNamespace)
                 && metadataReader.StringComparer.Equals(nameHandle, attributeName);
         }
 
-        private string GetTypeIdentiferFromTypeDef(EcmaModule module, TypeDefinitionHandle typeDefHandle)
+        private string GetTypeIdentiferFromTypeDef(
+            EcmaModule module,
+            TypeDefinitionHandle typeDefHandle
+        )
         {
-            CustomAttributeTypeProvider customAttributeTypeProvider = new CustomAttributeTypeProvider(module);
+            CustomAttributeTypeProvider customAttributeTypeProvider =
+                new CustomAttributeTypeProvider(module);
             var typeDef = module.MetadataReader.GetTypeDefinition(typeDefHandle);
             foreach (var attributeHandle in typeDef.GetCustomAttributes())
             {
-                if (IsEqualCustomAttributeName(attributeHandle, module.MetadataReader, "System.Runtime.InteropServices", "TypeIdentifierAttribute"))
+                if (
+                    IsEqualCustomAttributeName(
+                        attributeHandle,
+                        module.MetadataReader,
+                        "System.Runtime.InteropServices",
+                        "TypeIdentifierAttribute"
+                    )
+                )
                 {
-                    var typeIdentifierAttribute = module.MetadataReader.GetCustomAttribute(attributeHandle).DecodeValue(customAttributeTypeProvider);
+                    var typeIdentifierAttribute = module
+                        .MetadataReader.GetCustomAttribute(attributeHandle)
+                        .DecodeValue(customAttributeTypeProvider);
 
                     if (typeIdentifierAttribute.FixedArguments.Length != 2)
                         throw new Exception("Unexpected in this test suite");
@@ -131,9 +177,13 @@ namespace TypeSystemTests
             return null;
         }
 
-        private Dictionary<string, TypeDefinitionHandle> GetTypeIdentifierAssociatedTypesInNamespace(EcmaModule module, string @namespace)
+        private Dictionary<
+            string,
+            TypeDefinitionHandle
+        > GetTypeIdentifierAssociatedTypesInNamespace(EcmaModule module, string @namespace)
         {
-            Dictionary<string, TypeDefinitionHandle> result = new Dictionary<string, TypeDefinitionHandle>();
+            Dictionary<string, TypeDefinitionHandle> result =
+                new Dictionary<string, TypeDefinitionHandle>();
             foreach (var typeDef in GetAllTypesInNamespace(module, @namespace))
             {
                 string typeId = GetTypeIdentiferFromTypeDef(module, typeDef);
@@ -145,16 +195,27 @@ namespace TypeSystemTests
             return result;
         }
 
-        private IEnumerable<ValueTuple<TypeDesc, TypeDesc>> GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(string @namespace)
+        private IEnumerable<
+            ValueTuple<TypeDesc, TypeDesc>
+        > GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(string @namespace)
         {
-            var module1Types = GetTypeIdentifierAssociatedTypesInNamespace(_testModule1, @namespace);
-            var module2Types = GetTypeIdentifierAssociatedTypesInNamespace(_testModule2, @namespace);
+            var module1Types = GetTypeIdentifierAssociatedTypesInNamespace(
+                _testModule1,
+                @namespace
+            );
+            var module2Types = GetTypeIdentifierAssociatedTypesInNamespace(
+                _testModule2,
+                @namespace
+            );
 
             foreach (var data in module1Types)
             {
                 if (module2Types.TryGetValue(data.Key, out var typeDef2))
                 {
-                    yield return ((TypeDesc)_testModule1.GetObject(data.Value), (TypeDesc)_testModule2.GetObject(typeDef2));
+                    yield return (
+                        (TypeDesc)_testModule1.GetObject(data.Value),
+                        (TypeDesc)_testModule2.GetObject(typeDef2)
+                    );
                 }
             }
         }
@@ -162,20 +223,32 @@ namespace TypeSystemTests
         [Fact]
         public void TestTypesWhichShouldMatch()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichMatch"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichMatch"
+                )
+            )
             {
                 _logger.WriteLine($"Comparing {typePair.Item1} to {typePair.Item2}");
                 Assert.NotEqual(typePair.Item1, typePair.Item2);
                 Assert.True(typePair.Item1.IsEquivalentTo(typePair.Item2));
-                Assert.True(typePair.Item1.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType);
-                Assert.True(typePair.Item2.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType);
+                Assert.True(
+                    typePair.Item1.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType
+                );
+                Assert.True(
+                    typePair.Item2.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType
+                );
             }
         }
 
         [Fact]
         public void TestGenericInterfacesWithTypeEquivalence()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichMatch"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichMatch"
+                )
+            )
             {
                 var gen1 = _interfaceGenericType.MakeInstantiatedType(typePair.Item1);
                 var gen2 = _interfaceGenericType.MakeInstantiatedType(typePair.Item2);
@@ -189,7 +262,11 @@ namespace TypeSystemTests
         [Fact]
         public void TestGenericClassesWithTypeEquivalence()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichMatch"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichMatch"
+                )
+            )
             {
                 var gen1 = _genericReferenceType.MakeInstantiatedType(typePair.Item1);
                 var gen2 = _genericReferenceType.MakeInstantiatedType(typePair.Item2);
@@ -203,7 +280,11 @@ namespace TypeSystemTests
         [Fact]
         public void TestGenericStructsWithTypeEquivalence()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichMatch"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichMatch"
+                )
+            )
             {
                 var gen1 = _genericStructType.MakeInstantiatedType(typePair.Item1);
                 var gen2 = _genericStructType.MakeInstantiatedType(typePair.Item2);
@@ -217,25 +298,39 @@ namespace TypeSystemTests
         [Fact]
         public void TestTypesWhichShouldNotMatch()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichDoNotMatch"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichDoNotMatch"
+                )
+            )
             {
                 _logger.WriteLine($"Comparing {typePair.Item1} to {typePair.Item2}");
                 Assert.False(typePair.Item1.IsEquivalentTo(typePair.Item2));
-                Assert.True(typePair.Item1.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType);
-                Assert.True(typePair.Item2.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType);
+                Assert.True(
+                    typePair.Item1.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType
+                );
+                Assert.True(
+                    typePair.Item2.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType
+                );
             }
         }
 
         [Fact]
         public void TestTypesWhichShouldNotBeLoadable()
         {
-            foreach (var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace("TypesWhichDoNotLoad"))
+            foreach (
+                var typePair in GetTypesWhichClaimMatchingTypeIdentifiersInNamespace(
+                    "TypesWhichDoNotLoad"
+                )
+            )
             {
                 if (((MetadataType)typePair.Item1).Name.EndsWith("IGNORE"))
                     continue;
 
                 _logger.WriteLine($"Checking load behavior of {typePair.Item1}");
-                Assert.False(typePair.Item1.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType);
+                Assert.False(
+                    typePair.Item1.TypeHasCharacteristicsRequiredToBeLoadableTypeEquivalentType
+                );
             }
         }
     }

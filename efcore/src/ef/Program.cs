@@ -28,9 +28,14 @@ internal static class Program
         catch (Exception ex)
         {
             var wrappedException = ex as WrappedException;
-            if (ex is CommandException
+            if (
+                ex is CommandException
                 || ex is CommandParsingException
-                || (wrappedException?.Type == "Microsoft.EntityFrameworkCore.Design.OperationException"))
+                || (
+                    wrappedException?.Type
+                    == "Microsoft.EntityFrameworkCore.Design.OperationException"
+                )
+            )
             {
                 Reporter.WriteVerbose(ex.ToString());
             }

@@ -26,66 +26,63 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.Serialization;
 
-namespace Mono.XBuild.CommandLine {
-	[Serializable]
-	public class CommandLineException : Exception {
-		int errorCode;
-		
-		public CommandLineException ()
-			: base ("Unknown command line exception has occured.")
-		{
-		}
-		
-		public CommandLineException (string message)
-			: base (message) 
-		{
-		}
-		
-		public CommandLineException (string message, int errorCode)
-			: base (message)
-		{
-			this.errorCode = errorCode;
-		}
-		
-		public CommandLineException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
-		
-		public CommandLineException (string message, Exception innerException, int errorCode)
-			: base (message, innerException)
-		{
-			this.errorCode = errorCode;
-		}
-		
-		public CommandLineException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			errorCode = info.GetInt32 ("ErrorCode");
-		}
-		
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			base.GetObjectData (info, context);
-			info.AddValue ("ErrorCode", errorCode);
-		}
-		
-		public int ErrorCode {
-			get { return errorCode; }
-		}
+namespace Mono.XBuild.CommandLine
+{
+    [Serializable]
+    public class CommandLineException : Exception
+    {
+        int errorCode;
 
-		public override string Message {
-			get {
-				if (InnerException != null)
-					return base.Message + ": " + InnerException.Message;
-				else
-					return base.Message;
-			}
-		}
-	}
+        public CommandLineException()
+            : base("Unknown command line exception has occured.") { }
+
+        public CommandLineException(string message)
+            : base(message) { }
+
+        public CommandLineException(string message, int errorCode)
+            : base(message)
+        {
+            this.errorCode = errorCode;
+        }
+
+        public CommandLineException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        public CommandLineException(string message, Exception innerException, int errorCode)
+            : base(message, innerException)
+        {
+            this.errorCode = errorCode;
+        }
+
+        public CommandLineException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            errorCode = info.GetInt32("ErrorCode");
+        }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("ErrorCode", errorCode);
+        }
+
+        public int ErrorCode
+        {
+            get { return errorCode; }
+        }
+
+        public override string Message
+        {
+            get
+            {
+                if (InnerException != null)
+                    return base.Message + ": " + InnerException.Message;
+                else
+                    return base.Message;
+            }
+        }
+    }
 }
-

@@ -463,19 +463,16 @@ internal static class JsonRequestHelpers
         string path
     )
     {
-        return serverCallContext.DescriptorInfo.PathDescriptorsCache.GetOrAdd(
-            path,
-            p =>
-            {
-                ServiceDescriptorHelpers.TryResolveDescriptors(
-                    requestMessage.Descriptor,
-                    p.Split('.'),
-                    allowJsonName: true,
-                    out var pathDescriptors
-                );
-                return pathDescriptors;
-            }
-        );
+        return serverCallContext.DescriptorInfo.PathDescriptorsCache.GetOrAdd(path, p =>
+        {
+            ServiceDescriptorHelpers.TryResolveDescriptors(
+                requestMessage.Descriptor,
+                p.Split('.'),
+                allowJsonName: true,
+                out var pathDescriptors
+            );
+            return pathDescriptors;
+        });
     }
 
     public static async ValueTask SendMessage<TResponse>(

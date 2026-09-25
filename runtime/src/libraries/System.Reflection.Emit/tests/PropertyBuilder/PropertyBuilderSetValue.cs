@@ -12,11 +12,26 @@ namespace System.Reflection.Emit.Tests
         public void SetValue_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            FieldBuilder field = type.DefineField("TestField", typeof(int), FieldAttributes.Private);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), null);
+            FieldBuilder field = type.DefineField(
+                "TestField",
+                typeof(int),
+                FieldAttributes.Private
+            );
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                null
+            );
 
-            MethodAttributes getMethodAttributes = MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
-            MethodBuilder method = type.DefineMethod("TestMethod", getMethodAttributes, typeof(int), null);
+            MethodAttributes getMethodAttributes =
+                MethodAttributes.Public | MethodAttributes.SpecialName | MethodAttributes.HideBySig;
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                getMethodAttributes,
+                typeof(int),
+                null
+            );
 
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);

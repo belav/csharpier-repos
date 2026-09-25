@@ -14,20 +14,44 @@ public class ManualTestsAsync : TarTestsBase
 {
     public static IEnumerable<object[]> WriteEntry_LongFileSize_TheoryDataAsync()
         // Fixes error xUnit1015: MemberData needs to be in the same class
-        => ManualTests.WriteEntry_LongFileSize_TheoryData();
+        =>
+        ManualTests.WriteEntry_LongFileSize_TheoryData();
 
     [ConditionalTheory(typeof(ManualTests), nameof(ManualTests.ManualTestsEnabled))]
     [MemberData(nameof(WriteEntry_LongFileSize_TheoryDataAsync))]
-    [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.Android | TestPlatforms.Browser, "Needs too much disk space.")]
-    public async Task WriteEntry_LongFileSizeAsync(TarEntryFormat entryFormat, long size, bool unseekableStream)
+    [SkipOnPlatform(
+        TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.Android | TestPlatforms.Browser,
+        "Needs too much disk space."
+    )]
+    public async Task WriteEntry_LongFileSizeAsync(
+        TarEntryFormat entryFormat,
+        long size,
+        bool unseekableStream
+    )
     {
         // Write archive with a 8 Gb long entry.
-        await using FileStream tarFile = File.Open(GetTestFilePath(), new FileStreamOptions { Access = FileAccess.ReadWrite, Mode = FileMode.Create, Options = FileOptions.DeleteOnClose });
-        Stream s = unseekableStream ? new WrappedStream(tarFile, tarFile.CanRead, tarFile.CanWrite, canSeek: false) : tarFile;
+        await using FileStream tarFile = File.Open(
+            GetTestFilePath(),
+            new FileStreamOptions
+            {
+                Access = FileAccess.ReadWrite,
+                Mode = FileMode.Create,
+                Options = FileOptions.DeleteOnClose,
+            }
+        );
+        Stream s = unseekableStream
+            ? new WrappedStream(tarFile, tarFile.CanRead, tarFile.CanWrite, canSeek: false)
+            : tarFile;
 
         await using (TarWriter writer = new(s, leaveOpen: true))
         {
-            TarEntry writeEntry = InvokeTarEntryCreationConstructor(entryFormat, entryFormat is TarEntryFormat.V7 ? TarEntryType.V7RegularFile : TarEntryType.RegularFile, "foo");
+            TarEntry writeEntry = InvokeTarEntryCreationConstructor(
+                entryFormat,
+                entryFormat is TarEntryFormat.V7
+                    ? TarEntryType.V7RegularFile
+                    : TarEntryType.RegularFile,
+                "foo"
+            );
             writeEntry.DataStream = new SimulatedDataStream(size);
             await writer.WriteEntryAsync(writeEntry);
         }
@@ -66,9 +90,13 @@ public class ManualTestsAsync : TarTestsBase
 
             while (dataStream.Position < dummyDataOffset)
             {
-                int bufSize = (int)Math.Min(seekBuffer.Length, dummyDataOffset - dataStream.Position);
+                int bufSize = (int)
+                    Math.Min(seekBuffer.Length, dummyDataOffset - dataStream.Position);
                 int res = await dataStream.ReadAsync(seekBuffer.Slice(0, bufSize));
-                Assert.True(res > 0, "Unseekable stream finished before expected - Something went very wrong");
+                Assert.True(
+                    res > 0,
+                    "Unseekable stream finished before expected - Something went very wrong"
+                );
             }
         }
 

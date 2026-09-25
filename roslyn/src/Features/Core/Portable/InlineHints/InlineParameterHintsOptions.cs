@@ -9,18 +9,31 @@ namespace Microsoft.CodeAnalysis.InlineHints;
 [DataContract]
 internal readonly record struct InlineParameterHintsOptions
 {
-    [DataMember] public bool EnabledForParameters { get; init; } = false;
-    [DataMember] public bool ForLiteralParameters { get; init; } = true;
-    [DataMember] public bool ForIndexerParameters { get; init; } = true;
-    [DataMember] public bool ForObjectCreationParameters { get; init; } = true;
-    [DataMember] public bool ForOtherParameters { get; init; } = false;
-    [DataMember] public bool SuppressForParametersThatDifferOnlyBySuffix { get; init; } = true;
-    [DataMember] public bool SuppressForParametersThatMatchMethodIntent { get; init; } = true;
-    [DataMember] public bool SuppressForParametersThatMatchArgumentName { get; init; } = true;
+    [DataMember]
+    public bool EnabledForParameters { get; init; } = false;
 
-    public InlineParameterHintsOptions()
-    {
-    }
+    [DataMember]
+    public bool ForLiteralParameters { get; init; } = true;
+
+    [DataMember]
+    public bool ForIndexerParameters { get; init; } = true;
+
+    [DataMember]
+    public bool ForObjectCreationParameters { get; init; } = true;
+
+    [DataMember]
+    public bool ForOtherParameters { get; init; } = false;
+
+    [DataMember]
+    public bool SuppressForParametersThatDifferOnlyBySuffix { get; init; } = true;
+
+    [DataMember]
+    public bool SuppressForParametersThatMatchMethodIntent { get; init; } = true;
+
+    [DataMember]
+    public bool SuppressForParametersThatMatchArgumentName { get; init; } = true;
+
+    public InlineParameterHintsOptions() { }
 
     public static readonly InlineParameterHintsOptions Default = new();
 }

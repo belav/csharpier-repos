@@ -54,11 +54,16 @@ namespace System.Threading.Tests
         {
             using (var b = new Barrier(2))
             {
-                var t = new Timer(_ =>
-                {
-                    b.SignalAndWait();
-                    b.SignalAndWait();
-                }, null, 1, -1);
+                var t = new Timer(
+                    _ =>
+                    {
+                        b.SignalAndWait();
+                        b.SignalAndWait();
+                    },
+                    null,
+                    1,
+                    -1
+                );
 
                 b.SignalAndWait();
                 ValueTask vt = t.DisposeAsync();
@@ -76,11 +81,16 @@ namespace System.Threading.Tests
         {
             using (var b = new Barrier(2))
             {
-                var t = new Timer(_ =>
-                {
-                    b.SignalAndWait();
-                    b.SignalAndWait();
-                }, null, 1, -1);
+                var t = new Timer(
+                    _ =>
+                    {
+                        b.SignalAndWait();
+                        b.SignalAndWait();
+                    },
+                    null,
+                    1,
+                    -1
+                );
 
                 b.SignalAndWait();
                 Task vt1 = t.DisposeAsync().AsTask();
@@ -101,11 +111,16 @@ namespace System.Threading.Tests
         {
             using (var b = new Barrier(2))
             {
-                var t = new Timer(_ =>
-                {
-                    b.SignalAndWait();
-                    b.SignalAndWait();
-                }, null, 1, -1);
+                var t = new Timer(
+                    _ =>
+                    {
+                        b.SignalAndWait();
+                        b.SignalAndWait();
+                    },
+                    null,
+                    1,
+                    -1
+                );
 
                 b.SignalAndWait();
                 t.Dispose();
@@ -124,16 +139,23 @@ namespace System.Threading.Tests
         {
             using (var b = new Barrier(2))
             {
-                var t = new Timer(_ =>
-                {
-                    b.SignalAndWait();
-                    b.SignalAndWait();
-                }, null, 1, -1);
+                var t = new Timer(
+                    _ =>
+                    {
+                        b.SignalAndWait();
+                        b.SignalAndWait();
+                    },
+                    null,
+                    1,
+                    -1
+                );
 
                 var mre = new ManualResetEvent(false);
                 b.SignalAndWait();
                 t.Dispose(mre);
-                await Assert.ThrowsAsync<InvalidOperationException>(async () => await t.DisposeAsync());
+                await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    await t.DisposeAsync()
+                );
                 b.SignalAndWait();
                 mre.WaitOne();
 
@@ -146,11 +168,16 @@ namespace System.Threading.Tests
         {
             using (var b = new Barrier(2))
             {
-                var t = new Timer(_ =>
-                {
-                    b.SignalAndWait();
-                    b.SignalAndWait();
-                }, null, 1, -1);
+                var t = new Timer(
+                    _ =>
+                    {
+                        b.SignalAndWait();
+                        b.SignalAndWait();
+                    },
+                    null,
+                    1,
+                    -1
+                );
 
                 b.SignalAndWait();
                 ValueTask vt = t.DisposeAsync();

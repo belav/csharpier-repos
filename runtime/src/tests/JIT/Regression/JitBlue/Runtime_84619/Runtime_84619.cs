@@ -9,12 +9,13 @@ using Xunit;
 // Reduced from 155.1 KiB to 0.2 KiB in 00:01:48
 // Hits JIT assert in Release:
 // Assertion failed '((tree->gtFlags & GTF_VAR_DEF) == 0) && (tree->GetLclNum() == lclNum) && tree->gtVNPair.BothDefined()' in 'Program:Main(Fuzzlyn.ExecutionServer.IRuntime)' during 'VN based copy prop' (IL size 25; hash 0xade6b36b; FullOpts)
-// 
+//
 //     File: D:\a\_work\1\s\src\coreclr\jit\copyprop.cpp Line: 161
-// 
+//
 public class Runtime_84619
 {
     public static sbyte s_27;
+
     [Fact]
     public static void TestEntryPoint()
     {

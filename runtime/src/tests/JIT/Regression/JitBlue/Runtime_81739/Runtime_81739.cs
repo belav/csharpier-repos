@@ -16,7 +16,5 @@ public class Runtime_81739
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume<T>(T v)
-    {
-    }
+    private static void Consume<T>(T v) { }
 }

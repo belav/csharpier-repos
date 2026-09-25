@@ -33,11 +33,18 @@ namespace System.Security.Cryptography.X509Certificates
             SafeSecCertificateHandle certHandle;
             SafeSecIdentityHandle identityHandle;
 
-            if (Interop.AppleCrypto.X509DemuxAndRetainHandle(handle, out certHandle, out identityHandle))
+            if (
+                Interop.AppleCrypto.X509DemuxAndRetainHandle(
+                    handle,
+                    out certHandle,
+                    out identityHandle
+                )
+            )
             {
                 Debug.Assert(
                     certHandle.IsInvalid != identityHandle.IsInvalid,
-                    $"certHandle.IsInvalid ({certHandle.IsInvalid}) should differ from identityHandle.IsInvalid ({identityHandle.IsInvalid})");
+                    $"certHandle.IsInvalid ({certHandle.IsInvalid}) should differ from identityHandle.IsInvalid ({identityHandle.IsInvalid})"
+                );
 
                 if (certHandle.IsInvalid)
                 {
@@ -70,7 +77,11 @@ namespace System.Security.Cryptography.X509Certificates
             return pal;
         }
 
-        internal static ICertificatePal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static ICertificatePal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
@@ -193,7 +204,8 @@ namespace System.Security.Cryptography.X509Certificates
             set
             {
                 throw new PlatformNotSupportedException(
-                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(FriendlyName)));
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(FriendlyName))
+                );
             }
         }
 
@@ -257,7 +269,8 @@ namespace System.Security.Cryptography.X509Certificates
             return policyData;
         }
 
-        public IEnumerable<X509Extension> Extensions {
+        public IEnumerable<X509Extension> Extensions
+        {
             get
             {
                 EnsureCertData();
@@ -292,7 +305,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is required for Compat")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "SHA1 is required for Compat"
+        )]
         public byte[] Thumbprint
         {
             get
@@ -308,7 +325,8 @@ namespace System.Security.Cryptography.X509Certificates
             set
             {
                 throw new PlatformNotSupportedException(
-                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(Archived)));
+                    SR.Format(SR.Cryptography_Unix_X509_PropertyNotSettable, nameof(Archived))
+                );
             }
         }
 
@@ -329,7 +347,9 @@ namespace System.Security.Cryptography.X509Certificates
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
+            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
+                _identityHandle
+            );
             Debug.Assert(!publicKey.IsInvalid);
 
             return new RSAImplementation.RSASecurityTransforms(publicKey, privateKey);
@@ -342,7 +362,9 @@ namespace System.Security.Cryptography.X509Certificates
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
+            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
+                _identityHandle
+            );
             Debug.Assert(!publicKey.IsInvalid);
 
             return new ECDsaImplementation.ECDsaSecurityTransforms(publicKey, privateKey);
@@ -355,10 +377,15 @@ namespace System.Security.Cryptography.X509Certificates
 
             Debug.Assert(!_identityHandle.IsInvalid);
             SafeSecKeyRefHandle publicKey = Interop.AppleCrypto.X509GetPublicKey(_certHandle);
-            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(_identityHandle);
+            SafeSecKeyRefHandle privateKey = Interop.AppleCrypto.X509GetPrivateKeyFromIdentity(
+                _identityHandle
+            );
             Debug.Assert(!publicKey.IsInvalid);
 
-            return new ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms(publicKey, privateKey);
+            return new ECDiffieHellmanImplementation.ECDiffieHellmanSecurityTransforms(
+                publicKey,
+                privateKey
+            );
         }
 
         public string GetNameInfo(X509NameType nameType, bool forIssuer)
@@ -411,7 +438,8 @@ namespace System.Security.Cryptography.X509Certificates
 
                 string message = SR.Format(
                     SR.Cryptography_X509_CertificateCorrupted,
-                    subjectSummary);
+                    subjectSummary
+                );
 
                 throw new CryptographicException(message, e);
             }

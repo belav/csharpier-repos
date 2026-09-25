@@ -7,6 +7,6 @@ namespace System.DirectoryServices.Protocols
     {
         Add = 0,
         Delete = 1,
-        Replace = 2
+        Replace = 2,
     }
 }

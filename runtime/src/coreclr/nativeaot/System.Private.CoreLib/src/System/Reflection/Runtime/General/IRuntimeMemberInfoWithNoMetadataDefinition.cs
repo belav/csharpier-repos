@@ -9,7 +9,5 @@ namespace System.Reflection.Runtime.General
     //    2. Is to be lumped into the "no metadata token" group for the purposes
     //       of the HasSameMetadataDefinitionAs() api.
     //
-    internal interface IRuntimeMemberInfoWithNoMetadataDefinition
-    {
-    }
+    internal interface IRuntimeMemberInfoWithNoMetadataDefinition { }
 }

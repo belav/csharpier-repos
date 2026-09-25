@@ -42,7 +42,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
             Dependency[] dependencies = null,
             bool? serviceable = null,
             string path = null,
-            string hashPath = null)
+            string hashPath = null
+        )
         {
             return new CompilationLibrary(
                 libraryType ?? DefaultType,
@@ -53,8 +54,8 @@ namespace Microsoft.Extensions.DependencyModel.Tests
                 dependencies ?? DefaultDependencies,
                 serviceable ?? DefaultServiceable,
                 path ?? DefaultPath,
-                hashPath ?? DefaultHashPath);
+                hashPath ?? DefaultHashPath
+            );
         }
     }
-
 }

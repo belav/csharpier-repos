@@ -8,13 +8,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 {
     /// <summary>
     /// provides info on the given file
-    /// 
+    ///
     /// this will be used to provide dynamic content such as generated content from cshtml to workspace
     /// we acquire this from <see cref="IDynamicFileInfoProvider"/> exposed from external components such as razor for cshtml
     /// </summary>
     internal sealed class RazorDynamicFileInfo
     {
-        public RazorDynamicFileInfo(string filePath, SourceCodeKind sourceCodeKind, TextLoader textLoader, IRazorDocumentServiceProvider documentServiceProvider)
+        public RazorDynamicFileInfo(
+            string filePath,
+            SourceCodeKind sourceCodeKind,
+            TextLoader textLoader,
+            IRazorDocumentServiceProvider documentServiceProvider
+        )
         {
             FilePath = filePath;
             SourceCodeKind = sourceCodeKind;
@@ -48,8 +53,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         /// </summary>
         public DocumentInfo ToUpdatedDocumentInfo(DocumentInfo existingDocumentInfo)
         {
-            var serviceProvider = new RazorDocumentServiceProviderWrapper(this.DocumentServiceProvider);
-            return new DocumentInfo(existingDocumentInfo.Attributes, this.TextLoader, serviceProvider);
+            var serviceProvider = new RazorDocumentServiceProviderWrapper(
+                this.DocumentServiceProvider
+            );
+            return new DocumentInfo(
+                existingDocumentInfo.Attributes,
+                this.TextLoader,
+                serviceProvider
+            );
         }
     }
 }

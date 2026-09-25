@@ -21,10 +21,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
 
             Assert.Throws<InvalidOperationException>(() =>
             {
-                context.Declare((segment, last) =>
-                {
-                    Assert.Fail("No segment should be declared.");
-                });
+                context.Declare(
+                    (segment, last) =>
+                    {
+                        Assert.Fail("No segment should be declared.");
+                    }
+                );
             });
         }
 
@@ -34,20 +36,27 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root" }, "a", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "b", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "c", true)]
-        public void PredictReturnsCorrectResult(string[] testSegments, string[] pushDirectory, string expectSegment, bool expectLast)
+        public void PredictReturnsCorrectResult(
+            string[] testSegments,
+            string[] pushDirectory,
+            string expectSegment,
+            bool expectLast
+        )
         {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);
 
-            context.Declare((segment, last) =>
-            {
-                var literal = segment as MockNonRecursivePathSegment;
+            context.Declare(
+                (segment, last) =>
+                {
+                    var literal = segment as MockNonRecursivePathSegment;
 
-                Assert.NotNull(segment);
-                Assert.Equal(expectSegment, literal.Value);
-                Assert.Equal(expectLast, last);
-            });
+                    Assert.NotNull(segment);
+                    Assert.Equal(expectSegment, literal.Value);
+                    Assert.Equal(expectLast, last);
+                }
+            );
         }
 
         [Theory]
@@ -55,24 +64,39 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "c" })]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b", "d" })]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b", "c" })]
-        public void PredictNotCallBackWhenEnterUnmatchDirectory(string[] testSegments, string[] pushDirectory)
+        public void PredictNotCallBackWhenEnterUnmatchDirectory(
+            string[] testSegments,
+            string[] pushDirectory
+        )
         {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
             PatternContextHelper.PushDirectory(context, pushDirectory);
 
-            context.Declare((segment, last) =>
-            {
-                Assert.Fail("No segment should be declared.");
-            });
+            context.Declare(
+                (segment, last) =>
+                {
+                    Assert.Fail("No segment should be declared.");
+                }
+            );
         }
 
         [Theory]
-        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", }, "b", false)]
+        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "b", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "d", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "c", true)]
-        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b", "c" }, "d", false)]
-        public void TestFileForIncludeReturnsCorrectResult(string[] testSegments, string[] pushDirectory, string filename, bool expectResult)
+        [InlineData(
+            new string[] { "a", "b", "c" },
+            new string[] { "root", "a", "b", "c" },
+            "d",
+            false
+        )]
+        public void TestFileForIncludeReturnsCorrectResult(
+            string[] testSegments,
+            string[] pushDirectory,
+            string filename,
+            bool expectResult
+        )
         {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
@@ -84,11 +108,21 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         }
 
         [Theory]
-        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", }, "b", false)]
+        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "b", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "c", true)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "d", false)]
-        [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b", "c" }, "d", false)]
-        public void TestFileForExcludeReturnsCorrectResult(string[] testSegments, string[] pushDirectory, string filename, bool expectResult)
+        [InlineData(
+            new string[] { "a", "b", "c" },
+            new string[] { "root", "a", "b", "c" },
+            "d",
+            false
+        )]
+        public void TestFileForExcludeReturnsCorrectResult(
+            string[] testSegments,
+            string[] pushDirectory,
+            string filename,
+            bool expectResult
+        )
         {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearExclude(pattern);
@@ -104,7 +138,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "b", true)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "c", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "c", false)]
-        public void TestDirectoryForIncludeReturnsCorrectResult(string[] testSegments, string[] pushDirectory, string directoryName, bool expectResult)
+        public void TestDirectoryForIncludeReturnsCorrectResult(
+            string[] testSegments,
+            string[] pushDirectory,
+            string directoryName,
+            bool expectResult
+        )
         {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearInclude(pattern);
@@ -120,7 +159,12 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "b", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a" }, "c", false)]
         [InlineData(new string[] { "a", "b", "c" }, new string[] { "root", "a", "b" }, "c", true)]
-        public void TestDirectoryForExcludeReturnsCorrectResult(string[] testSegments, string[] pushDirectory, string directoryName, bool expectResult)
+        public void TestDirectoryForExcludeReturnsCorrectResult(
+            string[] testSegments,
+            string[] pushDirectory,
+            string directoryName,
+            bool expectResult
+        )
         {
             var pattern = MockLinearPatternBuilder.New().Add(testSegments).Build();
             var context = new PatternContextLinearExclude(pattern);
@@ -138,17 +182,32 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
                 Name = name;
             }
 
-            public override string FullName { get { throw new NotImplementedException(); } }
+            public override string FullName
+            {
+                get { throw new NotImplementedException(); }
+            }
 
             public override string Name { get; }
 
-            public override DirectoryInfoBase ParentDirectory { get { throw new NotImplementedException(); } }
+            public override DirectoryInfoBase ParentDirectory
+            {
+                get { throw new NotImplementedException(); }
+            }
 
-            public override IEnumerable<FileSystemInfoBase> EnumerateFileSystemInfos() { throw new NotImplementedException(); }
+            public override IEnumerable<FileSystemInfoBase> EnumerateFileSystemInfos()
+            {
+                throw new NotImplementedException();
+            }
 
-            public override DirectoryInfoBase GetDirectory(string path) { throw new NotImplementedException(); }
+            public override DirectoryInfoBase GetDirectory(string path)
+            {
+                throw new NotImplementedException();
+            }
 
-            public override FileInfoBase GetFile(string path) { throw new NotImplementedException(); }
+            public override FileInfoBase GetFile(string path)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private class FakeFileInfo : FileInfoBase
@@ -158,11 +217,17 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
                 Name = name;
             }
 
-            public override string FullName { get { throw new NotImplementedException(); } }
+            public override string FullName
+            {
+                get { throw new NotImplementedException(); }
+            }
 
             public override string Name { get; }
 
-            public override DirectoryInfoBase ParentDirectory { get { throw new NotImplementedException(); } }
+            public override DirectoryInfoBase ParentDirectory
+            {
+                get { throw new NotImplementedException(); }
+            }
         }
     }
 }

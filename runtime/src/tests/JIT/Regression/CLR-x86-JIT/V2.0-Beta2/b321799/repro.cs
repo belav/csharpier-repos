@@ -14,7 +14,6 @@ delegate void NoArg();
 
 public class SmallRepro
 {
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Throws1()
     {
@@ -26,7 +25,6 @@ public class SmallRepro
     {
         throw new Exception2();
     }
-
 
     static void Rethrows1()
     {
@@ -118,7 +116,8 @@ public class SmallRepro
                 bPassed = false;
             }
         }
-        if (bPassed) return 100;
+        if (bPassed)
+            return 100;
         return 1;
     }
 }

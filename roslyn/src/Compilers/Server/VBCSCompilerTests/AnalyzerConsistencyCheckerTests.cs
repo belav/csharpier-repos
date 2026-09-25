@@ -10,15 +10,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Basic.Reference.Assemblies;
 using Microsoft.CodeAnalysis.CommandLine;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Xunit;
 using Xunit.Abstractions;
-using Microsoft.CodeAnalysis.Test.Utilities;
-using Basic.Reference.Assemblies;
 
 namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
 {
@@ -26,6 +26,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     public class AssemblyLoadTestFixtureCollection : ICollectionFixture<AssemblyLoadTestFixture>
     {
         public const string Name = nameof(AssemblyLoadTestFixtureCollection);
+
         private AssemblyLoadTestFixtureCollection() { }
     }
 
@@ -35,13 +36,22 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         private ICompilerServerLogger Logger { get; }
         private AssemblyLoadTestFixture TestFixture { get; }
 
-        public AnalyzerConsistencyCheckerTests(ITestOutputHelper testOutputHelper, AssemblyLoadTestFixture testFixture)
+        public AnalyzerConsistencyCheckerTests(
+            ITestOutputHelper testOutputHelper,
+            AssemblyLoadTestFixture testFixture
+        )
         {
             Logger = new XunitCompilerServerLogger(testOutputHelper);
             TestFixture = testFixture;
         }
 
-        private TempFile CreateNetStandardDll(TempDirectory directory, string assemblyName, string version, ImmutableArray<byte> publicKey, string? extraSource = null)
+        private TempFile CreateNetStandardDll(
+            TempDirectory directory,
+            string assemblyName,
+            string version,
+            ImmutableArray<byte> publicKey,
+            string? extraSource = null
+        )
         {
             var source = $$"""
                 using System;
@@ -60,13 +70,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 warningLevel: Diagnostic.MaxWarningLevel,
                 cryptoPublicKey: publicKey,
                 deterministic: true,
-                publicSign: true);
+                publicSign: true
+            );
 
             var comp = CSharpCompilation.Create(
                 assemblyName,
                 sources,
                 references: NetStandard20.All,
-                options: options);
+                options: options
+            );
 
             var file = directory.CreateFile($"{assemblyName}.dll");
             var emitResult = comp.Emit(file.Path);
@@ -77,17 +89,26 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         /// <summary>
         /// Must support loading a DLL without all of it's references being present. It is common for analyzer
         /// assemblies to have missing references because customers often pair code fixers and analyzers into
-        /// the same assembly.Here Alpha depends on Gamma which is not included 
+        /// the same assembly.Here Alpha depends on Gamma which is not included
         /// </summary>
         [Fact]
         public void LoadLibraryWithMissingReference()
         {
             var directory = Temp.CreateDirectory();
             _ = directory.CopyFile(TestFixture.Alpha);
-            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(directory.CreateDirectory("shadow").Path);
+            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
+                directory.CreateDirectory("shadow").Path
+            );
 
-            var analyzerReferences = ImmutableArray.Create(new CommandLineAnalyzerReference("Alpha.dll"));
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, assemblyLoader, Logger);
+            var analyzerReferences = ImmutableArray.Create(
+                new CommandLineAnalyzerReference("Alpha.dll")
+            );
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                assemblyLoader,
+                Logger
+            );
             Assert.True(result);
         }
 
@@ -95,14 +116,22 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public void LoadLibraryAll()
         {
             var directory = Temp.CreateDirectory();
-            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(directory.CreateDirectory("shadow").Path);
+            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
+                directory.CreateDirectory("shadow").Path
+            );
             var analyzerReferences = ImmutableArray.Create(
                 new CommandLineAnalyzerReference("Alpha.dll"),
                 new CommandLineAnalyzerReference("Beta.dll"),
                 new CommandLineAnalyzerReference("Gamma.dll"),
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(Path.GetDirectoryName(TestFixture.Alpha)!, analyzerReferences, assemblyLoader, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                Path.GetDirectoryName(TestFixture.Alpha)!,
+                analyzerReferences,
+                assemblyLoader,
+                Logger
+            );
             Assert.True(result);
         }
 
@@ -110,22 +139,42 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public void DifferingMvidsDifferentDirectory()
         {
             var directory = Temp.CreateDirectory();
-            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(directory.CreateDirectory("shadow").Path);
+            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
+                directory.CreateDirectory("shadow").Path
+            );
 
             var key = NetStandard20.netstandard.GetAssemblyIdentity().PublicKey;
-            var mvidAlpha1 = CreateNetStandardDll(directory.CreateDirectory("mvid1"), "MvidAlpha", "1.0.0.0", key, "class C { }");
-            var mvidAlpha2 = CreateNetStandardDll(directory.CreateDirectory("mvid2"), "MvidAlpha", "1.0.0.0", key, "class D { }");
+            var mvidAlpha1 = CreateNetStandardDll(
+                directory.CreateDirectory("mvid1"),
+                "MvidAlpha",
+                "1.0.0.0",
+                key,
+                "class C { }"
+            );
+            var mvidAlpha2 = CreateNetStandardDll(
+                directory.CreateDirectory("mvid2"),
+                "MvidAlpha",
+                "1.0.0.0",
+                key,
+                "class D { }"
+            );
 
             var analyzerReferences = ImmutableArray.Create(
                 new CommandLineAnalyzerReference(mvidAlpha1.Path),
-                new CommandLineAnalyzerReference(mvidAlpha2.Path));
+                new CommandLineAnalyzerReference(mvidAlpha2.Path)
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, assemblyLoader, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                assemblyLoader,
+                Logger
+            );
 
 #if NETFRAMEWORK
             Assert.False(result);
 #else
-            // In .NET Core assembly loading is partitioned per directory so it's possible to load the same 
+            // In .NET Core assembly loading is partitioned per directory so it's possible to load the same
             // simple name with different MVID
             Assert.True(result);
 #endif
@@ -135,31 +184,47 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public void DifferingMvidsSameDirectory()
         {
             var directory = Temp.CreateDirectory();
-            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(directory.CreateDirectory("shadow").Path);
+            var assemblyLoader = DefaultAnalyzerAssemblyLoader.CreateNonLockingLoader(
+                directory.CreateDirectory("shadow").Path
+            );
 
             var key = NetStandard20.netstandard.GetAssemblyIdentity().PublicKey;
-            var mvidAlpha1 = CreateNetStandardDll(directory, "MvidAlpha", "1.0.0.0", key, "class C { }");
+            var mvidAlpha1 = CreateNetStandardDll(
+                directory,
+                "MvidAlpha",
+                "1.0.0.0",
+                key,
+                "class C { }"
+            );
 
             var result = AnalyzerConsistencyChecker.Check(
                 directory.Path,
                 ImmutableArray.Create(new CommandLineAnalyzerReference(mvidAlpha1.Path)),
                 assemblyLoader,
-                Logger);
+                Logger
+            );
             Assert.True(result);
 
             File.Delete(mvidAlpha1.Path);
-            var mvidAlpha2 = CreateNetStandardDll(directory, "MvidAlpha", "1.0.0.0", key, "class D { }");
+            var mvidAlpha2 = CreateNetStandardDll(
+                directory,
+                "MvidAlpha",
+                "1.0.0.0",
+                key,
+                "class D { }"
+            );
             Assert.Equal(mvidAlpha1.Path, mvidAlpha2.Path);
             result = AnalyzerConsistencyChecker.Check(
                 directory.Path,
                 ImmutableArray.Create(new CommandLineAnalyzerReference(mvidAlpha2.Path)),
                 assemblyLoader,
-                Logger);
+                Logger
+            );
             Assert.False(result);
         }
 
         /// <summary>
-        /// A differing MVID is okay when it's loading a DLL from the compiler directory. That is 
+        /// A differing MVID is okay when it's loading a DLL from the compiler directory. That is
         /// considered an exchange type. For example if an analyzer has a reference to System.Memory
         /// it will always load the copy the compiler used and that is not a consistency issue.
         /// </summary>
@@ -168,21 +233,32 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
         public void LoadingLibraryFromCompiler()
         {
             var directory = Temp.CreateDirectory();
-            _ = CreateNetStandardDll(directory, "System.Memory", "2.0.0.0", NetStandard20.netstandard.GetAssemblyIdentity().PublicKey);
+            _ = CreateNetStandardDll(
+                directory,
+                "System.Memory",
+                "2.0.0.0",
+                NetStandard20.netstandard.GetAssemblyIdentity().PublicKey
+            );
 
             // This test must use the DefaultAnalyzerAssemblyLoader as we want assembly binding redirects
             // to take affect here.
             var assemblyLoader = new DefaultAnalyzerAssemblyLoader();
             var analyzerReferences = ImmutableArray.Create(
-                new CommandLineAnalyzerReference("System.Memory.dll"));
+                new CommandLineAnalyzerReference("System.Memory.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, assemblyLoader, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                assemblyLoader,
+                Logger
+            );
 
             Assert.True(result);
         }
 
         /// <summary>
-        /// A differing MVID is okay when it's loading a DLL from the GAC. There is no reason that 
+        /// A differing MVID is okay when it's loading a DLL from the GAC. There is no reason that
         /// falling back to csc would change the load result.
         /// </summary>
         [Fact]
@@ -197,9 +273,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             // to take affect here.
             var assemblyLoader = new DefaultAnalyzerAssemblyLoader();
             var analyzerReferences = ImmutableArray.Create(
-                new CommandLineAnalyzerReference("System.Core.dll"));
+                new CommandLineAnalyzerReference("System.Core.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, assemblyLoader, Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                assemblyLoader,
+                Logger
+            );
 
 #if NETFRAMEWORK
             Assert.True(assemblyLoader.LoadFromPath(dllFile.Path).GlobalAssemblyCache);
@@ -215,9 +297,15 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             directory.CopyFile(TestFixture.Delta1);
 
             var analyzerReferences = ImmutableArray.Create(
-                new CommandLineAnalyzerReference("Delta.dll"));
+                new CommandLineAnalyzerReference("Delta.dll")
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, new ThrowingLoader(), Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                new ThrowingLoader(),
+                Logger
+            );
 
             Assert.False(result);
         }
@@ -229,9 +317,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             var key = NetStandard20.netstandard.GetAssemblyIdentity().PublicKey;
             var compFile = CreateNetStandardDll(directory, "netstandardRef", "1.0.0.0", key);
 
-            var analyzerReferences = ImmutableArray.Create(new CommandLineAnalyzerReference(compFile.Path));
+            var analyzerReferences = ImmutableArray.Create(
+                new CommandLineAnalyzerReference(compFile.Path)
+            );
 
-            var result = AnalyzerConsistencyChecker.Check(directory.Path, analyzerReferences, new DefaultAnalyzerAssemblyLoader(), Logger);
+            var result = AnalyzerConsistencyChecker.Check(
+                directory.Path,
+                analyzerReferences,
+                new DefaultAnalyzerAssemblyLoader(),
+                Logger
+            );
 
             Assert.True(result);
         }
@@ -240,7 +335,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
     file sealed class ThrowingLoader : IAnalyzerAssemblyLoaderInternal
     {
         public void AddDependencyLocation(string fullPath) { }
+
         public bool IsHostAssembly(Assembly assembly) => false;
+
         public Assembly LoadFromPath(string fullPath) => throw new Exception();
     }
 }

@@ -119,9 +119,11 @@ namespace System.Text.Json.SourceGeneration
 
                     foreach (PropertyGenerationSpec property in PropertyGenSpecs)
                     {
-                        if (property.PropertyType.SpecialType is SpecialType.System_Object ||
-                            property.NumberHandling != null ||
-                            property.ConverterType != null)
+                        if (
+                            property.PropertyType.SpecialType is SpecialType.System_Object
+                            || property.NumberHandling != null
+                            || property.ConverterType != null
+                        )
                         {
                             return false;
                         }
@@ -130,12 +132,12 @@ namespace System.Text.Json.SourceGeneration
                     return true;
 
                 case ClassType.Enumerable:
-                    return CollectionType != CollectionType.IAsyncEnumerableOfT &&
-                           CollectionValueType!.SpecialType is not SpecialType.System_Object;
+                    return CollectionType != CollectionType.IAsyncEnumerableOfT
+                        && CollectionValueType!.SpecialType is not SpecialType.System_Object;
 
                 case ClassType.Dictionary:
-                    return CollectionKeyType!.SpecialType is SpecialType.System_String &&
-                           CollectionValueType!.SpecialType is not SpecialType.System_Object;
+                    return CollectionKeyType!.SpecialType is SpecialType.System_String
+                        && CollectionValueType!.SpecialType is not SpecialType.System_Object;
 
                 default:
                     return false;

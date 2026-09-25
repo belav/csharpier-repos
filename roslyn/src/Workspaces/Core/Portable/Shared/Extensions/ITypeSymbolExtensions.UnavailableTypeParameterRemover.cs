@@ -12,13 +12,15 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class ITypeSymbolExtensions
     {
-        private class UnavailableTypeParameterRemover(Compilation compilation, ISet<string> availableTypeParameterNames) : SymbolVisitor<ITypeSymbol>
+        private class UnavailableTypeParameterRemover(
+            Compilation compilation,
+            ISet<string> availableTypeParameterNames
+        ) : SymbolVisitor<ITypeSymbol>
         {
-            public override ITypeSymbol DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override ITypeSymbol DefaultVisit(ISymbol node) =>
+                throw new NotImplementedException();
 
-            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol)
-                => symbol;
+            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol) => symbol;
 
             public override ITypeSymbol VisitArrayType(IArrayTypeSymbol symbol)
             {

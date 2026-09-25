@@ -24,99 +24,86 @@ using System.Collections;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public class ReplicationNeighbor
-	{
-		[Flags]
-		public enum ReplicationNeighborOptions : long
-		{
-			Writeable = 16L,
-			SyncOnStartup = 32L,
-			ScheduledSync = 64L,
-			UseInterSiteTransport = 128L,
-			TwoWaySync = 512L,
-			ReturnObjectParent = 2048L,
-			FullSyncInProgress = 65536L,
-			FullSyncNextPacket = 131072L,
-			NeverSynced = 2097152L,
-			Preempted = 16777216L,
-			IgnoreChangeNotifications = 67108864L,
-			DisableScheduledSync = 134217728L,
-			CompressChanges = 268435456L,
-			NoChangeNotifications = 536870912L,
-			PartialAttributeSet = 1073741824L
-		}
+    public class ReplicationNeighbor
+    {
+        [Flags]
+        public enum ReplicationNeighborOptions : long
+        {
+            Writeable = 16L,
+            SyncOnStartup = 32L,
+            ScheduledSync = 64L,
+            UseInterSiteTransport = 128L,
+            TwoWaySync = 512L,
+            ReturnObjectParent = 2048L,
+            FullSyncInProgress = 65536L,
+            FullSyncNextPacket = 131072L,
+            NeverSynced = 2097152L,
+            Preempted = 16777216L,
+            IgnoreChangeNotifications = 67108864L,
+            DisableScheduledSync = 134217728L,
+            CompressChanges = 268435456L,
+            NoChangeNotifications = 536870912L,
+            PartialAttributeSet = 1073741824L,
+        }
 
-		public string PartitionName {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string PartitionName
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public string SourceServer {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string SourceServer
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public ActiveDirectoryTransportType TransportType {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public ActiveDirectoryTransportType TransportType
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public ReplicationNeighbor.ReplicationNeighborOptions ReplicationNeighborOption {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public ReplicationNeighbor.ReplicationNeighborOptions ReplicationNeighborOption
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public Guid SourceInvocationId {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		public long UsnLastObjectChangeSynced {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		public long UsnAttributeFilter {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		public DateTime LastSuccessfulSync {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		public DateTime LastAttemptedSync {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		public int LastSyncResult {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-		public string LastSyncMessage {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public Guid SourceInvocationId
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public int ConsecutiveFailureCount {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-		
-	}
+        public long UsnLastObjectChangeSynced
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public long UsnAttributeFilter
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public DateTime LastSuccessfulSync
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public DateTime LastAttemptedSync
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int LastSyncResult
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string LastSyncMessage
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int ConsecutiveFailureCount
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }

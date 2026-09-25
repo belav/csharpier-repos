@@ -10,10 +10,13 @@
 namespace System.Data.Objects
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     ///
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1008:EnumsShouldHaveZeroValue")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1008:EnumsShouldHaveZeroValue"
+    )]
     public enum RefreshMode
     {
         /// <summary>
@@ -23,14 +26,13 @@ namespace System.Data.Objects
         /// considered modified and require updating.
         /// </summary>
         ///
-        ClientWins       = MergeOption.PreserveChanges,
-        
+        ClientWins = MergeOption.PreserveChanges,
+
         /// <summary>
         /// Discard all changes on the client and refresh values with store values.
         /// Client original values is updated to match the store.
         /// </summary>
         ///
-        StoreWins      = MergeOption.OverwriteChanges,
+        StoreWins = MergeOption.OverwriteChanges,
     }
 }
-

@@ -76,67 +76,78 @@
 
     ******************************************************************************/
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
-    [Obsolete("This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
-    public sealed class PassportAuthentication : ConfigurationElement {
-        private static readonly ConfigurationElementProperty s_elemProperty = 
-            new ConfigurationElementProperty(new CallbackValidator(typeof(PassportAuthentication), Validate));
+    [Obsolete(
+        "This type is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID."
+    )]
+    public sealed class PassportAuthentication : ConfigurationElement
+    {
+        private static readonly ConfigurationElementProperty s_elemProperty =
+            new ConfigurationElementProperty(
+                new CallbackValidator(typeof(PassportAuthentication), Validate)
+            );
         private static ConfigurationPropertyCollection _properties;
-        private static readonly ConfigurationProperty _propRedirectUrl =
-            new ConfigurationProperty("redirectUrl", typeof(string), "internal", ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propRedirectUrl = new ConfigurationProperty(
+            "redirectUrl",
+            typeof(string),
+            "internal",
+            ConfigurationPropertyOptions.None
+        );
 
-        static PassportAuthentication() {
+        static PassportAuthentication()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propRedirectUrl);
         }
 
-        public PassportAuthentication() {
-        }
+        public PassportAuthentication() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("redirectUrl", DefaultValue = "internal")]
         [StringValidator()]
-        public string RedirectUrl {
-            get {
-                return (string)base[_propRedirectUrl];
-            }
-            set {
-                base[_propRedirectUrl] = value;
-            }
+        public string RedirectUrl
+        {
+            get { return (string)base[_propRedirectUrl]; }
+            set { base[_propRedirectUrl] = value; }
         }
-        protected override ConfigurationElementProperty ElementProperty {
-            get {
-                return s_elemProperty;
-            }
+        protected override ConfigurationElementProperty ElementProperty
+        {
+            get { return s_elemProperty; }
         }
-        private static void Validate(object value) {
-            if (value == null) {
+
+        private static void Validate(object value)
+        {
+            if (value == null)
+            {
                 throw new ArgumentNullException("passport");
             }
             Debug.Assert(value is PassportAuthentication);
 
             PassportAuthentication elem = (PassportAuthentication)value;
 
-            if (StringUtil.StringStartsWith(elem.RedirectUrl, "\\\\") || 
-                (elem.RedirectUrl.Length > 1 && elem.RedirectUrl[1] == ':')) {
+            if (
+                StringUtil.StringStartsWith(elem.RedirectUrl, "\\\\")
+                || (elem.RedirectUrl.Length > 1 && elem.RedirectUrl[1] == ':')
+            )
+            {
                 throw new ConfigurationErrorsException(SR.GetString(SR.Auth_bad_url));
             }
         }

@@ -12,10 +12,7 @@ namespace System.Web.Mvc.Test
         public void GuardClause()
         {
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => new Filter(null, FilterScope.Action, null),
-                "instance"
-                );
+            Assert.ThrowsArgumentNull(() => new Filter(null, FilterScope.Action, null), "instance");
         }
 
         [Fact]

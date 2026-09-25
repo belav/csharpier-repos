@@ -12,7 +12,7 @@ namespace System.ServiceModel
     using System.Web;
     using System.Web.Hosting;
 
-    // wrapper class that helps with partial trust analysis 
+    // wrapper class that helps with partial trust analysis
     // -- HostingEnvironment does a number of Demands and LinkDemands
     // -- this wrapper encapsulates access into "Safe" and "Unsafe" methods that do the appropriate asserts
     // -- it is recommended that ALL HostingEnvironment access go through this class
@@ -35,20 +35,24 @@ namespace System.ServiceModel
             get { return HostingEnvironment.IsHosted; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls getters with LinkDemands in ASP .NET objects.",
-            Safe = "Does not leak control or mutable/harmful data, no potential for harm.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls getters with LinkDemands in ASP .NET objects.",
+            Safe = "Does not leak control or mutable/harmful data, no potential for harm."
+        )]
         public static VirtualPathProvider VirtualPathProvider
         {
             [SecuritySafeCritical]
-            get 
+            get
             {
                 AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
-                return HostingEnvironment.VirtualPathProvider; 
+                return HostingEnvironment.VirtualPathProvider;
             }
         }
-                
-        [Fx.Tag.SecurityNote(Critical = "Calls getters with LinkDemands in ASP .NET objects.",
-            Safe = "Does not leak control or mutable/harmful data, no potential for harm.")]
+
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls getters with LinkDemands in ASP .NET objects.",
+            Safe = "Does not leak control or mutable/harmful data, no potential for harm."
+        )]
         [SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void DecrementBusyCount()
@@ -71,8 +75,10 @@ namespace System.ServiceModel
             return HostingEnvironment.Impersonate(token);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls getters with LinkDemands in ASP .NET objects.",
-            Safe = "Does not leak control or mutable/harmful data, no potential for harm.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls getters with LinkDemands in ASP .NET objects.",
+            Safe = "Does not leak control or mutable/harmful data, no potential for harm."
+        )]
         [SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static void IncrementBusyCount()
@@ -86,22 +92,37 @@ namespace System.ServiceModel
             AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
             return HostingEnvironment.MapPath(virtualPath);
         }
-        
+
         public static string UnsafeApplicationID
         {
-            [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts, Justification = "Users cannot pass arbitrary data to this code.")]
-            [Fx.Tag.SecurityNote(Critical = "Asserts SecurityPermission in order to call HostingEnvironment.get_ApplicationID.")]
+            [SuppressMessage(
+                FxCop.Category.Security,
+                FxCop.Rule.SecureAsserts,
+                Justification = "Users cannot pass arbitrary data to this code."
+            )]
+            [Fx.Tag.SecurityNote(
+                Critical = "Asserts SecurityPermission in order to call HostingEnvironment.get_ApplicationID."
+            )]
             [SecurityCritical]
-            [AspNetHostingPermission(System.Security.Permissions.SecurityAction.Assert, Level = AspNetHostingPermissionLevel.High)]
-            get 
+            [AspNetHostingPermission(
+                System.Security.Permissions.SecurityAction.Assert,
+                Level = AspNetHostingPermissionLevel.High
+            )]
+            get
             {
                 AspNetPartialTrustHelpers.FailIfInPartialTrustOutsideAspNet();
-                return HostingEnvironment.ApplicationID; 
+                return HostingEnvironment.ApplicationID;
             }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts, Justification = "Users cannot pass arbitrary data to this code.")]
-        [Fx.Tag.SecurityNote(Critical = "Asserts SecurityPermission in order to call HostingEnvironment.UnsafeImpersonate.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureAsserts,
+            Justification = "Users cannot pass arbitrary data to this code."
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts SecurityPermission in order to call HostingEnvironment.UnsafeImpersonate."
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true)]
         public static IDisposable UnsafeImpersonate()
@@ -110,7 +131,9 @@ namespace System.ServiceModel
             return HostingEnvironment.Impersonate();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Asserts SecurityPermission in order to call HostingEnvironment.UnsafeImpersonate.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts SecurityPermission in order to call HostingEnvironment.UnsafeImpersonate."
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, Unrestricted = true)]
         public static IDisposable UnsafeImpersonate(IntPtr token)
@@ -119,8 +142,14 @@ namespace System.ServiceModel
             return HostingEnvironment.Impersonate(token);
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts, Justification = "This is an internal SecurityCritical method and its only caller passes in non-user data. Users cannot pass arbitrary data to this code.")]
-        [Fx.Tag.SecurityNote(Critical = "Asserts SecurityPermission in order to call HostingEnvironment.RegisterObject.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureAsserts,
+            Justification = "This is an internal SecurityCritical method and its only caller passes in non-user data. Users cannot pass arbitrary data to this code."
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts SecurityPermission in order to call HostingEnvironment.RegisterObject."
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, Unrestricted = true)]
         public static void UnsafeRegisterObject(IRegisteredObject target)
@@ -129,7 +158,9 @@ namespace System.ServiceModel
             HostingEnvironment.RegisterObject(target);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Asserts SecurityPermission in order to call HostingEnvironment.UnregisterObject.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts SecurityPermission in order to call HostingEnvironment.UnregisterObject."
+        )]
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, Unrestricted = true)]
         public static void UnsafeUnregisterObject(IRegisteredObject target)
@@ -138,8 +169,10 @@ namespace System.ServiceModel
             HostingEnvironment.UnregisterObject(target);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeImpersonate in order to check whether the service file exists.",
-            Safe = "Does not leak anything, does not let caller influence impersonation.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses SecurityCritical method UnsafeImpersonate in order to check whether the service file exists.",
+            Safe = "Does not leak anything, does not let caller influence impersonation."
+        )]
         [SecuritySafeCritical]
         public static bool ServiceFileExists(string normalizedVirtualPath)
         {
@@ -150,9 +183,7 @@ namespace System.ServiceModel
             {
                 try
                 {
-                    try 
-                    {
-                    }
+                    try { }
                     finally
                     {
                         unsafeImpersonate = HostingEnvironmentWrapper.UnsafeImpersonate();
@@ -173,8 +204,10 @@ namespace System.ServiceModel
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses SecurityCritical method UnsafeImpersonate in order to get service file.",
-            Safe = "Does not leak anything, does not let caller influence impersonation.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses SecurityCritical method UnsafeImpersonate in order to get service file.",
+            Safe = "Does not leak anything, does not let caller influence impersonation."
+        )]
         [SecuritySafeCritical]
         public static VirtualFile GetServiceFile(string normalizedVirtualPath)
         {
@@ -185,9 +218,7 @@ namespace System.ServiceModel
             {
                 try
                 {
-                    try 
-                    {
-                    }
+                    try { }
                     finally
                     {
                         unsafeImpersonate = HostingEnvironmentWrapper.UnsafeImpersonate();
@@ -205,7 +236,7 @@ namespace System.ServiceModel
             catch
             {
                 throw;
-            }            
-        }     
+            }
+        }
     }
 }

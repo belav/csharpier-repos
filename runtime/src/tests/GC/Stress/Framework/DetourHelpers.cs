@@ -13,6 +13,7 @@ using System.Runtime.InteropServices;
 public class DetourHelpers
 {
     private ReliabilityTestSet _testSet;
+
     public void Initialize(ReliabilityTestSet testSet)
     {
         _testSet = testSet;
@@ -40,7 +41,10 @@ public class DetourHelpers
     }
 
     [DllImport("RFDetours")]
-    private static extern void AddTestToNameMapping(int id, [MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPStr)] string name);
+    private static extern void AddTestToNameMapping(
+        int id,
+        [MarshalAs(System.Runtime.InteropServices.UnmanagedType.LPStr)] string name
+    );
 
     [DllImport("RFDetours")]
     private static extern void InstallDetours();
@@ -54,4 +58,3 @@ public class DetourHelpers
     [DllImport("RFDetours")]
     private static extern IntPtr GetThreadTest();
 }
-

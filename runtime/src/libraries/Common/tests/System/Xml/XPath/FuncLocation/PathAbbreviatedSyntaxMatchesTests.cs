@@ -26,7 +26,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"@*";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -44,7 +50,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"@*";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -62,7 +74,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"@Attr1";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -80,7 +98,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"@Attr1";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -98,7 +122,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"Title[@Attr1=""value1""]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -116,7 +146,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"Title[@Attr1=""value2""]";
             var expected = false;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -134,7 +170,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"//title";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -151,8 +193,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var startingNodePath = "/bookstore/book/title";
             var testExpression = @"/bookstore/..//title";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -169,8 +215,12 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var startingNodePath = "/bookstore/book/title";
             var testExpression = @"/bookstore/book/./title";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -187,7 +237,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"@frequency[.=""monthly""]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -204,7 +260,13 @@ namespace XPathTests.FunctionalTests.Location.Paths.AbbreviatedSyntax
             var testExpression = @"@frequency[../@frequency]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

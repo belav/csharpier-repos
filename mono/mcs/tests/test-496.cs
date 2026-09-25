@@ -2,12 +2,10 @@
 
 unsafe class Baz
 {
-	struct Foo
-	{
-		public Foo *next;
-	}
-	
-	public static void Main ()
-	{
-	}
+    struct Foo
+    {
+        public Foo* next;
+    }
+
+    public static void Main() { }
 }

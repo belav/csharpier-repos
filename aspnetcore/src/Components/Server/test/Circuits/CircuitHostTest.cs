@@ -157,13 +157,10 @@ public class CircuitHostTest
         );
 
         // Assert: Circuit host notifies about the exception
-        Assert.Collection(
-            circuitUnhandledExceptions,
-            eventArgs =>
-            {
-                Assert.Same(componentException, eventArgs.ExceptionObject);
-            }
-        );
+        Assert.Collection(circuitUnhandledExceptions, eventArgs =>
+        {
+            Assert.Same(componentException, eventArgs.ExceptionObject);
+        });
     }
 
     [Fact]
@@ -541,8 +538,8 @@ public class CircuitHostTest
         await UpdateComponentAsync<DynamicallyAddedComponent>(circuitHost, 1, parameters);
 
         // Assert
-        Assert.Throws<ArgumentException>(
-            () => ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
+        Assert.Throws<ArgumentException>(() =>
+            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
         );
         var componentState = ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(1);
         var component = Assert.IsType<DynamicallyAddedComponent>(componentState.Component);
@@ -669,8 +666,8 @@ public class CircuitHostTest
         await RemoveComponentAsync(circuitHost, 1);
 
         // Assert
-        Assert.Throws<ArgumentException>(
-            () => ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
+        Assert.Throws<ArgumentException>(() =>
+            ((TestRemoteRenderer)circuitHost.Renderer).GetTestComponentState(0)
         );
     }
 
@@ -1096,8 +1093,8 @@ public class CircuitHostTest
 
         public void TriggerRender()
         {
-            var task = _renderHandle.Dispatcher.InvokeAsync(
-                () => _renderHandle.Render(_renderFragment)
+            var task = _renderHandle.Dispatcher.InvokeAsync(() =>
+                _renderHandle.Render(_renderFragment)
             );
             Assert.True(task.IsCompletedSuccessfully);
         }

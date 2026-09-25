@@ -16,7 +16,8 @@ namespace System.Net.Security.Tests
         [PlatformSpecific(TestPlatforms.Linux)]
         public static async Task Create_OcspDoesNotReturnOrCacheInvalidStapleData()
         {
-            string serverName = $"{nameof(Create_OcspDoesNotReturnOrCacheInvalidStapleData)}.example";
+            string serverName =
+                $"{nameof(Create_OcspDoesNotReturnOrCacheInvalidStapleData)}.example";
 
             CertificateAuthority.BuildPrivatePki(
                 PkiOptions.EndEntityRevocationViaOcsp | PkiOptions.CrlEverywhere,
@@ -27,7 +28,8 @@ namespace System.Net.Security.Tests
                 intermediateAuthorityCount: 1,
                 subjectName: serverName,
                 keySize: 2048,
-                extensions: TestHelper.BuildTlsServerCertExtensions(serverName));
+                extensions: TestHelper.BuildTlsServerCertExtensions(serverName)
+            );
 
             using (responder)
             using (rootAuthority)
@@ -41,19 +43,23 @@ namespace System.Net.Security.Tests
                 SslStreamCertificateContext context = SslStreamCertificateContext.Create(
                     serverCert,
                     additionalCertificates: new X509Certificate2Collection { issuerCert },
-                    offline: false);
+                    offline: false
+                );
 
                 MethodInfo fetchOcspAsyncMethod = typeof(SslStreamCertificateContext).GetMethod(
                     "DownloadOcspAsync",
-                    BindingFlags.Instance | BindingFlags.NonPublic);
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
                 FieldInfo ocspResponseField = typeof(SslStreamCertificateContext).GetField(
                     "_ocspResponse",
-                    BindingFlags.Instance | BindingFlags.NonPublic);
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
 
                 Assert.NotNull(fetchOcspAsyncMethod);
                 Assert.NotNull(ocspResponseField);
 
-                byte[] ocspFetch = await (ValueTask<byte[]>)fetchOcspAsyncMethod.Invoke(context, Array.Empty<object>());
+                byte[] ocspFetch = await (ValueTask<byte[]>)
+                    fetchOcspAsyncMethod.Invoke(context, Array.Empty<object>());
                 Assert.Null(ocspFetch);
 
                 byte[] ocspResponseValue = (byte[])ocspResponseField.GetValue(context);

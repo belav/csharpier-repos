@@ -114,7 +114,8 @@ public class ProviderConventionSetBuilder : IProviderConventionSetBuilder
     /// <param name="newConvention">The new convention.</param>
     protected virtual bool ReplaceConvention<TConvention, TImplementation>(
         List<TConvention> conventionsList,
-        TImplementation newConvention)
-        where TImplementation : TConvention
-        => ConventionSet.Replace(conventionsList, newConvention);
+        TImplementation newConvention
+    )
+        where TImplementation : TConvention =>
+        ConventionSet.Replace(conventionsList, newConvention);
 }

@@ -26,7 +26,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 projectName,
                 hierarchy,
                 this.SystemServiceProvider,
-                this.Package.ComponentModel.GetService<IThreadingContext>());
+                this.Package.ComponentModel.GetService<IThreadingContext>()
+            );
 
             projectRoot.SetProjectSite(project);
         }

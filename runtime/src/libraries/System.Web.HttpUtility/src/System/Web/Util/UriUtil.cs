@@ -10,7 +10,11 @@ namespace System.Web.Util
         // Just extracts the query string and fragment from the input path by splitting on the separator characters.
         // Doesn't perform any validation as to whether the input represents a valid URL.
         // Concatenating the pieces back together will form the original input string.
-        private static void ExtractQueryAndFragment(string input, out string path, out string? queryAndFragment)
+        private static void ExtractQueryAndFragment(
+            string input,
+            out string path,
+            out string? queryAndFragment
+        )
         {
             int queryFragmentSeparatorPos = input.AsSpan().IndexOfAny('?', '#'); // query fragment separators
             if (queryFragmentSeparatorPos >= 0)
@@ -29,7 +33,12 @@ namespace System.Web.Util
         // Attempts to split a URI into its constituent pieces.
         // Even if this method returns true, one or more of the out parameters might contain a null or empty string, e.g. if there is no query / fragment.
         // Concatenating the pieces back together will form the original input string.
-        internal static bool TrySplitUriForPathEncode(string input, [NotNullWhen(true)] out string? schemeAndAuthority, [NotNullWhen(true)] out string? path, out string? queryAndFragment)
+        internal static bool TrySplitUriForPathEncode(
+            string input,
+            [NotNullWhen(true)] out string? schemeAndAuthority,
+            [NotNullWhen(true)] out string? path,
+            out string? queryAndFragment
+        )
         {
             // Strip off ?query and #fragment if they exist, since we're not going to look at them
             string inputWithoutQueryFragment;
@@ -47,11 +56,17 @@ namespace System.Web.Util
                     // For example, the "//" could be missing, or there could be "///" as in "file:///C:\foo.txt"
                     // To retain the same string as originally given, find the authority in the original url and include
                     // everything up to that.
-                    int authorityIndex = inputWithoutQueryFragment.IndexOf(authority, StringComparison.OrdinalIgnoreCase);
+                    int authorityIndex = inputWithoutQueryFragment.IndexOf(
+                        authority,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                     if (authorityIndex != -1)
                     {
                         int schemeAndAuthorityLength = authorityIndex + authority.Length;
-                        schemeAndAuthority = inputWithoutQueryFragment.Substring(0, schemeAndAuthorityLength);
+                        schemeAndAuthority = inputWithoutQueryFragment.Substring(
+                            0,
+                            schemeAndAuthorityLength
+                        );
                         path = inputWithoutQueryFragment.Substring(schemeAndAuthorityLength);
                         return true;
                     }

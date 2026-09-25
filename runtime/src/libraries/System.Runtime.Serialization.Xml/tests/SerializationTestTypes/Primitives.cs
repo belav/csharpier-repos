@@ -31,10 +31,12 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     [Flags]
@@ -81,7 +83,14 @@ namespace SerializationTestTypes
         public object p2 = new NotSer();
 
         [DataMember]
-        public object[] enumArrayData = new object[] { MyEnum1.red, MyEnum1.black, MyEnum1.blue, Seasons1.Autumn, Seasons2.Spring };
+        public object[] enumArrayData = new object[]
+        {
+            MyEnum1.red,
+            MyEnum1.black,
+            MyEnum1.blue,
+            Seasons1.Autumn,
+            Seasons2.Spring,
+        };
 
         [DataMember]
         public object p3 = new MyStruct();
@@ -96,9 +105,7 @@ namespace SerializationTestTypes
             Name = "smith";
         }
 
-        public Person()
-        {
-        }
+        public Person() { }
 
         [DataMember]
         public int Age;
@@ -342,7 +349,10 @@ namespace SerializationTestTypes
 
         [DataMember]
         [IgnoreMember]
-        public XmlQualifiedName xmlQualifiedName = new XmlQualifiedName("WCF", "http://www.microsoft.com");
+        public XmlQualifiedName xmlQualifiedName = new XmlQualifiedName(
+            "WCF",
+            "http://www.microsoft.com"
+        );
 
         [DataMember]
         [IgnoreMember]
@@ -588,7 +598,10 @@ namespace SerializationTestTypes
 
         [DataMember]
         [IgnoreMember]
-        public XmlQualifiedName xmlQualifiedName = new XmlQualifiedName("WCF", "http://www.microsoft.com");
+        public XmlQualifiedName xmlQualifiedName = new XmlQualifiedName(
+            "WCF",
+            "http://www.microsoft.com"
+        );
 
         [DataMember]
         [IgnoreMember]
@@ -627,9 +640,18 @@ namespace SerializationTestTypes
 
         public DictContainer()
         {
-            dictionaryData.Add(new Guid("ec1f7b4b-c2d1-4c6e-95b6-060a111b0afd").ToByteArray(), new Guid("9831dc90-ca4c-4db2-9335-58a1025ecf29").ToByteArray());
-            dictionaryData.Add(new Guid("5e689847-1a10-4f72-aaae-19b247cd0878").ToByteArray(), new Guid("e7af8691-43d5-49e7-8775-1b0126bd943c").ToByteArray());
-            dictionaryData.Add(new Guid("711168dd-4a00-4de5-9f3e-38ddfbda0144").ToByteArray(), new Guid("2685b4af-09b6-4a56-81db-95231a3d0276").ToByteArray());
+            dictionaryData.Add(
+                new Guid("ec1f7b4b-c2d1-4c6e-95b6-060a111b0afd").ToByteArray(),
+                new Guid("9831dc90-ca4c-4db2-9335-58a1025ecf29").ToByteArray()
+            );
+            dictionaryData.Add(
+                new Guid("5e689847-1a10-4f72-aaae-19b247cd0878").ToByteArray(),
+                new Guid("e7af8691-43d5-49e7-8775-1b0126bd943c").ToByteArray()
+            );
+            dictionaryData.Add(
+                new Guid("711168dd-4a00-4de5-9f3e-38ddfbda0144").ToByteArray(),
+                new Guid("2685b4af-09b6-4a56-81db-95231a3d0276").ToByteArray()
+            );
         }
     }
 
@@ -638,6 +660,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public List<string> listData = new List<string>();
+
         public ListContainer()
         {
             listData.Add("TestData");
@@ -650,6 +673,7 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public ArrayList listData = new ArrayList();
+
         public ArrayContainer(bool init)
         {
             listData.Add("TestData");
@@ -732,12 +756,15 @@ namespace SerializationTestTypes
     [DataContract]
     public class DerivedFromPriC : PrivateCstor
     {
-        public DerivedFromPriC() : base(int.MaxValue) { }
+        public DerivedFromPriC()
+            : base(int.MaxValue) { }
+
         public DerivedFromPriC(int d)
             : base(d)
         {
             this.d = d;
         }
+
         [DataMember]
         public int d;
     }
@@ -765,10 +792,12 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract(Name = "Enum1")]
@@ -776,27 +805,31 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     internal enum MyPrivateEnum2
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     internal enum MyPrivateEnum3
     {
         red,
         blue,
-        black
+        black,
     }
 
     internal interface SomeProperties
@@ -853,10 +886,12 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -864,10 +899,12 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -875,10 +912,12 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -886,10 +925,12 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     [DataContract]
@@ -897,18 +938,22 @@ namespace SerializationTestTypes
     {
         [EnumMember]
         red,
+
         [EnumMember]
         blue,
+
         [EnumMember]
-        black
+        black,
     }
 
     public class SeasonsEnumContainer
     {
         [IgnoreMember]
         public Seasons1 member1 = Seasons1.Autumn;
+
         [IgnoreMember]
         public Seasons2 member2 = Seasons2.Spring;
+
         [IgnoreMember]
         public Seasons3 member3 = Seasons3.Winter;
     }

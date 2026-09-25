@@ -22,7 +22,10 @@ namespace System.Net.Http
         public void TryGetContentValue_WhenResponseParameterIsNull_Throws()
         {
             object value;
-            Assert.ThrowsArgumentNull(() => HttpResponseMessageExtensions.TryGetContentValue<object>(null, out value), "response");
+            Assert.ThrowsArgumentNull(
+                () => HttpResponseMessageExtensions.TryGetContentValue<object>(null, out value),
+                "response"
+            );
         }
 
         [Theory]
@@ -38,12 +41,13 @@ namespace System.Net.Http
             Assert.Equal(expectedResult, value);
         }
 
-
         [Theory]
         [InlineData(default(bool))]
         [InlineData(default(int))]
         [InlineData(default(object))]
-        public void TryGetContentValue_WhenResponseHasNonObjectContent_ReturnsFalse<T>(T expectedResult)
+        public void TryGetContentValue_WhenResponseHasNonObjectContent_ReturnsFalse<T>(
+            T expectedResult
+        )
         {
             _response.Content = new StringContent("43");
             T value;
@@ -57,7 +61,9 @@ namespace System.Net.Http
         [InlineData(default(bool))]
         [InlineData(default(int))]
         [InlineData(default(object))]
-        public void TryGetContentValue_WhenResponseHasObjectContentWithNullValue_ReturnsFalse<T>(T expectedResult)
+        public void TryGetContentValue_WhenResponseHasObjectContentWithNullValue_ReturnsFalse<T>(
+            T expectedResult
+        )
         {
             _response.Content = new ObjectContent(typeof(object), null, _formatterMock.Object);
             T value;
@@ -70,7 +76,9 @@ namespace System.Net.Http
         [Theory]
         [InlineData(default(bool))]
         [InlineData(default(int))]
-        public void TryGetContentValue_WhenResponseHasObjectContentWithIncompatibleValue_ReturnsFalse<T>(T expectedResult)
+        public void TryGetContentValue_WhenResponseHasObjectContentWithIncompatibleValue_ReturnsFalse<T>(
+            T expectedResult
+        )
         {
             _response.Content = new ObjectContent<string>("42", _formatterMock.Object);
             T value;

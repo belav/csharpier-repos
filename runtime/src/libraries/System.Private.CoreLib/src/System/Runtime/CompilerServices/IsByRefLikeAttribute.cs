@@ -14,8 +14,6 @@ namespace System.Runtime.CompilerServices
     public sealed class IsByRefLikeAttribute : Attribute
     {
         /// <summary>Initializes the attribute.</summary>
-        public IsByRefLikeAttribute()
-        {
-        }
+        public IsByRefLikeAttribute() { }
     }
 }

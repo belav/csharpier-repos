@@ -22,11 +22,7 @@ namespace Roslyn.Utilities
         /// the stream position or the output buffer will be unchanged if an exception is
         /// returned.
         /// </remarks>
-        public static int TryReadAll(
-            this Stream stream,
-            byte[] buffer,
-            int offset,
-            int count)
+        public static int TryReadAll(this Stream stream, byte[] buffer, int offset, int count)
         {
             // The implementations for many streams, e.g. FileStream, allows 0 bytes to be
             // read and returns 0, but the documentation for Stream.Read states that 0 is
@@ -40,9 +36,7 @@ namespace Roslyn.Utilities
             {
                 // Note: Don't attempt to save state in-between calls to .Read as it would
                 // require a possibly massive intermediate buffer array
-                bytesRead = stream.Read(buffer,
-                                        offset + totalBytesRead,
-                                        count - totalBytesRead);
+                bytesRead = stream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
                 if (bytesRead == 0)
                 {
                     break;

@@ -4,7 +4,7 @@
 
 #nullable disable
 
-#pragma warning disable 436 // SuppressUnmanagedCodeSecurityAttribute defined in source and mscorlib 
+#pragma warning disable 436 // SuppressUnmanagedCodeSecurityAttribute defined in source and mscorlib
 
 using System;
 using System.Runtime.InteropServices;
@@ -12,13 +12,21 @@ using System.Security;
 
 namespace Microsoft.DiaSymReader
 {
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("98ECEE1E-752D-11d3-8D56-00C04F680B2B"), SuppressUnmanagedCodeSecurity]
+    [
+        ComImport,
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        Guid("98ECEE1E-752D-11d3-8D56-00C04F680B2B"),
+        SuppressUnmanagedCodeSecurity
+    ]
     internal interface IPdbWriter
     {
-        int __SetPath(/*[in] const WCHAR* szFullPathName, [in] IStream* pIStream, [in] BOOL fFullBuild*/);
-        int __OpenMod(/*[in] const WCHAR* szModuleName, [in] const WCHAR* szFileName*/);
+        int __SetPath( /*[in] const WCHAR* szFullPathName, [in] IStream* pIStream, [in] BOOL fFullBuild*/
+        );
+        int __OpenMod( /*[in] const WCHAR* szModuleName, [in] const WCHAR* szFileName*/
+        );
         int __CloseMod();
-        int __GetPath(/*[in] DWORD ccData,[out] DWORD* pccData,[out, size_is(ccData),length_is(*pccData)] WCHAR szPath[]*/);
+        int __GetPath( /*[in] DWORD ccData,[out] DWORD* pccData,[out, size_is(ccData),length_is(*pccData)] WCHAR szPath[]*/
+        );
 
         void GetSignatureAge(out uint sig, out int age);
     }
@@ -26,38 +34,111 @@ namespace Microsoft.DiaSymReader
     /// <summary>
     /// The highest version of the interface available on Desktop FX 4.0+.
     /// </summary>
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("DCF7780D-BDE9-45DF-ACFE-21731A32000C"), SuppressUnmanagedCodeSecurity]
+    [
+        ComImport,
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        Guid("DCF7780D-BDE9-45DF-ACFE-21731A32000C"),
+        SuppressUnmanagedCodeSecurity
+    ]
     internal unsafe interface ISymUnmanagedWriter5
     {
         #region ISymUnmanagedWriter
 
-        ISymUnmanagedDocumentWriter DefineDocument(string url, ref Guid language, ref Guid languageVendor, ref Guid documentType);
+        ISymUnmanagedDocumentWriter DefineDocument(
+            string url,
+            ref Guid language,
+            ref Guid languageVendor,
+            ref Guid documentType
+        );
         void SetUserEntryPoint(int entryMethodToken);
         void OpenMethod(uint methodToken);
         void CloseMethod();
         uint OpenScope(int startOffset);
         void CloseScope(int endOffset);
         void SetScopeRange(uint scopeID, uint startOffset, uint endOffset);
-        void DefineLocalVariable(string name, uint attributes, uint sig, byte* signature, uint addrKind, uint addr1, uint addr2, uint startOffset, uint endOffset);
-        void DefineParameter(string name, uint attributes, uint sequence, uint addrKind, uint addr1, uint addr2, uint addr3);
-        void DefineField(uint parent, string name, uint attributes, uint sig, byte* signature, uint addrKind, uint addr1, uint addr2, uint addr3);
-        void DefineGlobalVariable(string name, uint attributes, uint sig, byte* signature, uint addrKind, uint addr1, uint addr2, uint addr3);
+        void DefineLocalVariable(
+            string name,
+            uint attributes,
+            uint sig,
+            byte* signature,
+            uint addrKind,
+            uint addr1,
+            uint addr2,
+            uint startOffset,
+            uint endOffset
+        );
+        void DefineParameter(
+            string name,
+            uint attributes,
+            uint sequence,
+            uint addrKind,
+            uint addr1,
+            uint addr2,
+            uint addr3
+        );
+        void DefineField(
+            uint parent,
+            string name,
+            uint attributes,
+            uint sig,
+            byte* signature,
+            uint addrKind,
+            uint addr1,
+            uint addr2,
+            uint addr3
+        );
+        void DefineGlobalVariable(
+            string name,
+            uint attributes,
+            uint sig,
+            byte* signature,
+            uint addrKind,
+            uint addr1,
+            uint addr2,
+            uint addr3
+        );
         void Close();
         void SetSymAttribute(uint parent, string name, int length, byte* data);
         void OpenNamespace(string name);
         void CloseNamespace();
         void UsingNamespace(string fullName);
-        void SetMethodSourceRange(ISymUnmanagedDocumentWriter startDoc, uint startLine, uint startColumn, object endDoc, uint endLine, uint endColumn);
-        void Initialize([MarshalAs(UnmanagedType.IUnknown)] object emitter, string filename, [MarshalAs(UnmanagedType.IUnknown)] object ptrIStream, bool fullBuild);
-        void GetDebugInfo(ref ImageDebugDirectory debugDirectory, uint dataCount, out uint dataCountPtr, byte* data);
-        void DefineSequencePoints(ISymUnmanagedDocumentWriter document, int count,
-          [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] offsets,
-          [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] lines,
-          [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] columns,
-          [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] endLines,
-          [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] endColumns);
+        void SetMethodSourceRange(
+            ISymUnmanagedDocumentWriter startDoc,
+            uint startLine,
+            uint startColumn,
+            object endDoc,
+            uint endLine,
+            uint endColumn
+        );
+        void Initialize(
+            [MarshalAs(UnmanagedType.IUnknown)] object emitter,
+            string filename,
+            [MarshalAs(UnmanagedType.IUnknown)] object ptrIStream,
+            bool fullBuild
+        );
+        void GetDebugInfo(
+            ref ImageDebugDirectory debugDirectory,
+            uint dataCount,
+            out uint dataCountPtr,
+            byte* data
+        );
+        void DefineSequencePoints(
+            ISymUnmanagedDocumentWriter document,
+            int count,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] offsets,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] lines,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] columns,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] endLines,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] int[] endColumns
+        );
         void RemapToken(uint oldToken, uint newToken);
-        void Initialize2([MarshalAs(UnmanagedType.IUnknown)] object emitter, string tempfilename, [MarshalAs(UnmanagedType.IUnknown)] object ptrIStream, bool fullBuild, string finalfilename);
+        void Initialize2(
+            [MarshalAs(UnmanagedType.IUnknown)] object emitter,
+            string tempfilename,
+            [MarshalAs(UnmanagedType.IUnknown)] object ptrIStream,
+            bool fullBuild,
+            string finalfilename
+        );
         void DefineConstant(string name, object value, uint sig, byte* signature);
         void Abort();
 
@@ -65,8 +146,26 @@ namespace Microsoft.DiaSymReader
 
         #region ISymUnmanagedWriter2
 
-        void DefineLocalVariable2(string name, int attributes, int localSignatureToken, uint addrKind, int index, uint addr2, uint addr3, uint startOffset, uint endOffset);
-        void DefineGlobalVariable2(string name, int attributes, int sigToken, uint addrKind, uint addr1, uint addr2, uint addr3);
+        void DefineLocalVariable2(
+            string name,
+            int attributes,
+            int localSignatureToken,
+            uint addrKind,
+            int index,
+            uint addr2,
+            uint addr3,
+            uint startOffset,
+            uint endOffset
+        );
+        void DefineGlobalVariable2(
+            string name,
+            int attributes,
+            int sigToken,
+            uint addrKind,
+            uint addr1,
+            uint addr2,
+            uint addr3
+        );
 
         /// <remarks>
         /// <paramref name="value"/> has type <see cref="VariantStructure"/>, rather than <see cref="object"/>,
@@ -74,7 +173,11 @@ namespace Microsoft.DiaSymReader
         /// <see cref="System.DateTime"/>s as the number of days since 1899/12/30, whereas the native VB compiler
         ///  marshalled them as the number of ticks since the Unix epoch (i.e. a much, much larger number).
         /// </remarks>
-        void DefineConstant2([MarshalAs(UnmanagedType.LPWStr)] string name, VariantStructure value, int constantSignatureToken);
+        void DefineConstant2(
+            [MarshalAs(UnmanagedType.LPWStr)] string name,
+            VariantStructure value,
+            int constantSignatureToken
+        );
 
         #endregion
 
@@ -87,14 +190,19 @@ namespace Microsoft.DiaSymReader
 
         #region ISymUnmanagedWriter4
 
-        void GetDebugInfoWithPadding(ref ImageDebugDirectory debugDirectory, uint dataCount, out uint dataCountPtr, byte* data);
+        void GetDebugInfoWithPadding(
+            ref ImageDebugDirectory debugDirectory,
+            uint dataCount,
+            out uint dataCountPtr,
+            byte* data
+        );
 
         #endregion
 
         #region ISymUnmanagedWriter5
 
         /// <summary>
-        /// Open a special custom data section to emit token to source span mapping information into. 
+        /// Open a special custom data section to emit token to source span mapping information into.
         /// Opening this section while a method is already open or vice versa is an error.
         /// </summary>
         void OpenMapTokensToSourceSpans();
@@ -106,10 +214,17 @@ namespace Microsoft.DiaSymReader
         void CloseMapTokensToSourceSpans();
 
         /// <summary>
-        /// Maps the given metadata token to the given source line span in the specified source file. 
+        /// Maps the given metadata token to the given source line span in the specified source file.
         /// Must be called between calls to <see cref="OpenMapTokensToSourceSpans"/> and <see cref="CloseMapTokensToSourceSpans"/>.
         /// </summary>
-        void MapTokenToSourceSpan(int token, ISymUnmanagedDocumentWriter document, int startLine, int startColumn, int endLine, int endColumn);
+        void MapTokenToSourceSpan(
+            int token,
+            ISymUnmanagedDocumentWriter document,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        );
 
         #endregion
     }
@@ -117,14 +232,22 @@ namespace Microsoft.DiaSymReader
     /// <summary>
     /// The highest version of the interface available in Microsoft.DiaSymReader.Native.
     /// </summary>
-    [ComImport, InterfaceType(ComInterfaceType.InterfaceIsIUnknown), Guid("5ba52f3b-6bf8-40fc-b476-d39c529b331e"), SuppressUnmanagedCodeSecurity]
+    [
+        ComImport,
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        Guid("5ba52f3b-6bf8-40fc-b476-d39c529b331e"),
+        SuppressUnmanagedCodeSecurity
+    ]
     internal interface ISymUnmanagedWriter8 : ISymUnmanagedWriter5
     {
         //  ISymUnmanagedWriter, ISymUnmanagedWriter2, ISymUnmanagedWriter3, ISymUnmanagedWriter4, ISymUnmanagedWriter5
         void _VtblGap1_33();
 
         // ISymUnmanagedWriter6
-        void InitializeDeterministic([MarshalAs(UnmanagedType.IUnknown)] object emitter, [MarshalAs(UnmanagedType.IUnknown)] object stream);
+        void InitializeDeterministic(
+            [MarshalAs(UnmanagedType.IUnknown)] object emitter,
+            [MarshalAs(UnmanagedType.IUnknown)] object stream
+        );
 
         // ISymUnmanagedWriter7
         unsafe void UpdateSignatureByHashingContent([In] byte* buffer, int size);
@@ -144,7 +267,8 @@ namespace Microsoft.DiaSymReader
     [StructLayout(LayoutKind.Explicit)]
     internal readonly struct VariantStructure
     {
-        public VariantStructure(DateTime date) : this() // Need this to avoid errors about the uninteresting union fields.
+        public VariantStructure(DateTime date)
+            : this() // Need this to avoid errors about the uninteresting union fields.
         {
             _longValue = date.Ticks;
 #pragma warning disable CS0618 // Type or member is obsolete
@@ -159,7 +283,7 @@ namespace Microsoft.DiaSymReader
         private readonly long _longValue;
 
         /// <summary>
-        /// This field determines the size of the struct 
+        /// This field determines the size of the struct
         /// (16 bytes on 32-bit platforms, 24 bytes on 64-bit platforms).
         /// </summary>
         [FieldOffset(8)]

@@ -7,7 +7,5 @@ namespace System.Activities
     using System.Linq;
     using System.Linq.Expressions;
 
-    interface IExpressionContainer
-    {
-    }
+    interface IExpressionContainer { }
 }

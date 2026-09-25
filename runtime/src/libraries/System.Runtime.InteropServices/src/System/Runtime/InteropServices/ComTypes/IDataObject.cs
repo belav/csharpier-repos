@@ -19,7 +19,6 @@ namespace System.Runtime.InteropServices.ComTypes
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     public interface IDataObject
     {
-
         /// <summary>
         ///     Called by a data consumer to obtain data from a source data object.
         ///     The GetData method renders the data described in the specified FORMATETC
@@ -57,7 +56,11 @@ namespace System.Runtime.InteropServices.ComTypes
         ///     Called by an object containing a data source to transfer data to
         ///     the object that implements this method.
         /// </summary>
-        void SetData([In] ref FORMATETC formatIn, [In] ref STGMEDIUM medium, [MarshalAs(UnmanagedType.Bool)] bool release);
+        void SetData(
+            [In] ref FORMATETC formatIn,
+            [In] ref STGMEDIUM medium,
+            [MarshalAs(UnmanagedType.Bool)] bool release
+        );
 
         /// <summary>
         ///     Creates an object for enumerating the FORMATETC structures for a
@@ -72,7 +75,12 @@ namespace System.Runtime.InteropServices.ComTypes
         ///     notified of changes in the data of the object.
         /// </summary>
         [PreserveSig]
-        int DAdvise([In] ref FORMATETC pFormatetc, ADVF advf, IAdviseSink adviseSink, out int connection);
+        int DAdvise(
+            [In] ref FORMATETC pFormatetc,
+            ADVF advf,
+            IAdviseSink adviseSink,
+            out int connection
+        );
 
         /// <summary>
         ///     Destroys a notification connection that had been previously set up.

@@ -22,20 +22,26 @@ namespace SharedTypes.ComInterfaces.MarshallingFails
         public void Set(
             [MarshalUsing(CountElementName = nameof(size))]
             [MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 1)]
-            int[] value, int size);
+                int[] value,
+            int size
+        );
     }
 
     [GeneratedComClass]
     internal partial class ICollectionMarshallingFailsImpl : ICollectionMarshallingFails
     {
         int[] _data = new[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+
         public int[] Get(out int size)
         {
             size = _data.Length;
             return _data;
         }
 
-        [return: MarshalUsing(ConstantElementCount = 10), MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 1)]
+        [return:
+            MarshalUsing(ConstantElementCount = 10),
+            MarshalUsing(typeof(ThrowOn4thElementMarshalled), ElementIndirectionDepth = 1)
+        ]
         public int[] GetConstSize() => new int[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
         public void Set(int[] value, int size)

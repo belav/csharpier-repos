@@ -24,8 +24,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         /// </summary>
         public string Language { get; }
 
-        public ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute(
-            string name, string language)
+        public ExportAspNetCoreEmbeddedLanguageBraceMatcherAttribute(string name, string language)
             : base(typeof(IAspNetCoreEmbeddedLanguageBraceMatcher))
         {
             Name = name ?? throw new ArgumentNullException(nameof(name));

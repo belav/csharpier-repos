@@ -42,7 +42,8 @@ internal abstract class AddImportCodeAction : CodeAction
     protected AddImportCodeAction(
         Document originalDocument,
         AddImportFixData fixData,
-        ImmutableArray<string> additionalTags)
+        ImmutableArray<string> additionalTags
+    )
     {
         OriginalDocument = originalDocument;
         FixData = fixData;
@@ -56,12 +57,13 @@ internal abstract class AddImportCodeAction : CodeAction
         this.CustomTags = this.CustomTags.Add(CodeAction.CanBeHighPriorityTag);
     }
 
-    protected sealed override CodeActionPriority ComputePriority()
-        => _priority;
+    protected sealed override CodeActionPriority ComputePriority() => _priority;
 
     protected async Task<Document> GetUpdatedDocumentAsync(CancellationToken cancellationToken)
     {
-        var oldText = await OriginalDocument.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+        var oldText = await OriginalDocument
+            .GetValueTextAsync(cancellationToken)
+            .ConfigureAwait(false);
         var newText = oldText.WithChanges(_textChanges);
         var newDocument = OriginalDocument.WithText(newText);
 

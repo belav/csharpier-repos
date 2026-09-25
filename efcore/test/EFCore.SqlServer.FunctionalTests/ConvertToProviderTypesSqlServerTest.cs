@@ -4,23 +4,23 @@
 namespace Microsoft.EntityFrameworkCore;
 
 [SqlServerCondition(SqlServerCondition.IsNotSqlAzure)]
-public class ConvertToProviderTypesSqlServerTest : ConvertToProviderTypesTestBase<
-    ConvertToProviderTypesSqlServerTest.ConvertToProviderTypesSqlServerFixture>
+public class ConvertToProviderTypesSqlServerTest
+    : ConvertToProviderTypesTestBase<ConvertToProviderTypesSqlServerTest.ConvertToProviderTypesSqlServerFixture>
 {
     public ConvertToProviderTypesSqlServerTest(ConvertToProviderTypesSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalFact]
     public virtual void Columns_have_expected_data_types()
     {
         var actual = BuiltInDataTypesSqlServerTest.QueryForColumnTypes(
             CreateContext(),
-            nameof(ObjectBackedDataTypes), nameof(NullableBackedDataTypes), nameof(NonNullableBackedDataTypes));
+            nameof(ObjectBackedDataTypes),
+            nameof(NullableBackedDataTypes),
+            nameof(NonNullableBackedDataTypes)
+        );
 
-        const string expected =
-            """
+        const string expected = """
 Animal.Id ---> [int] [Precision = 10 Scale = 0]
 AnimalDetails.AnimalId ---> [nullable int] [Precision = 10 Scale = 0]
 AnimalDetails.BoolField ---> [int] [Precision = 10 Scale = 0]
@@ -182,38 +182,27 @@ UnicodeDataTypes.StringUnicode ---> [nullable nvarchar] [MaxLength = -1]
 
     public class ConvertToProviderTypesSqlServerFixture : ConvertToProviderTypesFixtureBase
     {
-        public override bool StrictEquality
-            => true;
+        public override bool StrictEquality => true;
 
-        public override bool SupportsAnsi
-            => true;
+        public override bool SupportsAnsi => true;
 
-        public override bool SupportsUnicodeToAnsiConversion
-            => true;
+        public override bool SupportsUnicodeToAnsiConversion => true;
 
-        public override bool SupportsLargeStringComparisons
-            => true;
+        public override bool SupportsLargeStringComparisons => true;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
-        public override bool SupportsBinaryKeys
-            => true;
+        public override bool SupportsBinaryKeys => true;
 
-        public override bool SupportsDecimalComparisons
-            => true;
+        public override bool SupportsDecimalComparisons => true;
 
-        public override DateTime DefaultDateTime
-            => new();
+        public override DateTime DefaultDateTime => new();
 
-        public override bool PreservesDateTimeKind
-            => false;
+        public override bool PreservesDateTimeKind => false;
 
-        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-            => base
-                .AddOptions(builder)
-                .ConfigureWarnings(
-                    c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
+        public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+            base.AddOptions(builder)
+                .ConfigureWarnings(c => c.Log(SqlServerEventId.DecimalTypeDefaultWarning));
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

@@ -18,15 +18,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
     [Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
     public class OnAutoInsertTests : AbstractLanguageServerProtocolTests
     {
-        public OnAutoInsertTests(ITestOutputHelper testOutputHelper) : base(testOutputHelper)
-        {
-        }
+        public OnAutoInsertTests(ITestOutputHelper testOutputHelper)
+            : base(testOutputHelper) { }
 
         [Theory, CombinatorialData]
         public async Task OnAutoInsert_CommentCharacter(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     ///{|type:|}
     void M()
@@ -34,7 +33,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     /// <summary>
 /// $0
@@ -50,7 +49,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
         public async Task OnAutoInsert_CommentCharacter_WithComment(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     ///{|type:|} This is an existing comment
     void M()
@@ -58,7 +57,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     /// <summary>
 /// $0This is an existing comment
@@ -71,10 +70,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
         }
 
         [Theory, CombinatorialData]
-        public async Task OnAutoInsert_CommentCharacter_WithComment_NoSpace(bool mutatingLspWorkspace)
+        public async Task OnAutoInsert_CommentCharacter_WithComment_NoSpace(
+            bool mutatingLspWorkspace
+        )
         {
             var markup =
-@"class A
+                @"class A
 {
     ///{|type:|}This is an existing comment
     void M()
@@ -82,7 +83,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     /// <summary>
 /// $0This is an existing comment
@@ -98,27 +99,33 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.OnAutoInsert
         public async Task OnAutoInsert_CommentCharacter_VB(bool mutatingLspWorkspace)
         {
             var markup =
-@"Class A
+                @"Class A
     '''{|type:|}
     Sub M()
     End Sub
 End Class";
             var expected =
-@"Class A
+                @"Class A
     ''' <summary>
 ''' $0
 ''' </summary>
     Sub M()
     End Sub
 End Class";
-            await VerifyMarkupAndExpected("'", markup, expected, mutatingLspWorkspace, languageName: LanguageNames.VisualBasic);
+            await VerifyMarkupAndExpected(
+                "'",
+                markup,
+                expected,
+                mutatingLspWorkspace,
+                languageName: LanguageNames.VisualBasic
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task OnAutoInsert_ParametersAndReturns(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     ///{|type:|}
     string M(int foo, bool bar)
@@ -126,7 +133,7 @@ End Class";
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     /// <summary>
 /// $0
@@ -142,10 +149,12 @@ End Class";
         }
 
         [Theory, CombinatorialData]
-        public async Task OnAutoInsert_CommentCharacterInsideMethod_Ignored(bool mutatingLspWorkspace)
+        public async Task OnAutoInsert_CommentCharacterInsideMethod_Ignored(
+            bool mutatingLspWorkspace
+        )
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -156,10 +165,12 @@ End Class";
         }
 
         [Theory, CombinatorialData]
-        public async Task OnAutoInsert_VisualBasicCommentCharacter_Ignored(bool mutatingLspWorkspace)
+        public async Task OnAutoInsert_VisualBasicCommentCharacter_Ignored(
+            bool mutatingLspWorkspace
+        )
         {
             var markup =
-@"class A
+                @"class A
 {
     '''{|type:|}
     void M()
@@ -173,7 +184,7 @@ End Class";
         public async Task OnAutoInsert_EnterKey(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     /// <summary>
     /// Foo
@@ -184,7 +195,7 @@ End Class";
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     /// <summary>
     /// Foo
@@ -201,7 +212,7 @@ End Class";
         public async Task OnAutoInsert_EnterKey2(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     /// <summary>
     /// Foo
@@ -212,7 +223,7 @@ End Class";
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     /// <summary>
     /// Foo
@@ -229,7 +240,7 @@ End Class";
         public async Task OnAutoInsert_EnterKey3(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     ///
 {|type:|}
@@ -238,7 +249,7 @@ End Class";
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     /// <summary>
     /// $0
@@ -261,27 +272,33 @@ End Class";
             // (bringing the server text to the form below) and then trigger OnAutoInsert
             // for the new line character.
             var markup =
-@"class A
+                @"class A
 {
     void M() {{|type:|}
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     void M()
     {
         $0
     }
 }";
-            await VerifyMarkupAndExpected("\n", markup, expected, mutatingLspWorkspace, serverKind: WellKnownLspServerKinds.RazorLspServer);
+            await VerifyMarkupAndExpected(
+                "\n",
+                markup,
+                expected,
+                mutatingLspWorkspace,
+                serverKind: WellKnownLspServerKinds.RazorLspServer
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task OnAutoInsert_BraceFormattingWithTabs(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     void M() {{|type:|}
     }
@@ -289,21 +306,29 @@ End Class";
             // Use show whitespace when modifying the expected value.
             // The method braces and caret location should be indented with tabs.
             var expected =
-@"class A
+                @"class A
 {
     void M()
 	{
 		$0
 	}
 }";
-            await VerifyMarkupAndExpected("\n", markup, expected, mutatingLspWorkspace, insertSpaces: false, tabSize: 4, serverKind: WellKnownLspServerKinds.RazorLspServer);
+            await VerifyMarkupAndExpected(
+                "\n",
+                markup,
+                expected,
+                mutatingLspWorkspace,
+                insertSpaces: false,
+                tabSize: 4,
+                serverKind: WellKnownLspServerKinds.RazorLspServer
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task OnAutoInsert_BraceFormattingInsideMethod(bool mutatingLspWorkspace)
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -312,7 +337,7 @@ End Class";
     }
 }";
             var expected =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -322,14 +347,22 @@ End Class";
         }
     }
 }";
-            await VerifyMarkupAndExpected("\n", markup, expected, mutatingLspWorkspace, serverKind: WellKnownLspServerKinds.RazorLspServer);
+            await VerifyMarkupAndExpected(
+                "\n",
+                markup,
+                expected,
+                mutatingLspWorkspace,
+                serverKind: WellKnownLspServerKinds.RazorLspServer
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task OnAutoInsert_BraceFormattingNoResultInInterpolation(bool mutatingLspWorkspace)
+        public async Task OnAutoInsert_BraceFormattingNoResultInInterpolation(
+            bool mutatingLspWorkspace
+        )
         {
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -339,15 +372,21 @@ End Class";
             await VerifyNoResult("\n", markup, mutatingLspWorkspace);
         }
 
-        [Theory, CombinatorialData, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1260219")]
-        public async Task OnAutoInsert_BraceFormattingDoesNotInsertExtraEmptyLines(bool mutatingLspWorkspace)
+        [
+            Theory,
+            CombinatorialData,
+            WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1260219")
+        ]
+        public async Task OnAutoInsert_BraceFormattingDoesNotInsertExtraEmptyLines(
+            bool mutatingLspWorkspace
+        )
         {
             // The test starts with the closing brace already on a new line.
             // In LSP, hitting enter will first trigger a didChange event for the new line character
             // (bringing the server text to the form below) and then trigger OnAutoInsert
             // for the new line character.
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {
@@ -358,15 +397,21 @@ End Class";
             await VerifyNoResult("\n", markup, mutatingLspWorkspace);
         }
 
-        [Theory, CombinatorialData, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1260219")]
-        public async Task OnAutoInsert_BraceFormattingDoesNotMoveCaretOnEnterInsideBraces(bool mutatingLspWorkspace)
+        [
+            Theory,
+            CombinatorialData,
+            WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1260219")
+        ]
+        public async Task OnAutoInsert_BraceFormattingDoesNotMoveCaretOnEnterInsideBraces(
+            bool mutatingLspWorkspace
+        )
         {
             // The test starts with the closing brace already on a new line.
             // In LSP, hitting enter will first trigger a didChange event for the new line character
             // (bringing the server text to the form below) and then trigger OnAutoInsert
             // for the new line character.
             var markup =
-@"class A
+                @"class A
 {
     void M()
     {{|type:|}
@@ -385,16 +430,33 @@ End Class";
             bool insertSpaces = true,
             int tabSize = 4,
             string languageName = LanguageNames.CSharp,
-            WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.AlwaysActiveVSLspServer)
+            WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.AlwaysActiveVSLspServer
+        )
         {
             Task<TestLspServer> testLspServerTask;
             if (languageName == LanguageNames.CSharp)
             {
-                testLspServerTask = CreateTestLspServerAsync(markup, mutatingLspWorkspace, new InitializationOptions { ClientCapabilities = CapabilitiesWithVSExtensions, ServerKind = serverKind });
+                testLspServerTask = CreateTestLspServerAsync(
+                    markup,
+                    mutatingLspWorkspace,
+                    new InitializationOptions
+                    {
+                        ClientCapabilities = CapabilitiesWithVSExtensions,
+                        ServerKind = serverKind,
+                    }
+                );
             }
             else if (languageName == LanguageNames.VisualBasic)
             {
-                testLspServerTask = CreateVisualBasicTestLspServerAsync(markup, mutatingLspWorkspace, new InitializationOptions { ClientCapabilities = CapabilitiesWithVSExtensions, ServerKind = serverKind });
+                testLspServerTask = CreateVisualBasicTestLspServerAsync(
+                    markup,
+                    mutatingLspWorkspace,
+                    new InitializationOptions
+                    {
+                        ClientCapabilities = CapabilitiesWithVSExtensions,
+                        ServerKind = serverKind,
+                    }
+                );
             }
             else
             {
@@ -404,10 +466,19 @@ End Class";
             await using var testLspServer = await testLspServerTask;
             var locationTyped = testLspServer.GetLocations("type").Single();
 
-            var document = testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single();
+            var document = testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(locationTyped.Uri)
+                .Single();
             var documentText = await document.GetTextAsync();
 
-            var result = await RunOnAutoInsertAsync(testLspServer, characterTyped, locationTyped, insertSpaces, tabSize);
+            var result = await RunOnAutoInsertAsync(
+                testLspServer,
+                characterTyped,
+                locationTyped,
+                insertSpaces,
+                tabSize
+            );
 
             AssertEx.NotNull(result);
             Assert.Equal(InsertTextFormat.Snippet, result.TextEditFormat);
@@ -415,13 +486,32 @@ End Class";
             Assert.Equal(expected, actualText);
         }
 
-        private async Task VerifyNoResult(string characterTyped, string markup, bool mutatingLspWorkspace, bool insertSpaces = true, int tabSize = 4)
+        private async Task VerifyNoResult(
+            string characterTyped,
+            string markup,
+            bool mutatingLspWorkspace,
+            bool insertSpaces = true,
+            int tabSize = 4
+        )
         {
-            await using var testLspServer = await CreateTestLspServerAsync(markup, mutatingLspWorkspace);
+            await using var testLspServer = await CreateTestLspServerAsync(
+                markup,
+                mutatingLspWorkspace
+            );
             var locationTyped = testLspServer.GetLocations("type").Single();
-            var documentText = await testLspServer.GetCurrentSolution().GetDocuments(locationTyped.Uri).Single().GetTextAsync();
+            var documentText = await testLspServer
+                .GetCurrentSolution()
+                .GetDocuments(locationTyped.Uri)
+                .Single()
+                .GetTextAsync();
 
-            var result = await RunOnAutoInsertAsync(testLspServer, characterTyped, locationTyped, insertSpaces, tabSize);
+            var result = await RunOnAutoInsertAsync(
+                testLspServer,
+                characterTyped,
+                locationTyped,
+                insertSpaces,
+                tabSize
+            );
 
             Assert.Null(result);
         }
@@ -431,18 +521,31 @@ End Class";
             string characterTyped,
             LSP.Location locationTyped,
             bool insertSpaces,
-            int tabSize)
+            int tabSize
+        )
         {
-            return await testLspServer.ExecuteRequestAsync<LSP.VSInternalDocumentOnAutoInsertParams, LSP.VSInternalDocumentOnAutoInsertResponseItem?>(VSInternalMethods.OnAutoInsertName,
-                CreateDocumentOnAutoInsertParams(characterTyped, locationTyped, insertSpaces, tabSize), CancellationToken.None);
+            return await testLspServer.ExecuteRequestAsync<
+                LSP.VSInternalDocumentOnAutoInsertParams,
+                LSP.VSInternalDocumentOnAutoInsertResponseItem?
+            >(
+                VSInternalMethods.OnAutoInsertName,
+                CreateDocumentOnAutoInsertParams(
+                    characterTyped,
+                    locationTyped,
+                    insertSpaces,
+                    tabSize
+                ),
+                CancellationToken.None
+            );
         }
 
         private static LSP.VSInternalDocumentOnAutoInsertParams CreateDocumentOnAutoInsertParams(
             string characterTyped,
             LSP.Location locationTyped,
             bool insertSpaces,
-            int tabSize)
-            => new LSP.VSInternalDocumentOnAutoInsertParams
+            int tabSize
+        ) =>
+            new LSP.VSInternalDocumentOnAutoInsertParams
             {
                 Position = locationTyped.Range.Start,
                 Character = characterTyped,
@@ -450,8 +553,8 @@ End Class";
                 Options = new LSP.FormattingOptions
                 {
                     InsertSpaces = insertSpaces,
-                    TabSize = tabSize
-                }
+                    TabSize = tabSize,
+                },
             };
     }
 }

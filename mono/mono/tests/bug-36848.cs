@@ -4,49 +4,55 @@
 
 using System;
 using System.Runtime.Remoting;
-using System.Runtime.Remoting.Proxies;
 using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Proxies;
 
 namespace Application
 {
-	public class App
-	{
-		public static void Test ()
-		{
-	    	RemoteProxy remote2 = new RemoteProxy (typeof(App).Assembly.GetType("Application.Remote"));
-	    	remote2.GetTransparentProxy ();
-		}
+    public class App
+    {
+        public static void Test()
+        {
+            RemoteProxy remote2 = new RemoteProxy(
+                typeof(App).Assembly.GetType("Application.Remote")
+            );
+            remote2.GetTransparentProxy();
+        }
 
-		public static int Main ()
-		{
-			int numCaught = 0;
+        public static int Main()
+        {
+            int numCaught = 0;
 
-			for (int i = 0; i < 10; ++i) {
-				try {
-					Test ();
-				} catch (Exception) {
-					++numCaught;
-				}
-			}
-			if (numCaught == 10)
-				return 0;
-			return 1;
-		}
-	}
+            for (int i = 0; i < 10; ++i)
+            {
+                try
+                {
+                    Test();
+                }
+                catch (Exception)
+                {
+                    ++numCaught;
+                }
+            }
+            if (numCaught == 10)
+                return 0;
+            return 1;
+        }
+    }
 
-	class Remote : MarshalByRefObject, IMyInterface {
-		public void Run ()
-		{
-		}
-	}
+    class Remote : MarshalByRefObject, IMyInterface
+    {
+        public void Run() { }
+    }
 
-	class RemoteProxy : RealProxy {
-		public RemoteProxy (Type t) : base (t) {
+    class RemoteProxy : RealProxy
+    {
+        public RemoteProxy(Type t)
+            : base(t) { }
 
-		}
-
-		public override IMessage Invoke (IMessage request) {
-			return null;
-		}
-	}
+        public override IMessage Invoke(IMessage request)
+        {
+            return null;
+        }
+    }
 }

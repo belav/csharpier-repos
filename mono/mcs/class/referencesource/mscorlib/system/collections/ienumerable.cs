@@ -1,20 +1,21 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Interface:  IEnumerable
-** 
+**
 ** <OWNER>kimhamil</OWNER>
 **
 **
 ** Purpose: Interface for classes providing IEnumerators
 **
-** 
+**
 ===========================================================*/
-namespace System.Collections {
+namespace System.Collections
+{
     using System;
     using System.Diagnostics.Contracts;
     using System.Runtime.InteropServices;

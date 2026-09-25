@@ -67,5 +67,6 @@ namespace JitTest_castclass_ldloc_cs
     }
 
     internal class DerivedClass : TestClass { }
+
     internal class OtherClass { }
 }

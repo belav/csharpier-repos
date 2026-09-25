@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
     {
         private sealed partial class Emitter
         {
-            internal static readonly AssemblyName s_assemblyName = typeof(ConfigurationBindingGenerator).Assembly.GetName();
+            internal static readonly AssemblyName s_assemblyName =
+                typeof(ConfigurationBindingGenerator).Assembly.GetName();
 
             private string? _emittedExtsTargetType;
 
@@ -47,13 +48,15 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 public const string sectionPath = "section.Path";
                 public const string sectionValue = "section.Value";
 
-                public static string GeneratedCodeAnnotation = $@"[GeneratedCode(""{s_assemblyName.Name}"", ""{s_assemblyName.Version}"")]";
+                public static string GeneratedCodeAnnotation =
+                    $@"[GeneratedCode(""{s_assemblyName.Name}"", ""{s_assemblyName.Version}"")]";
             }
 
             private static class TypeDisplayString
             {
                 public const string NullableActionOfBinderOptions = "Action<BinderOptions>?";
-                public const string OptionsBuilderOfTOptions = $"OptionsBuilder<{Identifier.TOptions}>";
+                public const string OptionsBuilderOfTOptions =
+                    $"OptionsBuilder<{Identifier.TOptions}>";
                 public const string HashSetOfString = "HashSet<string>";
                 public const string LazyHashSetOfString = "Lazy<HashSet<string>>";
                 public const string ListOfString = "List<string>";
@@ -94,7 +97,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 public const string Bind = nameof(Bind);
                 public const string BinderOptions = nameof(BinderOptions);
                 public const string BindingExtensions = nameof(BindingExtensions);
-                public const string ConfigurationChangeTokenSource = nameof(ConfigurationChangeTokenSource);
+                public const string ConfigurationChangeTokenSource = nameof(
+                    ConfigurationChangeTokenSource
+                );
                 public const string Configure = nameof(Configure);
                 public const string CopyTo = nameof(CopyTo);
                 public const string ContainsKey = nameof(ContainsKey);
@@ -102,7 +107,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 public const string CultureInfo = nameof(CultureInfo);
                 public const string CultureNotFoundException = nameof(CultureNotFoundException);
                 public const string Enum = nameof(Enum);
-                public const string ErrorOnUnknownConfiguration = nameof(ErrorOnUnknownConfiguration);
+                public const string ErrorOnUnknownConfiguration = nameof(
+                    ErrorOnUnknownConfiguration
+                );
                 public const string Exception = nameof(Exception);
                 public const string Get = nameof(Get);
                 public const string GetBinderOptions = nameof(GetBinderOptions);
@@ -136,7 +143,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 public const string Value = nameof(Value);
             }
 
-            private bool ShouldEmitMethods(MethodsToGen methods) => (_interceptorInfo.MethodsToGen & methods) != 0;
+            private bool ShouldEmitMethods(MethodsToGen methods) =>
+                (_interceptorInfo.MethodsToGen & methods) != 0;
 
             private void EmitInterceptsLocationAnnotations(MethodsToGen overload)
             {
@@ -146,9 +154,12 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 // The only time a generated binding method won't have any locations to
                 // intercept is when either of these methods are used as helpers for
                 // other generated OptionsBuilder or ServiceCollection binding extensions.
-                Debug.Assert(interceptsCalls ||
-                    overload is MethodsToGen.ServiceCollectionExt_Configure_T_name_BinderOptions ||
-                    overload is MethodsToGen.OptionsBuilderExt_Bind_T_BinderOptions);
+                Debug.Assert(
+                    interceptsCalls
+                        || overload
+                            is MethodsToGen.ServiceCollectionExt_Configure_T_name_BinderOptions
+                        || overload is MethodsToGen.OptionsBuilderExt_Bind_T_BinderOptions
+                );
 
                 if (interceptsCalls)
                 {
@@ -156,11 +167,15 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 }
             }
 
-            private void EmitInterceptsLocationAnnotations(IEnumerable<InvocationLocationInfo> infoList)
+            private void EmitInterceptsLocationAnnotations(
+                IEnumerable<InvocationLocationInfo> infoList
+            )
             {
                 foreach (InvocationLocationInfo info in infoList)
                 {
-                    _writer.WriteLine($@"[{Identifier.InterceptsLocation}(@""{info.FilePath}"", {info.LineNumber}, {info.CharacterNumber})]");
+                    _writer.WriteLine(
+                        $@"[{Identifier.InterceptsLocation}(@""{info.FilePath}"", {info.LineNumber}, {info.CharacterNumber})]"
+                    );
                 }
             }
 
@@ -216,7 +231,9 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                     _writer.WriteLine(source);
                 }
 
-                string endBlockSource = endBraceTrailingSource is null ? "}" : $"}}{endBraceTrailingSource}";
+                string endBlockSource = endBraceTrailingSource is null
+                    ? "}"
+                    : $"}}{endBraceTrailingSource}";
                 _writer.Indentation--;
                 _writer.WriteLine(endBlockSource);
             }
@@ -231,27 +248,33 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 _emitBlankLineBeforeNextStatement = true;
             }
 
-            private void EmitCheckForNullArgument_WithBlankLine(string paramName, bool useThrowIfNullMethod, bool voidReturn = false)
+            private void EmitCheckForNullArgument_WithBlankLine(
+                string paramName,
+                bool useThrowIfNullMethod,
+                bool voidReturn = false
+            )
             {
                 if (voidReturn)
                 {
-                    _writer.WriteLine($$"""
-                    if ({{paramName}} is null)
-                    {
-                        return;
-                    }
-                    """);
+                    _writer.WriteLine(
+                        $$"""
+                        if ({{paramName}} is null)
+                        {
+                            return;
+                        }
+                        """
+                    );
                 }
                 else
                 {
                     string throwIfNullExpr = useThrowIfNullMethod
-                    ? $"ArgumentNullException.ThrowIfNull({paramName});"
-                    : $$"""
-                    if ({{paramName}} is null)
-                    {
-                        throw new ArgumentNullException(nameof({{paramName}}));
-                    }
-                    """;
+                        ? $"ArgumentNullException.ThrowIfNull({paramName});"
+                        : $$"""
+                            if ({{paramName}} is null)
+                            {
+                                throw new ArgumentNullException(nameof({{paramName}}));
+                            }
+                            """;
 
                     _writer.WriteLine(throwIfNullExpr);
                 }
@@ -259,7 +282,8 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 _writer.WriteLine();
             }
 
-            private string GetIncrementalIdentifier(string prefix) => $"{prefix}{_valueSuffixIndex++}";
+            private string GetIncrementalIdentifier(string prefix) =>
+                $"{prefix}{_valueSuffixIndex++}";
 
             private static string GetInitalizeMethodDisplayString(ObjectSpec type) =>
                 $"{nameof(MethodsToGen_CoreBindingHelper.Initialize)}{type.IdentifierCompatibleSubstring}";

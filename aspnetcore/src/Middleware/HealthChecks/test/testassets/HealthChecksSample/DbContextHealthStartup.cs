@@ -46,45 +46,33 @@ public class DbContextHealthStartup
         //
         app.UseHealthChecks("/health");
 
-        app.Map(
-            "/createdatabase",
-            b =>
-                b.Run(
-                    async (context) =>
-                    {
-                        await context.Response.WriteAsync("Creating the database...\n");
-                        await context.Response.Body.FlushAsync();
+        app.Map("/createdatabase", b => b.Run(
+                async (context) =>
+                {
+                    await context.Response.WriteAsync("Creating the database...\n");
+                    await context.Response.Body.FlushAsync();
 
-                        var myContext = context.RequestServices.GetRequiredService<MyContext>();
-                        await myContext.Database.EnsureCreatedAsync();
+                    var myContext = context.RequestServices.GetRequiredService<MyContext>();
+                    await myContext.Database.EnsureCreatedAsync();
 
-                        await context.Response.WriteAsync("Done\n");
-                        await context.Response.WriteAsync(
-                            "Go to /health to see the health status\n"
-                        );
-                    }
-                )
-        );
+                    await context.Response.WriteAsync("Done\n");
+                    await context.Response.WriteAsync("Go to /health to see the health status\n");
+                }
+            ));
 
-        app.Map(
-            "/deletedatabase",
-            b =>
-                b.Run(
-                    async (context) =>
-                    {
-                        await context.Response.WriteAsync("Deleting the database...\n");
-                        await context.Response.Body.FlushAsync();
+        app.Map("/deletedatabase", b => b.Run(
+                async (context) =>
+                {
+                    await context.Response.WriteAsync("Deleting the database...\n");
+                    await context.Response.Body.FlushAsync();
 
-                        var myContext = context.RequestServices.GetRequiredService<MyContext>();
-                        await myContext.Database.EnsureDeletedAsync();
+                    var myContext = context.RequestServices.GetRequiredService<MyContext>();
+                    await myContext.Database.EnsureDeletedAsync();
 
-                        await context.Response.WriteAsync("Done\n");
-                        await context.Response.WriteAsync(
-                            "Go to /health to see the health status\n"
-                        );
-                    }
-                )
-        );
+                    await context.Response.WriteAsync("Done\n");
+                    await context.Response.WriteAsync("Go to /health to see the health status\n");
+                }
+            ));
 
         app.Run(
             async (context) =>

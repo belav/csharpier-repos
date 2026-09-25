@@ -19,16 +19,25 @@ namespace System.Data.Common.Internal.Materialization
     using System.Reflection;
 
     /// <summary>
-    /// Shapes store reader values into EntityClient/ObjectQuery results. Also maintains 
+    /// Shapes store reader values into EntityClient/ObjectQuery results. Also maintains
     /// state used by materializer delegates.
     /// </summary>
     internal abstract class Shaper
     {
         #region constructor
 
-        internal Shaper(DbDataReader reader, ObjectContext context, MetadataWorkspace workspace, MergeOption mergeOption, int stateCount)
+        internal Shaper(
+            DbDataReader reader,
+            ObjectContext context,
+            MetadataWorkspace workspace,
+            MergeOption mergeOption,
+            int stateCount
+        )
         {
-            Debug.Assert(context == null || workspace == context.MetadataWorkspace, "workspace must match context's workspace");
+            Debug.Assert(
+                context == null || workspace == context.MetadataWorkspace,
+                "workspace must match context's workspace"
+            );
 
             this.Reader = reader;
             this.MergeOption = mergeOption;
@@ -38,7 +47,7 @@ namespace System.Data.Common.Internal.Materialization
             this.AssociationSpaceMap = new Dictionary<AssociationType, AssociationType>();
             this.spatialReader = new Singleton<DbSpatialDataReader>(CreateSpatialDataReader);
         }
-        
+
         #endregion
 
         #region OnMaterialized storage
@@ -53,16 +62,16 @@ namespace System.Data.Common.Internal.Materialization
 
         #region runtime callable/accessible code
 
-        // Code in this section is called from the delegates produced by the Translator.  It   
+        // Code in this section is called from the delegates produced by the Translator.  It
         // may not show up if you search using Find All References...use Find in Files instead.
-        // 
+        //
         // Many items on this class are public, simply to make the job of producing the
         // expressions that use them simpler.  If you have a hankering to make them private,
         // you will need to modify the code in the Translator that does the GetMethod/GetField
         // to use BindingFlags.NonPublic | BindingFlags.Instance as well.
         //
-        // Debug.Asserts that fire from the code in this region will probably create a 
-        // SecurityException in the Coordinator's Read method since those are restricted when 
+        // Debug.Asserts that fire from the code in this region will probably create a
+        // SecurityException in the Coordinator's Read method since those are restricted when
         // running the Shaper.
 
         /// <summary>
@@ -104,14 +113,23 @@ namespace System.Data.Common.Internal.Materialization
 
         /// <summary>
         /// Utility method used to evaluate a multi-discriminator column map. Takes
-        /// discriminator values and determines the appropriate entity type, then looks up 
+        /// discriminator values and determines the appropriate entity type, then looks up
         /// the appropriate handler and invokes it.
         /// </summary>
-        public TElement Discriminate<TElement>(object[] discriminatorValues, Func<object[], EntityType> discriminate, KeyValuePair<EntityType, Func<Shaper, TElement>>[] elementDelegates)
+        public TElement Discriminate<TElement>(
+            object[] discriminatorValues,
+            Func<object[], EntityType> discriminate,
+            KeyValuePair<EntityType, Func<Shaper, TElement>>[] elementDelegates
+        )
         {
             EntityType entityType = discriminate(discriminatorValues);
             Func<Shaper, TElement> elementDelegate = null;
-            foreach (KeyValuePair<EntityType, Func<Shaper, TElement>> typeDelegatePair in elementDelegates)
+            foreach (
+                KeyValuePair<
+                    EntityType,
+                    Func<Shaper, TElement>
+                > typeDelegatePair in elementDelegates
+            )
             {
                 if (typeDelegatePair.Key == entityType)
                 {
@@ -134,25 +152,46 @@ namespace System.Data.Common.Internal.Materialization
         /// exists, updates that entry and returns the existing entity. Otherwise, the entity
         /// passed in is returned.
         /// </summary>
-        public IEntityWrapper HandleEntity<TEntity>(IEntityWrapper wrappedEntity, EntityKey entityKey, EntitySet entitySet)
+        public IEntityWrapper HandleEntity<TEntity>(
+            IEntityWrapper wrappedEntity,
+            EntityKey entityKey,
+            EntitySet entitySet
+        )
         {
-            Debug.Assert(MergeOption.NoTracking != this.MergeOption, "no need to HandleEntity if there's no tracking");
-            Debug.Assert(MergeOption.AppendOnly != this.MergeOption, "use HandleEntityAppendOnly instead...");
+            Debug.Assert(
+                MergeOption.NoTracking != this.MergeOption,
+                "no need to HandleEntity if there's no tracking"
+            );
+            Debug.Assert(
+                MergeOption.AppendOnly != this.MergeOption,
+                "use HandleEntityAppendOnly instead..."
+            );
             Debug.Assert(null != wrappedEntity, "wrapped entity is null");
-            Debug.Assert(null != wrappedEntity.Entity, "if HandleEntity is called, there must be an entity");
+            Debug.Assert(
+                null != wrappedEntity.Entity,
+                "if HandleEntity is called, there must be an entity"
+            );
 
             IEntityWrapper result = wrappedEntity;
 
             // no entity set, so no tracking is required for this entity
             if (null != (object)entityKey)
             {
-                Debug.Assert(null != entitySet, "if there is an entity key, there must also be an entity set");
+                Debug.Assert(
+                    null != entitySet,
+                    "if there is an entity key, there must also be an entity set"
+                );
 
                 // check for an existing entity with the same key
-                EntityEntry existingEntry = this.Context.ObjectStateManager.FindEntityEntry(entityKey);
+                EntityEntry existingEntry = this.Context.ObjectStateManager.FindEntityEntry(
+                    entityKey
+                );
                 if (null != existingEntry && !existingEntry.IsKeyEntry)
                 {
-                    Debug.Assert(existingEntry.EntityKey.Equals(entityKey), "Found ObjectStateEntry with wrong EntityKey");
+                    Debug.Assert(
+                        existingEntry.EntityKey.Equals(entityKey),
+                        "Found ObjectStateEntry with wrong EntityKey"
+                    );
                     UpdateEntry<TEntity>(wrappedEntity, existingEntry);
                     result = existingEntry.WrappedEntity;
                 }
@@ -161,11 +200,25 @@ namespace System.Data.Common.Internal.Materialization
                     RegisterMaterializedEntityForEvent(result);
                     if (null == existingEntry)
                     {
-                        Context.ObjectStateManager.AddEntry(wrappedEntity, entityKey, entitySet, "HandleEntity", false);
+                        Context.ObjectStateManager.AddEntry(
+                            wrappedEntity,
+                            entityKey,
+                            entitySet,
+                            "HandleEntity",
+                            false
+                        );
                     }
                     else
                     {
-                        Context.ObjectStateManager.PromoteKeyEntry(existingEntry, wrappedEntity, (IExtendedDataRecord)null, false, /*setIsLoaded*/ true, /*keyEntryInitialized*/ false, "HandleEntity");
+                        Context.ObjectStateManager.PromoteKeyEntry(
+                            existingEntry,
+                            wrappedEntity,
+                            (IExtendedDataRecord)null,
+                            false, /*setIsLoaded*/
+                            true, /*keyEntryInitialized*/
+                            false,
+                            "HandleEntity"
+                        );
                     }
                 }
             }
@@ -174,14 +227,24 @@ namespace System.Data.Common.Internal.Materialization
 
         /// <summary>
         /// REQUIRES:: entity exists; MergeOption is AppendOnly
-        /// Handles state management for an entity with the given key. When the entity already exists  
-        /// in the state manager, it is returned directly. Otherwise, the entityDelegate is invoked and  
+        /// Handles state management for an entity with the given key. When the entity already exists
+        /// in the state manager, it is returned directly. Otherwise, the entityDelegate is invoked and
         /// the resulting entity is returned.
         /// </summary>
-        public IEntityWrapper HandleEntityAppendOnly<TEntity>(Func<Shaper, IEntityWrapper> constructEntityDelegate, EntityKey entityKey, EntitySet entitySet)
+        public IEntityWrapper HandleEntityAppendOnly<TEntity>(
+            Func<Shaper, IEntityWrapper> constructEntityDelegate,
+            EntityKey entityKey,
+            EntitySet entitySet
+        )
         {
-            Debug.Assert(this.MergeOption == MergeOption.AppendOnly, "only use HandleEntityAppendOnly when MergeOption is AppendOnly");
-            Debug.Assert(null != constructEntityDelegate, "must provide delegate to construct the entity");
+            Debug.Assert(
+                this.MergeOption == MergeOption.AppendOnly,
+                "only use HandleEntityAppendOnly when MergeOption is AppendOnly"
+            );
+            Debug.Assert(
+                null != constructEntityDelegate,
+                "must provide delegate to construct the entity"
+            );
 
             IEntityWrapper result;
 
@@ -194,16 +257,28 @@ namespace System.Data.Common.Internal.Materialization
             }
             else
             {
-                Debug.Assert(null != entitySet, "if there is an entity key, there must also be an entity set");
+                Debug.Assert(
+                    null != entitySet,
+                    "if there is an entity key, there must also be an entity set"
+                );
 
                 // check for an existing entity with the same key
-                EntityEntry existingEntry = this.Context.ObjectStateManager.FindEntityEntry(entityKey);
+                EntityEntry existingEntry = this.Context.ObjectStateManager.FindEntityEntry(
+                    entityKey
+                );
                 if (null != existingEntry && !existingEntry.IsKeyEntry)
                 {
-                    Debug.Assert(existingEntry.EntityKey.Equals(entityKey), "Found ObjectStateEntry with wrong EntityKey");
+                    Debug.Assert(
+                        existingEntry.EntityKey.Equals(entityKey),
+                        "Found ObjectStateEntry with wrong EntityKey"
+                    );
                     if (typeof(TEntity) != existingEntry.WrappedEntity.IdentityType)
                     {
-                        throw EntityUtil.RecyclingEntity(existingEntry.EntityKey, typeof(TEntity), existingEntry.WrappedEntity.IdentityType);
+                        throw EntityUtil.RecyclingEntity(
+                            existingEntry.EntityKey,
+                            typeof(TEntity),
+                            existingEntry.WrappedEntity.IdentityType
+                        );
                     }
 
                     if (EntityState.Added == existingEntry.State)
@@ -219,11 +294,25 @@ namespace System.Data.Common.Internal.Materialization
                     RegisterMaterializedEntityForEvent(result);
                     if (null == existingEntry)
                     {
-                        Context.ObjectStateManager.AddEntry(result, entityKey, entitySet, "HandleEntity", false);
+                        Context.ObjectStateManager.AddEntry(
+                            result,
+                            entityKey,
+                            entitySet,
+                            "HandleEntity",
+                            false
+                        );
                     }
                     else
                     {
-                        Context.ObjectStateManager.PromoteKeyEntry(existingEntry, result, (IExtendedDataRecord)null, false, /*setIsLoaded*/ true, /*keyEntryInitialized*/ false, "HandleEntity");
+                        Context.ObjectStateManager.PromoteKeyEntry(
+                            existingEntry,
+                            result,
+                            (IExtendedDataRecord)null,
+                            false, /*setIsLoaded*/
+                            true, /*keyEntryInitialized*/
+                            false,
+                            "HandleEntity"
+                        );
                     }
                 }
             }
@@ -233,24 +322,35 @@ namespace System.Data.Common.Internal.Materialization
         /// <summary>
         /// Call to ensure a collection of full-spanned elements are added
         /// into the state manager properly.  We registers an action to be called
-        /// when the collection is closed that pulls the collection of full spanned 
+        /// when the collection is closed that pulls the collection of full spanned
         /// objects into the state manager.
         /// </summary>
-        public IEntityWrapper HandleFullSpanCollection<T_SourceEntity, T_TargetEntity>(IEntityWrapper wrappedEntity, Coordinator<T_TargetEntity> coordinator, AssociationEndMember targetMember)
+        public IEntityWrapper HandleFullSpanCollection<T_SourceEntity, T_TargetEntity>(
+            IEntityWrapper wrappedEntity,
+            Coordinator<T_TargetEntity> coordinator,
+            AssociationEndMember targetMember
+        )
         {
             Debug.Assert(null != wrappedEntity, "wrapped entity is null");
             if (null != wrappedEntity.Entity)
             {
-                coordinator.RegisterCloseHandler((state, spannedEntities) => FullSpanAction(wrappedEntity, spannedEntities, targetMember));
+                coordinator.RegisterCloseHandler(
+                    (state, spannedEntities) =>
+                        FullSpanAction(wrappedEntity, spannedEntities, targetMember)
+                );
             }
             return wrappedEntity;
         }
 
         /// <summary>
-        /// Call to ensure a single full-spanned element is added into 
+        /// Call to ensure a single full-spanned element is added into
         /// the state manager properly.
         /// </summary>
-        public IEntityWrapper HandleFullSpanElement<T_SourceEntity, T_TargetEntity>(IEntityWrapper wrappedSource, IEntityWrapper wrappedSpannedEntity, AssociationEndMember targetMember)
+        public IEntityWrapper HandleFullSpanElement<T_SourceEntity, T_TargetEntity>(
+            IEntityWrapper wrappedSource,
+            IEntityWrapper wrappedSpannedEntity,
+            AssociationEndMember targetMember
+        )
         {
             Debug.Assert(null != wrappedSource, "wrapped entity is null");
             if (wrappedSource.Entity == null)
@@ -275,17 +375,24 @@ namespace System.Data.Common.Internal.Materialization
         }
 
         /// <summary>
-        /// Call to ensure a target entities key is added into the state manager 
+        /// Call to ensure a target entities key is added into the state manager
         /// properly
         /// </summary>
-        public IEntityWrapper HandleRelationshipSpan<T_SourceEntity>(IEntityWrapper wrappedEntity, EntityKey targetKey, AssociationEndMember targetMember)
+        public IEntityWrapper HandleRelationshipSpan<T_SourceEntity>(
+            IEntityWrapper wrappedEntity,
+            EntityKey targetKey,
+            AssociationEndMember targetMember
+        )
         {
             if (null == wrappedEntity.Entity)
             {
                 return wrappedEntity;
             }
             Debug.Assert(targetMember != null);
-            Debug.Assert(targetMember.RelationshipMultiplicity == RelationshipMultiplicity.One || targetMember.RelationshipMultiplicity == RelationshipMultiplicity.ZeroOrOne);
+            Debug.Assert(
+                targetMember.RelationshipMultiplicity == RelationshipMultiplicity.One
+                    || targetMember.RelationshipMultiplicity == RelationshipMultiplicity.ZeroOrOne
+            );
 
             EntityKey sourceKey = wrappedEntity.EntityKey;
             AssociationEndMember sourceMember = MetadataHelper.GetOtherAssociationEnd(targetMember);
@@ -296,17 +403,38 @@ namespace System.Data.Common.Internal.Materialization
                 EntitySet targetEntitySet;
 
                 EntityContainer entityContainer = this.Context.MetadataWorkspace.GetEntityContainer(
-                    targetKey.EntityContainerName, DataSpace.CSpace);
+                    targetKey.EntityContainerName,
+                    DataSpace.CSpace
+                );
 
                 // find the correct AssociationSet
-                AssociationSet associationSet = MetadataHelper.GetAssociationsForEntitySetAndAssociationType(entityContainer,
-                    targetKey.EntitySetName, (AssociationType)(targetMember.DeclaringType), targetMember.Name, out targetEntitySet);
+                AssociationSet associationSet =
+                    MetadataHelper.GetAssociationsForEntitySetAndAssociationType(
+                        entityContainer,
+                        targetKey.EntitySetName,
+                        (AssociationType)(targetMember.DeclaringType),
+                        targetMember.Name,
+                        out targetEntitySet
+                    );
                 Debug.Assert(associationSet != null, "associationSet should not be null");
 
                 ObjectStateManager manager = Context.ObjectStateManager;
                 EntityState newEntryState;
-                // If there is an existing relationship entry, update it based on its current state and the MergeOption, otherwise add a new one            
-                if (!ObjectStateManager.TryUpdateExistingRelationships(this.Context, this.MergeOption, associationSet, sourceMember, sourceKey, wrappedEntity, targetMember, targetKey, /*setIsLoaded*/ true, out newEntryState))
+                // If there is an existing relationship entry, update it based on its current state and the MergeOption, otherwise add a new one
+                if (
+                    !ObjectStateManager.TryUpdateExistingRelationships(
+                        this.Context,
+                        this.MergeOption,
+                        associationSet,
+                        sourceMember,
+                        sourceKey,
+                        wrappedEntity,
+                        targetMember,
+                        targetKey, /*setIsLoaded*/
+                        true,
+                        out newEntryState
+                    )
+                )
                 {
                     // Try to find a state entry for the target key
                     EntityEntry targetEntry = null;
@@ -323,18 +451,21 @@ namespace System.Data.Common.Internal.Materialization
                     {
                         case RelationshipMultiplicity.ZeroOrOne:
                         case RelationshipMultiplicity.One:
-                            // devnote: targetEntry can be a key entry (targetEntry.Entity == null), 
+                            // devnote: targetEntry can be a key entry (targetEntry.Entity == null),
                             // but it that case this parameter won't be used in TryUpdateExistingRelationships
-                            needNewRelationship = !ObjectStateManager.TryUpdateExistingRelationships(this.Context,
-                                this.MergeOption,
-                                associationSet,
-                                targetMember,
-                                targetKey,
-                                targetEntry.WrappedEntity,
-                                sourceMember,
-                                sourceKey,
-                                /*setIsLoaded*/ true,
-                                out newEntryState);
+                            needNewRelationship =
+                                !ObjectStateManager.TryUpdateExistingRelationships(
+                                    this.Context,
+                                    this.MergeOption,
+                                    associationSet,
+                                    targetMember,
+                                    targetKey,
+                                    targetEntry.WrappedEntity,
+                                    sourceMember,
+                                    sourceKey,
+                                    /*setIsLoaded*/true,
+                                    out newEntryState
+                                );
 
                             // It is possible that as part of removing existing relationships, the key entry was deleted
                             // If that is the case, recreate the key entry
@@ -344,7 +475,7 @@ namespace System.Data.Common.Internal.Materialization
                             }
                             break;
                         case RelationshipMultiplicity.Many:
-                            // we always need a new relationship with Many-To-Many, if there was no exact match between these two entities, so do nothing                                
+                            // we always need a new relationship with Many-To-Many, if there was no exact match between these two entities, so do nothing
                             break;
                         default:
                             Debug.Assert(false, "Unexpected sourceMember.RelationshipMultiplicity");
@@ -353,17 +484,22 @@ namespace System.Data.Common.Internal.Materialization
 
                     if (needNewRelationship)
                     {
-
-                        // If the target entry is a key entry, then we need to add a relation 
+                        // If the target entry is a key entry, then we need to add a relation
                         //   between the source and target entries
                         // If we are in a state where we just need to add a new Deleted relation, we
                         //   only need to do that and not touch the related ends
-                        // If the target entry is a full entity entry, then we need to add 
+                        // If the target entry is a full entity entry, then we need to add
                         //   the target entity to the source collection or reference
                         if (targetEntry.IsKeyEntry || newEntryState == EntityState.Deleted)
                         {
                             // Add a relationship between the source entity and the target key entry
-                            RelationshipWrapper wrapper = new RelationshipWrapper(associationSet, sourceMember.Name, sourceKey, targetMember.Name, targetKey);
+                            RelationshipWrapper wrapper = new RelationshipWrapper(
+                                associationSet,
+                                sourceMember.Name,
+                                sourceKey,
+                                targetMember.Name,
+                                targetKey
+                            );
                             manager.AddNewRelation(wrapper, newEntryState);
                         }
                         else
@@ -374,19 +510,28 @@ namespace System.Data.Common.Internal.Materialization
                                 // The entry contains an entity, do collection or reference fixup
                                 // This will also try to create a new relationship entry or will revert the delete on an existing deleted relationship
                                 ObjectStateManager.AddEntityToCollectionOrReference(
-                                    this.MergeOption, wrappedEntity, sourceMember,
+                                    this.MergeOption,
+                                    wrappedEntity,
+                                    sourceMember,
                                     targetEntry.WrappedEntity,
                                     targetMember,
-                                    /*setIsLoaded*/ true,
-                                    /*relationshipAlreadyExists*/ false,
-                                    /* inKeyEntryPromotion */ false);
+                                    /*setIsLoaded*/true,
+                                    /*relationshipAlreadyExists*/false,
+                                    /* inKeyEntryPromotion */false
+                                );
                             }
                             else
                             {
                                 // if the target entry is deleted, then the materializer needs to create a deleted relationship
                                 // between the entity and the target entry so that if the entity is deleted, the update
                                 // pipeline can find the relationship (even though it is deleted)
-                                RelationshipWrapper wrapper = new RelationshipWrapper(associationSet, sourceMember.Name, sourceKey, targetMember.Name, targetKey);
+                                RelationshipWrapper wrapper = new RelationshipWrapper(
+                                    associationSet,
+                                    sourceMember.Name,
+                                    sourceKey,
+                                    targetMember.Name,
+                                    targetKey
+                                );
                                 manager.AddNewRelation(wrapper, EntityState.Deleted);
                             }
                         }
@@ -396,25 +541,46 @@ namespace System.Data.Common.Internal.Materialization
             else
             {
                 RelatedEnd relatedEnd;
-                if(TryGetRelatedEnd(wrappedEntity, (AssociationType)targetMember.DeclaringType, sourceMember.Name, targetMember.Name, out relatedEnd))
+                if (
+                    TryGetRelatedEnd(
+                        wrappedEntity,
+                        (AssociationType)targetMember.DeclaringType,
+                        sourceMember.Name,
+                        targetMember.Name,
+                        out relatedEnd
+                    )
+                )
                 {
                     SetIsLoadedForSpan(relatedEnd, false);
                 }
             }
 
-            // else there is nothing else for us to do, the relationship has been handled already   
+            // else there is nothing else for us to do, the relationship has been handled already
             return wrappedEntity;
         }
 
-        private bool TryGetRelatedEnd(IEntityWrapper wrappedEntity, AssociationType associationType, string sourceEndName, string targetEndName, out RelatedEnd relatedEnd)
+        private bool TryGetRelatedEnd(
+            IEntityWrapper wrappedEntity,
+            AssociationType associationType,
+            string sourceEndName,
+            string targetEndName,
+            out RelatedEnd relatedEnd
+        )
         {
             Debug.Assert(associationType.DataSpace == DataSpace.CSpace);
 
             // Get the OSpace AssociationType
             AssociationType oSpaceAssociation;
-            if (!AssociationSpaceMap.TryGetValue((AssociationType)associationType, out oSpaceAssociation))
+            if (
+                !AssociationSpaceMap.TryGetValue(
+                    (AssociationType)associationType,
+                    out oSpaceAssociation
+                )
+            )
             {
-                oSpaceAssociation = this.Workspace.GetItemCollection(DataSpace.OSpace).GetItem<AssociationType>(associationType.FullName);
+                oSpaceAssociation = this
+                    .Workspace.GetItemCollection(DataSpace.OSpace)
+                    .GetItem<AssociationType>(associationType.FullName);
                 AssociationSpaceMap[(AssociationType)associationType] = oSpaceAssociation;
             }
 
@@ -444,14 +610,18 @@ namespace System.Data.Common.Internal.Materialization
                 {
                     // It is possible, because of MEST, that we're trying to load a relationship that is valid for this EntityType
                     // in metadata, but is not valid in this case because the specific entity is part of an EntitySet that is not
-                    // mapped in any AssociationSet for this association type.                  
+                    // mapped in any AssociationSet for this association type.
                     // The metadata structure makes checking for this somewhat time consuming because of the loop required.
                     // Because the whole reason for this method is perf, we try to reduce the
                     // impact of this check by caching positive hits in a HashSet so we don't have to do this for
                     // every entity in a query.  (We could also cache misses, but since these only happen in MEST, which
                     // is not common, we decided not to slow down the normal non-MEST case anymore by doing this.)
                     var entitySet = wrappedEntity.EntityKey.GetEntitySet(this.Workspace);
-                    var relatedEndKey = Tuple.Create<string, string, string>(entitySet.Identity, associationType.Identity, sourceEndName);
+                    var relatedEndKey = Tuple.Create<string, string, string>(
+                        entitySet.Identity,
+                        associationType.Identity,
+                        sourceEndName
+                    );
 
                     if (_relatedEndCache == null)
                     {
@@ -468,7 +638,11 @@ namespace System.Data.Common.Internal.Materialization
                         {
                             if ((EdmType)entitySetBase.ElementType == associationType)
                             {
-                                if (((AssociationSet)entitySetBase).AssociationSetEnds[sourceEndName].EntitySet == entitySet)
+                                if (
+                                    ((AssociationSet)entitySetBase)
+                                        .AssociationSetEnds[sourceEndName]
+                                        .EntitySet == entitySet
+                                )
                                 {
                                     createRelatedEnd = true;
                                     _relatedEndCache.Add(relatedEndKey);
@@ -480,7 +654,12 @@ namespace System.Data.Common.Internal.Materialization
                 }
                 if (createRelatedEnd)
                 {
-                    relatedEnd = LightweightCodeGenerator.GetRelatedEnd(wrappedEntity.RelationshipManager, sourceEnd, targetEnd, null);
+                    relatedEnd = LightweightCodeGenerator.GetRelatedEnd(
+                        wrappedEntity.RelationshipManager,
+                        sourceEnd,
+                        targetEnd,
+                        null
+                    );
                     return true;
                 }
             }
@@ -488,7 +667,7 @@ namespace System.Data.Common.Internal.Materialization
             relatedEnd = null;
             return false;
         }
-        
+
         /// <summary>
         /// Sets the IsLoaded flag to "true"
         /// There are also rules for when this can be set based on MergeOption and the current value(s) in the related end.
@@ -496,8 +675,8 @@ namespace System.Data.Common.Internal.Materialization
         private void SetIsLoadedForSpan(RelatedEnd relatedEnd, bool forceToTrue)
         {
             Debug.Assert(relatedEnd != null, "RelatedEnd should not be null");
-            
-            // We can now say this related end is "Loaded" 
+
+            // We can now say this related end is "Loaded"
             // The cases where we should set this to true are:
             // AppendOnly: the related end is empty and does not point to a stub
             // PreserveChanges: the related end is empty and does not point to a stub (otherwise, an Added item exists and IsLoaded should not change)
@@ -525,7 +704,10 @@ namespace System.Data.Common.Internal.Materialization
         /// Still need this so that the correct key will be used for iPOCOs that implement IEntityWithKey
         /// in a non-default manner.
         /// </summary>
-        public IEntityWrapper HandleIEntityWithKey<TEntity>(IEntityWrapper wrappedEntity, EntitySet entitySet)
+        public IEntityWrapper HandleIEntityWithKey<TEntity>(
+            IEntityWrapper wrappedEntity,
+            EntitySet entitySet
+        )
         {
             Debug.Assert(null != wrappedEntity, "wrapped entity is null");
             return HandleEntity<TEntity>(wrappedEntity, wrappedEntity.EntityKey, entitySet);
@@ -538,17 +720,21 @@ namespace System.Data.Common.Internal.Materialization
         {
             RecordState recordState = (RecordState)this.State[recordStateSlotNumber];
             recordState.SetColumnValue(ordinal, value);
-            return true;  // TRICKY: return true so we can use BitwiseOr expressions to string these guys together.
+            return true; // TRICKY: return true so we can use BitwiseOr expressions to string these guys together.
         }
 
         /// <summary>
         /// Calls through to the specified RecordState to set the value for the EntityRecordInfo.
         /// </summary>
-        public bool SetEntityRecordInfo(int recordStateSlotNumber, EntityKey entityKey, EntitySet entitySet)
+        public bool SetEntityRecordInfo(
+            int recordStateSlotNumber,
+            EntityKey entityKey,
+            EntitySet entitySet
+        )
         {
             RecordState recordState = (RecordState)this.State[recordStateSlotNumber];
             recordState.SetEntityRecordInfo(entityKey, entitySet);
-            return true;  // TRICKY: return true so we can use BitwiseOr expressions to string these guys together.
+            return true; // TRICKY: return true so we can use BitwiseOr expressions to string these guys together.
         }
 
         /// <summary>
@@ -559,13 +745,13 @@ namespace System.Data.Common.Internal.Materialization
         public bool SetState<T>(int ordinal, T value)
         {
             this.State[ordinal] = value;
-            return true;  // TRICKY: return true so we can use BitwiseOr expressions to string these guys together.
+            return true; // TRICKY: return true so we can use BitwiseOr expressions to string these guys together.
         }
 
         /// <summary>
         /// REQUIRES:: should be called only by delegate allocating this state.
         /// Utility method assigning a value to a state slot and return the value, allowing
-        /// the value to be accessed/set in a ShapeEmitter Expression delegate and later 
+        /// the value to be accessed/set in a ShapeEmitter Expression delegate and later
         /// retrieved.
         /// </summary>
         public T SetStatePassthrough<T>(int ordinal, T value)
@@ -580,9 +766,16 @@ namespace System.Data.Common.Internal.Materialization
         /// but when an exception occurs we retry using this method to potentially get
         /// a more useful error message to the user.
         /// </summary>
-        public TProperty GetPropertyValueWithErrorHandling<TProperty>(int ordinal, string propertyName, string typeName)
+        public TProperty GetPropertyValueWithErrorHandling<TProperty>(
+            int ordinal,
+            string propertyName,
+            string typeName
+        )
         {
-            TProperty result = new PropertyErrorHandlingValueReader<TProperty>(propertyName, typeName).GetValue(this.Reader, ordinal);
+            TProperty result = new PropertyErrorHandlingValueReader<TProperty>(
+                propertyName,
+                typeName
+            ).GetValue(this.Reader, ordinal);
             return result;
         }
 
@@ -594,7 +787,10 @@ namespace System.Data.Common.Internal.Materialization
         /// </summary>
         public TColumn GetColumnValueWithErrorHandling<TColumn>(int ordinal)
         {
-            TColumn result = new ColumnErrorHandlingValueReader<TColumn>().GetValue(this.Reader, ordinal);
+            TColumn result = new ColumnErrorHandlingValueReader<TColumn>().GetValue(
+                this.Reader,
+                ordinal
+            );
             return result;
         }
 
@@ -602,57 +798,78 @@ namespace System.Data.Common.Internal.Materialization
         {
             return SpatialHelpers.CreateSpatialDataReader(this.Workspace, this.Reader);
         }
+
         private readonly Singleton<DbSpatialDataReader> spatialReader;
-                
+
         public DbGeography GetGeographyColumnValue(int ordinal)
         {
             return this.spatialReader.Value.GetGeography(ordinal);
         }
-                
+
         public DbGeometry GetGeometryColumnValue(int ordinal)
         {
             return this.spatialReader.Value.GetGeometry(ordinal);
         }
 
-        public TColumn GetSpatialColumnValueWithErrorHandling<TColumn>(int ordinal, PrimitiveTypeKind spatialTypeKind)
+        public TColumn GetSpatialColumnValueWithErrorHandling<TColumn>(
+            int ordinal,
+            PrimitiveTypeKind spatialTypeKind
+        )
         {
-            Debug.Assert(spatialTypeKind == PrimitiveTypeKind.Geography || spatialTypeKind == PrimitiveTypeKind.Geometry, "Spatial primitive type kind is not geography or geometry?");
+            Debug.Assert(
+                spatialTypeKind == PrimitiveTypeKind.Geography
+                    || spatialTypeKind == PrimitiveTypeKind.Geometry,
+                "Spatial primitive type kind is not geography or geometry?"
+            );
 
             TColumn result;
             if (spatialTypeKind == PrimitiveTypeKind.Geography)
             {
                 result = new ColumnErrorHandlingValueReader<TColumn>(
-                                (reader, column) => (TColumn)(object)this.spatialReader.Value.GetGeography(column),
-                                (reader, column) => this.spatialReader.Value.GetGeography(column)
-                         ).GetValue(this.Reader, ordinal);
+                    (reader, column) =>
+                        (TColumn)(object)this.spatialReader.Value.GetGeography(column),
+                    (reader, column) => this.spatialReader.Value.GetGeography(column)
+                ).GetValue(this.Reader, ordinal);
             }
             else
             {
                 result = new ColumnErrorHandlingValueReader<TColumn>(
-                                (reader, column) => (TColumn)(object)this.spatialReader.Value.GetGeometry(column),
-                                (reader, column) => this.spatialReader.Value.GetGeometry(column)
-                         ).GetValue(this.Reader, ordinal);
+                    (reader, column) =>
+                        (TColumn)(object)this.spatialReader.Value.GetGeometry(column),
+                    (reader, column) => this.spatialReader.Value.GetGeometry(column)
+                ).GetValue(this.Reader, ordinal);
             }
             return result;
         }
 
-        public TProperty GetSpatialPropertyValueWithErrorHandling<TProperty>(int ordinal, string propertyName, string typeName, PrimitiveTypeKind spatialTypeKind)
+        public TProperty GetSpatialPropertyValueWithErrorHandling<TProperty>(
+            int ordinal,
+            string propertyName,
+            string typeName,
+            PrimitiveTypeKind spatialTypeKind
+        )
         {
             TProperty result;
             if (Helper.IsGeographicTypeKind(spatialTypeKind))
             {
-                result = new PropertyErrorHandlingValueReader<TProperty>(propertyName, typeName,
-                                (reader, column) => (TProperty)(object)this.spatialReader.Value.GetGeography(column),
-                                (reader, column) => this.spatialReader.Value.GetGeography(column)
-                         ).GetValue(this.Reader, ordinal);
+                result = new PropertyErrorHandlingValueReader<TProperty>(
+                    propertyName,
+                    typeName,
+                    (reader, column) =>
+                        (TProperty)(object)this.spatialReader.Value.GetGeography(column),
+                    (reader, column) => this.spatialReader.Value.GetGeography(column)
+                ).GetValue(this.Reader, ordinal);
             }
             else
             {
                 Debug.Assert(Helper.IsGeometricTypeKind(spatialTypeKind));
-                result = new PropertyErrorHandlingValueReader<TProperty>(propertyName, typeName,
-                            (reader, column) => (TProperty)(object)this.spatialReader.Value.GetGeometry(column),
-                            (reader, column) => this.spatialReader.Value.GetGeometry(column)
-                     ).GetValue(this.Reader, ordinal);
+                result = new PropertyErrorHandlingValueReader<TProperty>(
+                    propertyName,
+                    typeName,
+                    (reader, column) =>
+                        (TProperty)(object)this.spatialReader.Value.GetGeometry(column),
+                    (reader, column) => this.spatialReader.Value.GetGeometry(column)
+                ).GetValue(this.Reader, ordinal);
             }
 
             return result;
@@ -662,22 +879,39 @@ namespace System.Data.Common.Internal.Materialization
 
         #region helper methods (used by runtime callable code)
 
-        private void CheckClearedEntryOnSpan(object targetValue, IEntityWrapper wrappedSource, EntityKey sourceKey, AssociationEndMember targetMember)
+        private void CheckClearedEntryOnSpan(
+            object targetValue,
+            IEntityWrapper wrappedSource,
+            EntityKey sourceKey,
+            AssociationEndMember targetMember
+        )
         {
             // If a relationship does not exist on the server but does exist on the client,
             // we may need to remove it, depending on the current state and the MergeOption
-            if ((null != (object)sourceKey) && (null == targetValue) &&
-                (this.MergeOption == MergeOption.PreserveChanges ||
-                 this.MergeOption == MergeOption.OverwriteChanges))
+            if (
+                (null != (object)sourceKey)
+                && (null == targetValue)
+                && (
+                    this.MergeOption == MergeOption.PreserveChanges
+                    || this.MergeOption == MergeOption.OverwriteChanges
+                )
+            )
             {
                 // When the spanned value is null, it may be because the spanned association applies to a
                 // subtype of the entity's type, and the entity is not actually an instance of that type.
-                AssociationEndMember sourceEnd = MetadataHelper.GetOtherAssociationEnd(targetMember);
+                AssociationEndMember sourceEnd = MetadataHelper.GetOtherAssociationEnd(
+                    targetMember
+                );
                 EdmType expectedSourceType = ((RefType)sourceEnd.TypeUsage.EdmType).ElementType;
                 TypeUsage entityTypeUsage;
-                if (!this.Context.Perspective.TryGetType(wrappedSource.IdentityType, out entityTypeUsage) ||
-                    entityTypeUsage.EdmType.EdmEquals(expectedSourceType) ||
-                    TypeSemantics.IsSubTypeOf(entityTypeUsage.EdmType, expectedSourceType))
+                if (
+                    !this.Context.Perspective.TryGetType(
+                        wrappedSource.IdentityType,
+                        out entityTypeUsage
+                    )
+                    || entityTypeUsage.EdmType.EdmEquals(expectedSourceType)
+                    || TypeSemantics.IsSubTypeOf(entityTypeUsage.EdmType, expectedSourceType)
+                )
                 {
                     // Otherwise, the source entity is the correct type (exactly or a subtype) for the source
                     // end of the spanned association, so validate that the relationhip that was spanned is
@@ -689,7 +923,11 @@ namespace System.Data.Common.Internal.Materialization
             }
         }
 
-        private void CheckClearedEntryOnSpan(EntityKey sourceKey, IEntityWrapper wrappedSource, AssociationEndMember targetMember)
+        private void CheckClearedEntryOnSpan(
+            EntityKey sourceKey,
+            IEntityWrapper wrappedSource,
+            AssociationEndMember targetMember
+        )
         {
             Debug.Assert(null != (object)sourceKey);
             Debug.Assert(wrappedSource != null);
@@ -699,16 +937,33 @@ namespace System.Data.Common.Internal.Materialization
 
             AssociationEndMember sourceMember = MetadataHelper.GetOtherAssociationEnd(targetMember);
 
-            EntityContainer entityContainer = this.Context.MetadataWorkspace.GetEntityContainer(sourceKey.EntityContainerName,
-                DataSpace.CSpace);
+            EntityContainer entityContainer = this.Context.MetadataWorkspace.GetEntityContainer(
+                sourceKey.EntityContainerName,
+                DataSpace.CSpace
+            );
             EntitySet sourceEntitySet;
-            AssociationSet associationSet = MetadataHelper.GetAssociationsForEntitySetAndAssociationType(entityContainer, sourceKey.EntitySetName,
-                (AssociationType)sourceMember.DeclaringType, sourceMember.Name, out sourceEntitySet);
+            AssociationSet associationSet =
+                MetadataHelper.GetAssociationsForEntitySetAndAssociationType(
+                    entityContainer,
+                    sourceKey.EntitySetName,
+                    (AssociationType)sourceMember.DeclaringType,
+                    sourceMember.Name,
+                    out sourceEntitySet
+                );
 
             if (associationSet != null)
             {
-                Debug.Assert(associationSet.AssociationSetEnds[sourceMember.Name].EntitySet == sourceEntitySet);
-                ObjectStateManager.RemoveRelationships(Context, MergeOption, associationSet, sourceKey, sourceMember);
+                Debug.Assert(
+                    associationSet.AssociationSetEnds[sourceMember.Name].EntitySet
+                        == sourceEntitySet
+                );
+                ObjectStateManager.RemoveRelationships(
+                    Context,
+                    MergeOption,
+                    associationSet,
+                    sourceKey,
+                    sourceMember
+                );
             }
         }
 
@@ -716,20 +971,44 @@ namespace System.Data.Common.Internal.Materialization
         /// Wire's one or more full-spanned entities into the state manager; used by
         /// both full-spanned collections and full-spanned entities.
         /// </summary>
-        private void FullSpanAction<T_TargetEntity>(IEntityWrapper wrappedSource, IList<T_TargetEntity> spannedEntities, AssociationEndMember targetMember)
+        private void FullSpanAction<T_TargetEntity>(
+            IEntityWrapper wrappedSource,
+            IList<T_TargetEntity> spannedEntities,
+            AssociationEndMember targetMember
+        )
         {
             Debug.Assert(null != wrappedSource, "wrapped entity is null");
 
             if (wrappedSource.Entity != null)
             {
                 EntityKey sourceKey = wrappedSource.EntityKey;
-                AssociationEndMember sourceMember = MetadataHelper.GetOtherAssociationEnd(targetMember);
+                AssociationEndMember sourceMember = MetadataHelper.GetOtherAssociationEnd(
+                    targetMember
+                );
 
                 RelatedEnd relatedEnd;
-                if (TryGetRelatedEnd(wrappedSource, (AssociationType)targetMember.DeclaringType, sourceMember.Name, targetMember.Name, out relatedEnd))
+                if (
+                    TryGetRelatedEnd(
+                        wrappedSource,
+                        (AssociationType)targetMember.DeclaringType,
+                        sourceMember.Name,
+                        targetMember.Name,
+                        out relatedEnd
+                    )
+                )
                 {
                     // Add members of the list to the source entity (item in column 0)
-                    int count = ObjectStateManager.UpdateRelationships(this.Context, this.MergeOption, (AssociationSet)relatedEnd.RelationshipSet, sourceMember, sourceKey, wrappedSource, targetMember, (List<T_TargetEntity>)spannedEntities, true);
+                    int count = ObjectStateManager.UpdateRelationships(
+                        this.Context,
+                        this.MergeOption,
+                        (AssociationSet)relatedEnd.RelationshipSet,
+                        sourceMember,
+                        sourceKey,
+                        wrappedSource,
+                        targetMember,
+                        (List<T_TargetEntity>)spannedEntities,
+                        true
+                    );
 
                     SetIsLoadedForSpan(relatedEnd, count > 0);
                 }
@@ -748,7 +1027,11 @@ namespace System.Data.Common.Internal.Materialization
             Type clrType = typeof(TEntity);
             if (clrType != existingEntry.WrappedEntity.IdentityType)
             {
-                throw EntityUtil.RecyclingEntity(existingEntry.EntityKey, clrType, existingEntry.WrappedEntity.IdentityType);
+                throw EntityUtil.RecyclingEntity(
+                    existingEntry.EntityKey,
+                    clrType,
+                    existingEntry.WrappedEntity.IdentityType
+                );
             }
 
             if (EntityState.Added == existingEntry.State)
@@ -757,9 +1040,12 @@ namespace System.Data.Common.Internal.Materialization
             }
 
             if (MergeOption.AppendOnly != MergeOption)
-            {   // existing entity, update CSpace values in place
+            { // existing entity, update CSpace values in place
                 Debug.Assert(EntityState.Added != existingEntry.State, "entry in State=Added");
-                Debug.Assert(EntityState.Detached != existingEntry.State, "entry in State=Detached");
+                Debug.Assert(
+                    EntityState.Detached != existingEntry.State,
+                    "entry in State=Detached"
+                );
 
                 if (MergeOption.OverwriteChanges == MergeOption)
                 {
@@ -768,32 +1054,53 @@ namespace System.Data.Common.Internal.Materialization
                         existingEntry.RevertDelete();
                     }
                     existingEntry.UpdateCurrentValueRecord(wrappedEntity.Entity);
-                    Context.ObjectStateManager.ForgetEntryWithConceptualNull(existingEntry, resetAllKeys: true);
+                    Context.ObjectStateManager.ForgetEntryWithConceptualNull(
+                        existingEntry,
+                        resetAllKeys: true
+                    );
                     existingEntry.AcceptChanges();
-                    Context.ObjectStateManager.FixupReferencesByForeignKeys(existingEntry, replaceAddedRefs: true);
+                    Context.ObjectStateManager.FixupReferencesByForeignKeys(
+                        existingEntry,
+                        replaceAddedRefs: true
+                    );
                 }
                 else
                 {
-                    Debug.Assert(MergeOption.PreserveChanges == MergeOption, "not MergeOption.PreserveChanges");
+                    Debug.Assert(
+                        MergeOption.PreserveChanges == MergeOption,
+                        "not MergeOption.PreserveChanges"
+                    );
                     if (EntityState.Unchanged == existingEntry.State)
                     {
                         // same behavior as MergeOption.OverwriteChanges
                         existingEntry.UpdateCurrentValueRecord(wrappedEntity.Entity);
-                        Context.ObjectStateManager.ForgetEntryWithConceptualNull(existingEntry, resetAllKeys: true);
+                        Context.ObjectStateManager.ForgetEntryWithConceptualNull(
+                            existingEntry,
+                            resetAllKeys: true
+                        );
                         existingEntry.AcceptChanges();
-                        Context.ObjectStateManager.FixupReferencesByForeignKeys(existingEntry, replaceAddedRefs: true);
+                        Context.ObjectStateManager.FixupReferencesByForeignKeys(
+                            existingEntry,
+                            replaceAddedRefs: true
+                        );
                     }
                     else
                     {
                         if (Context.ContextOptions.UseLegacyPreserveChangesBehavior)
                         {
                             // Do not mark properties as modified if they differ from the entity.
-                            existingEntry.UpdateRecordWithoutSetModified(wrappedEntity.Entity, existingEntry.EditableOriginalValues);
+                            existingEntry.UpdateRecordWithoutSetModified(
+                                wrappedEntity.Entity,
+                                existingEntry.EditableOriginalValues
+                            );
                         }
                         else
                         {
                             // Mark properties as modified if they differ from the entity
-                            existingEntry.UpdateRecordWithSetModified(wrappedEntity.Entity, existingEntry.EditableOriginalValues);
+                            existingEntry.UpdateRecordWithSetModified(
+                                wrappedEntity.Entity,
+                                existingEntry.EditableOriginalValues
+                            );
                         }
                     }
                 }
@@ -810,27 +1117,33 @@ namespace System.Data.Common.Internal.Materialization
             private readonly Func<DbDataReader, int, T> getTypedValue;
             private readonly Func<DbDataReader, int, object> getUntypedValue;
 
-            protected ErrorHandlingValueReader(Func<DbDataReader, int, T> typedValueAccessor, Func<DbDataReader, int, object> untypedValueAccessor)
+            protected ErrorHandlingValueReader(
+                Func<DbDataReader, int, T> typedValueAccessor,
+                Func<DbDataReader, int, object> untypedValueAccessor
+            )
             {
                 this.getTypedValue = typedValueAccessor;
                 this.getUntypedValue = untypedValueAccessor;
             }
 
             protected ErrorHandlingValueReader()
-                : this(GetTypedValueDefault, GetUntypedValueDefault)
-            {
-            }
+                : this(GetTypedValueDefault, GetUntypedValueDefault) { }
 
             private static T GetTypedValueDefault(DbDataReader reader, int ordinal)
             {
                 var underlyingType = Nullable.GetUnderlyingType(typeof(T));
                 // The value read from the reader is of a primitive type. Such a value cannot be cast to a nullable enum type directly
                 // but first needs to be cast to the non-nullable enum type. Therefore we will call this method for non-nullable
-                // underlying enum type and cast to the target type. 
+                // underlying enum type and cast to the target type.
                 if (underlyingType != null && underlyingType.IsEnum)
                 {
                     var type = typeof(ErrorHandlingValueReader<>).MakeGenericType(underlyingType);
-                    return (T)type.GetMethod(MethodBase.GetCurrentMethod().Name, BindingFlags.NonPublic | BindingFlags.Static).Invoke(null, new object[] { reader, ordinal });
+                    return (T)
+                        type.GetMethod(
+                                MethodBase.GetCurrentMethod().Name,
+                                BindingFlags.NonPublic | BindingFlags.Static
+                            )
+                            .Invoke(null, new object[] { reader, ordinal });
                 }
 
                 // use the specific reader.GetXXX method
@@ -863,7 +1176,7 @@ namespace System.Data.Common.Internal.Materialization
                     {
                         // NullReferenceException is thrown when casting null to a value type.
                         // We don't use isNullable here because of an issue with GetReaderMethod
-                        // 
+                        //
                         throw CreateNullValueException();
                     }
                 }
@@ -882,7 +1195,8 @@ namespace System.Data.Common.Internal.Materialization
                             // for it to percolate up -- we only intercept type
                             // and null mismatches)
                             object untypedResult = this.getUntypedValue(reader, ordinal);
-                            Type resultType = null == untypedResult ? null : untypedResult.GetType();
+                            Type resultType =
+                                null == untypedResult ? null : untypedResult.GetType();
                             if (!typeof(T).IsAssignableFrom(resultType))
                             {
                                 throw CreateWrongTypeException(resultType);
@@ -909,27 +1223,27 @@ namespace System.Data.Common.Internal.Materialization
 
         private class ColumnErrorHandlingValueReader<TColumn> : ErrorHandlingValueReader<TColumn>
         {
-            internal ColumnErrorHandlingValueReader()
-            {
-            }
+            internal ColumnErrorHandlingValueReader() { }
 
-            internal ColumnErrorHandlingValueReader(Func<DbDataReader, int, TColumn> typedAccessor, Func<DbDataReader, int, object> untypedAccessor)
-                : base(typedAccessor, untypedAccessor)
-            {
-            }
+            internal ColumnErrorHandlingValueReader(
+                Func<DbDataReader, int, TColumn> typedAccessor,
+                Func<DbDataReader, int, object> untypedAccessor
+            )
+                : base(typedAccessor, untypedAccessor) { }
 
             protected override Exception CreateNullValueException()
             {
                 return EntityUtil.ValueNullReferenceCast(typeof(TColumn));
             }
 
-            protected override Exception  CreateWrongTypeException(Type resultType)
+            protected override Exception CreateWrongTypeException(Type resultType)
             {
                 return EntityUtil.ValueInvalidCast(resultType, typeof(TColumn));
             }
         }
 
-        private class PropertyErrorHandlingValueReader<TProperty> : ErrorHandlingValueReader<TProperty>
+        private class PropertyErrorHandlingValueReader<TProperty>
+            : ErrorHandlingValueReader<TProperty>
         {
             private readonly string _propertyName;
             private readonly string _typeName;
@@ -941,7 +1255,12 @@ namespace System.Data.Common.Internal.Materialization
                 _typeName = typeName;
             }
 
-            internal PropertyErrorHandlingValueReader(string propertyName, string typeName, Func<DbDataReader, int, TProperty> typedAccessor, Func<DbDataReader, int, object> untypedAccessor)
+            internal PropertyErrorHandlingValueReader(
+                string propertyName,
+                string typeName,
+                Func<DbDataReader, int, TProperty> typedAccessor,
+                Func<DbDataReader, int, object> untypedAccessor
+            )
                 : base(typedAccessor, untypedAccessor)
             {
                 _propertyName = propertyName;
@@ -951,17 +1270,25 @@ namespace System.Data.Common.Internal.Materialization
             protected override Exception CreateNullValueException()
             {
                 return EntityUtil.Constraint(
-                                        System.Data.Entity.Strings.Materializer_SetInvalidValue(
-                                        (Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)).Name,
-                                        _typeName, _propertyName, "null"));
+                    System.Data.Entity.Strings.Materializer_SetInvalidValue(
+                        (Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)).Name,
+                        _typeName,
+                        _propertyName,
+                        "null"
+                    )
+                );
             }
 
             protected override Exception CreateWrongTypeException(Type resultType)
             {
                 return EntityUtil.InvalidOperation(
-                                        System.Data.Entity.Strings.Materializer_SetInvalidValue(
-                                        (Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)).Name,
-                                        _typeName, _propertyName, resultType.Name));
+                    System.Data.Entity.Strings.Materializer_SetInvalidValue(
+                        (Nullable.GetUnderlyingType(typeof(TProperty)) ?? typeof(TProperty)).Name,
+                        _typeName,
+                        _propertyName,
+                        resultType.Name
+                    )
+                );
             }
         }
         #endregion
@@ -1052,10 +1379,23 @@ namespace System.Data.Common.Internal.Materialization
 
         #region constructor
 
-        internal Shaper(DbDataReader reader, ObjectContext context, MetadataWorkspace workspace, MergeOption mergeOption, int stateCount, CoordinatorFactory<T> rootCoordinatorFactory, Action checkPermissions, bool readerOwned)
+        internal Shaper(
+            DbDataReader reader,
+            ObjectContext context,
+            MetadataWorkspace workspace,
+            MergeOption mergeOption,
+            int stateCount,
+            CoordinatorFactory<T> rootCoordinatorFactory,
+            Action checkPermissions,
+            bool readerOwned
+        )
             : base(reader, context, workspace, mergeOption, stateCount)
         {
-            RootCoordinator = new Coordinator<T>(rootCoordinatorFactory, /*parent*/ null, /*next*/ null);
+            RootCoordinator = new Coordinator<T>(
+                rootCoordinatorFactory, /*parent*/
+                null, /*next*/
+                null
+            );
             if (null != checkPermissions)
             {
                 checkPermissions();
@@ -1071,7 +1411,7 @@ namespace System.Data.Common.Internal.Materialization
         #region "public" surface area
 
         /// <summary>
-        /// Events raised when the shaper has finished enumerating results. Useful for callback 
+        /// Events raised when the shaper has finished enumerating results. Useful for callback
         /// to set parameter values.
         /// </summary>
         internal event EventHandler OnDone;
@@ -1112,12 +1452,18 @@ namespace System.Data.Common.Internal.Materialization
         /// </summary>
         private void InitializeRecordStates(CoordinatorFactory coordinatorFactory)
         {
-            foreach (RecordStateFactory recordStateFactory in coordinatorFactory.RecordStateFactories)
+            foreach (
+                RecordStateFactory recordStateFactory in coordinatorFactory.RecordStateFactories
+            )
             {
-                State[recordStateFactory.StateSlotNumber] = recordStateFactory.Create(coordinatorFactory);
+                State[recordStateFactory.StateSlotNumber] = recordStateFactory.Create(
+                    coordinatorFactory
+                );
             }
 
-            foreach (CoordinatorFactory nestedCoordinatorFactory in coordinatorFactory.NestedCoordinators)
+            foreach (
+                CoordinatorFactory nestedCoordinatorFactory in coordinatorFactory.NestedCoordinators
+            )
             {
                 InitializeRecordStates(nestedCoordinatorFactory);
             }
@@ -1133,7 +1479,9 @@ namespace System.Data.Common.Internal.Materialization
             }
             else
             {
-                RowNestedResultEnumerator rowEnumerator = new Shaper<T>.RowNestedResultEnumerator(this);
+                RowNestedResultEnumerator rowEnumerator = new Shaper<T>.RowNestedResultEnumerator(
+                    this
+                );
 
                 if (this.IsObjectQuery)
                 {
@@ -1169,7 +1517,7 @@ namespace System.Data.Common.Internal.Materialization
                         this.Reader.Dispose();
                     }
 
-                    // This case includes when the ObjectResult is disposed before it 
+                    // This case includes when the ObjectResult is disposed before it
                     // created an ObjectQueryEnumeration; at this time, the connection can be released
                     if (this.Context != null)
                     {
@@ -1208,7 +1556,10 @@ namespace System.Data.Common.Internal.Materialization
                 // wrap exception if necessary
                 if (EntityUtil.IsCatchableEntityExceptionType(e))
                 {
-                    throw EntityUtil.CommandExecution(System.Data.Entity.Strings.EntityClient_StoreReaderFailed, e);
+                    throw EntityUtil.CommandExecution(
+                        System.Data.Entity.Strings.EntityClient_StoreReaderFailed,
+                        e
+                    );
                 }
                 throw;
             }
@@ -1229,7 +1580,7 @@ namespace System.Data.Common.Internal.Materialization
 
         /// <summary>
         /// Notify ObjectContext that we are finished materializing the element
-        /// </summary>        
+        /// </summary>
         private void StopMaterializingElement()
         {
             if (Context != null)
@@ -1293,7 +1644,7 @@ namespace System.Data.Common.Internal.Materialization
                     finally
                     {
                         _shaper.StopMaterializingElement();
-                    }                    
+                    }
                     return true;
                 }
                 this.Dispose();
@@ -1353,7 +1704,7 @@ namespace System.Data.Common.Internal.Materialization
                 try
                 {
                     _shaper.StartMaterializingElement();
-                    
+
                     if (!_shaper.StoreRead())
                     {
                         // Reset all collections
@@ -1366,7 +1717,10 @@ namespace System.Data.Common.Internal.Materialization
                     for (; depth < _current.Length; depth++)
                     {
                         // find a coordinator at this depth that currently has data (if any)
-                        while (currentCoordinator != null && !currentCoordinator.CoordinatorFactory.HasData(_shaper))
+                        while (
+                            currentCoordinator != null
+                            && !currentCoordinator.CoordinatorFactory.HasData(_shaper)
+                        )
                         {
                             currentCoordinator = currentCoordinator.Next;
                         }
@@ -1445,7 +1799,10 @@ namespace System.Data.Common.Internal.Materialization
                 _state = State.Start;
             }
 
-            public T Current { get { return _previousElement; } }
+            public T Current
+            {
+                get { return _previousElement; }
+            }
 
             public void Dispose()
             {
@@ -1456,7 +1813,10 @@ namespace System.Data.Common.Internal.Materialization
                 _rowEnumerator.Dispose();
             }
 
-            object System.Collections.IEnumerator.Current { get { return this.Current; } }
+            object System.Collections.IEnumerator.Current
+            {
+                get { return this.Current; }
+            }
 
             public bool MoveNext()
             {
@@ -1476,18 +1836,21 @@ namespace System.Data.Common.Internal.Materialization
                                 // no data at all...
                                 _state = State.NoRows;
                             }
-                        };
+                        }
+                        ;
                         break;
                     case State.Reading:
                         {
                             ReadElement();
-                        };
+                        }
+                        ;
                         break;
                     case State.NoRowsLastElementPending:
                         {
                             // nothing to do but move to the next state...
                             _state = State.NoRows;
-                        };
+                        }
+                        ;
                         break;
                 }
 
@@ -1507,7 +1870,7 @@ namespace System.Data.Common.Internal.Materialization
 
             /// <summary>
             /// Requires: the row is currently positioned at the start of an element.
-            /// 
+            ///
             /// Reads all rows in the element and sets up state for the next element (if any).
             /// </summary>
             private void ReadElement()
@@ -1672,6 +2035,5 @@ namespace System.Data.Common.Internal.Materialization
         }
 
         #endregion
-
     }
 }

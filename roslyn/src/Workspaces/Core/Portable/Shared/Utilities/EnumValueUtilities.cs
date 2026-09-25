@@ -19,12 +19,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// </summary>
         public static object GetNextEnumValue(INamedTypeSymbol enumType)
         {
-            var orderedExistingConstants = enumType.GetMembers()
-                                            .OfType<IFieldSymbol>()
-                                            .Where(f => f.HasConstantValue)
-                                            .Select(f => f.ConstantValue)
-                                            .OfType<IComparable>()
-                                            .OrderByDescending(f => f).ToList();
+            var orderedExistingConstants = enumType
+                .GetMembers()
+                .OfType<IFieldSymbol>()
+                .Where(f => f.HasConstantValue)
+                .Select(f => f.ConstantValue)
+                .OfType<IComparable>()
+                .OrderByDescending(f => f)
+                .ToList();
             var existingConstants = orderedExistingConstants.ToSet();
 
             if (LooksLikeFlagsEnum(orderedExistingConstants))
@@ -54,8 +56,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return null;
         }
 
-        private static object CreateOne(SpecialType specialType)
-            => specialType switch
+        private static object CreateOne(SpecialType specialType) =>
+            specialType switch
             {
                 SpecialType.System_SByte => (sbyte)1,
                 SpecialType.System_Byte => (byte)1,
@@ -68,8 +70,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 _ => 1,
             };
 
-        private static IComparable Multiply(IComparable value, uint number)
-            => value switch
+        private static IComparable Multiply(IComparable value, uint number) =>
+            value switch
             {
                 long v => unchecked(v * number),
                 ulong v => unchecked(v * number),
@@ -82,8 +84,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 _ => null,
             };
 
-        private static IComparable Add(IComparable value, uint number)
-            => value switch
+        private static IComparable Add(IComparable value, uint number) =>
+            value switch
             {
                 long v => unchecked(v + number),
                 ulong v => unchecked(v + number),
@@ -96,8 +98,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 _ => null,
             };
 
-        private static bool GreaterThanOrEqualsZero(IComparable value)
-            => value switch
+        private static bool GreaterThanOrEqualsZero(IComparable value) =>
+            value switch
             {
                 long v => v >= 0,
                 ulong v => v >= 0,
@@ -112,10 +114,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         private static bool LooksLikeFlagsEnum(List<IComparable> existingConstants)
         {
-            if (existingConstants.Count >= 1 &&
-               IntegerUtilities.HasOneBitSet(existingConstants[0]) &&
-               Multiply(existingConstants[0], 2).CompareTo(existingConstants[0]) > 0 &&
-               existingConstants.All(GreaterThanOrEqualsZero))
+            if (
+                existingConstants.Count >= 1
+                && IntegerUtilities.HasOneBitSet(existingConstants[0])
+                && Multiply(existingConstants[0], 2).CompareTo(existingConstants[0]) > 0
+                && existingConstants.All(GreaterThanOrEqualsZero)
+            )
             {
                 if (existingConstants.Count == 1)
                 {
@@ -126,8 +130,12 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 {
                     // If you only have two values, and they're 1 and 2, then don't assume this is a
                     // flags enum.  The person could have been trying to type, 1, 2, 3 instead.
-                    if (existingConstants[0].Equals(Convert.ChangeType(2, existingConstants[0].GetType())) &&
-                        existingConstants[1].Equals(Convert.ChangeType(1, existingConstants[1].GetType())))
+                    if (
+                        existingConstants[0]
+                            .Equals(Convert.ChangeType(2, existingConstants[0].GetType()))
+                        && existingConstants[1]
+                            .Equals(Convert.ChangeType(1, existingConstants[1].GetType()))
+                    )
                     {
                         return false;
                     }

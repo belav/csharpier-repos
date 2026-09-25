@@ -9,6 +9,5 @@ internal static class AnsiConsole
 {
     public static readonly AnsiTextWriter Out = new(Console.Out);
 
-    public static void WriteLine(string? text)
-        => Out.WriteLine(text);
+    public static void WriteLine(string? text) => Out.WriteLine(text);
 }

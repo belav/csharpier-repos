@@ -10,8 +10,10 @@ namespace System.CodeDom
             Name = ".ctor";
         }
 
-        public CodeExpressionCollection BaseConstructorArgs { get; } = new CodeExpressionCollection();
+        public CodeExpressionCollection BaseConstructorArgs { get; } =
+            new CodeExpressionCollection();
 
-        public CodeExpressionCollection ChainedConstructorArgs { get; } = new CodeExpressionCollection();
+        public CodeExpressionCollection ChainedConstructorArgs { get; } =
+            new CodeExpressionCollection();
     }
 }

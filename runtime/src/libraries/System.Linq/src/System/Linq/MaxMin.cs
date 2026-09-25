@@ -11,7 +11,8 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        private interface IMinMaxCalc<T> where T : struct, IBinaryInteger<T>
+        private interface IMinMaxCalc<T>
+            where T : struct, IBinaryInteger<T>
         {
             public static abstract bool Compare(T left, T right);
             public static abstract Vector128<T> Compare(Vector128<T> left, Vector128<T> right);
@@ -46,7 +47,10 @@ namespace System.Linq
                 else if (!Vector256.IsHardwareAccelerated || span.Length < Vector256<T>.Count)
                 {
                     ref T current = ref MemoryMarshal.GetReference(span);
-                    ref T lastVectorStart = ref Unsafe.Add(ref current, span.Length - Vector128<T>.Count);
+                    ref T lastVectorStart = ref Unsafe.Add(
+                        ref current,
+                        span.Length - Vector128<T>.Count
+                    );
 
                     Vector128<T> best = Vector128.LoadUnsafe(ref current);
                     current = ref Unsafe.Add(ref current, Vector128<T>.Count);
@@ -70,7 +74,10 @@ namespace System.Linq
                 else if (!Vector512.IsHardwareAccelerated || span.Length < Vector512<T>.Count)
                 {
                     ref T current = ref MemoryMarshal.GetReference(span);
-                    ref T lastVectorStart = ref Unsafe.Add(ref current, span.Length - Vector256<T>.Count);
+                    ref T lastVectorStart = ref Unsafe.Add(
+                        ref current,
+                        span.Length - Vector256<T>.Count
+                    );
 
                     Vector256<T> best = Vector256.LoadUnsafe(ref current);
                     current = ref Unsafe.Add(ref current, Vector256<T>.Count);
@@ -94,7 +101,10 @@ namespace System.Linq
                 else
                 {
                     ref T current = ref MemoryMarshal.GetReference(span);
-                    ref T lastVectorStart = ref Unsafe.Add(ref current, span.Length - Vector512<T>.Count);
+                    ref T lastVectorStart = ref Unsafe.Add(
+                        ref current,
+                        span.Length - Vector512<T>.Count
+                    );
 
                     Vector512<T> best = Vector512.LoadUnsafe(ref current);
                     current = ref Unsafe.Add(ref current, Vector512<T>.Count);

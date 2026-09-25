@@ -10,7 +10,10 @@ using Xunit;
 
 public static unsafe class CopyCtor
 {
-    public static unsafe int StructWithCtorTest(StructWithCtor* ptrStruct, ref StructWithCtor refStruct)
+    public static unsafe int StructWithCtorTest(
+        StructWithCtor* ptrStruct,
+        ref StructWithCtor refStruct
+    )
     {
         if (ptrStruct->_instanceField != 1)
             return 1;
@@ -22,19 +25,26 @@ public static unsafe class CopyCtor
         if (StructWithCtor.DtorCallCount != 2)
             return 4;
 
-
         return 100;
     }
 
     [Fact]
     public static unsafe int TestEntryPoint()
     {
-        TestDelegate del = (TestDelegate)Delegate.CreateDelegate(typeof(TestDelegate), typeof(CopyCtor).GetMethod("StructWithCtorTest"));
+        TestDelegate del = (TestDelegate)
+            Delegate.CreateDelegate(
+                typeof(TestDelegate),
+                typeof(CopyCtor).GetMethod("StructWithCtorTest")
+            );
         StructWithCtor s1 = new StructWithCtor();
         StructWithCtor s2 = new StructWithCtor();
         s1._instanceField = 1;
         s2._instanceField = 2;
-        int returnVal = FunctionPointer.Call_FunctionPointer(Marshal.GetFunctionPointerForDelegate(del), &s1, ref s2);
+        int returnVal = FunctionPointer.Call_FunctionPointer(
+            Marshal.GetFunctionPointerForDelegate(del),
+            &s1,
+            ref s2
+        );
 
         GC.KeepAlive(del);
 

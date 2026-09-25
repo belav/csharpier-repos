@@ -6,9 +6,9 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Objects.DataClasses;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.Objects.Internal
 {
@@ -46,7 +46,13 @@ namespace System.Data.Objects.Internal
         }
 
         // See IChangeTrackingStrategy documentation
-        public void SetCurrentValue(EntityEntry entry, StateManagerMemberMetadata member, int ordinal, object target, object value)
+        public void SetCurrentValue(
+            EntityEntry entry,
+            StateManagerMemberMetadata member,
+            int ordinal,
+            object target,
+            object value
+        )
         {
             member.SetValue(target, value);
         }
@@ -59,7 +65,7 @@ namespace System.Data.Objects.Internal
             entry.UpdateRecordWithoutSetModified(value, entry.CurrentValues);
             if (isProxy)
             {
-                entry.DetectChangesInProperties(true);      // detect only complex property changes
+                entry.DetectChangesInProperties(true); // detect only complex property changes
             }
         }
     }

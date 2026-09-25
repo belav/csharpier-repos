@@ -16,33 +16,40 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
     {
         private readonly ContainedLanguage _underlyingObject;
 
-        [Obsolete("Use the constructor that omits the IVsHierarchy and uint parameters instead.", error: true)]
+        [Obsolete(
+            "Use the constructor that omits the IVsHierarchy and uint parameters instead.",
+            error: true
+        )]
         public VSTypeScriptContainedLanguageWrapper(
             IVsTextBufferCoordinator bufferCoordinator,
             IComponentModel componentModel,
             VSTypeScriptVisualStudioProjectWrapper project,
             IVsHierarchy hierarchy,
             uint itemid,
-            Guid languageServiceGuid) : this(bufferCoordinator, componentModel, project, languageServiceGuid)
-        {
-        }
+            Guid languageServiceGuid
+        )
+            : this(bufferCoordinator, componentModel, project, languageServiceGuid) { }
 
-        [Obsolete("Use the constructor that omits the IVsHierarchy and uint parameters instead.", error: true)]
+        [Obsolete(
+            "Use the constructor that omits the IVsHierarchy and uint parameters instead.",
+            error: true
+        )]
         public VSTypeScriptContainedLanguageWrapper(
             IVsTextBufferCoordinator bufferCoordinator,
             IComponentModel componentModel,
             Workspace workspace,
             IVsHierarchy hierarchy,
             uint itemid,
-            Guid languageServiceGuid) : this(bufferCoordinator, componentModel, workspace, languageServiceGuid)
-        {
-        }
+            Guid languageServiceGuid
+        )
+            : this(bufferCoordinator, componentModel, workspace, languageServiceGuid) { }
 
         public VSTypeScriptContainedLanguageWrapper(
             IVsTextBufferCoordinator bufferCoordinator,
             IComponentModel componentModel,
             VSTypeScriptVisualStudioProjectWrapper project,
-            Guid languageServiceGuid)
+            Guid languageServiceGuid
+        )
         {
             _underlyingObject = new ContainedLanguage(
                 bufferCoordinator,
@@ -51,14 +58,16 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
                 project.Project.Id,
                 project.Project,
                 languageServiceGuid,
-                vbHelperFormattingRule: null);
+                vbHelperFormattingRule: null
+            );
         }
 
         public VSTypeScriptContainedLanguageWrapper(
             IVsTextBufferCoordinator bufferCoordinator,
             IComponentModel componentModel,
             Workspace workspace,
-            Guid languageServiceGuid)
+            Guid languageServiceGuid
+        )
         {
             var projectId = ProjectId.CreateNewId();
 
@@ -69,10 +78,19 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
                 projectId,
                 null,
                 languageServiceGuid,
-                vbHelperFormattingRule: null);
+                vbHelperFormattingRule: null
+            );
 
             var filePath = _underlyingObject.GetFilePathFromBuffers();
-            workspace.OnProjectAdded(ProjectInfo.Create(projectId, VersionStamp.Default, filePath, string.Empty, InternalLanguageNames.TypeScript));
+            workspace.OnProjectAdded(
+                ProjectInfo.Create(
+                    projectId,
+                    VersionStamp.Default,
+                    filePath,
+                    string.Empty,
+                    InternalLanguageNames.TypeScript
+                )
+            );
         }
 
         public bool IsDefault => _underlyingObject == null;

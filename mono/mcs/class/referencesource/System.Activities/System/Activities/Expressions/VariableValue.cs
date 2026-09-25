@@ -10,9 +10,7 @@ namespace System.Activities.Expressions
     public sealed class VariableValue<T> : EnvironmentLocationValue<T>
     {
         public VariableValue()
-            : base()
-        {
-        }
+            : base() { }
 
         public VariableValue(Variable variable)
             : base()
@@ -20,11 +18,7 @@ namespace System.Activities.Expressions
             this.Variable = variable;
         }
 
-        public Variable Variable
-        {
-            get;
-            set;
-        }
+        public Variable Variable { get; set; }
 
         public override LocationReference LocationReference
         {
@@ -39,9 +33,14 @@ namespace System.Activities.Expressions
             }
             else
             {
-                if (!(this.Variable is Variable<T>) && !TypeHelper.AreTypesCompatible(this.Variable.Type, typeof(T)))
+                if (
+                    !(this.Variable is Variable<T>)
+                    && !TypeHelper.AreTypesCompatible(this.Variable.Type, typeof(T))
+                )
                 {
-                    metadata.AddValidationError(SR.VariableTypeInvalid(this.Variable, typeof(T), this.Variable.Type));
+                    metadata.AddValidationError(
+                        SR.VariableTypeInvalid(this.Variable, typeof(T), this.Variable.Type)
+                    );
                 }
 
                 if (!this.Variable.IsInTree)

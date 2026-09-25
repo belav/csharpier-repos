@@ -45,8 +45,12 @@ namespace Roslyn.Utilities
                 var sourceElement = ((XElement)(object)node);
                 var targetElement = ((XElement)copy);
 
-                IEnumerator<XAttribute> sourceAttributes = sourceElement.Attributes().GetEnumerator();
-                IEnumerator<XAttribute> targetAttributes = targetElement.Attributes().GetEnumerator();
+                IEnumerator<XAttribute> sourceAttributes = sourceElement
+                    .Attributes()
+                    .GetEnumerator();
+                IEnumerator<XAttribute> targetAttributes = targetElement
+                    .Attributes()
+                    .GetEnumerator();
                 while (sourceAttributes.MoveNext() && targetAttributes.MoveNext())
                 {
                     Debug.Assert(sourceAttributes.Current.Name == targetAttributes.Current.Name);
@@ -65,7 +69,12 @@ namespace Roslyn.Utilities
             }
         }
 
-        internal static XElement[]? TrySelectElements(XNode node, string xpath, out string? errorMessage, out bool invalidXPath)
+        internal static XElement[]? TrySelectElements(
+            XNode node,
+            string xpath,
+            out string? errorMessage,
+            out bool invalidXPath
+        )
         {
             errorMessage = null;
             invalidXPath = false;

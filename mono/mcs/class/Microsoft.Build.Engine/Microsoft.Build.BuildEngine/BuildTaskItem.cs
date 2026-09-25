@@ -29,55 +29,56 @@ using System.Xml;
 
 namespace Microsoft.Build.BuildEngine
 {
-	internal class BuildTaskItem : BuildItem, IBuildTask
-	{
-		BuildTaskItemGroup parent;
-		Project project;
+    internal class BuildTaskItem : BuildItem, IBuildTask
+    {
+        BuildTaskItemGroup parent;
+        Project project;
 
-		public bool ContinueOnError {
-			get; set;
-		}
-		
-		internal BuildTaskItem (Project project, XmlElement itemElement, BuildTaskItemGroup parentItemGroup)
-			: base (itemElement, parentItemGroup)
-		{
-			this.parent = parentItemGroup;
-			this.project = project;
-		}
+        public bool ContinueOnError { get; set; }
 
-		bool CheckCondition (string condition)
-		{
-			if (string.IsNullOrEmpty (condition))
-				return true;
-			var ce = ConditionParser.ParseCondition (condition);
-			return ce.BoolEvaluate (project);
-		}
+        internal BuildTaskItem(
+            Project project,
+            XmlElement itemElement,
+            BuildTaskItemGroup parentItemGroup
+        )
+            : base(itemElement, parentItemGroup)
+        {
+            this.parent = parentItemGroup;
+            this.project = project;
+        }
 
-		bool CheckCondition ()
-		{
-			return CheckCondition (parent.Condition) && CheckCondition (Condition);
-		}
+        bool CheckCondition(string condition)
+        {
+            if (string.IsNullOrEmpty(condition))
+                return true;
+            var ce = ConditionParser.ParseCondition(condition);
+            return ce.BoolEvaluate(project);
+        }
 
-		public bool Execute ()
-		{
-			var condition = CheckCondition ();
-			Evaluate (project, condition);
-			return true;
-		}
-		
-		public IEnumerable<string> GetAttributes ()
-		{
-			foreach (XmlAttribute attrib in parent.XmlElement.Attributes)
-				yield return attrib.Value;
+        bool CheckCondition()
+        {
+            return CheckCondition(parent.Condition) && CheckCondition(Condition);
+        }
 
-			foreach (XmlAttribute attrib in XmlElement.Attributes)
-				yield return attrib.Value;
-		}
+        public bool Execute()
+        {
+            var condition = CheckCondition();
+            Evaluate(project, condition);
+            return true;
+        }
 
-		public bool ResolveOutputItems ()
-		{
-			return true;
-		}
-	}
+        public IEnumerable<string> GetAttributes()
+        {
+            foreach (XmlAttribute attrib in parent.XmlElement.Attributes)
+                yield return attrib.Value;
+
+            foreach (XmlAttribute attrib in XmlElement.Attributes)
+                yield return attrib.Value;
+        }
+
+        public bool ResolveOutputItems()
+        {
+            return true;
+        }
+    }
 }
-

@@ -11,9 +11,7 @@ namespace System.Reflection
     /// </summary>
     public abstract class DispatchProxy
     {
-        protected DispatchProxy()
-        {
-        }
+        protected DispatchProxy() { }
 
         /// <summary>
         /// Whenever any method on the generated proxy type is called, this method
@@ -37,10 +35,22 @@ namespace System.Reflection
         // https://github.com/dotnet/runtime/issues/73136 - we can remove the RequiresDynamicCode annotation.
         // This has been done AOT-safely with .NET Native in the past.
         [RequiresDynamicCode("Creating a proxy instance requires generating code at runtime")]
-        public static T Create<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] TProxy>()
+        public static T Create<
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] T,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                TProxy
+        >()
             where TProxy : DispatchProxy
         {
-            return (T)DispatchProxyGenerator.CreateProxyInstance(typeof(TProxy), typeof(T), "T", "TProxy");
+            return (T)
+                DispatchProxyGenerator.CreateProxyInstance(
+                    typeof(TProxy),
+                    typeof(T),
+                    "T",
+                    "TProxy"
+                );
         }
 
         /// <summary>
@@ -55,17 +65,31 @@ namespace System.Reflection
         /// or <paramref name="proxyType"/> is sealed or abstract or does not inherited from the <see cref="System.Reflection.DispatchProxy"/>
         /// type or have a parameterless constructor</exception>
         [RequiresDynamicCode("Creating a proxy instance requires generating code at runtime")]
-        public static object Create([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type proxyType)
+        public static object Create(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type interfaceType,
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type proxyType
+        )
         {
             ArgumentNullException.ThrowIfNull(interfaceType);
             ArgumentNullException.ThrowIfNull(proxyType);
 
             if (!proxyType.IsAssignableTo(typeof(DispatchProxy)))
             {
-                throw new ArgumentException(SR.Format(SR.ProxyType_Must_Be_Derived_From_DispatchProxy, proxyType.Name), nameof(proxyType));
+                throw new ArgumentException(
+                    SR.Format(SR.ProxyType_Must_Be_Derived_From_DispatchProxy, proxyType.Name),
+                    nameof(proxyType)
+                );
             }
 
-            return DispatchProxyGenerator.CreateProxyInstance(proxyType, interfaceType, "interfaceType", "proxyType");
+            return DispatchProxyGenerator.CreateProxyInstance(
+                proxyType,
+                interfaceType,
+                "interfaceType",
+                "proxyType"
+            );
         }
     }
 }

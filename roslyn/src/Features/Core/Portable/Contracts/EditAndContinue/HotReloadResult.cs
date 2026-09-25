@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         NoChanges = 1,
 
         /// <summary>
-        /// Rude edits were found. 
+        /// Rude edits were found.
         /// Changes can be applied by restarting the session.
         /// </summary>
         RestartRequired = 2,
@@ -34,6 +34,6 @@ namespace Microsoft.CodeAnalysis.Contracts.EditAndContinue
         /// <summary>
         /// An internal error was found while applying code updates. This will generally be propagated through an exception.
         /// </summary>
-        ApplyUpdateFailure = 4
+        ApplyUpdateFailure = 4,
     }
 }

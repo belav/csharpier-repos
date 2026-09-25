@@ -12,25 +12,38 @@ namespace System.Runtime.InteropServices.Marshalling
         // We limit the concurrency level to 1 writer as we believe this is the most common scenario and limiting the concurrency level
         // significantly reduces memory overhead.
         // We set the default capacity as a decent guess.
-        private readonly ConcurrentDictionary<RuntimeTypeHandle, IIUnknownCacheStrategy.TableInfo> _cache = new(concurrencyLevel: 1, capacity: 16);
+        private readonly ConcurrentDictionary<
+            RuntimeTypeHandle,
+            IIUnknownCacheStrategy.TableInfo
+        > _cache = new(concurrencyLevel: 1, capacity: 16);
 
-        IIUnknownCacheStrategy.TableInfo IIUnknownCacheStrategy.ConstructTableInfo(RuntimeTypeHandle handle, IIUnknownDerivedDetails details, void* ptr)
+        IIUnknownCacheStrategy.TableInfo IIUnknownCacheStrategy.ConstructTableInfo(
+            RuntimeTypeHandle handle,
+            IIUnknownDerivedDetails details,
+            void* ptr
+        )
         {
             var obj = (void***)ptr;
             return new IIUnknownCacheStrategy.TableInfo()
             {
                 ThisPtr = obj,
                 Table = *obj,
-                ManagedType = details.Implementation.TypeHandle
+                ManagedType = details.Implementation.TypeHandle,
             };
         }
 
-        bool IIUnknownCacheStrategy.TryGetTableInfo(RuntimeTypeHandle handle, out IIUnknownCacheStrategy.TableInfo info)
+        bool IIUnknownCacheStrategy.TryGetTableInfo(
+            RuntimeTypeHandle handle,
+            out IIUnknownCacheStrategy.TableInfo info
+        )
         {
             return _cache.TryGetValue(handle, out info);
         }
 
-        bool IIUnknownCacheStrategy.TrySetTableInfo(RuntimeTypeHandle handle, IIUnknownCacheStrategy.TableInfo info)
+        bool IIUnknownCacheStrategy.TrySetTableInfo(
+            RuntimeTypeHandle handle,
+            IIUnknownCacheStrategy.TableInfo info
+        )
         {
             return _cache.TryAdd(handle, info);
         }

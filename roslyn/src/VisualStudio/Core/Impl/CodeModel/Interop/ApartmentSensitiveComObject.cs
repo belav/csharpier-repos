@@ -20,7 +20,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             where THandle : class
             where TObject : ApartmentSensitiveComObject, THandle
         {
-            return new ComHandle<THandle, TObject>((THandle)ComAggregate.CreateAggregatedObject((TObject)this), (TObject)this);
+            return new ComHandle<THandle, TObject>(
+                (THandle)ComAggregate.CreateAggregatedObject((TObject)this),
+                (TObject)this
+            );
         }
     }
 }

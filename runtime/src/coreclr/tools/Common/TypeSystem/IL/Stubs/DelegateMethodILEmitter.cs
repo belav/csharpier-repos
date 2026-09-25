@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -20,7 +19,10 @@ namespace Internal.IL.Stubs
                 // BeginInvoke and EndInvoke are not supported on .NET Core
                 ILEmitter emit = new ILEmitter();
                 ILCodeStream codeStream = emit.NewCodeStream();
-                MethodDesc notSupportedExceptionHelper = method.Context.GetHelperEntryPoint("ThrowHelpers", "ThrowPlatformNotSupportedException");
+                MethodDesc notSupportedExceptionHelper = method.Context.GetHelperEntryPoint(
+                    "ThrowHelpers",
+                    "ThrowPlatformNotSupportedException"
+                );
                 codeStream.EmitCallThrowHelper(emit, notSupportedExceptionHelper);
                 return emit.Link(method);
             }
@@ -35,7 +37,10 @@ namespace Internal.IL.Stubs
                 // but it remains to be proven that this is an actual customer scenario.
                 ILEmitter emit = new ILEmitter();
                 ILCodeStream codeStream = emit.NewCodeStream();
-                MethodDesc notSupportedExceptionHelper = method.Context.GetHelperEntryPoint("ThrowHelpers", "ThrowPlatformNotSupportedException");
+                MethodDesc notSupportedExceptionHelper = method.Context.GetHelperEntryPoint(
+                    "ThrowHelpers",
+                    "ThrowPlatformNotSupportedException"
+                );
                 codeStream.EmitCallThrowHelper(emit, notSupportedExceptionHelper);
                 return emit.Link(method);
             }
@@ -45,26 +50,36 @@ namespace Internal.IL.Stubs
                 TypeSystemContext context = method.Context;
 
                 ILEmitter emit = new ILEmitter();
-                TypeDesc delegateType = context.GetWellKnownType(WellKnownType.MulticastDelegate).BaseType;
+                TypeDesc delegateType = context
+                    .GetWellKnownType(WellKnownType.MulticastDelegate)
+                    .BaseType;
                 FieldDesc firstParameterField = delegateType.GetKnownField("m_firstParameter");
                 FieldDesc functionPointerField = delegateType.GetKnownField("m_functionPointer");
                 ILCodeStream codeStream = emit.NewCodeStream();
 
                 codeStream.EmitLdArg(0);
-                codeStream.Emit(ILOpcode.ldfld, emit.NewToken(firstParameterField.InstantiateAsOpen()));
+                codeStream.Emit(
+                    ILOpcode.ldfld,
+                    emit.NewToken(firstParameterField.InstantiateAsOpen())
+                );
                 for (int i = 0; i < method.Signature.Length; i++)
                 {
                     codeStream.EmitLdArg(i + 1);
                 }
                 codeStream.EmitLdArg(0);
-                codeStream.Emit(ILOpcode.ldfld, emit.NewToken(functionPointerField.InstantiateAsOpen()));
+                codeStream.Emit(
+                    ILOpcode.ldfld,
+                    emit.NewToken(functionPointerField.InstantiateAsOpen())
+                );
 
                 MethodSignature signature = method.Signature;
                 if (method.OwningType.HasInstantiation)
                 {
                     // If the owning type is generic, the signature will contain T's and U's.
                     // We need !0's and !1's.
-                    TypeDesc[] typesToReplace = new TypeDesc[method.OwningType.Instantiation.Length];
+                    TypeDesc[] typesToReplace = new TypeDesc[
+                        method.OwningType.Instantiation.Length
+                    ];
                     TypeDesc[] replacementTypes = new TypeDesc[typesToReplace.Length];
                     for (int i = 0; i < typesToReplace.Length; i++)
                     {
@@ -74,10 +89,21 @@ namespace Internal.IL.Stubs
                     TypeDesc[] parameters = new TypeDesc[method.Signature.Length];
                     for (int i = 0; i < parameters.Length; i++)
                     {
-                        parameters[i] = method.Signature[i].ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
+                        parameters[i] = method
+                            .Signature[i]
+                            .ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
                     }
-                    TypeDesc returnType = method.Signature.ReturnType.ReplaceTypesInConstructionOfType(typesToReplace, replacementTypes);
-                    signature = new MethodSignature(signature.Flags, signature.GenericParameterCount, returnType, parameters);
+                    TypeDesc returnType =
+                        method.Signature.ReturnType.ReplaceTypesInConstructionOfType(
+                            typesToReplace,
+                            replacementTypes
+                        );
+                    signature = new MethodSignature(
+                        signature.Flags,
+                        signature.GenericParameterCount,
+                        returnType,
+                        parameters
+                    );
                 }
 
                 codeStream.Emit(ILOpcode.calli, emit.NewToken(signature));

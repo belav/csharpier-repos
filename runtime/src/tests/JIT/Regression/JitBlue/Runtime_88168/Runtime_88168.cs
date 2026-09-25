@@ -25,13 +25,15 @@ public class Program
         GC.Collect();
         return e is OperationCanceledException;
     }
-    
+
     public static IDisposable AllocateObject()
     {
         return new DisposableObject();
     }
 
-    [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImpl(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     private static void top_level_filter_test()
     {
         try

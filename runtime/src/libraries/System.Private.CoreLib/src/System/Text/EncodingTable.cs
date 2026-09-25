@@ -15,7 +15,9 @@ namespace System.Text
     //
     internal static partial class EncodingTable
     {
-        private static readonly Hashtable s_nameToCodePage = Hashtable.Synchronized(new Hashtable(StringComparer.OrdinalIgnoreCase));
+        private static readonly Hashtable s_nameToCodePage = Hashtable.Synchronized(
+            new Hashtable(StringComparer.OrdinalIgnoreCase)
+        );
         private static CodePageDataItem?[]? s_codePageToCodePageData;
 
         /*=================================GetCodePageFromName==========================
@@ -66,7 +68,13 @@ namespace System.Text
                 index = ((right - left) / 2) + left;
 
                 Debug.Assert(index < EncodingNameIndices.Length - 1);
-                result = string.CompareOrdinal(invariantName, EncodingNames.AsSpan(EncodingNameIndices[index], EncodingNameIndices[index + 1] - EncodingNameIndices[index]));
+                result = string.CompareOrdinal(
+                    invariantName,
+                    EncodingNames.AsSpan(
+                        EncodingNameIndices[index],
+                        EncodingNameIndices[index + 1] - EncodingNameIndices[index]
+                    )
+                );
 
                 if (result == 0)
                 {
@@ -89,7 +97,14 @@ namespace System.Text
             for (; left <= right; left++)
             {
                 Debug.Assert(left < EncodingNameIndices.Length - 1);
-                if (invariantName.SequenceEqual(EncodingNames.AsSpan(EncodingNameIndices[left], EncodingNameIndices[left + 1] - EncodingNameIndices[left])))
+                if (
+                    invariantName.SequenceEqual(
+                        EncodingNames.AsSpan(
+                            EncodingNameIndices[left],
+                            EncodingNameIndices[left + 1] - EncodingNameIndices[left]
+                        )
+                    )
+                )
                 {
                     return CodePagesByName[left];
                 }
@@ -98,7 +113,8 @@ namespace System.Text
             // The encoding name is not valid.
             throw new ArgumentException(
                 SR.Format(SR.Argument_EncodingNotSupported, name),
-                nameof(name));
+                nameof(name)
+            );
         }
 
         // Return a list of all EncodingInfo objects describing all of our encodings
@@ -108,7 +124,11 @@ namespace System.Text
             // to account for the skipped EncodingInfo element.
 
             ReadOnlySpan<ushort> mappedCodePages = MappedCodePages;
-            EncodingInfo[] arrayEncodingInfo = new EncodingInfo[(LocalAppContextSwitches.EnableUnsafeUTF7Encoding) ? mappedCodePages.Length : (mappedCodePages.Length - 1)];
+            EncodingInfo[] arrayEncodingInfo = new EncodingInfo[
+                (LocalAppContextSwitches.EnableUnsafeUTF7Encoding)
+                    ? mappedCodePages.Length
+                    : (mappedCodePages.Length - 1)
+            ];
             string webNames = WebNames;
             ReadOnlySpan<int> webNameIndices = WebNameIndices;
             int arrayEncodingInfoIdx = 0;
@@ -116,7 +136,10 @@ namespace System.Text
             for (int i = 0; i < mappedCodePages.Length; i++)
             {
                 int codePage = mappedCodePages[i];
-                if (codePage == Encoding.CodePageUTF7 && !LocalAppContextSwitches.EnableUnsafeUTF7Encoding)
+                if (
+                    codePage == Encoding.CodePageUTF7
+                    && !LocalAppContextSwitches.EnableUnsafeUTF7Encoding
+                )
                 {
                     continue; // skip this entry; UTF-7 is disabled
                 }
@@ -125,7 +148,7 @@ namespace System.Text
                     codePage,
                     webNames[webNameIndices[i]..webNameIndices[i + 1]],
                     GetDisplayName(codePage)
-                    );
+                );
             }
 
             Debug.Assert(arrayEncodingInfoIdx == arrayEncodingInfo.Length);
@@ -148,10 +171,16 @@ namespace System.Text
                     // Exception: If somebody already registered a custom UTF-7 provider, the dictionary
                     // will already contain an entry for the UTF-7 code page key, and we'll let it go through.
 
-                    if (codePage != Encoding.CodePageUTF7 || LocalAppContextSwitches.EnableUnsafeUTF7Encoding)
+                    if (
+                        codePage != Encoding.CodePageUTF7
+                        || LocalAppContextSwitches.EnableUnsafeUTF7Encoding
+                    )
                     {
-                        encodingInfoList[codePage] = new EncodingInfo(codePage, webNames[webNameIndices[i]..webNameIndices[i + 1]],
-                                                                                GetDisplayName(codePage));
+                        encodingInfoList[codePage] = new EncodingInfo(
+                            codePage,
+                            webNames[webNameIndices[i]..webNameIndices[i + 1]],
+                            GetDisplayName(codePage)
+                        );
                     }
                 }
             }
@@ -177,7 +206,11 @@ namespace System.Text
         {
             if (s_codePageToCodePageData == null)
             {
-                Interlocked.CompareExchange<CodePageDataItem?[]?>(ref s_codePageToCodePageData, new CodePageDataItem[MappedCodePages.Length], null);
+                Interlocked.CompareExchange<CodePageDataItem?[]?>(
+                    ref s_codePageToCodePageData,
+                    new CodePageDataItem[MappedCodePages.Length],
+                    null
+                );
             }
 
             // Keep in sync with MappedCodePages
@@ -215,7 +248,11 @@ namespace System.Text
             CodePageDataItem? data = s_codePageToCodePageData[index];
             if (data == null)
             {
-                Interlocked.CompareExchange<CodePageDataItem?>(ref s_codePageToCodePageData[index], InternalGetCodePageDataItem(codePage, index), null);
+                Interlocked.CompareExchange<CodePageDataItem?>(
+                    ref s_codePageToCodePageData[index],
+                    InternalGetCodePageDataItem(codePage, index),
+                    null
+                );
                 data = s_codePageToCodePageData[index];
             }
 
@@ -232,22 +269,38 @@ namespace System.Text
             string displayName = GetDisplayName(codePage);
             uint flags = Flags[index];
 
-            return new CodePageDataItem(uiFamilyCodePage, webName, headerName, bodyName, displayName, flags);
+            return new CodePageDataItem(
+                uiFamilyCodePage,
+                webName,
+                headerName,
+                bodyName,
+                displayName,
+                flags
+            );
         }
 
         private static string GetDisplayName(int codePage)
         {
             switch (codePage)
             {
-                case 1200: return SR.Globalization_cp_1200;
-                case 1201: return SR.Globalization_cp_1201;
-                case 12000: return SR.Globalization_cp_12000;
-                case 12001: return SR.Globalization_cp_12001;
-                case 20127: return SR.Globalization_cp_20127;
-                case 28591: return SR.Globalization_cp_28591;
-                case 65000: return SR.Globalization_cp_65000;
-                case 65001: return SR.Globalization_cp_65001;
-            };
+                case 1200:
+                    return SR.Globalization_cp_1200;
+                case 1201:
+                    return SR.Globalization_cp_1201;
+                case 12000:
+                    return SR.Globalization_cp_12000;
+                case 12001:
+                    return SR.Globalization_cp_12001;
+                case 20127:
+                    return SR.Globalization_cp_20127;
+                case 28591:
+                    return SR.Globalization_cp_28591;
+                case 65000:
+                    return SR.Globalization_cp_65000;
+                case 65001:
+                    return SR.Globalization_cp_65001;
+            }
+            ;
 
             Debug.Fail("Unexpected code page");
             return "";

@@ -6,12 +6,15 @@ namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
 
-    [ConfigurationCollection(typeof(AllowedAudienceUriElement), CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public sealed partial class AllowedAudienceUriElementCollection : ServiceModelConfigurationElementCollection<AllowedAudienceUriElement>
+    [ConfigurationCollection(
+        typeof(AllowedAudienceUriElement),
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed partial class AllowedAudienceUriElementCollection
+        : ServiceModelConfigurationElementCollection<AllowedAudienceUriElement>
     {
         public AllowedAudienceUriElementCollection()
-            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Add)
-        { }
+            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Add) { }
 
         protected override ConfigurationElement CreateNewElement()
         {

@@ -29,14 +29,16 @@ namespace System.IO.Enumeration
             //   C:\foo\       C:\foo    C:\foo\bar      jar         "bar"           C:\foo\bar\jar
             //   C:\foo/       C:\foo    C:\foo\bar      jar         "bar"           C:\foo/bar\jar
 
-
             // If we're at the top level directory the Directory and RootDirectory will be identical. As there are no
             // trailing slashes in play, once we're in a subdirectory, slicing off the root will leave us with an
             // initial separator. We need to trim that off if it exists, but it isn't needed if the original root
             // didn't have a separator. Join() would handle it if we did trim it, not doing so is an optimization.
 
             ReadOnlySpan<char> relativePath = Directory.Slice(RootDirectory.Length);
-            if (Path.EndsInDirectorySeparator(OriginalRootDirectory) && PathInternal.StartsWithDirectorySeparator(relativePath))
+            if (
+                Path.EndsInDirectorySeparator(OriginalRootDirectory)
+                && PathInternal.StartsWithDirectorySeparator(relativePath)
+            )
                 relativePath = relativePath.Slice(1);
 
             return Join(OriginalRootDirectory, relativePath, FileName);

@@ -35,7 +35,8 @@ namespace System.Web.Helpers.Claims
         private sealed class ClaimsIdentityImpl<TClaimsIdentity, TClaim> : ClaimsIdentity
             where TClaimsIdentity : class, IIdentity
         {
-            private static readonly Func<TClaimsIdentity, IEnumerable<TClaim>> _claimsGetter = CreateClaimsGetter();
+            private static readonly Func<TClaimsIdentity, IEnumerable<TClaim>> _claimsGetter =
+                CreateClaimsGetter();
 
             private readonly TClaimsIdentity _claimsIdentity;
 
@@ -46,13 +47,20 @@ namespace System.Web.Helpers.Claims
 
             private static Func<TClaimsIdentity, IEnumerable<TClaim>> CreateClaimsGetter()
             {
-                PropertyInfo propInfo = typeof(TClaimsIdentity).GetProperty("Claims", BindingFlags.Public | BindingFlags.Instance);
+                PropertyInfo propInfo = typeof(TClaimsIdentity).GetProperty(
+                    "Claims",
+                    BindingFlags.Public | BindingFlags.Instance
+                );
                 MethodInfo propGetter = propInfo.GetGetMethod();
 
                 // For improved perf, instance methods can be treated as static methods by leaving
                 // the 'this' parameter unbound. Virtual dispatch for the property getter will
                 // still take place as expected.
-                return (Func<TClaimsIdentity, IEnumerable<TClaim>>)Delegate.CreateDelegate(typeof(Func<TClaimsIdentity, IEnumerable<TClaim>>), propGetter);
+                return (Func<TClaimsIdentity, IEnumerable<TClaim>>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<TClaimsIdentity, IEnumerable<TClaim>>),
+                        propGetter
+                    );
             }
 
             public override IEnumerable<Claim> GetClaims()

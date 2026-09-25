@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.MimePartCollection.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,56 +30,59 @@
 
 using System.Collections;
 
-namespace System.Web.Services.Description {
-	public sealed class MimePartCollection : CollectionBase {
+namespace System.Web.Services.Description
+{
+    public sealed class MimePartCollection : CollectionBase
+    {
+        #region Properties
 
-		#region Properties
+        public MimePart this[int index]
+        {
+            get
+            {
+                if (index < 0 || index > Count)
+                    throw new ArgumentOutOfRangeException();
 
-		public MimePart this [int index] {
-			get { 
-				if (index < 0 || index > Count)
-					throw new ArgumentOutOfRangeException ();
+                return (MimePart)List[index];
+            }
+            set { List[index] = value; }
+        }
 
-				return (MimePart) List[index]; 
-			}
-			set { List[index] = value; }
-		}
+        #endregion // Properties
 
-		#endregion // Properties
+        #region Methods
 
-		#region Methods
+        public int Add(MimePart mimePart)
+        {
+            Insert(Count, mimePart);
+            return (Count - 1);
+        }
 
-		public int Add (MimePart mimePart) 
-		{
-			Insert (Count, mimePart);	
-			return (Count - 1);
-		}
+        public bool Contains(MimePart mimePart)
+        {
+            return List.Contains(mimePart);
+        }
 
-		public bool Contains (MimePart mimePart)
-		{
-			return List.Contains (mimePart);
-		}
+        public void CopyTo(MimePart[] array, int index)
+        {
+            List.CopyTo(array, index);
+        }
 
-		public void CopyTo (MimePart[] array, int index) 
-		{
-			List.CopyTo (array, index);
-		}
+        public int IndexOf(MimePart mimePart)
+        {
+            return List.IndexOf(mimePart);
+        }
 
-		public int IndexOf (MimePart mimePart)
-		{
-			return List.IndexOf (mimePart);
-		}
+        public void Insert(int index, MimePart mimePart)
+        {
+            List.Insert(index, mimePart);
+        }
 
-		public void Insert (int index, MimePart mimePart)
-		{
-			List.Insert (index, mimePart);
-		}
-	
-		public void Remove (MimePart mimePart)
-		{
-			List.Remove (mimePart);
-		}
-			
-		#endregion // Methods
-	}
+        public void Remove(MimePart mimePart)
+        {
+            List.Remove(mimePart);
+        }
+
+        #endregion // Methods
+    }
 }

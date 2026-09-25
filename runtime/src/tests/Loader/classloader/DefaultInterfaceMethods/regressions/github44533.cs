@@ -47,5 +47,6 @@ namespace BugInReflection
     {
         public string Title { get; set; }
     }
+
     public class BlogPost : Post { }
 }

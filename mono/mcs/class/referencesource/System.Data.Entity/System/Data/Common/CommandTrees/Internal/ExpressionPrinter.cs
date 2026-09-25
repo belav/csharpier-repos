@@ -28,9 +28,12 @@ namespace System.Data.Common.CommandTrees.Internal
         private PrinterVisitor _visitor = new PrinterVisitor();
 
         internal ExpressionPrinter()
-            : base() {}
+            : base() { }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
         internal string Print(DbExpression expr)
         {
             Debug.Assert(expr != null, "Null DbExpression");
@@ -61,12 +64,15 @@ namespace System.Data.Common.CommandTrees.Internal
             {
                 predicateNode = new TreeNode("Predicate");
             }
-            
-            return this.Print(new TreeNode(
+
+            return this.Print(
+                new TreeNode(
                     "DbDeleteCommandTree",
                     CreateParametersNode(tree),
                     targetNode,
-                    predicateNode));
+                    predicateNode
+                )
+            );
         }
 
         internal string Print(DbFunctionCommandTree tree)
@@ -85,7 +91,14 @@ namespace System.Data.Common.CommandTrees.Internal
                 PrinterVisitor.AppendTypeSpecifier(typeNode, tree.ResultType);
             }
 
-            return this.Print(new TreeNode("DbFunctionCommandTree", CreateParametersNode(tree), funcNode, typeNode));
+            return this.Print(
+                new TreeNode(
+                    "DbFunctionCommandTree",
+                    CreateParametersNode(tree),
+                    funcNode,
+                    typeNode
+                )
+            );
         }
 
         internal string Print(DbInsertCommandTree tree)
@@ -116,17 +129,20 @@ namespace System.Data.Common.CommandTrees.Internal
             {
                 returningNode = new TreeNode("Returning", _visitor.VisitExpression(tree.Returning));
             }
-            else 
+            else
             {
                 returningNode = new TreeNode("Returning");
             }
 
-            return this.Print(new TreeNode(
-                "DbInsertCommandTree",
-                CreateParametersNode(tree),
-                targetNode,
-                clausesNode,
-                returningNode));
+            return this.Print(
+                new TreeNode(
+                    "DbInsertCommandTree",
+                    CreateParametersNode(tree),
+                    targetNode,
+                    clausesNode,
+                    returningNode
+                )
+            );
         }
 
         internal string Print(DbUpdateCommandTree tree)
@@ -173,13 +189,16 @@ namespace System.Data.Common.CommandTrees.Internal
                 returningNode = new TreeNode("Returning");
             }
 
-            return this.Print(new TreeNode(
-                "DbUpdateCommandTree",
-                CreateParametersNode(tree),
-                targetNode,
-                clausesNode,
-                predicateNode,
-                returningNode));
+            return this.Print(
+                new TreeNode(
+                    "DbUpdateCommandTree",
+                    CreateParametersNode(tree),
+                    targetNode,
+                    clausesNode,
+                    predicateNode,
+                    returningNode
+                )
+            );
         }
 
         internal string Print(DbQueryCommandTree tree)
@@ -193,7 +212,9 @@ namespace System.Data.Common.CommandTrees.Internal
                 queryNode.Children.Add(_visitor.VisitExpression(tree.Query));
             }
 
-            return this.Print(new TreeNode("DbQueryCommandTree", CreateParametersNode(tree), queryNode));
+            return this.Print(
+                new TreeNode("DbQueryCommandTree", CreateParametersNode(tree), queryNode)
+            );
         }
 
         private static TreeNode CreateParametersNode(DbCommandTree tree)
@@ -212,10 +233,13 @@ namespace System.Data.Common.CommandTrees.Internal
         private class PrinterVisitor : DbExpressionVisitor<TreeNode>
         {
             private static Dictionary<DbExpressionKind, string> _opMap = InitializeOpMap();
-            
+
             private static Dictionary<DbExpressionKind, string> InitializeOpMap()
             {
-                Dictionary<DbExpressionKind, string> opMap = new Dictionary<DbExpressionKind, string>(12);
+                Dictionary<DbExpressionKind, string> opMap = new Dictionary<
+                    DbExpressionKind,
+                    string
+                >(12);
 
                 // Arithmetic
                 opMap[DbExpressionKind.Divide] = "/";
@@ -259,10 +283,20 @@ namespace System.Data.Common.CommandTrees.Internal
                 TreeNode funcInfo = new TreeNode();
                 AppendFullName(funcInfo.Text, func);
 
-                AppendParameters(funcInfo, func.Parameters.Select(fp => new KeyValuePair<string, TypeUsage>(fp.Name, fp.TypeUsage)));
+                AppendParameters(
+                    funcInfo,
+                    func.Parameters.Select(fp => new KeyValuePair<string, TypeUsage>(
+                        fp.Name,
+                        fp.TypeUsage
+                    ))
+                );
                 if (args != null)
                 {
-                    AppendArguments(funcInfo, func.Parameters.Select(fp => fp.Name).ToArray(), args);
+                    AppendArguments(
+                        funcInfo,
+                        func.Parameters.Select(fp => fp.Name).ToArray(),
+                        args
+                    );
                 }
 
                 return funcInfo;
@@ -273,11 +307,14 @@ namespace System.Data.Common.CommandTrees.Internal
                 return new TreeNode(Enum.GetName(typeof(DbExpressionKind), expr.ExpressionKind));
             }
 
-            private static void AppendParameters(TreeNode node, IEnumerable<KeyValuePair<string, TypeUsage>> paramInfos)
+            private static void AppendParameters(
+                TreeNode node,
+                IEnumerable<KeyValuePair<string, TypeUsage>> paramInfos
+            )
             {
                 node.Text.Append("(");
                 int pos = 0;
-                foreach(KeyValuePair<string, TypeUsage> paramInfo in paramInfos)
+                foreach (KeyValuePair<string, TypeUsage> paramInfo in paramInfos)
                 {
                     if (pos > 0)
                     {
@@ -382,7 +419,11 @@ namespace System.Data.Common.CommandTrees.Internal
                 return retInfo;
             }
 
-            private void AppendArguments(TreeNode node, IList<string> paramNames, IList<DbExpression> args)
+            private void AppendArguments(
+                TreeNode node,
+                IList<string> paramNames,
+                IList<DbExpression> args
+            )
             {
                 if (paramNames.Count > 0)
                 {
@@ -406,7 +447,9 @@ namespace System.Data.Common.CommandTrees.Internal
                 List<TreeNode> bindingInfos = new List<TreeNode>();
                 for (int idx = 0; idx < bindings.Count; idx++)
                 {
-                    bindingInfos.Add(this.VisitBinding(StringUtil.FormatIndex(propName, idx), bindings[idx]));
+                    bindingInfos.Add(
+                        this.VisitBinding(StringUtil.FormatIndex(propName, idx), bindings[idx])
+                    );
                 }
 
                 return new TreeNode(propName, bindingInfos);
@@ -417,7 +460,12 @@ namespace System.Data.Common.CommandTrees.Internal
                 TreeNode inputInfo = this.VisitExpression(groupBinding.Expression);
                 TreeNode retInfo = new TreeNode();
                 retInfo.Children.Add(inputInfo);
-                retInfo.Text.AppendFormat(CultureInfo.InvariantCulture, "Input : '{0}', '{1}'", groupBinding.VariableName, groupBinding.GroupVariableName);
+                retInfo.Text.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "Input : '{0}', '{1}'",
+                    groupBinding.VariableName,
+                    groupBinding.GroupVariableName
+                );
                 return retInfo;
             }
 
@@ -431,7 +479,12 @@ namespace System.Data.Common.CommandTrees.Internal
                 return retInfo;
             }
 
-            private TreeNode VisitInfix(DbExpression root, DbExpression left, string name, DbExpression right)
+            private TreeNode VisitInfix(
+                DbExpression root,
+                DbExpression left,
+                string name,
+                DbExpression right
+            )
             {
                 if (_infix)
                 {
@@ -476,7 +529,11 @@ namespace System.Data.Common.CommandTrees.Internal
 
             public override TreeNode Visit(DbExpression e)
             {
-                throw EntityUtil.NotSupported(System.Data.Entity.Strings.Cqt_General_UnsupportedExpression(e.GetType().FullName));
+                throw EntityUtil.NotSupported(
+                    System.Data.Entity.Strings.Cqt_General_UnsupportedExpression(
+                        e.GetType().FullName
+                    )
+                );
             }
 
             public override TreeNode Visit(DbConstantExpression e)
@@ -531,14 +588,24 @@ namespace System.Data.Common.CommandTrees.Internal
                 TreeNode funcInfo = VisitFunction(e.Function, e.Arguments);
                 return funcInfo;
             }
-                        
+
             public override TreeNode Visit(DbLambdaExpression expression)
             {
                 TreeNode lambdaInfo = new TreeNode();
                 lambdaInfo.Text.Append("Lambda");
 
-                AppendParameters(lambdaInfo, expression.Lambda.Variables.Select(v => new KeyValuePair<string, TypeUsage>(v.VariableName, v.ResultType)));
-                AppendArguments(lambdaInfo, expression.Lambda.Variables.Select(v => v.VariableName).ToArray(), expression.Arguments);
+                AppendParameters(
+                    lambdaInfo,
+                    expression.Lambda.Variables.Select(v => new KeyValuePair<string, TypeUsage>(
+                        v.VariableName,
+                        v.ResultType
+                    ))
+                );
+                AppendArguments(
+                    lambdaInfo,
+                    expression.Lambda.Variables.Select(v => v.VariableName).ToArray(),
+                    expression.Arguments
+                );
                 lambdaInfo.Children.Add(this.Visit("Body", expression.Lambda.Body));
 
                 return lambdaInfo;
@@ -569,8 +636,13 @@ namespace System.Data.Common.CommandTrees.Internal
                 if (e.Instance != null)
                 {
                     inst = this.VisitExpression(e.Instance);
-                    if (e.Instance.ExpressionKind == DbExpressionKind.VariableReference ||
-                        (e.Instance.ExpressionKind == DbExpressionKind.Property && 0 == inst.Children.Count))
+                    if (
+                        e.Instance.ExpressionKind == DbExpressionKind.VariableReference
+                        || (
+                            e.Instance.ExpressionKind == DbExpressionKind.Property
+                            && 0 == inst.Children.Count
+                        )
+                    )
                     {
                         inst.Text.Append(".");
                         inst.Text.Append(e.Property.Name);
@@ -624,7 +696,12 @@ namespace System.Data.Common.CommandTrees.Internal
                 }
                 else
                 {
-                    return this.VisitInfix(e, e.Arguments[0], _opMap[e.ExpressionKind], e.Arguments[1]);
+                    return this.VisitInfix(
+                        e,
+                        e.Arguments[0],
+                        _opMap[e.ExpressionKind],
+                        e.Arguments[1]
+                    );
                 }
             }
 
@@ -727,7 +804,9 @@ namespace System.Data.Common.CommandTrees.Internal
 
             public override TreeNode Visit(DbOfTypeExpression e)
             {
-                TreeNode retInfo = new TreeNode(e.ExpressionKind == DbExpressionKind.OfTypeOnly ? "OfTypeOnly" : "OfType");
+                TreeNode retInfo = new TreeNode(
+                    e.ExpressionKind == DbExpressionKind.OfTypeOnly ? "OfTypeOnly" : "OfType"
+                );
                 AppendTypeSpecifier(retInfo, e.OfType);
                 retInfo.Children.Add(this.VisitExpression(e.Argument));
 
@@ -762,21 +841,35 @@ namespace System.Data.Common.CommandTrees.Internal
                 }
                 else
                 {
-                    string description = (BuiltInTypeKind.RowType == e.ResultType.EdmType.BuiltInTypeKind) ? "Column" : "Property";
+                    string description =
+                        (BuiltInTypeKind.RowType == e.ResultType.EdmType.BuiltInTypeKind)
+                            ? "Column"
+                            : "Property";
                     IList<EdmProperty> properties = TypeHelpers.GetProperties(e.ResultType);
                     for (int idx = 0; idx < properties.Count; idx++)
                     {
-                        retInfo.Children.Add(this.VisitWithLabel(description, properties[idx].Name, e.Arguments[idx]));
+                        retInfo.Children.Add(
+                            this.VisitWithLabel(description, properties[idx].Name, e.Arguments[idx])
+                        );
                     }
 
-                    if (BuiltInTypeKind.EntityType == e.ResultType.EdmType.BuiltInTypeKind &&
-                         e.HasRelatedEntityReferences)
+                    if (
+                        BuiltInTypeKind.EntityType == e.ResultType.EdmType.BuiltInTypeKind
+                        && e.HasRelatedEntityReferences
+                    )
                     {
                         TreeNode references = new TreeNode("RelatedEntityReferences");
                         foreach (DbRelatedEntityRef relatedRef in e.RelatedEntityReferences)
                         {
-                            TreeNode refNode = CreateNavigationNode(relatedRef.SourceEnd, relatedRef.TargetEnd);
-                            refNode.Children.Add(CreateRelationshipNode((RelationshipType)relatedRef.SourceEnd.DeclaringType));
+                            TreeNode refNode = CreateNavigationNode(
+                                relatedRef.SourceEnd,
+                                relatedRef.TargetEnd
+                            );
+                            refNode.Children.Add(
+                                CreateRelationshipNode(
+                                    (RelationshipType)relatedRef.SourceEnd.DeclaringType
+                                )
+                            );
                             refNode.Children.Add(VisitExpression(relatedRef.TargetEntityReference));
 
                             references.Children.Add(refNode);
@@ -792,7 +885,10 @@ namespace System.Data.Common.CommandTrees.Internal
             {
                 TreeNode retNode = new TreeNode("Ref");
                 retNode.Text.Append("<");
-                AppendFullName(retNode.Text, TypeHelpers.GetEdmType<RefType>(e.ResultType).ElementType);
+                AppendFullName(
+                    retNode.Text,
+                    TypeHelpers.GetEdmType<RefType>(e.ResultType).ElementType
+                );
                 retNode.Text.Append(">");
 
                 TreeNode setNode = new TreeNode("EntitySet : ");
@@ -814,7 +910,10 @@ namespace System.Data.Common.CommandTrees.Internal
                 return rel;
             }
 
-            private TreeNode CreateNavigationNode(RelationshipEndMember fromEnd, RelationshipEndMember toEnd)
+            private TreeNode CreateNavigationNode(
+                RelationshipEndMember fromEnd,
+                RelationshipEndMember toEnd
+            )
             {
                 TreeNode nav = new TreeNode();
                 nav.Text.Append("Navigation : ");
@@ -858,7 +957,7 @@ namespace System.Data.Common.CommandTrees.Internal
                 retInfo.Text.Append(e.Target.Name);
                 return retInfo;
             }
-                        
+
             public override TreeNode Visit(DbFilterExpression e)
             {
                 TreeNode retInfo = NodeFromExpression(e);
@@ -888,7 +987,7 @@ namespace System.Data.Common.CommandTrees.Internal
                 retInfo.Children.Add(this.VisitBinding("Left", e.Left));
                 retInfo.Children.Add(this.VisitBinding("Right", e.Right));
                 retInfo.Children.Add(this.Visit("JoinCondition", e.JoinCondition));
-                
+
                 return retInfo;
             }
 
@@ -906,11 +1005,15 @@ namespace System.Data.Common.CommandTrees.Internal
                 List<TreeNode> keys = new List<TreeNode>();
                 List<TreeNode> aggs = new List<TreeNode>();
 
-                RowType outputType = TypeHelpers.GetEdmType<RowType>(TypeHelpers.GetEdmType<CollectionType>(e.ResultType).TypeUsage);
+                RowType outputType = TypeHelpers.GetEdmType<RowType>(
+                    TypeHelpers.GetEdmType<CollectionType>(e.ResultType).TypeUsage
+                );
                 int keyIdx = 0;
                 for (int idx = 0; idx < e.Keys.Count; idx++)
                 {
-                    keys.Add(this.VisitWithLabel("Key", outputType.Properties[idx].Name, e.Keys[keyIdx]));
+                    keys.Add(
+                        this.VisitWithLabel("Key", outputType.Properties[idx].Name, e.Keys[keyIdx])
+                    );
                     keyIdx++;
                 }
 
@@ -937,7 +1040,7 @@ namespace System.Data.Common.CommandTrees.Internal
                         Debug.Assert(groupAgg != null, "Invalid DbAggregate");
                         aggInfo.Children.Add(this.Visit("GroupAggregate", groupAgg.Arguments[0]));
                     }
-                    
+
                     aggs.Add(aggInfo);
                     aggIdx++;
                 }
@@ -962,7 +1065,10 @@ namespace System.Data.Common.CommandTrees.Internal
                 TreeNode keyInfo = new TreeNode("SortOrder");
                 foreach (DbSortClause clause in sortOrder)
                 {
-                    TreeNode key = this.Visit((clause.Ascending ? "Asc" : "Desc"), clause.Expression);
+                    TreeNode key = this.Visit(
+                        (clause.Ascending ? "Asc" : "Desc"),
+                        clause.Expression
+                    );
                     if (!string.IsNullOrEmpty(clause.Collation))
                     {
                         key.Text.Append(" : ");

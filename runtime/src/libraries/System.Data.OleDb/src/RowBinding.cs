@@ -27,14 +27,25 @@ namespace System.Data.OleDb
         // all data values listed after that (variable length), each individual starting 64bit aligned
         // Int64 - zero for pointers to emptystring
 
-        internal static RowBinding CreateBuffer(int bindingCount, int databuffersize, bool needToReset)
+        internal static RowBinding CreateBuffer(
+            int bindingCount,
+            int databuffersize,
+            bool needToReset
+        )
         {
             int headerLength = RowBinding.AlignDataSize(bindingCount * ODB.SizeOf_tagDBBINDING);
             int length = RowBinding.AlignDataSize(headerLength + databuffersize) + 8; // 8 bytes for a null terminated string
             return new RowBinding(bindingCount, headerLength, databuffersize, length, needToReset);
         }
 
-        private RowBinding(int bindingCount, int headerLength, int dataLength, int length, bool needToReset) : base(length)
+        private RowBinding(
+            int bindingCount,
+            int headerLength,
+            int dataLength,
+            int length,
+            bool needToReset
+        )
+            : base(length)
         {
             _bindingCount = bindingCount;
             _headerLength = headerLength;
@@ -90,12 +101,23 @@ namespace System.Data.OleDb
             return ADP.IntPtrOffset(DangerousGetHandle(), valueOffset);
         }
 
-        internal OleDbHResult CreateAccessor(UnsafeNativeMethods.IAccessor iaccessor, int flags, ColumnBinding[] bindings)
+        internal OleDbHResult CreateAccessor(
+            UnsafeNativeMethods.IAccessor iaccessor,
+            int flags,
+            ColumnBinding[] bindings
+        )
         {
             int[] rowBindStatus = new int[BindingCount()];
 
             _iaccessor = iaccessor;
-            OleDbHResult hr = iaccessor.CreateAccessor(flags, (IntPtr)rowBindStatus.Length, this, (IntPtr)_dataLength, out _accessorHandle, rowBindStatus);
+            OleDbHResult hr = iaccessor.CreateAccessor(
+                flags,
+                (IntPtr)rowBindStatus.Length,
+                this,
+                (IntPtr)_dataLength,
+                out _accessorHandle,
+                rowBindStatus
+            );
 
             for (int k = 0; k < rowBindStatus.Length; ++k)
             {
@@ -103,11 +125,17 @@ namespace System.Data.OleDb
                 {
                     if (ODB.DBACCESSOR_PARAMETERDATA == flags)
                     {
-                        throw ODB.BadStatus_ParamAcc(bindings[k].ColumnBindingOrdinal, (DBBindStatus)rowBindStatus[k]);
+                        throw ODB.BadStatus_ParamAcc(
+                            bindings[k].ColumnBindingOrdinal,
+                            (DBBindStatus)rowBindStatus[k]
+                        );
                     }
                     else if (ODB.DBACCESSOR_ROWDATA == flags)
                     {
-                        throw ODB.BadStatusRowAccessor(bindings[k].ColumnBindingOrdinal, (DBBindStatus)rowBindStatus[k]);
+                        throw ODB.BadStatusRowAccessor(
+                            bindings[k].ColumnBindingOrdinal,
+                            (DBBindStatus)rowBindStatus[k]
+                        );
                     }
                     else
                         Debug.Assert(false, "unknown accessor buffer");
@@ -116,9 +144,15 @@ namespace System.Data.OleDb
             return hr;
         }
 
-        internal ColumnBinding[] SetBindings(OleDbDataReader? dataReader, Bindings bindings,
-                                             int indexStart, int indexForAccessor,
-                                             OleDbParameter[]? parameters, tagDBBINDING[] dbbindings, bool ifIRowsetElseIRow)
+        internal ColumnBinding[] SetBindings(
+            OleDbDataReader? dataReader,
+            Bindings bindings,
+            int indexStart,
+            int indexForAccessor,
+            OleDbParameter[]? parameters,
+            tagDBBINDING[] dbbindings,
+            bool ifIRowsetElseIRow
+        )
         {
             Debug.Assert(null != bindings, "null bindings");
             Debug.Assert(dbbindings.Length == BindingCount(), "count mismatch");
@@ -134,7 +168,11 @@ namespace System.Data.OleDb
                 for (int i = 0; i < dbbindings.Length; ++i)
                 {
                     IntPtr ptr = ADP.IntPtrOffset(buffer, (i * ODB.SizeOf_tagDBBINDING));
-                    Marshal.StructureToPtr(dbbindings[i], ptr, false/*deleteold*/);
+                    Marshal.StructureToPtr(
+                        dbbindings[i],
+                        ptr,
+                        false /*deleteold*/
+                    );
                 }
             }
             finally
@@ -146,14 +184,26 @@ namespace System.Data.OleDb
             }
 
             ColumnBinding[] columns = new ColumnBinding[dbbindings.Length];
-            for (int indexWithinAccessor = 0; indexWithinAccessor < columns.Length; ++indexWithinAccessor)
+            for (
+                int indexWithinAccessor = 0;
+                indexWithinAccessor < columns.Length;
+                ++indexWithinAccessor
+            )
             {
                 int index = indexStart + indexWithinAccessor;
                 OleDbParameter? parameter = parameters?[index];
                 columns[indexWithinAccessor] = new ColumnBinding(
-                    dataReader!, index, indexForAccessor, indexWithinAccessor,
-                    parameter, this, bindings, dbbindings[indexWithinAccessor], _headerLength,
-                    ifIRowsetElseIRow);
+                    dataReader!,
+                    index,
+                    indexForAccessor,
+                    indexWithinAccessor,
+                    parameter,
+                    this,
+                    bindings,
+                    dbbindings[indexWithinAccessor],
+                    _headerLength,
+                    ifIRowsetElseIRow
+                );
             }
             return columns;
         }
@@ -218,7 +268,11 @@ namespace System.Data.OleDb
                 finally
                 {
                     // safe to copy memory(dst,src,count), even if GetNativeVariantForObject failed
-                    NativeOledbWrapper.MemoryCopy(ADP.IntPtrOffset(buffer, ODB.SizeOf_Variant), buffer, ODB.SizeOf_Variant);
+                    NativeOledbWrapper.MemoryCopy(
+                        ADP.IntPtrOffset(buffer, ODB.SizeOf_Variant),
+                        buffer,
+                        ODB.SizeOf_Variant
+                    );
                 }
             }
             finally
@@ -249,8 +303,7 @@ namespace System.Data.OleDb
                 DangerousAddRef(ref mustRelease);
 
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try
-                { }
+                try { }
                 finally
                 {
                     ptr = Interop.OleAut32.SysAllocStringLen(value, (uint)value.Length);
@@ -291,11 +344,10 @@ namespace System.Data.OleDb
                 DangerousAddRef(ref mustRelease);
 
                 RuntimeHelpers.PrepareConstrainedRegions();
-                try
-                { }
+                try { }
                 finally
                 {
-                    Marshal.WriteIntPtr(base.handle, offset, pinnedValue);               // parameter input value
+                    Marshal.WriteIntPtr(base.handle, offset, pinnedValue); // parameter input value
                     Marshal.WriteIntPtr(base.handle, offset + IntPtr.Size, pinnedValue); // original parameter value
                 }
             }
@@ -343,7 +395,6 @@ namespace System.Data.OleDb
             {
                 lock (this)
                 { // prevent Dispose/ResetValues race condition
-
                     bool mustRelease = false;
                     RuntimeHelpers.PrepareConstrainedRegions();
                     try
@@ -370,10 +421,15 @@ namespace System.Data.OleDb
             // that sets this up is in dbbinding.cs, MaxLen { set; }
             if (!_needToReset)
             {
-                Debug.Assert(0 <= _bindingCount && (_bindingCount * ODB.SizeOf_tagDBBINDING) < Length, "bad _bindingCount");
+                Debug.Assert(
+                    0 <= _bindingCount && (_bindingCount * ODB.SizeOf_tagDBBINDING) < Length,
+                    "bad _bindingCount"
+                );
                 for (int i = 0; i < _bindingCount; ++i)
                 {
-                    short wtype = ReadInt16((i * ODB.SizeOf_tagDBBINDING) + ODB.OffsetOf_tagDBBINDING_wType);
+                    short wtype = ReadInt16(
+                        (i * ODB.SizeOf_tagDBBINDING) + ODB.OffsetOf_tagDBBINDING_wType
+                    );
                     switch (wtype)
                     {
                         case (NativeDBType.BYREF | NativeDBType.BYTES):
@@ -392,12 +448,17 @@ namespace System.Data.OleDb
 
         private unsafe void ResetValues(IntPtr buffer, object? iaccessor)
         {
-            Debug.Assert(IntPtr.Zero != buffer && _needToReset && _haveData, "shouldn't be calling ResetValues");
+            Debug.Assert(
+                IntPtr.Zero != buffer && _needToReset && _haveData,
+                "shouldn't be calling ResetValues"
+            );
             for (int i = 0; i < _bindingCount; ++i)
             {
                 IntPtr ptr = ADP.IntPtrOffset(buffer, (i * ODB.SizeOf_tagDBBINDING));
 
-                int valueOffset = _headerLength + Marshal.ReadIntPtr(ptr, ODB.OffsetOf_tagDBBINDING_obValue).ToInt32();
+                int valueOffset =
+                    _headerLength
+                    + Marshal.ReadIntPtr(ptr, ODB.OffsetOf_tagDBBINDING_obValue).ToInt32();
                 short wtype = Marshal.ReadInt16(ptr, ODB.OffsetOf_tagDBBINDING_wType);
 
                 switch (wtype)
@@ -470,8 +531,13 @@ namespace System.Data.OleDb
         {
             Debug.Assert(0 == valueOffset % 8, "unexpected unaligned ptr offset");
 
-            UnsafeNativeMethods.IChapteredRowset chapteredRowset = (iaccessor as UnsafeNativeMethods.IChapteredRowset)!;
-            IntPtr chapter = SafeNativeMethods.InterlockedExchangePointer(ADP.IntPtrOffset(buffer, valueOffset), IntPtr.Zero);
+            UnsafeNativeMethods.IChapteredRowset chapteredRowset = (
+                iaccessor as UnsafeNativeMethods.IChapteredRowset
+            )!;
+            IntPtr chapter = SafeNativeMethods.InterlockedExchangePointer(
+                ADP.IntPtrOffset(buffer, valueOffset),
+                IntPtr.Zero
+            );
             if (ODB.DB_NULL_HCHAPTER != chapter)
             {
                 chapteredRowset.ReleaseChapter(chapter, out _);
@@ -485,8 +551,7 @@ namespace System.Data.OleDb
             // two contiguous BSTR ptrs that need to be freed
             // the second should only be freed if different from the first
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            { }
+            try { }
             finally
             {
                 IntPtr currentValue = Marshal.ReadIntPtr(buffer, valueOffset);
@@ -514,8 +579,7 @@ namespace System.Data.OleDb
             // two contiguous CoTaskMemAlloc ptrs that need to be freed
             // the first should only be freed if different from the first
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            { }
+            try { }
             finally
             {
                 IntPtr currentValue = Marshal.ReadIntPtr(buffer, valueOffset);
@@ -543,11 +607,14 @@ namespace System.Data.OleDb
 
             IntPtr currentHandle = ADP.IntPtrOffset(buffer, valueOffset);
             IntPtr originalHandle = ADP.IntPtrOffset(buffer, valueOffset + ODB.SizeOf_Variant);
-            bool different = NativeOledbWrapper.MemoryCompare(currentHandle, originalHandle, ODB.SizeOf_Variant);
+            bool different = NativeOledbWrapper.MemoryCompare(
+                currentHandle,
+                originalHandle,
+                ODB.SizeOf_Variant
+            );
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            { }
+            try { }
             finally
             {
                 // always clear the first structure
@@ -574,11 +641,14 @@ namespace System.Data.OleDb
 
             IntPtr currentHandle = ADP.IntPtrOffset(buffer, valueOffset);
             IntPtr originalHandle = ADP.IntPtrOffset(buffer, valueOffset + sizeof(PROPVARIANT));
-            bool different = NativeOledbWrapper.MemoryCompare(currentHandle, originalHandle, sizeof(PROPVARIANT));
+            bool different = NativeOledbWrapper.MemoryCompare(
+                currentHandle,
+                originalHandle,
+                sizeof(PROPVARIANT)
+            );
 
             RuntimeHelpers.PrepareConstrainedRegions();
-            try
-            { }
+            try { }
             finally
             {
                 // always clear the first structure

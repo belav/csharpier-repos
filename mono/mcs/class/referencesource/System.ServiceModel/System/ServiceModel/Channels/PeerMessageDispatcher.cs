@@ -15,10 +15,20 @@ namespace System.ServiceModel.Channels
     {
         public class PeerMessageQueueAdapter
         {
-            SingletonChannelAcceptor<ChannelInterfaceType, TChannel, Message> singletonChannelAcceptor;
+            SingletonChannelAcceptor<
+                ChannelInterfaceType,
+                TChannel,
+                Message
+            > singletonChannelAcceptor;
             InputQueueChannel<Message> inputQueueChannel;
 
-            public PeerMessageQueueAdapter(SingletonChannelAcceptor<ChannelInterfaceType, TChannel, Message> singletonChannelAcceptor)
+            public PeerMessageQueueAdapter(
+                SingletonChannelAcceptor<
+                    ChannelInterfaceType,
+                    TChannel,
+                    Message
+                > singletonChannelAcceptor
+            )
             {
                 this.singletonChannelAcceptor = singletonChannelAcceptor;
             }
@@ -50,7 +60,13 @@ namespace System.ServiceModel.Channels
         PeerQuotaHelper quotaHelper = new PeerQuotaHelper(Int32.MaxValue);
         bool registered;
 
-        public PeerMessageDispatcher(PeerMessageQueueAdapter queueHandler, PeerNodeImplementation peerNode, ChannelManagerBase channelManager, EndpointAddress to, Uri via)
+        public PeerMessageDispatcher(
+            PeerMessageQueueAdapter queueHandler,
+            PeerNodeImplementation peerNode,
+            ChannelManagerBase channelManager,
+            EndpointAddress to,
+            Uri via
+        )
         {
             PeerNodeImplementation.ValidateVia(via);
 
@@ -61,15 +77,29 @@ namespace System.ServiceModel.Channels
             this.channelManager = channelManager;
             EndpointAddress filterTo = null;
 
-            this.securityProtocol = ((IPeerFactory)channelManager).SecurityManager.CreateSecurityProtocol<ChannelInterfaceType>(to, ServiceDefaults.SendTimeout);
+            this.securityProtocol = (
+                (IPeerFactory)channelManager
+            ).SecurityManager.CreateSecurityProtocol<ChannelInterfaceType>(
+                to,
+                ServiceDefaults.SendTimeout
+            );
 
             if (typeof(IDuplexChannel).IsAssignableFrom(typeof(ChannelInterfaceType)))
                 filterTo = to;
 
             //Register this handler
-            PeerMessageFilter[] filters = new PeerMessageFilter[] { new PeerMessageFilter(via, filterTo) };
-            peerNode.RegisterMessageFilter(this, this.via, filters, (ITransportFactorySettings)this.channelManager,
-                                           new PeerNodeImplementation.MessageAvailableCallback(OnMessageAvailable), securityProtocol);
+            PeerMessageFilter[] filters = new PeerMessageFilter[]
+            {
+                new PeerMessageFilter(via, filterTo),
+            };
+            peerNode.RegisterMessageFilter(
+                this,
+                this.via,
+                filters,
+                (ITransportFactorySettings)this.channelManager,
+                new PeerNodeImplementation.MessageAvailableCallback(OnMessageAvailable),
+                securityProtocol
+            );
             registered = true;
         }
 
@@ -88,11 +118,13 @@ namespace System.ServiceModel.Channels
             get { return securityProtocol; }
         }
 
-        protected override void OnAbort()
-        {
-        }
+        protected override void OnAbort() { }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnClose(timeout);
             return new CompletedAsyncResult(callback, state);
@@ -128,11 +160,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -148,12 +182,15 @@ namespace System.ServiceModel.Channels
             queueHandler.EnqueueAndDispatch(message, quotaHelper.ItemDequeued);
         }
     }
+
     class PeerMessageFilter
     {
         Uri via;
         Uri actingAs;
 
-        public PeerMessageFilter(Uri via) : this(via, null) { }
+        public PeerMessageFilter(Uri via)
+            : this(via, null) { }
+
         public PeerMessageFilter(Uri via, EndpointAddress to)
         {
             Fx.Assert(via != null, "PeerMessageFilter via can not be set to null");
@@ -169,23 +206,45 @@ namespace System.ServiceModel.Channels
             {
                 result = false;
             }
-            else if (Uri.Compare(this.via, peerVia,
-               (UriComponents.Scheme | UriComponents.UserInfo | UriComponents.Host | UriComponents.Port | UriComponents.Path),
-               UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) != 0)
+            else if (
+                Uri.Compare(
+                    this.via,
+                    peerVia,
+                    (
+                        UriComponents.Scheme
+                        | UriComponents.UserInfo
+                        | UriComponents.Host
+                        | UriComponents.Port
+                        | UriComponents.Path
+                    ),
+                    UriFormat.SafeUnescaped,
+                    StringComparison.OrdinalIgnoreCase
+                ) != 0
+            )
             {
                 result = false;
             }
             else if (this.actingAs != null)
             {
-                result = Uri.Compare(this.actingAs, toCond,
-               (UriComponents.Scheme | UriComponents.UserInfo | UriComponents.Host | UriComponents.Port | UriComponents.Path),
-               UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) == 0;
+                result =
+                    Uri.Compare(
+                        this.actingAs,
+                        toCond,
+                        (
+                            UriComponents.Scheme
+                            | UriComponents.UserInfo
+                            | UriComponents.Host
+                            | UriComponents.Port
+                            | UriComponents.Path
+                        ),
+                        UriFormat.SafeUnescaped,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0;
             }
             else
                 result = true;
 
             return result;
         }
-
     }
 }

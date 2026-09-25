@@ -17,14 +17,32 @@ namespace System.Text.Encodings.Web
 
             Vector128<byte> vecZero = Vector128<byte>.Zero;
             Vector128<byte> vec0x7 = Vector128.Create((byte)0x7);
-            Vector128<byte> vecPowersOfTwo = Vector128.Create(1, 2, 4, 8, 16, 32, 64, 128, 0, 0, 0, 0, 0, 0, 0, 0);
+            Vector128<byte> vecPowersOfTwo = Vector128.Create(
+                1,
+                2,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            );
             Vector128<byte> allowedCodePoints = _allowedAsciiCodePoints.AsVector;
             int pmovmskb;
 
             nuint i = 0;
             if (lengthInBytes >= 16)
             {
-                nuint lastLegalIterationFor16CharRead = lengthInBytes & unchecked((nuint)(nint)~0xF);
+                nuint lastLegalIterationFor16CharRead =
+                    lengthInBytes & unchecked((nuint)(nint)~0xF);
 
                 do
                 {
@@ -46,7 +64,10 @@ namespace System.Text.Encodings.Web
                     // in the 'result' vector also being 0x00, meaning that escaping is required.
 
                     var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
-                    var vecPowersOfTwoShuffled = Ssse3.Shuffle(vecPowersOfTwo, Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7));
+                    var vecPowersOfTwoShuffled = Ssse3.Shuffle(
+                        vecPowersOfTwo,
+                        Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7)
+                    );
                     var result = Sse2.And(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
 
                     // Now, each element of 'result' contains a non-zero value if the corresponding element in
@@ -69,9 +90,16 @@ namespace System.Text.Encodings.Web
                 // Same logic as the 16-byte case, but we only care about the low byte of the final pmovmskb value.
                 // Everything except the low byte of pmovksmb contains garbage and must be discarded.
 
-                var packed = Sse2.LoadScalarVector128((/* unaligned */ ulong*)(pData + i)).AsByte();
+                var packed = Sse2.LoadScalarVector128(
+                        ( /* unaligned */
+                        ulong*)(pData + i)
+                    )
+                    .AsByte();
                 var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
-                var vecPowersOfTwoShuffled = Ssse3.Shuffle(vecPowersOfTwo, Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7));
+                var vecPowersOfTwoShuffled = Ssse3.Shuffle(
+                    vecPowersOfTwo,
+                    Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7)
+                );
                 var result = Sse2.And(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 pmovmskb = Sse2.MoveMask(Sse2.CompareEqual(result, vecZero));
                 if ((byte)pmovmskb != 0)
@@ -88,9 +116,16 @@ namespace System.Text.Encodings.Web
                 // Same logic as the 16-byte case, but we only care about the low nibble of the final pmovmskb value.
                 // Everything except the low nibble of pmovksmb contains garbage and must be discarded.
 
-                var packed = Sse2.LoadScalarVector128((/* unaligned */ uint*)(pData + i)).AsByte();
+                var packed = Sse2.LoadScalarVector128(
+                        ( /* unaligned */
+                        uint*)(pData + i)
+                    )
+                    .AsByte();
                 var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
-                var vecPowersOfTwoShuffled = Ssse3.Shuffle(vecPowersOfTwo, Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7));
+                var vecPowersOfTwoShuffled = Ssse3.Shuffle(
+                    vecPowersOfTwo,
+                    Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7)
+                );
                 var result = Sse2.And(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 pmovmskb = Sse2.MoveMask(Sse2.CompareEqual(result, vecZero));
                 if ((pmovmskb & 0xF) != 0)
@@ -109,15 +144,18 @@ namespace System.Text.Encodings.Web
 
                 do
                 {
-                    if (!_allowedAsciiCodePoints.IsAllowedAsciiCodePoint(pData[i])) { break; }
+                    if (!_allowedAsciiCodePoints.IsAllowedAsciiCodePoint(pData[i]))
+                    {
+                        break;
+                    }
                 } while (++i != lengthInBytes);
             }
 
-        Return:
+            Return:
 
             return i;
 
-        MaskContainsDataWhichRequiresEscaping:
+            MaskContainsDataWhichRequiresEscaping:
 
             Debug.Assert(pmovmskb != 0);
             i += (uint)BitOperations.TrailingZeroCount(pmovmskb); // location of lowest set bit is where we must begin escaping
@@ -137,24 +175,52 @@ namespace System.Text.Encodings.Web
 
             Vector128<byte> vecZero = Vector128<byte>.Zero;
             Vector128<byte> vec0x7 = Vector128.Create((byte)0x7);
-            Vector128<byte> vecPowersOfTwo = Vector128.Create(1, 2, 4, 8, 16, 32, 64, 128, 0, 0, 0, 0, 0, 0, 0, 0);
+            Vector128<byte> vecPowersOfTwo = Vector128.Create(
+                1,
+                2,
+                4,
+                8,
+                16,
+                32,
+                64,
+                128,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            );
             Vector128<byte> allowedCodePoints = _allowedAsciiCodePoints.AsVector;
             int pmovmskb;
 
             nuint i = 0;
             if (lengthInChars >= 16)
             {
-                nuint lastLegalIterationFor16CharRead = lengthInChars & unchecked((nuint)(nint)~0xF);
+                nuint lastLegalIterationFor16CharRead =
+                    lengthInChars & unchecked((nuint)(nint)~0xF);
 
                 do
                 {
                     // Read 16 chars at a time into 2x 128-bit vectors, then pack into a single 128-bit vector.
 
                     var packed = Sse2.PackUnsignedSaturate(
-                        Sse2.LoadVector128((/* unaligned */ short*)(pData + i)),
-                        Sse2.LoadVector128((/* unaligned */ short*)(pData + 8 + i)));
+                        Sse2.LoadVector128(
+                            ( /* unaligned */
+                            short*)(pData + i)
+                        ),
+                        Sse2.LoadVector128(
+                            ( /* unaligned */
+                            short*)(pData + 8 + i)
+                        )
+                    );
                     var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
-                    var vecPowersOfTwoShuffled = Ssse3.Shuffle(vecPowersOfTwo, Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7));
+                    var vecPowersOfTwoShuffled = Ssse3.Shuffle(
+                        vecPowersOfTwo,
+                        Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7)
+                    );
                     var result = Sse2.And(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                     pmovmskb = Sse2.MoveMask(Sse2.CompareEqual(result, vecZero));
                     if ((pmovmskb & 0xFFFF) != 0)
@@ -169,10 +235,17 @@ namespace System.Text.Encodings.Web
                 // Read 8 chars at a time into a single 128-bit vector, then pack into low 8 bytes.
 
                 var packed = Sse2.PackUnsignedSaturate(
-                    Sse2.LoadVector128((/* unaligned */ short*)(pData + i)),
-                    vecZero.AsInt16());
+                    Sse2.LoadVector128(
+                        ( /* unaligned */
+                        short*)(pData + i)
+                    ),
+                    vecZero.AsInt16()
+                );
                 var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
-                var vecPowersOfTwoShuffled = Ssse3.Shuffle(vecPowersOfTwo, Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7));
+                var vecPowersOfTwoShuffled = Ssse3.Shuffle(
+                    vecPowersOfTwo,
+                    Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7)
+                );
                 var result = Sse2.And(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 pmovmskb = Sse2.MoveMask(Sse2.CompareEqual(result, vecZero));
                 if ((byte)pmovmskb != 0)
@@ -189,10 +262,18 @@ namespace System.Text.Encodings.Web
                 // Everything except the low nibble of pmovksmb contains garbage and must be discarded.
 
                 var packed = Sse2.PackUnsignedSaturate(
-                   Sse2.LoadScalarVector128((/* unaligned */ ulong*)(pData + i)).AsInt16(),
-                   vecZero.AsInt16());
+                    Sse2.LoadScalarVector128(
+                            ( /* unaligned */
+                            ulong*)(pData + i)
+                        )
+                        .AsInt16(),
+                    vecZero.AsInt16()
+                );
                 var allowedCodePointsShuffled = Ssse3.Shuffle(allowedCodePoints, packed);
-                var vecPowersOfTwoShuffled = Ssse3.Shuffle(vecPowersOfTwo, Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7));
+                var vecPowersOfTwoShuffled = Ssse3.Shuffle(
+                    vecPowersOfTwo,
+                    Sse2.And(Sse2.ShiftRightLogical(packed.AsUInt32(), 4).AsByte(), vec0x7)
+                );
                 var result = Sse2.And(allowedCodePointsShuffled, vecPowersOfTwoShuffled);
                 pmovmskb = Sse2.MoveMask(Sse2.CompareEqual(result, vecZero));
                 if ((pmovmskb & 0xF) != 0)
@@ -211,15 +292,18 @@ namespace System.Text.Encodings.Web
 
                 do
                 {
-                    if (!_allowedAsciiCodePoints.IsAllowedAsciiCodePoint(pData[i])) { break; }
+                    if (!_allowedAsciiCodePoints.IsAllowedAsciiCodePoint(pData[i]))
+                    {
+                        break;
+                    }
                 } while (++i != lengthInChars);
             }
 
-        Return:
+            Return:
 
             return i;
 
-        MaskContainsDataWhichRequiresEscaping:
+            MaskContainsDataWhichRequiresEscaping:
 
             Debug.Assert(pmovmskb != 0);
             i += (uint)BitOperations.TrailingZeroCount(pmovmskb); // location of lowest set bit is where we must begin escaping

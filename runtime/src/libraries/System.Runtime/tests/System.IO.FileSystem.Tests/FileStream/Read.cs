@@ -12,7 +12,12 @@ namespace System.IO.Tests
         public void NegativeReadRootThrows()
         {
             Assert.Throws<UnauthorizedAccessException>(() =>
-                new FileStream(Path.GetPathRoot(Directory.GetCurrentDirectory()), FileMode.Open, FileAccess.Read));
+                new FileStream(
+                    Path.GetPathRoot(Directory.GetCurrentDirectory()),
+                    FileMode.Open,
+                    FileAccess.Read
+                )
+            );
         }
     }
 }

@@ -8,19 +8,20 @@
 /*is iObj.
 /******************************************************************/
 
-namespace DoubLink {
-    using System.Threading;
+namespace DoubLink
+{
     using System;
     using System.IO;
     using System.Runtime.CompilerServices;
+    using System.Threading;
 
     public class DLBigLeakThd
     {
-        internal DoubLink []Mv_Doub;
+        internal DoubLink[] Mv_Doub;
         internal int iRep = 0;
         internal int iObj = 0;
 
-        public static int Main(System.String [] Args)
+        public static int Main(System.String[] Args)
         {
             DLBigLeakThd Mv_Leak = new DLBigLeakThd();
 
@@ -30,58 +31,56 @@ namespace DoubLink {
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");
             //Console.SetOut(TextWriter.Synchronized(Console.Out));
 
-            switch( Args.Length )
+            switch (Args.Length)
             {
                 case 1:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 1;
                     }
-                break;
+                    break;
 
                 case 2:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 1;
                     }
-                    if (!Int32.TryParse( Args[1], out iObj ))
+                    if (!Int32.TryParse(Args[1], out iObj))
                     {
                         iObj = 20;
                     }
-                break;
+                    break;
 
                 case 3:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 1;
                     }
-                    if (!Int32.TryParse( Args[1], out iObj ))
+                    if (!Int32.TryParse(Args[1], out iObj))
                     {
                         iObj = 20;
                     }
-                    if (!Int32.TryParse( Args[2], out iThd ))
+                    if (!Int32.TryParse(Args[2], out iThd))
                     {
                         iThd = 2;
                     }
-                break;
+                    break;
 
                 default:
                     iRep = 1;
                     iObj = 20;
                     iThd = 2;
-                break;
+                    break;
             }
 
-            if (Mv_Leak.runTest(iRep, iObj, iThd ))
+            if (Mv_Leak.runTest(iRep, iObj, iThd))
             {
                 Console.WriteLine("Test Passed");
                 return 100;
             }
             Console.WriteLine("Test Failed");
             return 1;
-
         }
-
 
         public bool runTest(int iRep, int iObj, int iThd)
         {
@@ -91,11 +90,10 @@ namespace DoubLink {
             GC.WaitForPendingFinalizers();
             GC.Collect();
 
-            int goal = iRep*15*iThd*iObj+20*iRep*iObj;
+            int goal = iRep * 15 * iThd * iObj + 20 * iRep * iObj;
             Console.WriteLine("{0}/{1} DLinkNodes finalized", DLinkNode.FinalCount, goal);
-            return (DLinkNode.FinalCount==goal);
+            return (DLinkNode.FinalCount == goal);
         }
-
 
         [MethodImpl(MethodImplOptions.NoInlining)]
         // Do not inline the method that creates GC objects, because it could
@@ -105,54 +103,49 @@ namespace DoubLink {
             this.iRep = iRep;
             this.iObj = iObj;
             Mv_Doub = new DoubLink[iRep];
-            Thread [] Mv_Thread = new Thread[iThd];
-            for(int i=0; i<iThd; i++)
+            Thread[] Mv_Thread = new Thread[iThd];
+            for (int i = 0; i < iThd; i++)
             {
                 Mv_Thread[i] = new Thread(new ThreadStart(this.ThreadStart));
-                Mv_Thread[i].Start( );
+                Mv_Thread[i].Start();
             }
             for (int i = 0; i < iters; i++)
             {
                 SetLink(iRep, iObj);
                 MakeLeak(iRep);
             }
-            for(int i=0; i<iThd; i++)
+            for (int i = 0; i < iThd; i++)
             {
                 Mv_Thread[i].Join();
             }
             Mv_Doub = null;
         }
 
-
         public void SetLink(int iRep, int iObj)
         {
-
-            for(int i=0; i<iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 Mv_Doub[i] = new DoubLink(iObj, true);
             }
             GC.Collect();
         }
 
-
         public void MakeLeak(int iRep)
         {
-            for(int i=0; i<iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 Mv_Doub[i] = null;
             }
             GC.Collect();
         }
 
-
         public void ThreadStart()
         {
-            for(int i=0; i<15; i++)
+            for (int i = 0; i < 15; i++)
             {
                 SetLink(iRep, iObj);
                 MakeLeak(iRep);
             }
         }
-
     }
 }

@@ -11,8 +11,8 @@ namespace System.Diagnostics.Tests
 {
     partial class ProcessStartInfoTests : ProcessTestBase
     {
-        private static bool IsAdmin_IsNotNano_RemoteExecutorIsSupported_CanShareFiles
-            => IsAdmin_IsNotNano_RemoteExecutorIsSupported && WindowsTestFileShare.CanShareFiles;
+        private static bool IsAdmin_IsNotNano_RemoteExecutorIsSupported_CanShareFiles =>
+            IsAdmin_IsNotNano_RemoteExecutorIsSupported && WindowsTestFileShare.CanShareFiles;
 
         [ConditionalFact(nameof(IsAdmin_IsNotNano_RemoteExecutorIsSupported_CanShareFiles))] // Nano has no "netapi32.dll", Admin rights are required
         [PlatformSpecific(TestPlatforms.Windows)]
@@ -27,14 +27,21 @@ namespace System.Diagnostics.Tests
             string testFilePath = GetTestFilePath();
             File.WriteAllText(testFilePath, TestFileContent);
 
-            using WindowsTestFileShare fileShare = new WindowsTestFileShare(ShareName, Path.GetDirectoryName(testFilePath));
-            string testFileUncPath = $"\\\\{Environment.MachineName}\\{ShareName}\\{Path.GetFileName(testFilePath)}";
+            using WindowsTestFileShare fileShare = new WindowsTestFileShare(
+                ShareName,
+                Path.GetDirectoryName(testFilePath)
+            );
+            string testFileUncPath =
+                $"\\\\{Environment.MachineName}\\{ShareName}\\{Path.GetFileName(testFilePath)}";
 
             using Process process = CreateProcess(() =>
             {
                 try
                 {
-                    Assert.Equal(TestFileContent, File.ReadAllText(Environment.GetEnvironmentVariable(UncPathEnvVar)));
+                    Assert.Equal(
+                        TestFileContent,
+                        File.ReadAllText(Environment.GetEnvironmentVariable(UncPathEnvVar))
+                    );
 
                     return RemoteExecutor.SuccessExitCode;
                 }
@@ -57,7 +64,12 @@ namespace System.Diagnostics.Tests
             {
                 if (PlatformDetection.IsNotWindowsServerCore) // for this particular Windows version it fails with Attempted to perform an unauthorized operation (#46619)
                 {
-                    SetAccessControl(username, testFilePath, Path.GetDirectoryName(testFilePath), add: true);
+                    SetAccessControl(
+                        username,
+                        testFilePath,
+                        Path.GetDirectoryName(testFilePath),
+                        add: true
+                    );
                 }
             }
 
@@ -66,7 +78,12 @@ namespace System.Diagnostics.Tests
                 if (PlatformDetection.IsNotWindowsServerCore)
                 {
                     // remove the access
-                    SetAccessControl(username, testFilePath, Path.GetDirectoryName(testFilePath), add: false);
+                    SetAccessControl(
+                        username,
+                        testFilePath,
+                        Path.GetDirectoryName(testFilePath),
+                        add: false
+                    );
                 }
             }
         }
@@ -86,7 +103,9 @@ namespace System.Diagnostics.Tests
             if (useShellExecute && PlatformDetection.IsMonoRuntime)
             {
                 // https://github.com/dotnet/runtime/issues/34360
-                throw new SkipTestException("ShellExecute tries to set STA COM apartment state which is not implemented by Mono.");
+                throw new SkipTestException(
+                    "ShellExecute tries to set STA COM apartment state which is not implemented by Mono."
+                );
             }
 
             // "x y" where x is the expected dwFlags & 0x1 result and y is the wShowWindow value
@@ -99,19 +118,22 @@ namespace System.Diagnostics.Tests
                 _ => useShellExecute ? (1, 1) : (0, 0),
             };
 
-            using Process p = CreateProcess((string procArg) =>
-            {
-                Interop.GetStartupInfoW(out Interop.STARTUPINFO si);
+            using Process p = CreateProcess(
+                (string procArg) =>
+                {
+                    Interop.GetStartupInfoW(out Interop.STARTUPINFO si);
 
-                string[] argSplit = procArg.Split(" ");
-                int expectedDwFlag = int.Parse(argSplit[0]);
-                short expectedWindowFlag = short.Parse(argSplit[1]);
+                    string[] argSplit = procArg.Split(" ");
+                    int expectedDwFlag = int.Parse(argSplit[0]);
+                    short expectedWindowFlag = short.Parse(argSplit[1]);
 
-                Assert.Equal(expectedDwFlag, si.dwFlags);
-                Assert.Equal(expectedWindowFlag, si.wShowWindow);
-                return RemoteExecutor.SuccessExitCode;
-            }, $"{expectedDwFlag} {expectedWindowFlag}");
-            p.StartInfo.UseShellExecute  = useShellExecute;
+                    Assert.Equal(expectedDwFlag, si.dwFlags);
+                    Assert.Equal(expectedWindowFlag, si.wShowWindow);
+                    return RemoteExecutor.SuccessExitCode;
+                },
+                $"{expectedDwFlag} {expectedWindowFlag}"
+            );
+            p.StartInfo.UseShellExecute = useShellExecute;
             p.StartInfo.WindowStyle = windowStyle;
             p.Start();
 

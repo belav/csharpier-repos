@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -20,17 +21,14 @@ namespace Test
                 {
                     param5 = (int)param4[2];
 
-                    do
-                    {
-                    } while (param5 != (uint)(new AA().m_fField3));
+                    do { } while (param5 != (uint)(new AA().m_fField3));
 
-                    do
-                    {
-                    } while (param5 > 0);
+                    do { } while (param5 > 0);
                     return;
                 }
             } while (param1[2]);
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -38,7 +36,10 @@ namespace Test
             {
                 Method2(null, null, 0.0f, null, 22);
             }
-            catch (NullReferenceException) { return 100; }
+            catch (NullReferenceException)
+            {
+                return 100;
+            }
             return 1;
         }
     }

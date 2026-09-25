@@ -28,9 +28,7 @@ internal static class MonoMSBuildDiscovery
                 return Array.Empty<string>();
             }
 
-            s_searchPaths = path
-                .Split(Path.PathSeparator)
-                .Select(p => p.Trim('"'));
+            s_searchPaths = path.Split(Path.PathSeparator).Select(p => p.Trim('"'));
         }
 
         return s_searchPaths;
@@ -38,11 +36,22 @@ internal static class MonoMSBuildDiscovery
 
     // http://man7.org/linux/man-pages/man3/realpath.3.html
     // CharSet.Ansi is UTF8 on Unix
-    [DllImport("libc", EntryPoint = "realpath", CharSet = CharSet.Ansi, ExactSpelling = true, CallingConvention = CallingConvention.Cdecl)]
+    [DllImport(
+        "libc",
+        EntryPoint = "realpath",
+        CharSet = CharSet.Ansi,
+        ExactSpelling = true,
+        CallingConvention = CallingConvention.Cdecl
+    )]
     private static extern IntPtr Unix_realpath(string path, IntPtr buffer);
 
     // http://man7.org/linux/man-pages/man3/free.3.html
-    [DllImport("libc", EntryPoint = "free", ExactSpelling = true, CallingConvention = CallingConvention.Cdecl)]
+    [DllImport(
+        "libc",
+        EntryPoint = "free",
+        ExactSpelling = true,
+        CallingConvention = CallingConvention.Cdecl
+    )]
     private static extern void Unix_free(IntPtr ptr);
 
     /// <summary>
@@ -53,7 +62,9 @@ internal static class MonoMSBuildDiscovery
     {
         if (PlatformInformation.IsWindows)
         {
-            throw new PlatformNotSupportedException($"{nameof(RealPath)} can only be called on Unix.");
+            throw new PlatformNotSupportedException(
+                $"{nameof(RealPath)} can only be called on Unix."
+            );
         }
 
         var ptr = Unix_realpath(path, IntPtr.Zero);
@@ -116,9 +127,7 @@ internal static class MonoMSBuildDiscovery
             var monoLibDirPath = Path.Combine(monoDirPath, "..", "lib", "mono");
             monoLibDirPath = Path.GetFullPath(monoLibDirPath);
 
-            s_monoLibDirPath = Directory.Exists(monoLibDirPath)
-                ? monoLibDirPath
-                : null;
+            s_monoLibDirPath = Directory.Exists(monoLibDirPath) ? monoLibDirPath : null;
         }
 
         return s_monoLibDirPath;
@@ -143,18 +152,23 @@ internal static class MonoMSBuildDiscovery
             if (!monoMSBuildDir.Exists)
                 return null;
 
-            // Inside this is either a Current directory or a 15.0 directory, so find it; the previous code at 
+            // Inside this is either a Current directory or a 15.0 directory, so find it; the previous code at
             // https://github.com/OmniSharp/omnisharp-roslyn/blob/dde8119c40f4e3920eb5ea894cbca047033bd9aa/src/OmniSharp.Host/MSBuild/Discovery/MSBuildInstanceProvider.cs#L48-L58
             // ensured we had a correctly normalized path in case the underlying file system might have been case insensitive.
             var versionDirectory =
-                monoMSBuildDir.EnumerateDirectories().SingleOrDefault(d => d.Name == "Current") ??
-                monoMSBuildDir.EnumerateDirectories().SingleOrDefault(d => d.Name == "15.0");
+                monoMSBuildDir.EnumerateDirectories().SingleOrDefault(d => d.Name == "Current")
+                ?? monoMSBuildDir.EnumerateDirectories().SingleOrDefault(d => d.Name == "15.0");
 
             if (versionDirectory == null)
                 return null;
 
             // Fetch the bin directory underneath, continuing to be case insensitive
-            s_monoMSBuildDirectory = versionDirectory.EnumerateDirectories().SingleOrDefault(d => string.Equals(d.Name, "bin", StringComparison.OrdinalIgnoreCase))?.FullName;
+            s_monoMSBuildDirectory = versionDirectory
+                .EnumerateDirectories()
+                .SingleOrDefault(d =>
+                    string.Equals(d.Name, "bin", StringComparison.OrdinalIgnoreCase)
+                )
+                ?.FullName;
         }
 
         return s_monoMSBuildDirectory;

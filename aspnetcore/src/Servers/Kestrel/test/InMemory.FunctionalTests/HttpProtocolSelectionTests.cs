@@ -152,12 +152,10 @@ public class HttpProtocolSelectionTests : TestApplicationErrorLoggerLoggedTest
             }
         }
 
-        Assert.Single(
-            LogMessages,
-            message =>
-                message.LogLevel == LogLevel.Error
-                && message.EventId.Id == 0
-                && message.Message == expectedErrorMessage
+        Assert.Single(LogMessages, message =>
+            message.LogLevel == LogLevel.Error
+            && message.EventId.Id == 0
+            && message.Message == expectedErrorMessage
         );
     }
 }

@@ -6,30 +6,62 @@ using Xunit;
 
 namespace System.CodeDom.Tests
 {
-    public class CodeStatementCollectionTests : CodeCollectionTestBase<CodeStatementCollection, CodeStatement>
+    public class CodeStatementCollectionTests
+        : CodeCollectionTestBase<CodeStatementCollection, CodeStatement>
     {
         protected override CodeStatementCollection Ctor() => new CodeStatementCollection();
-        protected override CodeStatementCollection CtorArray(CodeStatement[] array) => new CodeStatementCollection(array);
-        protected override CodeStatementCollection CtorCollection(CodeStatementCollection collection) => new CodeStatementCollection(collection);
+
+        protected override CodeStatementCollection CtorArray(CodeStatement[] array) =>
+            new CodeStatementCollection(array);
+
+        protected override CodeStatementCollection CtorCollection(
+            CodeStatementCollection collection
+        ) => new CodeStatementCollection(collection);
 
         protected override int Count(CodeStatementCollection collection) => collection.Count;
 
-        protected override CodeStatement GetItem(CodeStatementCollection collection, int index) => collection[index];
-        protected override void SetItem(CodeStatementCollection collection, int index, CodeStatement value) => collection[index] = value;
+        protected override CodeStatement GetItem(CodeStatementCollection collection, int index) =>
+            collection[index];
 
-        protected override void AddRange(CodeStatementCollection collection, CodeStatement[] array) => collection.AddRange(array);
-        protected override void AddRange(CodeStatementCollection collection, CodeStatementCollection value) => collection.AddRange(value);
+        protected override void SetItem(
+            CodeStatementCollection collection,
+            int index,
+            CodeStatement value
+        ) => collection[index] = value;
 
-        protected override object Add(CodeStatementCollection collection, CodeStatement obj) => collection.Add(obj);
+        protected override void AddRange(
+            CodeStatementCollection collection,
+            CodeStatement[] array
+        ) => collection.AddRange(array);
 
-        protected override void Insert(CodeStatementCollection collection, int index, CodeStatement value) => collection.Insert(index, value);
+        protected override void AddRange(
+            CodeStatementCollection collection,
+            CodeStatementCollection value
+        ) => collection.AddRange(value);
 
-        protected override void Remove(CodeStatementCollection collection, CodeStatement value) => collection.Remove(value);
+        protected override object Add(CodeStatementCollection collection, CodeStatement obj) =>
+            collection.Add(obj);
 
-        protected override int IndexOf(CodeStatementCollection collection, CodeStatement value) => collection.IndexOf(value);
-        protected override bool Contains(CodeStatementCollection collection, CodeStatement value) => collection.Contains(value);
+        protected override void Insert(
+            CodeStatementCollection collection,
+            int index,
+            CodeStatement value
+        ) => collection.Insert(index, value);
 
-        protected override void CopyTo(CodeStatementCollection collection, CodeStatement[] array, int index) => collection.CopyTo(array, index);
+        protected override void Remove(CodeStatementCollection collection, CodeStatement value) =>
+            collection.Remove(value);
+
+        protected override int IndexOf(CodeStatementCollection collection, CodeStatement value) =>
+            collection.IndexOf(value);
+
+        protected override bool Contains(CodeStatementCollection collection, CodeStatement value) =>
+            collection.Contains(value);
+
+        protected override void CopyTo(
+            CodeStatementCollection collection,
+            CodeStatement[] array,
+            int index
+        ) => collection.CopyTo(array, index);
 
         public static IEnumerable<object[]> Add_CodeExpression_TestData()
         {

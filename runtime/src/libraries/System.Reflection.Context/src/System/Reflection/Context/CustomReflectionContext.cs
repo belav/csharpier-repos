@@ -10,15 +10,23 @@ namespace System.Reflection.Context
 {
     internal sealed class IdentityReflectionContext : ReflectionContext
     {
-        public override Assembly MapAssembly(Assembly assembly) { return assembly; }
-        public override TypeInfo MapType(TypeInfo type) { return type; }
+        public override Assembly MapAssembly(Assembly assembly)
+        {
+            return assembly;
+        }
+
+        public override TypeInfo MapType(TypeInfo type)
+        {
+            return type;
+        }
     }
 
     public abstract partial class CustomReflectionContext : ReflectionContext
     {
         private readonly ReflectionContextProjector _projector;
 
-        protected CustomReflectionContext() : this(new IdentityReflectionContext()) { }
+        protected CustomReflectionContext()
+            : this(new IdentityReflectionContext()) { }
 
         protected CustomReflectionContext(ReflectionContext source)
         {
@@ -51,12 +59,18 @@ namespace System.Reflection.Context
             return _projector.ProjectTypeIfNeeded(type);
         }
 
-        protected virtual IEnumerable<object> GetCustomAttributes(MemberInfo member, IEnumerable<object> declaredAttributes)
+        protected virtual IEnumerable<object> GetCustomAttributes(
+            MemberInfo member,
+            IEnumerable<object> declaredAttributes
+        )
         {
             return declaredAttributes;
         }
 
-        protected virtual IEnumerable<object> GetCustomAttributes(ParameterInfo parameter, IEnumerable<object> declaredAttributes)
+        protected virtual IEnumerable<object> GetCustomAttributes(
+            ParameterInfo parameter,
+            IEnumerable<object> declaredAttributes
+        )
         {
             return declaredAttributes;
         }
@@ -72,7 +86,8 @@ namespace System.Reflection.Context
             Type propertyType,
             string name,
             Func<object, object?>? getter,
-            Action<object, object?>? setter)
+            Action<object, object?>? setter
+        )
         {
             return new VirtualPropertyInfo(
                 name,
@@ -82,7 +97,8 @@ namespace System.Reflection.Context
                 null,
                 null,
                 null,
-                this);
+                this
+            );
         }
 
         protected PropertyInfo CreateProperty(
@@ -92,7 +108,8 @@ namespace System.Reflection.Context
             Action<object, object?>? setter,
             IEnumerable<Attribute>? propertyCustomAttributes,
             IEnumerable<Attribute>? getterCustomAttributes,
-            IEnumerable<Attribute>? setterCustomAttributes)
+            IEnumerable<Attribute>? setterCustomAttributes
+        )
         {
             return new VirtualPropertyInfo(
                 name,
@@ -102,7 +119,8 @@ namespace System.Reflection.Context
                 propertyCustomAttributes,
                 getterCustomAttributes,
                 setterCustomAttributes,
-                this);
+                this
+            );
         }
 
         internal IEnumerable<PropertyInfo> GetNewPropertiesForType(CustomType type)
@@ -122,24 +140,36 @@ namespace System.Reflection.Context
 
                 VirtualPropertyBase? vp = prop as VirtualPropertyBase;
                 if (vp == null || vp.ReflectionContext != this)
-                    throw new InvalidOperationException(SR.InvalidOperation_AddPropertyDifferentContext);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_AddPropertyDifferentContext
+                    );
 
                 if (vp.DeclaringType == null)
                     vp.SetDeclaringType(type);
                 else if (!vp.DeclaringType.Equals(type))
-                    throw new InvalidOperationException(SR.InvalidOperation_AddPropertyDifferentType);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_AddPropertyDifferentType
+                    );
 
                 yield return prop;
             }
         }
 
-        internal IEnumerable<object> GetCustomAttributesOnMember(MemberInfo member, IEnumerable<object> declaredAttributes, Type attributeFilterType)
+        internal IEnumerable<object> GetCustomAttributesOnMember(
+            MemberInfo member,
+            IEnumerable<object> declaredAttributes,
+            Type attributeFilterType
+        )
         {
             IEnumerable<object> attributes = GetCustomAttributes(member, declaredAttributes);
             return AttributeUtils.FilterCustomAttributes(attributes, attributeFilterType);
         }
 
-        internal IEnumerable<object> GetCustomAttributesOnParameter(ParameterInfo parameter, IEnumerable<object> declaredAttributes, Type attributeFilterType)
+        internal IEnumerable<object> GetCustomAttributesOnParameter(
+            ParameterInfo parameter,
+            IEnumerable<object> declaredAttributes,
+            Type attributeFilterType
+        )
         {
             IEnumerable<object> attributes = GetCustomAttributes(parameter, declaredAttributes);
             return AttributeUtils.FilterCustomAttributes(attributes, attributeFilterType);
@@ -147,10 +177,7 @@ namespace System.Reflection.Context
 
         internal Projector Projector
         {
-            get
-            {
-                return _projector;
-            }
+            get { return _projector; }
         }
 
         internal ReflectionContext SourceContext { get; }

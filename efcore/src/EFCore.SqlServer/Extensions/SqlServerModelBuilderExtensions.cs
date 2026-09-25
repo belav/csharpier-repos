@@ -32,7 +32,8 @@ public static class SqlServerModelBuilderExtensions
     public static ModelBuilder UseHiLo(
         this ModelBuilder modelBuilder,
         string? name = null,
-        string? schema = null)
+        string? schema = null
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -75,7 +76,8 @@ public static class SqlServerModelBuilderExtensions
         this IConventionModelBuilder modelBuilder,
         string? name,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!modelBuilder.CanSetHiLoSequence(name, schema))
         {
@@ -105,13 +107,22 @@ public static class SqlServerModelBuilderExtensions
         this IConventionModelBuilder modelBuilder,
         string? name,
         string? schema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
         Check.NullButNotEmpty(schema, nameof(schema));
 
-        return modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.HiLoSequenceName, name, fromDataAnnotation)
-            && modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.HiLoSequenceSchema, schema, fromDataAnnotation);
+        return modelBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.HiLoSequenceName,
+                name,
+                fromDataAnnotation
+            )
+            && modelBuilder.CanSetAnnotation(
+                SqlServerAnnotationNames.HiLoSequenceSchema,
+                schema,
+                fromDataAnnotation
+            );
     }
 
     /// <summary>
@@ -130,7 +141,8 @@ public static class SqlServerModelBuilderExtensions
     public static ModelBuilder UseKeySequences(
         this ModelBuilder modelBuilder,
         string? nameSuffix = null,
-        string? schema = null)
+        string? schema = null
+    )
     {
         Check.NullButNotEmpty(nameSuffix, nameof(nameSuffix));
         Check.NullButNotEmpty(schema, nameof(schema));
@@ -167,7 +179,8 @@ public static class SqlServerModelBuilderExtensions
     public static ModelBuilder UseIdentityColumns(
         this ModelBuilder modelBuilder,
         long seed = 1,
-        int increment = 1)
+        int increment = 1
+    )
     {
         var model = modelBuilder.Model;
 
@@ -199,8 +212,8 @@ public static class SqlServerModelBuilderExtensions
     public static ModelBuilder UseIdentityColumns(
         this ModelBuilder modelBuilder,
         int seed,
-        int increment = 1)
-        => modelBuilder.UseIdentityColumns((long)seed, increment);
+        int increment = 1
+    ) => modelBuilder.UseIdentityColumns((long)seed, increment);
 
     /// <summary>
     ///     Configures the default seed for SQL Server IDENTITY.
@@ -220,7 +233,8 @@ public static class SqlServerModelBuilderExtensions
     public static IConventionModelBuilder? HasIdentityColumnSeed(
         this IConventionModelBuilder modelBuilder,
         long? seed,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetIdentityColumnSeed(seed, fromDataAnnotation))
         {
@@ -246,8 +260,13 @@ public static class SqlServerModelBuilderExtensions
     public static bool CanSetIdentityColumnSeed(
         this IConventionModelBuilder modelBuilder,
         long? seed,
-        bool fromDataAnnotation = false)
-        => modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.IdentitySeed, seed, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        modelBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.IdentitySeed,
+            seed,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the default increment for SQL Server IDENTITY.
@@ -267,7 +286,8 @@ public static class SqlServerModelBuilderExtensions
     public static IConventionModelBuilder? HasIdentityColumnIncrement(
         this IConventionModelBuilder modelBuilder,
         int? increment,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetIdentityColumnIncrement(increment, fromDataAnnotation))
         {
@@ -293,8 +313,13 @@ public static class SqlServerModelBuilderExtensions
     public static bool CanSetIdentityColumnIncrement(
         this IConventionModelBuilder modelBuilder,
         int? increment,
-        bool fromDataAnnotation = false)
-        => modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.IdentityIncrement, increment, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        modelBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.IdentityIncrement,
+            increment,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the default value generation strategy for key properties marked as <see cref="ValueGenerated.OnAdd" />,
@@ -315,11 +340,15 @@ public static class SqlServerModelBuilderExtensions
     public static IConventionModelBuilder? HasValueGenerationStrategy(
         this IConventionModelBuilder modelBuilder,
         SqlServerValueGenerationStrategy? valueGenerationStrategy,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation))
         {
-            modelBuilder.Metadata.SetValueGenerationStrategy(valueGenerationStrategy, fromDataAnnotation);
+            modelBuilder.Metadata.SetValueGenerationStrategy(
+                valueGenerationStrategy,
+                fromDataAnnotation
+            );
             if (valueGenerationStrategy != SqlServerValueGenerationStrategy.IdentityColumn)
             {
                 modelBuilder.HasIdentityColumnSeed(null, fromDataAnnotation);
@@ -343,8 +372,10 @@ public static class SqlServerModelBuilderExtensions
 
         void RemoveKeySequenceAnnotations()
         {
-            if (modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.SequenceNameSuffix, null)
-                && modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.SequenceSchema, null))
+            if (
+                modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.SequenceNameSuffix, null)
+                && modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.SequenceSchema, null)
+            )
             {
                 modelBuilder.Metadata.SetSequenceNameSuffix(null, fromDataAnnotation);
                 modelBuilder.Metadata.SetSequenceSchema(null, fromDataAnnotation);
@@ -367,9 +398,13 @@ public static class SqlServerModelBuilderExtensions
     public static bool CanSetValueGenerationStrategy(
         this IConventionModelBuilder modelBuilder,
         SqlServerValueGenerationStrategy? valueGenerationStrategy,
-        bool fromDataAnnotation = false)
-        => modelBuilder.CanSetAnnotation(
-            SqlServerAnnotationNames.ValueGenerationStrategy, valueGenerationStrategy, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        modelBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.ValueGenerationStrategy,
+            valueGenerationStrategy,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the maximum size for Azure SQL Database.
@@ -419,7 +454,8 @@ public static class SqlServerModelBuilderExtensions
     public static IConventionModelBuilder? HasDatabaseMaxSize(
         this IConventionModelBuilder modelBuilder,
         string? maxSize,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetDatabaseMaxSize(maxSize, fromDataAnnotation))
         {
@@ -445,8 +481,13 @@ public static class SqlServerModelBuilderExtensions
     public static bool CanSetDatabaseMaxSize(
         this IConventionModelBuilder modelBuilder,
         string? maxSize,
-        bool fromDataAnnotation = false)
-        => modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.MaxDatabaseSize, maxSize, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        modelBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.MaxDatabaseSize,
+            maxSize,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the service tier (EDITION) for Azure SQL Database as a string literal.
@@ -521,7 +562,8 @@ public static class SqlServerModelBuilderExtensions
     public static IConventionModelBuilder? HasServiceTierSql(
         this IConventionModelBuilder modelBuilder,
         string? serviceTier,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetServiceTierSql(serviceTier, fromDataAnnotation))
         {
@@ -547,8 +589,13 @@ public static class SqlServerModelBuilderExtensions
     public static bool CanSetServiceTierSql(
         this IConventionModelBuilder modelBuilder,
         string? serviceTier,
-        bool fromDataAnnotation = false)
-        => modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.ServiceTierSql, serviceTier, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        modelBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.ServiceTierSql,
+            serviceTier,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the performance level (SERVICE_OBJECTIVE) for Azure SQL Database as a string literal.
@@ -566,7 +613,10 @@ public static class SqlServerModelBuilderExtensions
     /// <param name="modelBuilder">The model builder.</param>
     /// <param name="performanceLevel">The performance level of the database as a string literal.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static ModelBuilder HasPerformanceLevel(this ModelBuilder modelBuilder, string performanceLevel)
+    public static ModelBuilder HasPerformanceLevel(
+        this ModelBuilder modelBuilder,
+        string performanceLevel
+    )
     {
         Check.NotNull(performanceLevel, nameof(performanceLevel));
 
@@ -591,7 +641,10 @@ public static class SqlServerModelBuilderExtensions
     /// <param name="modelBuilder">The model builder.</param>
     /// <param name="performanceLevel">The expression for the performance level of the database.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static ModelBuilder HasPerformanceLevelSql(this ModelBuilder modelBuilder, string performanceLevel)
+    public static ModelBuilder HasPerformanceLevelSql(
+        this ModelBuilder modelBuilder,
+        string performanceLevel
+    )
     {
         Check.NotNull(performanceLevel, nameof(performanceLevel));
 
@@ -623,7 +676,8 @@ public static class SqlServerModelBuilderExtensions
     public static IConventionModelBuilder? HasPerformanceLevelSql(
         this IConventionModelBuilder modelBuilder,
         string? performanceLevel,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (modelBuilder.CanSetPerformanceLevelSql(performanceLevel, fromDataAnnotation))
         {
@@ -649,6 +703,11 @@ public static class SqlServerModelBuilderExtensions
     public static bool CanSetPerformanceLevelSql(
         this IConventionModelBuilder modelBuilder,
         string? performanceLevel,
-        bool fromDataAnnotation = false)
-        => modelBuilder.CanSetAnnotation(SqlServerAnnotationNames.PerformanceLevelSql, performanceLevel, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        modelBuilder.CanSetAnnotation(
+            SqlServerAnnotationNames.PerformanceLevelSql,
+            performanceLevel,
+            fromDataAnnotation
+        );
 }

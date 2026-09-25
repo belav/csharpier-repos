@@ -15,22 +15,25 @@ namespace System.ServiceModel.Administration
 
     class ContractInstanceProvider : ProviderBase, IWmiProvider
     {
-        static Dictionary<string, ContractDescription> knownContracts = new Dictionary<string, ContractDescription>();
+        static Dictionary<string, ContractDescription> knownContracts =
+            new Dictionary<string, ContractDescription>();
 
         internal static string ContractReference(string contractName)
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                                 AdministrationStrings.Contract +
-                                        "." +
-                                        AdministrationStrings.Name +
-                                        "='{0}'," +
-                                        AdministrationStrings.ProcessId +
-                                        "={1}," +
-                                        AdministrationStrings.AppDomainId +
-                                        "={2}",
-                                contractName,
-                                AppDomainInfo.Current.ProcessId,
-                                AppDomainInfo.Current.Id);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                AdministrationStrings.Contract
+                    + "."
+                    + AdministrationStrings.Name
+                    + "='{0}',"
+                    + AdministrationStrings.ProcessId
+                    + "={1},"
+                    + AdministrationStrings.AppDomainId
+                    + "={2}",
+                contractName,
+                AppDomainInfo.Current.ProcessId,
+                AppDomainInfo.Current.Id
+            );
         }
 
         internal static void RegisterContract(ContractDescription contract)
@@ -50,12 +53,18 @@ namespace System.ServiceModel.Administration
             contract.SetProperty(AdministrationStrings.Type, contractDescription.ContractType.Name);
             if (null != contractDescription.CallbackContractType)
             {
-                contract.SetProperty(AdministrationStrings.CallbackContract, ContractReference(contractDescription.CallbackContractType.Name));
+                contract.SetProperty(
+                    AdministrationStrings.CallbackContract,
+                    ContractReference(contractDescription.CallbackContractType.Name)
+                );
             }
 
             contract.SetProperty(AdministrationStrings.Name, contractDescription.Name);
             contract.SetProperty(AdministrationStrings.Namespace, contractDescription.Namespace);
-            contract.SetProperty(AdministrationStrings.SessionMode, contractDescription.SessionMode.ToString());
+            contract.SetProperty(
+                AdministrationStrings.SessionMode,
+                contractDescription.SessionMode.ToString()
+            );
 
             IWmiInstance[] operations = new IWmiInstance[contractDescription.Operations.Count];
             for (int j = 0; j < operations.Length; ++j)
@@ -65,7 +74,6 @@ namespace System.ServiceModel.Administration
                 IWmiInstance operation = contract.NewInstance(AdministrationStrings.Operation);
                 FillOperation(operation, operationDescription);
                 operations[j] = operation;
-
             }
             contract.SetProperty(AdministrationStrings.Operations, operations);
             FillBehaviorsInfo(contract, contractDescription.Behaviors);
@@ -74,22 +82,43 @@ namespace System.ServiceModel.Administration
         static void FillOperation(IWmiInstance operation, OperationDescription operationDescription)
         {
             operation.SetProperty(AdministrationStrings.Name, operationDescription.Name);
-            operation.SetProperty(AdministrationStrings.Action, FixWildcardAction(operationDescription.Messages[0].Action));
+            operation.SetProperty(
+                AdministrationStrings.Action,
+                FixWildcardAction(operationDescription.Messages[0].Action)
+            );
             if (operationDescription.Messages.Count > 1)
             {
-                operation.SetProperty(AdministrationStrings.ReplyAction, FixWildcardAction(operationDescription.Messages[1].Action));
+                operation.SetProperty(
+                    AdministrationStrings.ReplyAction,
+                    FixWildcardAction(operationDescription.Messages[1].Action)
+                );
             }
             operation.SetProperty(AdministrationStrings.IsOneWay, operationDescription.IsOneWay);
-            operation.SetProperty(AdministrationStrings.IsInitiating, operationDescription.IsInitiating);
-            operation.SetProperty(AdministrationStrings.IsTerminating, operationDescription.IsTerminating);
-            operation.SetProperty(AdministrationStrings.AsyncPattern, null != operationDescription.BeginMethod);
+            operation.SetProperty(
+                AdministrationStrings.IsInitiating,
+                operationDescription.IsInitiating
+            );
+            operation.SetProperty(
+                AdministrationStrings.IsTerminating,
+                operationDescription.IsTerminating
+            );
+            operation.SetProperty(
+                AdministrationStrings.AsyncPattern,
+                null != operationDescription.BeginMethod
+            );
             if (null != operationDescription.SyncMethod)
             {
                 if (null != operationDescription.SyncMethod.ReturnType)
                 {
-                    operation.SetProperty(AdministrationStrings.ReturnType, operationDescription.SyncMethod.ReturnType.Name);
+                    operation.SetProperty(
+                        AdministrationStrings.ReturnType,
+                        operationDescription.SyncMethod.ReturnType.Name
+                    );
                 }
-                operation.SetProperty(AdministrationStrings.MethodSignature, operationDescription.SyncMethod.ToString());
+                operation.SetProperty(
+                    AdministrationStrings.MethodSignature,
+                    operationDescription.SyncMethod.ToString()
+                );
                 ParameterInfo[] parameterInfo = operationDescription.SyncMethod.GetParameters();
                 string[] parameterTypes = new string[parameterInfo.Length];
                 for (int i = 0; i < parameterInfo.Length; i++)
@@ -98,13 +127,18 @@ namespace System.ServiceModel.Administration
                 }
                 operation.SetProperty(AdministrationStrings.ParameterTypes, parameterTypes);
             }
-            operation.SetProperty(AdministrationStrings.IsCallback, operationDescription.Messages[0].Direction == MessageDirection.Output);
+            operation.SetProperty(
+                AdministrationStrings.IsCallback,
+                operationDescription.Messages[0].Direction == MessageDirection.Output
+            );
 
             FillBehaviorsInfo(operation, operationDescription.Behaviors);
-
         }
 
-        static void FillBehaviorsInfo(IWmiInstance operation, KeyedByTypeCollection<IOperationBehavior> behaviors)
+        static void FillBehaviorsInfo(
+            IWmiInstance operation,
+            KeyedByTypeCollection<IOperationBehavior> behaviors
+        )
         {
             List<IWmiInstance> behaviorInstances = new List<IWmiInstance>(behaviors.Count);
             foreach (IOperationBehavior behavior in behaviors)
@@ -119,7 +153,10 @@ namespace System.ServiceModel.Administration
             operation.SetProperty(AdministrationStrings.Behaviors, behaviorInstances.ToArray());
         }
 
-        static void FillBehaviorsInfo(IWmiInstance operation, KeyedByTypeCollection<IContractBehavior> behaviors)
+        static void FillBehaviorsInfo(
+            IWmiInstance operation,
+            KeyedByTypeCollection<IContractBehavior> behaviors
+        )
         {
             List<IWmiInstance> behaviorInstances = new List<IWmiInstance>(behaviors.Count);
             foreach (IContractBehavior behavior in behaviors)
@@ -134,7 +171,11 @@ namespace System.ServiceModel.Administration
             operation.SetProperty(AdministrationStrings.Behaviors, behaviorInstances.ToArray());
         }
 
-        static void FillBehaviorInfo(IContractBehavior behavior, IWmiInstance existingInstance, out IWmiInstance instance)
+        static void FillBehaviorInfo(
+            IContractBehavior behavior,
+            IWmiInstance existingInstance,
+            out IWmiInstance instance
+        )
         {
             Fx.Assert(null != existingInstance, "");
             Fx.Assert(null != behavior, "");
@@ -142,12 +183,22 @@ namespace System.ServiceModel.Administration
             if (behavior is DeliveryRequirementsAttribute)
             {
                 instance = existingInstance.NewInstance("DeliveryRequirementsAttribute");
-                DeliveryRequirementsAttribute specificBehavior = (DeliveryRequirementsAttribute)behavior;
-                instance.SetProperty(AdministrationStrings.QueuedDeliveryRequirements, specificBehavior.QueuedDeliveryRequirements.ToString());
-                instance.SetProperty(AdministrationStrings.RequireOrderedDelivery, specificBehavior.RequireOrderedDelivery);
+                DeliveryRequirementsAttribute specificBehavior =
+                    (DeliveryRequirementsAttribute)behavior;
+                instance.SetProperty(
+                    AdministrationStrings.QueuedDeliveryRequirements,
+                    specificBehavior.QueuedDeliveryRequirements.ToString()
+                );
+                instance.SetProperty(
+                    AdministrationStrings.RequireOrderedDelivery,
+                    specificBehavior.RequireOrderedDelivery
+                );
                 if (null != specificBehavior.TargetContract)
                 {
-                    instance.SetProperty(AdministrationStrings.TargetContract, specificBehavior.TargetContract.ToString());
+                    instance.SetProperty(
+                        AdministrationStrings.TargetContract,
+                        specificBehavior.TargetContract.ToString()
+                    );
                 }
             }
             else if (behavior is IWmiInstanceProvider)
@@ -166,7 +217,11 @@ namespace System.ServiceModel.Administration
             }
         }
 
-        static void FillBehaviorInfo(IOperationBehavior behavior, IWmiInstance existingInstance, out IWmiInstance instance)
+        static void FillBehaviorInfo(
+            IOperationBehavior behavior,
+            IWmiInstance existingInstance,
+            out IWmiInstance instance
+        )
         {
             Fx.Assert(null != existingInstance, "");
             Fx.Assert(null != behavior, "");
@@ -174,39 +229,77 @@ namespace System.ServiceModel.Administration
             if (behavior is DataContractSerializerOperationBehavior)
             {
                 instance = existingInstance.NewInstance("DataContractSerializerOperationBehavior");
-                DataContractSerializerOperationBehavior specificBehavior = (DataContractSerializerOperationBehavior)behavior;
-                instance.SetProperty(AdministrationStrings.IgnoreExtensionDataObject, specificBehavior.IgnoreExtensionDataObject);
-                instance.SetProperty(AdministrationStrings.MaxItemsInObjectGraph, specificBehavior.MaxItemsInObjectGraph);
+                DataContractSerializerOperationBehavior specificBehavior =
+                    (DataContractSerializerOperationBehavior)behavior;
+                instance.SetProperty(
+                    AdministrationStrings.IgnoreExtensionDataObject,
+                    specificBehavior.IgnoreExtensionDataObject
+                );
+                instance.SetProperty(
+                    AdministrationStrings.MaxItemsInObjectGraph,
+                    specificBehavior.MaxItemsInObjectGraph
+                );
                 if (null != specificBehavior.DataContractFormatAttribute)
                 {
-                    instance.SetProperty(AdministrationStrings.Style, specificBehavior.DataContractFormatAttribute.Style.ToString());
+                    instance.SetProperty(
+                        AdministrationStrings.Style,
+                        specificBehavior.DataContractFormatAttribute.Style.ToString()
+                    );
                 }
             }
             else if (behavior is OperationBehaviorAttribute)
             {
                 instance = existingInstance.NewInstance("OperationBehaviorAttribute");
                 OperationBehaviorAttribute specificBehavior = (OperationBehaviorAttribute)behavior;
-                instance.SetProperty(AdministrationStrings.AutoDisposeParameters, specificBehavior.AutoDisposeParameters);
-                instance.SetProperty(AdministrationStrings.Impersonation, specificBehavior.Impersonation.ToString());
-                instance.SetProperty(AdministrationStrings.ReleaseInstanceMode, specificBehavior.ReleaseInstanceMode.ToString());
-                instance.SetProperty(AdministrationStrings.TransactionAutoComplete, specificBehavior.TransactionAutoComplete);
-                instance.SetProperty(AdministrationStrings.TransactionScopeRequired, specificBehavior.TransactionScopeRequired);
+                instance.SetProperty(
+                    AdministrationStrings.AutoDisposeParameters,
+                    specificBehavior.AutoDisposeParameters
+                );
+                instance.SetProperty(
+                    AdministrationStrings.Impersonation,
+                    specificBehavior.Impersonation.ToString()
+                );
+                instance.SetProperty(
+                    AdministrationStrings.ReleaseInstanceMode,
+                    specificBehavior.ReleaseInstanceMode.ToString()
+                );
+                instance.SetProperty(
+                    AdministrationStrings.TransactionAutoComplete,
+                    specificBehavior.TransactionAutoComplete
+                );
+                instance.SetProperty(
+                    AdministrationStrings.TransactionScopeRequired,
+                    specificBehavior.TransactionScopeRequired
+                );
             }
             else if (behavior is TransactionFlowAttribute)
             {
                 instance = existingInstance.NewInstance("TransactionFlowAttribute");
                 TransactionFlowAttribute specificBehavior = (TransactionFlowAttribute)behavior;
-                instance.SetProperty(AdministrationStrings.TransactionFlowOption, specificBehavior.Transactions.ToString());
+                instance.SetProperty(
+                    AdministrationStrings.TransactionFlowOption,
+                    specificBehavior.Transactions.ToString()
+                );
             }
             else if (behavior is XmlSerializerOperationBehavior)
             {
                 instance = existingInstance.NewInstance("XmlSerializerOperationBehavior");
-                XmlSerializerOperationBehavior specificBehavior = (XmlSerializerOperationBehavior)behavior;
+                XmlSerializerOperationBehavior specificBehavior =
+                    (XmlSerializerOperationBehavior)behavior;
                 if (null != specificBehavior.XmlSerializerFormatAttribute)
                 {
-                    instance.SetProperty(AdministrationStrings.Style, specificBehavior.XmlSerializerFormatAttribute.Style.ToString());
-                    instance.SetProperty(AdministrationStrings.Use, specificBehavior.XmlSerializerFormatAttribute.Use.ToString());
-                    instance.SetProperty(AdministrationStrings.SupportFaults, specificBehavior.XmlSerializerFormatAttribute.SupportFaults.ToString());
+                    instance.SetProperty(
+                        AdministrationStrings.Style,
+                        specificBehavior.XmlSerializerFormatAttribute.Style.ToString()
+                    );
+                    instance.SetProperty(
+                        AdministrationStrings.Use,
+                        specificBehavior.XmlSerializerFormatAttribute.Use.ToString()
+                    );
+                    instance.SetProperty(
+                        AdministrationStrings.SupportFaults,
+                        specificBehavior.XmlSerializerFormatAttribute.SupportFaults.ToString()
+                    );
                 }
             }
             else if (behavior is IWmiInstanceProvider)
@@ -250,7 +343,9 @@ namespace System.ServiceModel.Administration
             lock (ContractInstanceProvider.knownContracts)
             {
                 UpdateContracts();
-                foreach (ContractDescription contract in ContractInstanceProvider.knownContracts.Values)
+                foreach (
+                    ContractDescription contract in ContractInstanceProvider.knownContracts.Values
+                )
                 {
                     IWmiInstance instance = instances.NewInstance(null);
 
@@ -262,21 +357,29 @@ namespace System.ServiceModel.Administration
                     instances.AddInstance(instance);
                 }
             }
-
         }
 
         bool IWmiProvider.GetInstance(IWmiInstance contract)
         {
             Fx.Assert(null != contract, "");
             bool bFound = false;
-            if ((int)contract.GetProperty(AdministrationStrings.ProcessId) == AppDomainInfo.Current.ProcessId
-                && (int)contract.GetProperty(AdministrationStrings.AppDomainId) == AppDomainInfo.Current.Id)
+            if (
+                (int)contract.GetProperty(AdministrationStrings.ProcessId)
+                    == AppDomainInfo.Current.ProcessId
+                && (int)contract.GetProperty(AdministrationStrings.AppDomainId)
+                    == AppDomainInfo.Current.Id
+            )
             {
                 string contractName = (string)contract.GetProperty(AdministrationStrings.Name);
 
                 ContractDescription contractDescription;
                 UpdateContracts();
-                if (ContractInstanceProvider.knownContracts.TryGetValue(contractName, out contractDescription))
+                if (
+                    ContractInstanceProvider.knownContracts.TryGetValue(
+                        contractName,
+                        out contractDescription
+                    )
+                )
                 {
                     bFound = true;
                     FillContract(contract, contractDescription);

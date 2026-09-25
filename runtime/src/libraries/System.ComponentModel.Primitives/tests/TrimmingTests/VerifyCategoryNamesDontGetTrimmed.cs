@@ -16,7 +16,11 @@ namespace Test
     {
         public static int Main()
         {
-            if (GetEnumCategory(AnEnum.Action) == "Action" && GetEnumCategory(AnEnum.Something) == "Something" && GetEnumCategory(AnEnum.WindowStyle) == "Window Style")
+            if (
+                GetEnumCategory(AnEnum.Action) == "Action"
+                && GetEnumCategory(AnEnum.Something) == "Something"
+                && GetEnumCategory(AnEnum.WindowStyle) == "Window Style"
+            )
             {
                 return 100;
             }

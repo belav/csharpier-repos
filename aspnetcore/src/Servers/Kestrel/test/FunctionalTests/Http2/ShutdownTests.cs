@@ -81,15 +81,11 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
                 testContext,
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 }
             )
         )
@@ -151,15 +147,11 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
                 testContext,
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 }
             )
         )
@@ -182,9 +174,8 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
 
         Assert.Contains(LogMessages, m => m.Message.Contains("Request finished "));
         Assert.Contains(LogMessages, m => m.Message.Contains("is closing."));
-        Assert.Contains(
-            LogMessages,
-            m => m.Message.Contains("is closed. The last processed stream ID was 1.")
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("is closed. The last processed stream ID was 1.")
         );
     }
 
@@ -220,15 +211,11 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
                 testContext,
                 kestrelOptions =>
                 {
-                    kestrelOptions.Listen(
-                        IPAddress.Loopback,
-                        0,
-                        listenOptions =>
-                        {
-                            listenOptions.Protocols = HttpProtocols.Http2;
-                            listenOptions.UseHttps(_x509Certificate2);
-                        }
-                    );
+                    kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                        listenOptions.UseHttps(_x509Certificate2);
+                    });
                 },
                 _ => { }
             )
@@ -262,16 +249,13 @@ public class ShutdownTests : TestApplicationErrorLoggerLoggedTest
         }
 
         Assert.Contains(LogMessages, m => m.Message.Contains("is closing."));
-        Assert.Contains(
-            LogMessages,
-            m => m.Message.Contains("is closed. The last processed stream ID was 1.")
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("is closed. The last processed stream ID was 1.")
         );
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "Some connections failed to close gracefully during server shutdown."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains(
+                "Some connections failed to close gracefully during server shutdown."
+            )
         );
         Assert.DoesNotContain(LogMessages, m => m.Message.Contains("Request finished in"));
 

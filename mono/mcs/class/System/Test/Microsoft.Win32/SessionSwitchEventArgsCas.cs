@@ -1,5 +1,5 @@
 //
-// SessionSwitchEventArgsCas.cs 
+// SessionSwitchEventArgsCas.cs
 //	- CAS unit tests for Microsoft.Win32.SessionSwitchEventArgs
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,73 +27,72 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using Microsoft.Win32;
+using NUnit.Framework;
 
-namespace MonoCasTests.Microsoft.Win32 {
+namespace MonoCasTests.Microsoft.Win32
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class SessionSwitchEventArgsCas
+    {
+        [SetUp]
+        public virtual void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class SessionSwitchEventArgsCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            SessionSwitchEventArgs swea = new SessionSwitchEventArgs(
+                SessionSwitchReason.SessionLock
+            );
+            Assert.AreEqual(SessionSwitchReason.SessionLock, swea.Reason, "Reason");
+        }
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			SessionSwitchEventArgs swea = new SessionSwitchEventArgs (SessionSwitchReason.SessionLock);
-			Assert.AreEqual (SessionSwitchReason.SessionLock, swea.Reason, "Reason");
-		}
+        // we use reflection to call this class as it is protected by a LinkDemand
+        // (which will be converted into full demand, i.e. a stack walk) when
+        // reflection is used (i.e. it gets testable).
 
-		// LinkDemand
+        public virtual object Create()
+        {
+            Type[] t = new Type[1] { typeof(SessionSwitchReason) };
+            ConstructorInfo ci = typeof(SessionSwitchEventArgs).GetConstructor(t);
+            Assert.IsNotNull(ci, ".ctor(SessionSwitchReason)");
+            return ci.Invoke(new object[1] { SessionSwitchReason.SessionLock });
+        }
 
-		// we use reflection to call this class as it is protected by a LinkDemand 
-		// (which will be converted into full demand, i.e. a stack walk) when 
-		// reflection is used (i.e. it gets testable).
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Assert.IsNotNull(Create());
+        }
 
-		public virtual object Create ()
-		{
-			Type[] t = new Type[1] { typeof (SessionSwitchReason) };
-			ConstructorInfo ci = typeof (SessionSwitchEventArgs).GetConstructor (t);
-			Assert.IsNotNull (ci, ".ctor(SessionSwitchReason)");
-			return ci.Invoke (new object[1] { SessionSwitchReason.SessionLock });
-		}
+        [Test]
+        [EnvironmentPermission(SecurityAction.Deny, Read = "MONO")]
+        [ExpectedException(typeof(SecurityException))]
+        public void LinkDemand_Deny_Anything()
+        {
+            // denying any permissions -> not full trust!
+            Assert.IsNotNull(Create());
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
-
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "MONO")]
-		[ExpectedException (typeof (SecurityException))]
-		public void LinkDemand_Deny_Anything ()
-		{
-			// denying any permissions -> not full trust!
-			Assert.IsNotNull (Create ());
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.PermitOnly, Unrestricted = true)]
-		public void LinkDemand_PermitOnly_Unrestricted ()
-		{
-			Assert.IsNotNull (Create ());
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.PermitOnly, Unrestricted = true)]
+        public void LinkDemand_PermitOnly_Unrestricted()
+        {
+            Assert.IsNotNull(Create());
+        }
+    }
 }
-

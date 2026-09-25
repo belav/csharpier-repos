@@ -4,15 +4,21 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using System;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
     internal readonly struct CSharpTypeInfo : IEquatable<CSharpTypeInfo>
     {
-        internal static readonly CSharpTypeInfo None = new CSharpTypeInfo(type: null, convertedType: null, nullability: default, convertedNullability: default, Conversion.Identity);
+        internal static readonly CSharpTypeInfo None = new CSharpTypeInfo(
+            type: null,
+            convertedType: null,
+            nullability: default,
+            convertedNullability: default,
+            Conversion.Identity
+        );
 
         // should be best guess if there is one, or error type if none.
         /// <summary>
@@ -38,7 +44,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         public readonly Conversion ImplicitConversion;
 
-        internal CSharpTypeInfo(TypeSymbol type, TypeSymbol convertedType, NullabilityInfo nullability, NullabilityInfo convertedNullability, Conversion implicitConversion)
+        internal CSharpTypeInfo(
+            TypeSymbol type,
+            TypeSymbol convertedType,
+            NullabilityInfo nullability,
+            NullabilityInfo convertedNullability,
+            Conversion implicitConversion
+        )
         {
             // When constructing the result for the Caas API, we expose the underlying symbols that
             // may have been hidden under error type, if the error type was immediate. We will
@@ -52,8 +64,14 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static implicit operator TypeInfo(CSharpTypeInfo info)
         {
-            return new TypeInfo(info.Type?.GetITypeSymbol(info.Nullability.FlowState.ToAnnotation()), info.ConvertedType?.GetITypeSymbol(info.ConvertedNullability.FlowState.ToAnnotation()),
-                                info.Nullability, info.ConvertedNullability);
+            return new TypeInfo(
+                info.Type?.GetITypeSymbol(info.Nullability.FlowState.ToAnnotation()),
+                info.ConvertedType?.GetITypeSymbol(
+                    info.ConvertedNullability.FlowState.ToAnnotation()
+                ),
+                info.Nullability,
+                info.ConvertedNullability
+            );
         }
 
         public override bool Equals(object obj)
@@ -65,18 +83,30 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             return this.ImplicitConversion.Equals(other.ImplicitConversion)
                 && TypeSymbol.Equals(this.Type, other.Type, TypeCompareKind.ConsiderEverything2)
-                && TypeSymbol.Equals(this.ConvertedType, other.ConvertedType, TypeCompareKind.ConsiderEverything2)
+                && TypeSymbol.Equals(
+                    this.ConvertedType,
+                    other.ConvertedType,
+                    TypeCompareKind.ConsiderEverything2
+                )
                 && this.Nullability.Equals(other.Nullability)
                 && this.ConvertedNullability.Equals(other.ConvertedNullability);
         }
 
         public override int GetHashCode()
         {
-            return Hash.Combine(this.ConvertedType,
-                                Hash.Combine(this.Type,
-                                             Hash.Combine(this.Nullability.GetHashCode(),
-                                                          Hash.Combine(this.ConvertedNullability.GetHashCode(),
-                                                                       this.ImplicitConversion.GetHashCode()))));
+            return Hash.Combine(
+                this.ConvertedType,
+                Hash.Combine(
+                    this.Type,
+                    Hash.Combine(
+                        this.Nullability.GetHashCode(),
+                        Hash.Combine(
+                            this.ConvertedNullability.GetHashCode(),
+                            this.ImplicitConversion.GetHashCode()
+                        )
+                    )
+                )
+            );
         }
     }
 }

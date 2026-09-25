@@ -10,16 +10,17 @@ namespace System.Web.Mvc.Filters
     {
         /// <summary>Initializes a new instance of the <see cref="AuthenticationContext"/> class.</summary>
         /// <remarks>This constructor should only be used for unit testing purposes.</remarks>
-        public AuthenticationContext()
-        {
-        }
+        public AuthenticationContext() { }
 
         /// <summary>Initializes a new instance of the <see cref="AuthenticationContext"/> class.</summary>
         /// <param name="controllerContext">The controller context.</param>
         /// <param name="actionDescriptor">The action descriptor.</param>
         /// <param name="principal">The current principal.</param>
-        public AuthenticationContext(ControllerContext controllerContext, ActionDescriptor actionDescriptor,
-            IPrincipal principal)
+        public AuthenticationContext(
+            ControllerContext controllerContext,
+            ActionDescriptor actionDescriptor,
+            IPrincipal principal
+        )
             : base(controllerContext)
         {
             if (actionDescriptor == null)

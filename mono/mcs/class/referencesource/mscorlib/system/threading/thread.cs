@@ -15,30 +15,32 @@
 **
 =============================================================================*/
 
-namespace System.Threading {
-    using System.Threading;
+namespace System.Threading
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
     using System.Runtime.InteropServices;
-#if FEATURE_REMOTING    
+    using System.Runtime.Serialization;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Threading;
+#if FEATURE_REMOTING
     using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Messaging;
 #endif
-    using System;
-    using System.Diagnostics;
+
 #if !MONO
     using System.Security.Permissions;
 #endif
 #if FEATURE_IMPERSONATION
     using System.Security.Principal;
 #endif
-    using System.Globalization;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
-    using System.Runtime.CompilerServices;
-    using System.Runtime.ConstrainedExecution;
-    using System.Security;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
 
     internal delegate Object InternalCrossContextDelegate(Object[] args);
 
@@ -46,12 +48,13 @@ namespace System.Threading {
     {
 #if !MONO
         [System.Security.SecuritySafeCritical]
-        static ThreadHelper() {}
+        static ThreadHelper() { }
 #endif
 
         Delegate _start;
         Object _startArg = null;
         ExecutionContext _executionContext = null;
+
         internal ThreadHelper(Delegate start)
         {
             _start = start;
@@ -63,10 +66,10 @@ namespace System.Threading {
         }
 
         [System.Security.SecurityCritical]
-        static internal ContextCallback _ccb = new ContextCallback(ThreadStart_Context);
-        
+        internal static ContextCallback _ccb = new ContextCallback(ThreadStart_Context);
+
         [System.Security.SecurityCritical]
-        static private void ThreadStart_Context(Object state)
+        private static void ThreadStart_Context(Object state)
         {
             ThreadHelper t = (ThreadHelper)state;
             if (t._start is ThreadStart)
@@ -80,15 +83,15 @@ namespace System.Threading {
         }
 
         // call back helper
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecuritySafeCritical] // auto-generated
-        #else
+#else
         [System.Security.SecurityCritical]
-        #endif
+#endif
         internal void ThreadStart(object obj)
-        {               
+        {
             _startArg = obj;
-            if (_executionContext != null) 
+            if (_executionContext != null)
             {
                 ExecutionContext.Run(_executionContext, _ccb, (Object)this);
             }
@@ -99,14 +102,14 @@ namespace System.Threading {
         }
 
         // call back helper
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecuritySafeCritical] // auto-generated
-        #else
+#else
         [System.Security.SecurityCritical]
-        #endif
+#endif
         internal void ThreadStart()
         {
-            if (_executionContext != null) 
+            if (_executionContext != null)
             {
                 ExecutionContext.Run(_executionContext, _ccb, (Object)this);
             }
@@ -116,6 +119,7 @@ namespace System.Threading {
             }
         }
     }
+
 #if !MONO
     internal struct ThreadHandle
     {
@@ -132,14 +136,14 @@ namespace System.Threading {
     // deliberately not [serializable]
     [ClassInterface(ClassInterfaceType.None)]
     [ComDefaultInterface(typeof(_Thread))]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
 #endif
 #if !NETCORE
     public
 #endif
     sealed partial class Thread : CriticalFinalizerObject
 #if !MOBILE && !NETCORE
-    , _Thread
+            , _Thread
 #endif
     {
 #if !MONO
@@ -148,21 +152,20 @@ namespace System.Threading {
         ** ThreadBaseObject to maintain alignment between the two classes.
         ** DON'T CHANGE THESE UNLESS YOU MODIFY ThreadBaseObject in vm\object.h
         =========================================================================*/
-#if FEATURE_REMOTING        
-        private Context         m_Context;
-#endif 
+#if FEATURE_REMOTING
+        private Context m_Context;
+#endif
 #if !FEATURE_CORECLR
-        private ExecutionContext m_ExecutionContext;    // this call context follows the logical thread
+        private ExecutionContext m_ExecutionContext; // this call context follows the logical thread
 #endif
 
-        private String          m_Name;
-        private Delegate        m_Delegate;             // Delegate
-        
-#if FEATURE_LEAK_CULTURE_INFO 
-        private CultureInfo     m_CurrentCulture;
-        private CultureInfo     m_CurrentUICulture;
+        private String m_Name;
+        private Delegate m_Delegate; // Delegate
+#if FEATURE_LEAK_CULTURE_INFO
+        private CultureInfo m_CurrentCulture;
+        private CultureInfo m_CurrentUICulture;
 #endif
-        private Object          m_ThreadStartArg;
+        private Object m_ThreadStartArg;
 
         /*=========================================================================
         ** The base implementation of Thread is all native.  The following fields
@@ -174,11 +177,10 @@ namespace System.Threading {
 #pragma warning disable 414  // These fields are not used from managed.
         // IntPtrs need to be together, and before ints, because IntPtrs are 64-bit
         //  fields on 64-bit platforms, where they will be sorted together.
-                                                        
-        private IntPtr  DONT_USE_InternalThread;        // Pointer
-        private int     m_Priority;                     // INT32
-        private int     m_ManagedThreadId;              // INT32
 
+        private IntPtr DONT_USE_InternalThread; // Pointer
+        private int m_Priority; // INT32
+        private int m_ManagedThreadId; // INT32
 #pragma warning restore 414
 #pragma warning restore 169
 
@@ -199,7 +201,7 @@ namespace System.Threading {
         ** Thread-local data store
         =========================================================================*/
         [ThreadStatic]
-        static private LocalDataStoreHolder s_LocalDataStore;
+        private static LocalDataStoreHolder s_LocalDataStore;
 #endif
 
         // Do not move! Order of above fields needs to be preserved for alignment
@@ -207,17 +209,18 @@ namespace System.Threading {
         // See code:#threadCultureInfo
 #if !FEATURE_LEAK_CULTURE_INFO
         [ThreadStatic]
-        internal static CultureInfo     m_CurrentCulture;
+        internal static CultureInfo m_CurrentCulture;
+
         [ThreadStatic]
-        internal static CultureInfo     m_CurrentUICulture;
+        internal static CultureInfo m_CurrentUICulture;
 #endif
 
-        static AsyncLocal<CultureInfo> s_asyncLocalCurrentCulture; 
+        static AsyncLocal<CultureInfo> s_asyncLocalCurrentCulture;
         static AsyncLocal<CultureInfo> s_asyncLocalCurrentUICulture;
 
         static void AsyncLocalSetCurrentCulture(AsyncLocalValueChangedArgs<CultureInfo> args)
         {
-#if FEATURE_LEAK_CULTURE_INFO 
+#if FEATURE_LEAK_CULTURE_INFO
             Thread.CurrentThread.m_CurrentCulture = args.CurrentValue;
 #else
             m_CurrentCulture = args.CurrentValue;
@@ -226,7 +229,7 @@ namespace System.Threading {
 
         static void AsyncLocalSetCurrentUICulture(AsyncLocalValueChangedArgs<CultureInfo> args)
         {
-#if FEATURE_LEAK_CULTURE_INFO 
+#if FEATURE_LEAK_CULTURE_INFO
             Thread.CurrentThread.m_CurrentUICulture = args.CurrentValue;
 #else
             m_CurrentUICulture = args.CurrentValue;
@@ -236,7 +239,7 @@ namespace System.Threading {
 #if FEATURE_CORECLR
         // Adding an empty default ctor for annotation purposes
         [System.Security.SecuritySafeCritical] // auto-generated
-        internal Thread(){}
+        internal Thread() { }
 #endif // FEATURE_CORECLR
 
         /*=========================================================================
@@ -245,45 +248,60 @@ namespace System.Threading {
         **
         ** Exceptions: ArgumentNullException if start == null.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public Thread(ThreadStart start) {
-            if (start == null) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public Thread(ThreadStart start)
+        {
+            if (start == null)
+            {
                 throw new ArgumentNullException("start");
             }
             Contract.EndContractBlock();
-            SetStartHelper((Delegate)start,0);  //0 will setup Thread with default stackSize
+            SetStartHelper((Delegate)start, 0); //0 will setup Thread with default stackSize
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public Thread(ThreadStart start, int maxStackSize) {
-            if (start == null) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public Thread(ThreadStart start, int maxStackSize)
+        {
+            if (start == null)
+            {
                 throw new ArgumentNullException("start");
             }
             if (0 > maxStackSize)
-                throw new ArgumentOutOfRangeException("maxStackSize",Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "maxStackSize",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
             SetStartHelper((Delegate)start, maxStackSize);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public Thread(ParameterizedThreadStart start) {
-            if (start == null) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public Thread(ParameterizedThreadStart start)
+        {
+            if (start == null)
+            {
                 throw new ArgumentNullException("start");
             }
             Contract.EndContractBlock();
             SetStartHelper((Delegate)start, 0);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        public Thread(ParameterizedThreadStart start, int maxStackSize) {
-            if (start == null) {
+        [System.Security.SecuritySafeCritical] // auto-generated
+        public Thread(ParameterizedThreadStart start, int maxStackSize)
+        {
+            if (start == null)
+            {
                 throw new ArgumentNullException("start");
             }
             if (0 > maxStackSize)
-                throw new ArgumentOutOfRangeException("maxStackSize",Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "maxStackSize",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             Contract.EndContractBlock();
             SetStartHelper((Delegate)start, maxStackSize);
         }
+
 #if !MONO
         [ComVisible(false)]
         public override int GetHashCode()
@@ -291,12 +309,12 @@ namespace System.Threading {
             return m_ManagedThreadId;
         }
 
-        extern public int ManagedThreadId
+        public extern int ManagedThreadId
         {
             [ResourceExposure(ResourceScope.None)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
             [MethodImplAttribute(MethodImplOptions.InternalCall)]
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             get;
         }
 
@@ -309,7 +327,10 @@ namespace System.Threading {
             // There are ways how to create an unitialized objects through remoting, etc. Avoid AVing in the EE by throwing a nice
             // exception here.
             if (thread.IsNull())
-                throw new ArgumentException(null, Environment.GetResourceString("Argument_InvalidHandle"));
+                throw new ArgumentException(
+                    null,
+                    Environment.GetResourceString("Argument_InvalidHandle")
+                );
 
             return new ThreadHandle(thread);
         }
@@ -323,7 +344,7 @@ namespace System.Threading {
         ** Exceptions: ThreadStateException if the thread has already been started.
         =========================================================================*/
 #if !MONO
-        [HostProtection(Synchronization=true,ExternalThreading=true)]
+        [HostProtection(Synchronization = true, ExternalThreading = true)]
 #endif
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public void Start()
@@ -333,19 +354,21 @@ namespace System.Threading {
         }
 
 #if !MONO
-        [HostProtection(Synchronization=true,ExternalThreading=true)]
+        [HostProtection(Synchronization = true, ExternalThreading = true)]
 #endif
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         public void Start(object parameter)
         {
             //In the case of a null delegate (second call to start on same thread)
             //    StartInternal method will take care of the error reporting
-            if(m_Delegate is ThreadStart)
+            if (m_Delegate is ThreadStart)
             {
                 //We expect the thread to be setup with a ParameterizedThreadStart
                 //    if this constructor is called.
                 //If we got here then that wasn't the case
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ThreadWrongThreadStart"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_ThreadWrongThreadStart")
+                );
             }
             m_ThreadStartArg = parameter;
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
@@ -371,7 +394,8 @@ namespace System.Threading {
 #if !NETCORE
                 ExecutionContext ec = ExecutionContext.Capture(
                     ref stackMark,
-                    ExecutionContext.CaptureOptions.IgnoreSyncCtx);
+                    ExecutionContext.CaptureOptions.IgnoreSyncCtx
+                );
                 t.SetExecutionContextHelper(ec);
 #endif
             }
@@ -382,7 +406,6 @@ namespace System.Threading {
 #endif
             StartInternal(principal, ref stackMark);
         }
-
 
 #if !FEATURE_CORECLR && !NETCORE
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -405,7 +428,7 @@ namespace System.Threading {
 #endif
 
         // note: please don't access this directly from mscorlib.  Use GetMutableExecutionContext or GetExecutionContextReader instead.
-        public  ExecutionContext ExecutionContext
+        public ExecutionContext ExecutionContext
         {
             [SecuritySafeCritical]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
@@ -445,7 +468,7 @@ namespace System.Threading {
 
         [SecurityCritical]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal void SetExecutionContext(ExecutionContext value, bool belongsToCurrentScope) 
+        internal void SetExecutionContext(ExecutionContext value, bool belongsToCurrentScope)
         {
             m_ExecutionContext = value;
             ExecutionContextBelongsToCurrentScope = belongsToCurrentScope;
@@ -461,41 +484,55 @@ namespace System.Threading {
 #endif //!FEATURE_CORECLR
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void StartInternal(IPrincipal principal, ref StackCrawlMark stackMark);
 #endif
 #if (FEATURE_COMPRESSEDSTACK || MONO) && !NETCORE
         /// <internalonly/>
-
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [DynamicSecurityMethodAttribute()]
 #endif
-        [Obsolete("Thread.SetCompressedStack is no longer supported. Please use the System.Threading.CompressedStack class")]         
-        public void SetCompressedStack( CompressedStack stack )
+        [Obsolete(
+            "Thread.SetCompressedStack is no longer supported. Please use the System.Threading.CompressedStack class"
+        )]
+        public void SetCompressedStack(CompressedStack stack)
         {
-            throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ThreadAPIsNotSupported"));
+            throw new InvalidOperationException(
+                Environment.GetResourceString("InvalidOperation_ThreadAPIsNotSupported")
+            );
         }
-#if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
-        [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern IntPtr SetAppDomainStack( SafeCompressedStackHandle csHandle);
 
-        [System.Security.SecurityCritical]  // auto-generated
+#if !MONO
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern void RestoreAppDomainStack( IntPtr appDomainStack);
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
+        internal extern IntPtr SetAppDomainStack(SafeCompressedStackHandle csHandle);
+
+        [System.Security.SecurityCritical] // auto-generated
+        [ResourceExposure(ResourceScope.None)]
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
+        internal extern void RestoreAppDomainStack(IntPtr appDomainStack);
 #endif
 
         /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated_required
-        [Obsolete("Thread.GetCompressedStack is no longer supported. Please use the System.Threading.CompressedStack class")]
+        [System.Security.SecurityCritical] // auto-generated_required
+        [Obsolete(
+            "Thread.GetCompressedStack is no longer supported. Please use the System.Threading.CompressedStack class"
+        )]
         public CompressedStack GetCompressedStack()
         {
-            throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ThreadAPIsNotSupported"));
+            throw new InvalidOperationException(
+                Environment.GetResourceString("InvalidOperation_ThreadAPIsNotSupported")
+            );
         }
 #endif // #if FEATURE_COMPRESSEDSTACK
 #if !MONO
@@ -503,10 +540,10 @@ namespace System.Threading {
         // Helper method to get a logical thread ID for StringBuilder (for
         // correctness) and for FileStream's async code path (for perf, to
         // avoid creating a Thread instance).
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static IntPtr InternalGetCurrentThread();
+        internal static extern IntPtr InternalGetCurrentThread();
 
         /*=========================================================================
         ** Raises a ThreadAbortException in the thread, which usually
@@ -525,8 +562,8 @@ namespace System.Threading {
         =========================================================================*/
 
 #if !FEATURE_CORECLR
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread=true)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
         public void Abort(Object stateInfo)
         {
             // If two aborts come at the same time, it is possible that the state info
@@ -546,29 +583,33 @@ namespace System.Threading {
         }
 #endif
 
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #else
+#else
         [System.Security.SecuritySafeCritical]
-        #endif
+#endif
 #pragma warning disable 618
         [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
 #pragma warning restore 618
         public void Abort()
         {
 #if FEATURE_LEGACYNETCF
-            if(CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
+            if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
             {
-                System.Reflection.Assembly callingAssembly = System.Reflection.Assembly.GetCallingAssembly();
-                if(callingAssembly != null && !callingAssembly.IsProfileAssembly)
+                System.Reflection.Assembly callingAssembly =
+                    System.Reflection.Assembly.GetCallingAssembly();
+                if (callingAssembly != null && !callingAssembly.IsProfileAssembly)
                 {
                     string caller = new StackFrame(1).GetMethod().FullName;
                     string callee = System.Reflection.MethodBase.GetCurrentMethod().FullName;
-                    throw new MethodAccessException(String.Format(
-                        CultureInfo.CurrentCulture,
-                        Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
-                        caller,
-                        callee));
+                    throw new MethodAccessException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Arg_MethodAccessException_WithCaller"),
+                            caller,
+                            callee
+                        )
+                    );
                 }
             }
 #endif // FEATURE_LEGACYNETCF
@@ -577,7 +618,7 @@ namespace System.Threading {
 
         // Internal helper (since we can't place security demands on
         // ecalls/fcalls).
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void AbortInternal();
@@ -588,20 +629,22 @@ namespace System.Threading {
         ** Should be called by trusted code only
           =========================================================================*/
 #if !MONO
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread=true)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermissionAttribute(SecurityAction.Demand, ControlThread = true)]
 #endif
         public static void ResetAbort()
         {
             Thread thread = Thread.CurrentThread;
             if ((thread.ThreadState & ThreadState.AbortRequested) == 0)
-                throw new ThreadStateException(Environment.GetResourceString("ThreadState_NoAbortRequested"));
+                throw new ThreadStateException(
+                    Environment.GetResourceString("ThreadState_NoAbortRequested")
+                );
             thread.ResetAbortNative();
             thread.ClearAbortReason();
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -615,16 +658,22 @@ namespace System.Threading {
         ** Exceptions: ThreadStateException if the thread has not been started or
         **             it is dead.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [Obsolete("Thread.Suspend has been deprecated.  Please use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.  http://go.microsoft.com/fwlink/?linkid=14202", false)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [Obsolete(
+            "Thread.Suspend has been deprecated.  Please use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.  http://go.microsoft.com/fwlink/?linkid=14202",
+            false
+        )]
 #if !MONO
-        [SecurityPermission(SecurityAction.Demand, ControlThread=true)]
+        [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
 #endif
-        public void Suspend() { SuspendInternal(); }
+        public void Suspend()
+        {
+            SuspendInternal();
+        }
 
         // Internal helper (since we can't place security demands on
         // ecalls/fcalls).
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #if !MONO
         [ResourceExposure(ResourceScope.None)]
 #endif
@@ -637,16 +686,22 @@ namespace System.Threading {
         ** Exceptions: ThreadStateException if the thread has not been started or
         **             it is dead or it isn't in the suspended state.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [Obsolete("Thread.Resume has been deprecated.  Please use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.  http://go.microsoft.com/fwlink/?linkid=14202", false)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [Obsolete(
+            "Thread.Resume has been deprecated.  Please use other classes in System.Threading, such as Monitor, Mutex, Event, and Semaphore, to synchronize Threads or protect resources.  http://go.microsoft.com/fwlink/?linkid=14202",
+            false
+        )]
 #if !MONO
-        [SecurityPermission(SecurityAction.Demand, ControlThread=true)]
+        [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
 #endif
-        public void Resume() { ResumeInternal(); }
+        public void Resume()
+        {
+            ResumeInternal();
+        }
 
         // Internal helper (since we can't place security demands on
         // ecalls/fcalls).
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void ResumeInternal();
@@ -659,15 +714,18 @@ namespace System.Threading {
         ** when it next begins to block.
         =========================================================================*/
 #if !MONO
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [SecurityPermission(SecurityAction.Demand, ControlThread=true)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
 #endif
-        public void Interrupt() { InterruptInternal(); }
+        public void Interrupt()
+        {
+            InterruptInternal();
+        }
 
         // Internal helper (since we can't place security demands on
         // ecalls/fcalls).
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -680,26 +738,26 @@ namespace System.Threading {
         ** Exceptions: ThreadStateException if the thread is dead.
         =========================================================================*/
 
-        public ThreadPriority Priority {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+        public ThreadPriority Priority
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
             get { return (ThreadPriority)GetPriorityNative(); }
-
 #if !MONO
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [HostProtection(SelfAffectingThreading=true)]
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [HostProtection(SelfAffectingThreading = true)]
 #endif
             set { SetPriorityNative((int)value); }
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern int GetPriorityNative();
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -708,8 +766,9 @@ namespace System.Threading {
         /*=========================================================================
         ** Returns true if the thread has been started and is not dead.
         =========================================================================*/
-        public extern bool IsAlive {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+        public extern bool IsAlive
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
             [MethodImpl(MethodImplOptions.InternalCall)]
             get;
         }
@@ -717,8 +776,9 @@ namespace System.Threading {
         /*=========================================================================
         ** Returns true if the thread is a threadpool thread.
         =========================================================================*/
-        public extern bool IsThreadPoolThread {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+        public extern bool IsThreadPoolThread
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
             [MethodImpl(MethodImplOptions.InternalCall)]
             get;
         }
@@ -741,7 +801,7 @@ namespace System.Threading {
 
 #if !MONO
         [System.Security.SecuritySafeCritical]
-        [HostProtection(Synchronization=true, ExternalThreading=true)]
+        [HostProtection(Synchronization = true, ExternalThreading = true)]
 #endif
         public void Join()
         {
@@ -750,25 +810,31 @@ namespace System.Threading {
 
 #if !MONO
         [System.Security.SecuritySafeCritical]
-        [HostProtection(Synchronization=true, ExternalThreading=true)]
+        [HostProtection(Synchronization = true, ExternalThreading = true)]
 #endif
         public bool Join(int millisecondsTimeout)
         {
 #if MONO
             if (millisecondsTimeout < Timeout.Infinite)
-                throw new ArgumentOutOfRangeException("millisecondsTimeout", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1"));
+                throw new ArgumentOutOfRangeException(
+                    "millisecondsTimeout",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1")
+                );
 #endif
             return JoinInternal(millisecondsTimeout);
         }
 
 #if !MONO
-        [HostProtection(Synchronization=true, ExternalThreading=true)]
+        [HostProtection(Synchronization = true, ExternalThreading = true)]
 #endif
         public bool Join(TimeSpan timeout)
         {
             long tm = (long)timeout.TotalMilliseconds;
-            if (tm < -1 || tm > (long) Int32.MaxValue)
-                throw new ArgumentOutOfRangeException("timeout", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1"));
+            if (tm < -1 || tm > (long)Int32.MaxValue)
+                throw new ArgumentOutOfRangeException(
+                    "timeout",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1")
+                );
 
             return Join((int)tm);
         }
@@ -782,23 +848,26 @@ namespace System.Threading {
         **             ThreadInterruptedException if the thread is interrupted while sleeping.
         =========================================================================*/
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern void SleepInternal(int millisecondsTimeout);
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static void Sleep(int millisecondsTimeout)
         {
 #if MONO
             if (millisecondsTimeout < Timeout.Infinite)
-                throw new ArgumentOutOfRangeException("millisecondsTimeout", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1"));
+                throw new ArgumentOutOfRangeException(
+                    "millisecondsTimeout",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1")
+                );
 #endif
             SleepInternal(millisecondsTimeout);
 #if !MONO
             // Ensure we don't return to app code when the pause is underway
-            if(AppDomainPauseManager.IsPaused)
+            if (AppDomainPauseManager.IsPaused)
                 AppDomainPauseManager.ResumeEvent.WaitOneWithoutFAS();
 #endif
         }
@@ -806,8 +875,11 @@ namespace System.Threading {
         public static void Sleep(TimeSpan timeout)
         {
             long tm = (long)timeout.TotalMilliseconds;
-            if (tm < -1 || tm > (long) Int32.MaxValue)
-                throw new ArgumentOutOfRangeException("timeout", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1"));
+            if (tm < -1 || tm > (long)Int32.MaxValue)
+                throw new ArgumentOutOfRangeException(
+                    "timeout",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegOrNegative1")
+                );
             Sleep((int)tm);
         }
 
@@ -816,16 +888,20 @@ namespace System.Threading {
            only take a few machine instructions.  Calling this API is preferable to coding
            a explict busy loop because the hardware can be informed that it is busy waiting. */
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [MethodImplAttribute(MethodImplOptions.InternalCall),
-         HostProtection(Synchronization=true,ExternalThreading=true),
-         ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success),
-         ResourceExposure(ResourceScope.None)]
+        [System.Security.SecurityCritical] // auto-generated
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            HostProtection(Synchronization = true, ExternalThreading = true),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success),
+            ResourceExposure(ResourceScope.None)
+        ]
         private static extern void SpinWaitInternal(int iterations);
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [HostProtection(Synchronization=true,ExternalThreading=true),
-         ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [
+            HostProtection(Synchronization = true, ExternalThreading = true),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
         public static void SpinWait(int iterations)
         {
             SpinWaitInternal(iterations);
@@ -834,19 +910,23 @@ namespace System.Threading {
 #if MONO
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
 #else
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
-        [HostProtection(Synchronization = true, ExternalThreading = true),
-         ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [
+            HostProtection(Synchronization = true, ExternalThreading = true),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
 #endif
         private static extern bool YieldInternal();
 
 #if !MONO
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [HostProtection(Synchronization = true, ExternalThreading = true),
-         ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [
+            HostProtection(Synchronization = true, ExternalThreading = true),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)
+        ]
 #endif
         public static bool Yield()
         {
@@ -854,20 +934,27 @@ namespace System.Threading {
         }
 
 #if !MONO
-        public static Thread CurrentThread {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+        public static Thread CurrentThread
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
-            get {
+            get
+            {
                 Contract.Ensures(Contract.Result<Thread>() != null);
                 return GetCurrentThreadNative();
             }
         }
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
-        [MethodImplAttribute(MethodImplOptions.InternalCall), ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
+        [
+            MethodImplAttribute(MethodImplOptions.InternalCall),
+            ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)
+        ]
         private static extern Thread GetCurrentThreadNative();
 #endif
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         private void SetStartHelper(Delegate start, int maxStackSize)
         {
 #if MONO
@@ -896,15 +983,19 @@ namespace System.Threading {
 #endif
 
             ThreadHelper threadStartCallBack = new ThreadHelper(start);
-            if(start is ThreadStart)
+            if (start is ThreadStart)
             {
                 SetStart(new ThreadStart(threadStartCallBack.ThreadStart), maxStackSize);
             }
             else
             {
-                SetStart(new ParameterizedThreadStart(threadStartCallBack.ThreadStart), maxStackSize);
-            }                
+                SetStart(
+                    new ParameterizedThreadStart(threadStartCallBack.ThreadStart),
+                    maxStackSize
+                );
+            }
         }
+
 #if !MONO
         [SecurityCritical]
         [ResourceExposure(ResourceScope.None)]
@@ -916,7 +1007,7 @@ namespace System.Threading {
         ** PRIVATE Sets the IThreadable interface for the thread. Assumes that
         ** start != null.
         =========================================================================*/
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void SetStart(Delegate start, int maxStackSize);
@@ -924,7 +1015,7 @@ namespace System.Threading {
         /*=========================================================================
         ** Clean up the thread when it goes away.
         =========================================================================*/
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         ~Thread()
         {
@@ -932,14 +1023,14 @@ namespace System.Threading {
             InternalFinalize();
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void InternalFinalize();
 
 #if FEATURE_COMINTEROP
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -952,39 +1043,40 @@ namespace System.Threading {
         **
         ** Exceptions: ThreadStateException if the thread is dead.
         =========================================================================*/
-        public bool IsBackground {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+        public bool IsBackground
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
             get { return IsBackgroundNative(); }
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [HostProtection(SelfAffectingThreading=true)]
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [HostProtection(SelfAffectingThreading = true)]
             set { SetBackgroundNative(value); }
         }
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern bool IsBackgroundNative();
 
 #if !MONO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void SetBackgroundNative(bool isBackground);
 
-
         /*=========================================================================
         ** Return the thread state as a consistent set of bits.  This is more
         ** general then IsAlive or IsBackground.
         =========================================================================*/
-        public ThreadState ThreadState {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+        public ThreadState ThreadState
+        {
+            [System.Security.SecuritySafeCritical] // auto-generated
             get { return (ThreadState)GetThreadStateNative(); }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern int GetThreadStateNative();
@@ -997,72 +1089,78 @@ namespace System.Threading {
         ** Exceptions: ArgumentException if state is not a valid apartment state
         **             (ApartmentSTA or ApartmentMTA).
         =========================================================================*/
-        [Obsolete("The ApartmentState property has been deprecated.  Use GetApartmentState, SetApartmentState or TrySetApartmentState instead.", false)]
+        [Obsolete(
+            "The ApartmentState property has been deprecated.  Use GetApartmentState, SetApartmentState or TrySetApartmentState instead.",
+            false
+        )]
         public ApartmentState ApartmentState
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get
-            {
-                return (ApartmentState)GetApartmentStateNative();
-            }
-
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [HostProtection(Synchronization=true, SelfAffectingThreading=true)]
-            set
-            {
-                SetApartmentStateNative((int)value, true);
-            }
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get { return (ApartmentState)GetApartmentStateNative(); }
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [HostProtection(Synchronization = true, SelfAffectingThreading = true)]
+            set { SetApartmentStateNative((int)value, true); }
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public ApartmentState GetApartmentState()
         {
             return (ApartmentState)GetApartmentStateNative();
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [HostProtection(Synchronization=true, SelfAffectingThreading=true)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [HostProtection(Synchronization = true, SelfAffectingThreading = true)]
         public bool TrySetApartmentState(ApartmentState state)
         {
             return SetApartmentStateHelper(state, false);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [HostProtection(Synchronization=true, SelfAffectingThreading=true)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [HostProtection(Synchronization = true, SelfAffectingThreading = true)]
         public void SetApartmentState(ApartmentState state)
         {
             bool result = SetApartmentStateHelper(state, true);
             if (!result)
-                throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ApartmentStateSwitchFailed"));
+                throw new InvalidOperationException(
+                    Environment.GetResourceString("InvalidOperation_ApartmentStateSwitchFailed")
+                );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private bool SetApartmentStateHelper(ApartmentState state, bool fireMDAOnMismatch)
         {
-            ApartmentState retState = (ApartmentState)SetApartmentStateNative((int)state, fireMDAOnMismatch);
+            ApartmentState retState = (ApartmentState)SetApartmentStateNative(
+                (int)state,
+                fireMDAOnMismatch
+            );
 
             // Special case where we pass in Unknown and get back MTA.
             //  Once we CoUninitialize the thread, the OS will still
             //  report the thread as implicitly in the MTA if any
             //  other thread in the process is CoInitialized.
-            if ((state == System.Threading.ApartmentState.Unknown) && (retState == System.Threading.ApartmentState.MTA))
+            if (
+                (state == System.Threading.ApartmentState.Unknown)
+                && (retState == System.Threading.ApartmentState.MTA)
+            )
                 return true;
-            
+
             if (retState != state)
                 return false;
 
-            return true;            
+            return true;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern int GetApartmentStateNative();
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern int SetApartmentStateNative(int state, bool fireMDAOnMismatch);
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private extern void StartupSetApartmentStateInternal();
@@ -1075,7 +1173,7 @@ namespace System.Threading {
         ** threads.
         =========================================================================*/
 #if !MONO
-        [HostProtection(SharedState=true, ExternalThreading=true)]
+        [HostProtection(SharedState = true, ExternalThreading = true)]
 #endif
         public static LocalDataStoreSlot AllocateDataSlot()
         {
@@ -1088,7 +1186,7 @@ namespace System.Threading {
         ** anyone.
         =========================================================================*/
 #if !MONO
-        [HostProtection(SharedState=true, ExternalThreading=true)]
+        [HostProtection(SharedState = true, ExternalThreading = true)]
 #endif
         public static LocalDataStoreSlot AllocateNamedDataSlot(String name)
         {
@@ -1101,7 +1199,7 @@ namespace System.Threading {
         ** anyone.
         =========================================================================*/
 #if !MONO
-        [HostProtection(SharedState=true, ExternalThreading=true)]
+        [HostProtection(SharedState = true, ExternalThreading = true)]
 #endif
         public static LocalDataStoreSlot GetNamedDataSlot(String name)
         {
@@ -1114,7 +1212,7 @@ namespace System.Threading {
         ** anyone.
         =========================================================================*/
 #if !MONO
-        [HostProtection(SharedState=true, ExternalThreading=true)]
+        [HostProtection(SharedState = true, ExternalThreading = true)]
 #endif
         public static void FreeNamedDataSlot(String name)
         {
@@ -1125,7 +1223,7 @@ namespace System.Threading {
         ** Retrieves the value from the specified slot on the current thread, for that thread's current domain.
         =========================================================================*/
 #if !MONO
-        [HostProtection(SharedState=true, ExternalThreading=true)]
+        [HostProtection(SharedState = true, ExternalThreading = true)]
         [ResourceExposure(ResourceScope.AppDomain)]
 #endif
         public static Object GetData(LocalDataStoreSlot slot)
@@ -1145,7 +1243,7 @@ namespace System.Threading {
         ** Sets the data in the specified slot on the currently running thread, for that thread's current domain.
         =========================================================================*/
 #if !MONO
-        [HostProtection(SharedState=true, ExternalThreading=true)]
+        [HostProtection(SharedState = true, ExternalThreading = true)]
         [ResourceExposure(ResourceScope.AppDomain)]
 #endif
         public static void SetData(LocalDataStoreSlot slot, Object data)
@@ -1153,7 +1251,8 @@ namespace System.Threading {
             LocalDataStoreHolder dls = s_LocalDataStore;
 
             // Create new DLS if one hasn't been created for this domain for this thread
-            if (dls == null) {
+            if (dls == null)
+            {
                 dls = LocalDataStoreManager.CreateLocalDataStore();
                 s_LocalDataStore = dls;
             }
@@ -1168,64 +1267,74 @@ namespace System.Threading {
         // In the desktop runtime, we allow a thread's cultures to travel with the thread
         // across AppDomain boundaries. Furthermore we update the native thread with the
         // culture of the managed thread. Because of security concerns and potential SxS
-        // effects, in Silverlight we are making the changes listed below. 
-        // 
+        // effects, in Silverlight we are making the changes listed below.
+        //
         // Silverlight Changes:
-        // - thread instance member cultures (CurrentCulture and CurrentUICulture) 
+        // - thread instance member cultures (CurrentCulture and CurrentUICulture)
         //   confined within AppDomains
         // - changes to these properties don't affect the underlying native thread
         //
         // Ifdef:
         // FEATURE_LEAK_CULTURE_INFO      : CultureInfos can leak across AppDomains, not
         //                                  enabled in Silverlight
-        // 
+        //
         // Implementation notes:
-        // In Silverlight, culture members thread static (per Thread, per AppDomain). 
+        // In Silverlight, culture members thread static (per Thread, per AppDomain).
         //
         // Quirks:
         // An interesting side-effect of isolating cultures within an AppDomain is that we
-        // now need to special case resource lookup for mscorlib, which transitions to the 
+        // now need to special case resource lookup for mscorlib, which transitions to the
         // default domain to lookup resources. See Environment.cs for more details.
-        // 
+        //
 #if FEATURE_LEAK_CULTURE_INFO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern private bool nativeGetSafeCulture(Thread t, int appDomainId, bool isUI, ref CultureInfo safeCulture);
+        private static extern bool nativeGetSafeCulture(
+            Thread t,
+            int appDomainId,
+            bool isUI,
+            ref CultureInfo safeCulture
+        );
 #endif // FEATURE_LEAK_CULTURE_INFO
 
-        // As the culture can be customized object then we cannot hold any 
-        // reference to it before we check if it is safe because the app domain 
-        // owning this customized culture may get unloaded while executing this 
-        // code. To achieve that we have to do the check using nativeGetSafeCulture 
-        // as the thread cannot get interrupted during the FCALL. 
-        // If the culture is safe (not customized or created in current app domain) 
-        // then the FCALL will return a reference to that culture otherwise the 
+        // As the culture can be customized object then we cannot hold any
+        // reference to it before we check if it is safe because the app domain
+        // owning this customized culture may get unloaded while executing this
+        // code. To achieve that we have to do the check using nativeGetSafeCulture
+        // as the thread cannot get interrupted during the FCALL.
+        // If the culture is safe (not customized or created in current app domain)
+        // then the FCALL will return a reference to that culture otherwise the
         // FCALL will return failure. In case of failure we'll return the default culture.
         // If the app domain owning a customized culture that is set to teh thread and this
         // app domain get unloaded there is a code to clean up the culture from the thread
         // using the code in AppDomain::ReleaseDomainStores.
 
-        public CultureInfo CurrentUICulture {
-            get {
+        public CultureInfo CurrentUICulture
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<CultureInfo>() != null);
 #if FEATURE_APPX
-                if(AppDomain.IsAppXModel()) {
-                    return CultureInfo.GetCultureInfoForUserPreferredLanguageInAppX() ?? GetCurrentUICultureNoAppX();
-                } 
-                else 
+                if (AppDomain.IsAppXModel())
+                {
+                    return CultureInfo.GetCultureInfoForUserPreferredLanguageInAppX()
+                        ?? GetCurrentUICultureNoAppX();
+                }
+                else
 #endif
                 {
                     return GetCurrentUICultureNoAppX();
                 }
             }
-
 #if !MONO
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [HostProtection(ExternalThreading=true)]
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [HostProtection(ExternalThreading = true)]
 #endif
-            set {
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
                 Contract.EndContractBlock();
@@ -1234,13 +1343,18 @@ namespace System.Threading {
                 //don't even let them set it on the thread.
                 CultureInfo.VerifyCultureName(value, true);
 
-                // If you add more pre-conditions to this method, check to see if you also need to 
+                // If you add more pre-conditions to this method, check to see if you also need to
                 // add them to CultureInfo.DefaultThreadCurrentUICulture.set.
 
 #if FEATURE_LEAK_CULTURE_INFO
                 if (nativeSetThreadUILocale(value.SortName) == false)
                 {
-                    throw new ArgumentException(Environment.GetResourceString("Argument_InvalidResourceCultureName", value.Name));
+                    throw new ArgumentException(
+                        Environment.GetResourceString(
+                            "Argument_InvalidResourceCultureName",
+                            value.Name
+                        )
+                    );
                 }
                 value.StartCrossDomainTracking();
 #else
@@ -1252,10 +1366,10 @@ namespace System.Threading {
                 if (CompatibilitySwitches.IsAppEarlierThanWindowsPhone8)
                 {
                     //
-                    // NetCF had a bug where Thread.Current{UI}Culture would set the culture for every thread in the process.  
+                    // NetCF had a bug where Thread.Current{UI}Culture would set the culture for every thread in the process.
                     // This was because they stored the value in a regular static field (NetCF has no support for ThreadStatic fields).
-                    // Some apps depend on the broken behavior. We will emulate this behavior by redirecting setters to 
-                    // DefaultThreadCurrentUICulture. (Note that this property did not existed in NetCF and so it is fine to piggy back 
+                    // Some apps depend on the broken behavior. We will emulate this behavior by redirecting setters to
+                    // DefaultThreadCurrentUICulture. (Note that this property did not existed in NetCF and so it is fine to piggy back
                     // on it for the quirk.)
                     //
                     CultureInfo.SetCurrentUICultureQuirk(value);
@@ -1269,7 +1383,11 @@ namespace System.Threading {
                 {
                     if (s_asyncLocalCurrentUICulture == null)
                     {
-                        Interlocked.CompareExchange(ref s_asyncLocalCurrentUICulture, new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentUICulture), null);
+                        Interlocked.CompareExchange(
+                            ref s_asyncLocalCurrentUICulture,
+                            new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentUICulture),
+                            null
+                        );
                     }
 
                     // this one will set m_CurrentUICulture too
@@ -1285,26 +1403,32 @@ namespace System.Threading {
         }
 
 #if FEATURE_LEAK_CULTURE_INFO
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #endif
-        internal CultureInfo GetCurrentUICultureNoAppX() {
-
+        internal CultureInfo GetCurrentUICultureNoAppX()
+        {
             Contract.Ensures(Contract.Result<CultureInfo>() != null);
 
-            // Fetch a local copy of m_CurrentUICulture to 
+            // Fetch a local copy of m_CurrentUICulture to
             // avoid ----s that malicious user can introduce
-            if (m_CurrentUICulture == null) {
+            if (m_CurrentUICulture == null)
+            {
                 CultureInfo appDomainDefaultUICulture = CultureInfo.DefaultThreadCurrentUICulture;
-                return (appDomainDefaultUICulture != null ? appDomainDefaultUICulture : CultureInfo.UserDefaultUICulture);
+                return (
+                    appDomainDefaultUICulture != null
+                        ? appDomainDefaultUICulture
+                        : CultureInfo.UserDefaultUICulture
+                );
             }
 
 #if FEATURE_LEAK_CULTURE_INFO
             CultureInfo culture = null;
 
-            if (!nativeGetSafeCulture(this, GetDomainID(), true, ref culture) || culture == null) {
+            if (!nativeGetSafeCulture(this, GetDomainID(), true, ref culture) || culture == null)
+            {
                 return CultureInfo.UserDefaultUICulture;
             }
-                
+
             return culture;
 #else
             return m_CurrentUICulture;
@@ -1313,50 +1437,55 @@ namespace System.Threading {
 
         // This returns the exposed context for a given context ID.
 #if FEATURE_LEAK_CULTURE_INFO
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        static extern private bool nativeSetThreadUILocale(String locale);
+        private static extern bool nativeSetThreadUILocale(String locale);
 #endif
 
-        // As the culture can be customized object then we cannot hold any 
-        // reference to it before we check if it is safe because the app domain 
-        // owning this customized culture may get unloaded while executing this 
-        // code. To achieve that we have to do the check using nativeGetSafeCulture 
-        // as the thread cannot get interrupted during the FCALL. 
-        // If the culture is safe (not customized or created in current app domain) 
-        // then the FCALL will return a reference to that culture otherwise the 
+        // As the culture can be customized object then we cannot hold any
+        // reference to it before we check if it is safe because the app domain
+        // owning this customized culture may get unloaded while executing this
+        // code. To achieve that we have to do the check using nativeGetSafeCulture
+        // as the thread cannot get interrupted during the FCALL.
+        // If the culture is safe (not customized or created in current app domain)
+        // then the FCALL will return a reference to that culture otherwise the
         // FCALL will return failure. In case of failure we'll return the default culture.
         // If the app domain owning a customized culture that is set to teh thread and this
         // app domain get unloaded there is a code to clean up the culture from the thread
         // using the code in AppDomain::ReleaseDomainStores.
 
-        public CultureInfo CurrentCulture {
-            get {
+        public CultureInfo CurrentCulture
+        {
+            get
+            {
                 Contract.Ensures(Contract.Result<CultureInfo>() != null);
 
 #if FEATURE_APPX
-                if(AppDomain.IsAppXModel()) {
-                    return CultureInfo.GetCultureInfoForUserPreferredLanguageInAppX() ?? GetCurrentCultureNoAppX();
-                } 
-                else 
+                if (AppDomain.IsAppXModel())
+                {
+                    return CultureInfo.GetCultureInfoForUserPreferredLanguageInAppX()
+                        ?? GetCurrentCultureNoAppX();
+                }
+                else
 #endif
                 {
                     return GetCurrentCultureNoAppX();
                 }
             }
-
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
 #if FEATURE_LEAK_CULTURE_INFO
             [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
 #endif
-            set {
-                if (null==value) {
+            set
+            {
+                if (null == value)
+                {
                     throw new ArgumentNullException("value");
                 }
                 Contract.EndContractBlock();
 
-                // If you add more pre-conditions to this method, check to see if you also need to 
+                // If you add more pre-conditions to this method, check to see if you also need to
                 // add them to CultureInfo.DefaultThreadCurrentCulture.set.
 
 #if FEATURE_LEAK_CULTURE_INFO
@@ -1384,7 +1513,11 @@ namespace System.Threading {
                 {
                     if (s_asyncLocalCurrentCulture == null)
                     {
-                        Interlocked.CompareExchange(ref s_asyncLocalCurrentCulture, new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentCulture), null);
+                        Interlocked.CompareExchange(
+                            ref s_asyncLocalCurrentCulture,
+                            new AsyncLocal<CultureInfo>(AsyncLocalSetCurrentCulture),
+                            null
+                        );
                     }
                     // this one will set m_CurrentCulture too
                     s_asyncLocalCurrentCulture.Value = value;
@@ -1399,31 +1532,36 @@ namespace System.Threading {
         }
 
 #if FEATURE_LEAK_CULTURE_INFO
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
 #endif
-        private CultureInfo GetCurrentCultureNoAppX() {
-
+        private CultureInfo GetCurrentCultureNoAppX()
+        {
             Contract.Ensures(Contract.Result<CultureInfo>() != null);
 
-            // Fetch a local copy of m_CurrentCulture to 
+            // Fetch a local copy of m_CurrentCulture to
             // avoid ----s that malicious user can introduce
-            if (m_CurrentCulture == null) {
-                CultureInfo appDomainDefaultCulture =  CultureInfo.DefaultThreadCurrentCulture;
-                return (appDomainDefaultCulture != null ? appDomainDefaultCulture : CultureInfo.UserDefaultCulture);
+            if (m_CurrentCulture == null)
+            {
+                CultureInfo appDomainDefaultCulture = CultureInfo.DefaultThreadCurrentCulture;
+                return (
+                    appDomainDefaultCulture != null
+                        ? appDomainDefaultCulture
+                        : CultureInfo.UserDefaultCulture
+                );
             }
 
 #if FEATURE_LEAK_CULTURE_INFO
             CultureInfo culture = null;
-              
-            if (!nativeGetSafeCulture(this, GetDomainID(), false, ref culture) || culture == null) {
+
+            if (!nativeGetSafeCulture(this, GetDomainID(), false, ref culture) || culture == null)
+            {
                 return CultureInfo.UserDefaultCulture;
             }
-                
+
             return culture;
 #else
             return m_CurrentCulture;
 #endif
-
         }
 
 #if! FEATURE_LEAK_CULTURE_INFO
@@ -1431,11 +1569,11 @@ namespace System.Threading {
 #if MONO
         static void nativeInitCultureAccessors()
         {
-            m_CurrentCulture = CultureInfo.ConstructCurrentCulture ();
-            m_CurrentUICulture = CultureInfo.ConstructCurrentUICulture ();
+            m_CurrentCulture = CultureInfo.ConstructCurrentCulture();
+            m_CurrentUICulture = CultureInfo.ConstructCurrentUICulture();
         }
 #else
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
@@ -1454,14 +1592,11 @@ namespace System.Threading {
 #if FEATURE_REMOTING
         public static Context CurrentContext
         {
-            [System.Security.SecurityCritical]  // auto-generated_required
-            get
-            {
-                return CurrentThread.GetCurrentContextInternal();
-            }
+            [System.Security.SecurityCritical] // auto-generated_required
+            get { return CurrentThread.GetCurrentContextInternal(); }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal Context GetCurrentContextInternal()
         {
             if (m_Context == null)
@@ -1470,20 +1605,18 @@ namespace System.Threading {
             }
             return m_Context;
         }
-#endif        
-
+#endif
 
 #if FEATURE_IMPERSONATION
         // Get and set thread's current principal (for role based security).
         public static IPrincipal CurrentPrincipal
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             get
             {
                 lock (CurrentThread)
                 {
-                    IPrincipal principal = (IPrincipal)
-                        CallContext.Principal;
+                    IPrincipal principal = (IPrincipal)CallContext.Principal;
                     if (principal == null)
                     {
                         principal = GetDomain().GetThreadPrincipal();
@@ -1492,45 +1625,57 @@ namespace System.Threading {
                     return principal;
                 }
             }
-
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [SecurityPermissionAttribute(SecurityAction.Demand, Flags=SecurityPermissionFlag.ControlPrincipal)]
-            set
-            {
-                CallContext.Principal = value;
-            }
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [SecurityPermissionAttribute(
+                SecurityAction.Demand,
+                Flags = SecurityPermissionFlag.ControlPrincipal
+            )]
+            set { CallContext.Principal = value; }
         }
 
         // Private routine called from unmanaged code to set an initial
         // principal for a newly created thread.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void SetPrincipalInternal(IPrincipal principal)
         {
             GetMutableExecutionContext().LogicalCallContext.SecurityData.Principal = principal;
         }
 #endif // FEATURE_IMPERSONATION
 
-#if FEATURE_REMOTING   
+#if FEATURE_REMOTING
 
         // This returns the exposed context for a given context ID.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern Context GetContextInternal(IntPtr id);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern Object InternalCrossContextCallback(Context ctx, IntPtr ctxID, Int32 appDomainID, InternalCrossContextDelegate ftnToCall, Object[] args);
+        internal extern Object InternalCrossContextCallback(
+            Context ctx,
+            IntPtr ctxID,
+            Int32 appDomainID,
+            InternalCrossContextDelegate ftnToCall,
+            Object[] args
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal Object InternalCrossContextCallback(Context ctx, InternalCrossContextDelegate ftnToCall, Object[] args)
+        [System.Security.SecurityCritical] // auto-generated
+        internal Object InternalCrossContextCallback(
+            Context ctx,
+            InternalCrossContextDelegate ftnToCall,
+            Object[] args
+        )
         {
             return InternalCrossContextCallback(ctx, ctx.InternalContextID, 0, ftnToCall, args);
         }
 
         // CompleteCrossContextCallback is called by the EE after transitioning to the requested context
-        private static Object CompleteCrossContextCallback(InternalCrossContextDelegate ftnToCall, Object[] args)
+        private static Object CompleteCrossContextCallback(
+            InternalCrossContextDelegate ftnToCall,
+            Object[] args
+        )
         {
             return ftnToCall(args);
         }
@@ -1540,32 +1685,34 @@ namespace System.Threading {
         ** Returns the current domain in which current thread is running.
         ======================================================================*/
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern AppDomain GetDomainInternal();
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         private static extern AppDomain GetFastDomainInternal();
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public static AppDomain GetDomain()
         {
             Contract.Ensures(Contract.Result<AppDomain>() != null);
-
 
             AppDomain ad;
             ad = GetFastDomainInternal();
             if (ad == null)
                 ad = GetDomainInternal();
 
-#if FEATURE_REMOTING        
-            Contract.Assert(CurrentThread.m_Context == null || CurrentThread.m_Context.AppDomain == ad, "AppDomains on the managed & unmanaged threads should match");
+#if FEATURE_REMOTING
+            Contract.Assert(
+                CurrentThread.m_Context == null || CurrentThread.m_Context.AppDomain == ad,
+                "AppDomains on the managed & unmanaged threads should match"
+            );
 #endif
             return ad;
         }
-
 
         /*
          *  This returns a unique id to identify an appdomain.
@@ -1575,36 +1722,43 @@ namespace System.Threading {
             return GetDomain().GetId();
         }
 
-
         // Retrieves the name of the thread.
         //
-        public  String Name {
-            get {
-                return m_Name;
-
-            }
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            [HostProtection(ExternalThreading=true)]
-            set {
-                lock(this) {
+        public String Name
+        {
+            get { return m_Name; }
+            [System.Security.SecuritySafeCritical] // auto-generated
+            [HostProtection(ExternalThreading = true)]
+            set
+            {
+                lock (this)
+                {
                     if (m_Name != null)
-                        throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_WriteOnce"));
+                        throw new InvalidOperationException(
+                            Environment.GetResourceString("InvalidOperation_WriteOnce")
+                        );
                     m_Name = value;
 
-                    InformThreadNameChange(GetNativeHandle(), value, (value != null) ? value.Length : 0);
+                    InformThreadNameChange(
+                        GetNativeHandle(),
+                        value,
+                        (value != null) ? value.Length : 0
+                    );
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [DllImport(JitHelpers.QCall, CharSet = CharSet.Unicode)]
         [SuppressUnmanagedCodeSecurity]
         private static extern void InformThreadNameChange(ThreadHandle t, String name, int len);
 
-        internal Object AbortReason {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {
+        internal Object AbortReason
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
+            {
                 object result = null;
                 try
                 {
@@ -1612,19 +1766,24 @@ namespace System.Threading {
                 }
                 catch (Exception e)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_ExceptionStateCrossAppDomain"), e);
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_ExceptionStateCrossAppDomain"
+                        ),
+                        e
+                    );
                 }
                 return result;
             }
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             set { SetAbortReason(value); }
         }
 
         /*
          *  This marks the beginning of a critical code region.
          */
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [HostProtection(Synchronization=true, ExternalThreading=true)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [HostProtection(Synchronization = true, ExternalThreading = true)]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
@@ -1633,8 +1792,8 @@ namespace System.Threading {
         /*
          *  This marks the end of a critical code region.
          */
-        [System.Security.SecuritySafeCritical]  // auto-generated
-        [HostProtection(Synchronization=true, ExternalThreading=true)]
+        [System.Security.SecuritySafeCritical] // auto-generated
+        [HostProtection(Synchronization = true, ExternalThreading = true)]
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
@@ -1643,7 +1802,7 @@ namespace System.Threading {
         /*
          *  This marks the beginning of a code region that requires thread affinity.
          */
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
@@ -1652,7 +1811,7 @@ namespace System.Threading {
         /*
          *  This marks the end of a code region that requires thread affinity.
          */
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.MayFail)]
@@ -1871,7 +2030,7 @@ namespace System.Threading {
 #endif
 
 #if !MONO
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
 #endif
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -1880,11 +2039,15 @@ namespace System.Threading {
 #if !NETCORE
         private static LocalDataStoreMgr LocalDataStoreManager
         {
-            get 
+            get
             {
                 if (s_LocalDataStoreMgr == null)
                 {
-                    Interlocked.CompareExchange(ref s_LocalDataStoreMgr, new LocalDataStoreMgr(), null);    
+                    Interlocked.CompareExchange(
+                        ref s_LocalDataStoreMgr,
+                        new LocalDataStoreMgr(),
+                        null
+                    );
                 }
 
                 return s_LocalDataStoreMgr;
@@ -1903,12 +2066,27 @@ namespace System.Threading {
             throw new NotImplementedException();
         }
 
-        void _Thread.GetIDsOfNames([In] ref Guid riid, IntPtr rgszNames, uint cNames, uint lcid, IntPtr rgDispId)
+        void _Thread.GetIDsOfNames(
+            [In] ref Guid riid,
+            IntPtr rgszNames,
+            uint cNames,
+            uint lcid,
+            IntPtr rgDispId
+        )
         {
             throw new NotImplementedException();
         }
 
-        void _Thread.Invoke(uint dispIdMember, [In] ref Guid riid, uint lcid, short wFlags, IntPtr pDispParams, IntPtr pVarResult, IntPtr pExcepInfo, IntPtr puArgErr)
+        void _Thread.Invoke(
+            uint dispIdMember,
+            [In] ref Guid riid,
+            uint lcid,
+            short wFlags,
+            IntPtr pDispParams,
+            IntPtr pVarResult,
+            IntPtr pExcepInfo,
+            IntPtr puArgErr
+        )
         {
             throw new NotImplementedException();
         }
@@ -1918,27 +2096,26 @@ namespace System.Threading {
         // Helper function to set the AbortReason for a thread abort.
         //  Checks that they're not alredy set, and then atomically updates
         //  the reason info (object + ADID).
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern void SetAbortReason(Object o);
-    
+
         // Helper function to retrieve the AbortReason from a thread
         //  abort.  Will perform cross-AppDomain marshalling if the object
         //  lives in a different AppDomain from the requester.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern Object GetAbortReason();
-    
+
         // Helper function to clear the AbortReason.  Takes care of
         //  AppDomain related cleanup if required.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern void ClearAbortReason();
 #endif
-
     } // End of class Thread
 
     // declaring a local var of this enum type and passing it by ref into a function that needs to do a
@@ -1950,7 +2127,6 @@ namespace System.Threading {
         LookForMe = 0,
         LookForMyCaller = 1,
         LookForMyCallersCaller = 2,
-        LookForThread = 3
+        LookForThread = 3,
     }
-
 }

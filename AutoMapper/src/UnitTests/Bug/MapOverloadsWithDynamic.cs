@@ -19,7 +19,7 @@ public class MapOverloadsWithDynamic : AutoMapperSpecBase
         public SubSetting SubSettings { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => {});
+    protected override MapperConfiguration CreateConfiguration() => new(cfg => { });
 
     protected override void Because_of()
     {
@@ -31,7 +31,7 @@ public class MapOverloadsWithDynamic : AutoMapperSpecBase
         baseSettings.SubSettings.SubTimeout = 11;
         baseSettings.SubSettings.SubColour = "Green";
 
-        // Create another object we will map onto the one above. 
+        // Create another object we will map onto the one above.
         // Notice that we do not set a Colour or SubColour property.
         dynamic overrideSettings = new ExpandoObject();
         overrideSettings.Timeout = 2;

@@ -4,14 +4,14 @@
 
 namespace System.ServiceModel.Activities.Presentation
 {
-    using System.Runtime;
+    using System.Activities;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Validation;
+    using System.Activities.Statements;
     using System.Activities.Validation;
     using System.Collections.Generic;
-    using System.Activities;
-    using System.Activities.Statements;
     using System.Globalization;
+    using System.Runtime;
 
     class ReceiveReplyValidationFeature : DesignTimeValidationFeature
     {
@@ -37,7 +37,8 @@ namespace System.ServiceModel.Activities.Presentation
         Constraint UnrootedRequestRule()
         {
             DelegateInArgument<ReceiveReply> receiveReply = new DelegateInArgument<ReceiveReply>();
-            DelegateInArgument<ValidationContext> context = new DelegateInArgument<ValidationContext>();
+            DelegateInArgument<ValidationContext> context =
+                new DelegateInArgument<ValidationContext>();
             DelegateInArgument<Activity> activityInTree = new DelegateInArgument<Activity>();
             Variable<bool> requestInTree = new Variable<bool> { Default = false };
 
@@ -54,10 +55,12 @@ namespace System.ServiceModel.Activities.Presentation
                         {
                             new If
                             {
-                                Condition = new InArgument<bool>(ctx => receiveReply.Get(ctx).Request != null),
+                                Condition = new InArgument<bool>(ctx =>
+                                    receiveReply.Get(ctx).Request != null
+                                ),
                                 Then = new Sequence
                                 {
-                                    Activities = 
+                                    Activities =
                                     {
                                         new ForEach<Activity>
                                         {
@@ -70,27 +73,43 @@ namespace System.ServiceModel.Activities.Presentation
                                                 Argument = activityInTree,
                                                 Handler = new If
                                                 {
-                                                    Condition = new InArgument<bool>(ctx => activityInTree.Get(ctx) == receiveReply.Get(ctx).Request),
+                                                    Condition = new InArgument<bool>(ctx =>
+                                                        activityInTree.Get(ctx)
+                                                        == receiveReply.Get(ctx).Request
+                                                    ),
                                                     Then = new Assign<bool>
                                                     {
                                                         To = requestInTree,
                                                         Value = true,
-                                                    }                                                    
-                                                }
-                                            }
-                                        },                            
+                                                    },
+                                                },
+                                            },
+                                        },
                                         new AssertValidation
-                                        {                                
-                                            Assertion = new InArgument<bool>(ctx => requestInTree.Get(ctx)),
+                                        {
+                                            Assertion = new InArgument<bool>(ctx =>
+                                                requestInTree.Get(ctx)
+                                            ),
                                             IsWarning = false,
-                                            Message = new InArgument<string>(ctx => string.Format(CultureInfo.CurrentCulture, System.Activities.Core.Presentation.SR.UnrootedRequestInReceiveReply, receiveReply.Get(ctx).DisplayName))
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                            Message = new InArgument<string>(ctx =>
+                                                string.Format(
+                                                    CultureInfo.CurrentCulture,
+                                                    System
+                                                        .Activities
+                                                        .Core
+                                                        .Presentation
+                                                        .SR
+                                                        .UnrootedRequestInReceiveReply,
+                                                    receiveReply.Get(ctx).DisplayName
+                                                )
+                                            ),
+                                        },
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             };
         }
     }

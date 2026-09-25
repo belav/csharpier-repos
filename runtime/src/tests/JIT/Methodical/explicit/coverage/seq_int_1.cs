@@ -32,18 +32,31 @@ internal struct AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static int call_target(int arg) { return arg; }
-    public static int call_target_ref(ref int arg) { return arg; }
+    public static int call_target(int arg)
+    {
+        return arg;
+    }
+
+    public static int call_target_ref(ref int arg)
+    {
+        return arg;
+    }
 
     public void verify()
     {
-        if (tmp1 != 106) throw new Exception("tmp1 corrupted");
-        if (tmp2 != 107) throw new Exception("tmp2 corrupted");
-        if (tmp3 != 108) throw new Exception("tmp3 corrupted");
-        if (tmp4 != 109) throw new Exception("tmp4 corrupted");
-        if (tmp5 != 110) throw new Exception("tmp5 corrupted");
+        if (tmp1 != 106)
+            throw new Exception("tmp1 corrupted");
+        if (tmp2 != 107)
+            throw new Exception("tmp2 corrupted");
+        if (tmp3 != 108)
+            throw new Exception("tmp3 corrupted");
+        if (tmp4 != 109)
+            throw new Exception("tmp4 corrupted");
+        if (tmp5 != 110)
+            throw new Exception("tmp5 corrupted");
     }
 
     public static void verify_all()
@@ -73,7 +86,8 @@ internal struct AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }
 
 public static class Test_seq_int_1

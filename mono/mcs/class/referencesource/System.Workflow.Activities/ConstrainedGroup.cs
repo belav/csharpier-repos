@@ -3,23 +3,23 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.Diagnostics;
-    using System.Xml;
     using System.CodeDom;
-    using System.Drawing;
     using System.Collections;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
-    using System.Windows.Forms.Design;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.Runtime.DebugEngine;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Runtime.DebugEngine;
+    using System.Xml;
 
     #endregion
 
@@ -30,25 +30,38 @@ namespace System.Workflow.Activities
     [ActivityValidator(typeof(ConditionedActivityGroupValidator))]
     [SRCategory(SR.Standard)]
     [WorkflowDebuggerSteppingAttribute(WorkflowDebuggerSteppingOption.Concurrent)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class ConditionedActivityGroup : CompositeActivity, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class ConditionedActivityGroup
+        : CompositeActivity,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
         //Attached properties provided to the children
-        public static readonly DependencyProperty WhenConditionProperty = DependencyProperty.RegisterAttached("WhenCondition", typeof(ActivityCondition), typeof(ConditionedActivityGroup), new PropertyMetadata(DependencyPropertyOptions.Metadata), typeof(WhenUnlessConditionDynamicPropertyValidator));
+        public static readonly DependencyProperty WhenConditionProperty =
+            DependencyProperty.RegisterAttached(
+                "WhenCondition",
+                typeof(ActivityCondition),
+                typeof(ConditionedActivityGroup),
+                new PropertyMetadata(DependencyPropertyOptions.Metadata),
+                typeof(WhenUnlessConditionDynamicPropertyValidator)
+            );
 
         // metadata properties go here
-        public static readonly DependencyProperty UntilConditionProperty = DependencyProperty.Register("UntilCondition", typeof(ActivityCondition), typeof(ConditionedActivityGroup), new PropertyMetadata(DependencyPropertyOptions.Metadata));
+        public static readonly DependencyProperty UntilConditionProperty =
+            DependencyProperty.Register(
+                "UntilCondition",
+                typeof(ActivityCondition),
+                typeof(ConditionedActivityGroup),
+                new PropertyMetadata(DependencyPropertyOptions.Metadata)
+            );
 
         #region Constructors
 
-        public ConditionedActivityGroup()
-        {
-        }
+        public ConditionedActivityGroup() { }
 
         public ConditionedActivityGroup(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
@@ -58,7 +71,13 @@ namespace System.Workflow.Activities
             if (dependencyObject == null)
                 throw new ArgumentNullException("dependencyObject");
             if (!(dependencyObject is DependencyObject))
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(DependencyObject).FullName), "dependencyObject");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(DependencyObject).FullName
+                    ),
+                    "dependencyObject"
+                );
 
             return (dependencyObject as DependencyObject).GetValue(WhenConditionProperty);
         }
@@ -68,7 +87,13 @@ namespace System.Workflow.Activities
             if (dependencyObject == null)
                 throw new ArgumentNullException("dependencyObject");
             if (!(dependencyObject is DependencyObject))
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(DependencyObject).FullName), "dependencyObject");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(DependencyObject).FullName
+                    ),
+                    "dependencyObject"
+                );
 
             (dependencyObject as DependencyObject).SetValue(WhenConditionProperty, value);
         }
@@ -78,14 +103,8 @@ namespace System.Workflow.Activities
         [DefaultValue(null)]
         public ActivityCondition UntilCondition
         {
-            get
-            {
-                return base.GetValue(UntilConditionProperty) as ActivityCondition;
-            }
-            set
-            {
-                base.SetValue(UntilConditionProperty, value);
-            }
+            get { return base.GetValue(UntilConditionProperty) as ActivityCondition; }
+            set { base.SetValue(UntilConditionProperty, value); }
         }
 
         [Browsable(false)]
@@ -96,7 +115,14 @@ namespace System.Workflow.Activities
                 throw new ArgumentNullException("childActivity");
 
             if (!this.EnabledActivities.Contains(childActivity))
-                throw new ArgumentException(SR.GetString(SR.Error_CAGChildNotFound, childActivity.QualifiedName, this.QualifiedName), "childActivity");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_CAGChildNotFound,
+                        childActivity.QualifiedName,
+                        this.QualifiedName
+                    ),
+                    "childActivity"
+                );
             else
             {
                 Activity[] dynamicChildActivity = this.GetDynamicActivities(childActivity);
@@ -127,7 +153,10 @@ namespace System.Workflow.Activities
             if (childActivity != null)
                 return GetDynamicActivity(childActivity);
 
-            throw new ArgumentException(SR.GetString(SR.Error_CAGChildNotFound, childActivityName, this.QualifiedName), "childActivityName");
+            throw new ArgumentException(
+                SR.GetString(SR.Error_CAGChildNotFound, childActivityName, this.QualifiedName),
+                "childActivityName"
+            );
         }
 
         public int GetChildActivityExecutedCount(Activity child)
@@ -139,12 +168,21 @@ namespace System.Workflow.Activities
 
             if (conditionedInfo == null)
             {
-                throw new InvalidOperationException(SR.GetString(SR.Error_CAGNotExecuting, this.QualifiedName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_CAGNotExecuting, this.QualifiedName)
+                );
             }
 
             if (!conditionedInfo.ChildrenStats.ContainsKey(child.QualifiedName))
             {
-                throw new ArgumentException(SR.GetString(SR.Error_CAGChildNotFound, child.QualifiedName, this.QualifiedName), "child");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_CAGChildNotFound,
+                        child.QualifiedName,
+                        this.QualifiedName
+                    ),
+                    "child"
+                );
             }
             else
             {
@@ -154,27 +192,51 @@ namespace System.Workflow.Activities
 
         private sealed class WhenUnlessConditionDynamicPropertyValidator : Validator
         {
-            public override ValidationErrorCollection Validate(ValidationManager manager, object obj)
+            public override ValidationErrorCollection Validate(
+                ValidationManager manager,
+                object obj
+            )
             {
-                ValidationErrorCollection validationErrors = ValidationHelpers.ValidateObject(manager, obj);
+                ValidationErrorCollection validationErrors = ValidationHelpers.ValidateObject(
+                    manager,
+                    obj
+                );
 
                 if (validationErrors.Count == 0)
                 {
                     Activity activity = manager.Context[typeof(Activity)] as Activity;
                     if (activity == null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ContextStackItemMissing, typeof(Activity).Name)
+                        );
 
                     CodeCondition codeCondition = obj as CodeCondition;
-                    if (codeCondition != null && codeCondition.IsBindingSet(CodeCondition.ConditionEvent))
+                    if (
+                        codeCondition != null
+                        && codeCondition.IsBindingSet(CodeCondition.ConditionEvent)
+                    )
                     {
-                        ActivityBind activityBind = codeCondition.GetBinding(CodeCondition.ConditionEvent) as ActivityBind;
+                        ActivityBind activityBind =
+                            codeCondition.GetBinding(CodeCondition.ConditionEvent) as ActivityBind;
                         if (activityBind != null)
                         {
-                            Activity contextActivity = Helpers.ParseActivityForBind(activity, activityBind.Name);
-                            if (contextActivity != null && Helpers.IsChildActivity(activity.Parent, contextActivity))
+                            Activity contextActivity = Helpers.ParseActivityForBind(
+                                activity,
+                                activityBind.Name
+                            );
+                            if (
+                                contextActivity != null
+                                && Helpers.IsChildActivity(activity.Parent, contextActivity)
+                            )
                             {
                                 string propertyName = GetFullPropertyName(manager);
-                                ValidationError error = new ValidationError(SR.GetString(SR.Error_NestedConstrainedGroupConditions, propertyName), ErrorNumbers.Error_NestedConstrainedGroupConditions);
+                                ValidationError error = new ValidationError(
+                                    SR.GetString(
+                                        SR.Error_NestedConstrainedGroupConditions,
+                                        propertyName
+                                    ),
+                                    ErrorNumbers.Error_NestedConstrainedGroupConditions
+                                );
                                 error.PropertyName = propertyName;
                                 validationErrors.Add(error);
                             }
@@ -187,18 +249,16 @@ namespace System.Workflow.Activities
         }
 
         #region Runtime Internal Dependency Property
-        static DependencyProperty CAGStateProperty = DependencyProperty.Register("CAGState", typeof(ConditionedActivityGroupStateInfo), typeof(ConditionedActivityGroup));
+        static DependencyProperty CAGStateProperty = DependencyProperty.Register(
+            "CAGState",
+            typeof(ConditionedActivityGroupStateInfo),
+            typeof(ConditionedActivityGroup)
+        );
 
         internal ConditionedActivityGroupStateInfo CAGState
         {
-            get
-            {
-                return (ConditionedActivityGroupStateInfo)base.GetValue(CAGStateProperty);
-            }
-            set
-            {
-                base.SetValue(CAGStateProperty, value);
-            }
+            get { return (ConditionedActivityGroupStateInfo)base.GetValue(CAGStateProperty); }
+            set { base.SetValue(CAGStateProperty, value); }
         }
         #endregion
 
@@ -208,7 +268,10 @@ namespace System.Workflow.Activities
         }
 
         #region Workflow Changes Overrides
-        protected override void OnActivityChangeAdd(ActivityExecutionContext executionContext, Activity addedActivity)
+        protected override void OnActivityChangeAdd(
+            ActivityExecutionContext executionContext,
+            Activity addedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -218,18 +281,28 @@ namespace System.Workflow.Activities
             if (!addedActivity.Enabled)
                 return;
 
-            ConditionedActivityGroup currentActivity = executionContext.Activity as ConditionedActivityGroup;
+            ConditionedActivityGroup currentActivity =
+                executionContext.Activity as ConditionedActivityGroup;
             Debug.Assert(currentActivity != null);
 
             ConditionedActivityGroupStateInfo state = currentActivity.CAGState;
-            if (currentActivity.ExecutionStatus == ActivityExecutionStatus.Executing && state != null)
+            if (
+                currentActivity.ExecutionStatus == ActivityExecutionStatus.Executing
+                && state != null
+            )
             {
-                Debug.Assert(currentActivity == addedActivity.Parent, "Attempting to add wrong activity to CAG");
+                Debug.Assert(
+                    currentActivity == addedActivity.Parent,
+                    "Attempting to add wrong activity to CAG"
+                );
                 state.ChildrenStats[addedActivity.QualifiedName] = new CAGChildStats();
             }
         }
 
-        protected override void OnActivityChangeRemove(ActivityExecutionContext executionContext, Activity removedActivity)
+        protected override void OnActivityChangeRemove(
+            ActivityExecutionContext executionContext,
+            Activity removedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -251,13 +324,16 @@ namespace System.Workflow.Activities
             }
         }
 
-        protected override void OnWorkflowChangesCompleted(ActivityExecutionContext executionContext)
+        protected override void OnWorkflowChangesCompleted(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
             // find out the status of the cag
-            ConditionedActivityGroup currentActivity = executionContext.Activity as ConditionedActivityGroup;
+            ConditionedActivityGroup currentActivity =
+                executionContext.Activity as ConditionedActivityGroup;
 
             // if CAG is executing... fire the conditions on the net result
             if (currentActivity.ExecutionStatus == ActivityExecutionStatus.Executing)
@@ -293,7 +369,9 @@ namespace System.Workflow.Activities
         }
 #endif
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -321,7 +399,10 @@ namespace System.Workflow.Activities
         /// <param name="cag"></param>
         /// <param name="context"></param>
         /// <returns>True if CAG is complete (UNTIL == true, or no UNTIL and no children execute), false otherwise</returns>
-        internal bool EvaluateConditions(ConditionedActivityGroup cag, ActivityExecutionContext context)
+        internal bool EvaluateConditions(
+            ConditionedActivityGroup cag,
+            ActivityExecutionContext context
+        )
         {
             Debug.Assert(cag != null);
             Debug.Assert(context != null);
@@ -379,7 +460,9 @@ namespace System.Workflow.Activities
 #if	LOG
                 Log("CAG quiet, but UNTIL condition is false, so error time");
 #endif
-                throw new InvalidOperationException(SR.GetString(SR.Error_CAGQuiet, cag.QualifiedName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_CAGQuiet, cag.QualifiedName)
+                );
             }
 #if	LOG
             Log("CAG quiet");
@@ -395,17 +478,27 @@ namespace System.Workflow.Activities
         /// <param name="child"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        private bool EvaluateChildConditions(ConditionedActivityGroup cag, Activity child, ActivityExecutionContext context)
+        private bool EvaluateChildConditions(
+            ConditionedActivityGroup cag,
+            Activity child,
+            ActivityExecutionContext context
+        )
         {
 #if	LOG
-            Log("EvaluateChildConditions on activity " + child.QualifiedName + " inside " + cag.QualifiedName);
+            Log(
+                "EvaluateChildConditions on activity "
+                    + child.QualifiedName
+                    + " inside "
+                    + cag.QualifiedName
+            );
 #endif
             // determine the result of the when condition (evaluate once if not specified)
             ConditionedActivityGroupStateInfo state = cag.CAGState;
             try
             {
                 state.Testing = true;
-                ActivityCondition whenCondition = (ActivityCondition)child.GetValue(ConditionedActivityGroup.WhenConditionProperty);
+                ActivityCondition whenCondition = (ActivityCondition)
+                    child.GetValue(ConditionedActivityGroup.WhenConditionProperty);
                 return (whenCondition != null)
                     ? whenCondition.Evaluate(child, context)
                     : (state.ChildrenStats[child.QualifiedName].ExecutedCount == 0);
@@ -421,7 +514,10 @@ namespace System.Workflow.Activities
         /// </summary>
         /// <param name="cag"></param>
         /// <param name="context"></param>
-        internal void TriggerChildren(ConditionedActivityGroup cag, ActivityExecutionContext context)
+        internal void TriggerChildren(
+            ConditionedActivityGroup cag,
+            ActivityExecutionContext context
+        )
         {
             Debug.Assert(cag != null);
             Debug.Assert(context != null);
@@ -448,7 +544,11 @@ namespace System.Workflow.Activities
 #endif
         }
 
-        private void ExecuteChild(ConditionedActivityGroup cag, Activity childActivity, ActivityExecutionContext context)
+        private void ExecuteChild(
+            ConditionedActivityGroup cag,
+            Activity childActivity,
+            ActivityExecutionContext context
+        )
         {
             Debug.Assert(cag != null);
             Debug.Assert(childActivity != null);
@@ -457,7 +557,11 @@ namespace System.Workflow.Activities
 #if	LOG
             Log("ExecuteChild " + childActivity.QualifiedName + " inside " + cag.QualifiedName);
 #endif
-            ActivityExecutionContext childContext = GetChildExecutionContext(context, childActivity, true);
+            ActivityExecutionContext childContext = GetChildExecutionContext(
+                context,
+                childActivity,
+                true
+            );
             cag.CAGState.ChildrenStats[childActivity.QualifiedName].State = CAGChildState.Excuting;
 
             // subscribe for child closure
@@ -479,13 +583,21 @@ namespace System.Workflow.Activities
             if (this.CAGState == null)
                 return ActivityExecutionStatus.Closed;
 
-            return Cleanup(this, executionContext) ? ActivityExecutionStatus.Closed : ActivityExecutionStatus.Canceling;
+            return Cleanup(this, executionContext)
+                ? ActivityExecutionStatus.Closed
+                : ActivityExecutionStatus.Canceling;
         }
 
         #region IActivityEventListener<ActivityExecutionStatusChangedEventArgs> Members
-        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(object sender, ActivityExecutionStatusChangedEventArgs e)
+        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+            object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
-            this.HandleEvent(sender as ActivityExecutionContext, new SubscriptionEventArg(e, EventType.StatusChange));
+            this.HandleEvent(
+                sender as ActivityExecutionContext,
+                new SubscriptionEventArg(e, EventType.StatusChange)
+            );
         }
         #endregion
 
@@ -498,7 +610,10 @@ namespace System.Workflow.Activities
 
             ConditionedActivityGroup cag = context.Activity as ConditionedActivityGroup;
             if (cag == null)
-                throw new ArgumentException(SR.GetString(SR.Error_InvalidCAGActivityType), "activity");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_InvalidCAGActivityType),
+                    "activity"
+                );
 
             // Already done the cleanup from another child's signalling
             if (cag.ExecutionStatus == ActivityExecutionStatus.Closed)
@@ -509,7 +624,8 @@ namespace System.Workflow.Activities
                 // split into seperate test to keep FxCop happy (only place SubscriptionType used)
                 Debug.Assert(false, "This CAG activity handler does not handle this event");
             }
-            ActivityExecutionStatusChangedEventArgs args1 = (ActivityExecutionStatusChangedEventArgs)e.Args;
+            ActivityExecutionStatusChangedEventArgs args1 =
+                (ActivityExecutionStatusChangedEventArgs)e.Args;
 #if	LOG
             Log("HandleEvent for " + cag.QualifiedName);
             Log("event = " + e.ToString());
@@ -543,7 +659,7 @@ namespace System.Workflow.Activities
                 finally
                 {
                     // get rid of the child that just completed
-                    // do this in the finally so that the child is cleaned up, 
+                    // do this in the finally so that the child is cleaned up,
                     // even if EvaluateConditions throws beause the CAG is stalled
                     CleanupChildAtClosure(context, args1.Activity);
                 }
@@ -594,7 +710,11 @@ namespace System.Workflow.Activities
                     childrenStats[act.QualifiedName].State = CAGChildState.Idle;
 
                 // find the run-time activity
-                ActivityExecutionContext childContext = GetChildExecutionContext(context, act, false);
+                ActivityExecutionContext childContext = GetChildExecutionContext(
+                    context,
+                    act,
+                    false
+                );
                 if (childContext != null)
                 {
                     // child must be running somewhere
@@ -640,14 +760,25 @@ namespace System.Workflow.Activities
             childActivity.UnregisterForStatusChange(Activity.ClosedEvent, this);
 
             //Dispose the execution context;
-            ActivityExecutionContext childContext = GetChildExecutionContext(context, childActivity, false);
+            ActivityExecutionContext childContext = GetChildExecutionContext(
+                context,
+                childActivity,
+                false
+            );
             ActivityExecutionContextManager contextManager = context.ExecutionContextManager;
             contextManager.CompleteExecutionContext(childContext);
         }
 
-        private Activity GetRuntimeInitializedActivity(ActivityExecutionContext context, Activity childActivity)
+        private Activity GetRuntimeInitializedActivity(
+            ActivityExecutionContext context,
+            Activity childActivity
+        )
         {
-            ActivityExecutionContext childContext = GetChildExecutionContext(context, childActivity, false);
+            ActivityExecutionContext childContext = GetChildExecutionContext(
+                context,
+                childActivity,
+                false
+            );
 
             if (childContext == null)
                 return childActivity;
@@ -655,10 +786,16 @@ namespace System.Workflow.Activities
             return childContext.Activity;
         }
 
-        private static ActivityExecutionContext GetChildExecutionContext(ActivityExecutionContext context, Activity childActivity, bool createIfNotExists)
+        private static ActivityExecutionContext GetChildExecutionContext(
+            ActivityExecutionContext context,
+            Activity childActivity,
+            bool createIfNotExists
+        )
         {
             ActivityExecutionContextManager contextManager = context.ExecutionContextManager;
-            ActivityExecutionContext childContext = contextManager.GetExecutionContext(childActivity);
+            ActivityExecutionContext childContext = contextManager.GetExecutionContext(
+                childActivity
+            );
             if (childContext != null)
                 return childContext;
 
@@ -674,7 +811,11 @@ namespace System.Workflow.Activities
                 throw new ArgumentNullException("context");
 
             // if there are any execution contexts, 1 or more children still doing something
-            foreach (ActivityExecutionContext activeContext in context.ExecutionContextManager.ExecutionContexts)
+            foreach (
+                ActivityExecutionContext activeContext in context
+                    .ExecutionContextManager
+                    .ExecutionContexts
+            )
             {
                 if (cag.GetActivityByName(activeContext.Activity.QualifiedName, true) != null)
                 {
@@ -768,11 +909,16 @@ namespace System.Workflow.Activities
             Trace.WriteLine(message + " completed = " + Completed.ToString());
             foreach (string key in this.childActivityStats.Keys)
             {
-                Trace.WriteLine(key + ": state = " + this.childActivityStats[key].State + ", performed = " + this.childActivityStats[key].ExecutedCount);
+                Trace.WriteLine(
+                    key
+                        + ": state = "
+                        + this.childActivityStats[key].State
+                        + ", performed = "
+                        + this.childActivityStats[key].ExecutedCount
+                );
             }
         }
 #endif
-
     }
 
     [Serializable]
@@ -780,7 +926,7 @@ namespace System.Workflow.Activities
     {
         Idle,
         Pending,
-        Excuting
+        Excuting,
     }
 
     [Serializable]
@@ -788,8 +934,8 @@ namespace System.Workflow.Activities
     {
         internal int ExecutedCount = 0;
         internal CAGChildState State = CAGChildState.Idle;
-        internal CAGChildStats()
-        { }
+
+        internal CAGChildStats() { }
     }
     #endregion
 
@@ -805,23 +951,42 @@ namespace System.Workflow.Activities
 
             ConditionedActivityGroup conditionedActivityGroup = obj as ConditionedActivityGroup;
             if (conditionedActivityGroup == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(ConditionedActivityGroup).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(ConditionedActivityGroup).FullName
+                    ),
+                    "obj"
+                );
 
             return validationErrors;
         }
 
-        public override ValidationError ValidateActivityChange(Activity activity, ActivityChangeAction action)
+        public override ValidationError ValidateActivityChange(
+            Activity activity,
+            ActivityChangeAction action
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
             if (action == null)
                 throw new ArgumentNullException("action");
 
-            if (activity.ExecutionStatus != ActivityExecutionStatus.Initialized &&
-                activity.ExecutionStatus != ActivityExecutionStatus.Executing &&
-                activity.ExecutionStatus != ActivityExecutionStatus.Closed)
+            if (
+                activity.ExecutionStatus != ActivityExecutionStatus.Initialized
+                && activity.ExecutionStatus != ActivityExecutionStatus.Executing
+                && activity.ExecutionStatus != ActivityExecutionStatus.Closed
+            )
             {
-                return new ValidationError(SR.GetString(SR.Error_DynamicActivity2, activity.QualifiedName, activity.ExecutionStatus, activity.GetType().FullName), ErrorNumbers.Error_DynamicActivity2);
+                return new ValidationError(
+                    SR.GetString(
+                        SR.Error_DynamicActivity2,
+                        activity.QualifiedName,
+                        activity.ExecutionStatus,
+                        activity.GetType().FullName
+                    ),
+                    ErrorNumbers.Error_DynamicActivity2
+                );
             }
 
             // if we are currently executing, make sure that we are not changing something already running

@@ -18,7 +18,10 @@ namespace System.Net.Http.Json.Functional.Tests
     public class TranscodingWriteStreamTest
     {
         public static TheoryData WriteAsyncInputLatin =>
-            TranscodingReadStreamTest.GetLatinTextInput(TranscodingWriteStream.MaxCharBufferSize, TranscodingWriteStream.MaxByteBufferSize);
+            TranscodingReadStreamTest.GetLatinTextInput(
+                TranscodingWriteStream.MaxCharBufferSize,
+                TranscodingWriteStream.MaxByteBufferSize
+            );
 
         public static TheoryData WriteAsyncInputUnicode =>
             TranscodingReadStreamTest.GetUnicodeText(TranscodingWriteStream.MaxCharBufferSize);
@@ -49,7 +52,6 @@ namespace System.Net.Http.Json.Functional.Tests
             Encoding targetEncoding = Encoding.GetEncoding(28591);
             return WriteAsyncTest(targetEncoding, message);
         }
-
 
         [Theory]
         [MemberData(nameof(WriteAsyncInputLatin))]

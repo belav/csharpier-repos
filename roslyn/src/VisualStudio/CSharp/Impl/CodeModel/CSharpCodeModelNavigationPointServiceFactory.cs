@@ -17,14 +17,18 @@ using Microsoft.VisualStudio.Text.Editor;
 
 namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
 {
-    [ExportLanguageServiceFactory(typeof(ICodeModelNavigationPointService), LanguageNames.CSharp), Shared]
+    [
+        ExportLanguageServiceFactory(
+            typeof(ICodeModelNavigationPointService),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
     internal partial class CSharpCodeModelNavigationPointServiceFactory : ILanguageServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCodeModelNavigationPointServiceFactory()
-        {
-        }
+        public CSharpCodeModelNavigationPointServiceFactory() { }
 
         public ILanguageService CreateLanguageService(HostLanguageServices provider)
         {

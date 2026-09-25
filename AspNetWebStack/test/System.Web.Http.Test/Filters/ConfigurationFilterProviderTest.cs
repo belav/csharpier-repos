@@ -14,10 +14,13 @@ namespace System.Web.Http.Filters
         [Fact]
         public void GetFilters_IfContextParameterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                provider.GetFilters(configuration: null, actionDescriptor: null);
-            }, "configuration");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    provider.GetFilters(configuration: null, actionDescriptor: null);
+                },
+                "configuration"
+            );
         }
 
         [Fact]

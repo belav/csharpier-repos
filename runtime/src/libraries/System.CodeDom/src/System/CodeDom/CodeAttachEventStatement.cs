@@ -9,16 +9,21 @@ namespace System.CodeDom
 
         public CodeAttachEventStatement() { }
 
-        public CodeAttachEventStatement(CodeEventReferenceExpression eventRef, CodeExpression listener)
+        public CodeAttachEventStatement(
+            CodeEventReferenceExpression eventRef,
+            CodeExpression listener
+        )
         {
             _eventRef = eventRef;
             Listener = listener;
         }
 
-        public CodeAttachEventStatement(CodeExpression targetObject, string eventName, CodeExpression listener) :
-            this(new CodeEventReferenceExpression(targetObject, eventName), listener)
-        {
-        }
+        public CodeAttachEventStatement(
+            CodeExpression targetObject,
+            string eventName,
+            CodeExpression listener
+        )
+            : this(new CodeEventReferenceExpression(targetObject, eventName), listener) { }
 
         public CodeEventReferenceExpression Event
         {

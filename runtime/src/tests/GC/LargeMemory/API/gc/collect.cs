@@ -4,40 +4,50 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public sealed class CollectTest {
+public sealed class CollectTest
+{
     private LargeObject lo;
     private int numTests = 0;
     public uint size = 0;
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public void CreateLargeObject() {
+    public void CreateLargeObject()
+    {
         lo = new LargeObject(size, true);
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public void DestroyLargeObject() {
+    public void DestroyLargeObject()
+    {
         lo = null;
     }
 
-    private bool collectLargeObject(int gen) {
+    private bool collectLargeObject(int gen)
+    {
         numTests++;
-        try {
+        try
+        {
             CreateLargeObject();
-        } catch (OutOfMemoryException) {
+        }
+        catch (OutOfMemoryException)
+        {
             Console.WriteLine("Large Memory Machine required");
             return true;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Console.WriteLine("Unexpected Exception:");
             Console.WriteLine(e);
             return false;
         }
-        
+
         DestroyLargeObject();
         GC.Collect(gen);
         GC.WaitForPendingFinalizers();
         GC.Collect(gen);
 
-        if (LargeObject.FinalizedCount>0) {
+        if (LargeObject.FinalizedCount > 0)
+        {
             Console.WriteLine("collectLargeObject {0} passed", gen);
             return true;
         }
@@ -46,10 +56,12 @@ public sealed class CollectTest {
         return false;
     }
 
-    public bool RunTests() {
+    public bool RunTests()
+    {
         int numPassed = 0;
 
-        if (collectLargeObject(0)) {
+        if (collectLargeObject(0))
+        {
             numPassed++;
         }
 
@@ -57,19 +69,21 @@ public sealed class CollectTest {
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        if (collectLargeObject(2)) {
+        if (collectLargeObject(2))
+        {
             numPassed++;
         }
 
-
-        return (numTests==numPassed);
+        return (numTests == numPassed);
     }
 
-    public static int Main(string[] args) {
+    public static int Main(string[] args)
+    {
         CollectTest test = new CollectTest();
         test.size = MemCheck.ParseSizeMBAndLimitByAvailableMem(args);
 
-        if (test.RunTests()) {
+        if (test.RunTests())
+        {
             Console.WriteLine("Test passed");
             return 100;
         }

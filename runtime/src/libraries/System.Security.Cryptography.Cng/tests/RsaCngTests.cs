@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Collections.Generic;
 using System.Security.Cryptography;
-
+using System.Text;
 using Test.Cryptography;
 using Xunit;
 
@@ -20,10 +19,20 @@ namespace System.Security.Cryptography.Cng.Tests
         {
             byte[] message = "781021abcd982139a8bc91387870ac01".HexToByteArray();
             byte[] hash = SHA1.Create().ComputeHash(message);
-            TestSignVerifyHashRoundTrip(hash, HashAlgorithmName.SHA1, RSASignaturePadding.Pss, 0x100);
+            TestSignVerifyHashRoundTrip(
+                hash,
+                HashAlgorithmName.SHA1,
+                RSASignaturePadding.Pss,
+                0x100
+            );
         }
 
-        private static void TestSignVerifyHashRoundTrip(byte[] hash, HashAlgorithmName hashAlgorithm, RSASignaturePadding paddingMode, int expectedSignatureLength)
+        private static void TestSignVerifyHashRoundTrip(
+            byte[] hash,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding paddingMode,
+            int expectedSignatureLength
+        )
         {
             using (RSA rsa = new RSACng())
             {
@@ -42,10 +51,20 @@ namespace System.Security.Cryptography.Cng.Tests
         public static void SignVerifyDataRoundTrip()
         {
             byte[] message = "781021abcd982139a8bc91387870ac01".HexToByteArray();
-            TestSignVerifyDataRoundTrip(message, HashAlgorithmName.SHA1, RSASignaturePadding.Pss, 0x100);
+            TestSignVerifyDataRoundTrip(
+                message,
+                HashAlgorithmName.SHA1,
+                RSASignaturePadding.Pss,
+                0x100
+            );
         }
 
-        private static void TestSignVerifyDataRoundTrip(byte[] message, HashAlgorithmName hashAlgorithm, RSASignaturePadding paddingMode, int expectedSignatureLength)
+        private static void TestSignVerifyDataRoundTrip(
+            byte[] message,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding paddingMode,
+            int expectedSignatureLength
+        )
         {
             using (RSA rsa = new RSACng())
             {
@@ -66,12 +85,18 @@ namespace System.Security.Cryptography.Cng.Tests
             using (RSA rsa = TestData.TestRsaKeyPair.CreateRsaCng())
             {
                 byte[] hash = ("aecc72ccc8e3c3ff28ffd7acac7d3065225aa24e").HexToByteArray();
-                byte[] signature =
-                    ("3bde39974a884c4ecbc7296063a2a96edc778435b7b277b594a0712dcc0ddcd00b2970473b2f1359c98535dbae41fe2fb9e7"
-                   + "42f77e1849c9746fd05c58d2e3f06c7290d96bbe53882391d76a73fd5f0650f1e46d5a81c83e617f05203f9ad6416957d06e"
-                   + "49fe98a3d97359a3b7c1b80593b75265daa1a670aabf287d31a2f441").HexToByteArray();
+                byte[] signature = (
+                    "3bde39974a884c4ecbc7296063a2a96edc778435b7b277b594a0712dcc0ddcd00b2970473b2f1359c98535dbae41fe2fb9e7"
+                    + "42f77e1849c9746fd05c58d2e3f06c7290d96bbe53882391d76a73fd5f0650f1e46d5a81c83e617f05203f9ad6416957d06e"
+                    + "49fe98a3d97359a3b7c1b80593b75265daa1a670aabf287d31a2f441"
+                ).HexToByteArray();
 
-                bool verified = rsa.VerifyHash(hash, signature, HashAlgorithmName.SHA1, RSASignaturePadding.Pss);
+                bool verified = rsa.VerifyHash(
+                    hash,
+                    signature,
+                    HashAlgorithmName.SHA1,
+                    RSASignaturePadding.Pss
+                );
                 Assert.True(verified);
             }
         }
@@ -82,18 +107,28 @@ namespace System.Security.Cryptography.Cng.Tests
             const int ExpectedKeySize = 384;
 
             byte[] keyBlob = (
-                "525341328001000003000000300000001800000018000000010001DACC22D86E" +
-                "671575032E31F206DCFC192C65E2D51089E5112D096F2882AFDB5B78CDB6572F" +
-                "D2F61DB390472232E3D9F5FADBD7F8A18B3A75A4F6DFAEE3426FD0FF8BAC74B6" +
-                "722DEFDF48144A6D88A780144FCEA66BDCDA50D6071C54E5D0DA5B").HexToByteArray();
+                "525341328001000003000000300000001800000018000000010001DACC22D86E"
+                + "671575032E31F206DCFC192C65E2D51089E5112D096F2882AFDB5B78CDB6572F"
+                + "D2F61DB390472232E3D9F5FADBD7F8A18B3A75A4F6DFAEE3426FD0FF8BAC74B6"
+                + "722DEFDF48144A6D88A780144FCEA66BDCDA50D6071C54E5D0DA5B"
+            ).HexToByteArray();
 
-            RSAParameters expected = System.Security.Cryptography.Rsa.Tests.TestData.RSA384Parameters;
+            RSAParameters expected = System
+                .Security
+                .Cryptography
+                .Rsa
+                .Tests
+                .TestData
+                .RSA384Parameters;
 
             try
             {
                 RSACng_Ctor_UnusualKeysize(ExpectedKeySize, keyBlob, expected);
 
-                Assert.True(Rsa.Tests.RSAFactory.Supports384PrivateKey, "RSAFactory.Supports384PrivateKey");
+                Assert.True(
+                    Rsa.Tests.RSAFactory.Supports384PrivateKey,
+                    "RSAFactory.Supports384PrivateKey"
+                );
             }
             catch (CryptographicException)
             {
@@ -113,21 +148,31 @@ namespace System.Security.Cryptography.Cng.Tests
             const int ExpectedKeySize = 1032;
 
             byte[] keyBlob = (
-                "525341320804000003000000810000004100000041000000010001BCACB1A534" +
-                "9D7B35A580AC3B3998EB15EBF900ECB329BF1F75717A00B2199C8A18D791B592" +
-                "B7EC52BD5AF2DB0D3B635F0595753DFF7BA7C9872DBF7E3226DEF44A07CA568D" +
-                "1017992C2B41BFE5EC3570824CF1F4B15919FED513FDA56204AF2034A2D08FF0" +
-                "4C2CCA49D168FA03FA2FA32FCCD3484C15F0A2E5467C76FC760B55090E15300A" +
-                "9D34BA37B6BDA831BC6727B2F7F6D0EFB7B33A99C9AF28CFD625E245A54F251B" +
-                "784C4791ADA585ADB711D9300A3D52B450CC307F55D31E1217B9FFD7450D65C6" +
-                "0DE8B6F54A7756FD1CCBA76CE41EF446D024031EE9C5A40931B07336CFED35A8" +
-                "EE580E19DB8592CB0F266EC69028EB9E98E3E84FF1A459A8A26860A610F5").HexToByteArray();
+                "525341320804000003000000810000004100000041000000010001BCACB1A534"
+                + "9D7B35A580AC3B3998EB15EBF900ECB329BF1F75717A00B2199C8A18D791B592"
+                + "B7EC52BD5AF2DB0D3B635F0595753DFF7BA7C9872DBF7E3226DEF44A07CA568D"
+                + "1017992C2B41BFE5EC3570824CF1F4B15919FED513FDA56204AF2034A2D08FF0"
+                + "4C2CCA49D168FA03FA2FA32FCCD3484C15F0A2E5467C76FC760B55090E15300A"
+                + "9D34BA37B6BDA831BC6727B2F7F6D0EFB7B33A99C9AF28CFD625E245A54F251B"
+                + "784C4791ADA585ADB711D9300A3D52B450CC307F55D31E1217B9FFD7450D65C6"
+                + "0DE8B6F54A7756FD1CCBA76CE41EF446D024031EE9C5A40931B07336CFED35A8"
+                + "EE580E19DB8592CB0F266EC69028EB9E98E3E84FF1A459A8A26860A610F5"
+            ).HexToByteArray();
 
-            RSAParameters expected = System.Security.Cryptography.Rsa.Tests.TestData.RSA1032Parameters;
+            RSAParameters expected = System
+                .Security
+                .Cryptography
+                .Rsa
+                .Tests
+                .TestData
+                .RSA1032Parameters;
             RSACng_Ctor_UnusualKeysize(ExpectedKeySize, keyBlob, expected);
         }
 
-        [ConditionalFact(typeof(PlatformSupport), nameof(PlatformSupport.PlatformCryptoProviderFunctionalRsa))]
+        [ConditionalFact(
+            typeof(PlatformSupport),
+            nameof(PlatformSupport.PlatformCryptoProviderFunctionalRsa)
+        )]
         [OuterLoop("Hardware backed key generation takes several seconds.")]
         public static void RSACng_PlatformCryptoProvider_SignHash_Roundtrip()
         {
@@ -144,26 +189,53 @@ namespace System.Security.Cryptography.Cng.Tests
                 key = CngKey.Create(
                     CngAlgorithm.Rsa,
                     nameof(RSACng_PlatformCryptoProvider_SignHash_Roundtrip),
-                    cngCreationParameters);
+                    cngCreationParameters
+                );
 
                 using (RSACng rsaKey = new RSACng(key))
                 {
                     byte[] data = new byte[] { 1, 2, 3 };
-                    byte[] signature = rsaKey.SignData(data, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
-                    bool valid = rsaKey.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                    byte[] signature = rsaKey.SignData(
+                        data,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
+                    bool valid = rsaKey.VerifyData(
+                        data,
+                        signature,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
                     Assert.True(valid, "valid signature");
 
                     byte[] hash = SHA256.HashData(data);
 
                     byte[] buffer = new byte[1];
-                    bool success = rsaKey.TrySignHash(hash, buffer, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1, out int bytesWritten);
+                    bool success = rsaKey.TrySignHash(
+                        hash,
+                        buffer,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1,
+                        out int bytesWritten
+                    );
                     Assert.False(success, "buffer large enough");
 
-                    success = rsaKey.TrySignHash(hash, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1, out bytesWritten);
+                    success = rsaKey.TrySignHash(
+                        hash,
+                        signature,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1,
+                        out bytesWritten
+                    );
                     Assert.True(success, "buffer large enough");
                     Assert.Equal(signature.Length, bytesWritten);
 
-                    valid = rsaKey.VerifyData(data, signature, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                    valid = rsaKey.VerifyData(
+                        data,
+                        signature,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
                     Assert.True(valid, "valid signature");
                 }
             }
@@ -173,7 +245,10 @@ namespace System.Security.Cryptography.Cng.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformSupport), nameof(PlatformSupport.PlatformCryptoProviderFunctionalRsa))]
+        [ConditionalFact(
+            typeof(PlatformSupport),
+            nameof(PlatformSupport.PlatformCryptoProviderFunctionalRsa)
+        )]
         [OuterLoop("Hardware backed key generation takes several seconds.")]
         public static void RSACng_PlatformCryptoProvider_EncryptDecrypt_Roundtrip()
         {
@@ -190,7 +265,8 @@ namespace System.Security.Cryptography.Cng.Tests
                 key = CngKey.Create(
                     CngAlgorithm.Rsa,
                     nameof(RSACng_PlatformCryptoProvider_EncryptDecrypt_Roundtrip),
-                    cngCreationParameters);
+                    cngCreationParameters
+                );
 
                 using (RSACng pcpKey = new RSACng(key))
                 using (RSACng publicRsa = new RSACng())
@@ -202,10 +278,20 @@ namespace System.Security.Cryptography.Cng.Tests
                     Assert.Equal(data, decrypted);
 
                     byte[] buffer = new byte[1];
-                    bool success = pcpKey.TryDecrypt(encrypted, buffer, RSAEncryptionPadding.Pkcs1, out int bytesWritten);
+                    bool success = pcpKey.TryDecrypt(
+                        encrypted,
+                        buffer,
+                        RSAEncryptionPadding.Pkcs1,
+                        out int bytesWritten
+                    );
                     Assert.False(success, "buffer large enough");
 
-                    success = pcpKey.TryDecrypt(encrypted, decrypted, RSAEncryptionPadding.Pkcs1, out bytesWritten);
+                    success = pcpKey.TryDecrypt(
+                        encrypted,
+                        decrypted,
+                        RSAEncryptionPadding.Pkcs1,
+                        out bytesWritten
+                    );
                     Assert.True(success, "buffer large enough");
                     Assert.Equal(decrypted.Length, bytesWritten);
                 }
@@ -219,7 +305,8 @@ namespace System.Security.Cryptography.Cng.Tests
         private static void RSACng_Ctor_UnusualKeysize(
             int expectedKeySize,
             byte[] keyBlob,
-            RSAParameters expectedParameters)
+            RSAParameters expectedParameters
+        )
         {
             // Pre-condition: Creating a key of this size will fail
             Assert.Throws<CryptographicException>(() => new RSACng(expectedKeySize));

@@ -19,7 +19,6 @@ namespace System.Xml.Xsl
 {
     internal delegate void ExecuteDelegate(XmlQueryRuntime runtime);
 
-
     /// <summary>
     /// This internal class is the entry point for creating Msil assemblies from QilExpression.
     /// </summary>
@@ -61,9 +60,7 @@ namespace System.Xml.Xsl
         /// <summary>
         /// Always output debug information in debug mode.
         /// </summary>
-        public XmlILGenerator()
-        {
-        }
+        public XmlILGenerator() { }
 
         /// <summary>
         /// Given the logical query plan (QilExpression) generate a physical query plan (MSIL) that can be executed.
@@ -71,17 +68,19 @@ namespace System.Xml.Xsl
         // SxS Note: The way the trace file names are created (hardcoded) is NOT SxS safe. However the files are
         // created only for internal tracing purposes. In addition XmlILTrace class is not compiled into retail
         // builds. As a result it is fine to suppress the FxCop SxS warning.
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This method will generate the IL methods using RefEmit at runtime, which will then try to call them " +
-            "using methods that are annotated as RequiresUnreferencedCode. In this case, these uses can be suppressed as the " +
-            "trimmer won't be able to trim any IL that gets generated at runtime.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This method will generate the IL methods using RefEmit at runtime, which will then try to call them "
+                + "using methods that are annotated as RequiresUnreferencedCode. In this case, these uses can be suppressed as the "
+                + "trimmer won't be able to trim any IL that gets generated at runtime."
+        )]
         public XmlILCommand? Generate(QilExpression query, TypeBuilder? typeBldr)
         {
             _qil = query;
 
             bool useLRE = (
-                !_qil.IsDebug &&
-                (typeBldr == null)
+                !_qil.IsDebug && (typeBldr == null)
 #if DEBUG
                 && !XmlILTrace.IsEnabled // Dump assembly to disk; can't do this when using LRE
 #endif
@@ -129,13 +128,28 @@ namespace System.Xml.Xsl
 
             // Create metadata for the Execute function, which is the entry point to the query
             // public static void Execute(XmlQueryRuntime);
-            MethodInfo methExec = _module.DefineMethod("Execute", typeof(void), Type.EmptyTypes, Array.Empty<string>(), XmlILMethodAttributes.NonUser);
+            MethodInfo methExec = _module.DefineMethod(
+                "Execute",
+                typeof(void),
+                Type.EmptyTypes,
+                Array.Empty<string>(),
+                XmlILMethodAttributes.NonUser
+            );
 
             // Create metadata for the root expression
             // public void Root()
             Debug.Assert(_qil.Root != null);
-            XmlILMethodAttributes methAttrs = (_qil.Root.SourceLine == null) ? XmlILMethodAttributes.NonUser : XmlILMethodAttributes.None;
-            MethodInfo methRoot = _module.DefineMethod("Root", typeof(void), Type.EmptyTypes, Array.Empty<string>(), methAttrs);
+            XmlILMethodAttributes methAttrs =
+                (_qil.Root.SourceLine == null)
+                    ? XmlILMethodAttributes.NonUser
+                    : XmlILMethodAttributes.None;
+            MethodInfo methRoot = _module.DefineMethod(
+                "Root",
+                typeof(void),
+                Type.EmptyTypes,
+                Array.Empty<string>(),
+                methAttrs
+            );
 
             // Declare all early bound function objects
             foreach (EarlyBoundInfo info in _qil.EarlyBoundTypes)
@@ -180,7 +194,8 @@ namespace System.Xml.Xsl
                 _module.BakeMethods();
 
                 // Create delegate over "Execute" method
-                ExecuteDelegate delExec = (ExecuteDelegate)_module.CreateDelegate("Execute", typeof(ExecuteDelegate));
+                ExecuteDelegate delExec = (ExecuteDelegate)
+                    _module.CreateDelegate("Execute", typeof(ExecuteDelegate));
                 return new XmlILCommand(delExec, staticData);
             }
         }
@@ -230,8 +245,17 @@ namespace System.Xml.Xsl
                 }
 
                 // Create the method metadata
-                methAttrs = ndFunc.SourceLine == null ? XmlILMethodAttributes.NonUser : XmlILMethodAttributes.None;
-                methInfo = _module!.DefineMethod(ndFunc.DebugName!, typReturn, paramTypes, paramNames, methAttrs);
+                methAttrs =
+                    ndFunc.SourceLine == null
+                        ? XmlILMethodAttributes.NonUser
+                        : XmlILMethodAttributes.None;
+                methInfo = _module!.DefineMethod(
+                    ndFunc.DebugName!,
+                    typReturn,
+                    paramTypes,
+                    paramNames,
+                    methAttrs
+                );
 
                 for (int arg = 0; arg < ndFunc.Arguments.Count; arg++)
                 {
@@ -257,8 +281,17 @@ namespace System.Xml.Xsl
             {
                 // public T GlobalValue()
                 typReturn = XmlILTypeHelper.GetStorageType(ndRef.XmlType!);
-                methAttrs = ndRef.SourceLine == null ? XmlILMethodAttributes.NonUser : XmlILMethodAttributes.None;
-                methInfo = _module!.DefineMethod(ndRef.DebugName!.ToString(), typReturn, Type.EmptyTypes, Array.Empty<string>(), methAttrs);
+                methAttrs =
+                    ndRef.SourceLine == null
+                        ? XmlILMethodAttributes.NonUser
+                        : XmlILMethodAttributes.None;
+                methInfo = _module!.DefineMethod(
+                    ndRef.DebugName!.ToString(),
+                    typReturn,
+                    Type.EmptyTypes,
+                    Array.Empty<string>(),
+                    methAttrs
+                );
 
                 // Annotate function with MethodBuilder
                 XmlILAnnotation.Write(ndRef).FunctionBinding = methInfo;
@@ -295,11 +328,12 @@ namespace System.Xml.Xsl
 
             // public static XPathNavigator SyncToNavigator(XPathNavigator, XPathNavigator);
             meth = _module!.DefineMethod(
-                            "SyncToNavigator",
-                            typeof(XPathNavigator),
-                            new Type[] { typeof(XPathNavigator), typeof(XPathNavigator) },
-                            new string?[] { null, null },
-                            XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw);
+                "SyncToNavigator",
+                typeof(XPathNavigator),
+                new Type[] { typeof(XPathNavigator), typeof(XPathNavigator) },
+                new string?[] { null, null },
+                XmlILMethodAttributes.NonUser | XmlILMethodAttributes.Raw
+            );
 
             _helper!.MethodBegin(meth, null, false);
 
@@ -334,11 +368,19 @@ namespace System.Xml.Xsl
             foreach (QilIterator ndIter in iterList)
             {
                 // Evaluate global if generating debug code, or if global might have side effects
-                if (_qil!.IsDebug || OptimizerPatterns.Read(ndIter).MatchesPattern(OptimizerPatternName.MaybeSideEffects))
+                if (
+                    _qil!.IsDebug
+                    || OptimizerPatterns
+                        .Read(ndIter)
+                        .MatchesPattern(OptimizerPatternName.MaybeSideEffects)
+                )
                 {
                     // Get MethodInfo that evaluates the global value and discard its return value
                     methInfo = XmlILAnnotation.Write(ndIter).FunctionBinding;
-                    Debug.Assert(methInfo != null, "MethodInfo for global value should have been created previously.");
+                    Debug.Assert(
+                        methInfo != null,
+                        "MethodInfo for global value should have been created previously."
+                    );
 
                     _helper!.LoadQueryRuntime();
                     _helper.Call(methInfo);
@@ -354,11 +396,16 @@ namespace System.Xml.Xsl
         {
             byte[] data;
             Type[]? ebTypes;
-            FieldInfo fldInitData, fldData, fldTypes;
+            FieldInfo fldInitData,
+                fldData,
+                fldTypes;
             ConstructorInfo cctor;
 
             staticData.GetObjectData(out data, out ebTypes);
-            fldInitData = _module!.DefineInitializedData($"__{XmlQueryStaticData.DataFieldName}", data);
+            fldInitData = _module!.DefineInitializedData(
+                $"__{XmlQueryStaticData.DataFieldName}",
+                data
+            );
             fldData = _module.DefineField(XmlQueryStaticData.DataFieldName, typeof(object));
             fldTypes = _module.DefineField(XmlQueryStaticData.TypesFieldName, typeof(Type[]));
 

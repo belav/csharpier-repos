@@ -1,18 +1,18 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Testing;
-using Microsoft.Interop;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Testing;
+using Microsoft.Interop;
 using Xunit;
 using static Microsoft.Interop.Analyzers.CustomMarshallerAttributeAnalyzer;
-
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.CustomMarshallerAttributeAnalyzer,
-    Microsoft.Interop.Analyzers.CustomMarshallerAttributeFixer>;
+    Microsoft.Interop.Analyzers.CustomMarshallerAttributeFixer
+>;
 
 namespace LibraryImportGenerator.UnitTests
 {
@@ -23,9 +23,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof({|#1:MarshallerType|}))]
                 struct MarshallerType
@@ -35,9 +35,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedOut, typeof(MarshallerType))]
                 struct MarshallerType
@@ -62,12 +62,45 @@ namespace LibraryImportGenerator.UnitTests
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromManagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedIn, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromManagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedOut, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToUnmanagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedIn, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToUnmanagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedOut, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType").WithLocation(1));
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromManagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedIn,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromManagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedOut,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedIn,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedOut,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType")
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType")
+                    .WithLocation(1)
+            );
         }
 
         [Fact]
@@ -75,9 +108,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof({|#1:MarshallerType|}))]
                 struct MarshallerType
@@ -87,9 +120,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof(MarshallerType))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedIn, typeof(MarshallerType))]
                 struct MarshallerType
@@ -114,12 +147,45 @@ namespace LibraryImportGenerator.UnitTests
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromUnmanagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedOut, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromUnmanagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedIn, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToManagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedOut, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToManagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedIn, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType").WithLocation(1));
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedOut,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedIn,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToManagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedOut,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToManagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedIn,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType")
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType")
+                    .WithLocation(1)
+            );
         }
 
         [Fact]
@@ -127,9 +193,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedOut, typeof({|#0:MarshallerType|}))]
                 struct MarshallerType
                 {
@@ -142,7 +208,11 @@ namespace LibraryImportGenerator.UnitTests
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(FromUnmanagedOverloadsNotSupportedRule).WithLocation(0).WithArguments("MarshallerType"));
+                VerifyCS
+                    .Diagnostic(FromUnmanagedOverloadsNotSupportedRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType")
+            );
         }
 
         [Fact]
@@ -150,9 +220,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType|}))]
                 struct MarshallerType
@@ -162,9 +232,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof(MarshallerType))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof(MarshallerType))]
                 struct MarshallerType
@@ -183,12 +253,12 @@ namespace LibraryImportGenerator.UnitTests
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public ManagedType ToManaged()
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public void Free()
                     {
                         throw new System.NotImplementedException();
@@ -199,16 +269,77 @@ namespace LibraryImportGenerator.UnitTests
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromManagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedRef, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromManagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedRef, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToUnmanagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedRef, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToUnmanagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedRef, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromUnmanagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedRef, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromUnmanagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedRef, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToManagedRule, "MarshallerType", MarshalMode.ManagedToUnmanagedRef, "ManagedType").WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToManagedRule, "MarshallerType", MarshalMode.UnmanagedToManagedRef, "ManagedType").WithLocation(1),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType").WithLocation(1));
+                VerifyCS
+                    .DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType")
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromManagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromManagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToManagedRule,
+                        "MarshallerType",
+                        MarshalMode.ManagedToUnmanagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToManagedRule,
+                        "MarshallerType",
+                        MarshalMode.UnmanagedToManagedRef,
+                        "ManagedType"
+                    )
+                    .WithLocation(1),
+                VerifyCS
+                    .DiagnosticWithArguments(StatefulMarshallerRequiresFreeRule, "MarshallerType")
+                    .WithLocation(1)
+            );
         }
 
         [Fact]
@@ -216,9 +347,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof({|#0:MarshallerType|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof({|#1:MarshallerType|}))]
                 struct MarshallerType
@@ -233,8 +364,21 @@ namespace LibraryImportGenerator.UnitTests
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(FirstParameterMustMatchReturnTypeRule).WithLocation(0).WithArguments("MarshallerType.FromUnmanaged(float)", "MarshallerType.ToUnmanaged()"),
-                VerifyCS.Diagnostic(FirstParameterMustMatchReturnTypeRule).WithLocation(1).WithArguments("MarshallerType.FromUnmanaged(float)", "MarshallerType.ToUnmanaged()"));
+                VerifyCS
+                    .Diagnostic(FirstParameterMustMatchReturnTypeRule)
+                    .WithLocation(0)
+                    .WithArguments(
+                        "MarshallerType.FromUnmanaged(float)",
+                        "MarshallerType.ToUnmanaged()"
+                    ),
+                VerifyCS
+                    .Diagnostic(FirstParameterMustMatchReturnTypeRule)
+                    .WithLocation(1)
+                    .WithArguments(
+                        "MarshallerType.FromUnmanaged(float)",
+                        "MarshallerType.ToUnmanaged()"
+                    )
+            );
         }
 
         [Fact]
@@ -242,9 +386,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedRef, typeof(MarshallerType))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.UnmanagedToManagedRef, typeof(MarshallerType))]
                 struct MarshallerType
@@ -257,8 +401,7 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(
-                source);
+            await VerifyCS.VerifyAnalyzerAsync(source);
         }
 
         [Fact]
@@ -266,9 +409,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ElementIn, typeof({|#0:MarshallerType|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ElementRef, typeof({|#1:MarshallerType|}))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ElementOut, typeof({|#2:MarshallerType|}))]
@@ -284,9 +427,19 @@ namespace LibraryImportGenerator.UnitTests
 
             await VerifyCS.VerifyAnalyzerAsync(
                 source,
-                VerifyCS.Diagnostic(ElementMarshallerCannotBeStatefulRule).WithLocation(0).WithArguments("MarshallerType", MarshalMode.ElementIn),
-                VerifyCS.Diagnostic(ElementMarshallerCannotBeStatefulRule).WithLocation(1).WithArguments("MarshallerType", MarshalMode.ElementRef),
-                VerifyCS.Diagnostic(ElementMarshallerCannotBeStatefulRule).WithLocation(2).WithArguments("MarshallerType", MarshalMode.ElementOut));
+                VerifyCS
+                    .Diagnostic(ElementMarshallerCannotBeStatefulRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType", MarshalMode.ElementIn),
+                VerifyCS
+                    .Diagnostic(ElementMarshallerCannotBeStatefulRule)
+                    .WithLocation(1)
+                    .WithArguments("MarshallerType", MarshalMode.ElementRef),
+                VerifyCS
+                    .Diagnostic(ElementMarshallerCannotBeStatefulRule)
+                    .WithLocation(2)
+                    .WithArguments("MarshallerType", MarshalMode.ElementOut)
+            );
         }
 
         [Fact]
@@ -294,9 +447,9 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.Default, typeof({|#0:MarshallerType|}))]
                 struct MarshallerType
                 {
@@ -305,9 +458,9 @@ namespace LibraryImportGenerator.UnitTests
 
             string fixedSource = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.Default, typeof(MarshallerType))]
                 struct MarshallerType
                 {
@@ -315,7 +468,7 @@ namespace LibraryImportGenerator.UnitTests
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public nint ToUnmanaged()
                     {
                         throw new System.NotImplementedException();
@@ -325,12 +478,12 @@ namespace LibraryImportGenerator.UnitTests
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public ManagedType ToManaged()
                     {
                         throw new System.NotImplementedException();
                     }
-                
+
                     public void Free()
                     {
                         throw new System.NotImplementedException();
@@ -341,11 +494,47 @@ namespace LibraryImportGenerator.UnitTests
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                VerifyCS.Diagnostic(StatefulMarshallerRequiresFreeRule).WithLocation(0).WithArguments("MarshallerType"),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromManagedRule, "MarshallerType", MarshalMode.Default, "ManagedType").WithSeverity(DiagnosticSeverity.Info).WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToUnmanagedRule, "MarshallerType", MarshalMode.Default, "ManagedType").WithSeverity(DiagnosticSeverity.Info).WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresFromUnmanagedRule, "MarshallerType", MarshalMode.Default, "ManagedType").WithSeverity(DiagnosticSeverity.Info).WithLocation(0),
-                VerifyCS.DiagnosticWithArguments(StatefulMarshallerRequiresToManagedRule, "MarshallerType", MarshalMode.Default, "ManagedType").WithSeverity(DiagnosticSeverity.Info).WithLocation(0));
+                VerifyCS
+                    .Diagnostic(StatefulMarshallerRequiresFreeRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType"),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromManagedRule,
+                        "MarshallerType",
+                        MarshalMode.Default,
+                        "ManagedType"
+                    )
+                    .WithSeverity(DiagnosticSeverity.Info)
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.Default,
+                        "ManagedType"
+                    )
+                    .WithSeverity(DiagnosticSeverity.Info)
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresFromUnmanagedRule,
+                        "MarshallerType",
+                        MarshalMode.Default,
+                        "ManagedType"
+                    )
+                    .WithSeverity(DiagnosticSeverity.Info)
+                    .WithLocation(0),
+                VerifyCS
+                    .DiagnosticWithArguments(
+                        StatefulMarshallerRequiresToManagedRule,
+                        "MarshallerType",
+                        MarshalMode.Default,
+                        "ManagedType"
+                    )
+                    .WithSeverity(DiagnosticSeverity.Info)
+                    .WithLocation(0)
+            );
         }
 
         [Fact]
@@ -354,9 +543,9 @@ namespace LibraryImportGenerator.UnitTests
             string source = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType|}))]
                 struct MarshallerType
                 {
@@ -371,9 +560,9 @@ namespace LibraryImportGenerator.UnitTests
             string fixedSource = """
                 using System;
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof({|#0:MarshallerType|}))]
                 struct MarshallerType
                 {
@@ -396,7 +585,11 @@ namespace LibraryImportGenerator.UnitTests
             await CustomMarshallerAttributeFixerTest.VerifyCodeFixAsync(
                 source,
                 fixedSource,
-                VerifyCS.Diagnostic(CallerAllocFromManagedMustHaveBufferSizeRule).WithLocation(0).WithArguments("MarshallerType", "byte"));
+                VerifyCS
+                    .Diagnostic(CallerAllocFromManagedMustHaveBufferSizeRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType", "byte")
+            );
         }
     }
 }

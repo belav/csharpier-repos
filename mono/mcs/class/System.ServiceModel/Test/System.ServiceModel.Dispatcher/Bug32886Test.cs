@@ -31,106 +31,153 @@ using System.ServiceModel;
 using System.ServiceModel.Description;
 using System.Threading;
 using NUnit.Framework;
-
 using WebServiceMoonlightTest.ServiceReference1;
-
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {
-	[TestFixture]
-	public class Bug32886
-	{
-		[Test]
-		public void Bug32886_Test () // test in one of the comment
-		{
-			// Init service
-			int port = NetworkHelpers.FindFreePort ();
-			ServiceHost serviceHost = new ServiceHost (typeof (TempConvertSoapImpl), new Uri ("http://localhost:" + port + "/TempConvertSoap"));
-			serviceHost.AddServiceEndpoint (typeof (TempConvertSoap), new BasicHttpBinding (), string.Empty);
+    [TestFixture]
+    public class Bug32886
+    {
+        [Test]
+        public void Bug32886_Test() // test in one of the comment
+        {
+            // Init service
+            int port = NetworkHelpers.FindFreePort();
+            ServiceHost serviceHost = new ServiceHost(
+                typeof(TempConvertSoapImpl),
+                new Uri("http://localhost:" + port + "/TempConvertSoap")
+            );
+            serviceHost.AddServiceEndpoint(
+                typeof(TempConvertSoap),
+                new BasicHttpBinding(),
+                string.Empty
+            );
 
-			// Enable metadata exchange (WSDL publishing)
-			var mexBehavior = new ServiceMetadataBehavior ();
-			mexBehavior.HttpGetEnabled = true;
-			serviceHost.Description.Behaviors.Add (mexBehavior);
-			serviceHost.AddServiceEndpoint (typeof (IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding (), "mex");
+            // Enable metadata exchange (WSDL publishing)
+            var mexBehavior = new ServiceMetadataBehavior();
+            mexBehavior.HttpGetEnabled = true;
+            serviceHost.Description.Behaviors.Add(mexBehavior);
+            serviceHost.AddServiceEndpoint(
+                typeof(IMetadataExchange),
+                MetadataExchangeBindings.CreateMexHttpBinding(),
+                "mex"
+            );
 
-			serviceHost.Open ();
+            serviceHost.Open();
 
-			try {
-				// client
-				var binding = new BasicHttpBinding ();
-				var remoteAddress = new EndpointAddress ("http://localhost:" + port + "/TempConvertSoap");
-				var client = new TempConvertSoapClient (binding, remoteAddress);
+            try
+            {
+                // client
+                var binding = new BasicHttpBinding();
+                var remoteAddress = new EndpointAddress(
+                    "http://localhost:" + port + "/TempConvertSoap"
+                );
+                var client = new TempConvertSoapClient(binding, remoteAddress);
 
-				var wait = new ManualResetEvent (false);
+                var wait = new ManualResetEvent(false);
 
-				Exception error = null;
-				string result = null;
+                Exception error = null;
+                string result = null;
 
-				client.CelsiusToFahrenheitCompleted += delegate (object o, CelsiusToFahrenheitCompletedEventArgs e) {
-					try {
-						error = e.Error;
-						result = e.Error == null ? e.Result : null;
-					} finally {
-						wait.Set ();
-					}
-				};
+                client.CelsiusToFahrenheitCompleted += delegate(
+                    object o,
+                    CelsiusToFahrenheitCompletedEventArgs e
+                )
+                {
+                    try
+                    {
+                        error = e.Error;
+                        result = e.Error == null ? e.Result : null;
+                    }
+                    finally
+                    {
+                        wait.Set();
+                    }
+                };
 
-				client.CelsiusToFahrenheitAsync ("24.5");
+                client.CelsiusToFahrenheitAsync("24.5");
 
-				Assert.IsTrue (wait.WaitOne (TimeSpan.FromSeconds (20)), "timeout");
-				Assert.IsNull (error, "#1, inner exception: {0}", error);
-				Assert.AreEqual ("76.1", result, "#2");
-			} finally {
-				serviceHost.Close ();
-			}
-		}
+                Assert.IsTrue(wait.WaitOne(TimeSpan.FromSeconds(20)), "timeout");
+                Assert.IsNull(error, "#1, inner exception: {0}", error);
+                Assert.AreEqual("76.1", result, "#2");
+            }
+            finally
+            {
+                serviceHost.Close();
+            }
+        }
 
-		class TempConvertSoapImpl : TempConvertSoap
-		{
-			public FahrenheitToCelsiusResponse FarenheitToCelsius (FahrenheitToCelsiusRequest request)
-			{
-				var farenheit = double.Parse (request.Body.Fahrenheit, CultureInfo.InvariantCulture);
-				var celsius = ((farenheit - 32) / 9) * 5;
-				return new FahrenheitToCelsiusResponse (new FahrenheitToCelsiusResponseBody (celsius.ToString (CultureInfo.InvariantCulture)));
-			}
+        class TempConvertSoapImpl : TempConvertSoap
+        {
+            public FahrenheitToCelsiusResponse FarenheitToCelsius(
+                FahrenheitToCelsiusRequest request
+            )
+            {
+                var farenheit = double.Parse(request.Body.Fahrenheit, CultureInfo.InvariantCulture);
+                var celsius = ((farenheit - 32) / 9) * 5;
+                return new FahrenheitToCelsiusResponse(
+                    new FahrenheitToCelsiusResponseBody(
+                        celsius.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
+            }
 
-			public CelsiusToFahrenheitResponse CelsiusToFarenheit (CelsiusToFahrenheitRequest request)
-			{
-				var celsius = double.Parse (request.Body.Celsius, CultureInfo.InvariantCulture);
-				var farenheit = ((celsius * 9) / 5) + 32;
-				return new CelsiusToFahrenheitResponse (new CelsiusToFahrenheitResponseBody (farenheit.ToString (CultureInfo.InvariantCulture)));
-			}
+            public CelsiusToFahrenheitResponse CelsiusToFarenheit(
+                CelsiusToFahrenheitRequest request
+            )
+            {
+                var celsius = double.Parse(request.Body.Celsius, CultureInfo.InvariantCulture);
+                var farenheit = ((celsius * 9) / 5) + 32;
+                return new CelsiusToFahrenheitResponse(
+                    new CelsiusToFahrenheitResponseBody(
+                        farenheit.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
+            }
 
-			Func<FahrenheitToCelsiusRequest,FahrenheitToCelsiusResponse> farenheitToCelsius;
-			Func<CelsiusToFahrenheitRequest,CelsiusToFahrenheitResponse> celsiusToFarenheit;
+            Func<FahrenheitToCelsiusRequest, FahrenheitToCelsiusResponse> farenheitToCelsius;
+            Func<CelsiusToFahrenheitRequest, CelsiusToFahrenheitResponse> celsiusToFarenheit;
 
-			public IAsyncResult BeginFahrenheitToCelsius (FahrenheitToCelsiusRequest request, AsyncCallback callback, object asyncState)
-			{
-				if (farenheitToCelsius == null)
-					farenheitToCelsius = new Func<FahrenheitToCelsiusRequest,FahrenheitToCelsiusResponse> (FarenheitToCelsius);
-				return farenheitToCelsius.BeginInvoke (request, callback, asyncState);
-			}
+            public IAsyncResult BeginFahrenheitToCelsius(
+                FahrenheitToCelsiusRequest request,
+                AsyncCallback callback,
+                object asyncState
+            )
+            {
+                if (farenheitToCelsius == null)
+                    farenheitToCelsius = new Func<
+                        FahrenheitToCelsiusRequest,
+                        FahrenheitToCelsiusResponse
+                    >(FarenheitToCelsius);
+                return farenheitToCelsius.BeginInvoke(request, callback, asyncState);
+            }
 
-			public FahrenheitToCelsiusResponse EndFahrenheitToCelsius (IAsyncResult result)
-			{
-				return farenheitToCelsius.EndInvoke (result);
-			}
+            public FahrenheitToCelsiusResponse EndFahrenheitToCelsius(IAsyncResult result)
+            {
+                return farenheitToCelsius.EndInvoke(result);
+            }
 
-			public IAsyncResult BeginCelsiusToFahrenheit (CelsiusToFahrenheitRequest request, AsyncCallback callback, object asyncState)
-			{
-				if (celsiusToFarenheit == null)
-					celsiusToFarenheit = new Func<CelsiusToFahrenheitRequest,CelsiusToFahrenheitResponse> (CelsiusToFarenheit);
-				return celsiusToFarenheit.BeginInvoke (request, callback, asyncState);
-			}
+            public IAsyncResult BeginCelsiusToFahrenheit(
+                CelsiusToFahrenheitRequest request,
+                AsyncCallback callback,
+                object asyncState
+            )
+            {
+                if (celsiusToFarenheit == null)
+                    celsiusToFarenheit = new Func<
+                        CelsiusToFahrenheitRequest,
+                        CelsiusToFahrenheitResponse
+                    >(CelsiusToFarenheit);
+                return celsiusToFarenheit.BeginInvoke(request, callback, asyncState);
+            }
 
-			public CelsiusToFahrenheitResponse EndCelsiusToFahrenheit (IAsyncResult result)
-			{
-				return celsiusToFarenheit.EndInvoke (result);
-			}
-		}
-	}
+            public CelsiusToFahrenheitResponse EndCelsiusToFahrenheit(IAsyncResult result)
+            {
+                return celsiusToFarenheit.EndInvoke(result);
+            }
+        }
+    }
 }
 
 //------------------------------------------------------------------------------
@@ -143,575 +190,771 @@ namespace MonoTests.System.ServiceModel.Dispatcher
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-// 
+//
 // This code was auto-generated by SlSvcUtil, version 5.0.61118.0
-// 
+//
 
-
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.ServiceContractAttribute (Namespace = "http://www.w3schools.com/webservices/", ConfigurationName = "TempConvertSoap")]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ServiceModel.ServiceContractAttribute(
+    Namespace = "http://www.w3schools.com/webservices/",
+    ConfigurationName = "TempConvertSoap"
+)]
 public interface TempConvertSoap
 {
+    [System.ServiceModel.OperationContractAttribute(
+        AsyncPattern = true,
+        Action = "http://www.w3schools.com/webservices/FahrenheitToCelsius",
+        ReplyAction = "*"
+    )]
+    System.IAsyncResult BeginFahrenheitToCelsius(
+        FahrenheitToCelsiusRequest request,
+        System.AsyncCallback callback,
+        object asyncState
+    );
 
-	[System.ServiceModel.OperationContractAttribute (AsyncPattern = true, Action = "http://www.w3schools.com/webservices/FahrenheitToCelsius", ReplyAction = "*")]
-	System.IAsyncResult BeginFahrenheitToCelsius (FahrenheitToCelsiusRequest request, System.AsyncCallback callback, object asyncState);
+    FahrenheitToCelsiusResponse EndFahrenheitToCelsius(System.IAsyncResult result);
 
-	FahrenheitToCelsiusResponse EndFahrenheitToCelsius (System.IAsyncResult result);
+    [System.ServiceModel.OperationContractAttribute(
+        AsyncPattern = true,
+        Action = "http://www.w3schools.com/webservices/CelsiusToFahrenheit",
+        ReplyAction = "*"
+    )]
+    System.IAsyncResult BeginCelsiusToFahrenheit(
+        CelsiusToFahrenheitRequest request,
+        System.AsyncCallback callback,
+        object asyncState
+    );
 
-	[System.ServiceModel.OperationContractAttribute (AsyncPattern = true, Action = "http://www.w3schools.com/webservices/CelsiusToFahrenheit", ReplyAction = "*")]
-	System.IAsyncResult BeginCelsiusToFahrenheit (CelsiusToFahrenheitRequest request, System.AsyncCallback callback, object asyncState);
-
-	CelsiusToFahrenheitResponse EndCelsiusToFahrenheit (System.IAsyncResult result);
+    CelsiusToFahrenheitResponse EndCelsiusToFahrenheit(System.IAsyncResult result);
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute (IsWrapped = false)]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
 public partial class FahrenheitToCelsiusRequest
 {
+    [System.ServiceModel.MessageBodyMemberAttribute(
+        Name = "FahrenheitToCelsius",
+        Namespace = "http://www.w3schools.com/webservices/",
+        Order = 0
+    )]
+    public FahrenheitToCelsiusRequestBody Body;
 
-	[System.ServiceModel.MessageBodyMemberAttribute (Name = "FahrenheitToCelsius", Namespace = "http://www.w3schools.com/webservices/", Order = 0)]
-	public FahrenheitToCelsiusRequestBody Body;
+    public FahrenheitToCelsiusRequest() { }
 
-	public FahrenheitToCelsiusRequest ()
-	{
-	}
-
-	public FahrenheitToCelsiusRequest (FahrenheitToCelsiusRequestBody Body)
-	{
-		this.Body = Body;
-	}
+    public FahrenheitToCelsiusRequest(FahrenheitToCelsiusRequestBody Body)
+    {
+        this.Body = Body;
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.Runtime.Serialization.DataContractAttribute (Namespace = "http://www.w3schools.com/webservices/")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.Runtime.Serialization.DataContractAttribute(
+    Namespace = "http://www.w3schools.com/webservices/"
+)]
 public partial class FahrenheitToCelsiusRequestBody
 {
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
+    public string Fahrenheit;
 
-	[System.Runtime.Serialization.DataMemberAttribute (EmitDefaultValue = false, Order = 0)]
-	public string Fahrenheit;
+    public FahrenheitToCelsiusRequestBody() { }
 
-	public FahrenheitToCelsiusRequestBody ()
-	{
-	}
-
-	public FahrenheitToCelsiusRequestBody (string Fahrenheit)
-	{
-		this.Fahrenheit = Fahrenheit;
-	}
+    public FahrenheitToCelsiusRequestBody(string Fahrenheit)
+    {
+        this.Fahrenheit = Fahrenheit;
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute (IsWrapped = false)]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
 public partial class FahrenheitToCelsiusResponse
 {
+    [System.ServiceModel.MessageBodyMemberAttribute(
+        Name = "FahrenheitToCelsiusResponse",
+        Namespace = "http://www.w3schools.com/webservices/",
+        Order = 0
+    )]
+    public FahrenheitToCelsiusResponseBody Body;
 
-	[System.ServiceModel.MessageBodyMemberAttribute (Name = "FahrenheitToCelsiusResponse", Namespace = "http://www.w3schools.com/webservices/", Order = 0)]
-	public FahrenheitToCelsiusResponseBody Body;
+    public FahrenheitToCelsiusResponse() { }
 
-	public FahrenheitToCelsiusResponse ()
-	{
-	}
-
-	public FahrenheitToCelsiusResponse (FahrenheitToCelsiusResponseBody Body)
-	{
-		this.Body = Body;
-	}
+    public FahrenheitToCelsiusResponse(FahrenheitToCelsiusResponseBody Body)
+    {
+        this.Body = Body;
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.Runtime.Serialization.DataContractAttribute (Namespace = "http://www.w3schools.com/webservices/")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.Runtime.Serialization.DataContractAttribute(
+    Namespace = "http://www.w3schools.com/webservices/"
+)]
 public partial class FahrenheitToCelsiusResponseBody
 {
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
+    public string FahrenheitToCelsiusResult;
 
-	[System.Runtime.Serialization.DataMemberAttribute (EmitDefaultValue = false, Order = 0)]
-	public string FahrenheitToCelsiusResult;
+    public FahrenheitToCelsiusResponseBody() { }
 
-	public FahrenheitToCelsiusResponseBody ()
-	{
-	}
-
-	public FahrenheitToCelsiusResponseBody (string FahrenheitToCelsiusResult)
-	{
-		this.FahrenheitToCelsiusResult = FahrenheitToCelsiusResult;
-	}
+    public FahrenheitToCelsiusResponseBody(string FahrenheitToCelsiusResult)
+    {
+        this.FahrenheitToCelsiusResult = FahrenheitToCelsiusResult;
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute (IsWrapped = false)]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
 public partial class CelsiusToFahrenheitRequest
 {
+    [System.ServiceModel.MessageBodyMemberAttribute(
+        Name = "CelsiusToFahrenheit",
+        Namespace = "http://www.w3schools.com/webservices/",
+        Order = 0
+    )]
+    public CelsiusToFahrenheitRequestBody Body;
 
-	[System.ServiceModel.MessageBodyMemberAttribute (Name = "CelsiusToFahrenheit", Namespace = "http://www.w3schools.com/webservices/", Order = 0)]
-	public CelsiusToFahrenheitRequestBody Body;
+    public CelsiusToFahrenheitRequest() { }
 
-	public CelsiusToFahrenheitRequest ()
-	{
-	}
-
-	public CelsiusToFahrenheitRequest (CelsiusToFahrenheitRequestBody Body)
-	{
-		this.Body = Body;
-	}
+    public CelsiusToFahrenheitRequest(CelsiusToFahrenheitRequestBody Body)
+    {
+        this.Body = Body;
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.Runtime.Serialization.DataContractAttribute (Namespace = "http://www.w3schools.com/webservices/")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.Runtime.Serialization.DataContractAttribute(
+    Namespace = "http://www.w3schools.com/webservices/"
+)]
 public partial class CelsiusToFahrenheitRequestBody
 {
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
+    public string Celsius;
 
-	[System.Runtime.Serialization.DataMemberAttribute (EmitDefaultValue = false, Order = 0)]
-	public string Celsius;
+    public CelsiusToFahrenheitRequestBody() { }
 
-	public CelsiusToFahrenheitRequestBody ()
-	{
-	}
-
-	public CelsiusToFahrenheitRequestBody (string Celsius)
-	{
-		this.Celsius = Celsius;
-	}
+    public CelsiusToFahrenheitRequestBody(string Celsius)
+    {
+        this.Celsius = Celsius;
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.ServiceModel.MessageContractAttribute (IsWrapped = false)]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
 public partial class CelsiusToFahrenheitResponse
 {
+    [System.ServiceModel.MessageBodyMemberAttribute(
+        Name = "CelsiusToFahrenheitResponse",
+        Namespace = "http://www.w3schools.com/webservices/",
+        Order = 0
+    )]
+    public CelsiusToFahrenheitResponseBody Body;
 
-	[System.ServiceModel.MessageBodyMemberAttribute (Name = "CelsiusToFahrenheitResponse", Namespace = "http://www.w3schools.com/webservices/", Order = 0)]
-	public CelsiusToFahrenheitResponseBody Body;
+    public CelsiusToFahrenheitResponse() { }
 
-	public CelsiusToFahrenheitResponse ()
-	{
-	}
-
-	public CelsiusToFahrenheitResponse (CelsiusToFahrenheitResponseBody Body)
-	{
-		this.Body = Body;
-	}
+    public CelsiusToFahrenheitResponse(CelsiusToFahrenheitResponseBody Body)
+    {
+        this.Body = Body;
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-[System.Runtime.Serialization.DataContractAttribute (Namespace = "http://www.w3schools.com/webservices/")]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ComponentModel.EditorBrowsableAttribute(
+    System.ComponentModel.EditorBrowsableState.Advanced
+)]
+[System.Runtime.Serialization.DataContractAttribute(
+    Namespace = "http://www.w3schools.com/webservices/"
+)]
 public partial class CelsiusToFahrenheitResponseBody
 {
+    [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue = false, Order = 0)]
+    public string CelsiusToFahrenheitResult;
 
-	[System.Runtime.Serialization.DataMemberAttribute (EmitDefaultValue = false, Order = 0)]
-	public string CelsiusToFahrenheitResult;
+    public CelsiusToFahrenheitResponseBody() { }
 
-	public CelsiusToFahrenheitResponseBody ()
-	{
-	}
-
-	public CelsiusToFahrenheitResponseBody (string CelsiusToFahrenheitResult)
-	{
-		this.CelsiusToFahrenheitResult = CelsiusToFahrenheitResult;
-	}
+    public CelsiusToFahrenheitResponseBody(string CelsiusToFahrenheitResult)
+    {
+        this.CelsiusToFahrenheitResult = CelsiusToFahrenheitResult;
+    }
 }
 
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-public interface TempConvertSoapChannel : TempConvertSoap, System.ServiceModel.IClientChannel
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public interface TempConvertSoapChannel : TempConvertSoap, System.ServiceModel.IClientChannel { }
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class FahrenheitToCelsiusCompletedEventArgs
+    : System.ComponentModel.AsyncCompletedEventArgs
 {
+    private object[] results;
+
+    public FahrenheitToCelsiusCompletedEventArgs(
+        object[] results,
+        System.Exception exception,
+        bool cancelled,
+        object userState
+    )
+        : base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
+
+    public string Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((string)(this.results[0]));
+        }
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-public partial class FahrenheitToCelsiusCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class CelsiusToFahrenheitCompletedEventArgs
+    : System.ComponentModel.AsyncCompletedEventArgs
 {
+    private object[] results;
 
-	private object[] results;
+    public CelsiusToFahrenheitCompletedEventArgs(
+        object[] results,
+        System.Exception exception,
+        bool cancelled,
+        object userState
+    )
+        : base(exception, cancelled, userState)
+    {
+        this.results = results;
+    }
 
-	public FahrenheitToCelsiusCompletedEventArgs (object[] results, System.Exception exception, bool cancelled, object userState) :
-	base (exception, cancelled, userState)
-	{
-		this.results = results;
-	}
-
-	public string Result {
-		get {
-			base.RaiseExceptionIfNecessary ();
-			return ((string)(this.results [0]));
-		}
-	}
+    public string Result
+    {
+        get
+        {
+            base.RaiseExceptionIfNecessary();
+            return ((string)(this.results[0]));
+        }
+    }
 }
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-public partial class CelsiusToFahrenheitCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+public partial class TempConvertSoapClient
+    : System.ServiceModel.ClientBase<TempConvertSoap>,
+        TempConvertSoap
 {
+    private BeginOperationDelegate onBeginFahrenheitToCelsiusDelegate;
 
-	private object[] results;
+    private EndOperationDelegate onEndFahrenheitToCelsiusDelegate;
 
-	public CelsiusToFahrenheitCompletedEventArgs (object[] results, System.Exception exception, bool cancelled, object userState) :
-	base (exception, cancelled, userState)
-	{
-		this.results = results;
-	}
+    private System.Threading.SendOrPostCallback onFahrenheitToCelsiusCompletedDelegate;
 
-	public string Result {
-		get {
-			base.RaiseExceptionIfNecessary ();
-			return ((string)(this.results [0]));
-		}
-	}
-}
+    private BeginOperationDelegate onBeginCelsiusToFahrenheitDelegate;
 
-[System.Diagnostics.DebuggerStepThroughAttribute ()]
-[System.CodeDom.Compiler.GeneratedCodeAttribute ("System.ServiceModel", "4.0.0.0")]
-public partial class TempConvertSoapClient : System.ServiceModel.ClientBase<TempConvertSoap>, TempConvertSoap
-{
+    private EndOperationDelegate onEndCelsiusToFahrenheitDelegate;
 
-	private BeginOperationDelegate onBeginFahrenheitToCelsiusDelegate;
+    private System.Threading.SendOrPostCallback onCelsiusToFahrenheitCompletedDelegate;
 
-	private EndOperationDelegate onEndFahrenheitToCelsiusDelegate;
+    private BeginOperationDelegate onBeginOpenDelegate;
 
-	private System.Threading.SendOrPostCallback onFahrenheitToCelsiusCompletedDelegate;
+    private EndOperationDelegate onEndOpenDelegate;
 
-	private BeginOperationDelegate onBeginCelsiusToFahrenheitDelegate;
+    private System.Threading.SendOrPostCallback onOpenCompletedDelegate;
 
-	private EndOperationDelegate onEndCelsiusToFahrenheitDelegate;
+    private BeginOperationDelegate onBeginCloseDelegate;
 
-	private System.Threading.SendOrPostCallback onCelsiusToFahrenheitCompletedDelegate;
+    private EndOperationDelegate onEndCloseDelegate;
 
-	private BeginOperationDelegate onBeginOpenDelegate;
+    private System.Threading.SendOrPostCallback onCloseCompletedDelegate;
 
-	private EndOperationDelegate onEndOpenDelegate;
+    public TempConvertSoapClient() { }
 
-	private System.Threading.SendOrPostCallback onOpenCompletedDelegate;
+    public TempConvertSoapClient(string endpointConfigurationName)
+        : base(endpointConfigurationName) { }
 
-	private BeginOperationDelegate onBeginCloseDelegate;
+    public TempConvertSoapClient(string endpointConfigurationName, string remoteAddress)
+        : base(endpointConfigurationName, remoteAddress) { }
 
-	private EndOperationDelegate onEndCloseDelegate;
+    public TempConvertSoapClient(
+        string endpointConfigurationName,
+        System.ServiceModel.EndpointAddress remoteAddress
+    )
+        : base(endpointConfigurationName, remoteAddress) { }
 
-	private System.Threading.SendOrPostCallback onCloseCompletedDelegate;
+    public TempConvertSoapClient(
+        System.ServiceModel.Channels.Binding binding,
+        System.ServiceModel.EndpointAddress remoteAddress
+    )
+        : base(binding, remoteAddress) { }
 
-	public TempConvertSoapClient ()
-	{
-	}
+    public System.Net.CookieContainer CookieContainer
+    {
+        get
+        {
+            System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
+                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+            if ((httpCookieContainerManager != null))
+            {
+                return httpCookieContainerManager.CookieContainer;
+            }
+            else
+            {
+                return null;
+            }
+        }
+        set
+        {
+            System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager =
+                this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager>();
+            if ((httpCookieContainerManager != null))
+            {
+                httpCookieContainerManager.CookieContainer = value;
+            }
+            else
+            {
+                throw new System.InvalidOperationException(
+                    "Unable to set the CookieContainer. Please make sure the binding contains an HttpC"
+                        + "ookieContainerBindingElement."
+                );
+            }
+        }
+    }
 
-	public TempConvertSoapClient (string endpointConfigurationName) :
-	base (endpointConfigurationName)
-	{
-	}
+    public event System.EventHandler<FahrenheitToCelsiusCompletedEventArgs> FahrenheitToCelsiusCompleted;
 
-	public TempConvertSoapClient (string endpointConfigurationName, string remoteAddress) :
-	base (endpointConfigurationName, remoteAddress)
-	{
-	}
+    public event System.EventHandler<CelsiusToFahrenheitCompletedEventArgs> CelsiusToFahrenheitCompleted;
 
-	public TempConvertSoapClient (string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
-	base (endpointConfigurationName, remoteAddress)
-	{
-	}
+    public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
 
-	public TempConvertSoapClient (System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
-	base (binding, remoteAddress)
-	{
-	}
+    public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
 
-	public System.Net.CookieContainer CookieContainer {
-		get {
-			System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager = this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager> ();
-			if ((httpCookieContainerManager != null)) {
-				return httpCookieContainerManager.CookieContainer;
-			} else {
-				return null;
-			}
-		}
-		set {
-			System.ServiceModel.Channels.IHttpCookieContainerManager httpCookieContainerManager = this.InnerChannel.GetProperty<System.ServiceModel.Channels.IHttpCookieContainerManager> ();
-			if ((httpCookieContainerManager != null)) {
-				httpCookieContainerManager.CookieContainer = value;
-			} else {
-				throw new System.InvalidOperationException ("Unable to set the CookieContainer. Please make sure the binding contains an HttpC" +
-					"ookieContainerBindingElement.");
-			}
-		}
-	}
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    System.IAsyncResult TempConvertSoap.BeginFahrenheitToCelsius(
+        FahrenheitToCelsiusRequest request,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        return base.Channel.BeginFahrenheitToCelsius(request, callback, asyncState);
+    }
 
-	public event System.EventHandler<FahrenheitToCelsiusCompletedEventArgs> FahrenheitToCelsiusCompleted;
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    private System.IAsyncResult BeginFahrenheitToCelsius(
+        string Fahrenheit,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        FahrenheitToCelsiusRequest inValue = new FahrenheitToCelsiusRequest();
+        inValue.Body = new FahrenheitToCelsiusRequestBody();
+        inValue.Body.Fahrenheit = Fahrenheit;
+        return ((TempConvertSoap)(this)).BeginFahrenheitToCelsius(inValue, callback, asyncState);
+    }
 
-	public event System.EventHandler<CelsiusToFahrenheitCompletedEventArgs> CelsiusToFahrenheitCompleted;
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    FahrenheitToCelsiusResponse TempConvertSoap.EndFahrenheitToCelsius(System.IAsyncResult result)
+    {
+        return base.Channel.EndFahrenheitToCelsius(result);
+    }
 
-	public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    private string EndFahrenheitToCelsius(System.IAsyncResult result)
+    {
+        FahrenheitToCelsiusResponse retVal = ((TempConvertSoap)(this)).EndFahrenheitToCelsius(
+            result
+        );
+        return retVal.Body.FahrenheitToCelsiusResult;
+    }
 
-	public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
+    private System.IAsyncResult OnBeginFahrenheitToCelsius(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        string Fahrenheit = ((string)(inValues[0]));
+        return this.BeginFahrenheitToCelsius(Fahrenheit, callback, asyncState);
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	System.IAsyncResult TempConvertSoap.BeginFahrenheitToCelsius (FahrenheitToCelsiusRequest request, System.AsyncCallback callback, object asyncState)
-	{
-		return base.Channel.BeginFahrenheitToCelsius (request, callback, asyncState);
-	}
+    private object[] OnEndFahrenheitToCelsius(System.IAsyncResult result)
+    {
+        string retVal = this.EndFahrenheitToCelsius(result);
+        return new object[] { retVal };
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	private System.IAsyncResult BeginFahrenheitToCelsius (string Fahrenheit, System.AsyncCallback callback, object asyncState)
-	{
-		FahrenheitToCelsiusRequest inValue = new FahrenheitToCelsiusRequest ();
-		inValue.Body = new FahrenheitToCelsiusRequestBody ();
-		inValue.Body.Fahrenheit = Fahrenheit;
-		return ((TempConvertSoap)(this)).BeginFahrenheitToCelsius (inValue, callback, asyncState);
-	}
+    private void OnFahrenheitToCelsiusCompleted(object state)
+    {
+        if ((this.FahrenheitToCelsiusCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.FahrenheitToCelsiusCompleted(
+                this,
+                new FahrenheitToCelsiusCompletedEventArgs(
+                    e.Results,
+                    e.Error,
+                    e.Cancelled,
+                    e.UserState
+                )
+            );
+        }
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	FahrenheitToCelsiusResponse TempConvertSoap.EndFahrenheitToCelsius (System.IAsyncResult result)
-	{
-		return base.Channel.EndFahrenheitToCelsius (result);
-	}
+    public void FahrenheitToCelsiusAsync(string Fahrenheit)
+    {
+        this.FahrenheitToCelsiusAsync(Fahrenheit, null);
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	private string EndFahrenheitToCelsius (System.IAsyncResult result)
-	{
-		FahrenheitToCelsiusResponse retVal = ((TempConvertSoap)(this)).EndFahrenheitToCelsius (result);
-		return retVal.Body.FahrenheitToCelsiusResult;
-	}
+    public void FahrenheitToCelsiusAsync(string Fahrenheit, object userState)
+    {
+        if ((this.onBeginFahrenheitToCelsiusDelegate == null))
+        {
+            this.onBeginFahrenheitToCelsiusDelegate = new BeginOperationDelegate(
+                this.OnBeginFahrenheitToCelsius
+            );
+        }
+        if ((this.onEndFahrenheitToCelsiusDelegate == null))
+        {
+            this.onEndFahrenheitToCelsiusDelegate = new EndOperationDelegate(
+                this.OnEndFahrenheitToCelsius
+            );
+        }
+        if ((this.onFahrenheitToCelsiusCompletedDelegate == null))
+        {
+            this.onFahrenheitToCelsiusCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnFahrenheitToCelsiusCompleted
+            );
+        }
+        base.InvokeAsync(
+            this.onBeginFahrenheitToCelsiusDelegate,
+            new object[] { Fahrenheit },
+            this.onEndFahrenheitToCelsiusDelegate,
+            this.onFahrenheitToCelsiusCompletedDelegate,
+            userState
+        );
+    }
 
-	private System.IAsyncResult OnBeginFahrenheitToCelsius (object[] inValues, System.AsyncCallback callback, object asyncState)
-	{
-		string Fahrenheit = ((string)(inValues [0]));
-		return this.BeginFahrenheitToCelsius (Fahrenheit, callback, asyncState);
-	}
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    System.IAsyncResult TempConvertSoap.BeginCelsiusToFahrenheit(
+        CelsiusToFahrenheitRequest request,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        return base.Channel.BeginCelsiusToFahrenheit(request, callback, asyncState);
+    }
 
-	private object[] OnEndFahrenheitToCelsius (System.IAsyncResult result)
-	{
-		string retVal = this.EndFahrenheitToCelsius (result);
-		return new object[] {
-			retVal
-		};
-	}
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    private System.IAsyncResult BeginCelsiusToFahrenheit(
+        string Celsius,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        CelsiusToFahrenheitRequest inValue = new CelsiusToFahrenheitRequest();
+        inValue.Body = new CelsiusToFahrenheitRequestBody();
+        inValue.Body.Celsius = Celsius;
+        return ((TempConvertSoap)(this)).BeginCelsiusToFahrenheit(inValue, callback, asyncState);
+    }
 
-	private void OnFahrenheitToCelsiusCompleted (object state)
-	{
-		if ((this.FahrenheitToCelsiusCompleted != null)) {
-			InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-			this.FahrenheitToCelsiusCompleted (this, new FahrenheitToCelsiusCompletedEventArgs (e.Results, e.Error, e.Cancelled, e.UserState));
-		}
-	}
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    CelsiusToFahrenheitResponse TempConvertSoap.EndCelsiusToFahrenheit(System.IAsyncResult result)
+    {
+        return base.Channel.EndCelsiusToFahrenheit(result);
+    }
 
-	public void FahrenheitToCelsiusAsync (string Fahrenheit)
-	{
-		this.FahrenheitToCelsiusAsync (Fahrenheit, null);
-	}
+    [System.ComponentModel.EditorBrowsableAttribute(
+        System.ComponentModel.EditorBrowsableState.Advanced
+    )]
+    private string EndCelsiusToFahrenheit(System.IAsyncResult result)
+    {
+        CelsiusToFahrenheitResponse retVal = ((TempConvertSoap)(this)).EndCelsiusToFahrenheit(
+            result
+        );
+        return retVal.Body.CelsiusToFahrenheitResult;
+    }
 
-	public void FahrenheitToCelsiusAsync (string Fahrenheit, object userState)
-	{
-		if ((this.onBeginFahrenheitToCelsiusDelegate == null)) {
-			this.onBeginFahrenheitToCelsiusDelegate = new BeginOperationDelegate (this.OnBeginFahrenheitToCelsius);
-		}
-		if ((this.onEndFahrenheitToCelsiusDelegate == null)) {
-			this.onEndFahrenheitToCelsiusDelegate = new EndOperationDelegate (this.OnEndFahrenheitToCelsius);
-		}
-		if ((this.onFahrenheitToCelsiusCompletedDelegate == null)) {
-			this.onFahrenheitToCelsiusCompletedDelegate = new System.Threading.SendOrPostCallback (this.OnFahrenheitToCelsiusCompleted);
-		}
-		base.InvokeAsync (this.onBeginFahrenheitToCelsiusDelegate, new object[] {
-			Fahrenheit
-		}, this.onEndFahrenheitToCelsiusDelegate, this.onFahrenheitToCelsiusCompletedDelegate, userState);
-	}
+    private System.IAsyncResult OnBeginCelsiusToFahrenheit(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        string Celsius = ((string)(inValues[0]));
+        return this.BeginCelsiusToFahrenheit(Celsius, callback, asyncState);
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	System.IAsyncResult TempConvertSoap.BeginCelsiusToFahrenheit (CelsiusToFahrenheitRequest request, System.AsyncCallback callback, object asyncState)
-	{
-		return base.Channel.BeginCelsiusToFahrenheit (request, callback, asyncState);
-	}
+    private object[] OnEndCelsiusToFahrenheit(System.IAsyncResult result)
+    {
+        string retVal = this.EndCelsiusToFahrenheit(result);
+        return new object[] { retVal };
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	private System.IAsyncResult BeginCelsiusToFahrenheit (string Celsius, System.AsyncCallback callback, object asyncState)
-	{
-		CelsiusToFahrenheitRequest inValue = new CelsiusToFahrenheitRequest ();
-		inValue.Body = new CelsiusToFahrenheitRequestBody ();
-		inValue.Body.Celsius = Celsius;
-		return ((TempConvertSoap)(this)).BeginCelsiusToFahrenheit (inValue, callback, asyncState);
-	}
+    private void OnCelsiusToFahrenheitCompleted(object state)
+    {
+        if ((this.CelsiusToFahrenheitCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.CelsiusToFahrenheitCompleted(
+                this,
+                new CelsiusToFahrenheitCompletedEventArgs(
+                    e.Results,
+                    e.Error,
+                    e.Cancelled,
+                    e.UserState
+                )
+            );
+        }
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	CelsiusToFahrenheitResponse TempConvertSoap.EndCelsiusToFahrenheit (System.IAsyncResult result)
-	{
-		return base.Channel.EndCelsiusToFahrenheit (result);
-	}
+    public void CelsiusToFahrenheitAsync(string Celsius)
+    {
+        this.CelsiusToFahrenheitAsync(Celsius, null);
+    }
 
-	[System.ComponentModel.EditorBrowsableAttribute (System.ComponentModel.EditorBrowsableState.Advanced)]
-	private string EndCelsiusToFahrenheit (System.IAsyncResult result)
-	{
-		CelsiusToFahrenheitResponse retVal = ((TempConvertSoap)(this)).EndCelsiusToFahrenheit (result);
-		return retVal.Body.CelsiusToFahrenheitResult;
-	}
+    public void CelsiusToFahrenheitAsync(string Celsius, object userState)
+    {
+        if ((this.onBeginCelsiusToFahrenheitDelegate == null))
+        {
+            this.onBeginCelsiusToFahrenheitDelegate = new BeginOperationDelegate(
+                this.OnBeginCelsiusToFahrenheit
+            );
+        }
+        if ((this.onEndCelsiusToFahrenheitDelegate == null))
+        {
+            this.onEndCelsiusToFahrenheitDelegate = new EndOperationDelegate(
+                this.OnEndCelsiusToFahrenheit
+            );
+        }
+        if ((this.onCelsiusToFahrenheitCompletedDelegate == null))
+        {
+            this.onCelsiusToFahrenheitCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnCelsiusToFahrenheitCompleted
+            );
+        }
+        base.InvokeAsync(
+            this.onBeginCelsiusToFahrenheitDelegate,
+            new object[] { Celsius },
+            this.onEndCelsiusToFahrenheitDelegate,
+            this.onCelsiusToFahrenheitCompletedDelegate,
+            userState
+        );
+    }
 
-	private System.IAsyncResult OnBeginCelsiusToFahrenheit (object[] inValues, System.AsyncCallback callback, object asyncState)
-	{
-		string Celsius = ((string)(inValues [0]));
-		return this.BeginCelsiusToFahrenheit (Celsius, callback, asyncState);
-	}
+    private System.IAsyncResult OnBeginOpen(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
+    }
 
-	private object[] OnEndCelsiusToFahrenheit (System.IAsyncResult result)
-	{
-		string retVal = this.EndCelsiusToFahrenheit (result);
-		return new object[] {
-			retVal
-		};
-	}
+    private object[] OnEndOpen(System.IAsyncResult result)
+    {
+        ((System.ServiceModel.ICommunicationObject)(this)).EndOpen(result);
+        return null;
+    }
 
-	private void OnCelsiusToFahrenheitCompleted (object state)
-	{
-		if ((this.CelsiusToFahrenheitCompleted != null)) {
-			InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-			this.CelsiusToFahrenheitCompleted (this, new CelsiusToFahrenheitCompletedEventArgs (e.Results, e.Error, e.Cancelled, e.UserState));
-		}
-	}
+    private void OnOpenCompleted(object state)
+    {
+        if ((this.OpenCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.OpenCompleted(
+                this,
+                new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+            );
+        }
+    }
 
-	public void CelsiusToFahrenheitAsync (string Celsius)
-	{
-		this.CelsiusToFahrenheitAsync (Celsius, null);
-	}
+    public void OpenAsync()
+    {
+        this.OpenAsync(null);
+    }
 
-	public void CelsiusToFahrenheitAsync (string Celsius, object userState)
-	{
-		if ((this.onBeginCelsiusToFahrenheitDelegate == null)) {
-			this.onBeginCelsiusToFahrenheitDelegate = new BeginOperationDelegate (this.OnBeginCelsiusToFahrenheit);
-		}
-		if ((this.onEndCelsiusToFahrenheitDelegate == null)) {
-			this.onEndCelsiusToFahrenheitDelegate = new EndOperationDelegate (this.OnEndCelsiusToFahrenheit);
-		}
-		if ((this.onCelsiusToFahrenheitCompletedDelegate == null)) {
-			this.onCelsiusToFahrenheitCompletedDelegate = new System.Threading.SendOrPostCallback (this.OnCelsiusToFahrenheitCompleted);
-		}
-		base.InvokeAsync (this.onBeginCelsiusToFahrenheitDelegate, new object[] {
-			Celsius
-		}, this.onEndCelsiusToFahrenheitDelegate, this.onCelsiusToFahrenheitCompletedDelegate, userState);
-	}
+    public void OpenAsync(object userState)
+    {
+        if ((this.onBeginOpenDelegate == null))
+        {
+            this.onBeginOpenDelegate = new BeginOperationDelegate(this.OnBeginOpen);
+        }
+        if ((this.onEndOpenDelegate == null))
+        {
+            this.onEndOpenDelegate = new EndOperationDelegate(this.OnEndOpen);
+        }
+        if ((this.onOpenCompletedDelegate == null))
+        {
+            this.onOpenCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnOpenCompleted
+            );
+        }
+        base.InvokeAsync(
+            this.onBeginOpenDelegate,
+            null,
+            this.onEndOpenDelegate,
+            this.onOpenCompletedDelegate,
+            userState
+        );
+    }
 
-	private System.IAsyncResult OnBeginOpen (object[] inValues, System.AsyncCallback callback, object asyncState)
-	{
-		return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen (callback, asyncState);
-	}
+    private System.IAsyncResult OnBeginClose(
+        object[] inValues,
+        System.AsyncCallback callback,
+        object asyncState
+    )
+    {
+        return ((System.ServiceModel.ICommunicationObject)(this)).BeginClose(callback, asyncState);
+    }
 
-	private object[] OnEndOpen (System.IAsyncResult result)
-	{
-		((System.ServiceModel.ICommunicationObject)(this)).EndOpen (result);
-		return null;
-	}
+    private object[] OnEndClose(System.IAsyncResult result)
+    {
+        ((System.ServiceModel.ICommunicationObject)(this)).EndClose(result);
+        return null;
+    }
 
-	private void OnOpenCompleted (object state)
-	{
-		if ((this.OpenCompleted != null)) {
-			InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-			this.OpenCompleted (this, new System.ComponentModel.AsyncCompletedEventArgs (e.Error, e.Cancelled, e.UserState));
-		}
-	}
+    private void OnCloseCompleted(object state)
+    {
+        if ((this.CloseCompleted != null))
+        {
+            InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+            this.CloseCompleted(
+                this,
+                new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState)
+            );
+        }
+    }
 
-	public void OpenAsync ()
-	{
-		this.OpenAsync (null);
-	}
+    public void CloseAsync()
+    {
+        this.CloseAsync(null);
+    }
 
-	public void OpenAsync (object userState)
-	{
-		if ((this.onBeginOpenDelegate == null)) {
-			this.onBeginOpenDelegate = new BeginOperationDelegate (this.OnBeginOpen);
-		}
-		if ((this.onEndOpenDelegate == null)) {
-			this.onEndOpenDelegate = new EndOperationDelegate (this.OnEndOpen);
-		}
-		if ((this.onOpenCompletedDelegate == null)) {
-			this.onOpenCompletedDelegate = new System.Threading.SendOrPostCallback (this.OnOpenCompleted);
-		}
-		base.InvokeAsync (this.onBeginOpenDelegate, null, this.onEndOpenDelegate, this.onOpenCompletedDelegate, userState);
-	}
+    public void CloseAsync(object userState)
+    {
+        if ((this.onBeginCloseDelegate == null))
+        {
+            this.onBeginCloseDelegate = new BeginOperationDelegate(this.OnBeginClose);
+        }
+        if ((this.onEndCloseDelegate == null))
+        {
+            this.onEndCloseDelegate = new EndOperationDelegate(this.OnEndClose);
+        }
+        if ((this.onCloseCompletedDelegate == null))
+        {
+            this.onCloseCompletedDelegate = new System.Threading.SendOrPostCallback(
+                this.OnCloseCompleted
+            );
+        }
+        base.InvokeAsync(
+            this.onBeginCloseDelegate,
+            null,
+            this.onEndCloseDelegate,
+            this.onCloseCompletedDelegate,
+            userState
+        );
+    }
 
-	private System.IAsyncResult OnBeginClose (object[] inValues, System.AsyncCallback callback, object asyncState)
-	{
-		return ((System.ServiceModel.ICommunicationObject)(this)).BeginClose (callback, asyncState);
-	}
+    protected override TempConvertSoap CreateChannel()
+    {
+        return new TempConvertSoapClientChannel(this);
+    }
 
-	private object[] OnEndClose (System.IAsyncResult result)
-	{
-		((System.ServiceModel.ICommunicationObject)(this)).EndClose (result);
-		return null;
-	}
+    private class TempConvertSoapClientChannel : ChannelBase<TempConvertSoap>, TempConvertSoap
+    {
+        public TempConvertSoapClientChannel(System.ServiceModel.ClientBase<TempConvertSoap> client)
+            : base(client) { }
 
-	private void OnCloseCompleted (object state)
-	{
-		if ((this.CloseCompleted != null)) {
-			InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-			this.CloseCompleted (this, new System.ComponentModel.AsyncCompletedEventArgs (e.Error, e.Cancelled, e.UserState));
-		}
-	}
+        public System.IAsyncResult BeginFahrenheitToCelsius(
+            FahrenheitToCelsiusRequest request,
+            System.AsyncCallback callback,
+            object asyncState
+        )
+        {
+            object[] _args = new object[1];
+            _args[0] = request;
+            System.IAsyncResult _result = base.BeginInvoke(
+                "FahrenheitToCelsius",
+                _args,
+                callback,
+                asyncState
+            );
+            return _result;
+        }
 
-	public void CloseAsync ()
-	{
-		this.CloseAsync (null);
-	}
+        public FahrenheitToCelsiusResponse EndFahrenheitToCelsius(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            FahrenheitToCelsiusResponse _result = (
+                (FahrenheitToCelsiusResponse)(base.EndInvoke("FahrenheitToCelsius", _args, result))
+            );
+            return _result;
+        }
 
-	public void CloseAsync (object userState)
-	{
-		if ((this.onBeginCloseDelegate == null)) {
-			this.onBeginCloseDelegate = new BeginOperationDelegate (this.OnBeginClose);
-		}
-		if ((this.onEndCloseDelegate == null)) {
-			this.onEndCloseDelegate = new EndOperationDelegate (this.OnEndClose);
-		}
-		if ((this.onCloseCompletedDelegate == null)) {
-			this.onCloseCompletedDelegate = new System.Threading.SendOrPostCallback (this.OnCloseCompleted);
-		}
-		base.InvokeAsync (this.onBeginCloseDelegate, null, this.onEndCloseDelegate, this.onCloseCompletedDelegate, userState);
-	}
+        public System.IAsyncResult BeginCelsiusToFahrenheit(
+            CelsiusToFahrenheitRequest request,
+            System.AsyncCallback callback,
+            object asyncState
+        )
+        {
+            object[] _args = new object[1];
+            _args[0] = request;
+            System.IAsyncResult _result = base.BeginInvoke(
+                "CelsiusToFahrenheit",
+                _args,
+                callback,
+                asyncState
+            );
+            return _result;
+        }
 
-	protected override TempConvertSoap CreateChannel ()
-	{
-		return new TempConvertSoapClientChannel (this);
-	}
-
-	private class TempConvertSoapClientChannel : ChannelBase<TempConvertSoap>, TempConvertSoap
-	{
-
-		public TempConvertSoapClientChannel (System.ServiceModel.ClientBase<TempConvertSoap> client) :
-		base (client)
-		{
-		}
-
-		public System.IAsyncResult BeginFahrenheitToCelsius (FahrenheitToCelsiusRequest request, System.AsyncCallback callback, object asyncState)
-		{
-			object[] _args = new object[1];
-			_args [0] = request;
-			System.IAsyncResult _result = base.BeginInvoke ("FahrenheitToCelsius", _args, callback, asyncState);
-			return _result;
-		}
-
-		public FahrenheitToCelsiusResponse EndFahrenheitToCelsius (System.IAsyncResult result)
-		{
-			object[] _args = new object[0];
-			FahrenheitToCelsiusResponse _result = ((FahrenheitToCelsiusResponse)(base.EndInvoke ("FahrenheitToCelsius", _args, result)));
-			return _result;
-		}
-
-		public System.IAsyncResult BeginCelsiusToFahrenheit (CelsiusToFahrenheitRequest request, System.AsyncCallback callback, object asyncState)
-		{
-			object[] _args = new object[1];
-			_args [0] = request;
-			System.IAsyncResult _result = base.BeginInvoke ("CelsiusToFahrenheit", _args, callback, asyncState);
-			return _result;
-		}
-
-		public CelsiusToFahrenheitResponse EndCelsiusToFahrenheit (System.IAsyncResult result)
-		{
-			object[] _args = new object[0];
-			CelsiusToFahrenheitResponse _result = ((CelsiusToFahrenheitResponse)(base.EndInvoke ("CelsiusToFahrenheit", _args, result)));
-			return _result;
-		}
-	}
+        public CelsiusToFahrenheitResponse EndCelsiusToFahrenheit(System.IAsyncResult result)
+        {
+            object[] _args = new object[0];
+            CelsiusToFahrenheitResponse _result = (
+                (CelsiusToFahrenheitResponse)(base.EndInvoke("CelsiusToFahrenheit", _args, result))
+            );
+            return _result;
+        }
+    }
 }
 #endif

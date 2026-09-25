@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector<int>;
 using Xunit;
+using Point = System.Numerics.Vector<int>;
 
 namespace VectorTests
 {

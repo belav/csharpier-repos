@@ -14,8 +14,9 @@ namespace System.Net.Http.Headers
     {
         private readonly UriKind _uriKind;
 
-        internal static readonly UriHeaderParser RelativeOrAbsoluteUriParser =
-            new UriHeaderParser(UriKind.RelativeOrAbsolute);
+        internal static readonly UriHeaderParser RelativeOrAbsoluteUriParser = new UriHeaderParser(
+            UriKind.RelativeOrAbsolute
+        );
 
         private UriHeaderParser(UriKind uriKind)
             : base(false)
@@ -23,7 +24,12 @@ namespace System.Net.Http.Headers
             _uriKind = uriKind;
         }
 
-        public override bool TryParseValue([NotNullWhen(true)] string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue)
+        public override bool TryParseValue(
+            [NotNullWhen(true)] string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        )
         {
             parsedValue = null;
 
@@ -63,10 +69,15 @@ namespace System.Net.Http.Headers
             if (!string.IsNullOrWhiteSpace(input))
             {
                 int possibleUtf8Pos = input.AsSpan().IndexOfAnyExceptInRange((char)0, (char)127);
-                if (possibleUtf8Pos >= 0 &&
-                    !input.AsSpan(possibleUtf8Pos).ContainsAnyExceptInRange((char)0, (char)255))
+                if (
+                    possibleUtf8Pos >= 0
+                    && !input.AsSpan(possibleUtf8Pos).ContainsAnyExceptInRange((char)0, (char)255)
+                )
                 {
-                    Span<byte> rawBytes = input.Length <= 256 ? stackalloc byte[input.Length] : new byte[input.Length];
+                    Span<byte> rawBytes =
+                        input.Length <= 256
+                            ? stackalloc byte[input.Length]
+                            : new byte[input.Length];
                     for (int i = 0; i < input.Length; i++)
                     {
                         rawBytes[i] = (byte)input[i];
@@ -75,7 +86,11 @@ namespace System.Net.Http.Headers
                     try
                     {
                         // We don't want '?' replacement characters, just fail.
-                        Encoding decoder = Encoding.GetEncoding("utf-8", EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
+                        Encoding decoder = Encoding.GetEncoding(
+                            "utf-8",
+                            EncoderFallback.ExceptionFallback,
+                            DecoderFallback.ExceptionFallback
+                        );
                         return decoder.GetString(rawBytes);
                     }
                     catch (ArgumentException) { } // Not actually Utf-8
@@ -96,7 +111,10 @@ namespace System.Net.Http.Headers
             }
             else
             {
-                return uri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+                return uri.GetComponents(
+                    UriComponents.SerializationInfoString,
+                    UriFormat.UriEscaped
+                );
             }
         }
     }

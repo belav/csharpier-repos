@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 
 using System;
 using System.IO;
@@ -52,7 +51,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             this.info = new NamedPipeSocketInfo(hPipe);
         }
 
-        ~NamedPipeSocket() 
+        ~NamedPipeSocket()
         {
             ((IDisposable)this).Dispose();
         }
@@ -63,10 +62,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <returns></returns>
         public NamedPipeSocketInfo Info
         {
-            get 
-            {
-                return info;
-            }
+            get { return info; }
         }
 
         NamedPipeSocketInfo info;
@@ -74,7 +70,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <summary>
         /// Closes the socket.
         /// </summary>
-        public void Close() 
+        public void Close()
         {
             ((IDisposable)this).Dispose();
         }
@@ -84,20 +80,18 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// </summary>
         void IDisposable.Dispose()
         {
-            if (hPipe != IntPtr.Zero) 
+            if (hPipe != IntPtr.Zero)
             {
-                try 
+                try
                 {
                     // disconnect the pipe
-                    if (Info.IsServer) 
+                    if (Info.IsServer)
                     {
                         NamedPipeHelper.FlushFileBuffers(hPipe);
                         NamedPipeHelper.DisconnectNamedPipe(hPipe);
                     }
                 }
-                catch (NamedPipeException) 
-                {
-                }
+                catch (NamedPipeException) { }
 
                 NamedPipeHelper.CloseHandle(hPipe);
                 hPipe = IntPtr.Zero;
@@ -109,14 +103,12 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// Returns the stream used to send and receive data.
         /// </summary>
         /// <returns></returns>
-        public Stream GetStream() 
+        public Stream GetStream()
         {
             if (hPipe == IntPtr.Zero)
                 throw new ObjectDisposedException(GetType().FullName);
 
-            return stream == null
-                ? stream = new NamedPipeStream(this, false)
-                : stream;
+            return stream == null ? stream = new NamedPipeStream(this, false) : stream;
         }
 
         Stream stream;
@@ -126,18 +118,18 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// the socket on close.
         /// </summary>
         /// <returns></returns>
-        public Stream GetClosingStream() 
+        public Stream GetClosingStream()
         {
             if (hPipe == IntPtr.Zero)
                 throw new ObjectDisposedException(GetType().FullName);
-            
+
             return new NamedPipeStream(this, true);
         }
 
         /// <summary>
         /// Flushes the socket.
         /// </summary>
-        public void Flush() 
+        public void Flush()
         {
             if (hPipe == IntPtr.Zero)
                 throw new ObjectDisposedException(GetType().FullName);
@@ -154,7 +146,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <param name="offset">The location in buffer to store the received data.</param>
         /// <param name="count">The number of bytes to receive.</param>
         /// <returns>The number of bytes received.</returns>
-        public int Receive(byte[] buffer, int offset, int count) 
+        public int Receive(byte[] buffer, int offset, int count)
         {
             if (hPipe == IntPtr.Zero)
                 throw new ObjectDisposedException(GetType().FullName);
@@ -167,22 +159,23 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
             uint read = 0;
 
-            GCHandle gch  = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            try 
+            GCHandle gch = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            try
             {
                 bool res = NamedPipeHelper.ReadFile(
                     hPipe,
                     Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
-                    (uint) count,
+                    (uint)count,
                     out read,
                     IntPtr.Zero
-                    );
+                );
 
-                if (!res && read == 0) throw new NamedPipeException();
+                if (!res && read == 0)
+                    throw new NamedPipeException();
 
-                return (int) read;
+                return (int)read;
             }
-            finally 
+            finally
             {
                 gch.Free();
             }
@@ -190,13 +183,18 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         delegate int ReceiveMethod(byte[] buffer, int offset, int count);
 
-        public IAsyncResult BeginReceive(byte[] buffer, int offset, int count,
-            AsyncCallback callback, object state)
+        public IAsyncResult BeginReceive(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ReceiveMethod(Receive).BeginInvoke(buffer, offset, count, callback, state);
         }
 
-        public int EndReceive(IAsyncResult asyncResult) 
+        public int EndReceive(IAsyncResult asyncResult)
         {
             AsyncResult ar = asyncResult as AsyncResult;
             return ((ReceiveMethod)ar.AsyncDelegate).EndInvoke(asyncResult);
@@ -210,7 +208,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <param name="offset">The position in the data buffer at which to begin sending data. </param>
         /// <param name="count">The number of bytes to send.</param>
         /// <returns>The number of bytes sent.</returns>
-        public int Send(byte[] buffer, int offset, int count) 
+        public int Send(byte[] buffer, int offset, int count)
         {
             if (hPipe == IntPtr.Zero)
                 throw new ObjectDisposedException(GetType().FullName);
@@ -223,21 +221,22 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
             uint written = 0;
 
-            GCHandle gch  = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            try 
+            GCHandle gch = GCHandle.Alloc(buffer, GCHandleType.Pinned);
+            try
             {
                 bool res = NamedPipeHelper.WriteFile(
                     hPipe,
                     Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset),
-                    (uint) count,
+                    (uint)count,
                     out written,
                     IntPtr.Zero
-                    );
+                );
 
-                if (!res) throw new NamedPipeException();
-                return (int) written;
+                if (!res)
+                    throw new NamedPipeException();
+                return (int)written;
             }
-            finally 
+            finally
             {
                 gch.Free();
             }
@@ -245,13 +244,18 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
 
         delegate int SendMethod(byte[] buffer, int offset, int count);
 
-        public IAsyncResult BeginSend(byte[] buffer, int offset, int count,
-            AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new SendMethod(Send).BeginInvoke(buffer, offset, count, callback, state);
         }
 
-        public int EndSend(IAsyncResult asyncResult) 
+        public int EndSend(IAsyncResult asyncResult)
         {
             AsyncResult ar = asyncResult as AsyncResult;
             return ((SendMethod)ar.AsyncDelegate).EndInvoke(asyncResult);
@@ -261,7 +265,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// Returns the current NamedPipeSocketState of this instance.
         /// </summary>
         /// <returns></returns>
-        public NamedPipeSocketState GetSocketState() 
+        public NamedPipeSocketState GetSocketState()
         {
             if (hPipe == IntPtr.Zero)
                 throw new ObjectDisposedException(GetType().FullName);
@@ -272,7 +276,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <summary>
         /// Impersonates the client.
         /// </summary>
-        public void Impersonate() 
+        public void Impersonate()
         {
             if (hPipe == IntPtr.Zero)
                 throw new ObjectDisposedException(GetType().FullName);
@@ -285,13 +289,11 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <summary>
         /// Reverts the impersonation.
         /// </summary>
-        public static bool RevertToSelf() 
+        public static bool RevertToSelf()
         {
             return NamedPipeHelper.RevertToSelf();
         }
-
     }
-
 
     /// <summary>
     /// Represents local Named Pipe informations.
@@ -303,15 +305,12 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public readonly int InBufferSize;
         public readonly int MaxInstances;
 
-        public bool IsServer 
+        public bool IsServer
         {
-            get 
-            {
-                return (Flags & NamedPipeHelper.PIPE_SERVER_END) != 0;
-            }
+            get { return (Flags & NamedPipeHelper.PIPE_SERVER_END) != 0; }
         }
 
-        internal NamedPipeSocketInfo(IntPtr hPipe) 
+        internal NamedPipeSocketInfo(IntPtr hPipe)
         {
             bool res = NamedPipeHelper.GetNamedPipeInfo(
                 hPipe,
@@ -319,20 +318,19 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
                 out OutBufferSize,
                 out InBufferSize,
                 out MaxInstances
-                );
-            
-            if (!res) 
+            );
+
+            if (!res)
             {
                 throw new NamedPipeException();
             }
         }
     }
 
-
     /// <summary>
     /// Represents local Named Pipe state informations.
     /// </summary>
-    internal class NamedPipeSocketState 
+    internal class NamedPipeSocketState
     {
         public readonly int State;
         public readonly int CurrentInstances;
@@ -340,7 +338,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public readonly int CollectDataTimeout;
         public readonly string UserName;
 
-        internal NamedPipeSocketState(IntPtr hPipe) 
+        internal NamedPipeSocketState(IntPtr hPipe)
         {
             StringBuilder userName = new StringBuilder(256);
             bool res = NamedPipeHelper.GetNamedPipeHandleState(
@@ -351,17 +349,16 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
                 out CollectDataTimeout,
                 userName,
                 userName.Capacity
-                );
-            
-            if (res) 
+            );
+
+            if (res)
             {
                 UserName = userName.ToString();
             }
-            else 
+            else
             {
                 throw new NamedPipeException();
             }
         }
     }
 }
-

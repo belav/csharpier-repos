@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,17 +34,20 @@ using System.Runtime.InteropServices;
 
 namespace System.Diagnostics
 {
-	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-	[Guid("73386977-D6FD-11D2-BED5-00C04F79E3AE")]
-	[ComImport]
-	public interface ICollectData {
-		void CloseData ();
-		[return: MarshalAs(UnmanagedType.I4)]
-		void CollectData (
-			[In] [MarshalAs(UnmanagedType.I4)] int id, 
-			[In] [MarshalAs(UnmanagedType.SysInt)] IntPtr valueName, 
-			[In] [MarshalAs(UnmanagedType.SysInt)] IntPtr data, 
-			[In] [MarshalAs(UnmanagedType.I4)] int totalBytes, 
-			[MarshalAs(UnmanagedType.SysInt)] out IntPtr res);
-	}
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("73386977-D6FD-11D2-BED5-00C04F79E3AE")]
+    [ComImport]
+    public interface ICollectData
+    {
+        void CloseData();
+
+        [return: MarshalAs(UnmanagedType.I4)]
+        void CollectData(
+            [In] [MarshalAs(UnmanagedType.I4)] int id,
+            [In] [MarshalAs(UnmanagedType.SysInt)] IntPtr valueName,
+            [In] [MarshalAs(UnmanagedType.SysInt)] IntPtr data,
+            [In] [MarshalAs(UnmanagedType.I4)] int totalBytes,
+            [MarshalAs(UnmanagedType.SysInt)] out IntPtr res
+        );
+    }
 }

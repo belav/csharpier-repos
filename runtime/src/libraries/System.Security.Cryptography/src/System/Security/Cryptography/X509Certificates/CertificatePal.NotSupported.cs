@@ -10,28 +10,38 @@ namespace System.Security.Cryptography.X509Certificates
 #pragma warning disable IDE0060
         internal static partial ICertificatePal FromHandle(IntPtr handle)
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial ICertificatePal FromOtherCert(X509Certificate copyFrom)
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial ICertificatePal FromBlob(
             ReadOnlySpan<byte> rawData,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 
         internal static partial ICertificatePal FromFile(
             string fileName,
             SafePasswordHandle password,
-            X509KeyStorageFlags keyStorageFlags)
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
-            throw new PlatformNotSupportedException(SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported);
+            throw new PlatformNotSupportedException(
+                SR.SystemSecurityCryptographyX509Certificates_PlatformNotSupported
+            );
         }
 #pragma warning restore IDE0060
     }

@@ -13,6 +13,7 @@ internal static partial class Interop
         internal static partial int WebSocketCreateServerHandle(
             Property[] properties,
             uint propertyCount,
-            out SafeWebSocketHandle webSocketHandle);
+            out SafeWebSocketHandle webSocketHandle
+        );
     }
 }

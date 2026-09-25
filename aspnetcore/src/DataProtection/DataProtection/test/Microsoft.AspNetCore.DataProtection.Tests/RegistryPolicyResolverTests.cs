@@ -66,8 +66,8 @@ public class RegistryPolicyResolverTests
         var registryEntries = new Dictionary<string, object>() { ["KeyEscrowSinks"] = typeName };
 
         // Act
-        var ex = ExceptionAssert.Throws<InvalidOperationException>(
-            () => RunTestWithRegValues(registryEntries)
+        var ex = ExceptionAssert.Throws<InvalidOperationException>(() =>
+            RunTestWithRegValues(registryEntries)
         );
 
         // Assert

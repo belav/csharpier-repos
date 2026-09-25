@@ -13,7 +13,9 @@ namespace Internal.TypeSystem.Ecma
         protected internal override int CompareToImpl(TypeDesc other, TypeSystemComparer comparer)
         {
             var otherType = (EcmaGenericParameter)other;
-            int result = _module.MetadataReader.GetToken(_handle) - otherType._module.MetadataReader.GetToken(otherType._handle);
+            int result =
+                _module.MetadataReader.GetToken(_handle)
+                - otherType._module.MetadataReader.GetToken(otherType._handle);
             if (result != 0)
                 return result;
 

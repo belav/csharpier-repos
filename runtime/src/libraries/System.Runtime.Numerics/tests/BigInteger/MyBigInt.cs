@@ -71,7 +71,9 @@ namespace System.Numerics.Tests
                     }
                     return new BigInteger(bytes1.ToArray());
                 case "u--":
-                    return new BigInteger(Add(bytes1, new List<byte>(new byte[] { 0xff })).ToArray());
+                    return new BigInteger(
+                        Add(bytes1, new List<byte>(new byte[] { 0xff })).ToArray()
+                    );
                 case "u++":
                     return new BigInteger(Add(bytes1, new List<byte>(new byte[] { 1 })).ToArray());
                 case "uNegate":
@@ -94,7 +96,12 @@ namespace System.Numerics.Tests
             return DoBinaryOperatorMine(num1, num2, op, out num3);
         }
 
-        public static BigInteger DoBinaryOperatorMine(BigInteger num1, BigInteger num2, string op, out BigInteger num3)
+        public static BigInteger DoBinaryOperatorMine(
+            BigInteger num1,
+            BigInteger num2,
+            string op,
+            out BigInteger num3
+        )
         {
             List<byte> bytes1 = new List<byte>(num1.ToByteArray());
             List<byte> bytes2 = new List<byte>(num2.ToByteArray());
@@ -151,7 +158,12 @@ namespace System.Numerics.Tests
             }
         }
 
-        public static BigInteger DoTertanaryOperatorMine(BigInteger num1, BigInteger num2, BigInteger num3, string op)
+        public static BigInteger DoTertanaryOperatorMine(
+            BigInteger num1,
+            BigInteger num2,
+            BigInteger num3,
+            string op
+        )
         {
             List<byte> bytes1 = new List<byte>(num1.ToByteArray());
             List<byte> bytes2 = new List<byte>(num2.ToByteArray());
@@ -639,8 +651,10 @@ namespace System.Numerics.Tests
 
         public static List<byte> ShiftLeft(List<byte> bytes1, List<byte> bytes2)
         {
-            int byteShift = (int)new BigInteger(Divide(Copy(bytes2), new List<byte>(new byte[] { 8 })).ToArray());
-            sbyte bitShift = (sbyte)new BigInteger(Remainder(bytes2, new List<byte>(new byte[] { 8 })).ToArray());
+            int byteShift = (int)
+                new BigInteger(Divide(Copy(bytes2), new List<byte>(new byte[] { 8 })).ToArray());
+            sbyte bitShift = (sbyte)
+                new BigInteger(Remainder(bytes2, new List<byte>(new byte[] { 8 })).ToArray());
 
             for (int i = 0; i < Math.Abs(bitShift); i++)
             {

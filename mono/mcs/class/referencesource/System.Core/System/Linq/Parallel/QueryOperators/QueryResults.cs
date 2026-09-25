@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -24,10 +24,10 @@ namespace System.Linq.Parallel
     ///
     /// 1. Open the query results as a partitioned stream by calling GivePartitionedStream
     ///    and pass a generic action as an argument.
-    ///    
+    ///
     /// 2. Access individual elements of the results list by calling GetElement(index) and
     ///    ElementsCount. This method of accessing the query results is available only if
-    ///    IsIndexible return true. 
+    ///    IsIndexible return true.
     /// </summary>
     /// <typeparam name="T"></typeparam>
     internal abstract class QueryResults<T> : IList<T>
@@ -60,11 +60,14 @@ namespace System.Linq.Parallel
         // Assumptions:
         //    IsIndexible returns true
         //    0 <= index < ElementsCount
-        //    
+        //
 
         internal virtual T GetElement(int index)
         {
-            Contract.Assert(false, "GetElement property is not supported by non-indexible query results");
+            Contract.Assert(
+                false,
+                "GetElement property is not supported by non-indexible query results"
+            );
             throw new NotSupportedException();
         }
 
@@ -73,13 +76,16 @@ namespace System.Linq.Parallel
         //
         // Assumptions:
         //    IsIndexible returns true
-        //   
+        //
 
         internal virtual int ElementsCount
         {
             get
             {
-                Contract.Assert(false, "ElementsCount property is not supported by non-indexible query results");
+                Contract.Assert(
+                    false,
+                    "ElementsCount property is not supported by non-indexible query results"
+                );
                 throw new NotSupportedException();
             }
         }
@@ -106,10 +112,7 @@ namespace System.Linq.Parallel
         public T this[int index]
         {
             get { return GetElement(index); }
-            set
-            {
-                throw new NotSupportedException();
-            }
+            set { throw new NotSupportedException(); }
         }
 
         void ICollection<T>.Add(T item)

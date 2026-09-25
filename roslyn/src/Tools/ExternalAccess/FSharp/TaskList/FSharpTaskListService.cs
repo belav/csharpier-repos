@@ -26,15 +26,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.TaskList
             _impl = impl;
         }
 
-        public async Task<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(Document document, ImmutableArray<TaskListItemDescriptor> descriptors, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<TaskListItem>> GetTaskListItemsAsync(
+            Document document,
+            ImmutableArray<TaskListItemDescriptor> descriptors,
+            CancellationToken cancellationToken
+        )
         {
             if (_impl == null)
                 return ImmutableArray<TaskListItem>.Empty;
 
-            var result = await _impl.GetTaskListItemsAsync(
-                document,
-                descriptors.SelectAsArray(d => new FSharpTaskListDescriptor(d)),
-                cancellationToken).ConfigureAwait(false);
+            var result = await _impl
+                .GetTaskListItemsAsync(
+                    document,
+                    descriptors.SelectAsArray(d => new FSharpTaskListDescriptor(d)),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (result.Length == 0)
                 return ImmutableArray<TaskListItem>.Empty;
@@ -44,7 +51,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.TaskList
             return result.SelectAsArray(d =>
             {
                 var priority = d.TaskDescriptor.Descriptor.Priority;
-                var span = new FileLinePositionSpan(document.FilePath!, text.Lines.GetLinePositionSpan(d.Span));
+                var span = new FileLinePositionSpan(
+                    document.FilePath!,
+                    text.Lines.GetLinePositionSpan(d.Span)
+                );
 
                 return new TaskListItem(priority, d.Message, document.Id, span, span);
             });

@@ -14,14 +14,17 @@ struct MyStruct
 
     public int A;
     public int B;
-    public int C { get { return A + B; } }
+    public int C
+    {
+        get { return A + B; }
+    }
 }
 
 public class Program
 {
-
     static int Pass = 100;
     static int Fail = -1;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -45,7 +48,13 @@ public class Program
     //  * The value type must be of size 1, 2, 4 or 8
     //  * That parameter must be passed on the stack.  Typically this is the 5th parameter and beyond for
     //    static methods, or 4th and beyond for instance methods.
-    static int Caller(int regParam1, int regParam2, int regParam3, int regParam4, MyStruct stackParam1)
+    static int Caller(
+        int regParam1,
+        int regParam2,
+        int regParam3,
+        int regParam4,
+        MyStruct stackParam1
+    )
     {
         // Add random calls to block inlining of this call into the parent frame.
         Console.Write("Let's ");
@@ -76,17 +85,25 @@ public class Program
     //  * The value type must be of size 1, 2, 4 or 8
     //  * That parameter must be passed in register.  Typically this is the 4th parameter or before for
     //    static methods, or 3rd or before for instance methods.
-    static int Callee(MyStruct regParam1, int regParam2, int regParam3, int regParam4, int stackParam1)
+    static int Callee(
+        MyStruct regParam1,
+        int regParam2,
+        int regParam3,
+        int regParam4,
+        int stackParam1
+    )
     {
         // If all conditions are met, Callee enters with an incorrect value for regParam1
         // This should print "9 0 1 2 3".  If the tail call is made incorrectly,
         // the result is (typically) "418858424 0 1 2 3".
-        System.Console.WriteLine("Printing Outputs: {0} {1} {2} {3} {4}",
+        System.Console.WriteLine(
+            "Printing Outputs: {0} {1} {2} {3} {4}",
             regParam1.C,
             regParam2,
             regParam3,
             regParam4,
-            stackParam1);
+            stackParam1
+        );
 
         return regParam1.C;
     }

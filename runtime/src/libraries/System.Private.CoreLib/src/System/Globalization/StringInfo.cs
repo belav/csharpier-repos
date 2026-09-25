@@ -18,9 +18,8 @@ namespace System.Globalization
 
         private int[]? _indexes;
 
-        public StringInfo() : this(string.Empty)
-        {
-        }
+        public StringInfo()
+            : this(string.Empty) { }
 
         public StringInfo(string value)
         {
@@ -29,8 +28,7 @@ namespace System.Globalization
 
         public override bool Equals([NotNullWhen(true)] object? value)
         {
-            return value is StringInfo otherStringInfo
-                && _str.Equals(otherStringInfo._str);
+            return value is StringInfo otherStringInfo && _str.Equals(otherStringInfo._str);
         }
 
         public override int GetHashCode() => _str.GetHashCode();
@@ -68,7 +66,10 @@ namespace System.Globalization
 
         public string SubstringByTextElements(int startingTextElement)
         {
-            return SubstringByTextElements(startingTextElement, (Indexes?.Length ?? 0) - startingTextElement);
+            return SubstringByTextElements(
+                startingTextElement,
+                (Indexes?.Length ?? 0) - startingTextElement
+            );
         }
 
         public string SubstringByTextElements(int startingTextElement, int lengthInTextElements)
@@ -77,11 +78,19 @@ namespace System.Globalization
 
             if ((uint)startingTextElement >= (uint)indexes.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(startingTextElement), startingTextElement, SR.Arg_ArgumentOutOfRangeException);
+                throw new ArgumentOutOfRangeException(
+                    nameof(startingTextElement),
+                    startingTextElement,
+                    SR.Arg_ArgumentOutOfRangeException
+                );
             }
             if ((uint)lengthInTextElements > (uint)(indexes.Length - startingTextElement))
             {
-                throw new ArgumentOutOfRangeException(nameof(lengthInTextElements), lengthInTextElements, SR.Arg_ArgumentOutOfRangeException);
+                throw new ArgumentOutOfRangeException(
+                    nameof(lengthInTextElements),
+                    lengthInTextElements,
+                    SR.Arg_ArgumentOutOfRangeException
+                );
             }
 
             int start = indexes[startingTextElement];
@@ -175,9 +184,11 @@ namespace System.Globalization
         /// <param name="str">The input span to analyze.</param>
         /// <returns>The length (in chars) of the substring corresponding to the first text element within <paramref name="str"/>,
         /// or 0 if <paramref name="str"/> is empty.</returns>
-        public static int GetNextTextElementLength(ReadOnlySpan<char> str) => TextSegmentationUtility.GetLengthOfFirstUtf16ExtendedGraphemeCluster(str);
+        public static int GetNextTextElementLength(ReadOnlySpan<char> str) =>
+            TextSegmentationUtility.GetLengthOfFirstUtf16ExtendedGraphemeCluster(str);
 
-        public static TextElementEnumerator GetTextElementEnumerator(string str) => GetTextElementEnumerator(str, 0);
+        public static TextElementEnumerator GetTextElementEnumerator(string str) =>
+            GetTextElementEnumerator(str, 0);
 
         public static TextElementEnumerator GetTextElementEnumerator(string str, int index)
         {

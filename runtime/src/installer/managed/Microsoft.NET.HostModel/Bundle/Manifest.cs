@@ -59,7 +59,7 @@ namespace Microsoft.NET.HostModel.Bundle
         private enum HeaderFlags : ulong
         {
             None = 0,
-            NetcoreApp3CompatMode = 1
+            NetcoreApp3CompatMode = 1,
         }
 
         // Bundle ID is a string that is used to uniquely
@@ -67,10 +67,12 @@ namespace Microsoft.NET.HostModel.Bundle
         // with path-names so that the AppHost can use it in
         // extraction path.
         public string BundleID { get; private set; }
+
         //Same as Path.GetRandomFileName
         private const int BundleIdLength = 12;
         private SHA256 bundleHash = SHA256.Create();
         public readonly uint BundleMajorVersion;
+
         // The Minor version is currently unused, and is always zero
         public const uint BundleMinorVersion = 0;
         private FileEntry DepsJsonEntry;
@@ -86,14 +88,30 @@ namespace Microsoft.NET.HostModel.Bundle
             Flags = (netcoreapp3CompatMode) ? HeaderFlags.NetcoreApp3CompatMode : HeaderFlags.None;
         }
 
-        public FileEntry AddEntry(FileType type, FileStream fileContent, string relativePath, long offset, long compressedSize, uint bundleMajorVersion)
+        public FileEntry AddEntry(
+            FileType type,
+            FileStream fileContent,
+            string relativePath,
+            long offset,
+            long compressedSize,
+            uint bundleMajorVersion
+        )
         {
             if (bundleHash == null)
             {
-                throw new InvalidOperationException("It is forbidden to change Manifest state after it was written or BundleId was obtained.");
+                throw new InvalidOperationException(
+                    "It is forbidden to change Manifest state after it was written or BundleId was obtained."
+                );
             }
 
-            FileEntry entry = new FileEntry(type, relativePath, offset, fileContent.Length, compressedSize, bundleMajorVersion);
+            FileEntry entry = new FileEntry(
+                type,
+                relativePath,
+                offset,
+                fileContent.Length,
+                compressedSize,
+                bundleMajorVersion
+            );
             Files.Add(entry);
 
             fileContent.Position = 0;

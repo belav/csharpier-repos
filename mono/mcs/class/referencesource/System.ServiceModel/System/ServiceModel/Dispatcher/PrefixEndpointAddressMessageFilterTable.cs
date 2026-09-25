@@ -8,15 +8,14 @@ namespace System.ServiceModel.Dispatcher
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    class PrefixEndpointAddressMessageFilterTable<TFilterData> : EndpointAddressMessageFilterTable<TFilterData>
+    class PrefixEndpointAddressMessageFilterTable<TFilterData>
+        : EndpointAddressMessageFilterTable<TFilterData>
     {
         UriPrefixTable<CandidateSet> toHostTable;
         UriPrefixTable<CandidateSet> toNoHostTable;
 
         public PrefixEndpointAddressMessageFilterTable()
-            : base()
-        {
-        }
+            : base() { }
 
         protected override void InitializeLookupTables()
         {
@@ -41,8 +40,14 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("filter");
             }
 
-            Fx.Assert("EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable");
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException("EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"));
+            Fx.Assert(
+                "EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"
+            );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    "EndpointAddressMessageFilter cannot be added to PrefixEndpointAddressMessageFilterTable"
+                )
+            );
         }
 
         public void Add(PrefixEndpointAddressMessageFilter filter, TFilterData data)
@@ -66,7 +71,12 @@ namespace System.ServiceModel.Dispatcher
             if (!TryMatchCandidateSet(soapToAddress, filter.IncludeHostNameInComparison, out cset))
             {
                 cset = new CandidateSet();
-                GetAddressTable(filter.IncludeHostNameInComparison).RegisterUri(soapToAddress, GetComparisonMode(filter.IncludeHostNameInComparison), cset);
+                GetAddressTable(filter.IncludeHostNameInComparison)
+                    .RegisterUri(
+                        soapToAddress,
+                        GetComparisonMode(filter.IncludeHostNameInComparison),
+                        cset
+                    );
             }
             cset.candidates.Add(can);
 
@@ -75,7 +85,9 @@ namespace System.ServiceModel.Dispatcher
 
         HostNameComparisonMode GetComparisonMode(bool includeHostNameInComparison)
         {
-            return includeHostNameInComparison ? HostNameComparisonMode.Exact : HostNameComparisonMode.StrongWildcard;
+            return includeHostNameInComparison
+                ? HostNameComparisonMode.Exact
+                : HostNameComparisonMode.StrongWildcard;
         }
 
         UriPrefixTable<CandidateSet> GetAddressTable(bool includeHostNameInComparison)
@@ -83,15 +95,22 @@ namespace System.ServiceModel.Dispatcher
             return includeHostNameInComparison ? this.toHostTable : this.toNoHostTable;
         }
 
-        internal override bool TryMatchCandidateSet(Uri to, bool includeHostNameInComparison, out CandidateSet cset)
+        internal override bool TryMatchCandidateSet(
+            Uri to,
+            bool includeHostNameInComparison,
+            out CandidateSet cset
+        )
         {
-            return GetAddressTable(includeHostNameInComparison).TryLookupUri(to, GetComparisonMode(includeHostNameInComparison), out cset);
+            return GetAddressTable(includeHostNameInComparison)
+                .TryLookupUri(to, GetComparisonMode(includeHostNameInComparison), out cset);
         }
 
         protected override void ClearLookupTables()
         {
-            this.toHostTable = new UriPrefixTable<EndpointAddressMessageFilterTable<TFilterData>.CandidateSet>();
-            this.toNoHostTable = new UriPrefixTable<EndpointAddressMessageFilterTable<TFilterData>.CandidateSet>();
+            this.toHostTable =
+                new UriPrefixTable<EndpointAddressMessageFilterTable<TFilterData>.CandidateSet>();
+            this.toNoHostTable =
+                new UriPrefixTable<EndpointAddressMessageFilterTable<TFilterData>.CandidateSet>();
         }
 
         public override bool Remove(MessageFilter filter)
@@ -101,7 +120,8 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("filter");
             }
 
-            PrefixEndpointAddressMessageFilter pFilter = filter as PrefixEndpointAddressMessageFilter;
+            PrefixEndpointAddressMessageFilter pFilter =
+                filter as PrefixEndpointAddressMessageFilter;
             if (pFilter != null)
             {
                 return Remove(pFilter);
@@ -117,8 +137,14 @@ namespace System.ServiceModel.Dispatcher
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("filter");
             }
 
-            Fx.Assert("EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable");
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException("EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"));
+            Fx.Assert(
+                "EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"
+            );
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    "EndpointAddressMessageFilter cannot be removed from PrefixEndpointAddressMessageFilterTable"
+                )
+            );
         }
 
         public bool Remove(PrefixEndpointAddressMessageFilter filter)
@@ -142,7 +168,11 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (cset.candidates.Count == 1)
                 {
-                    GetAddressTable(filter.IncludeHostNameInComparison).UnregisterUri(soapToAddress, GetComparisonMode(filter.IncludeHostNameInComparison));
+                    GetAddressTable(filter.IncludeHostNameInComparison)
+                        .UnregisterUri(
+                            soapToAddress,
+                            GetComparisonMode(filter.IncludeHostNameInComparison)
+                        );
                 }
                 else
                 {

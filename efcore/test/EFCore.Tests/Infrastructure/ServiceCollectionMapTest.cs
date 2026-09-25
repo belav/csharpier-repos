@@ -14,21 +14,58 @@ public class ServiceCollectionMapTest
         Func<IServiceProvider, FakeService> factory = p => new FakeService();
 #pragma warning restore IDE0039 // Use local function
 
-        AddServiceDelegateTest(m => m.TryAddTransient<IFakeService, FakeService>(factory), factory, ServiceLifetime.Transient);
-        AddServiceDelegateTest(m => m.TryAddScoped<IFakeService, FakeService>(factory), factory, ServiceLifetime.Scoped);
-        AddServiceDelegateTest(m => m.TryAddSingleton<IFakeService, FakeService>(factory), factory, ServiceLifetime.Singleton);
-        AddServiceDelegateTest(m => m.TryAddTransient<IFakeService>(factory), factory, ServiceLifetime.Transient);
-        AddServiceDelegateTest(m => m.TryAddScoped<IFakeService>(factory), factory, ServiceLifetime.Scoped);
-        AddServiceDelegateTest(m => m.TryAddSingleton<IFakeService>(factory), factory, ServiceLifetime.Singleton);
-        AddServiceDelegateTest(m => m.TryAddTransient(typeof(IFakeService), factory), factory, ServiceLifetime.Transient);
-        AddServiceDelegateTest(m => m.TryAddScoped(typeof(IFakeService), factory), factory, ServiceLifetime.Scoped);
-        AddServiceDelegateTest(m => m.TryAddSingleton(typeof(IFakeService), factory), factory, ServiceLifetime.Singleton);
+        AddServiceDelegateTest(
+            m => m.TryAddTransient<IFakeService, FakeService>(factory),
+            factory,
+            ServiceLifetime.Transient
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddScoped<IFakeService, FakeService>(factory),
+            factory,
+            ServiceLifetime.Scoped
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddSingleton<IFakeService, FakeService>(factory),
+            factory,
+            ServiceLifetime.Singleton
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddTransient<IFakeService>(factory),
+            factory,
+            ServiceLifetime.Transient
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddScoped<IFakeService>(factory),
+            factory,
+            ServiceLifetime.Scoped
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddSingleton<IFakeService>(factory),
+            factory,
+            ServiceLifetime.Singleton
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddTransient(typeof(IFakeService), factory),
+            factory,
+            ServiceLifetime.Transient
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddScoped(typeof(IFakeService), factory),
+            factory,
+            ServiceLifetime.Scoped
+        );
+        AddServiceDelegateTest(
+            m => m.TryAddSingleton(typeof(IFakeService), factory),
+            factory,
+            ServiceLifetime.Singleton
+        );
     }
 
     private void AddServiceDelegateTest(
         Func<ServiceCollectionMap, ServiceCollectionMap> adder,
         Func<IServiceProvider, object> factory,
-        ServiceLifetime lifetime)
+        ServiceLifetime lifetime
+    )
     {
         var serviceCollectionMap = adder(new ServiceCollectionMap(new ServiceCollection()));
 
@@ -42,17 +79,36 @@ public class ServiceCollectionMapTest
     [ConditionalFact]
     public void Can_add_concrete_services()
     {
-        AddServiceConcreteTest(m => m.TryAddTransient<IFakeService, DerivedFakeService>(), ServiceLifetime.Transient);
-        AddServiceConcreteTest(m => m.TryAddScoped<IFakeService, DerivedFakeService>(), ServiceLifetime.Scoped);
-        AddServiceConcreteTest(m => m.TryAddSingleton<IFakeService, DerivedFakeService>(), ServiceLifetime.Singleton);
-        AddServiceConcreteTest(m => m.TryAddTransient(typeof(IFakeService), typeof(DerivedFakeService)), ServiceLifetime.Transient);
-        AddServiceConcreteTest(m => m.TryAddScoped(typeof(IFakeService), typeof(DerivedFakeService)), ServiceLifetime.Scoped);
-        AddServiceConcreteTest(m => m.TryAddSingleton(typeof(IFakeService), typeof(DerivedFakeService)), ServiceLifetime.Singleton);
+        AddServiceConcreteTest(
+            m => m.TryAddTransient<IFakeService, DerivedFakeService>(),
+            ServiceLifetime.Transient
+        );
+        AddServiceConcreteTest(
+            m => m.TryAddScoped<IFakeService, DerivedFakeService>(),
+            ServiceLifetime.Scoped
+        );
+        AddServiceConcreteTest(
+            m => m.TryAddSingleton<IFakeService, DerivedFakeService>(),
+            ServiceLifetime.Singleton
+        );
+        AddServiceConcreteTest(
+            m => m.TryAddTransient(typeof(IFakeService), typeof(DerivedFakeService)),
+            ServiceLifetime.Transient
+        );
+        AddServiceConcreteTest(
+            m => m.TryAddScoped(typeof(IFakeService), typeof(DerivedFakeService)),
+            ServiceLifetime.Scoped
+        );
+        AddServiceConcreteTest(
+            m => m.TryAddSingleton(typeof(IFakeService), typeof(DerivedFakeService)),
+            ServiceLifetime.Singleton
+        );
     }
 
     private void AddServiceConcreteTest(
         Func<ServiceCollectionMap, ServiceCollectionMap> adder,
-        ServiceLifetime lifetime)
+        ServiceLifetime lifetime
+    )
     {
         var serviceCollectionMap = adder(new ServiceCollectionMap(new ServiceCollection()));
 
@@ -74,7 +130,8 @@ public class ServiceCollectionMapTest
 
     private void AddServiceInstanceTest(
         Func<ServiceCollectionMap, ServiceCollectionMap> adder,
-        object instance)
+        object instance
+    )
     {
         var serviceCollectionMap = adder(new ServiceCollectionMap(new ServiceCollection()));
 
@@ -94,9 +151,13 @@ public class ServiceCollectionMapTest
         ExistingServiceTest(m => m.TryAddTransient(typeof(IFakeService), typeof(FakeService)));
         ExistingServiceTest(m => m.TryAddScoped(typeof(IFakeService), typeof(FakeService)));
         ExistingServiceTest(m => m.TryAddSingleton(typeof(IFakeService), typeof(FakeService)));
-        ExistingServiceTest(m => m.TryAddTransient<IFakeService, FakeService>(p => new FakeService()));
+        ExistingServiceTest(m =>
+            m.TryAddTransient<IFakeService, FakeService>(p => new FakeService())
+        );
         ExistingServiceTest(m => m.TryAddScoped<IFakeService, FakeService>(p => new FakeService()));
-        ExistingServiceTest(m => m.TryAddSingleton<IFakeService, FakeService>(p => new FakeService()));
+        ExistingServiceTest(m =>
+            m.TryAddSingleton<IFakeService, FakeService>(p => new FakeService())
+        );
         ExistingServiceTest(m => m.TryAddTransient<IFakeService>(p => new FakeService()));
         ExistingServiceTest(m => m.TryAddScoped<IFakeService>(p => new FakeService()));
         ExistingServiceTest(m => m.TryAddSingleton<IFakeService>(p => new FakeService()));
@@ -109,8 +170,7 @@ public class ServiceCollectionMapTest
 
     private void ExistingServiceTest(Func<ServiceCollectionMap, ServiceCollectionMap> adder)
     {
-        var serviceCollection = new ServiceCollection()
-            .AddSingleton<IFakeService, FakeService>();
+        var serviceCollection = new ServiceCollection().AddSingleton<IFakeService, FakeService>();
 
         var descriptor = serviceCollection.Single();
 
@@ -126,38 +186,45 @@ public class ServiceCollectionMapTest
         AddServiceConcreteEnumerableTest(
             m => m.TryAddTransientEnumerable<IFakeService, FakeService>(),
             m => m.TryAddTransientEnumerable<IFakeService, DerivedFakeService>(),
-            ServiceLifetime.Transient);
+            ServiceLifetime.Transient
+        );
 
         AddServiceConcreteEnumerableTest(
             m => m.TryAddScopedEnumerable<IFakeService, FakeService>(),
             m => m.TryAddScopedEnumerable<IFakeService, DerivedFakeService>(),
-            ServiceLifetime.Scoped);
+            ServiceLifetime.Scoped
+        );
 
         AddServiceConcreteEnumerableTest(
             m => m.TryAddSingletonEnumerable<IFakeService, FakeService>(),
             m => m.TryAddSingletonEnumerable<IFakeService, DerivedFakeService>(),
-            ServiceLifetime.Singleton);
+            ServiceLifetime.Singleton
+        );
 
         AddServiceConcreteEnumerableTest(
             m => m.TryAddTransientEnumerable(typeof(IFakeService), typeof(FakeService)),
             m => m.TryAddTransientEnumerable(typeof(IFakeService), typeof(DerivedFakeService)),
-            ServiceLifetime.Transient);
+            ServiceLifetime.Transient
+        );
 
         AddServiceConcreteEnumerableTest(
             m => m.TryAddScopedEnumerable(typeof(IFakeService), typeof(FakeService)),
             m => m.TryAddScopedEnumerable(typeof(IFakeService), typeof(DerivedFakeService)),
-            ServiceLifetime.Scoped);
+            ServiceLifetime.Scoped
+        );
 
         AddServiceConcreteEnumerableTest(
             m => m.TryAddSingletonEnumerable(typeof(IFakeService), typeof(FakeService)),
             m => m.TryAddSingletonEnumerable(typeof(IFakeService), typeof(DerivedFakeService)),
-            ServiceLifetime.Singleton);
+            ServiceLifetime.Singleton
+        );
     }
 
     private void AddServiceConcreteEnumerableTest(
         Func<ServiceCollectionMap, ServiceCollectionMap> adder1,
         Func<ServiceCollectionMap, ServiceCollectionMap> adder2,
-        ServiceLifetime lifetime)
+        ServiceLifetime lifetime
+    )
     {
         var serviceCollection = new ServiceCollection();
         adder2(adder1(adder2(adder1(new ServiceCollectionMap(serviceCollection)))));
@@ -184,17 +251,26 @@ public class ServiceCollectionMapTest
         AddServiceDelegateEnumerableTest(
             m => m.TryAddTransientEnumerable<IFakeService, FakeService>(factory1),
             m => m.TryAddTransientEnumerable<IFakeService, DerivedFakeService>(factory2),
-            factory1, factory2, ServiceLifetime.Transient);
+            factory1,
+            factory2,
+            ServiceLifetime.Transient
+        );
 
         AddServiceDelegateEnumerableTest(
             m => m.TryAddScopedEnumerable<IFakeService, FakeService>(factory1),
             m => m.TryAddScopedEnumerable<IFakeService, DerivedFakeService>(factory2),
-            factory1, factory2, ServiceLifetime.Scoped);
+            factory1,
+            factory2,
+            ServiceLifetime.Scoped
+        );
 
         AddServiceDelegateEnumerableTest(
             m => m.TryAddSingletonEnumerable<IFakeService, FakeService>(factory1),
             m => m.TryAddSingletonEnumerable<IFakeService, DerivedFakeService>(factory2),
-            factory1, factory2, ServiceLifetime.Singleton);
+            factory1,
+            factory2,
+            ServiceLifetime.Singleton
+        );
     }
 
     private void AddServiceDelegateEnumerableTest(
@@ -202,7 +278,8 @@ public class ServiceCollectionMapTest
         Func<ServiceCollectionMap, ServiceCollectionMap> adder2,
         Func<IServiceProvider, object> factory1,
         Func<IServiceProvider, object> factory2,
-        ServiceLifetime lifetime)
+        ServiceLifetime lifetime
+    )
     {
         var serviceCollection = new ServiceCollection();
         adder2(adder1(adder2(adder1(new ServiceCollectionMap(serviceCollection)))));
@@ -227,19 +304,24 @@ public class ServiceCollectionMapTest
         AddServiceInstanceEnumerableTest(
             m => m.TryAddSingletonEnumerable<IFakeService>(instance1),
             m => m.TryAddSingletonEnumerable<IFakeService>(instance2),
-            instance1, instance2);
+            instance1,
+            instance2
+        );
 
         AddServiceInstanceEnumerableTest(
             m => m.TryAddSingletonEnumerable(typeof(IFakeService), instance1),
             m => m.TryAddSingletonEnumerable(typeof(IFakeService), instance2),
-            instance1, instance2);
+            instance1,
+            instance2
+        );
     }
 
     private void AddServiceInstanceEnumerableTest(
         Func<ServiceCollectionMap, ServiceCollectionMap> adder1,
         Func<ServiceCollectionMap, ServiceCollectionMap> adder2,
         object instance1,
-        object instance2)
+        object instance2
+    )
     {
         var serviceCollection = new ServiceCollection();
         adder2(adder1(adder2(adder1(new ServiceCollectionMap(serviceCollection)))));
@@ -255,19 +337,15 @@ public class ServiceCollectionMapTest
         Assert.Equal(ServiceLifetime.Singleton, serviceCollection[1].Lifetime);
     }
 
-    private interface IFakeService
-    {
-    }
+    private interface IFakeService { }
 
     private class FakeService : IFakeService, IPatchServiceInjectionSite
     {
         public DbContext Context { get; private set; }
 
-        void IPatchServiceInjectionSite.InjectServices(IServiceProvider serviceProvider)
-            => Context = serviceProvider.GetService<ICurrentDbContext>().Context;
+        void IPatchServiceInjectionSite.InjectServices(IServiceProvider serviceProvider) =>
+            Context = serviceProvider.GetService<ICurrentDbContext>().Context;
     }
 
-    private class DerivedFakeService : FakeService
-    {
-    }
+    private class DerivedFakeService : FakeService { }
 }

@@ -25,7 +25,9 @@ namespace Microsoft.Extensions.Logging.Console
             {
                 if (value <= 0)
                 {
-                    throw new ArgumentOutOfRangeException(SR.Format(SR.MaxQueueLengthBadValue, nameof(value)));
+                    throw new ArgumentOutOfRangeException(
+                        SR.Format(SR.MaxQueueLengthBadValue, nameof(value))
+                    );
                 }
 
                 lock (_messageQueue)
@@ -41,9 +43,14 @@ namespace Microsoft.Extensions.Logging.Console
             get => _fullMode;
             set
             {
-                if (value != ConsoleLoggerQueueFullMode.Wait && value != ConsoleLoggerQueueFullMode.DropWrite)
+                if (
+                    value != ConsoleLoggerQueueFullMode.Wait
+                    && value != ConsoleLoggerQueueFullMode.DropWrite
+                )
                 {
-                    throw new ArgumentOutOfRangeException(SR.Format(SR.QueueModeNotSupported, nameof(value)));
+                    throw new ArgumentOutOfRangeException(
+                        SR.Format(SR.QueueModeNotSupported, nameof(value))
+                    );
                 }
 
                 lock (_messageQueue)
@@ -60,7 +67,12 @@ namespace Microsoft.Extensions.Logging.Console
         public IConsole Console { get; }
         public IConsole ErrorConsole { get; }
 
-        public ConsoleLoggerProcessor(IConsole console, IConsole errorConsole, ConsoleLoggerQueueFullMode fullMode, int maxQueueLength)
+        public ConsoleLoggerProcessor(
+            IConsole console,
+            IConsole errorConsole,
+            ConsoleLoggerQueueFullMode fullMode,
+            int maxQueueLength
+        )
         {
             _messageQueue = new Queue<LogMessageEntry>();
             FullMode = fullMode;
@@ -71,7 +83,7 @@ namespace Microsoft.Extensions.Logging.Console
             _outputThread = new Thread(ProcessLogQueue)
             {
                 IsBackground = true,
-                Name = "Console logger queue processing thread"
+                Name = "Console logger queue processing thread",
             };
             _outputThread.Start();
         }
@@ -129,10 +141,15 @@ namespace Microsoft.Extensions.Logging.Console
                     bool startedEmpty = _messageQueue.Count == 0;
                     if (_messagesDropped > 0)
                     {
-                        _messageQueue.Enqueue(new LogMessageEntry(
-                            message: SR.Format(SR.WarningMessageOnDrop + Environment.NewLine, _messagesDropped),
-                            logAsError: true
-                        ));
+                        _messageQueue.Enqueue(
+                            new LogMessageEntry(
+                                message: SR.Format(
+                                    SR.WarningMessageOnDrop + Environment.NewLine,
+                                    _messagesDropped
+                                ),
+                                logAsError: true
+                            )
+                        );
 
                         _messagesDropped = 0;
                     }

@@ -17,7 +17,8 @@ namespace System.CodeDom
             BaseTypes.Add(new CodeTypeReference("System.Delegate"));
         }
 
-        public CodeTypeDelegate(string name) : this()
+        public CodeTypeDelegate(string name)
+            : this()
         {
             Name = name;
         }
@@ -28,6 +29,7 @@ namespace System.CodeDom
             set => _returnType = value;
         }
 
-        public CodeParameterDeclarationExpressionCollection Parameters { get; } = new CodeParameterDeclarationExpressionCollection();
+        public CodeParameterDeclarationExpressionCollection Parameters { get; } =
+            new CodeParameterDeclarationExpressionCollection();
     }
 }

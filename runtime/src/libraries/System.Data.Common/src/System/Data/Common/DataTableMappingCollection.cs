@@ -10,8 +10,10 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Data.Common
 {
     [ListBindable(false)]
-    [Editor("Microsoft.VSDesigner.Data.Design.DataTableMappingCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
-            "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [Editor(
+        "Microsoft.VSDesigner.Data.Design.DataTableMappingCollectionEditor, Microsoft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+        "System.Drawing.Design.UITypeEditor, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public sealed class DataTableMappingCollection : MarshalByRefObject, ITableMappingCollection
     {
         private List<DataTableMapping>? _items; // delay creation until AddWithoutEvents, Insert, CopyTo, GetEnumerator
@@ -44,8 +46,11 @@ namespace System.Data.Common
                 this[index] = (DataTableMapping)value;
             }
         }
-        ITableMapping ITableMappingCollection.Add(string sourceTableName, string dataSetTableName) =>
-            Add(sourceTableName, dataSetTableName);
+
+        ITableMapping ITableMappingCollection.Add(
+            string sourceTableName,
+            string dataSetTableName
+        ) => Add(sourceTableName, dataSetTableName);
 
         ITableMapping ITableMappingCollection.GetByDataSetTable(string dataSetTableName) =>
             GetByDataSetTable(dataSetTableName);
@@ -171,7 +176,8 @@ namespace System.Data.Common
 
         public bool Contains(object? value) => (-1 != IndexOf(value));
 
-        public void CopyTo(Array array, int index) => ((ICollection)ArrayList()).CopyTo(array, index);
+        public void CopyTo(Array array, int index) =>
+            ((ICollection)ArrayList()).CopyTo(array, index);
 
         public void CopyTo(DataTableMapping[] array, int index) => ArrayList().CopyTo(array, index);
 
@@ -284,7 +290,10 @@ namespace System.Data.Common
 
         private void RemoveIndex(int index)
         {
-            Debug.Assert((null != _items) && (0 <= index) && (index < Count), "RemoveIndex, invalid");
+            Debug.Assert(
+                (null != _items) && (0 <= index) && (index < Count),
+                "RemoveIndex, invalid"
+            );
             _items[index].Parent = null;
             _items.RemoveAt(index);
         }
@@ -356,7 +365,9 @@ namespace System.Data.Common
                 index = 1;
                 do
                 {
-                    name = ADP.SourceTable + index.ToString(System.Globalization.CultureInfo.InvariantCulture);
+                    name =
+                        ADP.SourceTable
+                        + index.ToString(System.Globalization.CultureInfo.InvariantCulture);
                     index++;
                 } while (-1 != IndexOf(name));
                 value.SourceTable = name;
@@ -378,7 +389,12 @@ namespace System.Data.Common
         }
 
         [EditorBrowsable(EditorBrowsableState.Advanced)]
-        public static DataTableMapping? GetTableMappingBySchemaAction(DataTableMappingCollection? tableMappings, string sourceTable, string dataSetTable, MissingMappingAction mappingAction)
+        public static DataTableMapping? GetTableMappingBySchemaAction(
+            DataTableMappingCollection? tableMappings,
+            string sourceTable,
+            string dataSetTable,
+            MissingMappingAction mappingAction
+        )
         {
             if (null != tableMappings)
             {

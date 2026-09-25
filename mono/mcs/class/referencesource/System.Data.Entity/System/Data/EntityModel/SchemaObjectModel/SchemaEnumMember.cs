@@ -31,19 +31,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// Parent element.
         /// </param>
         public SchemaEnumMember(SchemaElement parentElement)
-            : base(parentElement)
-        { }
+            : base(parentElement) { }
 
         /// <summary>
         /// Gets the value of this enum member. Possibly null if not specified in the CSDL.
         /// </summary>
         public long? Value
         {
-            get 
-            {
-                return _value;
-            }
-
+            get { return _value; }
             set
             {
                 Debug.Assert(value != null, "value != null");
@@ -66,7 +61,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
             {
                 HandleValueAttribute(reader);
             }
-            
+
             return handled;
         }
 
@@ -81,7 +76,14 @@ namespace System.Data.EntityModel.SchemaObjectModel
             // xsd validation will report an error if the value is not a valid xs:long number. If the number is valid
             // xs:long number then long.TryParse will succeed.
             long tmpValue;
-            if (long.TryParse(reader.Value, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out tmpValue))
+            if (
+                long.TryParse(
+                    reader.Value,
+                    NumberStyles.AllowLeadingSign,
+                    CultureInfo.InvariantCulture,
+                    out tmpValue
+                )
+            )
             {
                 _value = tmpValue;
             }

@@ -13,16 +13,32 @@ public class ModelCleanupConventionTest
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToOnePrincipal>();
         var modelBuilder = principalEntityBuilder.ModelBuilder;
-        var dependentEntityBuilder = modelBuilder.Entity(typeof(OneToOneDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = modelBuilder.Entity(
+            typeof(OneToOneDependent),
+            ConfigurationSource.Convention
+        );
         var baseEntityBuilder = modelBuilder.Entity(typeof(Base), ConfigurationSource.Convention);
-        principalEntityBuilder.HasBaseType(baseEntityBuilder.Metadata, ConfigurationSource.Convention);
-        dependentEntityBuilder.HasBaseType(baseEntityBuilder.Metadata, ConfigurationSource.Convention);
+        principalEntityBuilder.HasBaseType(
+            baseEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
+        dependentEntityBuilder.HasBaseType(
+            baseEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
         dependentEntityBuilder.HasRelationship(
-            principalEntityBuilder.Metadata, nameof(OneToOneDependent.OneToOnePrincipal), null, ConfigurationSource.Convention);
+            principalEntityBuilder.Metadata,
+            nameof(OneToOneDependent.OneToOnePrincipal),
+            null,
+            ConfigurationSource.Convention
+        );
 
         RunConvention(modelBuilder);
 
-        Assert.Equal(nameof(OneToOnePrincipal), modelBuilder.Metadata.GetEntityTypes().Single().DisplayName());
+        Assert.Equal(
+            nameof(OneToOnePrincipal),
+            modelBuilder.Metadata.GetEntityTypes().Single().DisplayName()
+        );
     }
 
     [ConditionalFact]
@@ -30,9 +46,16 @@ public class ModelCleanupConventionTest
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToOnePrincipal>();
         var modelBuilder = principalEntityBuilder.ModelBuilder;
-        var dependentEntityBuilder = modelBuilder.Entity(typeof(OneToOneDependent), ConfigurationSource.Convention);
+        var dependentEntityBuilder = modelBuilder.Entity(
+            typeof(OneToOneDependent),
+            ConfigurationSource.Convention
+        );
         dependentEntityBuilder.HasRelationship(
-            principalEntityBuilder.Metadata, null, nameof(OneToOnePrincipal.OneToOneDependent), ConfigurationSource.Convention);
+            principalEntityBuilder.Metadata,
+            null,
+            nameof(OneToOnePrincipal.OneToOneDependent),
+            ConfigurationSource.Convention
+        );
 
         RunConvention(modelBuilder);
 
@@ -44,36 +67,74 @@ public class ModelCleanupConventionTest
     {
         var principalEntityBuilder = CreateInternalEntityBuilder<OneToOnePrincipal>();
         var modelBuilder = principalEntityBuilder.ModelBuilder;
-        var dependentEntityBuilder = modelBuilder.Entity(typeof(OneToOneDependent), ConfigurationSource.DataAnnotation);
-        var baseEntityBuilder = modelBuilder.Entity(typeof(Base), ConfigurationSource.DataAnnotation);
-        principalEntityBuilder.HasBaseType(baseEntityBuilder.Metadata, ConfigurationSource.Convention);
-        dependentEntityBuilder.HasBaseType(baseEntityBuilder.Metadata, ConfigurationSource.Convention);
+        var dependentEntityBuilder = modelBuilder.Entity(
+            typeof(OneToOneDependent),
+            ConfigurationSource.DataAnnotation
+        );
+        var baseEntityBuilder = modelBuilder.Entity(
+            typeof(Base),
+            ConfigurationSource.DataAnnotation
+        );
+        principalEntityBuilder.HasBaseType(
+            baseEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
+        dependentEntityBuilder.HasBaseType(
+            baseEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
 
-        dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention);
-        dependentEntityBuilder.HasRelationship(principalEntityBuilder.Metadata, ConfigurationSource.Convention);
-        principalEntityBuilder.HasRelationship(dependentEntityBuilder.Metadata, ConfigurationSource.Convention);
-        principalEntityBuilder.HasRelationship(dependentEntityBuilder.Metadata, ConfigurationSource.Convention);
-        baseEntityBuilder.HasRelationship(baseEntityBuilder.Metadata, ConfigurationSource.Convention);
-        baseEntityBuilder.HasRelationship(baseEntityBuilder.Metadata, ConfigurationSource.Convention);
+        dependentEntityBuilder.HasRelationship(
+            principalEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
+        dependentEntityBuilder.HasRelationship(
+            principalEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
+        principalEntityBuilder.HasRelationship(
+            dependentEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
+        principalEntityBuilder.HasRelationship(
+            dependentEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
+        baseEntityBuilder.HasRelationship(
+            baseEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
+        baseEntityBuilder.HasRelationship(
+            baseEntityBuilder.Metadata,
+            ConfigurationSource.Convention
+        );
 
         RunConvention(modelBuilder);
 
-        Assert.True(modelBuilder.Metadata.GetEntityTypes().All(e => !e.GetDeclaredForeignKeys().Any()));
+        Assert.True(
+            modelBuilder.Metadata.GetEntityTypes().All(e => !e.GetDeclaredForeignKeys().Any())
+        );
     }
 
     private void RunConvention(InternalModelBuilder modelBuilder)
     {
-        var context = new ConventionContext<IConventionModelBuilder>(modelBuilder.Metadata.ConventionDispatcher);
+        var context = new ConventionContext<IConventionModelBuilder>(
+            modelBuilder.Metadata.ConventionDispatcher
+        );
 
-        new ModelCleanupConvention(CreateDependencies())
-            .ProcessModelFinalizing(modelBuilder, context);
+        new ModelCleanupConvention(CreateDependencies()).ProcessModelFinalizing(
+            modelBuilder,
+            context
+        );
     }
 
-    private ProviderConventionSetBuilderDependencies CreateDependencies()
-        => InMemoryTestHelpers.Instance.CreateContextServices().GetRequiredService<ProviderConventionSetBuilderDependencies>();
+    private ProviderConventionSetBuilderDependencies CreateDependencies() =>
+        InMemoryTestHelpers
+            .Instance.CreateContextServices()
+            .GetRequiredService<ProviderConventionSetBuilderDependencies>();
 
-    private static InternalEntityTypeBuilder CreateInternalEntityBuilder<T>()
-        => new InternalModelBuilder(new Model()).Entity(typeof(T), ConfigurationSource.Explicit);
+    private static InternalEntityTypeBuilder CreateInternalEntityBuilder<T>() =>
+        new InternalModelBuilder(new Model()).Entity(typeof(T), ConfigurationSource.Explicit);
 
     private class Base
     {

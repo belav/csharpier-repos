@@ -5,14 +5,16 @@
 // inside it and as such should update the liveness information. Since we were not updating the liveness
 // information for such scenarios, we were hitting an assert during register allocation.
 using Xunit;
+
 public class Program
 {
     public static ulong[] s_14;
     public static uint s_34;
+
     [Fact]
     public static void TestEntryPoint()
     {
-        var vr2 = new ulong[][]{new ulong[]{0}};
+        var vr2 = new ulong[][] { new ulong[] { 0 } };
         M27(s_34, vr2);
     }
 

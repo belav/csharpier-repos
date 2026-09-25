@@ -15,59 +15,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -88,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     [Goo]
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -100,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     void Goo() {
                     }
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -113,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         get;
                     }
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -124,7 +130,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     int Goo;
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -135,14 +142,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 class C {
                     event Action<int> Goo;
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInOuterAttribute()
         {
-            await VerifyAbsenceAsync(
-@"[$$");
+            await VerifyAbsenceAsync(@"[$$");
         }
 
         [Fact]
@@ -152,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void Goo([$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -162,7 +170,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     int Goo { [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -172,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     int Goo { get { } [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -182,7 +192,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     event Action<int> Goo { [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -192,14 +203,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     event Action<int> Goo { add { } [$$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInTypeParameters()
         {
-            await VerifyAbsenceAsync(
-@"class C<[$$");
+            await VerifyAbsenceAsync(@"class C<[$$");
         }
 
         [Fact]
@@ -209,7 +220,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface I {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -219,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 struct S {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -229,7 +242,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 enum E {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/51756")]

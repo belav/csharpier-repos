@@ -6,10 +6,15 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Runtime.Serialization
 {
-    [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.LegacyFormatterMessage,
+        DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public sealed class SerializationObjectManager
     {
-        private const string SerializationObjectManagerUnreferencedCodeMessage = "SerializationObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered.";
+        private const string SerializationObjectManagerUnreferencedCodeMessage =
+            "SerializationObjectManager is not trim compatible because the type of objects being managed cannot be statically discovered.";
 
         private readonly Dictionary<object, object> _objectSeenTable; // Table to keep track of objects [OnSerializing] has been called on
         private readonly StreamingContext _context;
@@ -25,7 +30,9 @@ namespace System.Runtime.Serialization
         public void RegisterObject(object obj)
         {
             // Invoke OnSerializing for this object
-            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(obj.GetType());
+            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(
+                obj.GetType()
+            );
 
             // Check to make sure type has serializing events
             if (cache.HasOnSerializingEvents)
@@ -46,7 +53,9 @@ namespace System.Runtime.Serialization
         [RequiresUnreferencedCode(SerializationObjectManagerUnreferencedCodeMessage)]
         private void AddOnSerialized(object obj)
         {
-            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(obj.GetType());
+            SerializationEvents cache = SerializationEventsCache.GetSerializationEventsForType(
+                obj.GetType()
+            );
             _onSerializedHandler = cache.AddOnSerialized(obj, _onSerializedHandler);
         }
     }

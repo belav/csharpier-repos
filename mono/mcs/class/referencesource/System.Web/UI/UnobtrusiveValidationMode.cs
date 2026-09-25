@@ -1,11 +1,10 @@
-﻿
-namespace System.Web.UI {
-    
+﻿namespace System.Web.UI
+{
     /// <summary>
     /// Defines the Unobtrusive validation behavior.
     /// </summary>
-    public enum UnobtrusiveValidationMode {
-
+    public enum UnobtrusiveValidationMode
+    {
         /// <summary>
         /// The unobtrusive validation is off.
         /// </summary>

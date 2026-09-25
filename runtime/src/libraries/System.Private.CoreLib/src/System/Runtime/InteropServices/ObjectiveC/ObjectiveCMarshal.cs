@@ -30,10 +30,13 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// to manage. The handler must not return and is expected to propagate the exception (for example, throw a native exception)
         /// into the native environment or fail fast.
         /// </remarks>
-        public unsafe delegate delegate* unmanaged<IntPtr, void> UnhandledExceptionPropagationHandler(
+        public unsafe delegate delegate* unmanaged<
+            IntPtr,
+            void> UnhandledExceptionPropagationHandler(
             Exception exception,
             RuntimeMethodHandle lastMethod,
-            out IntPtr context);
+            out IntPtr context
+        );
 
         private static UnhandledExceptionPropagationHandler? s_unhandledExceptionPropagationHandler;
 
@@ -61,17 +64,26 @@ namespace System.Runtime.InteropServices.ObjectiveC
             delegate* unmanaged<void> beginEndCallback,
             delegate* unmanaged<IntPtr, int> isReferencedCallback,
             delegate* unmanaged<IntPtr, void> trackedObjectEnteredFinalization,
-            UnhandledExceptionPropagationHandler unhandledExceptionPropagationHandler)
+            UnhandledExceptionPropagationHandler unhandledExceptionPropagationHandler
+        )
         {
             ArgumentNullException.ThrowIfNull(beginEndCallback);
             ArgumentNullException.ThrowIfNull(isReferencedCallback);
             ArgumentNullException.ThrowIfNull(trackedObjectEnteredFinalization);
             ArgumentNullException.ThrowIfNull(unhandledExceptionPropagationHandler);
 
-            if (s_unhandledExceptionPropagationHandler != null
-                || !TryInitializeReferenceTracker(beginEndCallback, isReferencedCallback, trackedObjectEnteredFinalization))
+            if (
+                s_unhandledExceptionPropagationHandler != null
+                || !TryInitializeReferenceTracker(
+                    beginEndCallback,
+                    isReferencedCallback,
+                    trackedObjectEnteredFinalization
+                )
+            )
             {
-                throw new InvalidOperationException(SR.InvalidOperation_ReinitializeObjectiveCMarshal);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ReinitializeObjectiveCMarshal
+                );
             }
             s_unhandledExceptionPropagationHandler = unhandledExceptionPropagationHandler;
         }
@@ -104,7 +116,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
         /// </remarks>
         public static GCHandle CreateReferenceTrackingHandle(
             object obj,
-            out Span<IntPtr> taggedMemory)
+            out Span<IntPtr> taggedMemory
+        )
         {
             ArgumentNullException.ThrowIfNull(obj);
 
@@ -115,7 +128,8 @@ namespace System.Runtime.InteropServices.ObjectiveC
                 ObjectHandleOnStack.Create(ref obj),
 #endif
                 out int memInSizeT,
-                out IntPtr mem);
+                out IntPtr mem
+            );
 
             unsafe
             {
@@ -134,18 +148,22 @@ namespace System.Runtime.InteropServices.ObjectiveC
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456712-objc_msgsend">msgSend()</see>.
             /// </summary>
             MsgSend,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456697-objc_msgsend_fpret">objc_msgSend_fpret()</see>.
             /// </summary>
             MsgSendFpret,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456730-objc_msgsend_stret">objc_msgSend_stret()</see>.
             /// </summary>
             MsgSendStret,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456716-objc_msgsendsuper">objc_msgSendSuper()</see>.
             /// </summary>
             MsgSendSuper,
+
             /// <summary>
             /// Overrides the Objective-C runtime's <see href="https://developer.apple.com/documentation/objectivec/1456722-objc_msgsendsuper_stret">objc_msgSendSuper_stret()</see>.
             /// </summary>
@@ -165,11 +183,16 @@ namespace System.Runtime.InteropServices.ObjectiveC
         {
             ArgumentNullException.ThrowIfNull(func);
 
-            if (msgSendFunction < MessageSendFunction.MsgSend || msgSendFunction > MessageSendFunction.MsgSendSuperStret)
+            if (
+                msgSendFunction < MessageSendFunction.MsgSend
+                || msgSendFunction > MessageSendFunction.MsgSendSuperStret
+            )
                 throw new ArgumentOutOfRangeException(nameof(msgSendFunction));
 
             if (!TrySetGlobalMessageSendCallback(msgSendFunction, func))
-                throw new InvalidOperationException(SR.InvalidOperation_ResetGlobalObjectiveCMsgSend);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_ResetGlobalObjectiveCMsgSend
+                );
         }
     }
 }

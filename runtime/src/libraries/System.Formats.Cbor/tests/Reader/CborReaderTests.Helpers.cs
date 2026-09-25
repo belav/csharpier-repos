@@ -12,7 +12,11 @@ namespace System.Formats.Cbor.Tests
     {
         internal static class Helpers
         {
-            public static void VerifyValue(CborReader reader, object expectedValue, bool expectDefiniteLengthCollections = true)
+            public static void VerifyValue(
+                CborReader reader,
+                object expectedValue,
+                bool expectDefiniteLengthCollections = true
+            )
             {
                 switch (expectedValue)
                 {
@@ -87,26 +91,39 @@ namespace System.Formats.Cbor.Tests
                         Assert.Equal(expected.ByteArrayToHex(), bytes.ByteArrayToHex());
                         break;
 
-                    case string[] expectedChunks when CborWriterTests.Helpers.IsIndefiniteLengthByteString(expectedChunks):
-                        byte[][] expectedByteChunks = expectedChunks.Skip(1).Select(ch => ch.HexToByteArray()).ToArray();
+                    case string[] expectedChunks
+                        when CborWriterTests.Helpers.IsIndefiniteLengthByteString(expectedChunks):
+                        byte[][] expectedByteChunks = expectedChunks
+                            .Skip(1)
+                            .Select(ch => ch.HexToByteArray())
+                            .ToArray();
                         VerifyValue(reader, expectedByteChunks, expectDefiniteLengthCollections);
                         break;
 
                     case string[] expectedChunks:
-                        Assert.Equal(CborReaderState.StartIndefiniteLengthTextString, reader.PeekState());
+                        Assert.Equal(
+                            CborReaderState.StartIndefiniteLengthTextString,
+                            reader.PeekState()
+                        );
                         reader.ReadStartIndefiniteLengthTextString();
-                        foreach(string expectedChunk in expectedChunks)
+                        foreach (string expectedChunk in expectedChunks)
                         {
                             Assert.Equal(CborReaderState.TextString, reader.PeekState());
                             string chunk = reader.ReadTextString();
                             Assert.Equal(expectedChunk, chunk);
                         }
-                        Assert.Equal(CborReaderState.EndIndefiniteLengthTextString, reader.PeekState());
+                        Assert.Equal(
+                            CborReaderState.EndIndefiniteLengthTextString,
+                            reader.PeekState()
+                        );
                         reader.ReadEndIndefiniteLengthTextString();
                         break;
 
                     case byte[][] expectedChunks:
-                        Assert.Equal(CborReaderState.StartIndefiniteLengthByteString, reader.PeekState());
+                        Assert.Equal(
+                            CborReaderState.StartIndefiniteLengthByteString,
+                            reader.PeekState()
+                        );
                         reader.ReadStartIndefiniteLengthByteString();
                         foreach (byte[] expectedChunk in expectedChunks)
                         {
@@ -114,21 +131,27 @@ namespace System.Formats.Cbor.Tests
                             byte[] chunk = reader.ReadByteString();
                             Assert.Equal(expectedChunk.ByteArrayToHex(), chunk.ByteArrayToHex());
                         }
-                        Assert.Equal(CborReaderState.EndIndefiniteLengthByteString, reader.PeekState());
+                        Assert.Equal(
+                            CborReaderState.EndIndefiniteLengthByteString,
+                            reader.PeekState()
+                        );
                         reader.ReadEndIndefiniteLengthByteString();
                         break;
 
-                    case object[] nested when CborWriterTests.Helpers.IsCborMapRepresentation(nested):
+                    case object[] nested
+                        when CborWriterTests.Helpers.IsCborMapRepresentation(nested):
                         VerifyMap(reader, nested, expectDefiniteLengthCollections);
                         break;
 
-                    case object[] nested when CborWriterTests.Helpers.IsEncodedValueRepresentation(nested):
+                    case object[] nested
+                        when CborWriterTests.Helpers.IsEncodedValueRepresentation(nested):
                         string expectedHexEncoding = (string)nested[1];
                         string actualHexEncoding = reader.ReadEncodedValue().ByteArrayToHex();
                         Assert.Equal(expectedHexEncoding, actualHexEncoding);
                         break;
 
-                    case object[] nested when CborWriterTests.Helpers.IsTaggedValueRepresentation(nested):
+                    case object[] nested
+                        when CborWriterTests.Helpers.IsTaggedValueRepresentation(nested):
                         CborTag expectedTag = (CborTag)nested[0];
                         object expectedNestedValue = nested[1];
                         Assert.Equal(CborReaderState.Tag, reader.PeekState());
@@ -141,17 +164,25 @@ namespace System.Formats.Cbor.Tests
                         break;
 
                     default:
-                        throw new ArgumentException($"Unrecognized argument type {expectedValue.GetType()}");
+                        throw new ArgumentException(
+                            $"Unrecognized argument type {expectedValue.GetType()}"
+                        );
                 }
 
                 static void VerifyPeekInteger(CborReader reader, bool isUnsignedInteger)
                 {
-                    CborReaderState expectedState = isUnsignedInteger ? CborReaderState.UnsignedInteger : CborReaderState.NegativeInteger;
+                    CborReaderState expectedState = isUnsignedInteger
+                        ? CborReaderState.UnsignedInteger
+                        : CborReaderState.NegativeInteger;
                     Assert.Equal(expectedState, reader.PeekState());
                 }
             }
 
-            public static void VerifyArray(CborReader reader, object[] expectedValues, bool expectDefiniteLengthCollections = true)
+            public static void VerifyArray(
+                CborReader reader,
+                object[] expectedValues,
+                bool expectDefiniteLengthCollections = true
+            )
             {
                 Assert.Equal(CborReaderState.StartArray, reader.PeekState());
 
@@ -176,11 +207,17 @@ namespace System.Formats.Cbor.Tests
                 reader.ReadEndArray();
             }
 
-            public static void VerifyMap(CborReader reader, object[] expectedValues, bool expectDefiniteLengthCollections = true)
+            public static void VerifyMap(
+                CborReader reader,
+                object[] expectedValues,
+                bool expectDefiniteLengthCollections = true
+            )
             {
                 if (!CborWriterTests.Helpers.IsCborMapRepresentation(expectedValues))
                 {
-                    throw new ArgumentException($"cbor map expected values missing '{CborWriterTests.Helpers.MapPrefixIdentifier}' prefix.");
+                    throw new ArgumentException(
+                        $"cbor map expected values missing '{CborWriterTests.Helpers.MapPrefixIdentifier}' prefix."
+                    );
                 }
 
                 Assert.Equal(CborReaderState.StartMap, reader.PeekState());

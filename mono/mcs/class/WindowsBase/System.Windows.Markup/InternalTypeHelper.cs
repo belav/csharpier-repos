@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,19 +28,34 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 
-namespace System.Windows.Markup {
+namespace System.Windows.Markup
+{
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    public abstract class InternalTypeHelper
+    {
+        protected InternalTypeHelper() { }
 
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	public abstract class InternalTypeHelper
-	{
-		protected InternalTypeHelper()
-		{
-		}
-
-		protected internal abstract void AddEventHandler (EventInfo eventInfo, object target, Delegate handler);
-		protected internal abstract Delegate CreateDelegate (Type delegateType, object target, string handler);
-		protected internal abstract object CreateInstance (Type type, CultureInfo culture);
-		protected internal abstract object GetPropertyValue (PropertyInfo propertyInfo, object target, CultureInfo culture);
-		protected internal abstract void SetPropertyValue (PropertyInfo propertyInfo, object target, object value, CultureInfo culture);
-	}
+        protected internal abstract void AddEventHandler(
+            EventInfo eventInfo,
+            object target,
+            Delegate handler
+        );
+        protected internal abstract Delegate CreateDelegate(
+            Type delegateType,
+            object target,
+            string handler
+        );
+        protected internal abstract object CreateInstance(Type type, CultureInfo culture);
+        protected internal abstract object GetPropertyValue(
+            PropertyInfo propertyInfo,
+            object target,
+            CultureInfo culture
+        );
+        protected internal abstract void SetPropertyValue(
+            PropertyInfo propertyInfo,
+            object target,
+            object value,
+            CultureInfo culture
+        );
+    }
 }

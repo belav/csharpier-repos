@@ -3,7 +3,6 @@
 
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-
 using Xunit;
 
 namespace System.Threading.Tasks.Tests
@@ -19,18 +18,31 @@ namespace System.Threading.Tasks.Tests
         {
             var complete = new bool[loopsize];
 
-            Parallel.For(0, loopsize, delegate(int i, ParallelLoopState ps)
-            {
-                complete[i] = true;
-                if (i >= breakpoint) ps.Break();
-                //Thread.Sleep(2);
-            });
+            Parallel.For(
+                0,
+                loopsize,
+                delegate(int i, ParallelLoopState ps)
+                {
+                    complete[i] = true;
+                    if (i >= breakpoint)
+                        ps.Break();
+                    //Thread.Sleep(2);
+                }
+            );
 
             // Should not be any omissions prior
             // to break, and there should be some after.
             for (int i = 0; i <= breakpoint; i++)
             {
-                Assert.True(complete[i], string.Format("TestForBreak:  Failed: incomplete at {0}, loopsize {1}, breakpoint {2}", i, loopsize, breakpoint));
+                Assert.True(
+                    complete[i],
+                    string.Format(
+                        "TestForBreak:  Failed: incomplete at {0}, loopsize {1}, breakpoint {2}",
+                        i,
+                        loopsize,
+                        breakpoint
+                    )
+                );
             }
 
             bool result = true;
@@ -43,7 +55,10 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            Assert.True(result, "TestForBreak:  Failed: Could not detect any interruption of For-loop.");
+            Assert.True(
+                result,
+                "TestForBreak:  Failed: Could not detect any interruption of For-loop."
+            );
         }
 
         [Theory]
@@ -59,18 +74,31 @@ namespace System.Threading.Tasks.Tests
             // just-over-Int32.MaxValue.  Make sure that 64-bit indices are being
             // handled correctly.
             long loopbase = (long)int.MaxValue - 10;
-            Parallel.For(loopbase, loopbase + loopsize, delegate(long i, ParallelLoopState ps)
-            {
-                complete[i - loopbase] = true;
-                if ((i - loopbase) >= breakpoint) ps.Break();
-                //Thread.Sleep(2);
-            });
+            Parallel.For(
+                loopbase,
+                loopbase + loopsize,
+                delegate(long i, ParallelLoopState ps)
+                {
+                    complete[i - loopbase] = true;
+                    if ((i - loopbase) >= breakpoint)
+                        ps.Break();
+                    //Thread.Sleep(2);
+                }
+            );
 
             // Should not be any omissions prior
             // to break, and there should be some after.
             for (long i = 0; i <= breakpoint; i++)
             {
-                Assert.True(complete[i], string.Format("TestFor64Break: Failed: incomplete at {0}, loopsize {1}, breakpoint {2}", i, loopsize, breakpoint));
+                Assert.True(
+                    complete[i],
+                    string.Format(
+                        "TestFor64Break: Failed: incomplete at {0}, loopsize {1}, breakpoint {2}",
+                        i,
+                        loopsize,
+                        breakpoint
+                    )
+                );
             }
 
             bool result = false;
@@ -83,7 +111,10 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            Assert.True(result, "TestFor64Break:  Failed: Could not detect any interruption of For-loop.");
+            Assert.True(
+                result,
+                "TestFor64Break:  Failed: Could not detect any interruption of For-loop."
+            );
         }
 
         [Theory]
@@ -99,20 +130,33 @@ namespace System.Threading.Tasks.Tests
             // array.  Lists/arrays will be essentially be passed through
             // Parallel.For() logic, which will make this test fail.
             var iqueue = new Queue<int>();
-            for (int i = 0; i < loopsize; i++) iqueue.Enqueue(i);
+            for (int i = 0; i < loopsize; i++)
+                iqueue.Enqueue(i);
 
-            Parallel.ForEach(iqueue, delegate(int i, ParallelLoopState ps)
-            {
-                complete[i] = true;
-                if (i >= breakpoint) ps.Break();
-                //Thread.Sleep(2);
-            });
+            Parallel.ForEach(
+                iqueue,
+                delegate(int i, ParallelLoopState ps)
+                {
+                    complete[i] = true;
+                    if (i >= breakpoint)
+                        ps.Break();
+                    //Thread.Sleep(2);
+                }
+            );
 
             // Same rules as For-loop.  Should not be any omissions prior
             // to break, and there should be some after.
             for (int i = 0; i <= breakpoint; i++)
             {
-                Assert.True(complete[i], string.Format("TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}", loopsize, breakpoint, i));
+                Assert.True(
+                    complete[i],
+                    string.Format(
+                        "TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}",
+                        loopsize,
+                        breakpoint,
+                        i
+                    )
+                );
             }
 
             bool result = false;
@@ -125,7 +169,14 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            Assert.True(result, string.Format("TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.", loopsize, breakpoint));
+            Assert.True(
+                result,
+                string.Format(
+                    "TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.",
+                    loopsize,
+                    breakpoint
+                )
+            );
 
             //
             // Now try it for OrderablePartitioner
@@ -137,19 +188,31 @@ namespace System.Threading.Tasks.Tests
                 complete[i] = false;
             }
             OrderablePartitioner<int> mop = Partitioner.Create(ilist, true);
-            Parallel.ForEach(mop, delegate(int item, ParallelLoopState ps, long index)
-            {
-                //break does not imply that the other iterations will not be run
-                //https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallelloopstate.break#System_Threading_Tasks_ParallelLoopState_Break
-                //execute the test with high loop size and low break index
-                complete[index] = true;
-                if (index >= breakpoint) ps.Break();
-                //Thread.Sleep(2);
-            });
+            Parallel.ForEach(
+                mop,
+                delegate(int item, ParallelLoopState ps, long index)
+                {
+                    //break does not imply that the other iterations will not be run
+                    //https://docs.microsoft.com/en-us/dotnet/api/system.threading.tasks.parallelloopstate.break#System_Threading_Tasks_ParallelLoopState_Break
+                    //execute the test with high loop size and low break index
+                    complete[index] = true;
+                    if (index >= breakpoint)
+                        ps.Break();
+                    //Thread.Sleep(2);
+                }
+            );
 
             for (int i = 0; i <= breakpoint; i++)
             {
-                Assert.True(complete[i], string.Format("TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}", loopsize, breakpoint, i));
+                Assert.True(
+                    complete[i],
+                    string.Format(
+                        "TestForEachBreak(loopsize={0},breakpoint={1}):  Failed: incomplete at {2}",
+                        loopsize,
+                        breakpoint,
+                        i
+                    )
+                );
             }
 
             result = false;
@@ -162,7 +225,14 @@ namespace System.Threading.Tasks.Tests
                 }
             }
 
-            Assert.True(result, string.Format("TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.", loopsize, breakpoint));
+            Assert.True(
+                result,
+                string.Format(
+                    "TestForEachBreak(loopsize={0},breakpoint={1}): Failed: Could not detect any interruption of For-loop.",
+                    loopsize,
+                    breakpoint
+                )
+            );
         }
     }
 }

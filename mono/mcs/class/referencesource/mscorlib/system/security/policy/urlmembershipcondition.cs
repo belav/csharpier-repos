@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 //  UrlMembershipCondition.cs
@@ -12,17 +12,21 @@
 //  Implementation of membership condition for urls
 //
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
     using System;
     using System.Collections;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Security;
     using System.Security.Util;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class UrlMembershipCondition : IMembershipCondition, IConstantMembershipCondition, IReportMatchMembershipCondition
+    public sealed class UrlMembershipCondition
+        : IMembershipCondition,
+            IConstantMembershipCondition,
+            IReportMatchMembershipCondition
     {
         //------------------------------------------------------
         //
@@ -44,17 +48,25 @@ namespace System.Security.Policy {
             m_url = null;
         }
 
-        public UrlMembershipCondition( String url )
+        public UrlMembershipCondition(String url)
         {
             if (url == null)
-                throw new ArgumentNullException( "url" );
+                throw new ArgumentNullException("url");
             Contract.EndContractBlock();
 
             // Parse the Url to check that it's valid.
-            m_url = new URLString(url, false /* not parsed */, true /* parse eagerly */);
+            m_url = new URLString(
+                url,
+                false /* not parsed */
+                ,
+                true /* parse eagerly */
+            );
 
             if (m_url.IsRelativeFileUrl)
-                throw new ArgumentException(Environment.GetResourceString("Argument_RelativeUrlMembershipCondition"), "url");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_RelativeUrlMembershipCondition"),
+                    "url"
+                );
         }
 
         //------------------------------------------------------
@@ -73,11 +85,13 @@ namespace System.Security.Policy {
 
                 URLString url = new URLString(value);
                 if (url.IsRelativeFileUrl)
-                    throw new ArgumentException(Environment.GetResourceString("Argument_RelativeUrlMembershipCondition"), "value");
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_RelativeUrlMembershipCondition"),
+                        "value"
+                    );
 
                 m_url = url;
             }
-
             get
             {
                 if (m_url == null && m_element != null)
@@ -93,7 +107,7 @@ namespace System.Security.Policy {
         //
         //------------------------------------------------------
 
-        public bool Check( Evidence evidence )
+        public bool Check(Evidence evidence)
         {
             object usedEvidence = null;
             return (this as IReportMatchMembershipCondition).Check(evidence, out usedEvidence);
@@ -130,46 +144,55 @@ namespace System.Security.Policy {
                 ParseURL();
 
             UrlMembershipCondition mc = new UrlMembershipCondition();
-            mc.m_url = new URLString( m_url.ToString() );
+            mc.m_url = new URLString(m_url.ToString());
             return mc;
         }
 
         public SecurityElement ToXml()
         {
-            return ToXml( null );
+            return ToXml(null);
         }
 
-        public void FromXml( SecurityElement e )
+        public void FromXml(SecurityElement e)
         {
-            FromXml( e, null );
+            FromXml(e, null);
         }
 
-        public SecurityElement ToXml( PolicyLevel level )
+        public SecurityElement ToXml(PolicyLevel level)
         {
             if (m_url == null && m_element != null)
                 ParseURL();
 
-            SecurityElement root = new SecurityElement( "IMembershipCondition" );
-            System.Security.Util.XMLUtil.AddClassAttribute( root, this.GetType(), "System.Security.Policy.UrlMembershipCondition" );
-            // If you hit this assert then most likely you are trying to change the name of this class. 
+            SecurityElement root = new SecurityElement("IMembershipCondition");
+            System.Security.Util.XMLUtil.AddClassAttribute(
+                root,
+                this.GetType(),
+                "System.Security.Policy.UrlMembershipCondition"
+            );
+            // If you hit this assert then most likely you are trying to change the name of this class.
             // This is ok as long as you change the hard coded string above and change the assert below.
-            Contract.Assert( this.GetType().FullName.Equals( "System.Security.Policy.UrlMembershipCondition" ), "Class name changed!" );
+            Contract.Assert(
+                this.GetType().FullName.Equals("System.Security.Policy.UrlMembershipCondition"),
+                "Class name changed!"
+            );
 
-            root.AddAttribute( "version", "1" );
+            root.AddAttribute("version", "1");
             if (m_url != null)
-                root.AddAttribute( "Url", m_url.ToString() );
+                root.AddAttribute("Url", m_url.ToString());
 
             return root;
         }
 
-        public void FromXml( SecurityElement e, PolicyLevel level )
+        public void FromXml(SecurityElement e, PolicyLevel level)
         {
             if (e == null)
                 throw new ArgumentNullException("e");
 
-            if (!e.Tag.Equals( "IMembershipCondition" ))
+            if (!e.Tag.Equals("IMembershipCondition"))
             {
-                throw new ArgumentException( Environment.GetResourceString( "Argument_MembershipConditionElement" ) );
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MembershipConditionElement")
+                );
             }
             Contract.EndContractBlock();
 
@@ -187,16 +210,20 @@ namespace System.Security.Policy {
                 if (m_element == null)
                     return;
 
-                String elurl = m_element.Attribute( "Url" );
+                String elurl = m_element.Attribute("Url");
                 if (elurl == null)
                 {
-                    throw new ArgumentException(Environment.GetResourceString("Argument_UrlCannotBeNull"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_UrlCannotBeNull")
+                    );
                 }
                 else
                 {
                     URLString url = new URLString(elurl);
                     if (url.IsRelativeFileUrl)
-                        throw new ArgumentException(Environment.GetResourceString("Argument_RelativeUrlMembershipCondition"));
+                        throw new ArgumentException(
+                            Environment.GetResourceString("Argument_RelativeUrlMembershipCondition")
+                        );
 
                     m_url = url;
                 }
@@ -205,7 +232,7 @@ namespace System.Security.Policy {
             }
         }
 
-        public override bool Equals( Object o )
+        public override bool Equals(Object o)
         {
             UrlMembershipCondition that = (o as UrlMembershipCondition);
 
@@ -216,7 +243,7 @@ namespace System.Security.Policy {
                 if (that.m_url == null && that.m_element != null)
                     that.ParseURL();
 
-                if (Equals( this.m_url, that.m_url ))
+                if (Equals(this.m_url, that.m_url))
                 {
                     return true;
                 }
@@ -235,7 +262,7 @@ namespace System.Security.Policy {
             }
             else
             {
-                return typeof( UrlMembershipCondition ).GetHashCode();
+                return typeof(UrlMembershipCondition).GetHashCode();
             }
         }
 
@@ -245,9 +272,13 @@ namespace System.Security.Policy {
                 ParseURL();
 
             if (m_url != null)
-                return String.Format( CultureInfo.CurrentCulture, Environment.GetResourceString( "Url_ToStringArg" ), m_url.ToString() );
+                return String.Format(
+                    CultureInfo.CurrentCulture,
+                    Environment.GetResourceString("Url_ToStringArg"),
+                    m_url.ToString()
+                );
             else
-                return Environment.GetResourceString( "Url_ToString" );
+                return Environment.GetResourceString("Url_ToString");
         }
     }
 }

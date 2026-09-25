@@ -20,7 +20,11 @@ namespace System.CodeDom.Tests
         {
             yield return new object[] { FieldDirection.In, null };
             yield return new object[] { FieldDirection.In - 1, new CodePrimitiveExpression() };
-            yield return new object[] { FieldDirection.Ref + 1, new CodePrimitiveExpression("Value") };
+            yield return new object[]
+            {
+                FieldDirection.Ref + 1,
+                new CodePrimitiveExpression("Value"),
+            };
         }
 
         [Theory]

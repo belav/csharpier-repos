@@ -20,9 +20,15 @@ namespace System.Web.Http.Validation
         public void IsRequiredMember_RecognizesRequiredMembers(string propertyName, bool isRequired)
         {
             HttpConfiguration config = new HttpConfiguration();
-            IRequiredMemberSelector selector = new ModelValidationRequiredMemberSelector(config.Services.GetModelMetadataProvider(), config.Services.GetModelValidatorProviders());
+            IRequiredMemberSelector selector = new ModelValidationRequiredMemberSelector(
+                config.Services.GetModelMetadataProvider(),
+                config.Services.GetModelValidatorProviders()
+            );
 
-            Assert.Equal(isRequired, selector.IsRequiredMember(typeof(PurchaseOrder).GetProperty(propertyName)));
+            Assert.Equal(
+                isRequired,
+                selector.IsRequiredMember(typeof(PurchaseOrder).GetProperty(propertyName))
+            );
         }
 
         [Theory]
@@ -32,11 +38,15 @@ namespace System.Web.Http.Validation
         public void IsRequiredMember_ReturnsFalse_ForNullableProperties(string propertyName)
         {
             HttpConfiguration config = new HttpConfiguration();
-            IRequiredMemberSelector selector = new ModelValidationRequiredMemberSelector(config.Services.GetModelMetadataProvider(), config.Services.GetModelValidatorProviders());
+            IRequiredMemberSelector selector = new ModelValidationRequiredMemberSelector(
+                config.Services.GetModelMetadataProvider(),
+                config.Services.GetModelValidatorProviders()
+            );
 
-            Assert.False(selector.IsRequiredMember(typeof(NullableProperties).GetProperty(propertyName)));
+            Assert.False(
+                selector.IsRequiredMember(typeof(NullableProperties).GetProperty(propertyName))
+            );
         }
-
 
         [Theory]
         [InlineData("ProtectedGet")]
@@ -45,8 +55,14 @@ namespace System.Web.Http.Validation
         public void IsRequiredMember_ReturnsFalse_ForInvalidProperties(string propertyName)
         {
             HttpConfiguration config = new HttpConfiguration();
-            IRequiredMemberSelector selector = new ModelValidationRequiredMemberSelector(config.Services.GetModelMetadataProvider(), config.Services.GetModelValidatorProviders());
-            PropertyInfo propertyInfo = typeof(BadProperties).GetProperty(propertyName, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            IRequiredMemberSelector selector = new ModelValidationRequiredMemberSelector(
+                config.Services.GetModelMetadataProvider(),
+                config.Services.GetModelValidatorProviders()
+            );
+            PropertyInfo propertyInfo = typeof(BadProperties).GetProperty(
+                propertyName,
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
 
             Assert.False(selector.IsRequiredMember(propertyInfo));
         }
@@ -81,22 +97,14 @@ namespace System.Web.Http.Validation
 
         public class BadProperties
         {
-            public int ProtectedGet
-            {
-                protected get;
-                set;
-            }
+            public int ProtectedGet { protected get; set; }
 
             public int NoGet
             {
                 set { }
             }
 
-            internal int Internal
-            {
-                get;
-                set;
-            }
+            internal int Internal { get; set; }
         }
     }
 }

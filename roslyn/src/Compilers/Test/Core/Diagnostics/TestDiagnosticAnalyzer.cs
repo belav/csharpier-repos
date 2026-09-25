@@ -12,17 +12,38 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.Test.Utilities
 {
-    public abstract class TestDiagnosticAnalyzer<TLanguageKindEnum> : DiagnosticAnalyzer where TLanguageKindEnum : struct
+    public abstract class TestDiagnosticAnalyzer<TLanguageKindEnum> : DiagnosticAnalyzer
+        where TLanguageKindEnum : struct
     {
-        protected static readonly ImmutableArray<SymbolKind> AllSymbolKinds = GetAllEnumValues<SymbolKind>();
+        protected static readonly ImmutableArray<SymbolKind> AllSymbolKinds =
+            GetAllEnumValues<SymbolKind>();
 
-        protected static readonly ImmutableArray<TLanguageKindEnum> AllSyntaxKinds = GetAllEnumValues<TLanguageKindEnum>();
+        protected static readonly ImmutableArray<TLanguageKindEnum> AllSyntaxKinds =
+            GetAllEnumValues<TLanguageKindEnum>();
 
-        protected static readonly ImmutableArray<string> AllAnalyzerMemberNames = new string[] { "AnalyzeCodeBlock", "AnalyzeCompilation", "AnalyzeNode", "AnalyzeSemanticModel", "AnalyzeSymbol", "AnalyzeSyntaxTree", "AnalyzeAdditionalFile", "Initialize", "SupportedDiagnostics" }.ToImmutableArray();
+        protected static readonly ImmutableArray<string> AllAnalyzerMemberNames = new string[]
+        {
+            "AnalyzeCodeBlock",
+            "AnalyzeCompilation",
+            "AnalyzeNode",
+            "AnalyzeSemanticModel",
+            "AnalyzeSymbol",
+            "AnalyzeSyntaxTree",
+            "AnalyzeAdditionalFile",
+            "Initialize",
+            "SupportedDiagnostics",
+        }.ToImmutableArray();
 
         protected static readonly DiagnosticDescriptor DefaultDiagnostic =
 #pragma warning disable RS1029 // Do not use reserved diagnostic IDs.
-            new DiagnosticDescriptor("CA7777", "CA7777_AnalyzerTestDiagnostic", "I'm here for test purposes", "Test", DiagnosticSeverity.Warning, isEnabledByDefault: true);
+        new DiagnosticDescriptor(
+            "CA7777",
+            "CA7777_AnalyzerTestDiagnostic",
+            "I'm here for test purposes",
+            "Test",
+            DiagnosticSeverity.Warning,
+            isEnabledByDefault: true
+        );
 #pragma warning restore RS1029 // Do not use reserved diagnostic IDs.
 
         private static ImmutableArray<T> GetAllEnumValues<T>()
@@ -30,8 +51,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             return ImmutableArray.CreateRange(Enum.GetValues(typeof(T)).Cast<T>());
         }
 
-        protected abstract void OnAbstractMember(string abstractMemberName, SyntaxNode node = null, ISymbol symbol = null, [CallerMemberName] string callerName = null);
-        protected virtual void OnOptions(AnalyzerOptions options, [CallerMemberName] string callerName = null) { }
+        protected abstract void OnAbstractMember(
+            string abstractMemberName,
+            SyntaxNode node = null,
+            ISymbol symbol = null,
+            [CallerMemberName] string callerName = null
+        );
+
+        protected virtual void OnOptions(
+            AnalyzerOptions options,
+            [CallerMemberName] string callerName = null
+        ) { }
 
         #region Implementation
 
@@ -39,7 +69,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             OnAbstractMember("Initialize");
 
-            context.RegisterCodeBlockStartAction<TLanguageKindEnum>(new NestedCodeBlockAnalyzer(this).Initialize);
+            context.RegisterCodeBlockStartAction<TLanguageKindEnum>(
+                new NestedCodeBlockAnalyzer(this).Initialize
+            );
 
             context.RegisterCompilationAction(this.AnalyzeCompilation);
             context.RegisterSemanticModelAction(this.AnalyzeSemanticModel);
@@ -47,7 +79,10 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             context.RegisterSymbolAction(this.AnalyzeSymbol, AllSymbolKinds.ToArray());
             context.RegisterSyntaxTreeAction(this.AnalyzeSyntaxTree);
             context.RegisterAdditionalFileAction(this.AnalyzeAdditionalFile);
-            context.RegisterSyntaxNodeAction<TLanguageKindEnum>(this.AnalyzeNode, AllSyntaxKinds.ToArray());
+            context.RegisterSyntaxNodeAction<TLanguageKindEnum>(
+                this.AnalyzeNode,
+                AllSyntaxKinds.ToArray()
+            );
         }
 
         private void AnalyzeCodeBlock(CodeBlockAnalysisContext context)
@@ -112,9 +147,16 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             public void Initialize(CodeBlockStartAnalysisContext<TLanguageKindEnum> context)
             {
-                _container.OnAbstractMember("CodeBlockStart", context.CodeBlock, context.OwningSymbol);
+                _container.OnAbstractMember(
+                    "CodeBlockStart",
+                    context.CodeBlock,
+                    context.OwningSymbol
+                );
                 context.RegisterCodeBlockEndAction(_container.AnalyzeCodeBlock);
-                context.RegisterSyntaxNodeAction(_container.AnalyzeNode, TestDiagnosticAnalyzer<TLanguageKindEnum>.AllSyntaxKinds.ToArray());
+                context.RegisterSyntaxNodeAction(
+                    _container.AnalyzeNode,
+                    TestDiagnosticAnalyzer<TLanguageKindEnum>.AllSyntaxKinds.ToArray()
+                );
             }
         }
 

@@ -25,19 +25,26 @@ namespace System.Web.Helpers
 
         private static readonly IDictionary<Guid, ImageFormat> _imageFormatLookup = new[]
         {
-            Drawing.Imaging.ImageFormat.Bmp, Drawing.Imaging.ImageFormat.Emf, Drawing.Imaging.ImageFormat.Exif,
-            Drawing.Imaging.ImageFormat.Gif, Drawing.Imaging.ImageFormat.Icon, Drawing.Imaging.ImageFormat.Jpeg,
-            Drawing.Imaging.ImageFormat.MemoryBmp, Drawing.Imaging.ImageFormat.Png, Drawing.Imaging.ImageFormat.Tiff,
-            Drawing.Imaging.ImageFormat.Wmf
+            Drawing.Imaging.ImageFormat.Bmp,
+            Drawing.Imaging.ImageFormat.Emf,
+            Drawing.Imaging.ImageFormat.Exif,
+            Drawing.Imaging.ImageFormat.Gif,
+            Drawing.Imaging.ImageFormat.Icon,
+            Drawing.Imaging.ImageFormat.Jpeg,
+            Drawing.Imaging.ImageFormat.MemoryBmp,
+            Drawing.Imaging.ImageFormat.Png,
+            Drawing.Imaging.ImageFormat.Tiff,
+            Drawing.Imaging.ImageFormat.Wmf,
         }.ToDictionary(format => format.Guid, format => format);
 
         private static readonly Func<string, byte[]> _defaultReadAction = File.ReadAllBytes;
 
-        // Initial format is the format of the image when it was constructed. 
+        // Initial format is the format of the image when it was constructed.
         // Current format is the format currently stored in the content buffer. This can
         // be different than initial format since image transformations can change format.
         private readonly ImageFormat _initialFormat;
-        private readonly List<ImageTransformation> _transformations = new List<ImageTransformation>();
+        private readonly List<ImageTransformation> _transformations =
+            new List<ImageTransformation>();
         private ImageFormat _currentFormat;
         private byte[] _content;
         private string _fileName;
@@ -54,9 +61,7 @@ namespace System.Web.Helpers
         }
 
         public WebImage(string filePath)
-            : this(new HttpContextWrapper(HttpContext.Current), _defaultReadAction, filePath)
-        {
-        }
+            : this(new HttpContextWrapper(HttpContext.Current), _defaultReadAction, filePath) { }
 
         public WebImage(Stream imageStream)
         {
@@ -85,8 +90,7 @@ namespace System.Web.Helpers
                         nextChunk = reader.ReadBytes(chunkSizeInBytes);
                         totalSize += nextChunk.Length;
                         chunks.Add(nextChunk);
-                    }
-                    while (nextChunk.Length == chunkSizeInBytes);
+                    } while (nextChunk.Length == chunkSizeInBytes);
                 }
 
                 _content = new byte[totalSize];
@@ -101,11 +105,18 @@ namespace System.Web.Helpers
             _currentFormat = _initialFormat;
         }
 
-        internal WebImage(HttpContextBase httpContext, Func<string, byte[]> readAction, string filePath)
+        internal WebImage(
+            HttpContextBase httpContext,
+            Func<string, byte[]> readAction,
+            string filePath
+        )
         {
             if (String.IsNullOrEmpty(filePath))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "filePath");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "filePath"
+                );
             }
 
             _fileName = filePath;
@@ -119,7 +130,7 @@ namespace System.Web.Helpers
             Debug.Assert(other != null);
             Debug.Assert(other._content != null, "Incorrectly constructed instance.");
 
-            // We are not validating the contents from this constructor since its a copy constructor. 
+            // We are not validating the contents from this constructor since its a copy constructor.
             _content = (byte[])other._content.Clone();
             _initialFormat = other._initialFormat;
             _currentFormat = other._currentFormat;
@@ -128,7 +139,8 @@ namespace System.Web.Helpers
             _height = other._height;
             _width = other._width;
 
-            _properties = (other._properties != null) ? (PropertyItem[])other._properties.Clone() : null;
+            _properties =
+                (other._properties != null) ? (PropertyItem[])other._properties.Clone() : null;
 
             _transformations = new List<ImageTransformation>(other._transformations);
         }
@@ -163,8 +175,11 @@ namespace System.Web.Helpers
             set { _fileName = value; }
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "No security decision is made based on this string. It's customary to display MIME format in lowercase.")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "No security decision is made based on this string. It's customary to display MIME format in lowercase."
+        )]
         public string ImageFormat
         {
             get
@@ -185,20 +200,25 @@ namespace System.Web.Helpers
             return GetImageFromRequest(request, postedFileName);
         }
 
-        internal static WebImage GetImageFromRequest(HttpRequestBase request, string postedFileName = null)
+        internal static WebImage GetImageFromRequest(
+            HttpRequestBase request,
+            string postedFileName = null
+        )
         {
             Debug.Assert(request != null);
             if ((request.Files == null) || (request.Files.Count == 0))
             {
                 return null;
             }
-            HttpPostedFileBase file = String.IsNullOrEmpty(postedFileName) ? request.Files[0] : request.Files[postedFileName];
+            HttpPostedFileBase file = String.IsNullOrEmpty(postedFileName)
+                ? request.Files[0]
+                : request.Files[postedFileName];
             if (file == null || file.ContentLength < 1)
             {
                 return null;
             }
 
-            // The content type is specified by the browser and is unreliable. 
+            // The content type is specified by the browser and is unreliable.
             // Disregard content type, acquire mime type.
             ImageFormat format;
             string mimeType = MimeMapping.GetMimeMapping(file.FileName);
@@ -260,22 +280,42 @@ namespace System.Web.Helpers
             }
         }
 
-        public WebImage Resize(int width, int height, bool preserveAspectRatio = true, bool preventEnlarge = false)
+        public WebImage Resize(
+            int width,
+            int height,
+            bool preserveAspectRatio = true,
+            bool preventEnlarge = false
+        )
         {
             if (width <= 0)
             {
                 throw new ArgumentOutOfRangeException(
                     "width",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThan, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThan,
+                        0
+                    )
+                );
             }
             if (height <= 0)
             {
                 throw new ArgumentOutOfRangeException(
                     "height",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThan, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThan,
+                        0
+                    )
+                );
             }
 
-            ResizeTransformation trans = new ResizeTransformation(height, width, preserveAspectRatio, preventEnlarge);
+            ResizeTransformation trans = new ResizeTransformation(
+                height,
+                width,
+                preserveAspectRatio,
+                preventEnlarge
+            );
             _transformations.Add(trans);
             return this;
         }
@@ -286,25 +326,45 @@ namespace System.Web.Helpers
             {
                 throw new ArgumentOutOfRangeException(
                     "top",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
             if (left < 0)
             {
                 throw new ArgumentOutOfRangeException(
                     "left",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
             if (bottom < 0)
             {
                 throw new ArgumentOutOfRangeException(
                     "bottom",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
             if (right < 0)
             {
                 throw new ArgumentOutOfRangeException(
                     "right",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
 
             CropTransformation crop = new CropTransformation(top, right, bottom, left);
@@ -314,28 +374,36 @@ namespace System.Web.Helpers
 
         public WebImage RotateLeft()
         {
-            ImageTransformation transform = new RotateTransformation(RotateFlipType.Rotate270FlipNone);
+            ImageTransformation transform = new RotateTransformation(
+                RotateFlipType.Rotate270FlipNone
+            );
             _transformations.Add(transform);
             return this;
         }
 
         public WebImage RotateRight()
         {
-            ImageTransformation transform = new RotateTransformation(RotateFlipType.Rotate90FlipNone);
+            ImageTransformation transform = new RotateTransformation(
+                RotateFlipType.Rotate90FlipNone
+            );
             _transformations.Add(transform);
             return this;
         }
 
         public WebImage FlipVertical()
         {
-            ImageTransformation transform = new RotateTransformation(RotateFlipType.RotateNoneFlipY);
+            ImageTransformation transform = new RotateTransformation(
+                RotateFlipType.RotateNoneFlipY
+            );
             _transformations.Add(transform);
             return this;
         }
 
         public WebImage FlipHorizontal()
         {
-            ImageTransformation transform = new RotateTransformation(RotateFlipType.RotateNoneFlipX);
+            ImageTransformation transform = new RotateTransformation(
+                RotateFlipType.RotateNoneFlipX
+            );
             _transformations.Add(transform);
             return this;
         }
@@ -362,11 +430,15 @@ namespace System.Web.Helpers
             string horizontalAlign = "Right",
             string verticalAlign = "Bottom",
             int opacity = 100,
-            int padding = 5)
+            int padding = 5
+        )
         {
             if (String.IsNullOrEmpty(text))
             {
-                throw new ArgumentException(CommonResources.Argument_Cannot_Be_Null_Or_Empty, "text");
+                throw new ArgumentException(
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty,
+                    "text"
+                );
             }
 
             Color color;
@@ -377,7 +449,15 @@ namespace System.Web.Helpers
 
             if ((opacity < 0) || (opacity > 100))
             {
-                throw new ArgumentOutOfRangeException("opacity", String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_Between, 0, 100));
+                throw new ArgumentOutOfRangeException(
+                    "opacity",
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_Between,
+                        0,
+                        100
+                    )
+                );
             }
 
             int alpha = 255 * opacity / 100;
@@ -387,7 +467,12 @@ namespace System.Web.Helpers
             {
                 throw new ArgumentOutOfRangeException(
                     "fontSize",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThan, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThan,
+                        0
+                    )
+                );
             }
 
             FontStyle fontStyleEnum;
@@ -409,11 +494,24 @@ namespace System.Web.Helpers
             {
                 throw new ArgumentOutOfRangeException(
                     "padding",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
 
-            WatermarkTextTransformation transformation =
-                new WatermarkTextTransformation(text, color, fontSize, fontStyleEnum, fontFamilyClass, horizontalAlignEnum, verticalAlignEnum, padding);
+            WatermarkTextTransformation transformation = new WatermarkTextTransformation(
+                text,
+                color,
+                fontSize,
+                fontStyleEnum,
+                fontFamilyClass,
+                horizontalAlignEnum,
+                verticalAlignEnum,
+                padding
+            );
             _transformations.Add(transformation);
             return this;
         }
@@ -436,7 +534,8 @@ namespace System.Web.Helpers
             string horizontalAlign = "Right",
             string verticalAlign = "Bottom",
             int opacity = 100,
-            int padding = 5)
+            int padding = 5
+        )
         {
             if (watermarkImage == null)
             {
@@ -447,13 +546,23 @@ namespace System.Web.Helpers
             {
                 throw new ArgumentOutOfRangeException(
                     "width",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
             if (height < 0)
             {
                 throw new ArgumentOutOfRangeException(
                     "height",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
             if (((width == 0) && (height > 0)) || ((width > 0) && (height == 0)))
             {
@@ -461,7 +570,15 @@ namespace System.Web.Helpers
             }
             if ((opacity < 0) || (opacity > 100))
             {
-                throw new ArgumentOutOfRangeException("opacity", String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_Between, 0, 100));
+                throw new ArgumentOutOfRangeException(
+                    "opacity",
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_Between,
+                        0,
+                        100
+                    )
+                );
             }
 
             HorizontalAlign horizontalAlignEnum = ParseHorizontalAlign(horizontalAlign);
@@ -471,11 +588,23 @@ namespace System.Web.Helpers
             {
                 throw new ArgumentOutOfRangeException(
                     "padding",
-                    String.Format(CultureInfo.InvariantCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, 0));
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        0
+                    )
+                );
             }
 
-            WatermarkImageTransformation transformation =
-                new WatermarkImageTransformation(watermarkImage.Clone(), width, height, horizontalAlignEnum, verticalAlignEnum, opacity, padding);
+            WatermarkImageTransformation transformation = new WatermarkImageTransformation(
+                watermarkImage.Clone(),
+                width,
+                height,
+                horizontalAlignEnum,
+                verticalAlignEnum,
+                opacity,
+                padding
+            );
             _transformations.Add(transformation);
             return this;
         }
@@ -498,10 +627,20 @@ namespace System.Web.Helpers
             string horizontalAlign = "Right",
             string verticalAlign = "Bottom",
             int opacity = 100,
-            int padding = 5)
+            int padding = 5
+        )
         {
-            return AddImageWatermark(new HttpContextWrapper(HttpContext.Current), _defaultReadAction, watermarkImageFilePath, width, height,
-                                     horizontalAlign, verticalAlign, opacity, padding);
+            return AddImageWatermark(
+                new HttpContextWrapper(HttpContext.Current),
+                _defaultReadAction,
+                watermarkImageFilePath,
+                width,
+                height,
+                horizontalAlign,
+                verticalAlign,
+                opacity,
+                padding
+            );
         }
 
         internal WebImage AddImageWatermark(
@@ -513,18 +652,30 @@ namespace System.Web.Helpers
             string horizontalAlign,
             string verticalAlign,
             int opacity,
-            int padding)
+            int padding
+        )
         {
-            return AddImageWatermark(new WebImage(httpContext, readAction, watermarkImageFilePath), width, height, horizontalAlign, verticalAlign, opacity, padding);
+            return AddImageWatermark(
+                new WebImage(httpContext, readAction, watermarkImageFilePath),
+                width,
+                height,
+                horizontalAlign,
+                verticalAlign,
+                opacity,
+                padding
+            );
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "No security decision is made based on this string. It's customary to display MIME format in lowercase.")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "No security decision is made based on this string. It's customary to display MIME format in lowercase."
+        )]
         public WebImage Write(string requestedFormat = null)
         {
-            // GetBytes takes care of executing pending transformations and 
+            // GetBytes takes care of executing pending transformations and
             // determining current image format if we didn't have it set before.
-            // todo: this could be made more efficient by avoiding cloning array 
+            // todo: this could be made more efficient by avoiding cloning array
             // when format is same
             requestedFormat = requestedFormat ?? _initialFormat.ToString();
             Debug.Assert(requestedFormat != null);
@@ -547,45 +698,76 @@ namespace System.Web.Helpers
             return this;
         }
 
-        /// <param name="filePath">If no filePath is specified, the method falls back to the file name if the image was constructed from a file or 
+        /// <param name="filePath">If no filePath is specified, the method falls back to the file name if the image was constructed from a file or
         /// the file name on the client (the browser machine) if the image was built off GetImageFromRequest
         /// </param>
         /// <param name="imageFormat">The format the image is saved in</param>
-        /// <param name="forceCorrectExtension">Appends a well known extension to the filePath based on the imageFormat specified. 
+        /// <param name="forceCorrectExtension">Appends a well known extension to the filePath based on the imageFormat specified.
         /// If the filePath uses a valid extension, no change is made.
         /// e.g. format: "jpg", filePath: "foo.txt". Image saved at = "foo.txt.jpeg"
         ///      format: "png", filePath: "foo.png". Image saved at = "foo.txt.png"
         /// </param>
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase",
-            Justification = "File extensions are typically specified in lower case.")]
-        public WebImage Save(string filePath = null, string imageFormat = null, bool forceCorrectExtension = true)
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "File extensions are typically specified in lower case."
+        )]
+        public WebImage Save(
+            string filePath = null,
+            string imageFormat = null,
+            bool forceCorrectExtension = true
+        )
         {
-            return Save(new HttpContextWrapper(HttpContext.Current), File.WriteAllBytes, filePath, imageFormat, forceCorrectExtension);
+            return Save(
+                new HttpContextWrapper(HttpContext.Current),
+                File.WriteAllBytes,
+                filePath,
+                imageFormat,
+                forceCorrectExtension
+            );
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "The string is a file extension which is typically lower case")]
-        internal WebImage Save(HttpContextBase context, Action<string, byte[]> saveAction, string filePath, string imageFormat, bool forceWellKnownExtension)
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "The string is a file extension which is typically lower case"
+        )]
+        internal WebImage Save(
+            HttpContextBase context,
+            Action<string, byte[]> saveAction,
+            string filePath,
+            string imageFormat,
+            bool forceWellKnownExtension
+        )
         {
             filePath = filePath ?? FileName;
             if (String.IsNullOrEmpty(filePath))
             {
-                throw new ArgumentNullException("filePath", CommonResources.Argument_Cannot_Be_Null_Or_Empty);
+                throw new ArgumentNullException(
+                    "filePath",
+                    CommonResources.Argument_Cannot_Be_Null_Or_Empty
+                );
             }
 
             // GetBytes takes care of executing pending transformations.
-            // todo: this could be made more efficient by avoiding cloning array 
+            // todo: this could be made more efficient by avoiding cloning array
             // when format is same
             byte[] content = GetBytes(imageFormat);
             if (forceWellKnownExtension)
             {
                 ImageFormat saveImageFormat;
-                ImageFormat requestedImageFormat = String.IsNullOrEmpty(imageFormat) ? _initialFormat : GetImageFormat(imageFormat);
+                ImageFormat requestedImageFormat = String.IsNullOrEmpty(imageFormat)
+                    ? _initialFormat
+                    : GetImageFormat(imageFormat);
                 var extension = Path.GetExtension(filePath).TrimStart('.');
                 // TryFromStringToImageFormat accepts mime types and image names. For images supported by System.Drawing.Imaging, the image name maps to the extension.
                 // Replace the extension with the current format in the following two events:
                 //  * The extension format cannot be converted to a known format
-                //  * The format does not match. 
-                if (!ConversionUtil.TryFromStringToImageFormat(extension, out saveImageFormat) || !saveImageFormat.Equals(requestedImageFormat))
+                //  * The format does not match.
+                if (
+                    !ConversionUtil.TryFromStringToImageFormat(extension, out saveImageFormat)
+                    || !saveImageFormat.Equals(requestedImageFormat)
+                )
                 {
                     extension = requestedImageFormat.ToString().ToLowerInvariant();
                     filePath = filePath + "." + extension;
@@ -607,13 +789,15 @@ namespace System.Web.Helpers
             {
                 using (MemoryStream stream = new MemoryStream(content))
                 {
-                    using (Image image = Image.FromStream(stream, useEmbeddedColorManagement: false))
+                    using (
+                        Image image = Image.FromStream(stream, useEmbeddedColorManagement: false)
+                    )
                     {
                         var rawFormat = image.RawFormat;
                         ImageFormat actualFormat;
-                        // RawFormat returns a ImageFormat instance with the same Guid as the predefined types 
+                        // RawFormat returns a ImageFormat instance with the same Guid as the predefined types
                         // This instance is not very useful when it comes to printing human readable strings and file extensions.
-                        // Therefore, lookup the predefined instance 
+                        // Therefore, lookup the predefined instance
                         if (!_imageFormatLookup.TryGetValue(rawFormat.Guid, out actualFormat))
                         {
                             actualFormat = rawFormat;
@@ -624,7 +808,11 @@ namespace System.Web.Helpers
             }
             catch (ArgumentException exception)
             {
-                throw new ArgumentException(HelpersResources.WebImage_InvalidImageContents, paramName, exception);
+                throw new ArgumentException(
+                    HelpersResources.WebImage_InvalidImageContents,
+                    paramName,
+                    exception
+                );
             }
         }
 
@@ -635,7 +823,14 @@ namespace System.Web.Helpers
             ImageFormat result;
             if (!ConversionUtil.TryFromStringToImageFormat(format, out result))
             {
-                throw new ArgumentException(String.Format(CultureInfo.InvariantCulture, HelpersResources.Image_IncorrectImageFormat, format), "format");
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        HelpersResources.Image_IncorrectImageFormat,
+                        format
+                    ),
+                    "format"
+                );
             }
 
             return result;
@@ -646,7 +841,11 @@ namespace System.Web.Helpers
             bool conversionOk;
             HorizontalAlign horizontalAlign;
             conversionOk = ConversionUtil.TryFromStringToEnum(alignment, out horizontalAlign);
-            if (!conversionOk || (horizontalAlign == HorizontalAlign.Justify) || (horizontalAlign == HorizontalAlign.NotSet))
+            if (
+                !conversionOk
+                || (horizontalAlign == HorizontalAlign.Justify)
+                || (horizontalAlign == HorizontalAlign.NotSet)
+            )
             {
                 throw new ArgumentException(HelpersResources.WebImage_IncorrectHorizontalAlignment);
             }
@@ -671,13 +870,13 @@ namespace System.Web.Helpers
             {
                 if (image.RawFormat.Equals(Drawing.Imaging.ImageFormat.MemoryBmp))
                 {
-                    // Memory Bmps are an in-memory format and do not have encoders to save to disk / stream. 
+                    // Memory Bmps are an in-memory format and do not have encoders to save to disk / stream.
                     // Save it in the current format whenever we encounter which ensures we preserve image information such as transparency.
                     image.Save(buffer, _currentFormat);
                 }
                 else
                 {
-                    // If the RawFormat has an encoder, save it as-is to prevent the cost of encoding it to another format such as the initial or current format. 
+                    // If the RawFormat has an encoder, save it as-is to prevent the cost of encoding it to another format such as the initial or current format.
                     image.Save(buffer, image.RawFormat);
                     _currentFormat = image.RawFormat;
                 }
@@ -717,7 +916,10 @@ namespace System.Web.Helpers
                             stream = null;
                         }
 
-                        Debug.Assert((image != null) && (tempImage != null), "Image instances should not be null.");
+                        Debug.Assert(
+                            (image != null) && (tempImage != null),
+                            "Image instances should not be null."
+                        );
                         image.Dispose();
                         image = tempImage;
                     }
@@ -750,16 +952,28 @@ namespace System.Web.Helpers
         }
 
         /// <remarks>Caller has to dispose of returned Bitmap object.</remarks>
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "Callers of this method are responsible for disposing returned Bitmap")]
-        private static Bitmap GetBitmapFromImage(Image image, int width, int height, bool preserveResolution = true)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Callers of this method are responsible for disposing returned Bitmap"
+        )]
+        private static Bitmap GetBitmapFromImage(
+            Image image,
+            int width,
+            int height,
+            bool preserveResolution = true
+        )
         {
-            bool indexed = (image.PixelFormat == PixelFormat.Format1bppIndexed ||
-                            image.PixelFormat == PixelFormat.Format4bppIndexed ||
-                            image.PixelFormat == PixelFormat.Format8bppIndexed ||
-                            image.PixelFormat == PixelFormat.Indexed);
+            bool indexed = (
+                image.PixelFormat == PixelFormat.Format1bppIndexed
+                || image.PixelFormat == PixelFormat.Format4bppIndexed
+                || image.PixelFormat == PixelFormat.Format8bppIndexed
+                || image.PixelFormat == PixelFormat.Indexed
+            );
 
-            Bitmap bitmap = indexed ? new Bitmap(width, height) : new Bitmap(width, height, image.PixelFormat);
+            Bitmap bitmap = indexed
+                ? new Bitmap(width, height)
+                : new Bitmap(width, height, image.PixelFormat);
             if (preserveResolution)
             {
                 bitmap.SetResolution(image.HorizontalResolution, image.VerticalResolution);
@@ -816,7 +1030,7 @@ namespace System.Web.Helpers
             {
                 if ((Top + Bottom > image.Height) || (Left + Right > image.Width))
                 {
-                    // If Crop arguments are too big (i.e. whole image is cropped) we don't make any changes. 
+                    // If Crop arguments are too big (i.e. whole image is cropped) we don't make any changes.
                     return image;
                 }
 
@@ -834,7 +1048,7 @@ namespace System.Web.Helpers
                     }
                     catch (OutOfMemoryException)
                     {
-                        // Bitmap.Clone unfortunately throws OOM exception when rect is 
+                        // Bitmap.Clone unfortunately throws OOM exception when rect is
                         // outside of the source bitmap bounds
                         return image;
                     }
@@ -849,7 +1063,12 @@ namespace System.Web.Helpers
 
         private class ResizeTransformation : ImageTransformation
         {
-            public ResizeTransformation(int height, int width, bool preserveAspectRatio, bool preventEnlarge)
+            public ResizeTransformation(
+                int height,
+                int width,
+                bool preserveAspectRatio,
+                bool preventEnlarge
+            )
             {
                 Height = height;
                 Width = width;
@@ -927,7 +1146,8 @@ namespace System.Web.Helpers
                 HorizontalAlign horizontalAlign,
                 VerticalAlign verticalAlign,
                 int opacity,
-                int padding)
+                int padding
+            )
                 : base(horizontalAlign, verticalAlign, padding)
             {
                 WatermarkImage = image;
@@ -946,18 +1166,29 @@ namespace System.Web.Helpers
                 // Use original image dimensions if user didn't specify any.
                 if (Width == 0)
                 {
-                    Debug.Assert(Height == 0, "If one dimension is zero the other one must be too.");
+                    Debug.Assert(
+                        Height == 0,
+                        "If one dimension is zero the other one must be too."
+                    );
                     Width = WatermarkImage.Width;
                     Height = WatermarkImage.Height;
                 }
 
-                if (((Padding * 2) + Width >= image.Width) || ((Padding * 2) + Height >= image.Height))
+                if (
+                    ((Padding * 2) + Width >= image.Width)
+                    || ((Padding * 2) + Height >= image.Height)
+                )
                 {
-                    // If watermark image + padding is too big we don't make any changes. 
+                    // If watermark image + padding is too big we don't make any changes.
                     return image;
                 }
 
-                WatermarkImage.Resize(Width, Height, preserveAspectRatio: false, preventEnlarge: false);
+                WatermarkImage.Resize(
+                    Width,
+                    Height,
+                    preserveAspectRatio: false,
+                    preventEnlarge: false
+                );
                 float alphaScaling = ((float)Opacity) / 100;
 
                 byte[] watermarkBuffer = WatermarkImage.GetBytes();
@@ -988,7 +1219,8 @@ namespace System.Web.Helpers
                 FontFamily fontFamily,
                 HorizontalAlign alignX,
                 VerticalAlign alignY,
-                int padding)
+                int padding
+            )
                 : base(alignX, alignY, padding)
             {
                 Text = text;
@@ -1008,7 +1240,7 @@ namespace System.Web.Helpers
             {
                 if ((Padding * 2 >= image.Width) || (Padding * 2 >= image.Height))
                 {
-                    // If padding is too big we don't make any changes. 
+                    // If padding is too big we don't make any changes.
                     return image;
                 }
 
@@ -1017,7 +1249,14 @@ namespace System.Web.Helpers
                 // resolutions. Otherwise, watermark is slightly different even when text & size arguments are the same.
                 int fontSize;
                 SizeF textArea;
-                using (Bitmap fixedResolutionImage = GetBitmapFromImage(image, image.Width, image.Height, preserveResolution: false))
+                using (
+                    Bitmap fixedResolutionImage = GetBitmapFromImage(
+                        image,
+                        image.Width,
+                        image.Height,
+                        preserveResolution: false
+                    )
+                )
                 {
                     using (Graphics graphics = Graphics.FromImage(fixedResolutionImage))
                     {
@@ -1056,21 +1295,40 @@ namespace System.Web.Helpers
 
             private int GetBestFontSize(Image image, Graphics graphics, out SizeF textArea)
             {
-                SizeF layoutArea = new SizeF(image.Width - (Padding * 2), image.Height - (Padding * 2));
+                SizeF layoutArea = new SizeF(
+                    image.Width - (Padding * 2),
+                    image.Height - (Padding * 2)
+                );
                 int bestFontSize = FontSize;
                 textArea = layoutArea;
 
-                using (StringFormat format = new StringFormat(StringFormatFlags.NoClip | StringFormatFlags.MeasureTrailingSpaces))
+                using (
+                    StringFormat format = new StringFormat(
+                        StringFormatFlags.NoClip | StringFormatFlags.MeasureTrailingSpaces
+                    )
+                )
                 {
                     for (int fontSize = FontSize; fontSize >= 2; fontSize--)
                     {
-                        int numChars = 0, numLines = 0;
+                        int numChars = 0,
+                            numLines = 0;
                         using (Font font = new Font(FontFamily, fontSize, FontStyle))
                         {
-                            textArea = graphics.MeasureString(Text, font, layoutArea, format, out numChars, out numLines);
+                            textArea = graphics.MeasureString(
+                                Text,
+                                font,
+                                layoutArea,
+                                format,
+                                out numChars,
+                                out numLines
+                            );
                         }
 
-                        if ((numChars >= Text.Length) && (textArea.Width <= layoutArea.Width) && (textArea.Height <= layoutArea.Height))
+                        if (
+                            (numChars >= Text.Length)
+                            && (textArea.Width <= layoutArea.Width)
+                            && (textArea.Height <= layoutArea.Height)
+                        )
                         {
                             // it fits! Exit now
                             return fontSize;
@@ -1088,15 +1346,19 @@ namespace System.Web.Helpers
         private abstract class WatermarkTransformation : ImageTransformation
         {
             private static readonly float[][] _identityScalingMatrix =
-                {
-                    new float[] { 1, 0, 0, 0, 0 },
-                    new float[] { 0, 1, 0, 0, 0 },
-                    new float[] { 0, 0, 1, 0, 0 },
-                    new float[] { 0, 0, 0, 1, 0 },
-                    new float[] { 0, 0, 0, 0, 1 }
-                };
+            {
+                new float[] { 1, 0, 0, 0, 0 },
+                new float[] { 0, 1, 0, 0, 0 },
+                new float[] { 0, 0, 1, 0, 0 },
+                new float[] { 0, 0, 0, 1, 0 },
+                new float[] { 0, 0, 0, 0, 1 },
+            };
 
-            public WatermarkTransformation(HorizontalAlign alignX, VerticalAlign alignY, int padding)
+            public WatermarkTransformation(
+                HorizontalAlign alignX,
+                VerticalAlign alignY,
+                int padding
+            )
             {
                 HorizontalAlign = alignX;
                 VerticalAlign = alignY;
@@ -1109,7 +1371,8 @@ namespace System.Web.Helpers
 
             public Rectangle GetRectangleInsideImage(Image image, int width, int height)
             {
-                int posX, posY;
+                int posX,
+                    posY;
 
                 switch (HorizontalAlign)
                 {
@@ -1149,25 +1412,43 @@ namespace System.Web.Helpers
                 }
 
                 float[][] scalingMatrix =
-                    {
-                        new float[] { 1, 0, 0, 0, 0 },
-                        new float[] { 0, 1, 0, 0, 0 },
-                        new float[] { 0, 0, 1, 0, 0 },
-                        new[] { 0, 0, 0, alphaScaling, 0 },
-                        new float[] { 0, 0, 0, 0, 1 }
-                    };
+                {
+                    new float[] { 1, 0, 0, 0, 0 },
+                    new float[] { 0, 1, 0, 0, 0 },
+                    new float[] { 0, 0, 1, 0, 0 },
+                    new[] { 0, 0, 0, alphaScaling, 0 },
+                    new float[] { 0, 0, 0, 0, 1 },
+                };
                 return scalingMatrix;
             }
 
-            public static void AddWatermark(Graphics targetGraphics, Image watermark, Rectangle rect, float alphaScaling)
+            public static void AddWatermark(
+                Graphics targetGraphics,
+                Image watermark,
+                Rectangle rect,
+                float alphaScaling
+            )
             {
                 float[][] scalingMatrix = GetScalingMatrix(alphaScaling);
                 ColorMatrix colorMatrix = new ColorMatrix(scalingMatrix);
 
                 using (ImageAttributes imageAtt = new ImageAttributes())
                 {
-                    imageAtt.SetColorMatrix(colorMatrix, ColorMatrixFlag.Default, ColorAdjustType.Default);
-                    targetGraphics.DrawImage(watermark, rect, 0, 0, watermark.Width, watermark.Height, GraphicsUnit.Pixel, imageAtt);
+                    imageAtt.SetColorMatrix(
+                        colorMatrix,
+                        ColorMatrixFlag.Default,
+                        ColorAdjustType.Default
+                    );
+                    targetGraphics.DrawImage(
+                        watermark,
+                        rect,
+                        0,
+                        0,
+                        watermark.Width,
+                        watermark.Height,
+                        GraphicsUnit.Pixel,
+                        imageAtt
+                    );
                 }
             }
         }

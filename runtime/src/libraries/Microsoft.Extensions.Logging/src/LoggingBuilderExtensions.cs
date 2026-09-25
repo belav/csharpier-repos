@@ -21,8 +21,11 @@ namespace Microsoft.Extensions.Logging
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
         public static ILoggingBuilder SetMinimumLevel(this ILoggingBuilder builder, LogLevel level)
         {
-            builder.Services.Add(ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
-                new DefaultLoggerLevelConfigureOptions(level)));
+            builder.Services.Add(
+                ServiceDescriptor.Singleton<IConfigureOptions<LoggerFilterOptions>>(
+                    new DefaultLoggerLevelConfigureOptions(level)
+                )
+            );
             return builder;
         }
 
@@ -32,7 +35,10 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to add the <paramref name="provider"/> to.</param>
         /// <param name="provider">The <see cref="ILoggerProvider"/> to add to the <paramref name="builder"/>.</param>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
-        public static ILoggingBuilder AddProvider(this ILoggingBuilder builder, ILoggerProvider provider)
+        public static ILoggingBuilder AddProvider(
+            this ILoggingBuilder builder,
+            ILoggerProvider provider
+        )
         {
             builder.Services.AddSingleton(provider);
             return builder;
@@ -55,7 +61,10 @@ namespace Microsoft.Extensions.Logging
         /// <param name="builder">The <see cref="ILoggingBuilder"/> to be configured with <see cref="LoggerFactoryOptions"/></param>
         /// <param name="action">The action used to configure the logger factory</param>
         /// <returns>The <see cref="ILoggingBuilder"/> so that additional calls can be chained.</returns>
-        public static ILoggingBuilder Configure(this ILoggingBuilder builder, Action<LoggerFactoryOptions> action)
+        public static ILoggingBuilder Configure(
+            this ILoggingBuilder builder,
+            Action<LoggerFactoryOptions> action
+        )
         {
             builder.Services.Configure(action);
             return builder;

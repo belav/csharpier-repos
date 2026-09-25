@@ -12,30 +12,20 @@ namespace System.Activities.Statements
     public sealed class Assign : CodeActivity
     {
         public Assign()
-            : base()
-        {
-        }
+            : base() { }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public OutArgument To
-        {
-            get;
-            set;
-        }
+        public OutArgument To { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument Value
-        {
-            get;
-            set;
-        }
+        public InArgument Value { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
             Collection<RuntimeArgument> arguments = new Collection<RuntimeArgument>();
-            
+
             Type valueType = TypeHelper.ObjectType;
 
             if (this.Value != null)
@@ -43,7 +33,12 @@ namespace System.Activities.Statements
                 valueType = this.Value.ArgumentType;
             }
 
-            RuntimeArgument valueArgument = new RuntimeArgument("Value", valueType, ArgumentDirection.In, true);
+            RuntimeArgument valueArgument = new RuntimeArgument(
+                "Value",
+                valueType,
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Value, valueArgument);
 
             Type toType = TypeHelper.ObjectType;
@@ -53,7 +48,12 @@ namespace System.Activities.Statements
                 toType = this.To.ArgumentType;
             }
 
-            RuntimeArgument toArgument = new RuntimeArgument("To", toType, ArgumentDirection.Out, true);
+            RuntimeArgument toArgument = new RuntimeArgument(
+                "To",
+                toType,
+                ArgumentDirection.Out,
+                true
+            );
             metadata.Bind(this.To, toArgument);
 
             arguments.Add(valueArgument);
@@ -65,10 +65,13 @@ namespace System.Activities.Statements
             {
                 if (!TypeHelper.AreTypesCompatible(this.Value.ArgumentType, this.To.ArgumentType))
                 {
-                    metadata.AddValidationError(SR.TypeMismatchForAssign(
-                                this.Value.ArgumentType,
-                                this.To.ArgumentType,
-                                this.DisplayName));
+                    metadata.AddValidationError(
+                        SR.TypeMismatchForAssign(
+                            this.Value.ArgumentType,
+                            this.To.ArgumentType,
+                            this.DisplayName
+                        )
+                    );
                 }
             }
         }
@@ -82,34 +85,34 @@ namespace System.Activities.Statements
     public sealed class Assign<T> : CodeActivity
     {
         public Assign()
-            : base()
-        {
-        }
+            : base() { }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public OutArgument<T> To
-        {
-            get;
-            set;
-        }
+        public OutArgument<T> To { get; set; }
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<T> Value
-        {
-            get;
-            set;
-        }
+        public InArgument<T> Value { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
             Collection<RuntimeArgument> arguments = new Collection<RuntimeArgument>();
 
-            RuntimeArgument valueArgument = new RuntimeArgument("Value", typeof(T), ArgumentDirection.In, true);
+            RuntimeArgument valueArgument = new RuntimeArgument(
+                "Value",
+                typeof(T),
+                ArgumentDirection.In,
+                true
+            );
             metadata.Bind(this.Value, valueArgument);
 
-            RuntimeArgument toArgument = new RuntimeArgument("To", typeof(T), ArgumentDirection.Out, true);
+            RuntimeArgument toArgument = new RuntimeArgument(
+                "To",
+                typeof(T),
+                ArgumentDirection.Out,
+                true
+            );
             metadata.Bind(this.To, toArgument);
 
             arguments.Add(valueArgument);

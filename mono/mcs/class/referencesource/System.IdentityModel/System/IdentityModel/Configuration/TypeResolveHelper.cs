@@ -11,18 +11,28 @@ namespace System.IdentityModel.Configuration
 {
     class TypeResolveHelper
     {
-        public static T Resolve<T>(ConfigurationElementInterceptor customTypeElement, Type customType) where T : class
+        public static T Resolve<T>(
+            ConfigurationElementInterceptor customTypeElement,
+            Type customType
+        )
+            where T : class
         {
             if (customTypeElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("customTypeElement");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "customTypeElement"
+                );
             }
 
             if (customType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TypeLoadException(SR.GetString(SR.ID8030, customTypeElement.ElementAsXml.OuterXml)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new TypeLoadException(
+                        SR.GetString(SR.ID8030, customTypeElement.ElementAsXml.OuterXml)
+                    )
+                );
             }
-            
+
             try
             {
                 if (!typeof(T).IsAssignableFrom(customType))
@@ -30,7 +40,8 @@ namespace System.IdentityModel.Configuration
                     throw DiagnosticUtility.ThrowHelperConfigurationError(
                         customTypeElement,
                         ConfigurationStrings.Type,
-                        SR.GetString(SR.ID1029, customType.AssemblyQualifiedName, typeof(T)));
+                        SR.GetString(SR.ID1029, customType.AssemblyQualifiedName, typeof(T))
+                    );
                 }
 
                 if (customTypeElement.ElementAsXml != null)
@@ -47,20 +58,30 @@ namespace System.IdentityModel.Configuration
                     }
                 }
 
-                T createdObject = (T)Activator.CreateInstance(
-                    customType,
-                    BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.CreateInstance,
-                    null,
-                    null,
-                    null
+                T createdObject = (T)
+                    Activator.CreateInstance(
+                        customType,
+                        BindingFlags.Instance
+                            | BindingFlags.NonPublic
+                            | BindingFlags.Public
+                            | BindingFlags.CreateInstance,
+                        null,
+                        null,
+                        null
                     );
 
-                if (customTypeElement.ElementAsXml != null && customTypeElement.ElementAsXml.ChildNodes.Count > 0)
+                if (
+                    customTypeElement.ElementAsXml != null
+                    && customTypeElement.ElementAsXml.ChildNodes.Count > 0
+                )
                 {
-                    ICustomIdentityConfiguration customConfiguration = createdObject as ICustomIdentityConfiguration;
+                    ICustomIdentityConfiguration customConfiguration =
+                        createdObject as ICustomIdentityConfiguration;
                     if (customConfiguration != null)
                     {
-                        customConfiguration.LoadCustomConfiguration(customTypeElement.ElementAsXml.ChildNodes);
+                        customConfiguration.LoadCustomConfiguration(
+                            customTypeElement.ElementAsXml.ChildNodes
+                        );
                     }
                 }
 
@@ -74,15 +95,22 @@ namespace System.IdentityModel.Configuration
                 }
                 else if (inner is TargetInvocationException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ID0012, customType.AssemblyQualifiedName), inner));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.ID0012, customType.AssemblyQualifiedName),
+                            inner
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ThrowHelperConfigurationError(customTypeElement, ConfigurationStrings.Type, inner);
+                    throw DiagnosticUtility.ThrowHelperConfigurationError(
+                        customTypeElement,
+                        ConfigurationStrings.Type,
+                        inner
+                    );
                 }
             }
         }
-
-
     }
 }

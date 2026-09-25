@@ -7,20 +7,32 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
+using System.Collections.Generic;
 using System.Data.Common.CommandTrees;
 using System.Data.Common.Utils;
-using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Linq;
+using System.Text;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-    using DomainConstraint  = System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>;
-    using DomainVariable    = System.Data.Common.Utils.Boolean.DomainVariable<BoolLiteral, Constant>;
-    using DomainBoolExpr    = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>>;
-    using DomainNotExpr     = System.Data.Common.Utils.Boolean.NotExpr <System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>>;
-    using DomainTermExpr    = System.Data.Common.Utils.Boolean.TermExpr<System.Data.Common.Utils.Boolean.DomainConstraint<BoolLiteral, Constant>>;
+    using DomainBoolExpr = System.Data.Common.Utils.Boolean.BoolExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
+    using DomainConstraint = System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >;
+    using DomainNotExpr = System.Data.Common.Utils.Boolean.NotExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
+    using DomainTermExpr = System.Data.Common.Utils.Boolean.TermExpr<System.Data.Common.Utils.Boolean.DomainConstraint<
+        BoolLiteral,
+        Constant
+    >>;
+    using DomainVariable = System.Data.Common.Utils.Boolean.DomainVariable<BoolLiteral, Constant>;
 
     /// <summary>
     /// A class that ties up all the literals in boolean expressions.
@@ -30,15 +42,21 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     internal abstract class BoolLiteral : InternalBase
     {
         #region Fields
-        internal static readonly IEqualityComparer<BoolLiteral> EqualityComparer = new BoolLiteralComparer();
-        internal static readonly IEqualityComparer<BoolLiteral> EqualityIdentifierComparer = new IdentifierComparer();
+        internal static readonly IEqualityComparer<BoolLiteral> EqualityComparer =
+            new BoolLiteralComparer();
+        internal static readonly IEqualityComparer<BoolLiteral> EqualityIdentifierComparer =
+            new IdentifierComparer();
         #endregion
 
         #region Static MakeTermExpression methods
         /// <summary>
         /// Creates a term expression of the form: "<paramref name="literal"/> in <paramref name="range"/> with all possible values being <paramref name="domain"/>".
         /// </summary>
-        internal static DomainTermExpr MakeTermExpression(BoolLiteral literal, IEnumerable<Constant> domain, IEnumerable<Constant> range)
+        internal static DomainTermExpr MakeTermExpression(
+            BoolLiteral literal,
+            IEnumerable<Constant> domain,
+            IEnumerable<Constant> range
+        )
         {
             Set<Constant> domainSet = new Set<Constant>(domain, Constant.EqualityComparer);
             Set<Constant> rangeSet = new Set<Constant>(range, Constant.EqualityComparer);
@@ -48,14 +66,25 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Creates a term expression of the form: "<paramref name="literal"/> in <paramref name="range"/> with all possible values being <paramref name="domain"/>".
         /// </summary>
-        internal static DomainTermExpr MakeTermExpression(BoolLiteral literal, Set<Constant> domain, Set<Constant> range)
+        internal static DomainTermExpr MakeTermExpression(
+            BoolLiteral literal,
+            Set<Constant> domain,
+            Set<Constant> range
+        )
         {
             domain.MakeReadOnly();
             range.MakeReadOnly();
 
-            DomainVariable variable = new DomainVariable(literal, domain, EqualityIdentifierComparer);
+            DomainVariable variable = new DomainVariable(
+                literal,
+                domain,
+                EqualityIdentifierComparer
+            );
             DomainConstraint constraint = new DomainConstraint(variable, range);
-            DomainTermExpr result = new DomainTermExpr(EqualityComparer<DomainConstraint>.Default, constraint);
+            DomainTermExpr result = new DomainTermExpr(
+                EqualityComparer<DomainConstraint>.Default,
+                constraint
+            );
             return result;
         }
         #endregion
@@ -64,7 +93,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Fixes the range of the literal using the new values provided in <paramref name="range"/> and returns a boolean expression corresponding to the new value.
         /// </summary>
-        internal abstract DomainBoolExpr FixRange(Set<Constant> range, MemberDomainMap memberDomainMap);
+        internal abstract DomainBoolExpr FixRange(
+            Set<Constant> range,
+            MemberDomainMap memberDomainMap
+        );
 
         internal abstract DomainBoolExpr GetDomainBoolExpression(MemberDomainMap domainMap);
 
@@ -78,21 +110,36 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// </summary>
         /// <param name="projectedSlotMap"></param>
         /// <param name="requiredSlots"></param>
-        internal abstract void GetRequiredSlots(MemberProjectionIndex projectedSlotMap, bool[] requiredSlots);
+        internal abstract void GetRequiredSlots(
+            MemberProjectionIndex projectedSlotMap,
+            bool[] requiredSlots
+        );
 
         /// <summary>
         /// See <see cref="BoolExpression.AsEsql"/>.
         /// </summary>
-        internal abstract StringBuilder AsEsql(StringBuilder builder, string blockAlias, bool skipIsNotNull);
+        internal abstract StringBuilder AsEsql(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        );
 
         /// <summary>
         /// See <see cref="BoolExpression.AsCqt"/>.
         /// </summary>
         internal abstract DbExpression AsCqt(DbExpression row, bool skipIsNotNull);
 
-        internal abstract StringBuilder AsUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull);
+        internal abstract StringBuilder AsUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        );
 
-        internal abstract StringBuilder AsNegatedUserString(StringBuilder builder, string blockAlias, bool skipIsNotNull);
+        internal abstract StringBuilder AsNegatedUserString(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        );
 
         /// <summary>
         /// Checks if the identifier in this is the same as the one in <paramref name="right"/>.
@@ -180,17 +227,33 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         {
             // Essentially say that the variable can take values true or false and here its value is only true
             IEnumerable<Constant> actualValues = new Constant[] { new ScalarConstant(true) };
-            IEnumerable<Constant> possibleValues = new Constant[] { new ScalarConstant(true), new ScalarConstant(false) };
-            Set<Constant> variableDomain = new Set<Constant>(possibleValues, Constant.EqualityComparer).MakeReadOnly();
-            Set<Constant> thisDomain = new Set<Constant>(actualValues, Constant.EqualityComparer).MakeReadOnly();
+            IEnumerable<Constant> possibleValues = new Constant[]
+            {
+                new ScalarConstant(true),
+                new ScalarConstant(false),
+            };
+            Set<Constant> variableDomain = new Set<Constant>(
+                possibleValues,
+                Constant.EqualityComparer
+            ).MakeReadOnly();
+            Set<Constant> thisDomain = new Set<Constant>(
+                actualValues,
+                Constant.EqualityComparer
+            ).MakeReadOnly();
 
             DomainTermExpr result = MakeTermExpression(this, variableDomain, thisDomain);
             return result;
         }
 
-        internal override DomainBoolExpr FixRange(Set<Constant> range, MemberDomainMap memberDomainMap)
+        internal override DomainBoolExpr FixRange(
+            Set<Constant> range,
+            MemberDomainMap memberDomainMap
+        )
         {
-            Debug.Assert(range.Count == 1, "For BoolLiterals, there should be precisely one value - true or false");
+            Debug.Assert(
+                range.Count == 1,
+                "For BoolLiterals, there should be precisely one value - true or false"
+            );
             ScalarConstant scalar = (ScalarConstant)range.First();
             DomainBoolExpr expr = GetDomainBoolExpression(memberDomainMap);
 

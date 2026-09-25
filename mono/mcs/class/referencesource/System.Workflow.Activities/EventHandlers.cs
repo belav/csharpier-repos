@@ -3,18 +3,18 @@ namespace System.Workflow.Activities
     #region Imports
 
     using System;
-    using System.Diagnostics;
     using System.CodeDom;
-    using System.Drawing;
     using System.Collections;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Collections.Generic;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.Runtime;
+    using System.Diagnostics;
+    using System.Drawing;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Runtime;
 
     #endregion
 
@@ -24,27 +24,37 @@ namespace System.Workflow.Activities
     [ActivityValidator(typeof(EventHandlersValidator))]
     [SRCategory(SR.Standard)]
     [AlternateFlowActivityAttribute]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    public sealed class EventHandlersActivity : CompositeActivity, IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class EventHandlersActivity
+        : CompositeActivity,
+            IActivityEventListener<ActivityExecutionStatusChangedEventArgs>
     {
-        public EventHandlersActivity()
-        {
-        }
+        public EventHandlersActivity() { }
 
         public EventHandlersActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #region Runtime State Specific Dependency Property
-        static DependencyProperty ActivityStateProperty = DependencyProperty.Register("ActivityState", typeof(List<EventHandlerEventActivitySubscriber>), typeof(EventHandlersActivity));
-        static DependencyProperty IsScopeCompletedProperty = DependencyProperty.Register("IsScopeCompleted", typeof(bool), typeof(EventHandlersActivity), new PropertyMetadata(false));
+        static DependencyProperty ActivityStateProperty = DependencyProperty.Register(
+            "ActivityState",
+            typeof(List<EventHandlerEventActivitySubscriber>),
+            typeof(EventHandlersActivity)
+        );
+        static DependencyProperty IsScopeCompletedProperty = DependencyProperty.Register(
+            "IsScopeCompleted",
+            typeof(bool),
+            typeof(EventHandlersActivity),
+            new PropertyMetadata(false)
+        );
 
         private List<EventHandlerEventActivitySubscriber> ActivityState
         {
             get
             {
-                return (List<EventHandlerEventActivitySubscriber>)base.GetValue(ActivityStateProperty);
+                return (List<EventHandlerEventActivitySubscriber>)
+                    base.GetValue(ActivityStateProperty);
             }
             set
             {
@@ -57,14 +67,8 @@ namespace System.Workflow.Activities
 
         private bool IsScopeCompleted
         {
-            get
-            {
-                return (bool)base.GetValue(IsScopeCompletedProperty);
-            }
-            set
-            {
-                base.SetValue(IsScopeCompletedProperty, value);
-            }
+            get { return (bool)base.GetValue(IsScopeCompletedProperty); }
+            set { base.SetValue(IsScopeCompletedProperty, value); }
         }
         #endregion
 
@@ -88,23 +92,29 @@ namespace System.Workflow.Activities
             base.Initialize(provider);
         }
 
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
 
-            List<EventHandlerEventActivitySubscriber> eventActivitySubscribers = new List<EventHandlerEventActivitySubscriber>();
+            List<EventHandlerEventActivitySubscriber> eventActivitySubscribers =
+                new List<EventHandlerEventActivitySubscriber>();
             this.ActivityState = eventActivitySubscribers;
 
             for (int i = 0; i < this.EnabledActivities.Count; ++i)
             {
-                EventDrivenActivity childActivity = this.EnabledActivities[i] as EventDrivenActivity;
-                EventHandlerEventActivitySubscriber eventDrivenSubscriber = new EventHandlerEventActivitySubscriber(childActivity);
+                EventDrivenActivity childActivity =
+                    this.EnabledActivities[i] as EventDrivenActivity;
+                EventHandlerEventActivitySubscriber eventDrivenSubscriber =
+                    new EventHandlerEventActivitySubscriber(childActivity);
                 eventActivitySubscribers.Add(eventDrivenSubscriber);
                 childActivity.EventActivity.Subscribe(executionContext, eventDrivenSubscriber);
             }
             return ActivityExecutionStatus.Executing;
         }
+
         protected override ActivityExecutionStatus Cancel(ActivityExecutionContext executionContext)
         {
             if (executionContext == null)
@@ -118,13 +128,18 @@ namespace System.Workflow.Activities
 
             for (int i = 0; i < this.EnabledActivities.Count; ++i)
             {
-                EventDrivenActivity childActivity = this.EnabledActivities[i] as EventDrivenActivity;
-                EventHandlerEventActivitySubscriber eventActivitySubscriber = this.ActivityState[i] as EventHandlerEventActivitySubscriber;
+                EventDrivenActivity childActivity =
+                    this.EnabledActivities[i] as EventDrivenActivity;
+                EventHandlerEventActivitySubscriber eventActivitySubscriber =
+                    this.ActivityState[i] as EventHandlerEventActivitySubscriber;
 
                 eventActivitySubscriber.PendingExecutionCount = 0;
 
-                ActivityExecutionContextManager contextManager = executionContext.ExecutionContextManager;
-                ActivityExecutionContext childContext = contextManager.GetExecutionContext(childActivity);
+                ActivityExecutionContextManager contextManager =
+                    executionContext.ExecutionContextManager;
+                ActivityExecutionContext childContext = contextManager.GetExecutionContext(
+                    childActivity
+                );
 
                 if (childContext != null)
                 {
@@ -143,7 +158,10 @@ namespace System.Workflow.Activities
 
                 if (!scopeCompleted) //UnSubscribe from event.
                 {
-                    childActivity.EventActivity.Unsubscribe(executionContext, eventActivitySubscriber);
+                    childActivity.EventActivity.Unsubscribe(
+                        executionContext,
+                        eventActivitySubscriber
+                    );
                 }
             }
 
@@ -157,7 +175,11 @@ namespace System.Workflow.Activities
                 return this.ExecutionStatus;
             }
         }
-        protected override void OnActivityChangeAdd(ActivityExecutionContext executionContext, Activity addedActivity)
+
+        protected override void OnActivityChangeAdd(
+            ActivityExecutionContext executionContext,
+            Activity addedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -167,16 +189,29 @@ namespace System.Workflow.Activities
 
             EventDrivenActivity eda = addedActivity as EventDrivenActivity;
 
-            EventHandlersActivity activity = (EventHandlersActivity)executionContext.Activity as EventHandlersActivity;
-            EventHandlerEventActivitySubscriber eventActivitySubscriber = new EventHandlerEventActivitySubscriber(eda);
+            EventHandlersActivity activity =
+                (EventHandlersActivity)executionContext.Activity as EventHandlersActivity;
+            EventHandlerEventActivitySubscriber eventActivitySubscriber =
+                new EventHandlerEventActivitySubscriber(eda);
 
-            if (activity.ExecutionStatus == ActivityExecutionStatus.Executing && activity.ActivityState != null && !activity.IsScopeCompleted)
+            if (
+                activity.ExecutionStatus == ActivityExecutionStatus.Executing
+                && activity.ActivityState != null
+                && !activity.IsScopeCompleted
+            )
             {
                 eda.EventActivity.Subscribe(executionContext, eventActivitySubscriber);
-                activity.ActivityState.Insert(activity.EnabledActivities.IndexOf(addedActivity), eventActivitySubscriber);
+                activity.ActivityState.Insert(
+                    activity.EnabledActivities.IndexOf(addedActivity),
+                    eventActivitySubscriber
+                );
             }
         }
-        protected override void OnActivityChangeRemove(ActivityExecutionContext executionContext, Activity removedActivity)
+
+        protected override void OnActivityChangeRemove(
+            ActivityExecutionContext executionContext,
+            Activity removedActivity
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -186,14 +221,23 @@ namespace System.Workflow.Activities
             EventDrivenActivity eda = removedActivity as EventDrivenActivity;
 
             // find out the status of the scope
-            EventHandlersActivity activity = (EventHandlersActivity)executionContext.Activity as EventHandlersActivity;
+            EventHandlersActivity activity =
+                (EventHandlersActivity)executionContext.Activity as EventHandlersActivity;
 
-            if (activity.ExecutionStatus == ActivityExecutionStatus.Executing && activity.ActivityState != null && !activity.IsScopeCompleted)
+            if (
+                activity.ExecutionStatus == ActivityExecutionStatus.Executing
+                && activity.ActivityState != null
+                && !activity.IsScopeCompleted
+            )
             {
                 for (int i = 0; i < activity.ActivityState.Count; ++i)
                 {
                     EventHandlerEventActivitySubscriber eventSubscriber = activity.ActivityState[i];
-                    if (eventSubscriber.eventDrivenActivity.QualifiedName.Equals(removedActivity.QualifiedName))
+                    if (
+                        eventSubscriber.eventDrivenActivity.QualifiedName.Equals(
+                            removedActivity.QualifiedName
+                        )
+                    )
                     {
                         eda.EventActivity.Unsubscribe(executionContext, eventSubscriber);
                         activity.ActivityState.RemoveAt(i);
@@ -203,7 +247,9 @@ namespace System.Workflow.Activities
             }
         }
 
-        protected override void OnWorkflowChangesCompleted(ActivityExecutionContext executionContext)
+        protected override void OnWorkflowChangesCompleted(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -234,7 +280,10 @@ namespace System.Workflow.Activities
 
         #region IActivityEventListener<ActivityExecutionStatusChangedEventArgs> Members
 
-        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(object sender, ActivityExecutionStatusChangedEventArgs e)
+        void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+            object sender,
+            ActivityExecutionStatusChangedEventArgs e
+        )
         {
             if (sender == null)
                 throw new ArgumentNullException("sender");
@@ -243,7 +292,10 @@ namespace System.Workflow.Activities
 
             ActivityExecutionContext context = sender as ActivityExecutionContext;
             if (context == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             EventDrivenActivity eda = e.Activity as EventDrivenActivity;
             EventHandlersActivity eventHandlers = context.Activity as EventHandlersActivity;
@@ -258,23 +310,37 @@ namespace System.Workflow.Activities
                 case ActivityExecutionStatus.Executing:
                     for (int i = 0; i < eventHandlers.EnabledActivities.Count; ++i)
                     {
-                        if (eventHandlers.EnabledActivities[i].QualifiedName.Equals(eda.QualifiedName))
+                        if (
+                            eventHandlers
+                                .EnabledActivities[i]
+                                .QualifiedName.Equals(eda.QualifiedName)
+                        )
                         {
-                            EventHandlerEventActivitySubscriber eventActivitySubscriber = eventHandlers.ActivityState[i];
+                            EventHandlerEventActivitySubscriber eventActivitySubscriber =
+                                eventHandlers.ActivityState[i];
 
                             if (eventActivitySubscriber.PendingExecutionCount > 0)
                             {
                                 eventActivitySubscriber.PendingExecutionCount--;
                                 eventActivitySubscriber.IsBlocked = false;
 
-                                ActivityExecutionContext childContext = contextManager.CreateExecutionContext(eventHandlers.EnabledActivities[i]);
-                                childContext.Activity.RegisterForStatusChange(Activity.ClosedEvent, this);
+                                ActivityExecutionContext childContext =
+                                    contextManager.CreateExecutionContext(
+                                        eventHandlers.EnabledActivities[i]
+                                    );
+                                childContext.Activity.RegisterForStatusChange(
+                                    Activity.ClosedEvent,
+                                    this
+                                );
                                 childContext.ExecuteActivity(childContext.Activity);
                             }
                             else
                             {
                                 eventActivitySubscriber.IsBlocked = true;
-                                if (eventHandlers.IsScopeCompleted && AllHandlersAreQuiet(eventHandlers, context))
+                                if (
+                                    eventHandlers.IsScopeCompleted
+                                    && AllHandlersAreQuiet(eventHandlers, context)
+                                )
                                     context.CloseActivity();
                             }
                             break;
@@ -293,18 +359,29 @@ namespace System.Workflow.Activities
         #endregion
 
         #region Helpers
-        private bool AllHandlersAreQuiet(EventHandlersActivity handlers, ActivityExecutionContext context)
+        private bool AllHandlersAreQuiet(
+            EventHandlersActivity handlers,
+            ActivityExecutionContext context
+        )
         {
             ActivityExecutionContextManager contextManager = context.ExecutionContextManager;
 
             for (int i = 0; i < handlers.EnabledActivities.Count; ++i)
             {
-                EventDrivenActivity eventDriven = handlers.EnabledActivities[i] as EventDrivenActivity;
-                if (contextManager.GetExecutionContext(eventDriven) != null || (handlers.ActivityState != null && handlers.ActivityState[i].PendingExecutionCount > 0))
+                EventDrivenActivity eventDriven =
+                    handlers.EnabledActivities[i] as EventDrivenActivity;
+                if (
+                    contextManager.GetExecutionContext(eventDriven) != null
+                    || (
+                        handlers.ActivityState != null
+                        && handlers.ActivityState[i].PendingExecutionCount > 0
+                    )
+                )
                     return false;
             }
             return true;
         }
+
         private void OnUnsubscribeAndClose(object sender, EventArgs args)
         {
             if (sender == null)
@@ -327,11 +404,15 @@ namespace System.Workflow.Activities
             bool readyToClose = true;
             for (int i = 0; i < handlers.EnabledActivities.Count; ++i)
             {
-                EventDrivenActivity evtDriven = handlers.EnabledActivities[i] as EventDrivenActivity;
+                EventDrivenActivity evtDriven =
+                    handlers.EnabledActivities[i] as EventDrivenActivity;
                 EventHandlerEventActivitySubscriber eventSubscriber = handlers.ActivityState[i];
                 evtDriven.EventActivity.Unsubscribe(context, eventSubscriber);
 
-                if (contextManager.GetExecutionContext(evtDriven) != null || handlers.ActivityState[i].PendingExecutionCount != 0)
+                if (
+                    contextManager.GetExecutionContext(evtDriven) != null
+                    || handlers.ActivityState[i].PendingExecutionCount != 0
+                )
                     readyToClose = false;
             }
 
@@ -345,7 +426,8 @@ namespace System.Workflow.Activities
 
         #region EventSubscriber
         [Serializable]
-        private sealed class EventHandlerEventActivitySubscriber : IActivityEventListener<QueueEventArgs>
+        private sealed class EventHandlerEventActivitySubscriber
+            : IActivityEventListener<QueueEventArgs>
         {
             bool isBlocked;
             int numOfMsgs;
@@ -361,26 +443,14 @@ namespace System.Workflow.Activities
 
             internal bool IsBlocked
             {
-                get
-                {
-                    return isBlocked;
-                }
-                set
-                {
-                    isBlocked = value;
-                }
+                get { return isBlocked; }
+                set { isBlocked = value; }
             }
 
             internal int PendingExecutionCount
             {
-                get
-                {
-                    return numOfMsgs;
-                }
-                set
-                {
-                    numOfMsgs = value;
-                }
+                get { return numOfMsgs; }
+                set { numOfMsgs = value; }
             }
 
             void IActivityEventListener<QueueEventArgs>.OnEvent(object sender, QueueEventArgs e)
@@ -405,8 +475,11 @@ namespace System.Workflow.Activities
                 if (IsBlocked)
                 {
                     IsBlocked = false;
-                    ActivityExecutionContextManager contextManager = context.ExecutionContextManager;
-                    ActivityExecutionContext childContext = contextManager.CreateExecutionContext(eventDrivenActivity);
+                    ActivityExecutionContextManager contextManager =
+                        context.ExecutionContextManager;
+                    ActivityExecutionContext childContext = contextManager.CreateExecutionContext(
+                        eventDrivenActivity
+                    );
                     childContext.Activity.RegisterForStatusChange(Activity.ClosedEvent, handlers);
                     childContext.ExecuteActivity(childContext.Activity);
                 }
@@ -427,7 +500,10 @@ namespace System.Workflow.Activities
                 throw new ArgumentNullException("childActivity");
 
             if (!this.EnabledActivities.Contains(childActivity))
-                throw new ArgumentException(SR.GetString(SR.Error_EventHandlersChildNotFound), "childActivity");
+                throw new ArgumentException(
+                    SR.GetString(SR.Error_EventHandlersChildNotFound),
+                    "childActivity"
+                );
             else
             {
                 Activity[] dynamicChildActivity = this.GetDynamicActivities(childActivity);
@@ -458,7 +534,10 @@ namespace System.Workflow.Activities
             if (childActivity != null)
                 return GetDynamicActivity(childActivity);
 
-            throw new ArgumentException(SR.GetString(SR.Error_EventHandlersChildNotFound), "childActivityName");
+            throw new ArgumentException(
+                SR.GetString(SR.Error_EventHandlersChildNotFound),
+                "childActivityName"
+            );
         }
     }
 
@@ -470,17 +549,36 @@ namespace System.Workflow.Activities
 
             EventHandlersActivity eventHandlers = obj as EventHandlersActivity;
             if (eventHandlers == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(EventHandlersActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(EventHandlersActivity).FullName
+                    ),
+                    "obj"
+                );
 
             if (eventHandlers.Parent == null)
             {
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_MustHaveParent), ErrorNumbers.Error_EventHandlersDeclParentNotScope));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_MustHaveParent),
+                        ErrorNumbers.Error_EventHandlersDeclParentNotScope
+                    )
+                );
                 return validationErrors;
             }
 
             // Parent must support event handlers
             if (!(eventHandlers.Parent is EventHandlingScopeActivity))
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_EventHandlersDeclParentNotScope, eventHandlers.Parent.QualifiedName), ErrorNumbers.Error_EventHandlersDeclParentNotScope));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(
+                            SR.Error_EventHandlersDeclParentNotScope,
+                            eventHandlers.Parent.QualifiedName
+                        ),
+                        ErrorNumbers.Error_EventHandlersDeclParentNotScope
+                    )
+                );
 
             bool bNotAllEventHandler = false;
             foreach (Activity activity in eventHandlers.EnabledActivities)
@@ -491,7 +589,12 @@ namespace System.Workflow.Activities
 
             // validate that all child activities are event driven activities.
             if (bNotAllEventHandler)
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_ListenNotAllEventDriven), ErrorNumbers.Error_ListenNotAllEventDriven));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_ListenNotAllEventDriven),
+                        ErrorNumbers.Error_ListenNotAllEventDriven
+                    )
+                );
 
             return validationErrors;
         }

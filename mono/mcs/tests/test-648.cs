@@ -2,30 +2,24 @@ using System;
 
 namespace ParamMismatch
 {
-	public class TestCase
-	{
-		public static void Main()
-		{
-		}
-		
-		public TestCase()
-		{
-		}
+    public class TestCase
+    {
+        public static void Main() { }
 
-		public event EventHandler Culprit
-		{
-			add
-			{
-				// even when this contained something, compiling would fail
-			}
+        public TestCase() { }
 
-			remove
-			{
-				// even when this contained something, compiling would fail
-			}
-		}
-		~TestCase()
-		{
-		}
-	}
+        public event EventHandler Culprit
+        {
+            add
+            {
+                // even when this contained something, compiling would fail
+            }
+            remove
+            {
+                // even when this contained something, compiling would fail
+            }
+        }
+
+        ~TestCase() { }
+    }
 }

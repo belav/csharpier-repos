@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Data.Common;
+using System.Text;
 
 namespace System.Data.Metadata.Edm
 {
@@ -27,11 +27,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="multiplicity">The multiplicity of this relationship end</param>
         /// <exception cref="System.ArgumentNullException">Thrown if name or endRefType arguments is null</exception>
         /// <exception cref="System.ArgumentException">Thrown if name argument is empty string</exception>
-        internal RelationshipEndMember(string name, 
-                                       RefType endRefType,
-                                       RelationshipMultiplicity multiplicity)
-        : base(name, 
-               TypeUsage.Create(endRefType, new FacetValues{ Nullable = false }))
+        internal RelationshipEndMember(
+            string name,
+            RefType endRefType,
+            RelationshipMultiplicity multiplicity
+        )
+            : base(name, TypeUsage.Create(endRefType, new FacetValues { Nullable = false }))
         {
             _relationshipMultiplicity = multiplicity;
             _deleteBehavior = OperationAction.None;
@@ -50,16 +51,12 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.OperationAction, true)]
         public OperationAction DeleteBehavior
         {
-            get
-            {
-                return _deleteBehavior;
-            }
+            get { return _deleteBehavior; }
             internal set
             {
-                Util.ThrowIfReadOnly(this);                
+                Util.ThrowIfReadOnly(this);
                 _deleteBehavior = value;
             }
-
         }
 
         /// <summary>
@@ -68,10 +65,7 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.RelationshipMultiplicity, false)]
         public RelationshipMultiplicity RelationshipMultiplicity
         {
-            get
-            {
-                return _relationshipMultiplicity;
-            }
+            get { return _relationshipMultiplicity; }
         }
         #endregion
 

@@ -23,7 +23,7 @@ public class RootClass
             Console.WriteLine("ClassA.Property returned: '{0}'", resultA);
             return 101;
         }
-        
+
         string folderBPath = Path.Combine(currentFolder, "FolderB.dll");
         Console.WriteLine("Loading FolderB: {0}", folderBPath);
         Assembly folderB = AssemblyLoadContext.Default.LoadFromAssemblyPath(folderBPath);

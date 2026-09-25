@@ -15,6 +15,7 @@ namespace System.Reflection.Emit.Tests
     {
         void Method(in int arg);
     }
+
     public class ILGeneratorEmitMethodInfo
     {
         [Fact]
@@ -22,12 +23,23 @@ namespace System.Reflection.Emit.Tests
         {
             Type methodType = typeof(IWithIn<int>);
             MethodInfo method = methodType.GetMethod("Method");
-            MethodInfo getMethodFromHandle = typeof(MethodBase).GetMethod("GetMethodFromHandle", new[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) });
+            MethodInfo getMethodFromHandle = typeof(MethodBase).GetMethod(
+                "GetMethodFromHandle",
+                new[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }
+            );
 
             ModuleBuilder moduleBuilder = Helpers.DynamicModule();
-            TypeBuilder typeBuilder = moduleBuilder.DefineType("DynamicType", TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Class);
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(
+                "DynamicType",
+                TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Class
+            );
 
-            MethodBuilder methodBuilder = typeBuilder.DefineMethod("Get", MethodAttributes.Public | MethodAttributes.Static, typeof(MethodBase), new Type[0]);
+            MethodBuilder methodBuilder = typeBuilder.DefineMethod(
+                "Get",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(MethodBase),
+                new Type[0]
+            );
             ILGenerator ilBuilder = methodBuilder.GetILGenerator();
             ilBuilder.Emit(OpCodes.Ldtoken, method);
             ilBuilder.Emit(OpCodes.Ldtoken, methodType);
@@ -39,7 +51,9 @@ namespace System.Reflection.Emit.Tests
             MethodInfo genMethod = type.GetMethod("Get");
             byte[] il = genMethod.GetMethodBody().GetILAsByteArray();
 
-            int ilMethodMetadataToken = BinaryPrimitives.ReadInt32LittleEndian(new Span<byte>(il, 1, 4));
+            int ilMethodMetadataToken = BinaryPrimitives.ReadInt32LittleEndian(
+                new Span<byte>(il, 1, 4)
+            );
             MethodBase resolvedMethod = type.Module.ResolveMethod(ilMethodMetadataToken);
             Assert.Equal(method, resolvedMethod);
             var methodBase = (MethodBase)genMethod.Invoke(null, null);

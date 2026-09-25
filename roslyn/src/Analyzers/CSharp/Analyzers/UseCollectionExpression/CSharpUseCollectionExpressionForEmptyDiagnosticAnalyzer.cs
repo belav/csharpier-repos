@@ -19,13 +19,16 @@ internal sealed partial class CSharpUseCollectionExpressionForEmptyDiagnosticAna
     : AbstractCSharpUseCollectionExpressionDiagnosticAnalyzer
 {
     public CSharpUseCollectionExpressionForEmptyDiagnosticAnalyzer()
-        : base(IDEDiagnosticIds.UseCollectionExpressionForEmptyDiagnosticId,
-               EnforceOnBuildValues.UseCollectionExpressionForEmpty)
-    {
-    }
+        : base(
+            IDEDiagnosticIds.UseCollectionExpressionForEmptyDiagnosticId,
+            EnforceOnBuildValues.UseCollectionExpressionForEmpty
+        ) { }
 
-    protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context)
-        => context.RegisterSyntaxNodeAction(AnalyzeMemberAccess, SyntaxKind.SimpleMemberAccessExpression);
+    protected override void InitializeWorker(CodeBlockStartAnalysisContext<SyntaxKind> context) =>
+        context.RegisterSyntaxNodeAction(
+            AnalyzeMemberAccess,
+            SyntaxKind.SimpleMemberAccessExpression
+        );
 
     private void AnalyzeMemberAccess(SyntaxNodeAnalysisContext context)
     {
@@ -40,23 +43,33 @@ internal sealed partial class CSharpUseCollectionExpressionForEmptyDiagnosticAna
         var memberAccess = (MemberAccessExpressionSyntax)context.Node;
 
         var nodeToReplace =
-            IsCollectionEmptyAccess(semanticModel, memberAccess, cancellationToken)
-                ? memberAccess
-                : memberAccess.Parent is InvocationExpressionSyntax invocation && IsCollectionEmptyAccess(semanticModel, invocation, cancellationToken)
-                    ? (ExpressionSyntax)invocation
-                    : null;
+            IsCollectionEmptyAccess(semanticModel, memberAccess, cancellationToken) ? memberAccess
+            : memberAccess.Parent is InvocationExpressionSyntax invocation
+            && IsCollectionEmptyAccess(semanticModel, invocation, cancellationToken)
+                ? (ExpressionSyntax)invocation
+            : null;
         if (nodeToReplace is null)
             return;
 
-        if (!CanReplaceWithCollectionExpression(semanticModel, nodeToReplace, skipVerificationForReplacedNode: true, cancellationToken))
+        if (
+            !CanReplaceWithCollectionExpression(
+                semanticModel,
+                nodeToReplace,
+                skipVerificationForReplacedNode: true,
+                cancellationToken
+            )
+        )
             return;
 
-        context.ReportDiagnostic(DiagnosticHelper.Create(
-            Descriptor,
-            memberAccess.Name.Identifier.GetLocation(),
-            option.Notification,
-            additionalLocations: ImmutableArray.Create(nodeToReplace.GetLocation()),
-            properties: null));
+        context.ReportDiagnostic(
+            DiagnosticHelper.Create(
+                Descriptor,
+                memberAccess.Name.Identifier.GetLocation(),
+                option.Notification,
+                additionalLocations: ImmutableArray.Create(nodeToReplace.GetLocation()),
+                properties: null
+            )
+        );
 
         return;
     }

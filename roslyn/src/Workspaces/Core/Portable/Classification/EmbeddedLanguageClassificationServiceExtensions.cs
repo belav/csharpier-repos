@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             ClassificationOptions options,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             classificationService.AddEmbeddedLanguageClassifications(
                 solutionServices,
@@ -29,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 ImmutableArray.Create(textSpan),
                 options,
                 result,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

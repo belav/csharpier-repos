@@ -24,6 +24,5 @@ namespace Microsoft.Extensions.Logging
         /// The alias of the provider.
         /// </summary>
         public string Alias { get; }
-
     }
 }

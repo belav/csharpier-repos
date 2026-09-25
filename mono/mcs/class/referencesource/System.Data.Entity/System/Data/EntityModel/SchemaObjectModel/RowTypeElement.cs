@@ -19,22 +19,19 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
     class RowTypeElement : ModelFunctionTypeElement
     {
-        private readonly SchemaElementLookUpTable<RowTypePropertyElement> _properties = new SchemaElementLookUpTable<RowTypePropertyElement>();
+        private readonly SchemaElementLookUpTable<RowTypePropertyElement> _properties =
+            new SchemaElementLookUpTable<RowTypePropertyElement>();
 
         #region constructor
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal RowTypeElement(SchemaElement parentElement)
-            : base(parentElement)
-        {
-        }
-
+            : base(parentElement) { }
 
         protected override bool HandleElement(XmlReader reader)
         {
-
             if (CanHandleElement(reader, XmlConstants.Property))
             {
                 HandlePropertyElement(reader);
@@ -49,7 +46,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             var property = new RowTypePropertyElement(this);
             property.Parse(reader);
-            _properties.Add(property, true, Strings.DuplicateEntityContainerMemberName /**/);
+            _properties.Add(
+                property,
+                true,
+                Strings.DuplicateEntityContainerMemberName /**/
+            );
         }
 
         #endregion
@@ -61,12 +62,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         internal override void ResolveTopLevelNames()
         {
-
             foreach (var property in _properties)
             {
                 property.ResolveTopLevelNames();
             }
-
         }
 
         internal override void WriteIdentity(StringBuilder builder)
@@ -80,7 +79,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 {
                     first = !first;
                 }
-                else 
+                else
                 {
                     builder.Append(", ");
                 }
@@ -109,7 +108,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 }
                 else
                 {
-                    Debug.Assert(Schema.DataModel == SchemaDataModelOption.ProviderDataModel, "Only DataModel == SchemaDataModelOption.ProviderDataModel is expected");
+                    Debug.Assert(
+                        Schema.DataModel == SchemaDataModelOption.ProviderDataModel,
+                        "Only DataModel == SchemaDataModelOption.ProviderDataModel is expected"
+                    );
                     rowType.DataSpace = DataSpace.SSpace;
                 }
 
@@ -119,7 +121,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             return _typeUsage;
         }
 
-        internal override bool ResolveNameAndSetTypeUsage(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems)
+        internal override bool ResolveNameAndSetTypeUsage(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        )
         {
             bool result = true;
             if (_typeUsage == null)
@@ -144,7 +149,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
             if (_properties.Count == 0)
             {
-                AddError(ErrorCode.RowTypeWithoutProperty, EdmSchemaErrorSeverity.Error, Strings.RowTypeWithoutProperty);
+                AddError(
+                    ErrorCode.RowTypeWithoutProperty,
+                    EdmSchemaErrorSeverity.Error,
+                    Strings.RowTypeWithoutProperty
+                );
             }
         }
     }

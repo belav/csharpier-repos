@@ -13,9 +13,15 @@ namespace System.Composition.TypedParts
 {
     internal sealed class TypedPartExportDescriptorProvider : ExportDescriptorProvider
     {
-        private readonly Dictionary<CompositionContract, ICollection<DiscoveredExport>> _discoveredParts = new Dictionary<CompositionContract, ICollection<DiscoveredExport>>();
+        private readonly Dictionary<
+            CompositionContract,
+            ICollection<DiscoveredExport>
+        > _discoveredParts = new Dictionary<CompositionContract, ICollection<DiscoveredExport>>();
 
-        public TypedPartExportDescriptorProvider(IEnumerable<Type> types, AttributedModelProvider attributeContext)
+        public TypedPartExportDescriptorProvider(
+            IEnumerable<Type> types,
+            AttributedModelProvider attributeContext
+        )
         {
             var activationFeatures = CreateActivationFeatures(attributeContext);
             var typeInspector = new TypeInspector(attributeContext, activationFeatures);
@@ -38,7 +44,10 @@ namespace System.Composition.TypedParts
             }
         }
 
-        private void AddDiscoveredExport(DiscoveredExport export, CompositionContract contract = null)
+        private void AddDiscoveredExport(
+            DiscoveredExport export,
+            CompositionContract contract = null
+        )
         {
             var actualContract = contract ?? export.Contract;
 
@@ -52,7 +61,10 @@ namespace System.Composition.TypedParts
             forKey.Add(export);
         }
 
-        public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor definitionAccessor)
+        public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
+            CompositionContract contract,
+            DependencyAccessor definitionAccessor
+        )
         {
             DiscoverGenericParts(contract);
             DiscoverConstrainedParts(contract);
@@ -70,7 +82,9 @@ namespace System.Composition.TypedParts
                 _discoveredParts.Remove(contract);
             }
 
-            return forKey.Select(de => de.GetExportDescriptorPromise(contract, definitionAccessor)).ToArray();
+            return forKey
+                .Select(de => de.GetExportDescriptorPromise(contract, definitionAccessor))
+                .ToArray();
         }
 
         // If the contract has metadata constraints, look for exports with matching metadata.
@@ -78,7 +92,10 @@ namespace System.Composition.TypedParts
         {
             if (contract.MetadataConstraints != null)
             {
-                var unconstrained = new CompositionContract(contract.ContractType, contract.ContractName);
+                var unconstrained = new CompositionContract(
+                    contract.ContractType,
+                    contract.ContractName
+                );
                 DiscoverGenericParts(unconstrained);
 
                 ICollection<DiscoveredExport> forKey;
@@ -86,10 +103,16 @@ namespace System.Composition.TypedParts
                 {
                     foreach (var export in forKey)
                     {
-                        var subsettedConstraints = contract.MetadataConstraints.Where(c => export.Metadata.ContainsKey(c.Key)).ToDictionary(c => c.Key, c => export.Metadata[c.Key]);
+                        var subsettedConstraints = contract
+                            .MetadataConstraints.Where(c => export.Metadata.ContainsKey(c.Key))
+                            .ToDictionary(c => c.Key, c => export.Metadata[c.Key]);
                         if (subsettedConstraints.Count != 0)
                         {
-                            var constrainedSubset = new CompositionContract(unconstrained.ContractType, unconstrained.ContractName, subsettedConstraints);
+                            var constrainedSubset = new CompositionContract(
+                                unconstrained.ContractType,
+                                unconstrained.ContractName,
+                                subsettedConstraints
+                            );
 
                             if (constrainedSubset.Equals(contract))
                                 AddDiscoveredExport(export, contract);
@@ -121,9 +144,12 @@ namespace System.Composition.TypedParts
             }
         }
 
-        private static ActivationFeature[] CreateActivationFeatures(AttributedModelProvider attributeContext)
+        private static ActivationFeature[] CreateActivationFeatures(
+            AttributedModelProvider attributeContext
+        )
         {
-            return new ActivationFeature[] {
+            return new ActivationFeature[]
+            {
                 new DisposalFeature(),
                 new PropertyInjectionFeature(attributeContext),
                 new OnImportsSatisfiedFeature(attributeContext),
@@ -131,7 +157,9 @@ namespace System.Composition.TypedParts
             };
         }
 
-        internal static ActivationFeature[] DebugGetActivationFeatures(AttributedModelProvider attributeContext)
+        internal static ActivationFeature[] DebugGetActivationFeatures(
+            AttributedModelProvider attributeContext
+        )
         {
             return CreateActivationFeatures(attributeContext);
         }

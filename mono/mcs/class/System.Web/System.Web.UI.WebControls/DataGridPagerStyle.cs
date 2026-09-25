@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,209 +29,267 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.WebControls
 {
-	// CAS - no inheritance demand required because the class is sealed
-	[AspNetHostingPermissionAttribute (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public sealed class DataGridPagerStyle : TableItemStyle
-	{
-		[Flags]
-		enum DataGridPagerStyles
-		{
-			Mode = 0x00100000,
-			NextPageText = 0x00200000,
-			PageButtonCount = 0x00400000,
-			Position = 0x00800000,
-			PrevPageText = 0x01000000,
-			Visible = 0x02000000
-		}
+    // CAS - no inheritance demand required because the class is sealed
+    [AspNetHostingPermissionAttribute(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class DataGridPagerStyle : TableItemStyle
+    {
+        [Flags]
+        enum DataGridPagerStyles
+        {
+            Mode = 0x00100000,
+            NextPageText = 0x00200000,
+            PageButtonCount = 0x00400000,
+            Position = 0x00800000,
+            PrevPageText = 0x01000000,
+            Visible = 0x02000000,
+        }
 
-		#region Constructors
-		internal DataGridPagerStyle ()
-		{
-		}
-		#endregion	// Constructors
+        #region Constructors
+        internal DataGridPagerStyle() { }
+        #endregion	// Constructors
 
-		#region Public Instance Properties
-		[DefaultValue(PagerMode.NextPrev)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public PagerMode Mode {
-			get {
-				if (!CheckBit ((int) DataGridPagerStyles.Mode))
-					return PagerMode.NextPrev;
+        #region Public Instance Properties
+        [DefaultValue(PagerMode.NextPrev)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public PagerMode Mode
+        {
+            get
+            {
+                if (!CheckBit((int)DataGridPagerStyles.Mode))
+                    return PagerMode.NextPrev;
 
-				return (PagerMode)ViewState["Mode"];
-			}
+                return (PagerMode)ViewState["Mode"];
+            }
+            set
+            {
+                ViewState["Mode"] = value;
+                SetBit((int)DataGridPagerStyles.Mode);
+            }
+        }
 
-			set {
-				ViewState["Mode"] = value;
-				SetBit ((int) DataGridPagerStyles.Mode);
-			}
-		}
+        [Localizable(true)]
+        [DefaultValue("&gt;")]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public string NextPageText
+        {
+            get
+            {
+                if (!CheckBit((int)DataGridPagerStyles.NextPageText))
+                    return "&gt;";
 
-		[Localizable (true)]
-		[DefaultValue("&gt;")]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public string NextPageText {
-			get {
-				if (!CheckBit ((int) DataGridPagerStyles.NextPageText))
-					return "&gt;";
+                return ViewState.GetString("NextPageText", "&gt;");
+            }
+            set
+            {
+                ViewState["NextPageText"] = value;
+                SetBit((int)DataGridPagerStyles.NextPageText);
+            }
+        }
 
-				return ViewState.GetString("NextPageText", "&gt;");
-			}
+        [DefaultValue(10)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public int PageButtonCount
+        {
+            get
+            {
+                if (!CheckBit((int)DataGridPagerStyles.PageButtonCount))
+                    return 10;
 
-			set {
-				ViewState["NextPageText"] = value;
-				SetBit ((int) DataGridPagerStyles.NextPageText);
-			}
-		}
+                return ViewState.GetInt("PageButtonCount", 10);
+            }
+            set
+            {
+                if (value < 1)
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        "PageButtonCount must be greater than 0"
+                    );
 
-		[DefaultValue(10)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public int PageButtonCount {
-			get {
-				if (!CheckBit ((int) DataGridPagerStyles.PageButtonCount))
-					return 10;
+                ViewState["PageButtonCount"] = value;
+                SetBit((int)DataGridPagerStyles.PageButtonCount);
+            }
+        }
 
-				return ViewState.GetInt("PageButtonCount", 10);
-			}
+        [DefaultValue(PagerPosition.Bottom)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public PagerPosition Position
+        {
+            get
+            {
+                if (!CheckBit((int)DataGridPagerStyles.Position))
+                    return PagerPosition.Bottom;
 
-			set {
-				if (value < 1)
-					throw new ArgumentOutOfRangeException("value", "PageButtonCount must be greater than 0");
+                return (PagerPosition)ViewState["Position"];
+            }
+            set
+            {
+                ViewState["Position"] = value;
+                SetBit((int)DataGridPagerStyles.Position);
+            }
+        }
 
-				ViewState["PageButtonCount"] = value;
-				SetBit ((int) DataGridPagerStyles.PageButtonCount);
-			}
-		}
+        [Localizable(true)]
+        [DefaultValue("&lt;")]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public string PrevPageText
+        {
+            get
+            {
+                if (!CheckBit((int)DataGridPagerStyles.PrevPageText))
+                    return "&lt;";
 
-		[DefaultValue(PagerPosition.Bottom)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public PagerPosition Position {
-			get {
-				if (!CheckBit ((int) DataGridPagerStyles.Position))
-					return PagerPosition.Bottom;
+                return ViewState.GetString("PrevPageText", "&lt;");
+            }
+            set
+            {
+                ViewState["PrevPageText"] = value;
+                SetBit((int)DataGridPagerStyles.PrevPageText);
+            }
+        }
 
-				return (PagerPosition)ViewState["Position"];
-			}
+        [DefaultValue(true)]
+        [NotifyParentProperty(true)]
+        [WebSysDescription("")]
+        [WebCategory("Misc")]
+        public bool Visible
+        {
+            get
+            {
+                if (!CheckBit((int)DataGridPagerStyles.Visible))
+                    return true;
 
-			set {
-				ViewState["Position"] = value;
-				SetBit ((int) DataGridPagerStyles.Position);
-			}
-		}
+                return ViewState.GetBool("Visible", true);
+            }
+            set
+            {
+                ViewState["Visible"] = value;
+                SetBit((int)DataGridPagerStyles.Visible);
+            }
+        }
+        #endregion	// Public Instance Properties
 
-		[Localizable (true)]
-		[DefaultValue("&lt;")]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public string PrevPageText {
-			get {
-				if (!CheckBit ((int) DataGridPagerStyles.PrevPageText))
-					return "&lt;";
+        #region Public Instance Methods
+        public override void CopyFrom(Style s)
+        {
+            base.CopyFrom(s);
 
-				return ViewState.GetString("PrevPageText", "&lt;");
-			}
+            if (s == null || s.IsEmpty)
+                return;
 
-			set {
-				ViewState["PrevPageText"] = value;
-				SetBit ((int) DataGridPagerStyles.PrevPageText);
-			}
-		}
+            if (
+                s.CheckBit((int)DataGridPagerStyles.Mode)
+                && (((DataGridPagerStyle)s).Mode != PagerMode.NextPrev)
+            )
+                this.Mode = ((DataGridPagerStyle)s).Mode;
 
-		[DefaultValue(true)]
-		[NotifyParentProperty(true)]
-		[WebSysDescription ("")]
-		[WebCategory ("Misc")]
-		public bool Visible {
-			get {
-				if (!CheckBit ((int) DataGridPagerStyles.Visible))
-					return true;
+            if (
+                s.CheckBit((int)DataGridPagerStyles.NextPageText)
+                && (((DataGridPagerStyle)s).NextPageText != "&gt;")
+            )
+                this.NextPageText = ((DataGridPagerStyle)s).NextPageText;
 
-				return ViewState.GetBool("Visible", true);
-			}
+            if (
+                s.CheckBit((int)DataGridPagerStyles.PageButtonCount)
+                && (((DataGridPagerStyle)s).PageButtonCount != 10)
+            )
+                this.PageButtonCount = ((DataGridPagerStyle)s).PageButtonCount;
 
-			set {
-				ViewState["Visible"] = value;
-				SetBit ((int) DataGridPagerStyles.Visible);
-			}
-		}
-		#endregion	// Public Instance Properties
+            if (
+                s.CheckBit((int)DataGridPagerStyles.Position)
+                && (((DataGridPagerStyle)s).Position != PagerPosition.Bottom)
+            )
+                this.Position = ((DataGridPagerStyle)s).Position;
 
-		#region Public Instance Methods
-		public override void CopyFrom(Style s)
-		{
-			base.CopyFrom (s);
+            if (
+                s.CheckBit((int)DataGridPagerStyles.PrevPageText)
+                && (((DataGridPagerStyle)s).PrevPageText != "&lt;")
+            )
+                this.PrevPageText = ((DataGridPagerStyle)s).PrevPageText;
 
-			if (s == null || s.IsEmpty)
-				return;
+            if (
+                s.CheckBit((int)DataGridPagerStyles.Visible)
+                && (((DataGridPagerStyle)s).Visible != true)
+            )
+                this.Visible = ((DataGridPagerStyle)s).Visible;
+        }
 
-			if (s.CheckBit ((int) DataGridPagerStyles.Mode) && (((DataGridPagerStyle) s).Mode != PagerMode.NextPrev))
-				this.Mode = ((DataGridPagerStyle)s).Mode;
+        public override void MergeWith(Style s)
+        {
+            base.MergeWith(s);
 
-			if (s.CheckBit ((int) DataGridPagerStyles.NextPageText) && (((DataGridPagerStyle) s).NextPageText != "&gt;"))
-				this.NextPageText = ((DataGridPagerStyle)s).NextPageText;
+            if (s == null || s.IsEmpty)
+                return;
 
-			if (s.CheckBit ((int) DataGridPagerStyles.PageButtonCount) && (((DataGridPagerStyle) s).PageButtonCount != 10))
-				this.PageButtonCount = ((DataGridPagerStyle)s).PageButtonCount;
+            if (
+                !CheckBit((int)DataGridPagerStyles.Mode)
+                && s.CheckBit((int)DataGridPagerStyles.Mode)
+                && (((DataGridPagerStyle)s).Mode != PagerMode.NextPrev)
+            )
+                this.Mode = ((DataGridPagerStyle)s).Mode;
 
-			if (s.CheckBit ((int) DataGridPagerStyles.Position) && (((DataGridPagerStyle) s).Position != PagerPosition.Bottom))
-				this.Position = ((DataGridPagerStyle)s).Position;
+            if (
+                !CheckBit((int)DataGridPagerStyles.NextPageText)
+                && s.CheckBit((int)DataGridPagerStyles.NextPageText)
+                && (((DataGridPagerStyle)s).NextPageText != "&gt;")
+            )
+                this.NextPageText = ((DataGridPagerStyle)s).NextPageText;
 
-			if (s.CheckBit ((int) DataGridPagerStyles.PrevPageText) && (((DataGridPagerStyle) s).PrevPageText != "&lt;"))
-				this.PrevPageText = ((DataGridPagerStyle)s).PrevPageText;
+            if (
+                !CheckBit((int)DataGridPagerStyles.PageButtonCount)
+                && s.CheckBit((int)DataGridPagerStyles.PageButtonCount)
+                && (((DataGridPagerStyle)s).PageButtonCount != 10)
+            )
+                this.PageButtonCount = ((DataGridPagerStyle)s).PageButtonCount;
 
-			if (s.CheckBit ((int) DataGridPagerStyles.Visible) && (((DataGridPagerStyle) s).Visible != true))
-				this.Visible = ((DataGridPagerStyle)s).Visible;
-		}
+            if (
+                !CheckBit((int)DataGridPagerStyles.Position)
+                && s.CheckBit((int)DataGridPagerStyles.Position)
+                && (((DataGridPagerStyle)s).Position != PagerPosition.Bottom)
+            )
+                this.Position = ((DataGridPagerStyle)s).Position;
 
-		public override void MergeWith(Style s)
-		{
-			base.MergeWith (s);
+            if (
+                !CheckBit((int)DataGridPagerStyles.PrevPageText)
+                && s.CheckBit((int)DataGridPagerStyles.PrevPageText)
+                && (((DataGridPagerStyle)s).PrevPageText != "&lt;")
+            )
+                this.PrevPageText = ((DataGridPagerStyle)s).PrevPageText;
 
-			if (s == null || s.IsEmpty)
-				return;
+            if (
+                !CheckBit((int)DataGridPagerStyles.Visible)
+                && s.CheckBit((int)DataGridPagerStyles.Visible)
+                && (((DataGridPagerStyle)s).Visible != true)
+            )
+                this.Visible = ((DataGridPagerStyle)s).Visible;
+        }
 
-			if (!CheckBit ((int) DataGridPagerStyles.Mode) && s.CheckBit ((int) DataGridPagerStyles.Mode) && (((DataGridPagerStyle) s).Mode != PagerMode.NextPrev))
-				this.Mode = ((DataGridPagerStyle)s).Mode;
+        public override void Reset()
+        {
+            // We call base.Reset(), we don't need this
+            //styles &= ~(Styles.Mode | Styles.NextPageText | Styles.PageButtonCount | Styles.Position | Styles.PrevPageText | Styles.Visible);
 
-			if (!CheckBit ((int) DataGridPagerStyles.NextPageText) && s.CheckBit ((int) DataGridPagerStyles.NextPageText) && (((DataGridPagerStyle) s).NextPageText != "&gt;"))
-				this.NextPageText = ((DataGridPagerStyle)s).NextPageText;
+            ViewState.Remove("Mode");
+            ViewState.Remove("NextPageText");
+            ViewState.Remove("PageButtonCount");
+            ViewState.Remove("Position");
+            ViewState.Remove("PrevPageText");
+            ViewState.Remove("Visible");
 
-			if (!CheckBit ((int) DataGridPagerStyles.PageButtonCount) && s.CheckBit ((int) DataGridPagerStyles.PageButtonCount) && (((DataGridPagerStyle) s).PageButtonCount != 10))
-				this.PageButtonCount = ((DataGridPagerStyle)s).PageButtonCount;
-
-			if (!CheckBit ((int) DataGridPagerStyles.Position) && s.CheckBit ((int) DataGridPagerStyles.Position) && (((DataGridPagerStyle) s).Position != PagerPosition.Bottom))
-				this.Position = ((DataGridPagerStyle)s).Position;
-
-			if (!CheckBit ((int) DataGridPagerStyles.PrevPageText) && s.CheckBit ((int) DataGridPagerStyles.PrevPageText) && (((DataGridPagerStyle) s).PrevPageText != "&lt;"))
-				this.PrevPageText = ((DataGridPagerStyle)s).PrevPageText;
-
-			if (!CheckBit ((int) DataGridPagerStyles.Visible) && s.CheckBit ((int) DataGridPagerStyles.Visible) && (((DataGridPagerStyle) s).Visible != true))
-				this.Visible = ((DataGridPagerStyle)s).Visible;
-		}
-
-		public override void Reset ()
-		{
-			// We call base.Reset(), we don't need this
-			//styles &= ~(Styles.Mode | Styles.NextPageText | Styles.PageButtonCount | Styles.Position | Styles.PrevPageText | Styles.Visible);
-
-			ViewState.Remove("Mode");
-			ViewState.Remove("NextPageText");
-			ViewState.Remove("PageButtonCount");
-			ViewState.Remove("Position");
-			ViewState.Remove("PrevPageText");
-			ViewState.Remove("Visible");
-
-			base.Reset ();
-		}
-		#endregion	// Public Instance Methods
-	}
+            base.Reset();
+        }
+        #endregion	// Public Instance Methods
+    }
 }

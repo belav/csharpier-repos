@@ -28,55 +28,56 @@
 
 namespace System.Net.Http.Headers
 {
-	public class RangeItemHeaderValue : ICloneable
-	{
-		public RangeItemHeaderValue (long? from, long? to)
-		{
-			if (from == null && to == null)
-				throw new ArgumentException ();
+    public class RangeItemHeaderValue : ICloneable
+    {
+        public RangeItemHeaderValue(long? from, long? to)
+        {
+            if (from == null && to == null)
+                throw new ArgumentException();
 
-			if (from != null && to != null && from > to) {
-				throw new ArgumentOutOfRangeException ("from");
-			}
+            if (from != null && to != null && from > to)
+            {
+                throw new ArgumentOutOfRangeException("from");
+            }
 
-			if (from < 0)
-				throw new ArgumentOutOfRangeException ("from");
+            if (from < 0)
+                throw new ArgumentOutOfRangeException("from");
 
-			if (to < 0)
-				throw new ArgumentOutOfRangeException ("to");
+            if (to < 0)
+                throw new ArgumentOutOfRangeException("to");
 
-			From = from;
-			To = to;
-		}
+            From = from;
+            To = to;
+        }
 
-		public long? From { get; private set; }
-		public long? To { get; private set; }
+        public long? From { get; private set; }
+        public long? To { get; private set; }
 
-		object ICloneable.Clone ()
-		{
-			return MemberwiseClone ();
-		}
+        object ICloneable.Clone()
+        {
+            return MemberwiseClone();
+        }
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as RangeItemHeaderValue;
-			return source != null && source.From == From && source.To == To;
-		}
+        public override bool Equals(object obj)
+        {
+            var source = obj as RangeItemHeaderValue;
+            return source != null && source.From == From && source.To == To;
+        }
 
-		public override int GetHashCode ()
-		{
-			return From.GetHashCode () ^ To.GetHashCode ();
-		}
+        public override int GetHashCode()
+        {
+            return From.GetHashCode() ^ To.GetHashCode();
+        }
 
-		public override string ToString ()
-		{
-			if (From == null)
-				return "-" + To.Value;
+        public override string ToString()
+        {
+            if (From == null)
+                return "-" + To.Value;
 
-			if (To == null)
-				return From.Value + "-";
+            if (To == null)
+                return From.Value + "-";
 
-			return From.Value + "-" + To.Value;
-		}
-	}
+            return From.Value + "-" + To.Value;
+        }
+    }
 }

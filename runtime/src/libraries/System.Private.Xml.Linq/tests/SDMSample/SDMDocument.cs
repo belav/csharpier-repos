@@ -32,7 +32,10 @@ namespace XDocumentTests.SDMSample
         {
             XDeclaration declaration = new XDeclaration("1.0", "utf-8", "yes");
             XComment comment = new XComment("This is a document");
-            XProcessingInstruction instruction = new XProcessingInstruction("doc-target", "doc-data");
+            XProcessingInstruction instruction = new XProcessingInstruction(
+                "doc-target",
+                "doc-data"
+            );
             XElement element = new XElement("RootElement");
 
             XDocument doc = new XDocument(declaration, comment, instruction, element);
@@ -50,7 +53,10 @@ namespace XDocumentTests.SDMSample
 
             XDeclaration declaration = new XDeclaration("1.0", "utf-8", "yes");
             XComment comment = new XComment("This is a document");
-            XProcessingInstruction instruction = new XProcessingInstruction("doc-target", "doc-data");
+            XProcessingInstruction instruction = new XProcessingInstruction(
+                "doc-target",
+                "doc-data"
+            );
             XElement element = new XElement("RootElement");
 
             XDocument doc = new XDocument(declaration, comment, instruction, element);

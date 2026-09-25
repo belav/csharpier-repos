@@ -2,7 +2,7 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //-----------------------------------------------------------------------------
 
-namespace System.ServiceModel.Security 
+namespace System.ServiceModel.Security
 {
     using System;
     using System.Collections;
@@ -18,6 +18,7 @@ namespace System.ServiceModel.Security
     {
         // if there are less than lowWaterMark entries, no purging is done
         static int lowWaterMark = 50;
+
         // frequency of purging the cache of stale entries
         // this is set to 10 mins as SCTs are expected to have long lifetimes
         static TimeSpan purgingInterval = TimeSpan.FromMinutes(10);
@@ -26,14 +27,15 @@ namespace System.ServiceModel.Security
         static SctEffectiveTimeComparer sctEffectiveTimeComparer = new SctEffectiveTimeComparer();
         TimeSpan clockSkew;
 
-        public SecurityContextTokenCache( int capacity, bool replaceOldestEntries )
-            : this( capacity, replaceOldestEntries, SecurityProtocolFactory.defaultMaxClockSkew )
-        {
-        }
+        public SecurityContextTokenCache(int capacity, bool replaceOldestEntries)
+            : this(capacity, replaceOldestEntries, SecurityProtocolFactory.defaultMaxClockSkew) { }
 
-        public SecurityContextTokenCache(int capacity, bool replaceOldestEntries, TimeSpan clockSkew)
+        public SecurityContextTokenCache(
+            int capacity,
+            bool replaceOldestEntries,
+            TimeSpan clockSkew
+        )
             : base(lowWaterMark, capacity, null, PurgingMode.TimerBasedPurge, purgingInterval, true)
-
         {
             this.replaceOldestEntries = replaceOldestEntries;
             this.clockSkew = clockSkew;
@@ -43,7 +45,7 @@ namespace System.ServiceModel.Security
         {
             TryAddContext(token, true);
         }
-        
+
         public bool TryAddContext(SecurityContextSecurityToken token)
         {
             return TryAddContext(token, false);
@@ -56,32 +58,79 @@ namespace System.ServiceModel.Security
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("token");
             }
 
-            if ( !SecurityUtils.IsCurrentlyTimeEffective( token.ValidFrom, token.ValidTo, this.clockSkew ) )
+            if (
+                !SecurityUtils.IsCurrentlyTimeEffective(
+                    token.ValidFrom,
+                    token.ValidTo,
+                    this.clockSkew
+                )
+            )
             {
                 if (token.KeyGeneration == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SecurityContextExpiredNoKeyGeneration, token.ContextId));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SecurityContextExpiredNoKeyGeneration, token.ContextId)
+                    );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SecurityContextExpired, token.ContextId, token.KeyGeneration.ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SecurityContextExpired,
+                            token.ContextId,
+                            token.KeyGeneration.ToString()
+                        )
+                    );
             }
 
-            if ( !SecurityUtils.IsCurrentlyTimeEffective( token.KeyEffectiveTime, token.KeyExpirationTime, this.clockSkew ) )
+            if (
+                !SecurityUtils.IsCurrentlyTimeEffective(
+                    token.KeyEffectiveTime,
+                    token.KeyExpirationTime,
+                    this.clockSkew
+                )
+            )
             {
                 if (token.KeyGeneration == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SecurityContextKeyExpiredNoKeyGeneration, token.ContextId));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.SecurityContextKeyExpiredNoKeyGeneration, token.ContextId)
+                    );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SecurityContextKeyExpired, token.ContextId, token.KeyGeneration.ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SecurityContextKeyExpired,
+                            token.ContextId,
+                            token.KeyGeneration.ToString()
+                        )
+                    );
             }
 
             object hashKey = GetHashKey(token.ContextId, token.KeyGeneration);
-            bool wasTokenAdded = base.TryAddItem(hashKey, (SecurityContextSecurityToken)token.Clone(), false);
+            bool wasTokenAdded = base.TryAddItem(
+                hashKey,
+                (SecurityContextSecurityToken)token.Clone(),
+                false
+            );
             if (!wasTokenAdded)
             {
                 if (throwOnFailure)
                 {
                     if (token.KeyGeneration == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ContextAlreadyRegisteredNoKeyGeneration, token.ContextId)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ContextAlreadyRegisteredNoKeyGeneration,
+                                    token.ContextId
+                                )
+                            )
+                        );
                     else
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ContextAlreadyRegistered, token.ContextId, token.KeyGeneration.ToString())));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ContextAlreadyRegistered,
+                                    token.ContextId,
+                                    token.KeyGeneration.ToString()
+                                )
+                            )
+                        );
                 }
             }
             return wasTokenAdded;
@@ -125,9 +174,17 @@ namespace System.ServiceModel.Security
             if (!base.TryRemoveItem(hashKey) && throwIfNotPresent)
             {
                 if (generation == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ContextNotPresentNoKeyGeneration, contextId)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ContextNotPresentNoKeyGeneration, contextId)
+                        )
+                    );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ContextNotPresent, contextId, generation.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.ContextNotPresent, contextId, generation.ToString())
+                        )
+                    );
             }
         }
 
@@ -182,26 +239,34 @@ namespace System.ServiceModel.Security
             {
                 base.TryRemoveItem(matchingKeys[i]);
             }
-
         }
 
-        public void UpdateContextCachingTime(SecurityContextSecurityToken token, DateTime expirationTime)
+        public void UpdateContextCachingTime(
+            SecurityContextSecurityToken token,
+            DateTime expirationTime
+        )
         {
             if (token.ValidTo <= expirationTime.ToUniversalTime())
             {
                 return;
             }
-            base.TryReplaceItem(GetHashKey(token.ContextId, token.KeyGeneration), token, expirationTime);
+            base.TryReplaceItem(
+                GetHashKey(token.ContextId, token.KeyGeneration),
+                token,
+                expirationTime
+            );
         }
 
         public Collection<SecurityContextSecurityToken> GetAllContexts(UniqueId contextId)
         {
             ArrayList matchingKeys = GetMatchingKeys(contextId);
 
-            Collection<SecurityContextSecurityToken> matchingContexts = new Collection<SecurityContextSecurityToken>();
+            Collection<SecurityContextSecurityToken> matchingContexts =
+                new Collection<SecurityContextSecurityToken>();
             for (int i = 0; i < matchingKeys.Count; ++i)
             {
-                SecurityContextSecurityToken token = base.GetItem(matchingKeys[i]) as SecurityContextSecurityToken;
+                SecurityContextSecurityToken token =
+                    base.GetItem(matchingKeys[i]) as SecurityContextSecurityToken;
                 if (token != null)
                 {
                     matchingContexts.Add(token);
@@ -219,10 +284,14 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                List<SecurityContextSecurityToken> tokens = new List<SecurityContextSecurityToken>(cacheTable.Count);
+                List<SecurityContextSecurityToken> tokens = new List<SecurityContextSecurityToken>(
+                    cacheTable.Count
+                );
                 foreach (IExpirableItem value in cacheTable.Values)
                 {
-                    SecurityContextSecurityToken token = (SecurityContextSecurityToken)ExtractItem(value);
+                    SecurityContextSecurityToken token = (SecurityContextSecurityToken)ExtractItem(
+                        value
+                    );
                     tokens.Add(token);
                 }
                 tokens.Sort(sctEffectiveTimeComparer);
@@ -234,7 +303,10 @@ namespace System.ServiceModel.Security
                     keys.Add(GetHashKey(tokens[i].ContextId, tokens[i].KeyGeneration));
                     OnRemove(tokens[i]);
                 }
-                SecurityTraceRecordHelper.TraceSecurityContextTokenCacheFull(this.Capacity, pruningAmount);
+                SecurityTraceRecordHelper.TraceSecurityContextTokenCacheFull(
+                    this.Capacity,
+                    pruningAmount
+                );
                 return keys;
             }
         }
@@ -258,11 +330,17 @@ namespace System.ServiceModel.Security
                 else
                 {
                     // compare the key effective times
-                    if (sct1.KeyEffectiveTime.ToUniversalTime() < sct2.KeyEffectiveTime.ToUniversalTime())
+                    if (
+                        sct1.KeyEffectiveTime.ToUniversalTime()
+                        < sct2.KeyEffectiveTime.ToUniversalTime()
+                    )
                     {
                         return -1;
                     }
-                    else if (sct1.KeyEffectiveTime.ToUniversalTime() > sct2.KeyEffectiveTime.ToUniversalTime())
+                    else if (
+                        sct1.KeyEffectiveTime.ToUniversalTime()
+                        > sct2.KeyEffectiveTime.ToUniversalTime()
+                    )
                     {
                         return 1;
                     }
@@ -294,18 +372,12 @@ namespace System.ServiceModel.Security
 
             public UniqueId ContextId
             {
-                get
-                {
-                    return this.contextId;
-                }
+                get { return this.contextId; }
             }
 
             public UniqueId Generation
             {
-                get
-                {
-                    return this.generation;
-                }
+                get { return this.generation; }
             }
 
             public override int GetHashCode()

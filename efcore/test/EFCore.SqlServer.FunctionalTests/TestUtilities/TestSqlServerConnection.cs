@@ -9,9 +9,7 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 public class TestSqlServerConnection : SqlServerConnection
 {
     public TestSqlServerConnection(RelationalConnectionDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     public int ErrorNumber { get; set; } = 64;
     public Queue<bool?> OpenFailures { get; } = new();
@@ -27,7 +25,10 @@ public class TestSqlServerConnection : SqlServerConnection
         return base.Open(errorsExpected);
     }
 
-    public override Task<bool> OpenAsync(CancellationToken cancellationToken, bool errorsExpected = false)
+    public override Task<bool> OpenAsync(
+        CancellationToken cancellationToken,
+        bool errorsExpected = false
+    )
     {
         PreOpen();
 

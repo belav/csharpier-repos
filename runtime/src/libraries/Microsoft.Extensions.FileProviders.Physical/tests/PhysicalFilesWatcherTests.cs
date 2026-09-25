@@ -18,17 +18,30 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         private const int WaitTimeForTokenToFire = 500;
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS, "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS,
+            "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS"
+        )]
         public void CreateFileChangeToken_DoesNotAllowPathsAboveRoot()
         {
             using (var root = new TempDirectory(GetTestFilePath()))
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.Path))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.Path + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.Path + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: false
+                )
+            )
             {
-                var token = physicalFilesWatcher.CreateFileChangeToken(Path.GetFullPath(Path.Combine(root.Path, "..")));
+                var token = physicalFilesWatcher.CreateFileChangeToken(
+                    Path.GetFullPath(Path.Combine(root.Path, ".."))
+                );
                 Assert.IsType<NullChangeToken>(token);
 
-                token = physicalFilesWatcher.CreateFileChangeToken(Path.GetFullPath(Path.Combine(root.Path, "../")));
+                token = physicalFilesWatcher.CreateFileChangeToken(
+                    Path.GetFullPath(Path.Combine(root.Path, "../"))
+                );
                 Assert.IsType<NullChangeToken>(token);
 
                 token = physicalFilesWatcher.CreateFileChangeToken("..");
@@ -37,22 +50,45 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS, "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS,
+            "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS"
+        )]
         public async Task HandlesOnRenamedEventsThatMatchRootPath()
         {
             using (var root = new TempDirectory(GetTestFilePath()))
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.Path))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.Path + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.Path + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: false
+                )
+            )
             {
                 var token = physicalFilesWatcher.CreateFileChangeToken("**");
                 var called = false;
                 token.RegisterChangeCallback(o => called = true, null);
 
-                fileSystemWatcher.CallOnRenamed(new RenamedEventArgs(WatcherChangeTypes.Renamed, root.Path, string.Empty, string.Empty));
+                fileSystemWatcher.CallOnRenamed(
+                    new RenamedEventArgs(
+                        WatcherChangeTypes.Renamed,
+                        root.Path,
+                        string.Empty,
+                        string.Empty
+                    )
+                );
                 await Task.Delay(WaitTimeForTokenToFire).ConfigureAwait(false);
                 Assert.False(called, "Callback should not have been triggered");
 
-                fileSystemWatcher.CallOnRenamed(new RenamedEventArgs(WatcherChangeTypes.Renamed, root.Path, "old.txt", "new.txt"));
+                fileSystemWatcher.CallOnRenamed(
+                    new RenamedEventArgs(
+                        WatcherChangeTypes.Renamed,
+                        root.Path,
+                        "old.txt",
+                        "new.txt"
+                    )
+                );
                 await Task.Delay(WaitTimeForTokenToFire).ConfigureAwait(false);
                 Assert.True(called, "Callback should have been triggered");
             }
@@ -67,7 +103,12 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             var cts3 = new CancellationTokenSource();
 
             var token1 = new TestPollingChangeToken { Id = 1, CancellationTokenSource = cts1 };
-            var token2 = new TestPollingChangeToken { Id = 2, HasChanged = true, CancellationTokenSource = cts2 };
+            var token2 = new TestPollingChangeToken
+            {
+                Id = 2,
+                HasChanged = true,
+                CancellationTokenSource = cts2,
+            };
             var token3 = new TestPollingChangeToken { Id = 3, CancellationTokenSource = cts3 };
 
             var tokens = new ConcurrentDictionary<IPollingChangeToken, IPollingChangeToken>
@@ -86,7 +127,10 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             Assert.True(cts2.IsCancellationRequested);
 
             // Ensure token2 is removed from the collection.
-            Assert.Equal(new[] { token1, token3, }, tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id));
+            Assert.Equal(
+                new[] { token1, token3 },
+                tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id)
+            );
         }
 
         [Fact]
@@ -99,11 +143,26 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             var cts4 = new CancellationTokenSource();
             var cts5 = new CancellationTokenSource();
 
-            var token1 = new TestPollingChangeToken { Id = 1, HasChanged = true, CancellationTokenSource = cts1 };
+            var token1 = new TestPollingChangeToken
+            {
+                Id = 1,
+                HasChanged = true,
+                CancellationTokenSource = cts1,
+            };
             var token2 = new TestPollingChangeToken { Id = 2, CancellationTokenSource = cts2 };
             var token3 = new TestPollingChangeToken { Id = 3, CancellationTokenSource = cts3 };
-            var token4 = new TestPollingChangeToken { Id = 4, HasChanged = true, CancellationTokenSource = cts4 };
-            var token5 = new TestPollingChangeToken { Id = 5, HasChanged = true, CancellationTokenSource = cts5 };
+            var token4 = new TestPollingChangeToken
+            {
+                Id = 4,
+                HasChanged = true,
+                CancellationTokenSource = cts4,
+            };
+            var token5 = new TestPollingChangeToken
+            {
+                Id = 5,
+                HasChanged = true,
+                CancellationTokenSource = cts5,
+            };
 
             var tokens = new ConcurrentDictionary<IPollingChangeToken, IPollingChangeToken>
             {
@@ -126,16 +185,28 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
             Assert.True(cts5.IsCancellationRequested);
 
             // Ensure changed tokens are removed
-            Assert.Equal(new[] { token2, token3, }, tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id));
+            Assert.Equal(
+                new[] { token2, token3 },
+                tokens.Keys.OfType<TestPollingChangeToken>().OrderBy(t => t.Id)
+            );
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS, "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS,
+            "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS"
+        )]
         public void GetOrAddFilePathChangeToken_AddsPollingChangeTokenWithCancellationToken_WhenActiveCallbackIsTrue()
         {
             using (var root = new TempDirectory(GetTestFilePath()))
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.Path))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.Path + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.Path + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: true
+                )
+            )
             {
                 physicalFilesWatcher.UseActivePolling = true;
 
@@ -150,19 +221,29 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                         var pollingChangeToken = Assert.IsType<PollingFileChangeToken>(token);
                         Assert.NotNull(pollingChangeToken.CancellationTokenSource);
                         Assert.True(pollingChangeToken.ActiveChangeCallbacks);
-                    });
+                    }
+                );
 
                 Assert.NotEmpty(physicalFilesWatcher.PollingChangeTokens);
             }
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS, "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS,
+            "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS"
+        )]
         public void GetOrAddFilePathChangeToken_AddsPollingChangeTokenWhenPollingIsEnabled()
         {
             using (var root = new TempDirectory(GetTestFilePath()))
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.Path))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.Path + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.Path + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: true
+                )
+            )
             {
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
 
@@ -175,19 +256,29 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                         var pollingChangeToken = Assert.IsType<PollingFileChangeToken>(token);
                         Assert.Null(pollingChangeToken.CancellationTokenSource);
                         Assert.False(pollingChangeToken.ActiveChangeCallbacks);
-                    });
+                    }
+                );
 
                 Assert.Empty(physicalFilesWatcher.PollingChangeTokens);
             }
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS, "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS,
+            "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS"
+        )]
         public void GetOrAddFilePathChangeToken_DoesNotAddsPollingChangeTokenWhenCallbackIsDisabled()
         {
             using (var root = new TempDirectory(GetTestFilePath()))
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.Path))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.Path + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: false))
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.Path + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: false
+                )
+            )
             {
                 var changeToken = physicalFilesWatcher.GetOrAddFilePathChangeToken("some-path");
 
@@ -197,12 +288,21 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS, "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS,
+            "System.IO.FileSystem.Watcher is not supported on Browser/iOS/tvOS"
+        )]
         public void GetOrAddWildcardChangeToken_AddsPollingChangeTokenWithCancellationToken_WhenActiveCallbackIsTrue()
         {
             using (var root = new TempDirectory(GetTestFilePath()))
             using (var fileSystemWatcher = new MockFileSystemWatcher(root.Path))
-            using (var physicalFilesWatcher = new PhysicalFilesWatcher(root.Path + Path.DirectorySeparatorChar, fileSystemWatcher, pollForChanges: true))
+            using (
+                var physicalFilesWatcher = new PhysicalFilesWatcher(
+                    root.Path + Path.DirectorySeparatorChar,
+                    fileSystemWatcher,
+                    pollForChanges: true
+                )
+            )
             {
                 physicalFilesWatcher.UseActivePolling = true;
 
@@ -217,7 +317,8 @@ namespace Microsoft.Extensions.FileProviders.Physical.Tests
                         var pollingChangeToken = Assert.IsType<PollingWildCardChangeToken>(token);
                         Assert.NotNull(pollingChangeToken.CancellationTokenSource);
                         Assert.True(pollingChangeToken.ActiveChangeCallbacks);
-                    });
+                    }
+                );
 
                 Assert.NotEmpty(physicalFilesWatcher.PollingChangeTokens);
             }

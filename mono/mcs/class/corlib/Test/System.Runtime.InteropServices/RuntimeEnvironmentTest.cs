@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,55 +32,56 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Runtime.InteropServices {
+namespace MonoTests.System.Runtime.InteropServices
+{
+    [TestFixture]
+    public class RuntimeEnvironmentTest
+    {
+        [Test]
+        [Category("MobileNotWorking")]
+        public void SystemConfigurationFile()
+        {
+            string fname = RuntimeEnvironment.SystemConfigurationFile;
+            Assert.IsNotNull(fname, "SystemConfigurationFile");
+            Assert.IsTrue(File.Exists(fname), "Exists");
+        }
 
-	[TestFixture]
-	public class RuntimeEnvironmentTest {
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void FromGlobalAccessCache_Null()
+        {
+            RuntimeEnvironment.FromGlobalAccessCache(null);
+        }
 
-		[Test]
-		[Category ("MobileNotWorking")]
-		public void SystemConfigurationFile ()
-		{
-			string fname = RuntimeEnvironment.SystemConfigurationFile;
-			Assert.IsNotNull (fname, "SystemConfigurationFile");
-			Assert.IsTrue (File.Exists (fname), "Exists");
-		}
-
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void FromGlobalAccessCache_Null ()
-		{
-			RuntimeEnvironment.FromGlobalAccessCache (null);
-		}
-
-		[Test]
+        [Test]
 #if MOBILE
-		[Ignore ("There's no GAC for the MOBILE based profiles (Moonlight, MonoTouch and Mono for Android")]
+        [Ignore(
+            "There's no GAC for the MOBILE based profiles (Moonlight, MonoTouch and Mono for Android"
+        )]
 #endif
-		public void FromGlobalAccessCache ()
-		{
-			Assembly corlib = typeof (int).Assembly;
-			// FIXME: This doesn't work when doing make distcheck (probably because the corlib used isn't the GAC)
-//			Assert.IsTrue (RuntimeEnvironment.FromGlobalAccessCache (corlib), "corlib");
-			Assembly corlib_test = Assembly.GetExecutingAssembly ();
-			Assert.IsFalse (RuntimeEnvironment.FromGlobalAccessCache (corlib_test), "corlib_test");
-		}
+        public void FromGlobalAccessCache()
+        {
+            Assembly corlib = typeof(int).Assembly;
+            // FIXME: This doesn't work when doing make distcheck (probably because the corlib used isn't the GAC)
+            //			Assert.IsTrue (RuntimeEnvironment.FromGlobalAccessCache (corlib), "corlib");
+            Assembly corlib_test = Assembly.GetExecutingAssembly();
+            Assert.IsFalse(RuntimeEnvironment.FromGlobalAccessCache(corlib_test), "corlib_test");
+        }
 
-		[Test]
-		public void GetRuntimeDirectory ()
-		{
-			string dirname = RuntimeEnvironment.GetRuntimeDirectory ();
-			Assert.IsNotNull (dirname, "GetRuntimeDirectory");
-			Assert.IsTrue (dirname.Length == 0 || Directory.Exists (dirname), "Exists");
-		}
+        [Test]
+        public void GetRuntimeDirectory()
+        {
+            string dirname = RuntimeEnvironment.GetRuntimeDirectory();
+            Assert.IsNotNull(dirname, "GetRuntimeDirectory");
+            Assert.IsTrue(dirname.Length == 0 || Directory.Exists(dirname), "Exists");
+        }
 
-		[Test]
-		public void GetSystemVersion ()
-		{
-			Assert.IsNotNull (RuntimeEnvironment.GetSystemVersion (), "GetSystemVersion");
-		}
-	}
+        [Test]
+        public void GetSystemVersion()
+        {
+            Assert.IsNotNull(RuntimeEnvironment.GetSystemVersion(), "GetSystemVersion");
+        }
+    }
 }

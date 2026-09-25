@@ -22,7 +22,10 @@ namespace JIT.HardwareIntrinsics.X86
         public SimdScalarUnaryOpTest__DataTable(TOp1[] inArray, int alignment)
         {
             int sizeOfinArray = inArray.Length * Unsafe.SizeOf<TOp1>();
-            if (((alignment != 64) && (alignment != 32) && (alignment != 16)) || (alignment * 2) < sizeOfinArray)
+            if (
+                ((alignment != 64) && (alignment != 32) && (alignment != 16))
+                || (alignment * 2) < sizeOfinArray
+            )
             {
                 throw new ArgumentException("Invalid value of alignment");
             }
@@ -32,10 +35,15 @@ namespace JIT.HardwareIntrinsics.X86
 
             this.alignment = (ulong)alignment;
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.AsRef<byte>(inArrayPtr), ref Unsafe.As<TOp1, byte>(ref inArray[0]), (uint)sizeOfinArray);
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.AsRef<byte>(inArrayPtr),
+                ref Unsafe.As<TOp1, byte>(ref inArray[0]),
+                (uint)sizeOfinArray
+            );
         }
 
-        public void* inArrayPtr => Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
+        public void* inArrayPtr =>
+            Align((byte*)(inHandle.AddrOfPinnedObject().ToPointer()), alignment);
 
         public void Dispose()
         {

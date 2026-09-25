@@ -23,9 +23,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Save_optional_many_to_one_dependents(ChangeMechanism changeMechanism, bool useExistingEntities)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Save_optional_many_to_one_dependents(
+        ChangeMechanism changeMechanism,
+        bool useExistingEntities
+    )
     {
         Optional1 new1 = null;
         Optional1Derived new1d = null;
@@ -66,12 +75,16 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 if (useExistingEntities)
                 {
                     new1 = context.Set<Optional1>().Single(e => e.Id == new1.Id);
-                    new1d = (Optional1Derived)context.Set<Optional1>().Single(e => e.Id == new1d.Id);
-                    new1dd = (Optional1MoreDerived)context.Set<Optional1>().Single(e => e.Id == new1dd.Id);
+                    new1d = (Optional1Derived)
+                        context.Set<Optional1>().Single(e => e.Id == new1d.Id);
+                    new1dd = (Optional1MoreDerived)
+                        context.Set<Optional1>().Single(e => e.Id == new1dd.Id);
                     new2a = context.Set<Optional2>().Single(e => e.Id == new2a.Id);
                     new2b = context.Set<Optional2>().Single(e => e.Id == new2b.Id);
-                    new2d = (Optional2Derived)context.Set<Optional2>().Single(e => e.Id == new2d.Id);
-                    new2dd = (Optional2MoreDerived)context.Set<Optional2>().Single(e => e.Id == new2dd.Id);
+                    new2d = (Optional2Derived)
+                        context.Set<Optional2>().Single(e => e.Id == new2d.Id);
+                    new2dd = (Optional2MoreDerived)
+                        context.Set<Optional2>().Single(e => e.Id == new2dd.Id);
                 }
                 else
                 {
@@ -140,7 +153,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Equal(root.Id, existing.ParentId);
                 Assert.Equal(root.Id, new1d.ParentId);
                 Assert.Equal(root.Id, new1dd.ParentId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -156,9 +170,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Save_required_many_to_one_dependents(ChangeMechanism changeMechanism, bool useExistingEntities)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Save_required_many_to_one_dependents(
+        ChangeMechanism changeMechanism,
+        bool useExistingEntities
+    )
     {
         Root newRoot;
         Required1 new1 = null;
@@ -201,12 +224,16 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 if (useExistingEntities)
                 {
                     new1 = context.Set<Required1>().Single(e => e.Id == new1.Id);
-                    new1d = (Required1Derived)context.Set<Required1>().Single(e => e.Id == new1d.Id);
-                    new1dd = (Required1MoreDerived)context.Set<Required1>().Single(e => e.Id == new1dd.Id);
+                    new1d = (Required1Derived)
+                        context.Set<Required1>().Single(e => e.Id == new1d.Id);
+                    new1dd = (Required1MoreDerived)
+                        context.Set<Required1>().Single(e => e.Id == new1dd.Id);
                     new2a = context.Set<Required2>().Single(e => e.Id == new2a.Id);
                     new2b = context.Set<Required2>().Single(e => e.Id == new2b.Id);
-                    new2d = (Required2Derived)context.Set<Required2>().Single(e => e.Id == new2d.Id);
-                    new2dd = (Required2MoreDerived)context.Set<Required2>().Single(e => e.Id == new2dd.Id);
+                    new2d = (Required2Derived)
+                        context.Set<Required2>().Single(e => e.Id == new2d.Id);
+                    new2dd = (Required2MoreDerived)
+                        context.Set<Required2>().Single(e => e.Id == new2dd.Id);
                 }
                 else
                 {
@@ -279,7 +306,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Equal(root.Id, existing.ParentId);
                 Assert.Equal(root.Id, new1d.ParentId);
                 Assert.Equal(root.Id, new1dd.ParentId);
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -290,7 +318,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk))]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent))]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk))]
-    public virtual void Save_removed_optional_many_to_one_dependents(ChangeMechanism changeMechanism)
+    public virtual void Save_removed_optional_many_to_one_dependents(
+        ChangeMechanism changeMechanism
+    )
     {
         Root root;
         ExecuteWithStrategyInTransaction(
@@ -349,13 +379,17 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     if (!DoesLazyLoading)
                     {
                         context.Entry(loadedRoot).Collection(e => e.OptionalChildren).Load();
-                        context.Entry(loadedRoot.OptionalChildren.First()).Collection(e => e.Children).Load();
+                        context
+                            .Entry(loadedRoot.OptionalChildren.First())
+                            .Collection(e => e.Children)
+                            .Load();
                     }
 
                     Assert.Single(loadedRoot.OptionalChildren);
                     Assert.Single(loadedRoot.OptionalChildren.First().Children);
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -366,7 +400,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk))]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent))]
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk))]
-    public virtual void Save_removed_required_many_to_one_dependents(ChangeMechanism changeMechanism)
+    public virtual void Save_removed_required_many_to_one_dependents(
+        ChangeMechanism changeMechanism
+    )
     {
         var removed1Id = 0;
         var removed2Id = 0;
@@ -405,8 +441,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 if ((changeMechanism & ChangeMechanism.Fk) != 0)
                 {
-                    context.Entry(removed2).GetInfrastructure()[context.Entry(removed2).Property(e => e.ParentId).Metadata] = null;
-                    context.Entry(removed1).GetInfrastructure()[context.Entry(removed1).Property(e => e.ParentId).Metadata] = null;
+                    context.Entry(removed2).GetInfrastructure()[
+                        context.Entry(removed2).Property(e => e.ParentId).Metadata
+                    ] = null;
+                    context.Entry(removed1).GetInfrastructure()[
+                        context.Entry(removed1).Property(e => e.ParentId).Metadata
+                    ] = null;
                 }
 
                 Assert.True(context.ChangeTracker.HasChanges());
@@ -429,8 +469,11 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Empty(context.Set<Required1>().Where(e => e.Id == removed1Id));
                 Assert.Empty(context.Set<Required2>().Where(e => e.Id == removed2Id));
-                Assert.Empty(context.Set<Required2>().Where(e => removed1ChildrenIds.Contains(e.Id)));
-            });
+                Assert.Empty(
+                    context.Set<Required2>().Where(e => removed1ChildrenIds.Contains(e.Id))
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -446,9 +489,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Reparent_to_different_one_to_many(ChangeMechanism changeMechanism, bool useExistingParent)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Reparent_to_different_one_to_many(
+        ChangeMechanism changeMechanism,
+        bool useExistingParent
+    )
     {
         var compositeCount = 0;
         OptionalAk1 oldParent = null;
@@ -461,8 +513,11 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             {
                 if (!useExistingParent)
                 {
-                    newParent = context.CreateProxy<Optional1>(
-                        e => e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(ReferenceEqualityComparer.Instance));
+                    newParent = context.CreateProxy<Optional1>(e =>
+                        e.CompositeChildren = new ObservableHashSet<OptionalComposite2>(
+                            ReferenceEqualityComparer.Instance
+                        )
+                    );
 
                     context.Set<Optional1>().Add(newParent);
                     context.SaveChanges();
@@ -552,8 +607,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     oldParent = context.Set<OptionalAk1>().Single(e => e.Id == oldParent.Id);
                     newParent = context.Set<Optional1>().Single(e => e.Id == newParent.Id);
 
-                    oldComposite1 = context.Set<OptionalComposite2>().Single(e => e.Id == oldComposite1.Id);
-                    oldComposite2 = context.Set<OptionalComposite2>().Single(e => e.Id == oldComposite2.Id);
+                    oldComposite1 = context
+                        .Set<OptionalComposite2>()
+                        .Single(e => e.Id == oldComposite1.Id);
+                    oldComposite2 = context
+                        .Set<OptionalComposite2>()
+                        .Single(e => e.Id == oldComposite2.Id);
 
                     Assert.Same(oldComposite2, oldParent.CompositeChildren.Single());
                     Assert.Same(oldParent, oldComposite2.Parent);
@@ -569,7 +628,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                     Assert.Equal(compositeCount, context.Set<OptionalComposite2>().Count());
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -585,9 +645,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Fk), true)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), false)]
     [InlineData((int)(ChangeMechanism.Fk | ChangeMechanism.Dependent), true)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), false)]
-    [InlineData((int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk), true)]
-    public virtual void Reparent_one_to_many_overlapping(ChangeMechanism changeMechanism, bool useExistingParent)
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        false
+    )]
+    [InlineData(
+        (int)(ChangeMechanism.Principal | ChangeMechanism.Dependent | ChangeMechanism.Fk),
+        true
+    )]
+    public virtual void Reparent_one_to_many_overlapping(
+        ChangeMechanism changeMechanism,
+        bool useExistingParent
+    )
     {
         Root root = null;
         var childCount = 0;
@@ -601,17 +670,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
             {
                 if (!useExistingParent)
                 {
-                    newParent = context.CreateProxy<RequiredComposite1>(
-                        e =>
+                    newParent = context.CreateProxy<RequiredComposite1>(e =>
+                    {
+                        e.Id = 3;
+                        e.Parent = context.Set<Root>().Single(IsTheRoot);
+                        e.CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(
+                            ReferenceEqualityComparer.Instance
+                        )
                         {
-                            e.Id = 3;
-                            e.Parent = context.Set<Root>().Single(IsTheRoot);
-                            e.CompositeChildren = new ObservableHashSet<OptionalOverlapping2>(ReferenceEqualityComparer.Instance)
-                            {
-                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 5),
-                                context.CreateProxy<OptionalOverlapping2>(e => e.Id = 6)
-                            };
-                        });
+                            context.CreateProxy<OptionalOverlapping2>(e => e.Id = 5),
+                            context.CreateProxy<OptionalOverlapping2>(e => e.Id = 6),
+                        };
+                    });
 
                     context.Set<RequiredComposite1>().Add(newParent);
                     context.SaveChanges();
@@ -685,7 +755,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Same(root, oldChild2.Root);
 
                 Assert.Equal(3, newParent.CompositeChildren.Count);
-                Assert.Same(oldChild1, newParent.CompositeChildren.Single(e => e.Id == oldChild1.Id));
+                Assert.Same(
+                    oldChild1,
+                    newParent.CompositeChildren.Single(e => e.Id == oldChild1.Id)
+                );
                 Assert.Same(newParent, oldChild1.Parent);
                 Assert.Equal(newParent.Id, oldChild1.ParentId);
                 Assert.Equal(oldParent.ParentAlternateId, oldChild1.ParentAlternateId);
@@ -716,14 +789,18 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Equal(oldParent.ParentAlternateId, oldChild2.ParentAlternateId);
                 Assert.Equal(root.AlternateId, oldChild2.ParentAlternateId);
 
-                Assert.Same(oldChild1, newParent.CompositeChildren.Single(e => e.Id == oldChild1.Id));
+                Assert.Same(
+                    oldChild1,
+                    newParent.CompositeChildren.Single(e => e.Id == oldChild1.Id)
+                );
                 Assert.Same(newParent, oldChild1.Parent);
                 Assert.Equal(newParent.Id, oldChild1.ParentId);
                 Assert.Equal(oldParent.ParentAlternateId, oldChild1.ParentAlternateId);
                 Assert.Equal(root.AlternateId, oldChild1.ParentAlternateId);
 
                 Assert.Equal(childCount, context.Set<OptionalOverlapping2>().Count());
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -738,7 +815,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_many_to_one_dependents_are_cascade_deleted(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         List<int> orphanedIds = null;
@@ -786,7 +864,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.False(context.ChangeTracker.HasChanges());
 
                     Assert.Equal(EntityState.Detached, context.Entry(removed).State);
-                    Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached));
+                    Assert.True(
+                        cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached)
+                    );
 
                     Assert.Single(root.RequiredChildren);
                     Assert.DoesNotContain(removedId, root.RequiredChildren.Select(e => e.Id));
@@ -815,7 +895,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Empty(context.Set<Required1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<Required2>().Where(e => orphanedIds.Contains(e.Id)));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -830,7 +911,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Optional_many_to_one_dependents_are_orphaned(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         List<int> orphanedIds = null;
@@ -867,9 +949,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.True(context.ChangeTracker.HasChanges());
 
-                var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate)
-                    ? EntityState.Modified
-                    : EntityState.Unchanged;
+                var expectedState =
+                    (cascadeDeleteTiming == CascadeTiming.Immediate)
+                        ? EntityState.Modified
+                        : EntityState.Unchanged;
 
                 foreach (var orphanEntry in orphaned.Select(context.Entry))
                 {
@@ -879,7 +962,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                         Assert.Equal(removed.Id, orphanEntry.Entity.ParentId);
                         Assert.Equal(
                             context.Entry(removed).Property(e => e.Id).CurrentValue,
-                            orphanEntry.Property(e => e.ParentId).CurrentValue);
+                            orphanEntry.Property(e => e.ParentId).CurrentValue
+                        );
                     }
                     else
                     {
@@ -899,7 +983,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.DoesNotContain(removedId, root.OptionalChildren.Select(e => e.Id));
 
                 Assert.Empty(context.Set<Optional1>().Where(e => e.Id == removedId));
-                Assert.Equal(orphanedIds.Count, context.Set<Optional2>().Count(e => orphanedIds.Contains(e.Id)));
+                Assert.Equal(
+                    orphanedIds.Count,
+                    context.Set<Optional2>().Count(e => orphanedIds.Contains(e.Id))
+                );
 
                 Assert.Same(root, removed.Parent);
                 Assert.Equal(2, removed.Children.Count());
@@ -917,8 +1004,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.DoesNotContain(removedId, root.OptionalChildren.Select(e => e.Id));
 
                 Assert.Empty(context.Set<Optional1>().Where(e => e.Id == removedId));
-                Assert.Equal(orphanedIds.Count, context.Set<Optional2>().Count(e => orphanedIds.Contains(e.Id)));
-            });
+                Assert.Equal(
+                    orphanedIds.Count,
+                    context.Set<Optional2>().Count(e => orphanedIds.Contains(e.Id))
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -934,51 +1025,53 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(null, null)]
     public virtual void Optional_many_to_one_dependents_are_orphaned_with_Added_graph(
         CascadeTiming? cascadeDeleteTiming,
-        CascadeTiming? deleteOrphansTiming) // Issue #29318
-        => ExecuteWithStrategyInTransaction(
-            context =>
+        CascadeTiming? deleteOrphansTiming
+    ) // Issue #29318
+        =>
+        ExecuteWithStrategyInTransaction(context =>
+        {
+            context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
+            context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+
+            var root = context.CreateProxy<Root>(e => e.AlternateId = Guid.NewGuid());
+            var removed = context.CreateProxy<Optional1>(e => e.Parent = root);
+            var orphaned = new List<Optional2>
             {
-                context.ChangeTracker.CascadeDeleteTiming = cascadeDeleteTiming ?? CascadeTiming.Never;
-                context.ChangeTracker.DeleteOrphansTiming = deleteOrphansTiming ?? CascadeTiming.Never;
+                context.CreateProxy<Optional2>(e => e.Parent = removed),
+                context.CreateProxy<Optional2>(e => e.Parent = removed),
+            };
 
-                var root = context.CreateProxy<Root>(e => e.AlternateId = Guid.NewGuid());
-                var removed = context.CreateProxy<Optional1>(e => e.Parent = root);
-                var orphaned = new List<Optional2>
-                {
-                    context.CreateProxy<Optional2>(e => e.Parent = removed), context.CreateProxy<Optional2>(e => e.Parent = removed)
-                };
+            context.AddRange(orphaned);
+            var removedId = context.Entry(removed).Property(e => e.Id).CurrentValue;
+            context.Remove(removed);
 
-                context.AddRange(orphaned);
-                var removedId = context.Entry(removed).Property(e => e.Id).CurrentValue;
-                context.Remove(removed);
+            Assert.Equal(EntityState.Detached, context.Entry(removed).State);
 
-                Assert.Equal(EntityState.Detached, context.Entry(removed).State);
+            if (cascadeDeleteTiming == null)
+            {
+                Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Added));
 
-                if (cascadeDeleteTiming == null)
-                {
-                    Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Added));
+                context.ChangeTracker.CascadeChanges();
+            }
 
-                    context.ChangeTracker.CascadeChanges();
-                }
+            foreach (var orphanEntry in orphaned.Select(context.Entry))
+            {
+                Assert.Equal(EntityState.Added, orphanEntry.State);
+                Assert.Null(orphanEntry.Entity.ParentId);
+                Assert.Null(orphanEntry.Property(e => e.ParentId).CurrentValue);
+            }
 
-                foreach (var orphanEntry in orphaned.Select(context.Entry))
-                {
-                    Assert.Equal(EntityState.Added, orphanEntry.State);
-                    Assert.Null(orphanEntry.Entity.ParentId);
-                    Assert.Null(orphanEntry.Property(e => e.ParentId).CurrentValue);
-                }
+            context.SaveChanges();
 
-                context.SaveChanges();
+            Assert.False(context.ChangeTracker.HasChanges());
 
-                Assert.False(context.ChangeTracker.HasChanges());
+            Assert.Equal(EntityState.Detached, context.Entry(removed).State);
+            Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Unchanged));
 
-                Assert.Equal(EntityState.Detached, context.Entry(removed).State);
-                Assert.True(orphaned.All(e => context.Entry(e).State == EntityState.Unchanged));
-
-                Assert.Empty(root.OptionalChildren);
-                Assert.Same(root, removed.Parent);
-                Assert.Equal(2, removed.Children.Count());
-            });
+            Assert.Empty(root.OptionalChildren);
+            Assert.Same(root, removed.Parent);
+            Assert.Equal(2, removed.Children.Count());
+        });
 
     [ConditionalTheory]
     [InlineData(CascadeTiming.OnSaveChanges, CascadeTiming.OnSaveChanges)]
@@ -992,7 +1085,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_many_to_one_dependents_are_cascade_deleted_in_store(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         List<int> orphanedIds = null;
@@ -1063,7 +1157,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Empty(context.Set<Required1>().Where(e => e.Id == removedId));
                 Assert.Empty(context.Set<Required2>().Where(e => orphanedIds.Contains(e.Id)));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1078,7 +1173,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Optional_many_to_one_dependents_are_orphaned_in_store(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         List<int> orphanedIds = null;
@@ -1131,7 +1227,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Empty(context.Set<Optional1>().Where(e => e.Id == removedId));
 
-                var orphaned = context.Set<Optional2>().Where(e => orphanedIds.Contains(e.Id)).ToList();
+                var orphaned = context
+                    .Set<Optional2>()
+                    .Where(e => orphanedIds.Contains(e.Id))
+                    .ToList();
                 Assert.Equal(orphanedIds.Count, orphaned.Count);
                 Assert.True(orphaned.All(e => e.ParentId == null));
 
@@ -1152,10 +1251,14 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Empty(context.Set<Optional1>().Where(e => e.Id == removedId));
 
-                var orphaned = context.Set<Optional2>().Where(e => orphanedIds.Contains(e.Id)).ToList();
+                var orphaned = context
+                    .Set<Optional2>()
+                    .Where(e => orphanedIds.Contains(e.Id))
+                    .ToList();
                 Assert.Equal(orphanedIds.Count, orphaned.Count);
                 Assert.True(orphaned.All(e => e.ParentId == null));
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1170,7 +1273,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_many_to_one_dependents_are_cascade_deleted_starting_detached(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         List<int> orphanedIds = null;
@@ -1213,9 +1317,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                var expectedState = cascadeDeleteTiming == CascadeTiming.Immediate
-                    ? EntityState.Deleted
-                    : EntityState.Unchanged;
+                var expectedState =
+                    cascadeDeleteTiming == CascadeTiming.Immediate
+                        ? EntityState.Deleted
+                        : EntityState.Unchanged;
 
                 Assert.True(cascadeRemoved.All(e => context.Entry(e).State == expectedState));
 
@@ -1232,7 +1337,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.False(context.ChangeTracker.HasChanges());
 
                     Assert.Equal(EntityState.Detached, context.Entry(removed).State);
-                    Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached));
+                    Assert.True(
+                        cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached)
+                    );
 
                     Assert.Same(root, removed.Parent);
                     Assert.Equal(2, removed.Children.Count());
@@ -1255,7 +1362,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Empty(context.Set<Required1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<Required2>().Where(e => orphanedIds.Contains(e.Id)));
                 }
-            });
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1270,7 +1378,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Optional_many_to_one_dependents_are_orphaned_starting_detached(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         List<int> orphanedIds = null;
@@ -1313,9 +1422,10 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                 Assert.Equal(EntityState.Deleted, context.Entry(removed).State);
 
-                var expectedState = (cascadeDeleteTiming == CascadeTiming.Immediate)
-                    ? EntityState.Modified
-                    : EntityState.Unchanged;
+                var expectedState =
+                    (cascadeDeleteTiming == CascadeTiming.Immediate)
+                        ? EntityState.Modified
+                        : EntityState.Unchanged;
 
                 foreach (var orphanEntry in orphaned.Select(context.Entry))
                 {
@@ -1325,7 +1435,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                         Assert.Equal(removed.Id, orphanEntry.Entity.ParentId);
                         Assert.Equal(
                             context.Entry(removed).Property(e => e.Id).CurrentValue,
-                            orphanEntry.Property(e => e.ParentId).CurrentValue);
+                            orphanEntry.Property(e => e.ParentId).CurrentValue
+                        );
                     }
                     else
                     {
@@ -1359,8 +1470,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.DoesNotContain(removedId, root.OptionalChildren.Select(e => e.Id));
 
                 Assert.Empty(context.Set<Optional1>().Where(e => e.Id == removedId));
-                Assert.Equal(orphanedIds.Count, context.Set<Optional2>().Count(e => orphanedIds.Contains(e.Id)));
-            });
+                Assert.Equal(
+                    orphanedIds.Count,
+                    context.Set<Optional2>().Count(e => orphanedIds.Contains(e.Id))
+                );
+            }
+        );
     }
 
     [ConditionalTheory]
@@ -1375,7 +1490,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
     [InlineData(CascadeTiming.Never, CascadeTiming.Never)]
     public virtual void Required_many_to_one_dependents_are_cascade_detached_when_Added(
         CascadeTiming cascadeDeleteTiming,
-        CascadeTiming deleteOrphansTiming)
+        CascadeTiming deleteOrphansTiming
+    )
     {
         var removedId = 0;
         List<int> orphanedIds = null;
@@ -1411,8 +1527,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 var added = context.CreateProxy<Required2>();
                 Add(removed.Children, added);
 
-                if (context.ChangeTracker.AutoDetectChangesEnabled
-                    && !DoesChangeTracking)
+                if (context.ChangeTracker.AutoDetectChangesEnabled && !DoesChangeTracking)
                 {
                     context.ChangeTracker.DetectChanges();
                 }
@@ -1420,7 +1535,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 Assert.Equal(EntityState.Unchanged, context.Entry(removed).State);
 
                 Assert.Equal(EntityState.Added, context.Entry(added).State);
-                Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
+                Assert.True(
+                    cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
+                );
 
                 context.Remove(removed);
 
@@ -1429,12 +1546,16 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                 if (cascadeDeleteTiming == CascadeTiming.Immediate)
                 {
                     Assert.Equal(EntityState.Detached, context.Entry(added).State);
-                    Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Deleted));
+                    Assert.True(
+                        cascadeRemoved.All(e => context.Entry(e).State == EntityState.Deleted)
+                    );
                 }
                 else
                 {
                     Assert.Equal(EntityState.Added, context.Entry(added).State);
-                    Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged));
+                    Assert.True(
+                        cascadeRemoved.All(e => context.Entry(e).State == EntityState.Unchanged)
+                    );
                 }
 
                 Assert.True(context.ChangeTracker.HasChanges());
@@ -1451,7 +1572,9 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
 
                     Assert.Equal(EntityState.Detached, context.Entry(removed).State);
                     Assert.Equal(EntityState.Detached, context.Entry(added).State);
-                    Assert.True(cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached));
+                    Assert.True(
+                        cascadeRemoved.All(e => context.Entry(e).State == EntityState.Detached)
+                    );
 
                     Assert.Same(root, removed.Parent);
                     Assert.Equal(3, removed.Children.Count());
@@ -1474,6 +1597,7 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture> : IClassFixtur
                     Assert.Empty(context.Set<Required1>().Where(e => e.Id == removedId));
                     Assert.Empty(context.Set<Required2>().Where(e => orphanedIds.Contains(e.Id)));
                 }
-            });
+            }
+        );
     }
 }

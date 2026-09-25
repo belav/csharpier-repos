@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -12,54 +12,54 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Remoting {
-
+namespace System.Runtime.Remoting
+{
+    using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using System.Runtime.Remoting.Activation;
     using System.Runtime.Remoting.Channels;
-    using System.Runtime.Remoting.Contexts;    
+    using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Lifetime;
     using System.Runtime.Remoting.Messaging;
     using System.Runtime.Remoting.Metadata;
-    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-    using System.Threading;
-    using System.IO;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Collections;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Diagnostics.Contracts;
-    
+    using System.Threading;
+
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public enum WellKnownObjectMode
     {
-        Singleton   = 1,
-        SingleCall  = 2
+        Singleton = 1,
+        SingleCall = 2,
     }
 
     // This is the class that plays the role of per-appDomain statics
     // till we have the real functionality.
     internal class DomainSpecificRemotingData
     {
-        const int  ACTIVATION_INITIALIZING  = 0x00000001;
-        const int  ACTIVATION_INITIALIZED   = 0x00000002;        
-        const int  ACTIVATOR_LISTENING      = 0x00000004;
-        
+        const int ACTIVATION_INITIALIZING = 0x00000001;
+        const int ACTIVATION_INITIALIZED = 0x00000002;
+        const int ACTIVATOR_LISTENING = 0x00000004;
+
         [System.Security.SecurityCritical] // auto-generated
         LocalActivator _LocalActivator;
-        ActivationListener _ActivationListener;       
-        IContextProperty[]  _appDomainProperties;
+        ActivationListener _ActivationListener;
+        IContextProperty[] _appDomainProperties;
         int _flags;
         Object _ConfigLock;
         ChannelServicesData _ChannelServicesData;
-                LeaseManager _LeaseManager;
+        LeaseManager _LeaseManager;
         ReaderWriterLock _IDTableLock;
 
         internal DomainSpecificRemotingData()
-        {            
+        {
             _flags = 0;
             _ConfigLock = new Object();
             _ChannelServicesData = new ChannelServicesData();
@@ -68,26 +68,20 @@ namespace System.Runtime.Remoting {
             // Add the Lifetime service property to the appdomain.
             // For now we are assuming that this is the only property
             // If there are more properties, then an existing array
-                        // will need to be expanded to add this property
-                        // The property needs to be added here so that the default context
-                        // for an appdomain has lifetime services activated
+            // will need to be expanded to add this property
+            // The property needs to be added here so that the default context
+            // for an appdomain has lifetime services activated
 
             _appDomainProperties = new IContextProperty[1];
-            _appDomainProperties[0] = new System.Runtime.Remoting.Lifetime.LeaseLifeTimeServiceProperty();
+            _appDomainProperties[0] =
+                new System.Runtime.Remoting.Lifetime.LeaseLifeTimeServiceProperty();
         }
 
         internal LeaseManager LeaseManager
         {
-            get 
-            { 
-                return _LeaseManager; 
-            }
-            set 
-            {  
-                _LeaseManager = value; 
-            }
+            get { return _LeaseManager; }
+            set { _LeaseManager = value; }
         }
-                
 
         // This lock object is exposed for various objects that need to synchronize
         // there configuration behavior.
@@ -102,19 +96,18 @@ namespace System.Runtime.Remoting {
             get { return _IDTableLock; }
         }
 
-
         internal LocalActivator LocalActivator
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get{return _LocalActivator;}
-            [System.Security.SecurityCritical]  // auto-generated
-            set{_LocalActivator=value;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _LocalActivator; }
+            [System.Security.SecurityCritical] // auto-generated
+            set { _LocalActivator = value; }
         }
 
         internal ActivationListener ActivationListener
         {
-            get {return _ActivationListener;}
-            set {_ActivationListener=value;}
+            get { return _ActivationListener; }
+            set { _ActivationListener = value; }
         }
 
         // access to InitializingActivation, ActivationInitialized
@@ -122,8 +115,8 @@ namespace System.Runtime.Remoting {
         // by the caller.
         internal bool InitializingActivation
         {
-            get {return (_flags & ACTIVATION_INITIALIZING) == ACTIVATION_INITIALIZING;}
-            set 
+            get { return (_flags & ACTIVATION_INITIALIZING) == ACTIVATION_INITIALIZING; }
+            set
             {
                 if (value == true)
                 {
@@ -138,8 +131,8 @@ namespace System.Runtime.Remoting {
 
         internal bool ActivationInitialized
         {
-            get {return (_flags & ACTIVATION_INITIALIZED) == ACTIVATION_INITIALIZED;}
-            set 
+            get { return (_flags & ACTIVATION_INITIALIZED) == ACTIVATION_INITIALIZED; }
+            set
             {
                 if (value == true)
                 {
@@ -150,13 +143,12 @@ namespace System.Runtime.Remoting {
                     _flags = _flags & ~ACTIVATION_INITIALIZED;
                 }
             }
-
         }
 
         internal bool ActivatorListening
         {
-            get {return (_flags & ACTIVATOR_LISTENING) == ACTIVATOR_LISTENING;}
-            set 
+            get { return (_flags & ACTIVATOR_LISTENING) == ACTIVATOR_LISTENING; }
+            set
             {
                 if (value == true)
                 {
@@ -167,30 +159,22 @@ namespace System.Runtime.Remoting {
                     _flags = _flags & ~ACTIVATOR_LISTENING;
                 }
             }
-
         }
-        
-        
+
         internal IContextProperty[] AppDomainContextProperties
         {
             get { return _appDomainProperties; }
-        } 
+        }
 
         internal ChannelServicesData ChannelServicesData
         {
-            get 
-            {
-                return _ChannelServicesData;
-            }
+            get { return _ChannelServicesData; }
         }
     } // class DomainSpecificRemotingData
 
-
-
-
-    //------------------------------------------------------------------    
-    //--------------------- Remoting Configuration ---------------------    
-    //------------------------------------------------------------------    
+    //------------------------------------------------------------------
+    //--------------------- Remoting Configuration ---------------------
+    //------------------------------------------------------------------
     internal static class RemotingConfigHandler
     {
         static volatile String _applicationName;
@@ -200,14 +184,12 @@ namespace System.Runtime.Remoting {
         static volatile bool _bUrlObjRefMode = false;
 
         static Queue _delayLoadChannelConfigQueue = new Queue(); // queue of channels we might be able to use
-        
 
         // All functions of RemotingConfigHandler operate upon the config
-        // data stored on a per appDomain basis 
+        // data stored on a per appDomain basis
         public static RemotingConfigInfo Info = new RemotingConfigInfo();
 
         private const String _machineConfigFilename = "machine.config";
-        
 
         internal static String ApplicationName
         {
@@ -216,26 +198,28 @@ namespace System.Runtime.Remoting {
                 if (_applicationName == null)
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Config_NoAppName"));
+                        Environment.GetResourceString("Remoting_Config_NoAppName")
+                    );
                 }
                 return _applicationName;
             }
-
             set
             {
                 if (_applicationName != null)
                 {
                     throw new RemotingException(
                         String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Config_AppNameSet"),
-                         _applicationName));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Config_AppNameSet"),
+                            _applicationName
+                        )
+                    );
                 }
-                
+
                 _applicationName = value;
 
                 // get rid of any starting or trailing slashes
-                char[] slash = new char[]{'/'};
+                char[] slash = new char[] { '/' };
                 if (_applicationName.StartsWith("/", StringComparison.Ordinal))
                     _applicationName = _applicationName.TrimStart(slash);
                 if (_applicationName.EndsWith("/", StringComparison.Ordinal))
@@ -252,32 +236,34 @@ namespace System.Runtime.Remoting {
         {
             get { return _bUrlObjRefMode; }
         }
-        
-        internal static CustomErrorsModes  CustomErrorsMode 
+
+        internal static CustomErrorsModes CustomErrorsMode
         {
-           get { 
-                return _errorMode; 
-           }
-           set
-           {
-                if (_errorsModeSet)                
-                    throw new RemotingException(Environment.GetResourceString("Remoting_Config_ErrorsModeSet"));                        
-                
+            get { return _errorMode; }
+            set
+            {
+                if (_errorsModeSet)
+                    throw new RemotingException(
+                        Environment.GetResourceString("Remoting_Config_ErrorsModeSet")
+                    );
+
                 _errorMode = value;
                 _errorsModeSet = true;
-           }
-           
+            }
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal static IMessageSink FindDelayLoadChannelForCreateMessageSink(
-            String url, Object data, out String objectURI)
+            String url,
+            Object data,
+            out String objectURI
+        )
         {
             LoadMachineConfigIfNecessary();
-        
+
             objectURI = null;
             IMessageSink msgSink = null;
-        
+
             foreach (DelayLoadClientChannelEntry entry in _delayLoadChannelConfigQueue)
             {
                 IChannelSender channel = entry.Channel;
@@ -297,13 +283,11 @@ namespace System.Runtime.Remoting {
             return null;
         } // FindChannelForCreateMessageSink
 
-
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         static void LoadMachineConfigIfNecessary()
-        {                    
+        {
             // Load the machine.config file if we haven't already
             if (!_bMachineConfigLoaded)
             {
@@ -311,34 +295,39 @@ namespace System.Runtime.Remoting {
                 {
                     if (!_bMachineConfigLoaded)
                     {
-                        RemotingXmlConfigFileData configData = RemotingXmlConfigFileParser.ParseDefaultConfiguration(); 
+                        RemotingXmlConfigFileData configData =
+                            RemotingXmlConfigFileParser.ParseDefaultConfiguration();
                         if (configData != null)
-                            ConfigureRemoting(configData, false/*ensureSecurity*/);
+                            ConfigureRemoting(
+                                configData,
+                                false /*ensureSecurity*/
+                            );
 
-                        String machineDirectory = System.Security.Util.Config.MachineDirectory;                        
-                        String longFileName = machineDirectory 
-                                            + _machineConfigFilename;
+                        String machineDirectory = System.Security.Util.Config.MachineDirectory;
+                        String longFileName = machineDirectory + _machineConfigFilename;
                         new FileIOPermission(FileIOPermissionAccess.Read, longFileName).Assert();
 
                         configData = LoadConfigurationFromXmlFile(longFileName);
 
                         if (configData != null)
-                            ConfigureRemoting(configData, false/*ensureSecurity*/);
-                        
+                            ConfigureRemoting(
+                                configData,
+                                false /*ensureSecurity*/
+                            );
+
                         _bMachineConfigLoaded = true;
                     }
                 }
             }
         } // LoadMachineConfigIfNecessary
-                
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         internal static void DoConfiguration(String filename, bool ensureSecurity)
-        {        
+        {
             LoadMachineConfigIfNecessary();
-        
+
             // load specified config file
             RemotingXmlConfigFileData configData = LoadConfigurationFromXmlFile(filename);
 
@@ -348,7 +337,7 @@ namespace System.Runtime.Remoting {
             if (configData != null)
                 ConfigureRemoting(configData, ensureSecurity);
         }
-        
+
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
         private static RemotingXmlConfigFileData LoadConfigurationFromXmlFile(String filename)
@@ -362,7 +351,7 @@ namespace System.Runtime.Remoting {
             }
             catch (Exception e)
             {
-                Exception inner =  e.InnerException as FileNotFoundException;
+                Exception inner = e.InnerException as FileNotFoundException;
                 if (inner != null)
                 {
                     // if the file is missing, this gives a clearer message
@@ -370,29 +359,33 @@ namespace System.Runtime.Remoting {
                 }
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString(
-                            "Remoting_Config_ReadFailure"),
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Config_ReadFailure"),
                         filename,
-                        e));
+                        e
+                    )
+                );
             }
-        } // LoadConfigurationFromXmlFile       
+        } // LoadConfigurationFromXmlFile
 
-
-        [System.Security.SecurityCritical]  // auto-generated
-        private static void ConfigureRemoting(RemotingXmlConfigFileData configData, bool ensureSecurity)
+        [System.Security.SecurityCritical] // auto-generated
+        private static void ConfigureRemoting(
+            RemotingXmlConfigFileData configData,
+            bool ensureSecurity
+        )
         {
             try
             {
                 String appName = configData.ApplicationName;
                 if (appName != null)
                     ApplicationName = appName;
-                
+
                 if (configData.CustomErrors != null)
                     _errorMode = configData.CustomErrors.Mode;
 
                 // configure channels
                 ConfigureChannels(configData, ensureSecurity);
-            
+
                 // configure lifetime
                 if (configData.Lifetime != null)
                 {
@@ -400,10 +393,14 @@ namespace System.Runtime.Remoting {
                         LifetimeServices.LeaseTime = configData.Lifetime.LeaseTime;
                     if (configData.Lifetime.IsRenewOnCallTimeSet)
                         LifetimeServices.RenewOnCallTime = configData.Lifetime.RenewOnCallTime;
-                    if (configData.Lifetime.IsSponsorshipTimeoutSet)    
-                        LifetimeServices.SponsorshipTimeout = configData.Lifetime.SponsorshipTimeout;
+                    if (configData.Lifetime.IsSponsorshipTimeoutSet)
+                        LifetimeServices.SponsorshipTimeout = configData
+                            .Lifetime
+                            .SponsorshipTimeout;
                     if (configData.Lifetime.IsLeaseManagerPollTimeSet)
-                        LifetimeServices.LeaseManagerPollTime = configData.Lifetime.LeaseManagerPollTime;
+                        LifetimeServices.LeaseManagerPollTime = configData
+                            .Lifetime
+                            .LeaseManagerPollTime;
                 }
 
                 _bUrlObjRefMode = configData.UrlObjRefMode;
@@ -416,26 +413,30 @@ namespace System.Runtime.Remoting {
 
                 // start up activation listener if there are any activated objects exposed
                 if (configData.ServerActivatedEntries.Count > 0)
-                    ActivationServices.StartListeningForRemoteRequests();                
+                    ActivationServices.StartListeningForRemoteRequests();
             }
             catch (Exception e)
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString(
-                            "Remoting_Config_ConfigurationFailure"),                        
-                        e));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Config_ConfigurationFailure"),
+                        e
+                    )
+                );
             }
         } // ConfigureRemoting
-        
 
         // configures channels loaded from remoting config file.
-        [System.Security.SecurityCritical]  // auto-generated
-        private static void ConfigureChannels(RemotingXmlConfigFileData configData, bool ensureSecurity)
+        [System.Security.SecurityCritical] // auto-generated
+        private static void ConfigureChannels(
+            RemotingXmlConfigFileData configData,
+            bool ensureSecurity
+        )
         {
             // Register our x-context & x-AD channels first
             RemotingServices.RegisterWellKnownChannels();
-            
+
             foreach (RemotingXmlConfigFileData.ChannelEntry entry in configData.ChannelEntries)
             {
                 if (!entry.DelayLoad)
@@ -444,17 +445,19 @@ namespace System.Runtime.Remoting {
                     ChannelServices.RegisterChannel(chnl, ensureSecurity);
                 }
                 else
-                    _delayLoadChannelConfigQueue.Enqueue(new DelayLoadClientChannelEntry(entry, ensureSecurity));
+                    _delayLoadChannelConfigQueue.Enqueue(
+                        new DelayLoadClientChannelEntry(entry, ensureSecurity)
+                    );
             }
         } //  ConfigureChannels
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static IChannel CreateChannelFromConfigEntry(
-            RemotingXmlConfigFileData.ChannelEntry entry)
-        {       
+            RemotingXmlConfigFileData.ChannelEntry entry
+        )
+        {
             Type type = RemotingConfigInfo.LoadType(entry.TypeName, entry.AssemblyName);
-            
+
             bool isServerChannel = typeof(IChannelReceiver).IsAssignableFrom(type);
             bool isClientChannel = typeof(IChannelSender).IsAssignableFrom(type);
 
@@ -462,13 +465,17 @@ namespace System.Runtime.Remoting {
             IServerChannelSinkProvider serverProviderChain = null;
 
             if (entry.ClientSinkProviders.Count > 0)
-                clientProviderChain = CreateClientChannelSinkProviderChain(entry.ClientSinkProviders);
+                clientProviderChain = CreateClientChannelSinkProviderChain(
+                    entry.ClientSinkProviders
+                );
             if (entry.ServerSinkProviders.Count > 0)
-                serverProviderChain = CreateServerChannelSinkProviderChain(entry.ServerSinkProviders);
+                serverProviderChain = CreateServerChannelSinkProviderChain(
+                    entry.ServerSinkProviders
+                );
 
             // construct argument list
             Object[] args;
-            
+
             if (isServerChannel && isClientChannel)
             {
                 args = new Object[3];
@@ -476,15 +483,13 @@ namespace System.Runtime.Remoting {
                 args[1] = clientProviderChain;
                 args[2] = serverProviderChain;
             }
-            else
-            if (isServerChannel)
+            else if (isServerChannel)
             {
                 args = new Object[2];
                 args[0] = entry.Properties;
                 args[1] = serverProviderChain;
             }
-            else
-            if (isClientChannel)
+            else if (isClientChannel)
             {
                 args = new Object[2];
                 args[0] = entry.Properties;
@@ -494,52 +499,63 @@ namespace System.Runtime.Remoting {
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Config_InvalidChannelType"), 
-                    type.FullName));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Config_InvalidChannelType"),
+                        type.FullName
+                    )
+                );
             }
 
             IChannel channel = null;
 
             try
             {
-                channel = (IChannel)Activator.CreateInstance(type, 
-                                                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance, 
-                                                        null, 
-                                                        args, 
-                                                        null, 
-                                                        null);
-
+                channel = (IChannel)
+                    Activator.CreateInstance(
+                        type,
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance,
+                        null,
+                        args,
+                        null,
+                        null
+                    );
             }
             catch (MissingMethodException)
             {
                 String ctor = null;
-                
+
                 if (isServerChannel && isClientChannel)
-                    ctor = "MyChannel(IDictionary properties, IClientChannelSinkProvider clientSinkProvider, IServerChannelSinkProvider serverSinkProvider)";
-                else
-                if (isServerChannel)
-                    ctor = "MyChannel(IDictionary properties, IServerChannelSinkProvider serverSinkProvider)";
-                else
-                if (isClientChannel)
-                    ctor = "MyChannel(IDictionary properties, IClientChannelSinkProvider clientSinkProvider)";
-                
+                    ctor =
+                        "MyChannel(IDictionary properties, IClientChannelSinkProvider clientSinkProvider, IServerChannelSinkProvider serverSinkProvider)";
+                else if (isServerChannel)
+                    ctor =
+                        "MyChannel(IDictionary properties, IServerChannelSinkProvider serverSinkProvider)";
+                else if (isClientChannel)
+                    ctor =
+                        "MyChannel(IDictionary properties, IClientChannelSinkProvider clientSinkProvider)";
+
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Config_ChannelMissingCtor"),
-                    type.FullName, ctor));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Config_ChannelMissingCtor"),
+                        type.FullName,
+                        ctor
+                    )
+                );
             }
-            
+
             return channel;
         } //  CreateChannelFromEntry
 
-
         // create a client sink provider chain
-        [System.Security.SecurityCritical]  // auto-generated
-        private static IClientChannelSinkProvider CreateClientChannelSinkProviderChain(ArrayList entries)
-        {   
+        [System.Security.SecurityCritical] // auto-generated
+        private static IClientChannelSinkProvider CreateClientChannelSinkProviderChain(
+            ArrayList entries
+        )
+        {
             IClientChannelSinkProvider chain = null;
             IClientChannelSinkProvider current = null;
-            
+
             foreach (RemotingXmlConfigFileData.SinkProviderEntry entry in entries)
             {
                 if (chain == null)
@@ -549,7 +565,10 @@ namespace System.Runtime.Remoting {
                 }
                 else
                 {
-                    current.Next = (IClientChannelSinkProvider)CreateChannelSinkProvider(entry, false);
+                    current.Next = (IClientChannelSinkProvider)CreateChannelSinkProvider(
+                        entry,
+                        false
+                    );
                     current = current.Next;
                 }
             }
@@ -557,14 +576,15 @@ namespace System.Runtime.Remoting {
             return chain;
         } // CreateClientChannelSinkProviderChain
 
-
         // create a client sink provider chain
-        [System.Security.SecurityCritical]  // auto-generated
-        private static IServerChannelSinkProvider CreateServerChannelSinkProviderChain(ArrayList entries)
-        {   
+        [System.Security.SecurityCritical] // auto-generated
+        private static IServerChannelSinkProvider CreateServerChannelSinkProviderChain(
+            ArrayList entries
+        )
+        {
             IServerChannelSinkProvider chain = null;
             IServerChannelSinkProvider current = null;
-            
+
             foreach (RemotingXmlConfigFileData.SinkProviderEntry entry in entries)
             {
                 if (chain == null)
@@ -574,34 +594,43 @@ namespace System.Runtime.Remoting {
                 }
                 else
                 {
-                    current.Next = (IServerChannelSinkProvider)CreateChannelSinkProvider(entry, true);
+                    current.Next = (IServerChannelSinkProvider)CreateChannelSinkProvider(
+                        entry,
+                        true
+                    );
                     current = current.Next;
                 }
             }
 
             return chain;
         } // CreateServerChannelSinkProviderChain
-            
 
         // create a sink provider from the config file data
-        [System.Security.SecurityCritical]  // auto-generated
-        private static Object CreateChannelSinkProvider(RemotingXmlConfigFileData.SinkProviderEntry entry,
-                                                        bool bServer)
+        [System.Security.SecurityCritical] // auto-generated
+        private static Object CreateChannelSinkProvider(
+            RemotingXmlConfigFileData.SinkProviderEntry entry,
+            bool bServer
+        )
         {
             Object sinkProvider = null;
 
-            Type type = RemotingConfigInfo.LoadType(entry.TypeName, entry.AssemblyName);            
+            Type type = RemotingConfigInfo.LoadType(entry.TypeName, entry.AssemblyName);
 
             if (bServer)
             {
-                // make sure this is a client provider                
+                // make sure this is a client provider
                 if (!typeof(IServerChannelSinkProvider).IsAssignableFrom(type))
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Config_InvalidSinkProviderType"),
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_Config_InvalidSinkProviderType"
+                            ),
                             type.FullName,
-                            "IServerChannelSinkProvider"));
+                            "IServerChannelSinkProvider"
+                        )
+                    );
                 }
             }
             else
@@ -611,25 +640,37 @@ namespace System.Runtime.Remoting {
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Config_InvalidSinkProviderType"),
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_Config_InvalidSinkProviderType"
+                            ),
                             type.FullName,
-                            "IClientChannelSinkProvider"));
+                            "IClientChannelSinkProvider"
+                        )
+                    );
                 }
             }
 
             // check to see if something labelled as a formatter is a formatter
             if (entry.IsFormatter)
             {
-                if ((bServer && !typeof(IServerFormatterSinkProvider).IsAssignableFrom(type)) ||
-                    (!bServer && !typeof(IClientFormatterSinkProvider).IsAssignableFrom(type)))
+                if (
+                    (bServer && !typeof(IServerFormatterSinkProvider).IsAssignableFrom(type))
+                    || (!bServer && !typeof(IClientFormatterSinkProvider).IsAssignableFrom(type))
+                )
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Config_SinkProviderNotFormatter"),
-                            type.FullName));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_Config_SinkProviderNotFormatter"
+                            ),
+                            type.FullName
+                        )
+                    );
                 }
-            }                        
-            
+            }
+
             // setup the argument list and call the constructor
             Object[] args = new Object[2];
             args[0] = entry.Properties;
@@ -637,42 +678,51 @@ namespace System.Runtime.Remoting {
 
             try
             {
-                sinkProvider = Activator.CreateInstance(type, 
-                                                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance, 
-                                                        null, 
-                                                        args, 
-                                                        null, 
-                                                        null);
+                sinkProvider = Activator.CreateInstance(
+                    type,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.CreateInstance,
+                    null,
+                    args,
+                    null,
+                    null
+                );
             }
             catch (MissingMethodException)
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Config_SinkProviderMissingCtor"),
-                        type.FullName, 
-                        "MySinkProvider(IDictionary properties, ICollection providerData)"));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Config_SinkProviderMissingCtor"),
+                        type.FullName,
+                        "MySinkProvider(IDictionary properties, ICollection providerData)"
+                    )
+                );
             }
 
             return sinkProvider;
         } // CreateChannelSinkProvider
-        
+
         // This is used at the client end to check if an activation needs
         // to go remote.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static ActivatedClientTypeEntry IsRemotelyActivatedClientType(RuntimeType svrType)
         {
             RemotingTypeCachedData cache = (RemotingTypeCachedData)
                 InternalRemotingServices.GetReflectionCachedData(svrType);
-        
+
             String assemblyName = cache.SimpleAssemblyName;
-            ActivatedClientTypeEntry entry = Info.QueryRemoteActivate(svrType.FullName, assemblyName);
+            ActivatedClientTypeEntry entry = Info.QueryRemoteActivate(
+                svrType.FullName,
+                assemblyName
+            );
 
             if (entry == null)
             {
                 // If not found try with the full assembly name
                 String fullAssemblyName = cache.AssemblyName;
                 entry = Info.QueryRemoteActivate(svrType.FullName, fullAssemblyName);
-                if (entry == null){
+                if (entry == null)
+                {
                     // If still not found try with partial type name (without namespace)
                     entry = Info.QueryRemoteActivate(svrType.Name, assemblyName);
                 }
@@ -680,36 +730,39 @@ namespace System.Runtime.Remoting {
             return entry;
         } // IsRemotelyActivatedClientType
 
-        
         // This is used at the client end to check if an activation needs
         // to go remote.
-        internal static ActivatedClientTypeEntry IsRemotelyActivatedClientType(String typeName, String assemblyName)
+        internal static ActivatedClientTypeEntry IsRemotelyActivatedClientType(
+            String typeName,
+            String assemblyName
+        )
         {
             return Info.QueryRemoteActivate(typeName, assemblyName);
         }
 
-
         // This is used at the client end to check if a "new Foo" needs to
         // happen via a Connect() under the covers.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static WellKnownClientTypeEntry IsWellKnownClientType(RuntimeType svrType)
         {
             RemotingTypeCachedData cache = (RemotingTypeCachedData)
                 InternalRemotingServices.GetReflectionCachedData(svrType);
-        
+
             String assemblyName = cache.SimpleAssemblyName;
             WellKnownClientTypeEntry wke = Info.QueryConnect(svrType.FullName, assemblyName);
             if (wke == null)
             {
-                wke= Info.QueryConnect(svrType.Name, assemblyName);
+                wke = Info.QueryConnect(svrType.Name, assemblyName);
             }
             return wke;
         }
 
         // This is used at the client end to check if a "new Foo" needs to
         // happen via a Connect() under the covers.
-        internal static WellKnownClientTypeEntry IsWellKnownClientType(String typeName, 
-                                                                       String assemblyName)
+        internal static WellKnownClientTypeEntry IsWellKnownClientType(
+            String typeName,
+            String assemblyName
+        )
         {
             return Info.QueryConnect(typeName, assemblyName);
         }
@@ -717,27 +770,36 @@ namespace System.Runtime.Remoting {
         //
         // helper functions for processing and parsing data
         //
-        private static void ParseGenericType(String typeAssem, int indexStart, out String typeName, out String assemName)
+        private static void ParseGenericType(
+            String typeAssem,
+            int indexStart,
+            out String typeName,
+            out String assemName
+        )
         {
             int len = typeAssem.Length;
             int depth = 1;
 
             int index = indexStart;
-            while(depth > 0 && (++index < len - 1))
+            while (depth > 0 && (++index < len - 1))
             {
-                if (typeAssem[index] == '[') {
+                if (typeAssem[index] == '[')
+                {
                     depth++;
                 }
-                else if (typeAssem[index] == ']') {
+                else if (typeAssem[index] == ']')
+                {
                     depth--;
                 }
             }
 
-            if (depth > 0 || index >= len) {
+            if (depth > 0 || index >= len)
+            {
                 typeName = null;
                 assemName = null;
             }
-            else {
+            else
+            {
                 index = typeAssem.IndexOf(',', index);
                 // comma must be present, and can't be last character
                 if ((index >= 0) && (index < (len - 1)))
@@ -756,13 +818,13 @@ namespace System.Runtime.Remoting {
         internal static void ParseType(String typeAssem, out String typeName, out String assemName)
         {
             String value = typeAssem;
-            
+
             int genericTypeIndex = value.IndexOf("[");
             if ((genericTypeIndex >= 0) && (genericTypeIndex < (value.Length - 1)))
             {
                 ParseGenericType(value, genericTypeIndex, out typeName, out assemName);
             }
-            else 
+            else
             {
                 int index = value.IndexOf(",");
 
@@ -779,9 +841,10 @@ namespace System.Runtime.Remoting {
                 }
             }
         } // ParseType
+
         // This is used at the server end to check if a type being activated
         // is explicitly allowed by the server.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static bool IsActivationAllowed(RuntimeType svrType)
         {
             if (svrType == null)
@@ -789,7 +852,7 @@ namespace System.Runtime.Remoting {
 
             RemotingTypeCachedData cache = (RemotingTypeCachedData)
                 InternalRemotingServices.GetReflectionCachedData(svrType);
-        
+
             String assemblyName = cache.SimpleAssemblyName;
 
             return Info.ActivationAllowed(svrType.FullName, assemblyName);
@@ -798,10 +861,12 @@ namespace System.Runtime.Remoting {
         // This is the flavor that we call from the activation listener
         // code path. This ensures that we don't load a type before checking
         // that it is configured for remote activation
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static bool IsActivationAllowed(String TypeName)
         {
-            String svrTypeName = RemotingServices.InternalGetTypeNameFromQualifiedTypeName(TypeName);
+            String svrTypeName = RemotingServices.InternalGetTypeNameFromQualifiedTypeName(
+                TypeName
+            );
             if (svrTypeName == null)
             {
                 return false;
@@ -812,26 +877,24 @@ namespace System.Runtime.Remoting {
             ParseType(svrTypeName, out typeName, out asmName);
             if (asmName == null)
                 return false;
-        
+
             int index = asmName.IndexOf(',');
             if (index != -1)
             {
                 // strip off the version info
-                asmName = asmName.Substring(0,index);
+                asmName = asmName.Substring(0, index);
             }
             return Info.ActivationAllowed(typeName, asmName);
         }
 
         // helper for Configuration::RegisterActivatedServiceType
         internal static void RegisterActivatedServiceType(ActivatedServiceTypeEntry entry)
-        {   
-            Info.AddActivatedType(entry.TypeName, entry.AssemblyName, 
-                                  entry.ContextAttributes);
+        {
+            Info.AddActivatedType(entry.TypeName, entry.AssemblyName, entry.ContextAttributes);
         } // RegisterActivatedServiceType
 
-        
         // helper for Configuration::RegisterWellKnownServiceType
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void RegisterWellKnownServiceType(WellKnownServiceTypeEntry entry)
         {
             BCLDebug.Trace("REMOTE", "Adding well known service type for " + entry.ObjectUri);
@@ -840,15 +903,14 @@ namespace System.Runtime.Remoting {
             String asmName = entry.AssemblyName;
             String URI = entry.ObjectUri;
             WellKnownObjectMode mode = entry.Mode;
-            
+
             lock (Info)
-            {            
+            {
                 // We make an entry in our config tables so as to keep
                 // both the file-based and programmatic config in sync.
                 Info.AddWellKnownEntry(entry);
             }
         } // RegisterWellKnownServiceType
-
 
         // helper for Configuration::RegisterActivatedClientType
         internal static void RegisterActivatedClientType(ActivatedClientTypeEntry entry)
@@ -860,16 +922,16 @@ namespace System.Runtime.Remoting {
         internal static void RegisterWellKnownClientType(WellKnownClientTypeEntry entry)
         {
             Info.AddWellKnownClientType(entry);
-        } 
+        }
 
         //helper for Configuration::GetServerTypeForUri
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Type GetServerTypeForUri(String URI)
         {
             URI = Identity.RemoveAppNameOrAppGuidIfNecessary(URI);
             return Info.GetServerTypeForUri(URI);
         }
-        
+
         // helper for Configuration::GetRegisteredActivatedServiceTypes
         internal static ActivatedServiceTypeEntry[] GetRegisteredActivatedServiceTypes()
         {
@@ -893,34 +955,35 @@ namespace System.Runtime.Remoting {
         {
             return Info.GetRegisteredWellKnownClientTypes();
         } // GetRegisteredWellKnownClientTypes
-        
 
         // helper for creating well known objects on demand
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static ServerIdentity CreateWellKnownObject(String uri)
         {
             uri = Identity.RemoveAppNameOrAppGuidIfNecessary(uri);
             return Info.StartupWellKnownObject(uri);
         }
-        
 
         internal class RemotingConfigInfo
         {
             Hashtable _exportableClasses; // list of objects that can be client-activated
-                                          // (this should be a StringTable since we only use the key,
-                                          //  but that type was removed from the BCL :( )
+
+            // (this should be a StringTable since we only use the key,
+            //  but that type was removed from the BCL :( )
             Hashtable _remoteTypeInfo;
             Hashtable _remoteAppInfo;
-            Hashtable _wellKnownExportInfo; //well known exports indexed by object URI in lower-case            
-          
-            static char[] SepSpace = {' '};
-            static char[] SepPound = {'#'};
-            static char[] SepSemiColon = {';'};
-            static char[] SepEquals = {'='};
+            Hashtable _wellKnownExportInfo; //well known exports indexed by object URI in lower-case
+
+            static char[] SepSpace = { ' ' };
+            static char[] SepPound = { '#' };
+            static char[] SepSemiColon = { ';' };
+            static char[] SepEquals = { '=' };
 
             private static Object s_wkoStartLock = new Object();
-            private static PermissionSet s_fullTrust = new PermissionSet(PermissionState.Unrestricted);
-            
+            private static PermissionSet s_fullTrust = new PermissionSet(
+                PermissionState.Unrestricted
+            );
+
             internal RemotingConfigInfo()
             {
                 // <
@@ -932,14 +995,12 @@ namespace System.Runtime.Remoting {
                 _wellKnownExportInfo = Hashtable.Synchronized(new Hashtable());
             }
 
-
             // encodes type name and assembly name into one string for purposes of
             //   indexing in lists and hash tables
             private String EncodeTypeAndAssemblyNames(String typeName, String assemblyName)
             {
                 return typeName + ", " + assemblyName.ToLower(CultureInfo.InvariantCulture);
             }
-            
 
             //
             // XML Configuration Helper Functions
@@ -947,40 +1008,51 @@ namespace System.Runtime.Remoting {
 
             internal void StoreActivatedExports(RemotingXmlConfigFileData configData)
             {
-                foreach (RemotingXmlConfigFileData.TypeEntry entry in configData.ServerActivatedEntries)
+                foreach (
+                    RemotingXmlConfigFileData.TypeEntry entry in configData.ServerActivatedEntries
+                )
                 {
-                    ActivatedServiceTypeEntry aste =
-                        new ActivatedServiceTypeEntry(entry.TypeName, entry.AssemblyName);
-                    aste.ContextAttributes = 
-                        CreateContextAttributesFromConfigEntries(entry.ContextAttributes);
-                
+                    ActivatedServiceTypeEntry aste = new ActivatedServiceTypeEntry(
+                        entry.TypeName,
+                        entry.AssemblyName
+                    );
+                    aste.ContextAttributes = CreateContextAttributesFromConfigEntries(
+                        entry.ContextAttributes
+                    );
+
                     RemotingConfiguration.RegisterActivatedServiceType(aste);
                 }
             } // StoreActivatedExports
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal void StoreInteropEntries(RemotingXmlConfigFileData configData)
             {
                 // process interop xml element entries
-                foreach (RemotingXmlConfigFileData.InteropXmlElementEntry entry in
-                         configData.InteropXmlElementEntries)
+                foreach (
+                    RemotingXmlConfigFileData.InteropXmlElementEntry entry in configData.InteropXmlElementEntries
+                )
                 {
                     Assembly assembly = Assembly.Load(entry.UrtAssemblyName);
                     Type type = assembly.GetType(entry.UrtTypeName);
-                    SoapServices.RegisterInteropXmlElement(entry.XmlElementName,
-                                                           entry.XmlElementNamespace,
-                                                           type);
+                    SoapServices.RegisterInteropXmlElement(
+                        entry.XmlElementName,
+                        entry.XmlElementNamespace,
+                        type
+                    );
                 }
 
                 // process interop xml type entries
-                foreach (RemotingXmlConfigFileData.InteropXmlTypeEntry entry in
-                         configData.InteropXmlTypeEntries)
+                foreach (
+                    RemotingXmlConfigFileData.InteropXmlTypeEntry entry in configData.InteropXmlTypeEntries
+                )
                 {
                     Assembly assembly = Assembly.Load(entry.UrtAssemblyName);
                     Type type = assembly.GetType(entry.UrtTypeName);
-                    SoapServices.RegisterInteropXmlType(entry.XmlTypeName,
-                                                        entry.XmlTypeNamespace,
-                                                        type);
+                    SoapServices.RegisterInteropXmlType(
+                        entry.XmlTypeName,
+                        entry.XmlTypeNamespace,
+                        type
+                    );
                 }
 
                 // process preload entries
@@ -1002,10 +1074,12 @@ namespace System.Runtime.Remoting {
 
             internal void StoreRemoteAppEntries(RemotingXmlConfigFileData configData)
             {
-                char[] slash = new char[]{'/'};
-            
+                char[] slash = new char[] { '/' };
+
                 // add each remote app to the table
-                foreach (RemotingXmlConfigFileData.RemoteAppEntry remApp in configData.RemoteAppEntries)
+                foreach (
+                    RemotingXmlConfigFileData.RemoteAppEntry remApp in configData.RemoteAppEntries
+                )
                 {
                     // form complete application uri by combining specified uri with app-name
                     //  (make sure appUri ends with slash, and that app name doesn't start,
@@ -1013,69 +1087,81 @@ namespace System.Runtime.Remoting {
                     String appUri = remApp.AppUri;
                     if ((appUri != null) && !appUri.EndsWith("/", StringComparison.Ordinal))
                         appUri = appUri.TrimEnd(slash);
-                        
+
                     // add each client activated type for this remote app
                     foreach (RemotingXmlConfigFileData.TypeEntry cae in remApp.ActivatedObjects)
                     {
-                        ActivatedClientTypeEntry acte = 
-                            new ActivatedClientTypeEntry(cae.TypeName, cae.AssemblyName, 
-                                                         appUri);
-                        acte.ContextAttributes = 
-                            CreateContextAttributesFromConfigEntries(cae.ContextAttributes);
-                   
+                        ActivatedClientTypeEntry acte = new ActivatedClientTypeEntry(
+                            cae.TypeName,
+                            cae.AssemblyName,
+                            appUri
+                        );
+                        acte.ContextAttributes = CreateContextAttributesFromConfigEntries(
+                            cae.ContextAttributes
+                        );
+
                         RemotingConfiguration.RegisterActivatedClientType(acte);
                     }
 
                     // add each well known object for this remote app
-                    foreach (RemotingXmlConfigFileData.ClientWellKnownEntry cwke in remApp.WellKnownObjects)
-                    {                    
-                        WellKnownClientTypeEntry wke = 
-                            new WellKnownClientTypeEntry(cwke.TypeName, cwke.AssemblyName, 
-                                                         cwke.Url);
+                    foreach (
+                        RemotingXmlConfigFileData.ClientWellKnownEntry cwke in remApp.WellKnownObjects
+                    )
+                    {
+                        WellKnownClientTypeEntry wke = new WellKnownClientTypeEntry(
+                            cwke.TypeName,
+                            cwke.AssemblyName,
+                            cwke.Url
+                        );
                         wke.ApplicationUrl = appUri;
-                        
-                        RemotingConfiguration.RegisterWellKnownClientType(wke);
-                    }          
-                }
-            } // StoreRemoteAppEntries            
 
-            [System.Security.SecurityCritical]  // auto-generated
+                        RemotingConfiguration.RegisterWellKnownClientType(wke);
+                    }
+                }
+            } // StoreRemoteAppEntries
+
+            [System.Security.SecurityCritical] // auto-generated
             internal void StoreWellKnownExports(RemotingXmlConfigFileData configData)
             {
                 // <
-            
-                foreach (RemotingXmlConfigFileData.ServerWellKnownEntry entry in configData.ServerWellKnownEntries)
+
+                foreach (
+                    RemotingXmlConfigFileData.ServerWellKnownEntry entry in configData.ServerWellKnownEntries
+                )
                 {
-                    WellKnownServiceTypeEntry wke = 
-                        new WellKnownServiceTypeEntry(
-                            entry.TypeName, entry.AssemblyName, entry.ObjectURI, 
-                            entry.ObjectMode);
+                    WellKnownServiceTypeEntry wke = new WellKnownServiceTypeEntry(
+                        entry.TypeName,
+                        entry.AssemblyName,
+                        entry.ObjectURI,
+                        entry.ObjectMode
+                    );
                     wke.ContextAttributes = null;
-                
+
                     // Register the well known entry but do not startup the object
                     RemotingConfigHandler.RegisterWellKnownServiceType(wke);
                 }
             } // StoreWellKnownExports
-            
 
             // helper functions for above configuration helpers
 
-            static IContextAttribute[] CreateContextAttributesFromConfigEntries(ArrayList contextAttributes)
+            static IContextAttribute[] CreateContextAttributesFromConfigEntries(
+                ArrayList contextAttributes
+            )
             {
                 // create context attribute entry list
                 int numAttrs = contextAttributes.Count;
                 if (numAttrs == 0)
                     return null;
-                
+
                 IContextAttribute[] attrs = new IContextAttribute[numAttrs];
 
                 int co = 0;
                 foreach (RemotingXmlConfigFileData.ContextAttributeEntry cae in contextAttributes)
                 {
-                    Assembly asm = Assembly.Load(cae.AssemblyName);  
+                    Assembly asm = Assembly.Load(cae.AssemblyName);
 
                     IContextAttribute attr = null;
-                    Hashtable properties = cae.Properties;                    
+                    Hashtable properties = cae.Properties;
                     if ((properties != null) && (properties.Count > 0))
                     {
                         Object[] args = new Object[1];
@@ -1085,22 +1171,24 @@ namespace System.Runtime.Remoting {
                         // only attributes
                         attr = (IContextAttribute)
                             Activator.CreateInstance(
-                                asm.GetType(cae.TypeName, false, false), 
-                                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.CreateInstance, 
-                                null, 
-                                args, 
-                                null, 
-                                null);
+                                asm.GetType(cae.TypeName, false, false),
+                                BindingFlags.Instance
+                                    | BindingFlags.Public
+                                    | BindingFlags.NonPublic
+                                    | BindingFlags.CreateInstance,
+                                null,
+                                args,
+                                null,
+                                null
+                            );
                     }
                     else
                     {
                         attr = (IContextAttribute)
-                            Activator.CreateInstance(
-                                asm.GetType(cae.TypeName, false, false), 
-                                true);
+                            Activator.CreateInstance(asm.GetType(cae.TypeName, false, false), true);
                     }
-                    
-                    attrs[co++] = attr; 
+
+                    attrs[co++] = attr;
                 }
 
                 return attrs;
@@ -1113,28 +1201,38 @@ namespace System.Runtime.Remoting {
             internal bool ActivationAllowed(String typeName, String assemblyName)
             {
                 // the assembly name is stored in lower-case to let it be case-insensitive
-                return _exportableClasses.ContainsKey(EncodeTypeAndAssemblyNames(typeName, assemblyName));
+                return _exportableClasses.ContainsKey(
+                    EncodeTypeAndAssemblyNames(typeName, assemblyName)
+                );
             }
 
-            internal ActivatedClientTypeEntry QueryRemoteActivate(String typeName, String assemblyName)
+            internal ActivatedClientTypeEntry QueryRemoteActivate(
+                String typeName,
+                String assemblyName
+            )
             {
                 String index = EncodeTypeAndAssemblyNames(typeName, assemblyName);
-            
-                ActivatedClientTypeEntry typeEntry = _remoteTypeInfo[index] as ActivatedClientTypeEntry;
+
+                ActivatedClientTypeEntry typeEntry =
+                    _remoteTypeInfo[index] as ActivatedClientTypeEntry;
                 if (typeEntry == null)
-                    return null;         
+                    return null;
 
                 if (typeEntry.GetRemoteAppEntry() == null)
                 {
                     RemoteAppEntry appEntry = (RemoteAppEntry)
-                                            _remoteAppInfo[typeEntry.ApplicationUrl];
+                        _remoteAppInfo[typeEntry.ApplicationUrl];
                     if (appEntry == null)
                     {
                         throw new RemotingException(
-                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Activation_MissingRemoteAppEntry"),
-                            typeEntry.ApplicationUrl));                            
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                Environment.GetResourceString(
+                                    "Remoting_Activation_MissingRemoteAppEntry"
+                                ),
+                                typeEntry.ApplicationUrl
+                            )
+                        );
                     }
                     typeEntry.CacheRemoteAppEntry(appEntry);
                 }
@@ -1144,57 +1242,59 @@ namespace System.Runtime.Remoting {
             internal WellKnownClientTypeEntry QueryConnect(String typeName, String assemblyName)
             {
                 String index = EncodeTypeAndAssemblyNames(typeName, assemblyName);
-                
-                WellKnownClientTypeEntry typeEntry = _remoteTypeInfo[index] as WellKnownClientTypeEntry;
+
+                WellKnownClientTypeEntry typeEntry =
+                    _remoteTypeInfo[index] as WellKnownClientTypeEntry;
                 if (typeEntry == null)
                     return null;
-                    
+
                 return typeEntry;
-            }       
-          
+            }
+
             //
             // helper functions to retrieve registered types
             //
 
-
             internal ActivatedServiceTypeEntry[] GetRegisteredActivatedServiceTypes()
             {
-                ActivatedServiceTypeEntry[] entries =
-                    new ActivatedServiceTypeEntry[_exportableClasses.Count];
+                ActivatedServiceTypeEntry[] entries = new ActivatedServiceTypeEntry[
+                    _exportableClasses.Count
+                ];
 
                 int co = 0;
                 foreach (DictionaryEntry dictEntry in _exportableClasses)
                 {
                     entries[co++] = (ActivatedServiceTypeEntry)dictEntry.Value;
                 }
-                    
+
                 return entries;
             } // GetRegisteredActivatedServiceTypes
 
-
             internal WellKnownServiceTypeEntry[] GetRegisteredWellKnownServiceTypes()
             {
-                WellKnownServiceTypeEntry[] entries =
-                    new WellKnownServiceTypeEntry[_wellKnownExportInfo.Count];
+                WellKnownServiceTypeEntry[] entries = new WellKnownServiceTypeEntry[
+                    _wellKnownExportInfo.Count
+                ];
 
                 int co = 0;
                 foreach (DictionaryEntry dictEntry in _wellKnownExportInfo)
                 {
                     WellKnownServiceTypeEntry entry = (WellKnownServiceTypeEntry)dictEntry.Value;
-                    
-                    WellKnownServiceTypeEntry wkste =
-                        new WellKnownServiceTypeEntry(
-                            entry.TypeName, entry.AssemblyName,
-                            entry.ObjectUri, entry.Mode);
+
+                    WellKnownServiceTypeEntry wkste = new WellKnownServiceTypeEntry(
+                        entry.TypeName,
+                        entry.AssemblyName,
+                        entry.ObjectUri,
+                        entry.Mode
+                    );
 
                     wkste.ContextAttributes = entry.ContextAttributes;
-                    
+
                     entries[co++] = wkste;
                 }
-                    
+
                 return entries;
             } // GetRegisteredWellKnownServiceTypes
-
 
             internal ActivatedClientTypeEntry[] GetRegisteredActivatedClientTypes()
             {
@@ -1202,13 +1302,12 @@ namespace System.Runtime.Remoting {
                 int count = 0;
                 foreach (DictionaryEntry dictEntry in _remoteTypeInfo)
                 {
-                    ActivatedClientTypeEntry entry = dictEntry.Value as ActivatedClientTypeEntry;                
+                    ActivatedClientTypeEntry entry = dictEntry.Value as ActivatedClientTypeEntry;
                     if (entry != null)
                         count++;
                 }
-                            
-                ActivatedClientTypeEntry[] entries =
-                    new ActivatedClientTypeEntry[count];
+
+                ActivatedClientTypeEntry[] entries = new ActivatedClientTypeEntry[count];
 
                 int co = 0;
                 foreach (DictionaryEntry dictEntry in _remoteTypeInfo)
@@ -1221,23 +1320,23 @@ namespace System.Runtime.Remoting {
                         String appUrl = null;
                         RemoteAppEntry remApp = entry.GetRemoteAppEntry();
                         if (remApp != null)
-                            appUrl = remApp.GetAppURI();  
-                    
-                        ActivatedClientTypeEntry wkcte =
-                            new ActivatedClientTypeEntry(entry.TypeName, 
-                                entry.AssemblyName, appUrl);
-                        
+                            appUrl = remApp.GetAppURI();
+
+                        ActivatedClientTypeEntry wkcte = new ActivatedClientTypeEntry(
+                            entry.TypeName,
+                            entry.AssemblyName,
+                            appUrl
+                        );
+
                         // Fetch the context attributes
                         wkcte.ContextAttributes = entry.ContextAttributes;
 
                         entries[co++] = wkcte;
                     }
-                    
                 }
-                   
+
                 return entries;
             } // GetRegisteredActivatedClientTypes
-            
 
             internal WellKnownClientTypeEntry[] GetRegisteredWellKnownClientTypes()
             {
@@ -1245,13 +1344,12 @@ namespace System.Runtime.Remoting {
                 int count = 0;
                 foreach (DictionaryEntry dictEntry in _remoteTypeInfo)
                 {
-                    WellKnownClientTypeEntry entry = dictEntry.Value as WellKnownClientTypeEntry;                
+                    WellKnownClientTypeEntry entry = dictEntry.Value as WellKnownClientTypeEntry;
                     if (entry != null)
                         count++;
                 }
-                            
-                WellKnownClientTypeEntry[] entries =
-                    new WellKnownClientTypeEntry[count];
+
+                WellKnownClientTypeEntry[] entries = new WellKnownClientTypeEntry[count];
 
                 int co = 0;
                 foreach (DictionaryEntry dictEntry in _remoteTypeInfo)
@@ -1259,31 +1357,34 @@ namespace System.Runtime.Remoting {
                     WellKnownClientTypeEntry entry = dictEntry.Value as WellKnownClientTypeEntry;
 
                     if (entry != null)
-                    {                    
-                        WellKnownClientTypeEntry wkcte =
-                            new WellKnownClientTypeEntry(entry.TypeName, 
-                                entry.AssemblyName, entry.ObjectUrl);
+                    {
+                        WellKnownClientTypeEntry wkcte = new WellKnownClientTypeEntry(
+                            entry.TypeName,
+                            entry.AssemblyName,
+                            entry.ObjectUrl
+                        );
 
                         // see if there is an associated app
                         RemoteAppEntry remApp = entry.GetRemoteAppEntry();
                         if (remApp != null)
-                            wkcte.ApplicationUrl = remApp.GetAppURI();                             
+                            wkcte.ApplicationUrl = remApp.GetAppURI();
 
                         entries[co++] = wkcte;
                     }
-                    
                 }
-                   
+
                 return entries;
             } // GetRegisteredWellKnownClientTypes
-
 
             //
             // end of helper functions to retrieve registered types
             //
 
-            internal void AddActivatedType(String typeName, String assemblyName,
-                                           IContextAttribute[] contextAttributes)
+            internal void AddActivatedType(
+                String typeName,
+                String assemblyName,
+                IContextAttribute[] contextAttributes
+            )
             {
                 if (typeName == null)
                     throw new ArgumentNullException("typeName");
@@ -1295,47 +1396,60 @@ namespace System.Runtime.Remoting {
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Config_CantUseRedirectedTypeForWellKnownService"),
-                            typeName, assemblyName));
-                }                                
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_Config_CantUseRedirectedTypeForWellKnownService"
+                            ),
+                            typeName,
+                            assemblyName
+                        )
+                    );
+                }
 
-                ActivatedServiceTypeEntry aste =  
-                    new ActivatedServiceTypeEntry(typeName, assemblyName);
+                ActivatedServiceTypeEntry aste = new ActivatedServiceTypeEntry(
+                    typeName,
+                    assemblyName
+                );
                 aste.ContextAttributes = contextAttributes;
-            
+
                 //   The assembly name is stored in lowercase to let it be case-insensitive.
                 String key = EncodeTypeAndAssemblyNames(typeName, assemblyName);
                 _exportableClasses.Add(key, aste);
             } // AddActivatedType
 
-
             // determines if either a wellknown or activated service type entry
             //   is associated with the given type name and assembly name
             private bool CheckForServiceEntryWithType(String typeName, String asmName)
-            {  
-                return
-                    CheckForWellKnownServiceEntryWithType(typeName, asmName) ||
-                    ActivationAllowed(typeName, asmName);                 
+            {
+                return CheckForWellKnownServiceEntryWithType(typeName, asmName)
+                    || ActivationAllowed(typeName, asmName);
             } // CheckForServiceEntryWithType
 
             private bool CheckForWellKnownServiceEntryWithType(String typeName, String asmName)
             {
                 foreach (DictionaryEntry entry in _wellKnownExportInfo)
                 {
-                    WellKnownServiceTypeEntry svc = 
-                        (WellKnownServiceTypeEntry)entry.Value;
+                    WellKnownServiceTypeEntry svc = (WellKnownServiceTypeEntry)entry.Value;
                     if (typeName == svc.TypeName)
                     {
                         bool match = false;
-                        
+
                         // need to ignore version while checking
                         if (asmName == svc.AssemblyName)
                             match = true;
                         else
                         {
                             // only well known service entry can have version info
-                            if (String.Compare(svc.AssemblyName, 0, asmName, 0, asmName.Length, StringComparison.OrdinalIgnoreCase) == 0)
+                            if (
+                                String.Compare(
+                                    svc.AssemblyName,
+                                    0,
+                                    asmName,
+                                    0,
+                                    asmName.Length,
+                                    StringComparison.OrdinalIgnoreCase
+                                ) == 0
+                            )
                             {
                                 // if asmName != svc.AssemblyName and svc.AssemblyName
                                 //   starts with asmName we know that svc.AssemblyName is
@@ -1356,7 +1470,6 @@ namespace System.Runtime.Remoting {
                 return false;
             } // CheckForWellKnownServiceEntryOfType
 
-
             // returns true if activation for the type has been redirected.
             private bool CheckForRedirectedClientType(String typeName, String asmName)
             {
@@ -1365,11 +1478,9 @@ namespace System.Runtime.Remoting {
                 if (index != -1)
                     asmName = asmName.Substring(0, index);
 
-                return 
-                    (QueryRemoteActivate(typeName, asmName) != null) ||
-                    (QueryConnect(typeName, asmName) != null);
+                return (QueryRemoteActivate(typeName, asmName) != null)
+                    || (QueryConnect(typeName, asmName) != null);
             } // CheckForRedirectedClientType
-            
 
             internal void AddActivatedClientType(ActivatedClientTypeEntry entry)
             {
@@ -1377,20 +1488,28 @@ namespace System.Runtime.Remoting {
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Config_TypeAlreadyRedirected"),
-                            entry.TypeName, entry.AssemblyName));
-                }                 
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Config_TypeAlreadyRedirected"),
+                            entry.TypeName,
+                            entry.AssemblyName
+                        )
+                    );
+                }
 
                 if (CheckForServiceEntryWithType(entry.TypeName, entry.AssemblyName))
                 {
-                   throw new RemotingException(
-                       String.Format(
-                           CultureInfo.CurrentCulture, Environment.GetResourceString(
-                               "Remoting_Config_CantRedirectActivationOfWellKnownService"),
-                           entry.TypeName, entry.AssemblyName));
+                    throw new RemotingException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_Config_CantRedirectActivationOfWellKnownService"
+                            ),
+                            entry.TypeName,
+                            entry.AssemblyName
+                        )
+                    );
                 }
-            
+
                 String appUrl = entry.ApplicationUrl;
                 RemoteAppEntry appEntry = (RemoteAppEntry)_remoteAppInfo[appUrl];
                 if (appEntry == null)
@@ -1398,16 +1517,15 @@ namespace System.Runtime.Remoting {
                     appEntry = new RemoteAppEntry(appUrl, appUrl);
                     _remoteAppInfo.Add(appUrl, appEntry);
                 }
-                    
+
                 if (appEntry != null)
                 {
                     entry.CacheRemoteAppEntry(appEntry);
                 }
-                    
+
                 String index = EncodeTypeAndAssemblyNames(entry.TypeName, entry.AssemblyName);
                 _remoteTypeInfo.Add(index, entry);
             } // AddActivatedClientType
-
 
             internal void AddWellKnownClientType(WellKnownClientTypeEntry entry)
             {
@@ -1415,21 +1533,28 @@ namespace System.Runtime.Remoting {
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Config_TypeAlreadyRedirected"),
-                            entry.TypeName, entry.AssemblyName));
-                }    
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Config_TypeAlreadyRedirected"),
+                            entry.TypeName,
+                            entry.AssemblyName
+                        )
+                    );
+                }
 
                 if (CheckForServiceEntryWithType(entry.TypeName, entry.AssemblyName))
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Config_CantRedirectActivationOfWellKnownService"),
-                            entry.TypeName, entry.AssemblyName));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_Config_CantRedirectActivationOfWellKnownService"
+                            ),
+                            entry.TypeName,
+                            entry.AssemblyName
+                        )
+                    );
                 }
-            
-            
+
                 String appUrl = entry.ApplicationUrl;
 
                 RemoteAppEntry appEntry = null;
@@ -1442,38 +1567,41 @@ namespace System.Runtime.Remoting {
                         _remoteAppInfo.Add(appUrl, appEntry);
                     }
                 }
-            
+
                 if (appEntry != null)
                     entry.CacheRemoteAppEntry(appEntry);
 
                 String index = EncodeTypeAndAssemblyNames(entry.TypeName, entry.AssemblyName);
                 _remoteTypeInfo.Add(index, entry);
             } // AddWellKnownClientType
-            
-            
 
             // This is to add programmatically registered well known objects
             // so that we keep all this data in one place
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal void AddWellKnownEntry(WellKnownServiceTypeEntry entry)
             {
-                AddWellKnownEntry(entry, true);                
+                AddWellKnownEntry(entry, true);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal void AddWellKnownEntry(WellKnownServiceTypeEntry entry, bool fReplace)
             {
                 if (CheckForRedirectedClientType(entry.TypeName, entry.AssemblyName))
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Config_CantUseRedirectedTypeForWellKnownService"),
-                            entry.TypeName, entry.AssemblyName));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString(
+                                "Remoting_Config_CantUseRedirectedTypeForWellKnownService"
+                            ),
+                            entry.TypeName,
+                            entry.AssemblyName
+                        )
+                    );
                 }
-            
+
                 String key = entry.ObjectUri.ToLower(CultureInfo.InvariantCulture);
-                
+
                 if (fReplace)
                 {
                     // Registering a well known object twice replaces the old one, so
@@ -1488,11 +1616,10 @@ namespace System.Runtime.Remoting {
                 {
                     _wellKnownExportInfo.Add(key, entry);
                 }
-
             }
 
             //This API exposes a way to get server type information wiihout booting the object
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal Type GetServerTypeForUri(String URI)
             {
                 Contract.Assert(null != URI, "null != URI");
@@ -1500,68 +1627,77 @@ namespace System.Runtime.Remoting {
                 Type serverType = null;
                 String uriLower = URI.ToLower(CultureInfo.InvariantCulture);
 
-                WellKnownServiceTypeEntry entry = 
-                        (WellKnownServiceTypeEntry)_wellKnownExportInfo[uriLower];
+                WellKnownServiceTypeEntry entry = (WellKnownServiceTypeEntry)
+                    _wellKnownExportInfo[uriLower];
 
-                if(entry != null)
+                if (entry != null)
                 {
                     serverType = LoadType(entry.TypeName, entry.AssemblyName);
                 }
 
                 return serverType;
             }
-            
-            [System.Security.SecurityCritical]  // auto-generated
+
+            [System.Security.SecurityCritical] // auto-generated
             internal ServerIdentity StartupWellKnownObject(String URI)
             {
                 Contract.Assert(null != URI, "null != URI");
-                
+
                 String uriLower = URI.ToLower(CultureInfo.InvariantCulture);
                 ServerIdentity ident = null;
 
-                WellKnownServiceTypeEntry entry = 
-                    (WellKnownServiceTypeEntry)_wellKnownExportInfo[uriLower];
+                WellKnownServiceTypeEntry entry = (WellKnownServiceTypeEntry)
+                    _wellKnownExportInfo[uriLower];
                 if (entry != null)
                 {
                     ident = StartupWellKnownObject(
                         entry.AssemblyName,
                         entry.TypeName,
                         entry.ObjectUri,
-                        entry.Mode);
-
+                        entry.Mode
+                    );
                 }
 
                 return ident;
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal ServerIdentity StartupWellKnownObject(
-                String asmName, String svrTypeName, String URI, 
-                WellKnownObjectMode mode)
+                String asmName,
+                String svrTypeName,
+                String URI,
+                WellKnownObjectMode mode
+            )
             {
                 return StartupWellKnownObject(asmName, svrTypeName, URI, mode, false);
             }
 
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal ServerIdentity StartupWellKnownObject(
-                String asmName, String svrTypeName, String URI, 
+                String asmName,
+                String svrTypeName,
+                String URI,
                 WellKnownObjectMode mode,
-                bool fReplace)
+                bool fReplace
+            )
             {
                 lock (s_wkoStartLock)
-                {                
+                {
                     MarshalByRefObject obj = null;
                     ServerIdentity srvID = null;
 
-                    // attempt to load the type                
+                    // attempt to load the type
                     Type serverType = LoadType(svrTypeName, asmName);
-                
+
                     // make sure the well known object derives from MarshalByRefObject
-                    if(!serverType.IsMarshalByRef)
-                    {   
+                    if (!serverType.IsMarshalByRef)
+                    {
                         throw new RemotingException(
-                            Environment.GetResourceString("Remoting_WellKnown_MustBeMBR",
-                            svrTypeName));                         
+                            Environment.GetResourceString(
+                                "Remoting_WellKnown_MustBeMBR",
+                                svrTypeName
+                            )
+                        );
                     }
 
                     // make sure that no one beat us to creating
@@ -1572,17 +1708,18 @@ namespace System.Runtime.Remoting {
                         IdentityHolder.RemoveIdentity(URI);
                         srvID = null;
                     }
-                                        
+
                     if (srvID == null)
-                    {                    
+                    {
                         //WellKnown type instances need to be created under full trust
-                        //since the permission set might have been restricted by the channel 
-                        //pipeline.           
+                        //since the permission set might have been restricted by the channel
+                        //pipeline.
                         //This assert is protected by Infrastructure link demands.
-                        s_fullTrust.Assert();                
-                        try {                    
+                        s_fullTrust.Assert();
+                        try
+                        {
                             obj = (MarshalByRefObject)Activator.CreateInstance(serverType, true);
-                                                 
+
                             if (RemotingServices.IsClientProxy(obj))
                             {
                                 // The wellknown type is remoted so we must wrap the proxy
@@ -1590,13 +1727,22 @@ namespace System.Runtime.Remoting {
 
                                 // The redirection proxy masquerades as an object of the appropriate
                                 // type, and forwards incoming messages to the actual proxy.
-                                RedirectionProxy redirectedProxy = new RedirectionProxy(obj, serverType);
+                                RedirectionProxy redirectedProxy = new RedirectionProxy(
+                                    obj,
+                                    serverType
+                                );
                                 redirectedProxy.ObjectMode = mode;
 
                                 // DevDiv 720951 and 911924:
                                 // 'isInitializing' is propagated into the new ServerIdentity so that other concurrent
                                 // operations that find it in URITable do not use it prematurely.
-                                RemotingServices.MarshalInternal(redirectedProxy, URI, serverType, updateChannelData: true, isInitializing: true);
+                                RemotingServices.MarshalInternal(
+                                    redirectedProxy,
+                                    URI,
+                                    serverType,
+                                    updateChannelData: true,
+                                    isInitializing: true
+                                );
 
                                 srvID = (ServerIdentity)IdentityHolder.ResolveIdentity(URI);
                                 Contract.Assert(null != srvID, "null != srvID");
@@ -1605,16 +1751,26 @@ namespace System.Runtime.Remoting {
                                 // so we always set its mode to Singleton.
                                 srvID.SetSingletonObjectMode();
                             }
-                            else
-                            if (serverType.IsCOMObject && (mode == WellKnownObjectMode.Singleton))
+                            else if (
+                                serverType.IsCOMObject && (mode == WellKnownObjectMode.Singleton)
+                            )
                             {
                                 // Singleton COM objects are wrapped, so that they will be
                                 //   recreated when an RPC server not available is thrown
                                 //   if dllhost.exe is killed.
-                                ComRedirectionProxy comRedirectedProxy = new ComRedirectionProxy(obj, serverType);
+                                ComRedirectionProxy comRedirectedProxy = new ComRedirectionProxy(
+                                    obj,
+                                    serverType
+                                );
 
                                 // DevDiv 720951 and 911924: isInitializing = true
-                                RemotingServices.MarshalInternal(comRedirectedProxy, URI, serverType, updateChannelData: true, isInitializing: true);
+                                RemotingServices.MarshalInternal(
+                                    comRedirectedProxy,
+                                    URI,
+                                    serverType,
+                                    updateChannelData: true,
+                                    isInitializing: true
+                                );
 
                                 srvID = (ServerIdentity)IdentityHolder.ResolveIdentity(URI);
                                 Contract.Assert(null != srvID, "null != srvID");
@@ -1630,13 +1786,23 @@ namespace System.Runtime.Remoting {
                                 {
                                     throw new RemotingException(
                                         String.Format(
-                                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                                "Remoting_WellKnown_CtorCantMarshal"),
-                                            URI));
+                                            CultureInfo.CurrentCulture,
+                                            Environment.GetResourceString(
+                                                "Remoting_WellKnown_CtorCantMarshal"
+                                            ),
+                                            URI
+                                        )
+                                    );
                                 }
 
                                 // DevDiv 720951 and 911924: isInitializing = true
-                                RemotingServices.MarshalInternal(obj, URI, serverType, updateChannelData: true, isInitializing: true);
+                                RemotingServices.MarshalInternal(
+                                    obj,
+                                    URI,
+                                    serverType,
+                                    updateChannelData: true,
+                                    isInitializing: true
+                                );
 
                                 srvID = (ServerIdentity)IdentityHolder.ResolveIdentity(URI);
                                 Contract.Assert(null != srvID, "null != srvID");
@@ -1644,7 +1810,7 @@ namespace System.Runtime.Remoting {
                                 if (mode == WellKnownObjectMode.SingleCall)
                                 {
                                     // We need to set a special flag in the serverId
-                                    // so that every dispatch to this type creates 
+                                    // so that every dispatch to this type creates
                                     // a new instance of the server object
                                     srvID.SetSingleCallObjectMode();
                                 }
@@ -1653,7 +1819,6 @@ namespace System.Runtime.Remoting {
                                     srvID.SetSingletonObjectMode();
                                 }
                             }
-
                         }
                         catch
                         {
@@ -1667,8 +1832,8 @@ namespace System.Runtime.Remoting {
                             // and lack of customer reports of a problem, we chose not to fix it.
                             throw;
                         }
-                        finally {
-
+                        finally
+                        {
                             // DevDiv 720951 and 911924:
                             // This flag is cleared only after the new ServerIdentity is completely
                             // initialized and ready for use.  It is done here in the 'finally' to
@@ -1681,54 +1846,53 @@ namespace System.Runtime.Remoting {
                             SecurityPermission.RevertAssert();
                         }
                     }
-                    
+
                     Contract.Assert(null != srvID, "null != srvID");
                     return srvID;
                 }
             } // StartupWellKnownObject
 
-
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             internal static Type LoadType(String typeName, String assemblyName)
             {
-                Assembly asm = null;                                               
-                // All the LoadType callers have been protected by 
+                Assembly asm = null;
+                // All the LoadType callers have been protected by
                 // Infrastructure LinkDemand, it is safe to assert
-                // this permission. 
-                // Assembly.Load demands FileIO when the target 
+                // this permission.
+                // Assembly.Load demands FileIO when the target
                 // assembly is the same as the executable running.
                 new FileIOPermission(PermissionState.Unrestricted).Assert();
-                try {                    
+                try
+                {
                     asm = Assembly.Load(assemblyName);
                 }
-                finally {
+                finally
+                {
                     CodeAccessPermission.RevertAssert();
                 }
-                
+
                 if (asm == null)
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString("Remoting_AssemblyLoadFailed",
-                        assemblyName));                    
+                        Environment.GetResourceString("Remoting_AssemblyLoadFailed", assemblyName)
+                    );
                 }
 
                 Type type = asm.GetType(typeName, false, false);
                 if (type == null)
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString("Remoting_BadType",
-                        typeName + ", " + assemblyName));     
+                        Environment.GetResourceString(
+                            "Remoting_BadType",
+                            typeName + ", " + assemblyName
+                        )
+                    );
                 }
 
                 return type;
             } // LoadType
-
-
-            
-        }// class RemotingConfigInfo        
+        } // class RemotingConfigInfo
     } // class RemotingConfigHandler
-
-
 
     internal class DelayLoadClientChannelEntry
     {
@@ -1737,27 +1901,31 @@ namespace System.Runtime.Remoting {
         private bool _bRegistered;
         private bool _ensureSecurity;
 
-        internal DelayLoadClientChannelEntry(RemotingXmlConfigFileData.ChannelEntry entry, bool ensureSecurity)
+        internal DelayLoadClientChannelEntry(
+            RemotingXmlConfigFileData.ChannelEntry entry,
+            bool ensureSecurity
+        )
         {
             _entry = entry;
-            _channel = null;      
+            _channel = null;
             _bRegistered = false;
             _ensureSecurity = ensureSecurity;
         }
 
         internal IChannelSender Channel
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 // If this method returns null, that means the channel has already been registered.
-        
+
                 // NOTE: Access to delay load client entries is synchronized at a higher level.
                 if (_channel == null)
                 {
                     if (!_bRegistered)
                     {
-                        _channel = (IChannelSender)RemotingConfigHandler.CreateChannelFromConfigEntry(_entry);
+                        _channel = (IChannelSender)
+                            RemotingConfigHandler.CreateChannelFromConfigEntry(_entry);
                         _entry = null;
                     }
                 }
@@ -1769,16 +1937,11 @@ namespace System.Runtime.Remoting {
         internal void RegisterChannel()
         {
             Contract.Assert(_channel != null, "channel shouldn't be null");
-        
+
             // NOTE: Access to delay load client entries is synchronized at a higher level.
             ChannelServices.RegisterChannel(_channel, _ensureSecurity);
             _bRegistered = true;
             _channel = null;
         } // RegisterChannel
-        
     } // class DelayLoadChannelEntry
-
-    
-
 } // namespace
-

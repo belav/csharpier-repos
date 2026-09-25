@@ -13,8 +13,10 @@ namespace System.ServiceModel
     {
         internal static bool IsDefined(BasicHttpMessageCredentialType value)
         {
-            return (value == BasicHttpMessageCredentialType.UserName ||
-                value == BasicHttpMessageCredentialType.Certificate);
+            return (
+                value == BasicHttpMessageCredentialType.UserName
+                || value == BasicHttpMessageCredentialType.Certificate
+            );
         }
     }
 }

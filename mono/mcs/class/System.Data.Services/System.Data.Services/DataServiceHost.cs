@@ -28,12 +28,12 @@
 
 using System.ServiceModel.Web;
 
-namespace System.Data.Services {
-	[CLSCompliant (false)]
-	public class DataServiceHost : WebServiceHost {
-		public DataServiceHost (Type serviceType, Uri[] baseAddresses)
-			: base (serviceType, baseAddresses)
-		{
-		}
-	}
+namespace System.Data.Services
+{
+    [CLSCompliant(false)]
+    public class DataServiceHost : WebServiceHost
+    {
+        public DataServiceHost(Type serviceType, Uri[] baseAddresses)
+            : base(serviceType, baseAddresses) { }
+    }
 }

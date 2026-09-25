@@ -34,14 +34,8 @@ namespace Newtonsoft.Json.Tests.TestObjects
 
         public ExistingValueClass()
         {
-            Dictionary = new Dictionary<string, string>
-            {
-                { "existing", "yup" }
-            };
-            List = new List<string>
-            {
-                "existing"
-            };
+            Dictionary = new Dictionary<string, string> { { "existing", "yup" } };
+            List = new List<string> { "existing" };
         }
     }
 }

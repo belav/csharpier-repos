@@ -7,13 +7,10 @@ public class ManyToManyTrackingSqlServerTest
     : ManyToManyTrackingSqlServerTestBase<ManyToManyTrackingSqlServerTest.ManyToManyTrackingSqlServerFixture>
 {
     public ManyToManyTrackingSqlServerTest(ManyToManyTrackingSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class ManyToManyTrackingSqlServerFixture : ManyToManyTrackingSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "ManyToManyTrackingSqlServerTest";
+        protected override string StoreName => "ManyToManyTrackingSqlServerTest";
     }
 }

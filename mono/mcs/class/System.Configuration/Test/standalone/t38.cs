@@ -3,62 +3,70 @@ using System.Configuration;
 
 public class MyElement : ConfigurationElement
 {
-	public MyElement ()
-	{
-	}
+    public MyElement() { }
 
-	[ConfigurationProperty ("name", Options = ConfigurationPropertyOptions.IsKey)]
-	public string Name {
-		get { return (string) this ["name"]; }
-	}
-	[ConfigurationProperty ("value")]
-	public string Value {
-		get { return (string) this ["value"]; }
-	}
+    [ConfigurationProperty("name", Options = ConfigurationPropertyOptions.IsKey)]
+    public string Name
+    {
+        get { return (string)this["name"]; }
+    }
+
+    [ConfigurationProperty("value")]
+    public string Value
+    {
+        get { return (string)this["value"]; }
+    }
 }
 
-[ConfigurationCollection (typeof (MyElement), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+[ConfigurationCollection(
+    typeof(MyElement),
+    CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+)]
 public class MyElementCollection : ConfigurationElementCollection
 {
-	protected override ConfigurationElement CreateNewElement ()
-	{
-		return new MyElement ();
-	}
-	protected override object GetElementKey (ConfigurationElement e)
-	{
-		return ((MyElement) e).Name;
-	}
+    protected override ConfigurationElement CreateNewElement()
+    {
+        return new MyElement();
+    }
 
-	public void Add (MyElement e)
-	{
-		BaseAdd (e);
-	}
+    protected override object GetElementKey(ConfigurationElement e)
+    {
+        return ((MyElement)e).Name;
+    }
 
-	protected override void BaseAdd (ConfigurationElement e)
-	{
-		base.BaseAdd (e);
-	}
+    public void Add(MyElement e)
+    {
+        BaseAdd(e);
+    }
+
+    protected override void BaseAdd(ConfigurationElement e)
+    {
+        base.BaseAdd(e);
+    }
 }
 
 public class MySection : ConfigurationSection
 {
-	[ConfigurationProperty ("MyElements")]
-	public MyElementCollection MyElements {
-		get { return (MyElementCollection) this ["MyElements"]; }
-	}
+    [ConfigurationProperty("MyElements")]
+    public MyElementCollection MyElements
+    {
+        get { return (MyElementCollection)this["MyElements"]; }
+    }
 }
 
 public class Driver
 {
-	public static void Main ()
-	{
-		try {
-			MySection ms = (MySection) ConfigurationManager.GetSection ("MySection");
-			foreach (MyElement e in ms.MyElements)
-				Console.WriteLine (e.Name);
-		} catch (ConfigurationException ex) {
-			Console.WriteLine ("Configuration error");
-		}
-	}
+    public static void Main()
+    {
+        try
+        {
+            MySection ms = (MySection)ConfigurationManager.GetSection("MySection");
+            foreach (MyElement e in ms.MyElements)
+                Console.WriteLine(e.Name);
+        }
+        catch (ConfigurationException ex)
+        {
+            Console.WriteLine("Configuration error");
+        }
+    }
 }
-

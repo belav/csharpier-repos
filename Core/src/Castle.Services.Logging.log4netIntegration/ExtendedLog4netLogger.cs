@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,66 +14,64 @@
 
 namespace Castle.Services.Logging.Log4netIntegration
 {
-	using System;
+    using System;
+    using Castle.Core.Logging;
+    using log4net;
+    using ExtendedLogger = Castle.Core.Logging.IExtendedLogger;
+    using ILogger = log4net.Core.ILogger;
+    using Logger = Castle.Core.Logging.ILogger;
 
-	using Castle.Core.Logging;
+    public class ExtendedLog4netLogger : Log4netLogger, ExtendedLogger
+    {
+        private static readonly IContextProperties globalContextProperties =
+            new GlobalContextProperties();
+        private static readonly IContextProperties threadContextProperties =
+            new ThreadContextProperties();
+        private static readonly IContextStacks threadContextStacks = new ThreadContextStacks();
 
-	using log4net;
+        public ExtendedLog4netLogger(ILog log, ExtendedLog4netFactory factory)
+            : this(log.Logger, factory) { }
 
-	using ILogger = log4net.Core.ILogger;
-	using Logger = Castle.Core.Logging.ILogger;
-	using ExtendedLogger = Castle.Core.Logging.IExtendedLogger;
+        public ExtendedLog4netLogger(ILogger logger, ExtendedLog4netFactory factory)
+        {
+            Logger = logger;
+            Factory = factory;
+        }
 
-	public class ExtendedLog4netLogger : Log4netLogger, ExtendedLogger
-	{
-		private static readonly IContextProperties globalContextProperties = new GlobalContextProperties();
-		private static readonly IContextProperties threadContextProperties = new ThreadContextProperties();
-		private static readonly IContextStacks threadContextStacks = new ThreadContextStacks();
+        /// <summary>
+        ///   Exposes the Global Context of the extended logger.
+        /// </summary>
+        public IContextProperties GlobalProperties
+        {
+            get { return globalContextProperties; }
+        }
 
-		public ExtendedLog4netLogger(ILog log, ExtendedLog4netFactory factory) : this(log.Logger, factory)
-		{
-		}
+        /// <summary>
+        ///   Exposes the Thread Context of the extended logger.
+        /// </summary>
+        public IContextProperties ThreadProperties
+        {
+            get { return threadContextProperties; }
+        }
 
-		public ExtendedLog4netLogger(ILogger logger, ExtendedLog4netFactory factory)
-		{
-			Logger = logger;
-			Factory = factory;
-		}
+        /// <summary>
+        ///   Exposes the Thread Stack of the extended logger.
+        /// </summary>
+        public IContextStacks ThreadStacks
+        {
+            get { return threadContextStacks; }
+        }
 
-		/// <summary>
-		///   Exposes the Global Context of the extended logger.
-		/// </summary>
-		public IContextProperties GlobalProperties
-		{
-			get { return globalContextProperties; }
-		}
+        protected internal new ExtendedLog4netFactory Factory { get; set; }
 
-		/// <summary>
-		///   Exposes the Thread Context of the extended logger.
-		/// </summary>
-		public IContextProperties ThreadProperties
-		{
-			get { return threadContextProperties; }
-		}
+        public ExtendedLogger CreateExtendedChildLogger(string name)
+        {
+            return Factory.Create(Logger.Name + "." + name);
+        }
 
-		/// <summary>
-		///   Exposes the Thread Stack of the extended logger.
-		/// </summary>
-		public IContextStacks ThreadStacks
-		{
-			get { return threadContextStacks; }
-		}
-
-		protected internal new ExtendedLog4netFactory Factory { get; set; }
-
-		public ExtendedLogger CreateExtendedChildLogger(string name)
-		{
-			return Factory.Create(Logger.Name + "." + name);
-		}
-
-		public override Logger CreateChildLogger(string name)
-		{
-			return CreateExtendedChildLogger(name);
-		}
-	}
+        public override Logger CreateChildLogger(string name)
+        {
+            return CreateExtendedChildLogger(name);
+        }
+    }
 }

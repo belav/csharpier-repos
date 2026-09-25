@@ -9,10 +9,10 @@ namespace System
     public static class DateTimeTestHelpers
     {
         // Fixed DateTimeOffset, to avoid the use of DateTimeOffset.(Utc)Now in situations that simply require a value be present.
-        public static DateTimeOffset FixedDateTimeOffsetValue => new DateTimeOffset(2001, 2, 3, 4, 5, 6, 789, TimeSpan.Zero);
+        public static DateTimeOffset FixedDateTimeOffsetValue =>
+            new DateTimeOffset(2001, 2, 3, 4, 5, 6, 789, TimeSpan.Zero);
 
         // Fixed DateTime, to avoid the use of DateTime.(Utc)Now in situations that simply require a value be present.
         public static DateTime FixedDateTimeValue => FixedDateTimeOffsetValue.UtcDateTime;
     }
-
 }

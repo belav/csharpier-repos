@@ -22,34 +22,30 @@ namespace System.Threading
     /// The exception that is thrown when the post-phase action of a <see cref="Barrier"/> fails.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class BarrierPostPhaseException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class.
         /// </summary>
         public BarrierPostPhaseException()
-            : this((string?)null)
-        {
-        }
+            : this((string?)null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with the specified inner exception.
         /// </summary>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public BarrierPostPhaseException(Exception? innerException)
-            : this(null, innerException)
-        {
-        }
+            : this(null, innerException) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with a specified error message.
         /// </summary>
         /// <param name="message">A string that describes the exception.</param>
         public BarrierPostPhaseException(string? message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BarrierPostPhaseException"/> class with a specified error message and inner exception.
@@ -57,23 +53,22 @@ namespace System.Threading
         /// <param name="message">A string that describes the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception.</param>
         public BarrierPostPhaseException(string? message, Exception? innerException)
-            : base(message is null ? SR.BarrierPostPhaseException : message, innerException)
-        {
-        }
+            : base(message is null ? SR.BarrierPostPhaseException : message, innerException) { }
 
         /// <summary>
         /// Initializes a new instance of the BarrierPostPhaseException class with serialized data.
         /// </summary>
         /// <param name="info">The object that holds the serialized object data.</param>
         /// <param name="context">The contextual information about the source or destination.</param>
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected BarrierPostPhaseException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
-
 
     /// <summary>
     /// Enables multiple tasks to cooperatively work on an algorithm in parallel through multiple phases.
@@ -91,7 +86,9 @@ namespace System.Threading
     /// completed.
     /// </para>
     /// </remarks>
-    [DebuggerDisplay("ParticipantCount = {ParticipantCount}, ParticipantsRemaining = {ParticipantsRemaining}")]
+    [DebuggerDisplay(
+        "ParticipantCount = {ParticipantCount}, ParticipantsRemaining = {ParticipantsRemaining}"
+    )]
     public class Barrier : IDisposable
     {
         //This variable holds the basic barrier variables:
@@ -116,12 +113,10 @@ namespace System.Threading
         // The maximum participants the barrier can operate = 32767 ( 2 power 15 - 1 )
         private const int MAX_PARTICIPANTS = TOTAL_MASK;
 
-
         // The current barrier phase
         // We don't need to worry about overflow, the max value is 2^63-1; If it starts from 0 at a
         // rate of 4 billion increments per second, it will takes about 64 years to overflow.
         private long _currentPhase;
-
 
         // dispose flag
         private bool _disposed;
@@ -185,7 +180,6 @@ namespace System.Threading
         {
             // use the new Volatile.Read/Write method because it is cheaper than Interlocked.Read on AMD64 architecture
             get { return Volatile.Read(ref _currentPhase); }
-
             internal set { Volatile.Write(ref _currentPhase, value); }
         }
 
@@ -198,9 +192,7 @@ namespace System.Threading
         /// <exception cref="ArgumentOutOfRangeException"> <paramref name="participantCount"/> is less than 0
         /// or greater than <see cref="short.MaxValue"/>.</exception>
         public Barrier(int participantCount)
-            : this(participantCount, null)
-        {
-        }
+            : this(participantCount, null) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Barrier"/> class.
@@ -243,7 +235,12 @@ namespace System.Threading
         /// <param name="current">The current participant count</param>
         /// <param name="total">The total participants count</param>
         /// <param name="sense">The sense flag</param>
-        private static void GetCurrentTotal(int currentTotal, out int current, out int total, out bool sense)
+        private static void GetCurrentTotal(
+            int currentTotal,
+            out int current,
+            out int total,
+            out bool sense
+        )
         {
             total = (int)(currentTotal & TOTAL_MASK);
             current = (int)((currentTotal & CURRENT_MASK) >> 16);
@@ -267,7 +264,11 @@ namespace System.Threading
                 newCurrentTotal |= SENSE_MASK;
             }
 
-            return Interlocked.CompareExchange(ref _currentTotalCount, newCurrentTotal, currentTotal) == currentTotal;
+            return Interlocked.CompareExchange(
+                    ref _currentTotalCount,
+                    newCurrentTotal,
+                    currentTotal
+                ) == currentTotal;
         }
 
         /// <summary>
@@ -293,7 +294,9 @@ namespace System.Threading
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new InvalidOperationException(SR.Barrier_AddParticipants_Overflow_ArgumentOutOfRange);
+                throw new InvalidOperationException(
+                    SR.Barrier_AddParticipants_Overflow_ArgumentOutOfRange
+                );
             }
         }
 
@@ -338,8 +341,10 @@ namespace System.Threading
                 GetCurrentTotal(currentTotal, out current, out total, out sense);
                 if (participantCount + total > MAX_PARTICIPANTS) //overflow
                 {
-                    throw new ArgumentOutOfRangeException(nameof(participantCount),
-                        SR.Barrier_AddParticipants_Overflow_ArgumentOutOfRange);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(participantCount),
+                        SR.Barrier_AddParticipants_Overflow_ArgumentOutOfRange
+                    );
                 }
 
                 if (SetCurrentTotal(currentTotal, current, total + participantCount, sense))
@@ -366,7 +371,6 @@ namespace System.Threading
                             _evenEvent.Wait();
                         }
                     }
-
                     //This else to fix the racing where the current phase has been finished, m_currentPhase has been updated but the events have not been set/reset yet
                     // otherwise when this participant calls SignalAndWait it will wait on a set event however all other participants have not arrived yet.
                     else
@@ -433,12 +437,16 @@ namespace System.Threading
 
                 if (total < participantCount)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(participantCount),
-                        SR.Barrier_RemoveParticipants_ArgumentOutOfRange);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(participantCount),
+                        SR.Barrier_RemoveParticipants_ArgumentOutOfRange
+                    );
                 }
                 if (total - participantCount < current)
                 {
-                    throw new InvalidOperationException(SR.Barrier_RemoveParticipants_InvalidOperation);
+                    throw new InvalidOperationException(
+                        SR.Barrier_RemoveParticipants_InvalidOperation
+                    );
                 }
                 // If the remaining participants = current participants, then finish the current phase
                 int remaingParticipants = total - participantCount;
@@ -498,7 +506,7 @@ namespace System.Threading
 #if DEBUG
             bool result =
 #endif
- SignalAndWait(Timeout.Infinite, cancellationToken);
+            SignalAndWait(Timeout.Infinite, cancellationToken);
 #if DEBUG
             Debug.Assert(result);
 #endif
@@ -556,8 +564,11 @@ namespace System.Threading
             long totalMilliseconds = (long)timeout.TotalMilliseconds;
             if (totalMilliseconds < -1 || totalMilliseconds > int.MaxValue)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(timeout), timeout,
-                    SR.Barrier_SignalAndWait_ArgumentOutOfRange);
+                throw new System.ArgumentOutOfRangeException(
+                    nameof(timeout),
+                    timeout,
+                    SR.Barrier_SignalAndWait_ArgumentOutOfRange
+                );
             }
             return SignalAndWait((int)timeout.TotalMilliseconds, cancellationToken);
         }
@@ -613,8 +624,11 @@ namespace System.Threading
 
             if (millisecondsTimeout < -1)
             {
-                throw new System.ArgumentOutOfRangeException(nameof(millisecondsTimeout), millisecondsTimeout,
-                    SR.Barrier_SignalAndWait_ArgumentOutOfRange);
+                throw new System.ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.Barrier_SignalAndWait_ArgumentOutOfRange
+                );
             }
 
             // in case of this is called from the PHA
@@ -639,13 +653,17 @@ namespace System.Threading
                 // throw if zero participants
                 if (total == 0)
                 {
-                    throw new InvalidOperationException(SR.Barrier_SignalAndWait_InvalidOperation_ZeroTotal);
+                    throw new InvalidOperationException(
+                        SR.Barrier_SignalAndWait_InvalidOperation_ZeroTotal
+                    );
                 }
                 // Try to detect if the number of threads for this phase exceeded the total number of participants or not
                 // This can be detected if the current is zero which means all participants for that phase has arrived and the phase number is not changed yet
                 if (current == 0 && sense != (CurrentPhaseNumber % 2 == 0))
                 {
-                    throw new InvalidOperationException(SR.Barrier_SignalAndWait_InvalidOperation_ThreadsExceeded);
+                    throw new InvalidOperationException(
+                        SR.Barrier_SignalAndWait_InvalidOperation_ThreadsExceeded
+                    );
                 }
                 //This is the last thread, finish the phase
                 if (current + 1 == total)
@@ -654,7 +672,10 @@ namespace System.Threading
                     {
                         if (CdsSyncEtwBCLProvider.Log.IsEnabled())
                         {
-                            CdsSyncEtwBCLProvider.Log.Barrier_PhaseFinished(sense, CurrentPhaseNumber);
+                            CdsSyncEtwBCLProvider.Log.Barrier_PhaseFinished(
+                                sense,
+                                CurrentPhaseNumber
+                            );
                         }
                         FinishPhase(sense);
                         return true;
@@ -676,13 +697,18 @@ namespace System.Threading
             bool waitResult = false;
             try
             {
-                waitResult = DiscontinuousWait(eventToWaitOn, millisecondsTimeout, cancellationToken, phase);
+                waitResult = DiscontinuousWait(
+                    eventToWaitOn,
+                    millisecondsTimeout,
+                    cancellationToken,
+                    phase
+                );
             }
             catch (OperationCanceledException)
             {
                 waitWasCanceled = true;
             }
-            catch (ObjectDisposedException)// in case a race happen where one of the thread returned from SignalAndWait and the current thread calls Wait on a disposed event
+            catch (ObjectDisposedException) // in case a race happen where one of the thread returned from SignalAndWait and the current thread calls Wait on a disposed event
             {
                 // make sure the current phase for this thread is already finished, otherwise propagate the exception
                 if (phase < CurrentPhaseNumber)
@@ -690,8 +716,6 @@ namespace System.Threading
                 else
                     throw;
             }
-
-
 
             if (!waitResult)
             {
@@ -727,7 +751,10 @@ namespace System.Threading
                         //or return false if it was the timeout that woke the wait.
                         //
                         if (waitWasCanceled)
-                            throw new OperationCanceledException(SR.Common_OperationCanceled, cancellationToken);
+                            throw new OperationCanceledException(
+                                SR.Common_OperationCanceled,
+                                cancellationToken
+                            );
                         else
                             return false;
                     }
@@ -757,7 +784,8 @@ namespace System.Threading
                     _actionCallerID = Environment.CurrentManagedThreadId;
                     if (_ownerThreadContext is not null)
                     {
-                        ContextCallback? handler = s_invokePostPhaseAction ??= InvokePostPhaseAction;
+                        ContextCallback? handler = s_invokePostPhaseAction ??=
+                            InvokePostPhaseAction;
                         ExecutionContext.Run(_ownerThreadContext, handler, this);
                     }
                     else
@@ -846,14 +874,20 @@ namespace System.Threading
         /// <param name="observedPhase">The current phase number for this thread</param>
         /// <returns>True if the event is set or the phase number changed, false if the timeout expired</returns>
         [UnsupportedOSPlatform("browser")]
-        private bool DiscontinuousWait(ManualResetEventSlim currentPhaseEvent, int totalTimeout, CancellationToken token, long observedPhase)
+        private bool DiscontinuousWait(
+            ManualResetEventSlim currentPhaseEvent,
+            int totalTimeout,
+            CancellationToken token,
+            long observedPhase
+        )
         {
             int maxWait = 100; // 100 ms
             int waitTimeCeiling = 10000; // 10 seconds
             while (observedPhase == CurrentPhaseNumber)
             {
                 // the next wait time, the min of the maxWait and the totalTimeout
-                int waitTime = totalTimeout == Timeout.Infinite ? maxWait : Math.Min(maxWait, totalTimeout);
+                int waitTime =
+                    totalTimeout == Timeout.Infinite ? maxWait : Math.Min(maxWait, totalTimeout);
 
                 if (currentPhaseEvent.Wait(waitTime, token))
                     return true;
@@ -867,7 +901,10 @@ namespace System.Threading
                 }
 
                 //if the maxwait exceeded 10 seconds then we will stop increasing the maxWait time and keep it 10 seconds, otherwise keep doubling it
-                maxWait = maxWait >= waitTimeCeiling ? waitTimeCeiling : Math.Min(maxWait << 1, waitTimeCeiling);
+                maxWait =
+                    maxWait >= waitTimeCeiling
+                        ? waitTimeCeiling
+                        : Math.Min(maxWait << 1, waitTimeCeiling);
             }
 
             //if we exited the loop because the observed phase doesn't match the current phase, then we have to spin to make sure

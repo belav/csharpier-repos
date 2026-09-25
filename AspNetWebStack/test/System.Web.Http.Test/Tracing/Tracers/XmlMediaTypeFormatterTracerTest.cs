@@ -11,9 +11,14 @@ using Moq.Protected;
 
 namespace System.Web.Http.Tracing.Tracers
 {
-    public class XmlMediaTypeFormatterTracerTest : ReadWriteMediaTypeFormatterTracerTestBase<XmlMediaTypeFormatter>
+    public class XmlMediaTypeFormatterTracerTest
+        : ReadWriteMediaTypeFormatterTracerTestBase<XmlMediaTypeFormatter>
     {
-        public override MediaTypeFormatter CreateTracer(XmlMediaTypeFormatter formatter, HttpRequestMessage request, ITraceWriter traceWriter)
+        public override MediaTypeFormatter CreateTracer(
+            XmlMediaTypeFormatter formatter,
+            HttpRequestMessage request,
+            ITraceWriter traceWriter
+        )
         {
             return new XmlMediaTypeFormatterTracer(formatter, traceWriter, request);
         }
@@ -25,7 +30,11 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request = new HttpRequestMessage();
             XmlMediaTypeFormatter innerFormatter = new XmlMediaTypeFormatter();
             innerFormatter.UseXmlSerializer = !innerFormatter.UseXmlSerializer;
-            XmlMediaTypeFormatterTracer tracer = new XmlMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            XmlMediaTypeFormatterTracer tracer = new XmlMediaTypeFormatterTracer(
+                innerFormatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act & Assert
             Assert.Equal(innerFormatter.UseXmlSerializer, tracer.UseXmlSerializer);
@@ -38,7 +47,11 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request = new HttpRequestMessage();
             XmlMediaTypeFormatter innerFormatter = new XmlMediaTypeFormatter();
             innerFormatter.MaxDepth = innerFormatter.MaxDepth + 1;
-            XmlMediaTypeFormatterTracer tracer = new XmlMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            XmlMediaTypeFormatterTracer tracer = new XmlMediaTypeFormatterTracer(
+                innerFormatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act & Assert
             Assert.Equal(innerFormatter.MaxDepth, tracer.MaxDepth);
@@ -51,7 +64,11 @@ namespace System.Web.Http.Tracing.Tracers
             HttpRequestMessage request = new HttpRequestMessage();
             XmlMediaTypeFormatter innerFormatter = new XmlMediaTypeFormatter();
             innerFormatter.Indent = !innerFormatter.Indent;
-            XmlMediaTypeFormatterTracer tracer = new XmlMediaTypeFormatterTracer(innerFormatter, new TestTraceWriter(), request);
+            XmlMediaTypeFormatterTracer tracer = new XmlMediaTypeFormatterTracer(
+                innerFormatter,
+                new TestTraceWriter(),
+                request
+            );
 
             // Act & Assert
             Assert.Equal(innerFormatter.Indent, tracer.Indent);
@@ -62,7 +79,11 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             XmlMediaTypeFormatter expectedInner = new XmlMediaTypeFormatter();
-            XmlMediaTypeFormatterTracer productUnderTest = new XmlMediaTypeFormatterTracer(expectedInner, new TestTraceWriter(), new HttpRequestMessage());
+            XmlMediaTypeFormatterTracer productUnderTest = new XmlMediaTypeFormatterTracer(
+                expectedInner,
+                new TestTraceWriter(),
+                new HttpRequestMessage()
+            );
 
             // Act
             XmlMediaTypeFormatter actualInner = productUnderTest.Inner;
@@ -76,10 +97,16 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             XmlMediaTypeFormatter expectedInner = new XmlMediaTypeFormatter();
-            XmlMediaTypeFormatterTracer productUnderTest = new XmlMediaTypeFormatterTracer(expectedInner, new TestTraceWriter(), new HttpRequestMessage());
+            XmlMediaTypeFormatterTracer productUnderTest = new XmlMediaTypeFormatterTracer(
+                expectedInner,
+                new TestTraceWriter(),
+                new HttpRequestMessage()
+            );
 
             // Act
-            XmlMediaTypeFormatter actualInner = Decorator.GetInner(productUnderTest as XmlMediaTypeFormatter);
+            XmlMediaTypeFormatter actualInner = Decorator.GetInner(
+                productUnderTest as XmlMediaTypeFormatter
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);

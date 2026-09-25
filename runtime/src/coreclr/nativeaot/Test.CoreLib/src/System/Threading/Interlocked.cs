@@ -12,9 +12,19 @@ namespace System.Threading
         public static IntPtr CompareExchange(ref IntPtr location1, IntPtr value, IntPtr comparand)
         {
 #if TARGET_64BIT
-            return (IntPtr)Interlocked.CompareExchange(ref Unsafe.As<IntPtr, long>(ref location1), (long)value, (long)comparand);
+            return (IntPtr)
+                Interlocked.CompareExchange(
+                    ref Unsafe.As<IntPtr, long>(ref location1),
+                    (long)value,
+                    (long)comparand
+                );
 #else
-            return (IntPtr)Interlocked.CompareExchange(ref Unsafe.As<IntPtr, int>(ref location1), (int)value, (int)comparand);
+            return (IntPtr)
+                Interlocked.CompareExchange(
+                    ref Unsafe.As<IntPtr, int>(ref location1),
+                    (int)value,
+                    (int)comparand
+                );
 #endif
         }
 

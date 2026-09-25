@@ -28,7 +28,10 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
         /// <summary>
         /// stores the parameter hint tags in a global location
         /// </summary>
-        private readonly List<(IMappingTagSpan<InlineHintDataTag> mappingTagSpan, ITagSpan<IntraTextAdornmentTag>? tagSpan)> _cache = new();
+        private readonly List<(
+            IMappingTagSpan<InlineHintDataTag> mappingTagSpan,
+            ITagSpan<IntraTextAdornmentTag>? tagSpan
+        )> _cache = new();
 
         /// <summary>
         /// Stores the snapshot associated with the cached tags in <see cref="_cache" />
@@ -54,7 +57,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             InlineHintsTaggerProvider taggerProvider,
             IWpfTextView textView,
             ITextBuffer buffer,
-            ITagAggregator<InlineHintDataTag> tagAggregator)
+            ITagAggregator<InlineHintDataTag> tagAggregator
+        )
         {
             _taggerProvider = taggerProvider;
 
@@ -62,9 +66,15 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _buffer = buffer;
 
             _tagAggregator = tagAggregator;
-            _formatMap = taggerProvider.ClassificationFormatMapService.GetClassificationFormatMap(textView);
-            _hintClassification = taggerProvider.ClassificationTypeRegistryService.GetClassificationType(InlineHintsTag.TagId);
-            _formatMap.ClassificationFormatMappingChanged += this.OnClassificationFormatMappingChanged;
+            _formatMap = taggerProvider.ClassificationFormatMapService.GetClassificationFormatMap(
+                textView
+            );
+            _hintClassification =
+                taggerProvider.ClassificationTypeRegistryService.GetClassificationType(
+                    InlineHintsTag.TagId
+                );
+            _formatMap.ClassificationFormatMappingChanged +=
+                this.OnClassificationFormatMappingChanged;
             _tagAggregator.BatchedTagsChanged += TagAggregator_BatchedTagsChanged;
         }
 
@@ -107,7 +117,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 InvalidateCache();
 
                 // When classifications change we need to rebuild the inline tags with updated Font and Color information.
-                var tags = GetTags(new NormalizedSnapshotSpanCollection(_textView.TextViewLines.FormattedSpan));
+                var tags = GetTags(
+                    new NormalizedSnapshotSpanCollection(_textView.TextViewLines.FormattedSpan)
+                );
 
                 foreach (var tag in tags)
                 {
@@ -133,7 +145,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
             _cache.Clear();
         }
 
-        public IEnumerable<ITagSpan<IntraTextAdornmentTag>> GetTags(NormalizedSnapshotSpanCollection spans)
+        public IEnumerable<ITagSpan<IntraTextAdornmentTag>> GetTags(
+            NormalizedSnapshotSpanCollection spans
+        )
         {
             try
             {
@@ -152,7 +166,9 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                     // Calling into the InlineParameterNameHintsDataTaggerProvider which only responds with the current
                     // active view and disregards and requests for tags not in that view
                     var fullSpan = new SnapshotSpan(snapshot, 0, snapshot.Length);
-                    var tags = _tagAggregator.GetTags(new NormalizedSnapshotSpanCollection(fullSpan));
+                    var tags = _tagAggregator.GetTags(
+                        new NormalizedSnapshotSpanCollection(fullSpan)
+                    );
                     foreach (var tag in tags)
                     {
                         // Gets the associated span from the snapshot span and creates the IntraTextAdornmentTag from the data
@@ -167,7 +183,12 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                 }
 
                 var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
-                var classify = document != null && _taggerProvider.EditorOptionsService.GlobalOptions.GetOption(InlineHintsViewOptionsStorage.ColorHints, document.Project.Language);
+                var classify =
+                    document != null
+                    && _taggerProvider.EditorOptionsService.GlobalOptions.GetOption(
+                        InlineHintsViewOptionsStorage.ColorHints,
+                        document.Project.Language
+                    );
 
                 var selectedSpans = new List<ITagSpan<IntraTextAdornmentTag>>();
                 for (var i = 0; i < _cache.Count; i++)
@@ -181,9 +202,19 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
                             if (_cache[i].tagSpan is not { } hintTagSpan)
                             {
                                 var hintUITag = InlineHintsTag.Create(
-                                        _cache[i].mappingTagSpan.Tag.Hint, Format, _textView, tagSpan, _taggerProvider, _formatMap, classify);
+                                    _cache[i].mappingTagSpan.Tag.Hint,
+                                    Format,
+                                    _textView,
+                                    tagSpan,
+                                    _taggerProvider,
+                                    _formatMap,
+                                    classify
+                                );
 
-                                hintTagSpan = new TagSpan<IntraTextAdornmentTag>(tagSpan, hintUITag);
+                                hintTagSpan = new TagSpan<IntraTextAdornmentTag>(
+                                    tagSpan,
+                                    hintUITag
+                                );
                                 _cache[i] = (_cache[i].mappingTagSpan, hintTagSpan);
                             }
 
@@ -194,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.InlineHints
 
                 return selectedSpans;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, ErrorSeverity.General))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, ErrorSeverity.General))
             {
                 throw ExceptionUtilities.Unreachable();
             }

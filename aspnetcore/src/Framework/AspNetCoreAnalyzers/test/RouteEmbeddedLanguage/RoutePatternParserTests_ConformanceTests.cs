@@ -625,9 +625,8 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         var parameter = tree.GetRouteParameter("p1");
-        Assert.Collection(
-            parameter.Policies,
-            p => Assert.Equal(":" + constraint.Replace("{", "{{").Replace("}", "}}"), p)
+        Assert.Collection(parameter.Policies, p =>
+            Assert.Equal(":" + constraint.Replace("{", "{{").Replace("}", "}}"), p)
         );
     }
 
@@ -641,9 +640,8 @@ public partial class RoutePatternParserTests
     public void Parse_RegularExpressions_Invalid(string template)
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
         );
     }
 
@@ -653,9 +651,8 @@ public partial class RoutePatternParserTests
     public void Parse_RegularExpressions_Unescaped(string template)
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message)
         );
     }
 
@@ -673,15 +670,13 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(
-            tree.Diagnostics,
-            p =>
-                p.Message
-                == Resources.FormatTemplateRoute_OptionalParameterHasTobeTheLast(
-                    template,
-                    parameter,
-                    invalid
-                )
+        Assert.Contains(tree.Diagnostics, p =>
+            p.Message
+            == Resources.FormatTemplateRoute_OptionalParameterHasTobeTheLast(
+                template,
+                parameter,
+                invalid
+            )
         );
     }
 
@@ -697,17 +692,15 @@ public partial class RoutePatternParserTests
     )
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p =>
-                Assert.Equal(
-                    Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(
-                        template,
-                        "p2",
-                        parameter
-                    ),
-                    p.Message
-                )
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(
+                Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(
+                    template,
+                    "p2",
+                    parameter
+                ),
+                p.Message
+            )
         );
     }
 
@@ -715,13 +708,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_WithRepeatedParameter()
     {
         var tree = Test(@"""{Controller}.mvc/{id}/{controller}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p =>
-                Assert.Equal(
-                    Resources.FormatTemplateRoute_RepeatedParameter("controller"),
-                    p.Message
-                )
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("controller"), p.Message)
         );
     }
 
@@ -736,9 +724,8 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(
-            tree.Diagnostics,
-            p => p.Message == Resources.TemplateRoute_MismatchedParameter
+        Assert.Contains(tree.Diagnostics, p =>
+            p.Message == Resources.TemplateRoute_MismatchedParameter
         );
     }
 
@@ -746,9 +733,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CannotHaveCatchAllInMultiSegment()
     {
         var tree = Test(@"""123{a}abc{*moo}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment, p.Message)
         );
     }
 
@@ -756,9 +742,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CannotHaveMoreThanOneCatchAll()
     {
         var tree = Test(@"""{*p1}/{*p2}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message)
         );
     }
 
@@ -777,9 +762,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CannotHaveCatchAllWithNoName()
     {
         var tree = Test(@"""foo/{*}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
         );
     }
 
@@ -800,9 +784,8 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""" + template.Replace(@"\", @"\\") + @"""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(
-            tree.Diagnostics,
-            p => p.Message == Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
+        Assert.Contains(tree.Diagnostics, p =>
+            p.Message == Resources.FormatTemplateRoute_InvalidParameterName(parameterName)
         );
     }
 
@@ -810,9 +793,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CannotHaveConsecutiveOpenBrace()
     {
         var tree = Test(@"""foo/{{p1}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
         );
     }
 
@@ -821,9 +803,8 @@ public partial class RoutePatternParserTests
     {
         var tree = Test(@"""foo/{p1}}""");
         // Use contains because other diagnostics can be recorded.
-        Assert.Contains(
-            tree.Diagnostics,
-            p => p.Message == Resources.TemplateRoute_MismatchedParameter
+        Assert.Contains(tree.Diagnostics, p =>
+            p.Message == Resources.TemplateRoute_MismatchedParameter
         );
     }
 
@@ -831,9 +812,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_SameParameterTwiceThrows()
     {
         var tree = Test(@"""{aaa}/{AAA}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message)
         );
     }
 
@@ -841,9 +821,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_SameParameterTwiceAndOneCatchAllThrows()
     {
         var tree = Test(@"""{aaa}/{*AAA}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_RepeatedParameter("AAA"), p.Message)
         );
     }
 
@@ -851,9 +830,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_InvalidParameterNameWithCloseBracketThrows()
     {
         var tree = Test(@"""{a}/{aa}a}/{z}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_MismatchedParameter, p.Message)
         );
     }
 
@@ -861,9 +839,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_InvalidParameterNameWithOpenBracketThrows()
     {
         var tree = Test(@"""{a}/{a{aa}/{z}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_UnescapedBrace, p.Message)
         );
     }
 
@@ -871,9 +848,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_InvalidParameterNameWithEmptyNameThrows()
     {
         var tree = Test(@"""{a}/{}/{z}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
         );
     }
 
@@ -881,9 +857,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_InvalidParameterNameWithQuestionThrows()
     {
         var tree = Test(@"""{Controller}.mvc/{?}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName(""), p.Message)
         );
     }
 
@@ -891,9 +866,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_ConsecutiveSeparatorsSlashSlashThrows()
     {
         var tree = Test(@"""{a}//{z}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveSeparators, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveSeparators, p.Message)
         );
     }
 
@@ -901,9 +875,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_WithCatchAllNotAtTheEndThrows()
     {
         var tree = Test(@"""foo/{p1}/{*p2}/{p3}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_CatchAllMustBeLast, p.Message)
         );
     }
 
@@ -911,9 +884,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_RepeatedParametersThrows()
     {
         var tree = Test(@"""foo/aa{p1}{p2}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveParameters, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_CannotHaveConsecutiveParameters, p.Message)
         );
     }
 
@@ -930,9 +902,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CannotStartWithTilde()
     {
         var tree = Test(@"""~foo""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_InvalidRouteTemplate, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_InvalidRouteTemplate, p.Message)
         );
     }
 
@@ -940,9 +911,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CannotContainQuestionMark()
     {
         var tree = Test(@"""foor?bar""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.FormatTemplateRoute_InvalidLiteral("foor?bar"), p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_InvalidLiteral("foor?bar"), p.Message)
         );
     }
 
@@ -950,13 +920,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_ParameterCannotContainQuestionMark_UnlessAtEnd()
     {
         var tree = Test(@"""{foor?b}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p =>
-                Assert.Equal(
-                    Resources.FormatTemplateRoute_InvalidParameterName("foor?b"),
-                    p.Message
-                )
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.FormatTemplateRoute_InvalidParameterName("foor?b"), p.Message)
         );
     }
 
@@ -964,9 +929,8 @@ public partial class RoutePatternParserTests
     public void InvalidTemplate_CatchAllMarkedOptional()
     {
         var tree = Test(@"""{a}/{*b?}""");
-        Assert.Collection(
-            tree.Diagnostics,
-            p => Assert.Equal(Resources.TemplateRoute_CatchAllCannotBeOptional, p.Message)
+        Assert.Collection(tree.Diagnostics, p =>
+            Assert.Equal(Resources.TemplateRoute_CatchAllCannotBeOptional, p.Message)
         );
     }
 

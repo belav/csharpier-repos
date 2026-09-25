@@ -9,8 +9,8 @@ using Microsoft.CodeAnalysis.UseObjectInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer;
 
-internal sealed class CSharpUseNamedMemberInitializerAnalyzer :
-    AbstractUseNamedMemberInitializerAnalyzer<
+internal sealed class CSharpUseNamedMemberInitializerAnalyzer
+    : AbstractUseNamedMemberInitializerAnalyzer<
         ExpressionSyntax,
         StatementSyntax,
         BaseObjectCreationExpressionSyntax,
@@ -18,8 +18,17 @@ internal sealed class CSharpUseNamedMemberInitializerAnalyzer :
         ExpressionStatementSyntax,
         LocalDeclarationStatementSyntax,
         VariableDeclaratorSyntax,
-        CSharpUseNamedMemberInitializerAnalyzer>
+        CSharpUseNamedMemberInitializerAnalyzer
+    >
 {
-    protected override bool IsInitializerOfLocalDeclarationStatement(LocalDeclarationStatementSyntax localDeclarationStatement, BaseObjectCreationExpressionSyntax rootExpression, [NotNullWhen(true)] out VariableDeclaratorSyntax? variableDeclarator)
-        => CSharpObjectCreationHelpers.IsInitializerOfLocalDeclarationStatement(localDeclarationStatement, rootExpression, out variableDeclarator);
+    protected override bool IsInitializerOfLocalDeclarationStatement(
+        LocalDeclarationStatementSyntax localDeclarationStatement,
+        BaseObjectCreationExpressionSyntax rootExpression,
+        [NotNullWhen(true)] out VariableDeclaratorSyntax? variableDeclarator
+    ) =>
+        CSharpObjectCreationHelpers.IsInitializerOfLocalDeclarationStatement(
+            localDeclarationStatement,
+            rootExpression,
+            out variableDeclarator
+        );
 }

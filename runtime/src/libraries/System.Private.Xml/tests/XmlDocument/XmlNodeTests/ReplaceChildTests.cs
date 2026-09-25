@@ -78,7 +78,9 @@ namespace System.Xml.XmlDocumentTests
             var child2 = xmlDocument.DocumentElement.ChildNodes[1];
             var newChild = xmlDocument.CreateElement("newElem");
 
-            AssertExtensions.Throws<ArgumentException>(null, () => child1.ReplaceChild(newChild, child2));
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                child1.ReplaceChild(newChild, child2)
+            );
         }
 
         [Fact]
@@ -92,7 +94,9 @@ namespace System.Xml.XmlDocumentTests
             var child1 = xmlDocument1.DocumentElement.ChildNodes[0];
             var newChild = xmlDocument2.CreateElement("newChild");
 
-            AssertExtensions.Throws<ArgumentException>(null, () => xmlDocument1.DocumentElement.ReplaceChild(newChild, child1));
+            AssertExtensions.Throws<ArgumentException>(null, () =>
+                xmlDocument1.DocumentElement.ReplaceChild(newChild, child1)
+            );
         }
 
         [Fact]
@@ -104,7 +108,9 @@ namespace System.Xml.XmlDocumentTests
             var child1 = xmlDocument.DocumentElement.FirstChild;
             var attribute = xmlDocument.CreateAttribute("attr");
 
-            Assert.Throws<InvalidOperationException>(() => xmlDocument.DocumentElement.ReplaceChild(attribute, child1));
+            Assert.Throws<InvalidOperationException>(() =>
+                xmlDocument.DocumentElement.ReplaceChild(attribute, child1)
+            );
         }
 
         [Fact]
@@ -117,7 +123,9 @@ namespace System.Xml.XmlDocumentTests
             var attributeChild = attribute.FirstChild;
             var newElement = xmlDocument.CreateElement("newElement");
 
-            Assert.Throws<InvalidOperationException>(() => attribute.ReplaceChild(newElement, attributeChild));
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.ReplaceChild(newElement, attributeChild)
+            );
             Assert.Null(attribute.FirstChild);
         }
 
@@ -131,7 +139,9 @@ namespace System.Xml.XmlDocumentTests
             var attributeChild = attribute.FirstChild;
             var newAttribute = xmlDocument.CreateAttribute("newAttribute");
 
-            Assert.Throws<InvalidOperationException>(() => attribute.ReplaceChild(newAttribute, attributeChild));
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.ReplaceChild(newAttribute, attributeChild)
+            );
             Assert.Null(attribute.FirstChild);
         }
 
@@ -161,7 +171,9 @@ namespace System.Xml.XmlDocumentTests
             var attributeChild = attribute.FirstChild;
             var newText = xmlDocument.CreateProcessingInstruction("PI", "instructions");
 
-            Assert.Throws<InvalidOperationException>(() => attribute.ReplaceChild(newText, attributeChild));
+            Assert.Throws<InvalidOperationException>(() =>
+                attribute.ReplaceChild(newText, attributeChild)
+            );
         }
 
         [Fact]

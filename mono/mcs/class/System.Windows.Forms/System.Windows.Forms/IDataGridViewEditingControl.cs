@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,31 +23,28 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
+namespace System.Windows.Forms
+{
+    public interface IDataGridViewEditingControl
+    {
+        DataGridView EditingControlDataGridView { get; set; }
 
-namespace System.Windows.Forms {
+        object EditingControlFormattedValue { get; set; }
 
-	public interface IDataGridViewEditingControl {
+        int EditingControlRowIndex { get; set; }
 
-		DataGridView EditingControlDataGridView {get; set;}
+        bool EditingControlValueChanged { get; set; }
 
-		object EditingControlFormattedValue {get; set;}
+        Cursor EditingPanelCursor { get; }
 
-		int EditingControlRowIndex {get; set;}
+        bool RepositionEditingControlOnValueChange { get; }
 
-		bool EditingControlValueChanged {get; set;}
+        void ApplyCellStyleToEditingControl(DataGridViewCellStyle dataGridViewCellStyle);
 
-		Cursor EditingPanelCursor {get;}
+        bool EditingControlWantsInputKey(Keys keyData, bool dataGridViewWantsInputKey);
 
-		bool RepositionEditingControlOnValueChange {get;}
+        object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context);
 
-		void ApplyCellStyleToEditingControl (DataGridViewCellStyle dataGridViewCellStyle);
-
-		bool EditingControlWantsInputKey (Keys keyData, bool dataGridViewWantsInputKey);
-
-		object GetEditingControlFormattedValue (DataGridViewDataErrorContexts context);
-
-		void PrepareEditingControlForEdit (bool selectAll);
-
-	}
-
+        void PrepareEditingControlForEdit(bool selectAll);
+    }
 }

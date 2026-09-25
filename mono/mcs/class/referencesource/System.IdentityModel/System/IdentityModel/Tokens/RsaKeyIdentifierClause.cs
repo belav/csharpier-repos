@@ -59,7 +59,7 @@ namespace System.IdentityModel.Tokens
             RsaKeyIdentifierClause that = keyIdentifierClause as RsaKeyIdentifierClause;
 
             // PreSharp Bug: Parameter 'that' to this public method must be validated: A null-dereference can occur here.
-            #pragma warning suppress 56506
+#pragma warning suppress 56506
             return ReferenceEquals(this, that) || (that != null && that.Matches(this.rsa));
         }
 
@@ -69,15 +69,18 @@ namespace System.IdentityModel.Tokens
                 return false;
 
             RSAParameters rsaParameters = rsa.ExportParameters(false);
-            return SecurityUtils.MatchesBuffer(this.rsaParameters.Modulus, rsaParameters.Modulus) &&
-                SecurityUtils.MatchesBuffer(this.rsaParameters.Exponent, rsaParameters.Exponent);
+            return SecurityUtils.MatchesBuffer(this.rsaParameters.Modulus, rsaParameters.Modulus)
+                && SecurityUtils.MatchesBuffer(this.rsaParameters.Exponent, rsaParameters.Exponent);
         }
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "RsaKeyIdentifierClause(Modulus = {0}, Exponent = {1})",
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "RsaKeyIdentifierClause(Modulus = {0}, Exponent = {1})",
                 Convert.ToBase64String(this.rsaParameters.Modulus),
-                Convert.ToBase64String(this.rsaParameters.Exponent));
+                Convert.ToBase64String(this.rsaParameters.Exponent)
+            );
         }
 
         public void WriteExponentAsBase64(XmlWriter writer)

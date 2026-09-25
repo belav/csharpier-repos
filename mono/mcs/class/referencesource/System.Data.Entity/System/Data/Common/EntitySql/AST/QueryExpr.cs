@@ -10,9 +10,9 @@
 namespace System.Data.Common.EntitySql.AST
 {
     using System;
-    using System.Globalization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Globalization;
 
     /// <summary>
     /// Represents select kind (value,row).
@@ -20,7 +20,7 @@ namespace System.Data.Common.EntitySql.AST
     internal enum SelectKind
     {
         Value,
-        Row
+        Row,
     }
 
     /// <summary>
@@ -32,7 +32,7 @@ namespace System.Data.Common.EntitySql.AST
         Inner,
         LeftOuter,
         FullOuter,
-        RightOuter
+        RightOuter,
     }
 
     /// <summary>
@@ -42,7 +42,7 @@ namespace System.Data.Common.EntitySql.AST
     {
         None,
         Asc,
-        Desc
+        Desc,
     }
 
     /// <summary>
@@ -52,7 +52,7 @@ namespace System.Data.Common.EntitySql.AST
     {
         None,
         All,
-        Distinct
+        Distinct,
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ namespace System.Data.Common.EntitySql.AST
     internal enum ApplyKind
     {
         Cross,
-        Outer
+        Outer,
     }
 
     /// <summary>
@@ -85,12 +85,14 @@ namespace System.Data.Common.EntitySql.AST
         /// <param name="groupByClause">optional group by clause</param>
         /// <param name="havingClause">optional having clause</param>
         /// <param name="orderByClause">optional order by clause</param>
-        internal QueryExpr(SelectClause selectClause,
-                           FromClause fromClause,
-                           Node whereClause,
-                           GroupByClause groupByClause,
-                           HavingClause havingClause,
-                           OrderByClause orderByClause)
+        internal QueryExpr(
+            SelectClause selectClause,
+            FromClause fromClause,
+            Node whereClause,
+            GroupByClause groupByClause,
+            HavingClause havingClause,
+            OrderByClause orderByClause
+        )
         {
             _selectClause = selectClause;
             _fromClause = fromClause;
@@ -155,9 +157,9 @@ namespace System.Data.Common.EntitySql.AST
         {
             get
             {
-                return _selectClause.HasMethodCall ||
-                       (null != _havingClause && _havingClause.HasMethodCall) ||
-                       (null != _orderByClause && _orderByClause.HasMethodCall);
+                return _selectClause.HasMethodCall
+                    || (null != _havingClause && _havingClause.HasMethodCall)
+                    || (null != _orderByClause && _orderByClause.HasMethodCall);
             }
         }
     }
@@ -176,7 +178,13 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initialize SelectKind.SelectRow clause.
         /// </summary>
-        internal SelectClause(NodeList<AliasedExpr> items, SelectKind selectKind, DistinctKind distinctKind, Node topExpr, uint methodCallCount)
+        internal SelectClause(
+            NodeList<AliasedExpr> items,
+            SelectKind selectKind,
+            DistinctKind distinctKind,
+            Node topExpr,
+            uint methodCallCount
+        )
         {
             _selectKind = selectKind;
             _selectClauseItems = items;
@@ -257,7 +265,7 @@ namespace System.Data.Common.EntitySql.AST
     {
         AliasedFromClause,
         JoinFromClause,
-        ApplyFromClause
+        ApplyFromClause,
     }
 
     /// <summary>
@@ -383,7 +391,12 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes order by clause.
         /// </summary>
-        internal OrderByClause(NodeList<OrderByClauseItem> orderByClauseItem, Node skipExpr, Node limitExpr, uint methodCallCount)
+        internal OrderByClause(
+            NodeList<OrderByClauseItem> orderByClauseItem,
+            Node skipExpr,
+            Node limitExpr,
+            uint methodCallCount
+        )
         {
             _orderByClauseItem = orderByClauseItem;
             _skipExpr = skipExpr;
@@ -437,15 +450,17 @@ namespace System.Data.Common.EntitySql.AST
         /// Initializes non-collated order by clause item.
         /// </summary>
         internal OrderByClauseItem(Node orderExpr, OrderKind orderKind)
-            : this(orderExpr, orderKind, null)
-        {
-        }
+            : this(orderExpr, orderKind, null) { }
 
         /// <summary>
         /// Initializes collated order by clause item.
         /// </summary>
         /// <param name="optCollationIdentifier">optional Collation identifier</param>
-        internal OrderByClauseItem(Node orderExpr, OrderKind orderKind, Identifier optCollationIdentifier)
+        internal OrderByClauseItem(
+            Node orderExpr,
+            OrderKind orderKind,
+            Identifier optCollationIdentifier
+        )
         {
             _orderExpr = orderExpr;
             _orderKind = orderKind;
@@ -490,15 +505,22 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes join clause item without ON expression.
         /// </summary>
-        internal JoinClauseItem(FromClauseItem joinLeft, FromClauseItem joinRight, JoinKind joinKind)
-            : this(joinLeft, joinRight, joinKind, null)
-        {
-        }
+        internal JoinClauseItem(
+            FromClauseItem joinLeft,
+            FromClauseItem joinRight,
+            JoinKind joinKind
+        )
+            : this(joinLeft, joinRight, joinKind, null) { }
 
         /// <summary>
         /// Initializes join clause item with ON expression.
         /// </summary>
-        internal JoinClauseItem(FromClauseItem joinLeft, FromClauseItem joinRight, JoinKind joinKind, Node onExpr)
+        internal JoinClauseItem(
+            FromClauseItem joinLeft,
+            FromClauseItem joinRight,
+            JoinKind joinKind,
+            Node onExpr
+        )
         {
             _joinLeft = joinLeft;
             _joinRight = joinRight;
@@ -552,7 +574,11 @@ namespace System.Data.Common.EntitySql.AST
         /// <summary>
         /// Initializes apply clause item.
         /// </summary>
-        internal ApplyClauseItem(FromClauseItem applyLeft, FromClauseItem applyRight, ApplyKind applyKind)
+        internal ApplyClauseItem(
+            FromClauseItem applyLeft,
+            FromClauseItem applyRight,
+            ApplyKind applyKind
+        )
         {
             _applyLeft = applyLeft;
             _applyRight = applyRight;

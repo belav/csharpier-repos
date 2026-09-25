@@ -9,13 +9,22 @@ namespace System.IO.MemoryMappedFiles
     internal sealed partial class MemoryMappedView
     {
         public static MemoryMappedView CreateView(
-            SafeMemoryMappedFileHandle memMappedFileHandle, MemoryMappedFileAccess access,
-            long requestedOffset, long requestedSize)
+            SafeMemoryMappedFileHandle memMappedFileHandle,
+            MemoryMappedFileAccess access,
+            long requestedOffset,
+            long requestedSize
+        )
         {
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(requestedOffset, memMappedFileHandle._capacity, "offset");
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                requestedOffset,
+                memMappedFileHandle._capacity,
+                "offset"
+            );
             if (requestedSize > MaxProcessAddressSpace)
             {
-                throw new IOException(SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed);
+                throw new IOException(
+                    SR.ArgumentOutOfRange_CapacityLargerThanLogicalAddressSpaceNotAllowed
+                );
             }
             if (requestedOffset + requestedSize > memMappedFileHandle._capacity)
             {
@@ -34,18 +43,27 @@ namespace System.IO.MemoryMappedFiles
             // requested view. (mmap may round up the actual length such that it is also page-aligned; we hide that by using
             // the right size and not extending the size to be page-aligned.)
             ulong nativeSize;
-            long extraMemNeeded, nativeOffset;
+            long extraMemNeeded,
+                nativeOffset;
             long pageSize = Interop.Sys.SysConf(Interop.Sys.SysConfName._SC_PAGESIZE);
             Debug.Assert(pageSize > 0);
             ValidateSizeAndOffset(
-                requestedSize, requestedOffset, pageSize,
-                out nativeSize, out extraMemNeeded, out nativeOffset);
+                requestedSize,
+                requestedOffset,
+                pageSize,
+                out nativeSize,
+                out extraMemNeeded,
+                out nativeOffset
+            );
 
             // Determine whether to create the pages as private or as shared; the former is used for copy-on-write.
             Interop.Sys.MemoryMappedFlags flags =
-                (memMappedFileHandle._access == MemoryMappedFileAccess.CopyOnWrite || access == MemoryMappedFileAccess.CopyOnWrite) ?
-                Interop.Sys.MemoryMappedFlags.MAP_PRIVATE :
-                Interop.Sys.MemoryMappedFlags.MAP_SHARED;
+                (
+                    memMappedFileHandle._access == MemoryMappedFileAccess.CopyOnWrite
+                    || access == MemoryMappedFileAccess.CopyOnWrite
+                )
+                    ? Interop.Sys.MemoryMappedFlags.MAP_PRIVATE
+                    : Interop.Sys.MemoryMappedFlags.MAP_SHARED;
 
             // If we have a file handle, get the file descriptor from it.  If the handle is null,
             // we'll use an anonymous backing store for the map.
@@ -66,27 +84,37 @@ namespace System.IO.MemoryMappedFiles
             // with mmap when creating the view.
 
             // Verify that the requested view permissions don't exceed the map's permissions
-            Interop.Sys.MemoryMappedProtections viewProtForVerification = GetProtections(access, forVerification: true);
-            Interop.Sys.MemoryMappedProtections mapProtForVerification = GetProtections(memMappedFileHandle._access, forVerification: true);
+            Interop.Sys.MemoryMappedProtections viewProtForVerification = GetProtections(
+                access,
+                forVerification: true
+            );
+            Interop.Sys.MemoryMappedProtections mapProtForVerification = GetProtections(
+                memMappedFileHandle._access,
+                forVerification: true
+            );
             if ((viewProtForVerification & mapProtForVerification) != viewProtForVerification)
             {
                 throw new UnauthorizedAccessException();
             }
 
             // viewProtections is strictly less than mapProtections, so use viewProtections for actually creating the map.
-            Interop.Sys.MemoryMappedProtections viewProtForCreation = GetProtections(access, forVerification: false);
+            Interop.Sys.MemoryMappedProtections viewProtForCreation = GetProtections(
+                access,
+                forVerification: false
+            );
 
             // Create the map
             IntPtr addr;
             if (nativeSize > 0)
             {
                 addr = Interop.Sys.MMap(
-                    IntPtr.Zero,         // don't specify an address; let the system choose one
-                    nativeSize,          // specify the rounded-size we computed so as to page align; size + extraMemNeeded
+                    IntPtr.Zero, // don't specify an address; let the system choose one
+                    nativeSize, // specify the rounded-size we computed so as to page align; size + extraMemNeeded
                     viewProtForCreation,
                     flags,
-                    fd,                  // mmap adds a ref count to the fd, so there's no need to dup it.
-                    nativeOffset);       // specify the rounded-offset we computed so as to page align; offset - extraMemNeeded
+                    fd, // mmap adds a ref count to the fd, so there's no need to dup it.
+                    nativeOffset
+                ); // specify the rounded-offset we computed so as to page align; offset - extraMemNeeded
             }
             else
             {
@@ -97,11 +125,12 @@ namespace System.IO.MemoryMappedFiles
                 // what backs the view, so we just create an anonymous mapping.
                 addr = Interop.Sys.MMap(
                     IntPtr.Zero,
-                    1,         // any length that's greater than zero will suffice
+                    1, // any length that's greater than zero will suffice
                     viewProtForCreation,
                     flags | Interop.Sys.MemoryMappedFlags.MAP_ANONYMOUS,
-                    new SafeFileHandle(new IntPtr(-1), false),        // ignore the actual fd even if there was one
-                    0);
+                    new SafeFileHandle(new IntPtr(-1), false), // ignore the actual fd even if there was one
+                    0
+                );
                 requestedSize = 0;
                 extraMemNeeded = 0;
             }
@@ -122,9 +151,10 @@ namespace System.IO.MemoryMappedFiles
             viewHandle.Initialize((ulong)nativeSize);
             return new MemoryMappedView(
                 viewHandle,
-                extraMemNeeded,       // the view points to offset - extraMemNeeded, so we need to shift back by extraMemNeeded
-                requestedSize,        // only allow access to the actual size requested
-                access);
+                extraMemNeeded, // the view points to offset - extraMemNeeded, so we need to shift back by extraMemNeeded
+                requestedSize, // only allow access to the actual size requested
+                access
+            );
         }
 
         public unsafe void Flush(UIntPtr capacity)
@@ -137,8 +167,11 @@ namespace System.IO.MemoryMappedFiles
             {
                 _viewHandle.AcquirePointer(ref ptr);
                 int result = Interop.Sys.MSync(
-                    (IntPtr)ptr, (ulong)capacity,
-                    Interop.Sys.MemoryMappedSyncFlags.MS_SYNC | Interop.Sys.MemoryMappedSyncFlags.MS_INVALIDATE);
+                    (IntPtr)ptr,
+                    (ulong)capacity,
+                    Interop.Sys.MemoryMappedSyncFlags.MS_SYNC
+                        | Interop.Sys.MemoryMappedSyncFlags.MS_INVALIDATE
+                );
                 if (result < 0)
                 {
                     throw Interop.GetExceptionForIoErrno(Interop.Sys.GetLastErrorInfo());
@@ -173,7 +206,9 @@ namespace System.IO.MemoryMappedFiles
 
         /// <summary>Maps a MemoryMappedFileAccess to the associated MemoryMappedProtections.</summary>
         internal static Interop.Sys.MemoryMappedProtections GetProtections(
-            MemoryMappedFileAccess access, bool forVerification)
+            MemoryMappedFileAccess access,
+            bool forVerification
+        )
         {
             switch (access)
             {
@@ -185,25 +220,23 @@ namespace System.IO.MemoryMappedFiles
                     return Interop.Sys.MemoryMappedProtections.PROT_WRITE;
 
                 case MemoryMappedFileAccess.ReadWrite:
-                    return
-                        Interop.Sys.MemoryMappedProtections.PROT_READ |
-                        Interop.Sys.MemoryMappedProtections.PROT_WRITE;
+                    return Interop.Sys.MemoryMappedProtections.PROT_READ
+                        | Interop.Sys.MemoryMappedProtections.PROT_WRITE;
 
                 case MemoryMappedFileAccess.ReadExecute:
-                    return
-                        Interop.Sys.MemoryMappedProtections.PROT_READ |
-                        Interop.Sys.MemoryMappedProtections.PROT_EXEC;
+                    return Interop.Sys.MemoryMappedProtections.PROT_READ
+                        | Interop.Sys.MemoryMappedProtections.PROT_EXEC;
 
                 case MemoryMappedFileAccess.ReadWriteExecute:
-                    return
-                        Interop.Sys.MemoryMappedProtections.PROT_READ |
-                        Interop.Sys.MemoryMappedProtections.PROT_WRITE |
-                        Interop.Sys.MemoryMappedProtections.PROT_EXEC;
+                    return Interop.Sys.MemoryMappedProtections.PROT_READ
+                        | Interop.Sys.MemoryMappedProtections.PROT_WRITE
+                        | Interop.Sys.MemoryMappedProtections.PROT_EXEC;
 
                 case MemoryMappedFileAccess.CopyOnWrite:
-                    return forVerification ?
-                        Interop.Sys.MemoryMappedProtections.PROT_READ :
-                        Interop.Sys.MemoryMappedProtections.PROT_READ | Interop.Sys.MemoryMappedProtections.PROT_WRITE;
+                    return forVerification
+                        ? Interop.Sys.MemoryMappedProtections.PROT_READ
+                        : Interop.Sys.MemoryMappedProtections.PROT_READ
+                            | Interop.Sys.MemoryMappedProtections.PROT_WRITE;
             }
         }
     }

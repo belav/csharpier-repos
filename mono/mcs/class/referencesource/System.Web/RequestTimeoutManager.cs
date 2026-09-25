@@ -1,26 +1,29 @@
 //------------------------------------------------------------------------------
 // <copyright file="RequestTimeoutManager.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Request timeout manager -- implements the request timeout mechanism
  */
-namespace System.Web {
-    using System.Threading;
+namespace System.Web
+{
     using System.Collections;
+    using System.Threading;
     using System.Web.Util;
 
-    internal class RequestTimeoutManager {
-        private int                 _requestCount;
-        private DoubleLinkList[]    _lists;           // partitioned to avoid contention
-        private int                 _currentList;
-        private int                 _inProgressLock;  // only 1 thread can be cancelling
-        private readonly TimeSpan   _timerPeriod = new TimeSpan(0, 0, 15); // 15 second init precision
-        private Timer               _timer;
+    internal class RequestTimeoutManager
+    {
+        private int _requestCount;
+        private DoubleLinkList[] _lists; // partitioned to avoid contention
+        private int _currentList;
+        private int _inProgressLock; // only 1 thread can be cancelling
+        private readonly TimeSpan _timerPeriod = new TimeSpan(0, 0, 15); // 15 second init precision
+        private Timer _timer;
 
-        internal RequestTimeoutManager() {
+        internal RequestTimeoutManager()
+        {
             // initialize request lists
 
             _requestCount = 0;
@@ -40,15 +43,21 @@ namespace System.Web {
             if (!Debug.IsTagPresent("Timer") || Debug.IsTagEnabled("Timer"))
 #endif
             {
-                _timer = new Timer(new TimerCallback(this.TimerCompletionCallback), null, _timerPeriod, _timerPeriod);
+                _timer = new Timer(
+                    new TimerCallback(this.TimerCompletionCallback),
+                    null,
+                    _timerPeriod,
+                    _timerPeriod
+                );
             }
-
         }
 
-        internal void Stop() {
+        internal void Stop()
+        {
             // stop the timer
 
-            if (_timer != null) {
+            if (_timer != null)
+            {
                 ((IDisposable)_timer).Dispose();
                 _timer = null;
             }
@@ -62,13 +71,14 @@ namespace System.Web {
                 CancelTimedOutRequests(DateTime.UtcNow.AddYears(1)); // future date
         }
 
-        private void TimerCompletionCallback(Object state) {
+        private void TimerCompletionCallback(Object state)
+        {
             if (_requestCount > 0)
                 CancelTimedOutRequests(DateTime.UtcNow);
         }
 
-        private void CancelTimedOutRequests(DateTime now) {
-
+        private void CancelTimedOutRequests(DateTime now)
+        {
             // only one thread can be doing it
 
             if (Interlocked.CompareExchange(ref _inProgressLock, 1, 0) != 0)
@@ -79,8 +89,10 @@ namespace System.Web {
             ArrayList entries = new ArrayList(_requestCount); // size can change
             DoubleLinkListEnumerator en;
 
-            for (int i = 0; i < _lists.Length; i++) {
-                lock (_lists[i]) {
+            for (int i = 0; i < _lists.Length; i++)
+            {
+                lock (_lists[i])
+                {
                     en = _lists[i].GetEnumerator();
 
                     while (en.MoveNext())
@@ -102,12 +114,14 @@ namespace System.Web {
             Interlocked.Exchange(ref _inProgressLock, 0);
         }
 
-        internal void Add(HttpContext context) {
-            if (context.TimeoutLink != null) {
+        internal void Add(HttpContext context)
+        {
+            if (context.TimeoutLink != null)
+            {
                 ((RequestTimeoutEntry)context.TimeoutLink).IncrementCount();
                 return;
             }
-           
+
             // create new entry
 
             RequestTimeoutEntry entry = new RequestTimeoutEntry(context);
@@ -115,7 +129,8 @@ namespace System.Web {
             // add it to the list
 
             int i = _currentList++;
-            if (i >= _lists.Length) {
+            if (i >= _lists.Length)
+            {
                 i = 0;
                 _currentList = 0;
             }
@@ -127,15 +142,20 @@ namespace System.Web {
             context.TimeoutLink = entry;
         }
 
-        internal void Remove(HttpContext context) {
+        internal void Remove(HttpContext context)
+        {
             RequestTimeoutEntry entry = (RequestTimeoutEntry)context.TimeoutLink;
 
             // remove from the list
-            if (entry != null) {
-                if( entry.DecrementCount() == 0 ) {
+            if (entry != null)
+            {
+                if (entry.DecrementCount() == 0)
+                {
                     entry.RemoveFromList();
                     Interlocked.Decrement(ref _requestCount);
-                } else {
+                }
+                else
+                {
                     return;
                 }
             }
@@ -144,48 +164,58 @@ namespace System.Web {
             context.TimeoutLink = null;
         }
 
-        private class RequestTimeoutEntry : DoubleLink {
-            private  HttpContext    _context;   // the request
-            private  DoubleLinkList _list;
+        private class RequestTimeoutEntry : DoubleLink
+        {
+            private HttpContext _context; // the request
+            private DoubleLinkList _list;
             private int _count;
 
-            internal RequestTimeoutEntry(HttpContext context) {
+            internal RequestTimeoutEntry(HttpContext context)
+            {
                 _context = context;
                 _count = 1;
             }
 
-            internal void AddToList(DoubleLinkList list) {
-                lock(list) {
+            internal void AddToList(DoubleLinkList list)
+            {
+                lock (list)
+                {
                     list.InsertTail(this);
                     _list = list;
                 }
             }
 
-            internal void RemoveFromList() {
-                if (_list != null) {
-                    lock(_list) {
+            internal void RemoveFromList()
+            {
+                if (_list != null)
+                {
+                    lock (_list)
+                    {
                         Remove();
                         _list = null;
                     }
                 }
             }
 
-            internal void TimeoutIfNeeded(DateTime now) {
+            internal void TimeoutIfNeeded(DateTime now)
+            {
                 Thread thread = _context.MustTimeout(now);
-                if (thread != null) {
+                if (thread != null)
+                {
                     RemoveFromList();
                     thread.Abort(new HttpApplication.CancelModuleException(true));
                 }
             }
 
-            internal void IncrementCount() {
-                Interlocked.Increment( ref _count );
+            internal void IncrementCount()
+            {
+                Interlocked.Increment(ref _count);
             }
 
-            internal int DecrementCount() {
-                return Interlocked.Decrement( ref _count );
+            internal int DecrementCount()
+            {
+                return Interlocked.Decrement(ref _count);
             }
         }
     }
-
 }

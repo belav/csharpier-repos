@@ -17,23 +17,55 @@ namespace System.Text.RegularExpressions.Tests
         {
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
-                (string Pattern, string Input, IEnumerable<(int, int)> MatchBoundaries)[] cases = MatchStartAndEndPositions_MemberData_Cases().ToArray();
-                Regex[] regexes = RegexHelpers.GetRegexesAsync(engine, cases.Select(c => (c.Pattern, (CultureInfo?)null, (RegexOptions?)RegexOptions.None, (TimeSpan?)null)).ToArray()).Result;
+                (string Pattern, string Input, IEnumerable<(int, int)> MatchBoundaries)[] cases =
+                    MatchStartAndEndPositions_MemberData_Cases().ToArray();
+                Regex[] regexes = RegexHelpers
+                    .GetRegexesAsync(
+                        engine,
+                        cases
+                            .Select(c =>
+                                (
+                                    c.Pattern,
+                                    (CultureInfo?)null,
+                                    (RegexOptions?)RegexOptions.None,
+                                    (TimeSpan?)null
+                                )
+                            )
+                            .ToArray()
+                    )
+                    .Result;
                 for (int i = 0; i < regexes.Length; i++)
                 {
-                    yield return new object[] { regexes[i], cases[i].Input, cases[i].MatchBoundaries };
+                    yield return new object[]
+                    {
+                        regexes[i],
+                        cases[i].Input,
+                        cases[i].MatchBoundaries,
+                    };
                 }
             }
         }
 
-        public static IEnumerable<(string Pattern, string Input, IEnumerable<(int, int)>? MatchBoundaries)> MatchStartAndEndPositions_MemberData_Cases()
+        public static IEnumerable<(
+            string Pattern,
+            string Input,
+            IEnumerable<(int, int)>? MatchBoundaries
+        )> MatchStartAndEndPositions_MemberData_Cases()
         {
             yield return (@"^$", "", new[] { (0, 0) });
             yield return (@"^$^$^$", "", new[] { (0, 0) });
             yield return (@"^^^$$$", "", new[] { (0, 0) });
             yield return (@"$^", "", new[] { (0, 0) });
-            yield return (@"(?:^$)*", "a\nb\nc", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) });
-            yield return (@"(?:$^)*", "a\nb\nc", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) });
+            yield return (
+                @"(?:^$)*",
+                "a\nb\nc",
+                new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+            );
+            yield return (
+                @"(?:$^)*",
+                "a\nb\nc",
+                new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+            );
             yield return (@"", "", new[] { (0, 0) });
             yield return (@"", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) });
             yield return (@"()", "abc", new[] { (0, 0), (1, 1), (2, 2), (3, 3) });
@@ -67,9 +99,17 @@ namespace System.Text.RegularExpressions.Tests
             yield return (@"(?m)[a-z]$", "abc\ndef\nxyz", new[] { (2, 3), (6, 7), (10, 11) });
             yield return (@"(?m)$[a-z]", "abc\ndef\nxyz", new ValueTuple<int, int>[] { });
             yield return (@"(?m)^$", "", new[] { (0, 0) });
-            yield return (@"(?m)(?:^$)*", "a\nb\nc", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) });
+            yield return (
+                @"(?m)(?:^$)*",
+                "a\nb\nc",
+                new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) }
+            );
             yield return (@"(?m)(?:^|a)+", "a\naaa\n", new[] { (0, 0), (2, 2), (3, 5), (6, 6) });
-            yield return (@"(?m)(?:^|a)*", "a\naaa\n", new[] { (0, 0), (1, 1), (2, 2), (3, 5), (5, 5), (6, 6) });
+            yield return (
+                @"(?m)(?:^|a)*",
+                "a\naaa\n",
+                new[] { (0, 0), (1, 1), (2, 2), (3, 5), (5, 5), (6, 6) }
+            );
             yield return (@"(?m)(?:^[a-z])+", "abc\ndef\nxyz", new[] { (0, 1), (4, 5), (8, 9) });
             yield return (@"(?m)(?:^[a-z]{3}\n?)+", "abc\ndef\nxyz", new[] { (0, 11) });
             yield return (@"(?m)(?:^[a-z]{3}\n?)*", "abc\ndef\nxyz", new[] { (0, 11), (11, 11) });
@@ -80,9 +120,17 @@ namespace System.Text.RegularExpressions.Tests
             yield return (@"(?m)$*", "\naa\n", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4) });
             yield return (@"(?m)$+", "\naa\n", new[] { (0, 0), (3, 3), (4, 4) });
             yield return (@"(?m)(?:$\n)+", "\n\naaa\n\n", new[] { (0, 2), (5, 7) });
-            yield return (@"(?m)(?:$\n)*", "\n\naaa\n\n", new[] { (0, 2), (2, 2), (3, 3), (4, 4), (5, 7), (7, 7) });
+            yield return (
+                @"(?m)(?:$\n)*",
+                "\n\naaa\n\n",
+                new[] { (0, 2), (2, 2), (3, 3), (4, 4), (5, 7), (7, 7) }
+            );
             yield return (@"(?m)(?:$\n^)+", "\n\naaa\n\n", new[] { (0, 2), (5, 7) });
-            yield return (@"(?m)(?:^|$)+", "\n\naaa\n\n", new[] { (0, 0), (1, 1), (2, 2), (5, 5), (6, 6), (7, 7) });
+            yield return (
+                @"(?m)(?:^|$)+",
+                "\n\naaa\n\n",
+                new[] { (0, 0), (1, 1), (2, 2), (5, 5), (6, 6), (7, 7) }
+            );
             yield return (@"\b", "a b c", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5) });
             yield return (@"^a|b", "ba", new[] { (0, 1) });
             yield return (@"[0-9][0-9][0-9]000", "153.230000\n", new[] { (4, 10) });
@@ -352,8 +400,16 @@ namespace System.Text.RegularExpressions.Tests
             yield return (@"([ab]*)*", "bbbbbb", new[] { (0, 6), (6, 6) });
             yield return (@"([^a]*)*", "b", new[] { (0, 1), (1, 1) });
             yield return (@"([^a]*)*", "bbbbbb", new[] { (0, 6), (6, 6) });
-            yield return (@"([^a]*)*", "aaaaaa", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) });
-            yield return (@"([^ab]*)*", "ababab", new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) });
+            yield return (
+                @"([^a]*)*",
+                "aaaaaa",
+                new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) }
+            );
+            yield return (
+                @"([^ab]*)*",
+                "ababab",
+                new[] { (0, 0), (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (6, 6) }
+            );
             yield return (@"((..)|(.))", "", new ValueTuple<int, int>[] { });
             yield return (@"((..)|(.))((..)|(.))", "", new ValueTuple<int, int>[] { });
             yield return (@"((..)|(.))((..)|(.))((..)|(.))", "", new ValueTuple<int, int>[] { });
@@ -394,7 +450,11 @@ namespace System.Text.RegularExpressions.Tests
             yield return (@".*(?:abcd)+", "abcdxabcd", new[] { (0, 9) });
             yield return (@".*x(?:abcd)+", "abcdxabcd", new[] { (0, 9) });
             yield return (@"[^abcd]*x(?:abcd)+", "abcdxabcd", new[] { (4, 9) });
-            yield return (@".", "\xD4\xC2\x65\x2B\x0E\xFE", new[] { (0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6) });
+            yield return (
+                @".",
+                "\xD4\xC2\x65\x2B\x0E\xFE",
+                new[] { (0, 1), (1, 2), (2, 3), (3, 4), (4, 5), (5, 6) }
+            );
             yield return ("${2}\u00E4", "\xD4\xC2\x65\x2B\x0E\xFE", new ValueTuple<int, int>[] { });
             yield return ("\u2603", "\u2603", new[] { (0, 1) });
             yield return ("\u2603+", "\u2603", new[] { (0, 1) });
@@ -422,7 +482,11 @@ namespace System.Text.RegularExpressions.Tests
 
         [Theory]
         [MemberData(nameof(MatchStartAndEndPositions_MemberData))]
-        public void MatchStartAndEndPositions(Regex regex, string input, IEnumerable<(int, int)>? matchBoundaries)
+        public void MatchStartAndEndPositions(
+            Regex regex,
+            string input,
+            IEnumerable<(int, int)>? matchBoundaries
+        )
         {
             Match match = regex.Match(input);
             foreach ((int start, int end) in matchBoundaries)

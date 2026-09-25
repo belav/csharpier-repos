@@ -6,26 +6,39 @@ using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Workspaces.ProjectSystem;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.HostWorkspace;
+
 internal class ProjectSystemDiagnosticSource : IProjectSystemDiagnosticSource
 {
-    public void ClearAllDiagnosticsForProject(ProjectId projectId)
+    public void ClearAllDiagnosticsForProject(ProjectId projectId) { }
+
+    public void ClearAnalyzerReferenceDiagnostics(
+        AnalyzerFileReference fileReference,
+        string language,
+        ProjectId projectId
+    ) { }
+
+    public void ClearDiagnosticsForProject(ProjectId projectId, object key) { }
+
+    public DiagnosticData CreateAnalyzerLoadFailureDiagnostic(
+        AnalyzerLoadFailureEventArgs e,
+        string fullPath,
+        ProjectId projectId,
+        string language
+    )
     {
+        return DocumentAnalysisExecutor.CreateAnalyzerLoadFailureDiagnostic(
+            e,
+            fullPath,
+            projectId,
+            language
+        );
     }
 
-    public void ClearAnalyzerReferenceDiagnostics(AnalyzerFileReference fileReference, string language, ProjectId projectId)
-    {
-    }
-
-    public void ClearDiagnosticsForProject(ProjectId projectId, object key)
-    {
-    }
-
-    public DiagnosticData CreateAnalyzerLoadFailureDiagnostic(AnalyzerLoadFailureEventArgs e, string fullPath, ProjectId projectId, string language)
-    {
-        return DocumentAnalysisExecutor.CreateAnalyzerLoadFailureDiagnostic(e, fullPath, projectId, language);
-    }
-
-    public void UpdateDiagnosticsForProject(ProjectId projectId, object key, IEnumerable<DiagnosticData> items)
+    public void UpdateDiagnosticsForProject(
+        ProjectId projectId,
+        object key,
+        IEnumerable<DiagnosticData> items
+    )
     {
         // TODO: actually store the diagnostics
     }

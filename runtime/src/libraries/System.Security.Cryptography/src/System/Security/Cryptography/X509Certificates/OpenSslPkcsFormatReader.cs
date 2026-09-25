@@ -25,7 +25,6 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     return true;
                 }
-
             }
 
             using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
@@ -78,7 +77,10 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal static bool TryReadPkcs7Der(ReadOnlySpan<byte> rawData, out ICertificatePal? certPal)
+        internal static bool TryReadPkcs7Der(
+            ReadOnlySpan<byte> rawData,
+            out ICertificatePal? certPal
+        )
         {
             return TryReadPkcs7Der(rawData, true, out certPal, out _);
         }
@@ -88,12 +90,18 @@ namespace System.Security.Cryptography.X509Certificates
             return TryReadPkcs7Der(bio, true, out certPal, out _);
         }
 
-        internal static bool TryReadPkcs7Der(ReadOnlySpan<byte> rawData, [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+        internal static bool TryReadPkcs7Der(
+            ReadOnlySpan<byte> rawData,
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             return TryReadPkcs7Der(rawData, false, out _, out certPals);
         }
 
-        internal static bool TryReadPkcs7Der(SafeBioHandle bio, [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+        internal static bool TryReadPkcs7Der(
+            SafeBioHandle bio,
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             return TryReadPkcs7Der(bio, false, out _, out certPals);
         }
@@ -102,7 +110,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             bool single,
             out ICertificatePal? certPal,
-            [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             using (SafePkcs7Handle pkcs7 = Interop.Crypto.DecodePkcs7(rawData))
             {
@@ -122,7 +131,8 @@ namespace System.Security.Cryptography.X509Certificates
             SafeBioHandle bio,
             bool single,
             out ICertificatePal? certPal,
-            [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             using (SafePkcs7Handle pkcs7 = Interop.Crypto.D2IPkcs7Bio(bio))
             {
@@ -138,7 +148,10 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        internal static bool TryReadPkcs7Pem(ReadOnlySpan<byte> rawData, out ICertificatePal? certPal)
+        internal static bool TryReadPkcs7Pem(
+            ReadOnlySpan<byte> rawData,
+            out ICertificatePal? certPal
+        )
         {
             return TryReadPkcs7Pem(rawData, true, out certPal, out _);
         }
@@ -148,12 +161,18 @@ namespace System.Security.Cryptography.X509Certificates
             return TryReadPkcs7Pem(bio, true, out certPal, out _);
         }
 
-        internal static bool TryReadPkcs7Pem(ReadOnlySpan<byte> rawData, [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+        internal static bool TryReadPkcs7Pem(
+            ReadOnlySpan<byte> rawData,
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             return TryReadPkcs7Pem(rawData, false, out _, out certPals);
         }
 
-        internal static bool TryReadPkcs7Pem(SafeBioHandle bio, [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+        internal static bool TryReadPkcs7Pem(
+            SafeBioHandle bio,
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             return TryReadPkcs7Pem(bio, false, out _, out certPals);
         }
@@ -162,7 +181,8 @@ namespace System.Security.Cryptography.X509Certificates
             ReadOnlySpan<byte> rawData,
             bool single,
             out ICertificatePal? certPal,
-            [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             using (SafeBioHandle bio = Interop.Crypto.CreateMemoryBio())
             {
@@ -181,7 +201,8 @@ namespace System.Security.Cryptography.X509Certificates
             SafeBioHandle bio,
             bool single,
             out ICertificatePal? certPal,
-            [NotNullWhen(true)] out List<ICertificatePal>? certPals)
+            [NotNullWhen(true)] out List<ICertificatePal>? certPals
+        )
         {
             using (SafePkcs7Handle pkcs7 = Interop.Crypto.PemReadBioPkcs7(bio))
             {
@@ -201,7 +222,8 @@ namespace System.Security.Cryptography.X509Certificates
             SafePkcs7Handle pkcs7,
             bool single,
             out ICertificatePal? certPal,
-            [NotNullWhen(true)] out List<ICertificatePal> certPals)
+            [NotNullWhen(true)] out List<ICertificatePal> certPals
+        )
         {
             List<ICertificatePal>? readPals = single ? null : new List<ICertificatePal>();
 
@@ -244,7 +266,8 @@ namespace System.Security.Cryptography.X509Certificates
             bool ephemeralSpecified,
             bool readingFromFile,
             [NotNullWhen(true)] out ICertificatePal? certPal,
-            out Exception? openSslException)
+            out Exception? openSslException
+        )
         {
             return TryReadPkcs12(
                 rawData,
@@ -254,7 +277,8 @@ namespace System.Security.Cryptography.X509Certificates
                 readingFromFile,
                 out certPal!,
                 out _,
-                out openSslException);
+                out openSslException
+            );
         }
 
         internal static bool TryReadPkcs12(
@@ -263,7 +287,8 @@ namespace System.Security.Cryptography.X509Certificates
             bool ephemeralSpecified,
             bool readingFromFile,
             [NotNullWhen(true)] out List<ICertificatePal>? certPals,
-            out Exception? openSslException)
+            out Exception? openSslException
+        )
         {
             return TryReadPkcs12(
                 rawData,
@@ -273,7 +298,8 @@ namespace System.Security.Cryptography.X509Certificates
                 readingFromFile,
                 out _,
                 out certPals!,
-                out openSslException);
+                out openSslException
+            );
         }
 
         private static bool TryReadPkcs12(
@@ -284,7 +310,8 @@ namespace System.Security.Cryptography.X509Certificates
             bool readingFromFile,
             out ICertificatePal? readPal,
             out List<ICertificatePal>? readCerts,
-            out Exception? openSslException)
+            out Exception? openSslException
+        )
         {
             // DER-PKCS12
             OpenSslPkcs12Reader? pfx;
@@ -298,7 +325,16 @@ namespace System.Security.Cryptography.X509Certificates
 
             using (pfx)
             {
-                return TryReadPkcs12(rawData, pfx, password, single, ephemeralSpecified, readingFromFile, out readPal, out readCerts);
+                return TryReadPkcs12(
+                    rawData,
+                    pfx,
+                    password,
+                    single,
+                    ephemeralSpecified,
+                    readingFromFile,
+                    out readPal,
+                    out readCerts
+                );
             }
         }
 
@@ -310,9 +346,14 @@ namespace System.Security.Cryptography.X509Certificates
             bool ephemeralSpecified,
             bool readingFromFile,
             out ICertificatePal? readPal,
-            out List<ICertificatePal>? readCerts)
+            out List<ICertificatePal>? readCerts
+        )
         {
-            X509Certificate.EnforceIterationCountLimit(ref rawData, readingFromFile, password.PasswordProvided);
+            X509Certificate.EnforceIterationCountLimit(
+                ref rawData,
+                readingFromFile,
+                password.PasswordProvided
+            );
             pfx.Decrypt(password, ephemeralSpecified);
 
             if (single)

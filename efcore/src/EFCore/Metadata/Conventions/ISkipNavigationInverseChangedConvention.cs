@@ -22,5 +22,6 @@ public interface ISkipNavigationInverseChangedConvention : IConvention
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionSkipNavigation? inverse,
         IConventionSkipNavigation? oldInverse,
-        IConventionContext<IConventionSkipNavigation> context);
+        IConventionContext<IConventionSkipNavigation> context
+    );
 }

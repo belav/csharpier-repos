@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 namespace System.Runtime.CompilerServices
 {
     // The CLR data marshaler has some behaviors that are incompatible with
-    // C++. Specifically, C++ treats boolean variables as byte size, whereas 
+    // C++. Specifically, C++ treats boolean variables as byte size, whereas
     // the marshaller treats them as 4-byte size.  Similarly, C++ treats
     // wchar_t variables as 4-byte size, whereas the marshaller treats them
     // as single byte size under certain conditions.  In order to work around
@@ -18,7 +18,5 @@ namespace System.Runtime.CompilerServices
     //
     // Indicates that the modified instance differs from its true type for
     // correct marshalling.
-    public static class CompilerMarshalOverride
-    {
-    }
+    public static class CompilerMarshalOverride { }
 }

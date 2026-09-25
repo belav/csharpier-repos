@@ -1,10 +1,11 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="AspNetSynchronizationContextBase.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
     using System.Runtime.ExceptionServices;
     using System.Threading;
@@ -15,14 +16,16 @@ namespace System.Web {
     // ASP.NET runtime might use. Consumers can target this abstraction rather than coding against
     // the various concrete types directly.
 
-    internal abstract class AspNetSynchronizationContextBase : SynchronizationContext {
-
+    internal abstract class AspNetSynchronizationContextBase : SynchronizationContext
+    {
         private AllowAsyncOperationsBlockDisposable _allowAsyncOperationsBlockDisposable;
 
         internal abstract bool AllowAsyncDuringSyncStages { get; set; }
         internal abstract bool Enabled { get; }
-        internal Exception Error {
-            get {
+        internal Exception Error
+        {
+            get
+            {
                 ExceptionDispatchInfo dispatchInfo = ExceptionDispatchInfo;
                 return (dispatchInfo != null) ? dispatchInfo.SourceException : null;
             }
@@ -40,23 +43,28 @@ namespace System.Web {
         // NOTE: The caller should verify that there are never outstanding calls to PendingCompletion
         // or to WaitForPendingOperationsAsync, since each call replaces the continuation that will
         // be invoked.
-        internal Task WaitForPendingOperationsAsync() {
+        internal Task WaitForPendingOperationsAsync()
+        {
             TaskCompletionSource<object> tcs = new TaskCompletionSource<object>();
 
-            WaitCallback callback = _ => {
+            WaitCallback callback = _ =>
+            {
                 Exception ex = Error;
-                if (ex != null) {
+                if (ex != null)
+                {
                     // We're going to observe the exception in the returned Task. We shouldn't keep
                     // it around in the SynchronizationContext or it will fault future Tasks.
                     ClearError();
                     tcs.TrySetException(ex);
                 }
-                else {
+                else
+                {
                     tcs.TrySetResult(null);
                 }
             };
 
-            if (!PendingCompletion(callback)) {
+            if (!PendingCompletion(callback))
+            {
                 // If PendingCompletion returns false, there are no pending operations and the
                 // callback will not be invoked, so we should just signal the TCS immediately.
                 callback(null);
@@ -82,13 +90,20 @@ namespace System.Web {
         // to kick off async void methods. They are used by the "AllowAsyncDuringSyncStages" setting to
         // determine whether kicking off an operation should throw.
 
-        internal virtual void AllowVoidAsyncOperations() { /* no-op by default */ }
-        internal virtual void ProhibitVoidAsyncOperations() { /* no-op by default */ }
+        internal virtual void AllowVoidAsyncOperations() { /* no-op by default */
+        }
+
+        internal virtual void ProhibitVoidAsyncOperations() { /* no-op by default */
+        }
 
         // helper method for wrapping AllowVoidAsyncOperations / ProhibitVoidAsyncOperations in a using block
-        internal IDisposable AllowVoidAsyncOperationsBlock() {
-            if (_allowAsyncOperationsBlockDisposable == null) {
-                _allowAsyncOperationsBlockDisposable = new AllowAsyncOperationsBlockDisposable(this);
+        internal IDisposable AllowVoidAsyncOperationsBlock()
+        {
+            if (_allowAsyncOperationsBlockDisposable == null)
+            {
+                _allowAsyncOperationsBlockDisposable = new AllowAsyncOperationsBlockDisposable(
+                    this
+                );
             }
 
             AllowVoidAsyncOperations();
@@ -96,22 +111,25 @@ namespace System.Web {
         }
 
         // Helper method to wrap Associate / Disassociate calls in a using() statement
-        internal IDisposable AcquireThreadLock() {
+        internal IDisposable AcquireThreadLock()
+        {
             AssociateWithCurrentThread();
             return new DisposableAction(DisassociateFromCurrentThread);
         }
 
-        private sealed class AllowAsyncOperationsBlockDisposable : IDisposable {
+        private sealed class AllowAsyncOperationsBlockDisposable : IDisposable
+        {
             private readonly AspNetSynchronizationContextBase _syncContext;
 
-            public AllowAsyncOperationsBlockDisposable(AspNetSynchronizationContextBase syncContext) {
+            public AllowAsyncOperationsBlockDisposable(AspNetSynchronizationContextBase syncContext)
+            {
                 _syncContext = syncContext;
             }
 
-            public void Dispose() {
+            public void Dispose()
+            {
                 _syncContext.ProhibitVoidAsyncOperations();
             }
         }
-        
     }
 }

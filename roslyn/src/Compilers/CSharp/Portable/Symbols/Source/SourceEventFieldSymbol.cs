@@ -22,50 +22,59 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     {
         private readonly SourceEventSymbol _associatedEvent;
 
-        internal SourceEventFieldSymbol(SourceEventSymbol associatedEvent, VariableDeclaratorSyntax declaratorSyntax, BindingDiagnosticBag discardedDiagnostics)
-            : base(associatedEvent.containingType,
-                   declaratorSyntax,
-                   (associatedEvent.Modifiers & (~DeclarationModifiers.AccessibilityMask)) | DeclarationModifiers.Private,
-                   modifierErrors: true,
-                   diagnostics: discardedDiagnostics)
+        internal SourceEventFieldSymbol(
+            SourceEventSymbol associatedEvent,
+            VariableDeclaratorSyntax declaratorSyntax,
+            BindingDiagnosticBag discardedDiagnostics
+        )
+            : base(
+                associatedEvent.containingType,
+                declaratorSyntax,
+                (associatedEvent.Modifiers & (~DeclarationModifiers.AccessibilityMask))
+                    | DeclarationModifiers.Private,
+                modifierErrors: true,
+                diagnostics: discardedDiagnostics
+            )
         {
             _associatedEvent = associatedEvent;
         }
 
         public override bool IsImplicitlyDeclared
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override IAttributeTargetSymbol AttributeOwner
         {
-            get
-            {
-                return _associatedEvent;
-            }
+            get { return _associatedEvent; }
         }
 
         public override Symbol AssociatedSymbol
         {
-            get
-            {
-                return _associatedEvent;
-            }
+            get { return _associatedEvent; }
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             var compilation = this.DeclaringCompilation;
-            AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor));
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.TrySynthesizeAttribute(
+                    WellKnownMember.System_Runtime_CompilerServices_CompilerGeneratedAttribute__ctor
+                )
+            );
 
-            // Dev11 doesn't synthesize this attribute, the debugger has a knowledge 
+            // Dev11 doesn't synthesize this attribute, the debugger has a knowledge
             // of special name C# compiler uses for backing fields, which is not desirable.
-            AddSynthesizedAttribute(ref attributes, compilation.SynthesizeDebuggerBrowsableNeverAttribute());
+            AddSynthesizedAttribute(
+                ref attributes,
+                compilation.SynthesizeDebuggerBrowsableNeverAttribute()
+            );
         }
     }
 }

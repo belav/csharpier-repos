@@ -36,21 +36,33 @@ namespace System.Activities.Core.Presentation
         {
             if (obj is StartSymbol)
             {
-                return (List<ConnectionPoint>)obj.GetValue(StateContainerEditor.ConnectionPointsProperty);
+                return (List<ConnectionPoint>)
+                    obj.GetValue(StateContainerEditor.ConnectionPointsProperty);
             }
             if (!(obj is VirtualizedContainerService.VirtualizingContainer))
             {
-                obj = VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(obj);
+                obj =
+                    VisualTreeUtils.FindVisualAncestor<VirtualizedContainerService.VirtualizingContainer>(
+                        obj
+                    );
             }
-            return (List<ConnectionPoint>)obj.GetValue(StateContainerEditor.ConnectionPointsProperty);
+            return (List<ConnectionPoint>)
+                obj.GetValue(StateContainerEditor.ConnectionPointsProperty);
         }
 
-        static void SetConnectionPoints(DependencyObject obj, List<ConnectionPoint> connectionPoints)
+        static void SetConnectionPoints(
+            DependencyObject obj,
+            List<ConnectionPoint> connectionPoints
+        )
         {
             obj.SetValue(StateContainerEditor.ConnectionPointsProperty, connectionPoints);
         }
 
-        static void SetConnectorSrcDestConnectionPoints(Connector connector, ConnectionPoint srcConnectionPoint, ConnectionPoint destConnectionPoint)
+        static void SetConnectorSrcDestConnectionPoints(
+            Connector connector,
+            ConnectionPoint srcConnectionPoint,
+            ConnectionPoint destConnectionPoint
+        )
         {
             FreeFormPanel.SetSourceConnectionPoint(connector, srcConnectionPoint);
             FreeFormPanel.SetDestinationConnectionPoint(connector, destConnectionPoint);
@@ -60,27 +72,42 @@ namespace System.Activities.Core.Presentation
 
         static void SetConnectorLabel(Connector connector, ModelItem connectorModelItem)
         {
-
-            connector.SetBinding(Connector.LabelTextProperty,  new Binding()
-            {
-                Source = connectorModelItem,
-                Path = new PropertyPath("DisplayName")
-            });
+            connector.SetBinding(
+                Connector.LabelTextProperty,
+                new Binding()
+                {
+                    Source = connectorModelItem,
+                    Path = new PropertyPath("DisplayName"),
+                }
+            );
 
             TextBlock toolTip = new TextBlock();
-            toolTip.SetBinding(TextBlock.TextProperty, new Binding()
-            {
-                Source = connectorModelItem,
-                Path = new PropertyPath("DisplayName"),
-                StringFormat = TransitionNameToolTip + Environment.NewLine + SR.EditTransitionTooltip + Environment.NewLine + SR.CopyTransitionToolTip
-            });
+            toolTip.SetBinding(
+                TextBlock.TextProperty,
+                new Binding()
+                {
+                    Source = connectorModelItem,
+                    Path = new PropertyPath("DisplayName"),
+                    StringFormat =
+                        TransitionNameToolTip
+                        + Environment.NewLine
+                        + SR.EditTransitionTooltip
+                        + Environment.NewLine
+                        + SR.CopyTransitionToolTip,
+                }
+            );
 
             connector.SetLabelToolTip(toolTip);
         }
 
-        static void SetConnectorStartDotToolTip(FrameworkElement startDot, ModelItem connectorModelItem)
+        static void SetConnectorStartDotToolTip(
+            FrameworkElement startDot,
+            ModelItem connectorModelItem
+        )
         {
-            ModelItem triggerModelItem = connectorModelItem.Properties[TransitionDesigner.TriggerPropertyName].Value as ModelItem;
+            ModelItem triggerModelItem =
+                connectorModelItem.Properties[TransitionDesigner.TriggerPropertyName].Value
+                as ModelItem;
             string triggerName = null;
             if (triggerModelItem == null)
             {
@@ -94,9 +121,11 @@ namespace System.Activities.Core.Presentation
                     triggerName = displayNameModelItem.GetCurrentValue() as string;
                 }
             }
-            startDot.ToolTip = string.Format(CultureInfo.InvariantCulture, TriggerNameToolTip, triggerName) + Environment.NewLine + SR.SharedTriggerToolTip;
+            startDot.ToolTip =
+                string.Format(CultureInfo.InvariantCulture, TriggerNameToolTip, triggerName)
+                + Environment.NewLine
+                + SR.SharedTriggerToolTip;
         }
-
 
         // Returns true if visual is on the visual tree for point p relative to the reference.
         static bool IsVisualHit(UIElement visual, UIElement reference, Point point)
@@ -121,7 +150,12 @@ namespace System.Activities.Core.Presentation
 
         //This snaps the center of the element to grid.
         //Wherever shapeAnchorPoint is valid, it is made co-incident with the drop location.
-        static Point SnapVisualToGrid(UIElement element, Point location, Point shapeAnchorPoint, bool isAnchorPointValid)
+        static Point SnapVisualToGrid(
+            UIElement element,
+            Point location,
+            Point shapeAnchorPoint,
+            bool isAnchorPointValid
+        )
         {
             Fx.Assert(element != null, "Input UIElement is null");
             element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
@@ -136,7 +170,10 @@ namespace System.Activities.Core.Presentation
             {
                 location.X -= shapeAnchorPoint.X;
                 location.Y -= shapeAnchorPoint.Y;
-                oldCenter = new Point(location.X + element.DesiredSize.Width / 2, location.Y + element.DesiredSize.Height / 2);
+                oldCenter = new Point(
+                    location.X + element.DesiredSize.Width / 2,
+                    location.Y + element.DesiredSize.Height / 2
+                );
             }
 
             Point newCenter = SnapPointToGrid(oldCenter);
@@ -145,12 +182,14 @@ namespace System.Activities.Core.Presentation
 
             if (location.X < 0)
             {
-                double correction = FreeFormPanel.GridSize - ((location.X * (-1)) % FreeFormPanel.GridSize);
+                double correction =
+                    FreeFormPanel.GridSize - ((location.X * (-1)) % FreeFormPanel.GridSize);
                 location.X = (correction == FreeFormPanel.GridSize) ? 0 : correction;
             }
             if (location.Y < 0)
             {
-                double correction = FreeFormPanel.GridSize - ((location.Y * (-1)) % FreeFormPanel.GridSize);
+                double correction =
+                    FreeFormPanel.GridSize - ((location.Y * (-1)) % FreeFormPanel.GridSize);
                 location.Y = (correction == FreeFormPanel.GridSize) ? 0 : correction;
             }
             return location;
@@ -217,7 +256,11 @@ namespace System.Activities.Core.Presentation
             {
                 if (connPoint != null)
                 {
-                    outgoingConnectors.AddRange(connPoint.AttachedConnectors.Where(p => FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint)));
+                    outgoingConnectors.AddRange(
+                        connPoint.AttachedConnectors.Where(p =>
+                            FreeFormPanel.GetSourceConnectionPoint(p).Equals(connPoint)
+                        )
+                    );
                 }
             }
             return outgoingConnectors;
@@ -231,7 +274,11 @@ namespace System.Activities.Core.Presentation
             {
                 if (connPoint != null)
                 {
-                    incomingConnectors.AddRange(connPoint.AttachedConnectors.Where(p => FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)));
+                    incomingConnectors.AddRange(
+                        connPoint.AttachedConnectors.Where(p =>
+                            FreeFormPanel.GetDestinationConnectionPoint(p).Equals(connPoint)
+                        )
+                    );
                 }
             }
             return incomingConnectors;
@@ -240,16 +287,25 @@ namespace System.Activities.Core.Presentation
         static ConnectionPoint ConnectionPointHitTest(UIElement element, Point hitPoint)
         {
             FreeFormPanel panel = VisualTreeUtils.FindVisualAncestor<FreeFormPanel>(element);
-            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(element);
+            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(
+                element
+            );
             return FreeFormPanel.ConnectionPointHitTest(hitPoint, connectionPoints, panel);
         }
 
         static ConnectionPoint GetConnectionPoint(UIElement element, Point location)
         {
-            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(element);
+            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(
+                element
+            );
             foreach (ConnectionPoint connectionPoint in connectionPoints)
             {
-                if (DesignerGeometryHelper.ManhattanDistanceBetweenPoints(location, connectionPoint.Location) <= ConnectorRouter.EndPointTolerance)
+                if (
+                    DesignerGeometryHelper.ManhattanDistanceBetweenPoints(
+                        location,
+                        connectionPoint.Location
+                    ) <= ConnectorRouter.EndPointTolerance
+                )
                 {
                     return connectionPoint;
                 }
@@ -272,7 +328,9 @@ namespace System.Activities.Core.Presentation
             return GetStateMachineModelItem(modelItem1) == GetStateMachineModelItem(modelItem2);
         }
 
-        internal static ModelItem GetParentStateModelItemForTransition(ModelItem transitionModelItem)
+        internal static ModelItem GetParentStateModelItemForTransition(
+            ModelItem transitionModelItem
+        )
         {
             ModelItem parent = transitionModelItem;
             while (parent != null && parent.ItemType != typeof(State))
@@ -287,7 +345,9 @@ namespace System.Activities.Core.Presentation
             ModelItem parent = GetStateMachineModelItem(stateModelItem);
             if (parent.View is StateMachineDesigner)
             {
-                return ((StateMachineDesigner)parent.View).StateContainerEditor.modelItemToUIElement[stateModelItem];
+                return ((StateMachineDesigner)parent.View)
+                    .StateContainerEditor
+                    .modelItemToUIElement[stateModelItem];
             }
             return null;
         }
@@ -306,7 +366,11 @@ namespace System.Activities.Core.Presentation
             return modelItem;
         }
 
-        static internal ConnectionPoint GetClosestConnectionPoint(ConnectionPoint srcConnPoint, List<ConnectionPoint> destConnPoints, out double minDist)
+        internal static ConnectionPoint GetClosestConnectionPoint(
+            ConnectionPoint srcConnPoint,
+            List<ConnectionPoint> destConnPoints,
+            out double minDist
+        )
         {
             minDist = double.PositiveInfinity;
             double dist = 0;
@@ -316,7 +380,10 @@ namespace System.Activities.Core.Presentation
             {
                 if (srcConnPoint != destConnPoint)
                 {
-                    dist = DesignerGeometryHelper.ManhattanDistanceBetweenPoints(srcPoint, FreeFormPanel.GetLocationRelativeToOutmostPanel(destConnPoint));
+                    dist = DesignerGeometryHelper.ManhattanDistanceBetweenPoints(
+                        srcPoint,
+                        FreeFormPanel.GetLocationRelativeToOutmostPanel(destConnPoint)
+                    );
                     if (dist < minDist)
                     {
                         minDist = dist;
@@ -328,21 +395,38 @@ namespace System.Activities.Core.Presentation
             return closestPoint;
         }
 
-        static ConnectionPoint GetClosestConnectionPointNotOfType(ConnectionPoint srcConnectionPoint, List<ConnectionPoint> targetConnectionPoints, ConnectionPointKind illegalConnectionPointKind)
+        static ConnectionPoint GetClosestConnectionPointNotOfType(
+            ConnectionPoint srcConnectionPoint,
+            List<ConnectionPoint> targetConnectionPoints,
+            ConnectionPointKind illegalConnectionPointKind
+        )
         {
             double minDist;
             List<ConnectionPoint> filteredConnectionPoints = new List<ConnectionPoint>();
             foreach (ConnectionPoint connPoint in targetConnectionPoints)
             {
-                if (connPoint.PointType != illegalConnectionPointKind && !connPoint.Equals(srcConnectionPoint) && connPoint.AttachedConnectors.Count == 0)
+                if (
+                    connPoint.PointType != illegalConnectionPointKind
+                    && !connPoint.Equals(srcConnectionPoint)
+                    && connPoint.AttachedConnectors.Count == 0
+                )
                 {
                     filteredConnectionPoints.Add(connPoint);
                 }
             }
-            return GetClosestConnectionPoint(srcConnectionPoint, filteredConnectionPoints, out minDist);
+            return GetClosestConnectionPoint(
+                srcConnectionPoint,
+                filteredConnectionPoints,
+                out minDist
+            );
         }
 
-        static void GetClosestConnectionPointPair(List<ConnectionPoint> srcConnPoints, List<ConnectionPoint> destConnPoints, out ConnectionPoint srcConnPoint, out ConnectionPoint destConnPoint)
+        static void GetClosestConnectionPointPair(
+            List<ConnectionPoint> srcConnPoints,
+            List<ConnectionPoint> destConnPoints,
+            out ConnectionPoint srcConnPoint,
+            out ConnectionPoint destConnPoint
+        )
         {
             double minDist = double.PositiveInfinity;
             double dist;
@@ -363,7 +447,12 @@ namespace System.Activities.Core.Presentation
             Fx.Assert(destConnPoint != null, "No ConnectionPoint found");
         }
 
-        static void GetEmptySrcDestConnectionPoints(UIElement source, UIElement dest, out ConnectionPoint srcConnPoint, out ConnectionPoint destConnPoint)
+        static void GetEmptySrcDestConnectionPoints(
+            UIElement source,
+            UIElement dest,
+            out ConnectionPoint srcConnPoint,
+            out ConnectionPoint destConnPoint
+        )
         {
             srcConnPoint = null;
             destConnPoint = null;
@@ -371,44 +460,74 @@ namespace System.Activities.Core.Presentation
             List<ConnectionPoint> destConnectionPoints = GetEmptyConnectionPoints(dest);
             if (srcConnectionPoints.Count > 0 && destConnectionPoints.Count > 0)
             {
-                GetClosestConnectionPointPair(srcConnectionPoints, destConnectionPoints, out srcConnPoint, out destConnPoint);
+                GetClosestConnectionPointPair(
+                    srcConnectionPoints,
+                    destConnectionPoints,
+                    out srcConnPoint,
+                    out destConnPoint
+                );
             }
         }
 
         internal static List<ConnectionPoint> GetEmptyConnectionPoints(UIElement designer)
         {
-            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(designer);
+            List<ConnectionPoint> connectionPoints = StateContainerEditor.GetConnectionPoints(
+                designer
+            );
             if (connectionPoints != null)
             {
-                return new List<ConnectionPoint>(connectionPoints.Where<ConnectionPoint>(
-                    (p) => { return p.AttachedConnectors == null || p.AttachedConnectors.Count == 0; }));
+                return new List<ConnectionPoint>(
+                    connectionPoints.Where<ConnectionPoint>(
+                        (p) =>
+                        {
+                            return p.AttachedConnectors == null || p.AttachedConnectors.Count == 0;
+                        }
+                    )
+                );
             }
             return new List<ConnectionPoint>();
         }
 
         //This returns the closest non-incoming connectionPoint on source. Return value will be different than destConnectionPoint.
-        static ConnectionPoint GetClosestSrcConnectionPoint(UIElement src, ConnectionPoint destConnectionPoint)
+        static ConnectionPoint GetClosestSrcConnectionPoint(
+            UIElement src,
+            ConnectionPoint destConnectionPoint
+        )
         {
             ConnectionPoint srcConnectionPoint = null;
             if (destConnectionPoint.PointType != ConnectionPointKind.Outgoing)
             {
-                srcConnectionPoint = GetClosestConnectionPointNotOfType(destConnectionPoint, StateContainerEditor.GetConnectionPoints(src), ConnectionPointKind.Incoming);
+                srcConnectionPoint = GetClosestConnectionPointNotOfType(
+                    destConnectionPoint,
+                    StateContainerEditor.GetConnectionPoints(src),
+                    ConnectionPointKind.Incoming
+                );
             }
             return srcConnectionPoint;
         }
 
         //This returns the closest non-outgoing connectionPoint on dest. Return value will be different than sourceConnectionPoint.
-        static ConnectionPoint GetClosestDestConnectionPoint(ConnectionPoint sourceConnectionPoint, UIElement dest)
+        static ConnectionPoint GetClosestDestConnectionPoint(
+            ConnectionPoint sourceConnectionPoint,
+            UIElement dest
+        )
         {
             ConnectionPoint destConnectionPoint = null;
             if (sourceConnectionPoint.PointType != ConnectionPointKind.Incoming)
             {
-                destConnectionPoint = GetClosestConnectionPointNotOfType(sourceConnectionPoint, StateContainerEditor.GetConnectionPoints(dest), ConnectionPointKind.Outgoing);
+                destConnectionPoint = GetClosestConnectionPointNotOfType(
+                    sourceConnectionPoint,
+                    StateContainerEditor.GetConnectionPoints(dest),
+                    ConnectionPointKind.Outgoing
+                );
             }
             return destConnectionPoint;
         }
 
-        static ConnectionPoint GetSrcConnectionPointForSharedTrigger(UIElement sourceDesigner, ModelItem connectorModelItem)
+        static ConnectionPoint GetSrcConnectionPointForSharedTrigger(
+            UIElement sourceDesigner,
+            ModelItem connectorModelItem
+        )
         {
             ConnectionPoint sourceConnectionPoint = null;
             List<Connector> connectors = StateContainerEditor.GetOutgoingConnectors(sourceDesigner);
@@ -417,7 +536,12 @@ namespace System.Activities.Core.Presentation
                 ModelItem modelItem = StateContainerEditor.GetConnectorModelItem(connector);
                 if (modelItem != null && modelItem.ItemType == typeof(Transition))
                 {
-                    if (modelItem.Properties[TransitionDesigner.TriggerPropertyName].Value == connectorModelItem.Properties[TransitionDesigner.TriggerPropertyName].Value)
+                    if (
+                        modelItem.Properties[TransitionDesigner.TriggerPropertyName].Value
+                        == connectorModelItem
+                            .Properties[TransitionDesigner.TriggerPropertyName]
+                            .Value
+                    )
                     {
                         sourceConnectionPoint = FreeFormPanel.GetSourceConnectionPoint(connector);
                     }
@@ -427,11 +551,18 @@ namespace System.Activities.Core.Presentation
         }
 
         // Test if the transition is contained by any of the states or their descendants
-        static bool IsTransitionModelItemContainedByStateModelItems(ModelItem transitionModelItem, IEnumerable<ModelItem> stateModelItems)
+        static bool IsTransitionModelItemContainedByStateModelItems(
+            ModelItem transitionModelItem,
+            IEnumerable<ModelItem> stateModelItems
+        )
         {
             foreach (ModelItem stateModelItem in stateModelItems)
             {
-                if (stateModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection.Contains(transitionModelItem))
+                if (
+                    stateModelItem
+                        .Properties[StateDesigner.TransitionsPropertyName]
+                        .Collection.Contains(transitionModelItem)
+                )
                 {
                     return true;
                 }
@@ -439,7 +570,10 @@ namespace System.Activities.Core.Presentation
             return false;
         }
 
-        static bool IsTransitionDestinationWithinStates(Transition transition, IEnumerable<State> states)
+        static bool IsTransitionDestinationWithinStates(
+            Transition transition,
+            IEnumerable<State> states
+        )
         {
             foreach (State state in states)
             {
@@ -459,13 +593,18 @@ namespace System.Activities.Core.Presentation
             {
                 State state = statesToProcess.Dequeue();
 
-                IEnumerable<Transition> toRemove = state.Transitions.Where<Transition>((p) =>
-                    { return !IsTransitionDestinationWithinStates(p, states); }).Reverse();
+                IEnumerable<Transition> toRemove = state
+                    .Transitions.Where<Transition>(
+                        (p) =>
+                        {
+                            return !IsTransitionDestinationWithinStates(p, states);
+                        }
+                    )
+                    .Reverse();
                 foreach (Transition transition in toRemove)
                 {
                     state.Transitions.Remove(transition);
                 }
-
             }
         }
 
@@ -474,7 +613,9 @@ namespace System.Activities.Core.Presentation
             List<ModelItem> transitionModelItems = new List<ModelItem>();
             foreach (ModelItem stateModelItem in stateModelItems)
             {
-                transitionModelItems.AddRange(stateModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection);
+                transitionModelItems.AddRange(
+                    stateModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection
+                );
                 //transitionModelItems.AddRange(GetTransitionModelItems(stateModelItem.Properties[ChildStatesPropertyName].Collection));
             }
             return transitionModelItems;
@@ -482,12 +623,19 @@ namespace System.Activities.Core.Presentation
 
         internal static bool IsFinalState(ModelItem modelItem)
         {
-            return modelItem.ItemType == typeof(State) && (bool)modelItem.Properties[StateDesigner.IsFinalPropertyName].Value.GetCurrentValue();
+            return modelItem.ItemType == typeof(State)
+                && (bool)
+                    modelItem.Properties[StateDesigner.IsFinalPropertyName].Value.GetCurrentValue();
         }
 
         static void ShowMessageBox(string message)
         {
-            MessageBox.Show(message, SR.ErrorMessageBoxTitle, MessageBoxButton.OK, MessageBoxImage.Error);
+            MessageBox.Show(
+                message,
+                SR.ErrorMessageBoxTitle,
+                MessageBoxButton.OK,
+                MessageBoxImage.Error
+            );
         }
 
         static void ReportConnectorCreationError(ConnectorCreationResult result)
@@ -519,14 +667,27 @@ namespace System.Activities.Core.Presentation
 
         internal static string GenerateTransitionName(ModelItem stateMachineModelItem)
         {
-            Fx.Assert(stateMachineModelItem.ItemType == typeof(StateMachine), "ModelItem param should be a statemachine.");
+            Fx.Assert(
+                stateMachineModelItem.ItemType == typeof(StateMachine),
+                "ModelItem param should be a statemachine."
+            );
             HashSet<String> existingTransitionNames = new HashSet<string>();
 
-            foreach (ModelItem stateModelItem in stateMachineModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection)
+            foreach (
+                ModelItem stateModelItem in stateMachineModelItem
+                    .Properties[StateMachineDesigner.StatesPropertyName]
+                    .Collection
+            )
             {
-                foreach (ModelItem transitionModelItem in stateModelItem.Properties[StateDesigner.TransitionsPropertyName].Collection)
+                foreach (
+                    ModelItem transitionModelItem in stateModelItem
+                        .Properties[StateDesigner.TransitionsPropertyName]
+                        .Collection
+                )
                 {
-                    existingTransitionNames.Add(((Transition)transitionModelItem.GetCurrentValue()).DisplayName);
+                    existingTransitionNames.Add(
+                        ((Transition)transitionModelItem.GetCurrentValue()).DisplayName
+                    );
                 }
             }
 

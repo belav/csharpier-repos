@@ -31,7 +31,8 @@ namespace System.Composition.Hosting.Core
 
         // Protects the two members holding shared instances
         private readonly object _sharingLock = new object();
-        private SmallSparseInitonlyArray _sharedPartInstances, _instancesUndergoingInitialization;
+        private SmallSparseInitonlyArray _sharedPartInstances,
+            _instancesUndergoingInitialization;
 
         // Protects the member holding bound instances.
         private readonly object _boundPartLock = new object();
@@ -91,7 +92,10 @@ namespace System.Composition.Hosting.Core
 
             // To generate acceptable error messages here we're going to need to pass in a description
             // of the component, or otherwise find a way to get one.
-            string message = SR.Format(SR.Component_NotCreatableOutsideSharingBoundary, sharingBoundary);
+            string message = SR.Format(
+                SR.Component_NotCreatableOutsideSharingBoundary,
+                sharingBoundary
+            );
             var ex = new CompositionFailedException(message);
             Debug.WriteLine(SR.Diagnostic_ThrowingException, ex.ToString());
             throw ex;
@@ -149,10 +153,17 @@ namespace System.Composition.Hosting.Core
         /// a lock will be taken that will serialize other writes via this method (concurrent reads will continue to
         /// be safe and lock-free). It is important that the composition, and thus lock acquisition, is strictly
         /// leaf-to-root in the lifetime tree.</remarks>
-        public object GetOrCreate(int sharingId, CompositionOperation operation, CompositeActivator creator)
+        public object GetOrCreate(
+            int sharingId,
+            CompositionOperation operation,
+            CompositeActivator creator
+        )
         {
             object result;
-            if (_sharedPartInstances != null && _sharedPartInstances.TryGetValue(sharingId, out result))
+            if (
+                _sharedPartInstances != null
+                && _sharedPartInstances.TryGetValue(sharingId, out result)
+            )
                 return result;
 
             // Remains locked for the rest of the operation.

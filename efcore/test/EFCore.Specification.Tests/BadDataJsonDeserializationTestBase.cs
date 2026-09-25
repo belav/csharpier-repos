@@ -16,8 +16,8 @@ public abstract class BadDataJsonDeserializationTestBase
     [InlineData("""{"Prop"}:127}""")]
     [InlineData("""{"Prop":"X"}""")]
     [InlineData("""{"Prop":}""")]
-    public virtual void Throws_for_bad_sbyte_JSON_values(string json)
-        => Throws_for_bad_JSON_value<Int8Type, sbyte>(nameof(Int8Type.Int8), json);
+    public virtual void Throws_for_bad_sbyte_JSON_values(string json) =>
+        Throws_for_bad_JSON_value<Int8Type, sbyte>(nameof(Int8Type.Int8), json);
 
     protected class Int8Type
     {
@@ -29,8 +29,8 @@ public abstract class BadDataJsonDeserializationTestBase
     [InlineData("""{"Prop"}:127}""")]
     [InlineData("""{"Prop":"X"}""")]
     [InlineData("""{"Prop":}""")]
-    public virtual void Throws_for_bad_nullable_long_JSON_values(string json)
-        => Throws_for_bad_JSON_value<NullableInt64Type, long?>(nameof(NullableInt64Type.Int64), json);
+    public virtual void Throws_for_bad_nullable_long_JSON_values(string json) =>
+        Throws_for_bad_JSON_value<NullableInt64Type, long?>(nameof(NullableInt64Type.Int64), json);
 
     protected class NullableInt64Type
     {
@@ -46,11 +46,15 @@ public abstract class BadDataJsonDeserializationTestBase
     [InlineData("""{"Prop":true}""")]
     [InlineData("""{"Prop":false}""")]
     [InlineData("""{"Prop":"X"}""")]
-    public virtual void Throws_for_bad_point_as_GeoJson(string json)
-        => Throws_for_bad_JSON_property_value<PointType, Point>(
-            b => b.Metadata.SetJsonValueReaderWriterType(typeof(JsonTypesTestBase.JsonGeoJsonReaderWriter)),
+    public virtual void Throws_for_bad_point_as_GeoJson(string json) =>
+        Throws_for_bad_JSON_property_value<PointType, Point>(
+            b =>
+                b.Metadata.SetJsonValueReaderWriterType(
+                    typeof(JsonTypesTestBase.JsonGeoJsonReaderWriter)
+                ),
             nameof(PointType.Point),
-            json);
+            json
+        );
 
     public class PointType
     {
@@ -63,11 +67,12 @@ public abstract class BadDataJsonDeserializationTestBase
     [InlineData("""{"Prop":[-128,],23]}""")]
     [InlineData("""{"Prop":[-128,},23]}""")]
     [InlineData("""{"Prop":[-128,,23]}""")]
-    public virtual void Throws_for_bad_collection_of_sbyte_JSON_values(string json)
-        => Throws_for_bad_JSON_value<Int8CollectionType, List<sbyte>>(
+    public virtual void Throws_for_bad_collection_of_sbyte_JSON_values(string json) =>
+        Throws_for_bad_JSON_value<Int8CollectionType, List<sbyte>>(
             nameof(Int8CollectionType.Int8),
             json,
-            mappedCollection: true);
+            mappedCollection: true
+        );
 
     protected class Int8CollectionType
     {
@@ -80,11 +85,12 @@ public abstract class BadDataJsonDeserializationTestBase
     [InlineData("""{"Prop":[-128,],23]}""")]
     [InlineData("""{"Prop":[-128,},23]}""")]
     [InlineData("""{"Prop":[-128,,23]}""")]
-    public virtual void Throws_for_bad_collection_of_nullable_long_JSON_values(string json)
-        => Throws_for_bad_JSON_value<NullableInt64CollectionType, List<long?>>(
+    public virtual void Throws_for_bad_collection_of_nullable_long_JSON_values(string json) =>
+        Throws_for_bad_JSON_value<NullableInt64CollectionType, List<long?>>(
             nameof(NullableInt64CollectionType.Int64),
             json,
-            mappedCollection: true);
+            mappedCollection: true
+        );
 
     protected class NullableInt64CollectionType
     {
@@ -95,7 +101,8 @@ public abstract class BadDataJsonDeserializationTestBase
         string propertyName,
         string json,
         bool mappedCollection = false,
-        object? existingObject = null)
+        object? existingObject = null
+    )
         where TEntity : class
     {
         if (mappedCollection)
@@ -106,7 +113,8 @@ public abstract class BadDataJsonDeserializationTestBase
                 propertyName,
                 json,
                 mappedCollection,
-                existingObject);
+                existingObject
+            );
         }
         else
         {
@@ -116,7 +124,8 @@ public abstract class BadDataJsonDeserializationTestBase
                 propertyName,
                 json,
                 mappedCollection,
-                existingObject);
+                existingObject
+            );
         }
     }
 
@@ -124,15 +133,17 @@ public abstract class BadDataJsonDeserializationTestBase
         Action<PropertyBuilder> buildProperty,
         string propertyName,
         string json,
-        object? existingObject = null)
-        where TEntity : class
-        => Throws_for_bad_JSON_value<TEntity, TModel>(
+        object? existingObject = null
+    )
+        where TEntity : class =>
+        Throws_for_bad_JSON_value<TEntity, TModel>(
             b => buildProperty(b.Entity<TEntity>().HasNoKey().Property(propertyName)),
             null,
             propertyName,
             json,
             mappedCollection: false,
-            existingObject);
+            existingObject
+        );
 
     protected virtual void Throws_for_bad_JSON_value<TEntity, TModel>(
         Action<ModelBuilder> buildModel,
@@ -140,14 +151,19 @@ public abstract class BadDataJsonDeserializationTestBase
         string propertyName,
         string json,
         bool mappedCollection = false,
-        object? existingObject = null)
+        object? existingObject = null
+    )
         where TEntity : class
     {
-        using var context = new SingleTypeDbContext(OnConfiguring, buildModel, configureConventions);
+        using var context = new SingleTypeDbContext(
+            OnConfiguring,
+            buildModel,
+            configureConventions
+        );
         var property = context.Model.FindEntityType(typeof(TEntity))!.GetProperty(propertyName);
 
-        var jsonReaderWriter = property.GetJsonValueReaderWriter()
-            ?? property.GetTypeMapping().JsonValueReaderWriter!;
+        var jsonReaderWriter =
+            property.GetJsonValueReaderWriter() ?? property.GetTypeMapping().JsonValueReaderWriter!;
 
         var buffer = Encoding.UTF8.GetBytes(json);
         var readerManager = new Utf8JsonReaderManager(new JsonReaderData(buffer), null);
@@ -162,38 +178,46 @@ public abstract class BadDataJsonDeserializationTestBase
         }
         catch (Exception e)
         {
-            Assert.True(e is InvalidOperationException || e is JsonException || e is Newtonsoft.Json.JsonException);
+            Assert.True(
+                e is InvalidOperationException
+                    || e is JsonException
+                    || e is Newtonsoft.Json.JsonException
+            );
         }
     }
 
     protected class SingleTypeDbContext(
-            Action<DbContextOptionsBuilder> buildOptions,
-            Action<ModelBuilder> buildModel,
-            Action<ModelConfigurationBuilder>? configureConventions = null)
-        : DbContext
+        Action<DbContextOptionsBuilder> buildOptions,
+        Action<ModelBuilder> buildModel,
+        Action<ModelConfigurationBuilder>? configureConventions = null
+    ) : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => buildOptions(optionsBuilder.ReplaceService<IModelCacheKeyFactory, DegenerateCacheKeyFactory>());
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            buildOptions(
+                optionsBuilder.ReplaceService<IModelCacheKeyFactory, DegenerateCacheKeyFactory>()
+            );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => buildModel(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            buildModel(modelBuilder);
 
-        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
-            => configureConventions?.Invoke(configurationBuilder);
+        protected override void ConfigureConventions(
+            ModelConfigurationBuilder configurationBuilder
+        ) => configureConventions?.Invoke(configurationBuilder);
 
         private class DegenerateCacheKeyFactory : IModelCacheKeyFactory
         {
             private static int _value;
 
-            public object Create(DbContext context, bool designTime)
-                => _value++;
+            public object Create(DbContext context, bool designTime) => _value++;
         }
     }
 
-    protected virtual void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.ConfigureWarnings(
-            w => w.Ignore(
+    protected virtual void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.ConfigureWarnings(w =>
+            w.Ignore(
                 CoreEventId.MappedEntityTypeIgnoredWarning,
                 CoreEventId.MappedPropertyIgnoredWarning,
-                CoreEventId.MappedNavigationIgnoredWarning));
+                CoreEventId.MappedNavigationIgnoredWarning
+            )
+        );
 }

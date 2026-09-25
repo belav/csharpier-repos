@@ -2,11 +2,11 @@
 // <copyright file="XmlSchemaComplexContentRestriction.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     using System.Collections;
     using System.Xml.Serialization;
 
@@ -14,18 +14,20 @@ namespace System.Xml.Schema {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSchemaComplexContentRestriction : XmlSchemaContent {
+    public class XmlSchemaComplexContentRestriction : XmlSchemaContent
+    {
         XmlSchemaParticle particle;
         XmlSchemaObjectCollection attributes = new XmlSchemaObjectCollection();
         XmlSchemaAnyAttribute anyAttribute;
-        XmlQualifiedName baseTypeName = XmlQualifiedName.Empty; 
+        XmlQualifiedName baseTypeName = XmlQualifiedName.Empty;
 
         /// <include file='doc\XmlSchemaComplexContentRestriction.uex' path='docs/doc[@for="XmlSchemaComplexContentRestriction.BaseTypeName"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("base")]
-        public XmlQualifiedName BaseTypeName { 
+        public XmlQualifiedName BaseTypeName
+        {
             get { return baseTypeName; }
             set { baseTypeName = (value == null ? XmlQualifiedName.Empty : value); }
         }
@@ -34,11 +36,14 @@ namespace System.Xml.Schema {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [XmlElement("group", typeof(XmlSchemaGroupRef)),
-         XmlElement("choice", typeof(XmlSchemaChoice)),
-         XmlElement("all", typeof(XmlSchemaAll)),
-         XmlElement("sequence", typeof(XmlSchemaSequence))]
-        public XmlSchemaParticle Particle {
+        [
+            XmlElement("group", typeof(XmlSchemaGroupRef)),
+            XmlElement("choice", typeof(XmlSchemaChoice)),
+            XmlElement("all", typeof(XmlSchemaAll)),
+            XmlElement("sequence", typeof(XmlSchemaSequence))
+        ]
+        public XmlSchemaParticle Particle
+        {
             get { return particle; }
             set { particle = value; }
         }
@@ -47,9 +52,12 @@ namespace System.Xml.Schema {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        [XmlElement("attribute", typeof(XmlSchemaAttribute)),
-         XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))]
-        public XmlSchemaObjectCollection Attributes {
+        [
+            XmlElement("attribute", typeof(XmlSchemaAttribute)),
+            XmlElement("attributeGroup", typeof(XmlSchemaAttributeGroupRef))
+        ]
+        public XmlSchemaObjectCollection Attributes
+        {
             get { return attributes; }
         }
 
@@ -58,15 +66,15 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlElement("anyAttribute")]
-        public XmlSchemaAnyAttribute AnyAttribute {
+        public XmlSchemaAnyAttribute AnyAttribute
+        {
             get { return anyAttribute; }
             set { anyAttribute = value; }
         }
 
-        internal void SetAttributes(XmlSchemaObjectCollection newAttributes) {
+        internal void SetAttributes(XmlSchemaObjectCollection newAttributes)
+        {
             attributes = newAttributes;
         }
     }
-
 }
-

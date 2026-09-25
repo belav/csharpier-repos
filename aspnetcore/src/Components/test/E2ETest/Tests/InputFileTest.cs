@@ -57,13 +57,11 @@ public class InputFileTest : ServerTestBase<ToggleExecutionModeServerFixture<Pro
 
         // Validate that the file was uploaded correctly and all fields are present
         Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
-        Browser.NotEqual(
-            default,
-            () => DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture)
+        Browser.NotEqual(default, () =>
+            DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture)
         );
-        Browser.Equal(
-            file.Contents.Length.ToString(CultureInfo.InvariantCulture),
-            () => fileSizeElement.Text
+        Browser.Equal(file.Contents.Length.ToString(CultureInfo.InvariantCulture), () =>
+            fileSizeElement.Text
         );
         Browser.Equal("text/plain", () => fileContentTypeElement.Text);
         Browser.Equal(file.Text, () => fileContentElement.Text);
@@ -96,13 +94,11 @@ public class InputFileTest : ServerTestBase<ToggleExecutionModeServerFixture<Pro
 
         // Validate that the file was uploaded correctly and all fields are present
         Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
-        Browser.NotEqual(
-            default,
-            () => DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture)
+        Browser.NotEqual(default, () =>
+            DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture)
         );
-        Browser.Equal(
-            file.Contents.Length.ToString(CultureInfo.InvariantCulture),
-            () => fileSizeElement.Text
+        Browser.Equal(file.Contents.Length.ToString(CultureInfo.InvariantCulture), () =>
+            fileSizeElement.Text
         );
         Browser.Equal("text/plain", () => fileContentTypeElement.Text);
         Browser.Equal(file.Text, () => fileContentElement.Text);
@@ -122,37 +118,26 @@ public class InputFileTest : ServerTestBase<ToggleExecutionModeServerFixture<Pro
         inputFile.SendKeys(string.Join("\n", files.Select(f => f.Path)));
 
         // Validate that each file was uploaded correctly
-        Assert.All(
-            files,
-            file =>
-            {
-                var fileContainer = Browser.Exists(By.Id($"file-{file.Name}"));
-                var fileNameElement = fileContainer.FindElement(By.Id("file-name"));
-                var fileLastModifiedElement = fileContainer.FindElement(
-                    By.Id("file-last-modified")
-                );
-                var fileSizeElement = fileContainer.FindElement(By.Id("file-size"));
-                var fileContentTypeElement = fileContainer.FindElement(By.Id("file-content-type"));
-                var fileContentElement = fileContainer.FindElement(By.Id("file-content"));
+        Assert.All(files, file =>
+        {
+            var fileContainer = Browser.Exists(By.Id($"file-{file.Name}"));
+            var fileNameElement = fileContainer.FindElement(By.Id("file-name"));
+            var fileLastModifiedElement = fileContainer.FindElement(By.Id("file-last-modified"));
+            var fileSizeElement = fileContainer.FindElement(By.Id("file-size"));
+            var fileContentTypeElement = fileContainer.FindElement(By.Id("file-content-type"));
+            var fileContentElement = fileContainer.FindElement(By.Id("file-content"));
 
-                // Validate that the file was uploaded correctly and all fields are present
-                Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
-                Browser.NotEqual(
-                    default,
-                    () =>
-                        DateTimeOffset.Parse(
-                            fileLastModifiedElement.Text,
-                            CultureInfo.InvariantCulture
-                        )
-                );
-                Browser.Equal(
-                    file.Contents.Length.ToString(CultureInfo.InvariantCulture),
-                    () => fileSizeElement.Text
-                );
-                Browser.Equal("text/plain", () => fileContentTypeElement.Text);
-                Browser.Equal(file.Text, () => fileContentElement.Text);
-            }
-        );
+            // Validate that the file was uploaded correctly and all fields are present
+            Browser.False(() => string.IsNullOrWhiteSpace(fileNameElement.Text));
+            Browser.NotEqual(default, () =>
+                DateTimeOffset.Parse(fileLastModifiedElement.Text, CultureInfo.InvariantCulture)
+            );
+            Browser.Equal(file.Contents.Length.ToString(CultureInfo.InvariantCulture), () =>
+                fileSizeElement.Text
+            );
+            Browser.Equal("text/plain", () => fileContentTypeElement.Text);
+            Browser.Equal(file.Text, () => fileContentElement.Text);
+        });
     }
 
     [Fact]
@@ -207,9 +192,8 @@ public class InputFileTest : ServerTestBase<ToggleExecutionModeServerFixture<Pro
 
         // Validate that the proper exception is thrown
         var exceptionMessage = Browser.Exists(By.Id("exception-message"));
-        Browser.Equal(
-            "The maximum number of files accepted is 1, but 2 were supplied.",
-            () => exceptionMessage.Text
+        Browser.Equal("The maximum number of files accepted is 1, but 2 were supplied.", () =>
+            exceptionMessage.Text
         );
     }
 
@@ -229,9 +213,8 @@ public class InputFileTest : ServerTestBase<ToggleExecutionModeServerFixture<Pro
 
         // Validate that the proper exception is thrown
         var exceptionMessage = Browser.Exists(By.Id("exception-message"));
-        Browser.Equal(
-            "Supplied file with size 32 bytes exceeds the maximum of 10 bytes.",
-            () => exceptionMessage.Text
+        Browser.Equal("Supplied file with size 32 bytes exceeds the maximum of 10 bytes.", () =>
+            exceptionMessage.Text
         );
     }
 

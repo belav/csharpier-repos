@@ -52,7 +52,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 """;
 
             Compilation compilation = CompilationHelper.CreateCompilation(source);
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(5, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::HelloWorld.MyType");
@@ -62,7 +64,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void TypeDiscoveryPrimitiveExternalPOCO()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLocationCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLocationCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
@@ -103,11 +106,19 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(6, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::HelloWorld.MyType");
@@ -118,11 +129,15 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void TypeDiscoveryWithRenamedAttribute()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLocationCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLocationCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
 
             string source = """
                 using System.Text.Json.Serialization;
@@ -165,9 +180,14 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(6, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::HelloWorld.MyType");
@@ -179,7 +199,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         [InlineData("System.Text.Json.Not", true)]
         [InlineData("System.Text.Json", false)]
         [InlineData("System.Text.Json.Not", false)]
-        public static void LocalJsonSerializableAttributeExpectedShape(string assemblyName, bool includeSTJ)
+        public static void LocalJsonSerializableAttributeExpectedShape(
+            string assemblyName,
+            bool includeSTJ
+        )
         {
             string source = """
                 using System;
@@ -203,8 +226,16 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences: null, assemblyName, includeSTJ: includeSTJ);
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation, disableDiagnosticValidation: true);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences: null,
+                assemblyName,
+                includeSTJ: includeSTJ
+            );
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation,
+                disableDiagnosticValidation: true
+            );
 
             if (includeSTJ)
             {
@@ -224,7 +255,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         {
             Compilation compilation = CompilationHelper.CreateRepeatedLocationsCompilation();
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation, disableDiagnosticValidation: true);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation,
+                disableDiagnosticValidation: true
+            );
 
             // Make sure compilation was successful.
             result.Diagnostics.AssertMaxSeverity(DiagnosticSeverity.Warning);
@@ -235,7 +269,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void CollectionDictionarySourceGeneration()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedHighLowTempsCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedHighLowTempsCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
@@ -245,7 +280,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 using System.Collections.Generic;
                 using System.Text.Json.Serialization;
                 using ReferencedAssembly;
-    
+
                 namespace HelloWorld
                 {
                     [JsonSerializable(typeof(HelloWorld.WeatherForecastWithPOCOs))]
@@ -266,9 +301,15 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
             CompilationHelper.RunJsonSourceGenerator(compilation);
         }
 
@@ -310,7 +351,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             Compilation compilation = CompilationHelper.CreateCompilation(source);
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(5, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::MyType");
@@ -325,7 +368,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void Record()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLibRecordCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLibRecordCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
@@ -356,11 +400,16 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
 
             Compilation compilation = CompilationHelper.CreateCompilation(source);
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(3, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::HelloWorld.AppRecord");
@@ -373,7 +422,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void RecordInExternalAssembly()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLibRecordCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLibRecordCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
@@ -391,10 +441,18 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(3, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::ReferencedAssembly.LibRecord");
@@ -406,7 +464,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void RecordDerivedFromRecordInExternalAssembly()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedSimpleLibRecordCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedSimpleLibRecordCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
@@ -429,11 +488,19 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(3, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::HelloWorld.AppRecord");
@@ -459,7 +526,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 """;
 
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateCompilation(referencedSource);
+            Compilation referencedCompilation = CompilationHelper.CreateCompilation(
+                referencedSource
+            );
 
             // Obtain the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
@@ -481,10 +550,18 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             // Should find the generated type.
             Assert.Equal(2, result.AllGeneratedTypes.Count());
@@ -562,7 +639,9 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             Compilation compilation = CompilationHelper.CreateCompilation(source);
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             // Should find the generated type.
             Assert.Equal(3, result.AllGeneratedTypes.Count());
@@ -598,7 +677,8 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         public void UseUnderlyingTypeConverterForNullableType()
         {
             // Compile the referenced assembly first.
-            Compilation referencedCompilation = CompilationHelper.CreateReferencedLocationCompilation();
+            Compilation referencedCompilation =
+                CompilationHelper.CreateReferencedLocationCompilation();
 
             // Emit the image of the referenced assembly.
             byte[] referencedImage = CompilationHelper.CreateAssemblyImage(referencedCompilation);
@@ -638,11 +718,19 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            MetadataReference[] additionalReferences = { MetadataReference.CreateFromImage(referencedImage) };
+            MetadataReference[] additionalReferences =
+            {
+                MetadataReference.CreateFromImage(referencedImage),
+            };
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, additionalReferences);
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                additionalReferences
+            );
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(3, result.AllGeneratedTypes.Count());
             result.AssertContainsType("global::Test.Sample");
@@ -688,13 +776,19 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             Compilation compilation = CompilationHelper.CreateCompilation(source);
 
-            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(compilation);
+            JsonSourceGeneratorResult result = CompilationHelper.RunJsonSourceGenerator(
+                compilation
+            );
 
             Assert.Equal(5, result.AllGeneratedTypes.Count());
-            result.AssertContainsType("global::System.Collections.Generic.Dictionary<string, string>");
+            result.AssertContainsType(
+                "global::System.Collections.Generic.Dictionary<string, string>"
+            );
             result.AssertContainsType("global::HelloWorld.MyClass.NestedGenericClass<string>");
             result.AssertContainsType("global::HelloWorld.MyGenericClass<string>.NestedClass");
-            result.AssertContainsType("global::HelloWorld.MyGenericClass<string>.NestedGenericClass<int>");
+            result.AssertContainsType(
+                "global::HelloWorld.MyGenericClass<string>.NestedGenericClass<int>"
+            );
             result.AssertContainsType("string");
         }
 
@@ -713,7 +807,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
         [InlineData("public partial record MyRecord(int x)", LanguageVersion.CSharp10)]
         [InlineData("public partial record struct MyRecordStruct(int x)", LanguageVersion.CSharp10)]
 #endif
-        public void NestedContextsAreSupported(string containingTypeDeclarationHeader, LanguageVersion? languageVersion = null)
+        public void NestedContextsAreSupported(
+            string containingTypeDeclarationHeader,
+            LanguageVersion? languageVersion = null
+        )
         {
             string source = $$"""
                 using System.Text.Json.Serialization;
@@ -734,7 +831,10 @@ namespace System.Text.Json.SourceGeneration.UnitTests
                 }
                 """;
 
-            Compilation compilation = CompilationHelper.CreateCompilation(source, parseOptions: CompilationHelper.CreateParseOptions(languageVersion));
+            Compilation compilation = CompilationHelper.CreateCompilation(
+                source,
+                parseOptions: CompilationHelper.CreateParseOptions(languageVersion)
+            );
             CompilationHelper.RunJsonSourceGenerator(compilation);
         }
 

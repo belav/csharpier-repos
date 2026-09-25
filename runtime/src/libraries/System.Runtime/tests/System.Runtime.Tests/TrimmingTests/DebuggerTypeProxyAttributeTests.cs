@@ -10,7 +10,10 @@ class Program
     static int Main(string[] args)
     {
         MyClass myClass = new MyClass() { Name = "trimmed" };
-        MyClassWithProxyString myClassWithString = new MyClassWithProxyString() { Name = "trimmed" };
+        MyClassWithProxyString myClassWithString = new MyClassWithProxyString()
+        {
+            Name = "trimmed",
+        };
 
         Type[] allTypes = typeof(MyClass).Assembly.GetTypes();
         bool foundDebuggerProxy = false;
@@ -18,15 +21,19 @@ class Program
         for (int i = 0; i < allTypes.Length; i++)
         {
             Type currentType = allTypes[i];
-            if (currentType.FullName == "Program+MyClass+DebuggerProxy" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            if (
+                currentType.FullName == "Program+MyClass+DebuggerProxy"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundDebuggerProxy = true;
             }
-            else if (currentType.FullName == "Program+MyClassWithProxyStringProxy" &&
-                currentType.GetProperties().Length == 1 &&
-                currentType.GetConstructors().Length == 1)
+            else if (
+                currentType.FullName == "Program+MyClassWithProxyStringProxy"
+                && currentType.GetProperties().Length == 1
+                && currentType.GetConstructors().Length == 1
+            )
             {
                 foundStringDebuggerProxy = true;
             }

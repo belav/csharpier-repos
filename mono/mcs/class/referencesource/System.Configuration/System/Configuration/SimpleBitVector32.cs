@@ -1,10 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="SimpleBitVector32.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System;
 
     //
@@ -14,45 +15,53 @@ namespace System.Configuration {
     // measurable performance gain, at the expense of some maintainability.
     //
     [Serializable]
-    internal struct SimpleBitVector32 {
+    internal struct SimpleBitVector32
+    {
         private int data;
 
-        internal SimpleBitVector32(int data) {
+        internal SimpleBitVector32(int data)
+        {
             this.data = data;
         }
 
-        internal int Data {
+        internal int Data
+        {
             get { return data; }
 #if UNUSED_CODE
             set { data = value; }
 #endif
         }
 
-        internal bool this[int bit] {
-            get {
-                return (data & bit) == bit;
-            }
-            set {
+        internal bool this[int bit]
+        {
+            get { return (data & bit) == bit; }
+            set
+            {
                 int _data = data;
-                if(value) {
+                if (value)
+                {
                     data = _data | bit;
                 }
-                else {
+                else
+                {
                     data = _data & ~bit;
                 }
             }
         }
 
 #if UNUSED_CODE
-        internal void Set(int bit) {
+        internal void Set(int bit)
+        {
             data |= bit;
         }
 
-        internal void Clear(int bit) {
+        internal void Clear(int bit)
+        {
             data &= ~bit;
         }
 
-        internal void Toggle(int bit) {
+        internal void Toggle(int bit)
+        {
             data ^= bit;
         }
 
@@ -70,7 +79,8 @@ namespace System.Configuration {
          * 1           0           1           0
          * 1           1           0           1
          */
-        internal void Copy(SimpleBitVector32 src, int bit) {
+        internal void Copy(SimpleBitVector32 src, int bit)
+        {
             data ^= (data ^ src.data) & bit;
         }
 #endif

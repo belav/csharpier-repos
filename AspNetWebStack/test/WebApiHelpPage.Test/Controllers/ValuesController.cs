@@ -51,7 +51,7 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
         /// </summary>
         /// <param name="point">The type defined with TypeConverter.</param>
         /// <returns>A point string.</returns>
-        public string Get([FromUri]Point point)
+        public string Get([FromUri] Point point)
         {
             return "point";
         }
@@ -61,7 +61,7 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
         /// </summary>
         /// <param name="value">The value.</param>
         /// <returns>A response.</returns>
-        public HttpResponseMessage Post([FromBody]string value)
+        public HttpResponseMessage Post([FromBody] string value)
         {
             return Request.CreateResponse<string>(HttpStatusCode.OK, "hello");
         }
@@ -71,33 +71,25 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
         /// </summary>
         /// <param name="id">The id.</param>
         /// <param name="value">The value.</param>
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+        public void Put(int id, [FromBody] string value) { }
 
         /// <summary>
         /// Updates the value pair collection.
         /// </summary>
         /// <param name="valuePairCollection">The value pair collection.</param>
-        public void Put(List<Tuple<int, string>> valuePairCollection)
-        {
-        }
+        public void Put(List<Tuple<int, string>> valuePairCollection) { }
 
         /// <summary>
         /// Deletes the value.
         /// </summary>
         /// <param name="id">The id.</param>
-        public void Delete(int? id)
-        {
-        }
+        public void Delete(int? id) { }
 
         /// <summary>
         /// Patches the value pair.
         /// </summary>
         /// <param name="valuePair">The pair.</param>
-        public void Patch(Tuple<int, string> valuePair)
-        {
-        }
+        public void Patch(Tuple<int, string> valuePair) { }
 
         /// <summary>
         /// Returns the options.
@@ -129,10 +121,9 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
         {
             // Overrides the CanConvertFrom method of TypeConverter.
             // The ITypeDescriptorContext interface provides the context for the
-            // conversion. Typically, this interface is used at design time to 
+            // conversion. Typically, this interface is used at design time to
             // provide information about the design-time container.
-            public override bool CanConvertFrom(ITypeDescriptorContext context,
-               Type sourceType)
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
             {
                 if (sourceType == typeof(string))
                 {
@@ -140,9 +131,13 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
                 }
                 return base.CanConvertFrom(context, sourceType);
             }
+
             // Overrides the ConvertFrom method of TypeConverter.
-            public override object ConvertFrom(ITypeDescriptorContext context,
-               CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
                 if (value is string)
                 {
@@ -151,9 +146,14 @@ namespace WebApiHelpPageWebHost.UnitTest.Controllers
                 }
                 return base.ConvertFrom(context, culture, value);
             }
+
             // Overrides the ConvertTo method of TypeConverter.
-            public override object ConvertTo(ITypeDescriptorContext context,
-               CultureInfo culture, object value, Type destinationType)
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value,
+                Type destinationType
+            )
             {
                 if (destinationType == typeof(string))
                 {

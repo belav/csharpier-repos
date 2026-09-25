@@ -25,17 +25,19 @@ namespace System.ServiceModel.Dispatcher
         TimeSpan timeout = TimeSpan.Zero;
         bool isTransactedReceiveChannelDispatcher = false;
 
-        internal TransactionBehavior()
-        {
-        }
+        internal TransactionBehavior() { }
 
         internal TransactionBehavior(DispatchRuntime dispatch)
         {
-            this.isConcurrent = (dispatch.ConcurrencyMode == ConcurrencyMode.Multiple ||
-                dispatch.ConcurrencyMode == ConcurrencyMode.Reentrant);
+            this.isConcurrent = (
+                dispatch.ConcurrencyMode == ConcurrencyMode.Multiple
+                || dispatch.ConcurrencyMode == ConcurrencyMode.Reentrant
+            );
 
             this.dispatch = dispatch;
-            this.isTransactedReceiveChannelDispatcher = dispatch.ChannelDispatcher.IsTransactedReceive;
+            this.isTransactedReceiveChannelDispatcher = dispatch
+                .ChannelDispatcher
+                .IsTransactedReceive;
 
             // Don't pull in System.Transactions.dll if we don't need it
             if (dispatch.ChannelDispatcher.TransactionIsolationLevelSet)
@@ -43,12 +45,19 @@ namespace System.ServiceModel.Dispatcher
                 this.InitializeIsolationLevel(dispatch);
             }
 
-            this.timeout = TransactionBehavior.NormalizeTimeout(dispatch.ChannelDispatcher.TransactionTimeout);
+            this.timeout = TransactionBehavior.NormalizeTimeout(
+                dispatch.ChannelDispatcher.TransactionTimeout
+            );
         }
 
-        internal static Exception CreateFault(string reasonText, string codeString, bool isNetDispatcherFault)
+        internal static Exception CreateFault(
+            string reasonText,
+            string codeString,
+            bool isNetDispatcherFault
+        )
         {
-            string faultCodeNamespace, action;
+            string faultCodeNamespace,
+                action;
 
             // 'Transactions' action should be used only when we expect to have a TransactionChannel in the channel stack
             // otherwise one should use the NetDispatch action.
@@ -86,14 +95,20 @@ namespace System.ServiceModel.Dispatcher
             {
                 timeout = TransactionManager.DefaultTimeout;
             }
-            else if (TimeSpan.Zero != TransactionManager.MaximumTimeout && timeout > TransactionManager.MaximumTimeout)
+            else if (
+                TimeSpan.Zero != TransactionManager.MaximumTimeout
+                && timeout > TransactionManager.MaximumTimeout
+            )
             {
                 timeout = TransactionManager.MaximumTimeout;
             }
             return timeout;
         }
 
-        internal static CommittableTransaction CreateTransaction(IsolationLevel isolation, TimeSpan timeout)
+        internal static CommittableTransaction CreateTransaction(
+            IsolationLevel isolation,
+            TimeSpan timeout
+        )
         {
             TransactionOptions options = new TransactionOptions();
             options.IsolationLevel = isolation;
@@ -165,7 +180,7 @@ namespace System.ServiceModel.Dispatcher
         {
             if (rpc.Operation.HasDefaultUnhandledActionInvoker)
             {
-                // we ignore unhandled operations 
+                // we ignore unhandled operations
                 return;
             }
 
@@ -175,22 +190,28 @@ namespace System.ServiceModel.Dispatcher
             if (rpc.Operation.IsInsideTransactedReceiveScope)
             {
                 // We may want to use an existing transaction for the instance.
-                IInstanceTransaction instanceTransaction = rpc.Operation.Invoker as IInstanceTransaction;
+                IInstanceTransaction instanceTransaction =
+                    rpc.Operation.Invoker as IInstanceTransaction;
                 if (instanceTransaction != null)
                 {
-                    contextTransaction = instanceTransaction.GetTransactionForInstance(rpc.OperationContext);
+                    contextTransaction = instanceTransaction.GetTransactionForInstance(
+                        rpc.OperationContext
+                    );
                 }
 
                 if (contextTransaction != null)
                 {
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information,
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
                             TraceCode.TxSourceTxScopeRequiredUsingExistingTransaction,
-                            SR.GetString(SR.TraceCodeTxSourceTxScopeRequiredUsingExistingTransaction,
-                            contextTransaction.TransactionInformation.LocalIdentifier,
-                            rpc.Operation.Name)
-                            );
+                            SR.GetString(
+                                SR.TraceCodeTxSourceTxScopeRequiredUsingExistingTransaction,
+                                contextTransaction.TransactionInformation.LocalIdentifier,
+                                rpc.Operation.Name
+                            )
+                        );
                     }
                 }
             }
@@ -208,7 +229,13 @@ namespace System.ServiceModel.Dispatcher
             catch (TransactionException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionUnmarshalFailed, e.Message), FaultCodeConstants.Codes.TransactionUnmarshalingFailed, false));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    TransactionBehavior.CreateFault(
+                        SR.GetString(SR.SFxTransactionUnmarshalFailed, e.Message),
+                        FaultCodeConstants.Codes.TransactionUnmarshalingFailed,
+                        false
+                    )
+                );
             }
 
             if (rpc.Operation.TransactionRequired)
@@ -219,29 +246,38 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.TxSourceTxScopeRequiredIsTransactedTransport,
-                                SR.GetString(SR.TraceCodeTxSourceTxScopeRequiredIsTransactedTransport,
-                                transaction.TransactionInformation.LocalIdentifier,
-                                rpc.Operation.Name)
-                                );
+                                SR.GetString(
+                                    SR.TraceCodeTxSourceTxScopeRequiredIsTransactedTransport,
+                                    transaction.TransactionInformation.LocalIdentifier,
+                                    rpc.Operation.Name
+                                )
+                            );
                         }
                     }
                     else
                     {
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.TxSourceTxScopeRequiredIsTransactionFlow,
-                                SR.GetString(SR.TraceCodeTxSourceTxScopeRequiredIsTransactionFlow,
-                                transaction.TransactionInformation.LocalIdentifier,
-                                rpc.Operation.Name)
-                                );
+                                SR.GetString(
+                                    SR.TraceCodeTxSourceTxScopeRequiredIsTransactionFlow,
+                                    transaction.TransactionInformation.LocalIdentifier,
+                                    rpc.Operation.Name
+                                )
+                            );
                         }
 
                         if (PerformanceCounters.PerformanceCountersEnabled)
                         {
-                            PerformanceCounters.TxFlowed(PerformanceCounters.GetEndpointDispatcher(), rpc.Operation.Name);
+                            PerformanceCounters.TxFlowed(
+                                PerformanceCounters.GetEndpointDispatcher(),
+                                rpc.Operation.Name
+                            );
                         }
 
                         bool sameTransaction = false;
@@ -258,12 +294,20 @@ namespace System.ServiceModel.Dispatcher
                         {
                             try
                             {
-                                transaction = transaction.DependentClone(DependentCloneOption.RollbackIfNotComplete);
+                                transaction = transaction.DependentClone(
+                                    DependentCloneOption.RollbackIfNotComplete
+                                );
                             }
                             catch (TransactionException e)
                             {
                                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    TransactionBehavior.CreateFault(
+                                        SR.GetString(SR.SFxTransactionAsyncAborted),
+                                        FaultCodeConstants.Codes.TransactionAborted,
+                                        true
+                                    )
+                                );
                             }
                         }
                     }
@@ -306,11 +350,14 @@ namespace System.ServiceModel.Dispatcher
                     context.ReleaseServiceInstance();
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Information,
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
                             TraceCode.TxReleaseServiceInstanceOnCompletion,
-                            SR.GetString(SR.TraceCodeTxReleaseServiceInstanceOnCompletion,
-                            contextTransaction.TransactionInformation.LocalIdentifier)
-                            );
+                            SR.GetString(
+                                SR.TraceCodeTxReleaseServiceInstanceOnCompletion,
+                                contextTransaction.TransactionInformation.LocalIdentifier
+                            )
+                        );
                     }
                 }
 
@@ -319,7 +366,13 @@ namespace System.ServiceModel.Dispatcher
                 if (transaction == null || transaction == contextTransaction)
                 {
                     rpc.Transaction.Current = contextTransaction;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        TransactionBehavior.CreateFault(
+                            SR.GetString(SR.SFxTransactionAsyncAborted),
+                            FaultCodeConstants.Codes.TransactionAborted,
+                            true
+                        )
+                    );
                 }
                 else
                 {
@@ -336,54 +389,86 @@ namespace System.ServiceModel.Dispatcher
                         transaction = contextTransaction;
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.TxSourceTxScopeRequiredIsAttachedTransaction,
-                                SR.GetString(SR.TraceCodeTxSourceTxScopeRequiredIsAttachedTransaction,
-                                transaction.TransactionInformation.LocalIdentifier,
-                                rpc.Operation.Name)
-                                );
+                                SR.GetString(
+                                    SR.TraceCodeTxSourceTxScopeRequiredIsAttachedTransaction,
+                                    transaction.TransactionInformation.LocalIdentifier,
+                                    rpc.Operation.Name
+                                )
+                            );
                         }
                     }
                     else
                     {
-                        transaction = TransactionBehavior.CreateTransaction(this.isolation, this.timeout);
+                        transaction = TransactionBehavior.CreateTransaction(
+                            this.isolation,
+                            this.timeout
+                        );
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.TxSourceTxScopeRequiredIsCreateNewTransaction,
-                                SR.GetString(SR.TraceCodeTxSourceTxScopeRequiredIsCreateNewTransaction,
-                                transaction.TransactionInformation.LocalIdentifier,
-                                rpc.Operation.Name)
-                                );
+                                SR.GetString(
+                                    SR.TraceCodeTxSourceTxScopeRequiredIsCreateNewTransaction,
+                                    transaction.TransactionInformation.LocalIdentifier,
+                                    rpc.Operation.Name
+                                )
+                            );
                         }
                     }
                 }
 
-                if ((this.isolation != IsolationLevel.Unspecified) && (transaction.IsolationLevel != this.isolation))
+                if (
+                    (this.isolation != IsolationLevel.Unspecified)
+                    && (transaction.IsolationLevel != this.isolation)
+                )
                 {
-                    throw TraceUtility.ThrowHelperError(TransactionBehavior.CreateFault
-                        (SR.GetString(SR.IsolationLevelMismatch2, transaction.IsolationLevel, this.isolation), FaultCodeConstants.Codes.TransactionIsolationLevelMismatch, false), rpc.Request);
+                    throw TraceUtility.ThrowHelperError(
+                        TransactionBehavior.CreateFault(
+                            SR.GetString(
+                                SR.IsolationLevelMismatch2,
+                                transaction.IsolationLevel,
+                                this.isolation
+                            ),
+                            FaultCodeConstants.Codes.TransactionIsolationLevelMismatch,
+                            false
+                        ),
+                        rpc.Request
+                    );
                 }
 
                 rpc.Transaction.Current = transaction;
-                rpc.InstanceContext.Transaction.AddReference(ref rpc, rpc.Transaction.Current, true);
+                rpc.InstanceContext.Transaction.AddReference(
+                    ref rpc,
+                    rpc.Transaction.Current,
+                    true
+                );
 
                 try
                 {
                     rpc.Transaction.Clone = transaction.Clone();
                     if (rpc.Operation.IsInsideTransactedReceiveScope)
                     {
-                        //It is because we want to synchronize the dispatcher processing of messages with the commit 
-                        //processing that is started by the completion of a TransactedReceiveScope. We need to make sure 
-                        //that all the dispatcher processing is done and we can do that by creating a blocking dependent clone and only 
+                        //It is because we want to synchronize the dispatcher processing of messages with the commit
+                        //processing that is started by the completion of a TransactedReceiveScope. We need to make sure
+                        //that all the dispatcher processing is done and we can do that by creating a blocking dependent clone and only
                         //completing it after all of the message processing is done for a given TransactionRpcFacet
                         rpc.Transaction.CreateDependentClone();
                     }
                 }
-                catch (ObjectDisposedException e)//transaction may be async aborted
+                catch (ObjectDisposedException e) //transaction may be async aborted
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        TransactionBehavior.CreateFault(
+                            SR.GetString(SR.SFxTransactionAsyncAborted),
+                            FaultCodeConstants.Codes.TransactionAborted,
+                            true
+                        )
+                    );
                 }
 
                 rpc.InstanceContext.Transaction.AddReference(ref rpc, rpc.Transaction.Clone, false);
@@ -416,7 +501,6 @@ namespace System.ServiceModel.Dispatcher
 
     internal class TransactionRpcFacet
     {
-
         //internal members
         // Current is the original transaction that we created/flowed/whatever.  This is
         // the "current" transaction used by the operation, and we keep it around so we
@@ -434,19 +518,17 @@ namespace System.ServiceModel.Dispatcher
         TransactionScope scope;
         bool transactionSetComplete = false; // To track if user has called SetTransactionComplete()
 
-        internal TransactionRpcFacet()
-        {
-        }
+        internal TransactionRpcFacet() { }
 
         internal TransactionRpcFacet(ref MessageRpc rpc)
         {
             this.rpc = rpc;
         }
 
-        // Calling Complete will Commit or Abort the transaction based on, 
+        // Calling Complete will Commit or Abort the transaction based on,
         // error - If any user error is propagated to the service we abort the transaction unless SetTransactionComplete was successful.
-        // transactionDoomed - If internal error occurred and this error may or may not be propagated 
-        //                                 by the user to the service. Abort the Tx if transactionDoomed is set true. 
+        // transactionDoomed - If internal error occurred and this error may or may not be propagated
+        //                                 by the user to the service. Abort the Tx if transactionDoomed is set true.
         //
         // If the user violates the following rules, the transaction is doomed.
         // User cannot call TransactionSetComplete() when TransactionAutoComplete is true.
@@ -474,27 +556,36 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (this.transactionSetComplete)
                     {
-                        // Commit the transaction when TransactionSetComplete() is called and 
-                        // even when an exception(non transactional) happens after this call. 
-                        rpc.InstanceContext.Transaction.CompletePendingTransaction(this.Current, null);
+                        // Commit the transaction when TransactionSetComplete() is called and
+                        // even when an exception(non transactional) happens after this call.
+                        rpc.InstanceContext.Transaction.CompletePendingTransaction(
+                            this.Current,
+                            null
+                        );
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.TxCompletionStatusCompletedForSetComplete,
-                                SR.GetString(SR.TraceCodeTxCompletionStatusCompletedForSetComplete,
-                                this.Current.TransactionInformation.LocalIdentifier,
-                                this.rpc.Operation.Name)
-                                );
+                                SR.GetString(
+                                    SR.TraceCodeTxCompletionStatusCompletedForSetComplete,
+                                    this.Current.TransactionInformation.LocalIdentifier,
+                                    this.rpc.Operation.Name
+                                )
+                            );
                         }
                     }
                     else if (this.IsCompleted || (error != null))
                     {
-                        rpc.InstanceContext.Transaction.CompletePendingTransaction(this.Current, error);
+                        rpc.InstanceContext.Transaction.CompletePendingTransaction(
+                            this.Current,
+                            error
+                        );
                     }
                 }
                 if (this.rpc.Operation.IsInsideTransactedReceiveScope)
                 {
-                    //We are done with the message processing associated with this TransactionRpcFacet so a commit that may have 
+                    //We are done with the message processing associated with this TransactionRpcFacet so a commit that may have
                     //been started by a TransactedReceiveScope can move forward.
                     this.CompleteDependentClone();
                 }
@@ -524,13 +615,18 @@ namespace System.ServiceModel.Dispatcher
                 }
                 catch (ObjectDisposedException e)
                 {
-                    //we don't want to mask the real error here 
+                    //we don't want to mask the real error here
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SFxTransactionInvalidSetTransactionComplete, rpc.Operation.Name, rpc.Host.Description.Name)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxTransactionInvalidSetTransactionComplete,
+                            rpc.Operation.Name,
+                            rpc.Host.Description.Name
+                        )
+                    )
+                );
             }
             // Prohibit user from calling SetTransactionComplete() multiple times.
             // Transaction will be aborted.
@@ -545,9 +641,15 @@ namespace System.ServiceModel.Dispatcher
                     //we don't want to mask the real error here
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SFxMultiSetTransactionComplete, rpc.Operation.Name, rpc.Host.Description.Name)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxMultiSetTransactionComplete,
+                            rpc.Operation.Name,
+                            rpc.Host.Description.Name
+                        )
+                    )
+                );
             }
 
             this.transactionSetComplete = true;
@@ -562,14 +664,15 @@ namespace System.ServiceModel.Dispatcher
 
             if ((clone != null) && (error == null))
             {
-
                 if (TD.TransactionScopeCreateIsEnabled())
                 {
                     if (clone != null && clone.TransactionInformation != null)
                     {
-                        TD.TransactionScopeCreate(rpc.EventTraceActivity,
+                        TD.TransactionScopeCreate(
+                            rpc.EventTraceActivity,
                             clone.TransactionInformation.LocalIdentifier,
-                            clone.TransactionInformation.DistributedIdentifier);
+                            clone.TransactionInformation.DistributedIdentifier
+                        );
                     }
                 }
 
@@ -596,15 +699,24 @@ namespace System.ServiceModel.Dispatcher
                 catch (TransactionException e)
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        TransactionBehavior.CreateFault(
+                            SR.GetString(SR.SFxTransactionAsyncAborted),
+                            FaultCodeConstants.Codes.TransactionAborted,
+                            true
+                        )
+                    );
                 }
             }
         }
+
         internal void CreateDependentClone()
         {
             if ((this.dependentClone == null) && (this.Clone != null))
             {
-                this.dependentClone = this.Clone.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                this.dependentClone = this.Clone.DependentClone(
+                    DependentCloneOption.BlockCommitUntilComplete
+                );
             }
         }
 
@@ -639,16 +751,9 @@ namespace System.ServiceModel.Dispatcher
         // no need to lock the following property because it's used only if Concurrency = false
         internal bool ShouldReleaseInstance
         {
-            get
-            {
-                return this.shouldReleaseInstance;
-            }
-            set
-            {
-                this.shouldReleaseInstance = value;
-            }
+            get { return this.shouldReleaseInstance; }
+            set { this.shouldReleaseInstance = value; }
         }
-
 
         // ........................................................................................................
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -668,16 +773,29 @@ namespace System.ServiceModel.Dispatcher
                         this.shouldReleaseInstance = false;
                         if (rpc.Error == null) //we don't want to mask the initial error
                         {
-                            rpc.Error = TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true);
-                            DiagnosticUtility.TraceHandledException(rpc.Error, TraceEventType.Error);
+                            rpc.Error = TransactionBehavior.CreateFault(
+                                SR.GetString(SR.SFxTransactionAsyncAborted),
+                                FaultCodeConstants.Codes.TransactionAborted,
+                                true
+                            );
+                            DiagnosticUtility.TraceHandledException(
+                                rpc.Error,
+                                TraceEventType.Error
+                            );
                             if (DiagnosticUtility.ShouldTraceInformation)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Information,
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
                                     TraceCode.TxCompletionStatusCompletedForAsyncAbort,
-                                    SR.GetString(SR.TraceCodeTxCompletionStatusCompletedForAsyncAbort,
-                                    rpc.Transaction.Current.TransactionInformation.LocalIdentifier,
-                                    rpc.Operation.Name)
-                                    );
+                                    SR.GetString(
+                                        SR.TraceCodeTxCompletionStatusCompletedForAsyncAbort,
+                                        rpc.Transaction
+                                            .Current
+                                            .TransactionInformation
+                                            .LocalIdentifier,
+                                        rpc.Operation.Name
+                                    )
+                                );
                             }
                         }
                     }
@@ -688,23 +806,34 @@ namespace System.ServiceModel.Dispatcher
                         {
                             if (rpc.Error != null)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Information,
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
                                     TraceCode.TxCompletionStatusCompletedForError,
-                                    SR.GetString(SR.TraceCodeTxCompletionStatusCompletedForError,
-                                    rpc.Transaction.Current.TransactionInformation.LocalIdentifier,
-                                    rpc.Operation.Name)
-                                    );
+                                    SR.GetString(
+                                        SR.TraceCodeTxCompletionStatusCompletedForError,
+                                        rpc.Transaction
+                                            .Current
+                                            .TransactionInformation
+                                            .LocalIdentifier,
+                                        rpc.Operation.Name
+                                    )
+                                );
                             }
                             else
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Information,
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
                                     TraceCode.TxCompletionStatusCompletedForAutocomplete,
-                                    SR.GetString(SR.TraceCodeTxCompletionStatusCompletedForAutocomplete,
-                                    rpc.Transaction.Current.TransactionInformation.LocalIdentifier,
-                                    rpc.Operation.Name)
-                                    );
+                                    SR.GetString(
+                                        SR.TraceCodeTxCompletionStatusCompletedForAutocomplete,
+                                        rpc.Transaction
+                                            .Current
+                                            .TransactionInformation
+                                            .LocalIdentifier,
+                                        rpc.Operation.Name
+                                    )
+                                );
                             }
-
                         }
 
                         this.Attached = null;
@@ -712,7 +841,9 @@ namespace System.ServiceModel.Dispatcher
                         if (!(waiting == null))
                         {
                             // tx processing requires failfast when state is inconsistent
-                            DiagnosticUtility.FailFast("waiting should be null when resetting current");
+                            DiagnosticUtility.FailFast(
+                                "waiting should be null when resetting current"
+                            );
                         }
 
                         this.current = null;
@@ -722,12 +853,15 @@ namespace System.ServiceModel.Dispatcher
                         this.Attached = rpc.Transaction.Current;
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.TxCompletionStatusRemainsAttached,
-                                SR.GetString(SR.TraceCodeTxCompletionStatusRemainsAttached,
-                                rpc.Transaction.Current.TransactionInformation.LocalIdentifier,
-                                rpc.Operation.Name)
-                                );
+                                SR.GetString(
+                                    SR.TraceCodeTxCompletionStatusRemainsAttached,
+                                    rpc.Transaction.Current.TransactionInformation.LocalIdentifier,
+                                    rpc.Operation.Name
+                                )
+                            );
                         }
                     }
                 }
@@ -736,22 +870,28 @@ namespace System.ServiceModel.Dispatcher
                     //transaction has been asynchronously aborted
                     if (rpc.Error == null) //we don't want to mask the initial error
                     {
-                        rpc.Error = TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true);
+                        rpc.Error = TransactionBehavior.CreateFault(
+                            SR.GetString(SR.SFxTransactionAsyncAborted),
+                            FaultCodeConstants.Codes.TransactionAborted,
+                            true
+                        );
                         DiagnosticUtility.TraceHandledException(rpc.Error, TraceEventType.Error);
                         if (DiagnosticUtility.ShouldTraceInformation)
                         {
-                            TraceUtility.TraceEvent(TraceEventType.Information,
+                            TraceUtility.TraceEvent(
+                                TraceEventType.Information,
                                 TraceCode.TxCompletionStatusCompletedForAsyncAbort,
-                                SR.GetString(SR.TraceCodeTxCompletionStatusCompletedForAsyncAbort,
-                                rpc.Transaction.Current.TransactionInformation.LocalIdentifier,
-                                rpc.Operation.Name)
-                                );
+                                SR.GetString(
+                                    SR.TraceCodeTxCompletionStatusCompletedForAsyncAbort,
+                                    rpc.Transaction.Current.TransactionInformation.LocalIdentifier,
+                                    rpc.Operation.Name
+                                )
+                            );
                         }
                     }
                 }
             }
         }
-
 
         // ........................................................................................................
         internal void CompletePendingTransaction(Transaction transaction, Exception error)
@@ -790,19 +930,23 @@ namespace System.ServiceModel.Dispatcher
                 {
                     transaction.Rollback();
                 }
-
             }
             catch (TransactionException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    TransactionBehavior.CreateFault(
+                        SR.GetString(SR.SFxTransactionAsyncAborted),
+                        FaultCodeConstants.Codes.TransactionAborted,
+                        true
+                    )
+                );
             }
         }
 
         // ........................................................................................................
         internal TransactionScope CreateTransactionScope(Transaction transaction)
         {
-
             lock (this.mutex)
             {
                 if (this.pending.ContainsKey(transaction))
@@ -820,7 +964,13 @@ namespace System.ServiceModel.Dispatcher
             }
 
             //the transaction was asynchronously aborted
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(TransactionBehavior.CreateFault(SR.GetString(SR.SFxTransactionAsyncAborted), FaultCodeConstants.Codes.TransactionAborted, true));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                TransactionBehavior.CreateFault(
+                    SR.GetString(SR.SFxTransactionAsyncAborted),
+                    FaultCodeConstants.Codes.TransactionAborted,
+                    true
+                )
+            );
         }
 
         // ........................................................................................................
@@ -832,7 +982,9 @@ namespace System.ServiceModel.Dispatcher
             if (!(requestTransaction != null))
             {
                 // tx processing requires failfast when state is inconsistent
-                DiagnosticUtility.FailFast("we should never get here with a requestTransaction null");
+                DiagnosticUtility.FailFast(
+                    "we should never get here with a requestTransaction null"
+                );
             }
 
             lock (this.mutex)
@@ -874,7 +1026,11 @@ namespace System.ServiceModel.Dispatcher
                     RemoveReferenceRM rm;
                     if (!this.pending.TryGetValue(tx, out rm))
                     {
-                        RemoveReferenceRM rrm = new RemoveReferenceRM(this.instanceContext, tx, rpc.Operation.Name);
+                        RemoveReferenceRM rrm = new RemoveReferenceRM(
+                            this.instanceContext,
+                            tx,
+                            rpc.Operation.Name
+                        );
                         rrm.CallCount = 1;
                         this.pending.Add(tx, rrm);
                     }
@@ -902,11 +1058,14 @@ namespace System.ServiceModel.Dispatcher
                             instanceContext.ReleaseServiceInstance();
                             if (DiagnosticUtility.ShouldTraceInformation)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Information,
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Information,
                                     TraceCode.TxReleaseServiceInstanceOnCompletion,
-                                    SR.GetString(SR.TraceCodeTxReleaseServiceInstanceOnCompletion,
-                                    tx.TransactionInformation.LocalIdentifier)
-                                    );
+                                    SR.GetString(
+                                        SR.TraceCodeTxReleaseServiceInstanceOnCompletion,
+                                        tx.TransactionInformation.LocalIdentifier
+                                    )
+                                );
                             }
                         }
 
@@ -916,14 +1075,12 @@ namespace System.ServiceModel.Dispatcher
                         {
                             Fx.Assert("TransactionBehavior resumed more than once for same call.");
                         }
-
                     }
                     else
                     {
                         this.shouldReleaseInstance = true;
                         this.current = null;
                     }
-
                 }
 
                 if (this.pending != null)
@@ -937,8 +1094,6 @@ namespace System.ServiceModel.Dispatcher
         }
 
         // ........................................................................................................
-
-
 
         abstract class VolatileBase : ISinglePhaseNotification
         {
@@ -987,7 +1142,11 @@ namespace System.ServiceModel.Dispatcher
             long callCount = 0;
             EndpointDispatcher endpointDispatcher;
 
-            internal RemoveReferenceRM(InstanceContext instanceContext, Transaction tx, string operation)
+            internal RemoveReferenceRM(
+                InstanceContext instanceContext,
+                Transaction tx,
+                string operation
+            )
                 : base(instanceContext, tx)
             {
                 this.operation = operation;
@@ -1027,7 +1186,6 @@ namespace System.ServiceModel.Dispatcher
                 base.SinglePhaseCommit(enlistment);
             }
 
-
             public override void Commit(Enlistment enlistment)
             {
                 if (PerformanceCounters.PerformanceCountersEnabled)
@@ -1046,11 +1204,14 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
                         TraceCode.TxAsyncAbort,
-                        SR.GetString(SR.TraceCodeTxAsyncAbort,
-                        this.Transaction.TransactionInformation.LocalIdentifier)
-                        );
+                        SR.GetString(
+                            SR.TraceCodeTxAsyncAbort,
+                            this.Transaction.TransactionInformation.LocalIdentifier
+                        )
+                    );
                 }
                 base.Rollback(enlistment);
             }
@@ -1068,6 +1229,8 @@ namespace System.ServiceModel.Dispatcher
 
     internal enum ExclusiveInstanceContextTransactionResult
     {
-        Acquired, Wait, Fault
+        Acquired,
+        Wait,
+        Fault,
     };
 }

@@ -7,13 +7,29 @@ using System.Security.Permissions;
 namespace System.Net.PeerToPeer
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct |
-         AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class PnrpPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public PnrpPermissionAttribute(SecurityAction action) : base(action) { }
-        public override IPermission CreatePermission() { return null; }
+        public PnrpPermissionAttribute(SecurityAction action)
+            : base(action) { }
+
+        public override IPermission CreatePermission()
+        {
+            return null;
+        }
     }
 }

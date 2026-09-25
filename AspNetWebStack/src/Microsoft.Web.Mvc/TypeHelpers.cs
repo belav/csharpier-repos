@@ -10,8 +10,11 @@ namespace Microsoft.Web.Mvc
     {
         public static Type ExtractGenericInterface(Type queryType, Type interfaceType)
         {
-            Func<Type, bool> matchesInterface = t => t.IsGenericType && t.GetGenericTypeDefinition() == interfaceType;
-            return (matchesInterface(queryType)) ? queryType : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
+            Func<Type, bool> matchesInterface = t =>
+                t.IsGenericType && t.GetGenericTypeDefinition() == interfaceType;
+            return (matchesInterface(queryType))
+                ? queryType
+                : queryType.GetInterfaces().FirstOrDefault(matchesInterface);
         }
 
         public static Type[] GetTypeArgumentsIfMatch(Type closedType, Type matchingOpenType)

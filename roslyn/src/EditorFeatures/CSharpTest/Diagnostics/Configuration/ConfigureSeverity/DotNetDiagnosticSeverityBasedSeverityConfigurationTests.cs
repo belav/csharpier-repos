@@ -19,7 +19,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureSeverity
 {
-    public abstract partial class DotNetDiagnosticSeverityBasedSeverityConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class DotNetDiagnosticSeverityBasedSeverityConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         private sealed class CustomDiagnosticAnalyzer : DiagnosticAnalyzer
         {
@@ -29,15 +30,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
                 messageFormat: "Message",
                 category: "Category",
                 defaultSeverity: DiagnosticSeverity.Info,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Rule);
 
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSyntaxNodeAction(
                     c => c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation())),
-                    SyntaxKind.ClassDeclaration);
+                    SyntaxKind.ClassDeclaration
+                );
             }
         }
 
@@ -45,14 +49,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CustomDiagnosticAnalyzer(), new ConfigureSeverityLevelCodeFixProvider());
+                new CustomDiagnosticAnalyzer(),
+                new ConfigureSeverityLevelCodeFixProvider()
+            );
         }
 
         [Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
-        public class NoneConfigurationTests : DotNetDiagnosticSeverityBasedSeverityConfigurationTests
+        public class NoneConfigurationTests
+            : DotNetDiagnosticSeverityBasedSeverityConfigurationTests
         {
             protected override int CodeActionIndex => 0;
 

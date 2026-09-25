@@ -44,7 +44,6 @@ namespace System.Xml.Xsl.Qil
         private readonly ObjectHashtable parents = new ObjectHashtable();
         private readonly ObjectHashtable scope = new ObjectHashtable();
 
-
         //-----------------------------------------------
         // QilVisitor overrides
         //-----------------------------------------------
@@ -85,9 +84,11 @@ namespace System.Xml.Xsl.Qil
                             SetError(parent, "Child " + i + " must not be null");
                     }
 
-                    if (parent.NodeType == QilNodeType.GlobalVariableList ||
-                        parent.NodeType == QilNodeType.GlobalParameterList ||
-                        parent.NodeType == QilNodeType.FunctionList)
+                    if (
+                        parent.NodeType == QilNodeType.GlobalVariableList
+                        || parent.NodeType == QilNodeType.GlobalParameterList
+                        || parent.NodeType == QilNodeType.FunctionList
+                    )
                     {
                         if (((QilReference)parent[i]).DebugName == null)
                             SetError(parent[i], "DebugName must not be null");
@@ -117,7 +118,6 @@ namespace System.Xml.Xsl.Qil
             return node;
         }
 
-
         //-----------------------------------------------
         // QilScopedVisitor overrides
         //-----------------------------------------------
@@ -140,7 +140,6 @@ namespace System.Xml.Xsl.Qil
         {
             this.scope.Remove(node);
         }
-
 
         //-----------------------------------------------
         // Helper methods

@@ -19,43 +19,69 @@ namespace System.ServiceModel.Description
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.transactionTimeout = value;
             }
         }
 
-        public CallbackTimeoutsBehavior()
+        public CallbackTimeoutsBehavior() { }
+
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint) { }
+
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
+
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(
+                        SR.SFXEndpointBehaviorUsedOnWrongSide,
+                        typeof(CallbackTimeoutsBehavior).Name
+                    )
+                )
+            );
         }
 
-        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
-        {
-        }
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
-        {
-        }
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                SR.GetString(SR.SFXEndpointBehaviorUsedOnWrongSide, typeof(CallbackTimeoutsBehavior).Name)));
-        }
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
         {
             if (this.transactionTimeout != TimeSpan.Zero)
             {
-                ChannelDispatcher channelDispatcher = behavior.CallbackDispatchRuntime.ChannelDispatcher;
-                if ((channelDispatcher != null) &&
-                    (channelDispatcher.TransactionTimeout == TimeSpan.Zero) ||
-                    (channelDispatcher.TransactionTimeout > this.transactionTimeout))
+                ChannelDispatcher channelDispatcher = behavior
+                    .CallbackDispatchRuntime
+                    .ChannelDispatcher;
+                if (
+                    (channelDispatcher != null)
+                        && (channelDispatcher.TransactionTimeout == TimeSpan.Zero)
+                    || (channelDispatcher.TransactionTimeout > this.transactionTimeout)
+                )
                 {
                     channelDispatcher.TransactionTimeout = this.transactionTimeout;
                 }

@@ -27,7 +27,11 @@ public interface IConventionStoredProcedureResultColumnBuilder : IConventionAnno
     ///     An <see cref="IConventionStoredProcedureResultColumnBuilder" /> to continue configuration if the annotation was set,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionStoredProcedureResultColumnBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionStoredProcedureResultColumnBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -44,7 +48,8 @@ public interface IConventionStoredProcedureResultColumnBuilder : IConventionAnno
     new IConventionStoredProcedureResultColumnBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -55,7 +60,10 @@ public interface IConventionStoredProcedureResultColumnBuilder : IConventionAnno
     ///     An <see cref="IConventionStoredProcedureResultColumnBuilder" /> to continue configuration if the annotation was set,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionStoredProcedureResultColumnBuilder? HasNoAnnotation(string name, bool fromDataAnnotation = false);
+    new IConventionStoredProcedureResultColumnBuilder? HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the result column name.
@@ -69,7 +77,10 @@ public interface IConventionStoredProcedureResultColumnBuilder : IConventionAnno
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionStoredProcedureResultColumnBuilder? HasName(string name, bool fromDataAnnotation = false);
+    IConventionStoredProcedureResultColumnBuilder? HasName(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given result column name can be set.

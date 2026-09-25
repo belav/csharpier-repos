@@ -80,18 +80,14 @@ internal static class HttpHelpers
                     {
                         if (configureKestrel == null)
                         {
-                            o.Listen(
-                                IPAddress.Parse("127.0.0.1"),
-                                0,
-                                listenOptions =>
+                            o.Listen(IPAddress.Parse("127.0.0.1"), 0, listenOptions =>
+                            {
+                                listenOptions.Protocols = protocol ?? HttpProtocols.Http3;
+                                if (!(plaintext ?? false))
                                 {
-                                    listenOptions.Protocols = protocol ?? HttpProtocols.Http3;
-                                    if (!(plaintext ?? false))
-                                    {
-                                        listenOptions.UseHttps(TestResources.GetTestCertificate());
-                                    }
+                                    listenOptions.UseHttps(TestResources.GetTestCertificate());
                                 }
-                            );
+                            });
                         }
                         else
                         {

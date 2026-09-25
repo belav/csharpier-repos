@@ -15,6 +15,7 @@ namespace Microsoft.CodeAnalysis.BraceMatching
             SyntaxToken token,
             int position,
             BraceMatchingOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

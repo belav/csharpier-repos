@@ -3,7 +3,6 @@
 
 using System.Reflection.Runtime.General;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime.Augments;
 
 namespace System.Reflection.Runtime.TypeInfos

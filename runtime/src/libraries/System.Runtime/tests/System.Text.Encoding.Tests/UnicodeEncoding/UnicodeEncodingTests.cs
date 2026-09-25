@@ -12,7 +12,12 @@ namespace System.Text.Tests
         public void Ctor_Empty()
         {
             UnicodeEncoding encoding = new UnicodeEncoding();
-            VerifyUnicodeEncoding(encoding, bigEndian: false, byteOrderMark: true, throwOnInvalidBytes: false);
+            VerifyUnicodeEncoding(
+                encoding,
+                bigEndian: false,
+                byteOrderMark: true,
+                throwOnInvalidBytes: false
+            );
         }
 
         [Theory]
@@ -29,13 +34,26 @@ namespace System.Text.Tests
             Ctor_Bool_Bool_Bool(bigEndian, byteOrderMark, throwOnInvalidBytes: false);
         }
 
-        private static void Ctor_Bool_Bool_Bool(bool bigEndian, bool byteOrderMark, bool throwOnInvalidBytes)
+        private static void Ctor_Bool_Bool_Bool(
+            bool bigEndian,
+            bool byteOrderMark,
+            bool throwOnInvalidBytes
+        )
         {
-            UnicodeEncoding encoding = new UnicodeEncoding(bigEndian, byteOrderMark, throwOnInvalidBytes);
+            UnicodeEncoding encoding = new UnicodeEncoding(
+                bigEndian,
+                byteOrderMark,
+                throwOnInvalidBytes
+            );
             VerifyUnicodeEncoding(encoding, bigEndian, byteOrderMark, throwOnInvalidBytes);
         }
 
-        private static void VerifyUnicodeEncoding(UnicodeEncoding encoding, bool bigEndian, bool byteOrderMark, bool throwOnInvalidBytes)
+        private static void VerifyUnicodeEncoding(
+            UnicodeEncoding encoding,
+            bool bigEndian,
+            bool byteOrderMark,
+            bool throwOnInvalidBytes
+        )
         {
             if (byteOrderMark)
             {
@@ -125,8 +143,18 @@ namespace System.Text.Tests
         public static IEnumerable<object[]> Equals_TestData()
         {
             yield return new object[] { new UnicodeEncoding(), new UnicodeEncoding(), true };
-            yield return new object[] { new UnicodeEncoding(), new UnicodeEncoding(false, true), true };
-            yield return new object[] { new UnicodeEncoding(), new UnicodeEncoding(false, false), false };
+            yield return new object[]
+            {
+                new UnicodeEncoding(),
+                new UnicodeEncoding(false, true),
+                true,
+            };
+            yield return new object[]
+            {
+                new UnicodeEncoding(),
+                new UnicodeEncoding(false, false),
+                false,
+            };
 
             yield return new object[] { Encoding.Unicode, Encoding.Unicode, true };
             yield return new object[] { Encoding.Unicode, Encoding.GetEncoding("Unicode"), true };
@@ -135,10 +163,30 @@ namespace System.Text.Tests
             yield return new object[] { Encoding.Unicode, new UnicodeEncoding(false, true), true };
             yield return new object[] { Encoding.Unicode, new UnicodeEncoding(true, true), false };
 
-            yield return new object[] { Encoding.BigEndianUnicode, Encoding.BigEndianUnicode, true };
-            yield return new object[] { Encoding.BigEndianUnicode, Encoding.GetEncoding("utf-16BE"), true };
-            yield return new object[] { Encoding.BigEndianUnicode, new UnicodeEncoding(true, true), true };
-            yield return new object[] { Encoding.BigEndianUnicode, new UnicodeEncoding(false, true), false };
+            yield return new object[]
+            {
+                Encoding.BigEndianUnicode,
+                Encoding.BigEndianUnicode,
+                true,
+            };
+            yield return new object[]
+            {
+                Encoding.BigEndianUnicode,
+                Encoding.GetEncoding("utf-16BE"),
+                true,
+            };
+            yield return new object[]
+            {
+                Encoding.BigEndianUnicode,
+                new UnicodeEncoding(true, true),
+                true,
+            };
+            yield return new object[]
+            {
+                Encoding.BigEndianUnicode,
+                new UnicodeEncoding(false, true),
+                false,
+            };
 
             yield return new object[] { new UnicodeEncoding(), new TimeSpan(), false };
             yield return new object[] { new UnicodeEncoding(), null, false };

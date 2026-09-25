@@ -10,9 +10,18 @@ namespace Microsoft.CodeAnalysis.OrganizeImports;
 
 internal static class OrganizeImportsOptionsStorage
 {
-    public static ValueTask<OrganizeImportsOptions> GetOrganizeImportsOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetOrganizeImportsOptionsAsync(globalOptions.GetOrganizeImportsOptions(document.Project.Language), cancellationToken);
+    public static ValueTask<OrganizeImportsOptions> GetOrganizeImportsOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetOrganizeImportsOptionsAsync(
+            globalOptions.GetOrganizeImportsOptions(document.Project.Language),
+            cancellationToken
+        );
 
-    public static OrganizeImportsOptions GetOrganizeImportsOptions(this IGlobalOptionService globalOptions, string language)
-        => globalOptions.GetOrganizeImportsOptions(language, fallbackOptions: null);
+    public static OrganizeImportsOptions GetOrganizeImportsOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) => globalOptions.GetOrganizeImportsOptions(language, fallbackOptions: null);
 }

@@ -12,9 +12,8 @@ namespace System.Speech.Internal
     {
         #region Constructors
 
-        public HGlobalSafeHandle() : base(IntPtr.Zero, true)
-        {
-        }
+        public HGlobalSafeHandle()
+            : base(IntPtr.Zero, true) { }
 
         // This destructor will run only if the Dispose method
         // does not get called.
@@ -58,10 +57,7 @@ namespace System.Speech.Internal
         /// </summary>
         public override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
 
         #endregion

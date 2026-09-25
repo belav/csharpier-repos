@@ -29,17 +29,16 @@ namespace System.Xml.Serialization
             }
             else if (members[member] != null)
             {
-                throw new InvalidOperationException(SR.Format(SR.XmlMultipleAttributeOverrides, type.FullName, member));
+                throw new InvalidOperationException(
+                    SR.Format(SR.XmlMultipleAttributeOverrides, type.FullName, member)
+                );
             }
             members.Add(member, attributes);
         }
 
         public SoapAttributes? this[Type type]
         {
-            get
-            {
-                return this[type, string.Empty];
-            }
+            get { return this[type, string.Empty]; }
         }
 
         public SoapAttributes? this[Type type, string member]
@@ -47,7 +46,8 @@ namespace System.Xml.Serialization
             get
             {
                 Hashtable? members = (Hashtable?)_types[type];
-                if (members == null) return null;
+                if (members == null)
+                    return null;
                 return (SoapAttributes?)members[member];
             }
         }

@@ -1,24 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="HttpGetProtocolReflector.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.Services.Description {
-
+namespace System.Web.Services.Description
+{
+    using System;
+    using System.Collections;
+    using System.Reflection;
     using System.Web.Services;
     using System.Web.Services.Protocols;
-    using System.Xml.Serialization;
     using System.Xml.Schema;
-    using System.Collections;
-    using System;
-    using System.Reflection;
+    using System.Xml.Serialization;
 
-    internal class HttpGetProtocolReflector : HttpProtocolReflector {
-        public override string ProtocolName { 
-            get { return "HttpGet"; } 
+    internal class HttpGetProtocolReflector : HttpProtocolReflector
+    {
+        public override string ProtocolName
+        {
+            get { return "HttpGet"; }
         }
 
-        protected override void BeginClass() {
+        protected override void BeginClass()
+        {
             if (IsEmptyBinding)
                 return;
             HttpBinding httpBinding = new HttpBinding();
@@ -28,17 +31,25 @@ namespace System.Web.Services.Description {
             httpAddressBinding.Location = ServiceUrl;
             if (this.UriFixups != null)
             {
-                this.UriFixups.Add(delegate(Uri current)
-                {
-                    httpAddressBinding.Location = DiscoveryServerType.CombineUris(current, httpAddressBinding.Location);
-                });
+                this.UriFixups.Add(
+                    delegate(Uri current)
+                    {
+                        httpAddressBinding.Location = DiscoveryServerType.CombineUris(
+                            current,
+                            httpAddressBinding.Location
+                        );
+                    }
+                );
             }
             Port.Extensions.Add(httpAddressBinding);
         }
 
-        protected override bool ReflectMethod() {
-            if (!ReflectUrlParameters()) return false;
-            if (!ReflectMimeReturn()) return false;
+        protected override bool ReflectMethod()
+        {
+            if (!ReflectUrlParameters())
+                return false;
+            if (!ReflectMimeReturn())
+                return false;
             HttpOperationBinding httpOperationBinding = new HttpOperationBinding();
             httpOperationBinding.Location = MethodUrl;
             OperationBinding.Extensions.Add(httpOperationBinding);

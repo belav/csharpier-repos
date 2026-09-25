@@ -1,5 +1,5 @@
 //
-// ResourcePermissionBaseEntryCas.cs - CAS unit tests for 
+// ResourcePermissionBaseEntryCas.cs - CAS unit tests for
 //	System.Security.Permissions.ResourcePermissionBaseEntry
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,45 +27,43 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Security.Permissions {
+namespace MonoCasTests.System.Security.Permissions
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ResourcePermissionBaseEntryCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ResourcePermissionBaseEntryCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted()
+        {
+            ResourcePermissionBaseEntryTest unit = new ResourcePermissionBaseEntryTest();
+            unit.Constructor_Default();
+            unit.Constructor_Negative();
+            unit.Constructor_IntString();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			ResourcePermissionBaseEntryTest unit = new ResourcePermissionBaseEntryTest ();
-			unit.Constructor_Default ();
-			unit.Constructor_Negative ();
-			unit.Constructor_IntString ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (ResourcePermissionBaseEntry).GetConstructor (new Type [0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(ResourcePermissionBaseEntry).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor()");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

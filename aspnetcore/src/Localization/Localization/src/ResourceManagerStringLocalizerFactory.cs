@@ -169,17 +169,14 @@ public class ResourceManagerStringLocalizerFactory : IStringLocalizerFactory
         ArgumentNullThrowHelper.ThrowIfNull(baseName);
         ArgumentNullThrowHelper.ThrowIfNull(location);
 
-        return _localizerCache.GetOrAdd(
-            $"B={baseName},L={location}",
-            _ =>
-            {
-                var assemblyName = new AssemblyName(location);
-                var assembly = Assembly.Load(assemblyName);
-                baseName = GetResourcePrefix(baseName, location);
+        return _localizerCache.GetOrAdd($"B={baseName},L={location}", _ =>
+        {
+            var assemblyName = new AssemblyName(location);
+            var assembly = Assembly.Load(assemblyName);
+            baseName = GetResourcePrefix(baseName, location);
 
-                return CreateResourceManagerStringLocalizer(assembly, baseName);
-            }
-        );
+            return CreateResourceManagerStringLocalizer(assembly, baseName);
+        });
     }
 
     /// <summary>Creates a <see cref="ResourceManagerStringLocalizer"/> for the given input.</summary>

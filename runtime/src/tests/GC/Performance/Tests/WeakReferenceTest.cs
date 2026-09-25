@@ -11,36 +11,38 @@ class WeakReferenceTest
     private const int m_numWRs = 50;
     private long m_numIters;
     private bool m_alive = true;
-    
+
     public static void Usage()
     {
-        Console.WriteLine("USAGE: WeakReference.exe <num iterations> <alive|dead> <gettarget|settarget|isalive|alloc|alloctrack>");
+        Console.WriteLine(
+            "USAGE: WeakReference.exe <num iterations> <alive|dead> <gettarget|settarget|isalive|alloc|alloctrack>"
+        );
     }
 
     static void Main(string[] args)
     {
-        if (args.Length!=3)
-		{
-			Usage();
-			return;
-		}
-        
+        if (args.Length != 3)
+        {
+            Usage();
+            return;
+        }
+
         long iterations = 0;
         if (!long.TryParse(args[0], out iterations))
-		{
-			Usage();
-			return;
-		}
+        {
+            Usage();
+            return;
+        }
 
         bool alive = true;
-        if (args[1].ToLower()=="dead")
+        if (args[1].ToLower() == "dead")
         {
             alive = false;
             Console.WriteLine("Using dead targets");
         }
 
         WeakReferenceTest test = new WeakReferenceTest(iterations, alive);
-        test.Init(); 
+        test.Init();
 
         switch (args[2].ToLower())
         {
@@ -63,18 +65,16 @@ class WeakReferenceTest
                 Usage();
                 break;
         }
-         
     }
-    
-    
+
     public WeakReferenceTest(long numIters, bool alive)
     {
         m_numIters = numIters;
         m_alive = alive;
-        
+
         m_objectArray = new Object[m_numWRs];
         m_wrArray = new WeakReference[m_numWRs];
-        
+
         for (int i = 0; i < m_numWRs; ++i)
         {
             if (m_alive)
@@ -88,30 +88,25 @@ class WeakReferenceTest
                 // set to null
                 m_objectArray[i] = null;
             }
-            
         }
-      
+
         //GC now to get that out of the way
-        GC.Collect();          
+        GC.Collect();
     }
-    
-    
+
     public void Init()
     {
-
         for (int i = 0; i < m_numWRs; ++i)
-        {            
+        {
             m_wrArray[i] = new WeakReference(m_objectArray[i]);
-        }    
-        GC.Collect();    
-
+        }
+        GC.Collect();
     }
 
     public void AllocTest(bool trackResurrection)
     {
-                    
         for (long i = 0; i < m_numIters; i++)
-        {                           
+        {
             m_wrArray[0] = new WeakReference(m_objectArray[0], trackResurrection);
             m_wrArray[1] = new WeakReference(m_objectArray[1], trackResurrection);
             m_wrArray[2] = new WeakReference(m_objectArray[2], trackResurrection);
@@ -166,26 +161,22 @@ class WeakReferenceTest
             m_wrArray[47] = new WeakReference(m_objectArray[47], trackResurrection);
             m_wrArray[48] = new WeakReference(m_objectArray[48], trackResurrection);
             m_wrArray[49] = new WeakReference(m_objectArray[49], trackResurrection);
-             
-            for (int j=0; j< m_wrArray.Length; j++)
+
+            for (int j = 0; j < m_wrArray.Length; j++)
             {
                 m_wrArray[j] = null;
             }
-            
+
             GC.Collect();
-    
         }
-        
     }
 
-       
-       
     public void SetTargetTest()
     {
         Init();
-        
+
         for (long i = 0; i < m_numIters; i++)
-        {                           
+        {
             m_wrArray[0].Target = m_objectArray[0];
             m_wrArray[1].Target = m_objectArray[1];
             m_wrArray[2].Target = m_objectArray[2];
@@ -240,19 +231,16 @@ class WeakReferenceTest
             m_wrArray[47].Target = m_objectArray[47];
             m_wrArray[48].Target = m_objectArray[48];
             m_wrArray[49].Target = m_objectArray[49];
-             
         }
-
     }
-    
+
     public void GetTargetTest()
     {
-    
         Init();
         Object o = null;
-                
+
         for (long i = 0; i < m_numIters; i++)
-        {                             
+        {
             o = m_wrArray[0].Target;
             o = m_wrArray[1].Target;
             o = m_wrArray[2].Target;
@@ -307,20 +295,16 @@ class WeakReferenceTest
             o = m_wrArray[47].Target;
             o = m_wrArray[48].Target;
             o = m_wrArray[49].Target;
-              
         }
-
     }
-    
-    
+
     public void IsAliveTest()
     {
-        bool b = false;        
+        bool b = false;
         Init();
-                
-        for (int i = 0; i < m_numIters; i++)
-        {              
 
+        for (int i = 0; i < m_numIters; i++)
+        {
             b = m_wrArray[0].IsAlive;
             b = m_wrArray[1].IsAlive;
             b = m_wrArray[2].IsAlive;
@@ -375,9 +359,6 @@ class WeakReferenceTest
             b = m_wrArray[47].IsAlive;
             b = m_wrArray[48].IsAlive;
             b = m_wrArray[49].IsAlive;
-            
         }
-
-    }    
-
+    }
 }

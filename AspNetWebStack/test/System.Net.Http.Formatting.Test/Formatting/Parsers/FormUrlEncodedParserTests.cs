@@ -19,7 +19,10 @@ namespace System.Net.Http.Formatting.Parsers
             return new Collection<KeyValuePair<string, string>>();
         }
 
-        internal static FormUrlEncodedParser CreateParser(int maxMessageSize, out ICollection<KeyValuePair<string, string>> nameValuePairs)
+        internal static FormUrlEncodedParser CreateParser(
+            int maxMessageSize,
+            out ICollection<KeyValuePair<string, string>> nameValuePairs
+        )
         {
             nameValuePairs = CreateCollection();
             return new FormUrlEncodedParser(nameValuePairs, maxMessageSize);
@@ -46,7 +49,12 @@ namespace System.Net.Http.Formatting.Parsers
             return Encoding.UTF8.GetBytes(buffer.ToString());
         }
 
-        internal static ParserState ParseBufferInSteps(FormUrlEncodedParser parser, byte[] buffer, int readsize, out int totalBytesConsumed)
+        internal static ParserState ParseBufferInSteps(
+            FormUrlEncodedParser parser,
+            byte[] buffer,
+            int readsize,
+            out int totalBytesConsumed
+        )
         {
             ParserState state = ParserState.Invalid;
             totalBytesConsumed = 0;
@@ -57,7 +65,12 @@ namespace System.Net.Http.Formatting.Parsers
                 Buffer.BlockCopy(buffer, totalBytesConsumed, parseBuffer, 0, size);
 
                 int bytesConsumed = 0;
-                state = parser.ParseBuffer(parseBuffer, parseBuffer.Length, ref bytesConsumed, totalBytesConsumed == buffer.Length - size);
+                state = parser.ParseBuffer(
+                    parseBuffer,
+                    parseBuffer.Length,
+                    ref bytesConsumed,
+                    totalBytesConsumed == buffer.Length - size
+                );
                 totalBytesConsumed += bytesConsumed;
 
                 if (state != ParserState.NeedMoreData)
@@ -78,15 +91,32 @@ namespace System.Net.Http.Formatting.Parsers
         [Fact]
         public void FormUrlEncodedParserThrowsOnNull()
         {
-            Assert.ThrowsArgumentNull(() => { new FormUrlEncodedParser(null, ParserData.MinHeaderSize); }, "nameValuePairs");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new FormUrlEncodedParser(null, ParserData.MinHeaderSize);
+                },
+                "nameValuePairs"
+            );
         }
 
         [Fact]
         public void FormUrlEncodedParserThrowsOnInvalidSize()
         {
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => { new FormUrlEncodedParser(CreateCollection(), MinMessageSize - 1); }, "maxMessageSize", MinMessageSize.ToString(), MinMessageSize - 1);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () =>
+                {
+                    new FormUrlEncodedParser(CreateCollection(), MinMessageSize - 1);
+                },
+                "maxMessageSize",
+                MinMessageSize.ToString(),
+                MinMessageSize - 1
+            );
 
-            FormUrlEncodedParser parser = new FormUrlEncodedParser(CreateCollection(), MinMessageSize);
+            FormUrlEncodedParser parser = new FormUrlEncodedParser(
+                CreateCollection(),
+                MinMessageSize
+            );
             Assert.NotNull(parser);
 
             parser = new FormUrlEncodedParser(CreateCollection(), MinMessageSize + 1);
@@ -99,7 +129,13 @@ namespace System.Net.Http.Formatting.Parsers
             ICollection<KeyValuePair<string, string>> collection;
             FormUrlEncodedParser parser = CreateParser(128, out collection);
             int bytesConsumed = 0;
-            Assert.ThrowsArgumentNull(() => { parser.ParseBuffer(null, 0, ref bytesConsumed, false); }, "buffer");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    parser.ParseBuffer(null, 0, ref bytesConsumed, false);
+                },
+                "buffer"
+            );
         }
 
         [Fact]
@@ -138,7 +174,12 @@ namespace System.Net.Http.Formatting.Parsers
                     Assert.NotNull(parser);
 
                     int totalBytesConsumed;
-                    ParserState state = ParseBufferInSteps(parser, data, cnt, out totalBytesConsumed);
+                    ParserState state = ParseBufferInSteps(
+                        parser,
+                        data,
+                        cnt,
+                        out totalBytesConsumed
+                    );
                     Assert.Equal(ParserState.Done, state);
                     Assert.Equal(data.Length, totalBytesConsumed);
 

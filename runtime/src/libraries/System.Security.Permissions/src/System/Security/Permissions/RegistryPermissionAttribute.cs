@@ -4,13 +4,21 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     [AttributeUsage((AttributeTargets)(109), AllowMultiple = true, Inherited = false)]
     public sealed partial class RegistryPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public RegistryPermissionAttribute(SecurityAction action) : base(default(SecurityAction)) { }
-        [Obsolete("RegistryPermissionAttribute.Add has been deprecated. Use ViewAndModify instead.")]
+        public RegistryPermissionAttribute(SecurityAction action)
+            : base(default(SecurityAction)) { }
+
+        [Obsolete(
+            "RegistryPermissionAttribute.Add has been deprecated. Use ViewAndModify instead."
+        )]
         public string All { get; set; }
         public string ChangeAccessControl { get; set; }
         public string Create { get; set; }
@@ -18,6 +26,10 @@ namespace System.Security.Permissions
         public string ViewAccessControl { get; set; }
         public string ViewAndModify { get; set; }
         public string Write { get; set; }
-        public override IPermission CreatePermission() { return default(IPermission); }
+
+        public override IPermission CreatePermission()
+        {
+            return default(IPermission);
+        }
     }
 }

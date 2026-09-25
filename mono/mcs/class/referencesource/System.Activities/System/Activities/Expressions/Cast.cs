@@ -22,11 +22,7 @@ namespace System.Activities.Expressions
 
         [RequiredArgument]
         [DefaultValue(null)]
-        public InArgument<TOperand> Operand
-        {
-            get;
-            set;
-        }
+        public InArgument<TOperand> Operand { get; set; }
 
         [DefaultValue(true)]
         public bool Checked
@@ -41,25 +37,38 @@ namespace System.Activities.Expressions
 
             if (this.checkedOperation)
             {
-                EnsureOperationFunction(metadata, ref checkedOperationFunction, ExpressionType.ConvertChecked);
+                EnsureOperationFunction(
+                    metadata,
+                    ref checkedOperationFunction,
+                    ExpressionType.ConvertChecked
+                );
             }
             else
             {
-                EnsureOperationFunction(metadata, ref uncheckedOperationFunction, ExpressionType.Convert);
+                EnsureOperationFunction(
+                    metadata,
+                    ref uncheckedOperationFunction,
+                    ExpressionType.Convert
+                );
             }
         }
 
-        void EnsureOperationFunction(CodeActivityMetadata metadata,
+        void EnsureOperationFunction(
+            CodeActivityMetadata metadata,
             ref Func<TOperand, TResult> operationFunction,
-            ExpressionType operatorType)
+            ExpressionType operatorType
+        )
         {
             if (operationFunction == null)
             {
                 ValidationError validationError;
-                if (!UnaryExpressionHelper.TryGenerateLinqDelegate(
-                            operatorType,
-                            out operationFunction,
-                            out validationError))
+                if (
+                    !UnaryExpressionHelper.TryGenerateLinqDelegate(
+                        operatorType,
+                        out operationFunction,
+                        out validationError
+                    )
+                )
                 {
                     metadata.AddValidationError(validationError);
                 }
@@ -69,8 +78,8 @@ namespace System.Activities.Expressions
         protected override TResult Execute(CodeActivityContext context)
         {
             TOperand operandValue = this.Operand.Get(context);
-            
-            //if user changed Checked flag between Open and Execution, 
+
+            //if user changed Checked flag between Open and Execution,
             //a NRE may be thrown and that's by design
             if (this.checkedOperation)
             {

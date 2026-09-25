@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,80 +29,60 @@
 //
 namespace System.Management
 {
-	public class QualifierData
-	{
-		internal QualifierData ()
-		{
-		}
+    public class QualifierData
+    {
+        internal QualifierData() { }
 
-		public bool IsAmended {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-			[MonoTODO]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public bool IsAmended
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
+        }
 
-		public bool IsLocal {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public bool IsLocal
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool IsOverridable {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-			[MonoTODO]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public bool IsOverridable
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
+        }
 
-		public string Name {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-		}
+        public string Name
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		public bool PropagatesToInstance {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-			[MonoTODO]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public bool PropagatesToInstance
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
+        }
 
-		public bool PropagatesToSubclass {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-			[MonoTODO]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
+        public bool PropagatesToSubclass
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
+        }
 
-		public object Value {
-			[MonoTODO]
-			get {
-				throw new NotImplementedException ();
-			}
-			[MonoTODO]
-			set {
-				throw new NotImplementedException ();
-			}
-		}
-	}
+        public object Value
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+            [MonoTODO]
+            set { throw new NotImplementedException(); }
+        }
+    }
 }
-

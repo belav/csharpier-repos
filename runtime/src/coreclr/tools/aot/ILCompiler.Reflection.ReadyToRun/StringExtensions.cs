@@ -16,7 +16,11 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// method in Roslyn .NET compiler; see its
         /// <a href="https://github.com/dotnet/roslyn/blob/master/src/Compilers/CSharp/Portable/SymbolDisplay/ObjectDisplay.cs">sources</a> for reference.
         /// </remarks>
-        public static StringBuilder AppendEscapedString(this StringBuilder builder, string value, bool placeQuotes = true)
+        public static StringBuilder AppendEscapedString(
+            this StringBuilder builder,
+            string value,
+            bool placeQuotes = true
+        )
         {
             if (placeQuotes)
             {
@@ -29,7 +33,10 @@ namespace ILCompiler.Reflection.ReadyToRun
                 UnicodeCategory category;
 
                 // Fast check for printable ASCII characters
-                if ((c <= 0x7e) && (c >= 0x20) || !NeedsEscaping(category = CharUnicodeInfo.GetUnicodeCategory(c)))
+                if (
+                    (c <= 0x7e) && (c >= 0x20)
+                    || !NeedsEscaping(category = CharUnicodeInfo.GetUnicodeCategory(c))
+                )
                 {
                     if ((c == '"') || (c == '\\'))
                     {
@@ -63,19 +70,37 @@ namespace ILCompiler.Reflection.ReadyToRun
                 else
                 {
                     string escaped = null;
-                    switch(c)
+                    switch (c)
                     {
-                        case '\0': escaped = @"\0"; break;
-                        case '\a': escaped = @"\a"; break;
-                        case '\b': escaped = @"\b"; break;
-                        case '\f': escaped = @"\f"; break;
-                        case '\n': escaped = @"\n"; break;
-                        case '\r': escaped = @"\r"; break;
-                        case '\t': escaped = @"\t"; break;
-                        case '\v': escaped = @"\v"; break;
-                        default :
-                            escaped = @"\u" + ((int)c).ToString("x4"); break;
-                    };
+                        case '\0':
+                            escaped = @"\0";
+                            break;
+                        case '\a':
+                            escaped = @"\a";
+                            break;
+                        case '\b':
+                            escaped = @"\b";
+                            break;
+                        case '\f':
+                            escaped = @"\f";
+                            break;
+                        case '\n':
+                            escaped = @"\n";
+                            break;
+                        case '\r':
+                            escaped = @"\r";
+                            break;
+                        case '\t':
+                            escaped = @"\t";
+                            break;
+                        case '\v':
+                            escaped = @"\v";
+                            break;
+                        default:
+                            escaped = @"\u" + ((int)c).ToString("x4");
+                            break;
+                    }
+                    ;
                     builder.Append(escaped);
                 }
             }
@@ -112,7 +137,9 @@ namespace ILCompiler.Reflection.ReadyToRun
         /// </summary>
         public static string ToEscapedString(this string value, bool placeQuotes = true)
         {
-            return new StringBuilder(value.Length + 16).AppendEscapedString(value, placeQuotes).ToString();
+            return new StringBuilder(value.Length + 16)
+                .AppendEscapedString(value, placeQuotes)
+                .ToString();
         }
     }
 }

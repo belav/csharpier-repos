@@ -9,14 +9,8 @@ namespace System.Data.ProviderBase
 
         internal DbConnectionPoolGroup? PoolGroup
         {
-            get
-            {
-                return _poolGroup;
-            }
-            set
-            {
-                _poolGroup = value;
-            }
+            get { return _poolGroup; }
+            set { _poolGroup = value; }
         }
     }
 }

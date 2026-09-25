@@ -3,9 +3,9 @@
 
 ////////////////////////////////////////////////////////////////
 //
-// Description 
+// Description
 // ____________
-// Access violation in JIT when range check is statically 
+// Access violation in JIT when range check is statically
 // determined to fail at compile time
 //
 // Right Behavior
@@ -20,7 +20,7 @@
 // __________________
 // > test1.exe
 //
-// External files 
+// External files
 // _______________
 // None
 ////////////////////////////////////////////////////////////////
@@ -49,10 +49,9 @@ namespace AutoGen
                 }
             }
 
-        L1:
+            L1:
             return;
         }
-
 
         [Fact]
         public static int TestEntryPoint()

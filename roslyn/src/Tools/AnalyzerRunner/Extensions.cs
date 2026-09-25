@@ -10,19 +10,25 @@ namespace AnalyzerRunner
 {
     internal static class Extensions
     {
-        internal static void Add(this AnalyzerTelemetryInfo analyzerTelemetryInfo, AnalyzerTelemetryInfo addendum)
+        internal static void Add(
+            this AnalyzerTelemetryInfo analyzerTelemetryInfo,
+            AnalyzerTelemetryInfo addendum
+        )
         {
             analyzerTelemetryInfo.CodeBlockActionsCount += addendum.CodeBlockActionsCount;
             analyzerTelemetryInfo.CodeBlockEndActionsCount += addendum.CodeBlockEndActionsCount;
             analyzerTelemetryInfo.CodeBlockStartActionsCount += addendum.CodeBlockStartActionsCount;
             analyzerTelemetryInfo.CompilationActionsCount += addendum.CompilationActionsCount;
             analyzerTelemetryInfo.CompilationEndActionsCount += addendum.CompilationEndActionsCount;
-            analyzerTelemetryInfo.CompilationStartActionsCount += addendum.CompilationStartActionsCount;
+            analyzerTelemetryInfo.CompilationStartActionsCount +=
+                addendum.CompilationStartActionsCount;
             analyzerTelemetryInfo.ExecutionTime += addendum.ExecutionTime;
             analyzerTelemetryInfo.OperationActionsCount += addendum.OperationActionsCount;
             analyzerTelemetryInfo.OperationBlockActionsCount += addendum.OperationBlockActionsCount;
-            analyzerTelemetryInfo.OperationBlockEndActionsCount += addendum.OperationBlockEndActionsCount;
-            analyzerTelemetryInfo.OperationBlockStartActionsCount += addendum.OperationBlockStartActionsCount;
+            analyzerTelemetryInfo.OperationBlockEndActionsCount +=
+                addendum.OperationBlockEndActionsCount;
+            analyzerTelemetryInfo.OperationBlockStartActionsCount +=
+                addendum.OperationBlockStartActionsCount;
             analyzerTelemetryInfo.SemanticModelActionsCount += addendum.SemanticModelActionsCount;
             analyzerTelemetryInfo.SymbolActionsCount += addendum.SymbolActionsCount;
             analyzerTelemetryInfo.SymbolStartActionsCount += addendum.SymbolStartActionsCount;

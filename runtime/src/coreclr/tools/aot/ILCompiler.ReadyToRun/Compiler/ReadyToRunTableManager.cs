@@ -4,13 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
-
 using ILCompiler.DependencyAnalysis;
 using ILCompiler.DependencyAnalysisFramework;
-
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -31,13 +28,14 @@ namespace ILCompiler
     {
         NonInstantiated,
         Instantiated,
-        All
+        All,
     }
 
     // TODO-REFACTOR: merge with the table manager
     public class MetadataManager
     {
         protected readonly CompilerTypeSystemContext _typeSystemContext;
+
         private class PerModuleMethodsGenerated
         {
             public PerModuleMethodsGenerated(EcmaModule module)
@@ -50,7 +48,8 @@ namespace ILCompiler
             public List<IMethodNode> GenericMethodsGenerated = new List<IMethodNode>();
         }
 
-        private Dictionary<EcmaModule, PerModuleMethodsGenerated> _methodsGenerated = new Dictionary<EcmaModule, PerModuleMethodsGenerated>();
+        private Dictionary<EcmaModule, PerModuleMethodsGenerated> _methodsGenerated =
+            new Dictionary<EcmaModule, PerModuleMethodsGenerated>();
         private List<IMethodNode> _completeSortedMethods = new List<IMethodNode>();
         private List<IMethodNode> _completeSortedGenericMethods = new List<IMethodNode>();
         private NodeFactory _factory;
@@ -62,7 +61,10 @@ namespace ILCompiler
             _typeSystemContext = context;
         }
 
-        public void AttachToDependencyGraph(DependencyAnalyzerBase<NodeFactory> graph, NodeFactory factory)
+        public void AttachToDependencyGraph(
+            DependencyAnalyzerBase<NodeFactory> graph,
+            NodeFactory factory
+        )
         {
             graph.NewMarkedNode += Graph_NewMarkedNode;
             _factory = factory;
@@ -79,7 +81,8 @@ namespace ILCompiler
                 {
                     Debug.Assert(!_sortedMethods);
                     MethodDesc method = methodNode.Method;
-                    EcmaModule module = (EcmaModule)((EcmaMethod)method.GetTypicalMethodDefinition()).Module;
+                    EcmaModule module = (EcmaModule)
+                        ((EcmaMethod)method.GetTypicalMethodDefinition()).Module;
                     if (!_methodsGenerated.TryGetValue(module, out var perModuleData))
                     {
                         perModuleData = new PerModuleMethodsGenerated(module);
@@ -97,30 +100,49 @@ namespace ILCompiler
             }
         }
 
-        public IEnumerable<IMethodNode> GetCompiledMethods(EcmaModule moduleToEnumerate, CompiledMethodCategory methodCategory)
+        public IEnumerable<IMethodNode> GetCompiledMethods(
+            EcmaModule moduleToEnumerate,
+            CompiledMethodCategory methodCategory
+        )
         {
             lock (_methodsGenerated)
             {
                 if (!_sortedMethods)
                 {
                     CompilerComparer comparer = CompilerComparer.Instance;
-                    SortableDependencyNode.ObjectNodeComparer objectNodeComparer = new SortableDependencyNode.ObjectNodeComparer(comparer);
+                    SortableDependencyNode.ObjectNodeComparer objectNodeComparer =
+                        new SortableDependencyNode.ObjectNodeComparer(comparer);
                     Comparison<IMethodNode> sortHelper = (x, y) =>
                     {
-                        int nodeComparerResult = objectNodeComparer.Compare((SortableDependencyNode)x, (SortableDependencyNode)y);
+                        int nodeComparerResult = objectNodeComparer.Compare(
+                            (SortableDependencyNode)x,
+                            (SortableDependencyNode)y
+                        );
 #if DEBUG
                         int methodOnlyResult = comparer.Compare(x.Method, y.Method);
 
                         // Assert the two sorting techniques produce the same result unless there is a CustomSort applied
-                        Debug.Assert((nodeComparerResult == methodOnlyResult) || 
-                            ((x is SortableDependencyNode sortableX && sortableX.CustomSort != Int32.MaxValue) ||
-                             (y is SortableDependencyNode sortableY && sortableY.CustomSort != Int32.MaxValue)));
+                        Debug.Assert(
+                            (nodeComparerResult == methodOnlyResult)
+                                || (
+                                    (
+                                        x is SortableDependencyNode sortableX
+                                        && sortableX.CustomSort != Int32.MaxValue
+                                    )
+                                    || (
+                                        y is SortableDependencyNode sortableY
+                                        && sortableY.CustomSort != Int32.MaxValue
+                                    )
+                                )
+                        );
 #endif
                         return nodeComparerResult;
                     };
-                    Comparison<IMethodNode> sortHelperNoCustomSort = (x, y) => comparer.Compare(x, y);
+                    Comparison<IMethodNode> sortHelperNoCustomSort = (x, y) =>
+                        comparer.Compare(x, y);
 
-                    List<PerModuleMethodsGenerated> perModuleDatas = new List<PerModuleMethodsGenerated>(_methodsGenerated.Values);
+                    List<PerModuleMethodsGenerated> perModuleDatas =
+                        new List<PerModuleMethodsGenerated>(_methodsGenerated.Values);
                     perModuleDatas.Sort((x, y) => x.Module.CompareTo(y.Module));
 
                     foreach (var perModuleData in perModuleDatas)
@@ -129,7 +151,9 @@ namespace ILCompiler
                         perModuleData.GenericMethodsGenerated.MergeSort(sortHelperNoCustomSort);
                         _completeSortedMethods.AddRange(perModuleData.MethodsGenerated);
                         _completeSortedMethods.AddRange(perModuleData.GenericMethodsGenerated);
-                        _completeSortedGenericMethods.AddRange(perModuleData.GenericMethodsGenerated);
+                        _completeSortedGenericMethods.AddRange(
+                            perModuleData.GenericMethodsGenerated
+                        );
                     }
                     _completeSortedMethods.MergeSort(sortHelper);
                     _completeSortedGenericMethods.MergeSort(sortHelper);
@@ -176,13 +200,25 @@ namespace ILCompiler
             }
         }
 
-        private IEnumerable<IMethodNode> GetCompiledMethodsAllMethodsInModuleHelper(EcmaModule moduleToEnumerate)
+        private IEnumerable<IMethodNode> GetCompiledMethodsAllMethodsInModuleHelper(
+            EcmaModule moduleToEnumerate
+        )
         {
-            foreach (var node in GetCompiledMethods(moduleToEnumerate, CompiledMethodCategory.Instantiated))
+            foreach (
+                var node in GetCompiledMethods(
+                    moduleToEnumerate,
+                    CompiledMethodCategory.Instantiated
+                )
+            )
             {
                 yield return node;
             }
-            foreach (var node in GetCompiledMethods(moduleToEnumerate, CompiledMethodCategory.NonInstantiated))
+            foreach (
+                var node in GetCompiledMethods(
+                    moduleToEnumerate,
+                    CompiledMethodCategory.NonInstantiated
+                )
+            )
             {
                 yield return node;
             }
@@ -192,13 +228,16 @@ namespace ILCompiler
     public class ReadyToRunTableManager : MetadataManager
     {
         public ReadyToRunTableManager(CompilerTypeSystemContext typeSystemContext)
-            : base(typeSystemContext) {}
+            : base(typeSystemContext) { }
 
         public IEnumerable<TypeInfo<TypeDefinitionHandle>> GetDefinedTypes(EcmaModule module)
         {
             foreach (TypeDefinitionHandle typeDefHandle in module.MetadataReader.TypeDefinitions)
             {
-                yield return new TypeInfo<TypeDefinitionHandle>(module.MetadataReader, typeDefHandle);
+                yield return new TypeInfo<TypeDefinitionHandle>(
+                    module.MetadataReader,
+                    typeDefHandle
+                );
             }
         }
 
@@ -206,7 +245,10 @@ namespace ILCompiler
         {
             foreach (ExportedTypeHandle exportedTypeHandle in module.MetadataReader.ExportedTypes)
             {
-                yield return new TypeInfo<ExportedTypeHandle>(module.MetadataReader, exportedTypeHandle);
+                yield return new TypeInfo<ExportedTypeHandle>(
+                    module.MetadataReader,
+                    exportedTypeHandle
+                );
             }
         }
     }

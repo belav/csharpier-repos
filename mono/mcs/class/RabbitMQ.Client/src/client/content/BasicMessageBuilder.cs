@@ -55,16 +55,17 @@
 //
 //---------------------------------------------------------------------------
 using System;
-using System.IO;
 using System.Collections;
-
+using System.IO;
 using RabbitMQ.Client;
 using RabbitMQ.Util;
 
-namespace RabbitMQ.Client.Content {
+namespace RabbitMQ.Client.Content
+{
     ///<summary>Framework for constructing various types of AMQP
     ///Basic-class application messages.</summary>
-    public class BasicMessageBuilder: IMessageBuilder {
+    public class BasicMessageBuilder : IMessageBuilder
+    {
         ///<summary>By default, new instances of BasicMessageBuilder and its
         ///subclasses will have this much initial buffer
         ///space.</summary>
@@ -82,9 +83,12 @@ namespace RabbitMQ.Client.Content {
         /// already exists, the existing instance is returned. The
         /// instance is not reset.
         ///</remarks>
-        public NetworkBinaryWriter Writer {
-            get {
-                if (m_writer == null) {
+        public NetworkBinaryWriter Writer
+        {
+            get
+            {
+                if (m_writer == null)
+                {
                     m_writer = new NetworkBinaryWriter(m_accumulator);
                 }
                 return m_writer;
@@ -95,75 +99,85 @@ namespace RabbitMQ.Client.Content {
         ///<remarks>
         /// The DefaultAccumulatorSize is used for the initial accumulator buffer size.
         ///</remarks>
-        public BasicMessageBuilder(IModel model): this(model, DefaultAccumulatorSize) {}
+        public BasicMessageBuilder(IModel model)
+            : this(model, DefaultAccumulatorSize) { }
 
         ///<summary>Construct an instance ready for writing.</summary>
-        public BasicMessageBuilder(IModel model, int initialAccumulatorSize) {
+        public BasicMessageBuilder(IModel model, int initialAccumulatorSize)
+        {
             m_properties = model.CreateBasicProperties();
             m_accumulator = new MemoryStream(initialAccumulatorSize);
 
             string contentType = GetDefaultContentType();
-            if (contentType != null) {
+            if (contentType != null)
+            {
                 Properties.ContentType = contentType;
             }
         }
 
         ///<summary>Retrieve the IBasicProperties associated with this instance.</summary>
-        public IBasicProperties Properties {
-	    get {
-		return m_properties;
-	    }
-	}
+        public IBasicProperties Properties
+        {
+            get { return m_properties; }
+        }
 
         ///<summary>Implement IMessageBuilder.Headers</summary>
-	public IDictionary Headers {
-	    get {
-		if (Properties.Headers == null) {
-		    Properties.Headers = new Hashtable();
-		}
-		return Properties.Headers;
-	    }
-	}
+        public IDictionary Headers
+        {
+            get
+            {
+                if (Properties.Headers == null)
+                {
+                    Properties.Headers = new Hashtable();
+                }
+                return Properties.Headers;
+            }
+        }
 
         ///<summary>Implement IMessageBuilder.BodyStream</summary>
-        public Stream BodyStream {
-	    get {
-		return m_accumulator;
-	    }
-	}
+        public Stream BodyStream
+        {
+            get { return m_accumulator; }
+        }
 
         ///<summary>Implement
         ///IMessageBuilder.GetDefaultContentType(). Returns null;
         ///overridden in subclasses.</summary>
-        public virtual string GetDefaultContentType() {
+        public virtual string GetDefaultContentType()
+        {
             return null;
         }
 
-	///<summary>Implement IMessageBuilder.RawWrite</summary>
-	public IMessageBuilder RawWrite(byte b) {
-	    BodyStream.WriteByte(b);
-	    return this;
-	}
+        ///<summary>Implement IMessageBuilder.RawWrite</summary>
+        public IMessageBuilder RawWrite(byte b)
+        {
+            BodyStream.WriteByte(b);
+            return this;
+        }
 
-	///<summary>Implement IMessageBuilder.RawWrite</summary>
-	public IMessageBuilder RawWrite(byte[] bytes) {
-	    return RawWrite(bytes, 0, bytes.Length);
-	}
+        ///<summary>Implement IMessageBuilder.RawWrite</summary>
+        public IMessageBuilder RawWrite(byte[] bytes)
+        {
+            return RawWrite(bytes, 0, bytes.Length);
+        }
 
-	///<summary>Implement IMessageBuilder.RawWrite</summary>
-	public IMessageBuilder RawWrite(byte[] bytes, int offset, int length) {
-	    BodyStream.Write(bytes, offset, length);
-	    return this;
-	}
+        ///<summary>Implement IMessageBuilder.RawWrite</summary>
+        public IMessageBuilder RawWrite(byte[] bytes, int offset, int length)
+        {
+            BodyStream.Write(bytes, offset, length);
+            return this;
+        }
 
-	///<summary>Implement IMessageBuilder.GetContentHeader</summary>
-	public virtual IContentHeader GetContentHeader() {
-	    return m_properties;
-	}
+        ///<summary>Implement IMessageBuilder.GetContentHeader</summary>
+        public virtual IContentHeader GetContentHeader()
+        {
+            return m_properties;
+        }
 
-	///<summary>Implement IMessageBuilder.GetContentBody</summary>
-	public virtual byte[] GetContentBody() {
-	    return m_accumulator.ToArray();
-	}
+        ///<summary>Implement IMessageBuilder.GetContentBody</summary>
+        public virtual byte[] GetContentBody()
+        {
+            return m_accumulator.ToArray();
+        }
     }
 }

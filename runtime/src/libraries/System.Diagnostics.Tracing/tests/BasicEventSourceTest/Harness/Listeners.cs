@@ -4,16 +4,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if USE_MDT_EVENTSOURCE
-using Microsoft.Diagnostics.Tracing;
-#else
-using System.Diagnostics.Tracing;
-#endif
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
+#if USE_MDT_EVENTSOURCE
+using Microsoft.Diagnostics.Tracing;
+#else
+using System.Diagnostics.Tracing;
+#endif
 
 namespace BasicEventSourceTests
 {
@@ -22,18 +22,27 @@ namespace BasicEventSourceTests
     /// </summary>
     public abstract class Listener : IDisposable
     {
-        public Action<Event> OnEvent;           // Called when you get events.
+        public Action<Event> OnEvent; // Called when you get events.
         public abstract void Dispose();
+
         /// <summary>
         /// Send a command to an eventSource.   Be careful this is async.  You may wish to do a WaitForEnable
         /// </summary>
-        public abstract void EventSourceCommand(string eventSourceName, EventCommand command, FilteringOptions options = null);
+        public abstract void EventSourceCommand(
+            string eventSourceName,
+            EventCommand command,
+            FilteringOptions options = null
+        );
 
-        public void EventSourceSynchronousEnable(EventSource eventSource, FilteringOptions options = null)
+        public void EventSourceSynchronousEnable(
+            EventSource eventSource,
+            FilteringOptions options = null
+        )
         {
             EventSourceCommand(eventSource.Name, EventCommand.Enable, options);
             WaitForEnable(eventSource);
         }
+
         public void WaitForEnable(EventSource logger)
         {
             if (!SpinWait.SpinUntil(() => logger.IsEnabled(), TimeSpan.FromSeconds(10)))
@@ -57,12 +66,18 @@ namespace BasicEventSourceTests
     /// </summary>
     public class FilteringOptions
     {
-        public FilteringOptions() { Keywords = EventKeywords.All; Level = EventLevel.Verbose; }
+        public FilteringOptions()
+        {
+            Keywords = EventKeywords.All;
+            Level = EventLevel.Verbose;
+        }
+
         public EventKeywords Keywords;
         public EventLevel Level;
         public IDictionary<string, string> Args;
 
-        public override string ToString() => $"<Options Keywords='{(ulong)Keywords:x}' Level'{Level}' ArgsCount='{Args.Count}'";
+        public override string ToString() =>
+            $"<Options Keywords='{(ulong)Keywords:x}' Level'{Level}' ArgsCount='{Args.Count}'";
     }
 
     /// <summary>
@@ -72,12 +87,19 @@ namespace BasicEventSourceTests
     /// </summary>
     public abstract class Event
     {
-        public virtual bool IsEtw { get { return false; } }
-        public virtual bool IsEventListener { get { return false; } }
+        public virtual bool IsEtw
+        {
+            get { return false; }
+        }
+        public virtual bool IsEventListener
+        {
+            get { return false; }
+        }
         public abstract string ProviderName { get; }
         public abstract string EventName { get; }
         public abstract object PayloadValue(int propertyIndex, string propertyName);
         public abstract int PayloadCount { get; }
+
         public virtual string PayloadString(int propertyIndex, string propertyName)
         {
             var obj = PayloadValue(propertyIndex, propertyName);
@@ -102,6 +124,7 @@ namespace BasicEventSourceTests
                 return obj.ToString();
             return "";
         }
+
         public abstract IList<string> PayloadNames { get; }
 
         /// <summary>
@@ -171,8 +194,8 @@ namespace BasicEventSourceTests
             if (useEventsToListen)
             {
                 _listener = new HelperEventListener(null);
-                _listener.EventSourceCreated += (sender, eventSourceCreatedEventArgs)
-                    => _onEventSourceCreated?.Invoke(eventSourceCreatedEventArgs.EventSource);
+                _listener.EventSourceCreated += (sender, eventSourceCreatedEventArgs) =>
+                    _onEventSourceCreated?.Invoke(eventSourceCreatedEventArgs.EventSource);
                 _listener.EventWritten += mListenerEventWritten;
             }
             else
@@ -203,9 +226,18 @@ namespace BasicEventSourceTests
                 throw new NotImplementedException();
         }
 
-        public override void EventSourceCommand(string eventSourceName, EventCommand command, FilteringOptions options = null)
+        public override void EventSourceCommand(
+            string eventSourceName,
+            EventCommand command,
+            FilteringOptions options = null
+        )
         {
-            EventTestHarness.LogWriteLine("Sending command {0} to EventSource {1} Options {2}", eventSourceName, command, options);
+            EventTestHarness.LogWriteLine(
+                "Sending command {0} to EventSource {1} Options {2}",
+                eventSourceName,
+                command,
+                options
+            );
 
             if (options == null)
                 options = new FilteringOptions();
@@ -219,12 +251,12 @@ namespace BasicEventSourceTests
                 }
             }
 
-            _onEventSourceCreated += delegate (EventSource sourceBeingCreated)
+            _onEventSourceCreated += delegate(EventSource sourceBeingCreated)
             {
                 if (eventSourceName != null && eventSourceName == sourceBeingCreated.Name)
                 {
                     DoCommand(sourceBeingCreated, command, options);
-                    eventSourceName = null;         // so we only do it once.
+                    eventSourceName = null; // so we only do it once.
                 }
             };
         }
@@ -267,13 +299,25 @@ namespace BasicEventSourceTests
 
             internal EventListenerEvent(EventWrittenEventArgs data) => Data = data;
 
-            public override bool IsEventListener { get { return true; } }
+            public override bool IsEventListener
+            {
+                get { return true; }
+            }
 
-            public override string ProviderName { get { return Data.EventSource.Name; } }
+            public override string ProviderName
+            {
+                get { return Data.EventSource.Name; }
+            }
 
-            public override string EventName { get { return Data.EventName; } }
+            public override string EventName
+            {
+                get { return Data.EventName; }
+            }
 
-            public override IList<string> PayloadNames { get { return Data.PayloadNames; } }
+            public override IList<string> PayloadNames
+            {
+                get { return Data.PayloadNames; }
+            }
 
             public override int PayloadCount
             {

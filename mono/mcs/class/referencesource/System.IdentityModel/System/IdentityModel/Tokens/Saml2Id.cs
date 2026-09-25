@@ -13,9 +13,9 @@ namespace System.IdentityModel.Tokens
     /// Represents the identifier used for SAML assertions.
     /// </summary>
     /// <details>
-    /// This identifier should be unique per [Saml2Core, 1.3.4] 
+    /// This identifier should be unique per [Saml2Core, 1.3.4]
     /// and must fit the NCName xml schema definition, which is to say that
-    /// it must begin with a letter or underscore. 
+    /// it must begin with a letter or underscore.
     /// </details>
     public class Saml2Id
     {
@@ -25,9 +25,7 @@ namespace System.IdentityModel.Tokens
         /// Creates a new ID value based on a GUID.
         /// </summary>
         public Saml2Id()
-            : this(System.IdentityModel.UniqueId.CreateRandomId())
-        {
-        }
+            : this(System.IdentityModel.UniqueId.CreateRandomId()) { }
 
         /// <summary>
         /// Creates a new ID whose value is the given string.
@@ -48,7 +46,8 @@ namespace System.IdentityModel.Tokens
             catch (XmlException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.ID4128), "value", e));
+                    new ArgumentException(SR.GetString(SR.ID4128), "value", e)
+                );
             }
         }
 
@@ -78,7 +77,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets the hash code for the <see cref="Saml2Id"/> as an integer. 
+        /// Gets the hash code for the <see cref="Saml2Id"/> as an integer.
         /// </summary>
         /// <returns>The hash code for this object.</returns>
         public override int GetHashCode()

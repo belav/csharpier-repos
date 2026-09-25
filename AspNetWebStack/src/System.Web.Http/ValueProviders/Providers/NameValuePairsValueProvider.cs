@@ -20,8 +20,15 @@ namespace System.Web.Http.ValueProviders.Providers
         /// </summary>
         /// <param name="values">The key value pairs to wrap.</param>
         /// <param name="culture">The culture to return with ValueProviderResult instances.</param>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Represents a collection of name/value pairs, cannot use NameValueCollection because it performs poorly")]
-        public NameValuePairsValueProvider(IEnumerable<KeyValuePair<string, string>> values, CultureInfo culture)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Represents a collection of name/value pairs, cannot use NameValueCollection because it performs poorly"
+        )]
+        public NameValuePairsValueProvider(
+            IEnumerable<KeyValuePair<string, string>> values,
+            CultureInfo culture
+        )
         {
             if (values == null)
             {
@@ -37,14 +44,24 @@ namespace System.Web.Http.ValueProviders.Providers
         /// </summary>
         /// <param name="valuesFactory">A function returning the key value pairs to wrap.</param>
         /// <param name="culture">The culture to return with ValueProviderResult instances.</param>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Represents a collection of name/value pairs, cannot use NameValueCollection because it performs poorly")]
-        public NameValuePairsValueProvider(Func<IEnumerable<KeyValuePair<string, string>>> valuesFactory, CultureInfo culture)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Represents a collection of name/value pairs, cannot use NameValueCollection because it performs poorly"
+        )]
+        public NameValuePairsValueProvider(
+            Func<IEnumerable<KeyValuePair<string, string>>> valuesFactory,
+            CultureInfo culture
+        )
         {
             if (valuesFactory == null)
             {
                 throw Error.ArgumentNull("valuesFactory");
             }
-            _lazyValues = new Lazy<Dictionary<string, object>>(() => InitializeValues(valuesFactory()), isThreadSafe: true);
+            _lazyValues = new Lazy<Dictionary<string, object>>(
+                () => InitializeValues(valuesFactory()),
+                isThreadSafe: true
+            );
             _culture = culture;
         }
 
@@ -67,10 +84,7 @@ namespace System.Web.Http.ValueProviders.Providers
         // For unit testing purposes
         internal CultureInfo Culture
         {
-            get
-            {
-                return _culture;
-            }
+            get { return _culture; }
         }
 
         private PrefixContainer PrefixContainer
@@ -99,21 +113,31 @@ namespace System.Web.Http.ValueProviders.Providers
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "One of the casts is conditionally compiled")]
-        private static Dictionary<string, object> InitializeValues<T>(IEnumerable<KeyValuePair<string, T>> nameValuePairs)
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "One of the casts is conditionally compiled"
+        )]
+        private static Dictionary<string, object> InitializeValues<T>(
+            IEnumerable<KeyValuePair<string, T>> nameValuePairs
+        )
             where T : class
         {
             // Performance-sensitive.
             // Optimize for the cases of 0 pairs, and for names being unique when present.
-            Dictionary<string, object> valuesDictionary = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, object> valuesDictionary = new Dictionary<string, object>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             // Avoid looping in the 0 case.
-            KeyValuePair<string, string>[] nameValuePairsArray = nameValuePairs as KeyValuePair<string, string>[];
+            KeyValuePair<string, string>[] nameValuePairsArray =
+                nameValuePairs as KeyValuePair<string, string>[];
             if (nameValuePairsArray != null && nameValuePairsArray.Length == 0)
             {
                 return valuesDictionary;
             }
-            Dictionary<string, object> nameValuePairsDictionary = nameValuePairs as Dictionary<string, object>;
+            Dictionary<string, object> nameValuePairsDictionary =
+                nameValuePairs as Dictionary<string, object>;
             if (nameValuePairsDictionary != null && nameValuePairsDictionary.Count == 0)
             {
                 return valuesDictionary;
@@ -124,7 +148,7 @@ namespace System.Web.Http.ValueProviders.Providers
                 string name = nameValuePair.Key;
                 object value;
                 // We optimize for the common case of a name being associated with exactly one value by avoiding a List
-                // allocation if we can avoid it. The first time the key appears, the value gets stored as a string. 
+                // allocation if we can avoid it. The first time the key appears, the value gets stored as a string.
                 // Only if the key appears a second time do we allocate a List to store the values for that key.
                 if (valuesDictionary.TryGetValue(name, out value))
                 {
@@ -180,7 +204,11 @@ namespace System.Web.Http.ValueProviders.Providers
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "One of the casts is conditionally compiled")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "One of the casts is conditionally compiled"
+        )]
         private static string GetAttemptedValue(object value)
         {
             List<string> valueStrings = value as List<string>;

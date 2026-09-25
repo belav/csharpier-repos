@@ -8,7 +8,8 @@ namespace System.Globalization.Tests
 {
     public class KoreanCalendarGetDayOfWeek
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> GetDayOfWeek_TestData()
         {
@@ -22,7 +23,10 @@ namespace System.Globalization.Tests
         [MemberData(nameof(GetDayOfWeek_TestData))]
         public void GetDayOfWeek(DateTime time)
         {
-            Assert.Equal(new GregorianCalendar().GetDayOfWeek(time), new KoreanCalendar().GetDayOfWeek(time));
+            Assert.Equal(
+                new GregorianCalendar().GetDayOfWeek(time),
+                new KoreanCalendar().GetDayOfWeek(time)
+            );
         }
     }
 }

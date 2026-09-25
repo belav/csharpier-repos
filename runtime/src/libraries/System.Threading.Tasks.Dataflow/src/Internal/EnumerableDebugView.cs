@@ -32,6 +32,9 @@ namespace System.Threading.Tasks.Dataflow.Internal
 
         /// <summary>Gets the contents of the list.</summary>
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public KeyValuePair<TKey, TValue>[] Items { get { return _enumerable.ToArray(); } }
+        public KeyValuePair<TKey, TValue>[] Items
+        {
+            get { return _enumerable.ToArray(); }
+        }
     }
 }

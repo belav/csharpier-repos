@@ -28,12 +28,13 @@ internal abstract class LspWorkspaceRegistrationService : IDisposable
             return;
 
         Logger.Log(FunctionId.RegisterWorkspace, KeyValueLogMessage.Create(LogType.Trace, m =>
-        {
-            m["WorkspaceKind"] = workspace.Kind;
-            m["WorkspaceCanOpenDocuments"] = workspace.CanOpenDocuments;
-            m["WorkspaceCanChangeActiveContextDocument"] = workspace.CanChangeActiveContextDocument;
-            m["WorkspacePartialSemanticsEnabled"] = workspace.PartialSemanticsEnabled;
-        }));
+            {
+                m["WorkspaceKind"] = workspace.Kind;
+                m["WorkspaceCanOpenDocuments"] = workspace.CanOpenDocuments;
+                m["WorkspaceCanChangeActiveContextDocument"] =
+                    workspace.CanChangeActiveContextDocument;
+                m["WorkspacePartialSemanticsEnabled"] = workspace.PartialSemanticsEnabled;
+            }));
 
         lock (_gate)
         {
@@ -76,7 +77,7 @@ internal abstract class LspWorkspaceRegistrationService : IDisposable
 
     /// <summary>
     /// Indicates whether the LSP solution has changed in a non-tracked document context.
-    /// 
+    ///
     /// <b>IMPORTANT:</b> Implementations of this event handler should do as little synchronous work as possible since this will block.
     /// </summary>
     public EventHandler<WorkspaceChangeEventArgs>? LspSolutionChanged;

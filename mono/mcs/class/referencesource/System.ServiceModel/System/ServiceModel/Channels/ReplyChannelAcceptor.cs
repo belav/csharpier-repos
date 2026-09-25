@@ -9,12 +9,11 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Diagnostics.Application;
 
-    class ReplyChannelAcceptor : SingletonChannelAcceptor<IReplyChannel, ReplyChannel, RequestContext>
+    class ReplyChannelAcceptor
+        : SingletonChannelAcceptor<IReplyChannel, ReplyChannel, RequestContext>
     {
         public ReplyChannelAcceptor(ChannelManagerBase channelManager)
-            : base(channelManager)
-        {
-        }
+            : base(channelManager) { }
 
         protected override ReplyChannel OnCreateChannel()
         {
@@ -25,9 +24,16 @@ namespace System.ServiceModel.Channels
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MessageReceived,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.MessageReceived,
                     SR.GetString(SR.TraceCodeMessageReceived),
-                    MessageTransmitTraceRecord.CreateReceiveTraceRecord((requestContext == null) ? null : requestContext.RequestMessage), this, null);
+                    MessageTransmitTraceRecord.CreateReceiveTraceRecord(
+                        (requestContext == null) ? null : requestContext.RequestMessage
+                    ),
+                    this,
+                    null
+                );
             }
         }
     }

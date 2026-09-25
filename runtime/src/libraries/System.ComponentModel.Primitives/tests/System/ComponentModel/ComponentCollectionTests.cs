@@ -34,15 +34,34 @@ namespace System.ComponentModel.Tests
             yield return new object[] { new IComponent[0], null, null };
             yield return new object[] { new IComponent[0], "name", null };
             yield return new object[] { new IComponent[] { new Component() }, "name", null };
-            yield return new object[] { new IComponent[] { new Component { Site = new MockSite() } }, "name", null };
-            yield return new object[] { new IComponent[] { namedComponent }, "Name", namedComponent };
-            yield return new object[] { new IComponent[] { namedComponent }, "name", namedComponent };
+            yield return new object[]
+            {
+                new IComponent[] { new Component { Site = new MockSite() } },
+                "name",
+                null,
+            };
+            yield return new object[]
+            {
+                new IComponent[] { namedComponent },
+                "Name",
+                namedComponent,
+            };
+            yield return new object[]
+            {
+                new IComponent[] { namedComponent },
+                "name",
+                namedComponent,
+            };
             yield return new object[] { new IComponent[] { namedComponent }, "nosuchname", null };
         }
 
         [Theory]
         [MemberData(nameof(Indexer_Name_TestData))]
-        public void Indexer_Name_ReturnsExpected(IComponent[] components, string name, IComponent expected)
+        public void Indexer_Name_ReturnsExpected(
+            IComponent[] components,
+            string name,
+            IComponent expected
+        )
         {
             var collection = new ComponentCollection(components);
             Assert.Equal(expected, collection[name]);

@@ -34,7 +34,6 @@ namespace System.Xml.ReaderSettingsTests
             return TEST_PASS;
         }
 
-
         private int _commentCount = 0;
         private int _piCount = 0;
         private int _wsCount = 0;
@@ -151,7 +150,11 @@ namespace System.Xml.ReaderSettingsTests
             reader = ReaderHelper.Create(new StringReader(mn.GetNodes()), rs, (string)null);
             reader.Read();
 
-            CError.Compare(reader.NodeType, XmlNodeType.XmlDeclaration, "XmlDecl should not be ignored");
+            CError.Compare(
+                reader.NodeType,
+                XmlNodeType.XmlDeclaration,
+                "XmlDecl should not be ignored"
+            );
 
             return TEST_PASS;
         }
@@ -171,7 +174,8 @@ namespace System.Xml.ReaderSettingsTests
             rs.IgnoreComments = true;
             reader = ReaderHelper.Create(new StringReader(mn.GetNodes()), rs, (string)null);
 
-            while (reader.Read()) ;
+            while (reader.Read())
+                ;
             reader.Dispose();
 
             return TEST_PASS;
@@ -198,7 +202,6 @@ namespace System.Xml.ReaderSettingsTests
 
             return TEST_PASS;
         }
-
 
         [Variation("IgnoreComments and invalid comment in XML", Pri = 0)]
         public int c02()
@@ -250,7 +253,6 @@ namespace System.Xml.ReaderSettingsTests
             return TEST_PASS;
         }
 
-
         [Variation("IgnoreWhitespace and Xml:Space=preserve", Pri = 0)]
         public int w02()
         {
@@ -284,7 +286,6 @@ namespace System.Xml.ReaderSettingsTests
 
             return TEST_PASS;
         }
-
 
         [Variation("IgnoreWhitespace and invalid whitespace in XML", Pri = 0)]
         public int w03()

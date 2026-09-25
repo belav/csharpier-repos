@@ -17,7 +17,7 @@ namespace System.Net
     // The buffer passed to the .ctor is owned by the ChunkParser until the whole response is read (i.e. Read/
     // ReadAsync return 0 bytes) or an error occurs.
     // ChunkParser requires the whole metadata to be in the buffer, i.e. if only parts of a secion (chunk length/
-    // extension/trailer header etc.) fit into the buffer, ChunkParser will create a new, larger buffer until the 
+    // extension/trailer header etc.) fit into the buffer, ChunkParser will create a new, larger buffer until the
     // data can be parsed or the buffer length limit is reached. The limit can be specified in the constructor.
     internal sealed class ChunkParser
     {
@@ -35,7 +35,7 @@ namespace System.Net
             PayloadEnd, // read CRLF
             Trailer,
             Done,
-            Error
+            Error,
         }
 
         private byte[] buffer;
@@ -94,16 +94,27 @@ namespace System.Net
             tokenChars[(byte)'}'] = false;
         }
 
-        public ChunkParser(Stream dataSource, byte[] internalBuffer, int initialBufferOffset, int initialBufferCount,
-            int maxBufferLength)
+        public ChunkParser(
+            Stream dataSource,
+            byte[] internalBuffer,
+            int initialBufferOffset,
+            int initialBufferCount,
+            int maxBufferLength
+        )
         {
             Contract.Requires(dataSource != null);
             Contract.Requires(internalBuffer != null);
-            Contract.Requires(internalBuffer.Length >= chunkLengthBuffer,
-                "Buffer must be big enough to hold the chunk length.");
-            Contract.Requires((initialBufferCount >= 0) && (initialBufferCount <= internalBuffer.Length));
-            Contract.Requires((initialBufferOffset >= 0) &&
-                (initialBufferOffset + initialBufferCount <= internalBuffer.Length));
+            Contract.Requires(
+                internalBuffer.Length >= chunkLengthBuffer,
+                "Buffer must be big enough to hold the chunk length."
+            );
+            Contract.Requires(
+                (initialBufferCount >= 0) && (initialBufferCount <= internalBuffer.Length)
+            );
+            Contract.Requires(
+                (initialBufferOffset >= 0)
+                    && (initialBufferOffset + initialBufferCount <= internalBuffer.Length)
+            );
 
             this.dataSource = dataSource;
             this.buffer = internalBuffer;
@@ -115,8 +126,14 @@ namespace System.Net
             this.readState = ReadState.ChunkLength;
         }
 
-        public IAsyncResult ReadAsync(object caller, byte[] userBuffer, int userBufferOffset,
-            int userBufferCount, AsyncCallback callback, object state)
+        public IAsyncResult ReadAsync(
+            object caller,
+            byte[] userBuffer,
+            int userBufferOffset,
+            int userBufferCount,
+            AsyncCallback callback,
+            object state
+        )
         {
             SetReadParameters(userBuffer, userBufferOffset, userBufferCount);
 
@@ -159,7 +176,9 @@ namespace System.Net
         {
             Contract.Requires(userBuffer != null);
             Contract.Requires((userBufferCount > 0) && (userBufferCount <= userBuffer.Length));
-            Contract.Requires((userBufferOffset >= 0) && (userBufferOffset + userBufferCount <= userBuffer.Length));
+            Contract.Requires(
+                (userBufferOffset >= 0) && (userBufferOffset + userBufferCount <= userBuffer.Length)
+            );
 
             if (Interlocked.CompareExchange(ref this.userBuffer, userBuffer, null) != null)
             {
@@ -168,15 +187,25 @@ namespace System.Net
             }
 
             Contract.Assert(userAsyncResult == null, "Overlapped read operations are not allowed.");
-            Contract.Assert((readState == ReadState.ChunkLength) || (readState == ReadState.PayloadEnd) ||
-                ((readState == ReadState.Payload) && (currentChunkBytesRead < currentChunkLength)),
-                "Only one outstanding read operation at a time supported.");
+            Contract.Assert(
+                (readState == ReadState.ChunkLength)
+                    || (readState == ReadState.PayloadEnd)
+                    || (
+                        (readState == ReadState.Payload)
+                        && (currentChunkBytesRead < currentChunkLength)
+                    ),
+                "Only one outstanding read operation at a time supported."
+            );
 
             this.userBufferCount = userBufferCount;
             this.userBufferOffset = userBufferOffset;
         }
 
-        public bool TryGetLeftoverBytes(out byte[] buffer, out int leftoverBufferOffset, out int leftoverBufferSize)
+        public bool TryGetLeftoverBytes(
+            out byte[] buffer,
+            out int leftoverBufferOffset,
+            out int leftoverBufferSize
+        )
         {
             leftoverBufferOffset = 0;
             leftoverBufferSize = 0;
@@ -184,13 +213,15 @@ namespace System.Net
 
             if (readState != ReadState.Done)
             {
-                // The ConnectStream was closed before we completed reading the response (e.g. when closing the 
-                // stream without consuming it). 
+                // The ConnectStream was closed before we completed reading the response (e.g. when closing the
+                // stream without consuming it).
                 return false;
             }
 
-            Contract.Assert(userAsyncResult == null, 
-                "If we're in the 'done' state we should not have pending operations.");
+            Contract.Assert(
+                userAsyncResult == null,
+                "If we're in the 'done' state we should not have pending operations."
+            );
 
             if (bufferCurrentPos == bufferFillLength)
             {
@@ -207,7 +238,10 @@ namespace System.Net
 
         private void ProcessResponse()
         {
-            Contract.Assert(readState < ReadState.Done, "We're already done. No need to process state.");
+            Contract.Assert(
+                readState < ReadState.Done,
+                "We're already done. No need to process state."
+            );
 
             DataParseStatus result;
 
@@ -237,7 +271,8 @@ namespace System.Net
 
                     default:
                         Contract.Assert(false, "Unknown state");
-                        throw new InternalException(); ;
+                        throw new InternalException();
+                        ;
                 }
 
                 switch (result)
@@ -253,8 +288,14 @@ namespace System.Net
 
                     case DataParseStatus.Invalid:
                     case DataParseStatus.DataTooBig:
-                        CompleteUserRead(new IOException(
-                            SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))));
+                        CompleteUserRead(
+                            new IOException(
+                                SR.GetString(
+                                    SR.net_io_readfailure,
+                                    SR.GetString(SR.net_io_connectionclosed)
+                                )
+                            )
+                        );
                         return;
 
                     case DataParseStatus.NeedMoreData:
@@ -269,7 +310,8 @@ namespace System.Net
 
                     default:
                         Contract.Assert(false, "Unknown state");
-                        throw new InternalException(); ;
+                        throw new InternalException();
+                        ;
                 }
             }
         }
@@ -329,7 +371,13 @@ namespace System.Net
 
             if (IsAsync)
             {
-                IAsyncResult ar = dataSource.BeginRead(buffer, bufferFillLength, readSize, ReadCallback, null);
+                IAsyncResult ar = dataSource.BeginRead(
+                    buffer,
+                    bufferFillLength,
+                    readSize,
+                    ReadCallback,
+                    null
+                );
                 CheckAsyncResult(ar);
 
                 if (!ar.CompletedSynchronously)
@@ -369,7 +417,7 @@ namespace System.Net
 
             if ((currentPos > 0) || (bufferFillLength < buffer.Length))
             {
-                // We have consumed some data from the buffer. However, we need more data to process data left in 
+                // We have consumed some data from the buffer. However, we need more data to process data left in
                 // the buffer. So move left data to the beginning of the buffer and fill the rest of the buffer.
 
                 if (currentPos > 0)
@@ -382,7 +430,7 @@ namespace System.Net
                 return;
             }
 
-            // The buffer is entirely filled and we haven't consumed a single byte. However, we need more data 
+            // The buffer is entirely filled and we haven't consumed a single byte. However, we need more data
             // to be able to process it (e.g. if the whole buffer contains just part of a trailer header).
 
             Contract.Assert(currentPos == 0);
@@ -390,7 +438,9 @@ namespace System.Net
 
             if (buffer.Length == maxBufferLength)
             {
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
             int newBufferLength = Math.Min(maxBufferLength, buffer.Length * 2);
@@ -405,8 +455,13 @@ namespace System.Net
             // A null return indicates that the connection was closed underneath us.
             if (ar == null)
             {
-                throw new WebException(NetRes.GetWebStatusString("net_requestaborted",
-                    WebExceptionStatus.RequestCanceled), WebExceptionStatus.RequestCanceled);
+                throw new WebException(
+                    NetRes.GetWebStatusString(
+                        "net_requestaborted",
+                        WebExceptionStatus.RequestCanceled
+                    ),
+                    WebExceptionStatus.RequestCanceled
+                );
             }
         }
 
@@ -414,9 +469,11 @@ namespace System.Net
         {
             if (bytesRead == 0)
             {
-                // We don't expect a g----ful connection close from the server while we're in the middle of reading 
+                // We don't expect a g----ful connection close from the server while we're in the middle of reading
                 // chunk metadata (chunk length, extension, trailer, etc.).
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
             bufferFillLength += bytesRead;
@@ -459,19 +516,31 @@ namespace System.Net
             // Try to fill the user buffer with data from the internal buffer first.
             if (bufferCurrentPos < bufferFillLength)
             {
-                Contract.Assert(currentOperationBytesRead == 0,
-                    "We only read chunk data from the buffer once per read operation.");
+                Contract.Assert(
+                    currentOperationBytesRead == 0,
+                    "We only read chunk data from the buffer once per read operation."
+                );
 
                 // We have chunk body data in our internal buffer. Copy it to the user buffer.
-                int bufferedBytesToRead = Math.Min(Math.Min(userBufferCount, bufferFillLength - bufferCurrentPos),
-                    currentChunkLength - currentChunkBytesRead);
+                int bufferedBytesToRead = Math.Min(
+                    Math.Min(userBufferCount, bufferFillLength - bufferCurrentPos),
+                    currentChunkLength - currentChunkBytesRead
+                );
 
-                Buffer.BlockCopy(buffer, bufferCurrentPos, userBuffer, userBufferOffset, bufferedBytesToRead);
+                Buffer.BlockCopy(
+                    buffer,
+                    bufferCurrentPos,
+                    userBuffer,
+                    userBufferOffset,
+                    bufferedBytesToRead
+                );
 
                 bufferCurrentPos += bufferedBytesToRead;
 
-                if ((currentChunkBytesRead + bufferedBytesToRead == currentChunkLength) ||
-                    (bufferedBytesToRead == userBufferCount))
+                if (
+                    (currentChunkBytesRead + bufferedBytesToRead == currentChunkLength)
+                    || (bufferedBytesToRead == userBufferCount)
+                )
                 {
                     // We read the whole chunk or filled the user buffer entirely. Complete the operation.
                     CompletePayloadReadOperation(bufferedBytesToRead);
@@ -484,19 +553,28 @@ namespace System.Net
                 currentChunkBytesRead += bufferedBytesToRead;
             }
 
-            Contract.Assert(bufferCurrentPos == bufferFillLength,
-                "We still have data buffered even though the user buffer is not filled yet.");
+            Contract.Assert(
+                bufferCurrentPos == bufferFillLength,
+                "We still have data buffered even though the user buffer is not filled yet."
+            );
             Contract.Assert(currentOperationBytesRead < userBufferCount);
 
             // If we get here we either didn't have any chunk data buffered, or we had less bytes buffered than the
             // user requested. Post a receive on the socket to retrieve more chunk data.
-            int bytesToRead = Math.Min(userBufferCount - currentOperationBytesRead,
-                currentChunkLength - currentChunkBytesRead);
+            int bytesToRead = Math.Min(
+                userBufferCount - currentOperationBytesRead,
+                currentChunkLength - currentChunkBytesRead
+            );
 
             if (IsAsync)
             {
-                IAsyncResult ar = dataSource.BeginRead(userBuffer, userBufferOffset + currentOperationBytesRead,
-                        bytesToRead, ReadCallback, null);
+                IAsyncResult ar = dataSource.BeginRead(
+                    userBuffer,
+                    userBufferOffset + currentOperationBytesRead,
+                    bytesToRead,
+                    ReadCallback,
+                    null
+                );
                 CheckAsyncResult(ar);
 
                 if (ar.CompletedSynchronously)
@@ -506,7 +584,11 @@ namespace System.Net
             }
             else
             {
-                int bytesRead = dataSource.Read(userBuffer, userBufferOffset + currentOperationBytesRead, bytesToRead);
+                int bytesRead = dataSource.Read(
+                    userBuffer,
+                    userBufferOffset + currentOperationBytesRead,
+                    bytesToRead
+                );
                 CompletePayloadReadOperation(bytesRead);
             }
 
@@ -516,19 +598,28 @@ namespace System.Net
         private void CompletePayloadReadOperation(int bytesRead)
         {
             Contract.Requires(bytesRead >= 0);
-            Contract.Assert(readState == ReadState.Payload,
-                "Chunk payload read completion must only be invoked when we're processing payload data.");
+            Contract.Assert(
+                readState == ReadState.Payload,
+                "Chunk payload read completion must only be invoked when we're processing payload data."
+            );
 
             // Getting EOF in the middle of a chunk is a failure.
             if (bytesRead == 0)
             {
-                throw new WebException(NetRes.GetWebStatusString("net_requestaborted",
-                    WebExceptionStatus.ConnectionClosed), WebExceptionStatus.ConnectionClosed);
+                throw new WebException(
+                    NetRes.GetWebStatusString(
+                        "net_requestaborted",
+                        WebExceptionStatus.ConnectionClosed
+                    ),
+                    WebExceptionStatus.ConnectionClosed
+                );
             }
 
             currentChunkBytesRead += bytesRead;
-            Contract.Assert(currentChunkBytesRead <= currentChunkLength,
-                "Read more bytes than available in the current chunk.");
+            Contract.Assert(
+                currentChunkBytesRead <= currentChunkLength,
+                "Read more bytes than available in the current chunk."
+            );
 
             int totalBytesRead = currentOperationBytesRead + bytesRead;
 
@@ -552,7 +643,11 @@ namespace System.Net
             {
                 byte c = buffer[i];
 
-                if (((c < '0') || (c > '9')) && ((c < 'A') || (c > 'F')) && ((c < 'a') || (c > 'f')))
+                if (
+                    ((c < '0') || (c > '9'))
+                    && ((c < 'A') || (c > 'F'))
+                    && ((c < 'a') || (c > 'f'))
+                )
                 {
                     // Not a hex number. Check if we had at least one hex digit. If not, then this is an invalid chunk.
                     if (chunkLength == noChunkLength)
@@ -568,8 +663,11 @@ namespace System.Net
                     return DataParseStatus.ContinueParsing;
                 }
 
-                byte currentDigit = (byte)((c < (byte)'A') ? (c - (byte)'0') :
-                    10 + ((c < (byte)'a') ? (c - (byte)'A') : (c - (byte)'a')));
+                byte currentDigit = (byte)(
+                    (c < (byte)'A')
+                        ? (c - (byte)'0')
+                        : 10 + ((c < (byte)'a') ? (c - (byte)'A') : (c - (byte)'a'))
+                );
 
                 if (chunkLength == noChunkLength)
                 {
@@ -668,17 +766,31 @@ namespace System.Net
             WebHeaderCollection trailer = new WebHeaderCollection();
             if (SettingsSectionInternal.Section.UseUnsafeHeaderParsing)
             {
-                result = trailer.ParseHeaders(buffer, bufferFillLength, ref currentPos, ref totalTrailerHeadersLength,
-                    maxBufferLength, ref error);
+                result = trailer.ParseHeaders(
+                    buffer,
+                    bufferFillLength,
+                    ref currentPos,
+                    ref totalTrailerHeadersLength,
+                    maxBufferLength,
+                    ref error
+                );
             }
             else
             {
-                result = trailer.ParseHeadersStrict(buffer, bufferFillLength, ref currentPos, 
-                    ref totalTrailerHeadersLength, maxBufferLength, ref error);
+                result = trailer.ParseHeadersStrict(
+                    buffer,
+                    bufferFillLength,
+                    ref currentPos,
+                    ref totalTrailerHeadersLength,
+                    maxBufferLength,
+                    ref error
+                );
             }
 
-            Contract.Assert(result != DataParseStatus.ContinueParsing,
-                "ContinueParsing should never be returned by WebHeaderCollection.ParseHeaders*().");
+            Contract.Assert(
+                result != DataParseStatus.ContinueParsing,
+                "ContinueParsing should never be returned by WebHeaderCollection.ParseHeaders*()."
+            );
 
             if ((result == DataParseStatus.NeedMoreData) || (result == DataParseStatus.Done))
             {
@@ -700,9 +812,11 @@ namespace System.Net
 
         private DataParseStatus ParseCRLF(ref int pos)
         {
-            Contract.Ensures((Contract.Result<DataParseStatus>() != DataParseStatus.Done) ||
-                (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig));
-            
+            Contract.Ensures(
+                (Contract.Result<DataParseStatus>() != DataParseStatus.Done)
+                    || (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig)
+            );
+
             const int crlfLength = 2;
 
             if (pos + crlfLength > bufferFillLength)
@@ -721,12 +835,14 @@ namespace System.Net
 
         private DataParseStatus ParseWhitespaces(ref int pos)
         {
-            Contract.Ensures((Contract.Result<DataParseStatus>() == DataParseStatus.ContinueParsing) ||
-                (Contract.Result<DataParseStatus>() == DataParseStatus.NeedMoreData) ||
-                (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig));
+            Contract.Ensures(
+                (Contract.Result<DataParseStatus>() == DataParseStatus.ContinueParsing)
+                    || (Contract.Result<DataParseStatus>() == DataParseStatus.NeedMoreData)
+                    || (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig)
+            );
 
             int currentPos = pos;
-            
+
             while (currentPos < bufferFillLength)
             {
                 byte c = buffer[currentPos];
@@ -737,7 +853,7 @@ namespace System.Net
                     pos = currentPos;
                     return DataParseStatus.ContinueParsing;
                 }
-                
+
                 currentPos++;
             }
 
@@ -752,8 +868,10 @@ namespace System.Net
 
         private DataParseStatus ParseExtensionNameValuePairs(ref int pos)
         {
-            Contract.Ensures((Contract.Result<DataParseStatus>() != DataParseStatus.Done) ||
-                (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig));
+            Contract.Ensures(
+                (Contract.Result<DataParseStatus>() != DataParseStatus.Done)
+                    || (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig)
+            );
 
             // chunk-extension= *( ";" chunk-ext-name [ "=" chunk-ext-val ] )
             // chunk-ext-name = token
@@ -784,9 +902,11 @@ namespace System.Net
                     return result;
                 }
 
-                Contract.Assert(currentPos < bufferFillLength, 
-                    "After skipping white spaces we should have at least one character.");
-            
+                Contract.Assert(
+                    currentPos < bufferFillLength,
+                    "After skipping white spaces we should have at least one character."
+                );
+
                 if (buffer[currentPos] == '=')
                 {
                     currentPos++;
@@ -823,8 +943,10 @@ namespace System.Net
 
         private DataParseStatus ParseQuotedString(ref int pos)
         {
-            Contract.Ensures((Contract.Result<DataParseStatus>() != DataParseStatus.Done) ||
-                (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig));
+            Contract.Ensures(
+                (Contract.Result<DataParseStatus>() != DataParseStatus.Done)
+                    || (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig)
+            );
 
             if (pos == bufferFillLength)
             {
@@ -851,7 +973,7 @@ namespace System.Net
                 // string followed by the extension-terminating CRLF. I.e. as soon as we see \" we interpret it as
                 // quoted pair.
                 if (buffer[currentPos] == '\\')
-                { 
+                {
                     // We have a quoted pair. Make sure we have at least one more char in the buffer.
                     currentPos++;
                     if (currentPos == bufferFillLength)
@@ -876,8 +998,10 @@ namespace System.Net
 
         private DataParseStatus ParseToken(ref int pos)
         {
-            Contract.Ensures((Contract.Result<DataParseStatus>() != DataParseStatus.Done) ||
-                (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig));
+            Contract.Ensures(
+                (Contract.Result<DataParseStatus>() != DataParseStatus.Done)
+                    || (Contract.Result<DataParseStatus>() != DataParseStatus.DataTooBig)
+            );
 
             for (int currentPos = pos; currentPos < bufferFillLength; currentPos++)
             {
@@ -899,7 +1023,7 @@ namespace System.Net
 
             return DataParseStatus.NeedMoreData;
         }
-        
+
         private static bool IsTokenChar(byte character)
         {
             // Must be between 'space' (32) and 'DEL' (127)
@@ -909,6 +1033,6 @@ namespace System.Net
             }
 
             return tokenChars[character];
-        }    
+        }
     }
 }

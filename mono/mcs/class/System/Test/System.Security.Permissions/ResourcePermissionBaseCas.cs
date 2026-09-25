@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,62 +27,62 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Security.Permissions {
+namespace MonoCasTests.System.Security.Permissions
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ResourcePermissionBaseCas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ResourcePermissionBaseCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted()
+        {
+            ResourcePermissionBaseTest unit = new ResourcePermissionBaseTest();
+            unit.Constants();
+            unit.Constructor_Empty();
+            unit.Constructor_None();
+            unit.Constructor_Unrestricted();
+            unit.PermissionAccessType();
+            unit.TagNames();
+            unit.AddPermissionAccess();
+            unit.AddPermissionAccess_SemiDuplicates();
+            unit.Clear();
+            unit.Copy();
+            unit.FromXml_WrongClass();
+            unit.FromXml_NoClass();
+            unit.FromXml_NoVersion();
+            unit.GetPermissionEntries();
+            unit.IsSubsetOf_DifferentPermissions();
+            unit.RemovePermissionAccess();
+            unit.ToXml();
+            unit.ToXml_Unrestricted();
+            unit.Union();
+            unit.Unrestricted_AddRemove();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			ResourcePermissionBaseTest unit = new ResourcePermissionBaseTest ();
-			unit.Constants ();
-			unit.Constructor_Empty ();
-			unit.Constructor_None ();
-			unit.Constructor_Unrestricted ();
-			unit.PermissionAccessType ();
-			unit.TagNames ();
-			unit.AddPermissionAccess ();
-			unit.AddPermissionAccess_SemiDuplicates ();
-			unit.Clear ();
-			unit.Copy ();
-			unit.FromXml_WrongClass ();
-			unit.FromXml_NoClass ();
-			unit.FromXml_NoVersion ();
-			unit.GetPermissionEntries ();
-			unit.IsSubsetOf_DifferentPermissions ();
-			unit.RemovePermissionAccess ();
-			unit.ToXml ();
-			unit.ToXml_Unrestricted ();
-			unit.Union ();
-			unit.Unrestricted_AddRemove ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (NonAbstractResourcePermissionBase).GetConstructor (new Type [0]);
-			Assert.IsNotNull (ci, "default .ctor()");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(NonAbstractResourcePermissionBase).GetConstructor(
+                new Type[0]
+            );
+            Assert.IsNotNull(ci, "default .ctor()");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }

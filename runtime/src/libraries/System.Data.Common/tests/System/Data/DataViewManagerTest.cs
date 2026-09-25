@@ -34,9 +34,12 @@ namespace System.Data.Tests
         [Fact]
         public void Ctor()
         {
-            string defaultString = "<DataViewSettingCollectionString></DataViewSettingCollectionString>";
-            string current = @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""CurrentRows""/></DataViewSettingCollectionString>";
-            string deleted = @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>";
+            string defaultString =
+                "<DataViewSettingCollectionString></DataViewSettingCollectionString>";
+            string current =
+                @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""CurrentRows""/></DataViewSettingCollectionString>";
+            string deleted =
+                @"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter="""" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>";
 
             DataViewManager m = new DataViewManager(null);
             Assert.Null(m.DataSet);
@@ -55,20 +58,23 @@ namespace System.Data.Tests
             Assert.Equal(current, m.DataViewSettingCollectionString);
 
             // Note that " Deleted " is trimmed.
-            m.DataViewSettingCollectionString = @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter=' Deleted '/></DataViewSettingCollectionString>";
+            m.DataViewSettingCollectionString =
+                @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter=' Deleted '/></DataViewSettingCollectionString>";
             Assert.Equal(deleted, m.DataViewSettingCollectionString);
 
             m.DataSet = ds2; //resets modified string.
             Assert.Equal(current, m.DataViewSettingCollectionString);
 
-            m.DataViewSettingCollectionString = @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter='Deleted'/></DataViewSettingCollectionString>";
+            m.DataViewSettingCollectionString =
+                @"<DataViewSettingCollectionString><table2-1 Sort='' RowFilter='' RowStateFilter='Deleted'/></DataViewSettingCollectionString>";
             // it does not clear anything.
             m.DataViewSettingCollectionString = "<DataViewSettingCollectionString/>";
             Assert.Equal(deleted, m.DataViewSettingCollectionString);
 
             // text node is not rejected (ignored).
             // RowFilter is not examined.
-            m.DataViewSettingCollectionString = "<DataViewSettingCollectionString>blah<table2-1 RowFilter='a=b' ApplyDefaultSort='true' /></DataViewSettingCollectionString>";
+            m.DataViewSettingCollectionString =
+                "<DataViewSettingCollectionString>blah<table2-1 RowFilter='a=b' ApplyDefaultSort='true' /></DataViewSettingCollectionString>";
             // MS.NET ignores ApplyDefaultSort.
             //            Assert.Equal (@"<DataViewSettingCollectionString><table2-1 Sort="""" RowFilter=""a=b"" RowStateFilter=""Deleted""/></DataViewSettingCollectionString>", m.DataViewSettingCollectionString);
         }
@@ -86,7 +92,8 @@ namespace System.Data.Tests
             DataViewManager m = new DataViewManager(null);
             Assert.Throws<NullReferenceException>(() =>
             {
-                m.DataViewSettingCollectionString = "<DataViewSettingCollectionString><table1-1 RowFilter='a=b' /></DataViewSettingCollectionString>";
+                m.DataViewSettingCollectionString =
+                    "<DataViewSettingCollectionString><table1-1 RowFilter='a=b' /></DataViewSettingCollectionString>";
             });
         }
 

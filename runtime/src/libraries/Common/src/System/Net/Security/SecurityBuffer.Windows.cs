@@ -68,8 +68,14 @@ namespace System.Net.Security
 
         public SecurityBuffer(byte[]? data, int offset, int size, SecurityBufferType tokentype)
         {
-            Debug.Assert(offset >= 0 && offset <= (data == null ? 0 : data.Length), $"'offset' out of range.  [{offset}]");
-            Debug.Assert(size >= 0 && size <= (data == null ? 0 : data.Length - offset), $"'size' out of range.  [{size}]");
+            Debug.Assert(
+                offset >= 0 && offset <= (data == null ? 0 : data.Length),
+                $"'offset' out of range.  [{offset}]"
+            );
+            Debug.Assert(
+                size >= 0 && size <= (data == null ? 0 : data.Length - offset),
+                $"'size' out of range.  [{size}]"
+            );
 
             this.offset = data == null || offset < 0 ? 0 : Math.Min(offset, data.Length);
             this.size = data == null || size < 0 ? 0 : Math.Min(size, data.Length - this.offset);

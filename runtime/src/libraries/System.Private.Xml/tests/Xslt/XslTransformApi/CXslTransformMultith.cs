@@ -14,17 +14,19 @@ namespace System.Xml.XslTransformApiTests
     public class CSameInstanceXslTransformTestCase : XsltApiTestCaseBase
     {
         // Variables from init string
-        protected string _strPath;                    // Path of the data files
+        protected string _strPath; // Path of the data files
 
         // Other global variables
 #pragma warning disable 0618
-        public XslTransform xsltSameInstance;         // Used for same instance testing of XsltArgumentList
+        public XslTransform xsltSameInstance; // Used for same instance testing of XsltArgumentList
 #pragma warning restore 0618
 
         protected int threadCount = 5;
 
         private ITestOutputHelper _output;
-        public CSameInstanceXslTransformTestCase(ITestOutputHelper output) : base(output)
+
+        public CSameInstanceXslTransformTestCase(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             Init(null);
@@ -39,9 +41,7 @@ namespace System.Xml.XslTransformApiTests
             return;
         }
 
-        protected virtual void Load(string _strXslFile, string _strXmlFile)
-        {
-        }
+        protected virtual void Load(string _strXslFile, string _strXmlFile) { }
 
         public virtual int Transform(object args)
         {
@@ -71,12 +71,24 @@ namespace System.Xml.XslTransformApiTests
         //[Variation("Variable nodeset", Params = new object[] { "xslt_mutith_variable_nodeset.xsl", "xslt_mutith_variable_nodeset.xml" })]
         [InlineData("xslt_mutith_variable_nodeset.xsl", "xslt_mutith_variable_nodeset.xml")]
         //[Variation("Forward global variable reference", Params = new object[] { "xslt_mutith_variable_global_forward_ref.xsl", "xslt_mutith_variable_nodeset.xml" })]
-        [InlineData("xslt_mutith_variable_global_forward_ref.xsl", "xslt_mutith_variable_nodeset.xml")]
+        [InlineData(
+            "xslt_mutith_variable_global_forward_ref.xsl",
+            "xslt_mutith_variable_nodeset.xml"
+        )]
         //[Variation("Forward global variable reference deep", Params = new object[] { "xslt_mutith_variable_global_forward_ref_deep.xsl", "xslt_mutith_variable_nodeset.xml" })]
-        [InlineData("xslt_mutith_variable_global_forward_ref_deep.xsl", "xslt_mutith_variable_nodeset.xml")]
+        [InlineData(
+            "xslt_mutith_variable_global_forward_ref_deep.xsl",
+            "xslt_mutith_variable_nodeset.xml"
+        )]
         //[Variation("Local and global variables", Params = new object[] { "xslt_mutith_variable_local_and_global.xsl", "xslt_mutith_variable_local_and_global.xsl" })]
-        [InlineData("xslt_mutith_variable_local_and_global.xsl", "xslt_mutith_variable_local_and_global.xsl")]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [InlineData(
+            "xslt_mutith_variable_local_and_global.xsl",
+            "xslt_mutith_variable_local_and_global.xsl"
+        )]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         public void Variations(object param0, object param1)
         {
             string xslFile = (string)param0;
@@ -100,10 +112,12 @@ namespace System.Xml.XslTransformApiTests
     //[TestCase(Name = "Same instance testing: Transform() - READER")]
     public class SameInstanceXslTransformReader : CSameInstanceXslTransformTestCase
     {
-        private XPathDocument _xd;            // Loads XML file
+        private XPathDocument _xd; // Loads XML file
 
         private ITestOutputHelper _output;
-        public SameInstanceXslTransformReader(ITestOutputHelper output) : base(output)
+
+        public SameInstanceXslTransformReader(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -111,13 +125,17 @@ namespace System.Xml.XslTransformApiTests
         protected override void Load(string _strXslFile, string _strXmlFile)
         {
 #pragma warning disable 0618
-            XmlValidatingReader xrData = new XmlValidatingReader(new XmlTextReader(Path.Combine(_strPath, _strXmlFile)));
+            XmlValidatingReader xrData = new XmlValidatingReader(
+                new XmlTextReader(Path.Combine(_strPath, _strXmlFile))
+            );
 #pragma warning restore 0618
             _xd = new XPathDocument(xrData, XmlSpace.Preserve);
             xrData.Dispose();
 
 #pragma warning disable 0618
-            XmlValidatingReader xrTemp = new XmlValidatingReader(new XmlTextReader(Path.Combine(_strPath, _strXslFile)));
+            XmlValidatingReader xrTemp = new XmlValidatingReader(
+                new XmlTextReader(Path.Combine(_strPath, _strXslFile))
+            );
 #pragma warning restore 0618
             xrTemp.ValidationType = ValidationType.None;
             xrTemp.EntityHandling = EntityHandling.ExpandEntities;
@@ -140,10 +158,12 @@ namespace System.Xml.XslTransformApiTests
     //[TestCase(Name = "Same instance testing: Transform() - TEXTWRITER")]
     public class SameInstanceXslTransformWriter : CSameInstanceXslTransformTestCase
     {
-        private XPathDocument _xd;        // Loads XML file
+        private XPathDocument _xd; // Loads XML file
 
         private ITestOutputHelper _output;
-        public SameInstanceXslTransformWriter(ITestOutputHelper output) : base(output)
+
+        public SameInstanceXslTransformWriter(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -151,13 +171,17 @@ namespace System.Xml.XslTransformApiTests
         protected override void Load(string _strXslFile, string _strXmlFile)
         {
 #pragma warning disable 0618
-            XmlValidatingReader xrData = new XmlValidatingReader(new XmlTextReader(Path.Combine(_strPath, _strXmlFile)));
+            XmlValidatingReader xrData = new XmlValidatingReader(
+                new XmlTextReader(Path.Combine(_strPath, _strXmlFile))
+            );
 #pragma warning restore 0618
             _xd = new XPathDocument(xrData, XmlSpace.Preserve);
             xrData.Dispose();
 
 #pragma warning disable 0618
-            XmlValidatingReader xrTemp = new XmlValidatingReader(new XmlTextReader(Path.Combine(_strPath, _strXslFile)));
+            XmlValidatingReader xrTemp = new XmlValidatingReader(
+                new XmlTextReader(Path.Combine(_strPath, _strXslFile))
+            );
             xrTemp.ValidationType = ValidationType.None;
             xrTemp.EntityHandling = EntityHandling.ExpandEntities;
             xsltSameInstance.Load(xrTemp);

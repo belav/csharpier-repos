@@ -6,14 +6,14 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
-    using System.Xaml;
-    using System.Xaml.Schema;
-    using System.ComponentModel;
     using System.Runtime;
     using System.Windows.Markup;
+    using System.Xaml;
+    using System.Xaml.Schema;
     using XamlBuildTask;
 
     class ClassImporter
@@ -50,11 +50,11 @@ namespace Microsoft.Build.Tasks.Xaml
             XamlWriter strippedXamlNodesWriter = strippedXamlNodes.Writer;
 
             ClassData result = new ClassData()
-                {
-                    FileName = this.xamlFileName,
-                    IsPublic = this.DefaultClassIsPublic,
-                    RootNamespace = this.rootNamespace
-                };
+            {
+                FileName = this.xamlFileName,
+                IsPublic = this.DefaultClassIsPublic,
+                RootNamespace = this.rootNamespace,
+            };
 
             // We loop through the provided XAML; for each node, we do two things:
             //  1. If it's a directive that's relevant to x:Class, we extract the data.
@@ -77,11 +77,13 @@ namespace Microsoft.Build.Tasks.Xaml
                         {
                             result.BaseType = reader.Type;
                         }
-                        currentTypes.Push(new NamedObject()
+                        currentTypes.Push(
+                            new NamedObject()
                             {
                                 Type = reader.Type,
                                 Visibility = DefaultFieldVisibility,
-                            });
+                            }
+                        );
                         break;
 
                     case XamlNodeType.EndObject:
@@ -94,7 +96,14 @@ namespace Microsoft.Build.Tasks.Xaml
                         if (member.IsDirective)
                         {
                             bool isRootElement = (currentTypes.Count == 1);
-                            stripNodeFromXaml = ProcessDirective(reader, result, currentTypes.Peek(), isRootElement, strippedXamlNodes, out readNextNode);
+                            stripNodeFromXaml = ProcessDirective(
+                                reader,
+                                result,
+                                currentTypes.Peek(),
+                                isRootElement,
+                                strippedXamlNodes,
+                                out readNextNode
+                            );
                         }
                         else
                         {
@@ -136,13 +145,19 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
             }
 
-            // ClassData.Name should be initialized to a non-null non-empty value if 
+            // ClassData.Name should be initialized to a non-null non-empty value if
             // the file contains x:Class. Throw an error if neither is found.
             if (result.Name == null)
             {
-                string xClassDirectiveName = "{" + XamlLanguage.Class.PreferredXamlNamespace + "}" + XamlLanguage.Class.Name;
+                string xClassDirectiveName =
+                    "{" + XamlLanguage.Class.PreferredXamlNamespace + "}" + XamlLanguage.Class.Name;
 
-                throw FxTrace.Exception.AsError(LogInvalidOperationException(null, SR.TaskCannotProcessFileWithoutType(xClassDirectiveName)));
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(
+                        null,
+                        SR.TaskCannotProcessFileWithoutType(xClassDirectiveName)
+                    )
+                );
             }
 
             strippedXamlNodes.Writer.Close();
@@ -160,8 +175,14 @@ namespace Microsoft.Build.Tasks.Xaml
                 foreach (var typeArg in typeArgs)
                 {
                     IList<XamlType> typeArgTypeArgs = UpdateTypeArgs(typeArg.TypeArguments, xsc);
-                    string typeArgXmlns = XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(typeArg.PreferredXamlNamespace, this.localAssemblyName);
-                    updatedTypeArgs.Add(new XamlType(typeArgXmlns, typeArg.Name, typeArgTypeArgs, xsc));
+                    string typeArgXmlns =
+                        XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(
+                            typeArg.PreferredXamlNamespace,
+                            this.localAssemblyName
+                        );
+                    updatedTypeArgs.Add(
+                        new XamlType(typeArgXmlns, typeArg.Name, typeArgTypeArgs, xsc)
+                    );
                 }
                 return updatedTypeArgs;
             }
@@ -176,9 +197,20 @@ namespace Microsoft.Build.Tasks.Xaml
                     XamlType xamlType = reader.Type;
                     if (xamlType.IsUnknown)
                     {
-                        IList<XamlType> typeArgs = UpdateTypeArgs(xamlType.TypeArguments, reader.SchemaContext);
-                        string xmlns = XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(xamlType.PreferredXamlNamespace, this.localAssemblyName);
-                        xamlType = new XamlType(xmlns, xamlType.Name, typeArgs, reader.SchemaContext);
+                        IList<XamlType> typeArgs = UpdateTypeArgs(
+                            xamlType.TypeArguments,
+                            reader.SchemaContext
+                        );
+                        string xmlns = XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(
+                            xamlType.PreferredXamlNamespace,
+                            this.localAssemblyName
+                        );
+                        xamlType = new XamlType(
+                            xmlns,
+                            xamlType.Name,
+                            typeArgs,
+                            reader.SchemaContext
+                        );
                     }
                     writer.WriteStartObject(xamlType);
                     break;
@@ -187,8 +219,16 @@ namespace Microsoft.Build.Tasks.Xaml
                     XamlMember member = reader.Member;
                     if (member.IsUnknown && !member.IsDirective)
                     {
-                        string xmlns = XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(member.DeclaringType.PreferredXamlNamespace, this.localAssemblyName);
-                        XamlType memberXamlType = new XamlType(xmlns, member.DeclaringType.Name, member.DeclaringType.TypeArguments, reader.SchemaContext);
+                        string xmlns = XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(
+                            member.DeclaringType.PreferredXamlNamespace,
+                            this.localAssemblyName
+                        );
+                        XamlType memberXamlType = new XamlType(
+                            xmlns,
+                            member.DeclaringType.Name,
+                            member.DeclaringType.TypeArguments,
+                            reader.SchemaContext
+                        );
                         member = new XamlMember(member.Name, memberXamlType, member.IsAttachable);
                     }
                     writer.WriteStartMember(member);
@@ -196,8 +236,12 @@ namespace Microsoft.Build.Tasks.Xaml
 
                 case XamlNodeType.NamespaceDeclaration:
                     NamespaceDeclaration ns = new NamespaceDeclaration(
-                        XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(reader.Namespace.Namespace, this.localAssemblyName),
-                        reader.Namespace.Prefix);
+                        XamlBuildTaskServices.UpdateClrNamespaceUriWithLocalAssembly(
+                            reader.Namespace.Namespace,
+                            this.localAssemblyName
+                        ),
+                        reader.Namespace.Prefix
+                    );
                     writer.WriteNamespace(ns);
                     break;
 
@@ -235,7 +279,14 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
             }
 
-            string namespaceName = string.Format(CultureInfo.InvariantCulture, "{0}{1};{2}{3}", XamlBuildTaskServices.ClrNamespaceUriNamespacePart, @namespace, XamlBuildTaskServices.ClrNamespaceUriAssemblyPart, this.localAssemblyName);
+            string namespaceName = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}{1};{2}{3}",
+                XamlBuildTaskServices.ClrNamespaceUriNamespacePart,
+                @namespace,
+                XamlBuildTaskServices.ClrNamespaceUriAssemblyPart,
+                this.localAssemblyName
+            );
 
             XamlReader reader = strippedXamlNodes.GetReader();
             XamlSchemaContext xsc = reader.SchemaContext;
@@ -261,17 +312,34 @@ namespace Microsoft.Build.Tasks.Xaml
                     rootXamlType = new XamlType(namespaceName, name, null, xsc);
                     writer.WriteStartObject(rootXamlType);
                 }
-                else if (reader.NodeType == XamlNodeType.StartMember && depth == 1 && reader.Member.IsUnknown 
-                    && reader.Member.DeclaringType != null && reader.Member.DeclaringType.Name == rootXamlType.Name)
+                else if (
+                    reader.NodeType == XamlNodeType.StartMember
+                    && depth == 1
+                    && reader.Member.IsUnknown
+                    && reader.Member.DeclaringType != null
+                    && reader.Member.DeclaringType.Name == rootXamlType.Name
+                )
                 {
                     string clrNs;
                     XamlMember member = reader.Member;
-                    if (XamlBuildTaskServices.TryExtractClrNs(member.PreferredXamlNamespace, out clrNs) &&
-                        clrNs == oldNamespace)
+                    if (
+                        XamlBuildTaskServices.TryExtractClrNs(
+                            member.PreferredXamlNamespace,
+                            out clrNs
+                        )
+                        && clrNs == oldNamespace
+                    )
                     {
                         // This is a member defined on the document root type, but missing the project root namespace. Fix it.
-                        XamlMember newMember = new XamlMember(member.Name, rootXamlType, member.IsAttachable);
-                        Fx.Assert(rootXamlType != null, "First StartObject should already have been processed");
+                        XamlMember newMember = new XamlMember(
+                            member.Name,
+                            rootXamlType,
+                            member.IsAttachable
+                        );
+                        Fx.Assert(
+                            rootXamlType != null,
+                            "First StartObject should already have been processed"
+                        );
                         writer.WriteStartMember(newMember);
                     }
                     else
@@ -289,10 +357,19 @@ namespace Microsoft.Build.Tasks.Xaml
             return newStrippedXamlNodes;
         }
 
-        bool ProcessDirective(XamlReader reader, ClassData classData,
-            NamedObject currentObject, bool isRootElement, XamlNodeList strippedXamlNodes, out bool readNextNode)
+        bool ProcessDirective(
+            XamlReader reader,
+            ClassData classData,
+            NamedObject currentObject,
+            bool isRootElement,
+            XamlNodeList strippedXamlNodes,
+            out bool readNextNode
+        )
         {
-            Fx.Assert(reader.NodeType == XamlNodeType.StartMember, "Current node should be a Start Member Node");
+            Fx.Assert(
+                reader.NodeType == XamlNodeType.StartMember,
+                "Current node should be a Start Member Node"
+            );
 
             XamlMember member = reader.Member;
             bool directiveRecognized = false;
@@ -306,8 +383,12 @@ namespace Microsoft.Build.Tasks.Xaml
                     strippedXamlNodes.Writer.WriteStartMember(member);
 
                     string objectName = ReadAtom(reader, XamlLanguage.Name.Name);
-                    if (!objectName.StartsWith(XamlBuildTaskServices.SerializerReferenceNamePrefix,
-                        StringComparison.Ordinal))
+                    if (
+                        !objectName.StartsWith(
+                            XamlBuildTaskServices.SerializerReferenceNamePrefix,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         currentObject.Name = objectName;
                         classData.NamedObjects.Add(currentObject);
@@ -338,7 +419,9 @@ namespace Microsoft.Build.Tasks.Xaml
 
                 case "FieldModifier":
                     string fieldModifier = ReadAtom(reader, XamlLanguage.FieldModifier.Name);
-                    currentObject.Visibility = XamlBuildTaskServices.GetMemberVisibility(fieldModifier);
+                    currentObject.Visibility = XamlBuildTaskServices.GetMemberVisibility(
+                        fieldModifier
+                    );
                     directiveRecognized = true;
                     break;
 
@@ -369,20 +452,24 @@ namespace Microsoft.Build.Tasks.Xaml
                     break;
 
                 case "ClassAttributes":
-                    foreach (AttributeData attribute in ReadAttributesCollection(reader.ReadSubtree()))
+                    foreach (
+                        AttributeData attribute in ReadAttributesCollection(reader.ReadSubtree())
+                    )
                     {
                         classData.Attributes.Add(attribute);
                     }
                     directiveRecognized = true;
                     readNextNode = true;
                     break;
-
             }
 
             if (directiveRecognized == true && readNextNode == false)
             {
                 reader.Read();
-                Fx.Assert(reader.NodeType == XamlNodeType.EndMember, "Current node should be a XamlEndmember");
+                Fx.Assert(
+                    reader.NodeType == XamlNodeType.EndMember,
+                    "Current node should be a XamlEndmember"
+                );
             }
 
             return directiveRecognized;
@@ -401,11 +488,17 @@ namespace Microsoft.Build.Tasks.Xaml
                     AttributeData attribute = null;
                     try
                     {
-                        attribute = AttributeData.LoadAttributeData(reader.ReadSubtree(), this.namespaceTable, this.rootNamespace);
+                        attribute = AttributeData.LoadAttributeData(
+                            reader.ReadSubtree(),
+                            this.namespaceTable,
+                            this.rootNamespace
+                        );
                     }
                     catch (InvalidOperationException e)
                     {
-                        throw FxTrace.Exception.AsError(LogInvalidOperationException(reader, e.Message));
+                        throw FxTrace.Exception.AsError(
+                            LogInvalidOperationException(reader, e.Message)
+                        );
                     }
                     nextNodeRead = true;
                     attributes.Add(attribute);
@@ -432,7 +525,12 @@ namespace Microsoft.Build.Tasks.Xaml
                         nextNodeRead = true;
                         if (members.ContainsKey(xProperty.Name))
                         {
-                            throw FxTrace.Exception.AsError(LogInvalidOperationException(reader, SR.DuplicatePropertyDefinition(xProperty.Name)));
+                            throw FxTrace.Exception.AsError(
+                                LogInvalidOperationException(
+                                    reader,
+                                    SR.DuplicatePropertyDefinition(xProperty.Name)
+                                )
+                            );
                         }
                         members.Add(xProperty.Name, xProperty);
                     }
@@ -464,32 +562,47 @@ namespace Microsoft.Build.Tasks.Xaml
                             property.Type = ReadPropertyType(xamlReader.ReadSubtree());
                             break;
                         case "Attributes":
-                            foreach (AttributeData attribute in ReadAttributesCollection(xamlReader.ReadSubtree()))
+                            foreach (
+                                AttributeData attribute in ReadAttributesCollection(
+                                    xamlReader.ReadSubtree()
+                                )
+                            )
                             {
                                 property.Attributes.Add(attribute);
                             }
                             break;
                         case "Modifier":
                             string propertyModifier = ReadValueAsString(xamlReader.ReadSubtree());
-                            property.Visibility = XamlBuildTaskServices.GetMemberVisibility(propertyModifier);
+                            property.Visibility = XamlBuildTaskServices.GetMemberVisibility(
+                                propertyModifier
+                            );
                             break;
                         default:
                             // Ignore AttachedProperties on property
                             if (!member.IsAttachable)
                             {
-                                throw FxTrace.Exception.AsError(LogInvalidOperationException(xamlReader, SR.UnknownPropertyMember(member.Name)));
-                            }                            
+                                throw FxTrace.Exception.AsError(
+                                    LogInvalidOperationException(
+                                        xamlReader,
+                                        SR.UnknownPropertyMember(member.Name)
+                                    )
+                                );
+                            }
                             break;
                     }
                 }
             }
             if (string.IsNullOrEmpty(property.Name))
             {
-                throw FxTrace.Exception.AsError(LogInvalidOperationException(xamlReader, SR.PropertyNameRequired));
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(xamlReader, SR.PropertyNameRequired)
+                );
             }
             if (property.Type == null)
             {
-                throw FxTrace.Exception.AsError(LogInvalidOperationException(xamlReader, SR.PropertyTypeRequired(property.Name)));
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(xamlReader, SR.PropertyTypeRequired(property.Name))
+                );
             }
             return property;
         }
@@ -500,7 +613,11 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (xamlReader.NodeType == XamlNodeType.Value && xamlReader.Value is string)
                 {
-                    return XamlBuildTaskServices.GetXamlTypeFromString((string)xamlReader.Value, this.namespaceTable, xamlReader.SchemaContext);
+                    return XamlBuildTaskServices.GetXamlTypeFromString(
+                        (string)xamlReader.Value,
+                        this.namespaceTable,
+                        xamlReader.SchemaContext
+                    );
                 }
             }
             return null;
@@ -523,7 +640,12 @@ namespace Microsoft.Build.Tasks.Xaml
             reader.Read();
             if (reader.NodeType != XamlNodeType.Value)
             {
-                throw FxTrace.Exception.AsError(LogInvalidOperationException(reader, SR.TextRepresentationExpected(propertyName)));
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(
+                        reader,
+                        SR.TextRepresentationExpected(propertyName)
+                    )
+                );
             }
             return (string)reader.Value;
         }
@@ -547,7 +669,9 @@ namespace Microsoft.Build.Tasks.Xaml
 
             if (string.IsNullOrEmpty(classData.Name))
             {
-                throw FxTrace.Exception.AsError(LogInvalidOperationException(null, SR.ClassNameMustBeNonEmpty));
+                throw FxTrace.Exception.AsError(
+                    LogInvalidOperationException(null, SR.ClassNameMustBeNonEmpty)
+                );
             }
         }
 
@@ -560,16 +684,16 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     Source = this.xamlFileName,
                     LineNumber = lineInfo.LineNumber,
-                    LinePosition = lineInfo.LinePosition
+                    LinePosition = lineInfo.LinePosition,
                 };
             }
             else
             {
                 return new LoggableException(new InvalidOperationException(exceptionMessage))
                 {
-                    Source = this.xamlFileName
+                    Source = this.xamlFileName,
                 };
             }
-        }       
+        }
     }
 }

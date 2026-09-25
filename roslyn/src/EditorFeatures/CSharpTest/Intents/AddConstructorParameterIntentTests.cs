@@ -28,8 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
         [Fact]
         public async Task AddConstructorParameterWithField()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;{|priorSelection:|}
@@ -40,8 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -51,8 +49,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -64,14 +61,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.AddConstructorParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.AddConstructorParameter,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task AddConstructorParameterWithProperty()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     public int SomeInt { get; }{|priorSelection:|}
@@ -81,8 +83,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     public int SomeInt { get; }
@@ -92,8 +93,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     public int SomeInt { get; }
@@ -105,14 +105,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.AddConstructorParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.AddConstructorParameter,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task AddMultipleConstructorParameters()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     {|priorSelection:private readonly int _someInt;
@@ -123,8 +128,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     {|priorSelection:private readonly int _someInt;
@@ -135,8 +139,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -150,14 +153,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.AddConstructorParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.AddConstructorParameter,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task AddConstructorParameterOnlyAddsSelected()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;{|priorSelection:|}
@@ -168,8 +176,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;{|priorSelection:|}
@@ -180,8 +187,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -194,14 +200,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.AddConstructorParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.AddConstructorParameter,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task AddConstructorParameterUsesCodeStyleOption()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;{|priorSelection:|}
@@ -211,8 +222,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;{|priorSelection:|}
@@ -222,8 +232,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -234,18 +243,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            await VerifyExpectedTextAsync(WellKnownIntents.AddConstructorParameter, initialText, currentText, expectedText,
-                options: new OptionsCollection(LanguageNames.CSharp)
-                {
-                    { CodeStyleOptions2.QualifyFieldAccess, true }
-                }).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.AddConstructorParameter,
+                    initialText,
+                    currentText,
+                    expectedText,
+                    options: new OptionsCollection(LanguageNames.CSharp)
+                    {
+                        { CodeStyleOptions2.QualifyFieldAccess, true },
+                    }
+                )
+                .ConfigureAwait(false);
         }
 
         [Fact]
         public async Task AddConstructorParameterUsesExistingAccessibility()
         {
-            var initialText =
-                """
+            var initialText = """
                 class C
                 {
                     private readonly int _someInt;{|priorSelection:|}
@@ -255,8 +269,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var currentText =
-                """
+            var currentText = """
                 class C
                 {
                     private readonly int _someInt;{|priorSelection:|}
@@ -266,8 +279,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                     }
                 }
                 """;
-            var expectedText =
-                """
+            var expectedText = """
                 class C
                 {
                     private readonly int _someInt;
@@ -279,7 +291,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Intents
                 }
                 """;
 
-            await VerifyExpectedTextAsync(WellKnownIntents.AddConstructorParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+            await VerifyExpectedTextAsync(
+                    WellKnownIntents.AddConstructorParameter,
+                    initialText,
+                    currentText,
+                    expectedText
+                )
+                .ConfigureAwait(false);
         }
     }
 }

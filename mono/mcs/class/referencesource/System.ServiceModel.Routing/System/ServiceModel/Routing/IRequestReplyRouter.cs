@@ -8,7 +8,10 @@ namespace System.ServiceModel.Routing
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    [ServiceContract(Namespace = RoutingUtilities.RoutingNamespace, SessionMode = SessionMode.Allowed)]
+    [ServiceContract(
+        Namespace = RoutingUtilities.RoutingNamespace,
+        SessionMode = SessionMode.Allowed
+    )]
     public interface IRequestReplyRouter
     {
         [OperationContract(AsyncPattern = true, IsOneWay = false, Action = "*", ReplyAction = "*")]

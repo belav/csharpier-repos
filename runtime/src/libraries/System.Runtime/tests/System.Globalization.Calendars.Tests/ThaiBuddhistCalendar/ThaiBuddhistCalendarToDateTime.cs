@@ -8,7 +8,8 @@ namespace System.Globalization.Tests
 {
     public class ThaiBuddhistCalendarToDateTime
     {
-        private static readonly RandomDataGenerator s_randomDataGenerator = new RandomDataGenerator();
+        private static readonly RandomDataGenerator s_randomDataGenerator =
+            new RandomDataGenerator();
 
         public static IEnumerable<object[]> ToDateTime_TestData()
         {
@@ -19,18 +20,52 @@ namespace System.Globalization.Tests
 
             // Random
             DateTime randomTime = s_randomDataGenerator.GetDateTime(-55);
-            yield return new object[] { randomTime.Year, randomTime.Month, randomTime.Day, randomTime.Hour, randomTime.Minute, randomTime.Second, randomTime.Millisecond };
+            yield return new object[]
+            {
+                randomTime.Year,
+                randomTime.Month,
+                randomTime.Day,
+                randomTime.Hour,
+                randomTime.Minute,
+                randomTime.Second,
+                randomTime.Millisecond,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ToDateTime_TestData))]
-        public void ToDateTime(int year, int month, int day, int hour, int minute, int second, int millisecond)
+        public void ToDateTime(
+            int year,
+            int month,
+            int day,
+            int hour,
+            int minute,
+            int second,
+            int millisecond
+        )
         {
             ThaiBuddhistCalendar calendar = new ThaiBuddhistCalendar();
-            DateTime expected = new GregorianCalendar().ToDateTime(year, month, day, hour, minute, second, millisecond);
-            Assert.Equal(expected, calendar.ToDateTime(year + 543, month, day, hour, minute, second, millisecond));
-            Assert.Equal(expected, calendar.ToDateTime(year + 543, month, day, hour, minute, second, millisecond, 0));
-            Assert.Equal(expected, calendar.ToDateTime(year + 543, month, day, hour, minute, second, millisecond, 1));
+            DateTime expected = new GregorianCalendar().ToDateTime(
+                year,
+                month,
+                day,
+                hour,
+                minute,
+                second,
+                millisecond
+            );
+            Assert.Equal(
+                expected,
+                calendar.ToDateTime(year + 543, month, day, hour, minute, second, millisecond)
+            );
+            Assert.Equal(
+                expected,
+                calendar.ToDateTime(year + 543, month, day, hour, minute, second, millisecond, 0)
+            );
+            Assert.Equal(
+                expected,
+                calendar.ToDateTime(year + 543, month, day, hour, minute, second, millisecond, 1)
+            );
         }
     }
 }

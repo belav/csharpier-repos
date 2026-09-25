@@ -8,15 +8,28 @@ namespace System.ServiceModel.Channels
     using System.Collections.Generic;
     using System.ServiceModel;
 
-    class ContextOutputSessionChannel : ContextOutputChannelBase<IOutputSessionChannel>, IOutputSessionChannel
+    class ContextOutputSessionChannel
+        : ContextOutputChannelBase<IOutputSessionChannel>,
+            IOutputSessionChannel
     {
         ClientContextProtocol contextProtocol;
 
-        public ContextOutputSessionChannel(ChannelManagerBase channelManager, IOutputSessionChannel innerChannel,
-            ContextExchangeMechanism contextExchangeMechanism, Uri callbackAddress, bool contextManagementEnabled)
+        public ContextOutputSessionChannel(
+            ChannelManagerBase channelManager,
+            IOutputSessionChannel innerChannel,
+            ContextExchangeMechanism contextExchangeMechanism,
+            Uri callbackAddress,
+            bool contextManagementEnabled
+        )
             : base(channelManager, innerChannel)
         {
-            this.contextProtocol = new ClientContextProtocol(contextExchangeMechanism, this.InnerChannel.Via, this, callbackAddress, contextManagementEnabled);
+            this.contextProtocol = new ClientContextProtocol(
+                contextExchangeMechanism,
+                this.InnerChannel.Via,
+                this,
+                callbackAddress,
+                contextManagementEnabled
+            );
         }
 
         public IOutputSession Session

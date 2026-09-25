@@ -7,30 +7,33 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.ServiceModel;
 
-    abstract class LayeredChannelListener<TChannel>
-        : ChannelListenerBase<TChannel>
+    abstract class LayeredChannelListener<TChannel> : ChannelListenerBase<TChannel>
         where TChannel : class, IChannel
     {
         IChannelListener innerChannelListener;
         bool sharedInnerListener;
         EventHandler onInnerListenerFaulted;
 
-        protected LayeredChannelListener(IDefaultCommunicationTimeouts timeouts, IChannelListener innerChannelListener)
-            : this(false, timeouts, innerChannelListener)
-        {
-        }
+        protected LayeredChannelListener(
+            IDefaultCommunicationTimeouts timeouts,
+            IChannelListener innerChannelListener
+        )
+            : this(false, timeouts, innerChannelListener) { }
 
         protected LayeredChannelListener(bool sharedInnerListener)
-            : this(sharedInnerListener, null, null)
-        {
-        }
+            : this(sharedInnerListener, null, null) { }
 
-        protected LayeredChannelListener(bool sharedInnerListener, IDefaultCommunicationTimeouts timeouts)
-            : this(sharedInnerListener, timeouts, null)
-        {
-        }
+        protected LayeredChannelListener(
+            bool sharedInnerListener,
+            IDefaultCommunicationTimeouts timeouts
+        )
+            : this(sharedInnerListener, timeouts, null) { }
 
-        protected LayeredChannelListener(bool sharedInnerListener, IDefaultCommunicationTimeouts timeouts, IChannelListener innerChannelListener)
+        protected LayeredChannelListener(
+            bool sharedInnerListener,
+            IDefaultCommunicationTimeouts timeouts,
+            IChannelListener innerChannelListener
+        )
             : base(timeouts)
         {
             this.sharedInnerListener = sharedInnerListener;
@@ -44,10 +47,7 @@ namespace System.ServiceModel.Channels
 
         internal virtual IChannelListener InnerChannelListener
         {
-            get
-            {
-                return innerChannelListener;
-            }
+            get { return innerChannelListener; }
             set
             {
                 lock (ThisLock)
@@ -108,10 +108,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnCloseOrAbort();
-            return new CloseAsyncResult(InnerChannelListener, sharedInnerListener, timeout, callback, state);
+            return new CloseAsyncResult(
+                InnerChannelListener,
+                sharedInnerListener,
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -137,9 +147,19 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new OpenAsyncResult(InnerChannelListener, sharedInnerListener, timeout, callback, state);
+            return new OpenAsyncResult(
+                InnerChannelListener,
+                sharedInnerListener,
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -169,7 +189,11 @@ namespace System.ServiceModel.Channels
         {
             if (this.InnerChannelListener == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
+                    )
+                );
             }
         }
 
@@ -179,7 +203,11 @@ namespace System.ServiceModel.Channels
 
             if (innerChannelListener == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.InnerListenerFactoryNotSet, this.GetType().ToString())
+                    )
+                );
             }
 
             return innerChannelListener;
@@ -188,9 +216,17 @@ namespace System.ServiceModel.Channels
         class OpenAsyncResult : AsyncResult
         {
             ICommunicationObject communicationObject;
-            static AsyncCallback onOpenComplete = Fx.ThunkCallback(new AsyncCallback(OnOpenComplete));
+            static AsyncCallback onOpenComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnOpenComplete)
+            );
 
-            public OpenAsyncResult(ICommunicationObject communicationObject, bool sharedInnerListener, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                ICommunicationObject communicationObject,
+                bool sharedInnerListener,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.communicationObject = communicationObject;
@@ -201,7 +237,11 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginOpen(timeout, onOpenComplete, this);
+                IAsyncResult result = this.communicationObject.BeginOpen(
+                    timeout,
+                    onOpenComplete,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     this.communicationObject.EndOpen(result);
@@ -242,9 +282,17 @@ namespace System.ServiceModel.Channels
         class CloseAsyncResult : AsyncResult
         {
             ICommunicationObject communicationObject;
-            static AsyncCallback onCloseComplete = Fx.ThunkCallback(new AsyncCallback(OnCloseComplete));
+            static AsyncCallback onCloseComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnCloseComplete)
+            );
 
-            public CloseAsyncResult(ICommunicationObject communicationObject, bool sharedInnerListener, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                ICommunicationObject communicationObject,
+                bool sharedInnerListener,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.communicationObject = communicationObject;
@@ -255,7 +303,11 @@ namespace System.ServiceModel.Channels
                     return;
                 }
 
-                IAsyncResult result = this.communicationObject.BeginClose(timeout, onCloseComplete, this);
+                IAsyncResult result = this.communicationObject.BeginClose(
+                    timeout,
+                    onCloseComplete,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -301,7 +353,10 @@ namespace System.ServiceModel.Channels
     {
         IChannelListener<TInnerChannel> innerListener;
 
-        protected LayeredChannelAcceptor(ChannelManagerBase channelManager, IChannelListener<TInnerChannel> innerListener)
+        protected LayeredChannelAcceptor(
+            ChannelManagerBase channelManager,
+            IChannelListener<TInnerChannel> innerListener
+        )
             : base(channelManager)
         {
             this.innerListener = innerListener;
@@ -318,7 +373,11 @@ namespace System.ServiceModel.Channels
                 return OnAcceptChannel(innerChannel);
         }
 
-        public override IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerListener.BeginAcceptChannel(timeout, callback, state);
         }
@@ -337,7 +396,11 @@ namespace System.ServiceModel.Channels
             return this.innerListener.WaitForChannel(timeout);
         }
 
-        public override IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.innerListener.BeginWaitForChannel(timeout, callback, state);
         }

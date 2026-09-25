@@ -50,9 +50,7 @@ namespace Microsoft.Test.ModuleCore
 
         //Constructors
         public TestModule()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         public TestModule(string name, string desc)
             : base(name, desc, TestType.TestModule)
@@ -97,7 +95,11 @@ namespace Microsoft.Test.ModuleCore
                     {
                         if (TestInput.IsTestCaseSelected(tc.Name))
                         {
-                            Console.WriteLine("TestCase:{0} - {1}", tc.Attribute.Name, tc.Attribute.Desc);
+                            Console.WriteLine(
+                                "TestCase:{0} - {1}",
+                                tc.Attribute.Name,
+                                tc.Attribute.Desc
+                            );
                             tc.Init();
                             tc.Execute();
                         }
@@ -170,13 +172,9 @@ namespace Microsoft.Test.ModuleCore
             base.DetermineChildren();
         }
 
-        protected virtual void DetermineIncludes()
-        {
-        }
+        protected virtual void DetermineIncludes() { }
 
-        protected virtual void DetermineFilters()
-        {
-        }
+        protected virtual void DetermineFilters() { }
 
         protected virtual string FilterScope(string xpath)
         {

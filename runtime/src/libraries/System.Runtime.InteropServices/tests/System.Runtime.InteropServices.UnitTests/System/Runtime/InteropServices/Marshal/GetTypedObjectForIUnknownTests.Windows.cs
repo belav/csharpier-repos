@@ -21,19 +21,46 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new IUnknownComObject(), typeof(IUnknownInterface) };
             yield return new object[] { new IDispatchComObject(), typeof(IDispatchComObject) };
             yield return new object[] { new IDispatchComObject(), typeof(IDispatchInterface) };
-            yield return new object[] { new IInspectableComObject(), typeof(IInspectableComObject) };
-            yield return new object[] { new IInspectableComObject(), typeof(IInspectableInterface) };
+            yield return new object[]
+            {
+                new IInspectableComObject(),
+                typeof(IInspectableComObject),
+            };
+            yield return new object[]
+            {
+                new IInspectableComObject(),
+                typeof(IInspectableInterface),
+            };
 
             yield return new object[] { new NonDualComObject(), typeof(NonDualComObject) };
-            yield return new object[] { new AutoDispatchComObject(), typeof(AutoDispatchComObject) };
+            yield return new object[]
+            {
+                new AutoDispatchComObject(),
+                typeof(AutoDispatchComObject),
+            };
             yield return new object[] { new AutoDualComObject(), typeof(AutoDualComObject) };
 
-            yield return new object[] { new NonDualComObjectEmpty(), typeof(NonDualComObjectEmpty) };
-            yield return new object[] { new AutoDispatchComObjectEmpty(), typeof(AutoDispatchComObjectEmpty) };
-            yield return new object[] { new AutoDualComObjectEmpty(), typeof(AutoDualComObjectEmpty) };
+            yield return new object[]
+            {
+                new NonDualComObjectEmpty(),
+                typeof(NonDualComObjectEmpty),
+            };
+            yield return new object[]
+            {
+                new AutoDispatchComObjectEmpty(),
+                typeof(AutoDispatchComObjectEmpty),
+            };
+            yield return new object[]
+            {
+                new AutoDualComObjectEmpty(),
+                typeof(AutoDualComObjectEmpty),
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetTypedObjectForIUnknown_ComObject_TestData))]
         public void GetTypedObjectForIUnknown_ComObject_ReturnsExpected(object o, Type type)
         {
@@ -46,9 +73,15 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { new IInspectableComObject(), typeof(IUnknownInterface) };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetTypedObjectForIUnknownTypeUncastableComObject_TestData))]
-        public void GetTypedObjectForIUnknown_UncastableComObject_ThrowsInvalidCastException(object o, Type type)
+        public void GetTypedObjectForIUnknown_UncastableComObject_ThrowsInvalidCastException(
+            object o,
+            Type type
+        )
         {
             GetTypedObjectForIUnknown_UncastableObject_ThrowsInvalidCastException(o, type);
         }

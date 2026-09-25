@@ -9,12 +9,16 @@ using System.Web.UI.WebControls;
 namespace Samples.AspNet.CS.Controls
 {
     [
-    AspNetHostingPermission(SecurityAction.Demand,
-        Level = AspNetHostingPermissionLevel.Minimal),
-    AspNetHostingPermission(SecurityAction.InheritanceDemand, 
-        Level=AspNetHostingPermissionLevel.Minimal),
-    DefaultProperty("Title"),
-    ToolboxData("<{0}:Book runat=\"server\"> </{0}:Book>")
+        AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        ),
+        AspNetHostingPermission(
+            SecurityAction.InheritanceDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        ),
+        DefaultProperty("Title"),
+        ToolboxData("<{0}:Book runat=\"server\"> </{0}:Book>")
     ]
     public class Book : WebControl
     {
@@ -22,13 +26,12 @@ namespace Samples.AspNet.CS.Controls
         private String initialAuthorString;
 
         [
-        Bindable(true),
-        Category("Appearance"),
-        DefaultValue(""),
-        Description("The name of the author."),
-        DesignerSerializationVisibility(
-            DesignerSerializationVisibility.Content),
-        PersistenceMode(PersistenceMode.InnerProperty),
+            Bindable(true),
+            Category("Appearance"),
+            DefaultValue(""),
+            Description("The name of the author."),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
+            PersistenceMode(PersistenceMode.InnerProperty),
         ]
         public virtual Author Author
         {
@@ -40,14 +43,13 @@ namespace Samples.AspNet.CS.Controls
                 }
                 return authorValue;
             }
-
         }
 
         [
-        Bindable(true),
-        Category("Appearance"),
-        DefaultValue(BookType.NotDefined),
-        Description("Fiction or Not"),
+            Bindable(true),
+            Category("Appearance"),
+            DefaultValue(BookType.NotDefined),
+            Description("Fiction or Not"),
         ]
         public virtual BookType BookType
         {
@@ -56,18 +58,15 @@ namespace Samples.AspNet.CS.Controls
                 object t = ViewState["BookType"];
                 return (t == null) ? BookType.NotDefined : (BookType)t;
             }
-            set
-            {
-                ViewState["BookType"] = value;
-            }
+            set { ViewState["BookType"] = value; }
         }
 
         [
-        Bindable(true),
-        Category("Appearance"),
-        DefaultValue(""),
-        Description("The symbol for the currency."),
-        Localizable(true)
+            Bindable(true),
+            Category("Appearance"),
+            DefaultValue(""),
+            Description("The symbol for the currency."),
+            Localizable(true)
         ]
         public virtual string CurrencySymbol
         {
@@ -76,39 +75,32 @@ namespace Samples.AspNet.CS.Controls
                 string s = (string)ViewState["CurrencySymbol"];
                 return (s == null) ? String.Empty : s;
             }
-            set
-            {
-                ViewState["CurrencySymbol"] = value;
-            }
+            set { ViewState["CurrencySymbol"] = value; }
         }
 
-
         [
-        Bindable(true),
-        Category("Appearance"),
-        DefaultValue("0.00"),
-        Description("The price of the book."),
-        Localizable(true)
+            Bindable(true),
+            Category("Appearance"),
+            DefaultValue("0.00"),
+            Description("The price of the book."),
+            Localizable(true)
         ]
         public virtual Decimal Price
         {
             get
             {
                 object price = ViewState["Price"];
-                return (price  == null) ? Decimal.Zero : (Decimal)price;
+                return (price == null) ? Decimal.Zero : (Decimal)price;
             }
-            set
-            {
-                ViewState["Price"] = value;
-            }
+            set { ViewState["Price"] = value; }
         }
 
         [
-        Bindable(true),
-        Category("Appearance"),
-        DefaultValue(""),
-        Description("The title of the book."),
-        Localizable(true)
+            Bindable(true),
+            Category("Appearance"),
+            DefaultValue(""),
+            Description("The title of the book."),
+            Localizable(true)
         ]
         public virtual string Title
         {
@@ -117,10 +109,7 @@ namespace Samples.AspNet.CS.Controls
                 string s = (string)ViewState["Title"];
                 return (s == null) ? String.Empty : s;
             }
-            set
-            {
-                ViewState["Title"] = value;
-            }
+            set { ViewState["Title"] = value; }
         }
 
         protected internal override void RenderContents(HtmlTextWriter writer)
@@ -189,6 +178,5 @@ namespace Samples.AspNet.CS.Controls
             }
             base.TrackViewState();
         }
-
     }
 }

@@ -15,218 +15,220 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestNewClause()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var q = from x in y
-                          $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    var q = from x in y
+                              $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterPreviousClause()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var v = from x in y
-                          where x > y
-                          $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    var v = from x in y
+                              where x > y
+                              $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterPreviousContinuationClause()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var v = from x in y
-                          group x by y into g
-                          $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    var v = from x in y
+                              group x by y into g
+                              $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAtEndOfPreviousClause()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"var q = from x in y$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"var q = from x in y$$"));
         }
 
         [Fact]
         public async Task TestBetweenClauses()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var q = from x in y
-                          $$
-                          from z in w
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    var q = from x in y
+                              $$
+                              from z in w
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterWhere()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var q = from x in y
-                          where $$
-                          from z in w
-                """));
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                    var q = from x in y
+                              where $$
+                              from z in w
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterClass()
         {
-            await VerifyAbsenceAsync(
-@"class C $$");
+            await VerifyAbsenceAsync(@"class C $$");
         }
 
         [Fact]
         public async Task TestAfterGenericClass()
         {
-            await VerifyKeywordAsync(
-@"class C<T> $$");
+            await VerifyKeywordAsync(@"class C<T> $$");
         }
 
         [Fact]
         public async Task TestNotAfterClassBaseList()
         {
-            await VerifyAbsenceAsync(
-@"class C : IGoo $$");
+            await VerifyAbsenceAsync(@"class C : IGoo $$");
         }
 
         [Fact]
         public async Task TestAfterGenericClassBaseList()
         {
-            await VerifyKeywordAsync(
-@"class C<T> : IGoo $$");
+            await VerifyKeywordAsync(@"class C<T> : IGoo $$");
         }
 
         [Fact]
         public async Task TestNotAfterDelegate()
         {
-            await VerifyAbsenceAsync(
-@"delegate void D() $$");
+            await VerifyAbsenceAsync(@"delegate void D() $$");
         }
 
         [Fact]
         public async Task TestAfterGenericDelegate()
         {
-            await VerifyKeywordAsync(
-@"delegate void D<T>() $$");
+            await VerifyKeywordAsync(@"delegate void D<T>() $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousClassConstraint()
         {
-            await VerifyKeywordAsync(
-@"class C<T> where T : class $$");
+            await VerifyKeywordAsync(@"class C<T> where T : class $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousStructConstraint()
         {
-            await VerifyKeywordAsync(
-@"class C<T> where T : struct $$");
+            await VerifyKeywordAsync(@"class C<T> where T : struct $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousNewConstraint()
         {
-            await VerifyKeywordAsync(
-@"class C<T> where T : new() $$");
+            await VerifyKeywordAsync(@"class C<T> where T : new() $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousConstraint()
         {
-            await VerifyKeywordAsync(
-@"class C<T> where T : IList<T> $$");
+            await VerifyKeywordAsync(@"class C<T> where T : IList<T> $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousDelegateClassConstraint()
         {
-            await VerifyKeywordAsync(
-@"delegate void D<T>() where T : class $$");
+            await VerifyKeywordAsync(@"delegate void D<T>() where T : class $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousDelegateStructConstraint()
         {
-            await VerifyKeywordAsync(
-@"delegate void D<T>() where T : struct $$");
+            await VerifyKeywordAsync(@"delegate void D<T>() where T : struct $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousDelegateNewConstraint()
         {
-            await VerifyKeywordAsync(
-@"delegate void D<T>() where T : new() $$");
+            await VerifyKeywordAsync(@"delegate void D<T>() where T : new() $$");
         }
 
         [Fact]
         public async Task TestAfterPreviousDelegateConstraint()
         {
-            await VerifyKeywordAsync(
-@"delegate void D<T>() where T : IList<T> $$");
+            await VerifyKeywordAsync(@"delegate void D<T>() where T : IList<T> $$");
         }
 
         [Fact]
@@ -236,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void D() $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -246,7 +249,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void D<T>() $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -256,7 +260,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void D<T>() where T : class $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -266,7 +271,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void D<T>() where T : struct $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -276,7 +282,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void D<T>() where T : new() $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -286,7 +293,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     void D<T>() where T : IList<T> $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/550715")]
@@ -297,7 +305,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class Goo<T> : System.Object where $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -308,7 +317,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class Goo<T> : System.Object where where $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -319,7 +329,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class Goo<T> : System.Object where where where $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/550720")]
@@ -330,7 +341,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class Goo<where> : System.$$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -342,7 +354,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : System.$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -353,7 +366,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : System.$$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -365,7 +379,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : System.Exception $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -376,7 +391,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : System.Exception $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -388,7 +404,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : global::$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -399,7 +416,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : global::$$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -411,7 +429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : global::System.Exception $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -422,7 +441,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : global::System.Exception $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -434,7 +454,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : List<$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -445,7 +466,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : List<$$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -457,7 +479,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : List<int> $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -468,7 +491,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : List<int> $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -480,7 +504,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : Dictionary<int, $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -491,7 +516,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : Dictionary<int, $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -503,7 +529,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : Dictionary<int, string> $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -514,7 +541,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : Dictionary<int, string> $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -526,7 +554,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : List<List<int>$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -537,7 +566,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : List<List<int>$$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -549,7 +579,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : List<List<int>> $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -560,7 +591,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : List<List<int>> $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -572,7 +604,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : List<(int, $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -583,7 +616,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : List<(int, $$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -595,7 +629,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : List<(int, string)$$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -606,7 +641,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : List<(int, string)$$
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -618,7 +654,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 {
                     void M<T> where T : List<(int, string)> $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30785")]
@@ -629,7 +666,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 public class C<T> where T : List<(int, string)> $$
                 {
                 }
-                """);
+                """
+            );
         }
     }
 }

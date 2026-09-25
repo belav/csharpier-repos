@@ -335,13 +335,10 @@ public class DataAnnotationsMetadataProviderTest
         provider.CreateDisplayMetadata(context);
 
         // Assert
-        Assert.Collection(
-            context.DisplayMetadata.EnumGroupedDisplayNamesAndValues,
-            (e) =>
-            {
-                Assert.Equal("Name from DisplayNameAttribute", e.Key.Name);
-            }
-        );
+        Assert.Collection(context.DisplayMetadata.EnumGroupedDisplayNamesAndValues, (e) =>
+        {
+            Assert.Equal("Name from DisplayNameAttribute", e.Key.Name);
+        });
     }
 
     [Fact]
@@ -624,30 +621,27 @@ public class DataAnnotationsMetadataProviderTest
         var stringLocalizer = new Mock<IStringLocalizer>(MockBehavior.Strict);
         stringLocalizer
             .Setup(s => s["Model_Name"])
-            .Returns(
-                () =>
-                    new LocalizedString(
-                        "Model_Name",
-                        "name from localizer " + CultureInfo.CurrentCulture
-                    )
+            .Returns(() =>
+                new LocalizedString(
+                    "Model_Name",
+                    "name from localizer " + CultureInfo.CurrentCulture
+                )
             );
         stringLocalizer
             .Setup(s => s["Model_Description"])
-            .Returns(
-                () =>
-                    new LocalizedString(
-                        "Model_Description",
-                        "description from localizer " + CultureInfo.CurrentCulture
-                    )
+            .Returns(() =>
+                new LocalizedString(
+                    "Model_Description",
+                    "description from localizer " + CultureInfo.CurrentCulture
+                )
             );
         stringLocalizer
             .Setup(s => s["Model_Prompt"])
-            .Returns(
-                () =>
-                    new LocalizedString(
-                        "Model_Prompt",
-                        "prompt from localizer " + CultureInfo.CurrentCulture
-                    )
+            .Returns(() =>
+                new LocalizedString(
+                    "Model_Prompt",
+                    "prompt from localizer " + CultureInfo.CurrentCulture
+                )
             );
 
         var stringLocalizerFactoryMock = new Mock<IStringLocalizerFactory>(MockBehavior.Strict);
@@ -1309,9 +1303,8 @@ public class DataAnnotationsMetadataProviderTest
         );
 
         // Assert
-        var groupTwo = Assert.Single(
-            enumNameAndGroup,
-            e => e.Value.Equals("2", StringComparison.Ordinal)
+        var groupTwo = Assert.Single(enumNameAndGroup, e =>
+            e.Value.Equals("2", StringComparison.Ordinal)
         );
 
         using (new CultureReplacer("en-US", "en-US"))
@@ -1334,9 +1327,8 @@ public class DataAnnotationsMetadataProviderTest
         );
 
         // Assert
-        var groupTwo = Assert.Single(
-            enumNameAndGroup,
-            e => e.Value.Equals("2", StringComparison.Ordinal)
+        var groupTwo = Assert.Single(enumNameAndGroup, e =>
+            e.Value.Equals("2", StringComparison.Ordinal)
         );
 
         using (new CultureReplacer("en-US", "en-US"))
@@ -1359,9 +1351,8 @@ public class DataAnnotationsMetadataProviderTest
         );
 
         // Assert
-        var groupThree = Assert.Single(
-            enumNameAndGroup,
-            e => e.Value.Equals("3", StringComparison.Ordinal)
+        var groupThree = Assert.Single(enumNameAndGroup, e =>
+            e.Value.Equals("3", StringComparison.Ordinal)
         );
 
         using (new CultureReplacer("en-US", "en-US"))
@@ -1383,9 +1374,8 @@ public class DataAnnotationsMetadataProviderTest
             useStringLocalizer: true
         );
 
-        var groupThree = Assert.Single(
-            enumNameAndGroup,
-            e => e.Value.Equals("3", StringComparison.Ordinal)
+        var groupThree = Assert.Single(enumNameAndGroup, e =>
+            e.Value.Equals("3", StringComparison.Ordinal)
         );
 
         // Assert
@@ -1474,9 +1464,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.True(context.ValidationMetadata.IsRequired);
-        var attribute = Assert.Single(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute
+        var attribute = Assert.Single(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute
         );
         Assert.True(((RequiredAttribute)attribute).AllowEmptyStrings); // non-Default for [Required]
     }
@@ -1508,9 +1497,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.True(context.ValidationMetadata.IsRequired);
-        var attribute = Assert.Single(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute a
+        var attribute = Assert.Single(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute a
         );
         Assert.Equal("Test", ((RequiredAttribute)attribute).ErrorMessage);
         Assert.False(((RequiredAttribute)attribute).AllowEmptyStrings); // Default for [Required]
@@ -1549,9 +1537,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.Null(context.ValidationMetadata.IsRequired);
-        Assert.DoesNotContain(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute
+        Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute
         );
     }
 
@@ -1626,9 +1613,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.Null(context.ValidationMetadata.IsRequired);
-        Assert.DoesNotContain(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute
+        Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute
         );
     }
 
@@ -1655,9 +1641,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.Null(context.ValidationMetadata.IsRequired);
-        Assert.DoesNotContain(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute
+        Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute
         );
     }
 
@@ -1755,9 +1740,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.Null(context.ValidationMetadata.IsRequired);
-        Assert.DoesNotContain(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute
+        Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute
         );
     }
 
@@ -1785,9 +1769,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.Null(context.ValidationMetadata.IsRequired);
-        Assert.DoesNotContain(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute
+        Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute
         );
     }
 
@@ -1843,9 +1826,8 @@ public class DataAnnotationsMetadataProviderTest
 
         // Assert
         Assert.Null(context.ValidationMetadata.IsRequired);
-        Assert.DoesNotContain(
-            context.ValidationMetadata.ValidatorMetadata,
-            m => m is RequiredAttribute
+        Assert.DoesNotContain(context.ValidationMetadata.ValidatorMetadata, m =>
+            m is RequiredAttribute
         );
     }
 

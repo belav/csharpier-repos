@@ -17,6 +17,7 @@ internal readonly struct AssetHint
 
     [DataMember(Order = 0)]
     public readonly ProjectId? ProjectId;
+
     [DataMember(Order = 1)]
     public readonly DocumentId? DocumentId;
 
@@ -26,6 +27,9 @@ internal readonly struct AssetHint
         DocumentId = documentId;
     }
 
-    public static implicit operator AssetHint(ProjectId projectId) => new(projectId, documentId: null);
-    public static implicit operator AssetHint(DocumentId documentId) => new(documentId.ProjectId, documentId);
+    public static implicit operator AssetHint(ProjectId projectId) =>
+        new(projectId, documentId: null);
+
+    public static implicit operator AssetHint(DocumentId documentId) =>
+        new(documentId.ProjectId, documentId);
 }

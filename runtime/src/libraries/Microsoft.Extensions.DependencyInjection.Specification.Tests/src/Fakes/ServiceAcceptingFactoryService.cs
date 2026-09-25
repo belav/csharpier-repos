@@ -7,7 +7,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification.Fakes
     {
         public ServiceAcceptingFactoryService(
             ScopedFactoryService scopedService,
-            IFactoryService transientService)
+            IFactoryService transientService
+        )
         {
             ScopedService = scopedService;
             TransientService = transientService;

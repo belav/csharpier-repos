@@ -18,7 +18,12 @@ namespace System.Text.Json.Serialization.Converters
     {
         internal override bool CanPopulate => true;
 
-        protected override void Add(string key, in object? value, JsonSerializerOptions options, ref ReadStack state)
+        protected override void Add(
+            string key,
+            in object? value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             TDictionary collection = (TDictionary)state.Current.ReturnValue!;
             collection[key] = value;
@@ -28,18 +33,30 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        protected override void CreateCollection(ref Utf8JsonReader reader, scoped ref ReadStack state)
+        protected override void CreateCollection(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state
+        )
         {
             base.CreateCollection(ref reader, ref state);
             TDictionary returnValue = (TDictionary)state.Current.ReturnValue!;
             if (returnValue.IsReadOnly)
             {
                 state.Current.ReturnValue = null; // clear out for more accurate JsonPath reporting.
-                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(Type, ref reader, ref state);
+                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                    Type,
+                    ref reader,
+                    ref state
+                );
             }
         }
 
-        protected internal override bool OnWriteResume(Utf8JsonWriter writer, TDictionary value, JsonSerializerOptions options, ref WriteStack state)
+        protected internal override bool OnWriteResume(
+            Utf8JsonWriter writer,
+            TDictionary value,
+            JsonSerializerOptions options,
+            ref WriteStack state
+        )
         {
             IDictionaryEnumerator enumerator;
             if (state.Current.CollectionEnumerator == null)
@@ -74,13 +91,23 @@ namespace System.Text.Json.Serialization.Converters
                     if (key is string keyString)
                     {
                         _keyConverter ??= GetConverter<string>(typeInfo.KeyTypeInfo!);
-                        _keyConverter.WriteAsPropertyNameCore(writer, keyString, options, state.Current.IsWritingExtensionDataProperty);
+                        _keyConverter.WriteAsPropertyNameCore(
+                            writer,
+                            keyString,
+                            options,
+                            state.Current.IsWritingExtensionDataProperty
+                        );
                     }
                     else
                     {
                         // IDictionary is a special case since it has polymorphic object semantics on serialization
                         // but needs to use JsonConverter<string> on deserialization.
-                        _valueConverter.WriteAsPropertyNameCore(writer, key, options, state.Current.IsWritingExtensionDataProperty);
+                        _valueConverter.WriteAsPropertyNameCore(
+                            writer,
+                            key,
+                            options,
+                            state.Current.IsWritingExtensionDataProperty
+                        );
                     }
                 }
 
@@ -97,10 +124,16 @@ namespace System.Text.Json.Serialization.Converters
             return true;
         }
 
-        internal override void ConfigureJsonTypeInfo(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        internal override void ConfigureJsonTypeInfo(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
             // Deserialize as Dictionary<TKey,TValue> for interface types that support it.
-            if (jsonTypeInfo.CreateObject is null && Type.IsAssignableFrom(typeof(Dictionary<string, object?>)))
+            if (
+                jsonTypeInfo.CreateObject is null
+                && Type.IsAssignableFrom(typeof(Dictionary<string, object?>))
+            )
             {
                 Debug.Assert(Type.IsInterface);
                 jsonTypeInfo.CreateObject = () => new Dictionary<string, object?>();

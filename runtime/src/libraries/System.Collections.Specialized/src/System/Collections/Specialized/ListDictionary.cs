@@ -10,7 +10,9 @@ namespace System.Collections.Specialized
     /// Recommended for collections that typically include fewer than 10 items.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ListDictionary : IDictionary
     {
         private DictionaryNode? head; // Do not rename (binary serialization)
@@ -18,9 +20,7 @@ namespace System.Collections.Specialized
         private int count; // Do not rename (binary serialization)
         private readonly IComparer? comparer; // Do not rename (binary serialization)
 
-        public ListDictionary()
-        {
-        }
+        public ListDictionary() { }
 
         public ListDictionary(IComparer? comparer)
         {
@@ -70,7 +70,9 @@ namespace System.Collections.Specialized
                 for (node = head; node != null; node = node.next)
                 {
                     object oldKey = node.key;
-                    if ((comparer == null) ? oldKey.Equals(key) : comparer.Compare(oldKey, key) == 0)
+                    if (
+                        (comparer == null) ? oldKey.Equals(key) : comparer.Compare(oldKey, key) == 0
+                    )
                     {
                         break;
                     }
@@ -100,52 +102,34 @@ namespace System.Collections.Specialized
 
         public int Count
         {
-            get
-            {
-                return count;
-            }
+            get { return count; }
         }
 
         public ICollection Keys
         {
-            get
-            {
-                return new NodeKeyValueCollection(this, true);
-            }
+            get { return new NodeKeyValueCollection(this, true); }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool IsFixedSize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot => this;
 
         public ICollection Values
         {
-            get
-            {
-                return new NodeKeyValueCollection(this, false);
-            }
+            get { return new NodeKeyValueCollection(this, false); }
         }
 
         public void Add(object key, object? value)
@@ -266,7 +250,6 @@ namespace System.Collections.Specialized
             private readonly int _version;
             private bool _start;
 
-
             public NodeEnumerator(ListDictionary list)
             {
                 _list = list;
@@ -277,10 +260,7 @@ namespace System.Collections.Specialized
 
             public object Current
             {
-                get
-                {
-                    return Entry;
-                }
+                get { return Entry; }
             }
 
             public DictionaryEntry Entry
@@ -387,25 +367,18 @@ namespace System.Collections.Specialized
 
             bool ICollection.IsSynchronized
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             object ICollection.SyncRoot
             {
-                get
-                {
-                    return _list.SyncRoot;
-                }
+                get { return _list.SyncRoot; }
             }
 
             IEnumerator IEnumerable.GetEnumerator()
             {
                 return new NodeKeyValueEnumerator(_list, _isKeys);
             }
-
 
             private sealed class NodeKeyValueEnumerator : IEnumerator
             {
@@ -430,7 +403,9 @@ namespace System.Collections.Specialized
                     {
                         if (_current == null)
                         {
-                            throw new InvalidOperationException(SR.InvalidOperation_EnumOpCantHappen);
+                            throw new InvalidOperationException(
+                                SR.InvalidOperation_EnumOpCantHappen
+                            );
                         }
                         return _isKeys ? _current.key : _current.value;
                     }
@@ -467,7 +442,9 @@ namespace System.Collections.Specialized
         }
 
         [Serializable]
-        [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+        [System.Runtime.CompilerServices.TypeForwardedFrom(
+            "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        )]
         public class DictionaryNode
         {
             public object key = null!; // Do not rename (binary serialization)

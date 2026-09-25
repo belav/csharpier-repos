@@ -3,10 +3,10 @@
 //------------------------------------------------------------
 namespace System.Workflow.Runtime
 {
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Compiler;
     using System.ServiceModel;
     using System.ServiceModel.Description;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
 
     class CompiledWorkflowDefinitionContext : WorkflowDefinitionContext
     {
@@ -24,7 +24,10 @@ namespace System.Workflow.Runtime
 
             if (!activityType.IsAssignableFrom(workflowType))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("workflowType", SR2.GetString(SR2.NotAnActivityType));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "workflowType",
+                    SR2.GetString(SR2.NotAnActivityType)
+                );
             }
 
             this.workflowType = workflowType;
@@ -32,18 +35,12 @@ namespace System.Workflow.Runtime
 
         public override string ConfigurationName
         {
-            get
-            {
-                return this.workflowType.FullName;
-            }
+            get { return this.workflowType.FullName; }
         }
 
         public override string WorkflowName
         {
-            get
-            {
-                return NamingHelper.XmlName(this.workflowType.Name);
-            }
+            get { return NamingHelper.XmlName(this.workflowType.Name); }
         }
 
         public override WorkflowInstance CreateWorkflow()
@@ -60,20 +57,14 @@ namespace System.Workflow.Runtime
         {
             if (rootActivity == null)
             {
-                rootActivity = (Activity) Activator.CreateInstance(workflowType);
+                rootActivity = (Activity)Activator.CreateInstance(workflowType);
             }
 
             return rootActivity;
         }
 
-        protected override void OnRegister()
-        {
+        protected override void OnRegister() { }
 
-        }
-
-        protected override void OnValidate(ValidationErrorCollection errors)
-        {
-
-        }
+        protected override void OnValidate(ValidationErrorCollection errors) { }
     }
 }

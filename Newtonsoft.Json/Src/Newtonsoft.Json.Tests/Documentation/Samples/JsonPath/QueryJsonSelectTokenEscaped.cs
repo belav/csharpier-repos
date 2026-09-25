@@ -23,6 +23,9 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using System.Collections.Generic;
+using System.Text;
 using Newtonsoft.Json.Linq;
 #if DNXCORE50
 using Xunit;
@@ -31,14 +34,12 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System;
-using System.Collections.Generic;
+
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
 {
@@ -49,12 +50,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
         public void Example()
         {
             #region Usage
-            JObject o = JObject.Parse(@"{
+            JObject o = JObject.Parse(
+                @"{
               'Space Invaders': 'Taito',
               'Doom ]|[': 'id',
               ""Yar's Revenge"": 'Atari',
               'Government ""Intelligence""': 'Make-Believe'
-            }");
+            }"
+            );
 
             string spaceInvaders = (string)o.SelectToken("['Space Invaders']");
             // Taito
@@ -65,7 +68,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.JsonPath
             string yarsRevenge = (string)o.SelectToken("['Yar\\'s Revenge']");
             // Atari
 
-            string governmentIntelligence = (string)o.SelectToken("['Government \"Intelligence\"']");
+            string governmentIntelligence = (string)
+                o.SelectToken("['Government \"Intelligence\"']");
             // Make-Believe
             #endregion
 

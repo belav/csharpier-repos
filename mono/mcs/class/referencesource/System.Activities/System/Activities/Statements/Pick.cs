@@ -19,8 +19,8 @@ namespace System.Activities.Statements
 
         Collection<PickBranch> branches;
         Variable<PickState> pickStateVariable;
-        Collection<Activity> branchBodies;        
-        
+        Collection<Activity> branchBodies;
+
         public Pick()
         {
             this.pickStateVariable = new Variable<PickState>();
@@ -28,10 +28,7 @@ namespace System.Activities.Statements
 
         protected override bool CanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public Collection<PickBranch> Branches
@@ -49,14 +46,17 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.branches;
             }
         }
 
-        protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
@@ -66,11 +66,14 @@ namespace System.Activities.Statements
             PickState pickState = updateContext.GetValue(this.pickStateVariable);
             Fx.Assert(pickState != null, "Pick's Execute must have run by now.");
 
-            if (updateContext.IsCancellationRequested || pickState.TriggerCompletionBookmark == null)
+            if (
+                updateContext.IsCancellationRequested
+                || pickState.TriggerCompletionBookmark == null
+            )
             {
                 // do not schedule newly added Branches once a Trigger has successfully completed.
                 return;
-            }            
+            }
 
             CompletionCallback onBranchCompleteCallback = new CompletionCallback(OnBranchComplete);
             foreach (PickBranchBody body in this.branchBodies)
@@ -97,22 +100,29 @@ namespace System.Activities.Statements
             {
                 if (branch.Trigger == null)
                 {
-                    metadata.AddValidationError(new ValidationError(SR.PickBranchRequiresTrigger(branch.DisplayName), false, null, branch));
+                    metadata.AddValidationError(
+                        new ValidationError(
+                            SR.PickBranchRequiresTrigger(branch.DisplayName),
+                            false,
+                            null,
+                            branch
+                        )
+                    );
                 }
-                
+
                 PickBranchBody pickBranchBody = new PickBranchBody
                 {
                     Action = branch.Action,
                     DisplayName = branch.DisplayName,
                     Trigger = branch.Trigger,
-                    Variables = branch.Variables,                    
+                    Variables = branch.Variables,
                 };
 
                 this.branchBodies.Add(pickBranchBody);
 
                 metadata.AddChild(pickBranchBody, origin: branch);
             }
-                        
+
             metadata.AddImplementationVariable(this.pickStateVariable);
         }
 
@@ -120,13 +130,15 @@ namespace System.Activities.Statements
         {
             if (this.branchBodies.Count == 0)
             {
-                 return;
+                return;
             }
 
             PickState pickState = new PickState();
             this.pickStateVariable.Set(context, pickState);
 
-            pickState.TriggerCompletionBookmark = context.CreateBookmark(new BookmarkCallback(OnTriggerComplete));
+            pickState.TriggerCompletionBookmark = context.CreateBookmark(
+                new BookmarkCallback(OnTriggerComplete)
+            );
 
             context.Properties.Add(pickStateProperty, pickState);
 
@@ -158,14 +170,17 @@ namespace System.Activities.Statements
                 case ActivityInstanceState.Faulted:
                     if (context.IsCancellationRequested)
                     {
-                        if (executingChildren.Count == 0 && !pickState.HasBranchCompletedSuccessfully)
+                        if (
+                            executingChildren.Count == 0
+                            && !pickState.HasBranchCompletedSuccessfully
+                        )
                         {
                             // All of the branches are complete and we haven't had a single
                             // one complete successfully and we've been asked to cancel.
                             context.MarkCanceled();
                             context.RemoveAllBookmarks();
                         }
-                    }                    
+                    }
                     break;
             }
 
@@ -175,7 +190,7 @@ namespace System.Activities.Statements
                 ResumeExecutionActionBookmark(pickState, context);
             }
         }
-        
+
         void OnTriggerComplete(NativeActivityContext context, Bookmark bookmark, object state)
         {
             PickState pickState = this.pickStateVariable.Get(context);
@@ -196,7 +211,7 @@ namespace System.Activities.Statements
                     resumeAction = false;
                 }
             }
-            
+
             if (resumeAction)
             {
                 ResumeExecutionActionBookmark(pickState, context);
@@ -205,7 +220,10 @@ namespace System.Activities.Statements
 
         void ResumeExecutionActionBookmark(PickState pickState, NativeActivityContext context)
         {
-            Fx.Assert(pickState.ExecuteActionBookmark != null, "This should have been set by the branch.");
+            Fx.Assert(
+                pickState.ExecuteActionBookmark != null,
+                "This should have been set by the branch."
+            );
 
             context.ResumeBookmark(pickState.ExecuteActionBookmark, null);
             pickState.ExecuteActionBookmark = null;
@@ -215,63 +233,46 @@ namespace System.Activities.Statements
         internal class PickState
         {
             [DataMember(EmitDefaultValue = false)]
-            public bool HasBranchCompletedSuccessfully
-            {
-                get;
-                set;
-            }
+            public bool HasBranchCompletedSuccessfully { get; set; }
 
             [DataMember(EmitDefaultValue = false)]
-            public Bookmark TriggerCompletionBookmark
-            {
-                get;
-                set;
-            }
+            public Bookmark TriggerCompletionBookmark { get; set; }
 
             [DataMember(EmitDefaultValue = false)]
-            public Bookmark ExecuteActionBookmark
-            {
-                get;
-                set;
-            }
+            public Bookmark ExecuteActionBookmark { get; set; }
         }
 
         class PickBranchBody : NativeActivity
         {
-            public PickBranchBody()
-            {
-            }
+            public PickBranchBody() { }
 
             protected override bool CanInduceIdle
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
-            public Collection<Variable> Variables
-            {
-                get;
-                set;
-            }
+            public Collection<Variable> Variables { get; set; }
 
-            public Activity Trigger
-            {
-                get;
-                set;
-            }
+            public Activity Trigger { get; set; }
 
-            public Activity Action
-            {
-                get;
-                set;
-            }
+            public Activity Action { get; set; }
 
-            protected override void OnCreateDynamicUpdateMap(NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+            protected override void OnCreateDynamicUpdateMap(
+                NativeActivityUpdateMapMetadata metadata,
+                Activity originalActivity
+            )
             {
                 PickBranchBody originalBranchBody = (PickBranchBody)originalActivity;
-                if ((originalBranchBody.Action != null && metadata.GetMatch(this.Trigger) == originalBranchBody.Action) || (this.Action != null && metadata.GetMatch(this.Action) == originalBranchBody.Trigger))
+                if (
+                    (
+                        originalBranchBody.Action != null
+                        && metadata.GetMatch(this.Trigger) == originalBranchBody.Action
+                    )
+                    || (
+                        this.Action != null
+                        && metadata.GetMatch(this.Action) == originalBranchBody.Trigger
+                    )
+                )
                 {
                     metadata.DisallowUpdateInsideThisActivity(SR.PickBranchTriggerActionSwapped);
                     return;
@@ -294,27 +295,41 @@ namespace System.Activities.Statements
                 }
 
                 metadata.SetChildrenCollection(children);
-                
+
                 metadata.SetVariablesCollection(this.Variables);
             }
 
             protected override void Execute(NativeActivityContext context)
             {
-                Fx.Assert(this.Trigger != null, "We validate that the trigger is not null in Pick.CacheMetadata");
+                Fx.Assert(
+                    this.Trigger != null,
+                    "We validate that the trigger is not null in Pick.CacheMetadata"
+                );
 
                 context.ScheduleActivity(this.Trigger, new CompletionCallback(OnTriggerCompleted));
             }
 
-            void OnTriggerCompleted(NativeActivityContext context, ActivityInstance completedInstance)
+            void OnTriggerCompleted(
+                NativeActivityContext context,
+                ActivityInstance completedInstance
+            )
             {
                 PickState pickState = (PickState)context.Properties.Find(pickStateProperty);
 
-                if (completedInstance.State == ActivityInstanceState.Closed && pickState.TriggerCompletionBookmark != null)
+                if (
+                    completedInstance.State == ActivityInstanceState.Closed
+                    && pickState.TriggerCompletionBookmark != null
+                )
                 {
                     // We're the first trigger!  We win!
-                    context.ResumeBookmark(pickState.TriggerCompletionBookmark, context.ActivityInstanceId);
+                    context.ResumeBookmark(
+                        pickState.TriggerCompletionBookmark,
+                        context.ActivityInstanceId
+                    );
                     pickState.TriggerCompletionBookmark = null;
-                    pickState.ExecuteActionBookmark = context.CreateBookmark(new BookmarkCallback(OnExecuteAction));
+                    pickState.ExecuteActionBookmark = context.CreateBookmark(
+                        new BookmarkCallback(OnExecuteAction)
+                    );
                 }
                 else if (!context.IsCancellationRequested)
                 {

@@ -5,7 +5,7 @@
 namespace System.ServiceModel.Channels
 {
     using System.ComponentModel;
-    
+
     static class WebSocketTransportUsageHelper
     {
         internal static bool IsDefined(WebSocketTransportUsage value)
@@ -20,7 +20,12 @@ namespace System.ServiceModel.Channels
             if (!IsDefined(value))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidEnumArgumentException("value", (int)value, typeof(WebSocketTransportUsage)));
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(WebSocketTransportUsage)
+                    )
+                );
             }
         }
     }

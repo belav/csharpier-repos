@@ -8,9 +8,9 @@ namespace System.Security.Cryptography.Pkcs
 {
     public enum SubjectIdentifierOrKeyType
     {
-        Unknown = 0,                // Use any of the following as appropriate
-        IssuerAndSerialNumber = 1,  // X509IssuerSerial
-        SubjectKeyIdentifier = 2,   // SKI hex string
-        PublicKeyInfo = 3,          // PublicKeyInfo
+        Unknown = 0, // Use any of the following as appropriate
+        IssuerAndSerialNumber = 1, // X509IssuerSerial
+        SubjectKeyIdentifier = 2, // SKI hex string
+        PublicKeyInfo = 3, // PublicKeyInfo
     }
 }

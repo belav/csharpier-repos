@@ -38,8 +38,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.named01b.named01b
 {
     // <Area>Named Parameters</Area>
@@ -75,8 +73,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.named01c.named01c
 {
@@ -114,8 +110,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.named02a.named02a
 {
     // <Area>Named Parameters</Area>
@@ -150,8 +144,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.named02b.named02b
 {
@@ -190,8 +182,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.named02c.named02c
 {
     // <Area>Named Parameters</Area>
@@ -229,8 +219,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.named03a.named03a
 {
     // <Area>Named Parameters</Area>
@@ -266,7 +254,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "Invalid");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "Invalid"
+                );
                 if (ret)
                     return 0;
             }
@@ -276,8 +269,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.named03c.named03c
 {
@@ -315,7 +306,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "Invalid");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "Invalid"
+                );
                 if (ret)
                     return 0;
             }
@@ -325,8 +321,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.optional03.optional03
 {
@@ -374,8 +368,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.optional02a.optional02a
 {
     // <Area>Optional Parameters</Area>
@@ -410,8 +402,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.optional02b.optional02b
 {
@@ -449,8 +439,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.optional02c.optional02c
 {
     // <Area>Optional Parameters</Area>
@@ -486,8 +474,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.basic.optional01.optional01
 {

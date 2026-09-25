@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,82 +31,91 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    [ConfigurationCollection(
+        typeof(UrlMapping),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class UrlMappingCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static UrlMappingCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-	[ConfigurationCollection (typeof (UrlMapping), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class UrlMappingCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+        public void Add(UrlMapping urlMapping)
+        {
+            BaseAdd(urlMapping);
+        }
 
-		static UrlMappingCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		public void Add (UrlMapping urlMapping)
-		{
-			BaseAdd (urlMapping);
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new UrlMapping();
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((UrlMapping)element).Url;
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new UrlMapping ();
-		}
+        public string GetKey(int index)
+        {
+            return (string)BaseGetKey(index);
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((UrlMapping)element).Url;
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public string GetKey (int index)
-		{
-			return (string)BaseGetKey (index);
-		}
+        public void Remove(UrlMapping urlMapping)
+        {
+            BaseRemove(urlMapping.Url);
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		public void Remove (UrlMapping urlMapping)
-		{
-			BaseRemove (urlMapping.Url);
-		}
+        public string[] AllKeys
+        {
+            get
+            {
+                string[] keys = new string[Count];
+                for (int i = 0; i < Count; i++)
+                    keys[i] = this[i].Url;
+                return keys;
+            }
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public UrlMapping this[int index]
+        {
+            get { return (UrlMapping)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
 
-		public string[] AllKeys {
-			get {
-				string[] keys = new string[Count];
-				for (int i = 0; i < Count; i ++)
-					keys[i] = this[i].Url;
-				return keys;
-			}
-		}
+        public new UrlMapping this[string name]
+        {
+            get { return (UrlMapping)BaseGet(name); }
+        }
 
-		public UrlMapping this [int index] {
-			get { return (UrlMapping) BaseGet (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
-
-		public new UrlMapping this [string name] {
-			get { return (UrlMapping) BaseGet (name); }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

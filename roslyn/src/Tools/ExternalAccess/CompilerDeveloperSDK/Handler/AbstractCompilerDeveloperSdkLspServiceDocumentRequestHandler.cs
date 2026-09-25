@@ -10,18 +10,31 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.CompilerDeveloperSdk;
 
-internal abstract class AbstractCompilerDeveloperSdkLspServiceDocumentRequestHandler<TRequest, TResponse> : ILspServiceDocumentRequestHandler<TRequest, TResponse>
+internal abstract class AbstractCompilerDeveloperSdkLspServiceDocumentRequestHandler<
+    TRequest,
+    TResponse
+> : ILspServiceDocumentRequestHandler<TRequest, TResponse>
 {
     public abstract bool RequiresLSPSolution { get; }
-    public abstract Task<TResponse> HandleRequestAsync(TRequest request, RequestContext context, CancellationToken cancellationToken);
+    public abstract Task<TResponse> HandleRequestAsync(
+        TRequest request,
+        RequestContext context,
+        CancellationToken cancellationToken
+    );
     public abstract TextDocumentIdentifier GetTextDocumentIdentifier(TRequest request);
     public abstract bool MutatesSolutionState { get; }
 
     bool IMethodHandler.MutatesSolutionState => MutatesSolutionState;
     bool ISolutionRequiredHandler.RequiresLSPSolution => RequiresLSPSolution;
 
-    TextDocumentIdentifier ITextDocumentIdentifierHandler<TRequest, TextDocumentIdentifier>.GetTextDocumentIdentifier(TRequest request)
-        => GetTextDocumentIdentifier(request);
-    Task<TResponse> IRequestHandler<TRequest, TResponse, LspRequestContext>.HandleRequestAsync(TRequest request, LspRequestContext context, CancellationToken cancellationToken)
-        => HandleRequestAsync(request, new RequestContext(context), cancellationToken);
+    TextDocumentIdentifier ITextDocumentIdentifierHandler<
+        TRequest,
+        TextDocumentIdentifier
+    >.GetTextDocumentIdentifier(TRequest request) => GetTextDocumentIdentifier(request);
+
+    Task<TResponse> IRequestHandler<TRequest, TResponse, LspRequestContext>.HandleRequestAsync(
+        TRequest request,
+        LspRequestContext context,
+        CancellationToken cancellationToken
+    ) => HandleRequestAsync(request, new RequestContext(context), cancellationToken);
 }

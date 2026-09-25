@@ -14,7 +14,6 @@ public sealed class SealedClass1
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     private Type GetTypeInlineable() => GetType();
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public object TestTernary1() => GetTypeInlineable() == typeof(SealedClass1) ? "Ok" : "Fail";
 
@@ -33,25 +32,29 @@ public sealed class SealedClass1
     [MethodImpl(MethodImplOptions.NoInlining)]
     public object TestTernary6() => GetType() == typeof(NotSealedClass1) ? "Fail" : "Ok";
 
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    public static object TestTernary7(SealedClass1 instance) =>
+        instance.GetType() == typeof(SealedClass1) ? "Ok" : "Fail";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static object TestTernary7(SealedClass1 instance) => instance.GetType() == typeof(SealedClass1) ? "Ok" : "Fail";
+    public static object TestTernary8(SealedClass1 instance) =>
+        instance.GetType() == typeof(SealedClass2) ? "Fail" : "Ok";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static object TestTernary8(SealedClass1 instance) => instance.GetType() == typeof(SealedClass2) ? "Fail" : "Ok";
+    public static object TestTernary9(SealedClass1 instance) =>
+        instance.GetType() == typeof(NotSealedClass1) ? "Fail" : "Ok";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static object TestTernary9(SealedClass1 instance) => instance.GetType() == typeof(NotSealedClass1) ? "Fail" : "Ok";
+    public static object TestTernary10(SealedClass1 instance) =>
+        instance.GetTypeInlineable() == typeof(SealedClass1) ? "Ok" : "Fail";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static object TestTernary10(SealedClass1 instance) => instance.GetTypeInlineable() == typeof(SealedClass1) ? "Ok" : "Fail";
+    public static object TestTernary11(SealedClass1 instance) =>
+        instance.GetTypeInlineable() == typeof(SealedClass2) ? "Fail" : "Ok";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static object TestTernary11(SealedClass1 instance) => instance.GetTypeInlineable() == typeof(SealedClass2) ? "Fail" : "Ok";
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public static object TestTernary12(SealedClass1 instance) => instance.GetTypeInlineable() == typeof(NotSealedClass1) ? "Fail" : "Ok";
-
+    public static object TestTernary12(SealedClass1 instance) =>
+        instance.GetTypeInlineable() == typeof(NotSealedClass1) ? "Fail" : "Ok";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public bool TestReturn1() => GetTypeInlineable() == typeof(SealedClass1);
@@ -71,7 +74,6 @@ public sealed class SealedClass1
     [MethodImpl(MethodImplOptions.NoInlining)]
     public bool TestReturn6() => GetTypeInlineable() != typeof(NotSealedClass1);
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     public bool TestReturn7() => GetType() == typeof(SealedClass1);
 
@@ -83,6 +85,7 @@ public sealed class SealedClass1
 }
 
 public sealed class SealedClass2 { }
+
 public class NotSealedClass1 { }
 
 public static class Program
@@ -137,7 +140,11 @@ public static class Program
         Console.WriteLine($"Expected: NullReferenceException");
     }
 
-    private static void AssertEquals(object expected, object actual, [CallerLineNumber] int line = 0)
+    private static void AssertEquals(
+        object expected,
+        object actual,
+        [CallerLineNumber] int line = 0
+    )
     {
         if (expected != actual)
         {

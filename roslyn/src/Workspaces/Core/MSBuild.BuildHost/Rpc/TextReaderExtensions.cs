@@ -14,7 +14,10 @@ internal static class TextReaderExtensions
     /// <summary>
     /// Returns the next line from the string, or null if the stream is closed or the cancellation token was triggered.
     /// </summary>
-    public static async Task<string?> TryReadLineOrReturnNullIfCancelledAsync(this TextReader streamReader, CancellationToken cancellationToken)
+    public static async Task<string?> TryReadLineOrReturnNullIfCancelledAsync(
+        this TextReader streamReader,
+        CancellationToken cancellationToken
+    )
     {
         // If we're on .NET Core 7.0 the implementation is easy, but on older versions we don't have the helper and since we also don't have
         // Microsoft.VisualStudio.Threading's WithCancellation helper we have to inline the same approach.

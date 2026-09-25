@@ -116,10 +116,7 @@ namespace System.Collections.Generic
         //
         public int Capacity
         {
-            get
-            {
-                return _items.Length;
-            }
+            get { return _items.Length; }
             set
             {
                 ArgumentOutOfRangeException.ThrowIfLessThan(value, _size);
@@ -143,10 +140,7 @@ namespace System.Collections.Generic
         // Read-only property describing how many elements are in the List.
         public int Count
         {
-            get
-            {
-                return _size;
-            }
+            get { return _size; }
         }
 
         // Sets or Gets the element at the given index.
@@ -156,18 +150,24 @@ namespace System.Collections.Generic
             get
             {
                 // Following trick can reduce the range check by one
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual((uint)index, (uint)_size, nameof(index));
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    (uint)index,
+                    (uint)_size,
+                    nameof(index)
+                );
                 return _items[index];
             }
-
             set
             {
-                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual((uint)index, (uint)_size, nameof(index));
+                ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                    (uint)index,
+                    (uint)_size,
+                    nameof(index)
+                );
                 _items[index] = value;
                 _version++;
             }
         }
-
 
         // Adds the given object to the end of this list. The size of the list is
         // increased by one. If required, the capacity of the list is doubled
@@ -175,7 +175,8 @@ namespace System.Collections.Generic
         //
         public void Add(T item)
         {
-            if (_size == _items.Length) EnsureCapacity(_size + 1);
+            if (_size == _items.Length)
+                EnsureCapacity(_size + 1);
             _items[_size++] = item;
             _version++;
         }
@@ -192,7 +193,8 @@ namespace System.Collections.Generic
                 // Allow the list to grow to maximum possible capacity (~2G elements) before encountering overflow.
                 // Note that this check works even when _items.Length overflowed thanks to the (uint) cast
                 //if ((uint)newCapacity > Array.MaxLength) newCapacity = Array.MaxLength;
-                if (newCapacity < min) newCapacity = min;
+                if (newCapacity < min)
+                    newCapacity = min;
                 Capacity = newCapacity;
             }
         }
@@ -204,7 +206,6 @@ namespace System.Collections.Generic
         //
         public void AddRange(IEnumerable<T> collection)
         {
-
             InsertRange(_size, collection);
         }
 
@@ -241,7 +242,6 @@ namespace System.Collections.Generic
             }
         }
 
-
         // Copies a section of this list to the given array at the given index.
         //
         // The method uses the Array.Copy method to copy the elements.
@@ -276,7 +276,6 @@ namespace System.Collections.Generic
             return Array.IndexOf(_items, item, 0, _size);
         }
 
-
         // Returns the index of the first occurrence of a given value in a range of
         // this list. The list is searched forwards, starting at index
         // index and ending at count number of elements. The
@@ -301,7 +300,8 @@ namespace System.Collections.Generic
             // Note that insertions at the end are legal.
             ArgumentOutOfRangeException.ThrowIfGreaterThan((uint)index, (uint)_size, nameof(index));
 
-            if (_size == _items.Length) EnsureCapacity(_size + 1);
+            if (_size == _items.Length)
+                EnsureCapacity(_size + 1);
             if (index < _size)
             {
                 Array.Copy(_items, index, _items, index + 1, _size - index);
@@ -323,7 +323,7 @@ namespace System.Collections.Generic
 
             ICollection<T>? c = collection as ICollection<T>;
             if (c != null)
-            {    // if collection is ICollection<T>
+            { // if collection is ICollection<T>
                 int count = c.Count;
                 if (count > 0)
                 {
@@ -384,17 +384,20 @@ namespace System.Collections.Generic
         {
             ArgumentNullException.ThrowIfNull(match);
 
-            int freeIndex = 0;   // the first free slot in items array
+            int freeIndex = 0; // the first free slot in items array
 
             // Find the first item which needs to be removed.
-            while (freeIndex < _size && !match(_items[freeIndex]!)) freeIndex++;
-            if (freeIndex >= _size) return 0;
+            while (freeIndex < _size && !match(_items[freeIndex]!))
+                freeIndex++;
+            if (freeIndex >= _size)
+                return 0;
 
             int current = freeIndex + 1;
             while (current < _size)
             {
                 // Find the first item which needs to be kept.
-                while (current < _size && match(_items[current]!)) current++;
+                while (current < _size && match(_items[current]!))
+                    current++;
 
                 if (current < _size)
                 {
@@ -415,7 +418,11 @@ namespace System.Collections.Generic
         //
         public void RemoveAt(int index)
         {
-            ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual((uint)index, (uint)_size, nameof(index));
+            ArgumentOutOfRangeException.ThrowIfGreaterThanOrEqual(
+                (uint)index,
+                (uint)_size,
+                nameof(index)
+            );
             _size--;
             if (index < _size)
             {
@@ -440,19 +447,13 @@ namespace System.Collections.Generic
     // LowLevelList<T> with full IList<T> implementation
     internal sealed class LowLevelListWithIList<T> : LowLevelList<T>, IList<T>
     {
-        public LowLevelListWithIList()
-        {
-        }
+        public LowLevelListWithIList() { }
 
         public LowLevelListWithIList(int capacity)
-            : base(capacity)
-        {
-        }
+            : base(capacity) { }
 
         public LowLevelListWithIList(IEnumerable<T> collection)
-            : base(collection)
-        {
-        }
+            : base(collection) { }
 
         // Is this List read-only?
         bool ICollection<T>.IsReadOnly
@@ -486,9 +487,7 @@ namespace System.Collections.Generic
                 _current = default(T);
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public bool MoveNext()
             {
@@ -517,10 +516,7 @@ namespace System.Collections.Generic
 
             public T Current
             {
-                get
-                {
-                    return _current!;
-                }
+                get { return _current!; }
             }
 
             object? System.Collections.IEnumerator.Current

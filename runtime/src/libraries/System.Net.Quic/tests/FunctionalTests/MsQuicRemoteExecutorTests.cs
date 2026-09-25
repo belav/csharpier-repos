@@ -24,19 +24,27 @@ namespace System.Net.Quic.Tests
         {
             if (PlatformDetection.IsReleaseLibrary(typeof(QuicConnection).Assembly))
             {
-                throw new SkipTestException("Retrieving SSL secrets is not supported in Release mode.");
+                throw new SkipTestException(
+                    "Retrieving SSL secrets is not supported in Release mode."
+                );
             }
 
             var psi = new ProcessStartInfo();
             var tempFile = Path.GetTempFileName();
             psi.Environment.Add("SSLKEYLOGFILE", tempFile);
 
-            RemoteExecutor.Invoke(async () =>
-            {
-                (QuicConnection clientConnection, QuicConnection serverConnection) = await CreateConnectedQuicConnection();
-                await clientConnection.DisposeAsync();
-                await serverConnection.DisposeAsync();
-            }, new RemoteInvokeOptions { StartInfo = psi }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    async () =>
+                    {
+                        (QuicConnection clientConnection, QuicConnection serverConnection) =
+                            await CreateConnectedQuicConnection();
+                        await clientConnection.DisposeAsync();
+                        await serverConnection.DisposeAsync();
+                    },
+                    new RemoteInvokeOptions { StartInfo = psi }
+                )
+                .Dispose();
 
             Assert.True(File.Exists(tempFile));
             Assert.True(File.ReadAllText(tempFile).Length > 0);

@@ -1,44 +1,48 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlPhoneCallAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
+using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
-using System.Drawing;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
-
     /*
      * HtmlPhoneCallAdapter class.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlPhoneCallAdapter.uex' path='docs/doc[@for="HtmlPhoneCallAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlPhoneCallAdapter : HtmlControlAdapter
     {
         /// <include file='doc\HtmlPhoneCallAdapter.uex' path='docs/doc[@for="HtmlPhoneCallAdapter.Control"]/*' />
         protected new PhoneCall Control
         {
-            get
-            {
-                return (PhoneCall)base.Control;
-            }
+            get { return (PhoneCall)base.Control; }
         }
 
         /// <include file='doc\HtmlPhoneCallAdapter.uex' path='docs/doc[@for="HtmlPhoneCallAdapter.Render"]/*' />
@@ -60,7 +64,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 foreach (char ch in phoneNumber)
                 {
-                    if (ch >= '0' && ch <= '9' || ch == '#' || ch=='+')
+                    if (ch >= '0' && ch <= '9' || ch == '#' || ch == '+')
                     {
                         writer.Write(ch);
                     }
@@ -74,8 +78,12 @@ namespace System.Web.UI.MobileControls.Adapters
             else
             {
                 // Format the text string based on properties
-                String text = String.Format(CultureInfo.CurrentCulture, Control.AlternateFormat, Control.Text,
-                                            Control.PhoneNumber);
+                String text = String.Format(
+                    CultureInfo.CurrentCulture,
+                    Control.AlternateFormat,
+                    Control.Text,
+                    Control.PhoneNumber
+                );
                 String url = Control.AlternateUrl;
 
                 // If URI specified, create a link.  Otherwise, only text is displayed.
@@ -93,6 +101,4 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.ExitStyle(Style, Control.BreakAfter);
         }
     }
-
 }
-

@@ -20,7 +20,9 @@ namespace TestResources
             var stream = assembly.GetManifestResourceStream(name);
             if (stream == null)
             {
-                throw new InvalidOperationException($"Resource '{name}' not found in {assembly.FullName}.");
+                throw new InvalidOperationException(
+                    $"Resource '{name}' not found in {assembly.FullName}."
+                );
             }
 
             return stream;
@@ -64,7 +66,13 @@ namespace TestResources
         {
             using (var stream = GetResourceStream(name))
             {
-                using (var streamReader = new StreamReader(stream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true))
+                using (
+                    var streamReader = new StreamReader(
+                        stream,
+                        Encoding.UTF8,
+                        detectEncodingFromByteOrderMarks: true
+                    )
+                )
                 {
                     return streamReader.ReadToEnd();
                 }

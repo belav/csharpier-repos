@@ -13,74 +13,82 @@ using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Xml;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography.Xml {
+namespace MonoTests.System.Security.Cryptography.Xml
+{
+    [TestFixture]
+    public class KeyInfoRetrievalMethodTest
+    {
+        [Test]
+        public void TestNewEmptyKeyNode()
+        {
+            KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod();
+            Assert.AreEqual(
+                "<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />",
+                (uri1.GetXml().OuterXml),
+                "Empty"
+            );
+        }
 
-	[TestFixture]
-	public class KeyInfoRetrievalMethodTest {
+        [Test]
+        public void TestNewKeyNode()
+        {
+            string uri = "http://www.example.com/";
+            KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod();
+            uri1.Uri = uri;
+            XmlElement xel = uri1.GetXml();
 
-		[Test]
-		public void TestNewEmptyKeyNode () 
-		{
-			KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod ();
-			Assert.AreEqual ("<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />", (uri1.GetXml ().OuterXml), "Empty");
-		}
+            KeyInfoRetrievalMethod uri2 = new KeyInfoRetrievalMethod(uri1.Uri);
+            uri2.LoadXml(xel);
 
-		[Test]
-		public void TestNewKeyNode () 
-		{
-			string uri = "http://www.example.com/";
-			KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod ();
-			uri1.Uri = uri;
-			XmlElement xel = uri1.GetXml ();
+            Assert.AreEqual((uri1.GetXml().OuterXml), (uri2.GetXml().OuterXml), "uri1==uri2");
+            Assert.AreEqual(uri, uri1.Uri, "uri==Uri");
+        }
 
-			KeyInfoRetrievalMethod uri2 = new KeyInfoRetrievalMethod (uri1.Uri);
-			uri2.LoadXml (xel);
+        [Test]
+        public void TestImportKeyNode()
+        {
+            string value =
+                "<RetrievalMethod URI=\"http://www.example.com/\" xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />";
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(value);
 
-			Assert.AreEqual ((uri1.GetXml ().OuterXml), (uri2.GetXml ().OuterXml), "uri1==uri2");
-			Assert.AreEqual (uri, uri1.Uri, "uri==Uri");
-		}
+            KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod();
+            uri1.LoadXml(doc.DocumentElement);
 
-		[Test]
-		public void TestImportKeyNode () 
-		{
-			string value = "<RetrievalMethod URI=\"http://www.example.com/\" xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />";
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (value);
+            // verify that proper XML is generated (equals to original)
+            string s = (uri1.GetXml().OuterXml);
+            Assert.AreEqual(value, s, "Xml");
 
-			KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod ();
-			uri1.LoadXml (doc.DocumentElement);
+            // verify that property is parsed correctly
+            Assert.AreEqual("http://www.example.com/", uri1.Uri, "Uri");
+        }
 
-			// verify that proper XML is generated (equals to original)
-			string s = (uri1.GetXml ().OuterXml);
-			Assert.AreEqual (value, s, "Xml");
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void InvalidKeyNode1()
+        {
+            KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod();
+            uri1.LoadXml(null);
+        }
 
-			// verify that property is parsed correctly
-			Assert.AreEqual ("http://www.example.com/", uri1.Uri, "Uri");
-		}
+        [Test]
+        public void InvalidKeyNode2()
+        {
+            string bad = "<Test></Test>";
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(bad);
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void InvalidKeyNode1 () 
-		{
-			KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod ();
-			uri1.LoadXml (null);
-		}
-
-		[Test]
-		public void InvalidKeyNode2 () 
-		{
-			string bad = "<Test></Test>";
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (bad);
-
-			KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod ();
-			// no exception is thrown
-			uri1.LoadXml (doc.DocumentElement);
-			AssertCrypto.AssertXmlEquals ("invalid", "<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />", (uri1.GetXml ().OuterXml));
-		}
-	}
+            KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod();
+            // no exception is thrown
+            uri1.LoadXml(doc.DocumentElement);
+            AssertCrypto.AssertXmlEquals(
+                "invalid",
+                "<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />",
+                (uri1.GetXml().OuterXml)
+            );
+        }
+    }
 }
 #endif

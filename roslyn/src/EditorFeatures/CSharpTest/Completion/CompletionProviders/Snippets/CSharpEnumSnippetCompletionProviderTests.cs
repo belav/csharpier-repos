@@ -8,19 +8,23 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
-    public class CSharpEnumSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpEnumSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "enum";
 
         [WpfFact]
         public async Task InsertEnumSnippetInNamespaceTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 namespace Namespace
                 {
                     $$
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 namespace Namespace
                 {
                     enum MyEnum
@@ -28,63 +32,79 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumSnippetInFileScopedNamespaceTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 namespace Namespace;
-                
+
                 $$
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 namespace Namespace;
-                
+
                 enum MyEnum
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumSnippetTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 $$
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 enum MyEnum
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumTopLevelSnippetTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 System.Console.WriteLine();
                 $$
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 System.Console.WriteLine();
                 enum MyEnum
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumSnippetInClassTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class MyClass
                 {
                     $$
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class MyClass
                 {
                     enum MyEnum
@@ -92,18 +112,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumSnippetInRecordTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 record MyRecord
                 {
                     $$
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 record MyRecord
                 {
                     enum MyEnum
@@ -111,18 +135,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumSnippetInStructTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 struct MyStruct
                 {
                     $$
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 struct MyStruct
                 {
                     enum MyEnum
@@ -130,18 +158,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumSnippetInInterfaceTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 interface MyInterface
                 {
                     $$
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 interface MyInterface
                 {
                     enum MyEnum
@@ -149,48 +181,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertEnumSnippetWithModifiersTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 <Workspace>
                     <Project Language="C#" AssemblyName="Assembly1" CommonReferences="true">
                     <Document FilePath="/0/Test0.cs">$$</Document>
                 <AnalyzerConfigDocument FilePath="/.editorconfig">
                 root = true
-                
+
                 [*]
                 # IDE0008: Use explicit type
                 dotnet_style_require_accessibility_modifiers = always
                     </AnalyzerConfigDocument>
                     </Project>
                 </Workspace>
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 public enum MyEnum
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task NoEnumSnippetInEnumTest()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 enum MyEnum
                 {
                     $$
                 }
-                """, ItemToCommit);
+                """,
+                ItemToCommit
+            );
         }
 
         [WpfFact]
         public async Task NoEnumSnippetInMethodTest()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -198,13 +239,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit);
+                """,
+                ItemToCommit
+            );
         }
 
         [WpfFact]
         public async Task NoEnumSnippetInConstructorTest()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 class Program
                 {
                     public Program()
@@ -212,7 +256,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit);
+                """,
+                ItemToCommit
+            );
         }
 
         [WpfTheory]
@@ -232,7 +278,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -265,7 +315,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]

@@ -19,7 +19,7 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
 
 #pragma warning disable CS0618 // Editor team use Obsolete attribute to mark potential changing API
     private readonly ISmartRenameSessionWrapper _smartRenameSession;
-#pragma warning restore CS0618 
+#pragma warning restore CS0618
 
     private readonly IThreadingContext _threadingContext;
 
@@ -29,7 +29,8 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
 
     public event EventHandler<string?>? OnSelectedSuggestedNameChanged;
 
-    public ObservableCollection<string> SuggestedNames { get; } = new ObservableCollection<string>();
+    public ObservableCollection<string> SuggestedNames { get; } =
+        new ObservableCollection<string>();
 
     public bool IsAvailable => _smartRenameSession.IsAvailable;
 
@@ -64,7 +65,8 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
         IThreadingContext threadingContext,
         IAsynchronousOperationListenerProvider listenerProvider,
 #pragma warning disable CS0618 // Editor team use Obsolete attribute to mark potential changing API
-        ISmartRenameSessionWrapper smartRenameSession)
+        ISmartRenameSessionWrapper smartRenameSession
+    )
 #pragma warning restore CS0618
     {
         _threadingContext = threadingContext;
@@ -72,8 +74,12 @@ internal sealed class SmartRenameViewModel : INotifyPropertyChanged, IDisposable
         _smartRenameSession.PropertyChanged += SessionPropertyChanged;
         var listener = listenerProvider.GetListener(FeatureAttribute.SmartRename);
 
-        var listenerToken = listener.BeginAsyncOperation(nameof(_smartRenameSession.GetSuggestionsAsync));
-        _smartRenameSession.GetSuggestionsAsync(_cancellationTokenSource.Token).CompletesAsyncOperation(listenerToken);
+        var listenerToken = listener.BeginAsyncOperation(
+            nameof(_smartRenameSession.GetSuggestionsAsync)
+        );
+        _smartRenameSession
+            .GetSuggestionsAsync(_cancellationTokenSource.Token)
+            .CompletesAsyncOperation(listenerToken);
     }
 
     private void SessionPropertyChanged(object sender, PropertyChangedEventArgs e)

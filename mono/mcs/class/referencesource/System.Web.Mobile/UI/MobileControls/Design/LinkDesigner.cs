@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // <copyright file="LinkDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.Design.MobileControls 
+namespace System.Web.UI.Design.MobileControls
 {
     using System;
     using System.ComponentModel;
@@ -13,10 +13,10 @@ namespace System.Web.UI.Design.MobileControls
     using System.IO;
     using System.Web.UI;
     using System.Web.UI.Design;
+    using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Converters;
     using System.Web.UI.MobileControls;
     using System.Web.UI.MobileControls.Adapters;
-    using System.Web.UI.Design.MobileControls.Adapters;
 
     /// <summary>
     ///    <para>
@@ -25,11 +25,13 @@ namespace System.Web.UI.Design.MobileControls
     ///    </para>
     /// </summary>
     /// <seealso cref='System.Web.UI.MobileControls.Link'/>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class LinkDesigner : MobileControlDesigner
     {
         private System.Web.UI.MobileControls.Link _link;
@@ -51,9 +53,11 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.Link,
-                         "LinkDesigner.Initialize - Invalid Link Control");
-            _link = (System.Web.UI.MobileControls.Link) component;
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.Link,
+                "LinkDesigner.Initialize - Invalid Link Control"
+            );
+            _link = (System.Web.UI.MobileControls.Link)component;
             base.Initialize(component);
         }
 
@@ -76,13 +80,13 @@ namespace System.Web.UI.Design.MobileControls
             DesignerTextWriter tw;
             Control[] children = null;
 
-            String originalText  = _link.Text;
+            String originalText = _link.Text;
             bool blankText = (originalText.Trim().Length == 0);
             bool hasControls = _link.HasControls();
 
             if (blankText)
             {
-                if (hasControls) 
+                if (hasControls)
                 {
                     children = new Control[_link.Controls.Count];
                     _link.Controls.CopyTo(children, 0);
@@ -99,9 +103,9 @@ namespace System.Web.UI.Design.MobileControls
                 if (blankText)
                 {
                     _link.Text = originalText;
-                    if (hasControls) 
+                    if (hasControls)
                     {
-                        foreach (Control c in children) 
+                        foreach (Control c in children)
                         {
                             _link.Controls.Add(c);
                         }
@@ -123,7 +127,7 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name=' e'>
         ///    The <see cref='System.ComponentModel.Design.ComponentChangedEventArgs'/> that provides data about the event.
         /// </param>
-        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs e) 
+        public override void OnComponentChanged(Object sender, ComponentChangedEventArgs e)
         {
             if ((e.Member != null) && e.Member.Name.Equals("NavigateUrl"))
             {
@@ -133,7 +137,12 @@ namespace System.Web.UI.Design.MobileControls
                     e.OldValue.ToString()
                 );
 
-                e = new ComponentChangedEventArgs(e.Component, e.Member, e.OldValue, _link.NavigateUrl);
+                e = new ComponentChangedEventArgs(
+                    e.Component,
+                    e.Member,
+                    e.OldValue,
+                    _link.NavigateUrl
+                );
             }
 
             base.OnComponentChanged(sender, e);

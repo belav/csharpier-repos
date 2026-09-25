@@ -12,10 +12,16 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
 {
     internal abstract partial class AbstractTypeInferenceService : ITypeInferenceService
     {
-        protected abstract AbstractTypeInferrer CreateTypeInferrer(SemanticModel semanticModel, CancellationToken cancellationToken);
+        protected abstract AbstractTypeInferrer CreateTypeInferrer(
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        );
 
         private static ImmutableArray<ITypeSymbol> InferTypeBasedOnNameIfEmpty(
-            SemanticModel semanticModel, ImmutableArray<ITypeSymbol> result, string nameOpt)
+            SemanticModel semanticModel,
+            ImmutableArray<ITypeSymbol> result,
+            string nameOpt
+        )
         {
             if (result.IsEmpty && nameOpt != null)
             {
@@ -26,7 +32,10 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
         }
 
         private static ImmutableArray<TypeInferenceInfo> InferTypeBasedOnNameIfEmpty(
-            SemanticModel semanticModel, ImmutableArray<TypeInferenceInfo> result, string nameOpt)
+            SemanticModel semanticModel,
+            ImmutableArray<TypeInferenceInfo> result,
+            string nameOpt
+        )
         {
             if (result.IsEmpty && nameOpt != null)
             {
@@ -37,15 +46,23 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
             return result;
         }
 
-        private static readonly ImmutableArray<string> s_booleanPrefixes =
-            ImmutableArray.Create("Is", "Has", "Contains", "Supports");
+        private static readonly ImmutableArray<string> s_booleanPrefixes = ImmutableArray.Create(
+            "Is",
+            "Has",
+            "Contains",
+            "Supports"
+        );
 
         private static ImmutableArray<ITypeSymbol> InferTypeBasedOnName(
-            SemanticModel semanticModel, string name)
+            SemanticModel semanticModel,
+            string name
+        )
         {
             var matchesBoolean = MatchesBoolean(name);
             return matchesBoolean
-                ? ImmutableArray.Create<ITypeSymbol>(semanticModel.Compilation.GetSpecialType(SpecialType.System_Boolean))
+                ? ImmutableArray.Create<ITypeSymbol>(
+                    semanticModel.Compilation.GetSpecialType(SpecialType.System_Boolean)
+                )
                 : ImmutableArray<ITypeSymbol>.Empty;
         }
 
@@ -79,8 +96,11 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
         }
 
         public ImmutableArray<ITypeSymbol> InferTypes(
-            SemanticModel semanticModel, int position,
-            string nameOpt, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            int position,
+            string nameOpt,
+            CancellationToken cancellationToken
+        )
         {
             var result = CreateTypeInferrer(semanticModel, cancellationToken)
                 .InferTypes(position)
@@ -91,8 +111,11 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
         }
 
         public ImmutableArray<ITypeSymbol> InferTypes(
-            SemanticModel semanticModel, SyntaxNode expression,
-            string nameOpt, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            string nameOpt,
+            CancellationToken cancellationToken
+        )
         {
             var result = CreateTypeInferrer(semanticModel, cancellationToken)
                 .InferTypes(expression)
@@ -103,18 +126,25 @@ namespace Microsoft.CodeAnalysis.LanguageService.TypeInferenceService
         }
 
         public ImmutableArray<TypeInferenceInfo> GetTypeInferenceInfo(
-            SemanticModel semanticModel, int position,
-            string nameOpt, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            int position,
+            string nameOpt,
+            CancellationToken cancellationToken
+        )
         {
             var result = CreateTypeInferrer(semanticModel, cancellationToken).InferTypes(position);
             return InferTypeBasedOnNameIfEmpty(semanticModel, result, nameOpt);
         }
 
         public ImmutableArray<TypeInferenceInfo> GetTypeInferenceInfo(
-            SemanticModel semanticModel, SyntaxNode expression,
-            string nameOpt, CancellationToken cancellationToken)
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            string nameOpt,
+            CancellationToken cancellationToken
+        )
         {
-            var result = CreateTypeInferrer(semanticModel, cancellationToken).InferTypes(expression);
+            var result = CreateTypeInferrer(semanticModel, cancellationToken)
+                .InferTypes(expression);
             return InferTypeBasedOnNameIfEmpty(semanticModel, result, nameOpt);
         }
     }

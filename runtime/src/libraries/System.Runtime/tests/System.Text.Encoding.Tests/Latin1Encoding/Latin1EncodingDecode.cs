@@ -19,7 +19,12 @@ namespace System.Text.Tests
                 yield return new object[] { new byte[] { 97, b, 97 }, 0, 3 };
             }
 
-            yield return new object[] { new byte[] { 0x01, 0x09, 0x10, 0x3F, 0x5C, 0x9F, 0xCB, 0xE7, 0xFF }, 0, 9 };
+            yield return new object[]
+            {
+                new byte[] { 0x01, 0x09, 0x10, 0x3F, 0x5C, 0x9F, 0xCB, 0xE7, 0xFF },
+                0,
+                9,
+            };
             yield return new object[] { new byte[] { 0x60, 0x7E, 0xE3 }, 0, 3 };
 
             // Empty string
@@ -36,7 +41,11 @@ namespace System.Text.Tests
             EncodingHelpers.Decode(Encoding.GetEncoding("latin1"), bytes, index, count, expected);
 
             // Decoding valid bytes should not throw with a DecoderExceptionFallback
-            Encoding exceptionEncoding = Encoding.GetEncoding("latin1", new EncoderReplacementFallback("?"), new DecoderExceptionFallback());
+            Encoding exceptionEncoding = Encoding.GetEncoding(
+                "latin1",
+                new EncoderReplacementFallback("?"),
+                new DecoderExceptionFallback()
+            );
             EncodingHelpers.Decode(exceptionEncoding, bytes, index, count, expected);
         }
 

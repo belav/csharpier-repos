@@ -48,10 +48,17 @@ namespace System.Web.WebPages.Test
 
             var expected = new DisplayInfo("Foo", displayMode3.Object);
             Func<string, bool> fileExists = path => true;
-            displayMode3.Setup(d => d.GetDisplayInfo(httpContext.Object, "path", fileExists)).Returns(expected);
+            displayMode3
+                .Setup(d => d.GetDisplayInfo(httpContext.Object, "path", fileExists))
+                .Returns(expected);
 
             // Act
-            DisplayInfo result = displayModeProvider.GetDisplayInfoForVirtualPath("path", httpContext.Object, fileExists, currentDisplayMode: null);
+            DisplayInfo result = displayModeProvider.GetDisplayInfoForVirtualPath(
+                "path",
+                httpContext.Object,
+                fileExists,
+                currentDisplayMode: null
+            );
 
             // Assert
             Assert.Same(expected, result);
@@ -79,11 +86,18 @@ namespace System.Web.WebPages.Test
 
             var displayInfo = new DisplayInfo("Foo", displayMode3.Object);
             Func<string, bool> fileExists = path => true;
-            displayMode3.Setup(d => d.GetDisplayInfo(httpContext.Object, "path", fileExists)).Returns(displayInfo);
+            displayMode3
+                .Setup(d => d.GetDisplayInfo(httpContext.Object, "path", fileExists))
+                .Returns(displayInfo);
 
             // Act
-            DisplayInfo result = displayModeProvider.GetDisplayInfoForVirtualPath("path", httpContext.Object, fileExists, currentDisplayMode: displayMode2.Object,
-                requireConsistentDisplayMode: true);
+            DisplayInfo result = displayModeProvider.GetDisplayInfoForVirtualPath(
+                "path",
+                httpContext.Object,
+                fileExists,
+                currentDisplayMode: displayMode2.Object,
+                requireConsistentDisplayMode: true
+            );
 
             // Assert
             Assert.Same(displayInfo, result);
@@ -110,11 +124,18 @@ namespace System.Web.WebPages.Test
 
             var displayInfo = new DisplayInfo("Foo", displayMode3.Object);
             Func<string, bool> fileExists = path => true;
-            displayMode1.Setup(d => d.GetDisplayInfo(httpContext.Object, "path", fileExists)).Returns(displayInfo);
+            displayMode1
+                .Setup(d => d.GetDisplayInfo(httpContext.Object, "path", fileExists))
+                .Returns(displayInfo);
 
             // Act
-            DisplayInfo result = displayModeProvider.GetDisplayInfoForVirtualPath("path", httpContext.Object, fileExists, currentDisplayMode: displayMode1.Object,
-                requireConsistentDisplayMode: false);
+            DisplayInfo result = displayModeProvider.GetDisplayInfoForVirtualPath(
+                "path",
+                httpContext.Object,
+                fileExists,
+                currentDisplayMode: displayMode1.Object,
+                requireConsistentDisplayMode: false
+            );
 
             // Assert
             Assert.Same(displayInfo, result);
@@ -140,7 +161,12 @@ namespace System.Web.WebPages.Test
             displayModeProvider.Modes.Add(displayMode3.Object);
 
             // Act
-            DisplayInfo displayModeForRequest = displayModeProvider.GetDisplayInfoForVirtualPath("path", httpContext.Object, path => false, currentDisplayMode: null);
+            DisplayInfo displayModeForRequest = displayModeProvider.GetDisplayInfoForVirtualPath(
+                "path",
+                httpContext.Object,
+                path => false,
+                currentDisplayMode: null
+            );
 
             // Assert
             Assert.Null(displayModeForRequest);
@@ -166,7 +192,13 @@ namespace System.Web.WebPages.Test
             displayModeProvider.Modes.Add(displayMode3.Object);
 
             // Act
-            var availableDisplayModes = displayModeProvider.GetAvailableDisplayModesForContext(httpContext.Object, displayMode2.Object, requireConsistentDisplayMode: true).ToList();
+            var availableDisplayModes = displayModeProvider
+                .GetAvailableDisplayModesForContext(
+                    httpContext.Object,
+                    displayMode2.Object,
+                    requireConsistentDisplayMode: true
+                )
+                .ToList();
 
             // Assert
             var availableDisplayMode = Assert.Single(availableDisplayModes);
@@ -194,7 +226,13 @@ namespace System.Web.WebPages.Test
             displayModeProvider.Modes.Add(displayMode3.Object);
 
             // Act
-            var availableDisplayModes = displayModeProvider.GetAvailableDisplayModesForContext(httpContext.Object, displayMode2.Object, requireConsistentDisplayMode: false).ToList();
+            var availableDisplayModes = displayModeProvider
+                .GetAvailableDisplayModesForContext(
+                    httpContext.Object,
+                    displayMode2.Object,
+                    requireConsistentDisplayMode: false
+                )
+                .ToList();
 
             // Assert
             Assert.Equal(2, availableDisplayModes.Count);
@@ -222,7 +260,13 @@ namespace System.Web.WebPages.Test
             displayModeProvider.Modes.Add(displayMode3.Object);
 
             // Act
-            var availableDisplayModes = displayModeProvider.GetAvailableDisplayModesForContext(httpContext.Object, displayMode1.Object, requireConsistentDisplayMode: false).ToList();
+            var availableDisplayModes = displayModeProvider
+                .GetAvailableDisplayModesForContext(
+                    httpContext.Object,
+                    displayMode1.Object,
+                    requireConsistentDisplayMode: false
+                )
+                .ToList();
 
             // Assert
             IDisplayMode availableDisplayMode = Assert.Single(availableDisplayModes);

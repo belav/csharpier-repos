@@ -14,32 +14,27 @@ namespace System.ServiceModel.Security
     class TransportSecurityProtocolFactory : SecurityProtocolFactory
     {
         public TransportSecurityProtocolFactory()
-            : base()
-        {
-        }
+            : base() { }
 
         internal TransportSecurityProtocolFactory(TransportSecurityProtocolFactory factory)
-            : base(factory)
-        {
-        }
+            : base(factory) { }
 
         public override bool SupportsDuplex
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool SupportsReplayDetection
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        protected override SecurityProtocol OnCreateSecurityProtocol(EndpointAddress target, Uri via, object listenerSecurityState, TimeSpan timeout)
+        protected override SecurityProtocol OnCreateSecurityProtocol(
+            EndpointAddress target,
+            Uri via,
+            object listenerSecurityState,
+            TimeSpan timeout
+        )
         {
             return new TransportSecurityProtocol(this, target, via);
         }

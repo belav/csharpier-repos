@@ -2,14 +2,10 @@
 
 public class A
 {
-	public virtual void Foo<T> ()
-	{
-	}
+    public virtual void Foo<T>() { }
 }
 
 public class B : A
 {
-	public override void Foo<T> ()
-	{
-	}
+    public override void Foo<T>() { }
 }

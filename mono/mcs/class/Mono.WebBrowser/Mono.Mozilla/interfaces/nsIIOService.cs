@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,80 +26,89 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("bddeda3f-9020-4d12-8c70-984ee9f7935e")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIIOService
+    {
+        #region nsIIOService
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getProtocolHandler(
+            [MarshalAs(UnmanagedType.LPStr)] string aScheme,
+            [MarshalAs(UnmanagedType.Interface)] out nsIProtocolHandler ret
+        );
 
-	[Guid ("bddeda3f-9020-4d12-8c70-984ee9f7935e")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIIOService {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getProtocolFlags([MarshalAs(UnmanagedType.LPStr)] string aScheme, out uint ret);
 
-#region nsIIOService
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getProtocolHandler (
-				[MarshalAs (UnmanagedType.LPStr)]   string aScheme,[MarshalAs (UnmanagedType.Interface)]  out nsIProtocolHandler ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int newURI(
+            /*AUTF8String*/HandleRef aSpec,
+            [MarshalAs(UnmanagedType.LPStr)] string aOriginCharset,
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aBaseURI,
+            [MarshalAs(UnmanagedType.Interface)] out nsIURI ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getProtocolFlags (
-				[MarshalAs (UnmanagedType.LPStr)]   string aScheme, out uint ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int newFileURI(
+            [MarshalAs(UnmanagedType.Interface)] nsIFile aFile,
+            [MarshalAs(UnmanagedType.Interface)] out nsIURI ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int newURI (
-				   /*AUTF8String*/ HandleRef aSpec,
-				[MarshalAs (UnmanagedType.LPStr)]   string aOriginCharset,
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aBaseURI,[MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int newChannelFromURI(
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aURI,
+            [MarshalAs(UnmanagedType.Interface)] out nsIChannel ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int newFileURI (
-				[MarshalAs (UnmanagedType.Interface)]   nsIFile aFile,[MarshalAs (UnmanagedType.Interface)]  out nsIURI ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int newChannel(
+            /*AUTF8String*/HandleRef aSpec,
+            [MarshalAs(UnmanagedType.LPStr)] string aOriginCharset,
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aBaseURI,
+            [MarshalAs(UnmanagedType.Interface)] out nsIChannel ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int newChannelFromURI (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aURI,[MarshalAs (UnmanagedType.Interface)]  out nsIChannel ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getOffline(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int newChannel (
-				   /*AUTF8String*/ HandleRef aSpec,
-				[MarshalAs (UnmanagedType.LPStr)]   string aOriginCharset,
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aBaseURI,[MarshalAs (UnmanagedType.Interface)]  out nsIChannel ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setOffline(bool value);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getOffline ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int allowPort(int aPort, [MarshalAs(UnmanagedType.LPStr)] string aScheme, out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setOffline ( bool value);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int extractScheme(
+            /*AUTF8String*/HandleRef urlString, /*ACString*/
+            HandleRef ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int allowPort (
-				   int aPort,
-				[MarshalAs (UnmanagedType.LPStr)]   string aScheme, out bool ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int extractScheme (
-				   /*AUTF8String*/ HandleRef urlString,  /*ACString*/ HandleRef ret);
-
-#endregion
-	}
-
-
-	internal class nsIOService {
-		public static nsIIOService GetProxy (Mono.WebBrowser.IWebBrowser control, nsIIOService obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIIOService).GUID, obj);
-			return o as nsIIOService;
-		}
-	}
+    internal class nsIOService
+    {
+        public static nsIIOService GetProxy(Mono.WebBrowser.IWebBrowser control, nsIIOService obj)
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIIOService).GUID, obj);
+            return o as nsIIOService;
+        }
+    }
 }

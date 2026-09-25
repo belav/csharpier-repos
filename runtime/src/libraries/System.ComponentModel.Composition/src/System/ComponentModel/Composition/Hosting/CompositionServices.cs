@@ -13,14 +13,15 @@ namespace System.ComponentModel.Composition.Hosting
 {
     internal static class CompositionServices
     {
-        internal static readonly Type InheritedExportAttributeType = typeof(InheritedExportAttribute);
+        internal static readonly Type InheritedExportAttributeType =
+            typeof(InheritedExportAttribute);
         internal static readonly Type ExportAttributeType = typeof(ExportAttribute);
         internal static readonly Type AttributeType = typeof(Attribute);
         internal static readonly Type ObjectType = typeof(object);
 
         private static readonly string[] reservedMetadataNames = new string[]
         {
-            CompositionConstants.PartCreationPolicyMetadataName
+            CompositionConstants.PartCreationPolicyMetadataName,
         };
 
         internal static Type GetDefaultTypeFromMember(this MemberInfo member)
@@ -46,7 +47,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        internal static Type AdjustSpecifiedTypeIdentityType(this Type specifiedContractType, MemberInfo member)
+        internal static Type AdjustSpecifiedTypeIdentityType(
+            this Type specifiedContractType,
+            MemberInfo member
+        )
         {
             if (member.MemberType == MemberTypes.Method)
             {
@@ -54,19 +58,31 @@ namespace System.ComponentModel.Composition.Hosting
             }
             else
             {
-                return specifiedContractType.AdjustSpecifiedTypeIdentityType(member.GetDefaultTypeFromMember());
+                return specifiedContractType.AdjustSpecifiedTypeIdentityType(
+                    member.GetDefaultTypeFromMember()
+                );
             }
         }
 
-        internal static Type AdjustSpecifiedTypeIdentityType(this Type specifiedContractType, Type? memberType)
+        internal static Type AdjustSpecifiedTypeIdentityType(
+            this Type specifiedContractType,
+            Type? memberType
+        )
         {
             ArgumentNullException.ThrowIfNull(specifiedContractType);
 
-            if ((memberType != null) && memberType.IsGenericType && specifiedContractType.IsGenericType)
+            if (
+                (memberType != null)
+                && memberType.IsGenericType
+                && specifiedContractType.IsGenericType
+            )
             {
                 // if the member type is closed and the specified contract type is open and they have exatly the same number of parameters
                 // we will close the specified contract type
-                if (specifiedContractType.ContainsGenericParameters && !memberType.ContainsGenericParameters)
+                if (
+                    specifiedContractType.ContainsGenericParameters
+                    && !memberType.ContainsGenericParameters
+                )
                 {
                     var typeGenericArguments = memberType.GetGenericArguments();
                     var metadataTypeGenericArguments = specifiedContractType.GetGenericArguments();
@@ -77,12 +93,19 @@ namespace System.ComponentModel.Composition.Hosting
                     }
                 }
                 // if both member type and the contract type are open generic types, make sure that their parameters are ordered the same way
-                else if (specifiedContractType.ContainsGenericParameters && memberType.ContainsGenericParameters)
+                else if (
+                    specifiedContractType.ContainsGenericParameters
+                    && memberType.ContainsGenericParameters
+                )
                 {
                     var memberGenericParameters = memberType.GetPureGenericParameters();
-                    if (specifiedContractType.GetPureGenericArity() == memberGenericParameters.Count)
+                    if (
+                        specifiedContractType.GetPureGenericArity() == memberGenericParameters.Count
+                    )
                     {
-                        return specifiedContractType.GetGenericTypeDefinition().MakeGenericType(memberGenericParameters.ToArray());
+                        return specifiedContractType
+                            .GetGenericTypeDefinition()
+                            .MakeGenericType(memberGenericParameters.ToArray());
                     }
                 }
             }
@@ -92,10 +115,19 @@ namespace System.ComponentModel.Composition.Hosting
 
         private static string AdjustTypeIdentity(string originalTypeIdentity, Type typeIdentityType)
         {
-            return GenericServices.GetGenericName(originalTypeIdentity, GenericServices.GetGenericParametersOrder(typeIdentityType), GenericServices.GetPureGenericArity(typeIdentityType));
+            return GenericServices.GetGenericName(
+                originalTypeIdentity,
+                GenericServices.GetGenericParametersOrder(typeIdentityType),
+                GenericServices.GetPureGenericArity(typeIdentityType)
+            );
         }
 
-        internal static void GetContractInfoFromExport(this MemberInfo member, ExportAttribute export, out Type? typeIdentityType, out string contractName)
+        internal static void GetContractInfoFromExport(
+            this MemberInfo member,
+            ExportAttribute export,
+            out Type? typeIdentityType,
+            out string contractName
+        )
         {
             typeIdentityType = member.GetTypeIdentityTypeFromExport(export);
             if (!string.IsNullOrEmpty(export.ContractName))
@@ -108,7 +140,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        internal static string GetTypeIdentityFromExport(this MemberInfo member, Type? typeIdentityType)
+        internal static string GetTypeIdentityFromExport(
+            this MemberInfo member,
+            Type? typeIdentityType
+        )
         {
             if (typeIdentityType != null)
             {
@@ -130,7 +165,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private static Type? GetTypeIdentityTypeFromExport(this MemberInfo member, ExportAttribute export)
+        private static Type? GetTypeIdentityTypeFromExport(
+            this MemberInfo member,
+            ExportAttribute export
+        )
         {
             if (export.ContractType != null)
             {
@@ -138,7 +176,9 @@ namespace System.ComponentModel.Composition.Hosting
             }
             else
             {
-                return (member.MemberType != MemberTypes.Method) ? member.GetDefaultTypeFromMember() : null;
+                return (member.MemberType != MemberTypes.Method)
+                    ? member.GetDefaultTypeFromMember()
+                    : null;
             }
         }
 
@@ -147,7 +187,10 @@ namespace System.ComponentModel.Composition.Hosting
             return string.IsNullOrEmpty(export.ContractName);
         }
 
-        internal static Type GetContractTypeFromImport(this IAttributedImport import, ImportType importType)
+        internal static Type GetContractTypeFromImport(
+            this IAttributedImport import,
+            ImportType importType
+        )
         {
             if (import.ContractType != null)
             {
@@ -157,7 +200,10 @@ namespace System.ComponentModel.Composition.Hosting
             return importType.ContractType;
         }
 
-        internal static string GetContractNameFromImport(this IAttributedImport import, ImportType importType)
+        internal static string GetContractNameFromImport(
+            this IAttributedImport import,
+            ImportType importType
+        )
         {
             if (!string.IsNullOrEmpty(import.ContractName))
             {
@@ -169,7 +215,10 @@ namespace System.ComponentModel.Composition.Hosting
             return AttributedModelServices.GetContractName(contractType);
         }
 
-        internal static string? GetTypeIdentityFromImport(this IAttributedImport import, ImportType importType)
+        internal static string? GetTypeIdentityFromImport(
+            this IAttributedImport import,
+            ImportType importType
+        )
         {
             Type contractType = import.GetContractTypeFromImport(importType);
 
@@ -182,7 +231,10 @@ namespace System.ComponentModel.Composition.Hosting
             return AttributedModelServices.GetTypeIdentity(contractType);
         }
 
-        internal static IDictionary<string, object?> GetPartMetadataForType(this Type type, CreationPolicy creationPolicy)
+        internal static IDictionary<string, object?> GetPartMetadataForType(
+            this Type type,
+            CreationPolicy creationPolicy
+        )
         {
             var dictionary = new Dictionary<string, object?>(StringComparers.MetadataKeyNames);
 
@@ -191,10 +243,16 @@ namespace System.ComponentModel.Composition.Hosting
                 dictionary.Add(CompositionConstants.PartCreationPolicyMetadataName, creationPolicy);
             }
 
-            foreach (PartMetadataAttribute partMetadata in type.GetAttributes<PartMetadataAttribute>())
+            foreach (
+                PartMetadataAttribute partMetadata in type.GetAttributes<PartMetadataAttribute>()
+            )
             {
-                if (reservedMetadataNames.Contains(partMetadata.Name, StringComparers.MetadataKeyNames)
-                    || dictionary.ContainsKey(partMetadata.Name))
+                if (
+                    reservedMetadataNames.Contains(
+                        partMetadata.Name,
+                        StringComparers.MetadataKeyNames
+                    ) || dictionary.ContainsKey(partMetadata.Name)
+                )
                 {
                     // Perhaps we should log an error here so that people know this value is being ignored.
                     continue;
@@ -211,12 +269,16 @@ namespace System.ComponentModel.Composition.Hosting
 
                 // Add arity
                 Type[] genericArguments = type.GetGenericArguments();
-                dictionary.Add(CompositionConstants.GenericPartArityMetadataName, genericArguments.Length);
+                dictionary.Add(
+                    CompositionConstants.GenericPartArityMetadataName,
+                    genericArguments.Length
+                );
 
                 // add constraints
                 bool hasConstraints = false;
                 object?[] genericParameterConstraints = new object?[genericArguments.Length];
-                GenericParameterAttributes[] genericParameterAttributes = new GenericParameterAttributes[genericArguments.Length];
+                GenericParameterAttributes[] genericParameterAttributes =
+                    new GenericParameterAttributes[genericArguments.Length];
                 for (int i = 0; i < genericArguments.Length; i++)
                 {
                     Type genericArgument = genericArguments[i];
@@ -227,7 +289,8 @@ namespace System.ComponentModel.Composition.Hosting
                         constraints = null;
                     }
 
-                    GenericParameterAttributes attributes = genericArgument.GenericParameterAttributes;
+                    GenericParameterAttributes attributes =
+                        genericArgument.GenericParameterAttributes;
 
                     if ((constraints != null) || (attributes != GenericParameterAttributes.None))
                     {
@@ -239,8 +302,14 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (hasConstraints)
                 {
-                    dictionary.Add(CompositionConstants.GenericParameterConstraintsMetadataName, genericParameterConstraints);
-                    dictionary.Add(CompositionConstants.GenericParameterAttributesMetadataName, genericParameterAttributes);
+                    dictionary.Add(
+                        CompositionConstants.GenericParameterConstraintsMetadataName,
+                        genericParameterConstraints
+                    );
+                    dictionary.Add(
+                        CompositionConstants.GenericParameterAttributesMetadataName,
+                        genericParameterAttributes
+                    );
                 }
             }
 
@@ -254,7 +323,10 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        internal static void TryExportMetadataForMember(this MemberInfo member, out IDictionary<string, object?> dictionary)
+        internal static void TryExportMetadataForMember(
+            this MemberInfo member,
+            out IDictionary<string, object?> dictionary
+        )
         {
             dictionary = new Dictionary<string, object?>();
 
@@ -264,26 +336,50 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (provider != null)
                 {
-                    if (reservedMetadataNames.Contains(provider.Name, StringComparers.MetadataKeyNames))
+                    if (
+                        reservedMetadataNames.Contains(
+                            provider.Name,
+                            StringComparers.MetadataKeyNames
+                        )
+                    )
                     {
-                        throw ExceptionBuilder.CreateDiscoveryException(SR.Discovery_ReservedMetadataNameUsed, member.GetDisplayName(), provider.Name);
+                        throw ExceptionBuilder.CreateDiscoveryException(
+                            SR.Discovery_ReservedMetadataNameUsed,
+                            member.GetDisplayName(),
+                            provider.Name
+                        );
                     }
 
                     // we pass "null" for valueType which would make it inferred. We don;t have additional type information when metadata
                     // goes through the ExportMetadataAttribute path
-                    if (!dictionary.TryContributeMetadataValue(provider.Name, provider.Value, null, provider.IsMultiple))
+                    if (
+                        !dictionary.TryContributeMetadataValue(
+                            provider.Name,
+                            provider.Value,
+                            null,
+                            provider.IsMultiple
+                        )
+                    )
                     {
-                        throw ExceptionBuilder.CreateDiscoveryException(SR.Discovery_DuplicateMetadataNameValues, member.GetDisplayName(), provider.Name);
+                        throw ExceptionBuilder.CreateDiscoveryException(
+                            SR.Discovery_DuplicateMetadataNameValues,
+                            member.GetDisplayName(),
+                            provider.Name
+                        );
                     }
                 }
                 else
                 {
                     Type attrType = attr.GetType();
                     // Perf optimization, relies on short circuit evaluation, often a property attribute is an ExportAttribute
-                    if ((attrType != CompositionServices.ExportAttributeType) && attrType.IsAttributeDefined<MetadataAttributeAttribute>(true))
+                    if (
+                        (attrType != CompositionServices.ExportAttributeType)
+                        && attrType.IsAttributeDefined<MetadataAttributeAttribute>(true)
+                    )
                     {
                         bool allowsMultiple = false;
-                        AttributeUsageAttribute? usage = attrType.GetFirstAttribute<AttributeUsageAttribute>(true);
+                        AttributeUsageAttribute? usage =
+                            attrType.GetFirstAttribute<AttributeUsageAttribute>(true);
 
                         if (usage != null)
                         {
@@ -292,27 +388,54 @@ namespace System.ComponentModel.Composition.Hosting
 
                         foreach (PropertyInfo pi in attrType.GetProperties())
                         {
-                            if (pi.DeclaringType == CompositionServices.ExportAttributeType || pi.DeclaringType == CompositionServices.AttributeType)
+                            if (
+                                pi.DeclaringType == CompositionServices.ExportAttributeType
+                                || pi.DeclaringType == CompositionServices.AttributeType
+                            )
                             {
                                 // Don't contribute metadata properies from the base attribute types.
                                 continue;
                             }
 
-                            if (reservedMetadataNames.Contains(pi.Name, StringComparers.MetadataKeyNames))
+                            if (
+                                reservedMetadataNames.Contains(
+                                    pi.Name,
+                                    StringComparers.MetadataKeyNames
+                                )
+                            )
                             {
-                                throw ExceptionBuilder.CreateDiscoveryException(SR.Discovery_ReservedMetadataNameUsed, pi.GetDisplayName(), pi.Name);
+                                throw ExceptionBuilder.CreateDiscoveryException(
+                                    SR.Discovery_ReservedMetadataNameUsed,
+                                    pi.GetDisplayName(),
+                                    pi.Name
+                                );
                             }
 
                             object? value = pi.GetValue(attr, null);
 
                             if (value != null && !IsValidAttributeType(value.GetType()))
                             {
-                                throw ExceptionBuilder.CreateDiscoveryException(SR.Discovery_MetadataContainsValueWithInvalidType, pi.GetDisplayName(), value.GetType().GetDisplayName());
+                                throw ExceptionBuilder.CreateDiscoveryException(
+                                    SR.Discovery_MetadataContainsValueWithInvalidType,
+                                    pi.GetDisplayName(),
+                                    value.GetType().GetDisplayName()
+                                );
                             }
 
-                            if (!dictionary.TryContributeMetadataValue(pi.Name, value, pi.PropertyType, allowsMultiple))
+                            if (
+                                !dictionary.TryContributeMetadataValue(
+                                    pi.Name,
+                                    value,
+                                    pi.PropertyType,
+                                    allowsMultiple
+                                )
+                            )
                             {
-                                throw ExceptionBuilder.CreateDiscoveryException(SR.Discovery_DuplicateMetadataNameValues, member.GetDisplayName(), pi.Name);
+                                throw ExceptionBuilder.CreateDiscoveryException(
+                                    SR.Discovery_DuplicateMetadataNameValues,
+                                    member.GetDisplayName(),
+                                    pi.Name
+                                );
                             }
                         }
                     }
@@ -332,7 +455,13 @@ namespace System.ComponentModel.Composition.Hosting
             return;
         }
 
-        private static bool TryContributeMetadataValue(this IDictionary<string, object?> dictionary, string name, object? value, Type? valueType, bool allowsMultiple)
+        private static bool TryContributeMetadataValue(
+            this IDictionary<string, object?> dictionary,
+            string name,
+            object? value,
+            Type? valueType,
+            bool allowsMultiple
+        )
         {
             if (!dictionary.TryGetValue(name, out object? metadataValue))
             {
@@ -466,33 +595,47 @@ namespace System.ComponentModel.Composition.Hosting
         //    return result;
         //}
 
-        internal static IEnumerable<KeyValuePair<string, Type>> GetRequiredMetadata(Type? metadataViewType)
+        internal static IEnumerable<KeyValuePair<string, Type>> GetRequiredMetadata(
+            Type? metadataViewType
+        )
         {
-            if ((metadataViewType == null) ||
-                ExportServices.IsDefaultMetadataViewType(metadataViewType) ||
-                ExportServices.IsDictionaryConstructorViewType(metadataViewType) ||
-                !metadataViewType.IsInterface)
+            if (
+                (metadataViewType == null)
+                || ExportServices.IsDefaultMetadataViewType(metadataViewType)
+                || ExportServices.IsDictionaryConstructorViewType(metadataViewType)
+                || !metadataViewType.IsInterface
+            )
             {
                 return Enumerable.Empty<KeyValuePair<string, Type>>();
             }
 
             // A metadata view is required to be an Interface, and therefore only properties are allowed
-            List<PropertyInfo> properties = metadataViewType.GetAllProperties().
-                Where(property => property.GetFirstAttribute<DefaultValueAttribute>() == null).
-                ToList();
+            List<PropertyInfo> properties = metadataViewType
+                .GetAllProperties()
+                .Where(property => property.GetFirstAttribute<DefaultValueAttribute>() == null)
+                .ToList();
 
             // NOTE : this is a carefully found balance between eager and delay-evaluation - the properties are filtered once and upfront
             // whereas the key/Type pairs are created every time. The latter is fine as KVPs are structs and as such copied on access regardless.
             // This also allows us to avoid creation of List<KVP> which - at least according to FxCop - leads to isues with NGEN
-            return properties.Select(property => new KeyValuePair<string, Type>(property.Name, property.PropertyType));
+            return properties.Select(property => new KeyValuePair<string, Type>(
+                property.Name,
+                property.PropertyType
+            ));
         }
 
-        internal static IDictionary<string, object?> GetImportMetadata(ImportType importType, IAttributedImport attributedImport)
+        internal static IDictionary<string, object?> GetImportMetadata(
+            ImportType importType,
+            IAttributedImport attributedImport
+        )
         {
             return GetImportMetadata(importType.ContractType, attributedImport);
         }
 
-        internal static IDictionary<string, object?> GetImportMetadata(Type type, IAttributedImport? attributedImport)
+        internal static IDictionary<string, object?> GetImportMetadata(
+            Type type,
+            IAttributedImport? attributedImport
+        )
         {
             Dictionary<string, object?>? metadata = null;
 
@@ -503,12 +646,15 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (type.ContainsGenericParameters)
                 {
-                    metadata[CompositionConstants.GenericImportParametersOrderMetadataName] = GenericServices.GetGenericParametersOrder(type);
+                    metadata[CompositionConstants.GenericImportParametersOrderMetadataName] =
+                        GenericServices.GetGenericParametersOrder(type);
                 }
                 else
                 {
-                    metadata[CompositionConstants.GenericContractMetadataName] = ContractNameServices.GetTypeIdentity(type.GetGenericTypeDefinition());
-                    metadata[CompositionConstants.GenericParametersMetadataName] = type.GetGenericArguments();
+                    metadata[CompositionConstants.GenericContractMetadataName] =
+                        ContractNameServices.GetTypeIdentity(type.GetGenericTypeDefinition());
+                    metadata[CompositionConstants.GenericParametersMetadataName] =
+                        type.GetGenericArguments();
                 }
             }
 
@@ -529,7 +675,11 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        internal static object? GetExportedValueFromComposedPart(ImportEngine? engine, ComposablePart part, ExportDefinition definition)
+        internal static object? GetExportedValueFromComposedPart(
+            ImportEngine? engine,
+            ComposablePart part,
+            ExportDefinition definition
+        )
         {
             if (engine != null)
             {
@@ -571,7 +721,11 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        internal static CompositionResult TryFire<TEventArgs>(EventHandler<TEventArgs> _delegate, object? sender, TEventArgs e)
+        internal static CompositionResult TryFire<TEventArgs>(
+            EventHandler<TEventArgs> _delegate,
+            object? sender,
+            TEventArgs e
+        )
             where TEventArgs : EventArgs
         {
             CompositionResult result = CompositionResult.SucceededResult;
@@ -607,7 +761,8 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         internal static bool IsAtMostOne(this ImportCardinality cardinality)
         {
-            return cardinality == ImportCardinality.ZeroOrOne || cardinality == ImportCardinality.ExactlyOne;
+            return cardinality == ImportCardinality.ZeroOrOne
+                || cardinality == ImportCardinality.ExactlyOne;
         }
 
         private static bool IsValidAttributeType(Type type)
@@ -644,9 +799,12 @@ namespace System.ComponentModel.Composition.Hosting
             }
 
             // Single-dimensional arrays of the above types.
-            if (arrayAllowed && type.IsArray &&
-                type.GetArrayRank() == 1 &&
-                IsValidAttributeType(type.GetElementType()!, false))
+            if (
+                arrayAllowed
+                && type.IsArray
+                && type.GetArrayRank() == 1
+                && IsValidAttributeType(type.GetElementType()!, false)
+            )
             {
                 return true;
             }

@@ -17,16 +17,25 @@ public struct ValueOrError<TValue>
     private ValueOrError(TValue? value = default, Result? error = default)
     {
         if (value != null && error != null)
-            throw new ArgumentException($"Both {nameof(value)}, and {nameof(error)} cannot be non-null");
+            throw new ArgumentException(
+                $"Both {nameof(value)}, and {nameof(error)} cannot be non-null"
+            );
 
         if (value == null && error == null)
-            throw new ArgumentException($"Both {nameof(value)}, and {nameof(error)} cannot be null");
+            throw new ArgumentException(
+                $"Both {nameof(value)}, and {nameof(error)} cannot be null"
+            );
 
         Value = value;
         Error = error;
     }
 
-    public static ValueOrError<TValue> WithValue(TValue value) => new ValueOrError<TValue>(value: value);
-    public static ValueOrError<TValue> WithError(Result err) => new ValueOrError<TValue>(error: err);
-    public static ValueOrError<TValue> WithError(string msg) => new ValueOrError<TValue>(error: Result.Err(msg));
+    public static ValueOrError<TValue> WithValue(TValue value) =>
+        new ValueOrError<TValue>(value: value);
+
+    public static ValueOrError<TValue> WithError(Result err) =>
+        new ValueOrError<TValue>(error: err);
+
+    public static ValueOrError<TValue> WithError(string msg) =>
+        new ValueOrError<TValue>(error: Result.Err(msg));
 }

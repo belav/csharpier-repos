@@ -24,7 +24,10 @@ namespace BoundTreeGenerator
 
             if (args.Length != 3)
             {
-                Console.Error.WriteLine("Usage: \"{0} <language> <input> <output>\", where <language> is \"VB\" or \"CSharp\"", Path.GetFileNameWithoutExtension(args[0]));
+                Console.Error.WriteLine(
+                    "Usage: \"{0} <language> <input> <output>\", where <language> is \"VB\" or \"CSharp\"",
+                    Path.GetFileNameWithoutExtension(args[0])
+                );
                 return 1;
             }
 
@@ -48,7 +51,12 @@ namespace BoundTreeGenerator
 
             Tree tree;
             var serializer = new XmlSerializer(typeof(Tree));
-            using (var reader = XmlReader.Create(infilename, new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }))
+            using (
+                var reader = XmlReader.Create(
+                    infilename,
+                    new XmlReaderSettings { DtdProcessing = DtdProcessing.Prohibit }
+                )
+            )
             {
                 tree = (Tree)serializer.Deserialize(reader);
             }
@@ -59,7 +67,12 @@ namespace BoundTreeGenerator
                 return 1;
             }
 
-            using (var outfile = new StreamWriter(File.Open(outfilename, FileMode.Create), Encoding.UTF8))
+            using (
+                var outfile = new StreamWriter(
+                    File.Open(outfilename, FileMode.Create),
+                    Encoding.UTF8
+                )
+            )
             {
                 BoundNodeClassWriter.Write(outfile, tree, targetLanguage);
             }
@@ -87,8 +100,10 @@ namespace BoundTreeGenerator
                 {
                     if (field.Type == "Conversion")
                     {
-                        Console.WriteLine($"Error: {type.Name} has a field {field.Name} of type 'Conversion'. Types that are not BoundConversions" +
-                                                 " should represent conversions as actual BoundConversion nodes, with placeholders if necessary.");
+                        Console.WriteLine(
+                            $"Error: {type.Name} has a field {field.Name} of type 'Conversion'. Types that are not BoundConversions"
+                                + " should represent conversions as actual BoundConversion nodes, with placeholders if necessary."
+                        );
                         success = false;
                     }
                 }

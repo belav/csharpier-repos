@@ -19,11 +19,14 @@ namespace System.Runtime.InteropServices
         private static extern IntPtr _InternalAlloc(object? value, GCHandleType type);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static IntPtr InternalAllocWithGCTransition(object? value, GCHandleType type)
-            => _InternalAllocWithGCTransition(ObjectHandleOnStack.Create(ref value), type);
+        private static IntPtr InternalAllocWithGCTransition(object? value, GCHandleType type) =>
+            _InternalAllocWithGCTransition(ObjectHandleOnStack.Create(ref value), type);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCHandle_InternalAllocWithGCTransition")]
-        private static partial IntPtr _InternalAllocWithGCTransition(ObjectHandleOnStack value, GCHandleType type);
+        private static partial IntPtr _InternalAllocWithGCTransition(
+            ObjectHandleOnStack value,
+            GCHandleType type
+        );
 
         internal static void InternalFree(IntPtr handle)
         {
@@ -35,8 +38,8 @@ namespace System.Runtime.InteropServices
         private static extern bool _InternalFree(IntPtr handle);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void InternalFreeWithGCTransition(IntPtr dependentHandle)
-            => _InternalFreeWithGCTransition(dependentHandle);
+        private static void InternalFreeWithGCTransition(IntPtr dependentHandle) =>
+            _InternalFreeWithGCTransition(dependentHandle);
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "GCHandle_InternalFreeWithGCTransition")]
         private static partial void _InternalFreeWithGCTransition(IntPtr dependentHandle);
@@ -55,6 +58,10 @@ namespace System.Runtime.InteropServices
         internal static extern void InternalSet(IntPtr handle, object? value);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern object? InternalCompareExchange(IntPtr handle, object? value, object? oldValue);
+        internal static extern object? InternalCompareExchange(
+            IntPtr handle,
+            object? value,
+            object? oldValue
+        );
     }
 }

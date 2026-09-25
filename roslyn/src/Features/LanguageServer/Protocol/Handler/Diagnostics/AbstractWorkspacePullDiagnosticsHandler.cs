@@ -18,8 +18,12 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics;
-internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsParams, TReport, TReturn>
-    : AbstractPullDiagnosticHandler<TDiagnosticsParams, TReport, TReturn>, IDisposable
+
+internal abstract class AbstractWorkspacePullDiagnosticsHandler<
+    TDiagnosticsParams,
+    TReport,
+    TReturn
+> : AbstractPullDiagnosticHandler<TDiagnosticsParams, TReport, TReturn>, IDisposable
     where TDiagnosticsParams : IPartialResultParams<TReport>
 {
     private readonly LspWorkspaceRegistrationService _workspaceRegistrationService;
@@ -38,7 +42,9 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
         LspWorkspaceRegistrationService registrationService,
         IDiagnosticAnalyzerService diagnosticAnalyzerService,
         IDiagnosticsRefresher diagnosticRefresher,
-        IGlobalOptionService globalOptions) : base(diagnosticAnalyzerService, diagnosticRefresher, globalOptions)
+        IGlobalOptionService globalOptions
+    )
+        : base(diagnosticAnalyzerService, diagnosticRefresher, globalOptions)
     {
         _workspaceManager = workspaceManager;
         _workspaceRegistrationService = registrationService;
@@ -53,7 +59,13 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
         _workspaceRegistrationService.LspSolutionChanged -= OnLspSolutionChanged;
     }
 
-    protected override async ValueTask<ImmutableArray<IDiagnosticSource>> GetOrderedDiagnosticSourcesAsync(TDiagnosticsParams diagnosticsParams, RequestContext context, CancellationToken cancellationToken)
+    protected override async ValueTask<
+        ImmutableArray<IDiagnosticSource>
+    > GetOrderedDiagnosticSourcesAsync(
+        TDiagnosticsParams diagnosticsParams,
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         // If we're being called from razor, we do not support WorkspaceDiagnostics at all.  For razor, workspace
         // diagnostics will be handled by razor itself, which will operate by calling into Roslyn and asking for
@@ -68,7 +80,8 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
 
         // if this request doesn't have a category at all (legacy behavior, assume they're asking about everything).
         if (category == null || category == PullDiagnosticCategories.WorkspaceDocumentsAndProject)
-            return await GetDiagnosticSourcesAsync(context, GlobalOptions, cancellationToken).ConfigureAwait(false);
+            return await GetDiagnosticSourcesAsync(context, GlobalOptions, cancellationToken)
+                .ConfigureAwait(false);
 
         // if it's a category we don't recognize, return nothing.
         return ImmutableArray<IDiagnosticSource>.Empty;
@@ -89,7 +102,10 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
         Interlocked.Exchange(ref _lspChanged, 1);
     }
 
-    protected override async Task WaitForChangesAsync(RequestContext context, CancellationToken cancellationToken)
+    protected override async Task WaitForChangesAsync(
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
         // Spin waiting until our LSP change flag has been set.  When the flag is set (meaning LSP has changed),
         // we reset the flag to false and exit out of the loop allowing the request to close.
@@ -97,7 +113,8 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
         while (Interlocked.CompareExchange(ref _lspChanged, value: 0, comparand: 1) == 0)
         {
             // There have been no changes between now and when the last request finished - we will hold the connection open while we poll for changes.
-            await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken).ConfigureAwait(false);
+            await Task.Delay(TimeSpan.FromMilliseconds(100), cancellationToken)
+                .ConfigureAwait(false);
         }
 
         context.TraceInformation("Closing workspace/diagnostics request");
@@ -106,7 +123,9 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
     }
 
     private static ImmutableArray<IDiagnosticSource> GetTaskListDiagnosticSources(
-            RequestContext context, IGlobalOptionService globalOptions)
+        RequestContext context,
+        IGlobalOptionService globalOptions
+    )
     {
         Contract.ThrowIfNull(context.Solution);
 
@@ -117,7 +136,9 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
 
         using var _ = ArrayBuilder<IDiagnosticSource>.GetInstance(out var result);
 
-        foreach (var project in GetProjectsInPriorityOrder(context.Solution, context.SupportedLanguages))
+        foreach (
+            var project in GetProjectsInPriorityOrder(context.Solution, context.SupportedLanguages)
+        )
         {
             foreach (var document in project.Documents)
             {
@@ -130,15 +151,22 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
     }
 
     public static async ValueTask<ImmutableArray<IDiagnosticSource>> GetDiagnosticSourcesAsync(
-        RequestContext context, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
+        RequestContext context,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    )
     {
         Contract.ThrowIfNull(context.Solution);
 
         using var _ = ArrayBuilder<IDiagnosticSource>.GetInstance(out var result);
 
         var solution = context.Solution;
-        var enableDiagnosticsInSourceGeneratedFiles = solution.Services.GetService<ISolutionCrawlerOptionsService>()?.EnableDiagnosticsInSourceGeneratedFiles == true;
-        var codeAnalysisService = solution.Workspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
+        var enableDiagnosticsInSourceGeneratedFiles =
+            solution
+                .Services.GetService<ISolutionCrawlerOptionsService>()
+                ?.EnableDiagnosticsInSourceGeneratedFiles == true;
+        var codeAnalysisService =
+            solution.Workspace.Services.GetRequiredService<ICodeAnalysisDiagnosticAnalyzerService>();
 
         foreach (var project in GetProjectsInPriorityOrder(solution, context.SupportedLanguages))
             await AddDocumentsAndProjectAsync(project, cancellationToken).ConfigureAwait(false);
@@ -161,48 +189,77 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
             //
             // If full solution analysis is disabled AND code analysis was never executed for the given project,
             // we have no workspace diagnostics to report and bail out.
-            var fullSolutionAnalysisEnabled = globalOptions.IsFullSolutionAnalysisEnabled(project.Language, out var compilerFullSolutionAnalysisEnabled, out var analyzersFullSolutionAnalysisEnabled);
-            if (!fullSolutionAnalysisEnabled && !codeAnalysisService.HasProjectBeenAnalyzed(project.Id))
+            var fullSolutionAnalysisEnabled = globalOptions.IsFullSolutionAnalysisEnabled(
+                project.Language,
+                out var compilerFullSolutionAnalysisEnabled,
+                out var analyzersFullSolutionAnalysisEnabled
+            );
+            if (
+                !fullSolutionAnalysisEnabled
+                && !codeAnalysisService.HasProjectBeenAnalyzed(project.Id)
+            )
                 return;
 
-            var documents = ImmutableArray<TextDocument>.Empty.AddRange(project.Documents).AddRange(project.AdditionalDocuments);
+            var documents = ImmutableArray<TextDocument>
+                .Empty.AddRange(project.Documents)
+                .AddRange(project.AdditionalDocuments);
 
             // If all features are enabled for source generated documents, then compute todo-comments/diagnostics for them.
             if (enableDiagnosticsInSourceGeneratedFiles)
             {
-                var sourceGeneratedDocuments = await project.GetSourceGeneratedDocumentsAsync(cancellationToken).ConfigureAwait(false);
+                var sourceGeneratedDocuments = await project
+                    .GetSourceGeneratedDocumentsAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 documents = documents.AddRange(sourceGeneratedDocuments);
             }
 
-            Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer = !compilerFullSolutionAnalysisEnabled || !analyzersFullSolutionAnalysisEnabled
-                ? ShouldIncludeAnalyzer : null;
+            Func<DiagnosticAnalyzer, bool>? shouldIncludeAnalyzer =
+                !compilerFullSolutionAnalysisEnabled || !analyzersFullSolutionAnalysisEnabled
+                    ? ShouldIncludeAnalyzer
+                    : null;
             foreach (var document in documents)
             {
                 if (!ShouldSkipDocument(context, document))
                 {
                     // Add the appropriate FSA or CodeAnalysis document source to get document diagnostics.
                     var documentDiagnosticSource = fullSolutionAnalysisEnabled
-                        ? AbstractWorkspaceDocumentDiagnosticSource.CreateForFullSolutionAnalysisDiagnostics(document, shouldIncludeAnalyzer)
-                        : AbstractWorkspaceDocumentDiagnosticSource.CreateForCodeAnalysisDiagnostics(document, codeAnalysisService);
+                        ? AbstractWorkspaceDocumentDiagnosticSource.CreateForFullSolutionAnalysisDiagnostics(
+                            document,
+                            shouldIncludeAnalyzer
+                        )
+                        : AbstractWorkspaceDocumentDiagnosticSource.CreateForCodeAnalysisDiagnostics(
+                            document,
+                            codeAnalysisService
+                        );
                     result.Add(documentDiagnosticSource);
                 }
             }
 
             // Finally, add the appropriate FSA or CodeAnalysis project source to get project specific diagnostics, not associated with any document.
             var projectDiagnosticSource = fullSolutionAnalysisEnabled
-                ? AbstractProjectDiagnosticSource.CreateForFullSolutionAnalysisDiagnostics(project, shouldIncludeAnalyzer)
-                : AbstractProjectDiagnosticSource.CreateForCodeAnalysisDiagnostics(project, codeAnalysisService);
+                ? AbstractProjectDiagnosticSource.CreateForFullSolutionAnalysisDiagnostics(
+                    project,
+                    shouldIncludeAnalyzer
+                )
+                : AbstractProjectDiagnosticSource.CreateForCodeAnalysisDiagnostics(
+                    project,
+                    codeAnalysisService
+                );
             result.Add(projectDiagnosticSource);
 
             bool ShouldIncludeAnalyzer(DiagnosticAnalyzer analyzer)
             {
-                return analyzer.IsCompilerAnalyzer() ? compilerFullSolutionAnalysisEnabled : analyzersFullSolutionAnalysisEnabled;
+                return analyzer.IsCompilerAnalyzer()
+                    ? compilerFullSolutionAnalysisEnabled
+                    : analyzersFullSolutionAnalysisEnabled;
             }
         }
     }
 
     private static IEnumerable<Project> GetProjectsInPriorityOrder(
-            Solution solution, ImmutableArray<string> supportedLanguages)
+        Solution solution,
+        ImmutableArray<string> supportedLanguages
+    )
     {
         return GetProjectsInPriorityOrderWorker(solution)
             .WhereNotNull()
@@ -211,7 +268,8 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
 
         static IEnumerable<Project?> GetProjectsInPriorityOrderWorker(Solution solution)
         {
-            var documentTrackingService = solution.Services.GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService =
+                solution.Services.GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
             // prioritize the files from currently active projects, but then also include all other docs in all projects
@@ -246,7 +304,9 @@ internal abstract class AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsPara
 
     internal abstract TestAccessor GetTestAccessor();
 
-    internal readonly struct TestAccessor(AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsParams, TReport, TReturn> handler)
+    internal readonly struct TestAccessor(
+        AbstractWorkspacePullDiagnosticsHandler<TDiagnosticsParams, TReport, TReturn> handler
+    )
     {
         public void TriggerConnectionClose() => handler.UpdateLspChanged();
     }

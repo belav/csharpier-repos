@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,59 +35,53 @@ using Crimson.CommonCrypto;
 // we need to use the CommonCrypto implementation instead of the runtime-supported RNGCryptoServiceProvider
 // since we have no guarantee (on iOS) about /dev/[u]random availability or quality
 #if MONOTOUCH || XAMMAC
-namespace System.Security.Cryptography {
-	public class RNGCryptoServiceProvider : RandomNumberGenerator {
-		public RNGCryptoServiceProvider ()
-		{
-		}
-		
-		public RNGCryptoServiceProvider (byte[] rgb)
-		{
-		}
+namespace System.Security.Cryptography
+{
+    public class RNGCryptoServiceProvider : RandomNumberGenerator
+    {
+        public RNGCryptoServiceProvider() { }
 
-		public RNGCryptoServiceProvider (CspParameters cspParams)
-		{
-		}
+        public RNGCryptoServiceProvider(byte[] rgb) { }
 
-		public RNGCryptoServiceProvider (string str) 
-		{
-		}
+        public RNGCryptoServiceProvider(CspParameters cspParams) { }
 
-		~RNGCryptoServiceProvider () 
-		{
-		}
-		
-		public override void GetBytes (byte[] data) 
-		{
-			if (data == null)
-				throw new ArgumentNullException ("data");
-					
-			Cryptor.GetRandom (data);
-		}
+        public RNGCryptoServiceProvider(string str) { }
 
-		unsafe internal void GetBytes (byte* data, IntPtr data_length)
-		{
-			Cryptor.GetRandom (data, data_length);
-		}
-		
-		public override void GetNonZeroBytes (byte[] data) 
-		{
-			if (data == null)
-				throw new ArgumentNullException ("data");
+        ~RNGCryptoServiceProvider() { }
 
-			byte[] random = new byte [data.Length * 2];
-			int i = 0;
-			// one pass should be enough but hey this is random ;-)
-			while (i < data.Length) {
-				Cryptor.GetRandom (random);
-				for (int j=0; j < random.Length; j++) {
-					if (i == data.Length)
-						break;
-					if (random [j] != 0)
-						data [i++] = random [j];
-				}
-			}
-		}
-	}
+        public override void GetBytes(byte[] data)
+        {
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            Cryptor.GetRandom(data);
+        }
+
+        internal unsafe void GetBytes(byte* data, IntPtr data_length)
+        {
+            Cryptor.GetRandom(data, data_length);
+        }
+
+        public override void GetNonZeroBytes(byte[] data)
+        {
+            if (data == null)
+                throw new ArgumentNullException("data");
+
+            byte[] random = new byte[data.Length * 2];
+            int i = 0;
+            // one pass should be enough but hey this is random ;-)
+            while (i < data.Length)
+            {
+                Cryptor.GetRandom(random);
+                for (int j = 0; j < random.Length; j++)
+                {
+                    if (i == data.Length)
+                        break;
+                    if (random[j] != 0)
+                        data[i++] = random[j];
+                }
+            }
+        }
+    }
 }
 #endif

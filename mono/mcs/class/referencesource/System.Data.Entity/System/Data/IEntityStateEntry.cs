@@ -8,13 +8,13 @@
 //---------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
+using System.Data.Metadata.Edm;
 using System.Data.Objects;
 using System.Data.Objects.DataClasses;
-using System.Data.Metadata.Edm;
-using System.Collections.Generic;
-using System.Collections;
 
 namespace System.Data
 {

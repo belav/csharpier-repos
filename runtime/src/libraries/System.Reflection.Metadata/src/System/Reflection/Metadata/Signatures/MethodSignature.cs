@@ -39,7 +39,13 @@ namespace System.Reflection.Metadata
         /// </summary>
         public ImmutableArray<TType> ParameterTypes { get; }
 
-        public MethodSignature(SignatureHeader header, TType returnType, int requiredParameterCount, int genericParameterCount, ImmutableArray<TType> parameterTypes)
+        public MethodSignature(
+            SignatureHeader header,
+            TType returnType,
+            int requiredParameterCount,
+            int genericParameterCount,
+            ImmutableArray<TType> parameterTypes
+        )
         {
             Header = header;
             ReturnType = returnType;

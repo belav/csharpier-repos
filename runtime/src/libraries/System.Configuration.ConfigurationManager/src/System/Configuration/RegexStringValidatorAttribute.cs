@@ -11,7 +11,8 @@ namespace System.Configuration
             Regex = regex;
         }
 
-        public override ConfigurationValidatorBase ValidatorInstance => new RegexStringValidator(Regex);
+        public override ConfigurationValidatorBase ValidatorInstance =>
+            new RegexStringValidator(Regex);
 
         public string Regex { get; }
     }

@@ -14,12 +14,15 @@ namespace System.IdentityModel.Selectors
     //
     internal class SymmetricCryptoHandle : ProofTokenCryptoHandle
     {
-        public SymmetricCryptoHandle(InternalRefCountedHandle nativeHandle, DateTime expiration, IntPtr parameters)
-            : base(nativeHandle, expiration, parameters, typeof(RpcSymmetricCryptoParameters))
-        {
-        }
+        public SymmetricCryptoHandle(
+            InternalRefCountedHandle nativeHandle,
+            DateTime expiration,
+            IntPtr parameters
+        )
+            : base(nativeHandle, expiration, parameters, typeof(RpcSymmetricCryptoParameters)) { }
 
-        private SymmetricCryptoHandle(InternalRefCountedHandle internalHandle) : base(internalHandle) { }
+        private SymmetricCryptoHandle(InternalRefCountedHandle internalHandle)
+            : base(internalHandle) { }
 
         protected override CryptoHandle OnDuplicate()
         {
@@ -32,4 +35,3 @@ namespace System.IdentityModel.Selectors
         }
     }
 }
-

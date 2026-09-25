@@ -17,9 +17,14 @@ namespace System.Web.Mvc.Test
     [Xunit.Collection("Uses ScopeStorage or ViewEngines.Engines")]
     public class HtmlHelperTest : IDisposable
     {
-        public static readonly RouteValueDictionary AttributesDictionary = new RouteValueDictionary(new { baz = "BazValue" });
+        public static readonly RouteValueDictionary AttributesDictionary = new RouteValueDictionary(
+            new { baz = "BazValue" }
+        );
         public static readonly object AttributesObjectDictionary = new { baz = "BazObjValue" };
-        public static readonly object AttributesObjectUnderscoresDictionary = new { foo_baz = "BazObjValue" };
+        public static readonly object AttributesObjectUnderscoresDictionary = new
+        {
+            foo_baz = "BazObjValue",
+        };
 
         // Constructor
 
@@ -31,18 +36,12 @@ namespace System.Web.Mvc.Test
             var viewDataContainer = MvcHelper.GetViewDataContainer(null);
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => new HtmlHelper(null, viewDataContainer),
-                "viewContext"
-                );
-            Assert.ThrowsArgumentNull(
-                () => new HtmlHelper(viewContext, null),
-                "viewDataContainer"
-                );
+            Assert.ThrowsArgumentNull(() => new HtmlHelper(null, viewDataContainer), "viewContext");
+            Assert.ThrowsArgumentNull(() => new HtmlHelper(viewContext, null), "viewDataContainer");
             Assert.ThrowsArgumentNull(
                 () => new HtmlHelper(viewContext, viewDataContainer, null),
                 "routeCollection"
-                );
+            );
         }
 
         [Fact]
@@ -276,18 +275,12 @@ namespace System.Web.Mvc.Test
         public void GenerateIdFromNameTests()
         {
             // Guard clauses
-            Assert.ThrowsArgumentNull(
-                () => HtmlHelper.GenerateIdFromName(null),
-                "name"
-                );
-            Assert.ThrowsArgumentNull(
-                () => HtmlHelper.GenerateIdFromName(null, "?"),
-                "name"
-                );
+            Assert.ThrowsArgumentNull(() => HtmlHelper.GenerateIdFromName(null), "name");
+            Assert.ThrowsArgumentNull(() => HtmlHelper.GenerateIdFromName(null, "?"), "name");
             Assert.ThrowsArgumentNull(
                 () => HtmlHelper.GenerateIdFromName("?", null),
                 "idAttributeDotReplacement"
-                );
+            );
 
             // Default replacement tests
             Assert.Equal("", HtmlHelper.GenerateIdFromName(""));
@@ -318,8 +311,18 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                () => helper.RenderPartialInternal(null /* partialViewName */, null /* viewData */, null /* model */, TextWriter.Null),
-                "partialViewName");
+                () =>
+                    helper.RenderPartialInternal(
+                        null /* partialViewName */
+                        ,
+                        null /* viewData */
+                        ,
+                        null /* model */
+                        ,
+                        TextWriter.Null
+                    ),
+                "partialViewName"
+            );
         }
 
         [Fact]
@@ -331,8 +334,18 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                () => helper.RenderPartialInternal(String.Empty /* partialViewName */, null /* viewData */, null /* model */, TextWriter.Null),
-                "partialViewName");
+                () =>
+                    helper.RenderPartialInternal(
+                        String.Empty /* partialViewName */
+                        ,
+                        null /* viewData */
+                        ,
+                        null /* model */
+                        ,
+                        TextWriter.Null
+                    ),
+                "partialViewName"
+            );
         }
 
         [Fact]
@@ -344,21 +357,35 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine
-                .Setup(e => e.FindPartialView(It.IsAny<ControllerContext>(), "partial-view", It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+                )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
-            view
-                .Setup(v => v.Render(It.IsAny<ViewContext>(), writer))
+            view.Setup(v => v.Render(It.IsAny<ViewContext>(), writer))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, _) =>
                     {
                         Assert.Same(helper.ViewContext.View, viewContext.View);
                         Assert.Same(helper.ViewContext.TempData, viewContext.TempData);
-                    })
+                    }
+                )
                 .Verifiable();
 
             // Act
-            helper.RenderPartialInternal("partial-view", null /* viewData */, null /* model */, writer, engine.Object);
+            helper.RenderPartialInternal(
+                "partial-view",
+                null /* viewData */
+                ,
+                null /* model */
+                ,
+                writer,
+                engine.Object
+            );
 
             // Assert
             engine.Verify();
@@ -372,16 +399,34 @@ namespace System.Web.Mvc.Test
             TestableHtmlHelper helper = TestableHtmlHelper.Create();
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             engine
-                .Setup(e => e.FindPartialView(It.IsAny<ControllerContext>(), "partial-view", It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+                )
                 .Returns(new ViewEngineResult(new[] { "location1", "location2" }))
                 .Verifiable();
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                () => helper.RenderPartialInternal("partial-view", null /* viewData */, null /* model */, TextWriter.Null, engine.Object),
-                "The partial view 'partial-view' was not found or no view engine supports the searched locations. The following locations were searched:" + Environment.NewLine
-              + "location1" + Environment.NewLine
-              + "location2");
+                () =>
+                    helper.RenderPartialInternal(
+                        "partial-view",
+                        null /* viewData */
+                        ,
+                        null /* model */
+                        ,
+                        TextWriter.Null,
+                        engine.Object
+                    ),
+                "The partial view 'partial-view' was not found or no view engine supports the searched locations. The following locations were searched:"
+                    + Environment.NewLine
+                    + "location1"
+                    + Environment.NewLine
+                    + "location2"
+            );
 
             engine.Verify();
         }
@@ -397,22 +442,36 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine
-                .Setup(e => e.FindPartialView(It.IsAny<ControllerContext>(), "partial-view", It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+                )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
-            view
-                .Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
+            view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, writer) =>
                     {
                         Assert.NotSame(helper.ViewData, viewContext.ViewData); // New view data instance
                         Assert.Equal("Bar", viewContext.ViewData["Foo"]); // Copy of the existing view data
                         Assert.Same(model, viewContext.ViewData.Model); // Keep existing model
-                    })
+                    }
+                )
                 .Verifiable();
 
             // Act
-            helper.RenderPartialInternal("partial-view", null /* viewData */, null /* model */, TextWriter.Null, engine.Object);
+            helper.RenderPartialInternal(
+                "partial-view",
+                null /* viewData */
+                ,
+                null /* model */
+                ,
+                TextWriter.Null,
+                engine.Object
+            );
 
             // Assert
             engine.Verify();
@@ -431,22 +490,35 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine
-                .Setup(e => e.FindPartialView(It.IsAny<ControllerContext>(), "partial-view", It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+                )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
-            view
-                .Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
+            view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, writer) =>
                     {
                         Assert.NotSame(helper.ViewData, viewContext.ViewData); // New view data instance
                         Assert.Empty(viewContext.ViewData); // Empty (not copied)
                         Assert.Same(newModel, viewContext.ViewData.Model); // New model
-                    })
+                    }
+                )
                 .Verifiable();
 
             // Act
-            helper.RenderPartialInternal("partial-view", null /* viewData */, newModel, TextWriter.Null, engine.Object);
+            helper.RenderPartialInternal(
+                "partial-view",
+                null /* viewData */
+                ,
+                newModel,
+                TextWriter.Null,
+                engine.Object
+            );
 
             // Assert
             engine.Verify();
@@ -468,11 +540,16 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine
-                .Setup(e => e.FindPartialView(It.IsAny<ControllerContext>(), "partial-view", It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+                )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
-            view
-                .Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
+            view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, writer) =>
                     {
@@ -480,11 +557,19 @@ namespace System.Web.Mvc.Test
                         Assert.Single(viewContext.ViewData); // Copy of the passed view data, not original view data
                         Assert.Equal("Biff", viewContext.ViewData["Baz"]);
                         Assert.Same(vddModel, viewContext.ViewData.Model); // Keep model from passed view data, not original view data
-                    })
+                    }
+                )
                 .Verifiable();
 
             // Act
-            helper.RenderPartialInternal("partial-view", vdd, null /* model */, TextWriter.Null, engine.Object);
+            helper.RenderPartialInternal(
+                "partial-view",
+                vdd,
+                null /* model */
+                ,
+                TextWriter.Null,
+                engine.Object
+            );
 
             // Assert
             engine.Verify();
@@ -507,11 +592,16 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> engine = new Mock<IViewEngine>(MockBehavior.Strict);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             engine
-                .Setup(e => e.FindPartialView(It.IsAny<ControllerContext>(), "partial-view", It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindPartialView(
+                        It.IsAny<ControllerContext>(),
+                        "partial-view",
+                        It.IsAny<bool>()
+                    )
+                )
                 .Returns(new ViewEngineResult(view.Object, engine.Object))
                 .Verifiable();
-            view
-                .Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
+            view.Setup(v => v.Render(It.IsAny<ViewContext>(), TextWriter.Null))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, writer) =>
                     {
@@ -519,11 +609,18 @@ namespace System.Web.Mvc.Test
                         Assert.Single(viewContext.ViewData); // Copy of the passed view data, not original view data
                         Assert.Equal("Biff", viewContext.ViewData["Baz"]);
                         Assert.Same(newModel, viewContext.ViewData.Model); // New model
-                    })
+                    }
+                )
                 .Verifiable();
 
             // Act
-            helper.RenderPartialInternal("partial-view", vdd, newModel, TextWriter.Null, engine.Object);
+            helper.RenderPartialInternal(
+                "partial-view",
+                vdd,
+                newModel,
+                TextWriter.Null,
+                engine.Object
+            );
 
             // Assert
             engine.Verify();
@@ -544,32 +641,37 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNullOrEmpty(
                 () => htmlHelper.HttpMethodOverride(null),
                 "httpMethod"
-                );
+            );
             Assert.Throws<ArgumentException>(
                 () => htmlHelper.HttpMethodOverride((HttpVerbs)10000),
-                "The specified HttpVerbs value is not supported. The supported values are Delete, Head, Put, Options, and Patch." + Environment.NewLine
-              + "Parameter name: httpVerb"
-                );
+                "The specified HttpVerbs value is not supported. The supported values are Delete, Head, Put, Options, and Patch."
+                    + Environment.NewLine
+                    + "Parameter name: httpVerb"
+            );
             Assert.Throws<ArgumentException>(
                 () => htmlHelper.HttpMethodOverride(HttpVerbs.Get),
-                "The specified HttpVerbs value is not supported. The supported values are Delete, Head, Put, Options, and Patch." + Environment.NewLine
-              + "Parameter name: httpVerb"
-                );
+                "The specified HttpVerbs value is not supported. The supported values are Delete, Head, Put, Options, and Patch."
+                    + Environment.NewLine
+                    + "Parameter name: httpVerb"
+            );
             Assert.Throws<ArgumentException>(
                 () => htmlHelper.HttpMethodOverride(HttpVerbs.Post),
-                "The specified HttpVerbs value is not supported. The supported values are Delete, Head, Put, Options, and Patch." + Environment.NewLine
-              + "Parameter name: httpVerb"
-                );
+                "The specified HttpVerbs value is not supported. The supported values are Delete, Head, Put, Options, and Patch."
+                    + Environment.NewLine
+                    + "Parameter name: httpVerb"
+            );
             Assert.Throws<ArgumentException>(
                 () => htmlHelper.HttpMethodOverride("gEt"),
-                "The GET and POST HTTP methods are not supported." + Environment.NewLine
-              + "Parameter name: httpMethod"
-                );
+                "The GET and POST HTTP methods are not supported."
+                    + Environment.NewLine
+                    + "Parameter name: httpMethod"
+            );
             Assert.Throws<ArgumentException>(
                 () => htmlHelper.HttpMethodOverride("pOsT"),
-                "The GET and POST HTTP methods are not supported." + Environment.NewLine
-              + "Parameter name: httpMethod"
-                );
+                "The GET and POST HTTP methods are not supported."
+                    + Environment.NewLine
+                    + "Parameter name: httpMethod"
+            );
         }
 
         [Fact]
@@ -584,7 +686,10 @@ namespace System.Web.Mvc.Test
             MvcHtmlString hiddenField = htmlHelper.HttpMethodOverride("PUT");
 
             // Assert
-            Assert.Equal(@"<input name=""X-HTTP-Method-Override"" type=""hidden"" value=""PUT"" />", hiddenField.ToHtmlString());
+            Assert.Equal(
+                @"<input name=""X-HTTP-Method-Override"" type=""hidden"" value=""PUT"" />",
+                hiddenField.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -599,7 +704,10 @@ namespace System.Web.Mvc.Test
             MvcHtmlString hiddenField = htmlHelper.HttpMethodOverride(HttpVerbs.Delete);
 
             // Assert
-            Assert.Equal(@"<input name=""X-HTTP-Method-Override"" type=""hidden"" value=""DELETE"" />", hiddenField.ToHtmlString());
+            Assert.Equal(
+                @"<input name=""X-HTTP-Method-Override"" type=""hidden"" value=""DELETE"" />",
+                hiddenField.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -611,7 +719,10 @@ namespace System.Web.Mvc.Test
             viewDataContainer.Setup(container => container.ViewData).Returns(viewDataDictionary);
 
             // Act
-            HtmlHelper htmlHelper = new HtmlHelper(new Mock<ViewContext>().Object, viewDataContainer.Object);
+            HtmlHelper htmlHelper = new HtmlHelper(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object
+            );
 
             // Assert
             Assert.Equal(1, htmlHelper.ViewBag.A);
@@ -627,9 +738,15 @@ namespace System.Web.Mvc.Test
 
             ViewDataDictionary otherViewDataDictionary = new ViewDataDictionary() { { "A", 2 } };
             Mock<IViewDataContainer> otherViewDataContainer = new Mock<IViewDataContainer>();
-            otherViewDataContainer.Setup(container => container.ViewData).Returns(otherViewDataDictionary);
+            otherViewDataContainer
+                .Setup(container => container.ViewData)
+                .Returns(otherViewDataDictionary);
 
-            HtmlHelper htmlHelper = new HtmlHelper(new Mock<ViewContext>().Object, viewDataContainer.Object, new RouteCollection());
+            HtmlHelper htmlHelper = new HtmlHelper(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object,
+                new RouteCollection()
+            );
 
             // Act
             htmlHelper.ViewDataContainer = otherViewDataContainer.Object;
@@ -646,7 +763,11 @@ namespace System.Web.Mvc.Test
             Mock<IViewDataContainer> viewDataContainer = new Mock<IViewDataContainer>();
             viewDataContainer.Setup(container => container.ViewData).Returns(viewDataDictionary);
 
-            HtmlHelper htmlHelper = new HtmlHelper(new Mock<ViewContext>().Object, viewDataContainer.Object, new RouteCollection());
+            HtmlHelper htmlHelper = new HtmlHelper(
+                new Mock<ViewContext>().Object,
+                viewDataContainer.Object,
+                new RouteCollection()
+            );
 
             // Act
             htmlHelper.ViewBag.A = "foo";
@@ -671,7 +792,9 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Empty(result);
@@ -690,7 +813,9 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Empty(result);
@@ -710,7 +835,9 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Empty(result);
@@ -727,10 +854,15 @@ namespace System.Web.Mvc.Test
             viewContext.SetupGet(vc => vc.UnobtrusiveJavaScriptEnabled).Returns(true);
             var viewDataContainer = MvcHelper.GetViewDataContainer(new ViewDataDictionary());
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
-            htmlHelper.ClientValidationRuleFactory = delegate { return Enumerable.Empty<ModelClientValidationRule>(); };
+            htmlHelper.ClientValidationRuleFactory = delegate
+            {
+                return Enumerable.Empty<ModelClientValidationRule>();
+            };
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Empty(result);
@@ -748,10 +880,15 @@ namespace System.Web.Mvc.Test
             viewContext.SetupGet(vc => vc.UnobtrusiveJavaScriptEnabled).Returns(true);
             var viewDataContainer = MvcHelper.GetViewDataContainer(new ViewDataDictionary());
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
-            htmlHelper.ClientValidationRuleFactory = delegate { return new[] { new ModelClientValidationRule { ValidationType = "type" } }; };
+            htmlHelper.ClientValidationRuleFactory = delegate
+            {
+                return new[] { new ModelClientValidationRule { ValidationType = "type" } };
+            };
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Equal("true", result["data-val"]);
@@ -768,10 +905,15 @@ namespace System.Web.Mvc.Test
             viewContext.SetupGet(vc => vc.UnobtrusiveJavaScriptEnabled).Returns(true);
             var viewDataContainer = MvcHelper.GetViewDataContainer(new ViewDataDictionary());
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
-            htmlHelper.ClientValidationRuleFactory = delegate { return new[] { new ModelClientValidationRule { ValidationType = "type" } }; };
+            htmlHelper.ClientValidationRuleFactory = delegate
+            {
+                return new[] { new ModelClientValidationRule { ValidationType = "type" } };
+            };
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Equal("", result["data-val-type"]);
@@ -788,10 +930,22 @@ namespace System.Web.Mvc.Test
             viewContext.SetupGet(vc => vc.UnobtrusiveJavaScriptEnabled).Returns(true);
             var viewDataContainer = MvcHelper.GetViewDataContainer(new ViewDataDictionary());
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
-            htmlHelper.ClientValidationRuleFactory = delegate { return new[] { new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "<script>alert('xss')</script>" } }; };
+            htmlHelper.ClientValidationRuleFactory = delegate
+            {
+                return new[]
+                {
+                    new ModelClientValidationRule
+                    {
+                        ValidationType = "type",
+                        ErrorMessage = "<script>alert('xss')</script>",
+                    },
+                };
+            };
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Equal("<script>alert('xss')</script>", result["data-val-type"]);
@@ -810,14 +964,20 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
             htmlHelper.ClientValidationRuleFactory = delegate
             {
-                ModelClientValidationRule rule = new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" };
+                ModelClientValidationRule rule = new ModelClientValidationRule
+                {
+                    ValidationType = "type",
+                    ErrorMessage = "error",
+                };
                 rule.ValidationParameters["foo"] = "bar";
                 rule.ValidationParameters["baz"] = "biff";
                 return new[] { rule };
             };
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Equal("error", result["data-val-type"]);
@@ -838,16 +998,26 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
             htmlHelper.ClientValidationRuleFactory = delegate
             {
-                ModelClientValidationRule rule1 = new ModelClientValidationRule { ValidationType = "type", ErrorMessage = "error" };
+                ModelClientValidationRule rule1 = new ModelClientValidationRule
+                {
+                    ValidationType = "type",
+                    ErrorMessage = "error",
+                };
                 rule1.ValidationParameters["foo"] = "bar";
                 rule1.ValidationParameters["baz"] = "biff";
-                ModelClientValidationRule rule2 = new ModelClientValidationRule { ValidationType = "othertype", ErrorMessage = "othererror" };
+                ModelClientValidationRule rule2 = new ModelClientValidationRule
+                {
+                    ValidationType = "othertype",
+                    ErrorMessage = "othererror",
+                };
                 rule2.ValidationParameters["true3"] = "false4";
                 return new[] { rule1, rule2 };
             };
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("foobar");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "foobar"
+            );
 
             // Assert
             Assert.Equal("error", result["data-val-type"]);
@@ -899,7 +1069,9 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
 
             // Act
-            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes("MyProperty");
+            IDictionary<string, object> result = htmlHelper.GetUnobtrusiveValidationAttributes(
+                "MyProperty"
+            );
 
             // Assert
             Assert.Equal(2, result.Count);
@@ -948,22 +1120,54 @@ namespace System.Web.Mvc.Test
             var htmlHelper = new HtmlHelper(viewContext.Object, viewDataContainer);
 
             // Act & Assert
-            AssertBadClientValidationRule(htmlHelper, "Validation type names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule", new ModelClientValidationRule());
-            AssertBadClientValidationRule(htmlHelper, "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"OnlyLowerCase\", client rule type: System.Web.Mvc.ModelClientValidationRule", new ModelClientValidationRule { ValidationType = "OnlyLowerCase" });
-            AssertBadClientValidationRule(htmlHelper, "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"nonumb3rs\", client rule type: System.Web.Mvc.ModelClientValidationRule", new ModelClientValidationRule { ValidationType = "nonumb3rs" });
-            AssertBadClientValidationRule(htmlHelper, "Validation type names in unobtrusive client validation rules must be unique. The following validation type was seen more than once: rule", new ModelClientValidationRule { ValidationType = "rule" }, new ModelClientValidationRule { ValidationType = "rule" });
+            AssertBadClientValidationRule(
+                htmlHelper,
+                "Validation type names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule",
+                new ModelClientValidationRule()
+            );
+            AssertBadClientValidationRule(
+                htmlHelper,
+                "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"OnlyLowerCase\", client rule type: System.Web.Mvc.ModelClientValidationRule",
+                new ModelClientValidationRule { ValidationType = "OnlyLowerCase" }
+            );
+            AssertBadClientValidationRule(
+                htmlHelper,
+                "Validation type names in unobtrusive client validation rules must consist of only lowercase letters. Invalid name: \"nonumb3rs\", client rule type: System.Web.Mvc.ModelClientValidationRule",
+                new ModelClientValidationRule { ValidationType = "nonumb3rs" }
+            );
+            AssertBadClientValidationRule(
+                htmlHelper,
+                "Validation type names in unobtrusive client validation rules must be unique. The following validation type was seen more than once: rule",
+                new ModelClientValidationRule { ValidationType = "rule" },
+                new ModelClientValidationRule { ValidationType = "rule" }
+            );
 
             var emptyParamName = new ModelClientValidationRule { ValidationType = "type" };
             emptyParamName.ValidationParameters[""] = "foo";
-            AssertBadClientValidationRule(htmlHelper, "Validation parameter names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule", emptyParamName);
+            AssertBadClientValidationRule(
+                htmlHelper,
+                "Validation parameter names in unobtrusive client validation rules cannot be empty. Client rule type: System.Web.Mvc.ModelClientValidationRule",
+                emptyParamName
+            );
 
             var paramNameMixedCase = new ModelClientValidationRule { ValidationType = "type" };
             paramNameMixedCase.ValidationParameters["MixedCase"] = "foo";
-            AssertBadClientValidationRule(htmlHelper, "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: MixedCase, client rule type: System.Web.Mvc.ModelClientValidationRule", paramNameMixedCase);
+            AssertBadClientValidationRule(
+                htmlHelper,
+                "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: MixedCase, client rule type: System.Web.Mvc.ModelClientValidationRule",
+                paramNameMixedCase
+            );
 
-            var paramNameStartsWithNumber = new ModelClientValidationRule { ValidationType = "type" };
+            var paramNameStartsWithNumber = new ModelClientValidationRule
+            {
+                ValidationType = "type",
+            };
             paramNameStartsWithNumber.ValidationParameters["2112"] = "foo";
-            AssertBadClientValidationRule(htmlHelper, "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: 2112, client rule type: System.Web.Mvc.ModelClientValidationRule", paramNameStartsWithNumber);
+            AssertBadClientValidationRule(
+                htmlHelper,
+                "Validation parameter names in unobtrusive client validation rules must start with a lowercase letter and consist of only lowercase letters or digits. Validation parameter name: 2112, client rule type: System.Web.Mvc.ModelClientValidationRule",
+                paramNameStartsWithNumber
+            );
         }
 
         [Fact]
@@ -1066,7 +1270,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             DateTime dt = new DateTime(1900, 1, 1, 0, 0, 0);
-            HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary() { { "date", dt } });
+            HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary() { { "date", dt } }
+            );
             string expectedFormattedDate = "-01/01/1900 00:00:00-";
 
             // Act && Assert
@@ -1080,7 +1286,9 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             DateTime dt = new DateTime(1900, 1, 1, 0, 0, 0);
-            HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(new ViewDataDictionary() { { "date", dt } });
+            HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(
+                new ViewDataDictionary() { { "date", dt } }
+            );
             string expectedUnformattedDate = "01/01/1900 00:00:00";
 
             // Act && Assert
@@ -1088,7 +1296,6 @@ namespace System.Web.Mvc.Test
             Assert.Equal(expectedUnformattedDate, htmlHelper.EvalString("date", String.Empty));
             Assert.Equal(expectedUnformattedDate, htmlHelper.EvalString("date"));
         }
-
 
         [Fact]
         public void ObjectToDictionaryWithAnonymousTypeLooksUpProperties()
@@ -1148,16 +1355,26 @@ namespace System.Web.Mvc.Test
 
         // Helpers
 
-        private static void AssertBadClientValidationRule(HtmlHelper htmlHelper, string expectedMessage, params ModelClientValidationRule[] rules)
+        private static void AssertBadClientValidationRule(
+            HtmlHelper htmlHelper,
+            string expectedMessage,
+            params ModelClientValidationRule[] rules
+        )
         {
-            htmlHelper.ClientValidationRuleFactory = delegate { return rules; };
+            htmlHelper.ClientValidationRuleFactory = delegate
+            {
+                return rules;
+            };
             Assert.Throws<InvalidOperationException>(
                 () => htmlHelper.GetUnobtrusiveValidationAttributes(Guid.NewGuid().ToString()),
                 expectedMessage
-                );
+            );
         }
 
-        internal static ValueProviderResult GetValueProviderResult(object rawValue, string attemptedValue)
+        internal static ValueProviderResult GetValueProviderResult(
+            object rawValue,
+            string attemptedValue
+        )
         {
             return new ValueProviderResult(rawValue, attemptedValue, CultureInfo.InvariantCulture);
         }
@@ -1165,16 +1382,16 @@ namespace System.Web.Mvc.Test
         private class TestableHtmlHelper : HtmlHelper
         {
             TestableHtmlHelper(ViewContext viewContext, IViewDataContainer viewDataContainer)
-                : base(viewContext, viewDataContainer)
-            {
-            }
+                : base(viewContext, viewDataContainer) { }
 
             public static TestableHtmlHelper Create()
             {
                 ViewDataDictionary viewData = new ViewDataDictionary();
 
                 Mock<ViewContext> mockViewContext = new Mock<ViewContext>();
-                mockViewContext.Setup(c => c.HttpContext.Response.Output).Throws(new Exception("Response.Output should never be called."));
+                mockViewContext
+                    .Setup(c => c.HttpContext.Response.Output)
+                    .Throws(new Exception("Response.Output should never be called."));
                 mockViewContext.SetupGet(c => c.TempData).Returns(new TempDataDictionary());
                 mockViewContext.SetupGet(c => c.View).Returns(Mock.Of<IView>());
                 mockViewContext.Setup(c => c.ViewData).Returns(viewData);
@@ -1186,13 +1403,21 @@ namespace System.Web.Mvc.Test
                 return new TestableHtmlHelper(mockViewContext.Object, container.Object);
             }
 
-            public void RenderPartialInternal(string partialViewName,
-                                              ViewDataDictionary viewData,
-                                              object model,
-                                              TextWriter writer,
-                                              params IViewEngine[] engines)
+            public void RenderPartialInternal(
+                string partialViewName,
+                ViewDataDictionary viewData,
+                object model,
+                TextWriter writer,
+                params IViewEngine[] engines
+            )
             {
-                base.RenderPartialInternal(partialViewName, viewData, model, writer, new ViewEngineCollection(engines));
+                base.RenderPartialInternal(
+                    partialViewName,
+                    viewData,
+                    model,
+                    writer,
+                    new ViewEngineCollection(engines)
+                );
             }
         }
 

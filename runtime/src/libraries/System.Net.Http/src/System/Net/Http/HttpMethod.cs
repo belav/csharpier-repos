@@ -14,15 +14,36 @@ namespace System.Net.Http
 
         private int _hashcode;
 
-        private static readonly HttpMethod s_getMethod = new HttpMethod("GET", http3StaticTableIndex: H3StaticTable.MethodGet);
-        private static readonly HttpMethod s_putMethod = new HttpMethod("PUT", http3StaticTableIndex: H3StaticTable.MethodPut);
-        private static readonly HttpMethod s_postMethod = new HttpMethod("POST", http3StaticTableIndex: H3StaticTable.MethodPost);
-        private static readonly HttpMethod s_deleteMethod = new HttpMethod("DELETE", http3StaticTableIndex: H3StaticTable.MethodDelete);
-        private static readonly HttpMethod s_headMethod = new HttpMethod("HEAD", http3StaticTableIndex: H3StaticTable.MethodHead);
-        private static readonly HttpMethod s_optionsMethod = new HttpMethod("OPTIONS", http3StaticTableIndex: H3StaticTable.MethodOptions);
+        private static readonly HttpMethod s_getMethod = new HttpMethod(
+            "GET",
+            http3StaticTableIndex: H3StaticTable.MethodGet
+        );
+        private static readonly HttpMethod s_putMethod = new HttpMethod(
+            "PUT",
+            http3StaticTableIndex: H3StaticTable.MethodPut
+        );
+        private static readonly HttpMethod s_postMethod = new HttpMethod(
+            "POST",
+            http3StaticTableIndex: H3StaticTable.MethodPost
+        );
+        private static readonly HttpMethod s_deleteMethod = new HttpMethod(
+            "DELETE",
+            http3StaticTableIndex: H3StaticTable.MethodDelete
+        );
+        private static readonly HttpMethod s_headMethod = new HttpMethod(
+            "HEAD",
+            http3StaticTableIndex: H3StaticTable.MethodHead
+        );
+        private static readonly HttpMethod s_optionsMethod = new HttpMethod(
+            "OPTIONS",
+            http3StaticTableIndex: H3StaticTable.MethodOptions
+        );
         private static readonly HttpMethod s_traceMethod = new HttpMethod("TRACE", -1);
         private static readonly HttpMethod s_patchMethod = new HttpMethod("PATCH", -1);
-        private static readonly HttpMethod s_connectMethod = new HttpMethod("CONNECT", http3StaticTableIndex: H3StaticTable.MethodConnect);
+        private static readonly HttpMethod s_connectMethod = new HttpMethod(
+            "CONNECT",
+            http3StaticTableIndex: H3StaticTable.MethodConnect
+        );
 
         public static HttpMethod Get
         {
@@ -136,9 +157,9 @@ namespace System.Net.Http
 
         public static bool operator ==(HttpMethod? left, HttpMethod? right)
         {
-            return left is null || right is null ?
-                ReferenceEquals(left, right) :
-                left.Equals(right);
+            return left is null || right is null
+                ? ReferenceEquals(left, right)
+                : left.Equals(right);
         }
 
         public static bool operator !=(HttpMethod? left, HttpMethod? right)
@@ -156,8 +177,7 @@ namespace System.Net.Http
         /// same validation being performed as by the <see cref="HttpMethod(string)"/> constructor.
         /// </remarks>
         public static HttpMethod Parse(ReadOnlySpan<char> method) =>
-            GetKnownMethod(method) ??
-            new HttpMethod(method.ToString());
+            GetKnownMethod(method) ?? new HttpMethod(method.ToString());
 
         /// <summary>
         /// Returns a singleton method instance with a capitalized method name for the supplied method
@@ -171,9 +191,9 @@ namespace System.Net.Http
             // _http3Index is only set for the singleton instances, so if it's not null,
             // we can avoid the lookup.  Otherwise, look up the method instance and return the
             // normalized instance if it's found.
-            return method._http3Index is null && GetKnownMethod(method._method) is HttpMethod match ?
-                match :
-                method;
+            return method._http3Index is null && GetKnownMethod(method._method) is HttpMethod match
+                ? match
+                : method;
         }
 
         internal static HttpMethod? GetKnownMethod(ReadOnlySpan<char> method)
@@ -197,8 +217,10 @@ namespace System.Net.Http
                     _ => null,
                 };
 
-                if (match is not null &&
-                    method.Equals(match._method, StringComparison.OrdinalIgnoreCase))
+                if (
+                    match is not null
+                    && method.Equals(match._method, StringComparison.OrdinalIgnoreCase)
+                )
                 {
                     return match;
                 }
@@ -214,8 +236,11 @@ namespace System.Net.Http
                 // Normalize before calling this
                 Debug.Assert(ReferenceEquals(this, Normalize(this)));
 
-                return !ReferenceEquals(this, HttpMethod.Get) && !ReferenceEquals(this, HttpMethod.Head) && !ReferenceEquals(this, HttpMethod.Connect) &&
-                       !ReferenceEquals(this, HttpMethod.Options) && !ReferenceEquals(this, HttpMethod.Delete);
+                return !ReferenceEquals(this, HttpMethod.Get)
+                    && !ReferenceEquals(this, HttpMethod.Head)
+                    && !ReferenceEquals(this, HttpMethod.Connect)
+                    && !ReferenceEquals(this, HttpMethod.Options)
+                    && !ReferenceEquals(this, HttpMethod.Delete);
             }
         }
     }

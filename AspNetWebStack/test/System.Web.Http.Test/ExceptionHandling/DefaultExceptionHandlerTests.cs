@@ -22,7 +22,10 @@ namespace System.Web.Http.ExceptionHandling
             CancellationToken cancellationToken = CancellationToken.None;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => product.HandleAsync(context, cancellationToken), "context");
+            Assert.ThrowsArgumentNull(
+                () => product.HandleAsync(context, cancellationToken),
+                "context"
+            );
         }
 
         [Fact]
@@ -30,13 +33,18 @@ namespace System.Web.Http.ExceptionHandling
         {
             // Arrange
             IExceptionHandler product = CreateProductUnderTest();
-            ExceptionHandlerContext context = new ExceptionHandlerContext(new ExceptionContext(CreateException(), ExceptionCatchBlocks.HttpServer));
+            ExceptionHandlerContext context = new ExceptionHandlerContext(
+                new ExceptionContext(CreateException(), ExceptionCatchBlocks.HttpServer)
+            );
             Assert.Null(context.ExceptionContext.Request); // Guard
             CancellationToken cancellationToken = CancellationToken.None;
 
             // Act & Assert
-            Assert.ThrowsArgument(() => product.HandleAsync(context, cancellationToken), "context",
-                "ExceptionContext.Request must not be null.");
+            Assert.ThrowsArgument(
+                () => product.HandleAsync(context, cancellationToken),
+                "context",
+                "ExceptionContext.Request must not be null."
+            );
         }
 
         [Fact]
@@ -47,7 +55,9 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             using (HttpRequestMessage expectedRequest = CreateRequest())
             {
-                expectedRequest.SetRequestContext(new HttpRequestContext { IncludeErrorDetail = true });
+                expectedRequest.SetRequestContext(
+                    new HttpRequestContext { IncludeErrorDetail = true }
+                );
                 ExceptionHandlerContext context = CreateValidContext(expectedRequest);
                 CancellationToken cancellationToken = CancellationToken.None;
 
@@ -61,8 +71,12 @@ namespace System.Web.Http.ExceptionHandling
                 {
                     Assert.NotNull(response);
 
-                    using (HttpResponseMessage expectedResponse = expectedRequest.CreateErrorResponse(
-                        HttpStatusCode.InternalServerError, context.ExceptionContext.Exception))
+                    using (
+                        HttpResponseMessage expectedResponse = expectedRequest.CreateErrorResponse(
+                            HttpStatusCode.InternalServerError,
+                            context.ExceptionContext.Exception
+                        )
+                    )
                     {
                         AssertErrorResponse(expectedResponse, response);
                     }
@@ -80,7 +94,10 @@ namespace System.Web.Http.ExceptionHandling
             // Arrange
             using (HttpRequestMessage request = CreateRequest())
             {
-                ExceptionHandlerContext context = CreateValidContext(request, ExceptionCatchBlocks.IExceptionFilter);
+                ExceptionHandlerContext context = CreateValidContext(
+                    request,
+                    ExceptionCatchBlocks.IExceptionFilter
+                );
                 CancellationToken cancellationToken = CancellationToken.None;
 
                 // Act
@@ -91,15 +108,22 @@ namespace System.Web.Http.ExceptionHandling
             }
         }
 
-        private static void AssertErrorResponse(HttpResponseMessage expected, HttpResponseMessage actual)
+        private static void AssertErrorResponse(
+            HttpResponseMessage expected,
+            HttpResponseMessage actual
+        )
         {
             Assert.NotNull(expected); // Guard
-            ObjectContent<HttpError> expectedContent = Assert.IsType<ObjectContent<HttpError>>(expected.Content); // Guard
+            ObjectContent<HttpError> expectedContent = Assert.IsType<ObjectContent<HttpError>>(
+                expected.Content
+            ); // Guard
             Assert.NotNull(expectedContent.Formatter); // Guard
 
             Assert.NotNull(actual);
             Assert.Equal(expected.StatusCode, actual.StatusCode);
-            ObjectContent<HttpError> actualContent = Assert.IsType<ObjectContent<HttpError>>(actual.Content);
+            ObjectContent<HttpError> actualContent = Assert.IsType<ObjectContent<HttpError>>(
+                actual.Content
+            );
             Assert.NotNull(actualContent.Formatter);
             Assert.Same(expectedContent.Formatter.GetType(), actualContent.Formatter.GetType());
             Assert.Equal(expectedContent.Value, actualContent.Value);
@@ -128,11 +152,15 @@ namespace System.Web.Http.ExceptionHandling
 
         private static ExceptionHandlerContext CreateValidContext(HttpRequestMessage request)
         {
-            return CreateContext(new ExceptionContext(CreateException(), ExceptionCatchBlocks.HttpServer, request));
+            return CreateContext(
+                new ExceptionContext(CreateException(), ExceptionCatchBlocks.HttpServer, request)
+            );
         }
 
-        private static ExceptionHandlerContext CreateValidContext(HttpRequestMessage request,
-            ExceptionContextCatchBlock catchBlock)
+        private static ExceptionHandlerContext CreateValidContext(
+            HttpRequestMessage request,
+            ExceptionContextCatchBlock catchBlock
+        )
         {
             return CreateContext(new ExceptionContext(CreateException(), catchBlock, request));
         }

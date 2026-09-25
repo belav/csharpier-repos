@@ -9,11 +9,11 @@ namespace System.ServiceModel.Configuration
     using System.Globalization;
 
     [ConfigurationCollection(typeof(ComMethodElement))]
-    public sealed class ComMethodElementCollection : ServiceModelEnhancedConfigurationElementCollection<ComMethodElement>
+    public sealed class ComMethodElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ComMethodElement>
     {
         public ComMethodElementCollection()
-            : base(ConfigurationStrings.Add)
-        { }
+            : base(ConfigurationStrings.Add) { }
 
         protected override bool ThrowOnDuplicate
         {
@@ -32,5 +32,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-

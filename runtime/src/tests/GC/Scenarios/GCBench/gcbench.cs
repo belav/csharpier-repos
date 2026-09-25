@@ -39,7 +39,8 @@
 //      commercial  implementations seriously attempt to minimize GC pause
 //      times.
 
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     internal class Node
@@ -53,17 +54,14 @@ namespace DefaultNamespace {
             right = r;
         }
 
-        internal Node()
-        {
-        }
+        internal Node() { }
     }
 
     public class GCBench
     {
-
-        public const int kStretchTreeDepth    = 18;      // about 16Mb
-        public const int kLongLivedTreeDepth  = 16;  // about 4Mb
-        public const int kArraySize  = 50;  // about 4Mb
+        public const int kStretchTreeDepth = 18; // about 16Mb
+        public const int kLongLivedTreeDepth = 16; // about 4Mb
+        public const int kArraySize = 50; // about 4Mb
         public const int kMinTreeDepth = 4;
         public const int kMaxTreeDepth = 16;
 
@@ -82,38 +80,37 @@ namespace DefaultNamespace {
         // Build tree top down, assigning to older objects.
         internal static void Populate(int iDepth, Node thisNode)
         {
-            if (iDepth<=0)
+            if (iDepth <= 0)
             {
                 return;
             }
             else
             {
                 iDepth--;
-                thisNode.left  = new Node();
+                thisNode.left = new Node();
                 thisNode.right = new Node();
-                Populate (iDepth, thisNode.left);
-                Populate (iDepth, thisNode.right);
+                Populate(iDepth, thisNode.left);
+                Populate(iDepth, thisNode.right);
             }
         }
 
         // Build tree bottom-up
         internal static Node MakeTree(int iDepth)
         {
-            if (iDepth<=0)
+            if (iDepth <= 0)
             {
                 return new Node();
             }
             else
             {
-                return new Node(MakeTree(iDepth-1), MakeTree(iDepth-1));
+                return new Node(MakeTree(iDepth - 1), MakeTree(iDepth - 1));
             }
         }
 
         internal void TimeConstruction(int depth)
         {
-
-            int     iNumIters = NumIters(depth);
-            Node    tempTree;
+            int iNumIters = NumIters(depth);
+            Node tempTree;
 
             for (int i = 0; i < iNumIters; ++i)
             {
@@ -122,19 +119,17 @@ namespace DefaultNamespace {
                 tempTree = null;
             }
 
-
             for (int i = 0; i < iNumIters; ++i)
             {
                 tempTree = MakeTree(depth);
                 tempTree = null;
             }
-
         }
 
         public static int Main()
         {
-            Node    longLivedTree;
-            Node    tempTree;
+            Node longLivedTree;
+            Node tempTree;
 
             Console.WriteLine("Test should return with ExitCode 100 ...");
 
@@ -149,10 +144,10 @@ namespace DefaultNamespace {
             Populate(kLongLivedTreeDepth, longLivedTree);
 
             // Create long-lived array, filling half of it
-            double []array = new double[kArraySize];
-            for (int i = 0; i < kArraySize/2; ++i)
+            double[] array = new double[kArraySize];
+            for (int i = 0; i < kArraySize / 2; ++i)
             {
-                array[i] = 1.0/i;
+                array[i] = 1.0 / i;
             }
 
             GC.Collect();
@@ -166,5 +161,4 @@ namespace DefaultNamespace {
             return 100;
         }
     }
-
 }

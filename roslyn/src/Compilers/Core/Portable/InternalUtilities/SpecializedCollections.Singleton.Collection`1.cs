@@ -71,11 +71,7 @@ namespace Roslyn.Utilities
 
                         return _loneValue;
                     }
-
-                    set
-                    {
-                        throw new NotSupportedException();
-                    }
+                    set { throw new NotSupportedException(); }
                 }
 
                 public int IndexOf(T item)

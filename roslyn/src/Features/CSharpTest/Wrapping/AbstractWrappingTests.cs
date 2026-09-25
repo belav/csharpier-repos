@@ -17,15 +17,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
 {
     public abstract class AbstractWrappingTests : AbstractCSharpCodeActionTest
     {
-        protected sealed override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected sealed override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
-        private protected TestParameters GetIndentionColumn(int column)
-            => new(globalOptions: Option(CodeActionOptionsStorage.WrappingColumn, column));
+        private protected TestParameters GetIndentionColumn(int column) =>
+            new(globalOptions: Option(CodeActionOptionsStorage.WrappingColumn, column));
 
-        protected Task TestAllWrappingCasesAsync(
-            string input,
-            params string[] outputs)
+        protected Task TestAllWrappingCasesAsync(string input, params string[] outputs)
         {
             return TestAllWrappingCasesAsync(input, parameters: null, outputs);
         }
@@ -33,7 +32,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
         private protected Task TestAllWrappingCasesAsync(
             string input,
             TestParameters parameters,
-            params string[] outputs)
+            params string[] outputs
+        )
         {
             return TestAllInRegularAndScriptAsync(input, parameters, outputs);
         }

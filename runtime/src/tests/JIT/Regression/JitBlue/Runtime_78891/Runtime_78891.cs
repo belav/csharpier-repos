@@ -26,10 +26,7 @@ public class Runtime_78891
     static S5 s_48;
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Consume(short x)
-    {
-
-    }
+    static void Consume(short x) { }
 
     static void M59(S5 arg0, S5 arg1)
     {

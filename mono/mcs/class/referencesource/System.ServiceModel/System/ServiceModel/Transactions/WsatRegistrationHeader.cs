@@ -5,15 +5,14 @@
 namespace System.ServiceModel.Transactions
 {
     using System;
-    using System.ServiceModel.Channels;
     using System.Diagnostics;
-    using System.ServiceModel;
-    using System.Xml;
-    
-    using Microsoft.Transactions.Wsat.Messaging;
-    using XD = System.ServiceModel.XD;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Xml;
+    using Microsoft.Transactions.Wsat.Messaging;
+    using XD = System.ServiceModel.XD;
 
     class WsatRegistrationHeader : AddressHeader
     {
@@ -56,25 +55,31 @@ namespace System.ServiceModel.Transactions
             get { return this.tokenId; }
         }
 
-        protected override void OnWriteStartAddressHeader (XmlDictionaryWriter writer)
+        protected override void OnWriteStartAddressHeader(XmlDictionaryWriter writer)
         {
-            writer.WriteStartElement(DotNetAtomicTransactionExternalStrings.Prefix,
-                                     XD.DotNetAtomicTransactionExternalDictionary.RegisterInfo,
-                                     XD.DotNetAtomicTransactionExternalDictionary.Namespace);
+            writer.WriteStartElement(
+                DotNetAtomicTransactionExternalStrings.Prefix,
+                XD.DotNetAtomicTransactionExternalDictionary.RegisterInfo,
+                XD.DotNetAtomicTransactionExternalDictionary.Namespace
+            );
         }
 
-        protected override void OnWriteAddressHeaderContents (XmlDictionaryWriter writer)
+        protected override void OnWriteAddressHeaderContents(XmlDictionaryWriter writer)
         {
-            writer.WriteStartElement(XD.DotNetAtomicTransactionExternalDictionary.LocalTransactionId,
-                                     XD.DotNetAtomicTransactionExternalDictionary.Namespace);
+            writer.WriteStartElement(
+                XD.DotNetAtomicTransactionExternalDictionary.LocalTransactionId,
+                XD.DotNetAtomicTransactionExternalDictionary.Namespace
+            );
 
             writer.WriteValue(this.transactionId);
             writer.WriteEndElement();
 
             if (this.contextId != null)
             {
-                writer.WriteStartElement(XD.DotNetAtomicTransactionExternalDictionary.ContextId,
-                                         XD.DotNetAtomicTransactionExternalDictionary.Namespace);
+                writer.WriteStartElement(
+                    XD.DotNetAtomicTransactionExternalDictionary.ContextId,
+                    XD.DotNetAtomicTransactionExternalDictionary.Namespace
+                );
 
                 writer.WriteValue(this.contextId);
                 writer.WriteEndElement();
@@ -82,15 +87,21 @@ namespace System.ServiceModel.Transactions
 
             if (this.tokenId != null)
             {
-                writer.WriteStartElement(XD.DotNetAtomicTransactionExternalDictionary.TokenId,
-                                         XD.DotNetAtomicTransactionExternalDictionary.Namespace);
+                writer.WriteStartElement(
+                    XD.DotNetAtomicTransactionExternalDictionary.TokenId,
+                    XD.DotNetAtomicTransactionExternalDictionary.Namespace
+                );
 
                 writer.WriteValue(this.tokenId);
                 writer.WriteEndElement();
             }
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "The call to InvalidEnlistmentHeaderException is safe.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "The call to InvalidEnlistmentHeaderException is safe."
+        )]
         public static WsatRegistrationHeader ReadFrom(Message message)
         {
             int index;
@@ -120,7 +131,9 @@ namespace System.ServiceModel.Transactions
                 catch (XmlException e)
                 {
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnlistmentHeaderException(e.Message, e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidEnlistmentHeaderException(e.Message, e)
+                    );
                 }
             }
 
@@ -135,33 +148,45 @@ namespace System.ServiceModel.Transactions
 
         static WsatRegistrationHeader ReadFrom(XmlDictionaryReader reader)
         {
-            reader.ReadFullStartElement(XD.DotNetAtomicTransactionExternalDictionary.RegisterInfo,
-                                        XD.DotNetAtomicTransactionExternalDictionary.Namespace);
+            reader.ReadFullStartElement(
+                XD.DotNetAtomicTransactionExternalDictionary.RegisterInfo,
+                XD.DotNetAtomicTransactionExternalDictionary.Namespace
+            );
 
-            reader.MoveToStartElement(XD.DotNetAtomicTransactionExternalDictionary.LocalTransactionId,
-                                      XD.DotNetAtomicTransactionExternalDictionary.Namespace);
+            reader.MoveToStartElement(
+                XD.DotNetAtomicTransactionExternalDictionary.LocalTransactionId,
+                XD.DotNetAtomicTransactionExternalDictionary.Namespace
+            );
 
             // TransactionId
             Guid transactionId = reader.ReadElementContentAsGuid();
             if (transactionId == Guid.Empty)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTransactionId)));
+                    new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTransactionId))
+                );
             }
 
             // ContextId
             string contextId;
-            if (reader.IsStartElement(XD.DotNetAtomicTransactionExternalDictionary.ContextId,
-                                      XD.DotNetAtomicTransactionExternalDictionary.Namespace))
+            if (
+                reader.IsStartElement(
+                    XD.DotNetAtomicTransactionExternalDictionary.ContextId,
+                    XD.DotNetAtomicTransactionExternalDictionary.Namespace
+                )
+            )
             {
                 Uri uri;
                 contextId = reader.ReadElementContentAsString().Trim();
-                if (contextId.Length == 0 ||
-                    contextId.Length > CoordinationContext.MaxIdentifierLength ||
-                    !Uri.TryCreate(contextId, UriKind.Absolute, out uri))
+                if (
+                    contextId.Length == 0
+                    || contextId.Length > CoordinationContext.MaxIdentifierLength
+                    || !Uri.TryCreate(contextId, UriKind.Absolute, out uri)
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.InvalidRegistrationHeaderIdentifier)));
+                        new XmlException(SR.GetString(SR.InvalidRegistrationHeaderIdentifier))
+                    );
                 }
             }
             else
@@ -171,14 +196,19 @@ namespace System.ServiceModel.Transactions
 
             // TokenId
             string tokenId;
-            if (reader.IsStartElement(XD.DotNetAtomicTransactionExternalDictionary.TokenId,
-                                      XD.DotNetAtomicTransactionExternalDictionary.Namespace))
+            if (
+                reader.IsStartElement(
+                    XD.DotNetAtomicTransactionExternalDictionary.TokenId,
+                    XD.DotNetAtomicTransactionExternalDictionary.Namespace
+                )
+            )
             {
                 tokenId = reader.ReadElementContentAsString().Trim();
                 if (tokenId.Length == 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTokenId)));
+                        new XmlException(SR.GetString(SR.InvalidRegistrationHeaderTokenId))
+                    );
                 }
             }
             else

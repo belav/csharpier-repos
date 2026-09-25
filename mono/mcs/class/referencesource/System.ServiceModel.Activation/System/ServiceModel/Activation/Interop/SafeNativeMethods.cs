@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Activation.Interop
 {
     using System;
-    using System.Security;
-    using System.Runtime.InteropServices;
-    using System.Security.Principal;
-    using System.Runtime.Versioning;
     using System.Runtime;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Principal;
 
     [SuppressUnmanagedCodeSecurity]
     static class SafeNativeMethods
@@ -25,18 +25,31 @@ namespace System.ServiceModel.Activation.Interop
             [In] IntPtr ThreadHandle,
             [In] TokenAccessLevels DesiredAccess,
             [In] bool OpenAsSelf,
-            [Out] out SafeCloseHandleCritical TokenHandle);
+            [Out] out SafeCloseHandleCritical TokenHandle
+        );
 
         [DllImport(KERNEL32, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         static extern IntPtr GetCurrentThread();
 
-        [Fx.Tag.SecurityNote(Critical = "Calls two safe native methods: GetCurrentThread and OpenThreadToken." +
-            "Marshal.GetLastWin32Error captures current thread token in a SecurityCritical field.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls two safe native methods: GetCurrentThread and OpenThreadToken."
+                + "Marshal.GetLastWin32Error captures current thread token in a SecurityCritical field."
+        )]
         [SecurityCritical]
-        internal static bool OpenCurrentThreadTokenCritical(TokenAccessLevels desiredAccess, bool openAsSelf, out SafeCloseHandleCritical tokenHandle, out int error)
+        internal static bool OpenCurrentThreadTokenCritical(
+            TokenAccessLevels desiredAccess,
+            bool openAsSelf,
+            out SafeCloseHandleCritical tokenHandle,
+            out int error
+        )
         {
-            bool result = OpenThreadTokenCritical(GetCurrentThread(), desiredAccess, openAsSelf, out tokenHandle);
+            bool result = OpenThreadTokenCritical(
+                GetCurrentThread(),
+                desiredAccess,
+                openAsSelf,
+                out tokenHandle
+            );
             error = Marshal.GetLastWin32Error();
             return result;
         }

@@ -1,23 +1,23 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.CodeDom;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Windows.Forms;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
 
     internal partial class StateDesigner : FreeformActivityDesigner
     {
@@ -26,20 +26,29 @@ namespace System.Workflow.Activities
             private CompositeActivity _eventHandler;
             private DesignerEdges _designerEdges;
 
-            public DesignerLayoutConnectionPoint(ActivityDesigner associatedDesigner, int connectionIndex, CompositeActivity eventHandler, DesignerEdges designerEdges)
+            public DesignerLayoutConnectionPoint(
+                ActivityDesigner associatedDesigner,
+                int connectionIndex,
+                CompositeActivity eventHandler,
+                DesignerEdges designerEdges
+            )
                 : base(associatedDesigner, designerEdges, connectionIndex)
             {
-                Debug.Assert(designerEdges == DesignerEdges.Left || designerEdges == DesignerEdges.Right);
+                Debug.Assert(
+                    designerEdges == DesignerEdges.Left || designerEdges == DesignerEdges.Right
+                );
                 _eventHandler = eventHandler;
                 _designerEdges = designerEdges;
-
             }
 
             public override Point Location
             {
                 get
                 {
-                    Debug.Assert(this.DesignerEdges == DesignerEdges.Left || this.DesignerEdges == DesignerEdges.Right);
+                    Debug.Assert(
+                        this.DesignerEdges == DesignerEdges.Left
+                            || this.DesignerEdges == DesignerEdges.Right
+                    );
                     DesignerLayout designerLayout = this.DesignerLayout;
                     if (designerLayout == null)
                         return Point.Empty;
@@ -55,25 +64,22 @@ namespace System.Workflow.Activities
                 get
                 {
                     DesignerLayout designerLayout;
-                    ((StateDesigner)this.AssociatedDesigner).DesignerLayouts.TryGetValue(this._eventHandler, out designerLayout);
+                    ((StateDesigner)this.AssociatedDesigner).DesignerLayouts.TryGetValue(
+                        this._eventHandler,
+                        out designerLayout
+                    );
                     return designerLayout;
                 }
             }
 
             public DesignerEdges DesignerEdges
             {
-                get
-                {
-                    return _designerEdges;
-                }
+                get { return _designerEdges; }
             }
 
             public CompositeActivity EventHandler
             {
-                get
-                {
-                    return _eventHandler;
-                }
+                get { return _eventHandler; }
             }
         }
 
@@ -111,58 +117,34 @@ namespace System.Workflow.Activities
             #region Properties
             public ActivityDesigner ActivityDesigner
             {
-                get
-                {
-                    return _activityDesigner;
-                }
+                get { return _activityDesigner; }
             }
 
             public Rectangle Bounds
             {
-                get
-                {
-                    return new Rectangle(_location, _size);
-                }
+                get { return new Rectangle(_location, _size); }
             }
 
             public List<Layout> Layouts
             {
-                get
-                {
-                    return _layouts;
-                }
+                get { return _layouts; }
             }
 
             public Point Location
             {
-                get
-                {
-                    return _location;
-                }
-                set
-                {
-                    _location = value;
-                }
+                get { return _location; }
+                set { _location = value; }
             }
 
             public Size Size
             {
-                get
-                {
-                    return _size;
-                }
-                set
-                {
-                    _size = value;
-                }
+                get { return _size; }
+                set { _size = value; }
             }
 
             public Layout MouseOverLayout
             {
-                get
-                {
-                    return _mouseOverLayout;
-                }
+                get { return _mouseOverLayout; }
                 set
                 {
                     if (value == _mouseOverLayout)
@@ -180,14 +162,8 @@ namespace System.Workflow.Activities
 
             public virtual Size MinimumSize
             {
-                get
-                {
-                    return _minimumSize;
-                }
-                set
-                {
-                    _minimumSize = value;
-                }
+                get { return _minimumSize; }
+                set { _minimumSize = value; }
             }
 
             #endregion Properties
@@ -222,22 +198,34 @@ namespace System.Workflow.Activities
                 foreach (Layout layout in _layouts)
                 {
                     Point currentLocation = layout.Location;
-                    Point newChildDesignerLocation = new Point(currentLocation.X - offset.X, currentLocation.Y - offset.Y);
+                    Point newChildDesignerLocation = new Point(
+                        currentLocation.X - offset.X,
+                        currentLocation.Y - offset.Y
+                    );
                     layout.MoveLayout(newChildDesignerLocation);
                 }
 
                 _location = newLocation;
             }
 
-            public virtual void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
-            {
-            }
+            public virtual void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            ) { }
 
-            public virtual void OnLayoutPosition(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
-            {
-            }
+            public virtual void OnLayoutPosition(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            ) { }
 
-            public virtual void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public virtual void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 foreach (Layout layout in _layouts)
                 {
@@ -338,7 +326,9 @@ namespace System.Workflow.Activities
 
             public virtual void Invalidate()
             {
-                WorkflowView parentView = StateDesigner.GetService(_activityDesigner, typeof(WorkflowView)) as WorkflowView;
+                WorkflowView parentView =
+                    StateDesigner.GetService(_activityDesigner, typeof(WorkflowView))
+                    as WorkflowView;
                 if (parentView != null)
                     parentView.InvalidateLogicalRectangle(this.Bounds);
             }
@@ -392,9 +382,7 @@ namespace System.Workflow.Activities
             #region Constructor
 
             public DesignerLayoutBase(ActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             #endregion Constructor
 
@@ -420,10 +408,7 @@ namespace System.Workflow.Activities
 
             public string Text
             {
-                get
-                {
-                    return this.ActivityDesigner.Activity.Name;
-                }
+                get { return this.ActivityDesigner.Activity.Name; }
             }
 
             #endregion Properties
@@ -432,20 +417,37 @@ namespace System.Workflow.Activities
 
             public override void MoveLayout(Point newLocation)
             {
-                Point offset = new Point(this.Location.X - newLocation.X, this.Location.Y - newLocation.Y);
+                Point offset = new Point(
+                    this.Location.X - newLocation.X,
+                    this.Location.Y - newLocation.Y
+                );
                 _textLocation = new Point(_textLocation.X - offset.X, _textLocation.Y - offset.Y);
-                _imageLocation = new Point(_imageLocation.X - offset.X, _imageLocation.Y - offset.Y);
+                _imageLocation = new Point(
+                    _imageLocation.X - offset.X,
+                    _imageLocation.Y - offset.Y
+                );
                 base.MoveLayout(newLocation);
             }
 
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 base.OnLayoutSize(graphics, designerTheme, ambientTheme, containerSize);
 
                 _imageSize = designerTheme.ImageSize;
                 string text = this.Text;
                 Font font = designerTheme.Font;
-                _textSize = StateMachineDesignerPaint.MeasureString(graphics, font, text, StringAlignment.Near, Size.Empty);
+                _textSize = StateMachineDesignerPaint.MeasureString(
+                    graphics,
+                    font,
+                    text,
+                    StringAlignment.Near,
+                    Size.Empty
+                );
                 int width = _imageSize.Width + ImagePadding + _textSize.Width;
                 width += ambientTheme.Margin.Width * 2;
                 int height = Math.Max(_imageSize.Height, _textSize.Height);
@@ -455,7 +457,11 @@ namespace System.Workflow.Activities
                 this.Size = size;
             }
 
-            public override void OnLayoutPosition(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnLayoutPosition(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 base.OnLayoutPosition(graphics, designerTheme, ambientTheme);
                 Point origin = this.Location;
@@ -466,7 +472,11 @@ namespace System.Workflow.Activities
                 _textLocation = origin;
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 ActivityDesigner activityDesigner = this.ActivityDesigner;
 
@@ -474,9 +484,22 @@ namespace System.Workflow.Activities
 
                 Image image = StateDesigner.GetDesignerImage(activityDesigner);
                 if (image != null)
-                    ActivityDesignerPaint.DrawImage(graphics, image, this.ImageRectangle, DesignerContentAlignment.Fill);
+                    ActivityDesignerPaint.DrawImage(
+                        graphics,
+                        image,
+                        this.ImageRectangle,
+                        DesignerContentAlignment.Fill
+                    );
 
-                ActivityDesignerPaint.DrawText(graphics, font, this.Text, TextRectangle, StringAlignment.Near, ambientTheme.TextQuality, designerTheme.ForegroundBrush);
+                ActivityDesignerPaint.DrawText(
+                    graphics,
+                    font,
+                    this.Text,
+                    TextRectangle,
+                    StringAlignment.Near,
+                    ambientTheme.TextQuality,
+                    designerTheme.ForegroundBrush
+                );
             }
 
             #endregion Methods
@@ -489,16 +512,17 @@ namespace System.Workflow.Activities
         internal class DesignerLayout : DesignerLayoutBase
         {
             public DesignerLayout(ActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             public override HitTestInfo HitTest(Point point)
             {
                 HitTestInfo hitInfo = HitTestInfo.Nowhere;
                 if (this.Bounds.Contains(point))
                 {
-                    hitInfo = new HitTestInfo(this.ActivityDesigner, HitTestLocations.Designer | HitTestLocations.ActionArea);
+                    hitInfo = new HitTestInfo(
+                        this.ActivityDesigner,
+                        HitTestLocations.Designer | HitTestLocations.ActionArea
+                    );
                 }
 
                 return hitInfo;
@@ -541,18 +565,13 @@ namespace System.Workflow.Activities
 
             #region Constructor
             public DesignerLinkLayout(ActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
             #endregion Constructor
 
             #region Properties
             public bool MouseOver
             {
-                get
-                {
-                    return _mouseOver;
-                }
+                get { return _mouseOver; }
                 set
                 {
                     if (value == _mouseOver)
@@ -565,14 +584,8 @@ namespace System.Workflow.Activities
 
             public StateDesigner ParentStateDesigner
             {
-                get
-                {
-                    return _parentStateDesigner;
-                }
-                set
-                {
-                    _parentStateDesigner = value;
-                }
+                get { return _parentStateDesigner; }
+                set { _parentStateDesigner = value; }
             }
             #endregion Properties
 
@@ -600,19 +613,41 @@ namespace System.Workflow.Activities
                 Invalidate();
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 ActivityDesigner activityDesigner = this.ActivityDesigner;
 
                 if (this.MouseOver)
                 {
-                    using (Font font = new Font(designerTheme.Font, FontStyle.Underline | designerTheme.Font.Style))
+                    using (
+                        Font font = new Font(
+                            designerTheme.Font,
+                            FontStyle.Underline | designerTheme.Font.Style
+                        )
+                    )
                     {
                         Image image = StateDesigner.GetDesignerImage(activityDesigner);
                         if (image != null)
-                            ActivityDesignerPaint.DrawImage(graphics, image, this.ImageRectangle, DesignerContentAlignment.Fill);
+                            ActivityDesignerPaint.DrawImage(
+                                graphics,
+                                image,
+                                this.ImageRectangle,
+                                DesignerContentAlignment.Fill
+                            );
 
-                        ActivityDesignerPaint.DrawText(graphics, font, this.Text, TextRectangle, StringAlignment.Near, ambientTheme.TextQuality, designerTheme.ForegroundBrush);
+                        ActivityDesignerPaint.DrawText(
+                            graphics,
+                            font,
+                            this.Text,
+                            TextRectangle,
+                            StringAlignment.Near,
+                            ambientTheme.TextQuality,
+                            designerTheme.ForegroundBrush
+                        );
                     }
                 }
                 else
@@ -633,9 +668,7 @@ namespace System.Workflow.Activities
             #region Constructor
 
             public EventHandlersLayout(ActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             #endregion Constructor
 
@@ -655,7 +688,12 @@ namespace System.Workflow.Activities
                 }
             }
 
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 Size selectionSize = ambientTheme.SelectionSize;
                 Size minimumSize = new Size();
@@ -665,7 +703,8 @@ namespace System.Workflow.Activities
                     layout.OnLayoutSize(graphics, designerTheme, ambientTheme, minimumSize);
                     minimumSize.Height += layout.Size.Height;
                     minimumSize.Height += selectionSize.Height;
-                    int layoutWidth = layout.Size.Width + 2 * (selectionSize.Width + ambientTheme.Margin.Width);
+                    int layoutWidth =
+                        layout.Size.Width + 2 * (selectionSize.Width + ambientTheme.Margin.Width);
                     minimumSize.Width = Math.Max(minimumSize.Width, layoutWidth);
                 }
 
@@ -680,7 +719,11 @@ namespace System.Workflow.Activities
                 this.Size = size;
             }
 
-            public override void OnLayoutPosition(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnLayoutPosition(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 Size selectionSize = ambientTheme.SelectionSize;
                 int x = Location.X + EventDrivenPadding;
@@ -696,7 +739,11 @@ namespace System.Workflow.Activities
                 }
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 base.OnPaint(graphics, designerTheme, ambientTheme);
 
@@ -704,11 +751,22 @@ namespace System.Workflow.Activities
                 ContainedDesignersParser parser = stateDesigner._designersParser;
                 // we only draw the separation line
                 // if we have at least one event driven and one state
-                if ((parser.EventDrivenDesigners.Count > 0 || parser.StateInitializationDesigners.Count > 0 || parser.StateFinalizationDesigners.Count > 0) &&
-                    (parser.StateDesigners.Count > 0 || parser.LeafStateDesigners.Count > 0))
+                if (
+                    (
+                        parser.EventDrivenDesigners.Count > 0
+                        || parser.StateInitializationDesigners.Count > 0
+                        || parser.StateFinalizationDesigners.Count > 0
+                    ) && (parser.StateDesigners.Count > 0 || parser.LeafStateDesigners.Count > 0)
+                )
                 {
                     Rectangle bounds = this.Bounds;
-                    graphics.DrawLine(designerTheme.BorderPen, bounds.Left, bounds.Bottom, bounds.Right, bounds.Bottom);
+                    graphics.DrawLine(
+                        designerTheme.BorderPen,
+                        bounds.Left,
+                        bounds.Bottom,
+                        bounds.Right,
+                        bounds.Bottom
+                    );
                 }
             }
 
@@ -731,9 +789,7 @@ namespace System.Workflow.Activities
             #region Constructor
 
             public BreadCrumbBarLayout(ActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             #endregion Constructor
 
@@ -753,18 +809,30 @@ namespace System.Workflow.Activities
                 }
             }
 
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 base.OnLayoutSize(graphics, designerTheme, ambientTheme, containerSize);
 
                 InitializeLayouts();
 
-                CompositeDesignerTheme compositeDesignerTheme = designerTheme as CompositeDesignerTheme;
+                CompositeDesignerTheme compositeDesignerTheme =
+                    designerTheme as CompositeDesignerTheme;
                 if (compositeDesignerTheme == null)
                     return;
 
                 Font font = designerTheme.BoldFont;
-                _breadCrumbSeparatorSize = StateMachineDesignerPaint.MeasureString(graphics, font, BreadCrumbSeparator, StringAlignment.Near, Size.Empty);
+                _breadCrumbSeparatorSize = StateMachineDesignerPaint.MeasureString(
+                    graphics,
+                    font,
+                    BreadCrumbSeparator,
+                    StringAlignment.Near,
+                    Size.Empty
+                );
                 Size size = Size.Empty;
 
                 foreach (Layout layout in Layouts)
@@ -778,7 +846,11 @@ namespace System.Workflow.Activities
                 this.Size = size;
             }
 
-            public override void OnLayoutPosition(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnLayoutPosition(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 Point location = this.Location;
                 foreach (Layout layout in this.Layouts)
@@ -789,7 +861,11 @@ namespace System.Workflow.Activities
                 }
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 if (Layouts.Count == 0)
                     return;
@@ -809,10 +885,18 @@ namespace System.Workflow.Activities
                         layout.Bounds.Right,
                         layout.Location.Y,
                         _breadCrumbSeparatorSize.Width,
-                        _breadCrumbSeparatorSize.Height);
+                        _breadCrumbSeparatorSize.Height
+                    );
 
-                    ActivityDesignerPaint.DrawText(graphics, font, BreadCrumbSeparator, separatorRectangle,
-                        StringAlignment.Near, textQuality, brush);
+                    ActivityDesignerPaint.DrawText(
+                        graphics,
+                        font,
+                        BreadCrumbSeparator,
+                        separatorRectangle,
+                        StringAlignment.Near,
+                        textQuality,
+                        brush
+                    );
                 }
 
                 // draw the last one
@@ -832,37 +916,59 @@ namespace System.Workflow.Activities
             #region Constructor
 
             public TextLayout(ActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             #endregion Constructor
 
             #region Methods
 
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 base.OnLayoutSize(graphics, designerTheme, ambientTheme, containerSize);
 
-                CompositeDesignerTheme compositeDesignerTheme = designerTheme as CompositeDesignerTheme;
+                CompositeDesignerTheme compositeDesignerTheme =
+                    designerTheme as CompositeDesignerTheme;
                 string text = this.ActivityDesigner.Text;
                 Size size = Size.Empty;
                 if (compositeDesignerTheme != null && !String.IsNullOrEmpty(text))
                 {
-                    size = StateMachineDesignerPaint.MeasureString(graphics, compositeDesignerTheme.Font, text, StringAlignment.Center, Size.Empty);
+                    size = StateMachineDesignerPaint.MeasureString(
+                        graphics,
+                        compositeDesignerTheme.Font,
+                        text,
+                        StringAlignment.Center,
+                        Size.Empty
+                    );
                 }
                 this.MinimumSize = size;
                 this.Size = size;
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 string text = this.ActivityDesigner.Text;
                 if (String.IsNullOrEmpty(text))
                     return;
 
                 Font font = designerTheme.Font;
-                ActivityDesignerPaint.DrawText(graphics, font, text, this.Bounds, StringAlignment.Near, ambientTheme.TextQuality, designerTheme.ForegroundBrush);
+                ActivityDesignerPaint.DrawText(
+                    graphics,
+                    font,
+                    text,
+                    this.Bounds,
+                    StringAlignment.Near,
+                    ambientTheme.TextQuality,
+                    designerTheme.ForegroundBrush
+                );
             }
 
             #endregion Methods
@@ -877,19 +983,23 @@ namespace System.Workflow.Activities
             #region Constructor
 
             public ImageLayout(ActivityDesigner activityDesigner)
-                : base(activityDesigner)
-            {
-            }
+                : base(activityDesigner) { }
 
             #endregion Constructor
 
             #region Methods
 
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 base.OnLayoutSize(graphics, designerTheme, ambientTheme, containerSize);
 
-                CompositeDesignerTheme compositeDesignerTheme = designerTheme as CompositeDesignerTheme;
+                CompositeDesignerTheme compositeDesignerTheme =
+                    designerTheme as CompositeDesignerTheme;
                 Size size = Size.Empty;
                 if (this.ActivityDesigner.Image != null && compositeDesignerTheme != null)
                 {
@@ -899,11 +1009,20 @@ namespace System.Workflow.Activities
                 this.Size = size;
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 Image image = this.ActivityDesigner.Image;
                 if (image != null)
-                    ActivityDesignerPaint.DrawImage(graphics, image, this.Bounds, DesignerContentAlignment.Fill);
+                    ActivityDesignerPaint.DrawImage(
+                        graphics,
+                        image,
+                        this.Bounds,
+                        DesignerContentAlignment.Fill
+                    );
             }
 
             #endregion Methods
@@ -940,25 +1059,24 @@ namespace System.Workflow.Activities
 
             public TextLayout TextLayout
             {
-                get
-                {
-                    return _textLayout;
-                }
+                get { return _textLayout; }
             }
 
             public ImageLayout ImageLayout
             {
-                get
-                {
-                    return _imageLayout;
-                }
+                get { return _imageLayout; }
             }
 
             #endregion Properties
 
             #region Methods
 
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 base.OnLayoutSize(graphics, designerTheme, ambientTheme, containerSize);
 
@@ -966,7 +1084,11 @@ namespace System.Workflow.Activities
                 _textLayout.OnLayoutSize(graphics, designerTheme, ambientTheme, Size.Empty);
                 _imageLayout.OnLayoutSize(graphics, designerTheme, ambientTheme, Size.Empty);
 
-                minimumSize.Width = designerTheme.BorderWidth * 2 + 10 + _textLayout.Size.Width + _imageLayout.Size.Width;
+                minimumSize.Width =
+                    designerTheme.BorderWidth * 2
+                    + 10
+                    + _textLayout.Size.Width
+                    + _imageLayout.Size.Width;
                 minimumSize.Height = Math.Max(_textLayout.Size.Height, _imageLayout.Size.Height);
                 minimumSize.Height += designerTheme.BorderWidth * 2 + 4;
 
@@ -976,7 +1098,11 @@ namespace System.Workflow.Activities
                 this.Size = size;
             }
 
-            public override void OnLayoutPosition(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnLayoutPosition(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
                 Point origin = this.Location;
@@ -988,7 +1114,11 @@ namespace System.Workflow.Activities
                 CalculateTextLayout();
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 Rectangle rectangle = this.Bounds;
 
@@ -1019,10 +1149,23 @@ namespace System.Workflow.Activities
 
                 if (rectangle.Width > 0 && rectangle.Height > 0)
                 {
-                    using (Brush linearGradientBrush = new LinearGradientBrush(rectangle, color1, color2, LinearGradientMode.Vertical))
+                    using (
+                        Brush linearGradientBrush = new LinearGradientBrush(
+                            rectangle,
+                            color1,
+                            color2,
+                            LinearGradientMode.Vertical
+                        )
+                    )
                     {
                         graphics.FillRectangle(linearGradientBrush, rectangle);
-                        graphics.DrawLine(designerTheme.BorderPen, rectangle.Left, rectangle.Bottom, rectangle.Right, rectangle.Bottom);
+                        graphics.DrawLine(
+                            designerTheme.BorderPen,
+                            rectangle.Left,
+                            rectangle.Bottom,
+                            rectangle.Right,
+                            rectangle.Bottom
+                        );
                     }
                 }
 
@@ -1074,7 +1217,8 @@ namespace System.Workflow.Activities
             public StatesLayout(
                 ActivityDesigner activityDesigner,
                 TitleBarLayout titleBarLayout,
-                EventHandlersLayout eventHandlersLayout)
+                EventHandlersLayout eventHandlersLayout
+            )
                 : base(activityDesigner)
             {
                 _titleBarLayout = titleBarLayout;
@@ -1089,10 +1233,7 @@ namespace System.Workflow.Activities
 
             private StateDesigner StateDesigner
             {
-                get
-                {
-                    return (StateDesigner)this.ActivityDesigner;
-                }
+                get { return (StateDesigner)this.ActivityDesigner; }
             }
 
             public override Size MinimumSize
@@ -1108,29 +1249,36 @@ namespace System.Workflow.Activities
 
             public EventHandlersLayout EventHandlersLayout
             {
-                get
-                {
-                    return _eventHandlersLayout;
-                }
+                get { return _eventHandlersLayout; }
             }
 
             #endregion Properties
 
             #region Methods
 
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 base.OnLayoutSize(graphics, designerTheme, ambientTheme, containerSize);
 
-                CompositeDesignerTheme compositeDesignerTheme = (CompositeDesignerTheme)designerTheme;
+                CompositeDesignerTheme compositeDesignerTheme =
+                    (CompositeDesignerTheme)designerTheme;
 
                 Size size = containerSize;
 
                 _titleBarLayout.OnLayoutSize(graphics, compositeDesignerTheme, ambientTheme, size);
                 _eventHandlersLayout.OnLayoutSize(graphics, designerTheme, ambientTheme, size);
 
-                int minWidth = Math.Max(_titleBarLayout.MinimumSize.Width, _eventHandlersLayout.MinimumSize.Width);
-                int minHeight = _titleBarLayout.MinimumSize.Height + _eventHandlersLayout.MinimumSize.Height;
+                int minWidth = Math.Max(
+                    _titleBarLayout.MinimumSize.Width,
+                    _eventHandlersLayout.MinimumSize.Width
+                );
+                int minHeight =
+                    _titleBarLayout.MinimumSize.Height + _eventHandlersLayout.MinimumSize.Height;
                 this.MinimumSize = new Size(minWidth, minHeight);
 
                 size.Width = Math.Max(minWidth, size.Width);
@@ -1139,9 +1287,10 @@ namespace System.Workflow.Activities
                 if (this.StateDesigner.NeedsAutoLayout)
                 {
                     int maximumX = size.Width;
-                    int maximumY = _titleBarLayout.Size.Height +
-                        _eventHandlersLayout.Size.Height +
-                        DefaultStateDesignerAutoLayoutDistance;
+                    int maximumY =
+                        _titleBarLayout.Size.Height
+                        + _eventHandlersLayout.Size.Height
+                        + DefaultStateDesignerAutoLayoutDistance;
 
                     bool containsStates = false;
 
@@ -1174,7 +1323,11 @@ namespace System.Workflow.Activities
                 this.Size = size;
             }
 
-            public override void OnLayoutPosition(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnLayoutPosition(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
                 _titleBarLayout.Location = this.Location;
                 _titleBarLayout.OnLayoutPosition(graphics, designerTheme, ambientTheme);
@@ -1186,9 +1339,17 @@ namespace System.Workflow.Activities
                 _eventHandlersLayout.OnLayoutPosition(graphics, designerTheme, ambientTheme);
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
-                GraphicsPath path = StateMachineDesignerPaint.GetDesignerPath(this.ActivityDesigner, this.Bounds, designerTheme);
+                GraphicsPath path = StateMachineDesignerPaint.GetDesignerPath(
+                    this.ActivityDesigner,
+                    this.Bounds,
+                    designerTheme
+                );
                 Brush backgroundBrush = designerTheme.GetBackgroundBrush(this.Bounds);
                 graphics.FillPath(backgroundBrush, path);
 
@@ -1197,17 +1358,24 @@ namespace System.Workflow.Activities
                 if (ambientTheme.ShowDesignerBorder)
                     graphics.DrawPath(designerTheme.BorderPen, path);
 
-                if (this.StateDesigner.ContainedDesigners.Count == 0 &&
-                    !this.StateDesigner.IsStateCustomActivity)
+                if (
+                    this.StateDesigner.ContainedDesigners.Count == 0
+                    && !this.StateDesigner.IsStateCustomActivity
+                )
                 {
                     Point location = new Point(this.Location.X, _titleBarLayout.Bounds.Bottom);
-                    Size size = new Size(this.Size.Width, this.Size.Height - _titleBarLayout.Bounds.Height);
+                    Size size = new Size(
+                        this.Size.Width,
+                        this.Size.Height - _titleBarLayout.Bounds.Height
+                    );
                     Rectangle rectangle = new Rectangle(location, size);
                     rectangle.Inflate(-1, -1);
 
                     StateActivity state = (StateActivity)this.StateDesigner.Activity;
-                    if (StateMachineHelpers.IsLeafState(state) &&
-                        StateMachineHelpers.IsCompletedState(state))
+                    if (
+                        StateMachineHelpers.IsLeafState(state)
+                        && StateMachineHelpers.IsCompletedState(state)
+                    )
                         return;
 
                     if (this.StateDesigner.DragDropActive)
@@ -1222,7 +1390,8 @@ namespace System.Workflow.Activities
                                 rectangle,
                                 StringAlignment.Center,
                                 ambientTheme.TextQuality,
-                                brush);
+                                brush
+                            );
                         }
                     }
                     else
@@ -1234,14 +1403,17 @@ namespace System.Workflow.Activities
                             rectangle,
                             StringAlignment.Center,
                             ambientTheme.TextQuality,
-                            designerTheme.ForegroundBrush);
+                            designerTheme.ForegroundBrush
+                        );
                     }
                 }
             }
 
             public override void ResizeLayout(Size newSize)
             {
-                _eventHandlersLayout.ResizeLayout(new Size(newSize.Width, _eventHandlersLayout.Size.Height));
+                _eventHandlersLayout.ResizeLayout(
+                    new Size(newSize.Width, _eventHandlersLayout.Size.Height)
+                );
                 _titleBarLayout.ResizeLayout(new Size(newSize.Width, _titleBarLayout.Size.Height));
                 base.ResizeLayout(newSize);
             }
@@ -1264,7 +1436,10 @@ namespace System.Workflow.Activities
             #endregion
 
             #region Constructor
-            public EventDrivenLayout(ActivityDesigner activityDesigner, TitleBarLayout titleBarLayout)
+            public EventDrivenLayout(
+                ActivityDesigner activityDesigner,
+                TitleBarLayout titleBarLayout
+            )
                 : base(activityDesigner)
             {
                 _breadCrumbBarLayout = new BreadCrumbBarLayout(activityDesigner);
@@ -1273,7 +1448,9 @@ namespace System.Workflow.Activities
                 if (stateDesigner != null)
                 {
                     _designerLayout.ParentStateDesigner = stateDesigner;
-                    _designerLayout.MouseDown += new MouseEventHandler(stateDesigner.StateDesignerLinkMouseDown);
+                    _designerLayout.MouseDown += new MouseEventHandler(
+                        stateDesigner.StateDesignerLinkMouseDown
+                    );
                 }
                 _titleBarLayout = titleBarLayout;
             }
@@ -1283,7 +1460,7 @@ namespace System.Workflow.Activities
                 this.Layouts.Clear();
                 if (this.StateDesigner.IsRootStateDesigner)
                 {
-                    // we only display the title bar and 
+                    // we only display the title bar and
                     // the bread crumb bar at the top most level
                     this.Layouts.Add(_titleBarLayout);
                     this.Layouts.Add(_breadCrumbBarLayout);
@@ -1300,16 +1477,18 @@ namespace System.Workflow.Activities
 
             private StateDesigner StateDesigner
             {
-                get
-                {
-                    return (StateDesigner)this.ActivityDesigner;
-                }
+                get { return (StateDesigner)this.ActivityDesigner; }
             }
 
             #endregion Properties
 
             #region Methods
-            public override void OnLayoutSize(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme, Size containerSize)
+            public override void OnLayoutSize(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme,
+                Size containerSize
+            )
             {
                 base.OnLayoutSize(graphics, designerTheme, ambientTheme, containerSize);
 
@@ -1328,34 +1507,51 @@ namespace System.Workflow.Activities
                     _titleBarLayout.OnLayoutSize(graphics, designerTheme, ambientTheme, size);
                     _breadCrumbBarLayout.OnLayoutSize(graphics, designerTheme, ambientTheme, size);
 
-                    size.Width = Math.Max(size.Width, activeDesignerSize.Width + ActiveDesignerPadding * 2);
+                    size.Width = Math.Max(
+                        size.Width,
+                        activeDesignerSize.Width + ActiveDesignerPadding * 2
+                    );
                     size.Width = Math.Max(size.Width, _titleBarLayout.Size.Width);
                     size.Width = Math.Max(size.Width, _breadCrumbBarLayout.Size.Width);
 
                     int minHeight =
-                        activeDesignerSize.Height +
-                        _titleBarLayout.Size.Height +
-                        _breadCrumbBarLayout.Size.Height +
-                        ActiveDesignerPadding * 3 +
-                        ambientTheme.SelectionSize.Height * 2;
+                        activeDesignerSize.Height
+                        + _titleBarLayout.Size.Height
+                        + _breadCrumbBarLayout.Size.Height
+                        + ActiveDesignerPadding * 3
+                        + ambientTheme.SelectionSize.Height * 2;
                     size.Height = Math.Max(size.Height, minHeight);
                     _titleBarLayout.ResizeLayout(new Size(size.Width, _titleBarLayout.Size.Height));
                 }
                 else
                 {
                     _designerLayout.OnLayoutSize(graphics, designerTheme, ambientTheme, size);
-                    size.Width = Math.Max(size.Width, activeDesigner.Size.Width + ActiveDesignerPadding * 2);
+                    size.Width = Math.Max(
+                        size.Width,
+                        activeDesigner.Size.Width + ActiveDesignerPadding * 2
+                    );
                     size.Width = Math.Max(size.Width, _designerLayout.Size.Width);
-                    size.Height = Math.Max(size.Height, activeDesigner.Size.Height + ActiveDesignerPadding * 2 + _designerLayout.Size.Height + ambientTheme.SelectionSize.Height * 2);
+                    size.Height = Math.Max(
+                        size.Height,
+                        activeDesigner.Size.Height
+                            + ActiveDesignerPadding * 2
+                            + _designerLayout.Size.Height
+                            + ambientTheme.SelectionSize.Height * 2
+                    );
                 }
 
                 this.MinimumSize = size;
                 this.Size = size;
             }
 
-            public override void OnLayoutPosition(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnLayoutPosition(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
-                CompositeDesignerTheme compositeDesignerTheme = designerTheme as CompositeDesignerTheme;
+                CompositeDesignerTheme compositeDesignerTheme =
+                    designerTheme as CompositeDesignerTheme;
                 if (compositeDesignerTheme == null)
                     return;
 
@@ -1375,10 +1571,14 @@ namespace System.Workflow.Activities
                 {
                     Point designerLayoutLocation = new Point(
                         bounds.Left + (bounds.Width - _designerLayout.Size.Width) / 2,
-                        bounds.Top + ambientTheme.SelectionSize.Height);
+                        bounds.Top + ambientTheme.SelectionSize.Height
+                    );
                     _designerLayout.Location = designerLayoutLocation;
                     _designerLayout.OnLayoutPosition(graphics, designerTheme, ambientTheme);
-                    origin.Y = _designerLayout.Bounds.Bottom + ambientTheme.SelectionSize.Height + ActiveDesignerPadding;
+                    origin.Y =
+                        _designerLayout.Bounds.Bottom
+                        + ambientTheme.SelectionSize.Height
+                        + ActiveDesignerPadding;
                 }
 
                 Size activeDesignerSize = this.StateDesigner.ActiveDesigner.Size;
@@ -1387,9 +1587,17 @@ namespace System.Workflow.Activities
                 this.StateDesigner.ActiveDesigner.Location = origin;
             }
 
-            public override void OnPaint(Graphics graphics, ActivityDesignerTheme designerTheme, AmbientTheme ambientTheme)
+            public override void OnPaint(
+                Graphics graphics,
+                ActivityDesignerTheme designerTheme,
+                AmbientTheme ambientTheme
+            )
             {
-                GraphicsPath path = StateMachineDesignerPaint.GetDesignerPath(this.ActivityDesigner, this.Bounds, designerTheme);
+                GraphicsPath path = StateMachineDesignerPaint.GetDesignerPath(
+                    this.ActivityDesigner,
+                    this.Bounds,
+                    designerTheme
+                );
                 Brush backgroundBrush = designerTheme.GetBackgroundBrush(this.Bounds);
                 graphics.FillPath(backgroundBrush, path);
 
@@ -1403,7 +1611,9 @@ namespace System.Workflow.Activities
             {
                 if (this.StateDesigner.IsRootStateDesigner)
                 {
-                    _titleBarLayout.ResizeLayout(new Size(newSize.Width, _titleBarLayout.Size.Height));
+                    _titleBarLayout.ResizeLayout(
+                        new Size(newSize.Width, _titleBarLayout.Size.Height)
+                    );
                 }
                 base.ResizeLayout(newSize);
             }

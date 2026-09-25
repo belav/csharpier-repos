@@ -8,14 +8,16 @@
  * Config related classes for HttpApplication
  */
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     using System;
-    using System.Text;
     using System.Globalization;
+    using System.Text;
 
-    internal class HandlerMappingMemo {
-        internal HandlerMappingMemo(HttpHandlerAction mapping, String verb, VirtualPath path) {
+    internal class HandlerMappingMemo
+    {
+        internal HandlerMappingMemo(HttpHandlerAction mapping, String verb, VirtualPath path)
+        {
             _mapping = mapping;
             _verb = verb;
             _path = path;
@@ -25,14 +27,16 @@ namespace System.Web.Configuration {
         private String _verb;
         private VirtualPath _path;
 
-        internal /*public*/ bool IsMatch(String verb, VirtualPath path) {
+        internal /*public*/
+        bool IsMatch(String verb, VirtualPath path)
+        {
             return _verb.Equals(verb) && _path.Equals(path);
         }
 
-        internal /*public*/ HttpHandlerAction Mapping {
-            get {
-                return _mapping;
-            }
+        internal /*public*/
+        HttpHandlerAction Mapping
+        {
+            get { return _mapping; }
         }
     }
 }

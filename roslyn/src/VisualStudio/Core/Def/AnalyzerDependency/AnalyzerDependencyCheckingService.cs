@@ -28,11 +28,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// Object given as key for <see cref="HostDiagnosticUpdateSource.UpdateAndAddDiagnosticsArgsForProject"/>.
         /// </summary>
         private static readonly object s_dependencyConflictErrorId = new();
-        private static readonly IIgnorableAssemblyList s_systemPrefixList = new IgnorableAssemblyNamePrefixList("System");
-        private static readonly IIgnorableAssemblyList s_codeAnalysisPrefixList = new IgnorableAssemblyNamePrefixList("Microsoft.CodeAnalysis");
-        private static readonly IIgnorableAssemblyList s_explicitlyIgnoredAssemblyList = new IgnorableAssemblyIdentityList(GetExplicitlyIgnoredAssemblyIdentities());
-        private static readonly IIgnorableAssemblyList s_assembliesIgnoredByNameList = new IgnorableAssemblyNameList(ImmutableHashSet.Create("mscorlib"));
-        private static readonly IBindingRedirectionService s_bindingRedirectionService = new BindingRedirectionService();
+        private static readonly IIgnorableAssemblyList s_systemPrefixList =
+            new IgnorableAssemblyNamePrefixList("System");
+        private static readonly IIgnorableAssemblyList s_codeAnalysisPrefixList =
+            new IgnorableAssemblyNamePrefixList("Microsoft.CodeAnalysis");
+        private static readonly IIgnorableAssemblyList s_explicitlyIgnoredAssemblyList =
+            new IgnorableAssemblyIdentityList(GetExplicitlyIgnoredAssemblyIdentities());
+        private static readonly IIgnorableAssemblyList s_assembliesIgnoredByNameList =
+            new IgnorableAssemblyNameList(ImmutableHashSet.Create("mscorlib"));
+        private static readonly IBindingRedirectionService s_bindingRedirectionService =
+            new BindingRedirectionService();
 
         private readonly VisualStudioWorkspace _workspace;
         private readonly HostDiagnosticUpdateSource _hostDiagnosticUpdateSource;
@@ -48,7 +53,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         /// as a continuation of this task to ensure any notification to <see cref="_hostDiagnosticUpdateSource"/> was done first.
         /// </summary>
         private Task _task = Task.CompletedTask;
-        private ImmutableHashSet<string> _previousAnalyzerPaths = ImmutableHashSet.Create<string>(StringComparer.OrdinalIgnoreCase);
+        private ImmutableHashSet<string> _previousAnalyzerPaths = ImmutableHashSet.Create<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         private static readonly DiagnosticDescriptor s_missingAnalyzerReferenceRule = new(
             id: IDEDiagnosticIds.MissingAnalyzerReferenceId,
@@ -56,7 +63,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             messageFormat: ServicesVSResources.Analyzer_assembly_0_depends_on_1_but_it_was_not_found_Analyzers_may_not_run_correctly_unless_the_missing_assembly_is_added_as_an_analyzer_reference_as_well,
             category: FeaturesResources.Roslyn_HostError,
             defaultSeverity: DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true
+        );
 
         private static readonly DiagnosticDescriptor s_analyzerDependencyConflictRule = new(
             id: IDEDiagnosticIds.AnalyzerDependencyConflictId,
@@ -64,13 +72,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             messageFormat: ServicesVSResources.Analyzer_assemblies_0_and_1_both_have_identity_2_but_different_contents_Only_one_will_be_loaded_and_analyzers_using_these_assemblies_may_not_run_correctly,
             category: FeaturesResources.Roslyn_HostError,
             defaultSeverity: DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+            isEnabledByDefault: true
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public AnalyzerDependencyCheckingService(
             VisualStudioWorkspace workspace,
-            HostDiagnosticUpdateSource hostDiagnosticUpdateSource)
+            HostDiagnosticUpdateSource hostDiagnosticUpdateSource
+        )
         {
             _workspace = workspace;
             _hostDiagnosticUpdateSource = hostDiagnosticUpdateSource;
@@ -80,8 +90,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             var solution = _workspace.CurrentSolution;
             var currentAnalyzerPaths = solution
-                .Projects
-                .SelectMany(p => p.AnalyzerReferences)
+                .Projects.SelectMany(p => p.AnalyzerReferences)
                 .OfType<AnalyzerFileReference>()
                 .Select(a => a.FullPath)
                 .ToImmutableHashSet(StringComparer.OrdinalIgnoreCase);
@@ -102,11 +111,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 var cancellationToken = _cancellationTokenSource.Token;
 
                 // We are explicitly relying on SafeContinueWith including LazyCancellation as a continuation option here
-                _task = _task.SafeContinueWith(_ =>
-                {
-                    AnalyzeAndReportConflictsInSolution(solution, currentAnalyzerPaths, _hostDiagnosticUpdateSource, cancellationToken);
-                },
-                cancellationToken, TaskScheduler.Default);
+                _task = _task.SafeContinueWith(
+                    _ =>
+                    {
+                        AnalyzeAndReportConflictsInSolution(
+                            solution,
+                            currentAnalyzerPaths,
+                            _hostDiagnosticUpdateSource,
+                            cancellationToken
+                        );
+                    },
+                    cancellationToken,
+                    TaskScheduler.Default
+                );
             }
         }
 
@@ -115,16 +132,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             Solution solution,
             ImmutableHashSet<string> currentAnalyzerPaths,
             HostDiagnosticUpdateSource hostDiagnosticUpdateSource,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var loadedAssemblies = AppDomain.CurrentDomain.GetAssemblies().Select(assembly => AssemblyIdentity.FromAssemblyDefinition(assembly));
+            var loadedAssemblies = AppDomain
+                .CurrentDomain.GetAssemblies()
+                .Select(assembly => AssemblyIdentity.FromAssemblyDefinition(assembly));
             var loadedAssembliesList = new IgnorableAssemblyIdentityList(loadedAssemblies);
 
-            var ignorableAssemblyLists = new[] { s_systemPrefixList, s_codeAnalysisPrefixList, s_explicitlyIgnoredAssemblyList, s_assembliesIgnoredByNameList, loadedAssembliesList };
+            var ignorableAssemblyLists = new[]
+            {
+                s_systemPrefixList,
+                s_codeAnalysisPrefixList,
+                s_explicitlyIgnoredAssemblyList,
+                s_assembliesIgnoredByNameList,
+                loadedAssembliesList,
+            };
 
             cancellationToken.ThrowIfCancellationRequested();
 
-            var results = AnalyzerDependencyChecker.ComputeDependencyConflicts(currentAnalyzerPaths, ignorableAssemblyLists, s_bindingRedirectionService, cancellationToken);
+            var results = AnalyzerDependencyChecker.ComputeDependencyConflicts(
+                currentAnalyzerPaths,
+                ignorableAssemblyLists,
+                s_bindingRedirectionService,
+                cancellationToken
+            );
 
             var builder = ImmutableArray.CreateBuilder<DiagnosticData>();
 
@@ -141,18 +173,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var analyzerFilePaths = new HashSet<string>(
-                    project.AnalyzerReferences
-                           .OfType<AnalyzerFileReference>()
-                           .Select(f => f.FullPath),
-                    StringComparer.OrdinalIgnoreCase);
+                    project
+                        .AnalyzerReferences.OfType<AnalyzerFileReference>()
+                        .Select(f => f.FullPath),
+                    StringComparer.OrdinalIgnoreCase
+                );
 
                 foreach (var conflict in conflicts)
                 {
-                    if (analyzerFilePaths.Contains(conflict.AnalyzerFilePath1) ||
-                        analyzerFilePaths.Contains(conflict.AnalyzerFilePath2))
+                    if (
+                        analyzerFilePaths.Contains(conflict.AnalyzerFilePath1)
+                        || analyzerFilePaths.Contains(conflict.AnalyzerFilePath2)
+                    )
                     {
-                        var messageArguments = new string[] { conflict.AnalyzerFilePath1, conflict.AnalyzerFilePath2, conflict.Identity.ToString() };
-                        if (DiagnosticData.TryCreate(s_analyzerDependencyConflictRule, messageArguments, project, out var diagnostic))
+                        var messageArguments = new string[]
+                        {
+                            conflict.AnalyzerFilePath1,
+                            conflict.AnalyzerFilePath2,
+                            conflict.Identity.ToString(),
+                        };
+                        if (
+                            DiagnosticData.TryCreate(
+                                s_analyzerDependencyConflictRule,
+                                messageArguments,
+                                project,
+                                out var diagnostic
+                            )
+                        )
                         {
                             builder.Add(diagnostic);
                         }
@@ -163,15 +210,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     if (analyzerFilePaths.Contains(missingDependency.AnalyzerPath))
                     {
-                        var messageArguments = new string[] { missingDependency.AnalyzerPath, missingDependency.DependencyIdentity.ToString() };
-                        if (DiagnosticData.TryCreate(s_missingAnalyzerReferenceRule, messageArguments, project, out var diagnostic))
+                        var messageArguments = new string[]
+                        {
+                            missingDependency.AnalyzerPath,
+                            missingDependency.DependencyIdentity.ToString(),
+                        };
+                        if (
+                            DiagnosticData.TryCreate(
+                                s_missingAnalyzerReferenceRule,
+                                messageArguments,
+                                project,
+                                out var diagnostic
+                            )
+                        )
                         {
                             builder.Add(diagnostic);
                         }
                     }
                 }
 
-                hostDiagnosticUpdateSource.UpdateAndAddDiagnosticsArgsForProject(ref argsBuilder.AsRef(), project.Id, s_dependencyConflictErrorId, builder.ToImmutable());
+                hostDiagnosticUpdateSource.UpdateAndAddDiagnosticsArgsForProject(
+                    ref argsBuilder.AsRef(),
+                    project.Id,
+                    s_dependencyConflictErrorId,
+                    builder.ToImmutable()
+                );
             }
 
             hostDiagnosticUpdateSource.RaiseDiagnosticsUpdated(argsBuilder.ToImmutableAndClear());
@@ -196,7 +259,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                     m["Identity"] = conflict.Identity.ToString();
                     m["Analyzer1"] = conflict.AnalyzerFilePath1;
                     m["Analyzer2"] = conflict.AnalyzerFilePath2;
-                }));
+                })
+            );
         }
 
         private static void LogMissingDependency(MissingAnalyzerDependency missingDependency)
@@ -207,15 +271,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 {
                     m["Analyzer"] = missingDependency.AnalyzerPath;
                     m["Identity"] = missingDependency.DependencyIdentity;
-                }));
+                })
+            );
         }
 
         private static IEnumerable<AssemblyIdentity> GetExplicitlyIgnoredAssemblyIdentities()
         {
             // Microsoft.VisualBasic.dll
             var list = new List<AssemblyIdentity>();
-            AddAssemblyIdentity(list, "Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-            AddAssemblyIdentity(list, "Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
+            AddAssemblyIdentity(
+                list,
+                "Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            );
+            AddAssemblyIdentity(
+                list,
+                "Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+            );
 
             return list;
         }
@@ -234,8 +305,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             public AssemblyIdentity ApplyBindingRedirects(AssemblyIdentity originalIdentity)
             {
-                var redirectedAssemblyName = AppDomain.CurrentDomain.ApplyPolicy(originalIdentity.ToString());
-                if (AssemblyIdentity.TryParseDisplayName(redirectedAssemblyName, out var redirectedAssemblyIdentity))
+                var redirectedAssemblyName = AppDomain.CurrentDomain.ApplyPolicy(
+                    originalIdentity.ToString()
+                );
+                if (
+                    AssemblyIdentity.TryParseDisplayName(
+                        redirectedAssemblyName,
+                        out var redirectedAssemblyIdentity
+                    )
+                )
                 {
                     return redirectedAssemblyIdentity;
                 }

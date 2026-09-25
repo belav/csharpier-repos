@@ -3,7 +3,5 @@
 
 namespace Microsoft.Extensions.Hosting.Fakes
 {
-    interface IFakeSingletonService : IFakeService
-    {
-    }
+    interface IFakeSingletonService : IFakeService { }
 }

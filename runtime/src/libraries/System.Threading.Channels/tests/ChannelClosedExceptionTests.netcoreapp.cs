@@ -9,7 +9,10 @@ namespace System.Threading.Channels.Tests
 {
     public partial class ChannelClosedExceptionTests
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void Serialization_Roundtrip()
         {
             var s = new MemoryStream();

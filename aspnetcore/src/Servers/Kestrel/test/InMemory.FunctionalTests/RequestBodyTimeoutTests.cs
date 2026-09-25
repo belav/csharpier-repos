@@ -134,13 +134,11 @@ public class RequestBodyTimeoutTests : LoggedTest
             }
         }
 
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.EventId.Id == 32 && w.LogLevel == LogLevel.Information
+        Assert.Contains(TestSink.Writes, w =>
+            w.EventId.Id == 32 && w.LogLevel == LogLevel.Information
         );
-        Assert.Contains(
-            TestSink.Writes,
-            w => w.EventId.Id == 33 && w.LogLevel == LogLevel.Information
+        Assert.Contains(TestSink.Writes, w =>
+            w.EventId.Id == 33 && w.LogLevel == LogLevel.Information
         );
     }
 

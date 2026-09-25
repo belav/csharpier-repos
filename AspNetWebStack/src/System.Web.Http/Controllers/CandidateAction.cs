@@ -8,8 +8,8 @@ using System.Web.Http.Controllers;
 
 namespace System.Web.Http.Routing
 {
-    // This is static description of an action and can be shared across requests. 
-    // Direct routes may cache a list of these. 
+    // This is static description of an action and can be shared across requests.
+    // Direct routes may cache a list of these.
     [DebuggerDisplay("{DebuggerToString()}")]
     internal class CandidateAction
     {
@@ -19,7 +19,11 @@ namespace System.Web.Http.Routing
 
         public bool MatchName(string actionName)
         {
-            return String.Equals(ActionDescriptor.ActionName, actionName, StringComparison.OrdinalIgnoreCase);
+            return String.Equals(
+                ActionDescriptor.ActionName,
+                actionName,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         public bool MatchVerb(HttpMethod method)
@@ -29,7 +33,13 @@ namespace System.Web.Http.Routing
 
         internal string DebuggerToString()
         {
-            return String.Format(CultureInfo.CurrentCulture, "{0}, Order={1}, Prec={2}", ActionDescriptor.ActionName, Order, Precedence);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                "{0}, Order={1}, Prec={2}",
+                ActionDescriptor.ActionName,
+                Order,
+                Precedence
+            );
         }
     }
 }

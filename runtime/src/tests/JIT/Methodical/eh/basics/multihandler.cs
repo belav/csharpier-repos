@@ -26,7 +26,7 @@ namespace hello_multihandler_basics_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

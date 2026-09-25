@@ -10,20 +10,20 @@ namespace System.ServiceModel.Configuration
     /// <summary>
     /// DelegatingHandlerElementCollection for DelegatingHandlers
     /// </summary>
-    [ConfigurationCollection(typeof(DelegatingHandlerElement), AddItemName = ConfigurationStrings.Handler, CollectionType = ConfigurationElementCollectionType.BasicMap)]
-    public sealed class DelegatingHandlerElementCollection : ServiceModelConfigurationElementCollection<DelegatingHandlerElement>
+    [ConfigurationCollection(
+        typeof(DelegatingHandlerElement),
+        AddItemName = ConfigurationStrings.Handler,
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed class DelegatingHandlerElementCollection
+        : ServiceModelConfigurationElementCollection<DelegatingHandlerElement>
     {
         public DelegatingHandlerElementCollection()
-            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Handler)
-        {
-        }
+            : base(ConfigurationElementCollectionType.BasicMap, ConfigurationStrings.Handler) { }
 
         protected override bool ThrowOnDuplicate
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         protected override object GetElementKey(ConfigurationElement element)
@@ -36,7 +36,14 @@ namespace System.ServiceModel.Configuration
             DelegatingHandlerElement delegatingHandlerElement = element as DelegatingHandlerElement;
             if (delegatingHandlerElement == null)
             {
-                throw FxTrace.Exception.Argument("element", SR.GetString(SR.InputMustBeDelegatingHandlerElementError, typeof(ConfigurationElement).Name, typeof(DelegatingHandlerElement).Name));
+                throw FxTrace.Exception.Argument(
+                    "element",
+                    SR.GetString(
+                        SR.InputMustBeDelegatingHandlerElementError,
+                        typeof(ConfigurationElement).Name,
+                        typeof(DelegatingHandlerElement).Name
+                    )
+                );
             }
 
             return delegatingHandlerElement.Id;

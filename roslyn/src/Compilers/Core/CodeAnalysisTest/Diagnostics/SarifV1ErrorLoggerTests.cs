@@ -22,13 +22,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             string toolName,
             string toolFileVersion,
             Version toolAssemblyVersion,
-            CultureInfo culture)
+            CultureInfo culture
+        )
         {
-            return new SarifV1ErrorLogger(stream, toolName, toolFileVersion, toolAssemblyVersion, culture);
+            return new SarifV1ErrorLogger(
+                stream,
+                toolName,
+                toolFileVersion,
+                toolAssemblyVersion,
+                culture
+            );
         }
 
         protected override string ExpectedOutputForAdditionalLocationsAsRelatedLocations =>
-@"{
+            @"{
   ""$schema"": ""http://json.schemastore.org/sarif-1.0.0"",
   ""version"": ""1.0.0"",
   ""runs"": [
@@ -47,9 +54,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
           ""locations"": [
             {
               ""resultFile"": {
-                ""uri"": """ + (PathUtilities.IsUnixLikePlatform
-                                    ? "Z:/Main%20Location.cs"
-                                    : "file:///Z:/Main%20Location.cs") + @""",
+                ""uri"": """
+            + (
+                PathUtilities.IsUnixLikePlatform
+                    ? "Z:/Main%20Location.cs"
+                    : "file:///Z:/Main%20Location.cs"
+            )
+            + @""",
                 ""region"": {
                   ""startLine"": 1,
                   ""startColumn"": 1,
@@ -95,7 +106,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         }
 
         protected override string ExpectedOutputForDescriptorIdCollision =>
-@"{
+            @"{
   ""$schema"": ""http://json.schemastore.org/sarif-1.0.0"",
   ""version"": ""1.0.0"",
   ""runs"": [
@@ -379,7 +390,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
         [Fact]
         public void PathToUri()
         {
-            PathToUriImpl(@"{{
+            PathToUriImpl(
+                @"{{
   ""$schema"": ""http://json.schemastore.org/sarif-1.0.0"",
   ""version"": ""1.0.0"",
   ""runs"": [
@@ -424,7 +436,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
       }}
     }}
   ]
-}}");
+}}"
+            );
         }
     }
 }

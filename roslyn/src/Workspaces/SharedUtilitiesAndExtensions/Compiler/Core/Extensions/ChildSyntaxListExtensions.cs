@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static class ChildSyntaxListExtensions
     {
-        public static SyntaxNodeOrToken First(this ChildSyntaxList childSyntaxList, Func<SyntaxNodeOrToken, bool> predicate)
+        public static SyntaxNodeOrToken First(
+            this ChildSyntaxList childSyntaxList,
+            Func<SyntaxNodeOrToken, bool> predicate
+        )
         {
             foreach (var syntaxNodeOrToken in childSyntaxList)
             {
@@ -21,7 +24,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return Enumerable.First(childSyntaxList, predicate);
         }
 
-        public static SyntaxNodeOrToken Last(this ChildSyntaxList childSyntaxList, Func<SyntaxNodeOrToken, bool> predicate)
+        public static SyntaxNodeOrToken Last(
+            this ChildSyntaxList childSyntaxList,
+            Func<SyntaxNodeOrToken, bool> predicate
+        )
         {
             foreach (var syntaxNodeOrToken in childSyntaxList.Reverse())
             {

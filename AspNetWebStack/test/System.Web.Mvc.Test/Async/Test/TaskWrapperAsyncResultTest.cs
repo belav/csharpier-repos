@@ -23,7 +23,10 @@ namespace System.Web.Mvc.Async.Test
             mockTask.Setup(o => o.IsCompleted).Returns(true);
 
             // Act
-            TaskWrapperAsyncResult taskWrapper = new TaskWrapperAsyncResult(mockTask.Object, asyncState: 20);
+            TaskWrapperAsyncResult taskWrapper = new TaskWrapperAsyncResult(
+                mockTask.Object,
+                asyncState: 20
+            );
 
             // Assert
             Assert.Equal(20, taskWrapper.AsyncState);
@@ -37,9 +40,7 @@ namespace System.Web.Mvc.Async.Test
         public class MyTask : Task, IAsyncResult
         {
             public MyTask()
-                : base(() => { })
-            {
-            }
+                : base(() => { }) { }
 
             public new virtual object AsyncState
             {

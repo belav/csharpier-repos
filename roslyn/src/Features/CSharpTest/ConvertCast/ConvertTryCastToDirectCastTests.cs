@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertConversionOperat
             {
                 TestCode = InitialMarkup,
                 FixedCode = ExpectedMarkup,
-                CodeActionValidationMode = CodeActionValidationMode.SemanticStructure
+                CodeActionValidationMode = CodeActionValidationMode.SemanticStructure,
             }.RunAsync();
         }
 
@@ -91,13 +91,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertConversionOperat
         }
 
         [Theory]
-        [InlineData("(1 as object) as $$C",
-                    "(C)(1 as object)")]
-        [InlineData("(1 as$$ object) as C",
-                    "((object)1) as C")]
+        [InlineData("(1 as object) as $$C", "(C)(1 as object)")]
+        [InlineData("(1 as$$ object) as C", "((object)1) as C")]
         public async Task ConvertFromAsToExplicit_Nested(string asExpression, string cast)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 class C {{ }}
 
 class Program
@@ -108,7 +107,8 @@ class Program
     }}
 }}
 ";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 class C {{ }}
 
 class Program
@@ -128,13 +128,15 @@ class Program
         }
 
         [Theory]
-        [InlineData("(1 + 1) as $$object",
-                    "(object)(1 + 1)")]
-        [InlineData("(1 $$+ 1) as object",
-                    "(object)(1 + 1)")]
-        public async Task ConvertFromAsToExplicit_OtherBinaryExpressions(string asExpression, string cast)
+        [InlineData("(1 + 1) as $$object", "(object)(1 + 1)")]
+        [InlineData("(1 $$+ 1) as object", "(object)(1 + 1)")]
+        public async Task ConvertFromAsToExplicit_OtherBinaryExpressions(
+            string asExpression,
+            string cast
+        )
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 class Program
 {{
     public static void Main()
@@ -143,7 +145,8 @@ class Program
     }}
 }}
 ";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 class Program
 {{
     public static void Main()
@@ -161,19 +164,18 @@ class Program
         }
 
         [Theory]
-        [InlineData("/* Leading */ 1 as $$object",
-                    "/* Leading */ (object)1")]
-        [InlineData("1 as $$object /* Trailing */",
-                    "(object)1 /* Trailing */")]
-        [InlineData("1 /* Middle1 */ as $$object",
-                    "(object)1/* Middle1 */ ")]
-        [InlineData("1 as /* Middle2 */ $$object",
-                    "/* Middle2 */ (object)1")]
-        [InlineData("/* Leading */ 1 /* Middle1 */ as /* Middle2 */ $$object /* Trailing */",
-                    "/* Leading */ /* Middle2 */ (object)1/* Middle1 */  /* Trailing */")]
+        [InlineData("/* Leading */ 1 as $$object", "/* Leading */ (object)1")]
+        [InlineData("1 as $$object /* Trailing */", "(object)1 /* Trailing */")]
+        [InlineData("1 /* Middle1 */ as $$object", "(object)1/* Middle1 */ ")]
+        [InlineData("1 as /* Middle2 */ $$object", "/* Middle2 */ (object)1")]
+        [InlineData(
+            "/* Leading */ 1 /* Middle1 */ as /* Middle2 */ $$object /* Trailing */",
+            "/* Leading */ /* Middle2 */ (object)1/* Middle1 */  /* Trailing */"
+        )]
         public async Task ConvertFromAsToExplicit_TriviaHandling(string asExpression, string cast)
         {
-            var initialMarkup = @$"
+            var initialMarkup =
+                @$"
 class Program
 {{
     public static void Main()
@@ -182,7 +184,8 @@ class Program
     }}
 }}
 ";
-            var expectedMarkup = @$"
+            var expectedMarkup =
+                @$"
 class Program
 {{
     public static void Main()

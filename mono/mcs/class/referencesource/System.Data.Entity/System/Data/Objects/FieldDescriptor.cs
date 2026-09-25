@@ -11,8 +11,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.Common;
-using System.Data.Objects.DataClasses;
 using System.Data.Metadata.Edm;
+using System.Data.Objects.DataClasses;
 using System.Diagnostics;
 using System.Globalization;
 
@@ -43,7 +43,10 @@ namespace System.Data.Objects
             _property = property;
             _isReadOnly = isReadOnly;
             _fieldType = DetermineClrType(_property.TypeUsage);
-            System.Diagnostics.Debug.Assert(_fieldType != null, "FieldDescriptor's CLR type has unexpected value of null.");
+            System.Diagnostics.Debug.Assert(
+                _fieldType != null,
+                "FieldDescriptor's CLR type has unexpected value of null."
+            );
         }
 
         /// <summary>
@@ -77,11 +80,17 @@ namespace System.Data.Objects
                 case BuiltInTypeKind.EnumType:
                     result = edmType.ClrType;
                     Facet nullable;
-                    if (result.IsValueType &&
-                        typeUsage.Facets.TryGetValue(DbProviderManifest.NullableFacetName, false, out nullable) &&
-                        ((bool)nullable.Value))
+                    if (
+                        result.IsValueType
+                        && typeUsage.Facets.TryGetValue(
+                            DbProviderManifest.NullableFacetName,
+                            false,
+                            out nullable
+                        )
+                        && ((bool)nullable.Value)
+                    )
                     {
-                        result = typeof(Nullable<>).MakeGenericType(result); 
+                        result = typeof(Nullable<>).MakeGenericType(result);
                     }
                     break;
 
@@ -90,7 +99,13 @@ namespace System.Data.Objects
                     break;
 
                 default:
-                    Debug.Fail(string.Format(CultureInfo.CurrentCulture, "The type {0} was not the expected scalar, enumeration, collection, structural, nominal, or reference type.", edmType.GetType()));
+                    Debug.Fail(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            "The type {0} was not the expected scalar, enumeration, collection, structural, nominal, or reference type.",
+                            edmType.GetType()
+                        )
+                    );
                     break;
             }
 
@@ -121,6 +136,7 @@ namespace System.Data.Objects
         {
             get { return _fieldType; }
         }
+
         public override bool CanResetValue(object item)
         {
             return false;
@@ -149,6 +165,7 @@ namespace System.Data.Objects
 
             return propertyValue;
         }
+
         public override void ResetValue(object item)
         {
             throw EntityUtil.NotSupported();
@@ -170,10 +187,12 @@ namespace System.Data.Objects
                 throw EntityUtil.WriteOperationNotAllowedOnReadOnlyBindingList();
             }
         }
+
         public override bool ShouldSerializeValue(object item)
         {
             return false;
         }
+
         public override bool IsBrowsable
         {
             get { return true; }

@@ -2,14 +2,14 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using Microsoft.Test.ModuleCore;
-using System.Xml;
-using System.Xml.Linq;
 using System.Text;
 using System.Threading;
+using System.Xml;
+using System.Xml.Linq;
+using Microsoft.Test.ModuleCore;
 using XmlCoreTest.Common;
 
 namespace CoreXml.Test.XLinq
@@ -20,7 +20,10 @@ namespace CoreXml.Test.XLinq
         {
             public partial class OmitAnotation : XLinqTestCase
             {
-                private static string s_MyPath = Path.Combine(FilePathUtil.GetTestDataPath(), @"Xlinq\DuplicateNamespaces");
+                private static string s_MyPath = Path.Combine(
+                    FilePathUtil.GetTestDataPath(),
+                    @"Xlinq\DuplicateNamespaces"
+                );
 
                 private static XContainer GetContainer(string filename, Type type)
                 {
@@ -48,7 +51,6 @@ namespace CoreXml.Test.XLinq
                     }
                 }
 
-
                 //[Variation(Priority = 0, Desc = "No annotation - element", Params = new object[] { typeof(XElement), "Simple.xml" })]
                 //[Variation(Priority = 0, Desc = "No annotation - document", Params = new object[] { typeof(XDocument), "Simple.xml" })]
                 public void NoAnnotation()
@@ -56,7 +58,16 @@ namespace CoreXml.Test.XLinq
                     Type t = CurrentChild.Params[0] as Type;
                     string fileName = Path.Combine(s_MyPath, CurrentChild.Params[1] as string);
                     // create normal reader for comparison
-                    using (XmlReader r1 = XmlReader.Create(FilePathUtil.getStream(fileName), new XmlReaderSettings() { IgnoreWhitespace = true, DtdProcessing = DtdProcessing.Ignore }))
+                    using (
+                        XmlReader r1 = XmlReader.Create(
+                            FilePathUtil.getStream(fileName),
+                            new XmlReaderSettings()
+                            {
+                                IgnoreWhitespace = true,
+                                DtdProcessing = DtdProcessing.Ignore,
+                            }
+                        )
+                    )
                     {
                         // create reader from Xlinq
                         XContainer c = GetContainer(fileName, t);
@@ -77,7 +88,16 @@ namespace CoreXml.Test.XLinq
                     string fileName = Path.Combine(s_MyPath, CurrentChild.Params[1] as string);
                     SaveOptions so = (SaveOptions)CurrentChild.Params[2];
 
-                    using (XmlReader r1 = XmlReader.Create(FilePathUtil.getStream(fileName), new XmlReaderSettings() { IgnoreWhitespace = true, DtdProcessing = DtdProcessing.Ignore }))
+                    using (
+                        XmlReader r1 = XmlReader.Create(
+                            FilePathUtil.getStream(fileName),
+                            new XmlReaderSettings()
+                            {
+                                IgnoreWhitespace = true,
+                                DtdProcessing = DtdProcessing.Ignore,
+                            }
+                        )
+                    )
                     {
                         XContainer doc = GetContainer(fileName, t);
                         doc.AddAnnotation(so);
@@ -101,13 +121,31 @@ namespace CoreXml.Test.XLinq
                     using (MemoryStream ms = new MemoryStream())
                     {
                         XDocument toClean = XDocument.Load(FilePathUtil.getStream(fileName));
-                        using (XmlWriter w = XmlWriter.Create(ms, new XmlWriterSettings() { OmitXmlDeclaration = true, NamespaceHandling = NamespaceHandling.OmitDuplicates }))
+                        using (
+                            XmlWriter w = XmlWriter.Create(
+                                ms,
+                                new XmlWriterSettings()
+                                {
+                                    OmitXmlDeclaration = true,
+                                    NamespaceHandling = NamespaceHandling.OmitDuplicates,
+                                }
+                            )
+                        )
                         {
                             toClean.Save(w);
                         }
                         ms.Position = 0;
 
-                        using (XmlReader r1 = XmlReader.Create(ms, new XmlReaderSettings() { IgnoreWhitespace = true, DtdProcessing = DtdProcessing.Ignore }))
+                        using (
+                            XmlReader r1 = XmlReader.Create(
+                                ms,
+                                new XmlReaderSettings()
+                                {
+                                    IgnoreWhitespace = true,
+                                    DtdProcessing = DtdProcessing.Ignore,
+                                }
+                            )
+                        )
                         {
                             XContainer doc = GetContainer(fileName, t);
                             doc.AddAnnotation(so);
@@ -132,26 +170,50 @@ namespace CoreXml.Test.XLinq
                     for (int i = 0; i < test.Count(); i++)
                     {
                         XNode n = test[i];
-                        XNode parent = n;  // verify parent and self
+                        XNode parent = n; // verify parent and self
                         while (parent != null)
-                        {  // for all parents
+                        { // for all parents
                             // verify original version
-                            TestLog.Compare(n.ToString(), n.ToString(SaveOptions.None), "Initial value");
-                            TestLog.Compare(n.ToString(), orig[i].ToString(), "Initial value, via orig");
+                            TestLog.Compare(
+                                n.ToString(),
+                                n.ToString(SaveOptions.None),
+                                "Initial value"
+                            );
+                            TestLog.Compare(
+                                n.ToString(),
+                                orig[i].ToString(),
+                                "Initial value, via orig"
+                            );
                             ReaderDiff.Compare(orig[i].CreateReader(), n.CreateReader());
                             // add annotation on parent
                             parent.AddAnnotation(SaveOptions.OmitDuplicateNamespaces);
                             // verify with annotation
-                            TestLog.Compare(n.ToString(), n.ToString(SaveOptions.OmitDuplicateNamespaces), "with the annotation, normal");
-                            ReaderDiffNSAware.CompareNamespaceAware(orig[i].CreateReader(), n.CreateReader());
+                            TestLog.Compare(
+                                n.ToString(),
+                                n.ToString(SaveOptions.OmitDuplicateNamespaces),
+                                "with the annotation, normal"
+                            );
+                            ReaderDiffNSAware.CompareNamespaceAware(
+                                orig[i].CreateReader(),
+                                n.CreateReader()
+                            );
                             // removeannotation
                             parent.RemoveAnnotations(typeof(SaveOptions));
                             // verify after removal
-                            TestLog.Compare(n.ToString(), n.ToString(SaveOptions.None), "after removed annotation value");
-                            TestLog.Compare(n.ToString(), orig[i].ToString(), "after removed annotation, via orig");
+                            TestLog.Compare(
+                                n.ToString(),
+                                n.ToString(SaveOptions.None),
+                                "after removed annotation value"
+                            );
+                            TestLog.Compare(
+                                n.ToString(),
+                                orig[i].ToString(),
+                                "after removed annotation, via orig"
+                            );
                             ReaderDiff.Compare(orig[i].CreateReader(), n.CreateReader());
                             // move parent
-                            if (parent is XDocument) break;
+                            if (parent is XDocument)
+                                break;
                             parent = parent.Parent ?? parent.Document as XNode;
                         }
                     }
@@ -162,21 +224,52 @@ namespace CoreXml.Test.XLinq
                 public void MultipleAnnotationsInTree()
                 {
                     Type t = CurrentChild.Param as Type;
-                    string xml = @"<A xmlns:p='a1'><B xmlns:q='a2'><C xmlns:p='a1'><D xmlns:q='a2' ><E xmlns:p='a1' /></D></C></B></A>";
-                    XContainer reF = (t == typeof(XElement) ? XElement.Parse(xml) as XContainer : XDocument.Parse(xml) as XContainer);  // I want dynamics!!!
-                    SaveOptions[] options = new SaveOptions[] { SaveOptions.None, SaveOptions.DisableFormatting, SaveOptions.OmitDuplicateNamespaces, SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces };
+                    string xml =
+                        @"<A xmlns:p='a1'><B xmlns:q='a2'><C xmlns:p='a1'><D xmlns:q='a2' ><E xmlns:p='a1' /></D></C></B></A>";
+                    XContainer reF = (
+                        t == typeof(XElement)
+                            ? XElement.Parse(xml) as XContainer
+                            : XDocument.Parse(xml) as XContainer
+                    ); // I want dynamics!!!
+                    SaveOptions[] options = new SaveOptions[]
+                    {
+                        SaveOptions.None,
+                        SaveOptions.DisableFormatting,
+                        SaveOptions.OmitDuplicateNamespaces,
+                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces,
+                    };
 
                     foreach (SaveOptions[] opts in Tuples2(options))
                     {
-                        XContainer gp = (t == typeof(XElement) ? XElement.Parse(xml) as XContainer : XDocument.Parse(xml) as XContainer);
+                        XContainer gp = (
+                            t == typeof(XElement)
+                                ? XElement.Parse(xml) as XContainer
+                                : XDocument.Parse(xml) as XContainer
+                        );
                         gp.AddAnnotation(opts[0]);
                         gp.FirstNode.AddAnnotation(opts[1]);
 
-                        TestLog.Compare(reF.Descendants("C").First().ToString(opts[1]), gp.Descendants("C").First().ToString(), "On C - ToString()");
-                        ReaderDiffNSAware.CompareNamespaceAware(opts[1], reF.Descendants("C").First().CreateReader(), gp.Descendants("C").First().CreateReader());
+                        TestLog.Compare(
+                            reF.Descendants("C").First().ToString(opts[1]),
+                            gp.Descendants("C").First().ToString(),
+                            "On C - ToString()"
+                        );
+                        ReaderDiffNSAware.CompareNamespaceAware(
+                            opts[1],
+                            reF.Descendants("C").First().CreateReader(),
+                            gp.Descendants("C").First().CreateReader()
+                        );
 
-                        TestLog.Compare(reF.Descendants("B").First().ToString(opts[1]), gp.Descendants("B").First().ToString(), "On C - ToString()");
-                        ReaderDiffNSAware.CompareNamespaceAware(opts[1], reF.Descendants("B").First().CreateReader(), gp.Descendants("B").First().CreateReader());
+                        TestLog.Compare(
+                            reF.Descendants("B").First().ToString(opts[1]),
+                            gp.Descendants("B").First().ToString(),
+                            "On C - ToString()"
+                        );
+                        ReaderDiffNSAware.CompareNamespaceAware(
+                            opts[1],
+                            reF.Descendants("B").First().CreateReader(),
+                            gp.Descendants("B").First().CreateReader()
+                        );
                     }
                 }
 
@@ -185,21 +278,52 @@ namespace CoreXml.Test.XLinq
                 public void MultipleAnnotationsInTree2()
                 {
                     Type t = CurrentChild.Param as Type;
-                    string xml = @"<A xmlns:p='a1'><B xmlns:q='a2'><C xmlns:p='a1'><D xmlns:q='a2' ><E xmlns:p='a1' /></D></C></B></A>";
-                    XContainer reF = (t == typeof(XElement) ? XElement.Parse(xml) as XContainer : XDocument.Parse(xml) as XContainer);  // I want dynamics!!!
-                    SaveOptions[] options = new SaveOptions[] { SaveOptions.None, SaveOptions.DisableFormatting, SaveOptions.OmitDuplicateNamespaces, SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces };
+                    string xml =
+                        @"<A xmlns:p='a1'><B xmlns:q='a2'><C xmlns:p='a1'><D xmlns:q='a2' ><E xmlns:p='a1' /></D></C></B></A>";
+                    XContainer reF = (
+                        t == typeof(XElement)
+                            ? XElement.Parse(xml) as XContainer
+                            : XDocument.Parse(xml) as XContainer
+                    ); // I want dynamics!!!
+                    SaveOptions[] options = new SaveOptions[]
+                    {
+                        SaveOptions.None,
+                        SaveOptions.DisableFormatting,
+                        SaveOptions.OmitDuplicateNamespaces,
+                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces,
+                    };
 
                     foreach (SaveOptions[] opts in Tuples2(options))
                     {
-                        XContainer gp = (t == typeof(XElement) ? XElement.Parse(xml) as XContainer : XDocument.Parse(xml) as XContainer);
+                        XContainer gp = (
+                            t == typeof(XElement)
+                                ? XElement.Parse(xml) as XContainer
+                                : XDocument.Parse(xml) as XContainer
+                        );
                         gp.AddAnnotation(opts[0]);
                         gp.Descendants("C").First().AddAnnotation(opts[1]);
 
-                        TestLog.Compare(reF.ToString(opts[0]), gp.ToString(), "On root - ToString()");
-                        ReaderDiffNSAware.CompareNamespaceAware(opts[0], reF.CreateReader(), gp.CreateReader());
+                        TestLog.Compare(
+                            reF.ToString(opts[0]),
+                            gp.ToString(),
+                            "On root - ToString()"
+                        );
+                        ReaderDiffNSAware.CompareNamespaceAware(
+                            opts[0],
+                            reF.CreateReader(),
+                            gp.CreateReader()
+                        );
 
-                        TestLog.Compare(reF.Descendants("B").First().ToString(opts[0]), gp.Descendants("B").First().ToString(), "On C - ToString()");
-                        ReaderDiffNSAware.CompareNamespaceAware(opts[0], reF.Descendants("B").First().CreateReader(), gp.Descendants("B").First().CreateReader());
+                        TestLog.Compare(
+                            reF.Descendants("B").First().ToString(opts[0]),
+                            gp.Descendants("B").First().ToString(),
+                            "On C - ToString()"
+                        );
+                        ReaderDiffNSAware.CompareNamespaceAware(
+                            opts[0],
+                            reF.Descendants("B").First().CreateReader(),
+                            gp.Descendants("B").First().CreateReader()
+                        );
                     }
                 }
 
@@ -208,19 +332,42 @@ namespace CoreXml.Test.XLinq
                 public void MultipleAnnotationsOnElement()
                 {
                     Type t = CurrentChild.Param as Type;
-                    string xml = @"<A xmlns:p='a1'><B xmlns:q='a2'><C xmlns:p='a1'><D xmlns:q='a2' ><E xmlns:p='a1' /></D></C></B></A>";
-                    XContainer reF = (t == typeof(XElement) ? XElement.Parse(xml) as XContainer : XDocument.Parse(xml) as XContainer);  // I want dynamics!!!
-                    SaveOptions[] options = new SaveOptions[] { SaveOptions.None, SaveOptions.DisableFormatting, SaveOptions.OmitDuplicateNamespaces, SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces };
+                    string xml =
+                        @"<A xmlns:p='a1'><B xmlns:q='a2'><C xmlns:p='a1'><D xmlns:q='a2' ><E xmlns:p='a1' /></D></C></B></A>";
+                    XContainer reF = (
+                        t == typeof(XElement)
+                            ? XElement.Parse(xml) as XContainer
+                            : XDocument.Parse(xml) as XContainer
+                    ); // I want dynamics!!!
+                    SaveOptions[] options = new SaveOptions[]
+                    {
+                        SaveOptions.None,
+                        SaveOptions.DisableFormatting,
+                        SaveOptions.OmitDuplicateNamespaces,
+                        SaveOptions.DisableFormatting | SaveOptions.OmitDuplicateNamespaces,
+                    };
 
                     foreach (SaveOptions[] opts in Tuples2(options))
                     {
-                        XContainer gp = (t == typeof(XElement) ? XElement.Parse(xml) as XContainer : XDocument.Parse(xml) as XContainer);
+                        XContainer gp = (
+                            t == typeof(XElement)
+                                ? XElement.Parse(xml) as XContainer
+                                : XDocument.Parse(xml) as XContainer
+                        );
                         foreach (SaveOptions o in opts)
                         {
                             gp.AddAnnotation(o);
                         }
-                        TestLog.Compare(reF.ToString(opts[0]), gp.ToString(), "On root - ToString()");
-                        ReaderDiffNSAware.CompareNamespaceAware(opts[0], reF.CreateReader(), gp.CreateReader());
+                        TestLog.Compare(
+                            reF.ToString(opts[0]),
+                            gp.ToString(),
+                            "On root - ToString()"
+                        );
+                        ReaderDiffNSAware.CompareNamespaceAware(
+                            opts[0],
+                            reF.CreateReader(),
+                            gp.CreateReader()
+                        );
                     }
                 }
 
@@ -230,7 +377,8 @@ namespace CoreXml.Test.XLinq
                     {
                         for (int j = 0; j < array.Length; j++)
                         {
-                            if (i != j) yield return new T[] { array[i], array[j] };
+                            if (i != j)
+                                yield return new T[] { array[i], array[j] };
                         }
                     }
                 }
@@ -250,9 +398,17 @@ namespace CoreXml.Test.XLinq
 
                     for (int i = 0; i < refAttrs.Length; i++)
                     {
-                        TestLog.Compare(refAttrs[i].ToString(), eAttrs[i].ToString(), "without annotation on attribute");
+                        TestLog.Compare(
+                            refAttrs[i].ToString(),
+                            eAttrs[i].ToString(),
+                            "without annotation on attribute"
+                        );
                         eAttrs[i].AddAnnotation(SaveOptions.OmitDuplicateNamespaces);
-                        TestLog.Compare(refAttrs[i].ToString(), eAttrs[i].ToString(), "with annotation on attribute");
+                        TestLog.Compare(
+                            refAttrs[i].ToString(),
+                            eAttrs[i].ToString(),
+                            "with annotation on attribute"
+                        );
                     }
                 }
 
@@ -269,7 +425,8 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Priority = 0, Desc = "Simulate the VB behavior - Save")]
                 public void SimulateVb1()
                 {
-                    string expected = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<A xmlns=\"ns1\">\n  <B />\n  <C />\n</A>";
+                    string expected =
+                        "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<A xmlns=\"ns1\">\n  <B />\n  <C />\n</A>";
                     XElement e1 = CreateVBSample();
                     StringBuilder sb = new StringBuilder();
                     e1.Save(new StringWriter(sb));
@@ -294,7 +451,8 @@ namespace CoreXml.Test.XLinq
                 //[Variation(Priority = 0, Desc = "Local settings override annotation")]
                 public void LocalOverride()
                 {
-                    string expected = "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<A xmlns=\"ns1\">\n  <B xmlns=\"ns1\"/>\n  <C xmlns=\"ns1\"/>\n</A>";
+                    string expected =
+                        "<?xml version=\"1.0\" encoding=\"utf-16\"?>\n<A xmlns=\"ns1\">\n  <B xmlns=\"ns1\"/>\n  <C xmlns=\"ns1\"/>\n</A>";
                     XElement e1 = CreateVBSample();
                     StringBuilder sb = new StringBuilder();
                     e1.Save(new StringWriter(sb), SaveOptions.None);
@@ -314,8 +472,15 @@ namespace CoreXml.Test.XLinq
                     var original = GetContainer(fileName, t).DescendantNodes().ToArray();
                     var clone = GetContainer(fileName, t).DescendantNodes().ToArray();
 
-                    TestLog.Compare(original.Length, clone.Length, "original.Length != clone.Length"); // assert
-                    Action<XmlReader, XmlReader> compareDelegate = ro == ReaderOptions.None ? (Action<XmlReader, XmlReader>)ReaderDiff.Compare : (Action<XmlReader, XmlReader>)ReaderDiffNSAware.CompareNamespaceAware;
+                    TestLog.Compare(
+                        original.Length,
+                        clone.Length,
+                        "original.Length != clone.Length"
+                    ); // assert
+                    Action<XmlReader, XmlReader> compareDelegate =
+                        ro == ReaderOptions.None
+                            ? (Action<XmlReader, XmlReader>)ReaderDiff.Compare
+                            : (Action<XmlReader, XmlReader>)ReaderDiffNSAware.CompareNamespaceAware;
 
                     foreach (int i in Enumerable.Range(0, original.Length))
                     {
@@ -323,7 +488,13 @@ namespace CoreXml.Test.XLinq
                         compareDelegate(original[i].CreateReader(), clone[i].CreateReader(ro));
 
                         // annotation on self
-                        foreach (SaveOptions so in new SaveOptions[] { SaveOptions.None, SaveOptions.OmitDuplicateNamespaces })
+                        foreach (
+                            SaveOptions so in new SaveOptions[]
+                            {
+                                SaveOptions.None,
+                                SaveOptions.OmitDuplicateNamespaces,
+                            }
+                        )
                         {
                             clone[i].AddAnnotation(so);
                             compareDelegate(original[i].CreateReader(), clone[i].CreateReader(ro));
@@ -331,12 +502,21 @@ namespace CoreXml.Test.XLinq
                         }
 
                         // annotation on parents
-                        foreach (SaveOptions so in new SaveOptions[] { SaveOptions.None, SaveOptions.OmitDuplicateNamespaces })
+                        foreach (
+                            SaveOptions so in new SaveOptions[]
+                            {
+                                SaveOptions.None,
+                                SaveOptions.OmitDuplicateNamespaces,
+                            }
+                        )
                         {
                             foreach (XNode anc in clone[i].Ancestors())
                             {
                                 anc.AddAnnotation(so);
-                                compareDelegate(original[i].CreateReader(), clone[i].CreateReader(ro));
+                                compareDelegate(
+                                    original[i].CreateReader(),
+                                    clone[i].CreateReader(ro)
+                                );
                                 anc.RemoveAnnotations(typeof(object));
                             }
                         }

@@ -20,5 +20,6 @@ internal interface IEmbeddedLanguageQuickInfoProvider : IEmbeddedLanguageFeature
     QuickInfoItem? GetQuickInfo(
         QuickInfoContext context,
         SemanticModel semanticModel,
-        SyntaxToken token);
+        SyntaxToken token
+    );
 }

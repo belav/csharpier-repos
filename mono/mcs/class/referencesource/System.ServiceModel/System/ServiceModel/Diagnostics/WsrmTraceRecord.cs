@@ -9,22 +9,25 @@ namespace System.ServiceModel.Diagnostics
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Channels;
     using System.Xml;
-    
+
     class WsrmTraceRecord : TraceRecord
     {
         UniqueId id;
 
-        internal WsrmTraceRecord(UniqueId id)            
+        internal WsrmTraceRecord(UniqueId id)
         {
             this.id = id;
         }
 
-        internal override string EventId { get { return BuildEventId("Sequence"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("Sequence"); }
+        }
 
         internal override void WriteTo(XmlWriter writer)
         {
             base.WriteTo(writer);
-            writer.WriteStartElement("Identifier");            
+            writer.WriteStartElement("Identifier");
             writer.WriteString(id.ToString());
             writer.WriteEndElement();
         }
@@ -34,7 +37,8 @@ namespace System.ServiceModel.Diagnostics
     {
         UniqueId id;
 
-        internal ReliableChannelTraceRecord(IChannel channel, UniqueId id) : base(channel)
+        internal ReliableChannelTraceRecord(IChannel channel, UniqueId id)
+            : base(channel)
         {
             this.id = id;
         }
@@ -49,12 +53,13 @@ namespace System.ServiceModel.Diagnostics
     }
 
     class SequenceTraceRecord : WsrmTraceRecord
-    {        
+    {
         Int64 sequenceNumber;
         bool isLast;
 
-        internal SequenceTraceRecord(UniqueId id, Int64 sequenceNumber, bool isLast) : base(id)
-        {            
+        internal SequenceTraceRecord(UniqueId id, Int64 sequenceNumber, bool isLast)
+            : base(id)
+        {
             this.sequenceNumber = sequenceNumber;
             this.isLast = isLast;
         }
@@ -75,7 +80,8 @@ namespace System.ServiceModel.Diagnostics
     {
         string reason;
 
-        internal SequenceFaultedTraceRecord(UniqueId id, string reason) : base(id)
+        internal SequenceFaultedTraceRecord(UniqueId id, string reason)
+            : base(id)
         {
             this.reason = reason;
         }
@@ -94,7 +100,11 @@ namespace System.ServiceModel.Diagnostics
         int bufferRemaining;
         IList<SequenceRange> ranges;
 
-        internal AcknowledgementTraceRecord(UniqueId id, IList<SequenceRange> ranges, int bufferRemaining)
+        internal AcknowledgementTraceRecord(
+            UniqueId id,
+            IList<SequenceRange> ranges,
+            int bufferRemaining
+        )
             : base(id)
         {
             this.bufferRemaining = bufferRemaining;
@@ -108,8 +118,14 @@ namespace System.ServiceModel.Diagnostics
             for (int i = 0; i < this.ranges.Count; i++)
             {
                 writer.WriteStartElement("Range");
-                writer.WriteAttributeString("Lower", this.ranges[i].Lower.ToString(CultureInfo.InvariantCulture));
-                writer.WriteAttributeString("Upper", this.ranges[i].Upper.ToString(CultureInfo.InvariantCulture));
+                writer.WriteAttributeString(
+                    "Lower",
+                    this.ranges[i].Lower.ToString(CultureInfo.InvariantCulture)
+                );
+                writer.WriteAttributeString(
+                    "Upper",
+                    this.ranges[i].Upper.ToString(CultureInfo.InvariantCulture)
+                );
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
@@ -122,4 +138,3 @@ namespace System.ServiceModel.Diagnostics
         }
     }
 }
-

@@ -2,10 +2,10 @@
 
 class C
 {
-	public static int Main ()
-	{
-		new A.C<int> ();
-		new B.C<byte> ();
-		return 0;
-	}
+    public static int Main()
+    {
+        new A.C<int>();
+        new B.C<byte>();
+        return 0;
+    }
 }

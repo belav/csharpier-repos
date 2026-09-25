@@ -44,14 +44,16 @@ namespace System.Reflection.Emit
             switch (_typeKind)
             {
                 case TypeKind.IsArray:
-                    {
-                        Type et = _baseType.InternalResolve();
-                        if (_rank == 1)
-                            return et.MakeArrayType();
-                        return et.MakeArrayType(_rank);
-                    }
-                case TypeKind.IsByRef: return _baseType.InternalResolve().MakeByRefType();
-                case TypeKind.IsPointer: return _baseType.InternalResolve().MakePointerType();
+                {
+                    Type et = _baseType.InternalResolve();
+                    if (_rank == 1)
+                        return et.MakeArrayType();
+                    return et.MakeArrayType(_rank);
+                }
+                case TypeKind.IsByRef:
+                    return _baseType.InternalResolve().MakeByRefType();
+                case TypeKind.IsPointer:
+                    return _baseType.InternalResolve().MakePointerType();
             }
 
             throw new NotSupportedException();

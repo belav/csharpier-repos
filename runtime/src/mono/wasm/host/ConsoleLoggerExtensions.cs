@@ -11,13 +11,17 @@ namespace Microsoft.WebAssembly.AppHost;
 internal static class ConsoleLoggerExtensions
 {
     public static ILoggingBuilder AddPassThroughConsole(this ILoggingBuilder builder) =>
-            builder
-                .AddConsole(options => options.FormatterName = nameof(PassThroughConsoleFormatter))
-                .AddConsoleFormatter<PassThroughConsoleFormatter, PassThroughConsoleFormatterOptions>();
+        builder
+            .AddConsole(options => options.FormatterName = nameof(PassThroughConsoleFormatter))
+            .AddConsoleFormatter<PassThroughConsoleFormatter, PassThroughConsoleFormatterOptions>();
 
     public static ILoggingBuilder AddPassThroughConsole(
-        this ILoggingBuilder builder, Action<PassThroughConsoleFormatterOptions> configure) =>
-            builder
-                .AddConsole(options => options.FormatterName = nameof(PassThroughConsoleFormatter))
-                .AddConsoleFormatter<PassThroughConsoleFormatter, PassThroughConsoleFormatterOptions>(configure);
+        this ILoggingBuilder builder,
+        Action<PassThroughConsoleFormatterOptions> configure
+    ) =>
+        builder
+            .AddConsole(options => options.FormatterName = nameof(PassThroughConsoleFormatter))
+            .AddConsoleFormatter<PassThroughConsoleFormatter, PassThroughConsoleFormatterOptions>(
+                configure
+            );
 }

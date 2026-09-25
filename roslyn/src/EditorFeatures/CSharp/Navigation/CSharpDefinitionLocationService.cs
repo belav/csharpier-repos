@@ -13,6 +13,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.Navigation;
 
 [ExportLanguageService(typeof(IDefinitionLocationService), LanguageNames.CSharp), Shared]
 [method: ImportingConstructor]
-[method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-internal class CSharpDefinitionLocationService(IThreadingContext threadingContext, IStreamingFindUsagesPresenter streamingPresenter)
-    : AbstractDefinitionLocationService(threadingContext, streamingPresenter);
+[method: SuppressMessage(
+    "RoslynDiagnosticsReliability",
+    "RS0033:Importing constructor should be [Obsolete]",
+    Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+)]
+internal class CSharpDefinitionLocationService(
+    IThreadingContext threadingContext,
+    IStreamingFindUsagesPresenter streamingPresenter
+) : AbstractDefinitionLocationService(threadingContext, streamingPresenter);

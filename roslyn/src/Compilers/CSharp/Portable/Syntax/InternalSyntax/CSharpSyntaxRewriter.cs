@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return token;
         }
 
-        public SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list) where TNode : CSharpSyntaxNode
+        public SyntaxList<TNode> VisitList<TNode>(SyntaxList<TNode> list)
+            where TNode : CSharpSyntaxNode
         {
             SyntaxListBuilder alternate = null;
             for (int i = 0, n = list.Count; i < n; i++)
@@ -57,7 +58,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 if (alternate != null)
                 {
-                    Debug.Assert(visited != null && visited.Kind != SyntaxKind.None, "Cannot remove node using Syntax.InternalSyntax.SyntaxRewriter.");
+                    Debug.Assert(
+                        visited != null && visited.Kind != SyntaxKind.None,
+                        "Cannot remove node using Syntax.InternalSyntax.SyntaxRewriter."
+                    );
                     alternate.Add(visited);
                 }
             }
@@ -70,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return list;
         }
 
-        public SeparatedSyntaxList<TNode> VisitList<TNode>(SeparatedSyntaxList<TNode> list) where TNode : CSharpSyntaxNode
+        public SeparatedSyntaxList<TNode> VisitList<TNode>(SeparatedSyntaxList<TNode> list)
+            where TNode : CSharpSyntaxNode
         {
             // A separated list is filled with C# nodes and C# tokens.  Both of which
             // derive from InternalSyntax.CSharpSyntaxNode.  So this cast is appropriately

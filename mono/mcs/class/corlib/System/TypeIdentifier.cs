@@ -27,208 +27,227 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System {
+namespace System
+{
+    // A TypeName is wrapper around type names in display form
+    // (that is, with special characters escaped).
+    //
+    // Note that in general if you unescape a type name, you will
+    // lose information: If the type name's DisplayName is
+    // Foo\+Bar+Baz (outer class ``Foo+Bar``, inner class Baz)
+    // unescaping the first plus will give you (outer class Foo,
+    // inner class Bar, innermost class Baz).
+    //
+    // The correct way to take a TypeName apart is to feed its
+    // DisplayName to TypeSpec.Parse()
+    //
+    internal interface TypeName : System.IEquatable<TypeName>
+    {
+        string DisplayName { get; }
 
-	// A TypeName is wrapper around type names in display form
-	// (that is, with special characters escaped).
-	//
-	// Note that in general if you unescape a type name, you will
-	// lose information: If the type name's DisplayName is
-	// Foo\+Bar+Baz (outer class ``Foo+Bar``, inner class Baz)
-	// unescaping the first plus will give you (outer class Foo,
-	// inner class Bar, innermost class Baz).
-	//
-	// The correct way to take a TypeName apart is to feed its
-	// DisplayName to TypeSpec.Parse()
-	//
-	internal interface TypeName : System.IEquatable<TypeName> {
-		string DisplayName {
-			get;
-		}
+        // add a nested name under this one.
+        TypeName NestedName(TypeIdentifier innerName);
+    }
 
-		// add a nested name under this one.
-		TypeName NestedName (TypeIdentifier innerName);
-	}
+    // A type identifier is a single component of a type name.
+    // Unlike a general typename, a type identifier can be be
+    // converted to internal form without loss of information.
+    internal interface TypeIdentifier : TypeName
+    {
+        string InternalName { get; }
+    }
 
-	// A type identifier is a single component of a type name.
-	// Unlike a general typename, a type identifier can be be
-	// converted to internal form without loss of information.
-	internal interface TypeIdentifier : TypeName {
+    internal class TypeNames
+    {
+        internal static TypeName FromDisplay(string displayName)
+        {
+            return new Display(displayName);
+        }
 
-		string InternalName {
-			get;
-		}
+        internal abstract class ATypeName : TypeName
+        {
+            public abstract string DisplayName { get; }
 
-	}
+            public abstract TypeName NestedName(TypeIdentifier innerName);
 
-	internal class TypeNames {
-		internal static TypeName FromDisplay (string displayName)
-		{
-			return new Display (displayName);
-		}
+            public bool Equals(TypeName other)
+            {
+                return other != null && DisplayName == other.DisplayName;
+            }
 
-		internal abstract class ATypeName : TypeName {
-			public abstract string DisplayName { get; }
+            public override int GetHashCode()
+            {
+                return DisplayName.GetHashCode();
+            }
 
-			public abstract TypeName NestedName (TypeIdentifier innerName);
+            public override bool Equals(object other)
+            {
+                return Equals(other as TypeName);
+            }
+        }
 
-			public bool Equals(TypeName other)
-			{
-				return other != null && DisplayName == other.DisplayName;
-			}
+        private class Display : ATypeName
+        {
+            string displayName;
 
-			public override int GetHashCode ()
-			{
-				return DisplayName.GetHashCode();
-			}
+            internal Display(string displayName)
+            {
+                this.displayName = displayName;
+            }
 
-			public override bool Equals(object other)
-			{
-				return Equals(other as TypeName);
-			}
-		}
+            public override string DisplayName
+            {
+                get { return displayName; }
+            }
 
+            public override TypeName NestedName(TypeIdentifier innerName)
+            {
+                return new Display(DisplayName + "+" + innerName.DisplayName);
+            }
+        }
+    }
 
-		private class Display : ATypeName {
-			string displayName;
+    internal class TypeIdentifiers
+    {
+        internal static TypeIdentifier FromDisplay(string displayName)
+        {
+            return new Display(displayName);
+        }
 
-			internal Display (string displayName)
-			{
-				this.displayName = displayName;
-			}
+        internal static TypeIdentifier FromInternal(string internalName)
+        {
+            return new Internal(internalName);
+        }
 
-			public override string DisplayName { get { return displayName; } }
+        internal static TypeIdentifier FromInternal(
+            string internalNameSpace,
+            TypeIdentifier typeName
+        )
+        {
+            return new Internal(internalNameSpace, typeName);
+        }
 
-			public override TypeName NestedName (TypeIdentifier innerName)
-			{
-				return new Display (DisplayName + "+" + innerName.DisplayName);
-			}
+        // Only use if simpleName is certain not to contain
+        // unexpected characters that ordinarily require
+        // escaping: ,+*&[]\
+        internal static TypeIdentifier WithoutEscape(string simpleName)
+        {
+            return new NoEscape(simpleName);
+        }
 
-		}
-	}
+        private class Display : TypeNames.ATypeName, TypeIdentifier
+        {
+            string displayName;
+            string internal_name; //cached
 
-	internal class TypeIdentifiers {
+            internal Display(string displayName)
+            {
+                this.displayName = displayName;
+                internal_name = null;
+            }
 
-		internal static TypeIdentifier FromDisplay (string displayName)
-		{
-			return new Display (displayName);
-		}
+            public override string DisplayName
+            {
+                get { return displayName; }
+            }
 
-		internal static TypeIdentifier FromInternal (string internalName)
-		{
-			return new Internal (internalName);
-		}
+            public string InternalName
+            {
+                get
+                {
+                    if (internal_name == null)
+                        internal_name = GetInternalName();
+                    return internal_name;
+                }
+            }
 
-		internal static TypeIdentifier FromInternal (string internalNameSpace, TypeIdentifier typeName)
-		{
-			return new Internal (internalNameSpace, typeName);
-		}
+            private string GetInternalName()
+            {
+                return TypeSpec.UnescapeInternalName(displayName);
+            }
 
-		// Only use if simpleName is certain not to contain
-		// unexpected characters that ordinarily require
-		// escaping: ,+*&[]\
-		internal static TypeIdentifier WithoutEscape (string simpleName)
-		{
-			return new NoEscape (simpleName);
-		}
+            public override TypeName NestedName(TypeIdentifier innerName)
+            {
+                return TypeNames.FromDisplay(DisplayName + "+" + innerName.DisplayName);
+            }
+        }
 
-		private class Display : TypeNames.ATypeName, TypeIdentifier {
-			string displayName;
-			string internal_name; //cached
+        private class Internal : TypeNames.ATypeName, TypeIdentifier
+        {
+            string internalName;
+            string display_name; //cached
 
-			internal Display (string displayName)
-			{
-				this.displayName = displayName;
-				internal_name = null;
-			}
+            internal Internal(string internalName)
+            {
+                this.internalName = internalName;
+                this.display_name = null;
+            }
 
-			public override string DisplayName {
-				get { return displayName; }
-			}
+            internal Internal(string nameSpaceInternal, TypeIdentifier typeName)
+            {
+                this.internalName = nameSpaceInternal + "." + typeName.InternalName;
+                this.display_name = null;
+            }
 
-			public string InternalName {
-				get {
-					if (internal_name == null)
-						internal_name = GetInternalName ();
-					return internal_name;
-				}
-			}
+            public override string DisplayName
+            {
+                get
+                {
+                    if (display_name == null)
+                        display_name = GetDisplayName();
+                    return display_name;
+                }
+            }
 
-			private string GetInternalName ()
-			{
-				return TypeSpec.UnescapeInternalName(displayName);
-			}
+            public string InternalName
+            {
+                get { return internalName; }
+            }
 
-			public override TypeName NestedName (TypeIdentifier innerName) {
-				return TypeNames.FromDisplay (DisplayName + "+" + innerName.DisplayName);
-			}
-		}
+            private string GetDisplayName()
+            {
+                return TypeSpec.EscapeDisplayName(internalName);
+            }
 
+            public override TypeName NestedName(TypeIdentifier innerName)
+            {
+                return TypeNames.FromDisplay(DisplayName + "+" + innerName.DisplayName);
+            }
+        }
 
-		private class Internal : TypeNames.ATypeName, TypeIdentifier {
-			string internalName;
-			string display_name; //cached
+        private class NoEscape : TypeNames.ATypeName, TypeIdentifier
+        {
+            string simpleName;
 
-			internal Internal (string internalName)
-			{
-				this.internalName = internalName;
-				this.display_name = null;
-			}
-
-			internal Internal (string nameSpaceInternal, TypeIdentifier typeName)
-			{
-				this.internalName = nameSpaceInternal + "." + typeName.InternalName;
-				this.display_name = null;
-			}
-
-			public override string DisplayName {
-				get {
-					if (display_name == null)
-						display_name = GetDisplayName ();
-					return display_name;
-				}
-			}
-
-			public string InternalName {
-				get { return internalName; }
-			}
-
-			private string GetDisplayName ()
-			{
-				return TypeSpec.EscapeDisplayName (internalName);
-			}
-
-			public override TypeName NestedName (TypeIdentifier innerName)
-			{
-				return TypeNames.FromDisplay (DisplayName + "+" + innerName.DisplayName);
-			}
-
-		}
-
-		private class NoEscape : TypeNames.ATypeName, TypeIdentifier {
-			string simpleName;
-			internal NoEscape (string simpleName)
-			{
-				this.simpleName = simpleName;
+            internal NoEscape(string simpleName)
+            {
+                this.simpleName = simpleName;
 #if DEBUG
-				checkNoBadChars(simpleName);
+                checkNoBadChars(simpleName);
 #endif
-			}
+            }
 
-			public override string DisplayName { get { return simpleName; } }
-			public string InternalName { get { return simpleName; } }
+            public override string DisplayName
+            {
+                get { return simpleName; }
+            }
+            public string InternalName
+            {
+                get { return simpleName; }
+            }
 
 #if DEBUG
-			static private void checkNoBadChars (string s)
-			{
-				if (TypeSpec.NeedsEscaping (s))
-				    throw new ArgumentException ("simpleName");
-			}
+            static private void checkNoBadChars(string s)
+            {
+                if (TypeSpec.NeedsEscaping(s))
+                    throw new ArgumentException("simpleName");
+            }
 #endif
 
-			public override TypeName NestedName (TypeIdentifier innerName) {
-				return TypeNames.FromDisplay (DisplayName + "+" + innerName.DisplayName);
-			}
-		}
-	}
+            public override TypeName NestedName(TypeIdentifier innerName)
+            {
+                return TypeNames.FromDisplay(DisplayName + "+" + innerName.DisplayName);
+            }
+        }
+    }
 }

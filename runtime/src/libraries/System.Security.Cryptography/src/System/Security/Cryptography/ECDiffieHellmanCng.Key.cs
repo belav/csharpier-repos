@@ -13,10 +13,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public override ECDiffieHellmanPublicKey PublicKey
         {
-            get
-            {
-                return ECDiffieHellmanCngPublicKey.FromKey(Key);
-            }
+            get { return ECDiffieHellmanCngPublicKey.FromKey(Key); }
         }
 
         /// <summary>
@@ -29,16 +26,15 @@ namespace System.Security.Cryptography
         /// </summary>
         public CngKey Key
         {
-            get
-            {
-                return GetKey();
-            }
-
+            get { return GetKey(); }
             private set
             {
                 ArgumentNullException.ThrowIfNull(value);
                 if (value.AlgorithmGroup != CngAlgorithmGroup.ECDiffieHellman)
-                    throw new ArgumentException(SR.Cryptography_ArgECDHRequiresECDHKey, nameof(value));
+                    throw new ArgumentException(
+                        SR.Cryptography_ArgECDHRequiresECDHKey,
+                        nameof(value)
+                    );
 
                 _core.SetKey(value);
 
@@ -56,7 +52,9 @@ namespace System.Security.Cryptography
             if (curve.IsNamed)
             {
                 if (string.IsNullOrEmpty(curve.Oid.FriendlyName))
-                    throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value));
+                    throw new PlatformNotSupportedException(
+                        SR.Format(SR.Cryptography_InvalidCurveOid, curve.Oid.Value)
+                    );
 
                 // Map curve name to algorithm to support pre-Win10 curves
                 CngAlgorithm alg = CngKey.EcdhCurveNameToAlgorithm(curve.Oid.FriendlyName);
@@ -91,7 +89,9 @@ namespace System.Security.Cryptography
             }
             else
             {
-                throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString()));
+                throw new PlatformNotSupportedException(
+                    SR.Format(SR.Cryptography_CurveNotSupported, curve.CurveType.ToString())
+                );
             }
         }
 

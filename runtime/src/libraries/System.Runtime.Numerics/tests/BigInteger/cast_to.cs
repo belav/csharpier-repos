@@ -187,7 +187,9 @@ namespace System.Numerics.Tests
             // UInt64 Implicit Cast to BigInteger: Random Positive
             for (int i = 0; i < NumberOfRandomIterations; ++i)
             {
-                VerifyUInt64ImplicitCastToBigInteger((ulong)(ulong.MaxValue * s_random.NextDouble()));
+                VerifyUInt64ImplicitCastToBigInteger(
+                    (ulong)(ulong.MaxValue * s_random.NextDouble())
+                );
             }
 
             // UInt64 Implicit Cast to BigInteger: UInt64.MaxValue
@@ -203,7 +205,9 @@ namespace System.Numerics.Tests
             // Int64 Implicit Cast to BigInteger: Random Negative
             for (int i = 0; i < NumberOfRandomIterations; ++i)
             {
-                VerifyInt64ImplicitCastToBigInteger(((long)(long.MaxValue * s_random.NextDouble())) - long.MaxValue);
+                VerifyInt64ImplicitCastToBigInteger(
+                    ((long)(long.MaxValue * s_random.NextDouble())) - long.MaxValue
+                );
             }
 
             // Int64 Implicit Cast to BigInteger: -1
@@ -231,7 +235,10 @@ namespace System.Numerics.Tests
             float value;
 
             // Single Explicit Cast to BigInteger: Single.NegativeInfinity
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)float.NegativeInfinity; });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)float.NegativeInfinity;
+            });
 
             // Single Explicit Cast to BigInteger: Single.MinValue
             VerifySingleExplicitCastToBigInteger(float.MinValue);
@@ -239,7 +246,9 @@ namespace System.Numerics.Tests
             // Single Explicit Cast to BigInteger: Random Negative
             for (int i = 0; i < NumberOfRandomIterations; ++i)
             {
-                VerifySingleExplicitCastToBigInteger(((float)(float.MaxValue * s_random.NextDouble())) - float.MaxValue);
+                VerifySingleExplicitCastToBigInteger(
+                    ((float)(float.MaxValue * s_random.NextDouble())) - float.MaxValue
+                );
             }
 
             // Single Explicit Cast to BigInteger: Random Non-Integral Negative > -100
@@ -266,27 +275,41 @@ namespace System.Numerics.Tests
             // Single Explicit Cast to BigInteger: Random Positive
             for (int i = 0; i < NumberOfRandomIterations; ++i)
             {
-                VerifySingleExplicitCastToBigInteger((float)(float.MaxValue * s_random.NextDouble()));
+                VerifySingleExplicitCastToBigInteger(
+                    (float)(float.MaxValue * s_random.NextDouble())
+                );
             }
 
             // Single Explicit Cast to BigInteger: Single.MaxValue
             VerifySingleExplicitCastToBigInteger(float.MaxValue);
 
             // Single Explicit Cast to BigInteger: Single.PositiveInfinity
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)float.PositiveInfinity; });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)float.PositiveInfinity;
+            });
 
             // double.IsInfinity(float.MaxValue * 2.0f) == false, but we don't want this odd behavior here
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)(float.MaxValue * 2.0f); });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)(float.MaxValue * 2.0f);
+            });
 
             // Single Explicit Cast to BigInteger: Single.Epsilon
             VerifySingleExplicitCastToBigInteger(float.Epsilon);
 
             // Single Explicit Cast to BigInteger: Single.NaN
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)float.NaN; });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)float.NaN;
+            });
 
             //There are multiple ways to represent a NaN just try another one
             // Single Explicit Cast to BigInteger: Single.NaN 2
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)ConvertInt32ToSingle(0x7FC00000); });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)ConvertInt32ToSingle(0x7FC00000);
+            });
 
             // Single Explicit Cast to BigInteger: Smallest Exponent
             VerifySingleExplicitCastToBigInteger((float)Math.Pow(2, -126));
@@ -322,7 +345,10 @@ namespace System.Numerics.Tests
             double value;
 
             // Double Explicit Cast to BigInteger: Double.NegativeInfinity
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)double.NegativeInfinity; });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)double.NegativeInfinity;
+            });
 
             // Double Explicit Cast to BigInteger: Double.MinValue
             VerifyDoubleExplicitCastToBigInteger(double.MinValue);
@@ -330,7 +356,9 @@ namespace System.Numerics.Tests
             // Double Explicit Cast to BigInteger: Random Negative
             for (int i = 0; i < NumberOfRandomIterations; ++i)
             {
-                VerifyDoubleExplicitCastToBigInteger(((double)(double.MaxValue * s_random.NextDouble())) - double.MaxValue);
+                VerifyDoubleExplicitCastToBigInteger(
+                    ((double)(double.MaxValue * s_random.NextDouble())) - double.MaxValue
+                );
             }
 
             // Double Explicit Cast to BigInteger: Random Non-Integral Negative > -100
@@ -357,24 +385,35 @@ namespace System.Numerics.Tests
             // Double Explicit Cast to BigInteger: Random Positive
             for (int i = 0; i < NumberOfRandomIterations; ++i)
             {
-                VerifyDoubleExplicitCastToBigInteger((double)(double.MaxValue * s_random.NextDouble()));
+                VerifyDoubleExplicitCastToBigInteger(
+                    (double)(double.MaxValue * s_random.NextDouble())
+                );
             }
 
             // Double Explicit Cast to BigInteger: Double.MaxValue
             VerifyDoubleExplicitCastToBigInteger(double.MaxValue);
 
             // Double Explicit Cast to BigInteger: Double.PositiveInfinity
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)double.PositiveInfinity; });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)double.PositiveInfinity;
+            });
 
             // Double Explicit Cast to BigInteger: Double.Epsilon
             VerifyDoubleExplicitCastToBigInteger(double.Epsilon);
 
             // Double Explicit Cast to BigInteger: Double.NaN
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)double.NaN; });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)double.NaN;
+            });
 
             //There are multiple ways to represent a NaN just try another one
             // Double Explicit Cast to BigInteger: Double.NaN 2
-            Assert.Throws<OverflowException>(() => { BigInteger temp = (BigInteger)ConvertInt64ToDouble(0x7FF8000000000000); });
+            Assert.Throws<OverflowException>(() =>
+            {
+                BigInteger temp = (BigInteger)ConvertInt64ToDouble(0x7FF8000000000000);
+            });
 
             // Double Explicit Cast to BigInteger: Smallest Exponent
             VerifyDoubleExplicitCastToBigInteger((double)Math.Pow(2, -1022));
@@ -420,7 +459,8 @@ namespace System.Numerics.Tests
                     s_random.Next(int.MinValue, int.MaxValue),
                     s_random.Next(int.MinValue, int.MaxValue),
                     true,
-                    (byte)s_random.Next(0, 29));
+                    (byte)s_random.Next(0, 29)
+                );
                 VerifyDecimalExplicitCastToBigInteger(value);
             }
 
@@ -441,27 +481,25 @@ namespace System.Numerics.Tests
                     s_random.Next(int.MinValue, int.MaxValue),
                     s_random.Next(int.MinValue, int.MaxValue),
                     false,
-                    (byte)s_random.Next(0, 29));
+                    (byte)s_random.Next(0, 29)
+                );
                 VerifyDecimalExplicitCastToBigInteger(value);
             }
 
             // Decimal Explicit Cast to BigInteger: Decimal.MaxValue
             VerifyDecimalExplicitCastToBigInteger(decimal.MaxValue);
-
             // Decimal Explicit Cast to BigInteger: Smallest Exponent
             unchecked
             {
                 value = new decimal(1, 0, 0, false, 0);
             }
             VerifyDecimalExplicitCastToBigInteger(value);
-
             // Decimal Explicit Cast to BigInteger: Largest Exponent and zero integer
             unchecked
             {
                 value = new decimal(0, 0, 0, false, 28);
             }
             VerifyDecimalExplicitCastToBigInteger(value);
-
             // Decimal Explicit Cast to BigInteger: Largest Exponent and non zero integer
             unchecked
             {
@@ -772,14 +810,14 @@ namespace System.Numerics.Tests
 
             if (isZero)
             {
-               Assert.Equal(BigInteger.Zero, bigInteger);
+                Assert.Equal(BigInteger.Zero, bigInteger);
             }
             else
             {
-               Assert.NotEqual(BigInteger.Zero, bigInteger);
+                Assert.NotEqual(BigInteger.Zero, bigInteger);
 
                 // x/x = 1
-               Assert.Equal(BigInteger.One, bigInteger / bigInteger);
+                Assert.Equal(BigInteger.One, bigInteger / bigInteger);
             }
 
             // (x + 1) - 1 = x

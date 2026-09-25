@@ -30,60 +30,69 @@ using System.Timers;
 
 namespace System.Runtime.Caching
 {
-	interface ICacheEntryHelper : IComparer<MemoryCacheEntry>
-	{
-		DateTime GetDateTime (MemoryCacheEntry entry);
-	}
+    interface ICacheEntryHelper : IComparer<MemoryCacheEntry>
+    {
+        DateTime GetDateTime(MemoryCacheEntry entry);
+    }
 
-	class CacheEntryCollection
-	{
-		protected MemoryCacheStore store;
-		private ICacheEntryHelper helper;
-		private SortedSet <MemoryCacheEntry> entries;
+    class CacheEntryCollection
+    {
+        protected MemoryCacheStore store;
+        private ICacheEntryHelper helper;
+        private SortedSet<MemoryCacheEntry> entries;
 
-		protected CacheEntryCollection (MemoryCacheStore store, ICacheEntryHelper helper)
-		{
-			this.store = store;
-			this.helper = helper;
-			entries = new SortedSet <MemoryCacheEntry> (helper);
-		}
+        protected CacheEntryCollection(MemoryCacheStore store, ICacheEntryHelper helper)
+        {
+            this.store = store;
+            this.helper = helper;
+            entries = new SortedSet<MemoryCacheEntry>(helper);
+        }
 
-		protected void Add (MemoryCacheEntry entry)
-		{
-			lock (entries) {
-				entries.Add (entry);
-			}
-		}
+        protected void Add(MemoryCacheEntry entry)
+        {
+            lock (entries)
+            {
+                entries.Add(entry);
+            }
+        }
 
-		protected void Remove (MemoryCacheEntry entry)
-		{
-			lock (entries) {
-				entries.Remove (entry);
-			}
-		}
+        protected void Remove(MemoryCacheEntry entry)
+        {
+            lock (entries)
+            {
+                entries.Remove(entry);
+            }
+        }
 
-		protected int FlushItems (DateTime limit, CacheEntryRemovedReason reason, bool blockInsert, int count = int.MaxValue)
-		{
-			var flushedItems = 0;
-			if (blockInsert)
-				store.BlockInsert ();
+        protected int FlushItems(
+            DateTime limit,
+            CacheEntryRemovedReason reason,
+            bool blockInsert,
+            int count = int.MaxValue
+        )
+        {
+            var flushedItems = 0;
+            if (blockInsert)
+                store.BlockInsert();
 
-			lock (entries) {
-				foreach (var entry in entries) {
-					if (helper.GetDateTime (entry) > limit || flushedItems >= count)
-						break;
+            lock (entries)
+            {
+                foreach (var entry in entries)
+                {
+                    if (helper.GetDateTime(entry) > limit || flushedItems >= count)
+                        break;
 
-					flushedItems++;
-				}
+                    flushedItems++;
+                }
 
-				for (var f = 0; f < flushedItems; f++)
-					store.Remove (entries.Min, null, reason);
-			}
+                for (var f = 0; f < flushedItems; f++)
+                    store.Remove(entries.Min, null, reason);
+            }
 
-			if (blockInsert)
-				store.UnblockInsert ();
+            if (blockInsert)
+                store.UnblockInsert();
 
-			return flushedItems;
-		}
-	}
+            return flushedItems;
+        }
+    }
 }

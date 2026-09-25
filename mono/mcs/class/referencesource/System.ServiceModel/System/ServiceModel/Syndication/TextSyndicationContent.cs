@@ -6,28 +6,31 @@ namespace System.ServiceModel.Syndication
 {
     using System;
     using System.Collections.Generic;
+    using System.Runtime.CompilerServices;
     using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Runtime.CompilerServices;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class TextSyndicationContent : SyndicationContent
     {
         string text;
         TextSyndicationContentKind textKind;
 
-        public TextSyndicationContent(string text) : this(text, TextSyndicationContentKind.Plaintext)
-        {
-        }
+        public TextSyndicationContent(string text)
+            : this(text, TextSyndicationContentKind.Plaintext) { }
 
         public TextSyndicationContent(string text, TextSyndicationContentKind textKind)
         {
             if (!TextSyndicationContentKindHelper.IsDefined(textKind))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("textKind"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("textKind")
+                );
             }
             this.text = text;
             this.textKind = textKind;

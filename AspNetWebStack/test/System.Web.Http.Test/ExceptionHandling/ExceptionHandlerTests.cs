@@ -21,7 +21,10 @@ namespace System.Web.Http.ExceptionHandling
             CancellationToken cancellationToken = CancellationToken.None;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => product.HandleAsync(context, cancellationToken), "context");
+            Assert.ThrowsArgumentNull(
+                () => product.HandleAsync(context, cancellationToken),
+                "context"
+            );
         }
 
         [Fact]
@@ -31,8 +34,12 @@ namespace System.Web.Http.ExceptionHandling
             Mock<ExceptionHandler> mock = new Mock<ExceptionHandler> { CallBase = true };
             Task expectedTask = CreateCompletedTask();
             mock.Setup(h => h.ShouldHandle(It.IsAny<ExceptionHandlerContext>())).Returns(true);
-            mock
-                .Setup(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+            mock.Setup(h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    )
+                )
                 .Returns(expectedTask);
 
             IExceptionHandler product = mock.Object;
@@ -49,7 +56,10 @@ namespace System.Web.Http.ExceptionHandling
                 // Assert
                 Assert.Same(expectedTask, task);
                 mock.Verify(h => h.ShouldHandle(expectedContext), Times.Once());
-                mock.Verify(h => h.HandleAsync(expectedContext, expectedCancellationToken), Times.Once());
+                mock.Verify(
+                    h => h.HandleAsync(expectedContext, expectedCancellationToken),
+                    Times.Once()
+                );
             }
         }
 
@@ -73,8 +83,14 @@ namespace System.Web.Http.ExceptionHandling
             Assert.True(task.IsCompleted);
             Assert.Equal(TaskStatus.RanToCompletion, task.Status);
             mock.Verify(h => h.ShouldHandle(expectedContext), Times.Once());
-            mock.Verify(h => h.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()),
-                Times.Never());
+            mock.Verify(
+                h =>
+                    h.HandleAsync(
+                        It.IsAny<ExceptionHandlerContext>(),
+                        It.IsAny<CancellationToken>()
+                    ),
+                Times.Never()
+            );
         }
 
         [Fact]
@@ -133,8 +149,16 @@ namespace System.Web.Http.ExceptionHandling
             mock.CallBase = true;
             ExceptionHandler product = mock.Object;
 
-            ExceptionHandlerContext context = CreateContext(new ExceptionContext(new Exception(),
-                new ExceptionContextCatchBlock("IgnoreCaughtAt", isTopLevelCatchBlock, callsHandler: false)));
+            ExceptionHandlerContext context = CreateContext(
+                new ExceptionContext(
+                    new Exception(),
+                    new ExceptionContextCatchBlock(
+                        "IgnoreCaughtAt",
+                        isTopLevelCatchBlock,
+                        callsHandler: false
+                    )
+                )
+            );
 
             // Act
             bool shouldHandle = product.ShouldHandle(context);

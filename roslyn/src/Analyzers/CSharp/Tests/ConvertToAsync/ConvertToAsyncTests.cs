@@ -13,15 +13,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToAsync
 {
     using VerifyCS = CSharpCodeFixVerifier<
         EmptyDiagnosticAnalyzer,
-        CSharpConvertToAsyncMethodCodeFixProvider>;
+        CSharpConvertToAsyncMethodCodeFixProvider
+    >;
 
     public sealed class ConvertToAsyncTests
     {
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsChangeToAsync)]
         public async Task CantAwaitAsyncVoid()
         {
-            var initial =
-                """
+            var initial = """
                 using System.Threading.Tasks;
 
                 class Program
@@ -37,8 +37,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToAsync
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System.Threading.Tasks;
 
                 class Program

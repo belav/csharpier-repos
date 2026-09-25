@@ -23,20 +23,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return TextWindow.Position - start;
         }
 
-        private int ConsumeQuoteSequence()
-            => ConsumeCharSequence('"');
+        private int ConsumeQuoteSequence() => ConsumeCharSequence('"');
 
-        private int ConsumeDollarSignSequence()
-            => ConsumeCharSequence('$');
+        private int ConsumeDollarSignSequence() => ConsumeCharSequence('$');
 
-        private int ConsumeAtSignSequence()
-            => ConsumeCharSequence('@');
+        private int ConsumeAtSignSequence() => ConsumeCharSequence('@');
 
-        private int ConsumeOpenBraceSequence()
-            => ConsumeCharSequence('{');
+        private int ConsumeOpenBraceSequence() => ConsumeCharSequence('{');
 
-        private int ConsumeCloseBraceSequence()
-            => ConsumeCharSequence('}');
+        private int ConsumeCloseBraceSequence() => ConsumeCharSequence('}');
 
         private void ConsumeWhitespace(StringBuilder? builder)
         {
@@ -51,8 +46,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
         }
 
-        private bool IsAtEndOfText(char currentChar)
-            => currentChar == SlidingTextWindow.InvalidCharacter && TextWindow.IsReallyAtEnd();
+        private bool IsAtEndOfText(char currentChar) =>
+            currentChar == SlidingTextWindow.InvalidCharacter && TextWindow.IsReallyAtEnd();
 
         private void ScanRawStringLiteral(ref TokenInfo info, bool inDirective)
         {
@@ -79,7 +74,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // If we encounter any errors while scanning this raw string then we can't really determine the true
             // value of the string.  So just do what we do with the normal strings and treat the contents as the
             // value from after the starting quote to the current position.  Note that for normal strings this will
-            // have interpreted things like escape sequences.  However, as we're a raw string and there are no 
+            // have interpreted things like escape sequences.  However, as we're a raw string and there are no
             // escapes, we can just grab the text block directly.  This does mean that things like leading indentation
             // will not be stripped, and that multiline raw strings will contain the contents of their first line.
             // However, as this is error code anyways, the interpretation of the value is fine for us to define
@@ -93,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 info.StringValue = TextWindow.GetText(
                     position: afterStartDelimiter,
                     length: valueLength,
-                    intern: true);
+                    intern: true
+                );
             }
             else
             {
@@ -101,7 +97,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 Debug.Assert(info.StringValue != null);
             }
 
-            Debug.Assert(info.Kind is (SyntaxKind.SingleLineRawStringLiteralToken or SyntaxKind.MultiLineRawStringLiteralToken));
+            Debug.Assert(
+                info.Kind
+                    is (
+                        SyntaxKind.SingleLineRawStringLiteralToken
+                        or SyntaxKind.MultiLineRawStringLiteralToken
+                    )
+            );
 
             if (!inDirective && ScanUtf8Suffix())
             {
@@ -117,7 +119,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                     default:
                         throw ExceptionUtilities.UnexpectedValue(info.Kind);
-                };
+                }
+                ;
             }
 
             info.Text = TextWindow.GetText(intern: true);
@@ -134,12 +137,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // See if we reached the end of the line or file before hitting the end.
                 if (SyntaxFacts.IsNewLine(currentChar))
                 {
-                    this.AddError(TextWindow.Position, width: TextWindow.GetNewLineWidth(), ErrorCode.ERR_UnterminatedRawString);
+                    this.AddError(
+                        TextWindow.Position,
+                        width: TextWindow.GetNewLineWidth(),
+                        ErrorCode.ERR_UnterminatedRawString
+                    );
                     return;
                 }
                 else if (IsAtEndOfText(currentChar))
                 {
-                    this.AddError(TextWindow.Position, width: 0, ErrorCode.ERR_UnterminatedRawString);
+                    this.AddError(
+                        TextWindow.Position,
+                        width: 0,
+                        ErrorCode.ERR_UnterminatedRawString
+                    );
                     return;
                 }
 
@@ -165,7 +176,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.AddError(
                         position: TextWindow.Position - excessQuoteCount,
                         width: excessQuoteCount,
-                        ErrorCode.ERR_TooManyQuotesForRawString);
+                        ErrorCode.ERR_TooManyQuotesForRawString
+                    );
                 }
 
                 // We have enough quotes to finish this string at this point.
@@ -175,7 +187,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 info.StringValue = TextWindow.GetText(
                     position: afterStartDelimiter,
                     length: valueLength,
-                    intern: true);
+                    intern: true
+                );
                 return;
             }
         }
@@ -197,7 +210,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 Debug.Assert(SyntaxFacts.IsNewLine(TextWindow.PeekChar()));
 
                 var contentLineCount = 0;
-                while (ScanMultiLineRawStringLiteralLine(startingQuoteCount, indentationWhitespace.Builder))
+                while (
+                    ScanMultiLineRawStringLiteralLine(
+                        startingQuoteCount,
+                        indentationWhitespace.Builder
+                    )
+                )
                     contentLineCount++;
 
                 // If the initial scan failed then just bail out without a constant value.
@@ -210,7 +228,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.AddError(
                         position: TextWindow.Position - startingQuoteCount,
                         width: startingQuoteCount,
-                        ErrorCode.ERR_RawStringMustContainContent);
+                        ErrorCode.ERR_RawStringMustContainContent
+                    );
                     return;
                 }
 
@@ -228,7 +247,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     AddMultiLineRawStringLiteralLineContents(
                         indentationWhitespace.Builder,
                         currentLineWhitespace.Builder,
-                        firstContentLine: currentLine == 0);
+                        firstContentLine: currentLine == 0
+                    );
 
                     // If processing the line produced errors, then bail out from continued processing.
                     if (this.HasErrors)
@@ -249,7 +269,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         private bool ScanMultiLineRawStringLiteralLine(
-            int startingQuoteCount, StringBuilder indentationWhitespace)
+            int startingQuoteCount,
+            StringBuilder indentationWhitespace
+        )
         {
             TextWindow.AdvancePastNewLine();
 
@@ -268,7 +290,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.AddError(
                         position: TextWindow.Position - excessQuoteCount,
                         width: excessQuoteCount,
-                        ErrorCode.ERR_TooManyQuotesForRawString);
+                        ErrorCode.ERR_TooManyQuotesForRawString
+                    );
                 }
 
                 // Done scanning lines.
@@ -282,7 +305,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 var currentChar = TextWindow.PeekChar();
                 if (IsAtEndOfText(currentChar))
                 {
-                    this.AddError(TextWindow.Position, width: 0, ErrorCode.ERR_UnterminatedRawString);
+                    this.AddError(
+                        TextWindow.Position,
+                        width: 0,
+                        ErrorCode.ERR_UnterminatedRawString
+                    );
                     return false;
                 }
 
@@ -298,7 +325,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         this.AddError(
                             position: TextWindow.Position - currentQuoteCount,
                             width: currentQuoteCount,
-                            ErrorCode.ERR_RawStringDelimiterOnOwnLine);
+                            ErrorCode.ERR_RawStringDelimiterOnOwnLine
+                        );
                         return false;
                     }
                 }
@@ -312,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private void AddMultiLineRawStringLiteralLineContents(
             StringBuilder indentationWhitespace,
             StringBuilder currentLineWhitespace,
-            bool firstContentLine)
+            bool firstContentLine
+        )
         {
             Debug.Assert(SyntaxFacts.IsNewLine(TextWindow.PeekChar()));
 
@@ -339,26 +368,35 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // with the indentation whitespace.  If we are on a blank line then it's ok if the whitespace
                 // we do have is a prefix of the indentation whitespace.
                 var isBlankLine = SyntaxFacts.IsNewLine(TextWindow.PeekChar());
-                var isLegalBlankLine = isBlankLine && StartsWith(indentationWhitespace, currentLineWhitespace);
+                var isLegalBlankLine =
+                    isBlankLine && StartsWith(indentationWhitespace, currentLineWhitespace);
                 if (!isLegalBlankLine)
                 {
                     // Specialized error message if this is a spacing difference.
-                    if (CheckForSpaceDifference(
-                            currentLineWhitespace, indentationWhitespace,
-                            out var currentLineWhitespaceChar, out var indentationWhitespaceChar))
+                    if (
+                        CheckForSpaceDifference(
+                            currentLineWhitespace,
+                            indentationWhitespace,
+                            out var currentLineWhitespaceChar,
+                            out var indentationWhitespaceChar
+                        )
+                    )
                     {
                         this.AddError(
                             lineStartPosition,
                             width: TextWindow.Position - lineStartPosition,
                             ErrorCode.ERR_LineContainsDifferentWhitespace,
-                            currentLineWhitespaceChar, indentationWhitespaceChar);
+                            currentLineWhitespaceChar,
+                            indentationWhitespaceChar
+                        );
                     }
                     else
                     {
                         this.AddError(
                             lineStartPosition,
                             width: TextWindow.Position - lineStartPosition,
-                            ErrorCode.ERR_LineDoesNotStartWithSameWhitespace);
+                            ErrorCode.ERR_LineDoesNotStartWithSameWhitespace
+                        );
                     }
                     return;
                 }
@@ -368,7 +406,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             // string value.  Note: if the current line is shorter than the indentation whitespace, this will
             // intentionally copy nothing.
 #if NETCOREAPP
-            _builder.Append(currentLineWhitespace, startIndex: indentationWhitespace.Length, count: Math.Max(0, currentLineWhitespace.Length - indentationWhitespace.Length));
+            _builder.Append(
+                currentLineWhitespace,
+                startIndex: indentationWhitespace.Length,
+                count: Math.Max(0, currentLineWhitespace.Length - indentationWhitespace.Length)
+            );
 #else
             for (var i = indentationWhitespace.Length; i < currentLineWhitespace.Length; i++)
                 _builder.Append(currentLineWhitespace[i]);
@@ -391,16 +433,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             StringBuilder currentLineWhitespace,
             StringBuilder indentationLineWhitespace,
             [NotNullWhen(true)] out string? currentLineMessage,
-            [NotNullWhen(true)] out string? indentationLineMessage)
+            [NotNullWhen(true)] out string? indentationLineMessage
+        )
         {
-            for (int i = 0, n = Math.Min(currentLineWhitespace.Length, indentationLineWhitespace.Length); i < n; i++)
+            for (
+                int i = 0,
+                    n = Math.Min(currentLineWhitespace.Length, indentationLineWhitespace.Length);
+                i < n;
+                i++
+            )
             {
                 var currentLineChar = currentLineWhitespace[i];
                 var indentationLineChar = indentationLineWhitespace[i];
 
-                if (currentLineChar != indentationLineChar &&
-                    SyntaxFacts.IsWhitespace(currentLineChar) &&
-                    SyntaxFacts.IsWhitespace(indentationLineChar))
+                if (
+                    currentLineChar != indentationLineChar
+                    && SyntaxFacts.IsWhitespace(currentLineChar)
+                    && SyntaxFacts.IsWhitespace(indentationLineChar)
+                )
                 {
                     currentLineMessage = CharToString(currentLineChar);
                     indentationLineMessage = CharToString(indentationLineChar);

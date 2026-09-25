@@ -20,9 +20,24 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { ImmutableObjectAttribute.Yes, ImmutableObjectAttribute.Yes, true };
-            yield return new object[] { ImmutableObjectAttribute.No, new ImmutableObjectAttribute(false), true };
-            yield return new object[] { ImmutableObjectAttribute.Yes, ImmutableObjectAttribute.No, false };
+            yield return new object[]
+            {
+                ImmutableObjectAttribute.Yes,
+                ImmutableObjectAttribute.Yes,
+                true,
+            };
+            yield return new object[]
+            {
+                ImmutableObjectAttribute.No,
+                new ImmutableObjectAttribute(false),
+                true,
+            };
+            yield return new object[]
+            {
+                ImmutableObjectAttribute.Yes,
+                ImmutableObjectAttribute.No,
+                false,
+            };
 
             yield return new object[] { ImmutableObjectAttribute.Yes, new object(), false };
             yield return new object[] { ImmutableObjectAttribute.Yes, null, false };
@@ -30,7 +45,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(ImmutableObjectAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            ImmutableObjectAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ImmutableObjectAttribute)
@@ -48,7 +67,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetImmutable_ReturnsExpected(ImmutableObjectAttribute attribute, bool expectedImmutableObject)
+        public void DefaultProperties_GetImmutable_ReturnsExpected(
+            ImmutableObjectAttribute attribute,
+            bool expectedImmutableObject
+        )
         {
             Assert.Equal(expectedImmutableObject, attribute.Immutable);
             Assert.Equal(!expectedImmutableObject, attribute.IsDefaultAttribute());

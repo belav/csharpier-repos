@@ -5,12 +5,12 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Data;
 using System.Data.Metadata.Edm;
-using System.Diagnostics;
 using System.Data.Objects.DataClasses;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 
 namespace System.Data.Objects.Internal
 {
@@ -30,27 +30,33 @@ namespace System.Data.Objects.Internal
                 return false;
             }
 
-            return string.Equals(key.EntityContainerName, s_NullPart) &&
-                   string.Equals(key.EntitySetName, s_NullPart);
+            return string.Equals(key.EntityContainerName, s_NullPart)
+                && string.Equals(key.EntitySetName, s_NullPart);
         }
 
         /// <summary>
-        /// Checks if the Real Key represents different FK values 
+        /// Checks if the Real Key represents different FK values
         /// than those present when the Conceptual Null was created
         /// </summary>
         /// <param name="conceptualNullKey">The key representing the Conceptual Null</param>
         /// <param name="realKey">The key to be checked</param>
         /// <returns>True if the values are different, false otherwise</returns>
-        public static bool IsConceptualNullKeyChanged(EntityKey conceptualNullKey, EntityKey realKey)
+        public static bool IsConceptualNullKeyChanged(
+            EntityKey conceptualNullKey,
+            EntityKey realKey
+        )
         {
-            Debug.Assert(IsConceptualNullKey(conceptualNullKey), "The key supplied is not a null key");
+            Debug.Assert(
+                IsConceptualNullKey(conceptualNullKey),
+                "The key supplied is not a null key"
+            );
 
             if (realKey == null)
             {
                 return true;
             }
 
-            return !EntityKey.InternalEquals(conceptualNullKey, realKey, compareEntitySets: false); 
+            return !EntityKey.InternalEquals(conceptualNullKey, realKey, compareEntitySets: false);
         }
 
         /// <summary>
@@ -74,12 +80,25 @@ namespace System.Data.Objects.Internal
         /// <param name="dependentEntry">The EntityEntry for the dependent that contains the FK</param>
         /// <param name="relatedEnd">Identifies the principal end for which a key is required</param>
         /// <returns>The key, or null if any value in the key is null</returns>
-        public static EntityKey CreateKeyFromForeignKeyValues(EntityEntry dependentEntry, RelatedEnd relatedEnd)
+        public static EntityKey CreateKeyFromForeignKeyValues(
+            EntityEntry dependentEntry,
+            RelatedEnd relatedEnd
+        )
         {
             // Note: there is only ever one constraint per association type
-            ReferentialConstraint constraint = ((AssociationType)relatedEnd.RelationMetadata).ReferentialConstraints.First();
-            Debug.Assert(constraint.FromRole.Identity == relatedEnd.TargetRoleName, "Unexpected constraint role");
-            return CreateKeyFromForeignKeyValues(dependentEntry, constraint, relatedEnd.GetTargetEntitySetFromRelationshipSet(), useOriginalValues: false);
+            ReferentialConstraint constraint = (
+                (AssociationType)relatedEnd.RelationMetadata
+            ).ReferentialConstraints.First();
+            Debug.Assert(
+                constraint.FromRole.Identity == relatedEnd.TargetRoleName,
+                "Unexpected constraint role"
+            );
+            return CreateKeyFromForeignKeyValues(
+                dependentEntry,
+                constraint,
+                relatedEnd.GetTargetEntitySetFromRelationshipSet(),
+                useOriginalValues: false
+            );
         }
 
         /// <summary>
@@ -91,7 +110,12 @@ namespace System.Data.Objects.Internal
         /// <param name="principalEntitySet">The entity set at the principal end of the the relationship</param>
         /// <param name="useOriginalValues">If true then the key will be constructed from the original FK values</param>
         /// <returns>The key, or null if any value in the key is null</returns>
-        public static EntityKey CreateKeyFromForeignKeyValues(EntityEntry dependentEntry, ReferentialConstraint constraint, EntitySet principalEntitySet, bool useOriginalValues)
+        public static EntityKey CreateKeyFromForeignKeyValues(
+            EntityEntry dependentEntry,
+            ReferentialConstraint constraint,
+            EntitySet principalEntitySet,
+            bool useOriginalValues
+        )
         {
             // Build the key values.  If any part of the key is null, then the entire key
             // is considered null.
@@ -99,10 +123,12 @@ namespace System.Data.Objects.Internal
             int numValues = dependentProps.Count;
             if (numValues == 1)
             {
-                object keyValue = useOriginalValues ?
-                    dependentEntry.GetOriginalEntityValue(dependentProps.First().Name) :
-                    dependentEntry.GetCurrentEntityValue(dependentProps.First().Name);
-                return keyValue == DBNull.Value ? null : new EntityKey(principalEntitySet, keyValue);
+                object keyValue = useOriginalValues
+                    ? dependentEntry.GetOriginalEntityValue(dependentProps.First().Name)
+                    : dependentEntry.GetCurrentEntityValue(dependentProps.First().Name);
+                return keyValue == DBNull.Value
+                    ? null
+                    : new EntityKey(principalEntitySet, keyValue);
             }
 
             // Note that the properties in the principal entity set may be in a different order than
@@ -112,20 +138,26 @@ namespace System.Data.Objects.Internal
             // because the internal "object" constructor hides it.  Even this doesn't work:
             // new EntityKey(principalEntitySet, (IEnumerable<KeyValuePair<string, object>>)keyValues)
             string[] keyNames = principalEntitySet.ElementType.KeyMemberNames;
-            Debug.Assert(keyNames.Length == numValues, "Number of entity set key names does not match constraint names");
+            Debug.Assert(
+                keyNames.Length == numValues,
+                "Number of entity set key names does not match constraint names"
+            );
             object[] values = new object[numValues];
             var principalProps = constraint.FromProperties;
             for (int i = 0; i < numValues; i++)
             {
-                object value = useOriginalValues ?
-                    dependentEntry.GetOriginalEntityValue(dependentProps[i].Name) :
-                    dependentEntry.GetCurrentEntityValue(dependentProps[i].Name);
+                object value = useOriginalValues
+                    ? dependentEntry.GetOriginalEntityValue(dependentProps[i].Name)
+                    : dependentEntry.GetCurrentEntityValue(dependentProps[i].Name);
                 if (value == DBNull.Value)
                 {
                     return null;
                 }
                 int keyIndex = Array.IndexOf(keyNames, principalProps[i].Name);
-                Debug.Assert(keyIndex >= 0 && keyIndex < numValues, "Could not find constraint prop name in entity set key names");
+                Debug.Assert(
+                    keyIndex >= 0 && keyIndex < numValues,
+                    "Could not find constraint prop name in entity set key names"
+                );
                 values[keyIndex] = value;
             }
             return new EntityKey(principalEntitySet, values);

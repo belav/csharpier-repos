@@ -18,21 +18,32 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertForEachToFor), Shared]
-    internal sealed class CSharpConvertForEachToForCodeRefactoringProvider :
-        AbstractConvertForEachToForCodeRefactoringProvider<StatementSyntax, ForEachStatementSyntax>
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertForEachToFor
+        ),
+        Shared
+    ]
+    internal sealed class CSharpConvertForEachToForCodeRefactoringProvider
+        : AbstractConvertForEachToForCodeRefactoringProvider<
+            StatementSyntax,
+            ForEachStatementSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpConvertForEachToForCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpConvertForEachToForCodeRefactoringProvider() { }
 
         protected override string Title => CSharpFeaturesResources.Convert_to_for;
 
         // https://github.com/dotnet/roslyn/issues/30584: Add tests for this scenario
-        protected override bool IsValid(ForEachStatementSyntax foreachStatement)
-            => foreachStatement.AwaitKeyword == default;
+        protected override bool IsValid(ForEachStatementSyntax foreachStatement) =>
+            foreachStatement.AwaitKeyword == default;
 
         protected override bool ValidLocation(ForEachInfo foreachInfo)
         {
@@ -41,7 +52,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
                 return true;
             }
 
-            // for now, we don't support converting in embedded statement if 
+            // for now, we don't support converting in embedded statement if
             // new local declaration for collection is required.
             // we can support this by using Introduce local variable service
             // but the service is not currently written in a way that can be
@@ -49,11 +60,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
             return foreachInfo.ForEachStatement.Parent.IsKind(SyntaxKind.Block);
         }
 
-        protected override (SyntaxNode start, SyntaxNode end) GetForEachBody(ForEachStatementSyntax foreachStatement)
-            => (foreachStatement.Statement, foreachStatement.Statement);
+        protected override (SyntaxNode start, SyntaxNode end) GetForEachBody(
+            ForEachStatementSyntax foreachStatement
+        ) => (foreachStatement.Statement, foreachStatement.Statement);
 
         protected override void ConvertToForStatement(
-            SemanticModel model, ForEachInfo foreachInfo, SyntaxEditor editor, CancellationToken cancellationToken)
+            SemanticModel model,
+            ForEachInfo foreachInfo,
+            SyntaxEditor editor,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -62,26 +78,49 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
 
             var foreachCollectionExpression = foreachStatement.Expression;
             var collectionVariable = GetCollectionVariableName(
-                model, generator, foreachInfo, foreachCollectionExpression, cancellationToken);
+                model,
+                generator,
+                foreachInfo,
+                foreachCollectionExpression,
+                cancellationToken
+            );
 
-            var typeSymbol = foreachInfo.ExplicitCastInterface ??
-                model.GetTypeInfo(foreachCollectionExpression, cancellationToken).Type ??
-                model.Compilation.GetSpecialType(SpecialType.System_Object);
+            var typeSymbol =
+                foreachInfo.ExplicitCastInterface
+                ?? model.GetTypeInfo(foreachCollectionExpression, cancellationToken).Type
+                ?? model.Compilation.GetSpecialType(SpecialType.System_Object);
 
             var collectionStatementType = typeSymbol.GenerateTypeSyntax();
 
             // first, see whether we need to introduce new statement to capture collection
             IntroduceCollectionStatement(
-                foreachInfo, editor, collectionStatementType, foreachCollectionExpression, collectionVariable);
+                foreachInfo,
+                editor,
+                collectionStatementType,
+                foreachCollectionExpression,
+                collectionVariable
+            );
 
-            var indexVariable = CreateUniqueName(foreachInfo.SemanticFacts, model, foreachStatement.Statement, "i", cancellationToken);
+            var indexVariable = CreateUniqueName(
+                foreachInfo.SemanticFacts,
+                model,
+                foreachStatement.Statement,
+                "i",
+                cancellationToken
+            );
 
             // do not cast when the element is identity - fixes 'var x in T![]' under nullable context
             var foreachStatementInfo = model.GetForEachStatementInfo(foreachStatement);
             var donotCastElement = foreachStatementInfo.ElementConversion.IsIdentity;
 
             // put variable statement in body
-            var bodyStatement = GetForLoopBody(generator, foreachInfo, collectionVariable, indexVariable, donotCastElement);
+            var bodyStatement = GetForLoopBody(
+                generator,
+                foreachInfo,
+                collectionVariable,
+                indexVariable,
+                donotCastElement
+            );
 
             // create for statement from foreach statement
             var forStatement = SyntaxFactory.ForStatement(
@@ -91,15 +130,26 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
                         SyntaxFactory.VariableDeclarator(
                             indexVariable.WithAdditionalAnnotations(RenameAnnotation.Create()),
                             argumentList: null,
-                            SyntaxFactory.EqualsValueClause((ExpressionSyntax)generator.LiteralExpression(0))))),
+                            SyntaxFactory.EqualsValueClause(
+                                (ExpressionSyntax)generator.LiteralExpression(0)
+                            )
+                        )
+                    )
+                ),
                 SyntaxFactory.SeparatedList<ExpressionSyntax>(),
-                (ExpressionSyntax)generator.LessThanExpression(
-                    generator.IdentifierName(indexVariable),
-                    generator.MemberAccessExpression(collectionVariable, foreachInfo.CountName)),
+                (ExpressionSyntax)
+                    generator.LessThanExpression(
+                        generator.IdentifierName(indexVariable),
+                        generator.MemberAccessExpression(collectionVariable, foreachInfo.CountName)
+                    ),
                 SyntaxFactory.SingletonSeparatedList<ExpressionSyntax>(
                     SyntaxFactory.PostfixUnaryExpression(
-                        SyntaxKind.PostIncrementExpression, SyntaxFactory.IdentifierName(indexVariable))),
-                bodyStatement);
+                        SyntaxKind.PostIncrementExpression,
+                        SyntaxFactory.IdentifierName(indexVariable)
+                    )
+                ),
+                bodyStatement
+            );
 
             if (!foreachInfo.RequireCollectionStatement)
             {
@@ -115,7 +165,12 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
         }
 
         private StatementSyntax GetForLoopBody(
-            SyntaxGenerator generator, ForEachInfo foreachInfo, SyntaxNode collectionVariableName, SyntaxToken indexVariable, bool donotCastElement)
+            SyntaxGenerator generator,
+            ForEachInfo foreachInfo,
+            SyntaxNode collectionVariableName,
+            SyntaxToken indexVariable,
+            bool donotCastElement
+        )
         {
             var foreachStatement = foreachInfo.ForEachStatement;
             if (foreachStatement.Statement is EmptyStatementSyntax)
@@ -125,11 +180,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
 
             // create variable statement
             var variableStatement = AddItemVariableDeclaration(
-                generator, foreachInfo.ForEachElementType.GenerateTypeSyntax(),
-                foreachStatement.Identifier, donotCastElement ? null : foreachInfo.ForEachElementType,
-                collectionVariableName, indexVariable);
+                generator,
+                foreachInfo.ForEachElementType.GenerateTypeSyntax(),
+                foreachStatement.Identifier,
+                donotCastElement ? null : foreachInfo.ForEachElementType,
+                collectionVariableName,
+                indexVariable
+            );
 
-            var bodyBlock = foreachStatement.Statement is BlockSyntax block ? block : SyntaxFactory.Block(foreachStatement.Statement);
+            var bodyBlock = foreachStatement.Statement is BlockSyntax block
+                ? block
+                : SyntaxFactory.Block(foreachStatement.Statement);
             if (bodyBlock.Statements.Count == 0)
             {
                 // If the block was empty, still put the new variable inside of it. This handles the case where the user
@@ -141,16 +202,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertForEachToFor
             {
                 if (IsForEachVariableWrittenInside)
                 {
-                    variableStatement = variableStatement.WithAdditionalAnnotations(CreateWarningAnnotation());
+                    variableStatement = variableStatement.WithAdditionalAnnotations(
+                        CreateWarningAnnotation()
+                    );
                 }
 
                 return bodyBlock.InsertNodesBefore(
                     bodyBlock.Statements[0],
-                    SpecializedCollections.SingletonEnumerable(variableStatement));
+                    SpecializedCollections.SingletonEnumerable(variableStatement)
+                );
             }
         }
 
-        protected override bool IsSupported(ILocalSymbol foreachVariable, IForEachLoopOperation forEachOperation, ForEachStatementSyntax foreachStatement)
-            => true;
+        protected override bool IsSupported(
+            ILocalSymbol foreachVariable,
+            IForEachLoopOperation forEachOperation,
+            ForEachStatementSyntax foreachStatement
+        ) => true;
     }
 }

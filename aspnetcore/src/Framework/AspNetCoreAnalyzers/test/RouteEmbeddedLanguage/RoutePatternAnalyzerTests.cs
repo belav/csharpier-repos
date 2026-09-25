@@ -334,19 +334,16 @@ public class TestController
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
-        Assert.Collection(
-            diagnostics,
-            d =>
-            {
-                Assert.Same(DiagnosticDescriptors.RoutePatternIssue, d.Descriptor);
-                Assert.Equal(
-                    Resources.FormatAnalyzer_RouteIssue_Message(
-                        Resources.AttributeRoute_TokenReplacement_UnclosedToken
-                    ),
-                    d.GetMessage(CultureInfo.InvariantCulture)
-                );
-            }
-        );
+        Assert.Collection(diagnostics, d =>
+        {
+            Assert.Same(DiagnosticDescriptors.RoutePatternIssue, d.Descriptor);
+            Assert.Equal(
+                Resources.FormatAnalyzer_RouteIssue_Message(
+                    Resources.AttributeRoute_TokenReplacement_UnclosedToken
+                ),
+                d.GetMessage(CultureInfo.InvariantCulture)
+            );
+        });
     }
 
     [Fact]
@@ -382,17 +379,14 @@ public class TestController
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
-        Assert.Collection(
-            diagnostics,
-            d =>
-            {
-                Assert.Same(DiagnosticDescriptors.RoutePatternUnusedParameter, d.Descriptor);
-                Assert.Equal(
-                    Resources.FormatAnalyzer_UnusedParameter_Message("id"),
-                    d.GetMessage(CultureInfo.InvariantCulture)
-                );
-            }
-        );
+        Assert.Collection(diagnostics, d =>
+        {
+            Assert.Same(DiagnosticDescriptors.RoutePatternUnusedParameter, d.Descriptor);
+            Assert.Equal(
+                Resources.FormatAnalyzer_UnusedParameter_Message("id"),
+                d.GetMessage(CultureInfo.InvariantCulture)
+            );
+        });
     }
 
     [Fact]
@@ -548,17 +542,14 @@ public class PageData
         var diagnostics = await Runner.GetDiagnosticsAsync(source.Source);
 
         // Assert
-        Assert.Collection(
-            diagnostics,
-            d =>
-            {
-                Assert.Same(DiagnosticDescriptors.RoutePatternUnusedParameter, d.Descriptor);
-                Assert.Equal(
-                    Resources.FormatAnalyzer_UnusedParameter_Message("id"),
-                    d.GetMessage(CultureInfo.InvariantCulture)
-                );
-            }
-        );
+        Assert.Collection(diagnostics, d =>
+        {
+            Assert.Same(DiagnosticDescriptors.RoutePatternUnusedParameter, d.Descriptor);
+            Assert.Equal(
+                Resources.FormatAnalyzer_UnusedParameter_Message("id"),
+                d.GetMessage(CultureInfo.InvariantCulture)
+            );
+        });
     }
 
     [Fact]

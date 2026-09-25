@@ -6,12 +6,12 @@ namespace System.ServiceModel.Diagnostics
 {
     using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Xml;
-    using System.Xml.XPath;
     using System.Globalization;
-    using System.Text;
     using System.IO;
     using System.Runtime;
+    using System.Text;
+    using System.Xml;
+    using System.Xml.XPath;
 
     // We have to put something here so that when this item appears in the
     // debugger, ToString() isn't called. Calling ToString() can cause bad behavior.
@@ -99,13 +99,16 @@ namespace System.ServiceModel.Diagnostics
                 this.childNodes.Add(node);
             }
 
-            //This method returns all subnodes with the given path of local names. Namespaces are ignored. 
+            //This method returns all subnodes with the given path of local names. Namespaces are ignored.
             //For all path elements but the last one, the first match is taken. For the last path element, all matches are returned.
             internal IEnumerable<ElementNode> FindSubnodes(string[] headersPath)
             {
 #pragma warning disable 618
                 Fx.Assert(null != headersPath, "Headers path should not be null");
-                Fx.Assert(headersPath.Length > 0, "There should be more than one item in the headersPath array.");
+                Fx.Assert(
+                    headersPath.Length > 0,
+                    "There should be more than one item in the headersPath array."
+                );
 #pragma warning restore 618
 
                 if (null == headersPath)
@@ -121,7 +124,10 @@ namespace System.ServiceModel.Diagnostics
                 while (null != node && ++i < headersPath.Length)
                 {
 #pragma warning disable 618
-                    Fx.Assert(null != headersPath[i], "None of the elements in headersPath should be null.");
+                    Fx.Assert(
+                        null != headersPath[i],
+                        "None of the elements in headersPath should be null."
+                    );
 #pragma warning restore 618
                     ElementNode subNode = null;
                     if (null != node.childNodes)
@@ -131,7 +137,10 @@ namespace System.ServiceModel.Diagnostics
                             if (child.NodeType == XPathNodeType.Element)
                             {
                                 ElementNode childNode = child as ElementNode;
-                                if (null != childNode && 0 == String.CompareOrdinal(childNode.name, headersPath[i]))
+                                if (
+                                    null != childNode
+                                    && 0 == String.CompareOrdinal(childNode.name, headersPath[i])
+                                )
                                 {
                                     if (headersPath.Length == i + 1)
                                     {
@@ -202,10 +211,7 @@ namespace System.ServiceModel.Diagnostics
 
             internal AttributeNode CurrentAttribute
             {
-                get
-                {
-                    return this.attributes[this.attributeIndex];
-                }
+                get { return this.attributes[this.attributeIndex]; }
             }
 
             public int Size
@@ -219,7 +225,7 @@ namespace System.ServiceModel.Diagnostics
                     }
                     if (!string.IsNullOrEmpty(this.xmlns))
                     {
-                        size += this.xmlns.Length + 9;  // xmlns="xmlns" 
+                        size += this.xmlns.Length + 9; // xmlns="xmlns"
                     }
                     return size;
                 }
@@ -245,13 +251,13 @@ namespace System.ServiceModel.Diagnostics
             {
                 get
                 {
-                    int size = this.name.Length + this.nodeValue.Length + 5; 
-                    
+                    int size = this.name.Length + this.nodeValue.Length + 5;
+
                     if (!string.IsNullOrEmpty(this.prefix))
                     {
                         size += this.prefix.Length + 1;
                     }
-                    
+
                     if (!string.IsNullOrEmpty(this.xmlns))
                     {
                         size += this.xmlns.Length + 9; //upper bound
@@ -265,8 +271,7 @@ namespace System.ServiceModel.Diagnostics
         class ProcessingInstructionNode : TraceNode, IMeasurable
         {
             internal ProcessingInstructionNode(string name, string text, ElementNode parent)
-                :
-                base(XPathNodeType.ProcessingInstruction, parent)
+                : base(XPathNodeType.ProcessingInstruction, parent)
             {
                 this.name = name;
                 this.text = text;
@@ -274,7 +279,7 @@ namespace System.ServiceModel.Diagnostics
 
             internal string name;
             internal string text;
-            
+
             public int Size
             {
                 get
@@ -290,14 +295,12 @@ namespace System.ServiceModel.Diagnostics
             {
                 this.nodeValue = value;
             }
+
             internal string nodeValue;
 
             public int Size
             {
-                get
-                {
-                    return this.nodeValue.Length;
-                }
+                get { return this.nodeValue.Length; }
             }
         }
 
@@ -336,7 +339,11 @@ namespace System.ServiceModel.Diagnostics
             }
             else
             {
-                ProcessingInstructionNode node = new ProcessingInstructionNode(name, text, this.CurrentElement);
+                ProcessingInstructionNode node = new ProcessingInstructionNode(
+                    name,
+                    text,
+                    this.CurrentElement
+                );
                 this.VerifySize(node);
                 this.CurrentElement.Add(node);
             }
@@ -449,7 +456,9 @@ namespace System.ServiceModel.Diagnostics
                 bool retval = true;
                 if (this.current != null)
                 {
-                    retval = this.CurrentElement.text != null || this.CurrentElement.childNodes.Count > 0;
+                    retval =
+                        this.CurrentElement.text != null
+                        || this.CurrentElement.childNodes.Count > 0;
                 }
                 return retval;
             }
@@ -482,9 +491,14 @@ namespace System.ServiceModel.Diagnostics
             {
                 foreach (AttributeNode attributeNode in node.attributes)
                 {
-                    if (string.Compare("xmlns", attributeNode.prefix, StringComparison.Ordinal) == 0)
+                    if (
+                        string.Compare("xmlns", attributeNode.prefix, StringComparison.Ordinal) == 0
+                    )
                     {
-                        if (string.Compare(ns, attributeNode.nodeValue, StringComparison.Ordinal) == 0)
+                        if (
+                            string.Compare(ns, attributeNode.nodeValue, StringComparison.Ordinal)
+                            == 0
+                        )
                         {
                             retval = attributeNode.name;
                             break;
@@ -538,7 +552,13 @@ namespace System.ServiceModel.Diagnostics
                 this.state = this.current.NodeType;
                 retval = true;
             }
-            else if ((null == this.CurrentElement.childNodes || this.CurrentElement.childNodes.Count == 0) && this.CurrentElement.text != null)
+            else if (
+                (
+                    null == this.CurrentElement.childNodes
+                    || this.CurrentElement.childNodes.Count == 0
+                )
+                && this.CurrentElement.text != null
+            )
             {
                 this.state = XPathNodeType.Text;
                 this.CurrentElement.movedToText = true;
@@ -855,7 +875,9 @@ namespace System.ServiceModel.Diagnostics
         {
             this.MoveToRoot();
             StringBuilder sb = new StringBuilder();
-            EncodingFallbackAwareXmlTextWriter writer = new EncodingFallbackAwareXmlTextWriter(new StringWriter(sb, CultureInfo.CurrentCulture));
+            EncodingFallbackAwareXmlTextWriter writer = new EncodingFallbackAwareXmlTextWriter(
+                new StringWriter(sb, CultureInfo.CurrentCulture)
+            );
             writer.WriteNode(this, false);
             return sb.ToString();
         }

@@ -14,7 +14,11 @@ namespace System.IO.Ports.Tests
         //Determines how long the randomly generated PortName is
         private const int rndPortNameSize = 255;
 
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         private readonly DosDevices _dosDevices;
 
@@ -28,26 +32,40 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_COM1_After_Open()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying setting PortName=COM1 after open has been called");
 
-                VerifyExceptionAfterOpen(com, TCSupport.LocalMachineSerialInfo.FirstAvailablePortName, typeof(InvalidOperationException));
+                VerifyExceptionAfterOpen(
+                    com,
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName,
+                    typeof(InvalidOperationException)
+                );
             }
         }
-
 
         [ConditionalFact(nameof(HasTwoSerialPorts))]
         public void PortName_COM2_After_Open()
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 Debug.WriteLine("Verifying setting PortName=COM2 after open has been called");
 
-                VerifyExceptionAfterOpen(com, TCSupport.LocalMachineSerialInfo.SecondAvailablePortName, typeof(InvalidOperationException));
+                VerifyExceptionAfterOpen(
+                    com,
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName,
+                    typeof(InvalidOperationException)
+                );
             }
         }
-
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_Empty()
@@ -56,14 +74,17 @@ namespace System.IO.Ports.Tests
             VerifyException("", ThrowAt.Set, typeof(ArgumentException), typeof(ArgumentException));
         }
 
-
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_null()
         {
             Debug.WriteLine("Verifying setting PortName=null");
-            VerifyException(null, ThrowAt.Set, typeof(ArgumentNullException), typeof(ArgumentNullException));
+            VerifyException(
+                null,
+                ThrowAt.Set,
+                typeof(ArgumentNullException),
+                typeof(ArgumentNullException)
+            );
         }
-
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_RND()
@@ -77,7 +98,12 @@ namespace System.IO.Ports.Tests
             }
 
             Debug.WriteLine("Verifying setting PortName to a random string");
-            VerifyException(rndStrBuf.ToString(), ThrowAt.Open, typeof(ArgumentException), typeof(InvalidOperationException));
+            VerifyException(
+                rndStrBuf.ToString(),
+                ThrowAt.Open,
+                typeof(ArgumentException),
+                typeof(InvalidOperationException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -93,12 +119,24 @@ namespace System.IO.Ports.Tests
             testFile.Close();
             Debug.WriteLine("Verifying setting PortName={0}", fileName);
 
-            VerifyException(fileName, ThrowAt.Open, typeof(ArgumentException), typeof(InvalidOperationException));
+            VerifyException(
+                fileName,
+                ThrowAt.Open,
+                typeof(ArgumentException),
+                typeof(InvalidOperationException)
+            );
 
-            Debug.WriteLine("Verifying setting PortName={0}", Environment.CurrentDirectory + fileName);
+            Debug.WriteLine(
+                "Verifying setting PortName={0}",
+                Environment.CurrentDirectory + fileName
+            );
 
-            VerifyException(Environment.CurrentDirectory + fileName, ThrowAt.Open, typeof(ArgumentException),
-                typeof(InvalidOperationException));
+            VerifyException(
+                Environment.CurrentDirectory + fileName,
+                ThrowAt.Open,
+                typeof(ArgumentException),
+                typeof(InvalidOperationException)
+            );
 
             File.Delete(fileName);
         }
@@ -107,52 +145,89 @@ namespace System.IO.Ports.Tests
         public void PortName_COM257()
         {
             Debug.WriteLine("Verifying setting PortName=COM257");
-            VerifyException("COM257", ThrowAt.Open, typeof(IOException), typeof(InvalidOperationException));
+            VerifyException(
+                "COM257",
+                ThrowAt.Open,
+                typeof(IOException),
+                typeof(InvalidOperationException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_LPT()
         {
-            Type expectedException = _dosDevices.CommonNameExists("LPT") ? typeof(ArgumentException) : typeof(ArgumentException);
+            Type expectedException = _dosDevices.CommonNameExists("LPT")
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=LPT");
-            VerifyException("LPT", ThrowAt.Open, expectedException, typeof(InvalidOperationException));
+            VerifyException(
+                "LPT",
+                ThrowAt.Open,
+                expectedException,
+                typeof(InvalidOperationException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_LPT1()
         {
-            Type expectedException = _dosDevices.CommonNameExists("LPT1") ? typeof(ArgumentException) : typeof(ArgumentException);
+            Type expectedException = _dosDevices.CommonNameExists("LPT1")
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=LPT1");
-            VerifyException("LPT1", ThrowAt.Open, expectedException, typeof(InvalidOperationException));
+            VerifyException(
+                "LPT1",
+                ThrowAt.Open,
+                expectedException,
+                typeof(InvalidOperationException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_PHYSICALDRIVE0()
         {
-            Type expectedException = _dosDevices.CommonNameExists("PHYSICALDRIVE0") ? typeof(ArgumentException) : typeof(ArgumentException);
+            Type expectedException = _dosDevices.CommonNameExists("PHYSICALDRIVE0")
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=PHYSICALDRIVE0");
-            VerifyException("PHYSICALDRIVE0", ThrowAt.Open, expectedException, typeof(InvalidOperationException));
+            VerifyException(
+                "PHYSICALDRIVE0",
+                ThrowAt.Open,
+                expectedException,
+                typeof(InvalidOperationException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_A()
         {
-            Type expectedException = _dosDevices.CommonNameExists("A:") ? typeof(ArgumentException) : typeof(ArgumentException);
+            Type expectedException = _dosDevices.CommonNameExists("A:")
+                ? typeof(ArgumentException)
+                : typeof(ArgumentException);
 
             Debug.WriteLine("Verifying setting PortName=A:");
-            VerifyException("A:", ThrowAt.Open, expectedException, typeof(InvalidOperationException));
+            VerifyException(
+                "A:",
+                ThrowAt.Open,
+                expectedException,
+                typeof(InvalidOperationException)
+            );
         }
-
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void PortName_C()
         {
             Debug.WriteLine("Verifying setting PortName=C:");
 
-            VerifyException("C:", ThrowAt.Open, new[] { typeof(ArgumentException), typeof(ArgumentException) }, typeof(InvalidOperationException));
+            VerifyException(
+                "C:",
+                ThrowAt.Open,
+                new[] { typeof(ArgumentException), typeof(ArgumentException) },
+                typeof(InvalidOperationException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -163,21 +238,45 @@ namespace System.IO.Ports.Tests
 
             if (!string.IsNullOrEmpty(portName))
             {
-                VerifyException(portName, ThrowAt.Open, new[] { typeof(ArgumentException) }, typeof(InvalidOperationException));
+                VerifyException(
+                    portName,
+                    ThrowAt.Open,
+                    new[] { typeof(ArgumentException) },
+                    typeof(InvalidOperationException)
+                );
             }
         }
         #endregion
 
         #region Verification for Test Cases
 
-        private void VerifyException(string portName, ThrowAt throwAt, Type expectedExceptionAtOpen, Type expectedExceptionAfterOpen)
+        private void VerifyException(
+            string portName,
+            ThrowAt throwAt,
+            Type expectedExceptionAtOpen,
+            Type expectedExceptionAfterOpen
+        )
         {
-            VerifyException(portName, throwAt, new[] { expectedExceptionAtOpen }, expectedExceptionAfterOpen);
+            VerifyException(
+                portName,
+                throwAt,
+                new[] { expectedExceptionAtOpen },
+                expectedExceptionAfterOpen
+            );
         }
 
-        private void VerifyException(string portName, ThrowAt throwAt, Type[] expectedExceptionAtOpen, Type expectedExceptionAfterOpen)
+        private void VerifyException(
+            string portName,
+            ThrowAt throwAt,
+            Type[] expectedExceptionAtOpen,
+            Type expectedExceptionAfterOpen
+        )
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, portName, throwAt, expectedExceptionAtOpen);
 
@@ -188,13 +287,22 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
-        private void VerifyExceptionAtOpen(SerialPort com, string portName, ThrowAt throwAt, Type expectedException)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            string portName,
+            ThrowAt throwAt,
+            Type expectedException
+        )
         {
             VerifyExceptionAtOpen(com, portName, throwAt, new[] { expectedException });
         }
 
-        private void VerifyExceptionAtOpen(SerialPort com, string portName, ThrowAt throwAt, Type[] expectedExceptions)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            string portName,
+            ThrowAt throwAt,
+            Type[] expectedExceptions
+        )
         {
             string origPortName = com.PortName;
 
@@ -212,7 +320,10 @@ namespace System.IO.Ports.Tests
             if (ThrowAt.Open == throwAt)
                 serPortProp.SetProperty("PortName", portName);
             else
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
 
             try
             {
@@ -224,7 +335,8 @@ namespace System.IO.Ports.Tests
                 if (null != expectedExceptions && 0 < expectedExceptions.Length)
                 {
                     Fail("ERROR!!! Expected Open() to throw ");
-                    for (int i = 0; i < expectedExceptions.Length; ++i) Console.Write(expectedExceptions[i] + " ");
+                    for (int i = 0; i < expectedExceptions.Length; ++i)
+                        Console.Write(expectedExceptions[i] + " ");
                     Debug.WriteLine(" and nothing was thrown");
                 }
             }
@@ -232,7 +344,10 @@ namespace System.IO.Ports.Tests
             {
                 if (null == expectedExceptions || 0 == expectedExceptions.Length)
                 {
-                    Fail("ERROR!!! Expected Open() NOT to throw an exception and the following was thrown:\n{0}", e);
+                    Fail(
+                        "ERROR!!! Expected Open() NOT to throw an exception and the following was thrown:\n{0}",
+                        e
+                    );
                 }
                 else
                 {
@@ -255,7 +370,8 @@ namespace System.IO.Ports.Tests
                     else
                     {
                         Fail("ERROR!!! Expected Open() throw ");
-                        for (int i = 0; i < expectedExceptions.Length; ++i) Console.Write(expectedExceptions[i] + " ");
+                        for (int i = 0; i < expectedExceptions.Length; ++i)
+                            Console.Write(expectedExceptions[i] + " ");
                         Debug.WriteLine(" and  the following was thrown:\n{0}", e);
                     }
                 }
@@ -265,8 +381,11 @@ namespace System.IO.Ports.Tests
             com.PortName = origPortName;
         }
 
-
-        private void VerifyExceptionAfterOpen(SerialPort com, string portName, Type expectedException)
+        private void VerifyExceptionAfterOpen(
+            SerialPort com,
+            string portName,
+            Type expectedException
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
@@ -279,18 +398,28 @@ namespace System.IO.Ports.Tests
                 com.PortName = portName;
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the PortName after Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected setting the PortName after Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the PortName after Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the PortName after Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the PortName after Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the PortName after Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 

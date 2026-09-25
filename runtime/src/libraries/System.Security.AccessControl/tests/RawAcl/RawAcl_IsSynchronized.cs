@@ -18,7 +18,16 @@ namespace System.Security.AccessControl.Tests
 
             // collection has one ACE. By code review, this properties always return false. So no additional cases are needed
             rAcl = new RawAcl(0, 1);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             Assert.True(false == rAcl.IsSynchronized);
         }

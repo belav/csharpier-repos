@@ -32,7 +32,13 @@ namespace Microsoft.CodeAnalysis
 
         private string? _totalAnalyzerExecutionTime;
 
-        public SarifV2ErrorLogger(Stream stream, string toolName, string toolFileVersion, Version toolAssemblyVersion, CultureInfo culture)
+        public SarifV2ErrorLogger(
+            Stream stream,
+            string toolName,
+            string toolFileVersion,
+            Version toolAssemblyVersion,
+            CultureInfo culture
+        )
             : base(stream, culture)
         {
             _descriptors = new DiagnosticDescriptorSet();
@@ -77,7 +83,10 @@ namespace Microsoft.CodeAnalysis
                 _writer.WriteArrayStart("suppressions");
                 _writer.WriteObjectStart(); // suppression
                 _writer.Write("kind", "inSource");
-                string? justification = suppressionInfo?.Attribute?.DecodeNamedArgument<string>("Justification", SpecialType.System_String);
+                string? justification = suppressionInfo?.Attribute?.DecodeNamedArgument<string>(
+                    "Justification",
+                    SpecialType.System_String
+                );
                 if (justification != null)
                 {
                     _writer.Write("justification", justification);
@@ -86,15 +95,20 @@ namespace Microsoft.CodeAnalysis
                 string? suppressionType = null;
                 if (diagnostic.ProgrammaticSuppressionInfo is { } programmaticSuppressionInfo)
                 {
-                    var suppressionsStr = programmaticSuppressionInfo.Suppressions
-                        .OrderBy(idAndJustification => idAndJustification.Id)
-                        .Select(idAndJustification => $"Suppression Id: {idAndJustification.Id}, Suppression Justification: {idAndJustification.Justification}")
+                    var suppressionsStr = programmaticSuppressionInfo
+                        .Suppressions.OrderBy(idAndJustification => idAndJustification.Id)
+                        .Select(idAndJustification =>
+                            $"Suppression Id: {idAndJustification.Id}, Suppression Justification: {idAndJustification.Justification}"
+                        )
                         .Join(", ");
                     suppressionType = $"DiagnosticSuppressor {{ {suppressionsStr} }}";
                 }
                 else if (suppressionInfo != null)
                 {
-                    suppressionType = suppressionInfo.Attribute != null ? "SuppressMessageAttribute" : "Pragma Directive";
+                    suppressionType =
+                        suppressionInfo.Attribute != null
+                            ? "SuppressMessageAttribute"
+                            : "Pragma Directive";
                 }
 
                 if (suppressionType != null)
@@ -117,14 +131,22 @@ namespace Microsoft.CodeAnalysis
             _writer.WriteObjectEnd(); // result
         }
 
-        public override void AddAnalyzerDescriptorsAndExecutionTime(ImmutableArray<(DiagnosticDescriptor Descriptor, DiagnosticDescriptorErrorLoggerInfo Info)> descriptors, double totalAnalyzerExecutionTime)
+        public override void AddAnalyzerDescriptorsAndExecutionTime(
+            ImmutableArray<(
+                DiagnosticDescriptor Descriptor,
+                DiagnosticDescriptorErrorLoggerInfo Info
+            )> descriptors,
+            double totalAnalyzerExecutionTime
+        )
         {
             foreach (var (descriptor, info) in descriptors.OrderBy(d => d.Descriptor.Id))
             {
                 _descriptors.Add(descriptor, info);
             }
 
-            _totalAnalyzerExecutionTime = ReportAnalyzerUtil.GetFormattedAnalyzerExecutionTime(totalAnalyzerExecutionTime, _culture).Trim();
+            _totalAnalyzerExecutionTime = ReportAnalyzerUtil
+                .GetFormattedAnalyzerExecutionTime(totalAnalyzerExecutionTime, _culture)
+                .Trim();
         }
 
         private void WriteLocations(Location location, IReadOnlyList<Location> additionalLocations)
@@ -144,9 +166,11 @@ namespace Microsoft.CodeAnalysis
             // See https://github.com/dotnet/roslyn/issues/11228 for discussion around
             // whether this is the correct treatment of Diagnostic.AdditionalLocations
             // as SARIF relatedLocations.
-            if (additionalLocations != null &&
-                additionalLocations.Count > 0 &&
-                additionalLocations.Any(l => HasPath(l)))
+            if (
+                additionalLocations != null
+                && additionalLocations.Count > 0
+                && additionalLocations.Any(l => HasPath(l))
+            )
             {
                 _writer.WriteArrayStart("relatedLocations");
 
@@ -202,7 +226,7 @@ namespace Microsoft.CodeAnalysis
             _writer.Write("columnKind", "utf16CodeUnits");
 
             _writer.WriteObjectEnd(); // run
-            _writer.WriteArrayEnd();  // runs
+            _writer.WriteArrayEnd(); // runs
             _writer.WriteObjectEnd(); // root
             base.Dispose();
         }
@@ -227,15 +251,25 @@ namespace Microsoft.CodeAnalysis
             WriteInvocations(effectiveSeverities);
         }
 
-        private ImmutableArray<(string DescriptorId, int DescriptorIndex, ImmutableHashSet<ReportDiagnostic> EffectiveSeverities)> WriteRules()
+        private ImmutableArray<(
+            string DescriptorId,
+            int DescriptorIndex,
+            ImmutableHashSet<ReportDiagnostic> EffectiveSeverities
+        )> WriteRules()
         {
-            var effectiveSeveritiesBuilder = ArrayBuilder<(string DescriptorId, int DescriptorIndex, ImmutableHashSet<ReportDiagnostic> EffectiveSeverities)>.GetInstance(_descriptors.Count);
+            var effectiveSeveritiesBuilder = ArrayBuilder<(
+                string DescriptorId,
+                int DescriptorIndex,
+                ImmutableHashSet<ReportDiagnostic> EffectiveSeverities
+            )>.GetInstance(_descriptors.Count);
 
             if (_descriptors.Count > 0)
             {
                 _writer.WriteArrayStart("rules");
 
-                var reportAnalyzerExecutionTime = !string.IsNullOrEmpty(_totalAnalyzerExecutionTime);
+                var reportAnalyzerExecutionTime = !string.IsNullOrEmpty(
+                    _totalAnalyzerExecutionTime
+                );
                 foreach (var (index, descriptor, descriptorInfo) in _descriptors.ToSortedList())
                 {
                     _writer.WriteObjectStart(); // rule
@@ -270,13 +304,23 @@ namespace Microsoft.CodeAnalysis
                     //    either for part of the compilation or the entire compilation.
                     // 2. If there is any source suppression for diagnostic(s) with the rule ID through pragma directive,
                     //    SuppressMessageAttribute, DiagnosticSuppressor, etc.
-                    var hasAnySourceSuppression = _diagnosticIdsWithAnySourceSuppressions.Contains(descriptor.Id);
-                    var isEverSuppressed = descriptorInfo.HasAnyExternalSuppression || hasAnySourceSuppression;
+                    var hasAnySourceSuppression = _diagnosticIdsWithAnySourceSuppressions.Contains(
+                        descriptor.Id
+                    );
+                    var isEverSuppressed =
+                        descriptorInfo.HasAnyExternalSuppression || hasAnySourceSuppression;
 
                     Debug.Assert(reportAnalyzerExecutionTime || descriptorInfo.ExecutionTime == 0);
-                    Debug.Assert(reportAnalyzerExecutionTime || descriptorInfo.ExecutionPercentage == 0);
+                    Debug.Assert(
+                        reportAnalyzerExecutionTime || descriptorInfo.ExecutionPercentage == 0
+                    );
 
-                    if (!string.IsNullOrEmpty(descriptor.Category) || isEverSuppressed || reportAnalyzerExecutionTime || descriptor.ImmutableCustomTags.Any())
+                    if (
+                        !string.IsNullOrEmpty(descriptor.Category)
+                        || isEverSuppressed
+                        || reportAnalyzerExecutionTime
+                        || descriptor.ImmutableCustomTags.Any()
+                    )
                     {
                         _writer.WriteObjectStart("properties");
 
@@ -306,10 +350,20 @@ namespace Microsoft.CodeAnalysis
 
                         if (reportAnalyzerExecutionTime)
                         {
-                            var executionTime = ReportAnalyzerUtil.GetFormattedAnalyzerExecutionTime(descriptorInfo.ExecutionTime, _culture).Trim();
+                            var executionTime = ReportAnalyzerUtil
+                                .GetFormattedAnalyzerExecutionTime(
+                                    descriptorInfo.ExecutionTime,
+                                    _culture
+                                )
+                                .Trim();
                             _writer.Write("executionTimeInSeconds", executionTime);
 
-                            var executionPercentage = ReportAnalyzerUtil.GetFormattedAnalyzerExecutionPercentage(descriptorInfo.ExecutionPercentage, _culture).Trim();
+                            var executionPercentage = ReportAnalyzerUtil
+                                .GetFormattedAnalyzerExecutionPercentage(
+                                    descriptorInfo.ExecutionPercentage,
+                                    _culture
+                                )
+                                .Trim();
                             _writer.Write("executionTimeInPercentage", executionPercentage);
                         }
 
@@ -330,12 +384,20 @@ namespace Microsoft.CodeAnalysis
 
                     _writer.WriteObjectEnd(); // rule
 
-                    var defaultSeverity = descriptor.IsEnabledByDefault ? DiagnosticDescriptor.MapSeverityToReport(descriptor.DefaultSeverity) : ReportDiagnostic.Suppress;
-                    var hasNonDefaultEffectiveSeverities = descriptorInfo.EffectiveSeverities != null &&
-                        (descriptorInfo.EffectiveSeverities.Count != 1 || descriptorInfo.EffectiveSeverities.Single() != defaultSeverity);
+                    var defaultSeverity = descriptor.IsEnabledByDefault
+                        ? DiagnosticDescriptor.MapSeverityToReport(descriptor.DefaultSeverity)
+                        : ReportDiagnostic.Suppress;
+                    var hasNonDefaultEffectiveSeverities =
+                        descriptorInfo.EffectiveSeverities != null
+                        && (
+                            descriptorInfo.EffectiveSeverities.Count != 1
+                            || descriptorInfo.EffectiveSeverities.Single() != defaultSeverity
+                        );
                     if (hasNonDefaultEffectiveSeverities)
                     {
-                        effectiveSeveritiesBuilder.Add((descriptor.Id, index, descriptorInfo.EffectiveSeverities!));
+                        effectiveSeveritiesBuilder.Add(
+                            (descriptor.Id, index, descriptorInfo.EffectiveSeverities!)
+                        );
                     }
                 }
 
@@ -345,7 +407,13 @@ namespace Microsoft.CodeAnalysis
             return effectiveSeveritiesBuilder.ToImmutableAndFree();
         }
 
-        private void WriteInvocations(ImmutableArray<(string DescriptorId, int DescriptorIndex, ImmutableHashSet<ReportDiagnostic> EffectiveSeverities)> effectiveSeverities)
+        private void WriteInvocations(
+            ImmutableArray<(
+                string DescriptorId,
+                int DescriptorIndex,
+                ImmutableHashSet<ReportDiagnostic> EffectiveSeverities
+            )> effectiveSeverities
+        )
         {
             if (effectiveSeverities.IsEmpty)
                 return;
@@ -396,7 +464,7 @@ namespace Microsoft.CodeAnalysis
                     _writer.WriteObjectEnd(); // descriptor
 
                     // Emit 'configuration' property bag with "enabled: false" for disabled diagnostics and
-                    // "level: severity" for enabled diagnostics with overridden severity. 
+                    // "level: severity" for enabled diagnostics with overridden severity.
                     _writer.WriteObjectStart("configuration");
                     var reportDiagnostic = DiagnosticDescriptor.MapReportToSeverity(severity);
                     if (!reportDiagnostic.HasValue)
@@ -454,9 +522,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private sealed class DiagnosticDescriptorSet
         {
-            private readonly record struct DescriptorInfoWithIndex(int Index, DiagnosticDescriptorErrorLoggerInfo Info);
+            private readonly record struct DescriptorInfoWithIndex(
+                int Index,
+                DiagnosticDescriptorErrorLoggerInfo Info
+            );
+
             // DiagnosticDescriptor -> DescriptorInfo
-            private readonly Dictionary<DiagnosticDescriptor, DescriptorInfoWithIndex> _distinctDescriptors = new(SarifDiagnosticComparer.Instance);
+            private readonly Dictionary<
+                DiagnosticDescriptor,
+                DescriptorInfoWithIndex
+            > _distinctDescriptors = new(SarifDiagnosticComparer.Instance);
 
             /// <summary>
             /// The total number of descriptors in the set.
@@ -469,7 +544,10 @@ namespace Microsoft.CodeAnalysis
             /// <returns>
             /// The unique key assigned to the given descriptor.
             /// </returns>
-            public int Add(DiagnosticDescriptor descriptor, DiagnosticDescriptorErrorLoggerInfo? info = null)
+            public int Add(
+                DiagnosticDescriptor descriptor,
+                DiagnosticDescriptorErrorLoggerInfo? info = null
+            )
             {
                 if (_distinctDescriptors.TryGetValue(descriptor, out var descriptorInfoWithIndex))
                 {
@@ -493,11 +571,19 @@ namespace Microsoft.CodeAnalysis
             /// <summary>
             /// Converts the set to a list, sorted by index.
             /// </summary>
-            public List<(int Index, DiagnosticDescriptor Descriptor, DiagnosticDescriptorErrorLoggerInfo Info)> ToSortedList()
+            public List<(
+                int Index,
+                DiagnosticDescriptor Descriptor,
+                DiagnosticDescriptorErrorLoggerInfo Info
+            )> ToSortedList()
             {
                 Debug.Assert(Count > 0);
 
-                var list = new List<(int Index, DiagnosticDescriptor Descriptor, DiagnosticDescriptorErrorLoggerInfo Info)>(Count);
+                var list = new List<(
+                    int Index,
+                    DiagnosticDescriptor Descriptor,
+                    DiagnosticDescriptorErrorLoggerInfo Info
+                )>(Count);
 
                 foreach (var pair in _distinctDescriptors)
                 {

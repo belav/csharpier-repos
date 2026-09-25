@@ -10,11 +10,13 @@ namespace System.Xml.Schema
     {
         private XmlSchemaObjectCollection _items = new XmlSchemaObjectCollection();
 
-        [XmlElement("element", typeof(XmlSchemaElement)),
-         XmlElement("group", typeof(XmlSchemaGroupRef)),
-         XmlElement("choice", typeof(XmlSchemaChoice)),
-         XmlElement("sequence", typeof(XmlSchemaSequence)),
-         XmlElement("any", typeof(XmlSchemaAny))]
+        [
+            XmlElement("element", typeof(XmlSchemaElement)),
+            XmlElement("group", typeof(XmlSchemaGroupRef)),
+            XmlElement("choice", typeof(XmlSchemaChoice)),
+            XmlElement("sequence", typeof(XmlSchemaSequence)),
+            XmlElement("any", typeof(XmlSchemaAny))
+        ]
         public override XmlSchemaObjectCollection Items
         {
             get { return _items; }
@@ -22,7 +24,11 @@ namespace System.Xml.Schema
 
         internal override bool IsEmpty
         {
-            get { return base.IsEmpty /*|| items.Count == 0*/; }
+            get
+            {
+                return base.IsEmpty /*|| items.Count == 0*/
+                ;
+            }
         }
 
         internal override void SetItems(XmlSchemaObjectCollection newItems)

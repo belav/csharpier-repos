@@ -37,7 +37,10 @@ public class SqlServerModificationCommandBatchTest
     [InlineData(EntityState.Deleted, false)]
     [InlineData(EntityState.Modified, true)]
     [InlineData(EntityState.Modified, false)]
-    public void AddCommand_returns_false_when_max_parameters_are_reached(EntityState entityState, bool withSameTable)
+    public void AddCommand_returns_false_when_max_parameters_are_reached(
+        EntityState entityState,
+        bool withSameTable
+    )
     {
         var typeMapper = CreateTypeMappingSource();
         var intMapping = typeMapper.FindMapping(typeof(int));
@@ -61,22 +64,24 @@ public class SqlServerModificationCommandBatchTest
         Assert.Same(command, Assert.Single(batch.ModificationCommands));
         Assert.Equal(2098, batch.ParameterValues.Count);
 
-        ColumnModificationParameters CreateModificationParameters(string columnName)
-            => new()
+        ColumnModificationParameters CreateModificationParameters(string columnName) =>
+            new()
             {
                 ColumnName = columnName,
                 ColumnType = "integer",
                 TypeMapping = intMapping,
                 IsWrite = true,
                 OriginalValue = 8,
-                GenerateParameterName = () => "p" + paramIndex++
+                GenerateParameterName = () => "p" + paramIndex++,
             };
     }
 
     [ConditionalTheory]
     [InlineData(true)]
     [InlineData(false)]
-    public void AddCommand_when_max_parameters_are_reached_with_pending_commands(bool lastCommandPending)
+    public void AddCommand_when_max_parameters_are_reached_with_pending_commands(
+        bool lastCommandPending
+    )
     {
         var typeMapper = CreateTypeMappingSource();
         var intMapping = typeMapper.FindMapping(typeof(int));
@@ -113,21 +118,19 @@ public class SqlServerModificationCommandBatchTest
         Assert.Contains("INSERT", batch.StoreCommand.RelationalCommand.CommandText);
         Assert.Equal(20, batch.ResultSetMappings.Count);
 
-        ColumnModificationParameters CreateModificationParameters(string columnName)
-            => new()
+        ColumnModificationParameters CreateModificationParameters(string columnName) =>
+            new()
             {
                 ColumnName = columnName,
                 ColumnType = "integer",
                 TypeMapping = intMapping,
                 IsWrite = true,
                 OriginalValue = 8,
-                GenerateParameterName = () => "p" + paramIndex++
+                GenerateParameterName = () => "p" + paramIndex++,
             };
     }
 
-    private class FakeDbContext : DbContext
-    {
-    }
+    private class FakeDbContext : DbContext { }
 
     private static TestSqlServerModificationCommandBatch CreateBatch(int maxBatchSize = 42)
     {
@@ -138,46 +141,53 @@ public class SqlServerModificationCommandBatchTest
                 new RelationalCommandBuilderFactory(
                     new RelationalCommandBuilderDependencies(
                         typeMapper,
-                        new SqlServerExceptionDetector())),
-                new SqlServerSqlGenerationHelper(
-                    new RelationalSqlGenerationHelperDependencies()),
+                        new SqlServerExceptionDetector()
+                    )
+                ),
+                new SqlServerSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies()),
                 new SqlServerUpdateSqlGenerator(
                     new UpdateSqlGeneratorDependencies(
                         new SqlServerSqlGenerationHelper(
-                            new RelationalSqlGenerationHelperDependencies()),
-                        typeMapper)),
+                            new RelationalSqlGenerationHelperDependencies()
+                        ),
+                        typeMapper
+                    )
+                ),
                 new CurrentDbContext(new FakeDbContext()),
                 new FakeRelationalCommandDiagnosticsLogger(),
-                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()),
-            maxBatchSize);
+                new FakeDiagnosticsLogger<DbLoggerCategory.Update>()
+            ),
+            maxBatchSize
+        );
     }
 
-    private static SqlServerTypeMappingSource CreateTypeMappingSource()
-        => new(
+    private static SqlServerTypeMappingSource CreateTypeMappingSource() =>
+        new(
             TestServiceFactory.Instance.Create<TypeMappingSourceDependencies>(),
-            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>());
+            TestServiceFactory.Instance.Create<RelationalTypeMappingSourceDependencies>()
+        );
 
     private static INonTrackedModificationCommand CreateModificationCommand(
         string name,
         string schema,
-        bool sensitiveLoggingEnabled)
-        => new ModificationCommandFactory().CreateNonTrackedModificationCommand(
-            new NonTrackedModificationCommandParameters(name, schema, sensitiveLoggingEnabled));
+        bool sensitiveLoggingEnabled
+    ) =>
+        new ModificationCommandFactory().CreateNonTrackedModificationCommand(
+            new NonTrackedModificationCommandParameters(name, schema, sensitiveLoggingEnabled)
+        );
 
     private class TestSqlServerModificationCommandBatch : SqlServerModificationCommandBatch
     {
-        public TestSqlServerModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies, int maxBatchSize)
-            : base(dependencies, maxBatchSize)
-        {
-        }
+        public TestSqlServerModificationCommandBatch(
+            ModificationCommandBatchFactoryDependencies dependencies,
+            int maxBatchSize
+        )
+            : base(dependencies, maxBatchSize) { }
 
-        public new Dictionary<string, object> ParameterValues
-            => base.ParameterValues;
+        public new Dictionary<string, object> ParameterValues => base.ParameterValues;
 
-        public new RawSqlCommand StoreCommand
-            => base.StoreCommand;
+        public new RawSqlCommand StoreCommand => base.StoreCommand;
 
-        public new IList<ResultSetMapping> ResultSetMappings
-            => base.ResultSetMappings;
+        public new IList<ResultSetMapping> ResultSetMappings => base.ResultSetMappings;
     }
 }

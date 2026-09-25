@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
-using Roslyn.Test.Utilities;
 using System.Collections.Immutable;
 using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Roslyn.Test.Utilities;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
@@ -26,10 +26,16 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 
         internal static RequestSignature Signature(Name name, params TypeSignature[] parameterTypes)
         {
-            return Signature(name, parameterTypes.Select(t => new ParameterSignature(t, isByRef: false)).ToArray());
+            return Signature(
+                name,
+                parameterTypes.Select(t => new ParameterSignature(t, isByRef: false)).ToArray()
+            );
         }
 
-        internal static RequestSignature Signature(Name name, params ParameterSignature[] parameters)
+        internal static RequestSignature Signature(
+            Name name,
+            params ParameterSignature[] parameters
+        )
         {
             return new RequestSignature(name, ImmutableArray.CreateRange(parameters));
         }
@@ -55,7 +61,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             return new QualifiedTypeSignature(null, name);
         }
 
-        internal static GenericTypeSignature Generic(QualifiedTypeSignature name, params TypeSignature[] typeArguments)
+        internal static GenericTypeSignature Generic(
+            QualifiedTypeSignature name,
+            params TypeSignature[] typeArguments
+        )
         {
             Assert.True(typeArguments.Length > 0);
             return new GenericTypeSignature(name, ImmutableArray.CreateRange(typeArguments));
@@ -86,7 +95,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             return new PointerTypeSignature(pointedAtType);
         }
 
-        internal static void VerifySignature(RequestSignature actualSignature, RequestSignature expectedSignature)
+        internal static void VerifySignature(
+            RequestSignature actualSignature,
+            RequestSignature expectedSignature
+        )
         {
             if (expectedSignature == null)
             {
@@ -95,7 +107,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             else
             {
                 Assert.NotNull(actualSignature);
-                Assert.Equal(expectedSignature.MemberName, actualSignature.MemberName, NameComparer.Instance);
+                Assert.Equal(
+                    expectedSignature.MemberName,
+                    actualSignature.MemberName,
+                    NameComparer.Instance
+                );
                 if (expectedSignature.Parameters.IsDefault)
                 {
                     Assert.True(actualSignature.Parameters.IsDefault);
@@ -106,7 +122,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
                         expectedSignature.Parameters,
                         actualSignature.Parameters,
                         comparer: ParameterComparer.Instance,
-                        itemInspector: p => p.Type.GetDebuggerDisplay());
+                        itemInspector: p => p.Type.GetDebuggerDisplay()
+                    );
                 }
             }
         }

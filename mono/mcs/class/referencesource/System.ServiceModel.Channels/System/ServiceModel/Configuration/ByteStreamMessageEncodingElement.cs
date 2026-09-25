@@ -5,19 +5,21 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Configuration;
     using System.Xml;
-    using System.Diagnostics.CodeAnalysis;
 
     public sealed partial class ByteStreamMessageEncodingElement : BindingElementExtensionElement
     {
-        public ByteStreamMessageEncodingElement()
-        {
-        }
+        public ByteStreamMessageEncodingElement() { }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule, Justification = "this property not a configuration property")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "this property not a configuration property"
+        )]
         public override Type BindingElementType
         {
             get { return typeof(ByteStreamMessageEncodingBindingElement); }
@@ -26,13 +28,18 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ByteStreamConfigurationStrings.ReaderQuotas)]
         public XmlDictionaryReaderQuotasElement ReaderQuotas
         {
-            get { return (XmlDictionaryReaderQuotasElement)base[ByteStreamConfigurationStrings.ReaderQuotas]; }
+            get
+            {
+                return (XmlDictionaryReaderQuotasElement)
+                    base[ByteStreamConfigurationStrings.ReaderQuotas];
+            }
         }
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
             base.ApplyConfiguration(bindingElement);
-            ByteStreamMessageEncodingBindingElement binding = (ByteStreamMessageEncodingBindingElement)bindingElement;
+            ByteStreamMessageEncodingBindingElement binding =
+                (ByteStreamMessageEncodingBindingElement)bindingElement;
 
             this.ApplyConfiguration(binding.ReaderQuotas);
         }
@@ -48,14 +55,16 @@ namespace System.ServiceModel.Configuration
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             base.InitializeFrom(bindingElement);
-            ByteStreamMessageEncodingBindingElement element = (ByteStreamMessageEncodingBindingElement)bindingElement;
+            ByteStreamMessageEncodingBindingElement element =
+                (ByteStreamMessageEncodingBindingElement)bindingElement;
 
             this.InitializeFrom(element.ReaderQuotas);
         }
 
         protected internal override BindingElement CreateBindingElement()
         {
-            ByteStreamMessageEncodingBindingElement binding = new ByteStreamMessageEncodingBindingElement();
+            ByteStreamMessageEncodingBindingElement binding =
+                new ByteStreamMessageEncodingBindingElement();
             this.ApplyConfiguration(binding);
             return binding;
         }
@@ -97,30 +106,42 @@ namespace System.ServiceModel.Configuration
             {
                 throw FxTrace.Exception.ArgumentNull("readerQuotas");
             }
-            
+
             XmlDictionaryReaderQuotasElement thisQuotas = this.ReaderQuotas;
-            
+
             // Can't call thisQuotas.InitializeFrom() because it's internal to System.ServiceModel.dll, so we duplicate the logic
             if (readerQuotas.MaxDepth != EncoderDefaults.MaxDepth && readerQuotas.MaxDepth != 0)
             {
                 thisQuotas.MaxDepth = readerQuotas.MaxDepth;
             }
-            if (readerQuotas.MaxStringContentLength != EncoderDefaults.MaxStringContentLength && readerQuotas.MaxStringContentLength != 0)
+            if (
+                readerQuotas.MaxStringContentLength != EncoderDefaults.MaxStringContentLength
+                && readerQuotas.MaxStringContentLength != 0
+            )
             {
                 thisQuotas.MaxStringContentLength = readerQuotas.MaxStringContentLength;
             }
-            if (readerQuotas.MaxArrayLength != EncoderDefaults.MaxArrayLength && readerQuotas.MaxArrayLength != 0)
+            if (
+                readerQuotas.MaxArrayLength != EncoderDefaults.MaxArrayLength
+                && readerQuotas.MaxArrayLength != 0
+            )
             {
                 thisQuotas.MaxArrayLength = readerQuotas.MaxArrayLength;
             }
-            if (readerQuotas.MaxBytesPerRead != EncoderDefaults.MaxBytesPerRead && readerQuotas.MaxBytesPerRead != 0)
+            if (
+                readerQuotas.MaxBytesPerRead != EncoderDefaults.MaxBytesPerRead
+                && readerQuotas.MaxBytesPerRead != 0
+            )
             {
                 thisQuotas.MaxBytesPerRead = readerQuotas.MaxBytesPerRead;
             }
-            if (readerQuotas.MaxNameTableCharCount != EncoderDefaults.MaxNameTableCharCount && readerQuotas.MaxNameTableCharCount != 0)
+            if (
+                readerQuotas.MaxNameTableCharCount != EncoderDefaults.MaxNameTableCharCount
+                && readerQuotas.MaxNameTableCharCount != 0
+            )
             {
                 thisQuotas.MaxNameTableCharCount = readerQuotas.MaxNameTableCharCount;
-            } 
+            }
         }
 
         void CopyFrom(XmlDictionaryReaderQuotasElement readerQuotas)

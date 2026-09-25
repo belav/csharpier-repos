@@ -13,7 +13,7 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Security;
     using System.Xml;
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     abstract class PeerChannelListenerBase : TransportChannelListener, IPeerFactory
     {
         // settings passed to PeerNode
@@ -32,20 +32,28 @@ namespace System.ServiceModel.Channels
         static UriPrefixTable<ITransportManagerRegistration> transportManagerTable =
             new UriPrefixTable<ITransportManagerRegistration>(true);
 
-        internal PeerChannelListenerBase(PeerTransportBindingElement bindingElement, BindingContext context,
-            PeerResolver peerResolver)
+        internal PeerChannelListenerBase(
+            PeerTransportBindingElement bindingElement,
+            BindingContext context,
+            PeerResolver peerResolver
+        )
             : base(bindingElement, context)
         {
             this.listenIPAddress = bindingElement.ListenIPAddress;
             this.port = bindingElement.Port;
             this.resolver = peerResolver;
             this.readerQuotas = new XmlDictionaryReaderQuotas();
-            BinaryMessageEncodingBindingElement encoder = context.Binding.Elements.Find<BinaryMessageEncodingBindingElement>();
+            BinaryMessageEncodingBindingElement encoder =
+                context.Binding.Elements.Find<BinaryMessageEncodingBindingElement>();
             if (encoder != null)
                 encoder.ReaderQuotas.CopyTo(this.readerQuotas);
             else
                 EncoderDefaults.ReaderQuotas.CopyTo(this.readerQuotas);
-            securityManager = PeerSecurityManager.Create(bindingElement.Security, context, this.readerQuotas);
+            securityManager = PeerSecurityManager.Create(
+                bindingElement.Security,
+                context,
+                this.readerQuotas
+            );
             this.securityCapabilities = bindingElement.GetProperty<ISecurityCapabilities>(context);
         }
 
@@ -56,10 +64,7 @@ namespace System.ServiceModel.Channels
 
         internal PeerNodeImplementation InnerNode
         {
-            get
-            {
-                return peerNode != null ? peerNode.InnerNode : null;
-            }
+            get { return peerNode != null ? peerNode.InnerNode : null; }
         }
 
         internal PeerNodeImplementation.Registration Registration
@@ -80,10 +85,7 @@ namespace System.ServiceModel.Channels
 
         public XmlDictionaryReaderQuotas ReaderQuotas
         {
-            get
-            {
-                return this.readerQuotas;
-            }
+            get { return this.readerQuotas; }
         }
 
         public PeerResolver Resolver
@@ -110,18 +112,12 @@ namespace System.ServiceModel.Channels
 
         internal static UriPrefixTable<ITransportManagerRegistration> StaticTransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
         internal override UriPrefixTable<ITransportManagerRegistration> TransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
         public override T GetProperty<T>()
@@ -153,7 +149,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 }
             }
@@ -192,7 +189,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             return new CompletedAsyncResult<TimeoutHelper>(timeoutHelper, callback, state);
@@ -217,7 +218,11 @@ namespace System.ServiceModel.Channels
             OnOpenCore(timeout);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             return new CompletedAsyncResult<TimeoutHelper>(timeoutHelper, callback, state);
@@ -231,7 +236,7 @@ namespace System.ServiceModel.Channels
 
         protected override void OnFaulted()
         {
-            OnAbort();              // Fault aborts the PeerNode
+            OnAbort(); // Fault aborts the PeerNode
         }
 
         internal override IList<TransportManager> SelectTransportManagers()
@@ -259,7 +264,15 @@ namespace System.ServiceModel.Channels
                 {
                     foundPeerNode.Release();
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.PeerMaxReceivedMessageSizeConflict, MaxReceivedMessageSize, foundPeerNode.MaxReceivedMessageSize, this.Uri)));
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.PeerMaxReceivedMessageSizeConflict,
+                                MaxReceivedMessageSize,
+                                foundPeerNode.MaxReceivedMessageSize,
+                                this.Uri
+                            )
+                        )
+                    );
                 }
 
                 // associate with the PeerNode and open it
@@ -270,19 +283,25 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
-    internal abstract class PeerChannelListener<TChannel, TChannelAcceptor> : PeerChannelListenerBase, IChannelListener<TChannel>
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    internal abstract class PeerChannelListener<TChannel, TChannelAcceptor>
+        : PeerChannelListenerBase,
+            IChannelListener<TChannel>
         where TChannel : class, IChannel
         where TChannelAcceptor : ChannelAcceptor<TChannel>
     {
-        public PeerChannelListener(PeerTransportBindingElement bindingElement, BindingContext context, PeerResolver peerResolver)
-            : base(bindingElement, context, peerResolver)
-        {
-        }
+        public PeerChannelListener(
+            PeerTransportBindingElement bindingElement,
+            BindingContext context,
+            PeerResolver peerResolver
+        )
+            : base(bindingElement, context, peerResolver) { }
 
         protected abstract TChannelAcceptor ChannelAcceptor { get; }
 
-        internal override ITransportManagerRegistration CreateTransportManagerRegistration(Uri listenUri)
+        internal override ITransportManagerRegistration CreateTransportManagerRegistration(
+            Uri listenUri
+        )
         {
             return null;
         }
@@ -303,7 +322,11 @@ namespace System.ServiceModel.Channels
             return ChannelAcceptor.AcceptChannel(timeout);
         }
 
-        public IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfNotOpened();
             return ChannelAcceptor.BeginAcceptChannel(timeout, callback, state);
@@ -333,7 +356,11 @@ namespace System.ServiceModel.Channels
             base.OnAbort();
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             return new CompletedAsyncResult<TimeoutHelper>(timeoutHelper, callback, state);
@@ -359,7 +386,11 @@ namespace System.ServiceModel.Channels
             OnOpenCore(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             return new CompletedAsyncResult<TimeoutHelper>(timeoutHelper, callback, state);
@@ -376,7 +407,11 @@ namespace System.ServiceModel.Channels
             return ChannelAcceptor.WaitForChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ChannelAcceptor.BeginWaitForChannel(timeout, callback, state);
         }

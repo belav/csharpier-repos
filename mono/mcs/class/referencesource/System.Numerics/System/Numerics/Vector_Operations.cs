@@ -20,10 +20,7 @@ namespace System.Numerics
         [JitIntrinsic]
         public static bool IsHardwareAccelerated
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

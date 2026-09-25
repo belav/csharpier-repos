@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,20 +21,19 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
 using System.Data;
 using System.IO;
-using System.Xml;
 using System.Reflection;
+using System.Xml;
 using NUnit.Framework;
-
 using nwind;
-
 #if MONO_STRICT
 using System.Diagnostics;
+
 public static class Profiler
 {
     private static Stopwatch timer = new Stopwatch();
@@ -45,6 +44,7 @@ public static class Profiler
         timer.Reset();
         timer.Start();
     }
+
     [Conditional("DEBUG")]
     public static void At(string format, params object[] args)
     {
@@ -67,7 +67,7 @@ using DbLinq.Util;
 namespace Test_NUnit
 {
     /// <summary>
-    /// base class for ReadTest and WriteTest. 
+    /// base class for ReadTest and WriteTest.
     /// Provides CreateDB(), Conn, and stringComparisonType.
     /// </summary>
     public abstract partial class TestBase
@@ -88,10 +88,7 @@ namespace Test_NUnit
 
         public string DbServer
         {
-            get
-            {
-                return Environment.GetEnvironmentVariable("DbLinqServer") ?? "localhost";
-            }
+            get { return Environment.GetEnvironmentVariable("DbLinqServer") ?? "localhost"; }
         }
         public string connStr
         {
@@ -99,7 +96,12 @@ namespace Test_NUnit
             {
                 var xConnectionStringsDoc = new XmlDocument();
                 xConnectionStringsDoc.Load("../tests/ConnectionStrings.xml");
-                XmlNode currentAssemblyNode = xConnectionStringsDoc.SelectSingleNode(string.Format("//Connection[@assembly=\"{0}\"]", Assembly.GetCallingAssembly().GetName().Name));
+                XmlNode currentAssemblyNode = xConnectionStringsDoc.SelectSingleNode(
+                    string.Format(
+                        "//Connection[@assembly=\"{0}\"]",
+                        Assembly.GetCallingAssembly().GetName().Name
+                    )
+                );
                 string stringConnection = currentAssemblyNode.FirstChild.Value.Replace(@"\\", @"\");
                 if (stringConnection.Contains("{0}"))
                     stringConnection = string.Format(stringConnection, DbServer);
@@ -111,7 +113,11 @@ namespace Test_NUnit
         {
             get
             {
-                if (_conn == null) { _conn = CreateConnection(connStr); _conn.Open(); }
+                if (_conn == null)
+                {
+                    _conn = CreateConnection(connStr);
+                    _conn.Open();
+                }
                 return _conn;
             }
         }
@@ -121,7 +127,7 @@ namespace Test_NUnit
         //    return CreateDB(System.Data.ConnectionState.Closed);
         //}
 
-        static partial void CheckRecreateSqlite ();
+        static partial void CheckRecreateSqlite();
 
         public Northwind CreateDB()
         {
@@ -147,7 +153,14 @@ namespace Test_NUnit
             {
                 object oResult = cmd.ExecuteScalar();
                 Assert.IsNotNull("Expecting result, instead got null. (sql=" + sql + ")");
-                Assert.IsInstanceOfType(typeof(long), oResult, "Expecting 'long' result from query " + sql + ", instead got type " + oResult.GetType());
+                Assert.IsInstanceOfType(
+                    typeof(long),
+                    oResult,
+                    "Expecting 'long' result from query "
+                        + sql
+                        + ", instead got type "
+                        + oResult.GetType()
+                );
                 return (long)oResult;
             }
         }

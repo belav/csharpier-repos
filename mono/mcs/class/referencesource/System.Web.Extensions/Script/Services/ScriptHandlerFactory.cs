@@ -4,77 +4,116 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-using System.Web.SessionState;
-using System.Security.Permissions;
 using System.Security;
+using System.Security.Permissions;
+using System.Web.SessionState;
 
-namespace System.Web.Script.Services {
-    internal class ScriptHandlerFactory : IHttpHandlerFactory {
+namespace System.Web.Script.Services
+{
+    internal class ScriptHandlerFactory : IHttpHandlerFactory
+    {
         IHttpHandlerFactory _restHandlerFactory;
         IHttpHandlerFactory _webServiceHandlerFactory;
 
-        internal class HandlerWrapper : IHttpHandler {
+        internal class HandlerWrapper : IHttpHandler
+        {
             protected IHttpHandler _originalHandler;
             private IHttpHandlerFactory _originalFactory;
 
-            internal HandlerWrapper(IHttpHandler originalHandler, IHttpHandlerFactory originalFactory) {
+            internal HandlerWrapper(
+                IHttpHandler originalHandler,
+                IHttpHandlerFactory originalFactory
+            )
+            {
                 _originalFactory = originalFactory;
                 _originalHandler = originalHandler;
             }
 
-            internal void ReleaseHandler() {
+            internal void ReleaseHandler()
+            {
                 _originalFactory.ReleaseHandler(_originalHandler);
             }
 
-            public bool IsReusable {
-                get {
-                    return _originalHandler.IsReusable;
-                }
+            public bool IsReusable
+            {
+                get { return _originalHandler.IsReusable; }
             }
 
-            public void ProcessRequest(HttpContext context) {
+            public void ProcessRequest(HttpContext context)
+            {
                 _originalHandler.ProcessRequest(context);
             }
         }
 
-        internal class HandlerWrapperWithSession : HandlerWrapper, IRequiresSessionState {
-            internal HandlerWrapperWithSession(IHttpHandler originalHandler, IHttpHandlerFactory originalFactory)
-                : base(originalHandler, originalFactory) {}
+        internal class HandlerWrapperWithSession : HandlerWrapper, IRequiresSessionState
+        {
+            internal HandlerWrapperWithSession(
+                IHttpHandler originalHandler,
+                IHttpHandlerFactory originalFactory
+            )
+                : base(originalHandler, originalFactory) { }
         }
 
-        private class AsyncHandlerWrapper : HandlerWrapper, IHttpAsyncHandler {
-            internal AsyncHandlerWrapper(IHttpHandler originalHandler, IHttpHandlerFactory originalFactory)
-                :
-                base(originalHandler, originalFactory) { }
+        private class AsyncHandlerWrapper : HandlerWrapper, IHttpAsyncHandler
+        {
+            internal AsyncHandlerWrapper(
+                IHttpHandler originalHandler,
+                IHttpHandlerFactory originalFactory
+            )
+                : base(originalHandler, originalFactory) { }
 
-            public IAsyncResult BeginProcessRequest(HttpContext context, AsyncCallback cb, object extraData) {
-                return ((IHttpAsyncHandler)_originalHandler).BeginProcessRequest(context, cb, extraData);
+            public IAsyncResult BeginProcessRequest(
+                HttpContext context,
+                AsyncCallback cb,
+                object extraData
+            )
+            {
+                return ((IHttpAsyncHandler)_originalHandler).BeginProcessRequest(
+                    context,
+                    cb,
+                    extraData
+                );
             }
 
-            public void EndProcessRequest(IAsyncResult result) {
+            public void EndProcessRequest(IAsyncResult result)
+            {
                 ((IHttpAsyncHandler)_originalHandler).EndProcessRequest(result);
             }
         }
 
-        private class AsyncHandlerWrapperWithSession : AsyncHandlerWrapper, IRequiresSessionState {
-            internal AsyncHandlerWrapperWithSession(IHttpHandler originalHandler, IHttpHandlerFactory originalFactory)
+        private class AsyncHandlerWrapperWithSession : AsyncHandlerWrapper, IRequiresSessionState
+        {
+            internal AsyncHandlerWrapperWithSession(
+                IHttpHandler originalHandler,
+                IHttpHandlerFactory originalFactory
+            )
                 : base(originalHandler, originalFactory) { }
         }
 
-        public ScriptHandlerFactory() {
+        public ScriptHandlerFactory()
+        {
             _restHandlerFactory = new RestHandlerFactory();
-            _webServiceHandlerFactory = new System.Web.Services.Protocols.WebServiceHandlerFactory();
+            _webServiceHandlerFactory =
+                new System.Web.Services.Protocols.WebServiceHandlerFactory();
         }
 
         [SecuritySafeCritical]
-        public virtual IHttpHandler GetHandler(HttpContext context, string requestType, string url, string pathTranslated) {
+        public virtual IHttpHandler GetHandler(
+            HttpContext context,
+            string requestType,
+            string url,
+            string pathTranslated
+        )
+        {
             IHttpHandler handler;
             IHttpHandlerFactory factory;
-            if (RestHandlerFactory.IsRestRequest(context)) {
+            if (RestHandlerFactory.IsRestRequest(context))
+            {
                 // It's a REST request
                 factory = _restHandlerFactory;
             }
-            else {
+            else
+            {
                 // It's a regular asmx web request, so delegate to the WebServiceHandlerFactory
                 factory = _webServiceHandlerFactory;
             }
@@ -83,7 +122,8 @@ namespace System.Web.Script.Services {
 
             bool requiresSession = handler is IRequiresSessionState;
 
-            if (handler is IHttpAsyncHandler) {
+            if (handler is IHttpAsyncHandler)
+            {
                 if (requiresSession)
                     return new AsyncHandlerWrapperWithSession(handler, factory);
                 else
@@ -96,8 +136,10 @@ namespace System.Web.Script.Services {
                 return new HandlerWrapper(handler, factory);
         }
 
-        public virtual void ReleaseHandler(IHttpHandler handler) {
-            if (handler == null) {
+        public virtual void ReleaseHandler(IHttpHandler handler)
+        {
+            if (handler == null)
+            {
                 throw new ArgumentNullException("handler");
             }
             ((HandlerWrapper)handler).ReleaseHandler();

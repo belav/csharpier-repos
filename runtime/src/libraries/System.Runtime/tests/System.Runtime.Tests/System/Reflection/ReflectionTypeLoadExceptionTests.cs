@@ -12,7 +12,11 @@ namespace System.Reflection.Tests
         {
             Type[] types = new Type[1];
             Exception[] exceptions = new Exception[1];
-            ReflectionTypeLoadException rtle = new ReflectionTypeLoadException(types, exceptions, "Null elements in Exceptions array");
+            ReflectionTypeLoadException rtle = new ReflectionTypeLoadException(
+                types,
+                exceptions,
+                "Null elements in Exceptions array"
+            );
             Assert.NotNull(rtle.ToString());
             Assert.NotNull(rtle.Message);
             Assert.Equal(1, rtle.LoaderExceptions.Length);
@@ -24,7 +28,11 @@ namespace System.Reflection.Tests
         [Fact]
         public static void NullArgumentsNoNullPointerException()
         {
-            ReflectionTypeLoadException rtle = new ReflectionTypeLoadException(null, null, "Null arguments");
+            ReflectionTypeLoadException rtle = new ReflectionTypeLoadException(
+                null,
+                null,
+                "Null arguments"
+            );
             Assert.NotNull(rtle.ToString());
             Assert.NotNull(rtle.Message);
             Assert.Empty(rtle.LoaderExceptions);

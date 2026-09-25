@@ -9,13 +9,13 @@ internal static partial class Interop
     {
         // schannel.h;
 
-        public const int SCHANNEL_SESSION = 3;   // session control
+        public const int SCHANNEL_SESSION = 3; // session control
 
         // Session structure.
         [StructLayout(LayoutKind.Sequential)]
         public struct SCHANNEL_SESSION_TOKEN
         {
-            public uint dwTokenType;            // SCHANNEL_SESSION
+            public uint dwTokenType; // SCHANNEL_SESSION
             public uint dwFlags;
         }
 

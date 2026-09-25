@@ -21,14 +21,15 @@ internal sealed class FileDownloader : IFileDownloader
             // to use to publish and access data from.
             const string BaseUrl = "https://az700632.vo.msecnd.net/pub";
 
-            return new FileDownloader(new RemoteControlClient(hostId, BaseUrl, serverPath, pollingMinutes));
+            return new FileDownloader(
+                new RemoteControlClient(hostId, BaseUrl, serverPath, pollingMinutes)
+            );
         }
     }
 
     private readonly RemoteControlClient _client;
 
-    private FileDownloader(RemoteControlClient client)
-        => _client = client;
+    private FileDownloader(RemoteControlClient client) => _client = client;
 
 #if NET
 
@@ -51,19 +52,16 @@ internal sealed class FileDownloader : IFileDownloader
     /// support this again, we can remove this specialized code for netcore.
     /// </summary>
     public async Task<Stream?> ReadFileAsync()
-        // Note: we try .ReturnStale first so this will automatically light up once they fix their issue, without 
-        // us having to do anything on our end.  Once we do get around to making a change, we'll remove the 
+        // Note: we try .ReturnStale first so this will automatically light up once they fix their issue, without
+        // us having to do anything on our end.  Once we do get around to making a change, we'll remove the
         // .ForceDownload part entirely.
-        => await _client.ReadFileAsync(BehaviorOnStale.ReturnStale).ConfigureAwait(false) ??
-           await _client.ReadFileAsync(BehaviorOnStale.ForceDownload).ConfigureAwait(false);
-
+        =>
+        await _client.ReadFileAsync(BehaviorOnStale.ReturnStale).ConfigureAwait(false)
+        ?? await _client.ReadFileAsync(BehaviorOnStale.ForceDownload).ConfigureAwait(false);
 #else
 
-    public Task<Stream?> ReadFileAsync()
-        => _client.ReadFileAsync(BehaviorOnStale.ReturnStale);
-
+    public Task<Stream?> ReadFileAsync() => _client.ReadFileAsync(BehaviorOnStale.ReturnStale);
 #endif
 
-    public void Dispose()
-        => _client.Dispose();
+    public void Dispose() => _client.Dispose();
 }

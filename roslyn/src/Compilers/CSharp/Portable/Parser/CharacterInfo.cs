@@ -21,9 +21,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <returns>true if the character is a hexadecimal digit 0-9, A-F, a-f.</returns>
         internal static bool IsHexDigit(char c)
         {
-            return (c >= '0' && c <= '9') ||
-                   (c >= 'A' && c <= 'F') ||
-                   (c >= 'a' && c <= 'f');
+            return (c >= '0' && c <= '9') || (c >= 'A' && c <= 'F') || (c >= 'a' && c <= 'f');
         }
 
         /// <summary>
@@ -128,18 +126,21 @@ namespace Microsoft.CodeAnalysis.CSharp
                 || ch == '\v'
                 || ch == '\f'
                 || ch == '\u00A0' // NO-BREAK SPACE
-                                  // The native compiler, in ScanToken, recognized both the byte-order
-                                  // marker '\uFEFF' as well as ^Z '\u001A' as whitespace, although
-                                  // this is not to spec since neither of these are in Zs. For the
-                                  // sake of compatibility, we recognize them both here. Note: '\uFEFF'
-                                  // also happens to be a formatting character (class Cf), which means
-                                  // that it is a legal non-initial identifier character. So it's
-                                  // especially funny, because it will be whitespace UNLESS we happen
-                                  // to be scanning an identifier or keyword, in which case it winds
-                                  // up in the identifier or keyword.
+                // The native compiler, in ScanToken, recognized both the byte-order
+                // marker '\uFEFF' as well as ^Z '\u001A' as whitespace, although
+                // this is not to spec since neither of these are in Zs. For the
+                // sake of compatibility, we recognize them both here. Note: '\uFEFF'
+                // also happens to be a formatting character (class Cf), which means
+                // that it is a legal non-initial identifier character. So it's
+                // especially funny, because it will be whitespace UNLESS we happen
+                // to be scanning an identifier or keyword, in which case it winds
+                // up in the identifier or keyword.
                 || ch == '\uFEFF'
                 || ch == '\u001A'
-                || (ch > 255 && CharUnicodeInfo.GetUnicodeCategory(ch) == UnicodeCategory.SpaceSeparator);
+                || (
+                    ch > 255
+                    && CharUnicodeInfo.GetUnicodeCategory(ch) == UnicodeCategory.SpaceSeparator
+                );
         }
 
         /// <summary>
@@ -155,11 +156,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             //   Line separator character (U+2028)
             //   Paragraph separator character (U+2029)
 
-            return ch == '\r'
-                || ch == '\n'
-                || ch == '\u0085'
-                || ch == '\u2028'
-                || ch == '\u2029';
+            return ch == '\r' || ch == '\n' || ch == '\u0085' || ch == '\u2028' || ch == '\u2029';
         }
 
         /// <summary>

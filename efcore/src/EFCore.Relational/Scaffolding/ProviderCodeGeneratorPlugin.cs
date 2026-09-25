@@ -16,13 +16,11 @@ public class ProviderCodeGeneratorPlugin : IProviderCodeGeneratorPlugin
     ///     Generates a method chain used to configure provider-specific options.
     /// </summary>
     /// <returns>The method chain. May be null.</returns>
-    public virtual MethodCallCodeFragment? GenerateContextOptions()
-        => null;
+    public virtual MethodCallCodeFragment? GenerateContextOptions() => null;
 
     /// <summary>
     ///     Generates a method chain to configure additional context options.
     /// </summary>
     /// <returns>The method chain. May be null.</returns>
-    public virtual MethodCallCodeFragment? GenerateProviderOptions()
-        => null;
+    public virtual MethodCallCodeFragment? GenerateProviderOptions() => null;
 }

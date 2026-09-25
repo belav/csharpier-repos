@@ -16,7 +16,8 @@ public class Test_PinnedCollect
         GCHandle handle1 = GCUtil.Alloc(arr, GCHandleType.Pinned);
         GCHandle handle2 = GCUtil.Alloc(arr, GCHandleType.Normal);
 
-        IntPtr oldaddr, newaddr;
+        IntPtr oldaddr,
+            newaddr;
 
         oldaddr = GCUtil.AddrOfPinnedObject(handle1);
         Console.WriteLine("Address of obj: {0}", oldaddr);
@@ -62,4 +63,3 @@ public class Test_PinnedCollect
         }
     }
 }
-

@@ -13,14 +13,12 @@ namespace System.Web.Http
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
     public sealed class HttpOptionsAttribute : Attribute, IActionHttpMethodProvider
     {
-        private static readonly Collection<HttpMethod> _supportedMethods = new Collection<HttpMethod>(new HttpMethod[] { HttpMethod.Options });
+        private static readonly Collection<HttpMethod> _supportedMethods =
+            new Collection<HttpMethod>(new HttpMethod[] { HttpMethod.Options });
 
         public Collection<HttpMethod> HttpMethods
         {
-            get
-            {
-                return _supportedMethods;
-            }
+            get { return _supportedMethods; }
         }
     }
 }

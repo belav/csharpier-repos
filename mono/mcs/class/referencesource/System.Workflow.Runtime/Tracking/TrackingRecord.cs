@@ -1,48 +1,35 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Workflow.ComponentModel;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
+using System.Workflow.ComponentModel;
 using System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime.Tracking
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class TrackingRecord
     {
-        protected TrackingRecord()
-        {
-        }
+        protected TrackingRecord() { }
 
-        public abstract DateTime EventDateTime
-        {
-            get;
-            set;
-        }
+        public abstract DateTime EventDateTime { get; set; }
 
-        public abstract int EventOrder
-        {
-            get;
-            set;
-        }
+        public abstract int EventOrder { get; set; }
 
-        public abstract EventArgs EventArgs
-        {
-            get;
-            set;
-        }
+        public abstract EventArgs EventArgs { get; set; }
 
-        public abstract TrackingAnnotationCollection Annotations
-        {
-            get;
-        }
+        public abstract TrackingAnnotationCollection Annotations { get; }
     }
 
     /// <summary>
     /// Contains data for a specific extraction point.
     /// </summary>
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityTrackingRecord : TrackingRecord
     {
         #region Data Members
@@ -51,7 +38,8 @@ namespace System.Workflow.Runtime.Tracking
         private Type _activityType = null;
         private ActivityExecutionStatus _status;
         private List<TrackingDataItem> _body = new List<TrackingDataItem>();
-        private Guid _contextGuid = Guid.Empty, _parentContextGuid = Guid.Empty;
+        private Guid _contextGuid = Guid.Empty,
+            _parentContextGuid = Guid.Empty;
 
         private DateTime _eventDateTime = DateTime.MinValue;
         private int _eventOrder = -1;
@@ -62,11 +50,18 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Constructors
 
-        public ActivityTrackingRecord()
-        {
-        }
+        public ActivityTrackingRecord() { }
 
-        public ActivityTrackingRecord(Type activityType, string qualifiedName, Guid contextGuid, Guid parentContextGuid, ActivityExecutionStatus executionStatus, DateTime eventDateTime, int eventOrder, EventArgs eventArgs)
+        public ActivityTrackingRecord(
+            Type activityType,
+            string qualifiedName,
+            Guid contextGuid,
+            Guid parentContextGuid,
+            ActivityExecutionStatus executionStatus,
+            DateTime eventDateTime,
+            int eventOrder,
+            EventArgs eventArgs
+        )
         {
             _activityType = activityType;
             _qualifiedID = qualifiedName;
@@ -126,8 +121,9 @@ namespace System.Workflow.Runtime.Tracking
             get { return _eventDateTime; }
             set { _eventDateTime = value; }
         }
+
         /// <summary>
-        /// Contains a value indicating the relative order of this event within the context of a workflow instance.  
+        /// Contains a value indicating the relative order of this event within the context of a workflow instance.
         /// Value will be unique within a workflow instance but is not guaranteed to be sequential.
         /// </summary>
         public override int EventOrder
@@ -150,7 +146,9 @@ namespace System.Workflow.Runtime.Tracking
         #endregion
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class UserTrackingRecord : TrackingRecord
     {
         #region Data Members
@@ -158,7 +156,8 @@ namespace System.Workflow.Runtime.Tracking
         private string _qualifiedID = null;
         private Type _activityType = null;
         private List<TrackingDataItem> _body = new List<TrackingDataItem>();
-        private Guid _contextGuid = Guid.Empty, _parentContextGuid = Guid.Empty;
+        private Guid _contextGuid = Guid.Empty,
+            _parentContextGuid = Guid.Empty;
 
         private DateTime _eventDateTime = DateTime.MinValue;
         private int _eventOrder = -1;
@@ -171,11 +170,18 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Constructors
 
-        public UserTrackingRecord()
-        {
-        }
+        public UserTrackingRecord() { }
 
-        public UserTrackingRecord(Type activityType, string qualifiedName, Guid contextGuid, Guid parentContextGuid, DateTime eventDateTime, int eventOrder, string userDataKey, object userData)
+        public UserTrackingRecord(
+            Type activityType,
+            string qualifiedName,
+            Guid contextGuid,
+            Guid parentContextGuid,
+            DateTime eventDateTime,
+            int eventOrder,
+            string userDataKey,
+            object userData
+        )
         {
             _activityType = activityType;
             _qualifiedID = qualifiedName;
@@ -241,8 +247,9 @@ namespace System.Workflow.Runtime.Tracking
             get { return _eventDateTime; }
             set { _eventDateTime = value; }
         }
+
         /// <summary>
-        /// Contains a value indicating the relative order of this event within the context of a workflow instance.  
+        /// Contains a value indicating the relative order of this event within the context of a workflow instance.
         /// Value will be unique within a workflow instance but is not guaranteed to be sequential.
         /// </summary>
         public override int EventOrder
@@ -265,7 +272,9 @@ namespace System.Workflow.Runtime.Tracking
         #endregion
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class WorkflowTrackingRecord : TrackingRecord
     {
         #region Private Data Members
@@ -280,11 +289,14 @@ namespace System.Workflow.Runtime.Tracking
 
         #region Constructors
 
-        public WorkflowTrackingRecord()
-        {
-        }
+        public WorkflowTrackingRecord() { }
 
-        public WorkflowTrackingRecord(TrackingWorkflowEvent trackingWorkflowEvent, DateTime eventDateTime, int eventOrder, EventArgs eventArgs)
+        public WorkflowTrackingRecord(
+            TrackingWorkflowEvent trackingWorkflowEvent,
+            DateTime eventDateTime,
+            int eventOrder,
+            EventArgs eventArgs
+        )
         {
             _event = trackingWorkflowEvent;
             _eventDateTime = eventDateTime;
@@ -307,8 +319,9 @@ namespace System.Workflow.Runtime.Tracking
             get { return _eventDateTime; }
             set { _eventDateTime = value; }
         }
+
         /// <summary>
-        /// Contains a value indicating the relative order of this event within the context of a workflow instance.  
+        /// Contains a value indicating the relative order of this event within the context of a workflow instance.
         /// Value will be unique within a workflow instance but is not guaranteed to be sequential.
         /// </summary>
         public override int EventOrder

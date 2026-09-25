@@ -43,7 +43,13 @@ namespace System.Tests
             RemoteInvokeOptions options = new RemoteInvokeOptions();
             options.StartInfo.RedirectStandardOutput = true;
             options.CheckExitCode = false;
-            using (RemoteInvokeHandle remoteExecution = RemoteExecutor.Invoke(action, exitCodeOnSigterm?.ToString() ?? string.Empty, options))
+            using (
+                RemoteInvokeHandle remoteExecution = RemoteExecutor.Invoke(
+                    action,
+                    exitCodeOnSigterm?.ToString() ?? string.Empty,
+                    options
+                )
+            )
             {
                 Process process = remoteExecution.Process;
 

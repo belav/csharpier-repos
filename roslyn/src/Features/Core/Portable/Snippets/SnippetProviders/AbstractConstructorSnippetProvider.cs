@@ -19,25 +19,45 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
         public override string Identifier => "ctor";
 
         public override string Description => FeaturesResources.constructor;
-        public override ImmutableArray<string> AdditionalFilterTexts { get; } = ImmutableArray.Create("constructor");
+        public override ImmutableArray<string> AdditionalFilterTexts { get; } =
+            ImmutableArray.Create("constructor");
 
-        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(ISyntaxFacts syntaxFacts) => syntaxFacts.IsConstructorDeclaration;
+        protected override Func<SyntaxNode?, bool> GetSnippetContainerFunction(
+            ISyntaxFacts syntaxFacts
+        ) => syntaxFacts.IsConstructorDeclaration;
 
-        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(SyntaxNode node, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
-            => ImmutableArray<SnippetPlaceholder>.Empty;
+        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(
+            SyntaxNode node,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        ) => ImmutableArray<SnippetPlaceholder>.Empty;
 
-        protected override async Task<TextChange> GenerateSnippetTextChangeAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<TextChange> GenerateSnippetTextChangeAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var nodeAtPosition = root.FindNode(TextSpan.FromBounds(position, position));
-            var containingType = nodeAtPosition.FirstAncestorOrSelf<SyntaxNode>(syntaxFacts.IsTypeDeclaration);
+            var containingType = nodeAtPosition.FirstAncestorOrSelf<SyntaxNode>(
+                syntaxFacts.IsTypeDeclaration
+            );
             Contract.ThrowIfNull(containingType);
             var constructorDeclaration = generator.ConstructorDeclaration(
-                containingTypeName: syntaxFacts.GetIdentifierOfTypeDeclaration(containingType).ToString(),
-                accessibility: Accessibility.Public);
-            return new TextChange(TextSpan.FromBounds(position, position), constructorDeclaration.NormalizeWhitespace().ToFullString());
+                containingTypeName: syntaxFacts
+                    .GetIdentifierOfTypeDeclaration(containingType)
+                    .ToString(),
+                accessibility: Accessibility.Public
+            );
+            return new TextChange(
+                TextSpan.FromBounds(position, position),
+                constructorDeclaration.NormalizeWhitespace().ToFullString()
+            );
         }
     }
 }

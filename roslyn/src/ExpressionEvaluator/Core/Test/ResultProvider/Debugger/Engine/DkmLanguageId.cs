@@ -17,10 +17,7 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
     {
         public static Guid Cpp
         {
-            get
-            {
-                return new Guid("3A12D0B7-C26C-11D0-B442-00A0244A1DD2");
-            }
+            get { return new Guid("3A12D0B7-C26C-11D0-B442-00A0244A1DD2"); }
         }
     }
 }

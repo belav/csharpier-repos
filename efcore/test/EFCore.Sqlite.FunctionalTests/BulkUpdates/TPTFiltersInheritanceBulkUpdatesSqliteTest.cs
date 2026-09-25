@@ -5,19 +5,18 @@ using Microsoft.Data.Sqlite;
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPTFiltersInheritanceBulkUpdatesSqliteTest : TPTFiltersInheritanceBulkUpdatesTestBase<
-    TPTFiltersInheritanceBulkUpdatesSqliteFixture>
+public class TPTFiltersInheritanceBulkUpdatesSqliteTest
+    : TPTFiltersInheritanceBulkUpdatesTestBase<TPTFiltersInheritanceBulkUpdatesSqliteFixture>
 {
     public TPTFiltersInheritanceBulkUpdatesSqliteTest(
         TPTFiltersInheritanceBulkUpdatesSqliteFixture fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture, testOutputHelper)
-    {
-    }
+        ITestOutputHelper testOutputHelper
+    )
+        : base(fixture, testOutputHelper) { }
 
     [ConditionalFact]
-    public virtual void Check_all_tests_overridden()
-        => TestHelpers.AssertAllMethodsOverridden(GetType());
+    public virtual void Check_all_tests_overridden() =>
+        TestHelpers.AssertAllMethodsOverridden(GetType());
 
     public override async Task Delete_where_hierarchy(bool async)
     {
@@ -47,7 +46,8 @@ WHERE (
     LEFT JOIN "Eagle" AS "e" ON "a"."Id" = "e"."Id"
     LEFT JOIN "Kiwi" AS "k" ON "a"."Id" = "k"."Id"
     WHERE "a"."CountryId" = 1 AND "c"."Id" = "a"."CountryId" AND "a"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_using_hierarchy_derived(bool async)
@@ -64,7 +64,8 @@ WHERE (
     LEFT JOIN "Eagle" AS "e" ON "a"."Id" = "e"."Id"
     LEFT JOIN "Kiwi" AS "k" ON "a"."Id" = "k"."Id"
     WHERE "a"."CountryId" = 1 AND "c"."Id" = "a"."CountryId" AND "k"."Id" IS NOT NULL AND "a"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Delete_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -122,12 +123,13 @@ FROM (
     WHERE "a0"."CountryId" = 1 AND "a0"."Name" = 'Great spotted kiwi'
 ) AS "t"
 WHERE "a"."Id" = "t"."Id"
-""");
+"""
+        );
     }
 
     // #31402
-    public override Task Update_base_type_with_OfType(bool async)
-        => Assert.ThrowsAsync<SqliteException>(() => base.Update_base_property_on_derived_type(async));
+    public override Task Update_base_type_with_OfType(bool async) =>
+        Assert.ThrowsAsync<SqliteException>(() => base.Update_base_property_on_derived_type(async));
 
     public override async Task Update_where_hierarchy_subquery(bool async)
     {
@@ -137,8 +139,8 @@ WHERE "a"."Id" = "t"."Id"
     }
 
     // #31402
-    public override Task Update_base_property_on_derived_type(bool async)
-        => Assert.ThrowsAsync<SqliteException>(() => base.Update_base_property_on_derived_type(async));
+    public override Task Update_base_property_on_derived_type(bool async) =>
+        Assert.ThrowsAsync<SqliteException>(() => base.Update_base_property_on_derived_type(async));
 
     public override async Task Update_derived_property_on_derived_type(bool async)
     {
@@ -151,7 +153,8 @@ SET "FoundOn" = 0
 FROM "Animals" AS "a"
 INNER JOIN "Birds" AS "b" ON "a"."Id" = "b"."Id"
 WHERE "a"."Id" = "k"."Id" AND "a"."CountryId" = 1
-""");
+"""
+        );
     }
 
     public override async Task Update_where_using_hierarchy(bool async)
@@ -169,7 +172,8 @@ WHERE (
     LEFT JOIN "Eagle" AS "e" ON "a"."Id" = "e"."Id"
     LEFT JOIN "Kiwi" AS "k" ON "a"."Id" = "k"."Id"
     WHERE "a"."CountryId" = 1 AND "c"."Id" = "a"."CountryId" AND "a"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_base_and_derived_types(bool async)
@@ -194,7 +198,8 @@ WHERE (
     LEFT JOIN "Eagle" AS "e" ON "a"."Id" = "e"."Id"
     LEFT JOIN "Kiwi" AS "k" ON "a"."Id" = "k"."Id"
     WHERE "a"."CountryId" = 1 AND "c"."Id" = "a"."CountryId" AND "k"."Id" IS NOT NULL AND "a"."CountryId" > 0) > 0
-""");
+"""
+        );
     }
 
     public override async Task Update_where_keyless_entity_mapped_to_sql_query(bool async)
@@ -204,12 +209,11 @@ WHERE (
         AssertExecuteUpdateSql();
     }
 
-    protected override void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected override void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    private void AssertExecuteUpdateSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
+    private void AssertExecuteUpdateSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, forUpdate: true);
 }

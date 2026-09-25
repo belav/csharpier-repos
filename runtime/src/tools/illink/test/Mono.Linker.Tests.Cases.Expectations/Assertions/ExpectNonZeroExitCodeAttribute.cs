@@ -5,10 +5,8 @@ using System;
 
 namespace Mono.Linker.Tests.Cases.Expectations.Assertions;
 
-[AttributeUsage (AttributeTargets.Class)]
+[AttributeUsage(AttributeTargets.Class)]
 public class ExpectNonZeroExitCodeAttribute : BaseExpectedLinkedBehaviorAttribute
 {
-	public ExpectNonZeroExitCodeAttribute (int value)
-	{
-	}
+    public ExpectNonZeroExitCodeAttribute(int value) { }
 }

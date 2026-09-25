@@ -11,9 +11,16 @@ namespace System.Diagnostics
     {
         internal static DistributedContextPropagator Instance { get; } = new LegacyPropagator();
 
-        public override IReadOnlyCollection<string> Fields { get; } = new ReadOnlyCollection<string>(new[] { TraceParent, RequestId, TraceState, Baggage, CorrelationContext });
+        public override IReadOnlyCollection<string> Fields { get; } =
+            new ReadOnlyCollection<string>(
+                new[] { TraceParent, RequestId, TraceState, Baggage, CorrelationContext }
+            );
 
-        public override void Inject(Activity? activity, object? carrier, PropagatorSetterCallback? setter)
+        public override void Inject(
+            Activity? activity,
+            object? carrier,
+            PropagatorSetterCallback? setter
+        )
         {
             if (activity is null || setter is null)
             {
@@ -42,7 +49,12 @@ namespace System.Diagnostics
             InjectBaggage(carrier, activity.Baggage, setter);
         }
 
-        public override void ExtractTraceIdAndState(object? carrier, PropagatorGetterCallback? getter, out string? traceId, out string? traceState)
+        public override void ExtractTraceIdAndState(
+            object? carrier,
+            PropagatorGetterCallback? getter,
+            out string? traceId,
+            out string? traceState
+        )
         {
             if (getter is null)
             {
@@ -60,7 +72,10 @@ namespace System.Diagnostics
             getter(carrier, TraceState, out traceState, out _);
         }
 
-        public override IEnumerable<KeyValuePair<string, string?>>? ExtractBaggage(object? carrier, PropagatorGetterCallback? getter)
+        public override IEnumerable<KeyValuePair<string, string?>>? ExtractBaggage(
+            object? carrier,
+            PropagatorGetterCallback? getter
+        )
         {
             if (getter is null)
             {
@@ -82,7 +97,10 @@ namespace System.Diagnostics
             return baggage;
         }
 
-        internal static bool TryExtractBaggage(string baggageString, out IEnumerable<KeyValuePair<string, string?>>? baggage)
+        internal static bool TryExtractBaggage(
+            string baggageString,
+            out IEnumerable<KeyValuePair<string, string?>>? baggage
+        )
         {
             baggage = null;
             List<KeyValuePair<string, string?>>? baggageList = null;
@@ -97,7 +115,10 @@ namespace System.Diagnostics
             do
             {
                 // Skip spaces
-                while (currentIndex < baggageString.Length && (baggageString[currentIndex] == Space || baggageString[currentIndex] == Tab))
+                while (
+                    currentIndex < baggageString.Length
+                    && (baggageString[currentIndex] == Space || baggageString[currentIndex] == Tab)
+                )
                 {
                     currentIndex++;
                 }
@@ -110,7 +131,12 @@ namespace System.Diagnostics
                 int keyStart = currentIndex;
 
                 // Search end of the key
-                while (currentIndex < baggageString.Length && baggageString[currentIndex] != Space && baggageString[currentIndex] != Tab && baggageString[currentIndex] != '=')
+                while (
+                    currentIndex < baggageString.Length
+                    && baggageString[currentIndex] != Space
+                    && baggageString[currentIndex] != Tab
+                    && baggageString[currentIndex] != '='
+                )
                 {
                     currentIndex++;
                 }
@@ -125,7 +151,13 @@ namespace System.Diagnostics
                 if (baggageString[currentIndex] != '=')
                 {
                     // Skip Spaces
-                    while (currentIndex < baggageString.Length && (baggageString[currentIndex] == Space || baggageString[currentIndex] == Tab))
+                    while (
+                        currentIndex < baggageString.Length
+                        && (
+                            baggageString[currentIndex] == Space
+                            || baggageString[currentIndex] == Tab
+                        )
+                    )
                     {
                         currentIndex++;
                     }
@@ -144,7 +176,10 @@ namespace System.Diagnostics
                 currentIndex++;
 
                 // Skip spaces
-                while (currentIndex < baggageString.Length && (baggageString[currentIndex] == Space || baggageString[currentIndex] == Tab))
+                while (
+                    currentIndex < baggageString.Length
+                    && (baggageString[currentIndex] == Space || baggageString[currentIndex] == Tab)
+                )
                 {
                     currentIndex++;
                 }
@@ -157,8 +192,13 @@ namespace System.Diagnostics
                 int valueStart = currentIndex;
 
                 // Search end of the value
-                while (currentIndex < baggageString.Length && baggageString[currentIndex] != Space && baggageString[currentIndex] != Tab &&
-                       baggageString[currentIndex] != Comma && baggageString[currentIndex] != Semicolon)
+                while (
+                    currentIndex < baggageString.Length
+                    && baggageString[currentIndex] != Space
+                    && baggageString[currentIndex] != Tab
+                    && baggageString[currentIndex] != Comma
+                    && baggageString[currentIndex] != Semicolon
+                )
                 {
                     currentIndex++;
                 }
@@ -168,9 +208,19 @@ namespace System.Diagnostics
                     baggageList ??= new List<KeyValuePair<string, string?>>();
 
                     // Insert in reverse order for asp.net compatibility.
-                    baggageList.Insert(0, new KeyValuePair<string, string?>(
-                                                WebUtility.UrlDecode(baggageString.Substring(keyStart, keyEnd - keyStart)).Trim(s_trimmingSpaceCharacters),
-                                                WebUtility.UrlDecode(baggageString.Substring(valueStart, currentIndex - valueStart)).Trim(s_trimmingSpaceCharacters)));
+                    baggageList.Insert(
+                        0,
+                        new KeyValuePair<string, string?>(
+                            WebUtility
+                                .UrlDecode(baggageString.Substring(keyStart, keyEnd - keyStart))
+                                .Trim(s_trimmingSpaceCharacters),
+                            WebUtility
+                                .UrlDecode(
+                                    baggageString.Substring(valueStart, currentIndex - valueStart)
+                                )
+                                .Trim(s_trimmingSpaceCharacters)
+                        )
+                    );
                 }
 
                 // Skip to end of values

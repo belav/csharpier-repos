@@ -14,7 +14,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
     /// </summary>
     internal partial class MoveStaticMembersDialog : DialogWindow
     {
-        public string MoveStaticMembersDialogTitle => ServicesVSResources.Move_static_members_to_another_type_colon;
+        public string MoveStaticMembersDialogTitle =>
+            ServicesVSResources.Move_static_members_to_another_type_colon;
         public string DestinationLabelText => ServicesVSResources.Type_Name;
         public string OK => ServicesVSResources.OK;
         public string Cancel => ServicesVSResources.Cancel;
@@ -37,8 +38,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             InitializeComponent();
         }
 
-        private void Cancel_Click(object sender, RoutedEventArgs e)
-            => DialogResult = false;
+        private void Cancel_Click(object sender, RoutedEventArgs e) => DialogResult = false;
 
         internal TestAccessor GetTestAccessor() => new(this);
 
@@ -50,12 +50,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
         internal readonly struct TestAccessor
         {
             private readonly MoveStaticMembersDialog _dialog;
-            public TestAccessor(MoveStaticMembersDialog dialog)
-                => _dialog = dialog;
+
+            public TestAccessor(MoveStaticMembersDialog dialog) => _dialog = dialog;
 
             public Button OKButton => _dialog.OKButton;
             public Button CancelButton => _dialog.CancelButton;
-
         }
     }
 }

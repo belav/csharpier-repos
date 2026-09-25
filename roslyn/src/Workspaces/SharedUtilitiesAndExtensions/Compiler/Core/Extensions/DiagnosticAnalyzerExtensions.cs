@@ -6,8 +6,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 {
     internal static class CompilerDiagnosticAnalyzerNames
     {
-        internal const string CSharpCompilerAnalyzerTypeName = "Microsoft.CodeAnalysis.Diagnostics.CSharp.CSharpCompilerDiagnosticAnalyzer";
-        internal const string VisualBasicCompilerAnalyzerTypeName = "Microsoft.CodeAnalysis.Diagnostics.VisualBasic.VisualBasicCompilerDiagnosticAnalyzer";
+        internal const string CSharpCompilerAnalyzerTypeName =
+            "Microsoft.CodeAnalysis.Diagnostics.CSharp.CSharpCompilerDiagnosticAnalyzer";
+        internal const string VisualBasicCompilerAnalyzerTypeName =
+            "Microsoft.CodeAnalysis.Diagnostics.VisualBasic.VisualBasicCompilerDiagnosticAnalyzer";
     }
 
     internal static partial class DiagnosticAnalyzerExtensions

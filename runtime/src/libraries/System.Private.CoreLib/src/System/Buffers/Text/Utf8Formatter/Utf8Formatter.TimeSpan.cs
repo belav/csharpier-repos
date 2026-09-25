@@ -27,7 +27,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(TimeSpan value, Span<byte> destination, out int bytesWritten, StandardFormat format = default)
+        public static bool TryFormat(
+            TimeSpan value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        )
         {
             TimeSpanFormat.StandardFormat sf = TimeSpanFormat.StandardFormat.C;
             ReadOnlySpan<byte> decimalSeparator = default;
@@ -50,7 +55,13 @@ namespace System.Buffers.Text
                 }
             }
 
-            return TimeSpanFormat.TryFormatStandard(value, sf, decimalSeparator, destination, out bytesWritten);
+            return TimeSpanFormat.TryFormatStandard(
+                value,
+                sf,
+                decimalSeparator,
+                destination,
+                out bytesWritten
+            );
         }
     }
 }

@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -40,7 +40,7 @@ namespace System.Linq.Parallel
         {
             get
             {
-                if( MergedCancellationTokenSource != null)
+                if (MergedCancellationTokenSource != null)
                     return MergedCancellationTokenSource.Token;
                 else
                     return new CancellationToken(false);
@@ -57,18 +57,18 @@ namespace System.Linq.Parallel
         }
 
         /// <summary>
-        /// Poll frequency (number of loops per cancellation check) for situations where per-1-loop testing is too high an overhead. 
+        /// Poll frequency (number of loops per cancellation check) for situations where per-1-loop testing is too high an overhead.
         /// </summary>
-        internal const int POLL_INTERVAL = 63;  //must be of the form (2^n)-1. 
+        internal const int POLL_INTERVAL = 63; //must be of the form (2^n)-1.
 
         // The two main situations requiring POLL_INTERVAL are:
         //    1. inner loops of sorting/merging operations
         //    2. tight loops that perform very little work per MoveNext call.
         // Testing has shown both situations have similar requirements and can share the same constant for polling interval.
-        // 
+        //
         // Because the poll checks are per-N loops, if there are delays in user code, they may affect cancellation timeliness.
         // Guidance is that all user-delegates should perform cancellation checks at least every 1ms.
-        // 
+        //
         // Inner loop code should poll once per n loop, typically via:
         // if ((i++ & CancellationState.POLL_INTERVAL) == 0)
         //     CancellationState.ThrowIfCanceled(m_cancellationToken);
@@ -85,7 +85,9 @@ namespace System.Linq.Parallel
         }
 
         // Test if external cancellation was requested and occured, and if so throw a standardize OCE with standardized message
-        internal static void ThrowWithStandardMessageIfCanceled(CancellationToken externalCancellationToken)
+        internal static void ThrowWithStandardMessageIfCanceled(
+            CancellationToken externalCancellationToken
+        )
         {
             if (externalCancellationToken.IsCancellationRequested)
             {

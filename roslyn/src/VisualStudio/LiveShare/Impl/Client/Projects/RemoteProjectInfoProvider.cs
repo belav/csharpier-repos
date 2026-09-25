@@ -28,24 +28,34 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteProjectInfoProvider([ImportMany] IEnumerable<IRemoteProjectInfoProvider> remoteProjectInfoProviders)
-            => _remoteProjectInfoProviders = remoteProjectInfoProviders ?? throw new ArgumentNullException(nameof(remoteProjectInfoProviders));
+        public RemoteProjectInfoProvider(
+            [ImportMany] IEnumerable<IRemoteProjectInfoProvider> remoteProjectInfoProviders
+        ) =>
+            _remoteProjectInfoProviders =
+                remoteProjectInfoProviders
+                ?? throw new ArgumentNullException(nameof(remoteProjectInfoProviders));
 
-        public async Task<IReadOnlyCollection<ProjectInfo>> GetRemoteProjectInfosAsync(CancellationToken cancellationToken)
+        public async Task<IReadOnlyCollection<ProjectInfo>> GetRemoteProjectInfosAsync(
+            CancellationToken cancellationToken
+        )
         {
             var projectInfos = new List<ProjectInfo>();
             foreach (var remoteProjectInfoProvider in _remoteProjectInfoProviders)
             {
                 try
                 {
-                    foreach (var projectInfo in await remoteProjectInfoProvider.GetRemoteProjectInfosAsync(cancellationToken).ConfigureAwait(false))
+                    foreach (
+                        var projectInfo in await remoteProjectInfoProvider
+                            .GetRemoteProjectInfosAsync(cancellationToken)
+                            .ConfigureAwait(false)
+                    )
                     {
                         projectInfos.Add(projectInfo);
                     }
                 }
                 catch (Exception)
                 {
-                    // Continue with the other providers even if one of them fails. 
+                    // Continue with the other providers even if one of them fails.
                     continue;
                 }
             }

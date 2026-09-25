@@ -31,6 +31,6 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
         Async = 1 << 15,
         Partial = 1 << 16,
 
-        AccessModifierMask = Private | Protected | Internal | Public
+        AccessModifierMask = Private | Protected | Internal | Public,
     }
 }

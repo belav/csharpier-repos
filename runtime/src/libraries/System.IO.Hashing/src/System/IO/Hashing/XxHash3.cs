@@ -27,12 +27,12 @@ namespace System.IO.Hashing
         private State _state;
 
         /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the default seed value 0.</summary>
-        public XxHash3() : this(0)
-        {
-        }
+        public XxHash3()
+            : this(0) { }
 
         /// <summary>Initializes a new instance of the <see cref="XxHash3"/> class using the specified seed.</summary>
-        public XxHash3(long seed) : base(HashLengthInBytes)
+        public XxHash3(long seed)
+            : base(HashLengthInBytes)
         {
             Initialize(ref _state, (ulong)seed);
         }
@@ -96,7 +96,12 @@ namespace System.IO.Hashing
         /// <param name="bytesWritten">When this method returns, contains the number of bytes written to <paramref name="destination"/>.</param>
         /// <param name="seed">The seed value for this hash computation. The default is zero.</param>
         /// <returns><see langword="true"/> if <paramref name="destination"/> is long enough to receive the computed hash value (8 bytes); otherwise, <see langword="false"/>.</returns>
-        public static bool TryHash(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten, long seed = 0)
+        public static bool TryHash(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten,
+            long seed = 0
+        )
         {
             if (destination.Length >= sizeof(long))
             {
@@ -182,14 +187,21 @@ namespace System.IO.Hashing
                 fixed (byte* secret = _state.Secret)
                 {
                     DigestLong(ref _state, accumulators, secret);
-                    current = MergeAccumulators(accumulators, secret + SecretMergeAccsStartBytes, _state.TotalLength * Prime64_1);
+                    current = MergeAccumulators(
+                        accumulators,
+                        secret + SecretMergeAccsStartBytes,
+                        _state.TotalLength * Prime64_1
+                    );
                 }
             }
             else
             {
                 fixed (byte* buffer = _state.Buffer)
                 {
-                    current = HashToUInt64(new ReadOnlySpan<byte>(buffer, (int)_state.TotalLength), (long)_state.Seed);
+                    current = HashToUInt64(
+                        new ReadOnlySpan<byte>(buffer, (int)_state.TotalLength),
+                        (long)_state.Seed
+                    );
                 }
             }
 
@@ -231,7 +243,8 @@ namespace System.IO.Hashing
 
             uint combined = ((uint)c1 << 16) | ((uint)c2 << 24) | c3 | (length << 8);
 
-            const uint SecretXor = unchecked((uint)DefaultSecretUInt64_0) ^ (uint)(DefaultSecretUInt64_0 >> 32);
+            const uint SecretXor =
+                unchecked((uint)DefaultSecretUInt64_0) ^ (uint)(DefaultSecretUInt64_0 >> 32);
             return XxHash64.Avalanche(combined ^ (SecretXor + seed));
         }
 
@@ -266,10 +279,11 @@ namespace System.IO.Hashing
             ulong inputHigh = ReadUInt64LE(source + length - sizeof(ulong)) ^ bitflipHigh;
 
             return Avalanche(
-                length +
-                BinaryPrimitives.ReverseEndianness(inputLow) +
-                inputHigh +
-                Multiply64To128ThenFold(inputLow, inputHigh));
+                length
+                    + BinaryPrimitives.ReverseEndianness(inputLow)
+                    + inputHigh
+                    + Multiply64To128ThenFold(inputLow, inputHigh)
+            );
         }
 
         private static ulong HashLength17To128(byte* source, uint length, ulong seed)
@@ -281,20 +295,55 @@ namespace System.IO.Hashing
             switch ((length - 1) / 32)
             {
                 default: // case 3
-                    hash += Mix16Bytes(source + 48, DefaultSecretUInt64_12, DefaultSecretUInt64_13, seed);
-                    hash += Mix16Bytes(source + length - 64, DefaultSecretUInt64_14, DefaultSecretUInt64_15, seed);
+                    hash += Mix16Bytes(
+                        source + 48,
+                        DefaultSecretUInt64_12,
+                        DefaultSecretUInt64_13,
+                        seed
+                    );
+                    hash += Mix16Bytes(
+                        source + length - 64,
+                        DefaultSecretUInt64_14,
+                        DefaultSecretUInt64_15,
+                        seed
+                    );
                     goto case 2;
                 case 2:
-                    hash += Mix16Bytes(source + 32, DefaultSecretUInt64_8, DefaultSecretUInt64_9, seed);
-                    hash += Mix16Bytes(source + length - 48, DefaultSecretUInt64_10, DefaultSecretUInt64_11, seed);
+                    hash += Mix16Bytes(
+                        source + 32,
+                        DefaultSecretUInt64_8,
+                        DefaultSecretUInt64_9,
+                        seed
+                    );
+                    hash += Mix16Bytes(
+                        source + length - 48,
+                        DefaultSecretUInt64_10,
+                        DefaultSecretUInt64_11,
+                        seed
+                    );
                     goto case 1;
                 case 1:
-                    hash += Mix16Bytes(source + 16, DefaultSecretUInt64_4, DefaultSecretUInt64_5, seed);
-                    hash += Mix16Bytes(source + length - 32, DefaultSecretUInt64_6, DefaultSecretUInt64_7, seed);
+                    hash += Mix16Bytes(
+                        source + 16,
+                        DefaultSecretUInt64_4,
+                        DefaultSecretUInt64_5,
+                        seed
+                    );
+                    hash += Mix16Bytes(
+                        source + length - 32,
+                        DefaultSecretUInt64_6,
+                        DefaultSecretUInt64_7,
+                        seed
+                    );
                     goto case 0;
                 case 0:
                     hash += Mix16Bytes(source, DefaultSecretUInt64_0, DefaultSecretUInt64_1, seed);
-                    hash += Mix16Bytes(source + length - 16, DefaultSecretUInt64_2, DefaultSecretUInt64_3, seed);
+                    hash += Mix16Bytes(
+                        source + length - 16,
+                        DefaultSecretUInt64_2,
+                        DefaultSecretUInt64_3,
+                        seed
+                    );
                     break;
             }
 
@@ -307,14 +356,54 @@ namespace System.IO.Hashing
 
             ulong hash = length * Prime64_1;
 
-            hash += Mix16Bytes(source + (16 * 0), DefaultSecretUInt64_0, DefaultSecretUInt64_1, seed);
-            hash += Mix16Bytes(source + (16 * 1), DefaultSecretUInt64_2, DefaultSecretUInt64_3, seed);
-            hash += Mix16Bytes(source + (16 * 2), DefaultSecretUInt64_4, DefaultSecretUInt64_5, seed);
-            hash += Mix16Bytes(source + (16 * 3), DefaultSecretUInt64_6, DefaultSecretUInt64_7, seed);
-            hash += Mix16Bytes(source + (16 * 4), DefaultSecretUInt64_8, DefaultSecretUInt64_9, seed);
-            hash += Mix16Bytes(source + (16 * 5), DefaultSecretUInt64_10, DefaultSecretUInt64_11, seed);
-            hash += Mix16Bytes(source + (16 * 6), DefaultSecretUInt64_12, DefaultSecretUInt64_13, seed);
-            hash += Mix16Bytes(source + (16 * 7), DefaultSecretUInt64_14, DefaultSecretUInt64_15, seed);
+            hash += Mix16Bytes(
+                source + (16 * 0),
+                DefaultSecretUInt64_0,
+                DefaultSecretUInt64_1,
+                seed
+            );
+            hash += Mix16Bytes(
+                source + (16 * 1),
+                DefaultSecretUInt64_2,
+                DefaultSecretUInt64_3,
+                seed
+            );
+            hash += Mix16Bytes(
+                source + (16 * 2),
+                DefaultSecretUInt64_4,
+                DefaultSecretUInt64_5,
+                seed
+            );
+            hash += Mix16Bytes(
+                source + (16 * 3),
+                DefaultSecretUInt64_6,
+                DefaultSecretUInt64_7,
+                seed
+            );
+            hash += Mix16Bytes(
+                source + (16 * 4),
+                DefaultSecretUInt64_8,
+                DefaultSecretUInt64_9,
+                seed
+            );
+            hash += Mix16Bytes(
+                source + (16 * 5),
+                DefaultSecretUInt64_10,
+                DefaultSecretUInt64_11,
+                seed
+            );
+            hash += Mix16Bytes(
+                source + (16 * 6),
+                DefaultSecretUInt64_12,
+                DefaultSecretUInt64_13,
+                seed
+            );
+            hash += Mix16Bytes(
+                source + (16 * 7),
+                DefaultSecretUInt64_14,
+                DefaultSecretUInt64_15,
+                seed
+            );
 
             hash = Avalanche(hash);
 
@@ -322,28 +411,68 @@ namespace System.IO.Hashing
             {
                 default: // case 7
                     Debug.Assert((length - 16 * 8) / 16 == 7);
-                    hash += Mix16Bytes(source + (16 * 14), DefaultSecret3UInt64_12, DefaultSecret3UInt64_13, seed);
+                    hash += Mix16Bytes(
+                        source + (16 * 14),
+                        DefaultSecret3UInt64_12,
+                        DefaultSecret3UInt64_13,
+                        seed
+                    );
                     goto case 6;
                 case 6:
-                    hash += Mix16Bytes(source + (16 * 13), DefaultSecret3UInt64_10, DefaultSecret3UInt64_11, seed);
+                    hash += Mix16Bytes(
+                        source + (16 * 13),
+                        DefaultSecret3UInt64_10,
+                        DefaultSecret3UInt64_11,
+                        seed
+                    );
                     goto case 5;
                 case 5:
-                    hash += Mix16Bytes(source + (16 * 12), DefaultSecret3UInt64_8, DefaultSecret3UInt64_9, seed);
+                    hash += Mix16Bytes(
+                        source + (16 * 12),
+                        DefaultSecret3UInt64_8,
+                        DefaultSecret3UInt64_9,
+                        seed
+                    );
                     goto case 4;
                 case 4:
-                    hash += Mix16Bytes(source + (16 * 11), DefaultSecret3UInt64_6, DefaultSecret3UInt64_7, seed);
+                    hash += Mix16Bytes(
+                        source + (16 * 11),
+                        DefaultSecret3UInt64_6,
+                        DefaultSecret3UInt64_7,
+                        seed
+                    );
                     goto case 3;
                 case 3:
-                    hash += Mix16Bytes(source + (16 * 10), DefaultSecret3UInt64_4, DefaultSecret3UInt64_5, seed);
+                    hash += Mix16Bytes(
+                        source + (16 * 10),
+                        DefaultSecret3UInt64_4,
+                        DefaultSecret3UInt64_5,
+                        seed
+                    );
                     goto case 2;
                 case 2:
-                    hash += Mix16Bytes(source + (16 * 9), DefaultSecret3UInt64_2, DefaultSecret3UInt64_3, seed);
+                    hash += Mix16Bytes(
+                        source + (16 * 9),
+                        DefaultSecret3UInt64_2,
+                        DefaultSecret3UInt64_3,
+                        seed
+                    );
                     goto case 1;
                 case 1:
-                    hash += Mix16Bytes(source + (16 * 8), DefaultSecret3UInt64_0, DefaultSecret3UInt64_1, seed);
+                    hash += Mix16Bytes(
+                        source + (16 * 8),
+                        DefaultSecret3UInt64_0,
+                        DefaultSecret3UInt64_1,
+                        seed
+                    );
                     goto case 0;
                 case 0:
-                    hash += Mix16Bytes(source + length - 16, 0x7378D9C97E9FC831, 0xEBD33483ACC5EA64, seed); // DefaultSecret[119], DefaultSecret[127]
+                    hash += Mix16Bytes(
+                        source + length - 16,
+                        0x7378D9C97E9FC831,
+                        0xEBD33483ACC5EA64,
+                        seed
+                    ); // DefaultSecret[119], DefaultSecret[127]
                     break;
             }
 

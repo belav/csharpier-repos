@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             private readonly ITextBuffer _textBuffer;
 
-            public InertClassifier(ITextBuffer textBuffer)
-                => _textBuffer = textBuffer;
+            public InertClassifier(ITextBuffer textBuffer) => _textBuffer = textBuffer;
 
 #pragma warning disable 67
             public event EventHandler<ClassificationChangedEventArgs> ClassificationChanged;
@@ -30,7 +29,12 @@ namespace Microsoft.CodeAnalysis.Interactive
             {
                 // See if we have cached classifications for this text buffer and return the ones
                 // that intersect the requested span if we do.
-                if (_textBuffer.Properties.TryGetProperty<IList<ClassificationSpan>>(s_classificationsKey, out var classifications))
+                if (
+                    _textBuffer.Properties.TryGetProperty<IList<ClassificationSpan>>(
+                        s_classificationsKey,
+                        out var classifications
+                    )
+                )
                 {
                     return classifications.Where(c => c.Span.IntersectsWith(span)).ToList();
                 }

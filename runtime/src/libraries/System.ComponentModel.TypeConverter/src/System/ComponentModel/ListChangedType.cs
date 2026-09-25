@@ -12,6 +12,6 @@ namespace System.ComponentModel
         ItemChanged,
         PropertyDescriptorAdded,
         PropertyDescriptorDeleted,
-        PropertyDescriptorChanged
+        PropertyDescriptorChanged,
     }
 }

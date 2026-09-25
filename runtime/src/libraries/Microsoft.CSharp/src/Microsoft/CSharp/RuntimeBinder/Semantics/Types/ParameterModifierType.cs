@@ -24,7 +24,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
             IsOut = isOut;
         }
 
-        public bool IsOut { get; }  // True for out parameter, false for ref parameter.
+        public bool IsOut { get; } // True for out parameter, false for ref parameter.
 
         public CType ParameterType { get; }
 

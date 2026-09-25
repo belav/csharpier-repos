@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.f
@@ -14,68 +14,68 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
+    using System;
 
-	public abstract class XmlNodeBase : IRealizableSource, IVirtual
-	{
-		protected Type type;
-		private readonly IXmlNode parent;
-		private readonly IXmlNamespaceSource namespaces;
+    public abstract class XmlNodeBase : IRealizableSource, IVirtual
+    {
+        protected Type type;
+        private readonly IXmlNode parent;
+        private readonly IXmlNamespaceSource namespaces;
 
-		protected XmlNodeBase(IXmlNamespaceSource namespaces, IXmlNode parent)
-		{
-			if (null == namespaces)
-				throw Error.ArgumentNull(nameof(namespaces));
+        protected XmlNodeBase(IXmlNamespaceSource namespaces, IXmlNode parent)
+        {
+            if (null == namespaces)
+                throw Error.ArgumentNull(nameof(namespaces));
 
-			this.namespaces = namespaces;
-			this.parent     = parent;
-		}
+            this.namespaces = namespaces;
+            this.parent = parent;
+        }
 
-		public virtual bool IsReal
-		{
-			get { return true; }
-		}
+        public virtual bool IsReal
+        {
+            get { return true; }
+        }
 
-		public virtual Type ClrType
-		{
-			get { return type; }
-		}
+        public virtual Type ClrType
+        {
+            get { return type; }
+        }
 
-		public IXmlNode Parent
-		{
-			get { return parent; }
-		}
+        public IXmlNode Parent
+        {
+            get { return parent; }
+        }
 
-		public IXmlNamespaceSource Namespaces
-		{
-			get { return namespaces; }
-		}
+        public IXmlNamespaceSource Namespaces
+        {
+            get { return namespaces; }
+        }
 
-		public virtual CompiledXPath Path
-		{
-			get { return null; }
-		}
+        public virtual CompiledXPath Path
+        {
+            get { return null; }
+        }
 
-		IRealizable<T> IRealizableSource.AsRealizable<T>()
-		{
-			return this as IRealizable<T>;
-		}
+        IRealizable<T> IRealizableSource.AsRealizable<T>()
+        {
+            return this as IRealizable<T>;
+        }
 
-		protected virtual void Realize()
-		{
-			// Default nodes are fully realized already
-		}
+        protected virtual void Realize()
+        {
+            // Default nodes are fully realized already
+        }
 
-		void IVirtual.Realize()
-		{
-			Realize();
-		}
+        void IVirtual.Realize()
+        {
+            Realize();
+        }
 
-		public virtual event EventHandler Realized
-		{
-			// Default nodes never realize
-			add    { }
-			remove { }
-		}
-	}
+        public virtual event EventHandler Realized
+        {
+            // Default nodes never realize
+            add { }
+            remove { }
+        }
+    }
 }

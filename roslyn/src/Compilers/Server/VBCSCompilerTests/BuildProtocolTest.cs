@@ -35,7 +35,9 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             await response.WriteAsync(memoryStream, default(CancellationToken));
             Assert.True(memoryStream.Position > 0);
             memoryStream.Position = 0;
-            var read = (CompletedBuildResponse)(await BuildResponse.ReadAsync(memoryStream, default(CancellationToken)));
+            var read = (CompletedBuildResponse)(
+                await BuildResponse.ReadAsync(memoryStream, default(CancellationToken))
+            );
             Assert.Equal(42, read.ReturnCode);
             Assert.False(read.Utf8Output);
             Assert.Equal("a string", read.Output);
@@ -48,8 +50,18 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                 RequestLanguage.VisualBasicCompile,
                 "HashValue",
                 ImmutableArray.Create(
-                    new BuildRequest.Argument(BuildProtocolConstants.ArgumentId.CurrentDirectory, argumentIndex: 0, value: "directory"),
-                    new BuildRequest.Argument(BuildProtocolConstants.ArgumentId.CommandLineArgument, argumentIndex: 1, value: "file")));
+                    new BuildRequest.Argument(
+                        BuildProtocolConstants.ArgumentId.CurrentDirectory,
+                        argumentIndex: 0,
+                        value: "directory"
+                    ),
+                    new BuildRequest.Argument(
+                        BuildProtocolConstants.ArgumentId.CommandLineArgument,
+                        argumentIndex: 1,
+                        value: "file"
+                    )
+                )
+            );
             var memoryStream = new MemoryStream();
             await request.WriteAsync(memoryStream, default(CancellationToken));
             Assert.True(memoryStream.Position > 0);
@@ -58,10 +70,16 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
             Assert.Equal(RequestLanguage.VisualBasicCompile, read.Language);
             Assert.Equal("HashValue", read.CompilerHash);
             Assert.Equal(2, read.Arguments.Count);
-            Assert.Equal(BuildProtocolConstants.ArgumentId.CurrentDirectory, read.Arguments[0].ArgumentId);
+            Assert.Equal(
+                BuildProtocolConstants.ArgumentId.CurrentDirectory,
+                read.Arguments[0].ArgumentId
+            );
             Assert.Equal(0, read.Arguments[0].ArgumentIndex);
             Assert.Equal("directory", read.Arguments[0].Value);
-            Assert.Equal(BuildProtocolConstants.ArgumentId.CommandLineArgument, read.Arguments[1].ArgumentId);
+            Assert.Equal(
+                BuildProtocolConstants.ArgumentId.CommandLineArgument,
+                read.Arguments[1].ArgumentId
+            );
             Assert.Equal(1, read.Arguments[1].ArgumentIndex);
             Assert.Equal("file", read.Arguments[1].Value);
         }

@@ -41,10 +41,11 @@ namespace System.Net.Http.Formatting.Parsers
         /// </summary>
         /// <param name="content">An existing <see cref="HttpContent"/> instance to use for the object's content.</param>
         /// <param name="streamProvider">A stream provider providing output streams for where to write body parts as they are parsed.</param>
-        public MimeMultipartBodyPartParser(HttpContent content, MultipartStreamProvider streamProvider)
-            : this(content, streamProvider, DefaultMaxMessageSize, DefaultMaxBodyPartHeaderSize)
-        {
-        }
+        public MimeMultipartBodyPartParser(
+            HttpContent content,
+            MultipartStreamProvider streamProvider
+        )
+            : this(content, streamProvider, DefaultMaxMessageSize, DefaultMaxBodyPartHeaderSize) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MimeMultipartBodyPartParser"/> class.
@@ -57,7 +58,8 @@ namespace System.Net.Http.Formatting.Parsers
             HttpContent content,
             MultipartStreamProvider streamProvider,
             long maxMessageSize,
-            int maxBodyPartHeaderSize)
+            int maxBodyPartHeaderSize
+        )
         {
             Contract.Assert(content != null, "content cannot be null.");
             Contract.Assert(streamProvider != null, "streamProvider cannot be null.");
@@ -79,7 +81,11 @@ namespace System.Net.Http.Formatting.Parsers
         /// <returns>
         ///   <c>true</c> if the specified content is MIME multipart content; otherwise, <c>false</c>.
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is translated to false return.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is translated to false return."
+        )]
         public static bool IsMimeMultipartContent(HttpContent content)
         {
             Contract.Assert(content != null, "content cannot be null.");
@@ -124,7 +130,9 @@ namespace System.Net.Http.Formatting.Parsers
             if (bytesRead == 0 && !_mimeParser.IsWaitingForEndOfMessage)
             {
                 CleanupCurrentBodyPart();
-                throw new IOException(Properties.Resources.ReadAsMimeMultipartUnexpectedTermination);
+                throw new IOException(
+                    Properties.Resources.ReadAsMimeMultipartUnexpectedTermination
+                );
             }
 
             // Make sure we remove an old array segments.
@@ -132,11 +140,25 @@ namespace System.Net.Http.Formatting.Parsers
 
             while (_mimeParser.CanParseMore(bytesRead, bytesConsumed))
             {
-                _mimeStatus = _mimeParser.ParseBuffer(data, bytesRead, ref bytesConsumed, out _parsedBodyPart[0], out _parsedBodyPart[1], out isFinal);
-                if (_mimeStatus != MimeMultipartParser.State.BodyPartCompleted && _mimeStatus != MimeMultipartParser.State.NeedMoreData)
+                _mimeStatus = _mimeParser.ParseBuffer(
+                    data,
+                    bytesRead,
+                    ref bytesConsumed,
+                    out _parsedBodyPart[0],
+                    out _parsedBodyPart[1],
+                    out isFinal
+                );
+                if (
+                    _mimeStatus != MimeMultipartParser.State.BodyPartCompleted
+                    && _mimeStatus != MimeMultipartParser.State.NeedMoreData
+                )
                 {
                     CleanupCurrentBodyPart();
-                    throw Error.InvalidOperation(Properties.Resources.ReadAsMimeMultipartParseError, bytesConsumed, data);
+                    throw Error.InvalidOperation(
+                        Properties.Resources.ReadAsMimeMultipartParseError,
+                        bytesConsumed,
+                        data
+                    );
                 }
 
                 // First body is empty preamble which we just ignore
@@ -161,16 +183,30 @@ namespace System.Net.Http.Formatting.Parsers
                     if (_bodyPartHeaderStatus != ParserState.Done)
                     {
                         int headerConsumed = part.Offset;
-                        _bodyPartHeaderStatus = _currentBodyPart.HeaderParser.ParseBuffer(part.Array, part.Count + part.Offset, ref headerConsumed);
+                        _bodyPartHeaderStatus = _currentBodyPart.HeaderParser.ParseBuffer(
+                            part.Array,
+                            part.Count + part.Offset,
+                            ref headerConsumed
+                        );
                         if (_bodyPartHeaderStatus == ParserState.Done)
                         {
                             // Add the remainder as body part content
-                            _currentBodyPart.Segments.Add(new ArraySegment<byte>(part.Array, headerConsumed, part.Count + part.Offset - headerConsumed));
+                            _currentBodyPart.Segments.Add(
+                                new ArraySegment<byte>(
+                                    part.Array,
+                                    headerConsumed,
+                                    part.Count + part.Offset - headerConsumed
+                                )
+                            );
                         }
                         else if (_bodyPartHeaderStatus != ParserState.NeedMoreData)
                         {
                             CleanupCurrentBodyPart();
-                            throw Error.InvalidOperation(Properties.Resources.ReadAsMimeMultipartHeaderParseError, headerConsumed, part.Array);
+                            throw Error.InvalidOperation(
+                                Properties.Resources.ReadAsMimeMultipartHeaderParseError,
+                                headerConsumed,
+                                part.Array
+                            );
                         }
                     }
                     else
@@ -187,7 +223,11 @@ namespace System.Net.Http.Formatting.Parsers
                     completed.IsComplete = true;
                     completed.IsFinal = isFinal;
 
-                    _currentBodyPart = new MimeBodyPart(_streamProvider, _maxBodyPartHeaderSize, _content);
+                    _currentBodyPart = new MimeBodyPart(
+                        _streamProvider,
+                        _maxBodyPartHeaderSize,
+                        _content
+                    );
 
                     _mimeStatus = MimeMultipartParser.State.NeedMoreData;
                     _bodyPartHeaderStatus = ParserState.NeedMoreData;
@@ -214,14 +254,22 @@ namespace System.Net.Http.Formatting.Parsers
             }
         }
 
-        private static string ValidateArguments(HttpContent content, long maxMessageSize, bool throwOnError)
+        private static string ValidateArguments(
+            HttpContent content,
+            long maxMessageSize,
+            bool throwOnError
+        )
         {
             Contract.Assert(content != null, "content cannot be null.");
             if (maxMessageSize < MimeMultipartParser.MinMessageSize)
             {
                 if (throwOnError)
                 {
-                    throw Error.ArgumentMustBeGreaterThanOrEqualTo("maxMessageSize", maxMessageSize, MimeMultipartParser.MinMessageSize);
+                    throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                        "maxMessageSize",
+                        maxMessageSize,
+                        MimeMultipartParser.MinMessageSize
+                    );
                 }
                 else
                 {
@@ -234,7 +282,12 @@ namespace System.Net.Http.Formatting.Parsers
             {
                 if (throwOnError)
                 {
-                    throw Error.Argument("content", Properties.Resources.ReadAsMimeMultipartArgumentNoContentType, typeof(HttpContent).Name, "multipart/");
+                    throw Error.Argument(
+                        "content",
+                        Properties.Resources.ReadAsMimeMultipartArgumentNoContentType,
+                        typeof(HttpContent).Name,
+                        "multipart/"
+                    );
                 }
                 else
                 {
@@ -246,7 +299,12 @@ namespace System.Net.Http.Formatting.Parsers
             {
                 if (throwOnError)
                 {
-                    throw Error.Argument("content", Properties.Resources.ReadAsMimeMultipartArgumentNoMultipart, typeof(HttpContent).Name, "multipart/");
+                    throw Error.Argument(
+                        "content",
+                        Properties.Resources.ReadAsMimeMultipartArgumentNoMultipart,
+                        typeof(HttpContent).Name,
+                        "multipart/"
+                    );
                 }
                 else
                 {
@@ -268,7 +326,13 @@ namespace System.Net.Http.Formatting.Parsers
             {
                 if (throwOnError)
                 {
-                    throw Error.Argument("content", Properties.Resources.ReadAsMimeMultipartArgumentNoBoundary, typeof(HttpContent).Name, "multipart", "boundary");
+                    throw Error.Argument(
+                        "content",
+                        Properties.Resources.ReadAsMimeMultipartArgumentNoBoundary,
+                        typeof(HttpContent).Name,
+                        "multipart",
+                        "boundary"
+                    );
                 }
                 else
                 {

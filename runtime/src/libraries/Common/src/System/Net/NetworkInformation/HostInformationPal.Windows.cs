@@ -91,7 +91,8 @@ namespace System.Net.NetworkInformation
                         result = Interop.IpHlpApi.GetNetworkParams(buffer, &size);
                         if (result == Interop.IpHlpApi.ERROR_SUCCESS)
                         {
-                            Interop.IpHlpApi.FIXED_INFO* pFixedInfo = (Interop.IpHlpApi.FIXED_INFO*)buffer;
+                            Interop.IpHlpApi.FIXED_INFO* pFixedInfo =
+                                (Interop.IpHlpApi.FIXED_INFO*)buffer;
 
                             s_hostName = pFixedInfo->HostName;
                             s_domainName = pFixedInfo->DomainName;

@@ -6,9 +6,9 @@ namespace System.Activities.Runtime
 {
     using System;
     using System.Activities.DynamicUpdate;
+    using System.Collections.ObjectModel;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
 
     [DataContract]
     class ActivityInstanceReference : ActivityInstanceMap.IActivityReference
@@ -29,22 +29,18 @@ namespace System.Activities.Runtime
 
         Activity ActivityInstanceMap.IActivityReference.Activity
         {
-            get
-            {
-                return this.activityInstance.Activity;
-            }
+            get { return this.activityInstance.Activity; }
         }
-
 
         public ActivityInstance ActivityInstance
         {
-            get
-            {
-                return this.activityInstance;
-            }
+            get { return this.activityInstance; }
         }
 
-        void ActivityInstanceMap.IActivityReference.Load(Activity activity, ActivityInstanceMap instanceMap)
+        void ActivityInstanceMap.IActivityReference.Load(
+            Activity activity,
+            ActivityInstanceMap instanceMap
+        )
         {
             // The conditional calling of ActivityInstance.Load is the value
             // added by this wrapper class.  This is because we can't guarantee
@@ -52,10 +48,11 @@ namespace System.Activities.Runtime
             // ActivityInstance.
             if (this.activityInstance.Activity == null)
             {
-                ((ActivityInstanceMap.IActivityReference)this.activityInstance).Load(activity, instanceMap);
+                ((ActivityInstanceMap.IActivityReference)this.activityInstance).Load(
+                    activity,
+                    instanceMap
+                );
             }
         }
     }
 }
-
-

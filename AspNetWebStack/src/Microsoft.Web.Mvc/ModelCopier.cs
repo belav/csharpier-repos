@@ -35,13 +35,24 @@ namespace Microsoft.Web.Mvc
 
             foreach (PropertyDescriptor fromProperty in fromProperties)
             {
-                PropertyDescriptor toProperty = toProperties.Find(fromProperty.Name, true /* ignoreCase */);
+                PropertyDescriptor toProperty = toProperties.Find(
+                    fromProperty.Name,
+                    true /* ignoreCase */
+                );
                 if (toProperty != null && !toProperty.IsReadOnly)
                 {
                     // Can from.Property reference just be assigned directly to to.Property reference?
-                    bool isDirectlyAssignable = toProperty.PropertyType.IsAssignableFrom(fromProperty.PropertyType);
+                    bool isDirectlyAssignable = toProperty.PropertyType.IsAssignableFrom(
+                        fromProperty.PropertyType
+                    );
                     // Is from.Property just the nullable form of to.Property?
-                    bool liftedValueType = (isDirectlyAssignable) ? false : (Nullable.GetUnderlyingType(fromProperty.PropertyType) == toProperty.PropertyType);
+                    bool liftedValueType =
+                        (isDirectlyAssignable)
+                            ? false
+                            : (
+                                Nullable.GetUnderlyingType(fromProperty.PropertyType)
+                                == toProperty.PropertyType
+                            );
 
                     if (isDirectlyAssignable || liftedValueType)
                     {

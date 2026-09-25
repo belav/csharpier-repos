@@ -12,9 +12,13 @@ namespace System
         // RFC 5952 Section 4.2.3
         // Longest consecutive sequence of zero segments, minimum 2.
         // On equal, first sequence wins. <-1, -1> for no compression.
-        internal static (int longestSequenceStart, int longestSequenceLength) FindCompressionRange(ReadOnlySpan<ushort> numbers)
+        internal static (int longestSequenceStart, int longestSequenceLength) FindCompressionRange(
+            ReadOnlySpan<ushort> numbers
+        )
         {
-            int longestSequenceLength = 0, longestSequenceStart = -1, currentSequenceLength = 0;
+            int longestSequenceLength = 0,
+                longestSequenceStart = -1,
+                currentSequenceLength = 0;
 
             for (int i = 0; i < numbers.Length; i++)
             {
@@ -33,9 +37,9 @@ namespace System
                 }
             }
 
-            return longestSequenceLength > 1 ?
-                (longestSequenceStart, longestSequenceStart + longestSequenceLength) :
-                (-1, 0);
+            return longestSequenceLength > 1
+                ? (longestSequenceStart, longestSequenceStart + longestSequenceLength)
+                : (-1, 0);
         }
 
         // Returns true if the IPv6 address should be formatted with an embedded IPv4 address:
@@ -43,7 +47,13 @@ namespace System
         internal static bool ShouldHaveIpv4Embedded(ReadOnlySpan<ushort> numbers)
         {
             // 0:0 : 0:0 : x:x : x.x.x.x
-            if (numbers[0] == 0 && numbers[1] == 0 && numbers[2] == 0 && numbers[3] == 0 && numbers[6] != 0)
+            if (
+                numbers[0] == 0
+                && numbers[1] == 0
+                && numbers[2] == 0
+                && numbers[3] == 0
+                && numbers[6] != 0
+            )
             {
                 // RFC 5952 Section 5 - 0:0 : 0:0 : 0:[0 | FFFF] : x.x.x.x
                 if (numbers[4] == 0 && (numbers[5] == 0 || numbers[5] == 0xFFFF))
@@ -221,7 +231,16 @@ namespace System
                             }
 
                             i = end;
-                            if (!IPv4AddressHelper.IsValid(name, lastSequence, ref i, true, false, false))
+                            if (
+                                !IPv4AddressHelper.IsValid(
+                                    name,
+                                    lastSequence,
+                                    ref i,
+                                    true,
+                                    false,
+                                    false
+                                )
+                            )
                             {
                                 return false;
                             }
@@ -230,7 +249,7 @@ namespace System
                             lastSequence = i - sequenceLength;
                             sequenceLength = 0;
                             haveIPv4Address = true;
-                            --i;            // it will be incremented back on the next loop
+                            --i; // it will be incremented back on the next loop
                             break;
 
                         default:
@@ -253,10 +272,13 @@ namespace System
             // these sequence counts are -1 because it is implied in end-of-sequence
 
             const int ExpectedSequenceCount = 8;
-            return
-                !expectingNumber &&
-                (haveCompressor ? (sequenceCount < ExpectedSequenceCount) : (sequenceCount == ExpectedSequenceCount)) &&
-                !needsClosingBracket;
+            return !expectingNumber
+                && (
+                    haveCompressor
+                        ? (sequenceCount < ExpectedSequenceCount)
+                        : (sequenceCount == ExpectedSequenceCount)
+                )
+                && !needsClosingBracket;
         }
 
         //
@@ -284,7 +306,12 @@ namespace System
         //  Nothing
         //
 
-        internal static void Parse(ReadOnlySpan<char> address, Span<ushort> numbers, int start, ref string? scopeId)
+        internal static void Parse(
+            ReadOnlySpan<char> address,
+            Span<ushort> numbers,
+            int start,
+            ref string? scopeId
+        )
         {
             int number = 0;
             int index = 0;
@@ -298,7 +325,7 @@ namespace System
                 ++start;
             }
 
-            for (int i = start; i < address.Length && address[i] != ']';)
+            for (int i = start; i < address.Length && address[i] != ']'; )
             {
                 switch (address[i])
                 {
@@ -311,13 +338,10 @@ namespace System
 
                         start = i;
                         for (++i; i < address.Length && address[i] != ']' && address[i] != '/'; ++i)
-                        {
-                        }
+                        { }
                         scopeId = new string(address.Slice(start, i - start));
                         // ignore prefix if any
-                        for (; i < address.Length && address[i] != ']'; ++i)
-                        {
-                        }
+                        for (; i < address.Length && address[i] != ']'; ++i) { }
                         break;
 
                     case ':':
@@ -339,14 +363,17 @@ namespace System
 
                         // check to see if the upcoming number is really an IPv4
                         // address. If it is, convert it to 2 ushort numbers
-                        for (int j = i; j < address.Length &&
-                                        (address[j] != ']') &&
-                                        (address[j] != ':') &&
-                                        (address[j] != '%') &&
-                                        (address[j] != '/') &&
-                                        (j < i + 4); ++j)
+                        for (
+                            int j = i;
+                            j < address.Length
+                                && (address[j] != ']')
+                                && (address[j] != ':')
+                                && (address[j] != '%')
+                                && (address[j] != '/')
+                                && (j < i + 4);
+                            ++j
+                        )
                         {
-
                             if (address[j] == '.')
                             {
                                 // we have an IPv4 address. Find the end of it:
@@ -355,7 +382,12 @@ namespace System
                                 // the IPv4 address are the prefix delimiter '/'
                                 // or the end-of-string (which we conveniently
                                 // delimited with ']')
-                                while (j < address.Length && (address[j] != ']') && (address[j] != '/') && (address[j] != '%'))
+                                while (
+                                    j < address.Length
+                                    && (address[j] != ']')
+                                    && (address[j] != '/')
+                                    && (address[j] != '%')
+                                )
                                 {
                                     ++j;
                                 }

@@ -54,7 +54,16 @@ namespace System.Globalization
 
                 int hijriAdvance = 0;
                 string? str = value.ToString();
-                if (string.Compare(str, 0, HijriAdvanceRegKeyEntry, 0, HijriAdvanceRegKeyEntry.Length, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        str,
+                        0,
+                        HijriAdvanceRegKeyEntry,
+                        0,
+                        HijriAdvanceRegKeyEntry.Length,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                 {
                     if (str!.Length == HijriAdvanceRegKeyEntry.Length)
                     {
@@ -62,9 +71,15 @@ namespace System.Globalization
                     }
                     else
                     {
-                        if (int.TryParse(str.AsSpan(HijriAdvanceRegKeyEntry.Length), CultureInfo.InvariantCulture, out int advance) &&
-                            (advance >= MinAdvancedHijri) &&
-                            (advance <= MaxAdvancedHijri))
+                        if (
+                            int.TryParse(
+                                str.AsSpan(HijriAdvanceRegKeyEntry.Length),
+                                CultureInfo.InvariantCulture,
+                                out int advance
+                            )
+                            && (advance >= MinAdvancedHijri)
+                            && (advance <= MaxAdvancedHijri)
+                        )
                         {
                             hijriAdvance = advance;
                         }

@@ -17,9 +17,9 @@ namespace System.Xml
     {
         internal enum Flags
         {
-            NCNames = 0x1,              // Validate that each non-empty prefix and localName is a valid NCName
-            CheckLocalName = 0x2,       // Validate the local-name
-            CheckPrefixMapping = 0x4,   // Validate the prefix --> namespace mapping
+            NCNames = 0x1, // Validate that each non-empty prefix and localName is a valid NCName
+            CheckLocalName = 0x2, // Validate the local-name
+            CheckPrefixMapping = 0x4, // Validate the prefix --> namespace mapping
             All = 0x7,
             AllExceptNCNames = 0x6,
             AllExceptPrefixMapping = 0x3,
@@ -213,7 +213,8 @@ namespace System.Xml
             if (len == 0 || len != s.Length)
             {
                 // If the string is not a valid NCName, then throw or return false
-                if (throwOnError) ThrowInvalidName(s, 0, len);
+                if (throwOnError)
+                    ThrowInvalidName(s, 0, len);
                 return false;
             }
 
@@ -232,7 +233,8 @@ namespace System.Xml
         /// </summary>
         internal static int ParseQName(string s, int offset, out int colonOffset)
         {
-            int len, lenLocal;
+            int len,
+                lenLocal;
 
             // Assume no colon
             colonOffset = 0;
@@ -304,7 +306,9 @@ namespace System.Xml
         /// </summary>
         internal static void ParseNameTestThrow(string s, out string? prefix, out string? localName)
         {
-            int len, lenLocal, offset;
+            int len,
+                lenLocal,
+                offset;
 
             if (s.StartsWith('*'))
             {
@@ -375,19 +379,32 @@ namespace System.Xml
 
             Debug.Assert(offsetBadChar < s.Length);
 
-            if (XmlCharType.IsNCNameSingleChar(s[offsetBadChar]) && !XmlCharType.IsStartNCNameSingleChar(s[offsetBadChar]))
+            if (
+                XmlCharType.IsNCNameSingleChar(s[offsetBadChar])
+                && !XmlCharType.IsStartNCNameSingleChar(s[offsetBadChar])
+            )
             {
                 // The error character is a valid name character, but is not a valid start name character
-                throw new XmlException(SR.Xml_BadStartNameChar, XmlException.BuildCharExceptionArgs(s, offsetBadChar));
+                throw new XmlException(
+                    SR.Xml_BadStartNameChar,
+                    XmlException.BuildCharExceptionArgs(s, offsetBadChar)
+                );
             }
             else
             {
                 // The error character is an invalid name character
-                throw new XmlException(SR.Xml_BadNameChar, XmlException.BuildCharExceptionArgs(s, offsetBadChar));
+                throw new XmlException(
+                    SR.Xml_BadNameChar,
+                    XmlException.BuildCharExceptionArgs(s, offsetBadChar)
+                );
             }
         }
 
-        internal static Exception GetInvalidNameException(string s, int offsetStartChar, int offsetBadChar)
+        internal static Exception GetInvalidNameException(
+            string s,
+            int offsetStartChar,
+            int offsetBadChar
+        )
         {
             // If the name is empty, throw an exception
             if (offsetStartChar >= s.Length)
@@ -395,15 +412,24 @@ namespace System.Xml
 
             Debug.Assert(offsetBadChar < s.Length);
 
-            if (XmlCharType.IsNCNameSingleChar(s[offsetBadChar]) && !XmlCharType.IsStartNCNameSingleChar(s[offsetBadChar]))
+            if (
+                XmlCharType.IsNCNameSingleChar(s[offsetBadChar])
+                && !XmlCharType.IsStartNCNameSingleChar(s[offsetBadChar])
+            )
             {
                 // The error character is a valid name character, but is not a valid start name character
-                return new XmlException(SR.Xml_BadStartNameChar, XmlException.BuildCharExceptionArgs(s, offsetBadChar));
+                return new XmlException(
+                    SR.Xml_BadStartNameChar,
+                    XmlException.BuildCharExceptionArgs(s, offsetBadChar)
+                );
             }
             else
             {
                 // The error character is an invalid name character
-                return new XmlException(SR.Xml_BadNameChar, XmlException.BuildCharExceptionArgs(s, offsetBadChar));
+                return new XmlException(
+                    SR.Xml_BadNameChar,
+                    XmlException.BuildCharExceptionArgs(s, offsetBadChar)
+                );
             }
         }
 
@@ -426,7 +452,13 @@ namespace System.Xml
         /// specified by the Flags.
         /// NOTE: Namespaces should be passed using a prefix, ns pair.  "localName" is always string.Empty.
         /// </summary>
-        internal static void ValidateNameThrow(string? prefix, string localName, string? ns, XPathNodeType nodeKind, Flags flags)
+        internal static void ValidateNameThrow(
+            string? prefix,
+            string localName,
+            string? ns,
+            XPathNodeType nodeKind,
+            Flags flags
+        )
         {
             // throwOnError = true
             ValidateNameInternal(prefix, localName, ns, nodeKind, flags, true);
@@ -437,7 +469,13 @@ namespace System.Xml
         /// specified by the Flags.
         /// NOTE: Namespaces should be passed using a prefix, ns pair.  "localName" is always string.Empty.
         /// </summary>
-        internal static bool ValidateName(string? prefix, string localName, string? ns, XPathNodeType nodeKind, Flags flags)
+        internal static bool ValidateName(
+            string? prefix,
+            string localName,
+            string? ns,
+            XPathNodeType nodeKind,
+            Flags flags
+        )
         {
             // throwOnError = false
             return ValidateNameInternal(prefix, localName, ns, nodeKind, flags, false);
@@ -448,7 +486,14 @@ namespace System.Xml
         /// that are specified by the Flags.
         /// NOTE: Namespaces should be passed using a prefix, ns pair.  "localName" is always string.Empty.
         /// </summary>
-        private static bool ValidateNameInternal(string? prefix, string localName, string? ns, XPathNodeType nodeKind, Flags flags, bool throwOnError)
+        private static bool ValidateNameInternal(
+            string? prefix,
+            string localName,
+            string? ns,
+            XPathNodeType nodeKind,
+            Flags flags,
+            bool throwOnError
+        )
         {
             Debug.Assert(prefix != null && localName != null && ns != null);
 
@@ -477,7 +522,8 @@ namespace System.Xml
                         // Elements and attributes must have a non-empty local name
                         if (localName.Length == 0)
                         {
-                            if (throwOnError) throw new XmlException(SR.Xdom_Empty_LocalName, string.Empty);
+                            if (throwOnError)
+                                throw new XmlException(SR.Xdom_Empty_LocalName, string.Empty);
                             return false;
                         }
                         break;
@@ -486,16 +532,24 @@ namespace System.Xml
                         // Attribute local name cannot be "xmlns" if namespace is empty
                         if (ns.Length == 0 && localName.Equals("xmlns"))
                         {
-                            if (throwOnError) throw new XmlException(SR.XmlBadName, new string[] { nodeKind.ToString(), localName });
+                            if (throwOnError)
+                                throw new XmlException(
+                                    SR.XmlBadName,
+                                    new string[] { nodeKind.ToString(), localName }
+                                );
                             return false;
                         }
                         goto case XPathNodeType.Element;
 
                     case XPathNodeType.ProcessingInstruction:
                         // PI's local-name must be non-empty and cannot be 'xml' (case-insensitive)
-                        if (localName.Length == 0 || (localName.Length == 3 && StartsWithXml(localName)))
+                        if (
+                            localName.Length == 0
+                            || (localName.Length == 3 && StartsWithXml(localName))
+                        )
                         {
-                            if (throwOnError) throw new XmlException(SR.Xml_InvalidPIName, localName);
+                            if (throwOnError)
+                                throw new XmlException(SR.Xml_InvalidPIName, localName);
                             return false;
                         }
                         break;
@@ -504,7 +558,8 @@ namespace System.Xml
                         // All other node types must have empty local-name
                         if (localName.Length != 0)
                         {
-                            if (throwOnError) throw new XmlException(SR.XmlNoNameAllowed, nodeKind.ToString());
+                            if (throwOnError)
+                                throw new XmlException(SR.XmlNoNameAllowed, nodeKind.ToString());
                             return false;
                         }
                         break;
@@ -524,7 +579,8 @@ namespace System.Xml
                             // If namespace is empty, then prefix must be empty
                             if (prefix.Length != 0)
                             {
-                                if (throwOnError) throw new XmlException(SR.Xml_PrefixForEmptyNs, string.Empty);
+                                if (throwOnError)
+                                    throw new XmlException(SR.Xml_PrefixForEmptyNs, string.Empty);
                                 return false;
                             }
                         }
@@ -533,7 +589,11 @@ namespace System.Xml
                             // Don't allow empty attribute prefix since namespace is non-empty
                             if (prefix.Length == 0 && nodeKind == XPathNodeType.Attribute)
                             {
-                                if (throwOnError) throw new XmlException(SR.XmlBadName, new string[] { nodeKind.ToString(), localName });
+                                if (throwOnError)
+                                    throw new XmlException(
+                                        SR.XmlBadName,
+                                        new string[] { nodeKind.ToString(), localName }
+                                    );
                                 return false;
                             }
 
@@ -542,20 +602,26 @@ namespace System.Xml
                                 // xml prefix must be mapped to the xml namespace
                                 if (!ns.Equals(XmlReservedNs.NsXml))
                                 {
-                                    if (throwOnError) throw new XmlException(SR.Xml_XmlPrefix, string.Empty);
+                                    if (throwOnError)
+                                        throw new XmlException(SR.Xml_XmlPrefix, string.Empty);
                                     return false;
                                 }
                             }
                             else if (prefix.Equals("xmlns"))
                             {
                                 // Prefix may never be 'xmlns'
-                                if (throwOnError) throw new XmlException(SR.Xml_XmlnsPrefix, string.Empty);
+                                if (throwOnError)
+                                    throw new XmlException(SR.Xml_XmlnsPrefix, string.Empty);
                                 return false;
                             }
                             else if (IsReservedNamespace(ns))
                             {
                                 // Don't allow non-reserved prefixes to map to xml or xmlns namespaces
-                                if (throwOnError) throw new XmlException(SR.Xml_NamespaceDeclXmlXmlns, string.Empty);
+                                if (throwOnError)
+                                    throw new XmlException(
+                                        SR.Xml_NamespaceDeclXmlXmlns,
+                                        string.Empty
+                                    );
                                 return false;
                             }
                         }
@@ -565,7 +631,11 @@ namespace System.Xml
                         // PI's prefix and namespace must be empty
                         if (prefix.Length != 0 || ns.Length != 0)
                         {
-                            if (throwOnError) throw new XmlException(SR.Xml_InvalidPIName, CreateName(prefix, localName));
+                            if (throwOnError)
+                                throw new XmlException(
+                                    SR.Xml_InvalidPIName,
+                                    CreateName(prefix, localName)
+                                );
                             return false;
                         }
                         break;
@@ -574,7 +644,8 @@ namespace System.Xml
                         // All other node types must have empty prefix and namespace
                         if (prefix.Length != 0 || ns.Length != 0)
                         {
-                            if (throwOnError) throw new XmlException(SR.XmlNoNameAllowed, nodeKind.ToString());
+                            if (throwOnError)
+                                throw new XmlException(SR.XmlNoNameAllowed, nodeKind.ToString());
                             return false;
                         }
                         break;
@@ -606,7 +677,10 @@ namespace System.Xml
             }
             else if (0 == colonPos || (name.Length - 1) == colonPos)
             {
-                throw new ArgumentException(SR.Format(SR.Xml_BadNameChar, XmlException.BuildCharExceptionArgs(':', '\0')), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.Xml_BadNameChar, XmlException.BuildCharExceptionArgs(':', '\0')),
+                    nameof(name)
+                );
             }
             else
             {

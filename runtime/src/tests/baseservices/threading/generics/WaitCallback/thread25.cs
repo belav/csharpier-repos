@@ -4,82 +4,81 @@ using System;
 using System.Threading;
 using Xunit;
 
-class Gen<T> 
+class Gen<T>
 {
-	public static void Target(object p)
-	{		
-			ManualResetEvent evt = (ManualResetEvent) p;
-			Interlocked.Increment(ref Test_thread25.Xcounter);
-			evt.Set();
-	}
-	public static void ThreadPoolTest()
-	{
-		ManualResetEvent[] evts = new ManualResetEvent[Test_thread25.nThreads];
-		WaitHandle[] hdls = new WaitHandle[Test_thread25.nThreads];
+    public static void Target(object p)
+    {
+        ManualResetEvent evt = (ManualResetEvent)p;
+        Interlocked.Increment(ref Test_thread25.Xcounter);
+        evt.Set();
+    }
 
-		for (int i=0; i<Test_thread25.nThreads; i++)
-		{
-			evts[i] = new ManualResetEvent(false);
-			hdls[i] = (WaitHandle) evts[i];
-		}
+    public static void ThreadPoolTest()
+    {
+        ManualResetEvent[] evts = new ManualResetEvent[Test_thread25.nThreads];
+        WaitHandle[] hdls = new WaitHandle[Test_thread25.nThreads];
 
-		Gen<T> obj = new Gen<T>();
+        for (int i = 0; i < Test_thread25.nThreads; i++)
+        {
+            evts[i] = new ManualResetEvent(false);
+            hdls[i] = (WaitHandle)evts[i];
+        }
 
-		for (int i = 0; i < Test_thread25.nThreads; i++)
-		{	
-			WaitCallback cb = new WaitCallback(Gen<T>.Target);
-			ThreadPool.QueueUserWorkItem(cb,evts[i]);
-		}
+        Gen<T> obj = new Gen<T>();
 
-		WaitHandle.WaitAll(hdls);
-		Test_thread25.Eval(Test_thread25.Xcounter==Test_thread25.nThreads);
-		Test_thread25.Xcounter = 0;
-	}
+        for (int i = 0; i < Test_thread25.nThreads; i++)
+        {
+            WaitCallback cb = new WaitCallback(Gen<T>.Target);
+            ThreadPool.QueueUserWorkItem(cb, evts[i]);
+        }
+
+        WaitHandle.WaitAll(hdls);
+        Test_thread25.Eval(Test_thread25.Xcounter == Test_thread25.nThreads);
+        Test_thread25.Xcounter = 0;
+    }
 }
 
 public class Test_thread25
 {
-	public static int nThreads = 50;
-	public static int counter = 0;
-	public static int Xcounter = 0;
-	public static bool result = true;
-	public static void Eval(bool exp)
-	{
-		counter++;
-		if (!exp)
-		{
-			result = exp;
-			Console.WriteLine("Test Failed at location: " + counter);
-		}
-	
-	}
-	
-	[Fact]
-	public static int TestEntryPoint()
-	{
-		Gen<int>.ThreadPoolTest();
-		Gen<double>.ThreadPoolTest();
-		Gen<string>.ThreadPoolTest();
-		Gen<object>.ThreadPoolTest(); 
-		Gen<Guid>.ThreadPoolTest(); 
+    public static int nThreads = 50;
+    public static int counter = 0;
+    public static int Xcounter = 0;
+    public static bool result = true;
 
-		Gen<int[]>.ThreadPoolTest(); 
-		Gen<double[,]>.ThreadPoolTest();
-		Gen<string[][][]>.ThreadPoolTest(); 
-		Gen<object[,,,]>.ThreadPoolTest();
-		Gen<Guid[][,,,][]>.ThreadPoolTest();
+    public static void Eval(bool exp)
+    {
+        counter++;
+        if (!exp)
+        {
+            result = exp;
+            Console.WriteLine("Test Failed at location: " + counter);
+        }
+    }
 
-		if (result)
-		{
-			Console.WriteLine("Test Passed");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("Test Failed");
-			return 1;
-		}
-	}
-}		
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        Gen<int>.ThreadPoolTest();
+        Gen<double>.ThreadPoolTest();
+        Gen<string>.ThreadPoolTest();
+        Gen<object>.ThreadPoolTest();
+        Gen<Guid>.ThreadPoolTest();
 
+        Gen<int[]>.ThreadPoolTest();
+        Gen<double[,]>.ThreadPoolTest();
+        Gen<string[][][]>.ThreadPoolTest();
+        Gen<object[,,,]>.ThreadPoolTest();
+        Gen<Guid[][,,,][]>.ThreadPoolTest();
 
+        if (result)
+        {
+            Console.WriteLine("Test Passed");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("Test Failed");
+            return 1;
+        }
+    }
+}

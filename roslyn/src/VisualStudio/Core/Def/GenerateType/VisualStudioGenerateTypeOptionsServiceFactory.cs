@@ -23,12 +23,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioGenerateTypeOptionsServiceFactory()
-        {
-        }
+        public VisualStudioGenerateTypeOptionsServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new VisualStudioGenerateTypeOptionsService();
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new VisualStudioGenerateTypeOptionsService();
 
         private class VisualStudioGenerateTypeOptionsService : IGenerateTypeOptionsService
         {
@@ -42,7 +40,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                 Document document,
                 INotificationService notificationService,
                 IProjectManagementService projectManagementService,
-                ISyntaxFactsService syntaxFactsService)
+                ISyntaxFactsService syntaxFactsService
+            )
             {
                 var viewModel = new GenerateTypeDialogViewModel(
                     document,
@@ -54,7 +53,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                     document.Project.Language == LanguageNames.CSharp ? ".cs" : ".vb",
                     _isNewFile,
                     _accessSelectString,
-                    _typeKindSelectString);
+                    _typeKindSelectString
+                );
 
                 var dialog = new GenerateTypeDialog(viewModel);
                 var result = dialog.ShowModal();
@@ -66,7 +66,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                     _accessSelectString = viewModel.SelectedAccessibilityString;
                     _typeKindSelectString = viewModel.SelectedTypeKindString;
 
-                    var defaultNamespace = projectManagementService.GetDefaultNamespace(viewModel.SelectedProject, viewModel.SelectedProject?.Solution.Workspace);
+                    var defaultNamespace = projectManagementService.GetDefaultNamespace(
+                        viewModel.SelectedProject,
+                        viewModel.SelectedProject?.Solution.Workspace
+                    );
 
                     return new GenerateTypeOptionsResult(
                         accessibility: viewModel.SelectedAccessibility,
@@ -79,7 +82,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.GenerateType
                         fullFilePath: viewModel.FullFilePath,
                         existingDocument: viewModel.SelectedDocument,
                         defaultNamespace: defaultNamespace,
-                        areFoldersValidIdentifiers: viewModel.AreFoldersValidIdentifiers);
+                        areFoldersValidIdentifiers: viewModel.AreFoldersValidIdentifiers
+                    );
                 }
                 else
                 {

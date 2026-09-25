@@ -31,20 +31,21 @@ namespace System.Text.Json.Serialization.Tests
                     return false;
 
                 Type arg = typeToConvert.GetGenericArguments()[0];
-                return arg == typeof(int) ||
-                    arg == typeof(long);
+                return arg == typeof(int) || arg == typeof(long);
             }
 
             public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
             {
                 Type elementType = type.GetGenericArguments()[0];
 
-                JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(ListConverter<>).MakeGenericType(elementType),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    new object[] { _offset },
-                    culture: null);
+                JsonConverter converter = (JsonConverter)
+                    Activator.CreateInstance(
+                        typeof(ListConverter<>).MakeGenericType(elementType),
+                        BindingFlags.Instance | BindingFlags.Public,
+                        binder: null,
+                        new object[] { _offset },
+                        culture: null
+                    );
 
                 return converter;
             }
@@ -54,12 +55,17 @@ namespace System.Text.Json.Serialization.Tests
         private class ListConverter<T> : JsonConverter<List<T>>
         {
             private int _offset;
+
             public ListConverter(int offset)
             {
                 _offset = offset;
             }
 
-            public override List<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override List<T> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
@@ -97,7 +103,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, List<T> value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                List<T> value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartArray();
 
@@ -177,7 +187,11 @@ namespace System.Text.Json.Serialization.Tests
                 return typeof(IList).IsAssignableFrom(typeToConvert);
             }
 
-            public override IList Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override IList Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartArray)
                 {
@@ -200,7 +214,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, IList value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                IList value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartArray();
 
@@ -261,12 +279,14 @@ namespace System.Text.Json.Serialization.Tests
         public static void CustomListWithJsonConverterAttribute()
         {
             const string Json =
-                @"{""ItemsList"":[""hello"",1,true]," +
-                @"""ItemsArray"":[""hello"",1,true]," +
-                @"""ItemsDictionary"":{""hello"":""hello"",""1"":1,""true"":true}}";
+                @"{""ItemsList"":[""hello"",1,true],"
+                + @"""ItemsArray"":[""hello"",1,true],"
+                + @"""ItemsDictionary"":{""hello"":""hello"",""1"":1,""true"":true}}";
 
             // Baseline failure (no JsonConverterAttributes).
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<MyModelWithNoConverterAttributes>(Json));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<MyModelWithNoConverterAttributes>(Json)
+            );
 
             // Success case.
             MyModelWithConverterAttributes obj;
@@ -291,11 +311,12 @@ namespace System.Text.Json.Serialization.Tests
 
             string jsonRoundTripped = JsonSerializer.Serialize<MyModelWithConverterAttributes>(obj);
             Assert.Equal(
-                @"{""ItemsList"":[""hello"",""1"",""True""]," +
-                @"""ItemsArray"":[""hello"",""1"",""True""]," +
-                @"""ItemsDictionary"":{""hello"":""hello"",""1"":""1"",""true"":""True""}}",
-                jsonRoundTripped);
- 
+                @"{""ItemsList"":[""hello"",""1"",""True""],"
+                    + @"""ItemsArray"":[""hello"",""1"",""True""],"
+                    + @"""ItemsDictionary"":{""hello"":""hello"",""1"":""1"",""true"":""True""}}",
+                jsonRoundTripped
+            );
+
             obj = JsonSerializer.Deserialize<MyModelWithConverterAttributes>(jsonRoundTripped);
             Verify();
         }
@@ -305,7 +326,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         class ListToStringElementsConverter : JsonConverter<List<string>>
         {
-            public override List<string> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override List<string> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 using (var doc = JsonDocument.ParseValue(ref reader))
                 {
@@ -313,7 +338,11 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }
 
-            public override void Write(Utf8JsonWriter writer, List<string> value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                List<string> value,
+                JsonSerializerOptions options
+            )
             {
                 JsonSerializer.Serialize(writer, value, options);
             }
@@ -324,7 +353,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         class ListToArrayElementsConverter : JsonConverter<string[]>
         {
-            public override string[] Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override string[] Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 using (var doc = JsonDocument.ParseValue(ref reader))
                 {
@@ -332,7 +365,11 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }
 
-            public override void Write(Utf8JsonWriter writer, string[] value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                string[] value,
+                JsonSerializerOptions options
+            )
             {
                 JsonSerializer.Serialize(writer, value, options);
             }
@@ -343,7 +380,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         class ListToDictionaryElementsConverter : JsonConverter<Dictionary<string, string>>
         {
-            public override Dictionary<string, string> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Dictionary<string, string> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 var dictionary = new Dictionary<string, string>();
 
@@ -358,7 +399,11 @@ namespace System.Text.Json.Serialization.Tests
                 return dictionary;
             }
 
-            public override void Write(Utf8JsonWriter writer, Dictionary<string, string> value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Dictionary<string, string> value,
+                JsonSerializerOptions options
+            )
             {
                 JsonSerializer.Serialize(writer, value, options);
             }

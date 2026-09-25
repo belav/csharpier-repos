@@ -26,7 +26,8 @@ namespace System.Numerics.Tests
 
         private static void RunPositiveTests(Random random)
         {
-            BigInteger bigInteger1, bigInteger2;
+            BigInteger bigInteger1,
+                bigInteger2;
             int expectedResult;
             byte[] byteArray;
             bool isNegative;
@@ -56,7 +57,6 @@ namespace System.Numerics.Tests
             // BigInteger.MinusOne, One Less
             VerifyComparison(BigInteger.MinusOne, BigInteger.MinusOne - 1, 1);
 
-
             // BigInteger.Zero, BigInteger.Zero
             VerifyComparison(BigInteger.Zero, BigInteger.Zero, 0);
 
@@ -71,7 +71,6 @@ namespace System.Numerics.Tests
 
             // BigInteger.Zero, Small Number
             VerifyComparison(BigInteger.Zero, (BigInteger)int.MaxValue - 1, -1);
-
 
             // BigInteger.One, BigInteger.One
             VerifyComparison(BigInteger.One, BigInteger.One, 0);
@@ -104,13 +103,20 @@ namespace System.Numerics.Tests
             // BigInteger.One, 1
             VerifyComparison(BigInteger.One, (int)(1), 0);
 
-
             //1 Inputs Around the boundary of UInt32
             // -1 * UInt32.MaxValue, -1 * UInt32.MaxValue
-            VerifyComparison(-1L * (BigInteger)uint.MaxValue - 1, -1L * (BigInteger)uint.MaxValue - 1, 0);
+            VerifyComparison(
+                -1L * (BigInteger)uint.MaxValue - 1,
+                -1L * (BigInteger)uint.MaxValue - 1,
+                0
+            );
 
             // -1 * UInt32.MaxValue, -1 * UInt32.MaxValue -1
-            VerifyComparison(-1L * (BigInteger)uint.MaxValue, (-1L * (BigInteger)uint.MaxValue) - 1L, 1);
+            VerifyComparison(
+                -1L * (BigInteger)uint.MaxValue,
+                (-1L * (BigInteger)uint.MaxValue) - 1L,
+                1
+            );
 
             // UInt32.MaxValue, -1 * UInt32.MaxValue
             VerifyComparison((BigInteger)uint.MaxValue, -1L * (BigInteger)uint.MaxValue, 1);
@@ -129,7 +135,11 @@ namespace System.Numerics.Tests
 
             //Other cases
             // -1 * Large Bigint, -1 * Large BigInt
-            VerifyComparison(-1L * ((BigInteger)int.MaxValue + 1), -1L * ((BigInteger)int.MaxValue + 1), 0);
+            VerifyComparison(
+                -1L * ((BigInteger)int.MaxValue + 1),
+                -1L * ((BigInteger)int.MaxValue + 1),
+                0
+            );
 
             // Large Bigint, Large Negative BigInt
             VerifyComparison((BigInteger)int.MaxValue + 1, -1L * ((BigInteger)int.MaxValue + 1), 1);
@@ -141,7 +151,11 @@ namespace System.Numerics.Tests
             VerifyComparison((BigInteger)int.MaxValue + 1, ((BigInteger)int.MaxValue) + 2, -1);
 
             // -1 * Small Bigint, -1 * Small BigInt
-            VerifyComparison(-1L * ((BigInteger)int.MaxValue - 1), -1L * ((BigInteger)int.MaxValue - 1), 0);
+            VerifyComparison(
+                -1L * ((BigInteger)int.MaxValue - 1),
+                -1L * ((BigInteger)int.MaxValue - 1),
+                0
+            );
 
             // Small Bigint, Small Negative BigInt
             VerifyComparison((BigInteger)int.MaxValue - 1, -1L * ((BigInteger)int.MaxValue - 1), 1);
@@ -219,7 +233,6 @@ namespace System.Numerics.Tests
             // One Larger (BigInteger), Int64.MaxValue
             VerifyComparison((BigInteger)long.MaxValue + 1, long.MaxValue, 1);
 
-
             //1 Random Inputs
             // Random BigInteger only differs by sign
 
@@ -228,8 +241,7 @@ namespace System.Numerics.Tests
                 do
                 {
                     byteArray = GetRandomByteArray(random);
-                }
-                while (MyBigIntImp.IsZero(byteArray));
+                } while (MyBigIntImp.IsZero(byteArray));
 
                 BigInteger b2 = new BigInteger(byteArray);
                 if (b2 > (BigInteger)0)
@@ -245,7 +257,11 @@ namespace System.Numerics.Tests
             // Random BigInteger, Random BigInteger
             for (int i = 0; i < NumberOfRandomIterations; ++i)
             {
-                expectedResult = GetRandomInputForComparison(random, out bigInteger1, out bigInteger2);
+                expectedResult = GetRandomInputForComparison(
+                    random,
+                    out bigInteger1,
+                    out bigInteger2
+                );
                 VerifyComparison(bigInteger1, bigInteger2, expectedResult);
             }
 
@@ -254,15 +270,33 @@ namespace System.Numerics.Tests
             {
                 byteArray = GetRandomByteArray(random);
                 isNegative = 0 == random.Next(0, 2);
-                VerifyComparison(new BigInteger(byteArray), isNegative, new BigInteger(byteArray), isNegative, 0);
+                VerifyComparison(
+                    new BigInteger(byteArray),
+                    isNegative,
+                    new BigInteger(byteArray),
+                    isNegative,
+                    0
+                );
             }
 
             //1 Identical values constructed multiple ways
             // BigInteger.Zero, BigInteger constructed with a byte[] isNegative=true
-            VerifyComparison(BigInteger.Zero, false, new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 }), true, 0);
+            VerifyComparison(
+                BigInteger.Zero,
+                false,
+                new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 }),
+                true,
+                0
+            );
 
             // BigInteger.Zero, BigInteger constructed with a byte[] isNegative=false
-            VerifyComparison(BigInteger.Zero, false, new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 }), false, 0);
+            VerifyComparison(
+                BigInteger.Zero,
+                false,
+                new BigInteger(new byte[] { 0, 0, 0, 0, 0, 0, 0, 0 }),
+                false,
+                0
+            );
 
             // BigInteger.Zero, BigInteger constructed from an Int64
             VerifyComparison(BigInteger.Zero, 0L, 0);
@@ -276,12 +310,24 @@ namespace System.Numerics.Tests
             // BigInteger.Zero, BigInteger constructed with Addition
             byteArray = GetRandomByteArray(random);
             isNegative = 0 == random.Next(0, 2);
-            VerifyComparison(BigInteger.Zero, false, new BigInteger(byteArray) + (-1 * new BigInteger(byteArray)), isNegative, 0);
+            VerifyComparison(
+                BigInteger.Zero,
+                false,
+                new BigInteger(byteArray) + (-1 * new BigInteger(byteArray)),
+                isNegative,
+                0
+            );
 
             // BigInteger.Zero, BigInteger constructed with Subtraction
             byteArray = GetRandomByteArray(random);
             isNegative = 0 == random.Next(0, 2);
-            VerifyComparison(BigInteger.Zero, false, new BigInteger(byteArray) - new BigInteger(byteArray), isNegative, 0);
+            VerifyComparison(
+                BigInteger.Zero,
+                false,
+                new BigInteger(byteArray) - new BigInteger(byteArray),
+                isNegative,
+                0
+            );
 
             // BigInteger.Zero, BigInteger constructed with Multiplication
             byteArray = GetRandomByteArray(random);
@@ -292,14 +338,19 @@ namespace System.Numerics.Tests
             do
             {
                 byteArray = GetRandomByteArray(random);
-            }
-            while (MyBigIntImp.IsZero(byteArray));
+            } while (MyBigIntImp.IsZero(byteArray));
 
             isNegative = 0 == random.Next(0, 2);
             VerifyComparison(BigInteger.Zero, false, 0 / new BigInteger(byteArray), isNegative, 0);
 
             // BigInteger.One, BigInteger constructed with a byte[]
-            VerifyComparison(BigInteger.One, false, new BigInteger(new byte[] { 1, 0, 0, 0, 0, 0, 0, 0 }), false, 0);
+            VerifyComparison(
+                BigInteger.One,
+                false,
+                new BigInteger(new byte[] { 1, 0, 0, 0, 0, 0, 0, 0 }),
+                false,
+                0
+            );
 
             // BigInteger.One, BigInteger constructed from an Int64
             VerifyComparison(BigInteger.One, 1L, 0);
@@ -313,7 +364,13 @@ namespace System.Numerics.Tests
             // BigInteger.One, BigInteger constructed with Addition
             byteArray = GetRandomByteArray(random);
             isNegative = 0 == random.Next(0, 2);
-            VerifyComparison(BigInteger.One, false, (((BigInteger)(-1)) * new BigInteger(byteArray)) + (new BigInteger(byteArray)) + 1, false, 0);
+            VerifyComparison(
+                BigInteger.One,
+                false,
+                (((BigInteger)(-1)) * new BigInteger(byteArray)) + (new BigInteger(byteArray)) + 1,
+                false,
+                0
+            );
 
             // BigInteger.One, BigInteger constructed with Subtraction
             byteArray = GetRandomByteArray(random);
@@ -339,8 +396,7 @@ namespace System.Numerics.Tests
             do
             {
                 byteArray = GetRandomByteArray(random);
-            }
-            while (MyBigIntImp.IsZero(byteArray));
+            } while (MyBigIntImp.IsZero(byteArray));
 
             BigInteger b1 = new BigInteger(byteArray);
             VerifyComparison(BigInteger.One, false, b1 / b1, false, 0);
@@ -482,7 +538,6 @@ namespace System.Numerics.Tests
                 Assert.Equal(x.ToString(), ((BigInteger)y).ToString());
             }
 
-
             Assert.Equal(x.GetHashCode(), x.GetHashCode());
             Assert.Equal(((BigInteger)y).GetHashCode(), ((BigInteger)y).GetHashCode());
 
@@ -580,7 +635,13 @@ namespace System.Numerics.Tests
             Assert.Equal(expectedLessThan || expectedEquals, y >= x);
         }
 
-        private static void VerifyComparison(BigInteger x, bool IsXNegative, BigInteger y, bool IsYNegative, int expectedResult)
+        private static void VerifyComparison(
+            BigInteger x,
+            bool IsXNegative,
+            BigInteger y,
+            bool IsYNegative,
+            int expectedResult
+        )
         {
             bool expectedEquals = 0 == expectedResult;
             bool expectedLessThan = expectedResult < 0;
@@ -636,7 +697,7 @@ namespace System.Numerics.Tests
             Assert.Equal(expectedGreaterThan || expectedEquals, x >= y);
             Assert.Equal(expectedLessThan || expectedEquals, y >= x);
         }
-        
+
         private static void VerifyCompareResult(int expected, int actual)
         {
             if (0 == expected)
@@ -653,9 +714,14 @@ namespace System.Numerics.Tests
             }
         }
 
-        private static int GetRandomInputForComparison(Random random, out BigInteger bigInteger1, out BigInteger bigInteger2)
+        private static int GetRandomInputForComparison(
+            Random random,
+            out BigInteger bigInteger1,
+            out BigInteger bigInteger2
+        )
         {
-            byte[] byteArray1, byteArray2;
+            byte[] byteArray1,
+                byteArray2;
             bool sameSize = 0 == random.Next(0, 2);
 
             if (sameSize)
@@ -696,11 +762,19 @@ namespace System.Numerics.Tests
                     }
                 }
             }
-            else if ((bigInteger1 < 0 && bigInteger2 > 0) || (bigInteger1 == 0 && bigInteger2 > 0) || (bigInteger1 < 0 && bigInteger2 == 0))
+            else if (
+                (bigInteger1 < 0 && bigInteger2 > 0)
+                || (bigInteger1 == 0 && bigInteger2 > 0)
+                || (bigInteger1 < 0 && bigInteger2 == 0)
+            )
             {
                 return -1;
             }
-            else if ((bigInteger1 > 0 && bigInteger2 < 0) || (bigInteger1 == 0 && bigInteger2 < 0) || (bigInteger1 > 0 && bigInteger2 == 0))
+            else if (
+                (bigInteger1 > 0 && bigInteger2 < 0)
+                || (bigInteger1 == 0 && bigInteger2 < 0)
+                || (bigInteger1 > 0 && bigInteger2 == 0)
+            )
             {
                 return 1;
             }

@@ -8,7 +8,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeBrotliEncoderHandle : SafeHandle
     {
-        public SafeBrotliEncoderHandle() : base(IntPtr.Zero, true) { }
+        public SafeBrotliEncoderHandle()
+            : base(IntPtr.Zero, true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -21,7 +22,8 @@ namespace Microsoft.Win32.SafeHandles
 
     internal sealed class SafeBrotliDecoderHandle : SafeHandle
     {
-        public SafeBrotliDecoderHandle() : base(IntPtr.Zero, true) { }
+        public SafeBrotliDecoderHandle()
+            : base(IntPtr.Zero, true) { }
 
         protected override bool ReleaseHandle()
         {

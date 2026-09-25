@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,39 +29,37 @@
 
 using System;
 using Cairo;
-	
+
 public class CairoTest
-{	
-	static readonly double  M_PI = 3.14159265358979323846;
-	
-	static void draw (Cairo.Context gr, int width, int height)
-	{
-		gr.Scale (width, height);
-		gr.LineWidth = 0.04;
+{
+    static readonly double M_PI = 3.14159265358979323846;
 
-		gr.Arc (0.5, 0.5, 0.3, 0, 2 * M_PI);
-		gr.Clip ();
+    static void draw(Cairo.Context gr, int width, int height)
+    {
+        gr.Scale(width, height);
+        gr.LineWidth = 0.04;
 
-		gr.NewPath ();
-		gr.Rectangle (new PointD (0, 0), 1, 1);
-		gr.Fill ();
-		gr.Color = new Color (0, 1, 0, 1);
-		gr.MoveTo ( new PointD (0, 0) );
-	        gr.LineTo ( new PointD (1, 1) );
-		gr.MoveTo ( new PointD (1, 0) );
-		gr.LineTo ( new PointD (0, 1) );
-		gr.Stroke ();
-	}
+        gr.Arc(0.5, 0.5, 0.3, 0, 2 * M_PI);
+        gr.Clip();
 
-	
-	static void Main ()
-	{		
-		Surface s = new ImageSurface (Format.ARGB32, 500, 500);
-		Cairo.Context g = new Cairo.Context (s);
+        gr.NewPath();
+        gr.Rectangle(new PointD(0, 0), 1, 1);
+        gr.Fill();
+        gr.Color = new Color(0, 1, 0, 1);
+        gr.MoveTo(new PointD(0, 0));
+        gr.LineTo(new PointD(1, 1));
+        gr.MoveTo(new PointD(1, 0));
+        gr.LineTo(new PointD(0, 1));
+        gr.Stroke();
+    }
 
-		draw (g, 500, 500);
+    static void Main()
+    {
+        Surface s = new ImageSurface(Format.ARGB32, 500, 500);
+        Cairo.Context g = new Cairo.Context(s);
 
-		s.WriteToPng ("clip.png");
-	}
+        draw(g, 500, 500);
+
+        s.WriteToPng("clip.png");
+    }
 }
-

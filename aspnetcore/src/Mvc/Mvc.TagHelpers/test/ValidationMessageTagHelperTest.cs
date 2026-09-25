@@ -77,9 +77,8 @@ public class ValidationMessageTagHelperTest
         Assert.Equal("field-validation-valid", attribute.Value);
         attribute = Assert.Single(output.Attributes, attr => attr.Name.Equals("data-valmsg-for"));
         Assert.Equal("Name", attribute.Value);
-        attribute = Assert.Single(
-            output.Attributes,
-            attr => attr.Name.Equals("data-valmsg-replace")
+        attribute = Assert.Single(output.Attributes, attr =>
+            attr.Name.Equals("data-valmsg-replace")
         );
         Assert.Equal("true", attribute.Value);
         Assert.Equal(expectedPreContent, output.PreContent.GetContent());
@@ -120,10 +119,8 @@ public class ValidationMessageTagHelperTest
             "test"
         );
 
-        var output = new TagHelperOutput(
-            expectedTagName,
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        var output = new TagHelperOutput(expectedTagName, new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
         // Act & Assert

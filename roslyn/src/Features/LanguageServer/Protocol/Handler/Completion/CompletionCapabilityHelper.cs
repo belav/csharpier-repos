@@ -37,17 +37,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             _completionSetting = clientCapabilities.TextDocument?.Completion;
 
             SupportSnippets = _completionSetting?.CompletionItem?.SnippetSupport ?? false;
-            SupportDefaultEditRange = _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(EditRangePropertyName) == true;
-            SupportsMarkdownDocumentation = _completionSetting?.CompletionItem?.DocumentationFormat?.Contains(MarkupKind.Markdown) == true;
-            SupportCompletionListData = _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(DataPropertyName) == true;
-            SupportDefaultCommitCharacters = _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(CommitCharactersPropertyName) == true;
-            SupportedItemKinds = _completionSetting?.CompletionItemKind?.ValueSet?.ToSet() ?? SpecializedCollections.EmptySet<CompletionItemKind>();
+            SupportDefaultEditRange =
+                _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(
+                    EditRangePropertyName
+                ) == true;
+            SupportsMarkdownDocumentation =
+                _completionSetting?.CompletionItem?.DocumentationFormat?.Contains(
+                    MarkupKind.Markdown
+                ) == true;
+            SupportCompletionListData =
+                _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(DataPropertyName)
+                == true;
+            SupportDefaultCommitCharacters =
+                _completionSetting?.CompletionListSetting?.ItemDefaults?.Contains(
+                    CommitCharactersPropertyName
+                ) == true;
+            SupportedItemKinds =
+                _completionSetting?.CompletionItemKind?.ValueSet?.ToSet()
+                ?? SpecializedCollections.EmptySet<CompletionItemKind>();
 
             // internal VS LSP
             if (clientCapabilities.HasVisualStudioLspCapability())
             {
                 SupportVSInternalClientCapabilities = true;
-                _vsCompletionSetting = ((VSInternalClientCapabilities)clientCapabilities).TextDocument?.Completion as VSInternalCompletionSetting;
+                _vsCompletionSetting =
+                    ((VSInternalClientCapabilities)clientCapabilities).TextDocument?.Completion
+                    as VSInternalCompletionSetting;
             }
             else
             {
@@ -55,8 +70,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
                 _vsCompletionSetting = null;
             }
 
-            SupportVSInternalCompletionListData = SupportVSInternalClientCapabilities && _vsCompletionSetting?.CompletionList?.Data == true;
-            SupportVSInternalDefaultCommitCharacters = SupportVSInternalClientCapabilities && _vsCompletionSetting?.CompletionList?.CommitCharacters == true;
+            SupportVSInternalCompletionListData =
+                SupportVSInternalClientCapabilities
+                && _vsCompletionSetting?.CompletionList?.Data == true;
+            SupportVSInternalDefaultCommitCharacters =
+                SupportVSInternalClientCapabilities
+                && _vsCompletionSetting?.CompletionList?.CommitCharacters == true;
         }
     }
 }

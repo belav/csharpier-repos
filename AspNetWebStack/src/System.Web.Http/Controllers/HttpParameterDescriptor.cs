@@ -12,16 +12,15 @@ namespace System.Web.Http.Controllers
 {
     public abstract class HttpParameterDescriptor
     {
-        private readonly ConcurrentDictionary<object, object> _properties = new ConcurrentDictionary<object, object>();
+        private readonly ConcurrentDictionary<object, object> _properties =
+            new ConcurrentDictionary<object, object>();
 
         private ParameterBindingAttribute _parameterBindingAttribute;
         private bool _searchedModelBinderAttribute;
         private HttpConfiguration _configuration;
         private HttpActionDescriptor _actionDescriptor;
 
-        protected HttpParameterDescriptor()
-        {
-        }
+        protected HttpParameterDescriptor() { }
 
         protected HttpParameterDescriptor(HttpActionDescriptor actionDescriptor)
         {
@@ -83,9 +82,7 @@ namespace System.Web.Http.Controllers
             {
                 ParameterBindingAttribute attribute = ParameterBinderAttribute;
                 ModelBinderAttribute modelAttribute = attribute as ModelBinderAttribute;
-                return modelAttribute != null
-                           ? modelAttribute.Name
-                           : null;
+                return modelAttribute != null ? modelAttribute.Name : null;
             }
         }
 
@@ -119,11 +116,11 @@ namespace System.Web.Http.Controllers
 
                 return _parameterBindingAttribute;
             }
-
             set { _parameterBindingAttribute = value; }
         }
 
-        public virtual Collection<T> GetCustomAttributes<T>() where T : class
+        public virtual Collection<T> GetCustomAttributes<T>()
+            where T : class
         {
             return new Collection<T>();
         }
@@ -132,10 +129,14 @@ namespace System.Web.Http.Controllers
         {
             // Can be on parameter itself or on the parameter's type.  Nearest wins.
             return ChooseAttribute(GetCustomAttributes<ParameterBindingAttribute>())
-                ?? ChooseAttribute(ParameterType.GetCustomAttributes<ParameterBindingAttribute>(false));
+                ?? ChooseAttribute(
+                    ParameterType.GetCustomAttributes<ParameterBindingAttribute>(false)
+                );
         }
 
-        private static ParameterBindingAttribute ChooseAttribute(IList<ParameterBindingAttribute> list)
+        private static ParameterBindingAttribute ChooseAttribute(
+            IList<ParameterBindingAttribute> list
+        )
         {
             if (list.Count == 0)
             {
@@ -149,12 +150,15 @@ namespace System.Web.Http.Controllers
             return list[0];
         }
 
-        // Helper class to return an error binding if an parameter has an invalid attribute combination. 
+        // Helper class to return an error binding if an parameter has an invalid attribute combination.
         private sealed class AmbiguousParameterBindingAttribute : ParameterBindingAttribute
         {
             public override HttpParameterBinding GetBinding(HttpParameterDescriptor parameter)
             {
-                string message = Error.Format(SRResources.ParameterBindingConflictingAttributes, parameter.ParameterName);
+                string message = Error.Format(
+                    SRResources.ParameterBindingConflictingAttributes,
+                    parameter.ParameterName
+                );
                 return parameter.BindAsError(message);
             }
         }

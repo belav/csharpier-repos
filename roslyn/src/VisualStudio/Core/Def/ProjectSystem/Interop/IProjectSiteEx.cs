@@ -17,7 +17,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.I
         void StartBatch();
         void EndBatch();
 
-        void AddFileEx([MarshalAs(UnmanagedType.LPWStr)] string filePath, [MarshalAs(UnmanagedType.LPWStr)] string linkMetadata);
+        void AddFileEx(
+            [MarshalAs(UnmanagedType.LPWStr)] string filePath,
+            [MarshalAs(UnmanagedType.LPWStr)] string linkMetadata
+        );
 
         /// <summary>
         /// Allows the project system to pass along property values not covered by the
@@ -25,6 +28,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.I
         /// See <see cref="LanguageServices.ProjectSystem.IWorkspaceProjectContext.SetProperty(string, string)"/>
         /// for the corresponding method for CPS-based projects.
         /// </summary>
-        void SetProperty([MarshalAs(UnmanagedType.LPWStr)] string property, [MarshalAs(UnmanagedType.LPWStr)] string value);
+        void SetProperty(
+            [MarshalAs(UnmanagedType.LPWStr)] string property,
+            [MarshalAs(UnmanagedType.LPWStr)] string value
+        );
     }
 }

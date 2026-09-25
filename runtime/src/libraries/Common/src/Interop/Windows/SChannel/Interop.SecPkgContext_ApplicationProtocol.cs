@@ -10,14 +10,14 @@ internal static partial class Interop
     {
         None = 0,
         Success,
-        SelectedClientOnly
+        SelectedClientOnly,
     }
 
     internal enum ApplicationProtocolNegotiationExt
     {
         None = 0,
         NPN,
-        ALPN
+        ALPN,
     }
 
     [StructLayout(LayoutKind.Sequential)]

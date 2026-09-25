@@ -8,9 +8,11 @@ namespace System.Collections.Frozen
 {
     /// <summary>Provides a frozen set optimized for value types using the default comparer.</summary>
     /// <typeparam name="T">The type of values in the set.</typeparam>
-    internal sealed class ValueTypeDefaultComparerFrozenSet<T> : ItemsFrozenSet<T, ValueTypeDefaultComparerFrozenSet<T>.GSW>
+    internal sealed class ValueTypeDefaultComparerFrozenSet<T>
+        : ItemsFrozenSet<T, ValueTypeDefaultComparerFrozenSet<T>.GSW>
     {
-        internal ValueTypeDefaultComparerFrozenSet(HashSet<T> source) : base(source, Constants.KeysAreHashCodes<T>())
+        internal ValueTypeDefaultComparerFrozenSet(HashSet<T> source)
+            : base(source, Constants.KeysAreHashCodes<T>())
         {
             Debug.Assert(typeof(T).IsValueType);
             Debug.Assert(ReferenceEquals(source.Comparer, EqualityComparer<T>.Default));
@@ -41,11 +43,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private ValueTypeDefaultComparerFrozenSet<T> _set;
+
             public void Store(FrozenSet<T> set) => _set = (ValueTypeDefaultComparerFrozenSet<T>)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<T> Comparer => _set.Comparer;
+
             public int FindItemIndex(T item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

@@ -39,7 +39,10 @@ namespace System.Dynamic
         /// <param name="target">The target of the dynamic create operation.</param>
         /// <param name="args">The arguments of the dynamic create operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public DynamicMetaObject FallbackCreateInstance(DynamicMetaObject target, DynamicMetaObject[] args)
+        public DynamicMetaObject FallbackCreateInstance(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args
+        )
         {
             return FallbackCreateInstance(target, args, null);
         }
@@ -51,7 +54,11 @@ namespace System.Dynamic
         /// <param name="args">The arguments of the dynamic create operation.</param>
         /// <param name="errorSuggestion">The binding result to use if binding fails, or null.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public abstract DynamicMetaObject FallbackCreateInstance(DynamicMetaObject target, DynamicMetaObject[] args, DynamicMetaObject? errorSuggestion);
+        public abstract DynamicMetaObject FallbackCreateInstance(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args,
+            DynamicMetaObject? errorSuggestion
+        );
 
         /// <summary>
         /// Performs the binding of the dynamic create operation.
@@ -59,7 +66,10 @@ namespace System.Dynamic
         /// <param name="target">The target of the dynamic create operation.</param>
         /// <param name="args">An array of arguments of the dynamic create operation.</param>
         /// <returns>The <see cref="DynamicMetaObject"/> representing the result of the binding.</returns>
-        public sealed override DynamicMetaObject Bind(DynamicMetaObject target, DynamicMetaObject[] args)
+        public sealed override DynamicMetaObject Bind(
+            DynamicMetaObject target,
+            DynamicMetaObject[] args
+        )
         {
             ArgumentNullException.ThrowIfNull(target);
             ContractUtils.RequiresNotNullItems(args, nameof(args));

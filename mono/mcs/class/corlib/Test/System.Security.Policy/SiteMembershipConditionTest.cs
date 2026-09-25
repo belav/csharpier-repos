@@ -1,5 +1,5 @@
 //
-// SiteMembershipConditionTest.cs - 
+// SiteMembershipConditionTest.cs -
 //	NUnit Test Cases for SiteMembershipCondition
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,240 +28,248 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Security;
 using System.Security.Policy;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Policy {
+namespace MonoTests.System.Security.Policy
+{
+    [TestFixture]
+    public class SiteMembershipConditionTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void SiteMembershipCondition_Null()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition(null);
+        }
 
-	[TestFixture]
-	public class SiteMembershipConditionTest {
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SiteMembershipCondition_Empty()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition(String.Empty);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void SiteMembershipCondition_Null () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SiteMembershipCondition_FileUrl()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("file://mono/index.html");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SiteMembershipCondition_Empty () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition (String.Empty);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void SiteMembershipCondition_FullUrlWithPort()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition(
+                "http://www.example.com:8080/index.html"
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SiteMembershipCondition_FileUrl () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("file://mono/index.html");
-		}
+        [Test]
+        public void SiteMembershipCondition_GoMonoWebSite()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("www.example.com");
+            Assert.AreEqual("www.example.com", smc.Site, "Site");
+            Assert.AreEqual("Site - www.example.com", smc.ToString(), "ToString");
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void SiteMembershipCondition_FullUrlWithPort () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("http://www.example.com:8080/index.html");
-		}
+            SiteMembershipCondition smc2 = (SiteMembershipCondition)smc.Copy();
+            Assert.AreEqual(smc.Site, smc2.Site, "Copy.Site");
+            Assert.AreEqual(smc.GetHashCode(), smc2.GetHashCode(), "Copy.GetHashCode");
 
-		[Test]
-		public void SiteMembershipCondition_GoMonoWebSite () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("www.example.com");
-			Assert.AreEqual ("www.example.com", smc.Site, "Site");
-			Assert.AreEqual ("Site - www.example.com", smc.ToString (), "ToString");
+            SecurityElement se = smc2.ToXml();
+            SiteMembershipCondition smc3 = new SiteMembershipCondition("*");
+            smc3.FromXml(se);
+            Assert.AreEqual(smc.Site, smc3.Site, "ToXml/FromXml");
 
-			SiteMembershipCondition smc2 = (SiteMembershipCondition) smc.Copy ();
-			Assert.AreEqual (smc.Site, smc2.Site, "Copy.Site");
-			Assert.AreEqual (smc.GetHashCode (), smc2.GetHashCode (), "Copy.GetHashCode");
+            Assert.IsTrue(smc.Equals(smc2), "Equals");
+            SiteMembershipCondition smc4 = new SiteMembershipCondition("example.com");
+            Assert.IsFalse(smc.Equals(smc4), "!Equals");
+        }
 
-			SecurityElement se = smc2.ToXml ();
-			SiteMembershipCondition smc3 = new SiteMembershipCondition ("*");
-			smc3.FromXml (se);
-			Assert.AreEqual (smc.Site, smc3.Site, "ToXml/FromXml");
+        [Test]
+        public void Site_AllGoMonoSite()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            Assert.AreEqual("*.example.com", smc.Site, "Site");
+            Assert.AreEqual("Site - *.example.com", smc.ToString(), "ToString");
 
-			Assert.IsTrue (smc.Equals (smc2), "Equals");
-			SiteMembershipCondition smc4 = new SiteMembershipCondition ("example.com");
-			Assert.IsFalse (smc.Equals (smc4), "!Equals");
-		}
+            SiteMembershipCondition smc2 = (SiteMembershipCondition)smc.Copy();
+            Assert.AreEqual(smc.Site, smc2.Site, "Copy.Site");
+            Assert.AreEqual(smc.GetHashCode(), smc2.GetHashCode(), "Copy.GetHashCode");
 
-		[Test]
-		public void Site_AllGoMonoSite () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			Assert.AreEqual ("*.example.com", smc.Site, "Site");
-			Assert.AreEqual ("Site - *.example.com", smc.ToString (), "ToString");
+            SecurityElement se = smc2.ToXml();
+            SiteMembershipCondition smc3 = new SiteMembershipCondition("*");
+            smc3.FromXml(se);
+            Assert.AreEqual(smc.Site, smc3.Site, "ToXml/FromXml");
 
-			SiteMembershipCondition smc2 = (SiteMembershipCondition) smc.Copy ();
-			Assert.AreEqual (smc.Site, smc2.Site, "Copy.Site");
-			Assert.AreEqual (smc.GetHashCode (), smc2.GetHashCode (), "Copy.GetHashCode");
+            Assert.IsTrue(smc.Equals(smc2), "Equals");
+            SiteMembershipCondition smc4 = new SiteMembershipCondition("example.com");
+            Assert.IsFalse(smc.Equals(smc4), "!Equals");
+        }
 
-			SecurityElement se = smc2.ToXml ();
-			SiteMembershipCondition smc3 = new SiteMembershipCondition ("*");
-			smc3.FromXml (se);
-			Assert.AreEqual (smc.Site, smc3.Site, "ToXml/FromXml");
+        [Test]
+        public void Check()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
 
-			Assert.IsTrue (smc.Equals (smc2), "Equals");
-			SiteMembershipCondition smc4 = new SiteMembershipCondition ("example.com");
-			Assert.IsFalse (smc.Equals (smc4), "!Equals");
-		}
+            Evidence e = null;
+            Assert.IsFalse(smc.Check(e), "Check(null)");
+            e = new Evidence();
+            Assert.IsFalse(smc.Check(e), "Check (empty)");
+            e.AddHost(new Zone(SecurityZone.MyComputer));
+            Assert.IsFalse(smc.Check(e), "Check (zone)");
 
-		[Test]
-		public void Check () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
+            Site s = new Site("*.example.com");
+            e.AddAssembly(s);
+            Assert.IsFalse(smc.Check(e), "Check (site-assembly)");
+            e.AddHost(s);
+            Assert.IsTrue(smc.Check(e), "Check (site-host)");
 
-			Evidence e = null;
-			Assert.IsFalse (smc.Check (e), "Check(null)");
-			e = new Evidence ();
-			Assert.IsFalse (smc.Check (e), "Check (empty)");
-			e.AddHost (new Zone (SecurityZone.MyComputer));
-			Assert.IsFalse (smc.Check (e), "Check (zone)");
-			
-			Site s = new Site ("*.example.com");
-			e.AddAssembly (s);
-			Assert.IsFalse (smc.Check (e), "Check (site-assembly)");
-			e.AddHost (s);
-			Assert.IsTrue (smc.Check (e), "Check (site-host)");
+            e = new Evidence();
+            e.AddHost(new Site("www.example.com"));
+            Assert.IsTrue(smc.Check(e), "Check(+-)");
 
-			e = new Evidence ();
-			e.AddHost (new Site ("www.example.com"));
-			Assert.IsTrue (smc.Check (e), "Check(+-)");
+            e = new Evidence();
+            e.AddHost(new Site("*.go-mono.org"));
+            Assert.IsFalse(smc.Check(e), "Check(-)");
+        }
 
-			e = new Evidence ();
-			e.AddHost (new Site ("*.go-mono.org"));
-			Assert.IsFalse (smc.Check (e), "Check(-)");
-		}
+        [Test]
+        public void Equals()
+        {
+            SiteMembershipCondition smc1 = new SiteMembershipCondition("*.example.com");
+            Assert.IsFalse(smc1.Equals(null), "Null");
+            SiteMembershipCondition smc2 = new SiteMembershipCondition("*.Example.com");
+            Assert.IsTrue(smc1.Equals(smc2), "CaseSensitive");
+        }
 
-		[Test]
-		public void Equals () 
-		{
-			SiteMembershipCondition smc1 = new SiteMembershipCondition ("*.example.com");
-			Assert.IsFalse (smc1.Equals (null), "Null");
-			SiteMembershipCondition smc2 = new SiteMembershipCondition ("*.Example.com");
-			Assert.IsTrue (smc1.Equals (smc2), "CaseSensitive");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromXml_Null()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            smc.FromXml(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void FromXml_Null () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			smc.FromXml (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_InvalidTag()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc.ToXml();
+            se.Tag = "IMonoship";
+            smc.FromXml(se);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FromXml_InvalidTag () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc.ToXml ();
-			se.Tag = "IMonoship";
-			smc.FromXml (se);
-		}
+        [Test]
+        public void FromXml_InvalidClass()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc.ToXml();
+            se.Attributes["class"] = "Hello world";
+            smc.FromXml(se);
+        }
 
-		[Test]
-		public void FromXml_InvalidClass ()
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc.ToXml ();
-			se.Attributes ["class"] = "Hello world";
-			smc.FromXml (se);
-		}
+        [Test]
+        public void FromXml_NoClass()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc.ToXml();
 
-		[Test]
-		public void FromXml_NoClass ()
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc.ToXml ();
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("version", se.Attribute("version"));
+            smc.FromXml(w);
+            // doesn't even care of the class attribute presence
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("version", se.Attribute ("version"));
-			smc.FromXml (w);
-			// doesn't even care of the class attribute presence
-		}
+        [Test]
+        public void FromXml_InvalidVersion()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc.ToXml();
+            se.Attributes["version"] = "2";
+            smc.FromXml(se);
+        }
 
-		[Test]
-		public void FromXml_InvalidVersion ()
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc.ToXml ();
-			se.Attributes ["version"] = "2";
-			smc.FromXml (se);
-		}
+        [Test]
+        public void FromXml_NoVersion()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc.ToXml();
 
-		[Test]
-		public void FromXml_NoVersion ()
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc.ToXml ();
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("class", se.Attribute("class"));
+            smc.FromXml(w);
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("class", se.Attribute ("class"));
-			smc.FromXml (w);
-		}
-
-		[Test]
+        [Test]
 #if MOBILE
-		[ExpectedException (typeof (NotSupportedException))]
+        [ExpectedException(typeof(NotSupportedException))]
 #endif
-		public void FromXml_PolicyLevel () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc.ToXml ();
-			// is it accepted for all policy levels ?
-			IEnumerator e = SecurityManager.PolicyHierarchy ();
-			while (e.MoveNext ()) {
-				PolicyLevel pl = e.Current as PolicyLevel;
-				SiteMembershipCondition spl = new SiteMembershipCondition ("*");
-				spl.FromXml (se, pl);
-				Assert.IsTrue (spl.Equals (smc), "FromXml(PolicyLevel='" + pl.Label + "')");
-			}
-			// yes!
-		}
+        public void FromXml_PolicyLevel()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc.ToXml();
+            // is it accepted for all policy levels ?
+            IEnumerator e = SecurityManager.PolicyHierarchy();
+            while (e.MoveNext())
+            {
+                PolicyLevel pl = e.Current as PolicyLevel;
+                SiteMembershipCondition spl = new SiteMembershipCondition("*");
+                spl.FromXml(se, pl);
+                Assert.IsTrue(spl.Equals(smc), "FromXml(PolicyLevel='" + pl.Label + "')");
+            }
+            // yes!
+        }
 
-		[Test]
-		public void ToXml_Null () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			// no ArgumentNullException here
-			SecurityElement se = smc.ToXml (null);
-			Assert.IsNotNull (se, "ToXml(null)");
-		}
+        [Test]
+        public void ToXml_Null()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            // no ArgumentNullException here
+            SecurityElement se = smc.ToXml(null);
+            Assert.IsNotNull(se, "ToXml(null)");
+        }
 
-		[Test]
+        [Test]
 #if MOBILE
-		[ExpectedException (typeof (NotSupportedException))]
+        [ExpectedException(typeof(NotSupportedException))]
 #endif
-		public void ToXml_PolicyLevel () 
-		{
-			SiteMembershipCondition smc = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc.ToXml ();
-			string s = smc.ToXml ().ToString ();
-			// is it accepted for all policy levels ?
-			IEnumerator e = SecurityManager.PolicyHierarchy ();
-			while (e.MoveNext ()) {
-				PolicyLevel pl = e.Current as PolicyLevel;
-				SiteMembershipCondition spl = new SiteMembershipCondition ("*");
-				spl.FromXml (se, pl);
-				Assert.AreEqual (s, spl.ToXml (pl).ToString (), "ToXml(PolicyLevel='" + pl.Label + "')");
-			}
-			// yes!
-		}
+        public void ToXml_PolicyLevel()
+        {
+            SiteMembershipCondition smc = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc.ToXml();
+            string s = smc.ToXml().ToString();
+            // is it accepted for all policy levels ?
+            IEnumerator e = SecurityManager.PolicyHierarchy();
+            while (e.MoveNext())
+            {
+                PolicyLevel pl = e.Current as PolicyLevel;
+                SiteMembershipCondition spl = new SiteMembershipCondition("*");
+                spl.FromXml(se, pl);
+                Assert.AreEqual(
+                    s,
+                    spl.ToXml(pl).ToString(),
+                    "ToXml(PolicyLevel='" + pl.Label + "')"
+                );
+            }
+            // yes!
+        }
 
-		[Test]
-		public void ToFromXmlRoundTrip () 
-		{
-			SiteMembershipCondition smc1 = new SiteMembershipCondition ("*.example.com");
-			SecurityElement se = smc1.ToXml ();
+        [Test]
+        public void ToFromXmlRoundTrip()
+        {
+            SiteMembershipCondition smc1 = new SiteMembershipCondition("*.example.com");
+            SecurityElement se = smc1.ToXml();
 
-			SiteMembershipCondition smc2 = new SiteMembershipCondition ("*");
-			smc2.FromXml (se);
+            SiteMembershipCondition smc2 = new SiteMembershipCondition("*");
+            smc2.FromXml(se);
 
-			Assert.AreEqual (smc1.GetHashCode (), smc2.GetHashCode (), "ToFromXmlRoundTrip");
-		}
-	}
+            Assert.AreEqual(smc1.GetHashCode(), smc2.GetHashCode(), "ToFromXmlRoundTrip");
+        }
+    }
 }

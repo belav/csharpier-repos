@@ -28,7 +28,10 @@ namespace System.Diagnostics
             // Try to get the task info. This can fail if the user permissions don't permit
             // this user context to query the specified process
             ProcessInfo iinfo = Interop.Process.GetProcessInfoById(pid);
-            if (!string.IsNullOrEmpty(processNameFilter) && !processNameFilter.Equals(iinfo.ProcessName))
+            if (
+                !string.IsNullOrEmpty(processNameFilter)
+                && !processNameFilter.Equals(iinfo.ProcessName)
+            )
             {
                 return null;
             }
@@ -54,6 +57,5 @@ namespace System.Diagnostics
         // ----------------------------------
         // ---- Unix PAL layer ends here ----
         // ----------------------------------
-
     }
 }

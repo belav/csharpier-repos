@@ -24,8 +24,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new InnerFinallyTest().Run(),              ref nSuccesses, ref nFailures);
-        
+        CountResults(new InnerFinallyTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -43,7 +43,7 @@ class InnerFinallyTest
 {
     Trace _trace;
 
-    public InnerFinallyTest() 
+    public InnerFinallyTest()
     {
         // Create test writer object to hold expected output
         System.IO.StringWriter expectedOut = new System.IO.StringWriter();
@@ -57,47 +57,47 @@ class InnerFinallyTest
         expectedOut.WriteLine("\t\t finally 1.1.1");
         expectedOut.WriteLine(" catch 1");
         expectedOut.WriteLine(" finally 1");
-        
+
         _trace = new Trace("InnerFinallyTest", expectedOut.ToString());
     }
-    
-    public int Run() 
-    {
-        int x = 7, y = 0, z;
 
-        try 
+    public int Run()
+    {
+        int x = 7,
+            y = 0,
+            z;
+
+        try
         {
             _trace.WriteLine(" try 1");
-            try 
+            try
             {
                 _trace.WriteLine("\t try 1.1");
-            } 
-            finally 
+            }
+            finally
             {
                 _trace.WriteLine("\t finally 1.1");
-                try  
-                { 
+                try
+                {
                     _trace.WriteLine("\t\t try 1.1.1");
                     _trace.WriteLine("\t\t Throwing an exception here!");
                     z = x / y;
-                } 
-                finally  
+                }
+                finally
                 {
                     _trace.WriteLine("\t\t finally 1.1.1");
                 }
             }
-        } 
-        catch (Exception) 
+        }
+        catch (Exception)
         {
             _trace.WriteLine(" catch 1");
-        } 
-        finally  
+        }
+        finally
         {
             _trace.WriteLine(" finally 1");
         }
-        
+
         return _trace.Match();
     }
 }
-
-

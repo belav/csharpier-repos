@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler;
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false), MetadataAttribute]
 internal class ExportCSharpVisualBasicLspServiceFactoryAttribute : ExportLspServiceFactoryAttribute
 {
-    public ExportCSharpVisualBasicLspServiceFactoryAttribute(Type type, WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.Any) : base(type, ProtocolConstants.RoslynLspLanguagesContract, serverKind)
-    {
-    }
+    public ExportCSharpVisualBasicLspServiceFactoryAttribute(
+        Type type,
+        WellKnownLspServerKinds serverKind = WellKnownLspServerKinds.Any
+    )
+        : base(type, ProtocolConstants.RoslynLspLanguagesContract, serverKind) { }
 }

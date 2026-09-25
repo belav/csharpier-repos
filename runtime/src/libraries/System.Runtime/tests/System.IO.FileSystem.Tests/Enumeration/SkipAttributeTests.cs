@@ -15,9 +15,13 @@ namespace System.IO.Tests.Enumeration
             return new FileSystemEnumerable<string>(
                 directory,
                 (ref FileSystemEntry entry) => entry.ToFullPath(),
-                options)
+                options
+            )
             {
-                ShouldIncludePredicate = (ref FileSystemEntry entry) => { return !entry.IsDirectory; }
+                ShouldIncludePredicate = (ref FileSystemEntry entry) =>
+                {
+                    return !entry.IsDirectory;
+                },
             }.ToArray();
         }
 
@@ -38,15 +42,25 @@ namespace System.IO.Tests.Enumeration
         private void SkippingHiddenFilesInternal(bool useDotPrefix, bool useHiddenFlag)
         {
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
-            DirectoryInfo testSubdirectory = Directory.CreateDirectory(Path.Combine(testDirectory.FullName, GetTestFileName()));
+            DirectoryInfo testSubdirectory = Directory.CreateDirectory(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
 
-            FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
-            FileInfo fileThree = new FileInfo(Path.Combine(testSubdirectory.FullName, GetTestFileName()));
+            FileInfo fileOne = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
+            FileInfo fileThree = new FileInfo(
+                Path.Combine(testSubdirectory.FullName, GetTestFileName())
+            );
 
             // Put a period in front of files two and four to make them hidden on Unix
             string prefix = useDotPrefix ? "." : "";
-            FileInfo fileTwo = new FileInfo(Path.Combine(testDirectory.FullName, prefix + GetTestFileName()));
-            FileInfo fileFour = new FileInfo(Path.Combine(testSubdirectory.FullName, prefix + GetTestFileName()));
+            FileInfo fileTwo = new FileInfo(
+                Path.Combine(testDirectory.FullName, prefix + GetTestFileName())
+            );
+            FileInfo fileFour = new FileInfo(
+                Path.Combine(testSubdirectory.FullName, prefix + GetTestFileName())
+            );
 
             fileOne.Create().Dispose();
             fileTwo.Create().Dispose();
@@ -63,10 +77,16 @@ namespace System.IO.Tests.Enumeration
             string[] paths = GetPaths(testDirectory.FullName, new EnumerationOptions());
             Assert.Equal(new string[] { fileOne.FullName }, paths);
 
-            paths = GetPaths(testDirectory.FullName, new EnumerationOptions { AttributesToSkip = 0 });
+            paths = GetPaths(
+                testDirectory.FullName,
+                new EnumerationOptions { AttributesToSkip = 0 }
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, paths);
 
-            paths = GetPaths(testDirectory.FullName, new EnumerationOptions { RecurseSubdirectories = true });
+            paths = GetPaths(
+                testDirectory.FullName,
+                new EnumerationOptions { RecurseSubdirectories = true }
+            );
             Assert.Equal(new string[] { fileOne.FullName, fileThree.FullName }, paths);
 
             if (PlatformDetection.IsWindows)
@@ -76,10 +96,16 @@ namespace System.IO.Tests.Enumeration
             }
             else
             {
-                Directory.Move(testSubdirectory.FullName, Path.Combine(testDirectory.FullName, "." + testSubdirectory.Name));
+                Directory.Move(
+                    testSubdirectory.FullName,
+                    Path.Combine(testDirectory.FullName, "." + testSubdirectory.Name)
+                );
             }
 
-            paths = GetPaths(testDirectory.FullName, new EnumerationOptions { RecurseSubdirectories = true });
+            paths = GetPaths(
+                testDirectory.FullName,
+                new EnumerationOptions { RecurseSubdirectories = true }
+            );
             Assert.Equal(new string[] { fileOne.FullName }, paths);
         }
 
@@ -88,20 +114,37 @@ namespace System.IO.Tests.Enumeration
         {
             // If skip comes first we shouldn't find ourselves recursing.
             DirectoryInfo testDirectory = Directory.CreateDirectory(GetTestFilePath());
-            DirectoryInfo testSubdirectory = Directory.CreateDirectory(Path.Combine(testDirectory.FullName, GetTestFileName()));
+            DirectoryInfo testSubdirectory = Directory.CreateDirectory(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
 
-            FileInfo fileOne = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
-            FileInfo fileTwo = new FileInfo(Path.Combine(testDirectory.FullName, GetTestFileName()));
+            FileInfo fileOne = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
+            FileInfo fileTwo = new FileInfo(
+                Path.Combine(testDirectory.FullName, GetTestFileName())
+            );
 
-            FileInfo fileThree = new FileInfo(Path.Combine(testSubdirectory.FullName, GetTestFileName()));
-            FileInfo fileFour = new FileInfo(Path.Combine(testSubdirectory.FullName, GetTestFileName()));
+            FileInfo fileThree = new FileInfo(
+                Path.Combine(testSubdirectory.FullName, GetTestFileName())
+            );
+            FileInfo fileFour = new FileInfo(
+                Path.Combine(testSubdirectory.FullName, GetTestFileName())
+            );
 
             fileOne.Create().Dispose();
             fileTwo.Create().Dispose();
             fileThree.Create().Dispose();
             fileFour.Create().Dispose();
 
-            string[] paths = GetPaths(testDirectory.FullName, new EnumerationOptions { AttributesToSkip = FileAttributes.Directory, RecurseSubdirectories = true });
+            string[] paths = GetPaths(
+                testDirectory.FullName,
+                new EnumerationOptions
+                {
+                    AttributesToSkip = FileAttributes.Directory,
+                    RecurseSubdirectories = true,
+                }
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName }, paths);
         }
     }
@@ -118,7 +161,10 @@ namespace System.IO.Tests.Enumeration
     {
         protected override string[] GetPaths(string directory, EnumerationOptions options)
         {
-            return new DirectoryInfo(directory).GetFiles("*", options).Select(i => i.FullName).ToArray();
+            return new DirectoryInfo(directory)
+                .GetFiles("*", options)
+                .Select(i => i.FullName)
+                .ToArray();
         }
     }
 }

@@ -43,7 +43,10 @@ namespace System.Text.RegularExpressions.Tests
             Assert.Equal(timeout, e.MatchTimeout);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void SerializationRoundtrip()
         {
             const string Input = "abcdef";

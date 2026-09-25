@@ -71,7 +71,7 @@ namespace System.ServiceModel.Transactions
         void ForcePromotion(Transaction transaction)
         {
             // Force promotion. This may throw TransactionException.
-            // We used to check the DistributedIdentifier property first, but VSWhidbey bug 547901 
+            // We used to check the DistributedIdentifier property first, but VSWhidbey bug 547901
             // prevents us from doing so reliably in multi-threaded scenarios (there is a ----
             // in the System.Transactions code that can cause a NullReferenceException if we ask
             // for the identifier while the transaction is being promoted)
@@ -90,7 +90,10 @@ namespace System.ServiceModel.Transactions
         {
             EnsureInitialized();
 
-            CoordinationContext context = WsatTransactionHeader.GetCoordinationContext(message, this.protocolVersion);
+            CoordinationContext context = WsatTransactionHeader.GetCoordinationContext(
+                message,
+                this.protocolVersion
+            );
             if (context == null)
                 return null;
 
@@ -98,20 +101,27 @@ namespace System.ServiceModel.Transactions
             RequestSecurityTokenResponse issuedToken;
             try
             {
-                issuedToken = CoordinationServiceSecurity.GetIssuedToken(message, context.Identifier, this.protocolVersion);
+                issuedToken = CoordinationServiceSecurity.GetIssuedToken(
+                    message,
+                    context.Identifier,
+                    this.protocolVersion
+                );
             }
             catch (XmlException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TransactionException(SR.FailedToDeserializeIssuedToken, e));
+                    new TransactionException(SR.FailedToDeserializeIssuedToken, e)
+                );
             }
 
             return new WsatTransactionInfo(this.wsatProxy, context, issuedToken);
         }
 
         //=======================================================================================
-        public WsatTransactionInfo CreateTransactionInfo(CoordinationContext context,
-                                                         RequestSecurityTokenResponse issuedToken)
+        public WsatTransactionInfo CreateTransactionInfo(
+            CoordinationContext context,
+            RequestSecurityTokenResponse issuedToken
+        )
         {
             return new WsatTransactionInfo(this.wsatProxy, context, issuedToken);
         }
@@ -124,9 +134,11 @@ namespace System.ServiceModel.Transactions
         // WSATs are not supported in partial trust, so customers should not be broken by this demand.
         [PermissionSet(SecurityAction.Demand, Unrestricted = true)]
         */
-        public void MarshalAsCoordinationContext(Transaction transaction,
-                                                 out CoordinationContext context,
-                                                 out RequestSecurityTokenResponse issuedToken)
+        public void MarshalAsCoordinationContext(
+            Transaction transaction,
+            out CoordinationContext context,
+            out RequestSecurityTokenResponse issuedToken
+        )
         {
             Guid transactionId = transaction.TransactionInformation.DistributedIdentifier;
             string nonNativeContextId = null;
@@ -137,10 +149,12 @@ namespace System.ServiceModel.Transactions
             uint timeout;
             IsolationFlags isoFlags;
             string description;
-            OleTxTransactionFormatter.GetTransactionAttributes(transaction,
-                                                               out timeout,
-                                                               out isoFlags,
-                                                               out description);
+            OleTxTransactionFormatter.GetTransactionAttributes(
+                transaction,
+                out timeout,
+                out isoFlags,
+                out description
+            );
             context.IsolationFlags = isoFlags;
             context.Description = description;
 
@@ -176,7 +190,8 @@ namespace System.ServiceModel.Transactions
                     // zero in the expires field if the local max timeout has been disabled.
                     //
                     // This is MB 34596: how can we flow the real timeout?
-                    context.Expires = (uint)TimeoutHelper.ToMilliseconds(this.wsatConfig.MaxTimeout);
+                    context.Expires = (uint)
+                        TimeoutHelper.ToMilliseconds(this.wsatConfig.MaxTimeout);
                 }
             }
 
@@ -194,21 +209,32 @@ namespace System.ServiceModel.Transactions
             }
             else
             {
-                CoordinationServiceSecurity.CreateIssuedToken(transactionId,
-                                                              context.Identifier,
-                                                              this.protocolVersion,
-                                                              out issuedToken,
-                                                              out tokenId);
+                CoordinationServiceSecurity.CreateIssuedToken(
+                    transactionId,
+                    context.Identifier,
+                    this.protocolVersion,
+                    out issuedToken,
+                    out tokenId
+                );
             }
 
-            AddressHeader refParam = new WsatRegistrationHeader(transactionId, nonNativeContextId, tokenId);
-            context.RegistrationService = wsatConfig.CreateRegistrationService(refParam, this.protocolVersion);
+            AddressHeader refParam = new WsatRegistrationHeader(
+                transactionId,
+                nonNativeContextId,
+                tokenId
+            );
+            context.RegistrationService = wsatConfig.CreateRegistrationService(
+                refParam,
+                this.protocolVersion
+            );
             context.IsolationLevel = transaction.IsolationLevel;
             context.LocalTransactionId = transactionId;
 
             if (this.wsatConfig.OleTxUpgradeEnabled)
             {
-                context.PropagationToken = TransactionInterop.GetTransmitterPropagationToken(transaction);
+                context.PropagationToken = TransactionInterop.GetTransmitterPropagationToken(
+                    transaction
+                );
             }
         }
     }
@@ -219,9 +245,13 @@ namespace System.ServiceModel.Transactions
 
     class WsatTransactionFormatter10 : WsatTransactionFormatter
     {
-        static WsatTransactionHeader emptyTransactionHeader = new WsatTransactionHeader(null, ProtocolVersion.Version10);
+        static WsatTransactionHeader emptyTransactionHeader = new WsatTransactionHeader(
+            null,
+            ProtocolVersion.Version10
+        );
 
-        public WsatTransactionFormatter10() : base(ProtocolVersion.Version10) { }
+        public WsatTransactionFormatter10()
+            : base(ProtocolVersion.Version10) { }
 
         //=======================================================================================
         public override MessageHeader EmptyTransactionHeader
@@ -232,9 +262,13 @@ namespace System.ServiceModel.Transactions
 
     class WsatTransactionFormatter11 : WsatTransactionFormatter
     {
-        static WsatTransactionHeader emptyTransactionHeader = new WsatTransactionHeader(null, ProtocolVersion.Version11);
+        static WsatTransactionHeader emptyTransactionHeader = new WsatTransactionHeader(
+            null,
+            ProtocolVersion.Version11
+        );
 
-        public WsatTransactionFormatter11() : base(ProtocolVersion.Version11) { }
+        public WsatTransactionFormatter11()
+            : base(ProtocolVersion.Version11) { }
 
         //=======================================================================================
         public override MessageHeader EmptyTransactionHeader

@@ -27,425 +27,687 @@
 //
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using Microsoft.Win32.SafeHandles;
-using System.Runtime.InteropServices;
+using System.IO;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Microsoft.Win32.SafeHandles;
 
 namespace System.IO.MemoryMappedFiles
 {
-	internal static class MemoryMapImpl {
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		static extern unsafe IntPtr OpenFileInternal (char* path, int path_length, FileMode mode, char* mapName, int mapName_length, out long capacity, MemoryMappedFileAccess access, MemoryMappedFileOptions options, out int error);
+    internal static class MemoryMapImpl
+    {
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern unsafe IntPtr OpenFileInternal(
+            char* path,
+            int path_length,
+            FileMode mode,
+            char* mapName,
+            int mapName_length,
+            out long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            out int error
+        );
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		static extern unsafe IntPtr OpenHandleInternal (IntPtr handle, char* mapName, int mapName_length, out long capacity, MemoryMappedFileAccess access, MemoryMappedFileOptions options, out int error);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern unsafe IntPtr OpenHandleInternal(
+            IntPtr handle,
+            char* mapName,
+            int mapName_length,
+            out long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            out int error
+        );
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal extern static void CloseMapping (IntPtr handle);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern void CloseMapping(IntPtr handle);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal extern static void Flush (IntPtr file_handle);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern void Flush(IntPtr file_handle);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal extern static void ConfigureHandleInheritability (IntPtr handle, HandleInheritability inheritability);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern void ConfigureHandleInheritability(
+            IntPtr handle,
+            HandleInheritability inheritability
+        );
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		internal extern static bool Unmap (IntPtr mmap_handle);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        internal static extern bool Unmap(IntPtr mmap_handle);
 
-		[MethodImplAttribute (MethodImplOptions.InternalCall)]
-		extern static int MapInternal (IntPtr handle, long offset, ref long size, MemoryMappedFileAccess access, out IntPtr mmap_handle, out IntPtr base_address);
+        [MethodImplAttribute(MethodImplOptions.InternalCall)]
+        static extern int MapInternal(
+            IntPtr handle,
+            long offset,
+            ref long size,
+            MemoryMappedFileAccess access,
+            out IntPtr mmap_handle,
+            out IntPtr base_address
+        );
 
-		internal static void Map (IntPtr handle, long offset, ref long size, MemoryMappedFileAccess access, out IntPtr mmap_handle, out IntPtr base_address)
-		{
-			int error = MapInternal (handle, offset, ref size, access, out mmap_handle, out base_address);
-			if (error != 0)
-				throw CreateException (error, "<none>");
-		}
+        internal static void Map(
+            IntPtr handle,
+            long offset,
+            ref long size,
+            MemoryMappedFileAccess access,
+            out IntPtr mmap_handle,
+            out IntPtr base_address
+        )
+        {
+            int error = MapInternal(
+                handle,
+                offset,
+                ref size,
+                access,
+                out mmap_handle,
+                out base_address
+            );
+            if (error != 0)
+                throw CreateException(error, "<none>");
+        }
 
-		static Exception CreateException (int error, string path) {
-			switch (error){
-			case 1:
-				return new ArgumentException ("A positive capacity must be specified for a Memory Mapped File backed by an empty file.");
-			case 2:
-				return new ArgumentOutOfRangeException ("capacity", "The capacity may not be smaller than the file size.");
-			case 3:
-				return new FileNotFoundException (path);
-			case 4:
-				return new IOException ("The file already exists");
-			case 5:
-				return new PathTooLongException ();
-			case 6:
-				return new IOException ("Could not open file");
-			case 7:
-				return new ArgumentException ("Capacity must be bigger than zero for non-file mappings");
-			case 8:
-				return new ArgumentException ("Invalid FileMode value.");
-			case 9:
-				return new IOException ("Could not map file");
-			case 10:
-				return new UnauthorizedAccessException ("Access to the path is denied.");
-			case 11:
-				return new ArgumentOutOfRangeException ("capacity", "The capacity cannot be greater than the size of the system's logical address space.");
-			default:
-				return new IOException ("Failed with unknown error code " + error);
-			}
-		}
+        static Exception CreateException(int error, string path)
+        {
+            switch (error)
+            {
+                case 1:
+                    return new ArgumentException(
+                        "A positive capacity must be specified for a Memory Mapped File backed by an empty file."
+                    );
+                case 2:
+                    return new ArgumentOutOfRangeException(
+                        "capacity",
+                        "The capacity may not be smaller than the file size."
+                    );
+                case 3:
+                    return new FileNotFoundException(path);
+                case 4:
+                    return new IOException("The file already exists");
+                case 5:
+                    return new PathTooLongException();
+                case 6:
+                    return new IOException("Could not open file");
+                case 7:
+                    return new ArgumentException(
+                        "Capacity must be bigger than zero for non-file mappings"
+                    );
+                case 8:
+                    return new ArgumentException("Invalid FileMode value.");
+                case 9:
+                    return new IOException("Could not map file");
+                case 10:
+                    return new UnauthorizedAccessException("Access to the path is denied.");
+                case 11:
+                    return new ArgumentOutOfRangeException(
+                        "capacity",
+                        "The capacity cannot be greater than the size of the system's logical address space."
+                    );
+                default:
+                    return new IOException("Failed with unknown error code " + error);
+            }
+        }
 
-		static int StringLength (string a)
-		{
-			return a?.Length ?? 0;
-		}
+        static int StringLength(string a)
+        {
+            return a?.Length ?? 0;
+        }
 
-		static void CheckString (string name, string value)
-		{
-			// Native code tends to truncate at NUL which is incorrect. Guard it here.
-			if (value?.IndexOf((char)0) >= 0)
-				throw new ArgumentException ("String must not contain embedded NULs.", name);
-		}
+        static void CheckString(string name, string value)
+        {
+            // Native code tends to truncate at NUL which is incorrect. Guard it here.
+            if (value?.IndexOf((char)0) >= 0)
+                throw new ArgumentException("String must not contain embedded NULs.", name);
+        }
 
-		internal static unsafe IntPtr OpenFile (string path, FileMode mode, string mapName, out long capacity, MemoryMappedFileAccess access, MemoryMappedFileOptions options)
-		{
-			CheckString (nameof (path), path);
-			CheckString (nameof (mapName), mapName);
-			fixed (char* fpath = path, fmapName = mapName) {
-				int error = 0;
-				IntPtr res = OpenFileInternal (fpath, StringLength (path), mode, fmapName, StringLength (mapName), out capacity, access, options, out error);
-				if (error != 0)
-					throw CreateException (error, path);
-				return res;
-			}
-		}
+        internal static unsafe IntPtr OpenFile(
+            string path,
+            FileMode mode,
+            string mapName,
+            out long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options
+        )
+        {
+            CheckString(nameof(path), path);
+            CheckString(nameof(mapName), mapName);
+            fixed (
+                char* fpath = path,
+                    fmapName = mapName
+            )
+            {
+                int error = 0;
+                IntPtr res = OpenFileInternal(
+                    fpath,
+                    StringLength(path),
+                    mode,
+                    fmapName,
+                    StringLength(mapName),
+                    out capacity,
+                    access,
+                    options,
+                    out error
+                );
+                if (error != 0)
+                    throw CreateException(error, path);
+                return res;
+            }
+        }
 
-		internal static unsafe IntPtr OpenHandle (IntPtr handle, string mapName, out long capacity, MemoryMappedFileAccess access, MemoryMappedFileOptions options)
-		{
-			CheckString (nameof (mapName), mapName);
-			fixed (char* fmapName = mapName) {
-				int error = 0;
-				IntPtr res = OpenHandleInternal (handle, fmapName, StringLength (mapName), out capacity, access, options, out error);
-				if (error != 0)
-					throw CreateException (error, "<none>");
-				return res;
-			}
-		}
-	}
+        internal static unsafe IntPtr OpenHandle(
+            IntPtr handle,
+            string mapName,
+            out long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options
+        )
+        {
+            CheckString(nameof(mapName), mapName);
+            fixed (char* fmapName = mapName)
+            {
+                int error = 0;
+                IntPtr res = OpenHandleInternal(
+                    handle,
+                    fmapName,
+                    StringLength(mapName),
+                    out capacity,
+                    access,
+                    options,
+                    out error
+                );
+                if (error != 0)
+                    throw CreateException(error, "<none>");
+                return res;
+            }
+        }
+    }
 
-	public class MemoryMappedFile : IDisposable {
-		// MemoryMappedFileAccess fileAccess;
-		// string name;
-		// long fileCapacity;
+    public class MemoryMappedFile : IDisposable
+    {
+        // MemoryMappedFileAccess fileAccess;
+        // string name;
+        // long fileCapacity;
 
-		//
-		// We allow the use of either the FileStream/keepOpen combo
-		// or a Unix file descriptor.  This way we avoid the dependency on
-		// Mono's io-layer having the Unix file descriptors mapped to
-		// the same io-layer handle
-		//
-		FileStream stream;
-		bool keepOpen;
-		SafeMemoryMappedFileHandle handle;
+        //
+        // We allow the use of either the FileStream/keepOpen combo
+        // or a Unix file descriptor.  This way we avoid the dependency on
+        // Mono's io-layer having the Unix file descriptors mapped to
+        // the same io-layer handle
+        //
+        FileStream stream;
+        bool keepOpen;
+        SafeMemoryMappedFileHandle handle;
 
-		public static MemoryMappedFile CreateFromFile (string path)
-		{
-			return CreateFromFile (path, FileMode.Open, null, 0, MemoryMappedFileAccess.ReadWrite);
-		}
+        public static MemoryMappedFile CreateFromFile(string path)
+        {
+            return CreateFromFile(path, FileMode.Open, null, 0, MemoryMappedFileAccess.ReadWrite);
+        }
 
-		public static MemoryMappedFile CreateFromFile (string path, FileMode mode)
-		{
-			long capacity = 0;
-			if (path == null)
-				throw new ArgumentNullException ("path");
-			if (path.Length == 0)
-				throw new ArgumentException ("path");
-			if (mode == FileMode.Append)
-				throw new ArgumentException ("mode");
+        public static MemoryMappedFile CreateFromFile(string path, FileMode mode)
+        {
+            long capacity = 0;
+            if (path == null)
+                throw new ArgumentNullException("path");
+            if (path.Length == 0)
+                throw new ArgumentException("path");
+            if (mode == FileMode.Append)
+                throw new ArgumentException("mode");
 
-			IntPtr handle = MemoryMapImpl.OpenFile (path, mode, null, out capacity, MemoryMappedFileAccess.ReadWrite, MemoryMappedFileOptions.None);
+            IntPtr handle = MemoryMapImpl.OpenFile(
+                path,
+                mode,
+                null,
+                out capacity,
+                MemoryMappedFileAccess.ReadWrite,
+                MemoryMappedFileOptions.None
+            );
 
-			return new MemoryMappedFile () {
-				handle = new SafeMemoryMappedFileHandle (handle, true),
-				// fileAccess = MemoryMappedFileAccess.ReadWrite,
-				// fileCapacity = capacity
-			};
-		}
+            return new MemoryMappedFile()
+            {
+                handle = new SafeMemoryMappedFileHandle(handle, true),
+                // fileAccess = MemoryMappedFileAccess.ReadWrite,
+                // fileCapacity = capacity
+            };
+        }
 
-		public static MemoryMappedFile CreateFromFile (string path, FileMode mode, string mapName)
-		{
-			return CreateFromFile (path, mode, mapName, 0, MemoryMappedFileAccess.ReadWrite);
-		}
+        public static MemoryMappedFile CreateFromFile(string path, FileMode mode, string mapName)
+        {
+            return CreateFromFile(path, mode, mapName, 0, MemoryMappedFileAccess.ReadWrite);
+        }
 
-		public static MemoryMappedFile CreateFromFile (string path, FileMode mode, string mapName, long capacity)
-		{
-			return CreateFromFile (path, mode, mapName, capacity, MemoryMappedFileAccess.ReadWrite);
-		}
+        public static MemoryMappedFile CreateFromFile(
+            string path,
+            FileMode mode,
+            string mapName,
+            long capacity
+        )
+        {
+            return CreateFromFile(path, mode, mapName, capacity, MemoryMappedFileAccess.ReadWrite);
+        }
 
-		public static MemoryMappedFile CreateFromFile (string path, FileMode mode, string mapName, long capacity, MemoryMappedFileAccess access)
-		{
-			if (path == null)
-				throw new ArgumentNullException ("path");
-			if (path.Length == 0)
-				throw new ArgumentException ("path");
-			if (mapName != null && mapName.Length == 0)
-				throw new ArgumentException ("mapName");
-			if (mode == FileMode.Append)
-				throw new ArgumentException ("mode");			
-			if (capacity < 0)
-				throw new ArgumentOutOfRangeException ("capacity");
+        public static MemoryMappedFile CreateFromFile(
+            string path,
+            FileMode mode,
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
+        {
+            if (path == null)
+                throw new ArgumentNullException("path");
+            if (path.Length == 0)
+                throw new ArgumentException("path");
+            if (mapName != null && mapName.Length == 0)
+                throw new ArgumentException("mapName");
+            if (mode == FileMode.Append)
+                throw new ArgumentException("mode");
+            if (capacity < 0)
+                throw new ArgumentOutOfRangeException("capacity");
 
-			IntPtr handle = MemoryMapImpl.OpenFile (path, mode, mapName, out capacity, access, MemoryMappedFileOptions.None);
-			
-			return new MemoryMappedFile () {
-				handle = new SafeMemoryMappedFileHandle (handle, true),
-				// fileAccess = access,
-				// name = mapName,
-				// fileCapacity = capacity
-			};
-		}
+            IntPtr handle = MemoryMapImpl.OpenFile(
+                path,
+                mode,
+                mapName,
+                out capacity,
+                access,
+                MemoryMappedFileOptions.None
+            );
 
-		public static MemoryMappedFile CreateFromFile (FileStream fileStream, string mapName, long capacity, MemoryMappedFileAccess access,
-							       HandleInheritability inheritability,
-							       bool leaveOpen)
-		{
-			if (fileStream == null)
-				throw new ArgumentNullException ("fileStream");
-			if (mapName != null && mapName.Length == 0)
-				throw new ArgumentException ("mapName");
-			if ((!MonoUtil.IsUnix && capacity == 0 && fileStream.Length == 0) || (capacity > fileStream.Length))
-				throw new ArgumentException ("capacity");
+            return new MemoryMappedFile()
+            {
+                handle = new SafeMemoryMappedFileHandle(handle, true),
+                // fileAccess = access,
+                // name = mapName,
+                // fileCapacity = capacity
+            };
+        }
 
-			IntPtr handle = MemoryMapImpl.OpenHandle (fileStream.SafeFileHandle.DangerousGetHandle (), mapName, out capacity, access, MemoryMappedFileOptions.None);
-			
-			MemoryMapImpl.ConfigureHandleInheritability (handle, inheritability);
-				
-			return new MemoryMappedFile () {
-				handle = new SafeMemoryMappedFileHandle (handle, true),
-				// fileAccess = access,
-				// name = mapName,
-				// fileCapacity = capacity,
+        public static MemoryMappedFile CreateFromFile(
+            FileStream fileStream,
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            HandleInheritability inheritability,
+            bool leaveOpen
+        )
+        {
+            if (fileStream == null)
+                throw new ArgumentNullException("fileStream");
+            if (mapName != null && mapName.Length == 0)
+                throw new ArgumentException("mapName");
+            if (
+                (!MonoUtil.IsUnix && capacity == 0 && fileStream.Length == 0)
+                || (capacity > fileStream.Length)
+            )
+                throw new ArgumentException("capacity");
 
-				stream = fileStream,
-				keepOpen = leaveOpen
-			};
-		}
+            IntPtr handle = MemoryMapImpl.OpenHandle(
+                fileStream.SafeFileHandle.DangerousGetHandle(),
+                mapName,
+                out capacity,
+                access,
+                MemoryMappedFileOptions.None
+            );
 
-		[MonoLimitation ("memoryMappedFileSecurity is currently ignored")]
-		public static MemoryMappedFile CreateFromFile (FileStream fileStream, string mapName, long capacity, MemoryMappedFileAccess access,
-							       MemoryMappedFileSecurity memoryMappedFileSecurity, HandleInheritability inheritability,
-							       bool leaveOpen)
-		{
-			if (fileStream == null)
-				throw new ArgumentNullException ("fileStream");
-			if (mapName != null && mapName.Length == 0)
-				throw new ArgumentException ("mapName");
-			if ((!MonoUtil.IsUnix && capacity == 0 && fileStream.Length == 0) || (capacity > fileStream.Length))
-				throw new ArgumentException ("capacity");
+            MemoryMapImpl.ConfigureHandleInheritability(handle, inheritability);
 
-			IntPtr handle = MemoryMapImpl.OpenHandle (fileStream.SafeFileHandle.DangerousGetHandle (), mapName, out capacity, access, MemoryMappedFileOptions.None);
-			
-			MemoryMapImpl.ConfigureHandleInheritability (handle, inheritability);
-				
-			return new MemoryMappedFile () {
-				handle = new SafeMemoryMappedFileHandle (handle, true),
-				// fileAccess = access,
-				// name = mapName,
-				// fileCapacity = capacity,
+            return new MemoryMappedFile()
+            {
+                handle = new SafeMemoryMappedFileHandle(handle, true),
+                // fileAccess = access,
+                // name = mapName,
+                // fileCapacity = capacity,
 
-				stream = fileStream,
-				keepOpen = leaveOpen
-			};
-		}
+                stream = fileStream,
+                keepOpen = leaveOpen,
+            };
+        }
 
+        [MonoLimitation("memoryMappedFileSecurity is currently ignored")]
+        public static MemoryMappedFile CreateFromFile(
+            FileStream fileStream,
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileSecurity memoryMappedFileSecurity,
+            HandleInheritability inheritability,
+            bool leaveOpen
+        )
+        {
+            if (fileStream == null)
+                throw new ArgumentNullException("fileStream");
+            if (mapName != null && mapName.Length == 0)
+                throw new ArgumentException("mapName");
+            if (
+                (!MonoUtil.IsUnix && capacity == 0 && fileStream.Length == 0)
+                || (capacity > fileStream.Length)
+            )
+                throw new ArgumentException("capacity");
 
-		static MemoryMappedFile CoreShmCreate (string mapName, long capacity, MemoryMappedFileAccess access,
-							  MemoryMappedFileOptions options, MemoryMappedFileSecurity memoryMappedFileSecurity,
-							  HandleInheritability inheritability, FileMode mode)
-		{
-			if (mapName != null && mapName.Length == 0)
-				throw new ArgumentException ("mapName");
-			if (capacity < 0)
-				throw new ArgumentOutOfRangeException ("capacity");
+            IntPtr handle = MemoryMapImpl.OpenHandle(
+                fileStream.SafeFileHandle.DangerousGetHandle(),
+                mapName,
+                out capacity,
+                access,
+                MemoryMappedFileOptions.None
+            );
 
-			IntPtr handle = MemoryMapImpl.OpenFile (null, mode, mapName, out capacity, access, options);
-			
-			return new MemoryMappedFile () {
-				handle = new SafeMemoryMappedFileHandle (handle, true),
-				// fileAccess = access,
-				// name = mapName,
-				// fileCapacity = capacity
-			};			
-		}
+            MemoryMapImpl.ConfigureHandleInheritability(handle, inheritability);
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile CreateNew (string mapName, long capacity)
-		{
-			return CreateNew (mapName, capacity, MemoryMappedFileAccess.ReadWrite, MemoryMappedFileOptions.None, null, HandleInheritability.None);
-		}
+            return new MemoryMappedFile()
+            {
+                handle = new SafeMemoryMappedFileHandle(handle, true),
+                // fileAccess = access,
+                // name = mapName,
+                // fileCapacity = capacity,
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile CreateNew (string mapName, long capacity, MemoryMappedFileAccess access) 
-		{
-			return CreateNew (mapName, capacity, access, MemoryMappedFileOptions.None, null, HandleInheritability.None);
-		}
+                stream = fileStream,
+                keepOpen = leaveOpen,
+            };
+        }
 
-		[MonoLimitation ("Named mappings scope is process local; options is ignored")]
-		public static MemoryMappedFile CreateNew (string mapName, long capacity, MemoryMappedFileAccess access, MemoryMappedFileOptions options, HandleInheritability inheritability)
-		{
-			return CreateNew (mapName, capacity, access, options, null, inheritability);
-		}
+        static MemoryMappedFile CoreShmCreate(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            MemoryMappedFileSecurity memoryMappedFileSecurity,
+            HandleInheritability inheritability,
+            FileMode mode
+        )
+        {
+            if (mapName != null && mapName.Length == 0)
+                throw new ArgumentException("mapName");
+            if (capacity < 0)
+                throw new ArgumentOutOfRangeException("capacity");
 
-		[MonoLimitation ("Named mappings scope is process local; options and memoryMappedFileSecurity are ignored")]
-		public static MemoryMappedFile CreateNew (string mapName, long capacity, MemoryMappedFileAccess access,
-							  MemoryMappedFileOptions options, MemoryMappedFileSecurity memoryMappedFileSecurity,
-							  HandleInheritability inheritability)
-		{
-			return CoreShmCreate (mapName, capacity, access, options, memoryMappedFileSecurity, inheritability, FileMode.CreateNew);
-		}
+            IntPtr handle = MemoryMapImpl.OpenFile(
+                null,
+                mode,
+                mapName,
+                out capacity,
+                access,
+                options
+            );
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile CreateOrOpen (string mapName, long capacity)
-		{
-			return CreateOrOpen (mapName, capacity, MemoryMappedFileAccess.ReadWrite);
-		}
+            return new MemoryMappedFile()
+            {
+                handle = new SafeMemoryMappedFileHandle(handle, true),
+                // fileAccess = access,
+                // name = mapName,
+                // fileCapacity = capacity
+            };
+        }
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile CreateOrOpen (string mapName, long capacity, MemoryMappedFileAccess access)
-		{
-			return CreateOrOpen (mapName, capacity, access, MemoryMappedFileOptions.None, null, HandleInheritability.None);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile CreateNew(string mapName, long capacity)
+        {
+            return CreateNew(
+                mapName,
+                capacity,
+                MemoryMappedFileAccess.ReadWrite,
+                MemoryMappedFileOptions.None,
+                null,
+                HandleInheritability.None
+            );
+        }
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile CreateOrOpen (string mapName, long capacity, MemoryMappedFileAccess access, MemoryMappedFileOptions options, HandleInheritability inheritability)
-		{
-			return CreateOrOpen (mapName, capacity, access, options, null, inheritability);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile CreateNew(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
+        {
+            return CreateNew(
+                mapName,
+                capacity,
+                access,
+                MemoryMappedFileOptions.None,
+                null,
+                HandleInheritability.None
+            );
+        }
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile CreateOrOpen (string mapName, long capacity, MemoryMappedFileAccess access, MemoryMappedFileOptions options, MemoryMappedFileSecurity memoryMappedFileSecurity, HandleInheritability inheritability)
-		{
-			return CoreShmCreate (mapName, capacity, access, options, memoryMappedFileSecurity, inheritability, FileMode.OpenOrCreate);
-		}
+        [MonoLimitation("Named mappings scope is process local; options is ignored")]
+        public static MemoryMappedFile CreateNew(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            HandleInheritability inheritability
+        )
+        {
+            return CreateNew(mapName, capacity, access, options, null, inheritability);
+        }
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile OpenExisting (string mapName)
-		{
-			return OpenExisting (mapName, MemoryMappedFileRights.ReadWrite);
-		}
+        [MonoLimitation(
+            "Named mappings scope is process local; options and memoryMappedFileSecurity are ignored"
+        )]
+        public static MemoryMappedFile CreateNew(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            MemoryMappedFileSecurity memoryMappedFileSecurity,
+            HandleInheritability inheritability
+        )
+        {
+            return CoreShmCreate(
+                mapName,
+                capacity,
+                access,
+                options,
+                memoryMappedFileSecurity,
+                inheritability,
+                FileMode.CreateNew
+            );
+        }
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile OpenExisting (string mapName, MemoryMappedFileRights desiredAccessRights)
-		{
-			return OpenExisting (mapName, desiredAccessRights, HandleInheritability.None);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile CreateOrOpen(string mapName, long capacity)
+        {
+            return CreateOrOpen(mapName, capacity, MemoryMappedFileAccess.ReadWrite);
+        }
 
-		[MonoLimitation ("Named mappings scope is process local")]
-		public static MemoryMappedFile OpenExisting (string mapName, MemoryMappedFileRights desiredAccessRights, HandleInheritability inheritability)
-		{
-			// FIXME: Actually use desiredAccessRights
-			return CoreShmCreate (mapName, 0, MemoryMappedFileAccess.ReadWrite, MemoryMappedFileOptions.None, null, inheritability, FileMode.Open);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile CreateOrOpen(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access
+        )
+        {
+            return CreateOrOpen(
+                mapName,
+                capacity,
+                access,
+                MemoryMappedFileOptions.None,
+                null,
+                HandleInheritability.None
+            );
+        }
 
-		public MemoryMappedViewStream CreateViewStream ()
-		{
-			return CreateViewStream (0, 0);//FIXME this is wrong
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile CreateOrOpen(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            HandleInheritability inheritability
+        )
+        {
+            return CreateOrOpen(mapName, capacity, access, options, null, inheritability);
+        }
 
-		public MemoryMappedViewStream CreateViewStream (long offset, long size)
-		{
-			return CreateViewStream (offset, size, MemoryMappedFileAccess.ReadWrite);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile CreateOrOpen(
+            string mapName,
+            long capacity,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            MemoryMappedFileSecurity memoryMappedFileSecurity,
+            HandleInheritability inheritability
+        )
+        {
+            return CoreShmCreate(
+                mapName,
+                capacity,
+                access,
+                options,
+                memoryMappedFileSecurity,
+                inheritability,
+                FileMode.OpenOrCreate
+            );
+        }
 
-		public MemoryMappedViewStream CreateViewStream (long offset, long size, MemoryMappedFileAccess access)
-		{
-			var view = MemoryMappedView.Create (handle.DangerousGetHandle (), offset, size, access);
-			return new MemoryMappedViewStream (view);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile OpenExisting(string mapName)
+        {
+            return OpenExisting(mapName, MemoryMappedFileRights.ReadWrite);
+        }
 
-		public MemoryMappedViewAccessor CreateViewAccessor ()
-		{
-			return CreateViewAccessor (0, 0);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile OpenExisting(
+            string mapName,
+            MemoryMappedFileRights desiredAccessRights
+        )
+        {
+            return OpenExisting(mapName, desiredAccessRights, HandleInheritability.None);
+        }
 
-		public MemoryMappedViewAccessor CreateViewAccessor (long offset, long size)
-		{
-			return CreateViewAccessor (offset, size, MemoryMappedFileAccess.ReadWrite);
-		}
+        [MonoLimitation("Named mappings scope is process local")]
+        public static MemoryMappedFile OpenExisting(
+            string mapName,
+            MemoryMappedFileRights desiredAccessRights,
+            HandleInheritability inheritability
+        )
+        {
+            // FIXME: Actually use desiredAccessRights
+            return CoreShmCreate(
+                mapName,
+                0,
+                MemoryMappedFileAccess.ReadWrite,
+                MemoryMappedFileOptions.None,
+                null,
+                inheritability,
+                FileMode.Open
+            );
+        }
 
-		public MemoryMappedViewAccessor CreateViewAccessor (long offset, long size, MemoryMappedFileAccess access)
-		{
-			var view = MemoryMappedView.Create (handle.DangerousGetHandle (), offset, size, access);
-			return new MemoryMappedViewAccessor (view);
-		}
+        public MemoryMappedViewStream CreateViewStream()
+        {
+            return CreateViewStream(0, 0); //FIXME this is wrong
+        }
 
-		MemoryMappedFile ()
-		{
-		}
+        public MemoryMappedViewStream CreateViewStream(long offset, long size)
+        {
+            return CreateViewStream(offset, size, MemoryMappedFileAccess.ReadWrite);
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-		}
+        public MemoryMappedViewStream CreateViewStream(
+            long offset,
+            long size,
+            MemoryMappedFileAccess access
+        )
+        {
+            var view = MemoryMappedView.Create(handle.DangerousGetHandle(), offset, size, access);
+            return new MemoryMappedViewStream(view);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			if (disposing) {
-				if (stream != null) {
-					if (keepOpen == false)
-						stream.Close ();
-					stream = null;
-				}
-			}
-			if (handle != null) {
-				handle.Dispose ();
-				handle = null;
-			}
-		}
+        public MemoryMappedViewAccessor CreateViewAccessor()
+        {
+            return CreateViewAccessor(0, 0);
+        }
 
-		[MonoTODO]
-		public MemoryMappedFileSecurity GetAccessControl ()
-		{
-			throw new NotImplementedException ();
-		}
+        public MemoryMappedViewAccessor CreateViewAccessor(long offset, long size)
+        {
+            return CreateViewAccessor(offset, size, MemoryMappedFileAccess.ReadWrite);
+        }
 
-		[MonoTODO]
-		public void SetAccessControl (MemoryMappedFileSecurity memoryMappedFileSecurity)
-		{
-			throw new NotImplementedException ();
-		}
+        public MemoryMappedViewAccessor CreateViewAccessor(
+            long offset,
+            long size,
+            MemoryMappedFileAccess access
+        )
+        {
+            var view = MemoryMappedView.Create(handle.DangerousGetHandle(), offset, size, access);
+            return new MemoryMappedViewAccessor(view);
+        }
 
-		public SafeMemoryMappedFileHandle SafeMemoryMappedFileHandle {
-			get {
-				return handle;
-			}
-		}
+        MemoryMappedFile() { }
 
-		// This converts a MemoryMappedFileAccess to a FileAccess. MemoryMappedViewStream and
-		// MemoryMappedViewAccessor subclass UnmanagedMemoryStream and UnmanagedMemoryAccessor, which both use
-		// FileAccess to determine whether they are writable and/or readable.
-		internal static FileAccess GetFileAccess (MemoryMappedFileAccess access) {
+        public void Dispose()
+        {
+            Dispose(true);
+        }
 
-			if (access == MemoryMappedFileAccess.Read) {
-				return FileAccess.Read;
-			}
-			if (access == MemoryMappedFileAccess.Write) {
-				return FileAccess.Write;
-			}
-			else if (access == MemoryMappedFileAccess.ReadWrite) {
-				return FileAccess.ReadWrite;
-			}
-			else if (access == MemoryMappedFileAccess.CopyOnWrite) {
-				return FileAccess.ReadWrite;
-			}
-			else if (access == MemoryMappedFileAccess.ReadExecute) {
-				return FileAccess.Read;
-			}
-			else if (access == MemoryMappedFileAccess.ReadWriteExecute) {
-				return FileAccess.ReadWrite;
-			}
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (stream != null)
+                {
+                    if (keepOpen == false)
+                        stream.Close();
+                    stream = null;
+                }
+            }
+            if (handle != null)
+            {
+                handle.Dispose();
+                handle = null;
+            }
+        }
 
-			// If we reached here, access was invalid.
-			throw new ArgumentOutOfRangeException ("access");
-		}
-	}
+        [MonoTODO]
+        public MemoryMappedFileSecurity GetAccessControl()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void SetAccessControl(MemoryMappedFileSecurity memoryMappedFileSecurity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public SafeMemoryMappedFileHandle SafeMemoryMappedFileHandle
+        {
+            get { return handle; }
+        }
+
+        // This converts a MemoryMappedFileAccess to a FileAccess. MemoryMappedViewStream and
+        // MemoryMappedViewAccessor subclass UnmanagedMemoryStream and UnmanagedMemoryAccessor, which both use
+        // FileAccess to determine whether they are writable and/or readable.
+        internal static FileAccess GetFileAccess(MemoryMappedFileAccess access)
+        {
+            if (access == MemoryMappedFileAccess.Read)
+            {
+                return FileAccess.Read;
+            }
+            if (access == MemoryMappedFileAccess.Write)
+            {
+                return FileAccess.Write;
+            }
+            else if (access == MemoryMappedFileAccess.ReadWrite)
+            {
+                return FileAccess.ReadWrite;
+            }
+            else if (access == MemoryMappedFileAccess.CopyOnWrite)
+            {
+                return FileAccess.ReadWrite;
+            }
+            else if (access == MemoryMappedFileAccess.ReadExecute)
+            {
+                return FileAccess.Read;
+            }
+            else if (access == MemoryMappedFileAccess.ReadWriteExecute)
+            {
+                return FileAccess.ReadWrite;
+            }
+
+            // If we reached here, access was invalid.
+            throw new ArgumentOutOfRangeException("access");
+        }
+    }
 }
-

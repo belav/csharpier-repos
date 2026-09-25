@@ -55,10 +55,12 @@ public interface IChangeDetector
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    (EventHandler<DetectChangesEventArgs>? DetectingAllChanges,
+    (
+        EventHandler<DetectChangesEventArgs>? DetectingAllChanges,
         EventHandler<DetectedChangesEventArgs>? DetectedAllChanges,
         EventHandler<DetectEntityChangesEventArgs>? DetectingEntityChanges,
-        EventHandler<DetectedEntityChangesEventArgs>? DetectedEntityChanges) CaptureEvents();
+        EventHandler<DetectedEntityChangesEventArgs>? DetectedEntityChanges
+    ) CaptureEvents();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -70,7 +72,8 @@ public interface IChangeDetector
         EventHandler<DetectChangesEventArgs>? detectingAllChanges,
         EventHandler<DetectedChangesEventArgs>? detectedAllChanges,
         EventHandler<DetectEntityChangesEventArgs>? detectingEntityChanges,
-        EventHandler<DetectedEntityChangesEventArgs>? detectedEntityChanges);
+        EventHandler<DetectedEntityChangesEventArgs>? detectedEntityChanges
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

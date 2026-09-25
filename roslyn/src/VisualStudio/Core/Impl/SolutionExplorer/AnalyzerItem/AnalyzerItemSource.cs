@@ -28,7 +28,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public AnalyzerItemSource(AnalyzersFolderItem analyzersFolder, IAnalyzersCommandHandler commandHandler)
+        public AnalyzerItemSource(
+            AnalyzersFolderItem analyzersFolder,
+            IAnalyzersCommandHandler commandHandler
+        )
         {
             _analyzersFolder = analyzersFolder;
             _commandHandler = commandHandler;
@@ -82,24 +85,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 return;
             }
 
-            var project = _analyzersFolder.Workspace
-                            .CurrentSolution
-                            .GetProject(_analyzersFolder.ProjectId);
+            var project = _analyzersFolder.Workspace.CurrentSolution.GetProject(
+                _analyzersFolder.ProjectId
+            );
 
-            if (project != null &&
-                project.AnalyzerReferences != _analyzerReferences)
+            if (project != null && project.AnalyzerReferences != _analyzerReferences)
             {
                 _analyzerReferences = project.AnalyzerReferences;
 
                 _analyzerItems.BeginBulkOperation();
 
                 var itemsToRemove = _analyzerItems
-                                        .Where(item => !_analyzerReferences.Contains(item.AnalyzerReference))
-                                        .ToArray();
+                    .Where(item => !_analyzerReferences.Contains(item.AnalyzerReference))
+                    .ToArray();
 
                 var referencesToAdd = GetFilteredAnalyzers(_analyzerReferences, project)
-                                        .Where(r => !_analyzerItems.Any(item => item.AnalyzerReference == r))
-                                        .ToArray();
+                    .Where(r => !_analyzerItems.Any(item => item.AnalyzerReference == r))
+                    .ToArray();
 
                 foreach (var item in itemsToRemove)
                 {
@@ -108,10 +110,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
                 foreach (var reference in referencesToAdd)
                 {
-                    _analyzerItems.Add(new AnalyzerItem(_analyzersFolder, reference, _commandHandler.AnalyzerContextMenuController));
+                    _analyzerItems.Add(
+                        new AnalyzerItem(
+                            _analyzersFolder,
+                            reference,
+                            _commandHandler.AnalyzerContextMenuController
+                        )
+                    );
                 }
 
-                var sorted = _analyzerItems.OrderBy(item => item.AnalyzerReference.Display).ToArray();
+                var sorted = _analyzerItems
+                    .OrderBy(item => item.AnalyzerReference.Display)
+                    .ToArray();
                 for (var i = 0; i < sorted.Length; i++)
                 {
                     _analyzerItems.Move(_analyzerItems.IndexOf(sorted[i]), i);
@@ -137,9 +147,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                     return _analyzerItems.Count > 0;
                 }
 
-                var project = _analyzersFolder.Workspace
-                                                .CurrentSolution
-                                                .GetProject(_analyzersFolder.ProjectId);
+                var project = _analyzersFolder.Workspace.CurrentSolution.GetProject(
+                    _analyzersFolder.ProjectId
+                );
 
                 if (project != null)
                 {
@@ -158,23 +168,28 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 {
                     _analyzerItems = new BulkObservableCollection<AnalyzerItem>();
 
-                    var project = _analyzersFolder.Workspace
-                                                .CurrentSolution
-                                                .GetProject(_analyzersFolder.ProjectId);
+                    var project = _analyzersFolder.Workspace.CurrentSolution.GetProject(
+                        _analyzersFolder.ProjectId
+                    );
 
                     if (project != null)
                     {
                         _analyzerReferences = project.AnalyzerReferences;
                         var initialSet = GetFilteredAnalyzers(_analyzerReferences, project)
-                                            .OrderBy(ar => ar.Display)
-                                            .Select(ar => new AnalyzerItem(_analyzersFolder, ar, _commandHandler.AnalyzerContextMenuController));
+                            .OrderBy(ar => ar.Display)
+                            .Select(ar => new AnalyzerItem(
+                                _analyzersFolder,
+                                ar,
+                                _commandHandler.AnalyzerContextMenuController
+                            ));
                         _analyzerItems.AddRange(initialSet);
                     }
                 }
 
                 Logger.Log(
                     FunctionId.SolutionExplorer_AnalyzerItemSource_GetItems,
-                    KeyValueLogMessage.Create(m => m["Count"] = _analyzerItems.Count));
+                    KeyValueLogMessage.Create(m => m["Count"] = _analyzerItems.Count)
+                );
 
                 return _analyzerItems;
             }
@@ -182,10 +197,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 
         public object SourceItem
         {
-            get
-            {
-                return _analyzersFolder;
-            }
+            get { return _analyzersFolder; }
         }
 
         private ImmutableHashSet<string> GetAnalyzersWithLoadErrors()
@@ -206,7 +218,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             return ImmutableHashSet<string>.Empty;
         }
 
-        private ImmutableArray<AnalyzerReference> GetFilteredAnalyzers(IEnumerable<AnalyzerReference> analyzerReferences, Project project)
+        private ImmutableArray<AnalyzerReference> GetFilteredAnalyzers(
+            IEnumerable<AnalyzerReference> analyzerReferences,
+            Project project
+        )
         {
             var analyzersWithLoadErrors = GetAnalyzersWithLoadErrors();
 
@@ -220,11 +235,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
                 // 3. Must have no source generators.
                 // 4. Must have non-null full path.
                 // 5. Must not have any assembly or analyzer load failures.
-                if (analyzerReference is AnalyzerFileReference &&
-                    analyzerReference.GetAnalyzers(project.Language).IsDefaultOrEmpty &&
-                    analyzerReference.GetGenerators(project.Language).IsDefaultOrEmpty &&
-                    analyzerReference.FullPath != null &&
-                    !analyzersWithLoadErrors.Contains(analyzerReference.FullPath))
+                if (
+                    analyzerReference is AnalyzerFileReference
+                    && analyzerReference.GetAnalyzers(project.Language).IsDefaultOrEmpty
+                    && analyzerReference.GetGenerators(project.Language).IsDefaultOrEmpty
+                    && analyzerReference.FullPath != null
+                    && !analyzersWithLoadErrors.Contains(analyzerReference.FullPath)
+                )
                 {
                     continue;
                 }

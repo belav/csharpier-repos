@@ -26,10 +26,16 @@ namespace System.Collections.Frozen
         /// <see cref="M:System.Linq.Enumerable.ToDictionary"/>, with which multiple duplicate keys will result in an exception.
         /// </remarks>
         /// <returns>A <see cref="FrozenDictionary{TKey, TValue}"/> that contains the specified keys and values.</returns>
-        public static FrozenDictionary<TKey, TValue> ToFrozenDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> source, IEqualityComparer<TKey>? comparer = null)
+        public static FrozenDictionary<TKey, TValue> ToFrozenDictionary<TKey, TValue>(
+            this IEnumerable<KeyValuePair<TKey, TValue>> source,
+            IEqualityComparer<TKey>? comparer = null
+        )
             where TKey : notnull =>
-            GetExistingFrozenOrNewDictionary(source, comparer, out Dictionary<TKey, TValue>? uniqueValues) ??
-            CreateFromDictionary(uniqueValues!);
+            GetExistingFrozenOrNewDictionary(
+                source,
+                comparer,
+                out Dictionary<TKey, TValue>? uniqueValues
+            ) ?? CreateFromDictionary(uniqueValues!);
 
         /// <summary>Creates a <see cref="FrozenDictionary{TKey, TSource}"/> from an <see cref="IEnumerable{TSource}"/> according to specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source"/>.</typeparam>
@@ -39,7 +45,10 @@ namespace System.Collections.Frozen
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}"/> to compare keys.</param>
         /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values selected from the input sequence.</returns>
         public static FrozenDictionary<TKey, TSource> ToFrozenDictionary<TSource, TKey>(
-            this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer = null)
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer = null
+        )
             where TKey : notnull =>
             source.ToDictionary(keySelector, comparer).ToFrozenDictionary(comparer);
 
@@ -53,9 +62,15 @@ namespace System.Collections.Frozen
         /// <param name="comparer">An <see cref="IEqualityComparer{TKey}"/> to compare keys.</param>
         /// <returns>A <see cref="FrozenDictionary{TKey, TElement}"/> that contains the keys and values selected from the input sequence.</returns>
         public static FrozenDictionary<TKey, TElement> ToFrozenDictionary<TSource, TKey, TElement>(
-            this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, Func<TSource, TElement> elementSelector, IEqualityComparer<TKey>? comparer = null)
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            Func<TSource, TElement> elementSelector,
+            IEqualityComparer<TKey>? comparer = null
+        )
             where TKey : notnull =>
-            source.ToDictionary(keySelector, elementSelector, comparer).ToFrozenDictionary(comparer);
+            source
+                .ToDictionary(keySelector, elementSelector, comparer)
+                .ToFrozenDictionary(comparer);
 
         /// <summary>
         /// Extracts from the source either an existing <see cref="FrozenDictionary{TKey,TValue}"/> instance or a <see cref="Dictionary{TKey,TValue}"/>
@@ -67,9 +82,14 @@ namespace System.Collections.Frozen
         /// Otherwise, returns null, and <paramref name="newDictionary"/> is set to a dictionary containing the keys/values from <paramref name="source"/> and
         /// specified <paramref name="comparer"/>.
         /// </returns>
-        private static FrozenDictionary<TKey, TValue>? GetExistingFrozenOrNewDictionary<TKey, TValue>(
-            IEnumerable<KeyValuePair<TKey, TValue>> source, IEqualityComparer<TKey>? comparer,
-            out Dictionary<TKey, TValue>? newDictionary)
+        private static FrozenDictionary<TKey, TValue>? GetExistingFrozenOrNewDictionary<
+            TKey,
+            TValue
+        >(
+            IEnumerable<KeyValuePair<TKey, TValue>> source,
+            IEqualityComparer<TKey>? comparer,
+            out Dictionary<TKey, TValue>? newDictionary
+        )
             where TKey : notnull
         {
             ThrowHelper.ThrowIfNull(source);
@@ -85,7 +105,10 @@ namespace System.Collections.Frozen
             // Ensure we have a Dictionary<,> using the specified comparer such that all keys
             // are non-null and unique according to that comparer.
             newDictionary = source as Dictionary<TKey, TValue>;
-            if (newDictionary is null || (newDictionary.Count != 0 && !newDictionary.Comparer.Equals(comparer)))
+            if (
+                newDictionary is null
+                || (newDictionary.Count != 0 && !newDictionary.Comparer.Equals(comparer))
+            )
             {
                 newDictionary = new Dictionary<TKey, TValue>(comparer);
                 foreach (KeyValuePair<TKey, TValue> pair in source)
@@ -99,9 +122,9 @@ namespace System.Collections.Frozen
 
             if (newDictionary.Count == 0)
             {
-                return ReferenceEquals(comparer, FrozenDictionary<TKey, TValue>.Empty.Comparer) ?
-                    FrozenDictionary<TKey, TValue>.Empty :
-                    new EmptyFrozenDictionary<TKey, TValue>(comparer);
+                return ReferenceEquals(comparer, FrozenDictionary<TKey, TValue>.Empty.Comparer)
+                    ? FrozenDictionary<TKey, TValue>.Empty
+                    : new EmptyFrozenDictionary<TKey, TValue>(comparer);
             }
 
             Debug.Assert(newDictionary is not null);
@@ -110,7 +133,9 @@ namespace System.Collections.Frozen
         }
 
         /// <summary>Constructs a frozen dictionary, optimizing for the speed of reads on the created instance.</summary>
-        private static FrozenDictionary<TKey, TValue> CreateFromDictionary<TKey, TValue>(Dictionary<TKey, TValue> source)
+        private static FrozenDictionary<TKey, TValue> CreateFromDictionary<TKey, TValue>(
+            Dictionary<TKey, TValue> source
+        )
             where TKey : notnull
         {
             Debug.Assert(source.Count > 0, "Empty sources should have been filtered out by caller");
@@ -120,7 +145,10 @@ namespace System.Collections.Frozen
             // Optimize for value types when the default comparer is being used. In such a case, the implementation
             // may use {Equality}Comparer<TKey>.Default.Compare/Equals/GetHashCode directly, with generic specialization enabling
             // the Equals/GetHashCode methods to be devirtualized and possibly inlined.
-            if (typeof(TKey).IsValueType && ReferenceEquals(comparer, EqualityComparer<TKey>.Default))
+            if (
+                typeof(TKey).IsValueType
+                && ReferenceEquals(comparer, EqualityComparer<TKey>.Default)
+            )
             {
                 if (source.Count <= Constants.MaxItemsInSmallValueTypeFrozenCollection)
                 {
@@ -128,11 +156,15 @@ namespace System.Collections.Frozen
                     // that will enable quickly ruling out values outside of the range of keys stored.
                     if (Constants.IsKnownComparable<TKey>())
                     {
-                        return (FrozenDictionary<TKey, TValue>)(object)new SmallValueTypeComparableFrozenDictionary<TKey, TValue>(source);
+                        return (FrozenDictionary<TKey, TValue>)
+                            (object)
+                                new SmallValueTypeComparableFrozenDictionary<TKey, TValue>(source);
                     }
 
                     // Otherwise, use an implementation optimized for a small number of value types using the default comparer.
-                    return (FrozenDictionary<TKey, TValue>)(object)new SmallValueTypeDefaultComparerFrozenDictionary<TKey, TValue>(source);
+                    return (FrozenDictionary<TKey, TValue>)
+                        (object)
+                            new SmallValueTypeDefaultComparerFrozenDictionary<TKey, TValue>(source);
                 }
 
                 // Use a hash-based implementation.
@@ -140,7 +172,11 @@ namespace System.Collections.Frozen
                 // For Int32 keys, we can reuse the key storage as the hash storage, saving on space and extra indirection.
                 if (typeof(TKey) == typeof(int))
                 {
-                    return (FrozenDictionary<TKey, TValue>)(object)new Int32FrozenDictionary<TValue>((Dictionary<int, TValue>)(object)source);
+                    return (FrozenDictionary<TKey, TValue>)
+                        (object)
+                            new Int32FrozenDictionary<TValue>(
+                                (Dictionary<int, TValue>)(object)source
+                            );
                 }
 
                 // Fallback to an implementation usable with any value type and the default comparer.
@@ -150,33 +186,55 @@ namespace System.Collections.Frozen
             // Optimize for string keys with the default, Ordinal, or OrdinalIgnoreCase comparers.
             // If the key is a string and the comparer is known to provide ordinal (case-sensitive or case-insensitive) semantics,
             // we can use an implementation that's able to examine and optimize based on lengths and/or subsequences within those strings.
-            if (typeof(TKey) == typeof(string) &&
-                (ReferenceEquals(comparer, EqualityComparer<TKey>.Default) || ReferenceEquals(comparer, StringComparer.Ordinal) || ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase)))
+            if (
+                typeof(TKey) == typeof(string)
+                && (
+                    ReferenceEquals(comparer, EqualityComparer<TKey>.Default)
+                    || ReferenceEquals(comparer, StringComparer.Ordinal)
+                    || ReferenceEquals(comparer, StringComparer.OrdinalIgnoreCase)
+                )
+            )
             {
-                IEqualityComparer<string> stringComparer = (IEqualityComparer<string>)(object)comparer;
+                IEqualityComparer<string> stringComparer =
+                    (IEqualityComparer<string>)(object)comparer;
 
                 // keys and values are needed for every strategy
                 string[] keys = (string[])(object)source.Keys.ToArray();
                 TValue[] values = source.Values.ToArray();
 
                 // Calculate the minimum and maximum lengths of the strings in the dictionary. Several of the analyses need this.
-                int minLength = int.MaxValue, maxLength = 0;
+                int minLength = int.MaxValue,
+                    maxLength = 0;
                 foreach (string key in keys)
                 {
-                    if (key.Length < minLength) minLength = key.Length;
-                    if (key.Length > maxLength) maxLength = key.Length;
+                    if (key.Length < minLength)
+                        minLength = key.Length;
+                    if (key.Length > maxLength)
+                        maxLength = key.Length;
                 }
                 Debug.Assert(minLength >= 0 && maxLength >= minLength);
 
                 // Try to create an implementation that uses length buckets, where each bucket contains up to only a few strings of the same length.
-                FrozenDictionary<string, TValue>? frozenDictionary = LengthBucketsFrozenDictionary<TValue>.CreateLengthBucketsFrozenDictionaryIfAppropriate(keys, values, stringComparer, minLength, maxLength);
+                FrozenDictionary<string, TValue>? frozenDictionary =
+                    LengthBucketsFrozenDictionary<TValue>.CreateLengthBucketsFrozenDictionaryIfAppropriate(
+                        keys,
+                        values,
+                        stringComparer,
+                        minLength,
+                        maxLength
+                    );
                 if (frozenDictionary is not null)
                 {
                     return (FrozenDictionary<TKey, TValue>)(object)frozenDictionary;
                 }
 
                 // Analyze the keys for unique substrings and create an implementation that minimizes the cost of hashing keys.
-                KeyAnalyzer.AnalysisResults analysis = KeyAnalyzer.Analyze(keys, ReferenceEquals(stringComparer, StringComparer.OrdinalIgnoreCase), minLength, maxLength);
+                KeyAnalyzer.AnalysisResults analysis = KeyAnalyzer.Analyze(
+                    keys,
+                    ReferenceEquals(stringComparer, StringComparer.OrdinalIgnoreCase),
+                    minLength,
+                    maxLength
+                );
                 if (analysis.SubstringHashing)
                 {
                     if (analysis.RightJustifiedSubstring)
@@ -184,14 +242,46 @@ namespace System.Collections.Frozen
                         if (analysis.IgnoreCase)
                         {
                             frozenDictionary = analysis.AllAsciiIfIgnoreCase
-                                ? new OrdinalStringFrozenDictionary_RightJustifiedCaseInsensitiveAsciiSubstring<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount)
-                                : new OrdinalStringFrozenDictionary_RightJustifiedCaseInsensitiveSubstring<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                                ? new OrdinalStringFrozenDictionary_RightJustifiedCaseInsensitiveAsciiSubstring<TValue>(
+                                    keys,
+                                    values,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                )
+                                : new OrdinalStringFrozenDictionary_RightJustifiedCaseInsensitiveSubstring<TValue>(
+                                    keys,
+                                    values,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                );
                         }
                         else
                         {
-                            frozenDictionary = analysis.HashCount == 1
-                                ? new OrdinalStringFrozenDictionary_RightJustifiedSingleChar<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex)
-                                : new OrdinalStringFrozenDictionary_RightJustifiedSubstring<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                            frozenDictionary =
+                                analysis.HashCount == 1
+                                    ? new OrdinalStringFrozenDictionary_RightJustifiedSingleChar<TValue>(
+                                        keys,
+                                        values,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex
+                                    )
+                                    : new OrdinalStringFrozenDictionary_RightJustifiedSubstring<TValue>(
+                                        keys,
+                                        values,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex,
+                                        analysis.HashCount
+                                    );
                         }
                     }
                     else
@@ -199,14 +289,46 @@ namespace System.Collections.Frozen
                         if (analysis.IgnoreCase)
                         {
                             frozenDictionary = analysis.AllAsciiIfIgnoreCase
-                                ? new OrdinalStringFrozenDictionary_LeftJustifiedCaseInsensitiveAsciiSubstring<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount)
-                                : new OrdinalStringFrozenDictionary_LeftJustifiedCaseInsensitiveSubstring<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                                ? new OrdinalStringFrozenDictionary_LeftJustifiedCaseInsensitiveAsciiSubstring<TValue>(
+                                    keys,
+                                    values,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                )
+                                : new OrdinalStringFrozenDictionary_LeftJustifiedCaseInsensitiveSubstring<TValue>(
+                                    keys,
+                                    values,
+                                    stringComparer,
+                                    analysis.MinimumLength,
+                                    analysis.MaximumLengthDiff,
+                                    analysis.HashIndex,
+                                    analysis.HashCount
+                                );
                         }
                         else
                         {
-                            frozenDictionary = analysis.HashCount == 1
-                                ? new OrdinalStringFrozenDictionary_LeftJustifiedSingleChar<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex)
-                                : new OrdinalStringFrozenDictionary_LeftJustifiedSubstring<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff, analysis.HashIndex, analysis.HashCount);
+                            frozenDictionary =
+                                analysis.HashCount == 1
+                                    ? new OrdinalStringFrozenDictionary_LeftJustifiedSingleChar<TValue>(
+                                        keys,
+                                        values,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex
+                                    )
+                                    : new OrdinalStringFrozenDictionary_LeftJustifiedSubstring<TValue>(
+                                        keys,
+                                        values,
+                                        stringComparer,
+                                        analysis.MinimumLength,
+                                        analysis.MaximumLengthDiff,
+                                        analysis.HashIndex,
+                                        analysis.HashCount
+                                    );
                         }
                     }
                 }
@@ -215,12 +337,30 @@ namespace System.Collections.Frozen
                     if (analysis.IgnoreCase)
                     {
                         frozenDictionary = analysis.AllAsciiIfIgnoreCase
-                            ? new OrdinalStringFrozenDictionary_FullCaseInsensitiveAscii<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff)
-                            : new OrdinalStringFrozenDictionary_FullCaseInsensitive<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff);
+                            ? new OrdinalStringFrozenDictionary_FullCaseInsensitiveAscii<TValue>(
+                                keys,
+                                values,
+                                stringComparer,
+                                analysis.MinimumLength,
+                                analysis.MaximumLengthDiff
+                            )
+                            : new OrdinalStringFrozenDictionary_FullCaseInsensitive<TValue>(
+                                keys,
+                                values,
+                                stringComparer,
+                                analysis.MinimumLength,
+                                analysis.MaximumLengthDiff
+                            );
                     }
                     else
                     {
-                        frozenDictionary = new OrdinalStringFrozenDictionary_Full<TValue>(keys, values, stringComparer, analysis.MinimumLength, analysis.MaximumLengthDiff);
+                        frozenDictionary = new OrdinalStringFrozenDictionary_Full<TValue>(
+                            keys,
+                            values,
+                            stringComparer,
+                            analysis.MinimumLength,
+                            analysis.MaximumLengthDiff
+                        );
                     }
                 }
 
@@ -252,7 +392,10 @@ namespace System.Collections.Frozen
     /// </remarks>
     [DebuggerTypeProxy(typeof(ImmutableDictionaryDebuggerProxy<,>))]
     [DebuggerDisplay("Count = {Count}")]
-    public abstract class FrozenDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>, IDictionary
+    public abstract class FrozenDictionary<TKey, TValue>
+        : IDictionary<TKey, TValue>,
+            IReadOnlyDictionary<TKey, TValue>,
+            IDictionary
         where TKey : notnull
     {
         /// <summary>Initialize the dictionary.</summary>
@@ -260,7 +403,8 @@ namespace System.Collections.Frozen
         private protected FrozenDictionary(IEqualityComparer<TKey> comparer) => Comparer = comparer;
 
         /// <summary>Gets an empty <see cref="FrozenDictionary{TKey, TValue}"/>.</summary>
-        public static FrozenDictionary<TKey, TValue> Empty { get; } = new EmptyFrozenDictionary<TKey, TValue>(EqualityComparer<TKey>.Default);
+        public static FrozenDictionary<TKey, TValue> Empty { get; } =
+            new EmptyFrozenDictionary<TKey, TValue>(EqualityComparer<TKey>.Default);
 
         /// <summary>Gets the comparer used by this dictionary.</summary>
         public IEqualityComparer<TKey> Comparer { get; }
@@ -293,7 +437,8 @@ namespace System.Collections.Frozen
         /// <remarks>
         /// The order of the values in the dictionary is unspecified, but it is the same order as the associated keys returned by the <see cref="Keys"/> property.
         /// </remarks>
-        public ImmutableArray<TValue> Values => ImmutableCollectionsMarshal.AsImmutableArray(ValuesCore);
+        public ImmutableArray<TValue> Values =>
+            ImmutableCollectionsMarshal.AsImmutableArray(ValuesCore);
 
         /// <inheritdoc cref="Values" />
         private protected abstract TValue[] ValuesCore { get; }
@@ -359,7 +504,10 @@ namespace System.Collections.Frozen
 
             if ((uint)index > (uint)array.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (array.Length - index < Count)
@@ -423,9 +571,9 @@ namespace System.Collections.Frozen
             get
             {
                 ThrowHelper.ThrowIfNull(key);
-                return key is TKey tkey && TryGetValue(tkey, out TValue? value) ?
-                    value :
-                    (object?)null;
+                return key is TKey tkey && TryGetValue(tkey, out TValue? value)
+                    ? value
+                    : (object?)null;
             }
             set => throw new NotSupportedException();
         }
@@ -474,8 +622,7 @@ namespace System.Collections.Frozen
         }
 
         /// <inheritdoc />
-        TValue IReadOnlyDictionary<TKey, TValue>.this[TKey key] =>
-            this[key];
+        TValue IReadOnlyDictionary<TKey, TValue>.this[TKey key] => this[key];
 
         /// <summary>Determines whether the dictionary contains the specified key.</summary>
         /// <param name="key">The key to locate in the dictionary.</param>
@@ -492,8 +639,8 @@ namespace System.Collections.Frozen
 
         /// <inheritdoc />
         bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item) =>
-            TryGetValue(item.Key, out TValue? value) &&
-            EqualityComparer<TValue>.Default.Equals(value, item.Value);
+            TryGetValue(item.Key, out TValue? value)
+            && EqualityComparer<TValue>.Default.Equals(value, item.Value);
 
         /// <summary>Gets the value associated with the specified key.</summary>
         /// <param name="key">The key of the value to get.</param>
@@ -524,24 +671,32 @@ namespace System.Collections.Frozen
         private protected abstract Enumerator GetEnumeratorCore();
 
         /// <inheritdoc />
-        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() =>
-            Count == 0 ? ((IList<KeyValuePair<TKey, TValue>>)Array.Empty<KeyValuePair<TKey, TValue>>()).GetEnumerator() :
-            GetEnumerator();
+        IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+            KeyValuePair<TKey, TValue>
+        >.GetEnumerator() =>
+            Count == 0
+                ? (
+                    (IList<KeyValuePair<TKey, TValue>>)Array.Empty<KeyValuePair<TKey, TValue>>()
+                ).GetEnumerator()
+                : GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() =>
-            Count == 0 ? Array.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator() :
-            GetEnumerator();
+            Count == 0
+                ? Array.Empty<KeyValuePair<TKey, TValue>>().GetEnumerator()
+                : GetEnumerator();
 
         /// <inheritdoc />
         IDictionaryEnumerator IDictionary.GetEnumerator() =>
             new DictionaryEnumerator<TKey, TValue>(GetEnumerator());
 
         /// <inheritdoc />
-        void IDictionary<TKey, TValue>.Add(TKey key, TValue value) => throw new NotSupportedException();
+        void IDictionary<TKey, TValue>.Add(TKey key, TValue value) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
-        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item) => throw new NotSupportedException();
+        void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
         void IDictionary.Add(object key, object? value) => throw new NotSupportedException();
@@ -550,7 +705,8 @@ namespace System.Collections.Frozen
         bool IDictionary<TKey, TValue>.Remove(TKey key) => throw new NotSupportedException();
 
         /// <inheritdoc />
-        bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) => throw new NotSupportedException();
+        bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) =>
+            throw new NotSupportedException();
 
         /// <inheritdoc />
         void IDictionary.Remove(object key) => throw new NotSupportedException();

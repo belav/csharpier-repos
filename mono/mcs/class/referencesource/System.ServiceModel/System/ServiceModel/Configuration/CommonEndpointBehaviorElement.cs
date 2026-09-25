@@ -8,12 +8,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Xml;
 
-    public partial class CommonEndpointBehaviorElement : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>
+    public partial class CommonEndpointBehaviorElement
+        : ServiceModelExtensionCollectionElement<BehaviorExtensionElement>
     {
         public CommonEndpointBehaviorElement()
-            : base(ConfigurationStrings.BehaviorExtensions)
-        {
-        }
+            : base(ConfigurationStrings.BehaviorExtensions) { }
 
         // Verify that the behavior being added implements IEndpointBehavior
         public override void Add(BehaviorExtensionElement element)
@@ -21,14 +20,24 @@ namespace System.ServiceModel.Configuration
             // If element is null, let base.Add() throw for consistency reasons
             if (null != element)
             {
-                if (!typeof(System.ServiceModel.Description.IEndpointBehavior).IsAssignableFrom(element.BehaviorType))
+                if (
+                    !typeof(System.ServiceModel.Description.IEndpointBehavior).IsAssignableFrom(
+                        element.BehaviorType
+                    )
+                )
                 {
 #pragma warning disable 56506 //Microsoft; element.ElementInformation is guaranteed to be non-null(System.Configuration)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidCommonEndpointBehaviorType,
-                        element.ConfigurationElementName,
-                        typeof(System.ServiceModel.Description.IEndpointBehavior).FullName),
-                        element.ElementInformation.Source,
-                        element.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidCommonEndpointBehaviorType,
+                                element.ConfigurationElementName,
+                                typeof(System.ServiceModel.Description.IEndpointBehavior).FullName
+                            ),
+                            element.ElementInformation.Source,
+                            element.ElementInformation.LineNumber
+                        )
+                    );
 #pragma warning restore
                 }
             }
@@ -42,14 +51,24 @@ namespace System.ServiceModel.Configuration
             // If element is null, let base.CanAdd() throw for consistency reasons
             if (null != element)
             {
-                if (!typeof(System.ServiceModel.Description.IEndpointBehavior).IsAssignableFrom(element.BehaviorType))
+                if (
+                    !typeof(System.ServiceModel.Description.IEndpointBehavior).IsAssignableFrom(
+                        element.BehaviorType
+                    )
+                )
                 {
 #pragma warning disable 56506 //Microsoft; element.ElementInformation is guaranteed to be non-null(System.Configuration)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidCommonEndpointBehaviorType,
-                        element.ConfigurationElementName,
-                        typeof(System.ServiceModel.Description.IEndpointBehavior).FullName),
-                        element.ElementInformation.Source,
-                        element.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidCommonEndpointBehaviorType,
+                                element.ConfigurationElementName,
+                                typeof(System.ServiceModel.Description.IEndpointBehavior).FullName
+                            ),
+                            element.ElementInformation.Source,
+                            element.ElementInformation.LineNumber
+                        )
+                    );
 #pragma warning restore
                 }
             }
@@ -58,4 +77,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

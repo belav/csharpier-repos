@@ -1,11 +1,11 @@
 #region Using directives
 
 using System;
-using System.Threading;
-using System.Reflection;
 using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Globalization;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
 using Microsoft.Win32;
 #endregion
 
@@ -15,7 +15,9 @@ namespace System.Workflow.Runtime.DebugEngine
 
     public delegate void DebugEngineCallback();
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public interface IExpressionEvaluationFrame
     {
         void CreateEvaluationFrame(IInstanceTable instanceTable, DebugEngineCallback callback);

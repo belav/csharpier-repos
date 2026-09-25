@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
             _backing = backing;
         }
 
-        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
-            => _backing.TryGetValue(key, out value);
+        public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value) =>
+            _backing.TryGetValue(key, out value);
     }
 }

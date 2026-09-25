@@ -12,7 +12,7 @@ using Microsoft.VisualStudio.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 {
-    /// <summary>   
+    /// <summary>
     /// Custom column to display the containing type for the Find All References window.
     /// </summary>
     [Export(typeof(ITableColumnDefinition))]
@@ -23,9 +23,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindReferences
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ContainingTypeColumnDefinition()
-        {
-        }
+        public ContainingTypeColumnDefinition() { }
 
         public override bool IsFilterable => true;
         public override string Name => ColumnName;

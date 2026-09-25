@@ -2,10 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Program
 {
     public static IRuntime s_rt;
     public static ulong s_1;
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -14,9 +16,7 @@ public class Program
             var vr1 = (uint)((int)M2(ref s_1, 0) % (long)1);
             M2(ref s_1, vr1);
         }
-        catch (System.Exception)
-        {
-        }
+        catch (System.Exception) { }
     }
 
     public static byte M2(ref ulong arg0, uint arg1)

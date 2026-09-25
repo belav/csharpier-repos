@@ -17,13 +17,23 @@ public class ReflectionTests
         using (ZipPackage package = (ZipPackage)Package.Open(ms, FileMode.Create, FileAccess.Write))
         {
             Uri uri = PackUriHelper.CreatePartUri(new Uri("document.xml", UriKind.Relative));
-            ZipPackagePart part = (ZipPackagePart)package.CreatePart(uri, Tests.Mime_MediaTypeNames_Text_Xml, CompressionOption.NotCompressed);
+            ZipPackagePart part = (ZipPackagePart)
+                package.CreatePart(
+                    uri,
+                    Tests.Mime_MediaTypeNames_Text_Xml,
+                    CompressionOption.NotCompressed
+                );
             using (Stream partStream = part.GetStream())
             {
                 using StreamWriter sw = new(partStream);
                 sw.Write(Tests.s_DocumentXml);
             }
-            package.CreateRelationship(part.Uri, TargetMode.Internal, "http://packageRelType", "rId1234");
+            package.CreateRelationship(
+                part.Uri,
+                TargetMode.Internal,
+                "http://packageRelType",
+                "rId1234"
+            );
         }
 
         ms.Position = 0;
@@ -31,7 +41,10 @@ public class ReflectionTests
         {
             foreach (ZipArchiveEntry entry in archive.Entries)
             {
-                FieldInfo fieldInfo = typeof(ZipArchiveEntry).GetField("_generalPurposeBitFlag", BindingFlags.Instance | BindingFlags.NonPublic);
+                FieldInfo fieldInfo = typeof(ZipArchiveEntry).GetField(
+                    "_generalPurposeBitFlag",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
                 object fieldObject = fieldInfo.GetValue(entry);
                 ushort shortField = (ushort)fieldObject;
                 Assert.Equal(0, shortField); // If it was UTF8, we would set the general purpose bit flag to 0x800 (UnicodeFileNameAndComment)
@@ -45,9 +58,11 @@ public class ReflectionTests
             for (int i = 0; i < value.Length; i++)
             {
                 char c = value[i];
-                Assert.True(c >= 32 && c <= 126, $"ZipArchiveEntry name character {c} requires UTF8");
+                Assert.True(
+                    c >= 32 && c <= 126,
+                    $"ZipArchiveEntry name character {c} requires UTF8"
+                );
             }
         }
     }
-
 }

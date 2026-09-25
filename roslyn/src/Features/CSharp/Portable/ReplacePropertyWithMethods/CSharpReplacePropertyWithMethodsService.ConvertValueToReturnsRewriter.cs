@@ -12,22 +12,21 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplacePropertyWithMethods
     {
         private class ConvertValueToReturnsRewriter : CSharpSyntaxRewriter
         {
-            public static readonly CSharpSyntaxRewriter Instance = new ConvertValueToReturnsRewriter();
+            public static readonly CSharpSyntaxRewriter Instance =
+                new ConvertValueToReturnsRewriter();
 
-            private ConvertValueToReturnsRewriter()
-            {
-            }
+            private ConvertValueToReturnsRewriter() { }
 
-            private static XmlNameSyntax ConvertToReturns(XmlNameSyntax name)
-                => name.ReplaceToken(name.LocalName, SyntaxFactory.Identifier("returns"));
+            private static XmlNameSyntax ConvertToReturns(XmlNameSyntax name) =>
+                name.ReplaceToken(name.LocalName, SyntaxFactory.Identifier("returns"));
 
-            public override SyntaxNode VisitXmlElementStartTag(XmlElementStartTagSyntax node)
-                => IsValueName(node.Name)
+            public override SyntaxNode VisitXmlElementStartTag(XmlElementStartTagSyntax node) =>
+                IsValueName(node.Name)
                     ? node.ReplaceNode(node.Name, ConvertToReturns(node.Name))
                     : base.VisitXmlElementStartTag(node);
 
-            public override SyntaxNode VisitXmlElementEndTag(XmlElementEndTagSyntax node)
-                => IsValueName(node.Name)
+            public override SyntaxNode VisitXmlElementEndTag(XmlElementEndTagSyntax node) =>
+                IsValueName(node.Name)
                     ? node.ReplaceNode(node.Name, ConvertToReturns(node.Name))
                     : base.VisitXmlElementEndTag(node);
         }

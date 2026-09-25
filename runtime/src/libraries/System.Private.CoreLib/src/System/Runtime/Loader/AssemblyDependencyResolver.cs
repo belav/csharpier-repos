@@ -45,10 +45,14 @@ namespace System.Runtime.Loader
             {
                 // Setup error writer for this thread. This makes the hostpolicy redirect all error output
                 // to the writer specified. Have to store the previous writer to set it back once this is done.
-                var errorWriter = new Interop.HostPolicy.corehost_error_writer_fn(message => errorMessage.AppendLine(Marshal.PtrToStringAuto(message)));
+                var errorWriter = new Interop.HostPolicy.corehost_error_writer_fn(message =>
+                    errorMessage.AppendLine(Marshal.PtrToStringAuto(message))
+                );
 
                 IntPtr errorWriterPtr = Marshal.GetFunctionPointerForDelegate(errorWriter);
-                IntPtr previousErrorWriterPtr = Interop.HostPolicy.corehost_set_error_writer(errorWriterPtr);
+                IntPtr previousErrorWriterPtr = Interop.HostPolicy.corehost_set_error_writer(
+                    errorWriterPtr
+                );
 
                 try
                 {
@@ -61,7 +65,8 @@ namespace System.Runtime.Loader
                             assemblyPathsList = Marshal.PtrToStringAuto(assemblyPaths);
                             nativeSearchPathsList = Marshal.PtrToStringAuto(nativeSearchPaths);
                             resourceSearchPathsList = Marshal.PtrToStringAuto(resourceSearchPaths);
-                        });
+                        }
+                    );
                 }
                 finally
                 {
@@ -72,21 +77,30 @@ namespace System.Runtime.Loader
             }
             catch (EntryPointNotFoundException entryPointNotFoundException)
             {
-                throw new InvalidOperationException(SR.AssemblyDependencyResolver_FailedToLoadHostpolicy, entryPointNotFoundException);
+                throw new InvalidOperationException(
+                    SR.AssemblyDependencyResolver_FailedToLoadHostpolicy,
+                    entryPointNotFoundException
+                );
             }
             catch (DllNotFoundException dllNotFoundException)
             {
-                throw new InvalidOperationException(SR.AssemblyDependencyResolver_FailedToLoadHostpolicy, dllNotFoundException);
+                throw new InvalidOperationException(
+                    SR.AssemblyDependencyResolver_FailedToLoadHostpolicy,
+                    dllNotFoundException
+                );
             }
 
             if (returnCode != 0)
             {
                 // Something went wrong - report a failure
-                throw new InvalidOperationException(SR.Format(
-                    SR.AssemblyDependencyResolver_FailedToResolveDependencies,
-                    componentAssemblyPath,
-                    returnCode,
-                    errorMessage));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.AssemblyDependencyResolver_FailedToResolveDependencies,
+                        componentAssemblyPath,
+                        returnCode,
+                        errorMessage
+                    )
+                );
             }
 
             string[] assemblyPaths = SplitPathsList(assemblyPathsList);
@@ -104,7 +118,10 @@ namespace System.Runtime.Loader
             _nativeSearchPaths = SplitPathsList(nativeSearchPathsList);
             _resourceSearchPaths = SplitPathsList(resourceSearchPathsList);
 
-            _assemblyDirectorySearchPaths = new string[1] { Path.GetDirectoryName(componentAssemblyPath)! };
+            _assemblyDirectorySearchPaths = new string[1]
+            {
+                Path.GetDirectoryName(componentAssemblyPath)!,
+            };
         }
 
         public string? ResolveAssemblyToPath(AssemblyName assemblyName)
@@ -117,8 +134,14 @@ namespace System.Runtime.Loader
             // - The culture name is the value of the AssemblyName.Culture.Name
             //     (CoreCLR gets this and stores it as the culture name in the internal assembly name)
             //     AssemblyName.CultureName is just a shortcut to AssemblyName.Culture.Name.
-            if (!string.IsNullOrEmpty(assemblyName.CultureName) &&
-                !string.Equals(assemblyName.CultureName, NeutralCultureName, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.IsNullOrEmpty(assemblyName.CultureName)
+                && !string.Equals(
+                    assemblyName.CultureName,
+                    NeutralCultureName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 // Load satellite assembly
                 // Search resource search paths by appending the culture name and the expected assembly file name.
@@ -130,7 +153,8 @@ namespace System.Runtime.Loader
                     string assemblyPath = Path.Combine(
                         searchPath,
                         assemblyName.CultureName,
-                        assemblyName.Name + ResourceAssemblyExtension);
+                        assemblyName.Name + ResourceAssemblyExtension
+                    );
                     if (File.Exists(assemblyPath))
                     {
                         return assemblyPath;
@@ -173,9 +197,15 @@ namespace System.Runtime.Loader
             }
 
             bool isRelativePath = !Path.IsPathFullyQualified(unmanagedDllName);
-            foreach (LibraryNameVariation libraryNameVariation in LibraryNameVariation.DetermineLibraryNameVariations(unmanagedDllName, isRelativePath))
+            foreach (
+                LibraryNameVariation libraryNameVariation in LibraryNameVariation.DetermineLibraryNameVariations(
+                    unmanagedDllName,
+                    isRelativePath
+                )
+            )
             {
-                string libraryName = libraryNameVariation.Prefix + unmanagedDllName + libraryNameVariation.Suffix;
+                string libraryName =
+                    libraryNameVariation.Prefix + unmanagedDllName + libraryNameVariation.Suffix;
                 foreach (string searchPath in searchPaths)
                 {
                     string libraryPath = Path.Combine(searchPath, libraryName);

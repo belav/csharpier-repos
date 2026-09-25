@@ -15,7 +15,12 @@ namespace Microsoft.Extensions.Hosting
 {
     public class WindowsServiceTester : ServiceController
     {
-        private WindowsServiceTester(SafeServiceHandle serviceHandle, RemoteInvokeHandle remoteInvokeHandle, string serviceName) : base(serviceName)
+        private WindowsServiceTester(
+            SafeServiceHandle serviceHandle,
+            RemoteInvokeHandle remoteInvokeHandle,
+            string serviceName
+        )
+            : base(serviceName)
         {
             _serviceHandle = serviceHandle;
             _remoteInvokeHandle = remoteInvokeHandle;
@@ -44,8 +49,7 @@ namespace Microsoft.Extensions.Hosting
                 // fetch the process handle so that we can get the exit code later.
                 var _ = _remoteInvokeHandle.Process.SafeHandle;
             }
-            catch (ArgumentException)
-            { }
+            catch (ArgumentException) { }
         }
 
         public static TimeSpan WaitForStatusTimeout { get; set; } = TimeSpan.FromSeconds(30);
@@ -61,24 +65,50 @@ namespace Microsoft.Extensions.Hosting
         }
 
         // the following overloads are necessary to ensure the compiler will produce the correct signature from a lambda.
-        public static WindowsServiceTester Create(Func<Task> serviceMain, [CallerMemberName] string serviceName = null) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
-        
-        public static WindowsServiceTester Create(Func<Task<int>> serviceMain, [CallerMemberName] string serviceName = null) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
+        public static WindowsServiceTester Create(
+            Func<Task> serviceMain,
+            [CallerMemberName] string serviceName = null
+        ) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
 
-        public static WindowsServiceTester Create(Func<int> serviceMain, [CallerMemberName] string serviceName = null) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
-        
-        public static WindowsServiceTester Create(Action serviceMain, [CallerMemberName] string serviceName = null) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
+        public static WindowsServiceTester Create(
+            Func<Task<int>> serviceMain,
+            [CallerMemberName] string serviceName = null
+        ) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
 
-        private static RemoteInvokeOptions remoteInvokeOptions = new RemoteInvokeOptions() { Start = false };
+        public static WindowsServiceTester Create(
+            Func<int> serviceMain,
+            [CallerMemberName] string serviceName = null
+        ) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
 
-        private static WindowsServiceTester Create(RemoteInvokeHandle remoteInvokeHandle, string serviceName)
+        public static WindowsServiceTester Create(
+            Action serviceMain,
+            [CallerMemberName] string serviceName = null
+        ) => Create(RemoteExecutor.Invoke(serviceMain, remoteInvokeOptions), serviceName);
+
+        private static RemoteInvokeOptions remoteInvokeOptions = new RemoteInvokeOptions()
+        {
+            Start = false,
+        };
+
+        private static WindowsServiceTester Create(
+            RemoteInvokeHandle remoteInvokeHandle,
+            string serviceName
+        )
         {
             // create remote executor commandline arguments
             var startInfo = remoteInvokeHandle.Process.StartInfo;
             string commandLine = startInfo.FileName + " " + startInfo.Arguments;
 
             // install the service
-            using (var serviceManagerHandle = new SafeServiceHandle(Interop.Advapi32.OpenSCManager(null, null, Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL)))
+            using (
+                var serviceManagerHandle = new SafeServiceHandle(
+                    Interop.Advapi32.OpenSCManager(
+                        null,
+                        null,
+                        Interop.Advapi32.ServiceControllerOptions.SC_MANAGER_ALL
+                    )
+                )
+            )
             {
                 if (serviceManagerHandle.IsInvalid)
                 {
@@ -86,7 +116,15 @@ namespace Microsoft.Extensions.Hosting
                 }
 
                 // delete existing service if it exists
-                using (var existingServiceHandle = new SafeServiceHandle(Interop.Advapi32.OpenService(serviceManagerHandle, serviceName, Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL)))
+                using (
+                    var existingServiceHandle = new SafeServiceHandle(
+                        Interop.Advapi32.OpenService(
+                            serviceManagerHandle,
+                            serviceName,
+                            Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL
+                        )
+                    )
+                )
                 {
                     if (!existingServiceHandle.IsInvalid)
                     {
@@ -95,19 +133,22 @@ namespace Microsoft.Extensions.Hosting
                 }
 
                 var serviceHandle = new SafeServiceHandle(
-                    Interop.Advapi32.CreateService(serviceManagerHandle,
-                    serviceName,
-                    $"{nameof(WindowsServiceTester)} {serviceName} test service",
-                    Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL,
-                    Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_OWN_PROCESS,
-                    (int)ServiceStartMode.Manual,
-                    Interop.Advapi32.ServiceStartErrorModes.ERROR_CONTROL_NORMAL,
-                    commandLine,
-                    loadOrderGroup: null,
-                    pTagId: IntPtr.Zero,
-                    dependencies: null,
-                    servicesStartName: null,
-                    password: null));
+                    Interop.Advapi32.CreateService(
+                        serviceManagerHandle,
+                        serviceName,
+                        $"{nameof(WindowsServiceTester)} {serviceName} test service",
+                        Interop.Advapi32.ServiceAccessOptions.ACCESS_TYPE_ALL,
+                        Interop.Advapi32.ServiceTypeOptions.SERVICE_WIN32_OWN_PROCESS,
+                        (int)ServiceStartMode.Manual,
+                        Interop.Advapi32.ServiceStartErrorModes.ERROR_CONTROL_NORMAL,
+                        commandLine,
+                        loadOrderGroup: null,
+                        pTagId: IntPtr.Zero,
+                        dependencies: null,
+                        servicesStartName: null,
+                        password: null
+                    )
+                );
 
                 if (serviceHandle.IsInvalid)
                 {
@@ -144,7 +185,7 @@ namespace Microsoft.Extensions.Hosting
         {
             if (_remoteInvokeHandle != null)
             {
-                _remoteInvokeHandle.Dispose();               
+                _remoteInvokeHandle.Dispose();
             }
 
             if (!_serviceHandle.IsInvalid)

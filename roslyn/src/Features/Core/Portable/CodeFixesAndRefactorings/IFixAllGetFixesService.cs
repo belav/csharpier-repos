@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         /// Computes the fix all occurrences code fix, brings up the preview changes dialog for the fix and
         /// returns the code action operations corresponding to the fix.
         /// </summary>
-        Task<ImmutableArray<CodeActionOperation>> GetFixAllOperationsAsync(IFixAllContext fixAllContext, bool showPreviewChangesDialog);
+        Task<ImmutableArray<CodeActionOperation>> GetFixAllOperationsAsync(
+            IFixAllContext fixAllContext,
+            bool showPreviewChangesDialog
+        );
 
         /// <summary>
         /// Computes the fix all occurrences code fix and returns the changed solution.
@@ -36,6 +39,7 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             string topLevelHeader,
             string? language,
             int? correlationId,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

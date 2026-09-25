@@ -83,42 +83,28 @@ public class Test_143837
 public class TestClass
 {
     public string strField;
-    public TestClass()
-    {
-    }
+
+    public TestClass() { }
+
     public TestClass(String strIn)
     {
         strField = strIn;
     }
+
     public virtual string strProperty
     {
-        get
-        {
-            return strField;
-        }
-        set
-        {
-            strField = value;
-        }
+        get { return strField; }
+        set { strField = value; }
     }
 }
 
 public class DerivedClass : TestClass
 {
-    public DerivedClass()
-    {
-    }
+    public DerivedClass() { }
+
     public override string strProperty
     {
-        get
-        {
-            return strField;
-        }
-        set
-        {
-            strField = value;
-        }
+        get { return strField; }
+        set { strField = value; }
     }
 }
-
-

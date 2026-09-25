@@ -6,23 +6,17 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConferencePlanner;
 public class ApplicationDbContext : DbContext
 {
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Attendee>()
-            .HasIndex(a => a.UserName)
-            .IsUnique();
+        modelBuilder.Entity<Attendee>().HasIndex(a => a.UserName).IsUnique();
 
         // Many-to-many: Session <-> Attendee
-        modelBuilder.Entity<SessionAttendee>()
-            .HasKey(ca => new { ca.SessionId, ca.AttendeeId });
+        modelBuilder.Entity<SessionAttendee>().HasKey(ca => new { ca.SessionId, ca.AttendeeId });
 
         // Many-to-many: Speaker <-> Session
-        modelBuilder.Entity<SessionSpeaker>()
-            .HasKey(ss => new { ss.SessionId, ss.SpeakerId });
+        modelBuilder.Entity<SessionSpeaker>().HasKey(ss => new { ss.SessionId, ss.SpeakerId });
     }
 
     public DbSet<Session> Sessions { get; set; }

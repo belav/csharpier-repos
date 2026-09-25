@@ -36,7 +36,12 @@ namespace Newtonsoft.Json.Tests.TestObjects
             return typeof(Encoding).IsAssignableFrom(objectType);
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             var encodingName = serializer.Deserialize<string>(reader);
             if (encodingName == null)

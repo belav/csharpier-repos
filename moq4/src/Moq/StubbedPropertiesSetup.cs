@@ -106,14 +106,8 @@ namespace Moq
                 Debug.Assert(invocation.Method.IsGetAccessor());
 
                 var propertyName = invocation.Method.Name.Substring(4);
-                var value = this.values.GetOrAdd(
-                    propertyName,
-                    pn =>
-                        this.Mock.GetDefaultValue(
-                            invocation.Method,
-                            out _,
-                            this.defaultValueProvider
-                        )
+                var value = this.values.GetOrAdd(propertyName, pn =>
+                    this.Mock.GetDefaultValue(invocation.Method, out _, this.defaultValueProvider)
                 );
                 invocation.ReturnValue = value;
             }

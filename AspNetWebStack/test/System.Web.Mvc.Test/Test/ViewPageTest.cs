@@ -85,8 +85,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { vp.ViewData.Model = 50; },
-                "The model item passed into the dictionary is of type 'System.Int32', but this dictionary requires a model item of type 'System.String'.");
+                delegate
+                {
+                    vp.ViewData.Model = 50;
+                },
+                "The model item passed into the dictionary is of type 'System.Int32', but this dictionary requires a model item of type 'System.String'."
+            );
         }
 
         [Fact]
@@ -99,13 +103,22 @@ namespace System.Web.Mvc.Test
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>();
             mockViewContext.Setup(c => c.Writer).Returns(writer);
             mockViewContext.Setup(c => c.HttpContext.Response.Output).Returns(TextWriter.Null);
-            mockViewContext.Setup(c => c.HttpContext.Server.Execute(It.IsAny<IHttpHandler>(), It.IsAny<TextWriter>(), true))
-                .Callback<IHttpHandler, TextWriter, bool>((_h, _w, _pf) =>
-                {
-                    ViewPage.SwitchWriter switchWriter = _w as ViewPage.SwitchWriter;
-                    Assert.NotNull(switchWriter);
-                    Assert.Same(writer, switchWriter.InnerWriter);
-                })
+            mockViewContext
+                .Setup(c =>
+                    c.HttpContext.Server.Execute(
+                        It.IsAny<IHttpHandler>(),
+                        It.IsAny<TextWriter>(),
+                        true
+                    )
+                )
+                .Callback<IHttpHandler, TextWriter, bool>(
+                    (_h, _w, _pf) =>
+                    {
+                        ViewPage.SwitchWriter switchWriter = _w as ViewPage.SwitchWriter;
+                        Assert.NotNull(switchWriter);
+                        Assert.Same(writer, switchWriter.InnerWriter);
+                    }
+                )
                 .Verifiable();
 
             // Act
@@ -125,9 +138,12 @@ namespace System.Web.Mvc.Test
             Mock<ViewContext> mockViewContext = new Mock<ViewContext>();
             mockViewContext.Setup(c => c.Writer).Returns(new StringWriter());
             mockViewContext.Setup(c => c.HttpContext.Response.Output).Returns(TextWriter.Null);
-            mockViewContext.Setup(c => c.HttpContext.Server).Returns(new Mock<HttpServerUtilityBase>().Object);
+            mockViewContext
+                .Setup(c => c.HttpContext.Server)
+                .Returns(new Mock<HttpServerUtilityBase>().Object);
 
-            ViewPageWithNoProcessRequest<Controller> viewPage = new ViewPageWithNoProcessRequest<Controller>();
+            ViewPageWithNoProcessRequest<Controller> viewPage =
+                new ViewPageWithNoProcessRequest<Controller>();
 
             // Act
             viewPage.RenderView(mockViewContext.Object);
@@ -162,9 +178,7 @@ namespace System.Web.Mvc.Test
             {
                 vp.RenderControl(writer);
             }
-            catch (CallbackException)
-            {
-            }
+            catch (CallbackException) { }
             Assert.Null(vp.Writer);
             Assert.True(triggered);
         }
@@ -172,27 +186,27 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void WriterSetCorrectly()
         {
-            WriterSetCorrectlyInternal(false /* throwException */);
+            WriterSetCorrectlyInternal(
+                false /* throwException */
+            );
         }
 
         [Fact]
         public void WriterSetCorrectlyThrowException()
         {
-            WriterSetCorrectlyInternal(true /* throwException */);
+            WriterSetCorrectlyInternal(
+                true /* throwException */
+            );
         }
 
         private sealed class ViewPageWithNoProcessRequest : ViewPage
         {
-            public override void ProcessRequest(HttpContext context)
-            {
-            }
+            public override void ProcessRequest(HttpContext context) { }
         }
 
         private sealed class ViewPageWithNoProcessRequest<TModel> : ViewPage<TModel>
         {
-            public override void ProcessRequest(HttpContext context)
-            {
-            }
+            public override void ProcessRequest(HttpContext context) { }
         }
 
         [Fact]
@@ -237,9 +251,7 @@ namespace System.Web.Mvc.Test
 
         private sealed class MockViewPage : ViewPage
         {
-            public MockViewPage()
-            {
-            }
+            public MockViewPage() { }
 
             public Action RenderCallback { get; set; }
 
@@ -253,12 +265,8 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private sealed class FooModel
-        {
-        }
+        private sealed class FooModel { }
 
-        private sealed class CallbackException : Exception
-        {
-        }
+        private sealed class CallbackException : Exception { }
     }
 }

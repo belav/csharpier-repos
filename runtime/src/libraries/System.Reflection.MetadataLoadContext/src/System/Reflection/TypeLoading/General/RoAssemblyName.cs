@@ -32,7 +32,13 @@ namespace System.Reflection.TypeLoading
 
         private static readonly Version s_Version0000 = new Version(0, 0, 0, 0);
 
-        public RoAssemblyName(string? name, Version? version, string? cultureName, byte[]? publicKeyToken, AssemblyNameFlags flags)
+        public RoAssemblyName(
+            string? name,
+            Version? version,
+            string? cultureName,
+            byte[]? publicKeyToken,
+            AssemblyNameFlags flags
+        )
         {
             // We forcefully normalize the representation so that Equality is dependable and fast.
             Debug.Assert(name != null);
@@ -66,8 +72,11 @@ namespace System.Reflection.TypeLoading
             return true;
         }
 
-        public sealed override bool Equals([NotNullWhen(true)] object? obj) => obj is RoAssemblyName other && Equals(other);
+        public sealed override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is RoAssemblyName other && Equals(other);
+
         public sealed override int GetHashCode() => Name.GetHashCode();
+
         public sealed override string ToString() => FullName;
 
         public AssemblyName ToAssemblyName()

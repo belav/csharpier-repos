@@ -9,28 +9,34 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class QueryExpressionInterceptorAggregator : InterceptorAggregator<IQueryExpressionInterceptor>
+public class QueryExpressionInterceptorAggregator
+    : InterceptorAggregator<IQueryExpressionInterceptor>
 {
     /// <inheritdoc />
-    protected override IQueryExpressionInterceptor CreateChain(IEnumerable<IQueryExpressionInterceptor> interceptors)
-        => new CompositeQueryExpressionInterceptor(interceptors);
+    protected override IQueryExpressionInterceptor CreateChain(
+        IEnumerable<IQueryExpressionInterceptor> interceptors
+    ) => new CompositeQueryExpressionInterceptor(interceptors);
 
     private sealed class CompositeQueryExpressionInterceptor : IQueryExpressionInterceptor
     {
         private readonly IQueryExpressionInterceptor[] _interceptors;
 
-        public CompositeQueryExpressionInterceptor(IEnumerable<IQueryExpressionInterceptor> interceptors)
+        public CompositeQueryExpressionInterceptor(
+            IEnumerable<IQueryExpressionInterceptor> interceptors
+        )
         {
             _interceptors = interceptors.ToArray();
         }
 
         public Expression QueryCompilationStarting(
             Expression queryExpression,
-            QueryExpressionEventData eventData)
+            QueryExpressionEventData eventData
+        )
         {
             for (var i = 0; i < _interceptors.Length; i++)
             {
-                queryExpression = _interceptors[i].QueryCompilationStarting(queryExpression, eventData);
+                queryExpression = _interceptors[i]
+                    .QueryCompilationStarting(queryExpression, eventData);
             }
 
             return queryExpression;

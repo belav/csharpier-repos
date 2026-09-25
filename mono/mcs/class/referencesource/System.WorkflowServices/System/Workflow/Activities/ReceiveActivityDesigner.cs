@@ -6,16 +6,15 @@ namespace System.Workflow.Activities
 {
     using System.Collections;
     using System.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
+    using System.ComponentModel.Design;
     using System.Drawing;
     using System.Reflection;
-    using System.Workflow.ComponentModel;
-    using System.ComponentModel.Design;
-    using System.Workflow.Activities.Design;
     using System.ServiceModel;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Windows.Forms;
-
+    using System.Workflow.Activities.Design;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
 
     [ActivityDesignerTheme(typeof(ReceiveActivityDesignerTheme))]
     class ReceiveActivityDesigner : SequenceDesigner
@@ -25,10 +24,7 @@ namespace System.Workflow.Activities
 
         public override Size MinimumSize
         {
-            get
-            {
-                return new Size(170, 80);
-            }
+            get { return new Size(170, 80); }
         }
 
         public override string Text
@@ -44,7 +40,6 @@ namespace System.Workflow.Activities
                     }
                 }
                 return base.Text;
-
             }
         }
 
@@ -58,12 +53,20 @@ namespace System.Workflow.Activities
                     verbs.Add(verb);
                 }
 
-                ActivityDesignerVerb findSimilarOperationsVerb = new FindSimilarActivitiesVerb<ReceiveActivity>(
-                    this, MatchByOperationCallback, SR2.GetString(SR2.ShowActivitiesWithSameOperation));
+                ActivityDesignerVerb findSimilarOperationsVerb =
+                    new FindSimilarActivitiesVerb<ReceiveActivity>(
+                        this,
+                        MatchByOperationCallback,
+                        SR2.GetString(SR2.ShowActivitiesWithSameOperation)
+                    );
                 verbs.Add(findSimilarOperationsVerb);
 
-                ActivityDesignerVerb findSimilarContractVerb = new FindSimilarActivitiesVerb<ReceiveActivity>(
-                    this, MatchByContractCallback, SR2.GetString(SR2.ShowActivitiesWithSameContract));
+                ActivityDesignerVerb findSimilarContractVerb =
+                    new FindSimilarActivitiesVerb<ReceiveActivity>(
+                        this,
+                        MatchByContractCallback,
+                        SR2.GetString(SR2.ShowActivitiesWithSameContract)
+                    );
                 verbs.Add(findSimilarContractVerb);
 
                 return verbs;
@@ -76,7 +79,9 @@ namespace System.Workflow.Activities
             {
                 if (matchByContractCallback == null)
                 {
-                    matchByContractCallback = new ActivityComparer<ReceiveActivity>(MatchByContract);
+                    matchByContractCallback = new ActivityComparer<ReceiveActivity>(
+                        MatchByContract
+                    );
                 }
                 return matchByContractCallback;
             }
@@ -88,7 +93,9 @@ namespace System.Workflow.Activities
             {
                 if (matchByOperationCallback == null)
                 {
-                    matchByOperationCallback = new ActivityComparer<ReceiveActivity>(MatchByOperation);
+                    matchByOperationCallback = new ActivityComparer<ReceiveActivity>(
+                        MatchByOperation
+                    );
                 }
                 return matchByOperationCallback;
             }
@@ -97,7 +104,6 @@ namespace System.Workflow.Activities
         ReceiveActivity ReceiveActivity
         {
             get { return this.Activity as ReceiveActivity; }
-
         }
 
         internal static bool MatchByContract(OperationInfoBase source, OperationInfoBase target)
@@ -124,13 +130,20 @@ namespace System.Workflow.Activities
         {
             base.Initialize(activity);
 
-            IExtenderListService extenderListService = (IExtenderListService)GetService(typeof(IExtenderListService));
+            IExtenderListService extenderListService = (IExtenderListService)GetService(
+                typeof(IExtenderListService)
+            );
             if (extenderListService != null)
             {
                 bool foundExtender = false;
-                foreach (IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders())
+                foreach (
+                    IExtenderProvider extenderProvider in extenderListService.GetExtenderProviders()
+                )
                 {
-                    if (extenderProvider.GetType() == typeof(WorkflowServiceAttributesPropertyProviderExtender))
+                    if (
+                        extenderProvider.GetType()
+                        == typeof(WorkflowServiceAttributesPropertyProviderExtender)
+                    )
                     {
                         foundExtender = true;
                     }
@@ -138,10 +151,13 @@ namespace System.Workflow.Activities
 
                 if (!foundExtender)
                 {
-                    IExtenderProviderService extenderProviderService = (IExtenderProviderService)GetService(typeof(IExtenderProviderService));
+                    IExtenderProviderService extenderProviderService =
+                        (IExtenderProviderService)GetService(typeof(IExtenderProviderService));
                     if (extenderProviderService != null)
                     {
-                        extenderProviderService.AddExtenderProvider(new WorkflowServiceAttributesPropertyProviderExtender());
+                        extenderProviderService.AddExtenderProvider(
+                            new WorkflowServiceAttributesPropertyProviderExtender()
+                        );
                     }
                 }
             }
@@ -150,7 +166,10 @@ namespace System.Workflow.Activities
         protected override void OnActivityChanged(ActivityChangedEventArgs e)
         {
             base.OnActivityChanged(e);
-            if (e.Member != null && e.Member.Name == ReceiveActivity.ServiceOperationInfoProperty.Name)
+            if (
+                e.Member != null
+                && e.Member.Name == ReceiveActivity.ServiceOperationInfoProperty.Name
+            )
             {
                 ReceiveActivity receiveActivity = e.Activity as ReceiveActivity;
                 if (receiveActivity != null)
@@ -172,26 +191,51 @@ namespace System.Workflow.Activities
             }
 
             OperationInfoBase pickedServiceOperation = null;
-            if (ServiceOperationUIEditor.TryPickOperation(this.Activity.Site, this.Activity, this.ReceiveActivity.ServiceOperationInfo, out pickedServiceOperation))
+            if (
+                ServiceOperationUIEditor.TryPickOperation(
+                    this.Activity.Site,
+                    this.Activity,
+                    this.ReceiveActivity.ServiceOperationInfo,
+                    out pickedServiceOperation
+                )
+            )
             {
-                PropertyDescriptorUtils.SetPropertyValue(this.Activity.Site, ServiceOperationHelpers.GetServiceOperationInfoPropertyDescriptor(this.Activity), this.Activity, pickedServiceOperation);
+                PropertyDescriptorUtils.SetPropertyValue(
+                    this.Activity.Site,
+                    ServiceOperationHelpers.GetServiceOperationInfoPropertyDescriptor(
+                        this.Activity
+                    ),
+                    this.Activity,
+                    pickedServiceOperation
+                );
             }
         }
 
         protected override void OnPaint(ActivityDesignerPaintEventArgs e)
         {
             base.OnPaint(e);
-            Rectangle incomingArrowRect = new Rectangle(this.Location.X - 2, this.Location.Y + 20, 24, 24);
-            Rectangle outgoingArrowRect = new Rectangle(this.Location.X + 22, this.Location.Y + this.Size.Height - 45, -24, 24);
+            Rectangle incomingArrowRect = new Rectangle(
+                this.Location.X - 2,
+                this.Location.Y + 20,
+                24,
+                24
+            );
+            Rectangle outgoingArrowRect = new Rectangle(
+                this.Location.X + 22,
+                this.Location.Y + this.Size.Height - 45,
+                -24,
+                24
+            );
             e.Graphics.DrawImage(ImageResources.Arrow, incomingArrowRect);
             bool isOneWay = false;
-
 
             if (ReceiveActivity.ServiceOperationInfo != null)
             {
                 // Refresh the referenced design time types in the serviceoperationInfo object properties;
                 //ServiceOperationHelpers.RefreshReferencedDesignTimeTypes(this.Activity.Site as IServiceProvider, operation);
-                isOneWay = this.ReceiveActivity.ServiceOperationInfo.GetIsOneWay(this.Activity.Site as IServiceProvider);
+                isOneWay = this.ReceiveActivity.ServiceOperationInfo.GetIsOneWay(
+                    this.Activity.Site as IServiceProvider
+                );
             }
             if (!isOneWay)
             {
@@ -227,7 +271,5 @@ namespace System.Workflow.Activities
             }
             return (sourceName == targetName);
         }
-
     }
-
 }

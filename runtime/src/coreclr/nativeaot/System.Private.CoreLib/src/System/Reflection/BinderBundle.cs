@@ -17,7 +17,10 @@ namespace System.Reflection
         {
             // This is not just performance, it is correctness too. The default binder's ChangeType() method throws a NotSupportedException so you really can't treat it
             // as "just another binder."
-            Debug.Assert(binder != null && binder != Type.DefaultBinder, "Not permitted to allocate a BinderBundle for the default Binder. Must pass a null BinderBundle instread.");
+            Debug.Assert(
+                binder != null && binder != Type.DefaultBinder,
+                "Not permitted to allocate a BinderBundle for the default Binder. Must pass a null BinderBundle instread."
+            );
             _binder = binder;
             _culture = culture;
         }

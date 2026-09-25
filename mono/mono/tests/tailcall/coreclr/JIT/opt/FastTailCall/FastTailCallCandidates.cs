@@ -3,7 +3,7 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Runtime.CompilerServices; 
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -54,18 +54,35 @@ public class FastTailCallCandidates
         CheckOutput(SimpleTestCase());
         CheckOutput(IntegerArgs(10, 11, 12, 13, 14, 15));
         CheckOutput(FloatArgs(10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f));
-        CheckOutput(IntAndFloatArgs(10, 11, 12, 13, 14, 15, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f));
-        CheckOutput(CallerGithubIssue12468(1, 2, 3, 4, 5, 6, 7, 8, new StructSizeSixteenNotExplicit(1, 2)));
+        CheckOutput(
+            IntAndFloatArgs(10, 11, 12, 13, 14, 15, 10.0f, 11.0f, 12.0f, 13.0f, 14.0f, 15.0f)
+        );
+        CheckOutput(
+            CallerGithubIssue12468(1, 2, 3, 4, 5, 6, 7, 8, new StructSizeSixteenNotExplicit(1, 2))
+        );
         CheckOutput(DoNotFastTailCallSimple(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14));
         CheckOutput(StackBasedCaller(16, new StructSizeTwentyFour(1, 2, 3)));
         CheckOutput(CallerSimpleHFACase(new HFASize32(1.0, 2.0, 3.0, 4.0), 1.0, 2.0, 3.0, 4.0));
-        CheckOutput(CallerHFACaseWithStack(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, new HFASize32(1.0, 2.0, 3.0, 4.0)));
+        CheckOutput(
+            CallerHFACaseWithStack(
+                1.0,
+                2.0,
+                3.0,
+                4.0,
+                5.0,
+                6.0,
+                7.0,
+                8.0,
+                new HFASize32(1.0, 2.0, 3.0, 4.0)
+            )
+        );
         CheckOutput(CallerHFACaseCalleeOnly(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0));
-        CheckOutput(CallerHFaCaseCalleeStackArgs(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0));
+        CheckOutput(
+            CallerHFaCaseCalleeStackArgs(1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 10.0)
+        );
         CheckOutput(DoubleCountRetBuffCaller(1));
 
         return s_ret_value;
-
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -110,24 +127,21 @@ public class FastTailCallCandidates
     /// Return 101 is a failure.
     ///
     /// </remarks>
-    public static int IntegerArgs(int arg1,
-                                  int arg2,
-                                  int arg3,
-                                  int arg4,
-                                  int arg5,
-                                  int arg6,
-                                  int retValue = 10)
+    public static int IntegerArgs(
+        int arg1,
+        int arg2,
+        int arg3,
+        int arg4,
+        int arg5,
+        int arg6,
+        int retValue = 10
+    )
     {
         retValue += 1;
 
         if (retValue == 100)
         {
-            if (arg1 != 10 ||
-                arg2 != 11 ||
-                arg3 != 12 ||
-                arg4 != 13 ||
-                arg5 != 14 ||
-                arg6 != 15)
+            if (arg1 != 10 || arg2 != 11 || arg3 != 12 || arg4 != 13 || arg5 != 14 || arg6 != 15)
             {
                 return 101;
             }
@@ -136,13 +150,7 @@ public class FastTailCallCandidates
         }
         else
         {
-            return IntegerArgs(arg1,
-                               arg2,
-                               arg3,
-                               arg4,
-                               arg5,
-                               arg6, 
-                               retValue);
+            return IntegerArgs(arg1, arg2, arg3, arg4, arg5, arg6, retValue);
         }
     }
 
@@ -159,24 +167,28 @@ public class FastTailCallCandidates
     /// Return 102 is a failure.
     ///
     /// </remarks>
-    public static int FloatArgs(float arg1,
-                                float arg2,
-                                float arg3,
-                                float arg4,
-                                float arg5,
-                                float arg6,
-                                int retValue = 10)
+    public static int FloatArgs(
+        float arg1,
+        float arg2,
+        float arg3,
+        float arg4,
+        float arg5,
+        float arg6,
+        int retValue = 10
+    )
     {
         retValue += 1;
 
         if (retValue == 100)
         {
-            if (arg1 != 10.0f ||
-                arg2 != 11.0f ||
-                arg3 != 12.0f ||
-                arg4 != 13.0f ||
-                arg5 != 14.0f ||
-                arg6 != 15.0f)
+            if (
+                arg1 != 10.0f
+                || arg2 != 11.0f
+                || arg3 != 12.0f
+                || arg4 != 13.0f
+                || arg5 != 14.0f
+                || arg6 != 15.0f
+            )
             {
                 return 102;
             }
@@ -185,13 +197,7 @@ public class FastTailCallCandidates
         }
         else
         {
-            return FloatArgs(arg1,
-                             arg2,
-                             arg3,
-                             arg4,
-                             arg5,
-                             arg6, 
-                             retValue);
+            return FloatArgs(arg1, arg2, arg3, arg4, arg5, arg6, retValue);
         }
     }
 
@@ -208,36 +214,40 @@ public class FastTailCallCandidates
     /// Return 103 is a failure.
     ///
     /// </remarks>
-    public static int IntAndFloatArgs(int argi1,
-                                      int argi2,
-                                      int argi3,
-                                      int argi4,
-                                      int argi5,
-                                      int argi6,
-                                      float argf1,
-                                      float argf2,
-                                      float argf3,
-                                      float argf4,
-                                      float argf5,
-                                      float argf6,
-                                      int retValue = 10)
+    public static int IntAndFloatArgs(
+        int argi1,
+        int argi2,
+        int argi3,
+        int argi4,
+        int argi5,
+        int argi6,
+        float argf1,
+        float argf2,
+        float argf3,
+        float argf4,
+        float argf5,
+        float argf6,
+        int retValue = 10
+    )
     {
         retValue += 1;
 
         if (retValue == 100)
         {
-            if (argi1 != 10 ||
-                argi2 != 11 ||
-                argi3 != 12 ||
-                argi4 != 13 ||
-                argi5 != 14 ||
-                argi6 != 15 ||
-                argf1 != 10.0f ||
-                argf2 != 11.0f ||
-                argf3 != 12.0f ||
-                argf4 != 13.0f ||
-                argf5 != 14.0f ||
-                argf6 != 15.0f)
+            if (
+                argi1 != 10
+                || argi2 != 11
+                || argi3 != 12
+                || argi4 != 13
+                || argi5 != 14
+                || argi6 != 15
+                || argf1 != 10.0f
+                || argf2 != 11.0f
+                || argf3 != 12.0f
+                || argf4 != 13.0f
+                || argf5 != 14.0f
+                || argf6 != 15.0f
+            )
             {
                 return 103;
             }
@@ -246,46 +256,50 @@ public class FastTailCallCandidates
         }
         else
         {
-            return IntAndFloatArgs(argi1,
-                                   argi2,
-                                   argi3,
-                                   argi4,
-                                   argi5,
-                                   argi6,
-                                   argf1,
-                                   argf2,
-                                   argf3,
-                                   argf4,
-                                   argf5,
-                                   argf6, 
-                                   retValue);
+            return IntAndFloatArgs(
+                argi1,
+                argi2,
+                argi3,
+                argi4,
+                argi5,
+                argi6,
+                argf1,
+                argf2,
+                argf3,
+                argf4,
+                argf5,
+                argf6,
+                retValue
+            );
         }
     }
 
     /// <summary>
     /// Decision not to tail call. See DoNotFastTailCallSimple for more info
     /// </summary>
-    public static int DoNotFastTailCallHelper(int one,
-                                              int two,
-                                              int three,
-                                              int four,
-                                              int five,
-                                              int six,
-                                              int seven,
-                                              int eight,
-                                              int nine,
-                                              int ten,
-                                              int eleven,
-                                              int twelve,
-                                              int thirteen,
-                                              int fourteen)
+    public static int DoNotFastTailCallHelper(
+        int one,
+        int two,
+        int three,
+        int four,
+        int five,
+        int six,
+        int seven,
+        int eight,
+        int nine,
+        int ten,
+        int eleven,
+        int twelve,
+        int thirteen,
+        int fourteen
+    )
     {
         if (one == 1)
         {
             two = one + two;
         }
 
-        if  (two == 3)
+        if (two == 3)
         {
             three = two + three;
         }
@@ -309,7 +323,7 @@ public class FastTailCallCandidates
         {
             return 104;
         }
-        
+
         if (seven != 7)
         {
             return 104;
@@ -358,61 +372,67 @@ public class FastTailCallCandidates
     /// </summary>
     /// <remarks>
     ///
-    /// The callee has 6 int register arguments on x64 linux. 
+    /// The callee has 6 int register arguments on x64 linux.
     /// With 8 * 8 (64) bytes stack size
     ///
     /// Return 100 is a pass.
     /// Return 104 is a failure.
     ///
     /// </remarks>
-    public static int DoNotFastTailCallSimple(float one,
-                                              float two,
-                                              float three,
-                                              float four,
-                                              float five,
-                                              float six,
-                                              float seven,
-                                              float eight,
-                                              int first,
-                                              int second,
-                                              int third,
-                                              int fourth,
-                                              int fifth,
-                                              int sixth)
+    public static int DoNotFastTailCallSimple(
+        float one,
+        float two,
+        float three,
+        float four,
+        float five,
+        float six,
+        float seven,
+        float eight,
+        int first,
+        int second,
+        int third,
+        int fourth,
+        int fifth,
+        int sixth
+    )
     {
         if (one % 2 == 0)
         {
-            return DoNotFastTailCallHelper((int) two,
-                                           (int) one,
-                                           (int) three,
-                                           (int) four,
-                                           (int) five,
-                                           (int) six,
-                                           (int) seven,
-                                           (int) eight,
-                                           first,
-                                           second,
-                                           third,
-                                           fourth,
-                                           fifth,
-                                           sixth); // Cannot fast tail call
+            return DoNotFastTailCallHelper(
+                (int)two,
+                (int)one,
+                (int)three,
+                (int)four,
+                (int)five,
+                (int)six,
+                (int)seven,
+                (int)eight,
+                first,
+                second,
+                third,
+                fourth,
+                fifth,
+                sixth
+            ); // Cannot fast tail call
         }
         else
         {
-            return DoNotFastTailCallHelper((int) one,
-                                           (int) two,
-                                           (int) three,
-                                           (int) four,
-                                           (int) five,
-                                           (int) six,
-                                           (int) seven,
-                                           (int) eight,
-                                           first,
-                                           second,
-                                           third,
-                                           fourth,
-                                           fifth,
-                                           sixth); // Cannot fast tail call
+            return DoNotFastTailCallHelper(
+                (int)one,
+                (int)two,
+                (int)three,
+                (int)four,
+                (int)five,
+                (int)six,
+                (int)seven,
+                (int)eight,
+                first,
+                second,
+                third,
+                fourth,
+                fifth,
+                sixth
+            ); // Cannot fast tail call
         }
     }
 
@@ -466,14 +486,16 @@ public class FastTailCallCandidates
     /// Possible to fast tail call only on arm64. See CallerSimpleHFACase for
     /// more information.
     /// </summary>
-    public static int CalleeSimpleHFACase(double one,
-                                          double two,
-                                          double three,
-                                          double four,
-                                          double five,
-                                          double six,
-                                          double seven,
-                                          double eight)
+    public static int CalleeSimpleHFACase(
+        double one,
+        double two,
+        double three,
+        double four,
+        double five,
+        double six,
+        double seven,
+        double eight
+    )
     {
         int count = 0;
         for (double i = 0; i < one; ++i)
@@ -488,7 +510,6 @@ public class FastTailCallCandidates
         {
             return 100;
         }
-
         else
         {
             return 107;
@@ -516,37 +537,25 @@ public class FastTailCallCandidates
     /// Return 107 is a failure.
     ///
     /// </remarks>
-    public static int CallerSimpleHFACase(HFASize32 s1,
-                                          double one,
-                                          double two,
-                                          double three,
-                                          double four)
+    public static int CallerSimpleHFACase(
+        HFASize32 s1,
+        double one,
+        double two,
+        double three,
+        double four
+    )
     {
         if (one % 2 == 0)
         {
             double a = one * 100;
             double b = one + 1100;
-            return CalleeSimpleHFACase(one, 
-                                       two,
-                                       three,
-                                       four,
-                                       a,
-                                       b,
-                                       one,
-                                       two);
+            return CalleeSimpleHFACase(one, two, three, four, a, b, one, two);
         }
         else
         {
             double b = one + 1599;
             double a = one + 16;
-            return CalleeSimpleHFACase(two, 
-                                       one,
-                                       three,
-                                       four,
-                                       a,
-                                       b,
-                                       two,
-                                       one);
+            return CalleeSimpleHFACase(two, one, three, four, a, b, two, one);
         }
     }
 
@@ -554,16 +563,18 @@ public class FastTailCallCandidates
     /// Possible to fast tail call only on arm64. See CallerHFACaseWithStack
     /// for more information.
     /// </summary>
-    public static int CalleeHFAStackSpace(double one,
-                                          double two,
-                                          double three,
-                                          double four,
-                                          double five,
-                                          double six,
-                                          double seven,
-                                          double eight,
-                                          double nine,
-                                          double ten)
+    public static int CalleeHFAStackSpace(
+        double one,
+        double two,
+        double three,
+        double four,
+        double five,
+        double six,
+        double seven,
+        double eight,
+        double nine,
+        double ten
+    )
     {
         int count = 0;
         for (double i = 0; i < one; ++i)
@@ -578,7 +589,6 @@ public class FastTailCallCandidates
         {
             return 100;
         }
-
         else
         {
             return 108;
@@ -600,53 +610,37 @@ public class FastTailCallCandidates
     /// caller has 8 register arguments and 32 bytes of stack space
     /// callee has 8 register arguments and 16 bytes of stack space
     ///
-    /// Arm64 can fast tail call while x64 linux will not. 
-    /// Note that this is due to a bug in LowerFastTailCall that assumes 
+    /// Arm64 can fast tail call while x64 linux will not.
+    /// Note that this is due to a bug in LowerFastTailCall that assumes
     /// nCallerArgs <= nCalleeArgs
     ///
     /// Return 100 is a pass.
     /// Return 108 is a failure.
     ///
     /// </remarks>
-    public static int CallerHFACaseWithStack(double one,
-                                             double two,
-                                             double three,
-                                             double four,
-                                             double five,
-                                             double six,
-                                             double seven,
-                                             double eight,
-                                             HFASize32 s1)
+    public static int CallerHFACaseWithStack(
+        double one,
+        double two,
+        double three,
+        double four,
+        double five,
+        double six,
+        double seven,
+        double eight,
+        HFASize32 s1
+    )
     {
         if (one % 2 == 0)
         {
             double a = one * 100;
             double b = one + 1100;
-            return CalleeHFAStackSpace(one, 
-                                       two,
-                                       three,
-                                       four,
-                                       a,
-                                       b,
-                                       five,
-                                       six,
-                                       seven,
-                                       eight);
+            return CalleeHFAStackSpace(one, two, three, four, a, b, five, six, seven, eight);
         }
         else
         {
             double b = one + 1599;
             double a = one + 16;
-            return CalleeHFAStackSpace(one, 
-                                       two,
-                                       three,
-                                       four,
-                                       a,
-                                       b,
-                                       six,
-                                       five,
-                                       seven,
-                                       eight);
+            return CalleeHFAStackSpace(one, two, three, four, a, b, six, five, seven, eight);
         }
     }
 
@@ -654,11 +648,7 @@ public class FastTailCallCandidates
     /// Possible to fast tail call only on arm64. See CallerHFACaseCalleeOnly
     /// for more information.
     /// </summary>
-    public static int CalleeWithHFA(double one,
-                                    double two,
-                                    double three,
-                                    double four,
-                                    HFASize32 s1)
+    public static int CalleeWithHFA(double one, double two, double three, double four, HFASize32 s1)
     {
         int count = 0;
         for (double i = 0; i < one; ++i)
@@ -673,7 +663,6 @@ public class FastTailCallCandidates
         {
             return 100;
         }
-
         else
         {
             return 109;
@@ -701,51 +690,47 @@ public class FastTailCallCandidates
     /// Return 109 is a failure.
     ///
     /// </remarks>
-    public static int CallerHFACaseCalleeOnly(double one,
-                                              double two,
-                                              double three,
-                                              double four,
-                                              double five,
-                                              double six,
-                                              double seven,
-                                              double eight)
+    public static int CallerHFACaseCalleeOnly(
+        double one,
+        double two,
+        double three,
+        double four,
+        double five,
+        double six,
+        double seven,
+        double eight
+    )
     {
         if (one % 2 == 0)
         {
             double a = one * 100;
             double b = one + 1100;
-            return CalleeWithHFA(one, 
-                                 a,
-                                 b,
-                                 four,
-                                 new HFASize32(a, b, five, six));
+            return CalleeWithHFA(one, a, b, four, new HFASize32(a, b, five, six));
         }
         else
         {
             double b = one + 1599;
             double a = one + 16;
-            return CalleeWithHFA(one, 
-                                 b,
-                                 a,
-                                 four,
-                                 new HFASize32(a, b, five, six));
+            return CalleeWithHFA(one, b, a, four, new HFASize32(a, b, five, six));
         }
     }
 
     /// <summary>
-    /// Possible to fast tail call on all targets. See 
+    /// Possible to fast tail call on all targets. See
     /// CallerHFaCaseCalleeStackArgs for info.
     /// </summary>
     /// <remarks>
-    public static int CalleeWithStackHFA(double one,
-                                         double two,
-                                         double three,
-                                         double four,
-                                         double five,
-                                         double six,
-                                         double seven,
-                                         double eight,
-                                         HFASize16 s1)
+    public static int CalleeWithStackHFA(
+        double one,
+        double two,
+        double three,
+        double four,
+        double five,
+        double six,
+        double seven,
+        double eight,
+        HFASize16 s1
+    )
     {
         int count = 0;
         for (double i = 0; i < one; ++i)
@@ -760,7 +745,6 @@ public class FastTailCallCandidates
         {
             return 100;
         }
-
         else
         {
             return 110;
@@ -797,44 +781,50 @@ public class FastTailCallCandidates
     /// Return 110 is a failure.
     ///
     /// </remarks>
-    public static int CallerHFaCaseCalleeStackArgs(double one,
-                                                   double two,
-                                                   double three,
-                                                   double four,
-                                                   double five,
-                                                   double six,
-                                                   double seven,
-                                                   double eight,
-                                                   double nine,
-                                                   double ten)
+    public static int CallerHFaCaseCalleeStackArgs(
+        double one,
+        double two,
+        double three,
+        double four,
+        double five,
+        double six,
+        double seven,
+        double eight,
+        double nine,
+        double ten
+    )
     {
         if (one % 2 == 0)
         {
             double a = one * 100;
             double b = one + 1100;
-            return CalleeWithStackHFA(one, 
-                                      a,
-                                      b,
-                                      four,
-                                      five,
-                                      six,
-                                      seven,
-                                      eight,
-                                      new HFASize16(a, b));
+            return CalleeWithStackHFA(
+                one,
+                a,
+                b,
+                four,
+                five,
+                six,
+                seven,
+                eight,
+                new HFASize16(a, b)
+            );
         }
         else
         {
             double b = one + 1599;
             double a = one + 16;
-            return CalleeWithStackHFA(one, 
-                                      a,
-                                      b,
-                                      four,
-                                      five,
-                                      six,
-                                      seven,
-                                      eight,
-                                      new HFASize16(a, b));
+            return CalleeWithStackHFA(
+                one,
+                a,
+                b,
+                four,
+                five,
+                six,
+                seven,
+                eight,
+                new HFASize16(a, b)
+            );
         }
     }
 
@@ -874,22 +864,23 @@ public class FastTailCallCandidates
             this.a = a;
             this.b = b;
         }
-
     }
 
     /// <summary>
     /// Possible to fast tail call. See CallerGithubIssue12468 for more info.
     /// </summary>
-    public static int CalleeGithubIssue12468(int one,
-                                             int two,
-                                             int three,
-                                             int four,
-                                             int five,
-                                             int six,
-                                             int seven,
-                                             int eight,
-                                             StructSizeEightNotExplicit s1,
-                                             StructSizeEightNotExplicit s2)
+    public static int CalleeGithubIssue12468(
+        int one,
+        int two,
+        int three,
+        int four,
+        int five,
+        int six,
+        int seven,
+        int eight,
+        StructSizeEightNotExplicit s1,
+        StructSizeEightNotExplicit s2
+    )
     {
         int count = 0;
         for (int i = 0; i < s1.a; ++i)
@@ -904,7 +895,6 @@ public class FastTailCallCandidates
         {
             return 100;
         }
-
         else
         {
             return 106;
@@ -927,55 +917,68 @@ public class FastTailCallCandidates
     /// Return 106 is a failure.
     ///
     /// </remarks>
-    public static int CallerGithubIssue12468(int one,
-                                             int two,
-                                             int three,
-                                             int four,
-                                             int five,
-                                             int six,
-                                             int seven,
-                                             int eight,
-                                             StructSizeSixteenNotExplicit s1)
+    public static int CallerGithubIssue12468(
+        int one,
+        int two,
+        int three,
+        int four,
+        int five,
+        int six,
+        int seven,
+        int eight,
+        StructSizeSixteenNotExplicit s1
+    )
     {
         if (one % 2 == 0)
         {
             long a = one * 100;
             long b = one + 1100;
-            return CalleeGithubIssue12468(two, 
-                                          one,
-                                          three,
-                                          four,
-                                          five,
-                                          six,
-                                          seven,
-                                          eight,
-                                          new StructSizeEightNotExplicit(a), 
-                                          new StructSizeEightNotExplicit(b));
+            return CalleeGithubIssue12468(
+                two,
+                one,
+                three,
+                four,
+                five,
+                six,
+                seven,
+                eight,
+                new StructSizeEightNotExplicit(a),
+                new StructSizeEightNotExplicit(b)
+            );
         }
         else
         {
             long b = one + 1599;
             long a = one + 16;
-            return CalleeGithubIssue12468(one, 
-                                          two,
-                                          three,
-                                          four,
-                                          five,
-                                          six,
-                                          seven,
-                                          eight,
-                                          new StructSizeEightNotExplicit(b), 
-                                          new StructSizeEightNotExplicit(a));
+            return CalleeGithubIssue12468(
+                one,
+                two,
+                three,
+                four,
+                five,
+                six,
+                seven,
+                eight,
+                new StructSizeEightNotExplicit(b),
+                new StructSizeEightNotExplicit(a)
+            );
         }
     }
-    
-    [StructLayout(LayoutKind.Explicit, Size=8, CharSet=CharSet.Ansi)]
+
+    [StructLayout(LayoutKind.Explicit, Size = 8, CharSet = CharSet.Ansi)]
     public struct StructSizeThirtyTwo
     {
-        [FieldOffset(0)]  public int a;
-        [FieldOffset(8)] public int b;
-        [FieldOffset(16)] public int c;
-        [FieldOffset(24)] public int d;
+        [FieldOffset(0)]
+        public int a;
+
+        [FieldOffset(8)]
+        public int b;
+
+        [FieldOffset(16)]
+        public int c;
+
+        [FieldOffset(24)]
+        public int d;
 
         public StructSizeThirtyTwo(int a, int b, int c, int d)
         {
@@ -986,12 +989,17 @@ public class FastTailCallCandidates
         }
     };
 
-    [StructLayout(LayoutKind.Explicit, Size=8, CharSet=CharSet.Ansi)]
+    [StructLayout(LayoutKind.Explicit, Size = 8, CharSet = CharSet.Ansi)]
     public struct StructSizeTwentyFour
     {
-        [FieldOffset(0)] public int a;
-        [FieldOffset(8)] public int b;
-        [FieldOffset(16)] public int c;
+        [FieldOffset(0)]
+        public int a;
+
+        [FieldOffset(8)]
+        public int b;
+
+        [FieldOffset(16)]
+        public int c;
 
         public StructSizeTwentyFour(int a, int b, int c)
         {
@@ -1020,7 +1028,6 @@ public class FastTailCallCandidates
         {
             return 100;
         }
-
         else
         {
             return 105;
@@ -1065,11 +1072,13 @@ public class FastTailCallCandidates
     /// Decision to fast tail call. See DoubleCountRetBuffCaller for more
     /// information.
     /// </summary>
-    public static StructSizeThirtyTwo DoubleCountRetBuffCallee(StructSizeEightIntNotExplicit sstf,
-                                                               StructSizeEightIntNotExplicit sstf2,
-                                                               StructSizeEightIntNotExplicit sstf3,
-                                                               StructSizeEightIntNotExplicit sstf4,
-                                                               StructSizeEightIntNotExplicit sstf5)
+    public static StructSizeThirtyTwo DoubleCountRetBuffCallee(
+        StructSizeEightIntNotExplicit sstf,
+        StructSizeEightIntNotExplicit sstf2,
+        StructSizeEightIntNotExplicit sstf3,
+        StructSizeEightIntNotExplicit sstf4,
+        StructSizeEightIntNotExplicit sstf5
+    )
     {
         int a = sstf.a;
         int b = sstf.b;
@@ -1099,14 +1108,26 @@ public class FastTailCallCandidates
             StructSizeEightIntNotExplicit eightBytes = new StructSizeEightIntNotExplicit(a, a);
             a = 1;
             b = b + 2;
-            return DoubleCountRetBuffCallee(eightBytes, eightBytes, eightBytes, eightBytes, eightBytes);
+            return DoubleCountRetBuffCallee(
+                eightBytes,
+                eightBytes,
+                eightBytes,
+                eightBytes,
+                eightBytes
+            );
         }
         else
         {
             StructSizeEightIntNotExplicit eightBytes = new StructSizeEightIntNotExplicit(b, b);
             a = 4;
             b = b + 1;
-            return DoubleCountRetBuffCallee(eightBytes, eightBytes, eightBytes, eightBytes, eightBytes);
+            return DoubleCountRetBuffCallee(
+                eightBytes,
+                eightBytes,
+                eightBytes,
+                eightBytes,
+                eightBytes
+            );
         }
     }
 
@@ -1129,7 +1150,7 @@ public class FastTailCallCandidates
         if (i % 2 == 0)
         {
             StructSizeThirtyTwo retVal = DoubleCountRetBuffCallerWrapper(4, 2);
-            
+
             if (retVal.b == 4.0)
             {
                 return 100;
@@ -1142,7 +1163,7 @@ public class FastTailCallCandidates
         else
         {
             StructSizeThirtyTwo retVal = DoubleCountRetBuffCallerWrapper(3, 1);
-            
+
             if (retVal.b == 1.0)
             {
                 return 0;

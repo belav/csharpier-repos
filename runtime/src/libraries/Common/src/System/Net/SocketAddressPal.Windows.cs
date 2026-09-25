@@ -35,16 +35,20 @@ namespace System.Net
 #endif
         }
 
-        public static ushort GetPort(ReadOnlySpan<byte> buffer)
-            => BinaryPrimitives.ReadUInt16BigEndian(buffer.Slice(2));
+        public static ushort GetPort(ReadOnlySpan<byte> buffer) =>
+            BinaryPrimitives.ReadUInt16BigEndian(buffer.Slice(2));
 
-        public static void SetPort(Span<byte> buffer, ushort port)
-            => BinaryPrimitives.WriteUInt16BigEndian(buffer.Slice(2), port);
+        public static void SetPort(Span<byte> buffer, ushort port) =>
+            BinaryPrimitives.WriteUInt16BigEndian(buffer.Slice(2), port);
 
-        public static uint GetIPv4Address(ReadOnlySpan<byte> buffer)
-            => BinaryPrimitives.ReadUInt32LittleEndian(buffer.Slice(4));
+        public static uint GetIPv4Address(ReadOnlySpan<byte> buffer) =>
+            BinaryPrimitives.ReadUInt32LittleEndian(buffer.Slice(4));
 
-        public static void GetIPv6Address(ReadOnlySpan<byte> buffer, Span<byte> address, out uint scope)
+        public static void GetIPv6Address(
+            ReadOnlySpan<byte> buffer,
+            Span<byte> address,
+            out uint scope
+        )
         {
             buffer.Slice(8, address.Length).CopyTo(address);
 

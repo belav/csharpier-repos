@@ -22,8 +22,10 @@ namespace System.Configuration
             set
             {
                 int data = Data;
-                if (value) Data = data | bit;
-                else Data = data & ~bit;
+                if (value)
+                    Data = data | bit;
+                else
+                    Data = data & ~bit;
             }
         }
     }

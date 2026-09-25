@@ -2,15 +2,15 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.DirectoryServices;
+using System.Text;
 
 #endregion
 
 namespace System.Workflow.Activities
 {
     [Serializable]
-    sealed internal class DirectoryRootQuery : IDirectoryOperation
+    internal sealed class DirectoryRootQuery : IDirectoryOperation
     {
         private String m_name;
         private String m_value;
@@ -28,7 +28,11 @@ namespace System.Workflow.Activities
             this.m_operation = operation;
         }
 
-        public void GetResult(DirectoryEntry rootEntry, DirectoryEntry currentEntry, List<DirectoryEntry> response)
+        public void GetResult(
+            DirectoryEntry rootEntry,
+            DirectoryEntry currentEntry,
+            List<DirectoryEntry> response
+        )
         {
             if (rootEntry == null)
                 throw new ArgumentNullException("rootEntry");
@@ -69,5 +73,4 @@ namespace System.Workflow.Activities
             }
         }
     }
-
 }

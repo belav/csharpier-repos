@@ -14,7 +14,5 @@
 
 namespace Castle.DynamicProxy.Generators.Emitters.SimpleAST
 {
-	internal interface IStatement : IExpressionOrStatement
-	{
-	}
+    internal interface IStatement : IExpressionOrStatement { }
 }

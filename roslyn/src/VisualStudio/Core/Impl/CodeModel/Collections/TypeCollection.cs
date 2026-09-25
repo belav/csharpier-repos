@@ -9,8 +9,8 @@ using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.InternalElements;
 using Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Interop;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Interop;
@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             object parent,
             FileCodeModel fileCodeModel,
-            SyntaxNodeKey nodeKey)
+            SyntaxNodeKey nodeKey
+        )
         {
             var collection = new TypeCollection(state, parent, fileCodeModel, nodeKey);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
@@ -38,7 +39,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             CodeModelState state,
             object parent,
             FileCodeModel fileCodeModel,
-            SyntaxNodeKey nodeKey)
+            SyntaxNodeKey nodeKey
+        )
             : base(state, parent)
         {
             Debug.Assert(fileCodeModel != null);
@@ -52,8 +54,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             get { return _fileCodeModel.Object; }
         }
 
-        private SyntaxNode LookupNode()
-            => FileCodeModel.LookupNode(_nodeKey);
+        private SyntaxNode LookupNode() => FileCodeModel.LookupNode(_nodeKey);
 
         internal override Snapshot CreateSnapshot()
         {
@@ -63,8 +64,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             var nodesBuilder = ArrayBuilder<SyntaxNode>.GetInstance();
             nodesBuilder.AddRange(CodeModelService.GetLogicalSupportedMemberNodes(node));
 
-            return new NodeSnapshot(this.State, _fileCodeModel, node, parentElement,
-                nodesBuilder.ToImmutableAndFree());
+            return new NodeSnapshot(
+                this.State,
+                _fileCodeModel,
+                node,
+                parentElement,
+                nodesBuilder.ToImmutableAndFree()
+            );
         }
 
         protected override bool TryGetItemByIndex(int index, out EnvDTE.CodeElement element)

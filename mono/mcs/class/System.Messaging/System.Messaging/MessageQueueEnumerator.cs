@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,78 +33,73 @@ using System.Collections;
 
 namespace System.Messaging
 {
-	public class MessageQueueEnumerator : MarshalByRefObject, IEnumerator, IDisposable
-	{
-		private bool disposed;
-		private ArrayList queueList;
-		private int currentIndex;
+    public class MessageQueueEnumerator : MarshalByRefObject, IEnumerator, IDisposable
+    {
+        private bool disposed;
+        private ArrayList queueList;
+        private int currentIndex;
 
-		internal MessageQueueEnumerator (ArrayList queueList)
-		{
-			this.queueList = queueList;
-			this.currentIndex = -1;
-		}
+        internal MessageQueueEnumerator(ArrayList queueList)
+        {
+            this.queueList = queueList;
+            this.currentIndex = -1;
+        }
 
-		public MessageQueue Current
-		{
-			get
-			{
-				if (currentIndex < 0 || currentIndex >= queueList.Count)
-					return null;
-				return (MessageQueue) queueList[currentIndex];
-			}
-		}
+        public MessageQueue Current
+        {
+            get
+            {
+                if (currentIndex < 0 || currentIndex >= queueList.Count)
+                    return null;
+                return (MessageQueue)queueList[currentIndex];
+            }
+        }
 
-		object IEnumerator.Current
-		{
-			get
-			{
-				if (currentIndex < 0 || currentIndex >= queueList.Count)
-					return null;
-				return queueList[currentIndex];
-			}
-		}
+        object IEnumerator.Current
+        {
+            get
+            {
+                if (currentIndex < 0 || currentIndex >= queueList.Count)
+                    return null;
+                return queueList[currentIndex];
+            }
+        }
 
-		public IntPtr LocatorHandle
-		{
-			[MonoTODO]
-			get
-			{
-				throw new NotImplementedException ();
-			}
-		}
+        public IntPtr LocatorHandle
+        {
+            [MonoTODO]
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public void Close ()
-		{
-		}
+        [MonoTODO]
+        public void Close() { }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		protected virtual void Dispose (bool disposing)
-		{
-			Close ();
-			disposed = true;
-		}
+        protected virtual void Dispose(bool disposing)
+        {
+            Close();
+            disposed = true;
+        }
 
-		public bool MoveNext ()
-		{
-			return (++currentIndex) < queueList.Count;
-		}
+        public bool MoveNext()
+        {
+            return (++currentIndex) < queueList.Count;
+        }
 
-		public void Reset ()
-		{
-			currentIndex = -1;
-		}
+        public void Reset()
+        {
+            currentIndex = -1;
+        }
 
-		~MessageQueueEnumerator ()
-		{
-			if (!disposed)
-				Dispose (false);
-		}
-	}
+        ~MessageQueueEnumerator()
+        {
+            if (!disposed)
+                Dispose(false);
+        }
+    }
 }

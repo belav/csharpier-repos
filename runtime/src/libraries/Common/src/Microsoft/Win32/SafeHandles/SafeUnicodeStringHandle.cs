@@ -42,10 +42,7 @@ namespace Microsoft.Win32.SafeHandles
 
         public sealed override bool IsInvalid
         {
-            get
-            {
-                return handle == IntPtr.Zero;
-            }
+            get { return handle == IntPtr.Zero; }
         }
 
         protected sealed override bool ReleaseHandle()

@@ -41,13 +41,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(SyntaxKind kind, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations)
+        internal CSharpSyntaxNode(
+            SyntaxKind kind,
+            DiagnosticInfo[] diagnostics,
+            SyntaxAnnotation[] annotations
+        )
             : base((ushort)kind, diagnostics, annotations)
         {
             GreenStats.NoteGreen(this);
         }
 
-        internal CSharpSyntaxNode(SyntaxKind kind, DiagnosticInfo[] diagnostics, SyntaxAnnotation[] annotations, int fullWidth)
+        internal CSharpSyntaxNode(
+            SyntaxKind kind,
+            DiagnosticInfo[] diagnostics,
+            SyntaxAnnotation[] annotations,
+            int fullWidth
+        )
             : base((ushort)kind, diagnostics, annotations, fullWidth)
         {
             GreenStats.NoteGreen(this);
@@ -67,14 +76,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         public override int RawContextualKind
         {
-            get
-            {
-                return this.RawKind;
-            }
+            get { return this.RawKind; }
         }
 
         public override bool IsSkippedTokensTrivia => this.Kind == SyntaxKind.SkippedTokensTrivia;
-        public override bool IsDocumentationCommentTrivia => SyntaxFacts.IsDocumentationCommentTrivia(this.Kind);
+        public override bool IsDocumentationCommentTrivia =>
+            SyntaxFacts.IsDocumentationCommentTrivia(this.Kind);
 
         public override int GetSlotOffset(int index)
         {
@@ -156,7 +163,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             return stack;
         }
 
-        internal static DirectiveStack ApplyDirectivesToListOrNode(GreenNode listOrNode, DirectiveStack stack)
+        internal static DirectiveStack ApplyDirectivesToListOrNode(
+            GreenNode listOrNode,
+            DirectiveStack stack
+        )
         {
             // If we have a list of trivia, then that node is not actually a CSharpSyntaxNode.
             // Just defer to our standard ApplyDirectives helper as it will do the appropriate
@@ -259,20 +269,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         // Use conditional weak table so we always return same identity for structured trivia
-        private static readonly ConditionalWeakTable<SyntaxNode, Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>> s_structuresTable
-            = new ConditionalWeakTable<SyntaxNode, Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>>();
+        private static readonly ConditionalWeakTable<
+            SyntaxNode,
+            Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>
+        > s_structuresTable =
+            new ConditionalWeakTable<
+                SyntaxNode,
+                Dictionary<CodeAnalysis.SyntaxTrivia, WeakReference<SyntaxNode>>
+            >();
 
         /// <summary>
-        /// Gets the syntax node represented the structure of this trivia, if any. The HasStructure property can be used to 
+        /// Gets the syntax node represented the structure of this trivia, if any. The HasStructure property can be used to
         /// determine if this trivia has structure.
         /// </summary>
         /// <returns>
-        /// A CSharpSyntaxNode derived from StructuredTriviaSyntax, with the structured view of this trivia node. 
+        /// A CSharpSyntaxNode derived from StructuredTriviaSyntax, with the structured view of this trivia node.
         /// If this trivia node does not have structure, returns null.
         /// </returns>
         /// <remarks>
         /// Some types of trivia have structure that can be accessed as additional syntax nodes.
-        /// These forms of trivia include: 
+        /// These forms of trivia include:
         ///   directives, where the structure describes the structure of the directive.
         ///   documentation comments, where the structure describes the XML structure of the comment.
         ///   skipped tokens, where the structure describes the tokens that were skipped by the parser.

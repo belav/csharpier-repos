@@ -5,10 +5,10 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Xml.Schema;
     using System.CodeDom;
     using System.Collections.Generic;
+    using System.Xml;
+    using System.Xml.Schema;
 
     internal class ContractCodeDomInfo
     {
@@ -27,7 +27,14 @@ namespace System.Runtime.Serialization
             set
             {
                 if (ReferencedTypeExists)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotSetNamespaceForReferencedType, TypeReference.BaseType)));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.CannotSetNamespaceForReferencedType,
+                                TypeReference.BaseType
+                            )
+                        )
+                    );
                 else
                     clrNamespace = value;
             }
@@ -36,7 +43,11 @@ namespace System.Runtime.Serialization
         internal Dictionary<string, object> GetMemberNames()
         {
             if (ReferencedTypeExists)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.CannotSetMembersForReferencedType, TypeReference.BaseType)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.CannotSetMembersForReferencedType, TypeReference.BaseType)
+                    )
+                );
             else
             {
                 if (memberNames == null)

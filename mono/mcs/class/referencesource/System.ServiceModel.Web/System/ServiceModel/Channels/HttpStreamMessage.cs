@@ -30,7 +30,11 @@ namespace System.ServiceModel.Channels
             this.properties = new MessageProperties();
         }
 
-        public HttpStreamMessage(MessageHeaders headers, MessageProperties properties, BodyWriter bodyWriter)
+        public HttpStreamMessage(
+            MessageHeaders headers,
+            MessageProperties properties,
+            BodyWriter bodyWriter
+        )
         {
             if (bodyWriter == null)
             {
@@ -48,7 +52,9 @@ namespace System.ServiceModel.Channels
                 if (IsDisposed)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateDisposedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateDisposedException()
+                    );
                 }
                 return headers;
             }
@@ -56,10 +62,7 @@ namespace System.ServiceModel.Channels
 
         public override bool IsEmpty
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool IsFault
@@ -74,7 +77,9 @@ namespace System.ServiceModel.Channels
                 if (IsDisposed)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateDisposedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateDisposedException()
+                    );
                 }
                 return properties;
             }
@@ -87,7 +92,9 @@ namespace System.ServiceModel.Channels
                 if (IsDisposed)
                 {
 #pragma warning suppress 56503
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateDisposedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateDisposedException()
+                    );
                 }
                 return MessageVersion.None;
             }
@@ -159,7 +166,11 @@ namespace System.ServiceModel.Channels
             {
                 bufferedBodyWriter = this.bodyWriter.CreateBufferedCopy(maxBufferSize);
             }
-            return new HttpStreamMessageBuffer(this.Headers, new MessageProperties(this.Properties), bufferedBodyWriter);
+            return new HttpStreamMessageBuffer(
+                this.Headers,
+                new MessageProperties(this.Properties),
+                bufferedBodyWriter
+            );
         }
 
         protected override void OnWriteBodyContents(XmlDictionaryWriter writer)
@@ -180,8 +191,11 @@ namespace System.ServiceModel.Channels
             MessageProperties properties;
             object thisLock = new object();
 
-            public HttpStreamMessageBuffer(MessageHeaders headers,
-                MessageProperties properties, BodyWriter bodyWriter)
+            public HttpStreamMessageBuffer(
+                MessageHeaders headers,
+                MessageProperties properties,
+                BodyWriter bodyWriter
+            )
                 : base()
             {
                 this.bodyWriter = bodyWriter;
@@ -219,7 +233,9 @@ namespace System.ServiceModel.Channels
                 {
                     if (closed)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateDisposedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            CreateDisposedException()
+                        );
                     }
                     return new HttpStreamMessage(this.headers, this.properties, this.bodyWriter);
                 }

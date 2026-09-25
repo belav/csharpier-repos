@@ -1,1 +1,1 @@
-[assembly:System.Reflection.AssemblyCulture("nn-NO")]
+[assembly: System.Reflection.AssemblyCulture("nn-NO")]

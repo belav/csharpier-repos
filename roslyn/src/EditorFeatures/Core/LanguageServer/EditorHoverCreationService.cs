@@ -20,17 +20,24 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     [ExportWorkspaceService(typeof(ILspHoverResultCreationService), ServiceLayer.Editor), Shared]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class EditorLspHoverResultCreationService(IGlobalOptionService globalOptions) : ILspHoverResultCreationService
+    internal sealed class EditorLspHoverResultCreationService(IGlobalOptionService globalOptions)
+        : ILspHoverResultCreationService
     {
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
         public async Task<Hover> CreateHoverAsync(
-            Document document, QuickInfoItem info, ClientCapabilities clientCapabilities, CancellationToken cancellationToken)
+            Document document,
+            QuickInfoItem info,
+            ClientCapabilities clientCapabilities,
+            CancellationToken cancellationToken
+        )
         {
             var supportsVSExtensions = clientCapabilities.HasVisualStudioLspCapability();
 
             if (!supportsVSExtensions)
-                return await DefaultLspHoverResultCreationService.CreateDefaultHoverAsync(document, info, clientCapabilities, cancellationToken).ConfigureAwait(false);
+                return await DefaultLspHoverResultCreationService
+                    .CreateDefaultHoverAsync(document, info, clientCapabilities, cancellationToken)
+                    .ConfigureAwait(false);
 
             var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
             var language = document.Project.Language;
@@ -44,20 +51,30 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 : new IntellisenseQuickInfoBuilderContext(
                     document,
                     classificationOptions,
-                    await document.GetLineFormattingOptionsAsync(_globalOptions, cancellationToken).ConfigureAwait(false),
+                    await document
+                        .GetLineFormattingOptionsAsync(_globalOptions, cancellationToken)
+                        .ConfigureAwait(false),
                     threadingContext: null,
                     operationExecutor: null,
                     asynchronousOperationListener: null,
-                    streamingPresenter: null);
+                    streamingPresenter: null
+                );
 
             return new VSInternalHover
             {
                 Range = ProtocolConversions.TextSpanToRange(info.Span, text),
-                Contents = new SumType<string, MarkedString, SumType<string, MarkedString>[], MarkupContent>(string.Empty),
+                Contents = new SumType<
+                    string,
+                    MarkedString,
+                    SumType<string, MarkedString>[],
+                    MarkupContent
+                >(string.Empty),
                 // Build the classified text without navigation actions - they are not serializable.
                 // TODO - Switch to markup content once it supports classifications.
                 // https://devdiv.visualstudio.com/DevDiv/_workitems/edit/918138
-                RawContent = await IntellisenseQuickInfoBuilder.BuildContentWithoutNavigationActionsAsync(info, context, cancellationToken).ConfigureAwait(false)
+                RawContent = await IntellisenseQuickInfoBuilder
+                    .BuildContentWithoutNavigationActionsAsync(info, context, cancellationToken)
+                    .ConfigureAwait(false),
             };
         }
     }

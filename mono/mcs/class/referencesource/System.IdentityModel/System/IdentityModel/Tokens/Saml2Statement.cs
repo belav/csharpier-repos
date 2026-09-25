@@ -15,7 +15,5 @@ namespace System.IdentityModel.Tokens
     /// This abstract class provides no operations; however, this type is used
     /// to declare collections of statements, for example Saml2Assertion.Statements.
     /// </remarks>
-    public abstract class Saml2Statement
-    {
-    }
+    public abstract class Saml2Statement { }
 }

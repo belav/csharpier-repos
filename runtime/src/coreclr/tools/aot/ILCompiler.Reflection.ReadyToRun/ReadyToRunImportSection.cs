@@ -24,11 +24,16 @@ namespace ILCompiler.Reflection.ReadyToRun
             public ReadyToRunSignature Signature { get; set; }
             public GCRefMap GCRefMap { get; set; }
 
-            public ImportSectionEntry()
-            {
-            }
+            public ImportSectionEntry() { }
 
-            public ImportSectionEntry(int index, int startOffset, int startRVA, long section, uint signatureRVA, ReadyToRunSignature signature)
+            public ImportSectionEntry(
+                int index,
+                int startOffset,
+                int startRVA,
+                long section,
+                uint signatureRVA,
+                ReadyToRunSignature signature
+            )
             {
                 Index = index;
                 StartOffset = startOffset;
@@ -88,7 +93,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int auxDataRVA,
             int auxDataOffset,
             Machine machine,
-            ushort majorVersion)
+            ushort majorVersion
+        )
         {
             Index = index;
             SectionRVA = rva;
@@ -108,7 +114,13 @@ namespace ILCompiler.Reflection.ReadyToRun
 
                 for (int i = 0; i < Entries.Count; i++)
                 {
-                    int entryStartOffset = auxDataOffset + BitConverter.ToInt32(reader.Image, auxDataOffset + sizeof(int) * (Entries[i].Index / GCRefMap.GCREFMAP_LOOKUP_STRIDE));
+                    int entryStartOffset =
+                        auxDataOffset
+                        + BitConverter.ToInt32(
+                            reader.Image,
+                            auxDataOffset
+                                + sizeof(int) * (Entries[i].Index / GCRefMap.GCREFMAP_LOOKUP_STRIDE)
+                        );
                     int remaining = Entries[i].Index % GCRefMap.GCREFMAP_LOOKUP_STRIDE;
                     while (remaining != 0)
                     {

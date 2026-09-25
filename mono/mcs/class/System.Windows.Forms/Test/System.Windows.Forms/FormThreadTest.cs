@@ -1,43 +1,41 @@
 using System;
-using System.Windows.Forms;
 using System.Threading;
-using Sys_Threading=System.Threading;
-
+using System.Windows.Forms;
 using NUnit.Framework;
-
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
+using Sys_Threading = System.Threading;
 
 namespace MonoTests.System.Windows.Forms
 {
-	[TestFixture]
-	public class FormThreadTest : TestHelper
-	{
-		private static void GuiThread()
-		{
-			Form form1;
+    [TestFixture]
+    public class FormThreadTest : TestHelper
+    {
+        private static void GuiThread()
+        {
+            Form form1;
 
-			form1 = new Form();
-			form1.Show();
-			form1.Dispose();
-		}
+            form1 = new Form();
+            form1.Show();
+            form1.Dispose();
+        }
 
-		[Test]
-		public void TestThreadFormsInit ()
-		{
-			Sys_Threading.Thread thread;
+        [Test]
+        public void TestThreadFormsInit()
+        {
+            Sys_Threading.Thread thread;
 
-			thread = new Sys_Threading.Thread(new ThreadStart(GuiThread));
-			thread.Start();
-			thread.Join();
+            thread = new Sys_Threading.Thread(new ThreadStart(GuiThread));
+            thread.Start();
+            thread.Join();
 
-			try
-			{
-				GuiThread();
-			}
-			catch (Exception e)
-			{
-				Assert.Fail ("#1");
-			}
-		}
-	}
+            try
+            {
+                GuiThread();
+            }
+            catch (Exception e)
+            {
+                Assert.Fail("#1");
+            }
+        }
+    }
 }

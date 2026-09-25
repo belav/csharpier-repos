@@ -36,7 +36,9 @@ namespace System.Linq
                 }
                 else
                 {
-                    count = _source is IIListProvider<TSource> listProv ? listProv.GetCount(onlyIfCheap: true) : -1;
+                    count = _source is IIListProvider<TSource> listProv
+                        ? listProv.GetCount(onlyIfCheap: true)
+                        : -1;
                 }
 
                 return count == 0 ? 1 : count;

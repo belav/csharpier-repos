@@ -33,9 +33,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LoadedSolutionScopeFilterFactory()
-        {
-        }
+        public LoadedSolutionScopeFilterFactory() { }
 
         public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl)
         {
@@ -43,7 +41,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
             return null;
         }
 
-        public IErrorListFilterHandler ReplaceFilter(IWpfTableControl tableControl, string filterIdentifier)
+        public IErrorListFilterHandler ReplaceFilter(
+            IWpfTableControl tableControl,
+            string filterIdentifier
+        )
         {
             if (filterIdentifier == PredefinedScopeFilterNames.AllItemsScopeFilter)
             {
@@ -83,10 +84,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
     internal class LoadedSolutionFilterHandler : RoslynFilterHandler
     {
         private const int LoadedSolutionFilterHandlerFilterId = 20;
+
         public LoadedSolutionFilterHandler(string displayName)
-            : base(LoadedSolutionFilterHandlerFilterId, displayName, ItemOrigin.ExactMetadata)
-        {
-        }
+            : base(LoadedSolutionFilterHandlerFilterId, displayName, ItemOrigin.ExactMetadata) { }
     }
 
     [Export(typeof(IScopeFilterFactory))]
@@ -101,12 +101,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AllSourcesFilterHandlerFactory()
-        {
-        }
+        public AllSourcesFilterHandlerFactory() { }
 
-        public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl)
-            => new AllSourcesFilterHandler();
+        public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl) =>
+            new AllSourcesFilterHandler();
     }
 
     internal class AllSourcesFilterHandler : RoslynFilterHandler
@@ -114,9 +112,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
         private const int AllSourcesFilterHandlerFilterId = 22;
 
         public AllSourcesFilterHandler()
-            : base(AllSourcesFilterHandlerFilterId, ServicesVSResources.All_sources, ItemOrigin.IndexedInThirdParty)
-        {
-        }
+            : base(
+                AllSourcesFilterHandlerFilterId,
+                ServicesVSResources.All_sources,
+                ItemOrigin.IndexedInThirdParty
+            ) { }
     }
 
     [Export(typeof(IScopeFilterFactory))]
@@ -129,12 +129,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EntireRepositoryFilterHandlerFactory()
-        {
-        }
+        public EntireRepositoryFilterHandlerFactory() { }
 
-        public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl)
-            => new EntireRepositoryFilterHandler();
+        public IErrorListFilterHandler CreateFilter(IWpfTableControl tableControl) =>
+            new EntireRepositoryFilterHandler();
     }
 
     internal class EntireRepositoryFilterHandler : RoslynFilterHandler
@@ -142,17 +140,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.FindUsages
         private const int EntireRepositoryFilterHandlerFilterId = 21;
 
         public EntireRepositoryFilterHandler()
-            : base(EntireRepositoryFilterHandlerFilterId, ServicesVSResources.Entire_repository, ItemOrigin.IndexedInRepo)
-        {
-        }
+            : base(
+                EntireRepositoryFilterHandlerFilterId,
+                ServicesVSResources.Entire_repository,
+                ItemOrigin.IndexedInRepo
+            ) { }
     }
 
     internal class ItemOriginFilter : IEntryFilter
     {
         private readonly ItemOrigin _targetOrigin;
 
-        internal ItemOriginFilter(ItemOrigin targetOrigin)
-            => _targetOrigin = targetOrigin;
+        internal ItemOriginFilter(ItemOrigin targetOrigin) => _targetOrigin = targetOrigin;
 
         public bool Match(ITableEntryHandle entry)
         {

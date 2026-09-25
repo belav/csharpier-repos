@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,22 +28,40 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-	[ServiceContract (Name = "Client", Namespace = MessageContractsApril2005.NS)]
-	internal interface IAnnouncementContractApril2005
-	{
-		[OperationContract (Name = "Hello", Action = MessageContractsApril2005.HelloAction, IsOneWay = true, AsyncPattern = true)]
-		IAsyncResult BeginOnlineAnnouncement (MessageContractsApril2005.OnlineAnnouncement message, AsyncCallback callback, object state);
+    [ServiceContract(Name = "Client", Namespace = MessageContractsApril2005.NS)]
+    internal interface IAnnouncementContractApril2005
+    {
+        [OperationContract(
+            Name = "Hello",
+            Action = MessageContractsApril2005.HelloAction,
+            IsOneWay = true,
+            AsyncPattern = true
+        )]
+        IAsyncResult BeginOnlineAnnouncement(
+            MessageContractsApril2005.OnlineAnnouncement message,
+            AsyncCallback callback,
+            object state
+        );
 
-		void EndOnlineAnnouncement (IAsyncResult result);
+        void EndOnlineAnnouncement(IAsyncResult result);
 
-		[OperationContract (Name = "Bye", Action = MessageContractsApril2005.ByeAction, IsOneWay = true, AsyncPattern = true)]
-		IAsyncResult BeginOfflineAnnouncement (MessageContractsApril2005.OfflineAnnouncement message, AsyncCallback callback, object state);
+        [OperationContract(
+            Name = "Bye",
+            Action = MessageContractsApril2005.ByeAction,
+            IsOneWay = true,
+            AsyncPattern = true
+        )]
+        IAsyncResult BeginOfflineAnnouncement(
+            MessageContractsApril2005.OfflineAnnouncement message,
+            AsyncCallback callback,
+            object state
+        );
 
-		void EndOfflineAnnouncement (IAsyncResult result);
-	}
+        void EndOfflineAnnouncement(IAsyncResult result);
+    }
 }

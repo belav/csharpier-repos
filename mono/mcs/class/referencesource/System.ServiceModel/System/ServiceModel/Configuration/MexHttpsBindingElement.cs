@@ -4,24 +4,20 @@
 
 namespace System.ServiceModel.Configuration
 {
+    using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.Text;
-    using System.ComponentModel;
-    using System.ServiceModel.Channels;
 
     public partial class MexHttpsBindingElement : MexBindingElement<WSHttpBinding>
     {
         public MexHttpsBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public MexHttpsBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
     }
 }

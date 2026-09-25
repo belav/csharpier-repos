@@ -15,7 +15,8 @@ namespace System.Reflection.Context.Tests
 {
     public class InteritedMethodInfoTests
     {
-        private readonly CustomReflectionContext _customReflectionContext = new VirtualPropertyInfoCustomReflectionContext();
+        private readonly CustomReflectionContext _customReflectionContext =
+            new VirtualPropertyInfoCustomReflectionContext();
         private TypeInfo _customTypeInfo;
         private TypeInfo _customTypeInfoToCheckForEquality;
         private PropertyInfo[] _propertyInfos;
@@ -29,7 +30,9 @@ namespace System.Reflection.Context.Tests
             _customTypeInfoToCheckForEquality = _customReflectionContext.MapType(typeInfo);
             _propertyInfos = _customTypeInfo.BaseType.GetTypeInfo().DeclaredProperties.ToArray();
             _inheritedMethodInfo = _customTypeInfo.GetMethod("get_number");
-            _inheritedMethodInfoToCheckForEquality = _customTypeInfoToCheckForEquality.GetMethod("get_number");
+            _inheritedMethodInfoToCheckForEquality = _customTypeInfoToCheckForEquality.GetMethod(
+                "get_number"
+            );
         }
 
         [Fact]
@@ -51,11 +54,13 @@ namespace System.Reflection.Context.Tests
             Assert.False(_inheritedMethodInfo.Equals(null));
         }
 
-
         [Fact]
         public void GetCustomAttributes_WithType_ReturnsVirtualAttribute()
         {
-            object[] attributes = _inheritedMethodInfo.GetCustomAttributes(typeof(TestGetterSetterAttribute), true);
+            object[] attributes = _inheritedMethodInfo.GetCustomAttributes(
+                typeof(TestGetterSetterAttribute),
+                true
+            );
             Assert.Single(attributes);
             Assert.IsType<TestGetterSetterAttribute>(attributes[0]);
         }
@@ -63,13 +68,19 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetHashCode_DifferentObjectSameType_AreEqual()
         {
-            Assert.Equal(_inheritedMethodInfoToCheckForEquality.GetHashCode(), _inheritedMethodInfo.GetHashCode());
+            Assert.Equal(
+                _inheritedMethodInfoToCheckForEquality.GetHashCode(),
+                _inheritedMethodInfo.GetHashCode()
+            );
         }
 
         [Fact]
         public void ReflectedType_ReturnsCustomType()
         {
-            Assert.Equal(ProjectionConstants.CustomType, _inheritedMethodInfo.ReflectedType.GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.CustomType,
+                _inheritedMethodInfo.ReflectedType.GetType().FullName
+            );
         }
     }
 }

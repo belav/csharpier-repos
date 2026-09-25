@@ -1,37 +1,34 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Drawing.Design;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
-    using System.Windows.Forms;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Runtime.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
     using System.ComponentModel.Design.Serialization;
-    using System.Collections.Specialized;
-    using System.Xml;
-    using System.Web.Services.Protocols;
-    using System.Windows.Forms.Design;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Runtime.Serialization;
     using System.Security.Permissions;
+    using System.Text;
+    using System.Web.Services.Protocols;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
 
     #region Class InvokeWebServiceToolboxItem
     [Serializable]
     internal sealed class InvokeWebServiceToolboxItem : ActivityToolboxItem
     {
         public InvokeWebServiceToolboxItem(Type type)
-            : base(type)
-        {
-
-        }
+            : base(type) { }
 
         private InvokeWebServiceToolboxItem(SerializationInfo info, StreamingContext context)
         {
@@ -42,7 +39,8 @@ namespace System.Workflow.Activities
         {
             Uri url = null;
             Type proxyClass = null;
-            IExtendedUIService extUIService = host.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
+            IExtendedUIService extUIService =
+                host.GetService(typeof(IExtendedUIService)) as IExtendedUIService;
             if (extUIService != null)
                 extUIService.AddWebReference(out url, out proxyClass);
 
@@ -73,13 +71,24 @@ namespace System.Workflow.Activities
         {
             base.PreFilterProperties(properties);
             if (properties["URL"] == null)
-                properties["URL"] = new WebServiceUrlPropertyDescriptor(Activity.Site, TypeDescriptor.CreateProperty(this.GetType(), "URL", typeof(string), DesignOnlyAttribute.Yes, MergablePropertyAttribute.No));
+                properties["URL"] = new WebServiceUrlPropertyDescriptor(
+                    Activity.Site,
+                    TypeDescriptor.CreateProperty(
+                        this.GetType(),
+                        "URL",
+                        typeof(string),
+                        DesignOnlyAttribute.Yes,
+                        MergablePropertyAttribute.No
+                    )
+                );
 
             //
 
             ITypeProvider typeProvider = (ITypeProvider)GetService(typeof(ITypeProvider));
             if (typeProvider == null)
-                throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.General_MissingService, typeof(ITypeProvider).FullName)
+                );
 
             InvokeWebServiceActivity invokeWebService = Activity as InvokeWebServiceActivity;
             invokeWebService.GetParameterPropertyDescriptors(properties);
@@ -95,8 +104,10 @@ namespace System.Workflow.Activities
             {
                 if (this.url == null)
                 {
-                    InvokeWebServiceActivity invokeWebServiceDecl = Activity as InvokeWebServiceActivity;
-                    IExtendedUIService extUIService = (IExtendedUIService)Activity.Site.GetService(typeof(IExtendedUIService));
+                    InvokeWebServiceActivity invokeWebServiceDecl =
+                        Activity as InvokeWebServiceActivity;
+                    IExtendedUIService extUIService = (IExtendedUIService)
+                        Activity.Site.GetService(typeof(IExtendedUIService));
                     if (extUIService != null && invokeWebServiceDecl.ProxyClass != null)
                     {
                         Uri uri = extUIService.GetUrlForProxyClass(invokeWebServiceDecl.ProxyClass);
@@ -112,18 +123,32 @@ namespace System.Workflow.Activities
                 {
                     this.url = value;
 
-                    IExtendedUIService extUIService = (IExtendedUIService)Activity.Site.GetService(typeof(IExtendedUIService));
+                    IExtendedUIService extUIService = (IExtendedUIService)
+                        Activity.Site.GetService(typeof(IExtendedUIService));
                     if (extUIService == null)
-                        throw new InvalidOperationException(SR.GetString(SR.General_MissingService, typeof(IExtendedUIService).FullName));
+                        throw new InvalidOperationException(
+                            SR.GetString(
+                                SR.General_MissingService,
+                                typeof(IExtendedUIService).FullName
+                            )
+                        );
 
                     //Create the designer transaction
                     DesignerTransaction trans = null;
-                    IDesignerHost host = Activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
+                    IDesignerHost host =
+                        Activity.Site.GetService(typeof(IDesignerHost)) as IDesignerHost;
                     if (host != null)
                         trans = host.CreateTransaction(SR.GetString(SR.ChangingVariable));
                     try
                     {
-                        PropertyDescriptorUtils.SetPropertyValue(Activity.Site, TypeDescriptor.GetProperties(Activity)["ProxyClass"], Activity, string.IsNullOrEmpty(this.url) ? null : extUIService.GetProxyClassForUrl(new Uri(this.url)));
+                        PropertyDescriptorUtils.SetPropertyValue(
+                            Activity.Site,
+                            TypeDescriptor.GetProperties(Activity)["ProxyClass"],
+                            Activity,
+                            string.IsNullOrEmpty(this.url)
+                                ? null
+                                : extUIService.GetProxyClassForUrl(new Uri(this.url))
+                        );
                         if (trans != null)
                             trans.Commit();
                     }
@@ -146,12 +171,24 @@ namespace System.Workflow.Activities
                 {
                     if (Activity.Site != null)
                     {
-                        InvokeWebServiceActivity invokeWebServiceDecl = e.Activity as InvokeWebServiceActivity;
-                        PropertyDescriptorUtils.SetPropertyValue(Activity.Site, TypeDescriptor.GetProperties(Activity)["MethodName"], Activity, String.Empty);
+                        InvokeWebServiceActivity invokeWebServiceDecl =
+                            e.Activity as InvokeWebServiceActivity;
+                        PropertyDescriptorUtils.SetPropertyValue(
+                            Activity.Site,
+                            TypeDescriptor.GetProperties(Activity)["MethodName"],
+                            Activity,
+                            String.Empty
+                        );
 
-                        IExtendedUIService extUIService = (IExtendedUIService)Activity.Site.GetService(typeof(IExtendedUIService));
+                        IExtendedUIService extUIService = (IExtendedUIService)
+                            Activity.Site.GetService(typeof(IExtendedUIService));
                         if (extUIService == null)
-                            throw new Exception(SR.GetString(SR.General_MissingService, typeof(IExtendedUIService).FullName));
+                            throw new Exception(
+                                SR.GetString(
+                                    SR.General_MissingService,
+                                    typeof(IExtendedUIService).FullName
+                                )
+                            );
 
                         if (invokeWebServiceDecl.ProxyClass == null)
                         {
@@ -159,14 +196,18 @@ namespace System.Workflow.Activities
                         }
                         else
                         {
-                            Uri uri = extUIService.GetUrlForProxyClass(invokeWebServiceDecl.ProxyClass);
+                            Uri uri = extUIService.GetUrlForProxyClass(
+                                invokeWebServiceDecl.ProxyClass
+                            );
                             this.url = (uri != null) ? uri.ToString() : string.Empty;
                         }
                     }
                 }
 
-                if ((e.Member.Name == "MethodName" || e.Member.Name == "TargetWorkflow")
-                    && e.Activity is InvokeWebServiceActivity)
+                if (
+                    (e.Member.Name == "MethodName" || e.Member.Name == "TargetWorkflow")
+                    && e.Activity is InvokeWebServiceActivity
+                )
                     (e.Activity as InvokeWebServiceActivity).ParameterBindings.Clear();
 
                 if (e.Member.Name == "ProxyClass" || e.Member.Name == "MethodName")
@@ -196,17 +237,15 @@ namespace System.Workflow.Activities
     #region Class WebServiceUrlPropertyDescriptor
     internal sealed class WebServiceUrlPropertyDescriptor : DynamicPropertyDescriptor
     {
-        internal WebServiceUrlPropertyDescriptor(IServiceProvider serviceProvider, PropertyDescriptor pd)
-            : base(serviceProvider, pd)
-        {
-        }
+        internal WebServiceUrlPropertyDescriptor(
+            IServiceProvider serviceProvider,
+            PropertyDescriptor pd
+        )
+            : base(serviceProvider, pd) { }
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
     #endregion
@@ -214,15 +253,20 @@ namespace System.Workflow.Activities
     internal sealed class WebServicePickerEditor : UITypeEditor
     {
         private IWindowsFormsEditorService editorService;
-        public WebServicePickerEditor()
-        {
-        }
 
-        public override object EditValue(ITypeDescriptorContext typeDescriptorContext, IServiceProvider serviceProvider, object o)
+        public WebServicePickerEditor() { }
+
+        public override object EditValue(
+            ITypeDescriptorContext typeDescriptorContext,
+            IServiceProvider serviceProvider,
+            object o
+        )
         {
             object returnVal = o;
-            this.editorService = (IWindowsFormsEditorService)serviceProvider.GetService(typeof(IWindowsFormsEditorService));
-            IExtendedUIService extUIService = (IExtendedUIService)serviceProvider.GetService(typeof(IExtendedUIService));
+            this.editorService = (IWindowsFormsEditorService)
+                serviceProvider.GetService(typeof(IWindowsFormsEditorService));
+            IExtendedUIService extUIService = (IExtendedUIService)
+                serviceProvider.GetService(typeof(IExtendedUIService));
             if (editorService != null && extUIService != null)
             {
                 Uri url = null;
@@ -231,13 +275,18 @@ namespace System.Workflow.Activities
                 if (DialogResult.OK == extUIService.AddWebReference(out url, out proxyClass))
                 {
                     returnVal = (url != null) ? url.ToString() : string.Empty;
-                    typeDescriptorContext.PropertyDescriptor.SetValue(typeDescriptorContext.Instance, returnVal as string);
+                    typeDescriptorContext.PropertyDescriptor.SetValue(
+                        typeDescriptorContext.Instance,
+                        returnVal as string
+                    );
                 }
             }
             return returnVal;
         }
 
-        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext typeDescriptorContext)
+        public override UITypeEditorEditStyle GetEditStyle(
+            ITypeDescriptorContext typeDescriptorContext
+        )
         {
             return UITypeEditorEditStyle.Modal;
         }

@@ -30,7 +30,10 @@ namespace System.Web.Mvc
             get { return _controllerType; }
         }
 
-        public override ActionDescriptor FindAction(ControllerContext controllerContext, string actionName)
+        public override ActionDescriptor FindAction(
+            ControllerContext controllerContext,
+            string actionName
+        )
         {
             if (controllerContext == null)
             {
@@ -92,9 +95,16 @@ namespace System.Web.Mvc
         {
             return DescriptorUtil.LazilyFetchOrCreateDescriptors(
                 cacheLocation: ref _canonicalActionsCache,
-                initializer: (ReflectedControllerDescriptor state) => state.GetAllActionMethodsFromSelector(),
-                converter: (MethodInfo methodInfo, ReflectedControllerDescriptor state) => ReflectedActionDescriptor.TryCreateDescriptor(methodInfo, methodInfo.Name, state),
-                state: this);
+                initializer: (ReflectedControllerDescriptor state) =>
+                    state.GetAllActionMethodsFromSelector(),
+                converter: (MethodInfo methodInfo, ReflectedControllerDescriptor state) =>
+                    ReflectedActionDescriptor.TryCreateDescriptor(
+                        methodInfo,
+                        methodInfo.Name,
+                        state
+                    ),
+                state: this
+            );
         }
     }
 }

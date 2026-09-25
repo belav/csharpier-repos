@@ -10,9 +10,18 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 {
     internal interface ISourceLinkService
     {
-        Task<SourceFilePathResult?> GetSourceFilePathAsync(string url, string relativePath, CancellationToken cancellationToken);
+        Task<SourceFilePathResult?> GetSourceFilePathAsync(
+            string url,
+            string relativePath,
+            CancellationToken cancellationToken
+        );
 
-        Task<PdbFilePathResult?> GetPdbFilePathAsync(string dllPath, PEReader peReader, bool useDefaultSymbolServers, CancellationToken cancellationToken);
+        Task<PdbFilePathResult?> GetPdbFilePathAsync(
+            string dllPath,
+            PEReader peReader,
+            bool useDefaultSymbolServers,
+            CancellationToken cancellationToken
+        );
     }
 
     // The following types mirror types in Microsoft.VisualStudio.Debugger.Contracts which cannot be referenced at this layer

@@ -30,7 +30,8 @@ internal class Program
         {
             public bool _testPropertyValue;
 
-            public bool TestProperty { 
+            public bool TestProperty
+            {
                 get => _testPropertyValue;
                 set { _testPropertyValue = value; }
             }
@@ -55,7 +56,8 @@ internal class Program
         {
             public bool _testPropertyValue;
 
-            public bool TestProperty { 
+            public bool TestProperty
+            {
                 get => _testPropertyValue;
                 set { _testPropertyValue = value; }
             }
@@ -63,7 +65,7 @@ internal class Program
 
         public static int Test()
         {
-            var obj = new TestType ();
+            var obj = new TestType();
             Expression<Func<TestType, bool>> expression = t => t.TestProperty;
             var prop = ((MemberExpression)expression.Body);
             ((PropertyInfo)prop.Member).SetValue(obj, true);

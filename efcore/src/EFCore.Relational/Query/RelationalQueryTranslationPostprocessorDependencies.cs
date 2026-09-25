@@ -46,7 +46,8 @@ public sealed record RelationalQueryTranslationPostprocessorDependencies
     /// </remarks>
     [EntityFrameworkInternal]
     public RelationalQueryTranslationPostprocessorDependencies(
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         SqlExpressionFactory = sqlExpressionFactory;
     }

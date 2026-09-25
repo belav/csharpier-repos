@@ -32,12 +32,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             _analyzer = analyzer;
         }
 
-        public Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
+        public Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return _analyzer.AnalyzeSemanticsAsync(document, cancellationToken);
         }
 
-        public Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
+        public Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             return _analyzer.AnalyzeSyntaxAsync(document, cancellationToken);
         }
@@ -59,7 +65,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             var dummyDescriptors = ImmutableArray.CreateBuilder<DiagnosticDescriptor>();
             for (var i = 0; i <= 10000; i++)
             {
-                dummyDescriptors.Add(new DiagnosticDescriptor(String.Format("FS{0:D4}", i), String.Empty, String.Empty, String.Empty, DiagnosticSeverity.Error, true, null, null));
+                dummyDescriptors.Add(
+                    new DiagnosticDescriptor(
+                        String.Format("FS{0:D4}", i),
+                        String.Empty,
+                        String.Empty,
+                        String.Empty,
+                        DiagnosticSeverity.Error,
+                        true,
+                        null,
+                        null
+                    )
+                );
             }
             return dummyDescriptors.ToImmutable();
         }
@@ -68,11 +85,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
 
         public override int Priority => 10; // Default = 50
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => _supportedDiagnostics;
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            _supportedDiagnostics;
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var analyzer = document.Project.Services.GetService<FSharpDocumentDiagnosticAnalyzerService>();
+            var analyzer =
+                document.Project.Services.GetService<FSharpDocumentDiagnosticAnalyzerService>();
             if (analyzer == null)
             {
                 return Task.FromResult(ImmutableArray<Diagnostic>.Empty);
@@ -81,9 +103,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Internal.Diagnostics
             return analyzer.AnalyzeSemanticsAsync(document, cancellationToken);
         }
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var analyzer = document.Project.Services.GetService<FSharpDocumentDiagnosticAnalyzerService>();
+            var analyzer =
+                document.Project.Services.GetService<FSharpDocumentDiagnosticAnalyzerService>();
             if (analyzer == null)
             {
                 return Task.FromResult(ImmutableArray<Diagnostic>.Empty);

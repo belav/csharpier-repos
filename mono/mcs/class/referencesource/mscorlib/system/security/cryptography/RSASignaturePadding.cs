@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 namespace System.Security.Cryptography
 {
-    // NOTE: This is *currently* 1:1 with the enum, but it exists to reserve room for more options 
+    // NOTE: This is *currently* 1:1 with the enum, but it exists to reserve room for more options
     //       such as custom # of PSS salt bytes without having to modify other parts of the API
     //       surface.
 
@@ -15,8 +15,12 @@ namespace System.Security.Cryptography
     /// </summary>
     public sealed class RSASignaturePadding : IEquatable<RSASignaturePadding>
     {
-        private static readonly RSASignaturePadding s_pkcs1 = new RSASignaturePadding(RSASignaturePaddingMode.Pkcs1);
-        private static readonly RSASignaturePadding s_pss = new RSASignaturePadding(RSASignaturePaddingMode.Pss);
+        private static readonly RSASignaturePadding s_pkcs1 = new RSASignaturePadding(
+            RSASignaturePaddingMode.Pkcs1
+        );
+        private static readonly RSASignaturePadding s_pss = new RSASignaturePadding(
+            RSASignaturePaddingMode.Pss
+        );
 
         private readonly RSASignaturePaddingMode _mode;
 

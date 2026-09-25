@@ -90,11 +90,31 @@ namespace System.Xml.Xsl
         // Small powers of ten. These are all the powers of ten that have an exact
         // representation in IEEE double precision format.
         public static ReadOnlySpan<double> C10toN =>
-        [
-            1e00, 1e01, 1e02, 1e03, 1e04, 1e05, 1e06, 1e07, 1e08, 1e09,
-            1e10, 1e11, 1e12, 1e13, 1e14, 1e15, 1e16, 1e17, 1e18, 1e19,
-            1e20, 1e21, 1e22,
-        ];
+            [
+                1e00,
+                1e01,
+                1e02,
+                1e03,
+                1e04,
+                1e05,
+                1e06,
+                1e07,
+                1e08,
+                1e09,
+                1e10,
+                1e11,
+                1e12,
+                1e13,
+                1e14,
+                1e15,
+                1e16,
+                1e17,
+                1e18,
+                1e19,
+                1e20,
+                1e21,
+                1e22,
+            ];
 
         // Returns 1 if argument is non-zero, and 0 otherwise
         public static uint NotZero(uint u)
@@ -206,7 +226,10 @@ namespace System.Xml.Xsl
             // one bit before the least significant bit of u0.
             private uint _error;
 
-            public uint Error { get { return _error; } }
+            public uint Error
+            {
+                get { return _error; }
+            }
 
             public BigNumber(uint u0, uint u1, uint u2, int exp, uint error)
             {
@@ -223,7 +246,10 @@ namespace System.Xml.Xsl
             {
                 Debug.Assert(dec.MantissaSize > 0);
 
-                int ib, exponent, mantissaSize, wT;
+                int ib,
+                    exponent,
+                    mantissaSize,
+                    wT;
                 uint uExtra;
                 BigNumber[] TenPowers;
 
@@ -385,10 +411,7 @@ namespace System.Xml.Xsl
             // Test to see if the num is zero. This works even if we're not normalized.
             private bool IsZero
             {
-                get
-                {
-                    return (0 == _u2) && (0 == _u1) && (0 == _u0);
-                }
+                get { return (0 == _u2) && (0 == _u1) && (0 == _u0); }
             }
 
             /*  ----------------------------------------------------------------------------
@@ -399,7 +422,8 @@ namespace System.Xml.Xsl
             */
             private void Normalize()
             {
-                int w1, w2;
+                int w1,
+                    w2;
 
                 // Normalize mantissa
                 if (0 == _u2)
@@ -445,8 +469,15 @@ namespace System.Xml.Xsl
                 Debug.Assert(0 != (numOp._u2 & 0x80000000));
 
                 //uint *rgu = stackalloc uint[6];
-                uint rgu0 = 0, rgu1 = 0, rgu2 = 0, rgu3 = 0, rgu4 = 0, rgu5 = 0;
-                uint uLo, uHi, uT;
+                uint rgu0 = 0,
+                    rgu1 = 0,
+                    rgu2 = 0,
+                    rgu3 = 0,
+                    rgu4 = 0,
+                    rgu5 = 0;
+                uint uLo,
+                    uHi,
+                    uT;
                 uint wCarry;
 
                 if (0 != (uT = _u0))
@@ -524,11 +555,14 @@ namespace System.Xml.Xsl
                 // Handle rounding and normalize.
                 if (0 == (rgu5 & 0x80000000))
                 {
-                    if (0 != (rgu2 & 0x40000000) &&
-                            (0 != (rgu2 & 0xBFFFFFFF) || 0 != rgu1 || 0 != rgu0))
+                    if (
+                        0 != (rgu2 & 0x40000000)
+                        && (0 != (rgu2 & 0xBFFFFFFF) || 0 != rgu1 || 0 != rgu0)
+                    )
                     {
                         // Round up by 1
-                        if (0 != AddU(ref rgu2, 0x40000000)
+                        if (
+                            0 != AddU(ref rgu2, 0x40000000)
                             && 0 != AddU(ref rgu3, 1)
                             && 0 != AddU(ref rgu4, 1)
                         )
@@ -558,12 +592,17 @@ namespace System.Xml.Xsl
                 }
                 else
                 {
-                    if (0 != (rgu2 & 0x80000000) &&
-                        (0 != (rgu3 & 1) || 0 != (rgu2 & 0x7FFFFFFF) ||
-                            0 != rgu1 || 0 != rgu0))
+                    if (
+                        0 != (rgu2 & 0x80000000)
+                        && (0 != (rgu3 & 1) || 0 != (rgu2 & 0x7FFFFFFF) || 0 != rgu1 || 0 != rgu0)
+                    )
                     {
                         // Round up by 1
-                        if (0 != AddU(ref rgu3, 1) && 0 != AddU(ref rgu4, 1) && 0 != AddU(ref rgu5, 1))
+                        if (
+                            0 != AddU(ref rgu3, 1)
+                            && 0 != AddU(ref rgu4, 1)
+                            && 0 != AddU(ref rgu5, 1)
+                        )
                         {
                             Debug.Assert(0 == rgu3);
                             Debug.Assert(0 == rgu4);
@@ -574,7 +613,7 @@ namespace System.Xml.Xsl
                     }
                 }
 
-            LNormalized:
+                LNormalized:
                 _u2 = rgu5;
                 _u1 = rgu4;
                 _u0 = rgu3;
@@ -591,7 +630,8 @@ namespace System.Xml.Xsl
             {
                 uint uEx;
                 int exp;
-                uint dblHi, dblLo;
+                uint dblHi,
+                    dblLo;
 
                 Debug.Assert(0 != (bn._u2 & 0x80000000));
 
@@ -683,7 +723,12 @@ namespace System.Xml.Xsl
                 Debug.Assert(_error < 0xFFFFFFFF);
                 uint uT = (_error + 1) >> 1;
 
-                if (0 != uT && 0 != AddU(ref _u0, uT) && 0 != AddU(ref _u1, 1) && 0 != AddU(ref _u2, 1))
+                if (
+                    0 != uT
+                    && 0 != AddU(ref _u0, uT)
+                    && 0 != AddU(ref _u1, 1)
+                    && 0 != AddU(ref _u2, 1)
+                )
                 {
                     Debug.Assert(0 == _u2 && 0 == _u1);
                     _u2 = 0x80000000;
@@ -699,7 +744,11 @@ namespace System.Xml.Xsl
                 Debug.Assert(_error < 0xFFFFFFFF);
                 uint uT = (_error + 1) >> 1;
 
-                if (0 != uT && 0 == AddU(ref _u0, unchecked((uint)-(int)uT)) && 0 == AddU(ref _u1, 0xFFFFFFFF))
+                if (
+                    0 != uT
+                    && 0 == AddU(ref _u0, unchecked((uint)-(int)uT))
+                    && 0 == AddU(ref _u1, 0xFFFFFFFF)
+                )
                 {
                     AddU(ref _u2, 0xFFFFFFFF);
                     if (0 == (0x80000000 & _u2))
@@ -715,18 +764,36 @@ namespace System.Xml.Xsl
 
                 Get mantissa bytes (BCD).
             */
-            public static bool DblToRgbFast(double dbl, byte[] mantissa, out int exponent, out int mantissaSize)
+            public static bool DblToRgbFast(
+                double dbl,
+                byte[] mantissa,
+                out int exponent,
+                out int mantissaSize
+            )
             {
-                BigNumber numHH, numHL, numLH, numLL;
+                BigNumber numHH,
+                    numHL,
+                    numLH,
+                    numLL;
                 BigNumber numBase;
                 BigNumber tenPower;
-                int ib, iT;
-                uint uT, uScale;
-                byte bHH, bHL, bLH, bLL;
-                uint uHH, uHL, uLH, uLL;
-                int wExp2, wExp10 = 0;
+                int ib,
+                    iT;
+                uint uT,
+                    uScale;
+                byte bHH,
+                    bHL,
+                    bLH,
+                    bLL;
+                uint uHH,
+                    uHL,
+                    uLH,
+                    uLL;
+                int wExp2,
+                    wExp10 = 0;
                 double dblInt;
-                uint dblHi, dblLo;
+                uint dblHi,
+                    dblLo;
 
                 dblHi = DblHi(dbl);
                 dblLo = DblLo(dbl);
@@ -899,7 +966,7 @@ namespace System.Xml.Xsl
                 wExp10++;
                 Debug.Assert(uHH >= uScale && uHH / uScale < 10);
 
-                for (ib = 0; ;)
+                for (ib = 0; ; )
                 {
                     Debug.Assert(uLL <= uHH);
                     bHH = (byte)(uHH / uScale);
@@ -962,9 +1029,7 @@ namespace System.Xml.Xsl
                 // and the current value of LH is zero and the least significant bit of
                 // the double is zero. In this case, we have exactly the digit sequence
                 // for the original numLL and IEEE and will rounds numLL up to the double.
-                if (0 == bLH && 0 == uLH && numLH.IsZero && 0 == (dblLo & 1))
-                {
-                }
+                if (0 == bLH && 0 == uLH && numLH.IsZero && 0 == (dblLo & 1)) { }
                 else if (bHL - bLH > 1)
                 {
                     // HL and LH differ by at least two in this digit, so split
@@ -986,10 +1051,12 @@ namespace System.Xml.Xsl
                 mantissaSize = ib;
                 goto LSucceed;
 
-            LSmallInt:
+                LSmallInt:
                 // dbl should be an integer from 1 to (2^53 - 1).
                 dblInt = dbl;
-                Debug.Assert(dblInt == Math.Floor(dblInt) && 1 <= dblInt && dblInt <= 9007199254740991.0d);
+                Debug.Assert(
+                    dblInt == Math.Floor(dblInt) && 1 <= dblInt && dblInt <= 9007199254740991.0d
+                );
 
                 iT = 0;
                 if (dblInt >= C10toN[iT + 8])
@@ -1017,19 +1084,23 @@ namespace System.Xml.Xsl
                     Debug.Assert(iT >= 0);
                     bHH = (byte)(dblInt / C10toN[iT]);
                     dblInt -= bHH * C10toN[iT];
-                    Debug.Assert(dblInt == Math.Floor(dblInt) && 0 <= dblInt && dblInt < C10toN[iT]);
+                    Debug.Assert(
+                        dblInt == Math.Floor(dblInt) && 0 <= dblInt && dblInt < C10toN[iT]
+                    );
                     mantissa[ib++] = bHH;
                 }
                 mantissaSize = ib;
 
-            LSucceed:
+                LSucceed:
 
 #if DEBUG
                 // Verify that precise is working and gives the same answer
                 if (mantissaSize > 0)
                 {
                     byte[] mantissaPrec = new byte[20];
-                    int exponentPrec, mantissaSizePrec, idx;
+                    int exponentPrec,
+                        mantissaSizePrec,
+                        idx;
 
                     DblToRgbPrecise(dbl, mantissaPrec, out exponentPrec, out mantissaSizePrec);
                     Debug.Assert(exponent == exponentPrec && mantissaSize == mantissaSizePrec);
@@ -1038,17 +1109,21 @@ namespace System.Xml.Xsl
                     for (idx = 0; idx < mantissaSize; idx++)
                     {
                         equal &= (
-                            (mantissa[idx] == mantissaPrec[idx]) ||
-                            (idx == mantissaSize - 1) && Math.Abs(mantissa[idx] - mantissaPrec[idx]) <= 1
+                            (mantissa[idx] == mantissaPrec[idx])
+                            || (idx == mantissaSize - 1)
+                                && Math.Abs(mantissa[idx] - mantissaPrec[idx]) <= 1
                         );
                     }
-                    Debug.Assert(equal, "DblToRgbFast and DblToRgbPrecise should give the same result");
+                    Debug.Assert(
+                        equal,
+                        "DblToRgbFast and DblToRgbPrecise should give the same result"
+                    );
                 }
 #endif
 
                 return true;
 
-            LFail:
+                LFail:
                 exponent = mantissaSize = 0;
                 return false;
             }
@@ -1058,7 +1133,12 @@ namespace System.Xml.Xsl
 
                 Uses big integer arithmetic to get the sequence of digits.
             */
-            public static void DblToRgbPrecise(double dbl, byte[] mantissa, out int exponent, out int mantissaSize)
+            public static void DblToRgbPrecise(
+                double dbl,
+                byte[] mantissa,
+                out int exponent,
+                out int mantissaSize
+            )
             {
                 BigInteger biNum = new BigInteger();
                 BigInteger biDen = new BigInteger();
@@ -1068,13 +1148,22 @@ namespace System.Xml.Xsl
                 BigInteger biHiLo;
                 byte bT;
                 bool fPow2;
-                int ib, cu;
-                int wExp10, wExp2, w1, w2;
-                int c2Num, c2Den, c5Num, c5Den;
+                int ib,
+                    cu;
+                int wExp10,
+                    wExp2,
+                    w1,
+                    w2;
+                int c2Num,
+                    c2Den,
+                    c5Num,
+                    c5Den;
                 double dblT;
                 //uint *rgu = stackalloc uint[2];
-                uint rgu0, rgu1;
-                uint dblHi, dblLo;
+                uint rgu0,
+                    rgu1;
+                uint dblHi,
+                    dblLo;
 
                 dblHi = DblHi(dbl);
                 dblLo = DblLo(dbl);
@@ -1148,8 +1237,7 @@ namespace System.Xml.Xsl
                 // Compute an approximation to the base 10 log. This is borrowed from
                 // David Gay's paper.
                 Debug.Assert(1 <= dblT && dblT < 2);
-                dblT = (dblT - 1.5) * 0.289529654602168 + 0.1760912590558 +
-                    w1 * 0.301029995663981;
+                dblT = (dblT - 1.5) * 0.289529654602168 + 0.1760912590558 + w1 * 0.301029995663981;
                 wExp10 = (int)dblT;
                 if (dblT < 0 && dblT != wExp10)
                 {
@@ -1253,7 +1341,7 @@ namespace System.Xml.Xsl
                     biHiLo = biHi;
                 }
 
-                for (ib = 0; ;)
+                for (ib = 0; ; )
                 {
                     bT = (byte)biNum.DivRem(biDen);
                     if (0 == ib && 0 == bT)
@@ -1329,7 +1417,7 @@ namespace System.Xml.Xsl
                     // Save the digit.
                     mantissa[ib++] = bT;
 
-                LSkip:
+                    LSkip:
                     biNum.MulAdd(10, 0);
                     biHi.MulAdd(10, 0);
                     if ((object)biHiLo != (object)biHi)
@@ -1338,7 +1426,7 @@ namespace System.Xml.Xsl
                     }
                     continue;
 
-                LRoundUp9:
+                    LRoundUp9:
                     while (ib > 0)
                     {
                         if (mantissa[--ib] != 9)
@@ -1352,110 +1440,112 @@ namespace System.Xml.Xsl
                     break;
                 }
 
-            LReturn:
+                LReturn:
                 exponent = wExp10 + 1;
                 mantissaSize = ib;
             }
 
             #region Powers of ten
-            private static readonly BigNumber[] s_tenPowersPos = new BigNumber[46] {
+            private static readonly BigNumber[] s_tenPowersPos = new BigNumber[46]
+            {
                 // Positive powers of 10 to 96 bits precision.
-                new BigNumber( 0x00000000, 0x00000000, 0xA0000000,     4, 0 ), // 10^1
-                new BigNumber( 0x00000000, 0x00000000, 0xC8000000,     7, 0 ), // 10^2
-                new BigNumber( 0x00000000, 0x00000000, 0xFA000000,    10, 0 ), // 10^3
-                new BigNumber( 0x00000000, 0x00000000, 0x9C400000,    14, 0 ), // 10^4
-                new BigNumber( 0x00000000, 0x00000000, 0xC3500000,    17, 0 ), // 10^5
-                new BigNumber( 0x00000000, 0x00000000, 0xF4240000,    20, 0 ), // 10^6
-                new BigNumber( 0x00000000, 0x00000000, 0x98968000,    24, 0 ), // 10^7
-                new BigNumber( 0x00000000, 0x00000000, 0xBEBC2000,    27, 0 ), // 10^8
-                new BigNumber( 0x00000000, 0x00000000, 0xEE6B2800,    30, 0 ), // 10^9
-                new BigNumber( 0x00000000, 0x00000000, 0x9502F900,    34, 0 ), // 10^10
-                new BigNumber( 0x00000000, 0x00000000, 0xBA43B740,    37, 0 ), // 10^11
-                new BigNumber( 0x00000000, 0x00000000, 0xE8D4A510,    40, 0 ), // 10^12
-                new BigNumber( 0x00000000, 0x00000000, 0x9184E72A,    44, 0 ), // 10^13
-                new BigNumber( 0x00000000, 0x80000000, 0xB5E620F4,    47, 0 ), // 10^14
-                new BigNumber( 0x00000000, 0xA0000000, 0xE35FA931,    50, 0 ), // 10^15
-                new BigNumber( 0x00000000, 0x04000000, 0x8E1BC9BF,    54, 0 ), // 10^16
-                new BigNumber( 0x00000000, 0xC5000000, 0xB1A2BC2E,    57, 0 ), // 10^17
-                new BigNumber( 0x00000000, 0x76400000, 0xDE0B6B3A,    60, 0 ), // 10^18
-                new BigNumber( 0x00000000, 0x89E80000, 0x8AC72304,    64, 0 ), // 10^19
-                new BigNumber( 0x00000000, 0xAC620000, 0xAD78EBC5,    67, 0 ), // 10^20
-                new BigNumber( 0x00000000, 0x177A8000, 0xD8D726B7,    70, 0 ), // 10^21
-                new BigNumber( 0x00000000, 0x6EAC9000, 0x87867832,    74, 0 ), // 10^22
-                new BigNumber( 0x00000000, 0x0A57B400, 0xA968163F,    77, 0 ), // 10^23
-                new BigNumber( 0x00000000, 0xCCEDA100, 0xD3C21BCE,    80, 0 ), // 10^24
-                new BigNumber( 0x00000000, 0x401484A0, 0x84595161,    84, 0 ), // 10^25
-                new BigNumber( 0x00000000, 0x9019A5C8, 0xA56FA5B9,    87, 0 ), // 10^26
-                new BigNumber( 0x00000000, 0xF4200F3A, 0xCECB8F27,    90, 0 ), // 10^27
-                new BigNumber( 0x40000000, 0xF8940984, 0x813F3978,    94, 0 ), // 10^28
-                new BigNumber( 0x50000000, 0x36B90BE5, 0xA18F07D7,    97, 0 ), // 10^29
-                new BigNumber( 0xA4000000, 0x04674EDE, 0xC9F2C9CD,   100, 0 ), // 10^30
-                new BigNumber( 0x4D000000, 0x45812296, 0xFC6F7C40,   103, 0 ), // 10^31
-                new BigNumber( 0xF0200000, 0x2B70B59D, 0x9DC5ADA8,   107, 0 ), // 10^32
-                new BigNumber( 0x3CBF6B72, 0xFFCFA6D5, 0xC2781F49,   213, 1 ), // 10^64   (rounded up)
-                new BigNumber( 0xC5CFE94F, 0xC59B14A2, 0xEFB3AB16,   319, 1 ), // 10^96   (rounded up)
-                new BigNumber( 0xC66F336C, 0x80E98CDF, 0x93BA47C9,   426, 1 ), // 10^128
-                new BigNumber( 0x577B986B, 0x7FE617AA, 0xB616A12B,   532, 1 ), // 10^160
-                new BigNumber( 0x85BBE254, 0x3927556A, 0xE070F78D,   638, 1 ), // 10^192  (rounded up)
-                new BigNumber( 0x82BD6B71, 0xE33CC92F, 0x8A5296FF,   745, 1 ), // 10^224  (rounded up)
-                new BigNumber( 0xDDBB901C, 0x9DF9DE8D, 0xAA7EEBFB,   851, 1 ), // 10^256  (rounded up)
-                new BigNumber( 0x73832EEC, 0x5C6A2F8C, 0xD226FC19,   957, 1 ), // 10^288
-                new BigNumber( 0xE6A11583, 0xF2CCE375, 0x81842F29,  1064, 1 ), // 10^320
-                new BigNumber( 0x5EBF18B7, 0xDB900AD2, 0x9FA42700,  1170, 1 ), // 10^352  (rounded up)
-                new BigNumber( 0x1027FFF5, 0xAEF8AA17, 0xC4C5E310,  1276, 1 ), // 10^384
-                new BigNumber( 0xB5E54F71, 0xE9B09C58, 0xF28A9C07,  1382, 1 ), // 10^416
-                new BigNumber( 0xA7EA9C88, 0xEBF7F3D3, 0x957A4AE1,  1489, 1 ), // 10^448
-                new BigNumber( 0x7DF40A74, 0x0795A262, 0xB83ED8DC,  1595, 1 ), // 10^480
+                new BigNumber(0x00000000, 0x00000000, 0xA0000000, 4, 0), // 10^1
+                new BigNumber(0x00000000, 0x00000000, 0xC8000000, 7, 0), // 10^2
+                new BigNumber(0x00000000, 0x00000000, 0xFA000000, 10, 0), // 10^3
+                new BigNumber(0x00000000, 0x00000000, 0x9C400000, 14, 0), // 10^4
+                new BigNumber(0x00000000, 0x00000000, 0xC3500000, 17, 0), // 10^5
+                new BigNumber(0x00000000, 0x00000000, 0xF4240000, 20, 0), // 10^6
+                new BigNumber(0x00000000, 0x00000000, 0x98968000, 24, 0), // 10^7
+                new BigNumber(0x00000000, 0x00000000, 0xBEBC2000, 27, 0), // 10^8
+                new BigNumber(0x00000000, 0x00000000, 0xEE6B2800, 30, 0), // 10^9
+                new BigNumber(0x00000000, 0x00000000, 0x9502F900, 34, 0), // 10^10
+                new BigNumber(0x00000000, 0x00000000, 0xBA43B740, 37, 0), // 10^11
+                new BigNumber(0x00000000, 0x00000000, 0xE8D4A510, 40, 0), // 10^12
+                new BigNumber(0x00000000, 0x00000000, 0x9184E72A, 44, 0), // 10^13
+                new BigNumber(0x00000000, 0x80000000, 0xB5E620F4, 47, 0), // 10^14
+                new BigNumber(0x00000000, 0xA0000000, 0xE35FA931, 50, 0), // 10^15
+                new BigNumber(0x00000000, 0x04000000, 0x8E1BC9BF, 54, 0), // 10^16
+                new BigNumber(0x00000000, 0xC5000000, 0xB1A2BC2E, 57, 0), // 10^17
+                new BigNumber(0x00000000, 0x76400000, 0xDE0B6B3A, 60, 0), // 10^18
+                new BigNumber(0x00000000, 0x89E80000, 0x8AC72304, 64, 0), // 10^19
+                new BigNumber(0x00000000, 0xAC620000, 0xAD78EBC5, 67, 0), // 10^20
+                new BigNumber(0x00000000, 0x177A8000, 0xD8D726B7, 70, 0), // 10^21
+                new BigNumber(0x00000000, 0x6EAC9000, 0x87867832, 74, 0), // 10^22
+                new BigNumber(0x00000000, 0x0A57B400, 0xA968163F, 77, 0), // 10^23
+                new BigNumber(0x00000000, 0xCCEDA100, 0xD3C21BCE, 80, 0), // 10^24
+                new BigNumber(0x00000000, 0x401484A0, 0x84595161, 84, 0), // 10^25
+                new BigNumber(0x00000000, 0x9019A5C8, 0xA56FA5B9, 87, 0), // 10^26
+                new BigNumber(0x00000000, 0xF4200F3A, 0xCECB8F27, 90, 0), // 10^27
+                new BigNumber(0x40000000, 0xF8940984, 0x813F3978, 94, 0), // 10^28
+                new BigNumber(0x50000000, 0x36B90BE5, 0xA18F07D7, 97, 0), // 10^29
+                new BigNumber(0xA4000000, 0x04674EDE, 0xC9F2C9CD, 100, 0), // 10^30
+                new BigNumber(0x4D000000, 0x45812296, 0xFC6F7C40, 103, 0), // 10^31
+                new BigNumber(0xF0200000, 0x2B70B59D, 0x9DC5ADA8, 107, 0), // 10^32
+                new BigNumber(0x3CBF6B72, 0xFFCFA6D5, 0xC2781F49, 213, 1), // 10^64   (rounded up)
+                new BigNumber(0xC5CFE94F, 0xC59B14A2, 0xEFB3AB16, 319, 1), // 10^96   (rounded up)
+                new BigNumber(0xC66F336C, 0x80E98CDF, 0x93BA47C9, 426, 1), // 10^128
+                new BigNumber(0x577B986B, 0x7FE617AA, 0xB616A12B, 532, 1), // 10^160
+                new BigNumber(0x85BBE254, 0x3927556A, 0xE070F78D, 638, 1), // 10^192  (rounded up)
+                new BigNumber(0x82BD6B71, 0xE33CC92F, 0x8A5296FF, 745, 1), // 10^224  (rounded up)
+                new BigNumber(0xDDBB901C, 0x9DF9DE8D, 0xAA7EEBFB, 851, 1), // 10^256  (rounded up)
+                new BigNumber(0x73832EEC, 0x5C6A2F8C, 0xD226FC19, 957, 1), // 10^288
+                new BigNumber(0xE6A11583, 0xF2CCE375, 0x81842F29, 1064, 1), // 10^320
+                new BigNumber(0x5EBF18B7, 0xDB900AD2, 0x9FA42700, 1170, 1), // 10^352  (rounded up)
+                new BigNumber(0x1027FFF5, 0xAEF8AA17, 0xC4C5E310, 1276, 1), // 10^384
+                new BigNumber(0xB5E54F71, 0xE9B09C58, 0xF28A9C07, 1382, 1), // 10^416
+                new BigNumber(0xA7EA9C88, 0xEBF7F3D3, 0x957A4AE1, 1489, 1), // 10^448
+                new BigNumber(0x7DF40A74, 0x0795A262, 0xB83ED8DC, 1595, 1), // 10^480
             };
 
-            private static readonly BigNumber[] s_tenPowersNeg = new BigNumber[46] {
+            private static readonly BigNumber[] s_tenPowersNeg = new BigNumber[46]
+            {
                 // Negative powers of 10 to 96 bits precision.
-                new BigNumber( 0xCCCCCCCD, 0xCCCCCCCC, 0xCCCCCCCC,    -3, 1 ), // 10^-1   (rounded up)
-                new BigNumber( 0x3D70A3D7, 0x70A3D70A, 0xA3D70A3D,    -6, 1 ), // 10^-2
-                new BigNumber( 0x645A1CAC, 0x8D4FDF3B, 0x83126E97,    -9, 1 ), // 10^-3
-                new BigNumber( 0xD3C36113, 0xE219652B, 0xD1B71758,   -13, 1 ), // 10^-4
-                new BigNumber( 0x0FCF80DC, 0x1B478423, 0xA7C5AC47,   -16, 1 ), // 10^-5
-                new BigNumber( 0xA63F9A4A, 0xAF6C69B5, 0x8637BD05,   -19, 1 ), // 10^-6   (rounded up)
-                new BigNumber( 0x3D329076, 0xE57A42BC, 0xD6BF94D5,   -23, 1 ), // 10^-7
-                new BigNumber( 0xFDC20D2B, 0x8461CEFC, 0xABCC7711,   -26, 1 ), // 10^-8
-                new BigNumber( 0x31680A89, 0x36B4A597, 0x89705F41,   -29, 1 ), // 10^-9   (rounded up)
-                new BigNumber( 0xB573440E, 0xBDEDD5BE, 0xDBE6FECE,   -33, 1 ), // 10^-10
-                new BigNumber( 0xF78F69A5, 0xCB24AAFE, 0xAFEBFF0B,   -36, 1 ), // 10^-11
-                new BigNumber( 0xF93F87B7, 0x6F5088CB, 0x8CBCCC09,   -39, 1 ), // 10^-12
-                new BigNumber( 0x2865A5F2, 0x4BB40E13, 0xE12E1342,   -43, 1 ), // 10^-13
-                new BigNumber( 0x538484C2, 0x095CD80F, 0xB424DC35,   -46, 1 ), // 10^-14  (rounded up)
-                new BigNumber( 0x0F9D3701, 0x3AB0ACD9, 0x901D7CF7,   -49, 1 ), // 10^-15
-                new BigNumber( 0x4C2EBE68, 0xC44DE15B, 0xE69594BE,   -53, 1 ), // 10^-16
-                new BigNumber( 0x09BEFEBA, 0x36A4B449, 0xB877AA32,   -56, 1 ), // 10^-17  (rounded up)
-                new BigNumber( 0x3AFF322E, 0x921D5D07, 0x9392EE8E,   -59, 1 ), // 10^-18
-                new BigNumber( 0x2B31E9E4, 0xB69561A5, 0xEC1E4A7D,   -63, 1 ), // 10^-19  (rounded up)
-                new BigNumber( 0x88F4BB1D, 0x92111AEA, 0xBCE50864,   -66, 1 ), // 10^-20  (rounded up)
-                new BigNumber( 0xD3F6FC17, 0x74DA7BEE, 0x971DA050,   -69, 1 ), // 10^-21  (rounded up)
-                new BigNumber( 0x5324C68B, 0xBAF72CB1, 0xF1C90080,   -73, 1 ), // 10^-22
-                new BigNumber( 0x75B7053C, 0x95928A27, 0xC16D9A00,   -76, 1 ), // 10^-23
-                new BigNumber( 0xC4926A96, 0x44753B52, 0x9ABE14CD,   -79, 1 ), // 10^-24
-                new BigNumber( 0x3A83DDBE, 0xD3EEC551, 0xF79687AE,   -83, 1 ), // 10^-25  (rounded up)
-                new BigNumber( 0x95364AFE, 0x76589DDA, 0xC6120625,   -86, 1 ), // 10^-26
-                new BigNumber( 0x775EA265, 0x91E07E48, 0x9E74D1B7,   -89, 1 ), // 10^-27  (rounded up)
-                new BigNumber( 0x8BCA9D6E, 0x8300CA0D, 0xFD87B5F2,   -93, 1 ), // 10^-28
-                new BigNumber( 0x096EE458, 0x359A3B3E, 0xCAD2F7F5,   -96, 1 ), // 10^-29
-                new BigNumber( 0xA125837A, 0x5E14FC31, 0xA2425FF7,   -99, 1 ), // 10^-30  (rounded up)
-                new BigNumber( 0x80EACF95, 0x4B43FCF4, 0x81CEB32C,  -102, 1 ), // 10^-31  (rounded up)
-                new BigNumber( 0x67DE18EE, 0x453994BA, 0xCFB11EAD,  -106, 1 ), // 10^-32  (rounded up)
-                new BigNumber( 0x3F2398D7, 0xA539E9A5, 0xA87FEA27,  -212, 1 ), // 10^-64
-                new BigNumber( 0x11DBCB02, 0xFD75539B, 0x88B402F7,  -318, 1 ), // 10^-96
-                new BigNumber( 0xAC7CB3F7, 0x64BCE4A0, 0xDDD0467C,  -425, 1 ), // 10^-128 (rounded up)
-                new BigNumber( 0x59ED2167, 0xDB73A093, 0xB3F4E093,  -531, 1 ), // 10^-160
-                new BigNumber( 0x7B6306A3, 0x5423CC06, 0x91FF8377,  -637, 1 ), // 10^-192
-                new BigNumber( 0xA4F8BF56, 0x4A314EBD, 0xECE53CEC,  -744, 1 ), // 10^-224
-                new BigNumber( 0xFA911156, 0x637A1939, 0xC0314325,  -850, 1 ), // 10^-256 (rounded up)
-                new BigNumber( 0x4EE367F9, 0x836AC577, 0x9BECCE62,  -956, 1 ), // 10^-288
-                new BigNumber( 0x8920B099, 0x478238D0, 0xFD00B897, -1063, 1 ), // 10^-320 (rounded up)
-                new BigNumber( 0x0092757C, 0x46F34F7D, 0xCD42A113, -1169, 1 ), // 10^-352 (rounded up)
-                new BigNumber( 0x88DBA000, 0xB11B0857, 0xA686E3E8, -1275, 1 ), // 10^-384 (rounded up)
-                new BigNumber( 0x1A4EB007, 0x3FFC68A6, 0x871A4981, -1381, 1 ), // 10^-416 (rounded up)
-                new BigNumber( 0x84C663CF, 0xB6074244, 0xDB377599, -1488, 1 ), // 10^-448 (rounded up)
-                new BigNumber( 0x61EB52E2, 0x79007736, 0xB1D983B4, -1594, 1 ), // 10^-480
+                new BigNumber(0xCCCCCCCD, 0xCCCCCCCC, 0xCCCCCCCC, -3, 1), // 10^-1   (rounded up)
+                new BigNumber(0x3D70A3D7, 0x70A3D70A, 0xA3D70A3D, -6, 1), // 10^-2
+                new BigNumber(0x645A1CAC, 0x8D4FDF3B, 0x83126E97, -9, 1), // 10^-3
+                new BigNumber(0xD3C36113, 0xE219652B, 0xD1B71758, -13, 1), // 10^-4
+                new BigNumber(0x0FCF80DC, 0x1B478423, 0xA7C5AC47, -16, 1), // 10^-5
+                new BigNumber(0xA63F9A4A, 0xAF6C69B5, 0x8637BD05, -19, 1), // 10^-6   (rounded up)
+                new BigNumber(0x3D329076, 0xE57A42BC, 0xD6BF94D5, -23, 1), // 10^-7
+                new BigNumber(0xFDC20D2B, 0x8461CEFC, 0xABCC7711, -26, 1), // 10^-8
+                new BigNumber(0x31680A89, 0x36B4A597, 0x89705F41, -29, 1), // 10^-9   (rounded up)
+                new BigNumber(0xB573440E, 0xBDEDD5BE, 0xDBE6FECE, -33, 1), // 10^-10
+                new BigNumber(0xF78F69A5, 0xCB24AAFE, 0xAFEBFF0B, -36, 1), // 10^-11
+                new BigNumber(0xF93F87B7, 0x6F5088CB, 0x8CBCCC09, -39, 1), // 10^-12
+                new BigNumber(0x2865A5F2, 0x4BB40E13, 0xE12E1342, -43, 1), // 10^-13
+                new BigNumber(0x538484C2, 0x095CD80F, 0xB424DC35, -46, 1), // 10^-14  (rounded up)
+                new BigNumber(0x0F9D3701, 0x3AB0ACD9, 0x901D7CF7, -49, 1), // 10^-15
+                new BigNumber(0x4C2EBE68, 0xC44DE15B, 0xE69594BE, -53, 1), // 10^-16
+                new BigNumber(0x09BEFEBA, 0x36A4B449, 0xB877AA32, -56, 1), // 10^-17  (rounded up)
+                new BigNumber(0x3AFF322E, 0x921D5D07, 0x9392EE8E, -59, 1), // 10^-18
+                new BigNumber(0x2B31E9E4, 0xB69561A5, 0xEC1E4A7D, -63, 1), // 10^-19  (rounded up)
+                new BigNumber(0x88F4BB1D, 0x92111AEA, 0xBCE50864, -66, 1), // 10^-20  (rounded up)
+                new BigNumber(0xD3F6FC17, 0x74DA7BEE, 0x971DA050, -69, 1), // 10^-21  (rounded up)
+                new BigNumber(0x5324C68B, 0xBAF72CB1, 0xF1C90080, -73, 1), // 10^-22
+                new BigNumber(0x75B7053C, 0x95928A27, 0xC16D9A00, -76, 1), // 10^-23
+                new BigNumber(0xC4926A96, 0x44753B52, 0x9ABE14CD, -79, 1), // 10^-24
+                new BigNumber(0x3A83DDBE, 0xD3EEC551, 0xF79687AE, -83, 1), // 10^-25  (rounded up)
+                new BigNumber(0x95364AFE, 0x76589DDA, 0xC6120625, -86, 1), // 10^-26
+                new BigNumber(0x775EA265, 0x91E07E48, 0x9E74D1B7, -89, 1), // 10^-27  (rounded up)
+                new BigNumber(0x8BCA9D6E, 0x8300CA0D, 0xFD87B5F2, -93, 1), // 10^-28
+                new BigNumber(0x096EE458, 0x359A3B3E, 0xCAD2F7F5, -96, 1), // 10^-29
+                new BigNumber(0xA125837A, 0x5E14FC31, 0xA2425FF7, -99, 1), // 10^-30  (rounded up)
+                new BigNumber(0x80EACF95, 0x4B43FCF4, 0x81CEB32C, -102, 1), // 10^-31  (rounded up)
+                new BigNumber(0x67DE18EE, 0x453994BA, 0xCFB11EAD, -106, 1), // 10^-32  (rounded up)
+                new BigNumber(0x3F2398D7, 0xA539E9A5, 0xA87FEA27, -212, 1), // 10^-64
+                new BigNumber(0x11DBCB02, 0xFD75539B, 0x88B402F7, -318, 1), // 10^-96
+                new BigNumber(0xAC7CB3F7, 0x64BCE4A0, 0xDDD0467C, -425, 1), // 10^-128 (rounded up)
+                new BigNumber(0x59ED2167, 0xDB73A093, 0xB3F4E093, -531, 1), // 10^-160
+                new BigNumber(0x7B6306A3, 0x5423CC06, 0x91FF8377, -637, 1), // 10^-192
+                new BigNumber(0xA4F8BF56, 0x4A314EBD, 0xECE53CEC, -744, 1), // 10^-224
+                new BigNumber(0xFA911156, 0x637A1939, 0xC0314325, -850, 1), // 10^-256 (rounded up)
+                new BigNumber(0x4EE367F9, 0x836AC577, 0x9BECCE62, -956, 1), // 10^-288
+                new BigNumber(0x8920B099, 0x478238D0, 0xFD00B897, -1063, 1), // 10^-320 (rounded up)
+                new BigNumber(0x0092757C, 0x46F34F7D, 0xCD42A113, -1169, 1), // 10^-352 (rounded up)
+                new BigNumber(0x88DBA000, 0xB11B0857, 0xA686E3E8, -1275, 1), // 10^-384 (rounded up)
+                new BigNumber(0x1A4EB007, 0x3FFC68A6, 0x871A4981, -1381, 1), // 10^-416 (rounded up)
+                new BigNumber(0x84C663CF, 0xB6074244, 0xDB377599, -1488, 1), // 10^-448 (rounded up)
+                new BigNumber(0x61EB52E2, 0x79007736, 0xB1D983B4, -1594, 1), // 10^-480
             };
             #endregion
 
@@ -1809,7 +1899,8 @@ namespace System.Xml.Xsl
                 AssertValid();
                 Debug.Assert(dec.MantissaSize >= 0);
 
-                uint uAdd, uMul;
+                uint uAdd,
+                    uMul;
                 int cu = (dec.MantissaSize + 8) / 9;
                 int mantissaSize = dec.MantissaSize;
 
@@ -1844,7 +1935,8 @@ namespace System.Xml.Xsl
 
                 for (int i = 0; i < _length; i++)
                 {
-                    uint d, uT;
+                    uint d,
+                        uT;
                     d = MulU(_digits[i], uMul, out uT);
                     if (0 != uAdd)
                     {
@@ -1884,7 +1976,7 @@ namespace System.Xml.Xsl
                 if (c5 > 0)
                 {
                     uint uT;
-                    for (uT = 5; --c5 > 0;)
+                    for (uT = 5; --c5 > 0; )
                     {
                         uT *= 5;
                     }
@@ -1898,7 +1990,8 @@ namespace System.Xml.Xsl
                 AssertValid();
                 Debug.Assert(cbit >= 0);
 
-                int idx, cu;
+                int idx,
+                    cu;
                 uint uExtra;
 
                 if (0 == cbit || 0 == _length)
@@ -1939,7 +2032,7 @@ namespace System.Xml.Xsl
                     {
                         // Shift the digits.
                         // REVIEW: memmove(digits + cu, digits, length * sizeof(uint));
-                        for (int i = _length; 0 != i--;)
+                        for (int i = _length; 0 != i--; )
                         {
                             _digits[cu + i] = _digits[i];
                         }
@@ -2001,7 +2094,7 @@ namespace System.Xml.Xsl
                     return;
                 }
 
-                for (idx = 0; ;)
+                for (idx = 0; ; )
                 {
                     _digits[idx] >>= cbit;
                     if (++idx >= _length)
@@ -2059,7 +2152,9 @@ namespace System.Xml.Xsl
                 bi.AssertValid();
                 Debug.Assert((object)this != (object)bi);
 
-                int idx, cuMax, cuMin;
+                int idx,
+                    cuMax,
+                    cuMin;
                 uint wCarry;
 
                 if ((cuMax = _length) < (cuMin = bi._length))
@@ -2114,7 +2209,8 @@ namespace System.Xml.Xsl
                 Debug.Assert((object)this != (object)bi);
 
                 int idx;
-                uint wCarry, uT;
+                uint wCarry,
+                    uT;
 
                 if (_length < bi._length)
                 {
@@ -2151,16 +2247,14 @@ namespace System.Xml.Xsl
                     if (idx == _length)
                     {
                         // Trim off zeros.
-                        while (--idx >= 0 && 0 == _digits[idx])
-                        {
-                        }
+                        while (--idx >= 0 && 0 == _digits[idx]) { }
                         _length = idx + 1;
                     }
                     AssertValid();
                     return;
                 }
 
-            LNegative:
+                LNegative:
                 // bi was bigger than this.
                 Debug.Fail("Who's subtracting to negative?");
                 _length = 0;
@@ -2173,10 +2267,14 @@ namespace System.Xml.Xsl
                 bi.AssertValid();
                 Debug.Assert((object)this != (object)bi);
 
-                int idx, cu;
-                uint uQuo, wCarry;
+                int idx,
+                    cu;
+                uint uQuo,
+                    wCarry;
                 int wT;
-                uint uT, uHi, uLo;
+                uint uT,
+                    uHi,
+                    uLo;
 
                 cu = bi._length;
                 Debug.Assert(_length <= cu);
@@ -2218,9 +2316,7 @@ namespace System.Xml.Xsl
                         Debug.Assert(idx == cu);
 
                         // Trim off zeros.
-                        while (--idx >= 0 && 0 == _digits[idx])
-                        {
-                        }
+                        while (--idx >= 0 && 0 == _digits[idx]) { }
                         _length = idx + 1;
                         break;
                 }
@@ -2244,24 +2340,31 @@ namespace System.Xml.Xsl
             }
 
 #if NEVER
-            public static explicit operator double(BigInteger bi) {
-                uint uHi, uLo;
-                uint u1, u2, u3;
+            public static explicit operator double(BigInteger bi)
+            {
+                uint uHi,
+                    uLo;
+                uint u1,
+                    u2,
+                    u3;
                 int idx;
                 int cbit;
-                uint dblHi, dblLo;
+                uint dblHi,
+                    dblLo;
 
-                switch (bi.length) {
-                case 0:
-                    return 0;
-                case 1:
-                    return bi.digits[0];
-                case 2:
-                    return (ulong)bi.digits[1] << 32 | bi.digits[0];
+                switch (bi.length)
+                {
+                    case 0:
+                        return 0;
+                    case 1:
+                        return bi.digits[0];
+                    case 2:
+                        return (ulong)bi.digits[1] << 32 | bi.digits[0];
                 }
 
                 Debug.Assert(3 <= bi.length);
-                if (bi.length > 32) {
+                if (bi.length > 32)
+                {
                     // Result is infinite.
                     return BitConverter.Int64BitsToDouble(0x7FF00000L << 32);
                 }
@@ -2272,10 +2375,13 @@ namespace System.Xml.Xsl
                 Debug.Assert(0 != u1);
                 cbit = 31 - CbitZeroLeft(u1);
 
-                if (0 == cbit) {
+                if (0 == cbit)
+                {
                     uHi = u2;
                     uLo = u3;
-                } else {
+                }
+                else
+                {
                     uHi = (u1 << (32 - cbit)) | (u2 >> cbit);
                     // Or 1 if there are any remaining nonzero bits in u3, so we take
                     // them into account when rounding.
@@ -2290,17 +2396,25 @@ namespace System.Xml.Xsl
                 dblHi |= (uint)(0x03FF + cbit + (bi.length - 1) * 0x0020) << 20;
 
                 // Do IEEE rounding.
-                if (0 != (uLo & 0x0800)) {
-                    if (0 != (uLo & 0x07FF) || 0 != (dblLo & 1)) {
-                        if (0 == ++dblLo) {
+                if (0 != (uLo & 0x0800))
+                {
+                    if (0 != (uLo & 0x07FF) || 0 != (dblLo & 1))
+                    {
+                        if (0 == ++dblLo)
+                        {
                             ++dblHi;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         // If there are any non-zero bits in digits from 0 to length - 4,
                         // round up.
-                        for (idx = bi.length - 4; idx >= 0; idx--) {
-                            if (0 != bi.digits[idx]) {
-                                if (0 == ++dblLo) {
+                        for (idx = bi.length - 4; idx >= 0; idx--)
+                        {
+                            if (0 != bi.digits[idx])
+                            {
+                                if (0 == ++dblLo)
+                                {
                                     ++dblHi;
                                 }
                                 break;
@@ -2319,24 +2433,32 @@ namespace System.Xml.Xsl
         private sealed class FloatingDecimal
         {
             public const int MaxDigits = 50;
-            private const int MaxExp10 = 310;  // Upper bound on base 10 exponent
-            private const int MinExp10 = -325;  // Lower bound on base 10 exponent
+            private const int MaxExp10 = 310; // Upper bound on base 10 exponent
+            private const int MinExp10 = -325; // Lower bound on base 10 exponent
 
-            private int _exponent;             // Base-10 scaling factor (0 means decimal point immediately precedes first digit)
-            private int _sign;                 // Sign is -1 or 1, depending on sign of number
-            private int _mantissaSize;         // Size of mantissa
-            private readonly byte[] _mantissa = new byte[MaxDigits];    // Array of base-10 digits
+            private int _exponent; // Base-10 scaling factor (0 means decimal point immediately precedes first digit)
+            private int _sign; // Sign is -1 or 1, depending on sign of number
+            private int _mantissaSize; // Size of mantissa
+            private readonly byte[] _mantissa = new byte[MaxDigits]; // Array of base-10 digits
 
-            public int Exponent { get { return _exponent; } set { _exponent = value; } }
-            public int Sign { get { return _sign; } set { _sign = value; } }
-            public byte[] Mantissa { get { return _mantissa; } }
+            public int Exponent
+            {
+                get { return _exponent; }
+                set { _exponent = value; }
+            }
+            public int Sign
+            {
+                get { return _sign; }
+                set { _sign = value; }
+            }
+            public byte[] Mantissa
+            {
+                get { return _mantissa; }
+            }
 
             public int MantissaSize
             {
-                get
-                {
-                    return _mantissaSize;
-                }
+                get { return _mantissaSize; }
                 set
                 {
                     Debug.Assert(value <= MaxDigits);
@@ -2385,7 +2507,11 @@ namespace System.Xml.Xsl
 #if DEBUG
             private bool Equals(FloatingDecimal other)
             {
-                if (_exponent != other._exponent || _sign != other._sign || _mantissaSize != other._mantissaSize)
+                if (
+                    _exponent != other._exponent
+                    || _sign != other._sign
+                    || _mantissaSize != other._mantissaSize
+                )
                 {
                     return false;
                 }
@@ -2407,25 +2533,33 @@ namespace System.Xml.Xsl
                 Rounds off the BCD representation of a number to a specified number of digits.
                 This may result in the exponent being incremented (e.g. if digits were 999).
             */
-            public void RoundTo(int sizeMantissa) {
-                if (sizeMantissa >= mantissaSize) {
+            public void RoundTo(int sizeMantissa)
+            {
+                if (sizeMantissa >= mantissaSize)
+                {
                     // No change required
                     return;
                 }
 
-                if (sizeMantissa >= 0) {
+                if (sizeMantissa >= 0)
+                {
                     bool fRoundUp = mantissa[sizeMantissa] >= 5;
                     mantissaSize = sizeMantissa;
 
                     // Round up if necessary and trim trailing zeros
-                    for (int idx = mantissaSize - 1; idx >= 0; idx--) {
-                        if (fRoundUp) {
-                            if (++(mantissa[idx]) <= 9) {
+                    for (int idx = mantissaSize - 1; idx >= 0; idx--)
+                    {
+                        if (fRoundUp)
+                        {
+                            if (++(mantissa[idx]) <= 9)
+                            {
                                 // Trailing digit is non-zero, so break
                                 fRoundUp = false;
                                 break;
                             }
-                        } else if (mantissa[idx] > 0) {
+                        }
+                        else if (mantissa[idx] > 0)
+                        {
                             // Trailing digit is non-zero, so break
                             break;
                         }
@@ -2434,19 +2568,23 @@ namespace System.Xml.Xsl
                         mantissaSize--;
                     }
 
-                    if (fRoundUp) {
+                    if (fRoundUp)
+                    {
                         // Number consisted only of 9's
                         Debug.Assert(0 == mantissaSize);
                         mantissa[0] = 1;
                         mantissaSize = 1;
                         exponent++;
                     }
-                } else {
+                }
+                else
+                {
                     // Number was rounded past any significant digits (e.g. 0.001 rounded to 1 fractional place), so round to 0.0
                     mantissaSize = 0;
                 }
 
-                if (0 == mantissaSize) {
+                if (0 == mantissaSize)
+                {
                     // 0.0
                     sign = 1;
                     exponent = 0;
@@ -2462,10 +2600,14 @@ namespace System.Xml.Xsl
             */
             public static explicit operator double(FloatingDecimal dec)
             {
-                BigNumber num, numHi, numLo;
+                BigNumber num,
+                    numHi,
+                    numLo;
                 uint ul;
                 int scale;
-                double dbl, dblLowPrec, dblLo;
+                double dbl,
+                    dblLowPrec,
+                    dblLo;
                 int mantissaSize = dec._mantissaSize;
 
                 // Verify that there are no leading or trailing zeros in the mantissa
@@ -2590,7 +2732,7 @@ namespace System.Xml.Xsl
                 //
                 dbl = dec.AdjustDbl((double)num);
 
-            LDone:
+                LDone:
                 // This assert was removed because it would fire on VERY rare occasions. Not
                 // repro on all machines and very hard to repro even on machines that could repro it.
                 // The numbers (dblLowPrec and dbl) were different in their two least sig bits only
@@ -2621,13 +2763,19 @@ namespace System.Xml.Xsl
             {
                 BigInteger biDec = new BigInteger();
                 BigInteger biDbl = new BigInteger();
-                int c2Dec, c2Dbl;
-                int c5Dec, c5Dbl;
-                uint wAddHi, uT;
-                int wT, iT;
-                int lwExp, wExp2;
+                int c2Dec,
+                    c2Dbl;
+                int c5Dec,
+                    c5Dbl;
+                uint wAddHi,
+                    uT;
+                int wT,
+                    iT;
+                int lwExp,
+                    wExp2;
                 //uint *rgu = stackalloc uint[2];
-                uint rgu0, rgu1;
+                uint rgu0,
+                    rgu1;
                 int cu;
 
                 biDec.InitFromFloatingDecimal(this);
@@ -2718,9 +2866,7 @@ namespace System.Xml.Xsl
                     }
                     Debug.Assert(c2Dbl < 32 || 0 != biDec[0]);
                     uT = biDec[0];
-                    for (iT = 0; iT < c2Dbl && 0 == (uT & (1L << iT)); iT++)
-                    {
-                    }
+                    for (iT = 0; iT < c2Dbl && 0 == (uT & (1L << iT)); iT++) { }
                     if (iT > 0)
                     {
                         c2Dbl -= iT;
@@ -2786,7 +2932,9 @@ namespace System.Xml.Xsl
                     if (wT > 0 || 0 == wT && 0 != (DblLo(dbl) & 1))
                     {
                         // Return the next lower value.
-                        dbl = BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(dbl) - 1);
+                        dbl = BitConverter.Int64BitsToDouble(
+                            BitConverter.DoubleToInt64Bits(dbl) - 1
+                        );
                     }
                 }
                 else
@@ -2811,7 +2959,9 @@ namespace System.Xml.Xsl
                     if (wT < 0 || 0 == wT && 0 != (DblLo(dbl) & 1))
                     {
                         // Return the next higher value.
-                        dbl = BitConverter.Int64BitsToDouble(BitConverter.DoubleToInt64Bits(dbl) + 1);
+                        dbl = BitConverter.Int64BitsToDouble(
+                            BitConverter.DoubleToInt64Bits(dbl) + 1
+                        );
                     }
                 }
                 return dbl;
@@ -2855,7 +3005,11 @@ namespace System.Xml.Xsl
         public static string DoubleToString(double dbl)
         {
             Debug.Assert(('0' & 0xF) == 0, "We use (char)(d |'0') to convert digit to char");
-            int maxSize, sizeInt, sizeFract, cntDigits, ib;
+            int maxSize,
+                sizeInt,
+                sizeFract,
+                cntDigits,
+                ib;
             int iVal;
 
             if (IsInteger(dbl, out iVal))
@@ -2964,7 +3118,14 @@ namespace System.Xml.Xsl
 
         public static unsafe double StringToDouble(string s)
         {
-            if (double.TryParse(s, NumberStyles.Float, CultureInfo.InvariantCulture, out double result) && double.IsFinite(result))
+            if (
+                double.TryParse(
+                    s,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out double result
+                ) && double.IsFinite(result)
+            )
             {
                 return result;
             }

@@ -13,7 +13,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         /// Unused.  But kept around for back compat.  Note this option is not about
         /// turning warning into errors.  It's about an aspect of 'remove unused using'
         /// functionality we don't support anymore.  Namely whether or not 'remove unused
-        /// using' should warn if you have any build errors as that might mean we 
+        /// using' should warn if you have any build errors as that might mean we
         /// remove some usings inappropriately.
         /// </summary>
         public int WarnOnBuildErrors
@@ -47,10 +47,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
         {
             get
             {
-                return GetOption(CompletionOptionsStorage.SnippetsBehavior) == SnippetsRule.AlwaysInclude
-                    ? 1 : 0;
+                return
+                    GetOption(CompletionOptionsStorage.SnippetsBehavior)
+                    == SnippetsRule.AlwaysInclude
+                    ? 1
+                    : 0;
             }
-
             set
             {
                 if (value == 0)
@@ -59,12 +61,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
                 }
                 else
                 {
-                    SetOption(CompletionOptionsStorage.SnippetsBehavior, SnippetsRule.AlwaysInclude);
+                    SetOption(
+                        CompletionOptionsStorage.SnippetsBehavior,
+                        SnippetsRule.AlwaysInclude
+                    );
                 }
             }
         }
 
-        [Obsolete("Use Style_UseImplicitTypeWherePossible, Style_UseImplicitTypeWhereApparent or Style_UseImplicitTypeForIntrinsicTypes", error: true)]
+        [Obsolete(
+            "Use Style_UseImplicitTypeWherePossible, Style_UseImplicitTypeWhereApparent or Style_UseImplicitTypeForIntrinsicTypes",
+            error: true
+        )]
         public int Style_UseVarWhenDeclaringLocals
         {
             get { return 0; }

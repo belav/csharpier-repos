@@ -15,7 +15,6 @@ namespace UseTrashedVfp1
             return ((Single)untypedValue - Helpers.TrashVFPAndGetStandardFloat32());
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool RunRepro()
         {
@@ -25,7 +24,6 @@ namespace UseTrashedVfp1
 
             return Helpers.IsWithin_0Point1(result, Helpers.StandardFloatValue_x_2);
         }
-
 
         [Fact]
         public static int TestEntryPoint()
@@ -47,7 +45,6 @@ namespace UseTrashedVfp1
             return 101;
         }
     }
-
 
     public static class Helpers
     {
@@ -82,7 +79,16 @@ namespace UseTrashedVfp1
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void TrashVolatileVFPRegistersHelper(double d0, double d1, double d2, double d3, double d4, double d5, double d6, double d7)
+        private static void TrashVolatileVFPRegistersHelper(
+            double d0,
+            double d1,
+            double d2,
+            double d3,
+            double d4,
+            double d5,
+            double d6,
+            double d7
+        )
         {
             return;
         }

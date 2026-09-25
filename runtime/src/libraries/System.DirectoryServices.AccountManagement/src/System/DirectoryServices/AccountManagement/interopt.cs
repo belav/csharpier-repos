@@ -12,17 +12,49 @@ namespace System.DirectoryServices.AccountManagement
 {
     internal static class Constants
     {
-        internal static byte[] GUID_FOREIGNSECURITYPRINCIPALS_CONTAINER_BYTE = new byte[] { 0x22, 0xb7, 0x0c, 0x67, 0xd5, 0x6e, 0x4e, 0xfb, 0x91, 0xe9, 0x30, 0x0f, 0xca, 0x3d, 0xc1, 0xaa };
+        internal static byte[] GUID_FOREIGNSECURITYPRINCIPALS_CONTAINER_BYTE = new byte[]
+        {
+            0x22,
+            0xb7,
+            0x0c,
+            0x67,
+            0xd5,
+            0x6e,
+            0x4e,
+            0xfb,
+            0x91,
+            0xe9,
+            0x30,
+            0x0f,
+            0xca,
+            0x3d,
+            0xc1,
+            0xaa,
+        };
     }
 
     internal static class UnsafeNativeMethods
     {
-        public static int ADsOpenObject(string path, string userName, string password, int flags, [In, Out] ref Guid iid, [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject)
+        public static int ADsOpenObject(
+            string path,
+            string userName,
+            string password,
+            int flags,
+            [In, Out] ref Guid iid,
+            [Out, MarshalAs(UnmanagedType.Interface)] out object ppObject
+        )
         {
             IntPtr ppObjPtr = IntPtr.Zero;
             try
             {
-                int hr = Interop.Activeds.ADsOpenObject(path, userName, password, flags, ref iid, out ppObjPtr);
+                int hr = Interop.Activeds.ADsOpenObject(
+                    path,
+                    userName,
+                    password,
+                    flags,
+                    ref iid,
+                    out ppObjPtr
+                );
                 ppObject = Marshal.GetObjectForIUnknown(ppObjPtr);
                 return hr;
             }
@@ -46,7 +78,7 @@ namespace System.DirectoryServices.AccountManagement
         internal enum ADS_PASSWORD_ENCODING_ENUM
         {
             ADS_PASSWORD_ENCODE_REQUIRE_SSL = 0,
-            ADS_PASSWORD_ENCODE_CLEAR = 1
+            ADS_PASSWORD_ENCODE_CLEAR = 1,
         }
 
         internal enum ADS_OPTION_ENUM
@@ -60,17 +92,25 @@ namespace System.DirectoryServices.AccountManagement
             ADS_OPTION_PASSWORD_PORTNUMBER = 6,
             ADS_OPTION_PASSWORD_METHOD = 7,
             ADS_OPTION_ACCUMULATIVE_MODIFICATION = 8,
-            ADS_OPTION_SKIP_SID_LOOKUP = 9
+            ADS_OPTION_SKIP_SID_LOOKUP = 9,
         }
 
-        [ComImport, Guid("7E99C0A2-F935-11D2-BA96-00C04FB6D0D1"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("7E99C0A2-F935-11D2-BA96-00C04FB6D0D1"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         public interface IADsDNWithBinary
         {
             object BinaryValue { get; set; }
             string DNString { get; set; }
         }
 
-        [ComImport, Guid("9068270b-0939-11D1-8be1-00c04fd8d503"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("9068270b-0939-11D1-8be1-00c04fd8d503"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         public interface IADsLargeInteger
         {
             int HighPart { get; set; }
@@ -78,26 +118,26 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         [ComImport, Guid("927971f5-0939-11d1-8be1-00c04fd8d503")]
-        public class ADsLargeInteger
-        {
-        }
+        public class ADsLargeInteger { }
 
-        [ComImport, Guid("46f14fda-232b-11d1-a808-00c04fd8d5a8"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("46f14fda-232b-11d1-a808-00c04fd8d5a8"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         public interface IAdsObjectOptions
         {
             [return: MarshalAs(UnmanagedType.Struct)]
-            object GetOption(
-                [In]
-                int option);
+            object GetOption([In] int option);
 
-            void PutOption(
-                [In]
-                int option,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                object vProp);
+            void PutOption([In] int option, [In, MarshalAs(UnmanagedType.Struct)] object vProp);
         }
 
-        [ComImport, Guid("FD8256D0-FD15-11CE-ABC4-02608C9E7553"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("FD8256D0-FD15-11CE-ABC4-02608C9E7553"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         public interface IADs
         {
             string Name
@@ -141,37 +181,33 @@ namespace System.DirectoryServices.AccountManagement
             void SetInfo();
 
             [return: MarshalAs(UnmanagedType.Struct)]
-            object Get(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName);
+            object Get([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
             void Put(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                object vProp);
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
+                [In, MarshalAs(UnmanagedType.Struct)] object vProp
+            );
 
             [return: MarshalAs(UnmanagedType.Struct)]
-            object GetEx(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName);
+            object GetEx([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
             void PutEx(
-                [In, MarshalAs(UnmanagedType.U4)]
-                int lnControlCode,
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                object vProp);
+                [In, MarshalAs(UnmanagedType.U4)] int lnControlCode,
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
+                [In, MarshalAs(UnmanagedType.Struct)] object vProp
+            );
 
             void GetInfoEx(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                object vProperties,
-                [In, MarshalAs(UnmanagedType.U4)]
-                int lnReserved);
+                [In, MarshalAs(UnmanagedType.Struct)] object vProperties,
+                [In, MarshalAs(UnmanagedType.U4)] int lnReserved
+            );
         }
 
-        [ComImport, Guid("27636b00-410f-11cf-b1ff-02608c9e7553"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("27636b00-410f-11cf-b1ff-02608c9e7553"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         public interface IADsGroup
         {
             string Name
@@ -215,34 +251,26 @@ namespace System.DirectoryServices.AccountManagement
             void SetInfo();
 
             [return: MarshalAs(UnmanagedType.Struct)]
-            object Get(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName);
+            object Get([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
             void Put(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                object vProp);
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
+                [In, MarshalAs(UnmanagedType.Struct)] object vProp
+            );
 
             [return: MarshalAs(UnmanagedType.Struct)]
-            object GetEx(
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName);
+            object GetEx([In, MarshalAs(UnmanagedType.BStr)] string bstrName);
 
             void PutEx(
-                [In, MarshalAs(UnmanagedType.U4)]
-                int lnControlCode,
-                [In, MarshalAs(UnmanagedType.BStr)]
-                string bstrName,
-                [In, MarshalAs(UnmanagedType.Struct)]
-                object vProp);
+                [In, MarshalAs(UnmanagedType.U4)] int lnControlCode,
+                [In, MarshalAs(UnmanagedType.BStr)] string bstrName,
+                [In, MarshalAs(UnmanagedType.Struct)] object vProp
+            );
 
             void GetInfoEx(
-                [In, MarshalAs(UnmanagedType.Struct)]
-                object vProperties,
-                [In, MarshalAs(UnmanagedType.U4)]
-                int lnReserved);
+                [In, MarshalAs(UnmanagedType.Struct)] object vProperties,
+                [In, MarshalAs(UnmanagedType.U4)] int lnReserved
+            );
 
             string Description
             {
@@ -261,7 +289,11 @@ namespace System.DirectoryServices.AccountManagement
             void Remove([In, MarshalAs(UnmanagedType.BStr)] string bstrItemToBeRemoved);
         }
 
-        [ComImport, Guid("451a0030-72ec-11cf-b03b-00aa006e0975"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("451a0030-72ec-11cf-b03b-00aa006e0975"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         public interface IADsMembers
         {
             int Count
@@ -286,39 +318,32 @@ namespace System.DirectoryServices.AccountManagement
         }
 
         [ComImport, Guid("080d0d78-f421-11d0-a36e-00c04fb950dc")]
-        public class Pathname
-        {
-        }
+        public class Pathname { }
 
-        [ComImport, Guid("d592aed4-f420-11d0-a36e-00c04fb950dc"), InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)]
+        [
+            ComImport,
+            Guid("d592aed4-f420-11d0-a36e-00c04fb950dc"),
+            InterfaceTypeAttribute(ComInterfaceType.InterfaceIsDual)
+        ]
         public interface IADsPathname
         {
             void Set(
                 [In, MarshalAs(UnmanagedType.BStr)] string bstrADsPath,
-                [In, MarshalAs(UnmanagedType.U4)]  int lnSetType
-                );
+                [In, MarshalAs(UnmanagedType.U4)] int lnSetType
+            );
 
-            void SetDisplayType(
-                [In, MarshalAs(UnmanagedType.U4)] int lnDisplayType
-                );
+            void SetDisplayType([In, MarshalAs(UnmanagedType.U4)] int lnDisplayType);
 
             [return: MarshalAs(UnmanagedType.BStr)]
-            string Retrieve(
-                [In, MarshalAs(UnmanagedType.U4)] int lnFormatType
-                );
+            string Retrieve([In, MarshalAs(UnmanagedType.U4)] int lnFormatType);
 
             [return: MarshalAs(UnmanagedType.U4)]
             int GetNumElements();
 
             [return: MarshalAs(UnmanagedType.BStr)]
-            string
-            GetElement(
-                [In, MarshalAs(UnmanagedType.U4)]  int lnElementIndex
-                );
+            string GetElement([In, MarshalAs(UnmanagedType.U4)] int lnElementIndex);
 
-            void AddLeafElement(
-                [In, MarshalAs(UnmanagedType.BStr)] string bstrLeafElement
-                );
+            void AddLeafElement([In, MarshalAs(UnmanagedType.BStr)] string bstrLeafElement);
 
             void RemoveLeafElement();
 
@@ -329,7 +354,7 @@ namespace System.DirectoryServices.AccountManagement
             string GetEscapedElement(
                 [In, MarshalAs(UnmanagedType.U4)] int lnReserved,
                 [In, MarshalAs(UnmanagedType.BStr)] string bstrInStr
-                );
+            );
 
             int EscapedMode
             {
@@ -371,7 +396,7 @@ namespace System.DirectoryServices.AccountManagement
             DsRole_WorkstationWithSharedAccountDomain,
             DsRole_ServerWithSharedAccountDomain,
             DsRole_MemberWorkstationWithSharedAccountDomain,
-            DsRole_MemberServerWithSharedAccountDomain
+            DsRole_MemberServerWithSharedAccountDomain,
         }
 
         /*
@@ -390,10 +415,13 @@ namespace System.DirectoryServices.AccountManagement
         {
             public DSROLE_MACHINE_ROLE MachineRole;
             public uint Flags;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string DomainNameFlat;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string DomainNameDns;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string DomainForestName;
             public Guid DomainGuid;

@@ -19,14 +19,16 @@ namespace System.ServiceModel.Channels
     }
 
     abstract class TcpChannelListener<TChannel, TChannelAcceptor>
-        : TcpChannelListener, IChannelListener<TChannel>
+        : TcpChannelListener,
+            IChannelListener<TChannel>
         where TChannel : class, IChannel
         where TChannelAcceptor : ChannelAcceptor<TChannel>
     {
-        protected TcpChannelListener(TcpTransportBindingElement bindingElement, BindingContext context)
-            : base(bindingElement, context)
-        {
-        }
+        protected TcpChannelListener(
+            TcpTransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : base(bindingElement, context) { }
 
         protected abstract TChannelAcceptor ChannelAcceptor { get; }
 
@@ -37,9 +39,20 @@ namespace System.ServiceModel.Channels
             ChannelAcceptor.Open(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedOpenAsyncResult(timeout, callback, state, base.OnBeginOpen, base.OnEndOpen, ChannelAcceptor);
+            return new ChainedOpenAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginOpen,
+                base.OnEndOpen,
+                ChannelAcceptor
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -54,9 +67,20 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedCloseAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, ChannelAcceptor);
+            return new ChainedCloseAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                ChannelAcceptor
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -86,7 +110,11 @@ namespace System.ServiceModel.Channels
             return ChannelAcceptor.AcceptChannel(timeout);
         }
 
-        public IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfNotOpened();
             return ChannelAcceptor.BeginAcceptChannel(timeout, callback, state);
@@ -103,7 +131,11 @@ namespace System.ServiceModel.Channels
             return ChannelAcceptor.WaitForChannel(timeout);
         }
 
-        protected override IAsyncResult OnBeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ChannelAcceptor.BeginWaitForChannel(timeout, callback, state);
         }
@@ -115,11 +147,15 @@ namespace System.ServiceModel.Channels
     }
 
     class TcpReplyChannelListener
-        : TcpChannelListener<IReplyChannel, ReplyChannelAcceptor>, ISingletonChannelListener
+        : TcpChannelListener<IReplyChannel, ReplyChannelAcceptor>,
+            ISingletonChannelListener
     {
         ReplyChannelAcceptor replyAcceptor;
 
-        public TcpReplyChannelListener(TcpTransportBindingElement bindingElement, BindingContext context)
+        public TcpReplyChannelListener(
+            TcpTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
             this.replyAcceptor = new ConnectionOrientedTransportReplyChannelAcceptor(this);
@@ -135,23 +171,38 @@ namespace System.ServiceModel.Channels
             get { return this.InternalReceiveTimeout; }
         }
 
-        void ISingletonChannelListener.ReceiveRequest(RequestContext requestContext, Action callback, bool canDispatchOnThisThread)
+        void ISingletonChannelListener.ReceiveRequest(
+            RequestContext requestContext,
+            Action callback,
+            bool canDispatchOnThisThread
+        )
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.TcpChannelMessageReceived,
-                    SR.GetString(SR.TraceCodeTcpChannelMessageReceived), requestContext.RequestMessage);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.TcpChannelMessageReceived,
+                    SR.GetString(SR.TraceCodeTcpChannelMessageReceived),
+                    requestContext.RequestMessage
+                );
             }
             replyAcceptor.Enqueue(requestContext, callback, canDispatchOnThisThread);
         }
     }
 
     class TcpDuplexChannelListener
-        : TcpChannelListener<IDuplexSessionChannel, InputQueueChannelAcceptor<IDuplexSessionChannel>>, ISessionPreambleHandler
+        : TcpChannelListener<
+            IDuplexSessionChannel,
+            InputQueueChannelAcceptor<IDuplexSessionChannel>
+        >,
+            ISessionPreambleHandler
     {
         InputQueueChannelAcceptor<IDuplexSessionChannel> duplexAcceptor;
 
-        public TcpDuplexChannelListener(TcpTransportBindingElement bindingElement, BindingContext context)
+        public TcpDuplexChannelListener(
+            TcpTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
             this.duplexAcceptor = new InputQueueChannelAcceptor<IDuplexSessionChannel>(this);
@@ -162,11 +213,17 @@ namespace System.ServiceModel.Channels
             get { return this.duplexAcceptor; }
         }
 
-        void ISessionPreambleHandler.HandleServerSessionPreamble(ServerSessionPreambleConnectionReader preambleReader,
-            ConnectionDemuxer connectionDemuxer)
+        void ISessionPreambleHandler.HandleServerSessionPreamble(
+            ServerSessionPreambleConnectionReader preambleReader,
+            ConnectionDemuxer connectionDemuxer
+        )
         {
             IDuplexSessionChannel channel = preambleReader.CreateDuplexSessionChannel(
-                this, new EndpointAddress(this.Uri), ExposeConnectionProperty, connectionDemuxer);
+                this,
+                new EndpointAddress(this.Uri),
+                ExposeConnectionProperty,
+                connectionDemuxer
+            );
 
             duplexAcceptor.EnqueueAndDispatch(channel, preambleReader.ConnectionDequeuedCallback);
         }
@@ -182,12 +239,17 @@ namespace System.ServiceModel.Channels
         Socket ipv4ListenSocket;
         Socket ipv6ListenSocket;
         ExtendedProtectionPolicy extendedProtectionPolicy;
-        static Random randomPortGenerator = new Random(AppDomain.CurrentDomain.GetHashCode() | Environment.TickCount);
+        static Random randomPortGenerator = new Random(
+            AppDomain.CurrentDomain.GetHashCode() | Environment.TickCount
+        );
 
         static UriPrefixTable<ITransportManagerRegistration> transportManagerTable =
             new UriPrefixTable<ITransportManagerRegistration>(true);
 
-        protected TcpChannelListener(TcpTransportBindingElement bindingElement, BindingContext context)
+        protected TcpChannelListener(
+            TcpTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
             this.listenBacklog = bindingElement.ListenBacklog;
@@ -195,7 +257,9 @@ namespace System.ServiceModel.Channels
             this.teredoEnabled = bindingElement.TeredoEnabled;
             this.extendedProtectionPolicy = bindingElement.ExtendedProtectionPolicy;
             SetIdleTimeout(bindingElement.ConnectionPoolSettings.IdleTimeout);
-            InitializeMaxPooledConnections(bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint);
+            InitializeMaxPooledConnections(
+                bindingElement.ConnectionPoolSettings.MaxOutboundConnectionsPerEndpoint
+            );
 
             // for exclusive mode, we have "port 0" functionality
             if (!bindingElement.PortSharingEnabled && context.ListenUriMode == ListenUriMode.Unique)
@@ -206,26 +270,17 @@ namespace System.ServiceModel.Channels
 
         public bool PortSharingEnabled
         {
-            get
-            {
-                return this.portSharingEnabled;
-            }
+            get { return this.portSharingEnabled; }
         }
 
         public bool TeredoEnabled
         {
-            get
-            {
-                return this.teredoEnabled;
-            }
+            get { return this.teredoEnabled; }
         }
 
         public int ListenBacklog
         {
-            get
-            {
-                return this.listenBacklog;
-            }
+            get { return this.listenBacklog; }
         }
 
         public override T GetProperty<T>()
@@ -261,18 +316,12 @@ namespace System.ServiceModel.Channels
 
         internal static UriPrefixTable<ITransportManagerRegistration> StaticTransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
         internal override UriPrefixTable<ITransportManagerRegistration> TransportManagerTable
         {
-            get
-            {
-                return transportManagerTable;
-            }
+            get { return transportManagerTable; }
         }
 
         internal static void FixIpv6Hostname(UriBuilder uriBuilder, Uri originalUri)
@@ -289,7 +338,11 @@ namespace System.ServiceModel.Channels
             Uri listenUri = this.BaseUri;
             if (!this.PortSharingEnabled)
             {
-                UriBuilder builder = new UriBuilder(listenUri.Scheme, listenUri.Host, listenUri.Port);
+                UriBuilder builder = new UriBuilder(
+                    listenUri.Scheme,
+                    listenUri.Host,
+                    listenUri.Port
+                );
                 TcpChannelListener.FixIpv6Hostname(builder, listenUri);
                 listenUri = builder.Uri;
             }
@@ -297,7 +350,9 @@ namespace System.ServiceModel.Channels
             return this.CreateTransportManagerRegistration(listenUri);
         }
 
-        internal override ITransportManagerRegistration CreateTransportManagerRegistration(Uri listenUri)
+        internal override ITransportManagerRegistration CreateTransportManagerRegistration(
+            Uri listenUri
+        )
         {
             if (this.PortSharingEnabled)
             {
@@ -311,7 +366,11 @@ namespace System.ServiceModel.Channels
 
         Socket ListenAndBind(IPEndPoint localEndpoint)
         {
-            Socket result = new Socket(localEndpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+            Socket result = new Socket(
+                localEndpoint.AddressFamily,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             try
             {
                 result.Bind(localEndpoint);
@@ -319,7 +378,8 @@ namespace System.ServiceModel.Channels
             catch (SocketException socketException)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    SocketConnectionListener.ConvertListenException(socketException, localEndpoint));
+                    SocketConnectionListener.ConvertListenException(socketException, localEndpoint)
+                );
             }
 
             return result;
@@ -349,13 +409,15 @@ namespace System.ServiceModel.Channels
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                         "context",
-                        SR.GetString(SR.TcpV6AddressInvalid, this.Uri));
+                        SR.GetString(SR.TcpV6AddressInvalid, this.Uri)
+                    );
                 }
                 else
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                         "context",
-                        SR.GetString(SR.TcpV4AddressInvalid, this.Uri));
+                        SR.GetString(SR.TcpV4AddressInvalid, this.Uri)
+                    );
                 }
             }
 
@@ -373,12 +435,12 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                // We need both IPv4 and IPv6 on the same port. We can't atomically bind for IPv4 and IPv6, 
+                // We need both IPv4 and IPv6 on the same port. We can't atomically bind for IPv4 and IPv6,
                 // so we try 10 times, which even with a 50% failure rate will statistically succeed 99.9% of the time.
                 //
                 // We look in the range of 49152-65534 for Vista default behavior parity.
                 // http://www.iana.org/assignments/port-numbers
-                // 
+                //
                 // We also grab the 10 random numbers in a row to reduce collisions between multiple people somehow
                 // colliding on the same seed.
                 const int retries = 10;
@@ -393,7 +455,6 @@ namespace System.ServiceModel.Channels
                         portNumbers[i] = randomPortGenerator.Next(lowWatermark, highWatermark);
                     }
                 }
-
 
                 for (int i = 0; i < retries; i++)
                 {
@@ -419,7 +480,8 @@ namespace System.ServiceModel.Channels
                 if (ipv4ListenSocket == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new AddressAlreadyInUseException(SR.GetString(SR.UniquePortNotAvailable)));
+                        new AddressAlreadyInUseException(SR.GetString(SR.UniquePortNotAvailable))
+                    );
                 }
             }
 

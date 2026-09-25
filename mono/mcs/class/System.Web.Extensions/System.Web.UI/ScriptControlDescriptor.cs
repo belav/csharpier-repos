@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,34 +33,35 @@ using System.Text;
 
 namespace System.Web.UI
 {
-	public class ScriptControlDescriptor : ScriptComponentDescriptor
-	{
-		public ScriptControlDescriptor (string type, string elementID)
-			: base (type) {
-			if (String.IsNullOrEmpty (elementID))
-				throw new ArgumentException ("Value cannot be null or empty.", "elementID");
-			ElementIDInternal = elementID;
-		}
+    public class ScriptControlDescriptor : ScriptComponentDescriptor
+    {
+        public ScriptControlDescriptor(string type, string elementID)
+            : base(type)
+        {
+            if (String.IsNullOrEmpty(elementID))
+                throw new ArgumentException("Value cannot be null or empty.", "elementID");
+            ElementIDInternal = elementID;
+        }
 
-		public override string ClientID {
-			get {
-				return ElementID;
-			}
-		}
+        public override string ClientID
+        {
+            get { return ElementID; }
+        }
 
-		public string ElementID {
-			get {
-				return ElementIDInternal;
-			}
-		}
+        public string ElementID
+        {
+            get { return ElementIDInternal; }
+        }
 
-		public override string ID {
-			get {
-				return base.ID;
-			}
-			set {
-				throw new InvalidOperationException ("The 'ID' property on ScriptControlDescriptor is not settable. The client ID of a script control is always equal to its element ID.");
-			}
-		}
-	}
+        public override string ID
+        {
+            get { return base.ID; }
+            set
+            {
+                throw new InvalidOperationException(
+                    "The 'ID' property on ScriptControlDescriptor is not settable. The client ID of a script control is always equal to its element ID."
+                );
+            }
+        }
+    }
 }

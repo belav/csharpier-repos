@@ -10,7 +10,8 @@ using Xunit;
 
 namespace Devirtualization
 {
-    public class EqualityComparerFixture<T> where T : IEquatable<T>
+    public class EqualityComparerFixture<T>
+        where T : IEquatable<T>
     {
         IEqualityComparer<T> comparer;
 
@@ -97,7 +98,6 @@ namespace Devirtualization
 
     public class EqualityComparer
     {
-
 #if DEBUG
         public const int Iterations = 1;
 #else
@@ -107,7 +107,7 @@ namespace Devirtualization
         public enum E
         {
             RED = 1,
-            BLUE = 2
+            BLUE = 2,
         }
 
         [Fact]

@@ -32,18 +32,28 @@ namespace System.ServiceModel.Channels
         }
 
         public abstract TChannel AcceptChannel(TimeSpan timeout);
-        public abstract IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         public abstract TChannel EndAcceptChannel(IAsyncResult result);
 
         public abstract bool WaitForChannel(TimeSpan timeout);
-        public abstract IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         public abstract bool EndWaitForChannel(IAsyncResult result);
 
-        protected override void OnAbort()
-        {
-        }
+        protected override void OnAbort() { }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -53,11 +63,13 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -67,8 +79,6 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
     }
 }

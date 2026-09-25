@@ -15,7 +15,10 @@ namespace System.Web.Razor.Test.Parser
         public void VisitThrowsOnNullVisitor()
         {
             ParserVisitor target = null;
-            ParserResults results = new ParserResults(new BlockBuilder() { Type = BlockType.Comment }.Build(), new List<RazorError>());
+            ParserResults results = new ParserResults(
+                new BlockBuilder() { Type = BlockType.Comment }.Build(),
+                new List<RazorError>()
+            );
 
             Assert.ThrowsArgumentNull(() => target.Visit(results), "self");
         }
@@ -48,9 +51,10 @@ namespace System.Web.Razor.Test.Parser
             // Arrange
             Mock<ParserVisitor> targetMock = new Mock<ParserVisitor>();
             Block root = new BlockBuilder() { Type = BlockType.Comment }.Build();
-            List<RazorError> errors = new List<RazorError>() {
+            List<RazorError> errors = new List<RazorError>()
+            {
                 new RazorError("Foo", 1, 0, 1),
-                new RazorError("Bar", 2, 0, 2)
+                new RazorError("Bar", 2, 0, 2),
             };
             ParserResults results = new ParserResults(root, errors);
 
@@ -68,9 +72,10 @@ namespace System.Web.Razor.Test.Parser
             // Arrange
             Mock<ParserVisitor> targetMock = new Mock<ParserVisitor>();
             Block root = new BlockBuilder() { Type = BlockType.Comment }.Build();
-            List<RazorError> errors = new List<RazorError>() {
+            List<RazorError> errors = new List<RazorError>()
+            {
                 new RazorError("Foo", 1, 0, 1),
-                new RazorError("Bar", 2, 0, 2)
+                new RazorError("Bar", 2, 0, 2),
             };
             ParserResults results = new ParserResults(root, errors);
 

@@ -17,8 +17,6 @@ internal static partial class Interop
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool GetCommModemStatus(
-            SafeFileHandle hFile,
-            ref int lpModemStat);
+        internal static partial bool GetCommModemStatus(SafeFileHandle hFile, ref int lpModemStat);
     }
 }

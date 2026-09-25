@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,86 +49,97 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class AddressHeaderCollectionElement
-		 : ConfigurationElement
-	{
-		AddressHeaderCollection _headers;
+    public sealed class AddressHeaderCollectionElement : ConfigurationElement
+    {
+        AddressHeaderCollection _headers;
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("headers",
-			 DefaultValue = null,
-			 Options = ConfigurationPropertyOptions.None)]
-		public AddressHeaderCollection Headers {
-			get { return _headers; }
-			set { _headers = value; }
-		}
+        [ConfigurationProperty(
+            "headers",
+            DefaultValue = null,
+            Options = ConfigurationPropertyOptions.None
+        )]
+        public AddressHeaderCollection Headers
+        {
+            get { return _headers; }
+            set { _headers = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
-		
-		protected override void DeserializeElement (
-			XmlReader reader, bool serializeCollectionKey) {
-			reader.MoveToContent ();
-			_headers = new AddressHeaderCollection (DeserializeAddressHeaders (reader));
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		static IEnumerable<AddressHeader> DeserializeAddressHeaders (XmlReader reader) {
-			while (true) {
-				do {
-					reader.Read ();
-				} while (reader.NodeType == XmlNodeType.Whitespace);
+        protected override void DeserializeElement(XmlReader reader, bool serializeCollectionKey)
+        {
+            reader.MoveToContent();
+            _headers = new AddressHeaderCollection(DeserializeAddressHeaders(reader));
+        }
 
-				if (reader.NodeType == XmlNodeType.EndElement)
-					yield break;
+        static IEnumerable<AddressHeader> DeserializeAddressHeaders(XmlReader reader)
+        {
+            while (true)
+            {
+                do
+                {
+                    reader.Read();
+                } while (reader.NodeType == XmlNodeType.Whitespace);
 
-				if (reader.NodeType != XmlNodeType.Element)
-					throw new ConfigurationErrorsException ("invalid node type.");
+                if (reader.NodeType == XmlNodeType.EndElement)
+                    yield break;
 
-				yield return new ConfiguredAddressHeader (reader.LocalName, reader.NamespaceURI, reader.ReadOuterXml ());
-			}
-		}
+                if (reader.NodeType != XmlNodeType.Element)
+                    throw new ConfigurationErrorsException("invalid node type.");
 
-		[MonoTODO]
-		protected override bool SerializeToXmlElement (
-			XmlWriter writer, string elementName)
-		{
-			return true;
-			throw new NotImplementedException ();
-		}
+                yield return new ConfiguredAddressHeader(
+                    reader.LocalName,
+                    reader.NamespaceURI,
+                    reader.ReadOuterXml()
+                );
+            }
+        }
 
-		class ConfiguredAddressHeader : AddressHeader {
+        [MonoTODO]
+        protected override bool SerializeToXmlElement(XmlWriter writer, string elementName)
+        {
+            return true;
+            throw new NotImplementedException();
+        }
 
-			readonly string _name;
-			readonly string _namespace;
-			readonly string _outerXml;
+        class ConfiguredAddressHeader : AddressHeader
+        {
+            readonly string _name;
+            readonly string _namespace;
+            readonly string _outerXml;
 
-			public ConfiguredAddressHeader (string name, string @namespace, string outerXml) {
-				_name = name;
-				_namespace = @namespace;
-				_outerXml = outerXml;
-			}
+            public ConfiguredAddressHeader(string name, string @namespace, string outerXml)
+            {
+                _name = name;
+                _namespace = @namespace;
+                _outerXml = outerXml;
+            }
 
-			[MonoTODO]
-			protected override void OnWriteAddressHeaderContents (XmlDictionaryWriter writer) {
-				throw new NotImplementedException ();
-			}
+            [MonoTODO]
+            protected override void OnWriteAddressHeaderContents(XmlDictionaryWriter writer)
+            {
+                throw new NotImplementedException();
+            }
 
-			public override string Name {
-				get { return _name; }
-			}
+            public override string Name
+            {
+                get { return _name; }
+            }
 
-			public override string Namespace {
-				get { return _namespace; }
-			}
-		}
-	}
-
+            public override string Namespace
+            {
+                get { return _namespace; }
+            }
+        }
+    }
 }

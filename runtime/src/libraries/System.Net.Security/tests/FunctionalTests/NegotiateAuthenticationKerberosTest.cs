@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Threading.Tasks;
 using System.Net.Security.Kerberos;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -17,11 +17,14 @@ namespace System.Net.Security.Tests
         {
             _testOutputHelper = testOutputHelper;
         }
-    
+
         [Fact]
         public async Task Loopback_Success()
         {
-            using var kerberosExecutor = new KerberosExecutor(_testOutputHelper, "LINUX.CONTOSO.COM");
+            using var kerberosExecutor = new KerberosExecutor(
+                _testOutputHelper,
+                "LINUX.CONTOSO.COM"
+            );
 
             kerberosExecutor.AddService("HTTP/linux.contoso.com");
             kerberosExecutor.AddUser("user");
@@ -31,8 +34,12 @@ namespace System.Net.Security.Tests
                 // Do a loopback authentication
                 NegotiateAuthenticationClientOptions clientOptions = new()
                 {
-                    Credential = new NetworkCredential("user", KerberosExecutor.DefaultUserPassword, "LINUX.CONTOSO.COM"),
-                    TargetName = $"HTTP/linux.contoso.com"
+                    Credential = new NetworkCredential(
+                        "user",
+                        KerberosExecutor.DefaultUserPassword,
+                        "LINUX.CONTOSO.COM"
+                    ),
+                    TargetName = $"HTTP/linux.contoso.com",
                 };
                 NegotiateAuthenticationServerOptions serverOptions = new() { };
                 NegotiateAuthentication clientNegotiateAuthentication = new(clientOptions);
@@ -43,16 +50,27 @@ namespace System.Net.Security.Tests
                 bool shouldContinue = true;
                 do
                 {
-                    clientBlob = clientNegotiateAuthentication.GetOutgoingBlob(serverBlob, out NegotiateAuthenticationStatusCode statusCode);
+                    clientBlob = clientNegotiateAuthentication.GetOutgoingBlob(
+                        serverBlob,
+                        out NegotiateAuthenticationStatusCode statusCode
+                    );
                     shouldContinue = statusCode == NegotiateAuthenticationStatusCode.ContinueNeeded;
-                    Assert.True(statusCode <= NegotiateAuthenticationStatusCode.ContinueNeeded, $"Client authentication failed with {statusCode}");
+                    Assert.True(
+                        statusCode <= NegotiateAuthenticationStatusCode.ContinueNeeded,
+                        $"Client authentication failed with {statusCode}"
+                    );
                     if (clientBlob != null)
                     {
-                        serverBlob = serverNegotiateAuthentication.GetOutgoingBlob(clientBlob, out statusCode);
-                        Assert.True(statusCode <= NegotiateAuthenticationStatusCode.ContinueNeeded, $"Server authentication failed with {statusCode}");
+                        serverBlob = serverNegotiateAuthentication.GetOutgoingBlob(
+                            clientBlob,
+                            out statusCode
+                        );
+                        Assert.True(
+                            statusCode <= NegotiateAuthenticationStatusCode.ContinueNeeded,
+                            $"Server authentication failed with {statusCode}"
+                        );
                     }
-                }
-                while (serverBlob != null && shouldContinue);
+                } while (serverBlob != null && shouldContinue);
 
                 Assert.Equal("Kerberos", clientNegotiateAuthentication.Package);
                 Assert.Equal("Kerberos", serverNegotiateAuthentication.Package);
@@ -64,14 +82,22 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task Invalid_Token()
         {
-            using var kerberosExecutor = new KerberosExecutor(_testOutputHelper, "LINUX.CONTOSO.COM");
+            using var kerberosExecutor = new KerberosExecutor(
+                _testOutputHelper,
+                "LINUX.CONTOSO.COM"
+            );
             // Force a non-empty keytab to make macOS happy
             kerberosExecutor.AddService("HTTP/linux.contoso.com");
             await kerberosExecutor.Invoke(() =>
             {
-                NegotiateAuthentication ntAuth = new NegotiateAuthentication(new NegotiateAuthenticationServerOptions { });
+                NegotiateAuthentication ntAuth = new NegotiateAuthentication(
+                    new NegotiateAuthenticationServerOptions { }
+                );
                 // Ask for NegHints
-                byte[] blob = ntAuth.GetOutgoingBlob((ReadOnlySpan<byte>)default, out NegotiateAuthenticationStatusCode statusCode);
+                byte[] blob = ntAuth.GetOutgoingBlob(
+                    (ReadOnlySpan<byte>)default,
+                    out NegotiateAuthenticationStatusCode statusCode
+                );
                 Assert.Equal(NegotiateAuthenticationStatusCode.ContinueNeeded, statusCode);
                 Assert.NotNull(blob);
                 // Send garbage token

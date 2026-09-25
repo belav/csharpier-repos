@@ -17,6 +17,9 @@ namespace System.Web.Mvc
     // it with the DataAnnotationsModelValidatorProvider.
     public interface IClientValidatable
     {
-        IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context);
+        IEnumerable<ModelClientValidationRule> GetClientValidationRules(
+            ModelMetadata metadata,
+            ControllerContext context
+        );
     }
 }

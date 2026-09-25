@@ -17,20 +17,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
     [ComDefaultInterface(typeof(ICodeElements))]
     public sealed class AttributeCollection : AbstractCodeElementCollection
     {
-        internal static EnvDTE.CodeElements Create(
-            CodeModelState state,
-            AbstractCodeElement parent)
+        internal static EnvDTE.CodeElements Create(CodeModelState state, AbstractCodeElement parent)
         {
             var collection = new AttributeCollection(state, parent);
             return (EnvDTE.CodeElements)ComAggregate.CreateAggregatedObject(collection);
         }
 
-        private AttributeCollection(
-            CodeModelState state,
-            AbstractCodeElement parent)
-            : base(state, parent)
-        {
-        }
+        private AttributeCollection(CodeModelState state, AbstractCodeElement parent)
+            : base(state, parent) { }
 
         private AbstractCodeElement ParentElement
         {
@@ -42,14 +36,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             get { return this.ParentElement.FileCodeModel; }
         }
 
-        private SyntaxNode LookupNode()
-            => this.ParentElement.LookupNode();
+        private SyntaxNode LookupNode() => this.ParentElement.LookupNode();
 
         private EnvDTE.CodeElement CreateCodeAttribute(SyntaxNode node, SyntaxNode parentNode)
         {
-            CodeModelService.GetAttributeNameAndOrdinal(parentNode, node, out var name, out var ordinal);
+            CodeModelService.GetAttributeNameAndOrdinal(
+                parentNode,
+                node,
+                out var name,
+                out var ordinal
+            );
 
-            return (EnvDTE.CodeElement)CodeAttribute.Create(this.State, this.FileCodeModel, this.ParentElement, name, ordinal);
+            return (EnvDTE.CodeElement)
+                CodeAttribute.Create(
+                    this.State,
+                    this.FileCodeModel,
+                    this.ParentElement,
+                    name,
+                    ordinal
+                );
         }
 
         protected override bool TryGetItemByIndex(int index, out EnvDTE.CodeElement element)
@@ -75,10 +80,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
             foreach (var child in CodeModelService.GetAttributeNodes(node))
             {
-                CodeModelService.GetAttributeNameAndOrdinal(node, child, out var childName, out var ordinal);
+                CodeModelService.GetAttributeNameAndOrdinal(
+                    node,
+                    child,
+                    out var childName,
+                    out var ordinal
+                );
                 if (childName == name)
                 {
-                    element = (EnvDTE.CodeElement)CodeAttribute.Create(State, FileCodeModel, this.ParentElement, childName, ordinal);
+                    element = (EnvDTE.CodeElement)
+                        CodeAttribute.Create(
+                            State,
+                            FileCodeModel,
+                            this.ParentElement,
+                            childName,
+                            ordinal
+                        );
                     return true;
                 }
             }
@@ -89,10 +106,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         public override int Count
         {
-            get
-            {
-                return CodeModelService.GetAttributeNodes(ParentElement.LookupNode()).Count();
-            }
+            get { return CodeModelService.GetAttributeNodes(ParentElement.LookupNode()).Count(); }
         }
     }
 }

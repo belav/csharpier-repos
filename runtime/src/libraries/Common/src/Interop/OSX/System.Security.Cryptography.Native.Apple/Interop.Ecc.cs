@@ -16,15 +16,20 @@ internal static partial class Interop
             int keySizeInBits,
             out SafeSecKeyRefHandle pPublicKey,
             out SafeSecKeyRefHandle pPrivateKey,
-            out SafeCFErrorHandle pErrorOut);
+            out SafeCFErrorHandle pErrorOut
+        );
 
-        [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_EccGetKeySizeInBits")]
+        [LibraryImport(
+            Libraries.AppleCryptoNative,
+            EntryPoint = "AppleCryptoNative_EccGetKeySizeInBits"
+        )]
         internal static partial int EccGetKeySizeInBits(SafeSecKeyRefHandle publicKey);
 
         internal static void EccGenerateKey(
             int keySizeInBits,
             out SafeSecKeyRefHandle pPublicKey,
-            out SafeSecKeyRefHandle pPrivateKey)
+            out SafeSecKeyRefHandle pPrivateKey
+        )
         {
             SafeSecKeyRefHandle publicKey;
             SafeSecKeyRefHandle privateKey;
@@ -34,7 +39,8 @@ internal static partial class Interop
                 keySizeInBits,
                 out publicKey,
                 out privateKey,
-                out error);
+                out error
+            );
 
             using (error)
             {
@@ -53,7 +59,9 @@ internal static partial class Interop
                         throw CreateExceptionForCFError(error);
                     }
 
-                    Debug.Fail($"Unexpected result from AppleCryptoNative_EccGenerateKey: {result}");
+                    Debug.Fail(
+                        $"Unexpected result from AppleCryptoNative_EccGenerateKey: {result}"
+                    );
                     throw new CryptographicException();
                 }
             }

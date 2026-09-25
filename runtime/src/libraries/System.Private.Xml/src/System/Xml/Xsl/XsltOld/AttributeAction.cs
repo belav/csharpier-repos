@@ -15,17 +15,23 @@ namespace System.Xml.Xsl.XsltOld
         private Avt? _nameAvt;
         private Avt? _nsAvt;
         private InputScopeManager? _manager;
+
         // Compile time precalculated AVTs
         private string? _name;
         private string? _nsUri;
         private PrefixQName? _qname; // When we not have AVTs at all we can do this. null otherwise.
 
-        private static PrefixQName? CreateAttributeQName(string name, string? nsUri, InputScopeManager? manager)
+        private static PrefixQName? CreateAttributeQName(
+            string name,
+            string? nsUri,
+            InputScopeManager? manager
+        )
         {
             // if name == "xmlns" we don't need to generate this attribute.
             // to avoid its generation we can return false and not add AttributeCreation to it's parent container action
             // for now not creating this.qname will do the trick at execution time
-            if (name == "xmlns") return null;
+            if (name == "xmlns")
+                return null;
             if (nsUri == XmlReservedNs.NsXmlNs)
             {
                 throw XsltException.Create(SR.Xslt_ReservedNS, nsUri);
@@ -40,7 +46,10 @@ namespace System.Xml.Xsl.XsltOld
             {
                 if (qname.Prefix.Length == 3)
                 { // prefix == "xml"
-                    if (qname.Namespace == XmlReservedNs.NsXml && (qname.Name == "lang" || qname.Name == "space"))
+                    if (
+                        qname.Namespace == XmlReservedNs.NsXml
+                        && (qname.Name == "lang" || qname.Name == "space")
+                    )
                     {
                         // preserve prefix for xml:lang and xml:space
                     }
@@ -140,19 +149,27 @@ namespace System.Xml.Xsl.XsltOld
                     }
                     goto case NameDone;
                 case NameDone:
+                {
+                    PrefixQName qname = frame.CalculatedName!;
+                    if (
+                        processor.BeginEvent(
+                            XPathNodeType.Attribute,
+                            qname.Prefix,
+                            qname.Name,
+                            qname.Namespace,
+                            false
+                        ) == false
+                    )
                     {
-                        PrefixQName qname = frame.CalculatedName!;
-                        if (processor.BeginEvent(XPathNodeType.Attribute, qname.Prefix, qname.Name, qname.Namespace, false) == false)
-                        {
-                            // Come back later
-                            frame.State = NameDone;
-                            break;
-                        }
-
-                        processor.PushActionFrame(frame);
-                        frame.State = ProcessingChildren;
-                        break;                              // Allow children to run
+                        // Come back later
+                        frame.State = NameDone;
+                        break;
                     }
+
+                    processor.PushActionFrame(frame);
+                    frame.State = ProcessingChildren;
+                    break; // Allow children to run
+                }
                 case ProcessingChildren:
                     if (processor.EndEvent(XPathNodeType.Attribute) == false)
                     {

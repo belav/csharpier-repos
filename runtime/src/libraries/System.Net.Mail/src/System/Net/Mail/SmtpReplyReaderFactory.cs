@@ -22,7 +22,7 @@ namespace System.Net.Mail
             ContinueLF,
             LastCR,
             LastLF,
-            Done
+            Done,
         }
 
         private readonly BufferedReadStream _bufferedStream;
@@ -39,28 +39,30 @@ namespace System.Net.Mail
 
         internal SmtpReplyReader? CurrentReader
         {
-            get
-            {
-                return _currentReader;
-            }
+            get { return _currentReader; }
         }
 
         internal SmtpStatusCode StatusCode
         {
-            get
-            {
-                return _statusCode;
-            }
+            get { return _statusCode; }
         }
 
-        internal IAsyncResult BeginReadLines(SmtpReplyReader caller, AsyncCallback? callback, object? state)
+        internal IAsyncResult BeginReadLines(
+            SmtpReplyReader caller,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ReadLinesAsyncResult result = new ReadLinesAsyncResult(this, callback, state);
             result.Read(caller);
             return result;
         }
 
-        internal IAsyncResult BeginReadLine(SmtpReplyReader caller, AsyncCallback? callback, object? state)
+        internal IAsyncResult BeginReadLine(
+            SmtpReplyReader caller,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ReadLinesAsyncResult result = new ReadLinesAsyncResult(this, callback, state, true);
             result.Read(caller);
@@ -75,7 +77,8 @@ namespace System.Net.Mail
                 {
                     _byteBuffer ??= new byte[SmtpReplyReaderFactory.DefaultBufferSize];
 
-                    while (0 != Read(caller, _byteBuffer, 0, _byteBuffer.Length)) ;
+                    while (0 != Read(caller, _byteBuffer, 0, _byteBuffer.Length))
+                        ;
                 }
 
                 _currentReader = null;
@@ -125,138 +128,138 @@ namespace System.Net.Mail
                     switch (_readState)
                     {
                         case ReadState.Status0:
+                        {
+                            if (ptr < end)
                             {
-                                if (ptr < end)
+                                byte b = *ptr++;
+                                if (b < '0' && b > '9')
                                 {
-                                    byte b = *ptr++;
-                                    if (b < '0' && b > '9')
-                                    {
-                                        throw new FormatException(SR.SmtpInvalidResponse);
-                                    }
-
-                                    _statusCode = (SmtpStatusCode)(100 * (b - '0'));
-
-                                    goto case ReadState.Status1;
+                                    throw new FormatException(SR.SmtpInvalidResponse);
                                 }
-                                _readState = ReadState.Status0;
-                                break;
+
+                                _statusCode = (SmtpStatusCode)(100 * (b - '0'));
+
+                                goto case ReadState.Status1;
                             }
+                            _readState = ReadState.Status0;
+                            break;
+                        }
                         case ReadState.Status1:
+                        {
+                            if (ptr < end)
                             {
-                                if (ptr < end)
+                                byte b = *ptr++;
+                                if (b < '0' && b > '9')
                                 {
-                                    byte b = *ptr++;
-                                    if (b < '0' && b > '9')
-                                    {
-                                        throw new FormatException(SR.SmtpInvalidResponse);
-                                    }
-
-                                    _statusCode += 10 * (b - '0');
-
-                                    goto case ReadState.Status2;
+                                    throw new FormatException(SR.SmtpInvalidResponse);
                                 }
-                                _readState = ReadState.Status1;
-                                break;
+
+                                _statusCode += 10 * (b - '0');
+
+                                goto case ReadState.Status2;
                             }
+                            _readState = ReadState.Status1;
+                            break;
+                        }
                         case ReadState.Status2:
+                        {
+                            if (ptr < end)
                             {
-                                if (ptr < end)
+                                byte b = *ptr++;
+                                if (b < '0' && b > '9')
                                 {
-                                    byte b = *ptr++;
-                                    if (b < '0' && b > '9')
-                                    {
-                                        throw new FormatException(SR.SmtpInvalidResponse);
-                                    }
-
-                                    _statusCode += b - '0';
-
-                                    goto case ReadState.ContinueFlag;
+                                    throw new FormatException(SR.SmtpInvalidResponse);
                                 }
-                                _readState = ReadState.Status2;
-                                break;
+
+                                _statusCode += b - '0';
+
+                                goto case ReadState.ContinueFlag;
                             }
+                            _readState = ReadState.Status2;
+                            break;
+                        }
                         case ReadState.ContinueFlag:
+                        {
+                            if (ptr < end)
                             {
-                                if (ptr < end)
+                                byte b = *ptr++;
+                                if (b == ' ') // last line
                                 {
-                                    byte b = *ptr++;
-                                    if (b == ' ')       // last line
-                                    {
-                                        goto case ReadState.LastCR;
-                                    }
-                                    else if (b == '-')  // more lines coming
-                                    {
-                                        goto case ReadState.ContinueCR;
-                                    }
-                                    else                // error
-                                    {
-                                        throw new FormatException(SR.SmtpInvalidResponse);
-                                    }
+                                    goto case ReadState.LastCR;
                                 }
-                                _readState = ReadState.ContinueFlag;
-                                break;
+                                else if (b == '-') // more lines coming
+                                {
+                                    goto case ReadState.ContinueCR;
+                                }
+                                else // error
+                                {
+                                    throw new FormatException(SR.SmtpInvalidResponse);
+                                }
                             }
+                            _readState = ReadState.ContinueFlag;
+                            break;
+                        }
                         case ReadState.ContinueCR:
+                        {
+                            while (ptr < end)
                             {
-                                while (ptr < end)
+                                if (*ptr++ == '\r')
                                 {
-                                    if (*ptr++ == '\r')
-                                    {
-                                        goto case ReadState.ContinueLF;
-                                    }
+                                    goto case ReadState.ContinueLF;
                                 }
-                                _readState = ReadState.ContinueCR;
-                                break;
                             }
+                            _readState = ReadState.ContinueCR;
+                            break;
+                        }
                         case ReadState.ContinueLF:
+                        {
+                            if (ptr < end)
                             {
-                                if (ptr < end)
+                                if (*ptr++ != '\n')
                                 {
-                                    if (*ptr++ != '\n')
-                                    {
-                                        throw new FormatException(SR.SmtpInvalidResponse);
-                                    }
-                                    if (readLine)
-                                    {
-                                        _readState = ReadState.Status0;
-                                        return (int)(ptr - start);
-                                    }
-                                    goto case ReadState.Status0;
+                                    throw new FormatException(SR.SmtpInvalidResponse);
                                 }
-                                _readState = ReadState.ContinueLF;
-                                break;
+                                if (readLine)
+                                {
+                                    _readState = ReadState.Status0;
+                                    return (int)(ptr - start);
+                                }
+                                goto case ReadState.Status0;
                             }
+                            _readState = ReadState.ContinueLF;
+                            break;
+                        }
                         case ReadState.LastCR:
+                        {
+                            while (ptr < end)
                             {
-                                while (ptr < end)
+                                if (*ptr++ == '\r')
                                 {
-                                    if (*ptr++ == '\r')
-                                    {
-                                        goto case ReadState.LastLF;
-                                    }
+                                    goto case ReadState.LastLF;
                                 }
-                                _readState = ReadState.LastCR;
-                                break;
                             }
+                            _readState = ReadState.LastCR;
+                            break;
+                        }
                         case ReadState.LastLF:
+                        {
+                            if (ptr < end)
                             {
-                                if (ptr < end)
+                                if (*ptr++ != '\n')
                                 {
-                                    if (*ptr++ != '\n')
-                                    {
-                                        throw new FormatException(SR.SmtpInvalidResponse);
-                                    }
-                                    goto case ReadState.Done;
+                                    throw new FormatException(SR.SmtpInvalidResponse);
                                 }
-                                _readState = ReadState.LastLF;
-                                break;
+                                goto case ReadState.Done;
                             }
+                            _readState = ReadState.LastLF;
+                            break;
+                        }
                         case ReadState.Done:
-                            {
-                                int actual = (int)(ptr - start);
-                                _readState = ReadState.Done;
-                                return actual;
-                            }
+                        {
+                            int actual = (int)(ptr - start);
+                            _readState = ReadState.Done;
+                            return actual;
+                        }
                     }
                     return (int)(ptr - start);
                 }
@@ -312,7 +315,7 @@ namespace System.Net.Mail
             var lines = new List<LineInfo>();
             int statusRead = 0;
 
-            for (int start = 0, read = 0; ;)
+            for (int start = 0, read = 0; ; )
             {
                 if (start == read)
                 {
@@ -368,12 +371,23 @@ namespace System.Net.Mail
             private int _statusRead;
             private readonly bool _oneLine;
 
-            internal ReadLinesAsyncResult(SmtpReplyReaderFactory parent, AsyncCallback? callback, object? state) : base(null, state, callback)
+            internal ReadLinesAsyncResult(
+                SmtpReplyReaderFactory parent,
+                AsyncCallback? callback,
+                object? state
+            )
+                : base(null, state, callback)
             {
                 _parent = parent;
             }
 
-            internal ReadLinesAsyncResult(SmtpReplyReaderFactory parent, AsyncCallback? callback, object? state, bool oneLine) : base(null, state, callback)
+            internal ReadLinesAsyncResult(
+                SmtpReplyReaderFactory parent,
+                AsyncCallback? callback,
+                object? state,
+                bool oneLine
+            )
+                : base(null, state, callback)
             {
                 _oneLine = oneLine;
                 _parent = parent;
@@ -410,7 +424,13 @@ namespace System.Net.Mail
             {
                 do
                 {
-                    IAsyncResult result = _parent._bufferedStream.BeginRead(_parent._byteBuffer!, 0, _parent._byteBuffer!.Length, s_readCallback, this);
+                    IAsyncResult result = _parent._bufferedStream.BeginRead(
+                        _parent._byteBuffer!,
+                        0,
+                        _parent._byteBuffer!.Length,
+                        s_readCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return;
@@ -449,12 +469,19 @@ namespace System.Net.Mail
             {
                 if (_read == 0)
                 {
-                    throw new IOException(SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed));
+                    throw new IOException(
+                        SR.Format(SR.net_io_readfailure, SR.net_io_connectionclosed)
+                    );
                 }
 
-                for (int start = 0; start != _read;)
+                for (int start = 0; start != _read; )
                 {
-                    int actual = _parent.ProcessRead(_parent._byteBuffer!, start, _read - start, true);
+                    int actual = _parent.ProcessRead(
+                        _parent._byteBuffer!,
+                        start,
+                        _read - start,
+                        true
+                    );
 
                     if (_statusRead < 4)
                     {
@@ -473,20 +500,34 @@ namespace System.Net.Mail
 
                     if (_parent._readState == ReadState.Status0)
                     {
-                        _lines!.Add(new LineInfo(_parent._statusCode, _builder.ToString(0, _builder.Length - 2))); // return everything except CRLF
+                        _lines!.Add(
+                            new LineInfo(
+                                _parent._statusCode,
+                                _builder.ToString(0, _builder.Length - 2)
+                            )
+                        ); // return everything except CRLF
                         _builder = new StringBuilder();
                         _statusRead = 0;
 
                         if (_oneLine)
                         {
-                            _parent._bufferedStream.Push(_parent._byteBuffer!, start, _read - start);
+                            _parent._bufferedStream.Push(
+                                _parent._byteBuffer!,
+                                start,
+                                _read - start
+                            );
                             InvokeCallback();
                             return false;
                         }
                     }
                     else if (_parent._readState == ReadState.Done)
                     {
-                        _lines!.Add(new LineInfo(_parent._statusCode, _builder.ToString(0, _builder.Length - 2))); // return everything except CRLF
+                        _lines!.Add(
+                            new LineInfo(
+                                _parent._statusCode,
+                                _builder.ToString(0, _builder.Length - 2)
+                            )
+                        ); // return everything except CRLF
                         _parent._bufferedStream.Push(_parent._byteBuffer!, start, _read - start);
                         InvokeCallback();
                         return false;

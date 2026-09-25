@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.PasteTracking
         private readonly IThreadingContext _threadingContext = threadingContext;
         private readonly object _pastedTextSpanKey = new();
 
-        public bool TryGetPastedTextSpan(SourceTextContainer sourceTextContainer, out TextSpan textSpan)
+        public bool TryGetPastedTextSpan(
+            SourceTextContainer sourceTextContainer,
+            out TextSpan textSpan
+        )
         {
             var textBuffer = sourceTextContainer.TryGetTextBuffer();
             if (textBuffer is null)
@@ -41,7 +44,7 @@ namespace Microsoft.CodeAnalysis.PasteTracking
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            // Use the TextBuffer properties to store the pasted text span. 
+            // Use the TextBuffer properties to store the pasted text span.
             // The `PropertiesCollection` is thread-safe and will be cleared
             // when all TextViews that share this buffer are closed.
             // Any change to the TextBuffer will remove the pasted text span.

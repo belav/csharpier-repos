@@ -17,9 +17,12 @@ namespace System.Runtime
             return SetLatencyModeStatus.Succeeded;
         }
 
-        private static GCLargeObjectHeapCompactionMode GetLOHCompactionMode() => GCLargeObjectHeapCompactionMode.Default;
+        private static GCLargeObjectHeapCompactionMode GetLOHCompactionMode() =>
+            GCLargeObjectHeapCompactionMode.Default;
 
-        private static void SetLOHCompactionMode(GCLargeObjectHeapCompactionMode newLOHCompactionMode)
+        private static void SetLOHCompactionMode(
+            GCLargeObjectHeapCompactionMode newLOHCompactionMode
+        )
         {
             if (newLOHCompactionMode != GCLargeObjectHeapCompactionMode.Default)
                 throw new PlatformNotSupportedException();

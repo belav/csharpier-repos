@@ -13,10 +13,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         [DataMember(Order = 0)]
         internal readonly Checksum UnderlyingObject;
 
-        public UnitTestingPinnedSolutionInfoWrapper(Checksum underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public UnitTestingPinnedSolutionInfoWrapper(Checksum underlyingObject) =>
+            UnderlyingObject = underlyingObject;
 
-        public static implicit operator UnitTestingPinnedSolutionInfoWrapper(Checksum info)
-            => new(info);
+        public static implicit operator UnitTestingPinnedSolutionInfoWrapper(Checksum info) =>
+            new(info);
     }
 }

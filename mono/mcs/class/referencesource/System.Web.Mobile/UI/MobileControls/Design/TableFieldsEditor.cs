@@ -1,10 +1,10 @@
 //------------------------------------------------------------------------------
 // <copyright file="TableFieldsEditor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.Design.MobileControls 
+namespace System.Web.UI.Design.MobileControls
 {
     using System;
     using System.ComponentModel;
@@ -18,12 +18,14 @@ namespace System.Web.UI.Design.MobileControls
     ///       The editor for column collections.
     ///    </para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class TableFieldsEditor : MobileUITypeEditor 
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class TableFieldsEditor : MobileUITypeEditor
     {
         /// <summary>
         ///    <para>
@@ -44,7 +46,11 @@ namespace System.Web.UI.Design.MobileControls
         ///       The updated value.
         ///    </para>
         /// </returns>
-        public override Object EditValue(ITypeDescriptorContext context, IServiceProvider provider, Object value) 
+        public override Object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            Object value
+        )
         {
             Debug.Assert(context != null);
 
@@ -70,4 +76,3 @@ namespace System.Web.UI.Design.MobileControls
         }
     }
 }
-

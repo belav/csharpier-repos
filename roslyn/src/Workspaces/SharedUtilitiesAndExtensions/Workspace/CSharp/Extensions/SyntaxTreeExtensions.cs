@@ -12,36 +12,56 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class SyntaxTreeExtensions
     {
-        public static bool IsPrimaryFunctionExpressionContext(this SyntaxTree syntaxTree, int position, SyntaxToken tokenOnLeftOfPosition)
+        public static bool IsPrimaryFunctionExpressionContext(
+            this SyntaxTree syntaxTree,
+            int position,
+            SyntaxToken tokenOnLeftOfPosition
+        )
         {
-            return
-                syntaxTree.IsTypeOfExpressionContext(position, tokenOnLeftOfPosition) ||
-                syntaxTree.IsDefaultExpressionContext(position, tokenOnLeftOfPosition) ||
-                syntaxTree.IsSizeOfExpressionContext(position, tokenOnLeftOfPosition);
+            return syntaxTree.IsTypeOfExpressionContext(position, tokenOnLeftOfPosition)
+                || syntaxTree.IsDefaultExpressionContext(position, tokenOnLeftOfPosition)
+                || syntaxTree.IsSizeOfExpressionContext(position, tokenOnLeftOfPosition);
         }
 
-        public static bool IsInNonUserCode(this SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+        public static bool IsInNonUserCode(
+            this SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                syntaxTree.IsEntirelyWithinNonUserCodeComment(position, cancellationToken) ||
-                syntaxTree.IsEntirelyWithinConflictMarker(position, cancellationToken) ||
-                syntaxTree.IsEntirelyWithinStringOrCharLiteral(position, cancellationToken) ||
-                syntaxTree.IsInInactiveRegion(position, cancellationToken);
+            return syntaxTree.IsEntirelyWithinNonUserCodeComment(position, cancellationToken)
+                || syntaxTree.IsEntirelyWithinConflictMarker(position, cancellationToken)
+                || syntaxTree.IsEntirelyWithinStringOrCharLiteral(position, cancellationToken)
+                || syntaxTree.IsInInactiveRegion(position, cancellationToken);
         }
 
         public static bool IsInPartiallyWrittenGeneric(
-            this SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+            this SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            return syntaxTree.IsInPartiallyWrittenGeneric(position, cancellationToken, out _, out _);
+            return syntaxTree.IsInPartiallyWrittenGeneric(
+                position,
+                cancellationToken,
+                out _,
+                out _
+            );
         }
 
         public static bool IsInPartiallyWrittenGeneric(
             this SyntaxTree syntaxTree,
             int position,
             CancellationToken cancellationToken,
-            out SyntaxToken genericIdentifier)
+            out SyntaxToken genericIdentifier
+        )
         {
-            return syntaxTree.IsInPartiallyWrittenGeneric(position, cancellationToken, out genericIdentifier, out _);
+            return syntaxTree.IsInPartiallyWrittenGeneric(
+                position,
+                cancellationToken,
+                out genericIdentifier,
+                out _
+            );
         }
 
         public static bool IsInPartiallyWrittenGeneric(
@@ -49,7 +69,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             int position,
             CancellationToken cancellationToken,
             out SyntaxToken genericIdentifier,
-            out SyntaxToken lessThanToken)
+            out SyntaxToken lessThanToken
+        )
         {
             genericIdentifier = default;
             lessThanToken = default;
@@ -125,10 +146,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
                         break;
 
-                    case SyntaxKind.AsteriskToken:      // for int*
-                    case SyntaxKind.QuestionToken:      // for int?
-                    case SyntaxKind.ColonToken:         // for global::  (so we don't dismiss help as you type the first :)
-                    case SyntaxKind.ColonColonToken:    // for global::
+                    case SyntaxKind.AsteriskToken: // for int*
+                    case SyntaxKind.QuestionToken: // for int?
+                    case SyntaxKind.ColonToken: // for global::  (so we don't dismiss help as you type the first :)
+                    case SyntaxKind.ColonColonToken: // for global::
                     case SyntaxKind.CloseBracketToken:
                     case SyntaxKind.OpenBracketToken:
                     case SyntaxKind.DotToken:
@@ -169,8 +190,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
         private static bool IsFullyWrittenGeneric(SyntaxToken token, SyntaxToken lessThanToken)
         {
-            return token.Parent is GenericNameSyntax genericName && genericName.TypeArgumentList != null &&
-                   genericName.TypeArgumentList.LessThanToken == lessThanToken && !genericName.TypeArgumentList.GreaterThanToken.IsMissing;
+            return token.Parent is GenericNameSyntax genericName
+                && genericName.TypeArgumentList != null
+                && genericName.TypeArgumentList.LessThanToken == lessThanToken
+                && !genericName.TypeArgumentList.GreaterThanToken.IsMissing;
         }
     }
 }

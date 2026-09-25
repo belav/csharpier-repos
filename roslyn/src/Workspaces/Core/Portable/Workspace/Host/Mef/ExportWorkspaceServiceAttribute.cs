@@ -31,7 +31,10 @@ namespace Microsoft.CodeAnalysis.Host.Mef
         /// </summary>
         /// <param name="serviceType">The type that will be used to retrieve the service from a <see cref="HostWorkspaceServices"/>.</param>
         /// <param name="layer">The layer that the service is specified for; <see cref="ServiceLayer.Default" />, etc.</param>
-        public ExportWorkspaceServiceAttribute(Type serviceType, string layer = ServiceLayer.Default)
+        public ExportWorkspaceServiceAttribute(
+            Type serviceType,
+            string layer = ServiceLayer.Default
+        )
             : base(typeof(IWorkspaceService))
         {
             if (serviceType == null)

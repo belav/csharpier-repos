@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System;
 using System.Collections.Generic;
-using Point = System.Numerics.Vector4;
 using Xunit;
+using Point = System.Numerics.Vector4;
 
 namespace VectorMathTests
 {
@@ -43,11 +43,11 @@ namespace VectorMathTests
             }
             Point[] fixedArr = new Point[5];
             Point fixedPoint = new Point(1);
-			fixedArr[0] = fixedPoint;
-			if (fixedArr[0].X != 1)
-			{
-				return 0;
-			}
+            fixedArr[0] = fixedPoint;
+            if (fixedArr[0].X != 1)
+            {
+                return 0;
+            }
 
             List<Point> points = new List<Point>();
             points.Add(fixedPoint);

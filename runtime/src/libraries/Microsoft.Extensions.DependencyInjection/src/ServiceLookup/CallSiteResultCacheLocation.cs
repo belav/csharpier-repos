@@ -8,6 +8,6 @@ namespace Microsoft.Extensions.DependencyInjection.ServiceLookup
         Root,
         Scope,
         Dispose,
-        None
+        None,
     }
 }

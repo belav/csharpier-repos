@@ -28,7 +28,8 @@ namespace System.CommandLine.DragonFruit
             Assembly entryAssembly,
             string[] args,
             string entryPointFullTypeName,
-            string xmlDocsFilePath = null)
+            string xmlDocsFilePath = null
+        )
         {
             if (entryAssembly == null)
             {
@@ -38,7 +39,10 @@ namespace System.CommandLine.DragonFruit
             args = args ?? Array.Empty<string>();
             entryPointFullTypeName = entryPointFullTypeName?.Trim();
 
-            MethodInfo entryMethod = EntryPointDiscoverer.FindStaticEntryMethod(entryAssembly, entryPointFullTypeName);
+            MethodInfo entryMethod = EntryPointDiscoverer.FindStaticEntryMethod(
+                entryAssembly,
+                entryPointFullTypeName
+            );
 
             //TODO The xml docs file name and location can be customized using <DocumentationFile> project property.
             return InvokeMethodAsync(args, entryMethod, xmlDocsFilePath, null);
@@ -56,7 +60,8 @@ namespace System.CommandLine.DragonFruit
             Assembly entryAssembly,
             string[] args,
             string entryPointFullTypeName,
-            string xmlDocsFilePath = null)
+            string xmlDocsFilePath = null
+        )
         {
             if (entryAssembly == null)
             {
@@ -66,7 +71,10 @@ namespace System.CommandLine.DragonFruit
             args = args ?? Array.Empty<string>();
             entryPointFullTypeName = entryPointFullTypeName?.Trim();
 
-            MethodInfo entryMethod = EntryPointDiscoverer.FindStaticEntryMethod(entryAssembly, entryPointFullTypeName);
+            MethodInfo entryMethod = EntryPointDiscoverer.FindStaticEntryMethod(
+                entryAssembly,
+                entryPointFullTypeName
+            );
 
             //TODO The xml docs file name and location can be customized using <DocumentationFile> project property.
             return InvokeMethod(args, entryMethod, xmlDocsFilePath, null);
@@ -78,7 +86,8 @@ namespace System.CommandLine.DragonFruit
             string xmlDocsFilePath = null,
             object target = null,
             TextWriter standardOutput = null,
-            TextWriter standardError = null)
+            TextWriter standardError = null
+        )
         {
             CliConfiguration configuration = BuildConfiguration(method, xmlDocsFilePath, target);
             configuration.Output = standardOutput ?? Console.Out;
@@ -93,7 +102,8 @@ namespace System.CommandLine.DragonFruit
             string xmlDocsFilePath = null,
             object target = null,
             TextWriter standardOutput = null,
-            TextWriter standardError = null)
+            TextWriter standardError = null
+        )
         {
             CliConfiguration configuration = BuildConfiguration(method, xmlDocsFilePath, target);
             configuration.Output = standardOutput ?? Console.Out;
@@ -102,9 +112,11 @@ namespace System.CommandLine.DragonFruit
             return configuration.Parse(args).Invoke();
         }
 
-        private static CliConfiguration BuildConfiguration(MethodInfo method,
+        private static CliConfiguration BuildConfiguration(
+            MethodInfo method,
             string xmlDocsFilePath,
-            object target)
+            object target
+        )
         {
             return new CliConfiguration(new CliRootCommand())
                 .ConfigureRootCommandFromMethod(method, target)
@@ -114,7 +126,8 @@ namespace System.CommandLine.DragonFruit
         public static CliConfiguration ConfigureRootCommandFromMethod(
             this CliConfiguration builder,
             MethodInfo method,
-            object target = null)
+            object target = null
+        )
         {
             if (builder == null)
             {
@@ -135,13 +148,14 @@ namespace System.CommandLine.DragonFruit
         {
             "arguments",
             "argument",
-            "args"
+            "args",
         };
 
         public static void ConfigureFromMethod(
             this CliCommand command,
             MethodInfo method,
-            object target = null)
+            object target = null
+        )
         {
             if (command == null)
             {
@@ -158,7 +172,12 @@ namespace System.CommandLine.DragonFruit
                 command.Options.Add(option);
             }
 
-            if (method.GetParameters().FirstOrDefault(p => _argumentParameterNames.Contains(p.Name)) is { } argsParam)
+            if (
+                method
+                    .GetParameters()
+                    .FirstOrDefault(p => _argumentParameterNames.Contains(p.Name)) is
+                { } argsParam
+            )
             {
                 command.Arguments.Add(ArgumentBuilder.CreateArgument(argsParam));
             }
@@ -169,7 +188,8 @@ namespace System.CommandLine.DragonFruit
         public static CliConfiguration ConfigureHelpFromXmlComments(
             this CliConfiguration builder,
             MethodInfo method,
-            string xmlDocsFilePath)
+            string xmlDocsFilePath
+        )
         {
             if (builder == null)
             {
@@ -181,10 +201,17 @@ namespace System.CommandLine.DragonFruit
                 throw new ArgumentNullException(nameof(method));
             }
 
-            if (XmlDocReader.TryLoad(xmlDocsFilePath ?? GetDefaultXmlDocsFileLocation(method.DeclaringType.Assembly), out var xmlDocs))
+            if (
+                XmlDocReader.TryLoad(
+                    xmlDocsFilePath ?? GetDefaultXmlDocsFileLocation(method.DeclaringType.Assembly),
+                    out var xmlDocs
+                )
+            )
             {
-                if (xmlDocs.TryGetMethodDescription(method, out CommandHelpMetadata metadata) &&
-                    metadata.Description != null)
+                if (
+                    xmlDocs.TryGetMethodDescription(method, out CommandHelpMetadata metadata)
+                    && metadata.Description != null
+                )
                 {
                     builder.RootCommand.Description = metadata.Description;
 
@@ -192,7 +219,9 @@ namespace System.CommandLine.DragonFruit
                     {
                         var kebabCasedParameterName = parameterDescription.Key.ToKebabCase();
 
-                        var option = builder.RootCommand.Options.FirstOrDefault(o => HasAliasIgnoringPrefix(o, kebabCasedParameterName));
+                        var option = builder.RootCommand.Options.FirstOrDefault(o =>
+                            HasAliasIgnoringPrefix(o, kebabCasedParameterName)
+                        );
 
                         if (option != null)
                         {
@@ -203,10 +232,13 @@ namespace System.CommandLine.DragonFruit
                             for (var i = 0; i < builder.RootCommand.Arguments.Count; i++)
                             {
                                 var argument = builder.RootCommand.Arguments[i];
-                                if (string.Equals(
-                                    argument.Name,
-                                    kebabCasedParameterName,
-                                    StringComparison.OrdinalIgnoreCase))
+                                if (
+                                    string.Equals(
+                                        argument.Name,
+                                        kebabCasedParameterName,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
                                 {
                                     argument.Description = parameterDescription.Value;
                                 }
@@ -235,12 +267,15 @@ namespace System.CommandLine.DragonFruit
         {
             if (String.IsNullOrWhiteSpace(parameterName))
             {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(parameterName));
+                throw new ArgumentException(
+                    "Value cannot be null or whitespace.",
+                    nameof(parameterName)
+                );
             }
 
             return parameterName.Length > 1
-                       ? $"--{parameterName.ToKebabCase()}"
-                       : $"-{parameterName.ToLowerInvariant()}";
+                ? $"--{parameterName.ToKebabCase()}"
+                : $"-{parameterName.ToLowerInvariant()}";
         }
 
         public static IEnumerable<CliOption> BuildOptions(this MethodInfo method)
@@ -248,28 +283,31 @@ namespace System.CommandLine.DragonFruit
             var descriptor = HandlerDescriptor.FromMethodInfo(method);
 
             var omittedTypes = new[]
-                               {
-                                   typeof(BindingContext),
-                                   typeof(ParseResult),
-                                   typeof(CliConfiguration),
-                                   typeof(CancellationToken),
-                               };
+            {
+                typeof(BindingContext),
+                typeof(ParseResult),
+                typeof(CliConfiguration),
+                typeof(CancellationToken),
+            };
 
-            foreach (var option in descriptor.ParameterDescriptors
-                                             .Where(d => !omittedTypes.Contains (d.ValueType))
-                                             .Where(d => !_argumentParameterNames.Contains(d.ValueName))
-                                             .Select(p => p.BuildOption()))
+            foreach (
+                var option in descriptor
+                    .ParameterDescriptors.Where(d => !omittedTypes.Contains(d.ValueType))
+                    .Where(d => !_argumentParameterNames.Contains(d.ValueName))
+                    .Select(p => p.BuildOption())
+            )
             {
                 yield return option;
             }
         }
 
-        public static CliOption BuildOption(this ParameterDescriptor parameter)
-            => OptionBuilder.CreateOption(
+        public static CliOption BuildOption(this ParameterDescriptor parameter) =>
+            OptionBuilder.CreateOption(
                 parameter.BuildAlias(),
                 parameter.ValueType,
                 parameter.ValueName,
-                parameter.HasDefaultValue ? parameter.GetDefaultValue : null);
+                parameter.HasDefaultValue ? parameter.GetDefaultValue : null
+            );
 
         private static string GetDefaultXmlDocsFileLocation(Assembly assembly)
         {
@@ -277,19 +315,18 @@ namespace System.CommandLine.DragonFruit
             {
                 return Path.Combine(
                     Path.GetDirectoryName(assembly.Location),
-                    Path.GetFileNameWithoutExtension(assembly.Location) + ".xml");
+                    Path.GetFileNameWithoutExtension(assembly.Location) + ".xml"
+                );
             }
 
             // Assembly.Location is empty for bundled (i.e, single-file) assemblies, but we can't be confident
             // that whenever Assembly.Location is empty the corresponding assembly is bundled.
             //
             // Provisionally assume that the entry-assembly is bundled. If this query is for something other
-            // than the entry-assembly, then return nothing. 
+            // than the entry-assembly, then return nothing.
             if (assembly == Assembly.GetEntryAssembly())
             {
-                return Path.Combine(
-                    AppContext.BaseDirectory,
-                    assembly.GetName().Name + ".xml");
+                return Path.Combine(AppContext.BaseDirectory, assembly.GetName().Name + ".xml");
             }
 
             return string.Empty;
@@ -304,14 +341,26 @@ namespace System.CommandLine.DragonFruit
         {
             ReadOnlySpan<char> rawAlias = alias.AsSpan(GetPrefixLength(alias));
 
-            if (MemoryExtensions.Equals(option.Name.AsSpan(GetPrefixLength(option.Name)), rawAlias, StringComparison.CurrentCulture))
+            if (
+                MemoryExtensions.Equals(
+                    option.Name.AsSpan(GetPrefixLength(option.Name)),
+                    rawAlias,
+                    StringComparison.CurrentCulture
+                )
+            )
             {
                 return true;
             }
 
             foreach (string existingAlias in option.Aliases)
             {
-                if (MemoryExtensions.Equals(existingAlias.AsSpan(GetPrefixLength(existingAlias)), rawAlias, StringComparison.CurrentCulture))
+                if (
+                    MemoryExtensions.Equals(
+                        existingAlias.AsSpan(GetPrefixLength(existingAlias)),
+                        rawAlias,
+                        StringComparison.CurrentCulture
+                    )
+                )
                 {
                     return true;
                 }

@@ -27,78 +27,72 @@ using System.IO;
 
 namespace zipsharp
 {
-	class UnzipArchive : IDisposable
-	{
-		string[] files;
-		
-		internal bool FileActive {
-			get; set;
-		}
-		
-		string[] Files {
-			get {
-				if (files == null)
-					files = NativeVersion.Use32Bit ? NativeUnzip.GetFiles32 (Handle) : NativeUnzip.GetFiles64 (Handle);
-				return files;
-			}
-		}
-		
-		internal UnzipHandle Handle {
-			get; private set;
-		}
-		
-		ZipStream Stream {
-			get; set;
-		}
+    class UnzipArchive : IDisposable
+    {
+        string[] files;
 
-		public UnzipArchive (string filename)
-			: this (File.Open (filename, FileMode.Open), true)
-		{
-			
-		}
+        internal bool FileActive { get; set; }
 
-		public UnzipArchive (Stream stream)
-			: this (stream, false)
-		{
-			
-		}
+        string[] Files
+        {
+            get
+            {
+                if (files == null)
+                    files = NativeVersion.Use32Bit
+                        ? NativeUnzip.GetFiles32(Handle)
+                        : NativeUnzip.GetFiles64(Handle);
+                return files;
+            }
+        }
 
-		public UnzipArchive (Stream stream, bool ownsStream)
-		{
-			Stream = new ZipStream (stream, ownsStream);
-			Handle = NativeVersion.Use32Bit ? NativeUnzip.OpenArchive32 (Stream.IOFunctions32) : NativeUnzip.OpenArchive64 (Stream.IOFunctions64);
-		}
+        internal UnzipHandle Handle { get; private set; }
 
-		public void Dispose ()
-		{
-			NativeUnzip.CloseArchive (Handle);
-			Stream.Close ();
-		}
+        ZipStream Stream { get; set; }
 
-		public System.IO.Packaging.CompressionOption GetCompressionLevel (string file)
-		{
-			using (UnzipReadStream stream = (UnzipReadStream) GetStream (file))
-				return stream.CompressionLevel;
-		}
+        public UnzipArchive(string filename)
+            : this(File.Open(filename, FileMode.Open), true) { }
 
-		public string[] GetFiles ()
-		{
-			return (string []) Files.Clone ();
-		}
+        public UnzipArchive(Stream stream)
+            : this(stream, false) { }
 
-		public Stream GetStream (string name)
-		{
-			foreach (string file in Files)
-			{
-				if (name.Equals(file, StringComparison.OrdinalIgnoreCase))
-				{
-					System.IO.Packaging.CompressionOption option;
-					NativeUnzip.OpenFile (Handle, name, out option);
-					return new UnzipReadStream (this, option);
-				}
-			}
-			
-			throw new Exception ("The file doesn't exist in the zip archive");
-		}
-	}
+        public UnzipArchive(Stream stream, bool ownsStream)
+        {
+            Stream = new ZipStream(stream, ownsStream);
+            Handle = NativeVersion.Use32Bit
+                ? NativeUnzip.OpenArchive32(Stream.IOFunctions32)
+                : NativeUnzip.OpenArchive64(Stream.IOFunctions64);
+        }
+
+        public void Dispose()
+        {
+            NativeUnzip.CloseArchive(Handle);
+            Stream.Close();
+        }
+
+        public System.IO.Packaging.CompressionOption GetCompressionLevel(string file)
+        {
+            using (UnzipReadStream stream = (UnzipReadStream)GetStream(file))
+                return stream.CompressionLevel;
+        }
+
+        public string[] GetFiles()
+        {
+            return (string[])Files.Clone();
+        }
+
+        public Stream GetStream(string name)
+        {
+            foreach (string file in Files)
+            {
+                if (name.Equals(file, StringComparison.OrdinalIgnoreCase))
+                {
+                    System.IO.Packaging.CompressionOption option;
+                    NativeUnzip.OpenFile(Handle, name, out option);
+                    return new UnzipReadStream(this, option);
+                }
+            }
+
+            throw new Exception("The file doesn't exist in the zip archive");
+        }
+    }
 }

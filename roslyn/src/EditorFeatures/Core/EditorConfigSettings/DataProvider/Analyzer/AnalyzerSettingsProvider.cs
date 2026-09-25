@@ -16,20 +16,36 @@ using RoslynEnumerableExtensions = Microsoft.CodeAnalysis.Editor.EditorConfigSet
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyzer
 {
-    internal sealed class AnalyzerSettingsProvider : SettingsProviderBase<AnalyzerSetting, AnalyzerSettingsUpdater, AnalyzerSetting, ReportDiagnostic>
+    internal sealed class AnalyzerSettingsProvider
+        : SettingsProviderBase<
+            AnalyzerSetting,
+            AnalyzerSettingsUpdater,
+            AnalyzerSetting,
+            ReportDiagnostic
+        >
     {
         private readonly IDiagnosticAnalyzerService _analyzerService;
 
-        public AnalyzerSettingsProvider(string fileName, AnalyzerSettingsUpdater settingsUpdater, Workspace workspace, IDiagnosticAnalyzerService analyzerService)
+        public AnalyzerSettingsProvider(
+            string fileName,
+            AnalyzerSettingsUpdater settingsUpdater,
+            Workspace workspace,
+            IDiagnosticAnalyzerService analyzerService
+        )
             : base(fileName, settingsUpdater, workspace, analyzerService.GlobalOptions)
         {
             _analyzerService = analyzerService;
             Update();
         }
 
-        protected override void UpdateOptions(TieredAnalyzerConfigOptions options, ImmutableArray<Project> projectsInScope)
+        protected override void UpdateOptions(
+            TieredAnalyzerConfigOptions options,
+            ImmutableArray<Project> projectsInScope
+        )
         {
-            var analyzerReferences = RoslynEnumerableExtensions.DistinctBy(projectsInScope.SelectMany(p => p.AnalyzerReferences), a => a.Id).ToImmutableArray();
+            var analyzerReferences = RoslynEnumerableExtensions
+                .DistinctBy(projectsInScope.SelectMany(p => p.AnalyzerReferences), a => a.Id)
+                .ToImmutableArray();
             foreach (var analyzerReference in analyzerReferences)
             {
                 var configSettings = GetSettings(analyzerReference, options.EditorConfigOptions);
@@ -37,20 +53,42 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
             }
         }
 
-        private IEnumerable<AnalyzerSetting> GetSettings(AnalyzerReference analyzerReference, AnalyzerConfigOptions editorConfigOptions)
+        private IEnumerable<AnalyzerSetting> GetSettings(
+            AnalyzerReference analyzerReference,
+            AnalyzerConfigOptions editorConfigOptions
+        )
         {
-            IEnumerable<DiagnosticAnalyzer> csharpAnalyzers = analyzerReference.GetAnalyzers(LanguageNames.CSharp);
-            IEnumerable<DiagnosticAnalyzer> visualBasicAnalyzers = analyzerReference.GetAnalyzers(LanguageNames.VisualBasic);
-            var dotnetAnalyzers = csharpAnalyzers.Intersect(visualBasicAnalyzers, DiagnosticAnalyzerComparer.Instance);
-            csharpAnalyzers = csharpAnalyzers.Except(dotnetAnalyzers, DiagnosticAnalyzerComparer.Instance);
-            visualBasicAnalyzers = visualBasicAnalyzers.Except(dotnetAnalyzers, DiagnosticAnalyzerComparer.Instance);
+            IEnumerable<DiagnosticAnalyzer> csharpAnalyzers = analyzerReference.GetAnalyzers(
+                LanguageNames.CSharp
+            );
+            IEnumerable<DiagnosticAnalyzer> visualBasicAnalyzers = analyzerReference.GetAnalyzers(
+                LanguageNames.VisualBasic
+            );
+            var dotnetAnalyzers = csharpAnalyzers.Intersect(
+                visualBasicAnalyzers,
+                DiagnosticAnalyzerComparer.Instance
+            );
+            csharpAnalyzers = csharpAnalyzers.Except(
+                dotnetAnalyzers,
+                DiagnosticAnalyzerComparer.Instance
+            );
+            visualBasicAnalyzers = visualBasicAnalyzers.Except(
+                dotnetAnalyzers,
+                DiagnosticAnalyzerComparer.Instance
+            );
 
             var csharpSettings = ToAnalyzerSetting(csharpAnalyzers, Language.CSharp);
-            var csharpAndVisualBasicSettings = csharpSettings.Concat(ToAnalyzerSetting(visualBasicAnalyzers, Language.VisualBasic));
-            return csharpAndVisualBasicSettings.Concat(ToAnalyzerSetting(dotnetAnalyzers, Language.CSharp | Language.VisualBasic));
+            var csharpAndVisualBasicSettings = csharpSettings.Concat(
+                ToAnalyzerSetting(visualBasicAnalyzers, Language.VisualBasic)
+            );
+            return csharpAndVisualBasicSettings.Concat(
+                ToAnalyzerSetting(dotnetAnalyzers, Language.CSharp | Language.VisualBasic)
+            );
 
-            IEnumerable<AnalyzerSetting> ToAnalyzerSetting(IEnumerable<DiagnosticAnalyzer> analyzers,
-                                                                   Language language)
+            IEnumerable<AnalyzerSetting> ToAnalyzerSetting(
+                IEnumerable<DiagnosticAnalyzer> analyzers,
+                Language language
+            )
             {
                 return analyzers
                     .SelectMany(a => _analyzerService.AnalyzerInfoCache.GetDiagnosticDescriptors(a))
@@ -59,10 +97,21 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
                     .Select(g =>
                     {
                         var selectedDiagnostic = g.First();
-                        var isEditorconfig = selectedDiagnostic.IsDefinedInEditorConfig(editorConfigOptions);
-                        var settingLocation = new SettingLocation(isEditorconfig ? LocationKind.EditorConfig : LocationKind.VisualStudio, FileName);
+                        var isEditorconfig = selectedDiagnostic.IsDefinedInEditorConfig(
+                            editorConfigOptions
+                        );
+                        var settingLocation = new SettingLocation(
+                            isEditorconfig ? LocationKind.EditorConfig : LocationKind.VisualStudio,
+                            FileName
+                        );
                         var severity = selectedDiagnostic.GetEffectiveSeverity(editorConfigOptions);
-                        return new AnalyzerSetting(selectedDiagnostic, severity, SettingsUpdater, language, settingLocation);
+                        return new AnalyzerSetting(
+                            selectedDiagnostic,
+                            severity,
+                            SettingsUpdater,
+                            language,
+                            settingLocation
+                        );
                     });
             }
         }
@@ -79,10 +128,12 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider.Analyz
                 if (x is null || y is null)
                     return false;
 
-                return x.GetAnalyzerIdAndVersion().GetHashCode() == y.GetAnalyzerIdAndVersion().GetHashCode();
+                return x.GetAnalyzerIdAndVersion().GetHashCode()
+                    == y.GetAnalyzerIdAndVersion().GetHashCode();
             }
 
-            public int GetHashCode(DiagnosticAnalyzer obj) => obj.GetAnalyzerIdAndVersion().GetHashCode();
+            public int GetHashCode(DiagnosticAnalyzer obj) =>
+                obj.GetAnalyzerIdAndVersion().GetHashCode();
         }
     }
 }

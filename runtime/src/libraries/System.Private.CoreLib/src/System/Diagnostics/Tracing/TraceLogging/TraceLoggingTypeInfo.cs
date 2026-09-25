@@ -36,7 +36,8 @@ namespace System.Diagnostics.Tracing
             EventLevel level,
             EventOpcode opcode,
             EventKeywords keywords,
-            EventTags tags)
+            EventTags tags
+        )
         {
             ArgumentNullException.ThrowIfNull(dataType);
             ArgumentNullException.ThrowIfNull(name);
@@ -112,7 +113,8 @@ namespace System.Diagnostics.Tracing
         public abstract void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string? name,
-            EventFieldFormat format);
+            EventFieldFormat format
+        );
 
         /// <summary>
         /// Refer to TraceLoggingTypeInfo.WriteObjectData for information about this
@@ -137,10 +139,13 @@ namespace System.Diagnostics.Tracing
         [ThreadStatic] // per-thread cache to avoid synchronization
         private static Dictionary<Type, TraceLoggingTypeInfo>? threadCache;
 
-        [RequiresUnreferencedCode("EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type")]
+        [RequiresUnreferencedCode(
+            "EventSource WriteEvent will serialize the whole object graph. Trimmer will not safely handle this case because properties may be trimmed. This can be suppressed if the object is a primitive type"
+        )]
         public static TraceLoggingTypeInfo GetInstance(Type type, List<Type>? recursionCheck)
         {
-            Dictionary<Type, TraceLoggingTypeInfo> cache = threadCache ??= new Dictionary<Type, TraceLoggingTypeInfo>();
+            Dictionary<Type, TraceLoggingTypeInfo> cache = threadCache ??=
+                new Dictionary<Type, TraceLoggingTypeInfo>();
 
             if (!cache.TryGetValue(type, out TraceLoggingTypeInfo? instance))
             {
@@ -148,7 +153,10 @@ namespace System.Diagnostics.Tracing
                 int recursionCheckCount = recursionCheck.Count;
                 instance = Statics.CreateDefaultTypeInfo(type, recursionCheck);
                 cache[type] = instance;
-                recursionCheck.RemoveRange(recursionCheckCount, recursionCheck.Count - recursionCheckCount);
+                recursionCheck.RemoveRange(
+                    recursionCheckCount,
+                    recursionCheck.Count - recursionCheckCount
+                );
             }
             return instance;
         }

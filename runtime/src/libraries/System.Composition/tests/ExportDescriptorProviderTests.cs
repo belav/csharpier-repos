@@ -16,27 +16,48 @@ namespace System.Composition.Lightweight.UnitTests
     {
         public class DefaultObjectExportDescriptorProvider : ExportDescriptorProvider
         {
-            private readonly CompositionContract _supportedContract = new CompositionContract(typeof(object));
+            private readonly CompositionContract _supportedContract = new CompositionContract(
+                typeof(object)
+            );
 
             public static readonly object DefaultObject = "Hello, World!";
 
-            public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(CompositionContract contract, DependencyAccessor descriptorAccessor)
+            public override IEnumerable<ExportDescriptorPromise> GetExportDescriptors(
+                CompositionContract contract,
+                DependencyAccessor descriptorAccessor
+            )
             {
                 if (!contract.Equals(_supportedContract))
                     return NoExportDescriptors;
 
-                var implementations = descriptorAccessor.ResolveDependencies("test for existing", contract, false);
+                var implementations = descriptorAccessor.ResolveDependencies(
+                    "test for existing",
+                    contract,
+                    false
+                );
                 if (implementations.Any())
                     return NoExportDescriptors;
 
-                return new[] { new ExportDescriptorPromise(contract, "test metadataProvider", false, NoDependencies, _ => ExportDescriptor.Create((c, o) => DefaultObject, NoMetadata)) };
+                return new[]
+                {
+                    new ExportDescriptorPromise(
+                        contract,
+                        "test metadataProvider",
+                        false,
+                        NoDependencies,
+                        _ => ExportDescriptor.Create((c, o) => DefaultObject, NoMetadata)
+                    ),
+                };
             }
         }
 
         public class ExportsObject
         {
             [Export]
-            public object AnObject { get { return "Not the default"; } }
+            public object AnObject
+            {
+                get { return "Not the default"; }
+            }
         }
 
         [Fact]

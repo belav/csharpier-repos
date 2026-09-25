@@ -64,9 +64,7 @@ namespace System.Collections.Concurrent
         /// Initializes a new instance of the <see cref="ConcurrentStack{T}"/>
         /// class.
         /// </summary>
-        public ConcurrentStack()
-        {
-        }
+        public ConcurrentStack() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentStack{T}"/>
@@ -100,7 +98,6 @@ namespace System.Collections.Concurrent
 
             _head = lastNode;
         }
-
 
         /// <summary>
         /// Gets a value that indicates whether the <see cref="ConcurrentStack{T}"/> is empty.
@@ -155,7 +152,6 @@ namespace System.Collections.Concurrent
             }
         }
 
-
         /// <summary>
         /// Gets a value indicating whether access to the <see cref="System.Collections.ICollection"/> is
         /// synchronized with the SyncRoot.
@@ -179,10 +175,7 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.NotSupportedException">The SyncRoot property is not supported</exception>
         object ICollection.SyncRoot
         {
-            get
-            {
-                throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported);
-            }
+            get { throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported); }
         }
 
         /// <summary>
@@ -338,7 +331,8 @@ namespace System.Collections.Concurrent
             if (count == 0)
                 return;
 
-            Node head, tail;
+            Node head,
+                tail;
             head = tail = new Node(items[startIndex]);
             for (int i = startIndex + 1; i < startIndex + count; i++)
             {
@@ -357,7 +351,6 @@ namespace System.Collections.Concurrent
             PushCore(head, tail);
         }
 
-
         /// <summary>
         /// Push one or many nodes into the stack, if head and tails are equal then push one node to the stack other wise push the list between head
         /// and tail to the stack
@@ -374,9 +367,7 @@ namespace System.Collections.Concurrent
                 spin.SpinOnce(sleep1Threshold: -1);
                 // Reread the head and link our new node.
                 tail._next = _head;
-            }
-            while (Interlocked.CompareExchange(
-                ref _head, head, tail._next) != tail._next);
+            } while (Interlocked.CompareExchange(ref _head, head, tail._next) != tail._next);
 
             if (CDSCollectionETWBCLProvider.Log.IsEnabled())
             {
@@ -644,7 +635,12 @@ namespace System.Collections.Concurrent
         /// <param name="collection">The collection to place the popped items in</param>
         /// <param name="startIndex">the beginning of index of where to place the popped items</param>
         /// <param name="nodesCount">The number of nodes.</param>
-        private static void CopyRemovedItems(Node head, T[] collection, int startIndex, int nodesCount)
+        private static void CopyRemovedItems(
+            Node head,
+            T[] collection,
+            int startIndex,
+            int nodesCount
+        )
         {
             Node? current = head;
             for (int i = startIndex; i < startIndex + nodesCount; i++)
@@ -679,9 +675,7 @@ namespace System.Collections.Concurrent
         public T[] ToArray()
         {
             Node? curr = _head;
-            return curr == null ?
-                Array.Empty<T>() :
-                ToList(curr).ToArray();
+            return curr == null ? Array.Empty<T>() : ToList(curr).ToArray();
         }
 
         /// <summary>

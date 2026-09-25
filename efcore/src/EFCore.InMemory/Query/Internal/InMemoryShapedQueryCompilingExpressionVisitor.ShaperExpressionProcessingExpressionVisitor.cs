@@ -10,20 +10,30 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
 {
     private sealed class ShaperExpressionProcessingExpressionVisitor : ExpressionVisitor
     {
-        private static readonly MethodInfo IncludeReferenceMethodInfo
-            = typeof(ShaperExpressionProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(IncludeReference))!;
+        private static readonly MethodInfo IncludeReferenceMethodInfo =
+            typeof(ShaperExpressionProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(IncludeReference))!;
 
-        private static readonly MethodInfo IncludeCollectionMethodInfo
-            = typeof(ShaperExpressionProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(IncludeCollection))!;
+        private static readonly MethodInfo IncludeCollectionMethodInfo =
+            typeof(ShaperExpressionProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(IncludeCollection))!;
 
-        private static readonly MethodInfo MaterializeCollectionMethodInfo
-            = typeof(ShaperExpressionProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(MaterializeCollection))!;
+        private static readonly MethodInfo MaterializeCollectionMethodInfo =
+            typeof(ShaperExpressionProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(MaterializeCollection))!;
 
-        private static readonly MethodInfo MaterializeSingleResultMethodInfo
-            = typeof(ShaperExpressionProcessingExpressionVisitor).GetTypeInfo().GetDeclaredMethod(nameof(MaterializeSingleResult))!;
+        private static readonly MethodInfo MaterializeSingleResultMethodInfo =
+            typeof(ShaperExpressionProcessingExpressionVisitor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(MaterializeSingleResult))!;
 
-        private static readonly MethodInfo CollectionAccessorAddMethodInfo
-            = typeof(IClrCollectionAccessor).GetTypeInfo().GetDeclaredMethod(nameof(IClrCollectionAccessor.Add))!;
+        private static readonly MethodInfo CollectionAccessorAddMethodInfo =
+            typeof(IClrCollectionAccessor)
+                .GetTypeInfo()
+                .GetDeclaredMethod(nameof(IClrCollectionAccessor.Add))!;
 
         private readonly InMemoryShapedQueryCompilingExpressionVisitor _inMemoryShapedQueryCompilingExpressionVisitor;
         private readonly bool _tracking;
@@ -32,23 +42,30 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
         private readonly Dictionary<Expression, ParameterExpression> _mapping = new();
         private readonly List<ParameterExpression> _variables = new();
         private readonly List<Expression> _expressions = new();
-        private readonly Dictionary<ParameterExpression, Dictionary<IProperty, int>> _materializationContextBindings = new();
+        private readonly Dictionary<
+            ParameterExpression,
+            Dictionary<IProperty, int>
+        > _materializationContextBindings = new();
 
         public ShaperExpressionProcessingExpressionVisitor(
             InMemoryShapedQueryCompilingExpressionVisitor inMemoryShapedQueryCompilingExpressionVisitor,
             InMemoryQueryExpression inMemoryQueryExpression,
-            bool tracking)
+            bool tracking
+        )
         {
-            _inMemoryShapedQueryCompilingExpressionVisitor = inMemoryShapedQueryCompilingExpressionVisitor;
+            _inMemoryShapedQueryCompilingExpressionVisitor =
+                inMemoryShapedQueryCompilingExpressionVisitor;
             _valueBufferParameter = inMemoryQueryExpression.CurrentParameter;
             _tracking = tracking;
         }
 
         private ShaperExpressionProcessingExpressionVisitor(
             InMemoryShapedQueryCompilingExpressionVisitor inMemoryShapedQueryCompilingExpressionVisitor,
-            bool tracking)
+            bool tracking
+        )
         {
-            _inMemoryShapedQueryCompilingExpressionVisitor = inMemoryShapedQueryCompilingExpressionVisitor;
+            _inMemoryShapedQueryCompilingExpressionVisitor =
+                inMemoryShapedQueryCompilingExpressionVisitor;
             _tracking = tracking;
         }
 
@@ -61,7 +78,11 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             // If parameter is null then the projection is not really server correlated so we can just put anything.
             _valueBufferParameter ??= Parameter(typeof(ValueBuffer));
 
-            return Lambda(result, QueryCompilationContext.QueryContextParameter, _valueBufferParameter);
+            return Lambda(
+                result,
+                QueryCompilationContext.QueryContextParameter,
+                _valueBufferParameter
+            );
         }
 
         protected override Expression VisitExtension(Expression extensionExpression)
@@ -76,7 +97,9 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                         variable = Parameter(shaper.StructuralType.ClrType);
                         _variables.Add(variable);
                         var innerShaper =
-                            _inMemoryShapedQueryCompilingExpressionVisitor.InjectEntityMaterializers(shaper);
+                            _inMemoryShapedQueryCompilingExpressionVisitor.InjectEntityMaterializers(
+                                shaper
+                            );
                         innerShaper = Visit(innerShaper);
                         _expressions.Add(Assign(variable, innerShaper));
                         _mapping[key] = variable;
@@ -92,16 +115,25 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                     {
                         variable = Parameter(projectionBindingExpression.Type);
                         _variables.Add(variable);
-                        var queryExpression = (InMemoryQueryExpression)projectionBindingExpression.QueryExpression;
+                        var queryExpression = (InMemoryQueryExpression)
+                            projectionBindingExpression.QueryExpression;
                         _valueBufferParameter ??= queryExpression.CurrentParameter;
 
-                        var projectionIndex = queryExpression.GetProjection(projectionBindingExpression).GetConstantValue<int>();
+                        var projectionIndex = queryExpression
+                            .GetProjection(projectionBindingExpression)
+                            .GetConstantValue<int>();
 
                         // We don't need to pass property when reading at top-level
                         _expressions.Add(
                             Assign(
-                                variable, queryExpression.CurrentParameter.CreateValueBufferReadValueExpression(
-                                    projectionBindingExpression.Type, projectionIndex, property: null)));
+                                variable,
+                                queryExpression.CurrentParameter.CreateValueBufferReadValueExpression(
+                                    projectionBindingExpression.Type,
+                                    projectionIndex,
+                                    property: null
+                                )
+                            )
+                        );
                         _mapping[key] = variable;
                     }
 
@@ -114,22 +146,33 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                     var entityClrType = includeExpression.EntityExpression.Type;
                     var includingClrType = includeExpression.Navigation.DeclaringEntityType.ClrType;
                     var inverseNavigation = includeExpression.Navigation.Inverse;
-                    var relatedEntityClrType = includeExpression.Navigation.TargetEntityType.ClrType;
-                    if (includingClrType != entityClrType
-                        && includingClrType.IsAssignableFrom(entityClrType))
+                    var relatedEntityClrType = includeExpression
+                        .Navigation
+                        .TargetEntityType
+                        .ClrType;
+                    if (
+                        includingClrType != entityClrType
+                        && includingClrType.IsAssignableFrom(entityClrType)
+                    )
                     {
                         includingClrType = entityClrType;
                     }
 
                     if (includeExpression.Navigation.IsCollection)
                     {
-                        var collectionResultShaperExpression = (CollectionResultShaperExpression)includeExpression.NavigationExpression;
+                        var collectionResultShaperExpression = (CollectionResultShaperExpression)
+                            includeExpression.NavigationExpression;
                         var shaperLambda = new ShaperExpressionProcessingExpressionVisitor(
-                                _inMemoryShapedQueryCompilingExpressionVisitor, _tracking)
-                            .ProcessShaper(collectionResultShaperExpression.InnerShaper);
+                            _inMemoryShapedQueryCompilingExpressionVisitor,
+                            _tracking
+                        ).ProcessShaper(collectionResultShaperExpression.InnerShaper);
                         _expressions.Add(
                             Call(
-                                IncludeCollectionMethodInfo.MakeGenericMethod(entityClrType, includingClrType, relatedEntityClrType),
+                                IncludeCollectionMethodInfo.MakeGenericMethod(
+                                    entityClrType,
+                                    includingClrType,
+                                    relatedEntityClrType
+                                ),
                                 QueryCompilationContext.QueryContextParameter,
                                 Visit(collectionResultShaperExpression.Projection),
                                 Constant(shaperLambda.Compile()),
@@ -138,18 +181,29 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                                 Constant(inverseNavigation, typeof(INavigationBase)),
                                 Constant(
                                     GenerateFixup(
-                                            includingClrType, relatedEntityClrType, includeExpression.Navigation, inverseNavigation)
-                                        .Compile()),
+                                            includingClrType,
+                                            relatedEntityClrType,
+                                            includeExpression.Navigation,
+                                            inverseNavigation
+                                        )
+                                        .Compile()
+                                ),
                                 Constant(_tracking),
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                                Constant(includeExpression.SetLoaded)));
+                                Constant(includeExpression.SetLoaded)
+                            )
+                        );
 #pragma warning restore EF1001 // Internal EF Core API usage.
                     }
                     else
                     {
                         _expressions.Add(
                             Call(
-                                IncludeReferenceMethodInfo.MakeGenericMethod(entityClrType, includingClrType, relatedEntityClrType),
+                                IncludeReferenceMethodInfo.MakeGenericMethod(
+                                    entityClrType,
+                                    includingClrType,
+                                    relatedEntityClrType
+                                ),
                                 QueryCompilationContext.QueryContextParameter,
                                 entity,
                                 Visit(includeExpression.NavigationExpression),
@@ -157,9 +211,16 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                                 Constant(inverseNavigation, typeof(INavigationBase)),
                                 Constant(
                                     GenerateFixup(
-                                            includingClrType, relatedEntityClrType, includeExpression.Navigation, inverseNavigation)
-                                        .Compile()),
-                                Constant(_tracking)));
+                                            includingClrType,
+                                            relatedEntityClrType,
+                                            includeExpression.Navigation,
+                                            inverseNavigation
+                                        )
+                                        .Compile()
+                                ),
+                                Constant(_tracking)
+                            )
+                        );
                     }
 
                     return entity;
@@ -169,31 +230,41 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
                 {
                     var navigation = collectionResultShaperExpression.Navigation;
                     var collectionAccessor = navigation?.GetCollectionAccessor();
-                    var collectionType = collectionAccessor?.CollectionType ?? collectionResultShaperExpression.Type;
+                    var collectionType =
+                        collectionAccessor?.CollectionType ?? collectionResultShaperExpression.Type;
                     var elementType = collectionResultShaperExpression.ElementType;
                     var shaperLambda = new ShaperExpressionProcessingExpressionVisitor(
-                            _inMemoryShapedQueryCompilingExpressionVisitor, _tracking)
-                        .ProcessShaper(collectionResultShaperExpression.InnerShaper);
+                        _inMemoryShapedQueryCompilingExpressionVisitor,
+                        _tracking
+                    ).ProcessShaper(collectionResultShaperExpression.InnerShaper);
 
                     return Call(
-                        MaterializeCollectionMethodInfo.MakeGenericMethod(elementType, collectionType),
+                        MaterializeCollectionMethodInfo.MakeGenericMethod(
+                            elementType,
+                            collectionType
+                        ),
                         QueryCompilationContext.QueryContextParameter,
                         Visit(collectionResultShaperExpression.Projection),
                         Constant(shaperLambda.Compile()),
-                        Constant(collectionAccessor, typeof(IClrCollectionAccessor)));
+                        Constant(collectionAccessor, typeof(IClrCollectionAccessor))
+                    );
                 }
 
                 case SingleResultShaperExpression singleResultShaperExpression:
                 {
                     var shaperLambda = new ShaperExpressionProcessingExpressionVisitor(
-                            _inMemoryShapedQueryCompilingExpressionVisitor, _tracking)
-                        .ProcessShaper(singleResultShaperExpression.InnerShaper);
+                        _inMemoryShapedQueryCompilingExpressionVisitor,
+                        _tracking
+                    ).ProcessShaper(singleResultShaperExpression.InnerShaper);
 
                     return Call(
-                        MaterializeSingleResultMethodInfo.MakeGenericMethod(singleResultShaperExpression.Type),
+                        MaterializeSingleResultMethodInfo.MakeGenericMethod(
+                            singleResultShaperExpression.Type
+                        ),
                         QueryCompilationContext.QueryContextParameter,
                         Visit(singleResultShaperExpression.Projection),
-                        Constant(shaperLambda.Compile()));
+                        Constant(shaperLambda.Compile())
+                    );
                 }
             }
 
@@ -202,26 +273,44 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
 
         protected override Expression VisitBinary(BinaryExpression binaryExpression)
         {
-            if (binaryExpression is { NodeType: ExpressionType.Assign, Left: ParameterExpression parameterExpression }
-                && parameterExpression.Type == typeof(MaterializationContext))
+            if (
+                binaryExpression
+                    is {
+                        NodeType: ExpressionType.Assign,
+                        Left: ParameterExpression parameterExpression
+                    }
+                && parameterExpression.Type == typeof(MaterializationContext)
+            )
             {
                 var newExpression = (NewExpression)binaryExpression.Right;
 
-                var projectionBindingExpression = (ProjectionBindingExpression)newExpression.Arguments[0];
-                var queryExpression = (InMemoryQueryExpression)projectionBindingExpression.QueryExpression;
+                var projectionBindingExpression = (ProjectionBindingExpression)
+                    newExpression.Arguments[0];
+                var queryExpression = (InMemoryQueryExpression)
+                    projectionBindingExpression.QueryExpression;
                 _valueBufferParameter ??= queryExpression.CurrentParameter;
 
-                _materializationContextBindings[parameterExpression]
-                    = queryExpression.GetProjection(projectionBindingExpression).GetConstantValue<Dictionary<IProperty, int>>();
+                _materializationContextBindings[parameterExpression] = queryExpression
+                    .GetProjection(projectionBindingExpression)
+                    .GetConstantValue<Dictionary<IProperty, int>>();
 
                 var updatedExpression = newExpression.Update(
-                    new[] { Constant(ValueBuffer.Empty), newExpression.Arguments[1] });
+                    new[] { Constant(ValueBuffer.Empty), newExpression.Arguments[1] }
+                );
 
                 return MakeBinary(ExpressionType.Assign, binaryExpression.Left, updatedExpression);
             }
 
-            if (binaryExpression is
-                { NodeType: ExpressionType.Assign, Left: MemberExpression { Member: FieldInfo { IsInitOnly: true } } memberExpression })
+            if (
+                binaryExpression is
+                {
+                    NodeType: ExpressionType.Assign,
+                    Left: MemberExpression
+                    {
+                        Member: FieldInfo { IsInitOnly: true }
+                    } memberExpression
+                }
+            )
             {
                 return memberExpression.Assign(Visit(binaryExpression.Right));
             }
@@ -231,21 +320,29 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
 
         protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
         {
-            if (methodCallExpression.Method.IsGenericMethod
-                && methodCallExpression.Method.GetGenericMethodDefinition() == ExpressionExtensions.ValueBufferTryReadValueMethod)
+            if (
+                methodCallExpression.Method.IsGenericMethod
+                && methodCallExpression.Method.GetGenericMethodDefinition()
+                    == ExpressionExtensions.ValueBufferTryReadValueMethod
+            )
             {
                 var property = methodCallExpression.Arguments[2].GetConstantValue<IProperty?>();
                 var indexMap = _materializationContextBindings[
-                    (ParameterExpression)((MethodCallExpression)methodCallExpression.Arguments[0]).Object!];
+                    (ParameterExpression)
+                        ((MethodCallExpression)methodCallExpression.Arguments[0]).Object!
+                ];
 
                 Check.DebugAssert(
-                    property != null || methodCallExpression.Type.IsNullableType(), "Must read nullable value without property");
+                    property != null || methodCallExpression.Type.IsNullableType(),
+                    "Must read nullable value without property"
+                );
 
                 return Call(
                     methodCallExpression.Method,
                     _valueBufferParameter!,
                     Constant(indexMap[property!]),
-                    methodCallExpression.Arguments[2]);
+                    methodCallExpression.Arguments[2]
+                );
             }
 
             return base.VisitMethodCall(methodCallExpression);
@@ -258,15 +355,15 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             INavigationBase navigation,
             INavigationBase? inverseNavigation,
             Action<TIncludingEntity, TIncludedEntity> fixup,
-            bool trackingQuery)
+            bool trackingQuery
+        )
             where TIncludingEntity : class, TEntity
             where TEntity : class
             where TIncludedEntity : class
         {
             if (entity is TIncludingEntity includingEntity)
             {
-                if (trackingQuery
-                    && navigation.DeclaringEntityType.FindPrimaryKey() != null)
+                if (trackingQuery && navigation.DeclaringEntityType.FindPrimaryKey() != null)
                 {
                     // For non-null relatedEntity StateManager will set the flag
                     if (relatedEntity == null)
@@ -298,7 +395,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             INavigationBase? inverseNavigation,
             Action<TIncludingEntity, TIncludedEntity> fixup,
             bool trackingQuery,
-            bool setLoaded)
+            bool setLoaded
+        )
             where TIncludingEntity : class, TEntity
             where TEntity : class
             where TIncludedEntity : class
@@ -307,7 +405,9 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             {
                 if (!navigation.IsShadowProperty())
                 {
-                    navigation.GetCollectionAccessor()!.GetOrCreate(includingEntity, forMaterialization: true);
+                    navigation
+                        .GetCollectionAccessor()!
+                        .GetOrCreate(includingEntity, forMaterialization: true);
                 }
 
                 if (setLoaded)
@@ -339,7 +439,8 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             QueryContext queryContext,
             IEnumerable<ValueBuffer> innerValueBuffers,
             Func<QueryContext, ValueBuffer, TElement> innerShaper,
-            IClrCollectionAccessor? clrCollectionAccessor)
+            IClrCollectionAccessor? clrCollectionAccessor
+        )
             where TCollection : class, ICollection<TElement>
         {
             var collection = (TCollection)(clrCollectionAccessor?.Create() ?? new List<TElement>());
@@ -356,16 +457,15 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
         private static TResult? MaterializeSingleResult<TResult>(
             QueryContext queryContext,
             ValueBuffer valueBuffer,
-            Func<QueryContext, ValueBuffer, TResult> innerShaper)
-            => valueBuffer.IsEmpty
-                ? default
-                : innerShaper(queryContext, valueBuffer);
+            Func<QueryContext, ValueBuffer, TResult> innerShaper
+        ) => valueBuffer.IsEmpty ? default : innerShaper(queryContext, valueBuffer);
 
         private static LambdaExpression GenerateFixup(
             Type entityType,
             Type relatedEntityType,
             INavigationBase navigation,
-            INavigationBase? inverseNavigation)
+            INavigationBase? inverseNavigation
+        )
         {
             var entityParameter = Parameter(entityType);
             var relatedEntityParameter = Parameter(relatedEntityType);
@@ -375,37 +475,63 @@ public partial class InMemoryShapedQueryCompilingExpressionVisitor
             {
                 expressions.Add(
                     navigation.IsCollection
-                        ? AddToCollectionNavigation(entityParameter, relatedEntityParameter, navigation)
-                        : AssignReferenceNavigation(entityParameter, relatedEntityParameter, navigation));
+                        ? AddToCollectionNavigation(
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
+                        : AssignReferenceNavigation(
+                            entityParameter,
+                            relatedEntityParameter,
+                            navigation
+                        )
+                );
             }
 
-            if (inverseNavigation != null
-                && !inverseNavigation.IsShadowProperty())
+            if (inverseNavigation != null && !inverseNavigation.IsShadowProperty())
             {
                 expressions.Add(
                     inverseNavigation.IsCollection
-                        ? AddToCollectionNavigation(relatedEntityParameter, entityParameter, inverseNavigation)
-                        : AssignReferenceNavigation(relatedEntityParameter, entityParameter, inverseNavigation));
+                        ? AddToCollectionNavigation(
+                            relatedEntityParameter,
+                            entityParameter,
+                            inverseNavigation
+                        )
+                        : AssignReferenceNavigation(
+                            relatedEntityParameter,
+                            entityParameter,
+                            inverseNavigation
+                        )
+                );
             }
 
-            return Lambda(Block(typeof(void), expressions), entityParameter, relatedEntityParameter);
+            return Lambda(
+                Block(typeof(void), expressions),
+                entityParameter,
+                relatedEntityParameter
+            );
         }
 
         private static Expression AssignReferenceNavigation(
             ParameterExpression entity,
             ParameterExpression relatedEntity,
-            INavigationBase navigation)
-            => entity.MakeMemberAccess(navigation.GetMemberInfo(forMaterialization: true, forSet: true)).Assign(relatedEntity);
+            INavigationBase navigation
+        ) =>
+            entity
+                .MakeMemberAccess(navigation.GetMemberInfo(forMaterialization: true, forSet: true))
+                .Assign(relatedEntity);
 
         private static Expression AddToCollectionNavigation(
             ParameterExpression entity,
             ParameterExpression relatedEntity,
-            INavigationBase navigation)
-            => Call(
+            INavigationBase navigation
+        ) =>
+            Call(
                 Constant(navigation.GetCollectionAccessor()),
                 CollectionAccessorAddMethodInfo,
                 entity,
                 relatedEntity,
-                Constant(true));
+                Constant(true)
+            );
     }
 }

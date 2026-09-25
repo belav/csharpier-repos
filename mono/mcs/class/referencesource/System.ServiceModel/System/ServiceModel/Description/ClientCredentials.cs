@@ -6,12 +6,12 @@ namespace System.ServiceModel.Description
 {
     using System.Diagnostics.CodeAnalysis;
     using System.IdentityModel.Selectors;
+    using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Security;
-    using System.IdentityModel.Tokens;
 
     public class ClientCredentials : SecurityCredentialsManager, IEndpointBehavior
     {
@@ -43,9 +43,13 @@ namespace System.ServiceModel.Description
             if (other.userName != null)
                 this.userName = new UserNamePasswordClientCredential(other.userName);
             if (other.clientCertificate != null)
-                this.clientCertificate = new X509CertificateInitiatorClientCredential(other.clientCertificate);
+                this.clientCertificate = new X509CertificateInitiatorClientCredential(
+                    other.clientCertificate
+                );
             if (other.serviceCertificate != null)
-                this.serviceCertificate = new X509CertificateRecipientClientCredential(other.serviceCertificate);
+                this.serviceCertificate = new X509CertificateRecipientClientCredential(
+                    other.serviceCertificate
+                );
             if (other.windows != null)
                 this.windows = new WindowsClientCredential(other.windows);
             if (other.httpDigest != null)
@@ -57,7 +61,8 @@ namespace System.ServiceModel.Description
 
             this.getInfoCardTokenCallback = other.getInfoCardTokenCallback;
             this.supportInteractive = other.supportInteractive;
-            this.securityTokenHandlerCollectionManager = other.securityTokenHandlerCollectionManager;
+            this.securityTokenHandlerCollectionManager =
+                other.securityTokenHandlerCollectionManager;
             this.useIdentityConfiguration = other.useIdentityConfiguration;
             this.isReadOnly = other.isReadOnly;
         }
@@ -68,7 +73,9 @@ namespace System.ServiceModel.Description
             {
                 if (this.getInfoCardTokenCallback == null)
                 {
-                    GetInfoCardTokenCallback gtc = new GetInfoCardTokenCallback(this.GetInfoCardSecurityToken);
+                    GetInfoCardTokenCallback gtc = new GetInfoCardTokenCallback(
+                        this.GetInfoCardSecurityToken
+                    );
                     this.getInfoCardTokenCallback = gtc;
                 }
                 return this.getInfoCardTokenCallback;
@@ -187,7 +194,8 @@ namespace System.ServiceModel.Description
                     {
                         if (this.securityTokenHandlerCollectionManager == null)
                         {
-                            this.securityTokenHandlerCollectionManager = SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager();
+                            this.securityTokenHandlerCollectionManager =
+                                SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager();
                         }
                     }
                 }
@@ -198,7 +206,9 @@ namespace System.ServiceModel.Description
             {
                 if (this.isReadOnly)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 }
 
                 this.securityTokenHandlerCollectionManager = value;
@@ -207,15 +217,14 @@ namespace System.ServiceModel.Description
 
         public bool UseIdentityConfiguration
         {
-            get
-            {
-                return this.useIdentityConfiguration;
-            }
+            get { return this.useIdentityConfiguration; }
             set
             {
                 if (this.isReadOnly)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 }
                 this.useIdentityConfiguration = value;
             }
@@ -223,15 +232,14 @@ namespace System.ServiceModel.Description
 
         public bool SupportInteractive
         {
-            get
-            {
-                return this.supportInteractive;
-            }
+            get { return this.supportInteractive; }
             set
             {
                 if (this.isReadOnly)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ObjectIsReadOnly))
+                    );
                 }
                 this.supportInteractive = value;
             }
@@ -257,34 +265,62 @@ namespace System.ServiceModel.Description
             ClientCredentials result = CloneCore();
             if (result == null || result.GetType() != this.GetType())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.CloneNotImplementedCorrectly, this.GetType(), (result != null) ? result.ToString() : "null")));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotImplementedException(
+                        SR.GetString(
+                            SR.CloneNotImplementedCorrectly,
+                            this.GetType(),
+                            (result != null) ? result.ToString() : "null"
+                        )
+                    )
+                );
             }
             return result;
         }
 
-        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
-        {
-        }
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint) { }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        )
         {
             if (bindingParameters == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bindingParameters");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "bindingParameters"
+                );
             }
             // throw if bindingParameters already has a SecurityCredentialsManager
-            SecurityCredentialsManager otherCredentialsManager = bindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager otherCredentialsManager =
+                bindingParameters.Find<SecurityCredentialsManager>();
             if (otherCredentialsManager != null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultipleSecurityCredentialsManagersInChannelBindingParameters, otherCredentialsManager)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.MultipleSecurityCredentialsManagersInChannelBindingParameters,
+                            otherCredentialsManager
+                        )
+                    )
+                );
             }
             bindingParameters.Add(this);
         }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                SR.GetString(SR.SFXEndpointBehaviorUsedOnWrongSide, typeof(ClientCredentials).Name)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(
+                        SR.SFXEndpointBehaviorUsedOnWrongSide,
+                        typeof(ClientCredentials).Name
+                    )
+                )
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -294,15 +330,28 @@ namespace System.ServiceModel.Description
             Uri dummyRelyingPartyIssuer;
             // we add the initializer only if infocard is required. At this point, serviceEndpoint.Address is not populated correctly but that's not needed to
             // determine whether infocard is required or not.
-            if (InfoCardHelper.IsInfocardRequired(serviceEndpoint.Binding, this, this.CreateSecurityTokenManager(), EndpointAddress.AnonymousAddress, out dummyPolicyElements, out dummyRelyingPartyIssuer))
+            if (
+                InfoCardHelper.IsInfocardRequired(
+                    serviceEndpoint.Binding,
+                    this,
+                    this.CreateSecurityTokenManager(),
+                    EndpointAddress.AnonymousAddress,
+                    out dummyPolicyElements,
+                    out dummyRelyingPartyIssuer
+                )
+            )
             {
-                behavior.InteractiveChannelInitializers.Add(new InfocardInteractiveChannelInitializer(this, serviceEndpoint.Binding));
+                behavior.InteractiveChannelInitializers.Add(
+                    new InfocardInteractiveChannelInitializer(this, serviceEndpoint.Binding)
+                );
             }
         }
 
-        public virtual void ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
+        public virtual void ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
         {
-
             if (serviceEndpoint == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceEndpoint");
@@ -310,11 +359,15 @@ namespace System.ServiceModel.Description
 
             if (serviceEndpoint.Binding == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("serviceEndpoint.Binding");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "serviceEndpoint.Binding"
+                );
             }
 
-
-            if (serviceEndpoint.Binding.CreateBindingElements().Find<SecurityBindingElement>() == null)
+            if (
+                serviceEndpoint.Binding.CreateBindingElements().Find<SecurityBindingElement>()
+                == null
+            )
             {
                 return;
             }
@@ -323,11 +376,7 @@ namespace System.ServiceModel.Description
             {
                 AddInteractiveInitializers(serviceEndpoint, behavior);
             }
-            catch (System.IO.FileNotFoundException)
-            {
-
-            }
-
+            catch (System.IO.FileNotFoundException) { }
         }
 
         // RC0 workaround to freeze credentials when the channel factory is opened
@@ -350,10 +399,17 @@ namespace System.ServiceModel.Description
                 this.peer.MakeReadOnly();
         }
 
-        // This APTCA method calls CardSpaceSelector.GetToken(..), which is defined in a non-APTCA assembly. It would be a breaking change to add a Demand, 
+        // This APTCA method calls CardSpaceSelector.GetToken(..), which is defined in a non-APTCA assembly. It would be a breaking change to add a Demand,
         // while we don't have an identified security vulnerability here.
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods)]
-        internal protected virtual SecurityToken GetInfoCardSecurityToken(bool requiresInfoCard, CardSpacePolicyElement[] chain, SecurityTokenSerializer tokenSerializer)
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods
+        )]
+        protected internal virtual SecurityToken GetInfoCardSecurityToken(
+            bool requiresInfoCard,
+            CardSpacePolicyElement[] chain,
+            SecurityTokenSerializer tokenSerializer
+        )
         {
             if (!requiresInfoCard)
             {
@@ -361,6 +417,5 @@ namespace System.ServiceModel.Description
             }
             return CardSpaceSelector.GetToken(chain, tokenSerializer);
         }
-
     }
 }

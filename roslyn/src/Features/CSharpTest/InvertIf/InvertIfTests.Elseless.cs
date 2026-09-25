@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -105,7 +106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -142,7 +144,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         g();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -185,7 +188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         return false;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -224,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         g();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -279,7 +284,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -334,7 +340,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40909")]
@@ -377,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         return false;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -416,7 +424,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -461,7 +470,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -504,7 +514,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -538,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -576,7 +588,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -611,7 +624,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -635,7 +649,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         if (!c) { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -672,7 +687,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -713,7 +729,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -744,7 +761,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         f();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -781,7 +799,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -824,7 +843,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -873,7 +893,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -883,7 +904,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.InvertIf
         public async Task IfWithoutElse_InPropertyAccessors(string accessor)
         {
             await TestInRegularAndScriptAsync(
-$@"class C
+                $@"class C
 {{
     private bool _b;
 
@@ -900,7 +921,7 @@ $@"class C
         }}
     }}
 }}",
-$@"class C
+                $@"class C
 {{
     private bool _b;
 
@@ -917,7 +938,8 @@ $@"class C
             Console.WriteLine();
         }}
     }}
-}}");
+}}"
+            );
         }
     }
 }

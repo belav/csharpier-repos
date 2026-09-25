@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,86 +27,92 @@ using System.Collections;
 using Mono.WebBrowser;
 using Mono.WebBrowser.DOM;
 
-
 namespace Mono.Mozilla.DOM
 {
-	internal class AttributeCollection : NodeList, IAttributeCollection
-	{
-		protected new nsIDOMNamedNodeMap unmanagedNodes;
+    internal class AttributeCollection : NodeList, IAttributeCollection
+    {
+        protected new nsIDOMNamedNodeMap unmanagedNodes;
 
-		public AttributeCollection (WebBrowser control, nsIDOMNamedNodeMap nodeMap)
-			: base (control, true)
-		{
-			if (control.platform != control.enginePlatform)
-				unmanagedNodes = nsDOMNamedNodeMap.GetProxy (control, nodeMap);
-			else
-				unmanagedNodes = nodeMap;
-		}
-		
-		public AttributeCollection (WebBrowser control) : base (control) 
-		{
-		}
-		
-		internal override void Load ()
-		{
-			if (unmanagedNodes == null) return;
-			Clear ();
-			uint count;
-			unmanagedNodes.getLength (out count);
-			nodeCount = (int) count;
-			nodes = new Node[count];
-			for (int i = 0; i < count; i++) {
-				nsIDOMNode node;
-				unmanagedNodes.item ((uint) i, out node);
-				nodes[i] = new Attribute (control, node as nsIDOMAttr);
-			}
-		}
+        public AttributeCollection(WebBrowser control, nsIDOMNamedNodeMap nodeMap)
+            : base(control, true)
+        {
+            if (control.platform != control.enginePlatform)
+                unmanagedNodes = nsDOMNamedNodeMap.GetProxy(control, nodeMap);
+            else
+                unmanagedNodes = nodeMap;
+        }
 
-		public override int Count {
-			get {
-				if (unmanagedNodes != null && nodes == null)
-					Load ();
-				return nodeCount; 
-			}
-		}
+        public AttributeCollection(WebBrowser control)
+            : base(control) { }
 
-		#region IList members
-		public new IAttribute this[int index]
-		{
-			get
-			{
-				if (index < 0 || index >= Count)
-					throw new ArgumentOutOfRangeException ("index");
-				return nodes[index] as IAttribute;
-			}
-			set { }
-		}
+        internal override void Load()
+        {
+            if (unmanagedNodes == null)
+                return;
+            Clear();
+            uint count;
+            unmanagedNodes.getLength(out count);
+            nodeCount = (int)count;
+            nodes = new Node[count];
+            for (int i = 0; i < count; i++)
+            {
+                nsIDOMNode node;
+                unmanagedNodes.item((uint)i, out node);
+                nodes[i] = new Attribute(control, node as nsIDOMAttr);
+            }
+        }
 
-		public IAttribute this[string name]
-		{
-			get
-			{
-				for (int i = 0; i < nodes.Length; i++) {
-					if (((IAttribute) nodes[i]).Name.Equals (name))
-						return nodes[i] as IAttribute;
-				}
-				return null;
-			}
-		}
+        public override int Count
+        {
+            get
+            {
+                if (unmanagedNodes != null && nodes == null)
+                    Load();
+                return nodeCount;
+            }
+        }
 
-		public bool Exists (string name)
-		{
-			if (unmanagedNodes == null) return false;
-			Base.StringSet (storage, name);
-			nsIDOMNode ret;
-			unmanagedNodes.getNamedItem (storage, out ret);
-			return ret != null;
-		}
-		#endregion
-		
-		public override int GetHashCode () {
-			if (unmanagedNodes == null) return base.GetHashCode ();
-			return this.unmanagedNodes.GetHashCode ();
-		}
-	}
+        #region IList members
+        public new IAttribute this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= Count)
+                    throw new ArgumentOutOfRangeException("index");
+                return nodes[index] as IAttribute;
+            }
+            set { }
+        }
+
+        public IAttribute this[string name]
+        {
+            get
+            {
+                for (int i = 0; i < nodes.Length; i++)
+                {
+                    if (((IAttribute)nodes[i]).Name.Equals(name))
+                        return nodes[i] as IAttribute;
+                }
+                return null;
+            }
+        }
+
+        public bool Exists(string name)
+        {
+            if (unmanagedNodes == null)
+                return false;
+            Base.StringSet(storage, name);
+            nsIDOMNode ret;
+            unmanagedNodes.getNamedItem(storage, out ret);
+            return ret != null;
+        }
+        #endregion
+
+        public override int GetHashCode()
+        {
+            if (unmanagedNodes == null)
+                return base.GetHashCode();
+            return this.unmanagedNodes.GetHashCode();
+        }
+    }
 }

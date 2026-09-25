@@ -8,8 +8,11 @@ namespace System.IO.Tests
 {
     public class RandomAccess_GetLength : RandomAccess_Base<long>
     {
-        protected override long MethodUnderTest(SafeFileHandle handle, byte[] bytes, long fileOffset)
-            => RandomAccess.GetLength(handle);
+        protected override long MethodUnderTest(
+            SafeFileHandle handle,
+            byte[] bytes,
+            long fileOffset
+        ) => RandomAccess.GetLength(handle);
 
         protected override bool UsesOffsets => false;
 
@@ -17,7 +20,14 @@ namespace System.IO.Tests
         [MemberData(nameof(GetSyncAsyncOptions))]
         public void ReturnsZeroForEmptyFile(FileOptions options)
         {
-            using (SafeFileHandle handle = File.OpenHandle(GetTestFilePath(), FileMode.CreateNew, FileAccess.Write, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(
+                    GetTestFilePath(),
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    options: options
+                )
+            )
             {
                 Assert.Equal(0, RandomAccess.GetLength(handle));
             }
@@ -31,14 +41,19 @@ namespace System.IO.Tests
             string filePath = GetTestFilePath();
             File.WriteAllBytes(filePath, new byte[fileSize]);
 
-            using (SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options))
+            using (
+                SafeFileHandle handle = File.OpenHandle(filePath, FileMode.Open, options: options)
+            )
             {
                 Assert.Equal(fileSize, RandomAccess.GetLength(handle));
             }
         }
 
         [PlatformSpecific(TestPlatforms.Windows)]
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsPrivilegedProcess))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsPrivilegedProcess)
+        )]
         [MemberData(nameof(GetSyncAsyncOptions))]
         public void ReturnsActualLengthForDevices(FileOptions options)
         {
@@ -47,7 +62,13 @@ namespace System.IO.Tests
             // Exception can be also thrown when the file is in use (#73925).
             try
             {
-                using (SafeFileHandle handle = File.OpenHandle(@"\\?\PhysicalDrive0", FileMode.Open, options: options))
+                using (
+                    SafeFileHandle handle = File.OpenHandle(
+                        @"\\?\PhysicalDrive0",
+                        FileMode.Open,
+                        options: options
+                    )
+                )
                 {
                     long length = RandomAccess.GetLength(handle);
                     Assert.True(length > 0);

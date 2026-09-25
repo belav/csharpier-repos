@@ -14,10 +14,18 @@ namespace MS.Internal.Xml.XPath
     {
         private int _level;
 
-        public DescendantOverDescendantQuery(Query qyParent, bool matchSelf, string name, string prefix, XPathNodeType typeTest, bool abbrAxis) :
-            base(qyParent, name, prefix, typeTest, matchSelf, abbrAxis)
-        { }
-        private DescendantOverDescendantQuery(DescendantOverDescendantQuery other) : base(other)
+        public DescendantOverDescendantQuery(
+            Query qyParent,
+            bool matchSelf,
+            string name,
+            string prefix,
+            XPathNodeType typeTest,
+            bool abbrAxis
+        )
+            : base(qyParent, name, prefix, typeTest, matchSelf, abbrAxis) { }
+
+        private DescendantOverDescendantQuery(DescendantOverDescendantQuery other)
+            : base(other)
         {
             _level = other._level;
         }
@@ -92,11 +100,17 @@ namespace MS.Internal.Xml.XPath
                     return false;
                 }
                 bool result = currentNode.MoveToParent();
-                Debug.Assert(result, "Algorithm error, We always should be able to move up if level > 0");
+                Debug.Assert(
+                    result,
+                    "Algorithm error, We always should be able to move up if level > 0"
+                );
             }
             return true;
         }
 
-        public override XPathNodeIterator Clone() { return new DescendantOverDescendantQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new DescendantOverDescendantQuery(this);
+        }
     }
 }

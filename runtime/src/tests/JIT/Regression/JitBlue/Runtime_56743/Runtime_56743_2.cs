@@ -20,17 +20,18 @@ public unsafe class Runtime_56743_2
         h.H = &h;
         return Bar(h);
     }
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     static int Bar(S h)
     {
         h.H->A = 10;
         return h.A;
     }
-    
+
     unsafe struct S
     {
-        public int A, B;
+        public int A,
+            B;
         public S* H;
     }
 }

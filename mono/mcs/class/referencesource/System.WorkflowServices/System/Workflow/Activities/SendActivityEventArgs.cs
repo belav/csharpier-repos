@@ -8,7 +8,9 @@ namespace System.Workflow.Activities
     using System;
 
 #pragma warning disable 56524
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class SendActivityEventArgs : EventArgs
     {
         SendActivity sendActivity;
@@ -22,10 +24,7 @@ namespace System.Workflow.Activities
 
         public SendActivity SendActivity
         {
-            get
-            {
-                return sendActivity;
-            }
+            get { return sendActivity; }
         }
     }
 }

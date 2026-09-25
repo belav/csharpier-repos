@@ -8,16 +8,16 @@
 //---------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Diagnostics;
-
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Common.CommandTrees
 {
     /// <summary>
     /// An abstract base type for types that implement the IExpressionVisitor interface to derive from.
     /// </summary>
-    /*CQT_PUBLIC_API(*/internal/*)*/ abstract class BasicCommandTreeVisitor : BasicExpressionVisitor
+    /*CQT_PUBLIC_API(*/internal /*)*/
+    abstract class BasicCommandTreeVisitor : BasicExpressionVisitor
     {
         #region protected API, may be overridden to add functionality at specific points in the traversal
 
@@ -35,7 +35,9 @@ namespace System.Data.Common.CommandTrees
             this.VisitSetClause((DbSetClause)modificationClause);
         }
 
-        protected virtual void VisitModificationClauses(IList<DbModificationClause> modificationClauses)
+        protected virtual void VisitModificationClauses(
+            IList<DbModificationClause> modificationClauses
+        )
         {
             EntityUtil.CheckArgumentNull(modificationClauses, "modificationClauses");
             for (int idx = 0; idx < modificationClauses.Count; idx++)
@@ -43,7 +45,7 @@ namespace System.Data.Common.CommandTrees
                 this.VisitModificationClause(modificationClauses[idx]);
             }
         }
-        
+
         #endregion
 
         #region public convenience API
@@ -93,7 +95,6 @@ namespace System.Data.Common.CommandTrees
         protected virtual void VisitFunctionCommandTree(DbFunctionCommandTree functionTree)
         {
             EntityUtil.CheckArgumentNull(functionTree, "functionTree");
-
         }
 
         protected virtual void VisitInsertCommandTree(DbInsertCommandTree insertTree)
@@ -128,6 +129,5 @@ namespace System.Data.Common.CommandTrees
         }
 
         #endregion
-
     }
 }

@@ -227,10 +227,13 @@ namespace System.Web.Http.WebHost
 
             var origin = (SeekOrigin)5;
 
-            var message = 
-                "The value of argument 'origin' (" + (int)origin + ") is invalid for Enum type " +
-                "'SeekOrigin'." + Environment.NewLine +
-                "Parameter name: origin";
+            var message =
+                "The value of argument 'origin' ("
+                + (int)origin
+                + ") is invalid for Enum type "
+                + "'SeekOrigin'."
+                + Environment.NewLine
+                + "Parameter name: origin";
 
             // Act & Assert
             Assert.Throws<InvalidEnumArgumentException>(() => stream.Seek(0L, origin), message);
@@ -262,36 +265,24 @@ namespace System.Web.Http.WebHost
         private class AccessibleStreamWrapper : SeekableBufferedRequestStream
         {
             public AccessibleStreamWrapper(HttpRequestBase request)
-                : base(request)
-            {
-            }
+                : base(request) { }
 
             public new Stream InnerStream
             {
-                get
-                {
-                    return base.InnerStream;
-                }
+                get { return base.InnerStream; }
             }
         }
 
         private class NonSeekableStream : MemoryStream
         {
-            public NonSeekableStream()
-            {
-            }
+            public NonSeekableStream() { }
 
             public NonSeekableStream(byte[] bytes)
-                : base(bytes)
-            {
-            }
+                : base(bytes) { }
 
             public override bool CanSeek
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
         }
     }

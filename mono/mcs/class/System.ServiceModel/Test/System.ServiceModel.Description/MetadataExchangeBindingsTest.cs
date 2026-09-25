@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,88 +36,140 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
 using System.Text;
-
 using NUnit.Framework;
 using MonoTests.Helpers;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-	[TestFixture]
-	public class MetadataExchangeBindingsTest
-	{
-		[Test]
-		public void CreateMexHttpBinding ()
-		{
-			var b = MetadataExchangeBindings.CreateMexHttpBinding () as WSHttpBinding;
-			Assert.IsNotNull (b, "#1");
-			Assert.AreEqual (SecurityMode.None, b.Security.Mode, "#2");
-			Assert.IsFalse (b.TransactionFlow, "#3");
-			Assert.IsFalse (b.ReliableSession.Enabled, "#4");
-			Assert.IsFalse (b.CreateBindingElements ().Any (be => be is SecurityBindingElement), "#b1");
-			Assert.IsTrue (b.CreateBindingElements ().Any (be => be is TransactionFlowBindingElement), "#b2");
-			Assert.IsFalse (b.CreateBindingElements ().Any (be => be is ReliableSessionBindingElement), "#b3");
-			Assert.IsTrue (new TransactionFlowBindingElement ().TransactionProtocol == TransactionProtocol.Default, "#x1");
-			Assert.AreEqual (MessageVersion.Soap12WSAddressing10, b.MessageVersion, "#5");
-			Assert.AreEqual (MessageVersion.Soap12WSAddressing10, b.GetProperty<MessageVersion> (new BindingParameterCollection ()), "#6");
+    [TestFixture]
+    public class MetadataExchangeBindingsTest
+    {
+        [Test]
+        public void CreateMexHttpBinding()
+        {
+            var b = MetadataExchangeBindings.CreateMexHttpBinding() as WSHttpBinding;
+            Assert.IsNotNull(b, "#1");
+            Assert.AreEqual(SecurityMode.None, b.Security.Mode, "#2");
+            Assert.IsFalse(b.TransactionFlow, "#3");
+            Assert.IsFalse(b.ReliableSession.Enabled, "#4");
+            Assert.IsFalse(
+                b.CreateBindingElements().Any(be => be is SecurityBindingElement),
+                "#b1"
+            );
+            Assert.IsTrue(
+                b.CreateBindingElements().Any(be => be is TransactionFlowBindingElement),
+                "#b2"
+            );
+            Assert.IsFalse(
+                b.CreateBindingElements().Any(be => be is ReliableSessionBindingElement),
+                "#b3"
+            );
+            Assert.IsTrue(
+                new TransactionFlowBindingElement().TransactionProtocol
+                    == TransactionProtocol.Default,
+                "#x1"
+            );
+            Assert.AreEqual(MessageVersion.Soap12WSAddressing10, b.MessageVersion, "#5");
+            Assert.AreEqual(
+                MessageVersion.Soap12WSAddressing10,
+                b.GetProperty<MessageVersion>(new BindingParameterCollection()),
+                "#6"
+            );
 
-			var host = new ServiceHost (typeof (MetadataExchange));
-			host.AddServiceEndpoint (typeof (IMetadataExchange), MetadataExchangeBindings.CreateMexHttpBinding (), "http://localhost:" + NetworkHelpers.FindFreePort ());
-			host.Open ();
-			try {
-				// it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which does overwriting.
-				Assert.AreEqual (MessageVersion.Soap12WSAddressing10, ((ChannelDispatcher) host.ChannelDispatchers [0]).MessageVersion, "#7");
-			} finally {
-				host.Close ();
-			}
-		}
+            var host = new ServiceHost(typeof(MetadataExchange));
+            host.AddServiceEndpoint(
+                typeof(IMetadataExchange),
+                MetadataExchangeBindings.CreateMexHttpBinding(),
+                "http://localhost:" + NetworkHelpers.FindFreePort()
+            );
+            host.Open();
+            try
+            {
+                // it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which does overwriting.
+                Assert.AreEqual(
+                    MessageVersion.Soap12WSAddressing10,
+                    ((ChannelDispatcher)host.ChannelDispatchers[0]).MessageVersion,
+                    "#7"
+                );
+            }
+            finally
+            {
+                host.Close();
+            }
+        }
 
-		[Test]
-		public void CreateMexHttpsBinding()
-		{
-			var b = MetadataExchangeBindings.CreateMexHttpsBinding() as WSHttpBinding;
-			Assert.IsNotNull(b, "#1");
-			Assert.AreEqual(SecurityMode.Transport, b.Security.Mode, "#2");
-			Assert.IsFalse(b.TransactionFlow, "#3");
-			Assert.IsFalse(b.ReliableSession.Enabled, "#4");
-			Assert.IsFalse(b.CreateBindingElements().Any(be => be is SecurityBindingElement), "#b1");
-			Assert.IsTrue(b.CreateBindingElements().Any(be => be is TransactionFlowBindingElement), "#b2");
-			Assert.IsFalse(b.CreateBindingElements().Any(be => be is ReliableSessionBindingElement), "#b3");
-			Assert.IsTrue(new TransactionFlowBindingElement().TransactionProtocol == TransactionProtocol.Default, "#x1");
-			Assert.AreEqual(MessageVersion.Soap12WSAddressing10, b.MessageVersion, "#5");
-			Assert.AreEqual(MessageVersion.Soap12WSAddressing10, b.GetProperty<MessageVersion>(new BindingParameterCollection()), "#6");
-			Assert.AreEqual(Uri.UriSchemeHttps, b.Scheme, "#8");
+        [Test]
+        public void CreateMexHttpsBinding()
+        {
+            var b = MetadataExchangeBindings.CreateMexHttpsBinding() as WSHttpBinding;
+            Assert.IsNotNull(b, "#1");
+            Assert.AreEqual(SecurityMode.Transport, b.Security.Mode, "#2");
+            Assert.IsFalse(b.TransactionFlow, "#3");
+            Assert.IsFalse(b.ReliableSession.Enabled, "#4");
+            Assert.IsFalse(
+                b.CreateBindingElements().Any(be => be is SecurityBindingElement),
+                "#b1"
+            );
+            Assert.IsTrue(
+                b.CreateBindingElements().Any(be => be is TransactionFlowBindingElement),
+                "#b2"
+            );
+            Assert.IsFalse(
+                b.CreateBindingElements().Any(be => be is ReliableSessionBindingElement),
+                "#b3"
+            );
+            Assert.IsTrue(
+                new TransactionFlowBindingElement().TransactionProtocol
+                    == TransactionProtocol.Default,
+                "#x1"
+            );
+            Assert.AreEqual(MessageVersion.Soap12WSAddressing10, b.MessageVersion, "#5");
+            Assert.AreEqual(
+                MessageVersion.Soap12WSAddressing10,
+                b.GetProperty<MessageVersion>(new BindingParameterCollection()),
+                "#6"
+            );
+            Assert.AreEqual(Uri.UriSchemeHttps, b.Scheme, "#8");
 
-			var host = new ServiceHost(typeof(MetadataExchange));
-			host.AddServiceEndpoint(typeof(IMetadataExchange), MetadataExchangeBindings.CreateMexHttpsBinding(), "https://localhost:" + NetworkHelpers.FindFreePort ());
-			host.Open();
-			try
-			{
-				// it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which does overwriting.
-				Assert.AreEqual(MessageVersion.Soap12WSAddressing10, ((ChannelDispatcher)host.ChannelDispatchers[0]).MessageVersion, "#7");
-			}
-			finally
-			{
-				host.Close();
-			}
-		}
+            var host = new ServiceHost(typeof(MetadataExchange));
+            host.AddServiceEndpoint(
+                typeof(IMetadataExchange),
+                MetadataExchangeBindings.CreateMexHttpsBinding(),
+                "https://localhost:" + NetworkHelpers.FindFreePort()
+            );
+            host.Open();
+            try
+            {
+                // it still does not rewrite MessageVersion.None. It's rather likely ServiceMetadataExtension which does overwriting.
+                Assert.AreEqual(
+                    MessageVersion.Soap12WSAddressing10,
+                    ((ChannelDispatcher)host.ChannelDispatchers[0]).MessageVersion,
+                    "#7"
+                );
+            }
+            finally
+            {
+                host.Close();
+            }
+        }
 
-		public class MetadataExchange : IMetadataExchange
-		{
-			public Message Get (Message request)
-			{
-				throw new Exception ();
-			}
-			
-			public IAsyncResult BeginGet (Message request, AsyncCallback callback, object state)
-			{
-				throw new Exception ();
-			}
-			
-			public Message EndGet (IAsyncResult result)
-			{
-				throw new Exception ();
-			}
-		}
-	}
+        public class MetadataExchange : IMetadataExchange
+        {
+            public Message Get(Message request)
+            {
+                throw new Exception();
+            }
+
+            public IAsyncResult BeginGet(Message request, AsyncCallback callback, object state)
+            {
+                throw new Exception();
+            }
+
+            public Message EndGet(IAsyncResult result)
+            {
+                throw new Exception();
+            }
+        }
+    }
 }
 #endif

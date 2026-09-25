@@ -5,13 +5,16 @@
 namespace System.Runtime.Serialization
 {
     using System;
-    using System.Xml;
-    using System.Xml.Schema;
     using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
-    using DataContractDictionary = System.Collections.Generic.Dictionary<System.Xml.XmlQualifiedName, DataContract>;
     using System.Text;
+    using System.Xml;
+    using System.Xml.Schema;
+    using DataContractDictionary = System.Collections.Generic.Dictionary<
+        System.Xml.XmlQualifiedName,
+        DataContract
+    >;
 
     internal class DataContractSet
     {
@@ -25,10 +28,14 @@ namespace System.Runtime.Serialization
         Dictionary<XmlQualifiedName, object> referencedTypesDictionary;
         Dictionary<XmlQualifiedName, object> referencedCollectionTypesDictionary;
 
+        internal DataContractSet(IDataContractSurrogate dataContractSurrogate)
+            : this(dataContractSurrogate, null, null) { }
 
-        internal DataContractSet(IDataContractSurrogate dataContractSurrogate) : this(dataContractSurrogate, null, null) { }
-
-        internal DataContractSet(IDataContractSurrogate dataContractSurrogate, ICollection<Type> referencedTypes, ICollection<Type> referencedCollectionTypes)
+        internal DataContractSet(
+            IDataContractSurrogate dataContractSurrogate,
+            ICollection<Type> referencedTypes,
+            ICollection<Type> referencedCollectionTypes
+        )
         {
             this.dataContractSurrogate = dataContractSurrogate;
             this.referencedTypes = referencedTypes;
@@ -38,7 +45,9 @@ namespace System.Runtime.Serialization
         internal DataContractSet(DataContractSet dataContractSet)
         {
             if (dataContractSet == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("dataContractSet"));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("dataContractSet")
+                );
 
             this.dataContractSurrogate = dataContractSet.dataContractSurrogate;
             this.referencedTypes = dataContractSet.referencedTypes;
@@ -51,7 +60,9 @@ namespace System.Runtime.Serialization
 
             if (dataContractSet.processedContracts != null)
             {
-                foreach (KeyValuePair<DataContract, object> pair in dataContractSet.processedContracts)
+                foreach (
+                    KeyValuePair<DataContract, object> pair in dataContractSet.processedContracts
+                )
                 {
                     ProcessedContracts.Add(pair.Key, pair.Value);
                 }
@@ -108,7 +119,11 @@ namespace System.Runtime.Serialization
         internal static void EnsureTypeNotGeneric(Type type)
         {
             if (type.ContainsGenericParameters)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.GenericTypeNotExportable, type)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.GetString(SR.GenericTypeNotExportable, type)
+                    )
+                );
         }
 
         void Add(DataContract dataContract)
@@ -130,12 +145,48 @@ namespace System.Runtime.Serialization
             {
                 if (!dataContractInSet.Equals(dataContract))
                 {
-                    if (dataContract.UnderlyingType == null || dataContractInSet.UnderlyingType == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.DupContractInDataContractSet, dataContract.StableName.Name, dataContract.StableName.Namespace)));
+                    if (
+                        dataContract.UnderlyingType == null
+                        || dataContractInSet.UnderlyingType == null
+                    )
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.DupContractInDataContractSet,
+                                    dataContract.StableName.Name,
+                                    dataContract.StableName.Namespace
+                                )
+                            )
+                        );
                     else
                     {
-                        bool typeNamesEqual = (DataContract.GetClrTypeFullName(dataContract.UnderlyingType) == DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType));
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.DupTypeContractInDataContractSet, (typeNamesEqual ? dataContract.UnderlyingType.AssemblyQualifiedName : DataContract.GetClrTypeFullName(dataContract.UnderlyingType)), (typeNamesEqual ? dataContractInSet.UnderlyingType.AssemblyQualifiedName : DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType)), dataContract.StableName.Name, dataContract.StableName.Namespace)));
+                        bool typeNamesEqual = (
+                            DataContract.GetClrTypeFullName(dataContract.UnderlyingType)
+                            == DataContract.GetClrTypeFullName(dataContractInSet.UnderlyingType)
+                        );
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.DupTypeContractInDataContractSet,
+                                    (
+                                        typeNamesEqual
+                                            ? dataContract.UnderlyingType.AssemblyQualifiedName
+                                            : DataContract.GetClrTypeFullName(
+                                                dataContract.UnderlyingType
+                                            )
+                                    ),
+                                    (
+                                        typeNamesEqual
+                                            ? dataContractInSet.UnderlyingType.AssemblyQualifiedName
+                                            : DataContract.GetClrTypeFullName(
+                                                dataContractInSet.UnderlyingType
+                                            )
+                                    ),
+                                    dataContract.StableName.Name,
+                                    dataContract.StableName.Namespace
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -175,9 +226,10 @@ namespace System.Runtime.Serialization
                         if (dataContractSurrogate != null && dataMember.MemberInfo != null)
                         {
                             object customData = DataContractSurrogateCaller.GetCustomDataToExport(
-                                                   dataContractSurrogate,
-                                                   dataMember.MemberInfo,
-                                                   memberDataContract.UnderlyingType);
+                                dataContractSurrogate,
+                                dataMember.MemberInfo,
+                                memberDataContract.UnderlyingType
+                            );
                             if (customData != null)
                                 SurrogateDataTable.Add(dataMember, customData);
                         }
@@ -192,7 +244,8 @@ namespace System.Runtime.Serialization
         {
             if (collectionDataContract.IsDictionary)
             {
-                ClassDataContract keyValueContract = collectionDataContract.ItemContract as ClassDataContract;
+                ClassDataContract keyValueContract =
+                    collectionDataContract.ItemContract as ClassDataContract;
                 AddClassDataContract(keyValueContract);
             }
             else
@@ -224,7 +277,10 @@ namespace System.Runtime.Serialization
         {
             if (dataContractSurrogate != null)
             {
-                Type dcType = DataContractSurrogateCaller.GetDataContractType(dataContractSurrogate, clrType);
+                Type dcType = DataContractSurrogateCaller.GetDataContractType(
+                    dataContractSurrogate,
+                    clrType
+                );
 
                 //if (clrType.IsValueType != dcType.IsValueType)
                 //    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)));
@@ -240,14 +296,20 @@ namespace System.Runtime.Serialization
             DataContract dataContract = DataContract.GetBuiltInDataContract(clrType);
             if (dataContract != null)
                 return dataContract;
-            Type dcType = DataContractSurrogateCaller.GetDataContractType(dataContractSurrogate, clrType);
+            Type dcType = DataContractSurrogateCaller.GetDataContractType(
+                dataContractSurrogate,
+                clrType
+            );
             //if (clrType.IsValueType != dcType.IsValueType)
             //    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.ValueTypeMismatchInSurrogatedType, dcType, clrType)));
             dataContract = DataContract.GetDataContract(dcType);
             if (!SurrogateDataTable.Contains(dataContract))
             {
                 object customData = DataContractSurrogateCaller.GetCustomDataToExport(
-                                      dataContractSurrogate, clrType, dcType);
+                    dataContractSurrogate,
+                    clrType,
+                    dcType
+                );
                 if (customData != null)
                     SurrogateDataTable.Add(dataContract, customData);
             }
@@ -263,14 +325,32 @@ namespace System.Runtime.Serialization
                 {
                     if (dataContractSurrogate != null)
                     {
-                        Type dcType = DataContractSurrogateCaller.GetDataContractType(dataContractSurrogate, dataMemberType);
+                        Type dcType = DataContractSurrogateCaller.GetDataContractType(
+                            dataContractSurrogate,
+                            dataMemberType
+                        );
                         if (dcType != dataMemberType)
                         {
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(SR.GetString(SR.SurrogatesWithGetOnlyCollectionsNotSupported,
-                                DataContract.GetClrTypeFullName(dataMemberType), DataContract.GetClrTypeFullName(dataMember.MemberInfo.DeclaringType), dataMember.MemberInfo.Name)));
+                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidDataContractException(
+                                    SR.GetString(
+                                        SR.SurrogatesWithGetOnlyCollectionsNotSupported,
+                                        DataContract.GetClrTypeFullName(dataMemberType),
+                                        DataContract.GetClrTypeFullName(
+                                            dataMember.MemberInfo.DeclaringType
+                                        ),
+                                        dataMember.MemberInfo.Name
+                                    )
+                                )
+                            );
                         }
                     }
-                    return DataContract.GetGetOnlyCollectionDataContract(DataContract.GetId(dataMemberType.TypeHandle), dataMemberType.TypeHandle, dataMemberType, SerializationMode.SharedContract);
+                    return DataContract.GetGetOnlyCollectionDataContract(
+                        DataContract.GetId(dataMemberType.TypeHandle),
+                        dataMemberType.TypeHandle,
+                        dataMemberType,
+                        SerializationMode.SharedContract
+                    );
                 }
                 else
                 {
@@ -301,7 +381,10 @@ namespace System.Runtime.Serialization
         {
             get
             {
-                DataContract dataContract = DataContract.GetBuiltInDataContract(key.Name, key.Namespace);
+                DataContract dataContract = DataContract.GetBuiltInDataContract(
+                    key.Name,
+                    key.Namespace
+                );
                 if (dataContract == null)
                 {
                     Contracts.TryGetValue(key, out dataContract);
@@ -351,6 +434,7 @@ namespace System.Runtime.Serialization
             ProcessedContracts.Add(dataContract, info);
         }
 #endif
+
         Dictionary<XmlQualifiedName, object> GetReferencedTypes()
         {
             if (referencedTypesDictionary == null)
@@ -358,13 +442,20 @@ namespace System.Runtime.Serialization
                 referencedTypesDictionary = new Dictionary<XmlQualifiedName, object>();
                 //Always include Nullable as referenced type
                 //Do not allow surrogating Nullable<T>
-                referencedTypesDictionary.Add(DataContract.GetStableName(Globals.TypeOfNullable), Globals.TypeOfNullable);
+                referencedTypesDictionary.Add(
+                    DataContract.GetStableName(Globals.TypeOfNullable),
+                    Globals.TypeOfNullable
+                );
                 if (this.referencedTypes != null)
                 {
                     foreach (Type type in this.referencedTypes)
                     {
                         if (type == null)
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ReferencedTypesCannotContainNull)));
+                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.ReferencedTypesCannotContainNull)
+                                )
+                            );
 
                         AddReferencedType(referencedTypesDictionary, type);
                     }
@@ -383,13 +474,25 @@ namespace System.Runtime.Serialization
                     foreach (Type type in this.referencedCollectionTypes)
                     {
                         if (type == null)
-                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ReferencedCollectionTypesCannotContainNull)));
+                            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(SR.ReferencedCollectionTypesCannotContainNull)
+                                )
+                            );
                         AddReferencedType(referencedCollectionTypesDictionary, type);
                     }
                 }
-                XmlQualifiedName genericDictionaryName = DataContract.GetStableName(Globals.TypeOfDictionaryGeneric);
-                if (!referencedCollectionTypesDictionary.ContainsKey(genericDictionaryName) && GetReferencedTypes().ContainsKey(genericDictionaryName))
-                    AddReferencedType(referencedCollectionTypesDictionary, Globals.TypeOfDictionaryGeneric);
+                XmlQualifiedName genericDictionaryName = DataContract.GetStableName(
+                    Globals.TypeOfDictionaryGeneric
+                );
+                if (
+                    !referencedCollectionTypesDictionary.ContainsKey(genericDictionaryName)
+                    && GetReferencedTypes().ContainsKey(genericDictionaryName)
+                )
+                    AddReferencedType(
+                        referencedCollectionTypesDictionary,
+                        Globals.TypeOfDictionaryGeneric
+                    );
             }
             return referencedCollectionTypesDictionary;
         }
@@ -440,20 +543,48 @@ namespace System.Runtime.Serialization
                     referencedTypes.Add(stableName, type);
             }
         }
-        internal bool TryGetReferencedType(XmlQualifiedName stableName, DataContract dataContract, out Type type)
+
+        internal bool TryGetReferencedType(
+            XmlQualifiedName stableName,
+            DataContract dataContract,
+            out Type type
+        )
         {
-            return TryGetReferencedType(stableName, dataContract, false/*useReferencedCollectionTypes*/, out type);
+            return TryGetReferencedType(
+                stableName,
+                dataContract,
+                false /*useReferencedCollectionTypes*/
+                ,
+                out type
+            );
         }
 
-        internal bool TryGetReferencedCollectionType(XmlQualifiedName stableName, DataContract dataContract, out Type type)
+        internal bool TryGetReferencedCollectionType(
+            XmlQualifiedName stableName,
+            DataContract dataContract,
+            out Type type
+        )
         {
-            return TryGetReferencedType(stableName, dataContract, true/*useReferencedCollectionTypes*/, out type);
+            return TryGetReferencedType(
+                stableName,
+                dataContract,
+                true /*useReferencedCollectionTypes*/
+                ,
+                out type
+            );
         }
 
-        bool TryGetReferencedType(XmlQualifiedName stableName, DataContract dataContract, bool useReferencedCollectionTypes, out Type type)
+        bool TryGetReferencedType(
+            XmlQualifiedName stableName,
+            DataContract dataContract,
+            bool useReferencedCollectionTypes,
+            out Type type
+        )
         {
             object value;
-            Dictionary<XmlQualifiedName, object> referencedTypes = useReferencedCollectionTypes ? GetReferencedCollectionTypes() : GetReferencedTypes();
+            Dictionary<XmlQualifiedName, object> referencedTypes = useReferencedCollectionTypes
+                ? GetReferencedCollectionTypes()
+                : GetReferencedTypes();
             if (referencedTypes.TryGetValue(stableName, out value))
             {
                 type = value as Type;
@@ -470,26 +601,56 @@ namespace System.Runtime.Serialization
                         Type conflictingType = types[i];
                         if (!containsGenericType)
                             containsGenericType = conflictingType.IsGenericTypeDefinition;
-                        errorMessage.AppendFormat("{0}\"{1}\" ", Environment.NewLine, conflictingType.AssemblyQualifiedName);
+                        errorMessage.AppendFormat(
+                            "{0}\"{1}\" ",
+                            Environment.NewLine,
+                            conflictingType.AssemblyQualifiedName
+                        );
                         if (dataContract != null)
                         {
                             DataContract other = this.GetDataContract(conflictingType);
-                            errorMessage.Append(SR.GetString(((other != null && other.Equals(dataContract)) ? SR.ReferencedTypeMatchingMessage : SR.ReferencedTypeNotMatchingMessage)));
+                            errorMessage.Append(
+                                SR.GetString(
+                                    (
+                                        (other != null && other.Equals(dataContract))
+                                            ? SR.ReferencedTypeMatchingMessage
+                                            : SR.ReferencedTypeNotMatchingMessage
+                                    )
+                                )
+                            );
                         }
                     }
                     if (containsGenericType)
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                            (useReferencedCollectionTypes ? SR.AmbiguousReferencedCollectionTypes1 : SR.AmbiguousReferencedTypes1),
-                            errorMessage.ToString())));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    (
+                                        useReferencedCollectionTypes
+                                            ? SR.AmbiguousReferencedCollectionTypes1
+                                            : SR.AmbiguousReferencedTypes1
+                                    ),
+                                    errorMessage.ToString()
+                                )
+                            )
+                        );
                     }
                     else
                     {
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                            (useReferencedCollectionTypes ? SR.AmbiguousReferencedCollectionTypes3 : SR.AmbiguousReferencedTypes3),
-                            XmlConvert.DecodeName(stableName.Name),
-                            stableName.Namespace,
-                            errorMessage.ToString())));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    (
+                                        useReferencedCollectionTypes
+                                            ? SR.AmbiguousReferencedCollectionTypes3
+                                            : SR.AmbiguousReferencedTypes3
+                                    ),
+                                    XmlConvert.DecodeName(stableName.Name),
+                                    stableName.Namespace,
+                                    errorMessage.ToString()
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -503,11 +664,16 @@ namespace System.Runtime.Serialization
 
             try
             {
-                return (type.IsSerializable ||
-                        type.IsDefined(Globals.TypeOfDataContractAttribute, false) ||
-                        (Globals.TypeOfIXmlSerializable.IsAssignableFrom(type) && !type.IsGenericTypeDefinition) ||
-                        CollectionDataContract.IsCollection(type, out itemType) ||
-                        ClassDataContract.IsNonAttributedTypeValidForSerialization(type));
+                return (
+                    type.IsSerializable
+                    || type.IsDefined(Globals.TypeOfDataContractAttribute, false)
+                    || (
+                        Globals.TypeOfIXmlSerializable.IsAssignableFrom(type)
+                        && !type.IsGenericTypeDefinition
+                    )
+                    || CollectionDataContract.IsCollection(type, out itemType)
+                    || ClassDataContract.IsNonAttributedTypeValidForSerialization(type)
+                );
             }
             catch (Exception ex)
             {
@@ -520,11 +686,8 @@ namespace System.Runtime.Serialization
                     throw;
                 }
             }
-            
+
             return false;
         }
     }
 }
-
-
-

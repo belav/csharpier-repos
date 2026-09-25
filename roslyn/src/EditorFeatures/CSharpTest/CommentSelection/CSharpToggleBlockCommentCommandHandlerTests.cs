@@ -25,8 +25,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CommentMarkerStringBeforeSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -37,8 +36,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -56,8 +54,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_DirectiveWithCommentInsideSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -70,8 +67,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -91,8 +87,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_MarkerInsideSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -103,8 +98,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -122,8 +116,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CloseCommentMarkerStringInSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -134,8 +127,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -153,8 +145,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void AddComment_CommentMarkerStringAfterSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -165,8 +156,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -184,8 +174,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CommentMarkerStringNearSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -197,8 +186,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -217,8 +205,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         [WpfFact]
         public void RemoveComment_CommentMarkerStringInSelection()
         {
-            var markup =
-                """
+            var markup = """
                 class C
                 {
                     void M()
@@ -227,8 +214,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
                     }
                 }
                 """;
-            var expected =
-                """
+            var expected = """
                 class C
                 {
                     void M()
@@ -241,13 +227,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
             ToggleComment(markup, expected);
         }
 
-        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(TestWorkspace workspace)
+        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(
+            TestWorkspace workspace
+        )
         {
-            return (AbstractCommentSelectionBase<ValueTuple>)workspace.ExportProvider.GetExportedValues<ICommandHandler>()
-                .First(export => typeof(CSharpToggleBlockCommentCommandHandler).Equals(export.GetType()));
+            return (AbstractCommentSelectionBase<ValueTuple>)
+                workspace
+                    .ExportProvider.GetExportedValues<ICommandHandler>()
+                    .First(export =>
+                        typeof(CSharpToggleBlockCommentCommandHandler).Equals(export.GetType())
+                    );
         }
 
-        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition)
-            => TestWorkspace.CreateCSharp(markup, composition: composition);
+        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition) =>
+            TestWorkspace.CreateCSharp(markup, composition: composition);
     }
 }

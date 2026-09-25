@@ -3,18 +3,17 @@
 //-----------------------------------------------------------------------------
 
 using System;
-
+using System.Collections.Generic;
+using System.Globalization;
+using System.IdentityModel.Selectors;
+using System.Net;
 using System.ServiceModel;
 using System.Xml;
-using System.Collections.Generic;
-using System.IdentityModel.Selectors;
-using System.Globalization;
-using System.Net;
-
 
 namespace System.ServiceModel.Security.Tokens
 {
-    public sealed class InitiatorServiceModelSecurityTokenRequirement : ServiceModelSecurityTokenRequirement 
+    public sealed class InitiatorServiceModelSecurityTokenRequirement
+        : ServiceModelSecurityTokenRequirement
     {
         WebHeaderCollection webHeaderCollection;
 
@@ -26,38 +25,20 @@ namespace System.ServiceModel.Security.Tokens
 
         public EndpointAddress TargetAddress
         {
-            get
-            {
-                return GetPropertyOrDefault<EndpointAddress>(TargetAddressProperty, null);
-            }
-            set
-            {
-                this.Properties[TargetAddressProperty] = value;
-            }
+            get { return GetPropertyOrDefault<EndpointAddress>(TargetAddressProperty, null); }
+            set { this.Properties[TargetAddressProperty] = value; }
         }
 
         public Uri Via
         {
-            get
-            {
-                return GetPropertyOrDefault<Uri>(ViaProperty, null);
-            }
-            set
-            {
-                this.Properties[ViaProperty] = value;
-            }
+            get { return GetPropertyOrDefault<Uri>(ViaProperty, null); }
+            set { this.Properties[ViaProperty] = value; }
         }
 
         internal bool IsOutOfBandToken
         {
-            get
-            {
-                return GetPropertyOrDefault<bool>(IsOutOfBandTokenProperty, false);
-            }
-            set
-            {
-                this.Properties[IsOutOfBandTokenProperty] = value;
-            }
+            get { return GetPropertyOrDefault<bool>(IsOutOfBandTokenProperty, false); }
+            set { this.Properties[IsOutOfBandTokenProperty] = value; }
         }
 
         internal bool PreferSslCertificateAuthenticator
@@ -66,22 +47,13 @@ namespace System.ServiceModel.Security.Tokens
             {
                 return GetPropertyOrDefault<bool>(PreferSslCertificateAuthenticatorProperty, false);
             }
-            set
-            {
-                this.Properties[PreferSslCertificateAuthenticatorProperty] = value;
-            }
+            set { this.Properties[PreferSslCertificateAuthenticatorProperty] = value; }
         }
 
         internal WebHeaderCollection WebHeaders
         {
-            get
-            {
-                return this.webHeaderCollection;
-            }
-            set
-            {
-                this.webHeaderCollection = value;
-            }
+            get { return this.webHeaderCollection; }
+            set { this.webHeaderCollection = value; }
         }
 
         public override string ToString()

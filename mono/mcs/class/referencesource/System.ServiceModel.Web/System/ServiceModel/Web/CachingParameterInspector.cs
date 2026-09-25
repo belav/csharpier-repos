@@ -8,6 +8,7 @@ using System.Runtime;
 using System.Runtime.Serialization;
 using System.Security;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Diagnostics;
 using System.ServiceModel.Dispatcher;
@@ -15,7 +16,6 @@ using System.Web;
 using System.Web.Caching;
 using System.Web.Configuration;
 using System.Web.UI;
-using System.ServiceModel.Activation;
 
 namespace System.ServiceModel.Web
 {
@@ -32,26 +32,41 @@ namespace System.ServiceModel.Web
 
         SqlDependencyInfo[] cacheDependencyInfoArray;
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "The config object never leaves the CachingParameterInspector.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "The config object never leaves the CachingParameterInspector."
+        )]
         [SecuritySafeCritical]
         public CachingParameterInspector(string cacheProfileName)
         {
             if (string.IsNullOrEmpty(cacheProfileName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.CacheProfileNameNullOrEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR2.CacheProfileNameNullOrEmpty)
+                );
             }
 
-            OutputCacheSettingsSection cacheSettings = AspNetEnvironment.Current.UnsafeGetConfigurationSection("system.web/caching/outputCacheSettings") as OutputCacheSettingsSection;
+            OutputCacheSettingsSection cacheSettings =
+                AspNetEnvironment.Current.UnsafeGetConfigurationSection(
+                    "system.web/caching/outputCacheSettings"
+                ) as OutputCacheSettingsSection;
             if (cacheSettings == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
+                    )
+                );
             }
 
             this.cacheProfile = cacheSettings.OutputCacheProfiles[cacheProfileName];
             if (this.cacheProfile == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.CacheProfileNotConfigured, cacheProfileName)
+                    )
+                );
             }
 
             // Validate the cacheProfile
@@ -60,17 +75,41 @@ namespace System.ServiceModel.Web
                 // Duration must be set; Duration default value is -1
                 if (this.cacheProfile.Duration == -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.CacheProfileValueMissing, this.cacheProfile.Name, "Duration")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.CacheProfileValueMissing,
+                                this.cacheProfile.Name,
+                                "Duration"
+                            )
+                        )
+                    );
                 }
                 if (this.cacheProfile.VaryByParam == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.CacheProfileValueMissing, this.cacheProfile.Name, "VaryByParam")));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.CacheProfileValueMissing,
+                                this.cacheProfile.Name,
+                                "VaryByParam"
+                            )
+                        )
+                    );
                 }
             }
 
-            if (string.Equals(this.cacheProfile.SqlDependency, "CommandNotification", StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    this.cacheProfile.SqlDependency,
+                    "CommandNotification",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.CommandNotificationSqlDependencyNotSupported));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR2.CommandNotificationSqlDependencyNotSupported)
+                );
             }
 
             if (!string.IsNullOrEmpty(this.cacheProfile.SqlDependency))
@@ -79,22 +118,42 @@ namespace System.ServiceModel.Web
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "The config object never leaves the CachingParameterInspector.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "The config object never leaves the CachingParameterInspector."
+        )]
         [SecuritySafeCritical]
-        public void AfterCall(string operationName, object[] outputs, object returnValue, object correlationState)
+        public void AfterCall(
+            string operationName,
+            object[] outputs,
+            object returnValue,
+            object correlationState
+        )
         {
-            if (this.cacheProfile != null &&
-                this.cacheProfile.Enabled &&
-                OperationContext.Current.IncomingMessage.Version == MessageVersion.None)
+            if (
+                this.cacheProfile != null
+                && this.cacheProfile.Enabled
+                && OperationContext.Current.IncomingMessage.Version == MessageVersion.None
+            )
             {
                 if (DiagnosticUtility.ShouldTraceWarning && !IsAnonymous())
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.AddingAuthenticatedResponseToOutputCache, SR2.GetString(SR2.TraceCodeAddingAuthenticatedResponseToOutputCache, operationName));
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.AddingAuthenticatedResponseToOutputCache,
+                        SR2.GetString(
+                            SR2.TraceCodeAddingAuthenticatedResponseToOutputCache,
+                            operationName
+                        )
+                    );
                 }
                 else if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.AddingResponseToOutputCache, SR2.GetString(SR2.TraceCodeAddingResponseToOutputCache, operationName));
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.AddingResponseToOutputCache,
+                        SR2.GetString(SR2.TraceCodeAddingResponseToOutputCache, operationName)
+                    );
                 }
 
                 SetCacheFromCacheProfile();
@@ -127,7 +186,7 @@ namespace System.ServiceModel.Web
 
         static SqlDependencyInfo[] ParseSqlDependencyString(string sqlDependencyString)
         {
-            // The code for this method was taken from private code in 
+            // The code for this method was taken from private code in
             // System.Web.SqlCacheDependency.ParseSql7OutputCacheDependency.
             // Alter if only absolutely necessary since we want to reproduce the same ASP.NET caching behavior.
 
@@ -139,33 +198,48 @@ namespace System.ServiceModel.Web
 
             try
             {
-                for (int currentIndex = 0; currentIndex < (sqlDependencyString.Length + 1); currentIndex++)
+                for (
+                    int currentIndex = 0;
+                    currentIndex < (sqlDependencyString.Length + 1);
+                    currentIndex++
+                )
                 {
                     if (escapeSequenceFlag)
                     {
                         escapeSequenceFlag = false;
                     }
-                    else if ((currentIndex != sqlDependencyString.Length) &&
-                             (sqlDependencyString[currentIndex] == escapeChar))
+                    else if (
+                        (currentIndex != sqlDependencyString.Length)
+                        && (sqlDependencyString[currentIndex] == escapeChar)
+                    )
                     {
                         escapeSequenceFlag = true;
                     }
                     else
                     {
                         int subStringLength;
-                        if ((currentIndex == sqlDependencyString.Length) ||
-                            (sqlDependencyString[currentIndex] == seperatorChar))
+                        if (
+                            (currentIndex == sqlDependencyString.Length)
+                            || (sqlDependencyString[currentIndex] == seperatorChar)
+                        )
                         {
                             if (databaseName == null)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(invalidSqlDependencyString);
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                                    invalidSqlDependencyString
+                                );
                             }
                             subStringLength = currentIndex - startIndexForTableName;
                             if (subStringLength == 0)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(invalidSqlDependencyString);
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                                    invalidSqlDependencyString
+                                );
                             }
-                            string tableName = sqlDependencyString.Substring(startIndexForTableName, subStringLength);
+                            string tableName = sqlDependencyString.Substring(
+                                startIndexForTableName,
+                                subStringLength
+                            );
                             SqlDependencyInfo info = new SqlDependencyInfo();
                             info.Database = VerifyAndRemoveEscapeCharacters(databaseName);
                             info.Table = VerifyAndRemoveEscapeCharacters(tableName);
@@ -181,14 +255,21 @@ namespace System.ServiceModel.Web
                         {
                             if (databaseName != null)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(invalidSqlDependencyString);
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                                    invalidSqlDependencyString
+                                );
                             }
                             subStringLength = currentIndex - startIndexForDatabaseName;
                             if (subStringLength == 0)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(invalidSqlDependencyString);
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                                    invalidSqlDependencyString
+                                );
                             }
-                            databaseName = sqlDependencyString.Substring(startIndexForDatabaseName, subStringLength);
+                            databaseName = sqlDependencyString.Substring(
+                                startIndexForDatabaseName,
+                                subStringLength
+                            );
                             startIndexForTableName = currentIndex + 1;
                         }
                     }
@@ -196,18 +277,26 @@ namespace System.ServiceModel.Web
             }
             catch (ArgumentException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.CacheProfileSqlDependencyIsInvalid, sqlDependencyString)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.CacheProfileSqlDependencyIsInvalid, sqlDependencyString)
+                    )
+                );
             }
             if (dependencyList.Count == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.CacheProfileSqlDependencyIsInvalid, sqlDependencyString)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.CacheProfileSqlDependencyIsInvalid, sqlDependencyString)
+                    )
+                );
             }
             return dependencyList.ToArray();
         }
 
         static string VerifyAndRemoveEscapeCharacters(string str)
         {
-            // The code for this method was taken from private code in 
+            // The code for this method was taken from private code in
             // System.Web.SqlCacheDependency.VerifyAndRemoveEscapeCharacters.
             // Alter if only absolutely necessary since we want to reproduce the same ASP.NET caching behavior.
 
@@ -216,9 +305,12 @@ namespace System.ServiceModel.Web
             {
                 if (escapeSequenceFlag)
                 {
-                    if (((str[currentIndex] != escapeChar) &&
-                         (str[currentIndex] != tableDbSeperatorChar)) &&
-                         (str[currentIndex] != seperatorChar))
+                    if (
+                        (
+                            (str[currentIndex] != escapeChar)
+                            && (str[currentIndex] != tableDbSeperatorChar)
+                        ) && (str[currentIndex] != seperatorChar)
+                    )
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(str);
                     }
@@ -242,26 +334,38 @@ namespace System.ServiceModel.Web
         {
             if (this.cacheDependencyInfoArray == null)
             {
-                this.cacheDependencyInfoArray = CachingParameterInspector.ParseSqlDependencyString(sqlDependency);
+                this.cacheDependencyInfoArray = CachingParameterInspector.ParseSqlDependencyString(
+                    sqlDependency
+                );
             }
 
             // cacheDependencyInfoArray will never have length = 0
 
             if (this.cacheDependencyInfoArray.Length == 1)
             {
-                return new SqlCacheDependency(this.cacheDependencyInfoArray[0].Database, this.cacheDependencyInfoArray[0].Table);
+                return new SqlCacheDependency(
+                    this.cacheDependencyInfoArray[0].Database,
+                    this.cacheDependencyInfoArray[0].Table
+                );
             }
 
             AggregateCacheDependency cacheDependency = new AggregateCacheDependency();
             foreach (SqlDependencyInfo dependencyInfo in this.cacheDependencyInfoArray)
             {
-                cacheDependency.Add(new CacheDependency[] { new SqlCacheDependency(dependencyInfo.Database, dependencyInfo.Table) });
+                cacheDependency.Add(
+                    new CacheDependency[]
+                    {
+                        new SqlCacheDependency(dependencyInfo.Database, dependencyInfo.Table),
+                    }
+                );
             }
             return cacheDependency;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses config object to set properties of the HttpCachePolicy.",
-            Safe = "The config object itself doesn't leak.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses config object to set properties of the HttpCachePolicy.",
+            Safe = "The config object itself doesn't leak."
+        )]
         [SecuritySafeCritical]
         void SetCacheFromCacheProfile()
         {
@@ -302,13 +406,22 @@ namespace System.ServiceModel.Web
                         cache.SetCacheability(HttpCacheability.ServerAndPrivate);
                         break;
                     default:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.CacheProfileLocationNotSupported, this.cacheProfile.Location)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR2.GetString(
+                                    SR2.CacheProfileLocationNotSupported,
+                                    this.cacheProfile.Location
+                                )
+                            )
+                        );
                 }
             }
 
             if (this.cacheProfile.Location != OutputCacheLocation.None)
             {
-                cache.SetExpires(HttpContext.Current.Timestamp.AddSeconds((double)this.cacheProfile.Duration));
+                cache.SetExpires(
+                    HttpContext.Current.Timestamp.AddSeconds((double)this.cacheProfile.Duration)
+                );
                 cache.SetMaxAge(new TimeSpan(0, 0, this.cacheProfile.Duration));
                 cache.SetValidUntilExpires(true);
                 cache.SetLastModified(HttpContext.Current.Timestamp);
@@ -317,7 +430,11 @@ namespace System.ServiceModel.Web
                 {
                     if (!string.IsNullOrEmpty(this.cacheProfile.VaryByContentEncoding))
                     {
-                        foreach (string contentEncoding in this.cacheProfile.VaryByContentEncoding.Split(seperatorChar))
+                        foreach (
+                            string contentEncoding in this.cacheProfile.VaryByContentEncoding.Split(
+                                seperatorChar
+                            )
+                        )
                         {
                             cache.VaryByContentEncodings[contentEncoding.Trim()] = true;
                         }
@@ -325,7 +442,9 @@ namespace System.ServiceModel.Web
 
                     if (!string.IsNullOrEmpty(this.cacheProfile.VaryByHeader))
                     {
-                        foreach (string header in this.cacheProfile.VaryByHeader.Split(seperatorChar))
+                        foreach (
+                            string header in this.cacheProfile.VaryByHeader.Split(seperatorChar)
+                        )
                         {
                             cache.VaryByHeaders[header.Trim()] = true;
                         }
@@ -340,7 +459,9 @@ namespace System.ServiceModel.Web
 
                         if (!string.IsNullOrEmpty(this.cacheProfile.VaryByParam))
                         {
-                            foreach (string parameter in cacheProfile.VaryByParam.Split(seperatorChar))
+                            foreach (
+                                string parameter in cacheProfile.VaryByParam.Split(seperatorChar)
+                            )
                             {
                                 cache.VaryByParams[parameter.Trim()] = true;
                             }
@@ -348,8 +469,12 @@ namespace System.ServiceModel.Web
 
                         if (!string.IsNullOrEmpty(this.cacheProfile.SqlDependency))
                         {
-                            CacheDependency cacheDependency = this.CreateSingleCacheDependency(cacheProfile.SqlDependency);
-                            HttpContext.Current.Response.AddCacheDependency(new CacheDependency[] { cacheDependency });
+                            CacheDependency cacheDependency = this.CreateSingleCacheDependency(
+                                cacheProfile.SqlDependency
+                            );
+                            HttpContext.Current.Response.AddCacheDependency(
+                                new CacheDependency[] { cacheDependency }
+                            );
                         }
                     }
                 }
@@ -361,6 +486,5 @@ namespace System.ServiceModel.Web
             public string Database;
             public string Table;
         }
-
     }
 }

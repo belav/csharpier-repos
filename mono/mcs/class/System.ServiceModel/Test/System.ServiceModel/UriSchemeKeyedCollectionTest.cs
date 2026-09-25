@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,52 +31,59 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class UriSchemeKeyedCollectionTest
-	{
-		[Test]
-		public void Ctor ()
-		{
-			UriSchemeKeyedCollection u = new UriSchemeKeyedCollection ( new Uri [] { 
-				new Uri ("http://localhost", UriKind.Absolute),
-				new Uri ("ftp://someotherhost", UriKind.Absolute) } );
-			Assert.AreEqual (u.Count, 2, "#1");
-		}
+    [TestFixture]
+    public class UriSchemeKeyedCollectionTest
+    {
+        [Test]
+        public void Ctor()
+        {
+            UriSchemeKeyedCollection u = new UriSchemeKeyedCollection(
+                new Uri[]
+                {
+                    new Uri("http://localhost", UriKind.Absolute),
+                    new Uri("ftp://someotherhost", UriKind.Absolute),
+                }
+            );
+            Assert.AreEqual(u.Count, 2, "#1");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CtorNull ()
-		{
-			new UriSchemeKeyedCollection (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CtorNull()
+        {
+            new UriSchemeKeyedCollection(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CtorRelativeBaseAddress ()
-		{
-			/* Only an absolute URI can be a base address */
-			new UriSchemeKeyedCollection (
-					new Uri [] { new Uri ("rel", UriKind.Relative) });
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CtorRelativeBaseAddress()
+        {
+            /* Only an absolute URI can be a base address */
+            new UriSchemeKeyedCollection(new Uri[] { new Uri("rel", UriKind.Relative) });
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CtorMultipleAddressPerScheme ()
-		{
-			/* Collection can have only one URI per scheme */
-			new UriSchemeKeyedCollection ( new Uri [] { 
-					new Uri ("http://localhost", UriKind.Absolute),
-					new Uri ("http://someotherhost", UriKind.Absolute) } );
-		}
-		
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CtorAddressWithQuery ()
-		{
-			/* Base address cannot contain query string */
-			new UriSchemeKeyedCollection ( new Uri [] { 
-					new Uri ("http://localhost/echo?a=5", UriKind.Absolute) });
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CtorMultipleAddressPerScheme()
+        {
+            /* Collection can have only one URI per scheme */
+            new UriSchemeKeyedCollection(
+                new Uri[]
+                {
+                    new Uri("http://localhost", UriKind.Absolute),
+                    new Uri("http://someotherhost", UriKind.Absolute),
+                }
+            );
+        }
 
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CtorAddressWithQuery()
+        {
+            /* Base address cannot contain query string */
+            new UriSchemeKeyedCollection(
+                new Uri[] { new Uri("http://localhost/echo?a=5", UriKind.Absolute) }
+            );
+        }
+    }
 }

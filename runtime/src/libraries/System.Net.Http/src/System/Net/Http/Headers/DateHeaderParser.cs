@@ -13,9 +13,7 @@ namespace System.Net.Http.Headers
         internal static readonly DateHeaderParser Parser = new DateHeaderParser();
 
         private DateHeaderParser()
-            : base(false)
-        {
-        }
+            : base(false) { }
 
         public override string ToString(object value)
         {
@@ -24,7 +22,12 @@ namespace System.Net.Http.Headers
             return ((DateTimeOffset)value).ToString("r");
         }
 
-        public override bool TryParseValue([NotNullWhen(true)] string? value, object? storeValue, ref int index, [NotNullWhen(true)] out object? parsedValue)
+        public override bool TryParseValue(
+            [NotNullWhen(true)] string? value,
+            object? storeValue,
+            ref int index,
+            [NotNullWhen(true)] out object? parsedValue
+        )
         {
             parsedValue = null;
 

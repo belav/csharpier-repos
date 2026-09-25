@@ -4,28 +4,38 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace Microsoft.Win32 {
-    using System.Runtime.InteropServices;
-    using System.Threading;
+namespace Microsoft.Win32
+{
     using System;
-    using System.Security.Permissions;
     using System.Collections;
-    using System.IO;
-    using System.Text;
-    using Microsoft.Win32.SafeHandles;
     using System.Configuration;
+    using System.IO;
+    using System.Runtime.InteropServices;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32.SafeHandles;
 
-    [
-    System.Security.SuppressUnmanagedCodeSecurityAttribute()
-    ]
-    internal static class UnsafeNativeMethods {
-        [DllImport(ExternDll.Kernel32, SetLastError=true, CharSet=CharSet.Auto, BestFitMapping=false)]
-        internal static extern bool GetFileAttributesEx(string name, int fileInfoLevel, out WIN32_FILE_ATTRIBUTE_DATA data);
+    [System.Security.SuppressUnmanagedCodeSecurityAttribute()]
+    internal static class UnsafeNativeMethods
+    {
+        [DllImport(
+            ExternDll.Kernel32,
+            SetLastError = true,
+            CharSet = CharSet.Auto,
+            BestFitMapping = false
+        )]
+        internal static extern bool GetFileAttributesEx(
+            string name,
+            int fileInfoLevel,
+            out WIN32_FILE_ATTRIBUTE_DATA data
+        );
 
         internal const int GetFileExInfoStandard = 0;
 
         [StructLayout(LayoutKind.Sequential)]
-        internal struct WIN32_FILE_ATTRIBUTE_DATA {
+        internal struct WIN32_FILE_ATTRIBUTE_DATA
+        {
             internal int fileAttributes;
             internal uint ftCreationTimeLow;
             internal uint ftCreationTimeHigh;
@@ -37,30 +47,60 @@ namespace Microsoft.Win32 {
             internal uint fileSizeLow;
         }
 
-        [DllImport(ExternDll.Kernel32, CharSet=CharSet.Auto, BestFitMapping=false)]
-        internal static extern int GetModuleFileName(HandleRef hModule, StringBuilder buffer, int length);
+        [DllImport(ExternDll.Kernel32, CharSet = CharSet.Auto, BestFitMapping = false)]
+        internal static extern int GetModuleFileName(
+            HandleRef hModule,
+            StringBuilder buffer,
+            int length
+        );
 
 #if !FEATURE_PAL
-        [DllImport(ExternDll.Crypt32, SetLastError=true, CharSet=CharSet.Unicode)]
-        internal extern static bool CryptProtectData(ref DATA_BLOB inputData, string description, ref DATA_BLOB entropy, IntPtr pReserved, ref CRYPTPROTECT_PROMPTSTRUCT promptStruct, UInt32 flags, ref DATA_BLOB outputData);
+        [DllImport(ExternDll.Crypt32, SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern bool CryptProtectData(
+            ref DATA_BLOB inputData,
+            string description,
+            ref DATA_BLOB entropy,
+            IntPtr pReserved,
+            ref CRYPTPROTECT_PROMPTSTRUCT promptStruct,
+            UInt32 flags,
+            ref DATA_BLOB outputData
+        );
 
-        [DllImport(ExternDll.Crypt32, SetLastError= true, CharSet=CharSet.Unicode)]
-        internal extern static bool CryptUnprotectData(ref DATA_BLOB inputData, IntPtr description, ref DATA_BLOB entropy, IntPtr pReserved, ref CRYPTPROTECT_PROMPTSTRUCT promptStruct, UInt32 flags, ref DATA_BLOB outputData);
+        [DllImport(ExternDll.Crypt32, SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern bool CryptUnprotectData(
+            ref DATA_BLOB inputData,
+            IntPtr description,
+            ref DATA_BLOB entropy,
+            IntPtr pReserved,
+            ref CRYPTPROTECT_PROMPTSTRUCT promptStruct,
+            UInt32 flags,
+            ref DATA_BLOB outputData
+        );
 
-        [DllImport(ExternDll.Advapi32, SetLastError=true, CharSet=CharSet.Unicode)]
-        internal extern static int CryptAcquireContext(out SafeCryptContextHandle phProv, string pszContainer, string pszProvider, uint dwProvType, uint dwFlags);
+        [DllImport(ExternDll.Advapi32, SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern int CryptAcquireContext(
+            out SafeCryptContextHandle phProv,
+            string pszContainer,
+            string pszProvider,
+            uint dwProvType,
+            uint dwFlags
+        );
 
-        [DllImport(ExternDll.Advapi32, SetLastError=true, CharSet=CharSet.Unicode)]
-        internal extern static int CryptReleaseContext(SafeCryptContextHandle hProv, uint dwFlags);
+        [DllImport(ExternDll.Advapi32, SetLastError = true, CharSet = CharSet.Unicode)]
+        internal static extern int CryptReleaseContext(SafeCryptContextHandle hProv, uint dwFlags);
 
-        [DllImport(ExternDll.Kernel32, CharSet=CharSet.Auto)]
-        internal extern static IntPtr LocalFree(IntPtr buf);
+        [DllImport(ExternDll.Kernel32, CharSet = CharSet.Auto)]
+        internal static extern IntPtr LocalFree(IntPtr buf);
 #endif
 
         // MoveFile Parameter
         internal const int MOVEFILE_REPLACE_EXISTING = 0x00000001;
 
-        [DllImport(ExternDll.Kernel32, CharSet=CharSet.Auto, BestFitMapping=false)]
-        internal static extern bool   MoveFileEx(string lpExistingFileName, string lpNewFileName, int dwFlags);
+        [DllImport(ExternDll.Kernel32, CharSet = CharSet.Auto, BestFitMapping = false)]
+        internal static extern bool MoveFileEx(
+            string lpExistingFileName,
+            string lpNewFileName,
+            int dwFlags
+        );
     }
 }

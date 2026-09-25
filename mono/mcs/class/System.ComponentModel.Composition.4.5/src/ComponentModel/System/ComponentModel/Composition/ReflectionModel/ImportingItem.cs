@@ -74,7 +74,7 @@ namespace System.ComponentModel.Composition.ReflectionModel
             Assumes.IsTrue(exports.Length < 2);
 
             if (exports.Length == 0)
-            {   
+            {
                 return null;
             }
 
@@ -102,11 +102,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
             if (!ContractServices.TryCast(type, value, out result))
             {
                 throw new ComposablePartException(
-                    String.Format(CultureInfo.CurrentCulture,
+                    String.Format(
+                        CultureInfo.CurrentCulture,
                         Strings.ReflectionModel_ImportNotAssignableFromExport,
                         export.ToElement().DisplayName,
-                        type.FullName),
-                    this.Definition.ToElement());
+                        type.FullName
+                    ),
+                    this.Definition.ToElement()
+                );
             }
 
             return result;

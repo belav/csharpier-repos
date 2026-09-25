@@ -16,8 +16,6 @@ namespace Microsoft.CodeAnalysis.CSharp.BracePairs
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpBracePairsService()
-            : base(CSharpSyntaxKinds.Instance)
-        {
-        }
+            : base(CSharpSyntaxKinds.Instance) { }
     }
 }

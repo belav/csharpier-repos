@@ -16,7 +16,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
     [Guid(Guids.CSharpOptionPageCodeStyleIdString)]
     internal class CodeStylePage : AbstractOptionPage
     {
-        protected override AbstractOptionPageControl CreateOptionPage(IServiceProvider serviceProvider, OptionStore optionStore)
+        protected override AbstractOptionPageControl CreateOptionPage(
+            IServiceProvider serviceProvider,
+            OptionStore optionStore
+        )
         {
             var editorService = serviceProvider.GetMefService<EditorConfigOptionsGenerator>();
 
@@ -25,7 +28,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options.Formatting
                 optionStore,
                 (o, s) => new StyleViewModel(o, s),
                 editorService.GetDefaultOptions(LanguageNames.CSharp),
-                LanguageNames.CSharp);
+                LanguageNames.CSharp
+            );
         }
     }
 }

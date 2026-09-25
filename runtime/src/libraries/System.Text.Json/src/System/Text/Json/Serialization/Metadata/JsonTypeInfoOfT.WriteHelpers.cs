@@ -18,7 +18,8 @@ namespace System.Text.Json.Serialization.Metadata
         internal void Serialize(
             Utf8JsonWriter writer,
             in T? rootValue,
-            object? rootValueBoxed = null)
+            object? rootValueBoxed = null
+        )
         {
             Debug.Assert(IsConfigured);
             Debug.Assert(rootValueBoxed is null || rootValueBoxed is T);
@@ -37,11 +38,16 @@ namespace System.Text.Json.Serialization.Metadata
             }
             else if (
 #if NETCOREAPP
-                !typeof(T).IsValueType &&
+                !typeof(T).IsValueType
+                &&
 #endif
-                Converter.CanBePolymorphic &&
-                rootValue is not null &&
-                Options.TryGetPolymorphicTypeInfoForRootType(rootValue, out JsonTypeInfo? derivedTypeInfo))
+                Converter.CanBePolymorphic
+                && rootValue is not null
+                && Options.TryGetPolymorphicTypeInfoForRootType(
+                    rootValue,
+                    out JsonTypeInfo? derivedTypeInfo
+                )
+            )
             {
                 Debug.Assert(typeof(T) == typeof(object));
                 derivedTypeInfo.SerializeAsObject(writer, rootValue);
@@ -63,7 +69,8 @@ namespace System.Text.Json.Serialization.Metadata
             Stream utf8Json,
             T? rootValue,
             CancellationToken cancellationToken,
-            object? rootValueBoxed = null)
+            object? rootValueBoxed = null
+        )
         {
             Debug.Assert(IsConfigured);
             Debug.Assert(rootValueBoxed is null || rootValueBoxed is T);
@@ -88,32 +95,45 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     // Record the serialization size in both successful and failed operations,
                     // since we want to immediately opt out of the fast path if it exceeds the threshold.
-                    OnRootLevelAsyncSerializationCompleted(writer.BytesCommitted + writer.BytesPending);
+                    OnRootLevelAsyncSerializationCompleted(
+                        writer.BytesCommitted + writer.BytesPending
+                    );
 
                     Utf8JsonWriterCache.ReturnWriter(writer);
                 }
 
-                await bufferWriter.WriteToStreamAsync(utf8Json, cancellationToken).ConfigureAwait(false);
+                await bufferWriter
+                    .WriteToStreamAsync(utf8Json, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else if (
 #if NETCOREAPP
-                !typeof(T).IsValueType &&
+                !typeof(T).IsValueType
+                &&
 #endif
-                Converter.CanBePolymorphic &&
-                rootValue is not null &&
-                Options.TryGetPolymorphicTypeInfoForRootType(rootValue, out JsonTypeInfo? derivedTypeInfo))
+                Converter.CanBePolymorphic
+                && rootValue is not null
+                && Options.TryGetPolymorphicTypeInfoForRootType(
+                    rootValue,
+                    out JsonTypeInfo? derivedTypeInfo
+                )
+            )
             {
                 Debug.Assert(typeof(T) == typeof(object));
-                await derivedTypeInfo.SerializeAsObjectAsync(utf8Json, rootValue, cancellationToken).ConfigureAwait(false);
+                await derivedTypeInfo
+                    .SerializeAsObjectAsync(utf8Json, rootValue, cancellationToken)
+                    .ConfigureAwait(false);
             }
             else
             {
                 bool isFinalBlock;
                 WriteStack state = default;
-                state.Initialize(this,
+                state.Initialize(
+                    this,
                     rootValueBoxed,
                     supportContinuation: true,
-                    supportAsync: true);
+                    supportAsync: true
+                );
 
                 state.CancellationToken = cancellationToken;
 
@@ -124,11 +144,18 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     do
                     {
-                        state.FlushThreshold = (int)(bufferWriter.Capacity * JsonSerializer.FlushThreshold);
+                        state.FlushThreshold = (int)(
+                            bufferWriter.Capacity * JsonSerializer.FlushThreshold
+                        );
 
                         try
                         {
-                            isFinalBlock = EffectiveConverter.WriteCore(writer, rootValue, Options, ref state);
+                            isFinalBlock = EffectiveConverter.WriteCore(
+                                writer,
+                                rootValue,
+                                Options,
+                                ref state
+                            );
                             writer.Flush();
 
                             if (state.SuppressFlush)
@@ -139,7 +166,9 @@ namespace System.Text.Json.Serialization.Metadata
                             }
                             else
                             {
-                                await bufferWriter.WriteToStreamAsync(utf8Json, cancellationToken).ConfigureAwait(false);
+                                await bufferWriter
+                                    .WriteToStreamAsync(utf8Json, cancellationToken)
+                                    .ConfigureAwait(false);
                                 bufferWriter.Clear();
                             }
                         }
@@ -151,7 +180,9 @@ namespace System.Text.Json.Serialization.Metadata
                             {
                                 // Exceptions should only be propagated by the resuming converter
 #if NET8_0_OR_GREATER
-                                await state.PendingTask.ConfigureAwait(ConfigureAwaitOptions.SuppressThrowing);
+                                await state.PendingTask.ConfigureAwait(
+                                    ConfigureAwaitOptions.SuppressThrowing
+                                );
 #else
                                 try
                                 {
@@ -164,10 +195,11 @@ namespace System.Text.Json.Serialization.Metadata
                             // Dispose any pending async disposables (currently these can only be completed IAsyncEnumerators).
                             if (state.CompletedAsyncDisposables?.Count > 0)
                             {
-                                await state.DisposeCompletedAsyncDisposables().ConfigureAwait(false);
+                                await state
+                                    .DisposeCompletedAsyncDisposables()
+                                    .ConfigureAwait(false);
                             }
                         }
-
                     } while (!isFinalBlock);
                 }
                 catch
@@ -189,10 +221,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         // Root serialization method for non-async streaming serialization
-        internal void Serialize(
-            Stream utf8Json,
-            in T? rootValue,
-            object? rootValueBoxed = null)
+        internal void Serialize(Stream utf8Json, in T? rootValue, object? rootValueBoxed = null)
         {
             Debug.Assert(IsConfigured);
             Debug.Assert(rootValueBoxed is null || rootValueBoxed is T);
@@ -205,7 +234,10 @@ namespace System.Text.Json.Serialization.Metadata
                 Debug.Assert(CanUseSerializeHandler);
                 Debug.Assert(Converter is JsonMetadataServicesConverter<T>);
 
-                Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(Options, out PooledByteBufferWriter bufferWriter);
+                Utf8JsonWriter writer = Utf8JsonWriterCache.RentWriterAndBuffer(
+                    Options,
+                    out PooledByteBufferWriter bufferWriter
+                );
                 try
                 {
                     SerializeHandler(writer, rootValue!);
@@ -216,18 +248,25 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     // Record the serialization size in both successful and failed operations,
                     // since we want to immediately opt out of the fast path if it exceeds the threshold.
-                    OnRootLevelAsyncSerializationCompleted(writer.BytesCommitted + writer.BytesPending);
+                    OnRootLevelAsyncSerializationCompleted(
+                        writer.BytesCommitted + writer.BytesPending
+                    );
 
                     Utf8JsonWriterCache.ReturnWriterAndBuffer(writer, bufferWriter);
                 }
             }
             else if (
 #if NETCOREAPP
-                !typeof(T).IsValueType &&
+                !typeof(T).IsValueType
+                &&
 #endif
-                Converter.CanBePolymorphic &&
-                rootValue is not null &&
-                Options.TryGetPolymorphicTypeInfoForRootType(rootValue, out JsonTypeInfo? polymorphicTypeInfo))
+                Converter.CanBePolymorphic
+                && rootValue is not null
+                && Options.TryGetPolymorphicTypeInfoForRootType(
+                    rootValue,
+                    out JsonTypeInfo? polymorphicTypeInfo
+                )
+            )
             {
                 Debug.Assert(typeof(T) == typeof(object));
                 polymorphicTypeInfo.SerializeAsObject(utf8Json, rootValue);
@@ -236,19 +275,28 @@ namespace System.Text.Json.Serialization.Metadata
             {
                 bool isFinalBlock;
                 WriteStack state = default;
-                state.Initialize(this,
+                state.Initialize(
+                    this,
                     rootValueBoxed,
                     supportContinuation: true,
-                    supportAsync: false);
+                    supportAsync: false
+                );
 
                 using var bufferWriter = new PooledByteBufferWriter(Options.DefaultBufferSize);
                 using var writer = new Utf8JsonWriter(bufferWriter, Options.GetWriterOptions());
 
                 do
                 {
-                    state.FlushThreshold = (int)(bufferWriter.Capacity * JsonSerializer.FlushThreshold);
+                    state.FlushThreshold = (int)(
+                        bufferWriter.Capacity * JsonSerializer.FlushThreshold
+                    );
 
-                    isFinalBlock = EffectiveConverter.WriteCore(writer, rootValue, Options, ref state);
+                    isFinalBlock = EffectiveConverter.WriteCore(
+                        writer,
+                        rootValue,
+                        Options,
+                        ref state
+                    );
                     writer.Flush();
 
                     bufferWriter.WriteToStream(utf8Json);
@@ -268,14 +316,23 @@ namespace System.Text.Json.Serialization.Metadata
             }
         }
 
-        internal sealed override void SerializeAsObject(Utf8JsonWriter writer, object? rootValue)
-            => Serialize(writer, JsonSerializer.UnboxOnWrite<T>(rootValue), rootValue);
+        internal sealed override void SerializeAsObject(Utf8JsonWriter writer, object? rootValue) =>
+            Serialize(writer, JsonSerializer.UnboxOnWrite<T>(rootValue), rootValue);
 
-        internal sealed override Task SerializeAsObjectAsync(Stream utf8Json, object? rootValue, CancellationToken cancellationToken)
-            => SerializeAsync(utf8Json, JsonSerializer.UnboxOnWrite<T>(rootValue), cancellationToken, rootValue);
+        internal sealed override Task SerializeAsObjectAsync(
+            Stream utf8Json,
+            object? rootValue,
+            CancellationToken cancellationToken
+        ) =>
+            SerializeAsync(
+                utf8Json,
+                JsonSerializer.UnboxOnWrite<T>(rootValue),
+                cancellationToken,
+                rootValue
+            );
 
-        internal sealed override void SerializeAsObject(Stream utf8Json, object? rootValue)
-            => Serialize(utf8Json, JsonSerializer.UnboxOnWrite<T>(rootValue), rootValue);
+        internal sealed override void SerializeAsObject(Stream utf8Json, object? rootValue) =>
+            Serialize(utf8Json, JsonSerializer.UnboxOnWrite<T>(rootValue), rootValue);
 
         // Fast-path serialization in source gen has not been designed with streaming in mind.
         // Even though it's not used in streaming by default, we can sometimes try to turn it on
@@ -283,7 +340,8 @@ namespace System.Text.Json.Serialization.Metadata
         // The `CanUseSerializeHandlerInStreaming` flag returns true iff:
         //  * The type has been used in at least `MinSerializationsSampleSize` streaming serializations AND
         //  * No serialization size exceeding JsonSerializerOptions.DefaultBufferSize / 2 has been recorded so far.
-        private bool CanUseSerializeHandlerInStreaming => _canUseSerializeHandlerInStreamingState == 1;
+        private bool CanUseSerializeHandlerInStreaming =>
+            _canUseSerializeHandlerInStreamingState == 1;
         private volatile int _canUseSerializeHandlerInStreamingState; // 0: unspecified, 1: allowed, 2: forbidden
 
         private const int MinSerializationsSampleSize = 10;
@@ -305,11 +363,18 @@ namespace System.Text.Json.Serialization.Metadata
                 }
                 else if ((uint)_serializationCount < MinSerializationsSampleSize)
                 {
-                    if (Interlocked.Increment(ref _serializationCount) == MinSerializationsSampleSize)
+                    if (
+                        Interlocked.Increment(ref _serializationCount)
+                        == MinSerializationsSampleSize
+                    )
                     {
                         // We have the minimum number of serializations needed to flag the type as safe for fast-path.
                         // Use CMPXCHG to avoid racing with threads reporting a large serialization.
-                        Interlocked.CompareExchange(ref _canUseSerializeHandlerInStreamingState, 1, 0);
+                        Interlocked.CompareExchange(
+                            ref _canUseSerializeHandlerInStreamingState,
+                            1,
+                            0
+                        );
                     }
                 }
             }

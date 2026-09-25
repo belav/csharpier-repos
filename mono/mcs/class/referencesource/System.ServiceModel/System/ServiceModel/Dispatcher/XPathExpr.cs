@@ -25,7 +25,7 @@ namespace System.ServiceModel.Dispatcher
         XsltFunction,
         Math,
         Filter,
-        Path
+        Path,
     }
 
     internal class XPathExpr
@@ -50,42 +50,24 @@ namespace System.ServiceModel.Dispatcher
 
         internal virtual bool IsLiteral
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal bool Negate
         {
-            get
-            {
-                return this.negate;
-            }
-            set
-            {
-                this.negate = value;
-            }
+            get { return this.negate; }
+            set { this.negate = value; }
         }
 
         internal ValueDataType ReturnType
         {
-            get
-            {
-                return this.returnType;
-            }
-            set
-            {
-                this.returnType = value;
-            }
+            get { return this.returnType; }
+            set { this.returnType = value; }
         }
 
         internal int SubExprCount
         {
-            get
-            {
-                return (null == this.subExpr) ? 0 : this.subExpr.Count;
-            }
+            get { return (null == this.subExpr) ? 0 : this.subExpr.Count; }
         }
 
         internal XPathExprList SubExpr
@@ -102,22 +84,13 @@ namespace System.ServiceModel.Dispatcher
 
         internal XPathExprType Type
         {
-            get
-            {
-                return this.type;
-            }
+            get { return this.type; }
         }
 
         internal bool TypecastRequired
         {
-            get
-            {
-                return this.castRequired;
-            }
-            set
-            {
-                this.castRequired = value;
-            }
+            get { return this.castRequired; }
+            set { this.castRequired = value; }
         }
 
         internal void Add(XPathExpr expr)
@@ -158,18 +131,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal int Count
         {
-            get
-            {
-                return this.list.Count;
-            }
+            get { return this.list.Count; }
         }
 
         internal XPathExpr this[int index]
         {
-            get
-            {
-                return (XPathExpr)this.list[index];
-            }
+            get { return (XPathExpr)this.list[index]; }
         }
 
         internal void Add(XPathExpr expr)
@@ -181,12 +148,19 @@ namespace System.ServiceModel.Dispatcher
 
     internal class XPathConjunctExpr : XPathExpr
     {
-        internal XPathConjunctExpr(XPathExprType type, ValueDataType returnType, XPathExpr left, XPathExpr right)
+        internal XPathConjunctExpr(
+            XPathExprType type,
+            ValueDataType returnType,
+            XPathExpr left,
+            XPathExpr right
+        )
             : base(type, returnType)
         {
             if (null == left || null == right)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidExpression));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new QueryCompileException(QueryCompileError.InvalidExpression)
+                );
             }
             this.SubExpr.Add(left);
             this.SubExpr.Add(right);
@@ -194,18 +168,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal XPathExpr Left
         {
-            get
-            {
-                return this.SubExpr[0];
-            }
+            get { return this.SubExpr[0]; }
         }
 
         internal XPathExpr Right
         {
-            get
-            {
-                return this.SubExpr[1];
-            }
+            get { return this.SubExpr[1]; }
         }
     }
 
@@ -221,14 +189,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal RelationOperator Op
         {
-            get
-            {
-                return this.op;
-            }
-            set
-            {
-                this.op = value;
-            }
+            get { return this.op; }
+            set { this.op = value; }
         }
     }
 
@@ -244,10 +206,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal MathOperator Op
         {
-            get
-            {
-                return this.op;
-            }
+            get { return this.op; }
         }
     }
 
@@ -264,10 +223,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal QueryFunction Function
         {
-            get
-            {
-                return this.function;
-            }
+            get { return this.function; }
         }
     }
 
@@ -276,7 +232,11 @@ namespace System.ServiceModel.Dispatcher
         XsltContext context;
         IXsltContextFunction function;
 
-        internal XPathXsltFunctionExpr(XsltContext context, IXsltContextFunction function, XPathExprList subExpr)
+        internal XPathXsltFunctionExpr(
+            XsltContext context,
+            IXsltContextFunction function,
+            XPathExprList subExpr
+        )
             : base(XPathExprType.XsltFunction, ConvertTypeFromXslt(function.ReturnType), subExpr)
         {
             this.function = function;
@@ -285,18 +245,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal XsltContext Context
         {
-            get
-            {
-                return this.context;
-            }
+            get { return this.context; }
         }
 
         internal IXsltContextFunction Function
         {
-            get
-            {
-                return this.function;
-            }
+            get { return this.function; }
         }
 
         internal static XPathResultType ConvertTypeToXslt(ValueDataType type)
@@ -316,7 +270,9 @@ namespace System.ServiceModel.Dispatcher
                     return XPathResultType.String;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidTypeConversion));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryCompileException(QueryCompileError.InvalidTypeConversion)
+                    );
             }
         }
 
@@ -337,7 +293,9 @@ namespace System.ServiceModel.Dispatcher
                     return ValueDataType.String;
 
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidTypeConversion));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new QueryCompileException(QueryCompileError.InvalidTypeConversion)
+                    );
             }
         }
     }
@@ -348,7 +306,10 @@ namespace System.ServiceModel.Dispatcher
         IXsltContextVariable variable;
 
         internal XPathXsltVariableExpr(XsltContext context, IXsltContextVariable variable)
-            : base(XPathExprType.XsltVariable, XPathXsltFunctionExpr.ConvertTypeFromXslt(variable.VariableType))
+            : base(
+                XPathExprType.XsltVariable,
+                XPathXsltFunctionExpr.ConvertTypeFromXslt(variable.VariableType)
+            )
         {
             Fx.Assert(null != variable, "");
             this.variable = variable;
@@ -357,18 +318,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal XsltContext Context
         {
-            get
-            {
-                return this.context;
-            }
+            get { return this.context; }
         }
 
         internal IXsltContextVariable Variable
         {
-            get
-            {
-                return this.variable;
-            }
+            get { return this.variable; }
         }
     }
 
@@ -377,9 +332,7 @@ namespace System.ServiceModel.Dispatcher
         NodeSelectCriteria selectDesc;
 
         internal XPathStepExpr(NodeSelectCriteria desc)
-            : this(desc, null)
-        {
-        }
+            : this(desc, null) { }
 
         internal XPathStepExpr(NodeSelectCriteria desc, XPathExprList predicates)
             : base(XPathExprType.PathStep, ValueDataType.Sequence, predicates)
@@ -390,33 +343,21 @@ namespace System.ServiceModel.Dispatcher
 
         internal NodeSelectCriteria SelectDesc
         {
-            get
-            {
-                return this.selectDesc;
-            }
+            get { return this.selectDesc; }
         }
     }
 
     internal abstract class XPathLiteralExpr : XPathExpr
     {
         internal XPathLiteralExpr(XPathExprType type, ValueDataType returnType)
-            : base(type, returnType)
-        {
-        }
+            : base(type, returnType) { }
 
         internal override bool IsLiteral
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
-        internal abstract object Literal
-        {
-            get;
-        }
-
+        internal abstract object Literal { get; }
     }
 
     internal class XPathStringExpr : XPathLiteralExpr
@@ -431,18 +372,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal override object Literal
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
 
         internal string String
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
     }
 
@@ -458,18 +393,12 @@ namespace System.ServiceModel.Dispatcher
 
         internal override object Literal
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
 
         internal double Number
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
     }
 }

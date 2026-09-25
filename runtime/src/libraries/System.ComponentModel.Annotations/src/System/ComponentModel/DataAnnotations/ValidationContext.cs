@@ -27,7 +27,8 @@ namespace System.ComponentModel.DataAnnotations
         // Also we use this ability in Validator.CreateValidationContext()??
         : IServiceProvider
     {
-        internal const string InstanceTypeNotStaticallyDiscovered = "The Type of instance cannot be statically discovered and the Type's properties can be trimmed.";
+        internal const string InstanceTypeNotStaticallyDiscovered =
+            "The Type of instance cannot be statically discovered and the Type's properties can be trimmed.";
 
         #region Member Fields
 
@@ -46,9 +47,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is <c>null</c></exception>
         [RequiresUnreferencedCode(InstanceTypeNotStaticallyDiscovered)]
         public ValidationContext(object instance)
-            : this(instance, null, null)
-        {
-        }
+            : this(instance, null, null) { }
 
         /// <summary>
         ///     Construct a <see cref="ValidationContext" /> for a given object instance and an optional
@@ -63,9 +62,7 @@ namespace System.ComponentModel.DataAnnotations
         /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is <c>null</c></exception>
         [RequiresUnreferencedCode(InstanceTypeNotStaticallyDiscovered)]
         public ValidationContext(object instance, IDictionary<object, object?>? items)
-            : this(instance, null, items)
-        {
-        }
+            : this(instance, null, items) { }
 
         /// <summary>
         ///     Construct a <see cref="ValidationContext" /> for a given object instance, an optional
@@ -84,7 +81,11 @@ namespace System.ComponentModel.DataAnnotations
         /// </param>
         /// <exception cref="ArgumentNullException">When <paramref name="instance" /> is <c>null</c></exception>
         [RequiresUnreferencedCode(InstanceTypeNotStaticallyDiscovered)]
-        public ValidationContext(object instance, IServiceProvider? serviceProvider, IDictionary<object, object?>? items)
+        public ValidationContext(
+            object instance,
+            IServiceProvider? serviceProvider,
+            IDictionary<object, object?>? items
+        )
         {
             ArgumentNullException.ThrowIfNull(instance);
 
@@ -94,7 +95,10 @@ namespace System.ComponentModel.DataAnnotations
                 InitializeServiceProvider(localServiceProvider.GetService);
             }
 
-            _items = items != null ? new Dictionary<object, object?>(items) : new Dictionary<object, object?>();
+            _items =
+                items != null
+                    ? new Dictionary<object, object?>(items)
+                    : new Dictionary<object, object?>();
             ObjectInstance = instance;
         }
 
@@ -172,20 +176,23 @@ namespace System.ComponentModel.DataAnnotations
 
         internal Type? MemberType
         {
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "The ctors are marked with RequiresUnreferencedCode.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "The ctors are marked with RequiresUnreferencedCode."
+            )]
             get
             {
                 Type? propertyType = _propertyType;
 
                 if (propertyType is null && MemberName != null)
                 {
-                    _propertyType = propertyType = ValidationAttributeStore.Instance.GetPropertyType(this);
+                    _propertyType = propertyType =
+                        ValidationAttributeStore.Instance.GetPropertyType(this);
                 }
 
                 return propertyType;
             }
-
             set => _propertyType = value;
         }
 
@@ -199,7 +206,11 @@ namespace System.ComponentModel.DataAnnotations
         ///     Looks up the display name using the DisplayAttribute attached to the respective type or property.
         /// </summary>
         /// <returns>A display-friendly name of the member represented by the <see cref="MemberName" />.</returns>
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "The ctors are marked with RequiresUnreferencedCode.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctors are marked with RequiresUnreferencedCode."
+        )]
         private string? GetDisplayName()
         {
             string? displayName = null;

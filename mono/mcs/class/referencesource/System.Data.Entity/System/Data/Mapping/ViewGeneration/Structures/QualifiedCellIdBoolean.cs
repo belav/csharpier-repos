@@ -24,7 +24,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         /// <summary>
         /// Creates a boolean of the form "<paramref name="block"/>.<paramref name="originalCellNum"/>".
         /// </summary>
-        internal QualifiedCellIdBoolean(CqlBlock block, CqlIdentifiers identifiers, int originalCellNum)
+        internal QualifiedCellIdBoolean(
+            CqlBlock block,
+            CqlIdentifiers identifiers,
+            int originalCellNum
+        )
             : base(identifiers, originalCellNum)
         {
             m_block = block;
@@ -36,7 +40,11 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #endregion
 
         #region Methods
-        internal override StringBuilder AsEsql(StringBuilder builder, string blockAlias, bool skipIsNotNull)
+        internal override StringBuilder AsEsql(
+            StringBuilder builder,
+            string blockAlias,
+            bool skipIsNotNull
+        )
         {
             // QualifiedCellIdBoolean is only used during JOIN processing where there is no single input, hence blockAlias is expected to be null.
             Debug.Assert(blockAlias == null, "QualifiedCellIdBoolean: blockAlias mismatch");

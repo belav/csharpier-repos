@@ -29,7 +29,7 @@ internal static class SignatureMapper
             nameof(Single) => 'F',
             nameof(Double) => 'D',
             "Void" => 'V',
-            _ => null
+            _ => null,
         };
 
         if (c == null)
@@ -71,15 +71,16 @@ internal static class SignatureMapper
         return result;
     }
 
-    public static string CharToNativeType(char c) => c switch
-    {
-        'V' => "void",
-        'I' => "int",
-        'L' => "int64_t",
-        'F' => "float",
-        'D' => "double",
-        _ => throw new InvalidSignatureCharException(c)
-    };
+    public static string CharToNativeType(char c) =>
+        c switch
+        {
+            'V' => "void",
+            'I' => "int",
+            'L' => "int64_t",
+            'F' => "float",
+            'D' => "double",
+            _ => throw new InvalidSignatureCharException(c),
+        };
 
     public static bool IsVoidSignature(string signature) => signature[0] == 'V';
 }
@@ -88,5 +89,6 @@ internal sealed class InvalidSignatureCharException : Exception
 {
     public char Char { get; private set; }
 
-    public InvalidSignatureCharException(char c) : base($"Can't handle signature '{c}'") => Char = c;
+    public InvalidSignatureCharException(char c)
+        : base($"Can't handle signature '{c}'") => Char = c;
 }

@@ -1,6 +1,6 @@
 using System;
 
-public class OtherType {
-	public OtherType () {
-	}
+public class OtherType
+{
+    public OtherType() { }
 }

@@ -1,19 +1,19 @@
 namespace System.Workflow.Activities
 {
     using System;
-    using System.Diagnostics;
-    using System.Text;
-    using System.Reflection;
-    using System.Collections;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Drawing2D;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Text;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
 
     #region Class WhileDesigner
     [ActivityDesignerTheme(typeof(WhileDesignerTheme))]
@@ -33,7 +33,8 @@ namespace System.Workflow.Activities
 
             if (Expanded)
             {
-                CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+                CompositeDesignerTheme compositeDesignerTheme =
+                    e.DesignerTheme as CompositeDesignerTheme;
                 Debug.Assert(compositeDesignerTheme != null);
                 if (compositeDesignerTheme == null)
                     return;
@@ -44,11 +45,20 @@ namespace System.Workflow.Activities
 
                 Point connectionPoint = Point.Empty;
                 if (!imageRectangle.IsEmpty)
-                    connectionPoint = new Point(imageRectangle.Right + e.AmbientTheme.Margin.Width / 2, imageRectangle.Top + imageRectangle.Height / 2);
+                    connectionPoint = new Point(
+                        imageRectangle.Right + e.AmbientTheme.Margin.Width / 2,
+                        imageRectangle.Top + imageRectangle.Height / 2
+                    );
                 else if (!textRectangle.IsEmpty)
-                    connectionPoint = new Point(textRectangle.Right + e.AmbientTheme.Margin.Width / 2, textRectangle.Top + textRectangle.Height / 2);
+                    connectionPoint = new Point(
+                        textRectangle.Right + e.AmbientTheme.Margin.Width / 2,
+                        textRectangle.Top + textRectangle.Height / 2
+                    );
                 else
-                    connectionPoint = new Point(bounds.Left + bounds.Width / 2 + e.AmbientTheme.Margin.Width / 2, bounds.Top + e.AmbientTheme.Margin.Height / 2);
+                    connectionPoint = new Point(
+                        bounds.Left + bounds.Width / 2 + e.AmbientTheme.Margin.Width / 2,
+                        bounds.Top + e.AmbientTheme.Margin.Height / 2
+                    );
 
                 Point[] points = new Point[4];
                 points[0].X = bounds.Left + bounds.Width / 2;
@@ -60,8 +70,24 @@ namespace System.Workflow.Activities
                 points[3].X = connectionPoint.X;
                 points[3].Y = connectionPoint.Y;
 
-                DrawConnectors(e.Graphics, compositeDesignerTheme.ForegroundPen, points, LineAnchor.None, LineAnchor.ArrowAnchor);
-                DrawConnectors(e.Graphics, compositeDesignerTheme.ForegroundPen, new Point[] { points[0], new Point(bounds.Left + bounds.Width / 2, bounds.Bottom) }, LineAnchor.None, LineAnchor.None);
+                DrawConnectors(
+                    e.Graphics,
+                    compositeDesignerTheme.ForegroundPen,
+                    points,
+                    LineAnchor.None,
+                    LineAnchor.ArrowAnchor
+                );
+                DrawConnectors(
+                    e.Graphics,
+                    compositeDesignerTheme.ForegroundPen,
+                    new Point[]
+                    {
+                        points[0],
+                        new Point(bounds.Left + bounds.Width / 2, bounds.Bottom),
+                    },
+                    LineAnchor.None,
+                    LineAnchor.None
+                );
             }
         }
 
@@ -72,7 +98,9 @@ namespace System.Workflow.Activities
             CompositeDesignerTheme designerTheme = DesignerTheme as CompositeDesignerTheme;
             Debug.Assert(designerTheme != null);
             if (Expanded && connectors.GetLength(0) > 0)
-                connectors[connectors.GetLength(0) - 1].Height = connectors[connectors.GetLength(0) - 1].Height - (((designerTheme != null) ? designerTheme.ConnectorSize.Height : 0) / 3);
+                connectors[connectors.GetLength(0) - 1].Height =
+                    connectors[connectors.GetLength(0) - 1].Height
+                    - (((designerTheme != null) ? designerTheme.ConnectorSize.Height : 0) / 3);
 
             return connectors;
         }
@@ -81,7 +109,8 @@ namespace System.Workflow.Activities
         {
             Size containerSize = base.OnLayoutSize(e);
 
-            CompositeDesignerTheme compositeDesignerTheme = e.DesignerTheme as CompositeDesignerTheme;
+            CompositeDesignerTheme compositeDesignerTheme =
+                e.DesignerTheme as CompositeDesignerTheme;
             if (compositeDesignerTheme != null && Expanded)
             {
                 containerSize.Width += 2 * compositeDesignerTheme.ConnectorSize.Width;
@@ -91,7 +120,10 @@ namespace System.Workflow.Activities
             return containerSize;
         }
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             //we only allow one activity to be inserted
             if (this == ActiveView.AssociatedDesigner && ContainedDesigners.Count > 0)

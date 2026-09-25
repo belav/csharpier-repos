@@ -43,15 +43,20 @@ namespace System.ServiceModel.Channels
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall)]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertFreeCertificateContext(IntPtr pCertContext);
+        static extern bool CertFreeCertificateContext(IntPtr pCertContext);
 
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            "Crypt32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertDeleteCertificateFromStore(IntPtr pCertContext);
+        static extern bool CertDeleteCertificateFromStore(IntPtr pCertContext);
 
         #endregion
         protected bool delete = false;
+
         protected CertificateHandle()
             : base(IntPtr.Zero, true)
         {
@@ -75,7 +80,11 @@ namespace System.ServiceModel.Channels
     [SuppressUnmanagedCodeSecurity]
     sealed class StoreCertificateHandle : CertificateHandle
     {
-        StoreCertificateHandle() : base() { base.delete = true; }
+        StoreCertificateHandle()
+            : base()
+        {
+            base.delete = true;
+        }
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -157,9 +166,7 @@ namespace System.ServiceModel.Channels
         int cbData;
         CriticalAllocHandle data;
 
-        public CryptoApiBlob()
-        {
-        }
+        public CryptoApiBlob() { }
 
         public CryptoApiBlob(byte[] bytes)
         {
@@ -190,12 +197,14 @@ namespace System.ServiceModel.Channels
         {
             public int size;
             public IntPtr data;
+
             public InteropHelper(int size, IntPtr data)
             {
                 this.size = size;
                 this.data = data;
             }
         }
+
         public InteropHelper GetMemoryForPinning()
         {
             return new InteropHelper(cbData, (IntPtr)data);
@@ -229,22 +238,28 @@ namespace System.ServiceModel.Channels
     sealed class CertificateName
     {
         #region PInvoke Declarations
-        [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Auto, SetLastError = true)]
+        [DllImport(
+            "Crypt32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            CharSet = CharSet.Auto,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertStrToName(CertEncodingType dwCertEncodingType,
-                                                    [MarshalAs(UnmanagedType.LPTStr)]string pszX500,
-                                                    StringType dwStrType,
-                                                    IntPtr pvReserved,
-                                                    [In, Out]byte[] pbEncoded,
-                                                    [In, Out]ref int pcbEncoded,
-                                                    [MarshalAs(UnmanagedType.LPTStr)]ref StringBuilder ppszError);
-
+        static extern bool CertStrToName(
+            CertEncodingType dwCertEncodingType,
+            [MarshalAs(UnmanagedType.LPTStr)] string pszX500,
+            StringType dwStrType,
+            IntPtr pvReserved,
+            [In, Out] byte[] pbEncoded,
+            [In, Out] ref int pcbEncoded,
+            [MarshalAs(UnmanagedType.LPTStr)] ref StringBuilder ppszError
+        );
 
         [Flags]
         enum CertEncodingType : int
         {
             X509AsnEncoding = 0x00000001,
-            PKCS7AsnEncoding = 0x00010000
+            PKCS7AsnEncoding = 0x00010000,
         }
 
         [Flags]
@@ -262,7 +277,7 @@ namespace System.ServiceModel.Channels
             ReverseFlag = 0x02000000,
             DisableIE4UTF8Flag = 0x00010000,
             EnableT61UnicodeFlag = 0x00020000,
-            EnableUTF8UnicodeFlag = 0x00040000
+            EnableUTF8UnicodeFlag = 0x00040000,
         }
         #endregion
 
@@ -290,99 +305,140 @@ namespace System.ServiceModel.Channels
             int encodingSize = 0;
             StringBuilder errorString = null;
 
-            CertStrToName(CertEncodingType.X509AsnEncoding | CertEncodingType.PKCS7AsnEncoding,
-                            DistinguishedName,
-                            StringType.OIDNameString | StringType.ReverseFlag,
-                            IntPtr.Zero,
-                            null,
-                            ref encodingSize,
-                            ref errorString);
+            CertStrToName(
+                CertEncodingType.X509AsnEncoding | CertEncodingType.PKCS7AsnEncoding,
+                DistinguishedName,
+                StringType.OIDNameString | StringType.ReverseFlag,
+                IntPtr.Zero,
+                null,
+                ref encodingSize,
+                ref errorString
+            );
 
             byte[] encodedBytes = new byte[encodingSize];
-            bool ok = CertStrToName(CertEncodingType.X509AsnEncoding | CertEncodingType.PKCS7AsnEncoding,
-                                        DistinguishedName,
-                                        StringType.OIDNameString | StringType.ReverseFlag,
-                                        IntPtr.Zero,
-                                        encodedBytes,
-                                        ref encodingSize,
-                                        ref errorString);
+            bool ok = CertStrToName(
+                CertEncodingType.X509AsnEncoding | CertEncodingType.PKCS7AsnEncoding,
+                DistinguishedName,
+                StringType.OIDNameString | StringType.ReverseFlag,
+                IntPtr.Zero,
+                encodedBytes,
+                ref encodingSize,
+                ref errorString
+            );
 
             if (!ok)
             {
-                PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(PeerExceptionHelper.GetLastException());
+                PeerExceptionHelper.ThrowInvalidOperation_PeerCertGenFailure(
+                    PeerExceptionHelper.GetLastException()
+                );
             }
 
             return encodedBytes;
         }
     }
 
-
     sealed partial class SelfSignedCertificate : IDisposable
     {
         #region PInvoke declarations
-        [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            "Crypt32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static CertificateHandle CertCreateSelfSignCertificate(
-                                                    KeyContainerHandle hProv,
-                                                    CryptoApiBlob.InteropHelper pSubjectIssuerBlob,
-                                                    SelfSignFlags dwFlags,
-                                                    IntPtr pKeyProvInfo,
-                                                    IntPtr pSignatureAlgorithm,
-                                                    [In] ref SystemTime pStartTime,
-                                                    [In] ref SystemTime pEndTime,
-                                                    IntPtr pExtensions);
+        static extern CertificateHandle CertCreateSelfSignCertificate(
+            KeyContainerHandle hProv,
+            CryptoApiBlob.InteropHelper pSubjectIssuerBlob,
+            SelfSignFlags dwFlags,
+            IntPtr pKeyProvInfo,
+            IntPtr pSignatureAlgorithm,
+            [In] ref SystemTime pStartTime,
+            [In] ref SystemTime pEndTime,
+            IntPtr pExtensions
+        );
 
-        [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            "Crypt32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static CertificateStoreHandle CertOpenStore(
-                                                    IntPtr lpszStoreProvider,
-                                                    int dwMsgAndCertEncodingType,
-                                                    IntPtr hCryptProv,
-                                                    int dwFlags,
-                                                    IntPtr pvPara);
+        static extern CertificateStoreHandle CertOpenStore(
+            IntPtr lpszStoreProvider,
+            int dwMsgAndCertEncodingType,
+            IntPtr hCryptProv,
+            int dwFlags,
+            IntPtr pvPara
+        );
 
-        [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            "Crypt32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertAddCertificateContextToStore(
-                                                    CertificateStoreHandle hCertStore,
-                                                    CertificateHandle pCertContext,
-                                                    AddDisposition dwAddDisposition,
-                                                    [Out]out StoreCertificateHandle ppStoreContext);
+        static extern bool CertAddCertificateContextToStore(
+            CertificateStoreHandle hCertStore,
+            CertificateHandle pCertContext,
+            AddDisposition dwAddDisposition,
+            [Out] out StoreCertificateHandle ppStoreContext
+        );
 
-        [DllImport("Advapi32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            "Advapi32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CryptAcquireContext(
-                                                    [Out]out KeyContainerHandle phProv,
-                                                    string pszContainer,
-                                                    string pszProvider,
-                                                    ProviderType dwProvType,
-                                                    ContextFlags dwFlags);
+        static extern bool CryptAcquireContext(
+            [Out] out KeyContainerHandle phProv,
+            string pszContainer,
+            string pszProvider,
+            ProviderType dwProvType,
+            ContextFlags dwFlags
+        );
 
-        [DllImport("Advapi32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            "Advapi32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CryptGenKey(
-                                                    KeyContainerHandle hProv,
-                                                    AlgorithmType algId,
-                                                    KeyFlags dwFlags,
-                                                    [Out]out KeyHandle phKey);
+        static extern bool CryptGenKey(
+            KeyContainerHandle hProv,
+            AlgorithmType algId,
+            KeyFlags dwFlags,
+            [Out] out KeyHandle phKey
+        );
 
-        [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true, CharSet = CharSet.Unicode)]
+        [DllImport(
+            "Crypt32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true,
+            CharSet = CharSet.Unicode
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool PFXExportCertStoreEx(
-                                                    CertificateStoreHandle hStore,
-                                                    IntPtr pPFX,
+        static extern bool PFXExportCertStoreEx(
+            CertificateStoreHandle hStore,
+            IntPtr pPFX,
             //IntPtr szPassword,
-                                                    string password,
-                                                    IntPtr pvReserved,
-                                                    PfxExportFlags dwFlags);
+            string password,
+            IntPtr pvReserved,
+            PfxExportFlags dwFlags
+        );
 
-        [DllImport("Crypt32.dll", CallingConvention = CallingConvention.StdCall, SetLastError = true)]
+        [DllImport(
+            "Crypt32.dll",
+            CallingConvention = CallingConvention.StdCall,
+            SetLastError = true
+        )]
         [ResourceExposure(ResourceScope.None)]
-        extern static bool CertSetCertificateContextProperty(
-                                                    CertificateHandle context,
-                                                    int propId,
-                                                    int flags,
-                                                    KeyHandle pv);
+        static extern bool CertSetCertificateContextProperty(
+            CertificateHandle context,
+            int propId,
+            int flags,
+            KeyHandle pv
+        );
 
         [Flags]
         enum SelfSignFlags : int
@@ -398,7 +454,7 @@ namespace System.ServiceModel.Channels
             UseExisting = 2,
             ReplaceExisting = 3,
             Always = 4,
-            ReplaceExistingInheritProperties = 5
+            ReplaceExistingInheritProperties = 5,
         }
 
         [Flags]
@@ -406,7 +462,7 @@ namespace System.ServiceModel.Channels
         {
             ReportNoPrivateKey = 0x00000001,
             ReportNotAbleToExportPrivateKey = 0x00000002,
-            ExportPrivateKeys = 0x00000004
+            ExportPrivateKeys = 0x00000004,
         }
 
         enum ProviderType : int
@@ -428,7 +484,7 @@ namespace System.ServiceModel.Channels
             RandomNumberGenerator = 21,
             IntelSec = 22,
             ReplaceOwf = 23,
-            RsaAes = 24
+            RsaAes = 24,
         }
 
         [Flags]
@@ -438,13 +494,13 @@ namespace System.ServiceModel.Channels
             NewKeySet = 0x00000008,
             DeleteKeySet = 0x00000010,
             MachineKeySet = 0x00000020,
-            Silent = 0x00000040
+            Silent = 0x00000040,
         }
 
         enum AlgorithmType : int
         {
             KeyExchange = 1,
-            Signature = 2
+            Signature = 2,
         }
 
         enum KeyFlags : int
@@ -500,6 +556,7 @@ namespace System.ServiceModel.Channels
             {
                 this.pszObjId = id;
             }
+
             public string pszObjId;
             public CRYPT_OBJID_BLOB Parameters;
         }
@@ -509,7 +566,9 @@ namespace System.ServiceModel.Channels
         public class Sha1AlgorithmId : CRYPT_ALGORITHM_IDENTIFIER
         {
             const string AlgId = "1.2.840.113549.1.1.5";
-            public Sha1AlgorithmId() : base(AlgId) { }
+
+            public Sha1AlgorithmId()
+                : base(AlgId) { }
         }
 
         CriticalAllocHandle GetProviderInfo()
@@ -529,5 +588,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-
-

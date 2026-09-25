@@ -36,10 +36,12 @@ namespace Microsoft.Extensions.Hosting
 
             if (SystemdHelpers.IsSystemdService())
             {
-                hostBuilder.ConfigureServices((hostContext, services) =>
-                {
-                    AddSystemdLifetime(services);
-                });
+                hostBuilder.ConfigureServices(
+                    (hostContext, services) =>
+                    {
+                        AddSystemdLifetime(services);
+                    }
+                );
             }
             return hostBuilder;
         }
@@ -88,7 +90,6 @@ namespace Microsoft.Extensions.Hosting
             services.AddSingleton<ISystemdNotifier, SystemdNotifier>();
             services.AddSingleton<IHostLifetime, SystemdLifetime>();
 #pragma warning restore CA1416 // Validate platform compatibility
-
         }
     }
 }

@@ -34,7 +34,9 @@ namespace System.Security.Cryptography
         public override byte[] DecryptKeyExchange(byte[] rgbIn)
         {
             if (_rsaKey == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingKey);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingKey
+                );
 
             return _rsaKey.Decrypt(rgbIn, RSAEncryptionPadding.Pkcs1);
         }

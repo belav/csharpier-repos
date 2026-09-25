@@ -59,7 +59,6 @@ namespace System.Workflow.Activities.Rules
             symbols[symbol] = null;
         }
 
-
         [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate")]
         public ICollection<string> GetSymbols()
         {
@@ -73,14 +72,30 @@ namespace System.Workflow.Activities.Rules
 
         #region RuleAttribute Analysis
 
-        internal void AnalyzeRuleAttributes(MemberInfo member, CodeExpression targetExpr, RulePathQualifier targetQualifier, CodeExpressionCollection argExprs, ParameterInfo[] parameters, List<CodeExpression> attributedExprs)
+        internal void AnalyzeRuleAttributes(
+            MemberInfo member,
+            CodeExpression targetExpr,
+            RulePathQualifier targetQualifier,
+            CodeExpressionCollection argExprs,
+            ParameterInfo[] parameters,
+            List<CodeExpression> attributedExprs
+        )
         {
             object[] attrs = member.GetCustomAttributes(typeof(RuleAttribute), true);
             if (attrs != null && attrs.Length > 0)
             {
                 RuleAttribute[] ruleAttrs = (RuleAttribute[])attrs;
                 for (int i = 0; i < ruleAttrs.Length; ++i)
-                    ruleAttrs[i].Analyze(this, member, targetExpr, targetQualifier, argExprs, parameters, attributedExprs);
+                    ruleAttrs[i]
+                        .Analyze(
+                            this,
+                            member,
+                            targetExpr,
+                            targetQualifier,
+                            argExprs,
+                            parameters,
+                            attributedExprs
+                        );
             }
         }
 

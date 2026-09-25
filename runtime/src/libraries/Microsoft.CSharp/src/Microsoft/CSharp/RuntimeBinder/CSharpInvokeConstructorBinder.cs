@@ -10,17 +10,22 @@ using Microsoft.CSharp.RuntimeBinder.Semantics;
 
 namespace Microsoft.CSharp.RuntimeBinder
 {
-    internal sealed class CSharpInvokeConstructorBinder : DynamicMetaObjectBinder, ICSharpInvokeOrInvokeMemberBinder
+    internal sealed class CSharpInvokeConstructorBinder
+        : DynamicMetaObjectBinder,
+            ICSharpInvokeOrInvokeMemberBinder
     {
         public BindingFlag BindingFlags => 0;
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public Expr DispatchPayload(RuntimeBinder runtimeBinder, ArgumentObject[] arguments, LocalVariableSymbol[] locals)
-            => runtimeBinder.DispatchPayload(this, arguments, locals);
+        public Expr DispatchPayload(
+            RuntimeBinder runtimeBinder,
+            ArgumentObject[] arguments,
+            LocalVariableSymbol[] locals
+        ) => runtimeBinder.DispatchPayload(this, arguments, locals);
 
         [RequiresUnreferencedCode(Binder.TrimmerWarning)]
-        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments)
-            => RuntimeBinder.PopulateSymbolTableWithPayloadInformation(this, callingType, arguments);
+        public void PopulateSymbolTableWithName(Type callingType, ArgumentObject[] arguments) =>
+            RuntimeBinder.PopulateSymbolTableWithPayloadInformation(this, callingType, arguments);
 
         public bool IsBinderThatCanHaveRefReceiver => true;
 
@@ -46,7 +51,8 @@ namespace Microsoft.CSharp.RuntimeBinder
         public CSharpInvokeConstructorBinder(
             CSharpCallFlags flags,
             Type callingContext,
-            IEnumerable<CSharpArgumentInfo> argumentInfo)
+            IEnumerable<CSharpArgumentInfo> argumentInfo
+        )
         {
             Flags = flags;
             _callingContext = callingContext;
@@ -73,25 +79,41 @@ namespace Microsoft.CSharp.RuntimeBinder
                 return false;
             }
 
-            if (Flags != otherBinder.Flags ||
-                _callingContext != otherBinder._callingContext ||
-                Name != otherBinder.Name ||
-                TypeArguments.Length != otherBinder.TypeArguments.Length ||
-                _argumentInfo.Length != otherBinder._argumentInfo.Length)
+            if (
+                Flags != otherBinder.Flags
+                || _callingContext != otherBinder._callingContext
+                || Name != otherBinder.Name
+                || TypeArguments.Length != otherBinder.TypeArguments.Length
+                || _argumentInfo.Length != otherBinder._argumentInfo.Length
+            )
             {
                 return false;
             }
 
-            return BinderHelper.CompareArgInfos(TypeArguments, otherBinder.TypeArguments, _argumentInfo, otherBinder._argumentInfo);
+            return BinderHelper.CompareArgInfos(
+                TypeArguments,
+                otherBinder.TypeArguments,
+                _argumentInfo,
+                otherBinder._argumentInfo
+            );
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override DynamicMetaObject Bind(DynamicMetaObject target, DynamicMetaObject[] args)
         {
             BinderHelper.ValidateBindArgument(target, nameof(target));
             BinderHelper.ValidateBindArgument(args, nameof(args));
-            return BinderHelper.Bind(this, _binder, BinderHelper.Cons(target, args), _argumentInfo, null);
+            return BinderHelper.Bind(
+                this,
+                _binder,
+                BinderHelper.Cons(target, args),
+                _argumentInfo,
+                null
+            );
         }
     }
 }

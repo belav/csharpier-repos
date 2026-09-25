@@ -4,27 +4,33 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Security {
-
+namespace System.Web.Security
+{
     using System;
     using System.Collections;
     using System.Configuration.Provider;
-    using System.Runtime.CompilerServices;    
+    using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [TypeForwardedFrom(
+        "System.Web, Version=2.0.0.0, Culture=Neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     [Serializable]
-    public sealed class MembershipUserCollection : IEnumerable, ICollection {
+    public sealed class MembershipUserCollection : IEnumerable, ICollection
+    {
         private Hashtable _Indices = null;
         private ArrayList _Values = null;
         private bool _ReadOnly = false;
 
-        public MembershipUserCollection() {
+        public MembershipUserCollection()
+        {
             _Indices = new Hashtable(10, StringComparer.CurrentCultureIgnoreCase);
             _Values = new ArrayList();
         }
 
-        public void Add(MembershipUser user) {
-            if (user == null) {
+        public void Add(MembershipUser user)
+        {
+            if (user == null)
+            {
                 throw new ArgumentNullException("user");
             }
 
@@ -32,16 +38,19 @@ namespace System.Web.Security {
                 throw new NotSupportedException();
 
             int pos = _Values.Add(user);
-            try {
+            try
+            {
                 _Indices.Add(user.UserName, pos);
             }
-            catch {
+            catch
+            {
                 _Values.RemoveAt(pos);
                 throw;
             }
         }
 
-        public void Remove(string name) {
+        public void Remove(string name)
+        {
             if (_ReadOnly)
                 throw new NotSupportedException();
 
@@ -61,8 +70,10 @@ namespace System.Web.Security {
                 _Indices[key] = ((int)_Indices[key]) - 1;
         }
 
-        public MembershipUser this[string name] {
-            get {
+        public MembershipUser this[string name]
+        {
+            get
+            {
                 object pos = _Indices[name];
                 if (pos == null || !(pos is int))
                     return null;
@@ -73,34 +84,47 @@ namespace System.Web.Security {
             }
         }
 
-        public IEnumerator GetEnumerator() {
+        public IEnumerator GetEnumerator()
+        {
             return _Values.GetEnumerator();
         }
 
-        public void SetReadOnly() {
+        public void SetReadOnly()
+        {
             if (_ReadOnly)
                 return;
             _ReadOnly = true;
             _Values = ArrayList.ReadOnly(_Values);
         }
 
-        public void Clear() {
+        public void Clear()
+        {
             _Values.Clear();
             _Indices.Clear();
         }
 
-        public int Count { get { return _Values.Count; } }
+        public int Count
+        {
+            get { return _Values.Count; }
+        }
 
-        public bool IsSynchronized { get { return false; } }
+        public bool IsSynchronized
+        {
+            get { return false; }
+        }
 
-        public object SyncRoot { get { return this; } }
+        public object SyncRoot
+        {
+            get { return this; }
+        }
 
-
-        void ICollection.CopyTo(Array array, int index) {
+        void ICollection.CopyTo(Array array, int index)
+        {
             _Values.CopyTo(array, index);
         }
 
-        public void CopyTo(MembershipUser[] array, int index) {
+        public void CopyTo(MembershipUser[] array, int index)
+        {
             _Values.CopyTo(array, index);
         }
     }

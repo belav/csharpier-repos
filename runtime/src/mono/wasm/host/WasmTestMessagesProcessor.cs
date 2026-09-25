@@ -31,7 +31,10 @@ internal sealed class WasmTestMessagesProcessor
                 logMessage = JsonSerializer.Deserialize<WasmLogMessage>(message);
                 if (logMessage != null)
                 {
-                    line = logMessage.payload + " " + string.Join(" ", logMessage.arguments ?? Enumerable.Empty<object>());
+                    line =
+                        logMessage.payload
+                        + " "
+                        + string.Join(" ", logMessage.arguments ?? Enumerable.Empty<object>());
                 }
                 else
                 {
@@ -51,13 +54,23 @@ internal sealed class WasmTestMessagesProcessor
         line = line.TrimEnd();
         switch (logMessage?.method?.ToLowerInvariant())
         {
-            case "console.debug": _logger.LogDebug(line); break;
-            case "console.error": _logger.LogError(line); break;
-            case "console.warn": _logger.LogWarning(line); break;
-            case "console.trace": _logger.LogTrace(line); break;
+            case "console.debug":
+                _logger.LogDebug(line);
+                break;
+            case "console.error":
+                _logger.LogError(line);
+                break;
+            case "console.warn":
+                _logger.LogWarning(line);
+                break;
+            case "console.trace":
+                _logger.LogTrace(line);
+                break;
 
             case "console.log":
-            default: _logger.LogInformation(line); break;
+            default:
+                _logger.LogInformation(line);
+                break;
         }
     }
 }

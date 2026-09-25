@@ -14,8 +14,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
         private readonly ImmutableArray<NavInfoNode> _nodes;
         private int _index;
 
-        public NavInfoNodeEnum(ImmutableArray<NavInfoNode> nodes)
-            => _nodes = nodes;
+        public NavInfoNodeEnum(ImmutableArray<NavInfoNode> nodes) => _nodes = nodes;
 
         public int Clone(out IVsEnumNavInfoNodes ppEnum)
         {
@@ -33,9 +32,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
 
             pceltFetched = (uint)i;
 
-            return i < celt
-                ? VSConstants.S_FALSE
-                : VSConstants.S_OK;
+            return i < celt ? VSConstants.S_FALSE : VSConstants.S_OK;
         }
 
         public int Reset()

@@ -17,15 +17,17 @@ namespace System.Text.Json.Serialization.Converters
 
             return
                 // There's no safe way to construct a Type/MemberInfo from untrusted user input.
-                typeof(MemberInfo).IsAssignableFrom(type) ||
+                typeof(MemberInfo).IsAssignableFrom(type)
+                ||
                 // (De)serialization of SerializationInfo is already disallowed due to Type being disallowed
                 // (the two ctors on SerializationInfo take a Type, and a Type member is present when serializing).
                 // Explicitly disallowing this type provides a clear exception when ctors with
                 // .ctor(SerializationInfo, StreamingContext) signatures are attempted to be used for deserialization.
                 // Invoking such ctors is not safe when used with untrusted user input.
-                type == typeof(SerializationInfo) ||
-                type == typeof(IntPtr) ||
-                type == typeof(UIntPtr) ||
+                type == typeof(SerializationInfo)
+                || type == typeof(IntPtr)
+                || type == typeof(UIntPtr)
+                ||
                 // Exclude delegates.
                 typeof(Delegate).IsAssignableFrom(type);
         }
@@ -36,14 +38,19 @@ namespace System.Text.Json.Serialization.Converters
             return CreateUnsupportedConverterForType(type);
         }
 
-        internal static JsonConverter CreateUnsupportedConverterForType(Type type, string? errorMessage = null)
+        internal static JsonConverter CreateUnsupportedConverterForType(
+            Type type,
+            string? errorMessage = null
+        )
         {
-            JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                typeof(UnsupportedTypeConverter<>).MakeGenericType(type),
-                BindingFlags.Instance | BindingFlags.Public,
-                binder: null,
-                args: new object?[] { errorMessage },
-                culture: null)!;
+            JsonConverter converter = (JsonConverter)
+                Activator.CreateInstance(
+                    typeof(UnsupportedTypeConverter<>).MakeGenericType(type),
+                    BindingFlags.Instance | BindingFlags.Public,
+                    binder: null,
+                    args: new object?[] { errorMessage },
+                    culture: null
+                )!;
 
             return converter;
         }

@@ -11,9 +11,7 @@ namespace System.Speech.Internal.SrgsCompiler
         #region Constructors
 
         internal PropertyTag(ParseElement parent, Backend backend)
-            : base(parent._rule)
-        {
-        }
+            : base(parent._rule) { }
 
         #endregion
 
@@ -23,7 +21,10 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             //Return if the Tag content is empty
             string sValue = value as string;
-            if (string.IsNullOrEmpty(name) && (value == null || (sValue != null && string.IsNullOrEmpty((sValue).Trim()))))
+            if (
+                string.IsNullOrEmpty(name)
+                && (value == null || (sValue != null && string.IsNullOrEmpty((sValue).Trim())))
+            )
             {
                 return;
             }

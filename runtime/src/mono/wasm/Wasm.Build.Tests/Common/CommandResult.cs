@@ -24,20 +24,30 @@ namespace Wasm.Build.Tests
             Output = output;
         }
 
-        public CommandResult EnsureSuccessful(string messagePrefix = "", bool suppressOutput = false)
-            => EnsureExitCode(0, messagePrefix, suppressOutput);
+        public CommandResult EnsureSuccessful(
+            string messagePrefix = "",
+            bool suppressOutput = false
+        ) => EnsureExitCode(0, messagePrefix, suppressOutput);
 
-        public CommandResult EnsureExitCode(int expectedExitCode = 0, string messagePrefix = "", bool suppressOutput = false)
+        public CommandResult EnsureExitCode(
+            int expectedExitCode = 0,
+            string messagePrefix = "",
+            bool suppressOutput = false
+        )
         {
             if (ExitCode != expectedExitCode)
             {
-                StringBuilder message = new StringBuilder($"{messagePrefix} Expected {expectedExitCode} exit code but got {ExitCode}: {StartInfo.FileName} {StartInfo.Arguments}");
+                StringBuilder message = new StringBuilder(
+                    $"{messagePrefix} Expected {expectedExitCode} exit code but got {ExitCode}: {StartInfo.FileName} {StartInfo.Arguments}"
+                );
 
                 if (!suppressOutput)
                 {
                     if (!string.IsNullOrEmpty(Output))
                     {
-                        message.AppendLine($"{Environment.NewLine}Standard Output:{Environment.NewLine}{Output}");
+                        message.AppendLine(
+                            $"{Environment.NewLine}Standard Output:{Environment.NewLine}{Output}"
+                        );
                     }
                 }
 

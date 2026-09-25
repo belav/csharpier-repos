@@ -38,7 +38,5 @@ public interface IRawSqlCommandBuilder
     /// <param name="sql">The command text.</param>
     /// <param name="parameters">Parameters for the command.</param>
     /// <returns>The newly created command.</returns>
-    RawSqlCommand Build(
-        string sql,
-        IEnumerable<object> parameters);
+    RawSqlCommand Build(string sql, IEnumerable<object> parameters);
 }

@@ -17,7 +17,8 @@ namespace System.Net.Http.Formatting
         [Fact]
         public Task PartialContract()
         {
-            var c = new PartialDataContract {
+            var c = new PartialDataContract
+            {
                 PropertyWithAttribute = "one",
 #if !Testing_NetStandard1_3 // Xml formatter ignores DCS attributes but JSON one does not in netstandard1.3.
                 PropertyWithoutAttribute = "false"
@@ -45,7 +46,12 @@ namespace System.Net.Http.Formatting
         [Fact]
         public Task NormalClass()
         {
-            var source = new NormalClass { FirstName = "John", LastName = "Smith", Item = "Socks" };
+            var source = new NormalClass
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Item = "Socks",
+            };
             return SerializerConsistencyHepers.TestAsync(source);
         }
 
@@ -61,7 +67,12 @@ namespace System.Net.Http.Formatting
         [Fact]
         public Task NullEmptyWhitespaceString()
         {
-            NormalClass source = new NormalClass { FirstName = string.Empty, LastName = null, Item = "   " };
+            NormalClass source = new NormalClass
+            {
+                FirstName = string.Empty,
+                LastName = null,
+                Item = "   ",
+            };
 
             return SerializerConsistencyHepers.TestAsync(source);
         }
@@ -233,7 +244,7 @@ namespace System.Net.Http.Formatting
 
             // Check C# --> XML --> C#
 
-            var blobXml2 = await WriteAsync(obj1, tSourceRead, xmlFormatter);  // C# --> XML --> C# --> XML
+            var blobXml2 = await WriteAsync(obj1, tSourceRead, xmlFormatter); // C# --> XML --> C# --> XML
             var blobJson2 = await WriteAsync(obj1, tSourceRead, jsonFor); // C# --> XML --> C# --> JSON
 
             // Ensure that C#->XMl and  C#->XML->C#->XML give us the same result..
@@ -244,7 +255,7 @@ namespace System.Net.Http.Formatting
 
             // Check C# --> JSON --> C#
 
-            var blobXml3 = await WriteAsync(obj2, tSourceRead, xmlFormatter);  // C# --> JSON --> C# --> XML
+            var blobXml3 = await WriteAsync(obj2, tSourceRead, xmlFormatter); // C# --> JSON --> C# --> XML
             var blobJson3 = await WriteAsync(obj2, tSourceRead, jsonFor); // C# --> JSON --> C# --> JSON
 
             // Ensure that C#->XML and C#->JSON->C#->XML are the same
@@ -270,25 +281,44 @@ namespace System.Net.Http.Formatting
             return System.Text.Encoding.UTF8.GetString(b, 0, (int)ms.Length);
         }
 
-        private static async Task<object> ReadAsync(MemoryStream ms, Type tSource, MediaTypeFormatter formatter)
+        private static async Task<object> ReadAsync(
+            MemoryStream ms,
+            Type tSource,
+            MediaTypeFormatter formatter
+        )
         {
             bool f = formatter.CanReadType(tSource);
             Assert.True(f);
 
-            object o = await formatter.ReadFromStreamAsync(tSource, ms, content: null, formatterLogger: null);
+            object o = await formatter.ReadFromStreamAsync(
+                tSource,
+                ms,
+                content: null,
+                formatterLogger: null
+            );
             Assert.True(tSource.IsAssignableFrom(o.GetType()));
 
             return o;
         }
 
-        private static async Task<MemoryStream> WriteAsync(object obj, Type tSource, MediaTypeFormatter formatter)
+        private static async Task<MemoryStream> WriteAsync(
+            object obj,
+            Type tSource,
+            MediaTypeFormatter formatter
+        )
         {
             bool f = formatter.CanWriteType(tSource);
             Assert.True(f);
 
             MemoryStream ms = new MemoryStream();
 
-            await formatter.WriteToStreamAsync(tSource, obj, ms, content: null, transportContext: null);
+            await formatter.WriteToStreamAsync(
+                tSource,
+                obj,
+                ms,
+                content: null,
+                transportContext: null
+            );
 
             ms.Position = 0;
             return ms;

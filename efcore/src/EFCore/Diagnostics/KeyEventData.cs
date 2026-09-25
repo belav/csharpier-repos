@@ -20,7 +20,8 @@ public class KeyEventData : EventData
     public KeyEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        IReadOnlyKey key)
+        IReadOnlyKey key
+    )
         : base(eventDefinition, messageGenerator)
     {
         Key = key;

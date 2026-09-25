@@ -1,28 +1,29 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:  SatelliteContractVersionAttribute
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 **
 **
-** Purpose: Specifies which version of a satellite assembly 
+** Purpose: Specifies which version of a satellite assembly
 **          the ResourceManager should ask for.
 **
 **
 ===========================================================*/
 
-namespace System.Resources {
+namespace System.Resources
+{
     using System;
     using System.Diagnostics.Contracts;
-    
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple=false)]  
-[System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class SatelliteContractVersionAttribute : Attribute 
+
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SatelliteContractVersionAttribute : Attribute
     {
         private String _version;
 
@@ -34,7 +35,8 @@ namespace System.Resources {
             _version = version;
         }
 
-        public String Version {
+        public String Version
+        {
             get { return _version; }
         }
     }

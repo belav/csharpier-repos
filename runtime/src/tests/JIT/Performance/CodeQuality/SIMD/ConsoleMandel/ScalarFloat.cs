@@ -11,14 +11,18 @@ namespace Algorithms
     internal class ScalarFloatRenderer : FractalRenderer
     {
         public ScalarFloatRenderer(Action<int, int, int> dp, Func<bool> abortFunc)
-            : base(dp, abortFunc)
-        {
-        }
+            : base(dp, abortFunc) { }
 
         protected const float limit = 4.0f;
 
         // Render the fractal using a Complex data type on a single thread with scalar floats
-        public void RenderSingleThreadedWithADT(float xmin, float xmax, float ymin, float ymax, float step)
+        public void RenderSingleThreadedWithADT(
+            float xmin,
+            float xmax,
+            float ymin,
+            float ymax,
+            float step
+        )
         {
             int yp = 0;
             for (float y = ymin; y < ymax && !Abort; y += step, yp++)
@@ -44,7 +48,13 @@ namespace Algorithms
         }
 
         // Render the fractal with no data type abstraction on a single thread with scalar floats
-        public void RenderSingleThreadedNoADT(float xmin, float xmax, float ymin, float ymax, float step)
+        public void RenderSingleThreadedNoADT(
+            float xmin,
+            float xmax,
+            float ymin,
+            float ymax,
+            float step
+        )
         {
             int yp = 0;
             for (float y = ymin; y < ymax && !Abort; y += step, yp++)
@@ -71,7 +81,13 @@ namespace Algorithms
         }
 
         // Render the fractal using a Complex data type on a single thread with scalar floats
-        public void RenderMultiThreadedWithADT(float xmin, float xmax, float ymin, float ymax, float step)
+        public void RenderMultiThreadedWithADT(
+            float xmin,
+            float xmax,
+            float ymin,
+            float ymax,
+            float step
+        )
         {
             Parallel.For(0, (int)(((ymax - ymin) / step) + .5f), (yp) =>
             {
@@ -99,7 +115,13 @@ namespace Algorithms
         }
 
         // Render the fractal with no data type abstraction on multiple threads with scalar floats
-        public void RenderMultiThreadedNoADT(float xmin, float xmax, float ymin, float ymax, float step)
+        public void RenderMultiThreadedNoADT(
+            float xmin,
+            float xmax,
+            float ymin,
+            float ymax,
+            float step
+        )
         {
             Parallel.For(0, (int)(((ymax - ymin) / step) + .5f), (yp) =>
             {

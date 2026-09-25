@@ -22,27 +22,60 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         public override KeySizes[] LegalKeySizes => _impl.LegalKeySizes;
 
-        public override byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) => _impl.Decrypt(data, padding);
-        public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) => _impl.Encrypt(data, padding);
-        public override RSAParameters ExportParameters(bool includePrivateParameters) => _impl.ExportParameters(includePrivateParameters);
-        public override void ImportParameters(RSAParameters parameters) => _impl.ImportParameters(parameters);
+        public override byte[] Decrypt(byte[] data, RSAEncryptionPadding padding) =>
+            _impl.Decrypt(data, padding);
 
-        public override byte[] SignData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) =>
-            _impl.SignData(data, offset, count, hashAlgorithm, padding);
+        public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding) =>
+            _impl.Encrypt(data, padding);
 
-        public override byte[] SignData(Stream data, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) =>
-            _impl.SignData(data, hashAlgorithm, padding);
+        public override RSAParameters ExportParameters(bool includePrivateParameters) =>
+            _impl.ExportParameters(includePrivateParameters);
 
-        public override byte[] SignHash(byte[] hash, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) =>
-            _impl.SignHash(hash, hashAlgorithm, padding);
+        public override void ImportParameters(RSAParameters parameters) =>
+            _impl.ImportParameters(parameters);
 
-        public override bool VerifyData(byte[] data, int offset, int count, byte[] signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) =>
-            _impl.VerifyData(data, offset, count, signature, hashAlgorithm, padding);
+        public override byte[] SignData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => _impl.SignData(data, offset, count, hashAlgorithm, padding);
 
-        public override bool VerifyHash(byte[] hash, byte[] signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding) =>
-            _impl.VerifyHash(hash, signature, hashAlgorithm, padding);
+        public override byte[] SignData(
+            Stream data,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => _impl.SignData(data, hashAlgorithm, padding);
 
-        protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm)
+        public override byte[] SignHash(
+            byte[] hash,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => _impl.SignHash(hash, hashAlgorithm, padding);
+
+        public override bool VerifyData(
+            byte[] data,
+            int offset,
+            int count,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => _impl.VerifyData(data, offset, count, signature, hashAlgorithm, padding);
+
+        public override bool VerifyHash(
+            byte[] hash,
+            byte[] signature,
+            HashAlgorithmName hashAlgorithm,
+            RSASignaturePadding padding
+        ) => _impl.VerifyHash(hash, signature, hashAlgorithm, padding);
+
+        protected override byte[] HashData(
+            byte[] data,
+            int offset,
+            int count,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             using (HashAlgorithm alg = GetHashAlgorithm(hashAlgorithm))
             {

@@ -26,8 +26,8 @@ namespace System.ServiceModel.Channels
             public const long MaxReceivedMessageSize = SocketReceiveBufferSize;
             public const int SocketReceiveBufferSize = 64 * 1024;
             public const int TimeToLive = 1;
-            public static MessageEncoderFactory MessageEncoderFactory = new TextMessageEncodingBindingElement().CreateMessageEncoderFactory();
+            public static MessageEncoderFactory MessageEncoderFactory =
+                new TextMessageEncodingBindingElement().CreateMessageEncoderFactory();
         }
-
     }
 }

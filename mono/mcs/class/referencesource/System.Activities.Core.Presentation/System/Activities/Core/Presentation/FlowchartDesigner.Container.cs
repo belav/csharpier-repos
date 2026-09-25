@@ -5,6 +5,7 @@
 namespace System.Activities.Core.Presentation
 {
     using System.Activities.Presentation;
+    using System.Activities.Presentation.FreeFormEditing;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
     using System.Activities.Statements;
@@ -18,12 +19,15 @@ namespace System.Activities.Core.Presentation
     using System.Windows.Media;
     using System.Windows.Threading;
     using System.Xaml;
-    using System.Activities.Presentation.FreeFormEditing;
 
     partial class FlowchartDesigner : IMultipleDragEnabledCompositeView
     {
         public static readonly DependencyProperty DroppingTypeResolvingOptionsProperty =
-            DependencyProperty.Register("DroppingTypeResolvingOptions", typeof(TypeResolvingOptions), typeof(FlowchartDesigner));
+            DependencyProperty.Register(
+                "DroppingTypeResolvingOptions",
+                typeof(TypeResolvingOptions),
+                typeof(FlowchartDesigner)
+            );
 
         [Fx.Tag.KnownXamlExternal]
         public TypeResolvingOptions DroppingTypeResolvingOptions
@@ -47,7 +51,8 @@ namespace System.Activities.Core.Presentation
 
             //Get the corresponding FlowElements and clone them.
             //We will work against actual objects here not the model items.
-            Dictionary<FlowNode, FlowNode> clonedFlowElements = new Dictionary<FlowNode, FlowNode>();
+            Dictionary<FlowNode, FlowNode> clonedFlowElements =
+                new Dictionary<FlowNode, FlowNode>();
             foreach (ModelItem modelItem in itemsToCopy)
             {
                 ModelItem flowElementMI = GetFlowElementMI(modelItem);
@@ -130,7 +135,10 @@ namespace System.Activities.Core.Presentation
         }
 
         //This method updates the clone of currentFlowElement to reference cloned FlowElements.
-        void UpdateCloneReferences(FlowNode currentFlowElement, Dictionary<FlowNode, FlowNode> clonedFlowElements)
+        void UpdateCloneReferences(
+            FlowNode currentFlowElement,
+            Dictionary<FlowNode, FlowNode> clonedFlowElements
+        )
         {
             if (typeof(FlowStep).IsAssignableFrom(currentFlowElement.GetType()))
             {
@@ -149,7 +157,8 @@ namespace System.Activities.Core.Presentation
             else if (typeof(FlowDecision).IsAssignableFrom(currentFlowElement.GetType()))
             {
                 FlowDecision currentFlowDecision = (FlowDecision)currentFlowElement;
-                FlowDecision clonedFlowDecision = (FlowDecision)clonedFlowElements[currentFlowElement];
+                FlowDecision clonedFlowDecision = (FlowDecision)
+                    clonedFlowElements[currentFlowElement];
                 FlowNode trueElement = currentFlowDecision.True;
                 FlowNode falseElement = currentFlowDecision.False;
 
@@ -170,11 +179,14 @@ namespace System.Activities.Core.Presentation
                 {
                     clonedFlowDecision.False = null;
                 }
-
             }
             else if (GenericFlowSwitchHelper.IsGenericFlowSwitch(currentFlowElement.GetType()))
             {
-                GenericFlowSwitchHelper.Copy(currentFlowElement.GetType().GetGenericArguments()[0], currentFlowElement, clonedFlowElements);
+                GenericFlowSwitchHelper.Copy(
+                    currentFlowElement.GetType().GetGenericArguments()[0],
+                    currentFlowElement,
+                    clonedFlowElements
+                );
             }
             else
             {
@@ -184,8 +196,11 @@ namespace System.Activities.Core.Presentation
 
         // The logic is similar to UpdateCloneReferences.
         // the difference is in this function, we need to set reference by Property.
-        void UpdateCloneReferenceByModelItem (FlowNode currentFlowElement,
-            Dictionary<FlowNode, ModelItem> modelItems, Dictionary<FlowNode, FlowNode> clonedFlowElements)
+        void UpdateCloneReferenceByModelItem(
+            FlowNode currentFlowElement,
+            Dictionary<FlowNode, ModelItem> modelItems,
+            Dictionary<FlowNode, FlowNode> clonedFlowElements
+        )
         {
             if (typeof(FlowStep).IsAssignableFrom(currentFlowElement.GetType()))
             {
@@ -209,7 +224,8 @@ namespace System.Activities.Core.Presentation
                     Fx.Assert("Should not happen.");
                 }
                 FlowDecision currentFlowDecision = (FlowDecision)currentFlowElement;
-                FlowDecision clonedFlowDecision = (FlowDecision)clonedFlowElements[currentFlowElement];
+                FlowDecision clonedFlowDecision = (FlowDecision)
+                    clonedFlowElements[currentFlowElement];
                 Fx.Assert(currentFlowDecision == clonedFlowDecision, "should not happen");
                 ModelItem modelItem = modelItems[currentFlowElement];
                 Fx.Assert(modelItem != null, "should not happen");
@@ -233,14 +249,15 @@ namespace System.Activities.Core.Presentation
                 {
                     modelItem.Properties["False"].SetValue(null);
                 }
-
             }
             else if (GenericFlowSwitchHelper.IsGenericFlowSwitch(currentFlowElement.GetType()))
             {
-                GenericFlowSwitchHelper.ReferenceCopy(currentFlowElement.GetType().GetGenericArguments()[0],
+                GenericFlowSwitchHelper.ReferenceCopy(
+                    currentFlowElement.GetType().GetGenericArguments()[0],
                     currentFlowElement,
                     modelItems,
-                    clonedFlowElements);
+                    clonedFlowElements
+                );
             }
             else
             {
@@ -255,24 +272,39 @@ namespace System.Activities.Core.Presentation
                 if (itemsToPaste != null)
                 {
                     return itemsToPaste.All(p =>
-                        typeof(Activity).IsAssignableFrom(p.GetType()) ||
-                        typeof(FlowNode).IsAssignableFrom(p.GetType()) ||
-                        (p is Type && typeof(Activity).IsAssignableFrom((Type)p)) ||
-                        (p is Type && typeof(FlowNode).IsAssignableFrom((Type)p)));
+                        typeof(Activity).IsAssignableFrom(p.GetType())
+                        || typeof(FlowNode).IsAssignableFrom(p.GetType())
+                        || (p is Type && typeof(Activity).IsAssignableFrom((Type)p))
+                        || (p is Type && typeof(FlowNode).IsAssignableFrom((Type)p))
+                    );
                 }
             }
             return false;
         }
 
-        public void OnItemsPasted(List<object> itemsToPaste, List<object> metaData, Point pastePoint, WorkflowViewElement pastePointReference)
+        public void OnItemsPasted(
+            List<object> itemsToPaste,
+            List<object> metaData,
+            Point pastePoint,
+            WorkflowViewElement pastePointReference
+        )
         {
             Fx.Assert(this.panel != null, "This code shouldn't be hit if panel is null");
             HashSet<Activity> workflowElementsPasted = new HashSet<Activity>();
             List<ModelItem> modelItemsToSelect = new List<ModelItem>();
             bool shouldStoreCurrentSizeViewState = true;
 
-            Fx.Assert(this.ModelItem is IModelTreeItem, "this.ModelItem must implement IModelTreeItem");
-            using (EditingScope editingScope = ((IModelTreeItem)this.ModelItem).ModelTreeManager.CreateEditingScope(System.Activities.Presentation.SR.CollectionAddEditingScopeDescription))
+            Fx.Assert(
+                this.ModelItem is IModelTreeItem,
+                "this.ModelItem must implement IModelTreeItem"
+            );
+            using (
+                EditingScope editingScope = (
+                    (IModelTreeItem)this.ModelItem
+                ).ModelTreeManager.CreateEditingScope(
+                    System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
+                )
+            )
             {
                 if (metaData != null)
                 {
@@ -297,14 +329,23 @@ namespace System.Activities.Core.Presentation
                                     shouldStoreCurrentSizeViewState = false;
                                 }
 
-                                ModelItem item = this.ModelItem.Properties["Nodes"].Collection.Add(element);
+                                ModelItem item = this
+                                    .ModelItem.Properties["Nodes"]
+                                    .Collection.Add(element);
 
                                 // if the pasted item is a flowswitch but the default target is not in the pasted selection,
                                 // reset the DefaultCaseDisplayName to "Default".
-                                if (GenericFlowSwitchHelper.IsGenericFlowSwitch(item.ItemType) &&
-                                    item.Properties["Default"].Value == null)
+                                if (
+                                    GenericFlowSwitchHelper.IsGenericFlowSwitch(item.ItemType)
+                                    && item.Properties["Default"].Value == null
+                                )
                                 {
-                                    item.Properties[FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName].SetValue(FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue);
+                                    item.Properties[
+                                            FlowSwitchLabelFeature.DefaultCaseDisplayNamePropertyName
+                                        ]
+                                        .SetValue(
+                                            FlowSwitchLabelFeature.DefaultCaseDisplayNameDefaultValue
+                                        );
                                 }
 
                                 modelItemsPerMetaData.Add(item);
@@ -323,11 +364,22 @@ namespace System.Activities.Core.Presentation
                             if (pastePoint.X > 0 && pastePoint.Y > 0)
                             {
                                 Point panelPoint = this.TranslatePoint(pastePoint, this.panel);
-                                if (pastePointReference != null && !pastePointReference.Equals(this))
+                                if (
+                                    pastePointReference != null
+                                    && !pastePointReference.Equals(this)
+                                )
                                 {
-                                    if (pastePointReference.ModelItem != null && this.modelElement.ContainsKey(pastePointReference.ModelItem))
+                                    if (
+                                        pastePointReference.ModelItem != null
+                                        && this.modelElement.ContainsKey(
+                                            pastePointReference.ModelItem
+                                        )
+                                    )
                                     {
-                                        panelPoint = pastePointReference.TranslatePoint(pastePoint, this.panel);
+                                        panelPoint = pastePointReference.TranslatePoint(
+                                            pastePoint,
+                                            this.panel
+                                        );
                                     }
                                 }
                                 panelPoint.X = panelPoint.X < 0 ? 0 : panelPoint.X;
@@ -346,21 +398,30 @@ namespace System.Activities.Core.Presentation
                 foreach (object itemToPaste in itemsToPaste)
                 {
                     Activity workflowElementToPaste = itemToPaste as Activity;
-                    if (workflowElementToPaste != null && !workflowElementsPasted.Contains(workflowElementToPaste))
+                    if (
+                        workflowElementToPaste != null
+                        && !workflowElementsPasted.Contains(workflowElementToPaste)
+                    )
                     {
-                        FlowStep flowStep = new FlowStep { Action = workflowElementToPaste, Next = null };
+                        FlowStep flowStep = new FlowStep
+                        {
+                            Action = workflowElementToPaste,
+                            Next = null,
+                        };
                         if (shouldStoreCurrentSizeViewState)
                         {
                             // Pasting may change the size of flowchart; need this to undo the size change.
                             this.StoreCurrentSizeViewStateWithUndo();
                             shouldStoreCurrentSizeViewState = false;
                         }
-                        
-                        // When paste a non-flowstep object to flowchart, the existing hintsize of the object 
+
+                        // When paste a non-flowstep object to flowchart, the existing hintsize of the object
                         // should be removed, and let flowchart panel to compute the right size.
                         VirtualizedContainerService.SetHintSize(workflowElementToPaste, null);
-                        ModelItem flowStepItem = this.ModelItem.Properties["Nodes"].Collection.Add(flowStep);
-                     
+                        ModelItem flowStepItem = this
+                            .ModelItem.Properties["Nodes"]
+                            .Collection.Add(flowStep);
+
                         if (flowStepItem != null)
                         {
                             modelItemsToSelect.Add(flowStepItem.Properties["Action"].Value);
@@ -371,15 +432,16 @@ namespace System.Activities.Core.Presentation
                 editingScope.Complete();
             }
 
-            this.Dispatcher.BeginInvoke(() =>
-            {
-                if (modelItemsToSelect.Count > 0 && modelItemsToSelect[0] != null)
+            this.Dispatcher.BeginInvoke(
+                () =>
                 {
-                    Keyboard.Focus(modelItemsToSelect[0].View as IInputElement);
-                }
-                this.Context.Items.SetValue(new Selection(modelItemsToSelect));
-            },
-            DispatcherPriority.ApplicationIdle
+                    if (modelItemsToSelect.Count > 0 && modelItemsToSelect[0] != null)
+                    {
+                        Keyboard.Focus(modelItemsToSelect[0].View as IInputElement);
+                    }
+                    this.Context.Items.SetValue(new Selection(modelItemsToSelect));
+                },
+                DispatcherPriority.ApplicationIdle
             );
         }
 
@@ -391,7 +453,10 @@ namespace System.Activities.Core.Presentation
             {
                 //Check to see if the first element in the input list needs offset. Generalize that information for all ModelItems in the input list.
                 //Get location information of the first element
-                object location = this.ViewStateService.RetrieveViewState(modelItemsPerMetaData[0], shapeLocation);
+                object location = this.ViewStateService.RetrieveViewState(
+                    modelItemsPerMetaData[0],
+                    shapeLocation
+                );
                 if (location != null)
                 {
                     Point locationOfShape = (Point)location;
@@ -402,10 +467,16 @@ namespace System.Activities.Core.Presentation
                         // as the copied point (with a slight margin of offset).  Therefore,
                         // we need to detect if the pasted point is within the boundary of the copied
                         // object.  If so, offset the pasted position such that the overlap is not observable.
-                        if ((locationOfShape.X < point.X + FreeFormPanel.GridSize &&
-                             locationOfShape.X > point.X - FreeFormPanel.GridSize) &&
-                            (locationOfShape.Y < point.Y + FreeFormPanel.GridSize &&
-                             locationOfShape.Y > point.Y - FreeFormPanel.GridSize))
+                        if (
+                            (
+                                locationOfShape.X < point.X + FreeFormPanel.GridSize
+                                && locationOfShape.X > point.X - FreeFormPanel.GridSize
+                            )
+                            && (
+                                locationOfShape.Y < point.Y + FreeFormPanel.GridSize
+                                && locationOfShape.Y > point.Y - FreeFormPanel.GridSize
+                            )
+                        )
                         {
                             offSetInMultipleOfGridSize++;
                             locationOfShape.Offset(FreeFormPanel.GridSize, FreeFormPanel.GridSize);
@@ -419,7 +490,6 @@ namespace System.Activities.Core.Presentation
                 double offsetValue = FreeFormPanel.GridSize * offSetInMultipleOfGridSize;
                 OffSetViewState(new Vector(offsetValue, offsetValue), modelItemsPerMetaData);
             }
-
         }
 
         void UpdateViewStateOnPastePoint(List<ModelItem> modelItemsInMetaData, Point newOrigin)
@@ -428,7 +498,9 @@ namespace System.Activities.Core.Presentation
             Point topLeft = new Point(Double.PositiveInfinity, Double.PositiveInfinity);
             foreach (ModelItem modelItem in modelItemsInMetaData)
             {
-                Dictionary<string, object> viewState = this.ViewStateService.RetrieveAllViewState(modelItem);
+                Dictionary<string, object> viewState = this.ViewStateService.RetrieveAllViewState(
+                    modelItem
+                );
 
                 foreach (object viewStateValue in viewState.Values)
                 {
@@ -449,7 +521,10 @@ namespace System.Activities.Core.Presentation
             }
 
             //Update the viewState.
-            OffSetViewState(new Vector(newOrigin.X - topLeft.X, newOrigin.Y - topLeft.Y), modelItemsInMetaData);
+            OffSetViewState(
+                new Vector(newOrigin.X - topLeft.X, newOrigin.Y - topLeft.Y),
+                modelItemsInMetaData
+            );
         }
 
         PointCollection OffsetPointCollection(PointCollection collection, Vector offset)
@@ -471,25 +546,36 @@ namespace System.Activities.Core.Presentation
         void OffSetViewState(Vector offsetVector, ModelItem modelItem, bool isUndoableViewState)
         {
             Dictionary<string, object> modifiedValues = new Dictionary<string, object>();
-            Dictionary<string, object> viewState = this.ViewStateService.RetrieveAllViewState(modelItem);
+            Dictionary<string, object> viewState = this.ViewStateService.RetrieveAllViewState(
+                modelItem
+            );
             foreach (KeyValuePair<string, object> viewStatePair in viewState)
             {
                 PointCollection viewStatePoints = viewStatePair.Value as PointCollection;
                 if (viewStatePoints != null)
                 {
-
-                    modifiedValues.Add(viewStatePair.Key, OffsetPointCollection(viewStatePoints, offsetVector));
+                    modifiedValues.Add(
+                        viewStatePair.Key,
+                        OffsetPointCollection(viewStatePoints, offsetVector)
+                    );
                 }
                 else if (viewStatePair.Value is Point)
                 {
-                    modifiedValues.Add(viewStatePair.Key, Point.Add((Point)viewStatePair.Value, offsetVector));
+                    modifiedValues.Add(
+                        viewStatePair.Key,
+                        Point.Add((Point)viewStatePair.Value, offsetVector)
+                    );
                 }
             }
             foreach (KeyValuePair<string, object> kvPair in modifiedValues)
             {
                 if (isUndoableViewState)
                 {
-                    this.ViewStateService.StoreViewStateWithUndo(modelItem, kvPair.Key, kvPair.Value);
+                    this.ViewStateService.StoreViewStateWithUndo(
+                        modelItem,
+                        kvPair.Key,
+                        kvPair.Value
+                    );
                 }
                 else
                 {
@@ -499,7 +585,6 @@ namespace System.Activities.Core.Presentation
 
             modifiedValues.Clear();
         }
-
 
         void OffSetViewState(Vector offsetVector, List<ModelItem> modelItemsInMetaData)
         {
@@ -521,9 +606,12 @@ namespace System.Activities.Core.Presentation
             return connectors;
         }
 
-        //This does a shallow copy of all the public properties with getter and setter. 
+        //This does a shallow copy of all the public properties with getter and setter.
         //It also replicates Xaml Attached properties.
-        FlowNode CloneFlowElement(FlowNode flowElement, Predicate<AttachableMemberIdentifier> allowAttachableProperty = null)
+        FlowNode CloneFlowElement(
+            FlowNode flowElement,
+            Predicate<AttachableMemberIdentifier> allowAttachableProperty = null
+        )
         {
             Type flowElementType = flowElement.GetType();
             FlowNode clonedObject = (FlowNode)Activator.CreateInstance(flowElementType);
@@ -531,20 +619,39 @@ namespace System.Activities.Core.Presentation
             {
                 if (propertyInfo.GetGetMethod() != null && propertyInfo.GetSetMethod() != null)
                 {
-                    propertyInfo.SetValue(clonedObject, propertyInfo.GetValue(flowElement, null), null);
+                    propertyInfo.SetValue(
+                        clonedObject,
+                        propertyInfo.GetValue(flowElement, null),
+                        null
+                    );
                 }
             }
 
             //Replicate any Xaml Attached Property.
-            KeyValuePair<AttachableMemberIdentifier, object>[] attachedProperties = new KeyValuePair<AttachableMemberIdentifier, object>[AttachablePropertyServices.GetAttachedPropertyCount(flowElement)];
+            KeyValuePair<AttachableMemberIdentifier, object>[] attachedProperties =
+                new KeyValuePair<AttachableMemberIdentifier, object>[
+                    AttachablePropertyServices.GetAttachedPropertyCount(flowElement)
+                ];
             AttachablePropertyServices.CopyPropertiesTo(flowElement, attachedProperties, 0);
-            foreach (KeyValuePair<AttachableMemberIdentifier, object> attachedProperty in attachedProperties)
+            foreach (
+                KeyValuePair<
+                    AttachableMemberIdentifier,
+                    object
+                > attachedProperty in attachedProperties
+            )
             {
-                if (allowAttachableProperty != null && !allowAttachableProperty(attachedProperty.Key))
+                if (
+                    allowAttachableProperty != null
+                    && !allowAttachableProperty(attachedProperty.Key)
+                )
                 {
                     continue;
                 }
-                AttachablePropertyServices.SetProperty(clonedObject, attachedProperty.Key, attachedProperty.Value);
+                AttachablePropertyServices.SetProperty(
+                    clonedObject,
+                    attachedProperty.Key,
+                    attachedProperty.Value
+                );
             }
 
             return clonedObject;

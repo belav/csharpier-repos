@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
     /// A{int}.Field
     /// A{int}.B{string}.C.Field
     /// </summary>
-    internal sealed class SpecializedFieldReference : TypeMemberReference, Cci.ISpecializedFieldReference
+    internal sealed class SpecializedFieldReference
+        : TypeMemberReference,
+            Cci.ISpecializedFieldReference
     {
         private readonly FieldSymbol _underlyingField;
 
@@ -30,10 +32,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         protected override Symbol UnderlyingSymbol
         {
-            get
-            {
-                return _underlyingField;
-            }
+            get { return _underlyingField; }
         }
 
         public override void Dispatch(Cci.MetadataVisitor visitor)
@@ -52,17 +51,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         Cci.ISpecializedFieldReference Cci.IFieldReference.AsSpecializedFieldReference
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         Cci.ITypeReference Cci.IFieldReference.GetType(EmitContext context)
         {
             TypeWithAnnotations oldType = _underlyingField.TypeWithAnnotations;
             var customModifiers = oldType.CustomModifiers;
-            var type = ((PEModuleBuilder)context.Module).Translate(oldType.Type, syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode, diagnostics: context.Diagnostics);
+            var type = ((PEModuleBuilder)context.Module).Translate(
+                oldType.Type,
+                syntaxNodeOpt: (CSharpSyntaxNode)context.SyntaxNode,
+                diagnostics: context.Diagnostics
+            );
 
             if (customModifiers.Length == 0)
             {
@@ -70,7 +70,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             }
             else
             {
-                return new Cci.ModifiedTypeReference(type, ImmutableArray<Cci.ICustomModifier>.CastUp(customModifiers));
+                return new Cci.ModifiedTypeReference(
+                    type,
+                    ImmutableArray<Cci.ICustomModifier>.CastUp(customModifiers)
+                );
             }
         }
 
@@ -86,10 +89,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
 
         bool Cci.IFieldReference.IsContextualNamedEntity
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
     }
 }

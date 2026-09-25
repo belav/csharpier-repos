@@ -31,13 +31,13 @@ using System.Text;
 
 namespace Application
 {
-	class Program
-	{
-		static void Main(string[] args)
-		{
-			Library1.Class1 c1 = new Library1.Class1();
-			Library2.Class1 c2 = new Library2.Class1();
-			Console.WriteLine("{0} {1}", c1, c2);
-		}
-	}
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Library1.Class1 c1 = new Library1.Class1();
+            Library2.Class1 c2 = new Library2.Class1();
+            Console.WriteLine("{0} {1}", c1, c2);
+        }
+    }
 }

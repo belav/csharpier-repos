@@ -76,37 +76,79 @@ namespace HFATest
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA02
     {
-        public double f1, f2;
+        public double f1,
+            f2;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA03
     {
-        public double f1, f2, f3;
+        public double f1,
+            f2,
+            f3;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA05
     {
-        public double f1, f2, f3, f4, f5;
+        public double f1,
+            f2,
+            f3,
+            f4,
+            f5;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA08
     {
-        public double f1, f2, f3, f4, f5, f6, f7, f8;
+        public double f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA11
     {
-        public double f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11;
+        public double f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8,
+            f9,
+            f10,
+            f11;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA19
     {
-        public double f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19;
+        public double f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8,
+            f9,
+            f10,
+            f11,
+            f12,
+            f13,
+            f14,
+            f15,
+            f16,
+            f17,
+            f18,
+            f19;
     }
 
 #else
@@ -120,37 +162,79 @@ namespace HFATest
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA02
     {
-        public float f1, f2;
+        public float f1,
+            f2;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA03
     {
-        public float f1, f2, f3;
+        public float f1,
+            f2,
+            f3;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA05
     {
-        public float f1, f2, f3, f4, f5;
+        public float f1,
+            f2,
+            f3,
+            f4,
+            f5;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA08
     {
-        public float f1, f2, f3, f4, f5, f6, f7, f8;
+        public float f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA11
     {
-        public float f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11;
+        public float f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8,
+            f9,
+            f10,
+            f11;
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public struct HFA19
     {
-        public float f1, f2, f3, f4, f5, f6, f7, f8, f9, f10, f11, f12, f13, f14, f15, f16, f17, f18, f19;
+        public float f1,
+            f2,
+            f3,
+            f4,
+            f5,
+            f6,
+            f7,
+            f8,
+            f9,
+            f10,
+            f11,
+            f12,
+            f13,
+            f14,
+            f15,
+            f16,
+            f17,
+            f18,
+            f19;
     }
 
 #endif // FLOAT64

@@ -19,10 +19,7 @@ namespace System.Collections.Generic
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         public T[] Items
         {
-            get
-            {
-                return _queue.ToArray();
-            }
+            get { return _queue.ToArray(); }
         }
     }
 }

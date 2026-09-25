@@ -10,10 +10,10 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Diagnostics.Contracts;
 using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using Microsoft.Internal;
-using System.IO;
 
 namespace System.ComponentModel.Composition.Hosting
 {
@@ -28,7 +28,7 @@ namespace System.ComponentModel.Composition.Hosting
         private ReflectionContext _reflectionContext = null;
 #endif
 
-        public ApplicationCatalog() {}
+        public ApplicationCatalog() { }
 
         public ApplicationCatalog(ICompositionElement definitionOrigin)
         {
@@ -45,7 +45,10 @@ namespace System.ComponentModel.Composition.Hosting
             this._reflectionContext = reflectionContext;
         }
 
-        public ApplicationCatalog(ReflectionContext reflectionContext, ICompositionElement definitionOrigin)
+        public ApplicationCatalog(
+            ReflectionContext reflectionContext,
+            ICompositionElement definitionOrigin
+        )
         {
             Requires.NotNull(reflectionContext, "reflectionContext");
             Requires.NotNull(definitionOrigin, "definitionOrigin");
@@ -58,10 +61,15 @@ namespace System.ComponentModel.Composition.Hosting
         internal ComposablePartCatalog CreateCatalog(string location, string pattern)
         {
 #if FEATURE_REFLECTIONCONTEXT
-            if(this._reflectionContext != null)
+            if (this._reflectionContext != null)
             {
                 return (this._definitionOrigin != null)
-                    ? new DirectoryCatalog(location, pattern, this._reflectionContext, this._definitionOrigin)
+                    ? new DirectoryCatalog(
+                        location,
+                        pattern,
+                        this._reflectionContext,
+                        this._definitionOrigin
+                    )
                     : new DirectoryCatalog(location, pattern, this._reflectionContext);
             }
 #endif
@@ -70,34 +78,37 @@ namespace System.ComponentModel.Composition.Hosting
                 : new DirectoryCatalog(location, pattern);
         }
 
-//  Note:
-//      Creating a catalog does not cause change notifications to propagate, For some reason the DeploymentCatalog did, but that is a bug.
-//      InnerCatalog is delay evaluated, from data supplied at construction time and so does not propagate change notifications
+        //  Note:
+        //      Creating a catalog does not cause change notifications to propagate, For some reason the DeploymentCatalog did, but that is a bug.
+        //      InnerCatalog is delay evaluated, from data supplied at construction time and so does not propagate change notifications
         private AggregateCatalog InnerCatalog
         {
             get
             {
-                if(this._innerCatalog == null)
+                if (this._innerCatalog == null)
                 {
-                    lock(this._thisLock)
+                    lock (this._thisLock)
                     {
-                        if(this._innerCatalog == null)
+                        if (this._innerCatalog == null)
                         {
                             var location = AppDomain.CurrentDomain.BaseDirectory;
                             Assumes.NotNull(location);
-        
+
                             var catalogs = new List<ComposablePartCatalog>();
                             catalogs.Add(CreateCatalog(location, "*.exe"));
                             catalogs.Add(CreateCatalog(location, "*.dll"));
-        
+
                             string relativeSearchPath = AppDomain.CurrentDomain.RelativeSearchPath;
-                            if(!string.IsNullOrEmpty(relativeSearchPath))
+                            if (!string.IsNullOrEmpty(relativeSearchPath))
                             {
-                                string[] probingPaths = relativeSearchPath.Split(new char[] {';'}, StringSplitOptions.RemoveEmptyEntries);
-                                foreach(var probingPath in probingPaths)
+                                string[] probingPaths = relativeSearchPath.Split(
+                                    new char[] { ';' },
+                                    StringSplitOptions.RemoveEmptyEntries
+                                );
+                                foreach (var probingPath in probingPaths)
                                 {
                                     var path = Path.Combine(location, probingPath);
-                                    if(Directory.Exists(path))
+                                    if (Directory.Exists(path))
                                     {
                                         catalogs.Add(CreateCatalog(path, "*.dll"));
                                     }
@@ -126,7 +137,7 @@ namespace System.ComponentModel.Composition.Hosting
                         this._innerCatalog = null;
                         this._isDisposed = true;
                     }
-                    if(innerCatalog != null)
+                    if (innerCatalog != null)
                     {
                         innerCatalog.Dispose();
                     }
@@ -149,13 +160,13 @@ namespace System.ComponentModel.Composition.Hosting
         ///     Returns the export definitions that match the constraint defined by the specified definition.
         /// </summary>
         /// <param name="definition">
-        ///     The <see cref="ImportDefinition"/> that defines the conditions of the 
+        ///     The <see cref="ImportDefinition"/> that defines the conditions of the
         ///     <see cref="ExportDefinition"/> objects to return.
         /// </param>
         /// <returns>
-        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the 
-        ///     <see cref="ExportDefinition"/> objects and their associated 
-        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined 
+        ///     An <see cref="IEnumerable{T}"/> of <see cref="Tuple{T1, T2}"/> containing the
+        ///     <see cref="ExportDefinition"/> objects and their associated
+        ///     <see cref="ComposablePartDefinition"/> for objects that match the constraint defined
         ///     by <paramref name="definition"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -164,7 +175,9 @@ namespace System.ComponentModel.Composition.Hosting
         /// <exception cref="ObjectDisposedException">
         ///     The <see cref="DirectoryCatalog"/> has been disposed of.
         /// </exception>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             this.ThrowIfDisposed();
 
@@ -175,7 +188,11 @@ namespace System.ComponentModel.Composition.Hosting
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfDisposed()
         {
             if (this._isDisposed)
@@ -186,11 +203,13 @@ namespace System.ComponentModel.Composition.Hosting
 
         private string GetDisplayName()
         {
-            return string.Format(CultureInfo.CurrentCulture,
-                                "{0} (Path=\"{1}\") (PrivateProbingPath=\"{2}\")",   // NOLOC
-                                this.GetType().Name,
-                                AppDomain.CurrentDomain.BaseDirectory, 
-                                AppDomain.CurrentDomain.RelativeSearchPath);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                "{0} (Path=\"{1}\") (PrivateProbingPath=\"{2}\")", // NOLOC
+                this.GetType().Name,
+                AppDomain.CurrentDomain.BaseDirectory,
+                AppDomain.CurrentDomain.RelativeSearchPath
+            );
         }
 
         /// <summary>

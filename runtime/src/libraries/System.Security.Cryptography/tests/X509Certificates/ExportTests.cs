@@ -32,14 +32,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // SerializedCert not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // SerializedCert not supported on Unix
         public static void ExportAsSerializedCert_Windows()
         {
             using (X509Certificate2 c1 = new X509Certificate2(TestData.MsCertificate))
             {
                 byte[] serializedCert = c1.Export(X509ContentType.SerializedCert);
 
-                Assert.Equal(X509ContentType.SerializedCert, X509Certificate2.GetCertContentType(serializedCert));
+                Assert.Equal(
+                    X509ContentType.SerializedCert,
+                    X509Certificate2.GetCertContentType(serializedCert)
+                );
 
                 using (X509Certificate2 c2 = new X509Certificate2(serializedCert))
                 {
@@ -50,12 +53,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // SerializedCert not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // SerializedCert not supported on Unix
         public static void ExportAsSerializedCert_Unix()
         {
             using (X509Certificate2 c1 = new X509Certificate2(TestData.MsCertificate))
             {
-                Assert.Throws<PlatformNotSupportedException>(() => c1.Export(X509ContentType.SerializedCert));
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    c1.Export(X509ContentType.SerializedCert)
+                );
             }
         }
 
@@ -101,22 +106,35 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c1 = new X509Certificate2(TestData.MsCertificate))
             {
                 byte[] pfx = c1.Export(X509ContentType.Pkcs12, password);
-                Assert.ThrowsAny<CryptographicException>(() => new X509Certificate2(pfx, "PlaceholderWrongPassword"));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    new X509Certificate2(pfx, "PlaceholderWrongPassword")
+                );
             }
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+            "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS"
+        )]
         public static void ExportAsPfxWithPrivateKeyVerifyPassword()
         {
-            using (var cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                var cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             {
                 Assert.True(cert.HasPrivateKey, "cert.HasPrivateKey");
                 const string password = "PLACEHOLDER";
 
                 byte[] pfx = cert.Export(X509ContentType.Pkcs12, password);
 
-                Assert.ThrowsAny<CryptographicException>(() => new X509Certificate2(pfx, "PlaceholderWrongPassword"));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    new X509Certificate2(pfx, "PlaceholderWrongPassword")
+                );
 
                 using (var cert2 = new X509Certificate2(pfx, password))
                 {
@@ -127,10 +145,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+            "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS"
+        )]
         public static void ExportAsPfxWithPrivateKey()
         {
-            using (X509Certificate2 cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable))
+            using (
+                X509Certificate2 cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable
+                )
+            )
             {
                 Assert.True(cert.HasPrivateKey, "cert.HasPrivateKey");
 
@@ -146,26 +173,46 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                     using (RSA origPriv = cert.GetRSAPrivateKey())
                     {
-                        origSign = origPriv.SignData(pfxBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                        origSign = origPriv.SignData(
+                            pfxBytes,
+                            HashAlgorithmName.SHA256,
+                            RSASignaturePadding.Pkcs1
+                        );
                     }
 
                     using (RSA copyPriv = fromPfx.GetRSAPrivateKey())
                     {
-                        copySign = copyPriv.SignData(pfxBytes, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                        copySign = copyPriv.SignData(
+                            pfxBytes,
+                            HashAlgorithmName.SHA256,
+                            RSASignaturePadding.Pkcs1
+                        );
                     }
 
                     using (RSA origPub = cert.GetRSAPublicKey())
                     {
                         Assert.True(
-                            origPub.VerifyData(pfxBytes, copySign, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1),
-                            "oPub v copySig");
+                            origPub.VerifyData(
+                                pfxBytes,
+                                copySign,
+                                HashAlgorithmName.SHA256,
+                                RSASignaturePadding.Pkcs1
+                            ),
+                            "oPub v copySig"
+                        );
                     }
 
                     using (RSA copyPub = fromPfx.GetRSAPublicKey())
                     {
                         Assert.True(
-                            copyPub.VerifyData(pfxBytes, origSign, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1),
-                            "copyPub v oSig");
+                            copyPub.VerifyData(
+                                pfxBytes,
+                                origSign,
+                                HashAlgorithmName.SHA256,
+                                RSASignaturePadding.Pkcs1
+                            ),
+                            "copyPub v oSig"
+                        );
                     }
                 }
             }
@@ -192,8 +239,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 {
                     X509Certificate2Collection coll = toClean.Collection;
 
-                    using (ImportedCollection matches =
-                        new ImportedCollection(coll.Find(X509FindType.FindBySubjectName, commonName, false)))
+                    using (
+                        ImportedCollection matches = new ImportedCollection(
+                            coll.Find(X509FindType.FindBySubjectName, commonName, false)
+                        )
+                    )
                     {
                         foreach (X509Certificate2 cert in matches.Collection)
                         {
@@ -214,7 +264,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 CngKeyCreationParameters options = new CngKeyCreationParameters
                 {
-                    ExportPolicy = CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport,
+                    ExportPolicy =
+                        CngExportPolicies.AllowExport | CngExportPolicies.AllowPlaintextExport,
                 };
 
                 using (CngKey key = CngKey.Create(CngAlgorithm.Rsa, keyName, options))
@@ -224,7 +275,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         subject,
                         rsaCng,
                         HashAlgorithmName.SHA256,
-                        RSASignaturePadding.Pkcs1);
+                        RSASignaturePadding.Pkcs1
+                    );
 
                     DateTimeOffset now = DateTimeOffset.UtcNow.AddMinutes(-5);
                     createdCert = certReq.CreateSelfSigned(now, now.AddDays(1));
@@ -237,7 +289,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection matches = toClean.Collection.Find(
                         X509FindType.FindBySubjectName,
                         commonName,
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     Assert.Equal(1, matches.Count);
                     foundCert = matches[0];
@@ -252,7 +305,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     X509Certificate2Collection matches = toClean.Collection.Find(
                         X509FindType.FindBySubjectName,
                         commonName,
-                        validOnly: false);
+                        validOnly: false
+                    );
 
                     Assert.Equal(1, matches.Count);
                     foundCert2 = matches[0];
@@ -279,9 +333,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     key.Delete();
                     key.Dispose();
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
 
             bool HasEphemeralKey(X509Certificate2 c)
@@ -300,7 +352,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void TryExportCertificatePem_DestinationTooSmall()
         {
-            using (X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped))
+            using (
+                X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped)
+            )
             {
                 // Too small by one
                 Span<char> destination = new char[TestData.CertRfc7468Wrapped.Length - 1];
@@ -312,7 +366,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void TryExportCertificatePem_DestinationJustRight()
         {
-            using (X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped))
+            using (
+                X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped)
+            )
             {
                 Span<char> destination = new char[TestData.CertRfc7468Wrapped.Length];
                 Assert.True(cert.TryExportCertificatePem(destination, out int charsWritten));
@@ -323,13 +379,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void TryExportCertificatePem_DestinationLarger()
         {
-            using (X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped))
+            using (
+                X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped)
+            )
             {
                 int padding = 10;
                 Span<char> destination = new char[TestData.CertRfc7468Wrapped.Length + padding * 2];
                 destination.Fill('!');
-                Assert.True(cert.TryExportCertificatePem(destination.Slice(padding), out int charsWritten));
-                Assert.Equal(TestData.CertRfc7468Wrapped, new string(destination.Slice(padding, charsWritten)));
+                Assert.True(
+                    cert.TryExportCertificatePem(destination.Slice(padding), out int charsWritten)
+                );
+                Assert.Equal(
+                    TestData.CertRfc7468Wrapped,
+                    new string(destination.Slice(padding, charsWritten))
+                );
 
                 // Assert front padding is unaltered
                 AssertExtensions.FilledWith('!', destination.Slice(0, padding));
@@ -342,7 +405,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ExportCertificatePem()
         {
-            using (X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped))
+            using (
+                X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.CertRfc7468Wrapped)
+            )
             {
                 string pem = cert.ExportCertificatePem();
                 Assert.Equal(TestData.CertRfc7468Wrapped, pem);

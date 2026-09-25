@@ -5,15 +5,15 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Security;
-    using System.IdentityModel.Claims;
-    using System.IdentityModel.Policy;
-    using System.IdentityModel.Tokens;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.IdentityModel.Claims;
+    using System.IdentityModel.Policy;
+    using System.IdentityModel.Tokens;
     using System.Security.Principal;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public class ServiceSecurityContext
     {
@@ -25,30 +25,39 @@ namespace System.ServiceModel
         WindowsIdentity windowsIdentity;
 
         // Perf: delay created authorizationContext using forward chain.
-        public ServiceSecurityContext(ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        public ServiceSecurityContext(
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationPolicies");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationPolicies"
+                );
             }
             this.authorizationContext = null;
             this.authorizationPolicies = authorizationPolicies;
         }
 
         public ServiceSecurityContext(AuthorizationContext authorizationContext)
-            : this(authorizationContext, EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance)
-        {
-        }
+            : this(authorizationContext, EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance) { }
 
-        public ServiceSecurityContext(AuthorizationContext authorizationContext, ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        public ServiceSecurityContext(
+            AuthorizationContext authorizationContext,
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             if (authorizationContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationContext");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationContext"
+                );
             }
             if (authorizationPolicies == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("authorizationPolicies");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "authorizationPolicies"
+                );
             }
             this.authorizationContext = authorizationContext;
             this.authorizationPolicies = authorizationPolicies;
@@ -60,7 +69,9 @@ namespace System.ServiceModel
             {
                 if (anonymous == null)
                 {
-                    anonymous = new ServiceSecurityContext(EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance);
+                    anonymous = new ServiceSecurityContext(
+                        EmptyReadOnlyCollection<IAuthorizationPolicy>.Instance
+                    );
                 }
                 return anonymous;
             }
@@ -92,10 +103,7 @@ namespace System.ServiceModel
 
         public bool IsAnonymous
         {
-            get
-            {
-                return this == Anonymous || this.IdentityClaim == null;
-            }
+            get { return this == Anonymous || this.IdentityClaim == null; }
         }
 
         internal Claim IdentityClaim
@@ -104,7 +112,9 @@ namespace System.ServiceModel
             {
                 if (this.identityClaim == null)
                 {
-                    this.identityClaim = SecurityUtils.GetPrimaryIdentityClaim(this.AuthorizationContext);
+                    this.identityClaim = SecurityUtils.GetPrimaryIdentityClaim(
+                        this.AuthorizationContext
+                    );
                 }
                 return this.identityClaim;
             }
@@ -164,14 +174,8 @@ namespace System.ServiceModel
 
         public ReadOnlyCollection<IAuthorizationPolicy> AuthorizationPolicies
         {
-            get
-            {
-                return this.authorizationPolicies;
-            }
-            set
-            {
-                this.authorizationPolicies = value;
-            }
+            get { return this.authorizationPolicies; }
+            set { this.authorizationPolicies = value; }
         }
 
         public AuthorizationContext AuthorizationContext
@@ -180,7 +184,10 @@ namespace System.ServiceModel
             {
                 if (this.authorizationContext == null)
                 {
-                    this.authorizationContext = AuthorizationContext.CreateDefaultAuthorizationContext(this.authorizationPolicies);
+                    this.authorizationContext =
+                        AuthorizationContext.CreateDefaultAuthorizationContext(
+                            this.authorizationPolicies
+                        );
                 }
                 return this.authorizationContext;
             }
@@ -190,7 +197,10 @@ namespace System.ServiceModel
         {
             object identities;
             AuthorizationContext authContext = this.AuthorizationContext;
-            if (authContext != null && authContext.Properties.TryGetValue(SecurityUtils.Identities, out identities))
+            if (
+                authContext != null
+                && authContext.Properties.TryGetValue(SecurityUtils.Identities, out identities)
+            )
             {
                 return identities as IList<IIdentity>;
             }

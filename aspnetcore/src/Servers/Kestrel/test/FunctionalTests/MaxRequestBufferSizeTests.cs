@@ -347,16 +347,13 @@ public class MaxRequestBufferSizeTests : LoggedTest
                 webHostBuilder
                     .UseKestrel(options =>
                     {
-                        options.Listen(
-                            new IPEndPoint(IPAddress.Loopback, 0),
-                            listenOptions =>
+                        options.Listen(new IPEndPoint(IPAddress.Loopback, 0), listenOptions =>
+                        {
+                            if (useConnectionAdapter)
                             {
-                                if (useConnectionAdapter)
-                                {
-                                    listenOptions.UsePassThrough();
-                                }
+                                listenOptions.UsePassThrough();
                             }
-                        );
+                        });
 
                         options.Limits.MaxRequestBufferSize = maxRequestBufferSize;
 

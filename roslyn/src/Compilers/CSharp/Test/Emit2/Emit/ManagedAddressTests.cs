@@ -49,35 +49,50 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
                 }
                 """;
 
-            var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugExe).VerifyDiagnostics(
-                // (6,5): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
-                //     int[]* xp = &x;
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "int[]*").WithArguments("int[]").WithLocation(6, 5),
-                // (6,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
-                //     int[]* xp = &x;
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&x").WithArguments("int[]").WithLocation(6, 17),
-                // (13,20): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
-                //     private int[]* _x;
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "_x").WithArguments("int[]").WithLocation(13, 20),
-                // (15,21): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
-                //     public C(int[]* x)
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "x").WithArguments("int[]").WithLocation(15, 21)
+            var comp = CreateCompilation(source, options: TestOptions.UnsafeDebugExe)
+                .VerifyDiagnostics(
+                    // (6,5): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    //     int[]* xp = &x;
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "int[]*")
+                        .WithArguments("int[]")
+                        .WithLocation(6, 5),
+                    // (6,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    //     int[]* xp = &x;
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "&x")
+                        .WithArguments("int[]")
+                        .WithLocation(6, 17),
+                    // (13,20): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    //     private int[]* _x;
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "_x")
+                        .WithArguments("int[]")
+                        .WithLocation(13, 20),
+                    // (15,21): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('int[]')
+                    //     public C(int[]* x)
+                    Diagnostic(ErrorCode.WRN_ManagedAddr, "x")
+                        .WithArguments("int[]")
+                        .WithLocation(15, 21)
                 );
-            var verifier = CompileAndVerify(comp, expectedOutput: "012", verify: Verification.Fails with
-            {
-                ILVerifyMessage = """
-                [<Main>$]: Expected numeric type on the stack. { Offset = 0x12, Found = address of 'int32[]' }
-                [.ctor]: Unmanaged pointers are not a verifiable type. { Offset = 0x9 }
-                [Print]: Expected ByRef on the stack. { Offset = 0x7, Found = Native Int }
-                """,
-                PEVerifyMessage = """
-                [ : Program::<Main>$][offset 0x00000012][found address of ref ] Expected numeric type on the stack.
-                [ : C::.ctor][offset 0x00000009] Unmanaged pointers are not a verifiable type.
-                [ : C::Print][offset 0x00000007][found unmanaged pointer] Expected ByRef on the stack.
-                """,
-            });
+            var verifier = CompileAndVerify(
+                comp,
+                expectedOutput: "012",
+                verify: Verification.Fails with
+                {
+                    ILVerifyMessage = """
+                    [<Main>$]: Expected numeric type on the stack. { Offset = 0x12, Found = address of 'int32[]' }
+                    [.ctor]: Unmanaged pointers are not a verifiable type. { Offset = 0x9 }
+                    [Print]: Expected ByRef on the stack. { Offset = 0x7, Found = Native Int }
+                    """,
+                    PEVerifyMessage = """
+                    [ : Program::<Main>$][offset 0x00000012][found address of ref ] Expected numeric type on the stack.
+                    [ : C::.ctor][offset 0x00000009] Unmanaged pointers are not a verifiable type.
+                    [ : C::Print][offset 0x00000007][found unmanaged pointer] Expected ByRef on the stack.
+                    """,
+                }
+            );
 
-            verifier.VerifyMethodBody("<top-level-statements-entry-point>", """
+            verifier.VerifyMethodBody(
+                "<top-level-statements-entry-point>",
+                """
                 {
                   // Code size       36 (0x24)
                   .maxstack  4
@@ -114,9 +129,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
                   IL_0022:  nop
                   IL_0023:  ret
                 }
-                """);
+                """
+            );
 
-            verifier.VerifyMethodBody("C..ctor", """
+            verifier.VerifyMethodBody(
+                "C..ctor",
+                """
                 {
                   // Code size       16 (0x10)
                   .maxstack  2
@@ -133,9 +151,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
                   // sequence point: }
                   IL_000f:  ret
                 }
-                """);
+                """
+            );
 
-            verifier.VerifyMethodBody("C.Print", """
+            verifier.VerifyMethodBody(
+                "C.Print",
+                """
                 {
                   // Code size       39 (0x27)
                   .maxstack  2
@@ -182,7 +203,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
                   // sequence point: }
                   IL_0026:  ret
                 }
-                """);
+                """
+            );
         }
     }
 }

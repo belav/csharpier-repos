@@ -21,7 +21,10 @@ namespace Microsoft.EntityFrameworkCore.Storage;
 /// </remarks>
 public class RelationalExecutionStrategyFactory : IExecutionStrategyFactory
 {
-    private readonly Func<ExecutionStrategyDependencies, IExecutionStrategy> _createExecutionStrategy;
+    private readonly Func<
+        ExecutionStrategyDependencies,
+        IExecutionStrategy
+    > _createExecutionStrategy;
 
     /// <summary>
     ///     Creates a new instance of this class with the given service dependencies.
@@ -31,7 +34,9 @@ public class RelationalExecutionStrategyFactory : IExecutionStrategyFactory
     {
         Dependencies = dependencies;
 
-        var configuredFactory = RelationalOptionsExtension.Extract(dependencies.Options).ExecutionStrategyFactory;
+        var configuredFactory = RelationalOptionsExtension
+            .Extract(dependencies.Options)
+            .ExecutionStrategyFactory;
 
         _createExecutionStrategy = configuredFactory ?? CreateDefaultStrategy;
     }
@@ -45,12 +50,12 @@ public class RelationalExecutionStrategyFactory : IExecutionStrategyFactory
     ///     Creates or returns a cached instance of the default <see cref="IExecutionStrategy" /> for the
     ///     current database provider.
     /// </summary>
-    protected virtual IExecutionStrategy CreateDefaultStrategy(ExecutionStrategyDependencies dependencies)
-        => new NonRetryingExecutionStrategy(dependencies);
+    protected virtual IExecutionStrategy CreateDefaultStrategy(
+        ExecutionStrategyDependencies dependencies
+    ) => new NonRetryingExecutionStrategy(dependencies);
 
     /// <summary>
     ///     Creates an <see cref="IExecutionStrategy" /> for the current database provider.
     /// </summary>
-    public virtual IExecutionStrategy Create()
-        => _createExecutionStrategy(Dependencies);
+    public virtual IExecutionStrategy Create() => _createExecutionStrategy(Dependencies);
 }

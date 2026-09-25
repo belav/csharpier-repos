@@ -28,164 +28,180 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
-using System.Threading;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography.Apple;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using Microsoft.Win32.SafeHandles;
 
 namespace Mono.AppleTls
 {
-	static partial class MonoCertificatePal
-	{
-		const string SecurityLibrary = OSX509Certificates.SecurityLibrary;
+    static partial class MonoCertificatePal
+    {
+        const string SecurityLibrary = OSX509Certificates.SecurityLibrary;
 
-		[DllImport (SecurityLibrary)]
-		extern static IntPtr SecCertificateCreateWithData (IntPtr allocator, IntPtr cfData);
+        [DllImport(SecurityLibrary)]
+        static extern IntPtr SecCertificateCreateWithData(IntPtr allocator, IntPtr cfData);
 
-		public static SafeSecCertificateHandle FromOtherCertificate (X509Certificate certificate)
-		{
-			if (certificate == null)
-				throw new ArgumentNullException (nameof (certificate));
-			return FromOtherCertificate (certificate.Impl);
-		}
+        public static SafeSecCertificateHandle FromOtherCertificate(X509Certificate certificate)
+        {
+            if (certificate == null)
+                throw new ArgumentNullException(nameof(certificate));
+            return FromOtherCertificate(certificate.Impl);
+        }
 
-		public static SafeSecCertificateHandle FromOtherCertificate (X509CertificateImpl impl)
-		{
-			X509Helper.ThrowIfContextInvalid (impl);
+        public static SafeSecCertificateHandle FromOtherCertificate(X509CertificateImpl impl)
+        {
+            X509Helper.ThrowIfContextInvalid(impl);
 
-			var handle = impl.GetNativeAppleCertificate ();
-			if (handle != IntPtr.Zero)
-				return new SafeSecCertificateHandle (handle, false);
+            var handle = impl.GetNativeAppleCertificate();
+            if (handle != IntPtr.Zero)
+                return new SafeSecCertificateHandle(handle, false);
 
-			using (var data = CFData.FromData (impl.RawData)) {
-				handle = SecCertificateCreateWithData (IntPtr.Zero, data.Handle);
-				if (handle == IntPtr.Zero)
-					throw new ArgumentException ("Not a valid DER-encoded X.509 certificate");
+            using (var data = CFData.FromData(impl.RawData))
+            {
+                handle = SecCertificateCreateWithData(IntPtr.Zero, data.Handle);
+                if (handle == IntPtr.Zero)
+                    throw new ArgumentException("Not a valid DER-encoded X.509 certificate");
 
-				return new SafeSecCertificateHandle (handle, true);
-			}
-		}
+                return new SafeSecCertificateHandle(handle, true);
+            }
+        }
 
-		[DllImport (SecurityLibrary)]
-		extern static IntPtr SecIdentityGetTypeID ();
+        [DllImport(SecurityLibrary)]
+        static extern IntPtr SecIdentityGetTypeID();
 
-		public static bool IsSecIdentity (IntPtr ptr)
-		{
-			if (ptr == IntPtr.Zero)
-				return false;
-			return CFType.GetTypeID (ptr) == SecIdentityGetTypeID ();
-		}
+        public static bool IsSecIdentity(IntPtr ptr)
+        {
+            if (ptr == IntPtr.Zero)
+                return false;
+            return CFType.GetTypeID(ptr) == SecIdentityGetTypeID();
+        }
 
-		[DllImport (SecurityLibrary)]
-		public extern static IntPtr SecKeyGetTypeID ();
-		
-		public static bool IsSecKey (IntPtr ptr)
-		{
-			if (ptr == IntPtr.Zero)
-				return false;
-			return CFType.GetTypeID (ptr) == SecKeyGetTypeID ();
-		}
+        [DllImport(SecurityLibrary)]
+        public static extern IntPtr SecKeyGetTypeID();
 
-		[DllImport (SecurityLibrary)]
-		extern static /* OSStatus */ SecStatusCode SecIdentityCopyCertificate (/* SecIdentityRef */ IntPtr identityRef,  /* SecCertificateRef* */ out IntPtr certificateRef);
+        public static bool IsSecKey(IntPtr ptr)
+        {
+            if (ptr == IntPtr.Zero)
+                return false;
+            return CFType.GetTypeID(ptr) == SecKeyGetTypeID();
+        }
 
-		public static SafeSecCertificateHandle GetCertificate (SafeSecIdentityHandle identity)
-		{
-			if (identity == null || identity.IsInvalid)
-				throw new ArgumentNullException (nameof (identity));
-			var result = SecIdentityCopyCertificate (identity.DangerousGetHandle (), out var cert);
-			if (result != SecStatusCode.Success)
-				throw new InvalidOperationException (result.ToString ());
-			return new SafeSecCertificateHandle (cert, true);
-		}
+        [DllImport(SecurityLibrary)]
+        static /* OSStatus */
+        extern SecStatusCode SecIdentityCopyCertificate( /* SecIdentityRef */
+            IntPtr identityRef, /* SecCertificateRef* */
+            out IntPtr certificateRef
+        );
 
-		[DllImport (SecurityLibrary)]
-		extern static IntPtr SecCertificateCopySubjectSummary (IntPtr cert);
+        public static SafeSecCertificateHandle GetCertificate(SafeSecIdentityHandle identity)
+        {
+            if (identity == null || identity.IsInvalid)
+                throw new ArgumentNullException(nameof(identity));
+            var result = SecIdentityCopyCertificate(identity.DangerousGetHandle(), out var cert);
+            if (result != SecStatusCode.Success)
+                throw new InvalidOperationException(result.ToString());
+            return new SafeSecCertificateHandle(cert, true);
+        }
 
-		public static string GetSubjectSummary (SafeSecCertificateHandle certificate)
-		{
-			if (certificate == null || certificate.IsInvalid)
-				throw new ArgumentNullException (nameof (certificate));
+        [DllImport(SecurityLibrary)]
+        static extern IntPtr SecCertificateCopySubjectSummary(IntPtr cert);
 
-			var subjectSummaryHandle = IntPtr.Zero;
-			try {
-				subjectSummaryHandle = SecCertificateCopySubjectSummary (certificate.DangerousGetHandle ());
-				return CFString.AsString (subjectSummaryHandle);
-			} finally {
-				if (subjectSummaryHandle != IntPtr.Zero)
-					CFObject.CFRelease (subjectSummaryHandle);
-			}
-		}
+        public static string GetSubjectSummary(SafeSecCertificateHandle certificate)
+        {
+            if (certificate == null || certificate.IsInvalid)
+                throw new ArgumentNullException(nameof(certificate));
 
-		[DllImport (SecurityLibrary)]
-		extern static /* CFDataRef */ IntPtr SecCertificateCopyData (/* SecCertificateRef */ IntPtr cert);
+            var subjectSummaryHandle = IntPtr.Zero;
+            try
+            {
+                subjectSummaryHandle = SecCertificateCopySubjectSummary(
+                    certificate.DangerousGetHandle()
+                );
+                return CFString.AsString(subjectSummaryHandle);
+            }
+            finally
+            {
+                if (subjectSummaryHandle != IntPtr.Zero)
+                    CFObject.CFRelease(subjectSummaryHandle);
+            }
+        }
 
-		public static byte[] GetRawData (SafeSecCertificateHandle certificate)
-		{
-			if (certificate == null || certificate.IsInvalid)
-				throw new ArgumentNullException (nameof (certificate));
+        [DllImport(SecurityLibrary)]
+        static /* CFDataRef */
+        extern IntPtr SecCertificateCopyData( /* SecCertificateRef */
+            IntPtr cert
+        );
 
-			var dataPtr = SecCertificateCopyData (certificate.DangerousGetHandle ());
-			if (dataPtr == IntPtr.Zero)
-				throw new ArgumentException ("Not a valid certificate");
+        public static byte[] GetRawData(SafeSecCertificateHandle certificate)
+        {
+            if (certificate == null || certificate.IsInvalid)
+                throw new ArgumentNullException(nameof(certificate));
 
-			using (var data = new CFData (dataPtr, true)) {
-				var buffer = new byte[(int)data.Length];
-				Marshal.Copy (data.Bytes, buffer, 0, buffer.Length);
-				return buffer;
-			}
-		}
+            var dataPtr = SecCertificateCopyData(certificate.DangerousGetHandle());
+            if (dataPtr == IntPtr.Zero)
+                throw new ArgumentException("Not a valid certificate");
 
+            using (var data = new CFData(dataPtr, true))
+            {
+                var buffer = new byte[(int)data.Length];
+                Marshal.Copy(data.Bytes, buffer, 0, buffer.Length);
+                return buffer;
+            }
+        }
 
-		public static bool Equals (SafeSecCertificateHandle first, SafeSecCertificateHandle second)
-		{
-			/*
-			 * This is a little bit expensive, but unfortunately there is no better API to compare two
-			 * SecCertificateRef's for equality.
-			 */
-			if (first == null || first.IsInvalid)
-				throw new ArgumentNullException (nameof (first));
-			if (second == null || second.IsInvalid)
-				throw new ArgumentNullException (nameof (second));
-			if (first.DangerousGetHandle () == second.DangerousGetHandle ())
-				return true;
+        public static bool Equals(SafeSecCertificateHandle first, SafeSecCertificateHandle second)
+        {
+            /*
+             * This is a little bit expensive, but unfortunately there is no better API to compare two
+             * SecCertificateRef's for equality.
+             */
+            if (first == null || first.IsInvalid)
+                throw new ArgumentNullException(nameof(first));
+            if (second == null || second.IsInvalid)
+                throw new ArgumentNullException(nameof(second));
+            if (first.DangerousGetHandle() == second.DangerousGetHandle())
+                return true;
 
-			var firstDataPtr = SecCertificateCopyData (first.DangerousGetHandle ());
-			var secondDataPtr = SecCertificateCopyData (first.DangerousGetHandle ());
+            var firstDataPtr = SecCertificateCopyData(first.DangerousGetHandle());
+            var secondDataPtr = SecCertificateCopyData(first.DangerousGetHandle());
 
-			try {
-				if (firstDataPtr == IntPtr.Zero || secondDataPtr == IntPtr.Zero)
-					throw new ArgumentException ("Not a valid certificate.");
-				if (firstDataPtr == secondDataPtr)
-					return true;
+            try
+            {
+                if (firstDataPtr == IntPtr.Zero || secondDataPtr == IntPtr.Zero)
+                    throw new ArgumentException("Not a valid certificate.");
+                if (firstDataPtr == secondDataPtr)
+                    return true;
 
-				var firstLength = (int)CFData.CFDataGetLength (firstDataPtr);
-				var secondLength = (int)CFData.CFDataGetLength (secondDataPtr);
-				if (firstLength != secondLength)
-					return false;
+                var firstLength = (int)CFData.CFDataGetLength(firstDataPtr);
+                var secondLength = (int)CFData.CFDataGetLength(secondDataPtr);
+                if (firstLength != secondLength)
+                    return false;
 
-				var firstBytePtr = CFData.CFDataGetBytePtr (firstDataPtr);
-				var secondBytePtr = CFData.CFDataGetBytePtr (secondDataPtr);
-				if (firstBytePtr == secondBytePtr)
-					return true;
+                var firstBytePtr = CFData.CFDataGetBytePtr(firstDataPtr);
+                var secondBytePtr = CFData.CFDataGetBytePtr(secondDataPtr);
+                if (firstBytePtr == secondBytePtr)
+                    return true;
 
-				var firstBuffer = new byte[firstLength];
-				var secondBuffer = new byte[secondLength];
-				Marshal.Copy (firstBytePtr, firstBuffer, 0, firstBuffer.Length);
-				Marshal.Copy (secondBytePtr, secondBuffer, 0, secondBuffer.Length);
+                var firstBuffer = new byte[firstLength];
+                var secondBuffer = new byte[secondLength];
+                Marshal.Copy(firstBytePtr, firstBuffer, 0, firstBuffer.Length);
+                Marshal.Copy(secondBytePtr, secondBuffer, 0, secondBuffer.Length);
 
-				for (int i = 0; i < firstBuffer.Length; i++)
-					if (firstBuffer[i] != secondBuffer[i])
-						return false;
+                for (int i = 0; i < firstBuffer.Length; i++)
+                    if (firstBuffer[i] != secondBuffer[i])
+                        return false;
 
-				return true;
-			} finally {
-				if (firstDataPtr != IntPtr.Zero)
-					CFObject.CFRelease (firstDataPtr);
-				if (secondDataPtr != IntPtr.Zero)
-					CFObject.CFRelease (secondDataPtr);
-			}
-		}
-	}
+                return true;
+            }
+            finally
+            {
+                if (firstDataPtr != IntPtr.Zero)
+                    CFObject.CFRelease(firstDataPtr);
+                if (secondDataPtr != IntPtr.Zero)
+                    CFObject.CFRelease(secondDataPtr);
+            }
+        }
+    }
 }

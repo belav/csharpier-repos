@@ -17,7 +17,10 @@ namespace IntelHardwareIntrinsicTest.Pause
         const int Fail = 0;
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/73454;https://github.com/dotnet/runtime/pull/61707#issuecomment-973122341", TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/73454;https://github.com/dotnet/runtime/pull/61707#issuecomment-973122341",
+            TestRuntimes.Mono
+        )]
         public static unsafe void Pause()
         {
             if (X86Base.IsSupported)

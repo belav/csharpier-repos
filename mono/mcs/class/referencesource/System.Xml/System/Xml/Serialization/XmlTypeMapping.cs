@@ -2,24 +2,25 @@
 // <copyright file="XmlTypeMapping.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
-
-    using System.Reflection;
+namespace System.Xml.Serialization
+{
     using System;
+    using System.Reflection;
 
     /// <include file='doc\XmlTypeMapping.uex' path='docs/doc[@for="XmlTypeMapping"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlTypeMapping : XmlMapping {
+    public class XmlTypeMapping : XmlMapping
+    {
+        internal XmlTypeMapping(TypeScope scope, ElementAccessor accessor)
+            : base(scope, accessor) { }
 
-        internal XmlTypeMapping(TypeScope scope, ElementAccessor accessor) : base(scope, accessor) { 
-        }
-
-        internal TypeMapping Mapping {
+        internal TypeMapping Mapping
+        {
             get { return Accessor.Mapping; }
         }
 
@@ -27,7 +28,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string TypeName {
+        public string TypeName
+        {
             get { return Mapping.TypeDesc.Name; }
         }
 
@@ -35,7 +37,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string TypeFullName {
+        public string TypeFullName
+        {
             get { return Mapping.TypeDesc.FullName; }
         }
 
@@ -43,7 +46,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string XsdTypeName {
+        public string XsdTypeName
+        {
             get { return Mapping.TypeName; }
         }
 
@@ -51,7 +55,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string XsdTypeNamespace {
+        public string XsdTypeNamespace
+        {
             get { return Mapping.Namespace; }
         }
     }

@@ -51,8 +51,14 @@ namespace System.Web.Http.Owin
 
             if (_messageHandler == null)
             {
-                throw new ArgumentException(Error.Format(OwinResources.TypePropertyMustNotBeNull,
-                    typeof(HttpMessageHandlerOptions).Name, "MessageHandler"), "options");
+                throw new ArgumentException(
+                    Error.Format(
+                        OwinResources.TypePropertyMustNotBeNull,
+                        typeof(HttpMessageHandlerOptions).Name,
+                        "MessageHandler"
+                    ),
+                    "options"
+                );
             }
 
             _messageInvoker = new HttpMessageInvoker(_messageHandler);
@@ -60,24 +66,42 @@ namespace System.Web.Http.Owin
 
             if (_bufferPolicySelector == null)
             {
-                throw new ArgumentException(Error.Format(OwinResources.TypePropertyMustNotBeNull,
-                    typeof(HttpMessageHandlerOptions).Name, "BufferPolicySelector"), "options");
+                throw new ArgumentException(
+                    Error.Format(
+                        OwinResources.TypePropertyMustNotBeNull,
+                        typeof(HttpMessageHandlerOptions).Name,
+                        "BufferPolicySelector"
+                    ),
+                    "options"
+                );
             }
 
             _exceptionLogger = options.ExceptionLogger;
 
             if (_exceptionLogger == null)
             {
-                throw new ArgumentException(Error.Format(OwinResources.TypePropertyMustNotBeNull,
-                    typeof(HttpMessageHandlerOptions).Name, "ExceptionLogger"), "options");
+                throw new ArgumentException(
+                    Error.Format(
+                        OwinResources.TypePropertyMustNotBeNull,
+                        typeof(HttpMessageHandlerOptions).Name,
+                        "ExceptionLogger"
+                    ),
+                    "options"
+                );
             }
 
             _exceptionHandler = options.ExceptionHandler;
 
             if (_exceptionHandler == null)
             {
-                throw new ArgumentException(Error.Format(OwinResources.TypePropertyMustNotBeNull,
-                    typeof(HttpMessageHandlerOptions).Name, "ExceptionHandler"), "options");
+                throw new ArgumentException(
+                    Error.Format(
+                        OwinResources.TypePropertyMustNotBeNull,
+                        typeof(HttpMessageHandlerOptions).Name,
+                        "ExceptionHandler"
+                    ),
+                    "options"
+                );
             }
 
             _appDisposing = options.AppDisposing;
@@ -99,12 +123,15 @@ namespace System.Web.Http.Owin
         /// This constructor is retained for backwards compatibility. The constructor taking
         /// <see cref="HttpMessageHandlerOptions"/> should be used instead.
         /// </remarks>
-        [Obsolete("Use the HttpMessageHandlerAdapter(OwinMiddleware, HttpMessageHandlerOptions) constructor instead.")]
-        public HttpMessageHandlerAdapter(OwinMiddleware next, HttpMessageHandler messageHandler,
-            IHostBufferPolicySelector bufferPolicySelector)
-            : this(next, CreateOptions(messageHandler, bufferPolicySelector))
-        {
-        }
+        [Obsolete(
+            "Use the HttpMessageHandlerAdapter(OwinMiddleware, HttpMessageHandlerOptions) constructor instead."
+        )]
+        public HttpMessageHandlerAdapter(
+            OwinMiddleware next,
+            HttpMessageHandler messageHandler,
+            IHostBufferPolicySelector bufferPolicySelector
+        )
+            : this(next, CreateOptions(messageHandler, bufferPolicySelector)) { }
 
         /// <summary>Gets the <see cref="HttpMessageHandler"/> to submit requests to.</summary>
         public HttpMessageHandler MessageHandler
@@ -162,7 +189,11 @@ namespace System.Web.Http.Owin
             return InvokeCore(context, owinRequest, owinResponse);
         }
 
-        private async Task InvokeCore(IOwinContext context, IOwinRequest owinRequest, IOwinResponse owinResponse)
+        private async Task InvokeCore(
+            IOwinContext context,
+            IOwinRequest owinRequest,
+            IOwinResponse owinResponse
+        )
         {
             CancellationToken cancellationToken = owinRequest.CallCancelled;
             HttpContent requestContent;
@@ -176,7 +207,10 @@ namespace System.Web.Http.Owin
 
             if (!owinRequest.Body.CanSeek && bufferInput)
             {
-                requestContent = await CreateBufferedRequestContentAsync(owinRequest, cancellationToken);
+                requestContent = await CreateBufferedRequestContentAsync(
+                    owinRequest,
+                    cancellationToken
+                );
             }
             else
             {
@@ -213,8 +247,15 @@ namespace System.Web.Http.Owin
                     // Compute Content-Length before calling UseBufferedOutputStream because the default implementation
                     // accesses that header and we want to catch any exceptions calling TryComputeLength here.
 
-                    if (response.Content == null
-                        || await ComputeContentLengthAsync(request, response, owinResponse, cancellationToken))
+                    if (
+                        response.Content == null
+                        || await ComputeContentLengthAsync(
+                            request,
+                            response,
+                            owinResponse,
+                            cancellationToken
+                        )
+                    )
                     {
                         bool bufferOutput = _bufferPolicySelector.UseBufferedOutputStream(response);
 
@@ -224,12 +265,28 @@ namespace System.Web.Http.Owin
                         }
                         else if (response.Content != null)
                         {
-                            response = await BufferResponseContentAsync(request, response, cancellationToken);
+                            response = await BufferResponseContentAsync(
+                                request,
+                                response,
+                                cancellationToken
+                            );
                         }
 
-                        if (await PrepareHeadersAsync(request, response, owinResponse, cancellationToken))
+                        if (
+                            await PrepareHeadersAsync(
+                                request,
+                                response,
+                                owinResponse,
+                                cancellationToken
+                            )
+                        )
                         {
-                            await SendResponseMessageAsync(request, response, owinResponse, cancellationToken);
+                            await SendResponseMessageAsync(
+                                request,
+                                response,
+                                owinResponse,
+                                cancellationToken
+                            );
                         }
                     }
                 }
@@ -260,8 +317,10 @@ namespace System.Web.Http.Owin
             return new StreamContent(new NonOwnedStream(owinRequest.Body));
         }
 
-        private static async Task<HttpContent> CreateBufferedRequestContentAsync(IOwinRequest owinRequest,
-            CancellationToken cancellationToken)
+        private static async Task<HttpContent> CreateBufferedRequestContentAsync(
+            IOwinRequest owinRequest,
+            CancellationToken cancellationToken
+        )
         {
             // We need to replace the request body with a buffered stream so that other components can read the stream.
             // For this stream to be useful, it must NOT be diposed along with the request. Streams created by
@@ -293,10 +352,16 @@ namespace System.Web.Http.Owin
             return new ByteArrayContent(buffer.GetBuffer(), 0, (int)buffer.Length);
         }
 
-        private static HttpRequestMessage CreateRequestMessage(IOwinRequest owinRequest, HttpContent requestContent)
+        private static HttpRequestMessage CreateRequestMessage(
+            IOwinRequest owinRequest,
+            HttpContent requestContent
+        )
         {
             // Create the request
-            HttpRequestMessage request = new HttpRequestMessage(new HttpMethod(owinRequest.Method), owinRequest.Uri);
+            HttpRequestMessage request = new HttpRequestMessage(
+                new HttpMethod(owinRequest.Method),
+                owinRequest.Uri
+            );
 
             try
             {
@@ -308,9 +373,14 @@ namespace System.Web.Http.Owin
                 {
                     if (!request.Headers.TryAddWithoutValidation(header.Key, header.Value))
                     {
-                        bool success = requestContent.Headers.TryAddWithoutValidation(header.Key, header.Value);
-                        Contract.Assert(success,
-                            "Every header can be added either to the request headers or to the content headers");
+                        bool success = requestContent.Headers.TryAddWithoutValidation(
+                            header.Key,
+                            header.Value
+                        );
+                        Contract.Assert(
+                            success,
+                            "Every header can be added either to the request headers or to the content headers"
+                        );
                     }
                 }
             }
@@ -346,8 +416,12 @@ namespace System.Web.Http.Owin
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
                 bool routingFailure;
-                if (request.Properties.TryGetValue<bool>(HttpPropertyKeys.NoRouteMatched, out routingFailure)
-                    && routingFailure)
+                if (
+                    request.Properties.TryGetValue<bool>(
+                        HttpPropertyKeys.NoRouteMatched,
+                        out routingFailure
+                    ) && routingFailure
+                )
                 {
                     return true;
                 }
@@ -355,8 +429,11 @@ namespace System.Web.Http.Owin
             return false;
         }
 
-        private async Task<HttpResponseMessage> BufferResponseContentAsync(HttpRequestMessage request,
-            HttpResponseMessage response, CancellationToken cancellationToken)
+        private async Task<HttpResponseMessage> BufferResponseContentAsync(
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            CancellationToken cancellationToken
+        )
         {
             ExceptionDispatchInfo exceptionInfo;
 
@@ -382,12 +459,18 @@ namespace System.Web.Http.Owin
 
             Debug.Assert(exceptionInfo.SourceException != null);
 
-            ExceptionContext exceptionContext = new ExceptionContext(exceptionInfo.SourceException,
-                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent, request, response);
+            ExceptionContext exceptionContext = new ExceptionContext(
+                exceptionInfo.SourceException,
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferContent,
+                request,
+                response
+            );
 
             await _exceptionLogger.LogAsync(exceptionContext, cancellationToken);
-            HttpResponseMessage errorResponse = await _exceptionHandler.HandleAsync(exceptionContext,
-                cancellationToken);
+            HttpResponseMessage errorResponse = await _exceptionHandler.HandleAsync(
+                exceptionContext,
+                cancellationToken
+            );
 
             response.Dispose();
 
@@ -423,8 +506,12 @@ namespace System.Web.Http.Owin
             // We tried to send back an error response with content, but we couldn't. It's an edge case; the best we
             // can do is to log that exception and send back an empty 500.
 
-            ExceptionContext errorExceptionContext = new ExceptionContext(errorException,
-                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError, request, response);
+            ExceptionContext errorExceptionContext = new ExceptionContext(
+                errorException,
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterBufferError,
+                request,
+                response
+            );
             await _exceptionLogger.LogAsync(errorExceptionContext, cancellationToken);
 
             response.Dispose();
@@ -432,15 +519,20 @@ namespace System.Web.Http.Owin
         }
 
         // Prepares Content-Length and Transfer-Encoding headers.
-        private Task<bool> PrepareHeadersAsync(HttpRequestMessage request, HttpResponseMessage response,
-            IOwinResponse owinResponse, CancellationToken cancellationToken)
+        private Task<bool> PrepareHeadersAsync(
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IOwinResponse owinResponse,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(response != null);
             HttpResponseHeaders responseHeaders = response.Headers;
             Contract.Assert(responseHeaders != null);
             HttpContent content = response.Content;
             bool isTransferEncodingChunked = responseHeaders.TransferEncodingChunked == true;
-            HttpHeaderValueCollection<TransferCodingHeaderValue> transferEncoding = responseHeaders.TransferEncoding;
+            HttpHeaderValueCollection<TransferCodingHeaderValue> transferEncoding =
+                responseHeaders.TransferEncoding;
 
             if (content != null)
             {
@@ -460,7 +552,12 @@ namespace System.Web.Http.Owin
                     // Copy the response content headers only after ensuring they are complete.
                     // We ask for Content-Length first because HttpContent lazily computes this header and only
                     // afterwards writes the value into the content headers.
-                    return ComputeContentLengthAsync(request, response, owinResponse, cancellationToken);
+                    return ComputeContentLengthAsync(
+                        request,
+                        response,
+                        owinResponse,
+                        cancellationToken
+                    );
                 }
             }
 
@@ -480,12 +577,23 @@ namespace System.Web.Http.Owin
             return Task.FromResult(true);
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "unused",
-            Justification = "unused variable necessary to call getter")]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "Exception is turned into an error response.")]
-        private Task<bool> ComputeContentLengthAsync(HttpRequestMessage request, HttpResponseMessage response,
-            IOwinResponse owinResponse, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1804:RemoveUnusedLocals",
+            MessageId = "unused",
+            Justification = "unused variable necessary to call getter"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is turned into an error response."
+        )]
+        private Task<bool> ComputeContentLengthAsync(
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IOwinResponse owinResponse,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(response != null);
             HttpResponseHeaders responseHeaders = response.Headers;
@@ -508,16 +616,31 @@ namespace System.Web.Http.Owin
                 exception = ex;
             }
 
-            return HandleTryComputeLengthExceptionAsync(exception, request, response, owinResponse, cancellationToken);
+            return HandleTryComputeLengthExceptionAsync(
+                exception,
+                request,
+                response,
+                owinResponse,
+                cancellationToken
+            );
         }
 
-        private async Task<bool> HandleTryComputeLengthExceptionAsync(Exception exception, HttpRequestMessage request,
-            HttpResponseMessage response, IOwinResponse owinResponse, CancellationToken cancellationToken)
+        private async Task<bool> HandleTryComputeLengthExceptionAsync(
+            Exception exception,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IOwinResponse owinResponse,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(owinResponse != null);
 
-            ExceptionContext exceptionContext = new ExceptionContext(exception,
-                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength, request, response);
+            ExceptionContext exceptionContext = new ExceptionContext(
+                exception,
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterComputeContentLength,
+                request,
+                response
+            );
             await _exceptionLogger.LogAsync(exceptionContext, cancellationToken);
 
             // Send back an empty error response if TryComputeLength throws.
@@ -526,8 +649,12 @@ namespace System.Web.Http.Owin
             return false;
         }
 
-        private Task SendResponseMessageAsync(HttpRequestMessage request, HttpResponseMessage response,
-            IOwinResponse owinResponse, CancellationToken cancellationToken)
+        private Task SendResponseMessageAsync(
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IOwinResponse owinResponse,
+            CancellationToken cancellationToken
+        )
         {
             owinResponse.StatusCode = (int)response.StatusCode;
             owinResponse.ReasonPhrase = response.ReasonPhrase;
@@ -548,7 +675,12 @@ namespace System.Web.Http.Owin
             else
             {
                 // Copy content headers
-                foreach (KeyValuePair<string, IEnumerable<string>> contentHeader in responseContent.Headers)
+                foreach (
+                    KeyValuePair<
+                        string,
+                        IEnumerable<string>
+                    > contentHeader in responseContent.Headers
+                )
                 {
                     responseHeaders[contentHeader.Key] = contentHeader.Value.AsArray();
                 }
@@ -564,8 +696,12 @@ namespace System.Web.Http.Owin
             headers["Content-Length"] = new string[] { "0" };
         }
 
-        private async Task SendResponseContentAsync(HttpRequestMessage request, HttpResponseMessage response,
-            IOwinResponse owinResponse, CancellationToken cancellationToken)
+        private async Task SendResponseContentAsync(
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IOwinResponse owinResponse,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(response != null);
             Contract.Assert(response.Content != null);
@@ -590,8 +726,12 @@ namespace System.Web.Http.Owin
 
             // We're streaming content, so we can only call loggers, not handlers, as we've already (possibly) send the
             // status code and headers across the wire. Log the exception, but then just abort.
-            ExceptionContext exceptionContext = new ExceptionContext(exception,
-                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent, request, response);
+            ExceptionContext exceptionContext = new ExceptionContext(
+                exception,
+                OwinExceptionCatchBlocks.HttpMessageHandlerAdapterStreamContent,
+                request,
+                response
+            );
             await _exceptionLogger.LogAsync(exceptionContext, cancellationToken);
             await AbortResponseAsync();
         }
@@ -604,8 +744,10 @@ namespace System.Web.Http.Owin
         }
 
         // Provides HttpMessageHandlerOptions for callers using the old constructor.
-        private static HttpMessageHandlerOptions CreateOptions(HttpMessageHandler messageHandler,
-            IHostBufferPolicySelector bufferPolicySelector)
+        private static HttpMessageHandlerOptions CreateOptions(
+            HttpMessageHandler messageHandler,
+            IHostBufferPolicySelector bufferPolicySelector
+        )
         {
             if (messageHandler == null)
             {
@@ -626,7 +768,7 @@ namespace System.Web.Http.Owin
                 BufferPolicySelector = bufferPolicySelector,
                 ExceptionLogger = new EmptyExceptionLogger(),
                 ExceptionHandler = new DefaultExceptionHandler(),
-                AppDisposing = CancellationToken.None
+                AppDisposing = CancellationToken.None,
             };
         }
 

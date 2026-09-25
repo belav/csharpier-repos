@@ -1,15 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="ImageClickEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
-
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>

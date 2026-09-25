@@ -27,7 +27,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new FileContentResult(null, "contentType"); }, "fileContents");
+                delegate
+                {
+                    new FileContentResult(null, "contentType");
+                },
+                "fileContents"
+            );
         }
 
         [Fact]
@@ -41,7 +46,10 @@ namespace System.Web.Mvc.Test
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
             mockResponse.Setup(r => r.OutputStream).Returns(mockOutputStream.Object);
 
-            FileContentResultHelper helper = new FileContentResultHelper(buffer, "application/octet-stream");
+            FileContentResultHelper helper = new FileContentResultHelper(
+                buffer,
+                "application/octet-stream"
+            );
 
             // Act
             helper.PublicWriteFile(mockResponse.Object);
@@ -54,9 +62,7 @@ namespace System.Web.Mvc.Test
         private class FileContentResultHelper : FileContentResult
         {
             public FileContentResultHelper(byte[] fileContents, string contentType)
-                : base(fileContents, contentType)
-            {
-            }
+                : base(fileContents, contentType) { }
 
             public void PublicWriteFile(HttpResponseBase response)
             {

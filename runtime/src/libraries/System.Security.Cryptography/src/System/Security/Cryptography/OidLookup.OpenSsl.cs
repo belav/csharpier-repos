@@ -15,7 +15,11 @@ namespace System.Security.Cryptography
             return true;
         }
 
-        private static string? NativeOidToFriendlyName(string oid, OidGroup oidGroup, bool fallBackToAllGroups)
+        private static string? NativeOidToFriendlyName(
+            string oid,
+            OidGroup oidGroup,
+            bool fallBackToAllGroups
+        )
         {
             IntPtr friendlyNamePtr = IntPtr.Zero;
             int result = Interop.Crypto.LookupFriendlyNameByOid(oid, ref friendlyNamePtr);
@@ -30,7 +34,10 @@ namespace System.Security.Cryptography
                 case -1: /* OpenSSL internal error */
                     throw Interop.Crypto.CreateOpenSslCryptographicException();
                 default:
-                    Debug.Assert(result == 0, $"LookupFriendlyNameByOid returned unexpected result {result}");
+                    Debug.Assert(
+                        result == 0,
+                        $"LookupFriendlyNameByOid returned unexpected result {result}"
+                    );
 
                     // The lookup may have left errors in this case, clean up for precaution.
                     Interop.Crypto.ErrClearError();
@@ -38,7 +45,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        private static string? NativeFriendlyNameToOid(string friendlyName, OidGroup oidGroup, bool fallBackToAllGroups)
+        private static string? NativeFriendlyNameToOid(
+            string friendlyName,
+            OidGroup oidGroup,
+            bool fallBackToAllGroups
+        )
         {
             IntPtr sharedObject = Interop.Crypto.GetObjectDefinitionByName(friendlyName);
 
@@ -51,6 +62,5 @@ namespace System.Security.Cryptography
         }
 
 #pragma warning restore IDE0060
-
     }
 }

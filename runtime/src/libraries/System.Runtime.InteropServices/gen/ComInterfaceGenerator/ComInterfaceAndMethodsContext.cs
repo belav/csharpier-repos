@@ -10,16 +10,21 @@ namespace Microsoft.Interop
     /// <summary>
     /// Represents an interface and all of the methods that need to be generated for it (methods declared on the interface and methods inherited from base interfaces).
     /// </summary>
-    internal sealed record ComInterfaceAndMethodsContext(ComInterfaceContext Interface, SequenceEqualImmutableArray<ComMethodContext> Methods)
+    internal sealed record ComInterfaceAndMethodsContext(
+        ComInterfaceContext Interface,
+        SequenceEqualImmutableArray<ComMethodContext> Methods
+    )
     {
         /// <summary>
         /// COM methods that are declared on the attributed interface declaration.
         /// </summary>
-        public IEnumerable<ComMethodContext> DeclaredMethods => Methods.Where(m => !m.IsInheritedMethod);
+        public IEnumerable<ComMethodContext> DeclaredMethods =>
+            Methods.Where(m => !m.IsInheritedMethod);
 
         /// <summary>
         /// COM methods that are declared on an interface the interface inherits from.
         /// </summary>
-        public IEnumerable<ComMethodContext> ShadowingMethods => Methods.Where(m => m.IsInheritedMethod);
+        public IEnumerable<ComMethodContext> ShadowingMethods =>
+            Methods.Where(m => m.IsInheritedMethod);
     }
 }

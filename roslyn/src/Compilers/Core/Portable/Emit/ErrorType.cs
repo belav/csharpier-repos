@@ -14,7 +14,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Emit
 {
     /// <summary>
-    /// Error type symbols should be replaced with an object of this class 
+    /// Error type symbols should be replaced with an object of this class
     /// in the translation layer for emit.
     /// </summary>
     internal class ErrorType : Cci.INamespaceTypeReference
@@ -33,52 +33,35 @@ namespace Microsoft.CodeAnalysis.Emit
 
         string Cci.INamespaceTypeReference.NamespaceName
         {
-            get
-            {
-                return "";
-            }
+            get { return ""; }
         }
 
         ushort Cci.INamedTypeReference.GenericParameterCount
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         bool Cci.INamedTypeReference.MangleName
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
 #nullable enable
         string? Cci.INamedTypeReference.AssociatedFileIdentifier
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
+
 #nullable disable
 
         bool Cci.ITypeReference.IsEnum
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         bool Cci.ITypeReference.IsValueType
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         Cci.ITypeDefinition Cci.ITypeReference.GetResolvedType(EmitContext context)
@@ -88,55 +71,39 @@ namespace Microsoft.CodeAnalysis.Emit
 
         Cci.PrimitiveTypeCode Cci.ITypeReference.TypeCode
         {
-            get
-            {
-                return Cci.PrimitiveTypeCode.NotPrimitive;
-            }
+            get { return Cci.PrimitiveTypeCode.NotPrimitive; }
         }
 
         TypeDefinitionHandle Cci.ITypeReference.TypeDef
         {
-            get
-            {
-                return default(TypeDefinitionHandle);
-            }
+            get { return default(TypeDefinitionHandle); }
         }
 
         Cci.IGenericMethodParameterReference Cci.ITypeReference.AsGenericMethodParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         Cci.IGenericTypeInstanceReference Cci.ITypeReference.AsGenericTypeInstanceReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         Cci.IGenericTypeParameterReference Cci.ITypeReference.AsGenericTypeParameterReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
-        Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(EmitContext context)
+        Cci.INamespaceTypeDefinition Cci.ITypeReference.AsNamespaceTypeDefinition(
+            EmitContext context
+        )
         {
             return null;
         }
 
         Cci.INamespaceTypeReference Cci.ITypeReference.AsNamespaceTypeReference
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         Cci.INestedTypeDefinition Cci.ITypeReference.AsNestedTypeDefinition(EmitContext context)
@@ -146,18 +113,12 @@ namespace Microsoft.CodeAnalysis.Emit
 
         Cci.INestedTypeReference Cci.ITypeReference.AsNestedTypeReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         Cci.ISpecializedNestedTypeReference Cci.ITypeReference.AsSpecializedNestedTypeReference
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         Cci.ITypeDefinition Cci.ITypeReference.AsTypeDefinition(EmitContext context)
@@ -184,10 +145,7 @@ namespace Microsoft.CodeAnalysis.Emit
 
         string Cci.INamedEntity.Name
         {
-            get
-            {
-                return s_name;
-            }
+            get { return s_name; }
         }
 
         public sealed override bool Equals(object obj)
@@ -219,7 +177,8 @@ namespace Microsoft.CodeAnalysis.Emit
                 publicKeyOrToken: ImmutableArray<byte>.Empty,
                 hasPublicKey: false,
                 isRetargetable: false,
-                contentType: AssemblyContentType.Default);
+                contentType: AssemblyContentType.Default
+            );
 
             AssemblyIdentity Cci.IAssemblyReference.Identity => s_identity;
             Version Cci.IAssemblyReference.AssemblyVersionPattern => null;

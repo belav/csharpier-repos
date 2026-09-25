@@ -8,9 +8,21 @@ internal static partial class Interop
 {
     internal static partial class Crypt32
     {
-        internal static unsafe bool CryptEncodeObject(MsgEncodingType dwCertEncodingType, CryptDecodeObjectStructType lpszStructType, void* pvStructInfo, byte[]? pbEncoded, ref int pcbEncoded)
+        internal static unsafe bool CryptEncodeObject(
+            MsgEncodingType dwCertEncodingType,
+            CryptDecodeObjectStructType lpszStructType,
+            void* pvStructInfo,
+            byte[]? pbEncoded,
+            ref int pcbEncoded
+        )
         {
-            return CryptEncodeObject(dwCertEncodingType, (nint)lpszStructType, pvStructInfo, pbEncoded, ref pcbEncoded);
+            return CryptEncodeObject(
+                dwCertEncodingType,
+                (nint)lpszStructType,
+                pvStructInfo,
+                pbEncoded,
+                ref pcbEncoded
+            );
         }
 
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
@@ -20,6 +32,7 @@ internal static partial class Interop
             nint lpszStructType,
             void* pvStructInfo,
             byte[]? pbEncoded,
-            ref int pcbEncoded);
+            ref int pcbEncoded
+        );
     }
 }

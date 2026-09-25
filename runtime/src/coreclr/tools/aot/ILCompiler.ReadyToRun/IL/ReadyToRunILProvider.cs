@@ -2,18 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Buffers.Binary;
 using System.Collections.Generic;
 using System.Diagnostics;
-
-using ILCompiler;
-
-using Internal.TypeSystem;
-using Internal.TypeSystem.Ecma;
-
-using Internal.IL.Stubs;
-using System.Buffers.Binary;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
+using ILCompiler;
+using Internal.IL.Stubs;
+using Internal.TypeSystem;
+using Internal.TypeSystem.Ecma;
 
 namespace Internal.IL
 {
@@ -21,7 +18,6 @@ namespace Internal.IL
     /// Marker interface that promises that all tokens from this MethodIL are useable in the current compilation
     /// </summary>
     public interface IMethodTokensAreUseableInCompilation { }
-
 
     public sealed class ReadyToRunILProvider : ILProvider
     {
@@ -48,15 +44,20 @@ namespace Internal.IL
 
         private MethodIL TryGetIntrinsicMethodILForActivator(MethodDesc method)
         {
-            if (method.Instantiation.Length == 1
+            if (
+                method.Instantiation.Length == 1
                 && method.Signature.Length == 0
-                && method.Name == "CreateInstance")
+                && method.Name == "CreateInstance"
+            )
             {
                 TypeDesc type = method.Instantiation[0];
                 if (type.IsValueType && type.GetParameterlessConstructor() == null)
                 {
                     // Replace the body with implementation that just returns "default"
-                    MethodDesc createDefaultInstance = method.OwningType.GetKnownMethod("CreateDefaultInstance", method.GetTypicalMethodDefinition().Signature);
+                    MethodDesc createDefaultInstance = method.OwningType.GetKnownMethod(
+                        "CreateDefaultInstance",
+                        method.GetTypicalMethodDefinition().Signature
+                    );
                     return GetMethodIL(createDefaultInstance.MakeInstantiatedMethod(type));
                 }
             }
@@ -75,7 +76,10 @@ namespace Internal.IL
             if (mdType == null)
                 return null;
 
-            if (mdType.Name == "RuntimeHelpers" && mdType.Namespace == "System.Runtime.CompilerServices")
+            if (
+                mdType.Name == "RuntimeHelpers"
+                && mdType.Namespace == "System.Runtime.CompilerServices"
+            )
             {
                 return RuntimeHelpersIntrinsics.EmitIL(method);
             }
@@ -104,7 +108,10 @@ namespace Internal.IL
             if (mdType == null)
                 return null;
 
-            if (mdType.Name == "RuntimeHelpers" && mdType.Namespace == "System.Runtime.CompilerServices")
+            if (
+                mdType.Name == "RuntimeHelpers"
+                && mdType.Namespace == "System.Runtime.CompilerServices"
+            )
             {
                 return RuntimeHelpersIntrinsics.EmitIL(method);
             }
@@ -117,15 +124,18 @@ namespace Internal.IL
             return null;
         }
 
-        private Dictionary<EcmaMethod, MethodIL> _manifestModuleWrappedMethods = new Dictionary<EcmaMethod, MethodIL>();
+        private Dictionary<EcmaMethod, MethodIL> _manifestModuleWrappedMethods =
+            new Dictionary<EcmaMethod, MethodIL>();
 
         // Create the cross module inlineable tokens for a method
         // This method is order dependent, and must be called during the single threaded portion of compilation
         public void CreateCrossModuleInlineableTokensForILBody(EcmaMethod method)
         {
             Debug.Assert(_manifestMutableModule != null);
-            Debug.Assert(!_compilationModuleGroup.VersionsWithMethodBody(method) &&
-                    _compilationModuleGroup.CrossModuleInlineable(method));
+            Debug.Assert(
+                !_compilationModuleGroup.VersionsWithMethodBody(method)
+                    && _compilationModuleGroup.CrossModuleInlineable(method)
+            );
             var wrappedMethodIL = new ManifestModuleWrappedMethodIL();
             if (!wrappedMethodIL.Initialize(_manifestMutableModule, EcmaMethodIL.Create(method)))
             {
@@ -140,9 +150,11 @@ namespace Internal.IL
 
         public bool NeedsCrossModuleInlineableTokens(EcmaMethod method)
         {
-            if (!_compilationModuleGroup.VersionsWithMethodBody(method) &&
-                    _compilationModuleGroup.CrossModuleInlineable(method) &&
-                    !_manifestModuleWrappedMethods.ContainsKey(method))
+            if (
+                !_compilationModuleGroup.VersionsWithMethodBody(method)
+                && _compilationModuleGroup.CrossModuleInlineable(method)
+                && !_manifestModuleWrappedMethods.ContainsKey(method)
+            )
             {
                 return true;
             }
@@ -202,7 +214,10 @@ namespace Internal.IL
         /// A MethodIL Provider which provides tokens relative to a MutableModule. Used to implement cross
         /// module inlining of code in ReadyToRun files.
         /// </summary>
-        class ManifestModuleWrappedMethodIL : MethodIL, IEcmaMethodIL, IMethodTokensAreUseableInCompilation
+        class ManifestModuleWrappedMethodIL
+            : MethodIL,
+                IEcmaMethodIL,
+                IMethodTokensAreUseableInCompilation
         {
             int _maxStack;
             bool _isInitLocals;
@@ -213,23 +228,30 @@ namespace Internal.IL
 
             MutableModule _mutableModule;
 
-            public ManifestModuleWrappedMethodIL() {}
+            public ManifestModuleWrappedMethodIL() { }
 
             public bool Initialize(MutableModule mutableModule, EcmaMethodIL wrappedMethod)
             {
                 bool failedToReplaceToken = false;
                 try
                 {
-                    Debug.Assert(mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences == null);
-                    mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences = ((EcmaMethod)wrappedMethod.OwningMethod).Module;
-                    var owningMethodHandle = mutableModule.TryGetEntityHandle(wrappedMethod.OwningMethod);
+                    Debug.Assert(
+                        mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences == null
+                    );
+                    mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences = (
+                        (EcmaMethod)wrappedMethod.OwningMethod
+                    ).Module;
+                    var owningMethodHandle = mutableModule.TryGetEntityHandle(
+                        wrappedMethod.OwningMethod
+                    );
                     if (!owningMethodHandle.HasValue)
                         return false;
                     _mutableModule = mutableModule;
                     _maxStack = wrappedMethod.MaxStack;
                     _isInitLocals = wrappedMethod.IsInitLocals;
                     _owningMethod = wrappedMethod.OwningMethod;
-                    _exceptionRegions = (ILExceptionRegion[])wrappedMethod.GetExceptionRegions().Clone();
+                    _exceptionRegions = (ILExceptionRegion[])
+                        wrappedMethod.GetExceptionRegions().Clone();
                     _ilBytes = (byte[])wrappedMethod.GetILBytes().Clone();
                     _locals = (LocalVariableDefinition[])wrappedMethod.GetLocals();
 
@@ -238,25 +260,37 @@ namespace Internal.IL
                         var region = _exceptionRegions[i];
                         if (region.Kind == ILExceptionRegionKind.Catch)
                         {
-                            var newHandle = _mutableModule.TryGetHandle((TypeSystemEntity)wrappedMethod.GetObject(region.ClassToken));
+                            var newHandle = _mutableModule.TryGetHandle(
+                                (TypeSystemEntity)wrappedMethod.GetObject(region.ClassToken)
+                            );
                             if (!newHandle.HasValue)
                             {
                                 return false;
                             }
-                            _exceptionRegions[i] = new ILExceptionRegion(region.Kind, region.TryOffset, region.TryLength, region.HandlerOffset, region.HandlerLength, newHandle.Value, newHandle.Value);
+                            _exceptionRegions[i] = new ILExceptionRegion(
+                                region.Kind,
+                                region.TryOffset,
+                                region.TryLength,
+                                region.HandlerOffset,
+                                region.HandlerLength,
+                                newHandle.Value,
+                                newHandle.Value
+                            );
                         }
                     }
 
                     ILTokenReplacer.Replace(_ilBytes, GetMutableModuleToken);
 #if DEBUG
-                    Debug.Assert(ReadyToRunStandaloneMethodMetadata.Compute((EcmaMethod)_owningMethod) != null);
+                    Debug.Assert(
+                        ReadyToRunStandaloneMethodMetadata.Compute((EcmaMethod)_owningMethod)
+                            != null
+                    );
 #endif // DEBUG
                 }
                 finally
                 {
                     mutableModule.ModuleThatIsCurrentlyTheSourceOfNewReferences = null;
                 }
-
 
                 return !failedToReplaceToken;
 
@@ -291,15 +325,26 @@ namespace Internal.IL
             public IEcmaModule Module => _mutableModule;
 
             public override ILExceptionRegion[] GetExceptionRegions() => _exceptionRegions;
+
             public override byte[] GetILBytes() => _ilBytes;
+
             public override LocalVariableDefinition[] GetLocals() => _locals;
-            public override object GetObject(int token, NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw)
+
+            public override object GetObject(
+                int token,
+                NotFoundBehavior notFoundBehavior = NotFoundBehavior.Throw
+            )
             {
                 // UserStrings cannot be wrapped in EntityHandle
                 if ((token & 0xFF000000) == 0x70000000)
-                    return _mutableModule.GetUserString(System.Reflection.Metadata.Ecma335.MetadataTokens.UserStringHandle(token));
+                    return _mutableModule.GetUserString(
+                        System.Reflection.Metadata.Ecma335.MetadataTokens.UserStringHandle(token)
+                    );
 
-                return _mutableModule.GetObject(System.Reflection.Metadata.Ecma335.MetadataTokens.EntityHandle(token), notFoundBehavior);
+                return _mutableModule.GetObject(
+                    System.Reflection.Metadata.Ecma335.MetadataTokens.EntityHandle(token),
+                    notFoundBehavior
+                );
             }
         }
     }

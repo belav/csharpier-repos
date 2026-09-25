@@ -58,25 +58,38 @@ namespace System.ServiceModel.Activities
                 else
                 {
                     Variable<Message> request = new Variable<Message> { Name = "RequestMessage" };
-                    Variable<NoPersistHandle> noPersistHandle = new Variable<NoPersistHandle> { Name = "ReceiveNoPersistHandle" };
+                    Variable<NoPersistHandle> noPersistHandle = new Variable<NoPersistHandle>
+                    {
+                        Name = "ReceiveNoPersistHandle",
+                    };
                     this.internalReceive.Message = new OutArgument<Message>(request);
                     this.requestFormatter.Message = new InOutArgument<Message>(request);
-                    this.internalReceive.NoPersistHandle = new InArgument<NoPersistHandle>(noPersistHandle);
-                    this.requestFormatter.NoPersistHandle = new InArgument<NoPersistHandle>(noPersistHandle);
+                    this.internalReceive.NoPersistHandle = new InArgument<NoPersistHandle>(
+                        noPersistHandle
+                    );
+                    this.requestFormatter.NoPersistHandle = new InArgument<NoPersistHandle>(
+                        noPersistHandle
+                    );
 
                     return new Sequence
                     {
                         Variables = { request, noPersistHandle },
-                        Activities = { this.internalReceive, this.requestFormatter }
+                        Activities = { this.internalReceive, this.requestFormatter },
                     };
                 }
             };
         }
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
-            Justification = "MessageQuerySet is a stand-alone class. We want to allow users to create their own.")]
-        [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.PropertyExternalTypesMustBeKnown,
-            Justification = "MessageQuerySet is a known XAML-serializable type in this assembly.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
+            Justification = "MessageQuerySet is a stand-alone class. We want to allow users to create their own."
+        )]
+        [SuppressMessage(
+            FxCop.Category.Xaml,
+            FxCop.Rule.PropertyExternalTypesMustBeKnown,
+            Justification = "MessageQuerySet is a known XAML-serializable type in this assembly."
+        )]
         public MessageQuerySet CorrelatesOn
         {
             get
@@ -87,27 +100,17 @@ namespace System.ServiceModel.Activities
                 }
                 return this.correlatesOn;
             }
-            set
-            {
-                this.correlatesOn = value;
-            }
+            set { this.correlatesOn = value; }
         }
 
         // the content to receive (either message or parameters-based) declared by the user
         [DefaultValue(null)]
-        public ReceiveContent Content
-        {
-            get;
-            set;
-        }
+        public ReceiveContent Content { get; set; }
 
         // Internally, we should always use InternalContent since this property may have default content that we added
         internal ReceiveContent InternalContent
         {
-            get
-            {
-                return this.Content ?? ReceiveContent.DefaultReceiveContent;
-            }
+            get { return this.Content ?? ReceiveContent.DefaultReceiveContent; }
         }
 
         // For initializing additional correlations beyond the CorrelatesWith property for following
@@ -129,27 +132,15 @@ namespace System.ServiceModel.Activities
         // If specified on the Send side of a message, the Receive side needs to have the same value in order
         // for the message to be delivered correctly.
         [DefaultValue(null)]
-        public string Action
-        {
-            get;
-            set;
-        }
+        public string Action { get; set; }
 
         // If true, a new workflow instance is created to process the message. If false, an existing workflow
         // instance is determined based on correlations.
         [DefaultValue(false)]
-        public bool CanCreateInstance
-        {
-            get;
-            set;
-        }
+        public bool CanCreateInstance { get; set; }
 
         [DefaultValue(null)]
-        public InArgument<CorrelationHandle> CorrelatesWith
-        {
-            get;
-            set;
-        }
+        public InArgument<CorrelationHandle> CorrelatesWith { get; set; }
 
         // This will be used to construct the default value for Action if the Action property is
         // not specifically set. It is also used in conjunction with CorrelatesWith and IsReply
@@ -157,39 +148,23 @@ namespace System.ServiceModel.Activities
         // There is validation to make sure either this or Action has a value.
         // Used by IServiceDescriptionBuilder2 as well
         [DefaultValue(null)]
-        public string OperationName
-        {
-            get;
-            set;
-        }
+        public string OperationName { get; set; }
 
         // The protection level for the message.
         // If ValueType or Value.Expression.ExpressionType is MessageContract, the MessageContract definition may have additional settings.
         // Default if this is not specified is Sign.
         [DefaultValue(null)]
-        public ProtectionLevel? ProtectionLevel
-        {
-            get;
-            set;
-        }
+        public ProtectionLevel? ProtectionLevel { get; set; }
 
         [DefaultValue(SerializerOption.DataContractSerializer)]
-        public SerializerOption SerializerOption
-        {
-            get;
-            set;
-        }
+        public SerializerOption SerializerOption { get; set; }
 
         // The service contract name. This allows the same workflow instance to implement multiple
         // servce "contracts". If not specified and this is the first Receive activity in the
         // workflow, contract inference uses this activity's Name as the service contract name.
         [DefaultValue(null)]
         [TypeConverter(typeof(ServiceXNameTypeConverter))]
-        public XName ServiceContractName
-        {
-            get;
-            set;
-        }
+        public XName ServiceContractName { get; set; }
 
         public Collection<Type> KnownTypes
         {
@@ -207,7 +182,10 @@ namespace System.ServiceModel.Activities
         {
             get
             {
-                Fx.Assert(this.internalReceive != null, "CacheMetadata must be called before this!");
+                Fx.Assert(
+                    this.internalReceive != null,
+                    "CacheMetadata must be called before this!"
+                );
                 return this.internalReceive.OperationBookmarkName;
             }
         }
@@ -223,17 +201,15 @@ namespace System.ServiceModel.Activities
 
         internal bool HasCorrelatesOn
         {
-            get
-            {
-                return this.correlatesOn != null && this.correlatesOn.Count > 0;
-            }
+            get { return this.correlatesOn != null && this.correlatesOn.Count > 0; }
         }
 
         internal bool HasCorrelationInitializers
         {
             get
             {
-                return this.correlationInitializers != null && this.correlationInitializers.Count > 0;
+                return this.correlationInitializers != null
+                    && this.correlationInitializers.Count > 0;
             }
         }
 
@@ -263,26 +239,17 @@ namespace System.ServiceModel.Activities
 
         internal bool HasReply
         {
-            get
-            {
-                return this.followingReplies != null && this.followingReplies.Count > 0;
-            }
+            get { return this.followingReplies != null && this.followingReplies.Count > 0; }
         }
 
         internal bool HasFault
         {
-            get
-            {
-                return this.followingFaults != null && this.followingFaults.Count > 0;
-            }
+            get { return this.followingFaults != null && this.followingFaults.Count > 0; }
         }
-              
+
         internal InternalReceiveMessage InternalReceive
         {
-            get 
-            {
-                return this.internalReceive;
-            }
+            get { return this.internalReceive; }
         }
 
         bool IsInvalidContentChangeFrom(ReceiveContent originalContent)
@@ -290,22 +257,36 @@ namespace System.ServiceModel.Activities
             ReceiveMessageContent newMsgContent = this.InternalContent as ReceiveMessageContent;
             ReceiveMessageContent originalMsgContent = originalContent as ReceiveMessageContent;
 
-            if (newMsgContent != null && newMsgContent.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
+            if (
+                newMsgContent != null
+                && newMsgContent.InternalDeclaredMessageType
+                    == MessageDescription.TypeOfUntypedMessage
+            )
             {
-                if (originalMsgContent == null || originalMsgContent.InternalDeclaredMessageType != MessageDescription.TypeOfUntypedMessage)
+                if (
+                    originalMsgContent == null
+                    || originalMsgContent.InternalDeclaredMessageType
+                        != MessageDescription.TypeOfUntypedMessage
+                )
                 {
                     return true;
                 }
             }
-            else if (originalMsgContent != null && originalMsgContent.InternalDeclaredMessageType == MessageDescription.TypeOfUntypedMessage)
+            else if (
+                originalMsgContent != null
+                && originalMsgContent.InternalDeclaredMessageType
+                    == MessageDescription.TypeOfUntypedMessage
+            )
             {
                 return true;
             }
-            
+
             return false;
         }
 
-        bool HasCorrelationsChanged(Collection<CorrelationInitializer> originalCorrelationInitializers)
+        bool HasCorrelationsChanged(
+            Collection<CorrelationInitializer> originalCorrelationInitializers
+        )
         {
             if (this.CorrelationInitializers.Count != originalCorrelationInitializers.Count)
             {
@@ -326,19 +307,26 @@ namespace System.ServiceModel.Activities
             return false;
         }
 
-        protected override void OnCreateDynamicUpdateMap(UpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            UpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             if (this.IsInvalidContentChangeFrom(((Receive)originalActivity).InternalContent))
             {
                 // Due to technical limitation, we don't currently support changing from untyped MessageContent to typed MessageContent or ParametersContent and vice versa.
                 metadata.DisallowUpdateInsideThisActivity(SR.ReceiveContentChanged);
             }
-            else if (this.HasCorrelationsChanged(((Receive)originalActivity).CorrelationInitializers))
+            else if (
+                this.HasCorrelationsChanged(((Receive)originalActivity).CorrelationInitializers)
+            )
             {
                 // we don't currently support changing CorrelationInitializers collection of Receive due to technical limitation.
                 // This change could be detected and blocked for update by the runtime, but we check this early
                 // so that we can provide more meaningful error message.
-                metadata.DisallowUpdateInsideThisActivity(SR.ReceiveCorrelationInitializiersChanged);
+                metadata.DisallowUpdateInsideThisActivity(
+                    SR.ReceiveCorrelationInitializiersChanged
+                );
             }
         }
 
@@ -350,11 +338,23 @@ namespace System.ServiceModel.Activities
             }
 
             // validate Correlation Initializers
-            MessagingActivityHelper.ValidateCorrelationInitializer(metadata, this.correlationInitializers, false, this.DisplayName, this.OperationName);
+            MessagingActivityHelper.ValidateCorrelationInitializer(
+                metadata,
+                this.correlationInitializers,
+                false,
+                this.DisplayName,
+                this.OperationName
+            );
 
             // Add runtime arguments
-            MessagingActivityHelper.AddRuntimeArgument(this.CorrelatesWith, "CorrelatesWith", Constants.CorrelationHandleType, ArgumentDirection.In, metadata);
-            
+            MessagingActivityHelper.AddRuntimeArgument(
+                this.CorrelatesWith,
+                "CorrelatesWith",
+                Constants.CorrelationHandleType,
+                ArgumentDirection.In,
+                metadata
+            );
+
             // Validate Content
             this.InternalContent.CacheMetadata(metadata, this, this.OperationName);
 
@@ -364,7 +364,11 @@ namespace System.ServiceModel.Activities
                 {
                     CorrelationInitializer initializer = this.correlationInitializers[i];
                     initializer.ArgumentName = Constants.Parameter + i;
-                    RuntimeArgument initializerArgument = new RuntimeArgument(initializer.ArgumentName, Constants.CorrelationHandleType, ArgumentDirection.In);
+                    RuntimeArgument initializerArgument = new RuntimeArgument(
+                        initializer.ArgumentName,
+                        Constants.CorrelationHandleType,
+                        ArgumentDirection.In
+                    );
                     metadata.Bind(initializer.CorrelationHandle, initializerArgument);
                     metadata.AddArgument(initializerArgument);
                 }
@@ -373,7 +377,10 @@ namespace System.ServiceModel.Activities
             if (!metadata.HasViolations)
             {
                 this.internalReceive = CreateInternalReceive();
-                this.InternalContent.ConfigureInternalReceive(this.internalReceive, out this.requestFormatter);
+                this.InternalContent.ConfigureInternalReceive(
+                    this.internalReceive,
+                    out this.requestFormatter
+                );
             }
             else
             {
@@ -381,7 +388,7 @@ namespace System.ServiceModel.Activities
                 this.requestFormatter = null;
             }
         }
-        
+
         InternalReceiveMessage CreateInternalReceive()
         {
             InternalReceiveMessage result = new InternalReceiveMessage
@@ -390,8 +397,10 @@ namespace System.ServiceModel.Activities
                 OperationName = this.OperationName,
                 OwnerDisplayName = this.DisplayName,
                 ServiceContractName = this.ServiceContractName,
-                CorrelatesWith = new InArgument<CorrelationHandle>(new ArgumentValue<CorrelationHandle> { ArgumentName = "CorrelatesWith" }),
-                IsOneWay = true  // This will be updated by contract inference logic,
+                CorrelatesWith = new InArgument<CorrelationHandle>(
+                    new ArgumentValue<CorrelationHandle> { ArgumentName = "CorrelatesWith" }
+                ),
+                IsOneWay = true, // This will be updated by contract inference logic,
             };
 
             if (this.correlationInitializers != null)
@@ -410,9 +419,9 @@ namespace System.ServiceModel.Activities
             Fx.Assert(this.internalReceive != null, "InternalReceiveMessage cannot be null!");
 
             this.internalReceive.IsOneWay = flag;
-            
-            // perf optimization if the receive is two way, null out the NoPersistHandle, 
-            // this optimization allows us not to access AEC in InternalReceiveMessage->Execute to null out the 
+
+            // perf optimization if the receive is two way, null out the NoPersistHandle,
+            // this optimization allows us not to access AEC in InternalReceiveMessage->Execute to null out the
             // NoPersistHandle in case of two-way. With this optimization, we just assert in InternalReceiveMessage
             if (!this.internalReceive.IsOneWay)
             {
@@ -434,17 +443,25 @@ namespace System.ServiceModel.Activities
 
         internal void SetDefaultFormatters(OperationDescription operationDescription)
         {
-            this.SetFormatter(this.GetDefaultMessageFormatter(operationDescription), this.GetDefaultFaultFormatter(), includeExceptionDetailInFaults: false);
+            this.SetFormatter(
+                this.GetDefaultMessageFormatter(operationDescription),
+                this.GetDefaultFaultFormatter(),
+                includeExceptionDetailInFaults: false
+            );
         }
 
-        internal void SetFormatter(IDispatchMessageFormatter formatter, IDispatchFaultFormatter faultFormatter, bool includeExceptionDetailInFaults)
+        internal void SetFormatter(
+            IDispatchMessageFormatter formatter,
+            IDispatchFaultFormatter faultFormatter,
+            bool includeExceptionDetailInFaults
+        )
         {
             if (this.requestFormatter != null)
             {
                 this.requestFormatter.Formatter = formatter;
             }
 
-            if (this.followingReplies != null) 
+            if (this.followingReplies != null)
             {
                 for (int i = 0; i < this.followingReplies.Count; i++)
                 {
@@ -456,14 +473,19 @@ namespace System.ServiceModel.Activities
             {
                 for (int i = 0; i < this.followingFaults.Count; i++)
                 {
-                    this.followingFaults[i].SetFaultFormatter(faultFormatter, includeExceptionDetailInFaults);
+                    this.followingFaults[i]
+                        .SetFaultFormatter(faultFormatter, includeExceptionDetailInFaults);
                 }
             }
         }
 
-        IDispatchMessageFormatter GetDefaultMessageFormatter(OperationDescription operationDescription)
+        IDispatchMessageFormatter GetDefaultMessageFormatter(
+            OperationDescription operationDescription
+        )
         {
-            return ServiceOperationFormatterProvider.GetDispatcherFormatterFromRuntime(operationDescription);
+            return ServiceOperationFormatterProvider.GetDispatcherFormatterFromRuntime(
+                operationDescription
+            );
         }
 
         IDispatchFaultFormatter GetDefaultFaultFormatter()
@@ -475,7 +497,10 @@ namespace System.ServiceModel.Activities
         public bool ShouldSerializeCorrelatesOn()
         {
             // don't serialize null nor default MessageQuerySet
-            if (this.correlatesOn == null || (this.correlatesOn.Name == null && this.correlatesOn.Count == 0))
+            if (
+                this.correlatesOn == null
+                || (this.correlatesOn.Name == null && this.correlatesOn.Count == 0)
+            )
             {
                 return false;
             }
@@ -486,12 +511,18 @@ namespace System.ServiceModel.Activities
         {
             if (operation == null)
             {
-                throw FxTrace.Exception.ArgumentNull("operation", "OperationDescription should not be null");
+                throw FxTrace.Exception.ArgumentNull(
+                    "operation",
+                    "OperationDescription should not be null"
+                );
             }
 
             MessageDescription message;
             Receive receiveActivity = new Receive();
-            receiveActivity.ServiceContractName = XName.Get(operation.DeclaringContract.Name, operation.DeclaringContract.Namespace);
+            receiveActivity.ServiceContractName = XName.Get(
+                operation.DeclaringContract.Name,
+                operation.DeclaringContract.Namespace
+            );
             receiveActivity.OperationName = operation.Name;
             receiveActivity.DisplayName = operation.Name + "Receive";
             receiveActivity.ProtectionLevel = operation.ProtectionLevel;
@@ -540,7 +571,11 @@ namespace System.ServiceModel.Activities
                                 break;
                             }
                             // Indicating it is a untyped message contract
-                            if (!messagePart.Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message)))
+                            if (
+                                !messagePart.Type.IsAssignableFrom(
+                                    typeof(System.ServiceModel.Channels.Message)
+                                )
+                            )
                             {
                                 contentIsParameter = true;
                             }
@@ -566,7 +601,10 @@ namespace System.ServiceModel.Activities
                     {
                         foreach (MessagePartDescription messagePart in message.Body.Parts)
                         {
-                            Argument outArgument = OutArgument.Create(messagePart.Type, ArgumentDirection.Out);
+                            Argument outArgument = OutArgument.Create(
+                                messagePart.Type,
+                                ArgumentDirection.Out
+                            );
                             content.Parameters.Add(messagePart.Name, (OutArgument)(outArgument));
                         }
                     }
@@ -587,7 +625,10 @@ namespace System.ServiceModel.Activities
                             content.DeclaredMessageType = message.Body.Parts[0].Type;
                         }
 
-                        Argument outArgument = OutArgument.Create(content.DeclaredMessageType, ArgumentDirection.Out);
+                        Argument outArgument = OutArgument.Create(
+                            content.DeclaredMessageType,
+                            ArgumentDirection.Out
+                        );
                         content.Message = (OutArgument)outArgument;
                     }
 
@@ -596,14 +637,34 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-                if ((message.Body.ReturnValue != null && message.Body.ReturnValue.Type.IsDefined(typeof(MessageContractAttribute), false))
-                    || (message.Body.ReturnValue != null && message.Body.ReturnValue.Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message))))
+                if (
+                    (
+                        message.Body.ReturnValue != null
+                        && message.Body.ReturnValue.Type.IsDefined(
+                            typeof(MessageContractAttribute),
+                            false
+                        )
+                    )
+                    || (
+                        message.Body.ReturnValue != null
+                        && message.Body.ReturnValue.Type.IsAssignableFrom(
+                            typeof(System.ServiceModel.Channels.Message)
+                        )
+                    )
+                )
                 {
                     receiveActivity.Content = new ReceiveMessageContent();
                 }
                 else if (operation.Messages.Count > 1)
                 {
-                    if (operation.Messages[1].MessageType != null || operation.Messages[1].Body.ReturnValue.Type.IsAssignableFrom(typeof(System.ServiceModel.Channels.Message)))
+                    if (
+                        operation.Messages[1].MessageType != null
+                        || operation
+                            .Messages[1]
+                            .Body.ReturnValue.Type.IsAssignableFrom(
+                                typeof(System.ServiceModel.Channels.Message)
+                            )
+                    )
                     {
                         receiveActivity.Content = new ReceiveMessageContent();
                     }

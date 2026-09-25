@@ -27,19 +27,16 @@ internal static class TaskGenericsUtil
 
     public static object? GetTaskResult(Task task)
     {
-        var getter = _cachedResultGetters.GetOrAdd(
-            task.GetType(),
-            taskInstanceType =>
-            {
-                var resultType = GetTaskResultType(taskInstanceType);
-                return resultType == null
-                    ? new VoidTaskResultGetter()
-                    : (ITaskResultGetter)
-                        Activator.CreateInstance(
-                            typeof(TaskResultGetter<>).MakeGenericType(resultType)
-                        )!;
-            }
-        );
+        var getter = _cachedResultGetters.GetOrAdd(task.GetType(), taskInstanceType =>
+        {
+            var resultType = GetTaskResultType(taskInstanceType);
+            return resultType == null
+                ? new VoidTaskResultGetter()
+                : (ITaskResultGetter)
+                    Activator.CreateInstance(
+                        typeof(TaskResultGetter<>).MakeGenericType(resultType)
+                    )!;
+        });
         return getter.GetResult(task);
     }
 
@@ -113,16 +110,11 @@ internal static class TaskGenericsUtil
 
     private static ITcsResultSetter CreateResultSetter(object taskCompletionSource)
     {
-        return _cachedResultSetters.GetOrAdd(
-            taskCompletionSource.GetType(),
-            tcsType =>
-            {
-                var resultType = tcsType.GetGenericArguments()[0];
-                return (ITcsResultSetter)
-                    Activator.CreateInstance(
-                        typeof(TcsResultSetter<>).MakeGenericType(resultType)
-                    )!;
-            }
-        );
+        return _cachedResultSetters.GetOrAdd(taskCompletionSource.GetType(), tcsType =>
+        {
+            var resultType = tcsType.GetGenericArguments()[0];
+            return (ITcsResultSetter)
+                Activator.CreateInstance(typeof(TcsResultSetter<>).MakeGenericType(resultType))!;
+        });
     }
 }

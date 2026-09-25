@@ -15,6 +15,7 @@ public unsafe class ManagedSequential
         public byte b1;
         public long l1;
     }
+
     class AutoClassLayoutBase : LayoutClassObjectBase
     {
         public byte b2;
@@ -35,9 +36,7 @@ public unsafe class ManagedSequential
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    class EmptySequentialClassObjectBase
-    {
-    }
+    class EmptySequentialClassObjectBase { }
 
     class AutoClassDerived : EmptySequentialClassObjectBase
     {
@@ -93,7 +92,11 @@ public unsafe class ManagedSequential
     {
         var o = new AutoClassDerived();
         // Validate that the int member is placed at the 0 offset.
-        Assert.Equal(0, (int)Unsafe.ByteOffset(ref Unsafe.As<RawData>(o).data, ref Unsafe.As<int, byte>(ref o.i)));
+        Assert.Equal(
+            0,
+            (int)
+                Unsafe.ByteOffset(ref Unsafe.As<RawData>(o).data, ref Unsafe.As<int, byte>(ref o.i))
+        );
     }
 
     [Fact]
@@ -101,8 +104,18 @@ public unsafe class ManagedSequential
     {
         var o = new ManagedSequentialDisqualifiedClassDerived();
         // Validate that the object member is placed at the 0 offset.
-        Assert.Equal(0, (int)Unsafe.ByteOffset(ref Unsafe.As<RawData>(o).data, ref Unsafe.As<AutoClassObjectBase, byte>(ref o.o)));
+        Assert.Equal(
+            0,
+            (int)
+                Unsafe.ByteOffset(
+                    ref Unsafe.As<RawData>(o).data,
+                    ref Unsafe.As<AutoClassObjectBase, byte>(ref o.o)
+                )
+        );
         // Validate that the byte member is placed immediately after the object member.
-        Assert.Equal(sizeof(nint), (int)Unsafe.ByteOffset(ref Unsafe.As<AutoClassObjectBase, byte>(ref o.o), ref o.b));
+        Assert.Equal(
+            sizeof(nint),
+            (int)Unsafe.ByteOffset(ref Unsafe.As<AutoClassObjectBase, byte>(ref o.o), ref o.b)
+        );
     }
 }

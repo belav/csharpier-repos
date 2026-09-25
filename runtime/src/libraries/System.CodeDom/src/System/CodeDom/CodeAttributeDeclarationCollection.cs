@@ -7,9 +7,7 @@ namespace System.CodeDom
 {
     public class CodeAttributeDeclarationCollection : CollectionBase
     {
-        public CodeAttributeDeclarationCollection()
-        {
-        }
+        public CodeAttributeDeclarationCollection() { }
 
         public CodeAttributeDeclarationCollection(CodeAttributeDeclarationCollection value)
         {
@@ -58,7 +56,8 @@ namespace System.CodeDom
 
         public bool Contains(CodeAttributeDeclaration value) => List.Contains(value);
 
-        public void CopyTo(CodeAttributeDeclaration[] array, int index) => List.CopyTo(array, index);
+        public void CopyTo(CodeAttributeDeclaration[] array, int index) =>
+            List.CopyTo(array, index);
 
         public int IndexOf(CodeAttributeDeclaration value) => List.IndexOf(value);
 

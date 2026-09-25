@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Simple1()
         {
             var text =
-@"
+                @"
 class A {
     void M(int x) {}
 }
@@ -52,35 +52,45 @@ class A {
             comp.VerifyDiagnostics(
                 // (1,12): error CS8773: Feature 'parameterless struct constructors' is not available in C# 9.0. Please use language version 10.0 or greater.
                 // struct A { A() {} }
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "A").WithArguments("parameterless struct constructors", "10.0").WithLocation(1, 12),
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion9, "A")
+                    .WithArguments("parameterless struct constructors", "10.0")
+                    .WithLocation(1, 12),
                 // (1,12): error CS8938: The parameterless struct constructor must be 'public'.
                 // struct A { A() {} }
-                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_NonPublicParameterlessStructConstructor, "A")
+                    .WithLocation(1, 12)
+            );
         }
 
         [WorkItem(537194, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537194")]
         [Fact]
         public void DefaultCtor1()
         {
-            Action<string, string, int, Accessibility?> check =
-                (source, className, ctorCount, accessibility) =>
+            Action<string, string, int, Accessibility?> check = (
+                source,
+                className,
+                ctorCount,
+                accessibility
+            ) =>
+            {
+                var comp = CreateCompilation(source);
+                var global = comp.GlobalNamespace;
+                var a = global.GetTypeMembers(className, 0).Single();
+                var ctors = a.InstanceConstructors; // Note, this only returns *instance* constructors.
+                Assert.Equal(ctorCount, ctors.Length);
+                foreach (var ct in ctors)
                 {
-                    var comp = CreateCompilation(source);
-                    var global = comp.GlobalNamespace;
-                    var a = global.GetTypeMembers(className, 0).Single();
-                    var ctors = a.InstanceConstructors; // Note, this only returns *instance* constructors.
-                    Assert.Equal(ctorCount, ctors.Length);
-                    foreach (var ct in ctors)
-                    {
-                        Assert.Equal(
-                            ct.IsStatic ? WellKnownMemberNames.StaticConstructorName : WellKnownMemberNames.InstanceConstructorName,
-                            ct.Name
-                        );
+                    Assert.Equal(
+                        ct.IsStatic
+                            ? WellKnownMemberNames.StaticConstructorName
+                            : WellKnownMemberNames.InstanceConstructorName,
+                        ct.Name
+                    );
 
-                        if (accessibility != null)
-                            Assert.Equal(accessibility, ct.DeclaredAccessibility);
-                    }
-                };
+                    if (accessibility != null)
+                        Assert.Equal(accessibility, ct.DeclaredAccessibility);
+                }
+            };
 
             Accessibility? doNotCheckAccessibility = null;
 
@@ -105,7 +115,7 @@ class A {
         public void Ctor1()
         {
             var text =
-@"
+                @"
 class A {
     A(int x) {}
 }
@@ -130,7 +140,7 @@ class A {
         public void Simple2()
         {
             var text =
-@"
+                @"
 class A {
     void M<T>(int x) {}
 }
@@ -154,7 +164,7 @@ class A {
         public void Access1()
         {
             var text =
-@"
+                @"
 class A {
     void M1() {}
 }
@@ -176,7 +186,7 @@ interface B {
         public void GenericParameter()
         {
             var text =
-@"
+                @"
 public class MyList<T>
 {
     public void Add(T element)
@@ -198,7 +208,7 @@ public class MyList<T>
         public void PartialLocation()
         {
             var text =
-@"
+                @"
 public partial class A {
   partial void M();
 }
@@ -218,7 +228,7 @@ public partial class A {
         public void PartialExtractSyntaxLocation_DeclBeforeDef()
         {
             var text =
-@"public partial class A {
+                @"public partial class A {
   partial void M();
 }
 public partial class A {
@@ -233,7 +243,11 @@ public partial class A {
             var returnSyntax = m.ExtractReturnTypeSyntax();
 
             var tree = comp.SyntaxTrees.Single();
-            var node = tree.GetRoot().DescendantNodes().OfType<PredefinedTypeSyntax>().Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword).First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PredefinedTypeSyntax>()
+                .Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword)
+                .First();
 
             var otherSymbol = m.PartialImplementationPart;
             Assert.True(otherSymbol.IsPartialImplementation());
@@ -246,7 +260,7 @@ public partial class A {
         public void PartialExtractSyntaxLocation_DefBeforeDecl()
         {
             var text =
-@"public partial class A {
+                @"public partial class A {
   partial void M() {}
 }
 public partial class A {
@@ -261,7 +275,11 @@ public partial class A {
             var returnSyntax = m.ExtractReturnTypeSyntax();
 
             var tree = comp.SyntaxTrees.Single();
-            var node = tree.GetRoot().DescendantNodes().OfType<PredefinedTypeSyntax>().Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword).Last();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<PredefinedTypeSyntax>()
+                .Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword)
+                .Last();
 
             var otherSymbol = m.PartialImplementationPart;
             Assert.True(otherSymbol.IsPartialImplementation());
@@ -274,7 +292,7 @@ public partial class A {
         public void PartialExtractSyntaxLocation_OnlyDef()
         {
             var text =
-@"public partial class A {
+                @"public partial class A {
   partial void M() {}
 }
 ";
@@ -286,7 +304,10 @@ public partial class A {
             var returnSyntax = m.ExtractReturnTypeSyntax();
 
             var tree = comp.SyntaxTrees.Single().GetRoot();
-            var node = tree.DescendantNodes().OfType<PredefinedTypeSyntax>().Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword).Single();
+            var node = tree.DescendantNodes()
+                .OfType<PredefinedTypeSyntax>()
+                .Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword)
+                .Single();
 
             Assert.Equal(node, returnSyntax);
         }
@@ -295,7 +316,7 @@ public partial class A {
         public void PartialExtractSyntaxLocation_OnlyDecl()
         {
             var text =
-@"public partial class A {
+                @"public partial class A {
   partial void M();
 }
 ";
@@ -307,7 +328,10 @@ public partial class A {
             var returnSyntax = m.ExtractReturnTypeSyntax();
 
             var tree = comp.SyntaxTrees.Single().GetRoot();
-            var node = tree.DescendantNodes().OfType<PredefinedTypeSyntax>().Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword).Single();
+            var node = tree.DescendantNodes()
+                .OfType<PredefinedTypeSyntax>()
+                .Where(n => n.Keyword.Kind() == SyntaxKind.VoidKeyword)
+                .Single();
 
             Assert.Equal(node, returnSyntax);
         }
@@ -316,7 +340,7 @@ public partial class A {
         public void FullName()
         {
             var text =
-@"
+                @"
 public class A {
   public string M(int x);
 }
@@ -332,7 +356,7 @@ public class A {
         public void TypeParameterScope()
         {
             var text =
-@"
+                @"
 public interface A {
   T M<T>(T t);
 }
@@ -350,7 +374,8 @@ public interface A {
         [Fact]
         public void RefOutParameterType()
         {
-            var text = @"public class A {
+            var text =
+                @"public class A {
   void M(ref A refp, out long outp) { }
 }
 ";
@@ -389,7 +414,7 @@ public interface A {
         public void RefReturn()
         {
             var text =
-@"public class A
+                @"public class A
 {
     ref int M(ref int i)
     {
@@ -416,7 +441,7 @@ public interface A {
         public void BothKindsOfCtors()
         {
             var text =
-@"public class Test
+                @"public class Test
 {
     public Test() {}
     public static Test() {}
@@ -433,7 +458,7 @@ public interface A {
         public void RefOutArrayParameter()
         {
             var text =
-@"public class Test
+                @"public class Test
 {
     public void MethodWithRefOutArray(ref int[] ary1, out string[] ary2)
     {
@@ -459,11 +484,13 @@ public interface A {
         public void InterfaceImplementsCrossTrees(string ob, string cb)
         {
             var text1 =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 namespace NS
-" + ob + @"
+"
+                + ob
+                + @"
   public class Abc {}
 
   public interface IGoo<T>
@@ -482,14 +509,17 @@ namespace NS
     void M21(); 
     Abc M22(ref Abc p);
   }
-" + cb;
+"
+                + cb;
 
             var text2 =
-@"using System;
+                @"using System;
 using System.Collections.Generic;
 
 namespace NS.NS1
-" + ob + @"
+"
+                + ob
+                + @"
   public class Impl : I2, IGoo<string>, I1
   {
     void IGoo<string>.M(ref string p) { }
@@ -503,7 +533,8 @@ namespace NS.NS1
   {
     void IGoo<T>.M(ref T t) {}
   }
-" + cb;
+"
+                + cb;
 
             var comp = CreateCompilation(new[] { text1, text2 });
             Assert.Equal(0, comp.GetDeclarationDiagnostics().Count());
@@ -512,7 +543,7 @@ namespace NS.NS1
 
             var classImpl = ns1.GetTypeMembers("Impl", 0).Single() as NamedTypeSymbol;
             Assert.Equal(3, classImpl.Interfaces().Length);
-            // 
+            //
             var itfc = classImpl.Interfaces().First() as NamedTypeSymbol;
             Assert.Equal(1, itfc.Interfaces().Length);
             itfc = itfc.Interfaces().First() as NamedTypeSymbol;
@@ -545,7 +576,8 @@ namespace NS.NS1
         [Fact]
         public void AbstractVirtualMethodsCrossTrees()
         {
-            var text = @"
+            var text =
+                @"
 namespace MT  {
     public interface IGoo  {
         void M0();
@@ -553,7 +585,8 @@ namespace MT  {
 }
 ";
 
-            var text1 = @"
+            var text1 =
+                @"
 namespace N1  {
     using MT;
     public abstract class Abc : IGoo  {
@@ -568,7 +601,8 @@ namespace N1  {
 }
 ";
 
-            var text2 = @"
+            var text2 =
+                @"
 namespace N1.N2  {
     public class Bbc : Abc  {
         public override void M0() { }
@@ -591,9 +625,7 @@ namespace N1.N2  {
             var mems = type1.GetMembers();
             Assert.Equal(7, mems.Length);
             // var sorted = mems.Orderby(m => m.Name).ToArray();
-            var sorted = (from m in mems
-                          orderby m.Name
-                          select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -652,9 +684,7 @@ namespace N1.N2  {
             mems = type2.GetMembers();
 
             Assert.Equal(8, mems.Length);
-            sorted = (from m in mems
-                      orderby m.Name
-                      select m).ToArray();
+            sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var mm = sorted[2] as FieldSymbol;
             Assert.Equal("M1", mm.Name);
@@ -716,7 +746,8 @@ namespace N1.N2  {
         [Fact]
         public void AbstractVirtualMethodsCrossComps()
         {
-            var text = @"
+            var text =
+                @"
 namespace MT  {
     public interface IGoo  {
         void M0();
@@ -724,7 +755,8 @@ namespace MT  {
 }
 ";
 
-            var text1 = @"
+            var text1 =
+                @"
 namespace N1  {
     using MT;
     public abstract class Abc : IGoo  {
@@ -739,7 +771,8 @@ namespace N1  {
 }
 ";
 
-            var text2 = @"
+            var text2 =
+                @"
 namespace N1.N2  {
     public class Bbc : Abc  {
         public override void M0() { }
@@ -755,13 +788,21 @@ namespace N1.N2  {
             var comp1 = CreateCompilationWithMscorlib45(text);
             var compRef1 = new CSharpCompilationReference(comp1);
 
-            var comp2 = CreateCompilationWithMscorlib45(new string[] { text1 }, new List<MetadataReference>() { compRef1 }, assemblyName: "Test2");
+            var comp2 = CreateCompilationWithMscorlib45(
+                new string[] { text1 },
+                new List<MetadataReference>() { compRef1 },
+                assemblyName: "Test2"
+            );
             //Compilation.Create(outputName: "Test2", options: CompilationOptions.Default,
             //                    syntaxTrees: new SyntaxTree[] { SyntaxTree.ParseCompilationUnit(text1) },
             //                    references: new MetadataReference[] { compRef1, GetCorlibReference() });
             var compRef2 = new CSharpCompilationReference(comp2);
 
-            var comp = CreateCompilationWithMscorlib45(new string[] { text2 }, new List<MetadataReference>() { compRef1, compRef2 }, assemblyName: "Test3");
+            var comp = CreateCompilationWithMscorlib45(
+                new string[] { text2 },
+                new List<MetadataReference>() { compRef1, compRef2 },
+                assemblyName: "Test3"
+            );
             //Compilation.Create(outputName: "Test3", options: CompilationOptions.Default,
             //                        syntaxTrees: new SyntaxTree[] { SyntaxTree.ParseCompilationUnit(text2) },
             //                        references: new MetadataReference[] { compRef1, compRef2, GetCorlibReference() });
@@ -784,9 +825,7 @@ namespace N1.N2  {
             var mems = type1.GetMembers();
             Assert.Equal(7, mems.Length);
             // var sorted = mems.Orderby(m => m.Name).ToArray();
-            var sorted = (from m in mems
-                          orderby m.Name
-                          select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -844,9 +883,7 @@ namespace N1.N2  {
             Assert.Equal("Abc", type2.Name);
             mems = type2.GetMembers();
             Assert.Equal(8, mems.Length);
-            sorted = (from m in mems
-                      orderby m.Name
-                      select m).ToArray();
+            sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var mm = sorted[2] as FieldSymbol;
             Assert.Equal("M1", mm.Name);
@@ -910,7 +947,8 @@ namespace N1.N2  {
         [Fact]
         public void OverloadMethodsCrossTrees()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 namespace NS
 {
@@ -922,7 +960,8 @@ namespace NS
 }
 ";
 
-            var text1 = @"
+            var text1 =
+                @"
 namespace NS
 {
     using System;
@@ -935,7 +974,8 @@ namespace NS
 }
 ";
 
-            var text2 = @"
+            var text2 =
+                @"
 namespace NS  {
     public class Test  {
         public class C : B  {
@@ -957,7 +997,10 @@ namespace NS  {
 
             var ns = comp.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
 
-            var type1 = (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol).GetTypeMembers("C", 0).Single() as NamedTypeSymbol;
+            var type1 =
+                (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol)
+                    .GetTypeMembers("C", 0)
+                    .Single() as NamedTypeSymbol;
             Assert.Equal(Accessibility.Public, type1.DeclaredAccessibility);
 
             var mems = type1.GetMembers();
@@ -973,9 +1016,7 @@ namespace NS  {
             list.AddRange(mems);
             list.AddRange(mems1);
             list.AddRange(mems2);
-            var sorted = (from m in list
-                          orderby m.Name
-                          select m).ToArray();
+            var sorted = (from m in list orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -985,13 +1026,19 @@ namespace NS  {
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
 
             var m1 = sorted[3] as MethodSymbol;
-            Assert.Equal("System.Int64 NS.Test.C.Overloads(NS.A p, NS.B p2)", m1.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int64 NS.Test.C.Overloads(NS.A p, NS.B p2)",
+                m1.ToTestDisplayString()
+            );
             m1 = sorted[4] as MethodSymbol;
             Assert.Equal("void NS.B.Overloads(ref NS.A p)", m1.ToTestDisplayString());
             m1 = sorted[5] as MethodSymbol;
             Assert.Equal("System.String NS.B.Overloads(NS.B p)", m1.ToTestDisplayString());
             m1 = sorted[6] as MethodSymbol;
-            Assert.Equal("System.Int64 NS.B.Overloads(NS.A p, System.Int64 p2)", m1.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int64 NS.B.Overloads(NS.A p, System.Int64 p2)",
+                m1.ToTestDisplayString()
+            );
             m1 = sorted[7] as MethodSymbol;
             Assert.Equal("void NS.A.Overloads(System.UInt16 p)", m1.ToTestDisplayString());
             m1 = sorted[8] as MethodSymbol;
@@ -1002,7 +1049,8 @@ namespace NS  {
         [Fact]
         public void OverloadMethodsCrossComps()
         {
-            var text = @"
+            var text =
+                @"
 namespace NS
 {
     public class A
@@ -1013,7 +1061,8 @@ namespace NS
 }
 ";
 
-            var text1 = @"
+            var text1 =
+                @"
 namespace NS
 {
     public class B : A
@@ -1025,7 +1074,8 @@ namespace NS
 }
 ";
 
-            var text2 = @"
+            var text2 =
+                @"
 namespace NS  {
     public class Test  {
         public class C : B  {
@@ -1044,13 +1094,21 @@ namespace NS  {
             var comp1 = CreateCompilation(text);
             var compRef1 = new CSharpCompilationReference(comp1);
 
-            var comp2 = CreateCompilation(new string[] { text1 }, new List<MetadataReference>() { compRef1 }, assemblyName: "Test2");
+            var comp2 = CreateCompilation(
+                new string[] { text1 },
+                new List<MetadataReference>() { compRef1 },
+                assemblyName: "Test2"
+            );
             //Compilation.Create(outputName: "Test2", options: CompilationOptions.Default,
             //                    syntaxTrees: new SyntaxTree[] { SyntaxTree.ParseCompilationUnit(text1) },
             //                    references: new MetadataReference[] { compRef1, GetCorlibReference() });
             var compRef2 = new CSharpCompilationReference(comp2);
 
-            var comp = CreateCompilation(new string[] { text2 }, new List<MetadataReference>() { compRef1, compRef2 }, assemblyName: "Test3");
+            var comp = CreateCompilation(
+                new string[] { text2 },
+                new List<MetadataReference>() { compRef1, compRef2 },
+                assemblyName: "Test3"
+            );
             //Compilation.Create(outputName: "Test3", options: CompilationOptions.Default,
             //                        syntaxTrees: new SyntaxTree[] { SyntaxTree.ParseCompilationUnit(text2) },
             //                        references: new MetadataReference[] { compRef1, compRef2, GetCorlibReference() });
@@ -1066,7 +1124,10 @@ namespace NS  {
             //Assert.Equal(String.Empty, errs);
 
             var ns = comp.GlobalNamespace.GetMembers("NS").Single() as NamespaceSymbol;
-            var type1 = (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol).GetTypeMembers("C", 0).Single() as NamedTypeSymbol;
+            var type1 =
+                (ns.GetTypeMembers("Test").Single() as NamedTypeSymbol)
+                    .GetTypeMembers("C", 0)
+                    .Single() as NamedTypeSymbol;
             Assert.Equal(Accessibility.Public, type1.DeclaredAccessibility);
 
             var mems = type1.GetMembers();
@@ -1082,9 +1143,7 @@ namespace NS  {
             list.AddRange(mems);
             list.AddRange(mems1);
             list.AddRange(mems2);
-            var sorted = (from m in list
-                          orderby m.Name
-                          select m).ToArray();
+            var sorted = (from m in list orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -1094,13 +1153,19 @@ namespace NS  {
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
 
             var m1 = sorted[3] as MethodSymbol;
-            Assert.Equal("System.Int64 NS.Test.C.Overloads(NS.A p, NS.B p2)", m1.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int64 NS.Test.C.Overloads(NS.A p, NS.B p2)",
+                m1.ToTestDisplayString()
+            );
             m1 = sorted[4] as MethodSymbol;
             Assert.Equal("void NS.B.Overloads(ref NS.A p)", m1.ToTestDisplayString());
             m1 = sorted[5] as MethodSymbol;
             Assert.Equal("System.String NS.B.Overloads(NS.B p)", m1.ToTestDisplayString());
             m1 = sorted[6] as MethodSymbol;
-            Assert.Equal("System.Int64 NS.B.Overloads(NS.A p, System.Int64 p2)", m1.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int64 NS.B.Overloads(NS.A p, System.Int64 p2)",
+                m1.ToTestDisplayString()
+            );
             m1 = sorted[7] as MethodSymbol;
             Assert.Equal("void NS.A.Overloads(System.UInt16 p)", m1.ToTestDisplayString());
             m1 = sorted[8] as MethodSymbol;
@@ -1111,7 +1176,8 @@ namespace NS  {
         [Fact]
         public void PartialMethodsCrossTrees()
         {
-            var text = @"
+            var text =
+                @"
 namespace NS
 {
     public partial struct PS
@@ -1126,7 +1192,8 @@ namespace NS
 }
 ";
 
-            var text1 = @"
+            var text1 =
+                @"
 namespace NS
 {
     partial struct PS
@@ -1143,7 +1210,8 @@ namespace NS
 }
 ";
 
-            var text2 = @"
+            var text2 =
+                @"
 namespace NS
 {
     partial struct PS
@@ -1173,9 +1241,7 @@ namespace NS
 
             var mems = type1.GetMembers();
             Assert.Equal(5, mems.Length);
-            var sorted = (from m in mems
-                          orderby m.Name
-                          select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -1210,9 +1276,7 @@ namespace NS
 
             mems = type2.GetMembers();
             // Assert.Equal(3, mems.Count());
-            sorted = (from m in mems
-                      orderby m.Name
-                      select m).ToArray();
+            sorted = (from m in mems orderby m.Name select m).ToArray();
 
             m0 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m0.Name);
@@ -1236,7 +1300,8 @@ namespace NS
         [Fact]
         public void PartialMethodsWithRefParams()
         {
-            var text = @"
+            var text =
+                @"
 namespace NS
 {
     public partial class PC
@@ -1267,9 +1332,7 @@ namespace NS
             var mems = type1.GetMembers();
             // Bug: actual 5
             Assert.Equal(3, mems.Length);
-            var sorted = (from m in mems
-                          orderby m.Name
-                          select m).ToArray();
+            var sorted = (from m in mems orderby m.Name select m).ToArray();
 
             var m1 = sorted[0] as MethodSymbol;
             Assert.Equal(WellKnownMemberNames.InstanceConstructorName, m1.Name);
@@ -1293,7 +1356,8 @@ namespace NS
         [Fact]
         public void ExplicitInterfaceImplementation()
         {
-            var text = @"
+            var text =
+                @"
 
 interface ISubFuncProp
 {
@@ -1323,7 +1387,8 @@ public class DerivedClass : Interface3Derived
 
             var comp = CreateCompilation(text);
 
-            var derivedClass = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("DerivedClass")[0];
+            var derivedClass = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("DerivedClass")[0];
             var members = derivedClass.GetMembers();
             Assert.Equal(3, members.Length);
         }
@@ -1331,7 +1396,8 @@ public class DerivedClass : Interface3Derived
         [Fact]
         public void SubstitutedExplicitInterfaceImplementation()
         {
-            var text = @"
+            var text =
+                @"
 public class A<T>
 {
     public interface I<U>
@@ -1358,7 +1424,8 @@ public class C : B<int, long>
             Assert.Equal("Q", classBTypeArguments[0].Name);
             Assert.Equal("R", classBTypeArguments[1].Name);
 
-            var classBMethodM = (MethodSymbol)classB.GetMembers().Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
+            var classBMethodM = (MethodSymbol)
+                classB.GetMembers().Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
             var classBMethodMTypeParameters = classBMethodM.TypeParameters;
             Assert.Equal(1, classBMethodMTypeParameters.Length);
             Assert.Equal("S", classBMethodMTypeParameters[0].Name);
@@ -1379,7 +1446,10 @@ public class C : B<int, long>
             Assert.Equal(SpecialType.System_Int32, classCBaseTypeArguments[0].SpecialType);
             Assert.Equal(SpecialType.System_Int64, classCBaseTypeArguments[1].SpecialType);
 
-            var classCBaseMethodM = (MethodSymbol)classCBase.GetMembers().Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
+            var classCBaseMethodM = (MethodSymbol)
+                classCBase
+                    .GetMembers()
+                    .Single(sym => sym.Name.EndsWith("M", StringComparison.Ordinal));
             Assert.NotEqual(classBMethodM, classCBaseMethodM);
 
             var classCBaseMethodMTypeParameters = classCBaseMethodM.TypeParameters;
@@ -1400,7 +1470,7 @@ public class C : B<int, long>
         public void MethodWithParamsInParameters()
         {
             var text =
-@"class C
+                @"class C
 {
     void F1(params int[] a) { }
 }
@@ -1415,7 +1485,8 @@ public class C : B<int, long>
         [Fact]
         public void Arglist()
         {
-            string code = @"
+            string code =
+                @"
                 class AA
                 {
                    public static int Method1(__arglist)
@@ -1427,14 +1498,18 @@ public class C : B<int, long>
             NamedTypeSymbol nts = comp.Assembly.GlobalNamespace.GetTypeMembers()[0];
             Assert.Equal("AA", nts.ToTestDisplayString());
             Assert.Empty(comp.GetDeclarationDiagnostics());
-            Assert.Equal("System.Int32 AA.Method1(__arglist)", nts.GetMembers("Method1").Single().ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32 AA.Method1(__arglist)",
+                nts.GetMembers("Method1").Single().ToTestDisplayString()
+            );
         }
 
         [WorkItem(537877, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/537877")]
         [Fact]
         public void ExpImpInterfaceWithGlobal()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 namespace N1 
 {
@@ -1473,7 +1548,8 @@ namespace N2
         [Fact]
         public void BaseInterfaceNameWithAlias()
         {
-            var text = @"
+            var text =
+                @"
 using N1Alias = N1;
 namespace N1 
 {
@@ -1509,7 +1585,8 @@ namespace N2
         [Fact]
         public void ParameterAccessibility01()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 class MyClass
 {
@@ -1548,7 +1625,8 @@ class MyClass
         [Fact]
         public void MethodsWithSameSigDiffReturnType()
         {
-            var text = @"
+            var text =
+                @"
 class Test
 {
     public int M1()
@@ -1574,7 +1652,8 @@ class Test
         [Fact]
         public void OverriddenMethod01()
         {
-            var text = @"
+            var text =
+                @"
 class A
 {
     public virtual void F(object[] args) {}
@@ -1605,7 +1684,8 @@ class B : A
         [Fact]
         public void MethodEscapedIdentifier()
         {
-            var text = @"
+            var text =
+                @"
 interface @void { @void @return(@void @in); };
 class @int { virtual @int @float(@int @in); };
 class C1 : @int, @void
@@ -1615,7 +1695,8 @@ class C1 : @int, @void
 }
 ";
             var comp = CreateCompilation(Parse(text));
-            NamedTypeSymbol c1 = (NamedTypeSymbol)comp.SourceModule.GlobalNamespace.GetMembers("C1").Single();
+            NamedTypeSymbol c1 = (NamedTypeSymbol)
+                comp.SourceModule.GlobalNamespace.GetMembers("C1").Single();
             // Per explanation from NGafter:
             //
             // We intentionally escape keywords that appear in the type qualification of the interface name
@@ -1630,15 +1711,21 @@ class C1 : @int, @void
             NamedTypeSymbol rvoid = (NamedTypeSymbol)mreturn.ReturnType;
             Assert.Equal("void", rvoid.Name);
             Assert.Equal("@void", rvoid.ToString());
-            MethodSymbol mvoidreturn = (MethodSymbol)mreturn.ExplicitInterfaceImplementations.Single();
+            MethodSymbol mvoidreturn = (MethodSymbol)
+                mreturn.ExplicitInterfaceImplementations.Single();
             Assert.Equal("return", mvoidreturn.Name);
             Assert.Equal("@void.@return(@void)", mvoidreturn.ToString());
             ParameterSymbol pin = mreturn.Parameters.Single();
             Assert.Equal("in", pin.Name);
-            Assert.Equal("@in", pin.ToDisplayString(
-                new SymbolDisplayFormat(
-                    parameterOptions: SymbolDisplayParameterOptions.IncludeName,
-                    miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers)));
+            Assert.Equal(
+                "@in",
+                pin.ToDisplayString(
+                    new SymbolDisplayFormat(
+                        parameterOptions: SymbolDisplayParameterOptions.IncludeName,
+                        miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+                    )
+                )
+            );
             MethodSymbol mfloat = (MethodSymbol)c1.GetMembers("float").Single();
             Assert.Equal("float", mfloat.Name);
             Assert.Empty(c1.GetMembers("@float"));
@@ -1647,7 +1734,8 @@ class C1 : @int, @void
         [Fact]
         public void ExplicitInterfaceImplementationSimple()
         {
-            string text = @"
+            string text =
+                @"
 interface I
 {
     void Method();
@@ -1679,9 +1767,20 @@ class C : I
             Assert.Equal(interfaceMethod, explicitImpl);
 
             var typeDef = (Cci.ITypeDefinition)@class.GetCciAdapter();
-            var module = new PEAssemblyBuilder((SourceAssemblySymbol)@class.ContainingAssembly, EmitOptions.Default, OutputKind.DynamicallyLinkedLibrary,
-                GetDefaultModulePropertiesForSerialization(), SpecializedCollections.EmptyEnumerable<ResourceDescription>());
-            var context = new EmitContext(module, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var module = new PEAssemblyBuilder(
+                (SourceAssemblySymbol)@class.ContainingAssembly,
+                EmitOptions.Default,
+                OutputKind.DynamicallyLinkedLibrary,
+                GetDefaultModulePropertiesForSerialization(),
+                SpecializedCollections.EmptyEnumerable<ResourceDescription>()
+            );
+            var context = new EmitContext(
+                module,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
             var explicitOverride = typeDef.GetExplicitImplementationOverrides(context).Single();
             Assert.Equal(@class, explicitOverride.ContainingType.GetInternalSymbol());
             Assert.Equal(classMethod, explicitOverride.ImplementingMethod.GetInternalSymbol());
@@ -1692,7 +1791,8 @@ class C : I
         [Fact]
         public void ExplicitInterfaceImplementationCorLib()
         {
-            string text = @"
+            string text =
+                @"
 class F : System.IFormattable
 {
     string System.IFormattable.ToString(string format, System.IFormatProvider formatProvider)
@@ -1707,7 +1807,8 @@ class F : System.IFormattable
             var globalNamespace = comp.GlobalNamespace;
             var systemNamespace = (NamespaceSymbol)globalNamespace.GetMembers("System").Single();
 
-            var @interface = (NamedTypeSymbol)systemNamespace.GetTypeMembers("IFormattable").Single();
+            var @interface = (NamedTypeSymbol)
+                systemNamespace.GetTypeMembers("IFormattable").Single();
             Assert.Equal(TypeKind.Interface, @interface.TypeKind);
 
             var interfaceMethod = (MethodSymbol)@interface.GetMembers("ToString").Single();
@@ -1716,16 +1817,28 @@ class F : System.IFormattable
             Assert.Equal(TypeKind.Class, @class.TypeKind);
             Assert.True(@class.Interfaces().Contains(@interface));
 
-            var classMethod = (MethodSymbol)@class.GetMembers("System.IFormattable.ToString").Single();
+            var classMethod = (MethodSymbol)
+                @class.GetMembers("System.IFormattable.ToString").Single();
             Assert.Equal(MethodKind.ExplicitInterfaceImplementation, classMethod.MethodKind);
 
             var explicitImpl = classMethod.ExplicitInterfaceImplementations.Single();
             Assert.Equal(interfaceMethod, explicitImpl);
 
             var typeDef = (Cci.ITypeDefinition)@class.GetCciAdapter();
-            var module = new PEAssemblyBuilder((SourceAssemblySymbol)@class.ContainingAssembly, EmitOptions.Default, OutputKind.DynamicallyLinkedLibrary,
-               GetDefaultModulePropertiesForSerialization(), SpecializedCollections.EmptyEnumerable<ResourceDescription>());
-            var context = new EmitContext(module, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var module = new PEAssemblyBuilder(
+                (SourceAssemblySymbol)@class.ContainingAssembly,
+                EmitOptions.Default,
+                OutputKind.DynamicallyLinkedLibrary,
+                GetDefaultModulePropertiesForSerialization(),
+                SpecializedCollections.EmptyEnumerable<ResourceDescription>()
+            );
+            var context = new EmitContext(
+                module,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
             var explicitOverride = typeDef.GetExplicitImplementationOverrides(context).Single();
             Assert.Equal(@class, explicitOverride.ContainingType.GetInternalSymbol());
             Assert.Equal(classMethod, explicitOverride.ImplementingMethod.GetInternalSymbol());
@@ -1736,7 +1849,8 @@ class F : System.IFormattable
         [Fact]
         public void ExplicitInterfaceImplementationRef()
         {
-            string text = @"
+            string text =
+                @"
 interface I
 {
     ref int Method(ref int i);
@@ -1770,9 +1884,20 @@ class C : I
             Assert.Equal(interfaceMethod, explicitImpl);
 
             var typeDef = (Cci.ITypeDefinition)@class.GetCciAdapter();
-            var module = new PEAssemblyBuilder((SourceAssemblySymbol)@class.ContainingAssembly, EmitOptions.Default, OutputKind.DynamicallyLinkedLibrary,
-                GetDefaultModulePropertiesForSerialization(), SpecializedCollections.EmptyEnumerable<ResourceDescription>());
-            var context = new EmitContext(module, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var module = new PEAssemblyBuilder(
+                (SourceAssemblySymbol)@class.ContainingAssembly,
+                EmitOptions.Default,
+                OutputKind.DynamicallyLinkedLibrary,
+                GetDefaultModulePropertiesForSerialization(),
+                SpecializedCollections.EmptyEnumerable<ResourceDescription>()
+            );
+            var context = new EmitContext(
+                module,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
             var explicitOverride = typeDef.GetExplicitImplementationOverrides(context).Single();
             Assert.Equal(@class, explicitOverride.ContainingType.GetInternalSymbol());
             Assert.Equal(classMethod, explicitOverride.ImplementingMethod.GetInternalSymbol());
@@ -1783,7 +1908,8 @@ class C : I
         [Fact]
         public void ExplicitInterfaceImplementationGeneric()
         {
-            string text = @"
+            string text =
+                @"
 namespace Namespace
 {
     interface I<T>
@@ -1814,34 +1940,57 @@ class IC : Namespace.I<int>
             var substitutedInterface = @class.Interfaces().Single();
             Assert.Equal(@interface, substitutedInterface.ConstructedFrom);
 
-            var substitutedInterfaceMethod = (MethodSymbol)substitutedInterface.GetMembers("Method").Single();
+            var substitutedInterfaceMethod = (MethodSymbol)
+                substitutedInterface.GetMembers("Method").Single();
 
-            var classMethod = (MethodSymbol)@class.GetMembers("Namespace.I<System.Int32>.Method").Single();
+            var classMethod = (MethodSymbol)
+                @class.GetMembers("Namespace.I<System.Int32>.Method").Single();
             Assert.Equal(MethodKind.ExplicitInterfaceImplementation, classMethod.MethodKind);
 
             var explicitImpl = classMethod.ExplicitInterfaceImplementations.Single();
             Assert.Equal(substitutedInterface, explicitImpl.ContainingType);
-            Assert.Equal(substitutedInterfaceMethod.OriginalDefinition, explicitImpl.OriginalDefinition);
+            Assert.Equal(
+                substitutedInterfaceMethod.OriginalDefinition,
+                explicitImpl.OriginalDefinition
+            );
 
             var typeDef = (Cci.ITypeDefinition)@class.GetCciAdapter();
-            var module = new PEAssemblyBuilder((SourceAssemblySymbol)@class.ContainingAssembly, EmitOptions.Default, OutputKind.DynamicallyLinkedLibrary,
-                GetDefaultModulePropertiesForSerialization(), SpecializedCollections.EmptyEnumerable<ResourceDescription>());
-            var context = new EmitContext(module, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var module = new PEAssemblyBuilder(
+                (SourceAssemblySymbol)@class.ContainingAssembly,
+                EmitOptions.Default,
+                OutputKind.DynamicallyLinkedLibrary,
+                GetDefaultModulePropertiesForSerialization(),
+                SpecializedCollections.EmptyEnumerable<ResourceDescription>()
+            );
+            var context = new EmitContext(
+                module,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
             var explicitOverride = typeDef.GetExplicitImplementationOverrides(context).Single();
             Assert.Equal(@class, explicitOverride.ContainingType.GetInternalSymbol());
             Assert.Equal(classMethod, explicitOverride.ImplementingMethod.GetInternalSymbol());
 
             var explicitOverrideImplementedMethod = explicitOverride.ImplementedMethod;
-            Assert.Equal(substitutedInterface, explicitOverrideImplementedMethod.GetContainingType(context).GetInternalSymbol());
+            Assert.Equal(
+                substitutedInterface,
+                explicitOverrideImplementedMethod.GetContainingType(context).GetInternalSymbol()
+            );
             Assert.Equal(substitutedInterfaceMethod.Name, explicitOverrideImplementedMethod.Name);
-            Assert.Equal(substitutedInterfaceMethod.Arity, explicitOverrideImplementedMethod.GenericParameterCount);
+            Assert.Equal(
+                substitutedInterfaceMethod.Arity,
+                explicitOverrideImplementedMethod.GenericParameterCount
+            );
             context.Diagnostics.Verify();
         }
 
         [Fact()]
         public void TestMetadataVirtual()
         {
-            string text = @"
+            string text =
+                @"
 class C
 {
     virtual void Method1() { }
@@ -1890,7 +2039,8 @@ class C
         [Fact]
         public void ExplicitStaticConstructor()
         {
-            string text = @"
+            string text =
+                @"
 class C
 {
     static C() { }
@@ -1899,7 +2049,9 @@ class C
             var comp = CreateCompilation(text);
             comp.VerifyDiagnostics();
 
-            var staticConstructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
+            var staticConstructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
 
             Assert.Equal(MethodKind.StaticConstructor, staticConstructor.MethodKind);
             Assert.Equal(Accessibility.Private, staticConstructor.DeclaredAccessibility);
@@ -1910,7 +2062,8 @@ class C
         [Fact]
         public void ImplicitStaticConstructor()
         {
-            string text = @"
+            string text =
+                @"
 class C
 {
     static int f = 1; //initialized in implicit static constructor
@@ -1923,7 +2076,9 @@ class C
                 Diagnostic(ErrorCode.WRN_UnreferencedFieldAssg, "f").WithArguments("C.f")
             );
 
-            var staticConstructor = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
+            var staticConstructor = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMember<MethodSymbol>(WellKnownMemberNames.StaticConstructorName);
 
             Assert.Equal(MethodKind.StaticConstructor, staticConstructor.MethodKind);
             Assert.Equal(Accessibility.Private, staticConstructor.DeclaredAccessibility);
@@ -1935,7 +2090,8 @@ class C
         [Fact]
         public void AccessorMethodAccessorOverriding()
         {
-            var text = @"
+            var text =
+                @"
 public class A
 {
     public virtual int P { get; set; }
@@ -1965,9 +2121,20 @@ public class C : B
             var methodC = classC.GetMember<PropertySymbol>("P").GetMethod;
 
             var typeDefC = (Cci.ITypeDefinition)classC.GetCciAdapter();
-            var module = new PEAssemblyBuilder((SourceAssemblySymbol)classC.ContainingAssembly, EmitOptions.Default, OutputKind.DynamicallyLinkedLibrary,
-                GetDefaultModulePropertiesForSerialization(), SpecializedCollections.EmptyEnumerable<ResourceDescription>());
-            var context = new EmitContext(module, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var module = new PEAssemblyBuilder(
+                (SourceAssemblySymbol)classC.ContainingAssembly,
+                EmitOptions.Default,
+                OutputKind.DynamicallyLinkedLibrary,
+                GetDefaultModulePropertiesForSerialization(),
+                SpecializedCollections.EmptyEnumerable<ResourceDescription>()
+            );
+            var context = new EmitContext(
+                module,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
             var explicitOverride = typeDefC.GetExplicitImplementationOverrides(context).Single();
             Assert.Equal(classC, explicitOverride.ContainingType.GetInternalSymbol());
             Assert.Equal(methodC, explicitOverride.ImplementingMethod.GetInternalSymbol());
@@ -1979,7 +2146,8 @@ public class C : B
         [Fact]
         public void MethodAccessorMethodOverriding()
         {
-            var text = @"
+            var text =
+                @"
 public class A
 {
     public virtual int get_P() { return 0; }
@@ -2009,9 +2177,20 @@ public class C : B
             var methodC = classC.GetMember<MethodSymbol>("get_P");
 
             var typeDefC = (Cci.ITypeDefinition)classC.GetCciAdapter();
-            var module = new PEAssemblyBuilder((SourceAssemblySymbol)classC.ContainingAssembly, EmitOptions.Default, OutputKind.DynamicallyLinkedLibrary,
-                GetDefaultModulePropertiesForSerialization(), SpecializedCollections.EmptyEnumerable<ResourceDescription>());
-            var context = new EmitContext(module, null, new DiagnosticBag(), metadataOnly: false, includePrivateMembers: true);
+            var module = new PEAssemblyBuilder(
+                (SourceAssemblySymbol)classC.ContainingAssembly,
+                EmitOptions.Default,
+                OutputKind.DynamicallyLinkedLibrary,
+                GetDefaultModulePropertiesForSerialization(),
+                SpecializedCollections.EmptyEnumerable<ResourceDescription>()
+            );
+            var context = new EmitContext(
+                module,
+                null,
+                new DiagnosticBag(),
+                metadataOnly: false,
+                includePrivateMembers: true
+            );
             var explicitOverride = typeDefC.GetExplicitImplementationOverrides(context).Single();
             Assert.Equal(classC, explicitOverride.ContainingType.GetInternalSymbol());
             Assert.Equal(methodC, explicitOverride.ImplementingMethod.GetInternalSymbol());
@@ -2024,7 +2203,7 @@ public class C : B
         public void BadArityInOperatorDeclaration()
         {
             var text =
-@"class A
+                @"class A
 {
     public static bool operator true(A x, A y) { return false; }
 }
@@ -2044,7 +2223,8 @@ class B
                 Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "*"),
                 // (3,33): error CS0216: The operator 'A.operator true(A, A)' requires a matching operator 'false' to also be defined
                 //     public static bool operator true(A x, A y) { return false; }
-                Diagnostic(ErrorCode.ERR_OperatorNeedsMatch, "true").WithArguments("A.operator true(A, A)", "false")
+                Diagnostic(ErrorCode.ERR_OperatorNeedsMatch, "true")
+                    .WithArguments("A.operator true(A, A)", "false")
             );
         }
 
@@ -2052,7 +2232,8 @@ class B
         [Fact]
         public void UserDefinedOperatorLocation()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static C operator +(C c) { return null; }
@@ -2063,7 +2244,10 @@ public class C
             var parenPos = source.IndexOf('(');
 
             var comp = CreateCompilation(source);
-            var symbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMembers(WellKnownMemberNames.UnaryPlusOperatorName).Single();
+            var symbol = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMembers(WellKnownMemberNames.UnaryPlusOperatorName)
+                .Single();
             var span = symbol.Locations.Single().SourceSpan;
             Assert.Equal(keywordPos, span.Start);
             Assert.Equal(parenPos, span.End);
@@ -2073,7 +2257,8 @@ public class C
         [Fact]
         public void UserDefinedConversionLocation()
         {
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public static explicit operator string(C c) { return null; }
@@ -2084,16 +2269,21 @@ public class C
             var parenPos = source.IndexOf('(');
 
             var comp = CreateCompilation(source);
-            var symbol = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMembers(WellKnownMemberNames.ExplicitConversionName).Single();
+            var symbol = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMembers(WellKnownMemberNames.ExplicitConversionName)
+                .Single();
             var span = symbol.Locations.Single().SourceSpan;
             Assert.Equal(keywordPos, span.Start);
             Assert.Equal(parenPos, span.End);
         }
+
         [WorkItem(787708, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/787708")]
         [Fact]
         public void PartialAsyncMethodInTypeWithAttributes()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 
 class Attr : Attribute
@@ -2110,17 +2300,20 @@ partial class C
     async partial void M() { }
 }
 ";
-            CreateCompilation(source).VerifyDiagnostics(
-              // (15,24): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-              //     async partial void M() { }
-              Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M"));
+            CreateCompilation(source)
+                .VerifyDiagnostics(
+                    // (15,24): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    //     async partial void M() { }
+                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M")
+                );
         }
 
         [WorkItem(910100, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/910100")]
         [Fact]
         public void SubstitutedParameterEquality()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M<T>(T t) { }
@@ -2145,7 +2338,8 @@ class C
         [Fact]
         public void ReducedExtensionMethodParameterEquality()
         {
-            var source = @"
+            var source =
+                @"
 static class C
 {
     static void M(this int i, string s) { }
@@ -2169,17 +2363,19 @@ static class C
         [Fact]
         public void RefReturningVoidMethod()
         {
-            var source = @"
+            var source =
+                @"
 static class C
 {
     static ref void M() { }
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (4,16): error CS1547: Keyword 'void' cannot be used in this context
-                //     static ref void M() { }
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 16)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (4,16): error CS1547: Keyword 'void' cannot be used in this context
+                    //     static ref void M() { }
+                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 16)
                 );
         }
 
@@ -2187,24 +2383,27 @@ static class C
         [CompilerTrait(CompilerFeature.ReadOnlyReferences)]
         public void RefReadonlyReturningVoidMethod()
         {
-            var source = @"
+            var source =
+                @"
 static class C
 {
     static ref readonly void M() { }
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (4,25): error CS1547: Keyword 'void' cannot be used in this context
-                //     static ref readonly void M() { }
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 25)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (4,25): error CS1547: Keyword 'void' cannot be used in this context
+                    //     static ref readonly void M() { }
+                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(4, 25)
                 );
         }
 
         [Fact]
         public void RefReturningVoidMethodNested()
         {
-            var source = @"
+            var source =
+                @"
 static class C
 {
     static void Main()
@@ -2214,13 +2413,16 @@ static class C
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (6,13): error CS1547: Keyword 'void' cannot be used in this context
-                //         ref void M() { }
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(6, 13),
-                // (6,18): warning CS8321: The local function 'M' is declared but never used
-                //         ref void M() { }
-                Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M").WithArguments("M").WithLocation(6, 18)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (6,13): error CS1547: Keyword 'void' cannot be used in this context
+                    //         ref void M() { }
+                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(6, 13),
+                    // (6,18): warning CS8321: The local function 'M' is declared but never used
+                    //         ref void M() { }
+                    Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "M")
+                        .WithArguments("M")
+                        .WithLocation(6, 18)
                 );
         }
 
@@ -2228,7 +2430,8 @@ static class C
         [CompilerTrait(CompilerFeature.ReadOnlyReferences)]
         public void RefReadonlyReturningVoidMethodNested()
         {
-            var source = @"
+            var source =
+                @"
 static class C
 {
     static void Main()
@@ -2245,33 +2448,40 @@ static class C
 ";
 
             var parseOptions = TestOptions.Regular;
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (10,22): error CS1547: Keyword 'void' cannot be used in this context
-                //         ref readonly void M2() {M1(); throw null;}
-                Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(10, 22)
-            );
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (10,22): error CS1547: Keyword 'void' cannot be used in this context
+                    //         ref readonly void M2() {M1(); throw null;}
+                    Diagnostic(ErrorCode.ERR_NoVoidHere, "void").WithLocation(10, 22)
+                );
         }
 
         [Fact]
         public void RefReturningAsyncMethod()
         {
-            var source = @"
+            var source =
+                @"
 static class C
 {
     static async ref int M() { }
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (4,18): error CS1073: Unexpected token 'ref'
-                //     static async ref int M() { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref").WithArguments("ref").WithLocation(4, 18),
-                // (4,26): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-                //     static async ref int M() { }
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 26),
-                // (4,26): error CS0161: 'C.M()': not all code paths return a value
-                //     static async ref int M() { }
-                Diagnostic(ErrorCode.ERR_ReturnExpected, "M").WithArguments("C.M()").WithLocation(4, 26)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (4,18): error CS1073: Unexpected token 'ref'
+                    //     static async ref int M() { }
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                        .WithArguments("ref")
+                        .WithLocation(4, 18),
+                    // (4,26): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    //     static async ref int M() { }
+                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 26),
+                    // (4,26): error CS0161: 'C.M()': not all code paths return a value
+                    //     static async ref int M() { }
+                    Diagnostic(ErrorCode.ERR_ReturnExpected, "M")
+                        .WithArguments("C.M()")
+                        .WithLocation(4, 26)
                 );
         }
 
@@ -2279,30 +2489,37 @@ static class C
         [CompilerTrait(CompilerFeature.ReadOnlyReferences)]
         public void RefReadonlyReturningAsyncMethod()
         {
-            var source = @"
+            var source =
+                @"
 static class C
 {
     static async ref readonly int M() { }
 }
 ";
 
-            CreateCompilationWithMscorlib45(source).VerifyDiagnostics(
-                // (4,18): error CS1073: Unexpected token 'ref'
-                //     static async ref readonly int M() { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref").WithArguments("ref").WithLocation(4, 18),
-                // (4,35): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
-                //     static async ref readonly int M() { }
-                Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 35),
-                // (4,35): error CS0161: 'C.M()': not all code paths return a value
-                //     static async ref readonly int M() { }
-                Diagnostic(ErrorCode.ERR_ReturnExpected, "M").WithArguments("C.M()").WithLocation(4, 35)
+            CreateCompilationWithMscorlib45(source)
+                .VerifyDiagnostics(
+                    // (4,18): error CS1073: Unexpected token 'ref'
+                    //     static async ref readonly int M() { }
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "ref")
+                        .WithArguments("ref")
+                        .WithLocation(4, 18),
+                    // (4,35): warning CS1998: This async method lacks 'await' operators and will run synchronously. Consider using the 'await' operator to await non-blocking API calls, or 'await Task.Run(...)' to do CPU-bound work on a background thread.
+                    //     static async ref readonly int M() { }
+                    Diagnostic(ErrorCode.WRN_AsyncLacksAwaits, "M").WithLocation(4, 35),
+                    // (4,35): error CS0161: 'C.M()': not all code paths return a value
+                    //     static async ref readonly int M() { }
+                    Diagnostic(ErrorCode.ERR_ReturnExpected, "M")
+                        .WithArguments("C.M()")
+                        .WithLocation(4, 35)
                 );
         }
 
         [Fact]
         public void StaticMethodDoesNotRequireInstanceReceiver()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public static int M() => 42;
@@ -2315,7 +2532,8 @@ class C
         [Fact]
         public void InstanceMethodRequiresInstanceReceiver()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public int M() => 42;
@@ -2328,7 +2546,8 @@ class C
         [Fact]
         public void OrdinaryMethodIsNotConditional()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     public void M() {}
@@ -2341,7 +2560,8 @@ class C
         [Fact]
         public void ConditionalMethodIsConditional()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 class C
 {
@@ -2356,7 +2576,8 @@ class C
         [Fact]
         public void ConditionalMethodOverrideIsConditional()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 class Base
@@ -2377,17 +2598,22 @@ class Derived : Base
         [Fact]
         public void InvalidConditionalMethodIsConditional()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 class C
 {
     [Conditional(""Debug"")]
     public int M() => 42; 
 }";
-            var compilation = CreateCompilation(source).VerifyDiagnostics(
+            var compilation = CreateCompilation(source)
+                .VerifyDiagnostics(
                     // (5,6): error CS0578: The Conditional attribute is not valid on 'C.M()' because its return type is not void
                     //     [Conditional("Debug")]
-                    Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""Debug"")").WithArguments("C.M()").WithLocation(5, 6));
+                    Diagnostic(ErrorCode.ERR_ConditionalMustReturnVoid, @"Conditional(""Debug"")")
+                        .WithArguments("C.M()")
+                        .WithLocation(5, 6)
+                );
             var method = compilation.GetMember<MethodSymbol>("C.M");
             Assert.True(method.IsConditional);
         }
@@ -2395,7 +2621,8 @@ class C
         [Fact, WorkItem(51082, "https://github.com/dotnet/roslyn/issues/51082")]
         public void IsPartialDefinitionOnNonPartial()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M() {}
@@ -2411,7 +2638,8 @@ class C
         [Fact, WorkItem(51082, "https://github.com/dotnet/roslyn/issues/51082")]
         public void IsPartialDefinitionOnPartialDefinitionOnly()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     partial void M();
@@ -2429,7 +2657,8 @@ partial class C
         [Fact, WorkItem(51082, "https://github.com/dotnet/roslyn/issues/51082")]
         public void IsPartialDefinitionWithPartialImplementation()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     partial void M();
@@ -2448,7 +2677,8 @@ partial class C
         [Fact, WorkItem(51082, "https://github.com/dotnet/roslyn/issues/51082")]
         public void IsPartialDefinitionOnPartialImplementation_NonPartialClass()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     partial void M();
@@ -2460,7 +2690,8 @@ class C
             comp.VerifyDiagnostics(
                 // (4,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M();
-                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M")
+                    .WithLocation(4, 18),
                 // (5,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M() {}
                 Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(5, 18)
@@ -2474,7 +2705,8 @@ class C
         [Fact, WorkItem(51082, "https://github.com/dotnet/roslyn/issues/51082")]
         public void IsPartialDefinitionOnPartialImplementationOnly()
         {
-            var source = @"
+            var source =
+                @"
 partial class C
 {
     partial void M() {}
@@ -2485,7 +2717,9 @@ partial class C
             comp.VerifyDiagnostics(
                 // (4,18): error CS0759: No defining declaration found for implementing declaration of partial method 'C.M()'
                 //     partial void M() {}
-                Diagnostic(ErrorCode.ERR_PartialMethodMustHaveLatent, "M").WithArguments("C.M()").WithLocation(4, 18)
+                Diagnostic(ErrorCode.ERR_PartialMethodMustHaveLatent, "M")
+                    .WithArguments("C.M()")
+                    .WithLocation(4, 18)
             );
             var m = comp.GetMember<MethodSymbol>("C.M").GetPublicSymbol();
             Assert.False(m.IsPartialDefinition);
@@ -2496,7 +2730,8 @@ partial class C
         [Fact, WorkItem(51082, "https://github.com/dotnet/roslyn/issues/51082")]
         public void IsPartialDefinition_ReturnsFalseFromMetadata()
         {
-            var source = @"
+            var source =
+                @"
 public partial class C
 {
     public partial void M();
@@ -2504,27 +2739,36 @@ public partial class C
 }
 ";
 
-            CompileAndVerify(source,
+            CompileAndVerify(
+                source,
                 sourceSymbolValidator: module =>
                 {
-                    var m = module.GlobalNamespace.GetTypeMember("C").GetMethod("M").GetPublicSymbol();
+                    var m = module
+                        .GlobalNamespace.GetTypeMember("C")
+                        .GetMethod("M")
+                        .GetPublicSymbol();
                     Assert.True(m.IsPartialDefinition);
                     Assert.Null(m.PartialDefinitionPart);
                     Assert.False(m.PartialImplementationPart.IsPartialDefinition);
                 },
                 symbolValidator: module =>
                 {
-                    var m = module.GlobalNamespace.GetTypeMember("C").GetMethod("M").GetPublicSymbol();
+                    var m = module
+                        .GlobalNamespace.GetTypeMember("C")
+                        .GetMethod("M")
+                        .GetPublicSymbol();
                     Assert.False(m.IsPartialDefinition);
                     Assert.Null(m.PartialDefinitionPart);
                     Assert.Null(m.PartialImplementationPart);
-                });
+                }
+            );
         }
 
         [Fact]
         public void IsPartialDefinition_OnPartialExtern()
         {
-            var source = @"
+            var source =
+                @"
 public partial class C
 {
     private partial void M();
@@ -2537,7 +2781,11 @@ public partial class C
             var syntax = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntax);
 
-            var methods = syntax.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().ToArray();
+            var methods = syntax
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .ToArray();
 
             var partialDef = model.GetDeclaredSymbol(methods[0]);
             Assert.True(partialDef.IsPartialDefinition);

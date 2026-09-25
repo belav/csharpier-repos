@@ -8,7 +8,12 @@ namespace System.Numerics
 {
     internal static partial class BigIntegerCalculator
     {
-        public static void Divide(ReadOnlySpan<uint> left, uint right, Span<uint> quotient, out uint remainder)
+        public static void Divide(
+            ReadOnlySpan<uint> left,
+            uint right,
+            Span<uint> quotient,
+            out uint remainder
+        )
         {
             Debug.Assert(left.Length >= 1);
             Debug.Assert(quotient.Length == left.Length);
@@ -61,7 +66,12 @@ namespace System.Numerics
             return (uint)carry;
         }
 
-        public static void Divide(ReadOnlySpan<uint> left, ReadOnlySpan<uint> right, Span<uint> quotient, Span<uint> remainder)
+        public static void Divide(
+            ReadOnlySpan<uint> left,
+            ReadOnlySpan<uint> right,
+            Span<uint> quotient,
+            Span<uint> remainder
+        )
         {
             Debug.Assert(left.Length >= 1);
             Debug.Assert(right.Length >= 1);
@@ -73,7 +83,11 @@ namespace System.Numerics
             Divide(remainder, right, quotient);
         }
 
-        public static void Divide(ReadOnlySpan<uint> left, ReadOnlySpan<uint> right, Span<uint> quotient)
+        public static void Divide(
+            ReadOnlySpan<uint> left,
+            ReadOnlySpan<uint> right,
+            Span<uint> quotient
+        )
         {
             Debug.Assert(left.Length >= 1);
             Debug.Assert(right.Length >= 1);
@@ -86,9 +100,11 @@ namespace System.Numerics
 
             // NOTE: left will get overwritten, we need a local copy
             // However, mutated left is not used afterwards, so use array pooling or stack alloc
-            Span<uint> leftCopy = (left.Length <= StackAllocThreshold ?
-                                  stackalloc uint[StackAllocThreshold]
-                                  : leftCopyFromPool = ArrayPool<uint>.Shared.Rent(left.Length)).Slice(0, left.Length);
+            Span<uint> leftCopy = (
+                left.Length <= StackAllocThreshold
+                    ? stackalloc uint[StackAllocThreshold]
+                    : leftCopyFromPool = ArrayPool<uint>.Shared.Rent(left.Length)
+            ).Slice(0, left.Length);
             left.CopyTo(leftCopy);
 
             Divide(leftCopy, right, quotient);
@@ -97,7 +113,11 @@ namespace System.Numerics
                 ArrayPool<uint>.Shared.Return(leftCopyFromPool);
         }
 
-        public static void Remainder(ReadOnlySpan<uint> left, ReadOnlySpan<uint> right, Span<uint> remainder)
+        public static void Remainder(
+            ReadOnlySpan<uint> left,
+            ReadOnlySpan<uint> right,
+            Span<uint> remainder
+        )
         {
             Debug.Assert(left.Length >= 1);
             Debug.Assert(right.Length >= 1);
@@ -115,8 +135,7 @@ namespace System.Numerics
             Debug.Assert(left.Length >= 1);
             Debug.Assert(right.Length >= 1);
             Debug.Assert(left.Length >= right.Length);
-            Debug.Assert(bits.Length == left.Length - right.Length + 1
-                || bits.Length == 0);
+            Debug.Assert(bits.Length == left.Length - right.Length + 1 || bits.Length == 0);
 
             // Executes the "grammar-school" algorithm for computing q = a / b.
             // Before calculating q_i, we get more bits into the highest bit
@@ -236,8 +255,13 @@ namespace System.Numerics
             return (uint)carry;
         }
 
-        private static bool DivideGuessTooBig(ulong q, ulong valHi, uint valLo,
-                                              uint divHi, uint divLo)
+        private static bool DivideGuessTooBig(
+            ulong q,
+            ulong valHi,
+            uint valLo,
+            uint divHi,
+            uint divLo
+        )
         {
             Debug.Assert(q <= 0xFFFFFFFF);
 

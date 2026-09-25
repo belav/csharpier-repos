@@ -10,25 +10,25 @@ using System.IdentityModel.Policy;
 using System.IdentityModel.Selectors;
 using System.IdentityModel.Tokens;
 using System.Reflection;
+using System.Security.Claims;
 using System.ServiceModel;
 using System.ServiceModel.Security.Tokens;
 using SysClaim = System.IdentityModel.Claims.Claim;
 using SystemAuthorizationContext = System.IdentityModel.Policy.AuthorizationContext;
 
-using System.Security.Claims;
-
-
 namespace System.ServiceModel.Security
 {
-
     /// <summary>
     /// Wraps a SessionSecurityTokenHandler. Delegates the token authentication call to
     /// this wrapped tokenAuthenticator. Wraps the returned ClaimsIdentities into
-    /// an IAuthorizationPolicy. This class is wired into WCF and actually receives 
+    /// an IAuthorizationPolicy. This class is wired into WCF and actually receives
     /// SecurityContextSecurityTokens which are then wrapped into SessionSecurityTokens for
     /// validation.
     /// </summary>
-    internal class WrappedSessionSecurityTokenAuthenticator : SecurityTokenAuthenticator, IIssuanceSecurityTokenAuthenticator, ICommunicationObject
+    internal class WrappedSessionSecurityTokenAuthenticator
+        : SecurityTokenAuthenticator,
+            IIssuanceSecurityTokenAuthenticator,
+            ICommunicationObject
     {
         SessionSecurityTokenHandler _sessionTokenHandler;
         IIssuanceSecurityTokenAuthenticator _issuanceSecurityTokenAuthenticator;
@@ -44,42 +44,55 @@ namespace System.ServiceModel.Security
         /// <param name="wcfSessionAuthenticator">The wcf SessionTokenAuthenticator.</param>
         /// <param name="sctClaimsHandler">Handler that converts WCF generated IAuthorizationPolicy to <see cref="AuthorizationPolicy"/></param>
         /// <param name="exceptionMapper">Converts token validation exception to SOAP faults.</param>
-        public WrappedSessionSecurityTokenAuthenticator( SessionSecurityTokenHandler sessionTokenHandler,
-                                                         SecurityTokenAuthenticator wcfSessionAuthenticator,
-                                                         SctClaimsHandler sctClaimsHandler,
-                                                         ExceptionMapper exceptionMapper )
+        public WrappedSessionSecurityTokenAuthenticator(
+            SessionSecurityTokenHandler sessionTokenHandler,
+            SecurityTokenAuthenticator wcfSessionAuthenticator,
+            SctClaimsHandler sctClaimsHandler,
+            ExceptionMapper exceptionMapper
+        )
             : base()
         {
-            if ( sessionTokenHandler == null )
+            if (sessionTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "sessionTokenHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "sessionTokenHandler"
+                );
             }
 
-            if ( wcfSessionAuthenticator == null )
+            if (wcfSessionAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "wcfSessionAuthenticator" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wcfSessionAuthenticator"
+                );
             }
 
-            if ( sctClaimsHandler == null )
+            if (sctClaimsHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "sctClaimsHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "sctClaimsHandler"
+                );
             }
 
-            if ( exceptionMapper == null )
+            if (exceptionMapper == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "exceptionMapper" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exceptionMapper");
             }
 
-            _issuanceSecurityTokenAuthenticator = wcfSessionAuthenticator as IIssuanceSecurityTokenAuthenticator;
-            if ( _issuanceSecurityTokenAuthenticator == null )
+            _issuanceSecurityTokenAuthenticator =
+                wcfSessionAuthenticator as IIssuanceSecurityTokenAuthenticator;
+            if (_issuanceSecurityTokenAuthenticator == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation( SR.GetString( SR.ID4244 ) );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4244)
+                );
             }
 
             _communicationObject = wcfSessionAuthenticator as ICommunicationObject;
-            if ( _communicationObject == null )
+            if (_communicationObject == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation( SR.GetString( SR.ID4245 ) );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperInvalidOperation(
+                    SR.GetString(SR.ID4245)
+                );
             }
 
             _sessionTokenHandler = sessionTokenHandler;
@@ -94,15 +107,21 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="token">Token to be validated. This is always a SecurityContextSecurityToken.</param>
         /// <returns>Read-only collection of IAuthorizationPolicy</returns>
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore( SecurityToken token )
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             SecurityContextSecurityToken sct = token as SecurityContextSecurityToken;
-            SessionSecurityToken sessionToken = SecurityContextSecurityTokenHelper.ConvertSctToSessionToken( sct );
+            SessionSecurityToken sessionToken =
+                SecurityContextSecurityTokenHelper.ConvertSctToSessionToken(sct);
             IEnumerable<ClaimsIdentity> identities = null;
 
             try
             {
-                identities = _sessionTokenHandler.ValidateToken(sessionToken, _sctClaimsHandler.EndpointId);
+                identities = _sessionTokenHandler.ValidateToken(
+                    sessionToken,
+                    _sctClaimsHandler.EndpointId
+                );
             }
             catch (Exception ex)
             {
@@ -112,38 +131,28 @@ namespace System.ServiceModel.Security
                 }
             }
 
-            return new List<IAuthorizationPolicy>(new AuthorizationPolicy[] { new AuthorizationPolicy(identities) }).AsReadOnly();
+            return new List<IAuthorizationPolicy>(
+                new AuthorizationPolicy[] { new AuthorizationPolicy(identities) }
+            ).AsReadOnly();
         }
 
-        protected override bool CanValidateTokenCore( SecurityToken token )
+        protected override bool CanValidateTokenCore(SecurityToken token)
         {
-            return ( token is SecurityContextSecurityToken );
+            return (token is SecurityContextSecurityToken);
         }
 
         #region IIssuanceSecurityTokenAuthenticator Members
 
         public IssuedSecurityTokenHandler IssuedSecurityTokenHandler
         {
-            get
-            {
-                return _issuanceSecurityTokenAuthenticator.IssuedSecurityTokenHandler;
-            }
-            set
-            {
-                _issuanceSecurityTokenAuthenticator.IssuedSecurityTokenHandler = value;
-            }
+            get { return _issuanceSecurityTokenAuthenticator.IssuedSecurityTokenHandler; }
+            set { _issuanceSecurityTokenAuthenticator.IssuedSecurityTokenHandler = value; }
         }
 
         public RenewedSecurityTokenHandler RenewedSecurityTokenHandler
         {
-            get
-            {
-                return _issuanceSecurityTokenAuthenticator.RenewedSecurityTokenHandler;
-            }
-            set
-            {
-                _issuanceSecurityTokenAuthenticator.RenewedSecurityTokenHandler = value;
-            }
+            get { return _issuanceSecurityTokenAuthenticator.RenewedSecurityTokenHandler; }
+            set { _issuanceSecurityTokenAuthenticator.RenewedSecurityTokenHandler = value; }
         }
 
         #endregion
@@ -158,29 +167,37 @@ namespace System.ServiceModel.Security
             _communicationObject.Abort();
         }
 
-        public System.IAsyncResult BeginClose( System.TimeSpan timeout, System.AsyncCallback callback, object state )
+        public System.IAsyncResult BeginClose(
+            System.TimeSpan timeout,
+            System.AsyncCallback callback,
+            object state
+        )
         {
-            return _communicationObject.BeginClose( timeout, callback, state );
+            return _communicationObject.BeginClose(timeout, callback, state);
         }
 
-        public System.IAsyncResult BeginClose( System.AsyncCallback callback, object state )
+        public System.IAsyncResult BeginClose(System.AsyncCallback callback, object state)
         {
-            return _communicationObject.BeginClose( callback, state );
+            return _communicationObject.BeginClose(callback, state);
         }
 
-        public System.IAsyncResult BeginOpen( System.TimeSpan timeout, System.AsyncCallback callback, object state )
+        public System.IAsyncResult BeginOpen(
+            System.TimeSpan timeout,
+            System.AsyncCallback callback,
+            object state
+        )
         {
-            return _communicationObject.BeginOpen( timeout, callback, state );
+            return _communicationObject.BeginOpen(timeout, callback, state);
         }
 
-        public System.IAsyncResult BeginOpen( System.AsyncCallback callback, object state )
+        public System.IAsyncResult BeginOpen(System.AsyncCallback callback, object state)
         {
-            return _communicationObject.BeginOpen( callback, state );
+            return _communicationObject.BeginOpen(callback, state);
         }
 
-        public void Close( System.TimeSpan timeout )
+        public void Close(System.TimeSpan timeout)
         {
-            _communicationObject.Close( timeout );
+            _communicationObject.Close(timeout);
         }
 
         public void Close()
@@ -200,14 +217,14 @@ namespace System.ServiceModel.Security
             remove { _communicationObject.Closing -= value; }
         }
 
-        public void EndClose( System.IAsyncResult result )
+        public void EndClose(System.IAsyncResult result)
         {
-            _communicationObject.EndClose( result );
+            _communicationObject.EndClose(result);
         }
 
-        public void EndOpen( System.IAsyncResult result )
+        public void EndOpen(System.IAsyncResult result)
         {
-            _communicationObject.EndOpen( result );
+            _communicationObject.EndOpen(result);
         }
 
         public event System.EventHandler Faulted
@@ -216,9 +233,9 @@ namespace System.ServiceModel.Security
             remove { _communicationObject.Faulted -= value; }
         }
 
-        public void Open( System.TimeSpan timeout )
+        public void Open(System.TimeSpan timeout)
         {
-            _communicationObject.Open( timeout );
+            _communicationObject.Open(timeout);
         }
 
         public void Open()
@@ -240,7 +257,6 @@ namespace System.ServiceModel.Security
 
         public CommunicationState State
         {
-
             get { return _communicationObject.State; }
         }
 
@@ -248,20 +264,20 @@ namespace System.ServiceModel.Security
     }
 
     /// <summary>
-    /// Defines a SecurityStateEncoder whose Encode and Decode operations are 
+    /// Defines a SecurityStateEncoder whose Encode and Decode operations are
     /// a no-op. This class is used to null WCF SecurityContextToken creation
     /// code to skip any encryption and decryption cost. When SessionSecurityTokenHandler
-    /// is being used we will use our own EncryptionTransform and ignore the WCF 
+    /// is being used we will use our own EncryptionTransform and ignore the WCF
     /// generated cookie.
     /// </summary>
     internal class NoOpSecurityStateEncoder : SecurityStateEncoder
     {
-        protected internal override byte[] EncodeSecurityState( byte[] data )
+        protected internal override byte[] EncodeSecurityState(byte[] data)
         {
             return data;
         }
 
-        protected internal override byte[] DecodeSecurityState( byte[] data )
+        protected internal override byte[] DecodeSecurityState(byte[] data)
         {
             return data;
         }

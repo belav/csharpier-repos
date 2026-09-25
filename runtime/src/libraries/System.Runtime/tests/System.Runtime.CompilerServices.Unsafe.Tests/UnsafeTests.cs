@@ -363,7 +363,7 @@ namespace System.Runtime.CompilerServices
         {
             byte* source = stackalloc byte[numBytes + 1];
             byte* destination = stackalloc byte[numBytes + 1];
-            source += 1;      // +1 = make unaligned
+            source += 1; // +1 = make unaligned
             destination += 1; // +1 = make unaligned
 
             for (int i = 0; i < numBytes; i++)
@@ -388,7 +388,7 @@ namespace System.Runtime.CompilerServices
         {
             byte* source = stackalloc byte[numBytes + 1];
             byte* destination = stackalloc byte[numBytes + 1];
-            source += 1;      // +1 = make unaligned
+            source += 1; // +1 = make unaligned
             destination += 1; // +1 = make unaligned
 
             for (int i = 0; i < numBytes; i++)
@@ -707,11 +707,36 @@ namespace System.Runtime.CompilerServices
 
             // The following tests ensure that we're using unsigned comparison logic
 
-            Assert.False(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(1)), ref Unsafe.AsRef<byte>((void*)(-1))));
-            Assert.True(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(-1)), ref Unsafe.AsRef<byte>((void*)(1))));
-            Assert.True(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(int.MinValue)), ref Unsafe.AsRef<byte>((void*)(int.MaxValue))));
-            Assert.False(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>((void*)(int.MaxValue)), ref Unsafe.AsRef<byte>((void*)(int.MinValue))));
-            Assert.False(Unsafe.IsAddressGreaterThan(ref Unsafe.AsRef<byte>(null), ref Unsafe.AsRef<byte>(null)));
+            Assert.False(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(1)),
+                    ref Unsafe.AsRef<byte>((void*)(-1))
+                )
+            );
+            Assert.True(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(-1)),
+                    ref Unsafe.AsRef<byte>((void*)(1))
+                )
+            );
+            Assert.True(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressGreaterThan(
+                    ref Unsafe.AsRef<byte>(null),
+                    ref Unsafe.AsRef<byte>(null)
+                )
+            );
         }
 
         [Fact]
@@ -726,11 +751,33 @@ namespace System.Runtime.CompilerServices
 
             // The following tests ensure that we're using unsigned comparison logic
 
-            Assert.True(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(1)), ref Unsafe.AsRef<byte>((void*)(-1))));
-            Assert.False(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(-1)), ref Unsafe.AsRef<byte>((void*)(1))));
-            Assert.False(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(int.MinValue)), ref Unsafe.AsRef<byte>((void*)(int.MaxValue))));
-            Assert.True(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>((void*)(int.MaxValue)), ref Unsafe.AsRef<byte>((void*)(int.MinValue))));
-            Assert.False(Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>(null), ref Unsafe.AsRef<byte>(null)));
+            Assert.True(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(1)),
+                    ref Unsafe.AsRef<byte>((void*)(-1))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(-1)),
+                    ref Unsafe.AsRef<byte>((void*)(1))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue))
+                )
+            );
+            Assert.True(
+                Unsafe.IsAddressLessThan(
+                    ref Unsafe.AsRef<byte>((void*)(int.MaxValue)),
+                    ref Unsafe.AsRef<byte>((void*)(int.MinValue))
+                )
+            );
+            Assert.False(
+                Unsafe.IsAddressLessThan(ref Unsafe.AsRef<byte>(null), ref Unsafe.AsRef<byte>(null))
+            );
         }
 
         [Fact]
@@ -769,7 +816,9 @@ namespace System.Runtime.CompilerServices
         {
             Int32Generic<string> s = new() { Int32 = 5, Value = "a" };
 
-            Int32Generic<string> actual = Read<Int32Generic<string>>(ref Unsafe.As<Int32Generic<string>, byte>(ref s));
+            Int32Generic<string> actual = Read<Int32Generic<string>>(
+                ref Unsafe.As<Int32Generic<string>, byte>(ref s)
+            );
 
             Assert.Equal(5, actual.Int32);
             Assert.Equal("a", actual.Value);
@@ -845,7 +894,10 @@ namespace System.Runtime.CompilerServices
         {
             byte[] unaligned = new byte[sizeof(Int32Double) + 1];
 
-            Unsafe.WriteUnaligned(ref unaligned[1], new Int32Double { Int32 = 123456789, Double = 3.42 });
+            Unsafe.WriteUnaligned(
+                ref unaligned[1],
+                new Int32Double { Int32 = 123456789, Double = 3.42 }
+            );
 
             Int32Double actual = Int32Double.Aligned(unaligned);
             Assert.Equal(123456789, actual.Int32);
@@ -857,7 +909,10 @@ namespace System.Runtime.CompilerServices
         {
             Int32Generic<string> actual = default;
 
-            Write(ref Unsafe.As<Int32Generic<string>, byte>(ref actual), new Int32Generic<string>() { Int32 = 5, Value = "a" });
+            Write(
+                ref Unsafe.As<Int32Generic<string>, byte>(ref actual),
+                new Int32Generic<string>() { Int32 = 5, Value = "a" }
+            );
 
             Assert.Equal(5, actual.Int32);
             Assert.Equal("a", actual.Value);
@@ -1024,14 +1079,28 @@ namespace System.Runtime.CompilerServices
             Unsafe.SkipInit(out doubleValue);
             Assert.Equal<double>(10, doubleValue);
 
-            Byte4 byte4Value = new Byte4 { B0 = 11, B1 = 12, B2 = 13, B3 = 14 };
+            Byte4 byte4Value = new Byte4
+            {
+                B0 = 11,
+                B1 = 12,
+                B2 = 13,
+                B3 = 14,
+            };
             Unsafe.SkipInit(out byte4Value);
             Assert.Equal<byte>(11, byte4Value.B0);
             Assert.Equal<byte>(12, byte4Value.B1);
             Assert.Equal<byte>(13, byte4Value.B2);
             Assert.Equal<byte>(14, byte4Value.B3);
 
-            Byte4Short2 byte4Short2Value = new Byte4Short2 { B0 = 15, B1 = 16, B2 = 17, B3 = 18, S4 = 19, S6 = 20 };
+            Byte4Short2 byte4Short2Value = new Byte4Short2
+            {
+                B0 = 15,
+                B1 = 16,
+                B2 = 17,
+                B3 = 18,
+                S4 = 19,
+                S6 = 20,
+            };
             Unsafe.SkipInit(out byte4Short2Value);
             Assert.Equal<byte>(15, byte4Short2Value.B0);
             Assert.Equal<byte>(16, byte4Short2Value.B1);
@@ -1163,7 +1232,13 @@ namespace System.Runtime.CompilerServices
 
             // Conversion from custom struct to a runtime SIMD type should succeed
 
-            Single4 single4b = new Single4 { X = -1.0f, Y = -2.0f, Z = -3.0f, W = -4.0f };
+            Single4 single4b = new Single4
+            {
+                X = -1.0f,
+                Y = -2.0f,
+                Z = -3.0f,
+                W = -4.0f,
+            };
             Vector4 vector4b = Unsafe.BitCast<Single4, Vector4>(single4b);
 
             Assert.Equal(-1.0f, vector4b.X);
@@ -1209,7 +1284,9 @@ namespace System.Runtime.CompilerServices
 
             S2 s2 = BitConverter.IsLittleEndian ? new S2(255, 0) : new S2(0, 255);
             S4 s4 = BitConverter.IsLittleEndian ? new S4(255, 0, 0, 0) : new S4(0, 0, 0, 255);
-            S8 s8 = BitConverter.IsLittleEndian ? new S8(255, 0, 0, 0, 0, 0, 0, 0) : new S8(0, 0, 0, 0, 0, 0, 0, 255);
+            S8 s8 = BitConverter.IsLittleEndian
+                ? new S8(255, 0, 0, 0, 0, 0, 0, 0)
+                : new S8(0, 0, 0, 0, 0, 0, 0, 255);
 
             Assert.Equal(s2, Unsafe.BitCast<ushort, S2>(b));
             Assert.Equal(s2, Unsafe.BitCast<short, S2>(b));
@@ -1221,7 +1298,10 @@ namespace System.Runtime.CompilerServices
 
             Assert.Equal(s8, Unsafe.BitCast<ulong, S8>(b));
             Assert.Equal(s8, Unsafe.BitCast<long, S8>(b));
-            Assert.Equal(new S8(255, 255, 255, 255, 255, 255, 255, 255), Unsafe.BitCast<long, S8>(sb));
+            Assert.Equal(
+                new S8(255, 255, 255, 255, 255, 255, 255, 255),
+                Unsafe.BitCast<long, S8>(sb)
+            );
 
             Assert.Equal((ushort)255, Unsafe.BitCast<S2, ushort>(s2));
             Assert.Equal((short)255, Unsafe.BitCast<S2, short>(s2));
@@ -1241,11 +1321,17 @@ namespace System.Runtime.CompilerServices
 
             Assert.Equal(s4, Unsafe.BitCast<uint, S4>(*misalignedPtr));
             Assert.Equal(s4, Unsafe.BitCast<int, S4>(*misalignedPtr));
-            Assert.Equal(new S4(255, 255, 255, 255), Unsafe.BitCast<int, S4>(*(sbyte*)misalignedPtr));
+            Assert.Equal(
+                new S4(255, 255, 255, 255),
+                Unsafe.BitCast<int, S4>(*(sbyte*)misalignedPtr)
+            );
 
             Assert.Equal(s8, Unsafe.BitCast<ulong, S8>(*misalignedPtr));
             Assert.Equal(s8, Unsafe.BitCast<long, S8>(*misalignedPtr));
-            Assert.Equal(new S8(255, 255, 255, 255, 255, 255, 255, 255), Unsafe.BitCast<long, S8>(*(sbyte*)misalignedPtr));
+            Assert.Equal(
+                new S8(255, 255, 255, 255, 255, 255, 255, 255),
+                Unsafe.BitCast<long, S8>(*(sbyte*)misalignedPtr)
+            );
 
             *(S2*)misalignedPtr = s2;
             Assert.Equal((ushort)255, Unsafe.BitCast<S2, ushort>(*(S2*)misalignedPtr));
@@ -1276,19 +1362,27 @@ namespace System.Runtime.CompilerServices
         }
     }
 
-    [StructLayout(LayoutKind.Sequential)] public record struct S2(byte a, byte b);
-    [StructLayout(LayoutKind.Sequential)] public record struct S4(byte a, byte b, byte c, byte d);
-    [StructLayout(LayoutKind.Sequential)] public record struct S8(byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte h);
+    [StructLayout(LayoutKind.Sequential)]
+    public record struct S2(byte a, byte b);
+
+    [StructLayout(LayoutKind.Sequential)]
+    public record struct S4(byte a, byte b, byte c, byte d);
+
+    [StructLayout(LayoutKind.Sequential)]
+    public record struct S8(byte a, byte b, byte c, byte d, byte e, byte f, byte g, byte h);
 
     [StructLayout(LayoutKind.Explicit)]
     public struct Byte4
     {
         [FieldOffset(0)]
         public byte B0;
+
         [FieldOffset(1)]
         public byte B1;
+
         [FieldOffset(2)]
         public byte B2;
+
         [FieldOffset(3)]
         public byte B3;
     }
@@ -1298,14 +1392,19 @@ namespace System.Runtime.CompilerServices
     {
         [FieldOffset(0)]
         public byte B0;
+
         [FieldOffset(1)]
         public byte B1;
+
         [FieldOffset(2)]
         public byte B2;
+
         [FieldOffset(3)]
         public byte B3;
+
         [FieldOffset(4)]
         public short S4;
+
         [FieldOffset(6)]
         public short S6;
     }
@@ -1320,6 +1419,7 @@ namespace System.Runtime.CompilerServices
     {
         [FieldOffset(0)]
         public int Int32;
+
         [FieldOffset(8)]
         public double Double;
 
@@ -1369,11 +1469,7 @@ namespace System.Runtime.CompilerServices
         public float W;
     }
 
-    public struct EmptyA
-    {
-    }
+    public struct EmptyA { }
 
-    public struct EmptyB
-    {
-    }
+    public struct EmptyB { }
 }

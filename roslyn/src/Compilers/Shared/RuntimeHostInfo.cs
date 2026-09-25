@@ -12,7 +12,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// This type provides information about the runtime which is hosting application. It must be included in a concrete 
+    /// This type provides information about the runtime which is hosting application. It must be included in a concrete
     /// target framework to be used.
     /// </summary>
     internal static class RuntimeHostInfo
@@ -20,10 +20,14 @@ namespace Microsoft.CodeAnalysis
         internal static bool IsDesktopRuntime => !IsCoreClrRuntime;
 
         /// <summary>
-        /// This gets information about invoking a tool on the current runtime. This will attempt to 
+        /// This gets information about invoking a tool on the current runtime. This will attempt to
         /// execute a tool as an EXE when on desktop and using dotnet when on CoreClr.
         /// </summary>
-        internal static (string processFilePath, string commandLineArguments, string toolFilePath) GetProcessInfo(string toolFilePathWithoutExtension, string commandLineArguments)
+        internal static (
+            string processFilePath,
+            string commandLineArguments,
+            string toolFilePath
+        ) GetProcessInfo(string toolFilePathWithoutExtension, string commandLineArguments)
         {
 #if NETCOREAPP
             // First check for an app host file and return that if it's available.
@@ -58,7 +62,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal static string GetDotNetPathOrDefault()
         {
-            if (Environment.GetEnvironmentVariable(DotNetHostPathEnvironmentName) is string pathToDotNet)
+            if (
+                Environment.GetEnvironmentVariable(DotNetHostPathEnvironmentName)
+                is string pathToDotNet
+            )
             {
                 return pathToDotNet;
             }

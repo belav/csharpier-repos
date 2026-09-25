@@ -2,11 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http;
-using System.Threading.Tasks;
 using System.Text;
-
+using System.Threading.Tasks;
 using Microsoft.DotNet.XUnitExtensions;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -136,7 +134,10 @@ namespace System.Net.Tests
             {
                 client.DefaultRequestHeaders.ConnectionClose = true;
 
-                HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Get, _factory.ListeningUrl);
+                HttpRequestMessage requestMessage = new HttpRequestMessage(
+                    HttpMethod.Get,
+                    _factory.ListeningUrl
+                );
 
                 for (int i = 0; i < numHeaders; i++)
                 {
@@ -148,7 +149,9 @@ namespace System.Net.Tests
                 if (clientTask == await Task.WhenAny(server, clientTask))
                 {
                     (await clientTask).EnsureSuccessStatusCode();
-                    Assert.Fail("Client should not have completed prior to server sending response");
+                    Assert.Fail(
+                        "Client should not have completed prior to server sending response"
+                    );
                 }
 
                 HttpListenerContext context = await server;

@@ -17,7 +17,7 @@ namespace System.ServiceModel.Syndication.Tests
         IgnorePrefix = 0x20,
         IgnoreDTD = 0x40,
         IgnoreChildOrder = 0x80,
-        InfosetComparison = 0xB,     //sets IgnoreEmptyElement, IgnoreWhitespace and IgnoreAttributeOrder
+        InfosetComparison = 0xB, //sets IgnoreEmptyElement, IgnoreWhitespace and IgnoreAttributeOrder
         CDataAsText = 0x100,
         NormalizeNewline = 0x200, // ignores newlines in text nodes only
         ConcatenateAdjacentTextNodes = 0x400, // treats adjacent text nodes as a single node

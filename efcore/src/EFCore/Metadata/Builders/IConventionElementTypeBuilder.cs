@@ -35,7 +35,11 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     The same builder to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionElementTypeBuilder? HasAnnotation(string name, object? value, bool fromDataAnnotation = false);
+    new IConventionElementTypeBuilder? HasAnnotation(
+        string name,
+        object? value,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Sets the annotation stored under the given name. Overwrites the existing annotation if an
@@ -52,7 +56,8 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     new IConventionElementTypeBuilder? HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Removes the annotation with the given name from this object.
@@ -62,7 +67,10 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     The same builder to continue configuration if the annotation was set, <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionElementTypeBuilder? HasNoAnnotation(string name, bool fromDataAnnotation = false);
+    new IConventionElementTypeBuilder? HasNoAnnotation(
+        string name,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures whether elements of the collection must have a value or can be <see langword="null" />.
@@ -177,7 +185,10 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionElementTypeBuilder? HasConversion(ValueConverter? converter, bool fromDataAnnotation = false);
+    IConventionElementTypeBuilder? HasConversion(
+        ValueConverter? converter,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueConverter" /> can be configured for the elements
@@ -200,7 +211,10 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionElementTypeBuilder? HasConversion(Type? providerClrType, bool fromDataAnnotation = false);
+    IConventionElementTypeBuilder? HasConversion(
+        Type? providerClrType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given type to convert values to and from
@@ -227,8 +241,9 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionElementTypeBuilder? HasConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        bool fromDataAnnotation = false);
+            Type? converterType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueConverter" /> can be configured for the elements
@@ -244,8 +259,9 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     bool CanSetConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        bool fromDataAnnotation = false);
+            Type? converterType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the <see cref="CoreTypeMapping" /> for elements of the collection.
@@ -255,7 +271,10 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     The same builder instance if the configuration was applied, or <see langword="null" /> otherwise.
     /// </returns>
-    IConventionElementTypeBuilder? HasTypeMapping(CoreTypeMapping? typeMapping, bool fromDataAnnotation = false);
+    IConventionElementTypeBuilder? HasTypeMapping(
+        CoreTypeMapping? typeMapping,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="CoreTypeMapping" />
@@ -276,7 +295,10 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// <returns>
     ///     The same builder instance if the configuration was applied, or <see langword="null" /> otherwise.
     /// </returns>
-    IConventionElementTypeBuilder? HasValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+    IConventionElementTypeBuilder? HasValueComparer(
+        ValueComparer? comparer,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -301,8 +323,9 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     IConventionElementTypeBuilder? HasValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -317,6 +340,7 @@ public interface IConventionElementTypeBuilder : IConventionAnnotatableBuilder
     /// </returns>
     bool CanSetValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 }

@@ -6,37 +6,39 @@ namespace System.ServiceModel.Configuration
 {
     using System.ComponentModel;
     using System.Configuration;
-    using System.ServiceModel;
     using System.Globalization;
-    using System.ServiceModel.Security;
-    using System.ServiceModel.Channels;
     using System.Net.Security;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Security;
 
     public partial class NetNamedPipeBindingElement : StandardBindingElement
     {
         public NetNamedPipeBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public NetNamedPipeBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         protected override Type BindingElementType
         {
             get { return typeof(NetNamedPipeBinding); }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TransactionFlow, DefaultValue = TransactionFlowDefaults.Transactions)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransactionFlow,
+            DefaultValue = TransactionFlowDefaults.Transactions
+        )]
         public bool TransactionFlow
         {
             get { return (bool)base[ConfigurationStrings.TransactionFlow]; }
             set { base[ConfigurationStrings.TransactionFlow] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TransferMode, DefaultValue = ConnectionOrientedTransportDefaults.TransferMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransferMode,
+            DefaultValue = ConnectionOrientedTransportDefaults.TransferMode
+        )]
         [ServiceModelEnumValidator(typeof(TransferModeHelper))]
         public TransferMode TransferMode
         {
@@ -44,7 +46,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.TransferMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TransactionProtocol, DefaultValue = TransactionFlowDefaults.TransactionProtocolString)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TransactionProtocol,
+            DefaultValue = TransactionFlowDefaults.TransactionProtocolString
+        )]
         [TypeConverter(typeof(TransactionProtocolConverter))]
         public TransactionProtocol TransactionProtocol
         {
@@ -52,15 +57,24 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.TransactionProtocol] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.HostNameComparisonMode, DefaultValue = ConnectionOrientedTransportDefaults.HostNameComparisonMode)]
+        [ConfigurationProperty(
+            ConfigurationStrings.HostNameComparisonMode,
+            DefaultValue = ConnectionOrientedTransportDefaults.HostNameComparisonMode
+        )]
         [ServiceModelEnumValidator(typeof(HostNameComparisonModeHelper))]
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get { return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode]; }
+            get
+            {
+                return (HostNameComparisonMode)base[ConfigurationStrings.HostNameComparisonMode];
+            }
             set { base[ConfigurationStrings.HostNameComparisonMode] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferPoolSize, DefaultValue = TransportDefaults.MaxBufferPoolSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferPoolSize,
+            DefaultValue = TransportDefaults.MaxBufferPoolSize
+        )]
         [LongValidator(MinValue = 0)]
         public long MaxBufferPoolSize
         {
@@ -68,7 +82,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxBufferPoolSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferSize, DefaultValue = TransportDefaults.MaxBufferSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferSize,
+            DefaultValue = TransportDefaults.MaxBufferSize
+        )]
         [IntegerValidator(MinValue = 1)]
         public int MaxBufferSize
         {
@@ -76,7 +93,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxBufferSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxConnections, DefaultValue = ConnectionOrientedTransportDefaults.MaxPendingConnectionsConst)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxConnections,
+            DefaultValue = ConnectionOrientedTransportDefaults.MaxPendingConnectionsConst
+        )]
         [IntegerValidator(MinValue = 0)]
         public int MaxConnections
         {
@@ -84,7 +104,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MaxConnections] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxReceivedMessageSize, DefaultValue = TransportDefaults.MaxReceivedMessageSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxReceivedMessageSize,
+            DefaultValue = TransportDefaults.MaxReceivedMessageSize
+        )]
         [LongValidator(MinValue = 1)]
         public long MaxReceivedMessageSize
         {
@@ -95,7 +118,10 @@ namespace System.ServiceModel.Configuration
         [ConfigurationProperty(ConfigurationStrings.ReaderQuotas)]
         public XmlDictionaryReaderQuotasElement ReaderQuotas
         {
-            get { return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas]; }
+            get
+            {
+                return (XmlDictionaryReaderQuotasElement)base[ConfigurationStrings.ReaderQuotas];
+            }
         }
 
         [ConfigurationProperty(ConfigurationStrings.Security)]
@@ -109,18 +135,45 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(binding);
             NetNamedPipeBinding npnpBinding = (NetNamedPipeBinding)binding;
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransactionFlow, npnpBinding.TransactionFlow);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransferMode, npnpBinding.TransferMode);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.TransactionProtocol, npnpBinding.TransactionProtocol);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.HostNameComparisonMode, npnpBinding.HostNameComparisonMode);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferPoolSize, npnpBinding.MaxBufferPoolSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferSize, npnpBinding.MaxBufferSize);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TransactionFlow,
+                npnpBinding.TransactionFlow
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TransferMode,
+                npnpBinding.TransferMode
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.TransactionProtocol,
+                npnpBinding.TransactionProtocol
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.HostNameComparisonMode,
+                npnpBinding.HostNameComparisonMode
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferPoolSize,
+                npnpBinding.MaxBufferPoolSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferSize,
+                npnpBinding.MaxBufferSize
+            );
             if (npnpBinding.IsMaxConnectionsSet)
             {
-                ConfigurationProperty maxConnectionsProperty = this.Properties[ConfigurationStrings.MaxConnections];
-                SetPropertyValue(maxConnectionsProperty, npnpBinding.MaxConnections, false /*ignore locks*/);
+                ConfigurationProperty maxConnectionsProperty = this.Properties[
+                    ConfigurationStrings.MaxConnections
+                ];
+                SetPropertyValue(
+                    maxConnectionsProperty,
+                    npnpBinding.MaxConnections,
+                    false /*ignore locks*/
+                );
             }
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReceivedMessageSize, npnpBinding.MaxReceivedMessageSize);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxReceivedMessageSize,
+                npnpBinding.MaxReceivedMessageSize
+            );
             this.Security.InitializeFrom(npnpBinding.Security);
             this.ReaderQuotas.InitializeFrom(npnpBinding.ReaderQuotas);
         }
@@ -135,7 +188,10 @@ namespace System.ServiceModel.Configuration
             npnpBinding.HostNameComparisonMode = this.HostNameComparisonMode;
             npnpBinding.MaxBufferPoolSize = this.MaxBufferPoolSize;
             PropertyInformationCollection propertyInfo = this.ElementInformation.Properties;
-            if (propertyInfo[ConfigurationStrings.MaxBufferSize].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                propertyInfo[ConfigurationStrings.MaxBufferSize].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 npnpBinding.MaxBufferSize = this.MaxBufferSize;
             }

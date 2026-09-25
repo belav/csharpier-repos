@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,149 +31,191 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 
-namespace System.Resources {
-	[Serializable]
-	[TypeConverter(typeof(ResXFileRef.Converter))]
+namespace System.Resources
+{
+    [Serializable]
+    [TypeConverter(typeof(ResXFileRef.Converter))]
 #if INSIDE_SYSTEM_WEB
-	internal
+    internal
 #else
-	public 
+    public
 #endif
-	class ResXFileRef {
+    class ResXFileRef
+    {
 #if INSIDE_SYSTEM_WEB
-		internal
+        internal
 #else
-		public
+        public
 #endif
-		class Converter : TypeConverter {
-			public Converter() {
-			}
+        class Converter : TypeConverter
+        {
+            public Converter() { }
 
-			public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
-				return sourceType == typeof(string);
-			}
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+            {
+                return sourceType == typeof(string);
+            }
 
-			public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType) {
-				return destinationType == typeof(string);
-			}
+            public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
+            {
+                return destinationType == typeof(string);
+            }
 
-			public override object ConvertFrom(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value) {
-				byte[]		buffer;
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                System.Globalization.CultureInfo culture,
+                object value
+            )
+            {
+                byte[] buffer;
 
-				if ( !(value is String)) {
-					return null;
-				}
+                if (!(value is String))
+                {
+                    return null;
+                }
 
-				string [] parts = ResXFileRef.Parse ((string) value);
-				if (parts.Length == 1)
-					throw new ArgumentException ("value");
+                string[] parts = ResXFileRef.Parse((string)value);
+                if (parts.Length == 1)
+                    throw new ArgumentException("value");
 
-				string filename = parts [0];
-				if (Path.DirectorySeparatorChar == '/')
-					filename = filename.Replace ("\\", "/");
+                string filename = parts[0];
+                if (Path.DirectorySeparatorChar == '/')
+                    filename = filename.Replace("\\", "/");
 
-				Type type = Type.GetType (parts [1]);
-				if (type == typeof(string)) {
-					Encoding encoding;
-					if (parts.Length > 2) {
-						encoding = Encoding.GetEncoding (parts [2]);
-					} else {
-						encoding = Encoding.Default;
-					}
+                Type type = Type.GetType(parts[1]);
+                if (type == typeof(string))
+                {
+                    Encoding encoding;
+                    if (parts.Length > 2)
+                    {
+                        encoding = Encoding.GetEncoding(parts[2]);
+                    }
+                    else
+                    {
+                        encoding = Encoding.Default;
+                    }
 
-					using (TextReader reader = new StreamReader(filename, encoding)) {
-						return reader.ReadToEnd();
-					}
-				}
+                    using (TextReader reader = new StreamReader(filename, encoding))
+                    {
+                        return reader.ReadToEnd();
+                    }
+                }
 
-				using (FileStream file = new FileStream (filename, FileMode.Open, FileAccess.Read, FileShare.Read)) {
-					buffer = new byte [file.Length];
-					file.Read(buffer, 0, (int) file.Length);
-				}
+                using (
+                    FileStream file = new FileStream(
+                        filename,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.Read
+                    )
+                )
+                {
+                    buffer = new byte[file.Length];
+                    file.Read(buffer, 0, (int)file.Length);
+                }
 
-				if (type == typeof(System.Byte[]))
-					return buffer;
+                if (type == typeof(System.Byte[]))
+                    return buffer;
 
-				if (type == typeof (Bitmap) && Path.GetExtension (filename) == ".ico") {
-					MemoryStream ms = new MemoryStream (buffer);
-					return new Icon (ms).ToBitmap ();
-				}
+                if (type == typeof(Bitmap) && Path.GetExtension(filename) == ".ico")
+                {
+                    MemoryStream ms = new MemoryStream(buffer);
+                    return new Icon(ms).ToBitmap();
+                }
 
-				if (type == typeof (MemoryStream))
-					return new MemoryStream (buffer);
+                if (type == typeof(MemoryStream))
+                    return new MemoryStream(buffer);
 
-				return Activator.CreateInstance(type, BindingFlags.CreateInstance
-					| BindingFlags.Public | BindingFlags.Instance, null, 
-					new object[] { new MemoryStream (buffer) }, culture);
-			}
+                return Activator.CreateInstance(
+                    type,
+                    BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    new object[] { new MemoryStream(buffer) },
+                    culture
+                );
+            }
 
-			public override object ConvertTo(ITypeDescriptorContext context, System.Globalization.CultureInfo culture, object value, Type destinationType) {
-				if (destinationType != typeof(String)) {
-					return base.ConvertTo (context, culture, value, destinationType);
-				}
+            public override object ConvertTo(
+                ITypeDescriptorContext context,
+                System.Globalization.CultureInfo culture,
+                object value,
+                Type destinationType
+            )
+            {
+                if (destinationType != typeof(String))
+                {
+                    return base.ConvertTo(context, culture, value, destinationType);
+                }
 
-				return ((ResXFileRef)value).ToString();
-			}
-		}
+                return ((ResXFileRef)value).ToString();
+            }
+        }
 
-		private string filename;
-		private string typename;
-		private Encoding textFileEncoding;
+        private string filename;
+        private string typename;
+        private Encoding textFileEncoding;
 
-		public ResXFileRef (string fileName, string typeName)
-		{
-			if (fileName == null)
-				throw new ArgumentNullException ("fileName");
-			if (typeName == null)
-				throw new ArgumentNullException ("typeName");
+        public ResXFileRef(string fileName, string typeName)
+        {
+            if (fileName == null)
+                throw new ArgumentNullException("fileName");
+            if (typeName == null)
+                throw new ArgumentNullException("typeName");
 
-			this.filename = fileName;
-			this.typename = typeName;
-		}
+            this.filename = fileName;
+            this.typename = typeName;
+        }
 
-		public ResXFileRef (string fileName, string typeName, Encoding textFileEncoding)
-			: this (fileName, typeName) 
-		{
-			this.textFileEncoding = textFileEncoding;
-		}
+        public ResXFileRef(string fileName, string typeName, Encoding textFileEncoding)
+            : this(fileName, typeName)
+        {
+            this.textFileEncoding = textFileEncoding;
+        }
 
-		public string FileName {
-			get { return filename; }
-		}
+        public string FileName
+        {
+            get { return filename; }
+        }
 
-		public Encoding TextFileEncoding {
-			get { return textFileEncoding; }
-		}
+        public Encoding TextFileEncoding
+        {
+            get { return textFileEncoding; }
+        }
 
-		public string TypeName {
-			get { return typename; }
-		}
+        public string TypeName
+        {
+            get { return typename; }
+        }
 
-		public override string ToString() {
-			StringBuilder sb = new StringBuilder ();
-			if (filename != null) {
-				sb.Append (filename);
-			}
-			sb.Append (';');
-			if (typename != null) {
-				sb.Append (typename);
-			}
-			if (textFileEncoding != null) {
-				sb.Append (';');
-				sb.Append (textFileEncoding.WebName);
-			}
-			return sb.ToString ();
-		}
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            if (filename != null)
+            {
+                sb.Append(filename);
+            }
+            sb.Append(';');
+            if (typename != null)
+            {
+                sb.Append(typename);
+            }
+            if (textFileEncoding != null)
+            {
+                sb.Append(';');
+                sb.Append(textFileEncoding.WebName);
+            }
+            return sb.ToString();
+        }
 
-		internal static string [] Parse (string fileRef)
-		{
-			// we cannot return ResXFileRef, as that would mean we'd have to
-			// instantiate the encoding, and we do not always need this
+        internal static string[] Parse(string fileRef)
+        {
+            // we cannot return ResXFileRef, as that would mean we'd have to
+            // instantiate the encoding, and we do not always need this
 
-			if (fileRef == null)
-				throw new ArgumentNullException ("fileRef");
+            if (fileRef == null)
+                throw new ArgumentNullException("fileRef");
 
-			return fileRef.Split (';');
-		}
-	}
+            return fileRef.Split(';');
+        }
+    }
 }

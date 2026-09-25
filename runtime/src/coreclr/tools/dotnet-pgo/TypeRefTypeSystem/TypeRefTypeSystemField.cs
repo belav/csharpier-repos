@@ -17,7 +17,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
         TypeDesc _fieldType;
         EmbeddedSignatureData[] _embeddedSignatureData;
 
-        public TypeRefTypeSystemField(TypeRefTypeSystemType type, string name, TypeDesc fieldType, EmbeddedSignatureData[] embeddedSigData)
+        public TypeRefTypeSystemField(
+            TypeRefTypeSystemType type,
+            string name,
+            TypeDesc fieldType,
+            EmbeddedSignatureData[] embeddedSigData
+        )
         {
             _type = type;
             _name = name;
@@ -30,7 +35,8 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         public override TypeDesc FieldType => _fieldType;
 
-        public override EmbeddedSignatureData[] GetEmbeddedSignatureData() => _embeddedSignatureData;
+        public override EmbeddedSignatureData[] GetEmbeddedSignatureData() =>
+            _embeddedSignatureData;
 
         public override bool HasEmbeddedSignatureData => _embeddedSignatureData != null;
 
@@ -48,7 +54,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         protected override int ClassCode => throw new NotImplementedException();
 
-        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) => throw new NotImplementedException();
-        protected override int CompareToImpl(FieldDesc other, TypeSystemComparer comparer) => throw new NotImplementedException();
+        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
+            throw new NotImplementedException();
+
+        protected override int CompareToImpl(FieldDesc other, TypeSystemComparer comparer) =>
+            throw new NotImplementedException();
     }
 }

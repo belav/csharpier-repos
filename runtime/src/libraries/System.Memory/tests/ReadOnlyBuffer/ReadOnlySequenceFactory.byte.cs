@@ -12,12 +12,18 @@ namespace System.Memory.Tests
 {
     public abstract class ReadOnlySequenceFactory<T>
     {
-        public static ReadOnlySequenceFactory<T> ArrayFactory { get; } = new ArrayTestSequenceFactory();
-        public static ReadOnlySequenceFactory<T> MemoryFactory { get; } = new MemoryTestSequenceFactory();
-        public static ReadOnlySequenceFactory<T> MemoryManagerFactory { get; } = new MemoryManagerTestSequenceFactory();
-        public static ReadOnlySequenceFactory<T> SingleSegmentFactory { get; } = new SingleSegmentTestSequenceFactory();
-        public static ReadOnlySequenceFactory<T> SegmentPerItemFactory { get; } = new BytePerSegmentTestSequenceFactory();
-        public static ReadOnlySequenceFactory<T> SplitInThree { get; } = new SegmentsTestSequenceFactory(3);
+        public static ReadOnlySequenceFactory<T> ArrayFactory { get; } =
+            new ArrayTestSequenceFactory();
+        public static ReadOnlySequenceFactory<T> MemoryFactory { get; } =
+            new MemoryTestSequenceFactory();
+        public static ReadOnlySequenceFactory<T> MemoryManagerFactory { get; } =
+            new MemoryManagerTestSequenceFactory();
+        public static ReadOnlySequenceFactory<T> SingleSegmentFactory { get; } =
+            new SingleSegmentTestSequenceFactory();
+        public static ReadOnlySequenceFactory<T> SegmentPerItemFactory { get; } =
+            new BytePerSegmentTestSequenceFactory();
+        public static ReadOnlySequenceFactory<T> SplitInThree { get; } =
+            new SegmentsTestSequenceFactory(3);
 
         public abstract ReadOnlySequence<T> CreateOfSize(int size);
         public abstract ReadOnlySequence<T> CreateWithContent(T[] data);
@@ -144,7 +150,7 @@ namespace System.Memory.Tests
 
                 public CustomMemoryManager(T[] content) => _buffer = content;
 
-                public unsafe override Span<T> GetSpan() => _buffer;
+                public override unsafe Span<T> GetSpan() => _buffer;
 
                 public override unsafe MemoryHandle Pin(int elementIndex = 0)
                 {
@@ -154,7 +160,11 @@ namespace System.Memory.Tests
                     }
 
                     var handle = GCHandle.Alloc(_buffer, GCHandleType.Pinned);
-                    return new MemoryHandle(Unsafe.Add<T>((void*)handle.AddrOfPinnedObject(), elementIndex), handle, this);
+                    return new MemoryHandle(
+                        Unsafe.Add<T>((void*)handle.AddrOfPinnedObject(), elementIndex),
+                        handle,
+                        this
+                    );
                 }
 
                 public override void Unpin() { }
@@ -163,7 +173,8 @@ namespace System.Memory.Tests
             }
         }
 
-        public static ReadOnlySequence<T> CreateSegments(params T[][] inputs) => CreateSegments(inputs.Select(input => (ReadOnlyMemory<T>)input.AsMemory()));
+        public static ReadOnlySequence<T> CreateSegments(params T[][] inputs) =>
+            CreateSegments(inputs.Select(input => (ReadOnlyMemory<T>)input.AsMemory()));
 
         public static ReadOnlySequence<T> CreateSegments(IEnumerable<ReadOnlyMemory<T>> inputs)
         {

@@ -39,59 +39,96 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
     [TagType(typeof(NavigableHighlightTag))]
     [TextViewRole(PredefinedTextViewRoles.Interactive)]
     [method: ImportingConstructor]
-    [method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
+    [method: SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
     internal sealed partial class ReferenceHighlightingViewTaggerProvider(
         IThreadingContext threadingContext,
         IGlobalOptionService globalOptions,
         [Import(AllowDefault = true)] ITextBufferVisibilityTracker visibilityTracker,
-        IAsynchronousOperationListenerProvider listenerProvider) : AsynchronousViewTaggerProvider<NavigableHighlightTag>(threadingContext, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.ReferenceHighlighting))
+        IAsynchronousOperationListenerProvider listenerProvider
+    )
+        : AsynchronousViewTaggerProvider<NavigableHighlightTag>(
+            threadingContext,
+            globalOptions,
+            visibilityTracker,
+            listenerProvider.GetListener(FeatureAttribute.ReferenceHighlighting)
+        )
     {
         private readonly IGlobalOptionService _globalOptions = globalOptions;
 
-        // Whenever an edit happens, clear all highlights.  When moving the caret, preserve 
+        // Whenever an edit happens, clear all highlights.  When moving the caret, preserve
         // highlights if the caret stays within an existing tag.
-        protected override TaggerCaretChangeBehavior CaretChangeBehavior => TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag;
-        protected override TaggerTextChangeBehavior TextChangeBehavior => TaggerTextChangeBehavior.RemoveAllTags;
+        protected override TaggerCaretChangeBehavior CaretChangeBehavior =>
+            TaggerCaretChangeBehavior.RemoveAllTagsOnCaretMoveOutsideOfTag;
+        protected override TaggerTextChangeBehavior TextChangeBehavior =>
+            TaggerTextChangeBehavior.RemoveAllTags;
 
-        protected override ImmutableArray<IOption2> Options { get; } = ImmutableArray.Create<IOption2>(ReferenceHighlightingOptionsStorage.ReferenceHighlighting);
+        protected override ImmutableArray<IOption2> Options { get; } =
+            ImmutableArray.Create<IOption2>(
+                ReferenceHighlightingOptionsStorage.ReferenceHighlighting
+            );
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.Medium;
 
-        protected override ITaggerEventSource CreateEventSource(ITextView textView, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView textView,
+            ITextBuffer subjectBuffer
+        )
         {
             // Note: we don't listen for OnTextChanged.  Text changes to this buffer will get
             // reported by OnSemanticChanged.
             return TaggerEventSources.Compose(
                 TaggerEventSources.OnCaretPositionChanged(textView, textView.TextBuffer),
                 TaggerEventSources.OnWorkspaceChanged(subjectBuffer, AsyncListener),
-                TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer));
+                TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer)
+            );
         }
 
-        protected override SnapshotPoint? GetCaretPoint(ITextView textViewOpt, ITextBuffer subjectBuffer)
+        protected override SnapshotPoint? GetCaretPoint(
+            ITextView textViewOpt,
+            ITextBuffer subjectBuffer
+        )
         {
             // With no selection we just use the caret position as expected
             if (textViewOpt.Selection.IsEmpty)
             {
-                return textViewOpt.Caret.Position.Point.GetPoint(b => IsSupportedContentType(b.ContentType), PositionAffinity.Successor);
+                return textViewOpt.Caret.Position.Point.GetPoint(
+                    b => IsSupportedContentType(b.ContentType),
+                    PositionAffinity.Successor
+                );
             }
 
             // If there is a selection then it makes more sense for highlighting to apply to the token at the start
             // of the selection rather than where the caret is, otherwise you can be in a situation like [|count$$|]++
             // and it will try to highlight the operator.
-            return textViewOpt.BufferGraph.MapDownToFirstMatch(textViewOpt.Selection.Start.Position, PointTrackingMode.Positive, b => IsSupportedContentType(b.ContentType), PositionAffinity.Successor);
+            return textViewOpt.BufferGraph.MapDownToFirstMatch(
+                textViewOpt.Selection.Start.Position,
+                PointTrackingMode.Positive,
+                b => IsSupportedContentType(b.ContentType),
+                PositionAffinity.Successor
+            );
         }
 
-        protected override IEnumerable<SnapshotSpan> GetSpansToTag(ITextView textViewOpt, ITextBuffer subjectBuffer)
+        protected override IEnumerable<SnapshotSpan> GetSpansToTag(
+            ITextView textViewOpt,
+            ITextBuffer subjectBuffer
+        )
         {
             // Note: this may return no snapshot spans.  We have to be resilient to that
             // when processing the TaggerContext<>.SpansToTag below.
-            return textViewOpt.BufferGraph.GetTextBuffers(b => IsSupportedContentType(b.ContentType))
-                              .Select(b => b.CurrentSnapshot.GetFullSpan())
-                              .ToList();
+            return textViewOpt
+                .BufferGraph.GetTextBuffers(b => IsSupportedContentType(b.ContentType))
+                .Select(b => b.CurrentSnapshot.GetFullSpan())
+                .ToList();
         }
 
         protected override Task ProduceTagsAsync(
-            TaggerContext<NavigableHighlightTag> context, CancellationToken cancellationToken)
+            TaggerContext<NavigableHighlightTag> context,
+            CancellationToken cancellationToken
+        )
         {
             // NOTE(cyrusn): Normally we'd limit ourselves to producing tags in the span we were
             // asked about.  However, we want to produce all tags here so that the user can actually
@@ -105,14 +142,21 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             var caretPosition = context.CaretPosition.Value;
 
             // GetSpansToTag may have produced no actual spans to tag.  Be resilient to that.
-            var document = context.SpansToTag.FirstOrDefault(vt => vt.SnapshotSpan.Snapshot == caretPosition.Snapshot).Document;
+            var document = context
+                .SpansToTag.FirstOrDefault(vt => vt.SnapshotSpan.Snapshot == caretPosition.Snapshot)
+                .Document;
             if (document == null)
             {
                 return Task.CompletedTask;
             }
 
             // Don't produce tags if the feature is not enabled.
-            if (!_globalOptions.GetOption(ReferenceHighlightingOptionsStorage.ReferenceHighlighting, document.Project.Language))
+            if (
+                !_globalOptions.GetOption(
+                    ReferenceHighlightingOptionsStorage.ReferenceHighlighting,
+                    document.Project.Language
+                )
+            )
             {
                 return Task.CompletedTask;
             }
@@ -138,11 +182,17 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
             SnapshotPoint position,
             Document document,
             HighlightingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var solution = document.Project.Solution;
 
-            using (Logger.LogBlock(FunctionId.Tagger_ReferenceHighlighting_TagProducer_ProduceTags, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.Tagger_ReferenceHighlighting_TagProducer_ProduceTags,
+                    cancellationToken
+                )
+            )
             {
                 if (document != null)
                 {
@@ -151,9 +201,18 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                     {
                         // We only want to search inside documents that correspond to the snapshots
                         // we're looking at
-                        var documentsToSearch = ImmutableHashSet.CreateRange(context.SpansToTag.Select(vt => vt.Document).WhereNotNull());
-                        var documentHighlightsList = await service.GetDocumentHighlightsAsync(
-                            document, position, documentsToSearch, options, cancellationToken).ConfigureAwait(false);
+                        var documentsToSearch = ImmutableHashSet.CreateRange(
+                            context.SpansToTag.Select(vt => vt.Document).WhereNotNull()
+                        );
+                        var documentHighlightsList = await service
+                            .GetDocumentHighlightsAsync(
+                                document,
+                                position,
+                                documentsToSearch,
+                                options,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                         if (documentHighlightsList != null)
                         {
                             foreach (var documentHighlights in documentHighlightsList)
@@ -169,11 +228,14 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         private static void AddTagSpans(
             TaggerContext<NavigableHighlightTag> context,
             DocumentHighlights documentHighlights,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = documentHighlights.Document;
 
-            var textSnapshot = context.SpansToTag.FirstOrDefault(s => s.Document == document).SnapshotSpan.Snapshot;
+            var textSnapshot = context
+                .SpansToTag.FirstOrDefault(s => s.Document == document)
+                .SnapshotSpan.Snapshot;
             if (textSnapshot == null)
             {
                 // There is no longer an editor snapshot for this document, so we can't care about the
@@ -186,11 +248,23 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
                 foreach (var span in documentHighlights.HighlightSpans)
                 {
                     var tag = GetTag(span);
-                    context.AddTag(new TagSpan<NavigableHighlightTag>(
-                        textSnapshot.GetSpan(Span.FromBounds(span.TextSpan.Start, span.TextSpan.End)), tag));
+                    context.AddTag(
+                        new TagSpan<NavigableHighlightTag>(
+                            textSnapshot.GetSpan(
+                                Span.FromBounds(span.TextSpan.Start, span.TextSpan.End)
+                            ),
+                            tag
+                        )
+                    );
                 }
             }
-            catch (Exception e) when (FatalError.ReportAndCatchUnlessCanceled(e, cancellationToken, ErrorSeverity.General))
+            catch (Exception e)
+                when (FatalError.ReportAndCatchUnlessCanceled(
+                        e,
+                        cancellationToken,
+                        ErrorSeverity.General
+                    )
+                )
             {
                 // report NFW and continue.
                 // also, rather than return partial results, return nothing
@@ -218,12 +292,12 @@ namespace Microsoft.CodeAnalysis.Editor.ReferenceHighlighting
         private static bool IsSupportedContentType(IContentType contentType)
         {
             // This list should match the list of exported content types above
-            return contentType.IsOfType(ContentTypeNames.RoslynContentType) ||
-                   contentType.IsOfType(ContentTypeNames.XamlContentType);
+            return contentType.IsOfType(ContentTypeNames.RoslynContentType)
+                || contentType.IsOfType(ContentTypeNames.XamlContentType);
         }
 
         // Safe to directly reference compare as all the NavigableHighlightTag subclasses are singletons.
-        protected override bool TagEquals(NavigableHighlightTag tag1, NavigableHighlightTag tag2)
-            => tag1 == tag2;
+        protected override bool TagEquals(NavigableHighlightTag tag1, NavigableHighlightTag tag2) =>
+            tag1 == tag2;
     }
 }

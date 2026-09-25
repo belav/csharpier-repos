@@ -55,10 +55,9 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.IO;
 using System.Text;
-using System.Collections;
-
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Util;
@@ -77,7 +76,10 @@ namespace RabbitMQ.Client.Impl
             ClearBits();
         }
 
-        public NetworkBinaryReader BaseReader { get { return m_reader; } }
+        public NetworkBinaryReader BaseReader
+        {
+            get { return m_reader; }
+        }
 
         private void ClearBits()
         {

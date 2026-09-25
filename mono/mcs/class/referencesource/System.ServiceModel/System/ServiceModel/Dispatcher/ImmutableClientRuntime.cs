@@ -29,9 +29,16 @@ namespace System.ServiceModel.Dispatcher
 
         internal ImmutableClientRuntime(ClientRuntime behavior)
         {
-            this.channelInitializers = EmptyArray<IChannelInitializer>.ToArray(behavior.ChannelInitializers);
-            this.interactiveChannelInitializers = EmptyArray<IInteractiveChannelInitializer>.ToArray(behavior.InteractiveChannelInitializers);
-            this.messageInspectors = EmptyArray<IClientMessageInspector>.ToArray(behavior.MessageInspectors);
+            this.channelInitializers = EmptyArray<IChannelInitializer>.ToArray(
+                behavior.ChannelInitializers
+            );
+            this.interactiveChannelInitializers =
+                EmptyArray<IInteractiveChannelInitializer>.ToArray(
+                    behavior.InteractiveChannelInitializers
+                );
+            this.messageInspectors = EmptyArray<IClientMessageInspector>.ToArray(
+                behavior.MessageInspectors
+            );
 
             this.operationSelector = behavior.OperationSelector;
             this.useSynchronizationContext = behavior.UseSynchronizationContext;
@@ -96,10 +103,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 for (int i = 0; i < this.messageInspectors.Length; i++)
                 {
-                    this.messageInspectors[i].AfterReceiveReply(ref rpc.Reply, rpc.Correlation[offset + i]);
+                    this.messageInspectors[i]
+                        .AfterReceiveReply(ref rpc.Reply, rpc.Correlation[offset + i]);
                     if (TD.ClientMessageInspectorAfterReceiveInvokedIsEnabled())
                     {
-                        TD.ClientMessageInspectorAfterReceiveInvoked(rpc.EventTraceActivity, this.messageInspectors[i].GetType().FullName);
+                        TD.ClientMessageInspectorAfterReceiveInvoked(
+                            rpc.EventTraceActivity,
+                            this.messageInspectors[i].GetType().FullName
+                        );
                     }
                 }
             }
@@ -124,10 +135,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 for (int i = 0; i < this.messageInspectors.Length; i++)
                 {
-                    rpc.Correlation[offset + i] = this.messageInspectors[i].BeforeSendRequest(ref rpc.Request, (IClientChannel)rpc.Channel.Proxy);
+                    rpc.Correlation[offset + i] = this.messageInspectors[i]
+                        .BeforeSendRequest(ref rpc.Request, (IClientChannel)rpc.Channel.Proxy);
                     if (TD.ClientMessageInspectorBeforeSendInvokedIsEnabled())
                     {
-                        TD.ClientMessageInspectorBeforeSendInvoked(rpc.EventTraceActivity, this.messageInspectors[i].GetType().FullName);
+                        TD.ClientMessageInspectorBeforeSendInvoked(
+                            rpc.EventTraceActivity,
+                            this.messageInspectors[i].GetType().FullName
+                        );
                     }
                 }
             }
@@ -155,9 +170,18 @@ namespace System.ServiceModel.Dispatcher
             EndDisplayInitializationUI(BeginDisplayInitializationUI(channel, null, null));
         }
 
-        internal IAsyncResult BeginDisplayInitializationUI(ServiceChannel channel, AsyncCallback callback, object state)
+        internal IAsyncResult BeginDisplayInitializationUI(
+            ServiceChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new DisplayInitializationUIAsyncResult(channel, this.interactiveChannelInitializers, callback, state);
+            return new DisplayInitializationUIAsyncResult(
+                channel,
+                this.interactiveChannelInitializers,
+                callback,
+                state
+            );
         }
 
         internal void EndDisplayInitializationUI(IAsyncResult result)
@@ -167,10 +191,15 @@ namespace System.ServiceModel.Dispatcher
 
         // this should not be inlined, since we want to JIT the reference to System.Transactions
         // only if transactions are being flowed.
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
         static void SendTransaction(ref ProxyRpc rpc)
         {
-            System.ServiceModel.Channels.TransactionFlowProperty.Set(Transaction.Current, rpc.Request);
+            System.ServiceModel.Channels.TransactionFlowProperty.Set(
+                Transaction.Current,
+                rpc.Request
+            );
         }
 
         internal void InitializeChannel(IClientChannel channel)
@@ -196,14 +225,23 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal ProxyOperationRuntime GetOperation(MethodBase methodBase, object[] args, out bool canCacheResult)
+        internal ProxyOperationRuntime GetOperation(
+            MethodBase methodBase,
+            object[] args,
+            out bool canCacheResult
+        )
         {
             if (this.operationSelector == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException
-                                                        (SR.GetString(SR.SFxNeedProxyBehaviorOperationSelector2,
-                                                                      methodBase.Name,
-                                                                      methodBase.DeclaringType.Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR.GetString(
+                            SR.SFxNeedProxyBehaviorOperationSelector2,
+                            methodBase.Name,
+                            methodBase.DeclaringType.Name
+                        )
+                    )
+                );
             }
 
             try
@@ -219,13 +257,16 @@ namespace System.ServiceModel.Dispatcher
                 }
                 string operationName = operationSelector.SelectOperation(methodBase, args);
                 ProxyOperationRuntime operation;
-                if ((operationName != null) && this.operations.TryGetValue(operationName, out operation))
+                if (
+                    (operationName != null)
+                    && this.operations.TryGetValue(operationName, out operation)
+                )
                 {
                     return operation;
                 }
                 else
                 {
-                    // did not find the right operation, will not know how 
+                    // did not find the right operation, will not know how
                     // to invoke the method.
                     return null;
                 }
@@ -260,11 +301,16 @@ namespace System.ServiceModel.Dispatcher
             IInteractiveChannelInitializer[] initializers;
             IClientChannel proxy;
 
-            static AsyncCallback callback = Fx.ThunkCallback(new AsyncCallback(DisplayInitializationUIAsyncResult.Callback));
+            static AsyncCallback callback = Fx.ThunkCallback(
+                new AsyncCallback(DisplayInitializationUIAsyncResult.Callback)
+            );
 
-            internal DisplayInitializationUIAsyncResult(ServiceChannel channel,
-                                                        IInteractiveChannelInitializer[] initializers,
-                                                        AsyncCallback callback, object state)
+            internal DisplayInitializationUIAsyncResult(
+                ServiceChannel channel,
+                IInteractiveChannelInitializer[] initializers,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channel = channel;
@@ -282,11 +328,12 @@ namespace System.ServiceModel.Dispatcher
 
                     try
                     {
-                        result = this.initializers[this.index].BeginDisplayInitializationUI(
-                            this.proxy,
-                            DisplayInitializationUIAsyncResult.callback,
-                            this
-                        );
+                        result = this.initializers[this.index]
+                            .BeginDisplayInitializationUI(
+                                this.proxy,
+                                DisplayInitializationUIAsyncResult.callback,
+                                this
+                            );
                     }
                     catch (Exception e)
                     {
@@ -325,7 +372,8 @@ namespace System.ServiceModel.Dispatcher
                     return;
                 }
 
-                DisplayInitializationUIAsyncResult outer = (DisplayInitializationUIAsyncResult)result.AsyncState;
+                DisplayInitializationUIAsyncResult outer = (DisplayInitializationUIAsyncResult)
+                    result.AsyncState;
                 Exception exception = null;
 
                 outer.CallEnd(result, out exception);

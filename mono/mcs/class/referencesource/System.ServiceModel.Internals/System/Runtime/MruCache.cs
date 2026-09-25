@@ -16,18 +16,14 @@ namespace System.Runtime
         CacheEntry mruEntry;
 
         public MruCache(int watermark)
-            : this(watermark * 4 / 5, watermark)
-        {
-        }
+            : this(watermark * 4 / 5, watermark) { }
 
         //
         // The cache will grow until the high watermark. At which point, the least recently used items
         // will be purge until the cache's size is reduced to low watermark
         //
         public MruCache(int lowWatermark, int highWatermark)
-            : this(lowWatermark, highWatermark, null)
-        {
-        }
+            : this(lowWatermark, highWatermark, null) { }
 
         public MruCache(int lowWatermark, int highWatermark, IEqualityComparer<TKey> comparer)
         {
@@ -47,26 +43,23 @@ namespace System.Runtime
             }
         }
 
-        public int Count 
+        public int Count
         {
-            get
-            {
-                return this.items.Count;
-            }
+            get { return this.items.Count; }
         }
 
         public void Add(TKey key, TValue value)
         {
             Fx.Assert(null != key, "");
 
-            // if anything goes wrong (duplicate entry, etc) we should 
+            // if anything goes wrong (duplicate entry, etc) we should
             // clear our caches so that we don't get out of sync
             bool success = false;
             try
             {
                 if (this.items.Count == this.highWatermark)
                 {
-                    // If the cache is full, purge enough LRU items to shrink the 
+                    // If the cache is full, purge enough LRU items to shrink the
                     // cache down to the low watermark
                     int countToPurge = this.highWatermark - this.lowWatermark;
                     for (int i = 0; i < countToPurge; i++)
@@ -125,14 +118,10 @@ namespace System.Runtime
             return false;
         }
 
-        protected virtual void OnSingleItemRemoved(TValue item)
-        {
-        }
+        protected virtual void OnSingleItemRemoved(TValue item) { }
 
-        protected virtual void OnItemAgedOutOfCache(TValue item)
-        {
-        }
-        
+        protected virtual void OnItemAgedOutOfCache(TValue item) { }
+
         //
         // If found, make the entry most recently used
         //
@@ -151,8 +140,11 @@ namespace System.Runtime
             value = entry.value;
 
             // Move the node to the head of the MRU list if it's not already there
-            if (found && this.mruList.Count > 1
-                && !object.ReferenceEquals(this.mruList.First, entry.node))
+            if (
+                found
+                && this.mruList.Count > 1
+                && !object.ReferenceEquals(this.mruList.First, entry.node)
+            )
             {
                 this.mruList.Remove(entry.node);
                 this.mruList.AddFirst(entry.node);

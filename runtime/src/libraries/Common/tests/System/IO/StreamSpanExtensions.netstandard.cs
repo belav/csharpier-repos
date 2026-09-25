@@ -22,17 +22,28 @@ internal static class StreamSpanExtensions
     public static void Write(this Stream stream, ReadOnlySpan<byte> source) =>
         stream.Write(source.ToArray(), 0, source.Length);
 
-    public static ValueTask<int> ReadAsync(this Stream stream, Memory<byte> destination, CancellationToken cancellationToken = default(CancellationToken))
+    public static ValueTask<int> ReadAsync(
+        this Stream stream,
+        Memory<byte> destination,
+        CancellationToken cancellationToken = default(CancellationToken)
+    )
     {
         byte[] array = new byte[destination.Length];
-        return new ValueTask<int>(stream.ReadAsync(array, 0, array.Length, cancellationToken).ContinueWith(t =>
-        {
-            int bytesRead = t.GetAwaiter().GetResult();
-            new Span<byte>(array, 0, bytesRead).CopyTo(destination.Span);
-            return bytesRead;
-        }));
+        return new ValueTask<int>(
+            stream
+                .ReadAsync(array, 0, array.Length, cancellationToken)
+                .ContinueWith(t =>
+                {
+                    int bytesRead = t.GetAwaiter().GetResult();
+                    new Span<byte>(array, 0, bytesRead).CopyTo(destination.Span);
+                    return bytesRead;
+                })
+        );
     }
 
-    public static Task WriteAsync(this Stream stream, ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default(CancellationToken)) =>
-        stream.WriteAsync(source.ToArray(), 0, source.Length, cancellationToken);
+    public static Task WriteAsync(
+        this Stream stream,
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default(CancellationToken)
+    ) => stream.WriteAsync(source.ToArray(), 0, source.Length, cancellationToken);
 }

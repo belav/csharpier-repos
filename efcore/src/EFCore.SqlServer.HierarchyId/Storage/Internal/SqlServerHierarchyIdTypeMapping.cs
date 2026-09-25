@@ -21,8 +21,8 @@ public class SqlServerHierarchyIdTypeMapping : RelationalTypeMapping
 {
     private const string HierarchyIdFormatConst = "hierarchyid::Parse('{0}')";
 
-    private static readonly ConstructorInfo HierarchyIdConstructor
-        = typeof(HierarchyId).GetConstructor(new[] { typeof(string) })!;
+    private static readonly ConstructorInfo HierarchyIdConstructor =
+        typeof(HierarchyId).GetConstructor(new[] { typeof(string) })!;
 
     private static readonly SqlServerHierarchyIdValueConverter ValueConverter = new();
 
@@ -46,10 +46,11 @@ public class SqlServerHierarchyIdTypeMapping : RelationalTypeMapping
                 new CoreTypeMappingParameters(
                     typeof(HierarchyId),
                     ValueConverter,
-                    jsonValueReaderWriter: SqlServerJsonHierarchyIdReaderWriter.Instance),
-                storeType))
-    {
-    }
+                    jsonValueReaderWriter: SqlServerJsonHierarchyIdReaderWriter.Instance
+                ),
+                storeType
+            )
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,9 +59,7 @@ public class SqlServerHierarchyIdTypeMapping : RelationalTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerHierarchyIdTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -68,8 +67,8 @@ public class SqlServerHierarchyIdTypeMapping : RelationalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerHierarchyIdTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerHierarchyIdTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -90,10 +89,11 @@ public class SqlServerHierarchyIdTypeMapping : RelationalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Expression GenerateCodeLiteral(object value)
-        => Expression.New(
+    public override Expression GenerateCodeLiteral(object value) =>
+        Expression.New(
             HierarchyIdConstructor,
-            Expression.Constant(((HierarchyId)value).ToString()));
+            Expression.Constant(((HierarchyId)value).ToString())
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -101,6 +101,5 @@ public class SqlServerHierarchyIdTypeMapping : RelationalTypeMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override string SqlLiteralFormatString
-        => HierarchyIdFormatConst;
+    protected override string SqlLiteralFormatString => HierarchyIdFormatConst;
 }

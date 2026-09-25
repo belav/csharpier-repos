@@ -14,160 +14,178 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestAtRoot_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyKeywordAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestAfterClass_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalStatement_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyKeywordAsync(SourceCodeKind.Script,
+            await VerifyKeywordAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestEmptyStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$"));
+            await VerifyKeywordAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
         public async Task TestBeforeStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                $$
-                return true;
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    $$
+                    return true;
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterStatement()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                return true;
-                $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    return true;
+                    $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestAfterBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                if (true) {
-                }
-                $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    if (true) {
+                    }
+                    $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInsideFor()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                for (;;)
-                     $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    for (;;)
+                         $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInsideForInsideFor()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                for (;;)
-                     for (;;)
-                        $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    for (;;)
+                         for (;;)
+                            $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestInsideForBlock()
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                for (;;) {
-                     $$
-                """));
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    for (;;) {
+                         $$
+                    """
+                )
+            );
         }
 
         [Fact]
         public async Task TestNotAfterFor1()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"for $$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"for $$"));
         }
 
         [Fact]
         public async Task TestNotAfterFor2()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"for ($$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"for ($$"));
         }
 
         [Fact]
         public async Task TestNotAfterFor3()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"for (;$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"for (;$$"));
         }
 
         [Fact]
         public async Task TestNotAfterFor4()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"for (;;$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"for (;;$$"));
         }
 
         [Fact]
         public async Task TestNotInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                   $$
                 }
-                """);
+                """
+            );
         }
     }
 }

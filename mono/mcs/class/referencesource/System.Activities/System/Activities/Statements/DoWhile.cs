@@ -23,9 +23,7 @@ namespace System.Activities.Statements
         Collection<Variable> variables;
 
         public DoWhile()
-            : base()
-        {
-        }
+            : base() { }
 
         public DoWhile(Expression<Func<ActivityContext, bool>> condition)
             : this()
@@ -64,7 +62,7 @@ namespace System.Activities.Statements
                             {
                                 throw SA.FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -73,21 +71,16 @@ namespace System.Activities.Statements
 
         [DefaultValue(null)]
         [DependsOn("Variables")]
-        public Activity<bool> Condition
-        {
-            get;
-            set;
-        }
+        public Activity<bool> Condition { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("Condition")]
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
-        protected override void OnCreateDynamicUpdateMap(DynamicUpdate.NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            DynamicUpdate.NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
@@ -125,7 +118,11 @@ namespace System.Activities.Statements
             context.ScheduleActivity(this.Condition, this.onConditionComplete);
         }
 
-        void OnConditionComplete(NativeActivityContext context, ActivityInstance completedInstance, bool result)
+        void OnConditionComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            bool result
+        )
         {
             if (result)
             {

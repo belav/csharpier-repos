@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -25,7 +25,6 @@ namespace System.Linq.Parallel
     /// <typeparam name="TElement"></typeparam>
     internal sealed class ScanQueryOperator<TElement> : QueryOperator<TElement>
     {
-
         private readonly IEnumerable<TElement> m_data; // The actual data source to scan.
 
         //-----------------------------------------------------------------------------------
@@ -37,7 +36,8 @@ namespace System.Linq.Parallel
         {
             Contract.Assert(data != null);
 
-            ParallelEnumerableWrapper<TElement> wrapper = data as ParallelEnumerableWrapper<TElement>;
+            ParallelEnumerableWrapper<TElement> wrapper =
+                data as ParallelEnumerableWrapper<TElement>;
             if (wrapper != null)
             {
                 data = wrapper.WrappedEnumerable;
@@ -67,7 +67,11 @@ namespace System.Linq.Parallel
             IList<TElement> dataAsList = m_data as IList<TElement>;
             if (dataAsList != null)
             {
-                return new ListQueryResults<TElement>(dataAsList, settings.DegreeOfParallelism.GetValueOrDefault(), preferStriping);
+                return new ListQueryResults<TElement>(
+                    dataAsList,
+                    settings.DegreeOfParallelism.GetValueOrDefault(),
+                    preferStriping
+                );
             }
             else
             {
@@ -75,17 +79,18 @@ namespace System.Linq.Parallel
             }
         }
 
-
         //-----------------------------------------------------------------------------------
         // IEnumerable<T> data source represented as QueryResults<T>. Typically, we would not
         // use ScanEnumerableQueryOperatorResults if the data source implements IList<T>.
         //
 
-        internal override IEnumerator<TElement> GetEnumerator(ParallelMergeOptions? mergeOptions, bool suppressOrderPreservation)
+        internal override IEnumerator<TElement> GetEnumerator(
+            ParallelMergeOptions? mergeOptions,
+            bool suppressOrderPreservation
+        )
         {
             return m_data.GetEnumerator();
         }
-
 
         //---------------------------------------------------------------------------------------
         // Returns an enumerable that represents the query executing sequentially.
@@ -104,12 +109,11 @@ namespace System.Linq.Parallel
         {
             get
             {
-                return m_data is IList<TElement> 
+                return m_data is IList<TElement>
                     ? OrdinalIndexState.Indexible
                     : OrdinalIndexState.Correct;
             }
         }
-
 
         //---------------------------------------------------------------------------------------
         // Whether this operator performs a premature merge that would not be performed in
@@ -127,17 +131,26 @@ namespace System.Linq.Parallel
 
             private QuerySettings m_settings; // Settings collected from the query
 
-            internal ScanEnumerableQueryOperatorResults(IEnumerable<TElement> data, QuerySettings settings)
+            internal ScanEnumerableQueryOperatorResults(
+                IEnumerable<TElement> data,
+                QuerySettings settings
+            )
             {
                 m_data = data;
                 m_settings = settings;
             }
 
-            internal override void GivePartitionedStream(IPartitionedStreamRecipient<TElement> recipient)
+            internal override void GivePartitionedStream(
+                IPartitionedStreamRecipient<TElement> recipient
+            )
             {
                 // Since we are not using m_data as an IList, we can pass useStriping = false.
-                PartitionedStream<TElement, int> partitionedStream = ExchangeUtilities.PartitionDataSource(
-                    m_data, m_settings.DegreeOfParallelism.Value, false);
+                PartitionedStream<TElement, int> partitionedStream =
+                    ExchangeUtilities.PartitionDataSource(
+                        m_data,
+                        m_settings.DegreeOfParallelism.Value,
+                        false
+                    );
                 recipient.Receive<int>(partitionedStream);
             }
         }

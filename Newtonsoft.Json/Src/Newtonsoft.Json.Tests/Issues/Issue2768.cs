@@ -113,11 +113,11 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var reader = new JsonTextReader(new StringReader(json))
             {
-                FloatParseHandling = FloatParseHandling.Decimal
+                FloatParseHandling = FloatParseHandling.Decimal,
             };
 
             decimal? parsedValue = null;
-            
+
             while (reader.Read())
             {
                 if (reader.TokenType == JsonToken.Float)
@@ -137,7 +137,7 @@ namespace Newtonsoft.Json.Tests.Issues
 
             var reader = new JsonTextReader(new StringReader(json))
             {
-                FloatParseHandling = FloatParseHandling.Decimal
+                FloatParseHandling = FloatParseHandling.Decimal,
             };
 
             List<object> boxedDecimals = new List<object>();

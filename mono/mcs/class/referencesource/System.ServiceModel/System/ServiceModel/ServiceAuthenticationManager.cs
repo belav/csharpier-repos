@@ -5,17 +5,21 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.IdentityModel.Policy;
     using System.ServiceModel.Channels;
-    using System.Collections;
-    using System.ServiceModel.Security.Tokens;
     using System.ServiceModel.Security;
+    using System.ServiceModel.Security.Tokens;
 
     public class ServiceAuthenticationManager
     {
-        public virtual ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
+        public virtual ReadOnlyCollection<IAuthorizationPolicy> Authenticate(
+            ReadOnlyCollection<IAuthorizationPolicy> authPolicy,
+            Uri listenUri,
+            ref Message message
+        )
         {
             return authPolicy;
         }
@@ -25,34 +29,58 @@ namespace System.ServiceModel
     {
         ServiceAuthenticationManager wrappedAuthenticationManager;
 
-        internal SCTServiceAuthenticationManagerWrapper(ServiceAuthenticationManager wrappedServiceAuthManager)
+        internal SCTServiceAuthenticationManagerWrapper(
+            ServiceAuthenticationManager wrappedServiceAuthManager
+        )
         {
             if (wrappedServiceAuthManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("wrappedServiceAuthManager");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappedServiceAuthManager"
+                );
             }
 
             this.wrappedAuthenticationManager = wrappedServiceAuthManager;
         }
 
-        public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
+        public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(
+            ReadOnlyCollection<IAuthorizationPolicy> authPolicy,
+            Uri listenUri,
+            ref Message message
+        )
         {
-            if ((message != null) &&
-                (message.Properties != null) &&
-                (message.Properties.Security != null) &&
-                (message.Properties.Security.TransportToken != null) &&
-                (message.Properties.Security.ServiceSecurityContext != null) &&
-                (message.Properties.Security.ServiceSecurityContext.AuthorizationPolicies != null))
+            if (
+                (message != null)
+                && (message.Properties != null)
+                && (message.Properties.Security != null)
+                && (message.Properties.Security.TransportToken != null)
+                && (message.Properties.Security.ServiceSecurityContext != null)
+                && (
+                    message.Properties.Security.ServiceSecurityContext.AuthorizationPolicies != null
+                )
+            )
             {
-                List<IAuthorizationPolicy> authPolicies = new List<IAuthorizationPolicy>(message.Properties.Security.ServiceSecurityContext.AuthorizationPolicies);
-                foreach (IAuthorizationPolicy policy in message.Properties.Security.TransportToken.SecurityTokenPolicies)
+                List<IAuthorizationPolicy> authPolicies = new List<IAuthorizationPolicy>(
+                    message.Properties.Security.ServiceSecurityContext.AuthorizationPolicies
+                );
+                foreach (
+                    IAuthorizationPolicy policy in message
+                        .Properties
+                        .Security
+                        .TransportToken
+                        .SecurityTokenPolicies
+                )
                 {
                     authPolicies.Remove(policy);
                 }
                 authPolicy = authPolicies.AsReadOnly();
             }
 
-            return this.wrappedAuthenticationManager.Authenticate(authPolicy, listenUri, ref message);
+            return this.wrappedAuthenticationManager.Authenticate(
+                authPolicy,
+                listenUri,
+                ref message
+            );
         }
     }
 
@@ -61,11 +89,16 @@ namespace System.ServiceModel
         ServiceAuthenticationManager wrappedAuthenticationManager;
         string[] filteredActionUriCollection;
 
-        internal ServiceAuthenticationManagerWrapper(ServiceAuthenticationManager wrappedServiceAuthManager, string[] actionUriFilter)
+        internal ServiceAuthenticationManagerWrapper(
+            ServiceAuthenticationManager wrappedServiceAuthManager,
+            string[] actionUriFilter
+        )
         {
             if (wrappedServiceAuthManager == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("wrappedServiceAuthManager");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappedServiceAuthManager"
+                );
             }
 
             if ((actionUriFilter != null) && (actionUriFilter.Length > 0))
@@ -80,7 +113,11 @@ namespace System.ServiceModel
             this.wrappedAuthenticationManager = wrappedServiceAuthManager;
         }
 
-        public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(ReadOnlyCollection<IAuthorizationPolicy> authPolicy, Uri listenUri, ref Message message)
+        public override ReadOnlyCollection<IAuthorizationPolicy> Authenticate(
+            ReadOnlyCollection<IAuthorizationPolicy> authPolicy,
+            Uri listenUri,
+            ref Message message
+        )
         {
             if (CanSkipAuthentication(message))
             {
@@ -91,42 +128,71 @@ namespace System.ServiceModel
             {
                 for (int i = 0; i < this.filteredActionUriCollection.Length; ++i)
                 {
-                    if ((message != null) &&
-                        (message.Headers != null) &&
-                        !String.IsNullOrEmpty(message.Headers.Action) &&
-                        (message.Headers.Action == this.filteredActionUriCollection[i]))
+                    if (
+                        (message != null)
+                        && (message.Headers != null)
+                        && !String.IsNullOrEmpty(message.Headers.Action)
+                        && (message.Headers.Action == this.filteredActionUriCollection[i])
+                    )
                     {
                         return authPolicy;
                     }
                 }
             }
 
-            return this.wrappedAuthenticationManager.Authenticate(authPolicy, listenUri, ref message);
+            return this.wrappedAuthenticationManager.Authenticate(
+                authPolicy,
+                listenUri,
+                ref message
+            );
         }
 
         //
         // We skip the authentication step if the client already has an SCT and there are no Transport level tokens.
         // ServiceAuthenticationManager would have been called when the SCT was issued and there is no need to do
-        // Authentication again. If TransportToken was present then we would call ServiceAutenticationManager as 
+        // Authentication again. If TransportToken was present then we would call ServiceAutenticationManager as
         // TransportTokens are not authenticated during SCT issuance.
         //
         bool CanSkipAuthentication(Message message)
         {
-            if ((message != null) && (message.Properties != null) && (message.Properties.Security != null) && (message.Properties.Security.TransportToken == null))
+            if (
+                (message != null)
+                && (message.Properties != null)
+                && (message.Properties.Security != null)
+                && (message.Properties.Security.TransportToken == null)
+            )
             {
-                if ((message.Properties.Security.ProtectionToken != null) &&
-                    (message.Properties.Security.ProtectionToken.SecurityToken != null) &&
-                    (message.Properties.Security.ProtectionToken.SecurityToken.GetType() == typeof(SecurityContextSecurityToken)))
+                if (
+                    (message.Properties.Security.ProtectionToken != null)
+                    && (message.Properties.Security.ProtectionToken.SecurityToken != null)
+                    && (
+                        message.Properties.Security.ProtectionToken.SecurityToken.GetType()
+                        == typeof(SecurityContextSecurityToken)
+                    )
+                )
                 {
                     return true;
                 }
 
                 if (message.Properties.Security.HasIncomingSupportingTokens)
                 {
-                    foreach (SupportingTokenSpecification tokenSpecification in message.Properties.Security.IncomingSupportingTokens)
+                    foreach (
+                        SupportingTokenSpecification tokenSpecification in message
+                            .Properties
+                            .Security
+                            .IncomingSupportingTokens
+                    )
                     {
-                        if ((tokenSpecification.SecurityTokenAttachmentMode == SecurityTokenAttachmentMode.Endorsing) &&
-                            (tokenSpecification.SecurityToken.GetType() == typeof(SecurityContextSecurityToken)))
+                        if (
+                            (
+                                tokenSpecification.SecurityTokenAttachmentMode
+                                == SecurityTokenAttachmentMode.Endorsing
+                            )
+                            && (
+                                tokenSpecification.SecurityToken.GetType()
+                                == typeof(SecurityContextSecurityToken)
+                            )
+                        )
                         {
                             return true;
                         }
@@ -137,6 +203,4 @@ namespace System.ServiceModel
             return false;
         }
     }
-
 }
-

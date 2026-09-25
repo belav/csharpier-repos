@@ -21,14 +21,33 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_TestData()
         {
             yield return new object[] { null, new CodeStatement[0], new CodeStatement[0] };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), new CodeStatement[] { new CodeCommentStatement("Value2") }, new CodeStatement[0] };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), new CodeStatement[] { new CodeCommentStatement("Value2") }, new CodeStatement[] { new CodeCommentStatement("Value3") } };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), new CodeStatement[0], new CodeStatement[] { new CodeCommentStatement("Value3") } };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodeStatement[] { new CodeCommentStatement("Value2") },
+                new CodeStatement[0],
+            };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodeStatement[] { new CodeCommentStatement("Value2") },
+                new CodeStatement[] { new CodeCommentStatement("Value3") },
+            };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                new CodeStatement[0],
+                new CodeStatement[] { new CodeCommentStatement("Value3") },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_TestData))]
-        public void Ctor(CodeExpression expression, CodeStatement[] trueStatements, CodeStatement[] falseStatements)
+        public void Ctor(
+            CodeExpression expression,
+            CodeStatement[] trueStatements,
+            CodeStatement[] falseStatements
+        )
         {
             if (falseStatements.Length == 0)
             {
@@ -47,7 +66,11 @@ namespace System.CodeDom.Tests
                 Assert.Empty(condition2.FalseStatements);
             }
             // Use Ctor(CodeExpression, CodeStatement[], CodeStatement[])
-            var condition3 = new CodeConditionStatement(expression, trueStatements, falseStatements);
+            var condition3 = new CodeConditionStatement(
+                expression,
+                trueStatements,
+                falseStatements
+            );
             Assert.Equal(expression, condition3.Condition);
             Assert.Equal(trueStatements, condition3.TrueStatements.Cast<CodeStatement>());
             Assert.Equal(falseStatements, condition3.FalseStatements.Cast<CodeStatement>());
@@ -69,11 +92,17 @@ namespace System.CodeDom.Tests
 
             CodeStatement statement1 = new CodeCommentStatement("Value1");
             condition.TrueStatements.Add(statement1);
-            Assert.Equal(new CodeStatement[] { statement1 }, condition.TrueStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1 },
+                condition.TrueStatements.Cast<CodeStatement>()
+            );
 
             CodeStatement statement2 = new CodeCommentStatement("Value2");
             condition.TrueStatements.Add(statement2);
-            Assert.Equal(new CodeStatement[] { statement1, statement2 }, condition.TrueStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1, statement2 },
+                condition.TrueStatements.Cast<CodeStatement>()
+            );
         }
 
         [Fact]
@@ -83,11 +112,17 @@ namespace System.CodeDom.Tests
 
             CodeStatement statement1 = new CodeCommentStatement("Value1");
             condition.FalseStatements.Add(statement1);
-            Assert.Equal(new CodeStatement[] { statement1 }, condition.FalseStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1 },
+                condition.FalseStatements.Cast<CodeStatement>()
+            );
 
             CodeStatement statement2 = new CodeCommentStatement("Value2");
             condition.FalseStatements.Add(statement2);
-            Assert.Equal(new CodeStatement[] { statement1, statement2 }, condition.FalseStatements.Cast<CodeStatement>());
+            Assert.Equal(
+                new CodeStatement[] { statement1, statement2 },
+                condition.FalseStatements.Cast<CodeStatement>()
+            );
         }
     }
 }

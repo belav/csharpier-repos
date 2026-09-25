@@ -7,18 +7,31 @@ namespace Internal.TypeSystem.TypesDebugInfo
 {
     public interface ITypesDebugInfoWriter
     {
-        uint GetEnumTypeIndex(EnumTypeDescriptor enumTypeDescriptor, EnumRecordTypeDescriptor[] typeRecords);
+        uint GetEnumTypeIndex(
+            EnumTypeDescriptor enumTypeDescriptor,
+            EnumRecordTypeDescriptor[] typeRecords
+        );
 
         uint GetClassTypeIndex(ClassTypeDescriptor classTypeDescriptor);
 
-        uint GetCompleteClassTypeIndex(ClassTypeDescriptor classTypeDescriptor, ClassFieldsTypeDescriptor classFieldsTypeDescriptor,
-                                       DataFieldDescriptor[] fields, StaticDataFieldDescriptor[] statics);
+        uint GetCompleteClassTypeIndex(
+            ClassTypeDescriptor classTypeDescriptor,
+            ClassFieldsTypeDescriptor classFieldsTypeDescriptor,
+            DataFieldDescriptor[] fields,
+            StaticDataFieldDescriptor[] statics
+        );
 
-        uint GetArrayTypeIndex(ClassTypeDescriptor classDescriptor, ArrayTypeDescriptor arrayTypeDescriprtor);
+        uint GetArrayTypeIndex(
+            ClassTypeDescriptor classDescriptor,
+            ArrayTypeDescriptor arrayTypeDescriprtor
+        );
 
         uint GetPointerTypeIndex(PointerTypeDescriptor pointerDescriptor);
 
-        uint GetMemberFunctionTypeIndex(MemberFunctionTypeDescriptor memberDescriptor, uint[] argumentTypes);
+        uint GetMemberFunctionTypeIndex(
+            MemberFunctionTypeDescriptor memberDescriptor,
+            uint[] argumentTypes
+        );
 
         uint GetMemberFunctionId(MemberFunctionIdTypeDescriptor memberIdDescriptor);
 

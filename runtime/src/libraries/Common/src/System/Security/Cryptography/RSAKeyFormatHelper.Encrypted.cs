@@ -9,7 +9,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> source,
             ReadOnlySpan<char> password,
             out int bytesRead,
-            out RSAParameters key)
+            out RSAParameters key
+        )
         {
             KeyFormatHelper.ReadEncryptedPkcs8<RSAParameters>(
                 s_validOids,
@@ -17,14 +18,16 @@ namespace System.Security.Cryptography
                 password,
                 FromPkcs1PrivateKey,
                 out bytesRead,
-                out key);
+                out key
+            );
         }
 
         internal static void ReadEncryptedPkcs8(
             ReadOnlySpan<byte> source,
             ReadOnlySpan<byte> passwordBytes,
             out int bytesRead,
-            out RSAParameters key)
+            out RSAParameters key
+        )
         {
             KeyFormatHelper.ReadEncryptedPkcs8<RSAParameters>(
                 s_validOids,
@@ -32,7 +35,8 @@ namespace System.Security.Cryptography
                 passwordBytes,
                 FromPkcs1PrivateKey,
                 out bytesRead,
-                out key);
+                out key
+            );
         }
     }
 }

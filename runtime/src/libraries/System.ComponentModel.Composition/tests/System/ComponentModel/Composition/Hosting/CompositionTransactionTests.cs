@@ -336,18 +336,30 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private void TestQuery(AtomicComposition context, object key, int parameter, bool expectation)
+        private void TestQuery(
+            AtomicComposition context,
+            object key,
+            int parameter,
+            bool expectation
+        )
         {
             Func<int, bool> query;
             if (context.TryGetValue(key, out query))
                 Assert.Equal(expectation, query(parameter));
         }
 
-        private void SetQuery(AtomicComposition context, object key, Func<int, Func<int, bool>, bool> query)
+        private void SetQuery(
+            AtomicComposition context,
+            object key,
+            Func<int, Func<int, bool>, bool> query
+        )
         {
             Func<int, bool> parentQuery;
             context.TryGetValue(key, out parentQuery);
-            Func<int, bool> queryFunction = parameter => { return query(parameter, parentQuery); };
+            Func<int, bool> queryFunction = parameter =>
+            {
+                return query(parameter, parentQuery);
+            };
             context.SetValue(key, queryFunction);
         }
 
@@ -502,6 +514,5 @@ namespace System.ComponentModel.Composition.Hosting
 
             Assert.True(stack.Count == 0);
         }
-
     }
 }

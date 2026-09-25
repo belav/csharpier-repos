@@ -9,8 +9,16 @@ public class Test_b00719
     [Fact]
     public static int TestEntryPoint()
     {
-        try { f(); return 1; }
-        catch (OverflowException) { Console.WriteLine("PASSED"); return 100; }
+        try
+        {
+            f();
+            return 1;
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("PASSED");
+            return 100;
+        }
         return 2;
     }
 
@@ -21,4 +29,3 @@ public class Test_b00719
         int[] a = new int[i];
     }
 }
-

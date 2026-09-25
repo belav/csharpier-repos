@@ -17,7 +17,13 @@ namespace System.ComponentModel.Tests
         private const int FirstPassBufferSize = 256;
         private const int E_FAIL = unchecked((int)0x80004005);
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, EntryPoint = "FormatMessageW", SetLastError = true, BestFitMapping = true)]
+        [DllImport(
+            "kernel32.dll",
+            CharSet = CharSet.Unicode,
+            EntryPoint = "FormatMessageW",
+            SetLastError = true,
+            BestFitMapping = true
+        )]
         private static extern int FormatMessage(
             int dwFlags,
             IntPtr lpSource_mustBeNull,
@@ -25,17 +31,24 @@ namespace System.ComponentModel.Tests
             int dwLanguageId,
             StringBuilder lpBuffer,
             int nSize,
-            IntPtr[] arguments);
+            IntPtr[] arguments
+        );
 
         private static bool IsExceptionMessageLong(int errorCode)
         {
             StringBuilder sb = new StringBuilder(FirstPassBufferSize); // Buffer length in the first pass in the implementation.
 
-            int result = FormatMessage(FORMAT_MESSAGE_IGNORE_INSERTS |
-                                       FORMAT_MESSAGE_FROM_SYSTEM |
-                                       FORMAT_MESSAGE_ARGUMENT_ARRAY,
-                                       IntPtr.Zero, (uint)errorCode, 0, sb, sb.Capacity,
-                                       null);
+            int result = FormatMessage(
+                FORMAT_MESSAGE_IGNORE_INSERTS
+                    | FORMAT_MESSAGE_FROM_SYSTEM
+                    | FORMAT_MESSAGE_ARGUMENT_ARRAY,
+                IntPtr.Zero,
+                (uint)errorCode,
+                0,
+                sb,
+                sb.Capacity,
+                null
+            );
             if (result == 0)
             {
                 return (Marshal.GetLastPInvokeError() == ERROR_INSUFFICIENT_BUFFER);
@@ -53,7 +66,10 @@ namespace System.ComponentModel.Tests
                 CultureInfo.InvariantCulture,
                 "{0} ({1})",
                 typeof(Win32Exception).ToString(),
-                PlatformDetection.IsNetFramework ? $"0x{E_FAIL:X8}" : error.ToString(CultureInfo.InvariantCulture));
+                PlatformDetection.IsNetFramework
+                    ? $"0x{E_FAIL:X8}"
+                    : error.ToString(CultureInfo.InvariantCulture)
+            );
 
             Exception innerException = new FormatException();
 
@@ -65,7 +81,11 @@ namespace System.ComponentModel.Tests
             ex = new Win32Exception(error);
             Assert.Equal(expected: E_FAIL, actual: ex.HResult);
             Assert.Equal(expected: error, actual: ex.NativeErrorCode);
-            Assert.StartsWith(expectedStartString: toStringStart, actualString: ex.ToString(), comparisonType: StringComparison.Ordinal);
+            Assert.StartsWith(
+                expectedStartString: toStringStart,
+                actualString: ex.ToString(),
+                comparisonType: StringComparison.Ordinal
+            );
 
             ex = new Win32Exception(message);
             Assert.Equal(expected: E_FAIL, actual: ex.HResult);
@@ -75,7 +95,11 @@ namespace System.ComponentModel.Tests
             Assert.Equal(expected: E_FAIL, actual: ex.HResult);
             Assert.Equal(expected: error, actual: ex.NativeErrorCode);
             Assert.Equal(expected: message, actual: ex.Message);
-            Assert.StartsWith(expectedStartString: toStringStart, actualString: ex.ToString(), comparisonType: StringComparison.Ordinal);
+            Assert.StartsWith(
+                expectedStartString: toStringStart,
+                actualString: ex.ToString(),
+                comparisonType: StringComparison.Ordinal
+            );
 
             ex = new Win32Exception(message, innerException);
             Assert.Equal(expected: E_FAIL, actual: ex.HResult);
@@ -84,7 +108,7 @@ namespace System.ComponentModel.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Uses P/Invokes to check whether the exception resource length >256 chars
+        [PlatformSpecific(TestPlatforms.Windows)] // Uses P/Invokes to check whether the exception resource length >256 chars
         public static void InstantiateExceptionWithLongErrorString()
         {
             // This test checks that Win32Exception supports error strings greater than 256 characters.

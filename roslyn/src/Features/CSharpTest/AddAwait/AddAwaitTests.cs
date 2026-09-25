@@ -15,13 +15,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
     [Trait(Traits.Feature, Traits.Features.CodeActionsAddAwait)]
     public class AddAwaitTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpAddAwaitCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpAddAwaitCodeRefactoringProvider();
 
         [Fact]
         public async Task Simple()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -30,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = GetNumberAsync()[||];
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -39,13 +43,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SimpleWithConfigureAwait()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -54,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = GetNumberAsync()[||];
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -63,13 +70,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync().ConfigureAwait(false);
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
         public async Task InArgument()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -78,7 +88,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = GetNumberAsync(arg[||]ument);
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -87,13 +98,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync(argument);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task InvocationInArgument()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -102,7 +115,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         M(GetNumberAsync()[||]);
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -111,13 +125,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         M(await GetNumberAsync());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task InvocationInArgumentWithConfigureAwait()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -126,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         M(GetNumberAsync()[||]);
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -135,13 +152,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         M(await GetNumberAsync().ConfigureAwait(false));
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
         public async Task AlreadyAwaited()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -150,13 +170,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync()[||];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task AlreadyAwaitedAndConfigured()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -165,13 +187,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync()[||].ConfigureAwait(false);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task AlreadyAwaitedAndConfigured2()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -180,13 +204,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync().ConfigureAwait(false)[||];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SimpleWithTrivia()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -196,7 +222,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                             GetNumberAsync()[||] /* comment */
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -206,13 +233,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                             await GetNumberAsync()[||] /* comment */
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SimpleWithTrivia2()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -221,7 +250,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = /* comment */ GetNumberAsync()[||] // comment
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -230,13 +260,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = /* comment */ await GetNumberAsync()[||] // comment
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task SimpleWithTriviaWithConfigureAwait()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -246,7 +278,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                             GetNumberAsync()[||] /* comment */
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -256,13 +289,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                             await GetNumberAsync().ConfigureAwait(false) /* comment */
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact]
         public async Task SimpleWithTrivia2WithConfigureAwait()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -271,7 +307,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = /* comment */ GetNumberAsync()[||] // comment
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -280,13 +317,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = /* comment */ await GetNumberAsync().ConfigureAwait(false) // comment
                     }
                 }
-                """, index: 1);
+                """,
+                index: 1
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task OnSemiColon()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -295,7 +335,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = GetNumberAsync();[||]
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -304,13 +345,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task Selection()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -319,7 +362,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = [|GetNumberAsync()|];
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -328,13 +372,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35525")]
         public async Task Selection2()
         {
-            await TestInRegularAndScriptAsync("""
+            await TestInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -343,7 +389,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         [|var x = GetNumberAsync();|]
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -352,13 +399,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = await GetNumberAsync();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ChainedInvocation()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -368,13 +417,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = GetNumberAsync()[||].ToString();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task ChainedInvocation_ExpressionOfInvalidInvocation()
         {
-            await TestInRegularAndScript1Async("""
+            await TestInRegularAndScript1Async(
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -384,7 +435,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = GetNumberAsync()[||].Invalid();
                     }
                 }
-                """, """
+                """,
+                """
                 using System.Threading.Tasks;
                 class Program
                 {
@@ -394,14 +446,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         var x = (await GetNumberAsync()).Invalid();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task BadAsyncReturnOperand1()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -419,8 +471,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -443,8 +494,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task BadAsyncReturnOperand_WithLeadingTrivia1()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -464,8 +514,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -490,8 +539,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task BadAsyncReturnOperand_ConditionalExpressionWithTrailingTrivia_SingleLine()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -506,8 +554,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -527,8 +574,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task BadAsyncReturnOperand_ConditionalExpressionWithTrailingTrivia_Multiline()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -545,8 +591,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -568,8 +613,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task BadAsyncReturnOperand_NullCoalescingExpressionWithTrailingTrivia_SingleLine()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -584,8 +628,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -605,8 +648,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task BadAsyncReturnOperand_NullCoalescingExpressionWithTrailingTrivia_Multiline()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -623,8 +665,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -646,8 +687,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task BadAsyncReturnOperand_AsExpressionWithTrailingTrivia_SingleLine()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -660,8 +700,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -679,8 +718,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task BadAsyncReturnOperand_AsExpressionWithTrailingTrivia_Multiline()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -697,8 +735,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
 
@@ -720,8 +757,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task TaskNotAwaited()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -733,8 +769,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -751,8 +786,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task TaskNotAwaited_WithLeadingTrivia()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -766,8 +800,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -786,8 +819,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task FunctionNotAwaited()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -804,8 +836,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -827,8 +858,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task FunctionNotAwaited_WithLeadingTrivia()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -847,8 +877,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -872,8 +901,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
         [Fact]
         public async Task FunctionNotAwaited_WithLeadingTrivia1()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -892,8 +920,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Threading.Tasks;
                 class Program
@@ -949,7 +976,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -987,14 +1015,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAssignmentExpressionWithConversionInNonAsyncFunction()
         {
-
-            await TestMissingAsync("""
+            await TestMissingAsync(
+                """
                 using System.Threading.Tasks;
 
                 class TestClass
@@ -1010,7 +1039,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1048,7 +1078,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(new object());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1092,7 +1123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1136,7 +1168,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1162,7 +1195,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1208,7 +1242,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1233,7 +1268,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1277,7 +1313,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1321,7 +1358,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1365,7 +1403,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1390,7 +1429,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1434,7 +1474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1460,7 +1501,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1506,7 +1548,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return Task.FromResult(result: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1536,7 +1579,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                         return await (true ? Task.FromResult(0) : Task.FromResult(1));
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1564,7 +1608,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                     {
                         return await (null ?? Task.FromResult(1)); }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1592,7 +1637,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                     {
                         return await (null as Task<int>); }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1345322")]
@@ -1608,7 +1654,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings.AddAwa
                     {
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

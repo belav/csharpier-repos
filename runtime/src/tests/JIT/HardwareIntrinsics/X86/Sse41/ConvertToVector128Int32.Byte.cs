@@ -95,8 +95,10 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int Op1ElementCount = Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
-        private static readonly int RetElementCount = Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
+        private static readonly int Op1ElementCount =
+            Unsafe.SizeOf<Vector128<Byte>>() / sizeof(Byte);
+        private static readonly int RetElementCount =
+            Unsafe.SizeOf<Vector128<Int32>>() / sizeof(Int32);
 
         private static Byte[] _data = new Byte[Op1ElementCount];
 
@@ -110,8 +112,15 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
         {
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _clsVar),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
         }
 
         public SimpleUnaryOpTest__ConvertToVector128Int32Byte()
@@ -120,11 +129,25 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
             var random = new Random();
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Vector128<Byte>, byte>(ref _fld), ref Unsafe.As<Byte, byte>(ref _data[0]), (uint)Unsafe.SizeOf<Vector128<Byte>>());
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Vector128<Byte>, byte>(ref _fld),
+                ref Unsafe.As<Byte, byte>(ref _data[0]),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
 
-            for (var i = 0; i < Op1ElementCount; i++) { _data[i] = (byte)(random.Next(0, byte.MaxValue)); }
-            _dataTable = new SimpleUnaryOpTest__DataTable<Int32, Byte>(_data, new Int32[RetElementCount], LargestVectorSize);
+            for (var i = 0; i < Op1ElementCount; i++)
+            {
+                _data[i] = (byte)(random.Next(0, byte.MaxValue));
+            }
+            _dataTable = new SimpleUnaryOpTest__DataTable<Int32, Byte>(
+                _data,
+                new Int32[RetElementCount],
+                LargestVectorSize
+            );
         }
 
         public bool IsSupported => Sse41.IsSupported;
@@ -143,9 +166,7 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
         public void RunBasicScenario_Ptr()
         {
-            var result = Sse41.ConvertToVector128Int32(
-                (Byte*)(_dataTable.inArrayPtr)
-            );
+            var result = Sse41.ConvertToVector128Int32((Byte*)(_dataTable.inArrayPtr));
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -173,10 +194,12 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
         public void RunReflectionScenario_UnsafeRead()
         {
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.ConvertToVector128Int32), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr)
-                                     });
+            var result = typeof(Sse41)
+                .GetMethod(
+                    nameof(Sse41.ConvertToVector128Int32),
+                    new Type[] { typeof(Vector128<Byte>) }
+                )
+                .Invoke(null, new object[] { Unsafe.Read<Vector128<Byte>>(_dataTable.inArrayPtr) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int32>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -184,10 +207,9 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
         public void RunReflectionScenario_Ptr()
         {
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.ConvertToVector128Int32), new Type[] { typeof(Byte*) })
-                                     .Invoke(null, new object[] {
-                                        Pointer.Box(_dataTable.inArrayPtr, typeof(Byte*))
-                                     });
+            var result = typeof(Sse41)
+                .GetMethod(nameof(Sse41.ConvertToVector128Int32), new Type[] { typeof(Byte*) })
+                .Invoke(null, new object[] { Pointer.Box(_dataTable.inArrayPtr, typeof(Byte*)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int32>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -195,10 +217,12 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
         public void RunReflectionScenario_Load()
         {
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.ConvertToVector128Int32), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadVector128((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse41)
+                .GetMethod(
+                    nameof(Sse41.ConvertToVector128Int32),
+                    new Type[] { typeof(Vector128<Byte>) }
+                )
+                .Invoke(null, new object[] { Sse2.LoadVector128((Byte*)(_dataTable.inArrayPtr)) });
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int32>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -206,10 +230,15 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
         public void RunReflectionScenario_LoadAligned()
         {
-            var result = typeof(Sse41).GetMethod(nameof(Sse41.ConvertToVector128Int32), new Type[] { typeof(Vector128<Byte>) })
-                                     .Invoke(null, new object[] {
-                                        Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr))
-                                     });
+            var result = typeof(Sse41)
+                .GetMethod(
+                    nameof(Sse41.ConvertToVector128Int32),
+                    new Type[] { typeof(Vector128<Byte>) }
+                )
+                .Invoke(
+                    null,
+                    new object[] { Sse2.LoadAlignedVector128((Byte*)(_dataTable.inArrayPtr)) }
+                );
 
             Unsafe.Write(_dataTable.outArrayPtr, (Vector128<Int32>)(result));
             ValidateResult(_dataTable.inArrayPtr, _dataTable.outArrayPtr);
@@ -217,9 +246,7 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
         public void RunClsVarScenario()
         {
-            var result = Sse41.ConvertToVector128Int32(
-                _clsVar
-            );
+            var result = Sse41.ConvertToVector128Int32(_clsVar);
 
             Unsafe.Write(_dataTable.outArrayPtr, result);
             ValidateResult(_clsVar, _dataTable.outArrayPtr);
@@ -283,29 +310,53 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
             }
         }
 
-        private void ValidateResult(Vector128<Byte> firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Byte> firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray = new Byte[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
             Unsafe.WriteUnaligned(ref Unsafe.As<Byte, byte>(ref inArray[0]), firstOp);
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Int32>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Int32>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(void* firstOp, void* result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            void* firstOp,
+            void* result,
+            [CallerMemberName] string method = ""
+        )
         {
             Byte[] inArray = new Byte[Op1ElementCount];
             Int32[] outArray = new Int32[RetElementCount];
 
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Byte, byte>(ref inArray[0]), ref Unsafe.AsRef<byte>(firstOp), (uint)Unsafe.SizeOf<Vector128<Byte>>());
-            Unsafe.CopyBlockUnaligned(ref Unsafe.As<Int32, byte>(ref outArray[0]), ref Unsafe.AsRef<byte>(result), (uint)Unsafe.SizeOf<Vector128<Int32>>());
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Byte, byte>(ref inArray[0]),
+                ref Unsafe.AsRef<byte>(firstOp),
+                (uint)Unsafe.SizeOf<Vector128<Byte>>()
+            );
+            Unsafe.CopyBlockUnaligned(
+                ref Unsafe.As<Int32, byte>(ref outArray[0]),
+                ref Unsafe.AsRef<byte>(result),
+                (uint)Unsafe.SizeOf<Vector128<Int32>>()
+            );
 
             ValidateResult(inArray, outArray, method);
         }
 
-        private void ValidateResult(Byte[] firstOp, Int32[] result, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Byte[] firstOp,
+            Int32[] result,
+            [CallerMemberName] string method = ""
+        )
         {
             if (result[0] != firstOp[0])
             {
@@ -325,7 +376,9 @@ namespace JIT.HardwareIntrinsics.X86._Sse41.handwritten
 
             if (!Succeeded)
             {
-                Console.WriteLine($"{nameof(Sse41)}.{nameof(Sse41.ConvertToVector128Int32)}<Int32>(Vector128<Byte>): {method} failed:");
+                Console.WriteLine(
+                    $"{nameof(Sse41)}.{nameof(Sse41.ConvertToVector128Int32)}<Int32>(Vector128<Byte>): {method} failed:"
+                );
                 Console.WriteLine($"  firstOp: ({string.Join(", ", firstOp)})");
                 Console.WriteLine($"   result: ({string.Join(", ", result)})");
                 Console.WriteLine();

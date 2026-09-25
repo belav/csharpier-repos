@@ -12,14 +12,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void CanAcquireResource()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire();
 
             Assert.True(lease.IsAcquired);
@@ -35,64 +37,71 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void InvalidOptionsThrows()
         {
-            AssertExtensions.Throws<ArgumentException>("options",
-                () => new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-                {
-                    PermitLimit = -1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1,
-                    Window = TimeSpan.FromMinutes(2),
-                    AutoReplenishment = false
-                }));
-            AssertExtensions.Throws<ArgumentException>("options",
-                () => new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = -1,
-                    Window = TimeSpan.FromMinutes(2),
-                    AutoReplenishment = false
-                }));
-            AssertExtensions.Throws<ArgumentException>("options",
-                () => new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1,
-                    Window = TimeSpan.MinValue,
-                    AutoReplenishment = false
-                }));
-            AssertExtensions.Throws<ArgumentException>("options",
-                () => new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1,
-                    Window = TimeSpan.FromMinutes(-2),
-                    AutoReplenishment = false,
-                }));
-            AssertExtensions.Throws<ArgumentException>("options",
-                () => new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-                {
-                    PermitLimit = 1,
-                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                    QueueLimit = 1,
-                    Window = TimeSpan.Zero,
-                    AutoReplenishment = false,
-                }));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = -1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.FromMinutes(2),
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = -1,
+                        Window = TimeSpan.FromMinutes(2),
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.MinValue,
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.FromMinutes(-2),
+                        AutoReplenishment = false,
+                    }
+                ));
+            AssertExtensions.Throws<ArgumentException>("options", () => new FixedWindowRateLimiter(
+                    new FixedWindowRateLimiterOptions
+                    {
+                        PermitLimit = 1,
+                        QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                        QueueLimit = 1,
+                        Window = TimeSpan.Zero,
+                        AutoReplenishment = false,
+                    }
+                ));
         }
 
         [Fact]
         public override async Task CanAcquireResourceAsync()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             using var lease = await limiter.AcquireAsync();
 
@@ -108,14 +117,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanAcquireResourceAsync_QueuesAndGrabsOldest()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = await limiter.AcquireAsync();
 
             Assert.True(lease.IsAcquired);
@@ -142,14 +153,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanAcquireResourceAsync_QueuesAndGrabsNewest()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 3,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 3,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             var lease = await limiter.AcquireAsync(2);
             Assert.True(lease.IsAcquired);
@@ -178,14 +191,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task FailsWhenQueuingMoreThanLimit_OldestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             using var lease = limiter.AttemptAcquire(1);
             var wait = limiter.AcquireAsync(1);
 
@@ -198,14 +213,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task DropsOldestWhenQueuingMoreThanLimit_NewestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             var wait = limiter.AcquireAsync(1);
             Assert.False(wait.IsCompleted);
@@ -224,14 +241,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task DropsMultipleOldestWhenQueuingMoreThanLimit_NewestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(2);
             Assert.True(lease.IsAcquired);
             var wait = limiter.AcquireAsync(1);
@@ -256,14 +275,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task DropsRequestedLeaseIfPermitCountGreaterThanQueueLimitAndNoAvailability_NewestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(2);
             Assert.True(lease.IsAcquired);
 
@@ -283,14 +304,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task QueueAvailableAfterQueueLimitHitAndResources_BecomeAvailable()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             var wait = limiter.AcquireAsync(1);
 
@@ -312,14 +335,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task LargeAcquiresAndQueuesDoNotIntegerOverflow()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = int.MaxValue,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = int.MaxValue,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = int.MaxValue,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = int.MaxValue,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(int.MaxValue);
             Assert.True(lease.IsAcquired);
 
@@ -341,70 +366,84 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void ThrowsWhenAcquiringMoreThanLimit()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => limiter.AttemptAcquire(2));
         }
 
         [Fact]
         public override async Task ThrowsWhenWaitingForMoreThanLimit()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await limiter.AcquireAsync(2));
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                await limiter.AcquireAsync(2)
+            );
         }
 
         [Fact]
         public override void ThrowsWhenAcquiringLessThanZero()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => limiter.AttemptAcquire(-1));
         }
 
         [Fact]
         public override async Task ThrowsWhenWaitingForLessThanZero()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
-            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await limiter.AcquireAsync(-1));
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+                await limiter.AcquireAsync(-1)
+            );
         }
 
         [Fact]
         public override void AcquireZero_WithAvailability()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             using var lease = limiter.AttemptAcquire(0);
             Assert.True(lease.IsAcquired);
@@ -413,14 +452,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void AcquireZero_WithoutAvailability()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             using var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
 
@@ -432,14 +473,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task AcquireAsyncZero_WithAvailability()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             using var lease = await limiter.AcquireAsync(0);
             Assert.True(lease.IsAcquired);
@@ -448,14 +491,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task AcquireAsyncZero_WithoutAvailabilityWaitsForAvailability()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = await limiter.AcquireAsync(1);
             Assert.True(lease.IsAcquired);
 
@@ -471,14 +516,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanDequeueMultipleResourcesAtOnce()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             using var lease = await limiter.AcquireAsync(2);
             Assert.True(lease.IsAcquired);
 
@@ -499,14 +546,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanCancelAcquireAsyncAfterQueuing()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
 
@@ -526,14 +575,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanFillQueueWithOldestFirstAfterCancelingFirstQueuedRequestManually()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 3,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 3,
-                Window = TimeSpan.FromMilliseconds(2),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 3,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 3,
+                    Window = TimeSpan.FromMilliseconds(2),
+                    AutoReplenishment = false,
+                }
+            );
 
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
@@ -561,21 +612,25 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanCancelAcquireAsyncBeforeQueuing()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
 
             var cts = new CancellationTokenSource();
             cts.Cancel();
 
-            var ex = await Assert.ThrowsAsync<TaskCanceledException>(() => limiter.AcquireAsync(1, cts.Token).AsTask());
+            var ex = await Assert.ThrowsAsync<TaskCanceledException>(() =>
+                limiter.AcquireAsync(1, cts.Token).AsTask()
+            );
             Assert.Equal(cts.Token, ex.CancellationToken);
 
             lease.Dispose();
@@ -587,14 +642,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CancelUpdatesQueueLimit()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
 
@@ -616,14 +673,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void NoMetadataOnAcquiredLease()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             using var lease = limiter.AttemptAcquire(1);
             Assert.False(lease.TryGetMetadata(MetadataName.RetryAfter, out _));
         }
@@ -631,29 +690,35 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void MetadataNamesContainsAllMetadata()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             using var lease = limiter.AttemptAcquire(1);
-            Assert.Collection(lease.MetadataNames, metadataName => Assert.Equal(metadataName, MetadataName.RetryAfter.Name));
+            Assert.Collection(lease.MetadataNames, metadataName =>
+                Assert.Equal(metadataName, MetadataName.RetryAfter.Name)
+            );
         }
 
         [Fact]
         public override async Task DisposeReleasesQueuedAcquires()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 3,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 3,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             var wait1 = limiter.AcquireAsync(1);
             var wait2 = limiter.AcquireAsync(1);
@@ -673,20 +738,24 @@ namespace System.Threading.RateLimiting.Test
 
             // Throws after disposal
             Assert.Throws<ObjectDisposedException>(() => limiter.AttemptAcquire(1));
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => limiter.AcquireAsync(1).AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                limiter.AcquireAsync(1).AsTask()
+            );
         }
 
         [Fact]
         public override async Task DisposeAsyncReleasesQueuedAcquires()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 3,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 3,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             var wait1 = limiter.AcquireAsync(1);
             var wait2 = limiter.AcquireAsync(1);
@@ -706,7 +775,9 @@ namespace System.Threading.RateLimiting.Test
 
             // Throws after disposal
             Assert.Throws<ObjectDisposedException>(() => limiter.AttemptAcquire(1));
-            await Assert.ThrowsAsync<ObjectDisposedException>(() => limiter.AcquireAsync(1).AsTask());
+            await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+                limiter.AcquireAsync(1).AsTask()
+            );
         }
 
         [Fact]
@@ -718,7 +789,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 1,
                 Window = TimeSpan.FromSeconds(20),
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new FixedWindowRateLimiter(options);
 
@@ -732,7 +803,9 @@ namespace System.Threading.RateLimiting.Test
 
             Assert.True(failedLease.TryGetMetadata(MetadataName.RetryAfter, out var typedMetadata));
             Assert.Equal(options.Window.Ticks, typedMetadata.Ticks);
-            Assert.Collection(failedLease.MetadataNames, item => item.Equals(MetadataName.RetryAfter.Name));
+            Assert.Collection(failedLease.MetadataNames, item =>
+                item.Equals(MetadataName.RetryAfter.Name)
+            );
         }
 
         [Fact]
@@ -744,7 +817,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 1,
                 Window = TimeSpan.FromSeconds(20),
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new FixedWindowRateLimiter(options);
 
@@ -759,7 +832,6 @@ namespace System.Threading.RateLimiting.Test
             Assert.Equal(options.Window.Ticks, typedMetadata.Ticks);
         }
 
-
         [Fact]
         public async Task CorrectRetryMetadataWithNonZeroAvailableItems()
         {
@@ -769,7 +841,7 @@ namespace System.Threading.RateLimiting.Test
                 QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
                 QueueLimit = 1,
                 Window = TimeSpan.FromSeconds(20),
-                AutoReplenishment = false
+                AutoReplenishment = false,
             };
             var limiter = new FixedWindowRateLimiter(options);
 
@@ -784,14 +856,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public void TryReplenishWithAutoReplenish_ReturnsFalse()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromSeconds(1),
-                AutoReplenishment = true
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromSeconds(1),
+                    AutoReplenishment = true,
+                }
+            );
             Assert.Equal(2, limiter.GetStatistics().CurrentAvailablePermits);
             Assert.False(limiter.TryReplenish());
             Assert.Equal(2, limiter.GetStatistics().CurrentAvailablePermits);
@@ -800,14 +874,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public async Task AutoReplenish_ReplenishesCounters()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1000),
-                AutoReplenishment = true
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1000),
+                    AutoReplenishment = true,
+                }
+            );
             Assert.Equal(2, limiter.GetStatistics().CurrentAvailablePermits);
             limiter.AttemptAcquire(2);
 
@@ -818,14 +894,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanAcquireResourcesWithAcquireAsyncWithQueuedItemsIfNewestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
@@ -847,14 +925,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CannotAcquireResourcesWithAcquireAsyncWithQueuedItemsIfOldestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 3,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 3,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
@@ -879,14 +959,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanAcquireResourcesWithAcquireWithQueuedItemsIfNewestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 3,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 3,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
@@ -907,14 +989,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CannotAcquireResourcesWithAcquireWithQueuedItemsIfOldestFirst()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 3,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 3,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
@@ -934,14 +1018,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void NullIdleDurationWhenActive()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(2),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(2),
+                    AutoReplenishment = false,
+                }
+            );
             limiter.AttemptAcquire(1);
             Assert.Null(limiter.IdleDuration);
         }
@@ -949,14 +1035,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task IdleDurationUpdatesWhenIdle()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(2),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(2),
+                    AutoReplenishment = false,
+                }
+            );
             Assert.NotNull(limiter.IdleDuration);
             var previousDuration = limiter.IdleDuration;
             await Task.Delay(15);
@@ -966,14 +1054,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void IdleDurationUpdatesWhenChangingFromActive()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             limiter.AttemptAcquire(1);
             Replenish(limiter, 1L);
             Assert.NotNull(limiter.IdleDuration);
@@ -983,26 +1073,30 @@ namespace System.Threading.RateLimiting.Test
         public void ReplenishingRateLimiterPropertiesHaveCorrectValues()
         {
             var replenishPeriod = TimeSpan.FromMinutes(1);
-            using ReplenishingRateLimiter limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2,
-                Window = replenishPeriod,
-                AutoReplenishment = true
-            });
+            using ReplenishingRateLimiter limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2,
+                    Window = replenishPeriod,
+                    AutoReplenishment = true,
+                }
+            );
             Assert.True(limiter.IsAutoReplenishing);
             Assert.Equal(replenishPeriod, limiter.ReplenishmentPeriod);
 
             replenishPeriod = TimeSpan.FromSeconds(2);
-            using ReplenishingRateLimiter limiter2 = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 2,
-                Window = replenishPeriod,
-                AutoReplenishment = false
-            });
+            using ReplenishingRateLimiter limiter2 = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 2,
+                    Window = replenishPeriod,
+                    AutoReplenishment = false,
+                }
+            );
             Assert.False(limiter2.IsAutoReplenishing);
             Assert.Equal(replenishPeriod, limiter2.ReplenishmentPeriod);
         }
@@ -1010,14 +1104,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanFillQueueWithNewestFirstAfterCancelingQueuedRequestWithAnotherQueuedRequest()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 2,
-                QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
-                QueueLimit = 2,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 2,
+                    QueueProcessingOrder = QueueProcessingOrder.NewestFirst,
+                    QueueLimit = 2,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(2);
             Assert.True(lease.IsAcquired);
 
@@ -1049,14 +1145,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task CanDisposeAfterCancelingQueuedRequest()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(1);
             Assert.True(lease.IsAcquired);
 
@@ -1074,14 +1172,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void GetStatisticsReturnsNewInstances()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 1,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 1,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             var stats = limiter.GetStatistics();
             Assert.Equal(1, stats.CurrentAvailablePermits);
@@ -1097,14 +1197,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task GetStatisticsHasCorrectValues()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 100,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 50,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 100,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 50,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
 
             var stats = limiter.GetStatistics();
             Assert.Equal(100, stats.CurrentAvailablePermits);
@@ -1160,14 +1262,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override async Task GetStatisticsWithZeroPermitCount()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 100,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 50,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 100,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 50,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             var lease = limiter.AttemptAcquire(0);
             Assert.True(lease.IsAcquired);
             Assert.Equal(1, limiter.GetStatistics().TotalSuccessfulLeases);
@@ -1193,14 +1297,16 @@ namespace System.Threading.RateLimiting.Test
         [Fact]
         public override void GetStatisticsThrowsAfterDispose()
         {
-            var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 100,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 50,
-                Window = TimeSpan.FromMilliseconds(1),
-                AutoReplenishment = false
-            });
+            var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 100,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 50,
+                    Window = TimeSpan.FromMilliseconds(1),
+                    AutoReplenishment = false,
+                }
+            );
             limiter.Dispose();
             Assert.Throws<ObjectDisposedException>(limiter.GetStatistics);
         }
@@ -1209,14 +1315,16 @@ namespace System.Threading.RateLimiting.Test
         public void AutoReplenishIgnoresTimerJitter()
         {
             var replenishmentPeriod = TimeSpan.FromMinutes(10);
-            using var limiter = new FixedWindowRateLimiter(new FixedWindowRateLimiterOptions
-            {
-                PermitLimit = 10,
-                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-                QueueLimit = 1,
-                Window = replenishmentPeriod,
-                AutoReplenishment = true,
-            });
+            using var limiter = new FixedWindowRateLimiter(
+                new FixedWindowRateLimiterOptions
+                {
+                    PermitLimit = 10,
+                    QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                    QueueLimit = 1,
+                    Window = replenishmentPeriod,
+                    AutoReplenishment = true,
+                }
+            );
 
             var lease = limiter.AttemptAcquire(permitCount: 3);
             Assert.True(lease.IsAcquired);
@@ -1229,14 +1337,28 @@ namespace System.Threading.RateLimiting.Test
             Assert.Equal(10, limiter.GetStatistics().CurrentAvailablePermits);
         }
 
-        private static readonly double TickFrequency = (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
+        private static readonly double TickFrequency =
+            (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
 
-        static internal void Replenish(FixedWindowRateLimiter limiter, long addMilliseconds)
+        internal static void Replenish(FixedWindowRateLimiter limiter, long addMilliseconds)
         {
-            var replenishInternalMethod = typeof(FixedWindowRateLimiter).GetMethod("ReplenishInternal", Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance)!;
-            var internalTick = typeof(FixedWindowRateLimiter).GetField("_lastReplenishmentTick", Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance)!;
+            var replenishInternalMethod = typeof(FixedWindowRateLimiter).GetMethod(
+                "ReplenishInternal",
+                Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance
+            )!;
+            var internalTick = typeof(FixedWindowRateLimiter).GetField(
+                "_lastReplenishmentTick",
+                Reflection.BindingFlags.NonPublic | Reflection.BindingFlags.Instance
+            )!;
             var currentTick = (long)internalTick.GetValue(limiter);
-            replenishInternalMethod.Invoke(limiter, new object[] { currentTick + addMilliseconds * (long)(TimeSpan.TicksPerMillisecond / TickFrequency) });
+            replenishInternalMethod.Invoke(
+                limiter,
+                new object[]
+                {
+                    currentTick
+                        + addMilliseconds * (long)(TimeSpan.TicksPerMillisecond / TickFrequency),
+                }
+            );
         }
     }
 }

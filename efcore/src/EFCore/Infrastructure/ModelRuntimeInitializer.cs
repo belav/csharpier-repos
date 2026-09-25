@@ -53,7 +53,8 @@ public class ModelRuntimeInitializer : IModelRuntimeInitializer
     public virtual IModel Initialize(
         IModel model,
         bool designTime = true,
-        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null)
+        IDiagnosticsLogger<DbLoggerCategory.Model.Validation>? validationLogger = null
+    )
     {
         if (model is Model { IsReadOnly: false } mutableModel)
         {
@@ -77,8 +78,7 @@ public class ModelRuntimeInitializer : IModelRuntimeInitializer
 
                     InitializeModel(model, designTime, prevalidation: true);
 
-                    if (validationLogger != null
-                        && model is IConventionModel)
+                    if (validationLogger != null && model is IConventionModel)
                     {
                         Dependencies.ModelValidator.Validate(model, validationLogger);
                     }
@@ -105,7 +105,8 @@ public class ModelRuntimeInitializer : IModelRuntimeInitializer
 
                 return model!;
             },
-            model);
+            model
+        );
 
         return model;
     }
@@ -119,7 +120,5 @@ public class ModelRuntimeInitializer : IModelRuntimeInitializer
     ///     <see langword="true" /> indicates that only pre-validation initialization should be performed;
     ///     <see langword="false" /> indicates that only post-validation initialization should be performed.
     /// </param>
-    protected virtual void InitializeModel(IModel model, bool designTime, bool prevalidation)
-    {
-    }
+    protected virtual void InitializeModel(IModel model, bool designTime, bool prevalidation) { }
 }

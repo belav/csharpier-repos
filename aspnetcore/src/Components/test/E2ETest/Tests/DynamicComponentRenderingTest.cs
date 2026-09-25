@@ -69,21 +69,18 @@ public class DynamicComponentRenderingTest
         var dynamicChild = app.FindElement(By.Id("dynamic-child"));
 
         // Regular parameters work
-        Browser.Equal(
-            "Hello 123",
-            () => dynamicChild.FindElement(By.CssSelector(".Param1 li")).Text
+        Browser.Equal("Hello 123", () =>
+            dynamicChild.FindElement(By.CssSelector(".Param1 li")).Text
         );
 
         // Derived parameters work
-        Browser.Equal(
-            "Goodbye Derived",
-            () => dynamicChild.FindElement(By.CssSelector(".Param2")).Text
+        Browser.Equal("Goodbye Derived", () =>
+            dynamicChild.FindElement(By.CssSelector(".Param2")).Text
         );
 
         // Catch-all parameters work
-        Browser.Equal(
-            "unmatchedParam This is the unmatched param value",
-            () => dynamicChild.FindElement(By.CssSelector(".Param3 li")).Text
+        Browser.Equal("unmatchedParam This is the unmatched param value", () =>
+            dynamicChild.FindElement(By.CssSelector(".Param3 li")).Text
         );
     }
 
@@ -92,9 +89,8 @@ public class DynamicComponentRenderingTest
     {
         testCasePicker.SelectByText("Component with parameters");
         var dynamicChild = app.FindElement(By.Id("dynamic-child"));
-        Browser.Equal(
-            "Component With Parameters",
-            () => dynamicChild.FindElement(By.TagName("h3")).Text
+        Browser.Equal("Component With Parameters", () =>
+            dynamicChild.FindElement(By.TagName("h3")).Text
         );
 
         testCasePicker.SelectByText("Counter");

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Authentication.ExtendedProtection;
 using System.Diagnostics;
+using System.Security.Authentication.ExtendedProtection;
 
 namespace System.Net
 {
@@ -12,10 +12,12 @@ namespace System.Net
 
         public ServiceNameCollection ServiceNames
         {
-            get {                
-                if (serviceNameCollection == null) {
-                    serviceNameCollection = new ServiceNameCollection(serviceNames);                
-                }                
+            get
+            {
+                if (serviceNameCollection == null)
+                {
+                    serviceNameCollection = new ServiceNameCollection(serviceNames);
+                }
                 return serviceNameCollection;
             }
         }
@@ -29,11 +31,11 @@ namespace System.Net
         private bool AddSingleServiceName(string spn)
         {
             spn = ServiceNameCollection.NormalizeServiceName(spn);
-            if (Contains(spn)) 
+            if (Contains(spn))
             {
                 return false;
             }
-            else 
+            else
             {
                 serviceNames.Add(spn);
                 return true;
@@ -45,32 +47,40 @@ namespace System.Net
             Debug.Assert(!String.IsNullOrEmpty(uriPrefix));
 
             string[] newServiceNames = BuildServiceNames(uriPrefix);
-            
+
             bool addedAny = false;
-            foreach (string spn in newServiceNames) 
+            foreach (string spn in newServiceNames)
             {
-                if (AddSingleServiceName(spn)) 
+                if (AddSingleServiceName(spn))
                 {
                     addedAny = true;
 
-                    if (Logging.On) 
+                    if (Logging.On)
                     {
-                        Logging.PrintInfo(Logging.HttpListener, "ServiceNameStore#" +
-                            ValidationHelper.HashString(this) + "::Add() " 
-                            + SR.GetString(SR.net_log_listener_spn_add, spn, uriPrefix));
+                        Logging.PrintInfo(
+                            Logging.HttpListener,
+                            "ServiceNameStore#"
+                                + ValidationHelper.HashString(this)
+                                + "::Add() "
+                                + SR.GetString(SR.net_log_listener_spn_add, spn, uriPrefix)
+                        );
                     }
                 }
             }
-            
-            if (addedAny) 
+
+            if (addedAny)
             {
                 serviceNameCollection = null;
             }
             else if (Logging.On)
             {
-                Logging.PrintInfo(Logging.HttpListener, "ServiceNameStore#" +
-                    ValidationHelper.HashString(this) + "::Add() " 
-                    + SR.GetString(SR.net_log_listener_spn_not_add, uriPrefix));
+                Logging.PrintInfo(
+                    Logging.HttpListener,
+                    "ServiceNameStore#"
+                        + ValidationHelper.HashString(this)
+                        + "::Add() "
+                        + SR.GetString(SR.net_log_listener_spn_not_add, uriPrefix)
+                );
             }
 
             return addedAny;
@@ -84,21 +94,37 @@ namespace System.Net
             newServiceName = ServiceNameCollection.NormalizeServiceName(newServiceName);
             bool needToRemove = Contains(newServiceName);
 
-            if (needToRemove) {
+            if (needToRemove)
+            {
                 serviceNames.Remove(newServiceName);
                 serviceNameCollection = null; //invalidate (readonly) ServiceNameCollection
             }
 
-            if (Logging.On) {
-                if (needToRemove) {
-                    Logging.PrintInfo(Logging.HttpListener, "ServiceNameStore#" +
-                        ValidationHelper.HashString(this) + "::Remove() " 
-                        + SR.GetString(SR.net_log_listener_spn_remove, newServiceName, uriPrefix));
+            if (Logging.On)
+            {
+                if (needToRemove)
+                {
+                    Logging.PrintInfo(
+                        Logging.HttpListener,
+                        "ServiceNameStore#"
+                            + ValidationHelper.HashString(this)
+                            + "::Remove() "
+                            + SR.GetString(
+                                SR.net_log_listener_spn_remove,
+                                newServiceName,
+                                uriPrefix
+                            )
+                    );
                 }
-                else {
-                    Logging.PrintInfo(Logging.HttpListener, "ServiceNameStore#" +
-                        ValidationHelper.HashString(this) + "::Remove() " 
-                        + SR.GetString(SR.net_log_listener_spn_not_remove, uriPrefix));
+                else
+                {
+                    Logging.PrintInfo(
+                        Logging.HttpListener,
+                        "ServiceNameStore#"
+                            + ValidationHelper.HashString(this)
+                            + "::Remove() "
+                            + SR.GetString(SR.net_log_listener_spn_not_remove, uriPrefix)
+                    );
                 }
             }
 
@@ -108,7 +134,8 @@ namespace System.Net
         // Assumes already normalized
         private bool Contains(string newServiceName)
         {
-            if (newServiceName == null) {
+            if (newServiceName == null)
+            {
                 return false;
             }
 
@@ -134,18 +161,22 @@ namespace System.Net
                 int j = i;
 
                 bool inSquareBrackets = false;
-                while(j < uriPrefix.Length && uriPrefix[j] != '/' && (uriPrefix[j] != ':' || inSquareBrackets)) 
+                while (
+                    j < uriPrefix.Length
+                    && uriPrefix[j] != '/'
+                    && (uriPrefix[j] != ':' || inSquareBrackets)
+                )
                 {
-                    if (uriPrefix[j] == '[') 
+                    if (uriPrefix[j] == '[')
                     {
-                        if (inSquareBrackets) 
+                        if (inSquareBrackets)
                         {
                             j = i;
                             break;
                         }
                         inSquareBrackets = true;
                     }
-                    if (inSquareBrackets && uriPrefix[j] == ']') 
+                    if (inSquareBrackets && uriPrefix[j] == ']')
                     {
                         inSquareBrackets = false;
                     }
@@ -177,9 +208,11 @@ namespace System.Net
             string hostname = ExtractHostname(uriPrefix, true);
 
             IPAddress ipAddress = null;
-            if (String.Compare(hostname, "*", StringComparison.InvariantCultureIgnoreCase) == 0 || 
-                String.Compare(hostname, "+", StringComparison.InvariantCultureIgnoreCase) == 0 ||
-                IPAddress.TryParse(hostname, out ipAddress)) 
+            if (
+                String.Compare(hostname, "*", StringComparison.InvariantCultureIgnoreCase) == 0
+                || String.Compare(hostname, "+", StringComparison.InvariantCultureIgnoreCase) == 0
+                || IPAddress.TryParse(hostname, out ipAddress)
+            )
             {
                 // for a wildcard, register the machine name.  If the caller doesn't have DNS permission
                 // or the query fails for some reason, don't add an SPN.

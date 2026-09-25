@@ -1,54 +1,53 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // IPermission.cs
-// 
+//
 // <OWNER>ShawnFa</OWNER>
 //
 // Defines the interface that all Permission objects must support.
-// 
+//
 
 namespace System.Security
 {
-
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface IPermission : ISecurityEncodable
     {
-        // NOTE: The constants that used to be defined here were moved to 
+        // NOTE: The constants that used to be defined here were moved to
         // PermissionsEnum.cs due to CLS restrictions.
 
         // The integrity of the security system depends on a means to
         // copy objects so that references to sensitive objects are not
         // exposed outside of the runtime. Thus, all permissions must
         // implement Copy.
-        // 
+        //
         // Makes an exact copy of the Permission.
         IPermission Copy();
 
         /*
          * Methods to support the Installation, Registration, others... PolicyEngine
          */
-    
+
         // Policy decisions and runtime mechanisms (for example, Deny)
         // require a means to retrieve shared state between two
         // permissions. If there is no shared state between two
         // instances, then the method should return null.
-        // 
+        //
         // Could think of the method as GetCommonState,
         // but leave it as Intersect to avoid gratuitous name changes.
-        // 
+        //
         // Returns a new permission with the permission-defined intersection
         // of the two permissions. The intersection is generally defined as
         // privilege parameters that are included by both 'this' and 'target'.
         // Returns null if 'target' is null or is of wrong type.
-        // 
+        //
         IPermission Intersect(IPermission target);
 
         // The runtime policy manager also requires a means of combining the
         // state contained within two permissions of the same type in a logical OR
-        // construct.  (The Union of two permission of different type is not defined, 
+        // construct.  (The Union of two permission of different type is not defined,
         // except when one of the two is a CompoundPermission of internal type equal
         // to the type of the other permission.)
         //
@@ -65,10 +64,10 @@ namespace System.Security
         // does not, then x.IsSubsetOf(y) should return false; the fact
         // that x is satisfied by the current security context does not
         // also imply that the demand for y will also be satisfied.
-        // 
+        //
         // Returns true if 'this' Permission allows no more access than the
         // argument.
-        // 
+        //
         bool IsSubsetOf(IPermission target);
 
         // The Demand method is the fundamental part of the IPermission
@@ -82,6 +81,5 @@ namespace System.Security
         // so the caller won't be inlined (which would mess up stack crawling).
         [DynamicSecurityMethodAttribute()]
         void Demand();
-
     }
 }

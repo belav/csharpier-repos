@@ -14,7 +14,11 @@ namespace System.Text.Json.Serialization
     {
         public override bool HandleNull => false;
 
-        public sealed override T? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public sealed override T? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (options is null)
             {
@@ -31,7 +35,11 @@ namespace System.Text.Json.Serialization
             return value;
         }
 
-        public sealed override void Write(Utf8JsonWriter writer, T value, JsonSerializerOptions options)
+        public sealed override void Write(
+            Utf8JsonWriter writer,
+            T value,
+            JsonSerializerOptions options
+        )
         {
             if (options is null)
             {

@@ -23,14 +23,17 @@ namespace System.Collections.Concurrent
 
         /// <summary>The array of items in this queue.  Each slot contains the item in that slot and its "sequence number".</summary>
         internal readonly Slot[] _slots; // SOS's ThreadPool command depends on this name
+
         /// <summary>Mask for quickly accessing a position within the queue's array.</summary>
         internal readonly int _slotsMask;
+
         /// <summary>The head and tail positions, with padding to help avoid false sharing contention.</summary>
         /// <remarks>Dequeuing happens from the head, enqueuing happens at the tail.</remarks>
         internal PaddedHeadAndTail _headAndTail; // mutable struct: do not make this readonly
 
         /// <summary>Indicates whether the segment has been marked such that dequeues don't overwrite the removed data.</summary>
         internal bool _preservedForObservation;
+
         /// <summary>Indicates whether the segment has been marked such that no additional items may be enqueued.</summary>
         internal bool _frozenForEnqueues;
 #pragma warning disable 0649 // some builds don't assign to this field
@@ -46,7 +49,10 @@ namespace System.Collections.Concurrent
         {
             // Validate the length
             Debug.Assert(boundedLength >= 2, $"Must be >= 2, got {boundedLength}");
-            Debug.Assert(BitOperations.IsPow2(boundedLength), $"Must be a power of 2, got {boundedLength}");
+            Debug.Assert(
+                BitOperations.IsPow2(boundedLength),
+                $"Must be a power of 2, got {boundedLength}"
+            );
 
             // Initialize the slots and the mask.  The mask is used as a way of quickly doing "% _slots.Length",
             // instead letting us do "& _slotsMask".
@@ -132,7 +138,13 @@ namespace System.Collections.Concurrent
                     // but before the Volatile.Write, enqueuers trying to enqueue into this slot would
                     // spin indefinitely.  If this implementation is ever used on such a platform, this
                     // if block should be wrapped in a finally / prepared region.
-                    if (Interlocked.CompareExchange(ref _headAndTail.Head, currentHead + 1, currentHead) == currentHead)
+                    if (
+                        Interlocked.CompareExchange(
+                            ref _headAndTail.Head,
+                            currentHead + 1,
+                            currentHead
+                        ) == currentHead
+                    )
                     {
                         // Successfully reserved the slot.  Note that after the above CompareExchange, other threads
                         // trying to dequeue from this slot will end up spinning until we do the subsequent Write.
@@ -146,7 +158,10 @@ namespace System.Collections.Concurrent
                             {
                                 slots[slotsIndex].Item = default;
                             }
-                            Volatile.Write(ref slots[slotsIndex].SequenceNumber, currentHead + slots.Length);
+                            Volatile.Write(
+                                ref slots[slotsIndex].SequenceNumber,
+                                currentHead + slots.Length
+                            );
                         }
                         return true;
                     }
@@ -165,7 +180,10 @@ namespace System.Collections.Concurrent
                     // empty or if we're just waiting for items in flight or after this one to become available.
                     bool frozen = _frozenForEnqueues;
                     int currentTail = Volatile.Read(ref _headAndTail.Tail);
-                    if (currentTail - currentHead <= 0 || (frozen && (currentTail - FreezeOffset - currentHead <= 0)))
+                    if (
+                        currentTail - currentHead <= 0
+                        || (frozen && (currentTail - FreezeOffset - currentHead <= 0))
+                    )
                     {
                         item = default;
                         return false;
@@ -234,7 +252,10 @@ namespace System.Collections.Concurrent
                     // empty or if we're just waiting for items in flight or after this one to become available.
                     bool frozen = _frozenForEnqueues;
                     int currentTail = Volatile.Read(ref _headAndTail.Tail);
-                    if (currentTail - currentHead <= 0 || (frozen && (currentTail - FreezeOffset - currentHead <= 0)))
+                    if (
+                        currentTail - currentHead <= 0
+                        || (frozen && (currentTail - FreezeOffset - currentHead <= 0))
+                    )
                     {
                         result = default;
                         return false;
@@ -290,7 +311,13 @@ namespace System.Collections.Concurrent
                     // but before the Volatile.Write, other threads will spin trying to access this slot.
                     // If this implementation is ever used on such a platform, this if block should be
                     // wrapped in a finally / prepared region.
-                    if (Interlocked.CompareExchange(ref _headAndTail.Tail, currentTail + 1, currentTail) == currentTail)
+                    if (
+                        Interlocked.CompareExchange(
+                            ref _headAndTail.Tail,
+                            currentTail + 1,
+                            currentTail
+                        ) == currentTail
+                    )
                     {
                         // Successfully reserved the slot.  Note that after the above CompareExchange, other threads
                         // trying to return will end up spinning until we do the subsequent Write.
@@ -329,6 +356,7 @@ namespace System.Collections.Concurrent
         {
             /// <summary>The item.</summary>
             public T? Item; // SOS's ThreadPool command depends on this being at the beginning of the struct when T is a reference type
+
             /// <summary>The sequence number for this slot, used to synchronize between enqueuers and dequeuers.</summary>
             public int SequenceNumber;
         }
@@ -339,7 +367,10 @@ namespace System.Collections.Concurrent
     [StructLayout(LayoutKind.Explicit, Size = 3 * Internal.PaddingHelpers.CACHE_LINE_SIZE)] // padding before/between/after fields
     internal struct PaddedHeadAndTail
     {
-        [FieldOffset(1 * Internal.PaddingHelpers.CACHE_LINE_SIZE)] public int Head;
-        [FieldOffset(2 * Internal.PaddingHelpers.CACHE_LINE_SIZE)] public int Tail;
+        [FieldOffset(1 * Internal.PaddingHelpers.CACHE_LINE_SIZE)]
+        public int Head;
+
+        [FieldOffset(2 * Internal.PaddingHelpers.CACHE_LINE_SIZE)]
+        public int Tail;
     }
 }

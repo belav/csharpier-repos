@@ -49,14 +49,22 @@ public class Program
                     // We're going to store a scalar at an offset of 2 from the aligned location.
                     // As it happens, we know that the struct has been initialized to all zeros,
                     // and the vector passed in was all ones, so now we have a one at offset 2.
-                    Sse2.StoreScalar(p + alignmentOffset + 2, Sse2.Subtract(v, Sse2.LoadAlignedVector128(p + offset + alignmentOffset + 4)));
+                    Sse2.StoreScalar(
+                        p + alignmentOffset + 2,
+                        Sse2.Subtract(
+                            v,
+                            Sse2.LoadAlignedVector128(p + offset + alignmentOffset + 4)
+                        )
+                    );
 
                     // Now do a load from the aligned location.
                     // That should give us {0, 0, 1, 0}.
                     Vector128<float> v2;
                     if (Sse41.IsSupported)
                     {
-                        v2 = Sse41.LoadAlignedVector128NonTemporal((byte*)(p + alignmentOffset)).AsSingle();
+                        v2 = Sse41
+                            .LoadAlignedVector128NonTemporal((byte*)(p + alignmentOffset))
+                            .AsSingle();
                     }
                     else
                     {
@@ -70,7 +78,10 @@ public class Program
 
                     // This is the unaligned case. The value we're loading to subtract is one element earlier than what we just stored.
                     // So we're doing { 1, 1, 1, 1 } - { 0, 1, 0, 0 } = { 1, 0, 1, 1 }
-                    Sse2.Store(p + alignmentOffset + 1, Sse2.Subtract(v, Sse2.LoadVector128(p + offset + alignmentOffset + 1)));
+                    Sse2.Store(
+                        p + alignmentOffset + 1,
+                        Sse2.Subtract(v, Sse2.LoadVector128(p + offset + alignmentOffset + 1))
+                    );
                     // Now do an unaligned load from that location.
                     v2 = Sse2.LoadVector128(p + alignmentOffset + 1);
                     if (!v2.Equals(Vector128.Create(1.0F, 0.0F, 1.0F, 1.0F)))
@@ -78,7 +89,6 @@ public class Program
                         Console.WriteLine("Unaligned case FAILED: v2 = " + v2);
                         returnVal = -1;
                     }
-
                 }
                 catch (Exception e)
                 {

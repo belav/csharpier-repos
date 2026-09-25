@@ -41,8 +41,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
             _uiShell = serviceProvider.GetService(typeof(SVsUIShell)) as IVsUIShell;
         }
 
-        IWorkspaceService IWorkspaceServiceFactory.CreateService(HostWorkspaceServices workspaceServices)
-            => this;
+        IWorkspaceService IWorkspaceServiceFactory.CreateService(
+            HostWorkspaceServices workspaceServices
+        ) => this;
 
         private static Image GetSeverityIconForDiagnostic(DiagnosticData diagnostic)
         {
@@ -65,16 +66,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 
             if (moniker.HasValue)
             {
-                return new CrispImage
-                {
-                    Moniker = moniker.Value
-                };
+                return new CrispImage { Moniker = moniker.Value };
             }
 
             return null;
         }
 
-        object IPreviewPaneService.GetPreviewPane(DiagnosticData data, IReadOnlyList<object> previewContent)
+        object IPreviewPaneService.GetPreviewPane(
+            DiagnosticData data,
+            IReadOnlyList<object> previewContent
+        )
         {
             var title = data?.Message;
 
@@ -88,8 +89,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                 }
 
                 return new PreviewPane(
-                    severityIcon: null, id: null, title: null, description: null, helpLink: null, helpLinkToolTipText: null,
-                    previewContent: previewContent, logIdVerbatimInTelemetry: false, uiShell: _uiShell);
+                    severityIcon: null,
+                    id: null,
+                    title: null,
+                    description: null,
+                    helpLink: null,
+                    helpLinkToolTipText: null,
+                    previewContent: previewContent,
+                    logIdVerbatimInTelemetry: false,
+                    uiShell: _uiShell
+                );
             }
 
             Guid optionPageGuid = default;
@@ -103,14 +112,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
 
             return new PreviewPane(
                 severityIcon: GetSeverityIconForDiagnostic(data),
-                id: data.Id, title: title,
+                id: data.Id,
+                title: title,
                 description: data.Description.ToString(CultureInfo.CurrentUICulture),
                 helpLink: helpLinkUri,
-                helpLinkToolTipText: (helpLinkUri != null) ? string.Format(EditorFeaturesResources.Get_help_for_0, data.Id) : null,
+                helpLinkToolTipText: (helpLinkUri != null)
+                    ? string.Format(EditorFeaturesResources.Get_help_for_0, data.Id)
+                    : null,
                 previewContent: previewContent,
-                logIdVerbatimInTelemetry: data.CustomTags.Contains(WellKnownDiagnosticTags.Telemetry),
+                logIdVerbatimInTelemetry: data.CustomTags.Contains(
+                    WellKnownDiagnosticTags.Telemetry
+                ),
                 uiShell: _uiShell,
-                optionPageGuid: optionPageGuid);
+                optionPageGuid: optionPageGuid
+            );
         }
 
         private static Guid GetOptionPageGuidForOptionName(string optionName, string optionLanguage)
@@ -126,7 +141,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.PreviewPane
                     return Guid.Parse(Guids.VisualBasicOptionPageNamingStyleIdString);
                 }
             }
-            else if (optionName == nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration))
+            else if (
+                optionName
+                == nameof(CodeStyleOptions2.PreferIntrinsicPredefinedTypeKeywordInDeclaration)
+            )
             {
                 if (optionLanguage == LanguageNames.CSharp)
                 {

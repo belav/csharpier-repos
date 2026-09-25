@@ -26,19 +26,22 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="saml11SecurityTokenHandler">The Saml11SecurityTokenHandler to wrap.</param>
         /// <param name="exceptionMapper">Converts token validation exceptions to SOAP faults.</param>
-        public WrappedSaml11SecurityTokenAuthenticator( 
-            SamlSecurityTokenHandler saml11SecurityTokenHandler, 
-            ExceptionMapper exceptionMapper )
-            : base( new List<SecurityTokenAuthenticator>() )
+        public WrappedSaml11SecurityTokenAuthenticator(
+            SamlSecurityTokenHandler saml11SecurityTokenHandler,
+            ExceptionMapper exceptionMapper
+        )
+            : base(new List<SecurityTokenAuthenticator>())
         {
-            if ( saml11SecurityTokenHandler == null )
+            if (saml11SecurityTokenHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "wrappedSaml11SecurityTokenHandler" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "wrappedSaml11SecurityTokenHandler"
+                );
             }
 
-            if ( exceptionMapper == null )
+            if (exceptionMapper == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull( "exceptionMapper" );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("exceptionMapper");
             }
 
             _wrappedSaml11SecurityTokenHandler = saml11SecurityTokenHandler;
@@ -51,16 +54,18 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <param name="token">Token to be validated.</param>
         /// <returns>Read-only collection of IAuthorizationPolicy</returns>
-        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore( SecurityToken token )
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
         {
             IEnumerable<ClaimsIdentity> identities = null;
             try
             {
-                identities = _wrappedSaml11SecurityTokenHandler.ValidateToken( token );
+                identities = _wrappedSaml11SecurityTokenHandler.ValidateToken(token);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
-                if ( !_exceptionMapper.HandleSecurityTokenProcessingException( ex ) )
+                if (!_exceptionMapper.HandleSecurityTokenProcessingException(ex))
                 {
                     throw;
                 }

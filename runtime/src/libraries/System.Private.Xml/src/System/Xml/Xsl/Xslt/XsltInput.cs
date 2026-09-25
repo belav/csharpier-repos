@@ -48,7 +48,8 @@ namespace System.Xml.Xsl.Xslt
             _atoms = atoms;
             _reader = reader;
             _reatomize = reader.NameTable != atoms.NameTable;
-            _readerLineInfo = (xmlLineInfo != null && xmlLineInfo.HasLineInfo()) ? xmlLineInfo : null;
+            _readerLineInfo =
+                (xmlLineInfo != null && xmlLineInfo.HasLineInfo()) ? xmlLineInfo : null;
             _topLevelReader = reader.ReadState == ReadState.Initial;
             _scopeManager = new CompilerScopeManager<VarPar>(atoms);
             _compiler = compiler;
@@ -56,25 +57,66 @@ namespace System.Xml.Xsl.Xslt
         }
 
         // Cached properties
-        public XmlNodeType NodeType { get { return _nodeType == XmlNodeType.Element && 0 < _currentRecord ? XmlNodeType.Attribute : _nodeType; } }
-        public string LocalName { get { return _records[_currentRecord].localName; } }
-        public string NamespaceUri { get { return _records[_currentRecord].nsUri; } }
-        public string Prefix { get { return _records[_currentRecord].prefix; } }
-        public string Value { get { return _records[_currentRecord].value; } }
-        public string? BaseUri { get { return _records[_currentRecord].baseUri; } }
-        public string QualifiedName { get { return _records[_currentRecord].QualifiedName; } }
-        public bool IsEmptyElement { get { return _isEmptyElement; } }
+        public XmlNodeType NodeType
+        {
+            get
+            {
+                return _nodeType == XmlNodeType.Element && 0 < _currentRecord
+                    ? XmlNodeType.Attribute
+                    : _nodeType;
+            }
+        }
+        public string LocalName
+        {
+            get { return _records[_currentRecord].localName; }
+        }
+        public string NamespaceUri
+        {
+            get { return _records[_currentRecord].nsUri; }
+        }
+        public string Prefix
+        {
+            get { return _records[_currentRecord].prefix; }
+        }
+        public string Value
+        {
+            get { return _records[_currentRecord].value; }
+        }
+        public string? BaseUri
+        {
+            get { return _records[_currentRecord].baseUri; }
+        }
+        public string QualifiedName
+        {
+            get { return _records[_currentRecord].QualifiedName; }
+        }
+        public bool IsEmptyElement
+        {
+            get { return _isEmptyElement; }
+        }
 
-        public string? Uri { get { return _records[_currentRecord].baseUri; } }
-        public Location Start { get { return _records[_currentRecord].start; } }
-        public Location End { get { return _records[_currentRecord].end; } }
+        public string? Uri
+        {
+            get { return _records[_currentRecord].baseUri; }
+        }
+        public Location Start
+        {
+            get { return _records[_currentRecord].start; }
+        }
+        public Location End
+        {
+            get { return _records[_currentRecord].end; }
+        }
 
         private static void EnsureExpandEntities(XmlReader reader)
         {
             XmlTextReader? tr = reader as XmlTextReader;
             if (tr != null && tr.EntityHandling != EntityHandling.ExpandEntities)
             {
-                Debug.Assert(tr.Settings == null, "XmlReader created with XmlReader.Create should always expand entities.");
+                Debug.Assert(
+                    tr.Settings == null,
+                    "XmlReader created with XmlReader.Create should always expand entities."
+                );
                 tr.EntityHandling = EntityHandling.ExpandEntities;
             }
         }
@@ -115,11 +157,14 @@ namespace System.Xml.Xsl.Xslt
                 IXmlNamespaceResolver? nsResolver = _reader as IXmlNamespaceResolver;
                 if (nsResolver != null)
                 {
-                    namespacesInScope = nsResolver.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+                    namespacesInScope = nsResolver.GetNamespacesInScope(
+                        XmlNamespaceScope.ExcludeXml
+                    );
                 }
             }
 
-            while (MoveToNextSibling() && _nodeType == XmlNodeType.Whitespace) ;
+            while (MoveToNextSibling() && _nodeType == XmlNodeType.Whitespace)
+                ;
 
             // An Element node was reached. Potentially this is xsl:stylesheet instruction.
             if (_nodeType == XmlNodeType.Element)
@@ -135,8 +180,13 @@ namespace System.Xml.Xsl.Xslt
                         // namespace definition for this prefix and the old definition must not be added to the scope.
                         if (_scopeManager.LookupNamespace(prefixNamespacePair.Key) == null)
                         {
-                            string nsAtomizedValue = _atoms.NameTable.Add(prefixNamespacePair.Value);
-                            _scopeManager.AddNsDeclaration(prefixNamespacePair.Key, nsAtomizedValue);
+                            string nsAtomizedValue = _atoms.NameTable.Add(
+                                prefixNamespacePair.Value
+                            );
+                            _scopeManager.AddNsDeclaration(
+                                prefixNamespacePair.Key,
+                                nsAtomizedValue
+                            );
                             _ctxInfo!.AddNamespace(prefixNamespacePair.Key, nsAtomizedValue);
                         }
                     }
@@ -180,7 +230,10 @@ namespace System.Xml.Xsl.Xslt
 
             if (_readerLineInfo != null)
             {
-                rec.start = new Location(_readerLineInfo.LineNumber, _readerLineInfo.LinePosition - PositionAdjustment(_reader.NodeType));
+                rec.start = new Location(
+                    _readerLineInfo.LineNumber,
+                    _readerLineInfo.LinePosition - PositionAdjustment(_reader.NodeType)
+                );
             }
         }
 
@@ -188,7 +241,10 @@ namespace System.Xml.Xsl.Xslt
         {
             if (_readerLineInfo != null)
             {
-                rec.end = new Location(_readerLineInfo.LineNumber, _readerLineInfo.LinePosition - PositionAdjustment(_reader.NodeType));
+                rec.end = new Location(
+                    _readerLineInfo.LineNumber,
+                    _readerLineInfo.LinePosition - PositionAdjustment(_reader.NodeType)
+                );
                 if (_reader.BaseURI != rec.baseUri || rec.end.LessOrEqual(rec.start))
                 {
                     rec.end = new Location(rec.start.Line, int.MaxValue);
@@ -199,8 +255,10 @@ namespace System.Xml.Xsl.Xslt
         private void FillupTextRecord(ref Record rec)
         {
             Debug.Assert(
-                _reader.NodeType == XmlNodeType.Whitespace || _reader.NodeType == XmlNodeType.SignificantWhitespace ||
-                _reader.NodeType == XmlNodeType.Text || _reader.NodeType == XmlNodeType.CDATA
+                _reader.NodeType == XmlNodeType.Whitespace
+                    || _reader.NodeType == XmlNodeType.SignificantWhitespace
+                    || _reader.NodeType == XmlNodeType.Text
+                    || _reader.NodeType == XmlNodeType.CDATA
             );
             rec.localName = string.Empty;
             rec.nsUri = string.Empty;
@@ -243,7 +301,13 @@ namespace System.Xml.Xsl.Xslt
         {
             Debug.Assert(_reader.NodeType == XmlNodeType.EntityReference);
             string local = _reader.LocalName;
-            Debug.Assert(local[0] == '#' || local == "lt" || local == "gt" || local == "quot" || local == "apos");
+            Debug.Assert(
+                local[0] == '#'
+                    || local == "lt"
+                    || local == "gt"
+                    || local == "quot"
+                    || local == "apos"
+            );
             rec.localName = string.Empty;
             rec.nsUri = string.Empty;
             rec.prefix = string.Empty;
@@ -251,17 +315,27 @@ namespace System.Xml.Xsl.Xslt
 
             if (_readerLineInfo != null)
             {
-                rec.start = new Location(_readerLineInfo.LineNumber, _readerLineInfo.LinePosition - 1);
+                rec.start = new Location(
+                    _readerLineInfo.LineNumber,
+                    _readerLineInfo.LinePosition - 1
+                );
             }
             _reader.ResolveEntity();
             _reader.Read();
-            Debug.Assert(_reader.NodeType == XmlNodeType.Text || _reader.NodeType == XmlNodeType.Whitespace || _reader.NodeType == XmlNodeType.SignificantWhitespace);
+            Debug.Assert(
+                _reader.NodeType == XmlNodeType.Text
+                    || _reader.NodeType == XmlNodeType.Whitespace
+                    || _reader.NodeType == XmlNodeType.SignificantWhitespace
+            );
             rec.value = _reader.Value;
             _reader.Read();
             Debug.Assert(_reader.NodeType == XmlNodeType.EndEntity);
             if (_readerLineInfo != null)
             {
-                rec.end = new Location(_readerLineInfo.LineNumber, _readerLineInfo.LinePosition + 1);
+                rec.end = new Location(
+                    _readerLineInfo.LineNumber,
+                    _readerLineInfo.LinePosition + 1
+                );
             }
         }
 
@@ -270,10 +344,13 @@ namespace System.Xml.Xsl.Xslt
         // returns false if attribute is actualy namespace
         private bool ReadAttribute(ref Record rec)
         {
-            Debug.Assert(_reader.NodeType == XmlNodeType.Attribute, "reader.NodeType == XmlNodeType.Attribute");
+            Debug.Assert(
+                _reader.NodeType == XmlNodeType.Attribute,
+                "reader.NodeType == XmlNodeType.Attribute"
+            );
             FillupRecord(ref rec);
             if (Ref.Equal(rec.prefix, _atoms.Xmlns))
-            {                                      // xmlns:foo="NS_FOO"
+            { // xmlns:foo="NS_FOO"
                 string atomizedValue = _atoms.NameTable.Add(_reader.Value);
                 if (!Ref.Equal(rec.localName, _atoms.Xml))
                 {
@@ -283,7 +360,7 @@ namespace System.Xml.Xsl.Xslt
                 return false;
             }
             else if (rec.prefix.Length == 0 && Ref.Equal(rec.localName, _atoms.Xmlns))
-            {  // xmlns="NS_FOO"
+            { // xmlns="NS_FOO"
                 string atomizedValue = _atoms.NameTable.Add(_reader.Value);
                 _scopeManager.AddNsDeclaration(string.Empty, atomizedValue);
                 _ctxInfo!.AddNamespace(string.Empty, atomizedValue);
@@ -301,10 +378,15 @@ namespace System.Xml.Xsl.Xslt
                 if (_readerLineInfo != null)
                 {
                     int correction = (_reader.NodeType == XmlNodeType.EntityReference) ? -2 : -1;
-                    rec.valueStart = new Location(_readerLineInfo.LineNumber, _readerLineInfo.LinePosition + correction);
+                    rec.valueStart = new Location(
+                        _readerLineInfo.LineNumber,
+                        _readerLineInfo.LinePosition + correction
+                    );
                     if (_reader.BaseURI != rec.baseUri || rec.valueStart.LessOrEqual(rec.start))
                     {
-                        int nameLength = ((rec.prefix.Length != 0) ? rec.prefix.Length + 1 : 0) + rec.localName.Length;
+                        int nameLength =
+                            ((rec.prefix.Length != 0) ? rec.prefix.Length + 1 : 0)
+                            + rec.localName.Length;
                         rec.end = new Location(rec.start.Line, rec.start.Pos + nameLength + 1);
                     }
                 }
@@ -320,7 +402,10 @@ namespace System.Xml.Xsl.Xslt
                         case XmlNodeType.EndEntity:
                             break;
                         default:
-                            Debug.Assert(_reader.NodeType == XmlNodeType.Text, "Unexpected node type inside attribute value");
+                            Debug.Assert(
+                                _reader.NodeType == XmlNodeType.Text,
+                                "Unexpected node type inside attribute value"
+                            );
                             lastText = _reader.Value;
                             _strConcat.Concat(lastText);
                             break;
@@ -330,8 +415,12 @@ namespace System.Xml.Xsl.Xslt
                 if (_readerLineInfo != null)
                 {
                     Debug.Assert(_reader.NodeType != XmlNodeType.EntityReference);
-                    int correction = ((_reader.NodeType == XmlNodeType.EndEntity) ? 1 : lastText.Length) + 1;
-                    rec.end = new Location(_readerLineInfo.LineNumber, _readerLineInfo.LinePosition + correction);
+                    int correction =
+                        ((_reader.NodeType == XmlNodeType.EndEntity) ? 1 : lastText.Length) + 1;
+                    rec.end = new Location(
+                        _readerLineInfo.LineNumber,
+                        _readerLineInfo.LinePosition + correction
+                    );
                     if (_reader.BaseURI != rec.baseUri || rec.end.LessOrEqual(rec.valueStart))
                     {
                         rec.end = new Location(rec.start.Line, int.MaxValue);
@@ -345,7 +434,10 @@ namespace System.Xml.Xsl.Xslt
 
         public bool MoveToFirstChild()
         {
-            Debug.Assert(_nodeType == XmlNodeType.Element, "To call MoveToFirstChild() XsltInut should be positioned on an Element.");
+            Debug.Assert(
+                _nodeType == XmlNodeType.Element,
+                "To call MoveToFirstChild() XsltInut should be positioned on an Element."
+            );
             if (IsEmptyElement)
             {
                 return false;
@@ -355,7 +447,10 @@ namespace System.Xml.Xsl.Xslt
 
         public bool MoveToNextSibling()
         {
-            Debug.Assert(_nodeType != XmlNodeType.Element || IsEmptyElement, "On non-empty elements we should call MoveToFirstChild()");
+            Debug.Assert(
+                _nodeType != XmlNodeType.Element || IsEmptyElement,
+                "On non-empty elements we should call MoveToFirstChild()"
+            );
             if (_nodeType == XmlNodeType.Element || _nodeType == XmlNodeType.EndElement)
             {
                 _scopeManager.ExitScope();
@@ -400,15 +495,24 @@ namespace System.Xml.Xsl.Xslt
                         break;
                     case XmlNodeType.EntityReference:
                         string local = _reader.LocalName;
-                        if (local.Length > 0 && (
-                            local[0] == '#' ||
-                            local == "lt" || local == "gt" || local == "quot" || local == "apos"
-                        ))
+                        if (
+                            local.Length > 0
+                            && (
+                                local[0] == '#'
+                                || local == "lt"
+                                || local == "gt"
+                                || local == "quot"
+                                || local == "apos"
+                            )
+                        )
                         {
                             // Special treatment for character and built-in entities
                             ExtendRecordBuffer(curTextNode);
                             FillupCharacterEntityRecord(ref _records[curTextNode]);
-                            if (textIsWhite && !XmlCharType.IsOnlyWhitespace(_records[curTextNode].value))
+                            if (
+                                textIsWhite
+                                && !XmlCharType.IsOnlyWhitespace(_records[curTextNode].value)
+                            )
                             {
                                 textIsWhite = false;
                             }
@@ -425,9 +529,10 @@ namespace System.Xml.Xsl.Xslt
                         break;
                     default:
                         _nodeType = (
-                            !textIsWhite ? XmlNodeType.Text :
-                            textPreserveWS ? XmlNodeType.SignificantWhitespace :
-                            /*default:    */ XmlNodeType.Whitespace
+                            !textIsWhite ? XmlNodeType.Text
+                            : textPreserveWS ? XmlNodeType.SignificantWhitespace
+                            :
+                            /*default:    */XmlNodeType.Whitespace
                         );
                         return curTextNode;
                 }
@@ -438,11 +543,15 @@ namespace System.Xml.Xsl.Xslt
         {
             if (_currentRecord < _lastTextNode)
             {
-                Debug.Assert(_nodeType == XmlNodeType.Text || _nodeType == XmlNodeType.Whitespace || _nodeType == XmlNodeType.SignificantWhitespace);
+                Debug.Assert(
+                    _nodeType == XmlNodeType.Text
+                        || _nodeType == XmlNodeType.Whitespace
+                        || _nodeType == XmlNodeType.SignificantWhitespace
+                );
                 _currentRecord++;
                 if (_currentRecord == _lastTextNode)
                 {
-                    _lastTextNode = 0;  // we are done with text nodes. Reset this counter
+                    _lastTextNode = 0; // we are done with text nodes. Reset this counter
                 }
                 return true;
             }
@@ -515,13 +624,19 @@ namespace System.Xml.Xsl.Xslt
 
         public void MoveToElement()
         {
-            Debug.Assert(_nodeType == XmlNodeType.Element, "For MoveToElement() we should be positioned on Element or Attribute");
+            Debug.Assert(
+                _nodeType == XmlNodeType.Element,
+                "For MoveToElement() we should be positioned on Element or Attribute"
+            );
             _currentRecord = 0;
         }
 
         private bool MoveToAttributeBase(int attNum)
         {
-            Debug.Assert(_nodeType == XmlNodeType.Element, "For MoveToLiteralAttribute() we should be positioned on Element or Attribute");
+            Debug.Assert(
+                _nodeType == XmlNodeType.Element,
+                "For MoveToLiteralAttribute() we should be positioned on Element or Attribute"
+            );
             if (0 < attNum && attNum <= _numAttributes)
             {
                 _currentRecord = attNum;
@@ -536,7 +651,10 @@ namespace System.Xml.Xsl.Xslt
 
         public bool MoveToLiteralAttribute(int attNum)
         {
-            Debug.Assert(_nodeType == XmlNodeType.Element, "For MoveToLiteralAttribute() we should be positioned on Element or Attribute");
+            Debug.Assert(
+                _nodeType == XmlNodeType.Element,
+                "For MoveToLiteralAttribute() we should be positioned on Element or Attribute"
+            );
             if (0 < attNum && attNum <= _numAttributes)
             {
                 _currentRecord = attNum;
@@ -551,19 +669,28 @@ namespace System.Xml.Xsl.Xslt
 
         public bool MoveToXsltAttribute(int attNum, string attName)
         {
-            Debug.Assert(_attributes != null && _attributes[attNum].name == attName, "Attribute numbering error.");
+            Debug.Assert(
+                _attributes != null && _attributes[attNum].name == attName,
+                "Attribute numbering error."
+            );
             _currentRecord = _xsltAttributeNumber[attNum];
             return _currentRecord != 0;
         }
 
         public bool IsRequiredAttribute(int attNum)
         {
-            return (_attributes![attNum].flags & (_compiler.Version == 2 ? XsltLoader.V2Req : XsltLoader.V1Req)) != 0;
+            return (
+                    _attributes![attNum].flags
+                    & (_compiler.Version == 2 ? XsltLoader.V2Req : XsltLoader.V1Req)
+                ) != 0;
         }
 
         public bool AttributeExists(int attNum, string attName)
         {
-            Debug.Assert(_attributes != null && _attributes[attNum].name == attName, "Attribute numbering error.");
+            Debug.Assert(
+                _attributes != null && _attributes[attNum].name == attName,
+                "Attribute numbering error."
+            );
             return _xsltAttributeNumber[attNum] != 0;
         }
 
@@ -571,11 +698,13 @@ namespace System.Xml.Xsl.Xslt
         {
             private readonly string _prefix;
             private readonly string _localName;
+
             public DelayedQName(ref Record rec)
             {
                 _prefix = rec.prefix;
                 _localName = rec.localName;
             }
+
             public static implicit operator string(DelayedQName qn)
             {
                 return qn._prefix.Length == 0 ? qn._localName : (qn._prefix + ':' + qn._localName);
@@ -586,18 +715,40 @@ namespace System.Xml.Xsl.Xslt
         {
             get
             {
-                Debug.Assert(_nodeType == XmlNodeType.Element || _nodeType == XmlNodeType.EndElement, "Input is positioned on element or attribute");
+                Debug.Assert(
+                    _nodeType == XmlNodeType.Element || _nodeType == XmlNodeType.EndElement,
+                    "Input is positioned on element or attribute"
+                );
                 return new DelayedQName(ref _records[0]);
             }
         }
 
         // -------------------- Keywords testing --------------------
 
-        public bool IsNs(string ns) { return Ref.Equal(ns, NamespaceUri); }
-        public bool IsKeyword(string kwd) { return Ref.Equal(kwd, LocalName); }
-        public bool IsXsltNamespace() { return IsNs(_atoms.UriXsl); }
-        public bool IsNullNamespace() { return IsNs(string.Empty); }
-        public bool IsXsltKeyword(string kwd) { return IsKeyword(kwd) && IsXsltNamespace(); }
+        public bool IsNs(string ns)
+        {
+            return Ref.Equal(ns, NamespaceUri);
+        }
+
+        public bool IsKeyword(string kwd)
+        {
+            return Ref.Equal(kwd, LocalName);
+        }
+
+        public bool IsXsltNamespace()
+        {
+            return IsNs(_atoms.UriXsl);
+        }
+
+        public bool IsNullNamespace()
+        {
+            return IsNs(string.Empty);
+        }
+
+        public bool IsXsltKeyword(string kwd)
+        {
+            return IsKeyword(kwd) && IsXsltNamespace();
+        }
 
         // -------------------- Scope Management --------------------
         // See private class InputScopeManager bellow.
@@ -617,7 +768,10 @@ namespace System.Xml.Xsl.Xslt
 
         public bool IsExtensionNamespace(string uri)
         {
-            Debug.Assert(_nodeType != XmlNodeType.Element || _attributesRead, "Should first read attributes");
+            Debug.Assert(
+                _nodeType != XmlNodeType.Element || _attributesRead,
+                "Should first read attributes"
+            );
             return _scopeManager.IsExNamespace(uri);
         }
 
@@ -625,7 +779,10 @@ namespace System.Xml.Xsl.Xslt
         {
             get
             {
-                Debug.Assert(_nodeType != XmlNodeType.Element || _attributesRead, "Should first read attributes");
+                Debug.Assert(
+                    _nodeType != XmlNodeType.Element || _attributesRead,
+                    "Should first read attributes"
+                );
                 return _scopeManager.ForwardCompatibility;
             }
         }
@@ -634,14 +791,22 @@ namespace System.Xml.Xsl.Xslt
         {
             get
             {
-                Debug.Assert(_nodeType != XmlNodeType.Element || _attributesRead, "Should first read attributes");
+                Debug.Assert(
+                    _nodeType != XmlNodeType.Element || _attributesRead,
+                    "Should first read attributes"
+                );
                 return _scopeManager.BackwardCompatibility;
             }
         }
 
         public XslVersion XslVersion
         {
-            get { return _scopeManager.ForwardCompatibility ? XslVersion.ForwardsCompatible : XslVersion.Current; }
+            get
+            {
+                return _scopeManager.ForwardCompatibility
+                    ? XslVersion.ForwardsCompatible
+                    : XslVersion.Current;
+            }
         }
 
         private void SetVersion(int attVersion)
@@ -651,7 +816,11 @@ namespace System.Xml.Xsl.Xslt
             double version = XPathConvert.StringToDouble(Value);
             if (double.IsNaN(version))
             {
-                ReportError(/*[XT0110]*/SR.Xslt_InvalidAttrValue, _atoms.Version, Value);
+                ReportError( /*[XT0110]*/
+                    SR.Xslt_InvalidAttrValue,
+                    _atoms.Version,
+                    Value
+                );
 #if XSLT2
                 version = 2.0;
 #else
@@ -660,6 +829,7 @@ namespace System.Xml.Xsl.Xslt
             }
             SetVersion(version);
         }
+
         private void SetVersion(double version)
         {
             if (_compiler.Version == 0)
@@ -692,6 +862,7 @@ namespace System.Xml.Xsl.Xslt
         {
             public string name;
             public int flags;
+
             public XsltAttribute(string name, int flags)
             {
                 this.name = name;
@@ -700,6 +871,7 @@ namespace System.Xml.Xsl.Xslt
         }
 
         private XsltAttribute[]? _attributes;
+
         // Mapping of attribute names as they ordered in 'attributes' array
         // to there's numbers in actual stylesheet as they ordered in 'records' array
         private readonly int[] _xsltAttributeNumber = new int[21];
@@ -725,7 +897,8 @@ namespace System.Xml.Xsl.Xslt
             int attUseWhen = 0;
 
             bool isXslOutput = IsXsltNamespace() && IsKeyword(_atoms.Output);
-            bool SS = IsXsltNamespace() && (IsKeyword(_atoms.Stylesheet) || IsKeyword(_atoms.Transform));
+            bool SS =
+                IsXsltNamespace() && (IsKeyword(_atoms.Stylesheet) || IsKeyword(_atoms.Transform));
             bool V2 = _compiler.Version == 2;
 
             for (int i = 0; i < attributes.Length; i++)
@@ -755,7 +928,9 @@ namespace System.Xml.Xsl.Xslt
 #endif
             }
             V2 = _compiler.Version == 2;
-            int OptOrReq = V2 ? XsltLoader.V2Opt | XsltLoader.V2Req : XsltLoader.V1Opt | XsltLoader.V1Req;
+            int OptOrReq = V2
+                ? XsltLoader.V2Opt | XsltLoader.V2Req
+                : XsltLoader.V1Opt | XsltLoader.V1Req;
 
             for (int attNum = 1; MoveToAttributeBase(attNum); attNum++)
             {
@@ -765,7 +940,10 @@ namespace System.Xml.Xsl.Xslt
                     int kwd;
                     for (kwd = 0; kwd < attributes.Length; kwd++)
                     {
-                        if (Ref.Equal(localName, attributes[kwd].name) && (attributes[kwd].flags & OptOrReq) != 0)
+                        if (
+                            Ref.Equal(localName, attributes[kwd].name)
+                            && (attributes[kwd].flags & OptOrReq) != 0
+                        )
                         {
                             _xsltAttributeNumber[kwd] = attNum;
                             break;
@@ -774,24 +952,45 @@ namespace System.Xml.Xsl.Xslt
 
                     if (kwd == attributes.Length)
                     {
-                        if (Ref.Equal(localName, _atoms.ExcludeResultPrefixes) && (SS || V2)) { attExclude = attNum; }
-                        else
-                        if (Ref.Equal(localName, _atoms.ExtensionElementPrefixes) && (SS || V2)) { attExtension = attNum; }
-                        else
-                        if (Ref.Equal(localName, _atoms.XPathDefaultNamespace) && (V2)) { attNamespace = attNum; }
-                        else
-                        if (Ref.Equal(localName, _atoms.DefaultCollation) && (V2)) { attCollation = attNum; }
-                        else
-                        if (Ref.Equal(localName, _atoms.UseWhen) && (V2)) { attUseWhen = attNum; }
+                        if (Ref.Equal(localName, _atoms.ExcludeResultPrefixes) && (SS || V2))
+                        {
+                            attExclude = attNum;
+                        }
+                        else if (
+                            Ref.Equal(localName, _atoms.ExtensionElementPrefixes) && (SS || V2)
+                        )
+                        {
+                            attExtension = attNum;
+                        }
+                        else if (Ref.Equal(localName, _atoms.XPathDefaultNamespace) && (V2))
+                        {
+                            attNamespace = attNum;
+                        }
+                        else if (Ref.Equal(localName, _atoms.DefaultCollation) && (V2))
+                        {
+                            attCollation = attNum;
+                        }
+                        else if (Ref.Equal(localName, _atoms.UseWhen) && (V2))
+                        {
+                            attUseWhen = attNum;
+                        }
                         else
                         {
-                            ReportError(/*[XT0090]*/SR.Xslt_InvalidAttribute, QualifiedName, _records[0].QualifiedName);
+                            ReportError( /*[XT0090]*/
+                                SR.Xslt_InvalidAttribute,
+                                QualifiedName,
+                                _records[0].QualifiedName
+                            );
                         }
                     }
                 }
                 else if (IsXsltNamespace())
                 {
-                    ReportError(/*[XT0090]*/SR.Xslt_InvalidAttribute, QualifiedName, _records[0].QualifiedName);
+                    ReportError( /*[XT0090]*/
+                        SR.Xslt_InvalidAttribute,
+                        QualifiedName,
+                        _records[0].QualifiedName
+                    );
                 }
                 else
                 {
@@ -809,8 +1008,16 @@ namespace System.Xml.Xsl.Xslt
             // <xsl:stylesheet unknown="foo" version="2.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"/>
             _compiler.ExitForwardsCompatible(ForwardCompatibility);
 
-            InsertExNamespaces(attExtension, _ctxInfo!, /*extensions:*/ true);
-            InsertExNamespaces(attExclude, _ctxInfo!, /*extensions:*/ false);
+            InsertExNamespaces(
+                attExtension,
+                _ctxInfo!, /*extensions:*/
+                true
+            );
+            InsertExNamespaces(
+                attExclude,
+                _ctxInfo!, /*extensions:*/
+                false
+            );
             SetXPathDefaultNamespace(attNamespace);
             SetDefaultCollation(attCollation);
             if (attUseWhen != 0)
@@ -826,11 +1033,16 @@ namespace System.Xml.Xsl.Xslt
                 {
                     int flags = attributes[i].flags;
                     if (
-                        _compiler.Version == 2 && (flags & XsltLoader.V2Req) != 0 ||
-                        _compiler.Version == 1 && (flags & XsltLoader.V1Req) != 0 && (!ForwardCompatibility || (flags & XsltLoader.V2Req) != 0)
+                        _compiler.Version == 2 && (flags & XsltLoader.V2Req) != 0
+                        || _compiler.Version == 1
+                            && (flags & XsltLoader.V1Req) != 0
+                            && (!ForwardCompatibility || (flags & XsltLoader.V2Req) != 0)
                     )
                     {
-                        ReportError(/*[XT_001]*/SR.Xslt_MissingAttribute, attributes[i].name);
+                        ReportError( /*[XT_001]*/
+                            SR.Xslt_MissingAttribute,
+                            attributes[i].name
+                        );
                     }
                 }
             }
@@ -855,17 +1067,30 @@ namespace System.Xml.Xsl.Xslt
                 if (IsXsltNamespace())
                 {
                     string localName = LocalName;
-                    if (Ref.Equal(localName, _atoms.Version)) { attVersion = i; }
-                    else
-                    if (Ref.Equal(localName, _atoms.ExtensionElementPrefixes)) { attExtension = i; }
-                    else
-                    if (Ref.Equal(localName, _atoms.ExcludeResultPrefixes)) { attExclude = i; }
-                    else
-                    if (Ref.Equal(localName, _atoms.XPathDefaultNamespace)) { attNamespace = i; }
-                    else
-                    if (Ref.Equal(localName, _atoms.DefaultCollation)) { attCollation = i; }
-                    else
-                    if (Ref.Equal(localName, _atoms.UseWhen)) { attUseWhen = i; }
+                    if (Ref.Equal(localName, _atoms.Version))
+                    {
+                        attVersion = i;
+                    }
+                    else if (Ref.Equal(localName, _atoms.ExtensionElementPrefixes))
+                    {
+                        attExtension = i;
+                    }
+                    else if (Ref.Equal(localName, _atoms.ExcludeResultPrefixes))
+                    {
+                        attExclude = i;
+                    }
+                    else if (Ref.Equal(localName, _atoms.XPathDefaultNamespace))
+                    {
+                        attNamespace = i;
+                    }
+                    else if (Ref.Equal(localName, _atoms.DefaultCollation))
+                    {
+                        attCollation = i;
+                    }
+                    else if (Ref.Equal(localName, _atoms.UseWhen))
+                    {
+                        attUseWhen = i;
+                    }
                 }
             }
 
@@ -881,8 +1106,13 @@ namespace System.Xml.Xsl.Xslt
             {
                 if (asStylesheet)
                 {
-                    ReportError(Ref.Equal(NamespaceUri, _atoms.UriWdXsl) && Ref.Equal(LocalName, _atoms.Stylesheet) ?
-                        /*[XT_025]*/SR.Xslt_WdXslNamespace : /*[XT0150]*/SR.Xslt_WrongStylesheetElement
+                    ReportError(
+                        Ref.Equal(NamespaceUri, _atoms.UriWdXsl)
+                        && Ref.Equal(LocalName, _atoms.Stylesheet)
+                            ?
+                            /*[XT_025]*/SR.Xslt_WdXslNamespace
+                            : /*[XT0150]*/
+                            SR.Xslt_WrongStylesheetElement
                     );
 #if XSLT2
                     SetVersion(2.0);
@@ -893,7 +1123,11 @@ namespace System.Xml.Xsl.Xslt
             }
 
             // Parse xsl:extension-element-prefixes attribute (now that forwards-compatible mode is known)
-            InsertExNamespaces(attExtension, _ctxInfo!, /*extensions:*/true);
+            InsertExNamespaces(
+                attExtension,
+                _ctxInfo!, /*extensions:*/
+                true
+            );
 
             if (!IsExtensionNamespace(_records[0].nsUri))
             {
@@ -908,7 +1142,11 @@ namespace System.Xml.Xsl.Xslt
                     }
                 }
 
-                InsertExNamespaces(attExclude, _ctxInfo!, /*extensions:*/false);
+                InsertExNamespaces(
+                    attExclude,
+                    _ctxInfo!, /*extensions:*/
+                    false
+                );
             }
 
             return _ctxInfo!;
@@ -945,13 +1183,21 @@ namespace System.Xml.Xsl.Xslt
             //and Exclusion namespace
             if (MoveToLiteralAttribute(attExPrefixes))
             {
-                Debug.Assert(extensions ? IsKeyword(_atoms.ExtensionElementPrefixes) : IsKeyword(_atoms.ExcludeResultPrefixes));
+                Debug.Assert(
+                    extensions
+                        ? IsKeyword(_atoms.ExtensionElementPrefixes)
+                        : IsKeyword(_atoms.ExcludeResultPrefixes)
+                );
                 string value = Value;
                 if (value.Length != 0)
                 {
                     if (!extensions && _compiler.Version != 1 && value == "#all")
                     {
-                        ctxInfo.nsList = new NsDecl(ctxInfo.nsList, /*prefix:*/null, /*nsUri:*/null);    // null, null means Exlusion #all
+                        ctxInfo.nsList = new NsDecl(
+                            ctxInfo.nsList, /*prefix:*/
+                            null, /*nsUri:*/
+                            null
+                        ); // null, null means Exlusion #all
                     }
                     else
                     {
@@ -962,9 +1208,15 @@ namespace System.Xml.Xsl.Xslt
                             if (list[idx] == "#default")
                             {
                                 list[idx] = this.LookupXmlNamespace(string.Empty)!;
-                                if (list[idx].Length == 0 && _compiler.Version != 1 && !BackwardCompatibility)
+                                if (
+                                    list[idx].Length == 0
+                                    && _compiler.Version != 1
+                                    && !BackwardCompatibility
+                                )
                                 {
-                                    ReportError(/*[XTSE0809]*/SR.Xslt_ExcludeDefault);
+                                    ReportError( /*[XTSE0809]*/
+                                        SR.Xslt_ExcludeDefault
+                                    );
                                 }
                             }
                             else
@@ -982,10 +1234,14 @@ namespace System.Xml.Xsl.Xslt
                         {
                             if (list[idx] != null)
                             {
-                                ctxInfo.nsList = new NsDecl(ctxInfo.nsList, /*prefix:*/null, list[idx]); // null means that this Exlusion NS
+                                ctxInfo.nsList = new NsDecl(
+                                    ctxInfo.nsList, /*prefix:*/
+                                    null,
+                                    list[idx]
+                                ); // null means that this Exlusion NS
                                 if (extensions)
                                 {
-                                    _scopeManager.AddExNamespace(list[idx]);                         // At Load time we need to know Extencion namespaces to ignore such literal elements.
+                                    _scopeManager.AddExNamespace(list[idx]); // At Load time we need to know Extencion namespaces to ignore such literal elements.
                                 }
                             }
                         }
@@ -1015,14 +1271,21 @@ namespace System.Xml.Xsl.Xslt
                 int col;
                 for (col = 0; col < list.Length; col++)
                 {
-                    if (System.Xml.Xsl.Runtime.XmlCollation.Create(list[col], /*throw:*/false) != null)
+                    if (
+                        System.Xml.Xsl.Runtime.XmlCollation.Create(
+                            list[col], /*throw:*/
+                            false
+                        ) != null
+                    )
                     {
                         break;
                     }
                 }
                 if (col == list.Length)
                 {
-                    ReportErrorFC(/*[XTSE0125]*/SR.Xslt_CollationSyntax);
+                    ReportErrorFC( /*[XTSE0125]*/
+                        SR.Xslt_CollationSyntax
+                    );
                 }
                 else
                 {
@@ -1039,12 +1302,12 @@ namespace System.Xml.Xsl.Xslt
         private static int PositionAdjustment(XmlNodeType nt) =>
             nt switch
             {
-                XmlNodeType.Element => 1,               // "<"
-                XmlNodeType.CDATA => 9,                 // "<![CDATA["
+                XmlNodeType.Element => 1, // "<"
+                XmlNodeType.CDATA => 9, // "<![CDATA["
                 XmlNodeType.ProcessingInstruction => 2, // "<?"
-                XmlNodeType.Comment => 4,               // "<!--"
-                XmlNodeType.EndElement => 2,            // "</"
-                XmlNodeType.EntityReference => 1,       // "&"
+                XmlNodeType.Comment => 4, // "<!--"
+                XmlNodeType.EndElement => 2, // "</"
+                XmlNodeType.EntityReference => 1, // "&"
                 _ => 0,
             };
 
@@ -1074,7 +1337,11 @@ namespace System.Xml.Xsl.Xslt
             Location start = Start;
             int line = start.Line;
             int pos = start.Pos + PositionAdjustment(NodeType);
-            return new SourceLineInfo(Uri, new Location(line, pos), new Location(line, pos + QualifiedName.Length));
+            return new SourceLineInfo(
+                Uri,
+                new Location(line, pos),
+                new Location(line, pos + QualifiedName.Length)
+            );
         }
 
         public ISourceLineInfo BuildReaderLineInfo()
@@ -1096,14 +1363,20 @@ namespace System.Xml.Xsl.Xslt
             string? nsUri = _scopeManager.LookupNamespace(prefix);
             if (nsUri != null)
             {
-                Debug.Assert(Ref.Equal(_atoms.NameTable.Get(nsUri), nsUri), "Namespaces must be atomized");
+                Debug.Assert(
+                    Ref.Equal(_atoms.NameTable.Get(nsUri), nsUri),
+                    "Namespaces must be atomized"
+                );
                 return nsUri;
             }
             if (prefix.Length == 0)
             {
                 return string.Empty;
             }
-            ReportError(/*[XT0280]*/SR.Xslt_InvalidPrefix, prefix);
+            ReportError( /*[XT0280]*/
+                SR.Xslt_InvalidPrefix,
+                prefix
+            );
             return null;
         }
 
@@ -1137,9 +1410,9 @@ namespace System.Xml.Xsl.Xslt
         internal sealed class ContextInfo
         {
             public NsDecl? nsList;
-            public ISourceLineInfo? lineInfo;       // Line info for whole start tag
-            public ISourceLineInfo? elemNameLi;     // Line info for element name
-            public ISourceLineInfo? endTagLi;       // Line info for end tag or '/>'
+            public ISourceLineInfo? lineInfo; // Line info for whole start tag
+            public ISourceLineInfo? elemNameLi; // Line info for element name
+            public ISourceLineInfo? endTagLi; // Line info for end tag or '/>'
             private readonly int _elemNameLength;
 
             // Create ContextInfo based on existing line info (used during AST rewriting)
@@ -1170,8 +1443,10 @@ namespace System.Xml.Xsl.Xslt
 
                 elemNameLi = new SourceLineInfo(
                     lineInfo.Uri,
-                    lineInfo.Start.Line, lineInfo.Start.Pos + 1,  // "<"
-                    lineInfo.Start.Line, lineInfo.Start.Pos + 1 + _elemNameLength
+                    lineInfo.Start.Line,
+                    lineInfo.Start.Pos + 1, // "<"
+                    lineInfo.Start.Line,
+                    lineInfo.Start.Pos + 1 + _elemNameLength
                 );
 
                 if (!input.IsEmptyElement)
@@ -1181,7 +1456,10 @@ namespace System.Xml.Xsl.Xslt
                 }
                 else
                 {
-                    Debug.Assert(input.NodeType == XmlNodeType.Element || input.NodeType == XmlNodeType.Attribute);
+                    Debug.Assert(
+                        input.NodeType == XmlNodeType.Element
+                            || input.NodeType == XmlNodeType.Attribute
+                    );
                     endTagLi = new EmptyElementEndTag(lineInfo);
                 }
             }
@@ -1196,12 +1474,25 @@ namespace System.Xml.Xsl.Xslt
                     _elementTagLi = elementTagLi;
                 }
 
-                public string? Uri { get { return _elementTagLi.Uri; } }
-                public bool IsNoSource { get { return _elementTagLi.IsNoSource; } }
-                public Location Start { get { return new Location(_elementTagLi.End.Line, _elementTagLi.End.Pos - 2); } }
-                public Location End { get { return _elementTagLi.End; } }
+                public string? Uri
+                {
+                    get { return _elementTagLi.Uri; }
+                }
+                public bool IsNoSource
+                {
+                    get { return _elementTagLi.IsNoSource; }
+                }
+                public Location Start
+                {
+                    get { return new Location(_elementTagLi.End.Line, _elementTagLi.End.Pos - 2); }
+                }
+                public Location End
+                {
+                    get { return _elementTagLi.End; }
+                }
             }
         }
+
         internal struct Record
         {
             public string localName;
@@ -1212,7 +1503,10 @@ namespace System.Xml.Xsl.Xslt
             public Location start;
             public Location valueStart;
             public Location end;
-            public string QualifiedName { get { return prefix.Length == 0 ? localName : $"{prefix}:{localName}"; } }
+            public string QualifiedName
+            {
+                get { return prefix.Length == 0 ? localName : $"{prefix}:{localName}"; }
+            }
         }
     }
 }

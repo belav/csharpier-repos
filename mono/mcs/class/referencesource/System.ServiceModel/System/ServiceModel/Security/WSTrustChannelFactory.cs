@@ -18,7 +18,7 @@ namespace System.ServiceModel.Security
     using IM = System.IdentityModel;
 
     /// <summary>
-    /// A <see cref="ChannelFactory" /> that produces <see cref="WSTrustChannel" /> objects used to 
+    /// A <see cref="ChannelFactory" /> that produces <see cref="WSTrustChannel" /> objects used to
     /// communicate to a WS-Trust endpoint.
     /// </summary>
     [ComVisible(false)]
@@ -65,8 +65,8 @@ namespace System.ServiceModel.Security
         //
         SecurityTokenResolver _securityTokenResolver;
         SecurityTokenResolver _useKeyTokenResolver;
-        SecurityTokenHandlerCollectionManager _securityTokenHandlerCollectionManager
-            = SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager();
+        SecurityTokenHandlerCollectionManager _securityTokenHandlerCollectionManager =
+            SecurityTokenHandlerCollectionManager.CreateDefaultSecurityTokenHandlerCollectionManager();
 
         //
         // These serializers determine how the channels serialize RST and RSTR messages.
@@ -78,59 +78,50 @@ namespace System.ServiceModel.Security
         /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class.
         /// </summary>
         public WSTrustChannelFactory()
-            : base()
-        {
-        }
+            : base() { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified endpoint 
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified endpoint
         /// configuration name.
         /// </summary>
         /// <param name="endpointConfigurationName">The configuration name used for the endpoint.</param>
         public WSTrustChannelFactory(string endpointConfigurationName)
-            : base(endpointConfigurationName)
-        {
-        }
+            : base(endpointConfigurationName) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class.
         /// </summary>
         /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the factory</param>
         public WSTrustChannelFactory(Binding binding)
-            : base(binding)
-        {
-        }
+            : base(binding) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified endpoint.
         /// </summary>
         /// <param name="endpoint">The <see cref="ServiceEndpoint" />for the channels produced by the factory.</param>
         public WSTrustChannelFactory(ServiceEndpoint endpoint)
-            : base(endpoint)
-        {
-        }
+            : base(endpoint) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class associated with a specified 
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class associated with a specified
         /// name for the endpoint configuration and remote address.
         /// </summary>
         /// <param name="endpointConfigurationName">The configuration name used for the endpoint.</param>
         /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
-        public WSTrustChannelFactory(string endpointConfigurationName, EndpointAddress remoteAddress)
-            : base(endpointConfigurationName, remoteAddress)
-        {
-        }
+        public WSTrustChannelFactory(
+            string endpointConfigurationName,
+            EndpointAddress remoteAddress
+        )
+            : base(endpointConfigurationName, remoteAddress) { }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified binding 
+        /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified binding
         /// and endpoint address.
         /// </summary>
         /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the factory</param>
-        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the service.</param>        
+        /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
         public WSTrustChannelFactory(Binding binding, EndpointAddress remoteAddress)
-            : base(binding, remoteAddress)
-        {
-        }
+            : base(binding, remoteAddress) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WSTrustChannelFactory" /> class with a specified binding
@@ -139,9 +130,7 @@ namespace System.ServiceModel.Security
         /// <param name="binding">The <see cref="Binding" /> specified for the channels produced by the factory</param>
         /// <param name="remoteAddress">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
         public WSTrustChannelFactory(Binding binding, string remoteAddress)
-            : base(binding, remoteAddress)
-        {
-        }
+            : base(binding, remoteAddress) { }
 
         /// <summary>
         /// Gets or sets the version of WS-Trust the created channels will use for serializing messages.
@@ -151,20 +140,19 @@ namespace System.ServiceModel.Security
         /// <see cref="SecurityBindingElement" /> found on the channel factory's Endpoint object if one exists.
         /// </para>
         /// <para>This class will not support changing the value of this property after a channel is created.</para>
-        /// </remarks>        
+        /// </remarks>
         public TrustVersion TrustVersion
         {
-            get
-            {
-                return _trustVersion;
-            }
+            get { return _trustVersion; }
             set
             {
                 lock (_factoryLock)
                 {
                     if (_locked)
                     {
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3287));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3287)
+                        );
                     }
                     _trustVersion = value;
                 }
@@ -173,18 +161,15 @@ namespace System.ServiceModel.Security
 
         /// <summary>
         /// Gets or sets the <see cref="SecurityTokenHandlerCollectionManager" /> containing the set of
-        /// <see cref="SecurityTokenHandler" /> objects used by created channels for serializing and validating 
+        /// <see cref="SecurityTokenHandler" /> objects used by created channels for serializing and validating
         /// tokens found in  WS-Trust messages.
         /// </summary>
         /// <remarks>
-        /// This class will not support changing the value of this property after a channel is created.        
-        /// </remarks> 
+        /// This class will not support changing the value of this property after a channel is created.
+        /// </remarks>
         public SecurityTokenHandlerCollectionManager SecurityTokenHandlerCollectionManager
         {
-            get
-            {
-                return _securityTokenHandlerCollectionManager;
-            }
+            get { return _securityTokenHandlerCollectionManager; }
             set
             {
                 if (value == null)
@@ -196,7 +181,9 @@ namespace System.ServiceModel.Security
                 {
                     if (_locked)
                     {
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3287));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3287)
+                        );
                     }
                     _securityTokenHandlerCollectionManager = value;
                 }
@@ -209,7 +196,7 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If this property is not set created channels will use the ClientCertificate set on the factory's 
+        /// If this property is not set created channels will use the ClientCertificate set on the factory's
         /// Endpoint's ClientCredentials behavior to create a resolver. If no such certificate is found, an empty
         /// resolver is used.
         /// </para>
@@ -219,17 +206,16 @@ namespace System.ServiceModel.Security
         /// </remarks>
         public SecurityTokenResolver SecurityTokenResolver
         {
-            get
-            {
-                return _securityTokenResolver;
-            }
+            get { return _securityTokenResolver; }
             set
             {
                 lock (_factoryLock)
                 {
                     if (_locked)
                     {
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3287));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3287)
+                        );
                     }
                     _securityTokenResolver = value;
                 }
@@ -250,17 +236,16 @@ namespace System.ServiceModel.Security
         /// </remarks>
         public SecurityTokenResolver UseKeyTokenResolver
         {
-            get
-            {
-                return _useKeyTokenResolver;
-            }
+            get { return _useKeyTokenResolver; }
             set
             {
                 lock (_factoryLock)
                 {
                     if (_locked)
                     {
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3287));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3287)
+                        );
                     }
                     _useKeyTokenResolver = value;
                 }
@@ -272,8 +257,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If this property is not set, either <see cref="WSTrust13RequestSerializer" /> or 
-        /// <see cref="WSTrustFeb2005RequestSerializer" /> will be used. The serializer will correspond to the 
+        /// If this property is not set, either <see cref="WSTrust13RequestSerializer" /> or
+        /// <see cref="WSTrustFeb2005RequestSerializer" /> will be used. The serializer will correspond to the
         /// version of WS-Trust indicated by the <see cref="TrustVersion" /> property.
         /// </para>
         /// <para>
@@ -282,17 +267,16 @@ namespace System.ServiceModel.Security
         /// </remarks>
         public WSTrustRequestSerializer WSTrustRequestSerializer
         {
-            get
-            {
-                return _wsTrustRequestSerializer;
-            }
+            get { return _wsTrustRequestSerializer; }
             set
             {
                 lock (_factoryLock)
                 {
                     if (_locked)
                     {
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3287));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3287)
+                        );
                     }
                     _wsTrustRequestSerializer = value;
                 }
@@ -304,8 +288,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If this property is not set, either <see cref="WSTrust13ResponseSerializer" /> or 
-        /// <see cref="WSTrustFeb2005ResponseSerializer" /> will be used. The serializer will correspond to the 
+        /// If this property is not set, either <see cref="WSTrust13ResponseSerializer" /> or
+        /// <see cref="WSTrustFeb2005ResponseSerializer" /> will be used. The serializer will correspond to the
         /// version of WS-Trust indicated by the <see cref="TrustVersion" /> property.
         /// </para>
         /// <para>
@@ -314,17 +298,16 @@ namespace System.ServiceModel.Security
         /// </remarks>
         public WSTrustResponseSerializer WSTrustResponseSerializer
         {
-            get
-            {
-                return _wsTrustResponseSerializer;
-            }
+            get { return _wsTrustResponseSerializer; }
             set
             {
                 lock (_factoryLock)
                 {
                     if (_locked)
                     {
-                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID3287));
+                        throw IM.DiagnosticUtility.ThrowHelperInvalidOperation(
+                            SR.GetString(SR.ID3287)
+                        );
                     }
                     _wsTrustResponseSerializer = value;
                 }
@@ -332,7 +315,7 @@ namespace System.ServiceModel.Security
         }
 
         /// <summary>
-        /// Creates a <see cref="WSTrustChannel" /> that is used to send messages to a service at a specific 
+        /// Creates a <see cref="WSTrustChannel" /> that is used to send messages to a service at a specific
         /// endpoint address through a specified transport address.
         /// </summary>
         /// <param name="address">The <see cref="EndpointAddress" /> that provides the location of the service.</param>
@@ -343,18 +326,20 @@ namespace System.ServiceModel.Security
             IWSTrustChannelContract innerChannel = base.CreateChannel(address, via);
 
             WSTrustChannelLockedProperties lockedProperties = GetLockedProperties();
-            return CreateTrustChannel(innerChannel,
-                                       lockedProperties.TrustVersion,
-                                       lockedProperties.Context,
-                                       lockedProperties.RequestSerializer,
-                                       lockedProperties.ResponseSerializer);
+            return CreateTrustChannel(
+                innerChannel,
+                lockedProperties.TrustVersion,
+                lockedProperties.Context,
+                lockedProperties.RequestSerializer,
+                lockedProperties.ResponseSerializer
+            );
         }
 
         /// <summary>
         /// Creates a <see cref="WSTrustChannel" /> using parameters that reflect the configuration of
         /// this factory.
         /// </summary>
-        /// <param name="innerChannel">The channel created by the base class capable of sending and 
+        /// <param name="innerChannel">The channel created by the base class capable of sending and
         /// receiving messages.</param>
         /// <param name="trustVersion">The version of WS-Trust that should be used.</param>
         /// <param name="context">
@@ -367,13 +352,22 @@ namespace System.ServiceModel.Security
         /// The <see cref="WSTrustResponseSerializer" /> that should be used to serialize WS-Trust response messages.
         /// </param>
         /// <returns></returns>
-        protected virtual WSTrustChannel CreateTrustChannel(IWSTrustChannelContract innerChannel,
-                                                             TrustVersion trustVersion,
-                                                             WSTrustSerializationContext context,
-                                                             WSTrustRequestSerializer requestSerializer,
-                                                             WSTrustResponseSerializer responseSerializer)
+        protected virtual WSTrustChannel CreateTrustChannel(
+            IWSTrustChannelContract innerChannel,
+            TrustVersion trustVersion,
+            WSTrustSerializationContext context,
+            WSTrustRequestSerializer requestSerializer,
+            WSTrustResponseSerializer responseSerializer
+        )
         {
-            return new WSTrustChannel(this, innerChannel, trustVersion, context, requestSerializer, responseSerializer);
+            return new WSTrustChannel(
+                this,
+                innerChannel,
+                trustVersion,
+                context,
+                requestSerializer,
+                responseSerializer
+            );
         }
 
         private WSTrustChannelLockedProperties GetLockedProperties()
@@ -382,11 +376,16 @@ namespace System.ServiceModel.Security
             {
                 if (_lockedProperties == null)
                 {
-                    WSTrustChannelLockedProperties tmpLockedProperties = new WSTrustChannelLockedProperties();
+                    WSTrustChannelLockedProperties tmpLockedProperties =
+                        new WSTrustChannelLockedProperties();
                     tmpLockedProperties.TrustVersion = GetTrustVersion();
                     tmpLockedProperties.Context = CreateSerializationContext();
-                    tmpLockedProperties.RequestSerializer = GetRequestSerializer(tmpLockedProperties.TrustVersion);
-                    tmpLockedProperties.ResponseSerializer = GetResponseSerializer(tmpLockedProperties.TrustVersion);
+                    tmpLockedProperties.RequestSerializer = GetRequestSerializer(
+                        tmpLockedProperties.TrustVersion
+                    );
+                    tmpLockedProperties.ResponseSerializer = GetResponseSerializer(
+                        tmpLockedProperties.TrustVersion
+                    );
 
                     _lockedProperties = tmpLockedProperties;
                     _locked = true;
@@ -414,7 +413,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError( new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString())));
+                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
+                );
             }
         }
 
@@ -437,7 +438,9 @@ namespace System.ServiceModel.Security
             }
             else
             {
-                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString())));
+                throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(SR.GetString(SR.ID3137, trustVersion.ToString()))
+                );
             }
         }
 
@@ -451,7 +454,9 @@ namespace System.ServiceModel.Security
                 SecurityBindingElement sbe = elements.Find<SecurityBindingElement>();
                 if (null == sbe)
                 {
-                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError( new InvalidOperationException( SR.GetString(SR.ID3269)));
+                    throw IM.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.ID3269))
+                    );
                 }
                 trustVersion = sbe.MessageSecurityVersion.TrustVersion;
             }
@@ -465,8 +470,8 @@ namespace System.ServiceModel.Security
         /// </summary>
         /// <remarks>
         /// <para>
-        /// If <see cref="WSTrustChannelFactory.SecurityTokenResolver" /> is set to null, the 
-        /// ClientCertificate set on the factory's  Endpoint's ClientCredentials behavior will be used to 
+        /// If <see cref="WSTrustChannelFactory.SecurityTokenResolver" /> is set to null, the
+        /// ClientCertificate set on the factory's  Endpoint's ClientCredentials behavior will be used to
         /// create a resolver. If no such certificate is found, an empty resolver is used.
         /// </para>
         /// <para>
@@ -484,11 +489,19 @@ namespace System.ServiceModel.Security
             if (resolver == null)
             {
                 ClientCredentials factoryCredentials = Credentials;
-                if (null != factoryCredentials.ClientCertificate && null != factoryCredentials.ClientCertificate.Certificate)
+                if (
+                    null != factoryCredentials.ClientCertificate
+                    && null != factoryCredentials.ClientCertificate.Certificate
+                )
                 {
                     List<SecurityToken> clientCredentialTokens = new List<SecurityToken>();
-                    clientCredentialTokens.Add(new X509SecurityToken(factoryCredentials.ClientCertificate.Certificate));
-                    resolver = SecurityTokenResolver.CreateDefaultSecurityTokenResolver(clientCredentialTokens.AsReadOnly(), false);
+                    clientCredentialTokens.Add(
+                        new X509SecurityToken(factoryCredentials.ClientCertificate.Certificate)
+                    );
+                    resolver = SecurityTokenResolver.CreateDefaultSecurityTokenResolver(
+                        clientCredentialTokens.AsReadOnly(),
+                        false
+                    );
                 }
             }
 
@@ -503,9 +516,14 @@ namespace System.ServiceModel.Security
             //
             // UseKeyTokenResolver is empty if null.
             //
-            SecurityTokenResolver useKeyResolver = _useKeyTokenResolver ?? EmptySecurityTokenResolver.Instance;
+            SecurityTokenResolver useKeyResolver =
+                _useKeyTokenResolver ?? EmptySecurityTokenResolver.Instance;
 
-            return new WSTrustSerializationContext(_securityTokenHandlerCollectionManager, resolver, useKeyResolver);
+            return new WSTrustSerializationContext(
+                _securityTokenHandlerCollectionManager,
+                resolver,
+                useKeyResolver
+            );
         }
     }
 }

@@ -25,10 +25,9 @@ public class SqliteQueryTranslationPostprocessor : RelationalQueryTranslationPos
     public SqliteQueryTranslationPostprocessor(
         QueryTranslationPostprocessorDependencies dependencies,
         RelationalQueryTranslationPostprocessorDependencies relationalDependencies,
-        QueryCompilationContext queryCompilationContext)
-        : base(dependencies, relationalDependencies, queryCompilationContext)
-    {
-    }
+        QueryCompilationContext queryCompilationContext
+    )
+        : base(dependencies, relationalDependencies, queryCompilationContext) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -56,8 +55,12 @@ public class SqliteQueryTranslationPostprocessor : RelationalQueryTranslationPos
                 return extensionExpression;
             }
 
-            if (extensionExpression is SelectExpression selectExpression
-                && selectExpression.Tables.Any(t => t is CrossApplyExpression or OuterApplyExpression))
+            if (
+                extensionExpression is SelectExpression selectExpression
+                && selectExpression.Tables.Any(t =>
+                    t is CrossApplyExpression or OuterApplyExpression
+                )
+            )
             {
                 throw new InvalidOperationException(SqliteStrings.ApplyNotSupported);
             }

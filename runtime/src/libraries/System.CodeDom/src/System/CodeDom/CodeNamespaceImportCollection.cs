@@ -9,7 +9,10 @@ namespace System.CodeDom
     public class CodeNamespaceImportCollection : IList
     {
         private readonly ArrayList _data = new ArrayList(); // not List<CodeNamespaceImport> to provide desktop-consistent semantics for CopyTo
-        private readonly Dictionary<string, CodeNamespaceImport> _keys = new Dictionary<string, CodeNamespaceImport>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, CodeNamespaceImport> _keys = new Dictionary<
+            string,
+            CodeNamespaceImport
+        >(StringComparer.OrdinalIgnoreCase);
 
         public CodeNamespaceImport this[int index]
         {

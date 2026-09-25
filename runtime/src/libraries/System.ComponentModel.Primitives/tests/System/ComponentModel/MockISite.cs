@@ -13,6 +13,7 @@ namespace System.ComponentModel.Tests
         public string Name { get; set; }
 
         public Type ServiceType { get; set; }
+
         public object GetService(Type serviceType) => ServiceType;
     }
 }

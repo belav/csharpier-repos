@@ -22,7 +22,12 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "FindResultEnumerator", "Entering Current, T={0}", typeof(T));
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "FindResultEnumerator",
+                    "Entering Current, T={0}",
+                    typeof(T)
+                );
 
                 CheckDisposed();
 
@@ -30,27 +35,30 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     // Either we're before the beginning or after the end of the collection.
                     GlobalDebug.WriteLineIf(
-                                        GlobalDebug.Warn,
-                                        "FindResultEnumerator",
-                                        "Current: bad position, beforeStart={0}, endReached={1}, resultSet={2}",
-                                        _beforeStart,
-                                        _endReached,
-                                        _resultSet);
+                        GlobalDebug.Warn,
+                        "FindResultEnumerator",
+                        "Current: bad position, beforeStart={0}, endReached={1}, resultSet={2}",
+                        _beforeStart,
+                        _endReached,
+                        _resultSet
+                    );
 
                     throw new InvalidOperationException(SR.FindResultEnumInvalidPos);
                 }
 
-                Debug.Assert(typeof(T) == typeof(System.DirectoryServices.AccountManagement.Principal) || typeof(T).IsSubclassOf(typeof(System.DirectoryServices.AccountManagement.Principal)));
+                Debug.Assert(
+                    typeof(T) == typeof(System.DirectoryServices.AccountManagement.Principal)
+                        || typeof(T).IsSubclassOf(
+                            typeof(System.DirectoryServices.AccountManagement.Principal)
+                        )
+                );
                 return (T)_resultSet.CurrentAsPrincipal;
             }
         }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         //
@@ -61,21 +69,34 @@ namespace System.DirectoryServices.AccountManagement
         // Returns false when it reaches the end of the last ResultSet in resultSets, and sets endReached to true.
         public bool MoveNext()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "FindResultEnumerator", "Entering MoveNext, T={0}", typeof(T));
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "FindResultEnumerator",
+                "Entering MoveNext, T={0}",
+                typeof(T)
+            );
 
             CheckDisposed();
 
             // If we previously reached the end, nothing more to move on to
             if (_endReached)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "FindResultEnumerator", "MoveNext: end previously reached");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "FindResultEnumerator",
+                    "MoveNext: end previously reached"
+                );
                 return false;
             }
 
             // No ResultSet, so we've already reached the end
             if (_resultSet == null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "FindResultEnumerator", "MoveNext: no resultSet");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "FindResultEnumerator",
+                    "MoveNext: no resultSet"
+                );
                 return false;
             }
 
@@ -86,7 +107,11 @@ namespace System.DirectoryServices.AccountManagement
                 // If before the first ResultSet, move to the first ResultSet
                 if (_beforeStart)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "FindResultEnumerator", "MoveNext: Moving to first resultSet");
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "FindResultEnumerator",
+                        "MoveNext: Moving to first resultSet"
+                    );
 
                     _beforeStart = false;
 
@@ -106,7 +131,12 @@ namespace System.DirectoryServices.AccountManagement
                 _endReached = true;
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "FindResultEnumerator", "MoveNext: returning {0}", f);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "FindResultEnumerator",
+                "MoveNext: returning {0}",
+                f
+            );
             return f;
         }
 
@@ -191,7 +221,11 @@ namespace System.DirectoryServices.AccountManagement
         {
             if (_disposed)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "FindResultEnumerator", "CheckDisposed: accessing disposed object");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "FindResultEnumerator",
+                    "CheckDisposed: accessing disposed object"
+                );
                 throw new ObjectDisposedException("FindResultEnumerator");
             }
         }

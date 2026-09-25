@@ -1638,12 +1638,8 @@ public class Http2ConnectionTests : Http2TestBase
 
         await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
 
         // Writing over half the initial window size induces a connection-level window update.
@@ -6226,12 +6222,8 @@ public class Http2ConnectionTests : Http2TestBase
 
         await WaitForStreamErrorAsync(1, Http2ErrorCode.NO_ERROR, null);
         // Logged without an exception.
-        Assert.Contains(
-            LogMessages,
-            m =>
-                m.Message.Contains(
-                    "the application completed without reading the entire request body."
-                )
+        Assert.Contains(LogMessages, m =>
+            m.Message.Contains("the application completed without reading the entire request body.")
         );
 
         // These would be refused if the cool-down period had expired

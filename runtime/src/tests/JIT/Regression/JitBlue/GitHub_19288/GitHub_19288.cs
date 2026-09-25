@@ -5,8 +5,8 @@
 // by loading 4-bytes, which is not always safe.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class GitHub_19288
@@ -36,7 +36,9 @@ public class GitHub_19288
         unsafe int DoStuff()
         {
             IntPtr pBase = Marshal.AllocCoTaskMem(0x40000 * 3);
-            PixelData* foo = (PixelData*)(pBase + 511 * (512 * sizeof(PixelData)) + 511 * sizeof(PixelData));
+            PixelData* foo = (PixelData*)(
+                pBase + 511 * (512 * sizeof(PixelData)) + 511 * sizeof(PixelData)
+            );
 
             CheckPointer(*foo);
 

@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
     [ContentType(ContentTypeNames.VisualBasicContentType)]
     [method: ImportingConstructor]
     [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    internal sealed class SmartIndentProvider(EditorOptionsService editorOptionsService) : ISmartIndentProvider
+    internal sealed class SmartIndentProvider(EditorOptionsService editorOptionsService)
+        : ISmartIndentProvider
     {
         private readonly EditorOptionsService _editorOptionsService = editorOptionsService;
 
@@ -27,7 +28,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.SmartIndent
                 throw new ArgumentNullException(nameof(textView));
             }
 
-            if (!_editorOptionsService.GlobalOptions.GetOption(SmartIndenterOptionsStorage.SmartIndenter))
+            if (
+                !_editorOptionsService.GlobalOptions.GetOption(
+                    SmartIndenterOptionsStorage.SmartIndenter
+                )
+            )
             {
                 return null;
             }

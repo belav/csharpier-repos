@@ -103,10 +103,24 @@ namespace System.PrivateUri.Tests
             string fqdnHost = "foo.bar.";
 
             // initial unicode host
-            ValidateUri(scheme, unicodeHost, UriHostNameType.Dns, unicodeHost, unicodeHost, punycodeHost);
+            ValidateUri(
+                scheme,
+                unicodeHost,
+                UriHostNameType.Dns,
+                unicodeHost,
+                unicodeHost,
+                punycodeHost
+            );
 
             // initial punycode host
-            ValidateUri(scheme, punycodeHost, UriHostNameType.Dns, punycodeHost, punycodeHost, punycodeHost);
+            ValidateUri(
+                scheme,
+                punycodeHost,
+                UriHostNameType.Dns,
+                punycodeHost,
+                punycodeHost,
+                punycodeHost
+            );
 
             // Host ending with a dot
             ValidateUri(scheme, fqdnHost, UriHostNameType.Dns, fqdnHost, fqdnHost, fqdnHost);
@@ -118,7 +132,8 @@ namespace System.PrivateUri.Tests
             UriHostNameType expectedHostType,
             string expectedHost,
             string expectedDnsSafeHost,
-            string expectedIdnHost)
+            string expectedIdnHost
+        )
         {
             Assert.True(Uri.TryCreate(scheme + "://" + host, UriKind.Absolute, out Uri uri));
             Assert.Equal(expectedHost, uri.Host);

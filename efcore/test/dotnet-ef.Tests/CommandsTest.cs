@@ -18,9 +18,10 @@ public class CommandsTest
                 Assert.True(
                     group.Key == null || group.Count() == 1,
                     "Duplicate short names on command '"
-                    + GetFullName(command)
-                    + "': "
-                    + string.Join("; ", group.Select(o => o.Template)));
+                        + GetFullName(command)
+                        + "': "
+                        + string.Join("; ", group.Select(o => o.Template))
+                );
             }
         }
     }
@@ -35,9 +36,10 @@ public class CommandsTest
                 Assert.True(
                     group.Key == null || group.Count() == 1,
                     "Duplicate option names on command '"
-                    + GetFullName(command)
-                    + "': "
-                    + string.Join("; ", group.Select(o => o.Template)));
+                        + GetFullName(command)
+                        + "': "
+                        + string.Join("; ", group.Select(o => o.Template))
+                );
             }
         }
     }

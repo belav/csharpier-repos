@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,16 +37,14 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
     /// </summary>
     internal sealed class NamedPipeHelper
     {
-        NamedPipeHelper()
-        {
-        }
+        NamedPipeHelper() { }
 
         /// <summary>
         /// Returns a properly formatted local pipe name.
         /// </summary>
         /// <param name="pipeName"></param>
         /// <returns></returns>
-        public static string FormatPipeName(string pipeName) 
+        public static string FormatPipeName(string pipeName)
         {
             return String.Format(@"\\.\pipe\{0}", pipeName);
         }
@@ -83,13 +81,13 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public const uint NMPWAIT_WAIT_FOREVER = 0xffffffff;
 
         // Create flags
-        public const uint CREATE_NEW        = 1;
-        public const uint CREATE_ALWAYS     = 2;
-        public const uint OPEN_EXISTING     = 3;
-        public const uint OPEN_ALWAYS       = 4;
+        public const uint CREATE_NEW = 1;
+        public const uint CREATE_ALWAYS = 2;
+        public const uint OPEN_EXISTING = 3;
+        public const uint OPEN_ALWAYS = 4;
         public const uint TRUNCATE_EXISTING = 5;
-	    public const uint FILE_FLAG_OVERLAPPED = 0x40000000;
-        
+        public const uint FILE_FLAG_OVERLAPPED = 0x40000000;
+
         // Access flags
         public const uint GENERIC_READ = 0x80000000;
         public const uint GENERIC_WRITE = 0x40000000;
@@ -103,7 +101,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         public const int ERROR_PIPE_NOT_CONNECTED = 233;
         public const int ERROR_PIPE_CONNECTED = 535;
         public const int ERROR_PIPE_LISTENING = 536;
-	    public const int ERROR_IO_PENDING = 997;
+        public const int ERROR_IO_PENDING = 997;
 
         public const int INVALID_HANDLE_VALUE = -1;
 
@@ -117,13 +115,13 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             uint nInBufferSize,
             uint nDefaultTimeOut,
             IntPtr pipeSecurityDescriptor
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool ConnectNamedPipe(
             IntPtr hPipe,
             [In] ref NativeOverlapped lpOverlapped
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern IntPtr CreateFile(
@@ -133,7 +131,8 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             IntPtr attr,
             uint dwCreationDisposition,
             uint dwFlagsAndAttributes,
-            IntPtr hTemplateFile);
+            IntPtr hTemplateFile
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool ReadFile(
@@ -142,7 +141,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             uint nNumberOfBytesToRead,
             out uint lpNumberOfBytesRead,
             IntPtr lpOverlapped
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool WriteFile(
@@ -151,7 +150,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             uint nNumberOfBytesToWrite,
             out uint lpNumberOfBytesWritten,
             IntPtr lpOverlapped
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetNamedPipeHandleState(
@@ -162,7 +161,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             out int lpCollectDataTimeout,
             StringBuilder lpUserName,
             int nMaxUserNameSize
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool SetNamedPipeHandleState(
@@ -170,7 +169,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             ref uint lpMode,
             ref uint lpMaxCollectionCount,
             ref uint lpCollectDataTimeout
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool GetNamedPipeInfo(
@@ -179,7 +178,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             out int lpOutBufferSize,
             out int lpInBufferSize,
             out int lpMaxInstances
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
         public static extern bool PeekNamedPipe(
@@ -189,40 +188,26 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             out uint lpBytesRead,
             out uint lpTotalBytesAvail,
             out uint lpBytesLeftThisMessage
-            );
+        );
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool WaitNamedPipe(
-            string name,
-            int timeout
-            );
+        public static extern bool WaitNamedPipe(string name, int timeout);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool DisconnectNamedPipe(
-            IntPtr hPipe
-            );
+        public static extern bool DisconnectNamedPipe(IntPtr hPipe);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool FlushFileBuffers(
-            IntPtr hFile
-            );
+        public static extern bool FlushFileBuffers(IntPtr hFile);
 
         [DllImport("kernel32.dll", SetLastError = true)]
-        public static extern bool CloseHandle(
-            IntPtr hHandle
-            );
+        public static extern bool CloseHandle(IntPtr hHandle);
 
         [DllImport("advapi32.dll", SetLastError = true)]
-        public static extern bool ImpersonateNamedPipeClient(
-            IntPtr hPipe
-            );
+        public static extern bool ImpersonateNamedPipeClient(IntPtr hPipe);
 
         [DllImport("advapi32.dll", SetLastError = true)]
         public static extern bool RevertToSelf();
 
         #endregion
-
     }
-
 }
-

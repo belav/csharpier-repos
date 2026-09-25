@@ -1,66 +1,82 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
-namespace System {
-    
+namespace System
+{
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     [Serializable]
-    public class NotFiniteNumberException : ArithmeticException {
-        private double _offendingNumber;    
-    
-        public NotFiniteNumberException() 
-            : base(Environment.GetResourceString("Arg_NotFiniteNumberException")) {
+    public class NotFiniteNumberException : ArithmeticException
+    {
+        private double _offendingNumber;
+
+        public NotFiniteNumberException()
+            : base(Environment.GetResourceString("Arg_NotFiniteNumberException"))
+        {
             _offendingNumber = 0;
             SetErrorCode(__HResults.COR_E_NOTFINITENUMBER);
         }
 
-        public NotFiniteNumberException(double offendingNumber) 
-            : base() {
+        public NotFiniteNumberException(double offendingNumber)
+            : base()
+        {
             _offendingNumber = offendingNumber;
             SetErrorCode(__HResults.COR_E_NOTFINITENUMBER);
         }
 
-        public NotFiniteNumberException(String message) 
-            : base(message) {
+        public NotFiniteNumberException(String message)
+            : base(message)
+        {
             _offendingNumber = 0;
             SetErrorCode(__HResults.COR_E_NOTFINITENUMBER);
         }
 
-        public NotFiniteNumberException(String message, double offendingNumber) 
-            : base(message) {
+        public NotFiniteNumberException(String message, double offendingNumber)
+            : base(message)
+        {
             _offendingNumber = offendingNumber;
             SetErrorCode(__HResults.COR_E_NOTFINITENUMBER);
         }
 
-        public NotFiniteNumberException(String message, Exception innerException) 
-            : base(message, innerException) {
+        public NotFiniteNumberException(String message, Exception innerException)
+            : base(message, innerException)
+        {
             SetErrorCode(__HResults.COR_E_NOTFINITENUMBER);
         }
-        
-        public NotFiniteNumberException(String message, double offendingNumber, Exception innerException) 
-            : base(message, innerException) {
+
+        public NotFiniteNumberException(
+            String message,
+            double offendingNumber,
+            Exception innerException
+        )
+            : base(message, innerException)
+        {
             _offendingNumber = offendingNumber;
             SetErrorCode(__HResults.COR_E_NOTFINITENUMBER);
         }
 
-        protected NotFiniteNumberException(SerializationInfo info, StreamingContext context) : base(info, context) {
+        protected NotFiniteNumberException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
             _offendingNumber = info.GetInt32("OffendingNumber");
         }
 
-        public double OffendingNumber {
+        public double OffendingNumber
+        {
             get { return _offendingNumber; }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public override void GetObjectData(SerializationInfo info, StreamingContext context) {
-            if (info==null) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+            {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();

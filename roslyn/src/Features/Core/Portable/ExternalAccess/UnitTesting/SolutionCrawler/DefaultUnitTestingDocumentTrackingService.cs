@@ -11,13 +11,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
     [ExportWorkspaceService(typeof(IUnitTestingDocumentTrackingService), ServiceLayer.Default)]
     [Shared]
-    internal sealed class DefaultUnitTestingDocumentTrackingService : IUnitTestingDocumentTrackingService
+    internal sealed class DefaultUnitTestingDocumentTrackingService
+        : IUnitTestingDocumentTrackingService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DefaultUnitTestingDocumentTrackingService()
-        {
-        }
+        public DefaultUnitTestingDocumentTrackingService() { }
 
         public bool SupportsDocumentTracking => false;
 
@@ -25,12 +24,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         public event EventHandler<DocumentId?> ActiveDocumentChanged { add { } remove { } }
 #endif
 
-        public event EventHandler<EventArgs> NonRoslynBufferTextChanged { add { } remove { } }
+        public event EventHandler<EventArgs> NonRoslynBufferTextChanged
+        {
+            add { }
+            remove { }
+        }
 
-        public ImmutableArray<DocumentId> GetVisibleDocuments()
-            => ImmutableArray<DocumentId>.Empty;
+        public ImmutableArray<DocumentId> GetVisibleDocuments() => ImmutableArray<DocumentId>.Empty;
 
-        public DocumentId? TryGetActiveDocument()
-            => null;
+        public DocumentId? TryGetActiveDocument() => null;
     }
 }

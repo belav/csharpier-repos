@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,40 +35,46 @@ using System.Xml;
 
 namespace MonoTests.System.Xaml
 {
-	public class DummyValueSerializerContext : IValueSerializerContext
-	{
-		public DummyValueSerializerContext ()
-		{
-		}
+    public class DummyValueSerializerContext : IValueSerializerContext
+    {
+        public DummyValueSerializerContext() { }
 
-		public object GetService (Type serviceType)
-		{
-			throw new NotImplementedException ();
-		}
-		public IContainer Container {
-			get { throw new NotImplementedException (); }
-		}
-		public object Instance {
-			get { throw new NotImplementedException (); }
-		}
-		public PropertyDescriptor PropertyDescriptor {
-			get { throw new NotImplementedException (); }
-		}
-		public void OnComponentChanged ()
-		{
-			throw new NotImplementedException ();
-		}
-		public bool OnComponentChanging ()
-		{
-			throw new NotImplementedException ();
-		}
-		public ValueSerializer GetValueSerializerFor (PropertyDescriptor descriptor)
-		{
-			throw new NotImplementedException ();
-		}
-		public ValueSerializer GetValueSerializerFor (Type type)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public object GetService(Type serviceType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IContainer Container
+        {
+            get { throw new NotImplementedException(); }
+        }
+        public object Instance
+        {
+            get { throw new NotImplementedException(); }
+        }
+        public PropertyDescriptor PropertyDescriptor
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public void OnComponentChanged()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool OnComponentChanging()
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueSerializer GetValueSerializerFor(PropertyDescriptor descriptor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ValueSerializer GetValueSerializerFor(Type type)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

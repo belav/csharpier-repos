@@ -21,7 +21,9 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Utilities
         {
             if (Interlocked.Exchange(ref s_registered, 1) == 0)
             {
-                var msBuildInstance = Build.Locator.MSBuildLocator.QueryVisualStudioInstances().First();
+                var msBuildInstance = Build
+                    .Locator.MSBuildLocator.QueryVisualStudioInstances()
+                    .First();
                 s_msBuildPath = Path.EndsInDirectorySeparator(msBuildInstance.MSBuildPath)
                     ? msBuildInstance.MSBuildPath
                     : msBuildInstance.MSBuildPath + Path.DirectorySeparatorChar;

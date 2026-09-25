@@ -24,7 +24,8 @@ public class EditAndContinueDelegateCacheTests : EditAndContinueTestBase
     [Fact]
     public void TargetChanged0()
     {
-        var source0 = @"
+        var source0 =
+            @"
 class C
 {
     static int Target0() => 0;
@@ -33,7 +34,8 @@ class C
     System.Func<int> F() => Target0;
 }
 ";
-        var source1 = @"
+        var source1 =
+            @"
 class C
 {
     static int Target0() => 0;
@@ -42,7 +44,10 @@ class C
     System.Func<int> F() => Target1;
 }
 ";
-        var compilation0 = CreateCompilation(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+        var compilation0 = CreateCompilation(
+            source0,
+            parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+        );
         var compilation1 = compilation0.WithSource(source1);
 
         Assert.Equal(compilation0.LanguageVersion, compilation1.LanguageVersion);
@@ -54,14 +59,20 @@ class C
         using var moduleData0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
         var methodData0 = v0.TestData.GetMethodData("C.F");
 
-        var generation0 = CreateInitialBaseline(compilation0, moduleData0, methodData0.EncDebugInfoProvider());
+        var generation0 = CreateInitialBaseline(
+            compilation0,
+            moduleData0,
+            methodData0.EncDebugInfoProvider()
+        );
         var diff1 = compilation1.EmitDifference(
             generation0,
-            ImmutableArray.Create(
-                SemanticEdit.Create(SemanticEditKind.Update, f0, f1)));
+            ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1))
+        );
 
         diff1.EmitResult.Diagnostics.Verify();
-        diff1.VerifyIL("C.F", @"
+        diff1.VerifyIL(
+            "C.F",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -76,7 +87,8 @@ class C
   IL_0016:  stsfld     ""System.Func<int> C.<>O#1.<0>__Target1""
   IL_001b:  ret
 }
-");
+"
+        );
 
         var reader0 = moduleData0.MetadataReader;
         var reader1 = diff1.GetMetadata().Reader;
@@ -88,7 +100,8 @@ class C
     [Fact]
     public void TargetChanged1()
     {
-        var source0 = @"
+        var source0 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -97,7 +110,8 @@ class C<T>
     System.Func<int> F() => Target0<T>;
 }
 ";
-        var source1 = @"
+        var source1 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -106,7 +120,10 @@ class C<T>
     System.Func<int> F() => Target1<T>;
 }
 ";
-        var compilation0 = CreateCompilation(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+        var compilation0 = CreateCompilation(
+            source0,
+            parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+        );
         var compilation1 = compilation0.WithSource(source1);
 
         Assert.Equal(compilation0.LanguageVersion, compilation1.LanguageVersion);
@@ -118,14 +135,20 @@ class C<T>
         using var moduleData0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
         var methodData0 = v0.TestData.GetMethodData("C<T>.F");
 
-        var generation0 = CreateInitialBaseline(compilation0, moduleData0, methodData0.EncDebugInfoProvider());
+        var generation0 = CreateInitialBaseline(
+            compilation0,
+            moduleData0,
+            methodData0.EncDebugInfoProvider()
+        );
         var diff1 = compilation1.EmitDifference(
             generation0,
-            ImmutableArray.Create(
-                SemanticEdit.Create(SemanticEditKind.Update, f0, f1)));
+            ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1))
+        );
 
         diff1.EmitResult.Diagnostics.Verify();
-        diff1.VerifyIL("C<T>.F", @"
+        diff1.VerifyIL(
+            "C<T>.F",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -140,7 +163,8 @@ class C<T>
   IL_0016:  stsfld     ""System.Func<int> C<T>.<>O#1.<0>__Target1""
   IL_001b:  ret
 }
-");
+"
+        );
 
         var reader0 = moduleData0.MetadataReader;
         var reader1 = diff1.GetMetadata().Reader;
@@ -152,7 +176,8 @@ class C<T>
     [Fact]
     public void TargetChanged2()
     {
-        var source0 = @"
+        var source0 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -161,7 +186,8 @@ class C<T>
     System.Func<int> F<G>() => Target0<T>;
 }
 ";
-        var source1 = @"
+        var source1 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -170,7 +196,10 @@ class C<T>
     System.Func<int> F<G>() => Target1<T>;
 }
 ";
-        var compilation0 = CreateCompilation(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+        var compilation0 = CreateCompilation(
+            source0,
+            parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+        );
         var compilation1 = compilation0.WithSource(source1);
 
         Assert.Equal(compilation0.LanguageVersion, compilation1.LanguageVersion);
@@ -182,14 +211,20 @@ class C<T>
         using var moduleData0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
         var methodData0 = v0.TestData.GetMethodData("C<T>.F<G>");
 
-        var generation0 = CreateInitialBaseline(compilation0, moduleData0, methodData0.EncDebugInfoProvider());
+        var generation0 = CreateInitialBaseline(
+            compilation0,
+            moduleData0,
+            methodData0.EncDebugInfoProvider()
+        );
         var diff1 = compilation1.EmitDifference(
             generation0,
-            ImmutableArray.Create(
-                SemanticEdit.Create(SemanticEditKind.Update, f0, f1)));
+            ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1))
+        );
 
         diff1.EmitResult.Diagnostics.Verify();
-        diff1.VerifyIL("C<T>.F<G>", @"
+        diff1.VerifyIL(
+            "C<T>.F<G>",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -204,7 +239,8 @@ class C<T>
   IL_0016:  stsfld     ""System.Func<int> C<T>.<>O#1.<0>__Target1""
   IL_001b:  ret
 }
-");
+"
+        );
 
         var reader0 = moduleData0.MetadataReader;
         var reader1 = diff1.GetMetadata().Reader;
@@ -216,7 +252,8 @@ class C<T>
     [Fact]
     public void TargetChanged3()
     {
-        var source0 = @"
+        var source0 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -225,7 +262,8 @@ class C<T>
     System.Func<int> F<G>() => Target0<T>;
 }
 ";
-        var source1 = @"
+        var source1 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -234,7 +272,10 @@ class C<T>
     System.Func<int> F<G>() => Target1<G>;
 }
 ";
-        var compilation0 = CreateCompilation(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+        var compilation0 = CreateCompilation(
+            source0,
+            parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+        );
         var compilation1 = compilation0.WithSource(source1);
 
         Assert.Equal(compilation0.LanguageVersion, compilation1.LanguageVersion);
@@ -246,14 +287,20 @@ class C<T>
         using var moduleData0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
         var methodData0 = v0.TestData.GetMethodData("C<T>.F<G>");
 
-        var generation0 = CreateInitialBaseline(compilation0, moduleData0, methodData0.EncDebugInfoProvider());
+        var generation0 = CreateInitialBaseline(
+            compilation0,
+            moduleData0,
+            methodData0.EncDebugInfoProvider()
+        );
         var diff1 = compilation1.EmitDifference(
             generation0,
-            ImmutableArray.Create(
-                SemanticEdit.Create(SemanticEditKind.Update, f0, f1)));
+            ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1))
+        );
 
         diff1.EmitResult.Diagnostics.Verify();
-        diff1.VerifyIL("C<T>.F<G>", @"
+        diff1.VerifyIL(
+            "C<T>.F<G>",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -268,7 +315,8 @@ class C<T>
   IL_0016:  stsfld     ""System.Func<int> C<T>.<F>O__2_0#1<G>.<0>__Target1""
   IL_001b:  ret
 }
-");
+"
+        );
 
         var reader0 = moduleData0.MetadataReader;
         var reader1 = diff1.GetMetadata().Reader;
@@ -280,7 +328,8 @@ class C<T>
     [Fact]
     public void TargetChanged4()
     {
-        var source0 = @"
+        var source0 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -289,7 +338,8 @@ class C<T>
     System.Func<int> F<G>() => Target0<G>;
 }
 ";
-        var source1 = @"
+        var source1 =
+            @"
 class C<T>
 {
     static int Target0<G>() => 0;
@@ -298,7 +348,10 @@ class C<T>
     System.Func<int> F<G>() => Target1<G>;
 }
 ";
-        var compilation0 = CreateCompilation(source0, parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute());
+        var compilation0 = CreateCompilation(
+            source0,
+            parseOptions: TestOptions.Regular.WithNoRefSafetyRulesAttribute()
+        );
         var compilation1 = compilation0.WithSource(source1);
 
         Assert.Equal(compilation0.LanguageVersion, compilation1.LanguageVersion);
@@ -310,14 +363,20 @@ class C<T>
         using var moduleData0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
         var methodData0 = v0.TestData.GetMethodData("C<T>.F<G>");
 
-        var generation0 = CreateInitialBaseline(compilation0, moduleData0, methodData0.EncDebugInfoProvider());
+        var generation0 = CreateInitialBaseline(
+            compilation0,
+            moduleData0,
+            methodData0.EncDebugInfoProvider()
+        );
         var diff1 = compilation1.EmitDifference(
             generation0,
-            ImmutableArray.Create(
-                SemanticEdit.Create(SemanticEditKind.Update, f0, f1)));
+            ImmutableArray.Create(SemanticEdit.Create(SemanticEditKind.Update, f0, f1))
+        );
 
         diff1.EmitResult.Diagnostics.Verify();
-        diff1.VerifyIL("C<T>.F<G>", @"
+        diff1.VerifyIL(
+            "C<T>.F<G>",
+            @"
 {
   // Code size       28 (0x1c)
   .maxstack  2
@@ -332,7 +391,8 @@ class C<T>
   IL_0016:  stsfld     ""System.Func<int> C<T>.<F>O__2_0#1<G>.<0>__Target1""
   IL_001b:  ret
 }
-");
+"
+        );
 
         var reader0 = moduleData0.MetadataReader;
         var reader1 = diff1.GetMetadata().Reader;
@@ -340,5 +400,4 @@ class C<T>
         CheckNames(reader0, reader0.GetTypeDefNames(), "<Module>", "C`1", "<F>O__2_0`1");
         CheckNames(new[] { reader0, reader1 }, reader1.GetTypeDefNames(), "<F>O__2_0#1`1");
     }
-
 }

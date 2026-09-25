@@ -79,24 +79,22 @@ namespace System.Memory.Tests.SequenceReader
             }
         }
 
-        protected virtual void OnNoReferences()
-        {
-        }
+        protected virtual void OnNoReferences() { }
 
         protected bool IsRetained => _referenceCount > 0;
 
         public bool IsDisposed => _array == null;
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void ThrowObjectDisposedException(string objectName)
-            => throw new ObjectDisposedException(objectName);
+        public static void ThrowObjectDisposedException(string objectName) =>
+            throw new ObjectDisposedException(objectName);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void ThrowInvalidOperationException()
-            => throw new InvalidOperationException();
+        public static void ThrowInvalidOperationException() =>
+            throw new InvalidOperationException();
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void ThrowArgumentNullException(string argumentName)
-            => throw new ArgumentNullException(argumentName);
+        public static void ThrowArgumentNullException(string argumentName) =>
+            throw new ArgumentNullException(argumentName);
     }
 }

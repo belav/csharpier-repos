@@ -18,13 +18,14 @@ public class ViewBuilder<TEntity> : ViewBuilder, IInfrastructure<EntityTypeBuild
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public ViewBuilder(in StoreObjectIdentifier storeObject, EntityTypeBuilder<TEntity> entityTypeBuilder)
-        : base(storeObject, entityTypeBuilder)
-    {
-    }
+    public ViewBuilder(
+        in StoreObjectIdentifier storeObject,
+        EntityTypeBuilder<TEntity> entityTypeBuilder
+    )
+        : base(storeObject, entityTypeBuilder) { }
 
-    private EntityTypeBuilder<TEntity> EntityTypeBuilder
-        => (EntityTypeBuilder<TEntity>)((IInfrastructure<EntityTypeBuilder>)this).GetInfrastructure();
+    private EntityTypeBuilder<TEntity> EntityTypeBuilder =>
+        (EntityTypeBuilder<TEntity>)((IInfrastructure<EntityTypeBuilder>)this).GetInfrastructure();
 
     /// <summary>
     ///     Maps the property to a column on the current view and returns an object that can be used
@@ -34,9 +35,10 @@ public class ViewBuilder<TEntity> : ViewBuilder, IInfrastructure<EntityTypeBuild
     ///     A lambda expression representing the property to be configured (<c>blog => blog.Url</c>).
     /// </param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression)
-        => new(StoreObject, EntityTypeBuilder.Property(propertyExpression));
+    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(
+        Expression<Func<TEntity, TProperty>> propertyExpression
+    ) => new(StoreObject, EntityTypeBuilder.Property(propertyExpression));
 
-    EntityTypeBuilder<TEntity> IInfrastructure<EntityTypeBuilder<TEntity>>.Instance
-        => EntityTypeBuilder;
+    EntityTypeBuilder<TEntity> IInfrastructure<EntityTypeBuilder<TEntity>>.Instance =>
+        EntityTypeBuilder;
 }

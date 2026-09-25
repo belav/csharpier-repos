@@ -11,17 +11,24 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler :
-        IChainedCommandHandler<TypeCharCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : IChainedCommandHandler<TypeCharCommandArgs>
     {
-        public CommandState GetCommandState(TypeCharCommandArgs args, Func<CommandState> nextHandler)
-            => GetCommandState(nextHandler);
+        public CommandState GetCommandState(
+            TypeCharCommandArgs args,
+            Func<CommandState> nextHandler
+        ) => GetCommandState(nextHandler);
 
-        public void ExecuteCommand(TypeCharCommandArgs args, Action nextHandler, CommandExecutionContext context)
+        public void ExecuteCommand(
+            TypeCharCommandArgs args,
+            Action nextHandler,
+            CommandExecutionContext context
+        )
         {
             HandlePossibleTypingCommand(args, nextHandler, (activeSession, span) =>
             {
-                var document = args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+                var document =
+                    args.SubjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
                 if (document == null)
                 {
                     nextHandler();
@@ -32,10 +39,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                 // We are inside the region we can edit, so let's forward only if it's a valid
                 // character
-                if (syntaxFactsService == null ||
-                    syntaxFactsService.IsIdentifierStartCharacter(args.TypedChar) ||
-                    syntaxFactsService.IsIdentifierPartCharacter(args.TypedChar) ||
-                    syntaxFactsService.IsStartOfUnicodeEscapeSequence(args.TypedChar))
+                if (
+                    syntaxFactsService == null
+                    || syntaxFactsService.IsIdentifierStartCharacter(args.TypedChar)
+                    || syntaxFactsService.IsIdentifierPartCharacter(args.TypedChar)
+                    || syntaxFactsService.IsStartOfUnicodeEscapeSequence(args.TypedChar)
+                )
                 {
                     nextHandler();
                 }

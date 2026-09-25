@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Description.OperationBinding.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,82 +31,86 @@
 using System.Web.Services.Configuration;
 using System.Xml.Serialization;
 
-namespace System.Web.Services.Description {
-	[XmlFormatExtensionPoint ("Extensions")]
-	public sealed class OperationBinding :
-		NamedItem
-	{
-		#region Fields
+namespace System.Web.Services.Description
+{
+    [XmlFormatExtensionPoint("Extensions")]
+    public sealed class OperationBinding : NamedItem
+    {
+        #region Fields
 
-		Binding binding;
-		ServiceDescriptionFormatExtensionCollection extensions;
-		FaultBindingCollection faults;
-		InputBinding input;
-		OutputBinding output;
+        Binding binding;
+        ServiceDescriptionFormatExtensionCollection extensions;
+        FaultBindingCollection faults;
+        InputBinding input;
+        OutputBinding output;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
-		
-		public OperationBinding ()
-		{
-			extensions = new ServiceDescriptionFormatExtensionCollection (this);
-			faults = new FaultBindingCollection (this);
-			input = null;
-			output = null;
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
-	
-//		[XmlIgnore]
-		public Binding Binding {
-			get { return binding; }
-		}
+        public OperationBinding()
+        {
+            extensions = new ServiceDescriptionFormatExtensionCollection(this);
+            faults = new FaultBindingCollection(this);
+            input = null;
+            output = null;
+        }
 
-		[XmlIgnore]
-		public 
-		override
-		ServiceDescriptionFormatExtensionCollection Extensions {
-			get { return extensions; }
-		}
+        #endregion // Constructors
 
-		[XmlElement ("fault")]
-		public FaultBindingCollection Faults {
-			get { return faults; }
-		}
+        #region Properties
 
-		[XmlElement ("input")]
-		public InputBinding Input {
-			get { return input; }
-			set {
-				input = value; 
-				if (input != null)
-					input.SetParent (this);
-			}
-		}
+        //		[XmlIgnore]
+        public Binding Binding
+        {
+            get { return binding; }
+        }
 
+        [XmlIgnore]
+        public override ServiceDescriptionFormatExtensionCollection Extensions
+        {
+            get { return extensions; }
+        }
 
-		[XmlElement ("output")]
-		public OutputBinding Output {
-			get { return output; }
-			set {
-				output = value; 
-				if (output != null)
-					output.SetParent (this);
-			}
-		}
+        [XmlElement("fault")]
+        public FaultBindingCollection Faults
+        {
+            get { return faults; }
+        }
 
-		#endregion // Properties
+        [XmlElement("input")]
+        public InputBinding Input
+        {
+            get { return input; }
+            set
+            {
+                input = value;
+                if (input != null)
+                    input.SetParent(this);
+            }
+        }
 
-		#region Methods
+        [XmlElement("output")]
+        public OutputBinding Output
+        {
+            get { return output; }
+            set
+            {
+                output = value;
+                if (output != null)
+                    output.SetParent(this);
+            }
+        }
 
-		internal void SetParent (Binding binding) 
-		{
-			this.binding = binding; 
-		} 
+        #endregion // Properties
 
-		#endregion
-	}
+        #region Methods
+
+        internal void SetParent(Binding binding)
+        {
+            this.binding = binding;
+        }
+
+        #endregion
+    }
 }

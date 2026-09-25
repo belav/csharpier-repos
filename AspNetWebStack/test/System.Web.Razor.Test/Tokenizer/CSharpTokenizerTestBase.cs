@@ -7,16 +7,25 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Test.Tokenizer
 {
-    public abstract class CSharpTokenizerTestBase : TokenizerTestBase<CSharpSymbol, CSharpSymbolType>
+    public abstract class CSharpTokenizerTestBase
+        : TokenizerTestBase<CSharpSymbol, CSharpSymbolType>
     {
-        private static CSharpSymbol _ignoreRemaining = new CSharpSymbol(0, 0, 0, String.Empty, CSharpSymbolType.Unknown);
+        private static CSharpSymbol _ignoreRemaining = new CSharpSymbol(
+            0,
+            0,
+            0,
+            String.Empty,
+            CSharpSymbolType.Unknown
+        );
 
         protected override CSharpSymbol IgnoreRemaining
         {
             get { return _ignoreRemaining; }
         }
 
-        protected override Tokenizer<CSharpSymbol, CSharpSymbolType> CreateTokenizer(ITextDocument source)
+        protected override Tokenizer<CSharpSymbol, CSharpSymbolType> CreateTokenizer(
+            ITextDocument source
+        )
         {
             return new CSharpTokenizer(source);
         }

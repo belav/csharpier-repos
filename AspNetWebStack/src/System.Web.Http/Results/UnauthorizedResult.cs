@@ -22,21 +22,25 @@ namespace System.Web.Http.Results
         /// <summary>Initializes a new instance of the <see cref="StatusCodeResult"/> class.</summary>
         /// <param name="challenges">The WWW-Authenticate challenges.</param>
         /// <param name="request">The request message which led to this result.</param>
-        public UnauthorizedResult(IEnumerable<AuthenticationHeaderValue> challenges, HttpRequestMessage request)
-            : this(challenges, new StatusCodeResult.DirectDependencyProvider(request))
-        {
-        }
+        public UnauthorizedResult(
+            IEnumerable<AuthenticationHeaderValue> challenges,
+            HttpRequestMessage request
+        )
+            : this(challenges, new StatusCodeResult.DirectDependencyProvider(request)) { }
 
         /// <summary>Initializes a new instance of the <see cref="StatusCodeResult"/> class.</summary>
         /// <param name="challenges">The WWW-Authenticate challenges.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public UnauthorizedResult(IEnumerable<AuthenticationHeaderValue> challenges, ApiController controller)
-            : this(challenges, new StatusCodeResult.ApiControllerDependencyProvider(controller))
-        {
-        }
+        public UnauthorizedResult(
+            IEnumerable<AuthenticationHeaderValue> challenges,
+            ApiController controller
+        )
+            : this(challenges, new StatusCodeResult.ApiControllerDependencyProvider(controller)) { }
 
-        private UnauthorizedResult(IEnumerable<AuthenticationHeaderValue> challenges,
-            StatusCodeResult.IDependencyProvider dependencies)
+        private UnauthorizedResult(
+            IEnumerable<AuthenticationHeaderValue> challenges,
+            StatusCodeResult.IDependencyProvider dependencies
+        )
         {
             if (challenges == null)
             {

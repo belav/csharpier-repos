@@ -1,36 +1,40 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.IO;
     using System.Web;
 
-    public class FileStreamResult : FileResult {
-
+    public class FileStreamResult : FileResult
+    {
         // default buffer size as defined in BufferedStream type
         private const int _bufferSize = 0x1000;
 
         public FileStreamResult(Stream fileStream, string contentType)
-            : base(contentType) {
-            if (fileStream == null) {
+            : base(contentType)
+        {
+            if (fileStream == null)
+            {
                 throw new ArgumentNullException("fileStream");
             }
 
             FileStream = fileStream;
         }
 
-        public Stream FileStream {
-            get;
-            private set;
-        }
+        public Stream FileStream { get; private set; }
 
-        protected override void WriteFile(HttpResponseBase response) {
+        protected override void WriteFile(HttpResponseBase response)
+        {
             // grab chunks of data and write to the output stream
             Stream outputStream = response.OutputStream;
-            using (FileStream) {
+            using (FileStream)
+            {
                 byte[] buffer = new byte[_bufferSize];
 
-                while (true) {
+                while (true)
+                {
                     int bytesRead = FileStream.Read(buffer, 0, _bufferSize);
-                    if (bytesRead == 0) {
+                    if (bytesRead == 0)
+                    {
                         // no more data
                         break;
                     }
@@ -39,6 +43,5 @@
                 }
             }
         }
-
     }
 }

@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,96 +34,111 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Mono.Security;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class ApplicationDirectoryMembershipCondition
+        : IConstantMembershipCondition,
+            IMembershipCondition
+    {
+        private readonly int version = 1;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class ApplicationDirectoryMembershipCondition : IConstantMembershipCondition, IMembershipCondition {
+        public ApplicationDirectoryMembershipCondition() { }
 
-		private readonly int version = 1;
+        // Methods
+        public bool Check(Evidence evidence)
+        {
+            if (evidence == null)
+                return false;
 
-		public ApplicationDirectoryMembershipCondition ()
-		{
-		}
+            string codebase = Assembly.GetCallingAssembly().CodeBase;
+            Uri local = new Uri(codebase);
+            Url ucode = new Url(codebase);
 
-		// Methods
-		public bool Check (Evidence evidence)
-		{
-			if (evidence == null)
-				return false;
+            // *both* ApplicationDirectory and Url must be in *Host* evidences
+            bool adir = false;
+            bool url = false;
+            IEnumerator e = evidence.GetHostEnumerator();
+            while (e.MoveNext())
+            {
+                object o = e.Current;
 
-			string codebase = Assembly.GetCallingAssembly ().CodeBase;
-			Uri local = new Uri (codebase);
-			Url ucode = new Url (codebase);
+                if (!adir && (o is ApplicationDirectory))
+                {
+                    ApplicationDirectory ad = (o as ApplicationDirectory);
+                    string s = ad.Directory;
+                    adir = (
+                        String.Compare(
+                            s,
+                            0,
+                            local.ToString(),
+                            0,
+                            s.Length,
+                            true,
+                            CultureInfo.InvariantCulture
+                        ) == 0
+                    );
+                }
+                else if (!url && (o is Url))
+                {
+                    url = ucode.Equals(o);
+                }
 
-			// *both* ApplicationDirectory and Url must be in *Host* evidences
-			bool adir = false;
-			bool url = false;
-			IEnumerator e = evidence.GetHostEnumerator ();
-			while (e.MoveNext ()) {
-				object o = e.Current;
+                // got both ?
+                if (adir && url)
+                    return true;
+            }
+            return false;
+        }
 
-				if (!adir && (o is ApplicationDirectory)) {
-					ApplicationDirectory ad = (o as ApplicationDirectory);
-					string s = ad.Directory;
-					adir = (String.Compare (s, 0, local.ToString (), 0, s.Length, true, CultureInfo.InvariantCulture) == 0);
-				}
-				else if (!url && (o is Url)) {
-					url = ucode.Equals (o);
-				}
+        public IMembershipCondition Copy()
+        {
+            return new ApplicationDirectoryMembershipCondition();
+        }
 
-				// got both ?
-				if (adir && url)
-					return true;
-			}
-			return false;
-		}
+        public override bool Equals(object o)
+        {
+            return (o is ApplicationDirectoryMembershipCondition);
+        }
 
-		public IMembershipCondition Copy () 
-		{ 
-			return new ApplicationDirectoryMembershipCondition ();
-		}
-		
-		public override bool Equals (object o) 
-		{ 
-			return (o is ApplicationDirectoryMembershipCondition); 
-		}
-		
-		public void FromXml (SecurityElement e)
-		{
-			FromXml (e, null);
-		}
-		
-		public void FromXml (SecurityElement e, PolicyLevel level)
-		{
-			MembershipConditionHelper.CheckSecurityElement (e, "e", version, version);
-		}
-		
-		// All instances of ApplicationDirectoryMembershipCondition are equal so they should
-		// have the same hashcode
-		public override int GetHashCode () 
-		{ 
-			return typeof (ApplicationDirectoryMembershipCondition).GetHashCode ();
-		}
-		
-		public override string ToString () 
-		{ 
-			return "ApplicationDirectory";
-		}
-		
-		public SecurityElement ToXml () 
-		{ 
-			return ToXml (null);
-		}
-		
-		public SecurityElement ToXml (PolicyLevel level) 
-		{
-			SecurityElement se = MembershipConditionHelper.Element (typeof (ApplicationDirectoryMembershipCondition), version);
-			// nothing to add
-			return se;
-		}
-	}
+        public void FromXml(SecurityElement e)
+        {
+            FromXml(e, null);
+        }
+
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
+            MembershipConditionHelper.CheckSecurityElement(e, "e", version, version);
+        }
+
+        // All instances of ApplicationDirectoryMembershipCondition are equal so they should
+        // have the same hashcode
+        public override int GetHashCode()
+        {
+            return typeof(ApplicationDirectoryMembershipCondition).GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "ApplicationDirectory";
+        }
+
+        public SecurityElement ToXml()
+        {
+            return ToXml(null);
+        }
+
+        public SecurityElement ToXml(PolicyLevel level)
+        {
+            SecurityElement se = MembershipConditionHelper.Element(
+                typeof(ApplicationDirectoryMembershipCondition),
+                version
+            );
+            // nothing to add
+            return se;
+        }
+    }
 }

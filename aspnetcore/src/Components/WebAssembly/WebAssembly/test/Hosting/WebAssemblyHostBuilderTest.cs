@@ -76,13 +76,10 @@ public class WebAssemblyHostBuilderTest
         builder.Services.AddScoped<StringBuilder>();
 
         var factory = new MyFakeServiceProviderFactory();
-        builder.ConfigureContainer(
-            factory,
-            builder =>
-            {
-                builder.ServiceCollection.AddScoped<List<string>>();
-            }
-        );
+        builder.ConfigureContainer(factory, builder =>
+        {
+            builder.ServiceCollection.AddScoped<List<string>>();
+        });
 
         // Act
         var host = builder.Build();
@@ -110,8 +107,8 @@ public class WebAssemblyHostBuilderTest
 
         // Assert
         Assert.NotNull(host.Services.GetRequiredService<StringBuilder>());
-        Assert.Throws<InvalidOperationException>(
-            () => host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>()
+        Assert.Throws<InvalidOperationException>(() =>
+            host.Services.GetRequiredService<TestServiceThatTakesStringBuilder>()
         );
     }
 

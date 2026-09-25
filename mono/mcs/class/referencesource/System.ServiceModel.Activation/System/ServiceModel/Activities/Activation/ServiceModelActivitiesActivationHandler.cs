@@ -3,13 +3,16 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Activities.Activation
 {
-    using System.ServiceModel;
-    using System.ServiceModel.Activation;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
+    using System.ServiceModel;
+    using System.ServiceModel.Activation;
 
-    [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUninstantiatedInternalClasses,
-        Justification = "This is instantiated by AspNet.")]
+    [SuppressMessage(
+        FxCop.Category.Performance,
+        FxCop.Rule.AvoidUninstantiatedInternalClasses,
+        Justification = "This is instantiated by AspNet."
+    )]
     class ServiceModelActivitiesActivationHandler : HttpHandler, IServiceModelActivationHandler
     {
         public ServiceHostFactoryBase GetFactory()

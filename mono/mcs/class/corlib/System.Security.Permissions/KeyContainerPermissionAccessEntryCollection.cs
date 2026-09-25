@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,99 +30,106 @@ using System.Collections;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Permissions {
+namespace System.Security.Permissions
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class KeyContainerPermissionAccessEntryCollection : ICollection, IEnumerable
+    {
+        private ArrayList _list;
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class KeyContainerPermissionAccessEntryCollection : ICollection, IEnumerable {
+        internal KeyContainerPermissionAccessEntryCollection()
+        {
+            _list = new ArrayList();
+        }
 
-		private ArrayList _list;
+        internal KeyContainerPermissionAccessEntryCollection(
+            KeyContainerPermissionAccessEntry[] entries
+        )
+            : base()
+        {
+            if (entries != null)
+            {
+                foreach (KeyContainerPermissionAccessEntry kcpae in entries)
+                {
+                    Add(kcpae);
+                }
+            }
+        }
 
-		internal KeyContainerPermissionAccessEntryCollection ()
-		{
-			_list = new ArrayList ();
-		}
+        public int Count
+        {
+            get { return _list.Count; }
+        }
 
-		internal KeyContainerPermissionAccessEntryCollection (KeyContainerPermissionAccessEntry[] entries)
-			: base ()
-		{
-			if (entries != null) {
-				foreach (KeyContainerPermissionAccessEntry kcpae in entries) {
-					Add (kcpae);
-				}
-			}
-		}
+        public bool IsSynchronized
+        {
+            get { return false; } // as documented
+        }
 
+        public KeyContainerPermissionAccessEntry this[int index]
+        {
+            get { return (KeyContainerPermissionAccessEntry)_list[index]; }
+        }
 
-		public int Count {
-			get { return _list.Count; }
-		}
+        public object SyncRoot
+        {
+            get { return this; } // as documented
+        }
 
-		public bool IsSynchronized {
-			get { return false; }	// as documented
-		}
+        public int Add(KeyContainerPermissionAccessEntry accessEntry)
+        {
+            return _list.Add(accessEntry);
+        }
 
-		public KeyContainerPermissionAccessEntry this [int index] {
-			get { return (KeyContainerPermissionAccessEntry) _list [index]; }
-		}
+        public void Clear()
+        {
+            _list.Clear();
+        }
 
-		public object SyncRoot {
-			get { return this; }	// as documented
-		}
+        public void CopyTo(KeyContainerPermissionAccessEntry[] array, int index)
+        {
+            _list.CopyTo(array, index);
+        }
 
+        void ICollection.CopyTo(Array array, int index)
+        {
+            _list.CopyTo(array, index);
+        }
 
-		public int Add (KeyContainerPermissionAccessEntry accessEntry)
-		{
-			return _list.Add (accessEntry);
-		}
+        public KeyContainerPermissionAccessEntryEnumerator GetEnumerator()
+        {
+            return new KeyContainerPermissionAccessEntryEnumerator(_list);
+        }
 
-		public void Clear ()
-		{
-			_list.Clear ();
-		}
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return new KeyContainerPermissionAccessEntryEnumerator(_list);
+        }
 
-		public void CopyTo (KeyContainerPermissionAccessEntry[] array, int index)
-		{
-			_list.CopyTo (array, index);
-		}
+        public int IndexOf(KeyContainerPermissionAccessEntry accessEntry)
+        {
+            if (accessEntry == null)
+                throw new ArgumentNullException("accessEntry");
 
-		void ICollection.CopyTo (Array array, int index)
-		{
-			_list.CopyTo (array, index);
-		}
+            for (int i = 0; i < _list.Count; i++)
+            {
+                if (accessEntry.Equals(_list[i]))
+                    return i;
+            }
+            return -1;
+        }
 
-		public KeyContainerPermissionAccessEntryEnumerator GetEnumerator ()
-		{
-			return new KeyContainerPermissionAccessEntryEnumerator (_list);
-		}
+        public void Remove(KeyContainerPermissionAccessEntry accessEntry)
+        {
+            if (accessEntry == null)
+                throw new ArgumentNullException("accessEntry");
 
-		IEnumerator IEnumerable.GetEnumerator () 
-		{
-			return new KeyContainerPermissionAccessEntryEnumerator (_list);
-		}
-
-		public int IndexOf (KeyContainerPermissionAccessEntry accessEntry) 
-		{
-			if (accessEntry == null)
-				throw new ArgumentNullException ("accessEntry");
-
-			for (int i=0; i < _list.Count; i++) {
-				if (accessEntry.Equals (_list [i]))
-					return i;
-			}
-			return -1;
-		}
-
-		public void Remove (KeyContainerPermissionAccessEntry accessEntry) 
-		{
-			if (accessEntry == null)
-				throw new ArgumentNullException ("accessEntry");
-
-			for (int i=0; i < _list.Count; i++) {
-				if (accessEntry.Equals (_list [i]))
-					_list.RemoveAt (i);
-			}
-		}
-	}
+            for (int i = 0; i < _list.Count; i++)
+            {
+                if (accessEntry.Equals(_list[i]))
+                    _list.RemoveAt(i);
+            }
+        }
+    }
 }
-

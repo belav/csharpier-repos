@@ -2,13 +2,12 @@
 
 public class X
 {
-	Stack<int> stack;
+    Stack<int> stack;
 
-	void Test ()
-	{
-		stack.Hello (3);
-	}
+    void Test()
+    {
+        stack.Hello(3);
+    }
 
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

@@ -64,7 +64,11 @@ namespace System.Xml.XmlSchemaTests
 
         //-----------------------------------------------------------------------------------
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75123", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75123",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         //[Variation(Desc = "v4 - ns = valid, URL = invalid")]
         public void v4()
         {
@@ -296,14 +300,17 @@ namespace System.Xml.XmlSchemaTests
             using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                string head = @"<?xml version='1.0'?>
+                string head =
+                    @"<?xml version='1.0'?>
                 <xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' >";
 
-                string body = @" <xsd:element name='myFields'>
+                string body =
+                    @" <xsd:element name='myFields'>
                                   <xsd:complexType>
                                    <xsd:sequence>";
 
-                string end = @"    </xsd:sequence>
+                string end =
+                    @"    </xsd:sequence>
                                   </xsd:complexType>
                                 </xsd:element>
                               </xsd:schema>";
@@ -349,14 +356,17 @@ namespace System.Xml.XmlSchemaTests
             using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write))
             using (StreamWriter sw = new StreamWriter(fs))
             {
-                string head = @"<?xml version='1.0'?>
+                string head =
+                    @"<?xml version='1.0'?>
                 <xsd:schema xmlns:xsd='http://www.w3.org/2001/XMLSchema' >";
 
-                string body = @" <xsd:element name='myFields'>
+                string body =
+                    @" <xsd:element name='myFields'>
                                   <xsd:complexType>
                                    <xsd:choice>";
 
-                string end = @"    </xsd:choice>
+                string end =
+                    @"    </xsd:choice>
                                   </xsd:complexType>
                                 </xsd:element>
                               </xsd:schema>";
@@ -383,7 +393,7 @@ namespace System.Xml.XmlSchemaTests
             {
                 XmlSchemaSet ss = new XmlSchemaSet();
                 ss.Add("", file);
-                ss.Compile();    // if throws StackOfFlowException will cause test failure
+                ss.Compile(); // if throws StackOfFlowException will cause test failure
             }
             catch (OutOfMemoryException)
             {

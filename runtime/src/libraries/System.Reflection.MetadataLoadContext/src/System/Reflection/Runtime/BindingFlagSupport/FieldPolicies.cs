@@ -16,14 +16,24 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             return typeInfo.DeclaredFields;
         }
 
-        public sealed override IEnumerable<FieldInfo> CoreGetDeclaredMembers(RuntimeTypeInfo type, NameFilter? filter, RuntimeTypeInfo reflectedType)
+        public sealed override IEnumerable<FieldInfo> CoreGetDeclaredMembers(
+            RuntimeTypeInfo type,
+            NameFilter? filter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             return type.GetFieldsCore(filter, reflectedType);
         }
 
         public sealed override bool AlwaysTreatAsDeclaredOnly => false;
 
-        public sealed override void GetMemberAttributes(FieldInfo member, out MethodAttributes visibility, out bool isStatic, out bool isVirtual, out bool isNewSlot)
+        public sealed override void GetMemberAttributes(
+            FieldInfo member,
+            out MethodAttributes visibility,
+            out bool isStatic,
+            out bool isVirtual,
+            out bool isNewSlot
+        )
         {
             FieldAttributes fieldAttributes = member.Attributes;
             visibility = (MethodAttributes)(fieldAttributes & FieldAttributes.FieldAccessMask);
@@ -32,9 +42,17 @@ namespace System.Reflection.Runtime.BindingFlagSupport
             isNewSlot = false;
         }
 
-        public sealed override bool ImplicitlyOverrides(FieldInfo? baseMember, FieldInfo? derivedMember) => false;
+        public sealed override bool ImplicitlyOverrides(
+            FieldInfo? baseMember,
+            FieldInfo? derivedMember
+        ) => false;
 
-        public sealed override bool IsSuppressedByMoreDerivedMember(FieldInfo member, FieldInfo[] priorMembers, int startIndex, int endIndex)
+        public sealed override bool IsSuppressedByMoreDerivedMember(
+            FieldInfo member,
+            FieldInfo[] priorMembers,
+            int startIndex,
+            int endIndex
+        )
         {
             return false;
         }

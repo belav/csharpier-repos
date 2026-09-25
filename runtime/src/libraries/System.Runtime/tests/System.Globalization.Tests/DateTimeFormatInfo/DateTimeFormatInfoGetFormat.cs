@@ -11,7 +11,8 @@ namespace System.Globalization.Tests
         public void GetFormat_Invoke_ReturnsExpected()
         {
             DateTimeFormatInfo expected = new DateTimeFormatInfo();
-            DateTimeFormatInfo format = (DateTimeFormatInfo)expected.GetFormat(typeof(DateTimeFormatInfo));
+            DateTimeFormatInfo format = (DateTimeFormatInfo)
+                expected.GetFormat(typeof(DateTimeFormatInfo));
             Assert.Same(expected, format);
         }
 

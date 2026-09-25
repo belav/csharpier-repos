@@ -46,7 +46,8 @@ public sealed record RelationalCommandBuilderDependencies
     [EntityFrameworkInternal]
     public RelationalCommandBuilderDependencies(
         IRelationalTypeMappingSource typeMappingSource,
-        IExceptionDetector exceptionDetector)
+        IExceptionDetector exceptionDetector
+    )
     {
         ExceptionDetector = exceptionDetector;
 
@@ -63,6 +64,8 @@ public sealed record RelationalCommandBuilderDependencies
     /// <summary>
     ///     The source for <see cref="RelationalTypeMapping" />s to use.
     /// </summary>
-    [Obsolete("RelationalCommandBuilder doesn't need TypeMappingSource. Derived class should inject the service if needed.")]
+    [Obsolete(
+        "RelationalCommandBuilder doesn't need TypeMappingSource. Derived class should inject the service if needed."
+    )]
     public IRelationalTypeMappingSource TypeMappingSource { get; init; }
 }

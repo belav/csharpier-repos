@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -31,6 +32,7 @@ namespace Test
             Method1();
             Method2();
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -38,7 +40,10 @@ namespace Test
             {
                 Main1();
             }
-            catch (NullReferenceException) { return 100; }
+            catch (NullReferenceException)
+            {
+                return 100;
+            }
             return -1;
         }
     }

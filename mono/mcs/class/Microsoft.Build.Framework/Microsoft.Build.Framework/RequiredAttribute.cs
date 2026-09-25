@@ -1,10 +1,10 @@
 //
 // RequiredAttribute.cs: Defines the metadata attribute that task author use to
-// identify required task parameters. 
+// identify required task parameters.
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -26,21 +26,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 
 namespace Microsoft.Build.Framework
 {
-	[AttributeUsage(AttributeTargets.Property, AllowMultiple=false, Inherited=false)]
-	public sealed class RequiredAttribute : Attribute
-	{
-		// It should stop build process if property is of non-array type
-		// and is null
-		// It should pass empty table if property is of array type
-		// and is null
-		public RequiredAttribute ()
-		{
-		}
-	}
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public sealed class RequiredAttribute : Attribute
+    {
+        // It should stop build process if property is of non-array type
+        // and is null
+        // It should pass empty table if property is of array type
+        // and is null
+        public RequiredAttribute() { }
+    }
 }
-

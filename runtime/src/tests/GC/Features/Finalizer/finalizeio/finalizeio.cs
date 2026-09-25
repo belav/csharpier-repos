@@ -7,17 +7,17 @@ using System;
 using System.IO;
 using System.Runtime.CompilerServices;
 
-public class Test_finalizeio {
-
-    public class Dummy {
-
+public class Test_finalizeio
+{
+    public class Dummy
+    {
         public static bool visited;
 
-        ~Dummy() {
-
+        ~Dummy()
+        {
             Console.WriteLine("In Finalize() of Dummy");
 
-            visited=true;
+            visited = true;
 
             try
             {
@@ -29,34 +29,38 @@ public class Test_finalizeio {
                         Console.WriteLine(read.ReadLine());
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Console.WriteLine("Exception handled: " + e);
-                visited=false;
+                visited = false;
             }
-
         }
     }
 
-    public class CreateObj{
+    public class CreateObj
+    {
         public Dummy obj;
 
-        public CreateObj() {
+        public CreateObj()
+        {
             obj = new Dummy();
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public void RunTest() {
-            obj=null;
+        public void RunTest()
+        {
+            obj = null;
         }
     }
 
-    public static int Main() {
+    public static int Main()
+    {
         CreateObj temp = new CreateObj();
 
         using (StreamWriter writer = File.CreateText("temp.txt"))
         {
-writer.WriteLine(@"***************** START ************************
+            writer.WriteLine(
+                @"***************** START ************************
 This is a test file for testing IO in Finalizers.
 Line 1
 Line 2
@@ -81,17 +85,17 @@ Line 20
 Line 21
 Line 22
 Line 23
-******************* END *****************************");
+******************* END *****************************"
+            );
         }
 
         temp.RunTest();
 
         GC.Collect();
-        GC.WaitForPendingFinalizers();  // makes sure Finalize() is called.
+        GC.WaitForPendingFinalizers(); // makes sure Finalize() is called.
         GC.Collect();
 
-
-        if (Dummy.visited) 
+        if (Dummy.visited)
         {
             Console.WriteLine("Test for Finalize() & WaitForPendingFinalizers() passed!");
             return 100;
@@ -99,6 +103,5 @@ Line 23
 
         Console.WriteLine("Test for Finalize() & WaitForPendingFinalizers() failed!");
         return 1;
-
     }
 }

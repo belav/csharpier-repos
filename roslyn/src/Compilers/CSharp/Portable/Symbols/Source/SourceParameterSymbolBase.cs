@@ -66,7 +66,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal abstract ConstantValue DefaultValueFromAttributes { get; }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
@@ -74,57 +77,100 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (this.IsParams)
             {
-                AddSynthesizedAttribute(ref attributes, compilation.TrySynthesizeAttribute(WellKnownMember.System_ParamArrayAttribute__ctor));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_ParamArrayAttribute__ctor
+                    )
+                );
             }
 
             // Synthesize DecimalConstantAttribute if we don't have an explicit custom attribute already:
             var defaultValue = this.ExplicitDefaultConstantValue;
-            if (defaultValue != ConstantValue.NotAvailable &&
-                defaultValue.SpecialType == SpecialType.System_Decimal &&
-                DefaultValueFromAttributes == ConstantValue.NotAvailable)
+            if (
+                defaultValue != ConstantValue.NotAvailable
+                && defaultValue.SpecialType == SpecialType.System_Decimal
+                && DefaultValueFromAttributes == ConstantValue.NotAvailable
+            )
             {
-                AddSynthesizedAttribute(ref attributes, compilation.SynthesizeDecimalConstantAttribute(defaultValue.DecimalValue));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeDecimalConstantAttribute(defaultValue.DecimalValue)
+                );
             }
 
             var type = this.TypeWithAnnotations;
 
             if (type.Type.ContainsDynamic())
             {
-                AddSynthesizedAttribute(ref attributes, compilation.SynthesizeDynamicAttribute(type.Type, type.CustomModifiers.Length + this.RefCustomModifiers.Length, this.RefKind));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeDynamicAttribute(
+                        type.Type,
+                        type.CustomModifiers.Length + this.RefCustomModifiers.Length,
+                        this.RefKind
+                    )
+                );
             }
 
             if (compilation.ShouldEmitNativeIntegerAttributes(type.Type))
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeNativeIntegerAttribute(this, type.Type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeNativeIntegerAttribute(this, type.Type)
+                );
             }
 
             if (ParameterHelpers.RequiresScopedRefAttribute(this))
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeScopedRefAttribute(this, EffectiveScope));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeScopedRefAttribute(this, EffectiveScope)
+                );
             }
 
             if (type.Type.ContainsTupleNames())
             {
-                AddSynthesizedAttribute(ref attributes,
-                    compilation.SynthesizeTupleNamesAttribute(type.Type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeTupleNamesAttribute(type.Type)
+                );
             }
 
             switch (this.RefKind)
             {
                 case RefKind.In:
-                    AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeIsReadOnlyAttribute(this));
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        moduleBuilder.SynthesizeIsReadOnlyAttribute(this)
+                    );
                     break;
                 case RefKind.RefReadOnlyParameter:
-                    AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeRequiresLocationAttribute(this));
+                    AddSynthesizedAttribute(
+                        ref attributes,
+                        moduleBuilder.SynthesizeRequiresLocationAttribute(this)
+                    );
                     break;
             }
 
             if (compilation.ShouldEmitNullableAttributes(this))
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeNullableAttributeIfNecessary(this, GetNullableContextValue(), type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeNullableAttributeIfNecessary(
+                        this,
+                        GetNullableContextValue(),
+                        type
+                    )
+                );
             }
         }
 
-        internal abstract ParameterSymbol WithCustomModifiersAndParams(TypeSymbol newType, ImmutableArray<CustomModifier> newCustomModifiers, ImmutableArray<CustomModifier> newRefCustomModifiers, bool newIsParams);
+        internal abstract ParameterSymbol WithCustomModifiersAndParams(
+            TypeSymbol newType,
+            ImmutableArray<CustomModifier> newCustomModifiers,
+            ImmutableArray<CustomModifier> newRefCustomModifiers,
+            bool newIsParams
+        );
     }
 }

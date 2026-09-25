@@ -1,99 +1,150 @@
-﻿namespace System.Web.Mvc {
+﻿namespace System.Web.Mvc
+{
     using System;
     using System.Web.Mvc.Async;
     using System.Web.Routing;
 
-    public abstract class AsyncController : Controller, IAsyncManagerContainer, IAsyncController {
-
+    public abstract class AsyncController : Controller, IAsyncManagerContainer, IAsyncController
+    {
         private static readonly object _executeTag = new object();
         private static readonly object _executeCoreTag = new object();
 
         private readonly AsyncManager _asyncManager = new AsyncManager();
 
-        public AsyncManager AsyncManager {
-            get {
-                return _asyncManager;
-            }
+        public AsyncManager AsyncManager
+        {
+            get { return _asyncManager; }
         }
 
-        protected virtual IAsyncResult BeginExecute(RequestContext requestContext, AsyncCallback callback, object state) {
-            if (requestContext == null) {
+        protected virtual IAsyncResult BeginExecute(
+            RequestContext requestContext,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            if (requestContext == null)
+            {
                 throw new ArgumentNullException("requestContext");
             }
 
             VerifyExecuteCalledOnce();
             Initialize(requestContext);
-            return AsyncResultWrapper.Begin(callback, state, BeginExecuteCore, EndExecuteCore, _executeTag);
+            return AsyncResultWrapper.Begin(
+                callback,
+                state,
+                BeginExecuteCore,
+                EndExecuteCore,
+                _executeTag
+            );
         }
 
-        protected virtual IAsyncResult BeginExecuteCore(AsyncCallback callback, object state) {
+        protected virtual IAsyncResult BeginExecuteCore(AsyncCallback callback, object state)
+        {
             // If code in this method needs to be updated, please also check the ExecuteCore() method
             // of Controller to see if that code also must be updated.
 
             PossiblyLoadTempData();
-            try {
+            try
+            {
                 string actionName = RouteData.GetRequiredString("action");
                 IActionInvoker invoker = ActionInvoker;
                 IAsyncActionInvoker asyncInvoker = invoker as IAsyncActionInvoker;
-                if (asyncInvoker != null) {
+                if (asyncInvoker != null)
+                {
                     // asynchronous invocation
-                    BeginInvokeDelegate beginDelegate = delegate(AsyncCallback asyncCallback, object asyncState) {
-                        return asyncInvoker.BeginInvokeAction(ControllerContext, actionName, asyncCallback, asyncState);
+                    BeginInvokeDelegate beginDelegate = delegate(
+                        AsyncCallback asyncCallback,
+                        object asyncState
+                    )
+                    {
+                        return asyncInvoker.BeginInvokeAction(
+                            ControllerContext,
+                            actionName,
+                            asyncCallback,
+                            asyncState
+                        );
                     };
 
-                    EndInvokeDelegate endDelegate = delegate(IAsyncResult asyncResult) {
-                        if (!asyncInvoker.EndInvokeAction(asyncResult)) {
+                    EndInvokeDelegate endDelegate = delegate(IAsyncResult asyncResult)
+                    {
+                        if (!asyncInvoker.EndInvokeAction(asyncResult))
+                        {
                             HandleUnknownAction(actionName);
                         }
                     };
 
-                    return AsyncResultWrapper.Begin(callback, state, beginDelegate, endDelegate, _executeCoreTag);
+                    return AsyncResultWrapper.Begin(
+                        callback,
+                        state,
+                        beginDelegate,
+                        endDelegate,
+                        _executeCoreTag
+                    );
                 }
-                else {
+                else
+                {
                     // synchronous invocation
-                    Action action = () => {
-                        if (!invoker.InvokeAction(ControllerContext, actionName)) {
+                    Action action = () =>
+                    {
+                        if (!invoker.InvokeAction(ControllerContext, actionName))
+                        {
                             HandleUnknownAction(actionName);
                         }
                     };
-                    return AsyncResultWrapper.BeginSynchronous(callback, state, action, _executeCoreTag);
+                    return AsyncResultWrapper.BeginSynchronous(
+                        callback,
+                        state,
+                        action,
+                        _executeCoreTag
+                    );
                 }
             }
-            catch {
+            catch
+            {
                 PossiblySaveTempData();
                 throw;
             }
         }
 
-        protected override IActionInvoker CreateActionInvoker() {
+        protected override IActionInvoker CreateActionInvoker()
+        {
             return new AsyncControllerActionInvoker();
         }
 
-        protected virtual void EndExecute(IAsyncResult asyncResult) {
+        protected virtual void EndExecute(IAsyncResult asyncResult)
+        {
             AsyncResultWrapper.End(asyncResult, _executeTag);
         }
 
-        protected virtual void EndExecuteCore(IAsyncResult asyncResult) {
+        protected virtual void EndExecuteCore(IAsyncResult asyncResult)
+        {
             // If code in this method needs to be updated, please also check the ExecuteCore() method
             // of Controller to see if that code also must be updated.
 
-            try {
+            try
+            {
                 AsyncResultWrapper.End(asyncResult, _executeCoreTag);
             }
-            finally {
+            finally
+            {
                 PossiblySaveTempData();
             }
         }
 
         #region IAsyncController Members
-        IAsyncResult IAsyncController.BeginExecute(RequestContext requestContext, AsyncCallback callback, object state) {
+        IAsyncResult IAsyncController.BeginExecute(
+            RequestContext requestContext,
+            AsyncCallback callback,
+            object state
+        )
+        {
             return BeginExecute(requestContext, callback, state);
         }
 
-        void IAsyncController.EndExecute(IAsyncResult asyncResult) {
+        void IAsyncController.EndExecute(IAsyncResult asyncResult)
+        {
             EndExecute(asyncResult);
         }
         #endregion
-
     }
 }

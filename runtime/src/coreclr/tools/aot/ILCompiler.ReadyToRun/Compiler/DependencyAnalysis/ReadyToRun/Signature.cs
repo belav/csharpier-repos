@@ -7,7 +7,9 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
     public abstract class Signature : ObjectNode, ISymbolDefinitionNode, ISortableSymbolNode
     {
-        public override ObjectNodeSection GetSection(NodeFactory factory) => ObjectNodeSection.DataSection;
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            ObjectNodeSection.DataSection;
+
         public override bool IsShareable => true;
         public override bool StaticDependenciesAreComputed => true;
 
@@ -15,6 +17,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         public int Offset => 0;
         public override int ClassCode => ClassCode;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
     }
 }

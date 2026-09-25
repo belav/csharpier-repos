@@ -17,7 +17,8 @@ namespace System.Net.Http.Functional.Tests
     {
         protected abstract bool SupportsIdna { get; }
 
-        public IdnaProtocolTests(ITestOutputHelper output) : base(output) { }
+        public IdnaProtocolTests(ITestOutputHelper output)
+            : base(output) { }
 
         [Theory]
         [MemberData(nameof(InternationalHostNames))]
@@ -30,28 +31,31 @@ namespace System.Net.Http.Functional.Tests
 
             Uri uri = new Uri($"http://{hostname}/");
 
-            await LoopbackServer.CreateServerAsync(async (server, serverUrl) =>
-            {
-                // We don't actually want to do DNS lookup on the IDNA host name in the URL.
-                // So instead, configure the loopback server as a proxy so we will send to it.
-                HttpClientHandler handler = CreateHttpClientHandler();
-                handler.UseProxy = true;
-                handler.Proxy = new WebProxy(serverUrl.ToString());
-
-                using (HttpClient client = CreateHttpClient(handler))
+            await LoopbackServer.CreateServerAsync(
+                async (server, serverUrl) =>
                 {
-                    Task<HttpResponseMessage> getResponseTask = client.GetAsync(TestAsync, uri);
-                    Task<List<string>> serverTask = server.AcceptConnectionSendResponseAndCloseAsync();
+                    // We don't actually want to do DNS lookup on the IDNA host name in the URL.
+                    // So instead, configure the loopback server as a proxy so we will send to it.
+                    HttpClientHandler handler = CreateHttpClientHandler();
+                    handler.UseProxy = true;
+                    handler.Proxy = new WebProxy(serverUrl.ToString());
 
-                    await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
+                    using (HttpClient client = CreateHttpClient(handler))
+                    {
+                        Task<HttpResponseMessage> getResponseTask = client.GetAsync(TestAsync, uri);
+                        Task<List<string>> serverTask =
+                            server.AcceptConnectionSendResponseAndCloseAsync();
 
-                    List<string> requestLines = await serverTask;
+                        await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
 
-                    // Note since we're using a proxy, host name is included in the request line
-                    Assert.Equal($"GET http://{uri.IdnHost}/ HTTP/1.1", requestLines[0]);
-                    Assert.Contains($"Host: {uri.IdnHost}", requestLines);
+                        List<string> requestLines = await serverTask;
+
+                        // Note since we're using a proxy, host name is included in the request line
+                        Assert.Equal($"GET http://{uri.IdnHost}/ HTTP/1.1", requestLines[0]);
+                        Assert.Contains($"Host: {uri.IdnHost}", requestLines);
+                    }
                 }
-            });
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24679")] // We aren't doing IDNA encoding properly
@@ -66,30 +70,41 @@ namespace System.Net.Http.Functional.Tests
 
             Uri uri = new Uri($"http://{hostname}/");
 
-            await LoopbackServer.CreateServerAsync(async (server, serverUrl) =>
-            {
-                using (HttpClient client = CreateHttpClient())
+            await LoopbackServer.CreateServerAsync(
+                async (server, serverUrl) =>
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Get, serverUrl) { Version = UseVersion };
-                    request.Headers.Host = hostname;
-                    request.Headers.Referrer = uri;
-                    Task<HttpResponseMessage> getResponseTask = client.SendAsync(TestAsync, request);
-                    Task<List<string>> serverTask = server.AcceptConnectionSendResponseAndCloseAsync();
+                    using (HttpClient client = CreateHttpClient())
+                    {
+                        var request = new HttpRequestMessage(HttpMethod.Get, serverUrl)
+                        {
+                            Version = UseVersion,
+                        };
+                        request.Headers.Host = hostname;
+                        request.Headers.Referrer = uri;
+                        Task<HttpResponseMessage> getResponseTask = client.SendAsync(
+                            TestAsync,
+                            request
+                        );
+                        Task<List<string>> serverTask =
+                            server.AcceptConnectionSendResponseAndCloseAsync();
 
-                    await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
+                        await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
 
-                    List<string> requestLines = await serverTask;
+                        List<string> requestLines = await serverTask;
 
-                    Assert.Contains($"Host: {uri.IdnHost}", requestLines);
-                    Assert.Contains($"Referer: http://{uri.IdnHost}/", requestLines);
+                        Assert.Contains($"Host: {uri.IdnHost}", requestLines);
+                        Assert.Contains($"Referer: http://{uri.IdnHost}/", requestLines);
+                    }
                 }
-            });
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24679")] // We aren't doing IDNA decoding properly
         [Theory]
         [MemberData(nameof(InternationalHostNames))]
-        public async Task InternationalResponseHeaderValues_UsesIdnaDecoding_Success(string hostname)
+        public async Task InternationalResponseHeaderValues_UsesIdnaDecoding_Success(
+            string hostname
+        )
         {
             if (!SupportsIdna)
             {
@@ -98,24 +113,29 @@ namespace System.Net.Http.Functional.Tests
 
             Uri uri = new Uri($"http://{hostname}/");
 
-            await LoopbackServer.CreateServerAsync(async (server, serverUrl) =>
-            {
-                HttpClientHandler handler = CreateHttpClientHandler();
-                handler.AllowAutoRedirect = false;
-
-                using (HttpClient client = CreateHttpClient(handler))
+            await LoopbackServer.CreateServerAsync(
+                async (server, serverUrl) =>
                 {
-                    Task<HttpResponseMessage> getResponseTask = client.GetAsync(serverUrl);
-                    Task<List<string>> serverTask = server.AcceptConnectionSendResponseAndCloseAsync(
-                        HttpStatusCode.Found, "Location: http://{uri.IdnHost}/\r\n");
+                    HttpClientHandler handler = CreateHttpClientHandler();
+                    handler.AllowAutoRedirect = false;
 
-                    await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
+                    using (HttpClient client = CreateHttpClient(handler))
+                    {
+                        Task<HttpResponseMessage> getResponseTask = client.GetAsync(serverUrl);
+                        Task<List<string>> serverTask =
+                            server.AcceptConnectionSendResponseAndCloseAsync(
+                                HttpStatusCode.Found,
+                                "Location: http://{uri.IdnHost}/\r\n"
+                            );
 
-                    HttpResponseMessage response = await getResponseTask;
+                        await TestHelper.WhenAllCompletedOrAnyFailed(getResponseTask, serverTask);
 
-                    Assert.Equal(uri, response.Headers.Location);
+                        HttpResponseMessage response = await getResponseTask;
+
+                        Assert.Equal(uri, response.Headers.Location);
+                    }
                 }
-            });
+            );
         }
 
         public static IEnumerable<object[]> InternationalHostNames()

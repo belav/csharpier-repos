@@ -183,14 +183,12 @@ public class MaxRequestBodySizeTests : IISFunctionalTestBase
 
         if (deploymentParameters.ServerType == ServerType.IISExpress)
         {
-            Assert.Single(
-                TestSink.Writes,
-                w =>
-                    w.Message.Contains(
-                        "Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength."
-                            + " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS."
-                            + " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."
-                    )
+            Assert.Single(TestSink.Writes, w =>
+                w.Message.Contains(
+                    "Increasing the MaxRequestBodySize conflicts with the max value for IIS limit maxAllowedContentLength."
+                        + " HTTP requests that have a content length greater than maxAllowedContentLength will still be rejected by IIS."
+                        + " You can disable the limit by either removing or setting the maxAllowedContentLength value to a higher limit."
+                )
             );
         }
     }

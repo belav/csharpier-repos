@@ -7,15 +7,23 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Runtime.General;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Metadata.NativeFormat;
 
 namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 {
-    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes : NativeFormatRuntimeGenericParameterTypeInfo
+    internal sealed partial class NativeFormatRuntimeGenericParameterTypeInfoForTypes
+        : NativeFormatRuntimeGenericParameterTypeInfo
     {
-        private NativeFormatRuntimeGenericParameterTypeInfoForTypes(MetadataReader reader, GenericParameterHandle genericParameterHandle, RuntimeTypeDefinitionTypeInfo declaringType)
-           : base(reader, genericParameterHandle, genericParameterHandle.GetGenericParameter(reader))
+        private NativeFormatRuntimeGenericParameterTypeInfoForTypes(
+            MetadataReader reader,
+            GenericParameterHandle genericParameterHandle,
+            RuntimeTypeDefinitionTypeInfo declaringType
+        )
+            : base(
+                reader,
+                genericParameterHandle,
+                genericParameterHandle.GetGenericParameter(reader)
+            )
         {
             _declaringType = declaringType;
         }
@@ -25,26 +33,17 @@ namespace System.Reflection.Runtime.TypeInfos.NativeFormat
 
         public sealed override MethodBase DeclaringMethod
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         internal sealed override RuntimeTypeInfo InternalDeclaringType
         {
-            get
-            {
-                return _declaringType;
-            }
+            get { return _declaringType; }
         }
 
         internal sealed override TypeContext TypeContext
         {
-            get
-            {
-                return _declaringType.TypeContext;
-            }
+            get { return _declaringType.TypeContext; }
         }
 
         private readonly RuntimeTypeDefinitionTypeInfo _declaringType;

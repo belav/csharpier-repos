@@ -8,15 +8,17 @@ public class NullSubstituteType : AutoMapperSpecBase
     {
         public long? Number { get; set; }
     }
+
     class Destination
     {
         public long? Number { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>().ForMember(d => d.Number, o => o.NullSubstitute(0));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>().ForMember(d => d.Number, o => o.NullSubstitute(0));
+        });
 
     protected override void Because_of()
     {

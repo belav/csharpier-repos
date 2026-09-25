@@ -25,25 +25,22 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
                 SqlServerValueGenerationStrategy.IdentityColumn
             );
 
-        modelBuilder.Entity(
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole",
-            b =>
-            {
-                b.Property<string>("Id");
+        modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
+        {
+            b.Property<string>("Id");
 
-                b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
+            b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                b.Property<string>("Name").HasAnnotation("MaxLength", 256);
+            b.Property<string>("Name").HasAnnotation("MaxLength", 256);
 
-                b.Property<string>("NormalizedName").HasAnnotation("MaxLength", 256);
+            b.Property<string>("NormalizedName").HasAnnotation("MaxLength", 256);
 
-                b.HasKey("Id");
+            b.HasKey("Id");
 
-                b.HasIndex("NormalizedName").HasName("RoleNameIndex");
+            b.HasIndex("NormalizedName").HasName("RoleNameIndex");
 
-                b.ToTable("AspNetRoles");
-            }
-        );
+            b.ToTable("AspNetRoles");
+        });
 
         modelBuilder.Entity(
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>",
@@ -141,49 +138,46 @@ partial class ApplicationDbContextModelSnapshot : ModelSnapshot
             }
         );
 
-        modelBuilder.Entity(
-            "Identity.ExternalClaims.Models.ApplicationUser",
-            b =>
-            {
-                b.Property<string>("Id");
+        modelBuilder.Entity("Identity.ExternalClaims.Models.ApplicationUser", b =>
+        {
+            b.Property<string>("Id");
 
-                b.Property<int>("AccessFailedCount");
+            b.Property<int>("AccessFailedCount");
 
-                b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
+            b.Property<string>("ConcurrencyStamp").IsConcurrencyToken();
 
-                b.Property<string>("Email").HasAnnotation("MaxLength", 256);
+            b.Property<string>("Email").HasAnnotation("MaxLength", 256);
 
-                b.Property<bool>("EmailConfirmed");
+            b.Property<bool>("EmailConfirmed");
 
-                b.Property<bool>("LockoutEnabled");
+            b.Property<bool>("LockoutEnabled");
 
-                b.Property<DateTimeOffset?>("LockoutEnd");
+            b.Property<DateTimeOffset?>("LockoutEnd");
 
-                b.Property<string>("NormalizedEmail").HasAnnotation("MaxLength", 256);
+            b.Property<string>("NormalizedEmail").HasAnnotation("MaxLength", 256);
 
-                b.Property<string>("NormalizedUserName").HasAnnotation("MaxLength", 256);
+            b.Property<string>("NormalizedUserName").HasAnnotation("MaxLength", 256);
 
-                b.Property<string>("PasswordHash");
+            b.Property<string>("PasswordHash");
 
-                b.Property<string>("PhoneNumber");
+            b.Property<string>("PhoneNumber");
 
-                b.Property<bool>("PhoneNumberConfirmed");
+            b.Property<bool>("PhoneNumberConfirmed");
 
-                b.Property<string>("SecurityStamp");
+            b.Property<string>("SecurityStamp");
 
-                b.Property<bool>("TwoFactorEnabled");
+            b.Property<bool>("TwoFactorEnabled");
 
-                b.Property<string>("UserName").HasAnnotation("MaxLength", 256);
+            b.Property<string>("UserName").HasAnnotation("MaxLength", 256);
 
-                b.HasKey("Id");
+            b.HasKey("Id");
 
-                b.HasIndex("NormalizedEmail").HasName("EmailIndex");
+            b.HasIndex("NormalizedEmail").HasName("EmailIndex");
 
-                b.HasIndex("NormalizedUserName").IsUnique().HasName("UserNameIndex");
+            b.HasIndex("NormalizedUserName").IsUnique().HasName("UserNameIndex");
 
-                b.ToTable("AspNetUsers");
-            }
-        );
+            b.ToTable("AspNetUsers");
+        });
 
         modelBuilder.Entity(
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>",

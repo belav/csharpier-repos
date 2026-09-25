@@ -4,14 +4,16 @@
 namespace Microsoft.EntityFrameworkCore.Query;
 
 /// <inheritdoc />
-public class RelationalSqlTranslatingExpressionVisitorFactory : IRelationalSqlTranslatingExpressionVisitorFactory
+public class RelationalSqlTranslatingExpressionVisitorFactory
+    : IRelationalSqlTranslatingExpressionVisitorFactory
 {
     /// <summary>
     ///     Creates an instance of the <see cref="RelationalSqlTranslatingExpressionVisitorFactory" />.
     /// </summary>
     /// <param name="dependencies">The service dependencies.</param>
     public RelationalSqlTranslatingExpressionVisitorFactory(
-        RelationalSqlTranslatingExpressionVisitorDependencies dependencies)
+        RelationalSqlTranslatingExpressionVisitorDependencies dependencies
+    )
     {
         Dependencies = dependencies;
     }
@@ -24,9 +26,6 @@ public class RelationalSqlTranslatingExpressionVisitorFactory : IRelationalSqlTr
     /// <inheritdoc />
     public virtual RelationalSqlTranslatingExpressionVisitor Create(
         QueryCompilationContext queryCompilationContext,
-        QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor)
-        => new(
-            Dependencies,
-            queryCompilationContext,
-            queryableMethodTranslatingExpressionVisitor);
+        QueryableMethodTranslatingExpressionVisitor queryableMethodTranslatingExpressionVisitor
+    ) => new(Dependencies, queryCompilationContext, queryableMethodTranslatingExpressionVisitor);
 }

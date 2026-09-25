@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using System.Buffers.Binary;
-using System.Text;
-using System.Net;
-using System.Security.Cryptography;
-using System.Net.Security;
+using System.Diagnostics.CodeAnalysis;
 using System.Formats.Asn1;
+using System.Net;
+using System.Net.Security;
+using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
+using System.Text;
 using Xunit;
 
 namespace System.Net.Security
@@ -22,7 +22,7 @@ namespace System.Net.Security
         private enum NegotiationToken
         {
             NegTokenInit = 0,
-            NegTokenResp = 1
+            NegTokenResp = 1,
         }
 
         private enum NegTokenInit
@@ -30,7 +30,7 @@ namespace System.Net.Security
             MechTypes = 0,
             ReqFlags = 1,
             MechToken = 2,
-            MechListMIC = 3
+            MechListMIC = 3,
         }
 
         private enum NegTokenResp
@@ -38,7 +38,7 @@ namespace System.Net.Security
             NegState = 0,
             SupportedMech = 1,
             ResponseToken = 2,
-            MechListMIC = 3
+            MechListMIC = 3,
         }
 
         private enum NegState
@@ -46,7 +46,7 @@ namespace System.Net.Security
             AcceptCompleted = 0,
             AcceptIncomplete = 1,
             Reject = 2,
-            RequestMic = 3
+            RequestMic = 3,
         }
 
         private const string SpnegoOid = "1.3.6.1.5.5.2";
@@ -80,13 +80,21 @@ namespace System.Net.Security
             AsnReader reader = new AsnReader(incomingBlob, AsnEncodingRules.DER);
             if (_spnegoMechList == null)
             {
-                AsnReader initialContextTokenReader = reader.ReadSequence(new Asn1Tag(TagClass.Application, 0));
+                AsnReader initialContextTokenReader = reader.ReadSequence(
+                    new Asn1Tag(TagClass.Application, 0)
+                );
 
                 string spNegoOid = initialContextTokenReader.ReadObjectIdentifier();
                 Assert.Equal(SpnegoOid, spNegoOid);
 
-                AsnReader negTokenInitReader  = initialContextTokenReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenInit)).ReadSequence();
-                AsnReader mechTypesOuterReader = negTokenInitReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechTypes));
+                AsnReader negTokenInitReader = initialContextTokenReader
+                    .ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenInit)
+                    )
+                    .ReadSequence();
+                AsnReader mechTypesOuterReader = negTokenInitReader.ReadSequence(
+                    new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechTypes)
+                );
                 _spnegoMechList = mechTypesOuterReader.PeekEncodedValue().ToArray();
 
                 bool hasNtlm = false;
@@ -105,23 +113,48 @@ namespace System.Net.Security
                 }
 
                 // Skip context flags, if present
-                if (negTokenInitReader.HasData && negTokenInitReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.ReqFlags)))
+                if (
+                    negTokenInitReader.HasData
+                    && negTokenInitReader
+                        .PeekTag()
+                        .HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.ReqFlags)
+                        )
+                )
                 {
                     negTokenInitReader.ReadSequence();
                 }
 
                 byte[]? mechToken = null;
-                if (negTokenInitReader.HasData && negTokenInitReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechToken)))
+                if (
+                    negTokenInitReader.HasData
+                    && negTokenInitReader
+                        .PeekTag()
+                        .HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechToken)
+                        )
+                )
                 {
-                    AsnReader mechTokenReader = negTokenInitReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechToken));
+                    AsnReader mechTokenReader = negTokenInitReader.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechToken)
+                    );
                     mechToken = mechTokenReader.ReadOctetString();
                     Assert.False(mechTokenReader.HasData);
                 }
 
                 byte[]? mechListMIC = null;
-                if (negTokenInitReader.HasData && negTokenInitReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechListMIC)))
+                if (
+                    negTokenInitReader.HasData
+                    && negTokenInitReader
+                        .PeekTag()
+                        .HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechListMIC)
+                        )
+                )
                 {
-                    AsnReader mechListMICReader = negTokenInitReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechListMIC));
+                    AsnReader mechListMICReader = negTokenInitReader.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenInit.MechListMIC)
+                    );
                     mechListMIC = mechListMICReader.ReadOctetString();
                     Assert.False(mechListMICReader.HasData);
                 }
@@ -138,11 +171,19 @@ namespace System.Net.Security
 
                 // Generate reply
                 AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
-                using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)))
+                using (
+                    writer.PushSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)
+                    )
+                )
                 {
                     using (writer.PushSequence())
                     {
-                        using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)))
+                        using (
+                            writer.PushSequence(
+                                new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)
+                            )
+                        )
                         {
                             if (RequestMIC)
                             {
@@ -154,14 +195,28 @@ namespace System.Net.Security
                             }
                         }
 
-                        using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.SupportedMech)))
+                        using (
+                            writer.PushSequence(
+                                new Asn1Tag(
+                                    TagClass.ContextSpecific,
+                                    (int)NegTokenResp.SupportedMech
+                                )
+                            )
+                        )
                         {
                             writer.WriteObjectIdentifier(NtlmOid);
                         }
 
                         if (outgoingBlob != null)
                         {
-                            using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)))
+                            using (
+                                writer.PushSequence(
+                                    new Asn1Tag(
+                                        TagClass.ContextSpecific,
+                                        (int)NegTokenResp.ResponseToken
+                                    )
+                                )
+                            )
                             {
                                 writer.WriteOctetString(outgoingBlob);
                             }
@@ -173,13 +228,25 @@ namespace System.Net.Security
             }
             else
             {
-                AsnReader negTokenRespReader = reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)).ReadSequence();
+                AsnReader negTokenRespReader = reader
+                    .ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)
+                    )
+                    .ReadSequence();
 
                 Assert.True(negTokenRespReader.HasData);
                 NegState? clientState;
-                if (negTokenRespReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)))
+                if (
+                    negTokenRespReader
+                        .PeekTag()
+                        .HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)
+                        )
+                )
                 {
-                    AsnReader valueReader = negTokenRespReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState));
+                    AsnReader valueReader = negTokenRespReader.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)
+                    );
                     clientState = valueReader.ReadEnumeratedValue<NegState>();
                     Assert.False(valueReader.HasData);
 
@@ -188,20 +255,44 @@ namespace System.Net.Security
                 }
 
                 // Client should not send mechanism
-                Assert.False(negTokenRespReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.SupportedMech)));
+                Assert.False(
+                    negTokenRespReader
+                        .PeekTag()
+                        .HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.SupportedMech)
+                        )
+                );
 
                 byte[]? mechToken = null;
-                if (negTokenRespReader.HasData && negTokenRespReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)))
+                if (
+                    negTokenRespReader.HasData
+                    && negTokenRespReader
+                        .PeekTag()
+                        .HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)
+                        )
+                )
                 {
-                    AsnReader mechTokenReader = negTokenRespReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken));
+                    AsnReader mechTokenReader = negTokenRespReader.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)
+                    );
                     mechToken = mechTokenReader.ReadOctetString();
                     Assert.False(mechTokenReader.HasData);
                 }
 
                 byte[]? mechListMIC = null;
-                if (negTokenRespReader.HasData && negTokenRespReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)))
+                if (
+                    negTokenRespReader.HasData
+                    && negTokenRespReader
+                        .PeekTag()
+                        .HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)
+                        )
+                )
                 {
-                    AsnReader mechListMICReader = negTokenRespReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC));
+                    AsnReader mechListMICReader = negTokenRespReader.ReadSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)
+                    );
                     mechListMIC = mechListMICReader.ReadOctetString();
                     Assert.False(mechListMICReader.HasData);
                 }
@@ -229,11 +320,19 @@ namespace System.Net.Security
 
                 // Generate reply
                 AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
-                using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)))
+                using (
+                    writer.PushSequence(
+                        new Asn1Tag(TagClass.ContextSpecific, (int)NegotiationToken.NegTokenResp)
+                    )
+                )
                 {
                     using (writer.PushSequence())
                     {
-                        using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)))
+                        using (
+                            writer.PushSequence(
+                                new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.NegState)
+                            )
+                        )
                         {
                             if (_ntlmServer.IsAuthenticated)
                             {
@@ -251,7 +350,14 @@ namespace System.Net.Security
 
                         if (outgoingBlob != null)
                         {
-                            using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.ResponseToken)))
+                            using (
+                                writer.PushSequence(
+                                    new Asn1Tag(
+                                        TagClass.ContextSpecific,
+                                        (int)NegTokenResp.ResponseToken
+                                    )
+                                )
+                            )
                             {
                                 writer.WriteOctetString(outgoingBlob);
                             }
@@ -259,7 +365,14 @@ namespace System.Net.Security
 
                         if (mechListMIC != null)
                         {
-                            using (writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)NegTokenResp.MechListMIC)))
+                            using (
+                                writer.PushSequence(
+                                    new Asn1Tag(
+                                        TagClass.ContextSpecific,
+                                        (int)NegTokenResp.MechListMIC
+                                    )
+                                )
+                            )
                             {
                                 Span<byte> mic = stackalloc byte[16];
                                 _ntlmServer.GetMIC(_spnegoMechList, mic);

@@ -634,13 +634,10 @@ public class PageBinderFactoryTest
         // Assert
         var modelState = page.PageContext.ModelState;
         Assert.False(modelState.IsValid);
-        Assert.Collection(
-            modelState,
-            kvp =>
-            {
-                Assert.Equal(nameof(PageModelWithValidation.Validated), kvp.Key);
-            }
-        );
+        Assert.Collection(modelState, kvp =>
+        {
+            Assert.Equal(nameof(PageModelWithValidation.Validated), kvp.Key);
+        });
     }
 
     [Fact]
@@ -677,14 +674,11 @@ public class PageBinderFactoryTest
         await factory(page.PageContext, arguments);
 
         // Assert
-        Assert.Collection(
-            arguments,
-            kvp =>
-            {
-                Assert.Equal("id", kvp.Key);
-                Assert.Equal("value", kvp.Value);
-            }
-        );
+        Assert.Collection(arguments, kvp =>
+        {
+            Assert.Equal("id", kvp.Key);
+            Assert.Equal("value", kvp.Value);
+        });
     }
 
     [Fact]
@@ -769,13 +763,10 @@ public class PageBinderFactoryTest
         // Assert
         var modelState = page.PageContext.ModelState;
         Assert.False(modelState.IsValid);
-        Assert.Collection(
-            modelState,
-            kvp =>
-            {
-                Assert.Equal("name", kvp.Key);
-            }
-        );
+        Assert.Collection(modelState, kvp =>
+        {
+            Assert.Equal("name", kvp.Key);
+        });
     }
 
     [Fact]

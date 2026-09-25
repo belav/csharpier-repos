@@ -22,7 +22,11 @@ namespace System.Reflection.Tests
                 yield return new object[] { typeof(int).Project().MakeByRefType(), null };
                 yield return new object[] { typeof(int).Project().MakePointerType(), null };
                 yield return new object[] { typeof(Derived1).Project(), typeof(Base1).Project() };
-                yield return new object[] { typeof(Derived2).Project(), typeof(GenericClass1<int>).Project() };
+                yield return new object[]
+                {
+                    typeof(Derived2).Project(),
+                    typeof(GenericClass1<int>).Project(),
+                };
 
                 {
                     Type derived3 = typeof(Derived3<,>).Project();
@@ -33,7 +37,11 @@ namespace System.Reflection.Tests
 
                     Type t1 = typeof(int).Project();
                     Type t2 = typeof(string).Project();
-                    yield return new object[] { derived3.MakeGenericType(t1, t2), baseType.MakeGenericType(t2, t1) };
+                    yield return new object[]
+                    {
+                        derived3.MakeGenericType(t1, t2),
+                        baseType.MakeGenericType(t2, t1),
+                    };
                 }
             }
         }

@@ -8,38 +8,96 @@ using Xunit;
 public struct VT
 {
     public char[,] char2darr;
-    public char[, ,] char3darr;
+    public char[,,] char3darr;
 }
 
 public class CL
 {
-    public char[,] char2darr = { { '0', '1' }, { '0', '0' } };
-    public char[, ,] char3darr = { { { '0', '0' } }, { { '0', '1' } }, { { '0', '0' } } };
+    public char[,] char2darr =
+    {
+        { '0', '1' },
+        { '0', '0' },
+    };
+    public char[,,] char3darr =
+    {
+        {
+            { '0', '0' },
+        },
+        {
+            { '0', '1' },
+        },
+        {
+            { '0', '0' },
+        },
+    };
 }
 
 public class charMDArrTest
 {
-
-    static char[,] char2darr = { { '0', '1' }, { '0', '0' } };
-    static char[, ,] char3darr = { { { '0', '0' } }, { { '0', '1' } }, { { '0', '0' } } };
+    static char[,] char2darr =
+    {
+        { '0', '1' },
+        { '0', '0' },
+    };
+    static char[,,] char3darr =
+    {
+        {
+            { '0', '0' },
+        },
+        {
+            { '0', '1' },
+        },
+        {
+            { '0', '0' },
+        },
+    };
 
     static char[][,] ja1 = new char[2][,];
-    static char[][, ,] ja2 = new char[2][, ,];
+    static char[][,,] ja2 = new char[2][,,];
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool pass = true;
 
         VT vt1;
-        vt1.char2darr = new char[,] { { '0', '1' }, { '0', '0' } };
-        vt1.char3darr = new char[,,] { { { '0', '0' } }, { { '0', '1' } }, { { '0', '0' } } };
+        vt1.char2darr = new char[,]
+        {
+            { '0', '1' },
+            { '0', '0' },
+        };
+        vt1.char3darr = new char[,,]
+        {
+            {
+                { '0', '0' },
+            },
+            {
+                { '0', '1' },
+            },
+            {
+                { '0', '0' },
+            },
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new char[,] { { '0', '1' }, { '0', '0' } };
-        ja2[1] = new char[,,] { { { '0', '0' } }, { { '0', '1' } }, { { '0', '0' } } };
+        ja1[0] = new char[,]
+        {
+            { '0', '1' },
+            { '0', '0' },
+        };
+        ja2[1] = new char[,,]
+        {
+            {
+                { '0', '0' },
+            },
+            {
+                { '0', '1' },
+            },
+            {
+                { '0', '0' },
+            },
+        };
 
         char result = '1';
 
@@ -815,8 +873,5 @@ public class charMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

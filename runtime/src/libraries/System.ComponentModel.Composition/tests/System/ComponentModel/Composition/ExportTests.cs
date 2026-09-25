@@ -274,7 +274,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor4_FuncReturningAStringAsExportedValueGetter_ShouldBeReturnedByGetExportedValue()
         {
-            var export = new Export("ContractName", new Dictionary<string, object>(), () => "Value");
+            var export = new Export("ContractName", new Dictionary<string, object>(), () =>
+                "Value"
+            );
 
             Assert.Equal("Value", export.Value);
         }
@@ -359,10 +361,10 @@ namespace System.ComponentModel.Composition
             int count = 0;
 
             var export = new Export("ContractName", () =>
-                {
-                    count++;
-                    return count;
-                });
+            {
+                count++;
+                return count;
+            });
 
             Assert.Equal(1, export.Value);
             Assert.Equal(1, export.Value);
@@ -401,9 +403,7 @@ namespace System.ComponentModel.Composition
             });
         }
 
-        private class NoOverridesExport : Export
-        {
-        }
+        private class NoOverridesExport : Export { }
 
         private class DerivedExport : Export
         {

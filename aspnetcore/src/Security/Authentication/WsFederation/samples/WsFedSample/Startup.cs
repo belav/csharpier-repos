@@ -48,32 +48,26 @@ public class Startup
         {
             if (context.Request.Path.Equals("/signedout"))
             {
-                await WriteHtmlAsync(
-                    context.Response,
-                    async res =>
-                    {
-                        await res.WriteAsync($"<h1>You have been signed out.</h1>");
-                        await res.WriteAsync("<a class=\"btn btn-link\" href=\"/\">Sign In</a>");
-                    }
-                );
+                await WriteHtmlAsync(context.Response, async res =>
+                {
+                    await res.WriteAsync($"<h1>You have been signed out.</h1>");
+                    await res.WriteAsync("<a class=\"btn btn-link\" href=\"/\">Sign In</a>");
+                });
                 return;
             }
 
             if (context.Request.Path.Equals("/signout"))
             {
                 await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                await WriteHtmlAsync(
-                    context.Response,
-                    async res =>
-                    {
-                        await context.Response.WriteAsync(
-                            $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
-                        );
-                        await context.Response.WriteAsync(
-                            "<a class=\"btn btn-link\" href=\"/\">Sign In</a>"
-                        );
-                    }
-                );
+                await WriteHtmlAsync(context.Response, async res =>
+                {
+                    await context.Response.WriteAsync(
+                        $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
+                    );
+                    await context.Response.WriteAsync(
+                        "<a class=\"btn btn-link\" href=\"/\">Sign In</a>"
+                    );
+                });
                 return;
             }
 
@@ -90,18 +84,15 @@ public class Startup
 
             if (context.Request.Path.Equals("/Account/AccessDenied"))
             {
-                await WriteHtmlAsync(
-                    context.Response,
-                    async res =>
-                    {
-                        await context.Response.WriteAsync(
-                            $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
-                        );
-                        await context.Response.WriteAsync(
-                            "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
-                        );
-                    }
-                );
+                await WriteHtmlAsync(context.Response, async res =>
+                {
+                    await context.Response.WriteAsync(
+                        $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
+                    );
+                    await context.Response.WriteAsync(
+                        "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
+                    );
+                });
                 return;
             }
 
@@ -136,31 +127,28 @@ public class Startup
                 return;
             }
 
-            await WriteHtmlAsync(
-                context.Response,
-                async response =>
-                {
-                    await response.WriteAsync(
-                        $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
-                    );
-                    await response.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
-                    );
-                    await response.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
-                    );
-                    await response.WriteAsync(
-                        "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
-                    );
+            await WriteHtmlAsync(context.Response, async response =>
+            {
+                await response.WriteAsync(
+                    $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
+                );
+                await response.WriteAsync(
+                    "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
+                );
+                await response.WriteAsync(
+                    "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
+                );
+                await response.WriteAsync(
+                    "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
+                );
 
-                    await response.WriteAsync("<h2>Claims:</h2>");
-                    await WriteTableHeader(
-                        response,
-                        new string[] { "Claim Type", "Value" },
-                        context.User.Claims.Select(c => new string[] { c.Type, c.Value })
-                    );
-                }
-            );
+                await response.WriteAsync("<h2>Claims:</h2>");
+                await WriteTableHeader(
+                    response,
+                    new string[] { "Claim Type", "Value" },
+                    context.User.Claims.Select(c => new string[] { c.Type, c.Value })
+                );
+            });
         });
     }
 

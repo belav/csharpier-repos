@@ -5,14 +5,14 @@
 namespace System.Xml
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Collections;
-    using System.IO;
-    using System.Xml;
     using System.Diagnostics;
-    using System.Text;
-    using System.Runtime.Serialization;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Text;
+    using System.Xml;
 
     public delegate void OnXmlDictionaryReaderClose(XmlDictionaryReader reader);
 
@@ -20,10 +20,12 @@ namespace System.Xml
     {
         internal const int MaxInitialArrayLength = 65535;
 
-        static public XmlDictionaryReader CreateDictionaryReader(XmlReader reader)
+        public static XmlDictionaryReader CreateDictionaryReader(XmlReader reader)
         {
             if (reader == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "reader"
+                );
 
             XmlDictionaryReader dictionaryReader = reader as XmlDictionaryReader;
 
@@ -35,102 +37,167 @@ namespace System.Xml
             return dictionaryReader;
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(byte[] buffer, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateBinaryReader(
+            byte[] buffer,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             if (buffer == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "buffer"
+                );
             return CreateBinaryReader(buffer, 0, buffer.Length, quotas);
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(byte[] buffer, int offset, int count, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateBinaryReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateBinaryReader(buffer, offset, count, null, quotas);
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(byte[] buffer, int offset, int count, IXmlDictionary dictionary, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateBinaryReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary dictionary,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateBinaryReader(buffer, offset, count, dictionary, quotas, null);
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(byte[] buffer, int offset, int count, IXmlDictionary dictionary, XmlDictionaryReaderQuotas quotas, XmlBinaryReaderSession session)
+        public static XmlDictionaryReader CreateBinaryReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession session
+        )
         {
             return CreateBinaryReader(buffer, offset, count, dictionary, quotas, session, null);
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(byte[] buffer, int offset, int count,
-                                                             IXmlDictionary dictionary,
-                                                             XmlDictionaryReaderQuotas quotas,
-                                                             XmlBinaryReaderSession session,
-                                                             OnXmlDictionaryReaderClose onClose)
+        public static XmlDictionaryReader CreateBinaryReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            IXmlDictionary dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession session,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlBinaryReader reader = new XmlBinaryReader();
             reader.SetInput(buffer, offset, count, dictionary, quotas, session, onClose);
             return reader;
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(Stream stream, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateBinaryReader(
+            Stream stream,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateBinaryReader(stream, null, quotas);
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(Stream stream, IXmlDictionary dictionary, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateBinaryReader(
+            Stream stream,
+            IXmlDictionary dictionary,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateBinaryReader(stream, dictionary, quotas, null);
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(Stream stream, IXmlDictionary dictionary, XmlDictionaryReaderQuotas quotas, XmlBinaryReaderSession session)
+        public static XmlDictionaryReader CreateBinaryReader(
+            Stream stream,
+            IXmlDictionary dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession session
+        )
         {
             return CreateBinaryReader(stream, dictionary, quotas, session, null);
         }
 
-        public static XmlDictionaryReader CreateBinaryReader(Stream stream,
-                                                             IXmlDictionary dictionary,
-                                                             XmlDictionaryReaderQuotas quotas,
-                                                             XmlBinaryReaderSession session,
-                                                             OnXmlDictionaryReaderClose onClose)
+        public static XmlDictionaryReader CreateBinaryReader(
+            Stream stream,
+            IXmlDictionary dictionary,
+            XmlDictionaryReaderQuotas quotas,
+            XmlBinaryReaderSession session,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlBinaryReader reader = new XmlBinaryReader();
             reader.SetInput(stream, dictionary, quotas, session, onClose);
             return reader;
         }
 
-        static public XmlDictionaryReader CreateTextReader(byte[] buffer, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateTextReader(
+            byte[] buffer,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             if (buffer == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("buffer");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "buffer"
+                );
             return CreateTextReader(buffer, 0, buffer.Length, quotas);
         }
 
-        static public XmlDictionaryReader CreateTextReader(byte[] buffer, int offset, int count, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateTextReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateTextReader(buffer, offset, count, null, quotas, null);
         }
 
-        static public XmlDictionaryReader CreateTextReader(byte[] buffer, int offset, int count,
-                                                           Encoding encoding,
-                                                           XmlDictionaryReaderQuotas quotas,
-                                                           OnXmlDictionaryReaderClose onClose)
+        public static XmlDictionaryReader CreateTextReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlUTF8TextReader reader = new XmlUTF8TextReader();
             reader.SetInput(buffer, offset, count, encoding, quotas, onClose);
             return reader;
         }
 
-        static public XmlDictionaryReader CreateTextReader(Stream stream, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateTextReader(
+            Stream stream,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateTextReader(stream, null, quotas, null);
         }
 
-        static public XmlDictionaryReader CreateTextReader(Stream stream, Encoding encoding,
-                                                           XmlDictionaryReaderQuotas quotas,
-                                                           OnXmlDictionaryReaderClose onClose)
+        public static XmlDictionaryReader CreateTextReader(
+            Stream stream,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlUTF8TextReader reader = new XmlUTF8TextReader();
             reader.SetInput(stream, encoding, quotas, onClose);
             return reader;
         }
 
-        static public XmlDictionaryReader CreateMtomReader(Stream stream, Encoding encoding, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateMtomReader(
+            Stream stream,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             if (encoding == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("encoding");
@@ -138,25 +205,46 @@ namespace System.Xml
             return CreateMtomReader(stream, new Encoding[1] { encoding }, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(Stream stream, Encoding[] encodings, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateMtomReader(
+            Stream stream,
+            Encoding[] encodings,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateMtomReader(stream, encodings, null, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(Stream stream, Encoding[] encodings, string contentType, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateMtomReader(
+            Stream stream,
+            Encoding[] encodings,
+            string contentType,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateMtomReader(stream, encodings, contentType, quotas, int.MaxValue, null);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(Stream stream, Encoding[] encodings, string contentType,
-            XmlDictionaryReaderQuotas quotas, int maxBufferSize, OnXmlDictionaryReaderClose onClose)
+        public static XmlDictionaryReader CreateMtomReader(
+            Stream stream,
+            Encoding[] encodings,
+            string contentType,
+            XmlDictionaryReaderQuotas quotas,
+            int maxBufferSize,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlMtomReader reader = new XmlMtomReader();
             reader.SetInput(stream, encodings, contentType, quotas, maxBufferSize, onClose);
             return reader;
         }
 
-        static public XmlDictionaryReader CreateMtomReader(byte[] buffer, int offset, int count, Encoding encoding, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateMtomReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding encoding,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             if (encoding == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("encoding");
@@ -164,48 +252,92 @@ namespace System.Xml
             return CreateMtomReader(buffer, offset, count, new Encoding[1] { encoding }, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(byte[] buffer, int offset, int count, Encoding[] encodings, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateMtomReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding[] encodings,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
             return CreateMtomReader(buffer, offset, count, encodings, null, quotas);
         }
 
-        static public XmlDictionaryReader CreateMtomReader(byte[] buffer, int offset, int count, Encoding[] encodings, string contentType, XmlDictionaryReaderQuotas quotas)
+        public static XmlDictionaryReader CreateMtomReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding[] encodings,
+            string contentType,
+            XmlDictionaryReaderQuotas quotas
+        )
         {
-            return CreateMtomReader(buffer, offset, count, encodings, contentType, quotas, int.MaxValue, null);
+            return CreateMtomReader(
+                buffer,
+                offset,
+                count,
+                encodings,
+                contentType,
+                quotas,
+                int.MaxValue,
+                null
+            );
         }
 
-        static public XmlDictionaryReader CreateMtomReader(byte[] buffer, int offset, int count, Encoding[] encodings, string contentType,
-            XmlDictionaryReaderQuotas quotas, int maxBufferSize, OnXmlDictionaryReaderClose onClose)
+        public static XmlDictionaryReader CreateMtomReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding[] encodings,
+            string contentType,
+            XmlDictionaryReaderQuotas quotas,
+            int maxBufferSize,
+            OnXmlDictionaryReaderClose onClose
+        )
         {
             XmlMtomReader reader = new XmlMtomReader();
-            reader.SetInput(buffer, offset, count, encodings, contentType, quotas, maxBufferSize, onClose);
+            reader.SetInput(
+                buffer,
+                offset,
+                count,
+                encodings,
+                contentType,
+                quotas,
+                maxBufferSize,
+                onClose
+            );
             return reader;
         }
 
 #if NO
-        static XmlDictionaryReader CreateMtomReader(byte[] buffer, int offset, int count, Encoding encoding)
+        static XmlDictionaryReader CreateMtomReader(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding encoding
+        )
         {
-            return XmlMtomWriter.IsUTF8Encoding(encoding) ? new XmlUTF8TextReader(buffer, offset, count)
+            return XmlMtomWriter.IsUTF8Encoding(encoding)
+                ? new XmlUTF8TextReader(buffer, offset, count)
                 : CreateReader(new MemoryStream(buffer, offset, count), encoding);
         }
 #endif
+
         public virtual bool CanCanonicalize
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public virtual XmlDictionaryReaderQuotas Quotas
         {
-            get
-            {
-                return XmlDictionaryReaderQuotas.Max;
-            }
+            get { return XmlDictionaryReaderQuotas.Max; }
         }
 
-        public virtual void StartCanonicalization(Stream stream, bool includeComments, string[] inclusivePrefixes)
+        public virtual void StartCanonicalization(
+            Stream stream,
+            bool includeComments,
+            string[] inclusivePrefixes
+        )
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
         }
@@ -233,7 +365,10 @@ namespace System.Xml
                 XmlExceptionHelper.ThrowStartElementExpected(this, localName, namespaceUri);
         }
 
-        public virtual void MoveToStartElement(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual void MoveToStartElement(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             if (!IsStartElement(localName, namespaceUri))
                 XmlExceptionHelper.ThrowStartElementExpected(this, localName, namespaceUri);
@@ -247,7 +382,9 @@ namespace System.Xml
         public virtual bool IsLocalName(XmlDictionaryString localName)
         {
             if (localName == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("localName");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "localName"
+                );
 
             return IsLocalName(localName.Value);
         }
@@ -255,14 +392,18 @@ namespace System.Xml
         public virtual bool IsNamespaceUri(string namespaceUri)
         {
             if (namespaceUri == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("namespaceUri");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "namespaceUri"
+                );
             return this.NamespaceURI == namespaceUri;
         }
 
         public virtual bool IsNamespaceUri(XmlDictionaryString namespaceUri)
         {
             if (namespaceUri == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("namespaceUri");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "namespaceUri"
+                );
             return IsNamespaceUri(namespaceUri.Value);
         }
 
@@ -290,7 +431,10 @@ namespace System.Xml
             Read();
         }
 
-        public virtual void ReadFullStartElement(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual void ReadFullStartElement(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             MoveToStartElement(localName, namespaceUri);
             if (IsEmptyElement)
@@ -298,24 +442,37 @@ namespace System.Xml
             Read();
         }
 
-        public virtual void ReadStartElement(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual void ReadStartElement(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
             MoveToStartElement(localName, namespaceUri);
             Read();
         }
 
-        public virtual bool IsStartElement(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual bool IsStartElement(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return IsStartElement(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri));
+            return IsStartElement(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri)
+            );
         }
 
         public virtual int IndexOfLocalName(string[] localNames, string namespaceUri)
         {
             if (localNames == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("localNames");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "localNames"
+                );
 
             if (namespaceUri == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("namespaceUri");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "namespaceUri"
+                );
 
             if (this.NamespaceURI == namespaceUri)
             {
@@ -324,7 +481,9 @@ namespace System.Xml
                 {
                     string value = localNames[i];
                     if (value == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(string.Format(CultureInfo.InvariantCulture, "localNames[{0}]", i));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                            string.Format(CultureInfo.InvariantCulture, "localNames[{0}]", i)
+                        );
                     if (localName == value)
                     {
                         return i;
@@ -335,13 +494,20 @@ namespace System.Xml
             return -1;
         }
 
-        public virtual int IndexOfLocalName(XmlDictionaryString[] localNames, XmlDictionaryString namespaceUri)
+        public virtual int IndexOfLocalName(
+            XmlDictionaryString[] localNames,
+            XmlDictionaryString namespaceUri
+        )
         {
             if (localNames == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("localNames");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "localNames"
+                );
 
             if (namespaceUri == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("namespaceUri");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "namespaceUri"
+                );
 
             if (this.NamespaceURI == namespaceUri.Value)
             {
@@ -350,7 +516,9 @@ namespace System.Xml
                 {
                     XmlDictionaryString value = localNames[i];
                     if (value == null)
-                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(string.Format(CultureInfo.InvariantCulture, "localNames[{0}]", i));
+                        throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                            string.Format(CultureInfo.InvariantCulture, "localNames[{0}]", i)
+                        );
                     if (localName == value.Value)
                     {
                         return i;
@@ -361,9 +529,15 @@ namespace System.Xml
             return -1;
         }
 
-        public virtual string GetAttribute(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual string GetAttribute(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return GetAttribute(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri));
+            return GetAttribute(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri)
+            );
         }
 
         public virtual bool TryGetBase64ContentLength(out int length)
@@ -374,7 +548,9 @@ namespace System.Xml
 
         public virtual int ReadValueAsBase64(byte[] buffer, int offset, int count)
         {
-            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+            throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException()
+            );
         }
 
         public virtual byte[] ReadContentAsBase64()
@@ -439,7 +615,10 @@ namespace System.Xml
                             if (sb == null)
                                 sb = new StringBuilder(result);
                             if (sb.Length > maxStringContentLength - value.Length)
-                                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(this, maxStringContentLength);
+                                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(
+                                    this,
+                                    maxStringContentLength
+                                );
                             sb.Append(value);
                         }
                         break;
@@ -471,7 +650,10 @@ namespace System.Xml
             if (sb != null)
                 result = sb.ToString();
             if (result.Length > maxStringContentLength)
-                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(this, maxStringContentLength);
+                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(
+                    this,
+                    maxStringContentLength
+                );
             return result;
         }
 
@@ -491,7 +673,9 @@ namespace System.Xml
                 if (this.IsEmptyElement)
                     return string.Empty;
                 if (!Read())
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.XmlInvalidOperation)));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.XmlInvalidOperation))
+                    );
                 if (this.NodeType == XmlNodeType.EndElement)
                     return string.Empty;
             }
@@ -509,16 +693,24 @@ namespace System.Xml
                     if (sb == null)
                         sb = new StringBuilder(result);
                     if (sb.Length > maxStringContentLength - value.Length)
-                        XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(this, maxStringContentLength);
+                        XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(
+                            this,
+                            maxStringContentLength
+                        );
                     sb.Append(value);
                 }
                 if (!Read())
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.XmlInvalidOperation)));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.XmlInvalidOperation))
+                    );
             }
             if (sb != null)
                 result = sb.ToString();
             if (result.Length > maxStringContentLength)
-                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(this, maxStringContentLength);
+                XmlExceptionHelper.ThrowMaxStringContentLengthExceeded(
+                    this,
+                    maxStringContentLength
+                );
             return result;
         }
 
@@ -576,11 +768,11 @@ namespace System.Xml
 
         protected bool IsTextNode(XmlNodeType nodeType)
         {
-            return nodeType == XmlNodeType.Text ||
-                nodeType == XmlNodeType.Whitespace ||
-                nodeType == XmlNodeType.SignificantWhitespace ||
-                nodeType == XmlNodeType.CDATA ||
-                nodeType == XmlNodeType.Attribute;
+            return nodeType == XmlNodeType.Text
+                || nodeType == XmlNodeType.Whitespace
+                || nodeType == XmlNodeType.SignificantWhitespace
+                || nodeType == XmlNodeType.CDATA
+                || nodeType == XmlNodeType.Attribute;
         }
 
         public virtual int ReadContentAsChars(char[] chars, int offset, int count)
@@ -600,7 +792,9 @@ namespace System.Xml
                     if (read > 0)
                         break;
 
-                    if (nodeType == XmlNodeType.Attribute /* || inAttributeText */)
+                    if (
+                        nodeType == XmlNodeType.Attribute /* || inAttributeText */
+                    )
                         break;
 
                     if (!Read())
@@ -640,14 +834,18 @@ namespace System.Xml
         public virtual string ReadContentAsString(string[] strings, out int index)
         {
             if (strings == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("strings");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "strings"
+                );
             string s = ReadContentAsString();
             index = -1;
             for (int i = 0; i < strings.Length; i++)
             {
                 string value = strings[i];
                 if (value == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(string.Format(CultureInfo.InvariantCulture, "strings[{0}]", i));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        string.Format(CultureInfo.InvariantCulture, "strings[{0}]", i)
+                    );
                 if (value == s)
                 {
                     index = i;
@@ -660,14 +858,18 @@ namespace System.Xml
         public virtual string ReadContentAsString(XmlDictionaryString[] strings, out int index)
         {
             if (strings == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("strings");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "strings"
+                );
             string s = ReadContentAsString();
             index = -1;
             for (int i = 0; i < strings.Length; i++)
             {
                 XmlDictionaryString value = strings[i];
                 if (value == null)
-                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(string.Format(CultureInfo.InvariantCulture, "strings[{0}]", i));
+                    throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        string.Format(CultureInfo.InvariantCulture, "strings[{0}]", i)
+                    );
                 if (value.Value == s)
                 {
                     index = i;
@@ -702,7 +904,10 @@ namespace System.Xml
             return XmlConverter.ToTimeSpan(ReadContentAsString());
         }
 
-        public virtual void ReadContentAsQualifiedName(out string localName, out string namespaceUri)
+        public virtual void ReadContentAsQualifiedName(
+            out string localName,
+            out string namespaceUri
+        )
         {
             string prefix;
             XmlConverter.ToQualifiedName(ReadContentAsString(), out prefix, out localName);
@@ -866,11 +1071,23 @@ namespace System.Xml
                 }
                 catch (ArgumentException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(string.Empty, "DateTime", exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            string.Empty,
+                            "DateTime",
+                            exception
+                        )
+                    );
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(string.Empty, "DateTime", exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            string.Empty,
+                            "DateTime",
+                            exception
+                        )
+                    );
                 }
             }
             else
@@ -897,11 +1114,23 @@ namespace System.Xml
                 }
                 catch (ArgumentException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(string.Empty, "UniqueId", exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            string.Empty,
+                            "UniqueId",
+                            exception
+                        )
+                    );
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(string.Empty, "UniqueId", exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            string.Empty,
+                            "UniqueId",
+                            exception
+                        )
+                    );
                 }
             }
             else
@@ -914,7 +1143,11 @@ namespace System.Xml
             return value;
         }
 
-        [SuppressMessage("Reliability", "Reliability113", Justification = "Catching expected exceptions inline instead of calling Fx.CreateGuid to minimize code change")]
+        [SuppressMessage(
+            "Reliability",
+            "Reliability113",
+            Justification = "Catching expected exceptions inline instead of calling Fx.CreateGuid to minimize code change"
+        )]
         public virtual Guid ReadElementContentAsGuid()
         {
             bool isEmptyElement = IsStartElement() && IsEmptyElement;
@@ -929,15 +1162,33 @@ namespace System.Xml
                 }
                 catch (ArgumentException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(string.Empty, "Guid", exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            string.Empty,
+                            "Guid",
+                            exception
+                        )
+                    );
                 }
                 catch (FormatException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(string.Empty, "Guid", exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            string.Empty,
+                            "Guid",
+                            exception
+                        )
+                    );
                 }
                 catch (OverflowException exception)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlExceptionHelper.CreateConversionException(string.Empty, "Guid", exception));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlExceptionHelper.CreateConversionException(
+                            string.Empty,
+                            "Guid",
+                            exception
+                        )
+                    );
                 }
             }
             else
@@ -1022,7 +1273,9 @@ namespace System.Xml
             return false;
         }
 
-        public virtual bool TryGetNamespaceUriAsDictionaryString(out XmlDictionaryString namespaceUri)
+        public virtual bool TryGetNamespaceUriAsDictionaryString(
+            out XmlDictionaryString namespaceUri
+        )
         {
             namespaceUri = null;
             return false;
@@ -1037,15 +1290,37 @@ namespace System.Xml
         void CheckArray(Array array, int offset, int count)
         {
             if (array == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("array"));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("array")
+                );
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("offset", SR.GetString(SR.ValueMustBeNonNegative)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             if (offset > array.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("offset", SR.GetString(SR.OffsetExceedsBufferSize, array.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "offset",
+                        SR.GetString(SR.OffsetExceedsBufferSize, array.Length)
+                    )
+                );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("count", SR.GetString(SR.ValueMustBeNonNegative)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             if (count > array.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("count", SR.GetString(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "count",
+                        SR.GetString(SR.SizeExceedsRemainingBufferSpace, array.Length - offset)
+                    )
+                );
         }
 
         public virtual bool IsStartArray(out Type type)
@@ -1063,15 +1338,34 @@ namespace System.Xml
         // Boolean
         public virtual bool[] ReadBooleanArray(string localName, string namespaceUri)
         {
-            return BooleanArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return BooleanArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual bool[] ReadBooleanArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual bool[] ReadBooleanArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return BooleanArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return BooleanArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, bool[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1083,23 +1377,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, bool[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            bool[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // Int16
         public virtual Int16[] ReadInt16Array(string localName, string namespaceUri)
         {
-            return Int16ArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return Int16ArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual Int16[] ReadInt16Array(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual Int16[] ReadInt16Array(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return Int16ArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return Int16ArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, Int16[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            Int16[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1107,30 +1432,65 @@ namespace System.Xml
             {
                 int i = ReadElementContentAsInt();
                 if (i < Int16.MinValue || i > Int16.MaxValue)
-                    XmlExceptionHelper.ThrowConversionOverflow(this, i.ToString(NumberFormatInfo.CurrentInfo), "Int16");
+                    XmlExceptionHelper.ThrowConversionOverflow(
+                        this,
+                        i.ToString(NumberFormatInfo.CurrentInfo),
+                        "Int16"
+                    );
                 array[offset + actual] = (Int16)i;
                 actual++;
             }
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, Int16[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            Int16[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // Int32
         public virtual Int32[] ReadInt32Array(string localName, string namespaceUri)
         {
-            return Int32ArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return Int32ArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual Int32[] ReadInt32Array(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual Int32[] ReadInt32Array(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return Int32ArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return Int32ArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, Int32[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            Int32[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1142,23 +1502,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, Int32[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            Int32[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // Int64
         public virtual Int64[] ReadInt64Array(string localName, string namespaceUri)
         {
-            return Int64ArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return Int64ArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual Int64[] ReadInt64Array(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual Int64[] ReadInt64Array(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return Int64ArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return Int64ArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, Int64[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            Int64[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1170,23 +1561,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, Int64[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            Int64[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // Single
         public virtual float[] ReadSingleArray(string localName, string namespaceUri)
         {
-            return SingleArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return SingleArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual float[] ReadSingleArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual float[] ReadSingleArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return SingleArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return SingleArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, float[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1198,23 +1620,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, float[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            float[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // Double
         public virtual double[] ReadDoubleArray(string localName, string namespaceUri)
         {
-            return DoubleArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return DoubleArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual double[] ReadDoubleArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual double[] ReadDoubleArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return DoubleArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return DoubleArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, double[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1226,23 +1679,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, double[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            double[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // Decimal
         public virtual decimal[] ReadDecimalArray(string localName, string namespaceUri)
         {
-            return DecimalArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return DecimalArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual decimal[] ReadDecimalArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual decimal[] ReadDecimalArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return DecimalArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return DecimalArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, decimal[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1254,23 +1738,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, decimal[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            decimal[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // DateTime
         public virtual DateTime[] ReadDateTimeArray(string localName, string namespaceUri)
         {
-            return DateTimeArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return DateTimeArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual DateTime[] ReadDateTimeArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual DateTime[] ReadDateTimeArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return DateTimeArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, DateTime[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1282,23 +1797,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, DateTime[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            DateTime[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // Guid
         public virtual Guid[] ReadGuidArray(string localName, string namespaceUri)
         {
-            return GuidArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return GuidArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual Guid[] ReadGuidArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual Guid[] ReadGuidArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return GuidArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return GuidArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, Guid[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1310,23 +1856,54 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, Guid[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            Guid[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         // TimeSpan
         public virtual TimeSpan[] ReadTimeSpanArray(string localName, string namespaceUri)
         {
-            return TimeSpanArrayHelperWithString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return TimeSpanArrayHelperWithString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual TimeSpan[] ReadTimeSpanArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri)
+        public virtual TimeSpan[] ReadTimeSpanArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri
+        )
         {
-            return TimeSpanArrayHelperWithDictionaryString.Instance.ReadArray(this, localName, namespaceUri, Quotas.MaxArrayLength);
+            return TimeSpanArrayHelperWithDictionaryString.Instance.ReadArray(
+                this,
+                localName,
+                namespaceUri,
+                Quotas.MaxArrayLength
+            );
         }
 
-        public virtual int ReadArray(string localName, string namespaceUri, TimeSpan[] array, int offset, int count)
+        public virtual int ReadArray(
+            string localName,
+            string namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
             CheckArray(array, offset, count);
             int actual = 0;
@@ -1338,9 +1915,21 @@ namespace System.Xml
             return actual;
         }
 
-        public virtual int ReadArray(XmlDictionaryString localName, XmlDictionaryString namespaceUri, TimeSpan[] array, int offset, int count)
+        public virtual int ReadArray(
+            XmlDictionaryString localName,
+            XmlDictionaryString namespaceUri,
+            TimeSpan[] array,
+            int offset,
+            int count
+        )
         {
-            return ReadArray(XmlDictionaryString.GetString(localName), XmlDictionaryString.GetString(namespaceUri), array, offset, count);
+            return ReadArray(
+                XmlDictionaryString.GetString(localName),
+                XmlDictionaryString.GetString(namespaceUri),
+                array,
+                offset,
+                count
+            );
         }
 
         class XmlWrappedReader : XmlDictionaryReader, IXmlLineInfo
@@ -1356,18 +1945,12 @@ namespace System.Xml
 
             public override int AttributeCount
             {
-                get
-                {
-                    return reader.AttributeCount;
-                }
+                get { return reader.AttributeCount; }
             }
 
             public override string BaseURI
             {
-                get
-                {
-                    return reader.BaseURI;
-                }
+                get { return reader.BaseURI; }
             }
 
             public override bool CanReadBinaryContent
@@ -1388,18 +1971,12 @@ namespace System.Xml
 
             public override int Depth
             {
-                get
-                {
-                    return reader.Depth;
-                }
+                get { return reader.Depth; }
             }
 
             public override bool EOF
             {
-                get
-                {
-                    return reader.EOF;
-                }
+                get { return reader.EOF; }
             }
 
             public override string GetAttribute(int index)
@@ -1419,26 +1996,17 @@ namespace System.Xml
 
             public override bool HasValue
             {
-                get
-                {
-                    return reader.HasValue;
-                }
+                get { return reader.HasValue; }
             }
 
             public override bool IsDefault
             {
-                get
-                {
-                    return reader.IsDefault;
-                }
+                get { return reader.IsDefault; }
             }
 
             public override bool IsEmptyElement
             {
-                get
-                {
-                    return reader.IsEmptyElement;
-                }
+                get { return reader.IsEmptyElement; }
             }
 
             public override bool IsStartElement(string name)
@@ -1453,10 +2021,7 @@ namespace System.Xml
 
             public override string LocalName
             {
-                get
-                {
-                    return reader.LocalName;
-                }
+                get { return reader.LocalName; }
             }
 
             public override string LookupNamespace(string namespaceUri)
@@ -1496,50 +2061,32 @@ namespace System.Xml
 
             public override string Name
             {
-                get
-                {
-                    return reader.Name;
-                }
+                get { return reader.Name; }
             }
 
             public override string NamespaceURI
             {
-                get
-                {
-                    return reader.NamespaceURI;
-                }
+                get { return reader.NamespaceURI; }
             }
 
             public override XmlNameTable NameTable
             {
-                get
-                {
-                    return reader.NameTable;
-                }
+                get { return reader.NameTable; }
             }
 
             public override XmlNodeType NodeType
             {
-                get
-                {
-                    return reader.NodeType;
-                }
+                get { return reader.NodeType; }
             }
 
             public override string Prefix
             {
-                get
-                {
-                    return reader.Prefix;
-                }
+                get { return reader.Prefix; }
             }
 
             public override char QuoteChar
             {
-                get
-                {
-                    return reader.QuoteChar;
-                }
+                get { return reader.QuoteChar; }
             }
 
             public override bool Read()
@@ -1594,10 +2141,7 @@ namespace System.Xml
 
             public override ReadState ReadState
             {
-                get
-                {
-                    return reader.ReadState;
-                }
+                get { return reader.ReadState; }
             }
 
             public override void ResolveEntity()
@@ -1607,50 +2151,32 @@ namespace System.Xml
 
             public override string this[int index]
             {
-                get
-                {
-                    return reader[index];
-                }
+                get { return reader[index]; }
             }
 
             public override string this[string name]
             {
-                get
-                {
-                    return reader[name];
-                }
+                get { return reader[name]; }
             }
 
             public override string this[string name, string namespaceUri]
             {
-                get
-                {
-                    return reader[name, namespaceUri];
-                }
+                get { return reader[name, namespaceUri]; }
             }
 
             public override string Value
             {
-                get
-                {
-                    return reader.Value;
-                }
+                get { return reader.Value; }
             }
 
             public override string XmlLang
             {
-                get
-                {
-                    return reader.XmlLang;
-                }
+                get { return reader.XmlLang; }
             }
 
             public override XmlSpace XmlSpace
             {
-                get
-                {
-                    return reader.XmlSpace;
-                }
+                get { return reader.XmlSpace; }
             }
 
             public override int ReadElementContentAsBase64(byte[] buffer, int offset, int count)
@@ -1680,10 +2206,7 @@ namespace System.Xml
 
             public override Type ValueType
             {
-                get
-                {
-                    return reader.ValueType;
-                }
+                get { return reader.ValueType; }
             }
 
             public override Boolean ReadContentAsBoolean()

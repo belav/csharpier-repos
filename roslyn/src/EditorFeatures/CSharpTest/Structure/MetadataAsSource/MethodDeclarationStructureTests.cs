@@ -11,20 +11,23 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure.MetadataAsSource;
 
-public class MethodDeclarationStructureTests : AbstractCSharpSyntaxNodeStructureTests<MethodDeclarationSyntax>
+public class MethodDeclarationStructureTests
+    : AbstractCSharpSyntaxNodeStructureTests<MethodDeclarationSyntax>
 {
     protected override string WorkspaceKind => CodeAnalysis.WorkspaceKind.MetadataAsSource;
-    internal override AbstractSyntaxStructureProvider CreateProvider() => new MethodDeclarationStructureProvider();
+
+    internal override AbstractSyntaxStructureProvider CreateProvider() =>
+        new MethodDeclarationStructureProvider();
 
     [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
     public async Task NoCommentsOrAttributes()
     {
         var code = """
-                class Goo
-                {
-                    public string $$Bar(int x);
-                }
-                """;
+            class Goo
+            {
+                public string $$Bar(int x);
+            }
+            """;
 
         await VerifyNoBlockSpansAsync(code);
     }
@@ -33,68 +36,76 @@ public class MethodDeclarationStructureTests : AbstractCSharpSyntaxNodeStructure
     public async Task WithAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:[Goo]
-                    |}public string $$Bar(int x);|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:[Goo]
+                |}public string $$Bar(int x);|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
     public async Task WithCommentsAndAttributes()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Goo]
-                    |}string $$Bar(int x);|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Goo]
+                |}string $$Bar(int x);|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]
     public async Task WithCommentsAttributesAndModifiers()
     {
         var code = """
-                class Goo
-                {
-                    {|hint:{|textspan:// Summary:
-                    //     This is a summary.
-                    [Goo]
-                    |}public string $$Bar(int x);|}
-                }
-                """;
+            class Goo
+            {
+                {|hint:{|textspan:// Summary:
+                //     This is a summary.
+                [Goo]
+                |}public string $$Bar(int x);|}
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 
     [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
     public async Task TestMethod3()
     {
         var code = """
-                class C
+            class C
+            {
+                $${|#0:public string Goo(){|textspan:
                 {
-                    $${|#0:public string Goo(){|textspan:
-                    {
-                    }|#0}
-                |}
-                    public string Goo2()
-                    {
-                    }
+                }|#0}
+            |}
+                public string Goo2()
+                {
                 }
-                """;
+            }
+            """;
 
-        await VerifyBlockSpansAsync(code,
-            Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: true));
+        await VerifyBlockSpansAsync(
+            code,
+            Region("textspan", "#0", CSharpStructureHelpers.Ellipsis, autoCollapse: true)
+        );
     }
 }

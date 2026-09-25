@@ -57,7 +57,9 @@ namespace System.Reflection.Metadata
 
             // IEnumerable:
             public Chunks GetEnumerator() => this;
+
             IEnumerator<BlobBuilder> IEnumerable<BlobBuilder>.GetEnumerator() => GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
 
@@ -89,13 +91,16 @@ namespace System.Reflection.Metadata
             }
 
             public bool MoveNext() => _chunks.MoveNext();
+
             public void Reset() => _chunks.Reset();
 
             void IDisposable.Dispose() { }
 
             // IEnumerable:
             public Blobs GetEnumerator() => this;
+
             IEnumerator<Blob> IEnumerable<Blob>.GetEnumerator() => GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }

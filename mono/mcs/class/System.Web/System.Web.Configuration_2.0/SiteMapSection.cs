@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,65 +28,81 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Configuration;
 using System.Web.Security;
 
 namespace System.Web.Configuration
 {
-	public sealed class SiteMapSection: ConfigurationSection
-	{
-		static ConfigurationProperty defaultProviderProp;
-		static ConfigurationProperty enabledProp;
-		static ConfigurationProperty providersProp;
-		static ConfigurationPropertyCollection properties;
-		
-		static SiteMapSection ()
-		{
-			defaultProviderProp = new ConfigurationProperty ("defaultProvider", typeof (string), "AspNetXmlSiteMapProvider");
-			enabledProp = new ConfigurationProperty ("enabled", typeof (bool), true);
-			providersProp = new ConfigurationProperty ("providers", typeof (ProviderSettingsCollection));
-			properties = new ConfigurationPropertyCollection ();
+    public sealed class SiteMapSection : ConfigurationSection
+    {
+        static ConfigurationProperty defaultProviderProp;
+        static ConfigurationProperty enabledProp;
+        static ConfigurationProperty providersProp;
+        static ConfigurationPropertyCollection properties;
 
-			properties.Add (defaultProviderProp);
-			properties.Add (enabledProp);
-			properties.Add (providersProp);
-		}
+        static SiteMapSection()
+        {
+            defaultProviderProp = new ConfigurationProperty(
+                "defaultProvider",
+                typeof(string),
+                "AspNetXmlSiteMapProvider"
+            );
+            enabledProp = new ConfigurationProperty("enabled", typeof(bool), true);
+            providersProp = new ConfigurationProperty(
+                "providers",
+                typeof(ProviderSettingsCollection)
+            );
+            properties = new ConfigurationPropertyCollection();
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("defaultProvider", DefaultValue = "AspNetXmlSiteMapProvider")]
-		public string DefaultProvider {
-			get { return (string) base ["defaultProvider"]; }
-			set { base ["defaultProvider"] = value; }
-		}
-		
-		[ConfigurationProperty ("enabled", DefaultValue = "True")]
-		public bool Enabled {
-			get { return (bool) base ["enabled"]; }
-			set { base ["enabled"] = value; }
-		}
+            properties.Add(defaultProviderProp);
+            properties.Add(enabledProp);
+            properties.Add(providersProp);
+        }
 
-		[ConfigurationProperty ("providers")]
-		public ProviderSettingsCollection Providers {
-			get { return (ProviderSettingsCollection) base ["providers"]; }
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty("defaultProvider", DefaultValue = "AspNetXmlSiteMapProvider")]
+        public string DefaultProvider
+        {
+            get { return (string)base["defaultProvider"]; }
+            set { base["defaultProvider"] = value; }
+        }
 
-		SiteMapProviderCollection providers;
-		internal SiteMapProviderCollection ProvidersInternal {
-			get {
-				if (providers == null) {
-					SiteMapProviderCollection providersTmp = new SiteMapProviderCollection ();
-					ProvidersHelper.InstantiateProviders (Providers, providersTmp, typeof (SiteMapProvider));
-					providers = providersTmp;
-				}
-				return providers;
-			}
-		}
+        [ConfigurationProperty("enabled", DefaultValue = "True")]
+        public bool Enabled
+        {
+            get { return (bool)base["enabled"]; }
+            set { base["enabled"] = value; }
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        [ConfigurationProperty("providers")]
+        public ProviderSettingsCollection Providers
+        {
+            get { return (ProviderSettingsCollection)base["providers"]; }
+        }
+
+        SiteMapProviderCollection providers;
+        internal SiteMapProviderCollection ProvidersInternal
+        {
+            get
+            {
+                if (providers == null)
+                {
+                    SiteMapProviderCollection providersTmp = new SiteMapProviderCollection();
+                    ProvidersHelper.InstantiateProviders(
+                        Providers,
+                        providersTmp,
+                        typeof(SiteMapProvider)
+                    );
+                    providers = providersTmp;
+                }
+                return providers;
+            }
+        }
+
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

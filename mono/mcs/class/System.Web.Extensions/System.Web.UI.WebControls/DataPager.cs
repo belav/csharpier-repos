@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,464 +35,517 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-//	[ToolboxBitmap (typeof (System.Web.UI.WebControls.DataPager), "DataPager.ico")]
-	[ToolboxItemFilter ("System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35", ToolboxItemFilterType.Require)]
-	[SupportsEventValidation]
-	[Themeable (true)]
-	[ParseChildren (true)]
-	[Designer ("System.Web.UI.Design.WebControls.DataPagerDesigner, System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
-	[PersistChildren (false)]
-	public class DataPager : Control, IAttributeAccessor, INamingContainer, ICompositeControlDesignerAccessor
-	{
-		const int NO_PAGEABLE_ITEM_CONTAINER = 0;
-		const int NO_DATABOUND_CONTROL = 1;
-		const int NO_PAGED_CONTAINER_ID = 2;
-		const int CONTROL_NOT_PAGEABLE = 3;
-		const int NO_NAMING_CONTAINER = 4;
+    //	[ToolboxBitmap (typeof (System.Web.UI.WebControls.DataPager), "DataPager.ico")]
+    [ToolboxItemFilter(
+        "System.Web.Extensions, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+        ToolboxItemFilterType.Require
+    )]
+    [SupportsEventValidation]
+    [Themeable(true)]
+    [ParseChildren(true)]
+    [Designer(
+        "System.Web.UI.Design.WebControls.DataPagerDesigner, System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
+    [PersistChildren(false)]
+    public class DataPager
+        : Control,
+            IAttributeAccessor,
+            INamingContainer,
+            ICompositeControlDesignerAccessor
+    {
+        const int NO_PAGEABLE_ITEM_CONTAINER = 0;
+        const int NO_DATABOUND_CONTROL = 1;
+        const int NO_PAGED_CONTAINER_ID = 2;
+        const int CONTROL_NOT_PAGEABLE = 3;
+        const int NO_NAMING_CONTAINER = 4;
 
-		const int CSTATE_BASE_STATE = 0;
-		const int CSTATE_TOTAL_ROW_COUNT = 1;
-		const int CSTATE_MAXIMUM_ROWS = 2;
-		const int CSTATE_START_ROW_INDEX = 3;
-		const int CSTATE_COUNT = 4;
-		
-		string[] _exceptionMessages = {
-			"No IPageableItemContainer was found. Verify that either the DataPager is inside an IPageableItemContainer or PagedControlID is set to the control ID of an IPageableItemContainer",
-			"There is no data-bound control associated with the DataPager control.",
-			"Control with id '{0}' cannot be found in the page",
-			"Control '{0}' is not pageable",
-			"DataPager has no naming container"
-		};
-		
-		IPageableItemContainer _pageableContainer;
-		DataPagerFieldCollection _fields;
-		AttributeCollection _attributes;
-		
-		int _totalRowCount;
-		int _startRowIndex;
-		int _maximumRows = 10;
-		
-		bool _initDone;
-		bool _needNewContainerSetup = true;
-		bool _needSetPageProperties = true;
-		bool _createPagerFieldsRunning;
-		
-		public DataPager()
-		{
-			_fields = new DataPagerFieldCollection (this);
-		}
+        const int CSTATE_BASE_STATE = 0;
+        const int CSTATE_TOTAL_ROW_COUNT = 1;
+        const int CSTATE_MAXIMUM_ROWS = 2;
+        const int CSTATE_START_ROW_INDEX = 3;
+        const int CSTATE_COUNT = 4;
 
-		protected virtual void AddAttributesToRender (HtmlTextWriter writer)
-		{
-			if (ID != null)
-				writer.AddAttribute (HtmlTextWriterAttribute.Id, ClientID);
+        string[] _exceptionMessages =
+        {
+            "No IPageableItemContainer was found. Verify that either the DataPager is inside an IPageableItemContainer or PagedControlID is set to the control ID of an IPageableItemContainer",
+            "There is no data-bound control associated with the DataPager control.",
+            "Control with id '{0}' cannot be found in the page",
+            "Control '{0}' is not pageable",
+            "DataPager has no naming container",
+        };
 
-			if (_attributes != null && _attributes.Count > 0) {
-				foreach (string attr in _attributes.Keys)
-					writer.AddAttribute (attr, _attributes [attr]);
-			}
-		}
+        IPageableItemContainer _pageableContainer;
+        DataPagerFieldCollection _fields;
+        AttributeCollection _attributes;
 
-		protected virtual void ConnectToEvents (IPageableItemContainer container)
-		{
-			if (container == null)
-				throw new ArgumentNullException ("container");
+        int _totalRowCount;
+        int _startRowIndex;
+        int _maximumRows = 10;
 
-			container.TotalRowCountAvailable += new EventHandler <PageEventArgs> (OnTotalRowCountAvailable);
-		}
+        bool _initDone;
+        bool _needNewContainerSetup = true;
+        bool _needSetPageProperties = true;
+        bool _createPagerFieldsRunning;
 
-		protected virtual void CreatePagerFields ()
-		{
-			// In theory (on multi-core or SMP machines), OnTotalRowCountAvailable may
-			// be called asynchronously to this method (since it is a delegate reacting
-			// to event in the container), so we want to protect ourselves from data
-			// corruption here. Lock would be an overkill, since we really want to
-			// create the list only once anyway.
-			_createPagerFieldsRunning = true;
-			
-			ControlCollection controls = Controls;
-			controls.Clear ();
+        public DataPager()
+        {
+            _fields = new DataPagerFieldCollection(this);
+        }
 
-			DataPagerFieldItem control;
-			
-			foreach (DataPagerField dpf in _fields) {
-				control = new DataPagerFieldItem (dpf, this);
-				controls.Add (control);
-				if (dpf.Visible) {
-					dpf.CreateDataPagers (control, _startRowIndex, _maximumRows, _totalRowCount, _fields.IndexOf (dpf));
-					control.DataBind ();
-				}
-			}
+        protected virtual void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            if (ID != null)
+                writer.AddAttribute(HtmlTextWriterAttribute.Id, ClientID);
 
-			_createPagerFieldsRunning = false;
-		}
+            if (_attributes != null && _attributes.Count > 0)
+            {
+                foreach (string attr in _attributes.Keys)
+                    writer.AddAttribute(attr, _attributes[attr]);
+            }
+        }
 
-		public override void DataBind ()
-		{
-			OnDataBinding (EventArgs.Empty);
-			EnsureChildControls ();
-			DataBindChildren ();
-		}
+        protected virtual void ConnectToEvents(IPageableItemContainer container)
+        {
+            if (container == null)
+                throw new ArgumentNullException("container");
 
-		protected virtual IPageableItemContainer FindPageableItemContainer ()
-		{
-			string pagedControlID = PagedControlID;
-			IPageableItemContainer ret = null;
-			Page page = Page;
-			Control container;
-			
-			if (page != null && !String.IsNullOrEmpty (pagedControlID)) {
-				Control ctl = null;
-				container = NamingContainer;
-				while (container != null) {
-					ctl = container.FindControl (pagedControlID);
-					if (ctl != null)
-						break;
-					if (container == page)
-						break;
-					container = container.NamingContainer;
-				}
+            container.TotalRowCountAvailable += new EventHandler<PageEventArgs>(
+                OnTotalRowCountAvailable
+            );
+        }
 
-				if (container == null)
-					throw new InvalidOperationException (_exceptionMessages [NO_NAMING_CONTAINER]);
-				
-				if (ctl == null)
-					throw new InvalidOperationException (String.Format (_exceptionMessages [NO_PAGED_CONTAINER_ID], pagedControlID));
+        protected virtual void CreatePagerFields()
+        {
+            // In theory (on multi-core or SMP machines), OnTotalRowCountAvailable may
+            // be called asynchronously to this method (since it is a delegate reacting
+            // to event in the container), so we want to protect ourselves from data
+            // corruption here. Lock would be an overkill, since we really want to
+            // create the list only once anyway.
+            _createPagerFieldsRunning = true;
 
-				ret = ctl as IPageableItemContainer;
-				if (ret == null)
-					throw new InvalidOperationException (String.Format (_exceptionMessages [CONTROL_NOT_PAGEABLE], pagedControlID));
+            ControlCollection controls = Controls;
+            controls.Clear();
 
-				return ret;
-			}
+            DataPagerFieldItem control;
 
-			// No ID set, try to find a container that's pageable
-			container = NamingContainer;
-			while (container != page) {
-				if (container == null)
-					throw new InvalidOperationException (_exceptionMessages [NO_NAMING_CONTAINER]);
+            foreach (DataPagerField dpf in _fields)
+            {
+                control = new DataPagerFieldItem(dpf, this);
+                controls.Add(control);
+                if (dpf.Visible)
+                {
+                    dpf.CreateDataPagers(
+                        control,
+                        _startRowIndex,
+                        _maximumRows,
+                        _totalRowCount,
+                        _fields.IndexOf(dpf)
+                    );
+                    control.DataBind();
+                }
+            }
 
-				ret = container as IPageableItemContainer;
-				if (ret != null)
-					return ret;
+            _createPagerFieldsRunning = false;
+        }
 
-				container = container.NamingContainer;
-			}
+        public override void DataBind()
+        {
+            OnDataBinding(EventArgs.Empty);
+            EnsureChildControls();
+            DataBindChildren();
+        }
 
-			return ret;
-		}
+        protected virtual IPageableItemContainer FindPageableItemContainer()
+        {
+            string pagedControlID = PagedControlID;
+            IPageableItemContainer ret = null;
+            Page page = Page;
+            Control container;
 
-		protected internal override void LoadControlState (object savedState)
-		{
-			object[] state = savedState as object[];
-			object tmp;
-			
-			if (state != null && state.Length == CSTATE_COUNT) {
-				base.LoadControlState (state [CSTATE_BASE_STATE]);
+            if (page != null && !String.IsNullOrEmpty(pagedControlID))
+            {
+                Control ctl = null;
+                container = NamingContainer;
+                while (container != null)
+                {
+                    ctl = container.FindControl(pagedControlID);
+                    if (ctl != null)
+                        break;
+                    if (container == page)
+                        break;
+                    container = container.NamingContainer;
+                }
 
-				if ((tmp = state [CSTATE_TOTAL_ROW_COUNT]) != null)
-					_totalRowCount = (int) tmp;
+                if (container == null)
+                    throw new InvalidOperationException(_exceptionMessages[NO_NAMING_CONTAINER]);
 
-				if ((tmp = state [CSTATE_MAXIMUM_ROWS]) != null)
-					_maximumRows = (int) tmp;
+                if (ctl == null)
+                    throw new InvalidOperationException(
+                        String.Format(_exceptionMessages[NO_PAGED_CONTAINER_ID], pagedControlID)
+                    );
 
-				if ((tmp = state [CSTATE_START_ROW_INDEX]) != null)
-					_startRowIndex = (int) tmp;
-			}
+                ret = ctl as IPageableItemContainer;
+                if (ret == null)
+                    throw new InvalidOperationException(
+                        String.Format(_exceptionMessages[CONTROL_NOT_PAGEABLE], pagedControlID)
+                    );
 
-			if (_pageableContainer == null) {
-				_pageableContainer = FindPageableItemContainer ();
-				if (_pageableContainer == null)
-					throw new InvalidOperationException (_exceptionMessages [NO_DATABOUND_CONTROL]);
-				ConnectToEvents (_pageableContainer);
-			}
-			
-			SetUpForNewContainer (false, false);
-		}
+                return ret;
+            }
 
-		protected override void LoadViewState (object savedState)
-		{
-			var state = savedState as object[];
+            // No ID set, try to find a container that's pageable
+            container = NamingContainer;
+            while (container != page)
+            {
+                if (container == null)
+                    throw new InvalidOperationException(_exceptionMessages[NO_NAMING_CONTAINER]);
 
-			if (state == null || state.Length != 2)
-				return;
+                ret = container as IPageableItemContainer;
+                if (ret != null)
+                    return ret;
 
-			base.LoadViewState (state [0]);
-			object myState = state [1];
-			if (myState != null)
-				((IStateManager) Fields).LoadViewState (myState);
-		}
+                container = container.NamingContainer;
+            }
 
-		protected override bool OnBubbleEvent (object source, EventArgs e)
-		{
-			DataPagerFieldCommandEventArgs args = e as DataPagerFieldCommandEventArgs;
+            return ret;
+        }
 
-			if (args != null) {
-				DataPagerFieldItem item = args.Item;
-				DataPagerField field = item != null ? item.PagerField : null;
-				
-				if (field != null) {
-					field.HandleEvent (args);
-					return true;
-				}
-			}
+        protected internal override void LoadControlState(object savedState)
+        {
+            object[] state = savedState as object[];
+            object tmp;
 
-			return false;
-		}
+            if (state != null && state.Length == CSTATE_COUNT)
+            {
+                base.LoadControlState(state[CSTATE_BASE_STATE]);
 
-		void SetUpForNewContainer (bool dataBind, bool needSetPageProperties)
-		{
- 			if (_needNewContainerSetup) {
-				ConnectToEvents (_pageableContainer);
-				_needNewContainerSetup = false;
-			}
+                if ((tmp = state[CSTATE_TOTAL_ROW_COUNT]) != null)
+                    _totalRowCount = (int)tmp;
 
-			if (_needSetPageProperties) {
-				_pageableContainer.SetPageProperties (_startRowIndex, _maximumRows, dataBind);
-				_needSetPageProperties = needSetPageProperties;
-			}
-		}
-		
-		protected internal override void OnInit (EventArgs e)
-		{
-			base.OnInit (e);
-			Page page = Page;
-			if (page != null)
-				page.RegisterRequiresControlState (this);
-			
-			// It might return null here - there is no guarantee all the controls on the
-			// page are already initialized by the time this method is loaded. Do not
-			// throw for that reason.
-			_pageableContainer = FindPageableItemContainer ();
-			if (_pageableContainer != null)
-				// Do not re-bind the data here - not all the controls might be
-				// initialized (that includes the container may be bound to)
-				SetUpForNewContainer (false, true);
+                if ((tmp = state[CSTATE_MAXIMUM_ROWS]) != null)
+                    _maximumRows = (int)tmp;
 
-			_initDone = true;
-		}
+                if ((tmp = state[CSTATE_START_ROW_INDEX]) != null)
+                    _startRowIndex = (int)tmp;
+            }
 
-		protected internal override void OnLoad (EventArgs e)
-		{
-			if (_pageableContainer == null)
-				_pageableContainer = FindPageableItemContainer ();
-			
-			if (_pageableContainer == null)
-				throw new InvalidOperationException (_exceptionMessages [NO_PAGEABLE_ITEM_CONTAINER]);
+            if (_pageableContainer == null)
+            {
+                _pageableContainer = FindPageableItemContainer();
+                if (_pageableContainer == null)
+                    throw new InvalidOperationException(_exceptionMessages[NO_DATABOUND_CONTROL]);
+                ConnectToEvents(_pageableContainer);
+            }
 
-			SetUpForNewContainer (false, false);
-			
-			base.OnLoad (e);
-		}
+            SetUpForNewContainer(false, false);
+        }
 
-		protected virtual void OnTotalRowCountAvailable (object sender, PageEventArgs e)
-		{
-			_totalRowCount = e.TotalRowCount;
-			_maximumRows = e.MaximumRows;
-			_startRowIndex = e.StartRowIndex;
-			
-			// Sanity checks: if the total row count is less than the current start row
-			// index, we must adjust and rebind the associated container control
-			if (_totalRowCount > 0 && (_totalRowCount <= _startRowIndex)) {
-				// Adjust the container's start row index to the new maximum rows
-				// count, but do not touch our index - we aren't a "view", so we
-				// don't want/need to change the start index.
-				int tmp = _startRowIndex - _maximumRows;
-				if (tmp < 0 || tmp >= _totalRowCount)
-					tmp = 0;
+        protected override void LoadViewState(object savedState)
+        {
+            var state = savedState as object[];
 
-				// Trigger the databinding, which will call us again, with adjusted
-				// data, so that we can recreate the pager fields.
-				_pageableContainer.SetPageProperties (tmp, _maximumRows, true);
-			} else if (!_createPagerFieldsRunning)
-				// No adjustments necessary, re-create the pager fields
-				CreatePagerFields ();
-		}
+            if (state == null || state.Length != 2)
+                return;
 
-		protected virtual void RecreateChildControls ()
-		{
-			// This is used only by VS designer
-			throw new NotImplementedException ();
-		}
+            base.LoadViewState(state[0]);
+            object myState = state[1];
+            if (myState != null)
+                ((IStateManager)Fields).LoadViewState(myState);
+        }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			RenderBeginTag (writer);
-			RenderContents (writer);
-			writer.RenderEndTag ();
-		}
+        protected override bool OnBubbleEvent(object source, EventArgs e)
+        {
+            DataPagerFieldCommandEventArgs args = e as DataPagerFieldCommandEventArgs;
 
-		public virtual void RenderBeginTag (HtmlTextWriter writer)
-		{
-			AddAttributesToRender (writer);
-			writer.RenderBeginTag (TagKey);
-		}
+            if (args != null)
+            {
+                DataPagerFieldItem item = args.Item;
+                DataPagerField field = item != null ? item.PagerField : null;
 
-		protected virtual void RenderContents (HtmlTextWriter writer)
-		{
-			// Nothing special to render, just child controls
-			base.Render (writer);
-		}
+                if (field != null)
+                {
+                    field.HandleEvent(args);
+                    return true;
+                }
+            }
 
-		protected internal override object SaveControlState ()
-		{
-			object[] ret = new object [CSTATE_COUNT];
+            return false;
+        }
 
-			ret [CSTATE_BASE_STATE] = base.SaveControlState ();
-			ret [CSTATE_TOTAL_ROW_COUNT] = _totalRowCount <= 0 ? 0 : _totalRowCount;
-			ret [CSTATE_MAXIMUM_ROWS] = _maximumRows <= 0 ? 0 : _maximumRows;
-			ret [CSTATE_START_ROW_INDEX] = _startRowIndex <= 0 ? 0 : _startRowIndex;
+        void SetUpForNewContainer(bool dataBind, bool needSetPageProperties)
+        {
+            if (_needNewContainerSetup)
+            {
+                ConnectToEvents(_pageableContainer);
+                _needNewContainerSetup = false;
+            }
 
-			return ret;
-		}
+            if (_needSetPageProperties)
+            {
+                _pageableContainer.SetPageProperties(_startRowIndex, _maximumRows, dataBind);
+                _needSetPageProperties = needSetPageProperties;
+            }
+        }
 
-		protected override object SaveViewState ()
-		{
-			var ret = new object [2];
-			
-			ret [0] = base.SaveViewState ();
-			ret [1] = _fields != null ? ((IStateManager) _fields).SaveViewState () : null;
+        protected internal override void OnInit(EventArgs e)
+        {
+            base.OnInit(e);
+            Page page = Page;
+            if (page != null)
+                page.RegisterRequiresControlState(this);
 
-			return ret;
-		}
+            // It might return null here - there is no guarantee all the controls on the
+            // page are already initialized by the time this method is loaded. Do not
+            // throw for that reason.
+            _pageableContainer = FindPageableItemContainer();
+            if (_pageableContainer != null)
+                // Do not re-bind the data here - not all the controls might be
+                // initialized (that includes the container may be bound to)
+                SetUpForNewContainer(false, true);
 
-		public virtual void SetPageProperties (int startRowIndex, int maximumRows, bool databind)
-		{
-			if (_pageableContainer == null)
-				throw new InvalidOperationException (_exceptionMessages [NO_DATABOUND_CONTROL]);
+            _initDone = true;
+        }
 
-			_startRowIndex = startRowIndex;
-			_maximumRows = maximumRows;
-			_needSetPageProperties = false;
-			
-			_pageableContainer.SetPageProperties (startRowIndex, maximumRows, databind);
-		}
+        protected internal override void OnLoad(EventArgs e)
+        {
+            if (_pageableContainer == null)
+                _pageableContainer = FindPageableItemContainer();
 
-		protected override void TrackViewState ()
-		{
-			base.TrackViewState ();
-			if (_fields != null)
-				((IStateManager) _fields).TrackViewState ();
-		}
+            if (_pageableContainer == null)
+                throw new InvalidOperationException(_exceptionMessages[NO_PAGEABLE_ITEM_CONTAINER]);
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public AttributeCollection Attributes {
-			get {
-				if (_attributes == null)
-					_attributes = new AttributeCollection (new StateBag ());
-				
-				return _attributes;
-			}
-		}
+            SetUpForNewContainer(false, false);
 
-		public override ControlCollection Controls {
-			get {
-				EnsureChildControls ();
-				return base.Controls;
-			}
-		}
+            base.OnLoad(e);
+        }
 
-		[Category ("Default")]
-		[PersistenceMode (PersistenceMode.InnerProperty)]
-		[DefaultValue ("")]
-		[Editor ("System.Web.UI.Design.WebControls.DataPagerFieldTypeEditor, System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35", typeof (System.Drawing.Design.UITypeEditor))]
-		[MergableProperty (false)]
-		public virtual DataPagerFieldCollection Fields {
-			get { return _fields; }
-		}
+        protected virtual void OnTotalRowCountAvailable(object sender, PageEventArgs e)
+        {
+            _totalRowCount = e.TotalRowCount;
+            _maximumRows = e.MaximumRows;
+            _startRowIndex = e.StartRowIndex;
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public int MaximumRows {
-			get { return _maximumRows; }
-		}
+            // Sanity checks: if the total row count is less than the current start row
+            // index, we must adjust and rebind the associated container control
+            if (_totalRowCount > 0 && (_totalRowCount <= _startRowIndex))
+            {
+                // Adjust the container's start row index to the new maximum rows
+                // count, but do not touch our index - we aren't a "view", so we
+                // don't want/need to change the start index.
+                int tmp = _startRowIndex - _maximumRows;
+                if (tmp < 0 || tmp >= _totalRowCount)
+                    tmp = 0;
 
-		[WebCategory ("Paging")]
-		[IDReferenceProperty (typeof (System.Web.UI.WebControls.IPageableItemContainer))]
-		[DefaultValue ("")]
-		[Themeable (false)]
-		public virtual string PagedControlID {
-			get {
-				string ret = ViewState ["PagedControlID"] as string;
-				if (ret == null)
-					return String.Empty;
+                // Trigger the databinding, which will call us again, with adjusted
+                // data, so that we can recreate the pager fields.
+                _pageableContainer.SetPageProperties(tmp, _maximumRows, true);
+            }
+            else if (!_createPagerFieldsRunning)
+                // No adjustments necessary, re-create the pager fields
+                CreatePagerFields();
+        }
 
-				return ret;
-			}
-			
-			set { ViewState ["PagedControlID"] = value; }
-		}
+        protected virtual void RecreateChildControls()
+        {
+            // This is used only by VS designer
+            throw new NotImplementedException();
+        }
 
-		[DefaultValue (10)]
-		[WebCategory ("Paging")]
-		public int PageSize {
-			get { return _maximumRows; }
-			set {
-				if (value < 1)
-					throw new ArgumentOutOfRangeException ("value");
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            RenderBeginTag(writer);
+            RenderContents(writer);
+            writer.RenderEndTag();
+        }
 
-				if (value == _maximumRows)
-					return;
-				
-				_maximumRows = value;
-				if (_initDone) {
-					// We have a source and the page size has changed, update
-					// the container
-					CreatePagerFields ();
+        public virtual void RenderBeginTag(HtmlTextWriter writer)
+        {
+            AddAttributesToRender(writer);
+            writer.RenderBeginTag(TagKey);
+        }
 
-					// Environment has changed, let the container know that it
-					// needs to rebind.
-					SetPageProperties (_startRowIndex, _maximumRows, true);
-				}
-			}
-		}
-		
-		[DefaultValue ("")]
-		[WebCategory ("Paging")]
-		public string QueryStringField {
-			get {
-				string ret = ViewState ["QueryStringField"] as string;
-				if (ret == null)
-					return String.Empty;
+        protected virtual void RenderContents(HtmlTextWriter writer)
+        {
+            // Nothing special to render, just child controls
+            base.Render(writer);
+        }
 
-				return ret;
-			}
-			
-			set { ViewState ["QueryStringField"] = value; }
-		}
+        protected internal override object SaveControlState()
+        {
+            object[] ret = new object[CSTATE_COUNT];
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public int StartRowIndex {
-			get { return _startRowIndex; }
-		}
+            ret[CSTATE_BASE_STATE] = base.SaveControlState();
+            ret[CSTATE_TOTAL_ROW_COUNT] = _totalRowCount <= 0 ? 0 : _totalRowCount;
+            ret[CSTATE_MAXIMUM_ROWS] = _maximumRows <= 0 ? 0 : _maximumRows;
+            ret[CSTATE_START_ROW_INDEX] = _startRowIndex <= 0 ? 0 : _startRowIndex;
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		protected virtual HtmlTextWriterTag TagKey {
-			get { return HtmlTextWriterTag.Span; }
-		}
+            return ret;
+        }
 
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[Browsable (false)]
-		public int TotalRowCount {
-			get { return _totalRowCount; }
-		}
+        protected override object SaveViewState()
+        {
+            var ret = new object[2];
 
-		string IAttributeAccessor.GetAttribute (string key)
-		{
-			return Attributes [key];
-		}
+            ret[0] = base.SaveViewState();
+            ret[1] = _fields != null ? ((IStateManager)_fields).SaveViewState() : null;
 
-		void IAttributeAccessor.SetAttribute (string key, string value)
-		{
-			Attributes [key] = value;
-		}
+            return ret;
+        }
 
-		void ICompositeControlDesignerAccessor.RecreateChildControls ()
-		{
-			RecreateChildControls ();
-		}
-	}
+        public virtual void SetPageProperties(int startRowIndex, int maximumRows, bool databind)
+        {
+            if (_pageableContainer == null)
+                throw new InvalidOperationException(_exceptionMessages[NO_DATABOUND_CONTROL]);
+
+            _startRowIndex = startRowIndex;
+            _maximumRows = maximumRows;
+            _needSetPageProperties = false;
+
+            _pageableContainer.SetPageProperties(startRowIndex, maximumRows, databind);
+        }
+
+        protected override void TrackViewState()
+        {
+            base.TrackViewState();
+            if (_fields != null)
+                ((IStateManager)_fields).TrackViewState();
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public AttributeCollection Attributes
+        {
+            get
+            {
+                if (_attributes == null)
+                    _attributes = new AttributeCollection(new StateBag());
+
+                return _attributes;
+            }
+        }
+
+        public override ControlCollection Controls
+        {
+            get
+            {
+                EnsureChildControls();
+                return base.Controls;
+            }
+        }
+
+        [Category("Default")]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
+        [DefaultValue("")]
+        [Editor(
+            "System.Web.UI.Design.WebControls.DataPagerFieldTypeEditor, System.Web.Extensions.Design, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35",
+            typeof(System.Drawing.Design.UITypeEditor)
+        )]
+        [MergableProperty(false)]
+        public virtual DataPagerFieldCollection Fields
+        {
+            get { return _fields; }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int MaximumRows
+        {
+            get { return _maximumRows; }
+        }
+
+        [WebCategory("Paging")]
+        [IDReferenceProperty(typeof(System.Web.UI.WebControls.IPageableItemContainer))]
+        [DefaultValue("")]
+        [Themeable(false)]
+        public virtual string PagedControlID
+        {
+            get
+            {
+                string ret = ViewState["PagedControlID"] as string;
+                if (ret == null)
+                    return String.Empty;
+
+                return ret;
+            }
+            set { ViewState["PagedControlID"] = value; }
+        }
+
+        [DefaultValue(10)]
+        [WebCategory("Paging")]
+        public int PageSize
+        {
+            get { return _maximumRows; }
+            set
+            {
+                if (value < 1)
+                    throw new ArgumentOutOfRangeException("value");
+
+                if (value == _maximumRows)
+                    return;
+
+                _maximumRows = value;
+                if (_initDone)
+                {
+                    // We have a source and the page size has changed, update
+                    // the container
+                    CreatePagerFields();
+
+                    // Environment has changed, let the container know that it
+                    // needs to rebind.
+                    SetPageProperties(_startRowIndex, _maximumRows, true);
+                }
+            }
+        }
+
+        [DefaultValue("")]
+        [WebCategory("Paging")]
+        public string QueryStringField
+        {
+            get
+            {
+                string ret = ViewState["QueryStringField"] as string;
+                if (ret == null)
+                    return String.Empty;
+
+                return ret;
+            }
+            set { ViewState["QueryStringField"] = value; }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public int StartRowIndex
+        {
+            get { return _startRowIndex; }
+        }
+
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        protected virtual HtmlTextWriterTag TagKey
+        {
+            get { return HtmlTextWriterTag.Span; }
+        }
+
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [Browsable(false)]
+        public int TotalRowCount
+        {
+            get { return _totalRowCount; }
+        }
+
+        string IAttributeAccessor.GetAttribute(string key)
+        {
+            return Attributes[key];
+        }
+
+        void IAttributeAccessor.SetAttribute(string key, string value)
+        {
+            Attributes[key] = value;
+        }
+
+        void ICompositeControlDesignerAccessor.RecreateChildControls()
+        {
+            RecreateChildControls();
+        }
+    }
 }

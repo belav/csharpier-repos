@@ -17,7 +17,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { attribute.OnAuthorization(null); }, "filterContext");
+                delegate
+                {
+                    attribute.OnAuthorization(null);
+                },
+                "filterContext"
+            );
         }
 
         [Fact]
@@ -32,7 +37,9 @@ namespace System.Web.Mvc.Test
             {
                 validateCalled = true;
             };
-            ValidateAntiForgeryTokenAttribute attribute = new ValidateAntiForgeryTokenAttribute(validateMethod);
+            ValidateAntiForgeryTokenAttribute attribute = new ValidateAntiForgeryTokenAttribute(
+                validateMethod
+            );
 
             // Act
             attribute.OnAuthorization(authorizationContextMock.Object);

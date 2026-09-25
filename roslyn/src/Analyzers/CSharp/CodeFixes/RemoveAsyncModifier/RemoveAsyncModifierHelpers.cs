@@ -9,28 +9,45 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
 {
     internal static class RemoveAsyncModifierHelpers
     {
-        internal static SyntaxNode WithoutAsyncModifier(MethodDeclarationSyntax method, TypeSyntax returnType)
+        internal static SyntaxNode WithoutAsyncModifier(
+            MethodDeclarationSyntax method,
+            TypeSyntax returnType
+        )
         {
             var newModifiers = RemoveAsyncModifier(method.Modifiers, ref returnType);
             return method.WithReturnType(returnType).WithModifiers(newModifiers);
         }
 
-        internal static SyntaxNode WithoutAsyncModifier(LocalFunctionStatementSyntax localFunction, TypeSyntax returnType)
+        internal static SyntaxNode WithoutAsyncModifier(
+            LocalFunctionStatementSyntax localFunction,
+            TypeSyntax returnType
+        )
         {
             var newModifiers = RemoveAsyncModifier(localFunction.Modifiers, ref returnType);
             return localFunction.WithReturnType(returnType).WithModifiers(newModifiers);
         }
 
-        internal static SyntaxNode WithoutAsyncModifier(ParenthesizedLambdaExpressionSyntax lambda)
-            => lambda.WithAsyncKeyword(default).WithPrependedLeadingTrivia(lambda.AsyncKeyword.LeadingTrivia);
+        internal static SyntaxNode WithoutAsyncModifier(
+            ParenthesizedLambdaExpressionSyntax lambda
+        ) =>
+            lambda
+                .WithAsyncKeyword(default)
+                .WithPrependedLeadingTrivia(lambda.AsyncKeyword.LeadingTrivia);
 
-        internal static SyntaxNode WithoutAsyncModifier(SimpleLambdaExpressionSyntax lambda)
-            => lambda.WithAsyncKeyword(default).WithPrependedLeadingTrivia(lambda.AsyncKeyword.LeadingTrivia);
+        internal static SyntaxNode WithoutAsyncModifier(SimpleLambdaExpressionSyntax lambda) =>
+            lambda
+                .WithAsyncKeyword(default)
+                .WithPrependedLeadingTrivia(lambda.AsyncKeyword.LeadingTrivia);
 
-        internal static SyntaxNode WithoutAsyncModifier(AnonymousMethodExpressionSyntax method)
-            => method.WithAsyncKeyword(default).WithPrependedLeadingTrivia(method.AsyncKeyword.LeadingTrivia);
+        internal static SyntaxNode WithoutAsyncModifier(AnonymousMethodExpressionSyntax method) =>
+            method
+                .WithAsyncKeyword(default)
+                .WithPrependedLeadingTrivia(method.AsyncKeyword.LeadingTrivia);
 
-        private static SyntaxTokenList RemoveAsyncModifier(SyntaxTokenList modifiers, ref TypeSyntax newReturnType)
+        private static SyntaxTokenList RemoveAsyncModifier(
+            SyntaxTokenList modifiers,
+            ref TypeSyntax newReturnType
+        )
         {
             var asyncTokenIndex = modifiers.IndexOf(SyntaxKind.AsyncKeyword);
             SyntaxTokenList newModifiers;
@@ -44,7 +61,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveAsyncModifier
                     // Move the trivia to the next modifier;
                     newModifiers = modifiers.Replace(
                         modifiers[1],
-                        modifiers[1].WithPrependedLeadingTrivia(asyncLeadingTrivia));
+                        modifiers[1].WithPrependedLeadingTrivia(asyncLeadingTrivia)
+                    );
                     newModifiers = newModifiers.RemoveAt(0);
                 }
                 else

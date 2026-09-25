@@ -25,7 +25,7 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         /// display any members of the object.
         /// </summary>
         /// <remarks>
-        /// <see cref="CommonObjectFormatter"/> does not apply this format to collections elements - 
+        /// <see cref="CommonObjectFormatter"/> does not apply this format to collections elements -
         /// they are shown regardless.
         /// </remarks>
         Hidden,

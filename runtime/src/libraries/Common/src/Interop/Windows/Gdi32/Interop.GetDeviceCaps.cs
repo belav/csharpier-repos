@@ -21,7 +21,7 @@ internal static partial class Interop
             PHYSICALWIDTH = 110,
             PHYSICALHEIGHT = 111,
             PHYSICALOFFSETX = 112,
-            PHYSICALOFFSETY = 113
+            PHYSICALOFFSETY = 113,
         }
 
         public static class DeviceTechnology

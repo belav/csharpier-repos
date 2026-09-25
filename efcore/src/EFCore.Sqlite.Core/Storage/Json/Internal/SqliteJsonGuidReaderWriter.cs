@@ -26,9 +26,7 @@ public sealed class SqliteJsonGuidReaderWriter : JsonValueReaderWriter<Guid>
     /// </summary>
     public static SqliteJsonGuidReaderWriter Instance { get; } = new();
 
-    private SqliteJsonGuidReaderWriter()
-    {
-    }
+    private SqliteJsonGuidReaderWriter() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,8 +34,10 @@ public sealed class SqliteJsonGuidReaderWriter : JsonValueReaderWriter<Guid>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Guid FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-        => manager.CurrentReader.GetGuid();
+    public override Guid FromJsonTyped(
+        ref Utf8JsonReaderManager manager,
+        object? existingObject = null
+    ) => manager.CurrentReader.GetGuid();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,6 +45,6 @@ public sealed class SqliteJsonGuidReaderWriter : JsonValueReaderWriter<Guid>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override void ToJsonTyped(Utf8JsonWriter writer, Guid value)
-        => writer.WriteStringValue(value.ToString().ToUpperInvariant());
+    public override void ToJsonTyped(Utf8JsonWriter writer, Guid value) =>
+        writer.WriteStringValue(value.ToString().ToUpperInvariant());
 }

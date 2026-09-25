@@ -35,7 +35,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             /// <summary>
             /// Gets all the diagnostics to fix for the given <paramref name="fixAllSpan"/> in the given <paramref name="document"/> in a <see cref="FixAllContext"/>.
             /// </summary>
-            public abstract Task<IEnumerable<Diagnostic>> GetDocumentSpanDiagnosticsAsync(Document document, TextSpan fixAllSpan, CancellationToken cancellationToken);
+            public abstract Task<IEnumerable<Diagnostic>> GetDocumentSpanDiagnosticsAsync(
+                Document document,
+                TextSpan fixAllSpan,
+                CancellationToken cancellationToken
+            );
         }
     }
 }

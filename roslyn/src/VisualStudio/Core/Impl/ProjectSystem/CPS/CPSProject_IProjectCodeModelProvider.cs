@@ -13,8 +13,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 {
     internal sealed partial class CPSProject
     {
-        public EnvDTE.CodeModel GetCodeModel(EnvDTE.Project parent)
-            => _projectCodeModel.GetOrCreateRootCodeModel(parent);
+        public EnvDTE.CodeModel GetCodeModel(EnvDTE.Project parent) =>
+            _projectCodeModel.GetOrCreateRootCodeModel(parent);
 
         public EnvDTE.FileCodeModel GetFileCodeModel(EnvDTE.ProjectItem item)
         {
@@ -30,10 +30,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
         {
             private readonly CPSProject _project;
 
-            public CPSCodeModelInstanceFactory(CPSProject project)
-                => _project = project;
+            public CPSCodeModelInstanceFactory(CPSProject project) => _project = project;
 
-            EnvDTE.FileCodeModel ICodeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(string filePath)
+            EnvDTE.FileCodeModel ICodeModelInstanceFactory.TryCreateFileCodeModelThroughProjectSystem(
+                string filePath
+            )
             {
                 var projectItem = GetProjectItem(filePath);
                 if (projectItem == null)
@@ -46,7 +47,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
 
             private EnvDTE.ProjectItem GetProjectItem(string filePath)
             {
-                var dteProject = _project._visualStudioWorkspace.TryGetDTEProject(_project._projectSystemProject.Id);
+                var dteProject = _project._visualStudioWorkspace.TryGetDTEProject(
+                    _project._projectSystemProject.Id
+                );
                 if (dteProject == null)
                 {
                     return null;

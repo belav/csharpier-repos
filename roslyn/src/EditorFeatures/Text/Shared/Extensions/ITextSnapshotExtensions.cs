@@ -12,10 +12,14 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
 {
     internal static partial class ITextSnapshotExtensions
     {
-        public static SnapshotPoint GetPoint(this ITextSnapshot snapshot, int position)
-            => new SnapshotPoint(snapshot, position);
+        public static SnapshotPoint GetPoint(this ITextSnapshot snapshot, int position) =>
+            new SnapshotPoint(snapshot, position);
 
-        public static SnapshotPoint? TryGetPoint(this ITextSnapshot snapshot, int lineNumber, int columnIndex)
+        public static SnapshotPoint? TryGetPoint(
+            this ITextSnapshot snapshot,
+            int lineNumber,
+            int columnIndex
+        )
         {
             var position = snapshot.TryGetPosition(lineNumber, columnIndex);
             if (position.HasValue)
@@ -35,13 +39,25 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
         {
             return TextSpan.FromBounds(
                 GetPosition(snapshot, span.Start.Line, span.Start.Character),
-                GetPosition(snapshot, span.End.Line, span.End.Character));
+                GetPosition(snapshot, span.End.Line, span.End.Character)
+            );
         }
 
-        public static int GetPosition(this ITextSnapshot snapshot, int lineNumber, int columnIndex)
-            => TryGetPosition(snapshot, lineNumber, columnIndex) ?? throw new InvalidOperationException(TextEditorResources.The_snapshot_does_not_contain_the_specified_position);
+        public static int GetPosition(
+            this ITextSnapshot snapshot,
+            int lineNumber,
+            int columnIndex
+        ) =>
+            TryGetPosition(snapshot, lineNumber, columnIndex)
+            ?? throw new InvalidOperationException(
+                TextEditorResources.The_snapshot_does_not_contain_the_specified_position
+            );
 
-        public static int? TryGetPosition(this ITextSnapshot snapshot, int lineNumber, int columnIndex)
+        public static int? TryGetPosition(
+            this ITextSnapshot snapshot,
+            int lineNumber,
+            int columnIndex
+        )
         {
             if (lineNumber < 0 || lineNumber >= snapshot.LineCount)
             {
@@ -57,7 +73,12 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             return end;
         }
 
-        public static bool TryGetPosition(this ITextSnapshot snapshot, int lineNumber, int columnIndex, out SnapshotPoint position)
+        public static bool TryGetPosition(
+            this ITextSnapshot snapshot,
+            int lineNumber,
+            int columnIndex,
+            out SnapshotPoint position
+        )
         {
             position = new SnapshotPoint();
 
@@ -77,25 +98,47 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             return true;
         }
 
-        public static SnapshotSpan GetSpan(this ITextSnapshot snapshot, int start, int length)
-            => new SnapshotSpan(snapshot, new Span(start, length));
+        public static SnapshotSpan GetSpan(this ITextSnapshot snapshot, int start, int length) =>
+            new SnapshotSpan(snapshot, new Span(start, length));
 
-        public static SnapshotSpan GetSpanFromBounds(this ITextSnapshot snapshot, int start, int end)
-            => new SnapshotSpan(snapshot, Span.FromBounds(start, end));
+        public static SnapshotSpan GetSpanFromBounds(
+            this ITextSnapshot snapshot,
+            int start,
+            int end
+        ) => new SnapshotSpan(snapshot, Span.FromBounds(start, end));
 
-        public static SnapshotSpan GetSpan(this ITextSnapshot snapshot, Span span)
-            => new SnapshotSpan(snapshot, span);
+        public static SnapshotSpan GetSpan(this ITextSnapshot snapshot, Span span) =>
+            new SnapshotSpan(snapshot, span);
 
-        public static ITagSpan<TTag> GetTagSpan<TTag>(this ITextSnapshot snapshot, Span span, TTag tag)
+        public static ITagSpan<TTag> GetTagSpan<TTag>(
+            this ITextSnapshot snapshot,
+            Span span,
+            TTag tag
+        )
             where TTag : ITag
         {
             return new TagSpan<TTag>(new SnapshotSpan(snapshot, span), tag);
         }
 
-        public static SnapshotSpan GetSpan(this ITextSnapshot snapshot, int startLine, int startIndex, int endLine, int endIndex)
-            => TryGetSpan(snapshot, startLine, startIndex, endLine, endIndex) ?? throw new InvalidOperationException(TextEditorResources.The_snapshot_does_not_contain_the_specified_span);
+        public static SnapshotSpan GetSpan(
+            this ITextSnapshot snapshot,
+            int startLine,
+            int startIndex,
+            int endLine,
+            int endIndex
+        ) =>
+            TryGetSpan(snapshot, startLine, startIndex, endLine, endIndex)
+            ?? throw new InvalidOperationException(
+                TextEditorResources.The_snapshot_does_not_contain_the_specified_span
+            );
 
-        public static SnapshotSpan? TryGetSpan(this ITextSnapshot snapshot, int startLine, int startIndex, int endLine, int endIndex)
+        public static SnapshotSpan? TryGetSpan(
+            this ITextSnapshot snapshot,
+            int startLine,
+            int startIndex,
+            int endLine,
+            int endIndex
+        )
         {
             var startPosition = snapshot.TryGetPosition(startLine, startIndex);
             var endPosition = snapshot.TryGetPosition(endLine, endIndex);
@@ -104,7 +147,10 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
                 return null;
             }
 
-            return new SnapshotSpan(snapshot, Span.FromBounds(startPosition.Value, endPosition.Value));
+            return new SnapshotSpan(
+                snapshot,
+                Span.FromBounds(startPosition.Value, endPosition.Value)
+            );
         }
 
         public static SnapshotSpan GetFullSpan(this ITextSnapshot snapshot)
@@ -114,14 +160,21 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             return new SnapshotSpan(snapshot, new Span(0, snapshot.Length));
         }
 
-        public static NormalizedSnapshotSpanCollection GetSnapshotSpanCollection(this ITextSnapshot snapshot)
+        public static NormalizedSnapshotSpanCollection GetSnapshotSpanCollection(
+            this ITextSnapshot snapshot
+        )
         {
             Contract.ThrowIfNull(snapshot);
 
             return new NormalizedSnapshotSpanCollection(snapshot.GetFullSpan());
         }
 
-        public static void GetLineAndCharacter(this ITextSnapshot snapshot, int position, out int lineNumber, out int characterIndex)
+        public static void GetLineAndCharacter(
+            this ITextSnapshot snapshot,
+            int position,
+            out int lineNumber,
+            out int characterIndex
+        )
         {
             var line = snapshot.GetLineFromPosition(position);
 
@@ -132,7 +185,10 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
         /// <summary>
         /// Returns the leading whitespace of the line located at the specified position in the given snapshot.
         /// </summary>
-        public static string GetLeadingWhitespaceOfLineAtPosition(this ITextSnapshot snapshot, int position)
+        public static string GetLeadingWhitespaceOfLineAtPosition(
+            this ITextSnapshot snapshot,
+            int position
+        )
         {
             Contract.ThrowIfNull(snapshot);
 
@@ -147,7 +203,7 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             return lineText[..(linePosition.Value - line.Start)];
         }
 
-        public static bool AreOnSameLine(this ITextSnapshot snapshot, int x1, int x2)
-            => snapshot.GetLineNumberFromPosition(x1) == snapshot.GetLineNumberFromPosition(x2);
+        public static bool AreOnSameLine(this ITextSnapshot snapshot, int x1, int x2) =>
+            snapshot.GetLineNumberFromPosition(x1) == snapshot.GetLineNumberFromPosition(x2);
     }
 }

@@ -7,15 +7,14 @@ namespace System.ServiceModel.Description
     using System;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Web;
     using System.Text;
     using System.Xml;
-    using System.ServiceModel.Web;
 
     public abstract class WebServiceEndpoint : ServiceEndpoint
     {
         internal WebServiceEndpoint(ContractDescription contract, EndpointAddress address)
-            : base(contract, new WebHttpBinding(), address)
-        { }
+            : base(contract, new WebHttpBinding(), address) { }
 
         public HostNameComparisonMode HostNameComparisonMode
         {
@@ -64,19 +63,16 @@ namespace System.ServiceModel.Description
             set { this.webHttpBinding.WriteEncoding = value; }
         }
 
-        public WebContentTypeMapper ContentTypeMapper 
+        public WebContentTypeMapper ContentTypeMapper
         {
             get { return this.webHttpBinding.ContentTypeMapper; }
             set { this.webHttpBinding.ContentTypeMapper = value; }
         }
 
-        public bool CrossDomainScriptAccessEnabled 
+        public bool CrossDomainScriptAccessEnabled
         {
             get { return this.webHttpBinding.CrossDomainScriptAccessEnabled; }
-            set
-            {
-                this.webHttpBinding.CrossDomainScriptAccessEnabled = value;
-            }
+            set { this.webHttpBinding.CrossDomainScriptAccessEnabled = value; }
         }
 
         protected abstract Type WebEndpointType { get; }
@@ -88,11 +84,18 @@ namespace System.ServiceModel.Description
                 WebHttpBinding webHttpBinding = this.Binding as WebHttpBinding;
                 if (webHttpBinding == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.WebHttpBindingNotFoundWithEndpoint, WebEndpointType.Name, typeof(WebHttpBinding).Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.WebHttpBindingNotFoundWithEndpoint,
+                                WebEndpointType.Name,
+                                typeof(WebHttpBinding).Name
+                            )
+                        )
+                    );
                 }
                 return webHttpBinding;
             }
         }
     }
-
 }

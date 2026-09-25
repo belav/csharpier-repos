@@ -8,9 +8,7 @@ namespace System.ServiceModel.Discovery
     {
         public const string Name = "System.ServiceModel.Discovery.DiscoveryMessageProperty";
 
-        public DiscoveryMessageProperty()
-        {
-        }
+        public DiscoveryMessageProperty() { }
 
         public DiscoveryMessageProperty(object correlationState)
         {

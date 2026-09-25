@@ -35,13 +35,19 @@ namespace System.Xml.Tests
         {
             if (DataReader.Internal != null)
             {
-                while (DataReader.Read()) ;
+                while (DataReader.Read())
+                    ;
                 DataReader.Close();
             }
             return base.Terminate(objParam);
         }
 
-        private bool VerifyInvalidReadBinHex(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+        private bool VerifyInvalidReadBinHex(
+            int iBufferSize,
+            int iIndex,
+            int iCount,
+            Type exceptionType
+        )
         {
             bool bPassed = false;
             byte[] buffer = new byte[iBufferSize];
@@ -50,7 +56,8 @@ namespace System.Xml.Tests
             DataReader.PositionOnElement(ST_ELEM_NAME1);
             DataReader.Read();
 
-            if (CheckCanReadBinaryContent()) return true;
+            if (CheckCanReadBinaryContent())
+                return true;
 
             try
             {
@@ -74,7 +81,8 @@ namespace System.Xml.Tests
             string value = DataReader.Value;
 
             byte[] buffer = new byte[1];
-            if (CheckCanReadBinaryContent()) return;
+            if (CheckCanReadBinaryContent())
+                return;
 
             try
             {
@@ -96,7 +104,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             binhexlen = DataReader.ReadContentAsBinHex(binhex, 0, binhex.Length);
 
@@ -106,7 +115,11 @@ namespace System.Xml.Tests
                 strActbinhex += System.BitConverter.ToChar(binhex, i);
             }
 
-            CError.Compare(strActbinhex, (strNumBinHex + strTextBinHex), "1. Compare All Valid BinHex");
+            CError.Compare(
+                strActbinhex,
+                (strNumBinHex + strTextBinHex),
+                "1. Compare All Valid BinHex"
+            );
             return TEST_PASS;
         }
 
@@ -119,7 +132,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME3);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -142,7 +156,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -174,7 +189,8 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader(xmlStr));
             DataReader.PositionOnElement("root");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadContentAsBinHex(BinHex, 0, BinHex.Length);
             CError.Compare(BinHexlen, 3, "BinHex");
@@ -195,7 +211,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME5);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -205,7 +222,11 @@ namespace System.Xml.Tests
                 strActBinHex += System.BitConverter.ToChar(BinHex, i);
             }
 
-            CError.Compare(strActBinHex, (strNumBinHex + strTextBinHex), "Compare All Valid BinHex");
+            CError.Compare(
+                strActBinHex,
+                (strNumBinHex + strTextBinHex),
+                "Compare All Valid BinHex"
+            );
             return TEST_PASS;
         }
 
@@ -218,7 +239,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME6);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -239,31 +261,41 @@ namespace System.Xml.Tests
         [Variation("ReadBinHex with count > buffer size")]
         public int TestReadBinHex_7()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 0, 6, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 0, 6, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with count < 0")]
         public int TestReadBinHex_8()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 2, -1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 2, -1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with index > buffer size")]
         public int vReadBinHex_9()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 5, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 5, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with index < 0")]
         public int TestReadBinHex_10()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, -1, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, -1, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with index + count exceeds buffer")]
         public int TestReadBinHex_11()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 0, 10, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 0, 10, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex index & count =0")]
@@ -275,7 +307,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             try
             {
@@ -300,7 +333,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             string strActbinhex = "";
             for (int i = 0; i < BinHexlen; i = i + 2)
@@ -308,7 +342,11 @@ namespace System.Xml.Tests
                 DataReader.ReadContentAsBinHex(BinHex, i, 2);
                 strActbinhex = (System.BitConverter.ToChar(BinHex, i)).ToString();
                 CError.WriteLine("Actual: " + strActbinhex + " Exp: " + strTextBinHex);
-                CError.Compare(string.Compare(strActbinhex, 0, strTextBinHex, i / 2, 1), 0, "Compare All Valid Base64");
+                CError.Compare(
+                    string.Compare(strActbinhex, 0, strTextBinHex, i / 2, 1),
+                    0,
+                    "Compare All Valid Base64"
+                );
             }
 
             return TEST_PASS;
@@ -321,7 +359,8 @@ namespace System.Xml.Tests
 
             DataReader.PositionOnElement(ST_ELEM_NAME4);
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             try
             {
@@ -341,14 +380,18 @@ namespace System.Xml.Tests
 
             DataReader.PositionOnElement("ElemNum");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[10];
             int nRead = DataReader.ReadContentAsBinHex(buffer, 0, 8);
             CError.Compare(nRead, 8, "0");
 
             DataReader.Read();
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.Element, "ElemText", string.Empty), "1vn");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.Element, "ElemText", string.Empty),
+                "1vn"
+            );
 
             return TEST_PASS;
         }
@@ -360,7 +403,8 @@ namespace System.Xml.Tests
 
             DataReader.PositionOnElement("ElemNum");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[30];
 
@@ -369,7 +413,10 @@ namespace System.Xml.Tests
 
             nRead = DataReader.ReadContentAsBinHex(buffer, 0, 19);
             CError.Compare(nRead, 18, "1");
-            CError.Compare(DataReader.VerifyNode(XmlNodeType.EndElement, "ElemNum", string.Empty), "1vn");
+            CError.Compare(
+                DataReader.VerifyNode(XmlNodeType.EndElement, "ElemNum", string.Empty),
+                "1vn"
+            );
 
             return TEST_PASS;
         }
@@ -382,7 +429,8 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader(strxml));
             DataReader.PositionOnElement("abc");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             int result = 0;
             int nRead;
             while ((nRead = DataReader.ReadContentAsBinHex(buffer, 0, 1)) > 0)
@@ -402,7 +450,8 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader(strxml));
             DataReader.PositionOnElement("abc");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             int result = 0;
             int nRead;
             while ((nRead = DataReader.ReadContentAsBinHex(buffer, 0, 1)) > 0)
@@ -424,7 +473,8 @@ namespace System.Xml.Tests
             ReloadSource(new StringReader(strxml));
             DataReader.PositionOnElement("B");
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             try
             {
                 DataReader.ReadContentAsBinHex(buffer, 0, 5000);
@@ -447,7 +497,8 @@ namespace System.Xml.Tests
             DataReader.MoveToContent();
             int bytes = -1;
             DataReader.Read();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             StringBuilder output = new StringBuilder();
             while (bytes != 0)
@@ -463,7 +514,9 @@ namespace System.Xml.Tests
 
             CError.WriteLine();
             CError.WriteLine("Length of the output : " + output.ToString().Length);
-            return (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735")) ? TEST_PASS : TEST_FAIL;
+            return (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735"))
+                ? TEST_PASS
+                : TEST_FAIL;
         }
     }
 
@@ -496,14 +549,21 @@ namespace System.Xml.Tests
 
             return base.Terminate(objParam);
         }
-        private bool VerifyInvalidReadBinHex(int iBufferSize, int iIndex, int iCount, Type exceptionType)
+
+        private bool VerifyInvalidReadBinHex(
+            int iBufferSize,
+            int iIndex,
+            int iCount,
+            Type exceptionType
+        )
         {
             bool bPassed = false;
             byte[] buffer = new byte[iBufferSize];
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
-            if (CheckCanReadBinaryContent()) return true;
+            if (CheckCanReadBinaryContent())
+                return true;
 
             try
             {
@@ -528,7 +588,8 @@ namespace System.Xml.Tests
             string value = DataReader.Value;
 
             byte[] buffer = new byte[1];
-            if (CheckCanReadBinaryContent()) return;
+            if (CheckCanReadBinaryContent())
+                return;
             try
             {
                 int nBytes = DataReader.ReadElementContentAsBinHex(buffer, 0, 1);
@@ -548,7 +609,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             binhexlen = DataReader.ReadElementContentAsBinHex(binhex, 0, binhex.Length);
 
@@ -558,7 +620,11 @@ namespace System.Xml.Tests
                 strActbinhex += System.BitConverter.ToChar(binhex, i);
             }
 
-            CError.Compare(strActbinhex, (strNumBinHex + strTextBinHex), "1. Compare All Valid BinHex");
+            CError.Compare(
+                strActbinhex,
+                (strNumBinHex + strTextBinHex),
+                "1. Compare All Valid BinHex"
+            );
             return TEST_PASS;
         }
 
@@ -570,7 +636,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME3);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadElementContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -592,7 +659,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadElementContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -614,7 +682,8 @@ namespace System.Xml.Tests
 
             ReloadSource(new StringReader("<root>AB<!--Comment-->CD<?pi target?>EF</root>"));
             DataReader.PositionOnElement("root");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadElementContentAsBinHex(BinHex, 0, BinHex.Length);
             CError.Compare(BinHexlen, 3, "BinHex");
@@ -630,7 +699,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME5);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadElementContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -640,7 +710,11 @@ namespace System.Xml.Tests
                 strActBinHex += System.BitConverter.ToChar(BinHex, i);
             }
 
-            CError.Compare(strActBinHex, (strNumBinHex + strTextBinHex), "Compare All Valid BinHex");
+            CError.Compare(
+                strActBinHex,
+                (strNumBinHex + strTextBinHex),
+                "Compare All Valid BinHex"
+            );
             return TEST_PASS;
         }
 
@@ -652,7 +726,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME6);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             BinHexlen = DataReader.ReadElementContentAsBinHex(BinHex, 0, BinHex.Length);
 
@@ -673,31 +748,41 @@ namespace System.Xml.Tests
         [Variation("ReadBinHex with count > buffer size")]
         public int TestReadBinHex_7()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 0, 6, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 0, 6, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with count < 0")]
         public int TestReadBinHex_8()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 2, -1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 2, -1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with index > buffer size")]
         public int vReadBinHex_9()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 5, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 5, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with index < 0")]
         public int TestReadBinHex_10()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, -1, 1, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, -1, 1, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex with index + count exceeds buffer")]
         public int TestReadBinHex_11()
         {
-            return BoolToLTMResult(VerifyInvalidReadBinHex(5, 0, 10, typeof(ArgumentOutOfRangeException)));
+            return BoolToLTMResult(
+                VerifyInvalidReadBinHex(5, 0, 10, typeof(ArgumentOutOfRangeException))
+            );
         }
 
         [Variation("ReadBinHex index & count =0")]
@@ -708,7 +793,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME1);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             try
             {
@@ -732,7 +818,8 @@ namespace System.Xml.Tests
 
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
             DataReader.PositionOnElement(ST_ELEM_NAME4);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             string strActbinhex = "";
             for (int i = 0; i < BinHexlen; i = i + 2)
@@ -740,7 +827,11 @@ namespace System.Xml.Tests
                 DataReader.ReadElementContentAsBinHex(BinHex, i, 2);
                 strActbinhex = (System.BitConverter.ToChar(BinHex, i)).ToString();
                 CError.WriteLine("Actual: " + strActbinhex + " Exp: " + strTextBinHex);
-                CError.Compare(string.Compare(strActbinhex, 0, strTextBinHex, i / 2, 1), 0, "Compare All Valid Base64");
+                CError.Compare(
+                    string.Compare(strActbinhex, 0, strTextBinHex, i / 2, 1),
+                    0,
+                    "Compare All Valid Base64"
+                );
             }
             return TEST_PASS;
         }
@@ -751,7 +842,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
 
             DataReader.PositionOnElement(ST_ELEM_NAME4);
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             try
             {
@@ -770,7 +862,8 @@ namespace System.Xml.Tests
             ReloadSource(EREADER_TYPE.BINHEX_TEST);
 
             DataReader.PositionOnElement("ElemNum");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
 
             byte[] buffer = new byte[10];
             int nRead = DataReader.ReadElementContentAsBinHex(buffer, 0, 8);
@@ -780,7 +873,6 @@ namespace System.Xml.Tests
             CError.Compare(DataReader.NodeType, XmlNodeType.Text, "Not on text node");
             return TEST_PASS;
         }
-
 
         [Variation("No op node types")]
         public int TestReadBinHex_18()
@@ -808,7 +900,8 @@ namespace System.Xml.Tests
             string strxml = "<abc> 1 1 B </abc>";
             ReloadSource(new StringReader(strxml));
             DataReader.PositionOnElement("abc");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             int result = 0;
             int nRead;
             while ((nRead = DataReader.ReadElementContentAsBinHex(buffer, 0, 1)) > 0)
@@ -827,7 +920,8 @@ namespace System.Xml.Tests
             string strxml = "<abc>11B</abc>";
             ReloadSource(new StringReader(strxml));
             DataReader.PositionOnElement("abc");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             int result = 0;
             int nRead;
             while ((nRead = DataReader.ReadElementContentAsBinHex(buffer, 0, 1)) > 0)
@@ -848,7 +942,8 @@ namespace System.Xml.Tests
             string strxml = "<B>" + new string('A', 5000);
             ReloadSource(new StringReader(strxml));
             DataReader.PositionOnElement("B");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             try
             {
                 DataReader.ReadElementContentAsBinHex(buffer, 0, 5000);
@@ -869,7 +964,8 @@ namespace System.Xml.Tests
             ReloadSource(filename);
 
             DataReader.MoveToContent();
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             int bytes = -1;
 
             StringBuilder output = new StringBuilder();
@@ -886,13 +982,16 @@ namespace System.Xml.Tests
 
             CError.WriteLine();
             CError.WriteLine("Length of the output : " + output.ToString().Length);
-            return (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735")) ? TEST_PASS : TEST_FAIL;
+            return (CError.Compare(output.ToString().Length, 1735, "Expected Length : 1735"))
+                ? TEST_PASS
+                : TEST_FAIL;
         }
 
         [Variation("430329: SubtreeReader inserted attributes don't work with ReadContentAsBinHex")]
         public int TestReadBinHex_430329()
         {
-            if (IsCustomReader() || IsXsltReader() || IsBinaryReader()) return TEST_SKIPPED;
+            if (IsCustomReader() || IsXsltReader() || IsBinaryReader())
+                return TEST_SKIPPED;
 
             string strxml = "<root xmlns='0102030405060708090a0B0c'><bar/></root>";
             ReloadSource(new StringReader(strxml));
@@ -906,7 +1005,9 @@ namespace System.Xml.Tests
                 byte[] bytes = new byte[4];
                 while ((sr.ReadContentAsBinHex(bytes, 0, bytes.Length)) > 0)
                 {
-                    if (!(IsXPathNavigatorReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc()))
+                    if (
+                        !(IsXPathNavigatorReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc())
+                    )
                     {
                         CError.WriteLine("LineNumber" + DataReader.LineNumber);
                         CError.WriteLine("LinePosition" + DataReader.LinePosition);
@@ -924,14 +1025,21 @@ namespace System.Xml.Tests
             string strxml = "<abc>1=2</abc>";
             ReloadSource(new StringReader(strxml));
             DataReader.PositionOnElement("abc");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             try
             {
                 DataReader.ReadElementContentAsBinHex(buffer, 0, 1);
                 CError.Compare(false, "ReadBinHex with = in the middle succeeded");
             }
-            catch (XmlException) { return TEST_PASS; }
-            finally { DataReader.Close(); }
+            catch (XmlException)
+            {
+                return TEST_PASS;
+            }
+            finally
+            {
+                DataReader.Close();
+            }
             return TEST_FAIL;
         }
 
@@ -954,7 +1062,7 @@ namespace System.Xml.Tests
             sw.Write("<root><base64>");
             sw.Write(base64str);
             sw.Write("</base64></root>");
-            sw.Flush();//sw.Close();
+            sw.Flush(); //sw.Close();
             FilePathUtil.addStream(fileName, mems);
             ReloadSource(fileName);
 
@@ -962,7 +1070,8 @@ namespace System.Xml.Tests
             int SIZE64 = SIZE * 3 / 4;
 
             DataReader.PositionOnElement("base64");
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] base64 = new byte[SIZE64];
 
             try
@@ -970,8 +1079,15 @@ namespace System.Xml.Tests
                 DataReader.ReadElementContentAsBinHex(base64, 0, 4096);
                 return TEST_FAIL;
             }
-            catch (XmlException) { DataReader.Close(); return TEST_PASS; }
-            finally { DataReader.Close(); }
+            catch (XmlException)
+            {
+                DataReader.Close();
+                return TEST_PASS;
+            }
+            finally
+            {
+                DataReader.Close();
+            }
         }
 
         [Variation("call ReadContentAsBinHex on two or more nodes")]
@@ -979,7 +1095,8 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0> 11B <elem1> 11B <elem2> 11B </elem2> 11B </elem1> 11B </elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
             int startPos = 0;
             int readSize = 3;
@@ -1006,7 +1123,8 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0>12%45<elem1>12%45<elem2>12%45</elem2>12%45</elem1>12%45</elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[5];
             int currentSize = 0;
 
@@ -1016,7 +1134,15 @@ namespace System.Xml.Tests
                 try
                 {
                     currentSize = DataReader.ReadContentAsBinHex(buffer, 0, 5);
-                    if (!(IsCharCheckingReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXmlValidatingReader() || IsXPathNavigatorReader()))
+                    if (
+                        !(
+                            IsCharCheckingReader()
+                            || IsXmlNodeReader()
+                            || IsXmlNodeReaderDataDoc()
+                            || IsXmlValidatingReader()
+                            || IsXPathNavigatorReader()
+                        )
+                    )
                         return TEST_FAIL;
                 }
                 catch (XmlException)
@@ -1033,7 +1159,8 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0>123</elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
 
             DataReader.Read();
@@ -1049,21 +1176,37 @@ namespace System.Xml.Tests
         {
             string xml = "<elem0>123</elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
 
             DataReader.Read();
             DataReader.Read();
             CError.Compare(DataReader.ReadContentAsBinHex(buffer, 0, 1), 1, "size");
-            CError.Compare(DataReader.Value, (IsCharCheckingReader() || IsXmlNodeReader() || IsXmlNodeReaderDataDoc() || IsXmlValidatingReader() || IsXPathNavigatorReader()) ? "123" : "3", "value");
+            CError.Compare(
+                DataReader.Value,
+                (
+                    IsCharCheckingReader()
+                    || IsXmlNodeReader()
+                    || IsXmlNodeReaderDataDoc()
+                    || IsXmlValidatingReader()
+                    || IsXPathNavigatorReader()
+                )
+                    ? "123"
+                    : "3",
+                "value"
+            );
             DataReader.Close();
             return TEST_PASS;
         }
 
-        [Variation("goto to huge text node, read several chars with ReadContentAsBinHex and Move forward with .Read()")]
+        [Variation(
+            "goto to huge text node, read several chars with ReadContentAsBinHex and Move forward with .Read()"
+        )]
         public int TestReadBinHex_32()
         {
-            string xml = "<elem0>1234567 89 1234 123345 5676788 5567712 34567 89 1234 123345 5676788 55677</elem0>";
+            string xml =
+                "<elem0>1234567 89 1234 123345 5676788 5567712 34567 89 1234 123345 5676788 55677</elem0>";
             ReloadSource(new StringReader(xml));
             byte[] buffer = new byte[5];
 
@@ -1073,13 +1216,18 @@ namespace System.Xml.Tests
             {
                 CError.Compare(DataReader.ReadContentAsBinHex(buffer, 0, 5), 5, "size");
             }
-            catch (NotSupportedException) { return TEST_PASS; }
+            catch (NotSupportedException)
+            {
+                return TEST_PASS;
+            }
             DataReader.Read();
             DataReader.Close();
             return TEST_PASS;
         }
 
-        [Variation("goto to huge text node with invalid chars, read several chars with ReadContentAsBinHex and Move forward with .Read()")]
+        [Variation(
+            "goto to huge text node with invalid chars, read several chars with ReadContentAsBinHex and Move forward with .Read()"
+        )]
         public int TestReadBinHex_33()
         {
             string xml = "<elem0>123 $^ 56789 abcdefg hij klmn opqrst  12345 uvw xy ^ z</elem0>";
@@ -1093,8 +1241,14 @@ namespace System.Xml.Tests
                 CError.Compare(DataReader.ReadContentAsBinHex(buffer, 0, 5), 5, "size");
                 DataReader.Read();
             }
-            catch (XmlException) { return TEST_PASS; }
-            catch (NotSupportedException) { return TEST_PASS; }
+            catch (XmlException)
+            {
+                return TEST_PASS;
+            }
+            catch (NotSupportedException)
+            {
+                return TEST_PASS;
+            }
             finally
             {
                 DataReader.Close();
@@ -1114,14 +1268,21 @@ namespace System.Xml.Tests
             {
                 ReloadSource(new StringReader(xml));
                 DataReader.Read();
-                if (IsBinaryReader()) DataReader.Read();
+                if (IsBinaryReader())
+                    DataReader.Read();
                 DataReader.MoveToAttribute(0);
                 CError.Compare(DataReader.Value, "default", "value");
                 CError.Equals(DataReader.ReadContentAsBinHex(buffer, 0, 8), 5, "size");
                 CError.Equals(false, "No exception");
             }
-            catch (XmlException) { return TEST_PASS; }
-            catch (NotSupportedException) { return TEST_PASS; }
+            catch (XmlException)
+            {
+                return TEST_PASS;
+            }
+            catch (NotSupportedException)
+            {
+                return TEST_PASS;
+            }
             finally
             {
                 DataReader.Close();
@@ -1132,11 +1293,19 @@ namespace System.Xml.Tests
         [Variation("call ReadContentAsBinHex on two or more nodes and whitespace")]
         public int TestReadBinHex_35()
         {
-            string xml = @"<elem0>   123" + "\n" + @" <elem1>" + "\r" + @"123
+            string xml =
+                @"<elem0>   123"
+                + "\n"
+                + @" <elem1>"
+                + "\r"
+                + @"123
 <elem2>
-123  </elem2>" + "\r\n" + @"  123</elem1>          123           </elem0>";
+123  </elem2>"
+                + "\r\n"
+                + @"  123</elem1>          123           </elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
             int startPos = 0;
             int readSize = 3;
@@ -1161,11 +1330,19 @@ namespace System.Xml.Tests
         [Variation("call ReadContentAsBinHex on two or more nodes and whitespace after call Value")]
         public int TestReadBinHex_36()
         {
-            string xml = @"<elem0>   123" + "\n" + @" <elem1>" + "\r" + @"123
+            string xml =
+                @"<elem0>   123"
+                + "\n"
+                + @" <elem1>"
+                + "\r"
+                + @"123
 <elem2>
-123  </elem2>" + "\r\n" + @"  123</elem1>          123           </elem0>";
+123  </elem2>"
+                + "\r\n"
+                + @"  123</elem1>          123           </elem0>";
             ReloadSource(new StringReader(xml));
-            if (CheckCanReadBinaryContent()) return TEST_PASS;
+            if (CheckCanReadBinaryContent())
+                return TEST_PASS;
             byte[] buffer = new byte[3];
             int startPos = 0;
             int readSize = 3;

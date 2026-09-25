@@ -4,11 +4,10 @@
 
 namespace System.IdentityModel.Tokens
 {
-
     // ASN.1 DER. DER refers to Distinguished Encoding Rules.
     internal static class DEREncoding
     {
-        // OID=1.2.840.113554.1.2.2 (Kerberos V5) { 0x06, 0x09, 0x2a, 0x86, 
+        // OID=1.2.840.113554.1.2.2 (Kerberos V5) { 0x06, 0x09, 0x2a, 0x86,
         //      0x48, 0x86, 0xf7, 0x12, 0x01, 0x02, 0x02 }
 
         // 1. 0x60 -- Tag for [APPLICATION 0] SEQUENCE; indicates that
@@ -57,11 +56,16 @@ namespace System.IdentityModel.Tokens
         // (Note: In many implementations, elements 3-5 may be stored and
         // referenced as a contiguous string constant.)
 
-
         static byte[] mech = new byte[] { 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x12, 0x01, 0x02, 0x02 };
         static byte[] type = new byte[] { 0x01, 0x00 };
 
-        private static bool BufferIsEqual(byte[] arrayOne, int offsetOne, byte[] arrayTwo, int offsetTwo, int length)
+        private static bool BufferIsEqual(
+            byte[] arrayOne,
+            int offsetOne,
+            byte[] arrayTwo,
+            int offsetTwo,
+            int length
+        )
         {
             if (length > arrayOne.Length - offsetOne)
             {
@@ -90,48 +94,46 @@ namespace System.IdentityModel.Tokens
 
         public static int LengthSize(int length)
         {
-
             if (length < (1 << 7))
             {
-
                 return 1;
             }
             else if (length < (1 << 8))
             {
-
                 return 2;
             }
             else if (length < (1 << 16))
             {
-
                 return 3;
             }
             else if (length < (1 << 24))
             {
-
                 return 4;
             }
             else
             {
-
                 return 5;
             }
         }
 
         //
-        // fills in a buffer with the token header.  The buffer is assumed 
-        // to be the right size.  buffer is advanced past the token header 
+        // fills in a buffer with the token header.  The buffer is assumed
+        // to be the right size.  buffer is advanced past the token header
         //
         // bodySize includes TokenId
-        // 
+        //
 
         public static void MakeTokenHeader(int bodySize, byte[] buffer, ref int offset, ref int len)
         {
-
             buffer[offset++] = 0x60;
             len--;
 
-            WriteLength(buffer, ref offset, ref len, 1 + LengthSize(mech.Length) + mech.Length + type.Length + bodySize);
+            WriteLength(
+                buffer,
+                ref offset,
+                ref len,
+                1 + LengthSize(mech.Length) + mech.Length + type.Length + bodySize
+            );
 
             buffer[offset++] = 0x06; // OID
             len--;
@@ -154,13 +156,11 @@ namespace System.IdentityModel.Tokens
 
         public static int ReadLength(byte[] buffer, ref int offset, ref int length)
         {
-
             int tmp;
             int ret = 0;
 
             if (length < 1)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
@@ -170,30 +170,28 @@ namespace System.IdentityModel.Tokens
 
             if ((tmp & 0x80) != 0)
             {
-
                 if ((tmp &= 0x7f) > (length - 1))
                 {
-
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SystemException()
+                    );
                 }
 
                 if (tmp > 4)
                 { // 4 == sizeof(int)
-
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SystemException()
+                    );
                 }
 
                 for (; tmp != 0; tmp--)
                 {
-
                     ret = (ret << 8) + buffer[offset++];
                     length--;
                 }
-
             }
             else
             {
-
                 ret = tmp;
             }
 
@@ -202,12 +200,11 @@ namespace System.IdentityModel.Tokens
 
         //
         // returns the length of a token, given the mech oid and the body
-        // size 
+        // size
         //
 
         public static int TokenSize(int bodySize)
         {
-
             // set body size to sequence contents size, 2 for token id
             bodySize += 2 + mech.Length + LengthSize(mech.Length) + 1;
 
@@ -222,16 +219,13 @@ namespace System.IdentityModel.Tokens
 
         public static void VerifyTokenHeader(byte[] buffer, ref int offset, ref int len)
         {
-
             if ((len -= 1) < 0)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             if (buffer[offset++] != 0x60)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
@@ -239,39 +233,33 @@ namespace System.IdentityModel.Tokens
 
             if (seqSize != len)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             if ((len -= 1) < 0)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             if (buffer[offset++] != 0x06)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             int oidLength = ReadLength(buffer, ref offset, ref len); // (byte) buffer[offset++];
 
             if ((oidLength & 0x7fffffff) != mech.Length)
-            { // Overflow??? 
-
+            { // Overflow???
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             if ((len -= oidLength) < 0)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             if (!BufferIsEqual(mech, 0, buffer, offset, mech.Length))
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
@@ -279,38 +267,37 @@ namespace System.IdentityModel.Tokens
 
             if ((len -= type.Length) < 0)
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             if (!BufferIsEqual(type, 0, buffer, offset, type.Length))
             {
-
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SystemException());
             }
 
             offset += type.Length;
         }
 
-        public static void WriteLength(byte[] buffer, ref int offset, ref int bufferLength, int length)
+        public static void WriteLength(
+            byte[] buffer,
+            ref int offset,
+            ref int bufferLength,
+            int length
+        )
         {
-
             if (length < (1 << 7))
             { // one byte
-
                 // *(*buffer)++ = (unsigned char) length;
                 buffer[offset++] = (byte)length;
                 bufferLength--;
             }
             else
             {
-
                 // *(*buffer)++ = (unsigned char) (der_length_size(length) + 127);
                 buffer[offset++] = (byte)(LengthSize(length) + 127);
 
                 if (length >= (1 << 24))
                 {
-
                     // *(*buffer)++ = (unsigned char) (length >> 24);
                     buffer[offset++] = (byte)(length >> 24);
                     bufferLength--;
@@ -318,7 +305,6 @@ namespace System.IdentityModel.Tokens
 
                 if (length >= (1 << 16))
                 {
-
                     // *(*buffer)++ = (unsigned char) ((length >> 16) & 0xff);
                     buffer[offset++] = (byte)((length >> 16) & 0xFF);
                     bufferLength--;
@@ -326,7 +312,6 @@ namespace System.IdentityModel.Tokens
 
                 if (length >= (1 << 8))
                 {
-
                     // *(*buffer)++ = (unsigned char) ((length >> 8) & 0xff);
                     buffer[offset++] = (byte)((length >> 8) & 0xFF);
                     bufferLength--;
@@ -339,4 +324,3 @@ namespace System.IdentityModel.Tokens
         }
     }
 }
-

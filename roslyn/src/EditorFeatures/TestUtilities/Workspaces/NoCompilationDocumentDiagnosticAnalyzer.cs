@@ -17,17 +17,35 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Workspaces
     internal class NoCompilationDocumentDiagnosticAnalyzer : DocumentDiagnosticAnalyzer
     {
         public static readonly DiagnosticDescriptor Descriptor = new DiagnosticDescriptor(
-            "NC0000", "No Compilation Syntax Error", "No Compilation Syntax Error", "Error", DiagnosticSeverity.Error, isEnabledByDefault: true);
+            "NC0000",
+            "No Compilation Syntax Error",
+            "No Compilation Syntax Error",
+            "Error",
+            DiagnosticSeverity.Error,
+            isEnabledByDefault: true
+        );
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Descriptor);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(Descriptor);
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(Document document, CancellationToken cancellationToken)
-            => SpecializedTasks.EmptyImmutableArray<Diagnostic>();
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSemanticsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => SpecializedTasks.EmptyImmutableArray<Diagnostic>();
 
-        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(Document document, CancellationToken cancellationToken)
+        public override Task<ImmutableArray<Diagnostic>> AnalyzeSyntaxAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            return Task.FromResult(ImmutableArray.Create(
-                Diagnostic.Create(Descriptor, Location.Create(document.FilePath, default, default))));
+            return Task.FromResult(
+                ImmutableArray.Create(
+                    Diagnostic.Create(
+                        Descriptor,
+                        Location.Create(document.FilePath, default, default)
+                    )
+                )
+            );
         }
     }
 }

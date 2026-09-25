@@ -20,11 +20,18 @@ namespace System.Security.Cryptography.Xml
         private bool HasNonRedundantInclusivePrefix(XmlAttribute attr)
         {
             string nsPrefix = Utils.GetNamespacePrefix(attr);
-            return _inclusivePrefixSet.ContainsKey(nsPrefix) &&
-                Utils.IsNonRedundantNamespaceDecl(attr, GetNearestRenderedNamespaceWithMatchingPrefix(nsPrefix, out _));
+            return _inclusivePrefixSet.ContainsKey(nsPrefix)
+                && Utils.IsNonRedundantNamespaceDecl(
+                    attr,
+                    GetNearestRenderedNamespaceWithMatchingPrefix(nsPrefix, out _)
+                );
         }
 
-        private void GatherNamespaceToRender(string nsPrefix, SortedList nsListToRender, Hashtable nsLocallyDeclared)
+        private void GatherNamespaceToRender(
+            string nsPrefix,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        )
         {
             foreach (object a in nsListToRender.GetKeyList())
             {
@@ -34,7 +41,10 @@ namespace System.Security.Cryptography.Xml
 
             int rDepth;
             XmlAttribute? local = (XmlAttribute?)nsLocallyDeclared[nsPrefix];
-            XmlAttribute? rAncestral = GetNearestRenderedNamespaceWithMatchingPrefix(nsPrefix, out rDepth);
+            XmlAttribute? rAncestral = GetNearestRenderedNamespaceWithMatchingPrefix(
+                nsPrefix,
+                out rDepth
+            );
 
             if (local != null)
             {
@@ -47,15 +57,27 @@ namespace System.Security.Cryptography.Xml
             else
             {
                 int uDepth;
-                XmlAttribute? uAncestral = GetNearestUnrenderedNamespaceWithMatchingPrefix(nsPrefix, out uDepth);
-                if (uAncestral != null && uDepth > rDepth && Utils.IsNonRedundantNamespaceDecl(uAncestral, rAncestral))
+                XmlAttribute? uAncestral = GetNearestUnrenderedNamespaceWithMatchingPrefix(
+                    nsPrefix,
+                    out uDepth
+                );
+                if (
+                    uAncestral != null
+                    && uDepth > rDepth
+                    && Utils.IsNonRedundantNamespaceDecl(uAncestral, rAncestral)
+                )
                 {
                     nsListToRender.Add(uAncestral, null);
                 }
             }
         }
 
-        internal override void GetNamespacesToRender(XmlElement element, SortedList attrListToRender, SortedList nsListToRender, Hashtable nsLocallyDeclared)
+        internal override void GetNamespacesToRender(
+            XmlElement element,
+            SortedList attrListToRender,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        )
         {
             GatherNamespaceToRender(element.Prefix, nsListToRender, nsLocallyDeclared);
             foreach (object attr in attrListToRender.GetKeyList())
@@ -66,7 +88,11 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        internal override void TrackNamespaceNode(XmlAttribute attr, SortedList nsListToRender, Hashtable nsLocallyDeclared)
+        internal override void TrackNamespaceNode(
+            XmlAttribute attr,
+            SortedList nsListToRender,
+            Hashtable nsLocallyDeclared
+        )
         {
             if (HasNonRedundantInclusivePrefix(attr))
                 nsListToRender.Add(attr, null);
@@ -74,7 +100,12 @@ namespace System.Security.Cryptography.Xml
                 nsLocallyDeclared.Add(Utils.GetNamespacePrefix(attr), attr);
         }
 
-        internal override void TrackXmlNamespaceNode(XmlAttribute attr, SortedList nsListToRender, SortedList attrListToRender, Hashtable nsLocallyDeclared)
+        internal override void TrackXmlNamespaceNode(
+            XmlAttribute attr,
+            SortedList nsListToRender,
+            SortedList attrListToRender,
+            Hashtable nsLocallyDeclared
+        )
         {
             // exclusive canonicalization treats Xml namespaces as simple attributes. They are not propagated.
             attrListToRender.Add(attr, null);

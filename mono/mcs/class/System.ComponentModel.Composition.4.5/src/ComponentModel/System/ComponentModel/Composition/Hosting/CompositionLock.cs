@@ -8,15 +8,15 @@ using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Threading;
 using Lock = Microsoft.Internal.Lock;
 
 namespace System.ComponentModel.Composition.Hosting
 {
     // This a a lock class that needs to be held in order to perform any mutation of the parts/parts state in the composition
-    // Today's implementation relies on the AppDomain-wide re-entrant lock for changes on the composition, and a narrow lock for changes in 
+    // Today's implementation relies on the AppDomain-wide re-entrant lock for changes on the composition, and a narrow lock for changes in
     // the state of the specific ImportEngine
     // Today we make several assumptions to ensure thread-safety:
     // 1. Each composition doesn't change lock affinity
@@ -31,6 +31,7 @@ namespace System.ComponentModel.Composition.Hosting
     {
         // narrow lock
         private readonly Lock _stateLock = null;
+
         // wide lock
         private static object _compositionLock = new object();
 
@@ -61,10 +62,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         public bool IsThreadSafe
         {
-            get
-            {
-                return this._isThreadSafe;
-            }
+            get { return this._isThreadSafe; }
         }
 
         private void EnterCompositionLock()
@@ -106,7 +104,7 @@ namespace System.ComponentModel.Composition.Hosting
             else
             {
                 return _EmptyLockHolder;
-            }            
+            }
         }
 
         public IDisposable LockStateForWrite()
@@ -118,7 +116,7 @@ namespace System.ComponentModel.Composition.Hosting
             else
             {
                 return _EmptyLockHolder;
-            }   
+            }
         }
 
         // NOTE : this should NOT be changed to a struct as ImportEngine relies on it
@@ -146,9 +144,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         private sealed class EmptyLockHolder : IDisposable
         {
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

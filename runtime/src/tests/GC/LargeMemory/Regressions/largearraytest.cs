@@ -8,20 +8,26 @@
 
 using System;
 
-public class LargeArrayTest {
-
-    public static int Main() {
-
-        for (int i=0; i<= 100; i++) {
-            try {
+public class LargeArrayTest
+{
+    public static int Main()
+    {
+        for (int i = 0; i <= 100; i++)
+        {
+            try
+            {
                 Console.Write("now try Int32.MaxValue-{0}: ", i);
-                Array a = Array.CreateInstance((new byte().GetType()), Int32.MaxValue-i);
+                Array a = Array.CreateInstance((new byte().GetType()), Int32.MaxValue - i);
                 Console.WriteLine(a.Length);
                 a = null;
-            } catch (OutOfMemoryException e) {
+            }
+            catch (OutOfMemoryException e)
+            {
                 Console.WriteLine();
                 Console.WriteLine(e.Message);
-            } catch (Exception e) {
+            }
+            catch (Exception e)
+            {
                 Console.WriteLine();
                 Console.WriteLine("Unexpected Exception!");
                 Console.WriteLine(e);
@@ -33,5 +39,4 @@ public class LargeArrayTest {
         Console.WriteLine("Test Passed!");
         return 100;
     }
-
 }

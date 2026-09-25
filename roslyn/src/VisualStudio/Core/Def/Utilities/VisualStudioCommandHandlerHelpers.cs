@@ -19,21 +19,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             int commandId,
             Guid commandGroup,
             EventHandler invokeHandler,
-            EventHandler beforeQueryStatus)
+            EventHandler beforeQueryStatus
+        )
         {
             var commandIdWithGroupId = new CommandID(commandGroup, commandId);
-            var command = new OleMenuCommand(invokeHandler, delegate { }, beforeQueryStatus, commandIdWithGroupId);
+            var command = new OleMenuCommand(
+                invokeHandler,
+                delegate { },
+                beforeQueryStatus,
+                commandIdWithGroupId
+            );
             menuCommandService.AddCommand(command);
             return command;
         }
 
-        public static bool TryGetSelectedProjectHierarchy(IServiceProvider? serviceProvider, [NotNullWhen(returnValue: true)] out IVsHierarchy? hierarchy)
+        public static bool TryGetSelectedProjectHierarchy(
+            IServiceProvider? serviceProvider,
+            [NotNullWhen(returnValue: true)] out IVsHierarchy? hierarchy
+        )
         {
             hierarchy = null;
 
             // Get the DTE service and make sure there is an open solution
-            if (serviceProvider?.GetService(typeof(EnvDTE.DTE)) is not EnvDTE.DTE dte ||
-                dte.Solution == null)
+            if (
+                serviceProvider?.GetService(typeof(EnvDTE.DTE)) is not EnvDTE.DTE dte
+                || dte.Solution == null
+            )
             {
                 return false;
             }
@@ -42,14 +53,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             var selectionContainer = IntPtr.Zero;
 
             // Get the current selection in the shell
-            if (serviceProvider.GetService(typeof(SVsShellMonitorSelection)) is IVsMonitorSelection monitorSelection)
+            if (
+                serviceProvider.GetService(typeof(SVsShellMonitorSelection))
+                is IVsMonitorSelection monitorSelection
+            )
             {
                 try
                 {
-                    monitorSelection.GetCurrentSelection(out selectionHierarchy, out var itemId, out var multiSelect, out selectionContainer);
+                    monitorSelection.GetCurrentSelection(
+                        out selectionHierarchy,
+                        out var itemId,
+                        out var multiSelect,
+                        out selectionContainer
+                    );
                     if (selectionHierarchy != IntPtr.Zero)
                     {
-                        hierarchy = Marshal.GetObjectForIUnknown(selectionHierarchy) as IVsHierarchy;
+                        hierarchy =
+                            Marshal.GetObjectForIUnknown(selectionHierarchy) as IVsHierarchy;
                         Debug.Assert(hierarchy != null);
                         return hierarchy != null;
                     }
@@ -76,7 +96,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             return false;
         }
 
-        public static bool IsBuildActive()
-            => KnownUIContexts.SolutionBuildingContext.IsActive;
+        public static bool IsBuildActive() => KnownUIContexts.SolutionBuildingContext.IsActive;
     }
 }

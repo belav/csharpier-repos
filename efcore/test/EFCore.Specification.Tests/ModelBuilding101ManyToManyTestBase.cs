@@ -8,8 +8,7 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract partial class ModelBuilding101TestBase
 {
     [ConditionalFact]
-    public virtual void BasicManyToManyTest()
-        => Model101Test();
+    public virtual void BasicManyToManyTest() => Model101Test();
 
     protected class BasicManyToMany
     {
@@ -27,40 +26,45 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
-                    .HasMany(e => e.Tags)
-                    .WithMany(e => e.Posts);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Post>().HasMany(e => e.Tags).WithMany(e => e.Posts);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         "PostTag",
-                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagsId").HasPrincipalKey(nameof(Tag.Id))
-                            .OnDelete(DeleteBehavior.Cascade),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostsId").HasPrincipalKey(nameof(Post.Id))
-                            .OnDelete(DeleteBehavior.Cascade),
-                        j => j.HasKey("PostsId", "TagsId"));
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasForeignKey("TagsId")
+                                .HasPrincipalKey(nameof(Tag.Id))
+                                .OnDelete(DeleteBehavior.Cascade),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasForeignKey("PostsId")
+                                .HasPrincipalKey(nameof(Post.Id))
+                                .OnDelete(DeleteBehavior.Cascade),
+                        j => j.HasKey("PostsId", "TagsId")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void UnidirectionalManyToManyTest()
-        => Model101Test();
+    public virtual void UnidirectionalManyToManyTest() => Model101Test();
 
     protected class UnidirectionalManyToMany
     {
@@ -77,37 +81,42 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
-                    .HasMany(e => e.Tags)
-                    .WithMany();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Post>().HasMany(e => e.Tags).WithMany();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany()
                     .UsingEntity(
                         "PostTag",
-                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagsId").HasPrincipalKey(nameof(Tag.Id))
-                            .OnDelete(DeleteBehavior.Cascade),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostId").HasPrincipalKey(nameof(Post.Id))
-                            .OnDelete(DeleteBehavior.Cascade),
-                        j => j.HasKey("PostId", "TagsId"));
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasForeignKey("TagsId")
+                                .HasPrincipalKey(nameof(Tag.Id))
+                                .OnDelete(DeleteBehavior.Cascade),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasForeignKey("PostId")
+                                .HasPrincipalKey(nameof(Post.Id))
+                                .OnDelete(DeleteBehavior.Cascade),
+                        j => j.HasKey("PostId", "TagsId")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyNamedJoinTableTest()
-        => Model101Test();
+    public virtual void ManyToManyNamedJoinTableTest() => Model101Test();
 
     protected class ManyToManyNamedJoinTable
     {
@@ -125,14 +134,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity("PostsToTagsJoinTable");
@@ -140,21 +148,30 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         "PostsToTagsJoinTable",
-                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagsId").HasPrincipalKey(nameof(Tag.Id)),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostsId").HasPrincipalKey(nameof(Post.Id)),
-                        j => j.HasKey("PostsId", "TagsId"));
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasForeignKey("TagsId")
+                                .HasPrincipalKey(nameof(Tag.Id)),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasForeignKey("PostsId")
+                                .HasPrincipalKey(nameof(Post.Id)),
+                        j => j.HasKey("PostsId", "TagsId")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyNamedForeignKeyColumnsTest()
-        => Model101Test();
+    public virtual void ManyToManyNamedForeignKeyColumnsTest() => Model101Test();
 
     protected class ManyToManyNamedForeignKeyColumns
     {
@@ -172,38 +189,47 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagForeignKey"),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostForeignKey"));
+                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostForeignKey")
+                    );
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         "PostTag",
-                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagForeignKey").HasPrincipalKey(nameof(Tag.Id)),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostForeignKey").HasPrincipalKey(nameof(Post.Id)),
-                        j => j.HasKey("PostForeignKey", "TagForeignKey"));
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasForeignKey("TagForeignKey")
+                                .HasPrincipalKey(nameof(Tag.Id)),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasForeignKey("PostForeignKey")
+                                .HasPrincipalKey(nameof(Post.Id)),
+                        j => j.HasKey("PostForeignKey", "TagForeignKey")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithJoinClassTest()
-        => Model101Test();
+    public virtual void ManyToManyWithJoinClassTest() => Model101Test();
 
     protected class ManyToManyWithJoinClass
     {
@@ -227,14 +253,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>();
@@ -242,31 +267,42 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
                         l => l.HasOne<Tag>().WithMany().HasForeignKey(e => e.TagId),
-                        r => r.HasOne<Post>().WithMany().HasForeignKey(e => e.PostId));
+                        r => r.HasOne<Post>().WithMany().HasForeignKey(e => e.PostId)
+                    );
         }
 
         public class Context2 : Context1
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>().WithMany().HasForeignKey(e => e.TagId).HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Post>().WithMany().HasForeignKey(e => e.PostId).HasPrincipalKey(e => e.Id),
-                        j => j.HasKey(e => new { e.PostId, e.TagId }));
+                        l =>
+                            l.HasOne<Tag>()
+                                .WithMany()
+                                .HasForeignKey(e => e.TagId)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Post>()
+                                .WithMany()
+                                .HasForeignKey(e => e.PostId)
+                                .HasPrincipalKey(e => e.Id),
+                        j => j.HasKey(e => new { e.PostId, e.TagId })
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithNavsToJoinClassTest()
-        => Model101Test();
+    public virtual void ManyToManyWithNavsToJoinClassTest() => Model101Test();
 
     protected class ManyToManyWithNavsToJoinClass
     {
@@ -292,14 +328,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>();
@@ -307,31 +342,42 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
                         l => l.HasOne<Tag>().WithMany(e => e.PostTags),
-                        r => r.HasOne<Post>().WithMany(e => e.PostTags));
+                        r => r.HasOne<Post>().WithMany(e => e.PostTags)
+                    );
         }
 
         public class Context2 : Context1
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>().WithMany(e => e.PostTags).HasForeignKey(e => e.TagId).HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Post>().WithMany(e => e.PostTags).HasForeignKey(e => e.PostId).HasPrincipalKey(e => e.Id),
-                        j => j.HasKey(e => new { e.PostId, e.TagId }));
+                        l =>
+                            l.HasOne<Tag>()
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.TagId)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Post>()
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.PostId)
+                                .HasPrincipalKey(e => e.Id),
+                        j => j.HasKey(e => new { e.PostId, e.TagId })
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithNavsToAndFromJoinClassTest()
-        => Model101Test();
+    public virtual void ManyToManyWithNavsToAndFromJoinClassTest() => Model101Test();
 
     protected class ManyToManyWithNavsToAndFromJoinClass
     {
@@ -359,14 +405,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>();
@@ -374,31 +419,42 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
                         l => l.HasOne<Tag>(e => e.Tag).WithMany(e => e.PostTags),
-                        r => r.HasOne<Post>(e => e.Post).WithMany(e => e.PostTags));
+                        r => r.HasOne<Post>(e => e.Post).WithMany(e => e.PostTags)
+                    );
         }
 
         public class Context2 : Context1
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>(e => e.Tag).WithMany(e => e.PostTags).HasForeignKey(e => e.TagId).HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Post>(e => e.Post).WithMany(e => e.PostTags).HasForeignKey(e => e.PostId).HasPrincipalKey(e => e.Id),
-                        j => j.HasKey(e => new { e.PostId, e.TagId }));
+                        l =>
+                            l.HasOne<Tag>(e => e.Tag)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.TagId)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Post>(e => e.Post)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.PostId)
+                                .HasPrincipalKey(e => e.Id),
+                        j => j.HasKey(e => new { e.PostId, e.TagId })
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithNamedFksAndNavsToAndFromJoinClassTest()
-        => Model101Test();
+    public virtual void ManyToManyWithNamedFksAndNavsToAndFromJoinClassTest() => Model101Test();
 
     protected class ManyToManyWithNamedFksAndNavsToAndFromJoinClass
     {
@@ -426,39 +482,52 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>(e => e.Tag).WithMany(e => e.PostTags).HasForeignKey(e => e.TagForeignKey),
-                        r => r.HasOne<Post>(e => e.Post).WithMany(e => e.PostTags).HasForeignKey(e => e.PostForeignKey));
+                        l =>
+                            l.HasOne<Tag>(e => e.Tag)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.TagForeignKey),
+                        r =>
+                            r.HasOne<Post>(e => e.Post)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.PostForeignKey)
+                    );
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>(e => e.Tag).WithMany(e => e.PostTags).HasForeignKey(e => e.TagForeignKey)
-                            .HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Post>(e => e.Post).WithMany(e => e.PostTags).HasForeignKey(e => e.PostForeignKey)
-                            .HasPrincipalKey(e => e.Id),
-                        j => j.HasKey(e => new { e.PostForeignKey, e.TagForeignKey }));
+                        l =>
+                            l.HasOne<Tag>(e => e.Tag)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.TagForeignKey)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Post>(e => e.Post)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.PostForeignKey)
+                                .HasPrincipalKey(e => e.Id),
+                        j => j.HasKey(e => new { e.PostForeignKey, e.TagForeignKey })
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyAlternateKeysTest()
-        => Model101Test();
+    public virtual void ManyToManyAlternateKeysTest() => Model101Test();
 
     protected class ManyToManyAlternateKeys
     {
@@ -478,39 +547,53 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
-                        l => l.HasOne(typeof(Tag)).WithMany().HasPrincipalKey(nameof(Tag.AlternateKey)),
-                        r => r.HasOne(typeof(Post)).WithMany().HasPrincipalKey(nameof(Post.AlternateKey)));
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasPrincipalKey(nameof(Tag.AlternateKey)),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasPrincipalKey(nameof(Post.AlternateKey))
+                    );
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         "PostTag",
-                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagsAlternateKey").HasPrincipalKey(nameof(Tag.AlternateKey)),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostsAlternateKey")
-                            .HasPrincipalKey(nameof(Post.AlternateKey)),
-                        j => j.HasKey("PostsAlternateKey", "TagsAlternateKey"));
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasForeignKey("TagsAlternateKey")
+                                .HasPrincipalKey(nameof(Tag.AlternateKey)),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasForeignKey("PostsAlternateKey")
+                                .HasPrincipalKey(nameof(Post.AlternateKey)),
+                        j => j.HasKey("PostsAlternateKey", "TagsAlternateKey")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithNavsAndAlternateKeysTest()
-        => Model101Test();
+    public virtual void ManyToManyWithNavsAndAlternateKeysTest() => Model101Test();
 
     protected class ManyToManyWithNavsAndAlternateKeys
     {
@@ -540,39 +623,52 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>(e => e.Tag).WithMany(e => e.PostTags).HasPrincipalKey(e => e.AlternateKey),
-                        r => r.HasOne<Post>(e => e.Post).WithMany(e => e.PostTags).HasPrincipalKey(e => e.AlternateKey));
+                        l =>
+                            l.HasOne<Tag>(e => e.Tag)
+                                .WithMany(e => e.PostTags)
+                                .HasPrincipalKey(e => e.AlternateKey),
+                        r =>
+                            r.HasOne<Post>(e => e.Post)
+                                .WithMany(e => e.PostTags)
+                                .HasPrincipalKey(e => e.AlternateKey)
+                    );
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>(e => e.Tag).WithMany(e => e.PostTags).HasForeignKey(e => e.TagId)
-                            .HasPrincipalKey(e => e.AlternateKey),
-                        r => r.HasOne<Post>(e => e.Post).WithMany(e => e.PostTags).HasForeignKey(e => e.PostId)
-                            .HasPrincipalKey(e => e.AlternateKey),
-                        j => j.HasKey(e => new { e.PostId, e.TagId }));
+                        l =>
+                            l.HasOne<Tag>(e => e.Tag)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.TagId)
+                                .HasPrincipalKey(e => e.AlternateKey),
+                        r =>
+                            r.HasOne<Post>(e => e.Post)
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.PostId)
+                                .HasPrincipalKey(e => e.AlternateKey),
+                        j => j.HasKey(e => new { e.PostId, e.TagId })
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithJoinClassHavingPrimaryKeyTest()
-        => Model101Test();
+    public virtual void ManyToManyWithJoinClassHavingPrimaryKeyTest() => Model101Test();
 
     protected class ManyToManyWithJoinClassHavingPrimaryKey
     {
@@ -597,14 +693,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>();
@@ -612,20 +707,29 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>().WithMany().HasForeignKey(e => e.TagId).HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Post>().WithMany().HasForeignKey(e => e.PostId).HasPrincipalKey(e => e.Id),
-                        j => j.HasKey(e => e.Id));
+                        l =>
+                            l.HasOne<Tag>()
+                                .WithMany()
+                                .HasForeignKey(e => e.TagId)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Post>()
+                                .WithMany()
+                                .HasForeignKey(e => e.PostId)
+                                .HasPrincipalKey(e => e.Id),
+                        j => j.HasKey(e => e.Id)
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithPrimaryKeyInJoinEntityTest()
-        => Model101Test();
+    public virtual void ManyToManyWithPrimaryKeyInJoinEntityTest() => Model101Test();
 
     protected class ManyToManyWithPrimaryKeyInJoinEntity
     {
@@ -643,45 +747,52 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
-                    .UsingEntity(
-                        j =>
-                        {
-                            j.IndexerProperty<int>("Id");
-                            j.HasKey("Id");
-                        });
+                    .UsingEntity(j =>
+                    {
+                        j.IndexerProperty<int>("Id");
+                        j.HasKey("Id");
+                    });
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         "PostTag",
-                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagsId").HasPrincipalKey(nameof(Tag.Id)),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostsId").HasPrincipalKey(nameof(Post.Id)),
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasForeignKey("TagsId")
+                                .HasPrincipalKey(nameof(Tag.Id)),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasForeignKey("PostsId")
+                                .HasPrincipalKey(nameof(Post.Id)),
                         j =>
                         {
                             j.IndexerProperty<int>("Id");
                             j.HasKey("Id");
-                        });
+                        }
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithPayloadAndNavsToJoinClassTest()
-        => Model101Test();
+    public virtual void ManyToManyWithPayloadAndNavsToJoinClassTest() => Model101Test();
 
     protected class ManyToManyWithPayloadAndNavsToJoinClass
     {
@@ -708,14 +819,13 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>();
@@ -723,23 +833,32 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<PostTag>(
-                        l => l.HasOne<Tag>().WithMany(e => e.PostTags).HasForeignKey(e => e.TagId).HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Post>().WithMany(e => e.PostTags).HasForeignKey(e => e.PostId).HasPrincipalKey(e => e.Id),
+                        l =>
+                            l.HasOne<Tag>()
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.TagId)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Post>()
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.PostId)
+                                .HasPrincipalKey(e => e.Id),
                         j =>
                         {
                             j.HasKey(e => new { e.PostId, e.TagId });
-                        });
+                        }
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithNoCascadeDeleteTest()
-        => Model101Test();
+    public virtual void ManyToManyWithNoCascadeDeleteTest() => Model101Test();
 
     protected class ManyToManyWithNoCascadeDelete
     {
@@ -757,40 +876,49 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         l => l.HasOne(typeof(Tag)).WithMany().OnDelete(DeleteBehavior.Restrict),
-                        r => r.HasOne(typeof(Post)).WithMany().OnDelete(DeleteBehavior.Restrict));
+                        r => r.HasOne(typeof(Post)).WithMany().OnDelete(DeleteBehavior.Restrict)
+                    );
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Post>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity(
                         "PostTag",
-                        l => l.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagsId").HasPrincipalKey(nameof(Tag.Id))
-                            .OnDelete(DeleteBehavior.Restrict),
-                        r => r.HasOne(typeof(Post)).WithMany().HasForeignKey("PostsId").HasPrincipalKey(nameof(Post.Id))
-                            .OnDelete(DeleteBehavior.Restrict),
-                        j => j.HasKey("PostsId", "TagsId"));
+                        l =>
+                            l.HasOne(typeof(Tag))
+                                .WithMany()
+                                .HasForeignKey("TagsId")
+                                .HasPrincipalKey(nameof(Tag.Id))
+                                .OnDelete(DeleteBehavior.Restrict),
+                        r =>
+                            r.HasOne(typeof(Post))
+                                .WithMany()
+                                .HasForeignKey("PostsId")
+                                .HasPrincipalKey(nameof(Post.Id))
+                                .OnDelete(DeleteBehavior.Restrict),
+                        j => j.HasKey("PostsId", "TagsId")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void SelfReferencingManyToManyTest()
-        => Model101Test();
+    public virtual void SelfReferencingManyToManyTest() => Model101Test();
 
     protected class SelfReferencingManyToMany
     {
@@ -803,35 +931,41 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Person> People
-                => Set<Person>();
+            public DbSet<Person> People => Set<Person>();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Person>()
-                    .HasMany(e => e.Children)
-                    .WithMany(e => e.Parents);
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Person>().HasMany(e => e.Children).WithMany(e => e.Parents);
         }
 
         public class Context2 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Person>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Person>()
                     .HasMany(e => e.Children)
                     .WithMany(e => e.Parents)
                     .UsingEntity(
                         "PersonPerson",
-                        l => l.HasOne(typeof(Person)).WithMany().HasForeignKey("ChildrenId").HasPrincipalKey(nameof(Person.Id)),
-                        r => r.HasOne(typeof(Person)).WithMany().HasForeignKey("ParentsId").HasPrincipalKey(nameof(Person.Id)),
-                        j => j.HasKey("ChildrenId", "ParentsId"));
+                        l =>
+                            l.HasOne(typeof(Person))
+                                .WithMany()
+                                .HasForeignKey("ChildrenId")
+                                .HasPrincipalKey(nameof(Person.Id)),
+                        r =>
+                            r.HasOne(typeof(Person))
+                                .WithMany()
+                                .HasForeignKey("ParentsId")
+                                .HasPrincipalKey(nameof(Person.Id)),
+                        j => j.HasKey("ChildrenId", "ParentsId")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void SelfReferencingUnidirectionalManyToManyTest()
-        => Model101Test();
+    public virtual void SelfReferencingUnidirectionalManyToManyTest() => Model101Test();
 
     protected class SelfReferencingUnidirectionalManyToMany
     {
@@ -843,32 +977,38 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Person> People
-                => Set<Person>();
+            public DbSet<Person> People => Set<Person>();
 
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Person>()
-                    .HasMany(e => e.Friends)
-                    .WithMany();
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder.Entity<Person>().HasMany(e => e.Friends).WithMany();
         }
 
         public class Context1 : Context0
         {
-            protected override void OnModelCreating(ModelBuilder modelBuilder)
-                => modelBuilder.Entity<Person>()
+            protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+                modelBuilder
+                    .Entity<Person>()
                     .HasMany(e => e.Friends)
                     .WithMany()
                     .UsingEntity(
                         "PersonPerson",
-                        l => l.HasOne(typeof(Person)).WithMany().HasForeignKey("FriendsId").HasPrincipalKey(nameof(Person.Id)),
-                        r => r.HasOne(typeof(Person)).WithMany().HasForeignKey("PersonId").HasPrincipalKey(nameof(Person.Id)),
-                        j => j.HasKey("FriendsId", "PersonId"));
+                        l =>
+                            l.HasOne(typeof(Person))
+                                .WithMany()
+                                .HasForeignKey("FriendsId")
+                                .HasPrincipalKey(nameof(Person.Id)),
+                        r =>
+                            r.HasOne(typeof(Person))
+                                .WithMany()
+                                .HasForeignKey("PersonId")
+                                .HasPrincipalKey(nameof(Person.Id)),
+                        j => j.HasKey("FriendsId", "PersonId")
+                    );
         }
     }
 
     [ConditionalFact]
-    public virtual void ManyToManyWithCustomSharedTypeEntityTypeTest()
-        => Model101Test();
+    public virtual void ManyToManyWithCustomSharedTypeEntityTypeTest() => Model101Test();
 
     protected class ManyToManyWithCustomSharedTypeEntityType
     {
@@ -909,35 +1049,38 @@ public abstract partial class ModelBuilding101TestBase
 
         public class Context0 : Context101
         {
-            public DbSet<Post> Posts
-                => Set<Post>();
+            public DbSet<Post> Posts => Set<Post>();
 
-            public DbSet<Tag> Tags
-                => Set<Tag>();
+            public DbSet<Tag> Tags => Set<Tag>();
 
-            public DbSet<Blog> Blogs
-                => Set<Blog>();
+            public DbSet<Blog> Blogs => Set<Blog>();
 
-            public DbSet<Author> Authors
-                => Set<Author>();
+            public DbSet<Author> Authors => Set<Author>();
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Post>()
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<JoinType>(
                         "PostTag",
                         l => l.HasOne<Tag>().WithMany(e => e.PostTags).HasForeignKey(e => e.Id1),
-                        r => r.HasOne<Post>().WithMany(e => e.PostTags).HasForeignKey(e => e.Id2));
+                        r => r.HasOne<Post>().WithMany(e => e.PostTags).HasForeignKey(e => e.Id2)
+                    );
 
-                modelBuilder.Entity<Blog>()
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Authors)
                     .WithMany(e => e.Blogs)
                     .UsingEntity<JoinType>(
                         "BlogAuthor",
-                        l => l.HasOne<Author>().WithMany(e => e.BlogAuthors).HasForeignKey(e => e.Id1),
-                        r => r.HasOne<Blog>().WithMany(e => e.BlogAuthors).HasForeignKey(e => e.Id2));
+                        l =>
+                            l.HasOne<Author>()
+                                .WithMany(e => e.BlogAuthors)
+                                .HasForeignKey(e => e.Id1),
+                        r => r.HasOne<Blog>().WithMany(e => e.BlogAuthors).HasForeignKey(e => e.Id2)
+                    );
             }
         }
 
@@ -945,23 +1088,43 @@ public abstract partial class ModelBuilding101TestBase
         {
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Post>()
+                modelBuilder
+                    .Entity<Post>()
                     .HasMany(e => e.Tags)
                     .WithMany(e => e.Posts)
                     .UsingEntity<JoinType>(
                         "PostTag",
-                        l => l.HasOne<Tag>().WithMany(e => e.PostTags).HasForeignKey(e => e.Id1).HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Post>().WithMany(e => e.PostTags).HasForeignKey(e => e.Id2).HasPrincipalKey(e => e.Id),
-                        j => j.HasKey(e => new { e.Id1, e.Id2 }));
+                        l =>
+                            l.HasOne<Tag>()
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.Id1)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Post>()
+                                .WithMany(e => e.PostTags)
+                                .HasForeignKey(e => e.Id2)
+                                .HasPrincipalKey(e => e.Id),
+                        j => j.HasKey(e => new { e.Id1, e.Id2 })
+                    );
 
-                modelBuilder.Entity<Blog>()
+                modelBuilder
+                    .Entity<Blog>()
                     .HasMany(e => e.Authors)
                     .WithMany(e => e.Blogs)
                     .UsingEntity<JoinType>(
                         "BlogAuthor",
-                        l => l.HasOne<Author>().WithMany(e => e.BlogAuthors).HasForeignKey(e => e.Id1).HasPrincipalKey(e => e.Id),
-                        r => r.HasOne<Blog>().WithMany(e => e.BlogAuthors).HasForeignKey(e => e.Id2).HasPrincipalKey(e => e.Id),
-                        j => j.HasKey(e => new { e.Id1, e.Id2 }));
+                        l =>
+                            l.HasOne<Author>()
+                                .WithMany(e => e.BlogAuthors)
+                                .HasForeignKey(e => e.Id1)
+                                .HasPrincipalKey(e => e.Id),
+                        r =>
+                            r.HasOne<Blog>()
+                                .WithMany(e => e.BlogAuthors)
+                                .HasForeignKey(e => e.Id2)
+                                .HasPrincipalKey(e => e.Id),
+                        j => j.HasKey(e => new { e.Id1, e.Id2 })
+                    );
             }
         }
     }

@@ -59,7 +59,11 @@ namespace ILCompiler.DependencyAnalysis.LoongArch64
         {
             Debug.Assert((imm >= -2048) && (imm <= 2047));
 
-            Builder.EmitUInt((uint)(0x02c00000 | (uint)((imm & 0xfff) << 10) | ((uint)regSrc << 5) | (uint)regDst));
+            Builder.EmitUInt(
+                (uint)(
+                    0x02c00000 | (uint)((imm & 0xfff) << 10) | ((uint)regSrc << 5) | (uint)regDst
+                )
+            );
         }
 
         // xori regDst, regSrc, imm12
@@ -67,7 +71,11 @@ namespace ILCompiler.DependencyAnalysis.LoongArch64
         {
             Debug.Assert((imm >= 0) && (imm <= 0xfff));
 
-            Builder.EmitUInt((uint)(0x03c00000 | (uint)((imm & 0xfff) << 10) | ((uint)regSrc << 5) | (uint)regDst));
+            Builder.EmitUInt(
+                (uint)(
+                    0x03c00000 | (uint)((imm & 0xfff) << 10) | ((uint)regSrc << 5) | (uint)regDst
+                )
+            );
         }
 
         // ld_d regDst, regAddr, offset
@@ -75,7 +83,11 @@ namespace ILCompiler.DependencyAnalysis.LoongArch64
         {
             Debug.Assert((offset >= -2048) && (offset <= 2047));
 
-            Builder.EmitUInt((uint)(0x28c00000 | (uint)((offset & 0xfff) << 10) | ((uint)regSrc << 5) | (uint)regDst));
+            Builder.EmitUInt(
+                (uint)(
+                    0x28c00000 | (uint)((offset & 0xfff) << 10) | ((uint)regSrc << 5) | (uint)regDst
+                )
+            );
         }
 
         public void EmitRET()

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,26 +31,27 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-	public abstract class MetaAccessor<TEntity, TMember> : MetaAccessor
-	{
-		public override Type Type {
-			get { return typeof (TEntity); }
-		}
+    public abstract class MetaAccessor<TEntity, TMember> : MetaAccessor
+    {
+        public override Type Type
+        {
+            get { return typeof(TEntity); }
+        }
 
-		public override object GetBoxedValue (object instance)
-		{
-			return GetValue ((TEntity) instance);
-		}
+        public override object GetBoxedValue(object instance)
+        {
+            return GetValue((TEntity)instance);
+        }
 
-		public abstract TMember GetValue (TEntity instance);
+        public abstract TMember GetValue(TEntity instance);
 
-		public override void SetBoxedValue (ref object instance, object value)
-		{
-			TEntity ent = (TEntity) instance;
-			SetValue (ref ent, (TMember) value);
-			instance = ent;
-		}
+        public override void SetBoxedValue(ref object instance, object value)
+        {
+            TEntity ent = (TEntity)instance;
+            SetValue(ref ent, (TMember)value);
+            instance = ent;
+        }
 
-		public abstract void SetValue (ref TEntity instance, TMember value);
-	}
+        public abstract void SetValue(ref TEntity instance, TMember value);
+    }
 }

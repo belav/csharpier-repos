@@ -22,7 +22,8 @@ namespace XLinqTests
 
         private const string BaseSaveFileName = "baseSave.xml";
 
-        private const string xml = "<PurchaseOrder><Item price=\"100\">Motor<![CDATA[cdata]]><elem>inner text</elem>text<?pi pi pi?></Item></PurchaseOrder>";
+        private const string xml =
+            "<PurchaseOrder><Item price=\"100\">Motor<![CDATA[cdata]]><elem>inner text</elem>text<?pi pi pi?></Item></PurchaseOrder>";
 
         #endregion
 
@@ -30,7 +31,12 @@ namespace XLinqTests
 
         private readonly XmlDiff _diff;
 
-        private readonly MethodsEnum[] _methods = { MethodsEnum.Load, MethodsEnum.ReadFrom, MethodsEnum.Parse };
+        private readonly MethodsEnum[] _methods =
+        {
+            MethodsEnum.Load,
+            MethodsEnum.ReadFrom,
+            MethodsEnum.Parse,
+        };
 
         #endregion
 
@@ -51,7 +57,7 @@ namespace XLinqTests
 
             ReadFrom,
 
-            Parse
+            Parse,
         }
 
         #endregion
@@ -60,59 +66,516 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(reader_1) { Attribute = new VariationAttribute("Read XDocument") { Priority = 0 } });
-            AddChild(new TestVariation(reader_2) { Attribute = new VariationAttribute("Read XElement") { Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with string content") { Params = new object[] { "<A>truck</A>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with attribute") { Params = new object[] { "<A attr=\"1\" />" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with empty element") { Params = new object[] { "<A />" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with empty content") { Params = new object[] { "<A></A>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with namespace and attributes") { Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with string content and empty node") { Params = new object[] { "<X>t0<A />t00</X>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with namespace, CData, PI") { Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with string content and non-empty node") { Params = new object[] { "<X>t0<A>truck</A>t00</X>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with namespace") { Params = new object[] { "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with attributes") { Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with namespace") { Params = new object[] { "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_12) { Attribute = new VariationAttribute("Read XDocument with namespace, CData") { Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with string content and empty node") { Params = new object[] { "<X>t0<A />t00</X>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with namespace, CData, PI") { Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with namespace and attributes") { Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with namespace") { Params = new object[] { "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with string content") { Params = new object[] { "<A>truck</A>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with empty element") { Params = new object[] { "<A />" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with string content and non-empty node") { Params = new object[] { "<X>t0<A>truck</A>t00</X>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with namespace, CData") { Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with namespace") { Params = new object[] { "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with empty content") { Params = new object[] { "<A></A>" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with attribute") { Params = new object[] { "<A attr=\"1\" />" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_14) { Attribute = new VariationAttribute("Read XElement with attributes") { Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" }, Priority = 0 } });
-            AddChild(new TestVariation(reader_15) { Attribute = new VariationAttribute("Read XElement with nwf <Atruck</A>") { Params = new object[] { "<Atruck</A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_15) { Attribute = new VariationAttribute("Read XElement with nwf empty") { Params = new object[] { "" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_15) { Attribute = new VariationAttribute("Read XElement with nwf tab") { Params = new object[] { "\t" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_15) { Attribute = new VariationAttribute("Read XElement with nwf EOL") { Params = new object[] { "\n" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_15) { Attribute = new VariationAttribute("Read XElement with nwf no closing bracket") { Params = new object[] { "<A >" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_15) { Attribute = new VariationAttribute("Read XElement with nwf no opening bracket") { Params = new object[] { "A></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_15) { Attribute = new VariationAttribute("Read XElement with nwf missing element") { Params = new object[] { "<q=a/>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_16) { Attribute = new VariationAttribute("Read XDocument with nwf empty") { Params = new object[] { "\n" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_16) { Attribute = new VariationAttribute("Read XDocument with nwf empty") { Params = new object[] { "" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_16) { Attribute = new VariationAttribute("Read XDocument with nwf no opening bracket") { Params = new object[] { "A></A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_16) { Attribute = new VariationAttribute("Read XDocument with nwf missing element") { Params = new object[] { "<q=a/>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_16) { Attribute = new VariationAttribute("Read XDocument with nwf empty") { Params = new object[] { "\t" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_16) { Attribute = new VariationAttribute("Read XDocument with nwf no closing bracket") { Params = new object[] { "<A >" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_16) { Attribute = new VariationAttribute("Read XDocument with nwf <Atruck</A>") { Params = new object[] { "<Atruck</A>" }, Priority = 2 } });
-            AddChild(new TestVariation(reader_19) { Attribute = new VariationAttribute("XDocument: Call Read after ReadState = Closed") { Priority = 2 } });
-            AddChild(new TestVariation(reader_20) { Attribute = new VariationAttribute("XElement: Call Read after ReadState = Closed") { Priority = 2 } });
-            AddChild(new TestVariation(reader_25) { Attribute = new VariationAttribute("XDocument: Null parameters for Load") { Priority = 1 } });
-            AddChild(new TestVariation(reader_26) { Attribute = new VariationAttribute("XElement: Null parameters for Load") { Priority = 1 } });
-            AddChild(new TestVariation(reader_27) { Attribute = new VariationAttribute("XDocument: Null parameters for Parse, ReadFrom and ReadContentFrom") { Priority = 1 } });
-            AddChild(new TestVariation(reader_28) { Attribute = new VariationAttribute("XElement: Null parameters for Parse, ReadFrom and ReadContentFrom") { Priority = 1 } });
+            AddChild(
+                new TestVariation(reader_1)
+                {
+                    Attribute = new VariationAttribute("Read XDocument") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_2)
+                {
+                    Attribute = new VariationAttribute("Read XElement") { Priority = 0 },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with string content")
+                    {
+                        Params = new object[] { "<A>truck</A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with attribute")
+                    {
+                        Params = new object[] { "<A attr=\"1\" />" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with empty element")
+                    {
+                        Params = new object[] { "<A />" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with empty content")
+                    {
+                        Params = new object[] { "<A></A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute(
+                        "Read XDocument with namespace and attributes"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute(
+                        "Read XDocument with string content and empty node"
+                    )
+                    {
+                        Params = new object[] { "<X>t0<A />t00</X>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with namespace, CData, PI")
+                    {
+                        Params = new object[]
+                        {
+                            "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute(
+                        "Read XDocument with string content and non-empty node"
+                    )
+                    {
+                        Params = new object[] { "<X>t0<A>truck</A>t00</X>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with namespace")
+                    {
+                        Params = new object[]
+                        {
+                            "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with attributes")
+                    {
+                        Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with namespace")
+                    {
+                        Params = new object[]
+                        {
+                            "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_12)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with namespace, CData")
+                    {
+                        Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute(
+                        "Read XElement with string content and empty node"
+                    )
+                    {
+                        Params = new object[] { "<X>t0<A />t00</X>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with namespace, CData, PI")
+                    {
+                        Params = new object[]
+                        {
+                            "<A xmlns=\"ns0\"><![CDATA[ja_a_hele]]><?PI?><X />text<Y /></A>",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute(
+                        "Read XElement with namespace and attributes"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<A attr=\"1\" a2=\"a2\" a3=\"a3\" xmlns=\"def\" xmlns:p=\"ns\" p:a3=\"pa3\" />",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with namespace")
+                    {
+                        Params = new object[]
+                        {
+                            "<a:A xmlns:a=\"a\"><C xmlns:p=\"nsc\" /><B /></a:A>",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with string content")
+                    {
+                        Params = new object[] { "<A>truck</A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with empty element")
+                    {
+                        Params = new object[] { "<A />" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute(
+                        "Read XElement with string content and non-empty node"
+                    )
+                    {
+                        Params = new object[] { "<X>t0<A>truck</A>t00</X>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with namespace, CData")
+                    {
+                        Params = new object[] { "<A xmlns=\"ns0\"><![CDATA[tralala]]></A>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with namespace")
+                    {
+                        Params = new object[]
+                        {
+                            "<A xmlns:p=\"nsc\"><p:C xmlns:a=\"a\"><a:S /></p:C><B /></A>",
+                        },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with empty content")
+                    {
+                        Params = new object[] { "<A></A>" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with attribute")
+                    {
+                        Params = new object[] { "<A attr=\"1\" />" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_14)
+                {
+                    Attribute = new VariationAttribute("Read XElement with attributes")
+                    {
+                        Params = new object[] { "<A attr=\"1\" a2=\"a2\" a3=\"a3\" />" },
+                        Priority = 0,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_15)
+                {
+                    Attribute = new VariationAttribute("Read XElement with nwf <Atruck</A>")
+                    {
+                        Params = new object[] { "<Atruck</A>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_15)
+                {
+                    Attribute = new VariationAttribute("Read XElement with nwf empty")
+                    {
+                        Params = new object[] { "" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_15)
+                {
+                    Attribute = new VariationAttribute("Read XElement with nwf tab")
+                    {
+                        Params = new object[] { "\t" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_15)
+                {
+                    Attribute = new VariationAttribute("Read XElement with nwf EOL")
+                    {
+                        Params = new object[] { "\n" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_15)
+                {
+                    Attribute = new VariationAttribute("Read XElement with nwf no closing bracket")
+                    {
+                        Params = new object[] { "<A >" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_15)
+                {
+                    Attribute = new VariationAttribute("Read XElement with nwf no opening bracket")
+                    {
+                        Params = new object[] { "A></A>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_15)
+                {
+                    Attribute = new VariationAttribute("Read XElement with nwf missing element")
+                    {
+                        Params = new object[] { "<q=a/>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_16)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with nwf empty")
+                    {
+                        Params = new object[] { "\n" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_16)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with nwf empty")
+                    {
+                        Params = new object[] { "" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_16)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with nwf no opening bracket")
+                    {
+                        Params = new object[] { "A></A>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_16)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with nwf missing element")
+                    {
+                        Params = new object[] { "<q=a/>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_16)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with nwf empty")
+                    {
+                        Params = new object[] { "\t" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_16)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with nwf no closing bracket")
+                    {
+                        Params = new object[] { "<A >" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_16)
+                {
+                    Attribute = new VariationAttribute("Read XDocument with nwf <Atruck</A>")
+                    {
+                        Params = new object[] { "<Atruck</A>" },
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_19)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument: Call Read after ReadState = Closed"
+                    )
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_20)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement: Call Read after ReadState = Closed"
+                    )
+                    {
+                        Priority = 2,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_25)
+                {
+                    Attribute = new VariationAttribute("XDocument: Null parameters for Load")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_26)
+                {
+                    Attribute = new VariationAttribute("XElement: Null parameters for Load")
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_27)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument: Null parameters for Parse, ReadFrom and ReadContentFrom"
+                    )
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(reader_28)
+                {
+                    Attribute = new VariationAttribute(
+                        "XElement: Null parameters for Parse, ReadFrom and ReadContentFrom"
+                    )
+                    {
+                        Priority = 1,
+                    },
+                }
+            );
         }
 
         //[Variation(Priority = 0, Desc = "Read XDocument")]
 
         public void reader_1()
         {
-            var doc = new XDocument(new XElement("PurchaseOrder", new XElement("Item", "Motor", new XAttribute("price", "100"), new XCData("cdata"), new XElement("elem", "inner text"), new XText("text"), new XProcessingInstruction("pi", "pi pi"))));
+            var doc = new XDocument(
+                new XElement(
+                    "PurchaseOrder",
+                    new XElement(
+                        "Item",
+                        "Motor",
+                        new XAttribute("price", "100"),
+                        new XCData("cdata"),
+                        new XElement("elem", "inner text"),
+                        new XText("text"),
+                        new XProcessingInstruction("pi", "pi pi")
+                    )
+                )
+            );
 
             SaveBaseline(xml);
             LoadURI(doc, BaseSaveFileName, xml);
@@ -254,7 +717,11 @@ namespace XLinqTests
                             }
                             else
                             {
-                                TestLog.Compare(r.ReadState, ReadState.Initial, "Error in ReadState");
+                                TestLog.Compare(
+                                    r.ReadState,
+                                    ReadState.Initial,
+                                    "Error in ReadState"
+                                );
                             }
                         }
                         catch (XmlException)
@@ -345,7 +812,11 @@ namespace XLinqTests
                             }
                             else
                             {
-                                TestLog.Compare(r.ReadState, ReadState.Initial, "Error in ReadState");
+                                TestLog.Compare(
+                                    r.ReadState,
+                                    ReadState.Initial,
+                                    "Error in ReadState"
+                                );
                             }
                         }
                         catch (XmlException)
@@ -367,9 +838,7 @@ namespace XLinqTests
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(xml), null))
                 {
-                    while (r.Read())
-                    {
-                    }
+                    while (r.Read()) { }
 
                     try
                     {
@@ -428,7 +897,18 @@ namespace XLinqTests
 
         public void reader_2()
         {
-            var doc = new XElement("PurchaseOrder", new XElement("Item", "Motor", new XAttribute("price", "100"), new XCData("cdata"), new XElement("elem", "inner text"), new XText("text"), new XProcessingInstruction("pi", "pi pi")));
+            var doc = new XElement(
+                "PurchaseOrder",
+                new XElement(
+                    "Item",
+                    "Motor",
+                    new XAttribute("price", "100"),
+                    new XCData("cdata"),
+                    new XElement("elem", "inner text"),
+                    new XText("text"),
+                    new XProcessingInstruction("pi", "pi pi")
+                )
+            );
 
             SaveBaseline(xml);
             LoadURI(doc, BaseSaveFileName, xml);
@@ -448,9 +928,7 @@ namespace XLinqTests
             {
                 using (XmlReader r = XmlReader.Create(new StringReader(xml), null))
                 {
-                    while (r.Read())
-                    {
-                    }
+                    while (r.Read()) { }
                     try
                     {
                         switch (m)
@@ -521,9 +999,7 @@ namespace XLinqTests
                     XDocument.Load((string)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
             try
             {
@@ -537,9 +1013,7 @@ namespace XLinqTests
                     XDocument.Load((string)null, LoadOptions.PreserveWhitespace);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
             try
             {
@@ -553,9 +1027,7 @@ namespace XLinqTests
                     XDocument.Load((string)null, LoadOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
 
             try //Load from TextReader
@@ -570,9 +1042,7 @@ namespace XLinqTests
                     XDocument.Load((TextReader)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
             try
             {
@@ -586,9 +1056,7 @@ namespace XLinqTests
                     XDocument.Load((TextReader)null, LoadOptions.PreserveWhitespace);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
             try
             {
@@ -602,9 +1070,7 @@ namespace XLinqTests
                     XDocument.Load((TextReader)null, LoadOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
 
             try //Load from XmlReader
@@ -619,9 +1085,7 @@ namespace XLinqTests
                     XDocument.Load((XmlReader)null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
         }
 
@@ -633,63 +1097,49 @@ namespace XLinqTests
                 XElement.Load((string)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 XElement.Load((string)null, LoadOptions.PreserveWhitespace);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 XElement.Load((string)null, LoadOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try //Load from TextReader
             {
                 XElement.Load((TextReader)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 XElement.Load((TextReader)null, LoadOptions.PreserveWhitespace);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 XElement.Load((TextReader)null, LoadOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try //Load from XmlReader
             {
                 XElement.Load((XmlReader)null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
         }
 
         //[Variation(Priority = 1, Desc = "XDocument: Null parameters for Parse, ReadFrom and ReadContentFrom")]
@@ -708,9 +1158,7 @@ namespace XLinqTests
                     XDocument.Parse(null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
 
             try
@@ -725,9 +1173,7 @@ namespace XLinqTests
                     XDocument.Parse(null, LoadOptions.PreserveWhitespace);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
 
             try
@@ -742,9 +1188,7 @@ namespace XLinqTests
                     XDocument.Parse(null, LoadOptions.None);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
 
             try
@@ -759,9 +1203,7 @@ namespace XLinqTests
                     XNode.ReadFrom(null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
 
             try
@@ -776,9 +1218,7 @@ namespace XLinqTests
                     XNode.ReadFrom(null);
                     throw new TestException(TestResult.Failed, "");
                 }
-                catch (ArgumentNullException)
-                {
-                }
+                catch (ArgumentNullException) { }
             }
         }
 
@@ -791,36 +1231,28 @@ namespace XLinqTests
                 XElement.Parse(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 XElement.Parse(null, LoadOptions.PreserveWhitespace);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 XElement.Parse(null, LoadOptions.None);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
 
             try
             {
                 XNode.ReadFrom(null);
                 throw new TestException(TestResult.Failed, "");
             }
-            catch (ArgumentNullException)
-            {
-            }
+            catch (ArgumentNullException) { }
         }
 
         #endregion
@@ -863,7 +1295,11 @@ namespace XLinqTests
                 TextReader tr3 = new StreamReader(FilePathUtil.getStream(uri));
                 xdoc = XDocument.Load(tr3, LoadOptions.None);
                 actualXml = xdoc.ToString(SaveOptions.DisableFormatting);
-                TestLog.Compare(actualXml, expectedXml, "XDocument (preserveWhitespace = false) mismatch");
+                TestLog.Compare(
+                    actualXml,
+                    expectedXml,
+                    "XDocument (preserveWhitespace = false) mismatch"
+                );
                 tr3.Dispose();
             }
             else if (doc is XElement)
@@ -883,7 +1319,11 @@ namespace XLinqTests
                 TextReader tr3 = new StreamReader(FilePathUtil.getStream(uri));
                 xelem = XElement.Load(tr3, LoadOptions.None);
                 actualXml = xelem.ToString(SaveOptions.DisableFormatting);
-                TestLog.Compare(actualXml, expectedXml, "XElement (preserveWhitespace = false) mismatch");
+                TestLog.Compare(
+                    actualXml,
+                    expectedXml,
+                    "XElement (preserveWhitespace = false) mismatch"
+                );
                 tr3.Dispose();
             }
             else
@@ -906,7 +1346,11 @@ namespace XLinqTests
 
                 xdoc = XDocument.Load(FilePathUtil.getStream(uri), LoadOptions.None);
                 actualXml = xdoc.ToString(SaveOptions.DisableFormatting);
-                TestLog.Compare(actualXml, expectedXml, "XDocument (preserveWhitespace = false) mismatch");
+                TestLog.Compare(
+                    actualXml,
+                    expectedXml,
+                    "XDocument (preserveWhitespace = false) mismatch"
+                );
             }
             else if (doc is XElement)
             {
@@ -920,7 +1364,11 @@ namespace XLinqTests
 
                 xelem = XElement.Load(FilePathUtil.getStream(uri), LoadOptions.None);
                 actualXml = xelem.ToString(SaveOptions.DisableFormatting);
-                TestLog.Compare(actualXml, expectedXml, "XElement (preserveWhitespace = false) mismatch");
+                TestLog.Compare(
+                    actualXml,
+                    expectedXml,
+                    "XElement (preserveWhitespace = false) mismatch"
+                );
             }
             else
             {
@@ -1035,7 +1483,11 @@ namespace XLinqTests
             ValidateXml(actualXml, expectedXml, ConformanceLevel.Document);
         }
 
-        private void ValidateXml(string actualXml, string expectedXml, ConformanceLevel conformanceLevel)
+        private void ValidateXml(
+            string actualXml,
+            string expectedXml,
+            ConformanceLevel conformanceLevel
+        )
         {
             var rs = new XmlReaderSettings();
             rs.ConformanceLevel = conformanceLevel;

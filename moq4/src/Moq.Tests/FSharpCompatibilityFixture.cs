@@ -52,10 +52,8 @@ namespace Moq.Tests
         public void Abstract_FSharp_event_has_accessors_marked_as_specialname(EventInfo @event)
         {
             Assert.All(@event.GetAccessors(), accessor => Assert.True(accessor.IsAbstract));
-            Assert.All(
-                @event.GetAccessors(),
-                accessor =>
-                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            Assert.All(@event.GetAccessors(), accessor =>
+                Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
             );
         }
 
@@ -64,10 +62,8 @@ namespace Moq.Tests
         public void Non_abstract_FSharp_event_has_accessors_marked_as_specialname(EventInfo @event)
         {
             Assert.All(@event.GetAccessors(), accessor => Assert.False(accessor.IsAbstract));
-            Assert.All(
-                @event.GetAccessors(),
-                accessor =>
-                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            Assert.All(@event.GetAccessors(), accessor =>
+                Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
             );
         }
 
@@ -114,10 +110,8 @@ namespace Moq.Tests
         [MemberData(nameof(FSharpIndexers))]
         public void All_FSharp_indexers_have_accessors_marked_as_specialname(PropertyInfo indexer)
         {
-            Assert.All(
-                indexer.GetAccessors(),
-                accessor =>
-                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            Assert.All(indexer.GetAccessors(), accessor =>
+                Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
             );
         }
 
@@ -162,10 +156,8 @@ namespace Moq.Tests
             PropertyInfo property
         )
         {
-            Assert.All(
-                @property.GetAccessors(),
-                accessor =>
-                    Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
+            Assert.All(@property.GetAccessors(), accessor =>
+                Assert.True(accessor.IsSpecialName, "Accessor not marked as `specialname`.")
             );
         }
 

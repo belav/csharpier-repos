@@ -7,7 +7,16 @@ namespace SslStress.Utils
 {
     public static class HumanReadableByteSizeFormatter
     {
-        private static readonly string[] s_suffixes = { "B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB" };
+        private static readonly string[] s_suffixes =
+        {
+            "B",
+            "KiB",
+            "MiB",
+            "GiB",
+            "TiB",
+            "PiB",
+            "EiB",
+        };
 
         public static string Format(long byteCount)
         {

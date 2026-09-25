@@ -53,23 +53,43 @@ namespace System.Composition.UnitTests
         [Fact]
         public void ConstraintsWithEquivalentKeysAndValuesAreEqual()
         {
-            var mcd1 = new CompositionContract(s_defaultContractType, null, new Dictionary<string, object> { { "A", new[] { "B" } } });
-            var mcd2 = new CompositionContract(s_defaultContractType, null, new Dictionary<string, object> { { "A", new[] { "B" } } });
+            var mcd1 = new CompositionContract(
+                s_defaultContractType,
+                null,
+                new Dictionary<string, object> { { "A", new[] { "B" } } }
+            );
+            var mcd2 = new CompositionContract(
+                s_defaultContractType,
+                null,
+                new Dictionary<string, object> { { "A", new[] { "B" } } }
+            );
             Assert.True(mcd1.Equals(mcd2));
         }
 
         [Fact]
         public void ConstraintsWithEquivalentKeysAndValuesHaveTheSameHashCode()
         {
-            var mcd1 = new CompositionContract(s_defaultContractType, null, new Dictionary<string, object> { { "A", new[] { "B" } } });
-            var mcd2 = new CompositionContract(s_defaultContractType, null, new Dictionary<string, object> { { "A", new[] { "B" } } });
+            var mcd1 = new CompositionContract(
+                s_defaultContractType,
+                null,
+                new Dictionary<string, object> { { "A", new[] { "B" } } }
+            );
+            var mcd2 = new CompositionContract(
+                s_defaultContractType,
+                null,
+                new Dictionary<string, object> { { "A", new[] { "B" } } }
+            );
             Assert.Equal(mcd1.GetHashCode(), mcd2.GetHashCode());
         }
 
         [Fact]
         public void FormattingTheContractPrintsConstraintKeysAndValues()
         {
-            var mcd = new CompositionContract(typeof(AType), null, new Dictionary<string, object> { { "A", 1 }, { "B", "C" } });
+            var mcd = new CompositionContract(
+                typeof(AType),
+                null,
+                new Dictionary<string, object> { { "A", 1 }, { "B", "C" } }
+            );
             var s = mcd.ToString();
             Assert.Equal("AType { A = 1, B = \"C\" }", s);
         }
@@ -77,7 +97,11 @@ namespace System.Composition.UnitTests
         [Fact]
         public void FormattingTheContractPrintsNameAndDiscriminator()
         {
-            var mcd = new CompositionContract(typeof(AType), "inner", new Dictionary<string, object> { { "A", 1 } });
+            var mcd = new CompositionContract(
+                typeof(AType),
+                "inner",
+                new Dictionary<string, object> { { "A", 1 } }
+            );
             var s = mcd.ToString();
             Assert.Equal("AType \"inner\" { A = 1 }", s);
         }
@@ -85,7 +109,11 @@ namespace System.Composition.UnitTests
         [Fact]
         public void AContractWithConstraintIsNotEqualToAContractWithoutConstraint()
         {
-            var first = new CompositionContract(typeof(string), null, new Dictionary<string, object> { { "A", 1 } });
+            var first = new CompositionContract(
+                typeof(string),
+                null,
+                new Dictionary<string, object> { { "A", 1 } }
+            );
             var second = new CompositionContract(typeof(string));
             Assert.False(first.Equals(second));
         }

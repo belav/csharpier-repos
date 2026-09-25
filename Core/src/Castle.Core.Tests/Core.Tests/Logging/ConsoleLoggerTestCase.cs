@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,148 +14,166 @@
 
 namespace Castle.Core.Logging.Tests
 {
-	using System;
-	using System.IO;
+    using System;
+    using System.IO;
+    using Castle.Core.Logging;
+    using NUnit.Framework;
 
-	using Castle.Core.Logging;
+    [TestFixture]
+    public class ConsoleLoggerTestCase
+    {
+        private StringWriter outWriter = new StringWriter();
+        private StringWriter errorWriter = new StringWriter();
+        private TextWriter oldOut;
+        private TextWriter oldError;
 
-	using NUnit.Framework;
+        [SetUp]
+        public void ReplaceOut()
+        {
+            outWriter.GetStringBuilder().Length = 0;
+            errorWriter.GetStringBuilder().Length = 0;
 
-	[TestFixture]
-	public class ConsoleLoggerTestCase
-	{
-		private StringWriter outWriter = new StringWriter();
-		private StringWriter errorWriter = new StringWriter();
-		private TextWriter oldOut;
-		private TextWriter oldError;
+            oldOut = Console.Out;
+            oldError = Console.Error;
+            Console.SetOut(outWriter);
+            Console.SetError(errorWriter);
+        }
 
-		[SetUp]
-		public void ReplaceOut()
-		{
-			outWriter.GetStringBuilder().Length = 0;
-			errorWriter.GetStringBuilder().Length = 0;
+        [TearDown]
+        public void TearDown()
+        {
+            Console.SetOut(oldOut);
+            Console.SetError(oldError);
+        }
 
-			oldOut = Console.Out;
-			oldError = Console.Error;
-			Console.SetOut(outWriter);
-			Console.SetError(errorWriter);
-		}
+        [Test]
+        public void InfoLogger()
+        {
+            ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Info);
 
-		[TearDown]
-		public void TearDown()
-		{
-			Console.SetOut(oldOut);
-			Console.SetError(oldError);
-		}
+            log.Trace("Some trace message");
+            log.Debug("Some debug message");
+            log.Info("Some info message");
+            log.Error("Some error message");
+            log.Fatal("Some fatal error message");
+            log.Warn("Some warn message");
 
-		[Test]
-		public void InfoLogger()
-		{
-			ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Info);
+            string logcontents = outWriter.GetStringBuilder().ToString();
 
-			log.Trace("Some trace message");
-			log.Debug("Some debug message");
-			log.Info("Some info message");
-			log.Error("Some error message");
-			log.Fatal("Some fatal error message");
-			log.Warn("Some warn message");
+            StringWriter expected = new StringWriter();
+            expected.WriteLine("[Info] 'Logger' Some info message");
+            expected.WriteLine("[Error] 'Logger' Some error message");
+            expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
+            expected.WriteLine("[Warn] 'Logger' Some warn message");
 
-			string logcontents = outWriter.GetStringBuilder().ToString();
-			
-			StringWriter expected = new StringWriter();
-			expected.WriteLine("[Info] 'Logger' Some info message");
-			expected.WriteLine("[Error] 'Logger' Some error message");
-			expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
-			expected.WriteLine("[Warn] 'Logger' Some warn message");
-			
-			Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
-		}
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
+        }
 
-		[Test]
-		public void DebugLogger()
-		{
-			ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Debug);
+        [Test]
+        public void DebugLogger()
+        {
+            ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Debug);
 
-			log.Trace("Some trace message");
-			log.Debug("Some debug message");
-			log.Info("Some info message");
-			log.Error("Some error message");
-			log.Fatal("Some fatal error message");
-			log.Warn("Some warn message");
+            log.Trace("Some trace message");
+            log.Debug("Some debug message");
+            log.Info("Some info message");
+            log.Error("Some error message");
+            log.Fatal("Some fatal error message");
+            log.Warn("Some warn message");
 
-			string logcontents = outWriter.GetStringBuilder().ToString();
-			
-			StringWriter expected = new StringWriter();
-			expected.WriteLine("[Debug] 'Logger' Some debug message");
-			expected.WriteLine("[Info] 'Logger' Some info message");
-			expected.WriteLine("[Error] 'Logger' Some error message");
-			expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
-			expected.WriteLine("[Warn] 'Logger' Some warn message");
+            string logcontents = outWriter.GetStringBuilder().ToString();
 
-			Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
-		}
+            StringWriter expected = new StringWriter();
+            expected.WriteLine("[Debug] 'Logger' Some debug message");
+            expected.WriteLine("[Info] 'Logger' Some info message");
+            expected.WriteLine("[Error] 'Logger' Some error message");
+            expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
+            expected.WriteLine("[Warn] 'Logger' Some warn message");
 
-		[Test]
-		public void TraceLogger()
-		{
-			ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Trace);
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
+        }
 
-			log.Trace("Some trace message");
-			log.Debug("Some debug message");
-			log.Info("Some info message");
-			log.Error("Some error message");
-			log.Fatal("Some fatal error message");
-			log.Warn("Some warn message");
+        [Test]
+        public void TraceLogger()
+        {
+            ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Trace);
 
-			string logcontents = outWriter.GetStringBuilder().ToString();
+            log.Trace("Some trace message");
+            log.Debug("Some debug message");
+            log.Info("Some info message");
+            log.Error("Some error message");
+            log.Fatal("Some fatal error message");
+            log.Warn("Some warn message");
 
-			StringWriter expected = new StringWriter();
-			expected.WriteLine("[Trace] 'Logger' Some trace message");
-			expected.WriteLine("[Debug] 'Logger' Some debug message");
-			expected.WriteLine("[Info] 'Logger' Some info message");
-			expected.WriteLine("[Error] 'Logger' Some error message");
-			expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
-			expected.WriteLine("[Warn] 'Logger' Some warn message");
+            string logcontents = outWriter.GetStringBuilder().ToString();
 
-			Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
-		}
+            StringWriter expected = new StringWriter();
+            expected.WriteLine("[Trace] 'Logger' Some trace message");
+            expected.WriteLine("[Debug] 'Logger' Some debug message");
+            expected.WriteLine("[Info] 'Logger' Some info message");
+            expected.WriteLine("[Error] 'Logger' Some error message");
+            expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
+            expected.WriteLine("[Warn] 'Logger' Some warn message");
 
-		[Test]
-		public void WarnLogger()
-		{
-			ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Warn);
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
+        }
 
-			log.Trace("Some trace message");
-			log.Debug("Some debug message");
-			log.Info("Some info message");
-			log.Error("Some error message");
-			log.Fatal("Some fatal error message");
-			log.Warn("Some warn message");
+        [Test]
+        public void WarnLogger()
+        {
+            ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Warn);
 
-			string logcontents = outWriter.GetStringBuilder().ToString();
-			
-			StringWriter expected = new StringWriter();
-			expected.WriteLine("[Error] 'Logger' Some error message");
-			expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
-			expected.WriteLine("[Warn] 'Logger' Some warn message");
+            log.Trace("Some trace message");
+            log.Debug("Some debug message");
+            log.Info("Some info message");
+            log.Error("Some error message");
+            log.Fatal("Some fatal error message");
+            log.Warn("Some warn message");
 
-			Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
-		}
+            string logcontents = outWriter.GetStringBuilder().ToString();
 
-		[Test]
-		public void ExceptionLogging()
-		{
-			ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Debug);
+            StringWriter expected = new StringWriter();
+            expected.WriteLine("[Error] 'Logger' Some error message");
+            expected.WriteLine("[Fatal] 'Logger' Some fatal error message");
+            expected.WriteLine("[Warn] 'Logger' Some warn message");
 
-			log.Debug("Some debug message", new Exception("Some exception message"));
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
+        }
 
-			string logcontents = outWriter.GetStringBuilder().ToString();
-			
-			StringWriter expected = new StringWriter();
-			expected.WriteLine("[Debug] 'Logger' Some debug message");
-			expected.WriteLine("[Debug] 'Logger' System.Exception: Some exception message ");
+        [Test]
+        public void ExceptionLogging()
+        {
+            ConsoleLogger log = new ConsoleLogger("Logger", LoggerLevel.Debug);
 
-			Assert.AreEqual(expected.GetStringBuilder().ToString(), logcontents, "logcontents don't match");
-		}
-	}
+            log.Debug("Some debug message", new Exception("Some exception message"));
+
+            string logcontents = outWriter.GetStringBuilder().ToString();
+
+            StringWriter expected = new StringWriter();
+            expected.WriteLine("[Debug] 'Logger' Some debug message");
+            expected.WriteLine("[Debug] 'Logger' System.Exception: Some exception message ");
+
+            Assert.AreEqual(
+                expected.GetStringBuilder().ToString(),
+                logcontents,
+                "logcontents don't match"
+            );
+        }
+    }
 }

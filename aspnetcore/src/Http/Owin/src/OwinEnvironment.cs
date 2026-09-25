@@ -286,8 +286,8 @@ public class OwinEnvironment : IDictionary<string, object>
             );
             _entries.Add(
                 OwinConstants.CommonKeys.LoadClientCertAsync,
-                new FeatureMap<ITlsConnectionFeature>(feature => new Func<Task>(
-                    () => feature.GetClientCertificateAsync(CancellationToken.None)
+                new FeatureMap<ITlsConnectionFeature>(feature => new Func<Task>(() =>
+                    feature.GetClientCertificateAsync(CancellationToken.None)
                 ))
             );
         }

@@ -11,9 +11,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Compiler;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules
 {
@@ -124,7 +124,11 @@ namespace System.Workflow.Activities.Rules
 
         // Note that the type pi.PropertyType may differ from the "exprType" argument if this
         // property is a Bind.
-        internal RulePropertyExpressionInfo(PropertyInfo pi, Type exprType, bool needsParamsExpansion)
+        internal RulePropertyExpressionInfo(
+            PropertyInfo pi,
+            Type exprType,
+            bool needsParamsExpansion
+        )
             : base(exprType)
         {
             this.propertyInfo = pi;
@@ -223,7 +227,13 @@ namespace System.Workflow.Activities.Rules
             return expectedParameters;
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             object[] actualParameters = new object[actualParameterLength];
             if (actualParameterLength > 1)
@@ -232,7 +242,13 @@ namespace System.Workflow.Activities.Rules
                 actualParameters[0] = null;
             else
                 actualParameters[0] = Executor.AdjustType(obj.GetType(), obj, assumedDeclaringType);
-            object result = actualMethod.Invoke(null, invokeAttr, binder, actualParameters, culture);
+            object result = actualMethod.Invoke(
+                null,
+                invokeAttr,
+                binder,
+                actualParameters,
+                culture
+            );
             // may be out/ref parameters, so copy back the results
             if (hasOutOrRefParameters)
                 Array.Copy(actualParameters, 1, parameters, 0, actualParameterLength - 1);
@@ -304,10 +320,7 @@ namespace System.Workflow.Activities.Rules
 
         public override Type ParameterType
         {
-            get
-            {
-                return parameterType;
-            }
+            get { return parameterType; }
         }
     }
 
@@ -351,7 +364,13 @@ namespace System.Workflow.Activities.Rules
             return expectedParameters;
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             throw new NotImplementedException();
         }
@@ -399,13 +418,17 @@ namespace System.Workflow.Activities.Rules
         public override bool Equals(object obj)
         {
             BaseMethodInfo other = obj as BaseMethodInfo;
-            if ((other == null)
+            if (
+                (other == null)
                 || (actualMethod != other.actualMethod)
                 || (resultType != other.resultType)
-                || (expectedParameters.Length != other.expectedParameters.Length))
+                || (expectedParameters.Length != other.expectedParameters.Length)
+            )
                 return false;
             for (int i = 0; i < expectedParameters.Length; ++i)
-                if (expectedParameters[i].ParameterType != other.expectedParameters[i].ParameterType)
+                if (
+                    expectedParameters[i].ParameterType != other.expectedParameters[i].ParameterType
+                )
                     return false;
             return true;
         }
@@ -435,7 +458,13 @@ namespace System.Workflow.Activities.Rules
             expectedParameters[0] = new SimpleParameterInfo(actualParameters[0]);
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             // null in, then result is null
             if (parameters[0] == null)
@@ -465,7 +494,13 @@ namespace System.Workflow.Activities.Rules
             resultType = typeof(Nullable<>).MakeGenericType(method.ReturnType);
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             // null in, then result is null
             if (parameters[0] == null)
@@ -498,7 +533,13 @@ namespace System.Workflow.Activities.Rules
             resultType = typeof(bool);
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             // null == null is true, null == something else is false, else call method
             if (parameters[0] == null)
@@ -529,7 +570,13 @@ namespace System.Workflow.Activities.Rules
             resultType = typeof(bool);
         }
 
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             // if either parameter is null, then result is false
             if (parameters[0] == null)
@@ -546,19 +593,24 @@ namespace System.Workflow.Activities.Rules
     {
         CodeBinaryOperatorType op;
         ParameterInfo[] expectedParameters;
-        Type resultType;        // may be nullable, enum, or value type
-        bool resultIsNullable;  // true if resultType is nullable
+        Type resultType; // may be nullable, enum, or value type
+        bool resultIsNullable; // true if resultType is nullable
 
-        Type lhsBaseType;       // non-Nullable, may be enum
+        Type lhsBaseType; // non-Nullable, may be enum
         Type rhsBaseType;
         Type resultBaseType;
 
-        Type lhsRootType;       // underlying type (int, long, ushort, etc)
+        Type lhsRootType; // underlying type (int, long, ushort, etc)
         Type rhsRootType;
         Type resultRootType;
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        public EnumOperationMethodInfo(Type lhs, CodeBinaryOperatorType operation, Type rhs, bool isZero)
+        public EnumOperationMethodInfo(
+            Type lhs,
+            CodeBinaryOperatorType operation,
+            Type rhs,
+            bool isZero
+        )
         {
             // only 5 arithmetic cases (U = underlying type of E):
             //    E = E + U
@@ -610,7 +662,10 @@ namespace System.Workflow.Activities.Rules
                         resultBaseType = rhsBaseType;
                     // if either side is nullable, result is nullable
                     resultIsNullable = (lhsNullable || rhsNullable);
-                    resultType = (resultIsNullable) ? typeof(Nullable<>).MakeGenericType(resultBaseType) : resultBaseType;
+                    resultType =
+                        (resultIsNullable)
+                            ? typeof(Nullable<>).MakeGenericType(resultBaseType)
+                            : resultBaseType;
                     break;
                 case CodeBinaryOperatorType.Subtract:
                     // subtract can be an enum or the underlying type
@@ -630,7 +685,7 @@ namespace System.Workflow.Activities.Rules
                         else
                             resultBaseType = lhsBaseType;
                     }
-                    else    // rhsType.IsEnum
+                    else // rhsType.IsEnum
                     {
                         // special case for 0 - E
                         // in all cases 0 becomes E, use E - E
@@ -641,7 +696,10 @@ namespace System.Workflow.Activities.Rules
                             resultBaseType = rhsBaseType;
                     }
                     resultIsNullable = (lhsNullable || rhsNullable);
-                    resultType = (resultIsNullable) ? typeof(Nullable<>).MakeGenericType(resultBaseType) : resultBaseType;
+                    resultType =
+                        (resultIsNullable)
+                            ? typeof(Nullable<>).MakeGenericType(resultBaseType)
+                            : resultBaseType;
                     break;
                 case CodeBinaryOperatorType.ValueEquality:
                 case CodeBinaryOperatorType.LessThan:
@@ -679,13 +737,21 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1803:AvoidCostlyCallsWherePossible")]
-        public override object Invoke(object obj, BindingFlags invokeAttr, Binder binder, object[] parameters, CultureInfo culture)
+        public override object Invoke(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] parameters,
+            CultureInfo culture
+        )
         {
             // we should get passed in 2 values that correspond to the parameter types
 
             object result;
-            ArithmeticLiteral leftArithmetic, rightArithmetic;
-            Literal leftLiteral, rightLiteral;
+            ArithmeticLiteral leftArithmetic,
+                rightArithmetic;
+            Literal leftLiteral,
+                rightLiteral;
 
             // for design-time types we couldn't find the underlying type, so do it now
             if (lhsRootType == null)
@@ -710,10 +776,14 @@ namespace System.Workflow.Activities.Rules
                     // if either is null, then the result is null
                     if ((parameters[0] == null) || (parameters[1] == null))
                         return null;
-                    leftArithmetic = ArithmeticLiteral.MakeLiteral(resultRootType,
-                        Executor.AdjustType(lhsRootType, parameters[0], resultRootType));
-                    rightArithmetic = ArithmeticLiteral.MakeLiteral(resultRootType,
-                        Executor.AdjustType(rhsRootType, parameters[1], resultRootType));
+                    leftArithmetic = ArithmeticLiteral.MakeLiteral(
+                        resultRootType,
+                        Executor.AdjustType(lhsRootType, parameters[0], resultRootType)
+                    );
+                    rightArithmetic = ArithmeticLiteral.MakeLiteral(
+                        resultRootType,
+                        Executor.AdjustType(rhsRootType, parameters[1], resultRootType)
+                    );
                     result = leftArithmetic.Subtract(rightArithmetic);
                     result = Executor.AdjustType(result.GetType(), result, resultBaseType);
                     if (resultIsNullable)
@@ -741,7 +811,11 @@ namespace System.Workflow.Activities.Rules
                     rightLiteral = Literal.MakeLiteral(rhsRootType, parameters[1]);
                     return leftLiteral.GreaterThanOrEqual(rightLiteral);
             }
-            string message = string.Format(CultureInfo.CurrentCulture, Messages.BinaryOpNotSupported, op.ToString());
+            string message = string.Format(
+                CultureInfo.CurrentCulture,
+                Messages.BinaryOpNotSupported,
+                op.ToString()
+            );
             throw new RuleEvaluationException(message);
         }
 
@@ -917,8 +991,10 @@ namespace System.Workflow.Activities.Rules
         private Dictionary<string, Type> typesUsed = new Dictionary<string, Type>(16);
         private Dictionary<string, Type> typesUsedAuthorized;
         private Stack<CodeExpression> activeParentNodes = new Stack<CodeExpression>();
-        private Dictionary<CodeExpression, RuleExpressionInfo> expressionInfoMap = new Dictionary<CodeExpression, RuleExpressionInfo>();
-        private Dictionary<CodeTypeReference, Type> typeRefMap = new Dictionary<CodeTypeReference, Type>();
+        private Dictionary<CodeExpression, RuleExpressionInfo> expressionInfoMap =
+            new Dictionary<CodeExpression, RuleExpressionInfo>();
+        private Dictionary<CodeTypeReference, Type> typeRefMap =
+            new Dictionary<CodeTypeReference, Type>();
         private bool checkStaticType;
         private IList<AuthorizedType> authorizedTypes;
         private static readonly Type voidType = typeof(void);
@@ -939,7 +1015,10 @@ namespace System.Workflow.Activities.Rules
             this.checkStaticType = checkStaticType;
             if (checkStaticType)
             {
-                Debug.Assert(WorkflowCompilationContext.Current != null, "Can't have checkTypes set to true without a context in scope");
+                Debug.Assert(
+                    WorkflowCompilationContext.Current != null,
+                    "Can't have checkTypes set to true without a context in scope"
+                );
                 this.authorizedTypes = WorkflowCompilationContext.Current.GetAuthorizedTypes();
                 this.typesUsedAuthorized = new Dictionary<string, Type>();
                 this.typesUsedAuthorized.Add(voidTypeName, voidType);
@@ -964,7 +1043,10 @@ namespace System.Workflow.Activities.Rules
                 throw new ArgumentNullException("thisType");
 
             this.thisType = thisType;
-            this.typeProvider = (typeProvider != null) ? typeProvider : new SimpleRunTimeTypeProvider(this.thisType.Assembly);
+            this.typeProvider =
+                (typeProvider != null)
+                    ? typeProvider
+                    : new SimpleRunTimeTypeProvider(this.thisType.Assembly);
         }
 
         #endregion
@@ -988,7 +1070,10 @@ namespace System.Workflow.Activities.Rules
                 if (resultType != null || Errors.Count == 0)
                 {
                     string message = Messages.ConditionMustBeBoolean;
-                    ValidationError error = new ValidationError(message, ErrorNumbers.Error_ConditionMustBeBoolean);
+                    ValidationError error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_ConditionMustBeBoolean
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = expression;
                     Errors.Add(error);
                 }
@@ -999,9 +1084,11 @@ namespace System.Workflow.Activities.Rules
 
         internal static bool IsValidBooleanResult(Type type)
         {
-            return ((type == typeof(bool))
+            return (
+                (type == typeof(bool))
                 || (type == typeof(bool?))
-                || (ImplicitConversion(type, typeof(bool))));
+                || (ImplicitConversion(type, typeof(bool)))
+            );
         }
 
         internal static bool IsPrivate(MethodInfo methodInfo)
@@ -1022,14 +1109,12 @@ namespace System.Workflow.Activities.Rules
 
         internal static bool IsInternal(MethodInfo methodInfo)
         {
-            return methodInfo.IsAssembly
-                || methodInfo.IsFamilyAndAssembly;
+            return methodInfo.IsAssembly || methodInfo.IsFamilyAndAssembly;
         }
 
         internal static bool IsInternal(FieldInfo fieldInfo)
         {
-            return fieldInfo.IsAssembly
-                || fieldInfo.IsFamilyAndAssembly;
+            return fieldInfo.IsAssembly || fieldInfo.IsFamilyAndAssembly;
         }
 
         #endregion
@@ -1068,8 +1153,14 @@ namespace System.Workflow.Activities.Rules
 
             if (activeParentNodes.Contains(newParent))
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.CyclicalExpression);
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CyclicalExpression);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CyclicalExpression
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CyclicalExpression
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = newParent;
                 Errors.Add(error);
                 return false;
@@ -1100,10 +1191,20 @@ namespace System.Workflow.Activities.Rules
 
         #region CodeDom Expression Validation methods
 
-        internal RuleExpressionInfo ValidateSubexpression(CodeExpression expr, RuleExpressionInternal ruleExpr, bool isWritten)
+        internal RuleExpressionInfo ValidateSubexpression(
+            CodeExpression expr,
+            RuleExpressionInternal ruleExpr,
+            bool isWritten
+        )
         {
-            Debug.Assert(ruleExpr != null, "Validation::ValidateSubexpression - IRuleExpression is null");
-            Debug.Assert(expr != null, "Validation::ValidateSubexpression - CodeExpression is null");
+            Debug.Assert(
+                ruleExpr != null,
+                "Validation::ValidateSubexpression - IRuleExpression is null"
+            );
+            Debug.Assert(
+                expr != null,
+                "Validation::ValidateSubexpression - CodeExpression is null"
+            );
 
             RuleExpressionInfo exprInfo = ruleExpr.Validate(expr, this, isWritten);
 
@@ -1117,10 +1218,15 @@ namespace System.Workflow.Activities.Rules
             return exprInfo;
         }
 
-        internal static bool TypesAreAssignable(Type rhsType, Type lhsType, CodeExpression rhsExpression, out ValidationError error)
+        internal static bool TypesAreAssignable(
+            Type rhsType,
+            Type lhsType,
+            CodeExpression rhsExpression,
+            out ValidationError error
+        )
         {
             // determine if rhsType can be implicitly converted to lhsType,
-            // following the rules in C# specification section 6.1, 
+            // following the rules in C# specification section 6.1,
             // plus support for Nullable<T>
 
             // all but 6.1.7 handled as a standard implicit conversion
@@ -1137,7 +1243,11 @@ namespace System.Workflow.Activities.Rules
             return true;
         }
 
-        internal static bool ExplicitConversionSpecified(Type fromType, Type toType, out ValidationError error)
+        internal static bool ExplicitConversionSpecified(
+            Type fromType,
+            Type toType,
+            out ValidationError error
+        )
         {
             // determine if fromType can be implicitly converted to toType,
             // following the rules in C# specification section 6.2
@@ -1150,7 +1260,11 @@ namespace System.Workflow.Activities.Rules
 
             // explicit numeric conversions
             // also handles Enum conversions, since GetTypeCode returns the underlying type
-            if (fromType.IsValueType && toType.IsValueType && IsExplicitNumericConversion(fromType, toType))
+            if (
+                fromType.IsValueType
+                && toType.IsValueType
+                && IsExplicitNumericConversion(fromType, toType)
+            )
                 return true;
 
             // explicit reference conversions
@@ -1173,7 +1287,10 @@ namespace System.Workflow.Activities.Rules
             if (fromType.IsInterface)
             {
                 // from any interface-type S to any class-type T, provided T is not sealed or provided T implements S.
-                if ((toType.IsClass) && ((!toType.IsSealed) || (InterfaceMatch(toType.GetInterfaces(), fromType))))
+                if (
+                    (toType.IsClass)
+                    && ((!toType.IsSealed) || (InterfaceMatch(toType.GetInterfaces(), fromType)))
+                )
                     return true;
             }
 
@@ -1196,7 +1313,11 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal static MethodInfo FindImplicitConversion(Type fromType, Type toType, out ValidationError error)
+        internal static MethodInfo FindImplicitConversion(
+            Type fromType,
+            Type toType,
+            out ValidationError error
+        )
         {
             List<MethodInfo> candidates = new List<MethodInfo>();
 
@@ -1254,7 +1375,10 @@ namespace System.Workflow.Activities.Rules
                     // only lift candidates that convert from a non-nullable value type
                     // to a non-nullable value type
                     ParameterInfo[] parameters = mi.GetParameters();
-                    if (ConditionHelper.IsNonNullableValueType(mi.ReturnType) && ConditionHelper.IsNonNullableValueType(parameters[0].ParameterType))
+                    if (
+                        ConditionHelper.IsNonNullableValueType(mi.ReturnType)
+                        && ConditionHelper.IsNonNullableValueType(parameters[0].ParameterType)
+                    )
                         candidates.Add(new LiftedConversionMethodInfo(mi));
                 }
             }
@@ -1262,10 +1386,12 @@ namespace System.Workflow.Activities.Rules
             if (candidates.Count == 0)
             {
                 // no overrides, so must be false
-                string message = string.Format(CultureInfo.CurrentCulture,
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
                     Messages.NoConversion,
                     RuleDecompiler.DecompileType(fromType),
-                    RuleDecompiler.DecompileType(toType));
+                    RuleDecompiler.DecompileType(toType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_OperandTypesIncompatible);
                 return null;
             }
@@ -1312,9 +1438,11 @@ namespace System.Workflow.Activities.Rules
             int position = 0;
             for (int i = 0; i < candidates.Count; ++i)
             {
-                if ((candidates[i].ReturnType == tx) &&
-                    (candidates[i].GetParameters()[0].ParameterType == sx) &&
-                    (!(candidates[i] is LiftedConversionMethodInfo)))
+                if (
+                    (candidates[i].ReturnType == tx)
+                    && (candidates[i].GetParameters()[0].ParameterType == sx)
+                    && (!(candidates[i] is LiftedConversionMethodInfo))
+                )
                 {
                     position = i;
                     ++numMatches;
@@ -1334,9 +1462,11 @@ namespace System.Workflow.Activities.Rules
                 {
                     for (int i = 0; i < candidates.Count; ++i)
                     {
-                        if ((candidates[i].ReturnType == tx) &&
-                            (candidates[i].GetParameters()[0].ParameterType == sx) &&
-                            (candidates[i] is LiftedConversionMethodInfo))
+                        if (
+                            (candidates[i].ReturnType == tx)
+                            && (candidates[i].GetParameters()[0].ParameterType == sx)
+                            && (candidates[i] is LiftedConversionMethodInfo)
+                        )
                         {
                             position = i;
                             ++numMatches;
@@ -1363,16 +1493,22 @@ namespace System.Workflow.Activities.Rules
             }
 
             // no exact matches, so it's an error
-            string message2 = string.Format(CultureInfo.CurrentCulture,
+            string message2 = string.Format(
+                CultureInfo.CurrentCulture,
                 Messages.AmbiguousConversion,
                 RuleDecompiler.DecompileType(fromType),
-                RuleDecompiler.DecompileType(toType));
+                RuleDecompiler.DecompileType(toType)
+            );
             error = new ValidationError(message2, ErrorNumbers.Error_OperandTypesIncompatible);
             return null;
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal static MethodInfo FindExplicitConversion(Type fromType, Type toType, out ValidationError error)
+        internal static MethodInfo FindExplicitConversion(
+            Type fromType,
+            Type toType,
+            out ValidationError error
+        )
         {
             List<MethodInfo> candidates = new List<MethodInfo>();
             ValidationError dummyError; // don't return transient errors
@@ -1453,10 +1589,12 @@ namespace System.Workflow.Activities.Rules
             if (candidates.Count == 0)
             {
                 // no overrides, so must be false
-                string message = string.Format(CultureInfo.CurrentCulture,
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
                     Messages.NoConversion,
                     RuleDecompiler.DecompileType(fromType),
-                    RuleDecompiler.DecompileType(toType));
+                    RuleDecompiler.DecompileType(toType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_OperandTypesIncompatible);
                 return null;
             }
@@ -1554,9 +1692,11 @@ namespace System.Workflow.Activities.Rules
             int position = 0;
             for (int i = 0; i < candidates.Count; ++i)
             {
-                if ((candidates[i].ReturnType == tx) &&
-                        (candidates[i].GetParameters()[0].ParameterType == sx) &&
-                        (!(candidates[i] is LiftedConversionMethodInfo)))
+                if (
+                    (candidates[i].ReturnType == tx)
+                    && (candidates[i].GetParameters()[0].ParameterType == sx)
+                    && (!(candidates[i] is LiftedConversionMethodInfo))
+                )
                 {
                     position = i;
                     ++numMatches;
@@ -1576,9 +1716,11 @@ namespace System.Workflow.Activities.Rules
                 {
                     for (int i = 0; i < candidates.Count; ++i)
                     {
-                        if ((candidates[i].ReturnType == tx) &&
-                            (candidates[i].GetParameters()[0].ParameterType == sx) &&
-                            (candidates[i] is LiftedConversionMethodInfo))
+                        if (
+                            (candidates[i].ReturnType == tx)
+                            && (candidates[i].GetParameters()[0].ParameterType == sx)
+                            && (candidates[i] is LiftedConversionMethodInfo)
+                        )
                         {
                             position = i;
                             ++numMatches;
@@ -1605,10 +1747,12 @@ namespace System.Workflow.Activities.Rules
             }
 
             // no exact matches, so it's an error
-            string message2 = string.Format(CultureInfo.CurrentCulture,
+            string message2 = string.Format(
+                CultureInfo.CurrentCulture,
                 Messages.AmbiguousConversion,
                 RuleDecompiler.DecompileType(fromType),
-                RuleDecompiler.DecompileType(toType));
+                RuleDecompiler.DecompileType(toType)
+            );
             error = new ValidationError(message2, ErrorNumbers.Error_OperandTypesIncompatible);
             return null;
         }
@@ -1624,12 +1768,14 @@ namespace System.Workflow.Activities.Rules
             // includes the implicit conversions as well
 
             // unwrap nullables
-            TypeCode sourceTypeCode = (ConditionHelper.IsNullableValueType(sourceType))
-                ? Type.GetTypeCode(sourceType.GetGenericArguments()[0])
-                : Type.GetTypeCode(sourceType);
-            TypeCode testTypeCode = (ConditionHelper.IsNullableValueType(testType))
-                ? Type.GetTypeCode(testType.GetGenericArguments()[0])
-                : Type.GetTypeCode(testType);
+            TypeCode sourceTypeCode =
+                (ConditionHelper.IsNullableValueType(sourceType))
+                    ? Type.GetTypeCode(sourceType.GetGenericArguments()[0])
+                    : Type.GetTypeCode(sourceType);
+            TypeCode testTypeCode =
+                (ConditionHelper.IsNullableValueType(testType))
+                    ? Type.GetTypeCode(testType.GetGenericArguments()[0])
+                    : Type.GetTypeCode(testType);
 
             switch (sourceTypeCode)
             {
@@ -1874,7 +2020,6 @@ namespace System.Workflow.Activities.Rules
             return false;
         }
 
-
         internal static bool ImplicitConversion(Type fromType, Type toType)
         {
             ValidationError error;
@@ -1888,7 +2033,12 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        internal static bool StandardImplicitConversion(Type rhsType, Type lhsType, CodeExpression rhsExpression, out ValidationError error)
+        internal static bool StandardImplicitConversion(
+            Type rhsType,
+            Type lhsType,
+            CodeExpression rhsExpression,
+            out ValidationError error
+        )
         {
             error = null;
 
@@ -1905,8 +2055,16 @@ namespace System.Workflow.Activities.Rules
                 // Special case if the RHS is 'null'; just make sure the LHS type can be assigned a null value.
                 if (ConditionHelper.IsNonNullableValueType(lhsType))
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.AssignNotAllowed, Messages.NullValue, RuleDecompiler.DecompileType(lhsType));
-                    error = new ValidationError(message, ErrorNumbers.Error_OperandTypesIncompatible);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.AssignNotAllowed,
+                        Messages.NullValue,
+                        RuleDecompiler.DecompileType(lhsType)
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_OperandTypesIncompatible
+                    );
                     return false;
                 }
                 return true;
@@ -2211,7 +2369,12 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        private static void AddImplicitConversions(Type t, Type source, Type target, List<MethodInfo> methods)
+        private static void AddImplicitConversions(
+            Type t,
+            Type source,
+            Type target,
+            List<MethodInfo> methods
+        )
         {
             // append the list of methods that match the name specified
             // s is the source type, so the parameter must encompass it
@@ -2224,8 +2387,10 @@ namespace System.Workflow.Activities.Rules
                     Type sourceType = mi.GetParameters()[0].ParameterType;
                     Type targetType = mi.ReturnType;
                     ValidationError error;
-                    if (StandardImplicitConversion(source, sourceType, null, out error) &&
-                        StandardImplicitConversion(targetType, target, null, out error))
+                    if (
+                        StandardImplicitConversion(source, sourceType, null, out error)
+                        && StandardImplicitConversion(targetType, target, null, out error)
+                    )
                     {
                         if (!methods.Contains(mi))
                             methods.Add(mi);
@@ -2234,7 +2399,12 @@ namespace System.Workflow.Activities.Rules
             }
         }
 
-        private static void AddExplicitConversions(Type t, Type source, Type target, List<MethodInfo> methods)
+        private static void AddExplicitConversions(
+            Type t,
+            Type source,
+            Type target,
+            List<MethodInfo> methods
+        )
         {
             // append the list of methods that match the name specified
             // s is the source type, so the parameter must encompass it
@@ -2242,13 +2412,24 @@ namespace System.Workflow.Activities.Rules
             MethodInfo[] possible = t.GetMethods(BindingFlags.Static | BindingFlags.Public);
             foreach (MethodInfo mi in possible)
             {
-                if (((mi.Name == "op_Implicit") || (mi.Name == "op_Explicit")) && (mi.GetParameters().Length == 1))
+                if (
+                    ((mi.Name == "op_Implicit") || (mi.Name == "op_Explicit"))
+                    && (mi.GetParameters().Length == 1)
+                )
                 {
                     Type sourceType = mi.GetParameters()[0].ParameterType;
                     Type targetType = mi.ReturnType;
                     ValidationError error;
-                    if ((StandardImplicitConversion(source, sourceType, null, out error) || StandardImplicitConversion(sourceType, source, null, out error))
-                     && (StandardImplicitConversion(target, targetType, null, out error) || StandardImplicitConversion(targetType, target, null, out error)))
+                    if (
+                        (
+                            StandardImplicitConversion(source, sourceType, null, out error)
+                            || StandardImplicitConversion(sourceType, source, null, out error)
+                        )
+                        && (
+                            StandardImplicitConversion(target, targetType, null, out error)
+                            || StandardImplicitConversion(targetType, target, null, out error)
+                        )
+                    )
                     {
                         if (!methods.Contains(mi))
                             methods.Add(mi);
@@ -2258,7 +2439,11 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")]
-        private static bool CheckValueRange(CodeExpression rhsExpression, Type lhsType, out ValidationError error)
+        private static bool CheckValueRange(
+            CodeExpression rhsExpression,
+            Type lhsType,
+            out ValidationError error
+        )
         {
             error = null;
 
@@ -2273,7 +2458,10 @@ namespace System.Workflow.Activities.Rules
                 }
                 catch (Exception e)
                 {
-                    error = new ValidationError(e.Message, ErrorNumbers.Error_OperandTypesIncompatible);
+                    error = new ValidationError(
+                        e.Message,
+                        ErrorNumbers.Error_OperandTypesIncompatible
+                    );
                     return false;
                 }
             }
@@ -2282,24 +2470,55 @@ namespace System.Workflow.Activities.Rules
         }
 
         internal bool ValidateMemberAccess(
-            CodeExpression targetExpression, Type targetType, FieldInfo accessorMethod, string memberName, CodeExpression parentExpr)
+            CodeExpression targetExpression,
+            Type targetType,
+            FieldInfo accessorMethod,
+            string memberName,
+            CodeExpression parentExpr
+        )
         {
             return this.ValidateMemberAccess(
-                targetExpression, targetType, memberName, parentExpr,
-                accessorMethod.DeclaringType.Assembly, RuleValidation.IsPrivate(accessorMethod), RuleValidation.IsInternal(accessorMethod), accessorMethod.IsStatic);
+                targetExpression,
+                targetType,
+                memberName,
+                parentExpr,
+                accessorMethod.DeclaringType.Assembly,
+                RuleValidation.IsPrivate(accessorMethod),
+                RuleValidation.IsInternal(accessorMethod),
+                accessorMethod.IsStatic
+            );
         }
 
         internal bool ValidateMemberAccess(
-            CodeExpression targetExpression, Type targetType, MethodInfo accessorMethod, string memberName, CodeExpression parentExpr)
+            CodeExpression targetExpression,
+            Type targetType,
+            MethodInfo accessorMethod,
+            string memberName,
+            CodeExpression parentExpr
+        )
         {
             return this.ValidateMemberAccess(
-                targetExpression, targetType, memberName, parentExpr,
-                accessorMethod.DeclaringType.Assembly, RuleValidation.IsPrivate(accessorMethod), RuleValidation.IsInternal(accessorMethod), accessorMethod.IsStatic);
+                targetExpression,
+                targetType,
+                memberName,
+                parentExpr,
+                accessorMethod.DeclaringType.Assembly,
+                RuleValidation.IsPrivate(accessorMethod),
+                RuleValidation.IsInternal(accessorMethod),
+                accessorMethod.IsStatic
+            );
         }
 
         private bool ValidateMemberAccess(
-            CodeExpression targetExpression, Type targetType, string memberName, CodeExpression parentExpr,
-            Assembly methodAssembly, bool isPrivate, bool isInternal, bool isStatic)
+            CodeExpression targetExpression,
+            Type targetType,
+            string memberName,
+            CodeExpression parentExpr,
+            Assembly methodAssembly,
+            bool isPrivate,
+            bool isInternal,
+            bool isStatic
+        )
         {
             string message;
 
@@ -2312,13 +2531,21 @@ namespace System.Workflow.Activities.Rules
                 if (isStatic)
                 {
                     // We have "object.StaticMember"
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.StaticMember, memberName);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.StaticMember,
+                        memberName
+                    );
                     errorNumber = ErrorNumbers.Error_StaticMember;
                 }
                 else
                 {
                     // We have "TypeName.NonStaticMember"
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.NonStaticMember, memberName);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.NonStaticMember,
+                        memberName
+                    );
                     errorNumber = ErrorNumbers.Error_NonStaticMember;
                 }
 
@@ -2332,8 +2559,16 @@ namespace System.Workflow.Activities.Rules
             if (isPrivate && targetType != ThisType)
             {
                 // Can't access private members except on the subject type.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CannotAccessPrivateMember, memberName, RuleDecompiler.DecompileType(targetType));
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotAccessPrivateMember,
+                    memberName,
+                    RuleDecompiler.DecompileType(targetType)
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CannotResolveMember
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = parentExpr;
                 Errors.Add(error);
 
@@ -2343,8 +2578,16 @@ namespace System.Workflow.Activities.Rules
             if (isInternal && ThisType.Assembly != methodAssembly)
             {
                 // Can't access internal members except on the subject assembly.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.CannotAccessInternalMember, memberName, RuleDecompiler.DecompileType(targetType));
-                ValidationError error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.CannotAccessInternalMember,
+                    memberName,
+                    RuleDecompiler.DecompileType(targetType)
+                );
+                ValidationError error = new ValidationError(
+                    message,
+                    ErrorNumbers.Error_CannotResolveMember
+                );
                 error.UserData[RuleUserDataKeys.ErrorObject] = parentExpr;
                 Errors.Add(error);
 
@@ -2358,12 +2601,20 @@ namespace System.Workflow.Activities.Rules
 
         internal MemberInfo ResolveFieldOrProperty(Type targetType, string name)
         {
-            BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
+            BindingFlags bindingFlags =
+                BindingFlags.Public
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.FlattenHierarchy;
             if (AllowInternalMembers(targetType))
                 bindingFlags |= BindingFlags.NonPublic;
 
             // Look up a field or property of the given name.
-            MemberInfo[] results = targetType.GetMember(name, MemberTypes.Field | MemberTypes.Property, bindingFlags);
+            MemberInfo[] results = targetType.GetMember(
+                name,
+                MemberTypes.Field | MemberTypes.Property,
+                bindingFlags
+            );
 
             if (results != null)
             {
@@ -2380,7 +2631,10 @@ namespace System.Workflow.Activities.Rules
                     for (int i = 0; i < numResults; ++i)
                     {
                         MemberInfo member = results[i];
-                        System.Diagnostics.Debug.Assert(member.MemberType == MemberTypes.Property, "only properties can be overloaded");
+                        System.Diagnostics.Debug.Assert(
+                            member.MemberType == MemberTypes.Property,
+                            "only properties can be overloaded"
+                        );
 
                         PropertyInfo pi = (PropertyInfo)member;
                         ParameterInfo[] parms = pi.GetIndexParameters();
@@ -2405,9 +2659,12 @@ namespace System.Workflow.Activities.Rules
             return null;
         }
 
-        internal PropertyInfo ResolveProperty(Type targetType, string propertyName, BindingFlags bindingFlags)
+        internal PropertyInfo ResolveProperty(
+            Type targetType,
+            string propertyName,
+            BindingFlags bindingFlags
+        )
         {
-
             PropertyInfo pi = GetProperty(targetType, propertyName, bindingFlags);
             if (pi == null && targetType.IsInterface)
             {
@@ -2436,12 +2693,20 @@ namespace System.Workflow.Activities.Rules
             return pi;
         }
 
-        private static PropertyInfo GetProperty(Type targetType, string propertyName, BindingFlags bindingFlags)
+        private static PropertyInfo GetProperty(
+            Type targetType,
+            string propertyName,
+            BindingFlags bindingFlags
+        )
         {
             // Properties may be overloaded (in VB), so we have to ---- out those that we can support,
             // i.e., those that have no parameters.
 
-            MemberInfo[] members = targetType.GetMember(propertyName, MemberTypes.Property, bindingFlags);
+            MemberInfo[] members = targetType.GetMember(
+                propertyName,
+                MemberTypes.Property,
+                bindingFlags
+            );
             for (int m = 0; m < members.Length; ++m)
             {
                 PropertyInfo pi = (PropertyInfo)members[m];
@@ -2505,7 +2770,12 @@ namespace System.Workflow.Activities.Rules
                 this.type = paramInfo.ParameterType;
             }
 
-            internal bool Match(Argument argument, string methodName, int argPosition, out ValidationError error)
+            internal bool Match(
+                Argument argument,
+                string methodName,
+                int argPosition,
+                out ValidationError error
+            )
             {
                 string message;
 
@@ -2526,8 +2796,17 @@ namespace System.Workflow.Activities.Rules
                             break;
                     }
 
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.MethodDirectionMismatch, argPosition, methodName, dirString);
-                    error = new ValidationError(message, ErrorNumbers.Error_MethodDirectionMismatch);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MethodDirectionMismatch,
+                        argPosition,
+                        methodName,
+                        dirString
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_MethodDirectionMismatch
+                    );
 
                     return false;
                 }
@@ -2537,20 +2816,47 @@ namespace System.Workflow.Activities.Rules
                     // If the parameter is "ref" or "out", then the types must match exactly.
                     // If not, this method can't be a candidate.
 
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.MethodArgumentTypeMismatch, argPosition, methodName, RuleDecompiler.DecompileType(argument.type), RuleDecompiler.DecompileType(this.type));
-                    error = new ValidationError(message, ErrorNumbers.Error_MethodArgumentTypeMismatch);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MethodArgumentTypeMismatch,
+                        argPosition,
+                        methodName,
+                        RuleDecompiler.DecompileType(argument.type),
+                        RuleDecompiler.DecompileType(this.type)
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_MethodArgumentTypeMismatch
+                    );
 
                     return false;
                 }
 
                 // If the argument type is not assignable to the corresponding parameter type,
                 // this method can't be a candidate.
-                if (!RuleValidation.TypesAreAssignable(argument.type, this.type, argument.expression, out error))
+                if (
+                    !RuleValidation.TypesAreAssignable(
+                        argument.type,
+                        this.type,
+                        argument.expression,
+                        out error
+                    )
+                )
                 {
                     if (error == null)
                     {
-                        message = string.Format(CultureInfo.CurrentCulture, Messages.MethodArgumentTypeMismatch, argPosition, methodName, RuleDecompiler.DecompileType(argument.type), RuleDecompiler.DecompileType(this.type));
-                        error = new ValidationError(message, ErrorNumbers.Error_MethodArgumentTypeMismatch);
+                        message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.MethodArgumentTypeMismatch,
+                            argPosition,
+                            methodName,
+                            RuleDecompiler.DecompileType(argument.type),
+                            RuleDecompiler.DecompileType(this.type)
+                        );
+                        error = new ValidationError(
+                            message,
+                            ErrorNumbers.Error_MethodArgumentTypeMismatch
+                        );
                     }
                     return false;
                 }
@@ -2594,8 +2900,18 @@ namespace System.Workflow.Activities.Rules
                 // If this parameter can be converted to the other parameter, and not vice versa, then
                 // this is a better conversion.  (And in the reverse situation, it's a worse conversion.)
                 ValidationError dummy;
-                bool thisConvertsToOther = RuleValidation.TypesAreAssignable(this.type, otherParam.type, null, out dummy);
-                bool otherConvertsToThis = RuleValidation.TypesAreAssignable(otherParam.type, this.type, null, out dummy);
+                bool thisConvertsToOther = RuleValidation.TypesAreAssignable(
+                    this.type,
+                    otherParam.type,
+                    null,
+                    out dummy
+                );
+                bool otherConvertsToThis = RuleValidation.TypesAreAssignable(
+                    otherParam.type,
+                    this.type,
+                    null,
+                    out dummy
+                );
                 if (thisConvertsToOther && !otherConvertsToThis)
                     return better;
                 if (otherConvertsToThis && !thisConvertsToOther)
@@ -2679,8 +2995,8 @@ namespace System.Workflow.Activities.Rules
         {
             internal enum Form
             {
-                Normal,     // no "params" expansion
-                Expanded    // matched only after "params" expansion
+                Normal, // no "params" expansion
+                Expanded, // matched only after "params" expansion
             }
 
             internal MemberInfo Member;
@@ -2691,7 +3007,12 @@ namespace System.Workflow.Activities.Rules
             private static List<CandidateParameter> noSignature = new List<CandidateParameter>();
 
             // Constructor for candidate methods with parameters.
-            internal CandidateMember(MemberInfo member, ParameterInfo[] parameters, List<CandidateParameter> signature, Form form)
+            internal CandidateMember(
+                MemberInfo member,
+                ParameterInfo[] parameters,
+                List<CandidateParameter> signature,
+                Form form
+            )
             {
                 this.Member = member;
                 this.memberParameters = parameters;
@@ -2701,9 +3022,7 @@ namespace System.Workflow.Activities.Rules
 
             // Constructor for a candidate method that has no parameters.
             internal CandidateMember(MemberInfo member)
-                : this(member, noParameters, noSignature, Form.Normal)
-            {
-            }
+                : this(member, noParameters, noSignature, Form.Normal) { }
 
             internal bool IsExpanded
             {
@@ -2711,7 +3030,12 @@ namespace System.Workflow.Activities.Rules
             }
 
             [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-            internal int CompareMember(Type targetType, CandidateMember other, List<Argument> arguments, RuleValidation validator)
+            internal int CompareMember(
+                Type targetType,
+                CandidateMember other,
+                List<Argument> arguments,
+                RuleValidation validator
+            )
             {
                 int better = 1;
                 int worse = -1;
@@ -2766,12 +3090,19 @@ namespace System.Workflow.Activities.Rules
                         return worse;
 
                     // compare arguments, including the "this" argument
-                    CandidateParameter thisDeclaringParam = new CandidateParameter(thisExtension.AssumedDeclaringType);
-                    CandidateParameter otherDeclaringParam = new CandidateParameter(otherExtension.AssumedDeclaringType);
+                    CandidateParameter thisDeclaringParam = new CandidateParameter(
+                        thisExtension.AssumedDeclaringType
+                    );
+                    CandidateParameter otherDeclaringParam = new CandidateParameter(
+                        otherExtension.AssumedDeclaringType
+                    );
                     if (!thisDeclaringParam.Equals(otherDeclaringParam))
                     {
                         signaturesAreIdentical = false;
-                        int conversionResult = thisDeclaringParam.CompareConversion(otherDeclaringParam, new Argument(targetType));
+                        int conversionResult = thisDeclaringParam.CompareConversion(
+                            otherDeclaringParam,
+                            new Argument(targetType)
+                        );
                         if (conversionResult < 0)
                         {
                             // A conversion was found that was worse, so this candidate is not better.
@@ -2794,7 +3125,10 @@ namespace System.Workflow.Activities.Rules
                         if (!thisParam.Equals(otherParam))
                             signaturesAreIdentical = false;
 
-                        int conversionResult = thisParam.CompareConversion(otherParam, arguments[p]);
+                        int conversionResult = thisParam.CompareConversion(
+                            otherParam,
+                            arguments[p]
+                        );
                         if (conversionResult < 0)
                         {
                             // A conversion was found that was worse, so this candidate is not better.
@@ -2833,7 +3167,10 @@ namespace System.Workflow.Activities.Rules
                         if (!thisParam.Equals(otherParam))
                             signaturesAreIdentical = false;
 
-                        int conversionResult = thisParam.CompareConversion(otherParam, arguments[p]);
+                        int conversionResult = thisParam.CompareConversion(
+                            otherParam,
+                            arguments[p]
+                        );
                         if (conversionResult < 0)
                         {
                             // A conversion was found that was worse, so this candidate is not better.
@@ -2873,7 +3210,7 @@ namespace System.Workflow.Activities.Rules
                     }
                     else if (this.form == Form.Expanded && other.form == Form.Expanded)
                     {
-                        // Both candidates matched in their expanded forms.  
+                        // Both candidates matched in their expanded forms.
 
                         int thisParameterCount = this.memberParameters.Length;
                         int otherParameterCount = other.memberParameters.Length;
@@ -2941,7 +3278,14 @@ namespace System.Workflow.Activities.Rules
 
         private delegate ValidationError BuildArgCountMismatchError(string name, int numArguments);
 
-        private static void EvaluateCandidate(List<CandidateMember> candidates, MemberInfo candidateMember, ParameterInfo[] parameters, List<Argument> arguments, out ValidationError error, BuildArgCountMismatchError buildArgCountMismatchError)
+        private static void EvaluateCandidate(
+            List<CandidateMember> candidates,
+            MemberInfo candidateMember,
+            ParameterInfo[] parameters,
+            List<Argument> arguments,
+            out ValidationError error,
+            BuildArgCountMismatchError buildArgCountMismatchError
+        )
         {
             error = null;
 
@@ -2974,7 +3318,10 @@ namespace System.Workflow.Activities.Rules
                 ParameterInfo lastParam = parameters[parameterCount - 1];
                 if (lastParam.ParameterType.IsArray)
                 {
-                    object[] attrs = lastParam.GetCustomAttributes(typeof(ParamArrayAttribute), false);
+                    object[] attrs = lastParam.GetCustomAttributes(
+                        typeof(ParamArrayAttribute),
+                        false
+                    );
                     if (attrs != null && attrs.Length > 0)
                         fixedParameterCount -= 1;
                 }
@@ -3024,7 +3371,12 @@ namespace System.Workflow.Activities.Rules
                     {
                         // Zero arguments were passed as the params array.  The method is a candidate
                         // in its expanded form.
-                        candidateMethod = new CandidateMember(candidateMember, parameters, signature, CandidateMember.Form.Expanded);
+                        candidateMethod = new CandidateMember(
+                            candidateMember,
+                            parameters,
+                            signature,
+                            CandidateMember.Form.Expanded
+                        );
                     }
                     else if (numArguments == parameterCount)
                     {
@@ -3032,10 +3384,15 @@ namespace System.Workflow.Activities.Rules
                         CandidateParameter candidateParam = new CandidateParameter(lastParam);
                         if (candidateParam.Match(arguments[p], candidateName, p + 1, out error))
                         {
-                            // It was the same array type as the params array, so the candidate 
+                            // It was the same array type as the params array, so the candidate
                             // matched in its normal form.
                             signature.Add(candidateParam);
-                            candidateMethod = new CandidateMember(candidateMember, parameters, signature, CandidateMember.Form.Normal);
+                            candidateMethod = new CandidateMember(
+                                candidateMember,
+                                parameters,
+                                signature,
+                                CandidateMember.Form.Normal
+                            );
                         }
                     }
 
@@ -3043,11 +3400,15 @@ namespace System.Workflow.Activities.Rules
                     {
                         // One or more arguments were passed as the params array.  As long
                         // as they match the element type, this method is a candidate.
-                        CandidateParameter candidateParam = new CandidateParameter(lastParam.ParameterType.GetElementType());
+                        CandidateParameter candidateParam = new CandidateParameter(
+                            lastParam.ParameterType.GetElementType()
+                        );
 
                         for (; p < numArguments; ++p)
                         {
-                            if (!candidateParam.Match(arguments[p], candidateName, p + 1, out error))
+                            if (
+                                !candidateParam.Match(arguments[p], candidateName, p + 1, out error)
+                            )
                             {
                                 // Not all of the trailing arguments matched the params array's element type;
                                 // this cannot be a candidate.
@@ -3059,7 +3420,12 @@ namespace System.Workflow.Activities.Rules
                         }
 
                         // All the trailing arguments matched, so this is a candidate in the expanded form.
-                        candidateMethod = new CandidateMember(candidateMember, parameters, signature, CandidateMember.Form.Expanded);
+                        candidateMethod = new CandidateMember(
+                            candidateMember,
+                            parameters,
+                            signature,
+                            CandidateMember.Form.Expanded
+                        );
                     }
 
                     candidates.Add(candidateMethod);
@@ -3067,12 +3433,23 @@ namespace System.Workflow.Activities.Rules
                 else
                 {
                     // The last parameter wasn't "params".  This candidate matched in its normal form.
-                    candidates.Add(new CandidateMember(candidateMember, parameters, signature, CandidateMember.Form.Normal));
+                    candidates.Add(
+                        new CandidateMember(
+                            candidateMember,
+                            parameters,
+                            signature,
+                            CandidateMember.Form.Normal
+                        )
+                    );
                 }
             }
         }
 
-        private CandidateMember FindBestCandidate(Type targetType, List<CandidateMember> candidates, List<Argument> arguments)
+        private CandidateMember FindBestCandidate(
+            Type targetType,
+            List<CandidateMember> candidates,
+            List<Argument> arguments
+        )
         {
             int numCandidates = candidates.Count;
             Debug.Assert(numCandidates > 0, "expected at least one candidate");
@@ -3089,12 +3466,17 @@ namespace System.Workflow.Activities.Rules
                 CandidateMember newCandidate = candidates[i];
 
                 // Compare this new candidate one if the current "best" ones.  (If there
-                // is currently more than one best candidate, then so far its ambiguous, which 
+                // is currently more than one best candidate, then so far its ambiguous, which
                 // means all the best ones are equally good.  Thus if this new candidate
                 // is better than one, it's better than all.
                 CandidateMember bestCandidate = bestCandidates[0];
 
-                int comparison = newCandidate.CompareMember(targetType, bestCandidate, arguments, this);
+                int comparison = newCandidate.CompareMember(
+                    targetType,
+                    bestCandidate,
+                    arguments,
+                    this
+                );
                 if (comparison > 0)
                 {
                     // The new one was better than at least one of the best ones.  It
@@ -3120,7 +3502,11 @@ namespace System.Workflow.Activities.Rules
             return null;
         }
 
-        internal MethodInfo FindBestCandidate(Type targetType, List<MethodInfo> methods, params Type[] types)
+        internal MethodInfo FindBestCandidate(
+            Type targetType,
+            List<MethodInfo> methods,
+            params Type[] types
+        )
         {
             List<Argument> arguments = new List<Argument>();
             foreach (Type t in types)
@@ -3130,12 +3516,26 @@ namespace System.Workflow.Activities.Rules
             foreach (MethodInfo method in methods)
             {
                 ValidationError tempError = null;
-                EvaluateCandidate(candidates, method, method.GetParameters(), arguments, out tempError,
-                                  delegate(string name, int numArguments)
-                                  {
-                                      string message = string.Format(CultureInfo.CurrentCulture, Messages.MethodArgCountMismatch, name, numArguments);
-                                      return new ValidationError(message, ErrorNumbers.Error_MethodArgCountMismatch);
-                                  });
+                EvaluateCandidate(
+                    candidates,
+                    method,
+                    method.GetParameters(),
+                    arguments,
+                    out tempError,
+                    delegate(string name, int numArguments)
+                    {
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.MethodArgCountMismatch,
+                            name,
+                            numArguments
+                        );
+                        return new ValidationError(
+                            message,
+                            ErrorNumbers.Error_MethodArgCountMismatch
+                        );
+                    }
+                );
             }
             if (candidates.Count == 0)
             {
@@ -3146,7 +3546,12 @@ namespace System.Workflow.Activities.Rules
             return (result != null) ? (MethodInfo)result.Member : null;
         }
 
-        internal RuleConstructorExpressionInfo ResolveConstructor(Type targetType, BindingFlags constructorBindingFlags, List<CodeExpression> argumentExprs, out ValidationError error)
+        internal RuleConstructorExpressionInfo ResolveConstructor(
+            Type targetType,
+            BindingFlags constructorBindingFlags,
+            List<CodeExpression> argumentExprs,
+            out ValidationError error
+        )
         {
             string message;
 
@@ -3157,37 +3562,65 @@ namespace System.Workflow.Activities.Rules
             // Get the candidate types and all candidate methods contained in them.
             List<Type> candidateTypes = GetCandidateTargetTypes(targetType);
             // Get all methods by this name...
-            List<ConstructorInfo> constructors = GetConstructors(candidateTypes, constructorBindingFlags);
+            List<ConstructorInfo> constructors = GetConstructors(
+                candidateTypes,
+                constructorBindingFlags
+            );
             if (constructors.Count == 0)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownConstructor, RuleDecompiler.DecompileType(targetType));
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownConstructor,
+                    RuleDecompiler.DecompileType(targetType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_MethodNotExists);
                 return null;
             }
 
             // Cull the list of methods to those which match the supplied arguments.
-            List<CandidateMember> candidateConstructors = GetCandidateConstructors(constructors, arguments, out error);
+            List<CandidateMember> candidateConstructors = GetCandidateConstructors(
+                constructors,
+                arguments,
+                out error
+            );
 
             // If the list is null, then no candidates matched.
             if (candidateConstructors == null)
                 return null;
 
             // We found candidate methods in this type.
-            CandidateMember bestCandidate = FindBestCandidate(targetType, candidateConstructors, arguments);
+            CandidateMember bestCandidate = FindBestCandidate(
+                targetType,
+                candidateConstructors,
+                arguments
+            );
 
             if (bestCandidate == null)
             {
                 // It was ambiguous.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.AmbiguousConstructor, RuleDecompiler.DecompileType(targetType));
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.AmbiguousConstructor,
+                    RuleDecompiler.DecompileType(targetType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
                 return null;
             }
 
             // We found the best match.
-            return new RuleConstructorExpressionInfo((ConstructorInfo)bestCandidate.Member, bestCandidate.IsExpanded);
+            return new RuleConstructorExpressionInfo(
+                (ConstructorInfo)bestCandidate.Member,
+                bestCandidate.IsExpanded
+            );
         }
 
-        internal RuleMethodInvokeExpressionInfo ResolveMethod(Type targetType, string methodName, BindingFlags methodBindingFlags, List<CodeExpression> argumentExprs, out ValidationError error)
+        internal RuleMethodInvokeExpressionInfo ResolveMethod(
+            Type targetType,
+            string methodName,
+            BindingFlags methodBindingFlags,
+            List<CodeExpression> argumentExprs,
+            out ValidationError error
+        )
         {
             string message;
 
@@ -3198,28 +3631,50 @@ namespace System.Workflow.Activities.Rules
             // Get the candidate types and all candidate methods contained in them.
             List<Type> candidateTypes = GetCandidateTargetTypes(targetType);
             // Get all methods by this name...
-            List<MethodInfo> methods = GetNamedMethods(candidateTypes, methodName, methodBindingFlags);
+            List<MethodInfo> methods = GetNamedMethods(
+                candidateTypes,
+                methodName,
+                methodBindingFlags
+            );
             if (methods.Count == 0)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownMethod, methodName, RuleDecompiler.DecompileType(targetType));
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.UnknownMethod,
+                    methodName,
+                    RuleDecompiler.DecompileType(targetType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_MethodNotExists);
                 return null;
             }
 
             // Cull the list of methods to those which match the supplied arguments.
-            List<CandidateMember> candidateMethods = GetCandidateMethods(methodName, methods, arguments, out error);
+            List<CandidateMember> candidateMethods = GetCandidateMethods(
+                methodName,
+                methods,
+                arguments,
+                out error
+            );
 
             // If the list is null, then no candidates matched.
             if (candidateMethods == null)
                 return null;
 
             // We found candidate methods in this type.
-            CandidateMember bestCandidate = FindBestCandidate(targetType, candidateMethods, arguments);
+            CandidateMember bestCandidate = FindBestCandidate(
+                targetType,
+                candidateMethods,
+                arguments
+            );
 
             if (bestCandidate == null)
             {
                 // It was ambiguous.
-                message = string.Format(CultureInfo.CurrentCulture, Messages.AmbiguousMatch, methodName);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.AmbiguousMatch,
+                    methodName
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_CannotResolveMember);
 
                 return null;
@@ -3234,7 +3689,10 @@ namespace System.Workflow.Activities.Rules
             return new RuleMethodInvokeExpressionInfo(theMethod, bestCandidate.IsExpanded);
         }
 
-        internal static List<ConstructorInfo> GetConstructors(List<Type> targetTypes, BindingFlags constructorBindingFlags)
+        internal static List<ConstructorInfo> GetConstructors(
+            List<Type> targetTypes,
+            BindingFlags constructorBindingFlags
+        )
         {
             List<ConstructorInfo> methods = new List<ConstructorInfo>();
 
@@ -3261,7 +3719,11 @@ namespace System.Workflow.Activities.Rules
             return methods;
         }
 
-        private List<MethodInfo> GetNamedMethods(List<Type> targetTypes, string methodName, BindingFlags methodBindingFlags)
+        private List<MethodInfo> GetNamedMethods(
+            List<Type> targetTypes,
+            string methodName,
+            BindingFlags methodBindingFlags
+        )
         {
             List<MethodInfo> methods = new List<MethodInfo>();
             List<ExtensionMethodInfo> currentExtensionMethods = ExtensionMethods;
@@ -3270,7 +3732,11 @@ namespace System.Workflow.Activities.Rules
                 Type targetType = targetTypes[t];
 
                 // Go through all the methods on the target type that have matching names.
-                MemberInfo[] members = targetType.GetMember(methodName, MemberTypes.Method, methodBindingFlags);
+                MemberInfo[] members = targetType.GetMember(
+                    methodName,
+                    MemberTypes.Method,
+                    methodBindingFlags
+                );
                 for (int m = 0; m < members.Length; ++m)
                 {
                     MethodInfo method = (MethodInfo)members[m];
@@ -3283,8 +3749,15 @@ namespace System.Workflow.Activities.Rules
                 {
                     // does it have the right name and is the type compatible
                     ValidationError error;
-                    if ((extension.Name == methodName) &&
-                        TypesAreAssignable(targetType, extension.AssumedDeclaringType, null, out error))
+                    if (
+                        (extension.Name == methodName)
+                        && TypesAreAssignable(
+                            targetType,
+                            extension.AssumedDeclaringType,
+                            null,
+                            out error
+                        )
+                    )
                     {
                         // possible match
                         methods.Add(extension);
@@ -3297,7 +3770,8 @@ namespace System.Workflow.Activities.Rules
 
         private List<ExtensionMethodInfo> extensionMethods;
         private List<Assembly> seenAssemblies;
-        private const string ExtensionAttributeFullName = "System.Runtime.CompilerServices.ExtensionAttribute, " + AssemblyRef.SystemCore;
+        private const string ExtensionAttributeFullName =
+            "System.Runtime.CompilerServices.ExtensionAttribute, " + AssemblyRef.SystemCore;
         private Type extensionAttribute;
 
         private static Type defaultExtensionAttribute = GetDefaultExtensionAttribute();
@@ -3356,7 +3830,7 @@ namespace System.Workflow.Activities.Rules
 
         internal void DetermineExtensionMethods(Assembly assembly)
         {
-            // when this method is called outside of this class, we must have tried 
+            // when this method is called outside of this class, we must have tried
             // getting ExtensionMethods. So we must have tried setting extensionAttributeType.
 
             if (extensionAttribute != null)
@@ -3389,10 +3863,17 @@ namespace System.Workflow.Activities.Rules
             {
                 // static classes are defined as "abstract sealed"
                 // Note: VB doesn't support static classes, so the modules are only defined as "sealed"
-                if ((type != null) && (type.IsPublic || type.IsNestedPublic) && (type.IsSealed) && (IsMarkedExtension(type)))
+                if (
+                    (type != null)
+                    && (type.IsPublic || type.IsNestedPublic)
+                    && (type.IsSealed)
+                    && (IsMarkedExtension(type))
+                )
                 {
                     // looks like a class containing extension methods, let's find them
-                    MethodInfo[] staticMethods = type.GetMethods(BindingFlags.Static | BindingFlags.Public);
+                    MethodInfo[] staticMethods = type.GetMethods(
+                        BindingFlags.Static | BindingFlags.Public
+                    );
                     foreach (MethodInfo mi in staticMethods)
                     {
                         // skip generic methods
@@ -3445,7 +3926,12 @@ namespace System.Workflow.Activities.Rules
             return false;
         }
 
-        static List<CandidateMember> GetCandidateMethods(string methodName, List<MethodInfo> methods, List<Argument> arguments, out ValidationError error)
+        static List<CandidateMember> GetCandidateMethods(
+            string methodName,
+            List<MethodInfo> methods,
+            List<Argument> arguments,
+            out ValidationError error
+        )
         {
             List<CandidateMember> candidates = new List<CandidateMember>();
 
@@ -3455,12 +3941,26 @@ namespace System.Workflow.Activities.Rules
             foreach (MethodInfo method in methods)
             {
                 ValidationError tempError = null;
-                EvaluateCandidate(candidates, method, method.GetParameters(), arguments, out tempError,
-                                  delegate(string name, int numArguments)
-                                  {
-                                      string message = string.Format(CultureInfo.CurrentCulture, Messages.MethodArgCountMismatch, name, numArguments);
-                                      return new ValidationError(message, ErrorNumbers.Error_MethodArgCountMismatch);
-                                  });
+                EvaluateCandidate(
+                    candidates,
+                    method,
+                    method.GetParameters(),
+                    arguments,
+                    out tempError,
+                    delegate(string name, int numArguments)
+                    {
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.MethodArgCountMismatch,
+                            name,
+                            numArguments
+                        );
+                        return new ValidationError(
+                            message,
+                            ErrorNumbers.Error_MethodArgCountMismatch
+                        );
+                    }
+                );
 
                 error = tempError;
                 if (tempError != null)
@@ -3475,7 +3975,11 @@ namespace System.Workflow.Activities.Rules
                 {
                     // If multiple candidates generated errors, then use a more generic error that says
                     // we couldn't find a matching overload.
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.MethodOverloadNotFound, methodName);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MethodOverloadNotFound,
+                        methodName
+                    );
                     error = new ValidationError(message, ErrorNumbers.Error_MethodOverloadNotFound);
                 }
 
@@ -3490,7 +3994,11 @@ namespace System.Workflow.Activities.Rules
             return candidates;
         }
 
-        static List<CandidateMember> GetCandidateConstructors(List<ConstructorInfo> constructors, List<Argument> arguments, out ValidationError error)
+        static List<CandidateMember> GetCandidateConstructors(
+            List<ConstructorInfo> constructors,
+            List<Argument> arguments,
+            out ValidationError error
+        )
         {
             List<CandidateMember> candidates = new List<CandidateMember>();
 
@@ -3500,12 +4008,26 @@ namespace System.Workflow.Activities.Rules
             foreach (ConstructorInfo method in constructors)
             {
                 ValidationError tempError = null;
-                EvaluateCandidate(candidates, method, method.GetParameters(), arguments, out tempError,
-                                  delegate(string name, int numArguments)
-                                  {
-                                      string message = string.Format(CultureInfo.CurrentCulture, Messages.MethodArgCountMismatch, name, numArguments);
-                                      return new ValidationError(message, ErrorNumbers.Error_MethodArgCountMismatch);
-                                  });
+                EvaluateCandidate(
+                    candidates,
+                    method,
+                    method.GetParameters(),
+                    arguments,
+                    out tempError,
+                    delegate(string name, int numArguments)
+                    {
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.MethodArgCountMismatch,
+                            name,
+                            numArguments
+                        );
+                        return new ValidationError(
+                            message,
+                            ErrorNumbers.Error_MethodArgCountMismatch
+                        );
+                    }
+                );
 
                 error = tempError;
                 if (tempError != null)
@@ -3520,7 +4042,10 @@ namespace System.Workflow.Activities.Rules
                 {
                     // If multiple candidates generated errors, then use a more generic error that says
                     // we couldn't find a matching overload.
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.ConstructorOverloadNotFound);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.ConstructorOverloadNotFound
+                    );
                     error = new ValidationError(message, ErrorNumbers.Error_MethodOverloadNotFound);
                 }
 
@@ -3535,7 +4060,12 @@ namespace System.Workflow.Activities.Rules
             return candidates;
         }
 
-        internal RulePropertyExpressionInfo ResolveIndexerProperty(Type targetType, BindingFlags bindingFlags, List<CodeExpression> argumentExprs, out ValidationError error)
+        internal RulePropertyExpressionInfo ResolveIndexerProperty(
+            Type targetType,
+            BindingFlags bindingFlags,
+            List<CodeExpression> argumentExprs,
+            out ValidationError error
+        )
         {
             string message;
 
@@ -3544,7 +4074,11 @@ namespace System.Workflow.Activities.Rules
             if (numArgs < 1)
             {
                 // Must have at least one indexer!
-                message = string.Format(CultureInfo.CurrentCulture, Messages.IndexerCountMismatch, numArgs);
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.IndexerCountMismatch,
+                    numArgs
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_IndexerCountMismatch);
                 return null;
             }
@@ -3555,22 +4089,37 @@ namespace System.Workflow.Activities.Rules
 
             // Get the candidate types and all the candidate indexer properties contained in them.
             List<Type> candidateTypes = GetCandidateTargetTypes(targetType);
-            List<PropertyInfo> indexerProperties = GetIndexerProperties(candidateTypes, bindingFlags);
+            List<PropertyInfo> indexerProperties = GetIndexerProperties(
+                candidateTypes,
+                bindingFlags
+            );
             if (indexerProperties.Count == 0)
             {
-                message = string.Format(CultureInfo.CurrentCulture, Messages.IndexerNotFound, RuleDecompiler.DecompileType(targetType));
+                message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.IndexerNotFound,
+                    RuleDecompiler.DecompileType(targetType)
+                );
                 error = new ValidationError(message, ErrorNumbers.Error_IndexerNotFound);
                 return null;
             }
 
-            List<CandidateMember> candidateIndexers = GetCandidateIndexers(indexerProperties, arguments, out error);
+            List<CandidateMember> candidateIndexers = GetCandidateIndexers(
+                indexerProperties,
+                arguments,
+                out error
+            );
 
             // If the list is null, then no candidates matched.
             if (candidateIndexers == null)
                 return null;
 
             // We found candidate methods in this type.
-            CandidateMember bestCandidate = FindBestCandidate(targetType, candidateIndexers, arguments);
+            CandidateMember bestCandidate = FindBestCandidate(
+                targetType,
+                candidateIndexers,
+                arguments
+            );
 
             if (bestCandidate == null)
             {
@@ -3590,13 +4139,19 @@ namespace System.Workflow.Activities.Rules
             return new RulePropertyExpressionInfo(pi, pi.PropertyType, bestCandidate.IsExpanded);
         }
 
-        private static List<PropertyInfo> GetIndexerProperties(List<Type> candidateTypes, BindingFlags bindingFlags)
+        private static List<PropertyInfo> GetIndexerProperties(
+            List<Type> candidateTypes,
+            BindingFlags bindingFlags
+        )
         {
             List<PropertyInfo> indexerProperties = new List<PropertyInfo>();
 
             foreach (Type targetType in candidateTypes)
             {
-                object[] attrs = targetType.GetCustomAttributes(typeof(DefaultMemberAttribute), true);
+                object[] attrs = targetType.GetCustomAttributes(
+                    typeof(DefaultMemberAttribute),
+                    true
+                );
                 if (attrs == null || attrs.Length == 0)
                     continue;
 
@@ -3635,7 +4190,11 @@ namespace System.Workflow.Activities.Rules
             return indexerProperties;
         }
 
-        private static List<CandidateMember> GetCandidateIndexers(List<PropertyInfo> indexerProperties, List<Argument> arguments, out ValidationError error)
+        private static List<CandidateMember> GetCandidateIndexers(
+            List<PropertyInfo> indexerProperties,
+            List<Argument> arguments,
+            out ValidationError error
+        )
         {
             List<CandidateMember> candidates = new List<CandidateMember>();
 
@@ -3645,12 +4204,25 @@ namespace System.Workflow.Activities.Rules
             foreach (PropertyInfo indexerProp in indexerProperties)
             {
                 ValidationError tempError = null;
-                EvaluateCandidate(candidates, indexerProp, indexerProp.GetIndexParameters(), arguments, out tempError,
-                                  delegate(string propName, int numArguments)
-                                  {
-                                      string message = string.Format(CultureInfo.CurrentCulture, Messages.IndexerCountMismatch, numArguments);
-                                      return new ValidationError(message, ErrorNumbers.Error_IndexerCountMismatch);
-                                  });
+                EvaluateCandidate(
+                    candidates,
+                    indexerProp,
+                    indexerProp.GetIndexParameters(),
+                    arguments,
+                    out tempError,
+                    delegate(string propName, int numArguments)
+                    {
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.IndexerCountMismatch,
+                            numArguments
+                        );
+                        return new ValidationError(
+                            message,
+                            ErrorNumbers.Error_IndexerCountMismatch
+                        );
+                    }
+                );
 
                 error = tempError;
                 if (tempError != null)
@@ -3665,8 +4237,14 @@ namespace System.Workflow.Activities.Rules
                 {
                     // If multiple candidates generated errors, then use a more generic error that says
                     // we couldn't find a matching overload.
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.IndexerOverloadNotFound);
-                    error = new ValidationError(message, ErrorNumbers.Error_IndexerOverloadNotFound);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.IndexerOverloadNotFound
+                    );
+                    error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_IndexerOverloadNotFound
+                    );
                 }
 
                 return null;
@@ -3702,7 +4280,8 @@ namespace System.Workflow.Activities.Rules
                 if (resultType == null)
                 {
                     // check if we have a qualifiedname saved, and if we do, use it
-                    string qualifiedName = typeRef.UserData[RuleUserDataKeys.QualifiedName] as string;
+                    string qualifiedName =
+                        typeRef.UserData[RuleUserDataKeys.QualifiedName] as string;
                     resultType = ResolveType(qualifiedName);
                     if (resultType != null)
                     {
@@ -3710,8 +4289,15 @@ namespace System.Workflow.Activities.Rules
                         typeRefMap.Add(typeRef, resultType);
                         return resultType;
                     }
-                    message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownType, typeRef.BaseType);
-                    ValidationError error = new ValidationError(message, ErrorNumbers.Error_UnableToResolveType);
+                    message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.UnknownType,
+                        typeRef.BaseType
+                    );
+                    ValidationError error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_UnableToResolveType
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = typeRef;
                     Errors.Add(error);
                     return null;
@@ -3747,14 +4333,20 @@ namespace System.Workflow.Activities.Rules
                             sb.Append(RuleDecompiler.DecompileType(t));
                         }
                         sb.Append(">");
-                        message = string.Format(CultureInfo.CurrentCulture, Messages.UnknownGenericType, sb.ToString());
-                        ValidationError error = new ValidationError(message, ErrorNumbers.Error_UnableToResolveType);
+                        message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.UnknownGenericType,
+                            sb.ToString()
+                        );
+                        ValidationError error = new ValidationError(
+                            message,
+                            ErrorNumbers.Error_UnableToResolveType
+                        );
                         error.UserData[RuleUserDataKeys.ErrorObject] = typeRef;
                         Errors.Add(error);
                         return null;
                     }
                 }
-
 
                 if (resultType != null)
                 {
@@ -3763,7 +4355,10 @@ namespace System.Workflow.Activities.Rules
                     {
                         do
                         {
-                            resultType = (arrayTypeRef.ArrayRank == 1) ? resultType.MakeArrayType() : resultType.MakeArrayType(arrayTypeRef.ArrayRank);
+                            resultType =
+                                (arrayTypeRef.ArrayRank == 1)
+                                    ? resultType.MakeArrayType()
+                                    : resultType.MakeArrayType(arrayTypeRef.ArrayRank);
 
                             arrayTypeRef = arrayTypeRef.ArrayElementType;
                         } while (arrayTypeRef.ArrayRank > 0);
@@ -3775,7 +4370,8 @@ namespace System.Workflow.Activities.Rules
                     typeRefMap.Add(typeRef, resultType);
 
                     // at runtime we may not have the assembly loaded, so keep the fully qualified name around
-                    typeRef.UserData[RuleUserDataKeys.QualifiedName] = resultType.AssemblyQualifiedName;
+                    typeRef.UserData[RuleUserDataKeys.QualifiedName] =
+                        resultType.AssemblyQualifiedName;
                 }
             }
 
@@ -3789,11 +4385,10 @@ namespace System.Workflow.Activities.Rules
             {
                 resultType = typeProvider.GetType(qualifiedName, false);
 
-                // if the Typeprovider can't find it, use the framework, 
+                // if the Typeprovider can't find it, use the framework,
                 // since it should be an AssemblyQualifiedName
                 if (resultType == null)
                     resultType = Type.GetType(qualifiedName, false);
-
             }
             return resultType;
         }
@@ -3823,13 +4418,19 @@ namespace System.Workflow.Activities.Rules
 
         internal void IsAuthorized(Type type)
         {
-            Debug.Assert(!type.IsPointer && !type.IsByRef,
-            "IsAuthorized should not be called for a type that is a pointer or passed by reference : " + type.AssemblyQualifiedName);
+            Debug.Assert(
+                !type.IsPointer && !type.IsByRef,
+                "IsAuthorized should not be called for a type that is a pointer or passed by reference : "
+                    + type.AssemblyQualifiedName
+            );
             if (checkStaticType)
             {
                 if (authorizedTypes == null)
                 {
-                    ValidationError error = new ValidationError(Messages.Error_ConfigFileMissingOrInvalid, ErrorNumbers.Error_ConfigFileMissingOrInvalid);
+                    ValidationError error = new ValidationError(
+                        Messages.Error_ConfigFileMissingOrInvalid,
+                        ErrorNumbers.Error_ConfigFileMissingOrInvalid
+                    );
                     Errors.Add(error);
                 }
                 else
@@ -3857,9 +4458,11 @@ namespace System.Workflow.Activities.Rules
 
         void IsAuthorizedSimpleType(Type type)
         {
-            Debug.Assert((!type.IsGenericType || type.IsGenericTypeDefinition) && !type.HasElementType,
-                "IsAuthorizedSimpleType should not be called for a partially specialized generic type or a type that encompasses or refers to another type : " +
-                type.AssemblyQualifiedName);
+            Debug.Assert(
+                (!type.IsGenericType || type.IsGenericTypeDefinition) && !type.HasElementType,
+                "IsAuthorizedSimpleType should not be called for a partially specialized generic type or a type that encompasses or refers to another type : "
+                    + type.AssemblyQualifiedName
+            );
 
             string qualifiedName = type.AssemblyQualifiedName;
 
@@ -3870,15 +4473,28 @@ namespace System.Workflow.Activities.Rules
                 {
                     if (authorizedType.RegularExpression.IsMatch(qualifiedName))
                     {
-                        authorized = (String.Compare(bool.TrueString, authorizedType.Authorized, StringComparison.OrdinalIgnoreCase) == 0);
+                        authorized = (
+                            String.Compare(
+                                bool.TrueString,
+                                authorizedType.Authorized,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        );
                         if (!authorized)
                             break;
                     }
                 }
                 if (!authorized)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.Error_TypeNotAuthorized, type.FullName);
-                    ValidationError error = new ValidationError(message, ErrorNumbers.Error_TypeNotAuthorized);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Error_TypeNotAuthorized,
+                        type.FullName
+                    );
+                    ValidationError error = new ValidationError(
+                        message,
+                        ErrorNumbers.Error_TypeNotAuthorized
+                    );
                     error.UserData[RuleUserDataKeys.ErrorObject] = type;
                     Errors.Add(error);
                 }

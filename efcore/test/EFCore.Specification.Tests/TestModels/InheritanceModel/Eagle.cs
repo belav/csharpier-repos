@@ -20,7 +20,7 @@ public enum EagleGroup
     Fish,
     Booted,
     Snake,
-    Harpy
+    Harpy,
 }
 
 public class EagleQuery : BirdQuery

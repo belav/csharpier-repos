@@ -50,11 +50,10 @@ namespace System.IO.Hashing
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             private readonly uint Converge()
             {
-                return
-                    BitOperations.RotateLeft(_acc1, 1) +
-                    BitOperations.RotateLeft(_acc2, 7) +
-                    BitOperations.RotateLeft(_acc3, 12) +
-                    BitOperations.RotateLeft(_acc4, 18);
+                return BitOperations.RotateLeft(_acc1, 1)
+                    + BitOperations.RotateLeft(_acc2, 7)
+                    + BitOperations.RotateLeft(_acc3, 12)
+                    + BitOperations.RotateLeft(_acc4, 18);
             }
 
             private static uint ApplyRound(uint acc, ReadOnlySpan<byte> lane)

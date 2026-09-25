@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,16 +24,16 @@
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class ZTestResult
-	{
-		public double FirstSeriesMean { get; private set; }
-		public double FirstSeriesVariance { get; private set; }
-		public double ProbabilityZOneTail { get; private set; }
-		public double ProbabilityZTwoTail { get; private set; }
-		public double SecondSeriesMean { get; private set; }
-		public double SecondSeriesVariance { get; private set; }
-		public double ZCriticalValueOneTail { get; private set; }
-		public double ZCriticalValueTwoTail { get; private set; }
-		public double ZValue { get; private set; }
-	}
+    public class ZTestResult
+    {
+        public double FirstSeriesMean { get; private set; }
+        public double FirstSeriesVariance { get; private set; }
+        public double ProbabilityZOneTail { get; private set; }
+        public double ProbabilityZTwoTail { get; private set; }
+        public double SecondSeriesMean { get; private set; }
+        public double SecondSeriesVariance { get; private set; }
+        public double ZCriticalValueOneTail { get; private set; }
+        public double ZCriticalValueTwoTail { get; private set; }
+        public double ZValue { get; private set; }
+    }
 }

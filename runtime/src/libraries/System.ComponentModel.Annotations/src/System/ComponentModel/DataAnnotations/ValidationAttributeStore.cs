@@ -32,8 +32,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the type.  It cannot be null.</param>
         /// <returns>The collection of validation attributes.  It could be empty.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
-        internal IEnumerable<ValidationAttribute> GetTypeValidationAttributes(ValidationContext validationContext)
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
+        internal IEnumerable<ValidationAttribute> GetTypeValidationAttributes(
+            ValidationContext validationContext
+        )
         {
             EnsureValidationContext(validationContext);
             var item = GetTypeStoreItem(validationContext.ObjectType);
@@ -45,7 +49,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the type.  It cannot be null.</param>
         /// <returns>The display attribute instance, if present.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal DisplayAttribute? GetTypeDisplayAttribute(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -58,8 +64,12 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
         /// <returns>The collection of validation attributes.  It could be empty.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
-        internal IEnumerable<ValidationAttribute> GetPropertyValidationAttributes(ValidationContext validationContext)
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
+        internal IEnumerable<ValidationAttribute> GetPropertyValidationAttributes(
+            ValidationContext validationContext
+        )
         {
             EnsureValidationContext(validationContext);
             var typeItem = GetTypeStoreItem(validationContext.ObjectType);
@@ -72,7 +82,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
         /// <returns>The display attribute instance, if present.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal DisplayAttribute? GetPropertyDisplayAttribute(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -86,7 +98,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The context that describes the property.  It cannot be null.</param>
         /// <returns>The type of the specified property</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal Type GetPropertyType(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -102,7 +116,9 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="validationContext">The <see cref="ValidationContext" /> to check.</param>
         /// <returns><c>true</c> when the <paramref name="validationContext" /> represents a property, <c>false</c> otherwise.</returns>
-        [RequiresUnreferencedCode("The Type of validationContext.ObjectType cannot be statically discovered.")]
+        [RequiresUnreferencedCode(
+            "The Type of validationContext.ObjectType cannot be statically discovered."
+        )]
         internal bool IsPropertyContext(ValidationContext validationContext)
         {
             EnsureValidationContext(validationContext);
@@ -115,14 +131,19 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         /// <param name="type">The type whose store item is needed.  It cannot be null</param>
         /// <returns>The type store item.  It will not be null.</returns>
-        private TypeStoreItem GetTypeStoreItem([DynamicallyAccessedMembers(TypeStoreItem.DynamicallyAccessedTypes)] Type type)
+        private TypeStoreItem GetTypeStoreItem(
+            [DynamicallyAccessedMembers(TypeStoreItem.DynamicallyAccessedTypes)] Type type
+        )
         {
             Debug.Assert(type != null);
 
             return _typeStoreItems.GetOrAdd(type, AddTypeStoreItem);
 
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2067:UnrecognizedReflectionPattern",
-                Justification = "The parameter in the parent method has already been marked DynamicallyAccessedMemberTypes.All.")]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2067:UnrecognizedReflectionPattern",
+                Justification = "The parameter in the parent method has already been marked DynamicallyAccessedMemberTypes.All."
+            )]
             static TypeStoreItem AddTypeStoreItem(Type type)
             {
                 AttributeCollection attributes = TypeDescriptor.GetAttributes(type);
@@ -140,7 +161,8 @@ namespace System.ComponentModel.DataAnnotations
         }
 
         internal static bool IsPublic(PropertyInfo p) =>
-            (p.GetMethod != null && p.GetMethod.IsPublic) || (p.SetMethod != null && p.SetMethod.IsPublic);
+            (p.GetMethod != null && p.GetMethod.IsPublic)
+            || (p.SetMethod != null && p.SetMethod.IsPublic);
 
         /// <summary>
         ///     Private abstract class for all store items
@@ -163,33 +185,47 @@ namespace System.ComponentModel.DataAnnotations
         /// </summary>
         private sealed class TypeStoreItem : StoreItem
         {
-            internal const DynamicallyAccessedMemberTypes DynamicallyAccessedTypes = DynamicallyAccessedMemberTypes.All;
+            internal const DynamicallyAccessedMemberTypes DynamicallyAccessedTypes =
+                DynamicallyAccessedMemberTypes.All;
 
             private readonly object _syncRoot = new object();
+
             [DynamicallyAccessedMembers(DynamicallyAccessedTypes)]
             private readonly Type _type;
             private Dictionary<string, PropertyStoreItem>? _propertyStoreItems;
 
-            internal TypeStoreItem([DynamicallyAccessedMembers(DynamicallyAccessedTypes)] Type type, AttributeCollection attributes)
+            internal TypeStoreItem(
+                [DynamicallyAccessedMembers(DynamicallyAccessedTypes)] Type type,
+                AttributeCollection attributes
+            )
                 : base(attributes)
             {
                 _type = type;
             }
 
-            [RequiresUnreferencedCode("The Types of _type's properties cannot be statically discovered.")]
+            [RequiresUnreferencedCode(
+                "The Types of _type's properties cannot be statically discovered."
+            )]
             internal PropertyStoreItem GetPropertyStoreItem(string propertyName)
             {
                 if (!TryGetPropertyStoreItem(propertyName, out PropertyStoreItem? item))
                 {
-                    throw new ArgumentException(SR.Format(SR.AttributeStore_Unknown_Property, _type.Name, propertyName),
-                                                nameof(propertyName));
+                    throw new ArgumentException(
+                        SR.Format(SR.AttributeStore_Unknown_Property, _type.Name, propertyName),
+                        nameof(propertyName)
+                    );
                 }
 
                 return item;
             }
 
-            [RequiresUnreferencedCode("The Types of _type's properties cannot be statically discovered.")]
-            internal bool TryGetPropertyStoreItem(string propertyName, [NotNullWhen(true)] out PropertyStoreItem? item)
+            [RequiresUnreferencedCode(
+                "The Types of _type's properties cannot be statically discovered."
+            )]
+            internal bool TryGetPropertyStoreItem(
+                string propertyName,
+                [NotNullWhen(true)] out PropertyStoreItem? item
+            )
             {
                 if (string.IsNullOrEmpty(propertyName))
                 {
@@ -207,7 +243,9 @@ namespace System.ComponentModel.DataAnnotations
                 return _propertyStoreItems.TryGetValue(propertyName, out item);
             }
 
-            [RequiresUnreferencedCode("The Types of _type's properties cannot be statically discovered.")]
+            [RequiresUnreferencedCode(
+                "The Types of _type's properties cannot be statically discovered."
+            )]
             private Dictionary<string, PropertyStoreItem> CreatePropertyStoreItems()
             {
                 var propertyStoreItems = new Dictionary<string, PropertyStoreItem>();
@@ -215,7 +253,10 @@ namespace System.ComponentModel.DataAnnotations
                 var properties = TypeDescriptor.GetProperties(_type);
                 foreach (PropertyDescriptor property in properties)
                 {
-                    var item = new PropertyStoreItem(property.PropertyType, GetExplicitAttributes(property));
+                    var item = new PropertyStoreItem(
+                        property.PropertyType,
+                        GetExplicitAttributes(property)
+                    );
                     propertyStoreItems[property.Name] = item;
                 }
 
@@ -231,17 +272,25 @@ namespace System.ComponentModel.DataAnnotations
             /// </remarks>
             /// <param name="propertyDescriptor">The property descriptor whose attributes are needed.</param>
             /// <returns>A new <see cref="AttributeCollection"/> stripped of any attributes from the property's type.</returns>
-            [RequiresUnreferencedCode("The Type of propertyDescriptor.PropertyType cannot be statically discovered.")]
-            private static AttributeCollection GetExplicitAttributes(PropertyDescriptor propertyDescriptor)
+            [RequiresUnreferencedCode(
+                "The Type of propertyDescriptor.PropertyType cannot be statically discovered."
+            )]
+            private static AttributeCollection GetExplicitAttributes(
+                PropertyDescriptor propertyDescriptor
+            )
             {
                 AttributeCollection propertyDescriptorAttributes = propertyDescriptor.Attributes;
-                List<Attribute> attributes = new List<Attribute>(propertyDescriptorAttributes.Count);
+                List<Attribute> attributes = new List<Attribute>(
+                    propertyDescriptorAttributes.Count
+                );
                 foreach (Attribute attribute in propertyDescriptorAttributes)
                 {
                     attributes.Add(attribute);
                 }
 
-                AttributeCollection typeAttributes = TypeDescriptor.GetAttributes(propertyDescriptor.PropertyType);
+                AttributeCollection typeAttributes = TypeDescriptor.GetAttributes(
+                    propertyDescriptor.PropertyType
+                );
                 bool removedAttribute = false;
                 foreach (Attribute attr in typeAttributes)
                 {
@@ -256,7 +305,9 @@ namespace System.ComponentModel.DataAnnotations
                         }
                     }
                 }
-                return removedAttribute ? new AttributeCollection(attributes.ToArray()) : propertyDescriptorAttributes;
+                return removedAttribute
+                    ? new AttributeCollection(attributes.ToArray())
+                    : propertyDescriptorAttributes;
             }
         }
 

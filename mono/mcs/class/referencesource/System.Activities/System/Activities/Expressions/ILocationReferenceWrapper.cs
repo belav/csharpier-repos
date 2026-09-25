@@ -10,9 +10,6 @@ namespace System.Activities.Expressions
 
     internal interface ILocationReferenceWrapper
     {
-        LocationReference LocationReference
-        {
-            get;
-        }
+        LocationReference LocationReference { get; }
     }
 }

@@ -25,7 +25,11 @@ namespace ComInterfaceGenerator.Tests
         [ComImport]
         [Guid(_guid)]
         [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-        [SuppressMessage("Interoperability", "SYSLIB1096:Convert to 'GeneratedComInterface'", Justification = "This interface is for us to test interop between GeneratedComInterface and ComImport.")]
+        [SuppressMessage(
+            "Interoperability",
+            "SYSLIB1096:Convert to 'GeneratedComInterface'",
+            Justification = "This interface is for us to test interop between GeneratedComInterface and ComImport."
+        )]
         internal interface IGetAndSetIntComImport
         {
             int GetInt();
@@ -38,42 +42,53 @@ namespace ComInterfaceGenerator.Tests
         [Fact]
         public void CallComImportInterfaceMethodsOnGeneratedComObject()
         {
-            using var _ = RemoteExecutor.Invoke(() =>
-            {
-                IGetAndSetInt obj = NewNativeObject();
-#pragma warning disable SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
-                IGetAndSetIntComImport runtimeObj = (IGetAndSetIntComImport)obj;
-#pragma warning restore SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
-                obj.SetInt(1234);
-                Assert.Equal(1234, runtimeObj.GetInt());
-                runtimeObj.SetInt(4321);
-                Assert.Equal(4321, obj.GetInt());
-
-            }, new RemoteInvokeOptions
-            {
-                RuntimeConfigurationOptions =
+            using var _ = RemoteExecutor.Invoke(
+                () =>
                 {
-                    { "System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop", true }
+                    IGetAndSetInt obj = NewNativeObject();
+#pragma warning disable SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
+                    IGetAndSetIntComImport runtimeObj = (IGetAndSetIntComImport)obj;
+#pragma warning restore SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
+                    obj.SetInt(1234);
+                    Assert.Equal(1234, runtimeObj.GetInt());
+                    runtimeObj.SetInt(4321);
+                    Assert.Equal(4321, obj.GetInt());
+                },
+                new RemoteInvokeOptions
+                {
+                    RuntimeConfigurationOptions =
+                    {
+                        {
+                            "System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop",
+                            true
+                        },
+                    },
                 }
-            });
+            );
         }
 
         [Fact]
         public void CallComImportInterfaceMethodsOnGeneratedComObject_FeatureFalse_Fails()
         {
-            using var _ = RemoteExecutor.Invoke(() =>
-            {
-                IGetAndSetInt obj = NewNativeObject();
-#pragma warning disable SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
-                Assert.Throws<InvalidCastException>(() => (IGetAndSetIntComImport)obj);
-#pragma warning restore SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
-            }, new RemoteInvokeOptions
-            {
-                RuntimeConfigurationOptions =
+            using var _ = RemoteExecutor.Invoke(
+                () =>
                 {
-                    { "System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop", false }
+                    IGetAndSetInt obj = NewNativeObject();
+#pragma warning disable SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
+                    Assert.Throws<InvalidCastException>(() => (IGetAndSetIntComImport)obj);
+#pragma warning restore SYSLIB1099 // Casting between a 'ComImport' type and a source-generated COM type is not supported
+                },
+                new RemoteInvokeOptions
+                {
+                    RuntimeConfigurationOptions =
+                    {
+                        {
+                            "System.Runtime.InteropServices.Marshalling.EnableGeneratedComInterfaceComImportInterop",
+                            false
+                        },
+                    },
                 }
-            });
+            );
         }
     }
 }

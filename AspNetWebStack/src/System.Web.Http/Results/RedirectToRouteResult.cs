@@ -29,11 +29,13 @@ namespace System.Web.Http.Results
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <param name="urlFactory">The factory to use to generate the route URL.</param>
         /// <param name="request">The request message which led to this result.</param>
-        public RedirectToRouteResult(string routeName, IDictionary<string, object> routeValues, UrlHelper urlFactory,
-            HttpRequestMessage request)
-            : this(routeName, routeValues, new DirectDependencyProvider(urlFactory, request))
-        {
-        }
+        public RedirectToRouteResult(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            UrlHelper urlFactory,
+            HttpRequestMessage request
+        )
+            : this(routeName, routeValues, new DirectDependencyProvider(urlFactory, request)) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RedirectToRouteResult"/> class with the values provided.
@@ -41,14 +43,18 @@ namespace System.Web.Http.Results
         /// <param name="routeName">The name of the route to use for generating the URL.</param>
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
-        public RedirectToRouteResult(string routeName, IDictionary<string, object> routeValues,
-            ApiController controller)
-            : this(routeName, routeValues, new ApiControllerDependencyProvider(controller))
-        {
-        }
+        public RedirectToRouteResult(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            ApiController controller
+        )
+            : this(routeName, routeValues, new ApiControllerDependencyProvider(controller)) { }
 
-        private RedirectToRouteResult(string routeName, IDictionary<string, object> routeValues,
-            IDependencyProvider dependencies)
+        private RedirectToRouteResult(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            IDependencyProvider dependencies
+        )
         {
             if (routeName == null)
             {
@@ -102,7 +108,9 @@ namespace System.Web.Http.Results
 
                 if (link == null)
                 {
-                    throw new InvalidOperationException(SRResources.UrlHelper_LinkMustNotReturnNull);
+                    throw new InvalidOperationException(
+                        SRResources.UrlHelper_LinkMustNotReturnNull
+                    );
                 }
 
                 response.Headers.Location = new Uri(link);
@@ -204,7 +212,9 @@ namespace System.Web.Http.Results
 
                     if (request == null)
                     {
-                        throw new InvalidOperationException(SRResources.ApiController_RequestMustNotBeNull);
+                        throw new InvalidOperationException(
+                            SRResources.ApiController_RequestMustNotBeNull
+                        );
                     }
 
                     UrlHelper urlFactory = _controller.Url ?? new UrlHelper(request);

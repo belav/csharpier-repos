@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.EditorFeatures.Lightup;
 
 internal static class LightupHelpers
 {
-    private static readonly ConcurrentDictionary<Type, ConcurrentDictionary<Type, bool>> s_supportedObjectWrappers = new();
+    private static readonly ConcurrentDictionary<
+        Type,
+        ConcurrentDictionary<Type, bool>
+    > s_supportedObjectWrappers = new();
 
     internal static bool CanWrapObject(object obj, Type underlyingType)
     {
@@ -27,7 +30,10 @@ internal static class LightupHelpers
             return false;
         }
 
-        var wrappedObject = s_supportedObjectWrappers.GetOrAdd(underlyingType, static _ => new ConcurrentDictionary<Type, bool>());
+        var wrappedObject = s_supportedObjectWrappers.GetOrAdd(
+            underlyingType,
+            static _ => new ConcurrentDictionary<Type, bool>()
+        );
 
         // Avoid creating a delegate and capture class
         if (!wrappedObject.TryGetValue(obj.GetType(), out var canCast))
@@ -54,7 +60,11 @@ internal static class LightupHelpers
     /// <param name="propertyName">The name of the property to access.</param>
     /// <param name="defaultValue">The value to return if the property is not available at runtime.</param>
     /// <returns>An accessor method to access the specified runtime property.</returns>
-    public static Func<T, TResult> CreatePropertyAccessor<T, TResult>(Type? type, string propertyName, TResult defaultValue)
+    public static Func<T, TResult> CreatePropertyAccessor<T, TResult>(
+        Type? type,
+        string propertyName,
+        TResult defaultValue
+    )
     {
         if (propertyName is null)
         {
@@ -68,7 +78,9 @@ internal static class LightupHelpers
 
         if (!typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Type '{type}' is not assignable to type '{typeof(T)}'");
+            throw new InvalidOperationException(
+                $"Type '{type}' is not assignable to type '{typeof(T)}'"
+            );
         }
 
         var property = type.GetTypeInfo().GetDeclaredProperty(propertyName);
@@ -79,19 +91,20 @@ internal static class LightupHelpers
 
         if (!typeof(TResult).GetTypeInfo().IsAssignableFrom(property.PropertyType.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Property '{property}' produces a value of type '{property.PropertyType}', which is not assignable to type '{typeof(TResult)}'");
+            throw new InvalidOperationException(
+                $"Property '{property}' produces a value of type '{property.PropertyType}', which is not assignable to type '{typeof(TResult)}'"
+            );
         }
 
         var parameter = Expression.Parameter(typeof(T), GenerateParameterName(typeof(T)));
-        var instance =
-            type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
+        var instance = type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
             ? (Expression)parameter
             : Expression.Convert(parameter, type);
 
-        var expression =
-            Expression.Lambda<Func<T, TResult>>(
-                Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(TResult)),
-                parameter);
+        var expression = Expression.Lambda<Func<T, TResult>>(
+            Expression.Convert(Expression.Call(instance, property.GetMethod), typeof(TResult)),
+            parameter
+        );
         return expression.Compile();
     }
 
@@ -120,7 +133,9 @@ internal static class LightupHelpers
 
         if (!typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Type '{type}' is not assignable to type '{typeof(T)}'");
+            throw new InvalidOperationException(
+                $"Type '{type}' is not assignable to type '{typeof(T)}'"
+            );
         }
 
         var method = type.GetTypeInfo().GetDeclaredMethod(methodName);
@@ -131,19 +146,17 @@ internal static class LightupHelpers
 
         if (method.ReturnType != typeof(void))
         {
-            throw new InvalidOperationException($"Method '{method}' produces an unexpected value of type '{method.ReturnType}'");
+            throw new InvalidOperationException(
+                $"Method '{method}' produces an unexpected value of type '{method.ReturnType}'"
+            );
         }
 
         var parameter = Expression.Parameter(typeof(T), GenerateParameterName(typeof(T)));
-        var instance =
-            type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
+        var instance = type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
             ? (Expression)parameter
             : Expression.Convert(parameter, type);
 
-        var expression =
-            Expression.Lambda<Action<T>>(
-                Expression.Call(instance, method),
-                parameter);
+        var expression = Expression.Lambda<Action<T>>(Expression.Call(instance, method), parameter);
         return expression.Compile();
     }
 
@@ -162,7 +175,11 @@ internal static class LightupHelpers
     /// <param name="argType">The runtime time of the parameter to the method. This value is allowed to be
     /// <see langword="null"/> if the method does not exist at runtime.</param>
     /// <returns>An accessor method to access the specified runtime method.</returns>
-    public static Action<T, TArg> CreateActionAccessor<T, TArg>(Type? type, string methodName, Type? argType)
+    public static Action<T, TArg> CreateActionAccessor<T, TArg>(
+        Type? type,
+        string methodName,
+        Type? argType
+    )
     {
         if (methodName is null)
         {
@@ -176,7 +193,9 @@ internal static class LightupHelpers
 
         if (!typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Type '{type}' is not assignable to type '{typeof(T)}'");
+            throw new InvalidOperationException(
+                $"Type '{type}' is not assignable to type '{typeof(T)}'"
+            );
         }
 
         var method = type.GetTypeInfo().GetDeclaredMethod(methodName);
@@ -188,35 +207,40 @@ internal static class LightupHelpers
         var parameters = method.GetParameters();
         if (argType != parameters[0].ParameterType)
         {
-            throw new ArgumentException($"Type '{argType}' was expected to match parameter type '{parameters[0].ParameterType}'", nameof(argType));
+            throw new ArgumentException(
+                $"Type '{argType}' was expected to match parameter type '{parameters[0].ParameterType}'",
+                nameof(argType)
+            );
         }
 
         if (!typeof(TArg).GetTypeInfo().IsAssignableFrom(argType.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Type '{argType}' is not assignable to type '{typeof(TArg)}'");
+            throw new InvalidOperationException(
+                $"Type '{argType}' is not assignable to type '{typeof(TArg)}'"
+            );
         }
 
         if (method.ReturnType != typeof(void))
         {
-            throw new InvalidOperationException($"Method '{method}' produces an unexpected value of type '{method.ReturnType}'");
+            throw new InvalidOperationException(
+                $"Method '{method}' produces an unexpected value of type '{method.ReturnType}'"
+            );
         }
 
         var parameter = Expression.Parameter(typeof(T), GenerateParameterName(typeof(T)));
         var argument = Expression.Parameter(typeof(TArg), parameters[0].Name);
-        var instance =
-            type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
+        var instance = type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
             ? (Expression)parameter
             : Expression.Convert(parameter, type);
-        var convertedArgument =
-            argType.GetTypeInfo().IsAssignableFrom(typeof(TArg).GetTypeInfo())
+        var convertedArgument = argType.GetTypeInfo().IsAssignableFrom(typeof(TArg).GetTypeInfo())
             ? (Expression)argument
             : Expression.Convert(argument, argType);
 
-        var expression =
-            Expression.Lambda<Action<T, TArg>>(
-                Expression.Call(instance, method, convertedArgument),
-                parameter,
-                argument);
+        var expression = Expression.Lambda<Action<T, TArg>>(
+            Expression.Call(instance, method, convertedArgument),
+            parameter,
+            argument
+        );
         return expression.Compile();
     }
 
@@ -235,7 +259,11 @@ internal static class LightupHelpers
     /// <param name="methodName">The name of the method to access.</param>
     /// <param name="defaultValue">The value to return if the method is not available at runtime.</param>
     /// <returns>An accessor method to access the specified runtime property.</returns>
-    public static Func<T, TResult> CreateFunctionAccessor<T, TResult>(Type? type, string methodName, TResult defaultValue)
+    public static Func<T, TResult> CreateFunctionAccessor<T, TResult>(
+        Type? type,
+        string methodName,
+        TResult defaultValue
+    )
     {
         if (methodName is null)
         {
@@ -249,7 +277,9 @@ internal static class LightupHelpers
 
         if (!typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Type '{type}' is not assignable to type '{typeof(T)}'");
+            throw new InvalidOperationException(
+                $"Type '{type}' is not assignable to type '{typeof(T)}'"
+            );
         }
 
         var method = type.GetTypeInfo().GetDeclaredMethod(methodName);
@@ -260,19 +290,20 @@ internal static class LightupHelpers
 
         if (!typeof(TResult).GetTypeInfo().IsAssignableFrom(method.ReturnType.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Method '{method}' produces a value of type '{method.ReturnType}', which is not assignable to type '{typeof(TResult)}'");
+            throw new InvalidOperationException(
+                $"Method '{method}' produces a value of type '{method.ReturnType}', which is not assignable to type '{typeof(TResult)}'"
+            );
         }
 
         var parameter = Expression.Parameter(typeof(T), GenerateParameterName(typeof(T)));
-        var instance =
-            type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
+        var instance = type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
             ? (Expression)parameter
             : Expression.Convert(parameter, type);
 
-        var expression =
-            Expression.Lambda<Func<T, TResult>>(
-                Expression.Convert(Expression.Call(instance, method), typeof(TResult)),
-                parameter);
+        var expression = Expression.Lambda<Func<T, TResult>>(
+            Expression.Convert(Expression.Call(instance, method), typeof(TResult)),
+            parameter
+        );
         return expression.Compile();
     }
 
@@ -294,7 +325,12 @@ internal static class LightupHelpers
     /// <param name="methodName">The name of the method to access.</param>
     /// <param name="defaultValue">The value to return if the method is not available at runtime.</param>
     /// <returns>An accessor method to access the specified runtime property.</returns>
-    public static Func<T, TArg, TResult> CreateFunctionAccessor<T, TArg, TResult>(Type? type, string methodName, Type? argType, TResult defaultValue)
+    public static Func<T, TArg, TResult> CreateFunctionAccessor<T, TArg, TResult>(
+        Type? type,
+        string methodName,
+        Type? argType,
+        TResult defaultValue
+    )
     {
         if (methodName is null)
         {
@@ -308,7 +344,9 @@ internal static class LightupHelpers
 
         if (!typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Type '{type}' is not assignable to type '{typeof(T)}'");
+            throw new InvalidOperationException(
+                $"Type '{type}' is not assignable to type '{typeof(T)}'"
+            );
         }
 
         var method = type.GetTypeInfo().GetDeclaredMethod(methodName);
@@ -320,29 +358,35 @@ internal static class LightupHelpers
         var parameters = method.GetParameters();
         if (argType != parameters[0].ParameterType)
         {
-            throw new ArgumentException($"Type '{argType}' was expected to match parameter type '{parameters[0].ParameterType}'", nameof(argType));
+            throw new ArgumentException(
+                $"Type '{argType}' was expected to match parameter type '{parameters[0].ParameterType}'",
+                nameof(argType)
+            );
         }
 
         if (!typeof(TResult).GetTypeInfo().IsAssignableFrom(method.ReturnType.GetTypeInfo()))
         {
-            throw new InvalidOperationException($"Method '{method}' produces a value of type '{method.ReturnType}', which is not assignable to type '{typeof(TResult)}'");
+            throw new InvalidOperationException(
+                $"Method '{method}' produces a value of type '{method.ReturnType}', which is not assignable to type '{typeof(TResult)}'"
+            );
         }
 
         var parameter = Expression.Parameter(typeof(T), GenerateParameterName(typeof(T)));
         var argument = Expression.Parameter(typeof(TArg), parameters[0].Name);
-        var instance =
-            type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
+        var instance = type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo())
             ? (Expression)parameter
             : Expression.Convert(parameter, type);
-        var convertedArgument =
-            argType.GetTypeInfo().IsAssignableFrom(typeof(TArg).GetTypeInfo())
+        var convertedArgument = argType.GetTypeInfo().IsAssignableFrom(typeof(TArg).GetTypeInfo())
             ? (Expression)argument
             : Expression.Convert(argument, argType);
 
-        var expression =
-            Expression.Lambda<Func<T, TArg, TResult>>(
-                Expression.Convert(Expression.Call(instance, method, convertedArgument), typeof(TResult)),
-                parameter);
+        var expression = Expression.Lambda<Func<T, TArg, TResult>>(
+            Expression.Convert(
+                Expression.Call(instance, method, convertedArgument),
+                typeof(TResult)
+            ),
+            parameter
+        );
         return expression.Compile();
     }
 
@@ -416,7 +460,9 @@ internal static class LightupHelpers
         return FallbackFunction;
     }
 
-    private static Func<T, TArg, TResult> CreateFallbackFunction<T, TArg, TResult>(TResult defaultValue)
+    private static Func<T, TArg, TResult> CreateFallbackFunction<T, TArg, TResult>(
+        TResult defaultValue
+    )
     {
         TResult FallbackFunction(T instance, TArg arg)
         {

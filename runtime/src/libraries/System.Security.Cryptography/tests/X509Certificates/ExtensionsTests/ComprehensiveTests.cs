@@ -37,18 +37,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     Assert.False(aia.Critical);
 
                     byte[] expectedDer = (
-                        "304c304a06082b06010505073002863e687474703a2f2f7777772e6d" +
-                        "6963726f736f66742e636f6d2f706b692f63657274732f4d6963436f" +
-                        "645369675043415f30382d33312d323031302e637274").HexToByteArray();
+                        "304c304a06082b06010505073002863e687474703a2f2f7777772e6d"
+                        + "6963726f736f66742e636f6d2f706b692f63657274732f4d6963436f"
+                        + "645369675043415f30382d33312d323031302e637274"
+                    ).HexToByteArray();
 
                     Assert.Equal(expectedDer, aia.RawData);
 
-                    X509AuthorityInformationAccessExtension rich = Assert.IsType<X509AuthorityInformationAccessExtension>(aia);
+                    X509AuthorityInformationAccessExtension rich =
+                        Assert.IsType<X509AuthorityInformationAccessExtension>(aia);
                     Assert.Empty(rich.EnumerateOcspUris());
 
                     Assert.Equal(
                         new[] { "http://www.microsoft.com/pki/certs/MicCodSigPCA_08-31-2010.crt" },
-                        rich.EnumerateCAIssuersUris());
+                        rich.EnumerateCAIssuersUris()
+                    );
                 }
 
                 {
@@ -57,11 +60,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     Assert.Equal("2.5.29.14", skid.Oid.Value);
                     Assert.False(skid.Critical);
 
-                    byte[] expected = "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray();
+                    byte[] expected =
+                        "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray();
                     Assert.Equal(expected, skid.RawData);
 
-                    X509SubjectKeyIdentifierExtension rich = Assert.IsType<X509SubjectKeyIdentifierExtension>(skid);
-                    Assert.Equal("5971A65A334DDA980780FF841EBE87F9723241F2", rich.SubjectKeyIdentifier);
+                    X509SubjectKeyIdentifierExtension rich =
+                        Assert.IsType<X509SubjectKeyIdentifierExtension>(skid);
+                    Assert.Equal(
+                        "5971A65A334DDA980780FF841EBE87F9723241F2",
+                        rich.SubjectKeyIdentifier
+                    );
                 }
 
                 {
@@ -71,15 +79,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     Assert.False(sans.Critical);
 
                     byte[] expected = (
-                        "3048a4463044310d300b060355040b13044d4f505231333031060355" +
-                        "0405132a33313539352b34666166306237312d616433372d34616133" +
-                        "2d613637312d373662633035323334346164").HexToByteArray();
+                        "3048a4463044310d300b060355040b13044d4f505231333031060355"
+                        + "0405132a33313539352b34666166306237312d616433372d34616133"
+                        + "2d613637312d373662633035323334346164"
+                    ).HexToByteArray();
 
                     Assert.Equal(expected, sans.RawData);
 
                     // This SAN only contains an alternate DirectoryName entry, so both the DNSNames and
                     // IPAddresses enumerations being empty is correct.
-                    X509SubjectAlternativeNameExtension rich = Assert.IsType<X509SubjectAlternativeNameExtension>(sans);
+                    X509SubjectAlternativeNameExtension rich =
+                        Assert.IsType<X509SubjectAlternativeNameExtension>(sans);
                     Assert.Equal(Enumerable.Empty<string>(), rich.EnumerateDnsNames());
                     Assert.Equal(Enumerable.Empty<IPAddress>(), rich.EnumerateIPAddresses());
                 }
@@ -91,9 +101,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     Assert.False(cdps.Critical);
 
                     byte[] expected = (
-                        "304d304ba049a0478645687474703a2f2f63726c2e6d6963726f736f" +
-                        "66742e636f6d2f706b692f63726c2f70726f64756374732f4d696343" +
-                        "6f645369675043415f30382d33312d323031302e63726c").HexToByteArray();
+                        "304d304ba049a0478645687474703a2f2f63726c2e6d6963726f736f"
+                        + "66742e636f6d2f706b692f63726c2f70726f64756374732f4d696343"
+                        + "6f645369675043415f30382d33312d323031302e63726c"
+                    ).HexToByteArray();
 
                     Assert.Equal(expected, cdps.RawData);
 
@@ -106,7 +117,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     Assert.Equal("2.5.29.35", akid.Oid.Value);
                     Assert.False(akid.Critical);
 
-                    byte[] expected = "30168014cb11e8cad2b4165801c9372e331616b94c9a0a1f".HexToByteArray();
+                    byte[] expected =
+                        "30168014cb11e8cad2b4165801c9372e331616b94c9a0a1f".HexToByteArray();
                     Assert.Equal(expected, akid.RawData);
 
                     X509AuthorityKeyIdentifierExtension rich =
@@ -119,7 +131,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
 
                     Assert.Equal(
                         "CB11E8CAD2B4165801C9372E331616B94C9A0A1F",
-                        rich.KeyIdentifier.GetValueOrDefault().ByteArrayToHex());
+                        rich.KeyIdentifier.GetValueOrDefault().ByteArrayToHex()
+                    );
                 }
 
                 {
@@ -131,7 +144,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                     byte[] expected = "300a06082b06010505070303".HexToByteArray();
                     Assert.Equal(expected, eku.RawData);
 
-                    X509EnhancedKeyUsageExtension rich = Assert.IsType<X509EnhancedKeyUsageExtension>(eku);
+                    X509EnhancedKeyUsageExtension rich =
+                        Assert.IsType<X509EnhancedKeyUsageExtension>(eku);
 
                     OidCollection usages = rich.EnhancedKeyUsages;
                     Assert.Equal(1, usages.Count);

@@ -11,9 +11,7 @@ namespace System.Formats.Tar
     {
         // Constructor called when reading a TarEntry from a TarReader.
         internal GnuTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin, TarEntryFormat.Gnu)
-        {
-        }
+            : base(header, readerOfOrigin, TarEntryFormat.Gnu) { }
 
         /// <summary>
         /// Initializes a new <see cref="GnuTarEntry"/> instance with the specified entry type and entry name.
@@ -59,13 +57,21 @@ namespace System.Formats.Tar
 
                 if (other is PaxTarEntry paxOther)
                 {
-                    changedATime = TarHelpers.TryGetDateTimeOffsetFromTimestampString(paxOther._header.ExtendedAttributes, TarHeader.PaxEaATime, out DateTimeOffset aTime);
+                    changedATime = TarHelpers.TryGetDateTimeOffsetFromTimestampString(
+                        paxOther._header.ExtendedAttributes,
+                        TarHeader.PaxEaATime,
+                        out DateTimeOffset aTime
+                    );
                     if (changedATime)
                     {
                         _header._aTime = aTime;
                     }
 
-                    changedCTime = TarHelpers.TryGetDateTimeOffsetFromTimestampString(paxOther._header.ExtendedAttributes, TarHeader.PaxEaCTime, out DateTimeOffset cTime);
+                    changedCTime = TarHelpers.TryGetDateTimeOffsetFromTimestampString(
+                        paxOther._header.ExtendedAttributes,
+                        TarHeader.PaxEaCTime,
+                        out DateTimeOffset cTime
+                    );
                     if (changedCTime)
                     {
                         _header._cTime = cTime;
@@ -118,6 +124,7 @@ namespace System.Formats.Tar
         }
 
         // Determines if the current instance's entry type supports setting a data stream.
-        internal override bool IsDataStreamSetterSupported() => EntryType is TarEntryType.RegularFile;
+        internal override bool IsDataStreamSetterSupported() =>
+            EntryType is TarEntryType.RegularFile;
     }
 }

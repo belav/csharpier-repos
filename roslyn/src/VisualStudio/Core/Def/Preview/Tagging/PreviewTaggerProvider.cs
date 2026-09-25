@@ -24,13 +24,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public PreviewTaggerProvider()
-        {
-        }
+        public PreviewTaggerProvider() { }
 
-        public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer) where T : ITag
+        public ITagger<T> CreateTagger<T>(ITextView textView, ITextBuffer buffer)
+            where T : ITag
         {
-            if (textView.Properties.TryGetProperty(typeof(PreviewUpdater.PreviewTagger), out PreviewUpdater.PreviewTagger tagger))
+            if (
+                textView.Properties.TryGetProperty(
+                    typeof(PreviewUpdater.PreviewTagger),
+                    out PreviewUpdater.PreviewTagger tagger
+                )
+            )
             {
                 return tagger as ITagger<T>;
             }

@@ -16,9 +16,15 @@ namespace System.Web.Mvc.Test
         public void ExecuteCallsControllerBaseExecute()
         {
             // Arrange
-            RequestContext requestContext = new RequestContext(HttpContextHelpers.GetMockHttpContext().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                HttpContextHelpers.GetMockHttpContext().Object,
+                new RouteData()
+            );
 
-            Mock<ControllerBaseHelper> mockController = new Mock<ControllerBaseHelper>() { CallBase = true };
+            Mock<ControllerBaseHelper> mockController = new Mock<ControllerBaseHelper>()
+            {
+                CallBase = true,
+            };
             mockController.Setup(c => c.PublicInitialize(requestContext)).Verifiable();
             mockController.Setup(c => c.PublicExecuteCore()).Verifiable();
             IController controller = mockController.Object;
@@ -35,7 +41,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             EmptyControllerBase controller = new EmptyControllerBase();
-            RequestContext requestContext = new RequestContext(HttpContextHelpers.GetMockHttpContext().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                HttpContextHelpers.GetMockHttpContext().Object,
+                new RouteData()
+            );
 
             // Act
             ((IController)controller).Execute(requestContext); // first call
@@ -44,7 +53,8 @@ namespace System.Web.Mvc.Test
                 {
                     ((IController)controller).Execute(requestContext); // second call
                 },
-                @"A single instance of controller 'System.Web.Mvc.Test.ControllerBaseTest+EmptyControllerBase' cannot be used to handle multiple requests. If a custom controller factory is in use, make sure that it creates a new instance of the controller for each request.");
+                @"A single instance of controller 'System.Web.Mvc.Test.ControllerBaseTest+EmptyControllerBase' cannot be used to handle multiple requests. If a custom controller factory is in use, make sure that it creates a new instance of the controller for each request."
+            );
 
             // Assert
             Assert.Equal(1, controller.NumTimesExecuteCoreCalled);
@@ -58,7 +68,12 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { controller.Execute(null); }, "requestContext");
+                delegate
+                {
+                    controller.Execute(null);
+                },
+                "requestContext"
+            );
         }
 
         [Fact]
@@ -69,7 +84,12 @@ namespace System.Web.Mvc.Test
 
             //Act & Assert
             Assert.Throws<ArgumentException>(
-                delegate { controller.Execute(new Mock<RequestContext>().Object); }, "Cannot execute Controller with a null HttpContext.\r\nParameter name: requestContext");
+                delegate
+                {
+                    controller.Execute(new Mock<RequestContext>().Object);
+                },
+                "Cannot execute Controller with a null HttpContext.\r\nParameter name: requestContext"
+            );
         }
 
         [Fact]
@@ -77,7 +97,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ControllerBaseHelper helper = new ControllerBaseHelper();
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, new RouteData());
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                new RouteData()
+            );
 
             // Act
             helper.PublicInitialize(requestContext);
@@ -95,7 +118,11 @@ namespace System.Web.Mvc.Test
             ControllerBase controller = new ControllerBaseHelper();
 
             // Act & Assert
-            MemberHelper.TestPropertyWithDefaultInstance(controller, "TempData", new TempDataDictionary());
+            MemberHelper.TestPropertyWithDefaultInstance(
+                controller,
+                "TempData",
+                new TempDataDictionary()
+            );
         }
 
         [Fact]
@@ -106,7 +133,10 @@ namespace System.Web.Mvc.Test
             ViewContext viewContext = new ViewContext { TempData = tempData };
             RouteData routeData = new RouteData();
             routeData.DataTokens[ControllerContext.ParentActionViewContextToken] = viewContext;
-            RequestContext requestContext = new RequestContext(new Mock<HttpContextBase>().Object, routeData);
+            RequestContext requestContext = new RequestContext(
+                new Mock<HttpContextBase>().Object,
+                routeData
+            );
             ControllerBaseHelper controller = new ControllerBaseHelper();
             controller.PublicInitialize(requestContext);
 
@@ -124,7 +154,13 @@ namespace System.Web.Mvc.Test
             ControllerBase controller = new ControllerBaseHelper();
 
             // Act & assert
-            MemberHelper.TestBooleanProperty(controller, "ValidateRequest", true /* initialValue */, false /* testDefaultValue */);
+            MemberHelper.TestBooleanProperty(
+                controller,
+                "ValidateRequest",
+                true /* initialValue */
+                ,
+                false /* testDefaultValue */
+            );
         }
 
         [Fact]
@@ -139,7 +175,11 @@ namespace System.Web.Mvc.Test
             try
             {
                 ValueProviderFactories.Factories.Clear();
-                MemberHelper.TestPropertyWithDefaultInstance(controller, "ValueProvider", valueProvider);
+                MemberHelper.TestPropertyWithDefaultInstance(
+                    controller,
+                    "ValueProvider",
+                    valueProvider
+                );
             }
             finally
             {
@@ -157,7 +197,11 @@ namespace System.Web.Mvc.Test
             ControllerBase controller = new ControllerBaseHelper();
 
             // Act & Assert
-            MemberHelper.TestPropertyWithDefaultInstance(controller, "ViewData", new ViewDataDictionary());
+            MemberHelper.TestPropertyWithDefaultInstance(
+                controller,
+                "ViewData",
+                new ViewDataDictionary()
+            );
         }
 
         [Fact]

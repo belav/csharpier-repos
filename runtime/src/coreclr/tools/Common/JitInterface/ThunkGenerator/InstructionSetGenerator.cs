@@ -22,7 +22,14 @@ namespace Thunkerator
             public string JitName { get; }
             public string CommandLineName { get; }
 
-            public InstructionSetInfo(string architecture, string managedName, string r2rName, string r2rNumericValue, string jitName, string commandLineName)
+            public InstructionSetInfo(
+                string architecture,
+                string managedName,
+                string r2rName,
+                string r2rNumericValue,
+                string jitName,
+                string commandLineName
+            )
             {
                 Architecture = architecture;
                 ManagedName = managedName;
@@ -66,14 +73,21 @@ namespace Thunkerator
             public string JitName { get; }
             public string ImpliedJitName { get; }
 
-            public InstructionSetImplication(string architecture, string jitName, string impliedJitName)
+            public InstructionSetImplication(
+                string architecture,
+                string jitName,
+                string impliedJitName
+            )
             {
                 Architecture = architecture;
                 JitName = jitName;
                 ImpliedJitName = impliedJitName;
             }
 
-            public InstructionSetImplication(string architecture, InstructionSetImplication similarInstructionSet)
+            public InstructionSetImplication(
+                string architecture,
+                InstructionSetImplication similarInstructionSet
+            )
             {
                 Architecture = architecture;
                 ImpliedJitName = similarInstructionSet.ImpliedJitName;
@@ -82,17 +96,24 @@ namespace Thunkerator
         }
 
         private List<InstructionSetInfo> _instructionSets = new List<InstructionSetInfo>();
-        private List<InstructionSetImplication> _implications = new List<InstructionSetImplication>();
+        private List<InstructionSetImplication> _implications =
+            new List<InstructionSetImplication>();
         private List<InstructionSetGroup> _instructionSetsGroups = new List<InstructionSetGroup>();
-        private Dictionary<string, HashSet<string>> _64bitVariants = new Dictionary<string, HashSet<string>>();
+        private Dictionary<string, HashSet<string>> _64bitVariants =
+            new Dictionary<string, HashSet<string>>();
         private SortedDictionary<string, int> _r2rNamesByName = new SortedDictionary<string, int>();
-        private SortedDictionary<int, string> _r2rNamesByNumber = new SortedDictionary<int, string>();
+        private SortedDictionary<int, string> _r2rNamesByNumber =
+            new SortedDictionary<int, string>();
         private SortedSet<string> _architectures = new SortedSet<string>();
-        private Dictionary<string, List<string>> _architectureJitNames = new Dictionary<string, List<string>>();
-        private Dictionary<string, List<string>> _architectureVectorInstructionSetJitNames = new Dictionary<string, List<string>>();
+        private Dictionary<string, List<string>> _architectureJitNames =
+            new Dictionary<string, List<string>>();
+        private Dictionary<string, List<string>> _architectureVectorInstructionSetJitNames =
+            new Dictionary<string, List<string>>();
         private HashSet<string> _64BitArchitectures = new HashSet<string>();
-        private Dictionary<string, string> _64BitVariantArchitectureJitNameSuffix = new Dictionary<string, string>();
-        private Dictionary<string, string> _64BitVariantArchitectureManagedNameSuffix = new Dictionary<string, string>();
+        private Dictionary<string, string> _64BitVariantArchitectureJitNameSuffix =
+            new Dictionary<string, string>();
+        private Dictionary<string, string> _64BitVariantArchitectureManagedNameSuffix =
+            new Dictionary<string, string>();
 
         // This represents the number of flags fields we currently track
         private const int FlagsFieldCount = 2;
@@ -121,7 +142,6 @@ namespace Thunkerator
             return arch;
         }
 
-
         private string ArchToInstructionSetSuffixArch(string arch)
         {
             return _64BitVariantArchitectureJitNameSuffix[arch];
@@ -135,7 +155,11 @@ namespace Thunkerator
         public bool ParseInput(TextReader tr)
         {
             int currentLineIndex = 1;
-            for (string currentLine = tr.ReadLine(); currentLine != null; currentLine = tr.ReadLine(), currentLineIndex++)
+            for (
+                string currentLine = tr.ReadLine();
+                currentLine != null;
+                currentLine = tr.ReadLine(), currentLineIndex++
+            )
             {
                 try
                 {
@@ -158,7 +182,9 @@ namespace Thunkerator
                     {
                         case "definearch":
                             if (command.Length != 5)
-                                throw new Exception($"Incorrect number of args for definearch {command.Length}");
+                                throw new Exception(
+                                    $"Incorrect number of args for definearch {command.Length}"
+                                );
                             ArchitectureEncountered(command[1]);
                             if (command[2] == "64Bit")
                             {
@@ -176,11 +202,22 @@ namespace Thunkerator
                                 throw new Exception("Incorrect number of args for instructionset");
                             ValidateArchitectureEncountered(command[1]);
                             _architectureJitNames[command[1]].Add(command[5]);
-                            _instructionSets.Add(new InstructionSetInfo(command[1], command[2], command[3], command[4], command[5], command[6]));
+                            _instructionSets.Add(
+                                new InstructionSetInfo(
+                                    command[1],
+                                    command[2],
+                                    command[3],
+                                    command[4],
+                                    command[5],
+                                    command[6]
+                                )
+                            );
                             break;
                         case "vectorinstructionset":
                             if (command.Length != 3)
-                                throw new Exception("Incorrect number of args for vectorinstructionset");
+                                throw new Exception(
+                                    "Incorrect number of args for vectorinstructionset"
+                                );
                             ValidateArchitectureEncountered(command[1]);
                             _architectureVectorInstructionSetJitNames[command[1]].Add(command[2]);
                             break;
@@ -189,18 +226,25 @@ namespace Thunkerator
                                 throw new Exception("Incorrect number of args for instructionset");
                             ValidateArchitectureEncountered(command[1]);
                             _64bitVariants[command[1]].Add(command[2]);
-                            _architectureJitNames[command[1]].Add(command[2] + "_" + ArchToInstructionSetSuffixArch(command[1]));
+                            _architectureJitNames[command[1]]
+                                .Add(command[2] + "_" + ArchToInstructionSetSuffixArch(command[1]));
                             break;
                         case "implication":
                             if (command.Length != 4)
                                 throw new Exception("Incorrect number of args for instructionset");
                             ValidateArchitectureEncountered(command[1]);
-                            _implications.Add(new InstructionSetImplication(command[1], command[2], command[3]));
+                            _implications.Add(
+                                new InstructionSetImplication(command[1], command[2], command[3])
+                            );
                             break;
                         case "instructionsetgroup":
                             if (command.Length != 4)
-                                throw new Exception("Incorrect number of args for instructionsetgroup");
-                            _instructionSetsGroups.Add(new InstructionSetGroup(command[1], command[2], command[3]));
+                                throw new Exception(
+                                    "Incorrect number of args for instructionsetgroup"
+                                );
+                            _instructionSetsGroups.Add(
+                                new InstructionSetGroup(command[1], command[2], command[3])
+                            );
                             break;
                         case "copyinstructionsets":
                             if (command.Length != 3)
@@ -216,7 +260,9 @@ namespace Thunkerator
                                 _instructionSets.Add(new InstructionSetInfo(targetarch, val));
                                 _architectureJitNames[targetarch].Add(val.JitName);
                             }
-                            foreach (var val in _architectureVectorInstructionSetJitNames[arch].ToArray())
+                            foreach (
+                                var val in _architectureVectorInstructionSetJitNames[arch].ToArray()
+                            )
                             {
                                 _architectureVectorInstructionSetJitNames[targetarch].Add(val);
                             }
@@ -229,7 +275,8 @@ namespace Thunkerator
                             foreach (var val in _64bitVariants[arch])
                             {
                                 _64bitVariants[targetarch].Add(val);
-                                _architectureJitNames[targetarch].Add(val + "_" + ArchToInstructionSetSuffixArch(targetarch));
+                                _architectureJitNames[targetarch]
+                                    .Add(val + "_" + ArchToInstructionSetSuffixArch(targetarch));
                             }
                             break;
                         default:
@@ -238,7 +285,11 @@ namespace Thunkerator
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine("Error parsing line {0} : {1}", currentLineIndex, e.Message);
+                    Console.Error.WriteLine(
+                        "Error parsing line {0} : {1}",
+                        currentLineIndex,
+                        e.Message
+                    );
                     return false;
                 }
             }
@@ -275,7 +326,8 @@ namespace Thunkerator
         public void WriteManagedReadyToRunInstructionSet(TextWriter tr)
         {
             // Write header
-            tr.Write(@"// Licensed to the .NET Foundation under one or more agreements.
+            tr.Write(
+                @"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // DO NOT EDIT THIS FILE! IT IS AUTOGENERATED
@@ -289,22 +341,26 @@ namespace Internal.ReadyToRunConstants
 {
     public enum ReadyToRunInstructionSet
     {
-");
+"
+            );
 
             foreach (var r2rEntry in _r2rNamesByNumber)
             {
                 tr.WriteLine($"        {r2rEntry.Value}={r2rEntry.Key},");
             }
-            tr.Write(@"
+            tr.Write(
+                @"
     }
 }
-");
+"
+            );
         }
 
         public void WriteManagedReadyToRunInstructionSetHelper(TextWriter tr)
         {
             // Write header
-            tr.Write(@"// Licensed to the .NET Foundation under one or more agreements.
+            tr.Write(
+                @"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // DO NOT EDIT THIS FILE! IT IS AUTOGENERATED
@@ -324,18 +380,22 @@ namespace Internal.ReadyToRunConstants
         {
             switch (architecture)
             {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 case TargetArchitecture.{architecture}:
                     {{
                         switch (instructionSet)
                         {{
-");
+"
+                );
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
+                    if (instructionSet.Architecture != architecture)
+                        continue;
 
                     string r2rEnumerationValue;
                     if (!string.IsNullOrEmpty(instructionSet.R2rName))
@@ -343,40 +403,51 @@ namespace Internal.ReadyToRunConstants
                     else
                         r2rEnumerationValue = $"null";
 
-                    tr.WriteLine($"                            case InstructionSet.{architecture}_{instructionSet.JitName}: return {r2rEnumerationValue};");
+                    tr.WriteLine(
+                        $"                            case InstructionSet.{architecture}_{instructionSet.JitName}: return {r2rEnumerationValue};"
+                    );
                     if (_64bitVariants[architecture].Contains(instructionSet.JitName))
                     {
                         if (_64BitArchitectures.Contains(architecture))
                         {
-                            tr.WriteLine($"                            case InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}: return {r2rEnumerationValue};");
+                            tr.WriteLine(
+                                $"                            case InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}: return {r2rEnumerationValue};"
+                            );
                         }
                         else
                         {
-                            tr.WriteLine($"                            case InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}: return null;");
+                            tr.WriteLine(
+                                $"                            case InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}: return null;"
+                            );
                         }
                     }
                 }
 
-                tr.Write(@"
+                tr.Write(
+                    @"
                             default: throw new Exception(""Unknown instruction set"");
                         }
                     }
-");
+"
+                );
             }
 
-            tr.Write(@"
+            tr.Write(
+                @"
                 default: throw new Exception(""Unknown architecture"");
             }
         }
     }
 }
-");
+"
+            );
         }
 
         public void WriteManagedJitInstructionSet(TextWriter tr)
         {
             // Write header
-            tr.Write(@"// Licensed to the .NET Foundation under one or more agreements.
+            tr.Write(
+                @"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // DO NOT EDIT THIS FILE! IT IS AUTOGENERATED
@@ -393,7 +464,8 @@ namespace Internal.JitInterface
     public enum InstructionSet
     {
         ILLEGAL = 0,
-");
+"
+            );
 
             tr.WriteLine($"        NONE = {((FlagsFieldCount * sizeof(ulong) * 8) - 1)},");
 
@@ -401,20 +473,26 @@ namespace Internal.JitInterface
             {
                 foreach (var jitName in _architectureJitNames[architecture])
                 {
-                    tr.WriteLine($"        {architecture}_{jitName} = InstructionSet_{architecture}.{jitName},");
+                    tr.WriteLine(
+                        $"        {architecture}_{jitName} = InstructionSet_{architecture}.{jitName},"
+                    );
                 }
             }
 
-            tr.Write(@"    }
-");
+            tr.Write(
+                @"    }
+"
+            );
 
             foreach (string architecture in _architectures)
             {
                 tr.WriteLine($"    public enum InstructionSet_{architecture}");
-                tr.Write(@"    {
+                tr.Write(
+                    @"    {
         ILLEGAL = InstructionSet.ILLEGAL,
         NONE = InstructionSet.NONE,
-");
+"
+                );
 
                 int counter = 1;
                 foreach (var jitName in _architectureJitNames[architecture])
@@ -422,13 +500,17 @@ namespace Internal.JitInterface
                     tr.WriteLine($"        {jitName} = {counter++},");
                 }
 
-                tr.Write(@"    }
+                tr.Write(
+                    @"    }
 
-");
+"
+                );
             }
 
-            tr.Write(@"    public unsafe struct InstructionSetFlags : IEnumerable<InstructionSet>
-    {");
+            tr.Write(
+                @"    public unsafe struct InstructionSetFlags : IEnumerable<InstructionSet>
+    {"
+            );
             tr.WriteLine();
             tr.WriteLine($"        private const int FlagsFieldCount = {FlagsFieldCount};");
             tr.WriteLine($"        private const int BitsPerFlagsField = 64;");
@@ -436,11 +518,14 @@ namespace Internal.JitInterface
 
             foreach (string architecture in _architectures)
             {
-                tr.WriteLine($"        public IEnumerable<InstructionSet_{architecture}> {architecture}Flags => this.Select((x) => (InstructionSet_{architecture})x);");
+                tr.WriteLine(
+                    $"        public IEnumerable<InstructionSet_{architecture}> {architecture}Flags => this.Select((x) => (InstructionSet_{architecture})x);"
+                );
                 tr.WriteLine();
             }
 
-            tr.Write(@"        public InstructionSetFlags() { }
+            tr.Write(
+                @"        public InstructionSetFlags() { }
 
         private static uint GetFlagsFieldIndex(InstructionSet instructionSet)
         {
@@ -547,41 +632,56 @@ namespace Internal.JitInterface
         {
             switch(architecture)
             {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
                 if (_architectureVectorInstructionSetJitNames[architecture].Count == 0)
                     continue;
 
-                tr.Write($@"            case TargetArchitecture.{architecture}:
+                tr.Write(
+                    $@"            case TargetArchitecture.{architecture}:
                 switch(input)
                 {{
-");
-                foreach (var vectorInstructionSet in _architectureVectorInstructionSetJitNames[architecture])
+"
+                );
+                foreach (
+                    var vectorInstructionSet in _architectureVectorInstructionSetJitNames[
+                        architecture
+                    ]
+                )
                 {
                     string impliedInstructionSet = null;
                     foreach (var implication in _implications)
                     {
-                        if (implication.Architecture != architecture) continue;
+                        if (implication.Architecture != architecture)
+                            continue;
                         if (implication.JitName == vectorInstructionSet)
                         {
                             if (impliedInstructionSet != null)
                             {
-                                throw new Exception($"Vector instruction set {vectorInstructionSet} implies multiple instruction sets");
+                                throw new Exception(
+                                    $"Vector instruction set {vectorInstructionSet} implies multiple instruction sets"
+                                );
                             }
                             impliedInstructionSet = implication.ImpliedJitName;
                         }
                     }
                     if (impliedInstructionSet != null)
                     {
-                        tr.WriteLine($"                case InstructionSet.{architecture}_{vectorInstructionSet}: return InstructionSet.{architecture}_{impliedInstructionSet};");
+                        tr.WriteLine(
+                            $"                case InstructionSet.{architecture}_{vectorInstructionSet}: return InstructionSet.{architecture}_{impliedInstructionSet};"
+                        );
                     }
                 }
-                tr.WriteLine(@"                }
-                break;");
+                tr.WriteLine(
+                    @"                }
+                break;"
+                );
             }
 
-            tr.Write(@"            }
+            tr.Write(
+                @"            }
             return input;
         }
 
@@ -594,30 +694,47 @@ namespace Internal.JitInterface
                 oldflags = resultflags;
                 switch (architecture)
                 {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 case TargetArchitecture.{architecture}:
-");
+"
+                );
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
-                    if (_64BitArchitectures.Contains(architecture) && _64bitVariants[architecture].Contains(instructionSet.JitName))
+                    if (instructionSet.Architecture != architecture)
+                        continue;
+                    if (
+                        _64BitArchitectures.Contains(architecture)
+                        && _64bitVariants[architecture].Contains(instructionSet.JitName)
+                    )
                     {
-                        AddImplication(architecture, instructionSet.JitName, $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}");
-                        AddImplication(architecture, $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}", instructionSet.JitName);
+                        AddImplication(
+                            architecture,
+                            instructionSet.JitName,
+                            $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}"
+                        );
+                        AddImplication(
+                            architecture,
+                            $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}",
+                            instructionSet.JitName
+                        );
                     }
                 }
                 foreach (var implication in _implications)
                 {
-                    if (implication.Architecture != architecture) continue;
+                    if (implication.Architecture != architecture)
+                        continue;
                     AddImplication(architecture, implication.JitName, implication.ImpliedJitName);
                 }
                 tr.WriteLine("                    break;");
             }
 
-            tr.Write(@"                }
+            tr.Write(
+                @"                }
             } while (!oldflags.Equals(resultflags));
 
             return resultflags;
@@ -637,27 +754,44 @@ namespace Internal.JitInterface
                 oldflags = resultflags;
                 switch(architecture)
                 {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 case TargetArchitecture.{architecture}:
-");
+"
+                );
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
-                    if (_64BitArchitectures.Contains(architecture) && _64bitVariants[architecture].Contains(instructionSet.JitName))
-                        AddReverseImplication(architecture, instructionSet.JitName, $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}");
+                    if (instructionSet.Architecture != architecture)
+                        continue;
+                    if (
+                        _64BitArchitectures.Contains(architecture)
+                        && _64bitVariants[architecture].Contains(instructionSet.JitName)
+                    )
+                        AddReverseImplication(
+                            architecture,
+                            instructionSet.JitName,
+                            $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}"
+                        );
                 }
                 foreach (var implication in _implications)
                 {
-                    if (implication.Architecture != architecture) continue;
-                    AddReverseImplication(architecture, implication.JitName, implication.ImpliedJitName);
+                    if (implication.Architecture != architecture)
+                        continue;
+                    AddReverseImplication(
+                        architecture,
+                        implication.JitName,
+                        implication.ImpliedJitName
+                    );
                 }
                 tr.WriteLine("                    break;");
             }
 
-            tr.Write(@"                }
+            tr.Write(
+                @"                }
             } while (!oldflags.Equals(resultflags));
 
             return resultflags;
@@ -665,19 +799,23 @@ namespace Internal.JitInterface
 
         private static Dictionary<(string, TargetArchitecture), string> AllInstructionSetGroups { get; } = new()
             {
-");
+"
+            );
             foreach (InstructionSetGroup group in _instructionSetsGroups)
             {
                 foreach (string name in group.Names.Split(' '))
                 {
                     foreach (string arch in group.Archs.Split(' '))
                     {
-                        string key = $"\"{name}\",".PadRight(13, ' ') + $" TargetArchitecture.{arch}),".PadRight(27, ' ');
+                        string key =
+                            $"\"{name}\",".PadRight(13, ' ')
+                            + $" TargetArchitecture.{arch}),".PadRight(27, ' ');
                         tr.WriteLine($"                {{ ({key} \"{group.Sets}\" }},");
                     }
                 }
             }
-            tr.Write(@"            };
+            tr.Write(
+                @"            };
 
         public static IEnumerable<string> AllCpuNames =>
             AllInstructionSetGroups.Keys.Select(key => key.Item1).Distinct();
@@ -705,75 +843,104 @@ namespace Internal.JitInterface
         {
             switch (architecture)
             {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 case TargetArchitecture.{architecture}:
-");
+"
+                );
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
-                    bool instructionSetIsSpecifiable = !string.IsNullOrEmpty(instructionSet.CommandLineName);
+                    if (instructionSet.Architecture != architecture)
+                        continue;
+                    bool instructionSetIsSpecifiable = !string.IsNullOrEmpty(
+                        instructionSet.CommandLineName
+                    );
                     string name = instructionSet.PublicName;
                     string managedName = instructionSet.ManagedName;
                     string specifiable = instructionSetIsSpecifiable ? "true" : "false";
-                    string instructionSetString = $"InstructionSet.{architecture}_{instructionSet.JitName}";
-                    tr.WriteLine($"                    yield return new InstructionSetInfo(\"{name}\", \"{managedName}\", {instructionSetString}, {specifiable});");
+                    string instructionSetString =
+                        $"InstructionSet.{architecture}_{instructionSet.JitName}";
+                    tr.WriteLine(
+                        $"                    yield return new InstructionSetInfo(\"{name}\", \"{managedName}\", {instructionSetString}, {specifiable});"
+                    );
                 }
                 tr.WriteLine("                    break;");
             }
 
-            tr.Write(@"            }
+            tr.Write(
+                @"            }
         }
 
         public void Set64BitInstructionSetVariants(TargetArchitecture architecture)
         {
             switch (architecture)
             {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 case TargetArchitecture.{architecture}:
-");
+"
+                );
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
+                    if (instructionSet.Architecture != architecture)
+                        continue;
 
-                    if (_64BitArchitectures.Contains(architecture) && _64bitVariants[architecture].Contains(instructionSet.JitName))
+                    if (
+                        _64BitArchitectures.Contains(architecture)
+                        && _64bitVariants[architecture].Contains(instructionSet.JitName)
+                    )
                     {
-                        tr.WriteLine($"                    if (HasInstructionSet(InstructionSet.{architecture}_{instructionSet.JitName}))");
-                        tr.WriteLine($"                        AddInstructionSet(InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)});");
+                        tr.WriteLine(
+                            $"                    if (HasInstructionSet(InstructionSet.{architecture}_{instructionSet.JitName}))"
+                        );
+                        tr.WriteLine(
+                            $"                        AddInstructionSet(InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)});"
+                        );
                     }
                 }
 
                 tr.WriteLine("                    break;");
             }
-            tr.Write(@"            }
+            tr.Write(
+                @"            }
         }
 
         public void Set64BitInstructionSetVariantsUnconditionally(TargetArchitecture architecture)
         {
             switch (architecture)
             {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 case TargetArchitecture.{architecture}:
-");
+"
+                );
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
+                    if (instructionSet.Architecture != architecture)
+                        continue;
 
                     if (_64bitVariants[architecture].Contains(instructionSet.JitName))
-                        tr.WriteLine($"                    AddInstructionSet(InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)});");
+                        tr.WriteLine(
+                            $"                    AddInstructionSet(InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)});"
+                        );
                 }
 
                 tr.WriteLine("                    break;");
             }
-            tr.Write(@"            }
+            tr.Write(
+                @"            }
         }
     }
     public static class InstructionSetParser
@@ -821,17 +988,21 @@ namespace Internal.JitInterface
 
             switch (targetArch)
             {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 case TargetArchitecture.{architecture}:
                 switch (typeName)
                 {{
-");
+"
+                );
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
+                    if (instructionSet.Architecture != architecture)
+                        continue;
                     // VL instructionSets are handled as part of their master instruction set.
                     if (instructionSet.ManagedName.EndsWith("_VL"))
                         continue;
@@ -843,54 +1014,77 @@ namespace Internal.JitInterface
                     InstructionSetInfo vlInstructionSet = null;
                     foreach (var potentialVLinstructionSet in _instructionSets)
                     {
-                        if (instructionSet.Architecture != architecture) continue;
+                        if (instructionSet.Architecture != architecture)
+                            continue;
                         string managedName = potentialVLinstructionSet.ManagedName;
-                        if (managedName.EndsWith("_VL") && instructionSet.ManagedName == managedName.Substring(0, managedName.Length - 3))
+                        if (
+                            managedName.EndsWith("_VL")
+                            && instructionSet.ManagedName
+                                == managedName.Substring(0, managedName.Length - 3)
+                        )
                         {
-                            vlInstructionSet = potentialVLinstructionSet; break;
+                            vlInstructionSet = potentialVLinstructionSet;
+                            break;
                         }
                     }
 
                     string hasSixtyFourBitInstructionSet = null;
-                    if (_64bitVariants[architecture].Contains(instructionSet.JitName) && _64BitArchitectures.Contains(architecture))
+                    if (
+                        _64bitVariants[architecture].Contains(instructionSet.JitName)
+                        && _64BitArchitectures.Contains(architecture)
+                    )
                     {
-                        hasSixtyFourBitInstructionSet = ArchToManagedInstructionSetSuffixArch(architecture);
+                        hasSixtyFourBitInstructionSet = ArchToManagedInstructionSetSuffixArch(
+                            architecture
+                        );
                     }
 
-                    tr.Write(@$"
-                    case ""{instructionSet.ManagedName}"":");
+                    tr.Write(
+                        @$"
+                    case ""{instructionSet.ManagedName}"":"
+                    );
 
                     if (hasSixtyFourBitInstructionSet != null)
                     {
-                        tr.Write($@"
+                        tr.Write(
+                            $@"
                         if (nestedTypeName == ""{hasSixtyFourBitInstructionSet}"")
                         {{ return InstructionSet.{architecture}_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}; }}
-                        else");
+                        else"
+                        );
                     }
                     if (vlInstructionSet != null)
                     {
-                        tr.Write($@"
+                        tr.Write(
+                            $@"
                         if (nestedTypeName == ""VL"")
                         {{ return InstructionSet.{architecture}_{vlInstructionSet.JitName}; }}
-                        else");
+                        else"
+                        );
                     }
-                    tr.Write($@"
+                    tr.Write(
+                        $@"
                         {{ return InstructionSet.{architecture}_{instructionSet.JitName}; }}
-");
+"
+                    );
                 }
-                tr.Write($@"
+                tr.Write(
+                    $@"
                 }}
                 break;
-");
+"
+                );
             }
 
-            tr.Write(@"
+            tr.Write(
+                @"
             }
             return InstructionSet.ILLEGAL;
         }
     }
 }
-");
+"
+            );
             return;
 
             void AddReverseImplication(string architecture, string jitName, string impliedJitName)
@@ -900,15 +1094,20 @@ namespace Internal.JitInterface
 
             void AddImplication(string architecture, string jitName, string impliedJitName)
             {
-                tr.WriteLine($"                    if (resultflags.HasInstructionSet(InstructionSet.{architecture}_{jitName}))");
-                tr.WriteLine($"                        resultflags.AddInstructionSet(InstructionSet.{architecture}_{impliedJitName});");
+                tr.WriteLine(
+                    $"                    if (resultflags.HasInstructionSet(InstructionSet.{architecture}_{jitName}))"
+                );
+                tr.WriteLine(
+                    $"                        resultflags.AddInstructionSet(InstructionSet.{architecture}_{impliedJitName});"
+                );
             }
         }
 
         public void WriteNativeCorInfoInstructionSet(TextWriter tr)
         {
             // Write header
-            tr.Write(@"// Licensed to the .NET Foundation under one or more agreements.
+            tr.Write(
+                @"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // DO NOT EDIT THIS FILE! IT IS AUTOGENERATED
@@ -924,7 +1123,8 @@ namespace Internal.JitInterface
 enum CORINFO_InstructionSet
 {
     InstructionSet_ILLEGAL = 0,
-");
+"
+            );
 
             int lastAvailableBit = (FlagsFieldCount * 64) - 1;
             tr.WriteLine($"    InstructionSet_NONE = {lastAvailableBit},");
@@ -939,19 +1139,22 @@ enum CORINFO_InstructionSet
                 }
                 tr.WriteLine($"#endif // TARGET_{ArchToIfDefArch(architecture)}");
             }
-            tr.Write(@"
+            tr.Write(
+                @"
 };
 
 struct CORINFO_InstructionSetFlags
 {
 private:
-");
+"
+            );
 
             tr.WriteLine($"    static const int32_t FlagsFieldCount = {FlagsFieldCount};");
             tr.WriteLine($"    static const int32_t BitsPerFlagsField = sizeof(uint64_t) * 8;");
             tr.WriteLine($"    uint64_t _flags[FlagsFieldCount] = {{ }};");
 
-            tr.Write(@"
+            tr.Write(
+                @"
 
     static uint32_t GetFlagsFieldIndex(CORINFO_InstructionSet instructionSet)
     {
@@ -1035,24 +1238,34 @@ public:
 
     void Set64BitInstructionSetVariants()
     {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
                 tr.WriteLine($"#ifdef TARGET_{ArchToIfDefArch(architecture)}");
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
+                    if (instructionSet.Architecture != architecture)
+                        continue;
 
-                    if (_64BitArchitectures.Contains(architecture) && _64bitVariants[architecture].Contains(instructionSet.JitName))
+                    if (
+                        _64BitArchitectures.Contains(architecture)
+                        && _64bitVariants[architecture].Contains(instructionSet.JitName)
+                    )
                     {
-                        tr.WriteLine($"        if (HasInstructionSet(InstructionSet_{instructionSet.JitName}))");
-                        tr.WriteLine($"            AddInstructionSet(InstructionSet_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)});");
+                        tr.WriteLine(
+                            $"        if (HasInstructionSet(InstructionSet_{instructionSet.JitName}))"
+                        );
+                        tr.WriteLine(
+                            $"            AddInstructionSet(InstructionSet_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)});"
+                        );
                     }
                 }
 
                 tr.WriteLine($"#endif // TARGET_{ArchToIfDefArch(architecture)}");
             }
-            tr.Write(@"
+            tr.Write(
+                @"
     }
 
     uint64_t* GetFlagsRaw()
@@ -1068,27 +1281,42 @@ inline CORINFO_InstructionSetFlags EnsureInstructionSetFlagsAreValid(CORINFO_Ins
     do
     {
         oldflags = resultflags;
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
                 tr.WriteLine($"#ifdef TARGET_{ArchToIfDefArch(architecture)}");
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
-                    if (_64BitArchitectures.Contains(architecture) && _64bitVariants[architecture].Contains(instructionSet.JitName))
+                    if (instructionSet.Architecture != architecture)
+                        continue;
+                    if (
+                        _64BitArchitectures.Contains(architecture)
+                        && _64bitVariants[architecture].Contains(instructionSet.JitName)
+                    )
                     {
-                        AddImplication(architecture, instructionSet.JitName, $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}");
-                        AddImplication(architecture, $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}", instructionSet.JitName);
+                        AddImplication(
+                            architecture,
+                            instructionSet.JitName,
+                            $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}"
+                        );
+                        AddImplication(
+                            architecture,
+                            $"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}",
+                            instructionSet.JitName
+                        );
                     }
                 }
                 foreach (var implication in _implications)
                 {
-                    if (implication.Architecture != architecture) continue;
+                    if (implication.Architecture != architecture)
+                        continue;
                     AddImplication(architecture, implication.JitName, implication.ImpliedJitName);
                 }
                 tr.WriteLine($"#endif // TARGET_{ArchToIfDefArch(architecture)}");
             }
-            tr.Write(@"
+            tr.Write(
+                @"
     } while (!oldflags.Equals(resultflags));
     return resultflags;
 }
@@ -1102,24 +1330,34 @@ inline const char *InstructionSetToString(CORINFO_InstructionSet instructionSet)
 
     switch (instructionSet)
     {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
                 tr.WriteLine($"#ifdef TARGET_{ArchToIfDefArch(architecture)}");
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
+                    if (instructionSet.Architecture != architecture)
+                        continue;
                     tr.WriteLine($"        case InstructionSet_{instructionSet.JitName} :");
                     tr.WriteLine($"            return \"{instructionSet.JitName}\";");
-                    if (_64BitArchitectures.Contains(architecture) && _64bitVariants[architecture].Contains(instructionSet.JitName))
+                    if (
+                        _64BitArchitectures.Contains(architecture)
+                        && _64bitVariants[architecture].Contains(instructionSet.JitName)
+                    )
                     {
-                        tr.WriteLine($"        case InstructionSet_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)} :");
-                        tr.WriteLine($"            return \"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}\";");
+                        tr.WriteLine(
+                            $"        case InstructionSet_{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)} :"
+                        );
+                        tr.WriteLine(
+                            $"            return \"{instructionSet.JitName}_{ArchToInstructionSetSuffixArch(architecture)}\";"
+                        );
                     }
                 }
                 tr.WriteLine($"#endif // TARGET_{ArchToIfDefArch(architecture)}");
             }
-            tr.Write(@"
+            tr.Write(
+                @"
         default:
             return ""UnknownInstructionSet"";
     }
@@ -1137,24 +1375,29 @@ inline CORINFO_InstructionSet InstructionSetFromR2RInstructionSet(ReadyToRunInst
 
     switch (r2rSet)
     {
-");
+"
+            );
             foreach (string architecture in _architectures)
             {
                 tr.WriteLine($"#ifdef TARGET_{ArchToIfDefArch(architecture)}");
                 foreach (var instructionSet in _instructionSets)
                 {
-                    if (instructionSet.Architecture != architecture) continue;
+                    if (instructionSet.Architecture != architecture)
+                        continue;
                     string r2rEnumerationValue;
                     if (string.IsNullOrEmpty(instructionSet.R2rName))
                         continue;
 
                     r2rEnumerationValue = $"READYTORUN_INSTRUCTION_{instructionSet.R2rName}";
 
-                    tr.WriteLine($"        case {r2rEnumerationValue}: return InstructionSet_{instructionSet.JitName};");
+                    tr.WriteLine(
+                        $"        case {r2rEnumerationValue}: return InstructionSet_{instructionSet.JitName};"
+                    );
                 }
                 tr.WriteLine($"#endif // TARGET_{ArchToIfDefArch(architecture)}");
             }
-            tr.Write(@"
+            tr.Write(
+                @"
         default:
             return InstructionSet_ILLEGAL;
     }
@@ -1164,20 +1407,26 @@ inline CORINFO_InstructionSet InstructionSetFromR2RInstructionSet(ReadyToRunInst
 }
 
 #endif // CORINFOINSTRUCTIONSET_H
-");
+"
+            );
             return;
 
             void AddImplication(string architecture, string jitName, string impliedJitName)
             {
-                tr.WriteLine($"        if (resultflags.HasInstructionSet(InstructionSet_{jitName}) && !resultflags.HasInstructionSet(InstructionSet_{impliedJitName}))");
-                tr.WriteLine($"            resultflags.RemoveInstructionSet(InstructionSet_{jitName});");
+                tr.WriteLine(
+                    $"        if (resultflags.HasInstructionSet(InstructionSet_{jitName}) && !resultflags.HasInstructionSet(InstructionSet_{impliedJitName}))"
+                );
+                tr.WriteLine(
+                    $"            resultflags.RemoveInstructionSet(InstructionSet_{jitName});"
+                );
             }
         }
 
         public void WriteNativeReadyToRunInstructionSet(TextWriter tr)
         {
             // Write header
-            tr.Write(@"// Licensed to the .NET Foundation under one or more agreements.
+            tr.Write(
+                @"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 // DO NOT EDIT THIS FILE! IT IS AUTOGENERATED
@@ -1188,17 +1437,20 @@ inline CORINFO_InstructionSet InstructionSetFromR2RInstructionSet(ReadyToRunInst
 #define READYTORUNINSTRUCTIONSET_H
 enum ReadyToRunInstructionSet
 {
-");
+"
+            );
 
             foreach (var r2rEntry in _r2rNamesByNumber)
             {
                 tr.WriteLine($"    READYTORUN_INSTRUCTION_{r2rEntry.Value}={r2rEntry.Key},");
             }
-            tr.Write(@"
+            tr.Write(
+                @"
 };
 
 #endif // READYTORUNINSTRUCTIONSET_H
-");
+"
+            );
         }
     }
 }

@@ -155,9 +155,8 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
     {
         if (expectedErrorMessage != null)
         {
-            Assert.Contains(
-                LogMessages,
-                m => m.Exception?.Message.Contains(expectedErrorMessage) ?? false
+            Assert.Contains(LogMessages, m =>
+                m.Exception?.Message.Contains(expectedErrorMessage) ?? false
             );
         }
     }
@@ -166,14 +165,12 @@ public abstract class Http3TestBase : TestApplicationErrorLoggerLoggedTest, IDis
     {
         if (expectedErrorMessage?.Length > 0)
         {
-            var message = Assert.Single(
-                LogMessages,
-                m => m.Exception != null && exceptionType.IsAssignableFrom(m.Exception.GetType())
+            var message = Assert.Single(LogMessages, m =>
+                m.Exception != null && exceptionType.IsAssignableFrom(m.Exception.GetType())
             );
 
-            Assert.Contains(
-                expectedErrorMessage,
-                expected => message.Exception.Message.Contains(expected)
+            Assert.Contains(expectedErrorMessage, expected =>
+                message.Exception.Message.Contains(expected)
             );
         }
     }

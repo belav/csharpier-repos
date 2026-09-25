@@ -2,37 +2,41 @@
 // <copyright file="Compiler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
+    using System;
+    using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
     using System.Reflection;
     using System.Reflection.Emit;
-    using System.Collections;
-    using System.IO;
-    using System;
-    using System.Text;
-    using System.ComponentModel;
-    using System.CodeDom.Compiler;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Permissions;
-    using System.Diagnostics;
-    using System.Security.Principal;
     using System.Security.Policy;
+    using System.Security.Principal;
+    using System.Text;
     using System.Threading;
     using System.Xml.Serialization.Configuration;
-    using System.Globalization;
-    using System.Runtime.Versioning;
-    using System.Runtime.CompilerServices;
 
-    internal class Compiler {
+    internal class Compiler
+    {
         bool debugEnabled = DiagnosticsSwitches.KeepTempFiles.Enabled;
         Hashtable imports = new Hashtable();
         StringWriter writer = new StringWriter(CultureInfo.InvariantCulture);
 
         [ResourceExposure(ResourceScope.Machine)]
-        protected string[] Imports {
-            get { 
+        protected string[] Imports
+        {
+            get
+            {
                 string[] array = new string[imports.Values.Count];
                 imports.Values.CopyTo(array, 0);
                 return array;
@@ -43,7 +47,8 @@ namespace System.Xml.Serialization {
         // It's OK to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        internal void AddImport(Type type, Hashtable types) {
+        internal void AddImport(Type type, Hashtable types)
+        {
             if (type == null)
                 return;
             if (TypeScope.IsKnownType(type))
@@ -63,16 +68,20 @@ namespace System.Xml.Serialization {
                 AddImport(intf, types);
 
             ConstructorInfo[] ctors = type.GetConstructors();
-            for (int i = 0; i < ctors.Length; i++) {
+            for (int i = 0; i < ctors.Length; i++)
+            {
                 ParameterInfo[] parms = ctors[i].GetParameters();
-                for (int j = 0; j < parms.Length; j++) {
+                for (int j = 0; j < parms.Length; j++)
+                {
                     AddImport(parms[j].ParameterType, types);
                 }
             }
 
-            if (type.IsGenericType) {
+            if (type.IsGenericType)
+            {
                 Type[] arguments = type.GetGenericArguments();
-                for (int i = 0; i < arguments.Length; i++) {
+                for (int i = 0; i < arguments.Length; i++)
+                {
                     AddImport(arguments[i], types);
                 }
             }
@@ -80,15 +89,20 @@ namespace System.Xml.Serialization {
             TempAssembly.FileIOPermission.Assert();
             Module module = type.Module;
             Assembly assembly = module.Assembly;
-            if (DynamicAssemblies.IsTypeDynamic(type)) {
+            if (DynamicAssemblies.IsTypeDynamic(type))
+            {
                 DynamicAssemblies.Add(assembly);
                 return;
             }
 
-            object[] typeForwardedFromAttribute = type.GetCustomAttributes(typeof(TypeForwardedFromAttribute), false);
+            object[] typeForwardedFromAttribute = type.GetCustomAttributes(
+                typeof(TypeForwardedFromAttribute),
+                false
+            );
             if (typeForwardedFromAttribute.Length > 0)
             {
-                TypeForwardedFromAttribute originalAssemblyInfo = typeForwardedFromAttribute[0] as TypeForwardedFromAttribute;
+                TypeForwardedFromAttribute originalAssemblyInfo =
+                    typeForwardedFromAttribute[0] as TypeForwardedFromAttribute;
                 Assembly originalAssembly = Assembly.Load(originalAssemblyInfo.AssemblyFullName);
                 imports[originalAssembly] = originalAssembly.Location;
             }
@@ -100,12 +114,14 @@ namespace System.Xml.Serialization {
         // It's OK to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        internal void AddImport(Assembly assembly) {
+        internal void AddImport(Assembly assembly)
+        {
             TempAssembly.FileIOPermission.Assert();
             imports[assembly] = assembly.Location;
         }
 
-        internal TextWriter Source {
+        internal TextWriter Source
+        {
             get { return writer; }
         }
 
@@ -113,8 +129,14 @@ namespace System.Xml.Serialization {
 
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        internal static string GetTempAssemblyPath(string baseDir, Assembly assembly, string defaultNamespace) {
-            if (assembly.IsDynamic) {
+        internal static string GetTempAssemblyPath(
+            string baseDir,
+            Assembly assembly,
+            string defaultNamespace
+        )
+        {
+            if (assembly.IsDynamic)
+            {
                 throw new InvalidOperationException(Res.GetString(Res.XmlPregenAssemblyDynamic));
             }
 
@@ -123,56 +145,80 @@ namespace System.Xml.Serialization {
             perms.AddPermission(new EnvironmentPermission(PermissionState.Unrestricted));
             perms.Assert();
 
-            try {
-                if (baseDir != null && baseDir.Length > 0) {
+            try
+            {
+                if (baseDir != null && baseDir.Length > 0)
+                {
                     // check that the dirsctory exists
-                    if (!Directory.Exists(baseDir)) {
-                        throw new UnauthorizedAccessException(Res.GetString(Res.XmlPregenMissingDirectory, baseDir));
+                    if (!Directory.Exists(baseDir))
+                    {
+                        throw new UnauthorizedAccessException(
+                            Res.GetString(Res.XmlPregenMissingDirectory, baseDir)
+                        );
                     }
                 }
-                else {
+                else
+                {
                     baseDir = Path.GetTempPath();
                     // check that the dirsctory exists
-                    if (!Directory.Exists(baseDir)) {
-                        throw new UnauthorizedAccessException(Res.GetString(Res.XmlPregenMissingTempDirectory));
+                    if (!Directory.Exists(baseDir))
+                    {
+                        throw new UnauthorizedAccessException(
+                            Res.GetString(Res.XmlPregenMissingTempDirectory)
+                        );
                     }
                 }
 
 #if MONO
-                baseDir = Path.Combine (baseDir, GetTempAssemblyName(assembly.GetName(), defaultNamespace));
+                baseDir = Path.Combine(
+                    baseDir,
+                    GetTempAssemblyName(assembly.GetName(), defaultNamespace)
+                );
 #else
                 if (baseDir.EndsWith("\\", StringComparison.Ordinal))
                     baseDir += GetTempAssemblyName(assembly.GetName(), defaultNamespace);
-                else 
+                else
                     baseDir += "\\" + GetTempAssemblyName(assembly.GetName(), defaultNamespace);
 #endif
             }
-            finally {
+            finally
+            {
                 CodeAccessPermission.RevertAssert();
             }
             return baseDir + ".dll";
         }
 
-        internal static string GetTempAssemblyName(AssemblyName parent, string ns) {
-            return parent.Name + ".XmlSerializers" + (ns == null || ns.Length == 0 ? "" : "." +  ns.GetHashCode());
+        internal static string GetTempAssemblyName(AssemblyName parent, string ns)
+        {
+            return parent.Name
+                + ".XmlSerializers"
+                + (ns == null || ns.Length == 0 ? "" : "." + ns.GetHashCode());
         }
 
         // SxS: This method does not take any resource name and does not expose any resources to the caller.
         // It's OK to suppress the SxS warning.
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.None)]
-        internal Assembly Compile(Assembly parent, string ns, XmlSerializerCompilerParameters xmlParameters, Evidence evidence) {
+        internal Assembly Compile(
+            Assembly parent,
+            string ns,
+            XmlSerializerCompilerParameters xmlParameters,
+            Evidence evidence
+        )
+        {
             CodeDomProvider codeProvider = new Microsoft.CSharp.CSharpCodeProvider();
             CompilerParameters parameters = xmlParameters.CodeDomParameters;
             parameters.ReferencedAssemblies.AddRange(Imports);
-            
-            if (debugEnabled) {
+
+            if (debugEnabled)
+            {
                 parameters.GenerateInMemory = false;
                 parameters.IncludeDebugInformation = true;
                 parameters.TempFiles.KeepFiles = true;
             }
             PermissionSet perms = new PermissionSet(PermissionState.None);
-            if (xmlParameters.IsNeedTempDirAccess) {
+            if (xmlParameters.IsNeedTempDirAccess)
+            {
                 perms.AddPermission(TempAssembly.FileIOPermission);
             }
             perms.AddPermission(new EnvironmentPermission(PermissionState.Unrestricted));
@@ -180,11 +226,15 @@ namespace System.Xml.Serialization {
             perms.AddPermission(new SecurityPermission(SecurityPermissionFlag.ControlEvidence));
             perms.Assert();
 
-            if (parent != null && (parameters.OutputAssembly == null || parameters.OutputAssembly.Length ==0)) {
+            if (
+                parent != null
+                && (parameters.OutputAssembly == null || parameters.OutputAssembly.Length == 0)
+            )
+            {
                 string assemblyName = AssemblyNameFromOptions(parameters.CompilerOptions);
                 if (assemblyName == null)
                     assemblyName = GetTempAssemblyPath(parameters.TempFiles.TempDir, parent, ns);
-                // 
+                //
                 parameters.OutputAssembly = assemblyName;
             }
 
@@ -199,58 +249,84 @@ namespace System.Xml.Serialization {
 #pragma warning restore 618
             CompilerResults results = null;
             Assembly assembly = null;
-            try {
+            try
+            {
                 results = codeProvider.CompileAssemblyFromSource(parameters, writer.ToString());
                 // check the output for errors or a certain level-1 warning (1595)
-                if (results.Errors.Count > 0) {
+                if (results.Errors.Count > 0)
+                {
                     StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture);
-                    stringWriter.WriteLine(Res.GetString(Res.XmlCompilerError, results.NativeCompilerReturnValue.ToString(CultureInfo.InvariantCulture)));
+                    stringWriter.WriteLine(
+                        Res.GetString(
+                            Res.XmlCompilerError,
+                            results.NativeCompilerReturnValue.ToString(CultureInfo.InvariantCulture)
+                        )
+                    );
                     bool foundOne = false;
-                    foreach (CompilerError e in results.Errors) {
+                    foreach (CompilerError e in results.Errors)
+                    {
                         // clear filename. This makes ToString() print just error number and message.
                         e.FileName = "";
-                        if (!e.IsWarning || e.ErrorNumber == "CS1595") {
+                        if (!e.IsWarning || e.ErrorNumber == "CS1595")
+                        {
                             foundOne = true;
                             stringWriter.WriteLine(e.ToString());
                         }
                     }
-                    if (foundOne) {
+                    if (foundOne)
+                    {
                         throw new InvalidOperationException(stringWriter.ToString());
                     }
                 }
                 assembly = results.CompiledAssembly;
             }
-            catch (UnauthorizedAccessException) {
+            catch (UnauthorizedAccessException)
+            {
                 // try to get the user token
                 string user = GetCurrentUser();
-                if (user == null || user.Length == 0) {
-                    throw new UnauthorizedAccessException(Res.GetString(Res.XmlSerializerAccessDenied));
+                if (user == null || user.Length == 0)
+                {
+                    throw new UnauthorizedAccessException(
+                        Res.GetString(Res.XmlSerializerAccessDenied)
+                    );
                 }
-                else {
-                    throw new UnauthorizedAccessException(Res.GetString(Res.XmlIdentityAccessDenied, user));
+                else
+                {
+                    throw new UnauthorizedAccessException(
+                        Res.GetString(Res.XmlIdentityAccessDenied, user)
+                    );
                 }
             }
-            catch (FileLoadException fle) {
-                throw new InvalidOperationException(Res.GetString(Res.XmlSerializerCompileFailed), fle);
+            catch (FileLoadException fle)
+            {
+                throw new InvalidOperationException(
+                    Res.GetString(Res.XmlSerializerCompileFailed),
+                    fle
+                );
             }
-            finally {
+            finally
+            {
                 CodeAccessPermission.RevertAssert();
             }
             // somehow we got here without generating an assembly
-            if (assembly == null) throw new InvalidOperationException(Res.GetString(Res.XmlInternalError));
-            
+            if (assembly == null)
+                throw new InvalidOperationException(Res.GetString(Res.XmlInternalError));
+
             return assembly;
         }
 
-        static string AssemblyNameFromOptions(string options) {
+        static string AssemblyNameFromOptions(string options)
+        {
             if (options == null || options.Length == 0)
                 return null;
 
             string outName = null;
             string[] flags = options.ToLower(CultureInfo.InvariantCulture).Split(null);
-            for (int i = 0; i < flags.Length; i++) {
+            for (int i = 0; i < flags.Length; i++)
+            {
                 string val = flags[i].Trim();
-                if (val.StartsWith("/out:", StringComparison.Ordinal)) {
+                if (val.StartsWith("/out:", StringComparison.Ordinal))
+                {
                     outName = val.Substring(5);
                 }
             }
@@ -260,13 +336,20 @@ namespace System.Xml.Serialization {
         internal static string GetCurrentUser()
         {
 #if !FEATURE_PAL
-            try {
+            try
+            {
                 WindowsIdentity id = WindowsIdentity.GetCurrent();
                 if (id != null && id.Name != null)
                     return id.Name;
-            } 
-            catch (Exception e) {
-                if (e is ThreadAbortException || e is StackOverflowException || e is OutOfMemoryException) {
+            }
+            catch (Exception e)
+            {
+                if (
+                    e is ThreadAbortException
+                    || e is StackOverflowException
+                    || e is OutOfMemoryException
+                )
+                {
                     throw;
                 }
             }
@@ -275,5 +358,3 @@ namespace System.Xml.Serialization {
         }
     }
 }
-
-

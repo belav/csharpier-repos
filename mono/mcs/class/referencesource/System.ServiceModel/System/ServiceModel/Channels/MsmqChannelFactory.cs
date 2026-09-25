@@ -1,6 +1,6 @@
-//------------------------------------------------------------  
-// Copyright (c) Microsoft Corporation.  All rights reserved.   
-//------------------------------------------------------------  
+//------------------------------------------------------------
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
     using System.Runtime.Serialization;
@@ -12,7 +12,10 @@ namespace System.ServiceModel.Channels
         QueueTransferProtocol queueTransferProtocol;
         bool useActiveDirectory;
 
-        protected MsmqChannelFactory(MsmqTransportBindingElement bindingElement, BindingContext context)
+        protected MsmqChannelFactory(
+            MsmqTransportBindingElement bindingElement,
+            BindingContext context
+        )
             : base(bindingElement, context)
         {
             this.maxPoolSize = bindingElement.MaxPoolSize;
@@ -38,10 +41,11 @@ namespace System.ServiceModel.Channels
 
     sealed class MsmqOutputChannelFactory : MsmqChannelFactory<IOutputChannel>
     {
-        internal MsmqOutputChannelFactory(MsmqTransportBindingElement bindingElement, BindingContext context)
-            : base(bindingElement, context)
-        {
-        }
+        internal MsmqOutputChannelFactory(
+            MsmqTransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : base(bindingElement, context) { }
 
         protected override IOutputChannel OnCreateChannel(EndpointAddress to, Uri via)
         {
@@ -52,10 +56,11 @@ namespace System.ServiceModel.Channels
 
     sealed class MsmqOutputSessionChannelFactory : MsmqChannelFactory<IOutputSessionChannel>
     {
-        internal MsmqOutputSessionChannelFactory(MsmqTransportBindingElement bindingElement, BindingContext context)
-            : base(bindingElement, context)
-        {
-        }
+        internal MsmqOutputSessionChannelFactory(
+            MsmqTransportBindingElement bindingElement,
+            BindingContext context
+        )
+            : base(bindingElement, context) { }
 
         protected override IOutputSessionChannel OnCreateChannel(EndpointAddress to, Uri via)
         {

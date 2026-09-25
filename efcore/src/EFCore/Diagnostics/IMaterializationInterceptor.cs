@@ -29,8 +29,10 @@ public interface IMaterializationInterceptor : ISingletonInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to change the result
     ///     should return the <paramref name="result" /> value passed in.
     /// </returns>
-    InterceptionResult<object> CreatingInstance(MaterializationInterceptionData materializationData, InterceptionResult<object> result)
-        => result;
+    InterceptionResult<object> CreatingInstance(
+        MaterializationInterceptionData materializationData,
+        InterceptionResult<object> result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF has created an instance of an entity. That is, after the constructor has been called, but before
@@ -46,8 +48,8 @@ public interface IMaterializationInterceptor : ISingletonInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to change the instance used
     ///     must return the <paramref name="entity" /> value passed in.
     /// </returns>
-    object CreatedInstance(MaterializationInterceptionData materializationData, object entity)
-        => entity;
+    object CreatedInstance(MaterializationInterceptionData materializationData, object entity) =>
+        entity;
 
     /// <summary>
     ///     Called immediately before EF is going to set property values of an entity that has just been created. Note that property values
@@ -67,8 +69,11 @@ public interface IMaterializationInterceptor : ISingletonInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to suppress
     ///     setting property values must return the <paramref name="result" /> value passed in.
     /// </returns>
-    InterceptionResult InitializingInstance(MaterializationInterceptionData materializationData, object entity, InterceptionResult result)
-        => result;
+    InterceptionResult InitializingInstance(
+        MaterializationInterceptionData materializationData,
+        object entity,
+        InterceptionResult result
+    ) => result;
 
     /// <summary>
     ///     Called immediately after EF has set property values of an entity that has just been created.
@@ -83,6 +88,8 @@ public interface IMaterializationInterceptor : ISingletonInterceptor
     ///     An implementation of this method for any interceptor that is not attempting to change the instance used
     ///     must return the <paramref name="entity" /> value passed in.
     /// </returns>
-    object InitializedInstance(MaterializationInterceptionData materializationData, object entity)
-        => entity;
+    object InitializedInstance(
+        MaterializationInterceptionData materializationData,
+        object entity
+    ) => entity;
 }

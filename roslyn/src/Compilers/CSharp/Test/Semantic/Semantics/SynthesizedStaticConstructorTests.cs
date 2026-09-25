@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NoStaticMembers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int i1;
@@ -32,7 +33,8 @@ class C
         [Fact]
         public void NoStaticFields()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int i1;
@@ -48,7 +50,8 @@ class C
         [Fact]
         public void NoStaticInitializers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int i1;
@@ -65,7 +68,8 @@ class C
         [Fact]
         public void StaticInitializers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int i1;
@@ -82,7 +86,8 @@ class C
         [Fact]
         public void ConstantInitializers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int i1;
@@ -99,7 +104,8 @@ class C
         [Fact]
         public void SourceStaticConstructorNoStaticMembers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static C() { }
@@ -115,7 +121,8 @@ class C
         [Fact]
         public void SourceStaticConstructorNoStaticFields()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static C() { }
@@ -133,7 +140,8 @@ class C
         [Fact]
         public void SourceStaticConstructorNoStaticInitializers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static C() { }
@@ -152,7 +160,8 @@ class C
         [Fact]
         public void SourceStaticConstructorStaticInitializers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static C() { }
@@ -171,7 +180,8 @@ class C
         [Fact]
         public void SourceStaticConstructorConstantInitializers()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static C() { }
@@ -191,7 +201,8 @@ class C
         [Fact]
         public void SourceStaticConstructorConstantInitializersDecimal01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     const decimal dec1 = 12345;
@@ -206,7 +217,8 @@ class C
         [Fact]
         public void SourceStaticConstructorConstantInitializersDecimal02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static C() { }
@@ -223,7 +235,8 @@ class C
         [Fact]
         public void SourceStaticConstructorConstantInitializersDecimal03()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     decimal dec1 = 12345;
@@ -238,7 +251,8 @@ class C
         [Fact]
         public void SourceStaticConstructorConstantInitializersDecimal04()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static C() { }
@@ -255,7 +269,8 @@ class C
         [Fact]
         public void SourceStaticConstructorConstantInitializersDecimal05()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     static int s1 = 1;
@@ -271,7 +286,8 @@ class C
         [Fact]
         public void StaticConstructorNullInitializer()
         {
-            var source = @"
+            var source =
+                @"
 #nullable enable
 class C
 {
@@ -288,13 +304,16 @@ class C
         private static SourceNamedTypeSymbol CompileAndExtractTypeSymbol(string source)
         {
             var compilation = CreateCompilation(source);
-            var typeSymbol = (SourceNamedTypeSymbol)compilation.GlobalNamespace.GetMembers("C").Single();
+            var typeSymbol = (SourceNamedTypeSymbol)
+                compilation.GlobalNamespace.GetMembers("C").Single();
             return typeSymbol;
         }
 
         private static bool HasSynthesizedStaticConstructor(NamedTypeSymbol typeSymbol)
         {
-            foreach (var member in typeSymbol.GetMembers(WellKnownMemberNames.StaticConstructorName))
+            foreach (
+                var member in typeSymbol.GetMembers(WellKnownMemberNames.StaticConstructorName)
+            )
             {
                 if (member.IsImplicitlyDeclared)
                 {

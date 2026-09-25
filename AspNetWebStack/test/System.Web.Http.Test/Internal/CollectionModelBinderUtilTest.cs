@@ -19,11 +19,18 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => new ReadOnlyCollection<int>(new int[0]), typeof(ICollection<int>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => new ReadOnlyCollection<int>(new int[0]),
+                    typeof(ICollection<int>)
+                ),
             };
 
             // Act
-            CollectionModelBinderUtil.CreateOrReplaceCollection(bindingContext, new[] { 10, 20, 30 }, () => new List<int>());
+            CollectionModelBinderUtil.CreateOrReplaceCollection(
+                bindingContext,
+                new[] { 10, 20, 30 },
+                () => new List<int>()
+            );
 
             // Assert
             int[] newModel = (bindingContext.Model as ICollection<int>).ToArray();
@@ -37,11 +44,18 @@ namespace System.Web.Http.Internal
             List<int> originalInstance = new List<int> { 10, 20, 30 };
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => originalInstance, typeof(ICollection<int>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => originalInstance,
+                    typeof(ICollection<int>)
+                ),
             };
 
             // Act
-            CollectionModelBinderUtil.CreateOrReplaceCollection(bindingContext, new[] { 40, 50, 60 }, () => new List<int>());
+            CollectionModelBinderUtil.CreateOrReplaceCollection(
+                bindingContext,
+                new[] { 40, 50, 60 },
+                () => new List<int>()
+            );
 
             // Assert
             Assert.Same(originalInstance, bindingContext.Model);
@@ -54,11 +68,18 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(ICollection<int>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(ICollection<int>)
+                ),
             };
 
             // Act
-            CollectionModelBinderUtil.CreateOrReplaceCollection(bindingContext, new[] { 10, 20, 30 }, () => new List<int>());
+            CollectionModelBinderUtil.CreateOrReplaceCollection(
+                bindingContext,
+                new[] { 10, 20, 30 },
+                () => new List<int>()
+            );
 
             // Assert
             int[] newModel = (bindingContext.Model as ICollection<int>).ToArray();
@@ -71,7 +92,10 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(Dictionary<string, int>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(Dictionary<string, int>)
+                ),
             };
 
             // Act
@@ -81,9 +105,10 @@ namespace System.Web.Http.Internal
                 {
                     new KeyValuePair<string, int>("forty-two", 40),
                     new KeyValuePair<string, int>("forty-two", 2),
-                    new KeyValuePair<string, int>("forty-two", 42)
+                    new KeyValuePair<string, int>("forty-two", 42),
                 },
-                () => new Dictionary<string, int>());
+                () => new Dictionary<string, int>()
+            );
 
             // Assert
             IDictionary<string, int> newModel = bindingContext.Model as IDictionary<string, int>;
@@ -97,7 +122,10 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(Dictionary<string, int>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(Dictionary<string, int>)
+                ),
             };
 
             // Act
@@ -106,9 +134,10 @@ namespace System.Web.Http.Internal
                 new[]
                 {
                     new KeyValuePair<string, int>("forty-two", 42),
-                    new KeyValuePair<string, int>(null, 84)
+                    new KeyValuePair<string, int>(null, 84),
                 },
-                () => new Dictionary<string, int>());
+                () => new Dictionary<string, int>()
+            );
 
             // Assert
             IDictionary<string, int> newModel = bindingContext.Model as IDictionary<string, int>;
@@ -120,24 +149,27 @@ namespace System.Web.Http.Internal
         public void CreateOrReplaceDictionary_OriginalModelImmutable_CreatesNewInstance()
         {
             // Arrange
-            ReadOnlyDictionary<string, string> originalModel = new ReadOnlyDictionary<string, string>();
+            ReadOnlyDictionary<string, string> originalModel =
+                new ReadOnlyDictionary<string, string>();
 
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => originalModel, typeof(IDictionary<string, string>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => originalModel,
+                    typeof(IDictionary<string, string>)
+                ),
             };
 
             // Act
             CollectionModelBinderUtil.CreateOrReplaceDictionary(
                 bindingContext,
-                new Dictionary<string, string>
-                {
-                    { "Hello", "World" }
-                },
-                () => new Dictionary<string, string>());
+                new Dictionary<string, string> { { "Hello", "World" } },
+                () => new Dictionary<string, string>()
+            );
 
             // Assert
-            IDictionary<string, string> newModel = bindingContext.Model as IDictionary<string, string>;
+            IDictionary<string, string> newModel =
+                bindingContext.Model as IDictionary<string, string>;
             Assert.NotSame(originalModel, newModel);
             Assert.Equal(new[] { "Hello" }, newModel.Keys.ToArray());
             Assert.Equal("World", newModel["Hello"]);
@@ -150,22 +182,22 @@ namespace System.Web.Http.Internal
             Dictionary<string, string> originalInstance = new Dictionary<string, string>
             {
                 { "dog", "Canidae" },
-                { "cat", "Felidae" }
+                { "cat", "Felidae" },
             };
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => originalInstance, typeof(IDictionary<string, string>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => originalInstance,
+                    typeof(IDictionary<string, string>)
+                ),
             };
 
             // Act
             CollectionModelBinderUtil.CreateOrReplaceDictionary(
                 bindingContext,
-                new Dictionary<string, string>
-                {
-                    { "horse", "Equidae" },
-                    { "bear", "Ursidae" }
-                },
-                () => new Dictionary<string, string>());
+                new Dictionary<string, string> { { "horse", "Equidae" }, { "bear", "Ursidae" } },
+                () => new Dictionary<string, string>()
+            );
 
             // Assert
             Assert.Same(originalInstance, bindingContext.Model);
@@ -180,21 +212,22 @@ namespace System.Web.Http.Internal
             // Arrange
             ModelBindingContext bindingContext = new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, typeof(IDictionary<string, string>))
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    typeof(IDictionary<string, string>)
+                ),
             };
 
             // Act
             CollectionModelBinderUtil.CreateOrReplaceDictionary(
                 bindingContext,
-                new Dictionary<string, string>
-                {
-                    { "horse", "Equidae" },
-                    { "bear", "Ursidae" }
-                },
-                () => new Dictionary<string, string>());
+                new Dictionary<string, string> { { "horse", "Equidae" }, { "bear", "Ursidae" } },
+                () => new Dictionary<string, string>()
+            );
 
             // Assert
-            IDictionary<string, string> newModel = bindingContext.Model as IDictionary<string, string>;
+            IDictionary<string, string> newModel =
+                bindingContext.Model as IDictionary<string, string>;
             Assert.Equal(new[] { "horse", "bear" }, newModel.Keys.ToArray());
             Assert.Equal("Equidae", newModel["horse"]);
             Assert.Equal("Ursidae", newModel["bear"]);
@@ -204,7 +237,8 @@ namespace System.Web.Http.Internal
         public void GetIndexNamesFromValueProviderResult_ValueProviderResultIsNull_ReturnsNull()
         {
             // Act
-            IEnumerable<string> indexNames = CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(null);
+            IEnumerable<string> indexNames =
+                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(null);
 
             // Assert
             Assert.Null(indexNames);
@@ -217,7 +251,8 @@ namespace System.Web.Http.Internal
             ValueProviderResult vpResult = new ValueProviderResult(new string[0], "", null);
 
             // Act
-            IEnumerable<string> indexNames = CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(vpResult);
+            IEnumerable<string> indexNames =
+                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(vpResult);
 
             // Assert
             Assert.Null(indexNames);
@@ -227,10 +262,15 @@ namespace System.Web.Http.Internal
         public void GetIndexNamesFromValueProviderResult_ValueProviderResultReturnsNonEmptyArray_ReturnsArray()
         {
             // Arrange
-            ValueProviderResult vpResult = new ValueProviderResult(new[] { "foo", "bar", "baz" }, "foo,bar,baz", null);
+            ValueProviderResult vpResult = new ValueProviderResult(
+                new[] { "foo", "bar", "baz" },
+                "foo,bar,baz",
+                null
+            );
 
             // Act
-            IEnumerable<string> indexNames = CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(vpResult);
+            IEnumerable<string> indexNames =
+                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(vpResult);
 
             // Assert
             Assert.NotNull(indexNames);
@@ -244,7 +284,8 @@ namespace System.Web.Http.Internal
             ValueProviderResult vpResult = new ValueProviderResult(null, null, null);
 
             // Act
-            IEnumerable<string> indexNames = CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(vpResult);
+            IEnumerable<string> indexNames =
+                CollectionModelBinderUtil.GetIndexNamesFromValueProviderResult(vpResult);
 
             // Assert
             Assert.Null(indexNames);
@@ -260,7 +301,9 @@ namespace System.Web.Http.Internal
             Assert.Equal(new[] { "0", "1", "2", "3", "4" }, indexes);
         }
 
-        private class ReadOnlyDictionary<TKey, TValue> : Dictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>
+        private class ReadOnlyDictionary<TKey, TValue>
+            : Dictionary<TKey, TValue>,
+                ICollection<KeyValuePair<TKey, TValue>>
         {
             bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly
             {

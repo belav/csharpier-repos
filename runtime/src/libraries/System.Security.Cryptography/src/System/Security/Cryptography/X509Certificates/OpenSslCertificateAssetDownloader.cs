@@ -96,7 +96,10 @@ namespace System.Security.Cryptography.X509Certificates
             return null;
         }
 
-        internal static SafeOcspResponseHandle? DownloadOcspGet(string uri, TimeSpan downloadTimeout)
+        internal static SafeOcspResponseHandle? DownloadOcspGet(
+            string uri,
+            TimeSpan downloadTimeout
+        )
         {
             byte[]? data = DownloadAsset(uri, downloadTimeout);
 

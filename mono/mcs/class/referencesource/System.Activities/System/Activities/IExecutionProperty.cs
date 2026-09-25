@@ -13,5 +13,3 @@ namespace System.Activities
         void CleanupWorkflowThread();
     }
 }
-
-

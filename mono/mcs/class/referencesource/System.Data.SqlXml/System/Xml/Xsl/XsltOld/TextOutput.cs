@@ -1,52 +1,59 @@
 //------------------------------------------------------------------------------
 // <copyright file="TextOutput.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Xsl.XsltOld {
-    using Res = System.Xml.Utils.Res;
+namespace System.Xml.Xsl.XsltOld
+{
     using System;
     using System.IO;
+    using System.Text;
     using System.Xml;
     using System.Xml.XPath;
-    using System.Text;
+    using Res = System.Xml.Utils.Res;
 
-    internal class TextOutput : SequentialOutput {
+    internal class TextOutput : SequentialOutput
+    {
         private TextWriter writer;
 
         internal TextOutput(Processor processor, Stream stream)
-            : base(processor) 
+            : base(processor)
         {
-            if (stream == null) {
+            if (stream == null)
+            {
                 throw new ArgumentNullException("stream");
             }
 
             this.encoding = processor.Output.Encoding;
-            this.writer   = new StreamWriter(stream, this.encoding);
+            this.writer = new StreamWriter(stream, this.encoding);
         }
 
         internal TextOutput(Processor processor, TextWriter writer)
-            : base(processor) 
+            : base(processor)
         {
-            if (writer == null) {
+            if (writer == null)
+            {
                 throw new ArgumentNullException("writer");
             }
 
             this.encoding = writer.Encoding;
-            this.writer   = writer;
+            this.writer = writer;
         }
 
-        internal override void Write(char outputChar) {
+        internal override void Write(char outputChar)
+        {
             this.writer.Write(outputChar);
         }
 
-        internal override void Write(string outputText) {
+        internal override void Write(string outputText)
+        {
             this.writer.Write(outputText);
         }
 
-        internal override void Close() {
+        internal override void Close()
+        {
             this.writer.Flush();
             this.writer = null;
         }

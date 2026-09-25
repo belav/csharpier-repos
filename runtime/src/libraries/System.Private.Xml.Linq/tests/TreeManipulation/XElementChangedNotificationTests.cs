@@ -4,7 +4,6 @@
 using System;
 using System.Xml;
 using System.Xml.Linq;
-
 using Xunit;
 
 namespace XLinqTests

@@ -10,22 +10,26 @@ namespace Test_NUnit.Internals
     public class ReflectionTest
     {
         //there was a bug where intField1 would be listed multiple times in a select statement:
-        public class Class1 
-        { 
+        public class Class1
+        {
             protected int intField1;
             public int publicField;
         }
-        public class Class2 : Class1 
-        { 
-            protected int intField2; 
+
+        public class Class2 : Class1
+        {
+            protected int intField2;
         }
+
 #if OBSOLETE
         [Test]
         public void AttribHelper_NoDuplicateFields()
         {
             //Andrus pointed out that one of the internal classes that help with reflection
             //returns fields in duplicate, which kills SQL SELECT and UPDATEs.
-            System.Reflection.MemberInfo[] members = DbLinq.Util.AttribHelper.GetMemberFields(typeof(Class2));
+            System.Reflection.MemberInfo[] members = DbLinq.Util.AttribHelper.GetMemberFields(
+                typeof(Class2)
+            );
             Assert.IsTrue(members.Length == 3);
         }
 
@@ -34,10 +38,11 @@ namespace Test_NUnit.Internals
         {
             //Andrus pointed out that one of the internal classes that help with reflection
             //returns fields in duplicate, which kills SQL SELECT and UPDATEs.
-            System.Reflection.MemberInfo[] members = DbLinq.Util.AttribHelper.GetMemberFields(typeof(Class1));
+            System.Reflection.MemberInfo[] members = DbLinq.Util.AttribHelper.GetMemberFields(
+                typeof(Class1)
+            );
             Assert.IsTrue(members.Length == 2);
         }
 #endif
-
     }
 }

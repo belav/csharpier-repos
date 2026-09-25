@@ -32,6 +32,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -40,11 +41,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
 
         public static int MainMethod(string[] args)
         {
-            List<dynamic> myList = new List<dynamic>()
-            {
-            new A(), new B()}
-
-            ;
+            List<dynamic> myList = new List<dynamic>() { new A(), new B() };
             int i = 1;
             foreach (var item in myList)
             {
@@ -58,8 +55,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract002.extract002
 {
@@ -90,6 +85,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -98,11 +94,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
 
         public static int MainMethod(string[] args)
         {
-            List<object> myList = new List<object>()
-            {
-            new A(), new B()}
-
-            ;
+            List<object> myList = new List<object>() { new A(), new B() };
             int i = 1;
             foreach (dynamic item in myList)
             {
@@ -116,8 +108,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract003.extract003
 {
@@ -148,6 +138,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -156,11 +147,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
 
         public static int MainMethod(string[] args)
         {
-            List<dynamic> myList = new List<object>()
-            {
-            new A(), new B()}
-
-            ;
+            List<dynamic> myList = new List<object>() { new A(), new B() };
             int i = 1;
             foreach (var item in myList)
             {
@@ -174,8 +161,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract004.extract004
 {
@@ -207,17 +192,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     {
         public List<dynamic> GetList()
         {
-            return new List<dynamic>()
-            {
-            new A(), new B()}
-
-            ;
+            return new List<dynamic>() { new A(), new B() };
         }
     }
 
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -240,8 +222,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract005.extract005
 {
@@ -273,17 +253,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     {
         public List<dynamic> GetList()
         {
-            return new List<object>()
-            {
-            new A(), new B()}
-
-            ;
+            return new List<object>() { new A(), new B() };
         }
     }
 
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -306,8 +283,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract006.extract006
 {
@@ -339,17 +314,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     {
         public IEnumerable<dynamic> GetList()
         {
-            return new List<dynamic>()
-            {
-            new A(), new B()}
-
-            ;
+            return new List<dynamic>() { new A(), new B() };
         }
     }
 
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -372,8 +344,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract007.extract007
 {
@@ -405,17 +375,14 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     {
         public IEnumerable<dynamic> GetList()
         {
-            return new List<object>()
-            {
-            new A(), new B()}
-
-            ;
+            return new List<object>() { new A(), new B() };
         }
     }
 
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -438,8 +405,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract008.extract008
 {
@@ -465,11 +430,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
         {
             var list = new List<Dictionary<string, List<dynamic>>>();
             var dict = new Dictionary<string, List<dynamic>>();
-            dict.Add("Test", new List<dynamic>()
-            {
-            new A()}
-
-            );
+            dict.Add("Test", new List<dynamic>() { new A() });
             list.Add(dict);
             return list;
         }
@@ -478,6 +439,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -496,8 +458,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract009.extract009
 {
@@ -523,11 +483,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
         {
             var list = new List<Dictionary<string, List<object>>>();
             var dict = new Dictionary<string, List<object>>();
-            dict.Add("Test", new List<object>()
-            {
-            new A()}
-
-            );
+            dict.Add("Test", new List<object>() { new A() });
             list.Add(dict);
             return list;
         }
@@ -536,6 +492,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -554,8 +511,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract010.extract010
 {
@@ -592,11 +547,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
             var dict2 = new Dictionary<string, List<dynamic>>();
             list.Add(dict);
             dict.Add("bar", dict2);
-            dict2.Add("foo", new List<dynamic>()
-            {
-            new A(), new B()}
-
-            );
+            dict2.Add("foo", new List<dynamic>() { new A(), new B() });
             return list;
         }
     }
@@ -604,6 +555,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {
@@ -622,8 +574,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.extractDynamic.extract011.extract011
 {
@@ -653,6 +603,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class C<T>
     {
         public T t;
+
         public T getT()
         {
             return t;
@@ -668,6 +619,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     {
         public T t;
         public U u;
+
         public T getT()
         {
             return t;
@@ -704,6 +656,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.generics.ex
     public class Test
     {
         public static int Status;
+
         [Fact]
         public static void DynamicCSharpRunTest()
         {

@@ -82,10 +82,8 @@ public class SpaProxyTests
     )
     {
         HttpRequestMessage forwardedRequestMessage = null;
-        var (context, httpClient) = GetHttpContextAndClient(
-            path,
-            queryString,
-            (req) => forwardedRequestMessage = req
+        var (context, httpClient) = GetHttpContextAndClient(path, queryString, (req) =>
+            forwardedRequestMessage = req
         );
         var baseUriTask = Task.FromResult(new Uri(baseUrl));
         var res = await SpaProxy.PerformProxyRequest(

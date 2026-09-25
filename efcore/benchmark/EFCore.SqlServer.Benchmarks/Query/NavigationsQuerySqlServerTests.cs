@@ -7,6 +7,6 @@ namespace Microsoft.EntityFrameworkCore.Benchmarks.Query;
 
 public class NavigationsQuerySqlServerTests : NavigationsQueryTests
 {
-    protected override AdventureWorksContextBase CreateContext()
-        => AdventureWorksSqlServerFixture.CreateContext();
+    protected override AdventureWorksContextBase CreateContext() =>
+        AdventureWorksSqlServerFixture.CreateContext();
 }

@@ -9,40 +9,53 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class EntityTypeConfigurationAttributeConvention : TypeAttributeConventionBase<EntityTypeConfigurationAttribute>,
-    IComplexPropertyAddedConvention
+public class EntityTypeConfigurationAttributeConvention
+    : TypeAttributeConventionBase<EntityTypeConfigurationAttribute>,
+        IComplexPropertyAddedConvention
 {
-    private static readonly MethodInfo ConfigureMethod
-        = typeof(EntityTypeConfigurationAttributeConvention).GetTypeInfo().GetDeclaredMethod(nameof(Configure))!;
+    private static readonly MethodInfo ConfigureMethod =
+        typeof(EntityTypeConfigurationAttributeConvention)
+            .GetTypeInfo()
+            .GetDeclaredMethod(nameof(Configure))!;
 
     /// <summary>
     ///     Creates a new instance of <see cref="EntityTypeConfigurationAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public EntityTypeConfigurationAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public EntityTypeConfigurationAttributeConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
+        : base(dependencies) { }
 
     /// <inheritdoc />
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         EntityTypeConfigurationAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var entityTypeConfigurationType = attribute.EntityTypeConfigurationType;
 
-        if (!entityTypeConfigurationType.GetInterfaces().Any(
-                x => x.IsGenericType
+        if (
+            !entityTypeConfigurationType
+                .GetInterfaces()
+                .Any(x =>
+                    x.IsGenericType
                     && x.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)
-                    && x.GenericTypeArguments[0] == entityTypeBuilder.Metadata.ClrType))
+                    && x.GenericTypeArguments[0] == entityTypeBuilder.Metadata.ClrType
+                )
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.InvalidEntityTypeConfigurationAttribute(
-                    entityTypeConfigurationType.ShortDisplayName(), entityTypeBuilder.Metadata.ShortName()));
+                    entityTypeConfigurationType.ShortDisplayName(),
+                    entityTypeBuilder.Metadata.ShortName()
+                )
+            );
         }
 
-        ConfigureMethod.MakeGenericMethod(entityTypeBuilder.Metadata.ClrType)
+        ConfigureMethod
+            .MakeGenericMethod(entityTypeBuilder.Metadata.ClrType)
             .Invoke(null, new object[] { entityTypeBuilder.Metadata, entityTypeConfigurationType });
     }
 
@@ -50,7 +63,8 @@ public class EntityTypeConfigurationAttributeConvention : TypeAttributeConventio
     protected override void ProcessComplexTypeAdded(
         IConventionComplexTypeBuilder complexTypeBuilder,
         EntityTypeConfigurationAttribute attribute,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         if (ReplaceWithEntityType(complexTypeBuilder) != null)
         {
@@ -58,11 +72,16 @@ public class EntityTypeConfigurationAttributeConvention : TypeAttributeConventio
         }
     }
 
-    private static void Configure<TEntity>(IConventionEntityType entityType, Type entityTypeConfigurationType)
+    private static void Configure<TEntity>(
+        IConventionEntityType entityType,
+        Type entityTypeConfigurationType
+    )
         where TEntity : class
     {
         var entityTypeBuilder = new EntityTypeBuilder<TEntity>((IMutableEntityType)entityType);
-        var entityTypeConfiguration = (IEntityTypeConfiguration<TEntity>)Activator.CreateInstance(entityTypeConfigurationType)!;
+        var entityTypeConfiguration =
+            (IEntityTypeConfiguration<TEntity>)
+                Activator.CreateInstance(entityTypeConfigurationType)!;
         entityTypeConfiguration.Configure(entityTypeBuilder);
     }
 }

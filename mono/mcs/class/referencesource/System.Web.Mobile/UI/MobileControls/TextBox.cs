@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="TextBox.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,15 +10,14 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile TextBox class.
      *
@@ -27,18 +26,30 @@ namespace System.Web.UI.MobileControls
     /// <include file='doc\TextBox.uex' path='docs/doc[@for="TextBox"]/*' />
     [
         ControlBuilderAttribute(typeof(TextBoxControlBuilder)),
-        DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign),
+        DataBindingHandler(
+            "System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign
+        ),
         DefaultEvent("TextChanged"),
         DefaultProperty("Text"),
         Designer(typeof(System.Web.UI.Design.MobileControls.TextBoxDesigner)),
-        DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerTextBoxAdapter)),
+        DesignerAdapter(
+            typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerTextBoxAdapter)
+        ),
         ToolboxData("<{0}:TextBox runat=\"server\"></{0}:TextBox>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign),
         ValidationProperty("Text")
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class TextBox : TextControl, IPostBackDataHandler
     {
         private static readonly Object EventTextChanged = new Object();
@@ -48,8 +59,7 @@ namespace System.Web.UI.MobileControls
         protected bool LoadPostData(String key, NameValueCollection data)
         {
             bool dataChanged = false;
-            bool handledByAdapter =
-                Adapter.LoadPostData(key, data, null, out dataChanged);
+            bool handledByAdapter = Adapter.LoadPostData(key, data, null, out dataChanged);
 
             if (!handledByAdapter)
             {
@@ -57,7 +67,7 @@ namespace System.Web.UI.MobileControls
                 if (Text != value)
                 {
                     Text = value;
-                    dataChanged = true;    // this will cause a RaisePostDataChangedEvent()
+                    dataChanged = true; // this will cause a RaisePostDataChangedEvent()
                 }
             }
 
@@ -77,7 +87,7 @@ namespace System.Web.UI.MobileControls
             EventHandler onTextChangedHandler = (EventHandler)Events[EventTextChanged];
             if (onTextChangedHandler != null)
             {
-                onTextChangedHandler(this,e);
+                onTextChangedHandler(this, e);
             }
         }
 
@@ -96,10 +106,7 @@ namespace System.Web.UI.MobileControls
                 Object b = ViewState["Password"];
                 return (b != null) ? (bool)b : false;
             }
-            set
-            {
-                ViewState["Password"] = value;
-            }
+            set { ViewState["Password"] = value; }
         }
 
         /// <include file='doc\TextBox.uex' path='docs/doc[@for="TextBox.Numeric"]/*' />
@@ -117,10 +124,7 @@ namespace System.Web.UI.MobileControls
                 Object b = ViewState["Numeric"];
                 return (b != null) ? (bool)b : false;
             }
-            set
-            {
-                ViewState["Numeric"] = value;
-            }
+            set { ViewState["Numeric"] = value; }
         }
 
         /// <include file='doc\TextBox.uex' path='docs/doc[@for="TextBox.Size"]/*' />
@@ -135,14 +139,17 @@ namespace System.Web.UI.MobileControls
             get
             {
                 Object i = ViewState["Size"];
-                return((i != null) ? (int)i : 0);
+                return ((i != null) ? (int)i : 0);
             }
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("Size", value,
-                        SR.GetString(SR.TextBox_NotNegativeNumber));
+                    throw new ArgumentOutOfRangeException(
+                        "Size",
+                        value,
+                        SR.GetString(SR.TextBox_NotNegativeNumber)
+                    );
                 }
                 ViewState["Size"] = value;
             }
@@ -160,33 +167,28 @@ namespace System.Web.UI.MobileControls
             get
             {
                 Object i = ViewState["MaxLength"];
-                return((i != null) ? (int)i : 0);
+                return ((i != null) ? (int)i : 0);
             }
             set
             {
                 if (value < 0)
                 {
-                    throw new ArgumentOutOfRangeException("MaxLength", value,
-                        SR.GetString(SR.TextBox_NotNegativeNumber));
+                    throw new ArgumentOutOfRangeException(
+                        "MaxLength",
+                        value,
+                        SR.GetString(SR.TextBox_NotNegativeNumber)
+                    );
                 }
                 ViewState["MaxLength"] = value;
             }
         }
 
         /// <include file='doc\TextBox.uex' path='docs/doc[@for="TextBox.TextChanged"]/*' />
-        [
-            MobileSysDescription(SR.TextBox_OnTextChanged)
-        ]
+        [MobileSysDescription(SR.TextBox_OnTextChanged)]
         public event EventHandler TextChanged
         {
-            add
-            {
-                Events.AddHandler(EventTextChanged, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventTextChanged, value);
-            }
+            add { Events.AddHandler(EventTextChanged, value); }
+            remove { Events.RemoveHandler(EventTextChanged, value); }
         }
 
         /// <include file='doc\TextBox.uex' path='docs/doc[@for="TextBox.Title"]/*' />
@@ -198,41 +200,31 @@ namespace System.Web.UI.MobileControls
         ]
         public String Title
         {
-            get
-            {
-                return ToString(ViewState["Title"]);
-            }
-            set
-            {
-                ViewState["Title"] = value;
-            }
+            get { return ToString(ViewState["Title"]); }
+            set { ViewState["Title"] = value; }
         }
 
         internal override bool TrimInnerText
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal override bool TrimNewlines
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         #region IPostBackDataHandler implementation
-        bool IPostBackDataHandler.LoadPostData(String key, NameValueCollection data) {
+        bool IPostBackDataHandler.LoadPostData(String key, NameValueCollection data)
+        {
             return LoadPostData(key, data);
         }
 
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
-        #endregion 
+        #endregion
     }
 
     /*
@@ -242,9 +234,17 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\TextBox.uex' path='docs/doc[@for="TextBoxControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class TextBoxControlBuilder : MobileControlBuilder
     {
         // Textbox allows whitespace inside text.
@@ -255,5 +255,4 @@ namespace System.Web.UI.MobileControls
             return true;
         }
     }
-
 }

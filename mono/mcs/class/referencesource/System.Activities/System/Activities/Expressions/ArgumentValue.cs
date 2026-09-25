@@ -13,20 +13,14 @@ namespace System.Activities.Expressions
     {
         RuntimeArgument targetArgument;
 
-        public ArgumentValue()
-        {
-        }
+        public ArgumentValue() { }
 
         public ArgumentValue(string argumentName)
         {
             this.ArgumentName = argumentName;
         }
 
-        public string ArgumentName
-        {
-            get;
-            set;
-        }
+        public string ArgumentName { get; set; }
 
         public override LocationReference LocationReference
         {
@@ -51,7 +45,13 @@ namespace System.Activities.Expressions
                 }
                 else if (!TypeHelper.AreTypesCompatible(this.targetArgument.Type, typeof(T)))
                 {
-                    metadata.AddValidationError(SR.ArgumentTypeMustBeCompatible(this.ArgumentName, this.targetArgument.Type, typeof(T)));
+                    metadata.AddValidationError(
+                        SR.ArgumentTypeMustBeCompatible(
+                            this.ArgumentName,
+                            this.targetArgument.Type,
+                            typeof(T)
+                        )
+                    );
                 }
             }
         }

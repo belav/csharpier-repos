@@ -12,15 +12,28 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestCtor()
         {
-            var blocks = new[] {
+            var blocks = new[]
+            {
                 new WriteOnceBlock<int>(null), // valid
                 new WriteOnceBlock<int>(i => i),
                 new WriteOnceBlock<int>(null, new DataflowBlockOptions()),
                 new WriteOnceBlock<int>(i => i, new DataflowBlockOptions { BoundedCapacity = 2 }),
-                new WriteOnceBlock<int>(null, new DataflowBlockOptions { CancellationToken = new CancellationTokenSource().Token  }),
-                new WriteOnceBlock<int>(null, new DataflowBlockOptions { MaxMessagesPerTask = 1  }),
-                new WriteOnceBlock<int>(null, new DataflowBlockOptions { NameFormat = ""  }),
-                new WriteOnceBlock<int>(null, new DataflowBlockOptions { TaskScheduler = new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler  }),
+                new WriteOnceBlock<int>(
+                    null,
+                    new DataflowBlockOptions
+                    {
+                        CancellationToken = new CancellationTokenSource().Token,
+                    }
+                ),
+                new WriteOnceBlock<int>(null, new DataflowBlockOptions { MaxMessagesPerTask = 1 }),
+                new WriteOnceBlock<int>(null, new DataflowBlockOptions { NameFormat = "" }),
+                new WriteOnceBlock<int>(
+                    null,
+                    new DataflowBlockOptions
+                    {
+                        TaskScheduler = new ConcurrentExclusiveSchedulerPair().ExclusiveScheduler,
+                    }
+                ),
             };
             foreach (var block in blocks)
             {
@@ -36,17 +49,23 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new WriteOnceBlock<int>(i => i, null));
             DataflowTestHelpers.TestArgumentsExceptions(new WriteOnceBlock<int>(i => i));
-            Assert.Throws<ArgumentNullException>(() => ((ITargetBlock<int>)new WriteOnceBlock<int>(null)).Fault(null));
+            Assert.Throws<ArgumentNullException>(() =>
+                ((ITargetBlock<int>)new WriteOnceBlock<int>(null)).Fault(null)
+            );
         }
 
         [Fact]
         public void TestToString()
         {
             // Test ToString() with the only custom configuration being NameFormat
-            DataflowTestHelpers.TestToString(
-                nameFormat => nameFormat != null ?
-                    new WriteOnceBlock<int>(i => i, new DataflowBlockOptions() { NameFormat = nameFormat }) :
-                    new WriteOnceBlock<int>(i => i));
+            DataflowTestHelpers.TestToString(nameFormat =>
+                nameFormat != null
+                    ? new WriteOnceBlock<int>(
+                        i => i,
+                        new DataflowBlockOptions() { NameFormat = nameFormat }
+                    )
+                    : new WriteOnceBlock<int>(i => i)
+            );
         }
 
         [Fact]
@@ -57,19 +76,22 @@ namespace System.Threading.Tasks.Dataflow.Tests
             foreach (bool append in DataflowTestHelpers.BooleanValues)
             foreach (int maxMessages in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
             {
-                var wob = consumeToAccept ?
-                    new WriteOnceBlock<int>(i => i) :
-                    new WriteOnceBlock<int>(null);
+                var wob = consumeToAccept
+                    ? new WriteOnceBlock<int>(i => i)
+                    : new WriteOnceBlock<int>(null);
 
                 int result = 0;
                 const int Count = 10;
                 Assert.True(Count % 2 == 0);
-                var targets = Enumerable.Range(0, Count).Select(i => new ActionBlock<int>(_ => Interlocked.Increment(ref result))).ToArray();
+                var targets = Enumerable
+                    .Range(0, Count)
+                    .Select(i => new ActionBlock<int>(_ => Interlocked.Increment(ref result)))
+                    .ToArray();
                 var options = new DataflowLinkOptions
                 {
                     MaxMessages = maxMessages,
                     Append = append,
-                    PropagateCompletion = propagateCompletion
+                    PropagateCompletion = propagateCompletion,
                 };
 
                 for (int i = 0; i < Count / 2; i++)
@@ -105,8 +127,16 @@ namespace System.Threading.Tasks.Dataflow.Tests
             var generators = new Func<WriteOnceBlock<int>>[]
             {
                 () => new WriteOnceBlock<int>(i => i),
-                () => new WriteOnceBlock<int>(i => i, new DataflowBlockOptions { BoundedCapacity = 10 }),
-                () => new WriteOnceBlock<int>(i => i, new DataflowBlockOptions { BoundedCapacity = 10, MaxMessagesPerTask = 1 })
+                () =>
+                    new WriteOnceBlock<int>(
+                        i => i,
+                        new DataflowBlockOptions { BoundedCapacity = 10 }
+                    ),
+                () =>
+                    new WriteOnceBlock<int>(
+                        i => i,
+                        new DataflowBlockOptions { BoundedCapacity = 10, MaxMessagesPerTask = 1 }
+                    ),
             };
             foreach (var generator in generators)
             {
@@ -125,10 +155,22 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 target = generator();
                 Assert.Equal(
                     expected: DataflowMessageStatus.Accepted,
-                    actual: ((ITargetBlock<int>)target).OfferMessage(new DataflowMessageHeader(1), 1, null, false));
+                    actual: ((ITargetBlock<int>)target).OfferMessage(
+                        new DataflowMessageHeader(1),
+                        1,
+                        null,
+                        false
+                    )
+                );
                 Assert.Equal(
                     expected: DataflowMessageStatus.DecliningPermanently,
-                    actual: ((ITargetBlock<int>)target).OfferMessage(new DataflowMessageHeader(1), 1, null, false));
+                    actual: ((ITargetBlock<int>)target).OfferMessage(
+                        new DataflowMessageHeader(1),
+                        1,
+                        null,
+                        false
+                    )
+                );
                 await target.Completion;
             }
         }
@@ -144,7 +186,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             foreach (int boundedCapacity in new[] { DataflowBlockOptions.Unbounded, 1, 2 })
             {
-                var wob = new WriteOnceBlock<int>(i => i, new DataflowBlockOptions { BoundedCapacity = boundedCapacity }); // options shouldn't affect anything
+                var wob = new WriteOnceBlock<int>(
+                    i => i,
+                    new DataflowBlockOptions { BoundedCapacity = boundedCapacity }
+                ); // options shouldn't affect anything
                 Assert.True(wob.Post(1));
                 Assert.False(wob.Post(2));
                 await wob.Completion;
@@ -210,7 +255,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestBroadcasting()
         {
             var wob = new WriteOnceBlock<int>(i => i + 1);
-            var targets = Enumerable.Range(0, 3).Select(_ => new TransformBlock<int, int>(i => i)).ToArray();
+            var targets = Enumerable
+                .Range(0, 3)
+                .Select(_ => new TransformBlock<int, int>(i => i))
+                .ToArray();
             foreach (var target in targets)
             {
                 wob.LinkTo(target);
@@ -232,7 +280,10 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 {
                     cts.Cancel();
                 }
-                var wob = new WriteOnceBlock<int>(null, new DataflowBlockOptions { CancellationToken = cts.Token });
+                var wob = new WriteOnceBlock<int>(
+                    null,
+                    new DataflowBlockOptions { CancellationToken = cts.Token }
+                );
                 if (!before)
                 {
                     cts.Cancel();
@@ -282,7 +333,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
 
                 int result = 0;
-                var target = new ActionBlock<int>(i => {
+                var target = new ActionBlock<int>(i =>
+                {
                     Assert.Equal(expected: 0, actual: result);
                     result = i;
                     Assert.Equal(expected: -data, actual: i);
@@ -315,7 +367,8 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
 
                 result = null;
-                var target = new ActionBlock<object>(o => {
+                var target = new ActionBlock<object>(o =>
+                {
                     Assert.Null(result);
                     result = o;
                     Assert.Equal(expected: data, actual: o);
@@ -341,11 +394,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         public async Task TestFaultyTarget()
         {
             var wob = new WriteOnceBlock<int>(null);
-            wob.LinkTo(new DelegatePropagator<int, int> {
-                OfferMessageDelegate = delegate {
-                    throw new FormatException();
+            wob.LinkTo(
+                new DelegatePropagator<int, int>
+                {
+                    OfferMessageDelegate = delegate
+                    {
+                        throw new FormatException();
+                    },
                 }
-            });
+            );
             wob.Post(42);
             await Assert.ThrowsAsync<FormatException>(() => wob.Completion);
         }
@@ -353,17 +410,22 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestFaultyScheduler()
         {
-            var wob = new WriteOnceBlock<int>(null, new DataflowBlockOptions {
-                TaskScheduler = new DelegateTaskScheduler {
-                    QueueTaskDelegate = delegate {
-                        throw new InvalidCastException();
-                    }
+            var wob = new WriteOnceBlock<int>(
+                null,
+                new DataflowBlockOptions
+                {
+                    TaskScheduler = new DelegateTaskScheduler
+                    {
+                        QueueTaskDelegate = delegate
+                        {
+                            throw new InvalidCastException();
+                        },
+                    },
                 }
-            });
+            );
             wob.LinkTo(DataflowBlock.NullTarget<int>());
             wob.Post(42);
             await Assert.ThrowsAsync<TaskSchedulerException>(() => wob.Completion);
         }
-
     }
 }

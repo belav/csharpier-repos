@@ -6,22 +6,24 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities.QueryTestGeneration;
 public class AppendCorrelatedCollectionExpressionMutator : ExpressionMutator
 {
     public AppendCorrelatedCollectionExpressionMutator(DbContext context)
-        : base(context)
-    {
-    }
+        : base(context) { }
 
-    private bool ContainsCollectionNavigation(Type type)
-        => Context.Model.FindEntityType(type)?.GetNavigations().Any(n => n.IsCollection) ?? false;
+    private bool ContainsCollectionNavigation(Type type) =>
+        Context.Model.FindEntityType(type)?.GetNavigations().Any(n => n.IsCollection) ?? false;
 
-    public override bool IsValid(Expression expression)
-        => IsQueryableResult(expression)
-            && IsEntityType(expression.Type.GetGenericArguments()[0])
-            && ContainsCollectionNavigation(expression.Type.GetGenericArguments()[0]);
+    public override bool IsValid(Expression expression) =>
+        IsQueryableResult(expression)
+        && IsEntityType(expression.Type.GetGenericArguments()[0])
+        && ContainsCollectionNavigation(expression.Type.GetGenericArguments()[0]);
 
     public override Expression Apply(Expression expression, Random random)
     {
         var typeArgument = expression.Type.GetGenericArguments()[0];
-        var navigations = Context.Model.FindEntityType(typeArgument).GetNavigations().Where(n => n.IsCollection).ToList();
+        var navigations = Context
+            .Model.FindEntityType(typeArgument)
+            .GetNavigations()
+            .Where(n => n.IsCollection)
+            .ToList();
 
         var i = random.Next(navigations.Count);
         var navigation = navigations[i];
@@ -41,12 +43,15 @@ public class AppendCorrelatedCollectionExpressionMutator : ExpressionMutator
             Expression.Call(
                 where,
                 Expression.Property(outerPrm, navigation.PropertyInfo),
-                Expression.Lambda(Expression.Constant(true), innerPrm)));
+                Expression.Lambda(Expression.Constant(true), innerPrm)
+            )
+        );
 
         var resultExpression = Expression.Call(
             select,
             expression,
-            Expression.Lambda(outerLambdaBody, outerPrm));
+            Expression.Lambda(outerLambdaBody, outerPrm)
+        );
 
         return resultExpression;
     }

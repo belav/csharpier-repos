@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,26 +42,35 @@ using System.Xml;
 
 namespace System.Security.Authentication.ExtendedProtection.Configuration
 {
-	internal static class ConfigUtil
-	{
-		// ugh, we cannot use extension methods yet.
-		internal static T GetCustomAttribute<T> (MemberInfo m, bool inherit)
-		{
-			var atts = m.GetCustomAttributes (typeof (T), false);
-			return atts.Length > 0 ? (T) atts [0] : default (T);
-		}
+    internal static class ConfigUtil
+    {
+        // ugh, we cannot use extension methods yet.
+        internal static T GetCustomAttribute<T>(MemberInfo m, bool inherit)
+        {
+            var atts = m.GetCustomAttributes(typeof(T), false);
+            return atts.Length > 0 ? (T)atts[0] : default(T);
+        }
 
-		internal static ConfigurationProperty BuildProperty (Type t, string name)
-		{
-			var mi = t.GetProperty (name);
+        internal static ConfigurationProperty BuildProperty(Type t, string name)
+        {
+            var mi = t.GetProperty(name);
 
-			var a = GetCustomAttribute<ConfigurationPropertyAttribute> (mi, false);
-			var tca = GetCustomAttribute<TypeConverterAttribute> (mi, false);
-			var va = GetCustomAttribute<ConfigurationValidatorAttribute> (mi, false);
+            var a = GetCustomAttribute<ConfigurationPropertyAttribute>(mi, false);
+            var tca = GetCustomAttribute<TypeConverterAttribute>(mi, false);
+            var va = GetCustomAttribute<ConfigurationValidatorAttribute>(mi, false);
 
-			return new ConfigurationProperty (a.Name, mi.PropertyType, a.DefaultValue, tca != null ? (TypeConverter) Activator.CreateInstance (Type.GetType (tca.ConverterTypeName)) : null, va != null ? va.ValidatorInstance : null, a.Options);
-		}
-	}
+            return new ConfigurationProperty(
+                a.Name,
+                mi.PropertyType,
+                a.DefaultValue,
+                tca != null
+                    ? (TypeConverter)Activator.CreateInstance(Type.GetType(tca.ConverterTypeName))
+                    : null,
+                va != null ? va.ValidatorInstance : null,
+                a.Options
+            );
+        }
+    }
 }
 
 #endif

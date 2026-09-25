@@ -19,11 +19,7 @@ namespace System.Runtime
 
         public TValue this[TKey key]
         {
-            get
-            {
-                return this.innerCollection[key];
-            }
+            get { return this.innerCollection[key]; }
         }
     }
-
 }

@@ -14,12 +14,11 @@ public class SqlServerOptionsExtensionTest
         var tasks = new Task[Environment.ProcessorCount];
         for (var i = 0; i < tasks.Length; i++)
         {
-            tasks[i] = Task.Run(
-                () =>
-                {
-                    using var ctx = new EmptyContext();
-                    Assert.NotNull(ctx.Model.GetRelationalDependencies());
-                });
+            tasks[i] = Task.Run(() =>
+            {
+                using var ctx = new EmptyContext();
+                Assert.NotNull(ctx.Model.GetRelationalDependencies());
+            });
         }
 
         Task.WaitAll(tasks);
@@ -45,15 +44,17 @@ public class SqlServerOptionsExtensionTest
             _instance = model;
         }
 
-        public EmptyContextModel(bool skipDetectChanges, Guid modelId, int entityTypeCount, int typeConfigurationCount)
-            : base(skipDetectChanges, modelId, entityTypeCount, typeConfigurationCount)
-        {
-        }
+        public EmptyContextModel(
+            bool skipDetectChanges,
+            Guid modelId,
+            int entityTypeCount,
+            int typeConfigurationCount
+        )
+            : base(skipDetectChanges, modelId, entityTypeCount, typeConfigurationCount) { }
 
         private static readonly EmptyContextModel _instance;
 
-        public static IModel Instance
-            => _instance;
+        public static IModel Instance => _instance;
     }
 
     [ConditionalFact]
@@ -68,10 +69,9 @@ public class SqlServerOptionsExtensionTest
 
     private class ChangedRowNumberContext : DbContext
     {
-        private static readonly IServiceProvider _serviceProvider
-            = new ServiceCollection()
-                .AddEntityFrameworkSqlServer()
-                .BuildServiceProvider(validateScopes: true);
+        private static readonly IServiceProvider _serviceProvider = new ServiceCollection()
+            .AddEntityFrameworkSqlServer()
+            .BuildServiceProvider(validateScopes: true);
 
         private readonly bool _setInternalServiceProvider;
 

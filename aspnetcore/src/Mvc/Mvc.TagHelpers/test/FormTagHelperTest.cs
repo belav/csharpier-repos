@@ -476,14 +476,12 @@ public class FormTagHelperTest
 
                     var routeValueDictionary = Assert.IsType<RouteValueDictionary>(routeValues);
                     Assert.Equal(2, routeValueDictionary.Count);
-                    var routeValue = Assert.Single(
-                        routeValueDictionary,
-                        attr => attr.Key.Equals("val")
+                    var routeValue = Assert.Single(routeValueDictionary, attr =>
+                        attr.Key.Equals("val")
                     );
                     Assert.Equal("hello", routeValue.Value);
-                    routeValue = Assert.Single(
-                        routeValueDictionary,
-                        attr => attr.Key.Equals("-Name")
+                    routeValue = Assert.Single(routeValueDictionary, attr =>
+                        attr.Key.Equals("-Name")
                     );
                     Assert.Equal("Value", routeValue.Value);
                 }
@@ -945,14 +943,11 @@ public class FormTagHelperTest
                 ) =>
                 {
                     var rvd = Assert.IsType<RouteValueDictionary>(routeValues);
-                    Assert.Collection(
-                        rvd.OrderBy(item => item.Key),
-                        item =>
-                        {
-                            Assert.Equal("area", item.Key);
-                            Assert.Equal("test-area", item.Value);
-                        }
-                    );
+                    Assert.Collection(rvd.OrderBy(item => item.Key), item =>
+                    {
+                        Assert.Equal("area", item.Key);
+                        Assert.Equal("test-area", item.Value);
+                    });
                 }
             )
             .Returns(new TagBuilder("form"))
@@ -1064,8 +1059,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, tagHelperOutput)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, tagHelperOutput)
         );
 
         Assert.Equal(expectedErrorMessage, ex.Message);
@@ -1106,8 +1101,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, output)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, output)
         );
 
         Assert.Equal(expectedErrorMessage, ex.Message);
@@ -1146,8 +1141,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, output)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, output)
         );
 
         Assert.Equal(expectedErrorMessage, ex.Message);
@@ -1186,8 +1181,8 @@ public class FormTagHelperTest
         );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => formTagHelper.ProcessAsync(context, output)
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            formTagHelper.ProcessAsync(context, output)
         );
 
         Assert.Equal(expectedErrorMessage, ex.Message);

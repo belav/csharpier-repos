@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using CoreXml.Test.XLinq;
-using Microsoft.Test.ModuleCore;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml;
 using System.Xml.Linq;
+using CoreXml.Test.XLinq;
+using Microsoft.Test.ModuleCore;
 
 namespace XLinqTests
 {
@@ -19,22 +19,200 @@ namespace XLinqTests
 
         public override void AddChildren()
         {
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument") { Params = new object[] { " <?PI?><!--comm-->", 1, false, false }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument with DTD and Root Elem") { Params = new object[] { "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>", 1, true, false }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument") { Params = new object[] { " <?PI?><!--comm-->", 4, false, false }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument whitespace only") { Params = new object[] { " ", 3, false, false, " " }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument with Root Elem") { Params = new object[] { "<A/>", 3, true, false }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument with DTD and Root Elem") { Params = new object[] { "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>", 4, true, false }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument - connected") { Params = new object[] { " <?PI?><!--comm-->", 1, false, true }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument whitespace only - connected") { Params = new object[] { " ", 1, false, true, " " }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument with Root Elem - connected") { Params = new object[] { "<A/>", 1, true, true }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument with DTD and Root Elem - connected") { Params = new object[] { "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>", 1, true, true }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument - connected") { Params = new object[] { " <?PI?><!--comm-->", 4, false, true }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument whitespace only - connected") { Params = new object[] { " ", 3, false, true, " " }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument with Root Elem") { Params = new object[] { "<A/>", 1, true, false }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument with DTD and Root Elem - connected") { Params = new object[] { "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>", 4, true, true }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("(Multiple) XDocument with Root Elem - connected") { Params = new object[] { "<A/>", 3, true, true }, Priority = 1 } });
-            AddChild(new TestVariation(AddFirstIntoDocument) { Attribute = new VariationAttribute("XDocument whitespace only") { Params = new object[] { " ", 1, false, false, " " }, Priority = 1 } });
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument")
+                    {
+                        Params = new object[] { " <?PI?><!--comm-->", 1, false, false },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument with DTD and Root Elem")
+                    {
+                        Params = new object[]
+                        {
+                            "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
+                            1,
+                            true,
+                            false,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("(Multiple) XDocument")
+                    {
+                        Params = new object[] { " <?PI?><!--comm-->", 4, false, false },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("(Multiple) XDocument whitespace only")
+                    {
+                        Params = new object[] { " ", 3, false, false, " " },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("(Multiple) XDocument with Root Elem")
+                    {
+                        Params = new object[] { "<A/>", 3, true, false },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute(
+                        "(Multiple) XDocument with DTD and Root Elem"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
+                            4,
+                            true,
+                            false,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument - connected")
+                    {
+                        Params = new object[] { " <?PI?><!--comm-->", 1, false, true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument whitespace only - connected")
+                    {
+                        Params = new object[] { " ", 1, false, true, " " },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument with Root Elem - connected")
+                    {
+                        Params = new object[] { "<A/>", 1, true, true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute(
+                        "XDocument with DTD and Root Elem - connected"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
+                            1,
+                            true,
+                            true,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("(Multiple) XDocument - connected")
+                    {
+                        Params = new object[] { " <?PI?><!--comm-->", 4, false, true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute(
+                        "(Multiple) XDocument whitespace only - connected"
+                    )
+                    {
+                        Params = new object[] { " ", 3, false, true, " " },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument with Root Elem")
+                    {
+                        Params = new object[] { "<A/>", 1, true, false },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute(
+                        "(Multiple) XDocument with DTD and Root Elem - connected"
+                    )
+                    {
+                        Params = new object[]
+                        {
+                            "<!DOCTYPE copyright [<!ELEMENT A (#PCDATA)>]><A>aaaa</A>",
+                            4,
+                            true,
+                            true,
+                        },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute(
+                        "(Multiple) XDocument with Root Elem - connected"
+                    )
+                    {
+                        Params = new object[] { "<A/>", 3, true, true },
+                        Priority = 1,
+                    },
+                }
+            );
+            AddChild(
+                new TestVariation(AddFirstIntoDocument)
+                {
+                    Attribute = new VariationAttribute("XDocument whitespace only")
+                    {
+                        Params = new object[] { " ", 1, false, false, " " },
+                        Priority = 1,
+                    },
+                }
+            );
         }
 
         /// <summary>
@@ -51,7 +229,8 @@ namespace XLinqTests
             var variationLength = (int)Variation.Params[1];
             var hasRoot = (bool)Variation.Params[2]; // for source document creation
             var isConnected = (bool)Variation.Params[3]; // to force cloning
-            string stringOnlyContent = Variation.Params.Length > 4 ? Variation.Params[4] as string : null;
+            string stringOnlyContent =
+                Variation.Params.Length > 4 ? Variation.Params[4] as string : null;
 
             var rs = new XmlReaderSettings
             {
@@ -60,10 +239,27 @@ namespace XLinqTests
                 DtdProcessing = DtdProcessing.Ignore,
             };
 
-            object[] nodes = { new XDocumentType("Q", null, null, "<!ENTITY e SYSTEM 'e.ent'!>"), new XDocumentType("Q", null, null, "<!ENTITY e SYSTEM 'e.ent'!>"), new XElement("B", new XElement("C"), new XAttribute("a", "aa")), new XElement("B", new XElement("C"), new XAttribute("a", "aa")), new XProcessingInstruction("PI", "data"), new XProcessingInstruction("PI2", ""), new XComment("comment"), new XComment(""), new XText(""), new XText(" "), new XText("data"), // invalid
-                               "data", // invalid
-                               new XCData(""), // invalid
-                               "\n", "\t", " ", "", null };
+            object[] nodes =
+            {
+                new XDocumentType("Q", null, null, "<!ENTITY e SYSTEM 'e.ent'!>"),
+                new XDocumentType("Q", null, null, "<!ENTITY e SYSTEM 'e.ent'!>"),
+                new XElement("B", new XElement("C"), new XAttribute("a", "aa")),
+                new XElement("B", new XElement("C"), new XAttribute("a", "aa")),
+                new XProcessingInstruction("PI", "data"),
+                new XProcessingInstruction("PI2", ""),
+                new XComment("comment"),
+                new XComment(""),
+                new XText(""),
+                new XText(" "),
+                new XText("data"), // invalid
+                "data", // invalid
+                new XCData(""), // invalid
+                "\n",
+                "\t",
+                " ",
+                "",
+                null,
+            };
 
             if (isConnected)
             {
@@ -99,8 +295,15 @@ namespace XLinqTests
                     }
                 }
 
-                string stringOnlyContentCopy = stringOnlyContent == null ? null : new string(stringOnlyContent.ToCharArray());
-                List<ExpectedValue> expectedNodes = CalculateExpectedValuesAddFirst(doc, toInsert, stringOnlyContentCopy).ProcessNodes().ToList();
+                string stringOnlyContentCopy =
+                    stringOnlyContent == null ? null : new string(stringOnlyContent.ToCharArray());
+                List<ExpectedValue> expectedNodes = CalculateExpectedValuesAddFirst(
+                        doc,
+                        toInsert,
+                        stringOnlyContentCopy
+                    )
+                    .ProcessNodes()
+                    .ToList();
                 shouldFail = expectedNodes.IsXDocValid();
 
                 try
@@ -113,7 +316,10 @@ namespace XLinqTests
                     // Difficult to verifty the way this variation is setup
                     //if (runWithEvents) eHelper.Verify(XObjectChange.Add, toInsert);
                     TestLog.Compare(!shouldFail, "exception was expected here");
-                    TestLog.Compare(expectedNodes.EqualAll(doc.Nodes(), XNode.EqualityComparer), "AddFirst");
+                    TestLog.Compare(
+                        expectedNodes.EqualAll(doc.Nodes(), XNode.EqualityComparer),
+                        "AddFirst"
+                    );
                 }
                 catch (InvalidOperationException)
                 {
@@ -130,11 +336,18 @@ namespace XLinqTests
             }
         }
 
-        private IEnumerable<ExpectedValue> CalculateExpectedValuesAddFirst(XContainer orig, IEnumerable<object> newNodes, string stringOnlyContent)
+        private IEnumerable<ExpectedValue> CalculateExpectedValuesAddFirst(
+            XContainer orig,
+            IEnumerable<object> newNodes,
+            string stringOnlyContent
+        )
         {
             foreach (object n in newNodes.Flatten())
             {
-                yield return new ExpectedValue((n is XNode) && (n as XNode).Parent == null && (n as XNode).Document == null, n);
+                yield return new ExpectedValue(
+                    (n is XNode) && (n as XNode).Parent == null && (n as XNode).Document == null,
+                    n
+                );
             }
             if (stringOnlyContent == null)
             {

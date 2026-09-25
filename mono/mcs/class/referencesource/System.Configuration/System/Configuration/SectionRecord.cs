@@ -4,19 +4,21 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-    using System.Configuration.Internal;
+namespace System.Configuration
+{
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Configuration;
+    using System.Configuration.Internal;
+    using System.Reflection;
     using System.Text;
     using System.Threading;
-    using System.Reflection;
     using System.Xml;
 
     [System.Diagnostics.DebuggerDisplay("SectionRecord {ConfigKey}")]
-    internal class SectionRecord {
+    internal class SectionRecord
+    {
         //
         // Flags constants
         //
@@ -26,173 +28,193 @@ namespace System.Configuration {
         //
 
         // locked by parent input, either because a parent section is locked,
-        // a parent section locks all children, or a location input for this 
+        // a parent section locks all children, or a location input for this
         // configPath has allowOverride=false.
-        private const int Flag_Locked                               = 0x00000001;
+        private const int Flag_Locked = 0x00000001;
 
         // lock children of this section
-        private const int Flag_LockChildren                         = 0x00000002;
+        private const int Flag_LockChildren = 0x00000002;
 
         // propagation of FactoryRecord.IsFactoryTrustedWithoutAptca
-        private const int Flag_IsResultTrustedWithoutAptca          = 0x00000004;
+        private const int Flag_IsResultTrustedWithoutAptca = 0x00000004;
 
         // propagation of FactoryRecord.RequirePermission
-        private const int Flag_RequirePermission                    = 0x00000008;
+        private const int Flag_RequirePermission = 0x00000008;
 
         // Look at AddLocationInput for explanation of this flag's purpose
-        private const int Flag_LocationInputLockApplied             = 0x00000010;
+        private const int Flag_LocationInputLockApplied = 0x00000010;
 
         // Look at AddIndirectLocationInput for explanation of this flag's purpose
-        private const int Flag_IndirectLocationInputLockApplied     = 0x00000020;
+        private const int Flag_IndirectLocationInputLockApplied = 0x00000020;
 
         // The flag gives us the inherited lock mode for this section record without the file input
         // We need this to support SectionInformation.OverrideModeEffective.
-        private const int Flag_ChildrenLockWithoutFileInput         = 0x00000040;
+        private const int Flag_ChildrenLockWithoutFileInput = 0x00000040;
 
         //
         // Designtime flags at or above 0x00010000
         //
 
         // the section has been added to the update list
-        private const int Flag_AddUpdate                            = 0x00010000;
+        private const int Flag_AddUpdate = 0x00010000;
 
         // result can be null, so we use this object to indicate whether it has been evaluated
-        static object                           s_unevaluated = new object();
+        static object s_unevaluated = new object();
 
-        private SafeBitVector32                _flags;
+        private SafeBitVector32 _flags;
 
         // config key
-        private string                          _configKey;
+        private string _configKey;
 
         // The input from location sections
         // This list is ordered to keep oldest ancestors at the front
-        private List<SectionInput>              _locationInputs;    
+        private List<SectionInput> _locationInputs;
 
         // The input from this file
-        private SectionInput                    _fileInput;
+        private SectionInput _fileInput;
 
         // This special input is used only when creating a location config record.
         // The inputs are from location tags which are found in the same config file as the
         // location config configPath, but point to the parent paths of the location config
         // configPath.  See the comment for VSWhidbey 540184 in Init() in
         // BaseConfigurationRecord.cs for more details.
-        private List<SectionInput>              _indirectLocationInputs;
+        private List<SectionInput> _indirectLocationInputs;
 
         // the cached result of evaluating this section
-        private object                          _result;
-        
+        private object _result;
+
         // the cached result of evaluating this section after GetRuntimeObject is called
-        private object                          _resultRuntimeObject;
+        private object _resultRuntimeObject;
 
-
-        internal SectionRecord(string configKey) {
+        internal SectionRecord(string configKey)
+        {
             _configKey = configKey;
             _result = s_unevaluated;
             _resultRuntimeObject = s_unevaluated;
         }
 
-        internal string ConfigKey {
-            get {return _configKey;}
+        internal string ConfigKey
+        {
+            get { return _configKey; }
         }
 
-        internal bool Locked {
-            get {return _flags[Flag_Locked];}
+        internal bool Locked
+        {
+            get { return _flags[Flag_Locked]; }
         }
 
-        internal bool LockChildren {
-            get {return _flags[Flag_LockChildren];}
+        internal bool LockChildren
+        {
+            get { return _flags[Flag_LockChildren]; }
         }
 
-        internal bool LockChildrenWithoutFileInput {
-            get {
-
+        internal bool LockChildrenWithoutFileInput
+        {
+            get
+            {
                 // Start assuming we dont have a file input
                 // When we don't have file input the lock mode for children is the same for LockChildren and LockChildrenWithoutFileInput
                 bool result = LockChildren;
 
-                if (HasFileInput) {
-                    result =  _flags[Flag_ChildrenLockWithoutFileInput];
+                if (HasFileInput)
+                {
+                    result = _flags[Flag_ChildrenLockWithoutFileInput];
                 }
 
                 return result;
             }
         }
 
-        internal bool IsResultTrustedWithoutAptca {
-            get {return _flags[Flag_IsResultTrustedWithoutAptca];}
-            set {_flags[Flag_IsResultTrustedWithoutAptca] = value;}
+        internal bool IsResultTrustedWithoutAptca
+        {
+            get { return _flags[Flag_IsResultTrustedWithoutAptca]; }
+            set { _flags[Flag_IsResultTrustedWithoutAptca] = value; }
         }
 
-        internal bool RequirePermission {
-            get {return _flags[Flag_RequirePermission];}
-            set {_flags[Flag_RequirePermission] = value;}
+        internal bool RequirePermission
+        {
+            get { return _flags[Flag_RequirePermission]; }
+            set { _flags[Flag_RequirePermission] = value; }
         }
 
-        internal bool AddUpdate {
-            get {return _flags[Flag_AddUpdate];}
-            set {_flags[Flag_AddUpdate] = value;}
+        internal bool AddUpdate
+        {
+            get { return _flags[Flag_AddUpdate]; }
+            set { _flags[Flag_AddUpdate] = value; }
         }
 
-        internal bool HasLocationInputs {
-            get {
-                return _locationInputs != null && _locationInputs.Count > 0;
-            }
+        internal bool HasLocationInputs
+        {
+            get { return _locationInputs != null && _locationInputs.Count > 0; }
         }
 
-        internal List<SectionInput> LocationInputs {
-            get {return _locationInputs;}
+        internal List<SectionInput> LocationInputs
+        {
+            get { return _locationInputs; }
         }
 
-        internal SectionInput LastLocationInput {
-            get {
-                if (HasLocationInputs) {
+        internal SectionInput LastLocationInput
+        {
+            get
+            {
+                if (HasLocationInputs)
+                {
                     return _locationInputs[_locationInputs.Count - 1];
                 }
-                else {
+                else
+                {
                     return null;
                 }
             }
         }
 
-        internal void 
-        AddLocationInput(SectionInput sectionInput) {
+        internal void AddLocationInput(SectionInput sectionInput)
+        {
             AddLocationInputImpl(sectionInput, false);
         }
 
-        internal bool HasFileInput {
-            get {
-                return _fileInput != null;
-            }
+        internal bool HasFileInput
+        {
+            get { return _fileInput != null; }
         }
 
-        internal SectionInput FileInput {
+        internal SectionInput FileInput
+        {
             get { return _fileInput; }
         }
 
-        internal void ChangeLockSettings(OverrideMode forSelf, OverrideMode forChildren) {
-
-            if (forSelf != OverrideMode.Inherit) {
-                _flags[Flag_Locked]         = (forSelf == OverrideMode.Deny);
-                _flags[Flag_LockChildren]   = (forSelf == OverrideMode.Deny);
+        internal void ChangeLockSettings(OverrideMode forSelf, OverrideMode forChildren)
+        {
+            if (forSelf != OverrideMode.Inherit)
+            {
+                _flags[Flag_Locked] = (forSelf == OverrideMode.Deny);
+                _flags[Flag_LockChildren] = (forSelf == OverrideMode.Deny);
             }
 
-            if (forChildren != OverrideMode.Inherit) {
-                _flags[Flag_LockChildren] = ((forSelf == OverrideMode.Deny) || (forChildren == OverrideMode.Deny));
+            if (forChildren != OverrideMode.Inherit)
+            {
+                _flags[Flag_LockChildren] = (
+                    (forSelf == OverrideMode.Deny) || (forChildren == OverrideMode.Deny)
+                );
             }
         }
 
         // AddFileInput
-        internal void AddFileInput(SectionInput sectionInput) {
+        internal void AddFileInput(SectionInput sectionInput)
+        {
             Debug.Assert(sectionInput != null);
-        
+
             _fileInput = sectionInput;
 
-            if (!sectionInput.HasErrors) {
-                
+            if (!sectionInput.HasErrors)
+            {
                 // If the file input has an explciti value for its children locking - use it
                 // Note we dont change the current lock setting
-                if (sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode != OverrideMode.Inherit) {
-
+                if (
+                    sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode
+                    != OverrideMode.Inherit
+                )
+                {
                     // Store the current setting before applying the lock from the file input
                     // So that if the user changes the current OverrideMode on this configKey to "Inherit"
                     // we will know what we are going to inherit ( used in SectionInformation.OverrideModeEffective )
@@ -200,64 +222,76 @@ namespace System.Configuration {
                     // resolved up to our immediate parent which does not inlcude normal and indirect location imputs
                     _flags[Flag_ChildrenLockWithoutFileInput] = LockChildren;
 
-                    ChangeLockSettings(OverrideMode.Inherit, sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode);
+                    ChangeLockSettings(
+                        OverrideMode.Inherit,
+                        sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode
+                    );
                 }
             }
         }
 
-        internal void RemoveFileInput() {
-            if (_fileInput != null) {
+        internal void RemoveFileInput()
+        {
+            if (_fileInput != null)
+            {
                 _fileInput = null;
 
-                // Reset LockChildren flag to the value provided by 
+                // Reset LockChildren flag to the value provided by
                 // location input or inherited sections.
                 _flags[Flag_LockChildren] = Locked;
             }
         }
 
-        internal bool HasIndirectLocationInputs {
-            get {
-                return _indirectLocationInputs != null && _indirectLocationInputs.Count > 0;
-            }
+        internal bool HasIndirectLocationInputs
+        {
+            get { return _indirectLocationInputs != null && _indirectLocationInputs.Count > 0; }
         }
 
-        internal List<SectionInput> IndirectLocationInputs {
-            get {return _indirectLocationInputs;}
+        internal List<SectionInput> IndirectLocationInputs
+        {
+            get { return _indirectLocationInputs; }
         }
 
-        internal SectionInput LastIndirectLocationInput {
-            get {
-                if (HasIndirectLocationInputs) {
+        internal SectionInput LastIndirectLocationInput
+        {
+            get
+            {
+                if (HasIndirectLocationInputs)
+                {
                     return _indirectLocationInputs[_indirectLocationInputs.Count - 1];
                 }
-                else {
+                else
+                {
                     return null;
                 }
             }
         }
 
-        internal void 
-        AddIndirectLocationInput(SectionInput sectionInput) {
+        internal void AddIndirectLocationInput(SectionInput sectionInput)
+        {
             AddLocationInputImpl(sectionInput, true);
         }
 
-        private void
-        AddLocationInputImpl(SectionInput sectionInput, bool isIndirectLocation) {
-            List<SectionInput>  inputs = isIndirectLocation ? 
-                                        _indirectLocationInputs : 
-                                        _locationInputs;
-                                        
-            int                 flag = isIndirectLocation ?
-                                        Flag_IndirectLocationInputLockApplied :
-                                        Flag_LocationInputLockApplied;
-            
-            if (inputs == null) {
+        private void AddLocationInputImpl(SectionInput sectionInput, bool isIndirectLocation)
+        {
+            List<SectionInput> inputs = isIndirectLocation
+                ? _indirectLocationInputs
+                : _locationInputs;
+
+            int flag = isIndirectLocation
+                ? Flag_IndirectLocationInputLockApplied
+                : Flag_LocationInputLockApplied;
+
+            if (inputs == null)
+            {
                 inputs = new List<SectionInput>(1);
-                
-                if (isIndirectLocation) {
+
+                if (isIndirectLocation)
+                {
                     _indirectLocationInputs = inputs;
                 }
-                else {
+                else
+                {
                     _locationInputs = inputs;
                 }
             }
@@ -274,82 +308,98 @@ namespace System.Configuration {
             //
             // For indirect location input:
             // This method will be first called for indirect input closest to the location config
-            if (!sectionInput.HasErrors) {
-                
-                if (!_flags[flag]) {
-                    OverrideMode modeLocation = sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode;
+            if (!sectionInput.HasErrors)
+            {
+                if (!_flags[flag])
+                {
+                    OverrideMode modeLocation = sectionInput
+                        .SectionXmlInfo
+                        .OverrideModeSetting
+                        .OverrideMode;
 
-                    if (modeLocation != OverrideMode.Inherit) { 
+                    if (modeLocation != OverrideMode.Inherit)
+                    {
                         ChangeLockSettings(modeLocation, modeLocation);
-                        _flags[flag] = true;   
+                        _flags[flag] = true;
                     }
                 }
             }
         }
 
-        internal bool HasInput {
-            get {
-                return HasLocationInputs || HasFileInput || HasIndirectLocationInputs;
-            }
+        internal bool HasInput
+        {
+            get { return HasLocationInputs || HasFileInput || HasIndirectLocationInputs; }
         }
 
-        internal void ClearRawXml() {
-            if (HasLocationInputs) {
-                foreach (SectionInput locationInput in LocationInputs) {
+        internal void ClearRawXml()
+        {
+            if (HasLocationInputs)
+            {
+                foreach (SectionInput locationInput in LocationInputs)
+                {
                     locationInput.SectionXmlInfo.RawXml = null;
                 }
             }
 
-            if (HasIndirectLocationInputs) {
-                foreach (SectionInput indirectLocationInput in IndirectLocationInputs) {
+            if (HasIndirectLocationInputs)
+            {
+                foreach (SectionInput indirectLocationInput in IndirectLocationInputs)
+                {
                     indirectLocationInput.SectionXmlInfo.RawXml = null;
                 }
             }
 
-            if (HasFileInput) {
+            if (HasFileInput)
+            {
                 FileInput.SectionXmlInfo.RawXml = null;
             }
         }
 
-        internal bool HasResult {
-            get {return _result != s_unevaluated;}
+        internal bool HasResult
+        {
+            get { return _result != s_unevaluated; }
         }
 
-        internal bool HasResultRuntimeObject {
-            get {return _resultRuntimeObject != s_unevaluated;}
+        internal bool HasResultRuntimeObject
+        {
+            get { return _resultRuntimeObject != s_unevaluated; }
         }
 
-        internal object Result {
-            get {
+        internal object Result
+        {
+            get
+            {
                 // Useful assert, but it fires in the debugger when using automatic property evaluation
                 // Debug.Assert(_result != s_unevaluated, "_result != s_unevaluated");
 
                 return _result;
             }
-
-            set {_result = value;}
+            set { _result = value; }
         }
 
-        internal object ResultRuntimeObject {
-            get {
+        internal object ResultRuntimeObject
+        {
+            get
+            {
                 // Useful assert, but it fires in the debugger when using automatic property evaluation
                 // Debug.Assert(_resultRuntimeObject != s_unevaluated, "_resultRuntimeObject != s_unevaluated");
 
                 return _resultRuntimeObject;
             }
-
-            set {
-                _resultRuntimeObject = value;
-            }
+            set { _resultRuntimeObject = value; }
         }
 
-        internal void ClearResult() {
-            if (_fileInput != null) {
+        internal void ClearResult()
+        {
+            if (_fileInput != null)
+            {
                 _fileInput.ClearResult();
             }
 
-            if (_locationInputs != null) {
-                foreach (SectionInput input in _locationInputs) {
+            if (_locationInputs != null)
+            {
+                foreach (SectionInput input in _locationInputs)
+                {
                     input.ClearResult();
                 }
             }
@@ -362,48 +412,64 @@ namespace System.Configuration {
         // Error handling.
         //
 
-        private List<ConfigurationException> GetAllErrors() {
+        private List<ConfigurationException> GetAllErrors()
+        {
             List<ConfigurationException> allErrors = null;
 
-            if (HasLocationInputs) {
-                foreach (SectionInput input in LocationInputs) {
+            if (HasLocationInputs)
+            {
+                foreach (SectionInput input in LocationInputs)
+                {
                     ErrorsHelper.AddErrors(ref allErrors, input.Errors);
                 }
             }
 
-            if (HasIndirectLocationInputs) {
-                foreach (SectionInput input in IndirectLocationInputs) {
+            if (HasIndirectLocationInputs)
+            {
+                foreach (SectionInput input in IndirectLocationInputs)
+                {
                     ErrorsHelper.AddErrors(ref allErrors, input.Errors);
                 }
             }
 
-            if (HasFileInput) {
+            if (HasFileInput)
+            {
                 ErrorsHelper.AddErrors(ref allErrors, FileInput.Errors);
             }
 
             return allErrors;
         }
 
-        internal bool HasErrors {
-            get {
-                if (HasLocationInputs) {
-                    foreach (SectionInput input in LocationInputs) {
-                        if (input.HasErrors) {
+        internal bool HasErrors
+        {
+            get
+            {
+                if (HasLocationInputs)
+                {
+                    foreach (SectionInput input in LocationInputs)
+                    {
+                        if (input.HasErrors)
+                        {
                             return true;
                         }
                     }
                 }
 
-                if (HasIndirectLocationInputs) {
-                    foreach (SectionInput input in IndirectLocationInputs) {
-                        if (input.HasErrors) {
+                if (HasIndirectLocationInputs)
+                {
+                    foreach (SectionInput input in IndirectLocationInputs)
+                    {
+                        if (input.HasErrors)
+                        {
                             return true;
                         }
                     }
                 }
 
-                if (HasFileInput) {
-                    if (FileInput.HasErrors) {
+                if (HasFileInput)
+                {
+                    if (FileInput.HasErrors)
+                    {
                         return true;
                     }
                 }
@@ -412,11 +478,12 @@ namespace System.Configuration {
             }
         }
 
-        internal void ThrowOnErrors() {
-            if (HasErrors) {
+        internal void ThrowOnErrors()
+        {
+            if (HasErrors)
+            {
                 throw new ConfigurationErrorsException(GetAllErrors());
             }
         }
     }
 }
-

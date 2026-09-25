@@ -21,8 +21,7 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
     /// <summary>
     ///     Gets this entity type or the one on which the complex property chain is declared.
     /// </summary>
-    IReadOnlyEntityType ContainingEntityType
-        => (IReadOnlyEntityType)this;
+    IReadOnlyEntityType ContainingEntityType => (IReadOnlyEntityType)this;
 
     /// <summary>
     ///     Gets the name of this type.
@@ -57,16 +56,14 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
     /// </summary>
     /// <returns><see langword="true" /> if the type is abstract, <see langword="false" /> otherwise.</returns>
     [DebuggerStepThrough]
-    bool IsAbstract()
-        => ClrType.IsAbstract;
+    bool IsAbstract() => ClrType.IsAbstract;
 
     /// <summary>
     ///     Gets the friendly display name for this structural type.
     /// </summary>
     /// <returns>The display name.</returns>
     [DebuggerStepThrough]
-    string DisplayName()
-        => DisplayName(omitSharedType: false);
+    string DisplayName() => DisplayName(omitSharedType: false);
 
     /// <summary>
     ///     Gets the friendly display name for the given <see cref="IReadOnlyTypeBase" />.
@@ -97,10 +94,20 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
         }
         else
         {
-            var dotIndex = shortName.LastIndexOf(".", hashIndex, hashIndex + 1, StringComparison.Ordinal);
+            var dotIndex = shortName.LastIndexOf(
+                ".",
+                hashIndex,
+                hashIndex + 1,
+                StringComparison.Ordinal
+            );
             if (dotIndex != -1)
             {
-                dotIndex = shortName.LastIndexOf(".", dotIndex - 1, dotIndex, StringComparison.Ordinal);
+                dotIndex = shortName.LastIndexOf(
+                    ".",
+                    dotIndex - 1,
+                    dotIndex,
+                    StringComparison.Ordinal
+                );
                 if (dotIndex != -1)
                 {
                     shortName = shortName[(dotIndex + 1)..];
@@ -108,9 +115,7 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
             }
         }
 
-        return shortName == Name
-            ? shortName + " (" + ClrType.ShortDisplayName() + ")"
-            : shortName;
+        return shortName == Name ? shortName + " (" + ClrType.ShortDisplayName() + ")" : shortName;
     }
 
     /// <summary>
@@ -144,9 +149,7 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
             if (plusIndex == -1)
             {
                 var dotIndex = Name.LastIndexOf(".", StringComparison.Ordinal);
-                return dotIndex == -1
-                    ? Name
-                    : Name[(dotIndex + 1)..];
+                return dotIndex == -1 ? Name : Name[(dotIndex + 1)..];
             }
 
             return Name[(plusIndex + 1)..];
@@ -163,8 +166,7 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
     ///     <see langword="true" /> if <paramref name="derivedType" /> derives from (or is the same as) this type,
     ///     otherwise <see langword="false" />.
     /// </returns>
-    bool IsAssignableFrom(IReadOnlyTypeBase derivedType)
-        => this == derivedType;
+    bool IsAssignableFrom(IReadOnlyTypeBase derivedType) => this == derivedType;
 
     /// <summary>
     ///     Determines if this type derives from (but is not the same as) a given type.
@@ -174,8 +176,8 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
     ///     <see langword="true" /> if this type derives from (but is not the same as) <paramref name="baseType" />,
     ///     otherwise <see langword="false" />.
     /// </returns>
-    bool IsStrictlyDerivedFrom(IReadOnlyTypeBase baseType)
-        => this != Check.NotNull(baseType, nameof(baseType)) && baseType.IsAssignableFrom(this);
+    bool IsStrictlyDerivedFrom(IReadOnlyTypeBase baseType) =>
+        this != Check.NotNull(baseType, nameof(baseType)) && baseType.IsAssignableFrom(this);
 
     /// <summary>
     ///     Gets the property with the given name. Returns <see langword="null" /> if no property with the given name is defined.
@@ -195,8 +197,8 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
     /// </remarks>
     /// <param name="memberInfo">The member on the class.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    IReadOnlyProperty? FindProperty(MemberInfo memberInfo)
-        => (Check.NotNull(memberInfo, nameof(memberInfo)) as PropertyInfo)?.IsIndexerProperty() == true
+    IReadOnlyProperty? FindProperty(MemberInfo memberInfo) =>
+        (Check.NotNull(memberInfo, nameof(memberInfo)) as PropertyInfo)?.IsIndexerProperty() == true
             ? null
             : FindProperty(memberInfo.GetSimpleMemberName());
 
@@ -285,8 +287,8 @@ public interface IReadOnlyTypeBase : IReadOnlyAnnotatable
     /// </remarks>
     /// <param name="memberInfo">The member on the class.</param>
     /// <returns>The property, or <see langword="null" /> if none is found.</returns>
-    IReadOnlyComplexProperty? FindComplexProperty(MemberInfo memberInfo)
-        => (Check.NotNull(memberInfo, nameof(memberInfo)) as PropertyInfo)?.IsIndexerProperty() == true
+    IReadOnlyComplexProperty? FindComplexProperty(MemberInfo memberInfo) =>
+        (Check.NotNull(memberInfo, nameof(memberInfo)) as PropertyInfo)?.IsIndexerProperty() == true
             ? null
             : FindComplexProperty(memberInfo.GetSimpleMemberName());
 

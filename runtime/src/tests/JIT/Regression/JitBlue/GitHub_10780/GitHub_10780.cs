@@ -31,14 +31,13 @@ namespace N
             Sum += pair.Left + pair.Right;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
         static void SumNFourteens(int n)
         {
             for (int i = 0; i < n; ++i)
             {
                 Two = 2; // Store to C.Two here is a global side-effect above which we won't hoist the static initializer (since it may throw).
-                Accumulate(Pair.TenFour);  // Hoisting the load of Pair.TenFour above the static init call is incorrect.
+                Accumulate(Pair.TenFour); // Hoisting the load of Pair.TenFour above the static init call is incorrect.
             }
         }
 
@@ -46,8 +45,8 @@ namespace N
         public static int TestEntryPoint()
         {
             Sum = 0;
-            SumNFourteens(7);  // Now Sum = 14 * 7 = 98 (and Two = 2)
-            return Sum + Two;  // 98 + 2 = 100 on success
+            SumNFourteens(7); // Now Sum = 14 * 7 = 98 (and Two = 2)
+            return Sum + Two; // 98 + 2 = 100 on success
         }
     }
 }

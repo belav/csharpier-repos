@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // GenericPrincipal.cs
@@ -14,7 +14,6 @@ namespace System.Security.Principal
 {
     using System;
     using System.Diagnostics.Contracts;
-
 #if !FEATURE_CORECLR
     using System.Collections.Generic;
     using System.Runtime.Serialization;
@@ -23,28 +22,33 @@ namespace System.Security.Principal
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-
 #if !FEATURE_CORECLR
-    public class GenericPrincipal : ClaimsPrincipal {        
+    public class GenericPrincipal : ClaimsPrincipal
+    {
 #else
-    public class GenericPrincipal : IPrincipal {
+    public class GenericPrincipal : IPrincipal
+    {
 #endif
         private IIdentity m_identity;
         private string[] m_roles;
 
-        public GenericPrincipal(IIdentity identity, string[] roles) {
+        public GenericPrincipal(IIdentity identity, string[] roles)
+        {
             if (identity == null)
                 throw new ArgumentNullException("identity");
             Contract.EndContractBlock();
 
             m_identity = identity;
-            if (roles != null) {
+            if (roles != null)
+            {
                 m_roles = new string[roles.Length];
-                for (int i = 0; i < roles.Length; ++i) {
+                for (int i = 0; i < roles.Length; ++i)
+                {
                     m_roles[i] = roles[i];
                 }
             }
-            else {
+            else
+            {
                 m_roles = null;
             }
 
@@ -77,7 +81,13 @@ namespace System.Security.Principal
 
             if (m_roles != null && m_roles.Length > 0 && firstNonNullIdentity != null)
             {
-                firstNonNullIdentity.ExternalClaims.Add(new RoleClaimProvider(ClaimsIdentity.DefaultIssuer, m_roles, firstNonNullIdentity).Claims);
+                firstNonNullIdentity.ExternalClaims.Add(
+                    new RoleClaimProvider(
+                        ClaimsIdentity.DefaultIssuer,
+                        m_roles,
+                        firstNonNullIdentity
+                    ).Claims
+                );
             }
             else if (firstNonNullIdentity == null)
             {
@@ -86,7 +96,7 @@ namespace System.Security.Principal
         }
 
         /// <summary>
-        /// helper method to add roles 
+        /// helper method to add roles
         /// </summary>
         [SecuritySafeCritical]
         void AddIdentityWithRoles(IIdentity identity, string[] roles)
@@ -105,7 +115,13 @@ namespace System.Security.Principal
             // if roles are not null then we need to add a provider
             if (roles != null && roles.Length > 0)
             {
-                claimsIdentity.ExternalClaims.Add(new RoleClaimProvider(ClaimsIdentity.DefaultIssuer, roles, claimsIdentity).Claims);
+                claimsIdentity.ExternalClaims.Add(
+                    new RoleClaimProvider(
+                        ClaimsIdentity.DefaultIssuer,
+                        roles,
+                        claimsIdentity
+                    ).Claims
+                );
             }
 
             base.AddIdentity(claimsIdentity);
@@ -114,25 +130,32 @@ namespace System.Security.Principal
         }
 #endif
 
-
 #if !FEATURE_CORECLR
-        public override IIdentity Identity {
+        public override IIdentity Identity
+        {
 #else
-        public virtual IIdentity Identity {
+        public virtual IIdentity Identity
+        {
 #endif
             get { return m_identity; }
         }
 
 #if !FEATURE_CORECLR
-        public override bool IsInRole(string role) {
+        public override bool IsInRole(string role)
+        {
 #else
-        public virtual bool IsInRole (string role) {
+        public virtual bool IsInRole(string role)
+        {
 #endif
             if (role == null || m_roles == null)
                 return false;
 
-            for (int i = 0; i < m_roles.Length; ++i) {
-                if (m_roles[i] != null && String.Compare(m_roles[i], role, StringComparison.OrdinalIgnoreCase) == 0)
+            for (int i = 0; i < m_roles.Length; ++i)
+            {
+                if (
+                    m_roles[i] != null
+                    && String.Compare(m_roles[i], role, StringComparison.OrdinalIgnoreCase) == 0
+                )
                     return true;
             }
 

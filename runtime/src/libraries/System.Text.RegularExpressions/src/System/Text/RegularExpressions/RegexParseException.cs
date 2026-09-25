@@ -26,14 +26,19 @@ namespace System.Text.RegularExpressions
 
         // No need for a serialization ctor: we swap the active type during serialization.
 
-        internal RegexParseException(RegexParseError error, int offset, string message) : base(message)
+        internal RegexParseException(RegexParseError error, int offset, string message)
+            : base(message)
         {
             Error = error;
             Offset = offset;
         }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

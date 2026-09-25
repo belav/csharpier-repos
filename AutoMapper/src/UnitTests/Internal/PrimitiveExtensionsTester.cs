@@ -11,7 +11,10 @@ public class PrimitiveExtensionsTester
 
     class DestinationClass : Interface
     {
-        int Interface.Value { get { return 123; } }
+        int Interface.Value
+        {
+            get { return 123; }
+        }
 
         public int PrivateProperty { get; private set; }
 
@@ -19,19 +22,25 @@ public class PrimitiveExtensionsTester
     }
 
     [Fact]
-    public void Should_find_explicitly_implemented_member() => typeof(DestinationClass).GetFieldOrProperty("Value").ShouldNotBeNull();
+    public void Should_find_explicitly_implemented_member() =>
+        typeof(DestinationClass).GetFieldOrProperty("Value").ShouldNotBeNull();
 
     [Fact]
     public void GetMembersChain()
     {
-        Expression<Func<DateTime, DayOfWeek>> e = x => x.Date.AddDays(1).Date.AddHours(2).AddMinutes(2).Date.DayOfWeek;
+        Expression<Func<DateTime, DayOfWeek>> e = x =>
+            x.Date.AddDays(1).Date.AddHours(2).AddMinutes(2).Date.DayOfWeek;
         var chain = e.GetMembersChain().Select(m => m.Name).ToArray();
-        chain.ShouldBe(new[] { "Date", "AddDays", "Date", "AddHours", "AddMinutes", "Date", "DayOfWeek" });
+        chain.ShouldBe(
+            new[] { "Date", "AddDays", "Date", "AddHours", "AddMinutes", "Date", "DayOfWeek" }
+        );
     }
+
     [Fact]
     public void IsMemberPath()
     {
-        Expression<Func<DateTime, DayOfWeek>> e = x => x.Date.AddDays(1).Date.AddHours(2).AddMinutes(2).Date.DayOfWeek;
+        Expression<Func<DateTime, DayOfWeek>> e = x =>
+            x.Date.AddDays(1).Date.AddHours(2).AddMinutes(2).Date.DayOfWeek;
         e.IsMemberPath(out _).ShouldBeFalse();
         e = x => x.Date.Date.DayOfWeek;
         e.IsMemberPath(out _).ShouldBeTrue();

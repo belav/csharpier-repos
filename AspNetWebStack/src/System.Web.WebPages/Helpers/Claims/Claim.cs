@@ -44,12 +44,20 @@ namespace System.Web.Helpers.Claims
             private static Func<TClaim, string> CreateClaimTypeGetter()
             {
                 // the claim type might go by one of two different property names
-                return CreateGeneralPropertyGetter("ClaimType") ?? CreateGeneralPropertyGetter("Type");
+                return CreateGeneralPropertyGetter("ClaimType")
+                    ?? CreateGeneralPropertyGetter("Type");
             }
 
             private static Func<TClaim, string> CreateGeneralPropertyGetter(string propertyName)
             {
-                PropertyInfo propInfo = typeof(TClaim).GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance, null, typeof(string), Type.EmptyTypes, null);
+                PropertyInfo propInfo = typeof(TClaim).GetProperty(
+                    propertyName,
+                    BindingFlags.Public | BindingFlags.Instance,
+                    null,
+                    typeof(string),
+                    Type.EmptyTypes,
+                    null
+                );
                 if (propInfo == null)
                 {
                     return null;
@@ -60,7 +68,8 @@ namespace System.Web.Helpers.Claims
                 // For improved perf, instance methods can be treated as static methods by leaving
                 // the 'this' parameter unbound. Virtual dispatch for the property getter will
                 // still take place as expected.
-                return (Func<TClaim, string>)Delegate.CreateDelegate(typeof(Func<TClaim, string>), propGetter);
+                return (Func<TClaim, string>)
+                    Delegate.CreateDelegate(typeof(Func<TClaim, string>), propGetter);
             }
 
             private static Func<TClaim, string> CreateValueGetter()

@@ -10,7 +10,6 @@ namespace System.ServiceModel.Channels
     using System.Xml;
     using WebTD = System.ServiceModel.Web.Diagnostics.Application.TD;
 
-
     class WebScriptMetadataMessageEncoderFactory : MessageEncoderFactory
     {
         const string applicationJavaScriptMediaType = "application/x-javascript";
@@ -44,7 +43,12 @@ namespace System.ServiceModel.Channels
                 this.readerQuotas = new XmlDictionaryReaderQuotas();
                 quotas.CopyTo(this.readerQuotas);
                 this.mediaType = this.contentType = applicationJavaScriptMediaType;
-                this.innerReadMessageEncoder = new TextMessageEncodingBindingElement(MessageVersion.None, Encoding.UTF8).CreateMessageEncoderFactory().Encoder;
+                this.innerReadMessageEncoder = new TextMessageEncodingBindingElement(
+                    MessageVersion.None,
+                    Encoding.UTF8
+                )
+                    .CreateMessageEncoderFactory()
+                    .Encoder;
             }
 
             public override string ContentType
@@ -67,48 +71,92 @@ namespace System.ServiceModel.Channels
                 return innerReadMessageEncoder.IsContentTypeSupported(contentType);
             }
 
-            public override Message ReadMessage(ArraySegment<byte> buffer, BufferManager bufferManager, string contentType)
+            public override Message ReadMessage(
+                ArraySegment<byte> buffer,
+                BufferManager bufferManager,
+                string contentType
+            )
             {
                 return innerReadMessageEncoder.ReadMessage(buffer, bufferManager, contentType);
             }
 
-            public override Message ReadMessage(Stream stream, int maxSizeOfHeaders, string contentType)
+            public override Message ReadMessage(
+                Stream stream,
+                int maxSizeOfHeaders,
+                string contentType
+            )
             {
                 return innerReadMessageEncoder.ReadMessage(stream, maxSizeOfHeaders, contentType);
             }
 
-            public override ArraySegment<byte> WriteMessage(Message message, int maxMessageSize, BufferManager bufferManager, int messageOffset)
+            public override ArraySegment<byte> WriteMessage(
+                Message message,
+                int maxMessageSize,
+                BufferManager bufferManager,
+                int messageOffset
+            )
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (bufferManager == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentNullException("bufferManager"), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentNullException("bufferManager"),
+                        message
+                    );
                 }
                 if (maxMessageSize < 0)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxMessageSize", maxMessageSize,
-                        SR2.GetString(SR2.ValueMustBeNonNegative)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "maxMessageSize",
+                            maxMessageSize,
+                            SR2.GetString(SR2.ValueMustBeNonNegative)
+                        ),
+                        message
+                    );
                 }
                 if (messageOffset < 0 || messageOffset > maxMessageSize)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentOutOfRangeException("messageOffset", messageOffset,
-                        SR2.GetString(SR2.JsonValueMustBeInRange, 0, maxMessageSize)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "messageOffset",
+                            messageOffset,
+                            SR2.GetString(SR2.JsonValueMustBeInRange, 0, maxMessageSize)
+                        ),
+                        message
+                    );
                 }
 
                 ThrowIfMismatchedMessageVersion(message);
                 message.Properties.Encoder = this;
-                BufferedMessageWriter messageWriter = new WebScriptMetadataBufferedMessageWriter(this);
-                ArraySegment<byte> messageData = messageWriter.WriteMessage(message, bufferManager, messageOffset, maxMessageSize);
+                BufferedMessageWriter messageWriter = new WebScriptMetadataBufferedMessageWriter(
+                    this
+                );
+                ArraySegment<byte> messageData = messageWriter.WriteMessage(
+                    message,
+                    bufferManager,
+                    messageOffset,
+                    maxMessageSize
+                );
                 if (MessageLogger.LogMessagesAtTransportLevel)
                 {
                     MessageLogger.LogMessage(ref message, MessageLoggingSource.TransportSend);
                 }
-                if (System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoderIsEnabled() && messageData != null)
+                if (
+                    System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoderIsEnabled()
+                    && messageData != null
+                )
                 {
-                    System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoder(EventTraceActivityHelper.TryExtractActivity(message), messageData.Count, this);
+                    System.ServiceModel.Diagnostics.Application.TD.MessageWrittenByEncoder(
+                        EventTraceActivityHelper.TryExtractActivity(message),
+                        messageData.Count,
+                        this
+                    );
                 }
                 return messageData;
             }
@@ -117,11 +165,16 @@ namespace System.ServiceModel.Channels
             {
                 if (message == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("message"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("message")
+                    );
                 }
                 if (stream == null)
                 {
-                    throw TraceUtility.ThrowHelperError(new ArgumentNullException("stream"), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ArgumentNullException("stream"),
+                        message
+                    );
                 }
                 ThrowIfMismatchedMessageVersion(message);
                 message.Properties.Encoder = this;
@@ -150,18 +203,16 @@ namespace System.ServiceModel.Channels
             {
                 WebScriptMetadataMessageEncoder messageEncoder;
 
-                public WebScriptMetadataBufferedMessageWriter(WebScriptMetadataMessageEncoder messageEncoder)
+                public WebScriptMetadataBufferedMessageWriter(
+                    WebScriptMetadataMessageEncoder messageEncoder
+                )
                 {
                     this.messageEncoder = messageEncoder;
                 }
 
-                protected override void OnWriteEndMessage(XmlDictionaryWriter writer)
-                {
-                }
+                protected override void OnWriteEndMessage(XmlDictionaryWriter writer) { }
 
-                protected override void OnWriteStartMessage(XmlDictionaryWriter writer)
-                {
-                }
+                protected override void OnWriteStartMessage(XmlDictionaryWriter writer) { }
 
                 protected override void ReturnXmlWriter(XmlDictionaryWriter writer)
                 {

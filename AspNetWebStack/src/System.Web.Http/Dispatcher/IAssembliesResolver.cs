@@ -17,7 +17,11 @@ namespace System.Web.Http.Dispatcher
         /// Returns a list of assemblies available for the application.
         /// </summary>
         /// <returns>An <see cref="ICollection{Assembly}"/> of assemblies.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This is better handled as a method.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This is better handled as a method."
+        )]
         ICollection<Assembly> GetAssemblies();
     }
 }

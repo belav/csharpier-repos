@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Management
 {
-
     internal class WmiEventSink : IWmiEventSource
     {
         private static int s_hash;
@@ -13,14 +12,13 @@ namespace System.Management
         private readonly ManagementOperationObserver watcher;
         private readonly object context;
         private readonly ManagementScope scope;
-        private object stub;           // The secured IWbemObjectSink
+        private object stub; // The secured IWbemObjectSink
 
         // Used for Put's only
         internal event InternalObjectPutEventHandler InternalObjectPut;
         private readonly ManagementPath path;
         private readonly string className;
         private readonly bool isLocal;
-
 
         private static ManagementOperationObserver watcherParameter;
         private static object contextParameter;
@@ -34,7 +32,8 @@ namespace System.Management
             object context,
             ManagementScope scope,
             string path,
-            string className)
+            string className
+        )
         {
             if (MTAHelper.IsNoContextMTA())
                 return new WmiEventSink(watcher, context, scope, path, className);
@@ -48,7 +47,9 @@ namespace System.Management
             //
             // Ensure we are able to trap exceptions from worker thread.
             //
-            ThreadDispatch disp = new ThreadDispatch(new ThreadDispatch.ThreadWorkerMethod(HackToCreateWmiEventSink));
+            ThreadDispatch disp = new ThreadDispatch(
+                new ThreadDispatch.ThreadWorkerMethod(HackToCreateWmiEventSink)
+            );
             disp.Start();
 
             return wmiEventSinkNew;
@@ -56,14 +57,22 @@ namespace System.Management
 
         private static void HackToCreateWmiEventSink()
         {
-            wmiEventSinkNew = new WmiEventSink(watcherParameter, contextParameter, scopeParameter, pathParameter, classNameParameter);
+            wmiEventSinkNew = new WmiEventSink(
+                watcherParameter,
+                contextParameter,
+                scopeParameter,
+                pathParameter,
+                classNameParameter
+            );
         }
 
-        protected WmiEventSink(ManagementOperationObserver watcher,
-                             object context,
-                             ManagementScope scope,
-                             string path,
-                             string className)
+        protected WmiEventSink(
+            ManagementOperationObserver watcher,
+            object context,
+            ManagementScope scope,
+            string path,
+            string className
+        )
         {
             try
             {
@@ -75,8 +84,16 @@ namespace System.Management
                 if (null != path)
                 {
                     this.path = new ManagementPath(path);
-                    if ((string.Equals(this.path.Server, ".", StringComparison.OrdinalIgnoreCase)) ||
-                        (string.Equals(this.path.Server, System.Environment.MachineName, StringComparison.OrdinalIgnoreCase)))
+                    if (
+                        (string.Equals(this.path.Server, ".", StringComparison.OrdinalIgnoreCase))
+                        || (
+                            string.Equals(
+                                this.path.Server,
+                                System.Environment.MachineName,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
+                    )
                     {
                         this.isLocal = true;
                     }
@@ -87,8 +104,22 @@ namespace System.Management
                     this.scope = (ManagementScope)scope.Clone();
                     if (null == path) // use scope to see if sink is local
                     {
-                        if ((string.Equals(this.scope.Path.Server, ".", StringComparison.OrdinalIgnoreCase)) ||
-                            (string.Equals(this.scope.Path.Server, System.Environment.MachineName, StringComparison.OrdinalIgnoreCase)))
+                        if (
+                            (
+                                string.Equals(
+                                    this.scope.Path.Server,
+                                    ".",
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
+                            || (
+                                string.Equals(
+                                    this.scope.Path.Server,
+                                    System.Environment.MachineName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
+                        )
                         {
                             this.isLocal = true;
                         }
@@ -127,18 +158,16 @@ namespace System.Management
             IWbemClassObjectFreeThreaded obj = new IWbemClassObjectFreeThreaded(pIWbemClassObject);
             try
             {
-                ObjectReadyEventArgs args = new ObjectReadyEventArgs(context,
-                                            ManagementBaseObject.GetBaseObject(obj, scope));
+                ObjectReadyEventArgs args = new ObjectReadyEventArgs(
+                    context,
+                    ManagementBaseObject.GetBaseObject(obj, scope)
+                );
                 watcher.FireObjectReady(args);
             }
             catch { }
         }
 
-        public void SetStatus(
-                        int flags,
-                        int hResult,
-                        string message,
-                        IntPtr pErrorObj)
+        public void SetStatus(int flags, int hResult, string message, IntPtr pErrorObj)
         {
             IWbemClassObjectFreeThreaded errObj = null;
             if (pErrorObj != IntPtr.Zero)
@@ -164,7 +193,9 @@ namespace System.Management
                         {
                             try
                             {
-                                InternalObjectPutEventArgs iargs = new InternalObjectPutEventArgs(path);
+                                InternalObjectPutEventArgs iargs = new InternalObjectPutEventArgs(
+                                    path
+                                );
                                 InternalObjectPut(this, iargs);
                             }
                             catch { }
@@ -178,15 +209,15 @@ namespace System.Management
                     CompletedEventArgs args2 = null;
                     if (errObj != null)
                     {
-                        args2 = new CompletedEventArgs(context, hResult,
-                                                new ManagementBaseObject(errObj)
-                                                );
+                        args2 = new CompletedEventArgs(
+                            context,
+                            hResult,
+                            new ManagementBaseObject(errObj)
+                        );
                     }
                     else
                     {
-                        args2 = new CompletedEventArgs(context, hResult,
-                                                null
-                                                );
+                        args2 = new CompletedEventArgs(context, hResult, null);
                     }
                     watcher.FireCompleted(args2);
 
@@ -196,8 +227,12 @@ namespace System.Management
                 else if (0 != (flags & (int)tag_WBEM_STATUS_TYPE.WBEM_STATUS_PROGRESS))
                 {
                     // Fire Progress event
-                    ProgressEventArgs args = new ProgressEventArgs(context,
-                        (int)(((uint)hResult & 0xFFFF0000) >> 16), hResult & 0xFFFF, message);
+                    ProgressEventArgs args = new ProgressEventArgs(
+                        context,
+                        (int)(((uint)hResult & 0xFFFF0000) >> 16),
+                        hResult & 0xFFFF,
+                        message
+                    );
 
                     watcher.FireProgress(args);
                 }
@@ -230,7 +265,6 @@ namespace System.Management
             }
             catch { }
         }
-
     }
 
     // Special sink implementation for ManagementObject.Get
@@ -250,7 +284,8 @@ namespace System.Management
             ManagementOperationObserver watcher,
             object context,
             ManagementScope scope,
-            ManagementObject managementObject)
+            ManagementObject managementObject
+        )
         {
             if (MTAHelper.IsNoContextMTA())
                 return new WmiGetEventSink(watcher, context, scope, managementObject);
@@ -263,7 +298,9 @@ namespace System.Management
             //
             // Ensure we are able to trap exceptions from worker thread.
             //
-            ThreadDispatch disp = new ThreadDispatch(new ThreadDispatch.ThreadWorkerMethod(HackToCreateWmiGetEventSink));
+            ThreadDispatch disp = new ThreadDispatch(
+                new ThreadDispatch.ThreadWorkerMethod(HackToCreateWmiGetEventSink)
+            );
             disp.Start();
 
             return wmiGetEventSinkNew;
@@ -271,15 +308,21 @@ namespace System.Management
 
         private static void HackToCreateWmiGetEventSink()
         {
-            wmiGetEventSinkNew = new WmiGetEventSink(watcherParameter, contextParameter, scopeParameter, managementObjectParameter);
+            wmiGetEventSinkNew = new WmiGetEventSink(
+                watcherParameter,
+                contextParameter,
+                scopeParameter,
+                managementObjectParameter
+            );
         }
 
-
-        private WmiGetEventSink(ManagementOperationObserver watcher,
-                             object context,
-                             ManagementScope scope,
-                             ManagementObject managementObject) :
-            base(watcher, context, scope, null, null)
+        private WmiGetEventSink(
+            ManagementOperationObserver watcher,
+            object context,
+            ManagementScope scope,
+            ManagementObject managementObject
+        )
+            : base(watcher, context, scope, null, null)
         {
             this.managementObject = managementObject;
         }
@@ -298,7 +341,4 @@ namespace System.Management
             }
         }
     }
-
-
-
 }

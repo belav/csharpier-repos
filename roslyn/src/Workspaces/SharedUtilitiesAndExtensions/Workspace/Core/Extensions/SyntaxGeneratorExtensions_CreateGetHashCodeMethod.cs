@@ -20,54 +20,88 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Compilation compilation,
             INamedTypeSymbol? containingType,
             ImmutableArray<ISymbol> members,
-            bool justMemberReference)
+            bool justMemberReference
+        )
         {
             var result = ArrayBuilder<SyntaxNode>.GetInstance();
 
             if (containingType != null && GetBaseGetHashCodeMethod(containingType) != null)
             {
-                result.Add(factory.InvocationExpression(
-                    factory.MemberAccessExpression(factory.BaseExpression(), GetHashCodeName)));
+                result.Add(
+                    factory.InvocationExpression(
+                        factory.MemberAccessExpression(factory.BaseExpression(), GetHashCodeName)
+                    )
+                );
             }
 
             foreach (var member in members)
             {
-                result.Add(GetMemberForGetHashCode(factory, generatorInternal, compilation, member, justMemberReference));
+                result.Add(
+                    GetMemberForGetHashCode(
+                        factory,
+                        generatorInternal,
+                        compilation,
+                        member,
+                        justMemberReference
+                    )
+                );
             }
 
             return result.ToImmutableAndFree();
         }
 
         public static ImmutableArray<SyntaxNode> CreateGetHashCodeStatementsUsingSystemHashCode(
-            this SyntaxGenerator factory, SyntaxGeneratorInternal generatorInternal,
-            INamedTypeSymbol hashCodeType, ImmutableArray<SyntaxNode> memberReferences)
+            this SyntaxGenerator factory,
+            SyntaxGeneratorInternal generatorInternal,
+            INamedTypeSymbol hashCodeType,
+            ImmutableArray<SyntaxNode> memberReferences
+        )
         {
             if (memberReferences.Length <= 8)
             {
                 var statement = factory.ReturnStatement(
                     factory.InvocationExpression(
-                        factory.MemberAccessExpression(factory.TypeExpression(hashCodeType), "Combine"),
-                        memberReferences));
+                        factory.MemberAccessExpression(
+                            factory.TypeExpression(hashCodeType),
+                            "Combine"
+                        ),
+                        memberReferences
+                    )
+                );
                 return ImmutableArray.Create(statement);
             }
 
             const string hashName = "hash";
             var statements = ArrayBuilder<SyntaxNode>.GetInstance();
-            statements.Add(factory.SimpleLocalDeclarationStatement(generatorInternal,
-                hashCodeType, hashName, factory.ObjectCreationExpression(hashCodeType)));
+            statements.Add(
+                factory.SimpleLocalDeclarationStatement(
+                    generatorInternal,
+                    hashCodeType,
+                    hashName,
+                    factory.ObjectCreationExpression(hashCodeType)
+                )
+            );
 
             var localReference = factory.IdentifierName(hashName);
             foreach (var member in memberReferences)
             {
-                statements.Add(factory.ExpressionStatement(
-                    factory.InvocationExpression(
-                        factory.MemberAccessExpression(localReference, "Add"),
-                        member)));
+                statements.Add(
+                    factory.ExpressionStatement(
+                        factory.InvocationExpression(
+                            factory.MemberAccessExpression(localReference, "Add"),
+                            member
+                        )
+                    )
+                );
             }
 
-            statements.Add(factory.ReturnStatement(
-                factory.InvocationExpression(
-                    factory.MemberAccessExpression(localReference, "ToHashCode"))));
+            statements.Add(
+                factory.ReturnStatement(
+                    factory.InvocationExpression(
+                        factory.MemberAccessExpression(localReference, "ToHashCode")
+                    )
+                )
+            );
 
             return statements.ToImmutableAndFree();
         }
@@ -82,10 +116,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             Compilation compilation,
             INamedTypeSymbol containingType,
             ImmutableArray<ISymbol> members,
-            bool useInt64)
+            bool useInt64
+        )
         {
             var components = GetGetHashCodeComponents(
-                factory, generatorInternal, compilation, containingType, members, justMemberReference: false);
+                factory,
+                generatorInternal,
+                compilation,
+                containingType,
+                members,
+                justMemberReference: false
+            );
 
             if (components.Length == 0)
             {
@@ -119,10 +160,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 //      return someHash + this.S1.GetHashCode();    // or
 
                 var multiplyResult = initHash * hashFactor;
-                return ImmutableArray.Create(factory.ReturnStatement(
-                    factory.AddExpression(
-                        CreateLiteralExpression(factory, multiplyResult),
-                        components[0])));
+                return ImmutableArray.Create(
+                    factory.ReturnStatement(
+                        factory.AddExpression(
+                            CreateLiteralExpression(factory, multiplyResult),
+                            components[0]
+                        )
+                    )
+                );
             }
 
             var statements = ArrayBuilder<SyntaxNode>.GetInstance();
@@ -132,9 +177,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             //      var hashCode = initialHashCode;
 
             const string HashCodeName = "hashCode";
-            statements.Add(!useInt64
-                ? factory.SimpleLocalDeclarationStatement(generatorInternal, compilation.GetSpecialType(SpecialType.System_Int32), HashCodeName, CreateLiteralExpression(factory, initHash))
-                : factory.LocalDeclarationStatement(compilation.GetSpecialType(SpecialType.System_Int64), HashCodeName, CreateLiteralExpression(factory, initHash)));
+            statements.Add(
+                !useInt64
+                    ? factory.SimpleLocalDeclarationStatement(
+                        generatorInternal,
+                        compilation.GetSpecialType(SpecialType.System_Int32),
+                        HashCodeName,
+                        CreateLiteralExpression(factory, initHash)
+                    )
+                    : factory.LocalDeclarationStatement(
+                        compilation.GetSpecialType(SpecialType.System_Int64),
+                        HashCodeName,
+                        CreateLiteralExpression(factory, initHash)
+                    )
+            );
 
             var hashCodeNameExpression = factory.IdentifierName(HashCodeName);
 
@@ -143,28 +199,36 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             foreach (var component in components)
             {
                 // hashCode = hashCode * -1521134295 + this.S.GetHashCode();
-                var rightSide =
-                    factory.AddExpression(
-                        factory.MultiplyExpression(hashCodeNameExpression, permuteValue),
-                        component);
+                var rightSide = factory.AddExpression(
+                    factory.MultiplyExpression(hashCodeNameExpression, permuteValue),
+                    component
+                );
 
                 if (useInt64)
                 {
                     rightSide = factory.InvocationExpression(
-                        factory.MemberAccessExpression(rightSide, GetHashCodeName));
+                        factory.MemberAccessExpression(rightSide, GetHashCodeName)
+                    );
                 }
 
-                statements.Add(factory.ExpressionStatement(
-                    factory.AssignmentStatement(hashCodeNameExpression, rightSide)));
+                statements.Add(
+                    factory.ExpressionStatement(
+                        factory.AssignmentStatement(hashCodeNameExpression, rightSide)
+                    )
+                );
             }
 
             // And finally, the "return hashCode;" statement.
-            statements.Add(!useInt64
-                ? factory.ReturnStatement(hashCodeNameExpression)
-                : factory.ReturnStatement(
-                    factory.ConvertExpression(
-                        compilation.GetSpecialType(SpecialType.System_Int32),
-                        hashCodeNameExpression)));
+            statements.Add(
+                !useInt64
+                    ? factory.ReturnStatement(hashCodeNameExpression)
+                    : factory.ReturnStatement(
+                        factory.ConvertExpression(
+                            compilation.GetSpecialType(SpecialType.System_Int32),
+                            hashCodeNameExpression
+                        )
+                    )
+            );
 
             return statements.ToImmutableAndFree();
         }
@@ -176,16 +240,20 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         /// type and let the simplifier decide if it should be <c>var</c> or not.
         /// </summary>
         private static SyntaxNode SimpleLocalDeclarationStatement(
-            this SyntaxGenerator generator, SyntaxGeneratorInternal generatorInternal, INamedTypeSymbol namedTypeSymbol,
-            string name, SyntaxNode initializer)
+            this SyntaxGenerator generator,
+            SyntaxGeneratorInternal generatorInternal,
+            INamedTypeSymbol namedTypeSymbol,
+            string name,
+            SyntaxNode initializer
+        )
         {
             return generatorInternal.RequiresLocalDeclarationType()
                 ? generator.LocalDeclarationStatement(namedTypeSymbol, name, initializer)
                 : generator.LocalDeclarationStatement(name, initializer);
         }
 
-        private static SyntaxNode CreateLiteralExpression(SyntaxGenerator factory, int value)
-            => value < 0
+        private static SyntaxNode CreateLiteralExpression(SyntaxGenerator factory, int value) =>
+            value < 0
                 ? factory.NegateExpression(factory.LiteralExpression(-value))
                 : factory.LiteralExpression(value);
 
@@ -203,12 +271,13 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             var existingMethods =
                 from baseType in containingType.GetBaseTypes()
                 from method in baseType.GetMembers(GetHashCodeName).OfType<IMethodSymbol>()
-                where method.IsOverride &&
-                      method.DeclaredAccessibility == Accessibility.Public &&
-                      !method.IsStatic &&
-                      method.Parameters.Length == 0 &&
-                      method.ReturnType.SpecialType == SpecialType.System_Int32 &&
-                      !method.IsAbstract
+                where
+                    method.IsOverride
+                    && method.DeclaredAccessibility == Accessibility.Public
+                    && !method.IsStatic
+                    && method.Parameters.Length == 0
+                    && method.ReturnType.SpecialType == SpecialType.System_Int32
+                    && !method.IsAbstract
                 select method;
 
             return existingMethods.FirstOrDefault();
@@ -219,11 +288,16 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             SyntaxGeneratorInternal generatorInternal,
             Compilation compilation,
             ISymbol member,
-            bool justMemberReference)
+            bool justMemberReference
+        )
         {
             var getHashCodeNameExpression = factory.IdentifierName(GetHashCodeName);
-            var thisSymbol = factory.MemberAccessExpression(factory.ThisExpression(),
-                factory.IdentifierName(member.Name)).WithAdditionalAnnotations(Simplification.Simplifier.Annotation);
+            var thisSymbol = factory
+                .MemberAccessExpression(
+                    factory.ThisExpression(),
+                    factory.IdentifierName(member.Name)
+                )
+                .WithAdditionalAnnotations(Simplification.Simplifier.Annotation);
 
             // Caller only wanted the reference to the member, nothing else added.
             if (justMemberReference)
@@ -239,15 +313,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 // EqualityComparer.GetHashCode on value types actually performs more poorly.
 
                 return factory.InvocationExpression(
-                    factory.MemberAccessExpression(thisSymbol, nameof(object.GetHashCode)));
+                    factory.MemberAccessExpression(thisSymbol, nameof(object.GetHashCode))
+                );
             }
             else
             {
                 return factory.InvocationExpression(
                     factory.MemberAccessExpression(
-                        GetDefaultEqualityComparer(factory, generatorInternal, compilation, GetType(compilation, member)),
-                        getHashCodeNameExpression),
-                    thisSymbol);
+                        GetDefaultEqualityComparer(
+                            factory,
+                            generatorInternal,
+                            compilation,
+                            GetType(compilation, member)
+                        ),
+                        getHashCodeNameExpression
+                    ),
+                    thisSymbol
+                );
             }
         }
     }

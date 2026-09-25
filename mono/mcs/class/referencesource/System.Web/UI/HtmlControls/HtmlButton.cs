@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlButton.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -10,31 +10,27 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-    using System.ComponentModel;
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
+    using System.ComponentModel;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
-
 
     /// <devdoc>
-    /// <para>The <see langword='HtmlButton'/> 
+    /// <para>The <see langword='HtmlButton'/>
     /// class defines the methods, properties and events for the
     /// <see langword='HtmlButton'/>
     /// control. This
     /// class allows programmatic access to the HTML &lt;button&gt; element
     /// on the server.</para>
     /// </devdoc>
-    [
-    DefaultEvent("ServerClick"),
-    SupportsEventValidation,
-    ]
-    public class HtmlButton : HtmlContainerControl, IPostBackEventHandler {
-
+    [DefaultEvent("ServerClick"), SupportsEventValidation]
+    public class HtmlButton : HtmlContainerControl, IPostBackEventHandler
+    {
         private static readonly object EventServerClick = new object();
-
 
         /*
          *  Creates an intrinsic Html BUTTON control.
@@ -43,9 +39,8 @@ namespace System.Web.UI.HtmlControls {
         /// <devdoc>
         /// <para>Initializes a new instance of a <see cref='System.Web.UI.HtmlControls.HtmlButton'/> class.</para>
         /// </devdoc>
-        public HtmlButton() : base("button") {
-        }
-
+        public HtmlButton()
+            : base("button") { }
 
         /// <devdoc>
         ///    <para>Gets or sets whether pressing the button causes page validation to fire. This defaults to True so that when
@@ -53,57 +48,46 @@ namespace System.Web.UI.HtmlControls {
         ///          on the client and the server. Setting this to False is useful when defining a cancel or reset button on a page
         ///          that has validators.</para>
         /// </devdoc>
-        [
-        WebCategory("Behavior"),
-        DefaultValue(true),
-        ]
-        public virtual bool CausesValidation {
-            get {
+        [WebCategory("Behavior"), DefaultValue(true)]
+        public virtual bool CausesValidation
+        {
+            get
+            {
                 object b = ViewState["CausesValidation"];
-                return((b == null) ? true : (bool)b);
+                return ((b == null) ? true : (bool)b);
             }
-            set {
-                ViewState["CausesValidation"] = value;
-            }
+            set { ViewState["CausesValidation"] = value; }
         }
-
 
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        WebSysDescription(SR.PostBackControl_ValidationGroup)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            WebSysDescription(SR.PostBackControl_ValidationGroup)
         ]
-        public virtual string ValidationGroup {
-            get {
+        public virtual string ValidationGroup
+        {
+            get
+            {
                 string s = (string)ViewState["ValidationGroup"];
-                return((s == null) ? String.Empty : s);
+                return ((s == null) ? String.Empty : s);
             }
-            set {
-                ViewState["ValidationGroup"] = value;
-            }
+            set { ViewState["ValidationGroup"] = value; }
         }
-
 
         /// <devdoc>
         /// <para>Occurs when the user clicks an <see cref='System.Web.UI.HtmlControls.HtmlButton'/> control on the
         ///    browser.</para>
         /// </devdoc>
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.HtmlControl_OnServerClick)
-        ]
-        public event EventHandler ServerClick {
-            add {
-                Events.AddHandler(EventServerClick, value);
-            }
-            remove {
-                Events.RemoveHandler(EventServerClick, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.HtmlControl_OnServerClick)]
+        public event EventHandler ServerClick
+        {
+            add { Events.AddHandler(EventServerClick, value); }
+            remove { Events.RemoveHandler(EventServerClick, value); }
         }
 
-
         /// <internalonly/>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
             if (Page != null && Events[EventServerClick] != null)
                 Page.RegisterPostBackScript();
@@ -116,27 +100,33 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void RenderAttributes(HtmlTextWriter writer) {
-
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
             bool submitsProgramatically = (Events[EventServerClick] != null);
-            if (Page != null && submitsProgramatically) {
+            if (Page != null && submitsProgramatically)
+            {
                 Util.WriteOnClickAttribute(
-                        writer, this, false, true,
-                        (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0),
-                        ValidationGroup);
+                    writer,
+                    this,
+                    false,
+                    true,
+                    (CausesValidation && Page.GetValidators(ValidationGroup).Count > 0),
+                    ValidationGroup
+                );
             }
 
             base.RenderAttributes(writer);
         }
 
-
         /// <devdoc>
         /// <para>Raises the <see langword='ServerClick'/>
         /// event.</para>
         /// </devdoc>
-        protected virtual void OnServerClick(EventArgs e) {
+        protected virtual void OnServerClick(EventArgs e)
+        {
             EventHandler handler = (EventHandler)Events[EventServerClick];
-            if (handler != null) handler(this, e);
+            if (handler != null)
+                handler(this, e);
         }
 
         /*
@@ -147,18 +137,20 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(string eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RaisePostBackEvent(string eventArgument) {
+        protected virtual void RaisePostBackEvent(string eventArgument)
+        {
             ValidateEvent(UniqueID, eventArgument);
 
-            if (CausesValidation) {
+            if (CausesValidation)
+            {
                 Page.Validate(ValidationGroup);
             }
             OnServerClick(EventArgs.Empty);

@@ -8,18 +8,18 @@
  *      the variant objects in the nodes
  */
 
-
-namespace DefaultNamespace {
+namespace DefaultNamespace
+{
     using System;
 
     internal class Node
     {
-// disabling unused variable warning
+        // disabling unused variable warning
 #pragma warning disable 0414
         internal Object m_Var;
 #pragma warning restore 0414
 
-        internal Object [] m_aVar;
+        internal Object[] m_aVar;
         internal Node next;
 
         public Node()
@@ -34,15 +34,15 @@ namespace DefaultNamespace {
     {
         internal Node m_Root;
 
-        public static int Main(String [] Args){
-        int iRep = 0;
-        int iObj = 0;
-        Console.WriteLine("Test should return with ExitCode 100 ...");
+        public static int Main(String[] Args)
+        {
+            int iRep = 0;
+            int iObj = 0;
+            Console.WriteLine("Test should return with ExitCode 100 ...");
 
-            if (Args.Length==2)
+            if (Args.Length == 2)
             {
-                if (!Int32.TryParse( Args[0], out iRep ) ||
-                    !Int32.TryParse( Args[0], out iObj ))
+                if (!Int32.TryParse(Args[0], out iRep) || !Int32.TryParse(Args[0], out iObj))
                 {
                     iRep = 40000;
                     iObj = 100;
@@ -55,7 +55,7 @@ namespace DefaultNamespace {
             }
 
             VariantLinkList Mv_Obj = new VariantLinkList();
-            if(Mv_Obj.runTest(iRep, iObj))
+            if (Mv_Obj.runTest(iRep, iObj))
             {
                 Console.WriteLine("Test Passed");
                 return 100;
@@ -70,16 +70,16 @@ namespace DefaultNamespace {
             m_Root.m_Var = null;
             m_Root.next = null;
             Node temp = m_Root;
-            for(int i = 0; i < iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 temp.next = new Node();
                 temp = temp.next;
                 temp.m_Var = (i);
                 temp.next = null;
-                if ((i+1)%10000 == 0)
+                if ((i + 1) % 10000 == 0)
                 {
                     Console.Write("Nodes Created: ");
-                    Console.WriteLine(i+1);
+                    Console.WriteLine(i + 1);
                 }
             }
             temp = m_Root;
@@ -87,10 +87,10 @@ namespace DefaultNamespace {
 
             Console.WriteLine("Done creating");
 
-            for(int i = 0; i < iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 temp = temp.next;
-                if ((i+1)%10000 == 0)
+                if ((i + 1) % 10000 == 0)
                 {
                     Console.Write("Nodes Traversed: ");
                     Console.WriteLine(i + 1);
@@ -100,6 +100,5 @@ namespace DefaultNamespace {
             GC.Collect();
             return true;
         }
-
     }
 }

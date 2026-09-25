@@ -4,7 +4,6 @@
 using System;
 using System.Runtime;
 using System.Runtime.CompilerServices;
-
 using Internal.Runtime;
 
 namespace System.Runtime
@@ -14,7 +13,8 @@ namespace System.Runtime
         [RuntimeExport("RhpCidResolve")]
         private static unsafe IntPtr RhpCidResolve(IntPtr callerTransitionBlockParam, IntPtr pCell)
         {
-            IntPtr locationOfThisPointer = callerTransitionBlockParam + TransitionBlock.GetThisOffset();
+            IntPtr locationOfThisPointer =
+                callerTransitionBlockParam + TransitionBlock.GetThisOffset();
 #pragma warning disable 8500 // address of managed types
             object pObject = *(object*)locationOfThisPointer;
 #pragma warning restore 8500
@@ -35,7 +35,12 @@ namespace System.Runtime
                 // as the one we just resolved would do the resolution the same way. We will need to ask again.
                 if (!pObject.GetMethodTable()->IsIDynamicInterfaceCastable)
                 {
-                    return InternalCalls.RhpUpdateDispatchCellCache(pCell, pTargetCode, pObject.GetMethodTable(), ref cellInfo);
+                    return InternalCalls.RhpUpdateDispatchCellCache(
+                        pCell,
+                        pTargetCode,
+                        pObject.GetMethodTable(),
+                        ref cellInfo
+                    );
                 }
                 else
                 {
@@ -73,7 +78,11 @@ namespace System.Runtime
         }
 
         [RuntimeExport("RhResolveDispatch")]
-        private static IntPtr RhResolveDispatch(object pObject, EETypePtr interfaceType, ushort slot)
+        private static IntPtr RhResolveDispatch(
+            object pObject,
+            EETypePtr interfaceType,
+            ushort slot
+        )
         {
             DispatchCellInfo cellInfo = default;
             cellInfo.CellType = DispatchCellType.InterfaceAndSlot;
@@ -84,7 +93,12 @@ namespace System.Runtime
         }
 
         [RuntimeExport("RhResolveDispatchOnType")]
-        private static IntPtr RhResolveDispatchOnType(EETypePtr instanceType, EETypePtr interfaceType, ushort slot, EETypePtr* pGenericContext)
+        private static IntPtr RhResolveDispatchOnType(
+            EETypePtr instanceType,
+            EETypePtr interfaceType,
+            ushort slot,
+            EETypePtr* pGenericContext
+        )
         {
             // Type of object we're dispatching on.
             MethodTable* pInstanceType = instanceType.ToPointer();
@@ -92,13 +106,19 @@ namespace System.Runtime
             // Type of interface
             MethodTable* pInterfaceType = interfaceType.ToPointer();
 
-            return DispatchResolve.FindInterfaceMethodImplementationTarget(pInstanceType,
-                                                                          pInterfaceType,
-                                                                          slot,
-                                                                          (MethodTable**)pGenericContext);
+            return DispatchResolve.FindInterfaceMethodImplementationTarget(
+                pInstanceType,
+                pInterfaceType,
+                slot,
+                (MethodTable**)pGenericContext
+            );
         }
 
-        private static unsafe IntPtr RhResolveDispatchWorker(object pObject, void* cell, ref DispatchCellInfo cellInfo)
+        private static unsafe IntPtr RhResolveDispatchWorker(
+            object pObject,
+            void* cell,
+            ref DispatchCellInfo cellInfo
+        )
         {
             // Type of object we're dispatching on.
             MethodTable* pInstanceType = pObject.GetMethodTable();
@@ -109,17 +129,29 @@ namespace System.Runtime
                 // we may repeat this process with an alternate type.
                 MethodTable* pResolvingInstanceType = pInstanceType;
 
-                IntPtr pTargetCode = DispatchResolve.FindInterfaceMethodImplementationTarget(pResolvingInstanceType,
-                                                                              cellInfo.InterfaceType.ToPointer(),
-                                                                              cellInfo.InterfaceSlot,
-                                                                              ppGenericContext: null);
+                IntPtr pTargetCode = DispatchResolve.FindInterfaceMethodImplementationTarget(
+                    pResolvingInstanceType,
+                    cellInfo.InterfaceType.ToPointer(),
+                    cellInfo.InterfaceSlot,
+                    ppGenericContext: null
+                );
                 if (pTargetCode == IntPtr.Zero && pInstanceType->IsIDynamicInterfaceCastable)
                 {
                     // Dispatch not resolved through normal dispatch map, try using the IDynamicInterfaceCastable
                     // This will either give us the appropriate result, or throw.
-                    var pfnGetInterfaceImplementation = (delegate*<object, MethodTable*, ushort, IntPtr>)
-                        pInstanceType->GetClasslibFunction(ClassLibFunctionId.IDynamicCastableGetInterfaceImplementation);
-                    pTargetCode = pfnGetInterfaceImplementation(pObject, cellInfo.InterfaceType.ToPointer(), cellInfo.InterfaceSlot);
+                    var pfnGetInterfaceImplementation = (delegate* <
+                        object,
+                        MethodTable*,
+                        ushort,
+                        IntPtr>)
+                        pInstanceType->GetClasslibFunction(
+                            ClassLibFunctionId.IDynamicCastableGetInterfaceImplementation
+                        );
+                    pTargetCode = pfnGetInterfaceImplementation(
+                        pObject,
+                        cellInfo.InterfaceType.ToPointer(),
+                        cellInfo.InterfaceSlot
+                    );
                     Diagnostics.Debug.Assert(pTargetCode != IntPtr.Zero);
                 }
                 return pTargetCode;
@@ -135,7 +167,10 @@ namespace System.Runtime
                 // Attempt to convert dispatch cell to non-metadata form if we haven't acquired a cache for this cell yet
                 if (cellInfo.HasCache == 0)
                 {
-                    cellInfo = InternalTypeLoaderCalls.ConvertMetadataTokenDispatch(InternalCalls.RhGetModuleFromPointer(cell), cellInfo);
+                    cellInfo = InternalTypeLoaderCalls.ConvertMetadataTokenDispatch(
+                        InternalCalls.RhGetModuleFromPointer(cell),
+                        cellInfo
+                    );
                     if (cellInfo.CellType != DispatchCellType.MetadataToken)
                     {
                         return RhResolveDispatchWorker(pObject, cell, ref cellInfo);
@@ -143,7 +178,11 @@ namespace System.Runtime
                 }
 
                 // If that failed, go down the metadata resolution path
-                return InternalTypeLoaderCalls.ResolveMetadataTokenDispatch(InternalCalls.RhGetModuleFromPointer(cell), (int)cellInfo.MetadataToken, new IntPtr(pInstanceType));
+                return InternalTypeLoaderCalls.ResolveMetadataTokenDispatch(
+                    InternalCalls.RhGetModuleFromPointer(cell),
+                    (int)cellInfo.MetadataToken,
+                    new IntPtr(pInstanceType)
+                );
 #else
                 EH.FallbackFailFast(RhFailFastReason.InternalError, null);
                 return IntPtr.Zero;

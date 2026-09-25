@@ -28,13 +28,13 @@ public static class InMemoryEventId
         TransactionIgnoredWarning = CoreEventId.ProviderBaseId,
 
         // Update events
-        ChangesSaved = CoreEventId.ProviderBaseId + 100
+        ChangesSaved = CoreEventId.ProviderBaseId + 100,
     }
 
-    private static readonly string TransactionPrefix = DbLoggerCategory.Database.Transaction.Name + ".";
+    private static readonly string TransactionPrefix =
+        DbLoggerCategory.Database.Transaction.Name + ".";
 
-    private static EventId MakeTransactionId(Id id)
-        => new((int)id, TransactionPrefix + id);
+    private static EventId MakeTransactionId(Id id) => new((int)id, TransactionPrefix + id);
 
     /// <summary>
     ///     A transaction operation was requested, but ignored because in-memory does not support transactions.
@@ -47,12 +47,13 @@ public static class InMemoryEventId
     ///         This event uses the <see cref="EventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId TransactionIgnoredWarning = MakeTransactionId(Id.TransactionIgnoredWarning);
+    public static readonly EventId TransactionIgnoredWarning = MakeTransactionId(
+        Id.TransactionIgnoredWarning
+    );
 
     private static readonly string UpdatePrefix = DbLoggerCategory.Update.Name + ".";
 
-    private static EventId MakeUpdateId(Id id)
-        => new((int)id, UpdatePrefix + id);
+    private static EventId MakeUpdateId(Id id) => new((int)id, UpdatePrefix + id);
 
     /// <summary>
     ///     Changes were saved to the database.

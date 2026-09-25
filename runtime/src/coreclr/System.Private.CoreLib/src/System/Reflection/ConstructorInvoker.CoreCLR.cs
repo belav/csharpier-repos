@@ -7,7 +7,8 @@ namespace System.Reflection
     {
         private readonly Signature? _signature;
 
-        internal unsafe ConstructorInvoker(RuntimeConstructorInfo constructor) : this(constructor, constructor.Signature.Arguments)
+        internal unsafe ConstructorInvoker(RuntimeConstructorInfo constructor)
+            : this(constructor, constructor.Signature.Arguments)
         {
             _signature = constructor.Signature;
             _invokeFunc_RefArgs = InterpretedInvoke;
@@ -15,7 +16,12 @@ namespace System.Reflection
 
         private unsafe object? InterpretedInvoke(object? obj, IntPtr* args)
         {
-            return RuntimeMethodHandle.InvokeMethod(obj, (void**)args, _signature!, isConstructor: obj is null);
+            return RuntimeMethodHandle.InvokeMethod(
+                obj,
+                (void**)args,
+                _signature!,
+                isConstructor: obj is null
+            );
         }
     }
 }

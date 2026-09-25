@@ -10,6 +10,7 @@ namespace Microsoft.CodeAnalysis.CSharp.FileHeaders
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpFileHeaderDiagnosticAnalyzer : AbstractFileHeaderDiagnosticAnalyzer
     {
-        protected override AbstractFileHeaderHelper FileHeaderHelper => CSharpFileHeaderHelper.Instance;
+        protected override AbstractFileHeaderHelper FileHeaderHelper =>
+            CSharpFileHeaderHelper.Instance;
     }
 }

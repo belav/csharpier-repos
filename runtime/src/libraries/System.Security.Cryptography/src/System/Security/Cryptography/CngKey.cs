@@ -17,7 +17,9 @@ namespace System.Security.Cryptography
         private CngKey(SafeNCryptProviderHandle providerHandle, SafeNCryptKeyHandle keyHandle)
         {
             Debug.Assert(keyHandle != null && !keyHandle.IsInvalid && !keyHandle.IsClosed);
-            Debug.Assert(providerHandle != null && !providerHandle.IsInvalid && !providerHandle.IsClosed);
+            Debug.Assert(
+                providerHandle != null && !providerHandle.IsInvalid && !providerHandle.IsClosed
+            );
 
             _providerHandle = providerHandle;
             _keyHandle = keyHandle;

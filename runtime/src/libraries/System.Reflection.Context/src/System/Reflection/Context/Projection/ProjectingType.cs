@@ -14,7 +14,7 @@ namespace System.Reflection.Context.Projection
         private readonly Projector _projector;
 
         public ProjectingType(Type type, Projector projector)
-            :  base(type)
+            : base(type)
         {
             Debug.Assert(null != projector);
 
@@ -75,7 +75,10 @@ namespace System.Reflection.Context.Projection
 
         public override IList<CustomAttributeData> GetCustomAttributesData()
         {
-            return _projector.Project(base.GetCustomAttributesData(), _projector.ProjectCustomAttributeData);
+            return _projector.Project(
+                base.GetCustomAttributesData(),
+                _projector.ProjectCustomAttributeData
+            );
         }
 
         public override EventInfo[] GetEvents()
@@ -90,7 +93,10 @@ namespace System.Reflection.Context.Projection
 
         public override Type[] GetGenericParameterConstraints()
         {
-            return _projector.Project(base.GetGenericParameterConstraints(), _projector.ProjectType);
+            return _projector.Project(
+                base.GetGenericParameterConstraints(),
+                _projector.ProjectType
+            );
         }
 
         public override Type GetGenericTypeDefinition()
@@ -105,10 +111,16 @@ namespace System.Reflection.Context.Projection
             return _projector.ProjectInterfaceMapping(base.GetInterfaceMap(interfaceType));
         }
 
-        public override MemberInfo[] GetMember(string name, MemberTypes type, BindingFlags bindingAttr)
+        public override MemberInfo[] GetMember(
+            string name,
+            MemberTypes type,
+            BindingFlags bindingAttr
+        )
         {
-            StringComparison comparisonType = (bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase
-                ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+            StringComparison comparisonType =
+                (bindingAttr & BindingFlags.IgnoreCase) == BindingFlags.IgnoreCase
+                    ? StringComparison.OrdinalIgnoreCase
+                    : StringComparison.Ordinal;
 
             List<MemberInfo> matchingMembers = new List<MemberInfo>();
 
@@ -179,16 +191,27 @@ namespace System.Reflection.Context.Projection
             return UnderlyingType.IsSubclassOf(otherType.UnderlyingType);
         }
 
-        protected override ConstructorInfo? GetConstructorImpl(BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[] types, ParameterModifier[]? modifiers)
+        protected override ConstructorInfo? GetConstructorImpl(
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[] types,
+            ParameterModifier[]? modifiers
+        )
         {
             types = Projector.Unproject(types);
 
-            return _projector.ProjectConstructor(base.GetConstructorImpl(bindingAttr, binder, callConvention, types, modifiers));
+            return _projector.ProjectConstructor(
+                base.GetConstructorImpl(bindingAttr, binder, callConvention, types, modifiers)
+            );
         }
 
         public override ConstructorInfo[] GetConstructors(BindingFlags bindingAttr)
         {
-            return _projector.Project(base.GetConstructors(bindingAttr), _projector.ProjectConstructor);
+            return _projector.Project(
+                base.GetConstructors(bindingAttr),
+                _projector.ProjectConstructor
+            );
         }
 
         public override Type? GetElementType()
@@ -237,31 +260,47 @@ namespace System.Reflection.Context.Projection
             // Interfaces are excluded from the result of GetMembers
 
             MemberInfo[] members = new MemberInfo[
-                methods.Length +
-                constructors.Length +
-                properties.Length +
-                events.Length +
-                fields.Length +
-                nestedTypes.Length];
+                methods.Length
+                    + constructors.Length
+                    + properties.Length
+                    + events.Length
+                    + fields.Length
+                    + nestedTypes.Length
+            ];
 
             int i = 0;
-            Array.Copy(methods, 0, members, i, methods.Length); i += methods.Length;
-            Array.Copy(constructors, 0, members, i, constructors.Length); i += constructors.Length;
-            Array.Copy(properties, 0, members, i, properties.Length); i += properties.Length;
-            Array.Copy(events, 0, members, i, events.Length); i += events.Length;
-            Array.Copy(fields, 0, members, i, fields.Length); i += fields.Length;
-            Array.Copy(nestedTypes, 0, members, i, nestedTypes.Length); i += nestedTypes.Length;
+            Array.Copy(methods, 0, members, i, methods.Length);
+            i += methods.Length;
+            Array.Copy(constructors, 0, members, i, constructors.Length);
+            i += constructors.Length;
+            Array.Copy(properties, 0, members, i, properties.Length);
+            i += properties.Length;
+            Array.Copy(events, 0, members, i, events.Length);
+            i += events.Length;
+            Array.Copy(fields, 0, members, i, fields.Length);
+            i += fields.Length;
+            Array.Copy(nestedTypes, 0, members, i, nestedTypes.Length);
+            i += nestedTypes.Length;
 
             Debug.Assert(i == members.Length);
 
             return members;
         }
 
-        protected override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers)
+        protected override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             types = Projector.Unproject(types);
 
-            return _projector.ProjectMethod(base.GetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers));
+            return _projector.ProjectMethod(
+                base.GetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers)
+            );
         }
 
         public override MethodInfo[] GetMethods(BindingFlags bindingAttr)
@@ -284,12 +323,21 @@ namespace System.Reflection.Context.Projection
             return _projector.Project(base.GetProperties(bindingAttr), _projector.ProjectProperty);
         }
 
-        protected override PropertyInfo? GetPropertyImpl(string name, BindingFlags bindingAttr, Binder? binder, Type? returnType, Type[]? types, ParameterModifier[]? modifiers)
+        protected override PropertyInfo? GetPropertyImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            Type? returnType,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        )
         {
             returnType = Projector.Unproject(returnType);
             types = Projector.Unproject(types);
 
-            return _projector.ProjectProperty(base.GetPropertyImpl(name, bindingAttr, binder, returnType, types, modifiers));
+            return _projector.ProjectProperty(
+                base.GetPropertyImpl(name, bindingAttr, binder, returnType, types, modifiers)
+            );
         }
 
         public override Type MakeArrayType()
@@ -307,7 +355,9 @@ namespace System.Reflection.Context.Projection
             return _projector.ProjectType(base.MakePointerType());
         }
 
-        [RequiresUnreferencedCode("If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met.")]
+        [RequiresUnreferencedCode(
+            "If some of the generic arguments are annotated (either with DynamicallyAccessedMembersAttribute, or generic constraints), trimming can't validate that the requirements of those annotations are met."
+        )]
         public override Type MakeGenericType(params Type[] typeArguments)
         {
             typeArguments = Projector.Unproject(typeArguments);
@@ -322,9 +372,9 @@ namespace System.Reflection.Context.Projection
 
         public override bool Equals([NotNullWhen(true)] object? o)
         {
-            return o is ProjectingType other &&
-                Projector == other.Projector &&
-                UnderlyingType.Equals(other.UnderlyingType);
+            return o is ProjectingType other
+                && Projector == other.Projector
+                && UnderlyingType.Equals(other.UnderlyingType);
         }
 
         public override int GetHashCode()

@@ -22,7 +22,12 @@ namespace System.Reflection.TypeLoading.Ecma
         // "fullyQualifiedName" determines the string returned by Module.FullyQualifiedName. It is typically set to the full path of the
         // file on disk containing the module.
         //
-        internal EcmaModule(EcmaAssembly assembly, string fullyQualifiedName, PEReader peReader, MetadataReader reader)
+        internal EcmaModule(
+            EcmaAssembly assembly,
+            string fullyQualifiedName,
+            PEReader peReader,
+            MetadataReader reader
+        )
             : base(fullyQualifiedName)
         {
             Debug.Assert(assembly != null);
@@ -36,15 +41,19 @@ namespace System.Reflection.TypeLoading.Ecma
         }
 
         internal sealed override RoAssembly GetRoAssembly() => _assembly;
+
         internal EcmaAssembly GetEcmaAssembly() => _assembly;
 
         public sealed override bool IsResource() => false;
-        public sealed override int MDStreamVersion => throw new NotSupportedException(SR.NotSupported_MDStreamVersion);
+
+        public sealed override int MDStreamVersion =>
+            throw new NotSupportedException(SR.NotSupported_MDStreamVersion);
         public sealed override int MetadataToken => 0x00000001; // The Module Table is exactly 1 record long so the token is always mdtModule | 0x000001
         public sealed override Guid ModuleVersionId => ModuleDefinition.Mvid.GetGuid(Reader);
         public sealed override string ScopeName => ModuleDefinition.Name.GetString(Reader);
 
-        public sealed override IEnumerable<CustomAttributeData> CustomAttributes => ModuleDefinition.GetCustomAttributes().ToTrueCustomAttributes(this);
+        public sealed override IEnumerable<CustomAttributeData> CustomAttributes =>
+            ModuleDefinition.GetCustomAttributes().ToTrueCustomAttributes(this);
 
         internal MethodInfo? ComputeEntryPoint(bool fileRefEntryPointAllowed)
         {
@@ -63,28 +72,33 @@ namespace System.Reflection.TypeLoading.Ecma
             switch (kind)
             {
                 case HandleKind.MethodDefinition:
-                    {
-                        MethodDefinitionHandle mdh = (MethodDefinitionHandle)handle;
-                        return mdh.ResolveMethod<MethodInfo>(this, default);
-                    }
+                {
+                    MethodDefinitionHandle mdh = (MethodDefinitionHandle)handle;
+                    return mdh.ResolveMethod<MethodInfo>(this, default);
+                }
 
                 case HandleKind.AssemblyFile:
-                    {
-                        if (!fileRefEntryPointAllowed)
-                            throw new BadImageFormatException();
+                {
+                    if (!fileRefEntryPointAllowed)
+                        throw new BadImageFormatException();
 
-                        MetadataReader reader = Reader;
-                        string moduleName = ((AssemblyFileHandle)handle).GetAssemblyFile(reader).Name.GetString(reader);
-                        EcmaModule? roModule = (EcmaModule?)(Assembly.GetModule(moduleName));
-                        return roModule!.ComputeEntryPoint(fileRefEntryPointAllowed: false);
-                    }
+                    MetadataReader reader = Reader;
+                    string moduleName = ((AssemblyFileHandle)handle)
+                        .GetAssemblyFile(reader)
+                        .Name.GetString(reader);
+                    EcmaModule? roModule = (EcmaModule?)(Assembly.GetModule(moduleName));
+                    return roModule!.ComputeEntryPoint(fileRefEntryPointAllowed: false);
+                }
 
                 default:
                     throw new BadImageFormatException();
             }
         }
 
-        public sealed override void GetPEKind(out PortableExecutableKinds peKind, out ImageFileMachine machine)
+        public sealed override void GetPEKind(
+            out PortableExecutableKinds peKind,
+            out ImageFileMachine machine
+        )
         {
             PEHeaders peHeaders = PEReader.PEHeaders;
             PEMagic peMagic = peHeaders.PEHeader!.Magic;
@@ -109,11 +123,28 @@ namespace System.Reflection.TypeLoading.Ecma
         //
         // Search for members on <Module> type.
         //
-        public sealed override FieldInfo? GetField(string name, BindingFlags bindingAttr) => GetModuleType().GetField(name, bindingAttr);
-        public sealed override FieldInfo[] GetFields(BindingFlags bindingFlags) => GetModuleType().GetFields(bindingFlags);
-        public sealed override MethodInfo[] GetMethods(BindingFlags bindingFlags) => GetModuleType().GetMethods(bindingFlags);
-        protected sealed override MethodInfo? GetMethodImpl(string name, BindingFlags bindingAttr, Binder? binder, CallingConventions callConvention, Type[]? types, ParameterModifier[]? modifiers) => GetModuleType().InternalGetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers);
-        private EcmaDefinitionType GetModuleType() => ModuleTypeToken.ToTypeDefinitionHandle().ResolveTypeDef(this);
+        public sealed override FieldInfo? GetField(string name, BindingFlags bindingAttr) =>
+            GetModuleType().GetField(name, bindingAttr);
+
+        public sealed override FieldInfo[] GetFields(BindingFlags bindingFlags) =>
+            GetModuleType().GetFields(bindingFlags);
+
+        public sealed override MethodInfo[] GetMethods(BindingFlags bindingFlags) =>
+            GetModuleType().GetMethods(bindingFlags);
+
+        protected sealed override MethodInfo? GetMethodImpl(
+            string name,
+            BindingFlags bindingAttr,
+            Binder? binder,
+            CallingConventions callConvention,
+            Type[]? types,
+            ParameterModifier[]? modifiers
+        ) =>
+            GetModuleType()
+                .InternalGetMethodImpl(name, bindingAttr, binder, callConvention, types, modifiers);
+
+        private EcmaDefinitionType GetModuleType() =>
+            ModuleTypeToken.ToTypeDefinitionHandle().ResolveTypeDef(this);
 
         public sealed override Type[] GetTypes()
         {
@@ -133,8 +164,16 @@ namespace System.Reflection.TypeLoading.Ecma
         internal PEReader PEReader => _guardedPEReader.PEReader;
         internal MetadataReader Reader => _guardedPEReader.Reader;
 
-        private ref readonly ModuleDefinition ModuleDefinition { get { Loader.DisposeCheck(); return ref _neverAccessThisExceptThroughModuleDefinitionProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private ref readonly ModuleDefinition ModuleDefinition
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return ref _neverAccessThisExceptThroughModuleDefinitionProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly ModuleDefinition _neverAccessThisExceptThroughModuleDefinitionProperty;
     }
 }

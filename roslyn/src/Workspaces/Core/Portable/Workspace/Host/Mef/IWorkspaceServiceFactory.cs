@@ -8,7 +8,7 @@ namespace Microsoft.CodeAnalysis.Host.Mef
 {
     /// <summary>
     /// A factory that creates instances of a specific <see cref="IWorkspaceService"/>.
-    /// 
+    ///
     /// Implement a <see cref="IWorkspaceServiceFactory"/> when you want to provide <see cref="IWorkspaceService"/> instances that use other services.
     /// </summary>
     public interface IWorkspaceServiceFactory

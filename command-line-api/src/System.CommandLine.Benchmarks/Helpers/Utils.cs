@@ -13,16 +13,22 @@ namespace System.CommandLine.Benchmarks.Helpers
 {
     internal static class Utils
     {
-        internal static string GetInputFullFilePath(string name)
-            => Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location), "Input", name);
+        internal static string GetInputFullFilePath(string name) =>
+            Path.Combine(Path.GetDirectoryName(typeof(Program).Assembly.Location), "Input", name);
 
-        internal static string CreateTestAssemblyInTempFileFromFile(string testCsFilePath, IEnumerable<string> references)
+        internal static string CreateTestAssemblyInTempFileFromFile(
+            string testCsFilePath,
+            IEnumerable<string> references
+        )
         {
             var testSourceCode = File.ReadAllText(GetInputFullFilePath(testCsFilePath));
             return CreateTestAssemblyInTempFileFromString(testSourceCode, references);
         }
 
-        internal static string CreateTestAssemblyInTempFileFromString(string sourceCode, IEnumerable<string> references)
+        internal static string CreateTestAssemblyInTempFileFromString(
+            string sourceCode,
+            IEnumerable<string> references
+        )
         {
             SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(sourceCode);
             string randomAssemblyName = Path.GetRandomFileName();
@@ -30,10 +36,17 @@ namespace System.CommandLine.Benchmarks.Helpers
                 randomAssemblyName,
                 new[] { syntaxTree },
                 references.Select(r => MetadataReference.CreateFromFile(r)),
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
-            string pathToAssemblyFile = Path.Combine(Path.GetTempPath(), randomAssemblyName + ".dll");
-            string pathToAssemblyXmlDocsFile = Path.Combine(Path.GetTempPath(), randomAssemblyName + ".xml");
+            string pathToAssemblyFile = Path.Combine(
+                Path.GetTempPath(),
+                randomAssemblyName + ".dll"
+            );
+            string pathToAssemblyXmlDocsFile = Path.Combine(
+                Path.GetTempPath(),
+                randomAssemblyName + ".xml"
+            );
             EmitResult result = compiler.Emit(pathToAssemblyFile, null, pathToAssemblyXmlDocsFile);
 
             if (!result.Success)

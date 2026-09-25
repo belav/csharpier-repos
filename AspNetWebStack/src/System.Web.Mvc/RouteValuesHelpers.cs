@@ -10,10 +10,18 @@ namespace System.Web.Mvc
     {
         public static RouteValueDictionary GetRouteValues(RouteValueDictionary routeValues)
         {
-            return (routeValues != null) ? new RouteValueDictionary(routeValues) : new RouteValueDictionary();
+            return (routeValues != null)
+                ? new RouteValueDictionary(routeValues)
+                : new RouteValueDictionary();
         }
 
-        public static RouteValueDictionary MergeRouteValues(string actionName, string controllerName, RouteValueDictionary implicitRouteValues, RouteValueDictionary routeValues, bool includeImplicitMvcValues)
+        public static RouteValueDictionary MergeRouteValues(
+            string actionName,
+            string controllerName,
+            RouteValueDictionary implicitRouteValues,
+            RouteValueDictionary routeValues,
+            bool includeImplicitMvcValues
+        )
         {
             // Create a new dictionary containing implicit and auto-generated values
             RouteValueDictionary mergedRouteValues = new RouteValueDictionary();
@@ -26,12 +34,18 @@ namespace System.Web.Mvc
                 // as the destination controller.
 
                 object implicitValue;
-                if (implicitRouteValues != null && implicitRouteValues.TryGetValue("action", out implicitValue))
+                if (
+                    implicitRouteValues != null
+                    && implicitRouteValues.TryGetValue("action", out implicitValue)
+                )
                 {
                     mergedRouteValues["action"] = implicitValue;
                 }
 
-                if (implicitRouteValues != null && implicitRouteValues.TryGetValue("controller", out implicitValue))
+                if (
+                    implicitRouteValues != null
+                    && implicitRouteValues.TryGetValue("controller", out implicitValue)
+                )
                 {
                     mergedRouteValues["controller"] = implicitValue;
                 }

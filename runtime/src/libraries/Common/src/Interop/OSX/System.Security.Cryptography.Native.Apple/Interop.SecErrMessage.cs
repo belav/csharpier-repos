@@ -9,11 +9,15 @@ internal static partial class Interop
     internal static partial class AppleCrypto
     {
         [LibraryImport(Libraries.AppleCryptoNative)]
-        private static partial SafeCFStringHandle AppleCryptoNative_SecCopyErrorMessageString(int osStatus);
+        private static partial SafeCFStringHandle AppleCryptoNative_SecCopyErrorMessageString(
+            int osStatus
+        );
 
         internal static string? GetSecErrorString(int osStatus)
         {
-            using (SafeCFStringHandle cfString = AppleCryptoNative_SecCopyErrorMessageString(osStatus))
+            using (
+                SafeCFStringHandle cfString = AppleCryptoNative_SecCopyErrorMessageString(osStatus)
+            )
             {
                 if (cfString.IsInvalid)
                 {

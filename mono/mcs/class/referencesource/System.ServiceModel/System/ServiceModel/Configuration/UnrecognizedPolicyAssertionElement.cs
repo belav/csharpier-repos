@@ -20,7 +20,6 @@ namespace System.ServiceModel.Configuration
         IDictionary<OperationDescription, ICollection<XmlElement>> operationAssertions;
         IDictionary<MessageDescription, ICollection<XmlElement>> messageAssertions;
 
-
         public override Type BindingElementType
         {
             get { return typeof(UnrecognizedAssertionsBindingElement); }
@@ -46,7 +45,8 @@ namespace System.ServiceModel.Configuration
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             base.InitializeFrom(bindingElement);
-            UnrecognizedAssertionsBindingElement binding = (UnrecognizedAssertionsBindingElement)bindingElement;
+            UnrecognizedAssertionsBindingElement binding =
+                (UnrecognizedAssertionsBindingElement)bindingElement;
 
             this.wsdlBinding = binding.WsdlBinding;
             this.bindingAsserions = binding.BindingAsserions;
@@ -62,8 +62,22 @@ namespace System.ServiceModel.Configuration
                 int indent = 1;
                 XmlWriterSettings settings = WriterSettings(writer);
                 Fx.Assert(this.wsdlBinding != null, "");
-                WriteComment(SR.GetString(SR.UnrecognizedBindingAssertions1, this.wsdlBinding.Namespace), indent, writer, settings);
-                WriteComment(String.Format(CultureInfo.InvariantCulture, "<wsdl:binding name='{0}'>", this.wsdlBinding.Name), indent, writer, settings);
+                WriteComment(
+                    SR.GetString(SR.UnrecognizedBindingAssertions1, this.wsdlBinding.Namespace),
+                    indent,
+                    writer,
+                    settings
+                );
+                WriteComment(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "<wsdl:binding name='{0}'>",
+                        this.wsdlBinding.Name
+                    ),
+                    indent,
+                    writer,
+                    settings
+                );
                 indent++;
                 foreach (XmlElement assertion in this.bindingAsserions)
                 {
@@ -74,7 +88,16 @@ namespace System.ServiceModel.Configuration
 
                 foreach (OperationDescription operation in this.operationAssertions.Keys)
                 {
-                    WriteComment(String.Format(CultureInfo.InvariantCulture, "<wsdl:operation name='{0}'>", operation.Name), indent, writer, settings);
+                    WriteComment(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "<wsdl:operation name='{0}'>",
+                            operation.Name
+                        ),
+                        indent,
+                        writer,
+                        settings
+                    );
                     indent++;
                     foreach (XmlElement assertion in this.operationAssertions[operation])
                     {
@@ -95,7 +118,12 @@ namespace System.ServiceModel.Configuration
                                 WriteComment("<wsdl:output>", indent, writer, settings);
                             foreach (XmlElement assertion in assertions)
                             {
-                                WriteComment(ToString(assertion, document), indent + 1, writer, settings);
+                                WriteComment(
+                                    ToString(assertion, document),
+                                    indent + 1,
+                                    writer,
+                                    settings
+                                );
                             }
                         }
                     }
@@ -105,14 +133,24 @@ namespace System.ServiceModel.Configuration
             return false;
         }
 
-        protected override void Unmerge(ConfigurationElement sourceElement, ConfigurationElement parentElement, ConfigurationSaveMode saveMode)
+        protected override void Unmerge(
+            ConfigurationElement sourceElement,
+            ConfigurationElement parentElement,
+            ConfigurationSaveMode saveMode
+        )
         {
             if (sourceElement is UnrecognizedPolicyAssertionElement)
             {
                 this.wsdlBinding = ((UnrecognizedPolicyAssertionElement)sourceElement).wsdlBinding;
-                this.bindingAsserions = ((UnrecognizedPolicyAssertionElement)sourceElement).bindingAsserions;
-                this.operationAssertions = ((UnrecognizedPolicyAssertionElement)sourceElement).operationAssertions;
-                this.messageAssertions = ((UnrecognizedPolicyAssertionElement)sourceElement).messageAssertions;
+                this.bindingAsserions = (
+                    (UnrecognizedPolicyAssertionElement)sourceElement
+                ).bindingAsserions;
+                this.operationAssertions = (
+                    (UnrecognizedPolicyAssertionElement)sourceElement
+                ).operationAssertions;
+                this.messageAssertions = (
+                    (UnrecognizedPolicyAssertionElement)sourceElement
+                ).messageAssertions;
             }
             base.Unmerge(sourceElement, parentElement, saveMode);
         }
@@ -165,6 +203,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

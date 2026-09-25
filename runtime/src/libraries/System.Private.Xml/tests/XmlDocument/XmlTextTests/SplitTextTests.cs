@@ -13,7 +13,6 @@ namespace System.Xml.XmlDocumentTests
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml("<doc><elem1>This is a test</elem1></doc>");
 
-
             var node = xmlDocument.DocumentElement.FirstChild.FirstChild;
             var splitNode = ((XmlText)node).SplitText(0);
 
@@ -52,7 +51,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void SplitLongTextNodeAndNormalize()
         {
-            var xml = @" <T>This is a very long text node that contains &lt;, and &amp;. We are going to use method SplitText.</T> ";
+            var xml =
+                @" <T>This is a very long text node that contains &lt;, and &amp;. We are going to use method SplitText.</T> ";
 
             var xmlDocument = new XmlDocument { PreserveWhitespace = true };
             xmlDocument.LoadXml(xml);

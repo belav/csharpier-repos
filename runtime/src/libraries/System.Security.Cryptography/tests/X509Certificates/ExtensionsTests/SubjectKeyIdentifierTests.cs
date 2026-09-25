@@ -49,7 +49,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             {
                 e = new X509SubjectKeyIdentifierExtension(
                     new AsnEncodedData(new ReadOnlySpan<byte>(rawData)),
-                    false);
+                    false
+                );
             }
             else
             {
@@ -78,7 +79,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
 
             ReadOnlyMemory<byte> ski1 = e.SubjectKeyIdentifierBytes;
             ReadOnlyMemory<byte> ski2 = e.SubjectKeyIdentifierBytes;
-            Assert.True(ski1.Span == ski2.Span, "Two calls to SubjectKeyIdentifierBytes return the same buffer");
+            Assert.True(
+                ski1.Span == ski2.Span,
+                "Two calls to SubjectKeyIdentifierBytes return the same buffer"
+            );
         }
 
         [Fact]
@@ -110,7 +114,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 X509SubjectKeyIdentifierHashAlgorithm.Sha1,
                 false,
                 "04145971a65a334dda980780ff841ebe87f9723241f2".HexToByteArray(),
-                "5971A65A334DDA980780FF841EBE87F9723241F2");
+                "5971A65A334DDA980780FF841EBE87F9723241F2"
+            );
         }
 
         [Fact]
@@ -121,7 +126,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 X509SubjectKeyIdentifierHashAlgorithm.ShortSha1,
                 false,
                 "04084ebe87f9723241f2".HexToByteArray(),
-                "4EBE87F9723241F2");
+                "4EBE87F9723241F2"
+            );
         }
 
         [Fact]
@@ -132,7 +138,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 X509SubjectKeyIdentifierHashAlgorithm.CapiSha1,
                 false,
                 "0414a260a870be1145ed71e2bb5aa19463a4fe9dcc41".HexToByteArray(),
-                "A260A870BE1145ED71E2BB5AA19463A4FE9DCC41");
+                "A260A870BE1145ED71E2BB5AA19463A4FE9DCC41"
+            );
         }
 
         [Fact]
@@ -153,7 +160,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             X509SubjectKeyIdentifierHashAlgorithm algorithm,
             bool critical,
             byte[] expectedDer,
-            string expectedIdentifier)
+            string expectedIdentifier
+        )
         {
             PublicKey pk;
 
@@ -162,19 +170,28 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 pk = cert.PublicKey;
             }
 
-            X509SubjectKeyIdentifierExtension ext =
-                new X509SubjectKeyIdentifierExtension(pk, algorithm, critical);
+            X509SubjectKeyIdentifierExtension ext = new X509SubjectKeyIdentifierExtension(
+                pk,
+                algorithm,
+                critical
+            );
 
             byte[] rawData = ext.RawData;
             Assert.Equal(expectedDer, rawData);
 
             ext = new X509SubjectKeyIdentifierExtension(new AsnEncodedData(rawData), critical);
             Assert.Equal(expectedIdentifier, ext.SubjectKeyIdentifier);
-            Assert.Equal(expectedIdentifier, Convert.ToHexString(ext.SubjectKeyIdentifierBytes.Span));
+            Assert.Equal(
+                expectedIdentifier,
+                Convert.ToHexString(ext.SubjectKeyIdentifierBytes.Span)
+            );
 
             ReadOnlyMemory<byte> ski1 = ext.SubjectKeyIdentifierBytes;
             ReadOnlyMemory<byte> ski2 = ext.SubjectKeyIdentifierBytes;
-            Assert.True(ski1.Span == ski2.Span, "Two calls to SubjectKeyIdentifierBytes return the same buffer");
+            Assert.True(
+                ski1.Span == ski2.Span,
+                "Two calls to SubjectKeyIdentifierBytes return the same buffer"
+            );
         }
     }
 }

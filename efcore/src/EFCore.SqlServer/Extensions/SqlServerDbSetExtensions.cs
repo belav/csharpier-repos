@@ -33,18 +33,23 @@ public static class SqlServerDbSetExtensions
     /// <returns>An <see cref="IQueryable" /> representing the entities at a given point in time.</returns>
     public static IQueryable<TEntity> TemporalAsOf<TEntity>(
         this DbSet<TEntity> source,
-        DateTime utcPointInTime)
+        DateTime utcPointInTime
+    )
         where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
         var entityType = entityQueryRootExpression.EntityType;
 
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            new TemporalAsOfQueryRootExpression(
-                entityQueryRootExpression.QueryProvider!,
-                entityType,
-                utcPointInTime)).AsNoTracking();
+        return queryableSource
+            .Provider.CreateQuery<TEntity>(
+                new TemporalAsOfQueryRootExpression(
+                    entityQueryRootExpression.QueryProvider!,
+                    entityType,
+                    utcPointInTime
+                )
+            )
+            .AsNoTracking();
     }
 
     /// <summary>
@@ -79,19 +84,24 @@ public static class SqlServerDbSetExtensions
     public static IQueryable<TEntity> TemporalFromTo<TEntity>(
         this DbSet<TEntity> source,
         DateTime utcFrom,
-        DateTime utcTo)
+        DateTime utcTo
+    )
         where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
         var entityType = entityQueryRootExpression.EntityType;
 
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            new TemporalFromToQueryRootExpression(
-                entityQueryRootExpression.QueryProvider!,
-                entityType,
-                utcFrom,
-                utcTo)).AsNoTracking();
+        return queryableSource
+            .Provider.CreateQuery<TEntity>(
+                new TemporalFromToQueryRootExpression(
+                    entityQueryRootExpression.QueryProvider!,
+                    entityType,
+                    utcFrom,
+                    utcTo
+                )
+            )
+            .AsNoTracking();
     }
 
     /// <summary>
@@ -126,19 +136,24 @@ public static class SqlServerDbSetExtensions
     public static IQueryable<TEntity> TemporalBetween<TEntity>(
         this DbSet<TEntity> source,
         DateTime utcFrom,
-        DateTime utcTo)
+        DateTime utcTo
+    )
         where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
         var entityType = entityQueryRootExpression.EntityType;
 
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            new TemporalBetweenQueryRootExpression(
-                entityQueryRootExpression.QueryProvider!,
-                entityType,
-                utcFrom,
-                utcTo)).AsNoTracking();
+        return queryableSource
+            .Provider.CreateQuery<TEntity>(
+                new TemporalBetweenQueryRootExpression(
+                    entityQueryRootExpression.QueryProvider!,
+                    entityType,
+                    utcFrom,
+                    utcTo
+                )
+            )
+            .AsNoTracking();
     }
 
     /// <summary>
@@ -173,19 +188,24 @@ public static class SqlServerDbSetExtensions
     public static IQueryable<TEntity> TemporalContainedIn<TEntity>(
         this DbSet<TEntity> source,
         DateTime utcFrom,
-        DateTime utcTo)
+        DateTime utcTo
+    )
         where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
         var entityType = entityQueryRootExpression.EntityType;
 
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            new TemporalContainedInQueryRootExpression(
-                entityQueryRootExpression.QueryProvider!,
-                entityType,
-                utcFrom,
-                utcTo)).AsNoTracking();
+        return queryableSource
+            .Provider.CreateQuery<TEntity>(
+                new TemporalContainedInQueryRootExpression(
+                    entityQueryRootExpression.QueryProvider!,
+                    entityType,
+                    utcFrom,
+                    utcTo
+                )
+            )
+            .AsNoTracking();
     }
 
     /// <summary>
@@ -203,16 +223,20 @@ public static class SqlServerDbSetExtensions
     /// </remarks>
     /// <param name="source">Source DbSet on which the temporal operation is applied.</param>
     /// <returns>An <see cref="IQueryable{T}" /> representing the entities and their historical versions.</returns>
-    public static IQueryable<TEntity> TemporalAll<TEntity>(
-        this DbSet<TEntity> source)
+    public static IQueryable<TEntity> TemporalAll<TEntity>(this DbSet<TEntity> source)
         where TEntity : class
     {
         var queryableSource = (IQueryable)source;
         var entityQueryRootExpression = (EntityQueryRootExpression)queryableSource.Expression;
         var entityType = entityQueryRootExpression.EntityType;
 
-        return queryableSource.Provider.CreateQuery<TEntity>(
-            new TemporalAllQueryRootExpression(
-                entityQueryRootExpression.QueryProvider!, entityType)).AsNoTracking();
+        return queryableSource
+            .Provider.CreateQuery<TEntity>(
+                new TemporalAllQueryRootExpression(
+                    entityQueryRootExpression.QueryProvider!,
+                    entityType
+                )
+            )
+            .AsNoTracking();
     }
 }

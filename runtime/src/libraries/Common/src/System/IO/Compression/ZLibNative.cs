@@ -23,7 +23,7 @@ namespace System.IO.Compression
             NoFlush = 0,
             SyncFlush = 2,
             Finish = 4,
-            Block = 5
+            Block = 5,
         }
 
         public enum ErrorCode : int
@@ -34,7 +34,7 @@ namespace System.IO.Compression
             DataError = -3,
             MemError = -4,
             BufError = -5,
-            VersionError = -6
+            VersionError = -6,
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace System.IO.Compression
             NoCompression = 0,
             BestSpeed = 1,
             DefaultCompression = -1,
-            BestCompression = 9
+            BestCompression = 9,
         }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace System.IO.Compression
         /// </summary>
         public enum CompressionStrategy : int
         {
-            DefaultStrategy = 0
+            DefaultStrategy = 0,
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace System.IO.Compression
         /// </summary>
         public enum CompressionMethod : int
         {
-            Deflated = 8
+            Deflated = 8,
         }
 
         /// <summary>
@@ -120,7 +120,8 @@ namespace System.IO.Compression
         /// <p>See also: How to choose a compression level (in comments to <code>CompressionLevel</code>.</p>
         /// </summary>
         public const int Deflate_DefaultWindowBits = -15; // Legal values are 8..15 and -8..-15. 15 is the window size,
-                                                          // negative val causes deflate to produce raw deflate data (no zlib header).
+
+        // negative val causes deflate to produce raw deflate data (no zlib header).
 
         /// <summary>
         /// <p><strong>From the ZLib manual:</strong></p>
@@ -148,8 +149,9 @@ namespace System.IO.Compression
         /// memory for optimal speed. The default value is 8.</p>
         /// <p>See also: How to choose a compression level (in comments to <code>CompressionLevel</code>.</p>
         /// </summary>
-        public const int Deflate_DefaultMemLevel = 8;     // Memory usage by deflate. Legal range: [1..9]. 8 is ZLib default.
-                                                          // More is faster and better compression with more memory usage.
+        public const int Deflate_DefaultMemLevel = 8; // Memory usage by deflate. Legal range: [1..9]. 8 is ZLib default.
+
+        // More is faster and better compression with more memory usage.
         public const int Deflate_NoCompressionMemLevel = 7;
 
         public const byte GZip_Header_ID1 = 31;
@@ -192,13 +194,12 @@ namespace System.IO.Compression
                 NotInitialized,
                 InitializedForDeflate,
                 InitializedForInflate,
-                Disposed
+                Disposed,
             }
 
             private ZStream _zStream;
 
             private volatile State _initializationState;
-
 
             public ZLibStreamHandle()
                 : base(new IntPtr(-1), true)
@@ -217,7 +218,6 @@ namespace System.IO.Compression
                 get { return _initializationState; }
             }
 
-
             protected override bool ReleaseHandle() =>
                 InitializationState switch
                 {
@@ -225,7 +225,7 @@ namespace System.IO.Compression
                     State.InitializedForDeflate => (DeflateEnd() == ErrorCode.Ok),
                     State.InitializedForInflate => (InflateEnd() == ErrorCode.Ok),
                     State.Disposed => true,
-                    _ => false,  // This should never happen. Did we forget one of the State enum values in the switch?
+                    _ => false, // This should never happen. Did we forget one of the State enum values in the switch?
                 };
 
             public IntPtr NextIn
@@ -257,28 +257,39 @@ namespace System.IO.Compression
                 ObjectDisposedException.ThrowIf(InitializationState == State.Disposed, this);
             }
 
-
             private void EnsureState(State requiredState)
             {
                 if (InitializationState != requiredState)
-                    throw new InvalidOperationException("InitializationState != " + requiredState.ToString());
+                    throw new InvalidOperationException(
+                        "InitializationState != " + requiredState.ToString()
+                    );
             }
 
-
-            public unsafe ErrorCode DeflateInit2_(CompressionLevel level, int windowBits, int memLevel, CompressionStrategy strategy)
+            public unsafe ErrorCode DeflateInit2_(
+                CompressionLevel level,
+                int windowBits,
+                int memLevel,
+                CompressionStrategy strategy
+            )
             {
                 EnsureNotDisposed();
                 EnsureState(State.NotInitialized);
 
                 fixed (ZStream* stream = &_zStream)
                 {
-                    ErrorCode errC = Interop.ZLib.DeflateInit2_(stream, level, CompressionMethod.Deflated, windowBits, memLevel, strategy);
+                    ErrorCode errC = Interop.ZLib.DeflateInit2_(
+                        stream,
+                        level,
+                        CompressionMethod.Deflated,
+                        windowBits,
+                        memLevel,
+                        strategy
+                    );
                     _initializationState = State.InitializedForDeflate;
 
                     return errC;
                 }
             }
-
 
             public unsafe ErrorCode Deflate(FlushCode flush)
             {
@@ -290,7 +301,6 @@ namespace System.IO.Compression
                     return Interop.ZLib.Deflate(stream, flush);
                 }
             }
-
 
             public unsafe ErrorCode DeflateEnd()
             {
@@ -306,7 +316,6 @@ namespace System.IO.Compression
                 }
             }
 
-
             public unsafe ErrorCode InflateInit2_(int windowBits)
             {
                 EnsureNotDisposed();
@@ -321,7 +330,6 @@ namespace System.IO.Compression
                 }
             }
 
-
             public unsafe ErrorCode Inflate(FlushCode flush)
             {
                 EnsureNotDisposed();
@@ -332,7 +340,6 @@ namespace System.IO.Compression
                     return Interop.ZLib.Inflate(stream, flush);
                 }
             }
-
 
             public unsafe ErrorCode InflateEnd()
             {
@@ -349,18 +356,26 @@ namespace System.IO.Compression
             }
 
             // This can work even after XxflateEnd().
-            public string GetErrorMessage() => _zStream.msg != ZNullPtr ? Marshal.PtrToStringUTF8(_zStream.msg)! : string.Empty;
+            public string GetErrorMessage() =>
+                _zStream.msg != ZNullPtr ? Marshal.PtrToStringUTF8(_zStream.msg)! : string.Empty;
         }
 
-        public static ErrorCode CreateZLibStreamForDeflate(out ZLibStreamHandle zLibStreamHandle, CompressionLevel level,
-            int windowBits, int memLevel, CompressionStrategy strategy)
+        public static ErrorCode CreateZLibStreamForDeflate(
+            out ZLibStreamHandle zLibStreamHandle,
+            CompressionLevel level,
+            int windowBits,
+            int memLevel,
+            CompressionStrategy strategy
+        )
         {
             zLibStreamHandle = new ZLibStreamHandle();
             return zLibStreamHandle.DeflateInit2_(level, windowBits, memLevel, strategy);
         }
 
-
-        public static ErrorCode CreateZLibStreamForInflate(out ZLibStreamHandle zLibStreamHandle, int windowBits)
+        public static ErrorCode CreateZLibStreamForInflate(
+            out ZLibStreamHandle zLibStreamHandle,
+            int windowBits
+        )
         {
             zLibStreamHandle = new ZLibStreamHandle();
             return zLibStreamHandle.InflateInit2_(windowBits);

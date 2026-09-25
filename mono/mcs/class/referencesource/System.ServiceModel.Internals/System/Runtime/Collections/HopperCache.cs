@@ -6,9 +6,8 @@ namespace System.Runtime.Collections
 {
     using System;
     using System.Collections;
-    using System.Threading;
     using System.Diagnostics;
-
+    using System.Threading;
 
     // This cache works like a MruCache, but operates loosely and without locks in the mainline path.
     //
@@ -57,7 +56,6 @@ namespace System.Runtime.Collections
         int promoting;
         LastHolder mruEntry;
 
-
         public HopperCache(int hopperSize, bool weak)
         {
             Fx.Assert(hopperSize > 0, "HopperCache hopperSize must be positive.");
@@ -82,8 +80,10 @@ namespace System.Runtime.Collections
                 value = new WeakReference(value);
             }
 
-            Fx.Assert(this.strongHopper.Count <= this.hopperSize * 2,
-                "HopperCache strongHopper is bigger than it's allowed to get.");
+            Fx.Assert(
+                this.strongHopper.Count <= this.hopperSize * 2,
+                "HopperCache strongHopper is bigger than it's allowed to get."
+            );
 
             if (this.strongHopper.Count >= this.hopperSize * 2)
             {
@@ -92,7 +92,8 @@ namespace System.Runtime.Collections
                 recycled.Add(key, value);
 
                 // The try/finally is here to make sure these happen without interruption.
-                try { } finally
+                try { }
+                finally
                 {
                     this.limitedHopper = this.strongHopper;
                     this.strongHopper = recycled;
@@ -136,7 +137,10 @@ namespace System.Runtime.Collections
 
             // Try the first hopper.
             object origValue = this.outstandingHopper[key];
-            value = this.weak && (weakRef = origValue as WeakReference) != null ? weakRef.Target : origValue;
+            value =
+                this.weak && (weakRef = origValue as WeakReference) != null
+                    ? weakRef.Target
+                    : origValue;
             if (value != null)
             {
                 this.mruEntry = new LastHolder(key, origValue);
@@ -145,11 +149,17 @@ namespace System.Runtime.Collections
 
             // Try the subsequent hoppers.
             origValue = this.strongHopper[key];
-            value = this.weak && (weakRef = origValue as WeakReference) != null ? weakRef.Target : origValue;
+            value =
+                this.weak && (weakRef = origValue as WeakReference) != null
+                    ? weakRef.Target
+                    : origValue;
             if (value == null)
             {
                 origValue = this.limitedHopper[key];
-                value = this.weak && (weakRef = origValue as WeakReference) != null ? weakRef.Target : origValue;
+                value =
+                    this.weak && (weakRef = origValue as WeakReference) != null
+                        ? weakRef.Target
+                        : origValue;
                 if (value == null)
                 {
                     // Still no value?  It's not here.
@@ -163,7 +173,8 @@ namespace System.Runtime.Collections
             int wasPromoting = 1;
             try
             {
-                try { } finally
+                try { }
+                finally
                 {
                     // This is effectively a lock, which is why it uses lock semantics.  If the Interlocked call
                     // were 'lost', the cache wouldn't deadlock, but it would be permanently broken.
@@ -173,8 +184,10 @@ namespace System.Runtime.Collections
                 // Only one thread can be inside this 'if' at a time.
                 if (wasPromoting == 0)
                 {
-                    Fx.Assert(this.outstandingHopper.Count <= this.hopperSize,
-                        "HopperCache outstandingHopper is bigger than it's allowed to get.");
+                    Fx.Assert(
+                        this.outstandingHopper.Count <= this.hopperSize,
+                        "HopperCache outstandingHopper is bigger than it's allowed to get."
+                    );
 
                     if (this.outstandingHopper.Count >= this.hopperSize)
                     {
@@ -185,7 +198,8 @@ namespace System.Runtime.Collections
                             recycled.Add(key, origValue);
 
                             // The try/finally is here to make sure these happen without interruption.
-                            try { } finally
+                            try { }
+                            finally
                             {
                                 this.limitedHopper = this.strongHopper;
                                 this.strongHopper = this.outstandingHopper;
@@ -229,18 +243,12 @@ namespace System.Runtime.Collections
 
             internal object Key
             {
-                get
-                {
-                    return this.key;
-                }
+                get { return this.key; }
             }
 
             internal object Value
             {
-                get
-                {
-                    return this.value;
-                }
+                get { return this.value; }
             }
         }
     }

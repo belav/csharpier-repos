@@ -11,12 +11,28 @@ namespace System.Collections.ObjectModel.Tests
     {
         public static IEnumerable<object[]> SerializeDeserialize_Roundtrips_MemberData()
         {
-            yield return new object[] { new ReadOnlyDictionary<string, string>(new Dictionary<string, string>()) };
-            yield return new object[] { new ReadOnlyDictionary<string, string>(new Dictionary<string, string>() { { "a", "b" } }) };
-            yield return new object[] { new ReadOnlyDictionary<string, string>(new Dictionary<string, string>() { { "a", "b" }, { "c", "d" } }) };
+            yield return new object[]
+            {
+                new ReadOnlyDictionary<string, string>(new Dictionary<string, string>()),
+            };
+            yield return new object[]
+            {
+                new ReadOnlyDictionary<string, string>(
+                    new Dictionary<string, string>() { { "a", "b" } }
+                ),
+            };
+            yield return new object[]
+            {
+                new ReadOnlyDictionary<string, string>(
+                    new Dictionary<string, string>() { { "a", "b" }, { "c", "d" } }
+                ),
+            };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [MemberData(nameof(SerializeDeserialize_Roundtrips_MemberData))]
         public void SerializeDeserialize_Roundtrips(ReadOnlyDictionary<string, string> d)
         {

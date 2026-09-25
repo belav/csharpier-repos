@@ -7,19 +7,32 @@ using System.Security.Permissions;
 namespace System.Drawing.Printing
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class PrintingPermission : CodeAccessPermission, IUnrestrictedPermission
     {
         public PrintingPermission(PrintingPermissionLevel printingLevel) { }
+
         public PrintingPermission(PermissionState state) { }
+
         public PrintingPermissionLevel Level { get; set; }
+
         public override IPermission Copy() => null;
+
         public override void FromXml(SecurityElement element) { }
+
         public override IPermission Intersect(IPermission target) => null;
+
         public override bool IsSubsetOf(IPermission target) => false;
+
         public bool IsUnrestricted() => false;
+
         public override SecurityElement ToXml() => null;
+
         public override IPermission Union(IPermission target) => null;
     }
 }

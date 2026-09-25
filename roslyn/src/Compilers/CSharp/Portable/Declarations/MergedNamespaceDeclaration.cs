@@ -11,7 +11,7 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    // An invariant of a merged declaration is that all of its children 
+    // An invariant of a merged declaration is that all of its children
     // are also merged declarations.
     internal sealed class MergedNamespaceDeclaration : MergedNamespaceOrTypeDeclaration
     {
@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             _declarations = declarations;
         }
 
-        public static MergedNamespaceDeclaration Create(ImmutableArray<SingleNamespaceDeclaration> declarations)
+        public static MergedNamespaceDeclaration Create(
+            ImmutableArray<SingleNamespaceDeclaration> declarations
+        )
         {
             return new MergedNamespaceDeclaration(declarations);
         }
@@ -36,10 +38,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override DeclarationKind Kind
         {
-            get
-            {
-                return DeclarationKind.Namespace;
-            }
+            get { return DeclarationKind.Namespace; }
         }
 
         public LexicalSortKey GetLexicalSortKey(CSharpCompilation compilation)
@@ -47,7 +46,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             LexicalSortKey sortKey = new LexicalSortKey(_declarations[0].NameLocation, compilation);
             for (var i = 1; i < _declarations.Length; i++)
             {
-                sortKey = LexicalSortKey.First(sortKey, new LexicalSortKey(_declarations[i].NameLocation, compilation));
+                sortKey = LexicalSortKey.First(
+                    sortKey,
+                    new LexicalSortKey(_declarations[i].NameLocation, compilation)
+                );
             }
 
             return sortKey;
@@ -105,7 +107,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             types = ArrayBuilder<SingleTypeDeclaration>.GetInstance();
                         }
-                        else if (allTypesHaveSameIdentity && !asType.Identity.Equals(types[0].Identity))
+                        else if (
+                            allTypesHaveSameIdentity && !asType.Identity.Equals(types[0].Identity)
+                        )
                         {
                             allTypesHaveSameIdentity = false;
                         }
@@ -123,7 +127,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                         {
                             namespaces = ArrayBuilder<SingleNamespaceDeclaration>.GetInstance();
                         }
-                        else if (allNamespacesHaveSameName && !asNamespace.Name.Equals(namespaces[0].Name))
+                        else if (
+                            allNamespacesHaveSameName
+                            && !asNamespace.Name.Equals(namespaces[0].Name)
+                        )
                         {
                             allNamespacesHaveSameName = false;
                         }
@@ -132,7 +139,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         continue;
                     }
 
-                    // Not sure if we can get here, perhaps, if we have errors, 
+                    // Not sure if we can get here, perhaps, if we have errors,
                     // but we care only about types and namespaces anyways.
                 }
             }
@@ -143,11 +150,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (allNamespacesHaveSameName)
                 {
-                    children.Add(MergedNamespaceDeclaration.Create(namespaces.ToImmutableAndFree()));
+                    children.Add(
+                        MergedNamespaceDeclaration.Create(namespaces.ToImmutableAndFree())
+                    );
                 }
                 else
                 {
-                    var namespaceGroups = namespaces.ToDictionary(n => n.Name, StringOrdinalComparer.Instance);
+                    var namespaceGroups = namespaces.ToDictionary(
+                        n => n.Name,
+                        StringOrdinalComparer.Instance
+                    );
                     namespaces.Free();
 
                     foreach (var namespaceGroup in namespaceGroups.Values)

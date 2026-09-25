@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.JitInterface;
 using Internal.TypeSystem;
 
@@ -16,10 +15,18 @@ namespace ILCompiler
         /// </summary>
         public static bool IsHardwareIntrinsic(MethodDesc method)
         {
-            return !string.IsNullOrEmpty(InstructionSetSupport.GetHardwareIntrinsicId(method.Context.Target.Architecture, method.OwningType));
+            return !string.IsNullOrEmpty(
+                InstructionSetSupport.GetHardwareIntrinsicId(
+                    method.Context.Target.Architecture,
+                    method.OwningType
+                )
+            );
         }
 
-        public static void AddRuntimeRequiredIsaFlagsToBuilder(InstructionSetSupportBuilder builder, int flags)
+        public static void AddRuntimeRequiredIsaFlagsToBuilder(
+            InstructionSetSupportBuilder builder,
+            int flags
+        )
         {
             switch (builder.Architecture)
             {
@@ -202,7 +209,9 @@ namespace ILCompiler
                     InstructionSet.X64_VectorT256 => VectorT256,
                     InstructionSet.X64_VectorT512 => VectorT512,
 
-                    _ => throw new NotSupportedException(((InstructionSet_X64)instructionSet).ToString())
+                    _ => throw new NotSupportedException(
+                        ((InstructionSet_X64)instructionSet).ToString()
+                    ),
                 };
             }
         }
@@ -253,7 +262,6 @@ namespace ILCompiler
             {
                 return instructionSet switch
                 {
-
                     // Baseline ISAs - they're always available
                     InstructionSet.ARM64_ArmBase => 0,
                     InstructionSet.ARM64_ArmBase_Arm64 => 0,
@@ -282,7 +290,9 @@ namespace ILCompiler
                     // Vector<T> Sizes
                     InstructionSet.ARM64_VectorT128 => VectorT128,
 
-                    _ => throw new NotSupportedException(((InstructionSet_ARM64)instructionSet).ToString())
+                    _ => throw new NotSupportedException(
+                        ((InstructionSet_ARM64)instructionSet).ToString()
+                    ),
                 };
             }
         }

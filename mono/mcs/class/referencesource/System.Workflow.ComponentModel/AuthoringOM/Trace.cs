@@ -38,7 +38,7 @@ namespace System.Workflow.Runtime
 
         /// <summary>
         /// Statically set up trace sources
-        /// 
+        ///
         /// To enable logging to a file, add lines like the following to your app config file.
         /*
             <system.diagnostics>
@@ -59,18 +59,28 @@ namespace System.Workflow.Runtime
         static WorkflowTrace()
         {
             runtime = new TraceSource("System.Workflow.Runtime");
-            runtime.Switch = new SourceSwitch("System.Workflow.Runtime", SourceLevels.Off.ToString());
+            runtime.Switch = new SourceSwitch(
+                "System.Workflow.Runtime",
+                SourceLevels.Off.ToString()
+            );
             // we'll use ID of 1 for the scheduler, 0 for rest of runtime
 
             tracking = new TraceSource("System.Workflow.Runtime.Tracking");
-            tracking.Switch = new SourceSwitch("System.Workflow.Runtime.Tracking", SourceLevels.Off.ToString());
+            tracking.Switch = new SourceSwitch(
+                "System.Workflow.Runtime.Tracking",
+                SourceLevels.Off.ToString()
+            );
 
             host = new TraceSource("System.Workflow.Runtime.Hosting");
-            host.Switch = new SourceSwitch("System.Workflow.Runtime.Hosting", SourceLevels.Off.ToString());
+            host.Switch = new SourceSwitch(
+                "System.Workflow.Runtime.Hosting",
+                SourceLevels.Off.ToString()
+            );
 
-
-
-            BooleanSwitch logToFile = new BooleanSwitch("System.Workflow LogToFile", "Log traces to file");
+            BooleanSwitch logToFile = new BooleanSwitch(
+                "System.Workflow LogToFile",
+                "Log traces to file"
+            );
             if (logToFile.Enabled)
             {
                 TextWriterTraceListener fileLog = new TextWriterTraceListener("WorkflowTrace.log");
@@ -81,7 +91,11 @@ namespace System.Workflow.Runtime
                 host.Listeners.Add(fileLog);
             }
 
-            BooleanSwitch traceToDefault = new BooleanSwitch("System.Workflow LogToTraceListeners", "Trace to listeners in Trace.Listeners", "0");
+            BooleanSwitch traceToDefault = new BooleanSwitch(
+                "System.Workflow LogToTraceListeners",
+                "Trace to listeners in Trace.Listeners",
+                "0"
+            );
             if (traceToDefault.Enabled)
             {
                 foreach (TraceListener listener in Trace.Listeners)

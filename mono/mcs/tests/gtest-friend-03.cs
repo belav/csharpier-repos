@@ -3,13 +3,12 @@ using System;
 
 public class Test
 {
-	public static void Main ()
-	{
-		FriendClass fc = new FriendClass ();
-		
-		// We should be able to access them
-		FriendClass.StaticFriendMethod ();
-		fc.InstanceFriendMethod ();
-	}
-}
+    public static void Main()
+    {
+        FriendClass fc = new FriendClass();
 
+        // We should be able to access them
+        FriendClass.StaticFriendMethod();
+        fc.InstanceFriendMethod();
+    }
+}

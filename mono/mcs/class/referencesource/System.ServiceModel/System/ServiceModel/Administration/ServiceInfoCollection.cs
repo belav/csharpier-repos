@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Administration
 {
     using System.Collections.Generic;
-    using System.ServiceModel;
     using System.Collections.ObjectModel;
     using System.Reflection;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
 
     [KnownType(typeof(List<ServiceInfo>))]
     internal sealed class ServiceInfoCollection : Collection<ServiceInfo>

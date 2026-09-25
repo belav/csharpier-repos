@@ -3,14 +3,17 @@
 //
 
 using Xunit;
+
 namespace AAAA
 {
     //@BEGINRENAME; Verify this renames
     //@ENDRENAME; Verify this renames
     using System;
+
     public class CtTest
     {
         private static int iTest = 5;
+
         [Fact]
         public static void TestEntryPoint()
         {

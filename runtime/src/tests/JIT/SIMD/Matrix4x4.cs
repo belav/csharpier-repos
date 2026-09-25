@@ -23,7 +23,10 @@ public class Matrix4x4Test
         }
 
         Matrix4x4 scaleAroundCenter = Matrix4x4.CreateScale(scale.X, scale.Y, scale.Z, center);
-        Matrix4x4 scaleAroundCenterExpected = Matrix4x4.CreateTranslation(-center) * Matrix4x4.CreateScale(scale.X, scale.Y, scale.Z) * Matrix4x4.CreateTranslation(center);
+        Matrix4x4 scaleAroundCenterExpected =
+            Matrix4x4.CreateTranslation(-center)
+            * Matrix4x4.CreateScale(scale.X, scale.Y, scale.Z)
+            * Matrix4x4.CreateTranslation(center);
         if (!scaleAroundCenter.Equals(scaleAroundCenterExpected))
         {
             returnVal = Fail;

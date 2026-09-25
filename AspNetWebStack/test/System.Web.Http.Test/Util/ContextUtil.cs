@@ -11,7 +11,12 @@ namespace System.Web.Http
 {
     internal static class ContextUtil
     {
-        public static HttpControllerContext CreateControllerContext(HttpConfiguration configuration = null, IHttpController instance = null, IHttpRouteData routeData = null, HttpRequestMessage request = null)
+        public static HttpControllerContext CreateControllerContext(
+            HttpConfiguration configuration = null,
+            IHttpController instance = null,
+            IHttpRouteData routeData = null,
+            HttpRequestMessage request = null
+        )
         {
             HttpConfiguration config = configuration ?? new HttpConfiguration();
             IHttpRouteData route = routeData ?? new HttpRouteData(new HttpRoute());
@@ -29,9 +34,13 @@ namespace System.Web.Http
             return context;
         }
 
-        public static HttpActionContext CreateActionContext(HttpControllerContext controllerContext = null, HttpActionDescriptor actionDescriptor = null)
+        public static HttpActionContext CreateActionContext(
+            HttpControllerContext controllerContext = null,
+            HttpActionDescriptor actionDescriptor = null
+        )
         {
-            HttpControllerContext context = controllerContext ?? ContextUtil.CreateControllerContext();
+            HttpControllerContext context =
+                controllerContext ?? ContextUtil.CreateControllerContext();
             HttpActionDescriptor descriptor = actionDescriptor ?? CreateActionDescriptor();
             descriptor.ControllerDescriptor = context.ControllerDescriptor;
             return new HttpActionContext(context, descriptor);
@@ -44,21 +53,36 @@ namespace System.Web.Http
             return actionContext;
         }
 
-        public static HttpActionExecutedContext GetActionExecutedContext(HttpRequestMessage request, HttpResponseMessage response)
+        public static HttpActionExecutedContext GetActionExecutedContext(
+            HttpRequestMessage request,
+            HttpResponseMessage response
+        )
         {
             HttpActionContext actionContext = CreateActionContext();
             actionContext.ControllerContext.Request = request;
-            HttpActionExecutedContext actionExecutedContext = new HttpActionExecutedContext(actionContext, null) { Response = response };
+            HttpActionExecutedContext actionExecutedContext = new HttpActionExecutedContext(
+                actionContext,
+                null
+            )
+            {
+                Response = response,
+            };
             return actionExecutedContext;
         }
 
-        public static HttpControllerDescriptor CreateControllerDescriptor(HttpConfiguration config = null)
+        public static HttpControllerDescriptor CreateControllerDescriptor(
+            HttpConfiguration config = null
+        )
         {
             if (config == null)
             {
                 config = new HttpConfiguration();
             }
-            return new HttpControllerDescriptor() { Configuration = config, ControllerName = "FooController" };
+            return new HttpControllerDescriptor()
+            {
+                Configuration = config,
+                ControllerName = "FooController",
+            };
         }
 
         public static HttpActionDescriptor CreateActionDescriptor()

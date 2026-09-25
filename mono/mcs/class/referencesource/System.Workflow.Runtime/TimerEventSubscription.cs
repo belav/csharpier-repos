@@ -9,7 +9,9 @@ namespace System.Workflow.Runtime
     /// instance creates on timer service for Timer Notification.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class TimerEventSubscription
     {
         #region Data
@@ -25,10 +27,7 @@ namespace System.Workflow.Runtime
         /// </summary>
         public virtual DateTime ExpiresAt
         {
-            get
-            {
-                return this.expiresAt;
-            }
+            get { return this.expiresAt; }
         }
 
         //A Unique id for this subscription. It is needed because
@@ -36,38 +35,22 @@ namespace System.Workflow.Runtime
         //Needed in case of Multiple Subscription on Same Queue
         public virtual Guid SubscriptionId
         {
-            get
-            {
-                return this.subscriptionId;
-            }
+            get { return this.subscriptionId; }
         }
 
         public virtual IComparable QueueName
         {
-            get
-            {
-                return this.queueName;
-            }
-            protected set
-            {
-                this.queueName = value;
-            }
+            get { return this.queueName; }
+            protected set { this.queueName = value; }
         }
 
         public virtual Guid WorkflowInstanceId
         {
-            get
-            {
-                return this.workflowInstanceId;
-            }
+            get { return this.workflowInstanceId; }
         }
-
 
         //Used only when providing specialized implementation.
-        protected TimerEventSubscription()
-        {
-
-        }
+        protected TimerEventSubscription() { }
 
         /// <summary>
         /// Creates a TimerEventSubscription for workflow Instance identified by
@@ -76,10 +59,7 @@ namespace System.Workflow.Runtime
         /// <param name="workflowInstanceId">WorkflowInstanceId for which this subscription is created.</param>
         /// <param name="expiresAt"> Time at which timer event should fire.</param>
         public TimerEventSubscription(Guid workflowInstanceId, DateTime expiresAt)
-            : this(Guid.NewGuid(), workflowInstanceId, expiresAt)
-        {
-
-        }
+            : this(Guid.NewGuid(), workflowInstanceId, expiresAt) { }
 
         /// <summary>
         /// Constructor to create TimerEventSubscription with user provided

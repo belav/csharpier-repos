@@ -14,9 +14,7 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
         public class HasVarargs
         {
-            public void OnlyVarargs(__arglist)
-            {
-            }
+            public void OnlyVarargs(__arglist) { }
 
             // Overloads where the varargs form could perhaps be confused with another
             public int Nullary(__arglist) => 0;
@@ -45,23 +43,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         public class VarArgCtorOption
         {
             public int Value { get; }
-            public VarArgCtorOption(__arglist)
-            {
-            }
 
-            public VarArgCtorOption(int i, __arglist)
-            {
-            }
+            public VarArgCtorOption(__arglist) { }
+
+            public VarArgCtorOption(int i, __arglist) { }
 
             public VarArgCtorOption(int i) => Value = i;
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void FailBindOnlyVarargsAvailable()
         {
             dynamic d = new HasVarargs();
-            string errorMessage = Assert.Throws<RuntimeBinderException>(() => d.OnlyVarargs()).Message;
+            string errorMessage = Assert
+                .Throws<RuntimeBinderException>(() => d.OnlyVarargs())
+                .Message;
             // No overload for method 'OnlyVarargs' takes '0' arguments
             // Localized forms should contain the name and count.
             Assert.Contains("OnlyVarargs", errorMessage);
@@ -69,11 +69,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             errorMessage = Assert.Throws<RuntimeBinderException>(() => d.OnlyVarargs(1)).Message;
             // "The best overloaded method match for 'Microsoft.CSharp.RuntimeBinder.Tests.VarArgsTests.HasVarargs.OnlyVarargs(__arglist)' has some invalid arguments"
             // Localized form should contain the name,
-            Assert.Contains("Microsoft.CSharp.RuntimeBinder.Tests.VarArgsTests.HasVarargs.OnlyVarargs(__arglist)", errorMessage);
+            Assert.Contains(
+                "Microsoft.CSharp.RuntimeBinder.Tests.VarArgsTests.HasVarargs.OnlyVarargs(__arglist)",
+                errorMessage
+            );
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void CorrectNullaryOverload()
         {
             dynamic d = new HasVarargs();
@@ -81,7 +87,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void CorrectUnaryOverload()
         {
             dynamic d = new HasVarargs();
@@ -96,7 +105,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void CorrectBinaryOverload()
         {
             dynamic d = new HasVarargs();
@@ -105,7 +117,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void CorrectCtor()
         {
             dynamic d = 19;

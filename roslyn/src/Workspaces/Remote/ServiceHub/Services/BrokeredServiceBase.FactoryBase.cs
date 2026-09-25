@@ -25,7 +25,12 @@ namespace Microsoft.CodeAnalysis.Remote
 
         internal interface IFactory
         {
-            object Create(IDuplexPipe pipe, IServiceProvider hostProvidedServices, ServiceActivationOptions serviceActivationOptions, IServiceBroker serviceBroker);
+            object Create(
+                IDuplexPipe pipe,
+                IServiceProvider hostProvidedServices,
+                ServiceActivationOptions serviceActivationOptions,
+                IServiceBroker serviceBroker
+            );
             Type ServiceType { get; }
         }
 
@@ -43,15 +48,16 @@ namespace Microsoft.CodeAnalysis.Remote
                 in ServiceConstructionArguments arguments,
                 ServiceRpcDescriptor descriptor,
                 ServiceRpcDescriptor.RpcConnection serverConnection,
-                object? clientRpcTarget)
-                => CreateService(arguments);
+                object? clientRpcTarget
+            ) => CreateService(arguments);
 
             public Task<object> CreateAsync(
-               Stream stream,
-               IServiceProvider hostProvidedServices,
-               ServiceActivationOptions serviceActivationOptions,
-               IServiceBroker serviceBroker,
-               AuthorizationServiceClient? authorizationServiceClient)
+                Stream stream,
+                IServiceProvider hostProvidedServices,
+                ServiceActivationOptions serviceActivationOptions,
+                IServiceBroker serviceBroker,
+                AuthorizationServiceClient? authorizationServiceClient
+            )
             {
                 // Exception from IServiceHubServiceFactory.CreateAsync are not propagated to the client.
                 // Intercept the exception here and report it to the log.
@@ -65,15 +71,20 @@ namespace Microsoft.CodeAnalysis.Remote
                     // TODO: Flow culture explicitly where needed https://github.com/dotnet/roslyn/issues/43670
                     if (Interlocked.CompareExchange(ref s_cultureInitialized, 1, 0) == 0)
                     {
-                        CultureInfo.DefaultThreadCurrentUICulture = serviceActivationOptions.ClientUICulture;
-                        CultureInfo.DefaultThreadCurrentCulture = serviceActivationOptions.ClientCulture;
+                        CultureInfo.DefaultThreadCurrentUICulture =
+                            serviceActivationOptions.ClientUICulture;
+                        CultureInfo.DefaultThreadCurrentCulture =
+                            serviceActivationOptions.ClientCulture;
                     }
 
-                    return Task.FromResult((object)Create(
-                        stream.UsePipe(),
-                        hostProvidedServices,
-                        serviceActivationOptions,
-                        serviceBroker));
+                    return Task.FromResult(
+                        (object)Create(
+                            stream.UsePipe(),
+                            hostProvidedServices,
+                            serviceActivationOptions,
+                            serviceBroker
+                        )
+                    );
                 }
                 catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
                 {
@@ -81,27 +92,42 @@ namespace Microsoft.CodeAnalysis.Remote
                 }
             }
 
-            object IFactory.Create(IDuplexPipe pipe, IServiceProvider hostProvidedServices, ServiceActivationOptions serviceActivationOptions, IServiceBroker serviceBroker)
-                => Create(pipe, hostProvidedServices, serviceActivationOptions, serviceBroker);
+            object IFactory.Create(
+                IDuplexPipe pipe,
+                IServiceProvider hostProvidedServices,
+                ServiceActivationOptions serviceActivationOptions,
+                IServiceBroker serviceBroker
+            ) => Create(pipe, hostProvidedServices, serviceActivationOptions, serviceBroker);
 
             Type IFactory.ServiceType => typeof(TService);
 
             internal TService Create(
-               IDuplexPipe pipe,
-               IServiceProvider hostProvidedServices,
-               ServiceActivationOptions serviceActivationOptions,
-               IServiceBroker serviceBroker)
+                IDuplexPipe pipe,
+                IServiceProvider hostProvidedServices,
+                ServiceActivationOptions serviceActivationOptions,
+                IServiceBroker serviceBroker
+            )
             {
                 // Register this service broker globally (if it's the first we encounter) so it can be used by other
                 // global services that need it.
                 GlobalServiceBroker.RegisterServiceBroker(serviceBroker);
 
-                var descriptor = ServiceDescriptors.Instance.GetServiceDescriptorForServiceFactory(typeof(TService));
-                var serviceHubTraceSource = (TraceSource?)hostProvidedServices.GetService(typeof(TraceSource));
-                var serverConnection = descriptor.WithTraceSource(serviceHubTraceSource).ConstructRpcConnection(pipe);
+                var descriptor = ServiceDescriptors.Instance.GetServiceDescriptorForServiceFactory(
+                    typeof(TService)
+                );
+                var serviceHubTraceSource = (TraceSource?)
+                    hostProvidedServices.GetService(typeof(TraceSource));
+                var serverConnection = descriptor
+                    .WithTraceSource(serviceHubTraceSource)
+                    .ConstructRpcConnection(pipe);
 
                 var args = new ServiceConstructionArguments(hostProvidedServices, serviceBroker);
-                var service = CreateService(args, descriptor, serverConnection, serviceActivationOptions.ClientRpcTarget);
+                var service = CreateService(
+                    args,
+                    descriptor,
+                    serverConnection,
+                    serviceActivationOptions.ClientRpcTarget
+                );
 
                 serverConnection.AddLocalRpcTarget(service);
                 serverConnection.StartListening();
@@ -119,19 +145,27 @@ namespace Microsoft.CodeAnalysis.Remote
                 Debug.Assert(typeof(TCallback).IsInterface);
             }
 
-            protected abstract TService CreateService(in ServiceConstructionArguments arguments, RemoteCallback<TCallback> callback);
+            protected abstract TService CreateService(
+                in ServiceConstructionArguments arguments,
+                RemoteCallback<TCallback> callback
+            );
 
-            protected sealed override TService CreateService(in ServiceConstructionArguments arguments)
-                => throw ExceptionUtilities.Unreachable();
+            protected sealed override TService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => throw ExceptionUtilities.Unreachable();
 
             protected sealed override TService CreateService(
                 in ServiceConstructionArguments arguments,
                 ServiceRpcDescriptor descriptor,
                 ServiceRpcDescriptor.RpcConnection serverConnection,
-                object? clientRpcTarget)
+                object? clientRpcTarget
+            )
             {
                 Contract.ThrowIfNull(descriptor.ClientInterface);
-                var callback = (TCallback)(clientRpcTarget ?? serverConnection.ConstructRpcClient(descriptor.ClientInterface));
+                var callback = (TCallback)(
+                    clientRpcTarget
+                    ?? serverConnection.ConstructRpcClient(descriptor.ClientInterface)
+                );
                 return CreateService(arguments, new RemoteCallback<TCallback>(callback));
             }
         }

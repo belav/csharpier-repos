@@ -7,18 +7,18 @@ namespace System.ServiceModel.Channels
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
     using System.Xml;
-    using System.ServiceModel.Diagnostics.Application;
-    using System.Diagnostics.CodeAnalysis;
 
     class ChannelDemuxer
     {
-        public readonly static TimeSpan UseDefaultReceiveTimeout = TimeSpan.MinValue;
+        public static readonly TimeSpan UseDefaultReceiveTimeout = TimeSpan.MinValue;
 
         TypedChannelDemuxer inputDemuxer;
         TypedChannelDemuxer replyDemuxer;
@@ -35,38 +35,33 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan PeekTimeout
         {
-            get
-            {
-                return this.peekTimeout;
-            }
-            set
-            {
-                this.peekTimeout = value;
-            }
+            get { return this.peekTimeout; }
+            set { this.peekTimeout = value; }
         }
 
         public int MaxPendingSessions
         {
-            get
-            {
-                return this.maxPendingSessions;
-            }
-            set
-            {
-                this.maxPendingSessions = value;
-            }
+            get { return this.maxPendingSessions; }
+            set { this.maxPendingSessions = value; }
         }
 
         public IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
             where TChannel : class, IChannel
         {
-            return this.BuildChannelListener<TChannel>(context, new ChannelDemuxerFilter(new MatchAllMessageFilter(), 0));
+            return this.BuildChannelListener<TChannel>(
+                context,
+                new ChannelDemuxerFilter(new MatchAllMessageFilter(), 0)
+            );
         }
 
-        public IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context, ChannelDemuxerFilter filter)
+        public IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context,
+            ChannelDemuxerFilter filter
+        )
             where TChannel : class, IChannel
         {
-            return GetTypedDemuxer(typeof(TChannel), context).BuildChannelListener<TChannel>(filter);
+            return GetTypedDemuxer(typeof(TChannel), context)
+                .BuildChannelListener<TChannel>(filter);
         }
 
         TypedChannelDemuxer CreateTypedDemuxer(Type channelType, BindingContext context)
@@ -74,15 +69,38 @@ namespace System.ServiceModel.Channels
             if (channelType == typeof(IDuplexChannel))
                 return (TypedChannelDemuxer)(object)new DuplexChannelDemuxer(context);
             if (channelType == typeof(IInputSessionChannel))
-                return (TypedChannelDemuxer)(object)new InputSessionChannelDemuxer(context, this.peekTimeout, this.maxPendingSessions);
+                return (TypedChannelDemuxer)
+                    (object)
+                        new InputSessionChannelDemuxer(
+                            context,
+                            this.peekTimeout,
+                            this.maxPendingSessions
+                        );
             if (channelType == typeof(IReplySessionChannel))
-                return (TypedChannelDemuxer)(object)new ReplySessionChannelDemuxer(context, this.peekTimeout, this.maxPendingSessions);
+                return (TypedChannelDemuxer)
+                    (object)
+                        new ReplySessionChannelDemuxer(
+                            context,
+                            this.peekTimeout,
+                            this.maxPendingSessions
+                        );
             if (channelType == typeof(IDuplexSessionChannel))
-                return (TypedChannelDemuxer)(object)new DuplexSessionChannelDemuxer(context, this.peekTimeout, this.maxPendingSessions);
+                return (TypedChannelDemuxer)
+                    (object)
+                        new DuplexSessionChannelDemuxer(
+                            context,
+                            this.peekTimeout,
+                            this.maxPendingSessions
+                        );
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
         }
 
-        [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "typeDemuxers", Justification = "No need to support type equivalence here.")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            "CA2301:EmbeddableTypesInContainersRule",
+            MessageId = "typeDemuxers",
+            Justification = "No need to support type equivalence here."
+        )]
         TypedChannelDemuxer GetTypedDemuxer(Type channelType, BindingContext context)
         {
             TypedChannelDemuxer typeDemuxer = null;
@@ -166,7 +184,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public abstract IChannelListener<TChannel> BuildChannelListener<TChannel>(ChannelDemuxerFilter filter)
+        public abstract IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            ChannelDemuxerFilter filter
+        )
             where TChannel : class, IChannel;
     }
 
@@ -176,29 +196,49 @@ namespace System.ServiceModel.Channels
 
     interface IChannelDemuxer
     {
-        void OnOuterListenerOpen(ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout);
-        IAsyncResult OnBeginOuterListenerOpen(ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout, AsyncCallback callback, object state);
+        void OnOuterListenerOpen(
+            ChannelDemuxerFilter filter,
+            IChannelListener listener,
+            TimeSpan timeout
+        );
+        IAsyncResult OnBeginOuterListenerOpen(
+            ChannelDemuxerFilter filter,
+            IChannelListener listener,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         void OnEndOuterListenerOpen(IAsyncResult result);
         void OnOuterListenerAbort(ChannelDemuxerFilter filter);
         void OnOuterListenerClose(ChannelDemuxerFilter filter, TimeSpan timeout);
-        IAsyncResult OnBeginOuterListenerClose(ChannelDemuxerFilter filter, TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult OnBeginOuterListenerClose(
+            ChannelDemuxerFilter filter,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         void OnEndOuterListenerClose(IAsyncResult result);
     }
 
-    abstract class DatagramChannelDemuxer<TInnerChannel, TInnerItem> : TypedChannelDemuxer, IChannelDemuxer
+    abstract class DatagramChannelDemuxer<TInnerChannel, TInnerItem>
+        : TypedChannelDemuxer,
+            IChannelDemuxer
         where TInnerChannel : class, IChannel
         where TInnerItem : class, IDisposable
     {
         MessageFilterTable<IChannelListener> filterTable;
         TInnerChannel innerChannel;
         IChannelListener<TInnerChannel> innerListener;
-        static AsyncCallback onReceiveComplete = Fx.ThunkCallback(new AsyncCallback(OnReceiveCompleteStatic));
+        static AsyncCallback onReceiveComplete = Fx.ThunkCallback(
+            new AsyncCallback(OnReceiveCompleteStatic)
+        );
         static Action<object> startReceivingStatic = new Action<object>(StartReceivingStatic);
         Action onItemDequeued;
         int openCount;
         IChannelDemuxFailureHandler demuxFailureHandler;
+
         // since the OnOuterListenerOpen method will be called for every outer listener and we will open
-        // the inner listener only once, we need to ensure that all the outer listeners wait till the 
+        // the inner listener only once, we need to ensure that all the outer listeners wait till the
         // inner listener is opened.
         ThreadNeutralSemaphore openSemaphore;
         Exception pendingInnerListenerOpenException;
@@ -210,7 +250,8 @@ namespace System.ServiceModel.Channels
             this.innerListener = context.BuildInnerChannelListener<TInnerChannel>();
             if (context.BindingParameters != null)
             {
-                this.demuxFailureHandler = context.BindingParameters.Find<IChannelDemuxFailureHandler>();
+                this.demuxFailureHandler =
+                    context.BindingParameters.Find<IChannelDemuxFailureHandler>();
             }
             this.openSemaphore = new ThreadNeutralSemaphore(1);
         }
@@ -236,16 +277,35 @@ namespace System.ServiceModel.Channels
         }
 
         protected abstract void AbortItem(TInnerItem item);
-        protected abstract IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state);
-        protected abstract LayeredChannelListener<TChannel> CreateListener<TChannel>(ChannelDemuxerFilter filter) where TChannel : class, IChannel;
+        protected abstract IAsyncResult BeginReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract LayeredChannelListener<TChannel> CreateListener<TChannel>(
+            ChannelDemuxerFilter filter
+        )
+            where TChannel : class, IChannel;
         protected abstract void Dispatch(IChannelListener listener);
         protected abstract void EndpointNotFound(TInnerItem item);
         protected abstract TInnerItem EndReceive(IAsyncResult result);
-        protected abstract void EnqueueAndDispatch(IChannelListener listener, TInnerItem item, Action dequeuedCallback, bool canDispatchOnThisThread);
-        protected abstract void EnqueueAndDispatch(IChannelListener listener, Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread);
+        protected abstract void EnqueueAndDispatch(
+            IChannelListener listener,
+            TInnerItem item,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        );
+        protected abstract void EnqueueAndDispatch(
+            IChannelListener listener,
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        );
         protected abstract Message GetMessage(TInnerItem item);
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(ChannelDemuxerFilter filter)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            ChannelDemuxerFilter filter
+        )
         {
             LayeredChannelListener<TChannel> listener = this.CreateListener<TChannel>(filter);
             listener.InnerChannelListener = this.innerListener;
@@ -292,7 +352,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
                 return true;
             }
@@ -303,8 +364,14 @@ namespace System.ServiceModel.Channels
                 {
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.PrematureDatagramEof, SR.GetString(SR.TraceCodePrematureDatagramEof),
-                            null, this.innerChannel, null);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.PrematureDatagramEof,
+                            SR.GetString(SR.TraceCodePrematureDatagramEof),
+                            null,
+                            this.innerChannel,
+                            null
+                        );
                     }
                 }
 
@@ -332,7 +399,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
                 return true;
             }
@@ -370,7 +438,10 @@ namespace System.ServiceModel.Channels
             {
                 if (this.filterTable.Count > 0)
                 {
-                    KeyValuePair<MessageFilter, IChannelListener>[] pairs = new KeyValuePair<MessageFilter, IChannelListener>[this.filterTable.Count];
+                    KeyValuePair<MessageFilter, IChannelListener>[] pairs = new KeyValuePair<
+                        MessageFilter,
+                        IChannelListener
+                    >[this.filterTable.Count];
                     this.filterTable.CopyTo(pairs, 0);
                     listener = pairs[0].Value;
 
@@ -432,7 +503,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult OnBeginOuterListenerClose(ChannelDemuxerFilter filter, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult OnBeginOuterListenerClose(
+            ChannelDemuxerFilter filter,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             bool closeInnerChannelAndListener = false;
             lock (this.ThisLock)
@@ -495,15 +571,36 @@ namespace System.ServiceModel.Channels
             {
                 if (pendingInnerListenerOpenException is CommunicationObjectAbortedException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new CommunicationObjectAbortedException(SR.GetString(SR.PreviousChannelDemuxerOpenFailed, this.pendingInnerListenerOpenException.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new CommunicationObjectAbortedException(
+                            SR.GetString(
+                                SR.PreviousChannelDemuxerOpenFailed,
+                                this.pendingInnerListenerOpenException.ToString()
+                            )
+                        )
+                    );
                 }
                 else if (pendingInnerListenerOpenException is CommunicationObjectFaultedException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new CommunicationObjectFaultedException(SR.GetString(SR.PreviousChannelDemuxerOpenFailed, this.pendingInnerListenerOpenException.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new CommunicationObjectFaultedException(
+                            SR.GetString(
+                                SR.PreviousChannelDemuxerOpenFailed,
+                                this.pendingInnerListenerOpenException.ToString()
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new CommunicationException(SR.GetString(SR.PreviousChannelDemuxerOpenFailed, this.pendingInnerListenerOpenException.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.PreviousChannelDemuxerOpenFailed,
+                                this.pendingInnerListenerOpenException.ToString()
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -513,7 +610,10 @@ namespace System.ServiceModel.Channels
             lock (this.ThisLock)
             {
                 // the listener's Abort may be racing with Open
-                if (listener.State == CommunicationState.Closed || listener.State == CommunicationState.Closing)
+                if (
+                    listener.State == CommunicationState.Closed
+                    || listener.State == CommunicationState.Closing
+                )
                 {
                     return false;
                 }
@@ -527,7 +627,11 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        public void OnOuterListenerOpen(ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout)
+        public void OnOuterListenerOpen(
+            ChannelDemuxerFilter filter,
+            IChannelListener listener,
+            TimeSpan timeout
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             this.openSemaphore.Enter(timeoutHelper.RemainingTime());
@@ -539,7 +643,9 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         this.innerListener.Open(timeoutHelper.RemainingTime());
-                        this.innerChannel = this.innerListener.AcceptChannel(timeoutHelper.RemainingTime());
+                        this.innerChannel = this.innerListener.AcceptChannel(
+                            timeoutHelper.RemainingTime()
+                        );
                         this.innerChannel.Open(timeoutHelper.RemainingTime());
 
                         lock (ThisLock)
@@ -571,7 +677,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult OnBeginOuterListenerOpen(ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult OnBeginOuterListenerOpen(
+            ChannelDemuxerFilter filter,
+            IChannelListener listener,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OpenAsyncResult(this, filter, listener, timeout, callback, state);
         }
@@ -593,7 +705,9 @@ namespace System.ServiceModel.Channels
         {
             if (result.CompletedSynchronously)
                 return;
-            ((DatagramChannelDemuxer<TInnerChannel, TInnerItem>)result.AsyncState).OnReceiveComplete(result);
+            (
+                (DatagramChannelDemuxer<TInnerChannel, TInnerItem>)result.AsyncState
+            ).OnReceiveComplete(result);
         }
 
         bool ProcessItem(TInnerItem item)
@@ -626,7 +740,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     this.HandleUnknownException(e);
                     return true;
                 }
@@ -634,7 +749,11 @@ namespace System.ServiceModel.Channels
                 if (matchingListener == null)
                 {
                     System.ServiceModel.Dispatcher.ErrorBehavior.ThrowAndCatch(
-                        new EndpointNotFoundException(SR.GetString(SR.UnableToDemuxChannel, message.Headers.Action)), message);
+                        new EndpointNotFoundException(
+                            SR.GetString(SR.UnableToDemuxChannel, message.Headers.Action)
+                        ),
+                        message
+                    );
                     // EndpointNotFound is responsible for closing the item
                     this.EndpointNotFound(item);
                     item = null;
@@ -705,7 +824,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     this.HandleUnknownException(e);
                     return;
                 }
@@ -725,23 +845,42 @@ namespace System.ServiceModel.Channels
         class OpenAsyncResult : AsyncResult
         {
             static FastAsyncCallback waitOverCallback = new FastAsyncCallback(WaitOverCallback);
-            static AsyncCallback openListenerCallback = Fx.ThunkCallback(new AsyncCallback(OpenListenerCallback));
-            static AsyncCallback acceptChannelCallback = Fx.ThunkCallback(new AsyncCallback(AcceptChannelCallback));
-            static AsyncCallback openChannelCallback = Fx.ThunkCallback(new AsyncCallback(OpenChannelCallback));
+            static AsyncCallback openListenerCallback = Fx.ThunkCallback(
+                new AsyncCallback(OpenListenerCallback)
+            );
+            static AsyncCallback acceptChannelCallback = Fx.ThunkCallback(
+                new AsyncCallback(AcceptChannelCallback)
+            );
+            static AsyncCallback openChannelCallback = Fx.ThunkCallback(
+                new AsyncCallback(OpenChannelCallback)
+            );
             DatagramChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer;
             ChannelDemuxerFilter filter;
             IChannelListener listener;
             TimeoutHelper timeoutHelper;
             bool openInnerListener;
 
-            public OpenAsyncResult(DatagramChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer, ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                DatagramChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer,
+                ChannelDemuxerFilter filter,
+                IChannelListener listener,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channelDemuxer = channelDemuxer;
                 this.filter = filter;
                 this.listener = listener;
                 this.timeoutHelper = new TimeoutHelper(timeout);
-                if (!this.channelDemuxer.openSemaphore.EnterAsync(this.timeoutHelper.RemainingTime(), waitOverCallback, this))
+                if (
+                    !this.channelDemuxer.openSemaphore.EnterAsync(
+                        this.timeoutHelper.RemainingTime(),
+                        waitOverCallback,
+                        this
+                    )
+                )
                 {
                     return;
                 }
@@ -786,7 +925,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         completeSelf = true;
                         completionException = e;
                     }
@@ -801,7 +941,10 @@ namespace System.ServiceModel.Channels
 
             bool OnWaitOver()
             {
-                this.openInnerListener = this.channelDemuxer.ShouldOpenInnerListener(filter, listener);
+                this.openInnerListener = this.channelDemuxer.ShouldOpenInnerListener(
+                    filter,
+                    listener
+                );
                 // the semaphore is obtained. Check if the inner listener needs to be opened. If not,
                 // check if there is a pending exception obtained while opening the inner listener and throw
                 // that
@@ -819,7 +962,11 @@ namespace System.ServiceModel.Channels
             bool OnInnerListenerEndOpen(IAsyncResult result)
             {
                 this.channelDemuxer.innerListener.EndOpen(result);
-                result = this.channelDemuxer.innerListener.BeginAcceptChannel(this.timeoutHelper.RemainingTime(), acceptChannelCallback, this);
+                result = this.channelDemuxer.innerListener.BeginAcceptChannel(
+                    this.timeoutHelper.RemainingTime(),
+                    acceptChannelCallback,
+                    this
+                );
 
                 if (!result.CompletedSynchronously)
                 {
@@ -833,7 +980,11 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    IAsyncResult result = this.channelDemuxer.innerListener.BeginOpen(timeoutHelper.RemainingTime(), openListenerCallback, this);
+                    IAsyncResult result = this.channelDemuxer.innerListener.BeginOpen(
+                        timeoutHelper.RemainingTime(),
+                        openListenerCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -864,7 +1015,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     completionException = e;
                 }
                 if (completionException != null)
@@ -891,7 +1043,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     completionException = e;
                     completeSelf = true;
                 }
@@ -908,8 +1061,13 @@ namespace System.ServiceModel.Channels
 
             bool OnEndAcceptChannel(IAsyncResult result)
             {
-                this.channelDemuxer.innerChannel = this.channelDemuxer.innerListener.EndAcceptChannel(result);
-                IAsyncResult openResult = this.channelDemuxer.innerChannel.BeginOpen(this.timeoutHelper.RemainingTime(), acceptChannelCallback, this);
+                this.channelDemuxer.innerChannel =
+                    this.channelDemuxer.innerListener.EndAcceptChannel(result);
+                IAsyncResult openResult = this.channelDemuxer.innerChannel.BeginOpen(
+                    this.timeoutHelper.RemainingTime(),
+                    acceptChannelCallback,
+                    this
+                );
 
                 if (!openResult.CompletedSynchronously)
                 {
@@ -935,7 +1093,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     completionException = e;
                 }
                 if (completionException != null)
@@ -975,12 +1134,19 @@ namespace System.ServiceModel.Channels
 
         class CloseAsyncResult : AsyncResult
         {
-            static AsyncCallback sharedCallback = Fx.ThunkCallback(new AsyncCallback(SharedCallback));
+            static AsyncCallback sharedCallback = Fx.ThunkCallback(
+                new AsyncCallback(SharedCallback)
+            );
             DatagramChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer;
             TimeoutHelper timeoutHelper;
             bool closedInnerChannel;
 
-            public CloseAsyncResult(DatagramChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                DatagramChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channelDemuxer = channelDemuxer;
@@ -990,7 +1156,11 @@ namespace System.ServiceModel.Channels
                     bool closeSucceeded = false;
                     try
                     {
-                        IAsyncResult result = channelDemuxer.innerChannel.BeginClose(timeoutHelper.RemainingTime(), sharedCallback, this);
+                        IAsyncResult result = channelDemuxer.innerChannel.BeginClose(
+                            timeoutHelper.RemainingTime(),
+                            sharedCallback,
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                         {
                             closeSucceeded = true;
@@ -1021,7 +1191,11 @@ namespace System.ServiceModel.Channels
                 bool closeSucceeded = false;
                 try
                 {
-                    IAsyncResult result = channelDemuxer.innerListener.BeginClose(timeoutHelper.RemainingTime(), sharedCallback, this);
+                    IAsyncResult result = channelDemuxer.innerListener.BeginClose(
+                        timeoutHelper.RemainingTime(),
+                        sharedCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         closeSucceeded = true;
@@ -1070,7 +1244,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     completeSelf = true;
                     completionException = e;
                 }
@@ -1099,30 +1274,36 @@ namespace System.ServiceModel.Channels
     class InputChannelDemuxer : DatagramChannelDemuxer<IInputChannel, Message>
     {
         public InputChannelDemuxer(BindingContext context)
-            : base(context)
-        {
-        }
+            : base(context) { }
 
         protected override void AbortItem(Message message)
         {
             AbortMessage(message);
         }
 
-        protected override IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginReceive(timeout, callback, state);
         }
 
-        protected override LayeredChannelListener<IInputChannel> CreateListener<IInputChannel>(ChannelDemuxerFilter filter)
+        protected override LayeredChannelListener<IInputChannel> CreateListener<IInputChannel>(
+            ChannelDemuxerFilter filter
+        )
         {
-            SingletonChannelListener<IInputChannel, InputChannel, Message> listener = new SingletonChannelListener<IInputChannel, InputChannel, Message>(filter, this);
+            SingletonChannelListener<IInputChannel, InputChannel, Message> listener =
+                new SingletonChannelListener<IInputChannel, InputChannel, Message>(filter, this);
             listener.Acceptor = (IChannelAcceptor<IInputChannel>)new InputChannelAcceptor(listener);
             return listener;
         }
 
         protected override void Dispatch(IChannelListener listener)
         {
-            SingletonChannelListener<IInputChannel, InputChannel, Message> singletonListener = (SingletonChannelListener<IInputChannel, InputChannel, Message>)listener;
+            SingletonChannelListener<IInputChannel, InputChannel, Message> singletonListener =
+                (SingletonChannelListener<IInputChannel, InputChannel, Message>)listener;
             singletonListener.Dispatch();
         }
 
@@ -1140,16 +1321,36 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.EndReceive(result);
         }
 
-        protected override void EnqueueAndDispatch(IChannelListener listener, Message message, Action dequeuedCallback, bool canDispatchOnThisThread)
+        protected override void EnqueueAndDispatch(
+            IChannelListener listener,
+            Message message,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            SingletonChannelListener<IInputChannel, InputChannel, Message> singletonListener = (SingletonChannelListener<IInputChannel, InputChannel, Message>)listener;
-            singletonListener.EnqueueAndDispatch(message, dequeuedCallback, canDispatchOnThisThread);
+            SingletonChannelListener<IInputChannel, InputChannel, Message> singletonListener =
+                (SingletonChannelListener<IInputChannel, InputChannel, Message>)listener;
+            singletonListener.EnqueueAndDispatch(
+                message,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
 
-        protected override void EnqueueAndDispatch(IChannelListener listener, Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        protected override void EnqueueAndDispatch(
+            IChannelListener listener,
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            SingletonChannelListener<IInputChannel, InputChannel, Message> singletonListener = (SingletonChannelListener<IInputChannel, InputChannel, Message>)listener;
-            singletonListener.EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
+            SingletonChannelListener<IInputChannel, InputChannel, Message> singletonListener =
+                (SingletonChannelListener<IInputChannel, InputChannel, Message>)listener;
+            singletonListener.EnqueueAndDispatch(
+                exception,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
 
         protected override Message GetMessage(Message message)
@@ -1161,30 +1362,37 @@ namespace System.ServiceModel.Channels
     class DuplexChannelDemuxer : DatagramChannelDemuxer<IDuplexChannel, Message>
     {
         public DuplexChannelDemuxer(BindingContext context)
-            : base(context)
-        {
-        }
+            : base(context) { }
 
         protected override void AbortItem(Message message)
         {
             AbortMessage(message);
         }
 
-        protected override IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginReceive(timeout, callback, state);
         }
 
-        protected override LayeredChannelListener<IDuplexChannel> CreateListener<IDuplexChannel>(ChannelDemuxerFilter filter)
+        protected override LayeredChannelListener<IDuplexChannel> CreateListener<IDuplexChannel>(
+            ChannelDemuxerFilter filter
+        )
         {
-            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> listener = new SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>(filter, this);
-            listener.Acceptor = (IChannelAcceptor<IDuplexChannel>)new DuplexChannelAcceptor(listener, this);
+            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> listener =
+                new SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>(filter, this);
+            listener.Acceptor =
+                (IChannelAcceptor<IDuplexChannel>)new DuplexChannelAcceptor(listener, this);
             return listener;
         }
 
         protected override void Dispatch(IChannelListener listener)
         {
-            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> singletonListener = (SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>)listener;
+            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> singletonListener =
+                (SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>)listener;
             singletonListener.Dispatch();
         }
 
@@ -1202,16 +1410,36 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.EndReceive(result);
         }
 
-        protected override void EnqueueAndDispatch(IChannelListener listener, Message message, Action dequeuedCallback, bool canDispatchOnThisThread)
+        protected override void EnqueueAndDispatch(
+            IChannelListener listener,
+            Message message,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> singletonListener = (SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>)listener;
-            singletonListener.EnqueueAndDispatch(message, dequeuedCallback, canDispatchOnThisThread);
+            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> singletonListener =
+                (SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>)listener;
+            singletonListener.EnqueueAndDispatch(
+                message,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
 
-        protected override void EnqueueAndDispatch(IChannelListener listener, Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        protected override void EnqueueAndDispatch(
+            IChannelListener listener,
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> singletonListener = (SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>)listener;
-            singletonListener.EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
+            SingletonChannelListener<IDuplexChannel, DuplexChannel, Message> singletonListener =
+                (SingletonChannelListener<IDuplexChannel, DuplexChannel, Message>)listener;
+            singletonListener.EnqueueAndDispatch(
+                exception,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
 
         protected override Message GetMessage(Message message)
@@ -1219,11 +1447,15 @@ namespace System.ServiceModel.Channels
             return message;
         }
 
-        class DuplexChannelAcceptor : SingletonChannelAcceptor<IDuplexChannel, DuplexChannel, Message>
+        class DuplexChannelAcceptor
+            : SingletonChannelAcceptor<IDuplexChannel, DuplexChannel, Message>
         {
             DuplexChannelDemuxer demuxer;
 
-            public DuplexChannelAcceptor(ChannelManagerBase channelManager, DuplexChannelDemuxer demuxer)
+            public DuplexChannelAcceptor(
+                ChannelManagerBase channelManager,
+                DuplexChannelDemuxer demuxer
+            )
                 : base(channelManager)
             {
                 this.demuxer = demuxer;
@@ -1238,8 +1470,14 @@ namespace System.ServiceModel.Channels
             {
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.MessageReceived, SR.GetString(SR.TraceCodeMessageReceived),
-                        MessageTransmitTraceRecord.CreateReceiveTraceRecord(message), this, null);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.MessageReceived,
+                        SR.GetString(SR.TraceCodeMessageReceived),
+                        MessageTransmitTraceRecord.CreateReceiveTraceRecord(message),
+                        this,
+                        null
+                    );
                 }
             }
         }
@@ -1248,7 +1486,10 @@ namespace System.ServiceModel.Channels
         {
             IDuplexChannel innerChannel;
 
-            public DuplexChannelWrapper(ChannelManagerBase channelManager, IDuplexChannel innerChannel)
+            public DuplexChannelWrapper(
+                ChannelManagerBase channelManager,
+                IDuplexChannel innerChannel
+            )
                 : base(channelManager, innerChannel.LocalAddress)
             {
                 this.innerChannel = innerChannel;
@@ -1269,7 +1510,12 @@ namespace System.ServiceModel.Channels
                 this.innerChannel.Send(message, timeout);
             }
 
-            protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginSend(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return this.innerChannel.BeginSend(message, timeout, callback, state);
             }
@@ -1279,7 +1525,11 @@ namespace System.ServiceModel.Channels
                 this.innerChannel.EndSend(result);
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult(callback, state);
             }
@@ -1289,18 +1539,14 @@ namespace System.ServiceModel.Channels
                 CompletedAsyncResult.End(result);
             }
 
-            protected override void OnOpen(TimeSpan timeout)
-            {
-            }
+            protected override void OnOpen(TimeSpan timeout) { }
         }
     }
 
     class ReplyChannelDemuxer : DatagramChannelDemuxer<IReplyChannel, RequestContext>
     {
         public ReplyChannelDemuxer(BindingContext context)
-            : base(context)
-        {
-        }
+            : base(context) { }
 
         protected override void AbortItem(RequestContext request)
         {
@@ -1308,40 +1554,60 @@ namespace System.ServiceModel.Channels
             request.Abort();
         }
 
-        protected override IAsyncResult BeginReceive(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginReceiveRequest(timeout, callback, state);
         }
 
-        protected override LayeredChannelListener<TChannel> CreateListener<TChannel>(ChannelDemuxerFilter filter)
+        protected override LayeredChannelListener<TChannel> CreateListener<TChannel>(
+            ChannelDemuxerFilter filter
+        )
         {
             if (typeof(TChannel) == typeof(IInputChannel))
             {
-                SingletonChannelListener<IInputChannel, InputChannel, Message> listener = new SingletonChannelListener<IInputChannel, InputChannel, Message>(filter, this);
-                listener.Acceptor = (IChannelAcceptor<IInputChannel>)new InputChannelAcceptor(listener);
+                SingletonChannelListener<IInputChannel, InputChannel, Message> listener =
+                    new SingletonChannelListener<IInputChannel, InputChannel, Message>(
+                        filter,
+                        this
+                    );
+                listener.Acceptor =
+                    (IChannelAcceptor<IInputChannel>)new InputChannelAcceptor(listener);
                 return (LayeredChannelListener<TChannel>)(object)listener;
             }
             else if (typeof(TChannel) == typeof(IReplyChannel))
             {
-                SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> listener = new SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>(filter, this);
-                listener.Acceptor = (IChannelAcceptor<IReplyChannel>)new ReplyChannelAcceptor(listener);
+                SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> listener =
+                    new SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>(
+                        filter,
+                        this
+                    );
+                listener.Acceptor =
+                    (IChannelAcceptor<IReplyChannel>)new ReplyChannelAcceptor(listener);
                 return (LayeredChannelListener<TChannel>)(object)listener;
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
         }
 
         protected override void Dispatch(IChannelListener listener)
         {
-            SingletonChannelListener<IInputChannel, InputChannel, Message> inputListener = listener as SingletonChannelListener<IInputChannel, InputChannel, Message>;
+            SingletonChannelListener<IInputChannel, InputChannel, Message> inputListener =
+                listener as SingletonChannelListener<IInputChannel, InputChannel, Message>;
             if (inputListener != null)
             {
                 inputListener.Dispatch();
                 return;
             }
-            SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> replyListener = listener as SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>;
+            SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> replyListener =
+                listener as SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>;
             if (replyListener != null)
             {
                 replyListener.Dispatch();
@@ -1383,7 +1649,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
             }
             finally
@@ -1404,7 +1671,13 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        ReplyChannelDemuxFailureAsyncResult result = new ReplyChannelDemuxFailureAsyncResult(this.DemuxFailureHandler, request, Fx.ThunkCallback(new AsyncCallback(this.EndpointNotFoundCallback)), request);
+                        ReplyChannelDemuxFailureAsyncResult result =
+                            new ReplyChannelDemuxFailureAsyncResult(
+                                this.DemuxFailureHandler,
+                                request,
+                                Fx.ThunkCallback(new AsyncCallback(this.EndpointNotFoundCallback)),
+                                request
+                            );
                         result.Start();
                         if (!result.CompletedSynchronously)
                         {
@@ -1432,7 +1705,8 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         this.HandleUnknownException(e);
                     }
                 }
@@ -1451,12 +1725,22 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.EndReceiveRequest(result);
         }
 
-        protected override void EnqueueAndDispatch(IChannelListener listener, RequestContext request, Action dequeuedCallback, bool canDispatchOnThisThread)
+        protected override void EnqueueAndDispatch(
+            IChannelListener listener,
+            RequestContext request,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            SingletonChannelListener<IInputChannel, InputChannel, Message> inputListener = listener as SingletonChannelListener<IInputChannel, InputChannel, Message>;
+            SingletonChannelListener<IInputChannel, InputChannel, Message> inputListener =
+                listener as SingletonChannelListener<IInputChannel, InputChannel, Message>;
             if (inputListener != null)
             {
-                inputListener.EnqueueAndDispatch(request.RequestMessage, dequeuedCallback, canDispatchOnThisThread);
+                inputListener.EnqueueAndDispatch(
+                    request.RequestMessage,
+                    dequeuedCallback,
+                    canDispatchOnThisThread
+                );
 
                 try
                 {
@@ -1475,29 +1759,49 @@ namespace System.ServiceModel.Channels
                     DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 }
             }
-            SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> replyListener = listener as SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>;
+            SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> replyListener =
+                listener as SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>;
             if (replyListener != null)
             {
-                replyListener.EnqueueAndDispatch(request, dequeuedCallback, canDispatchOnThisThread);
+                replyListener.EnqueueAndDispatch(
+                    request,
+                    dequeuedCallback,
+                    canDispatchOnThisThread
+                );
                 return;
             }
 
             throw Fx.AssertAndThrow("ReplyChannelDemuxer.EnqueueAndDispatch (false)");
         }
 
-        protected override void EnqueueAndDispatch(IChannelListener listener, Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        protected override void EnqueueAndDispatch(
+            IChannelListener listener,
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            SingletonChannelListener<IInputChannel, InputChannel, Message> inputListener = listener as SingletonChannelListener<IInputChannel, InputChannel, Message>;
+            SingletonChannelListener<IInputChannel, InputChannel, Message> inputListener =
+                listener as SingletonChannelListener<IInputChannel, InputChannel, Message>;
             if (inputListener != null)
             {
-                inputListener.EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
+                inputListener.EnqueueAndDispatch(
+                    exception,
+                    dequeuedCallback,
+                    canDispatchOnThisThread
+                );
                 return;
             }
 
-            SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> replyListener = listener as SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>;
+            SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext> replyListener =
+                listener as SingletonChannelListener<IReplyChannel, ReplyChannel, RequestContext>;
             if (replyListener != null)
             {
-                replyListener.EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
+                replyListener.EnqueueAndDispatch(
+                    exception,
+                    dequeuedCallback,
+                    canDispatchOnThisThread
+                );
                 return;
             }
 
@@ -1515,7 +1819,9 @@ namespace System.ServiceModel.Channels
         ChannelDemuxerFilter Filter { get; }
     }
 
-    class SingletonChannelListener<TChannel, TQueuedChannel, TQueuedItem> : DelegatingChannelListener<TChannel>, IChannelDemuxerFilter
+    class SingletonChannelListener<TChannel, TQueuedChannel, TQueuedItem>
+        : DelegatingChannelListener<TChannel>,
+            IChannelDemuxerFilter
         where TChannel : class, IChannel
         where TQueuedChannel : InputQueueChannel<TQueuedItem>
         where TQueuedItem : class, IDisposable
@@ -1537,20 +1843,40 @@ namespace System.ServiceModel.Channels
 
         SingletonChannelAcceptor<TChannel, TQueuedChannel, TQueuedItem> SingletonAcceptor
         {
-            get { return (SingletonChannelAcceptor<TChannel, TQueuedChannel, TQueuedItem>)base.Acceptor; }
+            get
+            {
+                return (SingletonChannelAcceptor<TChannel, TQueuedChannel, TQueuedItem>)
+                    base.Acceptor;
+            }
             set { this.Acceptor = value; }
         }
 
         protected override void OnOpen(TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            this.channelDemuxer.OnOuterListenerOpen(this.filter, this, timeoutHelper.RemainingTime());
+            this.channelDemuxer.OnOuterListenerOpen(
+                this.filter,
+                this,
+                timeoutHelper.RemainingTime()
+            );
             base.OnOpen(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, this.OnBeginOuterListenerOpen, this.OnEndOuterListenerOpen, base.OnBeginOpen, base.OnEndOpen);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.OnBeginOuterListenerOpen,
+                this.OnEndOuterListenerOpen,
+                base.OnBeginOpen,
+                base.OnEndOpen
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -1558,9 +1884,19 @@ namespace System.ServiceModel.Channels
             ChainedAsyncResult.End(result);
         }
 
-        IAsyncResult OnBeginOuterListenerOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult OnBeginOuterListenerOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return this.channelDemuxer.OnBeginOuterListenerOpen(this.filter, this, timeout, callback, state);
+            return this.channelDemuxer.OnBeginOuterListenerOpen(
+                this.filter,
+                this,
+                timeout,
+                callback,
+                state
+            );
         }
 
         void OnEndOuterListenerOpen(IAsyncResult result)
@@ -1581,9 +1917,21 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, this.OnBeginOuterListenerClose, this.OnEndOuterListenerClose, base.OnBeginClose, base.OnEndClose);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.OnBeginOuterListenerClose,
+                this.OnEndOuterListenerClose,
+                base.OnBeginClose,
+                base.OnEndClose
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -1591,9 +1939,18 @@ namespace System.ServiceModel.Channels
             ChainedAsyncResult.End(result);
         }
 
-        IAsyncResult OnBeginOuterListenerClose(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult OnBeginOuterListenerClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return this.channelDemuxer.OnBeginOuterListenerClose(this.filter, timeout, callback, state);
+            return this.channelDemuxer.OnBeginOuterListenerClose(
+                this.filter,
+                timeout,
+                callback,
+                state
+            );
         }
 
         void OnEndOuterListenerClose(IAsyncResult result)
@@ -1606,14 +1963,30 @@ namespace System.ServiceModel.Channels
             this.SingletonAcceptor.DispatchItems();
         }
 
-        public void EnqueueAndDispatch(TQueuedItem item, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            TQueuedItem item,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            this.SingletonAcceptor.EnqueueAndDispatch(item, dequeuedCallback, canDispatchOnThisThread);
+            this.SingletonAcceptor.EnqueueAndDispatch(
+                item,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
 
-        public void EnqueueAndDispatch(Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            this.SingletonAcceptor.EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
+            this.SingletonAcceptor.EnqueueAndDispatch(
+                exception,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
     }
 
@@ -1621,15 +1994,21 @@ namespace System.ServiceModel.Channels
     // Session demuxers
     //
 
-    abstract class SessionChannelDemuxer<TInnerChannel, TInnerItem> : TypedChannelDemuxer, IChannelDemuxer
+    abstract class SessionChannelDemuxer<TInnerChannel, TInnerItem>
+        : TypedChannelDemuxer,
+            IChannelDemuxer
         where TInnerChannel : class, IChannel
         where TInnerItem : class, IDisposable
     {
         IChannelDemuxFailureHandler demuxFailureHandler;
         MessageFilterTable<InputQueueChannelListener<TInnerChannel>> filterTable;
         IChannelListener<TInnerChannel> innerListener;
-        static AsyncCallback onAcceptComplete = Fx.ThunkCallback(new AsyncCallback(OnAcceptCompleteStatic));
-        static AsyncCallback onPeekComplete = Fx.ThunkCallback(new AsyncCallback(OnPeekCompleteStatic));
+        static AsyncCallback onAcceptComplete = Fx.ThunkCallback(
+            new AsyncCallback(OnAcceptCompleteStatic)
+        );
+        static AsyncCallback onPeekComplete = Fx.ThunkCallback(
+            new AsyncCallback(OnPeekCompleteStatic)
+        );
         Action onItemDequeued;
         static WaitCallback scheduleAcceptStatic = new WaitCallback(ScheduleAcceptStatic);
         static Action<object> startAcceptStatic = new Action<object>(StartAcceptStatic);
@@ -1641,11 +2020,16 @@ namespace System.ServiceModel.Channels
         FlowThrottle throttle;
         TimeSpan peekTimeout;
 
-        public SessionChannelDemuxer(BindingContext context, TimeSpan peekTimeout, int maxPendingSessions)
+        public SessionChannelDemuxer(
+            BindingContext context,
+            TimeSpan peekTimeout,
+            int maxPendingSessions
+        )
         {
             if (context.BindingParameters != null)
             {
-                this.demuxFailureHandler = context.BindingParameters.Find<IChannelDemuxFailureHandler>();
+                this.demuxFailureHandler =
+                    context.BindingParameters.Find<IChannelDemuxFailureHandler>();
             }
             this.innerListener = context.BuildInnerChannelListener<TInnerChannel>();
             this.filterTable = new MessageFilterTable<InputQueueChannelListener<TInnerChannel>>();
@@ -1678,18 +2062,39 @@ namespace System.ServiceModel.Channels
         }
 
         protected abstract void AbortItem(TInnerItem item);
-        protected abstract IAsyncResult BeginReceive(TInnerChannel channel, AsyncCallback callback, object state);
-        protected abstract IAsyncResult BeginReceive(TInnerChannel channel, TimeSpan timeout, AsyncCallback callback, object state);
-        protected abstract TInnerChannel CreateChannel(ChannelManagerBase channelManager, TInnerChannel innerChannel, TInnerItem firstItem);
+        protected abstract IAsyncResult BeginReceive(
+            TInnerChannel channel,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract IAsyncResult BeginReceive(
+            TInnerChannel channel,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract TInnerChannel CreateChannel(
+            ChannelManagerBase channelManager,
+            TInnerChannel innerChannel,
+            TInnerItem firstItem
+        );
         protected abstract void EndpointNotFound(TInnerChannel channel, TInnerItem item);
         protected abstract TInnerItem EndReceive(TInnerChannel channel, IAsyncResult result);
         protected abstract Message GetMessage(TInnerItem item);
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(ChannelDemuxerFilter filter)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            ChannelDemuxerFilter filter
+        )
         {
-            Fx.Assert(typeof(TChannel) == typeof(TInnerChannel), "SessionChannelDemuxer.BuildChannelListener (typeof(TChannel) == typeof(TInnerChannel))");
+            Fx.Assert(
+                typeof(TChannel) == typeof(TInnerChannel),
+                "SessionChannelDemuxer.BuildChannelListener (typeof(TChannel) == typeof(TInnerChannel))"
+            );
 
-            InputQueueChannelListener<TChannel> listener = new InputQueueChannelListener<TChannel>(filter, this);
+            InputQueueChannelListener<TChannel> listener = new InputQueueChannelListener<TChannel>(
+                filter,
+                this
+            );
             listener.InnerChannelListener = this.innerListener;
             return listener;
         }
@@ -1708,7 +2113,11 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                result = this.innerListener.BeginAcceptChannel(TimeSpan.MaxValue, onAcceptComplete, this);
+                result = this.innerListener.BeginAcceptChannel(
+                    TimeSpan.MaxValue,
+                    onAcceptComplete,
+                    this
+                );
                 releaseThrottle = false;
             }
             catch (CommunicationObjectFaultedException e)
@@ -1742,7 +2151,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
                 releaseThrottle = false;
                 return false;
@@ -1798,7 +2208,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
                 releaseThrottle = false;
                 return false;
@@ -1846,7 +2257,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
                 releaseThrottle = false;
             }
@@ -1897,7 +2309,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
                 releaseThrottle = false;
                 return;
@@ -1938,7 +2351,8 @@ namespace System.ServiceModel.Channels
                 }
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     this.HandleUnknownException(e);
                     releaseThrottle = false;
                 }
@@ -1972,7 +2386,9 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            ((SessionChannelDemuxer<TInnerChannel, TInnerItem>)result.AsyncState).OnStartAcceptingCallback(result);
+            (
+                (SessionChannelDemuxer<TInnerChannel, TInnerItem>)result.AsyncState
+            ).OnStartAcceptingCallback(result);
         }
 
         static void ScheduleAcceptStatic(object state)
@@ -1990,12 +2406,19 @@ namespace System.ServiceModel.Channels
             lock (this.ThisLock)
             {
                 // the listener's Abort may be racing with Open
-                if (listener.State == CommunicationState.Closed || listener.State == CommunicationState.Closing)
+                if (
+                    listener.State == CommunicationState.Closed
+                    || listener.State == CommunicationState.Closing
+                )
                 {
                     return false;
                 }
 
-                this.filterTable.Add(filter.Filter, (InputQueueChannelListener<TInnerChannel>)(object)listener, filter.Priority);
+                this.filterTable.Add(
+                    filter.Filter,
+                    (InputQueueChannelListener<TInnerChannel>)(object)listener,
+                    filter.Priority
+                );
                 if (++this.openCount == 1)
                 {
                     this.abortOngoingOpen = false;
@@ -2027,20 +2450,45 @@ namespace System.ServiceModel.Channels
             {
                 if (pendingExceptionOnOpen is CommunicationObjectAbortedException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new CommunicationObjectAbortedException(SR.GetString(SR.PreviousChannelDemuxerOpenFailed, this.pendingExceptionOnOpen.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new CommunicationObjectAbortedException(
+                            SR.GetString(
+                                SR.PreviousChannelDemuxerOpenFailed,
+                                this.pendingExceptionOnOpen.ToString()
+                            )
+                        )
+                    );
                 }
                 else if (pendingExceptionOnOpen is CommunicationObjectFaultedException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new CommunicationObjectFaultedException(SR.GetString(SR.PreviousChannelDemuxerOpenFailed, this.pendingExceptionOnOpen.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new CommunicationObjectFaultedException(
+                            SR.GetString(
+                                SR.PreviousChannelDemuxerOpenFailed,
+                                this.pendingExceptionOnOpen.ToString()
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new CommunicationException(SR.GetString(SR.PreviousChannelDemuxerOpenFailed, this.pendingExceptionOnOpen.ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new CommunicationException(
+                            SR.GetString(
+                                SR.PreviousChannelDemuxerOpenFailed,
+                                this.pendingExceptionOnOpen.ToString()
+                            )
+                        )
+                    );
                 }
             }
         }
 
-        public void OnOuterListenerOpen(ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout)
+        public void OnOuterListenerOpen(
+            ChannelDemuxerFilter filter,
+            IChannelListener listener,
+            TimeSpan timeout
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             this.openSemaphore.Enter(timeoutHelper.RemainingTime());
@@ -2079,8 +2527,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-
-        public IAsyncResult OnBeginOuterListenerOpen(ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult OnBeginOuterListenerOpen(
+            ChannelDemuxerFilter filter,
+            IChannelListener listener,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new OpenAsyncResult(this, filter, listener, timeout, callback, state);
         }
@@ -2140,7 +2593,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult OnBeginOuterListenerClose(ChannelDemuxerFilter filter, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult OnBeginOuterListenerClose(
+            ChannelDemuxerFilter filter,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (ShouldCloseInnerListener(filter, false))
             {
@@ -2211,8 +2669,8 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            SessionChannelDemuxer<TInnerChannel, TInnerItem> demuxer
-                = (SessionChannelDemuxer<TInnerChannel, TInnerItem>)result.AsyncState;
+            SessionChannelDemuxer<TInnerChannel, TInnerItem> demuxer =
+                (SessionChannelDemuxer<TInnerChannel, TInnerItem>)result.AsyncState;
 
             bool releaseThrottle = true;
 
@@ -2231,7 +2689,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 demuxer.HandleUnknownException(e);
                 releaseThrottle = false;
             }
@@ -2287,7 +2746,12 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        throw TraceUtility.ThrowHelperError(new EndpointNotFoundException(SR.GetString(SR.UnableToDemuxChannel, message.Headers.Action)), message);
+                        throw TraceUtility.ThrowHelperError(
+                            new EndpointNotFoundException(
+                                SR.GetString(SR.UnableToDemuxChannel, message.Headers.Action)
+                            ),
+                            message
+                        );
                     }
                     catch (EndpointNotFoundException e)
                     {
@@ -2324,12 +2788,17 @@ namespace System.ServiceModel.Channels
                     this.onItemDequeued = new Action(this.OnItemDequeued);
                 }
 
-                listener.InputQueueAcceptor.EnqueueAndDispatch(wrappedChannel, this.onItemDequeued, false);
+                listener.InputQueueAcceptor.EnqueueAndDispatch(
+                    wrappedChannel,
+                    this.onItemDequeued,
+                    false
+                );
                 enqueueSucceeded = true;
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
             }
             finally
@@ -2350,7 +2819,10 @@ namespace System.ServiceModel.Channels
             {
                 if (this.filterTable.Count > 0)
                 {
-                    KeyValuePair<MessageFilter, InputQueueChannelListener<TInnerChannel>>[] pairs = new KeyValuePair<MessageFilter, InputQueueChannelListener<TInnerChannel>>[this.filterTable.Count];
+                    KeyValuePair<MessageFilter, InputQueueChannelListener<TInnerChannel>>[] pairs =
+                        new KeyValuePair<MessageFilter, InputQueueChannelListener<TInnerChannel>>[
+                            this.filterTable.Count
+                        ];
                     this.filterTable.CopyTo(pairs, 0);
                     listener = pairs[0].Value;
 
@@ -2359,14 +2831,18 @@ namespace System.ServiceModel.Channels
                         this.onItemDequeued = new Action(OnItemDequeued);
                     }
 
-                    listener.InputQueueAcceptor.EnqueueAndDispatch(exception, this.onItemDequeued, false);
+                    listener.InputQueueAcceptor.EnqueueAndDispatch(
+                        exception,
+                        this.onItemDequeued,
+                        false
+                    );
                 }
             }
         }
 
         void StartAccepting(TInnerChannel channelToPeek)
         {
-            for (;;)
+            for (; ; )
             {
                 IAsyncResult result;
                 bool acceptValid = this.BeginAcceptChannel(true, out result);
@@ -2413,10 +2889,19 @@ namespace System.ServiceModel.Channels
             TInnerChannel channel;
             SessionChannelDemuxer<TInnerChannel, TInnerItem> demuxer;
             TInnerItem item;
-            static AsyncCallback onOpenComplete = Fx.ThunkCallback(new AsyncCallback(OnOpenCompleteStatic));
-            static AsyncCallback onReceiveComplete = Fx.ThunkCallback(new AsyncCallback(OnReceiveCompleteStatic));
+            static AsyncCallback onOpenComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnOpenCompleteStatic)
+            );
+            static AsyncCallback onReceiveComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnReceiveCompleteStatic)
+            );
 
-            public PeekAsyncResult(SessionChannelDemuxer<TInnerChannel, TInnerItem> demuxer, TInnerChannel channel, AsyncCallback callback, object state)
+            public PeekAsyncResult(
+                SessionChannelDemuxer<TInnerChannel, TInnerItem> demuxer,
+                TInnerChannel channel,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.demuxer = demuxer;
@@ -2432,7 +2917,11 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            public static void End(IAsyncResult result, out TInnerChannel channel, out TInnerItem item)
+            public static void End(
+                IAsyncResult result,
+                out TInnerChannel channel,
+                out TInnerItem item
+            )
             {
                 PeekAsyncResult peekResult = AsyncResult.End<PeekAsyncResult>(result);
                 channel = peekResult.channel;
@@ -2448,11 +2937,20 @@ namespace System.ServiceModel.Channels
                 if (this.demuxer.peekTimeout == ChannelDemuxer.UseDefaultReceiveTimeout)
                 {
                     //use the default ReceiveTimeout for the channel
-                    receiveResult = this.demuxer.BeginReceive(this.channel, onReceiveComplete, this);
+                    receiveResult = this.demuxer.BeginReceive(
+                        this.channel,
+                        onReceiveComplete,
+                        this
+                    );
                 }
                 else
                 {
-                    receiveResult = this.demuxer.BeginReceive(this.channel, this.demuxer.peekTimeout, onReceiveComplete, this);
+                    receiveResult = this.demuxer.BeginReceive(
+                        this.channel,
+                        this.demuxer.peekTimeout,
+                        onReceiveComplete,
+                        this
+                    );
                 }
 
                 if (receiveResult.CompletedSynchronously)
@@ -2527,21 +3025,36 @@ namespace System.ServiceModel.Channels
         class OpenAsyncResult : AsyncResult
         {
             static FastAsyncCallback waitOverCallback = new FastAsyncCallback(WaitOverCallback);
-            static AsyncCallback openListenerCallback = Fx.ThunkCallback(new AsyncCallback(OpenListenerCallback));
+            static AsyncCallback openListenerCallback = Fx.ThunkCallback(
+                new AsyncCallback(OpenListenerCallback)
+            );
             SessionChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer;
             ChannelDemuxerFilter filter;
             IChannelListener listener;
             TimeoutHelper timeoutHelper;
             bool startAccepting;
 
-            public OpenAsyncResult(SessionChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer, ChannelDemuxerFilter filter, IChannelListener listener, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                SessionChannelDemuxer<TInnerChannel, TInnerItem> channelDemuxer,
+                ChannelDemuxerFilter filter,
+                IChannelListener listener,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.channelDemuxer = channelDemuxer;
                 this.filter = filter;
                 this.listener = listener;
                 this.timeoutHelper = new TimeoutHelper(timeout);
-                if (!this.channelDemuxer.openSemaphore.EnterAsync(this.timeoutHelper.RemainingTime(), waitOverCallback, this))
+                if (
+                    !this.channelDemuxer.openSemaphore.EnterAsync(
+                        this.timeoutHelper.RemainingTime(),
+                        waitOverCallback,
+                        this
+                    )
+                )
                 {
                     return;
                 }
@@ -2585,7 +3098,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         completeSelf = true;
                         completionException = e;
                     }
@@ -2600,7 +3114,10 @@ namespace System.ServiceModel.Channels
 
             bool OnWaitOver()
             {
-                this.startAccepting = this.channelDemuxer.ShouldStartAccepting(this.filter, this.listener);
+                this.startAccepting = this.channelDemuxer.ShouldStartAccepting(
+                    this.filter,
+                    this.listener
+                );
                 if (!this.startAccepting)
                 {
                     this.channelDemuxer.ThrowPendingOpenExceptionIfAny();
@@ -2629,7 +3146,11 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    IAsyncResult result = this.channelDemuxer.innerListener.BeginOpen(timeoutHelper.RemainingTime(), openListenerCallback, this);
+                    IAsyncResult result = this.channelDemuxer.innerListener.BeginOpen(
+                        timeoutHelper.RemainingTime(),
+                        openListenerCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -2660,7 +3181,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
                 catch (Exception e)
                 {
-                    if (Fx.IsFatal(e)) throw;
+                    if (Fx.IsFatal(e))
+                        throw;
                     completionException = e;
                 }
                 if (completionException != null)
@@ -2685,27 +3207,42 @@ namespace System.ServiceModel.Channels
 
     class InputSessionChannelDemuxer : SessionChannelDemuxer<IInputSessionChannel, Message>
     {
-        public InputSessionChannelDemuxer(BindingContext context, TimeSpan peekTimeout, int maxPendingSessions)
-            : base(context, peekTimeout, maxPendingSessions)
-        {
-        }
+        public InputSessionChannelDemuxer(
+            BindingContext context,
+            TimeSpan peekTimeout,
+            int maxPendingSessions
+        )
+            : base(context, peekTimeout, maxPendingSessions) { }
 
         protected override void AbortItem(Message message)
         {
             AbortMessage(message);
         }
 
-        protected override IAsyncResult BeginReceive(IInputSessionChannel channel, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            IInputSessionChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginReceive(callback, state);
         }
 
-        protected override IAsyncResult BeginReceive(IInputSessionChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            IInputSessionChannel channel,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginReceive(timeout, callback, state);
         }
 
-        protected override IInputSessionChannel CreateChannel(ChannelManagerBase channelManager, IInputSessionChannel innerChannel, Message firstMessage)
+        protected override IInputSessionChannel CreateChannel(
+            ChannelManagerBase channelManager,
+            IInputSessionChannel innerChannel,
+            Message firstMessage
+        )
         {
             return new InputSessionChannelWrapper(channelManager, innerChannel, firstMessage);
         }
@@ -2733,10 +3270,12 @@ namespace System.ServiceModel.Channels
 
     class InputSessionChannelWrapper : InputChannelWrapper, IInputSessionChannel
     {
-        public InputSessionChannelWrapper(ChannelManagerBase channelManager, IInputSessionChannel innerChannel, Message firstMessage)
-            : base(channelManager, innerChannel, firstMessage)
-        {
-        }
+        public InputSessionChannelWrapper(
+            ChannelManagerBase channelManager,
+            IInputSessionChannel innerChannel,
+            Message firstMessage
+        )
+            : base(channelManager, innerChannel, firstMessage) { }
 
         new IInputSessionChannel InnerChannel
         {
@@ -2751,27 +3290,42 @@ namespace System.ServiceModel.Channels
 
     class DuplexSessionChannelDemuxer : SessionChannelDemuxer<IDuplexSessionChannel, Message>
     {
-        public DuplexSessionChannelDemuxer(BindingContext context, TimeSpan peekTimeout, int maxPendingSessions)
-            : base(context, peekTimeout, maxPendingSessions)
-        {
-        }
+        public DuplexSessionChannelDemuxer(
+            BindingContext context,
+            TimeSpan peekTimeout,
+            int maxPendingSessions
+        )
+            : base(context, peekTimeout, maxPendingSessions) { }
 
         protected override void AbortItem(Message message)
         {
             AbortMessage(message);
         }
 
-        protected override IAsyncResult BeginReceive(IDuplexSessionChannel channel, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            IDuplexSessionChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginReceive(callback, state);
         }
 
-        protected override IAsyncResult BeginReceive(IDuplexSessionChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            IDuplexSessionChannel channel,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginReceive(timeout, callback, state);
         }
 
-        protected override IDuplexSessionChannel CreateChannel(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel, Message firstMessage)
+        protected override IDuplexSessionChannel CreateChannel(
+            ChannelManagerBase channelManager,
+            IDuplexSessionChannel innerChannel,
+            Message firstMessage
+        )
         {
             return new DuplexSessionChannelWrapper(channelManager, innerChannel, firstMessage);
         }
@@ -2782,7 +3336,8 @@ namespace System.ServiceModel.Channels
             {
                 return;
             }
-            ChannelAndMessageAsyncState channelAndMessage = (ChannelAndMessageAsyncState)result.AsyncState;
+            ChannelAndMessageAsyncState channelAndMessage = (ChannelAndMessageAsyncState)
+                result.AsyncState;
             bool doAbort = true;
             try
             {
@@ -2807,7 +3362,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
             }
             finally
@@ -2829,7 +3385,14 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        DuplexSessionDemuxFailureAsyncResult result = new DuplexSessionDemuxFailureAsyncResult(this.DemuxFailureHandler, channel, message, Fx.ThunkCallback(new AsyncCallback(this.EndpointNotFoundCallback)), new ChannelAndMessageAsyncState(channel, message));
+                        DuplexSessionDemuxFailureAsyncResult result =
+                            new DuplexSessionDemuxFailureAsyncResult(
+                                this.DemuxFailureHandler,
+                                channel,
+                                message,
+                                Fx.ThunkCallback(new AsyncCallback(this.EndpointNotFoundCallback)),
+                                new ChannelAndMessageAsyncState(channel, message)
+                            );
                         result.Start();
                         if (!result.CompletedSynchronously)
                         {
@@ -2857,7 +3420,8 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         this.HandleUnknownException(e);
                     }
                 }
@@ -2897,10 +3461,12 @@ namespace System.ServiceModel.Channels
 
     class DuplexSessionChannelWrapper : InputChannelWrapper, IDuplexSessionChannel
     {
-        public DuplexSessionChannelWrapper(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel, Message firstMessage)
-            : base(channelManager, innerChannel, firstMessage)
-        {
-        }
+        public DuplexSessionChannelWrapper(
+            ChannelManagerBase channelManager,
+            IDuplexSessionChannel innerChannel,
+            Message firstMessage
+        )
+            : base(channelManager, innerChannel, firstMessage) { }
 
         new IDuplexSessionChannel InnerChannel
         {
@@ -2937,7 +3503,12 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.BeginSend(message, callback, state);
         }
 
-        public IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginSend(message, timeout, callback, state);
         }
@@ -2950,10 +3521,12 @@ namespace System.ServiceModel.Channels
 
     class ReplySessionChannelDemuxer : SessionChannelDemuxer<IReplySessionChannel, RequestContext>
     {
-        public ReplySessionChannelDemuxer(BindingContext context, TimeSpan peekTimeout, int maxPendingSessions)
-            : base(context, peekTimeout, maxPendingSessions)
-        {
-        }
+        public ReplySessionChannelDemuxer(
+            BindingContext context,
+            TimeSpan peekTimeout,
+            int maxPendingSessions
+        )
+            : base(context, peekTimeout, maxPendingSessions) { }
 
         protected override void AbortItem(RequestContext request)
         {
@@ -2961,17 +3534,30 @@ namespace System.ServiceModel.Channels
             request.Abort();
         }
 
-        protected override IAsyncResult BeginReceive(IReplySessionChannel channel, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            IReplySessionChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginReceiveRequest(callback, state);
         }
 
-        protected override IAsyncResult BeginReceive(IReplySessionChannel channel, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginReceive(
+            IReplySessionChannel channel,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginReceiveRequest(timeout, callback, state);
         }
 
-        protected override IReplySessionChannel CreateChannel(ChannelManagerBase channelManager, IReplySessionChannel innerChannel, RequestContext firstRequest)
+        protected override IReplySessionChannel CreateChannel(
+            ChannelManagerBase channelManager,
+            IReplySessionChannel innerChannel,
+            RequestContext firstRequest
+        )
         {
             return new ReplySessionChannelWrapper(channelManager, innerChannel, firstRequest);
         }
@@ -2982,7 +3568,8 @@ namespace System.ServiceModel.Channels
             {
                 return;
             }
-            ChannelAndRequestAsyncState channelAndRequest = (ChannelAndRequestAsyncState)result.AsyncState;
+            ChannelAndRequestAsyncState channelAndRequest = (ChannelAndRequestAsyncState)
+                result.AsyncState;
             bool doAbort = true;
             try
             {
@@ -3007,7 +3594,8 @@ namespace System.ServiceModel.Channels
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 this.HandleUnknownException(e);
             }
             finally
@@ -3020,7 +3608,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override void EndpointNotFound(IReplySessionChannel channel, RequestContext request)
+        protected override void EndpointNotFound(
+            IReplySessionChannel channel,
+            RequestContext request
+        )
         {
             bool doAbort = true;
             try
@@ -3029,7 +3620,14 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        ReplySessionDemuxFailureAsyncResult result = new ReplySessionDemuxFailureAsyncResult(this.DemuxFailureHandler, request, channel, Fx.ThunkCallback(new AsyncCallback(this.EndpointNotFoundCallback)), new ChannelAndRequestAsyncState(channel, request));
+                        ReplySessionDemuxFailureAsyncResult result =
+                            new ReplySessionDemuxFailureAsyncResult(
+                                this.DemuxFailureHandler,
+                                request,
+                                channel,
+                                Fx.ThunkCallback(new AsyncCallback(this.EndpointNotFoundCallback)),
+                                new ChannelAndRequestAsyncState(channel, request)
+                            );
                         result.Start();
                         if (!result.CompletedSynchronously)
                         {
@@ -3057,7 +3655,8 @@ namespace System.ServiceModel.Channels
                     }
                     catch (Exception e)
                     {
-                        if (Fx.IsFatal(e)) throw;
+                        if (Fx.IsFatal(e))
+                            throw;
                         this.HandleUnknownException(e);
                     }
                 }
@@ -3072,7 +3671,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override RequestContext EndReceive(IReplySessionChannel channel, IAsyncResult result)
+        protected override RequestContext EndReceive(
+            IReplySessionChannel channel,
+            IAsyncResult result
+        )
         {
             return channel.EndReceiveRequest(result);
         }
@@ -3097,10 +3699,12 @@ namespace System.ServiceModel.Channels
 
     class ReplySessionChannelWrapper : ReplyChannelWrapper, IReplySessionChannel
     {
-        public ReplySessionChannelWrapper(ChannelManagerBase channelManager, IReplySessionChannel innerChannel, RequestContext firstRequest)
-            : base(channelManager, innerChannel, firstRequest)
-        {
-        }
+        public ReplySessionChannelWrapper(
+            ChannelManagerBase channelManager,
+            IReplySessionChannel innerChannel,
+            RequestContext firstRequest
+        )
+            : base(channelManager, innerChannel, firstRequest) { }
 
         new IReplySessionChannel InnerChannel
         {
@@ -3119,7 +3723,11 @@ namespace System.ServiceModel.Channels
     {
         TItem firstItem;
 
-        public ChannelWrapper(ChannelManagerBase channelManager, TChannel innerChannel, TItem firstItem)
+        public ChannelWrapper(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel,
+            TItem firstItem
+        )
             : base(channelManager, innerChannel)
         {
             this.firstItem = firstItem;
@@ -3150,7 +3758,11 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             this.CloseFirstItem(timeoutHelper.RemainingTime());
@@ -3198,17 +3810,23 @@ namespace System.ServiceModel.Channels
 
     class InputChannelWrapper : ChannelWrapper<IInputChannel, Message>, IInputChannel
     {
-        public InputChannelWrapper(ChannelManagerBase channelManager, IInputChannel innerChannel, Message firstMessage)
-            : base(channelManager, innerChannel, firstMessage)
-        {
-        }
+        public InputChannelWrapper(
+            ChannelManagerBase channelManager,
+            IInputChannel innerChannel,
+            Message firstMessage
+        )
+            : base(channelManager, innerChannel, firstMessage) { }
 
         public EndpointAddress LocalAddress
         {
             get { return this.InnerChannel.LocalAddress; }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -3218,9 +3836,7 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
         protected override void CloseFirstItem(TimeSpan timeout)
         {
@@ -3303,7 +3919,11 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.WaitForMessage(timeout);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.HaveFirstItem())
                 return new WaitAsyncResult(callback, state);
@@ -3320,17 +3940,23 @@ namespace System.ServiceModel.Channels
 
     class ReplyChannelWrapper : ChannelWrapper<IReplyChannel, RequestContext>, IReplyChannel
     {
-        public ReplyChannelWrapper(ChannelManagerBase channelManager, IReplyChannel innerChannel, RequestContext firstRequest)
-            : base(channelManager, innerChannel, firstRequest)
-        {
-        }
+        public ReplyChannelWrapper(
+            ChannelManagerBase channelManager,
+            IReplyChannel innerChannel,
+            RequestContext firstRequest
+        )
+            : base(channelManager, innerChannel, firstRequest) { }
 
         public EndpointAddress LocalAddress
         {
             get { return this.InnerChannel.LocalAddress; }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -3340,9 +3966,7 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
         protected override void CloseFirstItem(TimeSpan timeout)
         {
@@ -3393,7 +4017,11 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.BeginReceiveRequest(callback, state);
         }
 
-        public IAsyncResult BeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             RequestContext request = this.GetFirstItem();
             if (request != null)
@@ -3416,7 +4044,11 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.TryReceiveRequest(timeout, out request);
         }
 
-        public IAsyncResult BeginTryReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             RequestContext request = this.GetFirstItem();
             if (request != null)
@@ -3441,7 +4073,11 @@ namespace System.ServiceModel.Channels
             return this.InnerChannel.WaitForRequest(timeout);
         }
 
-        public IAsyncResult BeginWaitForRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.HaveFirstItem())
                 return new WaitAsyncResult(callback, state);
@@ -3462,7 +4098,10 @@ namespace System.ServiceModel.Channels
         ChannelDemuxerFilter filter;
         IChannelDemuxer channelDemuxer;
 
-        public InputQueueChannelListener(ChannelDemuxerFilter filter, IChannelDemuxer channelDemuxer)
+        public InputQueueChannelListener(
+            ChannelDemuxerFilter filter,
+            IChannelDemuxer channelDemuxer
+        )
             : base(true)
         {
             this.filter = filter;
@@ -3483,13 +4122,29 @@ namespace System.ServiceModel.Channels
         protected override void OnOpen(TimeSpan timeout)
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-            this.channelDemuxer.OnOuterListenerOpen(this.filter, this, timeoutHelper.RemainingTime());
+            this.channelDemuxer.OnOuterListenerOpen(
+                this.filter,
+                this,
+                timeoutHelper.RemainingTime()
+            );
             base.OnOpen(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, this.OnBeginOuterListenerOpen, this.OnEndOuterListenerOpen, base.OnBeginOpen, base.OnEndOpen);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.OnBeginOuterListenerOpen,
+                this.OnEndOuterListenerOpen,
+                base.OnBeginOpen,
+                base.OnEndOpen
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -3497,9 +4152,19 @@ namespace System.ServiceModel.Channels
             ChainedAsyncResult.End(result);
         }
 
-        IAsyncResult OnBeginOuterListenerOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult OnBeginOuterListenerOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return this.channelDemuxer.OnBeginOuterListenerOpen(this.filter, this, timeout, callback, state);
+            return this.channelDemuxer.OnBeginOuterListenerOpen(
+                this.filter,
+                this,
+                timeout,
+                callback,
+                state
+            );
         }
 
         void OnEndOuterListenerOpen(IAsyncResult result)
@@ -3520,9 +4185,21 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, this.OnBeginOuterListenerClose, this.OnEndOuterListenerClose, base.OnBeginClose, base.OnEndClose);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.OnBeginOuterListenerClose,
+                this.OnEndOuterListenerClose,
+                base.OnBeginClose,
+                base.OnEndClose
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -3530,9 +4207,18 @@ namespace System.ServiceModel.Channels
             ChainedAsyncResult.End(result);
         }
 
-        IAsyncResult OnBeginOuterListenerClose(TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult OnBeginOuterListenerClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return this.channelDemuxer.OnBeginOuterListenerClose(this.filter, timeout, callback, state);
+            return this.channelDemuxer.OnBeginOuterListenerClose(
+                this.filter,
+                timeout,
+                callback,
+                state
+            );
         }
 
         void OnEndOuterListenerClose(IAsyncResult result)
@@ -3570,15 +4256,14 @@ namespace System.ServiceModel.Channels
 
         public TimeSpan PeekTimeout
         {
-            get
-            {
-                return this.demuxer.PeekTimeout;
-            }
+            get { return this.demuxer.PeekTimeout; }
             set
             {
                 if (value < TimeSpan.Zero && value != ChannelDemuxer.UseDefaultReceiveTimeout)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.demuxer.PeekTimeout = value;
@@ -3587,15 +4272,14 @@ namespace System.ServiceModel.Channels
 
         public int MaxPendingSessions
         {
-            get
-            {
-                return this.demuxer.MaxPendingSessions;
-            }
+            get { return this.demuxer.MaxPendingSessions; }
             set
             {
                 if (value < 1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(SR.GetString(SR.ValueMustBeGreaterThanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(SR.GetString(SR.ValueMustBeGreaterThanZero))
+                    );
                 }
 
                 this.demuxer.MaxPendingSessions = value;
@@ -3626,7 +4310,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -3635,8 +4321,9 @@ namespace System.ServiceModel.Channels
             return context.BuildInnerChannelFactory<TChannel>();
         }
 
-
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
@@ -3676,9 +4363,15 @@ namespace System.ServiceModel.Channels
             {
                 for (int i = 0; i < this.cachedContextState.CachedBindingParameters.Count; ++i)
                 {
-                    if (!context.BindingParameters.Contains(this.cachedContextState.CachedBindingParameters[i].GetType()))
+                    if (
+                        !context.BindingParameters.Contains(
+                            this.cachedContextState.CachedBindingParameters[i].GetType()
+                        )
+                    )
                     {
-                        context.BindingParameters.Add(this.cachedContextState.CachedBindingParameters[i]);
+                        context.BindingParameters.Add(
+                            this.cachedContextState.CachedBindingParameters[i]
+                        );
                     }
                 }
             }
@@ -3725,16 +4418,25 @@ namespace System.ServiceModel.Channels
 
     class ReplyChannelDemuxFailureAsyncResult : AsyncResult
     {
-        static AsyncCallback demuxFailureHandlerCallback = Fx.ThunkCallback(new AsyncCallback(DemuxFailureHandlerCallback));
+        static AsyncCallback demuxFailureHandlerCallback = Fx.ThunkCallback(
+            new AsyncCallback(DemuxFailureHandlerCallback)
+        );
         IChannelDemuxFailureHandler demuxFailureHandler;
         RequestContext requestContext;
 
-        public ReplyChannelDemuxFailureAsyncResult(IChannelDemuxFailureHandler demuxFailureHandler, RequestContext requestContext, AsyncCallback callback, object state)
+        public ReplyChannelDemuxFailureAsyncResult(
+            IChannelDemuxFailureHandler demuxFailureHandler,
+            RequestContext requestContext,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             if (demuxFailureHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("demuxFailureHandler");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "demuxFailureHandler"
+                );
             }
             if (requestContext == null)
             {
@@ -3746,7 +4448,12 @@ namespace System.ServiceModel.Channels
 
         public void Start()
         {
-            IAsyncResult result = this.demuxFailureHandler.BeginHandleDemuxFailure(requestContext.RequestMessage, requestContext, demuxFailureHandlerCallback, this);
+            IAsyncResult result = this.demuxFailureHandler.BeginHandleDemuxFailure(
+                requestContext.RequestMessage,
+                requestContext,
+                demuxFailureHandlerCallback,
+                this
+            );
             if (!result.CompletedSynchronously)
             {
                 return;
@@ -3770,7 +4477,9 @@ namespace System.ServiceModel.Channels
             {
                 return;
             }
-            ReplyChannelDemuxFailureAsyncResult self = (ReplyChannelDemuxFailureAsyncResult)(result.AsyncState);
+            ReplyChannelDemuxFailureAsyncResult self = (ReplyChannelDemuxFailureAsyncResult)(
+                result.AsyncState
+            );
             bool completeSelf = false;
             Exception completionException = null;
             try
@@ -3781,7 +4490,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 completeSelf = true;
                 completionException = e;
             }
@@ -3799,10 +4509,18 @@ namespace System.ServiceModel.Channels
 
     class ReplySessionDemuxFailureAsyncResult : ReplyChannelDemuxFailureAsyncResult
     {
-        static AsyncCallback closeChannelCallback = Fx.ThunkCallback(new AsyncCallback(ChannelCloseCallback));
+        static AsyncCallback closeChannelCallback = Fx.ThunkCallback(
+            new AsyncCallback(ChannelCloseCallback)
+        );
         IReplySessionChannel channel;
 
-        public ReplySessionDemuxFailureAsyncResult(IChannelDemuxFailureHandler demuxFailureHandler, RequestContext requestContext, IReplySessionChannel channel, AsyncCallback callback, object state)
+        public ReplySessionDemuxFailureAsyncResult(
+            IChannelDemuxFailureHandler demuxFailureHandler,
+            RequestContext requestContext,
+            IReplySessionChannel channel,
+            AsyncCallback callback,
+            object state
+        )
             : base(demuxFailureHandler, requestContext, callback, state)
         {
             this.channel = channel;
@@ -3826,7 +4544,8 @@ namespace System.ServiceModel.Channels
             {
                 return;
             }
-            ReplySessionDemuxFailureAsyncResult self = (ReplySessionDemuxFailureAsyncResult)result.AsyncState;
+            ReplySessionDemuxFailureAsyncResult self = (ReplySessionDemuxFailureAsyncResult)
+                result.AsyncState;
             Exception completionException = null;
             try
             {
@@ -3835,7 +4554,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 completionException = e;
             }
             self.Complete(false, completionException);
@@ -3849,18 +4569,30 @@ namespace System.ServiceModel.Channels
 
     class DuplexSessionDemuxFailureAsyncResult : AsyncResult
     {
-        static AsyncCallback demuxFailureHandlerCallback = Fx.ThunkCallback(new AsyncCallback(DemuxFailureHandlerCallback));
-        static AsyncCallback channelCloseCallback = Fx.ThunkCallback(new AsyncCallback(ChannelCloseCallback));
+        static AsyncCallback demuxFailureHandlerCallback = Fx.ThunkCallback(
+            new AsyncCallback(DemuxFailureHandlerCallback)
+        );
+        static AsyncCallback channelCloseCallback = Fx.ThunkCallback(
+            new AsyncCallback(ChannelCloseCallback)
+        );
         IChannelDemuxFailureHandler demuxFailureHandler;
         IDuplexSessionChannel channel;
         Message message;
 
-        public DuplexSessionDemuxFailureAsyncResult(IChannelDemuxFailureHandler demuxFailureHandler, IDuplexSessionChannel channel, Message message, AsyncCallback callback, object state)
+        public DuplexSessionDemuxFailureAsyncResult(
+            IChannelDemuxFailureHandler demuxFailureHandler,
+            IDuplexSessionChannel channel,
+            Message message,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             if (demuxFailureHandler == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("demuxFailureHandler");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "demuxFailureHandler"
+                );
             }
             if (channel == null)
             {
@@ -3873,7 +4605,12 @@ namespace System.ServiceModel.Channels
 
         public void Start()
         {
-            IAsyncResult result = this.demuxFailureHandler.BeginHandleDemuxFailure(this.message, this.channel, demuxFailureHandlerCallback, this);
+            IAsyncResult result = this.demuxFailureHandler.BeginHandleDemuxFailure(
+                this.message,
+                this.channel,
+                demuxFailureHandlerCallback,
+                this
+            );
             if (!result.CompletedSynchronously)
             {
                 return;
@@ -3903,7 +4640,8 @@ namespace System.ServiceModel.Channels
             {
                 return;
             }
-            DuplexSessionDemuxFailureAsyncResult self = (DuplexSessionDemuxFailureAsyncResult)result.AsyncState;
+            DuplexSessionDemuxFailureAsyncResult self = (DuplexSessionDemuxFailureAsyncResult)
+                result.AsyncState;
             bool completeSelf = false;
             Exception completionException = null;
             try
@@ -3914,7 +4652,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 completeSelf = true;
                 completionException = e;
             }
@@ -3930,7 +4669,8 @@ namespace System.ServiceModel.Channels
             {
                 return;
             }
-            DuplexSessionDemuxFailureAsyncResult self = (DuplexSessionDemuxFailureAsyncResult)result.AsyncState;
+            DuplexSessionDemuxFailureAsyncResult self = (DuplexSessionDemuxFailureAsyncResult)
+                result.AsyncState;
             Exception completionException = null;
             try
             {
@@ -3940,7 +4680,8 @@ namespace System.ServiceModel.Channels
 #pragma warning suppress 56500 // covered by FxCOP
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 completionException = e;
             }
             self.Complete(false, completionException);
@@ -3956,8 +4697,18 @@ namespace System.ServiceModel.Channels
     {
         void HandleDemuxFailure(Message message);
 
-        IAsyncResult BeginHandleDemuxFailure(Message message, RequestContext faultContext, AsyncCallback callback, object state);
-        IAsyncResult BeginHandleDemuxFailure(Message message, IOutputChannel faultContext, AsyncCallback callback, object state);
+        IAsyncResult BeginHandleDemuxFailure(
+            Message message,
+            RequestContext faultContext,
+            AsyncCallback callback,
+            object state
+        );
+        IAsyncResult BeginHandleDemuxFailure(
+            Message message,
+            IOutputChannel faultContext,
+            AsyncCallback callback,
+            object state
+        );
         void EndHandleDemuxFailure(IAsyncResult result);
     }
 }

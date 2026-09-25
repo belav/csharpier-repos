@@ -145,8 +145,9 @@ public interface IConventionElementType : IReadOnlyElementType, IConventionAnnot
     /// <returns>The configured value.</returns>
     Type? SetValueConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        bool fromDataAnnotation = false);
+            Type? converterType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetValueConverter" />.
@@ -184,11 +185,14 @@ public interface IConventionElementType : IReadOnlyElementType, IConventionAnnot
     /// </param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The configured value.</returns>
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
     Type? SetValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyProperty.GetValueComparer" />.

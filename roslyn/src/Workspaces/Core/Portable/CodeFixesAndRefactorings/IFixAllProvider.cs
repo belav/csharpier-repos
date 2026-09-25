@@ -10,7 +10,7 @@ using FixAllScope = Microsoft.CodeAnalysis.CodeFixes.FixAllScope;
 namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 {
     /// <summary>
-    /// Represents a FixAllProvider for code fixes or refactorings. 
+    /// Represents a FixAllProvider for code fixes or refactorings.
     /// </summary>
     internal interface IFixAllProvider
     {

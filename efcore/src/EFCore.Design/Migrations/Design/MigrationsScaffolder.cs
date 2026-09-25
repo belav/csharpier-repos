@@ -45,8 +45,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     public virtual ScaffoldedMigration ScaffoldMigration(
         string migrationName,
         string? rootNamespace,
-        string? subNamespace)
-        => ScaffoldMigration(migrationName, rootNamespace, subNamespace, language: null);
+        string? subNamespace
+    ) => ScaffoldMigration(migrationName, rootNamespace, subNamespace, language: null);
 
     /// <summary>
     ///     Scaffolds a new migration.
@@ -66,7 +66,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         string migrationName,
         string? rootNamespace,
         string? subNamespace = null,
-        string? language = null)
+        string? language = null
+    )
     {
         if (string.Equals(migrationName, "migration", StringComparison.OrdinalIgnoreCase))
         {
@@ -89,12 +90,10 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         var (key, typeInfo) = Dependencies.MigrationsAssembly.Migrations.LastOrDefault();
 
         var migrationNamespace =
-            (!string.IsNullOrEmpty(rootNamespace)
-                && !string.IsNullOrEmpty(subNamespace))
+            (!string.IsNullOrEmpty(rootNamespace) && !string.IsNullOrEmpty(subNamespace))
                 ? rootNamespace + "." + subNamespace
-                : !string.IsNullOrEmpty(rootNamespace)
-                    ? rootNamespace
-                    : subNamespace;
+            : !string.IsNullOrEmpty(rootNamespace) ? rootNamespace
+            : subNamespace;
 
         if (subNamespaceDefaulted)
         {
@@ -127,26 +126,34 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 }
                 else
                 {
-                    builder
-                        .Append(sanitizedContextName)
-                        .Append("Migrations");
+                    builder.Append(sanitizedContextName).Append("Migrations");
                 }
 
                 migrationNamespace = builder.ToString();
             }
             else
             {
-                Dependencies.OperationReporter.WriteWarning(DesignStrings.ForeignMigrations(migrationNamespace));
+                Dependencies.OperationReporter.WriteWarning(
+                    DesignStrings.ForeignMigrations(migrationNamespace)
+                );
             }
         }
 
         var modelSnapshot = Dependencies.MigrationsAssembly.ModelSnapshot;
-        var lastModel = Dependencies.SnapshotModelProcessor.Process(modelSnapshot?.Model)?.GetRelationalModel();
-        var upOperations = Dependencies.MigrationsModelDiffer
-            .GetDifferences(lastModel, Dependencies.Model.GetRelationalModel());
-        var downOperations = upOperations.Count > 0
-            ? Dependencies.MigrationsModelDiffer.GetDifferences(Dependencies.Model.GetRelationalModel(), lastModel)
-            : new List<MigrationOperation>();
+        var lastModel = Dependencies
+            .SnapshotModelProcessor.Process(modelSnapshot?.Model)
+            ?.GetRelationalModel();
+        var upOperations = Dependencies.MigrationsModelDiffer.GetDifferences(
+            lastModel,
+            Dependencies.Model.GetRelationalModel()
+        );
+        var downOperations =
+            upOperations.Count > 0
+                ? Dependencies.MigrationsModelDiffer.GetDifferences(
+                    Dependencies.Model.GetRelationalModel(),
+                    lastModel
+                )
+                : new List<MigrationOperation>();
         var migrationId = Dependencies.MigrationsIdGenerator.GenerateId(migrationName);
         var modelSnapshotNamespace = overrideNamespace
             ? migrationNamespace
@@ -158,7 +165,9 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             var lastModelSnapshotName = modelSnapshot.GetType().Name;
             if (lastModelSnapshotName != modelSnapshotName)
             {
-                Dependencies.OperationReporter.WriteVerbose(DesignStrings.ReusingSnapshotName(lastModelSnapshotName));
+                Dependencies.OperationReporter.WriteVerbose(
+                    DesignStrings.ReusingSnapshotName(lastModelSnapshotName)
+                );
 
                 modelSnapshotName = lastModelSnapshotName;
             }
@@ -174,18 +183,21 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             migrationNamespace,
             migrationName,
             upOperations,
-            downOperations);
+            downOperations
+        );
         var migrationMetadataCode = codeGenerator.GenerateMetadata(
             migrationNamespace,
             _contextType,
             migrationName,
             migrationId,
-            Dependencies.Model);
+            Dependencies.Model
+        );
         var modelSnapshotCode = codeGenerator.GenerateSnapshot(
             modelSnapshotNamespace,
             _contextType,
             modelSnapshotName,
-            Dependencies.Model);
+            Dependencies.Model
+        );
 
         return new ScaffoldedMigration(
             codeGenerator.FileExtension,
@@ -196,7 +208,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             GetSubNamespace(rootNamespace, migrationNamespace!),
             modelSnapshotCode,
             modelSnapshotName,
-            GetSubNamespace(rootNamespace, modelSnapshotNamespace!));
+            GetSubNamespace(rootNamespace, modelSnapshotNamespace!)
+        );
     }
 
     /// <summary>
@@ -209,11 +222,10 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     {
         rootNamespace ??= string.Empty;
 
-        return @namespace == rootNamespace
-            ? string.Empty
+        return @namespace == rootNamespace ? string.Empty
             : @namespace.StartsWith(rootNamespace + '.', StringComparison.Ordinal)
                 ? @namespace[(rootNamespace.Length + 1)..]
-                : @namespace;
+            : @namespace;
     }
 
     /// <summary>
@@ -223,8 +235,11 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     /// <param name="rootNamespace">The project's root namespace.</param>
     /// <param name="force">Don't check to see if the migration has been applied to the database.</param>
     /// <returns>The removed migration files.</returns>
-    public virtual MigrationFiles RemoveMigration(string projectDir, string rootNamespace, bool force)
-        => RemoveMigration(projectDir, rootNamespace, force, language: null);
+    public virtual MigrationFiles RemoveMigration(
+        string projectDir,
+        string rootNamespace,
+        bool force
+    ) => RemoveMigration(projectDir, rootNamespace, force, language: null);
 
     /// <summary>
     ///     Removes the previous migration.
@@ -239,7 +254,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         string projectDir,
         string? rootNamespace,
         bool force,
-        string? language)
+        string? language
+    )
     {
         var files = new MigrationFiles();
 
@@ -252,28 +268,43 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         var codeGenerator = Dependencies.MigrationsCodeGeneratorSelector.Select(language);
 
         IModel? model = null;
-        var migrations = Dependencies.MigrationsAssembly.Migrations
-            .Select(m => Dependencies.MigrationsAssembly.CreateMigration(m.Value, _activeProvider))
+        var migrations = Dependencies
+            .MigrationsAssembly.Migrations.Select(m =>
+                Dependencies.MigrationsAssembly.CreateMigration(m.Value, _activeProvider)
+            )
             .ToList();
         if (migrations.Count != 0)
         {
             var migration = migrations[^1];
             model = Dependencies.SnapshotModelProcessor.Process(migration.TargetModel);
 
-            if (!Dependencies.MigrationsModelDiffer.HasDifferences(
-                    model.GetRelationalModel(), Dependencies.SnapshotModelProcessor.Process(modelSnapshot.Model).GetRelationalModel()))
+            if (
+                !Dependencies.MigrationsModelDiffer.HasDifferences(
+                    model.GetRelationalModel(),
+                    Dependencies
+                        .SnapshotModelProcessor.Process(modelSnapshot.Model)
+                        .GetRelationalModel()
+                )
+            )
             {
                 var applied = false;
                 try
                 {
-                    applied = Dependencies.HistoryRepository.GetAppliedMigrations().Any(
-                        e => e.MigrationId.Equals(migration.GetId(), StringComparison.OrdinalIgnoreCase));
+                    applied = Dependencies
+                        .HistoryRepository.GetAppliedMigrations()
+                        .Any(e =>
+                            e.MigrationId.Equals(
+                                migration.GetId(),
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
                 }
                 catch (Exception ex) when (force)
                 {
                     Dependencies.OperationReporter.WriteVerbose(ex.ToString());
                     Dependencies.OperationReporter.WriteWarning(
-                        DesignStrings.ForceRemoveMigration(migration.GetId(), ex.Message));
+                        DesignStrings.ForceRemoveMigration(migration.GetId(), ex.Message)
+                    );
                 }
 
                 if (applied)
@@ -283,11 +314,14 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                         Dependencies.Migrator.Migrate(
                             migrations.Count > 1
                                 ? migrations[^2].GetId()
-                                : Migration.InitialDatabase);
+                                : Migration.InitialDatabase
+                        );
                     }
                     else
                     {
-                        throw new OperationException(DesignStrings.RevertMigration(migration.GetId()));
+                        throw new OperationException(
+                            DesignStrings.RevertMigration(migration.GetId())
+                        );
                     }
                 }
 
@@ -295,18 +329,28 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 var migrationFile = TryGetProjectFile(projectDir, migrationFileName);
                 if (migrationFile != null)
                 {
-                    Dependencies.OperationReporter.WriteInformation(DesignStrings.RemovingMigration(migration.GetId()));
+                    Dependencies.OperationReporter.WriteInformation(
+                        DesignStrings.RemovingMigration(migration.GetId())
+                    );
                     File.Delete(migrationFile);
                     files.MigrationFile = migrationFile;
                 }
                 else
                 {
                     Dependencies.OperationReporter.WriteWarning(
-                        DesignStrings.NoMigrationFile(migrationFileName, migration.GetType().ShortDisplayName()));
+                        DesignStrings.NoMigrationFile(
+                            migrationFileName,
+                            migration.GetType().ShortDisplayName()
+                        )
+                    );
                 }
 
-                var migrationMetadataFileName = migration.GetId() + ".Designer" + codeGenerator.FileExtension;
-                var migrationMetadataFile = TryGetProjectFile(projectDir, migrationMetadataFileName);
+                var migrationMetadataFileName =
+                    migration.GetId() + ".Designer" + codeGenerator.FileExtension;
+                var migrationMetadataFile = TryGetProjectFile(
+                    projectDir,
+                    migrationMetadataFileName
+                );
                 if (migrationMetadataFile != null)
                 {
                     File.Delete(migrationMetadataFile);
@@ -315,12 +359,14 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 else
                 {
                     Dependencies.OperationReporter.WriteVerbose(
-                        DesignStrings.NoMigrationMetadataFile(migrationMetadataFile));
+                        DesignStrings.NoMigrationMetadataFile(migrationMetadataFile)
+                    );
                 }
 
-                model = migrations.Count > 1
-                    ? Dependencies.SnapshotModelProcessor.Process(migrations[^2].TargetModel)
-                    : null;
+                model =
+                    migrations.Count > 1
+                        ? Dependencies.SnapshotModelProcessor.Process(migrations[^2].TargetModel)
+                        : null;
             }
             else
             {
@@ -344,22 +390,33 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 Dependencies.OperationReporter.WriteWarning(
                     DesignStrings.NoSnapshotFile(
                         modelSnapshotFileName,
-                        modelSnapshot.GetType().ShortDisplayName()));
+                        modelSnapshot.GetType().ShortDisplayName()
+                    )
+                );
             }
         }
         else
         {
             var modelSnapshotNamespace = modelSnapshot.GetType().Namespace;
-            Check.DebugAssert(!string.IsNullOrEmpty(modelSnapshotNamespace), "modelSnapshotNamespace is null or empty");
+            Check.DebugAssert(
+                !string.IsNullOrEmpty(modelSnapshotNamespace),
+                "modelSnapshotNamespace is null or empty"
+            );
             var modelSnapshotCode = codeGenerator.GenerateSnapshot(
                 modelSnapshotNamespace,
                 _contextType,
                 modelSnapshotName,
-                model);
+                model
+            );
 
             modelSnapshotFile ??= Path.Combine(
-                GetDirectory(projectDir, null, GetSubNamespace(rootNamespace, modelSnapshotNamespace)),
-                modelSnapshotFileName);
+                GetDirectory(
+                    projectDir,
+                    null,
+                    GetSubNamespace(rootNamespace, modelSnapshotNamespace)
+                ),
+                modelSnapshotFileName
+            );
 
             Dependencies.OperationReporter.WriteInformation(DesignStrings.RevertingSnapshot);
             File.WriteAllText(modelSnapshotFile, modelSnapshotCode, Encoding.UTF8);
@@ -375,14 +432,30 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     /// <param name="migration">The scaffolded migration.</param>
     /// <param name="outputDir">The directory to put files in. Paths are relative to the project directory.</param>
     /// <returns>The saved migrations files.</returns>
-    public virtual MigrationFiles Save(string projectDir, ScaffoldedMigration migration, string? outputDir)
+    public virtual MigrationFiles Save(
+        string projectDir,
+        ScaffoldedMigration migration,
+        string? outputDir
+    )
     {
         var lastMigrationFileName = migration.PreviousMigrationId + migration.FileExtension;
-        var migrationDirectory = outputDir ?? GetDirectory(projectDir, lastMigrationFileName, migration.MigrationSubNamespace);
-        var migrationFile = Path.Combine(migrationDirectory, migration.MigrationId + migration.FileExtension);
-        var migrationMetadataFile = Path.Combine(migrationDirectory, migration.MigrationId + ".Designer" + migration.FileExtension);
+        var migrationDirectory =
+            outputDir
+            ?? GetDirectory(projectDir, lastMigrationFileName, migration.MigrationSubNamespace);
+        var migrationFile = Path.Combine(
+            migrationDirectory,
+            migration.MigrationId + migration.FileExtension
+        );
+        var migrationMetadataFile = Path.Combine(
+            migrationDirectory,
+            migration.MigrationId + ".Designer" + migration.FileExtension
+        );
         var modelSnapshotFileName = migration.SnapshotName + migration.FileExtension;
-        var modelSnapshotDirectory = GetDirectory(projectDir, modelSnapshotFileName, migration.SnapshotSubnamespace);
+        var modelSnapshotDirectory = GetDirectory(
+            projectDir,
+            modelSnapshotFileName,
+            migration.SnapshotSubnamespace
+        );
         var modelSnapshotFile = Path.Combine(modelSnapshotDirectory, modelSnapshotFileName);
 
         Dependencies.OperationReporter.WriteVerbose(DesignStrings.WritingMigration(migrationFile));
@@ -390,7 +463,9 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         File.WriteAllText(migrationFile, migration.MigrationCode, Encoding.UTF8);
         File.WriteAllText(migrationMetadataFile, migration.MetadataCode, Encoding.UTF8);
 
-        Dependencies.OperationReporter.WriteVerbose(DesignStrings.WritingSnapshot(modelSnapshotFile));
+        Dependencies.OperationReporter.WriteVerbose(
+            DesignStrings.WritingSnapshot(modelSnapshotFile)
+        );
         Directory.CreateDirectory(modelSnapshotDirectory);
         File.WriteAllText(modelSnapshotFile, migration.SnapshotCode, Encoding.UTF8);
 
@@ -398,7 +473,7 @@ public class MigrationsScaffolder : IMigrationsScaffolder
         {
             MigrationFile = migrationFile,
             MetadataFile = migrationMetadataFile,
-            SnapshotFile = modelSnapshotFile
+            SnapshotFile = modelSnapshotFile,
         };
     }
 
@@ -415,7 +490,9 @@ public class MigrationsScaffolder : IMigrationsScaffolder
             var lastNamespace = siblingType.Namespace ?? string.Empty;
             if (lastNamespace != defaultNamespace)
             {
-                Dependencies.OperationReporter.WriteVerbose(DesignStrings.ReusingNamespace(siblingType.ShortDisplayName()));
+                Dependencies.OperationReporter.WriteVerbose(
+                    DesignStrings.ReusingNamespace(siblingType.ShortDisplayName())
+                );
 
                 return lastNamespace;
             }
@@ -434,7 +511,8 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     protected virtual string GetDirectory(
         string projectDir,
         string? siblingFileName,
-        string subnamespace)
+        string subnamespace
+    )
     {
         var defaultDirectory = Path.Combine(projectDir, Path.Combine(subnamespace.Split('.')));
 
@@ -446,7 +524,9 @@ public class MigrationsScaffolder : IMigrationsScaffolder
                 var lastDirectory = Path.GetDirectoryName(siblingPath)!;
                 if (!defaultDirectory.Equals(lastDirectory, StringComparison.OrdinalIgnoreCase))
                 {
-                    Dependencies.OperationReporter.WriteVerbose(DesignStrings.ReusingNamespace(siblingFileName));
+                    Dependencies.OperationReporter.WriteVerbose(
+                        DesignStrings.ReusingNamespace(siblingFileName)
+                    );
 
                     return lastDirectory;
                 }
@@ -462,15 +542,17 @@ public class MigrationsScaffolder : IMigrationsScaffolder
     /// <param name="projectDir">The project directory.</param>
     /// <param name="fileName">The filename.</param>
     /// <returns>The file path or null if none.</returns>
-    protected virtual string? TryGetProjectFile(string projectDir, string fileName)
-        => Directory.EnumerateFiles(projectDir, fileName, SearchOption.AllDirectories).FirstOrDefault();
+    protected virtual string? TryGetProjectFile(string projectDir, string fileName) =>
+        Directory
+            .EnumerateFiles(projectDir, fileName, SearchOption.AllDirectories)
+            .FirstOrDefault();
 
-    private bool ContainsForeignMigrations(string migrationsNamespace)
-        => (from t in Dependencies.MigrationsAssembly.Assembly.GetConstructibleTypes()
-            where t.Namespace == migrationsNamespace
-                && t.IsSubclassOf(typeof(Migration))
+    private bool ContainsForeignMigrations(string migrationsNamespace) =>
+        (
+            from t in Dependencies.MigrationsAssembly.Assembly.GetConstructibleTypes()
+            where t.Namespace == migrationsNamespace && t.IsSubclassOf(typeof(Migration))
             let contextTypeAttribute = t.GetCustomAttribute<DbContextAttribute>()
-            where contextTypeAttribute != null
-                && contextTypeAttribute.ContextType != _contextType
-            select t).Any();
+            where contextTypeAttribute != null && contextTypeAttribute.ContextType != _contextType
+            select t
+        ).Any();
 }

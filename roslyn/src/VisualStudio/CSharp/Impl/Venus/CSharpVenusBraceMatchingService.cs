@@ -18,9 +18,7 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Venus
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpVenusBraceMatchingService()
-        {
-        }
+        public CSharpVenusBraceMatchingService() { }
 
         public bool TryGetCorrespondingOpenBrace(SyntaxToken token, out SyntaxToken openBrace)
         {

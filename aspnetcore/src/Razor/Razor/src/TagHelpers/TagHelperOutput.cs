@@ -21,11 +21,8 @@ public class TagHelperOutput : IHtmlContentContainer
 
     // Internal for testing
     internal TagHelperOutput(string tagName)
-        : this(
-            tagName,
-            new TagHelperAttributeList(),
-            (useCachedResult, encoder) =>
-                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        : this(tagName, new TagHelperAttributeList(), (useCachedResult, encoder) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         ) { }
 
     /// <summary>

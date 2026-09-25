@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // compatibility behavior of the program at runtime (e.g. when executing the program
             // against a modified library). This test checks that we bind the invocation to the
             // virtual method, not the override.
-            var lib0 = @"
+            var lib0 =
+                @"
 public class Base
 {
     public virtual void M() { System.Console.WriteLine(""Base0""); }
@@ -31,9 +32,15 @@ public class Derived : Base
     public override void M() { System.Console.WriteLine(""Derived0""); }
 }
 ";
-            var lib0Image = CreateCompilationWithMscorlib46(lib0, options: TestOptions.ReleaseDll, assemblyName: "lib").EmitToImageReference();
+            var lib0Image = CreateCompilationWithMscorlib46(
+                    lib0,
+                    options: TestOptions.ReleaseDll,
+                    assemblyName: "lib"
+                )
+                .EmitToImageReference();
 
-            var lib1 = @"
+            var lib1 =
+                @"
 public class Base
 {
     public virtual void M() { System.Console.WriteLine(""Base1""); }
@@ -43,9 +50,15 @@ public class Derived : Base
     public new virtual void M() { System.Console.WriteLine(""Derived1""); }
 }
 ";
-            var lib1Image = CreateCompilationWithMscorlib46(lib1, options: TestOptions.ReleaseDll, assemblyName: "lib").EmitToImageReference();
+            var lib1Image = CreateCompilationWithMscorlib46(
+                    lib1,
+                    options: TestOptions.ReleaseDll,
+                    assemblyName: "lib"
+                )
+                .EmitToImageReference();
 
-            var client = @"
+            var client =
+                @"
 public class Client
 {
     public static void M()
@@ -55,9 +68,15 @@ public class Client
     }
 }
 ";
-            var clientImage = CreateCompilationWithMscorlib46(client, references: new[] { lib0Image }, options: TestOptions.ReleaseDll).EmitToImageReference();
+            var clientImage = CreateCompilationWithMscorlib46(
+                    client,
+                    references: new[] { lib0Image },
+                    options: TestOptions.ReleaseDll
+                )
+                .EmitToImageReference();
 
-            var program = @"
+            var program =
+                @"
 public class Program
 {
     public static void Main()
@@ -66,7 +85,11 @@ public class Program
     }
 }
 ";
-            var compilation = CreateCompilationWithMscorlib46(program, references: new[] { lib1Image, clientImage }, options: TestOptions.ReleaseExe);
+            var compilation = CreateCompilationWithMscorlib46(
+                program,
+                references: new[] { lib1Image, clientImage },
+                options: TestOptions.ReleaseExe
+            );
             CompileAndVerify(compilation, expectedOutput: @"Base1");
         }
     }

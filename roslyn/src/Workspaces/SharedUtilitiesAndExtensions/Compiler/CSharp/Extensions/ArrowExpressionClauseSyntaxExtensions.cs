@@ -16,9 +16,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ArrowExpressionClauseSyntax arrowExpression,
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression,
-            out BlockSyntax block)
+            out BlockSyntax block
+        )
         {
-            if (!arrowExpression.TryConvertToStatement(semicolonToken, createReturnStatementForExpression, out var statement))
+            if (
+                !arrowExpression.TryConvertToStatement(
+                    semicolonToken,
+                    createReturnStatementForExpression,
+                    out var statement
+                )
+            )
             {
                 block = null;
                 return false;
@@ -32,19 +39,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this ArrowExpressionClauseSyntax arrowExpression,
             SyntaxToken semicolonToken,
             bool createReturnStatementForExpression,
-            out StatementSyntax statement)
+            out StatementSyntax statement
+        )
         {
-            if (!arrowExpression.Expression.TryConvertToStatement(
-                    semicolonToken, createReturnStatementForExpression, out statement))
+            if (
+                !arrowExpression.Expression.TryConvertToStatement(
+                    semicolonToken,
+                    createReturnStatementForExpression,
+                    out statement
+                )
+            )
             {
                 return false;
             }
 
             if (arrowExpression.ArrowToken.TrailingTrivia.Any(t => t.IsSingleOrMultiLineComment()))
-                statement = statement.WithPrependedLeadingTrivia(arrowExpression.ArrowToken.TrailingTrivia);
+                statement = statement.WithPrependedLeadingTrivia(
+                    arrowExpression.ArrowToken.TrailingTrivia
+                );
 
             if (arrowExpression.ArrowToken.LeadingTrivia.Any(t => t.IsSingleOrMultiLineComment()))
-                statement = statement.WithPrependedLeadingTrivia(arrowExpression.ArrowToken.LeadingTrivia);
+                statement = statement.WithPrependedLeadingTrivia(
+                    arrowExpression.ArrowToken.LeadingTrivia
+                );
 
             return true;
         }

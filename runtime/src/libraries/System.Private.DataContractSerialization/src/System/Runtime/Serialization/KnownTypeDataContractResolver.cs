@@ -14,13 +14,22 @@ namespace System.Runtime.Serialization
 
         internal KnownTypeDataContractResolver(XmlObjectSerializerContext context)
         {
-            Debug.Assert(context != null, "KnownTypeDataContractResolver should not be instantiated with a null context");
+            Debug.Assert(
+                context != null,
+                "KnownTypeDataContractResolver should not be instantiated with a null context"
+            );
             _context = context;
         }
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override bool TryResolveType(Type type, Type? declaredType, DataContractResolver knownTypeResolver, out XmlDictionaryString? typeName, out XmlDictionaryString? typeNamespace)
+        public override bool TryResolveType(
+            Type type,
+            Type? declaredType,
+            DataContractResolver knownTypeResolver,
+            out XmlDictionaryString? typeName,
+            out XmlDictionaryString? typeNamespace
+        )
         {
             if (type == null)
             {
@@ -28,7 +37,11 @@ namespace System.Runtime.Serialization
                 typeNamespace = null;
                 return false;
             }
-            if (declaredType != null && declaredType.IsInterface && CollectionDataContract.IsCollectionInterface(declaredType))
+            if (
+                declaredType != null
+                && declaredType.IsInterface
+                && CollectionDataContract.IsCollectionInterface(declaredType)
+            )
             {
                 typeName = null;
                 typeNamespace = null;
@@ -52,11 +65,18 @@ namespace System.Runtime.Serialization
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
-        public override Type? ResolveName(string typeName, string? typeNamespace, Type? declaredType, DataContractResolver knownTypeResolver)
+        public override Type? ResolveName(
+            string typeName,
+            string? typeNamespace,
+            Type? declaredType,
+            DataContractResolver knownTypeResolver
+        )
         {
             if (typeName == null || typeNamespace == null)
                 return null;
-            return _context.ResolveNameFromKnownTypes(new XmlQualifiedName(typeName, typeNamespace));
+            return _context.ResolveNameFromKnownTypes(
+                new XmlQualifiedName(typeName, typeNamespace)
+            );
         }
     }
 }

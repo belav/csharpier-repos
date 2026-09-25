@@ -1,22 +1,30 @@
 ﻿namespace AutoMapper.IntegrationTests.ExplicitExpansion;
 
-public class ExpandCollectionsWithStrings : IntegrationTest<ExpandCollectionsWithStrings.DatabaseInitializer>
+public class ExpandCollectionsWithStrings
+    : IntegrationTest<ExpandCollectionsWithStrings.DatabaseInitializer>
 {
     TrainingCourseDto _course;
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Category, CategoryDto>();
-        cfg.CreateProjection<TrainingCourse, TrainingCourseDto>();
-        cfg.CreateProjection<TrainingContent, TrainingContentDto>().ForMember(c => c.Category, o => o.ExplicitExpansion());
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Category, CategoryDto>();
+            cfg.CreateProjection<TrainingCourse, TrainingCourseDto>();
+            cfg.CreateProjection<TrainingContent, TrainingContentDto>()
+                .ForMember(c => c.Category, o => o.ExplicitExpansion());
+        });
 
     [Fact]
     public void Should_expand_collections_items_with_strings()
     {
         using (var context = new ClientContext())
         {
-            _course = ProjectTo<TrainingCourseDto>(context.TrainingCourses, null, "Content.Category").FirstOrDefault(n => n.CourseName == "Course 1");
+            _course = ProjectTo<TrainingCourseDto>(
+                    context.TrainingCourses,
+                    null,
+                    "Content.Category"
+                )
+                .FirstOrDefault(n => n.CourseName == "Course 1");
         }
         _course.Content[0].Category.CategoryName.ShouldBe("Category 1");
     }
@@ -66,7 +74,6 @@ public class ExpandCollectionsWithStrings : IntegrationTest<ExpandCollectionsWit
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
     }
-
 
     public class TrainingCourseDto
     {

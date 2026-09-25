@@ -14,10 +14,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
 {
     public sealed class SourceTextStreamTests
     {
-        private static readonly Encoding s_utf8NoBom = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false);
+        private static readonly Encoding s_utf8NoBom = new UTF8Encoding(
+            encoderShouldEmitUTF8Identifier: false
+        );
 
         /// <summary>
-        /// In the case the destination buffer is of insufficient length to store the reading of a single 
+        /// In the case the destination buffer is of insufficient length to store the reading of a single
         /// character we will throw.  Returning 0 is not correct here as that indicates end of stream
         /// not insufficient space in destination buffer.
         /// </summary>
@@ -52,7 +54,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Text
             {
                 var buffer = new byte[baseText.Length + 1];
                 Assert.Equal(baseText.Length, stream.Read(buffer, 0, buffer.Length));
-                Assert.True(buffer.Take(baseText.Length).SequenceEqual(encoding.GetBytes(baseText)));
+                Assert.True(
+                    buffer.Take(baseText.Length).SequenceEqual(encoding.GetBytes(baseText))
+                );
 
                 Assert.Equal(3, stream.Read(buffer, 0, buffer.Length));
                 Assert.True(buffer.Take(3).SequenceEqual(encoding.GetBytes(new[] { '\u2019' })));

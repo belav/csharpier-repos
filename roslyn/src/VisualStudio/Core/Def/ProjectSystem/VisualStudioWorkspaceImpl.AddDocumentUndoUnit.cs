@@ -14,13 +14,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             public AddDocumentUndoUnit(
                 VisualStudioWorkspaceImpl workspace,
                 DocumentInfo docInfo,
-                SourceText text)
-                : base(workspace, docInfo, text)
-            {
-            }
+                SourceText text
+            )
+                : base(workspace, docInfo, text) { }
 
-            protected override Project AddDocument(Project fromProject)
-                => fromProject.AddDocument(DocumentInfo.Name, Text, DocumentInfo.Folders, DocumentInfo.FilePath).Project;
+            protected override Project AddDocument(Project fromProject) =>
+                fromProject
+                    .AddDocument(
+                        DocumentInfo.Name,
+                        Text,
+                        DocumentInfo.Folders,
+                        DocumentInfo.FilePath
+                    )
+                    .Project;
         }
     }
 }

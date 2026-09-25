@@ -18,16 +18,20 @@ namespace Microsoft.Extensions.Hosting.Tests
         public async Task StartTimeoutClass_WithValue(TimeoutService.Phase phase)
         {
             var host = new HostBuilder()
-                 .ConfigureServices((hostContext, services) =>
-                 {
-                     services.AddHostedService((token) => new TimeoutService(phase));
-                     services.Configure<HostOptions>((opts) =>
-                     {
-                         opts.StartupTimeout = s_shortDelay;
-                     });
-                 })
-                 .UseConsoleLifetime()
-                 .Build();
+                .ConfigureServices(
+                    (hostContext, services) =>
+                    {
+                        services.AddHostedService((token) => new TimeoutService(phase));
+                        services.Configure<HostOptions>(
+                            (opts) =>
+                            {
+                                opts.StartupTimeout = s_shortDelay;
+                            }
+                        );
+                    }
+                )
+                .UseConsoleLifetime()
+                .Build();
 
             await Assert.ThrowsAsync<TaskCanceledException>(async () => await host.StartAsync());
         }
@@ -38,17 +42,21 @@ namespace Microsoft.Extensions.Hosting.Tests
         public async Task StartTimeoutClass_WithValue_Concurrently(TimeoutService.Phase phase)
         {
             var host = new HostBuilder()
-                 .ConfigureServices((hostContext, services) =>
-                 {
-                     services.AddHostedService((token) => new TimeoutService(phase));
-                     services.Configure<HostOptions>((opts) =>
-                     {
-                         opts.StartupTimeout = s_shortDelay;
-                         opts.ServicesStartConcurrently = true;
-                     });
-                 })
-                 .UseConsoleLifetime()
-                 .Build();
+                .ConfigureServices(
+                    (hostContext, services) =>
+                    {
+                        services.AddHostedService((token) => new TimeoutService(phase));
+                        services.Configure<HostOptions>(
+                            (opts) =>
+                            {
+                                opts.StartupTimeout = s_shortDelay;
+                                opts.ServicesStartConcurrently = true;
+                            }
+                        );
+                    }
+                )
+                .UseConsoleLifetime()
+                .Build();
 
             await Assert.ThrowsAsync<TaskCanceledException>(async () => await host.StartAsync());
         }
@@ -61,16 +69,20 @@ namespace Microsoft.Extensions.Hosting.Tests
         public async Task StopTimeoutClass_WithValue(TimeoutService.Phase phase)
         {
             var host = new HostBuilder()
-                 .ConfigureServices((hostContext, services) =>
-                 {
-                     services.AddHostedService((token) => new TimeoutService(phase));
-                     services.Configure<HostOptions>((opts) =>
-                     {
-                         opts.ShutdownTimeout = s_shortDelay;
-                     });
-                 })
-                 .UseConsoleLifetime()
-                 .Build();
+                .ConfigureServices(
+                    (hostContext, services) =>
+                    {
+                        services.AddHostedService((token) => new TimeoutService(phase));
+                        services.Configure<HostOptions>(
+                            (opts) =>
+                            {
+                                opts.ShutdownTimeout = s_shortDelay;
+                            }
+                        );
+                    }
+                )
+                .UseConsoleLifetime()
+                .Build();
 
             await host.StartAsync();
             await Assert.ThrowsAsync<TaskCanceledException>(async () => await host.StopAsync());
@@ -82,17 +94,21 @@ namespace Microsoft.Extensions.Hosting.Tests
         public async Task StopTimeoutClass_WithValue_Concurrently(TimeoutService.Phase phase)
         {
             var host = new HostBuilder()
-                 .ConfigureServices((hostContext, services) =>
-                 {
-                     services.AddHostedService((token) => new TimeoutService(phase));
-                     services.Configure<HostOptions>((opts) =>
-                     {
-                         opts.ShutdownTimeout = s_shortDelay;
-                         opts.ServicesStopConcurrently = true;
-                     });
-                 })
-                 .UseConsoleLifetime()
-                 .Build();
+                .ConfigureServices(
+                    (hostContext, services) =>
+                    {
+                        services.AddHostedService((token) => new TimeoutService(phase));
+                        services.Configure<HostOptions>(
+                            (opts) =>
+                            {
+                                opts.ShutdownTimeout = s_shortDelay;
+                                opts.ServicesStopConcurrently = true;
+                            }
+                        );
+                    }
+                )
+                .UseConsoleLifetime()
+                .Build();
 
             await host.StartAsync();
             await Assert.ThrowsAsync<TaskCanceledException>(async () => await host.StopAsync());
@@ -162,7 +178,7 @@ namespace Microsoft.Extensions.Hosting.Tests
                 Started,
                 Stopping,
                 Stop,
-                Stopped
+                Stopped,
             }
         }
     }

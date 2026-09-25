@@ -24,11 +24,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
         SemanticDocument document,
         TextSpan textSpan,
         ExtractMethodOptions options,
-        bool localFunction) : SelectionValidator<CSharpSelectionResult, StatementSyntax>(document, textSpan, options)
+        bool localFunction
+    ) : SelectionValidator<CSharpSelectionResult, StatementSyntax>(document, textSpan, options)
     {
         private readonly bool _localFunction = localFunction;
 
-        public override async Task<(CSharpSelectionResult, OperationStatus)> GetValidSelectionAsync(CancellationToken cancellationToken)
+        public override async Task<(CSharpSelectionResult, OperationStatus)> GetValidSelectionAsync(
+            CancellationToken cancellationToken
+        )
         {
             if (!ContainsValidSelection)
                 return (null, OperationStatus.FailedWithUnknownReason);
@@ -41,9 +44,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             // go through pipe line and calculate information about the user selection
             var selectionInfo = GetInitialSelectionInfo(root, text);
             selectionInfo = AssignInitialFinalTokens(selectionInfo, root, cancellationToken);
-            selectionInfo = AdjustFinalTokensBasedOnContext(selectionInfo, model, cancellationToken);
+            selectionInfo = AdjustFinalTokensBasedOnContext(
+                selectionInfo,
+                model,
+                cancellationToken
+            );
             selectionInfo = AssignFinalSpan(selectionInfo, text);
-            selectionInfo = ApplySpecialCases(selectionInfo, text, SemanticDocument.SyntaxTree.Options, _localFunction);
+            selectionInfo = ApplySpecialCases(
+                selectionInfo,
+                text,
+                SemanticDocument.SyntaxTree.Options,
+                _localFunction
+            );
             selectionInfo = CheckErrorCasesAndAppendDescriptions(selectionInfo, root);
 
             // there was a fatal error that we couldn't even do negative preview, return error result
@@ -53,66 +65,115 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             var controlFlowSpan = GetControlFlowSpan(selectionInfo);
             if (!selectionInfo.SelectionInExpression)
             {
-                var statementRange = GetStatementRangeContainedInSpan<StatementSyntax>(root, controlFlowSpan, cancellationToken);
+                var statementRange = GetStatementRangeContainedInSpan<StatementSyntax>(
+                    root,
+                    controlFlowSpan,
+                    cancellationToken
+                );
                 if (statementRange == null)
                 {
-                    selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.Cannot_determine_valid_range_of_statements_to_extract));
+                    selectionInfo = selectionInfo.WithStatus(s =>
+                        s.With(
+                            succeeded: false,
+                            CSharpFeaturesResources.Cannot_determine_valid_range_of_statements_to_extract
+                        )
+                    );
                     return (null, selectionInfo.Status);
                 }
 
-                var isFinalSpanSemanticallyValid = IsFinalSpanSemanticallyValidSpan(model, controlFlowSpan, statementRange.Value, cancellationToken);
+                var isFinalSpanSemanticallyValid = IsFinalSpanSemanticallyValidSpan(
+                    model,
+                    controlFlowSpan,
+                    statementRange.Value,
+                    cancellationToken
+                );
                 if (!isFinalSpanSemanticallyValid)
                 {
                     // check control flow only if we are extracting statement level, not expression
                     // level. you can not have goto that moves control out of scope in expression level
                     // (even in lambda)
-                    selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: true, CSharpFeaturesResources.Not_all_code_paths_return));
+                    selectionInfo = selectionInfo.WithStatus(s =>
+                        s.With(succeeded: true, CSharpFeaturesResources.Not_all_code_paths_return)
+                    );
                 }
             }
 
-            var selectionChanged = selectionInfo.FirstTokenInOriginalSpan != selectionInfo.FirstTokenInFinalSpan || selectionInfo.LastTokenInOriginalSpan != selectionInfo.LastTokenInFinalSpan;
+            var selectionChanged =
+                selectionInfo.FirstTokenInOriginalSpan != selectionInfo.FirstTokenInFinalSpan
+                || selectionInfo.LastTokenInOriginalSpan != selectionInfo.LastTokenInFinalSpan;
 
-            var result = await CSharpSelectionResult.CreateAsync(
-                selectionInfo.OriginalSpan,
-                selectionInfo.FinalSpan,
-                Options,
-                selectionInfo.SelectionInExpression,
-                doc,
-                selectionInfo.FirstTokenInFinalSpan,
-                selectionInfo.LastTokenInFinalSpan,
-                selectionChanged,
-                cancellationToken).ConfigureAwait(false);
+            var result = await CSharpSelectionResult
+                .CreateAsync(
+                    selectionInfo.OriginalSpan,
+                    selectionInfo.FinalSpan,
+                    Options,
+                    selectionInfo.SelectionInExpression,
+                    doc,
+                    selectionInfo.FirstTokenInFinalSpan,
+                    selectionInfo.LastTokenInFinalSpan,
+                    selectionChanged,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return (result, selectionInfo.Status);
         }
 
-        private SelectionInfo ApplySpecialCases(SelectionInfo selectionInfo, SourceText text, ParseOptions options, bool localFunction)
+        private SelectionInfo ApplySpecialCases(
+            SelectionInfo selectionInfo,
+            SourceText text,
+            ParseOptions options,
+            bool localFunction
+        )
         {
             if (selectionInfo.Status.Failed)
                 return selectionInfo;
 
-            if (selectionInfo.CommonRootFromOriginalSpan.IsKind(SyntaxKind.CompilationUnit)
-                || selectionInfo.CommonRootFromOriginalSpan.IsParentKind(SyntaxKind.GlobalStatement))
+            if (
+                selectionInfo.CommonRootFromOriginalSpan.IsKind(SyntaxKind.CompilationUnit)
+                || selectionInfo.CommonRootFromOriginalSpan.IsParentKind(SyntaxKind.GlobalStatement)
+            )
             {
                 // Cannot extract a local function from a global statement in script code
                 if (localFunction && options is { Kind: SourceCodeKind.Script })
                 {
-                    return selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.Selection_cannot_include_global_statements));
+                    return selectionInfo.WithStatus(s =>
+                        s.With(
+                            succeeded: false,
+                            CSharpFeaturesResources.Selection_cannot_include_global_statements
+                        )
+                    );
                 }
 
                 // Cannot extract a method from a top-level statement in normal code
                 if (!localFunction && options is { Kind: SourceCodeKind.Regular })
                 {
-                    return selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.Selection_cannot_include_top_level_statements));
+                    return selectionInfo.WithStatus(s =>
+                        s.With(
+                            succeeded: false,
+                            CSharpFeaturesResources.Selection_cannot_include_top_level_statements
+                        )
+                    );
                 }
             }
 
             if (_localFunction)
             {
-                foreach (var ancestor in selectionInfo.CommonRootFromOriginalSpan.AncestorsAndSelf())
+                foreach (
+                    var ancestor in selectionInfo.CommonRootFromOriginalSpan.AncestorsAndSelf()
+                )
                 {
-                    if (ancestor.Kind() is SyntaxKind.BaseConstructorInitializer or SyntaxKind.ThisConstructorInitializer)
+                    if (
+                        ancestor.Kind()
+                        is SyntaxKind.BaseConstructorInitializer
+                            or SyntaxKind.ThisConstructorInitializer
+                    )
                     {
-                        return selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.Selection_cannot_be_in_constructor_initializer));
+                        return selectionInfo.WithStatus(s =>
+                            s.With(
+                                succeeded: false,
+                                CSharpFeaturesResources.Selection_cannot_be_in_constructor_initializer
+                            )
+                        );
                     }
 
                     if (ancestor is AnonymousFunctionExpressionSyntax)
@@ -127,7 +188,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return selectionInfo;
             }
 
-            var expressionNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
+            var expressionNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
+                selectionInfo.LastTokenInFinalSpan
+            );
             if (!expressionNode.IsAnyAssignExpression())
             {
                 return selectionInfo;
@@ -141,18 +204,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return selectionInfo;
             }
 
-            return AssignFinalSpan(selectionInfo.With(s => s.FirstTokenInFinalSpan = assign.Right.GetFirstToken(includeZeroWidth: true))
-                                                .With(s => s.LastTokenInFinalSpan = assign.Right.GetLastToken(includeZeroWidth: true)),
-                                   text);
+            return AssignFinalSpan(
+                selectionInfo
+                    .With(s =>
+                        s.FirstTokenInFinalSpan = assign.Right.GetFirstToken(includeZeroWidth: true)
+                    )
+                    .With(s =>
+                        s.LastTokenInFinalSpan = assign.Right.GetLastToken(includeZeroWidth: true)
+                    ),
+                text
+            );
         }
 
-        private static TextSpan GetControlFlowSpan(SelectionInfo selectionInfo)
-            => TextSpan.FromBounds(selectionInfo.FirstTokenInFinalSpan.SpanStart, selectionInfo.LastTokenInFinalSpan.Span.End);
+        private static TextSpan GetControlFlowSpan(SelectionInfo selectionInfo) =>
+            TextSpan.FromBounds(
+                selectionInfo.FirstTokenInFinalSpan.SpanStart,
+                selectionInfo.LastTokenInFinalSpan.Span.End
+            );
 
         private static SelectionInfo AdjustFinalTokensBasedOnContext(
             SelectionInfo selectionInfo,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (selectionInfo.Status.Failed)
                 return selectionInfo;
@@ -164,7 +238,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // get the node that covers the selection
-            var node = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
+            var node = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
+                selectionInfo.LastTokenInFinalSpan
+            );
 
             var validNode = Check(semanticModel, node, cancellationToken);
             if (validNode)
@@ -172,54 +248,95 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return selectionInfo;
             }
 
-            var firstValidNode = node.GetAncestors<SyntaxNode>().FirstOrDefault(n => Check(semanticModel, n, cancellationToken));
+            var firstValidNode = node.GetAncestors<SyntaxNode>()
+                .FirstOrDefault(n => Check(semanticModel, n, cancellationToken));
             if (firstValidNode == null)
             {
                 // couldn't find any valid node
-                return selectionInfo.WithStatus(s => new OperationStatus(succeeded: false, CSharpFeaturesResources.Selection_does_not_contain_a_valid_node))
-                                    .With(s => s.FirstTokenInFinalSpan = default)
-                                    .With(s => s.LastTokenInFinalSpan = default);
+                return selectionInfo
+                    .WithStatus(s => new OperationStatus(
+                        succeeded: false,
+                        CSharpFeaturesResources.Selection_does_not_contain_a_valid_node
+                    ))
+                    .With(s => s.FirstTokenInFinalSpan = default)
+                    .With(s => s.LastTokenInFinalSpan = default);
             }
 
-            firstValidNode = (firstValidNode.Parent is ExpressionStatementSyntax) ? firstValidNode.Parent : firstValidNode;
+            firstValidNode =
+                (firstValidNode.Parent is ExpressionStatementSyntax)
+                    ? firstValidNode.Parent
+                    : firstValidNode;
 
-            return selectionInfo.With(s => s.SelectionInExpression = firstValidNode is ExpressionSyntax)
-                                .With(s => s.SelectionInSingleStatement = firstValidNode is StatementSyntax)
-                                .With(s => s.FirstTokenInFinalSpan = firstValidNode.GetFirstToken(includeZeroWidth: true))
-                                .With(s => s.LastTokenInFinalSpan = firstValidNode.GetLastToken(includeZeroWidth: true));
+            return selectionInfo
+                .With(s => s.SelectionInExpression = firstValidNode is ExpressionSyntax)
+                .With(s => s.SelectionInSingleStatement = firstValidNode is StatementSyntax)
+                .With(s =>
+                    s.FirstTokenInFinalSpan = firstValidNode.GetFirstToken(includeZeroWidth: true)
+                )
+                .With(s =>
+                    s.LastTokenInFinalSpan = firstValidNode.GetLastToken(includeZeroWidth: true)
+                );
         }
 
         private SelectionInfo GetInitialSelectionInfo(SyntaxNode root, SourceText text)
         {
             var adjustedSpan = GetAdjustedSpan(text, OriginalSpan);
 
-            var firstTokenInSelection = root.FindTokenOnRightOfPosition(adjustedSpan.Start, includeSkipped: false);
-            var lastTokenInSelection = root.FindTokenOnLeftOfPosition(adjustedSpan.End, includeSkipped: false);
+            var firstTokenInSelection = root.FindTokenOnRightOfPosition(
+                adjustedSpan.Start,
+                includeSkipped: false
+            );
+            var lastTokenInSelection = root.FindTokenOnLeftOfPosition(
+                adjustedSpan.End,
+                includeSkipped: false
+            );
 
-            if (firstTokenInSelection.Kind() == SyntaxKind.None || lastTokenInSelection.Kind() == SyntaxKind.None)
-            {
-                return new SelectionInfo { Status = new OperationStatus(succeeded: false, FeaturesResources.Invalid_selection), OriginalSpan = adjustedSpan };
-            }
-
-            if (!adjustedSpan.Contains(firstTokenInSelection.Span) && !adjustedSpan.Contains(lastTokenInSelection.Span))
+            if (
+                firstTokenInSelection.Kind() == SyntaxKind.None
+                || lastTokenInSelection.Kind() == SyntaxKind.None
+            )
             {
                 return new SelectionInfo
                 {
-                    Status = new OperationStatus(succeeded: false, FeaturesResources.Selection_does_not_contain_a_valid_token),
+                    Status = new OperationStatus(
+                        succeeded: false,
+                        FeaturesResources.Invalid_selection
+                    ),
                     OriginalSpan = adjustedSpan,
-                    FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
                 };
             }
 
-            if (!firstTokenInSelection.UnderValidContext() || !lastTokenInSelection.UnderValidContext())
+            if (
+                !adjustedSpan.Contains(firstTokenInSelection.Span)
+                && !adjustedSpan.Contains(lastTokenInSelection.Span)
+            )
             {
                 return new SelectionInfo
                 {
-                    Status = new OperationStatus(succeeded: false, FeaturesResources.No_valid_selection_to_perform_extraction),
+                    Status = new OperationStatus(
+                        succeeded: false,
+                        FeaturesResources.Selection_does_not_contain_a_valid_token
+                    ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
+                };
+            }
+
+            if (
+                !firstTokenInSelection.UnderValidContext()
+                || !lastTokenInSelection.UnderValidContext()
+            )
+            {
+                return new SelectionInfo
+                {
+                    Status = new OperationStatus(
+                        succeeded: false,
+                        FeaturesResources.No_valid_selection_to_perform_extraction
+                    ),
+                    OriginalSpan = adjustedSpan,
+                    FirstTokenInOriginalSpan = firstTokenInSelection,
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -229,10 +346,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 return new SelectionInfo
                 {
-                    Status = new OperationStatus(succeeded: false, FeaturesResources.No_common_root_node_for_extraction),
+                    Status = new OperationStatus(
+                        succeeded: false,
+                        FeaturesResources.No_common_root_node_for_extraction
+                    ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -240,10 +360,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 return new SelectionInfo
                 {
-                    Status = new OperationStatus(succeeded: false, FeaturesResources.Selection_not_contained_inside_a_type),
+                    Status = new OperationStatus(
+                        succeeded: false,
+                        FeaturesResources.Selection_not_contained_inside_a_type
+                    ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -252,10 +375,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             {
                 return new SelectionInfo
                 {
-                    Status = new OperationStatus(succeeded: false, FeaturesResources.No_valid_selection_to_perform_extraction),
+                    Status = new OperationStatus(
+                        succeeded: false,
+                        FeaturesResources.No_valid_selection_to_perform_extraction
+                    ),
                     OriginalSpan = adjustedSpan,
                     FirstTokenInOriginalSpan = firstTokenInSelection,
-                    LastTokenInOriginalSpan = lastTokenInSelection
+                    LastTokenInOriginalSpan = lastTokenInSelection,
                 };
             }
 
@@ -266,70 +392,123 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 CommonRootFromOriginalSpan = commonRoot,
                 SelectionInExpression = selectionInExpression,
                 FirstTokenInOriginalSpan = firstTokenInSelection,
-                LastTokenInOriginalSpan = lastTokenInSelection
+                LastTokenInOriginalSpan = lastTokenInSelection,
             };
         }
 
         private static SelectionInfo CheckErrorCasesAndAppendDescriptions(
             SelectionInfo selectionInfo,
-            SyntaxNode root)
+            SyntaxNode root
+        )
         {
             if (selectionInfo.Status.Failed)
                 return selectionInfo;
 
-            if (selectionInfo.FirstTokenInFinalSpan.IsMissing || selectionInfo.LastTokenInFinalSpan.IsMissing)
+            if (
+                selectionInfo.FirstTokenInFinalSpan.IsMissing
+                || selectionInfo.LastTokenInFinalSpan.IsMissing
+            )
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.Contains_invalid_selection));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(succeeded: false, CSharpFeaturesResources.Contains_invalid_selection)
+                );
             }
 
             // get the node that covers the selection
-            var commonNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(selectionInfo.LastTokenInFinalSpan);
+            var commonNode = selectionInfo.FirstTokenInFinalSpan.GetCommonRoot(
+                selectionInfo.LastTokenInFinalSpan
+            );
 
-            if ((selectionInfo.SelectionInExpression || selectionInfo.SelectionInSingleStatement) && commonNode.HasDiagnostics())
+            if (
+                (selectionInfo.SelectionInExpression || selectionInfo.SelectionInSingleStatement)
+                && commonNode.HasDiagnostics()
+            )
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.The_selection_contains_syntactic_errors));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.The_selection_contains_syntactic_errors
+                    )
+                );
             }
 
             var tokens = root.DescendantTokens(selectionInfo.FinalSpan);
             if (tokens.ContainPreprocessorCrossOver(selectionInfo.FinalSpan))
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: true, CSharpFeaturesResources.Selection_can_not_cross_over_preprocessor_directives));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: true,
+                        CSharpFeaturesResources.Selection_can_not_cross_over_preprocessor_directives
+                    )
+                );
             }
 
             // TODO : check whether this can be handled by control flow analysis engine
             if (tokens.Any(t => t.Kind() == SyntaxKind.YieldKeyword))
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: true, CSharpFeaturesResources.Selection_can_not_contain_a_yield_statement));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: true,
+                        CSharpFeaturesResources.Selection_can_not_contain_a_yield_statement
+                    )
+                );
             }
 
             // TODO : check behavior of control flow analysis engine around exception and exception handling.
             if (tokens.ContainArgumentlessThrowWithoutEnclosingCatch(selectionInfo.FinalSpan))
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: true, CSharpFeaturesResources.Selection_can_not_contain_throw_statement));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: true,
+                        CSharpFeaturesResources.Selection_can_not_contain_throw_statement
+                    )
+                );
             }
 
-            if (selectionInfo.SelectionInExpression && commonNode.PartOfConstantInitializerExpression())
+            if (
+                selectionInfo.SelectionInExpression
+                && commonNode.PartOfConstantInitializerExpression()
+            )
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.Selection_can_not_be_part_of_constant_initializer_expression));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.Selection_can_not_be_part_of_constant_initializer_expression
+                    )
+                );
             }
 
             if (commonNode.IsUnsafeContext())
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(s.Succeeded, CSharpFeaturesResources.The_selected_code_is_inside_an_unsafe_context));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        s.Succeeded,
+                        CSharpFeaturesResources.The_selected_code_is_inside_an_unsafe_context
+                    )
+                );
             }
 
             // For now patterns are being blanket disabled for extract method.  This issue covers designing extractions for them
-            // and re-enabling this. 
+            // and re-enabling this.
             // https://github.com/dotnet/roslyn/issues/9244
             if (commonNode.Kind() == SyntaxKind.IsPatternExpression)
             {
-                selectionInfo = selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.Selection_can_not_contain_a_pattern_expression));
+                selectionInfo = selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.Selection_can_not_contain_a_pattern_expression
+                    )
+                );
             }
 
             return selectionInfo;
         }
 
-        private static SelectionInfo AssignInitialFinalTokens(SelectionInfo selectionInfo, SyntaxNode root, CancellationToken cancellationToken)
+        private static SelectionInfo AssignInitialFinalTokens(
+            SelectionInfo selectionInfo,
+            SyntaxNode root,
+            CancellationToken cancellationToken
+        )
         {
             if (selectionInfo.Status.Failed)
                 return selectionInfo;
@@ -337,18 +516,37 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             if (selectionInfo.SelectionInExpression)
             {
                 // simple expression case
-                return selectionInfo.With(s => s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetFirstToken(includeZeroWidth: true))
-                                    .With(s => s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetLastToken(includeZeroWidth: true));
+                return selectionInfo
+                    .With(s =>
+                        s.FirstTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetFirstToken(
+                            includeZeroWidth: true
+                        )
+                    )
+                    .With(s =>
+                        s.LastTokenInFinalSpan = s.CommonRootFromOriginalSpan.GetLastToken(
+                            includeZeroWidth: true
+                        )
+                    );
             }
 
             var range = GetStatementRangeContainingSpan<StatementSyntax>(
                 CSharpSyntaxFacts.Instance,
-                root, TextSpan.FromBounds(selectionInfo.FirstTokenInOriginalSpan.SpanStart, selectionInfo.LastTokenInOriginalSpan.Span.End),
-                cancellationToken);
+                root,
+                TextSpan.FromBounds(
+                    selectionInfo.FirstTokenInOriginalSpan.SpanStart,
+                    selectionInfo.LastTokenInOriginalSpan.Span.End
+                ),
+                cancellationToken
+            );
 
             if (range == null)
             {
-                return selectionInfo.WithStatus(s => s.With(succeeded: false, CSharpFeaturesResources.No_valid_statement_range_to_extract));
+                return selectionInfo.WithStatus(s =>
+                    s.With(
+                        succeeded: false,
+                        CSharpFeaturesResources.No_valid_statement_range_to_extract
+                    )
+                );
             }
 
             var statement1 = range.Value.Item1;
@@ -357,23 +555,41 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             if (statement1 == statement2)
             {
                 // check one more time to see whether it is an expression case
-                var expression = selectionInfo.CommonRootFromOriginalSpan.GetAncestor<ExpressionSyntax>();
+                var expression =
+                    selectionInfo.CommonRootFromOriginalSpan.GetAncestor<ExpressionSyntax>();
                 if (expression != null && statement1.Span.Contains(expression.Span))
                 {
-                    return selectionInfo.With(s => s.SelectionInExpression = true)
-                                        .With(s => s.FirstTokenInFinalSpan = expression.GetFirstToken(includeZeroWidth: true))
-                                        .With(s => s.LastTokenInFinalSpan = expression.GetLastToken(includeZeroWidth: true));
+                    return selectionInfo
+                        .With(s => s.SelectionInExpression = true)
+                        .With(s =>
+                            s.FirstTokenInFinalSpan = expression.GetFirstToken(
+                                includeZeroWidth: true
+                            )
+                        )
+                        .With(s =>
+                            s.LastTokenInFinalSpan = expression.GetLastToken(includeZeroWidth: true)
+                        );
                 }
 
                 // single statement case
-                return selectionInfo.With(s => s.SelectionInSingleStatement = true)
-                                    .With(s => s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true))
-                                    .With(s => s.LastTokenInFinalSpan = statement1.GetLastToken(includeZeroWidth: true));
+                return selectionInfo
+                    .With(s => s.SelectionInSingleStatement = true)
+                    .With(s =>
+                        s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
+                    )
+                    .With(s =>
+                        s.LastTokenInFinalSpan = statement1.GetLastToken(includeZeroWidth: true)
+                    );
             }
 
             // move only statements inside of the block
-            return selectionInfo.With(s => s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true))
-                                .With(s => s.LastTokenInFinalSpan = statement2.GetLastToken(includeZeroWidth: true));
+            return selectionInfo
+                .With(s =>
+                    s.FirstTokenInFinalSpan = statement1.GetFirstToken(includeZeroWidth: true)
+                )
+                .With(s =>
+                    s.LastTokenInFinalSpan = statement2.GetLastToken(includeZeroWidth: true)
+                );
         }
 
         private static SelectionInfo AssignFinalSpan(SelectionInfo selectionInfo, SourceText text)
@@ -382,40 +598,68 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return selectionInfo;
 
             // set final span
-            var start = (selectionInfo.FirstTokenInOriginalSpan == selectionInfo.FirstTokenInFinalSpan)
-                            ? Math.Min(selectionInfo.FirstTokenInOriginalSpan.SpanStart, selectionInfo.OriginalSpan.Start)
-                            : selectionInfo.FirstTokenInFinalSpan.FullSpan.Start;
+            var start =
+                (selectionInfo.FirstTokenInOriginalSpan == selectionInfo.FirstTokenInFinalSpan)
+                    ? Math.Min(
+                        selectionInfo.FirstTokenInOriginalSpan.SpanStart,
+                        selectionInfo.OriginalSpan.Start
+                    )
+                    : selectionInfo.FirstTokenInFinalSpan.FullSpan.Start;
 
-            var end = (selectionInfo.LastTokenInOriginalSpan == selectionInfo.LastTokenInFinalSpan)
-                            ? Math.Max(selectionInfo.LastTokenInOriginalSpan.Span.End, selectionInfo.OriginalSpan.End)
-                            : selectionInfo.LastTokenInFinalSpan.FullSpan.End;
+            var end =
+                (selectionInfo.LastTokenInOriginalSpan == selectionInfo.LastTokenInFinalSpan)
+                    ? Math.Max(
+                        selectionInfo.LastTokenInOriginalSpan.Span.End,
+                        selectionInfo.OriginalSpan.End
+                    )
+                    : selectionInfo.LastTokenInFinalSpan.FullSpan.End;
 
-            return selectionInfo.With(s => s.FinalSpan = GetAdjustedSpan(text, TextSpan.FromBounds(start, end)));
+            return selectionInfo.With(s =>
+                s.FinalSpan = GetAdjustedSpan(text, TextSpan.FromBounds(start, end))
+            );
         }
 
-        public override bool ContainsNonReturnExitPointsStatements(IEnumerable<SyntaxNode> jumpsOutOfRegion)
-            => jumpsOutOfRegion.Where(n => n is not ReturnStatementSyntax).Any();
+        public override bool ContainsNonReturnExitPointsStatements(
+            IEnumerable<SyntaxNode> jumpsOutOfRegion
+        ) => jumpsOutOfRegion.Where(n => n is not ReturnStatementSyntax).Any();
 
-        public override IEnumerable<SyntaxNode> GetOuterReturnStatements(SyntaxNode commonRoot, IEnumerable<SyntaxNode> jumpsOutOfRegion)
+        public override IEnumerable<SyntaxNode> GetOuterReturnStatements(
+            SyntaxNode commonRoot,
+            IEnumerable<SyntaxNode> jumpsOutOfRegion
+        )
         {
             var returnStatements = jumpsOutOfRegion.Where(s => s is ReturnStatementSyntax);
 
-            var container = commonRoot.GetAncestorsOrThis<SyntaxNode>().Where(a => a.IsReturnableConstruct()).FirstOrDefault();
+            var container = commonRoot
+                .GetAncestorsOrThis<SyntaxNode>()
+                .Where(a => a.IsReturnableConstruct())
+                .FirstOrDefault();
             if (container == null)
             {
                 return SpecializedCollections.EmptyEnumerable<SyntaxNode>();
             }
 
-            var returnableConstructPairs = returnStatements.Select(r => (r, r.GetAncestors<SyntaxNode>().Where(a => a.IsReturnableConstruct()).FirstOrDefault()))
-                                                           .Where(p => p.Item2 != null);
+            var returnableConstructPairs = returnStatements
+                .Select(r =>
+                    (
+                        r,
+                        r.GetAncestors<SyntaxNode>()
+                            .Where(a => a.IsReturnableConstruct())
+                            .FirstOrDefault()
+                    )
+                )
+                .Where(p => p.Item2 != null);
 
             // now filter return statements to only include the one under outmost container
             return returnableConstructPairs.Where(p => p.Item2 == container).Select(p => p.Item1);
         }
 
         public override bool IsFinalSpanSemanticallyValidSpan(
-            SyntaxNode root, TextSpan textSpan,
-            IEnumerable<SyntaxNode> returnStatements, CancellationToken cancellationToken)
+            SyntaxNode root,
+            TextSpan textSpan,
+            IEnumerable<SyntaxNode> returnStatements,
+            CancellationToken cancellationToken
+        )
         {
             // return statement shouldn't contain any return value
             if (returnStatements.Cast<ReturnStatementSyntax>().Any(r => r.Expression != null))
@@ -429,7 +673,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
                 return false;
             }
 
-            var container = lastToken.GetAncestors<SyntaxNode>().FirstOrDefault(n => n.IsReturnableConstruct());
+            var container = lastToken
+                .GetAncestors<SyntaxNode>()
+                .FirstOrDefault(n => n.IsReturnableConstruct());
             if (container == null)
             {
                 return false;
@@ -463,8 +709,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExtractMethod
             }
 
             // make sure this method doesn't have return type.
-            return method.ReturnType is PredefinedTypeSyntax p &&
-                p.Keyword.Kind() == SyntaxKind.VoidKeyword;
+            return method.ReturnType is PredefinedTypeSyntax p
+                && p.Keyword.Kind() == SyntaxKind.VoidKeyword;
         }
 
         private static TextSpan GetAdjustedSpan(SourceText text, TextSpan textSpan)

@@ -13,14 +13,25 @@ namespace System.ServiceModel.Discovery
         TimeoutHelper TimeoutHelper { get; }
         ServiceDiscoveryMode DiscoveryMode { get; }
 
-        IAsyncResult BeginSendFindResponse(Collection<EndpointDiscoveryMetadata> matchingEndpoints, AsyncCallback callback, object state);
+        IAsyncResult BeginSendFindResponse(
+            Collection<EndpointDiscoveryMetadata> matchingEndpoints,
+            AsyncCallback callback,
+            object state
+        );
         void EndSendFindResponse(IAsyncResult result);
 
-        IAsyncResult BeginSendResolveResponse(EndpointDiscoveryMetadata matchingEndpoint, AsyncCallback callback, object state);
+        IAsyncResult BeginSendResolveResponse(
+            EndpointDiscoveryMetadata matchingEndpoint,
+            AsyncCallback callback,
+            object state
+        );
         void EndSendResolveResponse(IAsyncResult result);
 
-        IAsyncResult BeginSendProxyAnnouncements(Collection<EndpointDiscoveryMetadata> proxyAnnouncementEndpoints, AsyncCallback callback, object state);
-        void EndSendProxyAnnouncements(IAsyncResult result);        
+        IAsyncResult BeginSendProxyAnnouncements(
+            Collection<EndpointDiscoveryMetadata> proxyAnnouncementEndpoints,
+            AsyncCallback callback,
+            object state
+        );
+        void EndSendProxyAnnouncements(IAsyncResult result);
     }
-
 }

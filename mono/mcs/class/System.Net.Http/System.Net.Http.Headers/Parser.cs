@@ -26,183 +26,209 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Net.Mail;
-using System.Globalization;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Net.Mail;
 
 namespace System.Net.Http.Headers
 {
-	static class Parser
-	{
-		public static class Token
-		{
-			public static bool TryParse (string input, out string result)
-			{
-				if (input != null && Lexer.IsValidToken (input)) {
-					result = input;
-					return true;
-				}
+    static class Parser
+    {
+        public static class Token
+        {
+            public static bool TryParse(string input, out string result)
+            {
+                if (input != null && Lexer.IsValidToken(input))
+                {
+                    result = input;
+                    return true;
+                }
 
-				result = null;
-				return false;
-			}
+                result = null;
+                return false;
+            }
 
-			public static void Check (string s)
-			{
-				if (s == null)
-					throw new ArgumentNullException ();
+            public static void Check(string s)
+            {
+                if (s == null)
+                    throw new ArgumentNullException();
 
-				if (!Lexer.IsValidToken (s)) {
-					if (s.Length == 0)
-						throw new ArgumentException ();
+                if (!Lexer.IsValidToken(s))
+                {
+                    if (s.Length == 0)
+                        throw new ArgumentException();
 
-					throw new FormatException (s);
-				}
-			}
+                    throw new FormatException(s);
+                }
+            }
 
-			public static bool TryCheck (string s)
-			{
-				if (s == null)
-					return false;
+            public static bool TryCheck(string s)
+            {
+                if (s == null)
+                    return false;
 
-				return Lexer.IsValidToken (s);
-			}
+                return Lexer.IsValidToken(s);
+            }
 
-			public static void CheckQuotedString (string s)
-			{
-				if (s == null)
-					throw new ArgumentNullException ();
+            public static void CheckQuotedString(string s)
+            {
+                if (s == null)
+                    throw new ArgumentNullException();
 
-				var lexer = new Lexer (s);
-				if (lexer.Scan () == Headers.Token.Type.QuotedString && lexer.Scan () == Headers.Token.Type.End)
-					return;
+                var lexer = new Lexer(s);
+                if (
+                    lexer.Scan() == Headers.Token.Type.QuotedString
+                    && lexer.Scan() == Headers.Token.Type.End
+                )
+                    return;
 
-				if (s.Length == 0)
-					throw new ArgumentException ();
+                if (s.Length == 0)
+                    throw new ArgumentException();
 
-				throw new FormatException (s);
-			}
+                throw new FormatException(s);
+            }
 
-			public static void CheckComment (string s)
-			{
-				if (s == null)
-					throw new ArgumentNullException ();
+            public static void CheckComment(string s)
+            {
+                if (s == null)
+                    throw new ArgumentNullException();
 
-				var lexer = new Lexer (s);
+                var lexer = new Lexer(s);
 
-				string temp;
-				if (!lexer.ScanCommentOptional (out temp)) {
-					if (s.Length == 0)
-						throw new ArgumentException ();
+                string temp;
+                if (!lexer.ScanCommentOptional(out temp))
+                {
+                    if (s.Length == 0)
+                        throw new ArgumentException();
 
-					throw new FormatException (s);
-				}
-			}
-		}
+                    throw new FormatException(s);
+                }
+            }
+        }
 
-		public static class DateTime
-		{
-			public new static readonly Func<object, string> ToString = l => ((DateTimeOffset) l).ToString ("r", CultureInfo.InvariantCulture);
-			
-			public static bool TryParse (string input, out DateTimeOffset result)
-			{
-				return Lexer.TryGetDateValue (input, out result);
-			}
-		}
+        public static class DateTime
+        {
+            public static new readonly Func<object, string> ToString = l =>
+                ((DateTimeOffset)l).ToString("r", CultureInfo.InvariantCulture);
 
-		public static class EmailAddress
-		{
-			public static bool TryParse (string input, out string result)
-			{
-				try {
-					new MailAddress (input);
-					result = input;
-					return true;
-				} catch {
-					result = null;
-					return false;
-				}
-			}
-		}
+            public static bool TryParse(string input, out DateTimeOffset result)
+            {
+                return Lexer.TryGetDateValue(input, out result);
+            }
+        }
 
-		public static class Host
-		{
-			public static bool TryParse (string input, out string result)
-			{
-				result = input;
+        public static class EmailAddress
+        {
+            public static bool TryParse(string input, out string result)
+            {
+                try
+                {
+                    new MailAddress(input);
+                    result = input;
+                    return true;
+                }
+                catch
+                {
+                    result = null;
+                    return false;
+                }
+            }
+        }
 
-				System.Uri dummy;
-				return System.Uri.TryCreate ("http://u@" + input + "/", UriKind.Absolute, out dummy);
-			}
-		}
+        public static class Host
+        {
+            public static bool TryParse(string input, out string result)
+            {
+                result = input;
 
-		public static class Int
-		{
-			public static bool TryParse (string input, out int result)
-			{
-				return int.TryParse (input, NumberStyles.None, CultureInfo.InvariantCulture, out result);
-			}
-		}
+                System.Uri dummy;
+                return System.Uri.TryCreate("http://u@" + input + "/", UriKind.Absolute, out dummy);
+            }
+        }
 
-		public static class Long
-		{
-			public static bool TryParse (string input, out long result)
-			{
-				return long.TryParse (input, NumberStyles.None, CultureInfo.InvariantCulture, out result);
-			}
-		}
+        public static class Int
+        {
+            public static bool TryParse(string input, out int result)
+            {
+                return int.TryParse(
+                    input,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out result
+                );
+            }
+        }
 
-		public static class MD5
-		{
-			public new static readonly Func<object, string> ToString = l => Convert.ToBase64String ((byte[]) l);
+        public static class Long
+        {
+            public static bool TryParse(string input, out long result)
+            {
+                return long.TryParse(
+                    input,
+                    NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out result
+                );
+            }
+        }
 
-			public static bool TryParse (string input, out byte[] result)
-			{
-				try {
-					result = Convert.FromBase64String (input);
-					return true;
-				} catch {
-					result = null;
-					return false;
-				}
-			}
-		}
+        public static class MD5
+        {
+            public static new readonly Func<object, string> ToString = l =>
+                Convert.ToBase64String((byte[])l);
 
-		public static class TimeSpanSeconds
-		{
-			public static bool TryParse (string input, out TimeSpan result)
-			{
-				int value;
-				if (Int.TryParse (input, out value)) {
-					result = TimeSpan.FromSeconds (value);
-					return true;
-				}
+            public static bool TryParse(string input, out byte[] result)
+            {
+                try
+                {
+                    result = Convert.FromBase64String(input);
+                    return true;
+                }
+                catch
+                {
+                    result = null;
+                    return false;
+                }
+            }
+        }
 
-				result = TimeSpan.Zero;
-				return false;
-			}
-		}
+        public static class TimeSpanSeconds
+        {
+            public static bool TryParse(string input, out TimeSpan result)
+            {
+                int value;
+                if (Int.TryParse(input, out value))
+                {
+                    result = TimeSpan.FromSeconds(value);
+                    return true;
+                }
 
-		public static class Uri
-		{
-			public static bool TryParse (string input, out System.Uri result)
-			{
-				return System.Uri.TryCreate (input, UriKind.RelativeOrAbsolute, out result);
-			}
+                result = TimeSpan.Zero;
+                return false;
+            }
+        }
 
-			public static void Check (string s)
-			{
-				if (s == null)
-					throw new ArgumentNullException ();
+        public static class Uri
+        {
+            public static bool TryParse(string input, out System.Uri result)
+            {
+                return System.Uri.TryCreate(input, UriKind.RelativeOrAbsolute, out result);
+            }
 
-				System.Uri uri;
-				if (!TryParse (s, out uri)) {
-					if (s.Length == 0)
-						throw new ArgumentException ();
+            public static void Check(string s)
+            {
+                if (s == null)
+                    throw new ArgumentNullException();
 
-					throw new FormatException (s);
-				}
-			}
-		}
-	}
+                System.Uri uri;
+                if (!TryParse(s, out uri))
+                {
+                    if (s.Length == 0)
+                        throw new ArgumentException();
+
+                    throw new FormatException(s);
+                }
+            }
+        }
+    }
 }

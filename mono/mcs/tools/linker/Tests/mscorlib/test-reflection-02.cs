@@ -3,38 +3,40 @@ using System.Runtime.InteropServices;
 
 class C
 {
-	[DllImport ("libc")]
-	public static extern void pinvoke ();
+    [DllImport("libc")]
+    public static extern void pinvoke();
 
-	public static int Main ()
-	{
-		var mi = typeof (C).GetMethod ("pinvoke");
-		var data = mi.CustomAttributes;
-		
-		int counter = 0;
-		foreach (var entry in data) {
-			++counter;
+    public static int Main()
+    {
+        var mi = typeof(C).GetMethod("pinvoke");
+        var data = mi.CustomAttributes;
 
-			if (entry.AttributeType == typeof (PreserveSigAttribute))
-				continue;
+        int counter = 0;
+        foreach (var entry in data)
+        {
+            ++counter;
 
-			if (entry.AttributeType == typeof (DllImportAttribute)) {
-				if ((string) entry.ConstructorArguments [0].Value != "libc")
-					return 3;
+            if (entry.AttributeType == typeof(PreserveSigAttribute))
+                continue;
 
-				// PreserveSig
-				if ((bool)entry.NamedArguments [4].TypedValue.Value != true)
-					return 4;
+            if (entry.AttributeType == typeof(DllImportAttribute))
+            {
+                if ((string)entry.ConstructorArguments[0].Value != "libc")
+                    return 3;
 
-				continue;
-			}
+                // PreserveSig
+                if ((bool)entry.NamedArguments[4].TypedValue.Value != true)
+                    return 4;
 
-			return 1;
-		}
+                continue;
+            }
 
-		if (counter != 2)
-			return 2;
+            return 1;
+        }
 
-		return 0;
-	}
+        if (counter != 2)
+            return 2;
+
+        return 0;
+    }
 }

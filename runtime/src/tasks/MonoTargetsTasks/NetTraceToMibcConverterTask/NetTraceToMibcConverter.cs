@@ -2,19 +2,19 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System.Text.Json.Serialization;
 
 #nullable enable
 
@@ -64,14 +64,19 @@ public class NetTraceToMibcConverter : ToolTask
 
         if (string.IsNullOrEmpty(ToolExe))
         {
-            ToolExe = (RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) ? "dotnet-pgo.exe" : "dotnet-pgo";
+            ToolExe =
+                (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                    ? "dotnet-pgo.exe"
+                    : "dotnet-pgo";
         }
 
         string mibcConverterBinaryPath = Path.Combine(ToolPath, ToolExe);
 
         if (!File.Exists(mibcConverterBinaryPath))
         {
-            Log.LogError($"{nameof(mibcConverterBinaryPath)}='{mibcConverterBinaryPath}' doesn't exist.");
+            Log.LogError(
+                $"{nameof(mibcConverterBinaryPath)}='{mibcConverterBinaryPath}' doesn't exist."
+            );
             return false;
         }
 
@@ -99,7 +104,10 @@ public class NetTraceToMibcConverter : ToolTask
 
     protected override string GenerateCommandLineCommands()
     {
-        MibcFilePath = Path.Combine(OutputDir, Path.ChangeExtension(Path.GetFileName(NetTraceFilePath), ".mibc"));
+        MibcFilePath = Path.Combine(
+            OutputDir,
+            Path.ChangeExtension(Path.GetFileName(NetTraceFilePath), ".mibc")
+        );
 
         StringBuilder mibcConverterArgsStr = new StringBuilder("create-mibc");
         mibcConverterArgsStr.Append($" --trace \"{NetTraceFilePath}\" ");

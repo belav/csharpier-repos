@@ -4,9 +4,9 @@
 
 using System.Collections.Immutable;
 using System.Runtime.Serialization;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Text;
 using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.SourceGeneration;
@@ -20,8 +20,16 @@ internal interface IRemoteSourceGenerationService
     /// compare that to the prior generated documents it has to see if it can reuse those directly, or if it needs to
     /// remove any documents no longer around, add any new documents, or change the contents of any existing documents.
     /// </summary>
-    ValueTask<ImmutableArray<(SourceGeneratedDocumentIdentity documentIdentity, SourceGeneratedDocumentContentIdentity contentIdentity)>> GetSourceGenerationInfoAsync(
-        Checksum solutionChecksum, ProjectId projectId, CancellationToken cancellationToken);
+    ValueTask<
+        ImmutableArray<(
+            SourceGeneratedDocumentIdentity documentIdentity,
+            SourceGeneratedDocumentContentIdentity contentIdentity
+        )>
+    > GetSourceGenerationInfoAsync(
+        Checksum solutionChecksum,
+        ProjectId projectId,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Given a particular set of generated document ids, returns the fully generated content for those documents.
@@ -29,7 +37,11 @@ internal interface IRemoteSourceGenerationService
     /// different than the last time the document was queried.
     /// </summary>
     ValueTask<ImmutableArray<string>> GetContentsAsync(
-        Checksum solutionChecksum, ProjectId projectId, ImmutableArray<DocumentId> documentIds, CancellationToken cancellationToken);
+        Checksum solutionChecksum,
+        ProjectId projectId,
+        ImmutableArray<DocumentId> documentIds,
+        CancellationToken cancellationToken
+    );
 }
 
 /// <summary>
@@ -46,4 +58,5 @@ internal interface IRemoteSourceGenerationService
 internal readonly record struct SourceGeneratedDocumentContentIdentity(
     [property: DataMember(Order = 0)] Checksum OriginalSourceTextContentHash,
     [property: DataMember(Order = 1)] string? EncodingName,
-    [property: DataMember(Order = 2)] SourceHashAlgorithm ChecksumAlgorithm);
+    [property: DataMember(Order = 2)] SourceHashAlgorithm ChecksumAlgorithm
+);

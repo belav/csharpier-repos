@@ -10,7 +10,14 @@ namespace System.Runtime.CompilerServices
     /// This attribute should not be used by developers in source code.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Method | AttributeTargets.Interface | AttributeTargets.Delegate, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Method
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate,
+        Inherited = false
+    )]
     public sealed class NullableContextAttribute : Attribute
     {
         /// <summary>Flag specifying metadata related to nullable reference types.</summary>

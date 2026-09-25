@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,24 +35,25 @@ using System.ComponentModel;
 
 namespace System.Drawing
 {
-	[AttributeUsage(AttributeTargets.All)]
-	internal sealed class SRDescriptionAttribute : DescriptionAttribute {
+    [AttributeUsage(AttributeTargets.All)]
+    internal sealed class SRDescriptionAttribute : DescriptionAttribute
+    {
+        private bool isReplaced = false;
 
-		private bool isReplaced = false;
+        public SRDescriptionAttribute(string description)
+            : base(description) { }
 
-		public SRDescriptionAttribute (string description)
-			: base (description)
-		{
-		}
-
-		public override string Description {
-			get {
-				if (!isReplaced) {
-					isReplaced = true;
-					DescriptionValue = Locale.GetText (DescriptionValue);
-				}
-				return DescriptionValue;
-			}
-		}
-	}
+        public override string Description
+        {
+            get
+            {
+                if (!isReplaced)
+                {
+                    isReplaced = true;
+                    DescriptionValue = Locale.GetText(DescriptionValue);
+                }
+                return DescriptionValue;
+            }
+        }
+    }
 }

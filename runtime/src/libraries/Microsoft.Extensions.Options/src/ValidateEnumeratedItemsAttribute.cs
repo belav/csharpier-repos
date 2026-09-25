@@ -20,9 +20,7 @@ namespace Microsoft.Extensions.Options
         /// Using this constructor for a field/property tells the code generator to
         /// generate validation for the individual members of the enumerable's type.
         /// </remarks>
-        public ValidateEnumeratedItemsAttribute()
-        {
-        }
+        public ValidateEnumeratedItemsAttribute() { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidateEnumeratedItemsAttribute"/> class.

@@ -81,7 +81,8 @@ namespace System.Text.Json.Serialization.Tests
         {
             public PocoWithParameterizedCtor[] Obj { get; set; }
 
-            public ClassWithParameterizedCtor_WithPocoArray(PocoWithParameterizedCtor[] obj) => Obj = obj;
+            public ClassWithParameterizedCtor_WithPocoArray(PocoWithParameterizedCtor[] obj) =>
+                Obj = obj;
         }
 
         public class ClassWithDictionaryOfIntArray
@@ -103,7 +104,9 @@ namespace System.Text.Json.Serialization.Tests
         {
             public Dictionary<string, List<PocoWithParameterizedCtor>> Obj { get; set; }
 
-            public ClassWithParameterizedCtor_WithDictionaryOfPocoList(Dictionary<string, List<PocoWithParameterizedCtor>> obj) => Obj = obj;
+            public ClassWithParameterizedCtor_WithDictionaryOfPocoList(
+                Dictionary<string, List<PocoWithParameterizedCtor>> obj
+            ) => Obj = obj;
         }
 
         public static IEnumerable<Type> TypesForInvalidJsonForCollectionTests()
@@ -137,11 +140,7 @@ namespace System.Text.Json.Serialization.Tests
                 typeof(ClassWithParameterizedCtor_WithDictionaryOfPocoList),
             };
 
-            Type[] collectionTypes = new Type[]
-            {
-                typeof(List<>),
-                typeof(Dictionary<,>),
-            };
+            Type[] collectionTypes = new Type[] { typeof(List<>), typeof(Dictionary<,>) };
 
             foreach (Type type in elementTypes)
             {
@@ -159,7 +158,10 @@ namespace System.Text.Json.Serialization.Tests
 
                     foreach (Type elementType in innerTypes)
                     {
-                        Type newCollectionType = MakeClosedCollectionType(collectionType, elementType);
+                        Type newCollectionType = MakeClosedCollectionType(
+                            collectionType,
+                            elementType
+                        );
                         newInnerTypes.Add(newCollectionType);
                         yield return newCollectionType;
                     }
@@ -194,7 +196,9 @@ namespace System.Text.Json.Serialization.Tests
             if (!typeof(IEnumerable).IsAssignableFrom(type))
             {
                 // Get type of "Obj" property.
-                elementType = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)[0].PropertyType;
+                elementType = type.GetProperties(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                )[0].PropertyType;
             }
             else if (type.IsArray)
             {
@@ -255,12 +259,28 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[] { typeof(int[]), @"[{""test"": 1}]" };
             yield return new object[] { typeof(int[]), @"[[true]]" };
             yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": {}}" };
-            yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": {""test"": 1}}" };
-            yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": ""test""}" };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, int[]>),
+                @"{""test"": {""test"": 1}}",
+            };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, int[]>),
+                @"{""test"": ""test""}",
+            };
             yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": 1}" };
             yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": true}" };
-            yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": [""test""}" };
-            yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": [""test""]}" };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, int[]>),
+                @"{""test"": [""test""}",
+            };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, int[]>),
+                @"{""test"": [""test""]}",
+            };
             yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": [[]]}" };
             yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": [true]}" };
             yield return new object[] { typeof(Dictionary<string, int[]>), @"{""test"": [{}]}" };
@@ -281,7 +301,11 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[] { typeof(Dictionary<string, string>), @"false" };
             yield return new object[] { typeof(Dictionary<string, string>), @"{"""": 1}" };
             yield return new object[] { typeof(Dictionary<string, string>), @"{"""": {}}" };
-            yield return new object[] { typeof(Dictionary<string, string>), @"{"""": {"""":""""}}" };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, string>),
+                @"{"""": {"""":""""}}",
+            };
             yield return new object[] { typeof(Dictionary<string, string>), @"[""test""" };
             yield return new object[] { typeof(Dictionary<string, string>), @"[""test""]" };
             yield return new object[] { typeof(Dictionary<string, string>), @"[true]" };
@@ -289,34 +313,90 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[] { typeof(Dictionary<string, string>), @"[[]]" };
             yield return new object[] { typeof(Dictionary<string, string>), @"[{""test"": 1}]" };
             yield return new object[] { typeof(Dictionary<string, string>), @"[[true]]" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":""test""}" };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":""test""}",
+            };
             yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":1}" };
             yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":false}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":{"""": 1}}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":{"""": {}}}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":{"""": {"""":""""}}}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":[""test""}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":[""test""]}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":[true]}" };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":{"""": 1}}",
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":{"""": {}}}",
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":{"""": {"""":""""}}}",
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":[""test""}",
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":[""test""]}",
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":[true]}",
+            };
             yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":[{}]}" };
             yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":[[]]}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":[{""test"": 1}]}" };
-            yield return new object[] { typeof(ClassWithDictionaryOfIntArray), @"{""Obj"":[[true]]}" };
-            yield return new object[] { typeof(Dictionary<string, Poco>), @"{""key"":[{""Id"":3}]}" };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":[{""test"": 1}]}",
+            };
+            yield return new object[]
+            {
+                typeof(ClassWithDictionaryOfIntArray),
+                @"{""Obj"":[[true]]}",
+            };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, Poco>),
+                @"{""key"":[{""Id"":3}]}",
+            };
             yield return new object[] { typeof(Dictionary<string, Poco>), @"{""key"":[""test""]}" };
             yield return new object[] { typeof(Dictionary<string, Poco>), @"{""key"":[1]}" };
             yield return new object[] { typeof(Dictionary<string, Poco>), @"{""key"":[false]}" };
             yield return new object[] { typeof(Dictionary<string, Poco>), @"{""key"":[]}" };
             yield return new object[] { typeof(Dictionary<string, Poco>), @"{""key"":1}" };
-            yield return new object[] { typeof(Dictionary<string, List<Poco>>), @"{""key"":{""Id"":3}}" };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, List<Poco>>),
+                @"{""key"":{""Id"":3}}",
+            };
             yield return new object[] { typeof(Dictionary<string, List<Poco>>), @"{""key"":{}}" };
             yield return new object[] { typeof(Dictionary<string, List<Poco>>), @"{""key"":[[]]}" };
-            yield return new object[] { typeof(Dictionary<string, Dictionary<string, Poco>>), @"{""key"":[]}" };
-            yield return new object[] { typeof(Dictionary<string, Dictionary<string, Poco>>), @"{""key"":1}" };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, Dictionary<string, Poco>>),
+                @"{""key"":[]}",
+            };
+            yield return new object[]
+            {
+                typeof(Dictionary<string, Dictionary<string, Poco>>),
+                @"{""key"":1}",
+            };
         }
 
         [Fact, OuterLoop]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/42677", platforms: TestPlatforms.Windows, runtimes: TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/42677",
+            platforms: TestPlatforms.Windows,
+            runtimes: TestRuntimes.Mono
+        )]
         public static void InvalidJsonForTypeShouldFail()
         {
             foreach (object[] args in DataForInvalidJsonForTypeTests()) // ~140K tests, too many for theory to handle well with our infrastructure

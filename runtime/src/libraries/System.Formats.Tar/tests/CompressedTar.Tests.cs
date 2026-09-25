@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.IO.Compression;
 using System.IO;
+using System.IO.Compression;
 using Xunit;
 
 namespace System.Formats.Tar.Tests
@@ -23,7 +23,10 @@ namespace System.Formats.Tar.Tests
             // Create tar.gz archive
             using (FileStream streamToCompress = File.Create(archivePath))
             {
-                using GZipStream compressorStream = new GZipStream(streamToCompress, CompressionMode.Compress);
+                using GZipStream compressorStream = new GZipStream(
+                    streamToCompress,
+                    CompressionMode.Compress
+                );
                 using TarWriter writer = new TarWriter(compressorStream);
                 writer.WriteEntry(fileName: filePath, entryName: fileName);
             }
@@ -34,7 +37,10 @@ namespace System.Formats.Tar.Tests
             // Verify tar.gz archive contents
             using (FileStream streamToDecompress = File.OpenRead(archivePath))
             {
-                using GZipStream decompressorStream = new GZipStream(streamToDecompress, CompressionMode.Decompress);
+                using GZipStream decompressorStream = new GZipStream(
+                    streamToDecompress,
+                    CompressionMode.Decompress
+                );
                 using TarReader reader = new TarReader(decompressorStream);
                 TarEntry entry = reader.GetNextEntry();
                 Assert.Equal(TarEntryFormat.Pax, entry.Format);
@@ -62,8 +68,15 @@ namespace System.Formats.Tar.Tests
 
             using (FileStream streamToCompress = File.Create(archivePath))
             {
-                using GZipStream compressorStream = new GZipStream(streamToCompress, CompressionMode.Compress);
-                TarFile.CreateFromDirectory(sourceDirectory, compressorStream, includeBaseDirectory: false);
+                using GZipStream compressorStream = new GZipStream(
+                    streamToCompress,
+                    CompressionMode.Compress
+                );
+                TarFile.CreateFromDirectory(
+                    sourceDirectory,
+                    compressorStream,
+                    includeBaseDirectory: false
+                );
             }
             FileInfo fileInfo = new FileInfo(archivePath);
             Assert.True(fileInfo.Exists);
@@ -71,8 +84,15 @@ namespace System.Formats.Tar.Tests
 
             using (FileStream streamToDecompress = File.OpenRead(archivePath))
             {
-                using GZipStream decompressorStream = new GZipStream(streamToDecompress, CompressionMode.Decompress);
-                TarFile.ExtractToDirectory(decompressorStream, destinationDirectory, overwriteFiles: true);
+                using GZipStream decompressorStream = new GZipStream(
+                    streamToDecompress,
+                    CompressionMode.Decompress
+                );
+                TarFile.ExtractToDirectory(
+                    decompressorStream,
+                    destinationDirectory,
+                    overwriteFiles: true
+                );
                 Assert.True(File.Exists(filePath));
             }
         }

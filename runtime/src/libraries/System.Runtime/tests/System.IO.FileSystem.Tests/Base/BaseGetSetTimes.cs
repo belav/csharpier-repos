@@ -13,10 +13,15 @@ namespace System.IO.Tests
         protected const string HFS = "hfs";
         public delegate void SetTime(T item, DateTime time);
         public delegate DateTime GetTime(T item);
-        // AppContainer restricts access to DriveFormat (::GetVolumeInformation)
-        private static string driveFormat = PlatformDetection.IsInAppContainer ? string.Empty : new DriveInfo(Path.GetTempPath()).DriveFormat;
 
-        protected static bool isHFS => driveFormat != null && driveFormat.Equals(HFS, StringComparison.InvariantCultureIgnoreCase);
+        // AppContainer restricts access to DriveFormat (::GetVolumeInformation)
+        private static string driveFormat = PlatformDetection.IsInAppContainer
+            ? string.Empty
+            : new DriveInfo(Path.GetTempPath()).DriveFormat;
+
+        protected static bool isHFS =>
+            driveFormat != null
+            && driveFormat.Equals(HFS, StringComparison.InvariantCultureIgnoreCase);
 
         protected static bool LowTemporalResolution => PlatformDetection.IsBrowser || isHFS;
         protected static bool HighTemporalResolution => !LowTemporalResolution;
@@ -28,7 +33,7 @@ namespace System.IO.Tests
 
         protected abstract T CreateSymlink(string path, string pathToTarget);
 
-        // When the item is a link, indicates whether the .NET API will get/set the link itself, or its target. 
+        // When the item is a link, indicates whether the .NET API will get/set the link itself, or its target.
         protected virtual bool ApiTargetsLink => true;
 
         protected T CreateSymlinkToItem(T item)
@@ -46,12 +51,10 @@ namespace System.IO.Tests
         public class TimeFunction : Tuple<SetTime, GetTime, DateTimeKind>
         {
             public TimeFunction(SetTime setter, GetTime getter, DateTimeKind kind)
-                : base(item1: setter, item2: getter, item3: kind)
-            {
-            }
+                : base(item1: setter, item2: getter, item3: kind) { }
 
-            public static TimeFunction Create(SetTime setter, GetTime getter, DateTimeKind kind)
-                => new TimeFunction(setter, getter, kind);
+            public static TimeFunction Create(SetTime setter, GetTime getter, DateTimeKind kind) =>
+                new TimeFunction(setter, getter, kind);
 
             public SetTime Setter => Item1;
             public GetTime Getter => Item2;
@@ -71,7 +74,16 @@ namespace System.IO.Tests
 
                 // Checking that milliseconds are not dropped after setter.
                 // Emscripten drops milliseconds in Browser
-                DateTime dt = new DateTime(2014, 12, 1, 12, 3, 3, LowTemporalResolution ? 0 : 321, function.Kind);
+                DateTime dt = new DateTime(
+                    2014,
+                    12,
+                    1,
+                    12,
+                    3,
+                    3,
+                    LowTemporalResolution ? 0 : 321,
+                    function.Kind
+                );
                 function.Setter(item, dt);
 
                 T getTarget = !isLink || ApiTargetsLink ? item : linkTarget;
@@ -161,7 +173,9 @@ namespace System.IO.Tests
                         fsi.Refresh();
                     }
 
-                    DateTime[] updatedTimes = timeFunctions.Select((funcs) => funcs.Getter(target)).ToArray();
+                    DateTime[] updatedTimes = timeFunctions
+                        .Select((funcs) => funcs.Getter(target))
+                        .ToArray();
                     Assert.Equal(initialTimes, updatedTimes);
                 }
             }
@@ -197,30 +211,68 @@ namespace System.IO.Tests
             // [0] = (access, write, False),    [1] = (access, write, True),
             // [2] = (write, access, False),    [3] = (write, access, True)
 
-            IEnumerable<TimeFunction> timeFunctionsUtc = TimeFunctions(requiresRoundtripping: true).Where((f) => f.Kind == DateTimeKind.Utc);
+            IEnumerable<TimeFunction> timeFunctionsUtc = TimeFunctions(requiresRoundtripping: true)
+                .Where((f) => f.Kind == DateTimeKind.Utc);
             bool[] booleanArray = new bool[] { false, true };
-            Assert.All(timeFunctionsUtc.SelectMany((x) => timeFunctionsUtc.SelectMany((y) => booleanArray.Select((reverse) => (x, y, reverse)))).Where((fs) => fs.x.Getter != fs.y.Getter), (functions) =>
-            {
-                TimeFunction function1 = functions.x;
-                TimeFunction function2 = functions.y;
-                bool reverse = functions.reverse;
-
-                // Checking that milliseconds are not dropped after setter.
-                DateTime dt1 = new DateTime(2002, 12, 1, 12, 3, 3, LowTemporalResolution ? 0 : 321, DateTimeKind.Utc);
-                DateTime dt2 = new DateTime(2001, 12, 1, 12, 3, 3, LowTemporalResolution ? 0 : 321, DateTimeKind.Utc);
-                DateTime dt3 = new DateTime(2000, 12, 1, 12, 3, 3, LowTemporalResolution ? 0 : 321, DateTimeKind.Utc);
-                if (reverse) //reverse the order of setting dates
+            Assert.All(
+                timeFunctionsUtc
+                    .SelectMany(
+                        (x) =>
+                            timeFunctionsUtc.SelectMany(
+                                (y) => booleanArray.Select((reverse) => (x, y, reverse))
+                            )
+                    )
+                    .Where((fs) => fs.x.Getter != fs.y.Getter),
+                (functions) =>
                 {
-                    (dt1, dt3) = (dt3, dt1);
+                    TimeFunction function1 = functions.x;
+                    TimeFunction function2 = functions.y;
+                    bool reverse = functions.reverse;
+
+                    // Checking that milliseconds are not dropped after setter.
+                    DateTime dt1 = new DateTime(
+                        2002,
+                        12,
+                        1,
+                        12,
+                        3,
+                        3,
+                        LowTemporalResolution ? 0 : 321,
+                        DateTimeKind.Utc
+                    );
+                    DateTime dt2 = new DateTime(
+                        2001,
+                        12,
+                        1,
+                        12,
+                        3,
+                        3,
+                        LowTemporalResolution ? 0 : 321,
+                        DateTimeKind.Utc
+                    );
+                    DateTime dt3 = new DateTime(
+                        2000,
+                        12,
+                        1,
+                        12,
+                        3,
+                        3,
+                        LowTemporalResolution ? 0 : 321,
+                        DateTimeKind.Utc
+                    );
+                    if (reverse) //reverse the order of setting dates
+                    {
+                        (dt1, dt3) = (dt3, dt1);
+                    }
+                    function1.Setter(item, dt1);
+                    function2.Setter(item, dt2);
+                    function1.Setter(item, dt3);
+                    DateTime result1 = function1.Getter(item);
+                    DateTime result2 = function2.Getter(item);
+                    Assert.Equal(dt3, result1);
+                    Assert.Equal(dt2, result2);
                 }
-                function1.Setter(item, dt1);
-                function2.Setter(item, dt2);
-                function1.Setter(item, dt3);
-                DateTime result1 = function1.Getter(item);
-                DateTime result2 = function2.Getter(item);
-                Assert.Equal(dt3, result1);
-                Assert.Equal(dt2, result2);
-            });
+            );
         }
 
         [Fact]
@@ -255,7 +307,9 @@ namespace System.IO.Tests
                     // If it's the OS/Filesystem often returns 0 for the millisecond part, this may
                     // help prove it. This should only be written 1/1000 runs, unless the test is going to
                     // fail.
-                    Console.WriteLine($"## TimesIncludeMillisecondPart got a file time of {time:o} on {driveFormat}");
+                    Console.WriteLine(
+                        $"## TimesIncludeMillisecondPart got a file time of {time:o} on {driveFormat}"
+                    );
 
                     item = GetExistingItem(); // try a new file/directory
                 }
@@ -282,11 +336,23 @@ namespace System.IO.Tests
             {
                 // We want to test all possible DateTimeKind conversions to ensure they function as expected
                 if (function.Kind == DateTimeKind.Local)
-                    Assert.InRange(function.Getter(item).Ticks, beforeTime.ToLocalTime().Ticks, afterTime.ToLocalTime().Ticks);
+                    Assert.InRange(
+                        function.Getter(item).Ticks,
+                        beforeTime.ToLocalTime().Ticks,
+                        afterTime.ToLocalTime().Ticks
+                    );
                 else
                     Assert.InRange(function.Getter(item).Ticks, beforeTime.Ticks, afterTime.Ticks);
-                Assert.InRange(function.Getter(item).ToLocalTime().Ticks, beforeTime.ToLocalTime().Ticks, afterTime.ToLocalTime().Ticks);
-                Assert.InRange(function.Getter(item).ToUniversalTime().Ticks, beforeTime.Ticks, afterTime.Ticks);
+                Assert.InRange(
+                    function.Getter(item).ToLocalTime().Ticks,
+                    beforeTime.ToLocalTime().Ticks,
+                    afterTime.ToLocalTime().Ticks
+                );
+                Assert.InRange(
+                    function.Getter(item).ToUniversalTime().Ticks,
+                    beforeTime.Ticks,
+                    afterTime.Ticks
+                );
             });
         }
 
@@ -300,7 +366,8 @@ namespace System.IO.Tests
                     function.Kind == DateTimeKind.Local
                         ? DateTime.FromFileTime(0).Ticks
                         : DateTime.FromFileTimeUtc(0).Ticks,
-                    function.Getter(item).Ticks);
+                    function.Getter(item).Ticks
+                );
             });
         }
     }

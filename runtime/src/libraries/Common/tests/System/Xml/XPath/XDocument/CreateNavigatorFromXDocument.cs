@@ -3,8 +3,8 @@
 
 using System.IO;
 using System.Xml;
-using System.Xml.XPath;
 using System.Xml.Linq;
+using System.Xml.XPath;
 using XPathTests.Common;
 
 namespace XPathTests

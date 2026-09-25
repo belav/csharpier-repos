@@ -11,13 +11,15 @@ using Internal.TypeSystem;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-
     /// <summary>
     /// A representation of a field. Typically a result of ldfld.
     /// </summary>
     internal sealed partial record FieldValue
     {
-        public FieldValue(FieldDesc field, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes)
+        public FieldValue(
+            FieldDesc field,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes
+        )
         {
             StaticType = field.FieldType;
             Field = field;
@@ -28,11 +30,12 @@ namespace ILLink.Shared.TrimAnalysis
 
         public override DynamicallyAccessedMemberTypes DynamicallyAccessedMemberTypes { get; }
 
-        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch()
-            => new string[] { Field.GetDisplayName() };
+        public override IEnumerable<string> GetDiagnosticArgumentsForAnnotationMismatch() =>
+            new string[] { Field.GetDisplayName() };
 
         public override SingleValue DeepCopy() => this; // This value is immutable
 
-        public override string ToString() => this.ValueToString(Field, DynamicallyAccessedMemberTypes);
+        public override string ToString() =>
+            this.ValueToString(Field, DynamicallyAccessedMemberTypes);
     }
 }

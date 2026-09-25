@@ -10,39 +10,36 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-    using System.ComponentModel;
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
-
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlInputRadioButton'/> class defines the methods,
-///       properties, and events for the HtmlInputRadio control. This class allows
-///       programmatic access to the HTML &lt;input type=
-///       radio&gt;
-///       element on the server.
-///    </para>
-/// </devdoc>
-    [
-    DefaultEvent("ServerChange"),
-    SupportsEventValidation,
-    ]
-    public class HtmlInputRadioButton : HtmlInputControl, IPostBackDataHandler {
-
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlInputRadioButton'/> class defines the methods,
+    ///       properties, and events for the HtmlInputRadio control. This class allows
+    ///       programmatic access to the HTML &lt;input type=
+    ///       radio&gt;
+    ///       element on the server.
+    ///    </para>
+    /// </devdoc>
+    [DefaultEvent("ServerChange"), SupportsEventValidation]
+    public class HtmlInputRadioButton : HtmlInputControl, IPostBackDataHandler
+    {
         private static readonly object EventServerChange = new object();
 
         /*
          * Creates an intrinsic Html INPUT type=radio control.
          */
 
-        public HtmlInputRadioButton() : base("radio") {
-        }
+        public HtmlInputRadioButton()
+            : base("radio") { }
 
         /*
          * Checked property.
@@ -55,16 +52,19 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Default"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Default"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public bool Checked {
-            get {
+        public bool Checked
+        {
+            get
+            {
                 string s = Attributes["checked"];
-                return((s != null) ? (s.Equals("checked")) : false);
+                return ((s != null) ? (s.Equals("checked")) : false);
             }
-            set {
+            set
+            {
                 if (value)
                     Attributes["checked"] = "checked";
                 else
@@ -72,31 +72,31 @@ namespace System.Web.UI.HtmlControls {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       Gets the value of the HTML
         ///       Name attribute that will be rendered to the browser.
         ///    </para>
         /// </devdoc>
-        public override string Name {
-            get {
+        public override string Name
+        {
+            get
+            {
                 string s = Attributes["name"];
                 return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["name"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["name"] = MapStringAttributeToString(value); }
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       Gets or sets the contents of a text box.
         ///    </para>
         /// </devdoc>
-        public override string Value {
-            get {
+        public override string Value
+        {
+            get
+            {
                 string val = base.Value;
 
                 if (val.Length != 0)
@@ -109,14 +109,14 @@ namespace System.Web.UI.HtmlControls {
                 // if specific value is not provided, use the UniqueID
                 return UniqueID;
             }
-            set {
-                base.Value = value;
-            }
+            set { base.Value = value; }
         }
 
         // Value that gets rendered for the Name attribute
-        internal override string RenderedNameAttribute {
-            get {
+        internal override string RenderedNameAttribute
+        {
+            get
+            {
                 // For radio buttons, we must make the name unique, but can't just use the
                 // UniqueID because all buttons in a group must have the same name.  So
                 // we replace the last part of the UniqueID with the group Name.
@@ -124,23 +124,16 @@ namespace System.Web.UI.HtmlControls {
                 string uid = UniqueID;
                 int lastColon = uid.LastIndexOf(IdSeparator);
                 if (lastColon >= 0)
-                    name = uid.Substring(0, lastColon+1) + name;
+                    name = uid.Substring(0, lastColon + 1) + name;
                 return name;
             }
         }
 
-
-        [
-        WebCategory("Action"),
-        WebSysDescription(SR.Control_OnServerCheckChanged)
-        ]
-        public event EventHandler ServerChange {
-            add {
-                Events.AddHandler(EventServerChange, value);
-            }
-            remove {
-                Events.RemoveHandler(EventServerChange, value);
-            }
+        [WebCategory("Action"), WebSysDescription(SR.Control_OnServerCheckChanged)]
+        public event EventHandler ServerChange
+        {
+            add { Events.AddHandler(EventServerChange, value); }
+            remove { Events.RemoveHandler(EventServerChange, value); }
         }
 
         /*
@@ -150,18 +143,21 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
-            if (Page != null && !Disabled) {
+            if (Page != null && !Disabled)
+            {
                 Page.RegisterRequiresPostBack(this);
 
                 Page.RegisterEnabledControl(this);
             }
 
             // if no change handler, no need to save posted property
-            if (Events[EventServerChange] == null && !Disabled) {
-                ViewState.SetItemDirty("checked",false);
+            if (Events[EventServerChange] == null && !Disabled)
+            {
+                ViewState.SetItemDirty("checked", false);
             }
         }
 
@@ -171,17 +167,20 @@ namespace System.Web.UI.HtmlControls {
 
         /// <devdoc>
         /// </devdoc>
-        protected virtual void OnServerChange(EventArgs e) {
+        protected virtual void OnServerChange(EventArgs e)
+        {
             EventHandler handler = (EventHandler)Events[EventServerChange];
-            if (handler != null) handler(this, e);
+            if (handler != null)
+                handler(this, e);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected override void RenderAttributes(HtmlTextWriter writer) {
-            if (Page != null) {
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            if (Page != null)
+            {
                 Page.ClientScript.RegisterForEventValidation(Value, RenderedNameAttribute);
             }
 
@@ -198,20 +197,25 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        bool IPostBackDataHandler.LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
             return LoadPostData(postDataKey, postCollection);
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+        {
             string postValue = postCollection[RenderedNameAttribute];
             bool valueChanged = false;
-            if ((postValue != null) && postValue.Equals(Value)) {
-                if (Checked == false) {
-
+            if ((postValue != null) && postValue.Equals(Value))
+            {
+                if (Checked == false)
+                {
                     ValidateEvent(Value, RenderedNameAttribute);
 
                     Checked = true;
@@ -219,8 +223,10 @@ namespace System.Web.UI.HtmlControls {
                     valueChanged = true;
                 }
             }
-            else {
-                if (Checked == true) {
+            else
+            {
+                if (Checked == true)
+                {
                     Checked = false;
                 }
             }
@@ -236,15 +242,16 @@ namespace System.Web.UI.HtmlControls {
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         /// </devdoc>
-        protected virtual void RaisePostDataChangedEvent() {
+        protected virtual void RaisePostDataChangedEvent()
+        {
             OnServerChange(EventArgs.Empty);
         }
     }

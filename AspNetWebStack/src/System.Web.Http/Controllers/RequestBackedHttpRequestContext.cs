@@ -58,14 +58,8 @@ namespace System.Web.Http.Controllers
 
         public HttpRequestMessage Request
         {
-            get
-            {
-                return _request;
-            }
-            set
-            {
-                _request = value;
-            }
+            get { return _request; }
+            set { _request = value; }
         }
 
         public override X509Certificate2 ClientCertificate

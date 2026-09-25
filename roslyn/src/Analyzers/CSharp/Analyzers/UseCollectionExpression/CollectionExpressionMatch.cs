@@ -9,4 +9,6 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionExpression;
 /// <inheritdoc cref="Match{TStatementSyntax}"/>
 internal readonly record struct CollectionExpressionMatch<TMatchNode>(
     TMatchNode Node,
-    bool UseSpread) where TMatchNode : SyntaxNode;
+    bool UseSpread
+)
+    where TMatchNode : SyntaxNode;

@@ -18,9 +18,7 @@ namespace System.Linq.Expressions
     {
         internal const ExpressionType CustomExpression = (ExpressionType)(-1);
 
-        internal EntityExpressionVisitor()
-        {
-        }
+        internal EntityExpressionVisitor() { }
 
         internal virtual Expression Visit(Expression exp)
         {
@@ -112,7 +110,9 @@ namespace System.Linq.Expressions
 
         internal virtual ElementInit VisitElementInitializer(ElementInit initializer)
         {
-            ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(initializer.Arguments);
+            ReadOnlyCollection<Expression> arguments = this.VisitExpressionList(
+                initializer.Arguments
+            );
             if (arguments != initializer.Arguments)
             {
                 return Expression.ElementInit(initializer.AddMethod, arguments);
@@ -140,7 +140,13 @@ namespace System.Linq.Expressions
                 if (b.NodeType == ExpressionType.Coalesce && b.Conversion != null)
                     return Expression.Coalesce(left, right, conversion as LambdaExpression);
                 else
-                    return Expression.MakeBinary(b.NodeType, left, right, b.IsLiftedToNull, b.Method);
+                    return Expression.MakeBinary(
+                        b.NodeType,
+                        left,
+                        right,
+                        b.IsLiftedToNull,
+                        b.Method
+                    );
             }
             return b;
         }
@@ -198,7 +204,9 @@ namespace System.Linq.Expressions
             return m;
         }
 
-        internal virtual ReadOnlyCollection<Expression> VisitExpressionList(ReadOnlyCollection<Expression> original)
+        internal virtual ReadOnlyCollection<Expression> VisitExpressionList(
+            ReadOnlyCollection<Expression> original
+        )
         {
             List<Expression> list = null;
             for (int i = 0, n = original.Count; i < n; i++)
@@ -245,7 +253,9 @@ namespace System.Linq.Expressions
 
         internal virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
         {
-            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(binding.Initializers);
+            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(
+                binding.Initializers
+            );
             if (initializers != binding.Initializers)
             {
                 return Expression.ListBind(binding.Member, initializers);
@@ -253,7 +263,9 @@ namespace System.Linq.Expressions
             return binding;
         }
 
-        internal virtual IEnumerable<MemberBinding> VisitBindingList(ReadOnlyCollection<MemberBinding> original)
+        internal virtual IEnumerable<MemberBinding> VisitBindingList(
+            ReadOnlyCollection<MemberBinding> original
+        )
         {
             List<MemberBinding> list = null;
             for (int i = 0, n = original.Count; i < n; i++)
@@ -278,7 +290,9 @@ namespace System.Linq.Expressions
             return original;
         }
 
-        internal virtual IEnumerable<ElementInit> VisitElementInitializerList(ReadOnlyCollection<ElementInit> original)
+        internal virtual IEnumerable<ElementInit> VisitElementInitializerList(
+            ReadOnlyCollection<ElementInit> original
+        )
         {
             List<ElementInit> list = null;
             for (int i = 0, n = original.Count; i < n; i++)
@@ -340,7 +354,9 @@ namespace System.Linq.Expressions
         internal virtual Expression VisitListInit(ListInitExpression init)
         {
             NewExpression n = this.VisitNew(init.NewExpression);
-            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(init.Initializers);
+            IEnumerable<ElementInit> initializers = this.VisitElementInitializerList(
+                init.Initializers
+            );
             if (n != init.NewExpression || initializers != init.Initializers)
             {
                 return Expression.ListInit(n, initializers);
@@ -381,7 +397,10 @@ namespace System.Linq.Expressions
             return ext;
         }
 
-        internal static Expression Visit(Expression exp, Func<Expression, Func<Expression, Expression>, Expression> visit)
+        internal static Expression Visit(
+            Expression exp,
+            Func<Expression, Func<Expression, Expression>, Expression> visit
+        )
         {
             BasicExpressionVisitor basicVisitor = new BasicExpressionVisitor(visit);
             return basicVisitor.Visit(exp);
@@ -390,10 +409,14 @@ namespace System.Linq.Expressions
         private sealed class BasicExpressionVisitor : EntityExpressionVisitor
         {
             private readonly Func<Expression, Func<Expression, Expression>, Expression> _visit;
-            internal BasicExpressionVisitor(Func<Expression, Func<Expression, Expression>, Expression> visit)
+
+            internal BasicExpressionVisitor(
+                Func<Expression, Func<Expression, Expression>, Expression> visit
+            )
             {
                 _visit = visit ?? ((exp, baseVisit) => baseVisit(exp));
             }
+
             internal override Expression Visit(Expression exp)
             {
                 return _visit(exp, base.Visit);

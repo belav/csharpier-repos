@@ -13,11 +13,13 @@ namespace System.IO.Pipelines.Tests
 
         public override long Length => throw new NotSupportedException();
 
-        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
-
-        public override void Flush()
+        public override long Position
         {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
         }
+
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {

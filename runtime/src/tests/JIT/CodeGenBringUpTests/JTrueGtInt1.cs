@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_JTrueGtInt1
 {
     const int Pass = 100;
@@ -25,14 +25,22 @@ public class BringUpTest_JTrueGtInt1
     {
         int returnValue = -1;
 
-        if (x > int.MaxValue)          returnValue = 0;    // Never true
-        else if (x > (int.MaxValue-1)) returnValue = 7;
-        else if (x > 1)                returnValue = 6;
-        else if (x > 0)                returnValue = 5;
-        else if (x > -1)               returnValue = 4;
-        else if (x > (int.MinValue+1)) returnValue = 3;
-        else if (x > int.MinValue)     returnValue = 2;
-        else                           returnValue = 1;
+        if (x > int.MaxValue)
+            returnValue = 0; // Never true
+        else if (x > (int.MaxValue - 1))
+            returnValue = 7;
+        else if (x > 1)
+            returnValue = 6;
+        else if (x > 0)
+            returnValue = 5;
+        else if (x > -1)
+            returnValue = 4;
+        else if (x > (int.MinValue + 1))
+            returnValue = 3;
+        else if (x > int.MinValue)
+            returnValue = 2;
+        else
+            returnValue = 1;
 
         return returnValue;
     }
@@ -42,13 +50,20 @@ public class BringUpTest_JTrueGtInt1
     {
         int returnValue = Pass;
 
-        if (JTrueGtInt1(int.MinValue)   != 1) returnValue = Fail;
-        if (JTrueGtInt1(int.MinValue+1) != 2) returnValue = Fail;
-        if (JTrueGtInt1(-1)             != 3) returnValue = Fail;
-        if (JTrueGtInt1(0)              != 4) returnValue = Fail;
-        if (JTrueGtInt1(1)              != 5) returnValue = Fail;
-        if (JTrueGtInt1(int.MaxValue-1) != 6) returnValue = Fail;
-        if (JTrueGtInt1(int.MaxValue)   != 7) returnValue = Fail;
+        if (JTrueGtInt1(int.MinValue) != 1)
+            returnValue = Fail;
+        if (JTrueGtInt1(int.MinValue + 1) != 2)
+            returnValue = Fail;
+        if (JTrueGtInt1(-1) != 3)
+            returnValue = Fail;
+        if (JTrueGtInt1(0) != 4)
+            returnValue = Fail;
+        if (JTrueGtInt1(1) != 5)
+            returnValue = Fail;
+        if (JTrueGtInt1(int.MaxValue - 1) != 6)
+            returnValue = Fail;
+        if (JTrueGtInt1(int.MaxValue) != 7)
+            returnValue = Fail;
 
         return returnValue;
     }

@@ -7,12 +7,20 @@ namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class StringConverter : JsonPrimitiveConverter<string?>
     {
-        public override string? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override string? Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             return reader.GetString();
         }
 
-        public override void Write(Utf8JsonWriter writer, string? value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            string? value,
+            JsonSerializerOptions options
+        )
         {
             // For performance, lift up the writer implementation.
             if (value == null)
@@ -25,13 +33,22 @@ namespace System.Text.Json.Serialization.Converters
             }
         }
 
-        internal override string ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override string ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
             return reader.GetString()!;
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, string value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            string value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
             if (value is null)
             {
@@ -44,7 +61,9 @@ namespace System.Text.Json.Serialization.Converters
 
                 if (value == null)
                 {
-                    ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(options.DictionaryKeyPolicy);
+                    ThrowHelper.ThrowInvalidOperationException_NamingPolicyReturnNull(
+                        options.DictionaryKeyPolicy
+                    );
                 }
             }
 

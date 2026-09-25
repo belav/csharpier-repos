@@ -199,11 +199,11 @@ public class MediaTypeHeaderValueTest
         Assert.False(mediaType0.Parameters.IsReadOnly);
         Assert.True(mediaType1.Parameters.IsReadOnly);
         Assert.Equal(mediaType0.Parameters.Count, mediaType1.Parameters.Count);
-        Assert.Throws<NotSupportedException>(
-            () => mediaType1.Parameters.Add(new NameValueHeaderValue("name"))
+        Assert.Throws<NotSupportedException>(() =>
+            mediaType1.Parameters.Add(new NameValueHeaderValue("name"))
         );
-        Assert.Throws<NotSupportedException>(
-            () => mediaType1.Parameters.Remove(new NameValueHeaderValue("name"))
+        Assert.Throws<NotSupportedException>(() =>
+            mediaType1.Parameters.Remove(new NameValueHeaderValue("name"))
         );
         Assert.Throws<NotSupportedException>(() => mediaType1.Parameters.Clear());
 
@@ -335,8 +335,8 @@ public class MediaTypeHeaderValueTest
     [Fact]
     public void Quality_LessThanZero_Throw()
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () => new MediaTypeHeaderValue("application/xml", -0.01)
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+            new MediaTypeHeaderValue("application/xml", -0.01)
         );
     }
 

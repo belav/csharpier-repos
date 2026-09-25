@@ -9,7 +9,5 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare
     /// <summary>
     /// Stub type - replace with type generated from resx file when resources are needed in this assembly.
     /// </summary>
-    internal static class LiveShareResources
-    {
-    }
+    internal static class LiveShareResources { }
 }

@@ -16,18 +16,15 @@ public class MappingToAReadOnlyCollection : AutoMapperSpecBase
         public ReadOnlyCollection<int> Values2 { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
-        var source = new Source
-                         {
-                             Values = new[] {1, 2, 3, 4},
-                             Values2 = new[] {5, 6},
-                         };
+        var source = new Source { Values = new[] { 1, 2, 3, 4 }, Values2 = new[] { 5, 6 } };
         _destination = Mapper.Map<Source, Destination>(source);
     }
 

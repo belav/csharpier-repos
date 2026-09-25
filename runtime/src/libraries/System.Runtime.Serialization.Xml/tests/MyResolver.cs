@@ -11,17 +11,33 @@ internal class MyResolver : DataContractResolver
     public bool TryResolveTypeInvoked = false;
     public bool DeclaredTypeIsNotNull = false;
 
-    public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+    public override Type ResolveName(
+        string typeName,
+        string typeNamespace,
+        Type declaredType,
+        DataContractResolver knownTypeResolver
+    )
     {
         ResolveNameInvoked = true;
         DeclaredTypeIsNotNull = declaredType != null;
         return knownTypeResolver.ResolveName(typeName, typeNamespace, declaredType, null);
     }
 
-    public override bool TryResolveType(Type type, Type declaredType, DataContractResolver knownTypeResolver,
-        out XmlDictionaryString typeName, out XmlDictionaryString typeNamespace)
+    public override bool TryResolveType(
+        Type type,
+        Type declaredType,
+        DataContractResolver knownTypeResolver,
+        out XmlDictionaryString typeName,
+        out XmlDictionaryString typeNamespace
+    )
     {
         TryResolveTypeInvoked = true;
-        return knownTypeResolver.TryResolveType(type, declaredType, null, out typeName, out typeNamespace);
+        return knownTypeResolver.TryResolveType(
+            type,
+            declaredType,
+            null,
+            out typeName,
+            out typeNamespace
+        );
     }
 }

@@ -12,12 +12,24 @@ namespace System.Activities.Core.Presentation
     using System.Windows;
     using System.Windows.Data;
 
-    [SuppressMessage("Microsoft.Performance", "CA1812:AvoidUninstantiatedInternalClasses", Justification = "Used in XAML")]
+    [SuppressMessage(
+        "Microsoft.Performance",
+        "CA1812:AvoidUninstantiatedInternalClasses",
+        Justification = "Used in XAML"
+    )]
     internal sealed class ExpandableItemShowExpandedMultiValueConverter : IMultiValueConverter
     {
-        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(
+            object[] values,
+            Type targetType,
+            object parameter,
+            CultureInfo culture
+        )
         {
-            if (values[0] != DependencyProperty.UnsetValue && values[1] != DependencyProperty.UnsetValue)
+            if (
+                values[0] != DependencyProperty.UnsetValue
+                && values[1] != DependencyProperty.UnsetValue
+            )
             {
                 bool isExpanded = (bool)values[0];
                 bool isPinned = (bool)values[1];
@@ -25,13 +37,17 @@ namespace System.Activities.Core.Presentation
                 bool shouldCollapseAll = (bool)values[3];
                 ExpandableItemWrapper wrapper = (ExpandableItemWrapper)values[4];
 
-                if ((!shouldExpandAll || isExpanded)
-                    && (!shouldCollapseAll || !isExpanded))
+                if ((!shouldExpandAll || isExpanded) && (!shouldCollapseAll || !isExpanded))
                 {
                     wrapper.SetPinState(false);
                 }
 
-                return ViewUtilities.ShouldShowExpanded(isExpanded, shouldExpandAll, shouldCollapseAll, wrapper.IsPinned);
+                return ViewUtilities.ShouldShowExpanded(
+                    isExpanded,
+                    shouldExpandAll,
+                    shouldCollapseAll,
+                    wrapper.IsPinned
+                );
             }
             else
             {
@@ -39,7 +55,12 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        public object[] ConvertBack(
+            object value,
+            Type[] targetTypes,
+            object parameter,
+            CultureInfo culture
+        )
         {
             throw FxTrace.Exception.AsError(new NotSupportedException());
         }

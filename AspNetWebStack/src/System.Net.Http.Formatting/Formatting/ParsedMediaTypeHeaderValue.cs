@@ -22,7 +22,10 @@ namespace System.Net.Http.Formatting
             Contract.Assert(mediaTypeHeaderValue != null);
             string mediaType = _mediaType = mediaTypeHeaderValue.MediaType;
             _delimiterIndex = mediaType.IndexOf(MediaTypeSubtypeDelimiter);
-            Contract.Assert(_delimiterIndex > 0, "The constructor of the MediaTypeHeaderValue would have failed if there wasn't a type and subtype.");
+            Contract.Assert(
+                _delimiterIndex > 0,
+                "The constructor of the MediaTypeHeaderValue would have failed if there wasn't a type and subtype."
+            );
 
             _isAllMediaRange = false;
             _isSubtypeMediaRange = false;
@@ -56,7 +59,14 @@ namespace System.Net.Http.Formatting
             {
                 return false;
             }
-            return String.Compare(_mediaType, 0, other._mediaType, 0, _delimiterIndex, StringComparison.OrdinalIgnoreCase) == 0;
+            return String.Compare(
+                    _mediaType,
+                    0,
+                    other._mediaType,
+                    0,
+                    _delimiterIndex,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0;
         }
 
         public bool SubTypesEqual(ref ParsedMediaTypeHeaderValue other)
@@ -66,7 +76,14 @@ namespace System.Net.Http.Formatting
             {
                 return false;
             }
-            return String.Compare(_mediaType, _delimiterIndex + 1, other._mediaType, other._delimiterIndex + 1, _subTypeLength, StringComparison.OrdinalIgnoreCase) == 0;
+            return String.Compare(
+                    _mediaType,
+                    _delimiterIndex + 1,
+                    other._mediaType,
+                    other._delimiterIndex + 1,
+                    _subTypeLength,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0;
         }
     }
 }

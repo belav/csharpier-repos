@@ -26,7 +26,13 @@ namespace XPathTests.FunctionalTests.Expressions.Basics
             var testExpression = @"child::*[((((1 + 2) * 3) - 7) div 2)]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -44,7 +50,13 @@ namespace XPathTests.FunctionalTests.Expressions.Basics
             var testExpression = @"child::*[(2 * (2 -  (3 div (1 + 2))))]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -62,7 +74,13 @@ namespace XPathTests.FunctionalTests.Expressions.Basics
             var testExpression = @"child::*[(4 - 1) div  (1 + 2)]";
             var expected = true;
 
-            Utils.XPathMatchTest(kind, xml, testExpression, expected, startingNodePath: startingNodePath);
+            Utils.XPathMatchTest(
+                kind,
+                xml,
+                testExpression,
+                expected,
+                startingNodePath: startingNodePath
+            );
         }
 
         /// <summary>
@@ -79,8 +97,12 @@ namespace XPathTests.FunctionalTests.Expressions.Basics
             var startingNodePath = "/Doc";
             var testExpression = @"child::$$Var";
 
-            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(kind, xml, testExpression,
-                startingNodePath: startingNodePath);
+            Utils.XPathMatchTestThrows<System.Xml.XPath.XPathException>(
+                kind,
+                xml,
+                testExpression,
+                startingNodePath: startingNodePath
+            );
         }
     }
 }

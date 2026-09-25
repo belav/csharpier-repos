@@ -15,127 +15,142 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
-        public async Task TestNotInCompilationUnit()
-            => await VerifyAbsenceAsync(@"$$");
+        public async Task TestNotInCompilationUnit() => await VerifyAbsenceAsync(@"$$");
 
         [Fact]
         public async Task TestNotAfterExtern()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 extern alias Goo;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterUsing()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 using Goo;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalUsing()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 global using Goo;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNamespace()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 namespace N {}
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterTypeDeclaration()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C {}
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterDelegateDeclaration()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 delegate void Goo();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterMethod()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C {
                   void Goo() {}
                   $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -146,7 +161,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 partial class C {
                   void Goo() {}
                   $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -157,7 +173,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 partial class C {
                   int i;
                   $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -168,7 +185,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 partial class C {
                   int i { get; }
                   $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -178,7 +196,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 $$
                 using Goo;
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -188,25 +207,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 $$
                 global using Goo;
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterAssemblyAttribute()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 [assembly: goo]
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterRootAttribute()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 [goo]
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -217,17 +241,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 partial class C {
                   [goo]
                   $$
-                """);
+                """
+            );
         }
 
         // This will be fixed once we have accessibility for members
         [Fact]
         public async Task TestNotInsideStruct()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 struct S {
                    $$
-                """);
+                """
+            );
         }
 
         // This will be fixed once we have accessibility for members
@@ -238,16 +265,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 partial struct S {
                    $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInsideInterface()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 interface I {
                    $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -257,28 +287,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 partial class C {
                    $$
-                """);
+                """
+            );
         }
 
         [Fact]
-        public async Task TestNotAfterPartial()
-            => await VerifyAbsenceAsync(@"partial $$");
+        public async Task TestNotAfterPartial() => await VerifyAbsenceAsync(@"partial $$");
 
         [Fact]
-        public async Task TestNotAfterAbstract()
-            => await VerifyAbsenceAsync(@"abstract $$");
+        public async Task TestNotAfterAbstract() => await VerifyAbsenceAsync(@"abstract $$");
 
         [Fact]
-        public async Task TestNotAfterInternal()
-            => await VerifyAbsenceAsync(@"internal $$");
+        public async Task TestNotAfterInternal() => await VerifyAbsenceAsync(@"internal $$");
 
         [Fact]
-        public async Task TestNotAfterPublic()
-            => await VerifyAbsenceAsync(@"public $$");
+        public async Task TestNotAfterPublic() => await VerifyAbsenceAsync(@"public $$");
 
         [Fact]
-        public async Task TestNotAfterStaticPublic()
-            => await VerifyAbsenceAsync(@"static public $$");
+        public async Task TestNotAfterStaticPublic() =>
+            await VerifyAbsenceAsync(@"static public $$");
 
         [Fact]
         public async Task TestAfterNestedStaticPublicInClass()
@@ -287,7 +314,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     static public $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -297,7 +325,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     static public $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -307,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     abstract public $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -317,7 +347,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     static abstract public $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -327,7 +358,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     abstract static public $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -337,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     static abstract $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -347,7 +380,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     abstract static $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -357,12 +391,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     static $$
-                """);
+                """
+            );
         }
 
         [Fact]
-        public async Task TestNotAfterPublicStatic()
-            => await VerifyAbsenceAsync(@"public static $$");
+        public async Task TestNotAfterPublicStatic() =>
+            await VerifyAbsenceAsync(@"public static $$");
 
         [Fact]
         public async Task TestAfterNestedPublicStaticInClass()
@@ -371,7 +406,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     public static $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -381,7 +417,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     public static $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -391,7 +428,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     public abstract $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -401,7 +439,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     public static abstract $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -411,36 +450,31 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 interface C {
                     public abstract static $$
-                """);
+                """
+            );
         }
 
         [Fact]
-        public async Task TestNotAfterInvalidPublic()
-            => await VerifyAbsenceAsync(@"virtual public $$");
+        public async Task TestNotAfterInvalidPublic() =>
+            await VerifyAbsenceAsync(@"virtual public $$");
 
         [Fact]
-        public async Task TestNotAfterPrivate()
-            => await VerifyAbsenceAsync(@"private $$");
+        public async Task TestNotAfterPrivate() => await VerifyAbsenceAsync(@"private $$");
 
         [Fact]
-        public async Task TestNotAfterProtected()
-            => await VerifyAbsenceAsync(@"protected $$");
+        public async Task TestNotAfterProtected() => await VerifyAbsenceAsync(@"protected $$");
 
         [Fact]
-        public async Task TestNotAfterSealed()
-            => await VerifyAbsenceAsync(@"sealed $$");
+        public async Task TestNotAfterSealed() => await VerifyAbsenceAsync(@"sealed $$");
 
         [Fact]
-        public async Task TestNotAfterStatic()
-            => await VerifyAbsenceAsync(@"static $$");
+        public async Task TestNotAfterStatic() => await VerifyAbsenceAsync(@"static $$");
 
         [Fact]
-        public async Task TestNotAfterClass()
-            => await VerifyAbsenceAsync(@"class $$");
+        public async Task TestNotAfterClass() => await VerifyAbsenceAsync(@"class $$");
 
         [Fact]
-        public async Task TestNotAfterDelegate()
-            => await VerifyAbsenceAsync(@"delegate $$");
+        public async Task TestNotAfterDelegate() => await VerifyAbsenceAsync(@"delegate $$");
 
         [Fact]
         public async Task TestNotBetweenUsings()
@@ -450,7 +484,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 using Goo;
                 $$
                 using Bar;
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -461,7 +496,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 global using Goo;
                 $$
                 using Bar;
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -472,124 +508,151 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 global using Goo;
                 $$
                 global using Bar;
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedAbstractInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C {
                     abstract $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedVirtualInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C {
                     virtual $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedOverrideInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C {
                     override $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedSealedInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C {
                     sealed $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedReadOnlyInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C {
                     readonly $$
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/544102")]
         public async Task TestAfterNestedUnsafeStaticPublicInClass()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C {
                      unsafe static public $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedAbstractInInterface()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 interface C {
                     abstract $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedVirtualInInterface()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 interface C {
                     virtual $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedOverrideInInterface()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 interface C {
                     override $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedSealedInInterface()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 interface C {
                     sealed $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterNestedReadOnlyInInterface()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 interface C {
                     readonly $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterUnsafeStaticAbstractInInterface()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 interface C {
                      unsafe static abstract $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterExternStaticAbstractInInterface()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 interface C {
                      extern static abstract $$
-                """);
+                """
+            );
         }
     }
 }

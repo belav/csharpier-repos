@@ -40,10 +40,15 @@ namespace CoreFXTestLibrary.Internal
         }
 
         private bool _isValueCreated = false;
-        // PLANNED: Add ClassInitialize and ClassCleanup, at which point this property will be necessary.
-        public override bool IsValueCreated { get { return _isValueCreated; } }
 
-        public ClassInfo(Func<T> Factory) : base()
+        // PLANNED: Add ClassInitialize and ClassCleanup, at which point this property will be necessary.
+        public override bool IsValueCreated
+        {
+            get { return _isValueCreated; }
+        }
+
+        public ClassInfo(Func<T> Factory)
+            : base()
         {
             _factory = Factory;
         }

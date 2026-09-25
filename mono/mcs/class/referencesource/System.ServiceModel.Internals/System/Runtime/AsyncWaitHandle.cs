@@ -8,7 +8,11 @@ namespace System.Runtime
     using System.Security;
     using System.Threading;
 
-    [Fx.Tag.SynchronizationPrimitive(Fx.Tag.BlocksUsing.MonitorWait, SupportsAsync = true, ReleaseMethod = "Set")]
+    [Fx.Tag.SynchronizationPrimitive(
+        Fx.Tag.BlocksUsing.MonitorWait,
+        SupportsAsync = true,
+        ReleaseMethod = "Set"
+    )]
     class AsyncWaitHandle
     {
         static Action<object> timerCompleteCallback;
@@ -23,9 +27,7 @@ namespace System.Runtime
         int syncWaiterCount;
 
         public AsyncWaitHandle()
-            : this(EventResetMode.AutoReset)
-        {
-        }
+            : this(EventResetMode.AutoReset) { }
 
         public AsyncWaitHandle(EventResetMode resetMode)
         {
@@ -33,7 +35,11 @@ namespace System.Runtime
             this.syncObject = new object();
         }
 
-        public bool WaitAsync(Action<object, TimeoutException> callback, object state, TimeSpan timeout)
+        public bool WaitAsync(
+            Action<object, TimeoutException> callback,
+            object state,
+            TimeSpan timeout
+        )
         {
             if (!this.isSignaled || (this.isSignaled && this.resetMode == EventResetMode.AutoReset))
             {
@@ -111,9 +117,7 @@ namespace System.Runtime
 
                         try
                         {
-                            try
-                            {
-                            }
+                            try { }
                             finally
                             {
                                 this.syncWaiterCount++;
@@ -214,53 +218,64 @@ namespace System.Runtime
             [Fx.Tag.SecurityNote(Critical = "Store the delegate to be invoked")]
             [SecurityCritical]
             Action<object, TimeoutException> callback;
+
             [Fx.Tag.SecurityNote(Critical = "Stores the state object to be passed to the callback")]
             [SecurityCritical]
             object state;
             IOThreadTimer timer;
             TimeSpan originalTimeout;
 
-            [Fx.Tag.SecurityNote(Critical = "Access critical members", Safe = "Doesn't leak information")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Access critical members",
+                Safe = "Doesn't leak information"
+            )]
             [SecuritySafeCritical]
-            public AsyncWaiter(AsyncWaitHandle parent, Action<object, TimeoutException> callback, object state)
+            public AsyncWaiter(
+                AsyncWaitHandle parent,
+                Action<object, TimeoutException> callback,
+                object state
+            )
             {
                 this.Parent = parent;
                 this.callback = callback;
                 this.state = state;
             }
 
-            public AsyncWaitHandle Parent
-            {
-                get;
-                private set;
-            }
+            public AsyncWaitHandle Parent { get; private set; }
 
-            public bool TimedOut
-            {
-                get;
-                set;
-            }
+            public bool TimedOut { get; set; }
 
-            [Fx.Tag.SecurityNote(Critical = "Calls into critical method Schedule", Safe = "Invokes the given delegate under the current context")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls into critical method Schedule",
+                Safe = "Invokes the given delegate under the current context"
+            )]
             [SecuritySafeCritical]
             public void Call()
             {
                 Schedule();
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Overriding an inherited critical method, access critical members")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Overriding an inherited critical method, access critical members"
+            )]
             [SecurityCritical]
             protected override void Invoke()
             {
-                this.callback(this.state,
-                    this.TimedOut ? new TimeoutException(InternalSR.TimeoutOnOperation(this.originalTimeout)) : null);
+                this.callback(
+                    this.state,
+                    this.TimedOut
+                        ? new TimeoutException(InternalSR.TimeoutOnOperation(this.originalTimeout))
+                        : null
+                );
             }
 
             public void SetTimer(Action<object> callback, object state, TimeSpan timeout)
             {
                 if (this.timer != null)
                 {
-                    throw Fx.Exception.AsError(new InvalidOperationException(InternalSR.MustCancelOldTimer));
+                    throw Fx.Exception.AsError(
+                        new InvalidOperationException(InternalSR.MustCancelOldTimer)
+                    );
                 }
 
                 this.originalTimeout = timeout;
@@ -279,5 +294,4 @@ namespace System.Runtime
             }
         }
     }
-
 }

@@ -13,9 +13,9 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Helper structure to encapsulate/cache various information about metadata name of a type and 
+    /// Helper structure to encapsulate/cache various information about metadata name of a type and
     /// name resolution options.
-    /// Also, allows us to stop using strings in the APIs that accept only metadata names, 
+    /// Also, allows us to stop using strings in the APIs that accept only metadata names,
     /// making usage of them less bug prone.
     /// </summary>
     [NonCopyable]
@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis
         private short _forcedArity;
 
         /// <summary>
-        /// While resolving the name, consider only types following 
+        /// While resolving the name, consider only types following
         /// CLS-compliant generic type names and arity encoding (ECMA-335, section 10.7.2).
         /// I.e. arity is inferred from the name and matching type must have the same
         /// emitted name and arity.
@@ -89,14 +89,20 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private ImmutableArray<ReadOnlyMemory<char>> _namespaceSegmentsMemory;
 
-        public static MetadataTypeName FromFullName(string fullName, bool useCLSCompliantNameArityEncoding = false, int forcedArity = -1)
+        public static MetadataTypeName FromFullName(
+            string fullName,
+            bool useCLSCompliantNameArityEncoding = false,
+            int forcedArity = -1
+        )
         {
             Debug.Assert(fullName != null);
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
-            Debug.Assert(forcedArity == -1 ||
-                         !useCLSCompliantNameArityEncoding ||
-                         forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(fullName),
-                         "Conflicting metadata type name resolution options!");
+            Debug.Assert(
+                forcedArity == -1
+                    || !useCLSCompliantNameArityEncoding
+                    || forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(fullName),
+                "Conflicting metadata type name resolution options!"
+            );
 
             MetadataTypeName name;
 
@@ -117,18 +123,22 @@ namespace Microsoft.CodeAnalysis
         }
 
         public static MetadataTypeName FromNamespaceAndTypeName(
-            string namespaceName, string typeName,
-            bool useCLSCompliantNameArityEncoding = false, int forcedArity = -1
+            string namespaceName,
+            string typeName,
+            bool useCLSCompliantNameArityEncoding = false,
+            int forcedArity = -1
         )
         {
             Debug.Assert(namespaceName != null);
             Debug.Assert(typeName != null);
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
             Debug.Assert(!typeName.Contains(MetadataHelpers.DotDelimiterString));
-            Debug.Assert(forcedArity == -1 ||
-                         !useCLSCompliantNameArityEncoding ||
-                         forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
-                         "Conflicting metadata type name resolution options!");
+            Debug.Assert(
+                forcedArity == -1
+                    || !useCLSCompliantNameArityEncoding
+                    || forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
+                "Conflicting metadata type name resolution options!"
+            );
 
             MetadataTypeName name;
 
@@ -148,15 +158,24 @@ namespace Microsoft.CodeAnalysis
             return name;
         }
 
-        public static MetadataTypeName FromTypeName(string typeName, bool useCLSCompliantNameArityEncoding = false, int forcedArity = -1)
+        public static MetadataTypeName FromTypeName(
+            string typeName,
+            bool useCLSCompliantNameArityEncoding = false,
+            int forcedArity = -1
+        )
         {
             Debug.Assert(typeName != null);
-            Debug.Assert(!typeName.Contains(MetadataHelpers.DotDelimiterString) || typeName.IndexOf(MetadataHelpers.MangledNameRegionStartChar) >= 0);
+            Debug.Assert(
+                !typeName.Contains(MetadataHelpers.DotDelimiterString)
+                    || typeName.IndexOf(MetadataHelpers.MangledNameRegionStartChar) >= 0
+            );
             Debug.Assert(forcedArity >= -1 && forcedArity < short.MaxValue);
-            Debug.Assert(forcedArity == -1 ||
-                         !useCLSCompliantNameArityEncoding ||
-                         forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
-                         "Conflicting metadata type name resolution options!");
+            Debug.Assert(
+                forcedArity == -1
+                    || !useCLSCompliantNameArityEncoding
+                    || forcedArity == MetadataHelpers.InferTypeArityFromMetadataName(typeName),
+                "Conflicting metadata type name resolution options!"
+            );
 
             MetadataTypeName name;
 
@@ -202,7 +221,10 @@ namespace Microsoft.CodeAnalysis
                 if (_namespaceNameMemory.Equals(default(ReadOnlyMemory<char>)))
                 {
                     Debug.Assert(_fullName != null);
-                    _typeNameMemory = MetadataHelpers.SplitQualifiedName(_fullName, out _namespaceNameMemory);
+                    _typeNameMemory = MetadataHelpers.SplitQualifiedName(
+                        _fullName,
+                        out _namespaceNameMemory
+                    );
                 }
 
                 return _namespaceNameMemory;
@@ -222,7 +244,10 @@ namespace Microsoft.CodeAnalysis
                 if (_typeNameMemory.Equals(default(ReadOnlyMemory<char>)))
                 {
                     Debug.Assert(_fullName != null);
-                    _typeNameMemory = MetadataHelpers.SplitQualifiedName(_fullName, out _namespaceNameMemory);
+                    _typeNameMemory = MetadataHelpers.SplitQualifiedName(
+                        _fullName,
+                        out _namespaceNameMemory
+                    );
                 }
 
                 return _typeNameMemory;
@@ -242,7 +267,11 @@ namespace Microsoft.CodeAnalysis
                 if (_unmangledTypeNameMemory.Equals(default(ReadOnlyMemory<char>)))
                 {
                     Debug.Assert(_inferredArity == -1);
-                    _unmangledTypeNameMemory = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(TypeNameMemory, out _inferredArity);
+                    _unmangledTypeNameMemory =
+                        MetadataHelpers.InferTypeArityAndUnmangleMetadataName(
+                            TypeNameMemory,
+                            out _inferredArity
+                        );
                 }
 
                 return _unmangledTypeNameMemory;
@@ -278,7 +307,11 @@ namespace Microsoft.CodeAnalysis
                 {
                     Debug.Assert(_unmangledTypeNameMemory.Equals(default(ReadOnlyMemory<char>)));
                     Debug.Assert(_unmangledTypeName == null);
-                    _unmangledTypeNameMemory = MetadataHelpers.InferTypeArityAndUnmangleMetadataName(TypeNameMemory, out _inferredArity);
+                    _unmangledTypeNameMemory =
+                        MetadataHelpers.InferTypeArityAndUnmangleMetadataName(
+                            TypeNameMemory,
+                            out _inferredArity
+                        );
                 }
 
                 return _inferredArity;
@@ -290,24 +323,18 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public bool IsMangled
         {
-            get
-            {
-                return InferredArity > 0;
-            }
+            get { return InferredArity > 0; }
         }
 
         /// <summary>
-        /// While resolving the name, consider only types following 
+        /// While resolving the name, consider only types following
         /// CLS-compliant generic type names and arity encoding (ECMA-335, section 10.7.2).
         /// I.e. arity is inferred from the name and matching type must have the same
         /// emitted name and arity.
         /// </summary>
         public readonly bool UseCLSCompliantNameArityEncoding
         {
-            get
-            {
-                return _useCLSCompliantNameArityEncoding;
-            }
+            get { return _useCLSCompliantNameArityEncoding; }
         }
 
         /// <summary>
@@ -318,10 +345,7 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public readonly int ForcedArity
         {
-            get
-            {
-                return _forcedArity;
-            }
+            get { return _forcedArity; }
         }
 
         /// <inheritdoc cref="NamespaceSegments"/>
@@ -331,7 +355,9 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_namespaceSegmentsMemory.IsDefault)
                 {
-                    _namespaceSegmentsMemory = MetadataHelpers.SplitQualifiedName(NamespaceNameMemory);
+                    _namespaceSegmentsMemory = MetadataHelpers.SplitQualifiedName(
+                        NamespaceNameMemory
+                    );
                 }
 
                 return _namespaceSegmentsMemory;
@@ -347,7 +373,9 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_namespaceSegments.IsDefault)
                 {
-                    _namespaceSegments = NamespaceSegmentsMemory.SelectAsArray(static s => s.ToString());
+                    _namespaceSegments = NamespaceSegmentsMemory.SelectAsArray(static s =>
+                        s.ToString()
+                    );
                 }
 
                 return _namespaceSegments;
@@ -356,10 +384,7 @@ namespace Microsoft.CodeAnalysis
 
         public readonly bool IsNull
         {
-            get
-            {
-                return _typeName == null && _fullName == null;
-            }
+            get { return _typeName == null && _fullName == null; }
         }
 
         public override string ToString()
@@ -370,7 +395,13 @@ namespace Microsoft.CodeAnalysis
             }
             else
             {
-                return String.Format("{{{0},{1},{2},{3}}}", NamespaceName, TypeName, UseCLSCompliantNameArityEncoding.ToString(), _forcedArity.ToString());
+                return String.Format(
+                    "{{{0},{1},{2},{3}}}",
+                    NamespaceName,
+                    TypeName,
+                    UseCLSCompliantNameArityEncoding.ToString(),
+                    _forcedArity.ToString()
+                );
             }
         }
     }

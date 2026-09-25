@@ -16,9 +16,7 @@ namespace System.Web.WebPages
         private readonly string _suffix;
 
         public DefaultDisplayMode()
-            : this(DisplayModeProvider.DefaultDisplayModeId)
-        {
-        }
+            : this(DisplayModeProvider.DefaultDisplayModeId) { }
 
         public DefaultDisplayMode(string suffix)
         {
@@ -44,7 +42,11 @@ namespace System.Web.WebPages
         /// <summary>
         /// Returns DisplayInfo with the transformed path if it exists.
         /// </summary>
-        public virtual DisplayInfo GetDisplayInfo(HttpContextBase httpContext, string virtualPath, Func<string, bool> virtualPathExists)
+        public virtual DisplayInfo GetDisplayInfo(
+            HttpContextBase httpContext,
+            string virtualPath,
+            Func<string, bool> virtualPathExists
+        )
         {
             string transformedFilename = TransformPath(virtualPath, _suffix);
             if (transformedFilename != null && virtualPathExists(transformedFilename))

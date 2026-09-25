@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     using System;
@@ -10,6 +11,7 @@ namespace DefaultNamespace
     public class DD
     {
         public static int zero = 0;
+
         [Fact]
         public static int TestEntryPoint()
         {

@@ -26,7 +26,10 @@ namespace System.ComponentModel.Tests
         [InlineData("filterString", ToolboxItemFilterType.Require)]
         [InlineData("filterString", ToolboxItemFilterType.Allow - 1)]
         [InlineData("filterString", ToolboxItemFilterType.Require + 1)]
-        public void Ctor_String_ToolboxItemFilterType(string filterString, ToolboxItemFilterType filterType)
+        public void Ctor_String_ToolboxItemFilterType(
+            string filterString,
+            ToolboxItemFilterType filterType
+        )
         {
             var attribute = new ToolboxItemFilterAttribute(filterString, filterType);
             Assert.Equal(filterString ?? string.Empty, attribute.FilterString);
@@ -37,7 +40,10 @@ namespace System.ComponentModel.Tests
         [InlineData(null, "System.ComponentModel.ToolboxItemFilterAttribute")]
         [InlineData("", "System.ComponentModel.ToolboxItemFilterAttribute")]
         [InlineData("filterString", "System.ComponentModel.ToolboxItemFilterAttributefilterString")]
-        public void TypeId_ValidEditorBaseTypeName_ReturnsExcepted(string filterType, object expected)
+        public void TypeId_ValidEditorBaseTypeName_ReturnsExcepted(
+            string filterType,
+            object expected
+        )
         {
             var attribute = new ToolboxItemFilterAttribute(filterType);
             Assert.Equal(expected, attribute.TypeId);
@@ -46,12 +52,30 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            var attribute = new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow);
+            var attribute = new ToolboxItemFilterAttribute(
+                "filterString",
+                ToolboxItemFilterType.Allow
+            );
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow), true };
-            yield return new object[] { attribute, new ToolboxItemFilterAttribute("filterstring", ToolboxItemFilterType.Allow), false };
-            yield return new object[] { attribute, new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Custom), false };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemFilterAttribute("filterstring", ToolboxItemFilterType.Allow),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Custom),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -59,7 +83,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(ToolboxItemFilterAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            ToolboxItemFilterAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
         }
@@ -73,12 +101,30 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Match_TestData()
         {
-            var attribute = new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow);
+            var attribute = new ToolboxItemFilterAttribute(
+                "filterString",
+                ToolboxItemFilterType.Allow
+            );
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow), true };
-            yield return new object[] { attribute, new ToolboxItemFilterAttribute("filterstring", ToolboxItemFilterType.Allow), false };
-            yield return new object[] { attribute, new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Custom), true };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Allow),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemFilterAttribute("filterstring", ToolboxItemFilterType.Allow),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemFilterAttribute("filterString", ToolboxItemFilterType.Custom),
+                true,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -86,7 +132,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Match_TestData))]
-        public void Match_Object_ReturnsExpected(ToolboxItemFilterAttribute attribute, object other, bool expected)
+        public void Match_Object_ReturnsExpected(
+            ToolboxItemFilterAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Match(other));
         }
@@ -98,7 +148,11 @@ namespace System.ComponentModel.Tests
         [InlineData("filterString", ToolboxItemFilterType.Require, "filterString,Require")]
         [InlineData("filterString", ToolboxItemFilterType.Allow - 1, "filterString,")]
         [InlineData("filterString", ToolboxItemFilterType.Require + 1, "filterString,")]
-        public void ToString_Invoke_ReturnsExpected(string filterString, ToolboxItemFilterType filterType, string expected)
+        public void ToString_Invoke_ReturnsExpected(
+            string filterString,
+            ToolboxItemFilterType filterType,
+            string expected
+        )
         {
             var attribute = new ToolboxItemFilterAttribute(filterString, filterType);
             Assert.Equal(expected, attribute.ToString());

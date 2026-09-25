@@ -7,7 +7,11 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+        public static IEnumerable<TResult> Zip<TFirst, TSecond, TResult>(
+            this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector
+        )
         {
             if (first is null)
             {
@@ -27,7 +31,10 @@ namespace System.Linq
             return ZipIterator(first, second, resultSelector);
         }
 
-        public static IEnumerable<(TFirst First, TSecond Second)> Zip<TFirst, TSecond>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second)
+        public static IEnumerable<(TFirst First, TSecond Second)> Zip<TFirst, TSecond>(
+            this IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second
+        )
         {
             if (first is null)
             {
@@ -52,7 +59,11 @@ namespace System.Linq
         /// <param name="second">The second sequence to merge.</param>
         /// <param name="third">The third sequence to merge.</param>
         /// <returns>A sequence of tuples with elements taken from the first, second, and third sequences, in that order.</returns>
-        public static IEnumerable<(TFirst First, TSecond Second, TThird Third)> Zip<TFirst, TSecond, TThird>(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, IEnumerable<TThird> third)
+        public static IEnumerable<(TFirst First, TSecond Second, TThird Third)> Zip<
+            TFirst,
+            TSecond,
+            TThird
+        >(this IEnumerable<TFirst> first, IEnumerable<TSecond> second, IEnumerable<TThird> third)
         {
             if (first is null)
             {
@@ -72,7 +83,10 @@ namespace System.Linq
             return ZipIterator(first, second, third);
         }
 
-        private static IEnumerable<(TFirst First, TSecond Second)> ZipIterator<TFirst, TSecond>(IEnumerable<TFirst> first, IEnumerable<TSecond> second)
+        private static IEnumerable<(TFirst First, TSecond Second)> ZipIterator<TFirst, TSecond>(
+            IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second
+        )
         {
             using (IEnumerator<TFirst> e1 = first.GetEnumerator())
             using (IEnumerator<TSecond> e2 = second.GetEnumerator())
@@ -84,7 +98,11 @@ namespace System.Linq
             }
         }
 
-        private static IEnumerable<TResult> ZipIterator<TFirst, TSecond, TResult>(IEnumerable<TFirst> first, IEnumerable<TSecond> second, Func<TFirst, TSecond, TResult> resultSelector)
+        private static IEnumerable<TResult> ZipIterator<TFirst, TSecond, TResult>(
+            IEnumerable<TFirst> first,
+            IEnumerable<TSecond> second,
+            Func<TFirst, TSecond, TResult> resultSelector
+        )
         {
             using (IEnumerator<TFirst> e1 = first.GetEnumerator())
             using (IEnumerator<TSecond> e2 = second.GetEnumerator())
@@ -96,7 +114,11 @@ namespace System.Linq
             }
         }
 
-        private static IEnumerable<(TFirst First, TSecond Second, TThird Third)> ZipIterator<TFirst, TSecond, TThird>(IEnumerable<TFirst> first, IEnumerable<TSecond> second, IEnumerable<TThird> third)
+        private static IEnumerable<(TFirst First, TSecond Second, TThird Third)> ZipIterator<
+            TFirst,
+            TSecond,
+            TThird
+        >(IEnumerable<TFirst> first, IEnumerable<TSecond> second, IEnumerable<TThird> third)
         {
             using (IEnumerator<TFirst> e1 = first.GetEnumerator())
             using (IEnumerator<TSecond> e2 = second.GetEnumerator())

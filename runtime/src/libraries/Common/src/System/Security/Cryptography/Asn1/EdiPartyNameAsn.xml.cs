@@ -23,7 +23,6 @@ namespace System.Security.Cryptography.Asn1
         {
             writer.PushSequence(tag);
 
-
             if (NameAssigner.HasValue)
             {
                 writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
@@ -37,12 +36,19 @@ namespace System.Security.Cryptography.Asn1
             writer.PopSequence(tag);
         }
 
-        internal static EdiPartyNameAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static EdiPartyNameAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static EdiPartyNameAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static EdiPartyNameAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -58,12 +64,21 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out EdiPartyNameAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out EdiPartyNameAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out EdiPartyNameAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out EdiPartyNameAsn decoded
+        )
         {
             try
             {
@@ -75,28 +90,45 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out EdiPartyNameAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out EdiPartyNameAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
             AsnValueReader explicitReader;
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
+            )
             {
-                explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 0));
+                explicitReader = sequenceReader.ReadSequence(
+                    new Asn1Tag(TagClass.ContextSpecific, 0)
+                );
                 System.Security.Cryptography.Asn1.DirectoryStringAsn tmpNameAssigner;
-                System.Security.Cryptography.Asn1.DirectoryStringAsn.Decode(ref explicitReader, rebind, out tmpNameAssigner);
+                System.Security.Cryptography.Asn1.DirectoryStringAsn.Decode(
+                    ref explicitReader,
+                    rebind,
+                    out tmpNameAssigner
+                );
                 decoded.NameAssigner = tmpNameAssigner;
 
                 explicitReader.ThrowIfNotEmpty();
             }
 
-
             explicitReader = sequenceReader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 1));
-            System.Security.Cryptography.Asn1.DirectoryStringAsn.Decode(ref explicitReader, rebind, out decoded.PartyName);
+            System.Security.Cryptography.Asn1.DirectoryStringAsn.Decode(
+                ref explicitReader,
+                rebind,
+                out decoded.PartyName
+            );
             explicitReader.ThrowIfNotEmpty();
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

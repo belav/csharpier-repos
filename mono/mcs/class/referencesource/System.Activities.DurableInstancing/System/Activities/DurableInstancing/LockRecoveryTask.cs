@@ -8,10 +8,20 @@ namespace System.Activities.DurableInstancing
 
     class LockRecoveryTask : PersistenceTask
     {
-        public LockRecoveryTask(SqlWorkflowInstanceStore store, SqlWorkflowInstanceStoreLock storeLock, TimeSpan taskInterval, TimeSpan taskTimeout)
-            : base(store, storeLock, new RecoverInstanceLocksCommand(), taskInterval, taskTimeout, true)
-        {
-        }
+        public LockRecoveryTask(
+            SqlWorkflowInstanceStore store,
+            SqlWorkflowInstanceStoreLock storeLock,
+            TimeSpan taskInterval,
+            TimeSpan taskTimeout
+        )
+            : base(
+                store,
+                storeLock,
+                new RecoverInstanceLocksCommand(),
+                taskInterval,
+                taskTimeout,
+                true
+            ) { }
 
         protected override void HandleError(Exception exception)
         {

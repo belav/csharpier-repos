@@ -90,7 +90,9 @@ namespace System.SpanTests
 
                     Assert.False(firstSpan.SequenceEqual<byte>(secondSpan));
                     Assert.False(firstSpan.SequenceEqual<byte>(secondSpan, null));
-                    Assert.False(firstSpan.SequenceEqual<byte>(secondSpan, EqualityComparer<byte>.Default));
+                    Assert.False(
+                        firstSpan.SequenceEqual<byte>(secondSpan, EqualityComparer<byte>.Default)
+                    );
                 }
             }
         }

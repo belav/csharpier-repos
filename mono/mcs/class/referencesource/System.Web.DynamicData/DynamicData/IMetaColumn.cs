@@ -1,11 +1,13 @@
-﻿namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData
+{
     using System;
     using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Reflection;
     using System.Web.DynamicData.ModelProviders;
 
-    internal interface IMetaColumn {
+    internal interface IMetaColumn
+    {
         bool ApplyFormatInEditMode { get; }
         bool AllowInitialValue { get; }
         AttributeCollection Attributes { get; }

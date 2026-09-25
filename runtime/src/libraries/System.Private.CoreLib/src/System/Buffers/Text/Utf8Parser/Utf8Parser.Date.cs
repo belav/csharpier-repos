@@ -29,64 +29,90 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out DateTime value, out int bytesConsumed, char standardFormat = default)
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out DateTime value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
             switch (standardFormat)
             {
                 case 'R':
+                {
+                    if (
+                        !TryParseDateTimeOffsetR(
+                            source,
+                            NoFlipCase,
+                            out DateTimeOffset dateTimeOffset,
+                            out bytesConsumed
+                        )
+                    )
                     {
-                        if (!TryParseDateTimeOffsetR(source, NoFlipCase, out DateTimeOffset dateTimeOffset, out bytesConsumed))
-                        {
-                            value = default;
-                            return false;
-                        }
-                        value = dateTimeOffset.DateTime;  // (returns a DateTimeKind.Unspecified to match DateTime.ParseExact(). Maybe better to return UtcDateTime instead?)
-                        return true;
+                        value = default;
+                        return false;
                     }
+                    value = dateTimeOffset.DateTime; // (returns a DateTimeKind.Unspecified to match DateTime.ParseExact(). Maybe better to return UtcDateTime instead?)
+                    return true;
+                }
 
                 case 'l':
+                {
+                    if (
+                        !TryParseDateTimeOffsetR(
+                            source,
+                            FlipCase,
+                            out DateTimeOffset dateTimeOffset,
+                            out bytesConsumed
+                        )
+                    )
                     {
-                        if (!TryParseDateTimeOffsetR(source, FlipCase, out DateTimeOffset dateTimeOffset, out bytesConsumed))
-                        {
-                            value = default;
-                            return false;
-                        }
-                        value = dateTimeOffset.DateTime;  // (returns a DateTimeKind.Unspecified to match DateTime.ParseExact(). Maybe better to return UtcDateTime instead?)
-                        return true;
+                        value = default;
+                        return false;
                     }
+                    value = dateTimeOffset.DateTime; // (returns a DateTimeKind.Unspecified to match DateTime.ParseExact(). Maybe better to return UtcDateTime instead?)
+                    return true;
+                }
 
                 case 'O':
+                {
+                    // Emulates DateTime.ParseExact(text, "O", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind)
+                    // In particular, the formatted string "encodes" the DateTimeKind according to the following table:
+                    //
+                    //         2017-06-12T05:30:45.7680000       - Unspecified
+                    //         2017-06-12T05:30:45.7680000+00:00 - Local
+                    //         2017-06-12T05:30:45.7680000Z      - Utc
+
+                    if (
+                        !TryParseDateTimeOffsetO(
+                            source,
+                            out DateTimeOffset dateTimeOffset,
+                            out bytesConsumed,
+                            out DateTimeKind kind
+                        )
+                    )
                     {
-                        // Emulates DateTime.ParseExact(text, "O", CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind)
-                        // In particular, the formatted string "encodes" the DateTimeKind according to the following table:
-                        //
-                        //         2017-06-12T05:30:45.7680000       - Unspecified
-                        //         2017-06-12T05:30:45.7680000+00:00 - Local
-                        //         2017-06-12T05:30:45.7680000Z      - Utc
-
-                        if (!TryParseDateTimeOffsetO(source, out DateTimeOffset dateTimeOffset, out bytesConsumed, out DateTimeKind kind))
-                        {
-                            value = default;
-                            bytesConsumed = 0;
-                            return false;
-                        }
-
-                        switch (kind)
-                        {
-                            case DateTimeKind.Local:
-                                value = dateTimeOffset.LocalDateTime;
-                                break;
-                            case DateTimeKind.Utc:
-                                value = dateTimeOffset.UtcDateTime;
-                                break;
-                            default:
-                                Debug.Assert(kind == DateTimeKind.Unspecified);
-                                value = dateTimeOffset.DateTime;
-                                break;
-                        }
-
-                        return true;
+                        value = default;
+                        bytesConsumed = 0;
+                        return false;
                     }
+
+                    switch (kind)
+                    {
+                        case DateTimeKind.Local:
+                            value = dateTimeOffset.LocalDateTime;
+                            break;
+                        case DateTimeKind.Utc:
+                            value = dateTimeOffset.UtcDateTime;
+                            break;
+                        default:
+                            Debug.Assert(kind == DateTimeKind.Unspecified);
+                            value = dateTimeOffset.DateTime;
+                            break;
+                    }
+
+                    return true;
+                }
 
                 case default(char):
                 case 'G':
@@ -118,20 +144,29 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out DateTimeOffset value, out int bytesConsumed, char standardFormat = default)
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out DateTimeOffset value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
             return standardFormat switch
             {
                 'R' => TryParseDateTimeOffsetR(source, NoFlipCase, out value, out bytesConsumed),
                 'l' => TryParseDateTimeOffsetR(source, FlipCase, out value, out bytesConsumed),
                 'O' => TryParseDateTimeOffsetO(source, out value, out bytesConsumed, out _),
-                default(char) => TryParseDateTimeOffsetDefault(source, out value, out bytesConsumed),
+                default(char) => TryParseDateTimeOffsetDefault(
+                    source,
+                    out value,
+                    out bytesConsumed
+                ),
                 'G' => TryParseDateTimeG(source, out DateTime _, out value, out bytesConsumed),
                 _ => ParserHelpers.TryParseThrowFormatException(out value, out bytesConsumed),
             };
         }
 
-        private const uint FlipCase = 0x00000020u;  // XOR mask to flip the case of a letter.
+        private const uint FlipCase = 0x00000020u; // XOR mask to flip the case of a letter.
         private const uint NoFlipCase = 0x00000000u;
     }
 }

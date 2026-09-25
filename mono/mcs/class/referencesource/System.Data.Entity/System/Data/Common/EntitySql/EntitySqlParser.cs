@@ -29,7 +29,7 @@ namespace System.Data.Common.EntitySql
         internal EntitySqlParser(Perspective perspective)
         {
             Debug.Assert(null != perspective, "null perspective?");
-            _perspective = perspective;                
+            _perspective = perspective;
         }
 
         /// <summary>
@@ -47,7 +47,13 @@ namespace System.Data.Common.EntitySql
                 EntityUtil.CheckArgumentContainsNull(ref paramsEnum, "parameters");
             }
 
-            var result = CqlQuery.Compile(query, _perspective, null /* parser options - use default */, parameters);
+            var result = CqlQuery.Compile(
+                query,
+                _perspective,
+                null /* parser options - use default */
+                ,
+                parameters
+            );
             return result;
         }
 
@@ -63,7 +69,15 @@ namespace System.Data.Common.EntitySql
                 EntityUtil.CheckArgumentContainsNull(ref varsEnum, "variables");
             }
 
-            DbLambda result = CqlQuery.CompileQueryCommandLambda(query, _perspective, null /* parser options - use default */, null /* parameters */, variables);
+            DbLambda result = CqlQuery.CompileQueryCommandLambda(
+                query,
+                _perspective,
+                null /* parser options - use default */
+                ,
+                null /* parameters */
+                ,
+                variables
+            );
 
             return result;
         }

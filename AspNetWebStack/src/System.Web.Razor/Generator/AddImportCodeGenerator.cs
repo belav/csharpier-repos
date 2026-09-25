@@ -28,9 +28,8 @@ namespace System.Web.Razor.Generator
                 ns = ns.Substring(1);
             }
 
-            CodeNamespaceImport import = context.Namespace
-                .Imports
-                .OfType<CodeNamespaceImport>()
+            CodeNamespaceImport import = context
+                .Namespace.Imports.OfType<CodeNamespaceImport>()
                 .Where(i => String.Equals(i.Namespace, ns.Trim(), StringComparison.Ordinal))
                 .FirstOrDefault();
 
@@ -53,17 +52,14 @@ namespace System.Web.Razor.Generator
         public override bool Equals(object obj)
         {
             AddImportCodeGenerator other = obj as AddImportCodeGenerator;
-            return other != null &&
-                   String.Equals(Namespace, other.Namespace, StringComparison.Ordinal) &&
-                   NamespaceKeywordLength == other.NamespaceKeywordLength;
+            return other != null
+                && String.Equals(Namespace, other.Namespace, StringComparison.Ordinal)
+                && NamespaceKeywordLength == other.NamespaceKeywordLength;
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(Namespace)
-                .Add(NamespaceKeywordLength)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(Namespace).Add(NamespaceKeywordLength).CombinedHash;
         }
     }
 }

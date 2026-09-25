@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,28 +30,19 @@ using System.Runtime.Serialization;
 
 namespace System.IdentityModel.Selectors
 {
-	[Serializable]
-	public class PolicyValidationException : Exception
-	{
-		public PolicyValidationException ()
-			: this ("PolicyValidation exception.")
-		{
-		}
+    [Serializable]
+    public class PolicyValidationException : Exception
+    {
+        public PolicyValidationException()
+            : this("PolicyValidation exception.") { }
 
-		public PolicyValidationException (string message)
-			: this (message, null)
-		{
-		}
+        public PolicyValidationException(string message)
+            : this(message, null) { }
 
-		protected PolicyValidationException (SerializationInfo info,
-			StreamingContext context)
-			: base (info, context)
-		{
-		}
+        protected PolicyValidationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
-		public PolicyValidationException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
-	}
+        public PolicyValidationException(string message, Exception innerException)
+            : base(message, innerException) { }
+    }
 }

@@ -73,7 +73,10 @@ namespace WebMatrix.WebData
                 var builtInMembership = Membership.Providers[BuiltInMembershipProviderName];
                 if (builtInMembership != null)
                 {
-                    var simpleMembership = CreateDefaultSimpleMembershipProvider(BuiltInMembershipProviderName, currentDefault: builtInMembership);
+                    var simpleMembership = CreateDefaultSimpleMembershipProvider(
+                        BuiltInMembershipProviderName,
+                        currentDefault: builtInMembership
+                    );
                     Membership.Providers.Remove(BuiltInMembershipProviderName);
                     Membership.Providers.Add(simpleMembership);
                 }
@@ -83,7 +86,10 @@ namespace WebMatrix.WebData
                 var builtInRoles = Roles.Providers[BuiltInRolesProviderName];
                 if (builtInRoles != null)
                 {
-                    var simpleRoles = CreateDefaultSimpleRoleProvider(BuiltInRolesProviderName, currentDefault: builtInRoles);
+                    var simpleRoles = CreateDefaultSimpleRoleProvider(
+                        BuiltInRolesProviderName,
+                        currentDefault: builtInRoles
+                    );
                     Roles.Providers.Remove(BuiltInRolesProviderName);
                     Roles.Providers.Add(simpleRoles);
                 }
@@ -95,104 +101,152 @@ namespace WebMatrix.WebData
             ExtendedMembershipProvider provider = Membership.Provider as ExtendedMembershipProvider;
             if (provider == null)
             {
-                throw new InvalidOperationException(WebDataResources.Security_NoExtendedMembershipProvider);
+                throw new InvalidOperationException(
+                    WebDataResources.Security_NoExtendedMembershipProvider
+                );
             }
             provider.VerifyInitialized(); // Have the provider verify that it's initialized (only our SimpleMembershipProvider does anything here)
             return provider;
         }
 
-        public static void InitializeDatabaseConnection(string connectionStringName, string userTableName, string userIdColumn, string userNameColumn, bool autoCreateTables)
+        public static void InitializeDatabaseConnection(
+            string connectionStringName,
+            string userTableName,
+            string userIdColumn,
+            string userNameColumn,
+            bool autoCreateTables
+        )
         {
             InitializeDatabaseConnection(
-                connectionStringName, 
-                userTableName, 
-                userIdColumn, 
-                userNameColumn, 
-                autoCreateTables, 
-                SimpleMembershipProviderCasingBehavior.NormalizeCasing);
+                connectionStringName,
+                userTableName,
+                userIdColumn,
+                userNameColumn,
+                autoCreateTables,
+                SimpleMembershipProviderCasingBehavior.NormalizeCasing
+            );
         }
 
         public static void InitializeDatabaseConnection(
-            string connectionStringName, 
-            string userTableName, 
-            string userIdColumn, 
-            string userNameColumn, 
+            string connectionStringName,
+            string userTableName,
+            string userIdColumn,
+            string userNameColumn,
             bool autoCreateTables,
-            SimpleMembershipProviderCasingBehavior casingBehavior)
+            SimpleMembershipProviderCasingBehavior casingBehavior
+        )
         {
             DatabaseConnectionInfo connect = new DatabaseConnectionInfo();
             connect.ConnectionStringName = connectionStringName;
-            InitializeProviders(connect, userTableName, userIdColumn, userNameColumn, autoCreateTables, casingBehavior);
+            InitializeProviders(
+                connect,
+                userTableName,
+                userIdColumn,
+                userNameColumn,
+                autoCreateTables,
+                casingBehavior
+            );
         }
 
         public static void InitializeDatabaseConnection(
-            string connectionString, 
-            string providerName, 
-            string userTableName, 
-            string userIdColumn, 
-            string userNameColumn, 
-            bool autoCreateTables)
+            string connectionString,
+            string providerName,
+            string userTableName,
+            string userIdColumn,
+            string userNameColumn,
+            bool autoCreateTables
+        )
         {
             InitializeDatabaseConnection(
-                connectionString, 
-                providerName, 
-                userTableName, 
-                userIdColumn, 
-                userNameColumn, 
-                autoCreateTables, 
-                SimpleMembershipProviderCasingBehavior.NormalizeCasing);
+                connectionString,
+                providerName,
+                userTableName,
+                userIdColumn,
+                userNameColumn,
+                autoCreateTables,
+                SimpleMembershipProviderCasingBehavior.NormalizeCasing
+            );
         }
 
         public static void InitializeDatabaseConnection(
-            string connectionString, 
-            string providerName, 
-            string userTableName, 
-            string userIdColumn, 
+            string connectionString,
+            string providerName,
+            string userTableName,
+            string userIdColumn,
             string userNameColumn,
             bool autoCreateTables,
-            SimpleMembershipProviderCasingBehavior casingBehavior)
+            SimpleMembershipProviderCasingBehavior casingBehavior
+        )
         {
             DatabaseConnectionInfo connect = new DatabaseConnectionInfo();
             connect.ConnectionString = connectionString;
             connect.ProviderName = providerName;
-            InitializeProviders(connect, userTableName, userIdColumn, userNameColumn, autoCreateTables, casingBehavior);
+            InitializeProviders(
+                connect,
+                userTableName,
+                userIdColumn,
+                userNameColumn,
+                autoCreateTables,
+                casingBehavior
+            );
         }
 
         private static void InitializeProviders(
-            DatabaseConnectionInfo connect, 
-            string userTableName, 
-            string userIdColumn, 
-            string userNameColumn, 
-            bool autoCreateTables, 
-            SimpleMembershipProviderCasingBehavior casingBehavior)
+            DatabaseConnectionInfo connect,
+            string userTableName,
+            string userIdColumn,
+            string userNameColumn,
+            bool autoCreateTables,
+            SimpleMembershipProviderCasingBehavior casingBehavior
+        )
         {
-            SimpleMembershipProvider simpleMembership = Membership.Provider as SimpleMembershipProvider;
+            SimpleMembershipProvider simpleMembership =
+                Membership.Provider as SimpleMembershipProvider;
             if (simpleMembership != null)
             {
-                InitializeMembershipProvider(simpleMembership, connect, userTableName, userIdColumn, userNameColumn, autoCreateTables, casingBehavior);
+                InitializeMembershipProvider(
+                    simpleMembership,
+                    connect,
+                    userTableName,
+                    userIdColumn,
+                    userNameColumn,
+                    autoCreateTables,
+                    casingBehavior
+                );
             }
 
             SimpleRoleProvider simpleRoles = Roles.Provider as SimpleRoleProvider;
             if (simpleRoles != null)
             {
-                InitializeRoleProvider(simpleRoles, connect, userTableName, userIdColumn, userNameColumn, autoCreateTables, casingBehavior);
+                InitializeRoleProvider(
+                    simpleRoles,
+                    connect,
+                    userTableName,
+                    userIdColumn,
+                    userNameColumn,
+                    autoCreateTables,
+                    casingBehavior
+                );
             }
 
             Initialized = true;
         }
 
         internal static void InitializeMembershipProvider(
-            SimpleMembershipProvider simpleMembership, 
-            DatabaseConnectionInfo connect, 
-            string userTableName, 
-            string userIdColumn, 
-            string userNameColumn, 
+            SimpleMembershipProvider simpleMembership,
+            DatabaseConnectionInfo connect,
+            string userTableName,
+            string userIdColumn,
+            string userNameColumn,
             bool createTables,
-            SimpleMembershipProviderCasingBehavior casingBehavior)
+            SimpleMembershipProviderCasingBehavior casingBehavior
+        )
         {
             if (simpleMembership.InitializeCalled)
             {
-                throw new InvalidOperationException(WebDataResources.Security_InitializeAlreadyCalled);
+                throw new InvalidOperationException(
+                    WebDataResources.Security_InitializeAlreadyCalled
+                );
             }
 
             simpleMembership.CasingBehavior = casingBehavior;
@@ -213,17 +267,20 @@ namespace WebMatrix.WebData
         }
 
         internal static void InitializeRoleProvider(
-            SimpleRoleProvider simpleRoles, 
-            DatabaseConnectionInfo connect, 
-            string userTableName, 
-            string userIdColumn, 
-            string userNameColumn, 
+            SimpleRoleProvider simpleRoles,
+            DatabaseConnectionInfo connect,
+            string userTableName,
+            string userIdColumn,
+            string userNameColumn,
             bool createTables,
-            SimpleMembershipProviderCasingBehavior casingBehavior)
+            SimpleMembershipProviderCasingBehavior casingBehavior
+        )
         {
             if (simpleRoles.InitializeCalled)
             {
-                throw new InvalidOperationException(WebDataResources.Security_InitializeAlreadyCalled);
+                throw new InvalidOperationException(
+                    WebDataResources.Security_InitializeAlreadyCalled
+                );
             }
 
             simpleRoles.CasingBehavior = casingBehavior;
@@ -239,7 +296,10 @@ namespace WebMatrix.WebData
             simpleRoles.InitializeCalled = true;
         }
 
-        private static SimpleMembershipProvider CreateDefaultSimpleMembershipProvider(string name, MembershipProvider currentDefault)
+        private static SimpleMembershipProvider CreateDefaultSimpleMembershipProvider(
+            string name,
+            MembershipProvider currentDefault
+        )
         {
             var membership = new SimpleMembershipProvider(previousProvider: currentDefault);
             NameValueCollection config = new NameValueCollection();
@@ -247,7 +307,10 @@ namespace WebMatrix.WebData
             return membership;
         }
 
-        private static SimpleRoleProvider CreateDefaultSimpleRoleProvider(string name, RoleProvider currentDefault)
+        private static SimpleRoleProvider CreateDefaultSimpleRoleProvider(
+            string name,
+            RoleProvider currentDefault
+        )
         {
             var roleProvider = new SimpleRoleProvider(previousProvider: currentDefault);
             NameValueCollection config = new NameValueCollection();
@@ -255,8 +318,17 @@ namespace WebMatrix.WebData
             return roleProvider;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Login", Justification = "Login is used more consistently in ASP.Net")]
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1726:UsePreferredTerms",
+            MessageId = "Login",
+            Justification = "Login is used more consistently in ASP.Net"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes"
+        )]
         public static bool Login(string userName, string password, bool persistCookie = false)
         {
             VerifyProvider();
@@ -268,20 +340,32 @@ namespace WebMatrix.WebData
             return success;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1726:UsePreferredTerms", MessageId = "Logout", Justification = "Login is used more consistently in ASP.Net")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1726:UsePreferredTerms",
+            MessageId = "Logout",
+            Justification = "Login is used more consistently in ASP.Net"
+        )]
         public static void Logout()
         {
             VerifyProvider();
             FormsAuthentication.SignOut();
         }
 
-        public static bool ChangePassword(string userName, string currentPassword, string newPassword)
+        public static bool ChangePassword(
+            string userName,
+            string currentPassword,
+            string newPassword
+        )
         {
             VerifyProvider();
             bool success = false;
             try
             {
-                var currentUser = Membership.GetUser(userName, true /* userIsOnline */);
+                var currentUser = Membership.GetUser(
+                    userName,
+                    true /* userIsOnline */
+                );
                 success = currentUser.ChangePassword(currentPassword, newPassword);
             }
             catch (ArgumentException)
@@ -306,8 +390,16 @@ namespace WebMatrix.WebData
             return provider.ConfirmAccount(userName, accountConfirmationToken);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes")]
-        public static string CreateAccount(string userName, string password, bool requireConfirmationToken = false)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes"
+        )]
+        public static string CreateAccount(
+            string userName,
+            string password,
+            bool requireConfirmationToken = false
+        )
         {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
@@ -315,8 +407,17 @@ namespace WebMatrix.WebData
             return provider.CreateAccount(userName, password, requireConfirmationToken);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes")]
-        public static string CreateUserAndAccount(string userName, string password, object propertyValues = null, bool requireConfirmationToken = false)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes"
+        )]
+        public static string CreateUserAndAccount(
+            string userName,
+            string password,
+            object propertyValues = null,
+            bool requireConfirmationToken = false
+        )
         {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
@@ -335,11 +436,23 @@ namespace WebMatrix.WebData
                 }
             }
 
-            return provider.CreateUserAndAccount(userName, password, requireConfirmationToken, values);
+            return provider.CreateUserAndAccount(
+                userName,
+                password,
+                requireConfirmationToken,
+                values
+            );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes")]
-        public static string GeneratePasswordResetToken(string userName, int tokenExpirationInMinutesFromNow = 1440)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1026:DefaultParametersShouldNotBeUsed",
+            Justification = "This is a helper class, and we are not removing optional parameters from methods in helper classes"
+        )]
+        public static string GeneratePasswordResetToken(
+            string userName,
+            int tokenExpirationInMinutesFromNow = 1440
+        )
         {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
@@ -445,25 +558,49 @@ namespace WebMatrix.WebData
             return provider.ResetPasswordWithToken(passwordResetToken, newPassword);
         }
 
-        public static bool IsAccountLockedOut(string userName, int allowedPasswordAttempts, int intervalInSeconds)
+        public static bool IsAccountLockedOut(
+            string userName,
+            int allowedPasswordAttempts,
+            int intervalInSeconds
+        )
         {
             VerifyProvider();
-            return IsAccountLockedOut(userName, allowedPasswordAttempts, TimeSpan.FromSeconds(intervalInSeconds));
+            return IsAccountLockedOut(
+                userName,
+                allowedPasswordAttempts,
+                TimeSpan.FromSeconds(intervalInSeconds)
+            );
         }
 
-        public static bool IsAccountLockedOut(string userName, int allowedPasswordAttempts, TimeSpan interval)
+        public static bool IsAccountLockedOut(
+            string userName,
+            int allowedPasswordAttempts,
+            TimeSpan interval
+        )
         {
             ExtendedMembershipProvider provider = VerifyProvider();
             Debug.Assert(provider != null); // VerifyProvider checks this
 
-            return IsAccountLockedOutInternal(provider, userName, allowedPasswordAttempts, interval);
+            return IsAccountLockedOutInternal(
+                provider,
+                userName,
+                allowedPasswordAttempts,
+                interval
+            );
         }
 
-        internal static bool IsAccountLockedOutInternal(ExtendedMembershipProvider provider, string userName, int allowedPasswordAttempts, TimeSpan interval)
+        internal static bool IsAccountLockedOutInternal(
+            ExtendedMembershipProvider provider,
+            string userName,
+            int allowedPasswordAttempts,
+            TimeSpan interval
+        )
         {
-            return (provider.GetUser(userName, false) != null &&
-                    provider.GetPasswordFailuresSinceLastSuccess(userName) > allowedPasswordAttempts &&
-                    provider.GetLastPasswordFailureDate(userName).Add(interval) > DateTime.UtcNow);
+            return (
+                provider.GetUser(userName, false) != null
+                && provider.GetPasswordFailuresSinceLastSuccess(userName) > allowedPasswordAttempts
+                && provider.GetLastPasswordFailureDate(userName).Add(interval) > DateTime.UtcNow
+            );
         }
 
         public static int GetPasswordFailuresSinceLastSuccess(string userName)

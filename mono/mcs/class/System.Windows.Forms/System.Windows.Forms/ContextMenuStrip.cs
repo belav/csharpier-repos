@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,75 +30,75 @@ using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	[ComVisible (true)]
-	[ClassInterface (ClassInterfaceType.AutoDispatch)]
-	[DefaultEvent ("Opening")]
-	public class ContextMenuStrip : ToolStripDropDownMenu
-	{
-		#region Public Construtors
-		public ContextMenuStrip () : base ()
-		{
-		}
-		
-		public ContextMenuStrip (IContainer container) : this ()
-		{
-			// TODO: handle `container` argument
-		}
-		#endregion
+    [ComVisible(true)]
+    [ClassInterface(ClassInterfaceType.AutoDispatch)]
+    [DefaultEvent("Opening")]
+    public class ContextMenuStrip : ToolStripDropDownMenu
+    {
+        #region Public Construtors
+        public ContextMenuStrip()
+            : base() { }
 
-		#region Public Properties
+        public ContextMenuStrip(IContainer container)
+            : this()
+        {
+            // TODO: handle `container` argument
+        }
+        #endregion
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public Control SourceControl { get; protected set; }
-		
-		#endregion
+        #region Public Properties
 
-		#region Protected Methods
-		protected override void Dispose (bool disposing)
-		{
-			base.Dispose (disposing);
-		}
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public Control SourceControl { get; protected set; }
 
-		protected override void SetVisibleCore (bool visible)
-		{
-			base.SetVisibleCore (visible);
-			if (visible)
-				XplatUI.SetTopmost (this.Handle, true);
-		}
+        #endregion
 
-		protected override void SetOwnerControl (Control newOwner)
-		{
-			base.SetOwnerControl (newOwner);
-			SourceControl = newOwner;
-			OnSetOwnerControlDone (new SetOwnerControlDoneArgs (newOwner));
-		}
-		#endregion
+        #region Protected Methods
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
+        }
 
-		#region Internal Events
+        protected override void SetVisibleCore(bool visible)
+        {
+            base.SetVisibleCore(visible);
+            if (visible)
+                XplatUI.SetTopmost(this.Handle, true);
+        }
 
-		internal delegate void SetOwnerControlDoneHandler (object sender, SetOwnerControlDoneArgs e);
-		
-		// Is used by UIA API.
-		[Browsable (false)]
-		internal static event SetOwnerControlDoneHandler SetOwnerControlDone; 
+        protected override void SetOwnerControl(Control newOwner)
+        {
+            base.SetOwnerControl(newOwner);
+            SourceControl = newOwner;
+            OnSetOwnerControlDone(new SetOwnerControlDoneArgs(newOwner));
+        }
+        #endregion
 
-		private void OnSetOwnerControlDone (SetOwnerControlDoneArgs e)
-		{
-			if (SetOwnerControlDone != null)
-				SetOwnerControlDone (this, e);
-		}
+        #region Internal Events
 
-		internal class SetOwnerControlDoneArgs : EventArgs
-		{
-			public readonly Control NewOwner;
+        internal delegate void SetOwnerControlDoneHandler(object sender, SetOwnerControlDoneArgs e);
 
-			public SetOwnerControlDoneArgs (Control newOwner)
-			{
-				NewOwner = newOwner;
-			}
-		}
+        // Is used by UIA API.
+        [Browsable(false)]
+        internal static event SetOwnerControlDoneHandler SetOwnerControlDone;
 
-		#endregion
-	}
+        private void OnSetOwnerControlDone(SetOwnerControlDoneArgs e)
+        {
+            if (SetOwnerControlDone != null)
+                SetOwnerControlDone(this, e);
+        }
+
+        internal class SetOwnerControlDoneArgs : EventArgs
+        {
+            public readonly Control NewOwner;
+
+            public SetOwnerControlDoneArgs(Control newOwner)
+            {
+                NewOwner = newOwner;
+            }
+        }
+
+        #endregion
+    }
 }

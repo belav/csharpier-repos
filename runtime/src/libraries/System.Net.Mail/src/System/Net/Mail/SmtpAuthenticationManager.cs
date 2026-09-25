@@ -7,7 +7,8 @@ namespace System.Net.Mail
 {
     internal static class SmtpAuthenticationManager
     {
-        private static readonly List<ISmtpAuthenticationModule> s_modules = new List<ISmtpAuthenticationModule>();
+        private static readonly List<ISmtpAuthenticationModule> s_modules =
+            new List<ISmtpAuthenticationModule>();
 
         static SmtpAuthenticationManager()
         {

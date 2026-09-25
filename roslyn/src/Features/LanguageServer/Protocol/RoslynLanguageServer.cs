@@ -17,10 +17,15 @@ using StreamJsonRpc;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    internal sealed class RoslynLanguageServer : AbstractLanguageServer<RequestContext>, IOnInitialized
+    internal sealed class RoslynLanguageServer
+        : AbstractLanguageServer<RequestContext>,
+            IOnInitialized
     {
         private readonly AbstractLspServiceProvider _lspServiceProvider;
-        private readonly ImmutableDictionary<Type, ImmutableArray<Func<ILspServices, object>>> _baseServices;
+        private readonly ImmutableDictionary<
+            Type,
+            ImmutableArray<Func<ILspServices, object>>
+        > _baseServices;
         private readonly WellKnownLspServerKinds _serverKind;
 
         public RoslynLanguageServer(
@@ -30,14 +35,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             ILspServiceLogger logger,
             HostServices hostServices,
             ImmutableArray<string> supportedLanguages,
-            WellKnownLspServerKinds serverKind)
+            WellKnownLspServerKinds serverKind
+        )
             : base(jsonRpc, logger)
         {
             _lspServiceProvider = lspServiceProvider;
             _serverKind = serverKind;
 
             // Create services that require base dependencies (jsonrpc) or are more complex to create to the set manually.
-            _baseServices = GetBaseServices(jsonRpc, logger, capabilitiesProvider, hostServices, serverKind, supportedLanguages);
+            _baseServices = GetBaseServices(
+                jsonRpc,
+                logger,
+                capabilitiesProvider,
+                hostServices,
+                serverKind,
+                supportedLanguages
+            );
 
             // This spins up the queue and ensure the LSP is ready to start receiving requests
             Initialize();
@@ -50,17 +63,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
 
         protected override IRequestExecutionQueue<RequestContext> ConstructRequestExecutionQueue()
         {
-            var provider = GetLspServices().GetRequiredService<IRequestExecutionQueueProvider<RequestContext>>();
+            var provider = GetLspServices()
+                .GetRequiredService<IRequestExecutionQueueProvider<RequestContext>>();
             return provider.CreateRequestExecutionQueue(this, _logger, GetHandlerProvider());
         }
 
-        private ImmutableDictionary<Type, ImmutableArray<Func<ILspServices, object>>> GetBaseServices(
+        private ImmutableDictionary<
+            Type,
+            ImmutableArray<Func<ILspServices, object>>
+        > GetBaseServices(
             JsonRpc jsonRpc,
             ILspServiceLogger logger,
             ICapabilitiesProvider capabilitiesProvider,
             HostServices hostServices,
             WellKnownLspServerKinds serverKind,
-            ImmutableArray<string> supportedLanguages)
+            ImmutableArray<string> supportedLanguages
+        )
         {
             var baseServices = new Dictionary<Type, ImmutableArray<Func<ILspServices, object>>>();
             var clientLanguageServerManager = new ClientLanguageServerManager(jsonRpc);
@@ -72,8 +90,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             AddBaseService<ICapabilitiesProvider>(capabilitiesProvider);
             AddBaseService<ILifeCycleManager>(lifeCycleManager);
             AddBaseService(new ServerInfoProvider(serverKind, supportedLanguages));
-            AddBaseServiceFromFunc<IRequestContextFactory<RequestContext>>((lspServices) => new RequestContextFactory(lspServices));
-            AddBaseServiceFromFunc<IRequestExecutionQueue<RequestContext>>((_) => GetRequestExecutionQueue());
+            AddBaseServiceFromFunc<IRequestContextFactory<RequestContext>>(
+                (lspServices) => new RequestContextFactory(lspServices)
+            );
+            AddBaseServiceFromFunc<IRequestExecutionQueue<RequestContext>>(
+                (_) => GetRequestExecutionQueue()
+            );
             AddBaseService<IInitializeManager>(new InitializeManager());
             AddBaseService<IMethodHandler>(new InitializeHandler());
             AddBaseService<IMethodHandler>(new InitializedHandler());
@@ -84,23 +106,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             // those cases, we do not need to add an additional workspace to manage new files we hear about.  So only
             // add the LspMiscellaneousFilesWorkspace for hosts that have not already brought their own.
             if (serverKind == WellKnownLspServerKinds.CSharpVisualBasicLspServer)
-                AddBaseService<LspMiscellaneousFilesWorkspace>(new LspMiscellaneousFilesWorkspace(hostServices));
+                AddBaseService<LspMiscellaneousFilesWorkspace>(
+                    new LspMiscellaneousFilesWorkspace(hostServices)
+                );
 
             return baseServices.ToImmutableDictionary();
 
-            void AddBaseService<T>(T instance) where T : class
+            void AddBaseService<T>(T instance)
+                where T : class
             {
                 AddBaseServiceFromFunc<T>((_) => instance);
             }
 
             void AddBaseServiceFromFunc<T>(Func<ILspServices, object> creatorFunc)
             {
-                var added = baseServices.GetValueOrDefault(typeof(T), ImmutableArray<Func<ILspServices, object>>.Empty).Add(creatorFunc);
+                var added = baseServices
+                    .GetValueOrDefault(typeof(T), ImmutableArray<Func<ILspServices, object>>.Empty)
+                    .Add(creatorFunc);
                 baseServices[typeof(T)] = added;
             }
         }
 
-        public Task OnInitializedAsync(ClientCapabilities clientCapabilities, RequestContext context, CancellationToken cancellationToken)
+        public Task OnInitializedAsync(
+            ClientCapabilities clientCapabilities,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             OnInitialized();
             return Task.CompletedTask;

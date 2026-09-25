@@ -17,7 +17,9 @@ namespace Internal.TypeSystem.Ecma
             EcmaModule module = _type.EcmaModule;
             EcmaModule otherModule = otherField._type.EcmaModule;
 
-            int result = module.MetadataReader.GetToken(_handle) - otherModule.MetadataReader.GetToken(otherField._handle);
+            int result =
+                module.MetadataReader.GetToken(_handle)
+                - otherModule.MetadataReader.GetToken(otherField._handle);
             if (result != 0)
                 return result;
 

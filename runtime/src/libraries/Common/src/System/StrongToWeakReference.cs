@@ -6,13 +6,15 @@ using System.Diagnostics;
 namespace System
 {
     /// <summary>Provides an object wrapper that can transition between strong and weak references to the object.</summary>
-    internal sealed class StrongToWeakReference<T> : WeakReference where T : class
+    internal sealed class StrongToWeakReference<T> : WeakReference
+        where T : class
     {
         private T? _strongRef;
 
         /// <summary>Initializes the instance with a strong reference to the specified object.</summary>
         /// <param name="obj">The object to wrap.</param>
-        public StrongToWeakReference(T obj) : base(obj)
+        public StrongToWeakReference(T obj)
+            : base(obj)
         {
             Debug.Assert(obj != null, "Expected non-null obj");
             _strongRef = obj;
@@ -25,7 +27,10 @@ namespace System
         public void MakeStrong()
         {
             _strongRef = WeakTarget;
-            Debug.Assert(_strongRef != null, $"Expected non-null {nameof(_strongRef)} after setting");
+            Debug.Assert(
+                _strongRef != null,
+                $"Expected non-null {nameof(_strongRef)} after setting"
+            );
         }
 
         /// <summary>Gets the wrapped object.</summary>

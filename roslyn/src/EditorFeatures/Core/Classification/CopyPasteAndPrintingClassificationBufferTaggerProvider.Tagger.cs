@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 CopyPasteAndPrintingClassificationBufferTaggerProvider owner,
                 ITextBuffer subjectBuffer,
                 IAsynchronousOperationListener asyncListener,
-                IGlobalOptionService globalOptions)
+                IGlobalOptionService globalOptions
+            )
             {
                 _owner = owner;
                 _subjectBuffer = subjectBuffer;
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Classification
                     subjectBuffer,
                     asyncListener,
                     TaggerEventSources.OnWorkspaceChanged(subjectBuffer, asyncListener),
-                    TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer));
+                    TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer)
+                );
 
                 _eventSource.Changed += OnEventSourceChanged;
                 _eventSource.Connect();
@@ -63,7 +65,11 @@ namespace Microsoft.CodeAnalysis.Classification
 
             // Explicitly a no-op.  This classifier does not support change notifications. See comment in
             // OnEventSourceChanged_OnForeground for more details.
-            public event EventHandler<SnapshotSpanEventArgs> TagsChanged { add { } remove { } }
+            public event EventHandler<SnapshotSpanEventArgs> TagsChanged
+            {
+                add { }
+                remove { }
+            }
 
             public void Dispose()
             {
@@ -91,7 +97,9 @@ namespace Microsoft.CodeAnalysis.Classification
                 // entire doc is changed, and that incurs a heavy cost for the editor reacting to that notification.
             }
 
-            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(NormalizedSnapshotSpanCollection spans)
+            public IEnumerable<ITagSpan<IClassificationTag>> GetTags(
+                NormalizedSnapshotSpanCollection spans
+            )
             {
                 _owner._threadingContext.ThrowIfNotOnUIThread();
 
@@ -99,7 +107,10 @@ namespace Microsoft.CodeAnalysis.Classification
                 return Array.Empty<ITagSpan<IClassificationTag>>();
             }
 
-            public IEnumerable<ITagSpan<IClassificationTag>> GetAllTags(NormalizedSnapshotSpanCollection spans, CancellationToken cancellationToken)
+            public IEnumerable<ITagSpan<IClassificationTag>> GetAllTags(
+                NormalizedSnapshotSpanCollection spans,
+                CancellationToken cancellationToken
+            )
             {
                 _owner._threadingContext.ThrowIfNotOnUIThread();
                 if (spans.Count == 0)
@@ -117,23 +128,28 @@ namespace Microsoft.CodeAnalysis.Classification
                 if (classificationService == null)
                     return Array.Empty<ITagSpan<IClassificationTag>>();
 
-                // We want to classify from the start of the first requested span to the end of the 
+                // We want to classify from the start of the first requested span to the end of the
                 // last requested span.
-                var spanToTag = new SnapshotSpan(snapshot, Span.FromBounds(spans.First().Start, spans.Last().End));
+                var spanToTag = new SnapshotSpan(
+                    snapshot,
+                    Span.FromBounds(spans.First().Start, spans.Last().End)
+                );
 
                 GetCachedInfo(out var cachedTaggedSpan, out var cachedTags);
 
                 // We don't need to actually classify if what we're being asked for is a subspan
                 // of the last classification we performed.
                 var canReuseCache =
-                    cachedTaggedSpan?.Snapshot == snapshot &&
-                    cachedTaggedSpan.Value.Contains(spanToTag);
+                    cachedTaggedSpan?.Snapshot == snapshot
+                    && cachedTaggedSpan.Value.Contains(spanToTag);
 
                 if (!canReuseCache)
                 {
                     // Our cache is not there, or is out of date.  We need to compute the up to date results.
                     var context = new TaggerContext<IClassificationTag>(document, snapshot);
-                    var options = _globalOptions.GetClassificationOptions(document.Project.Language);
+                    var options = _globalOptions.GetClassificationOptions(
+                        document.Project.Language
+                    );
 
                     _owner._threadingContext.JoinableTaskFactory.Run(async () =>
                     {
@@ -141,12 +157,32 @@ namespace Microsoft.CodeAnalysis.Classification
 
                         // When copying/pasting, ensure we have classifications fully computed for the requested spans
                         // for both semantic classifications and embedded lang classifications.
-                        await ProduceTagsAsync(context, snapshotSpan, classificationService, options, ClassificationType.Semantic, cancellationToken).ConfigureAwait(false);
-                        await ProduceTagsAsync(context, snapshotSpan, classificationService, options, ClassificationType.EmbeddedLanguage, cancellationToken).ConfigureAwait(false);
+                        await ProduceTagsAsync(
+                                context,
+                                snapshotSpan,
+                                classificationService,
+                                options,
+                                ClassificationType.Semantic,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                        await ProduceTagsAsync(
+                                context,
+                                snapshotSpan,
+                                classificationService,
+                                options,
+                                ClassificationType.EmbeddedLanguage,
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false);
                     });
 
                     cachedTaggedSpan = spanToTag;
-                    cachedTags = new TagSpanIntervalTree<IClassificationTag>(snapshot.TextBuffer, SpanTrackingMode.EdgeExclusive, context.TagSpans);
+                    cachedTags = new TagSpanIntervalTree<IClassificationTag>(
+                        snapshot.TextBuffer,
+                        SpanTrackingMode.EdgeExclusive,
+                        context.TagSpans
+                    );
 
                     lock (_gate)
                     {
@@ -156,20 +192,37 @@ namespace Microsoft.CodeAnalysis.Classification
                 }
 
                 return SegmentedListPool.ComputeList(
-                    static (args, tags) => args.cachedTags?.AddIntersectingTagSpans(args.spans, tags),
+                    static (args, tags) =>
+                        args.cachedTags?.AddIntersectingTagSpans(args.spans, tags),
                     (cachedTags, spans),
-                    _: (ITagSpan<IClassificationTag>?)null);
+                    _: (ITagSpan<IClassificationTag>?)null
+                );
             }
 
             private Task ProduceTagsAsync(
-                TaggerContext<IClassificationTag> context, DocumentSnapshotSpan snapshotSpan,
-                IClassificationService classificationService, ClassificationOptions options, ClassificationType type, CancellationToken cancellationToken)
+                TaggerContext<IClassificationTag> context,
+                DocumentSnapshotSpan snapshotSpan,
+                IClassificationService classificationService,
+                ClassificationOptions options,
+                ClassificationType type,
+                CancellationToken cancellationToken
+            )
             {
                 return ClassificationUtilities.ProduceTagsAsync(
-                    context, snapshotSpan, classificationService, _owner._typeMap, options, type, cancellationToken);
+                    context,
+                    snapshotSpan,
+                    classificationService,
+                    _owner._typeMap,
+                    options,
+                    type,
+                    cancellationToken
+                );
             }
 
-            private void GetCachedInfo(out SnapshotSpan? cachedTaggedSpan, out TagSpanIntervalTree<IClassificationTag>? cachedTags)
+            private void GetCachedInfo(
+                out SnapshotSpan? cachedTaggedSpan,
+                out TagSpanIntervalTree<IClassificationTag>? cachedTags
+            )
             {
                 lock (_gate)
                 {

@@ -17,27 +17,37 @@ namespace System.Linq.Parallel.Tests
         {
             foreach (object[] parms in UnorderedSources.Ranges(start, counts))
             {
-                yield return new object[] { ((Labeled<ParallelQuery<int>>)parms[0]).Order(), parms[1] };
+                yield return new object[]
+                {
+                    ((Labeled<ParallelQuery<int>>)parms[0]).Order(),
+                    parms[1],
+                };
             }
         }
 
         // Wrapper for attribute calls
         public static IEnumerable<object[]> OuterLoopRanges()
         {
-            foreach (object[] parms in Ranges(OuterLoopCounts)) yield return parms;
+            foreach (object[] parms in Ranges(OuterLoopCounts))
+                yield return parms;
         }
 
         public static IEnumerable<object[]> Ranges(int[] counts)
         {
-            foreach (object[] parms in Ranges(counts.Cast<int>())) yield return parms;
+            foreach (object[] parms in Ranges(counts.Cast<int>()))
+                yield return parms;
         }
 
         public static IEnumerable<object[]> Ranges(IEnumerable<int> counts)
         {
-            foreach (object[] parms in Ranges(0, counts)) yield return parms;
+            foreach (object[] parms in Ranges(0, counts))
+                yield return parms;
         }
 
-        public static IEnumerable<object[]> Ranges<T>(IEnumerable<int> counts, Func<int, IEnumerable<T>> modifiers)
+        public static IEnumerable<object[]> Ranges<T>(
+            IEnumerable<int> counts,
+            Func<int, IEnumerable<T>> modifiers
+        )
         {
             foreach (object[] parms in Ranges(counts))
             {
@@ -48,7 +58,10 @@ namespace System.Linq.Parallel.Tests
             }
         }
 
-        public static IEnumerable<object[]> Ranges<T>(IEnumerable<int> counts, Func<int, T[]> modifiers)
+        public static IEnumerable<object[]> Ranges<T>(
+            IEnumerable<int> counts,
+            Func<int, T[]> modifiers
+        )
         {
             foreach (object[] parms in Ranges(counts, i => modifiers(i).Cast<T>()))
             {

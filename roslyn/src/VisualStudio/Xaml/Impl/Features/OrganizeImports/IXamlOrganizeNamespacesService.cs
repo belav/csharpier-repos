@@ -14,6 +14,10 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.OrganizeImports
     {
         /// <returns>Returns the rewritten document, or the document passed in if no changes were made. If cancellation
         /// was observed, it returns null.</returns>
-        Task<Document> OrganizeNamespacesAsync(Document document, bool placeSystemNamespaceFirst, CancellationToken cancellationToken);
+        Task<Document> OrganizeNamespacesAsync(
+            Document document,
+            bool placeSystemNamespaceFirst,
+            CancellationToken cancellationToken
+        );
     }
 }

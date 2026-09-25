@@ -24,13 +24,14 @@ namespace OLEDB.Test.ModuleCore
             SingleEnd,
             DoubleBegin,
             DoubleEnd,
-            End
+            End,
         };
 
         //Accessors
         //Note: You can override these if you want to leverage our parser (inherit), and change
         //some of the behavior (without reimplementing it).
         private static Tokens s_DefaultTokens = new Tokens();
+
         public class Tokens
         {
             public string Equal = "=";
@@ -38,7 +39,6 @@ namespace OLEDB.Test.ModuleCore
             public string SingleQuote = "'";
             public string DoubleQuote = "\"";
         };
-
 
         //Methods
         public static MyDict<string, string> ParseKeywords(string str)

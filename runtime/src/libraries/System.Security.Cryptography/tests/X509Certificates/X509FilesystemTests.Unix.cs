@@ -24,13 +24,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void VerifyCrlCache()
         {
             string crlDirectory = PersistedFiles.GetUserFeatureDirectory("cryptography", "crls");
-            string crlFile = Path.Combine(crlDirectory,MicrosoftDotComRootCrlFilename);
+            string crlFile = Path.Combine(crlDirectory, MicrosoftDotComRootCrlFilename);
 
             Directory.CreateDirectory(crlDirectory);
             File.Delete(crlFile);
 
-            using (var microsoftDotComIssuer = new X509Certificate2(TestData.MicrosoftDotComIssuerBytes))
-            using (var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes))
+            using (
+                var microsoftDotComIssuer = new X509Certificate2(
+                    TestData.MicrosoftDotComIssuerBytes
+                )
+            )
+            using (
+                var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes)
+            )
             using (var unrelated = new X509Certificate2(TestData.DssCer))
             using (var chainHolder = new ChainHolder())
             {
@@ -40,10 +46,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 chain.ChainPolicy.ExtraStore.Add(microsoftDotComRoot);
 
                 // The very start of the CRL period.
-                chain.ChainPolicy.VerificationTime = new DateTime(2015, 6, 17, 0, 0, 0, DateTimeKind.Utc);
+                chain.ChainPolicy.VerificationTime = new DateTime(
+                    2015,
+                    6,
+                    17,
+                    0,
+                    0,
+                    0,
+                    DateTimeKind.Utc
+                );
                 chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
                 chain.ChainPolicy.RevocationFlag = X509RevocationFlag.EndCertificateOnly;
-                chain.ChainPolicy.VerificationFlags |= X509VerificationFlags.AllowUnknownCertificateAuthority;
+                chain.ChainPolicy.VerificationFlags |=
+                    X509VerificationFlags.AllowUnknownCertificateAuthority;
 
                 bool valid = chain.Build(microsoftDotComIssuer);
                 Assert.True(valid, "Precondition: Chain builds with no revocation checks");
@@ -66,7 +81,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.False(valid, "Chain should not build validly");
 
                 const X509ChainStatusFlags UnknownOffline =
-                    X509ChainStatusFlags.RevocationStatusUnknown | X509ChainStatusFlags.OfflineRevocation;
+                    X509ChainStatusFlags.RevocationStatusUnknown
+                    | X509ChainStatusFlags.OfflineRevocation;
 
                 Assert.Equal(initialFlags | UnknownOffline, chain.AllStatusFlags());
 
@@ -87,9 +103,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 (store, storeDirectory) =>
                 {
                     // Since the directory was explicitly deleted already, this should fail.
-                    Assert.Throws<CryptographicException>(
-                        () => store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly));
-                });
+                    Assert.Throws<CryptographicException>(() =>
+                        store.Open(OpenFlags.ReadOnly | OpenFlags.OpenExistingOnly)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -106,9 +124,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         Assert.Throws<CryptographicException>(() => store.Add(cert));
 
                         // Since we haven't done anything yet, we shouldn't have polluted the hard drive.
-                        Assert.False(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.False(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                     }
-                });
+                }
+            );
         }
 
         [Fact]
@@ -123,13 +145,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         Assert.Throws<CryptographicException>(() => store.Add(cert));
 
                         // Since we haven't done anything yet, we shouldn't have polluted the hard drive.
-                        Assert.False(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.False(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddOne()
         {
             RunX509StoreTest(
@@ -140,7 +168,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         store.Open(OpenFlags.ReadWrite);
 
                         store.Add(cert);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                         Assert.Equal(1, Directory.GetFiles(storeDirectory).Length);
 
                         using (var coll = new ImportedCollection(store.Certificates))
@@ -156,11 +187,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             }
                         }
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddOneAfterUpgrade()
         {
             RunX509StoreTest(
@@ -174,13 +208,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         Assert.Throws<CryptographicException>(() => store.Add(cert));
 
                         // Since we haven't done anything yet, we shouldn't have polluted the hard drive.
-                        Assert.False(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.False(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
 
                         // Calling Open on an open store changes the access rights:
                         store.Open(OpenFlags.ReadWrite);
 
                         store.Add(cert);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                         Assert.Equal(1, Directory.GetFiles(storeDirectory).Length);
 
                         using (var coll = new ImportedCollection(store.Certificates))
@@ -196,11 +236,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             }
                         }
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_DowngradePermissions()
         {
             RunX509StoreTest(
@@ -219,11 +262,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         // Adding a certificate when the store is ReadOnly should fail:
                         Assert.Throws<CryptographicException>(() => store.Add(certB));
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddAfterDispose()
         {
             RunX509StoreTest(
@@ -242,11 +288,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         // Adding a certificate when the store is closed should fail:
                         Assert.Throws<CryptographicException>(() => store.Add(certB));
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddAndClear()
         {
             RunX509StoreTest(
@@ -257,20 +306,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         store.Open(OpenFlags.ReadWrite);
 
                         store.Add(cert);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                         Assert.Equal(1, Directory.GetFiles(storeDirectory).Length);
 
                         store.Remove(cert);
 
                         // The directory should still exist.
-                        Assert.True(Directory.Exists(storeDirectory), "Store Directory Still Exists");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Store Directory Still Exists"
+                        );
                         Assert.Equal(0, Directory.GetFiles(storeDirectory).Length);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddDuplicate()
         {
             RunX509StoreTest(
@@ -282,17 +340,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         store.Open(OpenFlags.ReadWrite);
 
                         store.Add(cert);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                         Assert.Equal(1, Directory.GetFiles(storeDirectory).Length);
 
                         store.Add(certClone);
                         Assert.Equal(1, Directory.GetFiles(storeDirectory).Length);
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddTwo()
         {
             RunX509StoreTest(
@@ -305,7 +369,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         store.Add(certA);
                         store.Add(certB);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                         Assert.Equal(2, Directory.GetFiles(storeDirectory).Length);
 
                         X509Certificate2Collection storeCerts = store.Certificates;
@@ -319,17 +386,25 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             storeCert.Dispose();
                         }
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddTwo_UpgradePrivateKey()
         {
             RunX509StoreTest(
                 (store, storeDirectory) =>
                 {
-                    using (var certAPrivate = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword))
+                    using (
+                        var certAPrivate = new X509Certificate2(
+                            TestData.PfxData,
+                            TestData.PfxDataPassword
+                        )
+                    )
                     using (var certAPublic = new X509Certificate2(certAPrivate.RawData))
                     using (var certB = new X509Certificate2(TestData.DssCer))
                     {
@@ -337,7 +412,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         store.Add(certAPublic);
                         store.Add(certB);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
 
                         string[] storeFiles = Directory.GetFiles(storeDirectory);
                         Assert.Equal(2, storeFiles.Length);
@@ -349,7 +427,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         foreach (X509Certificate2 storeCert in storeCerts)
                         {
-                            Assert.False(storeCert.HasPrivateKey, "storeCert.HasPrivateKey (before)");
+                            Assert.False(
+                                storeCert.HasPrivateKey,
+                                "storeCert.HasPrivateKey (before)"
+                            );
                             storeCert.Dispose();
                         }
 
@@ -367,12 +448,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             // The public instance and private instance are .Equal
                             if (storeCert.Equals(certAPublic))
                             {
-                                Assert.True(storeCert.HasPrivateKey, "storeCert.HasPrivateKey (affected cert)");
+                                Assert.True(
+                                    storeCert.HasPrivateKey,
+                                    "storeCert.HasPrivateKey (affected cert)"
+                                );
                                 foundCertA = true;
                             }
                             else
                             {
-                                Assert.False(storeCert.HasPrivateKey, "storeCert.HasPrivateKey (other cert)");
+                                Assert.False(
+                                    storeCert.HasPrivateKey,
+                                    "storeCert.HasPrivateKey (other cert)"
+                                );
                             }
 
                             Assert.Contains(storeCert, expectedCerts);
@@ -381,17 +468,25 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         Assert.True(foundCertA, "foundCertA");
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_AddTwo_UpgradePrivateKey_NoDowngrade()
         {
             RunX509StoreTest(
                 (store, storeDirectory) =>
                 {
-                    using (var certAPrivate = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword))
+                    using (
+                        var certAPrivate = new X509Certificate2(
+                            TestData.PfxData,
+                            TestData.PfxDataPassword
+                        )
+                    )
                     using (var certAPublic = new X509Certificate2(certAPrivate.RawData))
                     using (var certB = new X509Certificate2(TestData.DssCer))
                     {
@@ -399,7 +494,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         store.Add(certAPublic);
                         store.Add(certB);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
 
                         X509Certificate2Collection storeCerts = store.Certificates;
                         Assert.Equal(2, storeCerts.Count);
@@ -408,7 +506,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         foreach (X509Certificate2 storeCert in storeCerts)
                         {
-                            Assert.False(storeCert.HasPrivateKey, "storeCert.HasPrivateKey (before)");
+                            Assert.False(
+                                storeCert.HasPrivateKey,
+                                "storeCert.HasPrivateKey (before)"
+                            );
                             Assert.Contains(storeCert, expectedCerts);
                             storeCert.Dispose();
                         }
@@ -427,12 +528,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         {
                             if (storeCert.Equals(certAPublic))
                             {
-                                Assert.True(storeCert.HasPrivateKey, "storeCert.HasPrivateKey (affected cert)");
+                                Assert.True(
+                                    storeCert.HasPrivateKey,
+                                    "storeCert.HasPrivateKey (affected cert)"
+                                );
                                 foundCertA = true;
                             }
                             else
                             {
-                                Assert.False(storeCert.HasPrivateKey, "storeCert.HasPrivateKey (other cert)");
+                                Assert.False(
+                                    storeCert.HasPrivateKey,
+                                    "storeCert.HasPrivateKey (other cert)"
+                                );
                             }
 
                             Assert.Contains(storeCert, expectedCerts);
@@ -441,11 +548,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         Assert.True(foundCertA, "foundCertA");
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_DistinctCollections()
         {
             RunX509StoreTest(
@@ -458,7 +568,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         store.Add(certA);
                         store.Add(certB);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                         Assert.Equal(2, Directory.GetFiles(storeDirectory).Length);
 
                         X509Certificate2Collection storeCertsA = store.Certificates;
@@ -482,11 +595,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             collBCert.Dispose();
                         }
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_Add4_Remove1()
         {
             RunX509StoreTest(
@@ -505,7 +621,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         store.Add(certC);
                         store.Add(certD);
 
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
                         Assert.Equal(4, Directory.GetFiles(storeDirectory).Length);
 
                         X509Certificate2[] expectedCerts = { certA, certB, certC, certD };
@@ -531,11 +650,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             storeCert.Dispose();
                         }
                     }
-                });
+                }
+            );
         }
 
         [Theory]
-        [OuterLoop(/* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         [InlineData(false)]
         [InlineData(true)]
         public static void X509Store_MultipleObjects(bool matchCase)
@@ -552,7 +674,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                         store.Add(certA);
                         store.Add(certB);
-                        Assert.True(Directory.Exists(storeDirectory), "Directory.Exists(storeDirectory)");
+                        Assert.True(
+                            Directory.Exists(storeDirectory),
+                            "Directory.Exists(storeDirectory)"
+                        );
 
                         string newName = store.Name;
 
@@ -578,11 +703,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                             AssertEqualContents(store, storeClone);
                         }
                     }
-                });
+                }
+            );
         }
 
         [Fact]
-        [OuterLoop( /* Alters user/machine state */)]
+        [OuterLoop( /* Alters user/machine state */
+
+        )]
         public static void X509Store_FiltersDuplicateOnLoad()
         {
             RunX509StoreTest(
@@ -621,7 +749,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                         string[] filesAfter = Directory.GetFiles(storeDirectory, "*.pfx");
                         Assert.Equal(0, filesAfter.Length);
                     }
-                });
+                }
+            );
         }
 
         private static void AssertEqualContents(X509Store storeA, X509Store storeB)
@@ -640,9 +769,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static void RunX509StoreTest(Action<X509Store, string> testAction)
         {
-            string certStoresFeaturePath = PersistedFiles.GetUserFeatureDirectory("cryptography", "x509stores");
+            string certStoresFeaturePath = PersistedFiles.GetUserFeatureDirectory(
+                "cryptography",
+                "x509stores"
+            );
             string storeName = "TestStore" + Guid.NewGuid().ToString("N");
-            string storeDirectory = Path.Combine(certStoresFeaturePath, storeName.ToLowerInvariant());
+            string storeDirectory = Path.Combine(
+                certStoresFeaturePath,
+                storeName.ToLowerInvariant()
+            );
 
             if (Directory.Exists(storeDirectory))
             {

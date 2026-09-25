@@ -4,16 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
-
 
     /// <devdoc>
     /// Specifies a DataSource operation.
     /// </devdoc>
-    public enum DataSourceOperation {
-
+    public enum DataSourceOperation
+    {
         Delete = 0,
 
         Insert = 1,
@@ -22,7 +21,6 @@ namespace System.Web.UI {
 
         Update = 3,
 
-        SelectCount = 4
+        SelectCount = 4,
     }
 }
-

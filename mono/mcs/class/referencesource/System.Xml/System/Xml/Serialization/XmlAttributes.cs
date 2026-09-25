@@ -2,16 +2,18 @@
 // <copyright file="XmlAttributes.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
+namespace System.Xml.Serialization
+{
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.ComponentModel;
+    using System.Reflection;
 
-    internal enum XmlAttributeFlags {
+    internal enum XmlAttributeFlags
+    {
         Enum = 0x1,
         Array = 0x2,
         Text = 0x4,
@@ -30,7 +32,8 @@ namespace System.Xml.Serialization {
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlAttributes {
+    public class XmlAttributes
+    {
         XmlElementAttributes xmlElements = new XmlElementAttributes();
         XmlArrayItemAttributes xmlArrayItems = new XmlArrayItemAttributes();
         XmlAnyElementAttributes xmlAnyElements = new XmlAnyElementAttributes();
@@ -47,38 +50,56 @@ namespace System.Xml.Serialization {
         XmlChoiceIdentifierAttribute xmlChoiceIdentifier;
         static volatile Type ignoreAttributeType;
 
-
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlAttributes"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributes() {
-        }
+        public XmlAttributes() { }
 
-        internal XmlAttributeFlags XmlFlags {
-            get { 
+        internal XmlAttributeFlags XmlFlags
+        {
+            get
+            {
                 XmlAttributeFlags flags = 0;
-                if (xmlElements.Count > 0) flags |= XmlAttributeFlags.Elements;
-                if (xmlArrayItems.Count > 0) flags |= XmlAttributeFlags.ArrayItems;
-                if (xmlAnyElements.Count > 0) flags |= XmlAttributeFlags.AnyElements;
-                if (xmlArray != null) flags |= XmlAttributeFlags.Array;
-                if (xmlAttribute != null) flags |= XmlAttributeFlags.Attribute;
-                if (xmlText != null) flags |= XmlAttributeFlags.Text;
-                if (xmlEnum != null) flags |= XmlAttributeFlags.Enum;
-                if (xmlRoot != null) flags |= XmlAttributeFlags.Root;
-                if (xmlType != null) flags |= XmlAttributeFlags.Type;
-                if (xmlAnyAttribute != null) flags |= XmlAttributeFlags.AnyAttribute;
-                if (xmlChoiceIdentifier != null) flags |= XmlAttributeFlags.ChoiceIdentifier;
-                if (xmlns) flags |= XmlAttributeFlags.XmlnsDeclarations;
+                if (xmlElements.Count > 0)
+                    flags |= XmlAttributeFlags.Elements;
+                if (xmlArrayItems.Count > 0)
+                    flags |= XmlAttributeFlags.ArrayItems;
+                if (xmlAnyElements.Count > 0)
+                    flags |= XmlAttributeFlags.AnyElements;
+                if (xmlArray != null)
+                    flags |= XmlAttributeFlags.Array;
+                if (xmlAttribute != null)
+                    flags |= XmlAttributeFlags.Attribute;
+                if (xmlText != null)
+                    flags |= XmlAttributeFlags.Text;
+                if (xmlEnum != null)
+                    flags |= XmlAttributeFlags.Enum;
+                if (xmlRoot != null)
+                    flags |= XmlAttributeFlags.Root;
+                if (xmlType != null)
+                    flags |= XmlAttributeFlags.Type;
+                if (xmlAnyAttribute != null)
+                    flags |= XmlAttributeFlags.AnyAttribute;
+                if (xmlChoiceIdentifier != null)
+                    flags |= XmlAttributeFlags.ChoiceIdentifier;
+                if (xmlns)
+                    flags |= XmlAttributeFlags.XmlnsDeclarations;
                 return flags;
             }
         }
 
-        private static Type IgnoreAttribute {
-            get {
-                if (ignoreAttributeType == null) {
-                    ignoreAttributeType = typeof(object).Assembly.GetType("System.XmlIgnoreMemberAttribute");
-                    if (ignoreAttributeType == null) {
+        private static Type IgnoreAttribute
+        {
+            get
+            {
+                if (ignoreAttributeType == null)
+                {
+                    ignoreAttributeType = typeof(object).Assembly.GetType(
+                        "System.XmlIgnoreMemberAttribute"
+                    );
+                    if (ignoreAttributeType == null)
+                    {
                         ignoreAttributeType = typeof(XmlIgnoreAttribute);
                     }
                 }
@@ -90,64 +111,91 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributes(ICustomAttributeProvider provider) {
+        public XmlAttributes(ICustomAttributeProvider provider)
+        {
             object[] attrs = provider.GetCustomAttributes(false);
 
-            // most generic <any/> matches everithig 
+            // most generic <any/> matches everithig
             XmlAnyElementAttribute wildcard = null;
-            for (int i = 0; i < attrs.Length; i++) {
-                if (attrs[i] is XmlIgnoreAttribute || attrs[i] is ObsoleteAttribute || attrs[i].GetType() == IgnoreAttribute) {
+            for (int i = 0; i < attrs.Length; i++)
+            {
+                if (
+                    attrs[i] is XmlIgnoreAttribute
+                    || attrs[i] is ObsoleteAttribute
+                    || attrs[i].GetType() == IgnoreAttribute
+                )
+                {
                     xmlIgnore = true;
                     break;
                 }
-                else if (attrs[i] is XmlElementAttribute) {
+                else if (attrs[i] is XmlElementAttribute)
+                {
                     this.xmlElements.Add((XmlElementAttribute)attrs[i]);
                 }
-                else if (attrs[i] is XmlArrayItemAttribute) {
+                else if (attrs[i] is XmlArrayItemAttribute)
+                {
                     this.xmlArrayItems.Add((XmlArrayItemAttribute)attrs[i]);
                 }
-                else if (attrs[i] is XmlAnyElementAttribute) {
+                else if (attrs[i] is XmlAnyElementAttribute)
+                {
                     XmlAnyElementAttribute any = (XmlAnyElementAttribute)attrs[i];
-                    if ((any.Name == null || any.Name.Length == 0) && any.NamespaceSpecified && any.Namespace == null) {
+                    if (
+                        (any.Name == null || any.Name.Length == 0)
+                        && any.NamespaceSpecified
+                        && any.Namespace == null
+                    )
+                    {
                         // ignore duplicate wildcards
                         wildcard = any;
                     }
-                    else {
+                    else
+                    {
                         this.xmlAnyElements.Add((XmlAnyElementAttribute)attrs[i]);
                     }
                 }
-                else if (attrs[i] is DefaultValueAttribute) {
+                else if (attrs[i] is DefaultValueAttribute)
+                {
                     this.xmlDefaultValue = ((DefaultValueAttribute)attrs[i]).Value;
                 }
-                else if (attrs[i] is XmlAttributeAttribute) {
+                else if (attrs[i] is XmlAttributeAttribute)
+                {
                     this.xmlAttribute = (XmlAttributeAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlArrayAttribute) {
+                else if (attrs[i] is XmlArrayAttribute)
+                {
                     this.xmlArray = (XmlArrayAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlTextAttribute) {
+                else if (attrs[i] is XmlTextAttribute)
+                {
                     this.xmlText = (XmlTextAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlEnumAttribute) {
+                else if (attrs[i] is XmlEnumAttribute)
+                {
                     this.xmlEnum = (XmlEnumAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlRootAttribute) {
+                else if (attrs[i] is XmlRootAttribute)
+                {
                     this.xmlRoot = (XmlRootAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlTypeAttribute) {
+                else if (attrs[i] is XmlTypeAttribute)
+                {
                     this.xmlType = (XmlTypeAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlAnyAttributeAttribute) {
+                else if (attrs[i] is XmlAnyAttributeAttribute)
+                {
                     this.xmlAnyAttribute = (XmlAnyAttributeAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlChoiceIdentifierAttribute) {
+                else if (attrs[i] is XmlChoiceIdentifierAttribute)
+                {
                     this.xmlChoiceIdentifier = (XmlChoiceIdentifierAttribute)attrs[i];
                 }
-                else if (attrs[i] is XmlNamespaceDeclarationsAttribute) {
+                else if (attrs[i] is XmlNamespaceDeclarationsAttribute)
+                {
                     this.xmlns = true;
                 }
             }
-            if (xmlIgnore) {
+            if (xmlIgnore)
+            {
                 this.xmlElements.Clear();
                 this.xmlArrayItems.Clear();
                 this.xmlAnyElements.Clear();
@@ -161,68 +209,78 @@ namespace System.Xml.Serialization {
                 this.xmlChoiceIdentifier = null;
                 this.xmlns = false;
             }
-            else {
-                if (wildcard != null) {
+            else
+            {
+                if (wildcard != null)
+                {
                     this.xmlAnyElements.Add(wildcard);
                 }
             }
         }
 
-        internal static object GetAttr(ICustomAttributeProvider provider, Type attrType) {
+        internal static object GetAttr(ICustomAttributeProvider provider, Type attrType)
+        {
             object[] attrs = provider.GetCustomAttributes(attrType, false);
-            if (attrs.Length == 0) return null;
+            if (attrs.Length == 0)
+                return null;
             return attrs[0];
         }
-        
+
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlElements"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlElementAttributes XmlElements {
+        public XmlElementAttributes XmlElements
+        {
             get { return xmlElements; }
         }
-        
+
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlAttribute"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributeAttribute XmlAttribute {
+        public XmlAttributeAttribute XmlAttribute
+        {
             get { return xmlAttribute; }
             set { xmlAttribute = value; }
         }
-        
+
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlEnum"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlEnumAttribute XmlEnum {
+        public XmlEnumAttribute XmlEnum
+        {
             get { return xmlEnum; }
             set { xmlEnum = value; }
         }
-        
+
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlText"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlTextAttribute XmlText {
+        public XmlTextAttribute XmlText
+        {
             get { return xmlText; }
             set { xmlText = value; }
         }
-        
+
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlArray"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlArrayAttribute XmlArray {
+        public XmlArrayAttribute XmlArray
+        {
             get { return xmlArray; }
             set { xmlArray = value; }
         }
-        
+
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlArrayItems"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlArrayItemAttributes XmlArrayItems {
+        public XmlArrayItemAttributes XmlArrayItems
+        {
             get { return xmlArrayItems; }
         }
 
@@ -230,7 +288,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public object XmlDefaultValue {
+        public object XmlDefaultValue
+        {
             get { return xmlDefaultValue; }
             set { xmlDefaultValue = value; }
         }
@@ -239,7 +298,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool XmlIgnore {
+        public bool XmlIgnore
+        {
             get { return xmlIgnore; }
             set { xmlIgnore = value; }
         }
@@ -248,7 +308,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlTypeAttribute XmlType {
+        public XmlTypeAttribute XmlType
+        {
             get { return xmlType; }
             set { xmlType = value; }
         }
@@ -257,7 +318,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlRootAttribute XmlRoot {
+        public XmlRootAttribute XmlRoot
+        {
             get { return xmlRoot; }
             set { xmlRoot = value; }
         }
@@ -266,7 +328,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAnyElementAttributes XmlAnyElements {
+        public XmlAnyElementAttributes XmlAnyElements
+        {
             get { return xmlAnyElements; }
         }
 
@@ -274,13 +337,15 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAnyAttributeAttribute XmlAnyAttribute {
+        public XmlAnyAttributeAttribute XmlAnyAttribute
+        {
             get { return xmlAnyAttribute; }
             set { xmlAnyAttribute = value; }
         }
 
         /// <include file='doc\XmlAttributes.uex' path='docs/doc[@for="XmlAttributes.XmlChoiceIdentifier"]/*' />
-        public XmlChoiceIdentifierAttribute XmlChoiceIdentifier {
+        public XmlChoiceIdentifierAttribute XmlChoiceIdentifier
+        {
             get { return xmlChoiceIdentifier; }
         }
 
@@ -288,10 +353,10 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool Xmlns {
+        public bool Xmlns
+        {
             get { return xmlns; }
             set { xmlns = value; }
         }
-
     }
 }

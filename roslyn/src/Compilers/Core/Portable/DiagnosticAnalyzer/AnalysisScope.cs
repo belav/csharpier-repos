@@ -93,38 +93,112 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public bool IsSemanticSingleFileAnalysisForCompilerAnalyzer =>
             IsSingleFileAnalysisForCompilerAnalyzer && !IsSyntacticSingleFileAnalysis;
 
-        public static AnalysisScope Create(Compilation compilation, ImmutableArray<DiagnosticAnalyzer> analyzers, CompilationWithAnalyzers compilationWithAnalyzers)
+        public static AnalysisScope Create(
+            Compilation compilation,
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            CompilationWithAnalyzers compilationWithAnalyzers
+        )
         {
             var analyzerOptions = compilationWithAnalyzers.AnalysisOptions.Options;
             var hasAllAnalyzers = ComputeHasAllAnalyzers(analyzers, compilationWithAnalyzers);
             var concurrentAnalysis = compilationWithAnalyzers.AnalysisOptions.ConcurrentAnalysis;
-            return Create(compilation, analyzerOptions, analyzers, hasAllAnalyzers, concurrentAnalysis);
+            return Create(
+                compilation,
+                analyzerOptions,
+                analyzers,
+                hasAllAnalyzers,
+                concurrentAnalysis
+            );
         }
 
-        public static AnalysisScope CreateForBatchCompile(Compilation compilation, AnalyzerOptions analyzerOptions, ImmutableArray<DiagnosticAnalyzer> analyzers)
+        public static AnalysisScope CreateForBatchCompile(
+            Compilation compilation,
+            AnalyzerOptions analyzerOptions,
+            ImmutableArray<DiagnosticAnalyzer> analyzers
+        )
         {
-            return Create(compilation, analyzerOptions, analyzers, hasAllAnalyzers: true, concurrentAnalysis: compilation.Options.ConcurrentBuild);
+            return Create(
+                compilation,
+                analyzerOptions,
+                analyzers,
+                hasAllAnalyzers: true,
+                concurrentAnalysis: compilation.Options.ConcurrentBuild
+            );
         }
 
-        private static AnalysisScope Create(Compilation compilation, AnalyzerOptions? analyzerOptions, ImmutableArray<DiagnosticAnalyzer> analyzers, bool hasAllAnalyzers, bool concurrentAnalysis)
+        private static AnalysisScope Create(
+            Compilation compilation,
+            AnalyzerOptions? analyzerOptions,
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            bool hasAllAnalyzers,
+            bool concurrentAnalysis
+        )
         {
-            var additionalFiles = analyzerOptions?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty;
-            return new AnalysisScope(compilation.CommonSyntaxTrees, additionalFiles,
-                   analyzers, hasAllAnalyzers, filterFile: null, filterSpanOpt: null,
-                   originalFilterFile: null, originalFilterSpan: null, isSyntacticSingleFileAnalysis: false,
-                   concurrentAnalysis: concurrentAnalysis);
+            var additionalFiles =
+                analyzerOptions?.AdditionalFiles ?? ImmutableArray<AdditionalText>.Empty;
+            return new AnalysisScope(
+                compilation.CommonSyntaxTrees,
+                additionalFiles,
+                analyzers,
+                hasAllAnalyzers,
+                filterFile: null,
+                filterSpanOpt: null,
+                originalFilterFile: null,
+                originalFilterSpan: null,
+                isSyntacticSingleFileAnalysis: false,
+                concurrentAnalysis: concurrentAnalysis
+            );
         }
 
-        public static AnalysisScope Create(ImmutableArray<DiagnosticAnalyzer> analyzers, SourceOrAdditionalFile filterFile, TextSpan? filterSpan, bool isSyntacticSingleFileAnalysis, CompilationWithAnalyzers compilationWithAnalyzers)
-            => Create(analyzers, filterFile, filterSpan, originalFilterFile: filterFile, originalFilterSpan: filterSpan, isSyntacticSingleFileAnalysis, compilationWithAnalyzers);
+        public static AnalysisScope Create(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            SourceOrAdditionalFile filterFile,
+            TextSpan? filterSpan,
+            bool isSyntacticSingleFileAnalysis,
+            CompilationWithAnalyzers compilationWithAnalyzers
+        ) =>
+            Create(
+                analyzers,
+                filterFile,
+                filterSpan,
+                originalFilterFile: filterFile,
+                originalFilterSpan: filterSpan,
+                isSyntacticSingleFileAnalysis,
+                compilationWithAnalyzers
+            );
 
-        public static AnalysisScope Create(ImmutableArray<DiagnosticAnalyzer> analyzers, SourceOrAdditionalFile filterFile, TextSpan? filterSpan, SourceOrAdditionalFile originalFilterFile, TextSpan? originalFilterSpan, bool isSyntacticSingleFileAnalysis, CompilationWithAnalyzers compilationWithAnalyzers)
+        public static AnalysisScope Create(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            SourceOrAdditionalFile filterFile,
+            TextSpan? filterSpan,
+            SourceOrAdditionalFile originalFilterFile,
+            TextSpan? originalFilterSpan,
+            bool isSyntacticSingleFileAnalysis,
+            CompilationWithAnalyzers compilationWithAnalyzers
+        )
         {
-            var trees = filterFile.SourceTree != null ? ImmutableArray.Create(filterFile.SourceTree) : ImmutableArray<SyntaxTree>.Empty;
-            var additionalFiles = filterFile.AdditionalFile != null ? ImmutableArray.Create(filterFile.AdditionalFile) : ImmutableArray<AdditionalText>.Empty;
+            var trees =
+                filterFile.SourceTree != null
+                    ? ImmutableArray.Create(filterFile.SourceTree)
+                    : ImmutableArray<SyntaxTree>.Empty;
+            var additionalFiles =
+                filterFile.AdditionalFile != null
+                    ? ImmutableArray.Create(filterFile.AdditionalFile)
+                    : ImmutableArray<AdditionalText>.Empty;
             var hasAllAnalyzers = ComputeHasAllAnalyzers(analyzers, compilationWithAnalyzers);
             var concurrentAnalysis = compilationWithAnalyzers.AnalysisOptions.ConcurrentAnalysis;
-            return new AnalysisScope(trees, additionalFiles, analyzers, hasAllAnalyzers, filterFile, filterSpan, originalFilterFile, originalFilterSpan, isSyntacticSingleFileAnalysis, concurrentAnalysis);
+            return new AnalysisScope(
+                trees,
+                additionalFiles,
+                analyzers,
+                hasAllAnalyzers,
+                filterFile,
+                filterSpan,
+                originalFilterFile,
+                originalFilterSpan,
+                isSyntacticSingleFileAnalysis,
+                concurrentAnalysis
+            );
         }
 
         private AnalysisScope(
@@ -137,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SourceOrAdditionalFile? originalFilterFile,
             TextSpan? originalFilterSpan,
             bool isSyntacticSingleFileAnalysis,
-            bool concurrentAnalysis)
+            bool concurrentAnalysis
+        )
         {
             Debug.Assert(!isSyntacticSingleFileAnalysis || filterFile.HasValue);
 
@@ -155,7 +230,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             _lazyAnalyzersSet = new Lazy<ImmutableHashSet<DiagnosticAnalyzer>>(CreateAnalyzersSet);
         }
 
-        private static TextSpan? GetEffectiveFilterSpan(TextSpan? filterSpan, SourceOrAdditionalFile? filterFile)
+        private static TextSpan? GetEffectiveFilterSpan(
+            TextSpan? filterSpan,
+            SourceOrAdditionalFile? filterFile
+        )
         {
             Debug.Assert(!filterSpan.HasValue || filterFile.HasValue);
 
@@ -167,7 +245,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 //       We are basically analyzing the entire tree, and clearing out the filter span
                 //       avoids span intersection checks for each symbol/node/operation in the tree
                 //       to determine if it falls in the analysis scope.
-                if (filterSpan.GetValueOrDefault().Start == 0 && filterSpan.GetValueOrDefault().Length == filterFile.GetValueOrDefault().SourceTree!.Length)
+                if (
+                    filterSpan.GetValueOrDefault().Start == 0
+                    && filterSpan.GetValueOrDefault().Length
+                        == filterFile.GetValueOrDefault().SourceTree!.Length
+                )
                 {
                     return null;
                 }
@@ -176,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return filterSpan;
         }
 
-        private ImmutableHashSet<DiagnosticAnalyzer> CreateAnalyzersSet() => Analyzers.ToImmutableHashSet();
+        private ImmutableHashSet<DiagnosticAnalyzer> CreateAnalyzersSet() =>
+            Analyzers.ToImmutableHashSet();
 
         public bool Contains(DiagnosticAnalyzer analyzer)
         {
@@ -189,13 +272,30 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return _lazyAnalyzersSet.Value.Contains(analyzer);
         }
 
-        public AnalysisScope WithAnalyzers(ImmutableArray<DiagnosticAnalyzer> analyzers, CompilationWithAnalyzers compilationWithAnalyzers)
+        public AnalysisScope WithAnalyzers(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            CompilationWithAnalyzers compilationWithAnalyzers
+        )
         {
             var hasAllAnalyzers = ComputeHasAllAnalyzers(analyzers, compilationWithAnalyzers);
-            return new AnalysisScope(SyntaxTrees, AdditionalFiles, analyzers, hasAllAnalyzers, FilterFileOpt, FilterSpanOpt, OriginalFilterFile, OriginalFilterSpan, IsSyntacticSingleFileAnalysis, ConcurrentAnalysis);
+            return new AnalysisScope(
+                SyntaxTrees,
+                AdditionalFiles,
+                analyzers,
+                hasAllAnalyzers,
+                FilterFileOpt,
+                FilterSpanOpt,
+                OriginalFilterFile,
+                OriginalFilterSpan,
+                IsSyntacticSingleFileAnalysis,
+                ConcurrentAnalysis
+            );
         }
 
-        private static bool ComputeHasAllAnalyzers(ImmutableArray<DiagnosticAnalyzer> analyzers, CompilationWithAnalyzers compilationWithAnalyzers)
+        private static bool ComputeHasAllAnalyzers(
+            ImmutableArray<DiagnosticAnalyzer> analyzers,
+            CompilationWithAnalyzers compilationWithAnalyzers
+        )
         {
 #if DEBUG
             foreach (var analyzer in analyzers)
@@ -207,20 +307,37 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return compilationWithAnalyzers.Analyzers.Length == analyzers.Length;
         }
 
-        public AnalysisScope WithFilterSpan(TextSpan? filterSpan)
-            => new AnalysisScope(SyntaxTrees, AdditionalFiles, Analyzers, HasAllAnalyzers, FilterFileOpt, filterSpan, OriginalFilterFile, OriginalFilterSpan, IsSyntacticSingleFileAnalysis, ConcurrentAnalysis);
+        public AnalysisScope WithFilterSpan(TextSpan? filterSpan) =>
+            new AnalysisScope(
+                SyntaxTrees,
+                AdditionalFiles,
+                Analyzers,
+                HasAllAnalyzers,
+                FilterFileOpt,
+                filterSpan,
+                OriginalFilterFile,
+                OriginalFilterSpan,
+                IsSyntacticSingleFileAnalysis,
+                ConcurrentAnalysis
+            );
 
         public static bool ShouldSkipSymbolAnalysis(SymbolDeclaredCompilationEvent symbolEvent)
         {
             // Skip symbol actions for implicitly declared symbols and non-source symbols.
-            return symbolEvent.Symbol.IsImplicitlyDeclared || symbolEvent.DeclaringSyntaxReferences.All(s => s.SyntaxTree == null);
+            return symbolEvent.Symbol.IsImplicitlyDeclared
+                || symbolEvent.DeclaringSyntaxReferences.All(s => s.SyntaxTree == null);
         }
 
         public static bool ShouldSkipDeclarationAnalysis(ISymbol symbol)
         {
             // Skip syntax actions for implicitly declared symbols, except for implicitly declared global namespace symbols.
-            return symbol.IsImplicitlyDeclared &&
-                !((symbol.Kind == SymbolKind.Namespace && ((INamespaceSymbol)symbol).IsGlobalNamespace));
+            return symbol.IsImplicitlyDeclared
+                && !(
+                    (
+                        symbol.Kind == SymbolKind.Namespace
+                        && ((INamespaceSymbol)symbol).IsGlobalNamespace
+                    )
+                );
         }
 
         public bool ShouldAnalyze(SyntaxTree tree)
@@ -230,13 +347,21 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public bool ShouldAnalyze(AdditionalText file)
         {
-            return !FilterFileOpt.HasValue || FilterFileOpt.GetValueOrDefault().AdditionalFile == file;
+            return !FilterFileOpt.HasValue
+                || FilterFileOpt.GetValueOrDefault().AdditionalFile == file;
         }
 
         public bool ShouldAnalyze(
             SymbolDeclaredCompilationEvent symbolEvent,
-            Func<ISymbol, SyntaxReference, Compilation, CancellationToken, SyntaxNode> getTopmostNodeForAnalysis,
-            CancellationToken cancellationToken)
+            Func<
+                ISymbol,
+                SyntaxReference,
+                Compilation,
+                CancellationToken,
+                SyntaxNode
+            > getTopmostNodeForAnalysis,
+            CancellationToken cancellationToken
+        )
         {
             if (!FilterFileOpt.HasValue)
             {
@@ -253,7 +378,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 if (syntaxRef.SyntaxTree == filterTree)
                 {
-                    var node = getTopmostNodeForAnalysis(symbolEvent.Symbol, syntaxRef, symbolEvent.Compilation, cancellationToken);
+                    var node = getTopmostNodeForAnalysis(
+                        symbolEvent.Symbol,
+                        syntaxRef,
+                        symbolEvent.Compilation,
+                        cancellationToken
+                    );
                     if (ShouldInclude(node.FullSpan))
                     {
                         return true;
@@ -281,12 +411,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public bool ShouldInclude(TextSpan filterSpan)
         {
-            return !FilterSpanOpt.HasValue || FilterSpanOpt.GetValueOrDefault().IntersectsWith(filterSpan);
+            return !FilterSpanOpt.HasValue
+                || FilterSpanOpt.GetValueOrDefault().IntersectsWith(filterSpan);
         }
 
         public bool ContainsSpan(TextSpan filterSpan)
         {
-            return !FilterSpanOpt.HasValue || FilterSpanOpt.GetValueOrDefault().Contains(filterSpan);
+            return !FilterSpanOpt.HasValue
+                || FilterSpanOpt.GetValueOrDefault().Contains(filterSpan);
         }
 
         public bool ShouldInclude(Diagnostic diagnostic)
@@ -306,8 +438,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             }
             else if (diagnostic.Location is ExternalFileLocation externalFileLocation)
             {
-                if (filterFile.AdditionalFile == null ||
-                    !PathUtilities.Comparer.Equals(externalFileLocation.GetLineSpan().Path, filterFile.AdditionalFile.Path))
+                if (
+                    filterFile.AdditionalFile == null
+                    || !PathUtilities.Comparer.Equals(
+                        externalFileLocation.GetLineSpan().Path,
+                        filterFile.AdditionalFile.Path
+                    )
+                )
                 {
                     return false;
                 }

@@ -11,12 +11,14 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         private static readonly PbeParameters s_win7Pbe = new PbeParameters(
             PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
             HashAlgorithmName.SHA1,
-            2000);
+            2000
+        );
 
         private static readonly PbeParameters s_pbkdf2Pbe = new PbeParameters(
             PbeEncryptionAlgorithm.Aes256Cbc,
             HashAlgorithmName.SHA256,
-            2000);
+            2000
+        );
 
         private static readonly ReadOnlyMemory<byte> s_derNull = new byte[] { 0x05, 0x00 };
 
@@ -33,24 +35,31 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                     rsa2.ImportEncryptedPkcs8PrivateKey(
                         (ReadOnlySpan<char>)nameof(rsa),
                         keyBag.EncryptedPkcs8PrivateKey.Span,
-                        out _);
+                        out _
+                    );
 
                     byte[] sig = new byte[rsa.KeySize / 8];
 
-                    Assert.True(rsa2.TrySignData(
-                        keyBag.EncryptedPkcs8PrivateKey.Span,
-                        sig,
-                        HashAlgorithmName.MD5,
-                        RSASignaturePadding.Pkcs1,
-                        out int sigLen));
+                    Assert.True(
+                        rsa2.TrySignData(
+                            keyBag.EncryptedPkcs8PrivateKey.Span,
+                            sig,
+                            HashAlgorithmName.MD5,
+                            RSASignaturePadding.Pkcs1,
+                            out int sigLen
+                        )
+                    );
 
                     Assert.Equal(sig.Length, sigLen);
 
-                    Assert.True(rsa.VerifyData(
-                        keyBag.EncryptedPkcs8PrivateKey.Span,
-                        sig,
-                        HashAlgorithmName.MD5,
-                        RSASignaturePadding.Pkcs1));
+                    Assert.True(
+                        rsa.VerifyData(
+                            keyBag.EncryptedPkcs8PrivateKey.Span,
+                            sig,
+                            HashAlgorithmName.MD5,
+                            RSASignaturePadding.Pkcs1
+                        )
+                    );
                 }
             }
         }
@@ -63,31 +72,42 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 Pkcs12SafeContents contents = new Pkcs12SafeContents();
                 byte[] encryptionKey = new byte[] { 1, 2, 3, 4, 5 };
 
-                Pkcs12ShroudedKeyBag keyBag = contents.AddShroudedKey(rsa, encryptionKey, s_pbkdf2Pbe);
+                Pkcs12ShroudedKeyBag keyBag = contents.AddShroudedKey(
+                    rsa,
+                    encryptionKey,
+                    s_pbkdf2Pbe
+                );
 
                 using (RSA rsa2 = RSA.Create())
                 {
                     rsa2.ImportEncryptedPkcs8PrivateKey(
                         encryptionKey,
                         keyBag.EncryptedPkcs8PrivateKey.Span,
-                        out _);
+                        out _
+                    );
 
                     byte[] sig = new byte[rsa.KeySize / 8];
 
-                    Assert.True(rsa2.TrySignData(
-                        keyBag.EncryptedPkcs8PrivateKey.Span,
-                        sig,
-                        HashAlgorithmName.MD5,
-                        RSASignaturePadding.Pkcs1,
-                        out int sigLen));
+                    Assert.True(
+                        rsa2.TrySignData(
+                            keyBag.EncryptedPkcs8PrivateKey.Span,
+                            sig,
+                            HashAlgorithmName.MD5,
+                            RSASignaturePadding.Pkcs1,
+                            out int sigLen
+                        )
+                    );
 
                     Assert.Equal(sig.Length, sigLen);
 
-                    Assert.True(rsa.VerifyData(
-                        keyBag.EncryptedPkcs8PrivateKey.Span,
-                        sig,
-                        HashAlgorithmName.MD5,
-                        RSASignaturePadding.Pkcs1));
+                    Assert.True(
+                        rsa.VerifyData(
+                            keyBag.EncryptedPkcs8PrivateKey.Span,
+                            sig,
+                            HashAlgorithmName.MD5,
+                            RSASignaturePadding.Pkcs1
+                        )
+                    );
                 }
             }
         }
@@ -103,13 +123,15 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             {
                 Assert.True(
                     s_derNull.Span.Overlaps(shroudedKeyBag.EncryptedPkcs8PrivateKey.Span),
-                    "Same memory");
+                    "Same memory"
+                );
             }
             else
             {
                 Assert.False(
                     s_derNull.Span.Overlaps(shroudedKeyBag.EncryptedPkcs8PrivateKey.Span),
-                    "Same memory");
+                    "Same memory"
+                );
             }
         }
 

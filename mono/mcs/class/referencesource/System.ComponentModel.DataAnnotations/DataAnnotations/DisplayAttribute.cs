@@ -2,14 +2,22 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// DisplayAttribute is a general-purpose attribute to specify user-visible globalizable strings for types and members.
     /// The string properties of this class can be used either as literals or as resource identifiers into a specified
     /// <see cref="ResourceType"/>
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Method, AllowMultiple = false)]
-    public sealed class DisplayAttribute : Attribute {
+    [AttributeUsage(
+        AttributeTargets.Property
+            | AttributeTargets.Field
+            | AttributeTargets.Parameter
+            | AttributeTargets.Method,
+        AllowMultiple = false
+    )]
+    public sealed class DisplayAttribute : Attribute
+    {
         #region Member Fields
 
         private Type _resourceType;
@@ -29,8 +37,7 @@ namespace System.ComponentModel.DataAnnotations {
         /// <summary>
         /// Default constructor for DisplayAttribute.  All associated string properties and methods will return <c>null</c>.
         /// </summary>
-        public DisplayAttribute() {
-        }
+        public DisplayAttribute() { }
 
         #endregion
 
@@ -55,13 +62,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// The short name is generally used as the grid column label for a UI element bound to the member
         /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
         /// </value>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string ShortName {
-            get {
-                return this._shortName.Value;
-            }
-            set {
-                if (this._shortName.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string ShortName
+        {
+            get { return this._shortName.Value; }
+            set
+            {
+                if (this._shortName.Value != value)
+                {
                     this._shortName.Value = value;
                 }
             }
@@ -86,13 +98,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// The name is generally used as the field label for a UI element bound to the member
         /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
         /// </value>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string Name {
-            get {
-                return this._name.Value;
-            }
-            set {
-                if (this._name.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string Name
+        {
+            get { return this._name.Value; }
+            set
+            {
+                if (this._name.Value != value)
+                {
                     this._name.Value = value;
                 }
             }
@@ -117,13 +134,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// Description is generally used as a tool tip or description a UI element bound to the member
         /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
         /// </value>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string Description {
-            get {
-                return this._description.Value;
-            }
-            set {
-                if (this._description.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string Description
+        {
+            get { return this._description.Value; }
+            set
+            {
+                if (this._description.Value != value)
+                {
                     this._description.Value = value;
                 }
             }
@@ -148,13 +170,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// A prompt is generally used as a prompt or watermark for a UI element bound to the member
         /// bearing this attribute.  A <c>null</c> or empty string is legal, and consumers must allow for that.
         /// </value>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string Prompt {
-            get {
-                return this._prompt.Value;
-            }
-            set {
-                if (this._prompt.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string Prompt
+        {
+            get { return this._prompt.Value; }
+            set
+            {
+                if (this._prompt.Value != value)
+                {
                     this._prompt.Value = value;
                 }
             }
@@ -179,13 +206,18 @@ namespace System.ComponentModel.DataAnnotations {
         /// A group name is used for grouping fields into the UI.  A <c>null</c> or empty string is legal,
         /// and consumers must allow for that.
         /// </value>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public string GroupName {
-            get {
-                return this._groupName.Value;
-            }
-            set {
-                if (this._groupName.Value != value) {
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public string GroupName
+        {
+            get { return this._groupName.Value; }
+            set
+            {
+                if (this._groupName.Value != value)
+                {
                     this._groupName.Value = value;
                 }
             }
@@ -198,12 +230,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// <see cref="GetName"/>, <see cref="GetDescription"/>, <see cref="GetPrompt"/>, and <see cref="GetGroupName"/>
         /// methods to return localized values.
         /// </summary>
-        public Type ResourceType {
-            get {
-                return this._resourceType;
-            }
-            set {
-                if (this._resourceType != value) {
+        public Type ResourceType
+        {
+            get { return this._resourceType; }
+            set
+            {
+                if (this._resourceType != value)
+                {
                     this._resourceType = value;
 
                     this._shortName.ResourceType = value;
@@ -227,18 +260,30 @@ namespace System.ComponentModel.DataAnnotations {
         /// <exception cref="System.InvalidOperationException">
         /// If the getter of this property is invoked when the value has not been explicitly set using the setter.
         /// </exception>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public bool AutoGenerateField {
-            get {
-                if (!this._autoGenerateField.HasValue) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DataAnnotationsResources.DisplayAttribute_PropertyNotSet, "AutoGenerateField", "GetAutoGenerateField"));
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public bool AutoGenerateField
+        {
+            get
+            {
+                if (!this._autoGenerateField.HasValue)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DataAnnotationsResources.DisplayAttribute_PropertyNotSet,
+                            "AutoGenerateField",
+                            "GetAutoGenerateField"
+                        )
+                    );
                 }
 
                 return this._autoGenerateField.Value;
             }
-            set {
-                this._autoGenerateField = value;
-            }
+            set { this._autoGenerateField = value; }
         }
 
         /// <summary>
@@ -253,18 +298,30 @@ namespace System.ComponentModel.DataAnnotations {
         /// <exception cref="System.InvalidOperationException">
         /// If the getter of this property is invoked when the value has not been explicitly set using the setter.
         /// </exception>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public bool AutoGenerateFilter {
-            get {
-                if (!this._autoGenerateFilter.HasValue) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DataAnnotationsResources.DisplayAttribute_PropertyNotSet, "AutoGenerateFilter", "GetAutoGenerateFilter"));
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public bool AutoGenerateFilter
+        {
+            get
+            {
+                if (!this._autoGenerateFilter.HasValue)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DataAnnotationsResources.DisplayAttribute_PropertyNotSet,
+                            "AutoGenerateFilter",
+                            "GetAutoGenerateFilter"
+                        )
+                    );
                 }
 
                 return this._autoGenerateFilter.Value;
             }
-            set {
-                this._autoGenerateFilter = value;
-            }
+            set { this._autoGenerateFilter = value; }
         }
 
         /// <summary>
@@ -279,18 +336,30 @@ namespace System.ComponentModel.DataAnnotations {
         /// <exception cref="System.InvalidOperationException">
         /// If the getter of this property is invoked when the value has not been explicitly set using the setter.
         /// </exception>
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "The property and method are a matched pair")]
-        public int Order {
-            get {
-                if (!this._order.HasValue) {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, DataAnnotationsResources.DisplayAttribute_PropertyNotSet, "Order", "GetOrder"));
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "The property and method are a matched pair"
+        )]
+        public int Order
+        {
+            get
+            {
+                if (!this._order.HasValue)
+                {
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            DataAnnotationsResources.DisplayAttribute_PropertyNotSet,
+                            "Order",
+                            "GetOrder"
+                        )
+                    );
                 }
 
                 return this._order.Value;
             }
-            set {
-                this._order = value;
-            }
+            set { this._order = value; }
         }
 
         #endregion
@@ -321,8 +390,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// but a public static property with a name matching the <see cref="ShortName"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public string GetShortName() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public string GetShortName()
+        {
             return this._shortName.GetLocalizableValue() ?? this.GetName();
         }
 
@@ -351,8 +425,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// but a public static property with a name matching the <see cref="Name"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public string GetName() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public string GetName()
+        {
             return this._name.GetLocalizableValue();
         }
 
@@ -377,8 +456,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// but a public static property with a name matching the <see cref="Description"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public string GetDescription() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public string GetDescription()
+        {
             return this._description.GetLocalizableValue();
         }
 
@@ -403,8 +487,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// but a public static property with a name matching the <see cref="Prompt"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public string GetPrompt() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public string GetPrompt()
+        {
             return this._prompt.GetLocalizableValue();
         }
 
@@ -429,8 +518,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// but a public static property with a name matching the <see cref="GroupName"/> value couldn't be found
         /// on the <see cref="ResourceType"/>.
         /// </exception>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public string GetGroupName() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public string GetGroupName()
+        {
             return this._groupName.GetLocalizableValue();
         }
 
@@ -443,8 +537,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// When <see cref="AutoGenerateField"/> has not been set returns <c>null</c>.
         /// </para>
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public bool? GetAutoGenerateField() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public bool? GetAutoGenerateField()
+        {
             return this._autoGenerateField;
         }
 
@@ -457,8 +556,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// When <see cref="AutoGenerateFilter"/> has not been set returns <c>null</c>.
         /// </para>
         /// </returns>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public bool? GetAutoGenerateFilter() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public bool? GetAutoGenerateFilter()
+        {
             return this._autoGenerateFilter;
         }
 
@@ -476,8 +580,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// of 10000.  This value allows for explicitly-ordered fields to be displayed before
         /// and after the fields that don't specify an order.
         /// </remarks>
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "This method does work using a property of the same name")]
-        public int? GetOrder() {
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "This method does work using a property of the same name"
+        )]
+        public int? GetOrder()
+        {
             return this._order;
         }
 

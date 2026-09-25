@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,38 +32,23 @@ using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	[Obsolete ("Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0.")]
-	public interface ITemplateEditingFrame : IDisposable
-	{
-		void Close (bool saveChanges);
-		void Open ();
-		void Resize (int width, int height);
-		void Save ();
-		void UpdateControlName (string newName);
+    [Obsolete(
+        "Template editing is supported in ControlDesigner.TemplateGroups with SetViewFlags(ViewFlags.TemplateEditing, true) in 2.0."
+    )]
+    public interface ITemplateEditingFrame : IDisposable
+    {
+        void Close(bool saveChanges);
+        void Open();
+        void Resize(int width, int height);
+        void Save();
+        void UpdateControlName(string newName);
 
-		Style ControlStyle {
-			get;
-		}
-		int InitialHeight {
-			get;
-			set;
-		}
-		int InitialWidth {
-			get;
-			set;
-		}
-		string Name {
-			get;
-		}
-		string[] TemplateNames {
-			get;
-		}
-		Style[] TemplateStyles {
-			get;
-		}
-		TemplateEditingVerb Verb {
-			get;
-			set;
-		}
-	}
+        Style ControlStyle { get; }
+        int InitialHeight { get; set; }
+        int InitialWidth { get; set; }
+        string Name { get; }
+        string[] TemplateNames { get; }
+        Style[] TemplateStyles { get; }
+        TemplateEditingVerb Verb { get; set; }
+    }
 }

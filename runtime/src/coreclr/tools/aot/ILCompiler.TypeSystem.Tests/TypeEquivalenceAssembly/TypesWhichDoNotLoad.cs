@@ -14,15 +14,11 @@ namespace TypesWhichDoNotLoad
 
     // A case where the type is not both public
     [TypeIdentifier("TypesWhichDoNotLoad", "Type2")]
-    enum Type2
-    {
-    }
+    enum Type2 { }
 
     // A case where the type is not both public
     [TypeIdentifier("TypesWhichDoNotLoad", "Type3")]
-    struct Type3
-    {
-    }
+    struct Type3 { }
 
     // A case where the type is not both public
     [TypeIdentifier("TypesWhichDoNotLoad", "Type4")]
@@ -33,8 +29,7 @@ namespace TypesWhichDoNotLoad
     public struct Type4_IGNORE
     {
         [TypeIdentifier("TypesWhichDoNotLoad", "Type5")]
-        struct Type5
-        { }
+        struct Type5 { }
     }
 
     // A case with a static field

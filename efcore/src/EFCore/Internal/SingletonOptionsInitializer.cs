@@ -22,7 +22,8 @@ public class SingletonOptionsInitializer : ISingletonOptionsInitializer
     /// </summary>
     public virtual void EnsureInitialized(
         IServiceProvider serviceProvider,
-        IDbContextOptions options)
+        IDbContextOptions options
+    )
     {
         if (!_isInitialized)
         {
@@ -30,7 +31,11 @@ public class SingletonOptionsInitializer : ISingletonOptionsInitializer
             {
                 if (!_isInitialized)
                 {
-                    foreach (var singletonOptions in serviceProvider.GetRequiredService<IEnumerable<ISingletonOptions>>())
+                    foreach (
+                        var singletonOptions in serviceProvider.GetRequiredService<
+                            IEnumerable<ISingletonOptions>
+                        >()
+                    )
                     {
                         singletonOptions.Initialize(options);
                     }
@@ -40,7 +45,11 @@ public class SingletonOptionsInitializer : ISingletonOptionsInitializer
             }
         }
 
-        foreach (var singletonOptions in serviceProvider.GetRequiredService<IEnumerable<ISingletonOptions>>())
+        foreach (
+            var singletonOptions in serviceProvider.GetRequiredService<
+                IEnumerable<ISingletonOptions>
+            >()
+        )
         {
             singletonOptions.Validate(options);
         }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,36 +31,38 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    public sealed class XhtmlConformanceSection : ConfigurationSection
+    {
+        static ConfigurationProperty modeProp;
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static XhtmlConformanceSection()
+        {
+            modeProp = new ConfigurationProperty(
+                "mode",
+                typeof(XhtmlConformanceMode),
+                XhtmlConformanceMode.Transitional,
+                new GenericEnumConverter(typeof(XhtmlConformanceMode)),
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            properties = new ConfigurationPropertyCollection();
 
-	public sealed class XhtmlConformanceSection : ConfigurationSection
-	{
-		static ConfigurationProperty modeProp;
-		static ConfigurationPropertyCollection properties;
+            properties.Add(modeProp);
+        }
 
-		static XhtmlConformanceSection ()
-		{
-			modeProp = new ConfigurationProperty ("mode", typeof (XhtmlConformanceMode), XhtmlConformanceMode.Transitional,
-							      new GenericEnumConverter (typeof (XhtmlConformanceMode)),
-							      PropertyHelper.DefaultValidator,
-							      ConfigurationPropertyOptions.None);
-			properties = new ConfigurationPropertyCollection ();
+        [ConfigurationProperty("mode", DefaultValue = "Transitional")]
+        public XhtmlConformanceMode Mode
+        {
+            get { return (XhtmlConformanceMode)base[modeProp]; }
+            set { base[modeProp] = value; }
+        }
 
-			properties.Add (modeProp);
-		}
-
-		[ConfigurationProperty ("mode", DefaultValue = "Transitional")]
-		public XhtmlConformanceMode Mode {
-			get { return (XhtmlConformanceMode) base [modeProp];}
-			set { base[modeProp] = value; }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-
-

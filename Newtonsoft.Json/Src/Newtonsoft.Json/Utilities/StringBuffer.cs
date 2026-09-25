@@ -43,9 +43,8 @@ namespace Newtonsoft.Json.Utilities
 
         public bool IsEmpty => _buffer == null;
 
-        public StringBuffer(IArrayPool<char>? bufferPool, int initalSize) : this(BufferUtils.RentBuffer(bufferPool, initalSize))
-        {
-        }
+        public StringBuffer(IArrayPool<char>? bufferPool, int initalSize)
+            : this(BufferUtils.RentBuffer(bufferPool, initalSize)) { }
 
         private StringBuffer(char[] buffer)
         {

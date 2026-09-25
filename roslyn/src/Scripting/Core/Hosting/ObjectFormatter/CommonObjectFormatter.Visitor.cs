@@ -48,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 BuilderOptions builderOptions,
                 CommonPrimitiveFormatterOptions primitiveOptions,
                 CommonTypeNameFormatterOptions typeNameOptions,
-                MemberDisplayFormat memberDisplayFormat)
+                MemberDisplayFormat memberDisplayFormat
+            )
             {
                 _formatter = formatter;
                 _builderOptions = builderOptions;
@@ -59,7 +60,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
             private Builder MakeMemberBuilder(int limit)
             {
-                return new Builder(_builderOptions.WithMaximumOutputLength(Math.Min(_builderOptions.MaximumLineLength, limit)), suppressEllipsis: true);
+                return new Builder(
+                    _builderOptions.WithMaximumOutputLength(
+                        Math.Min(_builderOptions.MaximumLineLength, limit)
+                    ),
+                    suppressEllipsis: true
+                );
             }
 
             public string FormatObject(object obj)
@@ -68,7 +74,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     var builder = new Builder(_builderOptions, suppressEllipsis: false);
                     string _;
-                    return FormatObjectRecursive(builder, obj, isRoot: true, debuggerDisplayName: out _).ToString();
+                    return FormatObjectRecursive(
+                            builder,
+                            obj,
+                            isRoot: true,
+                            debuggerDisplayName: out _
+                        )
+                        .ToString();
                 }
                 catch (InsufficientExecutionStackException)
                 {
@@ -76,7 +88,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
             }
 
-            private Builder FormatObjectRecursive(Builder result, object obj, bool isRoot, out string debuggerDisplayName)
+            private Builder FormatObjectRecursive(
+                Builder result,
+                object obj,
+                bool isRoot,
+                out string debuggerDisplayName
+            )
             {
                 // TODO (https://github.com/dotnet/roslyn/issues/6689): remove this
                 if (!isRoot && _memberDisplayFormat == MemberDisplayFormat.SeparateLines)
@@ -85,7 +102,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
 
                 debuggerDisplayName = null;
-                string primitive = _formatter.PrimitiveFormatter.FormatPrimitive(obj, _primitiveOptions);
+                string primitive = _formatter.PrimitiveFormatter.FormatPrimitive(
+                    obj,
+                    _primitiveOptions
+                );
                 if (primitive != null)
                 {
                     result.Append(primitive);
@@ -100,16 +120,21 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 //
                 // { { format(key), format(value) }, ... }
                 // instead of
-                // { [key.ToString(), value.ToString()], ... } 
+                // { [key.ToString(), value.ToString()], ... }
                 //
                 // This is more general than overriding Dictionary<,> debugger proxy attribute since it applies on all
                 // types that return an array of KeyValuePair in their DebuggerDisplay to display items.
                 //
-                if (typeInfo.IsGenericType && typeInfo.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
+                if (
+                    typeInfo.IsGenericType
+                    && typeInfo.GetGenericTypeDefinition() == typeof(KeyValuePair<,>)
+                )
                 {
                     if (isRoot)
                     {
-                        result.Append(_formatter.TypeNameFormatter.FormatTypeName(type, _typeNameOptions));
+                        result.Append(
+                            _formatter.TypeNameFormatter.FormatTypeName(type, _typeNameOptions)
+                        );
                         result.Append(' ');
                     }
 
@@ -133,7 +158,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     return result;
                 }
 
-                DebuggerDisplayAttribute debuggerDisplay = GetApplicableDebuggerDisplayAttribute(typeInfo);
+                DebuggerDisplayAttribute debuggerDisplay = GetApplicableDebuggerDisplayAttribute(
+                    typeInfo
+                );
                 if (debuggerDisplay != null)
                 {
                     debuggerDisplayName = debuggerDisplay.Name;
@@ -151,8 +178,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 // or
                 // [[ToString()]] if ToString overridden
                 // or
-                // TypeName 
-                // 
+                // TypeName
+                //
                 ICollection collection;
                 if ((collection = obj as ICollection) != null)
                 {
@@ -162,7 +189,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     if (isRoot)
                     {
-                        result.Append(_formatter.TypeNameFormatter.FormatTypeName(type, _typeNameOptions));
+                        result.Append(
+                            _formatter.TypeNameFormatter.FormatTypeName(type, _typeNameOptions)
+                        );
                         result.Append('(');
                     }
 
@@ -182,7 +211,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
                 else
                 {
-                    result.Append(_formatter.TypeNameFormatter.FormatTypeName(type, _typeNameOptions));
+                    result.Append(
+                        _formatter.TypeNameFormatter.FormatTypeName(type, _typeNameOptions)
+                    );
                 }
 
                 MemberDisplayFormat memberFormat = _memberDisplayFormat;
@@ -220,14 +251,20 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
             #region Members
 
-            private void FormatMembers(Builder result, object obj, object proxy, bool includeNonPublic, bool inlineMembers)
+            private void FormatMembers(
+                Builder result,
+                object obj,
+                object proxy,
+                bool includeNonPublic,
+                bool inlineMembers
+            )
             {
                 // TODO (tomat): we should not use recursion
                 RuntimeHelpers.EnsureSufficientExecutionStack();
 
                 result.Append(' ');
 
-                // Note: Even if we've seen it before, we show a header 
+                // Note: Even if we've seen it before, we show a header
                 if (!VisitedObjects.Add(obj))
                 {
                     result.AppendInfiniteRecursionMarker();
@@ -255,7 +292,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                 if (!membersFormatted)
                 {
-                    FormatObjectMembers(result, proxy ?? obj, obj.GetType().GetTypeInfo(), includeNonPublic, inlineMembers);
+                    FormatObjectMembers(
+                        result,
+                        proxy ?? obj,
+                        obj.GetType().GetTypeInfo(),
+                        includeNonPublic,
+                        inlineMembers
+                    );
                 }
 
                 VisitedObjects.Remove(obj);
@@ -263,12 +306,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
             /// <summary>
             /// Formats object members to a list.
-            /// 
+            ///
             /// Inline == false:
             /// <code>
             /// { A=true, B=false, C=new int[3] { 1, 2, 3 } }
             /// </code>
-            /// 
+            ///
             /// Inline == true:
             /// <code>
             /// {
@@ -278,7 +321,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             /// }
             /// </code>
             /// </summary>
-            private void FormatObjectMembers(Builder result, object obj, TypeInfo preProxyTypeInfo, bool includeNonPublic, bool inline)
+            private void FormatObjectMembers(
+                Builder result,
+                object obj,
+                TypeInfo preProxyTypeInfo,
+                bool includeNonPublic,
+                bool inline
+            )
             {
                 int lengthLimit = result.Remaining;
                 if (lengthLimit < 0)
@@ -316,15 +365,24 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 result.AppendGroupClosing(inline);
             }
 
-            private static bool UseCollectionFormat(IEnumerable<FormattedMember> members, TypeInfo originalType)
+            private static bool UseCollectionFormat(
+                IEnumerable<FormattedMember> members,
+                TypeInfo originalType
+            )
             {
-                return typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(originalType) && members.All(member => member.Index >= 0);
+                return typeof(IEnumerable).GetTypeInfo().IsAssignableFrom(originalType)
+                    && members.All(member => member.Index >= 0);
             }
 
             /// <summary>
             /// Enumerates sorted object members to display.
             /// </summary>
-            private void FormatObjectMembersRecursive(List<FormattedMember> result, object obj, bool includeNonPublic, ref int lengthLimit)
+            private void FormatObjectMembersRecursive(
+                List<FormattedMember> result,
+                object obj,
+                bool includeNonPublic,
+                ref int lengthLimit
+            )
             {
                 Debug.Assert(obj != null);
 
@@ -334,23 +392,32 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 while (type != null)
                 {
                     members.AddRange(type.DeclaredFields.Where(f => !f.IsStatic));
-                    members.AddRange(type.DeclaredProperties.Where(f => f.GetMethod != null && !f.GetMethod.IsStatic));
+                    members.AddRange(
+                        type.DeclaredProperties.Where(f =>
+                            f.GetMethod != null && !f.GetMethod.IsStatic
+                        )
+                    );
                     type = type.BaseType?.GetTypeInfo();
                 }
 
-                members.Sort((x, y) =>
-                {
-                    // Need case-sensitive comparison here so that the order of members is
-                    // always well-defined (members can differ by case only). And we don't want to
-                    // depend on that order.
-                    int comparisonResult = StringComparer.OrdinalIgnoreCase.Compare(x.Name, y.Name);
-                    if (comparisonResult == 0)
+                members.Sort(
+                    (x, y) =>
                     {
-                        comparisonResult = StringComparer.Ordinal.Compare(x.Name, y.Name);
-                    }
+                        // Need case-sensitive comparison here so that the order of members is
+                        // always well-defined (members can differ by case only). And we don't want to
+                        // depend on that order.
+                        int comparisonResult = StringComparer.OrdinalIgnoreCase.Compare(
+                            x.Name,
+                            y.Name
+                        );
+                        if (comparisonResult == 0)
+                        {
+                            comparisonResult = StringComparer.Ordinal.Compare(x.Name, y.Name);
+                        }
 
-                    return comparisonResult;
-                });
+                        return comparisonResult;
+                    }
+                );
 
                 foreach (var member in members)
                 {
@@ -359,8 +426,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         continue;
                     }
 
-                    bool rootHidden = false, ignoreVisibility = false;
-                    var browsable = (DebuggerBrowsableAttribute)member.GetCustomAttributes(typeof(DebuggerBrowsableAttribute), false).FirstOrDefault();
+                    bool rootHidden = false,
+                        ignoreVisibility = false;
+                    var browsable = (DebuggerBrowsableAttribute)
+                        member
+                            .GetCustomAttributes(typeof(DebuggerBrowsableAttribute), false)
+                            .FirstOrDefault();
                     if (browsable != null)
                     {
                         if (browsable.State == DebuggerBrowsableState.Never)
@@ -374,7 +445,15 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                     if (member is FieldInfo field)
                     {
-                        if (!(includeNonPublic || ignoreVisibility || field.IsPublic || field.IsFamily || field.IsFamilyOrAssembly))
+                        if (
+                            !(
+                                includeNonPublic
+                                || ignoreVisibility
+                                || field.IsPublic
+                                || field.IsFamily
+                                || field.IsFamilyOrAssembly
+                            )
+                        )
                         {
                             continue;
                         }
@@ -392,9 +471,23 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         var setter = property.SetMethod;
 
                         // If not ignoring visibility include properties that has a visible getter or setter.
-                        if (!(includeNonPublic || ignoreVisibility ||
-                            getter.IsPublic || getter.IsFamily || getter.IsFamilyOrAssembly ||
-                            (setter != null && (setter.IsPublic || setter.IsFamily || setter.IsFamilyOrAssembly))))
+                        if (
+                            !(
+                                includeNonPublic
+                                || ignoreVisibility
+                                || getter.IsPublic
+                                || getter.IsFamily
+                                || getter.IsFamilyOrAssembly
+                                || (
+                                    setter != null
+                                    && (
+                                        setter.IsPublic
+                                        || setter.IsFamily
+                                        || setter.IsFamilyOrAssembly
+                                    )
+                                )
+                            )
+                        )
                         {
                             continue;
                         }
@@ -408,8 +501,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     var debuggerDisplay = GetApplicableDebuggerDisplayAttribute(member);
                     if (debuggerDisplay != null)
                     {
-                        string k = FormatWithEmbeddedExpressions(lengthLimit, debuggerDisplay.Name, obj) ?? member.Name;
-                        string v = FormatWithEmbeddedExpressions(lengthLimit, debuggerDisplay.Value, obj) ?? string.Empty; // TODO: ?
+                        string k =
+                            FormatWithEmbeddedExpressions(lengthLimit, debuggerDisplay.Name, obj)
+                            ?? member.Name;
+                        string v =
+                            FormatWithEmbeddedExpressions(lengthLimit, debuggerDisplay.Value, obj)
+                            ?? string.Empty; // TODO: ?
                         if (!AddMember(result, new FormattedMember(-1, k, v), ref lengthLimit))
                         {
                             return;
@@ -424,7 +521,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     {
                         var memberValueBuilder = MakeMemberBuilder(lengthLimit);
                         FormatException(memberValueBuilder, exception);
-                        if (!AddMember(result, new FormattedMember(-1, member.Name, memberValueBuilder.ToString()), ref lengthLimit))
+                        if (
+                            !AddMember(
+                                result,
+                                new FormattedMember(-1, member.Name, memberValueBuilder.ToString()),
+                                ref lengthLimit
+                            )
+                        )
                         {
                             return;
                         }
@@ -437,21 +540,37 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         if (value != null && !VisitedObjects.Contains(value))
                         {
                             Array array;
-                            if ((array = value as Array) != null)  // TODO (tomat): n-dim arrays
+                            if ((array = value as Array) != null) // TODO (tomat): n-dim arrays
                             {
                                 int i = 0;
                                 foreach (object item in array)
                                 {
                                     string name;
                                     Builder valueBuilder = MakeMemberBuilder(lengthLimit);
-                                    FormatObjectRecursive(valueBuilder, item, isRoot: false, debuggerDisplayName: out name);
+                                    FormatObjectRecursive(
+                                        valueBuilder,
+                                        item,
+                                        isRoot: false,
+                                        debuggerDisplayName: out name
+                                    );
 
                                     if (!string.IsNullOrEmpty(name))
                                     {
-                                        name = FormatWithEmbeddedExpressions(MakeMemberBuilder(lengthLimit), name, item).ToString();
+                                        name = FormatWithEmbeddedExpressions(
+                                                MakeMemberBuilder(lengthLimit),
+                                                name,
+                                                item
+                                            )
+                                            .ToString();
                                     }
 
-                                    if (!AddMember(result, new FormattedMember(i, name, valueBuilder.ToString()), ref lengthLimit))
+                                    if (
+                                        !AddMember(
+                                            result,
+                                            new FormattedMember(i, name, valueBuilder.ToString()),
+                                            ref lengthLimit
+                                        )
+                                    )
                                     {
                                         return;
                                     }
@@ -459,9 +578,20 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                     i++;
                                 }
                             }
-                            else if (_formatter.PrimitiveFormatter.FormatPrimitive(value, _primitiveOptions) == null && VisitedObjects.Add(value))
+                            else if (
+                                _formatter.PrimitiveFormatter.FormatPrimitive(
+                                    value,
+                                    _primitiveOptions
+                                ) == null
+                                && VisitedObjects.Add(value)
+                            )
                             {
-                                FormatObjectMembersRecursive(result, value, includeNonPublic, ref lengthLimit);
+                                FormatObjectMembersRecursive(
+                                    result,
+                                    value,
+                                    includeNonPublic,
+                                    ref lengthLimit
+                                );
                                 VisitedObjects.Remove(value);
                             }
                         }
@@ -470,7 +600,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     {
                         string name;
                         Builder valueBuilder = MakeMemberBuilder(lengthLimit);
-                        FormatObjectRecursive(valueBuilder, value, isRoot: false, debuggerDisplayName: out name);
+                        FormatObjectRecursive(
+                            valueBuilder,
+                            value,
+                            isRoot: false,
+                            debuggerDisplayName: out name
+                        );
 
                         if (string.IsNullOrEmpty(name))
                         {
@@ -478,10 +613,21 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         }
                         else
                         {
-                            name = FormatWithEmbeddedExpressions(MakeMemberBuilder(lengthLimit), name, value).ToString();
+                            name = FormatWithEmbeddedExpressions(
+                                    MakeMemberBuilder(lengthLimit),
+                                    name,
+                                    value
+                                )
+                                .ToString();
                         }
 
-                        if (!AddMember(result, new FormattedMember(-1, name, valueBuilder.ToString()), ref lengthLimit))
+                        if (
+                            !AddMember(
+                                result,
+                                new FormattedMember(-1, name, valueBuilder.ToString()),
+                                ref lengthLimit
+                            )
+                        )
                         {
                             return;
                         }
@@ -489,7 +635,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 }
             }
 
-            private bool AddMember(List<FormattedMember> members, FormattedMember member, ref int remainingLength)
+            private bool AddMember(
+                List<FormattedMember> members,
+                FormattedMember member,
+                ref int remainingLength
+            )
             {
                 // Add this item even if we exceed the limit - its prefix might be appended to the result.
                 members.Add(member);
@@ -515,7 +665,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             private void FormatException(Builder result, Exception exception)
             {
                 result.Append("!<");
-                result.Append(_formatter.TypeNameFormatter.FormatTypeName(exception.GetType(), _typeNameOptions));
+                result.Append(
+                    _formatter.TypeNameFormatter.FormatTypeName(
+                        exception.GetType(),
+                        _typeNameOptions
+                    )
+                );
                 result.Append('>');
             }
 
@@ -527,7 +682,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             {
                 TypeInfo type = obj.GetType().GetTypeInfo();
                 object key = type.GetDeclaredProperty("Key").GetValue(obj, Array.Empty<object>());
-                object value = type.GetDeclaredProperty("Value").GetValue(obj, Array.Empty<object>());
+                object value = type.GetDeclaredProperty("Value")
+                    .GetValue(obj, Array.Empty<object>());
                 string _;
                 result.AppendGroupOpening();
                 result.AppendCollectionItemSeparator(isFirst: true, inline: true);
@@ -541,11 +697,22 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             {
                 if (collection is Array array)
                 {
-                    result.Append(_formatter.TypeNameFormatter.FormatArrayTypeName(array.GetType(), array, _typeNameOptions));
+                    result.Append(
+                        _formatter.TypeNameFormatter.FormatArrayTypeName(
+                            array.GetType(),
+                            array,
+                            _typeNameOptions
+                        )
+                    );
                     return;
                 }
 
-                result.Append(_formatter.TypeNameFormatter.FormatTypeName(collection.GetType(), _typeNameOptions));
+                result.Append(
+                    _formatter.TypeNameFormatter.FormatTypeName(
+                        collection.GetType(),
+                        _typeNameOptions
+                    )
+                );
                 try
                 {
                     result.Append('(');
@@ -566,12 +733,20 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                 if (array.Rank > 1)
                 {
-                    FormatMultidimensionalArrayElements(result, array, inline: _memberDisplayFormat != MemberDisplayFormat.SeparateLines);
+                    FormatMultidimensionalArrayElements(
+                        result,
+                        array,
+                        inline: _memberDisplayFormat != MemberDisplayFormat.SeparateLines
+                    );
                 }
                 else
                 {
                     result.Append(' ');
-                    FormatSequenceMembers(result, array, inline: _memberDisplayFormat != MemberDisplayFormat.SeparateLines);
+                    FormatSequenceMembers(
+                        result,
+                        array,
+                        inline: _memberDisplayFormat != MemberDisplayFormat.SeparateLines
+                    );
                 }
             }
 
@@ -593,9 +768,19 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                             result.AppendCollectionItemSeparator(isFirst: i == 0, inline: inline);
                             result.AppendGroupOpening();
                             result.AppendCollectionItemSeparator(isFirst: true, inline: true);
-                            FormatObjectRecursive(result, entry.Key, isRoot: false, debuggerDisplayName: out _);
+                            FormatObjectRecursive(
+                                result,
+                                entry.Key,
+                                isRoot: false,
+                                debuggerDisplayName: out _
+                            );
                             result.AppendCollectionItemSeparator(isFirst: false, inline: true);
-                            FormatObjectRecursive(result, entry.Value, isRoot: false, debuggerDisplayName: out _);
+                            FormatObjectRecursive(
+                                result,
+                                entry.Value,
+                                isRoot: false,
+                                debuggerDisplayName: out _
+                            );
                             result.AppendGroupClosing(inline: true);
                             i++;
                         }
@@ -627,7 +812,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     {
                         string _;
                         result.AppendCollectionItemSeparator(isFirst: i == 0, inline: inline);
-                        FormatObjectRecursive(result, item, isRoot: false, debuggerDisplayName: out _);
+                        FormatObjectRecursive(
+                            result,
+                            item,
+                            isRoot: false,
+                            debuggerDisplayName: out _
+                        );
                         i++;
                     }
                 }
@@ -641,7 +831,11 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 result.AppendGroupClosing(inline);
             }
 
-            private void FormatMultidimensionalArrayElements(Builder result, Array array, bool inline)
+            private void FormatMultidimensionalArrayElements(
+                Builder result,
+                Array array,
+                bool inline
+            )
             {
                 Debug.Assert(array.Rank > 1);
 
@@ -680,7 +874,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         indices[i]++;
                     }
 
-                    result.AppendCollectionItemSeparator(isFirst: flatIndex == 0, inline: inline || nesting != 1);
+                    result.AppendCollectionItemSeparator(
+                        isFirst: flatIndex == 0,
+                        inline: inline || nesting != 1
+                    );
 
                     i = indices.Length - 1;
                     while (i >= 0 && indices[i] == array.GetLowerBound(i))
@@ -689,13 +886,21 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         nesting++;
 
                         // array isn't empty, so there is always an element following this separator
-                        result.AppendCollectionItemSeparator(isFirst: true, inline: inline || nesting != 1);
+                        result.AppendCollectionItemSeparator(
+                            isFirst: true,
+                            inline: inline || nesting != 1
+                        );
 
                         i--;
                     }
 
                     string _;
-                    FormatObjectRecursive(result, array.GetValue(indices), isRoot: false, debuggerDisplayName: out _);
+                    FormatObjectRecursive(
+                        result,
+                        array.GetValue(indices),
+                        isRoot: false,
+                        debuggerDisplayName: out _
+                    );
 
                     indices[indices.Length - 1]++;
                     flatIndex++;
@@ -760,17 +965,17 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             #region DebuggerDisplay Embedded Expressions
 
             /// <summary>
-            /// Evaluate a format string with possible member references enclosed in braces. 
+            /// Evaluate a format string with possible member references enclosed in braces.
             /// E.g. "goo = {GetGooString(),nq}, bar = {Bar}".
             /// </summary>
             /// <remarks>
             /// Although in theory any expression is allowed to be embedded in the string such behavior is in practice fundamentally broken.
-            /// The attribute doesn't specify what language (VB, C#, F#, etc.) to use to parse these expressions. Even if it did all languages 
-            /// would need to be able to evaluate each other language's expressions, which is not viable and the Expression Evaluator doesn't 
-            /// work that way today. Instead it evaluates the embedded expressions in the language of the current method frame. When consuming 
+            /// The attribute doesn't specify what language (VB, C#, F#, etc.) to use to parse these expressions. Even if it did all languages
+            /// would need to be able to evaluate each other language's expressions, which is not viable and the Expression Evaluator doesn't
+            /// work that way today. Instead it evaluates the embedded expressions in the language of the current method frame. When consuming
             /// VB objects from C#, for example, the evaluation might fail due to language mismatch (evaluating VB expression using C# parser).
-            /// 
-            /// Therefore we limit the expressions to a simple language independent syntax: {clr-member-name} '(' ')' ',nq', 
+            ///
+            /// Therefore we limit the expressions to a simple language independent syntax: {clr-member-name} '(' ')' ',nq',
             /// where parentheses and ,nq suffix (no-quotes) are optional and the name is an arbitrary CLR field, property, or method name.
             /// We then resolve the member by name using case-sensitive lookup first with fallback to case insensitive and evaluate it.
             /// If parentheses are present we only look for methods.
@@ -783,7 +988,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                     return null;
                 }
 
-                var builder = new Builder(_builderOptions.WithMaximumOutputLength(lengthLimit), suppressEllipsis: true);
+                var builder = new Builder(
+                    _builderOptions.WithMaximumOutputLength(lengthLimit),
+                    suppressEllipsis: true
+                );
                 return FormatWithEmbeddedExpressions(builder, format, obj).ToString();
             }
 
@@ -803,9 +1011,21 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                         {
                             int expressionEnd = format.IndexOf('}', i);
 
-                            bool noQuotes, callableOnly;
+                            bool noQuotes,
+                                callableOnly;
                             string memberName;
-                            if (expressionEnd == -1 || (memberName = ParseSimpleMemberName(format, i, expressionEnd, out noQuotes, out callableOnly)) == null)
+                            if (
+                                expressionEnd == -1
+                                || (
+                                    memberName = ParseSimpleMemberName(
+                                        format,
+                                        i,
+                                        expressionEnd,
+                                        out noQuotes,
+                                        out callableOnly
+                                    )
+                                ) == null
+                            )
                             {
                                 // the expression isn't properly formatted
                                 result.Append(format, i - 1, format.Length - i + 1);
@@ -815,7 +1035,12 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                             MemberInfo member = ResolveMember(obj, memberName, callableOnly);
                             if (member == null)
                             {
-                                result.AppendFormat(callableOnly ? "!<Method '{0}' not found>" : "!<Member '{0}' not found>", memberName);
+                                result.AppendFormat(
+                                    callableOnly
+                                        ? "!<Method '{0}' not found>"
+                                        : "!<Member '{0}' not found>",
+                                    memberName
+                                );
                             }
                             else
                             {
@@ -828,8 +1053,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                 }
                                 else
                                 {
-                                    MemberDisplayFormat oldMemberDisplayFormat = _memberDisplayFormat;
-                                    CommonPrimitiveFormatterOptions oldPrimitiveOptions = _primitiveOptions;
+                                    MemberDisplayFormat oldMemberDisplayFormat =
+                                        _memberDisplayFormat;
+                                    CommonPrimitiveFormatterOptions oldPrimitiveOptions =
+                                        _primitiveOptions;
 
                                     _memberDisplayFormat = MemberDisplayFormat.Hidden;
                                     _primitiveOptions = new CommonPrimitiveFormatterOptions(
@@ -837,10 +1064,16 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                                         _primitiveOptions.IncludeCharacterCodePoints,
                                         quoteStringsAndCharacters: !noQuotes,
                                         escapeNonPrintableCharacters: _primitiveOptions.EscapeNonPrintableCharacters,
-                                        cultureInfo: _primitiveOptions.CultureInfo);
+                                        cultureInfo: _primitiveOptions.CultureInfo
+                                    );
 
                                     string _;
-                                    FormatObjectRecursive(result, value, isRoot: false, debuggerDisplayName: out _);
+                                    FormatObjectRecursive(
+                                        result,
+                                        value,
+                                        isRoot: false,
+                                        debuggerDisplayName: out _
+                                    );
 
                                     _primitiveOptions = oldPrimitiveOptions;
                                     _memberDisplayFormat = oldMemberDisplayFormat;

@@ -10,6 +10,4 @@ namespace Microsoft.Extensions.Configuration;
 /// It is both an <see cref="IConfigurationBuilder"/> and an <see cref="IConfiguration"/>.
 /// As sources are added, it updates its current view of configuration.
 /// </remarks>
-public interface IConfigurationManager : IConfiguration, IConfigurationBuilder
-{
-}
+public interface IConfigurationManager : IConfiguration, IConfigurationBuilder { }

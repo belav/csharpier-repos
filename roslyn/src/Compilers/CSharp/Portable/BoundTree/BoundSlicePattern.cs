@@ -10,7 +10,15 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private partial void Validate()
         {
-            Debug.Assert(IndexerAccess is null or BoundIndexerAccess or BoundImplicitIndexerAccess or BoundArrayAccess or BoundBadExpression or BoundDynamicIndexerAccess);
+            Debug.Assert(
+                IndexerAccess
+                    is null
+                        or BoundIndexerAccess
+                        or BoundImplicitIndexerAccess
+                        or BoundArrayAccess
+                        or BoundBadExpression
+                        or BoundDynamicIndexerAccess
+            );
             Debug.Assert(Binder.GetIndexerOrImplicitIndexerSymbol(IndexerAccess) is var _);
         }
     }

@@ -12,10 +12,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options.Convert
 {
     public class MarginConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            => new Thickness(System.Convert.ToDouble(value), 0, 0, 0);
+        public object Convert(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        ) => new Thickness(System.Convert.ToDouble(value), 0, 0, 0);
 
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-            => throw new NotSupportedException();
+        public object ConvertBack(
+            object value,
+            Type targetType,
+            object parameter,
+            System.Globalization.CultureInfo culture
+        ) => throw new NotSupportedException();
     }
 }

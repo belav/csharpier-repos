@@ -20,7 +20,8 @@ public class TypeEventData : EventData
     public TypeEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        Type clrType)
+        Type clrType
+    )
         : base(eventDefinition, messageGenerator)
     {
         ClrType = clrType;

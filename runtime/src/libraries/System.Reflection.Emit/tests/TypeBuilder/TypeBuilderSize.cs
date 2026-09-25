@@ -27,7 +27,12 @@ namespace System.Reflection.Emit.Tests
         public void Size_Set_ReturnsExpected(int size)
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            TypeBuilder type = module.DefineType("TestType", TypeAttributes.Class | TypeAttributes.Public, null, size);
+            TypeBuilder type = module.DefineType(
+                "TestType",
+                TypeAttributes.Class | TypeAttributes.Public,
+                null,
+                size
+            );
             Assert.Equal(size, type.Size);
 
             type.DefineGenericParameters("T", "U");

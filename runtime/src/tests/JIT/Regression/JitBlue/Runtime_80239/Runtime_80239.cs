@@ -16,7 +16,5 @@ public class Runtime_80239
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume(Vector3 test)
-    {
-    }
+    private static void Consume(Vector3 test) { }
 }

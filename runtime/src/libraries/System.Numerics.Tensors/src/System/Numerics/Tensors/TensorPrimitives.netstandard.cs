@@ -31,9 +31,12 @@ namespace System.Numerics.Tensors
             float xSumOfSquares = 0f;
             float ySumOfSquares = 0f;
 
-            if (Vector.IsHardwareAccelerated &&
-                Vector<float>.Count <= 16 && // currently never greater than 8, but 16 would occur if/when AVX512 is supported, and logic in remainder handling assumes that maximum
-                x.Length >= Vector<float>.Count)
+            if (
+                Vector.IsHardwareAccelerated
+                && Vector<float>.Count <= 16
+                && // currently never greater than 8, but 16 would occur if/when AVX512 is supported, and logic in remainder handling assumes that maximum
+                x.Length >= Vector<float>.Count
+            )
             {
                 ref float xRef = ref MemoryMarshal.GetReference(x);
                 ref float yRef = ref MemoryMarshal.GetReference(y);
@@ -55,8 +58,7 @@ namespace System.Numerics.Tensors
                     ySumOfSquaresVector += yVec * yVec;
 
                     i += Vector<float>.Count;
-                }
-                while (i <= oneVectorFromEnd);
+                } while (i <= oneVectorFromEnd);
 
                 // Process the last vector in the span, masking off elements already processed.
                 if (i != x.Length)
@@ -104,7 +106,10 @@ namespace System.Numerics.Tensors
         /// The aggregation is applied after the transform is applied to each element.
         /// </typeparam>
         private static unsafe float Aggregate<TTransformOperator, TAggregationOperator>(
-            ReadOnlySpan<float> x, TTransformOperator transformOp = default, TAggregationOperator aggregationOp = default)
+            ReadOnlySpan<float> x,
+            TTransformOperator transformOp = default,
+            TAggregationOperator aggregationOp = default
+        )
             where TTransformOperator : struct, IUnaryOperator
             where TAggregationOperator : struct, IAggregationOperator
         {
@@ -143,26 +148,41 @@ namespace System.Numerics.Tensors
             return SoftwareFallback(ref xRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static float SoftwareFallback(ref float xRef, nuint length, TTransformOperator transformOp = default, TAggregationOperator aggregationOp = default)
+            static float SoftwareFallback(
+                ref float xRef,
+                nuint length,
+                TTransformOperator transformOp = default,
+                TAggregationOperator aggregationOp = default
+            )
             {
                 float result = aggregationOp.IdentityValue;
 
                 for (nuint i = 0; i < length; i++)
                 {
-                    result = aggregationOp.Invoke(result, transformOp.Invoke(Unsafe.Add(ref xRef, (nint)(i))));
+                    result = aggregationOp.Invoke(
+                        result,
+                        transformOp.Invoke(Unsafe.Add(ref xRef, (nint)(i)))
+                    );
                 }
 
                 return result;
             }
 
-            static float Vectorized(ref float xRef, nuint remainder, TTransformOperator transformOp = default, TAggregationOperator aggregationOp = default)
+            static float Vectorized(
+                ref float xRef,
+                nuint remainder,
+                TTransformOperator transformOp = default,
+                TAggregationOperator aggregationOp = default
+            )
             {
                 Vector<float> vresult = new Vector<float>(aggregationOp.IdentityValue);
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector<float> beg = transformOp.Invoke(AsVector(ref xRef));
-                Vector<float> end = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)));
+                Vector<float> end = transformOp.Invoke(
+                    AsVector(ref xRef, remainder - (uint)(Vector<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -189,7 +209,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
 
@@ -209,10 +233,18 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)));
-                            vector2 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)));
-                            vector3 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)));
-                            vector4 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)));
+                            vector1 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0))
+                            );
+                            vector2 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1))
+                            );
+                            vector3 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2))
+                            );
+                            vector4 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3))
+                            );
 
                             vresult = aggregationOp.Invoke(vresult, vector1);
                             vresult = aggregationOp.Invoke(vresult, vector2);
@@ -221,10 +253,18 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)));
-                            vector2 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)));
-                            vector3 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)));
-                            vector4 = transformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)));
+                            vector1 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4))
+                            );
+                            vector2 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5))
+                            );
+                            vector3 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6))
+                            );
+                            vector4 = transformOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7))
+                            );
 
                             vresult = aggregationOp.Invoke(vresult, vector1);
                             vresult = aggregationOp.Invoke(vresult, vector2);
@@ -248,7 +288,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector.ConditionalSelect(CreateAlignmentMaskSingleVector((int)(misalignment)), beg, new Vector<float>(aggregationOp.IdentityValue));
+                beg = Vector.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector((int)(misalignment)),
+                    beg,
+                    new Vector<float>(aggregationOp.IdentityValue)
+                );
                 vresult = aggregationOp.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -266,49 +310,63 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector<float> vector = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)));
+                        Vector<float> vector = transformOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)));
+                        Vector<float> vector = transformOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)));
+                        Vector<float> vector = transformOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)));
+                        Vector<float> vector = transformOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)));
+                        Vector<float> vector = transformOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)));
+                        Vector<float> vector = transformOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector<float> vector = transformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 1)));
+                        Vector<float> vector = transformOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 1))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -316,7 +374,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector.ConditionalSelect(CreateRemainderMaskSingleVector((int)(trailing)), end, new Vector<float>(aggregationOp.IdentityValue));
+                        end = Vector.ConditionalSelect(
+                            CreateRemainderMaskSingleVector((int)(trailing)),
+                            end,
+                            new Vector<float>(aggregationOp.IdentityValue)
+                        );
                         vresult = aggregationOp.Invoke(vresult, end);
                         break;
                     }
@@ -333,7 +395,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static float VectorizedSmall(ref float xRef, nuint remainder, TTransformOperator transformOp = default, TAggregationOperator aggregationOp = default)
+            static float VectorizedSmall(
+                ref float xRef,
+                nuint remainder,
+                TTransformOperator transformOp = default,
+                TAggregationOperator aggregationOp = default
+            )
             {
                 float result = aggregationOp.IdentityValue;
 
@@ -341,37 +408,55 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        result = aggregationOp.Invoke(result, transformOp.Invoke(Unsafe.Add(ref xRef, 6)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            transformOp.Invoke(Unsafe.Add(ref xRef, 6))
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        result = aggregationOp.Invoke(result, transformOp.Invoke(Unsafe.Add(ref xRef, 5)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            transformOp.Invoke(Unsafe.Add(ref xRef, 5))
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        result = aggregationOp.Invoke(result, transformOp.Invoke(Unsafe.Add(ref xRef, 4)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            transformOp.Invoke(Unsafe.Add(ref xRef, 4))
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        result = aggregationOp.Invoke(result, transformOp.Invoke(Unsafe.Add(ref xRef, 3)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            transformOp.Invoke(Unsafe.Add(ref xRef, 3))
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        result = aggregationOp.Invoke(result, transformOp.Invoke(Unsafe.Add(ref xRef, 2)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            transformOp.Invoke(Unsafe.Add(ref xRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = aggregationOp.Invoke(result, transformOp.Invoke(Unsafe.Add(ref xRef, 1)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            transformOp.Invoke(Unsafe.Add(ref xRef, 1))
+                        );
                         goto case 1;
                     }
 
@@ -398,7 +483,11 @@ namespace System.Numerics.Tensors
         /// The aggregation is applied to the results of the binary operations on the pair-wise values.
         /// </typeparam>
         private static unsafe float Aggregate<TBinaryOperator, TAggregationOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y, TBinaryOperator binaryOp = default, TAggregationOperator aggregationOp = default)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            TBinaryOperator binaryOp = default,
+            TAggregationOperator aggregationOp = default
+        )
             where TBinaryOperator : struct, IBinaryOperator
             where TAggregationOperator : struct, IAggregationOperator
         {
@@ -443,29 +532,47 @@ namespace System.Numerics.Tensors
             return SoftwareFallback(ref xRef, ref yRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static float SoftwareFallback(ref float xRef, ref float yRef, nuint length, TBinaryOperator binaryOp = default, TAggregationOperator aggregationOp = default)
+            static float SoftwareFallback(
+                ref float xRef,
+                ref float yRef,
+                nuint length,
+                TBinaryOperator binaryOp = default,
+                TAggregationOperator aggregationOp = default
+            )
             {
                 float result = aggregationOp.IdentityValue;
 
                 for (nuint i = 0; i < length; i++)
                 {
-                    result = aggregationOp.Invoke(result, binaryOp.Invoke(Unsafe.Add(ref xRef, (nint)(i)),
-                                                                          Unsafe.Add(ref yRef, (nint)(i))));
+                    result = aggregationOp.Invoke(
+                        result,
+                        binaryOp.Invoke(
+                            Unsafe.Add(ref xRef, (nint)(i)),
+                            Unsafe.Add(ref yRef, (nint)(i))
+                        )
+                    );
                 }
 
                 return result;
             }
 
-            static float Vectorized(ref float xRef, ref float yRef, nuint remainder, TBinaryOperator binaryOp = default, TAggregationOperator aggregationOp = default)
+            static float Vectorized(
+                ref float xRef,
+                ref float yRef,
+                nuint remainder,
+                TBinaryOperator binaryOp = default,
+                TAggregationOperator aggregationOp = default
+            )
             {
                 Vector<float> vresult = new Vector<float>(aggregationOp.IdentityValue);
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector<float> beg = binaryOp.Invoke(AsVector(ref xRef),
-                                                    AsVector(ref yRef));
-                Vector<float> end = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
-                                                    AsVector(ref yRef, remainder - (uint)(Vector<float>.Count)));
+                Vector<float> beg = binaryOp.Invoke(AsVector(ref xRef), AsVector(ref yRef));
+                Vector<float> end = binaryOp.Invoke(
+                    AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
+                    AsVector(ref yRef, remainder - (uint)(Vector<float>.Count))
+                );
 
                 nuint misalignment = 0;
 
@@ -494,7 +601,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(xPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(xPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -515,14 +626,22 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0)));
-                            vector2 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1)));
-                            vector3 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2)));
-                            vector4 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3)));
+                            vector1 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0))
+                            );
+                            vector2 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1))
+                            );
+                            vector3 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2))
+                            );
+                            vector4 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3))
+                            );
 
                             vresult = aggregationOp.Invoke(vresult, vector1);
                             vresult = aggregationOp.Invoke(vresult, vector2);
@@ -531,14 +650,22 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4)));
-                            vector2 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5)));
-                            vector3 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6)));
-                            vector4 = binaryOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
-                                                      *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7)));
+                            vector1 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4))
+                            );
+                            vector2 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5))
+                            );
+                            vector3 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6))
+                            );
+                            vector4 = binaryOp.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7))
+                            );
 
                             vresult = aggregationOp.Invoke(vresult, vector1);
                             vresult = aggregationOp.Invoke(vresult, vector2);
@@ -564,7 +691,11 @@ namespace System.Numerics.Tensors
                 // Store the first block. Handling this separately simplifies the latter code as we know
                 // they come after and so we can relegate it to full blocks or the trailing elements
 
-                beg = Vector.ConditionalSelect(CreateAlignmentMaskSingleVector((int)(misalignment)), beg, new Vector<float>(aggregationOp.IdentityValue));
+                beg = Vector.ConditionalSelect(
+                    CreateAlignmentMaskSingleVector((int)(misalignment)),
+                    beg,
+                    new Vector<float>(aggregationOp.IdentityValue)
+                );
                 vresult = aggregationOp.Invoke(vresult, beg);
 
                 // Process the remaining [0, Count * 7] elements via a jump table
@@ -582,56 +713,70 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        Vector<float> vector = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
-                                                               AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7)));
+                        Vector<float> vector = binaryOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
-                                                               AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6)));
+                        Vector<float> vector = binaryOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
-                                                               AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5)));
+                        Vector<float> vector = binaryOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
-                                                               AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4)));
+                        Vector<float> vector = binaryOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
-                                                               AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3)));
+                        Vector<float> vector = binaryOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
-                                                               AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2)));
+                        Vector<float> vector = binaryOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 1;
                     }
 
                     case 1:
                     {
-                        Vector<float> vector = binaryOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 1)),
-                                                               AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 1)));
+                        Vector<float> vector = binaryOp.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 1)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 1))
+                        );
                         vresult = aggregationOp.Invoke(vresult, vector);
                         goto case 0;
                     }
@@ -639,7 +784,11 @@ namespace System.Numerics.Tensors
                     case 0:
                     {
                         // Store the last block, which includes any elements that wouldn't fill a full vector
-                        end = Vector.ConditionalSelect(CreateRemainderMaskSingleVector((int)(trailing)), end, new Vector<float>(aggregationOp.IdentityValue));
+                        end = Vector.ConditionalSelect(
+                            CreateRemainderMaskSingleVector((int)(trailing)),
+                            end,
+                            new Vector<float>(aggregationOp.IdentityValue)
+                        );
                         vresult = aggregationOp.Invoke(vresult, end);
                         break;
                     }
@@ -656,7 +805,13 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static float VectorizedSmall(ref float xRef, ref float yRef, nuint remainder, TBinaryOperator binaryOp = default, TAggregationOperator aggregationOp = default)
+            static float VectorizedSmall(
+                ref float xRef,
+                ref float yRef,
+                nuint remainder,
+                TBinaryOperator binaryOp = default,
+                TAggregationOperator aggregationOp = default
+            )
             {
                 float result = aggregationOp.IdentityValue;
 
@@ -664,43 +819,55 @@ namespace System.Numerics.Tensors
                 {
                     case 7:
                     {
-                        result = aggregationOp.Invoke(result, binaryOp.Invoke(Unsafe.Add(ref xRef, 6),
-                                                                              Unsafe.Add(ref yRef, 6)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            binaryOp.Invoke(Unsafe.Add(ref xRef, 6), Unsafe.Add(ref yRef, 6))
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        result = aggregationOp.Invoke(result, binaryOp.Invoke(Unsafe.Add(ref xRef, 5),
-                                                                              Unsafe.Add(ref yRef, 5)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            binaryOp.Invoke(Unsafe.Add(ref xRef, 5), Unsafe.Add(ref yRef, 5))
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        result = aggregationOp.Invoke(result, binaryOp.Invoke(Unsafe.Add(ref xRef, 4),
-                                                                              Unsafe.Add(ref yRef, 4)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            binaryOp.Invoke(Unsafe.Add(ref xRef, 4), Unsafe.Add(ref yRef, 4))
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        result = aggregationOp.Invoke(result, binaryOp.Invoke(Unsafe.Add(ref xRef, 3),
-                                                                              Unsafe.Add(ref yRef, 3)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            binaryOp.Invoke(Unsafe.Add(ref xRef, 3), Unsafe.Add(ref yRef, 3))
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        result = aggregationOp.Invoke(result, binaryOp.Invoke(Unsafe.Add(ref xRef, 2),
-                                                                              Unsafe.Add(ref yRef, 2)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            binaryOp.Invoke(Unsafe.Add(ref xRef, 2), Unsafe.Add(ref yRef, 2))
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        result = aggregationOp.Invoke(result, binaryOp.Invoke(Unsafe.Add(ref xRef, 1),
-                                                                              Unsafe.Add(ref yRef, 1)));
+                        result = aggregationOp.Invoke(
+                            result,
+                            binaryOp.Invoke(Unsafe.Add(ref xRef, 1), Unsafe.Add(ref yRef, 1))
+                        );
                         goto case 1;
                     }
 
@@ -724,7 +891,10 @@ namespace System.Numerics.Tensors
         /// This is the same as <see cref="Aggregate{TTransformOperator, TAggregationOperator}(ReadOnlySpan{float}, TTransformOperator, TAggregationOperator)"/>
         /// with an identity transform, except it early exits on NaN.
         /// </remarks>
-        private static float MinMaxCore<TMinMaxOperator>(ReadOnlySpan<float> x, TMinMaxOperator op = default)
+        private static float MinMaxCore<TMinMaxOperator>(
+            ReadOnlySpan<float> x,
+            TMinMaxOperator op = default
+        )
             where TMinMaxOperator : struct, IBinaryOperator
         {
             if (x.IsEmpty)
@@ -746,7 +916,8 @@ namespace System.Numerics.Tensors
 
                 // Load the first vector as the initial set of results, and bail immediately
                 // to scalar handling if it contains any NaNs (which don't compare equally to themselves).
-                Vector<float> resultVector = AsVector(ref xRef, 0), current;
+                Vector<float> resultVector = AsVector(ref xRef, 0),
+                    current;
                 if (Vector.EqualsAll(resultVector, resultVector))
                 {
                     int oneVectorFromEnd = x.Length - Vector<float>.Count;
@@ -808,7 +979,10 @@ namespace System.Numerics.Tensors
 
         private static readonly int[] s_0through7 = [0, 1, 2, 3, 4, 5, 6, 7];
 
-        private static int IndexOfMinMaxCore<TIndexOfMinMaxOperator>(ReadOnlySpan<float> x, TIndexOfMinMaxOperator op = default)
+        private static int IndexOfMinMaxCore<TIndexOfMinMaxOperator>(
+            ReadOnlySpan<float> x,
+            TIndexOfMinMaxOperator op = default
+        )
             where TIndexOfMinMaxOperator : struct, IIndexOfOperator
         {
             if (x.IsEmpty)
@@ -824,7 +998,11 @@ namespace System.Numerics.Tensors
             int result;
             int i = 0;
 
-            if (Vector.IsHardwareAccelerated && Vector<int>.Count <= 8 && x.Length >= Vector<float>.Count)
+            if (
+                Vector.IsHardwareAccelerated
+                && Vector<int>.Count <= 8
+                && x.Length >= Vector<float>.Count
+            )
             {
                 ref float xRef = ref MemoryMarshal.GetReference(x);
 
@@ -834,7 +1012,8 @@ namespace System.Numerics.Tensors
 
                 // Load the first vector as the initial set of results, and bail immediately
                 // to scalar handling if it contains any NaNs (which don't compare equally to themselves).
-                Vector<float> resultVector = AsVector(ref xRef, 0), current;
+                Vector<float> resultVector = AsVector(ref xRef, 0),
+                    current;
                 if (Vector.EqualsAll(resultVector, resultVector))
                 {
                     int oneVectorFromEnd = x.Length - Vector<float>.Count;
@@ -876,9 +1055,9 @@ namespace System.Numerics.Tensors
                 }
             }
 
-        // Scalar path used when either vectorization is not supported, the input is too small to vectorize,
-        // or a NaN is encountered.
-        Scalar:
+            // Scalar path used when either vectorization is not supported, the input is too small to vectorize,
+            // or a NaN is encountered.
+            Scalar:
             float curResult = x[i];
             int curIn = i;
             if (float.IsNaN(curResult))
@@ -903,7 +1082,10 @@ namespace System.Numerics.Tensors
         /// <summary>Performs an element-wise operation on <paramref name="x"/> and writes the results to <paramref name="destination"/>.</summary>
         /// <typeparam name="TUnaryOperator">Specifies the operation to perform on each element loaded from <paramref name="x"/>.</typeparam>
         private static unsafe void InvokeSpanIntoSpan<TUnaryOperator>(
-            ReadOnlySpan<float> x, Span<float> destination, TUnaryOperator op = default)
+            ReadOnlySpan<float> x,
+            Span<float> destination,
+            TUnaryOperator op = default
+        )
             where TUnaryOperator : struct, IUnaryOperator
         {
             if (x.Length > destination.Length)
@@ -947,7 +1129,12 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, ref float dRef, nuint length, TUnaryOperator op = default)
+            static void SoftwareFallback(
+                ref float xRef,
+                ref float dRef,
+                nuint length,
+                TUnaryOperator op = default
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
@@ -955,14 +1142,21 @@ namespace System.Numerics.Tensors
                 }
             }
 
-            static void Vectorized(ref float xRef, ref float dRef, nuint remainder, TUnaryOperator op = default)
+            static void Vectorized(
+                ref float xRef,
+                ref float dRef,
+                nuint remainder,
+                TUnaryOperator op = default
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
                 Vector<float> beg = op.Invoke(AsVector(ref xRef));
-                Vector<float> end = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)));
+                Vector<float> end = op.Invoke(
+                    AsVector(ref xRef, remainder - (uint)(Vector<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector<float>.Count * 8))
                 {
@@ -989,7 +1183,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -1008,10 +1206,18 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 0)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 1)) = vector2;
@@ -1020,10 +1226,18 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 4)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 5)) = vector2;
@@ -1054,55 +1268,70 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
 
                 switch (remainder / (uint)(Vector<float>.Count))
                 {
                     case 8:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 8)) = vector;
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 7)) = vector;
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 6)) = vector;
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 5)) = vector;
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 4)) = vector;
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 3)) = vector;
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 2)) = vector;
                         goto case 1;
                     }
@@ -1124,7 +1353,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void VectorizedSmall(ref float xRef, ref float dRef, nuint remainder, TUnaryOperator op = default)
+            static void VectorizedSmall(
+                ref float xRef,
+                ref float dRef,
+                nuint remainder,
+                TUnaryOperator op = default
+            )
             {
                 switch (remainder)
                 {
@@ -1186,7 +1420,11 @@ namespace System.Numerics.Tensors
         /// Specifies the operation to perform on the pair-wise elements loaded from <paramref name="x"/> and <paramref name="y"/>.
         /// </typeparam>
         private static unsafe void InvokeSpanSpanIntoSpan<TBinaryOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y, Span<float> destination, TBinaryOperator op = default)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            Span<float> destination,
+            TBinaryOperator op = default
+        )
             where TBinaryOperator : struct, IBinaryOperator
         {
             if (x.Length != y.Length)
@@ -1237,25 +1475,40 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, ref yRef, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, ref float yRef, ref float dRef, nuint length, TBinaryOperator op = default)
+            static void SoftwareFallback(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint length,
+                TBinaryOperator op = default
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(Unsafe.Add(ref xRef, (nint)(i)),
-                                                                Unsafe.Add(ref yRef, (nint)(i)));
+                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(
+                        Unsafe.Add(ref xRef, (nint)(i)),
+                        Unsafe.Add(ref yRef, (nint)(i))
+                    );
                 }
             }
 
-            static void Vectorized(ref float xRef, ref float yRef, ref float dRef, nuint remainder, TBinaryOperator op = default)
+            static void Vectorized(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder,
+                TBinaryOperator op = default
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector<float> beg = op.Invoke(AsVector(ref xRef),
-                                              AsVector(ref yRef));
-                Vector<float> end = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
-                                              AsVector(ref yRef, remainder - (uint)(Vector<float>.Count)));
+                Vector<float> beg = op.Invoke(AsVector(ref xRef), AsVector(ref yRef));
+                Vector<float> end = op.Invoke(
+                    AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
+                    AsVector(ref yRef, remainder - (uint)(Vector<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector<float>.Count * 8))
                 {
@@ -1284,7 +1537,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -1304,14 +1561,22 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 0)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 1)) = vector2;
@@ -1320,14 +1585,22 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 4)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 5)) = vector2;
@@ -1360,62 +1633,77 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
 
                 switch (remainder / (uint)(Vector<float>.Count))
                 {
                     case 8:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 8)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 8))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 8)) = vector;
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 7)) = vector;
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 6)) = vector;
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 5)) = vector;
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 4)) = vector;
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 3)) = vector;
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 2)) = vector;
                         goto case 1;
                     }
@@ -1437,49 +1725,67 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void VectorizedSmall(ref float xRef, ref float yRef, ref float dRef, nuint remainder, TBinaryOperator op = default)
+            static void VectorizedSmall(
+                ref float xRef,
+                ref float yRef,
+                ref float dRef,
+                nuint remainder,
+                TBinaryOperator op = default
+            )
             {
                 switch (remainder)
                 {
                     case 7:
                     {
-                        Unsafe.Add(ref dRef, 6) = op.Invoke(Unsafe.Add(ref xRef, 6),
-                                                            Unsafe.Add(ref yRef, 6));
+                        Unsafe.Add(ref dRef, 6) = op.Invoke(
+                            Unsafe.Add(ref xRef, 6),
+                            Unsafe.Add(ref yRef, 6)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Unsafe.Add(ref dRef, 5) = op.Invoke(Unsafe.Add(ref xRef, 5),
-                                                            Unsafe.Add(ref yRef, 5));
+                        Unsafe.Add(ref dRef, 5) = op.Invoke(
+                            Unsafe.Add(ref xRef, 5),
+                            Unsafe.Add(ref yRef, 5)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Unsafe.Add(ref dRef, 4) = op.Invoke(Unsafe.Add(ref xRef, 4),
-                                                            Unsafe.Add(ref yRef, 4));
+                        Unsafe.Add(ref dRef, 4) = op.Invoke(
+                            Unsafe.Add(ref xRef, 4),
+                            Unsafe.Add(ref yRef, 4)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Unsafe.Add(ref dRef, 3) = op.Invoke(Unsafe.Add(ref xRef, 3),
-                                                            Unsafe.Add(ref yRef, 3));
+                        Unsafe.Add(ref dRef, 3) = op.Invoke(
+                            Unsafe.Add(ref xRef, 3),
+                            Unsafe.Add(ref yRef, 3)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = op.Invoke(Unsafe.Add(ref xRef, 2),
-                                                            Unsafe.Add(ref yRef, 2));
+                        Unsafe.Add(ref dRef, 2) = op.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = op.Invoke(Unsafe.Add(ref xRef, 1),
-                                                            Unsafe.Add(ref yRef, 1));
+                        Unsafe.Add(ref dRef, 1) = op.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -1505,9 +1811,19 @@ namespace System.Numerics.Tensors
         /// Specifies the operation to perform on each element loaded from <paramref name="x"/> with <paramref name="y"/>.
         /// </typeparam>
         private static void InvokeSpanScalarIntoSpan<TBinaryOperator>(
-            ReadOnlySpan<float> x, float y, Span<float> destination, TBinaryOperator op = default)
+            ReadOnlySpan<float> x,
+            float y,
+            Span<float> destination,
+            TBinaryOperator op = default
+        )
             where TBinaryOperator : struct, IBinaryOperator =>
-            InvokeSpanScalarIntoSpan<IdentityOperator, TBinaryOperator>(x, y, destination, default, op);
+            InvokeSpanScalarIntoSpan<IdentityOperator, TBinaryOperator>(
+                x,
+                y,
+                destination,
+                default,
+                op
+            );
 
         /// <summary>
         /// Performs an element-wise operation on <paramref name="x"/> and <paramref name="y"/>,
@@ -1521,7 +1837,12 @@ namespace System.Numerics.Tensors
         /// Specifies the operation to perform on the transformed value from <paramref name="x"/> with <paramref name="y"/>.
         /// </typeparam>
         private static unsafe void InvokeSpanScalarIntoSpan<TTransformOperator, TBinaryOperator>(
-            ReadOnlySpan<float> x, float y, Span<float> destination, TTransformOperator xTransformOp = default, TBinaryOperator binaryOp = default)
+            ReadOnlySpan<float> x,
+            float y,
+            Span<float> destination,
+            TTransformOperator xTransformOp = default,
+            TBinaryOperator binaryOp = default
+        )
             where TTransformOperator : struct, IUnaryOperator
             where TBinaryOperator : struct, IBinaryOperator
         {
@@ -1566,16 +1887,32 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, y, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, float y, ref float dRef, nuint length, TTransformOperator xTransformOp = default, TBinaryOperator binaryOp = default)
+            static void SoftwareFallback(
+                ref float xRef,
+                float y,
+                ref float dRef,
+                nuint length,
+                TTransformOperator xTransformOp = default,
+                TBinaryOperator binaryOp = default
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, (nint)(i)) = binaryOp.Invoke(xTransformOp.Invoke(Unsafe.Add(ref xRef, (nint)(i))),
-                                                                      y);
+                    Unsafe.Add(ref dRef, (nint)(i)) = binaryOp.Invoke(
+                        xTransformOp.Invoke(Unsafe.Add(ref xRef, (nint)(i))),
+                        y
+                    );
                 }
             }
 
-            static void Vectorized(ref float xRef, float y, ref float dRef, nuint remainder, TTransformOperator xTransformOp = default, TBinaryOperator binaryOp = default)
+            static void Vectorized(
+                ref float xRef,
+                float y,
+                ref float dRef,
+                nuint remainder,
+                TTransformOperator xTransformOp = default,
+                TBinaryOperator binaryOp = default
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -1583,10 +1920,13 @@ namespace System.Numerics.Tensors
 
                 Vector<float> yVec = new Vector<float>(y);
 
-                Vector<float> beg = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef)),
-                                                    yVec);
-                Vector<float> end = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count))),
-                                                    yVec);
+                Vector<float> beg = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef)), yVec);
+                Vector<float> end = binaryOp.Invoke(
+                    xTransformOp.Invoke(
+                        AsVector(ref xRef, remainder - (uint)(Vector<float>.Count))
+                    ),
+                    yVec
+                );
 
                 if (remainder > (uint)(Vector<float>.Count * 8))
                 {
@@ -1613,7 +1953,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             dPtr += misalignment;
@@ -1632,14 +1976,30 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0))),
-                                                                          yVec);
-                            vector2 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1))),
-                                                                          yVec);
-                            vector3 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2))),
-                                                                          yVec);
-                            vector4 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3))),
-                                                                          yVec);
+                            vector1 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0))
+                                ),
+                                yVec
+                            );
+                            vector2 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1))
+                                ),
+                                yVec
+                            );
+                            vector3 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2))
+                                ),
+                                yVec
+                            );
+                            vector4 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3))
+                                ),
+                                yVec
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 0)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 1)) = vector2;
@@ -1648,14 +2008,30 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4))),
-                                                                          yVec);
-                            vector2 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5))),
-                                                                          yVec);
-                            vector3 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6))),
-                                                                          yVec);
-                            vector4 = binaryOp.Invoke(xTransformOp.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7))),
-                                                                          yVec);
+                            vector1 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4))
+                                ),
+                                yVec
+                            );
+                            vector2 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5))
+                                ),
+                                yVec
+                            );
+                            vector3 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6))
+                                ),
+                                yVec
+                            );
+                            vector4 = binaryOp.Invoke(
+                                xTransformOp.Invoke(
+                                    *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7))
+                                ),
+                                yVec
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 4)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 5)) = vector2;
@@ -1686,62 +2062,91 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
 
                 switch (remainder / (uint)(Vector<float>.Count))
                 {
                     case 8:
                     {
-                        Vector<float> vector = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8))),
-                                                               yVec);
+                        Vector<float> vector = binaryOp.Invoke(
+                            xTransformOp.Invoke(
+                                AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8))
+                            ),
+                            yVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 8)) = vector;
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector<float> vector = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7))),
-                                                               yVec);
+                        Vector<float> vector = binaryOp.Invoke(
+                            xTransformOp.Invoke(
+                                AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7))
+                            ),
+                            yVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 7)) = vector;
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6))),
-                                                               yVec);
+                        Vector<float> vector = binaryOp.Invoke(
+                            xTransformOp.Invoke(
+                                AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6))
+                            ),
+                            yVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 6)) = vector;
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5))),
-                                                               yVec);
+                        Vector<float> vector = binaryOp.Invoke(
+                            xTransformOp.Invoke(
+                                AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5))
+                            ),
+                            yVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 5)) = vector;
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4))),
-                                                               yVec);
+                        Vector<float> vector = binaryOp.Invoke(
+                            xTransformOp.Invoke(
+                                AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4))
+                            ),
+                            yVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 4)) = vector;
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3))),
-                                                               yVec);
+                        Vector<float> vector = binaryOp.Invoke(
+                            xTransformOp.Invoke(
+                                AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3))
+                            ),
+                            yVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 3)) = vector;
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = binaryOp.Invoke(xTransformOp.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2))),
-                                                               yVec);
+                        Vector<float> vector = binaryOp.Invoke(
+                            xTransformOp.Invoke(
+                                AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2))
+                            ),
+                            yVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 2)) = vector;
                         goto case 1;
                     }
@@ -1763,49 +2168,68 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void VectorizedSmall(ref float xRef, float y, ref float dRef, nuint remainder, TTransformOperator xTransformOp = default, TBinaryOperator binaryOp = default)
+            static void VectorizedSmall(
+                ref float xRef,
+                float y,
+                ref float dRef,
+                nuint remainder,
+                TTransformOperator xTransformOp = default,
+                TBinaryOperator binaryOp = default
+            )
             {
                 switch (remainder)
                 {
                     case 7:
                     {
-                        Unsafe.Add(ref dRef, 6) = binaryOp.Invoke(xTransformOp.Invoke(Unsafe.Add(ref xRef, 6)),
-                                                                  y);
+                        Unsafe.Add(ref dRef, 6) = binaryOp.Invoke(
+                            xTransformOp.Invoke(Unsafe.Add(ref xRef, 6)),
+                            y
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Unsafe.Add(ref dRef, 5) = binaryOp.Invoke(xTransformOp.Invoke(Unsafe.Add(ref xRef, 5)),
-                                                                  y);
+                        Unsafe.Add(ref dRef, 5) = binaryOp.Invoke(
+                            xTransformOp.Invoke(Unsafe.Add(ref xRef, 5)),
+                            y
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Unsafe.Add(ref dRef, 4) = binaryOp.Invoke(xTransformOp.Invoke(Unsafe.Add(ref xRef, 4)),
-                                                                  y);
+                        Unsafe.Add(ref dRef, 4) = binaryOp.Invoke(
+                            xTransformOp.Invoke(Unsafe.Add(ref xRef, 4)),
+                            y
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Unsafe.Add(ref dRef, 3) = binaryOp.Invoke(xTransformOp.Invoke(Unsafe.Add(ref xRef, 3)),
-                                                                  y);
+                        Unsafe.Add(ref dRef, 3) = binaryOp.Invoke(
+                            xTransformOp.Invoke(Unsafe.Add(ref xRef, 3)),
+                            y
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = binaryOp.Invoke(xTransformOp.Invoke(Unsafe.Add(ref xRef, 2)),
-                                                                  y);
+                        Unsafe.Add(ref dRef, 2) = binaryOp.Invoke(
+                            xTransformOp.Invoke(Unsafe.Add(ref xRef, 2)),
+                            y
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = binaryOp.Invoke(xTransformOp.Invoke(Unsafe.Add(ref xRef, 1)),
-                                                                  y);
+                        Unsafe.Add(ref dRef, 1) = binaryOp.Invoke(
+                            xTransformOp.Invoke(Unsafe.Add(ref xRef, 1)),
+                            y
+                        );
                         goto case 1;
                     }
 
@@ -1832,7 +2256,12 @@ namespace System.Numerics.Tensors
         /// and <paramref name="z"/>.
         /// </typeparam>
         private static unsafe void InvokeSpanSpanSpanIntoSpan<TTernaryOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y, ReadOnlySpan<float> z, Span<float> destination, TTernaryOperator op = default)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            ReadOnlySpan<float> z,
+            Span<float> destination,
+            TTernaryOperator op = default
+        )
             where TTernaryOperator : struct, ITernaryOperator
         {
             if (x.Length != y.Length || x.Length != z.Length)
@@ -1880,28 +2309,48 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, ref yRef, ref zRef, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint length, TTernaryOperator op = default)
+            static void SoftwareFallback(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint length,
+                TTernaryOperator op = default
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(Unsafe.Add(ref xRef, (nint)(i)),
-                                                                Unsafe.Add(ref yRef, (nint)(i)),
-                                                                Unsafe.Add(ref zRef, (nint)(i)));
+                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(
+                        Unsafe.Add(ref xRef, (nint)(i)),
+                        Unsafe.Add(ref yRef, (nint)(i)),
+                        Unsafe.Add(ref zRef, (nint)(i))
+                    );
                 }
             }
 
-            static void Vectorized(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder, TTernaryOperator op = default)
+            static void Vectorized(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder,
+                TTernaryOperator op = default
+            )
             {
                 ref float dRefBeg = ref dRef;
 
                 // Preload the beginning and end so that overlapping accesses don't negatively impact the data
 
-                Vector<float> beg = op.Invoke(AsVector(ref xRef),
-                                              AsVector(ref yRef),
-                                              AsVector(ref zRef));
-                Vector<float> end = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
-                                              AsVector(ref yRef, remainder - (uint)(Vector<float>.Count)),
-                                              AsVector(ref zRef, remainder - (uint)(Vector<float>.Count)));
+                Vector<float> beg = op.Invoke(
+                    AsVector(ref xRef),
+                    AsVector(ref yRef),
+                    AsVector(ref zRef)
+                );
+                Vector<float> end = op.Invoke(
+                    AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
+                    AsVector(ref yRef, remainder - (uint)(Vector<float>.Count)),
+                    AsVector(ref zRef, remainder - (uint)(Vector<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector<float>.Count * 8))
                 {
@@ -1932,7 +2381,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -1953,18 +2406,26 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 0)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 1)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 2)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 3)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 0))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 1))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 2))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 3))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 0)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 1)) = vector2;
@@ -1973,18 +2434,26 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 4)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 5)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 6)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7)),
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 7)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 4))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 5))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 6))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7)),
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 7))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 4)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 5)) = vector2;
@@ -2019,69 +2488,84 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
 
                 switch (remainder / (uint)(Vector<float>.Count))
                 {
                     case 8:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 8)),
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 8)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 8)),
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 8))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 8)) = vector;
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7)),
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 7)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7)),
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 7))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 7)) = vector;
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6)),
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 6)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6)),
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 6))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 6)) = vector;
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5)),
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 5)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5)),
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 5))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 5)) = vector;
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4)),
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 4)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4)),
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 4))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 4)) = vector;
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3)),
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 3)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3)),
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 3))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 3)) = vector;
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2)),
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 2)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2)),
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 2))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 2)) = vector;
                         goto case 1;
                     }
@@ -2103,55 +2587,74 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void VectorizedSmall(ref float xRef, ref float yRef, ref float zRef, ref float dRef, nuint remainder, TTernaryOperator op = default)
+            static void VectorizedSmall(
+                ref float xRef,
+                ref float yRef,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder,
+                TTernaryOperator op = default
+            )
             {
                 switch (remainder)
                 {
                     case 7:
                     {
-                        Unsafe.Add(ref dRef, 6) = op.Invoke(Unsafe.Add(ref xRef, 6),
-                                                            Unsafe.Add(ref yRef, 6),
-                                                            Unsafe.Add(ref zRef, 6));
+                        Unsafe.Add(ref dRef, 6) = op.Invoke(
+                            Unsafe.Add(ref xRef, 6),
+                            Unsafe.Add(ref yRef, 6),
+                            Unsafe.Add(ref zRef, 6)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Unsafe.Add(ref dRef, 5) = op.Invoke(Unsafe.Add(ref xRef, 5),
-                                                            Unsafe.Add(ref yRef, 5),
-                                                            Unsafe.Add(ref zRef, 5));
+                        Unsafe.Add(ref dRef, 5) = op.Invoke(
+                            Unsafe.Add(ref xRef, 5),
+                            Unsafe.Add(ref yRef, 5),
+                            Unsafe.Add(ref zRef, 5)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Unsafe.Add(ref dRef, 4) = op.Invoke(Unsafe.Add(ref xRef, 4),
-                                                            Unsafe.Add(ref yRef, 4),
-                                                            Unsafe.Add(ref zRef, 4));
+                        Unsafe.Add(ref dRef, 4) = op.Invoke(
+                            Unsafe.Add(ref xRef, 4),
+                            Unsafe.Add(ref yRef, 4),
+                            Unsafe.Add(ref zRef, 4)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Unsafe.Add(ref dRef, 3) = op.Invoke(Unsafe.Add(ref xRef, 3),
-                                                            Unsafe.Add(ref yRef, 3),
-                                                            Unsafe.Add(ref zRef, 3));
+                        Unsafe.Add(ref dRef, 3) = op.Invoke(
+                            Unsafe.Add(ref xRef, 3),
+                            Unsafe.Add(ref yRef, 3),
+                            Unsafe.Add(ref zRef, 3)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = op.Invoke(Unsafe.Add(ref xRef, 2),
-                                                            Unsafe.Add(ref yRef, 2),
-                                                            Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = op.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = op.Invoke(Unsafe.Add(ref xRef, 1),
-                                                            Unsafe.Add(ref yRef, 1),
-                                                            Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = op.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -2178,7 +2681,12 @@ namespace System.Numerics.Tensors
         /// with <paramref name="z"/>.
         /// </typeparam>
         private static unsafe void InvokeSpanSpanScalarIntoSpan<TTernaryOperator>(
-            ReadOnlySpan<float> x, ReadOnlySpan<float> y, float z, Span<float> destination, TTernaryOperator op = default)
+            ReadOnlySpan<float> x,
+            ReadOnlySpan<float> y,
+            float z,
+            Span<float> destination,
+            TTernaryOperator op = default
+        )
             where TTernaryOperator : struct, ITernaryOperator
         {
             if (x.Length != y.Length)
@@ -2224,17 +2732,33 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, ref yRef, z, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, ref float yRef, float z, ref float dRef, nuint length, TTernaryOperator op = default)
+            static void SoftwareFallback(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint length,
+                TTernaryOperator op = default
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(Unsafe.Add(ref xRef, (nint)(i)),
-                                                                Unsafe.Add(ref yRef, (nint)(i)),
-                                                                z);
+                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(
+                        Unsafe.Add(ref xRef, (nint)(i)),
+                        Unsafe.Add(ref yRef, (nint)(i)),
+                        z
+                    );
                 }
             }
 
-            static void Vectorized(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder, TTernaryOperator op = default)
+            static void Vectorized(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder,
+                TTernaryOperator op = default
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -2242,12 +2766,12 @@ namespace System.Numerics.Tensors
 
                 Vector<float> zVec = new Vector<float>(z);
 
-                Vector<float> beg = op.Invoke(AsVector(ref xRef),
-                                              AsVector(ref yRef),
-                                              zVec);
-                Vector<float> end = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
-                                              AsVector(ref yRef, remainder - (uint)(Vector<float>.Count)),
-                                              zVec);
+                Vector<float> beg = op.Invoke(AsVector(ref xRef), AsVector(ref yRef), zVec);
+                Vector<float> end = op.Invoke(
+                    AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
+                    AsVector(ref yRef, remainder - (uint)(Vector<float>.Count)),
+                    zVec
+                );
 
                 if (remainder > (uint)(Vector<float>.Count * 8))
                 {
@@ -2276,7 +2800,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             yPtr += misalignment;
@@ -2296,18 +2824,26 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0)),
-                                                zVec);
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1)),
-                                                zVec);
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2)),
-                                                zVec);
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3)),
-                                                zVec);
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 0)),
+                                zVec
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 1)),
+                                zVec
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 2)),
+                                zVec
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 3)),
+                                zVec
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 0)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 1)) = vector2;
@@ -2316,18 +2852,26 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4)),
-                                                zVec);
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5)),
-                                                zVec);
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6)),
-                                                zVec);
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
-                                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7)),
-                                                zVec);
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 4)),
+                                zVec
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 5)),
+                                zVec
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 6)),
+                                zVec
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
+                                *(Vector<float>*)(yPtr + (uint)(Vector<float>.Count * 7)),
+                                zVec
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 4)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 5)) = vector2;
@@ -2360,69 +2904,84 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
 
                 switch (remainder / (uint)(Vector<float>.Count))
                 {
                     case 8:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 8)),
-                                                         zVec);
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 8)),
+                            zVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 8)) = vector;
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7)),
-                                                         zVec);
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 7)),
+                            zVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 7)) = vector;
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6)),
-                                                         zVec);
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 6)),
+                            zVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 6)) = vector;
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5)),
-                                                         zVec);
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 5)),
+                            zVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 5)) = vector;
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4)),
-                                                         zVec);
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 4)),
+                            zVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 4)) = vector;
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3)),
-                                                         zVec);
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 3)),
+                            zVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 3)) = vector;
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
-                                                         AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2)),
-                                                         zVec);
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
+                            AsVector(ref yRef, remainder - (uint)(Vector<float>.Count * 2)),
+                            zVec
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 2)) = vector;
                         goto case 1;
                     }
@@ -2444,55 +3003,74 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void VectorizedSmall(ref float xRef, ref float yRef, float z, ref float dRef, nuint remainder, TTernaryOperator op = default)
+            static void VectorizedSmall(
+                ref float xRef,
+                ref float yRef,
+                float z,
+                ref float dRef,
+                nuint remainder,
+                TTernaryOperator op = default
+            )
             {
                 switch (remainder)
                 {
                     case 7:
                     {
-                        Unsafe.Add(ref dRef, 6) = op.Invoke(Unsafe.Add(ref xRef, 6),
-                                                            Unsafe.Add(ref yRef, 6),
-                                                            z);
+                        Unsafe.Add(ref dRef, 6) = op.Invoke(
+                            Unsafe.Add(ref xRef, 6),
+                            Unsafe.Add(ref yRef, 6),
+                            z
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Unsafe.Add(ref dRef, 5) = op.Invoke(Unsafe.Add(ref xRef, 5),
-                                                            Unsafe.Add(ref yRef, 5),
-                                                            z);
+                        Unsafe.Add(ref dRef, 5) = op.Invoke(
+                            Unsafe.Add(ref xRef, 5),
+                            Unsafe.Add(ref yRef, 5),
+                            z
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Unsafe.Add(ref dRef, 4) = op.Invoke(Unsafe.Add(ref xRef, 4),
-                                                            Unsafe.Add(ref yRef, 4),
-                                                            z);
+                        Unsafe.Add(ref dRef, 4) = op.Invoke(
+                            Unsafe.Add(ref xRef, 4),
+                            Unsafe.Add(ref yRef, 4),
+                            z
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Unsafe.Add(ref dRef, 3) = op.Invoke(Unsafe.Add(ref xRef, 3),
-                                                            Unsafe.Add(ref yRef, 3),
-                                                            z);
+                        Unsafe.Add(ref dRef, 3) = op.Invoke(
+                            Unsafe.Add(ref xRef, 3),
+                            Unsafe.Add(ref yRef, 3),
+                            z
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = op.Invoke(Unsafe.Add(ref xRef, 2),
-                                                            Unsafe.Add(ref yRef, 2),
-                                                            z);
+                        Unsafe.Add(ref dRef, 2) = op.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            Unsafe.Add(ref yRef, 2),
+                            z
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = op.Invoke(Unsafe.Add(ref xRef, 1),
-                                                            Unsafe.Add(ref yRef, 1),
-                                                            z);
+                        Unsafe.Add(ref dRef, 1) = op.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            Unsafe.Add(ref yRef, 1),
+                            z
+                        );
                         goto case 1;
                     }
 
@@ -2519,7 +3097,12 @@ namespace System.Numerics.Tensors
         /// and the element loaded from <paramref name="z"/>.
         /// </typeparam>
         private static unsafe void InvokeSpanScalarSpanIntoSpan<TTernaryOperator>(
-            ReadOnlySpan<float> x, float y, ReadOnlySpan<float> z, Span<float> destination, TTernaryOperator op = default)
+            ReadOnlySpan<float> x,
+            float y,
+            ReadOnlySpan<float> z,
+            Span<float> destination,
+            TTernaryOperator op = default
+        )
             where TTernaryOperator : struct, ITernaryOperator
         {
             if (x.Length != z.Length)
@@ -2565,17 +3148,33 @@ namespace System.Numerics.Tensors
             SoftwareFallback(ref xRef, y, ref zRef, ref dRef, remainder);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void SoftwareFallback(ref float xRef, float y, ref float zRef, ref float dRef, nuint length, TTernaryOperator op = default)
+            static void SoftwareFallback(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint length,
+                TTernaryOperator op = default
+            )
             {
                 for (nuint i = 0; i < length; i++)
                 {
-                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(Unsafe.Add(ref xRef, (nint)(i)),
-                                                                y,
-                                                                Unsafe.Add(ref zRef, (nint)(i)));
+                    Unsafe.Add(ref dRef, (nint)(i)) = op.Invoke(
+                        Unsafe.Add(ref xRef, (nint)(i)),
+                        y,
+                        Unsafe.Add(ref zRef, (nint)(i))
+                    );
                 }
             }
 
-            static void Vectorized(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder, TTernaryOperator op = default)
+            static void Vectorized(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder,
+                TTernaryOperator op = default
+            )
             {
                 ref float dRefBeg = ref dRef;
 
@@ -2583,12 +3182,12 @@ namespace System.Numerics.Tensors
 
                 Vector<float> yVec = new Vector<float>(y);
 
-                Vector<float> beg = op.Invoke(AsVector(ref xRef),
-                                              yVec,
-                                              AsVector(ref zRef));
-                Vector<float> end = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
-                                              yVec,
-                                              AsVector(ref zRef, remainder - (uint)(Vector<float>.Count)));
+                Vector<float> beg = op.Invoke(AsVector(ref xRef), yVec, AsVector(ref zRef));
+                Vector<float> end = op.Invoke(
+                    AsVector(ref xRef, remainder - (uint)(Vector<float>.Count)),
+                    yVec,
+                    AsVector(ref zRef, remainder - (uint)(Vector<float>.Count))
+                );
 
                 if (remainder > (uint)(Vector<float>.Count * 8))
                 {
@@ -2617,7 +3216,11 @@ namespace System.Numerics.Tensors
                             // are more expensive than unaligned loads and aligning both is significantly more
                             // complex.
 
-                            nuint misalignment = ((uint)(sizeof(Vector<float>)) - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))) / sizeof(float);
+                            nuint misalignment =
+                                (
+                                    (uint)(sizeof(Vector<float>))
+                                    - ((nuint)(dPtr) % (uint)(sizeof(Vector<float>)))
+                                ) / sizeof(float);
 
                             xPtr += misalignment;
                             zPtr += misalignment;
@@ -2637,18 +3240,26 @@ namespace System.Numerics.Tensors
                         {
                             // We load, process, and store the first four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 0)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 1)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 2)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 3)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 0)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 0))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 1)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 1))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 2)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 2))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 3)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 3))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 0)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 1)) = vector2;
@@ -2657,18 +3268,26 @@ namespace System.Numerics.Tensors
 
                             // We load, process, and store the next four vectors
 
-                            vector1 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 4)));
-                            vector2 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 5)));
-                            vector3 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 6)));
-                            vector4 = op.Invoke(*(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
-                                                yVec,
-                                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 7)));
+                            vector1 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 4)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 4))
+                            );
+                            vector2 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 5)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 5))
+                            );
+                            vector3 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 6)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 6))
+                            );
+                            vector4 = op.Invoke(
+                                *(Vector<float>*)(xPtr + (uint)(Vector<float>.Count * 7)),
+                                yVec,
+                                *(Vector<float>*)(zPtr + (uint)(Vector<float>.Count * 7))
+                            );
 
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 4)) = vector1;
                             *(Vector<float>*)(dPtr + (uint)(Vector<float>.Count * 5)) = vector2;
@@ -2701,69 +3320,84 @@ namespace System.Numerics.Tensors
                 // data before the first aligned address.
 
                 nuint endIndex = remainder;
-                remainder = (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
+                remainder =
+                    (remainder + (uint)(Vector<float>.Count - 1)) & (nuint)(-Vector<float>.Count);
 
                 switch (remainder / (uint)(Vector<float>.Count))
                 {
                     case 8:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
-                                                         yVec,
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 8)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 8)),
+                            yVec,
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 8))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 8)) = vector;
                         goto case 7;
                     }
 
                     case 7:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
-                                                         yVec,
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 7)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 7)),
+                            yVec,
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 7))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 7)) = vector;
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
-                                                         yVec,
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 6)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 6)),
+                            yVec,
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 6))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 6)) = vector;
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
-                                                         yVec,
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 5)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 5)),
+                            yVec,
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 5))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 5)) = vector;
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
-                                                         yVec,
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 4)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 4)),
+                            yVec,
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 4))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 4)) = vector;
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
-                                                         yVec,
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 3)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 3)),
+                            yVec,
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 3))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 3)) = vector;
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Vector<float> vector = op.Invoke(AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
-                                                         yVec,
-                                                         AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 2)));
+                        Vector<float> vector = op.Invoke(
+                            AsVector(ref xRef, remainder - (uint)(Vector<float>.Count * 2)),
+                            yVec,
+                            AsVector(ref zRef, remainder - (uint)(Vector<float>.Count * 2))
+                        );
                         AsVector(ref dRef, remainder - (uint)(Vector<float>.Count * 2)) = vector;
                         goto case 1;
                     }
@@ -2785,55 +3419,74 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            static void VectorizedSmall(ref float xRef, float y, ref float zRef, ref float dRef, nuint remainder, TTernaryOperator op = default)
+            static void VectorizedSmall(
+                ref float xRef,
+                float y,
+                ref float zRef,
+                ref float dRef,
+                nuint remainder,
+                TTernaryOperator op = default
+            )
             {
                 switch (remainder)
                 {
                     case 7:
                     {
-                        Unsafe.Add(ref dRef, 6) = op.Invoke(Unsafe.Add(ref xRef, 6),
-                                                            y,
-                                                            Unsafe.Add(ref zRef, 6));
+                        Unsafe.Add(ref dRef, 6) = op.Invoke(
+                            Unsafe.Add(ref xRef, 6),
+                            y,
+                            Unsafe.Add(ref zRef, 6)
+                        );
                         goto case 6;
                     }
 
                     case 6:
                     {
-                        Unsafe.Add(ref dRef, 5) = op.Invoke(Unsafe.Add(ref xRef, 5),
-                                                            y,
-                                                            Unsafe.Add(ref zRef, 5));
+                        Unsafe.Add(ref dRef, 5) = op.Invoke(
+                            Unsafe.Add(ref xRef, 5),
+                            y,
+                            Unsafe.Add(ref zRef, 5)
+                        );
                         goto case 5;
                     }
 
                     case 5:
                     {
-                        Unsafe.Add(ref dRef, 4) = op.Invoke(Unsafe.Add(ref xRef, 4),
-                                                            y,
-                                                            Unsafe.Add(ref zRef, 4));
+                        Unsafe.Add(ref dRef, 4) = op.Invoke(
+                            Unsafe.Add(ref xRef, 4),
+                            y,
+                            Unsafe.Add(ref zRef, 4)
+                        );
                         goto case 4;
                     }
 
                     case 4:
                     {
-                        Unsafe.Add(ref dRef, 3) = op.Invoke(Unsafe.Add(ref xRef, 3),
-                                                            y,
-                                                            Unsafe.Add(ref zRef, 3));
+                        Unsafe.Add(ref dRef, 3) = op.Invoke(
+                            Unsafe.Add(ref xRef, 3),
+                            y,
+                            Unsafe.Add(ref zRef, 3)
+                        );
                         goto case 3;
                     }
 
                     case 3:
                     {
-                        Unsafe.Add(ref dRef, 2) = op.Invoke(Unsafe.Add(ref xRef, 2),
-                                                            y,
-                                                            Unsafe.Add(ref zRef, 2));
+                        Unsafe.Add(ref dRef, 2) = op.Invoke(
+                            Unsafe.Add(ref xRef, 2),
+                            y,
+                            Unsafe.Add(ref zRef, 2)
+                        );
                         goto case 2;
                     }
 
                     case 2:
                     {
-                        Unsafe.Add(ref dRef, 1) = op.Invoke(Unsafe.Add(ref xRef, 1),
-                                                            y,
-                                                            Unsafe.Add(ref zRef, 1));
+                        Unsafe.Add(ref dRef, 1) = op.Invoke(
+                            Unsafe.Add(ref xRef, 1),
+                            y,
+                            Unsafe.Add(ref zRef, 1)
+                        );
                         goto case 1;
                     }
 
@@ -2859,20 +3512,17 @@ namespace System.Numerics.Tensors
         /// <summary>Loads a <see cref="Vector{Single}"/> that begins at the specified <paramref name="offset"/> from <paramref name="start"/>.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ref Vector<float> AsVector(ref float start, int offset) =>
-            ref Unsafe.As<float, Vector<float>>(
-                ref Unsafe.Add(ref start, offset));
+            ref Unsafe.As<float, Vector<float>>(ref Unsafe.Add(ref start, offset));
 
         /// <summary>Loads a <see cref="Vector{Single}"/> that begins at the specified <paramref name="offset"/> from <paramref name="start"/>.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ref Vector<float> AsVector(ref float start, nuint offset) =>
-            ref Unsafe.As<float, Vector<float>>(
-                ref Unsafe.Add(ref start, (nint)(offset)));
+            ref Unsafe.As<float, Vector<float>>(ref Unsafe.Add(ref start, (nint)(offset)));
 
         /// <summary>Loads a <see cref="Vector{Single}"/> that begins at the specified <paramref name="offset"/> from <paramref name="start"/>.</summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static ref Vector<int> AsVector(ref int start, int offset) =>
-            ref Unsafe.As<int, Vector<int>>(
-                ref Unsafe.Add(ref start, offset));
+            ref Unsafe.As<int, Vector<int>>(ref Unsafe.Add(ref start, offset));
 
         /// <summary>Gets whether the specified <see cref="float"/> is positive.</summary>
         private static bool IsPositive(float f) => !IsNegative(f);
@@ -2901,8 +3551,11 @@ namespace System.Numerics.Tensors
             Debug.Assert(Vector<float>.Count is 4 or 8 or 16);
 
             return AsVector(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)),
-                (count * 16));
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(AlignmentUInt32Mask_16x16)
+                ),
+                (count * 16)
+            );
         }
 
         /// <summary>
@@ -2914,15 +3567,20 @@ namespace System.Numerics.Tensors
             Debug.Assert(Vector<float>.Count is 4 or 8 or 16);
 
             return AsVector(
-                ref Unsafe.As<uint, float>(ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)),
-                (count * 16) + (16 - Vector<float>.Count));
+                ref Unsafe.As<uint, float>(
+                    ref MemoryMarshal.GetReference(RemainderUInt32Mask_16x16)
+                ),
+                (count * 16) + (16 - Vector<float>.Count)
+            );
         }
 
         /// <summary>x + y</summary>
         private readonly struct AddOperator : IAggregationOperator
         {
             public float Invoke(float x, float y) => x + y;
+
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) => x + y;
+
             public float IdentityValue => 0;
         }
 
@@ -2930,6 +3588,7 @@ namespace System.Numerics.Tensors
         private readonly struct SubtractOperator : IBinaryOperator
         {
             public float Invoke(float x, float y) => x - y;
+
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) => x - y;
         }
 
@@ -2953,7 +3612,9 @@ namespace System.Numerics.Tensors
         private readonly struct MultiplyOperator : IAggregationOperator
         {
             public float Invoke(float x, float y) => x * y;
+
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) => x * y;
+
             public float IdentityValue => 1;
         }
 
@@ -2961,6 +3622,7 @@ namespace System.Numerics.Tensors
         private readonly struct DivideOperator : IBinaryOperator
         {
             public float Invoke(float x, float y) => x / y;
+
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) => x / y;
         }
 
@@ -2968,7 +3630,12 @@ namespace System.Numerics.Tensors
         {
             int Invoke(ref float result, float current, int resultIndex, int curIndex);
             int Invoke(Vector<float> result, Vector<int> resultIndex);
-            void Invoke(ref Vector<float> result, Vector<float> current, ref Vector<int> resultIndex, Vector<int> curIndex);
+            void Invoke(
+                ref Vector<float> result,
+                Vector<float> current,
+                ref Vector<int> resultIndex,
+                Vector<int> curIndex
+            );
         }
 
         /// <summary>Returns the index of MathF.Max(x, y)</summary>
@@ -2997,7 +3664,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void Invoke(ref Vector<float> result, Vector<float> current, ref Vector<int> resultIndex, Vector<int> curIndex)
+            public void Invoke(
+                ref Vector<float> result,
+                Vector<float> current,
+                ref Vector<int> resultIndex,
+                Vector<int> curIndex
+            )
             {
                 Vector<int> lessThanMask = Vector.GreaterThan(result, current);
 
@@ -3008,7 +3680,9 @@ namespace System.Numerics.Tensors
                     Vector<float> negativeMask = IsNegative(current);
                     Vector<int> lessThanIndexMask = Vector.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= ((Vector<int>)~negativeMask & equalMask) | ((Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
+                    lessThanMask |=
+                        ((Vector<int>)~negativeMask & equalMask)
+                        | ((Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
                 }
 
                 result = Vector.ConditionalSelect(lessThanMask, result, current);
@@ -3069,7 +3743,11 @@ namespace System.Numerics.Tensors
                 int curIn = maxIndex[0];
                 for (int i = 1; i < Vector<float>.Count; i++)
                 {
-                    if (MathF.Abs(result[i]) == MathF.Abs(curMax) && IsNegative(curMax) && !IsNegative(result[i]))
+                    if (
+                        MathF.Abs(result[i]) == MathF.Abs(curMax)
+                        && IsNegative(curMax)
+                        && !IsNegative(result[i])
+                    )
                     {
                         curMax = result[i];
                         curIn = maxIndex[i];
@@ -3085,9 +3763,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void Invoke(ref Vector<float> result, Vector<float> current, ref Vector<int> resultIndex, Vector<int> curIndex)
+            public void Invoke(
+                ref Vector<float> result,
+                Vector<float> current,
+                ref Vector<int> resultIndex,
+                Vector<int> curIndex
+            )
             {
-                Vector<float> maxMag = Vector.Abs(result), currentMag = Vector.Abs(current);
+                Vector<float> maxMag = Vector.Abs(result),
+                    currentMag = Vector.Abs(current);
 
                 Vector<int> lessThanMask = Vector.GreaterThan(maxMag, currentMag);
 
@@ -3098,7 +3782,9 @@ namespace System.Numerics.Tensors
                     Vector<float> negativeMask = IsNegative(current);
                     Vector<int> lessThanIndexMask = Vector.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= ((Vector<int>)~negativeMask & equalMask) | ((Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
+                    lessThanMask |=
+                        ((Vector<int>)~negativeMask & equalMask)
+                        | ((Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
                 }
 
                 result = Vector.ConditionalSelect(lessThanMask, result, current);
@@ -3152,7 +3838,12 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void Invoke(ref Vector<float> result, Vector<float> current, ref Vector<int> resultIndex, Vector<int> curIndex)
+            public void Invoke(
+                ref Vector<float> result,
+                Vector<float> current,
+                ref Vector<int> resultIndex,
+                Vector<int> curIndex
+            )
             {
                 Vector<int> lessThanMask = Vector.LessThan(result, current);
 
@@ -3163,7 +3854,9 @@ namespace System.Numerics.Tensors
                     Vector<float> negativeMask = IsNegative(current);
                     Vector<int> lessThanIndexMask = Vector.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= ((Vector<int>)negativeMask & equalMask) | (~(Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
+                    lessThanMask |=
+                        ((Vector<int>)negativeMask & equalMask)
+                        | (~(Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
                 }
 
                 result = Vector.ConditionalSelect(lessThanMask, result, current);
@@ -3203,7 +3896,11 @@ namespace System.Numerics.Tensors
                 int curIn = resultIndex[0];
                 for (int i = 1; i < Vector<float>.Count; i++)
                 {
-                    if (MathF.Abs(result[i]) == MathF.Abs(curMin) && IsPositive(curMin) && !IsPositive(result[i]))
+                    if (
+                        MathF.Abs(result[i]) == MathF.Abs(curMin)
+                        && IsPositive(curMin)
+                        && !IsPositive(result[i])
+                    )
                     {
                         curMin = result[i];
                         curIn = resultIndex[i];
@@ -3219,9 +3916,15 @@ namespace System.Numerics.Tensors
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public void Invoke(ref Vector<float> result, Vector<float> current, ref Vector<int> resultIndex, Vector<int> curIndex)
+            public void Invoke(
+                ref Vector<float> result,
+                Vector<float> current,
+                ref Vector<int> resultIndex,
+                Vector<int> curIndex
+            )
             {
-                Vector<float> minMag = Vector.Abs(result), currentMag = Vector.Abs(current);
+                Vector<float> minMag = Vector.Abs(result),
+                    currentMag = Vector.Abs(current);
 
                 Vector<int> lessThanMask = Vector.LessThan(minMag, currentMag);
 
@@ -3232,7 +3935,9 @@ namespace System.Numerics.Tensors
                     Vector<float> negativeMask = IsNegative(current);
                     Vector<int> lessThanIndexMask = Vector.LessThan(resultIndex, curIndex);
 
-                    lessThanMask |= ((Vector<int>)negativeMask & equalMask) | (~(Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
+                    lessThanMask |=
+                        ((Vector<int>)negativeMask & equalMask)
+                        | (~(Vector<int>)IsNegative(result) & equalMask & lessThanIndexMask);
                 }
 
                 result = Vector.ConditionalSelect(lessThanMask, result, current);
@@ -3246,15 +3951,15 @@ namespace System.Numerics.Tensors
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public float Invoke(float x, float y) =>
-                x == y ?
-                    (IsNegative(x) ? y : x) :
-                    (y > x ? y : x);
+                x == y ? (IsNegative(x) ? y : x) : (y > x ? y : x);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) =>
-                Vector.ConditionalSelect(Vector.Equals(x, y),
+                Vector.ConditionalSelect(
+                    Vector.Equals(x, y),
                     Vector.ConditionalSelect(IsNegative(x), y, x),
-                    Vector.Max(x, y));
+                    Vector.Max(x, y)
+                );
         }
 
         /// <summary>MathF.Max(x, y)</summary>
@@ -3265,13 +3970,19 @@ namespace System.Numerics.Tensors
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) =>
-                Vector.ConditionalSelect(Vector.Equals(x, x),
-                    Vector.ConditionalSelect(Vector.Equals(y, y),
-                        Vector.ConditionalSelect(Vector.Equals(x, y),
+                Vector.ConditionalSelect(
+                    Vector.Equals(x, x),
+                    Vector.ConditionalSelect(
+                        Vector.Equals(y, y),
+                        Vector.ConditionalSelect(
+                            Vector.Equals(x, y),
                             Vector.ConditionalSelect(IsNegative(x), y, x),
-                            Vector.Max(x, y)),
-                        y),
-                    x);
+                            Vector.Max(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
         }
 
         /// <summary>Operator to get x or y based on which has the larger MathF.Abs (but NaNs may not be propagated)</summary>
@@ -3280,21 +3991,21 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public float Invoke(float x, float y)
             {
-                float xMag = MathF.Abs(x), yMag = MathF.Abs(y);
-                return
-                    yMag == xMag ?
-                        (IsNegative(x) ? y : x) :
-                        (xMag > yMag ? x : y);
+                float xMag = MathF.Abs(x),
+                    yMag = MathF.Abs(y);
+                return yMag == xMag ? (IsNegative(x) ? y : x) : (xMag > yMag ? x : y);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y)
             {
-                Vector<float> xMag = Vector.Abs(x), yMag = Vector.Abs(y);
-                return
-                    Vector.ConditionalSelect(Vector.Equals(xMag, yMag),
-                        Vector.ConditionalSelect(IsNegative(x), y, x),
-                        Vector.ConditionalSelect(Vector.GreaterThan(xMag, yMag), x, y));
+                Vector<float> xMag = Vector.Abs(x),
+                    yMag = Vector.Abs(y);
+                return Vector.ConditionalSelect(
+                    Vector.Equals(xMag, yMag),
+                    Vector.ConditionalSelect(IsNegative(x), y, x),
+                    Vector.ConditionalSelect(Vector.GreaterThan(xMag, yMag), x, y)
+                );
             }
         }
 
@@ -3304,22 +4015,29 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public float Invoke(float x, float y)
             {
-                float xMag = MathF.Abs(x), yMag = MathF.Abs(y);
+                float xMag = MathF.Abs(x),
+                    yMag = MathF.Abs(y);
                 return xMag > yMag || float.IsNaN(xMag) || (xMag == yMag && !IsNegative(x)) ? x : y;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y)
             {
-                Vector<float> xMag = Vector.Abs(x), yMag = Vector.Abs(y);
-                return
-                    Vector.ConditionalSelect(Vector.Equals(x, x),
-                        Vector.ConditionalSelect(Vector.Equals(y, y),
-                            Vector.ConditionalSelect(Vector.Equals(xMag, yMag),
-                                Vector.ConditionalSelect(IsNegative(x), y, x),
-                                Vector.ConditionalSelect(Vector.GreaterThan(xMag, yMag), x, y)),
-                            y),
-                        x);
+                Vector<float> xMag = Vector.Abs(x),
+                    yMag = Vector.Abs(y);
+                return Vector.ConditionalSelect(
+                    Vector.Equals(x, x),
+                    Vector.ConditionalSelect(
+                        Vector.Equals(y, y),
+                        Vector.ConditionalSelect(
+                            Vector.Equals(xMag, yMag),
+                            Vector.ConditionalSelect(IsNegative(x), y, x),
+                            Vector.ConditionalSelect(Vector.GreaterThan(xMag, yMag), x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
         }
 
@@ -3328,15 +4046,15 @@ namespace System.Numerics.Tensors
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public float Invoke(float x, float y) =>
-                x == y ?
-                    (IsNegative(y) ? y : x) :
-                    (y < x ? y : x);
+                x == y ? (IsNegative(y) ? y : x) : (y < x ? y : x);
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) =>
-                Vector.ConditionalSelect(Vector.Equals(x, y),
+                Vector.ConditionalSelect(
+                    Vector.Equals(x, y),
                     Vector.ConditionalSelect(IsNegative(y), y, x),
-                    Vector.Min(x, y));
+                    Vector.Min(x, y)
+                );
         }
 
         /// <summary>MathF.Min(x, y)</summary>
@@ -3347,13 +4065,19 @@ namespace System.Numerics.Tensors
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y) =>
-                Vector.ConditionalSelect(Vector.Equals(x, x),
-                    Vector.ConditionalSelect(Vector.Equals(y, y),
-                        Vector.ConditionalSelect(Vector.Equals(x, y),
+                Vector.ConditionalSelect(
+                    Vector.Equals(x, x),
+                    Vector.ConditionalSelect(
+                        Vector.Equals(y, y),
+                        Vector.ConditionalSelect(
+                            Vector.Equals(x, y),
                             Vector.ConditionalSelect(IsNegative(x), x, y),
-                            Vector.Min(x, y)),
-                        y),
-                    x);
+                            Vector.Min(x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
         }
 
         /// <summary>Operator to get x or y based on which has the smaller MathF.Abs (but NaNs may not be propagated)</summary>
@@ -3362,21 +4086,21 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public float Invoke(float x, float y)
             {
-                float xMag = MathF.Abs(x), yMag = MathF.Abs(y);
-                return
-                    yMag == xMag ?
-                        (IsNegative(y) ? y : x) :
-                        (yMag < xMag ? y : x);
+                float xMag = MathF.Abs(x),
+                    yMag = MathF.Abs(y);
+                return yMag == xMag ? (IsNegative(y) ? y : x) : (yMag < xMag ? y : x);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y)
             {
-                Vector<float> xMag = Vector.Abs(x), yMag = Vector.Abs(y);
-                return
-                    Vector.ConditionalSelect(Vector.Equals(yMag, xMag),
-                        Vector.ConditionalSelect(IsNegative(y), y, x),
-                        Vector.ConditionalSelect(Vector.LessThan(yMag, xMag), y, x));
+                Vector<float> xMag = Vector.Abs(x),
+                    yMag = Vector.Abs(y);
+                return Vector.ConditionalSelect(
+                    Vector.Equals(yMag, xMag),
+                    Vector.ConditionalSelect(IsNegative(y), y, x),
+                    Vector.ConditionalSelect(Vector.LessThan(yMag, xMag), y, x)
+                );
             }
         }
 
@@ -3386,23 +4110,30 @@ namespace System.Numerics.Tensors
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public float Invoke(float x, float y)
             {
-                float xMag = MathF.Abs(x), yMag = MathF.Abs(y);
+                float xMag = MathF.Abs(x),
+                    yMag = MathF.Abs(y);
                 return xMag < yMag || float.IsNaN(xMag) || (xMag == yMag && IsNegative(x)) ? x : y;
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public Vector<float> Invoke(Vector<float> x, Vector<float> y)
             {
-                Vector<float> xMag = Vector.Abs(x), yMag = Vector.Abs(y);
+                Vector<float> xMag = Vector.Abs(x),
+                    yMag = Vector.Abs(y);
 
-                return
-                    Vector.ConditionalSelect(Vector.Equals(x, x),
-                        Vector.ConditionalSelect(Vector.Equals(y, y),
-                            Vector.ConditionalSelect(Vector.Equals(yMag, xMag),
-                                Vector.ConditionalSelect(IsNegative(x), x, y),
-                                Vector.ConditionalSelect(Vector.LessThan(xMag, yMag), x, y)),
-                            y),
-                        x);
+                return Vector.ConditionalSelect(
+                    Vector.Equals(x, x),
+                    Vector.ConditionalSelect(
+                        Vector.Equals(y, y),
+                        Vector.ConditionalSelect(
+                            Vector.Equals(yMag, xMag),
+                            Vector.ConditionalSelect(IsNegative(x), x, y),
+                            Vector.ConditionalSelect(Vector.LessThan(xMag, yMag), x, y)
+                        ),
+                        y
+                    ),
+                    x
+                );
             }
         }
 
@@ -3410,7 +4141,9 @@ namespace System.Numerics.Tensors
         private readonly struct NegateOperator : IUnaryOperator
         {
             public bool CanVectorize => true;
+
             public float Invoke(float x) => -x;
+
             public Vector<float> Invoke(Vector<float> x) => -x;
         }
 
@@ -3418,21 +4151,27 @@ namespace System.Numerics.Tensors
         private readonly struct AddMultiplyOperator : ITernaryOperator
         {
             public float Invoke(float x, float y, float z) => (x + y) * z;
-            public Vector<float> Invoke(Vector<float> x, Vector<float> y, Vector<float> z) => (x + y) * z;
+
+            public Vector<float> Invoke(Vector<float> x, Vector<float> y, Vector<float> z) =>
+                (x + y) * z;
         }
 
         /// <summary>(x * y) + z</summary>
         private readonly struct MultiplyAddOperator : ITernaryOperator
         {
             public float Invoke(float x, float y, float z) => (x * y) + z;
-            public Vector<float> Invoke(Vector<float> x, Vector<float> y, Vector<float> z) => (x * y) + z;
+
+            public Vector<float> Invoke(Vector<float> x, Vector<float> y, Vector<float> z) =>
+                (x * y) + z;
         }
 
         /// <summary>x</summary>
         private readonly struct IdentityOperator : IUnaryOperator
         {
             public bool CanVectorize => true;
+
             public float Invoke(float x) => x;
+
             public Vector<float> Invoke(Vector<float> x) => x;
         }
 
@@ -3440,7 +4179,9 @@ namespace System.Numerics.Tensors
         private readonly struct SquaredOperator : IUnaryOperator
         {
             public bool CanVectorize => true;
+
             public float Invoke(float x) => x * x;
+
             public Vector<float> Invoke(Vector<float> x) => x * x;
         }
 
@@ -3448,7 +4189,9 @@ namespace System.Numerics.Tensors
         private readonly struct AbsoluteOperator : IUnaryOperator
         {
             public bool CanVectorize => true;
+
             public float Invoke(float x) => MathF.Abs(x);
+
             public Vector<float> Invoke(Vector<float> x) => Vector.Abs(x);
         }
 
@@ -3456,7 +4199,9 @@ namespace System.Numerics.Tensors
         private readonly struct ExpOperator : IUnaryOperator
         {
             public bool CanVectorize => false;
+
             public float Invoke(float x) => MathF.Exp(x);
+
             public Vector<float> Invoke(Vector<float> x) =>
                 // requires ShiftLeft (.NET 7+)
                 throw new NotImplementedException();
@@ -3466,7 +4211,9 @@ namespace System.Numerics.Tensors
         private readonly struct SinhOperator : IUnaryOperator
         {
             public bool CanVectorize => false;
+
             public float Invoke(float x) => MathF.Sinh(x);
+
             public Vector<float> Invoke(Vector<float> x) =>
                 // requires ShiftLeft (.NET 7+)
                 throw new NotImplementedException();
@@ -3476,7 +4223,9 @@ namespace System.Numerics.Tensors
         private readonly struct CoshOperator : IUnaryOperator
         {
             public bool CanVectorize => false;
+
             public float Invoke(float x) => MathF.Cosh(x);
+
             public Vector<float> Invoke(Vector<float> x) =>
                 // requires ShiftLeft (.NET 7+)
                 throw new NotImplementedException();
@@ -3486,7 +4235,9 @@ namespace System.Numerics.Tensors
         private readonly struct TanhOperator : IUnaryOperator
         {
             public bool CanVectorize => false;
+
             public float Invoke(float x) => MathF.Tanh(x);
+
             public Vector<float> Invoke(Vector<float> x) =>
                 // requires ShiftLeft (.NET 7+)
                 throw new NotImplementedException();
@@ -3496,7 +4247,9 @@ namespace System.Numerics.Tensors
         private readonly struct LogOperator : IUnaryOperator
         {
             public bool CanVectorize => false;
+
             public float Invoke(float x) => MathF.Log(x);
+
             public Vector<float> Invoke(Vector<float> x) =>
                 // requires ShiftRightArithmetic (.NET 7+)
                 throw new NotImplementedException();
@@ -3506,7 +4259,9 @@ namespace System.Numerics.Tensors
         private readonly struct Log2Operator : IUnaryOperator
         {
             public bool CanVectorize => false;
+
             public float Invoke(float x) => Log2(x);
+
             public Vector<float> Invoke(Vector<float> x) =>
                 // requires ShiftRightArithmetic (.NET 7+)
                 throw new NotImplementedException();
@@ -3516,7 +4271,9 @@ namespace System.Numerics.Tensors
         private readonly struct SigmoidOperator : IUnaryOperator
         {
             public bool CanVectorize => false;
+
             public float Invoke(float x) => 1.0f / (1.0f + MathF.Exp(-x));
+
             public Vector<float> Invoke(Vector<float> x) =>
                 // requires ShiftRightArithmetic (.NET 7+)
                 throw new NotImplementedException();

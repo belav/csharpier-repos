@@ -8,7 +8,8 @@ internal static class SqliteConnectionExtensions
     public static SqliteDataReader ExecuteReader(
         this SqliteConnection connection,
         string commandText,
-        params SqliteParameter[] parameters)
+        params SqliteParameter[] parameters
+    )
     {
         var command = connection.CreateCommand();
         command.CommandText = commandText;

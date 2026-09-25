@@ -24,7 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             SemanticModel semanticModel,
             bool allowUncertainCandidates = false,
             bool allowParams = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             // if argument is a named argument it can't map to a parameter.
             if (argument.NameEquals != null)
@@ -36,7 +37,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             if (argumentList.Parent is not AttributeSyntax invocableExpression)
                 return null;
 
-            var symbols = semanticModel.GetSymbolInfo(invocableExpression, cancellationToken).GetBestOrAllSymbols();
+            var symbols = semanticModel
+                .GetSymbolInfo(invocableExpression, cancellationToken)
+                .GetBestOrAllSymbols();
             if (symbols.Length >= 2 && !allowUncertainCandidates)
                 return null;
 

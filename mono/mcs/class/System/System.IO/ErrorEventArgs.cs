@@ -1,4 +1,4 @@
-// 
+//
 // System.IO.ErrorEventArgs.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,31 +30,32 @@
 
 using System;
 
-namespace System.IO {
-	public class ErrorEventArgs : EventArgs {
+namespace System.IO
+{
+    public class ErrorEventArgs : EventArgs
+    {
+        #region Fields
 
-		#region Fields
+        Exception exception;
 
-		Exception exception;
+        #endregion // Fields
 
-		#endregion // Fields
+        #region Constructors
 
-		#region Constructors
+        public ErrorEventArgs(Exception exception)
+        {
+            this.exception = exception;
+        }
 
-		public ErrorEventArgs (Exception exception) 
-		{
-			this.exception = exception;
-		}
-		
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Methods
+        #region Methods
 
-		public virtual Exception GetException ()
-		{
-			return exception;
-		}
+        public virtual Exception GetException()
+        {
+            return exception;
+        }
 
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

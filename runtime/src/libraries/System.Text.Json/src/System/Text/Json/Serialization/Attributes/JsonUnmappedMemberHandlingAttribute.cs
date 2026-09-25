@@ -7,15 +7,20 @@ namespace System.Text.Json.Serialization
     /// When placed on a type, determines the <see cref="JsonUnmappedMemberHandling"/> configuration
     /// for the specific type, overriding the global <see cref="JsonSerializerOptions.UnmappedMemberHandling"/> setting.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
-        AllowMultiple = false, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
+        AllowMultiple = false,
+        Inherited = false
+    )]
     public class JsonUnmappedMemberHandlingAttribute : JsonAttribute
     {
         /// <summary>
         /// Initializes a new instance of <see cref="JsonUnmappedMemberHandlingAttribute"/>.
         /// </summary>
         /// <param name="unmappedMemberHandling">The handling to apply to the current member.</param>
-        public JsonUnmappedMemberHandlingAttribute(JsonUnmappedMemberHandling unmappedMemberHandling)
+        public JsonUnmappedMemberHandlingAttribute(
+            JsonUnmappedMemberHandling unmappedMemberHandling
+        )
         {
             UnmappedMemberHandling = unmappedMemberHandling;
         }

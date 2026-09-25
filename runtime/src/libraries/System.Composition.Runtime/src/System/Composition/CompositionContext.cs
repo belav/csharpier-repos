@@ -151,7 +151,9 @@ namespace System.Composition
             if (TryGetExport(contract, out object export))
                 return export;
 
-            throw new CompositionFailedException(SR.Format(SR.CompositionContext_NoExportFoundForContract, contract));
+            throw new CompositionFailedException(
+                SR.Format(SR.CompositionContext_NoExportFoundForContract, contract)
+            );
         }
 
         /// <summary>
@@ -178,7 +180,8 @@ namespace System.Composition
             var manyContract = new CompositionContract(
                 exportType.MakeArrayType(),
                 contractName,
-                new Dictionary<string, object> { { ImportManyImportMetadataConstraintName, true } });
+                new Dictionary<string, object> { { ImportManyImportMetadataConstraintName, true } }
+            );
 
             return (IEnumerable<object>)GetExport(manyContract);
         }

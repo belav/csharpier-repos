@@ -17,7 +17,8 @@ namespace System.Runtime.InteropServices
 
         private sealed class AllocHGlobalSafeHandle : SafeBuffer
         {
-            public AllocHGlobalSafeHandle(nuint cb) : base(ownsHandle: true)
+            public AllocHGlobalSafeHandle(nuint cb)
+                : base(ownsHandle: true)
             {
 #if !NETCOREAPP
                 RuntimeHelpers.PrepareConstrainedRegions();

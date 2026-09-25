@@ -36,10 +36,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public bool this[int bit]
         {
-            get
-            {
-                return (_data & bit) == unchecked((uint)bit);
-            }
+            get { return (_data & bit) == unchecked((uint)bit); }
             set
             {
                 unchecked
@@ -65,7 +62,9 @@ namespace System.Collections.Specialized
             {
                 unchecked
                 {
-                    return (int)((_data & (uint)(section.Mask << section.Offset)) >> section.Offset);
+                    return (int)(
+                        (_data & (uint)(section.Mask << section.Offset)) >> section.Offset
+                    );
                 }
             }
             set
@@ -86,10 +85,7 @@ namespace System.Collections.Specialized
         /// </devdoc>
         public int Data
         {
-            get
-            {
-                return unchecked((int)_data);
-            }
+            get { return unchecked((int)_data); }
         }
 
         /// <devdoc>
@@ -134,7 +130,11 @@ namespace System.Collections.Specialized
             return CreateSectionHelper(maxValue, previous.Mask, previous.Offset);
         }
 
-        private static Section CreateSectionHelper(short maxValue, short priorMask, short priorOffset)
+        private static Section CreateSectionHelper(
+            short maxValue,
+            short priorMask,
+            short priorOffset
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(maxValue);
 
@@ -148,7 +148,8 @@ namespace System.Collections.Specialized
             return new Section(mask, offset);
         }
 
-        public override bool Equals([NotNullWhen(true)] object? o) => o is BitVector32 other && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? o) =>
+            o is BitVector32 other && Equals(other);
 
         /// <summary>Indicates whether the current instance is equal to another instance of the same type.</summary>
         /// <param name="other">An instance to compare with this instance.</param>
@@ -159,20 +160,28 @@ namespace System.Collections.Specialized
 
         public static string ToString(BitVector32 value)
         {
-            return string.Create(/*"BitVector32{".Length*/12 + /*32 bits*/32 + /*"}".Length"*/1, value, (dst, v) =>
-            {
-                ReadOnlySpan<char> prefix = "BitVector32{";
-                prefix.CopyTo(dst);
-                dst[dst.Length - 1] = '}';
-
-                int locdata = unchecked((int)v._data);
-                dst = dst.Slice(prefix.Length, 32);
-                for (int i = 0; i < dst.Length; i++)
+            return string.Create( /*"BitVector32{".Length*/
+                12
+                    + /*32 bits*/
+                    32
+                    + /*"}".Length"*/
+                    1,
+                value,
+                (dst, v) =>
                 {
-                    dst[i] = (locdata & 0x80000000) != 0 ? '1' : '0';
-                    locdata <<= 1;
+                    ReadOnlySpan<char> prefix = "BitVector32{";
+                    prefix.CopyTo(dst);
+                    dst[dst.Length - 1] = '}';
+
+                    int locdata = unchecked((int)v._data);
+                    dst = dst.Slice(prefix.Length, 32);
+                    for (int i = 0; i < dst.Length; i++)
+                    {
+                        dst[i] = (locdata & 0x80000000) != 0 ? '1' : '0';
+                        locdata <<= 1;
+                    }
                 }
-            });
+            );
         }
 
         public override string ToString()
@@ -199,7 +208,8 @@ namespace System.Collections.Specialized
 
             public short Offset => _offset;
 
-            public override bool Equals([NotNullWhen(true)] object? o) => o is Section other && Equals(other);
+            public override bool Equals([NotNullWhen(true)] object? o) =>
+                o is Section other && Equals(other);
 
             public bool Equals(Section obj)
             {

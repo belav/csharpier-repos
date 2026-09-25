@@ -28,40 +28,47 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         CSharpSymbolMatcher previousSourceToMetadata,
         CSharpSymbolMatcher sourceToMetadata,
         CSharpSymbolMatcher? previousSourceToCurrentSource,
-        EmitBaseline baseline) : DefinitionMap(edits, baseline)
+        EmitBaseline baseline
+    ) : DefinitionMap(edits, baseline)
     {
-        private readonly CSharpSymbolMatcher _sourceToPrevious = previousSourceToCurrentSource ?? sourceToMetadata;
+        private readonly CSharpSymbolMatcher _sourceToPrevious =
+            previousSourceToCurrentSource ?? sourceToMetadata;
 
         public override SymbolMatcher SourceToMetadataSymbolMatcher => sourceToMetadata;
         public override SymbolMatcher SourceToPreviousSymbolMatcher => _sourceToPrevious;
-        public override SymbolMatcher PreviousSourceToMetadataSymbolMatcher => previousSourceToMetadata;
+        public override SymbolMatcher PreviousSourceToMetadataSymbolMatcher =>
+            previousSourceToMetadata;
 
         protected override ISymbolInternal? GetISymbolInternalOrNull(ISymbol symbol)
         {
             return (symbol as Symbols.PublicModel.Symbol)?.UnderlyingSymbol;
         }
 
-        internal override CommonMessageProvider MessageProvider
-            => CSharp.MessageProvider.Instance;
+        internal override CommonMessageProvider MessageProvider => CSharp.MessageProvider.Instance;
 
-        protected override LambdaSyntaxFacts GetLambdaSyntaxFacts()
-            => CSharpLambdaSyntaxFacts.Instance;
+        protected override LambdaSyntaxFacts GetLambdaSyntaxFacts() =>
+            CSharpLambdaSyntaxFacts.Instance;
 
-        internal bool TryGetAnonymousTypeValue(AnonymousTypeManager.AnonymousTypeOrDelegateTemplateSymbol template, out AnonymousTypeValue typeValue)
-            => _sourceToPrevious.TryGetAnonymousTypeValue(template, out typeValue);
+        internal bool TryGetAnonymousTypeValue(
+            AnonymousTypeManager.AnonymousTypeOrDelegateTemplateSymbol template,
+            out AnonymousTypeValue typeValue
+        ) => _sourceToPrevious.TryGetAnonymousTypeValue(template, out typeValue);
 
         protected override void GetStateMachineFieldMapFromMetadata(
             ITypeSymbolInternal stateMachineType,
             ImmutableArray<LocalSlotDebugInfo> localSlotDebugInfo,
             out IReadOnlyDictionary<EncHoistedLocalInfo, int> hoistedLocalMap,
             out IReadOnlyDictionary<Cci.ITypeReference, int> awaiterMap,
-            out int awaiterSlotCount)
+            out int awaiterSlotCount
+        )
         {
             // we are working with PE symbols
             Debug.Assert(stateMachineType.ContainingAssembly is PEAssemblySymbol);
 
             var hoistedLocals = new Dictionary<EncHoistedLocalInfo, int>();
-            var awaiters = new Dictionary<Cci.ITypeReference, int>(Cci.SymbolEquivalentEqualityComparer.Instance);
+            var awaiters = new Dictionary<Cci.ITypeReference, int>(
+                Cci.SymbolEquivalentEqualityComparer.Instance
+            );
             int maxAwaiterSlotIndex = -1;
 
             foreach (var member in ((TypeSymbol)stateMachineType).GetMembers())
@@ -79,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                                 var field = (FieldSymbol)member;
 
                                 // correct metadata won't contain duplicates, but malformed might, ignore the duplicate:
-                                awaiters[(Cci.ITypeReference)field.Type.GetCciAdapter()] = slotIndex;
+                                awaiters[(Cci.ITypeReference)field.Type.GetCciAdapter()] =
+                                    slotIndex;
 
                                 if (slotIndex > maxAwaiterSlotIndex)
                                 {
@@ -101,7 +109,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                                     continue;
                                 }
 
-                                var key = new EncHoistedLocalInfo(localSlotDebugInfo[slotIndex], (Cci.ITypeReference)field.Type.GetCciAdapter());
+                                var key = new EncHoistedLocalInfo(
+                                    localSlotDebugInfo[slotIndex],
+                                    (Cci.ITypeReference)field.Type.GetCciAdapter()
+                                );
 
                                 // correct metadata won't contain duplicate ids, but malformed might, ignore the duplicate:
                                 hoistedLocals[key] = slotIndex;
@@ -117,7 +128,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             awaiterSlotCount = maxAwaiterSlotIndex + 1;
         }
 
-        protected override ImmutableArray<EncLocalInfo> GetLocalSlotMapFromMetadata(StandaloneSignatureHandle handle, EditAndContinueMethodDebugInformation debugInfo)
+        protected override ImmutableArray<EncLocalInfo> GetLocalSlotMapFromMetadata(
+            StandaloneSignatureHandle handle,
+            EditAndContinueMethodDebugInformation debugInfo
+        )
         {
             Debug.Assert(!handle.IsNil);
 
@@ -127,11 +141,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             return result;
         }
 
-        protected override ITypeSymbolInternal? TryGetStateMachineType(MethodDefinitionHandle methodHandle)
-            => metadataDecoder.Module.HasStateMachineAttribute(methodHandle, out var typeName) ? metadataDecoder.GetTypeSymbolForSerializedType(typeName) : null;
+        protected override ITypeSymbolInternal? TryGetStateMachineType(
+            MethodDefinitionHandle methodHandle
+        ) =>
+            metadataDecoder.Module.HasStateMachineAttribute(methodHandle, out var typeName)
+                ? metadataDecoder.GetTypeSymbolForSerializedType(typeName)
+                : null;
 
-        protected override IMethodSymbolInternal GetMethodSymbol(MethodDefinitionHandle methodHandle)
-            => (IMethodSymbolInternal)metadataDecoder.GetSymbolForILToken(methodHandle);
+        protected override IMethodSymbolInternal GetMethodSymbol(
+            MethodDefinitionHandle methodHandle
+        ) => (IMethodSymbolInternal)metadataDecoder.GetSymbolForILToken(methodHandle);
 
         /// <summary>
         /// Match local declarations to names to generate a map from
@@ -140,7 +159,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
         /// </summary>
         private static ImmutableArray<EncLocalInfo> CreateLocalSlotMap(
             EditAndContinueMethodDebugInformation methodEncInfo,
-            ImmutableArray<LocalInfo<TypeSymbol>> slotMetadata)
+            ImmutableArray<LocalInfo<TypeSymbol>> slotMetadata
+        )
         {
             var result = new EncLocalInfo[slotMetadata.Length];
 
@@ -164,7 +184,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
                         // previous version of the local if it had custom modifiers.
                         if (metadata.CustomModifiers.IsDefaultOrEmpty)
                         {
-                            var local = new EncLocalInfo(slot, (Cci.ITypeReference)metadata.Type.GetCciAdapter(), metadata.Constraints, metadata.SignatureOpt);
+                            var local = new EncLocalInfo(
+                                slot,
+                                (Cci.ITypeReference)metadata.Type.GetCciAdapter(),
+                                metadata.Constraints,
+                                metadata.SignatureOpt
+                            );
                             map.Add(local, slotIndex);
                         }
                     }
@@ -193,19 +218,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             out int suffixIndex,
             out char idSeparator,
             out bool isDisplayClass,
-            out bool hasDebugIds)
+            out bool hasDebugIds
+        )
         {
             suffixIndex = 0;
             isDisplayClass = false;
             hasDebugIds = false;
             idSeparator = GeneratedNameConstants.IdSeparator;
 
-            if (!GeneratedNameParser.TryParseGeneratedName(name, out var generatedKind, out _, out var closeBracketOffset))
+            if (
+                !GeneratedNameParser.TryParseGeneratedName(
+                    name,
+                    out var generatedKind,
+                    out _,
+                    out var closeBracketOffset
+                )
+            )
             {
                 return false;
             }
 
-            if (generatedKind is not (GeneratedNameKind.LambdaDisplayClass or GeneratedNameKind.LambdaMethod or GeneratedNameKind.LocalFunction))
+            if (
+                generatedKind
+                is not (
+                    GeneratedNameKind.LambdaDisplayClass
+                    or GeneratedNameKind.LambdaMethod
+                    or GeneratedNameKind.LocalFunction
+                )
+            )
             {
                 return false;
             }
@@ -216,7 +256,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Emit
             isDisplayClass = generatedKind == GeneratedNameKind.LambdaDisplayClass;
 
             suffixIndex = closeBracketOffset + 2;
-            hasDebugIds = name.AsSpan(suffixIndex).StartsWith(GeneratedNameConstants.SuffixSeparator.AsSpan(), StringComparison.Ordinal);
+            hasDebugIds = name.AsSpan(suffixIndex)
+                .StartsWith(
+                    GeneratedNameConstants.SuffixSeparator.AsSpan(),
+                    StringComparison.Ordinal
+                );
 
             if (hasDebugIds)
             {

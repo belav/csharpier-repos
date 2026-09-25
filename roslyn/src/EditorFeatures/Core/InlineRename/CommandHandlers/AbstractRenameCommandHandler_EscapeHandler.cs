@@ -7,10 +7,10 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler : ICommandHandler<EscapeKeyCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<EscapeKeyCommandArgs>
     {
-        public CommandState GetCommandState(EscapeKeyCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(EscapeKeyCommandArgs args) => GetCommandState();
 
         public bool ExecuteCommand(EscapeKeyCommandArgs args, CommandExecutionContext context)
         {

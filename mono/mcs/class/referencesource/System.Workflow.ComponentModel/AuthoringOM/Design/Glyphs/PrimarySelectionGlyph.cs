@@ -25,10 +25,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public override bool IsPrimarySelection
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
     #endregion
@@ -36,4 +33,3 @@ namespace System.Workflow.ComponentModel.Design
 
     #endregion
 }
-

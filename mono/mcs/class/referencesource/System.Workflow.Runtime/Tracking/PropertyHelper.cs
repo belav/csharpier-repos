@@ -2,32 +2,35 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Globalization;
-
+using System.Text;
 //using System.Workflow.Activities;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
+using System.Xml.Schema;
 using Hosting = System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime.Tracking
 {
-
     internal sealed class PropertyHelper
     {
         private PropertyHelper() { }
 
         #region Internal Static Methods
 
-        internal static void GetProperty(string name, Activity activity, TrackingAnnotationCollection annotations, out TrackingDataItem item)
+        internal static void GetProperty(
+            string name,
+            Activity activity,
+            TrackingAnnotationCollection annotations,
+            out TrackingDataItem item
+        )
         {
             item = null;
             object tmp = PropertyHelper.GetProperty(name, activity);
@@ -54,7 +57,9 @@ namespace System.Workflow.Runtime.Tracking
             for (int i = 0; i < names.Length; i++)
             {
                 if ((null == names[i]) || (0 == names[i].Length))
-                    throw new InvalidOperationException(ExecutionStringManager.TrackingProfileInvalidMember);
+                    throw new InvalidOperationException(
+                        ExecutionStringManager.TrackingProfileInvalidMember
+                    );
 
                 object tmp = null;
                 PropertyHelper.GetPropertyOrField(names[i], currObj, out tmp);
@@ -81,7 +86,8 @@ namespace System.Workflow.Runtime.Tracking
 
             Type t = o.GetType();
 
-            string tmp = null, realName = null;
+            string tmp = null,
+                realName = null;
             bool isCollection = false;
             int index = -1;
 
@@ -99,20 +105,22 @@ namespace System.Workflow.Runtime.Tracking
                 // Attempt to match default, no parameter (if overloaded)
                 // Indexer accesses will fail - we do not handle indexers
                 // Do case sensitive here because we have the real name of the matching member
-                val = t.InvokeMember(realName,
-                                        BindingFlags.Public |
-                                        BindingFlags.NonPublic |
-                                        BindingFlags.GetProperty |
-                                        BindingFlags.GetField |
-                                        BindingFlags.Instance |
-                                        BindingFlags.Static,
-                                        null,
-                                        o,
-                                        null,
-                                        System.Globalization.CultureInfo.InvariantCulture);
+                val = t.InvokeMember(
+                    realName,
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.GetProperty
+                        | BindingFlags.GetField
+                        | BindingFlags.Instance
+                        | BindingFlags.Static,
+                    null,
+                    o,
+                    null,
+                    System.Globalization.CultureInfo.InvariantCulture
+                );
             }
             else
-                val = o;  // root object is a collection - all that is passed for name is "[1]"
+                val = o; // root object is a collection - all that is passed for name is "[1]"
 
             if (isCollection)
             {
@@ -165,16 +173,22 @@ namespace System.Workflow.Runtime.Tracking
             return tmp;
         }
 
-        internal static void GetAllMembers(Activity activity, IList<TrackingDataItem> items, TrackingAnnotationCollection annotations)
+        internal static void GetAllMembers(
+            Activity activity,
+            IList<TrackingDataItem> items,
+            TrackingAnnotationCollection annotations
+        )
         {
             Type t = activity.GetType();
             //
             // Get all fields
-            FieldInfo[] fields = t.GetFields(BindingFlags.Public |
-                                                BindingFlags.NonPublic |
-                                                BindingFlags.Instance |
-                                                BindingFlags.Static |
-                                                BindingFlags.GetField);
+            FieldInfo[] fields = t.GetFields(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.GetField
+            );
 
             foreach (FieldInfo f in fields)
             {
@@ -190,11 +204,13 @@ namespace System.Workflow.Runtime.Tracking
             }
             //
             // Get all properties (except indexers)
-            PropertyInfo[] properties = t.GetProperties(BindingFlags.Public |
-                                                            BindingFlags.NonPublic |
-                                                            BindingFlags.Instance |
-                                                            BindingFlags.Static |
-                                                            BindingFlags.GetProperty);
+            PropertyInfo[] properties = t.GetProperties(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.GetProperty
+            );
 
             foreach (PropertyInfo p in properties)
             {
@@ -222,7 +238,12 @@ namespace System.Workflow.Runtime.Tracking
 
         private static bool IsInternalVariable(string name)
         {
-            string[] vars = { "__winoe_ActivityLocks_", "__winoe_StaticActivityLocks_", "__winoe_MethodLocks_" };
+            string[] vars =
+            {
+                "__winoe_ActivityLocks_",
+                "__winoe_StaticActivityLocks_",
+                "__winoe_MethodLocks_",
+            };
 
             foreach (string s in vars)
             {
@@ -239,13 +260,15 @@ namespace System.Workflow.Runtime.Tracking
             //
             // Get the member with the requested name
             // Do case specific first
-            MemberInfo[] members = t.GetMember(name,
-                                                BindingFlags.Public |
-                                                BindingFlags.NonPublic |
-                                                BindingFlags.GetProperty |
-                                                BindingFlags.GetField |
-                                                BindingFlags.Instance |
-                                                BindingFlags.Static);
+            MemberInfo[] members = t.GetMember(
+                name,
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.GetProperty
+                    | BindingFlags.GetField
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+            );
 
             //
             // Not found
@@ -253,14 +276,16 @@ namespace System.Workflow.Runtime.Tracking
             {
                 //
                 // Do case insensitive
-                members = t.GetMember(name,
-                                        BindingFlags.Public |
-                                        BindingFlags.NonPublic |
-                                        BindingFlags.GetProperty |
-                                        BindingFlags.GetField |
-                                        BindingFlags.Instance |
-                                        BindingFlags.Static |
-                                        BindingFlags.IgnoreCase);
+                members = t.GetMember(
+                    name,
+                    BindingFlags.Public
+                        | BindingFlags.NonPublic
+                        | BindingFlags.GetProperty
+                        | BindingFlags.GetField
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.IgnoreCase
+                );
                 //
                 // Not found
                 if ((null == members) || (0 == members.Length))
@@ -269,7 +294,12 @@ namespace System.Workflow.Runtime.Tracking
                 }
             }
 
-            if ((null == members) || (0 == members.Length) || (null == members[0].Name) || (0 == members[0].Name.Length))
+            if (
+                (null == members)
+                || (0 == members.Length)
+                || (null == members[0].Name)
+                || (0 == members[0].Name.Length)
+            )
                 return false;
 
             realName = members[0].Name;
@@ -281,7 +311,8 @@ namespace System.Workflow.Runtime.Tracking
             name = null;
             index = -1;
 
-            int endPos = -1, startPos = -1;
+            int endPos = -1,
+                startPos = -1;
             for (int i = fullName.Length - 1; i > 0; i--)
             {
                 if ((']' == fullName[i]) && (-1 == endPos))

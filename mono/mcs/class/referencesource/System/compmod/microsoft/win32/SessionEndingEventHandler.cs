@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="SessionEndingEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace Microsoft.Win32 {
+namespace Microsoft.Win32
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;
@@ -17,4 +18,3 @@ namespace Microsoft.Win32 {
     [HostProtectionAttribute(MayLeakOnAbort = true)]
     public delegate void SessionEndingEventHandler(object sender, SessionEndingEventArgs e);
 }
-

@@ -8,20 +8,21 @@ namespace System.ServiceModel.Activities.Dispatcher
     using System.Activities.DurableInstancing;
     using System.Activities.Hosting;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.Runtime.DurableInstancing;
-    using System.ServiceModel.Channels;
     using System.ServiceModel.Activities.Description;
+    using System.ServiceModel.Channels;
     using System.Transactions;
-    using System.Xml.Linq;    
+    using System.Xml.Linq;
 
     sealed class PersistenceContext : CommunicationObject
     {
         // Dictionary keyed by Transaction HashCode. The value is the enlistment for that transaction.
-        internal static Dictionary<int, PersistenceContextEnlistment> Enlistments = new Dictionary<int, PersistenceContextEnlistment>();
+        internal static Dictionary<int, PersistenceContextEnlistment> Enlistments =
+            new Dictionary<int, PersistenceContextEnlistment>();
 
         readonly PersistenceProviderDirectory directory;
 
@@ -34,7 +35,6 @@ namespace System.ServiceModel.Activities.Dispatcher
         static TimeSpan defaultOpenTimeout = TimeSpan.FromSeconds(90);
         static TimeSpan defaultCloseTimeout = TimeSpan.FromSeconds(90);
 
-
         bool operationInProgress;
 
         WorkflowServiceInstance workflowInstance;
@@ -44,9 +44,10 @@ namespace System.ServiceModel.Activities.Dispatcher
         // and it is available to be "locked" by a transaction. Locking for transactions is done
         // with QueueForTransactionLock. This method returns a TransactionWaitAsyncResult. If the
         // lock was obtained by the call, the resulting AsyncResult will be marked as "Completed"
-        // upon return from QueueForTransactionLock. If not, the caller should wait on the 
+        // upon return from QueueForTransactionLock. If not, the caller should wait on the
         // AsyncResult.AsyncWaitHandle before proceeding to update any of the fields of the context.
         int lockingTransaction;
+
         //We are keeping a reference to both the transaction object and the hash code to avoid calling the GetHashCode multiple times
         Transaction lockingTransactionObject;
 
@@ -57,8 +58,12 @@ namespace System.ServiceModel.Activities.Dispatcher
         Queue<TransactionWaitAsyncResult> transactionWaiterQueue;
 
         // Used by PPD when there is no store.
-        internal PersistenceContext(PersistenceProviderDirectory directory,
-            Guid instanceId, InstanceKey key, IEnumerable<InstanceKey> associatedKeys)
+        internal PersistenceContext(
+            PersistenceProviderDirectory directory,
+            Guid instanceId,
+            InstanceKey key,
+            IEnumerable<InstanceKey> associatedKeys
+        )
         {
             Fx.Assert(directory != null, "Directory is null in PersistenceContext.");
             Fx.Assert(instanceId != Guid.Empty, "Cannot provide an empty instance ID.");
@@ -67,8 +72,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             InstanceId = instanceId;
 
-            AssociatedKeys = associatedKeys != null ? new HashSet<InstanceKey>(associatedKeys) :
-                new HashSet<InstanceKey>();
+            AssociatedKeys =
+                associatedKeys != null
+                    ? new HashSet<InstanceKey>(associatedKeys)
+                    : new HashSet<InstanceKey>();
             if (key != null && !AssociatedKeys.Contains(key))
             {
                 AssociatedKeys.Add(key);
@@ -83,9 +90,17 @@ namespace System.ServiceModel.Activities.Dispatcher
         }
 
         // Used by PPD when there is a store.
-        internal PersistenceContext(PersistenceProviderDirectory directory, InstanceStore store,
-            InstanceHandle handle, Guid instanceId, IEnumerable<InstanceKey> associatedKeys,
-            bool newInstance, bool locked, InstanceView view, WorkflowIdentityKey updatedIdentity) 
+        internal PersistenceContext(
+            PersistenceProviderDirectory directory,
+            InstanceStore store,
+            InstanceHandle handle,
+            Guid instanceId,
+            IEnumerable<InstanceKey> associatedKeys,
+            bool newInstance,
+            bool locked,
+            InstanceView view,
+            WorkflowIdentityKey updatedIdentity
+        )
             : this(directory, instanceId, null, associatedKeys)
         {
             Fx.Assert(store != null, "Null store passed to PersistenceContext.");
@@ -111,14 +126,27 @@ namespace System.ServiceModel.Activities.Dispatcher
             if (IsInitialized)
             {
                 Fx.Assert(view != null, "View must be specified on an initialized instance.");
-                WorkflowIdentity definitionIdentity;                
+                WorkflowIdentity definitionIdentity;
 
-                if (!TryGetValue<WorkflowIdentity>(view.InstanceMetadata, Workflow45Namespace.DefinitionIdentity, out definitionIdentity))
+                if (
+                    !TryGetValue<WorkflowIdentity>(
+                        view.InstanceMetadata,
+                        Workflow45Namespace.DefinitionIdentity,
+                        out definitionIdentity
+                    )
+                )
                 {
                     definitionIdentity = null;
                 }
 
-                this.workflowInstance = this.directory.InitializeInstance(InstanceId, this, definitionIdentity, updatedIdentity, view.InstanceData, null);
+                this.workflowInstance = this.directory.InitializeInstance(
+                    InstanceId,
+                    this,
+                    definitionIdentity,
+                    updatedIdentity,
+                    view.InstanceData,
+                    null
+                );
             }
         }
 
@@ -134,25 +162,16 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         // Set to true when we detach from the PPD under a transaction. When the transaction completes,
         // either commit or abort, we will finish the removal from the PPD.
-        internal bool Detaching
-        {
-            get; set;
-        }
+        internal bool Detaching { get; set; }
 
         public bool CanPersist
         {
-            get
-            {
-                return (this.store != null);
-            }
+            get { return (this.store != null); }
         }
 
         public bool IsHandleValid
         {
-            get
-            {
-                return this.handle == null || this.handle.IsValid;
-            }
+            get { return this.handle == null || this.handle.IsValid; }
         }
 
         internal Transaction LockingTransaction
@@ -175,8 +194,14 @@ namespace System.ServiceModel.Activities.Dispatcher
         internal HashSet<InstanceKey> AssociatedKeys { get; private set; }
         internal ReadOnlyCollection<BookmarkInfo> Bookmarks { get; set; }
 
-        protected override TimeSpan DefaultCloseTimeout { get { return defaultCloseTimeout; } }
-        protected override TimeSpan DefaultOpenTimeout { get { return defaultOpenTimeout; } }
+        protected override TimeSpan DefaultCloseTimeout
+        {
+            get { return defaultCloseTimeout; }
+        }
+        protected override TimeSpan DefaultOpenTimeout
+        {
+            get { return defaultOpenTimeout; }
+        }
 
         // Remove key associations.  These are never immediately propagated to the store / cache.  Succeeds
         // if the keys don't exist or are associated with a different instance (in which case they are
@@ -184,14 +209,20 @@ namespace System.ServiceModel.Activities.Dispatcher
         public void DisassociateKeys(ICollection<InstanceKey> expiredKeys)
         {
             ThrowIfDisposedOrNotOpen();
-            Fx.Assert(expiredKeys != null, "'expiredKeys' parameter to DisassociateKeys cannot be null.");
+            Fx.Assert(
+                expiredKeys != null,
+                "'expiredKeys' parameter to DisassociateKeys cannot be null."
+            );
 
             try
             {
                 StartOperation();
                 ThrowIfCompleted();
                 ThrowIfNotVisible();
-                Fx.Assert(!IsInitialized || IsLocked, "Should not be visible if initialized and not locked.");
+                Fx.Assert(
+                    !IsInitialized || IsLocked,
+                    "Should not be visible if initialized and not locked."
+                );
 
                 foreach (InstanceKey key in expiredKeys)
                 {
@@ -202,7 +233,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     }
                     else
                     {
-                        Fx.Assert(!this.keysToAssociate.Contains(key), "Cannot be planning to associate this key.");
+                        Fx.Assert(
+                            !this.keysToAssociate.Contains(key),
+                            "Cannot be planning to associate this key."
+                        );
                     }
                 }
             }
@@ -217,10 +251,14 @@ namespace System.ServiceModel.Activities.Dispatcher
             SaveStatus saveStatus,
             TimeSpan timeout,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             ThrowIfDisposedOrNotOpen();
-            Fx.AssertAndThrow(instance != null, "'instance' parameter to BeginSave cannot be null.");
+            Fx.AssertAndThrow(
+                instance != null,
+                "'instance' parameter to BeginSave cannot be null."
+            );
 
             return new SaveAsyncResult(this, instance, saveStatus, timeout, callback, state);
         }
@@ -243,24 +281,47 @@ namespace System.ServiceModel.Activities.Dispatcher
         }
 
         public IAsyncResult BeginAssociateKeys(
-            ICollection<InstanceKey> associatedKeys, TimeSpan timeout, AsyncCallback callback, object state)
+            ICollection<InstanceKey> associatedKeys,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return BeginAssociateKeysHelper(associatedKeys, timeout, true, callback, state);
         }
 
         internal IAsyncResult BeginAssociateInfrastructureKeys(
-            ICollection<InstanceKey> associatedKeys, TimeSpan timeout, AsyncCallback callback, object state)
+            ICollection<InstanceKey> associatedKeys,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return BeginAssociateKeysHelper(associatedKeys, timeout, true, callback, state);
         }
 
-        IAsyncResult BeginAssociateKeysHelper(ICollection<InstanceKey> associatedKeys,
-            TimeSpan timeout, bool applicationKeys, AsyncCallback callback, object state)
+        IAsyncResult BeginAssociateKeysHelper(
+            ICollection<InstanceKey> associatedKeys,
+            TimeSpan timeout,
+            bool applicationKeys,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfDisposedOrNotOpen();
-            Fx.Assert(associatedKeys != null, "'associatedKeys' parameter to BeginAssociateKeys cannot be null.");
+            Fx.Assert(
+                associatedKeys != null,
+                "'associatedKeys' parameter to BeginAssociateKeys cannot be null."
+            );
 
-            return new AssociateKeysAsyncResult(this, associatedKeys, timeout, applicationKeys, callback, state);
+            return new AssociateKeysAsyncResult(
+                this,
+                associatedKeys,
+                timeout,
+                applicationKeys,
+                callback,
+                state
+            );
         }
 
         public void EndAssociateKeys(IAsyncResult result)
@@ -274,7 +335,12 @@ namespace System.ServiceModel.Activities.Dispatcher
         }
 
         // UpdateSuspendMetadata and Unlock instance
-        public IAsyncResult BeginUpdateSuspendMetadata(Exception reason, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginUpdateSuspendMetadata(
+            Exception reason,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfDisposedOrNotOpen();
 
@@ -301,13 +367,27 @@ namespace System.ServiceModel.Activities.Dispatcher
                             WorkflowServiceInstance result;
                             if (parameters.WorkflowHostingEndpoint != null)
                             {
-                                WorkflowHostingResponseContext responseContext = new WorkflowHostingResponseContext();
-                                WorkflowCreationContext creationContext = parameters.WorkflowHostingEndpoint.OnGetCreationContext(parameters.Inputs, parameters.OperationContext, InstanceId, responseContext);
+                                WorkflowHostingResponseContext responseContext =
+                                    new WorkflowHostingResponseContext();
+                                WorkflowCreationContext creationContext =
+                                    parameters.WorkflowHostingEndpoint.OnGetCreationContext(
+                                        parameters.Inputs,
+                                        parameters.OperationContext,
+                                        InstanceId,
+                                        responseContext
+                                    );
                                 if (creationContext == null)
                                 {
-                                    throw FxTrace.Exception.AsError(WorkflowHostingEndpoint.CreateDispatchFaultException());
+                                    throw FxTrace.Exception.AsError(
+                                        WorkflowHostingEndpoint.CreateDispatchFaultException()
+                                    );
                                 }
-                                result = this.directory.InitializeInstance(InstanceId, this, null, creationContext);
+                                result = this.directory.InitializeInstance(
+                                    InstanceId,
+                                    this,
+                                    null,
+                                    creationContext
+                                );
 
                                 // Return args
                                 parameters.WorkflowCreationContext = creationContext;
@@ -315,7 +395,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                             }
                             else
                             {
-                                result = this.directory.InitializeInstance(InstanceId, this, null, null);
+                                result = this.directory.InitializeInstance(
+                                    InstanceId,
+                                    this,
+                                    null,
+                                    null
+                                );
                             }
                             this.workflowInstance = result;
                         }
@@ -340,12 +425,20 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CloseAsyncResult(this, callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -379,9 +472,7 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         // PersistenceProviderDirectory calls Open in an async path.  Do not introduce blocking work to this method
         // without changing PersistenceProviderDirectory to call BeginOpen instead.
-        protected override void OnOpen(TimeSpan timeout)
-        {
-        }
+        protected override void OnOpen(TimeSpan timeout) { }
 
         protected override void OnClosing()
         {
@@ -416,7 +507,13 @@ namespace System.ServiceModel.Activities.Dispatcher
         void ReadSuspendedInfo(InstanceView view)
         {
             string suspendedReason = null;
-            if (TryGetValue<string>(view.InstanceMetadata, WorkflowServiceNamespace.SuspendReason, out suspendedReason))
+            if (
+                TryGetValue<string>(
+                    view.InstanceMetadata,
+                    WorkflowServiceNamespace.SuspendReason,
+                    out suspendedReason
+                )
+            )
             {
                 IsSuspended = true;
                 SuspendedReason = suspendedReason;
@@ -430,7 +527,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         void StartOperation()
         {
-            Fx.AssertAndThrow(!this.operationInProgress, "PersistenceContext doesn't support multiple operations.");
+            Fx.AssertAndThrow(
+                !this.operationInProgress,
+                "PersistenceContext doesn't support multiple operations."
+            );
             this.operationInProgress = true;
         }
 
@@ -445,7 +545,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (exception is OperationCanceledException)
                 {
-                    throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.HandleFreedInDirectory, exception)); 
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 else if (exception is TimeoutException)
                 {
@@ -464,7 +569,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         void ThrowIfCompleted()
         {
-            Fx.AssertAndThrow(!IsCompleted, "PersistenceContext operation invalid: instance already completed.");
+            Fx.AssertAndThrow(
+                !IsCompleted,
+                "PersistenceContext operation invalid: instance already completed."
+            );
         }
 
         void ThrowIfNotVisible()
@@ -474,13 +582,19 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 lock (ThisLock)
                 {
-                    Fx.AssertAndThrow(State != CommunicationState.Opened,
-                        "PersistenceContext operation invalid: instance must be visible.");
+                    Fx.AssertAndThrow(
+                        State != CommunicationState.Opened,
+                        "PersistenceContext operation invalid: instance must be visible."
+                    );
                 }
             }
         }
 
-        internal static bool TryGetValue<T>(IDictionary<XName, InstanceValue> data, XName key, out T value)
+        internal static bool TryGetValue<T>(
+            IDictionary<XName, InstanceValue> data,
+            XName key,
+            out T value
+        )
         {
             InstanceValue instanceValue;
             value = default(T);
@@ -500,11 +614,19 @@ namespace System.ServiceModel.Activities.Dispatcher
                 {
                     if (instanceValue.Value == null)
                     {
-                        throw FxTrace.Exception.AsError(new InstancePersistenceException(SRCore.NullAssignedToValueType(typeof(T))));
+                        throw FxTrace.Exception.AsError(
+                            new InstancePersistenceException(
+                                SRCore.NullAssignedToValueType(typeof(T))
+                            )
+                        );
                     }
                     else
                     {
-                        throw FxTrace.Exception.AsError(new InstancePersistenceException(SRCore.IncorrectValueType(typeof(T), instanceValue.Value.GetType())));
+                        throw FxTrace.Exception.AsError(
+                            new InstancePersistenceException(
+                                SRCore.IncorrectValueType(typeof(T), instanceValue.Value.GetType())
+                            )
+                        );
                     }
                 }
             }
@@ -514,16 +636,29 @@ namespace System.ServiceModel.Activities.Dispatcher
             }
         }
 
-        internal TransactionWaitAsyncResult BeginEnlist(TimeSpan timeout, AsyncCallback callback, object state)
+        internal TransactionWaitAsyncResult BeginEnlist(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfDisposedOrNotOpen();
-            // The transaction to enlist on is in Transaction.Current. The actual enlistment, if needed, will be made in 
+            // The transaction to enlist on is in Transaction.Current. The actual enlistment, if needed, will be made in
             // TransactionWaitAsyncResult when it is notified that it has the transaction lock.
-            return new TransactionWaitAsyncResult(Transaction.Current, this, timeout, callback, state);
+            return new TransactionWaitAsyncResult(
+                Transaction.Current,
+                this,
+                timeout,
+                callback,
+                state
+            );
         }
 
-        [SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.CommunicationObjectThrowIf,
-            Justification = "We are intentionally re-validating the state of the instance after having acquired the transaction lock")]
+        [SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.CommunicationObjectThrowIf,
+            Justification = "We are intentionally re-validating the state of the instance after having acquired the transaction lock"
+        )]
         internal void EndEnlist(IAsyncResult result)
         {
             TransactionWaitAsyncResult.End(result);
@@ -531,10 +666,12 @@ namespace System.ServiceModel.Activities.Dispatcher
             ThrowIfDisposedOrNotOpen();
         }
 
-
         // Returns true if the call was able to obtain the transaction lock; false if we had
         // to queue the request for the lock.
-        internal bool QueueForTransactionLock(Transaction requestingTransaction, TransactionWaitAsyncResult txWaitAsyncResult)
+        internal bool QueueForTransactionLock(
+            Transaction requestingTransaction,
+            TransactionWaitAsyncResult txWaitAsyncResult
+        )
         {
             lock (ThisLock)
             {
@@ -550,7 +687,10 @@ namespace System.ServiceModel.Activities.Dispatcher
                     // No queuing because we weren't already locked by a transaction.
                     return true;
                 }
-                else if ((null != requestingTransaction) && (this.lockingTransaction == requestingTransaction.GetHashCode()))
+                else if (
+                    (null != requestingTransaction)
+                    && (this.lockingTransaction == requestingTransaction.GetHashCode())
+                )
                 {
                     // Same transaction as the locking transaction - no queuing.
                     return true;
@@ -578,7 +718,9 @@ namespace System.ServiceModel.Activities.Dispatcher
                 bool atLeastOneSuccessfullyCompleted = false;
                 if (0 < this.transactionWaiterQueue.Count)
                 {
-                    while ((0 < this.transactionWaiterQueue.Count) && !atLeastOneSuccessfullyCompleted)
+                    while (
+                        (0 < this.transactionWaiterQueue.Count) && !atLeastOneSuccessfullyCompleted
+                    )
                     {
                         dequeuedWaiter = this.transactionWaiterQueue.Dequeue();
 
@@ -595,7 +737,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             this.lockingTransactionObject = null;
                         }
 
-                        atLeastOneSuccessfullyCompleted = dequeuedWaiter.Complete() || atLeastOneSuccessfullyCompleted;
+                        atLeastOneSuccessfullyCompleted =
+                            dequeuedWaiter.Complete() || atLeastOneSuccessfullyCompleted;
 
                         if (this.Detaching)
                         {
@@ -613,7 +756,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             while (0 < this.transactionWaiterQueue.Count)
                             {
                                 dequeuedWaiter = this.transactionWaiterQueue.Dequeue();
-                                atLeastOneSuccessfullyCompleted = dequeuedWaiter.Complete() || atLeastOneSuccessfullyCompleted;
+                                atLeastOneSuccessfullyCompleted =
+                                    dequeuedWaiter.Complete() || atLeastOneSuccessfullyCompleted;
                             }
                         }
 
@@ -623,7 +767,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                         // there won't be any waiters left in the queue at this point.
                         while (0 < this.transactionWaiterQueue.Count)
                         {
-                            TransactionWaitAsyncResult nextWaiter = this.transactionWaiterQueue.Peek();
+                            TransactionWaitAsyncResult nextWaiter =
+                                this.transactionWaiterQueue.Peek();
                             if (0 == this.lockingTransaction)
                             {
                                 // We dequeue this waiter because we shouldn't block transactional waiters
@@ -633,27 +778,29 @@ namespace System.ServiceModel.Activities.Dispatcher
                                 if (null != nextWaiter.Transaction)
                                 {
                                     this.lockingTransactionObject = nextWaiter.Transaction;
-                                    this.lockingTransaction = this.lockingTransactionObject.GetHashCode();
+                                    this.lockingTransaction =
+                                        this.lockingTransactionObject.GetHashCode();
                                 }
                             }
                             else if (null != nextWaiter.Transaction)
                             {
                                 // Stop looking if the new lockingTransaction is different than
-                                // the nextWaiter's transaction. 
+                                // the nextWaiter's transaction.
                                 if (this.lockingTransaction != nextWaiter.Transaction.GetHashCode())
                                 {
-                                    break;  // out of the inner-while
+                                    break; // out of the inner-while
                                 }
                             }
                             else
                             {
                                 // The nextWaiter is non-transational, so it doesn't match the current
                                 // lock holder, so we are done.
-                                break;  // out of the inner-while
+                                break; // out of the inner-while
                             }
 
                             dequeuedWaiter = this.transactionWaiterQueue.Dequeue();
-                            atLeastOneSuccessfullyCompleted = dequeuedWaiter.Complete() || atLeastOneSuccessfullyCompleted;
+                            atLeastOneSuccessfullyCompleted =
+                                dequeuedWaiter.Complete() || atLeastOneSuccessfullyCompleted;
                         }
                     }
                 }
@@ -692,14 +839,22 @@ namespace System.ServiceModel.Activities.Dispatcher
             bool saveIdentity;
             if (!IsInitialized)
             {
-                Fx.Assert(this.directory.InstanceMetadataChanges != null, "We should always be non-null here.");
-                foreach (KeyValuePair<XName, InstanceValue> pair in this.directory.InstanceMetadataChanges)
+                Fx.Assert(
+                    this.directory.InstanceMetadataChanges != null,
+                    "We should always be non-null here."
+                );
+                foreach (
+                    KeyValuePair<
+                        XName,
+                        InstanceValue
+                    > pair in this.directory.InstanceMetadataChanges
+                )
                 {
                     saveCommand.InstanceMetadataChanges.Add(pair.Key, pair.Value);
                 }
                 saveIdentity = this.workflowInstance.DefinitionIdentity != null;
             }
-            else 
+            else
             {
                 saveIdentity = this.workflowInstance.HasBeenUpdated;
             }
@@ -708,11 +863,20 @@ namespace System.ServiceModel.Activities.Dispatcher
             {
                 if (this.workflowInstance.DefinitionIdentity != null)
                 {
-                    saveCommand.InstanceMetadataChanges.Add(Workflow45Namespace.DefinitionIdentity, new InstanceValue(this.workflowInstance.DefinitionIdentity, InstanceValueOptions.None));
+                    saveCommand.InstanceMetadataChanges.Add(
+                        Workflow45Namespace.DefinitionIdentity,
+                        new InstanceValue(
+                            this.workflowInstance.DefinitionIdentity,
+                            InstanceValueOptions.None
+                        )
+                    );
                 }
                 else
                 {
-                    saveCommand.InstanceMetadataChanges.Add(Workflow45Namespace.DefinitionIdentity, InstanceValue.DeletedValue);
+                    saveCommand.InstanceMetadataChanges.Add(
+                        Workflow45Namespace.DefinitionIdentity,
+                        InstanceValue.DeletedValue
+                    );
                 }
             }
         }
@@ -721,7 +885,11 @@ namespace System.ServiceModel.Activities.Dispatcher
         {
             PersistenceContext persistenceContext;
 
-            public CloseAsyncResult(PersistenceContext persistenceContext, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                PersistenceContext persistenceContext,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.persistenceContext = persistenceContext;
@@ -735,7 +903,10 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     if (this.persistenceContext.store != null)
                     {
-                        Fx.Assert(this.persistenceContext.handle != null, "WorkflowInstance failed to call SetHandle - from OnBeginClose.");
+                        Fx.Assert(
+                            this.persistenceContext.handle != null,
+                            "WorkflowInstance failed to call SetHandle - from OnBeginClose."
+                        );
                         this.persistenceContext.handle.Free();
                     }
                     completeSelf = true;
@@ -768,7 +939,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class SaveAsyncResult : TransactedAsyncResult
         {
-            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(HandleEndExecute);
+            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(
+                HandleEndExecute
+            );
             static readonly AsyncCompletion handleEndEnlist = new AsyncCompletion(HandleEndEnlist);
 
             readonly PersistenceContext persistenceContext;
@@ -776,8 +949,14 @@ namespace System.ServiceModel.Activities.Dispatcher
             readonly TimeoutHelper timeoutHelper;
             readonly DependentTransaction transaction;
 
-            public SaveAsyncResult(PersistenceContext persistenceContext, IDictionary<XName, InstanceValue> instance, SaveStatus saveStatus, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public SaveAsyncResult(
+                PersistenceContext persistenceContext,
+                IDictionary<XName, InstanceValue> instance,
+                SaveStatus saveStatus,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.persistenceContext = persistenceContext;
@@ -792,20 +971,24 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     this.persistenceContext.ThrowIfCompleted();
                     this.persistenceContext.ThrowIfNotVisible();
-                    Fx.Assert(!this.persistenceContext.IsInitialized || this.persistenceContext.IsLocked,
-                        "Should not be visible if initialized and not locked.");
+                    Fx.Assert(
+                        !this.persistenceContext.IsInitialized || this.persistenceContext.IsLocked,
+                        "Should not be visible if initialized and not locked."
+                    );
 
                     this.timeoutHelper = new TimeoutHelper(timeout);
 
                     Transaction currentTransaction = Transaction.Current;
                     if (currentTransaction != null)
                     {
-                        this.transaction = currentTransaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                        this.transaction = currentTransaction.DependentClone(
+                            DependentCloneOption.BlockCommitUntilComplete
+                        );
                     }
 
                     if (this.persistenceContext.store != null)
                     {
-                        SaveWorkflowCommand saveCommand = new SaveWorkflowCommand();                        
+                        SaveWorkflowCommand saveCommand = new SaveWorkflowCommand();
                         foreach (KeyValuePair<XName, InstanceValue> value in instance)
                         {
                             saveCommand.InstanceData.Add(value);
@@ -813,12 +996,21 @@ namespace System.ServiceModel.Activities.Dispatcher
                         this.persistenceContext.PopulateActivationMetadata(saveCommand);
                         if (this.persistenceContext.IsSuspended)
                         {
-                            saveCommand.InstanceMetadataChanges.Add(WorkflowServiceNamespace.SuspendReason, new InstanceValue(this.persistenceContext.SuspendedReason));
+                            saveCommand.InstanceMetadataChanges.Add(
+                                WorkflowServiceNamespace.SuspendReason,
+                                new InstanceValue(this.persistenceContext.SuspendedReason)
+                            );
                         }
                         else
                         {
-                            saveCommand.InstanceMetadataChanges.Add(WorkflowServiceNamespace.SuspendReason, InstanceValue.DeletedValue);
-                            saveCommand.InstanceMetadataChanges.Add(WorkflowServiceNamespace.SuspendException, InstanceValue.DeletedValue);
+                            saveCommand.InstanceMetadataChanges.Add(
+                                WorkflowServiceNamespace.SuspendReason,
+                                InstanceValue.DeletedValue
+                            );
+                            saveCommand.InstanceMetadataChanges.Add(
+                                WorkflowServiceNamespace.SuspendException,
+                                InstanceValue.DeletedValue
+                            );
                         }
                         foreach (InstanceKey key in this.persistenceContext.keysToAssociate)
                         {
@@ -846,7 +1038,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             saveCommand,
                             this.timeoutHelper.RemainingTime(),
                             PrepareAsyncCompletion(SaveAsyncResult.handleEndExecute),
-                            this);
+                            this
+                        );
                         if (SyncContinue(result))
                         {
                             Complete(true);
@@ -861,7 +1054,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                         }
                         else
                         {
-                            this.persistenceContext.IsLocked = this.saveStatus != SaveStatus.Unlocked;
+                            this.persistenceContext.IsLocked =
+                                this.saveStatus != SaveStatus.Unlocked;
                         }
                         if (AfterSave())
                         {
@@ -872,7 +1066,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.HandleFreedInDirectory, exception)); 
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {
@@ -921,7 +1120,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                     IAsyncResult result;
                     using (PrepareTransactionalCall(this.transaction))
                     {
-                        result = this.persistenceContext.BeginEnlist(this.timeoutHelper.RemainingTime(), PrepareAsyncCompletion(SaveAsyncResult.handleEndEnlist), this);
+                        result = this.persistenceContext.BeginEnlist(
+                            this.timeoutHelper.RemainingTime(),
+                            PrepareAsyncCompletion(SaveAsyncResult.handleEndEnlist),
+                            this
+                        );
                     }
                     return SyncContinue(result);
                 }
@@ -965,14 +1168,21 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class ReleaseAsyncResult : TransactedAsyncResult
         {
-            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(HandleEndExecute);
+            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(
+                HandleEndExecute
+            );
             static readonly AsyncCompletion handleEndEnlist = new AsyncCompletion(HandleEndEnlist);
 
             readonly PersistenceContext persistenceContext;
             readonly TimeoutHelper timeoutHelper;
             readonly DependentTransaction transaction;
 
-            public ReleaseAsyncResult(PersistenceContext persistenceContext, TimeSpan timeout, AsyncCallback callback, object state)
+            public ReleaseAsyncResult(
+                PersistenceContext persistenceContext,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.persistenceContext = persistenceContext;
@@ -988,21 +1198,30 @@ namespace System.ServiceModel.Activities.Dispatcher
                     Transaction currentTransaction = Transaction.Current;
                     if (currentTransaction != null)
                     {
-                        this.transaction = currentTransaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                        this.transaction = currentTransaction.DependentClone(
+                            DependentCloneOption.BlockCommitUntilComplete
+                        );
                     }
 
                     if (this.persistenceContext.IsVisible)
                     {
-                        if (this.persistenceContext.store != null && this.persistenceContext.IsLocked)
+                        if (
+                            this.persistenceContext.store != null
+                            && this.persistenceContext.IsLocked
+                        )
                         {
-                            SaveWorkflowCommand saveCommand = new SaveWorkflowCommand() { UnlockInstance = true };
+                            SaveWorkflowCommand saveCommand = new SaveWorkflowCommand()
+                            {
+                                UnlockInstance = true,
+                            };
                             this.persistenceContext.PopulateActivationMetadata(saveCommand);
                             IAsyncResult result = this.persistenceContext.store.BeginExecute(
                                 this.persistenceContext.handle,
                                 saveCommand,
                                 this.timeoutHelper.RemainingTime(),
                                 PrepareAsyncCompletion(ReleaseAsyncResult.handleEndExecute),
-                                this);
+                                this
+                            );
                             if (SyncContinue(result))
                             {
                                 Complete(true);
@@ -1029,7 +1248,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.HandleFreedInDirectory, exception)); 
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {
@@ -1074,7 +1298,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                 IAsyncResult result;
                 using (PrepareTransactionalCall(this.transaction))
                 {
-                    result = this.persistenceContext.BeginEnlist(this.timeoutHelper.RemainingTime(), PrepareAsyncCompletion(ReleaseAsyncResult.handleEndEnlist), this);
+                    result = this.persistenceContext.BeginEnlist(
+                        this.timeoutHelper.RemainingTime(),
+                        PrepareAsyncCompletion(ReleaseAsyncResult.handleEndEnlist),
+                        this
+                    );
                 }
                 return SyncContinue(result);
             }
@@ -1117,7 +1345,9 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class AssociateKeysAsyncResult : TransactedAsyncResult
         {
-            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(HandleEndExecute);
+            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(
+                HandleEndExecute
+            );
             static readonly AsyncCompletion handleEndEnlist = new AsyncCompletion(HandleEndEnlist);
 
             readonly PersistenceContext persistenceContext;
@@ -1126,8 +1356,14 @@ namespace System.ServiceModel.Activities.Dispatcher
             readonly TimeoutHelper timeoutHelper;
             readonly DependentTransaction transaction;
 
-            public AssociateKeysAsyncResult(PersistenceContext persistenceContext, ICollection<InstanceKey> associatedKeys, TimeSpan timeout,
-                bool applicationKeys, AsyncCallback callback, object state)
+            public AssociateKeysAsyncResult(
+                PersistenceContext persistenceContext,
+                ICollection<InstanceKey> associatedKeys,
+                TimeSpan timeout,
+                bool applicationKeys,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.persistenceContext = persistenceContext;
@@ -1144,18 +1380,25 @@ namespace System.ServiceModel.Activities.Dispatcher
 
                     this.persistenceContext.ThrowIfCompleted();
                     this.persistenceContext.ThrowIfNotVisible();
-                    Fx.Assert(!this.persistenceContext.IsInitialized || this.persistenceContext.IsLocked,
-                        "Should not be visible if initialized and not locked.");
+                    Fx.Assert(
+                        !this.persistenceContext.IsInitialized || this.persistenceContext.IsLocked,
+                        "Should not be visible if initialized and not locked."
+                    );
 
                     Transaction currentTransaction = Transaction.Current;
                     if (currentTransaction != null)
                     {
-                        this.transaction = currentTransaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                        this.transaction = currentTransaction.DependentClone(
+                            DependentCloneOption.BlockCommitUntilComplete
+                        );
                     }
 
                     // We need to get the transaction lock and enlist on the transaction, if there is one.
-                    IAsyncResult enlistResult = persistenceContext.BeginEnlist(this.timeoutHelper.RemainingTime(), 
-                                      this.PrepareAsyncCompletion(handleEndEnlist), this);
+                    IAsyncResult enlistResult = persistenceContext.BeginEnlist(
+                        this.timeoutHelper.RemainingTime(),
+                        this.PrepareAsyncCompletion(handleEndEnlist),
+                        this
+                    );
                     if (SyncContinue(enlistResult))
                     {
                         Complete(true);
@@ -1169,7 +1412,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.HandleFreedInDirectory, exception)); 
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {
@@ -1214,11 +1462,16 @@ namespace System.ServiceModel.Activities.Dispatcher
                 AssociateKeysAsyncResult thisPtr = (AssociateKeysAsyncResult)result.AsyncState;
                 bool returnValue = false;
 
-                if (!thisPtr.persistenceContext.directory.TryAddAssociations(
-                    thisPtr.persistenceContext,
-                    thisPtr.keysToAssociate,
-                    thisPtr.persistenceContext.keysToAssociate,
-                    thisPtr.applicationKeys ? thisPtr.persistenceContext.keysToDisassociate : null))
+                if (
+                    !thisPtr.persistenceContext.directory.TryAddAssociations(
+                        thisPtr.persistenceContext,
+                        thisPtr.keysToAssociate,
+                        thisPtr.persistenceContext.keysToAssociate,
+                        thisPtr.applicationKeys
+                            ? thisPtr.persistenceContext.keysToDisassociate
+                            : null
+                    )
+                )
                 {
                     lock (thisPtr.persistenceContext.ThisLock)
                     {
@@ -1227,25 +1480,34 @@ namespace System.ServiceModel.Activities.Dispatcher
                     throw Fx.AssertAndThrow("Should only fail to add keys in a ---- with abort.");
                 }
 
-                if (thisPtr.persistenceContext.directory.ConsistencyScope == DurableConsistencyScope.Global)
+                if (
+                    thisPtr.persistenceContext.directory.ConsistencyScope
+                    == DurableConsistencyScope.Global
+                )
                 {
                     // Only do a SetKeysToPersist or Save command if we have keys to associate or disassociate.
                     // It's possible that we got invoked with a key that was already in the
                     // AssociatedKeys collection.
-                    if ((thisPtr.persistenceContext.keysToAssociate.Count != 0) ||
-                        ((thisPtr.persistenceContext.keysToDisassociate.Count != 0) &&
-                         (thisPtr.applicationKeys)))
+                    if (
+                        (thisPtr.persistenceContext.keysToAssociate.Count != 0)
+                        || (
+                            (thisPtr.persistenceContext.keysToDisassociate.Count != 0)
+                            && (thisPtr.applicationKeys)
+                        )
+                    )
                     {
                         if (thisPtr.persistenceContext.store != null)
                         {
                             SaveWorkflowCommand saveCommand = new SaveWorkflowCommand();
                             foreach (InstanceKey key in thisPtr.persistenceContext.keysToAssociate)
-                            {                                
+                            {
                                 saveCommand.InstanceKeysToAssociate.Add(key.Value, key.Metadata);
                             }
                             if (thisPtr.applicationKeys)
                             {
-                                foreach (InstanceKey key in thisPtr.persistenceContext.keysToDisassociate)
+                                foreach (
+                                    InstanceKey key in thisPtr.persistenceContext.keysToDisassociate
+                                )
                                 {
                                     // We are going to Complete and Disassociate with the same Save command.
                                     saveCommand.InstanceKeysToComplete.Add(key.Value);
@@ -1259,8 +1521,11 @@ namespace System.ServiceModel.Activities.Dispatcher
                                     thisPtr.persistenceContext.handle,
                                     saveCommand,
                                     thisPtr.timeoutHelper.RemainingTime(),
-                                    thisPtr.PrepareAsyncCompletion(AssociateKeysAsyncResult.handleEndExecute),
-                                    thisPtr);
+                                    thisPtr.PrepareAsyncCompletion(
+                                        AssociateKeysAsyncResult.handleEndExecute
+                                    ),
+                                    thisPtr
+                                );
                             }
                             returnValue = thisPtr.SyncContinue(beginExecuteResult);
                         }
@@ -1315,13 +1580,21 @@ namespace System.ServiceModel.Activities.Dispatcher
 
         class UpdateSuspendMetadataAsyncResult : AsyncResult
         {
-            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(HandleEndExecute);
+            static readonly AsyncCompletion handleEndExecute = new AsyncCompletion(
+                HandleEndExecute
+            );
 
             readonly PersistenceContext persistenceContext;
             readonly TimeoutHelper timeoutHelper;
             readonly DependentTransaction transaction;
 
-            public UpdateSuspendMetadataAsyncResult(PersistenceContext persistenceContext, Exception reason, TimeSpan timeout, AsyncCallback callback, object state)
+            public UpdateSuspendMetadataAsyncResult(
+                PersistenceContext persistenceContext,
+                Exception reason,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.persistenceContext = persistenceContext;
@@ -1337,15 +1610,24 @@ namespace System.ServiceModel.Activities.Dispatcher
                     Transaction currentTransaction = Transaction.Current;
                     if (currentTransaction != null)
                     {
-                        this.transaction = currentTransaction.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                        this.transaction = currentTransaction.DependentClone(
+                            DependentCloneOption.BlockCommitUntilComplete
+                        );
                     }
 
                     if (this.persistenceContext.store != null)
                     {
                         SaveWorkflowCommand saveCommand = new SaveWorkflowCommand();
                         this.persistenceContext.PopulateActivationMetadata(saveCommand);
-                        saveCommand.InstanceMetadataChanges[WorkflowServiceNamespace.SuspendReason] = new InstanceValue(reason.Message);
-                        saveCommand.InstanceMetadataChanges[WorkflowServiceNamespace.SuspendException] = new InstanceValue(reason, InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional);
+                        saveCommand.InstanceMetadataChanges[
+                            WorkflowServiceNamespace.SuspendReason
+                        ] = new InstanceValue(reason.Message);
+                        saveCommand.InstanceMetadataChanges[
+                            WorkflowServiceNamespace.SuspendException
+                        ] = new InstanceValue(
+                            reason,
+                            InstanceValueOptions.WriteOnly | InstanceValueOptions.Optional
+                        );
                         saveCommand.UnlockInstance = true;
 
                         IAsyncResult result = this.persistenceContext.store.BeginExecute(
@@ -1353,7 +1635,8 @@ namespace System.ServiceModel.Activities.Dispatcher
                             saveCommand,
                             this.timeoutHelper.RemainingTime(),
                             PrepareAsyncCompletion(handleEndExecute),
-                            this);
+                            this
+                        );
                         if (SyncContinue(result))
                         {
                             Complete(true);
@@ -1367,7 +1650,12 @@ namespace System.ServiceModel.Activities.Dispatcher
                 }
                 catch (OperationCanceledException exception)
                 {
-                    throw FxTrace.Exception.AsError(new CommunicationObjectAbortedException(SR.HandleFreedInDirectory, exception));
+                    throw FxTrace.Exception.AsError(
+                        new CommunicationObjectAbortedException(
+                            SR.HandleFreedInDirectory,
+                            exception
+                        )
+                    );
                 }
                 catch (TimeoutException)
                 {
@@ -1400,7 +1688,8 @@ namespace System.ServiceModel.Activities.Dispatcher
 
             static bool HandleEndExecute(IAsyncResult result)
             {
-                UpdateSuspendMetadataAsyncResult thisPtr = (UpdateSuspendMetadataAsyncResult)result.AsyncState;
+                UpdateSuspendMetadataAsyncResult thisPtr = (UpdateSuspendMetadataAsyncResult)
+                    result.AsyncState;
                 thisPtr.persistenceContext.store.EndExecute(result);
                 return true;
             }

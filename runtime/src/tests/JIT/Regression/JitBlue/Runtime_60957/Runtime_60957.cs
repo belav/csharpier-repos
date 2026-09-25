@@ -72,7 +72,8 @@ namespace mdarray
         static int test5(int[] a)
         {
             int sum = 0;
-            for (int i = 0; i < a.GetLength(0); i++) {
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
                 sum += a[i];
             }
             return sum;
@@ -82,7 +83,8 @@ namespace mdarray
         static int test6(int[] a)
         {
             int sum = 0;
-            for (int i = a.GetLowerBound(0); i <= a.GetUpperBound(0); i++) {
+            for (int i = a.GetLowerBound(0); i <= a.GetUpperBound(0); i++)
+            {
                 sum += a[i];
             }
             return sum;
@@ -92,9 +94,11 @@ namespace mdarray
         static int test7(int[,] a)
         {
             int sum = 0;
-            for (int i = 0; i < a.GetLength(0); i++) {
-                for (int j = 0; j < a.GetLength(1); j++) {
-                    sum += a[i,j];
+            for (int i = 0; i < a.GetLength(0); i++)
+            {
+                for (int j = 0; j < a.GetLength(1); j++)
+                {
+                    sum += a[i, j];
                 }
             }
             return sum;
@@ -104,9 +108,11 @@ namespace mdarray
         static int test8(int[,] a)
         {
             int sum = 0;
-            for (int i = a.GetLowerBound(0); i <= a.GetUpperBound(0); i++) {
-                for (int j = a.GetLowerBound(1); j <= a.GetUpperBound(1); j++) {
-                    sum += a[i,j];
+            for (int i = a.GetLowerBound(0); i <= a.GetUpperBound(0); i++)
+            {
+                for (int j = a.GetLowerBound(1); j <= a.GetUpperBound(1); j++)
+                {
+                    sum += a[i, j];
                 }
             }
             return sum;
@@ -116,9 +122,11 @@ namespace mdarray
         static int test9(System.Array a)
         {
             int sum = 0;
-            for (int i = a.GetLowerBound(0); i <= a.GetUpperBound(0); i++) {
-                for (int j = a.GetLowerBound(1); j <= a.GetUpperBound(1); j++) {
-                    sum += (int)a.GetValue(i,j);
+            for (int i = a.GetLowerBound(0); i <= a.GetUpperBound(0); i++)
+            {
+                for (int j = a.GetLowerBound(1); j <= a.GetUpperBound(1); j++)
+                {
+                    sum += (int)a.GetValue(i, j);
                 }
             }
             return sum;
@@ -146,9 +154,11 @@ namespace mdarray
         static int test11(int[,] a)
         {
             int sum = 0;
-            for (int i = 0; i < GetArray(a).GetLength(0); i++) {
-                for (int j = 0; j < GetArray(a).GetLength(1); j++) {
-                    sum += a[i,j];
+            for (int i = 0; i < GetArray(a).GetLength(0); i++)
+            {
+                for (int j = 0; j < GetArray(a).GetLength(1); j++)
+                {
+                    sum += a[i, j];
                 }
             }
             return sum;
@@ -158,9 +168,11 @@ namespace mdarray
         static int test12(int[,] a)
         {
             int sum = 0;
-            for (int i = GetArray(a).GetLowerBound(0); i <= GetArray(a).GetUpperBound(0); i++) {
-                for (int j = GetArray(a).GetLowerBound(1); j <= GetArray(a).GetUpperBound(1); j++) {
-                    sum += a[i,j];
+            for (int i = GetArray(a).GetLowerBound(0); i <= GetArray(a).GetUpperBound(0); i++)
+            {
+                for (int j = GetArray(a).GetLowerBound(1); j <= GetArray(a).GetUpperBound(1); j++)
+                {
+                    sum += a[i, j];
                 }
             }
             return sum;
@@ -196,9 +208,11 @@ namespace mdarray
         static int test14(S1 s)
         {
             int sum = 0;
-            for (int i = 0; i < s.a.GetLength(0); i++) {
-                for (int j = 0; j < s.a.GetLength(1); j++) {
-                    sum += s.a[i,j];
+            for (int i = 0; i < s.a.GetLength(0); i++)
+            {
+                for (int j = 0; j < s.a.GetLength(1); j++)
+                {
+                    sum += s.a[i, j];
                 }
             }
             return sum;
@@ -208,9 +222,11 @@ namespace mdarray
         static int test15(S1 s)
         {
             int sum = 0;
-            for (int i = s.a.GetLowerBound(0); i <= s.a.GetUpperBound(0); i++) {
-                for (int j = s.a.GetLowerBound(1); j <= s.a.GetUpperBound(1); j++) {
-                    sum += s.a[i,j];
+            for (int i = s.a.GetLowerBound(0); i <= s.a.GetUpperBound(0); i++)
+            {
+                for (int j = s.a.GetLowerBound(1); j <= s.a.GetUpperBound(1); j++)
+                {
+                    sum += s.a[i, j];
                 }
             }
             return sum;
@@ -243,9 +259,11 @@ namespace mdarray
         static int test17(S2 s)
         {
             int sum = 0;
-            for (int i = 0; i < s.a.GetLength(0); i++) {
-                for (int j = 0; j < s.a.GetLength(1); j++) {
-                    sum += s.a[i,j];
+            for (int i = 0; i < s.a.GetLength(0); i++)
+            {
+                for (int j = 0; j < s.a.GetLength(1); j++)
+                {
+                    sum += s.a[i, j];
                 }
             }
             return sum;
@@ -255,9 +273,11 @@ namespace mdarray
         static int test18(S2 s)
         {
             int sum = 0;
-            for (int i = s.a.GetLowerBound(0); i <= s.a.GetUpperBound(0); i++) {
-                for (int j = s.a.GetLowerBound(1); j <= s.a.GetUpperBound(1); j++) {
-                    sum += s.a[i,j];
+            for (int i = s.a.GetLowerBound(0); i <= s.a.GetUpperBound(0); i++)
+            {
+                for (int j = s.a.GetLowerBound(1); j <= s.a.GetUpperBound(1); j++)
+                {
+                    sum += s.a[i, j];
                 }
             }
             return sum;
@@ -284,9 +304,11 @@ namespace mdarray
         static int test20(int[][,] a)
         {
             int sum = 0;
-            for (int i = 0; i < a[0].GetLength(0); i++) {
-                for (int j = 0; j < a[0].GetLength(1); j++) {
-                    sum += a[0][i,j];
+            for (int i = 0; i < a[0].GetLength(0); i++)
+            {
+                for (int j = 0; j < a[0].GetLength(1); j++)
+                {
+                    sum += a[0][i, j];
                 }
             }
             return sum;
@@ -296,9 +318,11 @@ namespace mdarray
         static int test21(int[][,] a)
         {
             int sum = 0;
-            for (int i = a[0].GetLowerBound(0); i <= a[0].GetUpperBound(0); i++) {
-                for (int j = a[0].GetLowerBound(1); j <= a[0].GetUpperBound(1); j++) {
-                    sum += a[0][i,j];
+            for (int i = a[0].GetLowerBound(0); i <= a[0].GetUpperBound(0); i++)
+            {
+                for (int j = a[0].GetLowerBound(1); j <= a[0].GetUpperBound(1); j++)
+                {
+                    sum += a[0][i, j];
                 }
             }
             return sum;
@@ -315,7 +339,9 @@ namespace mdarray
         {
             if (value != expected)
             {
-                Console.WriteLine($"Test {test} failed: value {value} != expected value {expected}");
+                Console.WriteLine(
+                    $"Test {test} failed: value {value} != expected value {expected}"
+                );
                 result = FAIL;
             }
         }
@@ -324,14 +350,17 @@ namespace mdarray
         public static int TestEntryPoint()
         {
             const int n = 10;
-            int[,] a = new int[n,n];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    a[i,j] = i + j;
+            int[,] a = new int[n, n];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    a[i, j] = i + j;
                 }
             }
             int[] b = new int[n];
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++)
+            {
                 b[i] = i;
             }
 
@@ -422,10 +451,12 @@ namespace mdarray
             // The following get the array from an array element.
 
             int[][,] a2 = new int[1][,];
-            a2[0] = new int[n,n];
-            for (int i = 0; i < n; i++) {
-                for (int j = 0; j < n; j++) {
-                    a2[0][i,j] = i + j;
+            a2[0] = new int[n, n];
+            for (int i = 0; i < n; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    a2[0][i, j] = i + j;
                 }
             }
 

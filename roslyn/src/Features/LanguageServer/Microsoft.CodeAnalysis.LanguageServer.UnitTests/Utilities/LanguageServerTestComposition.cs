@@ -14,11 +14,20 @@ internal sealed class LanguageServerTestComposition
     /// </summary>
     private const string DevKitExtensionSubdirectory = "DevKit";
 
-    private const string DevKitAssemblyFileName = "Microsoft.VisualStudio.LanguageServices.DevKit.dll";
+    private const string DevKitAssemblyFileName =
+        "Microsoft.VisualStudio.LanguageServices.DevKit.dll";
 
-    private static string GetDevKitExtensionPath()
-        => Path.Combine(AppContext.BaseDirectory, DevKitExtensionSubdirectory, DevKitAssemblyFileName);
+    private static string GetDevKitExtensionPath() =>
+        Path.Combine(AppContext.BaseDirectory, DevKitExtensionSubdirectory, DevKitAssemblyFileName);
 
-    public static Task<ExportProvider> CreateExportProviderAsync(ILoggerFactory loggerFactory, bool includeDevKitComponents)
-        => ExportProviderBuilder.CreateExportProviderAsync(extensionAssemblyPaths: includeDevKitComponents ? [GetDevKitExtensionPath()] : Array.Empty<string>(), loggerFactory: loggerFactory);
+    public static Task<ExportProvider> CreateExportProviderAsync(
+        ILoggerFactory loggerFactory,
+        bool includeDevKitComponents
+    ) =>
+        ExportProviderBuilder.CreateExportProviderAsync(
+            extensionAssemblyPaths: includeDevKitComponents
+                ? [GetDevKitExtensionPath()]
+                : Array.Empty<string>(),
+            loggerFactory: loggerFactory
+        );
 }

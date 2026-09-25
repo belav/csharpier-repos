@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol method,
             ImmutableArray<BoundExpression> arguments,
             BitVector defaultArguments,
-            bool expanded)
+            bool expanded
+        )
         {
             this.Method = method;
             this.Arguments = arguments;
@@ -34,7 +35,12 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static MethodArgumentInfo CreateParameterlessMethod(MethodSymbol method)
         {
             Debug.Assert(method.ParameterCount == 0);
-            return new MethodArgumentInfo(method, arguments: ImmutableArray<BoundExpression>.Empty, defaultArguments: default, expanded: false);
+            return new MethodArgumentInfo(
+                method,
+                arguments: ImmutableArray<BoundExpression>.Empty,
+                defaultArguments: default,
+                expanded: false
+            );
         }
     }
 }

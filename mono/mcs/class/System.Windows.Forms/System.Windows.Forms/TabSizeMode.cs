@@ -22,13 +22,12 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
-namespace System.Windows.Forms {
-
-	public enum TabSizeMode {
-		Normal,
-		FillToRight,
-		Fixed
-	}
+namespace System.Windows.Forms
+{
+    public enum TabSizeMode
+    {
+        Normal,
+        FillToRight,
+        Fixed,
+    }
 }
-

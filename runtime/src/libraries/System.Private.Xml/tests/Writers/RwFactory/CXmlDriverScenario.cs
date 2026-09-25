@@ -14,22 +14,45 @@ namespace System.Xml.RwFactoryWriterTests
         private CXmlDriverParam _xmlDriverParams = null;
         private CultureInfo _requiredCultureInfo = null;
 
-        public CXmlDriverParam XmlDriverParam { get { return _xmlDriverParams; } set { _xmlDriverParams = value; } }
-        public CultureInfo RequiredCultureInfo { get { return _requiredCultureInfo; } set { _requiredCultureInfo = value; } }
-        public new CXmlDriverVariation CurVariation { get { return (CXmlDriverVariation)base.CurVariation; } }
+        public CXmlDriverParam XmlDriverParam
+        {
+            get { return _xmlDriverParams; }
+            set { _xmlDriverParams = value; }
+        }
+        public CultureInfo RequiredCultureInfo
+        {
+            get { return _requiredCultureInfo; }
+            set { _requiredCultureInfo = value; }
+        }
+        public new CXmlDriverVariation CurVariation
+        {
+            get { return (CXmlDriverVariation)base.CurVariation; }
+        }
 
         public abstract int ExecuteVariation(CXmlDriverParam param);
     }
-
 
     internal class CXmlDriverErrorTestCase : CTestCase
     {
         private Exception _exception;
         private tagVARIATION_STATUS _returnCode;
 
-        internal CXmlDriverErrorTestCase(string name, string desc, Exception e, CTestModule testModule) : this(name, desc, e, tagVARIATION_STATUS.eVariationStatusAborted, testModule) { }
-        internal CXmlDriverErrorTestCase(string name, string desc, Exception e, tagVARIATION_STATUS returnCode, CTestModule testModule) :
-            base(testModule, (desc.Length > 1000 ? desc.Substring(0, 1000) + "..." : desc))
+        internal CXmlDriverErrorTestCase(
+            string name,
+            string desc,
+            Exception e,
+            CTestModule testModule
+        )
+            : this(name, desc, e, tagVARIATION_STATUS.eVariationStatusAborted, testModule) { }
+
+        internal CXmlDriverErrorTestCase(
+            string name,
+            string desc,
+            Exception e,
+            tagVARIATION_STATUS returnCode,
+            CTestModule testModule
+        )
+            : base(testModule, (desc.Length > 1000 ? desc.Substring(0, 1000) + "..." : desc))
         {
             this.Name = name;
             _exception = e;
@@ -47,11 +70,17 @@ namespace System.Xml.RwFactoryWriterTests
         }
     }
 
-
     internal class CXmlDriverEmptyTestCase : CTestCase
     {
         private string _message;
-        internal CXmlDriverEmptyTestCase(string name, string desc, string message, CTestModule testModule) : base(testModule, desc)
+
+        internal CXmlDriverEmptyTestCase(
+            string name,
+            string desc,
+            string message,
+            CTestModule testModule
+        )
+            : base(testModule, desc)
         {
             this.Name = name;
             _message = message;
@@ -70,7 +99,8 @@ namespace System.Xml.RwFactoryWriterTests
         private string[] _filters;
         private string _defaultSection;
 
-        public XmlDriverScenario(string desc, string controlFile) : base(desc)
+        public XmlDriverScenario(string desc, string controlFile)
+            : base(desc)
         {
             _spec = controlFile;
             _filters = null;
@@ -83,7 +113,7 @@ namespace System.Xml.RwFactoryWriterTests
             get { return _spec; }
         }
 
-        public virtual new string Filter
+        public new virtual string Filter
         {
             get { return _filters[0]; }
             set { _filters = new string[] { value }; }

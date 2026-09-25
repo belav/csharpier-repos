@@ -12,7 +12,11 @@ namespace System.IO.Ports.Tests
 {
     public class ctor_str : PortsTest
     {
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         [Fact]
         public void COM1()
@@ -137,15 +141,21 @@ namespace System.IO.Ports.Tests
             {
                 if (null == expectedException)
                 {
-                    Assert.Fail($"Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{e}");
+                    Assert.Fail(
+                        $"Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{e}"
+                    );
                 }
                 else if (throwAt == ThrowAt.Open)
                 {
-                    Assert.Fail($"Err_88916adfa Expected {expectedException} to be thrown at Open and the following was thrown at Set: \n{e}");
+                    Assert.Fail(
+                        $"Err_88916adfa Expected {expectedException} to be thrown at Open and the following was thrown at Set: \n{e}"
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Assert.Fail($"Err_90282ahwhp Expected {expectedException} to be thrown and the following was thrown: \n{e}");
+                    Assert.Fail(
+                        $"Err_90282ahwhp Expected {expectedException} to be thrown and the following was thrown: \n{e}"
+                    );
                 }
             }
         }

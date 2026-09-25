@@ -18,15 +18,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> sideEffects,
             BoundExpression value,
             TypeSymbol type,
-            bool hasErrors = false)
-            : this(syntax, locals, MakeStatements(sideEffects), value, type, hasErrors)
-        {
-        }
+            bool hasErrors = false
+        )
+            : this(syntax, locals, MakeStatements(sideEffects), value, type, hasErrors) { }
 
-        private static ImmutableArray<BoundStatement> MakeStatements(ImmutableArray<BoundExpression> expressions)
+        private static ImmutableArray<BoundStatement> MakeStatements(
+            ImmutableArray<BoundExpression> expressions
+        )
         {
             return expressions.SelectAsArray<BoundExpression, BoundStatement>(
-                expression => new BoundExpressionStatement(expression.Syntax, expression, expression.HasErrors));
+                expression => new BoundExpressionStatement(
+                    expression.Syntax,
+                    expression,
+                    expression.HasErrors
+                )
+            );
         }
     }
 }

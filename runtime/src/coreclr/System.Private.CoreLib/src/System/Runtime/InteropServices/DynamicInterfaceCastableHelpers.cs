@@ -13,31 +13,66 @@ namespace System.Runtime.InteropServices
     internal static class DynamicInterfaceCastableHelpers
     {
         [StackTraceHidden]
-        internal static bool IsInterfaceImplemented(IDynamicInterfaceCastable castable, RuntimeType interfaceType, bool throwIfNotImplemented)
+        internal static bool IsInterfaceImplemented(
+            IDynamicInterfaceCastable castable,
+            RuntimeType interfaceType,
+            bool throwIfNotImplemented
+        )
         {
-            bool isImplemented= castable.IsInterfaceImplemented(new RuntimeTypeHandle(interfaceType), throwIfNotImplemented);
+            bool isImplemented = castable.IsInterfaceImplemented(
+                new RuntimeTypeHandle(interfaceType),
+                throwIfNotImplemented
+            );
             if (!isImplemented && throwIfNotImplemented)
-                throw new InvalidCastException(SR.Format(SR.InvalidCast_FromTo, castable.GetType(), interfaceType));
+                throw new InvalidCastException(
+                    SR.Format(SR.InvalidCast_FromTo, castable.GetType(), interfaceType)
+                );
 
             return isImplemented;
         }
 
         [StackTraceHidden]
-        internal static RuntimeType? GetInterfaceImplementation(IDynamicInterfaceCastable castable, RuntimeType interfaceType)
+        internal static RuntimeType? GetInterfaceImplementation(
+            IDynamicInterfaceCastable castable,
+            RuntimeType interfaceType
+        )
         {
-            RuntimeTypeHandle handle = castable.GetInterfaceImplementation(new RuntimeTypeHandle(interfaceType));
+            RuntimeTypeHandle handle = castable.GetInterfaceImplementation(
+                new RuntimeTypeHandle(interfaceType)
+            );
             if (handle.Equals(default))
-                throw new InvalidCastException(SR.Format(SR.InvalidCast_FromTo, castable.GetType(), interfaceType));
+                throw new InvalidCastException(
+                    SR.Format(SR.InvalidCast_FromTo, castable.GetType(), interfaceType)
+                );
 
             RuntimeType implType = handle.GetRuntimeType();
             if (!implType.IsInterface)
-                throw new InvalidOperationException(SR.Format(SR.IDynamicInterfaceCastable_NotInterface, implType.ToString()));
+                throw new InvalidOperationException(
+                    SR.Format(SR.IDynamicInterfaceCastable_NotInterface, implType.ToString())
+                );
 
-            if (!implType.IsDefined(typeof(DynamicInterfaceCastableImplementationAttribute), inherit: false))
-                throw new InvalidOperationException(SR.Format(SR.IDynamicInterfaceCastable_MissingImplementationAttribute, implType, nameof(DynamicInterfaceCastableImplementationAttribute)));
+            if (
+                !implType.IsDefined(
+                    typeof(DynamicInterfaceCastableImplementationAttribute),
+                    inherit: false
+                )
+            )
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.IDynamicInterfaceCastable_MissingImplementationAttribute,
+                        implType,
+                        nameof(DynamicInterfaceCastableImplementationAttribute)
+                    )
+                );
 
             if (!implType.IsAssignableTo(interfaceType))
-                throw new InvalidOperationException(SR.Format(SR.IDynamicInterfaceCastable_DoesNotImplementRequested, implType, interfaceType));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.IDynamicInterfaceCastable_DoesNotImplementRequested,
+                        implType,
+                        interfaceType
+                    )
+                );
 
             return implType;
         }

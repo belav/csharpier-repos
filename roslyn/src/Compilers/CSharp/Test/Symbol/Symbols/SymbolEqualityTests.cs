@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
         [Fact]
         public void SynthesizedIntrinsicOperatorSymbol()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M()
@@ -53,7 +54,8 @@ class C
         [Fact]
         public void ReducedExtensionMethodSymbol()
         {
-            var src = @"
+            var src =
+                @"
 public static class Extensions
 {
     public static void StringExt(this object o)
@@ -76,7 +78,10 @@ class C
             comp.VerifyDiagnostics(
                 // (17,9): warning CS8604: Possible null reference argument for parameter 'o' in 'void Extensions.StringExt(object o)'.
                 //         s.StringExt();
-                Diagnostic(ErrorCode.WRN_NullReferenceArgument, "s").WithArguments("o", "void Extensions.StringExt(object o)").WithLocation(17, 9));
+                Diagnostic(ErrorCode.WRN_NullReferenceArgument, "s")
+                    .WithArguments("o", "void Extensions.StringExt(object o)")
+                    .WithLocation(17, 9)
+            );
 
             var tree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(tree);
@@ -103,7 +108,8 @@ class C
         [Fact]
         public void LocalFunctionSymbol()
         {
-            var src = @"
+            var src =
+                @"
 class C
 {
     void M()
@@ -142,7 +148,8 @@ class C
         [Fact]
         public void SubstitutedMethodSymbol()
         {
-            var src = @"
+            var src =
+                @"
 class C<T>
 {
     public static void M<U>(T t, U u) {}
@@ -181,7 +188,7 @@ class B
         public void Internal_Symbol_Equality()
         {
             var source =
-@"
+                @"
 public class A
 {
     public static A field1;
@@ -212,7 +219,7 @@ public class A
         public void Internal_Type_Equality_With_No_Nullability()
         {
             var source =
-@"
+                @"
 public class A
 {
     public static A field1;
@@ -225,16 +232,14 @@ public class A
             var type1 = ((IFieldSymbol)comp.GetMember("A.field1")).Type;
             var type2 = ((IFieldSymbol)comp.GetMember("A.field2")).Type;
 
-            VerifyEquality(type1, type2,
-                expectedIncludeNullability: true
-            );
+            VerifyEquality(type1, type2, expectedIncludeNullability: true);
         }
 
         [Fact]
         public void Internal_Type_Equality_With_Top_Level_Nullability()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A
@@ -249,28 +254,32 @@ public class A
             var type1 = ((IFieldSymbol)comp.GetMember("A.field1")).Type;
             var type2 = ((IFieldSymbol)comp.GetMember("A.field2")).Type;
 
-            VerifyEquality(type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None), type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+            VerifyEquality(
+                type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+                type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
                 expectedIncludeNullability: true // We don't consider top-level nullability
-                );
+            );
 
-            VerifyEquality(type1, type2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(type1, type2, expectedIncludeNullability: false);
 
-            VerifyEquality(type1, type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+            VerifyEquality(
+                type1,
+                type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
                 expectedIncludeNullability: false
-                );
+            );
 
-            VerifyEquality(type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None), type2,
+            VerifyEquality(
+                type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+                type2,
                 expectedIncludeNullability: false
-                );
+            );
         }
 
         [Fact]
         public void Internal_Type_Equality_With_Nested_Nullability()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A<T>
@@ -285,16 +294,18 @@ public class A<T>
             var type1 = ((IFieldSymbol)comp.GetMember("A.field1")).Type;
             var type2 = ((IFieldSymbol)comp.GetMember("A.field2")).Type;
 
-            VerifyEquality(type1, type2,
+            VerifyEquality(
+                type1,
+                type2,
                 expectedIncludeNullability: false // nested nullability is different
-                );
+            );
         }
 
         [Fact]
         public void Internal_Type_Equality_With_Same_Nested_Nullability()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A<T>
@@ -309,16 +320,18 @@ public class A<T>
             var type1 = ((IFieldSymbol)comp.GetMember("A.field1")).Type;
             var type2 = ((IFieldSymbol)comp.GetMember("A.field2")).Type;
 
-            VerifyEquality(type1, type2,
+            VerifyEquality(
+                type1,
+                type2,
                 expectedIncludeNullability: true // nested nullability is the same
-                );
+            );
         }
 
         [Fact]
         public void Internal_Type_Equality_From_Metadata()
         {
             var source1 =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A<T>
@@ -330,7 +343,7 @@ public class A<T>
             comp1.VerifyDiagnostics();
 
             var source2 =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class B
@@ -338,31 +351,28 @@ public class B
     public static A<object?> field2;
 }
 ";
-            var comp2 = (Compilation)CreateCompilation(source2, new[] { new CSharpCompilationReference((CSharpCompilation)comp1) });
+            var comp2 = (Compilation)CreateCompilation(
+                source2,
+                new[] { new CSharpCompilationReference((CSharpCompilation)comp1) }
+            );
             comp2.VerifyDiagnostics();
 
             var type1comp1 = ((IFieldSymbol)comp1.GetMember("A.field1")).Type;
             var type1comp2 = ((IFieldSymbol)comp2.GetMember("A.field1")).Type;
             var type2 = ((IFieldSymbol)comp2.GetMember("B.field2")).Type;
 
-            VerifyEquality(type1comp1, type1comp2,
-                expectedIncludeNullability: true
-                );
+            VerifyEquality(type1comp1, type1comp2, expectedIncludeNullability: true);
 
-            VerifyEquality(type1comp1, type2,
-                expectedIncludeNullability: true
-                );
+            VerifyEquality(type1comp1, type2, expectedIncludeNullability: true);
 
-            VerifyEquality(type1comp2, type2,
-                expectedIncludeNullability: true
-                );
+            VerifyEquality(type1comp2, type2, expectedIncludeNullability: true);
         }
 
         [Fact]
         public void Internal_Symbol_Equality_With_Null()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A<T>
@@ -379,24 +389,36 @@ public class A<T>
 
             Assert.False(SymbolEqualityComparer.Default.Equals(symbol1, symbol2));
             Assert.False(SymbolEqualityComparer.Default.Equals(symbol2, symbol1));
-            Assert.NotEqual(SymbolEqualityComparer.Default.GetHashCode(symbol1), SymbolEqualityComparer.Default.GetHashCode(symbol2));
+            Assert.NotEqual(
+                SymbolEqualityComparer.Default.GetHashCode(symbol1),
+                SymbolEqualityComparer.Default.GetHashCode(symbol2)
+            );
             Assert.False(SymbolEqualityComparer.ConsiderEverything.Equals(symbol1, symbol2));
             Assert.False(SymbolEqualityComparer.ConsiderEverything.Equals(symbol2, symbol1));
-            Assert.NotEqual(SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol1), SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol2));
+            Assert.NotEqual(
+                SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol1),
+                SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol2)
+            );
 
             Assert.True(SymbolEqualityComparer.Default.Equals(symbol2, symbol3));
             Assert.True(SymbolEqualityComparer.Default.Equals(symbol3, symbol2));
-            Assert.Equal(SymbolEqualityComparer.Default.GetHashCode(symbol2), SymbolEqualityComparer.Default.GetHashCode(symbol3));
+            Assert.Equal(
+                SymbolEqualityComparer.Default.GetHashCode(symbol2),
+                SymbolEqualityComparer.Default.GetHashCode(symbol3)
+            );
             Assert.True(SymbolEqualityComparer.ConsiderEverything.Equals(symbol2, symbol3));
             Assert.True(SymbolEqualityComparer.ConsiderEverything.Equals(symbol3, symbol2));
-            Assert.Equal(SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol2), SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol3));
+            Assert.Equal(
+                SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol2),
+                SymbolEqualityComparer.ConsiderEverything.GetHashCode(symbol3)
+            );
         }
 
         [Fact]
         public void SemanticModel_Symbol_Equality()
         {
             var source =
-@"
+                @"
 public class A
 {
     public static A field1;
@@ -408,8 +430,10 @@ public class A
 
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
@@ -434,7 +458,7 @@ public class A
         public void SemanticModel_Type_Equality_With_No_Nullability()
         {
             var source =
-@"
+                @"
 public class A
 {
     public static A field1;
@@ -446,24 +470,28 @@ public class A
 
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 = ((IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])).Type;
-            var type2 = ((IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
-            VerifyEquality(type1, type2,
-                expectedIncludeNullability: true
-            );
+            VerifyEquality(type1, type2, expectedIncludeNullability: true);
         }
 
         [Fact]
         public void SemanticModel_Type_Equality_With_Top_Level_Nullability()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A
@@ -477,36 +505,46 @@ public class A
 
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 = ((IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])).Type;
-            var type2 = ((IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
-            VerifyEquality(type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None), type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+            VerifyEquality(
+                type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+                type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
                 expectedIncludeNullability: true // We don't consider top-level nullability
-                );
+            );
 
-            VerifyEquality(type1, type2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(type1, type2, expectedIncludeNullability: false);
 
-            VerifyEquality(type1, type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+            VerifyEquality(
+                type1,
+                type2.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
                 expectedIncludeNullability: false
-                );
+            );
 
-            VerifyEquality(type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None), type2,
+            VerifyEquality(
+                type1.WithNullableAnnotation(CodeAnalysis.NullableAnnotation.None),
+                type2,
                 expectedIncludeNullability: false
-                );
+            );
         }
 
         [Fact]
         public void SemanticModel_Type_Equality_With_Nested_Nullability()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A<T>
@@ -520,24 +558,32 @@ public class A<T>
 
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 = ((IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])).Type;
-            var type2 = ((IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
-            VerifyEquality(type1, type2,
+            VerifyEquality(
+                type1,
+                type2,
                 expectedIncludeNullability: false // nested nullability is different
-                );
+            );
         }
 
         [Fact]
         public void SemanticModel_Type_Equality_With_Same_Nested_Nullability()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A<T>
@@ -551,24 +597,32 @@ public class A<T>
 
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 = ((IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])).Type;
-            var type2 = ((IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
-            VerifyEquality(type1, type2,
+            VerifyEquality(
+                type1,
+                type2,
                 expectedIncludeNullability: true // nested nullability is the same
-                );
+            );
         }
 
         [Fact]
         public void SemanticModel_Method_Equality()
         {
             var source =
-@"
+                @"
 #nullable enable
 public class A
 {
@@ -587,24 +641,24 @@ public class A
 
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
-            var create1Syntax = (InvocationExpressionSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.InvocationExpression);
-            var create2Syntax = (InvocationExpressionSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.InvocationExpression);
+            var create1Syntax = (InvocationExpressionSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.InvocationExpression);
+            var create2Syntax = (InvocationExpressionSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.InvocationExpression);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
             var create1Symbol = model.GetSymbolInfo(create1Syntax).Symbol;
             var create2Symbol = model.GetSymbolInfo(create2Syntax).Symbol;
 
-            VerifyEquality(create1Symbol, create2Symbol,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(create1Symbol, create2Symbol, expectedIncludeNullability: false);
         }
 
         [Fact]
         public void SemanticModel_Property_Equality()
         {
             var source =
-@"
+                @"
 #nullable enable
 public class A<T>
 {
@@ -622,38 +676,38 @@ public class B
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
 
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 = ((IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])).Type;
-            var type2 = ((IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
-            VerifyEquality(type1, type2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(type1, type2, expectedIncludeNullability: false);
 
             var property1 = (IPropertySymbol)type1.GetMembers()[0];
             var property2 = (IPropertySymbol)type2.GetMembers()[0];
 
-            VerifyEquality(property1, property2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(property1, property2, expectedIncludeNullability: false);
 
             var prop1Type = property1.Type;
             var prop2Type = property2.Type;
 
-            VerifyEquality(prop1Type, prop2Type,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(prop1Type, prop2Type, expectedIncludeNullability: false);
         }
 
         [Fact]
         public void SemanticModel_Field_Equality()
         {
             var source =
-@"
+                @"
 #nullable enable
 public class A<T>
 {
@@ -671,38 +725,44 @@ public class B
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
 
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.ClassDeclaration).DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.ClassDeclaration).DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes()
+                    .Last(sn => sn.Kind() == SyntaxKind.ClassDeclaration)
+                    .DescendantNodes()
+                    .First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes()
+                    .Last(sn => sn.Kind() == SyntaxKind.ClassDeclaration)
+                    .DescendantNodes()
+                    .Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 = ((IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])).Type;
-            var type2 = ((IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
-            VerifyEquality(type1, type2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(type1, type2, expectedIncludeNullability: false);
 
             var field1 = (IFieldSymbol)type1.GetMembers()[0];
             var field2 = (IFieldSymbol)type2.GetMembers()[0];
 
-            VerifyEquality(field1, field2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(field1, field2, expectedIncludeNullability: false);
 
             var prop1Type = field1.Type;
             var prop2Type = field2.Type;
 
-            VerifyEquality(prop1Type, prop2Type,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(prop1Type, prop2Type, expectedIncludeNullability: false);
         }
 
         [Fact]
         public void SemanticModel_Event_Equality()
         {
             var source =
-@"
+                @"
 #nullable enable
 #pragma warning disable 8618
 public class A<T>
@@ -723,31 +783,31 @@ public class B
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
 
-            var member1Syntax = (FieldDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
-            var member2Syntax = (FieldDeclarationSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member1Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
+            var member2Syntax = (FieldDeclarationSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.FieldDeclaration);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var type1 = ((IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])).Type;
-            var type2 = ((IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])).Type;
+            var type1 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member1Syntax.Declaration.Variables[0])
+            ).Type;
+            var type2 = (
+                (IFieldSymbol)model.GetDeclaredSymbol(member2Syntax.Declaration.Variables[0])
+            ).Type;
 
-            VerifyEquality(type1, type2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(type1, type2, expectedIncludeNullability: false);
 
             var event1 = (IEventSymbol)type1.GetMembers()[2];
             var event2 = (IEventSymbol)type2.GetMembers()[2];
 
-            VerifyEquality(event1, event2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(event1, event2, expectedIncludeNullability: false);
 
             var prop1Type = event1.Type;
             var prop2Type = event2.Type;
 
-            VerifyEquality(prop1Type, prop2Type,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(prop1Type, prop2Type, expectedIncludeNullability: false);
         }
 
         [Fact]
@@ -755,7 +815,7 @@ public class B
         public void SemanticModel_SubstitutedField_Equality()
         {
             var source =
-@"
+                @"
 #nullable enable
 public class A<T> 
     where T : class //not necessary, but makes it easier to reason about the resulting fields
@@ -773,32 +833,34 @@ public class A<T>
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
 
-            var member1Syntax = (ClassDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.ClassDeclaration);
-            var member2Syntax = (IdentifierNameSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.IdentifierName);
+            var member1Syntax = (ClassDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.ClassDeclaration);
+            var member2Syntax = (IdentifierNameSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.IdentifierName);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var field1 = (IFieldSymbol)((INamedTypeSymbol)model.GetDeclaredSymbol(member1Syntax)).GetMembers("field").Single(); // A<T!>! A<T>.field
-            var field2 = (IFieldSymbol)model.GetSymbolInfo(member2Syntax).Symbol;                                               // A<T!>! A<T!>.field
+            var field1 = (IFieldSymbol)
+                ((INamedTypeSymbol)model.GetDeclaredSymbol(member1Syntax))
+                    .GetMembers("field")
+                    .Single(); // A<T!>! A<T>.field
+            var field2 = (IFieldSymbol)model.GetSymbolInfo(member2Syntax).Symbol; // A<T!>! A<T!>.field
 
-            VerifyEquality(field1, field2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(field1, field2, expectedIncludeNullability: false);
 
             var field1Type = field1.Type; // A<T!>
             var field2Type = field2.Type; // A<T!>
 
-            VerifyEquality(field1Type, field2Type,
-                expectedIncludeNullability: true
-                );
+            VerifyEquality(field1Type, field2Type, expectedIncludeNullability: true);
 
             var field1ContainingType = field1.ContainingType; //A<T>
             var field2ContainingType = field2.ContainingType; //A<T!>
 
-            VerifyEquality(field1ContainingType, field2ContainingType,
+            VerifyEquality(
+                field1ContainingType,
+                field2ContainingType,
                 expectedIncludeNullability: false
-                );
-
+            );
         }
 
         [Fact]
@@ -806,7 +868,7 @@ public class A<T>
         public void SemanticModel_SubstitutedMethod_Equality()
         {
             var source =
-@"
+                @"
 #nullable enable
 public class A<T> 
     where T : class //not necessary, but makes it easier to reason about the resulting fields
@@ -824,38 +886,40 @@ public class A<T>
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
 
-            var member1Syntax = (ClassDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.ClassDeclaration);
-            var member2Syntax = (IdentifierNameSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.SimpleMemberAccessExpression).DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.IdentifierName);
+            var member1Syntax = (ClassDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.ClassDeclaration);
+            var member2Syntax = (IdentifierNameSyntax)
+                root.DescendantNodes()
+                    .Last(sn => sn.Kind() == SyntaxKind.SimpleMemberAccessExpression)
+                    .DescendantNodes()
+                    .Last(sn => sn.Kind() == SyntaxKind.IdentifierName);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var method1 = (IMethodSymbol)((INamedTypeSymbol)model.GetDeclaredSymbol(member1Syntax)).GetMembers("M").Single(); // A<T!>! A<T>.M(A<T!>! t)
-            var method2 = (IMethodSymbol)model.GetSymbolInfo(member2Syntax).Symbol;                                           // A<T!>! A<T!>.M(A<T!>! t)
+            var method1 = (IMethodSymbol)
+                ((INamedTypeSymbol)model.GetDeclaredSymbol(member1Syntax)).GetMembers("M").Single(); // A<T!>! A<T>.M(A<T!>! t)
+            var method2 = (IMethodSymbol)model.GetSymbolInfo(member2Syntax).Symbol; // A<T!>! A<T!>.M(A<T!>! t)
 
-            VerifyEquality(method1, method2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(method1, method2, expectedIncludeNullability: false);
 
             var method1ReturnType = method1.ReturnType; // A<T!>
             var method2ReturnType = method2.ReturnType; // A<T!>
 
-            VerifyEquality(method1ReturnType, method2ReturnType,
-                expectedIncludeNullability: true
-                );
+            VerifyEquality(method1ReturnType, method2ReturnType, expectedIncludeNullability: true);
 
             var method1ParamType = method1.Parameters.First().Type; // A<T!>
             var method2ParamType = method2.Parameters.First().Type; // A<T!>
 
-            VerifyEquality(method1ParamType, method2ParamType,
-                expectedIncludeNullability: true
-                );
+            VerifyEquality(method1ParamType, method2ParamType, expectedIncludeNullability: true);
 
             var method1ContainingType = method1.ContainingType; //A<T>
             var method2ContainingType = method2.ContainingType; //A<T!>
 
-            VerifyEquality(method1ContainingType, method2ContainingType,
+            VerifyEquality(
+                method1ContainingType,
+                method2ContainingType,
                 expectedIncludeNullability: false
-                );
+            );
         }
 
         [Fact]
@@ -863,7 +927,7 @@ public class A<T>
         public void SemanticModel_SubstitutedEvent_Equality()
         {
             var source =
-@"
+                @"
 #nullable enable
 public class A<T> 
     where T : class //not necessary, but makes it easier to reason about the resulting fields
@@ -879,37 +943,42 @@ public class A<T>
             comp.VerifyDiagnostics(
                 // (6,41): warning CS8618: Non-nullable event 'MyEvent' is uninitialized. Consider declaring the event as nullable.
                 //     public event System.EventHandler<T> MyEvent;
-                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "MyEvent").WithArguments("event", "MyEvent").WithLocation(6, 41)
-                );
+                Diagnostic(ErrorCode.WRN_UninitializedNonNullableField, "MyEvent")
+                    .WithArguments("event", "MyEvent")
+                    .WithLocation(6, 41)
+            );
 
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
 
-            var member1Syntax = (ClassDeclarationSyntax)root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.ClassDeclaration);
-            var member2Syntax = (IdentifierNameSyntax)root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.IdentifierName);
+            var member1Syntax = (ClassDeclarationSyntax)
+                root.DescendantNodes().First(sn => sn.Kind() == SyntaxKind.ClassDeclaration);
+            var member2Syntax = (IdentifierNameSyntax)
+                root.DescendantNodes().Last(sn => sn.Kind() == SyntaxKind.IdentifierName);
 
             var model = comp.GetSemanticModel(syntaxTree);
 
-            var event1 = (IEventSymbol)((INamedTypeSymbol)model.GetDeclaredSymbol(member1Syntax)).GetMembers("MyEvent").Single(); // System.EventHandler<T!>! A<T>.MyEvent
-            var event2 = (IEventSymbol)model.GetSymbolInfo(member2Syntax).Symbol;                                                 // System.EventHandler<T!>! A<T!>.MyEvent
+            var event1 = (IEventSymbol)
+                ((INamedTypeSymbol)model.GetDeclaredSymbol(member1Syntax))
+                    .GetMembers("MyEvent")
+                    .Single(); // System.EventHandler<T!>! A<T>.MyEvent
+            var event2 = (IEventSymbol)model.GetSymbolInfo(member2Syntax).Symbol; // System.EventHandler<T!>! A<T!>.MyEvent
 
-            VerifyEquality(event1, event2,
-                expectedIncludeNullability: false
-                );
+            VerifyEquality(event1, event2, expectedIncludeNullability: false);
 
             var event1Type = event1.Type; // System.EventHandler<T!>
             var event2Type = event2.Type; // System.EventHandler<T!>
 
-            VerifyEquality(event1Type, event2Type,
-                expectedIncludeNullability: true
-                );
+            VerifyEquality(event1Type, event2Type, expectedIncludeNullability: true);
 
             var event1ContainingType = event1.ContainingType; //A<T>
             var event2ContainingType = event2.ContainingType; //A<T!>
 
-            VerifyEquality(event1ContainingType, event2ContainingType,
+            VerifyEquality(
+                event1ContainingType,
+                event2ContainingType,
                 expectedIncludeNullability: false
-                );
+            );
         }
 
         [Fact]
@@ -917,7 +986,7 @@ public class A<T>
         public void LambdaSymbol()
         {
             var source =
-@"
+                @"
 #nullable enable
 
 using System;
@@ -932,7 +1001,9 @@ void M1<TResult>(Func<object?[], TResult>? f) { }
             var syntaxTree = comp.SyntaxTrees[0];
             var root = syntaxTree.GetRoot();
 
-            var lambdaSyntax = root.DescendantNodes().OfType<SimpleLambdaExpressionSyntax>().First();
+            var lambdaSyntax = root.DescendantNodes()
+                .OfType<SimpleLambdaExpressionSyntax>()
+                .First();
             var semanticModel1 = comp.GetSemanticModel(syntaxTree);
             var semanticModel2 = comp.GetSemanticModel(syntaxTree);
 
@@ -948,7 +1019,7 @@ void M1<TResult>(Func<object?[], TResult>? f) { }
         public void LambdaSymbol_02()
         {
             var source =
-@"class Program
+                @"class Program
 {
     static void Main()
     {
@@ -958,17 +1029,27 @@ void M1<TResult>(Func<object?[], TResult>? f) { }
             var comp = CreateCompilation(source);
             var syntaxTree = comp.SyntaxTrees[0];
             var model = comp.GetSemanticModel(syntaxTree);
-            var syntaxNode = syntaxTree.GetRoot().DescendantNodes().
-                OfType<QueryExpressionSyntax>().Single();
+            var syntaxNode = syntaxTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<QueryExpressionSyntax>()
+                .Single();
             var operation = model.GetOperation(syntaxNode);
-            var lambdas = operation.Descendants().OfType<AnonymousFunctionOperation>().
-                Select(op => op.Symbol.GetSymbol<LambdaSymbol>()).ToImmutableArray();
+            var lambdas = operation
+                .Descendants()
+                .OfType<AnonymousFunctionOperation>()
+                .Select(op => op.Symbol.GetSymbol<LambdaSymbol>())
+                .ToImmutableArray();
             Assert.Equal(2, lambdas.Length);
             Assert.Equal(lambdas[0].SyntaxRef.Span, lambdas[1].SyntaxRef.Span);
             Assert.NotEqual(lambdas[0], lambdas[1]);
         }
 
-        private void VerifyEquality(ISymbol symbol1, ISymbol symbol2, bool expectedIncludeNullability)
+        private void VerifyEquality(
+            ISymbol symbol1,
+            ISymbol symbol2,
+            bool expectedIncludeNullability
+        )
         {
             // Symbol.Equals
             Assert.True(symbol1.Equals(symbol1));
@@ -985,13 +1066,25 @@ void M1<TResult>(Func<object?[], TResult>? f) { }
             // TypeSymbol.Equals - IncludeNullability
             Assert.True(symbol1.Equals(symbol1, SymbolEqualityComparer.IncludeNullability));
             Assert.True(symbol2.Equals(symbol2, SymbolEqualityComparer.IncludeNullability));
-            Assert.Equal(expectedIncludeNullability, symbol1.Equals(symbol2, SymbolEqualityComparer.IncludeNullability));
-            Assert.Equal(expectedIncludeNullability, symbol2.Equals(symbol1, SymbolEqualityComparer.IncludeNullability));
+            Assert.Equal(
+                expectedIncludeNullability,
+                symbol1.Equals(symbol2, SymbolEqualityComparer.IncludeNullability)
+            );
+            Assert.Equal(
+                expectedIncludeNullability,
+                symbol2.Equals(symbol1, SymbolEqualityComparer.IncludeNullability)
+            );
 
             // GetHashCode
             Assert.Equal(symbol1.GetHashCode(), symbol2.GetHashCode());
-            Assert.Equal(SymbolEqualityComparer.Default.GetHashCode(symbol1), SymbolEqualityComparer.Default.GetHashCode(symbol2));
-            Assert.Equal(SymbolEqualityComparer.IncludeNullability.GetHashCode(symbol1), SymbolEqualityComparer.IncludeNullability.GetHashCode(symbol2));
+            Assert.Equal(
+                SymbolEqualityComparer.Default.GetHashCode(symbol1),
+                SymbolEqualityComparer.Default.GetHashCode(symbol2)
+            );
+            Assert.Equal(
+                SymbolEqualityComparer.IncludeNullability.GetHashCode(symbol1),
+                SymbolEqualityComparer.IncludeNullability.GetHashCode(symbol2)
+            );
         }
     }
 }

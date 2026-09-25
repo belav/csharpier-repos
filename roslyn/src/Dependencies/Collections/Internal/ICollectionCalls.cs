@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Collections.Internal
     internal static class ICollectionCalls
     {
         public static bool IsSynchronized<TCollection>(ref TCollection collection)
-            where TCollection : ICollection
-            => collection.IsSynchronized;
+            where TCollection : ICollection => collection.IsSynchronized;
 
         public static void CopyTo<TCollection>(ref TCollection collection, Array array, int index)
             where TCollection : ICollection

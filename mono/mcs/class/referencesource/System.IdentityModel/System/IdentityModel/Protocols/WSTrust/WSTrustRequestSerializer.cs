@@ -19,7 +19,10 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="reader">XML reader over the RST</param>
         /// <param name="context">Current Serialization context.</param>
         /// <returns>RequestSecurityToken object if the deserialization was successful</returns>
-        public abstract RequestSecurityToken ReadXml(XmlReader reader, WSTrustSerializationContext context);
+        public abstract RequestSecurityToken ReadXml(
+            XmlReader reader,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// When overridden in the derived class reads a child element inside RST.
@@ -27,15 +30,23 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="reader">Reader pointing at an element to read inside the RST.</param>
         /// <param name="requestSecurityToken">The RequestSecurityToken element that is being populated from the reader.</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void ReadXmlElement(XmlReader reader, RequestSecurityToken requestSecurityToken, WSTrustSerializationContext context);
+        public abstract void ReadXmlElement(
+            XmlReader reader,
+            RequestSecurityToken requestSecurityToken,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
-        /// When overriden in the derived classs writes out the supported elements on the request object. 
+        /// When overriden in the derived classs writes out the supported elements on the request object.
         /// </summary>
         /// <param name="requestSecurityToken">The request instance</param>
         /// <param name="writer">The writer to write to</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void WriteKnownRequestElement(RequestSecurityToken requestSecurityToken, XmlWriter writer, WSTrustSerializationContext context);
+        public abstract void WriteKnownRequestElement(
+            RequestSecurityToken requestSecurityToken,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// When overriden in the derived class serializes the given RequestSecurityToken into the XmlWriter
@@ -43,7 +54,11 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="request">RequestSecurityToken object to be serialized</param>
         /// <param name="writer">XML writer to serialize into</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void WriteXml(RequestSecurityToken request, XmlWriter writer, WSTrustSerializationContext context);
+        public abstract void WriteXml(
+            RequestSecurityToken request,
+            XmlWriter writer,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// When overridden in the derived class writes a child element inside the RST.
@@ -53,7 +68,13 @@ namespace System.IdentityModel.Protocols.WSTrust
         /// <param name="elementValue">The value of the element.</param>
         /// <param name="requestSecurityToken">The entire RST object that is being serialized.</param>
         /// <param name="context">Current Serialization context.</param>
-        public abstract void WriteXmlElement(XmlWriter writer, string elementName, object elementValue, RequestSecurityToken requestSecurityToken, WSTrustSerializationContext context);
+        public abstract void WriteXmlElement(
+            XmlWriter writer,
+            string elementName,
+            object elementValue,
+            RequestSecurityToken requestSecurityToken,
+            WSTrustSerializationContext context
+        );
 
         /// <summary>
         /// Creates an instance of the RequestSecurityToken object that this class can Serialize or Deserialize.
@@ -77,11 +98,27 @@ namespace System.IdentityModel.Protocols.WSTrust
             }
 
             // Validate the RequestSecurityToken required parameters.
-            if ((StringComparer.Ordinal.Equals(requestSecurityToken.RequestType, RequestTypes.Issue) || requestSecurityToken.RequestType == null) &&
-                 StringComparer.Ordinal.Equals(requestSecurityToken.KeyType, KeyTypes.Asymmetric) &&
-                 ((requestSecurityToken.UseKey == null) || (requestSecurityToken.UseKey.SecurityKeyIdentifier == null && requestSecurityToken.UseKey.Token == null)))
+            if (
+                (
+                    StringComparer.Ordinal.Equals(
+                        requestSecurityToken.RequestType,
+                        RequestTypes.Issue
+                    )
+                    || requestSecurityToken.RequestType == null
+                )
+                && StringComparer.Ordinal.Equals(requestSecurityToken.KeyType, KeyTypes.Asymmetric)
+                && (
+                    (requestSecurityToken.UseKey == null)
+                    || (
+                        requestSecurityToken.UseKey.SecurityKeyIdentifier == null
+                        && requestSecurityToken.UseKey.Token == null
+                    )
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ID3091)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ID3091))
+                );
             }
         }
 
@@ -93,13 +130,18 @@ namespace System.IdentityModel.Protocols.WSTrust
         public abstract bool CanRead(XmlReader reader);
 
         /// <summary>
-        /// When overriden in the derived classs reads a custom element. 
+        /// When overriden in the derived classs reads a custom element.
         /// </summary>
         /// <param name="reader">The reader on the current element.</param>
         /// <param name="context">Current Serialization context.</param>
-        protected virtual void ReadCustomElement(XmlReader reader, WSTrustSerializationContext context)
+        protected virtual void ReadCustomElement(
+            XmlReader reader,
+            WSTrustSerializationContext context
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID2072, reader.LocalName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(SR.GetString(SR.ID2072, reader.LocalName))
+            );
         }
     }
 }

@@ -40,7 +40,9 @@ public interface IDbContextTransactionManager : IResettableService
     ///     A task that represents the asynchronous operation. The task result contains the newly created transaction.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default);
+    Task<IDbContextTransaction> BeginTransactionAsync(
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     Commits all changes made to the database in the current transaction.

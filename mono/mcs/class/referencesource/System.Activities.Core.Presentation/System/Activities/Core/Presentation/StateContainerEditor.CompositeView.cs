@@ -25,7 +25,11 @@ namespace System.Activities.Core.Presentation
     partial class StateContainerEditor : IMultipleDragEnabledCompositeView
     {
         public static readonly DependencyProperty DroppingTypeResolvingOptionsProperty =
-            DependencyProperty.Register("DroppingTypeResolvingOptions", typeof(TypeResolvingOptions), typeof(StateContainerEditor));
+            DependencyProperty.Register(
+                "DroppingTypeResolvingOptions",
+                typeof(TypeResolvingOptions),
+                typeof(StateContainerEditor)
+            );
 
         public TypeResolvingOptions DroppingTypeResolvingOptions
         {
@@ -36,11 +40,14 @@ namespace System.Activities.Core.Presentation
         public bool IsDefaultContainer
         {
             get { return true; }
-        }        
+        }
 
         public void OnItemMoved(ModelItem modelItem)
         {
-            Fx.Assert(this.modelItemToUIElement.ContainsKey(modelItem), "Moved item does not exist.");
+            Fx.Assert(
+                this.modelItemToUIElement.ContainsKey(modelItem),
+                "Moved item does not exist."
+            );
             this.DoDeleteItems(new List<ModelItem> { modelItem }, false);
         }
 
@@ -54,7 +61,9 @@ namespace System.Activities.Core.Presentation
                 ModelItem item = itemsToCopy.First();
                 if (item != null && item.ItemType == typeof(Transition))
                 {
-                    ModelItem destinationState = item.Properties[TransitionDesigner.ToPropertyName].Value;
+                    ModelItem destinationState = item.Properties[
+                        TransitionDesigner.ToPropertyName
+                    ].Value;
 
                     if (!modelItemToGuid.ContainsKey(destinationState))
                     {
@@ -73,13 +82,19 @@ namespace System.Activities.Core.Presentation
             PointCollection metaData = new PointCollection();
             foreach (ModelItem modelItem in itemsToCopy)
             {
-                object viewState = this.ViewStateService.RetrieveViewState(modelItem, ShapeLocationViewStateKey);
+                object viewState = this.ViewStateService.RetrieveViewState(
+                    modelItem,
+                    ShapeLocationViewStateKey
+                );
                 Point location = (Point)viewState;
-                StateContainerEditor parentDesigner = VisualTreeUtils.FindVisualAncestor<StateContainerEditor>(GetStateView(modelItem));
+                StateContainerEditor parentDesigner =
+                    VisualTreeUtils.FindVisualAncestor<StateContainerEditor>(
+                        GetStateView(modelItem)
+                    );
                 location = parentDesigner.panel.GetLocationRelativeToOutmostPanel(location);
                 metaData.Add(location);
             }
-            
+
             CopiedTransitionDestinationState = null;
             return metaData;
         }
@@ -110,24 +125,39 @@ namespace System.Activities.Core.Presentation
 
             HashSet<Connector> connectorsToDelete = new HashSet<Connector>();
             List<ModelItem> allStateModelItemsToDelete = new List<ModelItem>();
-            IEnumerable<ModelItem> selectedStateModelItems = this.Context.Items.GetValue<Selection>().SelectedObjects
-                .Where<ModelItem>((p) => { return p.ItemType == typeof(State); });
+            IEnumerable<ModelItem> selectedStateModelItems = this
+                .Context.Items.GetValue<Selection>()
+                .SelectedObjects.Where<ModelItem>(
+                    (p) =>
+                    {
+                        return p.ItemType == typeof(State);
+                    }
+                );
 
             foreach (ModelItem stateModelItem in itemsToDelete)
             {
-                allStateModelItemsToDelete.Add(stateModelItem);                
+                allStateModelItemsToDelete.Add(stateModelItem);
             }
 
             foreach (ModelItem modelItem in allStateModelItemsToDelete)
             {
                 // We only need to delete incoming connectors to the states to be deleted; outgoing connectors will be deleted
                 // automatically when the containing state is deleted.
-                List<Connector> incomingConnectors = StateContainerEditor.GetIncomingConnectors(GetStateView(modelItem));
+                List<Connector> incomingConnectors = StateContainerEditor.GetIncomingConnectors(
+                    GetStateView(modelItem)
+                );
                 foreach (Connector connector in incomingConnectors)
                 {
-                    ModelItem transitionModelItem = StateContainerEditor.GetConnectorModelItem(connector);
+                    ModelItem transitionModelItem = StateContainerEditor.GetConnectorModelItem(
+                        connector
+                    );
                     // If the transition is contained by the states to delete, we don't bother to delete it separately.
-                    if (!StateContainerEditor.IsTransitionModelItemContainedByStateModelItems(transitionModelItem, selectedStateModelItems))
+                    if (
+                        !StateContainerEditor.IsTransitionModelItemContainedByStateModelItems(
+                            transitionModelItem,
+                            selectedStateModelItems
+                        )
+                    )
                     {
                         connectorsToDelete.Add(connector);
                     }
@@ -138,7 +168,9 @@ namespace System.Activities.Core.Presentation
             // This is in order to create an undo unit that contains the change notifications needed to make undo/redo work correctly.
             foreach (Connector connector in connectorsToDelete)
             {
-                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(connector);
+                ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
+                    connector
+                );
                 if (removeIncomingConnectors || connectorModelItem.ItemType == typeof(Transition))
                 {
                     this.DeleteConnectorModelItem(connector);
@@ -148,10 +180,15 @@ namespace System.Activities.Core.Presentation
             {
                 foreach (Connector connector in connectorsToDelete)
                 {
-                    ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(connector);
+                    ModelItem connectorModelItem = StateContainerEditor.GetConnectorModelItem(
+                        connector
+                    );
                     if (connectorModelItem.ItemType == typeof(Transition))
                     {
-                        StateContainerEditor.GetParentStateModelItemForTransition(connectorModelItem).Properties[StateDesigner.TransitionsPropertyName].Collection.Add(connectorModelItem);
+                        StateContainerEditor
+                            .GetParentStateModelItemForTransition(connectorModelItem)
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection.Add(connectorModelItem);
                     }
                 }
             }
@@ -169,17 +206,20 @@ namespace System.Activities.Core.Presentation
                 if (itemsToPaste.Count == 1 && itemsToPaste.First() is Transition)
                 {
                     string errorMessage;
-                    IEnumerable<ModelItem> selectedStateModelItems = this.Context.Items.GetValue<Selection>().SelectedObjects;
-                    return selectedStateModelItems.All(item => CanPasteTransition(item, out errorMessage));
+                    IEnumerable<ModelItem> selectedStateModelItems = this
+                        .Context.Items.GetValue<Selection>()
+                        .SelectedObjects;
+                    return selectedStateModelItems.All(item =>
+                        CanPasteTransition(item, out errorMessage)
+                    );
                 }
                 else
                 {
                     return itemsToPaste.All(p =>
-                        {
-                            Type type = (p is Type) ? (Type)p : p.GetType();
-                            return (typeof(State) == type || typeof(FinalState) == type);
-                        }
-                    );
+                    {
+                        Type type = (p is Type) ? (Type)p : p.GetType();
+                        return (typeof(State) == type || typeof(FinalState) == type);
+                    });
                 }
             }
 
@@ -212,7 +252,11 @@ namespace System.Activities.Core.Presentation
 
             if (GetEmptyConnectionPoints(sourceStateItem.View as UIElement).Count < 1)
             {
-                errorMessage = string.Format(CultureInfo.CurrentUICulture, SR.PasteTransitionWithoutAvailableConnectionPoints, sourceState.DisplayName);
+                errorMessage = string.Format(
+                    CultureInfo.CurrentUICulture,
+                    SR.PasteTransitionWithoutAvailableConnectionPoints,
+                    sourceState.DisplayName
+                );
                 return false;
             }
 
@@ -220,11 +264,15 @@ namespace System.Activities.Core.Presentation
             return true;
         }
 
-        internal bool CanPasteTransition(ModelItem destinationStateItem, out string errorMessage, params ModelItem[] sourceStateItems)
+        internal bool CanPasteTransition(
+            ModelItem destinationStateItem,
+            out string errorMessage,
+            params ModelItem[] sourceStateItems
+        )
         {
             bool isDestinationStateSelected = false;
             foreach (ModelItem sourceStateItem in sourceStateItems)
-            {                
+            {
                 if (!CanPasteTransition(sourceStateItem, out errorMessage))
                 {
                     return false;
@@ -236,11 +284,20 @@ namespace System.Activities.Core.Presentation
                 }
             }
 
-            int emptyConnectionPointsCountNeeded = isDestinationStateSelected ? sourceStateItems.Count() + 1 : sourceStateItems.Count();
+            int emptyConnectionPointsCountNeeded = isDestinationStateSelected
+                ? sourceStateItems.Count() + 1
+                : sourceStateItems.Count();
 
-            if (GetEmptyConnectionPoints(destinationStateItem.View as UIElement).Count < emptyConnectionPointsCountNeeded)
+            if (
+                GetEmptyConnectionPoints(destinationStateItem.View as UIElement).Count
+                < emptyConnectionPointsCountNeeded
+            )
             {
-                errorMessage = string.Format(CultureInfo.CurrentUICulture, SR.PasteTransitionWithoutAvailableConnectionPoints, destinationStateItem.Properties["DisplayName"].Value);
+                errorMessage = string.Format(
+                    CultureInfo.CurrentUICulture,
+                    SR.PasteTransitionWithoutAvailableConnectionPoints,
+                    destinationStateItem.Properties["DisplayName"].Value
+                );
                 return false;
             }
 
@@ -249,7 +306,7 @@ namespace System.Activities.Core.Presentation
         }
 
         private ModelItem FindState(string guid)
-        {            
+        {
             foreach (ModelItem item in this.modelItemToUIElement.Keys)
             {
                 string itemGuid;
@@ -262,15 +319,28 @@ namespace System.Activities.Core.Presentation
             return null;
         }
 
-        public void OnItemsPasted(List<object> itemsToPaste, List<object> metaData, Point pastePoint, WorkflowViewElement pastePointReference)
+        public void OnItemsPasted(
+            List<object> itemsToPaste,
+            List<object> metaData,
+            Point pastePoint,
+            WorkflowViewElement pastePointReference
+        )
         {
             if (this.ModelItem.ItemType == typeof(State))
             {
-                WorkflowViewElement view = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(this);
+                WorkflowViewElement view = VisualTreeUtils.FindVisualAncestor<WorkflowViewElement>(
+                    this
+                );
                 if (view != null)
                 {
-                    StateContainerEditor container = (StateContainerEditor)DragDropHelper.GetCompositeView(view);
-                    container.OnItemsPasted(itemsToPaste, metaData, pastePoint, pastePointReference);
+                    StateContainerEditor container = (StateContainerEditor)
+                        DragDropHelper.GetCompositeView(view);
+                    container.OnItemsPasted(
+                        itemsToPaste,
+                        metaData,
+                        pastePoint,
+                        pastePointReference
+                    );
                 }
 
                 return;
@@ -294,7 +364,9 @@ namespace System.Activities.Core.Presentation
 
                 this.PopulateVirtualizingContainer(destinationState);
 
-                ModelItem[] selectedItems = this.Context.Items.GetValue<Selection>().SelectedObjects.ToArray();
+                ModelItem[] selectedItems = this
+                    .Context.Items.GetValue<Selection>()
+                    .SelectedObjects.ToArray();
                 string errorMessage;
                 if (!CanPasteTransition(destinationState, out errorMessage, selectedItems))
                 {
@@ -305,7 +377,12 @@ namespace System.Activities.Core.Presentation
                 Transition pastedTransition = itemsToPaste.First() as Transition;
                 Fx.Assert(pastedTransition != null, "Copied Transition should not be null.");
 
-                using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(System.Activities.Presentation.SR.PropertyChangeEditingScopeDescription))
+                using (
+                    EditingScope es = (EditingScope)
+                        this.ModelItem.BeginEdit(
+                            System.Activities.Presentation.SR.PropertyChangeEditingScopeDescription
+                        )
+                )
                 {
                     string displayName = pastedTransition.DisplayName;
                     bool isFirst = true;
@@ -313,20 +390,37 @@ namespace System.Activities.Core.Presentation
                     {
                         if (!isFirst)
                         {
-                            StringReader reader = new StringReader(XamlServices.Save(pastedTransition));
+                            StringReader reader = new StringReader(
+                                XamlServices.Save(pastedTransition)
+                            );
                             pastedTransition = (Transition)XamlServices.Load(reader);
                         }
 
-                        ModelItem transitionModelItem = this.Context.Services.GetRequiredService<ModelTreeManager>().WrapAsModelItem(pastedTransition);
+                        ModelItem transitionModelItem = this
+                            .Context.Services.GetRequiredService<ModelTreeManager>()
+                            .WrapAsModelItem(pastedTransition);
                         ModelItem sourceState = selectedItem;
-                        sourceState.Properties[StateDesigner.TransitionsPropertyName].Collection.Add(transitionModelItem);
-                        transitionModelItem.Properties[TransitionDesigner.ToPropertyName].SetValue(destinationState);
+                        sourceState
+                            .Properties[StateDesigner.TransitionsPropertyName]
+                            .Collection.Add(transitionModelItem);
+                        transitionModelItem
+                            .Properties[TransitionDesigner.ToPropertyName]
+                            .SetValue(destinationState);
 
                         if (isFirst)
                         {
-                            this.ViewStateService.RemoveViewState(transitionModelItem, ConnectorLocationViewStateKey);
-                            this.ViewStateService.RemoveViewState(transitionModelItem, SrcConnectionPointIndexStateKey);
-                            this.ViewStateService.RemoveViewState(transitionModelItem, DestConnectionPointIndexStateKey);
+                            this.ViewStateService.RemoveViewState(
+                                transitionModelItem,
+                                ConnectorLocationViewStateKey
+                            );
+                            this.ViewStateService.RemoveViewState(
+                                transitionModelItem,
+                                SrcConnectionPointIndexStateKey
+                            );
+                            this.ViewStateService.RemoveViewState(
+                                transitionModelItem,
+                                DestConnectionPointIndexStateKey
+                            );
                             isFirst = false;
                         }
                     }
@@ -344,7 +438,11 @@ namespace System.Activities.Core.Presentation
                     State state;
                     if (obj is FinalState)
                     {
-                        state = new State() { DisplayName = DefaultFinalStateDisplayName, IsFinal = true };
+                        state = new State()
+                        {
+                            DisplayName = DefaultFinalStateDisplayName,
+                            IsFinal = true,
+                        };
                     }
                     else
                     {
@@ -359,20 +457,28 @@ namespace System.Activities.Core.Presentation
 
                 RemoveDanglingTransitions(states);
 
-                using (EditingScope es = (EditingScope)this.ModelItem.BeginEdit(
-                    System.Activities.Presentation.SR.CollectionAddEditingScopeDescription))
+                using (
+                    EditingScope es = (EditingScope)
+                        this.ModelItem.BeginEdit(
+                            System.Activities.Presentation.SR.CollectionAddEditingScopeDescription
+                        )
+                )
                 {
                     // Fix 157591 by storing the height and width of the container "before" the new states are added to the
-                    // panel, and group the insertion inside one editing scope - such that Undo will also restore the 
+                    // panel, and group the insertion inside one editing scope - such that Undo will also restore the
                     // size of the StateMachineContainer to pre-insert size.
                     StoreShapeSizeWithUndoRecursively(this.ModelItem);
 
                     foreach (State state in states)
                     {
                         ModelItem stateModelItem =
-                            (this.ModelItem.ItemType == typeof(StateMachine)) ?
-                            this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection.Add(state) :
-                            GetStateMachineModelItem(this.ModelItem).Properties[StateMachineDesigner.StatesPropertyName].Collection.Add(state);
+                            (this.ModelItem.ItemType == typeof(StateMachine))
+                                ? this
+                                    .ModelItem.Properties[StateMachineDesigner.StatesPropertyName]
+                                    .Collection.Add(state)
+                                : GetStateMachineModelItem(this.ModelItem)
+                                    .Properties[StateMachineDesigner.StatesPropertyName]
+                                    .Collection.Add(state);
                         modelItemsPasted.Add(stateModelItem);
                     }
 
@@ -382,7 +488,10 @@ namespace System.Activities.Core.Presentation
                 if (modelItemsPasted.Count > 0)
                 {
                     // translate location view states to be in the coordinate system of the pasting target
-                    Fx.Assert(this.ModelItem.ItemType == typeof(StateMachine), "Only StateMachine contain the StateContainerEditor.");
+                    Fx.Assert(
+                        this.ModelItem.ItemType == typeof(StateMachine),
+                        "Only StateMachine contain the StateContainerEditor."
+                    );
 
                     this.UpdateLocationViewStatesByMetaData(modelItemsPasted, metaData, this);
 
@@ -403,19 +512,19 @@ namespace System.Activities.Core.Presentation
                     }
                 }
 
-                this.Dispatcher.BeginInvoke(() =>
-                {
-                    if (modelItemsPasted.Count > 0 && modelItemsPasted[0] != null)
+                this.Dispatcher.BeginInvoke(
+                    () =>
                     {
-                        Keyboard.Focus(modelItemsPasted[0].View as IInputElement);
-                    }
-                    this.Context.Items.SetValue(new Selection(modelItemsPasted));
-                },
-                DispatcherPriority.ApplicationIdle
+                        if (modelItemsPasted.Count > 0 && modelItemsPasted[0] != null)
+                        {
+                            Keyboard.Focus(modelItemsPasted[0].View as IInputElement);
+                        }
+                        this.Context.Items.SetValue(new Selection(modelItemsPasted));
+                    },
+                    DispatcherPriority.ApplicationIdle
                 );
             }
         }
-
 
         public List<ModelItem> SortSelectedItems(List<ModelItem> selectedItems)
         {
@@ -424,7 +533,10 @@ namespace System.Activities.Core.Presentation
                 throw FxTrace.Exception.ArgumentNull("selectedItems");
             }
 
-            DragDropHelper.ValidateItemsAreOnView(selectedItems, this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection);
+            DragDropHelper.ValidateItemsAreOnView(
+                selectedItems,
+                this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection
+            );
             return selectedItems;
         }
 
@@ -435,7 +547,10 @@ namespace System.Activities.Core.Presentation
                 throw FxTrace.Exception.ArgumentNull("movedItems");
             }
 
-            DragDropHelper.ValidateItemsAreOnView(movedItems, this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection);
+            DragDropHelper.ValidateItemsAreOnView(
+                movedItems,
+                this.ModelItem.Properties[StateMachineDesigner.StatesPropertyName].Collection
+            );
             this.DoDeleteItems(movedItems, false);
         }
 
@@ -444,7 +559,10 @@ namespace System.Activities.Core.Presentation
             Point topLeft = new Point(Double.PositiveInfinity, Double.PositiveInfinity);
             foreach (ModelItem stateModelItem in itemsPasted)
             {
-                object viewState = this.ViewStateService.RetrieveViewState(stateModelItem, ShapeLocationViewStateKey);
+                object viewState = this.ViewStateService.RetrieveViewState(
+                    stateModelItem,
+                    ShapeLocationViewStateKey
+                );
                 if (viewState != null)
                 {
                     Point location = (Point)viewState;
@@ -452,13 +570,25 @@ namespace System.Activities.Core.Presentation
                     topLeft.Y = topLeft.Y > location.Y ? location.Y : topLeft.Y;
                 }
             }
-            OffsetLocationViewStates(new Vector(point.X - topLeft.X, point.Y - topLeft.Y), itemsPasted, GetTransitionModelItems(itemsPasted), false);
+            OffsetLocationViewStates(
+                new Vector(point.X - topLeft.X, point.Y - topLeft.Y),
+                itemsPasted,
+                GetTransitionModelItems(itemsPasted),
+                false
+            );
         }
 
-        void UpdateLocationViewStatesByMetaData(List<ModelItem> itemsPasted, List<object> metaData, StateContainerEditor container)
+        void UpdateLocationViewStatesByMetaData(
+            List<ModelItem> itemsPasted,
+            List<object> metaData,
+            StateContainerEditor container
+        )
         {
-            Fx.Assert(container != null, "The view states must be calculated related to a parent StateContainerEditor.");
-            // If the states are not copied from state machine view (e.g., when the State designer is the breadcrumb root), 
+            Fx.Assert(
+                container != null,
+                "The view states must be calculated related to a parent StateContainerEditor."
+            );
+            // If the states are not copied from state machine view (e.g., when the State designer is the breadcrumb root),
             // there is no meta data
             if (metaData != null && metaData.Count > 0)
             {
@@ -469,7 +599,11 @@ namespace System.Activities.Core.Presentation
                     foreach (Point point in points)
                     {
                         // translate location view states to be in the coordinate system of the pasting target
-                        this.ViewStateService.StoreViewState(itemsPasted[ii], ShapeLocationViewStateKey, container.panel.TranslatePoint(point, container.panel));
+                        this.ViewStateService.StoreViewState(
+                            itemsPasted[ii],
+                            ShapeLocationViewStateKey,
+                            container.panel.TranslatePoint(point, container.panel)
+                        );
                         ++ii;
                     }
                 }
@@ -477,24 +611,40 @@ namespace System.Activities.Core.Presentation
             }
         }
 
-        void OffsetLocationViewStates(Vector offsetVector, IEnumerable<ModelItem> stateModelItems, IEnumerable<ModelItem> transitionModelItems, bool enableUndo)
+        void OffsetLocationViewStates(
+            Vector offsetVector,
+            IEnumerable<ModelItem> stateModelItems,
+            IEnumerable<ModelItem> transitionModelItems,
+            bool enableUndo
+        )
         {
             // Offset view state for states
             if (stateModelItems != null)
             {
                 foreach (ModelItem modelItem in stateModelItems)
                 {
-                    object viewState = this.ViewStateService.RetrieveViewState(modelItem, ShapeLocationViewStateKey);
+                    object viewState = this.ViewStateService.RetrieveViewState(
+                        modelItem,
+                        ShapeLocationViewStateKey
+                    );
                     if (viewState != null)
                     {
                         viewState = Point.Add((Point)viewState, offsetVector);
                         if (enableUndo)
                         {
-                            this.ViewStateService.StoreViewStateWithUndo(modelItem, ShapeLocationViewStateKey, viewState);
+                            this.ViewStateService.StoreViewStateWithUndo(
+                                modelItem,
+                                ShapeLocationViewStateKey,
+                                viewState
+                            );
                         }
                         else
                         {
-                            this.ViewStateService.StoreViewState(modelItem, ShapeLocationViewStateKey, viewState);
+                            this.ViewStateService.StoreViewState(
+                                modelItem,
+                                ShapeLocationViewStateKey,
+                                viewState
+                            );
                         }
                     }
                 }
@@ -504,7 +654,10 @@ namespace System.Activities.Core.Presentation
             {
                 foreach (ModelItem modelItem in transitionModelItems)
                 {
-                    object viewState = this.ViewStateService.RetrieveViewState(modelItem, ConnectorLocationViewStateKey);
+                    object viewState = this.ViewStateService.RetrieveViewState(
+                        modelItem,
+                        ConnectorLocationViewStateKey
+                    );
                     if (viewState != null)
                     {
                         PointCollection locations = (PointCollection)viewState;
@@ -518,11 +671,19 @@ namespace System.Activities.Core.Presentation
                         }
                         if (enableUndo)
                         {
-                            this.ViewStateService.StoreViewStateWithUndo(modelItem, ConnectorLocationViewStateKey, newLocations);
+                            this.ViewStateService.StoreViewStateWithUndo(
+                                modelItem,
+                                ConnectorLocationViewStateKey,
+                                newLocations
+                            );
                         }
                         else
                         {
-                            this.ViewStateService.StoreViewState(modelItem, ConnectorLocationViewStateKey, newLocations);
+                            this.ViewStateService.StoreViewState(
+                                modelItem,
+                                ConnectorLocationViewStateKey,
+                                newLocations
+                            );
                         }
                     }
                 }
@@ -535,7 +696,10 @@ namespace System.Activities.Core.Presentation
             if (itemsPasted.Count > 0)
             {
                 //Check to see if the first element in the input list needs offset. Generalize that information for all ModelItems in the input list.
-                object location = this.ViewStateService.RetrieveViewState(itemsPasted[0], ShapeLocationViewStateKey);
+                object location = this.ViewStateService.RetrieveViewState(
+                    itemsPasted[0],
+                    ShapeLocationViewStateKey
+                );
                 HashSet<Point> targetOccupiedLocations = null;
 
                 if (this.ModelItem.ItemType == typeof(StateMachine))
@@ -544,8 +708,11 @@ namespace System.Activities.Core.Presentation
                 }
                 else
                 {
-                    ModelItem stateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(this.ModelItem);
-                    StateMachineDesigner designer = stateMachineModelItem.View as StateMachineDesigner;
+                    ModelItem stateMachineModelItem = StateContainerEditor.GetStateMachineModelItem(
+                        this.ModelItem
+                    );
+                    StateMachineDesigner designer =
+                        stateMachineModelItem.View as StateMachineDesigner;
 
                     if (designer != null)
                     {
@@ -569,13 +736,22 @@ namespace System.Activities.Core.Presentation
                             // as the copied point (with a slight margin of offset).  Therefore,
                             // we need to detect if the pasted point is within the boundary of the copied
                             // object.  If so, offset the pasted position such that the overlap is not observable.
-                            if ((locationOfShape.X < point.X + FreeFormPanel.GridSize &&
-                                 locationOfShape.X > point.X - FreeFormPanel.GridSize) &&
-                                (locationOfShape.Y < point.Y + FreeFormPanel.GridSize &&
-                                 locationOfShape.Y > point.Y - FreeFormPanel.GridSize))
+                            if (
+                                (
+                                    locationOfShape.X < point.X + FreeFormPanel.GridSize
+                                    && locationOfShape.X > point.X - FreeFormPanel.GridSize
+                                )
+                                && (
+                                    locationOfShape.Y < point.Y + FreeFormPanel.GridSize
+                                    && locationOfShape.Y > point.Y - FreeFormPanel.GridSize
+                                )
+                            )
                             {
                                 offset++;
-                                locationOfShape.Offset(FreeFormPanel.GridSize, FreeFormPanel.GridSize);
+                                locationOfShape.Offset(
+                                    FreeFormPanel.GridSize,
+                                    FreeFormPanel.GridSize
+                                );
                                 isOverlapped = true;
                                 break;
                             }
@@ -587,7 +763,12 @@ namespace System.Activities.Core.Presentation
             if (offset > 0)
             {
                 double offsetValue = FreeFormPanel.GridSize * offset;
-                OffsetLocationViewStates(new Vector(offsetValue, offsetValue), itemsPasted, GetTransitionModelItems(itemsPasted), false);
+                OffsetLocationViewStates(
+                    new Vector(offsetValue, offsetValue),
+                    itemsPasted,
+                    GetTransitionModelItems(itemsPasted),
+                    false
+                );
             }
         }
     }

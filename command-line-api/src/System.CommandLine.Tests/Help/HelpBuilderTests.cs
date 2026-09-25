@@ -1,11 +1,11 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
 using System.Collections.Generic;
 using System.CommandLine.Help;
 using System.IO;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 using static System.Environment;
 
@@ -40,16 +40,15 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Synopsis_section_keeps_added_newlines()
         {
-            var command = new CliRootCommand(
-                $"test{NewLine}\r\ndescription with\nline breaks");
+            var command = new CliRootCommand($"test{NewLine}\r\ndescription with\nline breaks");
 
             _helpBuilder.Write(command, _console);
 
             var expected =
-                $"{_indentation}test{NewLine}" +
-                $"{_indentation}{NewLine}" +
-                $"{_indentation}description with{NewLine}" +
-                $"{_indentation}line breaks{NewLine}{NewLine}";
+                $"{_indentation}test{NewLine}"
+                + $"{_indentation}{NewLine}"
+                + $"{_indentation}description with{NewLine}"
+                + $"{_indentation}line breaks{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -58,9 +57,9 @@ namespace System.CommandLine.Tests.Help
         public void Synopsis_section_properly_wraps_description()
         {
             var longSynopsisText =
-                "test\t" +
-                "description with some tabs that is long enough to wrap to a\t" +
-                "new line";
+                "test\t"
+                + "description with some tabs that is long enough to wrap to a\t"
+                + "new line";
 
             var command = new CliRootCommand(description: longSynopsisText);
 
@@ -68,8 +67,8 @@ namespace System.CommandLine.Tests.Help
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"{_indentation}test\tdescription with some tabs that is long enough to wrap to a\t{NewLine}" +
-                $"{_indentation}new line{NewLine}{NewLine}";
+                $"{_indentation}test\tdescription with some tabs that is long enough to wrap to a\t{NewLine}"
+                + $"{_indentation}new line{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -99,19 +98,17 @@ namespace System.CommandLine.Tests.Help
         public void Usage_section_shows_arguments_if_there_are_arguments_for_command_when_there_is_one_argument(
             int minArity,
             int maxArity,
-            string expectedArgsUsage)
+            string expectedArgsUsage
+        )
         {
             var argument = new CliArgument<string>("the-args")
             {
-                Arity = new ArgumentArity(minArity, maxArity)
+                Arity = new ArgumentArity(minArity, maxArity),
             };
             var command = new CliCommand("the-command", "command help")
             {
                 argument,
-                new CliOption<string>("--verbosity", "-v")
-                {
-                    Description = "Sets the verbosity"
-                }
+                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity" },
             };
             var rootCommand = new CliRootCommand();
             rootCommand.Subcommands.Add(command);
@@ -119,8 +116,8 @@ namespace System.CommandLine.Tests.Help
             new HelpBuilder(LargeMaxWidth).Write(command, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}{_executableName} the-command {expectedArgsUsage} [options]";
+                $"Usage:{NewLine}"
+                + $"{_indentation}{_executableName} the-command {expectedArgsUsage} [options]";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -134,25 +131,22 @@ namespace System.CommandLine.Tests.Help
             int maxArityForArg1,
             int minArityForArg2,
             int maxArityForArg2,
-            string expectedArgsUsage)
+            string expectedArgsUsage
+        )
         {
             var arg1 = new CliArgument<string>("arg1")
             {
-                Arity = new ArgumentArity(
-                    minArityForArg1,
-                    maxArityForArg1)
+                Arity = new ArgumentArity(minArityForArg1, maxArityForArg1),
             };
             var arg2 = new CliArgument<string>("arg2")
             {
-                Arity = new ArgumentArity(
-                    minArityForArg2,
-                    maxArityForArg2)
+                Arity = new ArgumentArity(minArityForArg2, maxArityForArg2),
             };
             var command = new CliCommand("the-command", "command help")
             {
                 arg1,
                 arg2,
-                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity" }
+                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity" },
             };
 
             var rootCommand = new CliRootCommand();
@@ -161,8 +155,8 @@ namespace System.CommandLine.Tests.Help
             _helpBuilder.Write(command, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}{_executableName} the-command {expectedArgsUsage} [options]";
+                $"Usage:{NewLine}"
+                + $"{_indentation}{_executableName} the-command {expectedArgsUsage} [options]";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -175,15 +169,17 @@ namespace System.CommandLine.Tests.Help
             outer.Subcommands.Add(inner);
             var innerEr = new CliCommand("inner-er", "the inner-er command");
             inner.Subcommands.Add(innerEr);
-            innerEr.Options.Add(new CliOption<string>("--some-option") { Description = "some option" });
+            innerEr.Options.Add(
+                new CliOption<string>("--some-option") { Description = "some option" }
+            );
             var rootCommand = new CliRootCommand();
             rootCommand.Add(outer);
 
             _helpBuilder.Write(innerEr, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}{_executableName} outer inner inner-er [options]";
+                $"Usage:{NewLine}"
+                + $"{_indentation}{_executableName} outer inner inner-er [options]";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -193,20 +189,20 @@ namespace System.CommandLine.Tests.Help
         {
             var inner = new CliCommand("inner", "command help")
             {
-                new CliOption<string>("-v") {Description = "Sets the verbosity" },
-                new CliArgument<string[]>("inner-args")
+                new CliOption<string>("-v") { Description = "Sets the verbosity" },
+                new CliArgument<string[]>("inner-args"),
             };
             _ = new CliCommand("outer", "command help")
             {
                 inner,
-                new CliArgument<string[]>("outer-args")
+                new CliArgument<string[]>("outer-args"),
             };
 
             _helpBuilder.Write(inner, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}outer [<outer-args>...] inner [<inner-args>...] [options]";
+                $"Usage:{NewLine}"
+                + $"{_indentation}outer [<outer-args>...] inner [<inner-args>...] [options]";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -214,11 +210,10 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Usage_section_does_not_show_additional_arguments_when_TreatUnmatchedTokensAsErrors_is_not_specified()
         {
-            var command = new CliCommand(
-                "some-command",
-                "Does something");
+            var command = new CliCommand("some-command", "Does something");
             command.Options.Add(
-                new CliOption<string>("-x") { Description = "Indicates whether x" });
+                new CliOption<string>("-x") { Description = "Indicates whether x" }
+            );
 
             _helpBuilder.Write(command, _console);
 
@@ -231,7 +226,9 @@ namespace System.CommandLine.Tests.Help
             var command = new CliRootCommand();
             var subcommand = new CliCommand("some-command", "Does something");
             command.Subcommands.Add(subcommand);
-            subcommand.Options.Add(new CliOption<string>("-x") { Description = "Indicates whether x" });
+            subcommand.Options.Add(
+                new CliOption<string>("-x") { Description = "Indicates whether x" }
+            );
             subcommand.TreatUnmatchedTokensAsErrors = true;
 
             _helpBuilder.Write(subcommand, _console);
@@ -245,7 +242,9 @@ namespace System.CommandLine.Tests.Help
             var command = new CliRootCommand();
             var subcommand = new CliCommand("some-command", "Does something");
             command.Subcommands.Add(subcommand);
-            subcommand.Options.Add(new CliOption<string>("-x") { Description = "Indicates whether x" });
+            subcommand.Options.Add(
+                new CliOption<string>("-x") { Description = "Indicates whether x" }
+            );
             subcommand.TreatUnmatchedTokensAsErrors = false;
 
             _helpBuilder.Write(subcommand, _console);
@@ -261,18 +260,18 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string[]>($"outer args {NewLine}\r\nwith new\nlines"),
                 new CliCommand("inner-command", "command help")
                 {
-                    new CliArgument<string>("inner-args")
-                }
+                    new CliArgument<string>("inner-args"),
+                },
             };
 
             _helpBuilder.Write(outer, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}outer-command [<outer args {NewLine}" +
-                $"{_indentation}{NewLine}" +
-                $"{_indentation}with new{NewLine}" +
-                $"{_indentation}lines>...] [command]{NewLine}{NewLine}";
+                $"Usage:{NewLine}"
+                + $"{_indentation}outer-command [<outer args {NewLine}"
+                + $"{_indentation}{NewLine}"
+                + $"{_indentation}with new{NewLine}"
+                + $"{_indentation}lines>...] [command]{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -287,23 +286,20 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string[]>("outer args long enough to wrap to a new line"),
                 new CliCommand("inner-command", "command help")
                 {
-                    new CliArgument<string[]>("inner-args")
-                }
+                    new CliArgument<string[]>("inner-args"),
+                },
             };
             //NB: Using Command with a fixed name, rather than RootCommand here
             //because RootCommand.ExecutableName returns different values when
             //run under net5 vs net462
-            _ = new CliCommand("System.CommandLine")
-            {
-                outerCommand
-            };
+            _ = new CliCommand("System.CommandLine") { outerCommand };
 
             helpBuilder.Write(outerCommand, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}System.CommandLine outer-command [<outer args long enough to wrap {NewLine}" +
-                $"{_indentation}to a new line>...] [command]{NewLine}{NewLine}";
+                $"Usage:{NewLine}"
+                + $"{_indentation}System.CommandLine outer-command [<outer args long enough to wrap {NewLine}"
+                + $"{_indentation}to a new line>...] [command]{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -314,22 +310,16 @@ namespace System.CommandLine.Tests.Help
             var commandName = "the-command";
             var visibleArgName = "visible";
             var command = new CliCommand(commandName, "Does things");
-            var hiddenArg = new CliArgument<int>("hidden")
-            {
-                Hidden = true
-            };
-            var visibleArg = new CliArgument<int>(visibleArgName)
-            {
-                Hidden = false
-            };
+            var hiddenArg = new CliArgument<int>("hidden") { Hidden = true };
+            var visibleArg = new CliArgument<int>(visibleArgName) { Hidden = false };
             command.Arguments.Add(hiddenArg);
             command.Arguments.Add(visibleArg);
 
             _helpBuilder.Write(command, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}{commandName} <{visibleArgName}>{NewLine}{NewLine}";
+                $"Usage:{NewLine}"
+                + $"{_indentation}{commandName} <{visibleArgName}>{NewLine}{NewLine}";
 
             string help = _console.ToString();
             help.Should().Contain(expected);
@@ -365,10 +355,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("the-command", "command help")
             {
-                new CliArgument<string>("arg command name")
-                {
-                    Description = "test"
-                }
+                new CliArgument<string>("arg command name") { Description = "test" },
             };
 
             _helpBuilder.Write(command, _console);
@@ -381,7 +368,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity." }
+                new CliOption<string>("--verbosity", "-v") { Description = "Sets the verbosity." },
             };
 
             _helpBuilder.Write(command, _console);
@@ -397,8 +384,8 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("-v")
                 {
                     Description = "Sets the verbosity.",
-                    HelpName = "argument for options"
-                }
+                    HelpName = "argument for options",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -414,8 +401,8 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("--verbosity", "-v")
                 {
                     HelpName = "LEVEL",
-                    Description = "Sets the verbosity."
-                }
+                    Description = "Sets the verbosity.",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -438,10 +425,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("the-command")
             {
-                new CliOption<VerbosityOptions>("--verbosity", "-v")
-                {
-                    HelpName = "LEVEL"
-                }
+                new CliOption<VerbosityOptions>("--verbosity", "-v") { HelpName = "LEVEL" },
             };
 
             _helpBuilder.Write(command, _console);
@@ -455,15 +439,12 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("the-command", "Help text from description")
             {
-                new CliArgument<string>("the-arg")
-                {
-                    Description = "Help text from HelpDetail"
-                }
+                new CliArgument<string>("the-arg") { Description = "Help text from HelpDetail" },
             };
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<the-arg>{_columnPadding}Help text from HelpDetail";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<the-arg>{_columnPadding}Help text from HelpDetail";
 
             _helpBuilder.Write(command, _console);
 
@@ -481,19 +462,19 @@ namespace System.CommandLine.Tests.Help
             var hiddenArg = new CliArgument<int>(hiddenArgName)
             {
                 Description = hiddenDesc,
-                Hidden = true
+                Hidden = true,
             };
             var visibleArg = new CliArgument<int>(visibleArgName)
             {
                 Description = visibleDesc,
-                Hidden = false
+                Hidden = false,
             };
             command.Arguments.Add(hiddenArg);
             command.Arguments.Add(visibleArg);
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<{visibleArgName}>{_columnPadding}{visibleDesc}{NewLine}{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<{visibleArgName}>{_columnPadding}{visibleDesc}{NewLine}{NewLine}";
 
             _helpBuilder.Write(command, _console);
             var help = _console.ToString();
@@ -508,24 +489,20 @@ namespace System.CommandLine.Tests.Help
         {
             var reused = new CliArgument<string>("reused")
             {
-                Description = "This argument is valid on both outer and inner commands"
+                Description = "This argument is valid on both outer and inner commands",
             };
-            var inner = new CliCommand("inner", "The inner command")
-            {
-                reused
-            };
-            _ = new CliCommand("outer")
-            {
-                reused,
-                inner
-            };
+            var inner = new CliCommand("inner", "The inner command") { reused };
+            _ = new CliCommand("outer") { reused, inner };
 
             _helpBuilder.Write(inner, _console);
 
             var help = _console.ToString();
 
-            help.Should().Contain($"Arguments:{NewLine}" +
-                    $"  <reused>{_columnPadding}This argument is valid on both outer and inner commands{NewLine}{NewLine}");
+            help.Should()
+                .Contain(
+                    $"Arguments:{NewLine}"
+                        + $"  <reused>{_columnPadding}This argument is valid on both outer and inner commands{NewLine}{NewLine}"
+                );
         }
 
         [Fact]
@@ -536,21 +513,21 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string>("the-inner-command-arg")
                 {
                     Description = "The argument for the inner command",
-                }
+                },
             };
             _ = new CliCommand("outer", "HelpDetail text for the outer command")
             {
                 new CliArgument<string>("outer-command-arg")
                 {
-                    Description = "The argument for the outer command"
+                    Description = "The argument for the outer command",
                 },
-                inner
+                inner,
             };
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<outer-command-arg>    {_columnPadding}The argument for the outer command{NewLine}" +
-                $"{_indentation}<the-inner-command-arg>{_columnPadding}The argument for the inner command";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<outer-command-arg>    {_columnPadding}The argument for the outer command{NewLine}"
+                + $"{_indentation}<the-inner-command-arg>{_columnPadding}The argument for the inner command";
 
             _helpBuilder.Write(inner, _console);
 
@@ -564,17 +541,17 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliArgument<string>("outer-command-arg")
                 {
-                    Description = $"The argument\r\nfor the\ninner command"
-                }
+                    Description = $"The argument\r\nfor the\ninner command",
+                },
             };
 
             _helpBuilder.Write(command, _console);
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<outer-command-arg>{_columnPadding}The argument{NewLine}" +
-                $"{_indentation}                   {_columnPadding}for the{NewLine}" +
-                $"{_indentation}                   {_columnPadding}inner command{NewLine}{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<outer-command-arg>{_columnPadding}The argument{NewLine}"
+                + $"{_indentation}                   {_columnPadding}for the{NewLine}"
+                + $"{_indentation}                   {_columnPadding}inner command{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -587,7 +564,7 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string>("outer-command-arg")
                 {
                     Description = $"The argument\r\nfor the\ninner command",
-                }
+                },
             };
 
             var helpBuilder = GetHelpBuilder(25);
@@ -595,12 +572,12 @@ namespace System.CommandLine.Tests.Help
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<outer-com{_columnPadding}The {NewLine}" +
-                $"{_indentation}mand-arg> {_columnPadding}argument{NewLine}" +
-                $"{_indentation}          {_columnPadding}for the{NewLine}" +
-                $"{_indentation}          {_columnPadding}inner {NewLine}" +
-                $"{_indentation}          {_columnPadding}command{NewLine}{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<outer-com{_columnPadding}The {NewLine}"
+                + $"{_indentation}mand-arg> {_columnPadding}argument{NewLine}"
+                + $"{_indentation}          {_columnPadding}for the{NewLine}"
+                + $"{_indentation}          {_columnPadding}inner {NewLine}"
+                + $"{_indentation}          {_columnPadding}command{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -609,16 +586,13 @@ namespace System.CommandLine.Tests.Help
         public void Arguments_section_properly_wraps_description()
         {
             var longCmdText =
-                $"Argument\t" +
-                $"for inner command with some tabs that is long enough to wrap to a\t" +
-                $"new line";
+                $"Argument\t"
+                + $"for inner command with some tabs that is long enough to wrap to a\t"
+                + $"new line";
 
             var command = new CliCommand("outer", "Help text for the outer command")
             {
-                new CliArgument<string>("outer-command-arg")
-                {
-                    Description = longCmdText
-                }
+                new CliArgument<string>("outer-command-arg") { Description = longCmdText },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -626,9 +600,9 @@ namespace System.CommandLine.Tests.Help
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<outer-command-arg>{_columnPadding}Argument\tfor inner command with some tabs that {NewLine}" +
-                $"{_indentation}                   {_columnPadding}is long enough to wrap to a\tnew line{NewLine}{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<outer-command-arg>{_columnPadding}Argument\tfor inner command with some tabs that {NewLine}"
+                + $"{_indentation}                   {_columnPadding}is long enough to wrap to a\tnew line{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -637,25 +611,23 @@ namespace System.CommandLine.Tests.Help
         public void Arguments_section_properly_wraps()
         {
             var name = "argument-name-for-a-command-that-is-long-enough-to-wrap-to-a-new-line";
-            var description = "Argument description for a command with line breaks that is long enough to wrap to a new line.";
+            var description =
+                "Argument description for a command with line breaks that is long enough to wrap to a new line.";
 
             var command = new CliRootCommand
             {
-                new CliArgument<string>(name)
-                {
-                    Description = description
-                }
+                new CliArgument<string>(name) { Description = description },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<argument-name-for-a-command-that{_columnPadding}Argument description for a {NewLine}" +
-                $"{_indentation}-is-long-enough-to-wrap-to-a-new-{_columnPadding}command with line breaks that is {NewLine}" +
-                $"{_indentation}line>                            {_columnPadding}long enough to wrap to a new {NewLine}" +
-                $"{_indentation}                                 {_columnPadding}line.{NewLine}{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<argument-name-for-a-command-that{_columnPadding}Argument description for a {NewLine}"
+                + $"{_indentation}-is-long-enough-to-wrap-to-a-new-{_columnPadding}command with line breaks that is {NewLine}"
+                + $"{_indentation}line>                            {_columnPadding}long enough to wrap to a new {NewLine}"
+                + $"{_indentation}                                 {_columnPadding}line.{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -668,22 +640,19 @@ namespace System.CommandLine.Tests.Help
             var description = "This is the argument description";
 
             CliArgument argument = nullable
-                               ? new CliArgument<FileAccess?>("arg")
-                               : new CliArgument<FileAccess>("arg");
+                ? new CliArgument<FileAccess?>("arg")
+                : new CliArgument<FileAccess>("arg");
             argument.Description = description;
 
-            var command = new CliCommand("outer", "Help text for the outer command")
-            {
-                argument
-            };
+            var command = new CliCommand("outer", "Help text for the outer command") { argument };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<Read|ReadWrite|Write>{_columnPadding}{description}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<Read|ReadWrite|Write>{_columnPadding}{description}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -696,14 +665,10 @@ namespace System.CommandLine.Tests.Help
             var description = "This is the option description";
 
             CliOption option = nullable
-                                ? new CliOption<bool?>("--opt") { Description = description }
-                                : new CliOption<bool>("--opt") { Description = description };
+                ? new CliOption<bool?>("--opt") { Description = description }
+                : new CliOption<bool>("--opt") { Description = description };
 
-            var command = new CliCommand(
-                "outer", "Help text for the outer command")
-            {
-                option
-            };
+            var command = new CliCommand("outer", "Help text for the outer command") { option };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
@@ -720,15 +685,15 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<bool>("boolArgument") { Description = "Some value" },
                 new CliArgument<int>("intArgument") { Description = "Another value" },
             };
-            
+
             var helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<boolArgument>{_columnPadding}Some value{NewLine}" +
-                $"{_indentation}<intArgument> {_columnPadding}Another value{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<boolArgument>{_columnPadding}Some value{NewLine}"
+                + $"{_indentation}<intArgument> {_columnPadding}Another value{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -741,20 +706,19 @@ namespace System.CommandLine.Tests.Help
             var description = "This is the argument description";
 
             CliOption option = nullable
-                                ? new CliOption<FileAccess?>("--opt") { Description = description }
-                                : new CliOption<FileAccess>("--opt") { Description = description };
+                ? new CliOption<FileAccess?>("--opt") { Description = description }
+                : new CliOption<FileAccess>("--opt") { Description = description };
 
-            var command = new CliCommand(
-                "outer", "Help text for the outer command")
-            {
-                option
-            };
+            var command = new CliCommand("outer", "Help text for the outer command") { option };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
             helpBuilder.Write(command, _console);
 
-            _console.ToString().Should().Contain($"--opt <Read|ReadWrite|Write>{_columnPadding}{description}");
+            _console
+                .ToString()
+                .Should()
+                .Contain($"--opt <Read|ReadWrite|Write>{_columnPadding}{description}");
         }
 
         [Fact]
@@ -763,11 +727,10 @@ namespace System.CommandLine.Tests.Help
             var argument = new CliArgument<string>("the-arg")
             {
                 Description = "Help text from HelpDetail",
-                DefaultValueFactory = (_) => "the-arg-value"
+                DefaultValueFactory = (_) => "the-arg-value",
             };
 
-            var command = new CliCommand("the-command",
-                "Help text from description") { argument };
+            var command = new CliCommand("the-command", "Help text from description") { argument };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
@@ -777,20 +740,17 @@ namespace System.CommandLine.Tests.Help
 
             help.Should().Contain("[default: the-arg-value]");
         }
-        
+
         [Fact]
         public void Help_does_not_show_default_value_for_argument_when_default_value_is_empty()
         {
             var argument = new CliArgument<string>("the-arg")
-            { 
-                Description = "The argument description",
-                DefaultValueFactory = (_) => ""
-            };
-            
-            var command = new CliCommand("the-command", "The command description")
             {
-                argument
+                Description = "The argument description",
+                DefaultValueFactory = (_) => "",
             };
+
+            var command = new CliCommand("the-command", "The command description") { argument };
 
             var helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
@@ -810,10 +770,7 @@ namespace System.CommandLine.Tests.Help
                 DefaultValueFactory = (_) => "",
             };
 
-            var command = new CliCommand("the-command", "The command description")
-            {
-                option
-            };
+            var command = new CliCommand("the-command", "The command description") { option };
 
             var helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
@@ -833,13 +790,12 @@ namespace System.CommandLine.Tests.Help
             };
             var otherArgument = new CliArgument<string>("the-other-arg")
             {
-                DefaultValueFactory = (_) => "the-other-arg-value"
+                DefaultValueFactory = (_) => "the-other-arg-value",
             };
-            var command = new CliCommand("the-command",
-                "Help text from description")
+            var command = new CliCommand("the-command", "Help text from description")
             {
                 argument,
-                otherArgument
+                otherArgument,
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -849,9 +805,9 @@ namespace System.CommandLine.Tests.Help
             var help = _console.ToString();
 
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<the-arg>      {_columnPadding}[default: the-arg-value]{NewLine}" +
-                $"{_indentation}<the-other-arg>{_columnPadding}[default: the-other-arg-value]{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<the-arg>      {_columnPadding}[default: the-arg-value]{NewLine}"
+                + $"{_indentation}<the-other-arg>{_columnPadding}[default: the-other-arg-value]{NewLine}";
 
             help.Should().Contain(expected);
         }
@@ -863,14 +819,14 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliArgument<List<int>>("filter-size")
                 {
-                    DefaultValueFactory = (_) => new List<int>() { 0, 2, 4 }
-                }   
+                    DefaultValueFactory = (_) => new List<int>() { 0, 2, 4 },
+                },
             };
 
             _helpBuilder.Write(command, _console);
             var expected =
-                $"Arguments:{NewLine}" +
-                $"{_indentation}<filter-size>{_columnPadding}[default: 0|2|4]{NewLine}{NewLine}";
+                $"Arguments:{NewLine}"
+                + $"{_indentation}<filter-size>{_columnPadding}[default: 0|2|4]{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -878,34 +834,20 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Command_shared_arguments_with_one_or_more_arity_are_displayed_as_being_required()
         {
-            var arg = new CliArgument<string[]>("shared-args")
-            {
-                Arity = ArgumentArity.OneOrMore
-            };
+            var arg = new CliArgument<string[]>("shared-args") { Arity = ArgumentArity.OneOrMore };
 
-            var inner = new CliCommand("inner", "command help")
-            {
-                arg
-            };
-            _ = new CliCommand("outer", "command help")
-            {
-                inner,
-                arg
-            };
-            _ = new CliCommand("unused", "command help")
-            {
-                arg
-            };
+            var inner = new CliCommand("inner", "command help") { arg };
+            _ = new CliCommand("outer", "command help") { inner, arg };
+            _ = new CliCommand("unused", "command help") { arg };
 
             _helpBuilder.Write(inner, _console);
 
             var expected =
-                $"Usage:{NewLine}" +
-                $"{_indentation}outer <shared-args>... inner <shared-args>...";
+                $"Usage:{NewLine}" + $"{_indentation}outer <shared-args>... inner <shared-args>...";
 
             _console.ToString().Should().Contain(expected);
         }
-        
+
         #endregion Arguments
 
         #region Options
@@ -915,7 +857,7 @@ namespace System.CommandLine.Tests.Help
         {
             var commandLineBuilder = new CliCommand("noOptions")
             {
-                new CliCommand("outer", "description for outer")
+                new CliCommand("outer", "description for outer"),
             };
 
             _helpBuilder.Write(commandLineBuilder, _console);
@@ -938,11 +880,11 @@ namespace System.CommandLine.Tests.Help
         public void Options_section_includes_option_with_empty_description()
         {
             var command = new CliCommand("the-command", "Does things.")
-                          {
-                              new CliOption<string>("-x"),
-                              new CliOption<string>("-n"),
-                              new HelpOption()
-                          };
+            {
+                new CliOption<string>("-x"),
+                new CliOption<string>("-n"),
+                new HelpOption(),
+            };
 
             _helpBuilder.Write(command, _console);
 
@@ -955,17 +897,12 @@ namespace System.CommandLine.Tests.Help
         public void Options_section_does_not_contain_option_with_HelpDefinition_that_IsHidden()
         {
             var command = new CliCommand("the-command");
-            command.Options.Add(new CliOption<string>("-x")
-            {
-                Description = "Is Hidden",
-                Hidden = true
-            });
-            command.Options.Add(new CliOption<string>("-n")
-            {
-                Description = "Not Hidden",
-                Hidden = false
-            });
-
+            command.Options.Add(
+                new CliOption<string>("-x") { Description = "Is Hidden", Hidden = true }
+            );
+            command.Options.Add(
+                new CliOption<string>("-n") { Description = "Not Hidden", Hidden = false }
+            );
 
             _helpBuilder.Write(command, _console);
 
@@ -985,10 +922,10 @@ namespace System.CommandLine.Tests.Help
                 {
                     Description = "An option with 8 characters",
                 },
-                new CliOption<string>("--bbbbbbbbbb","-b")
+                new CliOption<string>("--bbbbbbbbbb", "-b")
                 {
-                    Description = "An option with 15 characters"
-                }
+                    Description = "An option with 15 characters",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -999,7 +936,8 @@ namespace System.CommandLine.Tests.Help
             var optionA = lines.Last(line => line.Contains("-a"));
             var optionB = lines.Last(line => line.Contains("-b"));
 
-            optionA.IndexOf("An option", StringComparison.Ordinal)
+            optionA
+                .IndexOf("An option", StringComparison.Ordinal)
                 .Should()
                 .Be(optionB.IndexOf("An option", StringComparison.Ordinal));
         }
@@ -1009,7 +947,10 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("command", "Help Test")
             {
-                new CliOption<string>("-multi", "--alt-option") { Description = "HelpDetail for option" }
+                new CliOption<string>("-multi", "--alt-option")
+                {
+                    Description = "HelpDetail for option",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1024,7 +965,10 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("command", "Help Test")
             {
-                new CliOption<string>("--m", "--alt-option") { Description = "HelpDetail for option" }
+                new CliOption<string>("--m", "--alt-option")
+                {
+                    Description = "HelpDetail for option",
+                },
             };
 
             _helpBuilder.Write(command, _console);
@@ -1035,25 +979,22 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Options_section_keeps_added_newlines()
         {
-            var command =
-                new CliCommand(
-                    "test-command",
-                    "Help text for the command")
+            var command = new CliCommand("test-command", "Help text for the command")
+            {
+                new CliOption<bool>("--aaa", "-a")
                 {
-                    new CliOption<bool>("--aaa", "-a")
-                    {
-                        Description = $"Help{NewLine}for \r\n the\noption"
-                    }
-                };
+                    Description = $"Help{NewLine}for \r\n the\noption",
+                },
+            };
 
             _helpBuilder.Write(command, _console);
 
             var expected =
-                $"Options:{NewLine}" +
-                $"{_indentation}-a, --aaa{_columnPadding}Help{NewLine}" +
-                $"{_indentation}         {_columnPadding}for {NewLine}" +
-                $"{_indentation}         {_columnPadding} the{NewLine}" +
-                $"{_indentation}         {_columnPadding}option{NewLine}{NewLine}";
+                $"Options:{NewLine}"
+                + $"{_indentation}-a, --aaa{_columnPadding}Help{NewLine}"
+                + $"{_indentation}         {_columnPadding}for {NewLine}"
+                + $"{_indentation}         {_columnPadding} the{NewLine}"
+                + $"{_indentation}         {_columnPadding}option{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -1075,8 +1016,8 @@ namespace System.CommandLine.Tests.Help
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"{_indentation}-a, --aaa{_columnPadding}The option whose description is long enough that it {NewLine}" +
-                $"{_indentation}         {_columnPadding}wraps to a new line{NewLine}";
+                $"{_indentation}-a, --aaa{_columnPadding}The option whose description is long enough that it {NewLine}"
+                + $"{_indentation}         {_columnPadding}wraps to a new line{NewLine}";
 
             Console.WriteLine(_console.ToString());
 
@@ -1095,7 +1036,7 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("--aaa", "-a")
                 {
                     Description = longOptionText,
-                    DefaultValueFactory = (_) => "the quick brown fox jumps over the lazy dog"
+                    DefaultValueFactory = (_) => "the quick brown fox jumps over the lazy dog",
                 },
                 new CliOption<string>("-y") { Description = "Option with a short description" },
             };
@@ -1104,9 +1045,9 @@ namespace System.CommandLine.Tests.Help
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"{_indentation}-a, --aaa{_columnPadding}The option whose description is long enough that it {NewLine}" +
-                $"{_indentation}         {_columnPadding}wraps to a new line [default: the quick brown fox jumps {NewLine}" +
-                $"{_indentation}         {_columnPadding}over the lazy dog]{NewLine}";
+                $"{_indentation}-a, --aaa{_columnPadding}The option whose description is long enough that it {NewLine}"
+                + $"{_indentation}         {_columnPadding}wraps to a new line [default: the quick brown fox jumps {NewLine}"
+                + $"{_indentation}         {_columnPadding}over the lazy dog]{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -1119,17 +1060,17 @@ namespace System.CommandLine.Tests.Help
 
             var command = new CliCommand("test")
             {
-                new CliOption<bool>(alias) { Description = description }
+                new CliOption<bool>(alias) { Description = description },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Options:{NewLine}" +
-                $"{_indentation}--option-alias-for-a-command-that{_columnPadding}Option description that is long {NewLine}" +
-                $"{_indentation}-is-long-enough-to-wrap-to-a-new-{_columnPadding}enough to wrap.{NewLine}" +
-                $"{_indentation}line{NewLine}{NewLine}";
+                $"Options:{NewLine}"
+                + $"{_indentation}--option-alias-for-a-command-that{_columnPadding}Option description that is long {NewLine}"
+                + $"{_indentation}-is-long-enough-to-wrap-to-a-new-{_columnPadding}enough to wrap.{NewLine}"
+                + $"{_indentation}line{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -1139,18 +1080,14 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<bool>("--required")
-                {
-                    Required = true
-                }
+                new CliOption<bool>("--required") { Required = true },
             };
 
             _helpBuilder.Write(command, _console);
 
             var help = _console.ToString();
 
-            help.Should()
-                .Contain("--required (REQUIRED)");
+            help.Should().Contain("--required (REQUIRED)");
         }
 
         [Fact]
@@ -1158,19 +1095,14 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("--required", "-r")
-                {
-                    Required = true,
-                    HelpName = "ARG"
-                }
+                new CliOption<string>("--required", "-r") { Required = true, HelpName = "ARG" },
             };
 
             _helpBuilder.Write(command, _console);
 
             var help = _console.ToString();
 
-            help.Should()
-                .Contain("-r, --required <ARG> (REQUIRED)");
+            help.Should().Contain("-r, --required <ARG> (REQUIRED)");
         }
 
         [Fact]
@@ -1182,18 +1114,14 @@ namespace System.CommandLine.Tests.Help
 
             var help = _console.ToString();
 
-            help.Should()
-                .Contain($"-?, -h, --help{_columnPadding}Show help and usage information");
+            help.Should().Contain($"-?, -h, --help{_columnPadding}Show help and usage information");
         }
 
         // TODO: use HiddenAliases here
         [Fact]
         public void Options_aliases_differing_only_by_prefix_are_deduplicated_favoring_dashed_prefixes()
         {
-            var command = new CliRootCommand
-            {
-                new CliOption<string>("-x", "/x")
-            };
+            var command = new CliRootCommand { new CliOption<string>("-x", "/x") };
 
             _helpBuilder.Write(command, _console);
 
@@ -1205,10 +1133,7 @@ namespace System.CommandLine.Tests.Help
         [Fact]
         public void Options_aliases_differing_only_by_prefix_are_deduplicated_favoring_double_dashed_prefixes()
         {
-            var command = new CliRootCommand
-            {
-                new CliOption<string>("--long", "/long")
-            };
+            var command = new CliRootCommand { new CliOption<string>("--long", "/long") };
 
             _helpBuilder.Write(command, _console);
 
@@ -1225,20 +1150,16 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<bool>("--first", "-f"),
                 new CliOption<bool>("--second", "-s"),
                 new CliOption<bool>("--third"),
-                new CliOption<bool>("--last", "-l")
+                new CliOption<bool>("--last", "-l"),
             };
 
             _helpBuilder.Write(command, _console);
             var help = _console
-                       .ToString()
-                       .Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
-                       .Select(l => l.Trim());
+                .ToString()
+                .Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(l => l.Trim());
 
-            help.Should().ContainInOrder(
-                "-f, --first",
-                "-s, --second",
-                "--third",
-                "-l, --last");
+            help.Should().ContainInOrder("-f, --first", "-s, --second", "--third", "-l, --last");
         }
 
         [Fact]
@@ -1246,7 +1167,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("-z", "-a", "--zzz", "--aaa")
+                new CliOption<string>("-z", "-a", "--zzz", "--aaa"),
             };
 
             _helpBuilder.Write(command, _console);
@@ -1262,8 +1183,8 @@ namespace System.CommandLine.Tests.Help
                 new CliOption<string>("-arg")
                 {
                     DefaultValueFactory = (_) => "the-arg-value",
-                    HelpName = "the-arg"
-                }
+                    HelpName = "the-arg",
+                },
             };
 
             HelpBuilder helpBuilder = GetHelpBuilder(SmallMaxWidth);
@@ -1282,14 +1203,14 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<List<int>>("--filter-size")
                 {
-                    DefaultValueFactory = (_) => new List<int> { 0, 2, 4 }
-                }
+                    DefaultValueFactory = (_) => new List<int> { 0, 2, 4 },
+                },
             };
 
             _helpBuilder.Write(command, _console);
             var expected =
-                $"Options:{NewLine}" +
-                $"{_indentation}--filter-size{_columnPadding}[default: 0|2|4]{NewLine}{NewLine}";
+                $"Options:{NewLine}"
+                + $"{_indentation}--filter-size{_columnPadding}[default: 0|2|4]{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -1301,19 +1222,17 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliOption<string[]>("--prefixes")
                 {
-                    DefaultValueFactory = (_) => new[]{ "^(TODO|BUG)", "^HACK" }
-                }
+                    DefaultValueFactory = (_) => new[] { "^(TODO|BUG)", "^HACK" },
+                },
             };
 
             _helpBuilder.Write(command, _console);
             var expected =
-                $"Options:{NewLine}" +
-                $"{_indentation}--prefixes{_columnPadding}[default: ^(TODO|BUG)|^HACK]{NewLine}{NewLine}";
+                $"Options:{NewLine}"
+                + $"{_indentation}--prefixes{_columnPadding}[default: ^(TODO|BUG)|^HACK]{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
-
-
 
         #endregion Options
 
@@ -1326,17 +1245,16 @@ namespace System.CommandLine.Tests.Help
             {
                 new CliCommand("inner-er", "inner-er description")
                 {
-                    new CliOption<string>("some-option") { Description = "some-option description" }
-                }
+                    new CliOption<string>("some-option")
+                    {
+                        Description = "some-option description",
+                    },
+                },
             };
 
             var sibling = new CliCommand("sibling", "sibling description");
 
-            var outer = new CliCommand("outer", "outer description")
-            {
-                sibling,
-                inner
-            };
+            var outer = new CliCommand("outer", "outer description") { sibling, inner };
 
             _helpBuilder.Write(inner, _console);
 
@@ -1351,18 +1269,18 @@ namespace System.CommandLine.Tests.Help
                 new CliArgument<string>("outer-args"),
                 new CliCommand("inner", $"inner{NewLine}command help \r\n with \nnewlines")
                 {
-                    new CliArgument<string>("inner-args")
-                }
+                    new CliArgument<string>("inner-args"),
+                },
             };
 
             _helpBuilder.Write(command, _console);
 
             var expected =
-                $"Commands:{NewLine}" +
-                $"{_indentation}inner <inner-args>{_columnPadding}inner{NewLine}" +
-                $"{_indentation}                  {_columnPadding}command help {NewLine}" +
-                $"{_indentation}                  {_columnPadding} with {NewLine}" +
-                $"{_indentation}                  {_columnPadding}newlines{NewLine}{NewLine}";
+                $"Commands:{NewLine}"
+                + $"{_indentation}inner <inner-args>{_columnPadding}inner{NewLine}"
+                + $"{_indentation}                  {_columnPadding}command help {NewLine}"
+                + $"{_indentation}                  {_columnPadding} with {NewLine}"
+                + $"{_indentation}                  {_columnPadding}newlines{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -1371,9 +1289,9 @@ namespace System.CommandLine.Tests.Help
         public void Subcommands_properly_wraps_description()
         {
             var longSubcommandDescription =
-                $"The\t" +
-                $"subcommand with some tabs that is long enough to wrap to a\t" +
-                $"new line";
+                $"The\t"
+                + $"subcommand with some tabs that is long enough to wrap to a\t"
+                + $"new line";
 
             var helpBuilder = GetHelpBuilder(SmallMaxWidth);
 
@@ -1383,16 +1301,16 @@ namespace System.CommandLine.Tests.Help
                 new CliCommand("inner-command", longSubcommandDescription)
                 {
                     new CliArgument<string[]>("inner-args"),
-                    new CliOption<string>("--verbosity", "-v")
-                }
+                    new CliOption<string>("--verbosity", "-v"),
+                },
             };
 
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Commands:{NewLine}" +
-                $"{_indentation}inner-command <inner-args>{_columnPadding}The\tsubcommand with some tabs that is {NewLine}" +
-                $"{_indentation}                          {_columnPadding}long enough to wrap to a\tnew line{NewLine}";
+                $"Commands:{NewLine}"
+                + $"{_indentation}inner-command <inner-args>{_columnPadding}The\tsubcommand with some tabs that is {NewLine}"
+                + $"{_indentation}                          {_columnPadding}long enough to wrap to a\tnew line{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -1401,21 +1319,19 @@ namespace System.CommandLine.Tests.Help
         public void Subcommands_section_properly_wraps()
         {
             var name = "subcommand-name-that-is-long-enough-to-wrap-to-a-new-line";
-            var description = "Subcommand description that is really long. So long that it caused the line to wrap.";
+            var description =
+                "Subcommand description that is really long. So long that it caused the line to wrap.";
 
-            var command = new CliRootCommand
-            {
-                new CliCommand(name, description)
-            };
+            var command = new CliRootCommand { new CliCommand(name, description) };
 
             var helpBuilder = GetHelpBuilder(SmallMaxWidth);
             helpBuilder.Write(command, _console);
 
             var expected =
-                $"Commands:{NewLine}" +
-                $"{_indentation}subcommand-name-that-is-long-enou{_columnPadding}Subcommand description that is {NewLine}" +
-                $"{_indentation}gh-to-wrap-to-a-new-line         {_columnPadding}really long. So long that it {NewLine}" +
-                $"{_indentation}                                 {_columnPadding}caused the line to wrap.{NewLine}{NewLine}";
+                $"Commands:{NewLine}"
+                + $"{_indentation}subcommand-name-that-is-long-enou{_columnPadding}Subcommand description that is {NewLine}"
+                + $"{_indentation}gh-to-wrap-to-a-new-line         {_columnPadding}really long. So long that it {NewLine}"
+                + $"{_indentation}                                 {_columnPadding}caused the line to wrap.{NewLine}{NewLine}";
 
             _console.ToString().Should().Contain(expected);
         }
@@ -1437,14 +1353,8 @@ namespace System.CommandLine.Tests.Help
         public void Subcommand_help_does_not_contain_hidden_command()
         {
             var command = new CliCommand("the-command", "Does things.");
-            var hiddenSubCommand = new CliCommand("the-hidden")
-            {
-                Hidden = true
-            };
-            var visibleSubCommand = new CliCommand("the-visible")
-            {
-                Hidden = false
-            };
+            var hiddenSubCommand = new CliCommand("the-hidden") { Hidden = true };
+            var visibleSubCommand = new CliCommand("the-visible") { Hidden = false };
             command.Subcommands.Add(hiddenSubCommand);
             command.Subcommands.Add(visibleSubCommand);
 
@@ -1460,14 +1370,8 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliCommand("the-command", "Does things.");
             var subCommand = new CliCommand("the-subcommand");
-            var hidden = new CliArgument<int>("the-hidden")
-            {
-                Hidden = true
-            };
-            var visible = new CliArgument<int>("the-visible")
-            {
-                Hidden = false
-            };
+            var hidden = new CliArgument<int>("the-hidden") { Hidden = true };
+            var visible = new CliArgument<int>("the-visible") { Hidden = false };
             subCommand.Arguments.Add(hidden);
             subCommand.Arguments.Add(visible);
             command.Subcommands.Add(subCommand);
@@ -1479,7 +1383,6 @@ namespace System.CommandLine.Tests.Help
             help.Should().Contain("the-visible");
         }
 
-
         #endregion Subcommands
 
 
@@ -1489,21 +1392,21 @@ namespace System.CommandLine.Tests.Help
             var argument = new CliArgument<string>("the-arg");
             var otherArgumentHidden = new CliArgument<string>("the-other-hidden-arg")
             {
-                Hidden = true
+                Hidden = true,
             };
-            argument.DefaultValueFactory = _  => "the-arg-value";
+            argument.DefaultValueFactory = _ => "the-arg-value";
             otherArgumentHidden.DefaultValueFactory = _ => "the-other-hidden-arg-value";
 
             var command = new CliCommand("outer", "outer command help")
+            {
+                new CliArgument<string>("outer-args"),
+                new CliCommand("inner", $"inner command help")
                 {
-                    new CliArgument<string>("outer-args"),
-                    new CliCommand("inner", $"inner command help")
-                    {
-                        argument,
-                        otherArgumentHidden,
-                        new CliArgument<string>("inner-other-arg-no-default")
-                    }
-                };
+                    argument,
+                    otherArgumentHidden,
+                    new CliArgument<string>("inner-other-arg-no-default"),
+                },
+            };
 
             HelpBuilder helpBuilder = GetHelpBuilder(LargeMaxWidth);
 
@@ -1519,21 +1422,18 @@ namespace System.CommandLine.Tests.Help
         {
             var argument = new CliArgument<string>("the-arg")
             {
-                DefaultValueFactory = (_) => "the-arg-value"
+                DefaultValueFactory = (_) => "the-arg-value",
             };
             var otherArgument = new CliArgument<string>("the-other-arg")
             {
-                DefaultValueFactory = (_) => "the-other-arg-value"
+                DefaultValueFactory = (_) => "the-other-arg-value",
             };
 
             var command = new CliCommand("outer", "outer command help")
-                {
-                    new CliArgument<string>("outer-args"),
-                    new CliCommand("inner", "inner command help")
-                    {
-                        argument, otherArgument
-                    }
-                };
+            {
+                new CliArgument<string>("outer-args"),
+                new CliCommand("inner", "inner command help") { argument, otherArgument },
+            };
 
             HelpBuilder helpBuilder = GetHelpBuilder(LargeMaxWidth);
 
@@ -1559,7 +1459,7 @@ namespace System.CommandLine.Tests.Help
         {
             var command = new CliRootCommand
             {
-                new CliOption<string>("-x") { Description = "the-option-description" }
+                new CliOption<string>("-x") { Description = "the-option-description" },
             };
 
             var helpBuilder = GetHelpBuilder();
@@ -1569,7 +1469,11 @@ namespace System.CommandLine.Tests.Help
 
             var output = writer.ToString();
 
-            output.Should().Contain($"{LocalizationResources.HelpUsageOptions()}{NewLine}{NewLine}{LocalizationResources.HelpOptionsTitle()}");
+            output
+                .Should()
+                .Contain(
+                    $"{LocalizationResources.HelpUsageOptions()}{NewLine}{NewLine}{LocalizationResources.HelpOptionsTitle()}"
+                );
         }
     }
 }

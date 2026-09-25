@@ -19,9 +19,15 @@ internal partial class MigrationsAddCommand : ContextCommandBase
 
         _name = command.Argument("<NAME>", Resources.MigrationNameDescription);
 
-        _outputDir = command.Option("-o|--output-dir <PATH>", Resources.MigrationsOutputDirDescription);
+        _outputDir = command.Option(
+            "-o|--output-dir <PATH>",
+            Resources.MigrationsOutputDirDescription
+        );
         _json = Json.ConfigureOption(command);
-        _namespace = command.Option("-n|--namespace <NAMESPACE>", Resources.MigrationsNamespaceDescription);
+        _namespace = command.Option(
+            "-n|--namespace <NAMESPACE>",
+            Resources.MigrationsNamespaceDescription
+        );
 
         base.Configure(command);
     }

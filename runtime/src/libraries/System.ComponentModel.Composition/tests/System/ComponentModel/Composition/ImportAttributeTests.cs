@@ -9,9 +9,7 @@ using Xunit;
 namespace System.ComponentModel.Composition
 {
     [Export]
-    public class WorkingType
-    {
-    }
+    public class WorkingType { }
 
     [Export]
     public class Constants

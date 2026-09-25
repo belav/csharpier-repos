@@ -52,9 +52,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             internal ImmutableArray<PendingBranch> ToImmutable()
             {
-                return _labeledBranches is null ?
-                    _unlabeledBranches.ToImmutable() :
-                    ImmutableArray.CreateRange(AsEnumerable());
+                return _labeledBranches is null
+                    ? _unlabeledBranches.ToImmutable()
+                    : ImmutableArray.CreateRange(AsEnumerable());
             }
 
             internal ArrayBuilder<PendingBranch>? GetAndRemoveBranches(LabelSymbol? label)
@@ -114,7 +114,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 if (_labeledBranches is null)
                 {
-                    _labeledBranches = PooledDictionary<LabelSymbol, ArrayBuilder<PendingBranch>>.GetInstance();
+                    _labeledBranches = PooledDictionary<
+                        LabelSymbol,
+                        ArrayBuilder<PendingBranch>
+                    >.GetInstance();
                 }
                 if (!_labeledBranches.TryGetValue(label, out var branches))
                 {
@@ -129,9 +132,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// </summary>
             internal IEnumerable<PendingBranch> AsEnumerable()
             {
-                return _labeledBranches is null ?
-                    _unlabeledBranches :
-                    asEnumerableCore();
+                return _labeledBranches is null ? _unlabeledBranches : asEnumerableCore();
 
                 IEnumerable<PendingBranch> asEnumerableCore()
                 {

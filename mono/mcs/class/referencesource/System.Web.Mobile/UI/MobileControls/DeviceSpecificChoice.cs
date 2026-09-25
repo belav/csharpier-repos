@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="DeviceSpecificChoice.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -11,14 +11,13 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
-using System.Web;
-using System.Web.UI;
-using System.Web.Mobile;
 using System.Security.Permissions;
+using System.Web;
+using System.Web.Mobile;
+using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * DeviceSpecificChoice object.
      *
@@ -31,9 +30,17 @@ namespace System.Web.UI.MobileControls
         PersistName("Choice"),
         PersistChildren(false),
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class DeviceSpecificChoice : IParserAccessor, IAttributeAccessor
     {
         private String _deviceFilter = String.Empty;
@@ -43,67 +50,47 @@ namespace System.Web.UI.MobileControls
         private IDictionary _templates;
         private DeviceSpecific _owner;
 
-        private static IComparer _caseInsensitiveComparer =
-            new CaseInsensitiveComparer(CultureInfo.InvariantCulture);
+        private static IComparer _caseInsensitiveComparer = new CaseInsensitiveComparer(
+            CultureInfo.InvariantCulture
+        );
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Filter"]/*' />
-        [
-            DefaultValue("")
-        ]
-        public String Filter  
+        [DefaultValue("")]
+        public String Filter
         {
             get
             {
                 Debug.Assert(_deviceFilter != null);
-                return _deviceFilter; 
+                return _deviceFilter;
             }
-             
             set
             {
                 if (value == null)
                 {
                     value = String.Empty;
                 }
-                _deviceFilter = value; 
+                _deviceFilter = value;
             }
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Argument"]/*' />
-        public String Argument  
+        public String Argument
         {
-            get
-            {
-                return _argument; 
-            }
-             
-            set
-            {
-                _argument = value; 
-            }
+            get { return _argument; }
+            set { _argument = value; }
         }
 
         // This property is used by the Designer, and has no runtime effect
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Xmlns"]/*' />
-        [
-            DefaultValue("")
-        ]
+        [DefaultValue("")]
         public String Xmlns
         {
-            get
-            {
-                return _xmlns;
-            }
-
-            set
-            {
-                _xmlns = value;
-            }
+            get { return _xmlns; }
+            set { _xmlns = value; }
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Contents"]/*' />
-        [
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public IDictionary Contents
         {
             get
@@ -117,9 +104,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.Templates"]/*' />
-        [
-            PersistenceMode(PersistenceMode.InnerProperty),
-        ]
+        [PersistenceMode(PersistenceMode.InnerProperty)]
         public IDictionary Templates
         {
             get
@@ -133,15 +118,10 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoice.HasTemplates"]/*' />
-        [
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool HasTemplates
         {
-            get
-            {
-                return _templates != null && _templates.Count > 0;
-            }
+            get { return _templates != null && _templates.Count > 0; }
         }
 
         internal void ApplyProperties()
@@ -150,41 +130,48 @@ namespace System.Web.UI.MobileControls
             while (enumerator.MoveNext())
             {
                 Object parentObject = Owner.Owner;
-                
+
                 String propertyName = (String)enumerator.Key;
                 String propertyValue = enumerator.Value as String;
 
                 // The ID property may not be overridden, according to spec
-                // (since it will override the parent's ID, not very useful). 
-                if (String.Equals(propertyName, "id", StringComparison.OrdinalIgnoreCase)) {
+                // (since it will override the parent's ID, not very useful).
+                if (String.Equals(propertyName, "id", StringComparison.OrdinalIgnoreCase))
+                {
                     throw new ArgumentException(
-                        SR.GetString(SR.DeviceSpecificChoice_InvalidPropertyOverride,
-                                     propertyName));
+                        SR.GetString(SR.DeviceSpecificChoice_InvalidPropertyOverride, propertyName)
+                    );
                 }
-                
+
                 if (propertyValue != null)
                 {
                     // Parse through any "-" syntax items.
 
                     int dash;
                     while ((dash = propertyName.IndexOf("-", StringComparison.Ordinal)) != -1)
-                    {   
+                    {
                         String containingObjectName = propertyName.Substring(0, dash);
-                        PropertyDescriptor pd = TypeDescriptor.GetProperties(parentObject).Find(
-                                    containingObjectName, true);
+                        PropertyDescriptor pd = TypeDescriptor
+                            .GetProperties(parentObject)
+                            .Find(containingObjectName, true);
                         if (pd == null)
                         {
                             throw new ArgumentException(
-                                SR.GetString(SR.DeviceSpecificChoice_OverridingPropertyNotFound,
-                                             propertyName));
+                                SR.GetString(
+                                    SR.DeviceSpecificChoice_OverridingPropertyNotFound,
+                                    propertyName
+                                )
+                            );
                         }
 
                         parentObject = pd.GetValue(parentObject);
                         propertyName = propertyName.Substring(dash + 1);
                     }
 
-                    if (!FindAndApplyProperty(parentObject, propertyName, propertyValue) &&
-                        !FindAndApplyEvent(parentObject, propertyName, propertyValue))
+                    if (
+                        !FindAndApplyProperty(parentObject, propertyName, propertyValue)
+                        && !FindAndApplyEvent(parentObject, propertyName, propertyValue)
+                    )
                     {
                         // If control supports IAttributeAccessor (which it should)
                         // use it to set a custom attribute.
@@ -197,8 +184,11 @@ namespace System.Web.UI.MobileControls
                         else
                         {
                             throw new ArgumentException(
-                                SR.GetString(SR.DeviceSpecificChoice_OverridingPropertyNotFound,
-                                         propertyName));
+                                SR.GetString(
+                                    SR.DeviceSpecificChoice_OverridingPropertyNotFound,
+                                    propertyName
+                                )
+                            );
                         }
                     }
                 }
@@ -215,10 +205,11 @@ namespace System.Web.UI.MobileControls
 
             // Make sure the property is declarable.
 
-            if (pd.Attributes.Contains(DesignerSerializationVisibilityAttribute.Hidden)) 
+            if (pd.Attributes.Contains(DesignerSerializationVisibilityAttribute.Hidden))
             {
                 throw new ArgumentException(
-                    SR.GetString(SR.DeviceSpecificChoice_OverridingPropertyNotDeclarable, name));
+                    SR.GetString(SR.DeviceSpecificChoice_OverridingPropertyNotDeclarable, name)
+                );
             }
 
             Object o;
@@ -250,7 +241,8 @@ namespace System.Web.UI.MobileControls
                 else
                 {
                     throw new InvalidCastException(
-                        SR.GetString(SR.DeviceSpecificChoice_OverridingPropertyTypeCast, name));
+                        SR.GetString(SR.DeviceSpecificChoice_OverridingPropertyTypeCast, name)
+                    );
                 }
             }
             pd.SetValue(parentObject, o);
@@ -259,9 +251,11 @@ namespace System.Web.UI.MobileControls
 
         private bool FindAndApplyEvent(Object parentObject, String name, String value)
         {
-            if (name.Length > 2 &&
-                    Char.ToLower(name[0], CultureInfo.InvariantCulture) == 'o' &&
-                    Char.ToLower(name[1], CultureInfo.InvariantCulture) == 'n')
+            if (
+                name.Length > 2
+                && Char.ToLower(name[0], CultureInfo.InvariantCulture) == 'o'
+                && Char.ToLower(name[1], CultureInfo.InvariantCulture) == 'n'
+            )
             {
                 String eventName = name.Substring(2);
                 EventDescriptor ed = TypeDescriptor.GetEvents(parentObject).Find(eventName, true);
@@ -277,15 +271,8 @@ namespace System.Web.UI.MobileControls
 
         internal DeviceSpecific Owner
         {
-            get
-            {
-                return _owner;
-            }
-
-            set
-            {
-                _owner = value;
-            }
+            get { return _owner; }
+            set { _owner = value; }
         }
 
         internal bool Evaluate(MobileCapabilities capabilities)
@@ -294,18 +281,19 @@ namespace System.Web.UI.MobileControls
             // checking against evaluators defined in code on the page, then by
             // consulting the MobileCapabilities object.
             bool result;
-            if (_deviceFilter != null && _deviceFilter.Length == 0) {
+            if (_deviceFilter != null && _deviceFilter.Length == 0)
+            {
                 // indicates device-independent <choice> clause
                 result = true;
             }
             else if (CheckOnPageEvaluator(capabilities, out result))
             {
                 // result already been set through the out-bound parameter
-                // above. 
+                // above.
             }
             else
             {
-                // The exception message generated by HasCapability() failing is 
+                // The exception message generated by HasCapability() failing is
                 // inappropriate, so we substitute a more specific one.
                 try
                 {
@@ -313,11 +301,10 @@ namespace System.Web.UI.MobileControls
                 }
                 catch
                 {
-                    throw new ArgumentException(SR.GetString(
-                                    SR.DeviceSpecificChoice_CantFindFilter,
-                                    _deviceFilter));
+                    throw new ArgumentException(
+                        SR.GetString(SR.DeviceSpecificChoice_CantFindFilter, _deviceFilter)
+                    );
                 }
-                
             }
 
             return result;
@@ -325,21 +312,18 @@ namespace System.Web.UI.MobileControls
 
         // Return true if specified evaluator exists on the page with the
         // correct signature.  If it does, return result of invoking it in
-        // evaluatorResult. 
-        private bool CheckOnPageEvaluator(MobileCapabilities capabilities,
-                                          out bool evaluatorResult)
+        // evaluatorResult.
+        private bool CheckOnPageEvaluator(MobileCapabilities capabilities, out bool evaluatorResult)
         {
             evaluatorResult = false;
             TemplateControl containingTemplateControl = Owner.ClosestTemplateControl;
 
-            MethodInfo methodInfo =
-                containingTemplateControl.GetType().GetMethod(_deviceFilter,
-                                                              new Type[]
-                                                              {
-                                                                  typeof(MobileCapabilities), 
-                                                                  typeof(String)
-                                                              }
-                    );
+            MethodInfo methodInfo = containingTemplateControl
+                .GetType()
+                .GetMethod(
+                    _deviceFilter,
+                    new Type[] { typeof(MobileCapabilities), typeof(String) }
+                );
 
             if (methodInfo == null || methodInfo.ReturnType != typeof(bool))
             {
@@ -348,13 +332,10 @@ namespace System.Web.UI.MobileControls
             else
             {
                 evaluatorResult = (bool)
-                    methodInfo.Invoke(containingTemplateControl,
-                                      new Object[]
-                                      {
-                                          capabilities,
-                                          _argument
-                                      }
-                                     );
+                    methodInfo.Invoke(
+                        containingTemplateControl,
+                        new Object[] { capabilities, _argument }
+                    );
 
                 return true;
             }
@@ -367,8 +348,9 @@ namespace System.Web.UI.MobileControls
             Object o = Contents[key];
             if (o != null & !(o is String))
             {
-                throw new ArgumentException(SR.GetString(
-                            SR.DeviceSpecificChoice_PropertyNotAnAttribute));
+                throw new ArgumentException(
+                    SR.GetString(SR.DeviceSpecificChoice_PropertyNotAnAttribute)
+                );
             }
             return (String)o;
         }
@@ -392,17 +374,20 @@ namespace System.Web.UI.MobileControls
         }
 
         #region IAttributeAccessor implementation
-        String IAttributeAccessor.GetAttribute(String name) {
+        String IAttributeAccessor.GetAttribute(String name)
+        {
             return GetAttribute(name);
         }
 
-        void IAttributeAccessor.SetAttribute(String name, String value) {
+        void IAttributeAccessor.SetAttribute(String name, String value)
+        {
             SetAttribute(name, value);
         }
         #endregion
 
         #region IParserAccessor implementation
-        void IParserAccessor.AddParsedSubObject(Object obj) {
+        void IParserAccessor.AddParsedSubObject(Object obj)
+        {
             AddParsedSubObject(obj);
         }
         #endregion
@@ -414,7 +399,7 @@ namespace System.Web.UI.MobileControls
     // the framework), but all internal to the DeviceSpecificChoice. They have to do with
     // persistence of arbitrary templates in a choice. Here's a description of what is done:
     //
-    // ASP.NET provides no way for an object or control to allow an arbitrary bag of 
+    // ASP.NET provides no way for an object or control to allow an arbitrary bag of
     // templates. It only allows one way to define templates - the parent object must have
     // a property, of type ITemplate, with the same name as the template name. For example,
     // the code
@@ -439,9 +424,9 @@ namespace System.Web.UI.MobileControls
     //    has DeviceSpecificChoiceTemplateBuilder as its builder.
     // 2) DeviceSpecificChoiceTemplateBuilder inherits from TemplateBuilder, and thus has the same
     //    behavior as TemplateBuilder for parsing and compiling a template. However, it has
-    //    an overriden Init method, which changes the tag name (and thus, the template name) 
+    //    an overriden Init method, which changes the tag name (and thus, the template name)
     //    to a constant, "Template". It also saves the real template name in a property.
-    // 3) When parsed, the framework calls the AppendSubBuilder method of the 
+    // 3) When parsed, the framework calls the AppendSubBuilder method of the
     //    DeviceSpecificChoiceBuilder, to add the template builder into it. But this builder
     //    first creates an intermediate builder, for the class DeviceSpecificChoiceTemplateContainer,
     //    adding the template name as a property in the builder's attribute dictionary. It then
@@ -453,7 +438,7 @@ namespace System.Web.UI.MobileControls
     //          <ItemTemplate>...</ItemTemplate>
     //          <HeaderTemplate>...</HeaderTemplate>
     //      </Choice>
-    // 
+    //
     // into
     //
     //      <Choice>
@@ -467,7 +452,7 @@ namespace System.Web.UI.MobileControls
     //
     // Now, at runtime the compiled code creates a DeviceSpecificChoiceTemplateContainer object,
     // and calls the AddParsedSubObject method of the DeviceSpecificChoice with it. This code (above)
-    // then extracts the template referred to by the Template property of the object, and 
+    // then extracts the template referred to by the Template property of the object, and
     // uses the Name property to add it to the template bag. Presto, we have a general template bag.
 
     /*
@@ -477,34 +462,46 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class DeviceSpecificChoiceControlBuilder : ControlBuilder
     {
         private bool _isDeviceIndependent = false;
+
         internal bool IsDeviceIndependent()
         {
             return _isDeviceIndependent;
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.Init"]/*' />
-        public override void Init(TemplateParser parser, 
-                                  ControlBuilder parentBuilder,
-                                  Type type, 
-                                  String tagName, 
-                                  String id, 
-                                  IDictionary attributes) 
+        public override void Init(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            String tagName,
+            String id,
+            IDictionary attributes
+        )
         {
             if (!(parentBuilder is DeviceSpecificControlBuilder))
             {
                 throw new ArgumentException(
-                    SR.GetString(SR.DeviceSpecificChoice_ChoiceOnlyExistInDeviceSpecific));
+                    SR.GetString(SR.DeviceSpecificChoice_ChoiceOnlyExistInDeviceSpecific)
+                );
             }
 
             _isDeviceIndependent = attributes == null || attributes["Filter"] == null;
 
-            base.Init (parser, parentBuilder, type, tagName, id, attributes);
+            base.Init(parser, parentBuilder, type, tagName, id, attributes);
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.AppendLiteralString"]/*' />
@@ -514,7 +511,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.GetChildControlType"]/*' />
-        public override Type GetChildControlType(String tagName, IDictionary attributes) 
+        public override Type GetChildControlType(String tagName, IDictionary attributes)
         {
             // Assume children are templates.
 
@@ -522,13 +519,13 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceControlBuilder.AppendSubBuilder"]/*' />
-        public override void AppendSubBuilder(ControlBuilder subBuilder) 
+        public override void AppendSubBuilder(ControlBuilder subBuilder)
         {
-            DeviceSpecificChoiceTemplateBuilder tplBuilder = 
+            DeviceSpecificChoiceTemplateBuilder tplBuilder =
                 subBuilder as DeviceSpecificChoiceTemplateBuilder;
             if (tplBuilder != null)
             {
-                // Called to add a template. Insert an intermediate control, 
+                // Called to add a template. Insert an intermediate control,
                 // by creating and adding its builder.
 
                 ListDictionary dict = new ListDictionary();
@@ -538,10 +535,15 @@ namespace System.Web.UI.MobileControls
 
                 // 1 and "xxxx" are bogus filename/line number values.
                 ControlBuilder container = ControlBuilder.CreateBuilderFromType(
-                                                Parser, this, 
-                                                typeof(DeviceSpecificChoiceTemplateContainer),
-                                                "Templates",
-                                                null, dict, 1, null);
+                    Parser,
+                    this,
+                    typeof(DeviceSpecificChoiceTemplateContainer),
+                    "Templates",
+                    null,
+                    dict,
+                    1,
+                    null
+                );
                 base.AppendSubBuilder(container);
 
                 // Now, append the template builder into the new intermediate builder.
@@ -563,20 +565,15 @@ namespace System.Web.UI.MobileControls
      * Copyright (c) 2000 Microsoft Corporation
      */
 
-    [
-        ControlBuilderAttribute(typeof(DeviceSpecificChoiceTemplateBuilder))
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [ControlBuilderAttribute(typeof(DeviceSpecificChoiceTemplateBuilder))]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DeviceSpecificChoiceTemplateType : Control, IParserAccessor
-
     {
-        private DeviceSpecificChoiceTemplateType()
-        {
-        }
+        private DeviceSpecificChoiceTemplateType() { }
 
-        void IParserAccessor.AddParsedSubObject(Object o)
-        {
-        }
+        void IParserAccessor.AddParsedSubObject(Object o) { }
     }
 
     /*
@@ -589,9 +586,17 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class DeviceSpecificChoiceTemplateBuilder : TemplateBuilder
     {
         private String _templateName;
@@ -600,10 +605,7 @@ namespace System.Web.UI.MobileControls
 
         internal String TemplateName
         {
-            get
-            {
-                return _templateName;
-            }
+            get { return _templateName; }
         }
 
         CompileLiteralTextParser _textParser = null;
@@ -613,8 +615,7 @@ namespace System.Web.UI.MobileControls
             {
                 if (_textParser == null)
                 {
-                    _textParser = 
-                        new CompileLiteralTextParser(Parser, this, "xxxx", 1);
+                    _textParser = new CompileLiteralTextParser(Parser, this, "xxxx", 1);
                     if (_controlsInserted)
                     {
                         _textParser.ResetBreaking();
@@ -626,12 +627,14 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateBuilder.Init"]/*' />
-        public override void Init(TemplateParser parser, 
-                                  ControlBuilder parentBuilder,
-                                  Type type, 
-                                  String tagName,
-                                  String id, 
-                                  IDictionary attributes) 
+        public override void Init(
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            String tagName,
+            String id,
+            IDictionary attributes
+        )
         {
             // Save off template name, and always pass the name "Template" to the base
             // class, because the intermediate object has this property as the name.
@@ -643,7 +646,7 @@ namespace System.Web.UI.MobileControls
 
             if (!InDesigner)
             {
-                DeviceSpecificChoiceControlBuilder choiceBuilder = 
+                DeviceSpecificChoiceControlBuilder choiceBuilder =
                     parentBuilder as DeviceSpecificChoiceControlBuilder;
                 _doLiteralText = choiceBuilder != null && choiceBuilder.IsDeviceIndependent();
             }
@@ -671,7 +674,7 @@ namespace System.Web.UI.MobileControls
             if (_doLiteralText)
             {
                 // The first one is used if ASP.NET is compiled with FAST_DATABINDING off. The second
-                // is used if it is compiled with FAST_DATABINDING on. Note: We can't do a type 
+                // is used if it is compiled with FAST_DATABINDING on. Note: We can't do a type
                 // comparison because CodeBlockBuilder is internal.
                 // if (typeof(DataBoundLiteralControl).IsAssignableFrom(subBuilder.ControlType))
                 if (subBuilder.GetType().FullName == "System.Web.UI.CodeBlockBuilder")
@@ -702,7 +705,7 @@ namespace System.Web.UI.MobileControls
     }
 
     /*
-     * DeviceSpecificChoiceTemplateContainer - "dummy" container object for 
+     * DeviceSpecificChoiceTemplateContainer - "dummy" container object for
      *      a template that goes inside a Choice. Once the Choice receives and
      *      extracts the information out of it, this object is simply discarded.
      *      See note on "Template Bag" above.
@@ -711,42 +714,35 @@ namespace System.Web.UI.MobileControls
      */
 
     /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class DeviceSpecificChoiceTemplateContainer
     {
         private ITemplate _template;
         private String _name;
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer.Template"]/*' />
-        [
-            Filterable(false),
-            TemplateContainer(typeof(TemplateContainer)),
-        ]
+        [Filterable(false), TemplateContainer(typeof(TemplateContainer))]
         public ITemplate Template
         {
-            get
-            {
-                return _template;
-            }
-            set
-            {
-                _template = value;
-            }
+            get { return _template; }
+            set { _template = value; }
         }
 
         /// <include file='doc\DeviceSpecificChoice.uex' path='docs/doc[@for="DeviceSpecificChoiceTemplateContainer.Name"]/*' />
         public String Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get { return _name; }
+            set { _name = value; }
         }
     }
 }

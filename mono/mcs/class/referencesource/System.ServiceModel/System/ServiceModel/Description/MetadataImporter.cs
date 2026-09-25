@@ -16,23 +16,23 @@ namespace System.ServiceModel.Description
     public abstract partial class MetadataImporter
     {
         readonly KeyedByTypeCollection<IPolicyImportExtension> policyExtensions;
-        readonly Dictionary<XmlQualifiedName, ContractDescription> knownContracts = new Dictionary<XmlQualifiedName, ContractDescription>();
-        readonly Collection<MetadataConversionError> errors = new Collection<MetadataConversionError>();
+        readonly Dictionary<XmlQualifiedName, ContractDescription> knownContracts =
+            new Dictionary<XmlQualifiedName, ContractDescription>();
+        readonly Collection<MetadataConversionError> errors =
+            new Collection<MetadataConversionError>();
         readonly Dictionary<object, object> state = new Dictionary<object, object>();
 
         //prevent inheritance until we are ready to allow it.
         internal MetadataImporter()
-            : this (null, MetadataImporterQuotas.Defaults)
-        {
-        }
+            : this(null, MetadataImporterQuotas.Defaults) { }
 
         internal MetadataImporter(IEnumerable<IPolicyImportExtension> policyImportExtensions)
-            : this (policyImportExtensions, MetadataImporterQuotas.Defaults)
-        {
-        }
+            : this(policyImportExtensions, MetadataImporterQuotas.Defaults) { }
 
-        internal MetadataImporter(IEnumerable<IPolicyImportExtension> policyImportExtensions,
-            MetadataImporterQuotas quotas)
+        internal MetadataImporter(
+            IEnumerable<IPolicyImportExtension> policyImportExtensions,
+            MetadataImporterQuotas quotas
+        )
         {
             if (quotas == null)
             {
@@ -45,7 +45,9 @@ namespace System.ServiceModel.Description
             }
 
             this.Quotas = quotas;
-            this.policyExtensions = new KeyedByTypeCollection<IPolicyImportExtension>(policyImportExtensions);
+            this.policyExtensions = new KeyedByTypeCollection<IPolicyImportExtension>(
+                policyImportExtensions
+            );
         }
 
         public KeyedByTypeCollection<IPolicyImportExtension> PolicyImportExtensions
@@ -72,15 +74,23 @@ namespace System.ServiceModel.Description
         public abstract Collection<ContractDescription> ImportAllContracts();
         public abstract ServiceEndpointCollection ImportAllEndpoints();
 
-        internal virtual XmlElement ResolvePolicyReference(string policyReference, XmlElement contextAssertion)
+        internal virtual XmlElement ResolvePolicyReference(
+            string policyReference,
+            XmlElement contextAssertion
+        )
         {
             return null;
         }
-        internal BindingElementCollection ImportPolicy(ServiceEndpoint endpoint, Collection<Collection<XmlElement>> policyAlternatives)
+
+        internal BindingElementCollection ImportPolicy(
+            ServiceEndpoint endpoint,
+            Collection<Collection<XmlElement>> policyAlternatives
+        )
         {
             foreach (Collection<XmlElement> selectedPolicy in policyAlternatives)
             {
-                BindingOnlyPolicyConversionContext policyConversionContext = new BindingOnlyPolicyConversionContext(endpoint, selectedPolicy);
+                BindingOnlyPolicyConversionContext policyConversionContext =
+                    new BindingOnlyPolicyConversionContext(endpoint, selectedPolicy);
 
                 if (TryImportPolicy(policyConversionContext))
                 {
@@ -102,7 +112,9 @@ namespace System.ServiceModel.Description
                 {
                     if (Fx.IsFatal(e))
                         throw;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(CreateExtensionException(policyImporter, e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        CreateExtensionException(policyImporter, e)
+                    );
                 }
 
             if (policyContext.GetBindingAssertions().Count != 0)
@@ -121,8 +133,10 @@ namespace System.ServiceModel.Description
             return true;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "uses ClientSection.UnsafeGetSection to get config in PT",
-            Safe = "does not leak config object, just picks up extensions")]
+        [Fx.Tag.SecurityNote(
+            Critical = "uses ClientSection.UnsafeGetSection to get config in PT",
+            Safe = "does not leak config object, just picks up extensions"
+        )]
         [SecuritySafeCritical]
         static Collection<IPolicyImportExtension> LoadPolicyExtensionsFromConfig()
         {
@@ -131,7 +145,11 @@ namespace System.ServiceModel.Description
 
         Exception CreateExtensionException(IPolicyImportExtension importer, Exception e)
         {
-            string errorMessage = SR.GetString(SR.PolicyExtensionImportError, importer.GetType(), e.Message);
+            string errorMessage = SR.GetString(
+                SR.PolicyExtensionImportError,
+                importer.GetType(),
+                e.Message
+            );
             return new InvalidOperationException(errorMessage, e);
         }
 
@@ -141,34 +159,45 @@ namespace System.ServiceModel.Description
             readonly BindingElementCollection bindingElements = new BindingElementCollection();
             readonly PolicyAssertionCollection bindingPolicy;
 
-            internal BindingOnlyPolicyConversionContext(ServiceEndpoint endpoint, IEnumerable<XmlElement> bindingPolicy)
+            internal BindingOnlyPolicyConversionContext(
+                ServiceEndpoint endpoint,
+                IEnumerable<XmlElement> bindingPolicy
+            )
                 : base(endpoint)
             {
                 this.bindingPolicy = new PolicyAssertionCollection(bindingPolicy);
             }
 
-            public override BindingElementCollection BindingElements { get { return this.bindingElements; } }
+            public override BindingElementCollection BindingElements
+            {
+                get { return this.bindingElements; }
+            }
 
             public override PolicyAssertionCollection GetBindingAssertions()
             {
                 return this.bindingPolicy;
             }
 
-            public override PolicyAssertionCollection GetOperationBindingAssertions(OperationDescription operation)
+            public override PolicyAssertionCollection GetOperationBindingAssertions(
+                OperationDescription operation
+            )
             {
                 return noPolicy;
             }
 
-            public override PolicyAssertionCollection GetMessageBindingAssertions(MessageDescription message)
+            public override PolicyAssertionCollection GetMessageBindingAssertions(
+                MessageDescription message
+            )
             {
                 return noPolicy;
             }
 
-            public override PolicyAssertionCollection GetFaultBindingAssertions(FaultDescription fault)
+            public override PolicyAssertionCollection GetFaultBindingAssertions(
+                FaultDescription fault
+            )
             {
                 return noPolicy;
             }
         }
     }
-
 }

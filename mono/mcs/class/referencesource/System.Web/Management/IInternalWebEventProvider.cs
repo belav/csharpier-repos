@@ -4,10 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Management {
-
+namespace System.Web.Management
+{
     // Used internally to mark our providers
-    internal interface IInternalWebEventProvider {
-    }
+    internal interface IInternalWebEventProvider { }
 }
-

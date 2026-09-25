@@ -1,21 +1,21 @@
-﻿// 
+﻿//
 // ResourceProperty.cs
-//  
+//
 // Author:
 //       Marek Habersack <grendel@twistedcode.net>
-// 
+//
 // Copyright (c) 2011 Novell, Inc
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -32,50 +32,49 @@ using System.Runtime.CompilerServices;
 
 namespace System.Data.Services.Providers
 {
-	[DebuggerDisplay ("{kind}: {name}")]
-	public class ResourceProperty
-	{
-		public bool CanReflectOnInstanceTypeProperty {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+    [DebuggerDisplay("{kind}: {name}")]
+    public class ResourceProperty
+    {
+        public bool CanReflectOnInstanceTypeProperty
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public ResourceType ResourceType {
-			get; private set;
-		}
+        public ResourceType ResourceType { get; private set; }
 
-		public string Name {
-			get; private set;
-		}
+        public string Name { get; private set; }
 
-		public string MimeType {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public string MimeType
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public ResourcePropertyKind Kind {
-			get; private set;
-		}
+        public ResourcePropertyKind Kind { get; private set; }
 
-		public object CustomState {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        public object CustomState
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		public bool IsReadOnly {
-			get; private set;
-		}
+        public bool IsReadOnly { get; private set; }
 
-		public ResourceProperty (string name, ResourcePropertyKind kind, ResourceType propertyResourceType)
-		{
-			this.Name = name;
-			this.Kind = kind;
-			this.ResourceType = propertyResourceType;
-		}
+        public ResourceProperty(
+            string name,
+            ResourcePropertyKind kind,
+            ResourceType propertyResourceType
+        )
+        {
+            this.Name = name;
+            this.Kind = kind;
+            this.ResourceType = propertyResourceType;
+        }
 
-		public void SetReadOnly ()
-		{
-			IsReadOnly = true;
-		}
-	}
+        public void SetReadOnly()
+        {
+            IsReadOnly = true;
+        }
+    }
 }

@@ -4,16 +4,16 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
+namespace System.Web.UI
+{
     using System;
     using System.Threading;
     using System.Threading.Tasks;
 
     // Represents a testable (mockable) PageAsyncTask
 
-    internal interface IPageAsyncTask {
-
+    internal interface IPageAsyncTask
+    {
         Task ExecuteAsync(object sender, EventArgs e, CancellationToken cancellationToken);
-
     }
 }

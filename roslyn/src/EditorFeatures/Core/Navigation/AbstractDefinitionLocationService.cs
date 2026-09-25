@@ -22,60 +22,97 @@ namespace Microsoft.CodeAnalysis.Navigation
 
         protected AbstractDefinitionLocationService(
             IThreadingContext threadingContext,
-            IStreamingFindUsagesPresenter streamingPresenter)
+            IStreamingFindUsagesPresenter streamingPresenter
+        )
         {
             _threadingContext = threadingContext;
             _streamingPresenter = streamingPresenter;
         }
 
         private static Task<INavigableLocation?> GetNavigableLocationAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var solution = document.Project.Solution;
             var workspace = solution.Workspace;
             var service = workspace.Services.GetRequiredService<IDocumentNavigationService>();
 
             return service.GetLocationForPositionAsync(
-                workspace, document.Id, position, virtualSpace: 0, cancellationToken);
+                workspace,
+                document.Id,
+                position,
+                virtualSpace: 0,
+                cancellationToken
+            );
         }
 
         public async Task<DefinitionLocation?> GetDefinitionLocationAsync(
-            Document document, int position, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             var symbolService = document.GetRequiredLanguageService<IGoToDefinitionSymbolService>();
-            var (controlFlowTarget, controlFlowSpan) = await symbolService.GetTargetIfControlFlowAsync(
-                document, position, cancellationToken).ConfigureAwait(false);
+            var (controlFlowTarget, controlFlowSpan) = await symbolService
+                .GetTargetIfControlFlowAsync(document, position, cancellationToken)
+                .ConfigureAwait(false);
             if (controlFlowTarget != null)
             {
                 var location = await GetNavigableLocationAsync(
-                    document, controlFlowTarget.Value, cancellationToken).ConfigureAwait(false);
-                return location is null ? null : new DefinitionLocation(location, new DocumentSpan(document, controlFlowSpan));
+                        document,
+                        controlFlowTarget.Value,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
+                return location is null
+                    ? null
+                    : new DefinitionLocation(location, new DocumentSpan(document, controlFlowSpan));
             }
             else
             {
                 // Try to compute the referenced symbol and attempt to go to definition for the symbol.
-                var (symbol, project, span) = await symbolService.GetSymbolProjectAndBoundSpanAsync(
-                    document, position, cancellationToken).ConfigureAwait(false);
+                var (symbol, project, span) = await symbolService
+                    .GetSymbolProjectAndBoundSpanAsync(document, position, cancellationToken)
+                    .ConfigureAwait(false);
                 if (symbol is null)
                     return null;
 
                 // if the symbol only has a single source location, and we're already on it,
                 // try to see if there's a better symbol we could navigate to.
                 var remappedLocation = await GetAlternativeLocationIfAlreadyOnDefinitionAsync(
-                    project, position, symbol, originalDocument: document, cancellationToken).ConfigureAwait(false);
+                        project,
+                        position,
+                        symbol,
+                        originalDocument: document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (remappedLocation != null)
-                    return new DefinitionLocation(remappedLocation, new DocumentSpan(document, span));
+                    return new DefinitionLocation(
+                        remappedLocation,
+                        new DocumentSpan(document, span)
+                    );
 
                 var isThirdPartyNavigationAllowed = await IsThirdPartyNavigationAllowedAsync(
-                    symbol, position, document, cancellationToken).ConfigureAwait(false);
+                        symbol,
+                        position,
+                        document,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var location = await GoToDefinitionHelpers.GetDefinitionLocationAsync(
-                    symbol,
-                    project.Solution,
-                    _threadingContext,
-                    _streamingPresenter,
-                    thirdPartyNavigationAllowed: isThirdPartyNavigationAllowed,
-                    cancellationToken: cancellationToken).ConfigureAwait(false);
+                var location = await GoToDefinitionHelpers
+                    .GetDefinitionLocationAsync(
+                        symbol,
+                        project.Solution,
+                        _threadingContext,
+                        _streamingPresenter,
+                        thirdPartyNavigationAllowed: isThirdPartyNavigationAllowed,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (location is null)
                     return null;
 
@@ -89,7 +126,12 @@ namespace Microsoft.CodeAnalysis.Navigation
         /// <param name="project">The project context to use for finding symbols</param>
         /// <param name="originalDocument">The document the user is navigating from. This may not be part of the project supplied.</param>
         private async Task<INavigableLocation?> GetAlternativeLocationIfAlreadyOnDefinitionAsync(
-            Project project, int position, ISymbol symbol, Document originalDocument, CancellationToken cancellationToken)
+            Project project,
+            int position,
+            ISymbol symbol,
+            Document originalDocument,
+            CancellationToken cancellationToken
+        )
         {
             var solution = project.Solution;
 
@@ -115,43 +157,73 @@ namespace Microsoft.CodeAnalysis.Navigation
             if (interfaceImpls.Length == 0)
                 return null;
 
-            var title = string.Format(EditorFeaturesResources._0_implemented_members,
-                FindUsagesHelpers.GetDisplayName(symbol));
+            var title = string.Format(
+                EditorFeaturesResources._0_implemented_members,
+                FindUsagesHelpers.GetDisplayName(symbol)
+            );
 
             using var _ = ArrayBuilder<DefinitionItem>.GetInstance(out var builder);
             foreach (var impl in interfaceImpls)
             {
-                builder.AddRange(await GoToDefinitionFeatureHelpers.GetDefinitionsAsync(
-                    impl, solution, thirdPartyNavigationAllowed: false, cancellationToken).ConfigureAwait(false));
+                builder.AddRange(
+                    await GoToDefinitionFeatureHelpers
+                        .GetDefinitionsAsync(
+                            impl,
+                            solution,
+                            thirdPartyNavigationAllowed: false,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                );
             }
 
             var definitions = builder.ToImmutable();
 
-            return await _streamingPresenter.GetStreamingLocationAsync(
-                _threadingContext, solution.Workspace, title, definitions, cancellationToken).ConfigureAwait(false);
+            return await _streamingPresenter
+                .GetStreamingLocationAsync(
+                    _threadingContext,
+                    solution.Workspace,
+                    title,
+                    definitions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         private static async Task<bool> IsThirdPartyNavigationAllowedAsync(
-            ISymbol symbolToNavigateTo, int caretPosition, Document document, CancellationToken cancellationToken)
+            ISymbol symbolToNavigateTo,
+            int caretPosition,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxRoot = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
             var syntaxFactsService = document.GetRequiredLanguageService<ISyntaxFactsService>();
-            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(syntaxRoot, caretPosition);
+            var containingTypeDeclaration = syntaxFactsService.GetContainingTypeDeclaration(
+                syntaxRoot,
+                caretPosition
+            );
 
             if (containingTypeDeclaration != null)
             {
-                var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 Debug.Assert(semanticModel != null);
 
                 // Allow third parties to navigate to all symbols except types/constructors
                 // if we are navigating from the corresponding type.
 
-                if (semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken) is ITypeSymbol containingTypeSymbol &&
-                    (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor()))
+                if (
+                    semanticModel.GetDeclaredSymbol(containingTypeDeclaration, cancellationToken)
+                        is ITypeSymbol containingTypeSymbol
+                    && (symbolToNavigateTo is ITypeSymbol || symbolToNavigateTo.IsConstructor())
+                )
                 {
-                    var candidateTypeSymbol = symbolToNavigateTo is ITypeSymbol
-                        ? symbolToNavigateTo
-                        : symbolToNavigateTo.ContainingType;
+                    var candidateTypeSymbol =
+                        symbolToNavigateTo is ITypeSymbol
+                            ? symbolToNavigateTo
+                            : symbolToNavigateTo.ContainingType;
 
                     if (Equals(containingTypeSymbol, candidateTypeSymbol))
                     {

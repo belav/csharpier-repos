@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using Xunit.Sdk;
 using Xunit.Abstractions;
+using Xunit.Sdk;
 
 namespace Legacy.Support
 {

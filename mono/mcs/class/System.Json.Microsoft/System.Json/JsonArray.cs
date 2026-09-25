@@ -12,8 +12,11 @@ namespace System.Json
     /// <summary>
     /// A JsonArray is an ordered sequence of zero or more <see cref="System.Json.JsonValue"/> objects.
     /// </summary>
-    [SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix",
-        Justification = "Array already conveys the meaning of collection")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix",
+        Justification = "Array already conveys the meaning of collection"
+    )]
     [DataContract]
     public sealed class JsonArray : JsonValue, IList<JsonValue>
     {
@@ -90,12 +93,14 @@ namespace System.Json
         public override JsonValue this[int index]
         {
             get { return values[index]; }
-
             set
             {
                 if (value != null && value.JsonType == JsonType.Default)
                 {
-                    throw new ArgumentNullException("value", Properties.Resources.UseOfDefaultNotAllowed);
+                    throw new ArgumentNullException(
+                        "value",
+                        Properties.Resources.UseOfDefaultNotAllowed
+                    );
                 }
 
                 JsonValue oldValue = values[index];
@@ -133,7 +138,10 @@ namespace System.Json
             {
                 if (item != null && item.JsonType == JsonType.Default)
                 {
-                    throw new ArgumentNullException("items", Properties.Resources.UseOfDefaultNotAllowed);
+                    throw new ArgumentNullException(
+                        "items",
+                        Properties.Resources.UseOfDefaultNotAllowed
+                    );
                 }
 
                 values.Add(item);
@@ -180,7 +188,10 @@ namespace System.Json
         {
             if (item != null && item.JsonType == JsonType.Default)
             {
-                throw new ArgumentNullException("item", Properties.Resources.UseOfDefaultNotAllowed);
+                throw new ArgumentNullException(
+                    "item",
+                    Properties.Resources.UseOfDefaultNotAllowed
+                );
             }
 
             RaiseItemChanging(item, JsonValueChange.Add, index);
@@ -213,7 +224,10 @@ namespace System.Json
         {
             if (item != null && item.JsonType == JsonType.Default)
             {
-                throw new ArgumentNullException("item", Properties.Resources.UseOfDefaultNotAllowed);
+                throw new ArgumentNullException(
+                    "item",
+                    Properties.Resources.UseOfDefaultNotAllowed
+                );
             }
 
             int index = Count;
@@ -294,7 +308,7 @@ namespace System.Json
         }
 
         /// <summary>
-        /// Safe indexer for the <see cref="System.Json.JsonValue"/> type. 
+        /// Safe indexer for the <see cref="System.Json.JsonValue"/> type.
         /// </summary>
         /// <param name="index">The zero-based index of the element to get.</param>
         /// <returns>If the index is within the array bounds and the value corresponding to the
@@ -332,7 +346,10 @@ namespace System.Json
         {
             for (int i = 0; i < values.Count; i++)
             {
-                yield return new KeyValuePair<string, JsonValue>(i.ToString(CultureInfo.InvariantCulture), values[i]);
+                yield return new KeyValuePair<string, JsonValue>(
+                    i.ToString(CultureInfo.InvariantCulture),
+                    values[i]
+                );
             }
         }
 
@@ -348,7 +365,10 @@ namespace System.Json
                 throw new ArgumentNullException("jsonWriter");
             }
 
-            jsonWriter.WriteAttributeString(JXmlToJsonValueConverter.TypeAttributeName, JXmlToJsonValueConverter.ArrayAttributeValue);
+            jsonWriter.WriteAttributeString(
+                JXmlToJsonValueConverter.TypeAttributeName,
+                JXmlToJsonValueConverter.ArrayAttributeValue
+            );
         }
 
         /// <summary>
@@ -358,7 +378,10 @@ namespace System.Json
         /// <param name="jsonWriter">The JXML writer used to write JSON.</param>
         /// <param name="currentIndex">The index within this collection.</param>
         /// <returns>The next item in the collection, or null of there are no more items.</returns>
-        internal override JsonValue WriteStartElementAndGetNext(XmlDictionaryWriter jsonWriter, int currentIndex)
+        internal override JsonValue WriteStartElementAndGetNext(
+            XmlDictionaryWriter jsonWriter,
+            int currentIndex
+        )
         {
             if (jsonWriter == null)
             {

@@ -42,8 +42,14 @@ namespace System.Linq.Parallel
         //     pipeline     - whether to use a pipelined merge.
         //
 
-        internal DefaultMergeHelper(PartitionedStream<TInputOutput, TIgnoreKey> partitions, bool ignoreOutput, ParallelMergeOptions options,
-            TaskScheduler taskScheduler, CancellationState cancellationState, int queryId)
+        internal DefaultMergeHelper(
+            PartitionedStream<TInputOutput, TIgnoreKey> partitions,
+            bool ignoreOutput,
+            ParallelMergeOptions options,
+            TaskScheduler taskScheduler,
+            CancellationState cancellationState,
+            int queryId
+        )
         {
             Debug.Assert(partitions != null);
 
@@ -53,7 +59,9 @@ namespace System.Linq.Parallel
             _ignoreOutput = ignoreOutput;
             IntValueEvent consumerEvent = new IntValueEvent();
 
-            TraceHelpers.TraceInfo("DefaultMergeHelper::.ctor(..): creating a default merge helper");
+            TraceHelpers.TraceInfo(
+                "DefaultMergeHelper::.ctor(..): creating a default merge helper"
+            );
 
             // If output won't be ignored, we need to manufacture a set of channels for the consumer.
             // Otherwise, when the merge is executed, we'll just invoke the activities themselves.
@@ -65,27 +73,48 @@ namespace System.Linq.Parallel
                     if (partitions.PartitionCount > 1)
                     {
                         Debug.Assert(!ParallelEnumerable.SinglePartitionMode);
-                        _asyncChannels =
-                            MergeExecutor<TInputOutput>.MakeAsynchronousChannels(partitions.PartitionCount, options, consumerEvent, cancellationState.MergedCancellationToken);
-                        _channelEnumerator = new AsynchronousChannelMergeEnumerator<TInputOutput>(_taskGroupState, _asyncChannels, consumerEvent);
+                        _asyncChannels = MergeExecutor<TInputOutput>.MakeAsynchronousChannels(
+                            partitions.PartitionCount,
+                            options,
+                            consumerEvent,
+                            cancellationState.MergedCancellationToken
+                        );
+                        _channelEnumerator = new AsynchronousChannelMergeEnumerator<TInputOutput>(
+                            _taskGroupState,
+                            _asyncChannels,
+                            consumerEvent
+                        );
                     }
                     else
                     {
                         // If there is only one partition, we don't need to create channels. The only producer enumerator
                         // will be used as the result enumerator.
-                        _channelEnumerator = ExceptionAggregator.WrapQueryEnumerator(partitions[0], _taskGroupState.CancellationState).GetEnumerator();
+                        _channelEnumerator = ExceptionAggregator
+                            .WrapQueryEnumerator(partitions[0], _taskGroupState.CancellationState)
+                            .GetEnumerator();
                     }
                 }
                 else
                 {
-                    _syncChannels =
-                        MergeExecutor<TInputOutput>.MakeSynchronousChannels(partitions.PartitionCount);
-                    _channelEnumerator = new SynchronousChannelMergeEnumerator<TInputOutput>(_taskGroupState, _syncChannels);
+                    _syncChannels = MergeExecutor<TInputOutput>.MakeSynchronousChannels(
+                        partitions.PartitionCount
+                    );
+                    _channelEnumerator = new SynchronousChannelMergeEnumerator<TInputOutput>(
+                        _taskGroupState,
+                        _syncChannels
+                    );
                 }
 
-                Debug.Assert(_asyncChannels == null || _asyncChannels.Length == partitions.PartitionCount);
-                Debug.Assert(_syncChannels == null || _syncChannels.Length == partitions.PartitionCount);
-                Debug.Assert(_channelEnumerator != null, "enumerator can't be null if we're not ignoring output");
+                Debug.Assert(
+                    _asyncChannels == null || _asyncChannels.Length == partitions.PartitionCount
+                );
+                Debug.Assert(
+                    _syncChannels == null || _syncChannels.Length == partitions.PartitionCount
+                );
+                Debug.Assert(
+                    _channelEnumerator != null,
+                    "enumerator can't be null if we're not ignoring output"
+                );
             }
         }
 
@@ -101,15 +130,29 @@ namespace System.Linq.Parallel
             if (_asyncChannels != null)
             {
                 Debug.Assert(!ParallelEnumerable.SinglePartitionMode);
-                SpoolingTask.SpoolPipeline<TInputOutput, TIgnoreKey>(_taskGroupState, _partitions, _asyncChannels, _taskScheduler);
+                SpoolingTask.SpoolPipeline<TInputOutput, TIgnoreKey>(
+                    _taskGroupState,
+                    _partitions,
+                    _asyncChannels,
+                    _taskScheduler
+                );
             }
             else if (_syncChannels != null)
             {
-                SpoolingTask.SpoolStopAndGo<TInputOutput, TIgnoreKey>(_taskGroupState, _partitions, _syncChannels, _taskScheduler);
+                SpoolingTask.SpoolStopAndGo<TInputOutput, TIgnoreKey>(
+                    _taskGroupState,
+                    _partitions,
+                    _syncChannels,
+                    _taskScheduler
+                );
             }
             else if (_ignoreOutput)
             {
-                SpoolingTask.SpoolForAll<TInputOutput, TIgnoreKey>(_taskGroupState, _partitions, _taskScheduler);
+                SpoolingTask.SpoolForAll<TInputOutput, TIgnoreKey>(
+                    _taskGroupState,
+                    _partitions,
+                    _taskScheduler
+                );
             }
             else
             {
@@ -161,7 +204,11 @@ namespace System.Linq.Parallel
             else
             {
                 List<TInputOutput> output = new List<TInputOutput>();
-                using (IEnumerator<TInputOutput> enumerator = ((IMergeHelper<TInputOutput>)this).GetEnumerator())
+                using (
+                    IEnumerator<TInputOutput> enumerator = (
+                        (IMergeHelper<TInputOutput>)this
+                    ).GetEnumerator()
+                )
                 {
                     while (enumerator.MoveNext())
                     {

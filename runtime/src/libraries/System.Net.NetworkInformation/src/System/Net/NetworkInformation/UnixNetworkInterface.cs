@@ -12,8 +12,10 @@ namespace System.Net.NetworkInformation
         protected int _index = -1;
         protected NetworkInterfaceType _networkInterfaceType = NetworkInterfaceType.Unknown;
         internal PhysicalAddress _physicalAddress = PhysicalAddress.None;
-        internal List<UnixUnicastIPAddressInformation> _unicastAddresses = new List<UnixUnicastIPAddressInformation>();
+        internal List<UnixUnicastIPAddressInformation> _unicastAddresses =
+            new List<UnixUnicastIPAddressInformation>();
         internal List<IPAddress>? _multicastAddresses;
+
         // If this is an ipv6 device, contains the Scope ID.
         protected uint? _ipv6ScopeId;
 
@@ -22,21 +24,37 @@ namespace System.Net.NetworkInformation
             _name = name;
         }
 
-        public sealed override string Id { get { return _name; } }
+        public sealed override string Id
+        {
+            get { return _name; }
+        }
 
-        public sealed override string Name { get { return _name; } }
+        public sealed override string Name
+        {
+            get { return _name; }
+        }
 
-        public sealed override string Description { get { return _name; } }
+        public sealed override string Description
+        {
+            get { return _name; }
+        }
 
-        public override NetworkInterfaceType NetworkInterfaceType { get { return _networkInterfaceType; } }
+        public override NetworkInterfaceType NetworkInterfaceType
+        {
+            get { return _networkInterfaceType; }
+        }
 
-        public sealed override PhysicalAddress GetPhysicalAddress() { return _physicalAddress; }
+        public sealed override PhysicalAddress GetPhysicalAddress()
+        {
+            return _physicalAddress;
+        }
 
         public override bool Supports(NetworkInterfaceComponent networkInterfaceComponent)
         {
-            Sockets.AddressFamily family = (networkInterfaceComponent == NetworkInterfaceComponent.IPv4) ?
-                Sockets.AddressFamily.InterNetwork :
-                Sockets.AddressFamily.InterNetworkV6;
+            Sockets.AddressFamily family =
+                (networkInterfaceComponent == NetworkInterfaceComponent.IPv4)
+                    ? Sockets.AddressFamily.InterNetwork
+                    : Sockets.AddressFamily.InterNetworkV6;
 
             foreach (UnixUnicastIPAddressInformation addr in _unicastAddresses)
             {
@@ -52,17 +70,26 @@ namespace System.Net.NetworkInformation
         /// <summary>
         /// The system's index for this network device.
         /// </summary>
-        public int Index { get { return _index; } }
+        public int Index
+        {
+            get { return _index; }
+        }
 
         /// <summary>
         /// Returns a list of all Unicast addresses of the interface's IP Addresses.
         /// </summary>
-        public List<UnixUnicastIPAddressInformation> UnicastAddress { get { return _unicastAddresses; } }
+        public List<UnixUnicastIPAddressInformation> UnicastAddress
+        {
+            get { return _unicastAddresses; }
+        }
 
         /// <summary>
         /// Returns a list of all Multicast addresses of the interface's IP Addresses.
         /// </summary>
-        public List<IPAddress>? MulticastAddresess { get { return _multicastAddresses; } }
+        public List<IPAddress>? MulticastAddresess
+        {
+            get { return _multicastAddresses; }
+        }
 
         // Adds any IPAddress to this interface's List of addresses.
         protected void AddAddress(IPAddress ipAddress, int prefix)
@@ -87,7 +114,10 @@ namespace System.Net.NetworkInformation
             _index = addressInfo->InterfaceIndex;
         }
 
-        protected unsafe void ProcessIpv6Address(Interop.Sys.IpAddressInfo* addressInfo, uint scopeId)
+        protected unsafe void ProcessIpv6Address(
+            Interop.Sys.IpAddressInfo* addressInfo,
+            uint scopeId
+        )
         {
             IPAddress address = IPAddressUtil.GetIPAddressFromNativeInfo(addressInfo);
             address.ScopeId = scopeId;
@@ -101,7 +131,12 @@ namespace System.Net.NetworkInformation
             byte[] macAddress = new byte[llAddr->NumAddressBytes];
             fixed (byte* macAddressPtr = macAddress)
             {
-                Buffer.MemoryCopy(llAddr->AddressBytes, macAddressPtr, llAddr->NumAddressBytes, llAddr->NumAddressBytes);
+                Buffer.MemoryCopy(
+                    llAddr->AddressBytes,
+                    macAddressPtr,
+                    llAddr->NumAddressBytes,
+                    llAddr->NumAddressBytes
+                );
             }
             PhysicalAddress physicalAddress = new PhysicalAddress(macAddress);
 

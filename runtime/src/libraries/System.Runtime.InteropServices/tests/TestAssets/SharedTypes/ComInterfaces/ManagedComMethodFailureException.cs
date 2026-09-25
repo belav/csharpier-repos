@@ -5,7 +5,5 @@ using System;
 
 namespace SharedTypes.ComInterfaces
 {
-    internal class ManagedComMethodFailureException : Exception
-    {
-    }
+    internal class ManagedComMethodFailureException : Exception { }
 }

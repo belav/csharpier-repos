@@ -58,16 +58,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         public void Example()
         {
             #region Usage
-            Person person = new Person
-            {
-                FirstName = "Sarah",
-                LastName = "Security"
-            };
+            Person person = new Person { FirstName = "Sarah", LastName = "Security" };
 
-            string json = JsonConvert.SerializeObject(person, Formatting.Indented, new JsonSerializerSettings
-            {
-                ContractResolver = new CamelCasePropertyNamesContractResolver()
-            });
+            string json = JsonConvert.SerializeObject(
+                person,
+                Formatting.Indented,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -77,11 +77,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""Sarah"",
   ""lastName"": ""Security"",
   ""fullName"": ""Sarah Security""
-}", json);
+}",
+                json
+            );
         }
     }
 }

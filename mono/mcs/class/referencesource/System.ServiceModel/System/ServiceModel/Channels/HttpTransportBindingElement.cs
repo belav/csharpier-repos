@@ -18,7 +18,9 @@ namespace System.ServiceModel.Channels
 
     public class HttpTransportBindingElement
         : TransportBindingElement,
-        IWsdlExportExtension, IPolicyExportExtension, ITransportPolicyImport
+            IWsdlExportExtension,
+            IPolicyExportExtension,
+            ITransportPolicyImport
     {
         bool allowCookies;
         AuthenticationSchemes authenticationScheme;
@@ -43,7 +45,7 @@ namespace System.ServiceModel.Channels
         HttpAnonymousUriPrefixMatcher anonymousUriPrefixMatcher;
         HttpMessageHandlerFactory httpMessageHandlerFactory;
         int maxPendingAccepts;
-        
+
         public HttpTransportBindingElement()
             : base()
         {
@@ -61,7 +63,8 @@ namespace System.ServiceModel.Channels
             this.realm = HttpTransportDefaults.Realm;
             this.requestInitializationTimeout = HttpTransportDefaults.RequestInitializationTimeout;
             this.transferMode = HttpTransportDefaults.TransferMode;
-            this.unsafeConnectionNtlmAuthentication = HttpTransportDefaults.UnsafeConnectionNtlmAuthentication;
+            this.unsafeConnectionNtlmAuthentication =
+                HttpTransportDefaults.UnsafeConnectionNtlmAuthentication;
             this.useDefaultWebProxy = HttpTransportDefaults.UseDefaultWebProxy;
             this.webSocketSettings = HttpTransportDefaults.GetDefaultWebSocketTransportSettings();
             this.webProxy = null;
@@ -87,14 +90,17 @@ namespace System.ServiceModel.Channels
             this.realm = elementToBeCloned.realm;
             this.requestInitializationTimeout = elementToBeCloned.requestInitializationTimeout;
             this.transferMode = elementToBeCloned.transferMode;
-            this.unsafeConnectionNtlmAuthentication = elementToBeCloned.unsafeConnectionNtlmAuthentication;
+            this.unsafeConnectionNtlmAuthentication =
+                elementToBeCloned.unsafeConnectionNtlmAuthentication;
             this.useDefaultWebProxy = elementToBeCloned.useDefaultWebProxy;
             this.webSocketSettings = elementToBeCloned.webSocketSettings.Clone();
             this.webProxy = elementToBeCloned.webProxy;
             this.extendedProtectionPolicy = elementToBeCloned.ExtendedProtectionPolicy;
             if (elementToBeCloned.anonymousUriPrefixMatcher != null)
             {
-                this.anonymousUriPrefixMatcher = new HttpAnonymousUriPrefixMatcher(elementToBeCloned.anonymousUriPrefixMatcher);
+                this.anonymousUriPrefixMatcher = new HttpAnonymousUriPrefixMatcher(
+                    elementToBeCloned.anonymousUriPrefixMatcher
+                );
             }
             this.MessageHandlerFactory = elementToBeCloned.MessageHandlerFactory;
         }
@@ -102,63 +108,35 @@ namespace System.ServiceModel.Channels
         [DefaultValue(HttpTransportDefaults.AllowCookies)]
         public bool AllowCookies
         {
-            get
-            {
-                return this.allowCookies;
-            }
-            set
-            {
-                this.allowCookies = value;
-            }
+            get { return this.allowCookies; }
+            set { this.allowCookies = value; }
         }
 
         [DefaultValue(HttpTransportDefaults.AuthenticationScheme)]
         public AuthenticationSchemes AuthenticationScheme
         {
-            get
-            {
-                return this.authenticationScheme;
-            }
-
-            set
-            {
-                this.authenticationScheme = value;
-            }
+            get { return this.authenticationScheme; }
+            set { this.authenticationScheme = value; }
         }
 
         [DefaultValue(HttpTransportDefaults.BypassProxyOnLocal)]
         public bool BypassProxyOnLocal
         {
-            get
-            {
-                return this.bypassProxyOnLocal;
-            }
-            set
-            {
-                this.bypassProxyOnLocal = value;
-            }
+            get { return this.bypassProxyOnLocal; }
+            set { this.bypassProxyOnLocal = value; }
         }
 
         [DefaultValue(HttpTransportDefaults.DecompressionEnabled)]
         public bool DecompressionEnabled
         {
-            get
-            {
-                return this.decompressionEnabled;
-            }
-            set
-            {
-                this.decompressionEnabled = value;
-            }
+            get { return this.decompressionEnabled; }
+            set { this.decompressionEnabled = value; }
         }
 
         [DefaultValue(HttpTransportDefaults.HostNameComparisonMode)]
         public HostNameComparisonMode HostNameComparisonMode
         {
-            get
-            {
-                return this.hostNameComparisonMode;
-            }
+            get { return this.hostNameComparisonMode; }
             set
             {
                 HostNameComparisonModeHelper.Validate(value);
@@ -168,22 +146,13 @@ namespace System.ServiceModel.Channels
 
         public HttpMessageHandlerFactory MessageHandlerFactory
         {
-            get
-            {
-                return this.httpMessageHandlerFactory;
-            }
-            set
-            {
-                this.httpMessageHandlerFactory = value;
-            }
+            get { return this.httpMessageHandlerFactory; }
+            set { this.httpMessageHandlerFactory = value; }
         }
 
         public ExtendedProtectionPolicy ExtendedProtectionPolicy
         {
-            get
-            {
-                return this.extendedProtectionPolicy;
-            }
+            get { return this.extendedProtectionPolicy; }
             set
             {
                 if (value == null)
@@ -191,11 +160,21 @@ namespace System.ServiceModel.Channels
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("value");
                 }
 
-                if (value.PolicyEnforcement == PolicyEnforcement.Always &&
-                    !System.Security.Authentication.ExtendedProtection.ExtendedProtectionPolicy.OSSupportsExtendedProtection)
+                if (
+                    value.PolicyEnforcement == PolicyEnforcement.Always
+                    && !System
+                        .Security
+                        .Authentication
+                        .ExtendedProtection
+                        .ExtendedProtectionPolicy
+                        .OSSupportsExtendedProtection
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new PlatformNotSupportedException(SR.GetString(SR.ExtendedProtectionNotSupported)));
+                        new PlatformNotSupportedException(
+                            SR.GetString(SR.ExtendedProtectionNotSupported)
+                        )
+                    );
                 }
 
                 this.extendedProtectionPolicy = value;
@@ -205,27 +184,15 @@ namespace System.ServiceModel.Channels
         // MB#26970: used by MEX to ensure that we don't conflict on base-address scoped settings
         internal bool InheritBaseAddressSettings
         {
-            get
-            {
-                return this.inheritBaseAddressSettings;
-            }
-            set
-            {
-                this.inheritBaseAddressSettings = value;
-            }
+            get { return this.inheritBaseAddressSettings; }
+            set { this.inheritBaseAddressSettings = value; }
         }
 
         [DefaultValue(HttpTransportDefaults.KeepAliveEnabled)]
         public bool KeepAliveEnabled
         {
-            get
-            {
-                return this.keepAliveEnabled;
-            }
-            set
-            {
-                this.keepAliveEnabled = value;
-            }
+            get { return this.keepAliveEnabled; }
+            set { this.keepAliveEnabled = value; }
         }
 
         // client
@@ -248,8 +215,13 @@ namespace System.ServiceModel.Channels
             {
                 if (value <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
 
                 maxBufferSizeInitialized = true;
@@ -261,22 +233,32 @@ namespace System.ServiceModel.Channels
         [DefaultValue(HttpTransportDefaults.DefaultMaxPendingAccepts)]
         public int MaxPendingAccepts
         {
-            get
-            {
-                return this.maxPendingAccepts;
-            }
+            get { return this.maxPendingAccepts; }
             set
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
 
                 if (value > HttpTransportDefaults.MaxPendingAcceptsUpperLimit)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.HttpMaxPendingAcceptsTooLargeError, HttpTransportDefaults.MaxPendingAcceptsUpperLimit)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(
+                                SR.HttpMaxPendingAcceptsTooLargeError,
+                                HttpTransportDefaults.MaxPendingAcceptsUpperLimit
+                            )
+                        )
+                    );
                 }
 
                 this.maxPendingAccepts = value;
@@ -286,11 +268,7 @@ namespace System.ServiceModel.Channels
         // string.Empty == wildcard
         internal string Method
         {
-            get
-            {
-                return this.method;
-            }
-
+            get { return this.method; }
             set
             {
                 if (value == null)
@@ -306,30 +284,22 @@ namespace System.ServiceModel.Channels
         [TypeConverter(typeof(UriTypeConverter))]
         public Uri ProxyAddress
         {
-            get
-            {
-                return this.proxyAddress;
-            }
-            set
-            {
-                this.proxyAddress = value;
-            }
+            get { return this.proxyAddress; }
+            set { this.proxyAddress = value; }
         }
 
         [DefaultValue(HttpTransportDefaults.ProxyAuthenticationScheme)]
         public AuthenticationSchemes ProxyAuthenticationScheme
         {
-            get
-            {
-                return this.proxyAuthenticationScheme;
-            }
-
+            get { return this.proxyAuthenticationScheme; }
             set
             {
                 if (!value.IsSingleton())
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.HttpProxyRequiresSingleAuthScheme,
-                        value));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.HttpProxyRequiresSingleAuthScheme, value)
+                    );
                 }
                 this.proxyAuthenticationScheme = value;
             }
@@ -338,23 +308,14 @@ namespace System.ServiceModel.Channels
         // CSDMain#17853: used by cardspace to ensure that the correct proxy is picked up
         internal IWebProxy Proxy
         {
-            set
-            {
-                this.webProxy = value;
-            }
-            get
-            {
-                return this.webProxy;
-            }
+            set { this.webProxy = value; }
+            get { return this.webProxy; }
         }
 
         [DefaultValue(HttpTransportDefaults.Realm)]
         public string Realm
         {
-            get
-            {
-                return this.realm;
-            }
+            get { return this.realm; }
             set
             {
                 if (value == null)
@@ -369,36 +330,45 @@ namespace System.ServiceModel.Channels
         [DefaultValue(typeof(TimeSpan), HttpTransportDefaults.RequestInitializationTimeoutString)]
         public TimeSpan RequestInitializationTimeout
         {
-            get
-            {
-                return this.requestInitializationTimeout;
-            }
+            get { return this.requestInitializationTimeout; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.requestInitializationTimeout = value;
             }
         }
 
-        public override string Scheme { get { return "http"; } }
+        public override string Scheme
+        {
+            get { return "http"; }
+        }
 
         // client
         // server
         [DefaultValue(HttpTransportDefaults.TransferMode)]
         public TransferMode TransferMode
         {
-            get
-            {
-                return this.transferMode;
-            }
+            get { return this.transferMode; }
             set
             {
                 TransferModeHelper.Validate(value);
@@ -408,10 +378,7 @@ namespace System.ServiceModel.Channels
 
         public WebSocketTransportSettings WebSocketSettings
         {
-            get
-            {
-                return this.webSocketSettings;
-            }
+            get { return this.webSocketSettings; }
             set
             {
                 if (value == null)
@@ -422,51 +389,39 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal virtual bool GetSupportsClientAuthenticationImpl(AuthenticationSchemes effectiveAuthenticationSchemes)
+        internal virtual bool GetSupportsClientAuthenticationImpl(
+            AuthenticationSchemes effectiveAuthenticationSchemes
+        )
         {
-            return effectiveAuthenticationSchemes != AuthenticationSchemes.None &&
-                effectiveAuthenticationSchemes.IsNotSet(AuthenticationSchemes.Anonymous);
+            return effectiveAuthenticationSchemes != AuthenticationSchemes.None
+                && effectiveAuthenticationSchemes.IsNotSet(AuthenticationSchemes.Anonymous);
         }
 
-        internal virtual bool GetSupportsClientWindowsIdentityImpl(AuthenticationSchemes effectiveAuthenticationSchemes)
+        internal virtual bool GetSupportsClientWindowsIdentityImpl(
+            AuthenticationSchemes effectiveAuthenticationSchemes
+        )
         {
-            return effectiveAuthenticationSchemes != AuthenticationSchemes.None &&
-                effectiveAuthenticationSchemes.IsNotSet(AuthenticationSchemes.Anonymous);
+            return effectiveAuthenticationSchemes != AuthenticationSchemes.None
+                && effectiveAuthenticationSchemes.IsNotSet(AuthenticationSchemes.Anonymous);
         }
 
         internal HttpAnonymousUriPrefixMatcher AnonymousUriPrefixMatcher
         {
-            get
-            {
-                return this.anonymousUriPrefixMatcher;
-            }
+            get { return this.anonymousUriPrefixMatcher; }
         }
 
         [DefaultValue(HttpTransportDefaults.UnsafeConnectionNtlmAuthentication)]
         public bool UnsafeConnectionNtlmAuthentication
         {
-            get
-            {
-                return this.unsafeConnectionNtlmAuthentication;
-            }
-
-            set
-            {
-                this.unsafeConnectionNtlmAuthentication = value;
-            }
+            get { return this.unsafeConnectionNtlmAuthentication; }
+            set { this.unsafeConnectionNtlmAuthentication = value; }
         }
 
         [DefaultValue(HttpTransportDefaults.UseDefaultWebProxy)]
         public bool UseDefaultWebProxy
         {
-            get
-            {
-                return this.useDefaultWebProxy;
-            }
-            set
-            {
-                this.useDefaultWebProxy = value;
-            }
+            get { return this.useDefaultWebProxy; }
+            set { this.useDefaultWebProxy = value; }
         }
 
         internal string GetWsdlTransportUri(bool useWebSocketTransport)
@@ -492,14 +447,25 @@ namespace System.ServiceModel.Channels
             }
             if (typeof(T) == typeof(ISecurityCapabilities))
             {
-                AuthenticationSchemes effectiveAuthenticationSchemes = HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(this.AuthenticationScheme,
-                    context.BindingParameters);
+                AuthenticationSchemes effectiveAuthenticationSchemes =
+                    HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(
+                        this.AuthenticationScheme,
+                        context.BindingParameters
+                    );
 
-                return (T)(object)new SecurityCapabilities(this.GetSupportsClientAuthenticationImpl(effectiveAuthenticationSchemes),
-                    effectiveAuthenticationSchemes == AuthenticationSchemes.Negotiate,
-                    this.GetSupportsClientWindowsIdentityImpl(effectiveAuthenticationSchemes),
-                    ProtectionLevel.None,
-                    ProtectionLevel.None);
+                return (T)
+                    (object)
+                        new SecurityCapabilities(
+                            this.GetSupportsClientAuthenticationImpl(
+                                effectiveAuthenticationSchemes
+                            ),
+                            effectiveAuthenticationSchemes == AuthenticationSchemes.Negotiate,
+                            this.GetSupportsClientWindowsIdentityImpl(
+                                effectiveAuthenticationSchemes
+                            ),
+                            ProtectionLevel.None,
+                            ProtectionLevel.None
+                        );
             }
             else if (typeof(T) == typeof(IBindingDeliveryCapabilities))
             {
@@ -563,8 +529,9 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -573,31 +540,52 @@ namespace System.ServiceModel.Channels
 
             if (this.MessageHandlerFactory != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.HttpPipelineNotSupportedOnClientSide, "MessageHandlerFactory")));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpPipelineNotSupportedOnClientSide,
+                            "MessageHandlerFactory"
+                        )
+                    )
+                );
             }
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
 #pragma warning suppress 56506 // Microsoft, context.Binding will never be null.
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.CouldnTCreateChannelForChannelType2, context.Binding.Name, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(
+                        SR.CouldnTCreateChannelForChannelType2,
+                        context.Binding.Name,
+                        typeof(TChannel)
+                    )
+                );
             }
 
             if (this.authenticationScheme == AuthenticationSchemes.None)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.HttpAuthSchemeCannotBeNone,
-                    this.authenticationScheme));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "value",
+                    SR.GetString(SR.HttpAuthSchemeCannotBeNone, this.authenticationScheme)
+                );
             }
             else if (!this.authenticationScheme.IsSingleton())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.HttpRequiresSingleAuthScheme,
-                    this.authenticationScheme));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "value",
+                    SR.GetString(SR.HttpRequiresSingleAuthScheme, this.authenticationScheme)
+                );
             }
 
-            return (IChannelFactory<TChannel>)(object)new HttpChannelFactory<TChannel>(this, context);
+            return (IChannelFactory<TChannel>)
+                (object)new HttpChannelFactory<TChannel>(this, context);
         }
 
-        internal static AuthenticationSchemes GetEffectiveAuthenticationSchemes(AuthenticationSchemes currentAuthenticationSchemes,
-            BindingParameterCollection bindingParameters)
+        internal static AuthenticationSchemes GetEffectiveAuthenticationSchemes(
+            AuthenticationSchemes currentAuthenticationSchemes,
+            BindingParameterCollection bindingParameters
+        )
         {
             if (bindingParameters == null)
             {
@@ -606,25 +594,36 @@ namespace System.ServiceModel.Channels
 
             AuthenticationSchemes hostSupportedAuthenticationSchemes;
 
-            if (!AuthenticationSchemesBindingParameter.TryExtract(bindingParameters, out hostSupportedAuthenticationSchemes))
+            if (
+                !AuthenticationSchemesBindingParameter.TryExtract(
+                    bindingParameters,
+                    out hostSupportedAuthenticationSchemes
+                )
+            )
             {
                 return currentAuthenticationSchemes;
             }
 
-            if (currentAuthenticationSchemes == AuthenticationSchemes.None ||
-                (AspNetEnvironment.Current.IsMetadataListener(bindingParameters) &&
-                currentAuthenticationSchemes == AuthenticationSchemes.Anonymous &&
-                hostSupportedAuthenticationSchemes.IsNotSet(AuthenticationSchemes.Anonymous)))
+            if (
+                currentAuthenticationSchemes == AuthenticationSchemes.None
+                || (
+                    AspNetEnvironment.Current.IsMetadataListener(bindingParameters)
+                    && currentAuthenticationSchemes == AuthenticationSchemes.Anonymous
+                    && hostSupportedAuthenticationSchemes.IsNotSet(AuthenticationSchemes.Anonymous)
+                )
+            )
             {
                 //Inherit authentication schemes from host.
                 //This logic of inheriting from the host for anonymous MEX endpoints was previously implemented in HostedAspNetEnvironment.ValidateHttpSettings.
                 //We moved it here to maintain the pre-multi-auth behavior. (see CSDMain 183553)
 
-                if (!hostSupportedAuthenticationSchemes.IsSingleton() &&
-                     hostSupportedAuthenticationSchemes.IsSet(AuthenticationSchemes.Anonymous) &&
-                     AspNetEnvironment.Current.AspNetCompatibilityEnabled &&
-                     AspNetEnvironment.Current.IsSimpleApplicationHost &&
-                     AspNetEnvironment.Current.IsWindowsAuthenticationConfigured())
+                if (
+                    !hostSupportedAuthenticationSchemes.IsSingleton()
+                    && hostSupportedAuthenticationSchemes.IsSet(AuthenticationSchemes.Anonymous)
+                    && AspNetEnvironment.Current.AspNetCompatibilityEnabled
+                    && AspNetEnvironment.Current.IsSimpleApplicationHost
+                    && AspNetEnvironment.Current.IsWindowsAuthenticationConfigured()
+                )
                 {
                     // Remove Anonymous if ASP.Net authentication mode is Windows (Asp.Net would not allow anonymous requests in this case anyway)
                     hostSupportedAuthenticationSchemes ^= AuthenticationSchemes.Anonymous;
@@ -639,7 +638,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -650,13 +651,19 @@ namespace System.ServiceModel.Channels
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
 #pragma warning suppress 56506 // Microsoft, context.Binding will never be null.
-"TChannel", SR.GetString(SR.CouldnTCreateChannelForChannelType2, context.Binding.Name, typeof(TChannel)));
+                    "TChannel",
+                    SR.GetString(
+                        SR.CouldnTCreateChannelForChannelType2,
+                        context.Binding.Name,
+                        typeof(TChannel)
+                    )
+                );
             }
 
             UpdateAuthenticationSchemes(context);
 
             HttpChannelListener listener = new HttpChannelListener<TChannel>(this, context);
-            
+
             AspNetEnvironment.Current.ApplyHostedContext(listener, context);
             return (IChannelListener<TChannel>)(object)listener;
         }
@@ -667,8 +674,11 @@ namespace System.ServiceModel.Channels
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
-            AuthenticationSchemes effectiveAutheSchemes = HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(this.AuthenticationScheme,
-                context.BindingParameters);
+            AuthenticationSchemes effectiveAutheSchemes =
+                HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(
+                    this.AuthenticationScheme,
+                    context.BindingParameters
+                );
 
             if (effectiveAutheSchemes == AuthenticationSchemes.None)
             {
@@ -681,29 +691,53 @@ namespace System.ServiceModel.Channels
                     //We are throwing a "NotSupportedException" to be consistent with the type of exception that was thrown in this scenario,
                     //before the multi-auth feature, in HostedAspNetEnvironment.ValidateHttpSettings.
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.AuthenticationSchemesCannotBeInheritedFromHost, bindingName)));
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.AuthenticationSchemesCannotBeInheritedFromHost,
+                                bindingName
+                            )
+                        )
+                    );
                 }
                 else
                 {
                     //settings configured on the host and binding conflict.
                     AuthenticationSchemes hostSchemes;
-                    if (!AuthenticationSchemesBindingParameter.TryExtract(context.BindingParameters, out hostSchemes))
+                    if (
+                        !AuthenticationSchemesBindingParameter.TryExtract(
+                            context.BindingParameters,
+                            out hostSchemes
+                        )
+                    )
                     {
                         //The host/binding settings can only conflict if host has settings specified, so we should never
                         //hit this line of code
-                        DiagnosticUtility.DebugAssert("Failed to find AuthenticationSchemesBindingParameter");
+                        DiagnosticUtility.DebugAssert(
+                            "Failed to find AuthenticationSchemesBindingParameter"
+                        );
                     }
 
                     //We are throwing a "NotSupportedException" to be consistent with the type of exception that was thrown in this scenario,
                     //before the multi-auth feature, in HostedAspNetEnvironment.ValidateHttpSettings.
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new NotSupportedException(SR.GetString(SR.AuthenticationSchemes_BindingAndHostConflict, hostSchemes, bindingName, this.AuthenticationScheme)));
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.AuthenticationSchemes_BindingAndHostConflict,
+                                hostSchemes,
+                                bindingName,
+                                this.AuthenticationScheme
+                            )
+                        )
+                    );
                 }
             }
             this.AuthenticationScheme = effectiveAutheSchemes;
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
             {
@@ -718,22 +752,36 @@ namespace System.ServiceModel.Channels
             this.OnExportPolicy(exporter, context);
 
             bool createdNew;
-            MessageEncodingBindingElement encodingBindingElement = FindMessageEncodingBindingElement(context.BindingElements, out createdNew);
+            MessageEncodingBindingElement encodingBindingElement =
+                FindMessageEncodingBindingElement(context.BindingElements, out createdNew);
             if (createdNew && encodingBindingElement is IPolicyExportExtension)
             {
                 ((IPolicyExportExtension)encodingBindingElement).ExportPolicy(exporter, context);
             }
 
-            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(exporter, context, encodingBindingElement.MessageVersion.Addressing);
+            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(
+                exporter,
+                context,
+                encodingBindingElement.MessageVersion.Addressing
+            );
         }
 
-        internal virtual void OnExportPolicy(MetadataExporter exporter, PolicyConversionContext policyContext)
+        internal virtual void OnExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext policyContext
+        )
         {
             List<string> assertionNames = new List<string>();
-            AuthenticationSchemes effectiveAuthenticationSchemes = HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(this.AuthenticationScheme,
-                    policyContext.BindingParameters);
+            AuthenticationSchemes effectiveAuthenticationSchemes =
+                HttpTransportBindingElement.GetEffectiveAuthenticationSchemes(
+                    this.AuthenticationScheme,
+                    policyContext.BindingParameters
+                );
 
-            if (effectiveAuthenticationSchemes != AuthenticationSchemes.None && !(effectiveAuthenticationSchemes.IsSet(AuthenticationSchemes.Anonymous)))
+            if (
+                effectiveAuthenticationSchemes != AuthenticationSchemes.None
+                && !(effectiveAuthenticationSchemes.IsSet(AuthenticationSchemes.Anonymous))
+            )
             {
                 // ATTENTION: The order of the if-statements below is essential! When importing WSDL svcutil is actually
                 // using the first assertion - and the HTTP spec requires clients to use the most secure authentication
@@ -762,21 +810,34 @@ namespace System.ServiceModel.Channels
                 {
                     if (assertionNames.Count == 1)
                     {
-                        policyContext.GetBindingAssertions().Add(new XmlDocument().CreateElement(TransportPolicyConstants.HttpTransportPrefix,
-                            assertionNames[0], TransportPolicyConstants.HttpTransportNamespace));
+                        policyContext
+                            .GetBindingAssertions()
+                            .Add(
+                                new XmlDocument().CreateElement(
+                                    TransportPolicyConstants.HttpTransportPrefix,
+                                    assertionNames[0],
+                                    TransportPolicyConstants.HttpTransportNamespace
+                                )
+                            );
                     }
                     else
                     {
                         XmlDocument dummy = new XmlDocument();
-                        XmlElement root = dummy.CreateElement(MetadataStrings.WSPolicy.Prefix,
+                        XmlElement root = dummy.CreateElement(
+                            MetadataStrings.WSPolicy.Prefix,
                             MetadataStrings.WSPolicy.Elements.ExactlyOne,
-                            exporter.PolicyVersion.Namespace);
+                            exporter.PolicyVersion.Namespace
+                        );
 
                         foreach (string assertionName in assertionNames)
                         {
-                            root.AppendChild(dummy.CreateElement(TransportPolicyConstants.HttpTransportPrefix,
-                                assertionName,
-                                TransportPolicyConstants.HttpTransportNamespace));
+                            root.AppendChild(
+                                dummy.CreateElement(
+                                    TransportPolicyConstants.HttpTransportPrefix,
+                                    assertionName,
+                                    TransportPolicyConstants.HttpTransportNamespace
+                                )
+                            );
                         }
 
                         policyContext.GetBindingAssertions().Add(root);
@@ -784,19 +845,33 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            bool useWebSocketTransport = WebSocketHelper.UseWebSocketTransport(this.WebSocketSettings.TransportUsage, policyContext.Contract.IsDuplex());
+            bool useWebSocketTransport = WebSocketHelper.UseWebSocketTransport(
+                this.WebSocketSettings.TransportUsage,
+                policyContext.Contract.IsDuplex()
+            );
             if (useWebSocketTransport && this.TransferMode != TransferMode.Buffered)
             {
-                policyContext.GetBindingAssertions().Add(new XmlDocument().CreateElement(TransportPolicyConstants.WebSocketPolicyPrefix,
-                this.TransferMode.ToString(), TransportPolicyConstants.WebSocketPolicyNamespace));
+                policyContext
+                    .GetBindingAssertions()
+                    .Add(
+                        new XmlDocument().CreateElement(
+                            TransportPolicyConstants.WebSocketPolicyPrefix,
+                            this.TransferMode.ToString(),
+                            TransportPolicyConstants.WebSocketPolicyNamespace
+                        )
+                    );
             }
         }
 
-        internal virtual void OnImportPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
-        {
-        }
+        internal virtual void OnImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        ) { }
 
-        void ITransportPolicyImport.ImportPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
+        void ITransportPolicyImport.ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        )
         {
             ICollection<XmlElement> bindingAssertions = policyContext.GetBindingAssertions();
             List<XmlElement> httpAuthAssertions = new List<XmlElement>();
@@ -829,14 +904,26 @@ namespace System.ServiceModel.Channels
 
                 if (foundAssertion)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(
-                        SR.GetString(SR.HttpTransportCannotHaveMultipleAuthenticationSchemes, policyContext.Contract.Namespace, policyContext.Contract.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(
+                                SR.HttpTransportCannotHaveMultipleAuthenticationSchemes,
+                                policyContext.Contract.Namespace,
+                                policyContext.Contract.Name
+                            )
+                        )
+                    );
                 }
 
                 foundAssertion = true;
                 httpAuthAssertions.Add(assertion);
             }
-            httpAuthAssertions.ForEach(delegate(XmlElement element) { bindingAssertions.Remove(element); });
+            httpAuthAssertions.ForEach(
+                delegate(XmlElement element)
+                {
+                    bindingAssertions.Remove(element);
+                }
+            );
 
             // This code is being used when we are generating the client configration. Before that, we should already set TransportUsage as Always if the server
             // is using WebSocket.
@@ -851,17 +938,25 @@ namespace System.ServiceModel.Channels
 
                     string transferMode = assertion.LocalName;
                     TransferMode result;
-                    if (!Enum.TryParse<TransferMode>(transferMode, true, out result) || !TransferModeHelper.IsDefined(result) || result == TransferMode.Buffered)
+                    if (
+                        !Enum.TryParse<TransferMode>(transferMode, true, out result)
+                        || !TransferModeHelper.IsDefined(result)
+                        || result == TransferMode.Buffered
+                    )
                     {
-
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(
-                                SR.WebSocketTransportPolicyAssertionInvalid,
-                                policyContext.Contract.Namespace,
-                                policyContext.Contract.Name,
-                                transferMode,
-                                TransferMode.Streamed,
-                                TransferMode.StreamedRequest,
-                                TransferMode.StreamedResponse)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.WebSocketTransportPolicyAssertionInvalid,
+                                    policyContext.Contract.Namespace,
+                                    policyContext.Contract.Name,
+                                    transferMode,
+                                    TransferMode.Streamed,
+                                    TransferMode.StreamedRequest,
+                                    TransferMode.StreamedResponse
+                                )
+                            )
+                        );
                     }
 
                     this.TransferMode = result;
@@ -873,27 +968,47 @@ namespace System.ServiceModel.Channels
             OnImportPolicy(importer, policyContext);
         }
 
-        void IWsdlExportExtension.ExportContract(WsdlExporter exporter, WsdlContractConversionContext context) { }
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        ) { }
 
-        void IWsdlExportExtension.ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext endpointContext)
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext endpointContext
+        )
         {
             bool createdNew;
-            MessageEncodingBindingElement encodingBindingElement = FindMessageEncodingBindingElement(endpointContext, out createdNew);
-            bool useWebSocketTransport = WebSocketHelper.UseWebSocketTransport(this.WebSocketSettings.TransportUsage, endpointContext.ContractConversionContext.Contract.IsDuplex());
+            MessageEncodingBindingElement encodingBindingElement =
+                FindMessageEncodingBindingElement(endpointContext, out createdNew);
+            bool useWebSocketTransport = WebSocketHelper.UseWebSocketTransport(
+                this.WebSocketSettings.TransportUsage,
+                endpointContext.ContractConversionContext.Contract.IsDuplex()
+            );
 
             EndpointAddress address = endpointContext.Endpoint.Address;
             if (useWebSocketTransport)
             {
-                address = new EndpointAddress(WebSocketHelper.GetWebSocketUri(endpointContext.Endpoint.Address.Uri), endpointContext.Endpoint.Address);
-                WsdlNS.SoapAddressBinding binding = SoapHelper.GetSoapAddressBinding(endpointContext.WsdlPort);
+                address = new EndpointAddress(
+                    WebSocketHelper.GetWebSocketUri(endpointContext.Endpoint.Address.Uri),
+                    endpointContext.Endpoint.Address
+                );
+                WsdlNS.SoapAddressBinding binding = SoapHelper.GetSoapAddressBinding(
+                    endpointContext.WsdlPort
+                );
                 if (binding != null)
                 {
                     binding.Location = address.Uri.AbsoluteUri;
                 }
             }
 
-            TransportBindingElement.ExportWsdlEndpoint(exporter, endpointContext,
-                this.GetWsdlTransportUri(useWebSocketTransport), address, encodingBindingElement.MessageVersion.Addressing);
+            TransportBindingElement.ExportWsdlEndpoint(
+                exporter,
+                endpointContext,
+                this.GetWsdlTransportUri(useWebSocketTransport),
+                address,
+                encodingBindingElement.MessageVersion.Addressing
+            );
         }
 
         internal override bool IsMatch(BindingElement b)
@@ -936,7 +1051,12 @@ namespace System.ServiceModel.Channels
             if (this.webProxy != http.webProxy)
                 return false;
 
-            if (!ChannelBindingUtility.AreEqual(this.ExtendedProtectionPolicy, http.ExtendedProtectionPolicy))
+            if (
+                !ChannelBindingUtility.AreEqual(
+                    this.ExtendedProtectionPolicy,
+                    http.ExtendedProtectionPolicy
+                )
+            )
             {
                 return false;
             }
@@ -947,7 +1067,10 @@ namespace System.ServiceModel.Channels
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeExtendedProtectionPolicy()
         {
-            return !ChannelBindingUtility.AreEqual(this.ExtendedProtectionPolicy, ChannelBindingUtility.DefaultPolicy);
+            return !ChannelBindingUtility.AreEqual(
+                this.ExtendedProtectionPolicy,
+                ChannelBindingUtility.DefaultPolicy
+            );
         }
 
         [EditorBrowsable(EditorBrowsableState.Never)]
@@ -959,13 +1082,19 @@ namespace System.ServiceModel.Channels
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool ShouldSerializeWebSocketSettings()
         {
-            return !this.WebSocketSettings.Equals(HttpTransportDefaults.GetDefaultWebSocketTransportSettings());
+            return !this.WebSocketSettings.Equals(
+                HttpTransportDefaults.GetDefaultWebSocketTransportSettings()
+            );
         }
 
-        MessageEncodingBindingElement FindMessageEncodingBindingElement(BindingElementCollection bindingElements, out bool createdNew)
+        MessageEncodingBindingElement FindMessageEncodingBindingElement(
+            BindingElementCollection bindingElements,
+            out bool createdNew
+        )
         {
             createdNew = false;
-            MessageEncodingBindingElement encodingBindingElement = bindingElements.Find<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement encodingBindingElement =
+                bindingElements.Find<MessageEncodingBindingElement>();
             if (encodingBindingElement == null)
             {
                 createdNew = true;
@@ -974,17 +1103,20 @@ namespace System.ServiceModel.Channels
             return encodingBindingElement;
         }
 
-        MessageEncodingBindingElement FindMessageEncodingBindingElement(WsdlEndpointConversionContext endpointContext, out bool createdNew)
+        MessageEncodingBindingElement FindMessageEncodingBindingElement(
+            WsdlEndpointConversionContext endpointContext,
+            out bool createdNew
+        )
         {
-            BindingElementCollection bindingElements = endpointContext.Endpoint.Binding.CreateBindingElements();
+            BindingElementCollection bindingElements =
+                endpointContext.Endpoint.Binding.CreateBindingElements();
             return FindMessageEncodingBindingElement(bindingElements, out createdNew);
         }
 
         class BindingDeliveryCapabilitiesHelper : IBindingDeliveryCapabilities
         {
-            internal BindingDeliveryCapabilitiesHelper()
-            {
-            }
+            internal BindingDeliveryCapabilitiesHelper() { }
+
             bool IBindingDeliveryCapabilities.AssuresOrderedDelivery
             {
                 get { return false; }

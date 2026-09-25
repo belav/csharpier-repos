@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,44 +30,48 @@
 using System.Configuration.Provider;
 using System.Web;
 
-namespace System.Web.SessionState 
+namespace System.Web.SessionState
 {
-	public abstract class SessionStateStoreProviderBase : ProviderBase
-	{
-		protected SessionStateStoreProviderBase ()
-		{
-		}
+    public abstract class SessionStateStoreProviderBase : ProviderBase
+    {
+        protected SessionStateStoreProviderBase() { }
 
-		public abstract SessionStateStoreData CreateNewStoreData (HttpContext context, int timeout);
-		public abstract void CreateUninitializedItem (HttpContext context, string id, int timeout);
-		public abstract void Dispose ();
-		public abstract void EndRequest (HttpContext context);
-		public abstract SessionStateStoreData GetItem (HttpContext context,
-							       string id,
-							       out bool locked,
-							       out TimeSpan lockAge,
-							       out Object lockId,
-							       out SessionStateActions actions);
-		public abstract SessionStateStoreData GetItemExclusive (HttpContext context,
-									string id,
-									out bool locked,
-									out TimeSpan lockAge,
-									out Object lockId,
-									out SessionStateActions actions);
-		public abstract void InitializeRequest (HttpContext context);
-		public abstract void ReleaseItemExclusive (HttpContext context,
-							   string id,
-							   Object lockId);
-		public abstract void RemoveItem (HttpContext context,
-						 string id,
-						 Object lockId,
-						 SessionStateStoreData item);
-		public abstract void ResetItemTimeout (HttpContext context, string id);
-		public abstract void SetAndReleaseItemExclusive (HttpContext context,
-								 string id,
-								 SessionStateStoreData item,
-								 Object lockId,
-								 bool newItem);
-		public abstract bool SetItemExpireCallback (SessionStateItemExpireCallback expireCallback);
-	}
+        public abstract SessionStateStoreData CreateNewStoreData(HttpContext context, int timeout);
+        public abstract void CreateUninitializedItem(HttpContext context, string id, int timeout);
+        public abstract void Dispose();
+        public abstract void EndRequest(HttpContext context);
+        public abstract SessionStateStoreData GetItem(
+            HttpContext context,
+            string id,
+            out bool locked,
+            out TimeSpan lockAge,
+            out Object lockId,
+            out SessionStateActions actions
+        );
+        public abstract SessionStateStoreData GetItemExclusive(
+            HttpContext context,
+            string id,
+            out bool locked,
+            out TimeSpan lockAge,
+            out Object lockId,
+            out SessionStateActions actions
+        );
+        public abstract void InitializeRequest(HttpContext context);
+        public abstract void ReleaseItemExclusive(HttpContext context, string id, Object lockId);
+        public abstract void RemoveItem(
+            HttpContext context,
+            string id,
+            Object lockId,
+            SessionStateStoreData item
+        );
+        public abstract void ResetItemTimeout(HttpContext context, string id);
+        public abstract void SetAndReleaseItemExclusive(
+            HttpContext context,
+            string id,
+            SessionStateStoreData item,
+            Object lockId,
+            bool newItem
+        );
+        public abstract bool SetItemExpireCallback(SessionStateItemExpireCallback expireCallback);
+    }
 }

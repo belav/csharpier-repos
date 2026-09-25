@@ -11,7 +11,9 @@ namespace System
     /// The exception that is thrown when there is an attempt to dereference a <see langword="null"/> object reference.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class NullReferenceException : SystemException
     {
         public NullReferenceException()
@@ -32,10 +34,13 @@ namespace System
             HResult = HResults.E_POINTER;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected NullReferenceException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected NullReferenceException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

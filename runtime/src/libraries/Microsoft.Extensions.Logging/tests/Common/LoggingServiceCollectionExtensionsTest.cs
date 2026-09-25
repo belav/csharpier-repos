@@ -4,8 +4,8 @@
 using System;
 using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
-using Xunit;
 using Moq;
+using Xunit;
 
 namespace Microsoft.Extensions.Logging.Test
 {
@@ -26,7 +26,10 @@ namespace Microsoft.Extensions.Logging.Test
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         public void AddLogging_TestInjectedScopeProvider()
         {
             bool callbackCalled = false;
@@ -34,7 +37,7 @@ namespace Microsoft.Extensions.Logging.Test
             externalScopeProvider
                 .Setup(e => e.Push(It.IsAny<object?>()))
                 .Callback(() => callbackCalled = true);
-      
+
             var serviceProvider = new ServiceCollection()
                 .AddSingleton(externalScopeProvider.Object)
                 .AddLogging()
@@ -55,7 +58,9 @@ namespace Microsoft.Extensions.Logging.Test
 
             services.AddLogging(builder => builder.ClearProviders());
 
-            Assert.Empty(services.Where(desctriptor => desctriptor.ServiceType == typeof(ILoggerProvider)));
+            Assert.Empty(
+                services.Where(desctriptor => desctriptor.ServiceType == typeof(ILoggerProvider))
+            );
         }
     }
 }

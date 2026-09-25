@@ -8,17 +8,19 @@ namespace System.ServiceModel.Discovery
     using System.ServiceModel;
     using System.ServiceModel.Channels;
 
-    class DiscoveryClientDuplexChannel<TChannel> : DiscoveryClientOutputChannel<TChannel>, IDuplexChannel
-        where TChannel : class, IDuplexChannel 
+    class DiscoveryClientDuplexChannel<TChannel>
+        : DiscoveryClientOutputChannel<TChannel>,
+            IDuplexChannel
+        where TChannel : class, IDuplexChannel
     {
         public DiscoveryClientDuplexChannel(
             ChannelManagerBase channelManagerBase,
             IChannelFactory<TChannel> innerChannelFactory,
             FindCriteria findCriteria,
-            DiscoveryEndpointProvider discoveryEndpointProvider)
+            DiscoveryEndpointProvider discoveryEndpointProvider
+        )
             : base(channelManagerBase, innerChannelFactory, findCriteria, discoveryEndpointProvider)
-        {
-        }
+        { }
 
         public EndpointAddress LocalAddress
         {
@@ -32,7 +34,12 @@ namespace System.ServiceModel.Discovery
             }
         }
 
-        public override IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.EnsureReplyTo(message);
             return base.BeginSend(message, timeout, callback, state);
@@ -59,7 +66,11 @@ namespace System.ServiceModel.Discovery
             return this.InnerChannel.BeginTryReceive(timeout, callback, state);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return this.InnerChannel.BeginWaitForMessage(timeout, callback, state);
         }
@@ -77,7 +88,7 @@ namespace System.ServiceModel.Discovery
         public bool EndWaitForMessage(IAsyncResult result)
         {
             return this.InnerChannel.EndWaitForMessage(result);
-        }        
+        }
 
         public Message Receive(TimeSpan timeout)
         {
@@ -103,7 +114,10 @@ namespace System.ServiceModel.Discovery
         {
             if (message != null && message.Headers != null)
             {
-                if (message.Headers.ReplyTo == DiscoveryClientBindingElement.DiscoveryEndpointAddress)
+                if (
+                    message.Headers.ReplyTo
+                    == DiscoveryClientBindingElement.DiscoveryEndpointAddress
+                )
                 {
                     message.Headers.ReplyTo = this.LocalAddress;
                 }

@@ -17,7 +17,11 @@ namespace Microsoft.CodeAnalysis.Scripting
         public abstract DiagnosticFormatter DiagnosticFormatter { get; }
         public abstract StringComparer IdentifierComparer { get; }
 
-        public abstract SyntaxTree ParseSubmission(SourceText text, ParseOptions parseOptions, CancellationToken cancellationToken);
+        public abstract SyntaxTree ParseSubmission(
+            SourceText text,
+            ParseOptions parseOptions,
+            CancellationToken cancellationToken
+        );
         public abstract bool IsCompleteSubmission(SyntaxTree tree);
     }
 }

@@ -15,37 +15,51 @@ namespace Microsoft.CodeAnalysis.CSharp
     [ExportLanguageService(typeof(ICompilationFactoryService), LanguageNames.CSharp), Shared]
     internal class CSharpCompilationFactoryService : ICompilationFactoryService
     {
-        private static readonly CSharpCompilationOptions s_defaultOptions = new(OutputKind.ConsoleApplication, concurrentBuild: false);
+        private static readonly CSharpCompilationOptions s_defaultOptions = new(
+            OutputKind.ConsoleApplication,
+            concurrentBuild: false
+        );
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpCompilationFactoryService()
-        {
-        }
+        public CSharpCompilationFactoryService() { }
 
-        Compilation ICompilationFactoryService.CreateCompilation(string assemblyName, CompilationOptions options)
+        Compilation ICompilationFactoryService.CreateCompilation(
+            string assemblyName,
+            CompilationOptions options
+        )
         {
             return CSharpCompilation.Create(
                 assemblyName,
-                options: (CSharpCompilationOptions)options ?? s_defaultOptions);
+                options: (CSharpCompilationOptions)options ?? s_defaultOptions
+            );
         }
 
-        Compilation ICompilationFactoryService.CreateSubmissionCompilation(string assemblyName, CompilationOptions options, Type? hostObjectType)
+        Compilation ICompilationFactoryService.CreateSubmissionCompilation(
+            string assemblyName,
+            CompilationOptions options,
+            Type? hostObjectType
+        )
         {
             return CSharpCompilation.CreateScriptCompilation(
                 assemblyName,
                 options: (CSharpCompilationOptions)options,
                 previousScriptCompilation: null,
-                globalsType: hostObjectType);
+                globalsType: hostObjectType
+            );
         }
 
-        CompilationOptions ICompilationFactoryService.GetDefaultCompilationOptions()
-            => s_defaultOptions;
+        CompilationOptions ICompilationFactoryService.GetDefaultCompilationOptions() =>
+            s_defaultOptions;
 
-        CompilationOptions? ICompilationFactoryService.TryParsePdbCompilationOptions(IReadOnlyDictionary<string, string> compilationOptionsMetadata)
+        CompilationOptions? ICompilationFactoryService.TryParsePdbCompilationOptions(
+            IReadOnlyDictionary<string, string> compilationOptionsMetadata
+        )
         {
-            if (!compilationOptionsMetadata.TryGetValue("output-kind", out var outputKindString) ||
-                !Enum.TryParse<OutputKind>(outputKindString, out var outputKind))
+            if (
+                !compilationOptionsMetadata.TryGetValue("output-kind", out var outputKindString)
+                || !Enum.TryParse<OutputKind>(outputKindString, out var outputKind)
+            )
             {
                 return null;
             }
@@ -53,9 +67,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new CSharpCompilationOptions(outputKind: outputKind);
         }
 
-        GeneratorDriver ICompilationFactoryService.CreateGeneratorDriver(ParseOptions parseOptions, ImmutableArray<ISourceGenerator> generators, AnalyzerConfigOptionsProvider optionsProvider, ImmutableArray<AdditionalText> additionalTexts)
+        GeneratorDriver ICompilationFactoryService.CreateGeneratorDriver(
+            ParseOptions parseOptions,
+            ImmutableArray<ISourceGenerator> generators,
+            AnalyzerConfigOptionsProvider optionsProvider,
+            ImmutableArray<AdditionalText> additionalTexts
+        )
         {
-            return CSharpGeneratorDriver.Create(generators, additionalTexts, (CSharpParseOptions)parseOptions, optionsProvider);
+            return CSharpGeneratorDriver.Create(
+                generators,
+                additionalTexts,
+                (CSharpParseOptions)parseOptions,
+                optionsProvider
+            );
         }
     }
 }

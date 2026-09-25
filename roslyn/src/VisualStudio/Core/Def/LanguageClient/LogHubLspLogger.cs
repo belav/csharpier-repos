@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
 
         public LogHubLspLogger(TraceConfiguration configuration, TraceSource traceSource)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _configuration =
+                configuration ?? throw new ArgumentNullException(nameof(configuration));
             _traceSource = traceSource ?? throw new ArgumentNullException(nameof(traceSource));
         }
 
@@ -57,7 +58,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             _traceSource.TraceEvent(TraceEventType.Error, id: 0, message);
         }
 
-        public void LogException(Exception exception, string? message = null, params object[] @params)
+        public void LogException(
+            Exception exception,
+            string? message = null,
+            params object[] @params
+        )
         {
             _traceSource.TraceEvent(TraceEventType.Error, id: 0, "Exception: {0}", exception);
         }

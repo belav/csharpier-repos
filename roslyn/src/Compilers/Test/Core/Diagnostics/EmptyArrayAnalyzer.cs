@@ -23,16 +23,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         internal const string ArrayEmptyMethodName = "Empty";
 
         private static readonly LocalizableString s_localizableTitle = "Empty Array";
-        private static readonly LocalizableString s_localizableMessage = "Empty array creation can be replaced with Array.Empty";
+        private static readonly LocalizableString s_localizableMessage =
+            "Empty array creation can be replaced with Array.Empty";
 
         /// <summary>The diagnostic descriptor used when Array.Empty should be used instead of a new array allocation.</summary>
-        public static readonly DiagnosticDescriptor UseArrayEmptyDescriptor = new DiagnosticDescriptor(
-            "EmptyArrayRule",
-            s_localizableTitle,
-            s_localizableMessage,
-            SystemCategory,
-            DiagnosticSeverity.Warning,
-            isEnabledByDefault: true);
+        public static readonly DiagnosticDescriptor UseArrayEmptyDescriptor =
+            new DiagnosticDescriptor(
+                "EmptyArrayRule",
+                s_localizableTitle,
+                s_localizableMessage,
+                SystemCategory,
+                DiagnosticSeverity.Warning,
+                isEnabledByDefault: true
+            );
 
         /// <summary>Gets the set of supported diagnostic descriptors from this analyzer.</summary>
         public sealed override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
@@ -53,7 +56,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// <param name="arrayCreationExpression">The array creation expression to be replaced.</param>
         internal void Report(OperationAnalysisContext context, SyntaxNode arrayCreationExpression)
         {
-            context.ReportDiagnostic(Diagnostic.Create(UseArrayEmptyDescriptor, arrayCreationExpression.GetLocation()));
+            context.ReportDiagnostic(
+                Diagnostic.Create(UseArrayEmptyDescriptor, arrayCreationExpression.GetLocation())
+            );
         }
 
         /// <summary>Called once at compilation start to register actions in the compilation context.</summary>
@@ -62,29 +67,37 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             context.RegisterOperationAction(
                 (operationContext) =>
+                {
+                    IArrayCreationOperation arrayCreation = (IArrayCreationOperation)
+                        operationContext.Operation;
+
+                    // ToDo: Need to suppress analysis of array creation expressions within attribute applications.
+
+                    // Detect array creation expression that have rank 1 and size 0. Such expressions
+                    // can be replaced with Array.Empty<T>(), provided that the element type can be a generic type argument.
+
+                    var elementType = (arrayCreation as IArrayTypeSymbol)?.ElementType;
+                    if (
+                        arrayCreation.DimensionSizes.Length == 1
+                        //// Pointer types can't be generic type arguments.
+                        && elementType?.TypeKind != TypeKind.Pointer
+                    )
                     {
-                        IArrayCreationOperation arrayCreation = (IArrayCreationOperation)operationContext.Operation;
-
-                        // ToDo: Need to suppress analysis of array creation expressions within attribute applications.
-
-                        // Detect array creation expression that have rank 1 and size 0. Such expressions
-                        // can be replaced with Array.Empty<T>(), provided that the element type can be a generic type argument.
-
-                        var elementType = (arrayCreation as IArrayTypeSymbol)?.ElementType;
-                        if (arrayCreation.DimensionSizes.Length == 1
-                            //// Pointer types can't be generic type arguments.
-                            && elementType?.TypeKind != TypeKind.Pointer)
+                        Optional<object> arrayLength = arrayCreation
+                            .DimensionSizes[0]
+                            .ConstantValue;
+                        if (
+                            arrayLength.HasValue
+                            && arrayLength.Value is int
+                            && (int)arrayLength.Value == 0
+                        )
                         {
-                            Optional<object> arrayLength = arrayCreation.DimensionSizes[0].ConstantValue;
-                            if (arrayLength.HasValue &&
-                                arrayLength.Value is int &&
-                                (int)arrayLength.Value == 0)
-                            {
-                                Report(operationContext, arrayCreation.Syntax);
-                            }
+                            Report(operationContext, arrayCreation.Syntax);
                         }
-                    },
-                OperationKind.ArrayCreation);
+                    }
+                },
+                OperationKind.ArrayCreation
+            );
         }
     }
 }

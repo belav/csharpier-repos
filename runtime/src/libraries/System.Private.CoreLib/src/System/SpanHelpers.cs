@@ -225,7 +225,8 @@ namespace System
             }
 
             // P/Invoke into the native version for large lengths
-            if (byteLength >= 512) goto PInvoke;
+            if (byteLength >= 512)
+                goto PInvoke;
 
             nuint i = 0; // byte offset at which we're copying
 
@@ -296,8 +297,7 @@ namespace System
 
                 // See notes above for why this wasn't used instead
                 // i += 16;
-            }
-            while (counter <= end);
+            } while (counter <= end);
 
             if ((byteLength & 8) != 0)
             {
@@ -329,13 +329,16 @@ namespace System
             return;
 #endif
 
-        PInvoke:
+            PInvoke:
             Buffer._ZeroMemory(ref b, byteLength);
         }
 
         public static unsafe void ClearWithReferences(ref IntPtr ip, nuint pointerSizeLength)
         {
-            Debug.Assert((int)Unsafe.AsPointer(ref ip) % sizeof(IntPtr) == 0, "Should've been aligned on natural word boundary.");
+            Debug.Assert(
+                (int)Unsafe.AsPointer(ref ip) % sizeof(IntPtr) == 0,
+                "Should've been aligned on natural word boundary."
+            );
 
             // First write backward 8 natural words at a time.
             // Writing backward allows us to get away with only simple modifications to the
@@ -385,7 +388,7 @@ namespace System
                 return; // nothing to write
             }
 
-        Write4To7:
+            Write4To7:
             Debug.Assert(pointerSizeLength >= 4);
 
             // Write first four and last three.
@@ -394,14 +397,14 @@ namespace System
             Unsafe.Add(ref Unsafe.Add(ref ip, (nint)pointerSizeLength), -3) = default;
             Unsafe.Add(ref Unsafe.Add(ref ip, (nint)pointerSizeLength), -2) = default;
 
-        Write2To3:
+            Write2To3:
             Debug.Assert(pointerSizeLength >= 2);
 
             // Write first two and last one.
             Unsafe.Add(ref ip, 1) = default;
             Unsafe.Add(ref Unsafe.Add(ref ip, (nint)pointerSizeLength), -1) = default;
 
-        Write1:
+            Write1:
             Debug.Assert(pointerSizeLength >= 1);
 
             // Write only element.
@@ -432,8 +435,14 @@ namespace System
                     //     +---------------+
                     //     | D | C | B | A |
                     //     +---------------+
-                    tempFirst = Vector512.Shuffle(tempFirst, Vector512.Create(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
-                    tempLast = Vector512.Shuffle(tempLast, Vector512.Create(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0));
+                    tempFirst = Vector512.Shuffle(
+                        tempFirst,
+                        Vector512.Create(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+                    );
+                    tempLast = Vector512.Shuffle(
+                        tempLast,
+                        Vector512.Create(15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
+                    );
 
                     // Store the reversed vectors
                     tempLast.StoreUnsafe(ref buf, (nuint)offset);
@@ -462,8 +471,14 @@ namespace System
                     //     +-------------------------------+
                     //     | H | G | F | E | D | C | B | A |
                     //     +-------------------------------+
-                    tempFirst = Avx2.PermuteVar8x32(tempFirst, Vector256.Create(7, 6, 5, 4, 3, 2, 1, 0));
-                    tempLast = Avx2.PermuteVar8x32(tempLast, Vector256.Create(7, 6, 5, 4, 3, 2, 1, 0));
+                    tempFirst = Avx2.PermuteVar8x32(
+                        tempFirst,
+                        Vector256.Create(7, 6, 5, 4, 3, 2, 1, 0)
+                    );
+                    tempLast = Avx2.PermuteVar8x32(
+                        tempLast,
+                        Vector256.Create(7, 6, 5, 4, 3, 2, 1, 0)
+                    );
 
                     // Store the reversed vectors
                     tempLast.StoreUnsafe(ref buf, (nuint)offset);
@@ -537,8 +552,14 @@ namespace System
                     //     +-------+
                     //     | B | A |
                     //     +-------+
-                    tempFirst = Vector512.Shuffle(tempFirst, Vector512.Create(7, 6, 5, 4, 3, 2, 1, 0));
-                    tempLast = Vector512.Shuffle(tempLast, Vector512.Create(7, 6, 5, 4, 3, 2, 1, 0));
+                    tempFirst = Vector512.Shuffle(
+                        tempFirst,
+                        Vector512.Create(7, 6, 5, 4, 3, 2, 1, 0)
+                    );
+                    tempLast = Vector512.Shuffle(
+                        tempLast,
+                        Vector512.Create(7, 6, 5, 4, 3, 2, 1, 0)
+                    );
 
                     // Store the reversed vectors
                     tempLast.StoreUnsafe(ref buf, (nuint)offset);

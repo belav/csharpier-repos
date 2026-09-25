@@ -22,7 +22,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
         switch (extensionExpression)
         {
             case ShapedQueryExpression shapedQueryExpression:
-                return shapedQueryExpression.UpdateQueryExpression(Visit(shapedQueryExpression.QueryExpression));
+                return shapedQueryExpression.UpdateQueryExpression(
+                    Visit(shapedQueryExpression.QueryExpression)
+                );
 
             case ReadItemExpression readItemExpression:
                 return readItemExpression;
@@ -125,7 +127,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected abstract Expression VisitSqlConditional(SqlConditionalExpression sqlConditionalExpression);
+    protected abstract Expression VisitSqlConditional(
+        SqlConditionalExpression sqlConditionalExpression
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -173,7 +177,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected abstract Expression VisitRootReference(RootReferenceExpression rootReferenceExpression);
+    protected abstract Expression VisitRootReference(
+        RootReferenceExpression rootReferenceExpression
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -181,7 +187,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected abstract Expression VisitEntityProjection(EntityProjectionExpression entityProjectionExpression);
+    protected abstract Expression VisitEntityProjection(
+        EntityProjectionExpression entityProjectionExpression
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -189,7 +197,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected abstract Expression VisitObjectArrayProjection(ObjectArrayProjectionExpression objectArrayProjectionExpression);
+    protected abstract Expression VisitObjectArrayProjection(
+        ObjectArrayProjectionExpression objectArrayProjectionExpression
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

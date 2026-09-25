@@ -15,15 +15,14 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         // TODO: tune pool size.
         private const int poolSize = 64;
-        private static readonly ObjectPool<LookupSymbolsInfo> s_pool = new ObjectPool<LookupSymbolsInfo>(() => new LookupSymbolsInfo(), poolSize);
+        private static readonly ObjectPool<LookupSymbolsInfo> s_pool =
+            new ObjectPool<LookupSymbolsInfo>(() => new LookupSymbolsInfo(), poolSize);
 
         private LookupSymbolsInfo()
-            : base(StringComparer.Ordinal)
-        {
-        }
+            : base(StringComparer.Ordinal) { }
 
         // To implement Poolable, you need two things:
-        // 1) Expose Freeing primitive. 
+        // 1) Expose Freeing primitive.
         public void Free()
         {
             // Note that poolables are not finalizable. If one gets collected - no big deal.

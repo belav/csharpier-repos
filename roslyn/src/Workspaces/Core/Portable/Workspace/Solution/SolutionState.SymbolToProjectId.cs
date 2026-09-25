@@ -43,22 +43,20 @@ namespace Microsoft.CodeAnalysis
                     try
                     {
                         throw new InvalidOperationException(
-                            $"We should always be able to map a body symbol back to a document:\r\n{symbol.Kind}\r\n{symbol.Name}\r\n{syntaxTree.FilePath}\r\n{projectId}");
+                            $"We should always be able to map a body symbol back to a document:\r\n{symbol.Kind}\r\n{symbol.Name}\r\n{syntaxTree.FilePath}\r\n{projectId}"
+                        );
                     }
-                    catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-                    {
-                    }
+                    catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
                 }
                 else if (documentId.ProjectId != projectId)
                 {
                     try
                     {
                         throw new InvalidOperationException(
-                            $"Syntax tree for a body symbol should map to the same project as the body symbol's assembly:\r\n{symbol.Kind}\r\n{symbol.Name}\r\n{syntaxTree.FilePath}\r\n{projectId}\r\n{documentId.ProjectId}");
+                            $"Syntax tree for a body symbol should map to the same project as the body symbol's assembly:\r\n{symbol.Kind}\r\n{symbol.Name}\r\n{syntaxTree.FilePath}\r\n{projectId}\r\n{documentId.ProjectId}"
+                        );
                     }
-                    catch (Exception ex) when (FatalError.ReportAndCatch(ex))
-                    {
-                    }
+                    catch (Exception ex) when (FatalError.ReportAndCatch(ex)) { }
                 }
             }
 
@@ -85,7 +83,9 @@ namespace Microsoft.CodeAnalysis
         }
 
         private ProjectId? GetProjectIdDirectly(
-            ISymbol symbol, ConditionalWeakTable<ISymbol, ProjectId?> unrootedSymbolToProjectId)
+            ISymbol symbol,
+            ConditionalWeakTable<ISymbol, ProjectId?> unrootedSymbolToProjectId
+        )
         {
             if (symbol.IsKind(SymbolKind.Namespace, out INamespaceSymbol? ns))
             {
@@ -97,9 +97,11 @@ namespace Microsoft.CodeAnalysis
                     return GetOriginatingProjectId(ns.ConstituentNamespaces[0]);
                 }
             }
-            else if (symbol.IsKind(SymbolKind.Assembly) ||
-                     symbol.IsKind(SymbolKind.NetModule) ||
-                     symbol.IsKind(SymbolKind.DynamicType))
+            else if (
+                symbol.IsKind(SymbolKind.Assembly)
+                || symbol.IsKind(SymbolKind.NetModule)
+                || symbol.IsKind(SymbolKind.DynamicType)
+            )
             {
                 if (!unrootedSymbolToProjectId.TryGetValue(symbol, out var projectId))
                 {
@@ -111,8 +113,9 @@ namespace Microsoft.CodeAnalysis
                     // references) for that project.  This is the case for metadata symbols.  A metadata symbol might be
                     // found in many projects, so we just return the first result as that's just as good for finding the
                     // metadata symbol as any other project.
-                    projectId = TryGetProjectId(symbol, primary: true) ??
-                                TryGetProjectId(symbol, primary: false);
+                    projectId =
+                        TryGetProjectId(symbol, primary: true)
+                        ?? TryGetProjectId(symbol, primary: false);
 
                     // Have to lock as there's no atomic AddOrUpdate in netstandard2.0 and we could throw if two
                     // threads tried to add the same item.
@@ -129,8 +132,10 @@ namespace Microsoft.CodeAnalysis
 
                 return projectId;
             }
-            else if (symbol.IsKind(SymbolKind.TypeParameter, out ITypeParameterSymbol? typeParameter) &&
-                     typeParameter.TypeParameterKind == TypeParameterKind.Cref)
+            else if (
+                symbol.IsKind(SymbolKind.TypeParameter, out ITypeParameterSymbol? typeParameter)
+                && typeParameter.TypeParameterKind == TypeParameterKind.Cref
+            )
             {
                 // Cref type parameters don't belong to any containing symbol.  But we can map them to a doc/project
                 // using the declaring syntax of the type parameter itself.

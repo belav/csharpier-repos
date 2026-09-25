@@ -7,7 +7,8 @@ namespace System.Buffers
     /// Represents a region of native memory. The <see cref="Memory"/> property can be used
     /// to get a <see cref="Memory{Byte}"/> backed by this memory region.
     /// </summary>
-    public abstract class BoundedMemory<T> : IDisposable where T : unmanaged
+    public abstract class BoundedMemory<T> : IDisposable
+        where T : unmanaged
     {
         /// <summary>
         /// Returns a value stating whether this native memory block is readonly.
@@ -52,13 +53,15 @@ namespace System.Buffers
         /// Gets the <see cref="Span{Byte}"/> which represents this native memory.
         /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see cref="Span{Byte}"/>.
         /// </summary>
-        public static implicit operator Span<T>(BoundedMemory<T> boundedMemory) => boundedMemory.Span;
+        public static implicit operator Span<T>(BoundedMemory<T> boundedMemory) =>
+            boundedMemory.Span;
 
         /// <summary>
         /// Gets the <see cref="ReadOnlySpan{Byte}"/> which represents this native memory.
         /// This <see cref="BoundedMemory{T}"/> instance must be kept alive while working with the <see cref="ReadOnlySpan{Byte}"/>.
         /// </summary>
-        public static implicit operator ReadOnlySpan<T>(BoundedMemory<T> boundedMemory) => boundedMemory.Span;
+        public static implicit operator ReadOnlySpan<T>(BoundedMemory<T> boundedMemory) =>
+            boundedMemory.Span;
 
         /// <summary>
         /// Gets a reference to the element at the specified index.

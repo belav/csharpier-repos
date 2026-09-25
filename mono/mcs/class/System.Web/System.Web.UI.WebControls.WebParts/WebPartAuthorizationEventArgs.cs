@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,47 +28,53 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 namespace System.Web.UI.WebControls.WebParts
 {
-	public class WebPartAuthorizationEventArgs : EventArgs
-	{
-		bool authorized;
-		Type type;
-		string path;
-		string authorizationFilter;
-		bool isShared;
+    public class WebPartAuthorizationEventArgs : EventArgs
+    {
+        bool authorized;
+        Type type;
+        string path;
+        string authorizationFilter;
+        bool isShared;
 
-		public WebPartAuthorizationEventArgs (Type type,
-						      string path,
-						      string authorizationFilter,
-						      bool isShared)
-		{
-			this.type = type;
-			this.path = path;
-			this.authorizationFilter = authorizationFilter;
-			this.isShared = isShared;
-		}
+        public WebPartAuthorizationEventArgs(
+            Type type,
+            string path,
+            string authorizationFilter,
+            bool isShared
+        )
+        {
+            this.type = type;
+            this.path = path;
+            this.authorizationFilter = authorizationFilter;
+            this.isShared = isShared;
+        }
 
-		public Type Type {
-			get { return type; }
-		}
+        public Type Type
+        {
+            get { return type; }
+        }
 
-		public string Path {
-			get { return path; }
-		}
+        public string Path
+        {
+            get { return path; }
+        }
 
-		public string AuthorizationFilter {
-			get { return authorizationFilter; }
-		}
+        public string AuthorizationFilter
+        {
+            get { return authorizationFilter; }
+        }
 
-		public bool IsShared {
-			get { return isShared; }
-		}
+        public bool IsShared
+        {
+            get { return isShared; }
+        }
 
-		public bool IsAuthorized {
-			get { return authorized; }
-			set { authorized = value; }
-		}
-	}
+        public bool IsAuthorized
+        {
+            get { return authorized; }
+            set { authorized = value; }
+        }
+    }
 }

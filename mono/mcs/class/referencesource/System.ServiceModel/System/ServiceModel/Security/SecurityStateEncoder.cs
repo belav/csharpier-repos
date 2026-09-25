@@ -16,4 +16,3 @@ namespace System.ServiceModel.Security
         protected internal abstract byte[] EncodeSecurityState(byte[] data);
     }
 }
-

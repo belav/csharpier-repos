@@ -25,7 +25,7 @@ namespace System.CommandLine.Rendering
         public AnsiControlCode AnsiControlCode { get; }
 
         public override int ContentLength => 0;
-        
+
         public override string ToString() => "";
 
         public override void WriteTo(TextWriter writer, OutputMode outputMode)

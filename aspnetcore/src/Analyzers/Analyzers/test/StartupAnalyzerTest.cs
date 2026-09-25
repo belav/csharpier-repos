@@ -110,9 +110,8 @@ namespace Microsoft.AspNetCore.Analyzers.TestFiles.StartupAnalyzerTest
         await VerifyAnalyzerAsync(source, DiagnosticResult.EmptyDiagnosticResults);
 
         // Assert
-        Assert.Collection(
-            ConfigureServicesMethods.OrderBy(m => m.Name),
-            m => Assert.Equal("ConfigureServices", m.Name)
+        Assert.Collection(ConfigureServicesMethods.OrderBy(m => m.Name), m =>
+            Assert.Equal("ConfigureServices", m.Name)
         );
 
         Assert.Collection(

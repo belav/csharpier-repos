@@ -3,9 +3,9 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.PeerResolvers
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
 
     [MessageContract(IsWrapped = false)]
     public class ServiceSettingsResponseInfo
@@ -22,7 +22,8 @@ namespace System.ServiceModel.PeerResolvers
             }
         }
 
-        public ServiceSettingsResponseInfo() : this(false) { }
+        public ServiceSettingsResponseInfo()
+            : this(false) { }
 
         public ServiceSettingsResponseInfo(bool control)
         {
@@ -44,4 +45,3 @@ namespace System.ServiceModel.PeerResolvers
         }
     }
 }
-

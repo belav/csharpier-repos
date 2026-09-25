@@ -19,9 +19,11 @@ public static class ValueComparerExtensions
     /// </summary>
     public static ValueComparer? ToNullableComparer(this ValueComparer? valueComparer, Type clrType)
     {
-        if (valueComparer == null
+        if (
+            valueComparer == null
             || !clrType.IsNullableValueType()
-            || valueComparer.Type.IsNullableValueType())
+            || valueComparer.Type.IsNullableValueType()
+        )
         {
             return valueComparer;
         }
@@ -34,35 +36,49 @@ public static class ValueComparerExtensions
         var v1HasValue = Expression.MakeMemberAccess(newEqualsParam1, hasValueProperty);
         var v2HasValue = Expression.MakeMemberAccess(newEqualsParam2, hasValueProperty);
 
-        return (ValueComparer)Activator.CreateInstance(
-            typeof(ValueComparer<>).MakeGenericType(clrType),
-            Expression.Lambda(
-                Expression.OrElse(
-                    Expression.AndAlso(
-                        v1HasValue,
+        return (ValueComparer)
+            Activator.CreateInstance(
+                typeof(ValueComparer<>).MakeGenericType(clrType),
+                Expression.Lambda(
+                    Expression.OrElse(
                         Expression.AndAlso(
-                            v2HasValue,
-                            valueComparer.ExtractEqualsBody(
-                                Expression.Convert(newEqualsParam1, valueComparer.Type),
-                                Expression.Convert(newEqualsParam2, valueComparer.Type)))),
-                    Expression.AndAlso(
-                        Expression.Not(v1HasValue),
-                        Expression.Not(v2HasValue))),
-                newEqualsParam1, newEqualsParam2),
-            Expression.Lambda(
-                Expression.Condition(
-                    Expression.MakeMemberAccess(newHashCodeParam, hasValueProperty),
-                    valueComparer.ExtractHashCodeBody(
-                        Expression.Convert(newHashCodeParam, valueComparer.Type)),
-                    Expression.Constant(0, typeof(int))),
-                newHashCodeParam),
-            Expression.Lambda(
-                Expression.Condition(
-                    Expression.MakeMemberAccess(newSnapshotParam, hasValueProperty),
-                    Expression.Convert(
-                        valueComparer.ExtractSnapshotBody(
-                            Expression.Convert(newSnapshotParam, valueComparer.Type)), clrType),
-                    Expression.Default(clrType)),
-                newSnapshotParam))!;
+                            v1HasValue,
+                            Expression.AndAlso(
+                                v2HasValue,
+                                valueComparer.ExtractEqualsBody(
+                                    Expression.Convert(newEqualsParam1, valueComparer.Type),
+                                    Expression.Convert(newEqualsParam2, valueComparer.Type)
+                                )
+                            )
+                        ),
+                        Expression.AndAlso(Expression.Not(v1HasValue), Expression.Not(v2HasValue))
+                    ),
+                    newEqualsParam1,
+                    newEqualsParam2
+                ),
+                Expression.Lambda(
+                    Expression.Condition(
+                        Expression.MakeMemberAccess(newHashCodeParam, hasValueProperty),
+                        valueComparer.ExtractHashCodeBody(
+                            Expression.Convert(newHashCodeParam, valueComparer.Type)
+                        ),
+                        Expression.Constant(0, typeof(int))
+                    ),
+                    newHashCodeParam
+                ),
+                Expression.Lambda(
+                    Expression.Condition(
+                        Expression.MakeMemberAccess(newSnapshotParam, hasValueProperty),
+                        Expression.Convert(
+                            valueComparer.ExtractSnapshotBody(
+                                Expression.Convert(newSnapshotParam, valueComparer.Type)
+                            ),
+                            clrType
+                        ),
+                        Expression.Default(clrType)
+                    ),
+                    newSnapshotParam
+                )
+            )!;
     }
 }

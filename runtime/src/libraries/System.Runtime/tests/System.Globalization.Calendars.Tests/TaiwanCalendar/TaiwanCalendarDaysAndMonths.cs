@@ -20,7 +20,7 @@ namespace System.Globalization.Tests
                 "\u661F\u671F\u4E09",
                 "\u661F\u671F\u56DB",
                 "\u661F\u671F\u4E94",
-                "\u661F\u671F\u516D"
+                "\u661F\u671F\u516D",
             };
 
             DateTimeFormatInfo dtfi = new CultureInfo("zh-TW").DateTimeFormat;

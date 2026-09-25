@@ -137,35 +137,26 @@ public class ResponseCookiesTest
         var deletedCookies = headers.SetCookie.ToArray();
         Assert.Equal(testCookies.Length, deletedCookies.Length);
 
-        Assert.Single(
-            deletedCookies,
-            cookie =>
-                cookie.StartsWith("key1", StringComparison.InvariantCulture)
-                && cookie.Contains("path=/path1/")
+        Assert.Single(deletedCookies, cookie =>
+            cookie.StartsWith("key1", StringComparison.InvariantCulture)
+            && cookie.Contains("path=/path1/")
         );
-        Assert.Single(
-            deletedCookies,
-            cookie =>
-                cookie.StartsWith("key1", StringComparison.InvariantCulture)
-                && cookie.Contains("path=/path2/")
+        Assert.Single(deletedCookies, cookie =>
+            cookie.StartsWith("key1", StringComparison.InvariantCulture)
+            && cookie.Contains("path=/path2/")
         );
-        Assert.Single(
-            deletedCookies,
-            cookie =>
-                cookie.StartsWith("key2", StringComparison.InvariantCulture)
-                && cookie.Contains("path=/path1/")
-                && cookie.Contains("domain=localhost")
+        Assert.Single(deletedCookies, cookie =>
+            cookie.StartsWith("key2", StringComparison.InvariantCulture)
+            && cookie.Contains("path=/path1/")
+            && cookie.Contains("domain=localhost")
         );
-        Assert.Single(
-            deletedCookies,
-            cookie =>
-                cookie.StartsWith("key2", StringComparison.InvariantCulture)
-                && cookie.Contains("path=/path2/")
-                && cookie.Contains("domain=localhost")
+        Assert.Single(deletedCookies, cookie =>
+            cookie.StartsWith("key2", StringComparison.InvariantCulture)
+            && cookie.Contains("path=/path2/")
+            && cookie.Contains("domain=localhost")
         );
-        Assert.All(
-            deletedCookies,
-            cookie => Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie)
+        Assert.All(deletedCookies, cookie =>
+            Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie)
         );
     }
 
@@ -199,22 +190,17 @@ public class ResponseCookiesTest
 
         var deletedCookies = headers.SetCookie.ToArray();
         Assert.Equal(2, deletedCookies.Length);
-        Assert.Single(
-            deletedCookies,
-            cookie =>
-                cookie.StartsWith("key1", StringComparison.InvariantCulture)
-                && cookie.Contains("path=/path1/")
+        Assert.Single(deletedCookies, cookie =>
+            cookie.StartsWith("key1", StringComparison.InvariantCulture)
+            && cookie.Contains("path=/path1/")
         );
-        Assert.Single(
-            deletedCookies,
-            cookie =>
-                cookie.StartsWith("key2", StringComparison.InvariantCulture)
-                && cookie.Contains("path=/path1/")
-                && cookie.Contains("domain=localhost")
+        Assert.Single(deletedCookies, cookie =>
+            cookie.StartsWith("key2", StringComparison.InvariantCulture)
+            && cookie.Contains("path=/path1/")
+            && cookie.Contains("domain=localhost")
         );
-        Assert.All(
-            deletedCookies,
-            cookie => Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie)
+        Assert.All(deletedCookies, cookie =>
+            Assert.Contains("expires=Thu, 01 Jan 1970 00:00:00 GMT", cookie)
         );
     }
 

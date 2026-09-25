@@ -12,6 +12,7 @@ namespace System.Security
     public sealed class AllowPartiallyTrustedCallersAttribute : Attribute
     {
         public AllowPartiallyTrustedCallersAttribute() { }
+
         public PartialTrustVisibilityLevel PartialTrustVisibilityLevel { get; set; }
     }
 }

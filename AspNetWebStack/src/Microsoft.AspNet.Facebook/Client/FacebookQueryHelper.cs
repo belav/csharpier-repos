@@ -49,7 +49,11 @@ namespace Microsoft.AspNet.Facebook.Client
             return String.Empty;
         }
 
-        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "Lowercase is intended for field names.")]
+        [SuppressMessage(
+            "Microsoft.Globalization",
+            "CA1308:NormalizeStringsToUppercase",
+            Justification = "Lowercase is intended for field names."
+        )]
         private static IList<string> GetFieldNames(Type modelType, HashSet<Type> typesVisited)
         {
             Type connectionType;
@@ -58,32 +62,41 @@ namespace Microsoft.AspNet.Facebook.Client
                 modelType = connectionType;
             }
 
-            PropertyInfo[] properties = modelType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            PropertyInfo[] properties = modelType.GetProperties(
+                BindingFlags.Public | BindingFlags.Instance
+            );
             List<string> facebookFields = new List<string>();
             foreach (PropertyInfo property in properties)
             {
                 string propertyName = property.Name;
-                AttributeCollection attributes =
-                   TypeDescriptor.GetProperties(modelType)[propertyName].Attributes;
+                AttributeCollection attributes = TypeDescriptor
+                    .GetProperties(modelType)[propertyName]
+                    .Attributes;
 
-                JsonIgnoreAttribute jsonIgnoreAttribute =
-                   (JsonIgnoreAttribute)attributes[typeof(JsonIgnoreAttribute)];
+                JsonIgnoreAttribute jsonIgnoreAttribute = (JsonIgnoreAttribute)
+                    attributes[typeof(JsonIgnoreAttribute)];
 
                 if (jsonIgnoreAttribute == null)
                 {
-                    JsonPropertyAttribute jsonPropertyAttribute =
-                        (JsonPropertyAttribute)attributes[typeof(JsonPropertyAttribute)];
+                    JsonPropertyAttribute jsonPropertyAttribute = (JsonPropertyAttribute)
+                        attributes[typeof(JsonPropertyAttribute)];
                     FacebookFieldModifierAttribute modifierAttribute =
-                        (FacebookFieldModifierAttribute)attributes[typeof(FacebookFieldModifierAttribute)];
+                        (FacebookFieldModifierAttribute)
+                            attributes[typeof(FacebookFieldModifierAttribute)];
 
                     StringBuilder fieldName = new StringBuilder(
-                        jsonPropertyAttribute != null ?
-                            jsonPropertyAttribute.PropertyName :
-                            propertyName);
+                        jsonPropertyAttribute != null
+                            ? jsonPropertyAttribute.PropertyName
+                            : propertyName
+                    );
 
                     if (modifierAttribute != null)
                     {
-                        fieldName.AppendFormat(CultureInfo.InvariantCulture, ".{0}", modifierAttribute.FieldModifier);
+                        fieldName.AppendFormat(
+                            CultureInfo.InvariantCulture,
+                            ".{0}",
+                            modifierAttribute.FieldModifier
+                        );
                     }
 
                     Type propertyType = property.PropertyType;
@@ -105,8 +118,10 @@ namespace Microsoft.AspNet.Facebook.Client
             if (modelType.IsGenericType)
             {
                 Type genericTypeDefinition = modelType.GetGenericTypeDefinition();
-                if (genericTypeDefinition == typeof(FacebookConnection<>) ||
-                    genericTypeDefinition == typeof(FacebookGroupConnection<>))
+                if (
+                    genericTypeDefinition == typeof(FacebookConnection<>)
+                    || genericTypeDefinition == typeof(FacebookGroupConnection<>)
+                )
                 {
                     Type genericArgumentType = modelType.GetGenericArguments()[0];
                     connectionType = genericArgumentType;

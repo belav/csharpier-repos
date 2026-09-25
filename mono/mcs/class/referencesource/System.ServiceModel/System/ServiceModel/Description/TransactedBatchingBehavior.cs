@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Description
 {
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     public class TransactedBatchingBehavior : IEndpointBehavior
     {
@@ -15,9 +15,13 @@ namespace System.ServiceModel.Description
         {
             if (maxBatchSize < 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxBatchSize", maxBatchSize,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxBatchSize",
+                        maxBatchSize,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             }
             this.maxBatchSize = maxBatchSize;
         }
@@ -29,8 +33,13 @@ namespace System.ServiceModel.Description
             {
                 if (value < 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.ValueMustBeNonNegative)
+                        )
+                    );
                 }
                 this.maxBatchSize = value;
             }
@@ -38,7 +47,8 @@ namespace System.ServiceModel.Description
 
         void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
         {
-            BindingElementCollection bindingElements = serviceEndpoint.Binding.CreateBindingElements();
+            BindingElementCollection bindingElements =
+                serviceEndpoint.Binding.CreateBindingElements();
             bool transactedElementFound = false;
 
             foreach (BindingElement bindingElement in bindingElements)
@@ -50,28 +60,46 @@ namespace System.ServiceModel.Description
                     break;
                 }
             }
-            
-            if (! transactedElementFound)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxTransactedBindingNeeded)));
+
+            if (!transactedElementFound)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SfxTransactedBindingNeeded))
+                );
         }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
-        {
-        }
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
             if (endpointDispatcher.DispatchRuntime.ReleaseServiceInstanceOnTransactionComplete)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoBatchingForReleaseOnComplete)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxNoBatchingForReleaseOnComplete)
+                    )
+                );
             if (serviceEndpoint.Contract.SessionMode == SessionMode.Required)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoBatchingForSession)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoBatchingForSession))
+                );
         }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        )
         {
             if (serviceEndpoint.Contract.SessionMode == SessionMode.Required)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoBatchingForSession)));
-            behavior.CallbackDispatchRuntime.ChannelDispatcher.MaxTransactedBatchSize = this.MaxBatchSize;
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoBatchingForSession))
+                );
+            behavior.CallbackDispatchRuntime.ChannelDispatcher.MaxTransactedBatchSize =
+                this.MaxBatchSize;
         }
     }
 }

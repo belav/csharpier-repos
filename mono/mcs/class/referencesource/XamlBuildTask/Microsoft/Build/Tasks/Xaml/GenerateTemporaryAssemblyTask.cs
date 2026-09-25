@@ -9,18 +9,18 @@ namespace Microsoft.Build.Tasks.Xaml
     using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
     using System.IO;
+    using System.Reflection;
+    using System.Runtime;
     using System.Xaml;
     using System.Xaml.Schema;
     using System.Xml;
     using System.Xml.Linq;
+    using Microsoft.Build.BuildEngine;
     using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
-    using Microsoft.Build.BuildEngine;
 
     [Fx.Tag.XamlVisible(true)]
     public class GenerateTemporaryAssemblyTask : Task
@@ -32,38 +32,28 @@ namespace Microsoft.Build.Tasks.Xaml
         bool supportExtensions = false;
         ITaskItem[] generatedResourceFiles;
 
-        public GenerateTemporaryAssemblyTask()
-        {
-        }
+        public GenerateTemporaryAssemblyTask() { }
 
         [Required]
-        public string AssemblyName
-        { get; set; }
+        public string AssemblyName { get; set; }
 
         [Required]
-        public string OutputPath
-        { get; set; }
+        public string OutputPath { get; set; }
 
         [Required]
-        public string CurrentProject
-        { get; set; }
+        public string CurrentProject { get; set; }
 
         [Fx.Tag.KnownXamlExternal]
         [Required]
         public ITaskItem[] SourceCodeFiles { get; set; }
 
         [Required]
-        public string CompileTargetName
-        { get; set; }
+        public string CompileTargetName { get; set; }
 
         // Required in Dev11, but for backward compatibility with a Dev10 targets file, not marking as required.
-        public ITaskItem[] GeneratedResourcesFiles 
+        public ITaskItem[] GeneratedResourcesFiles
         {
-            get
-            {
-                return this.generatedResourceFiles;
-            }
-
+            get { return this.generatedResourceFiles; }
             set
             {
                 this.generatedResourceFiles = value;
@@ -72,12 +62,10 @@ namespace Microsoft.Build.Tasks.Xaml
         }
 
         [Fx.Tag.KnownXamlExternal]
-        public ITaskItem[] ReferencePaths
-        { get; set; }
+        public ITaskItem[] ReferencePaths { get; set; }
 
         [Required]
-        public string ApplicationMarkupTypeName
-        { get; set; }
+        public string ApplicationMarkupTypeName { get; set; }
 
         public override bool Execute()
         {
@@ -87,7 +75,9 @@ namespace Microsoft.Build.Tasks.Xaml
                 XDocument projectDocument = XDocument.Load(this.CurrentProject);
                 if (projectDocument != null)
                 {
-                    XElement projectElement = projectDocument.Element(XName.Get("Project", MSBuildNamespace));
+                    XElement projectElement = projectDocument.Element(
+                        XName.Get("Project", MSBuildNamespace)
+                    );
                     if (projectElement != null)
                     {
                         RemoveItemsByName(projectElement, this.ApplicationMarkupTypeName);
@@ -102,12 +92,24 @@ namespace Microsoft.Build.Tasks.Xaml
 
                         RemovePropertyByName(projectElement, "OutputType");
                         RemovePropertyByName(projectElement, "AssemblyName");
-                        AddNewProperties(projectElement,
-                            new ProjectProperty[] {
+                        AddNewProperties(
+                            projectElement,
+                            new ProjectProperty[]
+                            {
                                 new ProjectProperty() { Name = "OutputType", Value = "Library" },
-                                new ProjectProperty() { Name = "AssemblyName", Value = this.AssemblyName },
-                                new ProjectProperty() { Name = "Utf8Output", Value = "true", Condition = "'$(Utf8Output)' == ''" }
-                            });
+                                new ProjectProperty()
+                                {
+                                    Name = "AssemblyName",
+                                    Value = this.AssemblyName,
+                                },
+                                new ProjectProperty()
+                                {
+                                    Name = "Utf8Output",
+                                    Value = "true",
+                                    Condition = "'$(Utf8Output)' == ''",
+                                },
+                            }
+                        );
                     }
                 }
 
@@ -119,7 +121,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 globalProperties["IntermediateOutputPath"] = this.OutputPath;
                 globalProperties["AssemblyName"] = this.AssemblyName;
                 globalProperties["OutputType"] = "Library";
-                retVal = base.BuildEngine.BuildProjectFile(filename, new string[] { this.CompileTargetName }, globalProperties, null);
+                retVal = base.BuildEngine.BuildProjectFile(
+                    filename,
+                    new string[] { this.CompileTargetName },
+                    globalProperties,
+                    null
+                );
                 File.Delete(filename);
                 return retVal;
             }
@@ -142,7 +149,9 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (!string.IsNullOrEmpty(itemName))
             {
-                IEnumerable<XElement> itemGroups = project.Elements(XName.Get("ItemGroup", MSBuildNamespace));
+                IEnumerable<XElement> itemGroups = project.Elements(
+                    XName.Get("ItemGroup", MSBuildNamespace)
+                );
                 itemGroups.Elements(XName.Get(itemName, MSBuildNamespace)).Remove();
             }
         }
@@ -177,25 +186,32 @@ namespace Microsoft.Build.Tasks.Xaml
                 project.Add(newItemGroup);
                 foreach (ITaskItem item in items)
                 {
-                    XElement newResource = new XElement(XName.Get("EmbeddedResource", MSBuildNamespace));
+                    XElement newResource = new XElement(
+                        XName.Get("EmbeddedResource", MSBuildNamespace)
+                    );
                     newResource.Add(new XAttribute("Include", item.ItemSpec));
 
                     XElement type = new XElement(XName.Get("Type", MSBuildNamespace), "Non-Resx");
                     newResource.Add(type);
 
-                    XElement withCulture = new XElement(XName.Get("WithCulture", MSBuildNamespace), "false");
+                    XElement withCulture = new XElement(
+                        XName.Get("WithCulture", MSBuildNamespace),
+                        "false"
+                    );
                     newResource.Add(withCulture);
 
                     newItemGroup.Add(newResource);
                 }
             }
         }
-        
+
         void RemovePropertyByName(XElement project, string propertyName)
         {
             if (!string.IsNullOrEmpty(propertyName))
             {
-                IEnumerable<XElement> itemGroups = project.Elements(XName.Get("PropertyGroup", MSBuildNamespace));
+                IEnumerable<XElement> itemGroups = project.Elements(
+                    XName.Get("PropertyGroup", MSBuildNamespace)
+                );
                 itemGroups.Elements(XName.Get(propertyName, MSBuildNamespace)).Remove();
             }
         }
@@ -204,7 +220,9 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             if (properties != null)
             {
-                XElement newPropertyGroup = new XElement(XName.Get("PropertyGroup", MSBuildNamespace));
+                XElement newPropertyGroup = new XElement(
+                    XName.Get("PropertyGroup", MSBuildNamespace)
+                );
                 project.Add(newPropertyGroup);
                 foreach (ProjectProperty prop in properties)
                 {
@@ -214,7 +232,10 @@ namespace Microsoft.Build.Tasks.Xaml
                         newElement.Value = prop.Value;
                         if (!string.IsNullOrEmpty(prop.Condition))
                         {
-                            newElement.SetAttributeValue(XName.Get("Condition", string.Empty), prop.Condition);
+                            newElement.SetAttributeValue(
+                                XName.Get("Condition", string.Empty),
+                                prop.Condition
+                            );
                         }
                         newPropertyGroup.Add(newElement);
                     }
@@ -224,12 +245,9 @@ namespace Microsoft.Build.Tasks.Xaml
 
         class ProjectProperty
         {
-            public string Name
-            { get; set; }
-            public string Value
-            { get; set; }
-            public string Condition
-            { get; set; }
+            public string Name { get; set; }
+            public string Value { get; set; }
+            public string Condition { get; set; }
         }
     }
 }

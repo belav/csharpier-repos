@@ -9,7 +9,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractClass
 {
     internal interface IOmniSharpExtractClassOptionsService
     {
-        Task<OmniSharpExtractClassOptions?> GetExtractClassOptionsAsync(Document document, INamedTypeSymbol originalType, ImmutableArray<ISymbol> selectedMembers);
+        Task<OmniSharpExtractClassOptions?> GetExtractClassOptionsAsync(
+            Document document,
+            INamedTypeSymbol originalType,
+            ImmutableArray<ISymbol> selectedMembers
+        );
     }
 
     internal sealed class OmniSharpExtractClassOptions
@@ -23,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractClass
             string fileName,
             string typeName,
             bool sameFile,
-            ImmutableArray<OmniSharpExtractClassMemberAnalysisResult> memberAnalysisResults)
+            ImmutableArray<OmniSharpExtractClassMemberAnalysisResult> memberAnalysisResults
+        )
         {
             FileName = fileName;
             TypeName = typeName;
@@ -31,6 +36,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractClass
             MemberAnalysisResults = memberAnalysisResults;
         }
     }
+
     internal sealed class OmniSharpExtractClassMemberAnalysisResult
     {
         /// <summary>
@@ -43,9 +49,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.ExtractClass
         /// </summary>
         public bool MakeAbstract { get; }
 
-        public OmniSharpExtractClassMemberAnalysisResult(
-            ISymbol member,
-            bool makeAbstract)
+        public OmniSharpExtractClassMemberAnalysisResult(ISymbol member, bool makeAbstract)
         {
             Member = member;
             MakeAbstract = makeAbstract;

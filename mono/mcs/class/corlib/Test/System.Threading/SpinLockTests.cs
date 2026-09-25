@@ -26,133 +26,142 @@
 
 using System;
 using System.Threading;
-
-using NUnit.Framework;
-
 using MonoTests.System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace MonoTests.System.Threading
 {
-	[TestFixture]
-	public class SpinLockTests
-	{
-		SpinLock sl;
+    [TestFixture]
+    public class SpinLockTests
+    {
+        SpinLock sl;
 
-		[SetUp]
-		public void Setup ()
-		{
-			sl = new SpinLock (true);
-		}
+        [SetUp]
+        public void Setup()
+        {
+            sl = new SpinLock(true);
+        }
 
-		[Test, ExpectedException (typeof (LockRecursionException))]
-		public void RecursionExceptionTest ()
-		{
-			sl = new SpinLock (true);
-			bool taken = false, taken2 = false;
+        [Test, ExpectedException(typeof(LockRecursionException))]
+        public void RecursionExceptionTest()
+        {
+            sl = new SpinLock(true);
+            bool taken = false,
+                taken2 = false;
 
-			sl.Enter (ref taken);
-			Assert.IsTrue (taken, "#1");
-			sl.Enter (ref taken2);
-		}
+            sl.Enter(ref taken);
+            Assert.IsTrue(taken, "#1");
+            sl.Enter(ref taken2);
+        }
 
-		[Test]
-		public void SimpleEnterExitSchemeTest ()
-		{
-			bool taken = false;
+        [Test]
+        public void SimpleEnterExitSchemeTest()
+        {
+            bool taken = false;
 
-			for (int i = 0; i < 50000; i++) {
-				sl.Enter (ref taken);
-				Assert.IsTrue (taken, "#" + i.ToString ());
-				sl.Exit ();
-				taken = false;
-			}
-		}
+            for (int i = 0; i < 50000; i++)
+            {
+                sl.Enter(ref taken);
+                Assert.IsTrue(taken, "#" + i.ToString());
+                sl.Exit();
+                taken = false;
+            }
+        }
 
-		[Test]
-		public void SemanticCorrectnessTest ()
-		{
-			sl = new SpinLock (false);
+        [Test]
+        public void SemanticCorrectnessTest()
+        {
+            sl = new SpinLock(false);
 
-			bool taken = false;
-			bool taken2 = false;
+            bool taken = false;
+            bool taken2 = false;
 
-			sl.Enter (ref taken);
-			Assert.IsTrue (taken, "#1");
-			sl.TryEnter (ref taken2);
-			Assert.IsFalse (taken2, "#2");
-			sl.Exit ();
+            sl.Enter(ref taken);
+            Assert.IsTrue(taken, "#1");
+            sl.TryEnter(ref taken2);
+            Assert.IsFalse(taken2, "#2");
+            sl.Exit();
 
-			sl.TryEnter (ref taken2);
-			Assert.IsTrue (taken2, "#3");
+            sl.TryEnter(ref taken2);
+            Assert.IsTrue(taken2, "#3");
 
-			sl.Exit ();
-			Assert.IsFalse (sl.IsHeld);
-		}
+            sl.Exit();
+            Assert.IsFalse(sl.IsHeld);
+        }
 
-		[Test, ExpectedException (typeof (ArgumentException))]
-		public void FirstTakenParameterTest ()
-		{
-			bool taken = true;
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void FirstTakenParameterTest()
+        {
+            bool taken = true;
 
-			sl.Enter (ref taken);
-		}
+            sl.Enter(ref taken);
+        }
 
-		[Test, ExpectedException (typeof (ArgumentException))]
-		public void SecondTakenParameterTest ()
-		{
-			bool taken = true;
+        [Test, ExpectedException(typeof(ArgumentException))]
+        public void SecondTakenParameterTest()
+        {
+            bool taken = true;
 
-			sl.TryEnter (ref taken);
-		}
+            sl.TryEnter(ref taken);
+        }
 
-		internal class SpinLockWrapper
-		{
-			public SpinLock Lock = new SpinLock (false);
-		}
+        internal class SpinLockWrapper
+        {
+            public SpinLock Lock = new SpinLock(false);
+        }
 
-		[Test]
-		[Category ("MultiThreaded")]
-		public void LockUnicityTest ()
-		{
-			ParallelTestHelper.Repeat (delegate {
-				int currentCount = 0;
-				bool fail = false;
-				SpinLockWrapper wrapper = new SpinLockWrapper ();
+        [Test]
+        [Category("MultiThreaded")]
+        public void LockUnicityTest()
+        {
+            ParallelTestHelper.Repeat(
+                delegate
+                {
+                    int currentCount = 0;
+                    bool fail = false;
+                    SpinLockWrapper wrapper = new SpinLockWrapper();
 
-				ParallelTestHelper.ParallelStressTest (wrapper, delegate {
-					bool taken = false;
-					wrapper.Lock.Enter (ref taken);
-					int current = currentCount++;
-					if (current != 0)
-						fail = true;
+                    ParallelTestHelper.ParallelStressTest(
+                        wrapper,
+                        delegate
+                        {
+                            bool taken = false;
+                            wrapper.Lock.Enter(ref taken);
+                            int current = currentCount++;
+                            if (current != 0)
+                                fail = true;
 
-					SpinWait sw = new SpinWait ();
-					for (int i = 0; i < 200; i++)
-						sw.SpinOnce ();
-					currentCount -= 1;
+                            SpinWait sw = new SpinWait();
+                            for (int i = 0; i < 200; i++)
+                                sw.SpinOnce();
+                            currentCount -= 1;
 
-					wrapper.Lock.Exit ();
-				}, 4);
+                            wrapper.Lock.Exit();
+                        },
+                        4
+                    );
 
-				Assert.IsFalse (fail);
-			}, 5);
-		}
+                    Assert.IsFalse(fail);
+                },
+                5
+            );
+        }
 
-		[Test]
-		public void IsHeldByCurrentThreadTest ()
-		{
-			bool lockTaken = false;
+        [Test]
+        public void IsHeldByCurrentThreadTest()
+        {
+            bool lockTaken = false;
 
-			sl.Enter (ref lockTaken);
-			Assert.IsTrue (lockTaken, "#1");
-			Assert.IsTrue (sl.IsHeldByCurrentThread, "#2");
+            sl.Enter(ref lockTaken);
+            Assert.IsTrue(lockTaken, "#1");
+            Assert.IsTrue(sl.IsHeldByCurrentThread, "#2");
 
-			lockTaken = false;
-			sl = new SpinLock (true);
+            lockTaken = false;
+            sl = new SpinLock(true);
 
-			sl.Enter (ref lockTaken);
-			Assert.IsTrue (lockTaken, "#3");
-			Assert.IsTrue (sl.IsHeldByCurrentThread, "#4");
-		}
-	}
+            sl.Enter(ref lockTaken);
+            Assert.IsTrue(lockTaken, "#3");
+            Assert.IsTrue(sl.IsHeldByCurrentThread, "#4");
+        }
+    }
 }

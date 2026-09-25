@@ -6,7 +6,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod;
 
-internal abstract partial class MethodExtractor<TSelectionResult, TStatementSyntax, TExpressionSyntax>
+internal abstract partial class MethodExtractor<
+    TSelectionResult,
+    TStatementSyntax,
+    TExpressionSyntax
+>
 {
     internal class GeneratedCode
     {
@@ -14,7 +18,8 @@ internal abstract partial class MethodExtractor<TSelectionResult, TStatementSynt
             SemanticDocument document,
             SyntaxAnnotation methodNameAnnotation,
             SyntaxAnnotation callSiteAnnotation,
-            SyntaxAnnotation methodDefinitionAnnotation)
+            SyntaxAnnotation methodDefinitionAnnotation
+        )
         {
             Contract.ThrowIfNull(document);
             Contract.ThrowIfNull(methodNameAnnotation);

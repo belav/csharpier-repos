@@ -71,11 +71,11 @@ namespace System.Security.Cryptography.OpenSsl.Tests
             {
                 SafeEvpPKeyHandle pkey = dsa.DuplicateKeyHandle();
 
-                using (pkey)
-                {
-                }
+                using (pkey) { }
 
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new DSAOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new DSAOpenSsl(pkey)
+                );
             }
         }
 
@@ -84,7 +84,9 @@ namespace System.Security.Cryptography.OpenSsl.Tests
         {
             using (SafeEvpPKeyHandle pkey = new SafeEvpPKeyHandle(IntPtr.Zero, false))
             {
-                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () => new DSAOpenSsl(pkey));
+                AssertExtensions.Throws<ArgumentException>("pkeyHandle", () =>
+                    new DSAOpenSsl(pkey)
+                );
             }
         }
 
@@ -105,7 +107,8 @@ namespace System.Security.Cryptography.OpenSsl.Tests
             {
                 DSAImportExport.AssertKeyEquals(
                     DSATestData.Dsa576Parameters,
-                    dsa.ExportParameters(true));
+                    dsa.ExportParameters(true)
+                );
             }
         }
     }

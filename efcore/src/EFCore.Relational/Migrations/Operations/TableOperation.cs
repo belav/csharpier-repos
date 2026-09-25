@@ -28,6 +28,5 @@ public abstract class TableOperation : MigrationOperation, ITableMigrationOperat
     public virtual string? Comment { get; set; }
 
     /// <inheritdoc />
-    string ITableMigrationOperation.Table
-        => Name;
+    string ITableMigrationOperation.Table => Name;
 }

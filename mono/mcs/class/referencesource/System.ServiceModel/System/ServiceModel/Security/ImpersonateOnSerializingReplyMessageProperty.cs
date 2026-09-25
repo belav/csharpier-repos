@@ -1,5 +1,5 @@
 //------------------------------------------------------------------------------------------------------
-// <copyright file="ImpersonateOnSerializingReplyMessageProperty.cs" company="Microsoft Corporation"> 
+// <copyright file="ImpersonateOnSerializingReplyMessageProperty.cs" company="Microsoft Corporation">
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //----------------------------------------------------------------------------------------------------
@@ -11,8 +11,8 @@ namespace System.ServiceModel.Security
     using System.Security.Principal;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
 
     /// <summary>
     /// The helper class to enable impersonation while serializing the body of the reply message.
@@ -24,7 +24,7 @@ namespace System.ServiceModel.Security
 
         internal ImpersonateOnSerializingReplyMessageProperty(ref MessageRpc rpc)
         {
-           this.rpc = rpc;
+            this.rpc = rpc;
         }
 
         /// <summary>
@@ -41,7 +41,10 @@ namespace System.ServiceModel.Security
         /// <param name="message">The message to extract the property from.</param>
         /// <param name="property">An output paramter to hold the ImpersonateOnSerializingReplyMessageProperty property.</param>
         /// <returns>True if the ImpersonateOnSerializingReplyMessageProperty property was found.</returns>
-        public static bool TryGet(Message message, out ImpersonateOnSerializingReplyMessageProperty property)
+        public static bool TryGet(
+            Message message,
+            out ImpersonateOnSerializingReplyMessageProperty property
+        )
         {
             if (message == null)
             {
@@ -57,7 +60,10 @@ namespace System.ServiceModel.Security
         /// <param name="properties">The MessagePropeties object.</param>
         /// <param name="property">An output paramter to hold the ImpersonateOnSerializingReplyMessageProperty property.</param>
         /// <returns>True if the ImpersonateOnSerializingReplyMessageProperty property was found.</returns>
-        public static bool TryGet(MessageProperties properties, out ImpersonateOnSerializingReplyMessageProperty property)
+        public static bool TryGet(
+            MessageProperties properties,
+            out ImpersonateOnSerializingReplyMessageProperty property
+        )
         {
             if (properties == null)
             {
@@ -76,17 +82,18 @@ namespace System.ServiceModel.Security
 
             return property != null;
         }
-        
+
         /// <summary>
         /// Creates a copy of the message property.
         /// </summary>
         /// <returns>Returns a copy of the message property.</returns>
         public IMessageProperty CreateCopy()
         {
-            ImpersonateOnSerializingReplyMessageProperty result = new ImpersonateOnSerializingReplyMessageProperty(ref this.rpc);
+            ImpersonateOnSerializingReplyMessageProperty result =
+                new ImpersonateOnSerializingReplyMessageProperty(ref this.rpc);
             return result;
         }
-              
+
         /// <summary>
         /// Starts Impersonating with the caller's context if impersonation is enabled on the service and sets the appropriate principal on the thread as per the service configuration.
         /// </summary>
@@ -94,9 +101,16 @@ namespace System.ServiceModel.Security
         /// <param name="originalPrincipal">The original principal on the thread before invoking this method.</param>
         /// <param name="isThreadPrincipalSet">The value determines if the principal was set on the thread by the method.</param>
         /// <returns>Returns false if operation context was not available to impersonate.</returns>
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method StartImpersonation.", Safe = "Manages the result of impersonation and properly Disposes it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method StartImpersonation.",
+            Safe = "Manages the result of impersonation and properly Disposes it."
+        )]
         [SecuritySafeCritical]
-        public void StartImpersonation(out IDisposable impersonationContext, out IPrincipal originalPrincipal, out bool isThreadPrincipalSet)
+        public void StartImpersonation(
+            out IDisposable impersonationContext,
+            out IPrincipal originalPrincipal,
+            out bool isThreadPrincipalSet
+        )
         {
             impersonationContext = null;
             originalPrincipal = null;
@@ -111,7 +125,12 @@ namespace System.ServiceModel.Security
                     ImmutableDispatchRuntime runtime = dispatchRuntime.GetRuntime();
                     if (runtime != null && runtime.SecurityImpersonation != null)
                     {
-                        runtime.SecurityImpersonation.StartImpersonation(ref this.rpc, out impersonationContext, out originalPrincipal, out isThreadPrincipalSet);
+                        runtime.SecurityImpersonation.StartImpersonation(
+                            ref this.rpc,
+                            out impersonationContext,
+                            out originalPrincipal,
+                            out isThreadPrincipalSet
+                        );
                     }
                 }
             }
@@ -124,9 +143,16 @@ namespace System.ServiceModel.Security
         /// <param name="originalPrincipal">The original principal to set on the thread.</param>
         /// <param name="isThreadPrincipalSet">The value determines if the thread principal was set during impersonation.</param>
         /// <returns>Returns false if operation context was not available to revert the impersonation.</returns>
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method StartImpersonation.", Safe = "Manages the result of impersonation and properly Disposes it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method StartImpersonation.",
+            Safe = "Manages the result of impersonation and properly Disposes it."
+        )]
         [SecuritySafeCritical]
-        public void StopImpersonation(IDisposable impersonationContext, IPrincipal originalPrincipal, bool isThreadPrincipalSet)
+        public void StopImpersonation(
+            IDisposable impersonationContext,
+            IPrincipal originalPrincipal,
+            bool isThreadPrincipalSet
+        )
         {
             if (OperationContext.Current != null)
             {
@@ -137,7 +163,12 @@ namespace System.ServiceModel.Security
                     ImmutableDispatchRuntime runtime = dispatchRuntime.GetRuntime();
                     if (runtime != null && runtime.SecurityImpersonation != null)
                     {
-                       runtime.SecurityImpersonation.StopImpersonation(ref this.rpc, impersonationContext, originalPrincipal, isThreadPrincipalSet);
+                        runtime.SecurityImpersonation.StopImpersonation(
+                            ref this.rpc,
+                            impersonationContext,
+                            originalPrincipal,
+                            isThreadPrincipalSet
+                        );
                     }
                 }
             }

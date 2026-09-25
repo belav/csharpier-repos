@@ -18,10 +18,7 @@ namespace System.Text
                 // We don't want to do this because it violates the invariants we have set for the sealed type.
                 // Instead, we'll create a new instance of the base Latin1Encoding type and mark it mutable.
 
-                return new Latin1Encoding()
-                {
-                    IsReadOnly = false
-                };
+                return new Latin1Encoding() { IsReadOnly = false };
             }
         }
     }

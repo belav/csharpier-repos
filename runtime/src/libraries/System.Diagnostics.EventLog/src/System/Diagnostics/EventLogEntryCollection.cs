@@ -16,18 +16,12 @@ namespace System.Diagnostics
 
         public int Count
         {
-            get
-            {
-                return _log.EntryCount;
-            }
+            get { return _log.EntryCount; }
         }
 
         public virtual EventLogEntry this[int index]
         {
-            get
-            {
-                return _log.GetEntryAt(index);
-            }
+            get { return _log.GetEntryAt(index); }
         }
 
         public void CopyTo(EventLogEntry[] entries, int index)
@@ -47,18 +41,12 @@ namespace System.Diagnostics
 
         bool ICollection.IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         object ICollection.SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         void ICollection.CopyTo(Array array, int index)

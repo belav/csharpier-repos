@@ -4,10 +4,10 @@
 namespace System.ServiceModel.Security.Tokens
 {
     using System;
-    using System.Xml;
     using System.Collections.ObjectModel;
+    using System.Xml;
 
-    public interface ISecurityContextSecurityTokenCache 
+    public interface ISecurityContextSecurityTokenCache
     {
         void AddContext(SecurityContextSecurityToken token);
         bool TryAddContext(SecurityContextSecurityToken token);
@@ -16,6 +16,9 @@ namespace System.ServiceModel.Security.Tokens
         void RemoveAllContexts(UniqueId contextId);
         SecurityContextSecurityToken GetContext(UniqueId contextId, UniqueId generation);
         Collection<SecurityContextSecurityToken> GetAllContexts(UniqueId contextId);
-        void UpdateContextCachingTime(SecurityContextSecurityToken context, DateTime expirationTime);
+        void UpdateContextCachingTime(
+            SecurityContextSecurityToken context,
+            DateTime expirationTime
+        );
     }
 }

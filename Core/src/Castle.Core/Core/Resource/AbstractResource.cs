@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,33 +14,31 @@
 
 namespace Castle.Core.Resource
 {
-	using System;
-	using System.IO;
-	using System.Text;
+    using System;
+    using System.IO;
+    using System.Text;
 
-	public abstract class AbstractResource : IResource
-	{
-		protected static readonly string DefaultBasePath = AppDomain.CurrentDomain.BaseDirectory;
+    public abstract class AbstractResource : IResource
+    {
+        protected static readonly string DefaultBasePath = AppDomain.CurrentDomain.BaseDirectory;
 
-		public virtual string FileBasePath
-		{
-			get { return DefaultBasePath; }
-		}
+        public virtual string FileBasePath
+        {
+            get { return DefaultBasePath; }
+        }
 
-		public abstract TextReader GetStreamReader();
+        public abstract TextReader GetStreamReader();
 
-		public abstract TextReader GetStreamReader(Encoding encoding);
+        public abstract TextReader GetStreamReader(Encoding encoding);
 
-		public abstract IResource CreateRelative(string relativePath);
+        public abstract IResource CreateRelative(string relativePath);
 
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		protected virtual void Dispose(bool disposing)
-		{
-		}
-	}
+        protected virtual void Dispose(bool disposing) { }
+    }
 }

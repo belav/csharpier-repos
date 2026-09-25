@@ -15,59 +15,61 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
-@"$$");
+            await VerifyAbsenceAsync(SourceCodeKind.Script, @"$$");
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalStatement_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 System.Console.WriteLine();
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotAfterGlobalVariableDeclaration_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 int i = 0;
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInEmptyStatement()
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$"));
+            await VerifyAbsenceAsync(AddInsideMethod(@"$$"));
         }
 
         [Fact]
@@ -77,7 +79,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 class C {
                     [$$
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -89,8 +92,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
             // The recommender doesn't work in record in script
             // Tracked by https://github.com/dotnet/roslyn/issues/44865
             await VerifyWorkerAsync(
-$@"{record} C {{
-    [$$", absent: false, TestOptions.RegularPreview);
+                $@"{record} C {{
+    [$$",
+                absent: false,
+                TestOptions.RegularPreview
+            );
         }
 
         [Fact]
@@ -101,7 +107,8 @@ $@"{record} C {{
                 class C {
                     [Goo]
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -113,7 +120,8 @@ $@"{record} C {{
                     void Goo() {
                     }
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -126,7 +134,8 @@ $@"{record} C {{
                         get;
                     }
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -137,7 +146,8 @@ $@"{record} C {{
                 class C {
                     int Goo;
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -148,14 +158,14 @@ $@"{record} C {{
                 class C {
                     event Action<int> Goo;
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInOuterAttribute()
         {
-            await VerifyAbsenceAsync(
-@"[$$");
+            await VerifyAbsenceAsync(@"[$$");
         }
 
         [Fact]
@@ -165,7 +175,8 @@ $@"{record} C {{
                 """
                 class C {
                     void Goo([$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -175,7 +186,8 @@ $@"{record} C {{
                 """
                 class C {
                     int Goo { [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -185,14 +197,14 @@ $@"{record} C {{
                 """
                 class C {
                     event Action<int> Goo { [$$
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInTypeParameters()
         {
-            await VerifyAbsenceAsync(
-@"class C<[$$");
+            await VerifyAbsenceAsync(@"class C<[$$");
         }
 
         [Fact]
@@ -202,7 +214,8 @@ $@"{record} C {{
                 """
                 interface I {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -212,7 +225,8 @@ $@"{record} C {{
                 """
                 struct S {
                     [$$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -222,7 +236,8 @@ $@"{record} C {{
                 """
                 enum E {
                     [$$
-                """);
+                """
+            );
         }
     }
 }

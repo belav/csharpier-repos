@@ -14,14 +14,29 @@ namespace System.Web.Http.ModelBinding.Binders
 
         public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
         {
-            ModelMetadataProvider metadataProvider = MetadataProvider ?? actionContext.GetMetadataProvider();
-            ModelBindingHelper.ValidateBindingContext(bindingContext, typeof(KeyValuePair<TKey, TValue>), true /* allowNullModel */);
+            ModelMetadataProvider metadataProvider =
+                MetadataProvider ?? actionContext.GetMetadataProvider();
+            ModelBindingHelper.ValidateBindingContext(
+                bindingContext,
+                typeof(KeyValuePair<TKey, TValue>),
+                true /* allowNullModel */
+            );
 
             TKey key;
-            bool keyBindingSucceeded = actionContext.TryBindStrongModel(bindingContext, "key", metadataProvider, out key);
+            bool keyBindingSucceeded = actionContext.TryBindStrongModel(
+                bindingContext,
+                "key",
+                metadataProvider,
+                out key
+            );
 
             TValue value;
-            bool valueBindingSucceeded = actionContext.TryBindStrongModel(bindingContext, "value", metadataProvider, out value);
+            bool valueBindingSucceeded = actionContext.TryBindStrongModel(
+                bindingContext,
+                "value",
+                metadataProvider,
+                out value
+            );
 
             if (keyBindingSucceeded && valueBindingSucceeded)
             {

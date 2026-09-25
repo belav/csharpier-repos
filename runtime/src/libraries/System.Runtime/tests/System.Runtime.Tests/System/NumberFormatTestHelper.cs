@@ -8,7 +8,14 @@ namespace System.Tests
 {
     internal static class NumberFormatTestHelper
     {
-        internal static void TryFormatNumberTest<T>(T i, string format, IFormatProvider provider, string expected, bool formatCasingMatchesOutput = true) where T : ISpanFormattable, IUtf8SpanFormattable
+        internal static void TryFormatNumberTest<T>(
+            T i,
+            string format,
+            IFormatProvider provider,
+            string expected,
+            bool formatCasingMatchesOutput = true
+        )
+            where T : ISpanFormattable, IUtf8SpanFormattable
         {
             // UTF16
             {
@@ -36,13 +43,27 @@ namespace System.Tests
                 {
                     // Upper format
                     actual = new char[expected.Length];
-                    Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToUpperInvariant(), provider));
+                    Assert.True(
+                        i.TryFormat(
+                            actual.AsSpan(),
+                            out charsWritten,
+                            format.ToUpperInvariant(),
+                            provider
+                        )
+                    );
                     Assert.Equal(expected.Length, charsWritten);
                     Assert.Equal(expected.ToUpperInvariant(), new string(actual));
 
                     // Lower format
                     actual = new char[expected.Length];
-                    Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToLowerInvariant(), provider));
+                    Assert.True(
+                        i.TryFormat(
+                            actual.AsSpan(),
+                            out charsWritten,
+                            format.ToLowerInvariant(),
+                            provider
+                        )
+                    );
                     Assert.Equal(expected.Length, charsWritten);
                     Assert.Equal(expected.ToLowerInvariant(), new string(actual));
                 }
@@ -75,15 +96,35 @@ namespace System.Tests
                 {
                     // Upper format
                     actual = new byte[expectedLength];
-                    Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToUpperInvariant(), provider));
+                    Assert.True(
+                        i.TryFormat(
+                            actual.AsSpan(),
+                            out charsWritten,
+                            format.ToUpperInvariant(),
+                            provider
+                        )
+                    );
                     Assert.Equal(expectedLength, charsWritten);
-                    Assert.Equal(expected.ToUpperInvariant(), Encoding.UTF8.GetString(actual.AsSpan(0, charsWritten)));
+                    Assert.Equal(
+                        expected.ToUpperInvariant(),
+                        Encoding.UTF8.GetString(actual.AsSpan(0, charsWritten))
+                    );
 
                     // Lower format
                     actual = new byte[expectedLength];
-                    Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToLowerInvariant(), provider));
+                    Assert.True(
+                        i.TryFormat(
+                            actual.AsSpan(),
+                            out charsWritten,
+                            format.ToLowerInvariant(),
+                            provider
+                        )
+                    );
                     Assert.Equal(expectedLength, charsWritten);
-                    Assert.Equal(expected.ToLowerInvariant(), Encoding.UTF8.GetString(actual.AsSpan(0, charsWritten)));
+                    Assert.Equal(
+                        expected.ToLowerInvariant(),
+                        Encoding.UTF8.GetString(actual.AsSpan(0, charsWritten))
+                    );
                 }
             }
         }

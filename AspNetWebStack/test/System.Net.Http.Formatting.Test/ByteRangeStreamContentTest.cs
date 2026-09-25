@@ -47,8 +47,18 @@ namespace System.Net.Http
                     { "bytes=0-9,0-0", 10, 2, new string[] { "bytes 0-9/10", "bytes 0-0/10" } },
                     { "bytes=0-0,0-9", 10, 2, new string[] { "bytes 0-0/10", "bytes 0-9/10" } },
                     { "bytes=0-0,9-20", 10, 2, new string[] { "bytes 0-0/10", "bytes 9-9/10" } },
-                    { "bytes=0-0,9-9,9-20", 10, 3, new string[] { "bytes 0-0/10", "bytes 9-9/10", "bytes 9-9/10" } },
-                    { "bytes=0-0,9-9,10-20", 10, 2, new string[] { "bytes 0-0/10", "bytes 9-9/10" } },
+                    {
+                        "bytes=0-0,9-9,9-20",
+                        10,
+                        3,
+                        new string[] { "bytes 0-0/10", "bytes 9-9/10", "bytes 9-9/10" }
+                    },
+                    {
+                        "bytes=0-0,9-9,10-20",
+                        10,
+                        2,
+                        new string[] { "bytes 0-0/10", "bytes 9-9/10" }
+                    },
                 };
             }
         }
@@ -70,12 +80,16 @@ namespace System.Net.Http
         public void Ctor_ThrowsOnNullContent()
         {
             RangeHeaderValue range = new RangeHeaderValue();
-            Assert.ThrowsArgumentNull(() => new ByteRangeStreamContent(
-                content: null,
-                range: range,
-                mediaType: _expectedMediatype,
-                bufferSize: 128),
-                "content");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: null,
+                        range: range,
+                        mediaType: _expectedMediatype,
+                        bufferSize: 128
+                    ),
+                "content"
+            );
         }
 
         [Fact]
@@ -87,83 +101,113 @@ namespace System.Net.Http
             RangeHeaderValue range = new RangeHeaderValue();
 
             // Act/Assert
-            Assert.ThrowsArgument(() => new ByteRangeStreamContent(
-                content: mockInnerStream.Object,
-                range: range,
-                mediaType: _expectedMediatype,
-                bufferSize: 128),
-                "content");
+            Assert.ThrowsArgument(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: mockInnerStream.Object,
+                        range: range,
+                        mediaType: _expectedMediatype,
+                        bufferSize: 128
+                    ),
+                "content"
+            );
         }
 
         [Fact]
         public void Ctor_ThrowsOnNullRange()
         {
-            Assert.ThrowsArgumentNull(() => new ByteRangeStreamContent(
-                content: Stream.Null,
-                range: null,
-                mediaType: _expectedMediatype,
-                bufferSize: 128),
-                "range");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: Stream.Null,
+                        range: null,
+                        mediaType: _expectedMediatype,
+                        bufferSize: 128
+                    ),
+                "range"
+            );
         }
 
         [Fact]
         public void Ctor_ThrowsOnNullMediaType()
         {
             RangeHeaderValue range = new RangeHeaderValue();
-            Assert.ThrowsArgumentNull(() => new ByteRangeStreamContent(
-                content: Stream.Null,
-                range: range,
-                mediaType: (MediaTypeHeaderValue)null,
-                bufferSize: 128),
-                "mediaType");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: Stream.Null,
+                        range: range,
+                        mediaType: (MediaTypeHeaderValue)null,
+                        bufferSize: 128
+                    ),
+                "mediaType"
+            );
         }
 
         [Fact]
         public void Ctor_ThrowsOnNullMediaTypeString()
         {
             RangeHeaderValue range = new RangeHeaderValue();
-            Assert.ThrowsArgument(() => new ByteRangeStreamContent(
-                content: Stream.Null,
-                range: range,
-                mediaType: (String)null,
-                bufferSize: 128),
-                "mediaType");
+            Assert.ThrowsArgument(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: Stream.Null,
+                        range: range,
+                        mediaType: (String)null,
+                        bufferSize: 128
+                    ),
+                "mediaType"
+            );
         }
 
         [Fact]
         public void Ctor_ThrowsOnInvalidBufferSize()
         {
             RangeHeaderValue range = new RangeHeaderValue();
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() => new ByteRangeStreamContent(
-                content: Stream.Null,
-                range: range,
-                mediaType: _expectedMediatype,
-                bufferSize: 0),
-                "bufferSize", "1", "0");
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: Stream.Null,
+                        range: range,
+                        mediaType: _expectedMediatype,
+                        bufferSize: 0
+                    ),
+                "bufferSize",
+                "1",
+                "0"
+            );
         }
 
         [Fact]
         public void Ctor_ThrowsOnNonByteRangeUnit()
         {
             RangeHeaderValue range = RangeHeaderValue.Parse("pages=0-9");
-            Assert.ThrowsArgument(() => new ByteRangeStreamContent(
-                content: Stream.Null,
-                range: range,
-                mediaType: _expectedMediatype,
-                bufferSize: 128),
-                "range");
+            Assert.ThrowsArgument(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: Stream.Null,
+                        range: range,
+                        mediaType: _expectedMediatype,
+                        bufferSize: 128
+                    ),
+                "range"
+            );
         }
 
         [Fact]
         public void Ctor_ThrowsOnNoByteRanges()
         {
             RangeHeaderValue range = new RangeHeaderValue() { Unit = "bytes" };
-            Assert.ThrowsArgument(() => new ByteRangeStreamContent(
-                content: Stream.Null,
-                range: range,
-                mediaType: _expectedMediatype,
-                bufferSize: 128),
-                "range");
+            Assert.ThrowsArgument(
+                () =>
+                    new ByteRangeStreamContent(
+                        content: Stream.Null,
+                        range: range,
+                        mediaType: _expectedMediatype,
+                        bufferSize: 128
+                    ),
+                "range"
+            );
         }
 
         [Theory]
@@ -182,14 +226,20 @@ namespace System.Net.Http
             }
             catch (InvalidByteRangeException invalidByteRangeException)
             {
-                ContentRangeHeaderValue expectedContentRange = new ContentRangeHeaderValue(length: 0);
+                ContentRangeHeaderValue expectedContentRange = new ContentRangeHeaderValue(
+                    length: 0
+                );
                 Assert.Equal(expectedContentRange, invalidByteRangeException.ContentRange);
             }
         }
 
         [Theory]
         [PropertyData("SingleRanges")]
-        public void SingleRangeGeneratesNonMultipartContent(string ranges, int innerStreamLength, string contentRange)
+        public void SingleRangeGeneratesNonMultipartContent(
+            string ranges,
+            int innerStreamLength,
+            string contentRange
+        )
         {
             // Arrange
             string data = new String('a', innerStreamLength);
@@ -198,17 +248,28 @@ namespace System.Net.Http
             RangeHeaderValue range = RangeHeaderValue.Parse(ranges);
 
             // Act
-            ByteRangeStreamContent rangeContent = new ByteRangeStreamContent(memStream, range, _expectedMediatype);
+            ByteRangeStreamContent rangeContent = new ByteRangeStreamContent(
+                memStream,
+                range,
+                _expectedMediatype
+            );
 
             // Assert
             Assert.Equal(_expectedMediatype, rangeContent.Headers.ContentType);
-            ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(contentRange);
+            ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(
+                contentRange
+            );
             Assert.Equal(expectedContentRange, rangeContent.Headers.ContentRange);
         }
 
         [Theory]
         [PropertyData("MultiRanges")]
-        public async Task MultipleRangesGeneratesMultipartByteRangesContent(string ranges, int innerStreamLength, int expectedBodyparts, string[] contentRanges)
+        public async Task MultipleRangesGeneratesMultipartByteRangesContent(
+            string ranges,
+            int innerStreamLength,
+            int expectedBodyparts,
+            string[] contentRanges
+        )
         {
             // Arrange
             string data = new String('a', innerStreamLength);
@@ -217,7 +278,11 @@ namespace System.Net.Http
             RangeHeaderValue range = RangeHeaderValue.Parse(ranges);
 
             // Act
-            ByteRangeStreamContent content = new ByteRangeStreamContent(memStream, range, _expectedMediatype);
+            ByteRangeStreamContent content = new ByteRangeStreamContent(
+                memStream,
+                range,
+                _expectedMediatype
+            );
             MemoryStream result = new MemoryStream();
             await content.CopyToAsync(result);
             MultipartMemoryStreamProvider multipart = await content.ReadAsMultipartAsync();
@@ -229,15 +294,24 @@ namespace System.Net.Http
                 MediaTypeHeaderValue contentType = multipart.Contents[count].Headers.ContentType;
                 Assert.Equal(_expectedMediatype, contentType);
 
-                ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(contentRanges[count]);
-                ContentRangeHeaderValue contentRange = multipart.Contents[count].Headers.ContentRange;
+                ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(
+                    contentRanges[count]
+                );
+                ContentRangeHeaderValue contentRange = multipart
+                    .Contents[count]
+                    .Headers
+                    .ContentRange;
                 Assert.Equal(expectedContentRange, contentRange);
             }
         }
 
         [Theory]
         [PropertyData("NoOverlappingRanges")]
-        public void NoOverlappingRangesThrowException(string ranges, int innerStreamLength, string contentRange)
+        public void NoOverlappingRangesThrowException(
+            string ranges,
+            int innerStreamLength,
+            string contentRange
+        )
         {
             // Arrange
             string data = new String('a', innerStreamLength);
@@ -252,7 +326,9 @@ namespace System.Net.Http
             }
             catch (InvalidByteRangeException invalidByteRangeException)
             {
-                ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(contentRange);
+                ContentRangeHeaderValue expectedContentRange = ContentRangeHeaderValue.Parse(
+                    contentRange
+                );
                 Assert.Equal(expectedContentRange, invalidByteRangeException.ContentRange);
             }
         }

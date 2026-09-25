@@ -4,8 +4,9 @@
 using System.Threading.Tasks;
 using Xunit;
 using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpCodeFixVerifier<
-       Microsoft.Interop.Analyzers.ConvertComImportToGeneratedComInterfaceAnalyzer,
-          Microsoft.Interop.Analyzers.ConvertComImportToGeneratedComInterfaceFixer>;
+    Microsoft.Interop.Analyzers.ConvertComImportToGeneratedComInterfaceAnalyzer,
+    Microsoft.Interop.Analyzers.ConvertComImportToGeneratedComInterfaceFixer
+>;
 
 namespace ComInterfaceGenerator.Unit.Tests
 {
@@ -26,16 +27,16 @@ namespace ComInterfaceGenerator.Unit.Tests
                 """;
 
             string fixedSource = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public partial interface I
-               {
-               }
-               """;
+                [GeneratedComInterface]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public partial interface I
+                {
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
@@ -44,29 +45,29 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task PrimitiveArgument_ReportsDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface [|I|]
-               {
-                    void Foo(int a);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface [|I|]
+                {
+                     void Foo(int a);
+                }
+                """;
 
             string fixedSource = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public partial interface I
-               {
-                    void Foo(int a);
-               }
-               """;
+                [GeneratedComInterface]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public partial interface I
+                {
+                     void Foo(int a);
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
@@ -75,30 +76,30 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task Bool_MarshalsAsVariantBool()
         {
             string source = """
-               using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface [|I|]
-               {
-                    bool Foo(bool a);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface [|I|]
+                {
+                     bool Foo(bool a);
+                }
+                """;
 
             string fixedSource = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public partial interface I
-               {
-                   [return: MarshalAs(UnmanagedType.VariantBool)]
-                   bool Foo([MarshalAs(UnmanagedType.VariantBool)] bool a);
-               }
-               """;
+                [GeneratedComInterface]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public partial interface I
+                {
+                    [return: MarshalAs(UnmanagedType.VariantBool)]
+                    bool Foo([MarshalAs(UnmanagedType.VariantBool)] bool a);
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
@@ -139,16 +140,16 @@ namespace ComInterfaceGenerator.Unit.Tests
         {
             // The default behavior in ComImport for arrays is to marshal as a SAFEARRAY. We don't support SAFEARRAY's, so we don't want to offer a fix here.
             string source = """
-               using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface I
-               {
-                   void Foo(int[] a);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface I
+                {
+                    void Foo(int[] a);
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
@@ -158,17 +159,17 @@ namespace ComInterfaceGenerator.Unit.Tests
         {
             // The default behavior in ComImport for delegates is to marshal as a COM object with an undefined interface. We don't support that interface, so we don't offer a fix here.
             string source = """
-               using System;
-               using System.Runtime.InteropServices;
+                using System;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface I
-               {
-                   void Foo(Action a);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface I
+                {
+                    void Foo(Action a);
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
@@ -178,16 +179,16 @@ namespace ComInterfaceGenerator.Unit.Tests
         {
             // The default behavior in ComImport for Object is to marshal as a VARIANT. We don't support VARIANTs, so we don't offer a fix here.
             string source = """
-               using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface I
-               {
-                   object Foo(object o);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface I
+                {
+                    object Foo(object o);
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
@@ -197,17 +198,17 @@ namespace ComInterfaceGenerator.Unit.Tests
         {
             // The default behavior in ComImport for System.Array is to marshal as a COM interface. We don't support that interface, so we don't offer a fix here.
             string source = """
-               using System;
-               using System.Runtime.InteropServices;
+                using System;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface I
-               {
-                   Array Foo(Array o);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface I
+                {
+                    Array Foo(Array o);
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, source);
         }
@@ -216,17 +217,17 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task Delegate_WithMarshalAs_ReportsDiagnostic()
         {
             string source = """
-               using System;
-               using System.Runtime.InteropServices;
+                using System;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface [|I|]
-               {
-                   void Foo([MarshalAs(UnmanagedType.FunctionPtr)] Action a);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface [|I|]
+                {
+                    void Foo([MarshalAs(UnmanagedType.FunctionPtr)] Action a);
+                }
+                """;
 
             string fixedSource = """
                 using System;
@@ -249,16 +250,16 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task Array_WithMarshalAs_ReportsDiagnostic()
         {
             string source = """
-               using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface [|I|]
-               {
-                   void Foo([MarshalAs(UnmanagedType.LPArray, SizeConst = 10)] int[] a);
-               }
-               """;
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface [|I|]
+                {
+                    void Foo([MarshalAs(UnmanagedType.LPArray, SizeConst = 10)] int[] a);
+                }
+                """;
 
             string fixedSource = """
                 using System.Runtime.InteropServices;
@@ -280,26 +281,26 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task InterfaceInheritance_RemovesShadowingMembers()
         {
             string source = """
-               using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface [|I|]
-               {
-                   void Foo(int a);
-               }
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface [|I|]
+                {
+                    void Foo(int a);
+                }
 
-               [ComImport]
-               [Guid("F59AB2FE-523D-4B28-911C-21363808C51E")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface [|J|] : I
-               {
-                   new void Foo(int a);
+                [ComImport]
+                [Guid("F59AB2FE-523D-4B28-911C-21363808C51E")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface [|J|] : I
+                {
+                    new void Foo(int a);
 
-                   void Bar(short a);
-               }
-               """;
+                    void Bar(short a);
+                }
+                """;
 
             string fixedSource = """
                 using System.Runtime.InteropServices;
@@ -329,44 +330,44 @@ namespace ComInterfaceGenerator.Unit.Tests
         public async Task HResultLikeType_MarshalsAsError()
         {
             string source = """
-               using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices;
 
-               [ComImport]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public interface [|I|]
-               {
-                   [PreserveSig]
-                   HResult Foo();
-               }
+                [ComImport]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public interface [|I|]
+                {
+                    [PreserveSig]
+                    HResult Foo();
+                }
 
-               [StructLayout(LayoutKind.Sequential)]
-               public struct HResult
-               {
-                  public int Value;
-               }
-               """;
+                [StructLayout(LayoutKind.Sequential)]
+                public struct HResult
+                {
+                   public int Value;
+                }
+                """;
 
             string fixedSource = """
-               using System.Runtime.InteropServices;
-               using System.Runtime.InteropServices.Marshalling;
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
 
-               [GeneratedComInterface]
-               [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
-               [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
-               public partial interface I
-               {
-                   [PreserveSig]
-                   [return: MarshalAs(UnmanagedType.Error)]
-                   HResult Foo();
-               }
-               
-               [StructLayout(LayoutKind.Sequential)]
-               public struct HResult
-               {
-                  public int Value;
-               }
-               """;
+                [GeneratedComInterface]
+                [Guid("5DA39CDF-DCAD-447A-836E-EA80DB34D81B")]
+                [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+                public partial interface I
+                {
+                    [PreserveSig]
+                    [return: MarshalAs(UnmanagedType.Error)]
+                    HResult Foo();
+                }
+
+                [StructLayout(LayoutKind.Sequential)]
+                public struct HResult
+                {
+                   public int Value;
+                }
+                """;
 
             await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }

@@ -14,10 +14,7 @@ namespace System.Net.NetworkInformation
 
         public bool IsAvailable
         {
-            get
-            {
-                return _isAvailable;
-            }
+            get { return _isAvailable; }
         }
     }
 }

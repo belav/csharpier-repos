@@ -11,10 +11,14 @@ namespace System.Xml
     internal sealed class XmlDataImplementation : XmlImplementation
     {
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
-        public XmlDataImplementation() : base() { }
+        public XmlDataImplementation()
+            : base() { }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "This whole class is unsafe. Constructors are marked as such.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This whole class is unsafe. Constructors are marked as such."
+        )]
         public override XmlDocument CreateDocument() => new XmlDataDocument(this);
     }
 }

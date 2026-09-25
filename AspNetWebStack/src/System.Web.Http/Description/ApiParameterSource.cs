@@ -10,6 +10,6 @@ namespace System.Web.Http.Description
     {
         FromUri = 0,
         FromBody,
-        Unknown
+        Unknown,
     }
 }

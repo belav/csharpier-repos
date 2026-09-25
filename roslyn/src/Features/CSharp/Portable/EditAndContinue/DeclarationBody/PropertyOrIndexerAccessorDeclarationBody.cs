@@ -30,13 +30,13 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue;
 /// Property or indexer with explicit body:
 ///   T P => [|expr;|]
 ///   T this[...] => [|expr;|]
-///   
+///
 /// Auto-property accessor:
 ///   T P { [|get;|] }
 ///   T P { [|set;|] }
 ///   T P { [|init;|] }
-///   
-/// Primary record auto-property: 
+///
+/// Primary record auto-property:
 ///   record R([|T P|])
 /// </summary>
 internal abstract class PropertyOrIndexerAccessorDeclarationBody : MemberBody
@@ -55,50 +55,72 @@ internal abstract class PropertyOrIndexerAccessorDeclarationBody : MemberBody
 
     public abstract SyntaxNode? MatchRoot { get; }
 
-    public SyntaxNode RootNode
-        => ExplicitBody ?? HeaderActiveStatement!;
+    public SyntaxNode RootNode => ExplicitBody ?? HeaderActiveStatement!;
 
-    public sealed override SyntaxTree SyntaxTree
-        => RootNode.SyntaxTree;
+    public sealed override SyntaxTree SyntaxTree => RootNode.SyntaxTree;
 
-    public sealed override TextSpan Envelope
-        => ExplicitBody?.Span ?? HeaderActiveStatementSpan;
+    public sealed override TextSpan Envelope => ExplicitBody?.Span ?? HeaderActiveStatementSpan;
 
-    public sealed override OneOrMany<SyntaxNode> RootNodes
-        => new(RootNode);
+    public sealed override OneOrMany<SyntaxNode> RootNodes => new(RootNode);
 
-    public sealed override SyntaxNode EncompassingAncestor
-        => RootNode;
+    public sealed override SyntaxNode EncompassingAncestor => RootNode;
 
-    public sealed override StateMachineInfo GetStateMachineInfo()
-        => StateMachineInfo.None;
+    public sealed override StateMachineInfo GetStateMachineInfo() => StateMachineInfo.None;
 
-    public sealed override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model)
-        => (ExplicitBody != null) ? model.AnalyzeDataFlow(ExplicitBody).CapturedInside : ImmutableArray<ISymbol>.Empty;
+    public sealed override ImmutableArray<ISymbol> GetCapturedVariables(SemanticModel model) =>
+        (ExplicitBody != null)
+            ? model.AnalyzeDataFlow(ExplicitBody).CapturedInside
+            : ImmutableArray<ISymbol>.Empty;
 
-    public sealed override SyntaxNode FindStatementAndPartner(TextSpan span, MemberBody? partnerDeclarationBody, out SyntaxNode? partnerStatement, out int statementPart)
+    public sealed override SyntaxNode FindStatementAndPartner(
+        TextSpan span,
+        MemberBody? partnerDeclarationBody,
+        out SyntaxNode? partnerStatement,
+        out int statementPart
+    )
     {
         if (HeaderActiveStatement != null)
         {
-            Debug.Assert(partnerDeclarationBody is null or PropertyOrIndexerAccessorDeclarationBody { HeaderActiveStatement: not null });
+            Debug.Assert(
+                partnerDeclarationBody
+                    is null
+                        or PropertyOrIndexerAccessorDeclarationBody
+                        {
+                            HeaderActiveStatement: not null
+                        }
+            );
 
             statementPart = AbstractEditAndContinueAnalyzer.DefaultStatementPart;
-            partnerStatement = ((PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody)?.HeaderActiveStatement;
+            partnerStatement = (
+                (PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody
+            )?.HeaderActiveStatement;
             return HeaderActiveStatement;
         }
 
         Debug.Assert(ExplicitBody != null);
-        Debug.Assert(partnerDeclarationBody is null or PropertyOrIndexerAccessorDeclarationBody { ExplicitBody: not null });
+        Debug.Assert(
+            partnerDeclarationBody
+                is null
+                    or PropertyOrIndexerAccessorDeclarationBody { ExplicitBody: not null }
+        );
 
         return CSharpEditAndContinueAnalyzer.FindStatementAndPartner(
             span,
             body: ExplicitBody,
-            partnerBody: ((PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody)?.ExplicitBody,
+            partnerBody: (
+                (PropertyOrIndexerAccessorDeclarationBody?)partnerDeclarationBody
+            )?.ExplicitBody,
             out partnerStatement,
-            out statementPart);
+            out statementPart
+        );
     }
 
-    public sealed override bool TryMatchActiveStatement(DeclarationBody newBody, SyntaxNode oldStatement, ref int statementPart, [NotNullWhen(true)] out SyntaxNode? newStatement)
+    public sealed override bool TryMatchActiveStatement(
+        DeclarationBody newBody,
+        SyntaxNode oldStatement,
+        ref int statementPart,
+        [NotNullWhen(true)] out SyntaxNode? newStatement
+    )
     {
         var newPropertyBody = (PropertyOrIndexerAccessorDeclarationBody)newBody;
 
@@ -117,7 +139,10 @@ internal abstract class PropertyOrIndexerAccessorDeclarationBody : MemberBody
             }
 
             Contract.ThrowIfNull(newPropertyBody.ExplicitBody);
-            (newStatement, statementPart) = CSharpEditAndContinueAnalyzer.GetFirstBodyActiveStatement(newPropertyBody.ExplicitBody);
+            (newStatement, statementPart) =
+                CSharpEditAndContinueAnalyzer.GetFirstBodyActiveStatement(
+                    newPropertyBody.ExplicitBody
+                );
             return true;
         }
 
@@ -146,8 +171,12 @@ internal abstract class PropertyOrIndexerAccessorDeclarationBody : MemberBody
         return false;
     }
 
-    public sealed override Match<SyntaxNode>? ComputeSingleRootMatch(DeclarationBody newBody, IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>>? knownMatches)
-        => MatchRoot is { } oldRoot && ((PropertyOrIndexerAccessorDeclarationBody)newBody).MatchRoot is { } newRoot
+    public sealed override Match<SyntaxNode>? ComputeSingleRootMatch(
+        DeclarationBody newBody,
+        IEnumerable<KeyValuePair<SyntaxNode, SyntaxNode>>? knownMatches
+    ) =>
+        MatchRoot is { } oldRoot
+        && ((PropertyOrIndexerAccessorDeclarationBody)newBody).MatchRoot is { } newRoot
             ? SyntaxComparer.Statement.ComputeMatch(oldRoot, newRoot, knownMatches)
             : null;
 }

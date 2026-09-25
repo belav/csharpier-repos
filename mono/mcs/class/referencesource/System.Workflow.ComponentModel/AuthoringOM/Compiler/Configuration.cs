@@ -1,36 +1,44 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
-    using System.Xml;
     using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
-    using System.Xml.Serialization;
     using System.Text.RegularExpressions;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     internal sealed class WorkflowCompilerConfigurationSectionGroup : ConfigurationSectionGroup
     {
-        public WorkflowCompilerConfigurationSectionGroup()
-        {
-        }
+        public WorkflowCompilerConfigurationSectionGroup() { }
     }
 
     internal sealed class AuthorizedTypesSectionHandler : IConfigurationSectionHandler
     {
         const string TargetFxVersionAttribute = "version";
+
         #region IConfigurationSectionHandler Members
 
-        object IConfigurationSectionHandler.Create(object parent, object configContext, XmlNode section)
+        object IConfigurationSectionHandler.Create(
+            object parent,
+            object configContext,
+            XmlNode section
+        )
         {
-            Dictionary<string, IList<AuthorizedType>> authorizedTypes = new Dictionary<string, IList<AuthorizedType>>();
+            Dictionary<string, IList<AuthorizedType>> authorizedTypes =
+                new Dictionary<string, IList<AuthorizedType>>();
 
             XmlAttributeOverrides authorizedTypeOverrides = new XmlAttributeOverrides();
             XmlAttributes authorizedTypeAttributes = new XmlAttributes();
             authorizedTypeAttributes.XmlRoot = new XmlRootAttribute("authorizedType");
             authorizedTypeOverrides.Add(typeof(AuthorizedType), authorizedTypeAttributes);
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(AuthorizedType), authorizedTypeOverrides);
+            XmlSerializer xmlSerializer = new XmlSerializer(
+                typeof(AuthorizedType),
+                authorizedTypeOverrides
+            );
             foreach (XmlNode targetFx in section.ChildNodes)
             {
-                XmlAttribute versionAttribute = targetFx.Attributes.GetNamedItem(TargetFxVersionAttribute) as XmlAttribute;
+                XmlAttribute versionAttribute =
+                    targetFx.Attributes.GetNamedItem(TargetFxVersionAttribute) as XmlAttribute;
                 if (versionAttribute != null)
                 {
                     string version = versionAttribute.Value;
@@ -44,7 +52,9 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                         foreach (XmlNode authorizedTypeNode in targetFx.ChildNodes)
                         {
-                            AuthorizedType authorizedType = xmlSerializer.Deserialize(new XmlNodeReader(authorizedTypeNode)) as AuthorizedType;
+                            AuthorizedType authorizedType =
+                                xmlSerializer.Deserialize(new XmlNodeReader(authorizedTypeNode))
+                                as AuthorizedType;
                             if (authorizedType != null)
                             {
                                 versionTypes.Add(authorizedType);
@@ -58,9 +68,11 @@ namespace System.Workflow.ComponentModel.Compiler
 
         #endregion
     }
-    
+
     [XmlType("authorizedType")]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class AuthorizedType
     {
         private string assemblyName;
@@ -72,56 +84,29 @@ namespace System.Workflow.ComponentModel.Compiler
         [XmlAttribute]
         public string Assembly
         {
-            get
-            {
-                return this.assemblyName;
-            }
-            set
-            {
-                this.assemblyName = value;
-            }
+            get { return this.assemblyName; }
+            set { this.assemblyName = value; }
         }
 
         [XmlAttribute]
         public string Namespace
         {
-            get
-            {
-                return this.namespaceName;
-            }
-
-            set
-            {
-                this.namespaceName = value;
-            }
+            get { return this.namespaceName; }
+            set { this.namespaceName = value; }
         }
 
         [XmlAttribute]
         public string TypeName
         {
-            get
-            {
-                return this.typeName;
-            }
-
-            set
-            {
-                this.typeName = value;
-            }
+            get { return this.typeName; }
+            set { this.typeName = value; }
         }
 
         [XmlAttribute]
         public string Authorized
         {
-            get
-            {
-                return this.isAuthorized.ToString();
-            }
-
-            set
-            {
-                this.isAuthorized = bool.Parse(value);
-            }
+            get { return this.isAuthorized.ToString(); }
+            set { this.isAuthorized = bool.Parse(value); }
         }
 
         [XmlIgnore]
@@ -131,7 +116,21 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (this.regex == null)
                 {
-                    this.regex = new Regex(MakeRegex(string.Format(CultureInfo.InvariantCulture, "{0}.{1}, {2}", new object[] { this.namespaceName, this.typeName, this.assemblyName })), RegexOptions.Compiled);
+                    this.regex = new Regex(
+                        MakeRegex(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0}.{1}, {2}",
+                                new object[]
+                                {
+                                    this.namespaceName,
+                                    this.typeName,
+                                    this.assemblyName,
+                                }
+                            )
+                        ),
+                        RegexOptions.Compiled
+                    );
                     return this.regex;
                 }
                 return this.regex;
@@ -142,8 +141,8 @@ namespace System.Workflow.ComponentModel.Compiler
         {
             // RegEx uses the following as meta characters:
             // [\^$.|?*+()
-            // Of these we translate * and ? to DOS wildcard equivalents in RegEx. 
-            // We escape rest of the Regex meta characters to thwart any luring 
+            // Of these we translate * and ? to DOS wildcard equivalents in RegEx.
+            // We escape rest of the Regex meta characters to thwart any luring
             // attacks caused by malformed inputString using meta characters.
             string outputString = inputString.Replace(@"\", @"\\");
             outputString = outputString.Replace("[", @"\[");
@@ -164,4 +163,3 @@ namespace System.Workflow.ComponentModel.Compiler
         }
     }
 }
-

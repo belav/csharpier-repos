@@ -30,7 +30,14 @@ namespace Microsoft.NET.HostModel.Bundle
 
         public const char DirectorySeparatorChar = '/';
 
-        public FileEntry(FileType fileType, string relativePath, long offset, long size, long compressedSize, uint bundleMajorVersion)
+        public FileEntry(
+            FileType fileType,
+            string relativePath,
+            long offset,
+            long size,
+            long compressedSize,
+            uint bundleMajorVersion
+        )
         {
             BundleMajorVersion = bundleMajorVersion;
             Type = fileType;
@@ -53,6 +60,7 @@ namespace Microsoft.NET.HostModel.Bundle
             writer.Write(RelativePath);
         }
 
-        public override string ToString() => $"{RelativePath} [{Type}] @{Offset} Sz={Size} CompressedSz={CompressedSize}";
+        public override string ToString() =>
+            $"{RelativePath} [{Type}] @{Offset} Sz={Size} CompressedSz={CompressedSize}";
     }
 }

@@ -192,13 +192,9 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
             js.ExecuteScript(
                 $"document.getElementById('async-container').scrollTo({{ top: {y} }})"
             );
-            Browser.Equal(
-                y,
-                () =>
-                    (long)
-                        js.ExecuteScript(
-                            "return document.getElementById('async-container').scrollTop"
-                        )
+            Browser.Equal(y, () =>
+                (long)
+                    js.ExecuteScript("return document.getElementById('async-container').scrollTop")
             );
         }
 

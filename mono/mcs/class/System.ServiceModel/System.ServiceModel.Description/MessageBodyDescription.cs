@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,36 +36,37 @@ using System.Xml;
 
 namespace System.ServiceModel.Description
 {
-	public class MessageBodyDescription
-	{
-		string wrapper_name, wrapper_ns;
-		MessagePartDescriptionCollection parts
+    public class MessageBodyDescription
+    {
+        string wrapper_name,
+            wrapper_ns;
+        MessagePartDescriptionCollection parts = new MessagePartDescriptionCollection();
+        MessagePartDescription return_value;
 
-			= new MessagePartDescriptionCollection ();
-		MessagePartDescription return_value;
+        public MessageBodyDescription() { }
 
-		public MessageBodyDescription ()
-		{
-		}
+        public MessagePartDescriptionCollection Parts
+        {
+            get { return parts; }
+            internal set { parts = value; }
+        }
 
-		public MessagePartDescriptionCollection Parts {
-			get { return parts; }
-			internal set { parts = value; }
-		}
+        public MessagePartDescription ReturnValue
+        {
+            get { return return_value; }
+            set { return_value = value; }
+        }
 
-		public MessagePartDescription ReturnValue {
-			get { return return_value; }
-			set { return_value = value; }
-		}
+        public string WrapperName
+        {
+            get { return wrapper_name; }
+            set { wrapper_name = value; }
+        }
 
-		public string WrapperName {
-			get { return wrapper_name; }
-			set { wrapper_name = value; }
-		}
-
-		public string WrapperNamespace {
-			get { return wrapper_ns; }
-			set { wrapper_ns = value; }
-		}
-	}
+        public string WrapperNamespace
+        {
+            get { return wrapper_ns; }
+            set { wrapper_ns = value; }
+        }
+    }
 }

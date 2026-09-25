@@ -3,10 +3,13 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class ConvertToProviderTypesSqliteTest : ConvertToProviderTypesTestBase<
-    ConvertToProviderTypesSqliteTest.ConvertToProviderTypesSqliteFixture>
+public class ConvertToProviderTypesSqliteTest
+    : ConvertToProviderTypesTestBase<ConvertToProviderTypesSqliteTest.ConvertToProviderTypesSqliteFixture>
 {
-    public ConvertToProviderTypesSqliteTest(ConvertToProviderTypesSqliteFixture fixture, ITestOutputHelper testOutputHelper)
+    public ConvertToProviderTypesSqliteTest(
+        ConvertToProviderTypesSqliteFixture fixture,
+        ITestOutputHelper testOutputHelper
+    )
         : base(fixture)
     {
         fixture.TestSqlLoggerFactory.Clear();
@@ -15,34 +18,24 @@ public class ConvertToProviderTypesSqliteTest : ConvertToProviderTypesTestBase<
 
     public class ConvertToProviderTypesSqliteFixture : ConvertToProviderTypesFixtureBase
     {
-        public override bool StrictEquality
-            => false;
+        public override bool StrictEquality => false;
 
-        public override bool SupportsAnsi
-            => false;
+        public override bool SupportsAnsi => false;
 
-        public override bool SupportsUnicodeToAnsiConversion
-            => true;
+        public override bool SupportsUnicodeToAnsiConversion => true;
 
-        public override bool SupportsLargeStringComparisons
-            => true;
+        public override bool SupportsLargeStringComparisons => true;
 
-        public override bool SupportsDecimalComparisons
-            => false;
+        public override bool SupportsDecimalComparisons => false;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        public override bool SupportsBinaryKeys
-            => true;
+        public override bool SupportsBinaryKeys => true;
 
-        public override DateTime DefaultDateTime
-            => new();
+        public override DateTime DefaultDateTime => new();
 
-        public override bool PreservesDateTimeKind
-            => true;
+        public override bool PreservesDateTimeKind => true;
     }
 }

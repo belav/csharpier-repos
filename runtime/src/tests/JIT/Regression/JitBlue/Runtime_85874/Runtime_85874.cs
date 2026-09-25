@@ -34,14 +34,11 @@ public unsafe class Runtime_85874
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Consume<T>(T val)
-    {
-    }
+    static void Consume<T>(T val) { }
 
     struct ListElement
     {
         public ListElement* Next;
         public int Value;
     }
-
 }

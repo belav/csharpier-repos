@@ -16,7 +16,8 @@ namespace System.Collections.Frozen
     {
         private readonly T[] _items;
 
-        internal SmallFrozenSet(HashSet<T> source) : base(source.Comparer)
+        internal SmallFrozenSet(HashSet<T> source)
+            : base(source.Comparer)
         {
             _items = source.ToArray();
         }
@@ -43,11 +44,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private SmallFrozenSet<T> _set;
+
             public void Store(FrozenSet<T> set) => _set = (SmallFrozenSet<T>)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<T> Comparer => _set.Comparer;
+
             public int FindItemIndex(T item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

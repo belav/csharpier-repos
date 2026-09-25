@@ -13,7 +13,13 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void IsUnsupportedExtensionError()
         {
-            Assert.False(BuildManagerExceptionUtil.IsUnsupportedExtensionError(new HttpException("The following file could not be rendered because its extension \".txt\" might not be supported: \"myfile.txt\".")));
+            Assert.False(
+                BuildManagerExceptionUtil.IsUnsupportedExtensionError(
+                    new HttpException(
+                        "The following file could not be rendered because its extension \".txt\" might not be supported: \"myfile.txt\"."
+                    )
+                )
+            );
 
             var e = CompilationUtil.GetBuildProviderException(".txt");
             Assert.NotNull(e);
@@ -28,7 +34,17 @@ namespace System.Web.WebPages.Test
             var e = CompilationUtil.GetBuildProviderException(extension);
 
             Assert.Throws<HttpException>(
-                () => { BuildManagerExceptionUtil.ThrowIfUnsupportedExtension(virtualPath, e); }, String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_FileNotSupported, extension, virtualPath));
+                () =>
+                {
+                    BuildManagerExceptionUtil.ThrowIfUnsupportedExtension(virtualPath, e);
+                },
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_FileNotSupported,
+                    extension,
+                    virtualPath
+                )
+            );
         }
 
         [Fact]
@@ -38,7 +54,20 @@ namespace System.Web.WebPages.Test
             var virtualPath = "Layout.js";
 
             Assert.Throws<HttpException>(
-                () => { BuildManagerExceptionUtil.ThrowIfCodeDomDefinedExtension(virtualPath, new HttpCompileException()); }, String.Format(CultureInfo.CurrentCulture, WebPageResources.WebPage_FileNotSupported, extension, virtualPath));
+                () =>
+                {
+                    BuildManagerExceptionUtil.ThrowIfCodeDomDefinedExtension(
+                        virtualPath,
+                        new HttpCompileException()
+                    );
+                },
+                String.Format(
+                    CultureInfo.CurrentCulture,
+                    WebPageResources.WebPage_FileNotSupported,
+                    extension,
+                    virtualPath
+                )
+            );
         }
 
         [Fact]
@@ -46,7 +75,10 @@ namespace System.Web.WebPages.Test
         {
             var virtualPath = "Layout.txt";
             // Should not throw an exception
-            BuildManagerExceptionUtil.ThrowIfCodeDomDefinedExtension(virtualPath, new HttpCompileException());
+            BuildManagerExceptionUtil.ThrowIfCodeDomDefinedExtension(
+                virtualPath,
+                new HttpCompileException()
+            );
         }
     }
 

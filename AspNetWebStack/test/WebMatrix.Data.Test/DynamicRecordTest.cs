@@ -76,7 +76,13 @@ namespace WebMatrix.Data.Test
             dynamic record = new DynamicRecord(Enumerable.Empty<string>(), mockRecord.Object);
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => { var value = record.C; }, "Invalid column name \"C\".");
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                {
+                    var value = record.C;
+                },
+                "Invalid column name \"C\"."
+            );
         }
 
         [Fact]
@@ -145,8 +151,14 @@ namespace WebMatrix.Data.Test
             // Assert
             var aDescriptor = record.GetProperties().Find("A", ignoreCase: false);
             Assert.NotNull(aDescriptor);
-            Assert.Throws<InvalidOperationException>(() => aDescriptor.SetValue(record, 1), "Unable to modify the value of column \"A\" because the record is read only.");
-            Assert.Throws<InvalidOperationException>(() => aDescriptor.ResetValue(record), "Unable to modify the value of column \"A\" because the record is read only.");
+            Assert.Throws<InvalidOperationException>(
+                () => aDescriptor.SetValue(record, 1),
+                "Unable to modify the value of column \"A\" because the record is read only."
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => aDescriptor.ResetValue(record),
+                "Unable to modify the value of column \"A\" because the record is read only."
+            );
         }
     }
 }

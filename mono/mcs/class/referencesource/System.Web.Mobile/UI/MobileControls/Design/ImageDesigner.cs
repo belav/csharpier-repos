@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ImageDesigner.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -16,25 +16,26 @@ namespace System.Web.UI.Design.MobileControls
     using System.Text;
     using System.Web.UI;
     using System.Web.UI.Design;
-    using System.Web.UI.MobileControls;
-    using System.Web.UI.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.Design.MobileControls.Converters;
     using System.Web.UI.Design.MobileControls.Util;
-
+    using System.Web.UI.MobileControls;
+    using System.Web.UI.MobileControls.Adapters;
     using Image = System.Web.UI.MobileControls.Image;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class ImageDesigner : MobileControlDesigner
     {
-        private Image                   _image;
-        private TemporaryBitmapFile     _tempBmpFile;
-        private Uri                     _cachedWbmpUri;
-        private String                  _baseUrl = String.Empty;
+        private Image _image;
+        private TemporaryBitmapFile _tempBmpFile;
+        private Uri _cachedWbmpUri;
+        private String _baseUrl = String.Empty;
 
         private String BaseUrl
         {
@@ -42,10 +43,11 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_baseUrl != null && _baseUrl.Length == 0)
                 {
-                    IWebFormsDocumentService wfServices =
-                        (IWebFormsDocumentService)GetService(typeof(IWebFormsDocumentService));
+                    IWebFormsDocumentService wfServices = (IWebFormsDocumentService)GetService(
+                        typeof(IWebFormsDocumentService)
+                    );
 
-                                        Debug.Assert(wfServices != null);
+                    Debug.Assert(wfServices != null);
                     _baseUrl = wfServices.DocumentUrl;
                 }
                 return _baseUrl;
@@ -69,9 +71,11 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is System.Web.UI.MobileControls.Image,
-                         "ImageDesigner.Initialize - Invalid Image Control");
-            _image = (System.Web.UI.MobileControls.Image) component;
+            Debug.Assert(
+                component is System.Web.UI.MobileControls.Image,
+                "ImageDesigner.Initialize - Invalid Image Control"
+            );
+            _image = (System.Web.UI.MobileControls.Image)component;
             base.Initialize(component);
         }
 
@@ -98,7 +102,7 @@ namespace System.Web.UI.Design.MobileControls
         ///    </note>
         /// </remarks>
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
-        protected override void Dispose(bool disposing) 
+        protected override void Dispose(bool disposing)
         {
             if (disposing && _tempBmpFile != null)
             {
@@ -116,12 +120,11 @@ namespace System.Web.UI.Design.MobileControls
             Uri imageUri = new Uri(baseUri, imageUriString);
             String extension = Path.GetExtension(imageUriString);
 
-            if(extension.Equals(".wbmp"))
+            if (extension.Equals(".wbmp"))
             {
-                if(_tempBmpFile != null)
+                if (_tempBmpFile != null)
                 {
-                    if(_cachedWbmpUri != null
-                        && _cachedWbmpUri.Equals(imageUri))
+                    if (_cachedWbmpUri != null && _cachedWbmpUri.Equals(imageUri))
                     {
                         return _tempBmpFile.Url;
                     }
@@ -134,14 +137,14 @@ namespace System.Web.UI.Design.MobileControls
                 }
 
                 Byte[] buffer = FileReader.Read(imageUri);
-                if(buffer == null)
+                if (buffer == null)
                 {
                     // Could not read image from URI, return original URI to
                     // Trident and let it render as a broken image.
                     goto ConversionError;
                 }
                 Bitmap bitmap = WbmpConverter.Convert(buffer);
-                if(bitmap == null)
+                if (bitmap == null)
                 {
                     // .wbmp appears to be corrupt, return original URI to
                     // Trident and let it render as a broken image.
@@ -151,10 +154,9 @@ namespace System.Web.UI.Design.MobileControls
                 imageUriString = _tempBmpFile.Url;
                 _cachedWbmpUri = imageUri;
             }
-ConversionError:
+            ConversionError:
             return imageUriString;
         }
-
 
         /// <summary>
         ///    <para>
@@ -188,11 +190,16 @@ ConversionError:
                     _image,
                     e.NewValue.ToString(),
                     e.OldValue.ToString()
-                    );
+                );
 
-                e = new ComponentChangedEventArgs(e.Component, e.Member, e.OldValue, _image.NavigateUrl);
+                e = new ComponentChangedEventArgs(
+                    e.Component,
+                    e.Member,
+                    e.OldValue,
+                    _image.NavigateUrl
+                );
             }
-             
+
             base.OnComponentChanged(sender, e);
         }
     }

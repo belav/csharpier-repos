@@ -21,8 +21,8 @@ public class RedundantBranchUnsigned
         }
         return default;
     }
-  
-    [MethodImpl(MethodImplOptions.NoInlining)] 
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public ReadOnlySpan<char> M2(ReadOnlySpan<char> span, int i)
     {
         if ((uint)i <= (uint)span.Length)

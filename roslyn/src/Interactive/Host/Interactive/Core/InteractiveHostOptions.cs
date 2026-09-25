@@ -43,7 +43,8 @@ namespace Microsoft.CodeAnalysis.Interactive
             string? initializationFilePath,
             CultureInfo culture,
             CultureInfo uiCulture,
-            InteractiveHostPlatform platform)
+            InteractiveHostPlatform platform
+        )
         {
             Contract.ThrowIfNull(hostPath);
 
@@ -59,15 +60,28 @@ namespace Microsoft.CodeAnalysis.Interactive
             string? initializationFileName,
             CultureInfo culture,
             CultureInfo uiCulture,
-            InteractiveHostPlatform platform)
+            InteractiveHostPlatform platform
+        )
         {
             var hostSubdirectory = (platform == InteractiveHostPlatform.Core) ? "Core" : "Desktop";
-            var hostExecutableFileName = "InteractiveHost" + (platform == InteractiveHostPlatform.Desktop32 ? "32" : "64") + ".exe";
+            var hostExecutableFileName =
+                "InteractiveHost"
+                + (platform == InteractiveHostPlatform.Desktop32 ? "32" : "64")
+                + ".exe";
 
             var hostPath = Path.Combine(hostDirectory, hostSubdirectory, hostExecutableFileName);
-            var initializationFilePath = (initializationFileName != null) ? Path.Combine(hostDirectory, hostSubdirectory, initializationFileName) : null;
+            var initializationFilePath =
+                (initializationFileName != null)
+                    ? Path.Combine(hostDirectory, hostSubdirectory, initializationFileName)
+                    : null;
 
-            return new InteractiveHostOptions(hostPath, initializationFilePath, culture, uiCulture, platform);
+            return new InteractiveHostOptions(
+                hostPath,
+                initializationFilePath,
+                culture,
+                uiCulture,
+                platform
+            );
         }
     }
 }

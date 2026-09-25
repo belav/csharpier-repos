@@ -21,7 +21,10 @@ namespace WebApiHelpPageWebHost.UnitTest
         public void RegisterArea()
         {
             HelpPageAreaRegistration area = new HelpPageAreaRegistration();
-            AreaRegistrationContext context = new AreaRegistrationContext("HelpPage", RouteTable.Routes);
+            AreaRegistrationContext context = new AreaRegistrationContext(
+                "HelpPage",
+                RouteTable.Routes
+            );
             area.RegisterArea(context);
             Assert.NotEmpty(context.Routes);
             Route route = Assert.IsType<Route>(context.Routes[0]);

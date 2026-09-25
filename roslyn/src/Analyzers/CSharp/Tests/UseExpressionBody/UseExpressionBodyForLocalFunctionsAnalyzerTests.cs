@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExpressionBodyDiagnosticAnalyzer,
-        UseExpressionBodyCodeFixProvider>;
+        UseExpressionBodyCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
     public class UseExpressionBodyForLocalFunctionsAnalyzerTests
@@ -28,27 +29,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.WhenPossible } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.WhenPossible
+                    },
+                },
             }.RunAsync();
         }
 
-        private static async Task TestWithUseExpressionBodyWhenOnSingleLine(string code, string fixedCode)
+        private static async Task TestWithUseExpressionBodyWhenOnSingleLine(
+            string code,
+            string fixedCode
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.WhenOnSingleLine } }
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.WhenOnSingleLine
+                    },
+                },
             }.RunAsync();
         }
 
-        private static async Task TestWithUseBlockBody(string code, string fixedCode, ReferenceAssemblies? referenceAssemblies = null)
+        private static async Task TestWithUseBlockBody(
+            string code,
+            string fixedCode,
+            ReferenceAssemblies? referenceAssemblies = null
+        )
         {
             await new VerifyCS.Test
             {
                 TestCode = code,
                 FixedCode = fixedCode,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.Never } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.Never
+                    },
+                },
                 ReferenceAssemblies = referenceAssemblies ?? ReferenceAssemblies.Default,
             }.RunAsync();
         }
@@ -735,7 +761,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Task Bar() { return Task.CompletedTask; }
                 }
                 """;
-            await TestWithUseBlockBody(code, fixedCode, ReferenceAssemblies.NetStandard.NetStandard21);
+            await TestWithUseBlockBody(
+                code,
+                fixedCode,
+                ReferenceAssemblies.NetStandard.NetStandard21
+            );
         }
 
         [Fact]
@@ -893,11 +923,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                        {|IDE0061:int Bar(int x)
-                        {
-                            return x;
-                        }|}
-                        """
+                            {|IDE0061:int Bar(int x)
+                            {
+                                return x;
+                            }|}
+                            """,
                     },
                 },
                 FixedState =
@@ -905,12 +935,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                        int Bar(int x) => x;
-                        """
+                            int Bar(int x) => x;
+                            """,
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.WhenPossible } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.WhenPossible
+                    },
+                },
             }.RunAsync();
         }
 
@@ -925,8 +961,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                        {|IDE0061:int Bar(int x) => x;|}
-                        """
+                            {|IDE0061:int Bar(int x) => x;|}
+                            """,
                     },
                 },
                 FixedState =
@@ -934,12 +970,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
                     Sources =
                     {
                         """
-                        int Bar(int x) { return x; }
-                        """
+                            int Bar(int x) { return x; }
+                            """,
                     },
                 },
                 LanguageVersion = LanguageVersion.CSharp9,
-                Options = { { CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions, ExpressionBodyPreference.Never } },
+                Options =
+                {
+                    {
+                        CSharpCodeStyleOptions.PreferExpressionBodiedLocalFunctions,
+                        ExpressionBodyPreference.Never
+                    },
+                },
             }.RunAsync();
         }
     }

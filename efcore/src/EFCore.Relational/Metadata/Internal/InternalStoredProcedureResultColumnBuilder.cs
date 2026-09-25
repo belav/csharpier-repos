@@ -9,9 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class InternalStoredProcedureResultColumnBuilder :
-    AnnotatableBuilder<StoredProcedureResultColumn, IConventionModelBuilder>,
-    IConventionStoredProcedureResultColumnBuilder
+public class InternalStoredProcedureResultColumnBuilder
+    : AnnotatableBuilder<StoredProcedureResultColumn, IConventionModelBuilder>,
+        IConventionStoredProcedureResultColumnBuilder
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -21,10 +21,9 @@ public class InternalStoredProcedureResultColumnBuilder :
     /// </summary>
     public InternalStoredProcedureResultColumnBuilder(
         StoredProcedureResultColumn resultColumn,
-        IConventionModelBuilder modelBuilder)
-        : base(resultColumn, modelBuilder)
-    {
-    }
+        IConventionModelBuilder modelBuilder
+    )
+        : base(resultColumn, modelBuilder) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -34,7 +33,8 @@ public class InternalStoredProcedureResultColumnBuilder :
     /// </summary>
     public virtual InternalStoredProcedureResultColumnBuilder? HasName(
         string name,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (!CanSetName(name, configurationSource))
         {
@@ -52,11 +52,9 @@ public class InternalStoredProcedureResultColumnBuilder :
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool CanSetName(
-        string? name,
-        ConfigurationSource configurationSource)
-        => configurationSource.Overrides(Metadata.GetNameConfigurationSource())
-            || Metadata.Name == name;
+    public virtual bool CanSetName(string? name, ConfigurationSource configurationSource) =>
+        configurationSource.Overrides(Metadata.GetNameConfigurationSource())
+        || Metadata.Name == name;
 
     /// <inheritdoc />
     IConventionStoredProcedureResultColumn IConventionStoredProcedureResultColumnBuilder.Metadata
@@ -70,36 +68,66 @@ public class InternalStoredProcedureResultColumnBuilder :
     IConventionStoredProcedureResultColumnBuilder? IConventionStoredProcedureResultColumnBuilder.HasAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation)
-        => (IConventionStoredProcedureResultColumnBuilder?)base.HasAnnotation(
-            name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        (IConventionStoredProcedureResultColumnBuilder?)
+            base.HasAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IConventionStoredProcedureResultColumnBuilder? IConventionStoredProcedureResultColumnBuilder.HasNonNullAnnotation(
         string name,
         object? value,
-        bool fromDataAnnotation)
-        => (IConventionStoredProcedureResultColumnBuilder?)base.HasNonNullAnnotation(
-            name, value, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        (IConventionStoredProcedureResultColumnBuilder?)
+            base.HasNonNullAnnotation(
+                name,
+                value,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IConventionStoredProcedureResultColumnBuilder? IConventionStoredProcedureResultColumnBuilder.HasNoAnnotation(
         string name,
-        bool fromDataAnnotation)
-        => (IConventionStoredProcedureResultColumnBuilder?)base.HasNoAnnotation(
-            name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        (IConventionStoredProcedureResultColumnBuilder?)
+            base.HasNoAnnotation(
+                name,
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
     IConventionStoredProcedureResultColumnBuilder? IConventionStoredProcedureResultColumnBuilder.HasName(
         string name,
-        bool fromDataAnnotation)
-        => HasName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+        bool fromDataAnnotation
+    ) =>
+        HasName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    bool IConventionStoredProcedureResultColumnBuilder.CanSetName(string? name, bool fromDataAnnotation)
-        => CanSetName(name, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool IConventionStoredProcedureResultColumnBuilder.CanSetName(
+        string? name,
+        bool fromDataAnnotation
+    ) =>
+        CanSetName(
+            name,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

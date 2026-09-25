@@ -10,7 +10,10 @@ using Xunit.Abstractions;
 namespace System.Xml.XslCompiledTransformApiTests
 {
     //[TestCase(Name = "OutputSettings", Desc = "This testcase tests the OutputSettings on XslCompiledTransform", Param = "Debug")]
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsReflectionEmitSupported)
+    )]
     public class COutputSettings : XsltApiTestCaseBase2
     {
         private XslCompiledTransform _xsl = null;
@@ -18,7 +21,9 @@ namespace System.Xml.XslCompiledTransformApiTests
         private string _xslFile = string.Empty;
 
         private ITestOutputHelper _output;
-        public COutputSettings(ITestOutputHelper output) : base(output)
+
+        public COutputSettings(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -302,7 +307,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             XmlWriter xw = XmlWriter.Create(stm2, os);
 
             //Transform to XmlWriter
-            _output.WriteLine("Transforming to XmlWriter over Stream2 with XSLT    OutputSettings - 'out2.xml'");
+            _output.WriteLine(
+                "Transforming to XmlWriter over Stream2 with XSLT    OutputSettings - 'out2.xml'"
+            );
             _xsl.Transform(_xmlFile, null, xw);
 
             //Close the streams

@@ -1,22 +1,28 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.Reflection;
-    using System.Xml;
-    using System.ComponentModel;
-    using System.ComponentModel.Design.Serialization;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.ComponentModel;
+    using System.ComponentModel.Design.Serialization;
+    using System.Reflection;
     using System.Workflow.ComponentModel.Compiler;
+    using System.Xml;
 
     internal sealed class StringCollectionMarkupSerializer : WorkflowMarkupSerializer
     {
-        protected internal override PropertyInfo[] GetProperties(WorkflowMarkupSerializationManager manager, object obj)
+        protected internal override PropertyInfo[] GetProperties(
+            WorkflowMarkupSerializationManager manager,
+            object obj
+        )
         {
             return new PropertyInfo[] { };
         }
 
-        protected internal override bool CanSerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override bool CanSerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -26,7 +32,10 @@ namespace System.Workflow.ComponentModel.Serialization
             return (value is ICollection<String>);
         }
 
-        protected internal override string SerializeToString(WorkflowMarkupSerializationManager serializationManager, object value)
+        protected internal override string SerializeToString(
+            WorkflowMarkupSerializationManager serializationManager,
+            object value
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -36,7 +45,11 @@ namespace System.Workflow.ComponentModel.Serialization
             return SynchronizationHandlesTypeConverter.Stringify(value as ICollection<String>);
         }
 
-        protected internal override object DeserializeFromString(WorkflowMarkupSerializationManager serializationManager, Type propertyType, string value)
+        protected internal override object DeserializeFromString(
+            WorkflowMarkupSerializationManager serializationManager,
+            Type propertyType,
+            string value
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -45,12 +58,16 @@ namespace System.Workflow.ComponentModel.Serialization
             if (value == null)
                 throw new ArgumentNullException("value");
 
-            // Work around For Bind based properties whose base type is an 
+            // Work around For Bind based properties whose base type is an
             // ICollection<string> or its derivative, special case! (A synchronization
             // handle cannot begin with a * because it won't be a language independent
             // identifier :) )
             if (IsValidCompactAttributeFormat(value))
-                return DeserializeFromCompactFormat(serializationManager, serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader, value);
+                return DeserializeFromCompactFormat(
+                    serializationManager,
+                    serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader,
+                    value
+                );
             else
                 return SynchronizationHandlesTypeConverter.UnStringify(value);
         }

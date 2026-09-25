@@ -11,7 +11,8 @@ using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal sealed class SynthesizedEmbeddedNativeIntegerAttributeSymbol : SynthesizedEmbeddedAttributeSymbolBase
+    internal sealed class SynthesizedEmbeddedNativeIntegerAttributeSymbol
+        : SynthesizedEmbeddedAttributeSymbolBase
     {
         private readonly ImmutableArray<FieldSymbol> _fields;
         private readonly ImmutableArray<MethodSymbol> _constructors;
@@ -24,7 +25,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamespaceSymbol containingNamespace,
             ModuleSymbol containingModule,
             NamedTypeSymbol systemAttributeType,
-            TypeSymbol boolType)
+            TypeSymbol boolType
+        )
             : base(name, containingNamespace, containingModule, baseType: systemAttributeType)
         {
             _boolType = boolType;
@@ -32,7 +34,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var boolArrayType = TypeWithAnnotations.Create(
                 ArrayTypeSymbol.CreateSZArray(
                     boolType.ContainingAssembly,
-                    TypeWithAnnotations.Create(boolType)));
+                    TypeWithAnnotations.Create(boolType)
+                )
+            );
 
             _fields = ImmutableArray.Create<FieldSymbol>(
                 new SynthesizedFieldSymbol(
@@ -41,20 +45,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     FieldName,
                     isPublic: true,
                     isReadOnly: true,
-                    isStatic: false));
+                    isStatic: false
+                )
+            );
 
             _constructors = ImmutableArray.Create<MethodSymbol>(
                 new SynthesizedEmbeddedAttributeConstructorWithBodySymbol(
                     this,
                     m => ImmutableArray<ParameterSymbol>.Empty,
-                    (f, s, p) => GenerateParameterlessConstructorBody(f, s)),
+                    (f, s, p) => GenerateParameterlessConstructorBody(f, s)
+                ),
                 new SynthesizedEmbeddedAttributeConstructorWithBodySymbol(
                     this,
-                    m => ImmutableArray.Create(SynthesizedParameterSymbol.Create(m, boolArrayType, 0, RefKind.None)),
-                    (f, s, p) => GenerateBoolArrayConstructorBody(f, s, p)));
+                    m =>
+                        ImmutableArray.Create(
+                            SynthesizedParameterSymbol.Create(m, boolArrayType, 0, RefKind.None)
+                        ),
+                    (f, s, p) => GenerateBoolArrayConstructorBody(f, s, p)
+                )
+            );
 
             // Ensure we never get out of sync with the description
-            Debug.Assert(_constructors.Length == AttributeDescription.NativeIntegerAttribute.Signatures.Length);
+            Debug.Assert(
+                _constructors.Length
+                    == AttributeDescription.NativeIntegerAttribute.Signatures.Length
+            );
         }
 
         internal override IEnumerable<FieldSymbol> GetFieldsToEmit() => _fields;
@@ -64,19 +79,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         internal override AttributeUsageInfo GetAttributeUsageInfo()
         {
             return new AttributeUsageInfo(
-                AttributeTargets.Class | AttributeTargets.Event | AttributeTargets.Field | AttributeTargets.GenericParameter | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue,
+                AttributeTargets.Class
+                    | AttributeTargets.Event
+                    | AttributeTargets.Field
+                    | AttributeTargets.GenericParameter
+                    | AttributeTargets.Parameter
+                    | AttributeTargets.Property
+                    | AttributeTargets.ReturnValue,
                 allowMultiple: false,
-                inherited: false);
+                inherited: false
+            );
         }
 
-        private void GenerateParameterlessConstructorBody(SyntheticBoundNodeFactory factory, ArrayBuilder<BoundStatement> statements)
+        private void GenerateParameterlessConstructorBody(
+            SyntheticBoundNodeFactory factory,
+            ArrayBuilder<BoundStatement> statements
+        )
         {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
-                        factory.Field(
-                            factory.This(),
-                            _fields.Single()),
+                        factory.Field(factory.This(), _fields.Single()),
                         factory.Array(
                             _boolType,
                             ImmutableArray.Create<BoundExpression>(factory.Literal(true))
@@ -86,14 +109,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             );
         }
 
-        private void GenerateBoolArrayConstructorBody(SyntheticBoundNodeFactory factory, ArrayBuilder<BoundStatement> statements, ImmutableArray<ParameterSymbol> parameters)
+        private void GenerateBoolArrayConstructorBody(
+            SyntheticBoundNodeFactory factory,
+            ArrayBuilder<BoundStatement> statements,
+            ImmutableArray<ParameterSymbol> parameters
+        )
         {
             statements.Add(
                 factory.ExpressionStatement(
                     factory.AssignmentExpression(
-                        factory.Field(
-                            factory.This(),
-                            _fields.Single()),
+                        factory.Field(factory.This(), _fields.Single()),
                         factory.Parameter(parameters.Single())
                     )
                 )
@@ -101,4 +126,3 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
     }
 }
-

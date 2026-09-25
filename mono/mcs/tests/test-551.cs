@@ -1,5 +1,7 @@
-namespace System {
-	public struct Int32 {
-		public static void Main () {}
-	}
+namespace System
+{
+    public struct Int32
+    {
+        public static void Main() { }
+    }
 }

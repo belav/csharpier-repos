@@ -4,32 +4,31 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
     using System.Diagnostics;
-    using System.ServiceModel;
-    using System.ServiceModel.Security;
-
-    using System.Transactions;
-    using System.ServiceModel.Transactions;
     using System.Runtime.CompilerServices;
     using System.Runtime.Remoting;
     using System.Runtime.Remoting.Messaging;
-    using SR = System.ServiceModel.SR;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
+    using System.ServiceModel.Transactions;
+    using System.Transactions;
+    using SR = System.ServiceModel.SR;
 
     internal interface ITransactionChannel
     {
         // These get run on forward-going messages only
         void WriteTransactionDataToMessage(Message message, MessageDirection direction);
         void ReadTransactionDataFromMessage(Message message, MessageDirection direction);
-        // These get run in both directions (request and reply).  If other flowable-things are added 
+
+        // These get run in both directions (request and reply).  If other flowable-things are added
         // that need to flow both ways, these methods should be renamed and generalized to do it
         void ReadIssuedTokens(Message message, MessageDirection direction);
         void WriteIssuedTokens(Message message, MessageDirection direction);
     }
 
-    abstract class TransactionChannel<TChannel>
-        : LayeredChannel<TChannel>, ITransactionChannel
+    abstract class TransactionChannel<TChannel> : LayeredChannel<TChannel>, ITransactionChannel
         where TChannel : class, IChannel
     {
         ITransactionChannelManager factory;
@@ -44,7 +43,10 @@ namespace System.ServiceModel.Channels
             {
                 this.formatter = TransactionFormatter.OleTxFormatter;
             }
-            else if (this.factory.TransactionProtocol == TransactionProtocol.WSAtomicTransactionOctober2004)
+            else if (
+                this.factory.TransactionProtocol
+                == TransactionProtocol.WSAtomicTransactionOctober2004
+            )
             {
                 this.formatter = TransactionFormatter.WsatFormatter10;
             }
@@ -55,24 +57,19 @@ namespace System.ServiceModel.Channels
             else
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols)));
+                    new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
+                );
             }
         }
 
         internal TransactionFormatter Formatter
         {
-            get
-            {
-                return this.formatter;
-            }
+            get { return this.formatter; }
         }
 
         internal TransactionProtocol Protocol
         {
-            get
-            {
-                return this.factory.TransactionProtocol;
-            }
+            get { return this.factory.TransactionProtocol; }
         }
 
         public override T GetProperty<T>()
@@ -85,7 +82,8 @@ namespace System.ServiceModel.Channels
             return base.GetProperty<T>();
         }
 
-        public T GetInnerProperty<T>() where T : class
+        public T GetInnerProperty<T>()
+            where T : class
         {
             return base.InnerChannel.GetProperty<T>();
         }
@@ -97,14 +95,26 @@ namespace System.ServiceModel.Channels
 
         void FaultOnMessage(Message message, string reason, string codeString)
         {
-            FaultCode code = FaultCode.CreateSenderFaultCode(codeString, FaultCodeConstants.Namespaces.Transactions);
-            FaultException fault = new FaultException(reason, code, FaultCodeConstants.Actions.Transactions);
+            FaultCode code = FaultCode.CreateSenderFaultCode(
+                codeString,
+                FaultCodeConstants.Namespaces.Transactions
+            );
+            FaultException fault = new FaultException(
+                reason,
+                code,
+                FaultCodeConstants.Actions.Transactions
+            );
             throw TraceUtility.ThrowHelperError(fault, message);
         }
 
         ICollection<RequestSecurityTokenResponse> GetIssuedTokens(Message message)
         {
-            return IssuedTokensHeader.ExtractIssuances(message, this.factory.StandardsManager, message.Version.Envelope.UltimateDestinationActorValues, null);
+            return IssuedTokensHeader.ExtractIssuances(
+                message,
+                this.factory.StandardsManager,
+                message.Version.Envelope.UltimateDestinationActorValues,
+                null
+            );
         }
 
         public void ReadIssuedTokens(Message message, MessageDirection direction)
@@ -117,7 +127,11 @@ namespace System.ServiceModel.Channels
             {
                 if (option == TransactionFlowOption.NotAllowed)
                 {
-                    FaultOnMessage(message, SR.GetString(SR.IssuedTokenFlowNotAllowed), FaultCodeConstants.Codes.IssuedTokenFlowNotAllowed);
+                    FaultOnMessage(
+                        message,
+                        SR.GetString(SR.IssuedTokenFlowNotAllowed),
+                        FaultCodeConstants.Codes.IssuedTokenFlowNotAllowed
+                    );
                 }
 
                 foreach (RequestSecurityTokenResponse rstr in issuances)
@@ -137,7 +151,11 @@ namespace System.ServiceModel.Channels
             catch (TransactionException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Error);
-                FaultOnMessage(message, SR.GetString(SR.SFxTransactionDeserializationFailed, e.Message), FaultCodeConstants.Codes.TransactionHeaderMalformed);
+                FaultOnMessage(
+                    message,
+                    SR.GetString(SR.SFxTransactionDeserializationFailed, e.Message),
+                    FaultCodeConstants.Codes.TransactionHeaderMalformed
+                );
             }
 
             if (transactionInfo != null)
@@ -146,15 +164,25 @@ namespace System.ServiceModel.Channels
             }
             else if (txFlowOption == TransactionFlowOption.Mandatory)
             {
-                FaultOnMessage(message, SR.GetString(SR.SFxTransactionFlowRequired), FaultCodeConstants.Codes.TransactionHeaderMissing);
+                FaultOnMessage(
+                    message,
+                    SR.GetString(SR.SFxTransactionFlowRequired),
+                    FaultCodeConstants.Codes.TransactionHeaderMissing
+                );
             }
         }
 
-        public virtual void ReadTransactionDataFromMessage(Message message, MessageDirection direction)
+        public virtual void ReadTransactionDataFromMessage(
+            Message message,
+            MessageDirection direction
+        )
         {
             this.ReadIssuedTokens(message, direction);
 
-            TransactionFlowOption txFlowOption = this.factory.GetTransaction(direction, message.Headers.Action);
+            TransactionFlowOption txFlowOption = this.factory.GetTransaction(
+                direction,
+                message.Headers.Action
+            );
             if (TransactionFlowOptionHelper.AllowedOrRequired(txFlowOption))
             {
                 this.ReadTransactionFromMessage(message, txFlowOption);
@@ -163,7 +191,10 @@ namespace System.ServiceModel.Channels
 
         public void WriteTransactionDataToMessage(Message message, MessageDirection direction)
         {
-            TransactionFlowOption txFlowOption = this.factory.GetTransaction(direction, message.Headers.Action);
+            TransactionFlowOption txFlowOption = this.factory.GetTransaction(
+                direction,
+                message.Headers.Action
+            );
             if (TransactionFlowOptionHelper.AllowedOrRequired(txFlowOption))
             {
                 this.WriteTransactionToMessage(message, txFlowOption);
@@ -173,7 +204,6 @@ namespace System.ServiceModel.Channels
             {
                 this.WriteIssuedTokens(message, direction);
             }
-
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -189,23 +219,30 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TransactionException e)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(e.Message, e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ProtocolException(e.Message, e)
+                    );
                 }
             }
             else if (txFlowOption == TransactionFlowOption.Mandatory)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.SFxTransactionFlowRequired)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ProtocolException(SR.GetString(SR.SFxTransactionFlowRequired))
+                );
             }
         }
 
         public void WriteIssuedTokens(Message message, MessageDirection direction)
         {
-            ICollection<RequestSecurityTokenResponse> issuances = TransactionFlowProperty.TryGetIssuedTokens(message);
+            ICollection<RequestSecurityTokenResponse> issuances =
+                TransactionFlowProperty.TryGetIssuedTokens(message);
             if (issuances != null)
             {
-                IssuedTokensHeader header = new IssuedTokensHeader(issuances, this.factory.StandardsManager);
+                IssuedTokensHeader header = new IssuedTokensHeader(
+                    issuances,
+                    this.factory.StandardsManager
+                );
                 message.Headers.Add(header);
-
             }
         }
     }

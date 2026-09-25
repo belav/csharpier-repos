@@ -8,18 +8,20 @@ namespace Microsoft.Data.Sqlite;
 public class SqliteFactoryTest
 {
     [Fact]
-    public void CreateConnection_works()
-        => Assert.IsType<SqliteConnection>(SqliteFactory.Instance.CreateConnection());
+    public void CreateConnection_works() =>
+        Assert.IsType<SqliteConnection>(SqliteFactory.Instance.CreateConnection());
 
     [Fact]
-    public void CreateConnectionStringBuilder_works()
-        => Assert.IsType<SqliteConnectionStringBuilder>(SqliteFactory.Instance.CreateConnectionStringBuilder());
+    public void CreateConnectionStringBuilder_works() =>
+        Assert.IsType<SqliteConnectionStringBuilder>(
+            SqliteFactory.Instance.CreateConnectionStringBuilder()
+        );
 
     [Fact]
-    public void CreateCommand_works()
-        => Assert.IsType<SqliteCommand>(SqliteFactory.Instance.CreateCommand());
+    public void CreateCommand_works() =>
+        Assert.IsType<SqliteCommand>(SqliteFactory.Instance.CreateCommand());
 
     [Fact]
-    public void CreateParameter_works()
-        => Assert.IsType<SqliteParameter>(SqliteFactory.Instance.CreateParameter());
+    public void CreateParameter_works() =>
+        Assert.IsType<SqliteParameter>(SqliteFactory.Instance.CreateParameter());
 }

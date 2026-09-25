@@ -22,7 +22,8 @@ public class SqlServerQueryTranslationPostprocessorFactory : IQueryTranslationPo
     public SqlServerQueryTranslationPostprocessorFactory(
         QueryTranslationPostprocessorDependencies dependencies,
         RelationalQueryTranslationPostprocessorDependencies relationalDependencies,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -45,6 +46,13 @@ public class SqlServerQueryTranslationPostprocessorFactory : IQueryTranslationPo
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QueryTranslationPostprocessor Create(QueryCompilationContext queryCompilationContext)
-        => new SqlServerQueryTranslationPostprocessor(Dependencies, RelationalDependencies, queryCompilationContext, _typeMappingSource);
+    public virtual QueryTranslationPostprocessor Create(
+        QueryCompilationContext queryCompilationContext
+    ) =>
+        new SqlServerQueryTranslationPostprocessor(
+            Dependencies,
+            RelationalDependencies,
+            queryCompilationContext,
+            _typeMappingSource
+        );
 }

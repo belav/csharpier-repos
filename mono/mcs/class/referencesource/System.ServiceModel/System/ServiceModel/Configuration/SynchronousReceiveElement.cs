@@ -8,9 +8,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class SynchronousReceiveElement : BehaviorExtensionElement
     {
-        public SynchronousReceiveElement()
-        {
-        }
+        public SynchronousReceiveElement() { }
 
         protected internal override object CreateBehavior()
         {
@@ -23,4 +21,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-

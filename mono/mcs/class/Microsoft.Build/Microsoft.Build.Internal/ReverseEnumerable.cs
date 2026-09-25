@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,24 +30,24 @@ using System.Collections.Generic;
 
 namespace Microsoft.Build.Internal
 {
-        internal class ReverseEnumerable<T> : IEnumerable<T>
+    internal class ReverseEnumerable<T> : IEnumerable<T>
+    {
+        LinkedList<T> backingList;
+
+        public ReverseEnumerable(LinkedList<T> list)
         {
-                LinkedList<T> backingList;
-
-                public ReverseEnumerable (LinkedList<T> list)
-                {
-                        backingList = list;
-                }
-
-                public IEnumerator<T> GetEnumerator ()
-                {
-                        for (var node = backingList.Last; node != null; node = node.Previous)
-                                yield return node.Value;
-                }
-
-                System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator ()
-                {
-                        return GetEnumerator ();
-                }
+            backingList = list;
         }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            for (var node = backingList.Last; node != null; node = node.Previous)
+                yield return node.Value;
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+    }
 }

@@ -22,7 +22,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 private readonly CodeAction _originalCodeAction;
                 private readonly SolutionChangeSummary _changeSummary;
 
-                public PreviewChangesCodeAction(Workspace workspace, CodeAction originalCodeAction, SolutionChangeSummary changeSummary)
+                public PreviewChangesCodeAction(
+                    Workspace workspace,
+                    CodeAction originalCodeAction,
+                    SolutionChangeSummary changeSummary
+                )
                 {
                     _workspace = workspace;
                     _originalCodeAction = originalCodeAction;
@@ -31,11 +35,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 public override string Title => EditorFeaturesResources.Preview_changes2;
 
-                private protected override async Task<ImmutableArray<CodeActionOperation>> GetOperationsCoreAsync(
-                    Solution originalSolution, IProgress<CodeAnalysisProgress> progressTracker, CancellationToken cancellationToken)
+                private protected override async Task<
+                    ImmutableArray<CodeActionOperation>
+                > GetOperationsCoreAsync(
+                    Solution originalSolution,
+                    IProgress<CodeAnalysisProgress> progressTracker,
+                    CancellationToken cancellationToken
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    var previewDialogService = _workspace.Services.GetService<IPreviewDialogService>();
+                    var previewDialogService =
+                        _workspace.Services.GetService<IPreviewDialogService>();
                     if (previewDialogService == null)
                     {
                         return ImmutableArray<CodeActionOperation>.Empty;
@@ -49,7 +59,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                         CodeAnalysis.Glyph.OpenFolder,
                         _changeSummary.NewSolution,
                         _changeSummary.OldSolution,
-                        showCheckBoxes: false);
+                        showCheckBoxes: false
+                    );
 
                     if (changedSolution == null)
                     {
@@ -58,7 +69,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     }
 
                     cancellationToken.ThrowIfCancellationRequested();
-                    return await _originalCodeAction.GetOperationsAsync(originalSolution, progressTracker, cancellationToken).ConfigureAwait(false);
+                    return await _originalCodeAction
+                        .GetOperationsAsync(originalSolution, progressTracker, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
         }

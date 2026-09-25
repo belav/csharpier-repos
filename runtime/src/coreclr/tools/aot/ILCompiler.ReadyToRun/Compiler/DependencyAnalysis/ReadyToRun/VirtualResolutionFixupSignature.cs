@@ -3,18 +3,19 @@
 
 using System;
 using System.Diagnostics;
-
+using Internal.CorConstants;
+using Internal.JitInterface;
+using Internal.ReadyToRunConstants;
 using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 using Internal.TypeSystem.Interop;
-using Internal.ReadyToRunConstants;
-using Internal.CorConstants;
-using Internal.JitInterface;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
-    public class VirtualResolutionFixupSignature : Signature, IEquatable<VirtualResolutionFixupSignature>
+    public class VirtualResolutionFixupSignature
+        : Signature,
+            IEquatable<VirtualResolutionFixupSignature>
     {
         private readonly ReadyToRunFixupKind _fixupKind;
 
@@ -22,7 +23,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         private readonly TypeDesc _implType;
         private readonly MethodWithToken _implMethod;
 
-        public VirtualResolutionFixupSignature(ReadyToRunFixupKind fixupKind, MethodWithToken declMethod, TypeDesc implType, MethodWithToken implMethod)
+        public VirtualResolutionFixupSignature(
+            ReadyToRunFixupKind fixupKind,
+            MethodWithToken declMethod,
+            TypeDesc implType,
+            MethodWithToken implMethod
+        )
         {
             _fixupKind = fixupKind;
             _declMethod = declMethod;
@@ -30,7 +36,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             _implMethod = implMethod;
 
             // Ensure types in signature are loadable and resolvable, otherwise we'll fail later while emitting the signature
-            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)declMethod.Method.Context;
+            CompilerTypeSystemContext compilerContext = (CompilerTypeSystemContext)
+                declMethod.Method.Context;
             compilerContext.EnsureLoadableMethod(declMethod.Method);
             compilerContext.EnsureLoadableType(implType);
             if (implMethod != null)
@@ -47,12 +54,35 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             {
                 dataBuilder.AddSymbol(this);
 
-                SignatureContext innerContext = dataBuilder.EmitFixup(factory, _fixupKind, _declMethod.Token.Module, factory.SignatureContext);
-                dataBuilder.EmitUInt((uint)(_implMethod != null ? ReadyToRunVirtualFunctionOverrideFlags.VirtualFunctionOverridden : ReadyToRunVirtualFunctionOverrideFlags.None));
-                dataBuilder.EmitMethodSignature(_declMethod, enforceDefEncoding: false, enforceOwningType: false, innerContext, isInstantiatingStub: false);
+                SignatureContext innerContext = dataBuilder.EmitFixup(
+                    factory,
+                    _fixupKind,
+                    _declMethod.Token.Module,
+                    factory.SignatureContext
+                );
+                dataBuilder.EmitUInt(
+                    (uint)(
+                        _implMethod != null
+                            ? ReadyToRunVirtualFunctionOverrideFlags.VirtualFunctionOverridden
+                            : ReadyToRunVirtualFunctionOverrideFlags.None
+                    )
+                );
+                dataBuilder.EmitMethodSignature(
+                    _declMethod,
+                    enforceDefEncoding: false,
+                    enforceOwningType: false,
+                    innerContext,
+                    isInstantiatingStub: false
+                );
                 dataBuilder.EmitTypeSignature(_implType, innerContext);
                 if (_implMethod != null)
-                    dataBuilder.EmitMethodSignature(_implMethod, enforceDefEncoding: false, enforceOwningType: false, innerContext, isInstantiatingStub: false);
+                    dataBuilder.EmitMethodSignature(
+                        _implMethod,
+                        enforceDefEncoding: false,
+                        enforceOwningType: false,
+                        innerContext,
+                        isInstantiatingStub: false
+                    );
             }
 
             return dataBuilder.ToObjectData();
@@ -99,6 +129,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             return $"VirtualResolutionFixupSignature {_fixupKind} {_declMethod} {_implType} {_implMethod}";
         }
 
-        public bool Equals(VirtualResolutionFixupSignature other) => object.ReferenceEquals(other, this);
+        public bool Equals(VirtualResolutionFixupSignature other) =>
+            object.ReferenceEquals(other, this);
     }
 }

@@ -34,7 +34,12 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("actionName");
         }
 
-        public SamlAuthorizationDecisionClaimResource(string resource, SamlAccessDecision accessDecision, string actionNamespace, string actionName)
+        public SamlAuthorizationDecisionClaimResource(
+            string resource,
+            SamlAccessDecision accessDecision,
+            string actionNamespace,
+            string actionName
+        )
         {
             if (string.IsNullOrEmpty(resource))
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("resource");
@@ -49,34 +54,22 @@ namespace System.IdentityModel.Tokens
 
         public string Resource
         {
-            get
-            {
-                return this.resource;
-            }
+            get { return this.resource; }
         }
 
         public SamlAccessDecision AccessDecision
         {
-            get
-            {
-                return this.accessDecision;
-            }
+            get { return this.accessDecision; }
         }
 
         public string ActionNamespace
         {
-            get
-            {
-                return this.actionNamespace;
-            }
+            get { return this.actionNamespace; }
         }
 
         public string ActionName
         {
-            get
-            {
-                return this.actionName;
-            }
+            get { return this.actionName; }
         }
 
         public override bool Equals(object obj)
@@ -87,12 +80,17 @@ namespace System.IdentityModel.Tokens
             if (ReferenceEquals(this, obj))
                 return true;
 
-            SamlAuthorizationDecisionClaimResource rhs = obj as SamlAuthorizationDecisionClaimResource;
+            SamlAuthorizationDecisionClaimResource rhs =
+                obj as SamlAuthorizationDecisionClaimResource;
             if (rhs == null)
                 return false;
 
-            return ((this.ActionName == rhs.ActionName) && (this.ActionNamespace == rhs.ActionNamespace) &&
-                (this.Resource == rhs.Resource) && (this.AccessDecision == rhs.AccessDecision));
+            return (
+                (this.ActionName == rhs.ActionName)
+                && (this.ActionNamespace == rhs.ActionNamespace)
+                && (this.Resource == rhs.Resource)
+                && (this.AccessDecision == rhs.AccessDecision)
+            );
         }
 
         public override int GetHashCode()

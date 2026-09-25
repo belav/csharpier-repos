@@ -31,12 +31,22 @@ namespace System.Web.Http.Results
         /// <param name="contentNegotiator">The content negotiator to handle content negotiation.</param>
         /// <param name="request">The request message which led to this result.</param>
         /// <param name="formatters">The formatters to use to negotiate and format the content.</param>
-        public CreatedNegotiatedContentResult(Uri location, T content, IContentNegotiator contentNegotiator,
-            HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
-            : this(location, content, new NegotiatedContentResult<T>.DirectDependencyProvider(contentNegotiator,
-                request, formatters))
-        {
-        }
+        public CreatedNegotiatedContentResult(
+            Uri location,
+            T content,
+            IContentNegotiator contentNegotiator,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
+            : this(
+                location,
+                content,
+                new NegotiatedContentResult<T>.DirectDependencyProvider(
+                    contentNegotiator,
+                    request,
+                    formatters
+                )
+            ) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="CreatedNegotiatedContentResult{T}"/> class with the values
@@ -46,12 +56,17 @@ namespace System.Web.Http.Results
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public CreatedNegotiatedContentResult(Uri location, T content, ApiController controller)
-            : this(location, content, new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(
+                location,
+                content,
+                new NegotiatedContentResult<T>.ApiControllerDependencyProvider(controller)
+            ) { }
 
-        private CreatedNegotiatedContentResult(Uri location, T content,
-            NegotiatedContentResult<T>.IDependencyProvider dependencies)
+        private CreatedNegotiatedContentResult(
+            Uri location,
+            T content,
+            NegotiatedContentResult<T>.IDependencyProvider dependencies
+        )
         {
             if (location == null)
             {
@@ -104,8 +119,11 @@ namespace System.Web.Http.Results
         private HttpResponseMessage Execute()
         {
             // Run content negotiation.
-            ContentNegotiationResult result = _dependencies.ContentNegotiator.Negotiate(typeof(T),
-                _dependencies.Request, _dependencies.Formatters);
+            ContentNegotiationResult result = _dependencies.ContentNegotiator.Negotiate(
+                typeof(T),
+                _dependencies.Request,
+                _dependencies.Formatters
+            );
 
             HttpResponseMessage response = new HttpResponseMessage();
 
@@ -123,7 +141,11 @@ namespace System.Web.Http.Results
                     Contract.Assert(result.Formatter != null);
                     // At this point mediaType should be a cloned value. (The content negotiator is responsible for
                     // returning a new copy.)
-                    response.Content = new ObjectContent<T>(_content, result.Formatter, result.MediaType);
+                    response.Content = new ObjectContent<T>(
+                        _content,
+                        result.Formatter,
+                        result.MediaType
+                    );
                 }
 
                 response.RequestMessage = _dependencies.Request;

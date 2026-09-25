@@ -1,28 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="LinqDataSourceDisposeEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics.CodeAnalysis;
 
-    public class LinqDataSourceDisposeEventArgs : CancelEventArgs {
-
+    public class LinqDataSourceDisposeEventArgs : CancelEventArgs
+    {
         private object _objectInstance;
 
-        public LinqDataSourceDisposeEventArgs(object instance) {
+        public LinqDataSourceDisposeEventArgs(object instance)
+        {
             _objectInstance = instance;
         }
 
-        public object ObjectInstance {
-            get {
-                return _objectInstance;
-            }
+        public object ObjectInstance
+        {
+            get { return _objectInstance; }
         }
-
     }
 }
-

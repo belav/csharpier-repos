@@ -11,18 +11,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class OrderByKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public OrderByKeywordRecommender()
-            : base(SyntaxKind.OrderByKeyword)
-        {
-        }
+            : base(SyntaxKind.OrderByKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var token = context.TargetToken;
 
             // var q = from x in y
             //         |
-            if (!token.IntersectsWith(position) &&
-                token.IsLastTokenOfQueryClause())
+            if (!token.IntersectsWith(position) && token.IsLastTokenOfQueryClause())
             {
                 return true;
             }

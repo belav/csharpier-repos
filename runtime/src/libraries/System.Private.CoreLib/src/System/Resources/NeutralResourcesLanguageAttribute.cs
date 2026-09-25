@@ -17,12 +17,17 @@ namespace System.Resources
             Location = UltimateResourceFallbackLocation.MainAssembly;
         }
 
-        public NeutralResourcesLanguageAttribute(string cultureName, UltimateResourceFallbackLocation location)
+        public NeutralResourcesLanguageAttribute(
+            string cultureName,
+            UltimateResourceFallbackLocation location
+        )
         {
             ArgumentNullException.ThrowIfNull(cultureName);
 
             if (!Enum.IsDefined(location))
-                throw new ArgumentException(SR.Format(SR.Arg_InvalidNeutralResourcesLanguage_FallbackLoc, location));
+                throw new ArgumentException(
+                    SR.Format(SR.Arg_InvalidNeutralResourcesLanguage_FallbackLoc, location)
+                );
 
             CultureName = cultureName;
             Location = location;

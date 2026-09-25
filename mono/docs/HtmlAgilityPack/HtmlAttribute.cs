@@ -230,7 +230,8 @@ namespace HtmlAgilityPack
             int i = 1;
             foreach (HtmlAttribute node in OwnerNode.Attributes)
             {
-                if (node.Name != Name) continue;
+                if (node.Name != Name)
+                    continue;
 
                 if (node == this)
                     break;
@@ -252,9 +253,10 @@ namespace HtmlAgilityPack
         /// A single quote mark '
         /// </summary>
         SingleQuote,
+
         /// <summary>
         /// A double quote mark "
         /// </summary>
-        DoubleQuote
+        DoubleQuote,
     }
 }

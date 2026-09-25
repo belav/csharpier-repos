@@ -5,7 +5,6 @@ using Xunit;
 
 public class TestSet
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
@@ -23,8 +22,8 @@ public class TestSet
 }
 
 class ReturnFromCatchTest
-{    
-    public int Run() 
+{
+    public int Run()
     {
         int henry = 0;
 
@@ -39,12 +38,13 @@ class ReturnFromCatchTest
         {
             Console.WriteLine("Inside Try. Setting return code to 50");
             bob = 50;
-
         }
-        catch(Exception)
+        catch (Exception)
         {
             Console.WriteLine("Inside Catch. Setting return code to 25");
-            Console.WriteLine("Next line returns so Finally in this method should be next and it will set return code to 100;");
+            Console.WriteLine(
+                "Next line returns so Finally in this method should be next and it will set return code to 100;"
+            );
             bob = 25;
             return;
         }
@@ -55,4 +55,3 @@ class ReturnFromCatchTest
         }
     }
 }
-

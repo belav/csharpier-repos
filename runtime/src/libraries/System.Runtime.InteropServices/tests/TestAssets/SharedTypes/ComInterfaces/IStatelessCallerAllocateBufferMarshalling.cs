@@ -19,19 +19,34 @@ namespace SharedTypes.ComInterfaces
         void MethodOut(out StatelessCallerAllocatedBufferType param);
         void MethodRef(ref StatelessCallerAllocatedBufferType param);
         StatelessCallerAllocatedBufferType Return();
+
         [PreserveSig]
         StatelessCallerAllocatedBufferType ReturnPreserveSig();
     }
 
     [GeneratedComClass]
-    internal partial class StatelessCallerAllocatedBufferMarshalling : IStatelessCallerAllocatedBufferMarshalling
+    internal partial class StatelessCallerAllocatedBufferMarshalling
+        : IStatelessCallerAllocatedBufferMarshalling
     {
         public void Method(StatelessCallerAllocatedBufferType param) { }
+
         public void MethodIn(in StatelessCallerAllocatedBufferType param) { }
-        public void MethodOut(out StatelessCallerAllocatedBufferType param) { param = new StatelessCallerAllocatedBufferType { I = 20 }; }
-        public void MethodRef(ref StatelessCallerAllocatedBufferType param) { param = new StatelessCallerAllocatedBufferType { I = 200 }; }
-        public StatelessCallerAllocatedBufferType Return() => new StatelessCallerAllocatedBufferType() { I = 201 };
-        public StatelessCallerAllocatedBufferType ReturnPreserveSig() => new StatelessCallerAllocatedBufferType() { I = 202 };
+
+        public void MethodOut(out StatelessCallerAllocatedBufferType param)
+        {
+            param = new StatelessCallerAllocatedBufferType { I = 20 };
+        }
+
+        public void MethodRef(ref StatelessCallerAllocatedBufferType param)
+        {
+            param = new StatelessCallerAllocatedBufferType { I = 200 };
+        }
+
+        public StatelessCallerAllocatedBufferType Return() =>
+            new StatelessCallerAllocatedBufferType() { I = 201 };
+
+        public StatelessCallerAllocatedBufferType ReturnPreserveSig() =>
+            new StatelessCallerAllocatedBufferType() { I = 202 };
     }
 
     [NativeMarshalling(typeof(StatelessCallerAllocatedBufferTypeMarshaller))]
@@ -45,23 +60,63 @@ namespace SharedTypes.ComInterfaces
         public int I;
     }
 
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.ManagedToUnmanagedRef, typeof(Bidirectional))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.UnmanagedToManagedRef, typeof(Bidirectional))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.ElementIn, typeof(Bidirectional))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.ElementOut, typeof(Bidirectional))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.ElementRef, typeof(Bidirectional))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.ManagedToUnmanagedOut, typeof(UnmanagedToManaged))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.UnmanagedToManagedIn, typeof(UnmanagedToManaged))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.ManagedToUnmanagedIn, typeof(ManagedToUnmanagedIn))]
-    [CustomMarshaller(typeof(StatelessCallerAllocatedBufferType), MarshalMode.UnmanagedToManagedOut, typeof(UnmanagedToManagedOut))]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.ManagedToUnmanagedRef,
+        typeof(Bidirectional)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.UnmanagedToManagedRef,
+        typeof(Bidirectional)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.ElementIn,
+        typeof(Bidirectional)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.ElementOut,
+        typeof(Bidirectional)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.ElementRef,
+        typeof(Bidirectional)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.ManagedToUnmanagedOut,
+        typeof(UnmanagedToManaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.UnmanagedToManagedIn,
+        typeof(UnmanagedToManaged)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.ManagedToUnmanagedIn,
+        typeof(ManagedToUnmanagedIn)
+    )]
+    [CustomMarshaller(
+        typeof(StatelessCallerAllocatedBufferType),
+        MarshalMode.UnmanagedToManagedOut,
+        typeof(UnmanagedToManagedOut)
+    )]
     internal static unsafe class StatelessCallerAllocatedBufferTypeMarshaller
     {
         static bool _canAllocate = true;
+
         public static void DisableAllocations() => _canAllocate = false;
+
         public static void EnableAllocations() => _canAllocate = true;
+
         public static void AssertAllPointersFreed()
         {
-            if (_ptrs.Any()) throw new InvalidOperationException();
+            if (_ptrs.Any())
+                throw new InvalidOperationException();
         }
 
         static HashSet<nint> _ptrs = new();
@@ -70,7 +125,9 @@ namespace SharedTypes.ComInterfaces
 
         public static class UnmanagedToManaged
         {
-            public static StatelessCallerAllocatedBufferType ConvertToManaged(StatelessCallerAllocatedBufferNative* unmanaged)
+            public static StatelessCallerAllocatedBufferType ConvertToManaged(
+                StatelessCallerAllocatedBufferNative* unmanaged
+            )
             {
                 return new StatelessCallerAllocatedBufferType() { I = unmanaged->I };
             }
@@ -90,11 +147,17 @@ namespace SharedTypes.ComInterfaces
         {
             public static int BufferSize => sizeof(StatelessCallerAllocatedBufferNative);
 
-            public static StatelessCallerAllocatedBufferNative* ConvertToUnmanaged(StatelessCallerAllocatedBufferType managed, Span<byte> buffer)
+            public static StatelessCallerAllocatedBufferNative* ConvertToUnmanaged(
+                StatelessCallerAllocatedBufferType managed,
+                Span<byte> buffer
+            )
             {
                 var unmanaged = new StatelessCallerAllocatedBufferNative() { I = managed.I };
                 MemoryMarshal.Write(buffer, in unmanaged);
-                return (StatelessCallerAllocatedBufferNative*)Unsafe.AsPointer(ref MemoryMarshal.AsRef<StatelessCallerAllocatedBufferNative>(buffer));
+                return (StatelessCallerAllocatedBufferNative*)
+                    Unsafe.AsPointer(
+                        ref MemoryMarshal.AsRef<StatelessCallerAllocatedBufferNative>(buffer)
+                    );
             }
 
             public static void Free(StatelessCallerAllocatedBufferNative* unmanaged)
@@ -110,10 +173,14 @@ namespace SharedTypes.ComInterfaces
 
         public static class UnmanagedToManagedOut
         {
-            public static StatelessCallerAllocatedBufferNative* ConvertToUnmanaged(StatelessCallerAllocatedBufferType managed)
+            public static StatelessCallerAllocatedBufferNative* ConvertToUnmanaged(
+                StatelessCallerAllocatedBufferType managed
+            )
             {
                 if (!_canAllocate)
-                    throw new InvalidOperationException("Marshalling used default ConverToUnmanaged when CallerAllocatedBuffer was expected");
+                    throw new InvalidOperationException(
+                        "Marshalling used default ConverToUnmanaged when CallerAllocatedBuffer was expected"
+                    );
                 nint ptr = Marshal.AllocHGlobal(sizeof(StatelessCallerAllocatedBufferNative));
                 _ptrs.Add(ptr);
                 var structPtr = (StatelessCallerAllocatedBufferNative*)ptr;
@@ -134,10 +201,14 @@ namespace SharedTypes.ComInterfaces
 
         public static class Bidirectional
         {
-            public static StatelessCallerAllocatedBufferNative* ConvertToUnmanaged(StatelessCallerAllocatedBufferType managed)
+            public static StatelessCallerAllocatedBufferNative* ConvertToUnmanaged(
+                StatelessCallerAllocatedBufferType managed
+            )
             {
                 if (!_canAllocate)
-                    throw new InvalidOperationException("Marshalling used default ConverToUnmanaged when CallerAllocatedBuffer was expected");
+                    throw new InvalidOperationException(
+                        "Marshalling used default ConverToUnmanaged when CallerAllocatedBuffer was expected"
+                    );
                 nint ptr = Marshal.AllocHGlobal(sizeof(StatelessCallerAllocatedBufferNative));
                 _ptrs.Add(ptr);
                 var structPtr = (StatelessCallerAllocatedBufferNative*)ptr;
@@ -145,7 +216,9 @@ namespace SharedTypes.ComInterfaces
                 return structPtr;
             }
 
-            public static StatelessCallerAllocatedBufferType ConvertToManaged(StatelessCallerAllocatedBufferNative* unmanaged)
+            public static StatelessCallerAllocatedBufferType ConvertToManaged(
+                StatelessCallerAllocatedBufferNative* unmanaged
+            )
             {
                 return new StatelessCallerAllocatedBufferType() { I = unmanaged->I };
             }

@@ -20,9 +20,7 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Empty constructor.
         /// </summary>
-        public IdentityProviderSingleSignOnDescriptor()
-        {
-        }
+        public IdentityProviderSingleSignOnDescriptor() { }
 
         /// <summary>
         /// Gets the collection of <see cref="ProtocolEndpoint"/> representing single signon services.

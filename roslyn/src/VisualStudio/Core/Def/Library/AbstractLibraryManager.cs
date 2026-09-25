@@ -16,14 +16,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
         internal readonly Guid LibraryGuid;
         private readonly IntPtr _imageListPtr;
 
-        protected AbstractLibraryManager(Guid libraryGuid, IComponentModel componentModel, IServiceProvider serviceProvider)
+        protected AbstractLibraryManager(
+            Guid libraryGuid,
+            IComponentModel componentModel,
+            IServiceProvider serviceProvider
+        )
         {
             LibraryGuid = libraryGuid;
             ComponentModel = componentModel;
             ServiceProvider = serviceProvider;
 
             var vsShell = serviceProvider.GetService(typeof(SVsShell)) as IVsShell;
-            vsShell?.TryGetPropertyValue(__VSSPROPID.VSSPROPID_ObjectMgrTypesImgList, out _imageListPtr);
+            vsShell?.TryGetPropertyValue(
+                __VSSPROPID.VSSPROPID_ObjectMgrTypesImgList,
+                out _imageListPtr
+            );
         }
 
         public IComponentModel ComponentModel { get; }

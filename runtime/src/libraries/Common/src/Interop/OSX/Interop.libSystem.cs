@@ -13,6 +13,7 @@ internal static partial class Interop
     {
         [LibraryImport(Interop.Libraries.libSystem)]
         public static unsafe partial int mach_timebase_info(mach_timebase_info_data_t* info);
+
         public struct mach_timebase_info_data_t
         {
             public uint numer;

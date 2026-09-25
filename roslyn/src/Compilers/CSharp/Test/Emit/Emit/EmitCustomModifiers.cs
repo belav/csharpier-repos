@@ -4,6 +4,7 @@
 
 #nullable disable
 
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
@@ -11,7 +12,6 @@ using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Linq;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
 {
@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
         public void Test1()
         {
             var mscorlibRef = TestMetadata.Net40.mscorlib;
-            string source = @"
+            string source =
+                @"
 public class A
 {
     unsafe public static void Main()
@@ -39,12 +40,16 @@ public class A
     }
 }
 ";
-            var c = CreateCompilation(source,
+            var c = CreateCompilation(
+                source,
                 new[] { TestReferences.SymbolsTests.CustomModifiers.Modifiers.dll },
-                options: TestOptions.UnsafeReleaseExe);
+                options: TestOptions.UnsafeReleaseExe
+            );
 
-            CompileAndVerify(c, verify: Verification.Passes, expectedOutput:
-@"F1
+            CompileAndVerify(
+                c,
+                verify: Verification.Passes,
+                expectedOutput: @"F1
 F2
 F3
 F7
@@ -52,7 +57,8 @@ F8
 F9
 F10
 M4
-");
+"
+            );
         }
 
         /// <summary>
@@ -61,7 +67,8 @@ M4
         [Fact]
         public void TestSingleInterfaceImplementationWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Class : CppCli.CppInterface1
 {
     //copy modifiers (even though dev10 doesn't)
@@ -100,7 +107,8 @@ Class.Method2(4)
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         /// <summary>
@@ -109,7 +117,8 @@ Class.Method2(4)
         [Fact]
         public void TestMultipleInterfaceImplementationWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Class : CppCli.CppInterface1, CppCli.CppInterface2
 {
     //copy modifiers (even though dev10 doesn't)
@@ -159,7 +168,8 @@ Class.Method2(6)
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         /// <summary>
@@ -171,7 +181,8 @@ Class.Method2(6)
         [Fact]
         public void TestSingleOverrideWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Class : CppCli.CppBase1
 {
     //copies custom modifiers
@@ -211,7 +222,8 @@ CppBase1::NonVirtualMethod(4)
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         /// <summary>
@@ -222,7 +234,8 @@ CppBase1::NonVirtualMethod(4)
         [Fact]
         public void TestRepeatedOverrideWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Base : CppCli.CppBase1
 {
     //copies custom modifiers
@@ -282,7 +295,8 @@ CppBase1::NonVirtualMethod(6)
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         /// <summary>
@@ -295,7 +309,8 @@ CppBase1::NonVirtualMethod(6)
         [Fact]
         public void TestImplicitImplementationInBaseWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class Class1 : CppCli.CppBase2, CppCli.CppInterface1
 {
 }
@@ -375,7 +390,8 @@ CppBase2::Method2(12)
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         /// <summary>
@@ -386,7 +402,8 @@ CppBase2::Method2(12)
         [Fact]
         public void TestImplicitImplementationBestMatchWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
     class Class1 : CppCli.CppBestMatchBase2, CppCli.CppBestMatchInterface
     {
     }
@@ -457,7 +474,8 @@ Class2.Method(23,24)
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         /// <summary>
@@ -466,7 +484,8 @@ Class2.Method(23,24)
         [Fact]
         public void TestGenericsWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
     class Derived1<U, V> : Outer<U>.Inner<V>
     {
         public override void Method<W>(U[] x, V[] y, W[] z)
@@ -509,7 +528,8 @@ Derived2.Method(Int64[], Int16[], Single[])
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         /// <summary>
@@ -518,7 +538,8 @@ Derived2.Method(Int64[], Int16[], Single[])
         [Fact]
         public void TestAssignmentWithCustomModifiers()
         {
-            var text = @"
+            var text =
+                @"
 class C : I3
 {
     void I3.M1(int[] arrayWithCustomModifiers)
@@ -552,14 +573,16 @@ System.Int32[]
             CompileAndVerify(
                 source: text,
                 references: new MetadataReference[] { ilAssemblyReference },
-                expectedOutput: expectedOutput);
+                expectedOutput: expectedOutput
+            );
         }
 
         [Fact]
         [WorkItem(737971, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/737971")]
         public void ByRefBeforeCustomModifiers()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -585,7 +608,8 @@ System.Int32[]
 } // end of class C
 ";
 
-            var source = @"
+            var source =
+                @"
 class Test
 {
     static void Main()
@@ -596,7 +620,12 @@ class Test
     }
 }
 ";
-            var comp = CreateCompilationWithILAndMscorlib40(source, il, TargetFramework.Mscorlib40, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilationWithILAndMscorlib40(
+                source,
+                il,
+                TargetFramework.Mscorlib40,
+                options: TestOptions.ReleaseExe
+            );
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var method = type.GetMember<MethodSymbol>("Incr");
@@ -613,7 +642,8 @@ class Test
         [WorkItem(737971, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/737971")]
         public void ByRefBeforeCustomModifiersOnSourceParameter()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit C
        extends [mscorlib]System.Object
 {
@@ -632,7 +662,8 @@ class Test
 } // end of class D
 ";
 
-            var source = @"
+            var source =
+                @"
 class D : C
 {
     public override void M(ref uint u)
@@ -652,7 +683,12 @@ class Test
     }
 }
 ";
-            var comp = CreateCompilationWithILAndMscorlib40(source, il, TargetFramework.Mscorlib40, options: TestOptions.ReleaseExe);
+            var comp = CreateCompilationWithILAndMscorlib40(
+                source,
+                il,
+                TargetFramework.Mscorlib40,
+                options: TestOptions.ReleaseExe
+            );
 
             var baseType = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C");
             var baseMethod = baseType.GetMember<MethodSymbol>("M");
@@ -678,7 +714,7 @@ class Test
         public void VoidPointerWithCustomModifiers()
         {
             var ilSource =
-@".class public A
+                @".class public A
 {
   // F1(void* p)
   .method public static void F1(void* p) { ret }
@@ -690,7 +726,7 @@ class Test
   .method public static void F4(void modopt([mscorlib]System.Runtime.CompilerServices.IsConst)* modopt([mscorlib]System.Runtime.CompilerServices.IsConst) p) { ret }
 }";
             var source =
-@"class B
+                @"class B
 {
     static void Main()
     {
@@ -703,7 +739,11 @@ class Test
         }
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource, options: TestOptions.UnsafeReleaseExe);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                ilSource,
+                options: TestOptions.UnsafeReleaseExe
+            );
             compilation.VerifyDiagnostics();
             CompileAndVerify(compilation, verify: Verification.FailsPEVerify);
         }
@@ -712,7 +752,7 @@ class Test
         public void IntPointerWithCustomModifiers()
         {
             var ilSource =
-@".class public A
+                @".class public A
 {
   // F1(int* p)
   .method public static void F1(int32* p) { ret }
@@ -724,7 +764,7 @@ class Test
   .method public static void F4(int32 modopt([mscorlib]System.Runtime.CompilerServices.IsConst)* modopt([mscorlib]System.Runtime.CompilerServices.IsConst) p) { ret }
 }";
             var source =
-@"class B
+                @"class B
 {
     static void Main()
     {
@@ -737,7 +777,11 @@ class Test
         }
     }
 }";
-            var compilation = CreateCompilationWithILAndMscorlib40(source, ilSource, options: TestOptions.UnsafeReleaseExe);
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                source,
+                ilSource,
+                options: TestOptions.UnsafeReleaseExe
+            );
             compilation.VerifyDiagnostics();
             CompileAndVerify(compilation, verify: Verification.FailsPEVerify);
         }

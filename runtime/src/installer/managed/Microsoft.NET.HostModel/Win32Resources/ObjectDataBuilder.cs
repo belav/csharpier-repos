@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Microsoft.NET.HostModel.Win32Resources
@@ -25,10 +24,7 @@ namespace Microsoft.NET.HostModel.Win32Resources
 
         public int CountBytes
         {
-            get
-            {
-                return _data.Count;
-            }
+            get { return _data.Count; }
         }
 
         public void EmitByte(byte emit)

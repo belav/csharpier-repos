@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,19 +29,20 @@
 
 using System.Runtime.InteropServices;
 
-namespace System.Security.Principal {
-
-	[Serializable]
-	[ComVisible (true)]
-	public enum WindowsBuiltInRole {
-		Administrator = 544,
-		User = 545,
-		Guest = 546,
-		PowerUser = 547,
-		AccountOperator = 548,
-		SystemOperator = 549,
-		PrintOperator = 550,
-		BackupOperator = 551,
-		Replicator = 552,
-	}
+namespace System.Security.Principal
+{
+    [Serializable]
+    [ComVisible(true)]
+    public enum WindowsBuiltInRole
+    {
+        Administrator = 544,
+        User = 545,
+        Guest = 546,
+        PowerUser = 547,
+        AccountOperator = 548,
+        SystemOperator = 549,
+        PrintOperator = 550,
+        BackupOperator = 551,
+        Replicator = 552,
+    }
 }

@@ -1,37 +1,34 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeSnippetCompileUnit.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a snippet block of code.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeSnippetCompileUnit : CodeCompileUnit {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeSnippetCompileUnit : CodeCompileUnit
+    {
         private string value;
         private CodeLinePragma linePragma;
 
-        public CodeSnippetCompileUnit() {
-        }
+        public CodeSnippetCompileUnit() { }
 
-        public CodeSnippetCompileUnit(string value) {
+        public CodeSnippetCompileUnit(string value)
+        {
             Value = value;
         }
 
@@ -42,13 +39,10 @@ namespace System.CodeDom {
         ///       text of the code block to represent.
         ///    </para>
         /// </devdoc>
-        public string Value {
-            get {
-                return (value == null) ? string.Empty : value;
-            }
-            set {
-                this.value = value;
-            }
+        public string Value
+        {
+            get { return (value == null) ? string.Empty : value; }
+            set { this.value = value; }
         }
 
         /// <devdoc>
@@ -56,13 +50,10 @@ namespace System.CodeDom {
         ///       The line the code block starts on.
         ///    </para>
         /// </devdoc>
-        public CodeLinePragma LinePragma {
-            get {
-                return linePragma;
-            }
-            set {
-                linePragma = value;
-            }
+        public CodeLinePragma LinePragma
+        {
+            get { return linePragma; }
+            set { linePragma = value; }
         }
     }
 }

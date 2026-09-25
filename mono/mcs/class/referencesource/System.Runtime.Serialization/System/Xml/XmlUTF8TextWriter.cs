@@ -20,18 +20,19 @@ namespace System.Xml
         //Supports FastAsync APIs
         internal override bool FastAsync
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public void SetOutput(Stream stream, Encoding encoding, bool ownsStream)
         {
             if (stream == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("stream");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "stream"
+                );
             if (encoding == null)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("encoding");
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "encoding"
+                );
             if (encoding.WebName != Encoding.UTF8.WebName)
             {
                 stream = new EncodingStreamWrapper(stream, encoding, true);
@@ -73,47 +74,237 @@ namespace System.Xml
         char[] chars;
         InternalWriteBase64TextAsyncWriter internalWriteBase64TextAsyncWriter;
 
-        static readonly byte[] startDecl = 
+        static readonly byte[] startDecl =
         {
-            (byte)'<', (byte)'?', (byte)'x', (byte)'m', (byte)'l', (byte)' ',
-            (byte)'v', (byte)'e', (byte)'r', (byte)'s', (byte)'i', (byte)'o', (byte)'n', (byte)'=', (byte)'"', (byte)'1', (byte)'.', (byte)'0', (byte)'"', (byte)' ',
-            (byte)'e', (byte)'n', (byte)'c', (byte)'o', (byte)'d', (byte)'i', (byte)'n', (byte)'g', (byte)'=', (byte)'"',
+            (byte)'<',
+            (byte)'?',
+            (byte)'x',
+            (byte)'m',
+            (byte)'l',
+            (byte)' ',
+            (byte)'v',
+            (byte)'e',
+            (byte)'r',
+            (byte)'s',
+            (byte)'i',
+            (byte)'o',
+            (byte)'n',
+            (byte)'=',
+            (byte)'"',
+            (byte)'1',
+            (byte)'.',
+            (byte)'0',
+            (byte)'"',
+            (byte)' ',
+            (byte)'e',
+            (byte)'n',
+            (byte)'c',
+            (byte)'o',
+            (byte)'d',
+            (byte)'i',
+            (byte)'n',
+            (byte)'g',
+            (byte)'=',
+            (byte)'"',
         };
-        static readonly byte[] endDecl =
-        {
-            (byte)'"', (byte)'?', (byte)'>'
-        };
+        static readonly byte[] endDecl = { (byte)'"', (byte)'?', (byte)'>' };
         static readonly byte[] utf8Decl =
         {
-            (byte)'<', (byte)'?', (byte)'x', (byte)'m', (byte)'l', (byte)' ',
-            (byte)'v', (byte)'e', (byte)'r', (byte)'s', (byte)'i', (byte)'o', (byte)'n', (byte)'=', (byte)'"', (byte)'1', (byte)'.', (byte)'0', (byte)'"', (byte)' ',
-            (byte)'e', (byte)'n', (byte)'c', (byte)'o', (byte)'d', (byte)'i', (byte)'n', (byte)'g', (byte)'=', (byte)'"', (byte)'u', (byte)'t', (byte)'f', (byte)'-', (byte)'8', (byte)'"',
-            (byte)'?', (byte)'>'
+            (byte)'<',
+            (byte)'?',
+            (byte)'x',
+            (byte)'m',
+            (byte)'l',
+            (byte)' ',
+            (byte)'v',
+            (byte)'e',
+            (byte)'r',
+            (byte)'s',
+            (byte)'i',
+            (byte)'o',
+            (byte)'n',
+            (byte)'=',
+            (byte)'"',
+            (byte)'1',
+            (byte)'.',
+            (byte)'0',
+            (byte)'"',
+            (byte)' ',
+            (byte)'e',
+            (byte)'n',
+            (byte)'c',
+            (byte)'o',
+            (byte)'d',
+            (byte)'i',
+            (byte)'n',
+            (byte)'g',
+            (byte)'=',
+            (byte)'"',
+            (byte)'u',
+            (byte)'t',
+            (byte)'f',
+            (byte)'-',
+            (byte)'8',
+            (byte)'"',
+            (byte)'?',
+            (byte)'>',
         };
-        static readonly byte[] digits = 
-        { 
-            (byte) '0', (byte) '1', (byte) '2', (byte) '3', (byte) '4', (byte) '5', (byte) '6', (byte) '7',
-            (byte) '8', (byte) '9', (byte) 'A', (byte) 'B', (byte) 'C', (byte) 'D', (byte) 'E', (byte) 'F'
+        static readonly byte[] digits =
+        {
+            (byte)'0',
+            (byte)'1',
+            (byte)'2',
+            (byte)'3',
+            (byte)'4',
+            (byte)'5',
+            (byte)'6',
+            (byte)'7',
+            (byte)'8',
+            (byte)'9',
+            (byte)'A',
+            (byte)'B',
+            (byte)'C',
+            (byte)'D',
+            (byte)'E',
+            (byte)'F',
         };
         static readonly bool[] defaultIsEscapedAttributeChar = new bool[]
         {
-            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, 
-            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-            false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false, // '"', '&'
-            false, false, false, false, false, false, false, false, false, false, false, false, true, false, true, false  // '<', '>'
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false, // '"', '&'
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false, // '<', '>'
         };
         static readonly bool[] defaultIsEscapedElementChar = new bool[]
         {
-            true, true, true, true, true, true, true, true, true, false, false, true, true, true, true, true, // All but 0x09, 0x0A
-            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-            false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, // '&'
-            false, false, false, false, false, false, false, false, false, false, false, false, true, false, true, false  // '<', '>'
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true, // All but 0x09, 0x0A
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false, // '&'
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false, // '<', '>'
         };
 
         public XmlUTF8NodeWriter()
-            : this(defaultIsEscapedAttributeChar, defaultIsEscapedElementChar)
-        {
-        }
+            : this(defaultIsEscapedAttributeChar, defaultIsEscapedElementChar) { }
 
         public XmlUTF8NodeWriter(bool[] isEscapedAttributeChar, bool[] isEscapedElementChar)
         {
@@ -122,7 +313,7 @@ namespace System.Xml
             this.inAttribute = false;
         }
 
-        new public void SetOutput(Stream stream, bool ownsStream, Encoding encoding)
+        public new void SetOutput(Stream stream, bool ownsStream, Encoding encoding)
         {
             Encoding utf8Encoding = null;
             if (encoding != null && encoding.CodePage == Encoding.UTF8.CodePage)
@@ -137,10 +328,7 @@ namespace System.Xml
 
         public Encoding Encoding
         {
-            get
-            {
-                return encoding;
-            }
+            get { return encoding; }
         }
 
         byte[] GetCharEntityBuffer()
@@ -248,7 +436,14 @@ namespace System.Xml
             WriteStartElement(prefix, localName.Value);
         }
 
-        public override void WriteStartElement(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteStartElement(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
             WriteByte('<');
             if (prefixLength != 0)
@@ -283,7 +478,14 @@ namespace System.Xml
             WriteByte('>');
         }
 
-        public override void WriteEndElement(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteEndElement(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
             WriteBytes('<', '/');
             if (prefixLength != 0)
@@ -327,7 +529,14 @@ namespace System.Xml
             WriteXmlnsAttribute(prefix, ns.Value);
         }
 
-        public override void WriteXmlnsAttribute(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] nsBuffer, int nsOffset, int nsLength)
+        public override void WriteXmlnsAttribute(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] nsBuffer,
+            int nsOffset,
+            int nsLength
+        )
         {
             WriteStartXmlnsAttribute();
             if (prefixLength != 0)
@@ -358,7 +567,14 @@ namespace System.Xml
             WriteStartAttribute(prefix, localName.Value);
         }
 
-        public override void WriteStartAttribute(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteStartAttribute(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
             WriteByte(' ');
             if (prefixLength != 0)
@@ -416,10 +632,12 @@ namespace System.Xml
             WriteEscapedText(s.Value);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public override void WriteEscapedText(string s)
+        public override unsafe void WriteEscapedText(string s)
         {
             int count = s.Length;
             if (count > 0)
@@ -431,10 +649,12 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code.",
-            Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code.",
+            Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+        )]
         [SecuritySafeCritical]
-        unsafe public override void WriteEscapedText(char[] s, int offset, int count)
+        public override unsafe void WriteEscapedText(char[] s, int offset, int count)
         {
             if (count > 0)
             {
@@ -445,7 +665,9 @@ namespace System.Xml
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Contains unsafe code. Caller needs to validate arguments.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Contains unsafe code. Caller needs to validate arguments."
+        )]
         [SecurityCritical]
         unsafe void UnsafeWriteEscapedText(char* chars, int count)
         {
@@ -508,7 +730,7 @@ namespace System.Xml
         }
 
         [SecuritySafeCritical]
-        unsafe public override void WriteText(char[] chars, int offset, int count)
+        public override unsafe void WriteText(char[] chars, int offset, int count)
         {
             if (count > 0)
             {
@@ -634,8 +856,7 @@ namespace System.Xml
                 count++;
                 chars[--offset] = digits[(int)(value & 0x0F)];
                 value /= 16;
-            }
-            while (value != 0);
+            } while (value != 0);
             return count;
         }
 
@@ -715,7 +936,13 @@ namespace System.Xml
             WriteText(value.ToString());
         }
 
-        public override void WriteBase64Text(byte[] trailBytes, int trailByteCount, byte[] buffer, int offset, int count)
+        public override void WriteBase64Text(
+            byte[] trailBytes,
+            int trailByteCount,
+            byte[] buffer,
+            int offset,
+            int count
+        )
         {
             if (trailByteCount > 0)
             {
@@ -745,7 +972,9 @@ namespace System.Xml
             }
         }
 
-        internal override AsyncCompletionResult WriteBase64TextAsync(AsyncEventArgs<XmlNodeWriterWriteBase64TextArgs> xmlNodeWriterState)
+        internal override AsyncCompletionResult WriteBase64TextAsync(
+            AsyncEventArgs<XmlNodeWriterWriteBase64TextArgs> xmlNodeWriterState
+        )
         {
             if (internalWriteBase64TextAsyncWriter == null)
             {
@@ -763,9 +992,15 @@ namespace System.Xml
             XmlUTF8NodeWriter writer;
             GetBufferAsyncEventArgs getBufferState;
             GetBufferArgs getBufferArgs;
-            static AsyncEventArgsCallback onTrailByteComplete = new AsyncEventArgsCallback(OnTrailBytesComplete);
-            static AsyncEventArgsCallback onWriteComplete = new AsyncEventArgsCallback(OnWriteComplete);
-            static AsyncEventArgsCallback onGetBufferComplete = new AsyncEventArgsCallback(OnGetBufferComplete);
+            static AsyncEventArgsCallback onTrailByteComplete = new AsyncEventArgsCallback(
+                OnTrailBytesComplete
+            );
+            static AsyncEventArgsCallback onWriteComplete = new AsyncEventArgsCallback(
+                OnWriteComplete
+            );
+            static AsyncEventArgsCallback onGetBufferComplete = new AsyncEventArgsCallback(
+                OnGetBufferComplete
+            );
 
             public InternalWriteBase64TextAsyncWriter(XmlUTF8NodeWriter writer)
             {
@@ -774,7 +1009,9 @@ namespace System.Xml
                 this.writerArgs = new XmlWriteBase64AsyncArguments();
             }
 
-            internal AsyncCompletionResult StartAsync(AsyncEventArgs<XmlNodeWriterWriteBase64TextArgs> xmlNodeWriterState)
+            internal AsyncCompletionResult StartAsync(
+                AsyncEventArgs<XmlNodeWriterWriteBase64TextArgs> xmlNodeWriterState
+            )
             {
                 Fx.Assert(xmlNodeWriterState != null, "xmlNodeWriterState cannot be null.");
                 Fx.Assert(this.nodeState == null, "nodeState is not null.");
@@ -789,7 +1026,10 @@ namespace System.Xml
                     this.writerArgs.Count = nodeWriterArgs.TrailCount;
 
                     this.writerState.Set(onTrailByteComplete, this.writerArgs, this);
-                    if (this.InternalWriteBase64TextAsync(this.writerState) != AsyncCompletionResult.Completed)
+                    if (
+                        this.InternalWriteBase64TextAsync(this.writerState)
+                        != AsyncCompletionResult.Completed
+                    )
                     {
                         return AsyncCompletionResult.Queued;
                     }
@@ -805,9 +1045,10 @@ namespace System.Xml
                 return AsyncCompletionResult.Queued;
             }
 
-            static private void OnTrailBytesComplete(IAsyncEventArgs eventArgs)
+            private static void OnTrailBytesComplete(IAsyncEventArgs eventArgs)
             {
-                InternalWriteBase64TextAsyncWriter thisPtr = (InternalWriteBase64TextAsyncWriter)eventArgs.AsyncState;
+                InternalWriteBase64TextAsyncWriter thisPtr = (InternalWriteBase64TextAsyncWriter)
+                    eventArgs.AsyncState;
                 Exception completionException = null;
                 bool completeSelf = false;
 
@@ -849,7 +1090,10 @@ namespace System.Xml
                 this.writerArgs.Count = nodeState.Arguments.Count;
 
                 this.writerState.Set(onWriteComplete, this.writerArgs, this);
-                if (this.InternalWriteBase64TextAsync(this.writerState) == AsyncCompletionResult.Completed)
+                if (
+                    this.InternalWriteBase64TextAsync(this.writerState)
+                    == AsyncCompletionResult.Completed
+                )
                 {
                     this.writerState.Complete(true);
                     return AsyncCompletionResult.Completed;
@@ -860,13 +1104,16 @@ namespace System.Xml
 
             static void OnWriteComplete(IAsyncEventArgs eventArgs)
             {
-                InternalWriteBase64TextAsyncWriter thisPtr = (InternalWriteBase64TextAsyncWriter)eventArgs.AsyncState;
+                InternalWriteBase64TextAsyncWriter thisPtr = (InternalWriteBase64TextAsyncWriter)
+                    eventArgs.AsyncState;
                 AsyncEventArgs<XmlNodeWriterWriteBase64TextArgs> state = thisPtr.nodeState;
                 thisPtr.nodeState = null;
                 state.Complete(false, eventArgs.Exception);
             }
 
-            AsyncCompletionResult InternalWriteBase64TextAsync(AsyncEventArgs<XmlWriteBase64AsyncArguments> writerState)
+            AsyncCompletionResult InternalWriteBase64TextAsync(
+                AsyncEventArgs<XmlWriteBase64AsyncArguments> writerState
+            )
             {
                 GetBufferAsyncEventArgs bufferState = this.getBufferState;
                 GetBufferArgs bufferArgs = this.getBufferArgs;
@@ -874,7 +1121,7 @@ namespace System.Xml
 
                 if (bufferState == null)
                 {
-                    // Need to initialize the cached getBufferState 
+                    // Need to initialize the cached getBufferState
                     // used to call GetBufferAsync() multiple times.
                     bufferState = new GetBufferAsyncEventArgs();
                     bufferArgs = new GetBufferArgs();
@@ -886,7 +1133,10 @@ namespace System.Xml
 
                 while (writerArgs.Count >= 3)
                 {
-                    int byteCount = Math.Min(bufferLength / 4 * 3, writerArgs.Count - writerArgs.Count % 3);
+                    int byteCount = Math.Min(
+                        bufferLength / 4 * 3,
+                        writerArgs.Count - writerArgs.Count % 3
+                    );
                     int charCount = byteCount / 3 * 4;
 
                     bufferArgs.Count = charCount;
@@ -895,12 +1145,15 @@ namespace System.Xml
                     {
                         GetBufferEventResult getbufferResult = bufferState.Result;
                         bufferState.Complete(true);
-                        writer.Advance(encoding.GetChars(
-                            writerArgs.Buffer,
-                            writerArgs.Offset,
-                            byteCount,
-                            getbufferResult.Buffer,
-                            getbufferResult.Offset));
+                        writer.Advance(
+                            encoding.GetChars(
+                                writerArgs.Buffer,
+                                writerArgs.Offset,
+                                byteCount,
+                                getbufferResult.Buffer,
+                                getbufferResult.Offset
+                            )
+                        );
                         writerArgs.Offset += byteCount;
                         writerArgs.Count -= byteCount;
                     }
@@ -918,12 +1171,15 @@ namespace System.Xml
                     {
                         GetBufferEventResult getbufferResult = bufferState.Result;
                         bufferState.Complete(true);
-                        writer.Advance(encoding.GetChars(
-                            writerArgs.Buffer,
-                            writerArgs.Offset,
-                            writerArgs.Count,
-                            getbufferResult.Buffer,
-                            getbufferResult.Offset));
+                        writer.Advance(
+                            encoding.GetChars(
+                                writerArgs.Buffer,
+                                writerArgs.Offset,
+                                writerArgs.Count,
+                                getbufferResult.Buffer,
+                                getbufferResult.Offset
+                            )
+                        );
                     }
                     else
                     {
@@ -937,7 +1193,8 @@ namespace System.Xml
             static void OnGetBufferComplete(IAsyncEventArgs state)
             {
                 GetBufferEventResult result = ((GetBufferAsyncEventArgs)state).Result;
-                InternalWriteBase64TextAsyncWriter thisPtr = (InternalWriteBase64TextAsyncWriter)state.AsyncState;
+                InternalWriteBase64TextAsyncWriter thisPtr = (InternalWriteBase64TextAsyncWriter)
+                    state.AsyncState;
                 XmlWriteBase64AsyncArguments writerArgs = thisPtr.writerState.Arguments;
 
                 Exception completionException = null;
@@ -956,15 +1213,21 @@ namespace System.Xml
                         int offset = result.Offset;
 
                         Base64Encoding encoding = XmlConverter.Base64Encoding;
-                        int byteCount = Math.Min(bufferLength / 4 * 3, writerArgs.Count - writerArgs.Count % 3);
+                        int byteCount = Math.Min(
+                            bufferLength / 4 * 3,
+                            writerArgs.Count - writerArgs.Count % 3
+                        );
                         int charCount = byteCount / 3 * 4;
 
-                        thisPtr.writer.Advance(encoding.GetChars(
-                                   writerArgs.Buffer,
-                                   writerArgs.Offset,
-                                   byteCount,
-                                   chars,
-                                   offset));
+                        thisPtr.writer.Advance(
+                            encoding.GetChars(
+                                writerArgs.Buffer,
+                                writerArgs.Offset,
+                                byteCount,
+                                chars,
+                                offset
+                            )
+                        );
 
                         if (byteCount >= 3)
                         {
@@ -972,7 +1235,10 @@ namespace System.Xml
                             writerArgs.Count -= byteCount;
                         }
 
-                        if (thisPtr.InternalWriteBase64TextAsync(thisPtr.writerState) == AsyncCompletionResult.Completed)
+                        if (
+                            thisPtr.InternalWriteBase64TextAsync(thisPtr.writerState)
+                            == AsyncCompletionResult.Completed
+                        )
                         {
                             completeSelf = true;
                         }
@@ -996,9 +1262,26 @@ namespace System.Xml
             }
         }
 
-        public override IAsyncResult BeginWriteBase64Text(byte[] trailBytes, int trailByteCount, byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWriteBase64Text(
+            byte[] trailBytes,
+            int trailByteCount,
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new WriteBase64TextAsyncResult(trailBytes, trailByteCount, buffer, offset, count, this, callback, state);
+            return new WriteBase64TextAsyncResult(
+                trailBytes,
+                trailByteCount,
+                buffer,
+                offset,
+                count,
+                this,
+                callback,
+                state
+            );
         }
 
         public override void EndWriteBase64Text(IAsyncResult result)
@@ -1006,9 +1289,22 @@ namespace System.Xml
             WriteBase64TextAsyncResult.End(result);
         }
 
-        IAsyncResult BeginInternalWriteBase64Text(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        IAsyncResult BeginInternalWriteBase64Text(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new InternalWriteBase64TextAsyncResult(buffer, offset, count, this, callback, state);
+            return new InternalWriteBase64TextAsyncResult(
+                buffer,
+                offset,
+                count,
+                this,
+                callback,
+                state
+            );
         }
 
         void EndInternalWriteBase64Text(IAsyncResult result)
@@ -1029,7 +1325,16 @@ namespace System.Xml
 
             XmlUTF8NodeWriter writer;
 
-            public WriteBase64TextAsyncResult(byte[] trailBytes, int trailByteCount, byte[] buffer, int offset, int count, XmlUTF8NodeWriter writer, AsyncCallback callback, object state)
+            public WriteBase64TextAsyncResult(
+                byte[] trailBytes,
+                int trailByteCount,
+                byte[] buffer,
+                int offset,
+                int count,
+                XmlUTF8NodeWriter writer,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.writer = writer;
@@ -1065,7 +1370,13 @@ namespace System.Xml
                 {
                     if (result == null)
                     {
-                        result = writer.BeginInternalWriteBase64Text(this.trailBytes, 0, this.trailByteCount, PrepareAsyncCompletion(onTrailBytesComplete), this);
+                        result = writer.BeginInternalWriteBase64Text(
+                            this.trailBytes,
+                            0,
+                            this.trailByteCount,
+                            PrepareAsyncCompletion(onTrailBytesComplete),
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                         {
                             return false;
@@ -1081,7 +1392,13 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = writer.BeginInternalWriteBase64Text(this.buffer, this.offset, this.count, PrepareAsyncCompletion(onComplete), this);
+                    result = writer.BeginInternalWriteBase64Text(
+                        this.buffer,
+                        this.offset,
+                        this.count,
+                        PrepareAsyncCompletion(onComplete),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -1107,9 +1424,18 @@ namespace System.Xml
 
             XmlUTF8NodeWriter writer;
             static AsyncCallback onWriteCharacters = Fx.ThunkCallback(OnWriteCharacters);
-            static AsyncCompletion onWriteTrailingCharacters = new AsyncCompletion(OnWriteTrailingCharacters);
+            static AsyncCompletion onWriteTrailingCharacters = new AsyncCompletion(
+                OnWriteTrailingCharacters
+            );
 
-            public InternalWriteBase64TextAsyncResult(byte[] buffer, int offset, int count, XmlUTF8NodeWriter writer, AsyncCallback callback, object state)
+            public InternalWriteBase64TextAsyncResult(
+                byte[] buffer,
+                int offset,
+                int count,
+                XmlUTF8NodeWriter writer,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.buffer = buffer;
@@ -1126,10 +1452,10 @@ namespace System.Xml
                 }
             }
 
-
             static bool OnWriteTrailingCharacters(IAsyncResult result)
             {
-                InternalWriteBase64TextAsyncResult thisPtr = (InternalWriteBase64TextAsyncResult)result.AsyncState;
+                InternalWriteBase64TextAsyncResult thisPtr = (InternalWriteBase64TextAsyncResult)
+                    result.AsyncState;
                 return thisPtr.HandleWriteTrailingCharacters(result);
             }
 
@@ -1172,7 +1498,9 @@ namespace System.Xml
 
                 byte[] chars = writer.EndGetBuffer(result, out charOffset);
 
-                writer.Advance(encoding.GetChars(this.buffer, this.offset, byteCount, chars, charOffset));
+                writer.Advance(
+                    encoding.GetChars(this.buffer, this.offset, byteCount, chars, charOffset)
+                );
                 this.offset += byteCount;
                 this.count -= byteCount;
 
@@ -1183,7 +1511,11 @@ namespace System.Xml
             {
                 if (result == null)
                 {
-                    result = writer.BeginGetBuffer(4, PrepareAsyncCompletion(onWriteTrailingCharacters), this);
+                    result = writer.BeginGetBuffer(
+                        4,
+                        PrepareAsyncCompletion(onWriteTrailingCharacters),
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -1192,7 +1524,9 @@ namespace System.Xml
 
                 int charOffset;
                 byte[] chars = writer.EndGetBuffer(result, out charOffset);
-                writer.Advance(encoding.GetChars(this.buffer, this.offset, this.count, chars, charOffset));
+                writer.Advance(
+                    encoding.GetChars(this.buffer, this.offset, this.count, chars, charOffset)
+                );
                 return true;
             }
 
@@ -1203,7 +1537,8 @@ namespace System.Xml
                     return;
                 }
 
-                InternalWriteBase64TextAsyncResult thisPtr = (InternalWriteBase64TextAsyncResult)result.AsyncState;
+                InternalWriteBase64TextAsyncResult thisPtr = (InternalWriteBase64TextAsyncResult)
+                    result.AsyncState;
                 Exception completionException = null;
                 bool completeSelf = false;
 
@@ -1239,18 +1574,14 @@ namespace System.Xml
             WriteText(XmlConvert.ToString(value));
         }
 
-        public override void WriteStartListText()
-        {
-        }
+        public override void WriteStartListText() { }
 
         public override void WriteListSeparator()
         {
             WriteByte(' ');
         }
 
-        public override void WriteEndListText()
-        {
-        }
+        public override void WriteEndListText() { }
 
         public override void WriteQualifiedName(string prefix, XmlDictionaryString localName)
         {

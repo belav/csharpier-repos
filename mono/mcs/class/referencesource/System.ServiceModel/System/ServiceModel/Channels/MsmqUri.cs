@@ -98,7 +98,9 @@ namespace System.ServiceModel.Channels
             const string privatePart = "/private";
 
             if (relativePath.StartsWith("/private$", StringComparison.OrdinalIgnoreCase))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MsmqWrongPrivateQueueSyntax)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MsmqWrongPrivateQueueSyntax))
+                );
 
             if (relativePath.StartsWith(privatePart, StringComparison.OrdinalIgnoreCase))
             {
@@ -135,13 +137,21 @@ namespace System.ServiceModel.Channels
             public string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("uri")
+                    );
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
+                    );
                 if (String.IsNullOrEmpty(uri.Host))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.MsmqWrongUri));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.MsmqWrongUri)
+                    );
                 if (-1 != uri.Port)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.MsmqUnexpectedPort));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.MsmqUnexpectedPort)
+                    );
 
                 StringBuilder builder = new StringBuilder();
                 builder.Append("DIRECT=");
@@ -185,13 +195,21 @@ namespace System.ServiceModel.Channels
             public virtual string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("uri")
+                    );
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
+                    );
                 if (String.IsNullOrEmpty(uri.Host))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.MsmqWrongUri));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.MsmqWrongUri)
+                    );
                 if (-1 != uri.Port)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.MsmqUnexpectedPort));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.MsmqUnexpectedPort)
+                    );
 
                 uri = PostVerify(uri);
 
@@ -240,7 +258,14 @@ namespace System.ServiceModel.Channels
                     return uri;
                 try
                 {
-                    if (0 == String.Compare(DnsCache.MachineName, DnsCache.Resolve(uri).HostName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        0
+                        == String.Compare(
+                            DnsCache.MachineName,
+                            DnsCache.Resolve(uri).HostName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return new UriBuilder(Scheme, "localhost", -1, uri.PathAndQuery).Uri;
                     }
@@ -249,7 +274,9 @@ namespace System.ServiceModel.Channels
                 {
                     MsmqDiagnostics.ExpectedException(ex);
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqDLQNotLocal), "uri"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.MsmqDLQNotLocal), "uri")
+                );
             }
         }
 
@@ -265,11 +292,17 @@ namespace System.ServiceModel.Channels
             public string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("uri")
+                    );
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
+                    );
                 if (String.IsNullOrEmpty(uri.Host))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.MsmqWrongUri));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(SR.MsmqWrongUri)
+                    );
 
                 StringBuilder builder = new StringBuilder();
                 builder.Append("DIRECT=");
@@ -288,7 +321,7 @@ namespace System.ServiceModel.Channels
                 return builder.ToString();
             }
 
-            abstract protected string DirectScheme { get; }
+            protected abstract string DirectScheme { get; }
 
             public Uri CreateUri(string host, string name, bool isPrivate)
             {
@@ -328,9 +361,13 @@ namespace System.ServiceModel.Channels
             public string UriToFormatName(Uri uri)
             {
                 if (null == uri)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("uri")
+                    );
                 if (uri.Scheme != this.Scheme)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.MsmqInvalidScheme), "uri")
+                    );
                 return Uri.UnescapeDataString(uri.AbsoluteUri.Substring(this.Scheme.Length + 1));
             }
 

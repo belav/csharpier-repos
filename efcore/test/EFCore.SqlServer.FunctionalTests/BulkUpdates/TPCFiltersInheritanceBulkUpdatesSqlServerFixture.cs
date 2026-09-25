@@ -3,11 +3,10 @@
 
 namespace Microsoft.EntityFrameworkCore.BulkUpdates;
 
-public class TPCFiltersInheritanceBulkUpdatesSqlServerFixture : TPCInheritanceBulkUpdatesSqlServerFixture
+public class TPCFiltersInheritanceBulkUpdatesSqlServerFixture
+    : TPCInheritanceBulkUpdatesSqlServerFixture
 {
-    protected override string StoreName
-        => "TPCFiltersInheritanceBulkUpdatesTest";
+    protected override string StoreName => "TPCFiltersInheritanceBulkUpdatesTest";
 
-    public override bool EnableFilters
-        => true;
+    public override bool EnableFilters => true;
 }

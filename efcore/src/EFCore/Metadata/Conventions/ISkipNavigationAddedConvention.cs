@@ -18,5 +18,6 @@ public interface ISkipNavigationAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessSkipNavigationAdded(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
-        IConventionContext<IConventionSkipNavigationBuilder> context);
+        IConventionContext<IConventionSkipNavigationBuilder> context
+    );
 }

@@ -82,7 +82,10 @@ namespace System.Speech.Recognition
         public void Append(string phrase, SubsetMatchingMode subsetMatchingCriteria)
         {
             Helpers.ThrowIfEmptyOrNull(phrase, nameof(phrase));
-            GrammarBuilder.ValidateSubsetMatchingCriteriaArgument(subsetMatchingCriteria, nameof(subsetMatchingCriteria));
+            GrammarBuilder.ValidateSubsetMatchingCriteriaArgument(
+                subsetMatchingCriteria,
+                nameof(subsetMatchingCriteria)
+            );
 
             AddItem(new GrammarBuilderPhrase(phrase, subsetMatchingCriteria));
         }
@@ -125,7 +128,10 @@ namespace System.Speech.Recognition
             }
 
             // Clone the items if we are playing with the local list.
-            List<GrammarBuilderBase> items = builder == this ? builder.Clone().InternalBuilder.Items : builder.InternalBuilder.Items;
+            List<GrammarBuilderBase> items =
+                builder == this
+                    ? builder.Clone().InternalBuilder.Items
+                    : builder.InternalBuilder.Items;
 
             foreach (GrammarBuilderBase item in items)
             {
@@ -236,12 +242,10 @@ namespace System.Speech.Recognition
 
             AddItem(new GrammarBuilderRuleRef(uri, rule));
         }
+
         public string DebugShowPhrases
         {
-            get
-            {
-                return DebugSummary;
-            }
+            get { return DebugSummary; }
         }
 
         #endregion Constructors
@@ -249,10 +253,7 @@ namespace System.Speech.Recognition
         #region Public Properties
         public CultureInfo Culture
         {
-            get
-            {
-                return _culture;
-            }
+            get { return _culture; }
             set
             {
                 if (value == null)
@@ -340,20 +341,44 @@ namespace System.Speech.Recognition
             grammar.Append(builder2);
             return grammar;
         }
-        public static implicit operator GrammarBuilder(string phrase) { return new GrammarBuilder(phrase); }
-        public static implicit operator GrammarBuilder(Choices choices) { return new GrammarBuilder(choices); }
-        public static implicit operator GrammarBuilder(SemanticResultKey semanticKey) { return new GrammarBuilder(semanticKey); }
-        public static implicit operator GrammarBuilder(SemanticResultValue semanticValue) { return new GrammarBuilder(semanticValue); }
+
+        public static implicit operator GrammarBuilder(string phrase)
+        {
+            return new GrammarBuilder(phrase);
+        }
+
+        public static implicit operator GrammarBuilder(Choices choices)
+        {
+            return new GrammarBuilder(choices);
+        }
+
+        public static implicit operator GrammarBuilder(SemanticResultKey semanticKey)
+        {
+            return new GrammarBuilder(semanticKey);
+        }
+
+        public static implicit operator GrammarBuilder(SemanticResultValue semanticValue)
+        {
+            return new GrammarBuilder(semanticValue);
+        }
 
         #endregion
 
         #region Internal Methods
 
-        internal static void ValidateRepeatArguments(int minRepeat, int maxRepeat, string minParamName, string maxParamName)
+        internal static void ValidateRepeatArguments(
+            int minRepeat,
+            int maxRepeat,
+            string minParamName,
+            string maxParamName
+        )
         {
             if (minRepeat < 0)
             {
-                throw new ArgumentOutOfRangeException(minParamName, SR.Get(SRID.InvalidMinRepeat, minRepeat));
+                throw new ArgumentOutOfRangeException(
+                    minParamName,
+                    SR.Get(SRID.InvalidMinRepeat, minRepeat)
+                );
             }
             if (minRepeat > maxRepeat)
             {
@@ -361,7 +386,10 @@ namespace System.Speech.Recognition
             }
         }
 
-        internal static void ValidateSubsetMatchingCriteriaArgument(SubsetMatchingMode subsetMatchingCriteria, string paramName)
+        internal static void ValidateSubsetMatchingCriteriaArgument(
+            SubsetMatchingMode subsetMatchingCriteria,
+            string paramName
+        )
         {
             switch (subsetMatchingCriteria)
             {
@@ -435,10 +463,7 @@ namespace System.Speech.Recognition
 
         internal BuilderElements InternalBuilder
         {
-            get
-            {
-                return _grammarBuilder;
-            }
+            get { return _grammarBuilder; }
         }
 
         #endregion
@@ -476,7 +501,12 @@ namespace System.Speech.Recognition
                 return newGrammarbuilder;
             }
 
-            internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+            internal override IElement CreateElement(
+                IElementFactory elementFactory,
+                IElement parent,
+                IRule rule,
+                IdentifierCollection ruleIds
+            )
             {
                 Collection<RuleElement> newRules = new();
                 CalcCount(null);
@@ -492,10 +522,20 @@ namespace System.Speech.Recognition
 
                 // Set the grammar's root rule
                 elementFactory.Grammar.Root = rootId;
-                elementFactory.Grammar.TagFormat = System.Speech.Recognition.SrgsGrammar.SrgsTagFormat.KeyValuePairs;
+                elementFactory.Grammar.TagFormat = System
+                    .Speech
+                    .Recognition
+                    .SrgsGrammar
+                    .SrgsTagFormat
+                    .KeyValuePairs;
 
                 // Create the root rule
-                IRule root = elementFactory.Grammar.CreateRule(rootId, RulePublic.False, RuleDynamic.NotSet, false);
+                IRule root = elementFactory.Grammar.CreateRule(
+                    rootId,
+                    RulePublic.False,
+                    RuleDynamic.NotSet,
+                    false
+                );
 
                 // Create all the rules
                 foreach (GrammarBuilderBase item in Items)

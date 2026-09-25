@@ -7,10 +7,7 @@ namespace Internal.TypeSystem
     {
         public override PInvokeStringFormat PInvokeStringFormat
         {
-            get
-            {
-                return _typeDef.PInvokeStringFormat;
-            }
+            get { return _typeDef.PInvokeStringFormat; }
         }
     }
 }

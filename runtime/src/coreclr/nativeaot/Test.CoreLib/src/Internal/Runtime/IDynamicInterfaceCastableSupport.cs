@@ -9,13 +9,21 @@ namespace Internal.Runtime
     static unsafe class IDynamicCastableSupport
     {
         [RuntimeExport("IDynamicCastableIsInterfaceImplemented")]
-        internal static bool IDynamicCastableIsInterfaceImplemented(object instance, MethodTable* interfaceType, bool throwIfNotImplemented)
+        internal static bool IDynamicCastableIsInterfaceImplemented(
+            object instance,
+            MethodTable* interfaceType,
+            bool throwIfNotImplemented
+        )
         {
             return false;
         }
 
         [RuntimeExport("IDynamicCastableGetInterfaceImplementation")]
-        internal static IntPtr IDynamicCastableGetInterfaceImplementation(object instance, MethodTable* interfaceType, ushort slot)
+        internal static IntPtr IDynamicCastableGetInterfaceImplementation(
+            object instance,
+            MethodTable* interfaceType,
+            ushort slot
+        )
         {
             RuntimeImports.RhpFallbackFailFast();
             return default;

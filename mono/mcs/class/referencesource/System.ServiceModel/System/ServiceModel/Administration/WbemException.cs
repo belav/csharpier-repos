@@ -11,34 +11,38 @@ namespace System.ServiceModel.Administration
     internal class WbemException : Win32Exception
     {
         internal WbemException(WbemNative.WbemStatus hr)
-            : base((int)hr)
-        {
-        }
+            : base((int)hr) { }
 
         internal WbemException(int hr)
-            : base(hr)
-        {
-        }
+            : base(hr) { }
 
         internal WbemException(int hr, string message)
-            : base(hr, message)
-        {
-        }
+            : base(hr, message) { }
 
         internal static void Throw(WbemNative.WbemStatus hr)
         {
             switch (hr)
             {
                 case WbemNative.WbemStatus.WBEM_E_NOT_FOUND:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemInstanceNotFoundException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WbemInstanceNotFoundException()
+                    );
                 case WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemInvalidParameterException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WbemInvalidParameterException()
+                    );
                 case WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemNotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WbemNotSupportedException()
+                    );
                 case WbemNative.WbemStatus.WBEM_E_INVALID_METHOD:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemInvalidMethodException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WbemInvalidMethodException()
+                    );
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WbemException(hr));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WbemException(hr)
+                    );
             }
         }
 
@@ -54,37 +58,27 @@ namespace System.ServiceModel.Administration
     internal class WbemInstanceNotFoundException : WbemException
     {
         internal WbemInstanceNotFoundException()
-            : base(WbemNative.WbemStatus.WBEM_E_NOT_FOUND)
-        {
-        }
+            : base(WbemNative.WbemStatus.WBEM_E_NOT_FOUND) { }
     }
 
     internal class WbemInvalidParameterException : WbemException
     {
         internal WbemInvalidParameterException(string name)
-            : base((int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER, name)
-        {
-        }
+            : base((int)WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER, name) { }
 
         internal WbemInvalidParameterException()
-            : base(WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER)
-        {
-        }
+            : base(WbemNative.WbemStatus.WBEM_E_INVALID_PARAMETER) { }
     }
 
     internal class WbemNotSupportedException : WbemException
     {
         internal WbemNotSupportedException()
-            : base(WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED)
-        {
-        }
+            : base(WbemNative.WbemStatus.WBEM_E_NOT_SUPPORTED) { }
     }
 
     internal class WbemInvalidMethodException : WbemException
     {
         internal WbemInvalidMethodException()
-            : base(WbemNative.WbemStatus.WBEM_E_INVALID_METHOD)
-        {
-        }
+            : base(WbemNative.WbemStatus.WBEM_E_INVALID_METHOD) { }
     }
 }

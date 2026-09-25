@@ -22,9 +22,7 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Empty constructor for contact person.
         /// </summary>
-        public ContactPerson()
-        {
-        }
+        public ContactPerson() { }
 
         /// <summary>
         /// Creates a contact person object with the contact type.
@@ -86,6 +84,5 @@ namespace System.IdentityModel.Metadata
             get { return _type; }
             set { _type = value; }
         }
-
     }
 }

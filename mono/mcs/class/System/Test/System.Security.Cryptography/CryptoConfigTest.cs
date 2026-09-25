@@ -24,31 +24,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-
-
-using NUnit.Framework;
-
 using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
 namespace MonoTests.System.Security.Cryptography
 {
-
-	[TestFixture]
-	public class CryptoConfigTest
-	{
-		[Test]
-		[TestCase ("http://www.w3.org/2000/09/xmldsig#dsa-sha1")]
-		[TestCase ("http://www.w3.org/2000/09/xmldsig#rsa-sha1")]
-		[TestCase ("http://www.w3.org/2001/04/xmldsig-more#rsa-sha256")]
-		[TestCase ("http://www.w3.org/2001/04/xmldsig-more#rsa-sha384")]
-		[TestCase ("http://www.w3.org/2001/04/xmldsig-more#rsa-sha512")]
-		public void CryptoConfig_NonNullDigest (string name)
-		{
-			SignatureDescription signatureDescription = CryptoConfig.CreateFromName (name) as SignatureDescription;
-			Assert.NotNull (signatureDescription.CreateDigest ());
-		}
-	}
+    [TestFixture]
+    public class CryptoConfigTest
+    {
+        [Test]
+        [TestCase("http://www.w3.org/2000/09/xmldsig#dsa-sha1")]
+        [TestCase("http://www.w3.org/2000/09/xmldsig#rsa-sha1")]
+        [TestCase("http://www.w3.org/2001/04/xmldsig-more#rsa-sha256")]
+        [TestCase("http://www.w3.org/2001/04/xmldsig-more#rsa-sha384")]
+        [TestCase("http://www.w3.org/2001/04/xmldsig-more#rsa-sha512")]
+        public void CryptoConfig_NonNullDigest(string name)
+        {
+            SignatureDescription signatureDescription =
+                CryptoConfig.CreateFromName(name) as SignatureDescription;
+            Assert.NotNull(signatureDescription.CreateDigest());
+        }
+    }
 }
-

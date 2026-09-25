@@ -9,27 +9,28 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class DeleteBehaviorAttributeConvention : PropertyAttributeConventionBase<DeleteBehaviorAttribute>,
-    INavigationAddedConvention,
-    IForeignKeyPrincipalEndChangedConvention,
-    IComplexPropertyAddedConvention,
-    IModelFinalizingConvention
+public class DeleteBehaviorAttributeConvention
+    : PropertyAttributeConventionBase<DeleteBehaviorAttribute>,
+        INavigationAddedConvention,
+        IForeignKeyPrincipalEndChangedConvention,
+        IComplexPropertyAddedConvention,
+        IModelFinalizingConvention
 {
     /// <summary>
     ///     Initializes a new instance of the <see cref="DeleteBehaviorAttributeConvention" /> class.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public DeleteBehaviorAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
     public virtual void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
-        IConventionContext<IConventionNavigationBuilder> context)
+        IConventionContext<IConventionNavigationBuilder> context
+    )
     {
-        var navAttribute = navigationBuilder.Metadata.PropertyInfo?.GetCustomAttribute<DeleteBehaviorAttribute>();
+        var navAttribute =
+            navigationBuilder.Metadata.PropertyInfo?.GetCustomAttribute<DeleteBehaviorAttribute>();
         if (navAttribute == null)
         {
             return;
@@ -47,7 +48,8 @@ public class DeleteBehaviorAttributeConvention : PropertyAttributeConventionBase
     /// <inheritdoc />
     public virtual void ProcessForeignKeyPrincipalEndChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<IConventionForeignKeyBuilder> context)
+        IConventionContext<IConventionForeignKeyBuilder> context
+    )
     {
         if (!relationshipBuilder.Metadata.IsUnique)
         {
@@ -65,7 +67,10 @@ public class DeleteBehaviorAttributeConvention : PropertyAttributeConventionBase
     }
 
     /// <inheritdoc />
-    public virtual void ProcessModelFinalizing(IConventionModelBuilder modelBuilder, IConventionContext<IConventionModelBuilder> context)
+    public virtual void ProcessModelFinalizing(
+        IConventionModelBuilder modelBuilder,
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
@@ -76,12 +81,16 @@ public class DeleteBehaviorAttributeConvention : PropertyAttributeConventionBase
                     return;
                 }
 
-                var navAttribute = navigation.PropertyInfo?.GetCustomAttribute<DeleteBehaviorAttribute>();
+                var navAttribute =
+                    navigation.PropertyInfo?.GetCustomAttribute<DeleteBehaviorAttribute>();
                 if (navAttribute != null)
                 {
                     throw new InvalidOperationException(
                         CoreStrings.DeleteBehaviorAttributeOnPrincipalProperty(
-                            navigation.DeclaringEntityType.DisplayName(), navigation.Name));
+                            navigation.DeclaringEntityType.DisplayName(),
+                            navigation.Name
+                        )
+                    );
                 }
             }
         }
@@ -92,12 +101,16 @@ public class DeleteBehaviorAttributeConvention : PropertyAttributeConventionBase
         IConventionPropertyBuilder propertyBuilder,
         DeleteBehaviorAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         var property = propertyBuilder.Metadata;
         throw new InvalidOperationException(
             CoreStrings.DeleteBehaviorAttributeNotOnNavigationProperty(
-                property.DeclaringType.DisplayName(), property.Name));
+                property.DeclaringType.DisplayName(),
+                property.Name
+            )
+        );
     }
 
     /// <inheritdoc />
@@ -105,11 +118,15 @@ public class DeleteBehaviorAttributeConvention : PropertyAttributeConventionBase
         IConventionComplexPropertyBuilder propertyBuilder,
         DeleteBehaviorAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         var property = propertyBuilder.Metadata;
         throw new InvalidOperationException(
             CoreStrings.DeleteBehaviorAttributeNotOnNavigationProperty(
-                property.DeclaringType.DisplayName(), property.Name));
+                property.DeclaringType.DisplayName(),
+                property.Name
+            )
+        );
     }
 }

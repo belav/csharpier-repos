@@ -23,18 +23,28 @@ namespace System.Web.Mvc.Async
         /// <summary>
         /// dictionary to hold methods that can read Task{T}.Result
         /// </summary>
-        private static readonly ConcurrentDictionary<Type, Func<object, object>> _taskValueExtractors = new ConcurrentDictionary<Type, Func<object, object>>();
+        private static readonly ConcurrentDictionary<
+            Type,
+            Func<object, object>
+        > _taskValueExtractors = new ConcurrentDictionary<Type, Func<object, object>>();
         private readonly string _actionName;
         private readonly ControllerDescriptor _controllerDescriptor;
         private readonly Lazy<string> _uniqueId;
         private ParameterDescriptor[] _parametersCache;
 
-        public TaskAsyncActionDescriptor(MethodInfo taskMethodInfo, string actionName, ControllerDescriptor controllerDescriptor)
-            : this(taskMethodInfo, actionName, controllerDescriptor, validateMethod: true)
-        {
-        }
+        public TaskAsyncActionDescriptor(
+            MethodInfo taskMethodInfo,
+            string actionName,
+            ControllerDescriptor controllerDescriptor
+        )
+            : this(taskMethodInfo, actionName, controllerDescriptor, validateMethod: true) { }
 
-        internal TaskAsyncActionDescriptor(MethodInfo taskMethodInfo, string actionName, ControllerDescriptor controllerDescriptor, bool validateMethod)
+        internal TaskAsyncActionDescriptor(
+            MethodInfo taskMethodInfo,
+            string actionName,
+            ControllerDescriptor controllerDescriptor,
+            bool validateMethod
+        )
         {
             if (taskMethodInfo == null)
             {
@@ -93,8 +103,17 @@ namespace System.Web.Mvc.Async
             return builder.ToString();
         }
 
-        [SuppressMessage("Microsoft.Web.FxCop", "MW1201:DoNotCallProblematicMethodsOnTask", Justification = "This is commented in great detail.")]
-        public override IAsyncResult BeginExecute(ControllerContext controllerContext, IDictionary<string, object> parameters, AsyncCallback callback, object state)
+        [SuppressMessage(
+            "Microsoft.Web.FxCop",
+            "MW1201:DoNotCallProblematicMethodsOnTask",
+            Justification = "This is commented in great detail."
+        )]
+        public override IAsyncResult BeginExecute(
+            ControllerContext controllerContext,
+            IDictionary<string, object> parameters,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (controllerContext == null)
             {
@@ -106,8 +125,9 @@ namespace System.Web.Mvc.Async
             }
 
             ParameterInfo[] parameterInfos = TaskMethodInfo.GetParameters();
-            var rawParameterValues = from parameterInfo in parameterInfos
-                                     select ExtractParameterFromDictionary(parameterInfo, parameters, TaskMethodInfo);
+            var rawParameterValues =
+                from parameterInfo in parameterInfos
+                select ExtractParameterFromDictionary(parameterInfo, parameters, TaskMethodInfo);
             object[] parametersArray = rawParameterValues.ToArray();
 
             CancellationTokenSource tokenSource = null;
@@ -135,19 +155,25 @@ namespace System.Web.Mvc.Async
 
             if (taskCancelledTimerRequired)
             {
-                taskCancelledTimer = new Timer(_ =>
-                {
-                    lock (tokenSource)
+                taskCancelledTimer = new Timer(
+                    _ =>
                     {
-                        if (!disposedTimer)
+                        lock (tokenSource)
                         {
-                            tokenSource.Cancel();
+                            if (!disposedTimer)
+                            {
+                                tokenSource.Cancel();
+                            }
                         }
-                    }
-                }, state: null, dueTime: timeout, period: Timeout.Infinite);
+                    },
+                    state: null,
+                    dueTime: timeout,
+                    period: Timeout.Infinite
+                );
             }
 
-            Task taskUser = dispatcher.Execute(controllerContext.Controller, parametersArray) as Task;
+            Task taskUser =
+                dispatcher.Execute(controllerContext.Controller, parametersArray) as Task;
             Action cleanupAtEndExecute = () =>
             {
                 // Cleanup code that's run in EndExecute, after we've waited on the task value.
@@ -174,7 +200,11 @@ namespace System.Web.Mvc.Async
                 }
             };
 
-            TaskWrapperAsyncResult result = new TaskWrapperAsyncResult(taskUser, state, cleanupAtEndExecute);
+            TaskWrapperAsyncResult result = new TaskWrapperAsyncResult(
+                taskUser,
+                state,
+                cleanupAtEndExecute
+            );
 
             // if user supplied a callback, invoke that when their task has finished running.
             if (callback != null)
@@ -210,10 +240,16 @@ namespace System.Web.Mvc.Async
             return result;
         }
 
-        public override object Execute(ControllerContext controllerContext, IDictionary<string, object> parameters)
+        public override object Execute(
+            ControllerContext controllerContext,
+            IDictionary<string, object> parameters
+        )
         {
-            string errorMessage = String.Format(CultureInfo.CurrentCulture, MvcResources.TaskAsyncActionDescriptor_CannotExecuteSynchronously,
-                                                ActionName);
+            string errorMessage = String.Format(
+                CultureInfo.CurrentCulture,
+                MvcResources.TaskAsyncActionDescriptor_CannotExecuteSynchronously,
+                ActionName
+            );
 
             throw new InvalidOperationException(errorMessage);
         }
@@ -236,7 +272,10 @@ namespace System.Web.Mvc.Async
             }
 
             // Extract the result of the task if there is a result
-            return _taskValueExtractors.GetOrAdd(TaskMethodInfo.ReturnType, CreateTaskValueExtractor)(wrapperResult.Task);
+            return _taskValueExtractors.GetOrAdd(
+                TaskMethodInfo.ReturnType,
+                CreateTaskValueExtractor
+            )(wrapperResult.Task);
         }
 
         private static Func<object, object> CreateTaskValueExtractor(Type taskType)
@@ -267,7 +306,11 @@ namespace System.Web.Mvc.Async
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
-            return ActionDescriptorHelper.GetCustomAttributes(TaskMethodInfo, attributeType, inherit);
+            return ActionDescriptorHelper.GetCustomAttributes(
+                TaskMethodInfo,
+                attributeType,
+                inherit
+            );
         }
 
         public override ParameterDescriptor[] GetParameters()

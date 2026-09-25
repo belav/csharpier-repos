@@ -36,26 +36,34 @@ namespace System.ServiceModel.Web
         }
 
         public string Accept
-        { 
-            get { return EnsureMessageProperty().Headers[HttpRequestHeader.Accept]; } 
+        {
+            get { return EnsureMessageProperty().Headers[HttpRequestHeader.Accept]; }
         }
 
         public long ContentLength
-        { 
-            get { return long.Parse(this.EnsureMessageProperty().Headers[HttpRequestHeader.ContentLength], CultureInfo.InvariantCulture); } 
+        {
+            get
+            {
+                return long.Parse(
+                    this.EnsureMessageProperty().Headers[HttpRequestHeader.ContentLength],
+                    CultureInfo.InvariantCulture
+                );
+            }
         }
 
         public string ContentType
-        { 
-            get { return this.EnsureMessageProperty().Headers[HttpRequestHeader.ContentType]; } 
+        {
+            get { return this.EnsureMessageProperty().Headers[HttpRequestHeader.ContentType]; }
         }
 
         public IEnumerable<string> IfMatch
         {
-            get 
-            { 
+            get
+            {
                 string ifMatchHeader = MessageProperty.Headers[HttpRequestHeader.IfMatch];
-                return (string.IsNullOrEmpty(ifMatchHeader)) ? null : Utility.QuoteAwareStringSplit(ifMatchHeader);
+                return (string.IsNullOrEmpty(ifMatchHeader))
+                    ? null
+                    : Utility.QuoteAwareStringSplit(ifMatchHeader);
             }
         }
 
@@ -64,14 +72,16 @@ namespace System.ServiceModel.Web
             get
             {
                 string ifNoneMatchHeader = MessageProperty.Headers[HttpRequestHeader.IfNoneMatch];
-                return (string.IsNullOrEmpty(ifNoneMatchHeader)) ? null : Utility.QuoteAwareStringSplit(ifNoneMatchHeader);
+                return (string.IsNullOrEmpty(ifNoneMatchHeader))
+                    ? null
+                    : Utility.QuoteAwareStringSplit(ifNoneMatchHeader);
             }
         }
 
         public DateTime? IfModifiedSince
         {
-            get 
-            { 
+            get
+            {
                 string dateTime = this.MessageProperty.Headers[HttpRequestHeader.IfModifiedSince];
                 if (!string.IsNullOrEmpty(dateTime))
                 {
@@ -87,8 +97,8 @@ namespace System.ServiceModel.Web
 
         public DateTime? IfUnmodifiedSince
         {
-            get 
-            { 
+            get
+            {
                 string dateTime = this.MessageProperty.Headers[HttpRequestHeader.IfUnmodifiedSince];
                 if (!string.IsNullOrEmpty(dateTime))
                 {
@@ -103,22 +113,28 @@ namespace System.ServiceModel.Web
         }
 
         public WebHeaderCollection Headers
-        { 
-            get { return this.EnsureMessageProperty().Headers; } 
+        {
+            get { return this.EnsureMessageProperty().Headers; }
         }
 
         public string Method
-        { 
-            get { return this.EnsureMessageProperty().Method; } 
+        {
+            get { return this.EnsureMessageProperty().Method; }
         }
 
         public UriTemplateMatch UriTemplateMatch
         {
             get
             {
-                if (this.operationContext.IncomingMessageProperties.ContainsKey(UriTemplateMatchResultsPropertyName))
+                if (
+                    this.operationContext.IncomingMessageProperties.ContainsKey(
+                        UriTemplateMatchResultsPropertyName
+                    )
+                )
                 {
-                    return this.operationContext.IncomingMessageProperties[UriTemplateMatchResultsPropertyName] as UriTemplateMatch;
+                    return this.operationContext.IncomingMessageProperties[
+                            UriTemplateMatchResultsPropertyName
+                        ] as UriTemplateMatch;
                 }
                 else
                 {
@@ -127,13 +143,15 @@ namespace System.ServiceModel.Web
             }
             set
             {
-                this.operationContext.IncomingMessageProperties[UriTemplateMatchResultsPropertyName] = value;
+                this.operationContext.IncomingMessageProperties[
+                    UriTemplateMatchResultsPropertyName
+                ] = value;
             }
         }
 
         public string UserAgent
-        { 
-            get { return this.EnsureMessageProperty().Headers[HttpRequestHeader.UserAgent]; } 
+        {
+            get { return this.EnsureMessageProperty().Headers[HttpRequestHeader.UserAgent]; }
         }
 
         HttpRequestMessageProperty MessageProperty
@@ -144,11 +162,16 @@ namespace System.ServiceModel.Web
                 {
                     return null;
                 }
-                if (!operationContext.IncomingMessageProperties.ContainsKey(HttpRequestMessageProperty.Name))
+                if (
+                    !operationContext.IncomingMessageProperties.ContainsKey(
+                        HttpRequestMessageProperty.Name
+                    )
+                )
                 {
                     return null;
                 }
-                return operationContext.IncomingMessageProperties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
+                return operationContext.IncomingMessageProperties[HttpRequestMessageProperty.Name]
+                    as HttpRequestMessageProperty;
             }
         }
 
@@ -178,23 +201,40 @@ namespace System.ServiceModel.Web
 
         public void CheckConditionalRetrieve(DateTime lastModified)
         {
-            if (!string.Equals(this.Method, IncomingWebRequestContext.HttpGetMethod, StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(this.Method, IncomingWebRequestContext.HttpHeadMethod, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(
+                    this.Method,
+                    IncomingWebRequestContext.HttpGetMethod,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && !string.Equals(
+                    this.Method,
+                    IncomingWebRequestContext.HttpHeadMethod,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.ConditionalRetrieveGetAndHeadOnly, this.Method)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.ConditionalRetrieveGetAndHeadOnly, this.Method)
+                    )
+                );
             }
 
             DateTime? ifModifiedSince = this.IfModifiedSince;
             if (ifModifiedSince.HasValue)
             {
-                long ticksDifference = lastModified.ToUniversalTime().Ticks - ifModifiedSince.Value.ToUniversalTime().Ticks;
+                long ticksDifference =
+                    lastModified.ToUniversalTime().Ticks
+                    - ifModifiedSince.Value.ToUniversalTime().Ticks;
                 if (ticksDifference < TimeSpan.TicksPerSecond)
                 {
                     WebOperationContext.Current.OutgoingResponse.LastModified = lastModified;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WebFaultException(HttpStatusCode.NotModified));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WebFaultException(HttpStatusCode.NotModified)
+                    );
                 }
-            }            
+            }
         }
 
         public void CheckConditionalUpdate(string entityTag)
@@ -224,8 +264,16 @@ namespace System.ServiceModel.Web
         public Collection<ContentType> GetAcceptHeaderElements()
         {
             string acceptHeader = this.Accept;
-            if (cachedAcceptHeaderElements == null ||
-                (!string.Equals(acceptHeaderWhenHeaderElementsCached, acceptHeader, StringComparison.OrdinalIgnoreCase)))
+            if (
+                cachedAcceptHeaderElements == null
+                || (
+                    !string.Equals(
+                        acceptHeaderWhenHeaderElementsCached,
+                        acceptHeader,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+            )
             {
                 if (string.IsNullOrEmpty(acceptHeader))
                 {
@@ -250,7 +298,7 @@ namespace System.ServiceModel.Web
                             contentTypeList.Add(contentType);
                         }
                     }
-                    
+
                     contentTypeList.Sort(new AcceptHeaderElementComparer());
                     cachedAcceptHeaderElements = new Collection<ContentType>(contentTypeList);
                     acceptHeaderWhenHeaderElementsCached = acceptHeader;
@@ -263,76 +311,123 @@ namespace System.ServiceModel.Web
         {
             if (this.MessageProperty == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.HttpContextNoIncomingMessageProperty, typeof(HttpRequestMessageProperty).Name)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.HttpContextNoIncomingMessageProperty,
+                            typeof(HttpRequestMessageProperty).Name
+                        )
+                    )
+                );
             }
             return this.MessageProperty;
         }
 
-
         void CheckConditionalRetrieveWithValidatedEtag(string entityTag)
         {
-            if (!string.Equals(this.Method, IncomingWebRequestContext.HttpGetMethod, StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(this.Method, IncomingWebRequestContext.HttpHeadMethod, StringComparison.OrdinalIgnoreCase))
+            if (
+                !string.Equals(
+                    this.Method,
+                    IncomingWebRequestContext.HttpGetMethod,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && !string.Equals(
+                    this.Method,
+                    IncomingWebRequestContext.HttpHeadMethod,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.ConditionalRetrieveGetAndHeadOnly, this.Method)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.ConditionalRetrieveGetAndHeadOnly, this.Method)
+                    )
+                );
             }
 
             if (!string.IsNullOrEmpty(entityTag))
-            {               
+            {
                 string entityTagHeader = this.Headers[HttpRequestHeader.IfNoneMatch];
                 if (!string.IsNullOrEmpty(entityTagHeader))
                 {
-                    if (IsWildCardCharacter(entityTagHeader) ||
-                        DoesHeaderContainEtag(entityTagHeader, entityTag))
+                    if (
+                        IsWildCardCharacter(entityTagHeader)
+                        || DoesHeaderContainEtag(entityTagHeader, entityTag)
+                    )
                     {
                         // set response entityTag directly because it has already been validated
                         WebOperationContext.Current.OutgoingResponse.ETag = entityTag;
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WebFaultException(HttpStatusCode.NotModified));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new WebFaultException(HttpStatusCode.NotModified)
+                        );
                     }
-                }               
+                }
             }
         }
 
         void CheckConditionalUpdateWithValidatedEtag(string entityTag)
         {
-            bool isPutMethod = string.Equals(this.Method, IncomingWebRequestContext.HttpPutMethod, StringComparison.OrdinalIgnoreCase);
-            if (!isPutMethod &&
-                !string.Equals(this.Method, IncomingWebRequestContext.HttpPostMethod, StringComparison.OrdinalIgnoreCase) &&
-                !string.Equals(this.Method, IncomingWebRequestContext.HttpDeleteMethod, StringComparison.OrdinalIgnoreCase))
+            bool isPutMethod = string.Equals(
+                this.Method,
+                IncomingWebRequestContext.HttpPutMethod,
+                StringComparison.OrdinalIgnoreCase
+            );
+            if (
+                !isPutMethod
+                && !string.Equals(
+                    this.Method,
+                    IncomingWebRequestContext.HttpPostMethod,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                && !string.Equals(
+                    this.Method,
+                    IncomingWebRequestContext.HttpDeleteMethod,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR2.GetString(SR2.ConditionalUpdatePutPostAndDeleteOnly, this.Method)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.ConditionalUpdatePutPostAndDeleteOnly, this.Method)
+                    )
+                );
             }
 
             string headerOfInterest;
 
             // if the current entityTag is null then the resource doesn't currently exist and the
-            //   a PUT request should only succeed if If-None-Match equals '*'.  
+            //   a PUT request should only succeed if If-None-Match equals '*'.
             if (isPutMethod && string.IsNullOrEmpty(entityTag))
             {
                 headerOfInterest = this.Headers[HttpRequestHeader.IfNoneMatch];
-                if (string.IsNullOrEmpty(headerOfInterest) ||
-                    !IsWildCardCharacter(headerOfInterest))
+                if (
+                    string.IsNullOrEmpty(headerOfInterest) || !IsWildCardCharacter(headerOfInterest)
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WebFaultException(HttpStatusCode.PreconditionFailed));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WebFaultException(HttpStatusCode.PreconditionFailed)
+                    );
                 }
             }
             else
             {
                 // all remaining cases are with an If-Match header
                 headerOfInterest = this.Headers[HttpRequestHeader.IfMatch];
-                if (string.IsNullOrEmpty(headerOfInterest) ||
-                    (!IsWildCardCharacter(headerOfInterest) &&
-                    !DoesHeaderContainEtag(headerOfInterest, entityTag)))
+                if (
+                    string.IsNullOrEmpty(headerOfInterest)
+                    || (
+                        !IsWildCardCharacter(headerOfInterest)
+                        && !DoesHeaderContainEtag(headerOfInterest, entityTag)
+                    )
+                )
                 {
                     // set response entityTag directly because it has already been validated
                     WebOperationContext.Current.OutgoingResponse.ETag = entityTag;
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new WebFaultException(HttpStatusCode.PreconditionFailed));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new WebFaultException(HttpStatusCode.PreconditionFailed)
+                    );
                 }
             }
-            
         }
 
         static bool DoesHeaderContainEtag(string header, string entityTag)
@@ -369,12 +464,24 @@ namespace System.ServiceModel.Web
             string[] xTypeSubType = x.MediaType.Split('/');
             string[] yTypeSubType = y.MediaType.Split('/');
 
-            Fx.Assert(xTypeSubType.Length == 2, "The creation of the ContentType would have failed if there wasn't a type and subtype.");
-            Fx.Assert(yTypeSubType.Length == 2, "The creation of the ContentType would have failed if there wasn't a type and subtype.");
+            Fx.Assert(
+                xTypeSubType.Length == 2,
+                "The creation of the ContentType would have failed if there wasn't a type and subtype."
+            );
+            Fx.Assert(
+                yTypeSubType.Length == 2,
+                "The creation of the ContentType would have failed if there wasn't a type and subtype."
+            );
 
             if (string.Equals(xTypeSubType[0], yTypeSubType[0], StringComparison.OrdinalIgnoreCase))
             {
-                if (string.Equals(xTypeSubType[1], yTypeSubType[1], StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        xTypeSubType[1],
+                        yTypeSubType[1],
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // need to check the number of parameters to determine which is more specific
                     bool xHasParam = HasParameters(x);
@@ -428,8 +535,14 @@ namespace System.ServiceModel.Web
             {
                 if (string.Equals("q", key, StringComparison.OrdinalIgnoreCase))
                 {
-                    if (decimal.TryParse(contentType.Parameters[key], numberStyles, CultureInfo.InvariantCulture, out result) &&
-                        (result <= (decimal)1.0))
+                    if (
+                        decimal.TryParse(
+                            contentType.Parameters[key],
+                            numberStyles,
+                            CultureInfo.InvariantCulture,
+                            out result
+                        ) && (result <= (decimal)1.0)
+                    )
                     {
                         return result;
                     }

@@ -13,17 +13,27 @@ namespace System.Activities.Runtime
     class ActivityCompletionCallbackWrapper : CompletionCallbackWrapper
     {
         static readonly Type completionCallbackType = typeof(CompletionCallback);
-        static readonly Type[] completionCallbackParameters = new Type[] { typeof(NativeActivityContext), typeof(ActivityInstance) };
-
-        public ActivityCompletionCallbackWrapper(CompletionCallback callback, ActivityInstance owningInstance)
-            : base(callback, owningInstance)
+        static readonly Type[] completionCallbackParameters = new Type[]
         {
-        }
+            typeof(NativeActivityContext),
+            typeof(ActivityInstance),
+        };
 
-        [Fx.Tag.SecurityNote(Critical = "Because we are calling EnsureCallback",
-            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT.")]
+        public ActivityCompletionCallbackWrapper(
+            CompletionCallback callback,
+            ActivityInstance owningInstance
+        )
+            : base(callback, owningInstance) { }
+
+        [Fx.Tag.SecurityNote(
+            Critical = "Because we are calling EnsureCallback",
+            Safe = "Safe because the method needs to be part of an Activity and we are casting to the callback type and it has a very specific signature. The author of the callback is buying into being invoked from PT."
+        )]
         [SecuritySafeCritical]
-        protected internal override void Invoke(NativeActivityContext context, ActivityInstance completedInstance)
+        protected internal override void Invoke(
+            NativeActivityContext context,
+            ActivityInstance completedInstance
+        )
         {
             EnsureCallback(completionCallbackType, completionCallbackParameters);
             CompletionCallback completionCallback = (CompletionCallback)this.Callback;

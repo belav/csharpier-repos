@@ -26,35 +26,23 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Utilities
         /// setting up the main thread. This property improves the ability to detect incorrectly configured tests (where
         /// a main thread is expected but not provided) and produce a meaningful error for developers.</para>
         /// </remarks>
-        bool HasMainThread
-        {
-            get;
-        }
+        bool HasMainThread { get; }
 
         /// <summary>
         /// Gets the <see cref="VisualStudio.Threading.JoinableTaskContext"/> for use in Roslyn code.
         /// </summary>
-        JoinableTaskContext JoinableTaskContext
-        {
-            get;
-        }
+        JoinableTaskContext JoinableTaskContext { get; }
 
         /// <summary>
         /// Gets the <see cref="VisualStudio.Threading.JoinableTaskFactory"/> for use in Roslyn code.
         /// </summary>
-        JoinableTaskFactory JoinableTaskFactory
-        {
-            get;
-        }
+        JoinableTaskFactory JoinableTaskFactory { get; }
 
         /// <summary>
         /// Gets a <see cref="CancellationToken"/> indicating that disposal has been requested for the threading
         /// context.
         /// </summary>
-        CancellationToken DisposalToken
-        {
-            get;
-        }
+        CancellationToken DisposalToken { get; }
 
         /// <summary>
         /// Runs an asynchronous operation. If the operation is not complete prior to the time the threading context is

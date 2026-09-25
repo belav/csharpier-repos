@@ -16,14 +16,10 @@ namespace Microsoft.Test.ModuleCore
     {
         //Constructor
         public TestSkippedException(string message)
-            : this(message, false, true, null)
-        {
-        }
+            : this(message, false, true, null) { }
 
         public TestSkippedException(string message, object actual, object expected, Exception inner)
-            : base(TestResult.Skipped, message, actual, expected, inner)
-        {
-        }
+            : base(TestResult.Skipped, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -34,14 +30,10 @@ namespace Microsoft.Test.ModuleCore
     {
         //Constructor
         public TestFailedException(string message)
-            : this(message, false, true, null)
-        {
-        }
+            : this(message, false, true, null) { }
 
         public TestFailedException(string message, object actual, object expected, Exception inner)
-            : base(TestResult.Failed, message, actual, expected, inner)
-        {
-        }
+            : base(TestResult.Failed, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -52,14 +44,10 @@ namespace Microsoft.Test.ModuleCore
     {
         //Constructor
         public TestWarningException(string message)
-            : this(message, false, true, null)
-        {
-        }
+            : this(message, false, true, null) { }
 
         public TestWarningException(string message, object actual, object expected, Exception inner)
-            : base(TestResult.Warning, message, actual, expected, inner)
-        {
-        }
+            : base(TestResult.Warning, message, actual, expected, inner) { }
     }
 
     ////////////////////////////////////////////////////////////////
@@ -76,11 +64,15 @@ namespace Microsoft.Test.ModuleCore
 
         //Constructor
         public TestException(TestResult result, string message)
-            : this(result, message, false, true, null)
-        {
-        }
+            : this(result, message, false, true, null) { }
 
-        public TestException(TestResult result, string message, object actual, object expected, Exception inner)
+        public TestException(
+            TestResult result,
+            string message,
+            object actual,
+            object expected,
+            Exception inner
+        )
             : base(message, inner)
         {
             //Note: iResult is the variation result (ie: TEST_PASS, TEST_FAIL, etc...)

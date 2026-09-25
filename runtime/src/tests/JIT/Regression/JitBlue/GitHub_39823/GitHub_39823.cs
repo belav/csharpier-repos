@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 public class Runtime_39823
@@ -22,7 +22,6 @@ public class Runtime_39823
         IntsWrapped s = *ps;
         return 100;
     }
-
 
     [Fact]
     public static unsafe int TestEntryPoint()

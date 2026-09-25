@@ -14,7 +14,10 @@ namespace Span
     class Sink
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static Sink NewSink() { return new Sink(); }
+        public static Sink NewSink()
+        {
+            return new Sink();
+        }
 
         public byte b;
         public int i;
@@ -23,9 +26,8 @@ namespace Span
     [AttributeUsage(AttributeTargets.Method, Inherited = false)]
     class BenchmarkAttribute : Attribute
     {
-        public BenchmarkAttribute()
-        {
-        }
+        public BenchmarkAttribute() { }
+
         private long _innerIterationsCount = 1;
         public long InnerIterationCount
         {
@@ -42,6 +44,7 @@ namespace Span
         {
             _data = data;
         }
+
         int _data;
         public int Data
         {
@@ -57,6 +60,7 @@ namespace Span
         {
             _name = name;
         }
+
         string _name;
         public string Name => _name;
     }
@@ -75,17 +79,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestRef(s);
-                }
-                return result;
-            },
-            "Ref({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestRef(s);
+                    }
+                    return result;
+                },
+                "Ref({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -110,17 +117,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestFixed1(s);
-                }
-                return result;
-            },
-            "Fixed1({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestFixed1(s);
+                    }
+                    return result;
+                },
+                "Fixed1({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -148,17 +158,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestFixed2(s);
-                }
-                return result;
-            },
-            "Fixed2({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestFixed2(s);
+                    }
+                    return result;
+                },
+                "Fixed2({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -185,17 +198,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestIndexer1(s);
-                }
-                return result;
-            },
-            "Indexer1({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestIndexer1(s);
+                    }
+                    return result;
+                },
+                "Indexer1({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -219,17 +235,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestIndexer2(s);
-                }
-                return result;
-            },
-            "Indexer2({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestIndexer2(s);
+                    }
+                    return result;
+                },
+                "Indexer2({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -252,17 +271,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestIndexer3(s);
-                }
-                return result;
-            },
-            "Indexer3({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestIndexer3(s);
+                    }
+                    return result;
+                },
+                "Indexer3({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -280,25 +302,28 @@ namespace Span
             return x;
         }
 
-        [Benchmark(InnerIterationCount=Iterations / 10)]
+        [Benchmark(InnerIterationCount = Iterations / 10)]
         [InlineData(DefaultLength)]
         [Category("Indexer in-loop bounds check elimination")]
         public static void Indexer4(int length)
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                int inner = Math.Max(1, innerIterationCount);
-                for (int i = 0; i < inner ; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestIndexer4(s, 10);
-                }
-                return result;
-            },
-            "Indexer4({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    int inner = Math.Max(1, innerIterationCount);
+                    for (int i = 0; i < inner; ++i)
+                    {
+                        result = TestIndexer4(s, 10);
+                    }
+                    return result;
+                },
+                "Indexer4({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -330,17 +355,20 @@ namespace Span
             byte[] a = GetData(length);
             int z = 0;
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestIndexer5(s, out z);
-                }
-                return result;
-            },
-            "Indexer5({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestIndexer5(s, out z);
+                    }
+                    return result;
+                },
+                "Indexer5({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -367,17 +395,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestIndexer6(s);
-                }
-                return result;
-            },
-            "Indexer6({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestIndexer6(s);
+                    }
+                    return result;
+                },
+                "Indexer6({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -404,17 +435,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestReadOnlyIndexer1(s);
-                }
-                return result;
-            },
-            "ReadOnlyIndexer1({0})", length);
+                    ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestReadOnlyIndexer1(s);
+                    }
+                    return result;
+                },
+                "ReadOnlyIndexer1({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -438,17 +472,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestReadOnlyIndexer2(s);
-                }
-                return result;
-            },
-            "ReadOnlyIndexer2({0})", length);
+                    ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestReadOnlyIndexer2(s);
+                    }
+                    return result;
+                },
+                "ReadOnlyIndexer2({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -471,17 +508,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestWriteViaIndexer1(s);
-                }
-                return result;
-            },
-            "WriteViaIndexer1({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestWriteViaIndexer1(s);
+                    }
+                    return result;
+                },
+                "WriteViaIndexer1({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -507,17 +547,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestWriteViaIndexer2(s, 0, length);
-                }
-                return result;
-            },
-            "WriteViaIndexer2({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestWriteViaIndexer2(s, 0, length);
+                    }
+                    return result;
+                },
+                "WriteViaIndexer2({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -546,12 +589,15 @@ namespace Span
                 throw new Exception("test requires 1024 byte length");
             }
 
-            Invoke((int innerIterationCount) =>
-            {
-                byte result = TestKnownSizeArray(innerIterationCount);
-                return result;
-            },
-            "KnownSizeArray({0})", length);
+            Invoke(
+                (int innerIterationCount) =>
+                {
+                    byte result = TestKnownSizeArray(innerIterationCount);
+                    return result;
+                },
+                "KnownSizeArray({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -586,12 +632,15 @@ namespace Span
 
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                byte result = TestKnownSizeCtor(a, innerIterationCount);
-                return result;
-            },
-            "KnownSizeCtor({0})", length);
+            Invoke(
+                (int innerIterationCount) =>
+                {
+                    byte result = TestKnownSizeCtor(a, innerIterationCount);
+                    return result;
+                },
+                "KnownSizeCtor({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -624,12 +673,15 @@ namespace Span
 
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                byte result = TestKnownSizeCtor2(a, innerIterationCount);
-                return result;
-            },
-            "KnownSizeCtor2({0})", length);
+            Invoke(
+                (int innerIterationCount) =>
+                {
+                    byte result = TestKnownSizeCtor2(a, innerIterationCount);
+                    return result;
+                },
+                "KnownSizeCtor2({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -662,17 +714,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestSameIndex1(s, 0, length);
-                }
-                return result;
-            },
-            "SameIndex1({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestSameIndex1(s, 0, length);
+                    }
+                    return result;
+                },
+                "SameIndex1({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -699,17 +754,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestSameIndex2(s, ref s[0], 0, length);
-                }
-                return result;
-            },
-            "SameIndex2({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestSameIndex2(s, ref s[0], 0, length);
+                    }
+                    return result;
+                },
+                "SameIndex2({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -746,17 +804,20 @@ namespace Span
 
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestCoveredIndex1(s, 0, length);
-                }
-                return result;
-            },
-            "CoveredIndex1({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestCoveredIndex1(s, 0, length);
+                    }
+                    return result;
+                },
+                "CoveredIndex1({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -789,17 +850,20 @@ namespace Span
         {
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestCoveredIndex2(s, 0, length);
-                }
-                return result;
-            },
-            "CoveredIndex2({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestCoveredIndex2(s, 0, length);
+                    }
+                    return result;
+                },
+                "CoveredIndex2({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -836,17 +900,20 @@ namespace Span
 
             byte[] a = GetData(length);
 
-            Invoke((int innerIterationCount) =>
-            {
-                Span<byte> s = new Span<byte>(a);
-                byte result = 0;
-                for (int i = 0; i < innerIterationCount; ++i)
+            Invoke(
+                (int innerIterationCount) =>
                 {
-                    result = TestCoveredIndex3(s, 0, length);
-                }
-                return result;
-            },
-            "CoveredIndex3({0})", length);
+                    Span<byte> s = new Span<byte>(a);
+                    byte result = 0;
+                    for (int i = 0; i < innerIterationCount; ++i)
+                    {
+                        result = TestCoveredIndex3(s, 0, length);
+                    }
+                    return result;
+                },
+                "CoveredIndex3({0})",
+                length
+            );
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -953,14 +1020,18 @@ namespace Span
                     }
                 }
 
-                Console.WriteLine("Running as command line perf test: {0} iterations",
-                    CommandLineInnerIterationCount);
+                Console.WriteLine(
+                    "Running as command line perf test: {0} iterations",
+                    CommandLineInnerIterationCount
+                );
                 Console.WriteLine();
             }
             else
             {
-                Console.WriteLine("Running as correctness test: {0} iterations",
-                    CommandLineInnerIterationCount);
+                Console.WriteLine(
+                    "Running as correctness test: {0} iterations",
+                    CommandLineInnerIterationCount
+                );
                 Usage();
             }
 
@@ -970,7 +1041,7 @@ namespace Span
             var testsByCategory = new Dictionary<string, List<MethodInfo>>();
 
             // Do a first pass to find out what categories of benchmarks we have.
-            foreach(MethodInfo m in t.DeclaredMethods)
+            foreach (MethodInfo m in t.DeclaredMethods)
             {
                 BenchmarkAttribute benchAttr = m.GetCustomAttribute<BenchmarkAttribute>();
                 if (benchAttr != null)
@@ -998,11 +1069,11 @@ namespace Span
                 }
             }
 
-            foreach(string categoryName in testsByCategory.Keys)
+            foreach (string categoryName in testsByCategory.Keys)
             {
                 Console.WriteLine("**** {0} ****", categoryName);
 
-                foreach(MethodInfo m in testsByCategory[categoryName])
+                foreach (MethodInfo m in testsByCategory[categoryName])
                 {
                     // Request a warm-up iteration before measuring this benchmark method.
                     DoWarmUp = true;
@@ -1012,7 +1083,9 @@ namespace Span
 
                     // All the benchmarks methods in this test use [InlineData] to specify how many times and with
                     // what arguments they should be run.
-                    foreach (InlineDataAttribute dataAttr in m.GetCustomAttributes<InlineDataAttribute>())
+                    foreach (
+                        InlineDataAttribute dataAttr in m.GetCustomAttributes<InlineDataAttribute>()
+                    )
                     {
                         int data = dataAttr.Data;
                         invokeMethod(data);

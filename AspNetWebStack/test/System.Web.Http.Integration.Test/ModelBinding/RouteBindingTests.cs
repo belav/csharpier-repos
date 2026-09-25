@@ -19,7 +19,7 @@ namespace System.Web.Http.ModelBinding
             HttpRequestMessage request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(BaseAddress + "ModelBinding/GetStringFromRoute"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             // Act

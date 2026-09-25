@@ -5,9 +5,7 @@ namespace System.Web.WebPages.Html
 {
     public class SelectListItem
     {
-        public SelectListItem()
-        {
-        }
+        public SelectListItem() { }
 
         public SelectListItem(SelectListItem item)
         {

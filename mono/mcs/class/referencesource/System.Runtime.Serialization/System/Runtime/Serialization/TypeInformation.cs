@@ -10,7 +10,11 @@ namespace System.Runtime.Serialization
         string assemblyString;
         bool hasTypeForwardedFrom;
 
-        internal TypeInformation(string fullTypeName, string assemblyString, bool hasTypeForwardedFrom)
+        internal TypeInformation(
+            string fullTypeName,
+            string assemblyString,
+            bool hasTypeForwardedFrom
+        )
         {
             this.fullTypeName = fullTypeName;
             this.assemblyString = assemblyString;
@@ -19,26 +23,17 @@ namespace System.Runtime.Serialization
 
         internal string FullTypeName
         {
-            get
-            {
-                return this.fullTypeName;
-            }
+            get { return this.fullTypeName; }
         }
 
         internal string AssemblyString
         {
-            get
-            {
-                return this.assemblyString;
-            }
+            get { return this.assemblyString; }
         }
 
         internal bool HasTypeForwardedFrom
         {
-            get
-            {
-                return this.hasTypeForwardedFrom;
-            }
+            get { return this.hasTypeForwardedFrom; }
         }
     }
 }

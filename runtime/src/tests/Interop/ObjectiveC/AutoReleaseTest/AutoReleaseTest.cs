@@ -10,8 +10,10 @@ internal static unsafe class ObjectiveC
 {
     [DllImport(nameof(ObjectiveC))]
     public static extern IntPtr initObject();
+
     [DllImport(nameof(ObjectiveC))]
     public static extern void autoreleaseObject(IntPtr art);
+
     [DllImport(nameof(ObjectiveC))]
     public static extern int getNumReleaseCalls();
 }

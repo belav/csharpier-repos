@@ -24,29 +24,21 @@ namespace System.ServiceModel.Dispatcher
             this.sequenceStack = new EvalStack(1, 2);
             this.nodeCount = -1;
         }
+
 #if NO
         internal int FrameCount
         {
-            get
-            {
-                return this.valueStack.FrameCount;
-            }
+            get { return this.valueStack.FrameCount; }
         }
 
         internal int FramePtr
         {
-            get
-            {
-                return this.valueStack.FramePtr;
-            }
+            get { return this.valueStack.FramePtr; }
         }
 #endif
         internal StackFrame this[int frameIndex]
         {
-            get
-            {
-                return this.valueStack[frameIndex];
-            }
+            get { return this.valueStack[frameIndex]; }
         }
 
         internal int IterationCount
@@ -68,62 +60,35 @@ namespace System.ServiceModel.Dispatcher
 
         internal int NodeCount
         {
-            get
-            {
-                return this.nodeCount;
-            }
-            set
-            {
-                this.nodeCount = value;
-            }
+            get { return this.nodeCount; }
+            set { this.nodeCount = value; }
         }
 
         internal ProcessingContext Next
         {
-            get
-            {
-                return this.next;
-            }
-            set
-            {
-                this.next = value;
-            }
+            get { return this.next; }
+            set { this.next = value; }
         }
 
         internal QueryProcessor Processor
         {
-            get
-            {
-                return this.processor;
-            }
-            set
-            {
-                this.processor = value;
-            }
+            get { return this.processor; }
+            set { this.processor = value; }
         }
 
         internal StackFrame SecondArg
         {
-            get
-            {
-                return this.valueStack.SecondArg;
-            }
+            get { return this.valueStack.SecondArg; }
         }
 
         internal Value[] Sequences
         {
-            get
-            {
-                return this.sequenceStack.Buffer;
-            }
+            get { return this.sequenceStack.Buffer; }
         }
 
         internal bool SequenceStackInUse
         {
-            get
-            {
-                return this.sequenceStack.InUse;
-            }
+            get { return this.sequenceStack.InUse; }
         }
 
         internal bool StacksInUse
@@ -136,26 +101,17 @@ namespace System.ServiceModel.Dispatcher
 
         internal StackFrame TopArg
         {
-            get
-            {
-                return this.valueStack.TopArg;
-            }
+            get { return this.valueStack.TopArg; }
         }
 
         internal StackFrame TopSequenceArg
         {
-            get
-            {
-                return this.sequenceStack.TopArg;
-            }
+            get { return this.sequenceStack.TopArg; }
         }
 
         internal Value[] Values
         {
-            get
-            {
-                return this.valueStack.Buffer;
-            }
+            get { return this.valueStack.Buffer; }
         }
 
         internal ProcessingContext Clone()
@@ -226,12 +182,14 @@ namespace System.ServiceModel.Dispatcher
         {
             return this.valueStack.PeekDouble(index);
         }
+
 #if NO
         internal int PeekInteger(int index)
         {
-            return (int) this.valueStack.PeekInteger(index);
+            return (int)this.valueStack.PeekInteger(index);
         }
 #endif
+
         internal NodeSequence PeekSequence(int index)
         {
             return this.valueStack.PeekSequence(index);
@@ -276,6 +234,7 @@ namespace System.ServiceModel.Dispatcher
             this.valueStack.Push(doubleVal);
         }
 #endif
+
         internal void Push(double doubleVal, int addCount)
         {
             this.valueStack.Push(doubleVal, addCount);
@@ -439,11 +398,13 @@ namespace System.ServiceModel.Dispatcher
         QueryBranchResultSet resultPool;
         Collection<MessageFilter> matchList;
         ICollection<MessageFilter> matchSet; // for inverse queries that produce multiple matches
-        ICollection<KeyValuePair<MessageQuery, XPathResult>> resultSet;  // for inverse queries that produce multiple query results
+        ICollection<KeyValuePair<MessageQuery, XPathResult>> resultSet; // for inverse queries that produce multiple query results
         NodeSequence sequencePool;
+
         //string selectResults;
         SubExprVariable[] subExprVars;
         string messageAction;
+
         //string messageAddress;
         //string messageVia;
         string messageId;
@@ -471,31 +432,19 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-
         internal string Action
         {
-            get
-            {
-                return this.messageAction;
-            }
-            set
-            {
-                this.messageAction = value;
-            }
+            get { return this.messageAction; }
+            set { this.messageAction = value; }
         }
-#if NO 
+#if NO
         internal string Address
         {
-            get
-            {
-                return this.messageAddress;
-            }
-            set
-            {
-                this.messageAddress = value;
-            }
+            get { return this.messageAddress; }
+            set { this.messageAddress = value; }
         }
 #endif
+
         // IMPORTANT: Either ContextNode.get or CounterMarker.get MUST be called before this.counter
         //            can be considered valid.
         internal SeekableXPathNavigator ContextNode
@@ -506,12 +455,17 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (null != this.message)
                     {
-                        this.contextNode = this.matcher.CreateMessageNavigator(this.message, this.matchMessageBody);
+                        this.contextNode = this.matcher.CreateMessageNavigator(
+                            this.message,
+                            this.matchMessageBody
+                        );
                     }
                     else
                     {
 #pragma warning suppress 56503 // Microsoft, property is more readable for this
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(new QueryProcessingException(QueryProcessingError.Unexpected));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperCritical(
+                            new QueryProcessingException(QueryProcessingError.Unexpected)
+                        );
                     }
                     this.counter = this.contextNode as INodeCounter;
                     if (null == this.counter)
@@ -530,10 +484,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal Message ContextMessage
         {
-            get
-            {
-                return this.message;
-            }
+            get { return this.message; }
             set
             {
                 this.message = value;
@@ -562,156 +513,88 @@ namespace System.ServiceModel.Dispatcher
                 }
                 return this.counter.CounterMarker;
             }
-            set
-            {
-                this.counter.CounterMarker = value;
-            }
+            set { this.counter.CounterMarker = value; }
         }
 
 #if NO
         internal QueryProcessingFlags Flags
         {
-            get
-            {
-                return this.flags;
-            }
+            get { return this.flags; }
         }
-        
+
         internal bool HasContextNode
         {
-            get
-            {
-                return (null != this.contextNode);
-            }
+            get { return (null != this.contextNode); }
         }
 #endif
 
         internal bool MatchBody
         {
 #if NO
-            get
-            {
-                return this.matchMessageBody;
-            }
+            get { return this.matchMessageBody; }
 #endif
-            set
-            {
-                this.matchMessageBody = value;
-            }
+            set { this.matchMessageBody = value; }
         }
 
         internal QueryMatcher Matcher
         {
-            get
-            {
-                return this.matcher;
-            }
+            get { return this.matcher; }
         }
 
         internal ICollection<KeyValuePair<MessageQuery, XPathResult>> ResultSet
         {
-            get
-            {
-                return this.resultSet;
-            }
-            set
-            {
-                this.resultSet = value;
-            }
+            get { return this.resultSet; }
+            set { this.resultSet = value; }
         }
 
         internal string MessageId
         {
-            get
-            {
-                return this.messageId;
-            }
-            set
-            {
-                this.messageId = value;
-            }
+            get { return this.messageId; }
+            set { this.messageId = value; }
         }
 
         internal bool Result
         {
-            get
-            {
-                return this.result;
-            }
-            set
-            {
-                this.result = value;
-            }
+            get { return this.result; }
+            set { this.result = value; }
         }
 
         internal XPathResult QueryResult
         {
-            get
-            {
-                return this.queryResult;
-            }
-            set
-            {
-                this.queryResult = value;
-            }
+            get { return this.queryResult; }
+            set { this.queryResult = value; }
         }
 
         internal Collection<MessageFilter> MatchList
         {
-            get
-            {
-                return this.matchList;
-            }
+            get { return this.matchList; }
         }
 
         internal ICollection<MessageFilter> MatchSet
         {
-            get
-            {
-                return this.matchSet;
-            }
-            set
-            {
-                this.matchSet = value;
-            }
+            get { return this.matchSet; }
+            set { this.matchSet = value; }
         }
 
         internal string SoapUri
         {
-            get
-            {
-                return this.messageSoapUri;
-            }
-            set
-            {
-                this.messageSoapUri = value;
-            }
+            get { return this.messageSoapUri; }
+            set { this.messageSoapUri = value; }
         }
 
         internal string ToHeader
         {
-            get
-            {
-                return this.messageTo;
-            }
-            set
-            {
-                this.messageTo = value;
-            }
+            get { return this.messageTo; }
+            set { this.messageTo = value; }
         }
-#if NO 
+#if NO
         internal string Via
         {
-            get
-            {
-                return this.messageVia;
-            }
-            set
-            {
-                this.messageVia = value;
-            }
+            get { return this.messageVia; }
+            set { this.messageVia = value; }
         }
 #endif
+
         internal void AddRef()
         {
             Interlocked.Increment(ref this.refCount);
@@ -1000,21 +883,24 @@ namespace System.ServiceModel.Dispatcher
 #if NO
         public override void Reset()
         {
-            base.Release();            
+            base.Release();
             // Trim local pools by releasing all references
-            while (null != this.PopResultSet());            
+            while (null != this.PopResultSet())
+                ;
             this.resultPool = null;
-            while (null != this.PopSequence());
+            while (null != this.PopSequence())
+                ;
             this.sequencePool = null;
-            while (null != this.PopContext());
+            while (null != this.PopContext())
+                ;
             this.contextPool = null;
         }
 
         public override void Trim()
         {
             // Trim stacks
-            base.Trim();   
-            // Trim local pools individually         
+            base.Trim();
+            // Trim local pools individually
             QueryBranchResultSet result = this.resultPool;
             while (null != result)
             {
@@ -1044,8 +930,7 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 
-
-#if NO 
+#if NO
     internal struct QueryStatistics
     {
         int backupCapacity;
@@ -1072,50 +957,32 @@ namespace System.ServiceModel.Dispatcher
 
         internal int BackupCapacity
         {
-            get
-            {
-                return this.backupCapacity;
-            }
+            get { return this.backupCapacity; }
         }
 
         internal int NodeCapacity
         {
-            get
-            {
-                return this.nodeCapacity;
-            }
+            get { return this.nodeCapacity; }
         }
 
         internal int SeqFrameCapacity
         {
-            get
-            {
-                return this.seqFrameCapacity;
-            }
+            get { return this.seqFrameCapacity; }
         }
 
         internal int SeqStackCapacity
         {
-            get
-            {
-                return this.seqStackCapacity;
-            }
+            get { return this.seqStackCapacity; }
         }
 
         internal int ValFrameCapacity
         {
-            get
-            {
-                return this.valFrameCapacity;
-            }
+            get { return this.valFrameCapacity; }
         }
 
         internal int ValStackCapacity
         {
-            get
-            {
-                return this.valStackCapacity;
-            }
+            get { return this.valStackCapacity; }
         }
     }
 #endif

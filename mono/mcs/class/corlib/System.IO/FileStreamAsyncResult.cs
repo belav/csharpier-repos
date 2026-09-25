@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,86 +34,92 @@ using System.Threading;
 
 namespace System.IO
 {
-	class FileStreamAsyncResult : IAsyncResult {
-		/* Same structure in the runtime */
-		object state;
-		bool completed;
-		bool done;
-		Exception exc;
-		ManualResetEvent wh;
-		AsyncCallback cb;
-		bool completedSynch;
-		
+    class FileStreamAsyncResult : IAsyncResult
+    {
+        /* Same structure in the runtime */
+        object state;
+        bool completed;
+        bool done;
+        Exception exc;
+        ManualResetEvent wh;
+        AsyncCallback cb;
+        bool completedSynch;
+
 #pragma warning disable 649
-		public byte [] Buffer;
-		public int Offset;
-		public int Count;
-		public int OriginalCount;
-		public int BytesRead;
-#pragma warning restore 649		
+        public byte[] Buffer;
+        public int Offset;
+        public int Count;
+        public int OriginalCount;
+        public int BytesRead;
+#pragma warning restore 649
 
-		AsyncCallback realcb;
+        AsyncCallback realcb;
 
-		public FileStreamAsyncResult (AsyncCallback cb, object state)
-		{
-			this.state = state;
-			this.realcb = cb;
-			if (realcb != null)
-				this.cb = new AsyncCallback (CBWrapper);
-			wh = new ManualResetEvent (false);
-		}
+        public FileStreamAsyncResult(AsyncCallback cb, object state)
+        {
+            this.state = state;
+            this.realcb = cb;
+            if (realcb != null)
+                this.cb = new AsyncCallback(CBWrapper);
+            wh = new ManualResetEvent(false);
+        }
 
-		static void CBWrapper (IAsyncResult ares)
-		{
-			FileStreamAsyncResult res = (FileStreamAsyncResult) ares;
-			res.realcb.BeginInvoke (ares, null, null);
-		}
+        static void CBWrapper(IAsyncResult ares)
+        {
+            FileStreamAsyncResult res = (FileStreamAsyncResult)ares;
+            res.realcb.BeginInvoke(ares, null, null);
+        }
 
-		public void SetComplete (Exception e)
-		{
-			exc = e;
-			completed = true;
-			wh.Set ();
-			if (cb != null)
-				cb (this);
-		}
-		
-		public void SetComplete (Exception e, int nbytes)
-		{
-			this.BytesRead = nbytes;
-			SetComplete (e);
-		}
+        public void SetComplete(Exception e)
+        {
+            exc = e;
+            completed = true;
+            wh.Set();
+            if (cb != null)
+                cb(this);
+        }
 
-		public void SetComplete (Exception e, int nbytes, bool synch)
-		{
-			completedSynch = synch;
-			SetComplete (e, nbytes);
-		}
+        public void SetComplete(Exception e, int nbytes)
+        {
+            this.BytesRead = nbytes;
+            SetComplete(e);
+        }
 
-		public object AsyncState {
-			get { return state; }
-		}
+        public void SetComplete(Exception e, int nbytes, bool synch)
+        {
+            completedSynch = synch;
+            SetComplete(e, nbytes);
+        }
 
-		public bool CompletedSynchronously {
-			get { return completedSynch; }
-		}
+        public object AsyncState
+        {
+            get { return state; }
+        }
 
-		public WaitHandle AsyncWaitHandle {
-			get { return wh; }
-		}
+        public bool CompletedSynchronously
+        {
+            get { return completedSynch; }
+        }
 
-		public bool IsCompleted {
-			get { return completed; }
-		}
+        public WaitHandle AsyncWaitHandle
+        {
+            get { return wh; }
+        }
 
-		public Exception Exception {
-			get { return exc; }
-		}
+        public bool IsCompleted
+        {
+            get { return completed; }
+        }
 
-		public bool Done {
-			get { return done; }
-			set { done = value; }
-		}
-	}
+        public Exception Exception
+        {
+            get { return exc; }
+        }
+
+        public bool Done
+        {
+            get { return done; }
+            set { done = value; }
+        }
+    }
 }
-

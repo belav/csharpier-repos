@@ -13,20 +13,28 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            Assert.Throws<ArgumentNullException>(() => new EventLogQuery(null, PathType.LogName, null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new EventLogQuery(null, PathType.LogName, null)
+            );
         }
 
         [ConditionalFact(typeof(Helpers), nameof(Helpers.SupportsEventLogs))]
         public void QueryByLevel_LevelMatchesQuery()
         {
-            EventLogQuery eventsQuery = new EventLogQuery("Application", PathType.LogName, "*[System/Level=4]");
+            EventLogQuery eventsQuery = new EventLogQuery(
+                "Application",
+                PathType.LogName,
+                "*[System/Level=4]"
+            );
             using (var logReader = new EventLogReader(eventsQuery))
             {
                 int count = 0;
                 // For each event returned from the query
-                for (EventRecord eventRecord = logReader.ReadEvent();
-                        eventRecord != null;
-                        eventRecord = logReader.ReadEvent())
+                for (
+                    EventRecord eventRecord = logReader.ReadEvent();
+                    eventRecord != null;
+                    eventRecord = logReader.ReadEvent()
+                )
                 {
                     count++;
                     if (eventRecord.Level.HasValue)

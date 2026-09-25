@@ -3,12 +3,13 @@
 using System;
 using System.Reflection;
 
-public class Tests {
+public class Tests
+{
+    public void test()
+    {
+        Foo f = null;
+        f.foo(5);
+    }
 
-	public void test () {
-		Foo f = null;
-		f.foo (5);
-	}
-	
-	public static void Main () {}
+    public static void Main() { }
 }

@@ -13,13 +13,13 @@ namespace System.Diagnostics.Tracing
     /// TraceLogging: Type handler for empty or unsupported types.
     /// </summary>
     /// <typeparam name="DataType">The type to handle.</typeparam>
-    internal sealed class NullTypeInfo<DataType>
-        : TraceLoggingTypeInfo<DataType>
+    internal sealed class NullTypeInfo<DataType> : TraceLoggingTypeInfo<DataType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddGroup(name);
         }
@@ -42,13 +42,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Boolean.
     /// </summary>
-    internal sealed class BooleanTypeInfo
-        : TraceLoggingTypeInfo<Boolean>
+    internal sealed class BooleanTypeInfo : TraceLoggingTypeInfo<Boolean>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format8(format, TraceLoggingDataType.Boolean8));
         }
@@ -62,13 +62,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Byte.
     /// </summary>
-    internal sealed class ByteTypeInfo
-        : TraceLoggingTypeInfo<Byte>
+    internal sealed class ByteTypeInfo : TraceLoggingTypeInfo<Byte>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format8(format, TraceLoggingDataType.UInt8));
         }
@@ -82,13 +82,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for SByte.
     /// </summary>
-    internal sealed class SByteTypeInfo
-        : TraceLoggingTypeInfo<SByte>
+    internal sealed class SByteTypeInfo : TraceLoggingTypeInfo<SByte>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format8(format, TraceLoggingDataType.Int8));
         }
@@ -102,13 +102,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Int16.
     /// </summary>
-    internal sealed class Int16TypeInfo
-        : TraceLoggingTypeInfo<Int16>
+    internal sealed class Int16TypeInfo : TraceLoggingTypeInfo<Int16>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format16(format, TraceLoggingDataType.Int16));
         }
@@ -122,13 +122,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UInt16.
     /// </summary>
-    internal sealed class UInt16TypeInfo
-        : TraceLoggingTypeInfo<UInt16>
+    internal sealed class UInt16TypeInfo : TraceLoggingTypeInfo<UInt16>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format16(format, TraceLoggingDataType.UInt16));
         }
@@ -142,13 +142,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Int32.
     /// </summary>
-    internal sealed class Int32TypeInfo
-        : TraceLoggingTypeInfo<Int32>
+    internal sealed class Int32TypeInfo : TraceLoggingTypeInfo<Int32>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format32(format, TraceLoggingDataType.Int32));
         }
@@ -162,13 +162,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UInt32.
     /// </summary>
-    internal sealed class UInt32TypeInfo
-        : TraceLoggingTypeInfo<UInt32>
+    internal sealed class UInt32TypeInfo : TraceLoggingTypeInfo<UInt32>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format32(format, TraceLoggingDataType.UInt32));
         }
@@ -182,13 +182,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Int64.
     /// </summary>
-    internal sealed class Int64TypeInfo
-        : TraceLoggingTypeInfo<Int64>
+    internal sealed class Int64TypeInfo : TraceLoggingTypeInfo<Int64>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format64(format, TraceLoggingDataType.Int64));
         }
@@ -202,13 +202,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UInt64.
     /// </summary>
-    internal sealed class UInt64TypeInfo
-        : TraceLoggingTypeInfo<UInt64>
+    internal sealed class UInt64TypeInfo : TraceLoggingTypeInfo<UInt64>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format64(format, TraceLoggingDataType.UInt64));
         }
@@ -222,13 +222,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for IntPtr.
     /// </summary>
-    internal sealed class IntPtrTypeInfo
-        : TraceLoggingTypeInfo<IntPtr>
+    internal sealed class IntPtrTypeInfo : TraceLoggingTypeInfo<IntPtr>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.FormatPtr(format, Statics.IntPtrType));
         }
@@ -242,13 +242,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UIntPtr.
     /// </summary>
-    internal sealed class UIntPtrTypeInfo
-        : TraceLoggingTypeInfo<UIntPtr>
+    internal sealed class UIntPtrTypeInfo : TraceLoggingTypeInfo<UIntPtr>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.FormatPtr(format, Statics.UIntPtrType));
         }
@@ -262,13 +262,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Double.
     /// </summary>
-    internal sealed class DoubleTypeInfo
-        : TraceLoggingTypeInfo<Double>
+    internal sealed class DoubleTypeInfo : TraceLoggingTypeInfo<Double>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format64(format, TraceLoggingDataType.Double));
         }
@@ -282,13 +282,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Single.
     /// </summary>
-    internal sealed class SingleTypeInfo
-        : TraceLoggingTypeInfo<Single>
+    internal sealed class SingleTypeInfo : TraceLoggingTypeInfo<Single>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format32(format, TraceLoggingDataType.Float));
         }
@@ -302,13 +302,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Char.
     /// </summary>
-    internal sealed class CharTypeInfo
-        : TraceLoggingTypeInfo<Char>
+    internal sealed class CharTypeInfo : TraceLoggingTypeInfo<Char>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format16(format, TraceLoggingDataType.Char16));
         }
@@ -326,13 +326,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Boolean[].
     /// </summary>
-    internal sealed class BooleanArrayTypeInfo
-        : TraceLoggingTypeInfo<Boolean[]>
+    internal sealed class BooleanArrayTypeInfo : TraceLoggingTypeInfo<Boolean[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format8(format, TraceLoggingDataType.Boolean8));
         }
@@ -346,18 +346,21 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Byte[].
     /// </summary>
-    internal sealed class ByteArrayTypeInfo
-        : TraceLoggingTypeInfo<Byte[]>
+    internal sealed class ByteArrayTypeInfo : TraceLoggingTypeInfo<Byte[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             switch (format)
             {
                 default:
-                    collector.AddBinary(name, Statics.MakeDataType(TraceLoggingDataType.Binary, format));
+                    collector.AddBinary(
+                        name,
+                        Statics.MakeDataType(TraceLoggingDataType.Binary, format)
+                    );
                     break;
                 case EventFieldFormat.String:
                     collector.AddBinary(name, TraceLoggingDataType.CountedMbcsString);
@@ -374,14 +377,14 @@ namespace System.Diagnostics.Tracing
                 case EventFieldFormat.Hexadecimal:
                     collector.AddArray(name, TraceLoggingDataType.HexInt8);
                     break;
-#if false 
+#if false
                 case EventSourceFieldFormat.Signed:
                     collector.AddArray(name, TraceLoggingDataType.Int8);
                     break;
                 case EventSourceFieldFormat.Unsigned:
                     collector.AddArray(name, TraceLoggingDataType.UInt8);
                     break;
-#endif 
+#endif
             }
         }
 
@@ -394,13 +397,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for SByte[].
     /// </summary>
-    internal sealed class SByteArrayTypeInfo
-        : TraceLoggingTypeInfo<SByte[]>
+    internal sealed class SByteArrayTypeInfo : TraceLoggingTypeInfo<SByte[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format8(format, TraceLoggingDataType.Int8));
         }
@@ -414,13 +417,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Int16[].
     /// </summary>
-    internal sealed class Int16ArrayTypeInfo
-        : TraceLoggingTypeInfo<Int16[]>
+    internal sealed class Int16ArrayTypeInfo : TraceLoggingTypeInfo<Int16[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format16(format, TraceLoggingDataType.Int16));
         }
@@ -434,13 +437,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UInt16[].
     /// </summary>
-    internal sealed class UInt16ArrayTypeInfo
-        : TraceLoggingTypeInfo<UInt16[]>
+    internal sealed class UInt16ArrayTypeInfo : TraceLoggingTypeInfo<UInt16[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format16(format, TraceLoggingDataType.UInt16));
         }
@@ -454,13 +457,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Int32[].
     /// </summary>
-    internal sealed class Int32ArrayTypeInfo
-        : TraceLoggingTypeInfo<Int32[]>
+    internal sealed class Int32ArrayTypeInfo : TraceLoggingTypeInfo<Int32[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format32(format, TraceLoggingDataType.Int32));
         }
@@ -474,13 +477,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UInt32[].
     /// </summary>
-    internal sealed class UInt32ArrayTypeInfo
-        : TraceLoggingTypeInfo<UInt32[]>
+    internal sealed class UInt32ArrayTypeInfo : TraceLoggingTypeInfo<UInt32[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format32(format, TraceLoggingDataType.UInt32));
         }
@@ -494,13 +497,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Int64[].
     /// </summary>
-    internal sealed class Int64ArrayTypeInfo
-        : TraceLoggingTypeInfo<Int64[]>
+    internal sealed class Int64ArrayTypeInfo : TraceLoggingTypeInfo<Int64[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format64(format, TraceLoggingDataType.Int64));
         }
@@ -514,13 +517,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UInt64[].
     /// </summary>
-    internal sealed class UInt64ArrayTypeInfo
-        : TraceLoggingTypeInfo<UInt64[]>
+    internal sealed class UInt64ArrayTypeInfo : TraceLoggingTypeInfo<UInt64[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format64(format, TraceLoggingDataType.UInt64));
         }
@@ -534,13 +537,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for IntPtr[].
     /// </summary>
-    internal sealed class IntPtrArrayTypeInfo
-        : TraceLoggingTypeInfo<IntPtr[]>
+    internal sealed class IntPtrArrayTypeInfo : TraceLoggingTypeInfo<IntPtr[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.FormatPtr(format, Statics.IntPtrType));
         }
@@ -554,13 +557,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for UIntPtr[].
     /// </summary>
-    internal sealed class UIntPtrArrayTypeInfo
-        : TraceLoggingTypeInfo<UIntPtr[]>
+    internal sealed class UIntPtrArrayTypeInfo : TraceLoggingTypeInfo<UIntPtr[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.FormatPtr(format, Statics.UIntPtrType));
         }
@@ -574,13 +577,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Char[].
     /// </summary>
-    internal sealed class CharArrayTypeInfo
-        : TraceLoggingTypeInfo<Char[]>
+    internal sealed class CharArrayTypeInfo : TraceLoggingTypeInfo<Char[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format16(format, TraceLoggingDataType.Char16));
         }
@@ -594,13 +597,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Double[].
     /// </summary>
-    internal sealed class DoubleArrayTypeInfo
-        : TraceLoggingTypeInfo<Double[]>
+    internal sealed class DoubleArrayTypeInfo : TraceLoggingTypeInfo<Double[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format64(format, TraceLoggingDataType.Double));
         }
@@ -614,13 +617,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Single[].
     /// </summary>
-    internal sealed class SingleArrayTypeInfo
-    : TraceLoggingTypeInfo<Single[]>
+    internal sealed class SingleArrayTypeInfo : TraceLoggingTypeInfo<Single[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.Format32(format, TraceLoggingDataType.Float));
         }
@@ -635,13 +638,13 @@ namespace System.Diagnostics.Tracing
 
     #region Enum scalars
 
-    internal sealed class EnumByteTypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumByteTypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format8(format, TraceLoggingDataType.UInt8));
         }
@@ -657,13 +660,13 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    internal sealed class EnumSByteTypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumSByteTypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format8(format, TraceLoggingDataType.Int8));
         }
@@ -679,13 +682,13 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    internal sealed class EnumInt16TypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumInt16TypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format16(format, TraceLoggingDataType.Int16));
         }
@@ -701,13 +704,13 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    internal sealed class EnumUInt16TypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumUInt16TypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format16(format, TraceLoggingDataType.UInt16));
         }
@@ -723,13 +726,13 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    internal sealed class EnumInt32TypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumInt32TypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format32(format, TraceLoggingDataType.Int32));
         }
@@ -745,13 +748,13 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    internal sealed class EnumUInt32TypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumUInt32TypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format32(format, TraceLoggingDataType.UInt32));
         }
@@ -767,13 +770,13 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    internal sealed class EnumInt64TypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumInt64TypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format64(format, TraceLoggingDataType.Int64));
         }
@@ -789,13 +792,13 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-    internal sealed class EnumUInt64TypeInfo<EnumType>
-        : TraceLoggingTypeInfo<EnumType>
+    internal sealed class EnumUInt64TypeInfo<EnumType> : TraceLoggingTypeInfo<EnumType>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.Format64(format, TraceLoggingDataType.UInt64));
         }
@@ -818,22 +821,25 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for String.
     /// </summary>
-    internal sealed class StringTypeInfo
-        : TraceLoggingTypeInfo<String>
+    internal sealed class StringTypeInfo : TraceLoggingTypeInfo<String>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
-            collector.AddBinary(name, Statics.MakeDataType(TraceLoggingDataType.CountedUtf16String, format));
+            collector.AddBinary(
+                name,
+                Statics.MakeDataType(TraceLoggingDataType.CountedUtf16String, format)
+            );
         }
 
         public override void WriteData(TraceLoggingDataCollector collector, ref String value)
         {
             collector.AddBinary(value);
         }
-        
+
         public override object GetData(object value)
         {
             object val = base.GetData(value);
@@ -847,13 +853,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Guid.
     /// </summary>
-    internal sealed class GuidTypeInfo
-        : TraceLoggingTypeInfo<Guid>
+    internal sealed class GuidTypeInfo : TraceLoggingTypeInfo<Guid>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.MakeDataType(TraceLoggingDataType.Guid, format));
         }
@@ -867,13 +873,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Guid[].
     /// </summary>
-    internal sealed class GuidArrayTypeInfo
-    : TraceLoggingTypeInfo<Guid[]>
+    internal sealed class GuidArrayTypeInfo : TraceLoggingTypeInfo<Guid[]>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddArray(name, Statics.MakeDataType(TraceLoggingDataType.Guid, format));
         }
@@ -887,13 +893,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for DateTime.
     /// </summary>
-    internal sealed class DateTimeTypeInfo
-        : TraceLoggingTypeInfo<DateTime>
+    internal sealed class DateTimeTypeInfo : TraceLoggingTypeInfo<DateTime>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.MakeDataType(TraceLoggingDataType.FileTime, format));
         }
@@ -908,17 +914,23 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for DateTimeOffset.
     /// </summary>
-    internal sealed class DateTimeOffsetTypeInfo
-        : TraceLoggingTypeInfo<DateTimeOffset>
+    internal sealed class DateTimeOffsetTypeInfo : TraceLoggingTypeInfo<DateTimeOffset>
     {
-        public override void WriteMetadata(TraceLoggingMetadataCollector collector, string name, EventFieldFormat format)
+        public override void WriteMetadata(
+            TraceLoggingMetadataCollector collector,
+            string name,
+            EventFieldFormat format
+        )
         {
             var group = collector.AddGroup(name);
             group.AddScalar("Ticks", Statics.MakeDataType(TraceLoggingDataType.FileTime, format));
             group.AddScalar("Offset", TraceLoggingDataType.Int64);
         }
 
-        public override void WriteData(TraceLoggingDataCollector collector, ref DateTimeOffset value)
+        public override void WriteData(
+            TraceLoggingDataCollector collector,
+            ref DateTimeOffset value
+        )
         {
             var ticks = value.Ticks;
             collector.AddScalar(ticks < 504911232000000000 ? 0 : ticks - 504911232000000000);
@@ -929,13 +941,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for TimeSpan.
     /// </summary>
-    internal sealed class TimeSpanTypeInfo
-        : TraceLoggingTypeInfo<TimeSpan>
+    internal sealed class TimeSpanTypeInfo : TraceLoggingTypeInfo<TimeSpan>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.MakeDataType(TraceLoggingDataType.Int64, format));
         }
@@ -949,13 +961,13 @@ namespace System.Diagnostics.Tracing
     /// <summary>
     /// TraceLogging: Type handler for Decimal. (Note: not full-fidelity, exposed as Double.)
     /// </summary>
-    internal sealed class DecimalTypeInfo
-        : TraceLoggingTypeInfo<Decimal>
+    internal sealed class DecimalTypeInfo : TraceLoggingTypeInfo<Decimal>
     {
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.AddScalar(name, Statics.MakeDataType(TraceLoggingDataType.Double, format));
         }
@@ -971,8 +983,7 @@ namespace System.Diagnostics.Tracing
     /// </summary>
     /// <typeparam name="K">Type of the KeyValuePair's Key property.</typeparam>
     /// <typeparam name="V">Type of the KeyValuePair's Value property.</typeparam>
-    internal sealed class KeyValuePairTypeInfo<K, V>
-        : TraceLoggingTypeInfo<KeyValuePair<K, V>>
+    internal sealed class KeyValuePairTypeInfo<K, V> : TraceLoggingTypeInfo<KeyValuePair<K, V>>
     {
         private readonly TraceLoggingTypeInfo<K> keyInfo;
         private readonly TraceLoggingTypeInfo<V> valueInfo;
@@ -986,7 +997,8 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             var group = collector.AddGroup(name);
             this.keyInfo.WriteMetadata(group, "Key", EventFieldFormat.Default);
@@ -995,7 +1007,8 @@ namespace System.Diagnostics.Tracing
 
         public override void WriteData(
             TraceLoggingDataCollector collector,
-            ref KeyValuePair<K, V> value)
+            ref KeyValuePair<K, V> value
+        )
         {
             var key = value.Key;
             var val = value.Value;
@@ -1006,7 +1019,7 @@ namespace System.Diagnostics.Tracing
         public override object GetData(object value)
         {
             var serializedType = new Dictionary<string, object>();
-            var keyValuePair = (KeyValuePair<K, V>) value;
+            var keyValuePair = (KeyValuePair<K, V>)value;
             serializedType.Add("Key", this.keyInfo.GetData(keyValuePair.Key));
             serializedType.Add("Value", this.valueInfo.GetData(keyValuePair.Value));
             return serializedType;
@@ -1017,8 +1030,7 @@ namespace System.Diagnostics.Tracing
     /// TraceLogging: Type handler for Nullable.
     /// </summary>
     /// <typeparam name="T">Type of the Nullable's Value property.</typeparam>
-    internal sealed class NullableTypeInfo<T>
-        : TraceLoggingTypeInfo<Nullable<T>>
+    internal sealed class NullableTypeInfo<T> : TraceLoggingTypeInfo<Nullable<T>>
         where T : struct
     {
         private readonly TraceLoggingTypeInfo<T> valueInfo;
@@ -1031,16 +1043,15 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             var group = collector.AddGroup(name);
             group.AddScalar("HasValue", TraceLoggingDataType.Boolean8);
             this.valueInfo.WriteMetadata(group, "Value", format);
         }
 
-        public override void WriteData(
-            TraceLoggingDataCollector collector,
-            ref Nullable<T> value)
+        public override void WriteData(TraceLoggingDataCollector collector, ref Nullable<T> value)
         {
             var hasValue = value.HasValue;
             collector.AddScalar(hasValue);

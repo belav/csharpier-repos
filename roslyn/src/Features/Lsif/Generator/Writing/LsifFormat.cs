@@ -14,6 +14,6 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator.Writing
         /// <summary>
         /// JSON format, where the entire output is a single JSON array.
         /// </summary>
-        Json
+        Json,
     }
 }

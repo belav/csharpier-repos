@@ -29,7 +29,11 @@ namespace System.ServiceModel.Channels
             return this.channelQueue.Dequeue(timeout);
         }
 
-        public override IAsyncResult BeginAcceptChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginAcceptChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.ThrowIfNotOpened();
             return this.channelQueue.BeginDequeue(timeout, callback, state);
@@ -65,14 +69,30 @@ namespace System.ServiceModel.Channels
             return this.channelQueue.EnqueueWithoutDispatch(exception, dequeuedCallback);
         }
 
-        public void EnqueueAndDispatch(TChannel channel, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public void EnqueueAndDispatch(
+            TChannel channel,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            this.channelQueue.EnqueueAndDispatch(channel, dequeuedCallback, canDispatchOnThisThread);
+            this.channelQueue.EnqueueAndDispatch(
+                channel,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
 
-        public virtual void EnqueueAndDispatch(Exception exception, Action dequeuedCallback, bool canDispatchOnThisThread)
+        public virtual void EnqueueAndDispatch(
+            Exception exception,
+            Action dequeuedCallback,
+            bool canDispatchOnThisThread
+        )
         {
-            this.channelQueue.EnqueueAndDispatch(exception, dequeuedCallback, canDispatchOnThisThread);
+            this.channelQueue.EnqueueAndDispatch(
+                exception,
+                dequeuedCallback,
+                canDispatchOnThisThread
+            );
         }
 
         public void FaultQueue()
@@ -98,7 +118,11 @@ namespace System.ServiceModel.Channels
             return this.channelQueue.WaitForItem(timeout);
         }
 
-        public override IAsyncResult BeginWaitForChannel(TimeSpan timeout, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWaitForChannel(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.ThrowIfNotOpened();
             return this.channelQueue.BeginWaitForItem(timeout, callback, state);

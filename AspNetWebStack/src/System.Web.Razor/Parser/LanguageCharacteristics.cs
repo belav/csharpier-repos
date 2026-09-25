@@ -11,7 +11,11 @@ using System.Web.Razor.Tokenizer.Symbols;
 
 namespace System.Web.Razor.Parser
 {
-    [SuppressMessage("Microsoft.Design", "CA1005:AvoidExcessiveParametersOnGenericTypes", Justification = "All generic type parameters are required")]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1005:AvoidExcessiveParametersOnGenericTypes",
+        Justification = "All generic type parameters are required"
+    )]
     public abstract class LanguageCharacteristics<TTokenizer, TSymbol, TSymbolType>
         where TTokenizer : Tokenizer<TSymbol, TSymbolType>
         where TSymbol : SymbolBase<TSymbolType>
@@ -90,13 +94,27 @@ namespace System.Web.Razor.Parser
             return symbol != null && Equals(symbol.Type, GetKnownSymbolType(type));
         }
 
-        public virtual Tuple<TSymbol, TSymbol> SplitSymbol(TSymbol symbol, int splitAt, TSymbolType leftType)
+        public virtual Tuple<TSymbol, TSymbol> SplitSymbol(
+            TSymbol symbol,
+            int splitAt,
+            TSymbolType leftType
+        )
         {
-            TSymbol left = CreateSymbol(symbol.Start, symbol.Content.Substring(0, splitAt), leftType, Enumerable.Empty<RazorError>());
+            TSymbol left = CreateSymbol(
+                symbol.Start,
+                symbol.Content.Substring(0, splitAt),
+                leftType,
+                Enumerable.Empty<RazorError>()
+            );
             TSymbol right = null;
             if (splitAt < symbol.Content.Length)
             {
-                right = CreateSymbol(SourceLocationTracker.CalculateNewLocation(symbol.Start, left.Content), symbol.Content.Substring(splitAt), symbol.Type, symbol.Errors);
+                right = CreateSymbol(
+                    SourceLocationTracker.CalculateNewLocation(symbol.Start, left.Content),
+                    symbol.Content.Substring(splitAt),
+                    symbol.Type,
+                    symbol.Errors
+                );
             }
             return Tuple.Create(left, right);
         }
@@ -105,9 +123,15 @@ namespace System.Web.Razor.Parser
 
         public virtual bool KnowsSymbolType(KnownSymbolType type)
         {
-            return type == KnownSymbolType.Unknown || !Equals(GetKnownSymbolType(type), GetKnownSymbolType(KnownSymbolType.Unknown));
+            return type == KnownSymbolType.Unknown
+                || !Equals(GetKnownSymbolType(type), GetKnownSymbolType(KnownSymbolType.Unknown));
         }
 
-        protected abstract TSymbol CreateSymbol(SourceLocation location, string content, TSymbolType type, IEnumerable<RazorError> errors);
+        protected abstract TSymbol CreateSymbol(
+            SourceLocation location,
+            string content,
+            TSymbolType type,
+            IEnumerable<RazorError> errors
+        );
     }
 }

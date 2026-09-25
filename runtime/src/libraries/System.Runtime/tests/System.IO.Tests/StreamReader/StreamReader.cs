@@ -45,11 +45,14 @@ namespace System.IO.Tests
 
         public static IEnumerable<object[]> DetectEncoding_EncodingRoundtrips_MemberData()
         {
-            yield return new object[] { new UTF8Encoding(encoderShouldEmitUTF8Identifier:true) };
-            yield return new object[] { new UTF32Encoding(bigEndian:false, byteOrderMark:true) };
-            yield return new object[] { new UTF32Encoding(bigEndian:true, byteOrderMark:true) };
-            yield return new object[] { new UnicodeEncoding(bigEndian:false, byteOrderMark:true) };
-            yield return new object[] { new UnicodeEncoding(bigEndian:true, byteOrderMark:true) };
+            yield return new object[] { new UTF8Encoding(encoderShouldEmitUTF8Identifier: true) };
+            yield return new object[] { new UTF32Encoding(bigEndian: false, byteOrderMark: true) };
+            yield return new object[] { new UTF32Encoding(bigEndian: true, byteOrderMark: true) };
+            yield return new object[]
+            {
+                new UnicodeEncoding(bigEndian: false, byteOrderMark: true),
+            };
+            yield return new object[] { new UnicodeEncoding(bigEndian: true, byteOrderMark: true) };
         }
 
         [Theory]
@@ -66,7 +69,7 @@ namespace System.IO.Tests
             }
 
             using (var stream = File.OpenRead(path))
-            using (var reader = new StreamReader(stream, detectEncodingFromByteOrderMarks:true))
+            using (var reader = new StreamReader(stream, detectEncodingFromByteOrderMarks: true))
             {
                 Assert.Equal(Text, reader.ReadToEnd());
                 Assert.Equal(encoding.EncodingName, reader.CurrentEncoding.EncodingName);

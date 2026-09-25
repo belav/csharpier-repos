@@ -5,7 +5,7 @@
 namespace System.ServiceModel.Configuration
 {
     static class UdpTransportConfigurationStrings
-    {      
+    {
         // UDP transport settings
         internal const string DuplicateMessageHistoryLength = "duplicateMessageHistoryLength";
         internal const string MaxPendingMessagesTotalSize = "maxPendingMessagesTotalSize";

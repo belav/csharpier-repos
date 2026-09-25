@@ -9,13 +9,21 @@ namespace System.IO
 {
     internal partial struct FileStatus
     {
-        internal void SetCreationTime(string path, DateTimeOffset time, bool asDirectory)
-            => SetCreationTime(handle: null, path, time, asDirectory);
+        internal void SetCreationTime(string path, DateTimeOffset time, bool asDirectory) =>
+            SetCreationTime(handle: null, path, time, asDirectory);
 
-        internal void SetCreationTime(SafeFileHandle handle, DateTimeOffset time, bool asDirectory)
-            => SetCreationTime(handle, handle.Path, time, asDirectory);
+        internal void SetCreationTime(
+            SafeFileHandle handle,
+            DateTimeOffset time,
+            bool asDirectory
+        ) => SetCreationTime(handle, handle.Path, time, asDirectory);
 
-        private void SetCreationTime(SafeFileHandle? handle, string? path, DateTimeOffset time, bool asDirectory)
+        private void SetCreationTime(
+            SafeFileHandle? handle,
+            string? path,
+            DateTimeOffset time,
+            bool asDirectory
+        )
         {
             // Either `handle` or `path` must not be null
             Debug.Assert(handle is not null || path is not null);
@@ -38,7 +46,14 @@ namespace System.IO
             }
             else if (error == Interop.Error.ENOTSUP)
             {
-                SetAccessOrWriteTimeCore(handle, path, time, isAccessTime: false, checkCreationTime: false, asDirectory);
+                SetAccessOrWriteTimeCore(
+                    handle,
+                    path,
+                    time,
+                    isAccessTime: false,
+                    checkCreationTime: false,
+                    asDirectory
+                );
             }
             else
             {
@@ -46,7 +61,12 @@ namespace System.IO
             }
         }
 
-        private static unsafe Interop.Error SetCreationTimeCore(SafeFileHandle? handle, string? path, long seconds, long nanoseconds)
+        private static unsafe Interop.Error SetCreationTimeCore(
+            SafeFileHandle? handle,
+            string? path,
+            long seconds,
+            long nanoseconds
+        )
         {
             Debug.Assert(handle is not null || path is not null);
             Interop.Sys.TimeSpec timeSpec = default;
@@ -59,15 +79,38 @@ namespace System.IO
             attrList.commonAttr = Interop.libc.AttrList.ATTR_CMN_CRTIME;
 
             int result = handle is not null
-                ? Interop.libc.fsetattrlist(handle, &attrList, &timeSpec, sizeof(Interop.Sys.TimeSpec), new CULong(Interop.libc.FSOPT_NOFOLLOW))
-                : Interop.libc.setattrlist(path!, &attrList, &timeSpec, sizeof(Interop.Sys.TimeSpec), new CULong(Interop.libc.FSOPT_NOFOLLOW));
+                ? Interop.libc.fsetattrlist(
+                    handle,
+                    &attrList,
+                    &timeSpec,
+                    sizeof(Interop.Sys.TimeSpec),
+                    new CULong(Interop.libc.FSOPT_NOFOLLOW)
+                )
+                : Interop.libc.setattrlist(
+                    path!,
+                    &attrList,
+                    &timeSpec,
+                    sizeof(Interop.Sys.TimeSpec),
+                    new CULong(Interop.libc.FSOPT_NOFOLLOW)
+                );
 
-            return result == 0 ?
-                Interop.Error.SUCCESS :
-                Interop.Sys.GetLastErrorInfo().Error;
+            return result == 0 ? Interop.Error.SUCCESS : Interop.Sys.GetLastErrorInfo().Error;
         }
 
-        private void SetAccessOrWriteTime(SafeFileHandle? handle, string? path, DateTimeOffset time, bool isAccessTime, bool asDirectory) =>
-            SetAccessOrWriteTimeCore(handle, path, time, isAccessTime, checkCreationTime: true, asDirectory);
+        private void SetAccessOrWriteTime(
+            SafeFileHandle? handle,
+            string? path,
+            DateTimeOffset time,
+            bool isAccessTime,
+            bool asDirectory
+        ) =>
+            SetAccessOrWriteTimeCore(
+                handle,
+                path,
+                time,
+                isAccessTime,
+                checkCreationTime: true,
+                asDirectory
+            );
     }
 }

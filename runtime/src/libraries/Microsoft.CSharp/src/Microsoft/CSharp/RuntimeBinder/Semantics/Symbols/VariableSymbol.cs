@@ -14,6 +14,6 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal abstract class VariableSymbol : Symbol
     {
-        protected CType type;                       // CType of the field.
+        protected CType type; // CType of the field.
     }
 }

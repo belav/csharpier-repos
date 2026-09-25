@@ -13,14 +13,8 @@ namespace Microsoft.Win32.SystemEventsTests
         protected override event EventHandler Event
         {
 #pragma warning disable CS0618 // Type or member is obsolete
-            add
-            {
-                SystemEvents.LowMemory += value;
-            }
-            remove
-            {
-                SystemEvents.LowMemory -= value;
-            }
+            add { SystemEvents.LowMemory += value; }
+            remove { SystemEvents.LowMemory -= value; }
 #pragma warning restore CS0618 // Type or member is obsolete
         }
     }

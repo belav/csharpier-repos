@@ -28,11 +28,20 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ImmutableArray<ISymbol> selectedMembers,
                 Document document,
                 NamingStylePreferencesProvider fallbackOptions,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var state = new State();
-                if (!await state.TryInitializeAsync(
-                    selectedMembers, document, fallbackOptions, cancellationToken).ConfigureAwait(false))
+                if (
+                    !await state
+                        .TryInitializeAsync(
+                            selectedMembers,
+                            document,
+                            fallbackOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                )
                 {
                     return null;
                 }
@@ -44,23 +53,34 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 ImmutableArray<ISymbol> selectedMembers,
                 Document document,
                 NamingStylePreferencesProvider fallbackOptions,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 ContainingType = selectedMembers[0].ContainingType;
 
-                var rules = await document.GetNamingRulesAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+                var rules = await document
+                    .GetNamingRulesAsync(fallbackOptions, cancellationToken)
+                    .ConfigureAwait(false);
                 var parametersForSelectedMembers = DetermineParameters(selectedMembers, rules);
 
-                if (!selectedMembers.All(IsWritableInstanceFieldOrProperty) ||
-                    ContainingType == null ||
-                    ContainingType.TypeKind == TypeKind.Interface ||
-                    parametersForSelectedMembers.IsEmpty)
+                if (
+                    !selectedMembers.All(IsWritableInstanceFieldOrProperty)
+                    || ContainingType == null
+                    || ContainingType.TypeKind == TypeKind.Interface
+                    || parametersForSelectedMembers.IsEmpty
+                )
                 {
                     return false;
                 }
 
                 ConstructorCandidates = await GetConstructorCandidatesInfoAsync(
-                    ContainingType, selectedMembers, document, parametersForSelectedMembers, cancellationToken).ConfigureAwait(false);
+                        ContainingType,
+                        selectedMembers,
+                        document,
+                        parametersForSelectedMembers,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return !ConstructorCandidates.IsEmpty;
             }
@@ -74,59 +94,102 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
             ///  - deserialization constructor
             ///  - implicit default constructor
             /// </summary>
-            private static async Task<ImmutableArray<ConstructorCandidate>> GetConstructorCandidatesInfoAsync(
+            private static async Task<
+                ImmutableArray<ConstructorCandidate>
+            > GetConstructorCandidatesInfoAsync(
                 INamedTypeSymbol containingType,
                 ImmutableArray<ISymbol> selectedMembers,
                 Document document,
                 ImmutableArray<IParameterSymbol> parametersForSelectedMembers,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                using var _ = ArrayBuilder<ConstructorCandidate>.GetInstance(out var applicableConstructors);
+                using var _ = ArrayBuilder<ConstructorCandidate>.GetInstance(
+                    out var applicableConstructors
+                );
 
                 foreach (var constructor in containingType.InstanceConstructors)
                 {
-                    if (await IsApplicableConstructorAsync(
-                        constructor, document, parametersForSelectedMembers.SelectAsArray(p => p.Name), cancellationToken).ConfigureAwait(false))
+                    if (
+                        await IsApplicableConstructorAsync(
+                                constructor,
+                                document,
+                                parametersForSelectedMembers.SelectAsArray(p => p.Name),
+                                cancellationToken
+                            )
+                            .ConfigureAwait(false)
+                    )
                     {
-                        applicableConstructors.Add(CreateConstructorCandidate(parametersForSelectedMembers, selectedMembers, constructor));
+                        applicableConstructors.Add(
+                            CreateConstructorCandidate(
+                                parametersForSelectedMembers,
+                                selectedMembers,
+                                constructor
+                            )
+                        );
                     }
                 }
 
                 return applicableConstructors.ToImmutable();
             }
 
-            private static async Task<bool> IsApplicableConstructorAsync(IMethodSymbol constructor, Document document, ImmutableArray<string> parameterNamesForSelectedMembers, CancellationToken cancellationToken)
+            private static async Task<bool> IsApplicableConstructorAsync(
+                IMethodSymbol constructor,
+                Document document,
+                ImmutableArray<string> parameterNamesForSelectedMembers,
+                CancellationToken cancellationToken
+            )
             {
                 var constructorParams = constructor.Parameters;
 
                 if (constructorParams.Length == 2)
                 {
-                    var compilation = await document.Project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-                    var deserializationConstructorCheck = new DeserializationConstructorCheck(compilation);
+                    var compilation = await document
+                        .Project.GetRequiredCompilationAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    var deserializationConstructorCheck = new DeserializationConstructorCheck(
+                        compilation
+                    );
                     if (deserializationConstructorCheck.IsDeserializationConstructor(constructor))
                     {
                         return false;
                     }
                 }
 
-                return constructorParams.All(parameter => parameter.RefKind == RefKind.None) &&
-                    !constructor.IsImplicitlyDeclared &&
-                    !constructorParams.Any(static p => p.IsParams) &&
-                    !SelectedMembersAlreadyExistAsParameters(parameterNamesForSelectedMembers, constructorParams);
+                return constructorParams.All(parameter => parameter.RefKind == RefKind.None)
+                    && !constructor.IsImplicitlyDeclared
+                    && !constructorParams.Any(static p => p.IsParams)
+                    && !SelectedMembersAlreadyExistAsParameters(
+                        parameterNamesForSelectedMembers,
+                        constructorParams
+                    );
             }
 
-            private static bool SelectedMembersAlreadyExistAsParameters(ImmutableArray<string> parameterNamesForSelectedMembers, ImmutableArray<IParameterSymbol> constructorParams)
-                => constructorParams.Length != 0 &&
-                !parameterNamesForSelectedMembers.Except(constructorParams.Select(p => p.Name)).Any();
+            private static bool SelectedMembersAlreadyExistAsParameters(
+                ImmutableArray<string> parameterNamesForSelectedMembers,
+                ImmutableArray<IParameterSymbol> constructorParams
+            ) =>
+                constructorParams.Length != 0
+                && !parameterNamesForSelectedMembers
+                    .Except(constructorParams.Select(p => p.Name))
+                    .Any();
 
-            private static ConstructorCandidate CreateConstructorCandidate(ImmutableArray<IParameterSymbol> parametersForSelectedMembers, ImmutableArray<ISymbol> selectedMembers, IMethodSymbol constructor)
+            private static ConstructorCandidate CreateConstructorCandidate(
+                ImmutableArray<IParameterSymbol> parametersForSelectedMembers,
+                ImmutableArray<ISymbol> selectedMembers,
+                IMethodSymbol constructor
+            )
             {
-                using var _0 = ArrayBuilder<IParameterSymbol>.GetInstance(out var missingParametersBuilder);
+                using var _0 = ArrayBuilder<IParameterSymbol>.GetInstance(
+                    out var missingParametersBuilder
+                );
                 using var _1 = ArrayBuilder<ISymbol>.GetInstance(out var missingMembersBuilder);
 
                 var constructorParamNames = constructor.Parameters.SelectAsArray(p => p.Name);
-                var zippedParametersAndSelectedMembers =
-                    parametersForSelectedMembers.Zip(selectedMembers, (parameter, selectedMember) => (parameter, selectedMember));
+                var zippedParametersAndSelectedMembers = parametersForSelectedMembers.Zip(
+                    selectedMembers,
+                    (parameter, selectedMember) => (parameter, selectedMember)
+                );
 
                 foreach (var (parameter, selectedMember) in zippedParametersAndSelectedMembers)
                 {
@@ -138,7 +201,10 @@ namespace Microsoft.CodeAnalysis.AddConstructorParametersFromMembers
                 }
 
                 return new ConstructorCandidate(
-                    constructor, missingMembersBuilder.ToImmutable(), missingParametersBuilder.ToImmutable());
+                    constructor,
+                    missingMembersBuilder.ToImmutable(),
+                    missingParametersBuilder.ToImmutable()
+                );
             }
         }
     }

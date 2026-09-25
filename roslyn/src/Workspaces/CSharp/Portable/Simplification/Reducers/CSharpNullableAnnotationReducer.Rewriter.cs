@@ -13,16 +13,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
     {
         private class Rewriter : AbstractReductionRewriter
         {
-            public Rewriter(ObjectPool<IReductionRewriter> pool) : base(pool)
-            {
-            }
+            public Rewriter(ObjectPool<IReductionRewriter> pool)
+                : base(pool) { }
 
             public override SyntaxNode VisitNullableType(NullableTypeSyntax node)
             {
                 return SimplifyNode(
                     node,
                     base.VisitNullableType(node),
-                    simplifier: s_simplifyNullableType);
+                    simplifier: s_simplifyNullableType
+                );
             }
         }
     }

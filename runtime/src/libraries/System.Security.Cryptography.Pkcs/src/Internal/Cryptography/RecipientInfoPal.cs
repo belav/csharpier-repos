@@ -10,9 +10,7 @@ namespace Internal.Cryptography
 {
     internal abstract class RecipientInfoPal
     {
-        internal RecipientInfoPal()
-        {
-        }
+        internal RecipientInfoPal() { }
 
         public abstract byte[] EncryptedKey { get; }
         public abstract AlgorithmIdentifier KeyEncryptionAlgorithm { get; }

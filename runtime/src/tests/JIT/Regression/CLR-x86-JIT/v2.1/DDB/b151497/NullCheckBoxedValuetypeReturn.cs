@@ -5,9 +5,9 @@
 // JIT AVs and subsequently throws NullReferenceException when comparing a boxed valuetype return with null.
 
 //  csc /o+ NullCheckBoxedValuetypeReturn.cs
-// Bug output: 
+// Bug output:
 //     A NullReferenceException.
-// Correct Expected output: 
+// Correct Expected output:
 //     It should print out "Pass".
 
 using System;
@@ -21,7 +21,9 @@ struct MyStruct
 
 public class MainApp
 {
-    [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [System.Runtime.CompilerServices.MethodImplAttribute(
+        System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+    )]
     static MyStruct Foo()
     {
         return new MyStruct();
@@ -41,5 +43,4 @@ public class MainApp
             return 100;
         }
     }
-
 }

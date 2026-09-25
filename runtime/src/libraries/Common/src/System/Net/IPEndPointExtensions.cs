@@ -10,7 +10,7 @@ namespace System.Net.Sockets
     {
         public static IPAddress GetIPAddress(ReadOnlySpan<byte> socketAddressBuffer)
         {
-            AddressFamily  family = SocketAddressPal.GetAddressFamily(socketAddressBuffer);
+            AddressFamily family = SocketAddressPal.GetAddressFamily(socketAddressBuffer);
 
             if (family == AddressFamily.InterNetworkV6)
             {
@@ -19,11 +19,16 @@ namespace System.Net.Sockets
                 SocketAddressPal.GetIPv6Address(socketAddressBuffer, address, out scope);
 
                 // Clear scope if set for anything but Link Local address (always starts with fe80 first 10bits).
-                return new IPAddress(address, (address[0] == 0xFE && (address[1] & 0xC0) == 0x80) ? (long)scope : 0);
+                return new IPAddress(
+                    address,
+                    (address[0] == 0xFE && (address[1] & 0xC0) == 0x80) ? (long)scope : 0
+                );
             }
             else if (family == AddressFamily.InterNetwork)
             {
-                return new IPAddress((long)SocketAddressPal.GetIPv4Address(socketAddressBuffer) & 0x0FFFFFFFF);
+                return new IPAddress(
+                    (long)SocketAddressPal.GetIPv4Address(socketAddressBuffer) & 0x0FFFFFFFF
+                );
             }
 
             throw new SocketException((int)SocketError.AddressFamilyNotSupported);
@@ -44,13 +49,20 @@ namespace System.Net.Sockets
                 Span<byte> addressBuffer = stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
                 address.TryWriteBytes(addressBuffer, out int written);
                 Debug.Assert(written == IPAddressParserStatics.IPv6AddressBytes);
-                SocketAddressPal.SetIPv6Address(socketAddressBuffer, addressBuffer, (uint)address.ScopeId);
+                SocketAddressPal.SetIPv6Address(
+                    socketAddressBuffer,
+                    addressBuffer,
+                    (uint)address.ScopeId
+                );
             }
         }
 
         public static IPEndPoint CreateIPEndPoint(ReadOnlySpan<byte> socketAddressBuffer)
         {
-           return new IPEndPoint(GetIPAddress(socketAddressBuffer), SocketAddressPal.GetPort(socketAddressBuffer));
+            return new IPEndPoint(
+                GetIPAddress(socketAddressBuffer),
+                SocketAddressPal.GetPort(socketAddressBuffer)
+            );
         }
 
         // suggestion from https://github.com/dotnet/runtime/issues/78993
@@ -63,21 +75,31 @@ namespace System.Net.Sockets
 
         public static bool Equals(this IPEndPoint endPoint, ReadOnlySpan<byte> socketAddressBuffer)
         {
-            if (socketAddressBuffer.Length >= SocketAddress.GetMaximumAddressSize(endPoint.AddressFamily) &&
-                endPoint.AddressFamily == SocketAddressPal.GetAddressFamily(socketAddressBuffer) &&
-                endPoint.Port == (int)SocketAddressPal.GetPort(socketAddressBuffer))
+            if (
+                socketAddressBuffer.Length
+                    >= SocketAddress.GetMaximumAddressSize(endPoint.AddressFamily)
+                && endPoint.AddressFamily == SocketAddressPal.GetAddressFamily(socketAddressBuffer)
+                && endPoint.Port == (int)SocketAddressPal.GetPort(socketAddressBuffer)
+            )
             {
                 if (endPoint.AddressFamily == AddressFamily.InterNetwork)
                 {
 #pragma warning disable CS0618
-                    return endPoint.Address.Address == (long)SocketAddressPal.GetIPv4Address(socketAddressBuffer);
+                    return endPoint.Address.Address
+                        == (long)SocketAddressPal.GetIPv4Address(socketAddressBuffer);
 #pragma warning restore CS0618
                 }
                 else
                 {
-                    Span<byte> addressBuffer1 = stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
-                    Span<byte> addressBuffer2 = stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
-                    SocketAddressPal.GetIPv6Address(socketAddressBuffer, addressBuffer1, out uint scopeid);
+                    Span<byte> addressBuffer1 =
+                        stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
+                    Span<byte> addressBuffer2 =
+                        stackalloc byte[IPAddressParserStatics.IPv6AddressBytes];
+                    SocketAddressPal.GetIPv6Address(
+                        socketAddressBuffer,
+                        addressBuffer1,
+                        out uint scopeid
+                    );
                     if (endPoint.Address.ScopeId != (long)scopeid)
                     {
                         return false;

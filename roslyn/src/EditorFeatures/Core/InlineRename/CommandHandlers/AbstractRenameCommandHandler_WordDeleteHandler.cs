@@ -11,23 +11,29 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler :
-        ICommandHandler<WordDeleteToStartCommandArgs>,
-        ICommandHandler<WordDeleteToEndCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<WordDeleteToStartCommandArgs>,
+            ICommandHandler<WordDeleteToEndCommandArgs>
     {
-        public CommandState GetCommandState(WordDeleteToStartCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(WordDeleteToStartCommandArgs args) => GetCommandState();
 
-        public CommandState GetCommandState(WordDeleteToEndCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(WordDeleteToEndCommandArgs args) => GetCommandState();
 
-        public bool ExecuteCommand(WordDeleteToStartCommandArgs args, CommandExecutionContext context)
-            => HandleWordDeleteCommand(args.SubjectBuffer, args.TextView, deleteToStart: true);
+        public bool ExecuteCommand(
+            WordDeleteToStartCommandArgs args,
+            CommandExecutionContext context
+        ) => HandleWordDeleteCommand(args.SubjectBuffer, args.TextView, deleteToStart: true);
 
-        public bool ExecuteCommand(WordDeleteToEndCommandArgs args, CommandExecutionContext context)
-            => HandleWordDeleteCommand(args.SubjectBuffer, args.TextView, deleteToStart: false);
+        public bool ExecuteCommand(
+            WordDeleteToEndCommandArgs args,
+            CommandExecutionContext context
+        ) => HandleWordDeleteCommand(args.SubjectBuffer, args.TextView, deleteToStart: false);
 
-        private bool HandleWordDeleteCommand(ITextBuffer subjectBuffer, ITextView view, bool deleteToStart)
+        private bool HandleWordDeleteCommand(
+            ITextBuffer subjectBuffer,
+            ITextView view,
+            bool deleteToStart
+        )
         {
             if (_renameService.ActiveSession == null)
             {
@@ -37,7 +43,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var caretPoint = view.GetCaretPoint(subjectBuffer);
             if (caretPoint.HasValue)
             {
-                if (_renameService.ActiveSession.TryGetContainingEditableSpan(caretPoint.Value, out var span))
+                if (
+                    _renameService.ActiveSession.TryGetContainingEditableSpan(
+                        caretPoint.Value,
+                        out var span
+                    )
+                )
                 {
                     int start = caretPoint.Value;
                     int end = caretPoint.Value;
@@ -57,9 +68,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         }
                     }
 
-                    subjectBuffer.Delete(deleteToStart
-                        ? Span.FromBounds(span.Start, end)
-                        : Span.FromBounds(start, span.End));
+                    subjectBuffer.Delete(
+                        deleteToStart
+                            ? Span.FromBounds(span.Start, end)
+                            : Span.FromBounds(start, span.End)
+                    );
 
                     return true;
                 }

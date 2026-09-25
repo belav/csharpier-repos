@@ -18,10 +18,13 @@ namespace ILVerify
         internal readonly IResolver _resolver;
 
         private RuntimeInterfacesAlgorithm _arrayOfTRuntimeInterfacesAlgorithm;
-        private MetadataRuntimeInterfacesAlgorithm _metadataRuntimeInterfacesAlgorithm = new MetadataRuntimeInterfacesAlgorithm();
-        private MetadataVirtualMethodAlgorithm _metadataVirtualMethodAlgorithm = new MetadataVirtualMethodAlgorithm();
+        private MetadataRuntimeInterfacesAlgorithm _metadataRuntimeInterfacesAlgorithm =
+            new MetadataRuntimeInterfacesAlgorithm();
+        private MetadataVirtualMethodAlgorithm _metadataVirtualMethodAlgorithm =
+            new MetadataVirtualMethodAlgorithm();
 
-        private readonly Dictionary<PEReader, EcmaModule> _modulesCache = new Dictionary<PEReader, EcmaModule>();
+        private readonly Dictionary<PEReader, EcmaModule> _modulesCache =
+            new Dictionary<PEReader, EcmaModule>();
 
         public ILVerifyTypeSystemContext(IResolver resolver)
         {
@@ -30,27 +33,50 @@ namespace ILVerify
 
         public override ModuleDesc ResolveAssembly(AssemblyName name, bool throwIfNotFound = true)
         {
-            return CacheResolvedAssemblyOrNetmodule(_resolver.ResolveAssembly(name), name.Name, null, throwIfNotFound);
+            return CacheResolvedAssemblyOrNetmodule(
+                _resolver.ResolveAssembly(name),
+                name.Name,
+                null,
+                throwIfNotFound
+            );
         }
 
-        internal override ModuleDesc ResolveModule(IAssemblyDesc referencingModule, string fileName, bool throwIfNotFound = true)
+        internal override ModuleDesc ResolveModule(
+            IAssemblyDesc referencingModule,
+            string fileName,
+            bool throwIfNotFound = true
+        )
         {
             // The referencing module is not getting verified currently.
             // However, netmodules are resolved in the context of assembly, not in the global context.
-            EcmaModule module = CacheResolvedAssemblyOrNetmodule(_resolver.ResolveModule(referencingModule.GetName(), fileName), fileName, referencingModule, throwIfNotFound);
+            EcmaModule module = CacheResolvedAssemblyOrNetmodule(
+                _resolver.ResolveModule(referencingModule.GetName(), fileName),
+                fileName,
+                referencingModule,
+                throwIfNotFound
+            );
             if (module.MetadataReader.IsAssembly)
             {
-                throw new VerifierException($"The module '{fileName}' is not expected to be an assembly");
+                throw new VerifierException(
+                    $"The module '{fileName}' is not expected to be an assembly"
+                );
             }
             return module;
         }
 
-        private EcmaModule CacheResolvedAssemblyOrNetmodule(PEReader peReader, string verificationName, IAssemblyDesc containingAssembly, bool throwIfNotFound)
+        private EcmaModule CacheResolvedAssemblyOrNetmodule(
+            PEReader peReader,
+            string verificationName,
+            IAssemblyDesc containingAssembly,
+            bool throwIfNotFound
+        )
         {
             if (peReader == null)
             {
                 if (throwIfNotFound)
-                    throw new VerifierException("Assembly or module not found: " + verificationName);
+                    throw new VerifierException(
+                        "Assembly or module not found: " + verificationName
+                    );
                 return null;
             }
             var module = GetModule(peReader, containingAssembly);
@@ -68,20 +94,28 @@ namespace ILVerify
             string actualSimpleName = metadataReader.GetString(nameHandle);
             if (!actualSimpleName.Equals(simpleName, StringComparison.OrdinalIgnoreCase))
             {
-                throw new VerifierException($"Actual PE name '{actualSimpleName}' does not match provided name '{simpleName}'");
+                throw new VerifierException(
+                    $"Actual PE name '{actualSimpleName}' does not match provided name '{simpleName}'"
+                );
             }
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(ArrayType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForNonPointerArrayType(
+            ArrayType type
+        )
         {
             if (_arrayOfTRuntimeInterfacesAlgorithm == null)
             {
-                _arrayOfTRuntimeInterfacesAlgorithm = new SimpleArrayOfTRuntimeInterfacesAlgorithm(SystemModule);
+                _arrayOfTRuntimeInterfacesAlgorithm = new SimpleArrayOfTRuntimeInterfacesAlgorithm(
+                    SystemModule
+                );
             }
             return _arrayOfTRuntimeInterfacesAlgorithm;
         }
 
-        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(DefType type)
+        protected override RuntimeInterfacesAlgorithm GetRuntimeInterfacesAlgorithmForDefType(
+            DefType type
+        )
         {
             return _metadataRuntimeInterfacesAlgorithm;
         }
@@ -102,7 +136,9 @@ namespace ILVerify
             {
                 if (containingAssembly != null && existingModule.Assembly != containingAssembly)
                 {
-                    throw new VerifierException($"Containing assembly for module '{existingModule}' must be '{containingAssembly}'");
+                    throw new VerifierException(
+                        $"Containing assembly for module '{existingModule}' must be '{containingAssembly}'"
+                    );
                 }
                 return existingModule;
             }

@@ -1,41 +1,37 @@
 using System;
 
-
 public interface IFace
 {
-	void Tst (IFace b);
+    void Tst(IFace b);
 }
 
-public delegate string ToStr (string format, IFormatProvider format_provider);
+public delegate string ToStr(string format, IFormatProvider format_provider);
 
-
-public class GenericClass<T> where T : IFormattable
+public class GenericClass<T>
+    where T : IFormattable
 {
-	T field;
+    T field;
 
-	public GenericClass (T t)
-	{
-		this.field = t;
-	}
+    public GenericClass(T t)
+    {
+        this.field = t;
+    }
 
-	public void Method ()
-	{
-		ToStr str = new ToStr (field.ToString);
+    public void Method()
+    {
+        ToStr str = new ToStr(field.ToString);
 
-		Console.WriteLine (str ("x", null));
-	}
+        Console.WriteLine(str("x", null));
+    }
 
-	public void Test (T t) { }
+    public void Test(T t) { }
 }
-
-
 
 public class Foo
 {
-	public static void Main (string [] args)
-	{
-		GenericClass<int> example = new GenericClass<int> (99);
-		example.Method ();
-	}
+    public static void Main(string[] args)
+    {
+        GenericClass<int> example = new GenericClass<int>(99);
+        example.Method();
+    }
 }
-

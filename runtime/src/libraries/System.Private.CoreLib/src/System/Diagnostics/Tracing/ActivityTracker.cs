@@ -42,9 +42,17 @@ namespace System.Diagnostics.Tracing
         ///
         /// If activity tracing is not on, then activityId and relatedActivityId are not set
         /// </summary>
-        public void OnStart(string providerName, string activityName, int task, ref Guid activityId, ref Guid relatedActivityId, EventActivityOptions options, bool useTplSource = true)
+        public void OnStart(
+            string providerName,
+            string activityName,
+            int task,
+            ref Guid activityId,
+            ref Guid relatedActivityId,
+            EventActivityOptions options,
+            bool useTplSource = true
+        )
         {
-            if (m_current == null)        // We are not enabled
+            if (m_current == null) // We are not enabled
             {
                 // We  used to rely on the TPL provider turning us on, but that has the disadvantage that you don't get Start-Stop tracking
                 // until you use Tasks for the first time (which you may never do).   Thus we change it to pull rather tan push for whether
@@ -52,7 +60,13 @@ namespace System.Diagnostics.Tracing
                 if (m_checkedForEnable)
                     return;
                 m_checkedForEnable = true;
-                if (useTplSource && TplEventSource.Log.IsEnabled(EventLevel.Informational, TplEventSource.Keywords.TasksFlowActivityIds))
+                if (
+                    useTplSource
+                    && TplEventSource.Log.IsEnabled(
+                        EventLevel.Informational,
+                        TplEventSource.Keywords.TasksFlowActivityIds
+                    )
+                )
                     Enable();
                 if (m_current == null)
                     return;
@@ -68,7 +82,10 @@ namespace System.Diagnostics.Tracing
             if (tplDebug)
             {
                 log!.DebugFacilityMessage("OnStartEnter", fullActivityName);
-                log!.DebugFacilityMessage("OnStartEnterActivityState", ActivityInfo.LiveActivities(currentActivity));
+                log!.DebugFacilityMessage(
+                    "OnStartEnterActivityState",
+                    ActivityInfo.LiveActivities(currentActivity)
+                );
             }
 
             if (currentActivity != null)
@@ -85,7 +102,10 @@ namespace System.Diagnostics.Tracing
                 // Check for recursion, and force-stop any activities if the activity already started.
                 if ((options & EventActivityOptions.Recursive) == 0)
                 {
-                    ActivityInfo? existingActivity = FindActiveActivity(fullActivityName, currentActivity);
+                    ActivityInfo? existingActivity = FindActiveActivity(
+                        fullActivityName,
+                        currentActivity
+                    );
                     if (existingActivity != null)
                     {
                         OnStop(providerName, activityName, task, ref activityId);
@@ -105,7 +125,13 @@ namespace System.Diagnostics.Tracing
             relatedActivityId = EventSource.CurrentThreadActivityId;
 
             // Add to the list of started but not stopped activities.
-            ActivityInfo newActivity = new ActivityInfo(fullActivityName, id, currentActivity, relatedActivityId, options);
+            ActivityInfo newActivity = new ActivityInfo(
+                fullActivityName,
+                id,
+                currentActivity,
+                relatedActivityId,
+                options
+            );
             m_current.Value = newActivity;
 
             // Remember the current ID so we can log it
@@ -113,8 +139,15 @@ namespace System.Diagnostics.Tracing
 
             if (tplDebug)
             {
-                log!.DebugFacilityMessage("OnStartRetActivityState", ActivityInfo.LiveActivities(newActivity));
-                log!.DebugFacilityMessage1("OnStartRet", activityId.ToString(), relatedActivityId.ToString());
+                log!.DebugFacilityMessage(
+                    "OnStartRetActivityState",
+                    ActivityInfo.LiveActivities(newActivity)
+                );
+                log!.DebugFacilityMessage1(
+                    "OnStartRet",
+                    activityId.ToString(),
+                    relatedActivityId.ToString()
+                );
             }
         }
 
@@ -124,9 +157,15 @@ namespace System.Diagnostics.Tracing
         ///
         /// If activity tracing is not on, then activityId and relatedActivityId are not set
         /// </summary>
-        public void OnStop(string providerName, string activityName, int task, ref Guid activityId, bool useTplSource = true)
+        public void OnStop(
+            string providerName,
+            string activityName,
+            int task,
+            ref Guid activityId,
+            bool useTplSource = true
+        )
         {
-            if (m_current == null)        // We are not enabled
+            if (m_current == null) // We are not enabled
                 return;
 
             string fullActivityName = NormalizeActivityName(providerName, activityName, task);
@@ -136,18 +175,24 @@ namespace System.Diagnostics.Tracing
             if (tplDebug)
             {
                 log!.DebugFacilityMessage("OnStopEnter", fullActivityName);
-                log!.DebugFacilityMessage("OnStopEnterActivityState", ActivityInfo.LiveActivities(m_current.Value));
+                log!.DebugFacilityMessage(
+                    "OnStopEnterActivityState",
+                    ActivityInfo.LiveActivities(m_current.Value)
+                );
             }
 
             while (true) // This is a retry loop.
             {
                 ActivityInfo? currentActivity = m_current.Value;
-                ActivityInfo? newCurrentActivity = null;               // if we have seen any live activities (orphans), at he first one we have seen.
+                ActivityInfo? newCurrentActivity = null; // if we have seen any live activities (orphans), at he first one we have seen.
 
                 // Search to find the activity to stop in one pass.   This insures that we don't let one mistake
                 // (stopping something that was not started) cause all active starts to be stopped
                 // By first finding the target start to stop we are more robust.
-                ActivityInfo? activityToStop = FindActiveActivity(fullActivityName, currentActivity);
+                ActivityInfo? activityToStop = FindActiveActivity(
+                    fullActivityName,
+                    currentActivity
+                );
 
                 // ignore stops where we can't find a start because we may have popped them previously.
                 if (activityToStop == null)
@@ -165,7 +210,7 @@ namespace System.Diagnostics.Tracing
                 ActivityInfo? orphan = currentActivity;
                 while (orphan != activityToStop && orphan != null)
                 {
-                    if (orphan.m_stopped != 0)      // Skip dead activities.
+                    if (orphan.m_stopped != 0) // Skip dead activities.
                     {
                         orphan = orphan.m_creator;
                         continue;
@@ -195,7 +240,10 @@ namespace System.Diagnostics.Tracing
 
                     if (tplDebug)
                     {
-                        log!.DebugFacilityMessage("OnStopRetActivityState", ActivityInfo.LiveActivities(newCurrentActivity));
+                        log!.DebugFacilityMessage(
+                            "OnStopRetActivityState",
+                            ActivityInfo.LiveActivities(newCurrentActivity)
+                        );
                         log!.DebugFacilityMessage("OnStopRet", activityId.ToString());
                     }
                     return;
@@ -219,7 +267,11 @@ namespace System.Diagnostics.Tracing
                 catch (NotImplementedException)
                 {
                     // send message to debugger without delay
-                    Debugger.Log(0, null, "Activity Enabled() called but AsyncLocals Not Supported (pre V4.6).  Ignoring Enable");
+                    Debugger.Log(
+                        0,
+                        null,
+                        "Activity Enabled() called but AsyncLocals Not Supported (pre V4.6).  Ignoring Enable"
+                    );
                 }
             }
         }
@@ -250,17 +302,29 @@ namespace System.Diagnostics.Tracing
         /// Strip out "Start" or "End" suffix from activity name and add providerName prefix.
         /// If 'task'  it does not end in Start or Stop and Task is non-zero use that as the name of the activity
         /// </summary>
-        private static string NormalizeActivityName(string providerName, string activityName, int task)
+        private static string NormalizeActivityName(
+            string providerName,
+            string activityName,
+            int task
+        )
         {
             // We use provider name to distinguish between activities from different providers.
 
             if (activityName.EndsWith(EventSource.ActivityStartSuffix, StringComparison.Ordinal))
             {
-                return string.Concat(providerName, activityName.AsSpan()[..^EventSource.ActivityStartSuffix.Length]);
+                return string.Concat(
+                    providerName,
+                    activityName.AsSpan()[..^EventSource.ActivityStartSuffix.Length]
+                );
             }
-            else if (activityName.EndsWith(EventSource.ActivityStopSuffix, StringComparison.Ordinal))
+            else if (
+                activityName.EndsWith(EventSource.ActivityStopSuffix, StringComparison.Ordinal)
+            )
             {
-                return string.Concat(providerName, activityName.AsSpan()[..^EventSource.ActivityStopSuffix.Length]);
+                return string.Concat(
+                    providerName,
+                    activityName.AsSpan()[..^EventSource.ActivityStopSuffix.Length]
+                );
             }
             else if (task != 0)
             {
@@ -285,7 +349,13 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         private sealed class ActivityInfo
         {
-            public ActivityInfo(string name, long uniqueId, ActivityInfo? creator, Guid activityIDToRestore, EventActivityOptions options)
+            public ActivityInfo(
+                string name,
+                long uniqueId,
+                ActivityInfo? creator,
+                Guid activityIDToRestore,
+                EventActivityOptions options
+            )
             {
                 m_name = name;
                 m_eventOptions = options;
@@ -347,7 +417,10 @@ namespace System.Diagnostics.Tracing
             /// byte (since the top nibble can't be zero you can determine if this is true by seeing if
             /// this byte is nonZero.   This offset is needed to efficiently create the ID for child activities.
             /// </summary>
-            private unsafe void CreateActivityPathGuid(out Guid idRet, out int activityPathGuidOffset)
+            private unsafe void CreateActivityPathGuid(
+                out Guid idRet,
+                out int activityPathGuidOffset
+            )
             {
                 fixed (Guid* outPtr = &idRet)
                 {
@@ -361,10 +434,18 @@ namespace System.Diagnostics.Tracing
                     {
                         int appDomainID = Thread.GetDomainID();
                         // We start with the appdomain number to make this unique among appdomains.
-                        activityPathGuidOffsetStart = AddIdToGuid(outPtr, activityPathGuidOffsetStart, (uint)appDomainID);
+                        activityPathGuidOffsetStart = AddIdToGuid(
+                            outPtr,
+                            activityPathGuidOffsetStart,
+                            (uint)appDomainID
+                        );
                     }
 
-                    activityPathGuidOffset = AddIdToGuid(outPtr, activityPathGuidOffsetStart, (uint)m_uniqueId);
+                    activityPathGuidOffset = AddIdToGuid(
+                        outPtr,
+                        activityPathGuidOffsetStart,
+                        (uint)m_uniqueId
+                    );
 
                     // If the path does not fit, Make a GUID by incrementing rather than as a path, keeping as much of the path as possible
                     if (12 < activityPathGuidOffset)
@@ -381,14 +462,25 @@ namespace System.Diagnostics.Tracing
             private unsafe void CreateOverflowGuid(Guid* outPtr)
             {
                 // Search backwards for an ancestor that has sufficient space to put the ID.
-                for (ActivityInfo? ancestor = m_creator; ancestor != null; ancestor = ancestor.m_creator)
+                for (
+                    ActivityInfo? ancestor = m_creator;
+                    ancestor != null;
+                    ancestor = ancestor.m_creator
+                )
                 {
-                    if (ancestor.m_activityPathGuidOffset <= 10)  // we need at least 2 bytes.
+                    if (ancestor.m_activityPathGuidOffset <= 10) // we need at least 2 bytes.
                     {
-                        uint id = unchecked((uint)Interlocked.Increment(ref ancestor.m_lastChildID));        // Get a unique ID
+                        uint id = unchecked(
+                            (uint)Interlocked.Increment(ref ancestor.m_lastChildID)
+                        ); // Get a unique ID
                         // Try to put the ID into the GUID
                         *outPtr = ancestor.m_guid;
-                        int endId = AddIdToGuid(outPtr, ancestor.m_activityPathGuidOffset, id, true);
+                        int endId = AddIdToGuid(
+                            outPtr,
+                            ancestor.m_activityPathGuidOffset,
+                            id,
+                            true
+                        );
 
                         // Does it fit?
                         if (endId <= 12)
@@ -406,15 +498,16 @@ namespace System.Diagnostics.Tracing
             /// </summary>
             private enum NumberListCodes : byte
             {
-                End = 0x0,             // ends the list.   No valid value has this prefix.
+                End = 0x0, // ends the list.   No valid value has this prefix.
                 LastImmediateValue = 0xA,
 
-                PrefixCode = 0xB,      // all the 'long' encodings go here.  If the next nibble is MultiByte1-4
-                                       // than this is a 'overflow' id.   Unlike the hierarchical IDs these are
-                                       // allocated densely but don't tell you anything about nesting. we use
-                                       // these when we run out of space in the GUID to store the path.
+                PrefixCode = 0xB, // all the 'long' encodings go here.  If the next nibble is MultiByte1-4
 
-                MultiByte1 = 0xC,   // 1 byte follows.  If this Nibble is in the high bits, it the high bits of the number are stored in the low nibble.
+                // than this is a 'overflow' id.   Unlike the hierarchical IDs these are
+                // allocated densely but don't tell you anything about nesting. we use
+                // these when we run out of space in the GUID to store the path.
+
+                MultiByte1 = 0xC, // 1 byte follows.  If this Nibble is in the high bits, it the high bits of the number are stored in the low nibble.
                 // commented out because the code does not explicitly reference the names (but they are logically defined).
                 // MultiByte2 = 0xD,   // 2 bytes follow (we don't bother with the nibble optimization)
                 // MultiByte3 = 0xE,   // 3 bytes follow (we don't bother with the nibble optimization)
@@ -426,13 +519,18 @@ namespace System.Diagnostics.Tracing
             /// is the maximum number of bytes that fit in a GUID) if the path did not fit.
             /// If 'overflow' is true, then the number is encoded as an 'overflow number (which has a
             /// special (longer prefix) that indicates that this ID is allocated differently
-            private static unsafe int AddIdToGuid(Guid* outPtr, int whereToAddId, uint id, bool overflow = false)
+            private static unsafe int AddIdToGuid(
+                Guid* outPtr,
+                int whereToAddId,
+                uint id,
+                bool overflow = false
+            )
             {
                 byte* ptr = (byte*)outPtr;
                 byte* endPtr = ptr + 12;
                 ptr += whereToAddId;
                 if (endPtr <= ptr)
-                    return 13;                // 12 means we might exactly fit, 13 means we definitely did not fit
+                    return 13; // 12 means we might exactly fit, 13 means we definitely did not fit
 
                 if (0 < id && id <= (uint)NumberListCodes.LastImmediateValue && !overflow)
                     WriteNibble(ref ptr, endPtr, id);
@@ -448,7 +546,7 @@ namespace System.Diagnostics.Tracing
 
                     if (overflow)
                     {
-                        if (endPtr <= ptr + 2)        // I need at least 2 bytes
+                        if (endPtr <= ptr + 2) // I need at least 2 bytes
                             return 13;
 
                         // Write out the prefix code nibble and the length nibble
@@ -465,7 +563,7 @@ namespace System.Diagnostics.Tracing
                         {
                             // Indicate this is a 1 byte multicode with 4 high order bits in the lower nibble.
                             *ptr = (byte)(((uint)NumberListCodes.MultiByte1 << 4) + (id >> 8));
-                            id &= 0xFF;     // Now we only want the low order bits.
+                            id &= 0xFF; // Now we only want the low order bits.
                         }
                         ptr++;
                     }
@@ -475,7 +573,7 @@ namespace System.Diagnostics.Tracing
                     {
                         if (endPtr <= ptr)
                         {
-                            ptr++;        // Indicate that we have overflowed
+                            ptr++; // Indicate that we have overflowed
                             break;
                         }
                         *ptr++ = (byte)id;
@@ -488,7 +586,8 @@ namespace System.Diagnostics.Tracing
                 uint* sumPtr = (uint*)outPtr;
                 // We set the last DWORD the sum of the first 3 DWORDS in the GUID.   This
                 // This last number is a random number (it identifies us as us)  the process ID to make it unique per process.
-                sumPtr[3] = (sumPtr[0] + sumPtr[1] + sumPtr[2] + 0x599D99AD) ^ (uint)Environment.ProcessId;
+                sumPtr[3] =
+                    (sumPtr[0] + sumPtr[1] + sumPtr[2] + 0x599D99AD) ^ (uint)Environment.ProcessId;
 
                 return (int)(ptr - ((byte*)outPtr));
             }
@@ -513,16 +612,16 @@ namespace System.Diagnostics.Tracing
 
             #endregion // CreateGuidForActivityPath
 
-            internal readonly string m_name;                        // The name used in the 'start' and 'stop' APIs to help match up
-            private readonly long m_uniqueId;                               // a small number that makes this activity unique among its siblings
-            internal readonly Guid m_guid;                          // Activity Guid, it is basically an encoding of the Path() (see CreateActivityPathGuid)
-            internal readonly int m_activityPathGuidOffset;         // Keeps track of where in m_guid the causality path stops (used to generated child GUIDs)
-            internal readonly int m_level;                          // current depth of the Path() of the activity (used to keep recursion under control)
-            internal readonly EventActivityOptions m_eventOptions;  // Options passed to start.
-            internal long m_lastChildID;                            // used to create a unique ID for my children activities
-            internal int m_stopped;                                 // This work item has stopped
-            internal readonly ActivityInfo? m_creator;               // My parent (creator).  Forms the Path() for the activity.
-            internal readonly Guid m_activityIdToRestore;           // The Guid to restore after a stop.
+            internal readonly string m_name; // The name used in the 'start' and 'stop' APIs to help match up
+            private readonly long m_uniqueId; // a small number that makes this activity unique among its siblings
+            internal readonly Guid m_guid; // Activity Guid, it is basically an encoding of the Path() (see CreateActivityPathGuid)
+            internal readonly int m_activityPathGuidOffset; // Keeps track of where in m_guid the causality path stops (used to generated child GUIDs)
+            internal readonly int m_level; // current depth of the Path() of the activity (used to keep recursion under control)
+            internal readonly EventActivityOptions m_eventOptions; // Options passed to start.
+            internal long m_lastChildID; // used to create a unique ID for my children activities
+            internal int m_stopped; // This work item has stopped
+            internal readonly ActivityInfo? m_creator; // My parent (creator).  Forms the Path() for the activity.
+            internal readonly Guid m_activityIdToRestore; // The Guid to restore after a stop.
             #endregion
         }
 
@@ -606,8 +705,8 @@ namespace System.Diagnostics.Tracing
 
         // Used to create unique IDs at the top level.  Not used for nested Ids (each activity has its own id generator)
         private static long m_nextId;
-        private const ushort MAX_ACTIVITY_DEPTH = 100;            // Limit maximum depth of activities to be tracked at 100.
-                                                                  // This will avoid leaking memory in case of activities that are never stopped.
+        private const ushort MAX_ACTIVITY_DEPTH = 100; // Limit maximum depth of activities to be tracked at 100.
+        // This will avoid leaking memory in case of activities that are never stopped.
 
         #endregion
     }

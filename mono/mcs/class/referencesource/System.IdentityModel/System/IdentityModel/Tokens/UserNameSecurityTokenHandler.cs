@@ -7,7 +7,7 @@ using System.Xml;
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// Defines a SecurityTokenHandler for Username Password Tokens. 
+    /// Defines a SecurityTokenHandler for Username Password Tokens.
     /// </summary>
     public abstract class UserNameSecurityTokenHandler : SecurityTokenHandler
     {
@@ -16,9 +16,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes an instance of <see cref="UserNameSecurityTokenHandler"/>
         /// </summary>
-        protected UserNameSecurityTokenHandler()
-        {
-        }
+        protected UserNameSecurityTokenHandler() { }
 
         /// <summary>
         /// Controls if the password will be retained in the bootstrap token that is
@@ -26,14 +24,8 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public virtual bool RetainPassword
         {
-            get
-            {
-                return _retainPassword;
-            }
-            set
-            {
-                _retainPassword = value;
-            }
+            get { return _retainPassword; }
+            set { _retainPassword = value; }
         }
 
         /// <summary>
@@ -50,7 +42,10 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reader");
             }
 
-            return reader.IsStartElement(WSSecurity10Constants.Elements.UsernameToken, WSSecurity10Constants.Namespace);
+            return reader.IsStartElement(
+                WSSecurity10Constants.Elements.UsernameToken,
+                WSSecurity10Constants.Namespace
+            );
         }
 
         /// <summary>
@@ -58,10 +53,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override bool CanWriteToken
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         /// <summary>
@@ -69,10 +61,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public override Type TokenType
         {
-            get
-            {
-                return typeof(UserNameSecurityToken);
-            }
+            get { return typeof(UserNameSecurityToken); }
         }
 
         /// <summary>
@@ -87,11 +76,11 @@ namespace System.IdentityModel.Tokens
         /// Reads the UsernameSecurityToken from the given XmlReader.
         /// </summary>
         /// <param name="reader">XmlReader pointing to the SecurityToken.</param>
-        /// <returns>An instance of <see cref="UserNameSecurityToken"/>.</returns> 
+        /// <returns>An instance of <see cref="UserNameSecurityToken"/>.</returns>
         /// <exception cref="ArgumentNullException">The parameter 'reader' is null.</exception>
         /// <exception cref="XmlException">The token cannot be read.</exception>
         /// <exception cref="NotSupportedException">The Password was not in plain text format.</exception>
-        /// <exception cref="InvalidOperationException">An unknown element was found in the SecurityToken or 
+        /// <exception cref="InvalidOperationException">An unknown element was found in the SecurityToken or
         /// the username was not specified.</exception>
         public override SecurityToken ReadToken(XmlReader reader)
         {
@@ -105,11 +94,14 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new XmlException(
                         SR.GetString(
-                        SR.ID4065,
-                        WSSecurity10Constants.Elements.Username,
-                        WSSecurity10Constants.Namespace,
-                        reader.LocalName,
-                        reader.NamespaceURI)));
+                            SR.ID4065,
+                            WSSecurity10Constants.Elements.Username,
+                            WSSecurity10Constants.Namespace,
+                            reader.LocalName,
+                            reader.NamespaceURI
+                        )
+                    )
+                );
             }
 
             string id = null;
@@ -117,38 +109,88 @@ namespace System.IdentityModel.Tokens
             string password = null;
 
             reader.MoveToContent();
-            id = reader.GetAttribute(WSUtilityConstants.Attributes.IdAttribute, WSUtilityConstants.NamespaceURI);
+            id = reader.GetAttribute(
+                WSUtilityConstants.Attributes.IdAttribute,
+                WSUtilityConstants.NamespaceURI
+            );
 
-            reader.ReadStartElement(WSSecurity10Constants.Elements.UsernameToken, WSSecurity10Constants.Namespace);
+            reader.ReadStartElement(
+                WSSecurity10Constants.Elements.UsernameToken,
+                WSSecurity10Constants.Namespace
+            );
             while (reader.IsStartElement())
             {
-                if (reader.IsStartElement(WSSecurity10Constants.Elements.Username, WSSecurity10Constants.Namespace))
+                if (
+                    reader.IsStartElement(
+                        WSSecurity10Constants.Elements.Username,
+                        WSSecurity10Constants.Namespace
+                    )
+                )
                 {
                     userName = reader.ReadElementString();
                 }
-                else if (reader.IsStartElement(WSSecurity10Constants.Elements.Password, WSSecurity10Constants.Namespace))
+                else if (
+                    reader.IsStartElement(
+                        WSSecurity10Constants.Elements.Password,
+                        WSSecurity10Constants.Namespace
+                    )
+                )
                 {
                     string type = reader.GetAttribute(WSSecurity10Constants.Attributes.Type, null);
-                    if (!string.IsNullOrEmpty(type) && !StringComparer.Ordinal.Equals(type, WSSecurity10Constants.UPTokenPasswordTextValue))
+                    if (
+                        !string.IsNullOrEmpty(type)
+                        && !StringComparer.Ordinal.Equals(
+                            type,
+                            WSSecurity10Constants.UPTokenPasswordTextValue
+                        )
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ID4059, type, WSSecurity10Constants.UPTokenPasswordTextValue)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.ID4059,
+                                    type,
+                                    WSSecurity10Constants.UPTokenPasswordTextValue
+                                )
+                            )
+                        );
                     }
 
                     password = reader.ReadElementString();
                 }
-                else if (reader.IsStartElement(WSSecurity10Constants.Elements.Nonce, WSSecurity10Constants.Namespace))
+                else if (
+                    reader.IsStartElement(
+                        WSSecurity10Constants.Elements.Nonce,
+                        WSSecurity10Constants.Namespace
+                    )
+                )
                 {
                     // Nonce can be safely ignored
                     reader.Skip();
                 }
-                else if (reader.IsStartElement(WSUtilityConstants.ElementNames.Created, WSUtilityConstants.NamespaceURI))
+                else if (
+                    reader.IsStartElement(
+                        WSUtilityConstants.ElementNames.Created,
+                        WSUtilityConstants.NamespaceURI
+                    )
+                )
                 {
                     // wsu:Created can be safely ignored
                     reader.Skip();
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.ID4060, reader.LocalName, reader.NamespaceURI, WSSecurity10Constants.Elements.UsernameToken, WSSecurity10Constants.Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.ID4060,
+                                reader.LocalName,
+                                reader.NamespaceURI,
+                                WSSecurity10Constants.Elements.UsernameToken,
+                                WSSecurity10Constants.Namespace
+                            )
+                        )
+                    );
                 }
             }
             reader.ReadEndElement();
@@ -158,11 +200,10 @@ namespace System.IdentityModel.Tokens
                 throw DiagnosticUtility.ThrowHelperInvalidOperation(SR.GetString(SR.ID4061));
             }
 
-            return string.IsNullOrEmpty(id) ?
-                new UserNameSecurityToken(userName, password) :
-                new UserNameSecurityToken(userName, password, id);
+            return string.IsNullOrEmpty(id)
+                ? new UserNameSecurityToken(userName, password)
+                : new UserNameSecurityToken(userName, password, id);
         }
-
 
         /// <summary>
         /// Writes the given UsernameSecurityToken to the XmlWriter.
@@ -187,29 +228,32 @@ namespace System.IdentityModel.Tokens
 
             if (usernameSecurityToken == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token", SR.GetString(SR.ID0018, typeof(UserNameSecurityToken)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "token",
+                    SR.GetString(SR.ID0018, typeof(UserNameSecurityToken))
+                );
             }
 
             // <wsse:UsernameToken
             writer.WriteStartElement(
-               WSSecurity10Constants.Elements.UsernameToken,
-               WSSecurity10Constants.Namespace
-               );
+                WSSecurity10Constants.Elements.UsernameToken,
+                WSSecurity10Constants.Namespace
+            );
             if (!string.IsNullOrEmpty(token.Id))
             {
                 // wsu:Id="..."
                 writer.WriteAttributeString(
-                       WSUtilityConstants.Attributes.IdAttribute,
-                       WSUtilityConstants.NamespaceURI,
-                       token.Id
-                       );
+                    WSUtilityConstants.Attributes.IdAttribute,
+                    WSUtilityConstants.NamespaceURI,
+                    token.Id
+                );
             }
             // <wsse:Username>...</wsse:Username>
             writer.WriteElementString(
                 WSSecurity10Constants.Elements.Username,
                 WSSecurity10Constants.Namespace,
                 usernameSecurityToken.UserName
-                );
+            );
 
             // <wsse:Password>...</wsse:Password>
             if (usernameSecurityToken.Password != null)
@@ -217,13 +261,13 @@ namespace System.IdentityModel.Tokens
                 writer.WriteStartElement(
                     WSSecurity10Constants.Elements.Password,
                     WSSecurity10Constants.Namespace
-                    );
+                );
 
                 writer.WriteAttributeString(
                     WSSecurity10Constants.Attributes.Type,
                     null,
                     WSSecurity10Constants.UPTokenPasswordTextValue
-                    );
+                );
 
                 writer.WriteString(usernameSecurityToken.Password);
                 writer.WriteEndElement();

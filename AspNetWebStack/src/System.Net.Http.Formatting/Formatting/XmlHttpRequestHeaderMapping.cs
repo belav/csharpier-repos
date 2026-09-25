@@ -16,10 +16,14 @@ namespace System.Net.Http.Formatting
         /// <summary>
         /// Initializes a new instance of <see cref="XmlHttpRequestHeaderMapping" /> class
         /// </summary>
-        public XmlHttpRequestHeaderMapping() :
-            base(FormattingUtilities.HttpRequestedWithHeader, FormattingUtilities.HttpRequestedWithHeaderValue, StringComparison.OrdinalIgnoreCase, isValueSubstring: true, mediaType: MediaTypeConstants.ApplicationJsonMediaType)
-        {
-        }
+        public XmlHttpRequestHeaderMapping()
+            : base(
+                FormattingUtilities.HttpRequestedWithHeader,
+                FormattingUtilities.HttpRequestedWithHeaderValue,
+                StringComparison.OrdinalIgnoreCase,
+                isValueSubstring: true,
+                mediaType: MediaTypeConstants.ApplicationJsonMediaType
+            ) { }
 
         /// <summary>
         /// Returns a value indicating whether the current <see cref="RequestHeaderMapping"/>
@@ -40,8 +44,15 @@ namespace System.Net.Http.Formatting
 
             // Accept header trumps XHR mapping.
             // Accept: */* is equivalent to passing no Accept header.
-            if (request.Headers.Accept.Count == 0
-                || (request.Headers.Accept.Count == 1 && request.Headers.Accept.First().MediaType.Equals("*/*", StringComparison.Ordinal)))
+            if (
+                request.Headers.Accept.Count == 0
+                || (
+                    request.Headers.Accept.Count == 1
+                    && request
+                        .Headers.Accept.First()
+                        .MediaType.Equals("*/*", StringComparison.Ordinal)
+                )
+            )
             {
                 return base.TryMatchMediaType(request);
             }

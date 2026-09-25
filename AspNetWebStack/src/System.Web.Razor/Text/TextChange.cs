@@ -17,29 +17,68 @@ namespace System.Web.Razor.Text
         /// <summary>
         /// Constructor for changes where the position hasn't moved (primarily for tests)
         /// </summary>
-        internal TextChange(int position, int oldLength, ITextBuffer oldBuffer, int newLength, ITextBuffer newBuffer)
-            : this(position, oldLength, oldBuffer, position, newLength, newBuffer)
-        {
-        }
+        internal TextChange(
+            int position,
+            int oldLength,
+            ITextBuffer oldBuffer,
+            int newLength,
+            ITextBuffer newBuffer
+        )
+            : this(position, oldLength, oldBuffer, position, newLength, newBuffer) { }
 
-        public TextChange(int oldPosition, int oldLength, ITextBuffer oldBuffer, int newPosition, int newLength, ITextBuffer newBuffer)
+        public TextChange(
+            int oldPosition,
+            int oldLength,
+            ITextBuffer oldBuffer,
+            int newPosition,
+            int newLength,
+            ITextBuffer newBuffer
+        )
             : this()
         {
             if (oldPosition < 0)
             {
-                throw new ArgumentOutOfRangeException("oldPosition", String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, "0"));
+                throw new ArgumentOutOfRangeException(
+                    "oldPosition",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        "0"
+                    )
+                );
             }
             if (newPosition < 0)
             {
-                throw new ArgumentOutOfRangeException("newPosition", String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, "0"));
+                throw new ArgumentOutOfRangeException(
+                    "newPosition",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        "0"
+                    )
+                );
             }
             if (oldLength < 0)
             {
-                throw new ArgumentOutOfRangeException("oldLength", String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, "0"));
+                throw new ArgumentOutOfRangeException(
+                    "oldLength",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        "0"
+                    )
+                );
             }
             if (newLength < 0)
             {
-                throw new ArgumentOutOfRangeException("newLength", String.Format(CultureInfo.CurrentCulture, CommonResources.Argument_Must_Be_GreaterThanOrEqualTo, "0"));
+                throw new ArgumentOutOfRangeException(
+                    "newLength",
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        CommonResources.Argument_Must_Be_GreaterThanOrEqualTo,
+                        "0"
+                    )
+                );
             }
             if (oldBuffer == null)
             {
@@ -121,12 +160,12 @@ namespace System.Web.Razor.Text
                 return false;
             }
             TextChange change = (TextChange)obj;
-            return (change.OldPosition == OldPosition) &&
-                   (change.NewPosition == NewPosition) &&
-                   (change.OldLength == OldLength) &&
-                   (change.NewLength == NewLength) &&
-                   OldBuffer.Equals(change.OldBuffer) &&
-                   NewBuffer.Equals(change.NewBuffer);
+            return (change.OldPosition == OldPosition)
+                && (change.NewPosition == NewPosition)
+                && (change.OldLength == OldLength)
+                && (change.NewLength == NewLength)
+                && OldBuffer.Equals(change.OldBuffer)
+                && NewBuffer.Equals(change.NewBuffer);
         }
 
         public string ApplyChange(string content, int changeOffset)
@@ -134,7 +173,8 @@ namespace System.Web.Razor.Text
             int changeRelativePosition = OldPosition - changeOffset;
 
             Debug.Assert(changeRelativePosition >= 0);
-            return content.Remove(changeRelativePosition, OldLength)
+            return content
+                .Remove(changeRelativePosition, OldLength)
                 .Insert(changeRelativePosition, NewText);
         }
 
@@ -149,12 +189,25 @@ namespace System.Web.Razor.Text
 
         public override int GetHashCode()
         {
-            return OldPosition ^ NewPosition ^ OldLength ^ NewLength ^ NewBuffer.GetHashCode() ^ OldBuffer.GetHashCode();
+            return OldPosition
+                ^ NewPosition
+                ^ OldLength
+                ^ NewLength
+                ^ NewBuffer.GetHashCode()
+                ^ OldBuffer.GetHashCode();
         }
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.CurrentCulture, "({0}:{1}) \"{3}\" -> ({0}:{2}) \"{4}\"", OldPosition, OldLength, NewLength, OldText, NewText);
+            return String.Format(
+                CultureInfo.CurrentCulture,
+                "({0}:{1}) \"{3}\" -> ({0}:{2}) \"{4}\"",
+                OldPosition,
+                OldLength,
+                NewLength,
+                OldText,
+                NewText
+            );
         }
 
         /// <summary>
@@ -163,15 +216,23 @@ namespace System.Web.Razor.Text
         /// <returns>A normalized text change</returns>
         public TextChange Normalize()
         {
-            if (OldBuffer != null && IsReplace && NewLength > OldLength && NewText.StartsWith(OldText, StringComparison.Ordinal) && NewPosition == OldPosition)
+            if (
+                OldBuffer != null
+                && IsReplace
+                && NewLength > OldLength
+                && NewText.StartsWith(OldText, StringComparison.Ordinal)
+                && NewPosition == OldPosition
+            )
             {
                 // Normalize the change into an insertion of the uncommon suffix (i.e. strip out the common prefix)
-                return new TextChange(oldPosition: OldPosition + OldLength,
-                                      oldLength: 0,
-                                      oldBuffer: OldBuffer,
-                                      newPosition: OldPosition + OldLength,
-                                      newLength: NewLength - OldLength,
-                                      newBuffer: NewBuffer);
+                return new TextChange(
+                    oldPosition: OldPosition + OldLength,
+                    oldLength: 0,
+                    oldBuffer: OldBuffer,
+                    newPosition: OldPosition + OldLength,
+                    newLength: NewLength - OldLength,
+                    newBuffer: NewBuffer
+                );
             }
             return this;
         }

@@ -82,45 +82,40 @@ public class TargetingPackTests
         );
         Assert.NotEmpty(dlls);
 
-        Assert.All(
-            dlls,
-            path =>
+        Assert.All(dlls, path =>
+        {
+            var expectedVersion = repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path))
+                ? aspnetcoreVersion
+                : version;
+
+            var fileName = Path.GetFileNameWithoutExtension(path);
+            var assemblyName = AssemblyName.GetAssemblyName(path);
+            using var fileStream = File.OpenRead(path);
+            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+            var assemblyDefinition = reader.GetAssemblyDefinition();
+
+            // Assembly versions should all match Major.Minor.0.0
+            if (repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
             {
-                var expectedVersion = repoAssemblies.Contains(
-                    Path.GetFileNameWithoutExtension(path)
-                )
-                    ? aspnetcoreVersion
-                    : version;
-
-                var fileName = Path.GetFileNameWithoutExtension(path);
-                var assemblyName = AssemblyName.GetAssemblyName(path);
-                using var fileStream = File.OpenRead(path);
-                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-                var assemblyDefinition = reader.GetAssemblyDefinition();
-
-                // Assembly versions should all match Major.Minor.0.0
-                if (repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
-                {
-                    // We always align major.minor in assemblies and packages.
-                    Assert.Equal(expectedVersion.Major, assemblyDefinition.Version.Major);
-                }
-                else
-                {
-                    // ... but dotnet/runtime has a window between package version and (then) assembly version updates.
-                    Assert.True(
-                        expectedVersion.Major == assemblyDefinition.Version.Major
-                            || expectedVersion.Major - 1 == assemblyDefinition.Version.Major,
-                        $"Unexpected Major assembly version '{assemblyDefinition.Version.Major}' is neither "
-                            + $"{expectedVersion.Major - 1}' nor '{expectedVersion.Major}'."
-                    );
-                }
-
-                Assert.Equal(expectedVersion.Minor, assemblyDefinition.Version.Minor);
-                Assert.Equal(0, assemblyDefinition.Version.Build);
-                Assert.Equal(0, assemblyDefinition.Version.Revision);
+                // We always align major.minor in assemblies and packages.
+                Assert.Equal(expectedVersion.Major, assemblyDefinition.Version.Major);
             }
-        );
+            else
+            {
+                // ... but dotnet/runtime has a window between package version and (then) assembly version updates.
+                Assert.True(
+                    expectedVersion.Major == assemblyDefinition.Version.Major
+                        || expectedVersion.Major - 1 == assemblyDefinition.Version.Major,
+                    $"Unexpected Major assembly version '{assemblyDefinition.Version.Major}' is neither "
+                        + $"{expectedVersion.Major - 1}' nor '{expectedVersion.Major}'."
+                );
+            }
+
+            Assert.Equal(expectedVersion.Minor, assemblyDefinition.Version.Minor);
+            Assert.Equal(0, assemblyDefinition.Version.Build);
+            Assert.Equal(0, assemblyDefinition.Version.Revision);
+        });
     }
 
     [Fact]
@@ -133,31 +128,23 @@ public class TargetingPackTests
         );
         Assert.NotEmpty(dlls);
 
-        Assert.All(
-            dlls,
-            path =>
+        Assert.All(dlls, path =>
+        {
+            using var fileStream = File.OpenRead(path);
+            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+
+            Assert.All(reader.AssemblyReferences, handle =>
             {
-                using var fileStream = File.OpenRead(path);
-                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+                var reference = reader.GetAssemblyReference(handle);
+                var result = (0 == reference.Version.Revision && 0 == reference.Version.Build);
 
-                Assert.All(
-                    reader.AssemblyReferences,
-                    handle =>
-                    {
-                        var reference = reader.GetAssemblyReference(handle);
-                        var result = (
-                            0 == reference.Version.Revision && 0 == reference.Version.Build
-                        );
-
-                        Assert.True(
-                            result,
-                            $"In {Path.GetFileName(path)}, {reference.GetAssemblyName()} has unexpected version {reference.Version}."
-                        );
-                    }
+                Assert.True(
+                    result,
+                    $"In {Path.GetFileName(path)}, {reference.GetAssemblyName()} has unexpected version {reference.Version}."
                 );
-            }
-        );
+            });
+        });
     }
 
     [Fact]
@@ -203,33 +190,30 @@ public class TargetingPackTests
             aspNetCoreAppPackageVersion = $"{parsedVersion.Major}.{parsedVersion.Minor}.0";
         }
 
-        Assert.All(
-            packageOverrideFileLines,
-            entry =>
+        Assert.All(packageOverrideFileLines, entry =>
+        {
+            var packageOverrideParts = entry.Split("|");
+            Assert.Equal(2, packageOverrideParts.Length);
+
+            var packageName = packageOverrideParts[0];
+            var packageVersion = packageOverrideParts[1];
+
+            if (runtimeDependencies.Contains(packageName))
             {
-                var packageOverrideParts = entry.Split("|");
-                Assert.Equal(2, packageOverrideParts.Length);
-
-                var packageName = packageOverrideParts[0];
-                var packageVersion = packageOverrideParts[1];
-
-                if (runtimeDependencies.Contains(packageName))
-                {
-                    Assert.Equal(netCoreAppPackageVersion, packageVersion);
-                }
-                else if (aspnetcoreDependencies.Contains(packageName))
-                {
-                    Assert.Equal(aspNetCoreAppPackageVersion, packageVersion);
-                }
-                else
-                {
-                    Assert.True(
-                        false,
-                        $"{packageName} is not a recognized aspNetCore or runtime dependency"
-                    );
-                }
+                Assert.Equal(netCoreAppPackageVersion, packageVersion);
             }
-        );
+            else if (aspnetcoreDependencies.Contains(packageName))
+            {
+                Assert.Equal(aspNetCoreAppPackageVersion, packageVersion);
+            }
+            else
+            {
+                Assert.True(
+                    false,
+                    $"{packageName} is not a recognized aspNetCore or runtime dependency"
+                );
+            }
+        });
     }
 
     [Fact]
@@ -242,49 +226,46 @@ public class TargetingPackTests
         );
         Assert.NotEmpty(dlls);
 
-        Assert.All(
-            dlls,
-            path =>
-            {
-                var assemblyName = AssemblyName.GetAssemblyName(path);
-                using var fileStream = File.OpenRead(path);
-                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-                var assemblyDefinition = reader.GetAssemblyDefinition();
-                var hasRefAssemblyAttribute = assemblyDefinition
-                    .GetCustomAttributes()
-                    .Any(attr =>
-                    {
-                        var attribute = reader.GetCustomAttribute(attr);
-                        var attributeConstructor = reader.GetMemberReference(
-                            (MemberReferenceHandle)attribute.Constructor
+        Assert.All(dlls, path =>
+        {
+            var assemblyName = AssemblyName.GetAssemblyName(path);
+            using var fileStream = File.OpenRead(path);
+            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+            var assemblyDefinition = reader.GetAssemblyDefinition();
+            var hasRefAssemblyAttribute = assemblyDefinition
+                .GetCustomAttributes()
+                .Any(attr =>
+                {
+                    var attribute = reader.GetCustomAttribute(attr);
+                    var attributeConstructor = reader.GetMemberReference(
+                        (MemberReferenceHandle)attribute.Constructor
+                    );
+                    var attributeType = reader.GetTypeReference(
+                        (TypeReferenceHandle)attributeConstructor.Parent
+                    );
+                    return reader.StringComparer.Equals(
+                            attributeType.Namespace,
+                            typeof(ReferenceAssemblyAttribute).Namespace
+                        )
+                        && reader.StringComparer.Equals(
+                            attributeType.Name,
+                            nameof(ReferenceAssemblyAttribute)
                         );
-                        var attributeType = reader.GetTypeReference(
-                            (TypeReferenceHandle)attributeConstructor.Parent
-                        );
-                        return reader.StringComparer.Equals(
-                                attributeType.Namespace,
-                                typeof(ReferenceAssemblyAttribute).Namespace
-                            )
-                            && reader.StringComparer.Equals(
-                                attributeType.Name,
-                                nameof(ReferenceAssemblyAttribute)
-                            );
-                    });
+                });
 
-                Assert.True(
-                    hasRefAssemblyAttribute,
-                    $"{path} should have {nameof(ReferenceAssemblyAttribute)}"
-                );
+            Assert.True(
+                hasRefAssemblyAttribute,
+                $"{path} should have {nameof(ReferenceAssemblyAttribute)}"
+            );
 #pragma warning disable SYSLIB0037 // AssemblyName.ProcessorArchitecture is obsolete
-                // MSIL and None represent platform neutral assemblies such that reference assemblies can always be loaded.
-                Assert.True(
-                    assemblyName.ProcessorArchitecture == ProcessorArchitecture.MSIL
-                        || assemblyName.ProcessorArchitecture == ProcessorArchitecture.None
-                );
+            // MSIL and None represent platform neutral assemblies such that reference assemblies can always be loaded.
+            Assert.True(
+                assemblyName.ProcessorArchitecture == ProcessorArchitecture.MSIL
+                    || assemblyName.ProcessorArchitecture == ProcessorArchitecture.None
+            );
 #pragma warning restore SYSLIB0037
-            }
-        );
+        });
     }
 
     [Fact]
@@ -340,26 +321,23 @@ public class TargetingPackTests
         Assert.Empty(missing);
         Assert.Empty(unexpected);
 
-        Assert.All(
-            manifestFileLines,
-            line =>
+        Assert.All(manifestFileLines, line =>
+        {
+            var parts = line.Split('|');
+            Assert.Equal(4, parts.Length);
+            Assert.Equal("Microsoft.AspNetCore.App.Ref", parts[1]);
+            if (parts[2].Length > 0)
             {
-                var parts = line.Split('|');
-                Assert.Equal(4, parts.Length);
-                Assert.Equal("Microsoft.AspNetCore.App.Ref", parts[1]);
-                if (parts[2].Length > 0)
-                {
-                    Assert.True(
-                        Version.TryParse(parts[2], out _),
-                        "Assembly version must be convertable to System.Version"
-                    );
-                }
                 Assert.True(
-                    Version.TryParse(parts[3], out _),
-                    "File version must be convertable to System.Version"
+                    Version.TryParse(parts[2], out _),
+                    "Assembly version must be convertable to System.Version"
                 );
             }
-        );
+            Assert.True(
+                Version.TryParse(parts[3], out _),
+                "File version must be convertable to System.Version"
+            );
+        });
     }
 
     [Fact]
@@ -433,24 +411,21 @@ public class TargetingPackTests
             Assert.Empty(unexpected);
         }
 
-        Assert.All(
-            frameworkListEntries,
-            i =>
-            {
-                var assemblyPath = i.Attribute("Path").Value;
-                var assemblyVersion = i.Attribute("AssemblyVersion").Value;
-                var fileVersion = i.Attribute("FileVersion").Value;
+        Assert.All(frameworkListEntries, i =>
+        {
+            var assemblyPath = i.Attribute("Path").Value;
+            var assemblyVersion = i.Attribute("AssemblyVersion").Value;
+            var fileVersion = i.Attribute("FileVersion").Value;
 
-                Assert.True(
-                    Version.TryParse(assemblyVersion, out _),
-                    $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version"
-                );
-                Assert.True(
-                    Version.TryParse(fileVersion, out _),
-                    $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version"
-                );
-            }
-        );
+            Assert.True(
+                Version.TryParse(assemblyVersion, out _),
+                $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version"
+            );
+            Assert.True(
+                Version.TryParse(fileVersion, out _),
+                $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version"
+            );
+        });
     }
 
     [Fact]
@@ -515,22 +490,19 @@ public class TargetingPackTests
             i.Attribute("Type").Value.Equals("Analyzer", StringComparison.Ordinal)
         );
 
-        Assert.All(
-            analyzerEntries,
-            analyzerEntry =>
+        Assert.All(analyzerEntries, analyzerEntry =>
+        {
+            var actualLanguage = analyzerEntry.Attribute("Language")?.Value;
+            var assemblyPath = analyzerEntry.Attribute("Path").Value;
+
+            string expectedLanguage = Path.GetFileName(Path.GetDirectoryName(assemblyPath));
+
+            if (expectedLanguage.Equals("dotnet", StringComparison.OrdinalIgnoreCase))
             {
-                var actualLanguage = analyzerEntry.Attribute("Language")?.Value;
-                var assemblyPath = analyzerEntry.Attribute("Path").Value;
-
-                string expectedLanguage = Path.GetFileName(Path.GetDirectoryName(assemblyPath));
-
-                if (expectedLanguage.Equals("dotnet", StringComparison.OrdinalIgnoreCase))
-                {
-                    expectedLanguage = null;
-                }
-
-                Assert.Equal(expectedLanguage, actualLanguage);
+                expectedLanguage = null;
             }
-        );
+
+            Assert.Equal(expectedLanguage, actualLanguage);
+        });
     }
 }

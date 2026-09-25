@@ -14,24 +14,42 @@ namespace System.Reflection
 
         internal unsafe delegate object? InvokeFunc_RefArgs(object? obj, IntPtr* refArguments);
         internal delegate object? InvokeFunc_ObjSpanArgs(object? obj, Span<object?> arguments);
-        internal delegate object? InvokeFunc_Obj4Args(object? obj, object? arg1, object? arg2, object? arg3, object? arg4);
+        internal delegate object? InvokeFunc_Obj4Args(
+            object? obj,
+            object? arg1,
+            object? arg2,
+            object? arg3,
+            object? arg4
+        );
 
-        public static unsafe InvokeFunc_Obj4Args CreateInvokeDelegate_Obj4Args(MethodBase method, bool backwardsCompat)
+        public static unsafe InvokeFunc_Obj4Args CreateInvokeDelegate_Obj4Args(
+            MethodBase method,
+            bool backwardsCompat
+        )
         {
             Debug.Assert(!method.ContainsGenericParameters);
 
             bool emitNew = method is RuntimeConstructorInfo;
             bool hasThis = !emitNew && !method.IsStatic;
 
-            Type[] delegateParameters = new Type[5] { typeof(object), typeof(object), typeof(object), typeof(object), typeof(object) };
+            Type[] delegateParameters = new Type[5]
+            {
+                typeof(object),
+                typeof(object),
+                typeof(object),
+                typeof(object),
+                typeof(object),
+            };
 
-            string declaringTypeName = method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
+            string declaringTypeName =
+                method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
             var dm = new DynamicMethod(
                 InvokeStubPrefix + declaringTypeName + method.Name,
                 returnType: typeof(object),
                 delegateParameters,
                 typeof(object).Module, // Use system module to identify our DynamicMethods.
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator il = dm.GetILGenerator();
 
@@ -80,10 +98,14 @@ namespace System.Reflection
             EmitCallAndReturnHandling(il, method, emitNew, backwardsCompat);
 
             // Create the delegate; it is also compiled at this point due to restrictedSkipVisibility=true.
-            return (InvokeFunc_Obj4Args)dm.CreateDelegate(typeof(InvokeFunc_Obj4Args), target: null);
+            return (InvokeFunc_Obj4Args)
+                dm.CreateDelegate(typeof(InvokeFunc_Obj4Args), target: null);
         }
 
-        public static unsafe InvokeFunc_ObjSpanArgs CreateInvokeDelegate_ObjSpanArgs(MethodBase method, bool backwardsCompat)
+        public static unsafe InvokeFunc_ObjSpanArgs CreateInvokeDelegate_ObjSpanArgs(
+            MethodBase method,
+            bool backwardsCompat
+        )
         {
             Debug.Assert(!method.ContainsGenericParameters);
 
@@ -93,13 +115,15 @@ namespace System.Reflection
             // The first parameter is unused but supports treating the DynamicMethod as an instance method which is slightly faster than a static.
             Type[] delegateParameters = new Type[2] { typeof(object), typeof(Span<object>) };
 
-            string declaringTypeName = method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
+            string declaringTypeName =
+                method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
             var dm = new DynamicMethod(
                 InvokeStubPrefix + declaringTypeName + method.Name,
                 returnType: typeof(object),
                 delegateParameters,
                 typeof(object).Module, // Use system module to identify our DynamicMethods.
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator il = dm.GetILGenerator();
 
@@ -137,10 +161,14 @@ namespace System.Reflection
             EmitCallAndReturnHandling(il, method, emitNew, backwardsCompat);
 
             // Create the delegate; it is also compiled at this point due to restrictedSkipVisibility=true.
-            return (InvokeFunc_ObjSpanArgs)dm.CreateDelegate(typeof(InvokeFunc_ObjSpanArgs), target: null);
+            return (InvokeFunc_ObjSpanArgs)
+                dm.CreateDelegate(typeof(InvokeFunc_ObjSpanArgs), target: null);
         }
 
-        public static unsafe InvokeFunc_RefArgs CreateInvokeDelegate_RefArgs(MethodBase method, bool backwardsCompat)
+        public static unsafe InvokeFunc_RefArgs CreateInvokeDelegate_RefArgs(
+            MethodBase method,
+            bool backwardsCompat
+        )
         {
             Debug.Assert(!method.ContainsGenericParameters);
 
@@ -148,15 +176,22 @@ namespace System.Reflection
             bool hasThis = !(emitNew || method.IsStatic);
 
             // The first parameter is unused but supports treating the DynamicMethod as an instance method which is slightly faster than a static.
-            Type[] delegateParameters = new Type[3] { typeof(object), typeof(object), typeof(IntPtr*) };
+            Type[] delegateParameters = new Type[3]
+            {
+                typeof(object),
+                typeof(object),
+                typeof(IntPtr*),
+            };
 
-            string declaringTypeName = method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
+            string declaringTypeName =
+                method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
             var dm = new DynamicMethod(
                 InvokeStubPrefix + declaringTypeName + method.Name,
                 returnType: typeof(object),
                 delegateParameters,
                 typeof(object).Module, // Use system module to identify our DynamicMethods.
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator il = dm.GetILGenerator();
 
@@ -186,7 +221,12 @@ namespace System.Reflection
                 RuntimeType parameterType = (RuntimeType)parameters[i].ParameterType;
                 if (!parameterType.IsByRef)
                 {
-                    il.Emit(OpCodes.Ldobj, parameterType.IsPointer || parameterType.IsFunctionPointer ? typeof(IntPtr) : parameterType);
+                    il.Emit(
+                        OpCodes.Ldobj,
+                        parameterType.IsPointer || parameterType.IsFunctionPointer
+                            ? typeof(IntPtr)
+                            : parameterType
+                    );
                 }
             }
 
@@ -205,7 +245,12 @@ namespace System.Reflection
             il.Emit(OpCodes.Ldobj, parameterType);
         }
 
-        private static void EmitCallAndReturnHandling(ILGenerator il, MethodBase method, bool emitNew, bool backwardsCompat)
+        private static void EmitCallAndReturnHandling(
+            ILGenerator il,
+            MethodBase method,
+            bool emitNew,
+            bool backwardsCompat
+        )
         {
             // For CallStack reasons, don't inline target method.
             // Mono interpreter does not support\need this.
@@ -280,7 +325,10 @@ namespace System.Reflection
                     Label retValueOk = il.DefineLabel();
                     il.Emit(OpCodes.Dup);
                     il.Emit(OpCodes.Brtrue_S, retValueOk);
-                    il.Emit(OpCodes.Call, Methods.ThrowHelper_Throw_NullReference_InvokeNullRefReturned());
+                    il.Emit(
+                        OpCodes.Call,
+                        Methods.ThrowHelper_Throw_NullReference_InvokeNullRefReturned()
+                    );
                     il.MarkLabel(retValueOk);
 
                     // Handle per-type differences.
@@ -322,37 +370,63 @@ namespace System.Reflection
         private static class Methods
         {
             private static FieldInfo? s_ByReferenceOfByte_Value;
+
             public static FieldInfo ByReferenceOfByte_Value() =>
                 s_ByReferenceOfByte_Value ??= typeof(ByReference).GetField("Value")!;
 
             private static MethodInfo? s_Span_get_Item;
+
             public static MethodInfo Span_get_Item() =>
                 s_Span_get_Item ??= typeof(Span<object>).GetProperty("Item")!.GetGetMethod()!;
 
             private static MethodInfo? s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned;
+
             public static MethodInfo ThrowHelper_Throw_NullReference_InvokeNullRefReturned() =>
-                s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned ??= typeof(ThrowHelper).GetMethod(nameof(ThrowHelper.Throw_NullReference_InvokeNullRefReturned))!;
+                s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned ??=
+                    typeof(ThrowHelper).GetMethod(
+                        nameof(ThrowHelper.Throw_NullReference_InvokeNullRefReturned)
+                    )!;
 
             private static MethodInfo? s_Object_GetRawData;
+
             public static MethodInfo Object_GetRawData() =>
-                s_Object_GetRawData ??= typeof(RuntimeHelpers).GetMethod(nameof(RuntimeHelpers.GetRawData), BindingFlags.NonPublic | BindingFlags.Static)!;
+                s_Object_GetRawData ??= typeof(RuntimeHelpers).GetMethod(
+                    nameof(RuntimeHelpers.GetRawData),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
 
             private static MethodInfo? s_Pointer_Box;
+
             public static MethodInfo Pointer_Box() =>
-                s_Pointer_Box ??= typeof(Pointer).GetMethod(nameof(Pointer.Box), new[] { typeof(void*), typeof(Type) })!;
+                s_Pointer_Box ??= typeof(Pointer).GetMethod(
+                    nameof(Pointer.Box),
+                    new[] { typeof(void*), typeof(Type) }
+                )!;
 
             private static MethodInfo? s_Type_GetTypeFromHandle;
+
             public static MethodInfo Type_GetTypeFromHandle() =>
-                s_Type_GetTypeFromHandle ??= typeof(Type).GetMethod(nameof(Type.GetTypeFromHandle), new[] { typeof(RuntimeTypeHandle) })!;
+                s_Type_GetTypeFromHandle ??= typeof(Type).GetMethod(
+                    nameof(Type.GetTypeFromHandle),
+                    new[] { typeof(RuntimeTypeHandle) }
+                )!;
 
 #if MONO
             private static MethodInfo? s_DisableInline;
+
             public static MethodInfo DisableInline() =>
-                s_DisableInline ??= typeof(System.Runtime.CompilerServices.JitHelpers).GetMethod(nameof(System.Runtime.CompilerServices.JitHelpers.DisableInline), BindingFlags.NonPublic | BindingFlags.Static)!;
+                s_DisableInline ??= typeof(System.Runtime.CompilerServices.JitHelpers).GetMethod(
+                    nameof(System.Runtime.CompilerServices.JitHelpers.DisableInline),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
 #else
             private static MethodInfo? s_NextCallReturnAddress;
+
             public static MethodInfo NextCallReturnAddress() =>
-                s_NextCallReturnAddress ??= typeof(StubHelpers.StubHelpers).GetMethod(nameof(StubHelpers.StubHelpers.NextCallReturnAddress), BindingFlags.NonPublic | BindingFlags.Static)!;
+                s_NextCallReturnAddress ??= typeof(StubHelpers.StubHelpers).GetMethod(
+                    nameof(StubHelpers.StubHelpers.NextCallReturnAddress),
+                    BindingFlags.NonPublic | BindingFlags.Static
+                )!;
 #endif
         }
     }

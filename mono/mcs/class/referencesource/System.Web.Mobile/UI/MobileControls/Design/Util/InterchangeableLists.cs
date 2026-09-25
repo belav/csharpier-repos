@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="InterchangeableLists.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 #if UNUSED_CODE
@@ -12,15 +12,17 @@ namespace System.Web.UI.Design.MobileControls.Util
     using System.Collections;
     using System.ComponentModel;
     using System.Data;
-    using System.Drawing;
     using System.Diagnostics;
+    using System.Drawing;
     using System.Web.UI.Design.MobileControls;
     using System.Windows.Forms;
 
     [
         ToolboxItem(false),
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-            Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
+        System.Security.Permissions.SecurityPermission(
+            System.Security.Permissions.SecurityAction.Demand,
+            Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+        )
     ]
     internal sealed class InterchangeableLists : System.Windows.Forms.Panel
     {
@@ -53,9 +55,7 @@ namespace System.Web.UI.Design.MobileControls.Util
             this._eventTable = new Hashtable();
         }
 
-        internal void SetTitles(
-            String availableListTitle,
-            String selectedListTitle)
+        internal void SetTitles(String availableListTitle, String selectedListTitle)
         {
             this._selectedFieldLabel.Text = selectedListTitle;
             this._availableFieldLabel.Text = availableListTitle;
@@ -85,14 +85,8 @@ namespace System.Web.UI.Design.MobileControls.Util
 
         internal EventHandler OnComponentChanged
         {
-            get 
-            {
-                return (EventHandler)_eventTable[_componentChangedEvent];
-            }
-            set 
-            {
-                _eventTable[_componentChangedEvent] = value;
-            }
+            get { return (EventHandler)_eventTable[_componentChangedEvent]; }
+            set { _eventTable[_componentChangedEvent] = value; }
         }
 
         private void NotifyChangeEvent()
@@ -122,7 +116,7 @@ namespace System.Web.UI.Design.MobileControls.Util
         }
 
         /// <summary>
-        ///    Required method for Designer support - do not modify 
+        ///    Required method for Designer support - do not modify
         ///    the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
@@ -141,7 +135,9 @@ namespace System.Web.UI.Design.MobileControls.Util
             this._removeButton.Text = "<";
             this._removeButton.Click += new System.EventHandler(this.RemoveNode);
             this._removeButton.AccessibleName = SR.GetString(SR.EditableTreeList_DeleteName);
-            this._removeButton.AccessibleDescription = SR.GetString(SR.EditableTreeList_DeleteDescription);
+            this._removeButton.AccessibleDescription = SR.GetString(
+                SR.EditableTreeList_DeleteDescription
+            );
             this._removeButton.Name = SR.GetString(SR.EditableTreeList_DeleteName);
 
             this._selectedFieldLabel.Location = new System.Drawing.Point(202, 8);
@@ -149,7 +145,9 @@ namespace System.Web.UI.Design.MobileControls.Util
             this._selectedFieldLabel.TabIndex = 5;
 
             this._addButton.AccessibleName = SR.GetString(SR.EditableTreeList_AddName);
-            this._addButton.AccessibleDescription = SR.GetString(SR.EditableTreeList_AddDescription);
+            this._addButton.AccessibleDescription = SR.GetString(
+                SR.EditableTreeList_AddDescription
+            );
             this._addButton.Name = SR.GetString(SR.EditableTreeList_AddName);
             this._addButton.Location = new System.Drawing.Point(166, 40);
             this._addButton.Size = new System.Drawing.Size(32, 25);
@@ -166,7 +164,9 @@ namespace System.Web.UI.Design.MobileControls.Util
             this._selectedList.Size = new System.Drawing.Size(154, 89);
             this._selectedList.TabIndex = 6;
             this._selectedList.DoubleClick += new System.EventHandler(this.RemoveNode);
-            this._selectedList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.SelectedList_AfterSelect);
+            this._selectedList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(
+                this.SelectedList_AfterSelect
+            );
             this._availableList.HideSelection = false;
             this._availableList.Indent = 15;
             this._availableList.Location = new System.Drawing.Point(8, 24);
@@ -176,13 +176,17 @@ namespace System.Web.UI.Design.MobileControls.Util
             this._availableList.Size = new System.Drawing.Size(154, 89);
             this._availableList.TabIndex = 2;
             this._availableList.DoubleClick += new System.EventHandler(this.AddNode);
-            this._availableList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.AvailableList_AfterSelect);
+            this._availableList.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(
+                this.AvailableList_AfterSelect
+            );
             this._availableFieldLabel.Location = new System.Drawing.Point(8, 8);
             this._availableFieldLabel.Size = new System.Drawing.Size(164, 16);
             this._availableFieldLabel.TabIndex = 1;
 
             this._upButton.AccessibleName = SR.GetString(SR.EditableTreeList_MoveUpName);
-            this._upButton.AccessibleDescription = SR.GetString(SR.EditableTreeList_MoveUpDescription);
+            this._upButton.AccessibleDescription = SR.GetString(
+                SR.EditableTreeList_MoveUpDescription
+            );
             this._upButton.Name = SR.GetString(SR.EditableTreeList_MoveUpName);
             this._upButton.Location = new System.Drawing.Point(360, 24);
             this._upButton.Size = new System.Drawing.Size(28, 27);
@@ -190,31 +194,35 @@ namespace System.Web.UI.Design.MobileControls.Util
             this._upButton.Click += new System.EventHandler(this.Up_Click);
 
             this._downButton.AccessibleName = SR.GetString(SR.EditableTreeList_MoveDownName);
-            this._downButton.AccessibleDescription = SR.GetString(SR.EditableTreeList_MoveDownDescription);
+            this._downButton.AccessibleDescription = SR.GetString(
+                SR.EditableTreeList_MoveDownDescription
+            );
             this._downButton.Name = SR.GetString(SR.EditableTreeList_MoveDownName);
             this._downButton.Location = new System.Drawing.Point(360, 55);
             this._downButton.Size = new System.Drawing.Size(28, 27);
             this._downButton.TabIndex = 8;
             this._downButton.Click += new System.EventHandler(this.Down_Click);
-            this.Controls.AddRange(new System.Windows.Forms.Control[] {this._availableFieldLabel,
-                                                                          this._selectedFieldLabel,
-                                                                          this._upButton,
-                                                                          this._downButton,
-                                                                          this._removeButton,
-                                                                          this._selectedList,
-                                                                          this._addButton,
-                                                                          this._availableList});
+            this.Controls.AddRange(
+                new System.Windows.Forms.Control[]
+                {
+                    this._availableFieldLabel,
+                    this._selectedFieldLabel,
+                    this._upButton,
+                    this._downButton,
+                    this._removeButton,
+                    this._selectedList,
+                    this._addButton,
+                    this._availableList,
+                }
+            );
             this.Size = new System.Drawing.Size(396, 119);
-
         }
 
         private void UpdateButtonEnabling()
         {
-            bool anAvailableItemIsSelected = 
-                (_availableList.SelectedNode != null);
+            bool anAvailableItemIsSelected = (_availableList.SelectedNode != null);
 
-            bool anSelectedItemIsSelected = 
-                (_selectedList.SelectedNode != null);
+            bool anSelectedItemIsSelected = (_selectedList.SelectedNode != null);
 
             _addButton.Enabled = anAvailableItemIsSelected;
             _removeButton.Enabled = anSelectedItemIsSelected;
@@ -223,8 +231,7 @@ namespace System.Web.UI.Design.MobileControls.Util
             {
                 int selectedIndex = _selectedList.SelectedNode.Index;
                 _upButton.Enabled = (selectedIndex > 0);
-                _downButton.Enabled = 
-                    (selectedIndex < _selectedList.Nodes.Count - 1);
+                _downButton.Enabled = (selectedIndex < _selectedList.Nodes.Count - 1);
             }
             else
             {
@@ -248,7 +255,7 @@ namespace System.Web.UI.Design.MobileControls.Util
 
         private void RemoveItem(TreeView list, TreeNode node)
         {
-            Debug.Assert (list.Nodes.Contains(node));
+            Debug.Assert(list.Nodes.Contains(node));
 
             int itemCount = list.Nodes.Count;
             int selectedIndex = list.SelectedNode.Index;
@@ -261,7 +268,7 @@ namespace System.Web.UI.Design.MobileControls.Util
             }
             else if (selectedIndex >= 1)
             {
-                list.SelectedNode = list.Nodes[selectedIndex-1];
+                list.SelectedNode = list.Nodes[selectedIndex - 1];
             }
             else
             {
@@ -295,10 +302,11 @@ namespace System.Web.UI.Design.MobileControls.Util
         }
 
         private void MoveItem(
-            int direction /* 1 is up, -1 is down */)
+            int direction /* 1 is up, -1 is down */
+        )
         {
             Debug.Assert(direction == -1 || direction == 1);
-            
+
             int selectedIndex = _selectedList.SelectedNode.Index;
             int newIndex = selectedIndex + direction;
 
@@ -326,12 +334,18 @@ namespace System.Web.UI.Design.MobileControls.Util
             NotifyChangeEvent();
         }
 
-        private void AvailableList_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
+        private void AvailableList_AfterSelect(
+            object sender,
+            System.Windows.Forms.TreeViewEventArgs e
+        )
         {
             UpdateButtonEnabling();
         }
 
-        private void SelectedList_AfterSelect(object sender, System.Windows.Forms.TreeViewEventArgs e)
+        private void SelectedList_AfterSelect(
+            object sender,
+            System.Windows.Forms.TreeViewEventArgs e
+        )
         {
             UpdateButtonEnabling();
         }

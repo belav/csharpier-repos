@@ -20,7 +20,7 @@ namespace System.Xml
         private XmlRawWriter? _wrapped;
         private OnRemoveWriter? _onRemove;
         private readonly XmlWriterSettings _writerSettings;
-        private readonly XmlEventCache _eventCache;           // Cache up events until first StartElement is encountered
+        private readonly XmlEventCache _eventCache; // Cache up events until first StartElement is encountered
         private readonly TextWriter? _textWriter;
         private readonly Stream? _strm;
 
@@ -51,7 +51,6 @@ namespace System.Xml
             _strm = strm;
         }
 
-
         //-----------------------------------------------
         // IRemovableWriter interface
         //-----------------------------------------------
@@ -64,7 +63,6 @@ namespace System.Xml
             get { return _onRemove; }
             set { _onRemove = value; }
         }
-
 
         //-----------------------------------------------
         // XmlWriter interface
@@ -275,10 +273,7 @@ namespace System.Xml
 
         internal override IXmlNamespaceResolver? NamespaceResolver
         {
-            get
-            {
-                return this._resolver;
-            }
+            get { return this._resolver; }
             set
             {
                 this._resolver = value;
@@ -330,10 +325,7 @@ namespace System.Xml
 
         internal override bool SupportsNamespaceDeclarationInChunks
         {
-            get
-            {
-                return _wrapped!.SupportsNamespaceDeclarationInChunks;
-            }
+            get { return _wrapped!.SupportsNamespaceDeclarationInChunks; }
         }
 
         internal override void WriteStartNamespaceDeclaration(string prefix)
@@ -403,15 +395,22 @@ namespace System.Xml
             _writerSettings.OutputMethod = outMethod;
 
             // If Indent was not set by the user, then default to True for Html
-            if (outMethod == XmlOutputMethod.Html && _writerSettings.IndentInternal == TriState.Unknown)
+            if (
+                outMethod == XmlOutputMethod.Html
+                && _writerSettings.IndentInternal == TriState.Unknown
+            )
                 _writerSettings.Indent = true;
 
             _writerSettings.ReadOnly = true;
 
             if (_textWriter != null)
-                _wrapped = ((XmlWellFormedWriter)XmlWriter.Create(_textWriter, _writerSettings)).RawWriter!;
+                _wrapped = (
+                    (XmlWellFormedWriter)XmlWriter.Create(_textWriter, _writerSettings)
+                ).RawWriter!;
             else
-                _wrapped = ((XmlWellFormedWriter)XmlWriter.Create(_strm!, _writerSettings)).RawWriter!;
+                _wrapped = (
+                    (XmlWellFormedWriter)XmlWriter.Create(_strm!, _writerSettings)
+                ).RawWriter!;
 
             // Send cached events to the new writer
             _eventCache.EndEvents();

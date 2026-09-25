@@ -223,14 +223,11 @@ public class RedirectToPageResultTest
 
         // Assert
         Assert.NotNull(context);
-        Assert.Collection(
-            Assert.IsType<RouteValueDictionary>(context.Values),
-            value =>
-            {
-                Assert.Equal("page", value.Key);
-                Assert.Equal(expected, value.Value);
-            }
-        );
+        Assert.Collection(Assert.IsType<RouteValueDictionary>(context.Values), value =>
+        {
+            Assert.Equal("page", value.Key);
+            Assert.Equal(expected, value.Value);
+        });
     }
 
     [Fact]

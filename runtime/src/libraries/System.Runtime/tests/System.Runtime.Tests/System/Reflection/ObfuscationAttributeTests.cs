@@ -22,10 +22,7 @@ namespace System.Reflection.Tests
         [InlineData(false)]
         public void ApplyToMembers_Set_GetReturnsExpected(bool value)
         {
-            var attribute = new ObfuscationAttribute
-            {
-                ApplyToMembers = value
-            };
+            var attribute = new ObfuscationAttribute { ApplyToMembers = value };
             Assert.Equal(value, attribute.ApplyToMembers);
         }
 
@@ -34,10 +31,7 @@ namespace System.Reflection.Tests
         [InlineData(false)]
         public void Exclude_Set_GetReturnsExpected(bool value)
         {
-            var attribute = new ObfuscationAttribute
-            {
-                Exclude = value
-            };
+            var attribute = new ObfuscationAttribute { Exclude = value };
             Assert.Equal(value, attribute.Exclude);
         }
 
@@ -47,10 +41,7 @@ namespace System.Reflection.Tests
         [InlineData("feature")]
         public void Feature_Set_GetReturnsExpected(string value)
         {
-            var attribute = new ObfuscationAttribute
-            {
-                Feature = value
-            };
+            var attribute = new ObfuscationAttribute { Feature = value };
             Assert.Equal(value, attribute.Feature);
         }
 
@@ -59,10 +50,7 @@ namespace System.Reflection.Tests
         [InlineData(false)]
         public void StripAfterObfuscation_Set_GetReturnsExpected(bool value)
         {
-            var attribute = new ObfuscationAttribute
-            {
-                StripAfterObfuscation = value
-            };
+            var attribute = new ObfuscationAttribute { StripAfterObfuscation = value };
             Assert.Equal(value, attribute.StripAfterObfuscation);
         }
     }

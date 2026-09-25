@@ -13,8 +13,10 @@ namespace System.Net.Test.Common
         // https://github.com/dotnet/runtime-assets/blob/main/src/System.Net.TestData/TestData/contoso.com.p7b
         private const string CARootThumbprint = "3B279AD43D6DD459268D3F3A3D72DAAD4BF4D9C6";
 
-        private static Lazy<bool> s_trustedCertificateSupport =
-            new Lazy<bool>(InitializeTrustedRootCertificateCapability, LazyThreadSafetyMode.ExecutionAndPublication);
+        private static Lazy<bool> s_trustedCertificateSupport = new Lazy<bool>(
+            InitializeTrustedRootCertificateCapability,
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
 
         public static bool IsTrustedRootCertificateInstalled()
         {
@@ -45,7 +47,10 @@ namespace System.Net.Test.Common
         public static bool Http2ForceUnencryptedLoopback()
         {
             string value = Configuration.Http.Http2ForceUnencryptedLoopback;
-            if (value != null && (value.Equals("true", StringComparison.OrdinalIgnoreCase) || value.Equals("1")))
+            if (
+                value != null
+                && (value.Equals("true", StringComparison.OrdinalIgnoreCase) || value.Equals("1"))
+            )
             {
                 return true;
             }
@@ -56,7 +61,10 @@ namespace System.Net.Test.Common
         public static bool SecurityForceSocketStreams()
         {
             string value = Configuration.Security.SecurityForceSocketStreams;
-            if (value != null && (value.Equals("true", StringComparison.OrdinalIgnoreCase) || value.Equals("1")))
+            if (
+                value != null
+                && (value.Equals("true", StringComparison.OrdinalIgnoreCase) || value.Equals("1"))
+            )
             {
                 return true;
             }
@@ -86,12 +94,14 @@ namespace System.Net.Test.Common
                 {
                     if (found != null)
                     {
-                        foreach (X509Certificate2 c in found) c.Dispose();
+                        foreach (X509Certificate2 c in found)
+                            c.Dispose();
                     }
 
                     if (certs != null)
                     {
-                        foreach (X509Certificate2 c in certs) c.Dispose();
+                        foreach (X509Certificate2 c in certs)
+                            c.Dispose();
                     }
                 }
             }

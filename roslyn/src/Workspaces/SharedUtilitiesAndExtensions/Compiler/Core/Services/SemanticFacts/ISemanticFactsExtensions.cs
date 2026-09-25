@@ -14,17 +14,18 @@ namespace Microsoft.CodeAnalysis.LanguageService
             this ISemanticFacts semanticFacts,
             TBinaryExpressionSyntax innerBinary,
             TBinaryExpressionSyntax parentBinary,
-            SemanticModel semanticModel)
+            SemanticModel semanticModel
+        )
             where TBinaryExpressionSyntax : SyntaxNode
         {
-            // Now we'll perform a few semantic checks to determine whether removal 
-            // of the parentheses might break semantics. Note that we'll try and be 
-            // fairly conservative with these. For example, we'll assume that failing 
-            // any of these checks results in the parentheses being declared as necessary 
+            // Now we'll perform a few semantic checks to determine whether removal
+            // of the parentheses might break semantics. Note that we'll try and be
+            // fairly conservative with these. For example, we'll assume that failing
+            // any of these checks results in the parentheses being declared as necessary
             // -- even if they could be removed depending on whether the parenthesized
             // expression appears on the left or right side of the parent binary expression.
 
-            // First, does the binary expression result in an operator overload being 
+            // First, does the binary expression result in an operator overload being
             // called?
             var symbolInfo = semanticModel.GetSymbolInfo(innerBinary);
             if (AnySymbolIsUserDefinedOperator(symbolInfo))
@@ -43,19 +44,31 @@ namespace Microsoft.CodeAnalysis.LanguageService
             if (innerTypeInfo.Type is IDynamicTypeSymbol)
                 return false;
 
-            semanticFacts.SyntaxFacts.GetPartsOfBinaryExpression(parentBinary, out var parentBinaryLeft, out var parentBinaryRight);
+            semanticFacts.SyntaxFacts.GetPartsOfBinaryExpression(
+                parentBinary,
+                out var parentBinaryLeft,
+                out var parentBinaryRight
+            );
 
             // Only allow us to change associativity if all the types are the same.
             // for example, if we have: int + (int + long)  then we don't want to
             // change things such that we effectively have (int + int) + long
-            if (!Equals(semanticModel.GetTypeInfo(parentBinaryLeft).Type,
-                        semanticModel.GetTypeInfo(parentBinaryRight).Type))
+            if (
+                !Equals(
+                    semanticModel.GetTypeInfo(parentBinaryLeft).Type,
+                    semanticModel.GetTypeInfo(parentBinaryRight).Type
+                )
+            )
             {
                 return false;
             }
 
-            if (!Equals(semanticModel.GetTypeInfo(parentBinaryLeft).ConvertedType,
-                        semanticModel.GetTypeInfo(parentBinaryRight).ConvertedType))
+            if (
+                !Equals(
+                    semanticModel.GetTypeInfo(parentBinaryLeft).ConvertedType,
+                    semanticModel.GetTypeInfo(parentBinaryRight).ConvertedType
+                )
+            )
             {
                 return false;
             }
@@ -67,11 +80,15 @@ namespace Microsoft.CodeAnalysis.LanguageService
             if (IsFloatingPoint(innerTypeInfo) || IsFloatingPoint(outerTypeInfo))
                 return false;
 
-            if (semanticModel.GetOperation(parentBinary) is IBinaryOperation parentBinaryOp &&
-                semanticModel.GetOperation(innerBinary) is IBinaryOperation innerBinaryOp)
+            if (
+                semanticModel.GetOperation(parentBinary) is IBinaryOperation parentBinaryOp
+                && semanticModel.GetOperation(innerBinary) is IBinaryOperation innerBinaryOp
+            )
             {
-                if ((parentBinaryOp.IsChecked || innerBinaryOp.IsChecked) &&
-                    (IsArithmetic(parentBinaryOp) || IsArithmetic(innerBinaryOp)))
+                if (
+                    (parentBinaryOp.IsChecked || innerBinaryOp.IsChecked)
+                    && (IsArithmetic(parentBinaryOp) || IsArithmetic(innerBinaryOp))
+                )
                 {
                     // For checked operations, we can't change which type of operator we're performing in a row as that
                     // could lead to overflow if we end up doing something like an addition prior to a subtraction.
@@ -83,10 +100,11 @@ namespace Microsoft.CodeAnalysis.LanguageService
 
             static bool IsArithmetic(IBinaryOperation op)
             {
-                return op.OperatorKind is BinaryOperatorKind.Add or
-                    BinaryOperatorKind.Subtract or
-                    BinaryOperatorKind.Multiply or
-                    BinaryOperatorKind.Divide;
+                return op.OperatorKind
+                    is BinaryOperatorKind.Add
+                        or BinaryOperatorKind.Subtract
+                        or BinaryOperatorKind.Multiply
+                        or BinaryOperatorKind.Divide;
             }
         }
 
@@ -108,20 +126,44 @@ namespace Microsoft.CodeAnalysis.LanguageService
             return false;
         }
 
-        private static bool IsUserDefinedOperator([NotNullWhen(returnValue: true)] ISymbol? symbol)
-            => symbol is IMethodSymbol methodSymbol &&
-               methodSymbol.MethodKind == MethodKind.UserDefinedOperator;
+        private static bool IsUserDefinedOperator(
+            [NotNullWhen(returnValue: true)] ISymbol? symbol
+        ) =>
+            symbol is IMethodSymbol methodSymbol
+            && methodSymbol.MethodKind == MethodKind.UserDefinedOperator;
 
-        private static bool IsFloatingPoint(TypeInfo typeInfo)
-            => IsFloatingPoint(typeInfo.Type) || IsFloatingPoint(typeInfo.ConvertedType);
+        private static bool IsFloatingPoint(TypeInfo typeInfo) =>
+            IsFloatingPoint(typeInfo.Type) || IsFloatingPoint(typeInfo.ConvertedType);
 
-        private static bool IsFloatingPoint([NotNullWhen(returnValue: true)] ITypeSymbol? type)
-            => type?.SpecialType is SpecialType.System_Single or SpecialType.System_Double;
+        private static bool IsFloatingPoint([NotNullWhen(returnValue: true)] ITypeSymbol? type) =>
+            type?.SpecialType is SpecialType.System_Single or SpecialType.System_Double;
 
-        public static IParameterSymbol? FindParameterForArgument(this ISemanticFacts semanticFacts, SemanticModel semanticModel, SyntaxNode argument, CancellationToken cancellationToken)
-            => semanticFacts.FindParameterForArgument(semanticModel, argument, allowUncertainCandidates: false, allowParams: false, cancellationToken);
+        public static IParameterSymbol? FindParameterForArgument(
+            this ISemanticFacts semanticFacts,
+            SemanticModel semanticModel,
+            SyntaxNode argument,
+            CancellationToken cancellationToken
+        ) =>
+            semanticFacts.FindParameterForArgument(
+                semanticModel,
+                argument,
+                allowUncertainCandidates: false,
+                allowParams: false,
+                cancellationToken
+            );
 
-        public static IParameterSymbol? FindParameterForAttributeArgument(this ISemanticFacts semanticFacts, SemanticModel semanticModel, SyntaxNode argument, CancellationToken cancellationToken)
-            => semanticFacts.FindParameterForAttributeArgument(semanticModel, argument, allowUncertainCandidates: false, allowParams: false, cancellationToken);
+        public static IParameterSymbol? FindParameterForAttributeArgument(
+            this ISemanticFacts semanticFacts,
+            SemanticModel semanticModel,
+            SyntaxNode argument,
+            CancellationToken cancellationToken
+        ) =>
+            semanticFacts.FindParameterForAttributeArgument(
+                semanticModel,
+                argument,
+                allowUncertainCandidates: false,
+                allowParams: false,
+                cancellationToken
+            );
     }
 }

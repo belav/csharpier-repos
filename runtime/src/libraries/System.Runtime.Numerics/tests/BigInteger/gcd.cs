@@ -133,15 +133,28 @@ namespace System.Numerics.Tests
             // (x+y)+z = (y+z)+x
 
             VerifyIdentityString(
-                Int64.MaxValue.ToString() + " " + Int32.MaxValue.ToString() + " bGCD " + Int16.MaxValue.ToString() + " bGCD",
-                Int32.MaxValue.ToString() + " " + Int16.MaxValue.ToString() + " bGCD " + Int64.MaxValue.ToString() + " bGCD"
+                Int64.MaxValue.ToString()
+                    + " "
+                    + Int32.MaxValue.ToString()
+                    + " bGCD "
+                    + Int16.MaxValue.ToString()
+                    + " bGCD",
+                Int32.MaxValue.ToString()
+                    + " "
+                    + Int16.MaxValue.ToString()
+                    + " bGCD "
+                    + Int64.MaxValue.ToString()
+                    + " bGCD"
             );
 
             byte[] x = GetRandomByteArray(s_random);
             byte[] y = GetRandomByteArray(s_random);
             byte[] z = GetRandomByteArray(s_random);
 
-            VerifyIdentityString(Print(x) + Print(y) + Print(z) + "bGCD bGCD", Print(y) + Print(z) + Print(x) + "bGCD bGCD");
+            VerifyIdentityString(
+                Print(x) + Print(y) + Print(z) + "bGCD bGCD",
+                Print(y) + Print(z) + Print(x) + "bGCD bGCD"
+            );
         }
 
         private static void VerifyGCDString(string opstring)

@@ -17,7 +17,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new AuthorizationContext(controllerContext, actionDescriptor); }, "actionDescriptor");
+                delegate
+                {
+                    new AuthorizationContext(controllerContext, actionDescriptor);
+                },
+                "actionDescriptor"
+            );
         }
 
         [Fact]
@@ -28,7 +33,10 @@ namespace System.Web.Mvc.Test
             ActionDescriptor actionDescriptor = new Mock<ActionDescriptor>().Object;
 
             // Act
-            AuthorizationContext authorizationContext = new AuthorizationContext(controllerContext, actionDescriptor);
+            AuthorizationContext authorizationContext = new AuthorizationContext(
+                controllerContext,
+                actionDescriptor
+            );
 
             // Assert
             Assert.Equal(actionDescriptor, authorizationContext.ActionDescriptor);

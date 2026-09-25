@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.MSBuild.Rpc;
 /// </summary>
 /// <remarks>
 /// The RPC system implemented here is pretty close to something like JSON-RPC; however since we need the Build Host to be usable in Source Build
-/// scenarios, we are limited to using only what is either in .NET or can be easily made buildable in Source Build. Thus existing solutions like StreamJsonRpc 
+/// scenarios, we are limited to using only what is either in .NET or can be easily made buildable in Source Build. Thus existing solutions like StreamJsonRpc
 /// are out. If at some point there is a standard RPC mechanism exposed in .NET or Source Build, we should delete this and use that instead.
 /// </remarks>
 internal sealed class RpcServer
@@ -61,7 +61,13 @@ internal sealed class RpcServer
         var runningTasks = new ConcurrentSet<Task>();
 
         string? line;
-        while ((line = await _receivingStream.TryReadLineOrReturnNullIfCancelledAsync(_shutdownTokenSource.Token).ConfigureAwait(false)) != null)
+        while (
+            (
+                line = await _receivingStream
+                    .TryReadLineOrReturnNullIfCancelledAsync(_shutdownTokenSource.Token)
+                    .ConfigureAwait(false)
+            ) != null
+        )
         {
             Request? request;
 
@@ -83,7 +89,9 @@ internal sealed class RpcServer
             _ = runningTask.ContinueWith(
                 _ => Contract.ThrowIfFalse(runningTasks.Remove(runningTask)),
                 CancellationToken.None,
-                TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
         }
 
         // Wait until all outstanding requests are processed; we however first must copy this into a list safely
@@ -108,20 +116,34 @@ internal sealed class RpcServer
         {
             Contract.ThrowIfFalse(
                 _rpcTargets.TryGetValue(request.TargetObject, out var rpcTarget),
-                $"Received a request for target object {request.TargetObject} but we don't have a registered object for that.");
+                $"Received a request for target object {request.TargetObject} but we don't have a registered object for that."
+            );
 
-            var method = rpcTarget.GetType().GetMethod(request.Method, BindingFlags.Public | BindingFlags.Instance);
+            var method = rpcTarget
+                .GetType()
+                .GetMethod(request.Method, BindingFlags.Public | BindingFlags.Instance);
 
-            Contract.ThrowIfNull(method, $"The invoked method '{request.Method}' could not be found.");
+            Contract.ThrowIfNull(
+                method,
+                $"The invoked method '{request.Method}' could not be found."
+            );
 
             var methodParameters = method.GetParameters();
 
-            var lastParameterIsCancellationToken = methodParameters.Length > 0 && methodParameters[^1].ParameterType == typeof(CancellationToken);
+            var lastParameterIsCancellationToken =
+                methodParameters.Length > 0
+                && methodParameters[^1].ParameterType == typeof(CancellationToken);
 
             if (lastParameterIsCancellationToken)
-                Contract.ThrowIfFalse(request.Parameters.Length == methodParameters.Length - 1, $"The arguments list should contain every parameter for {request.Method} except the final CancellationToken.");
+                Contract.ThrowIfFalse(
+                    request.Parameters.Length == methodParameters.Length - 1,
+                    $"The arguments list should contain every parameter for {request.Method} except the final CancellationToken."
+                );
             else
-                Contract.ThrowIfFalse(request.Parameters.Length == methodParameters.Length, $"The arguments list should contain every parameter for {request.Method}.");
+                Contract.ThrowIfFalse(
+                    request.Parameters.Length == methodParameters.Length,
+                    $"The arguments list should contain every parameter for {request.Method}."
+                );
 
             var arguments = new object?[methodParameters.Length];
 
@@ -132,7 +154,9 @@ internal sealed class RpcServer
                 if (i == methodParameters.Length - 1 && lastParameterIsCancellationToken)
                     arguments[i] = CancellationToken.None;
                 else
-                    arguments[i] = request.Parameters[i].ToObject(methodParameters[i].ParameterType);
+                    arguments[i] = request
+                        .Parameters[i]
+                        .ToObject(methodParameters[i].ParameterType);
             }
 
             var result = method.Invoke(rpcTarget, arguments);
@@ -155,17 +179,28 @@ internal sealed class RpcServer
                 }
             }
 
-            response = new Response { Id = request.Id, Value = result is not null ? JToken.FromObject(result) : null };
+            response = new Response
+            {
+                Id = request.Id,
+                Value = result is not null ? JToken.FromObject(result) : null,
+            };
         }
         catch (Exception e)
         {
             if (e is TargetInvocationException)
                 e = e.InnerException ?? e;
 
-            response = new Response { Id = request.Id, Exception = $"An exception of type {e.GetType()} was thrown: {e.Message}" };
+            response = new Response
+            {
+                Id = request.Id,
+                Exception = $"An exception of type {e.GetType()} was thrown: {e.Message}",
+            };
         }
 
-        var responseJson = JsonConvert.SerializeObject(response, JsonSettings.SingleLineSerializerSettings);
+        var responseJson = JsonConvert.SerializeObject(
+            response,
+            JsonSettings.SingleLineSerializerSettings
+        );
 
 #if DEBUG
         // Assert we didn't put a newline in this, since if we did the receiving side won't know how to parse it

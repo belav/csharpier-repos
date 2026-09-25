@@ -3,16 +3,14 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class IncludeOneToOneInMemoryTest : IncludeOneToOneTestBase<IncludeOneToOneInMemoryTest.OneToOneQueryInMemoryFixture>
+public class IncludeOneToOneInMemoryTest
+    : IncludeOneToOneTestBase<IncludeOneToOneInMemoryTest.OneToOneQueryInMemoryFixture>
 {
     public IncludeOneToOneInMemoryTest(OneToOneQueryInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class OneToOneQueryInMemoryFixture : OneToOneQueryFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

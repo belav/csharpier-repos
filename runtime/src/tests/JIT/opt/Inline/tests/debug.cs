@@ -5,6 +5,7 @@
 
 using System;
 using Xunit;
+
 public class A
 {
     private int _prop;
@@ -14,6 +15,7 @@ public class A
         set { _prop = value; }
     }
 }
+
 public class debug
 {
     [Fact]

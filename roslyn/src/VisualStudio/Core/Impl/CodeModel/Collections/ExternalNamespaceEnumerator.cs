@@ -18,19 +18,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 {
     public sealed class ExternalNamespaceEnumerator : IEnumerator, ICloneable
     {
-        internal static IEnumerator Create(CodeModelState state, ProjectId projectId, SymbolKey namespaceSymbolId)
+        internal static IEnumerator Create(
+            CodeModelState state,
+            ProjectId projectId,
+            SymbolKey namespaceSymbolId
+        )
         {
-            var newEnumerator = new ExternalNamespaceEnumerator(state, projectId, namespaceSymbolId);
+            var newEnumerator = new ExternalNamespaceEnumerator(
+                state,
+                projectId,
+                namespaceSymbolId
+            );
             return (IEnumerator)ComAggregate.CreateAggregatedObject(newEnumerator);
         }
 
-        private ExternalNamespaceEnumerator(CodeModelState state, ProjectId projectId, SymbolKey namespaceSymbolId)
+        private ExternalNamespaceEnumerator(
+            CodeModelState state,
+            ProjectId projectId,
+            SymbolKey namespaceSymbolId
+        )
         {
             _state = state;
             _projectId = projectId;
             _namespaceSymbolId = namespaceSymbolId;
 
-            _childEnumerator = ChildrenOfNamespace(state, projectId, namespaceSymbolId).GetEnumerator();
+            _childEnumerator = ChildrenOfNamespace(state, projectId, namespaceSymbolId)
+                .GetEnumerator();
         }
 
         private readonly CodeModelState _state;
@@ -41,22 +54,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
 
         public object Current
         {
-            get
-            {
-                return _childEnumerator.Current;
-            }
+            get { return _childEnumerator.Current; }
         }
 
-        public object Clone()
-            => Create(_state, _projectId, _namespaceSymbolId);
+        public object Clone() => Create(_state, _projectId, _namespaceSymbolId);
 
-        public bool MoveNext()
-            => _childEnumerator.MoveNext();
+        public bool MoveNext() => _childEnumerator.MoveNext();
 
-        public void Reset()
-            => _childEnumerator.Reset();
+        public void Reset() => _childEnumerator.Reset();
 
-        internal static IEnumerable<EnvDTE.CodeElement> ChildrenOfNamespace(CodeModelState state, ProjectId projectId, SymbolKey namespaceSymbolId)
+        internal static IEnumerable<EnvDTE.CodeElement> ChildrenOfNamespace(
+            CodeModelState state,
+            ProjectId projectId,
+            SymbolKey namespaceSymbolId
+        )
         {
             var project = state.Workspace.CurrentSolution.GetProject(projectId);
             if (project == null)
@@ -64,7 +75,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                 throw Exceptions.ThrowEFail();
             }
 
-            if (namespaceSymbolId.Resolve(project.GetCompilationAsync().Result).Symbol is not INamespaceSymbol namespaceSymbol)
+            if (
+                namespaceSymbolId.Resolve(project.GetCompilationAsync().Result).Symbol
+                is not INamespaceSymbol namespaceSymbol
+            )
             {
                 throw Exceptions.ThrowEFail();
             }
@@ -75,7 +89,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
             {
                 if (child is INamespaceSymbol namespaceChild)
                 {
-                    yield return (EnvDTE.CodeElement)ExternalCodeNamespace.Create(state, projectId, namespaceChild);
+                    yield return (EnvDTE.CodeElement)
+                        ExternalCodeNamespace.Create(state, projectId, namespaceChild);
                 }
                 else
                 {
@@ -85,7 +100,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Colle
                     {
                         if (namedType.Locations.Any(static l => l.IsInMetadata || l.IsInSource))
                         {
-                            yield return state.CodeModelService.CreateCodeType(state, projectId, namedType);
+                            yield return state.CodeModelService.CreateCodeType(
+                                state,
+                                projectId,
+                                namedType
+                            );
                         }
                     }
                 }

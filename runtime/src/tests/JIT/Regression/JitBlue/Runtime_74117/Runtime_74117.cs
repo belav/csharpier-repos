@@ -7,7 +7,7 @@ using Xunit;
 public unsafe class Runtime_74117
 {
     [Fact]
-    public unsafe static void TestEntryPoint()
+    public static unsafe void TestEntryPoint()
     {
         byte a = 5;
         Problem(ref a, 0);
@@ -24,5 +24,6 @@ public unsafe class Runtime_74117
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    internal static void JitUse<T>(T* arg) where T : unmanaged { }
+    internal static void JitUse<T>(T* arg)
+        where T : unmanaged { }
 }

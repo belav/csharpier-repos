@@ -2,6 +2,7 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 using System.Web.Http.Description;
+
 namespace System.Web.Http.ApiExplorer
 {
     public class HiddenActionController : ApiController
@@ -13,9 +14,7 @@ namespace System.Web.Http.ApiExplorer
 
         [HttpPost]
         [ApiExplorerSettings(IgnoreApi = true)]
-        public void AddData()
-        {
-        }
+        public void AddData() { }
 
         [ApiExplorerSettings(IgnoreApi = true)]
         public int Get()

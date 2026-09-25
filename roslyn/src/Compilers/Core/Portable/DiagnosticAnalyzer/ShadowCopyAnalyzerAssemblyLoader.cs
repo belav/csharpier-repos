@@ -5,12 +5,11 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Immutable;
-
 #if NETCOREAPP
 using System.Runtime.Loader;
 #endif
@@ -46,11 +45,12 @@ namespace Microsoft.CodeAnalysis
 
 #if NETCOREAPP
         public ShadowCopyAnalyzerAssemblyLoader(string baseDirectory)
-            : this(null, baseDirectory)
-        {
-        }
+            : this(null, baseDirectory) { }
 
-        public ShadowCopyAnalyzerAssemblyLoader(AssemblyLoadContext? compilerLoadContext, string baseDirectory)
+        public ShadowCopyAnalyzerAssemblyLoader(
+            AssemblyLoadContext? compilerLoadContext,
+            string baseDirectory
+        )
             : base(compilerLoadContext, AnalyzerLoadOption.LoadFromDisk)
 #else
         public ShadowCopyAnalyzerAssemblyLoader(string baseDirectory)
@@ -63,7 +63,9 @@ namespace Microsoft.CodeAnalysis
 
             _baseDirectory = baseDirectory;
             _shadowCopyDirectoryAndMutex = new Lazy<(string directory, Mutex)>(
-                () => CreateUniqueDirectoryForProcess(), LazyThreadSafetyMode.ExecutionAndPublication);
+                () => CreateUniqueDirectoryForProcess(),
+                LazyThreadSafetyMode.ExecutionAndPublication
+            );
 
             DeleteLeftoverDirectoriesTask = Task.Run(DeleteLeftoverDirectories);
         }
@@ -129,7 +131,10 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected override string PreparePathToLoad(string originalAnalyzerPath, ImmutableHashSet<string> cultureNames)
+        protected override string PreparePathToLoad(
+            string originalAnalyzerPath,
+            ImmutableHashSet<string> cultureNames
+        )
         {
             var analyzerFileName = Path.GetFileName(originalAnalyzerPath);
             var shadowDirectory = CreateUniqueDirectoryForAssembly();
@@ -145,8 +150,16 @@ namespace Microsoft.CodeAnalysis
             var satelliteFileName = GetSatelliteFileName(analyzerFileName);
             foreach (var cultureName in cultureNames)
             {
-                var originalSatellitePath = Path.Combine(originalDirectory, cultureName, satelliteFileName);
-                var shadowSatellitePath = Path.Combine(shadowDirectory, cultureName, satelliteFileName);
+                var originalSatellitePath = Path.Combine(
+                    originalDirectory,
+                    cultureName,
+                    satelliteFileName
+                );
+                var shadowSatellitePath = Path.Combine(
+                    shadowDirectory,
+                    cultureName,
+                    satelliteFileName
+                );
                 copyFile(originalSatellitePath, shadowSatellitePath);
             }
 
@@ -157,7 +170,9 @@ namespace Microsoft.CodeAnalysis
                 var directory = Path.GetDirectoryName(shadowCopyPath);
                 if (directory is null)
                 {
-                    throw new ArgumentException($"Shadow copy path '{shadowCopyPath}' must not be the root directory");
+                    throw new ArgumentException(
+                        $"Shadow copy path '{shadowCopyPath}' must not be the root directory"
+                    );
                 }
 
                 _ = Directory.CreateDirectory(directory);
@@ -170,7 +185,12 @@ namespace Microsoft.CodeAnalysis
         {
             DirectoryInfo directory = new DirectoryInfo(directoryPath);
 
-            foreach (var file in directory.EnumerateFiles(searchPattern: "*", searchOption: SearchOption.AllDirectories))
+            foreach (
+                var file in directory.EnumerateFiles(
+                    searchPattern: "*",
+                    searchOption: SearchOption.AllDirectories
+                )
+            )
             {
                 ClearReadOnlyFlagOnFile(file);
             }
@@ -195,7 +215,10 @@ namespace Microsoft.CodeAnalysis
         {
             int directoryId = Interlocked.Increment(ref _assemblyDirectoryId);
 
-            string directory = Path.Combine(_shadowCopyDirectoryAndMutex.Value.directory, directoryId.ToString());
+            string directory = Path.Combine(
+                _shadowCopyDirectoryAndMutex.Value.directory,
+                directoryId.ToString()
+            );
 
             Directory.CreateDirectory(directory);
             return directory;

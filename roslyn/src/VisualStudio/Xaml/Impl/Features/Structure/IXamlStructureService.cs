@@ -14,6 +14,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Structure
 {
     internal interface IXamlStructureService : ILanguageService
     {
-        Task<ImmutableArray<XamlStructureTag>> GetStructureTagsAsync(TextDocument document, CancellationToken cancellationToken);
+        Task<ImmutableArray<XamlStructureTag>> GetStructureTagsAsync(
+            TextDocument document,
+            CancellationToken cancellationToken
+        );
     }
 }

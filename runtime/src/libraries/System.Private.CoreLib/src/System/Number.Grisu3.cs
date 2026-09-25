@@ -35,293 +35,297 @@ namespace System
             private const int MinimalTargetExponent = -60;
 
             private static ReadOnlySpan<short> CachedPowersBinaryExponent =>
-            [
-                -1220,
-                -1193,
-                -1166,
-                -1140,
-                -1113,
-                -1087,
-                -1060,
-                -1034,
-                -1007,
-                -980,
-                -954,
-                -927,
-                -901,
-                -874,
-                -847,
-                -821,
-                -794,
-                -768,
-                -741,
-                -715,
-                -688,
-                -661,
-                -635,
-                -608,
-                -582,
-                -555,
-                -529,
-                -502,
-                -475,
-                -449,
-                -422,
-                -396,
-                -369,
-                -343,
-                -316,
-                -289,
-                -263,
-                -236,
-                -210,
-                -183,
-                -157,
-                -130,
-                -103,
-                -77,
-                -50,
-                -24,
-                3,
-                30,
-                56,
-                83,
-                109,
-                136,
-                162,
-                189,
-                216,
-                242,
-                269,
-                295,
-                322,
-                348,
-                375,
-                402,
-                428,
-                455,
-                481,
-                508,
-                534,
-                561,
-                588,
-                614,
-                641,
-                667,
-                694,
-                720,
-                747,
-                774,
-                800,
-                827,
-                853,
-                880,
-                907,
-                933,
-                960,
-                986,
-                1013,
-                1039,
-                1066,
-            ];
+                [
+                    -1220,
+                    -1193,
+                    -1166,
+                    -1140,
+                    -1113,
+                    -1087,
+                    -1060,
+                    -1034,
+                    -1007,
+                    -980,
+                    -954,
+                    -927,
+                    -901,
+                    -874,
+                    -847,
+                    -821,
+                    -794,
+                    -768,
+                    -741,
+                    -715,
+                    -688,
+                    -661,
+                    -635,
+                    -608,
+                    -582,
+                    -555,
+                    -529,
+                    -502,
+                    -475,
+                    -449,
+                    -422,
+                    -396,
+                    -369,
+                    -343,
+                    -316,
+                    -289,
+                    -263,
+                    -236,
+                    -210,
+                    -183,
+                    -157,
+                    -130,
+                    -103,
+                    -77,
+                    -50,
+                    -24,
+                    3,
+                    30,
+                    56,
+                    83,
+                    109,
+                    136,
+                    162,
+                    189,
+                    216,
+                    242,
+                    269,
+                    295,
+                    322,
+                    348,
+                    375,
+                    402,
+                    428,
+                    455,
+                    481,
+                    508,
+                    534,
+                    561,
+                    588,
+                    614,
+                    641,
+                    667,
+                    694,
+                    720,
+                    747,
+                    774,
+                    800,
+                    827,
+                    853,
+                    880,
+                    907,
+                    933,
+                    960,
+                    986,
+                    1013,
+                    1039,
+                    1066,
+                ];
 
             private static ReadOnlySpan<short> CachedPowersDecimalExponent =>
-            [
-                CachedPowersMinDecimalExponent,
-                -340,
-                -332,
-                -324,
-                -316,
-                -308,
-                -300,
-                -292,
-                -284,
-                -276,
-                -268,
-                -260,
-                -252,
-                -244,
-                -236,
-                -228,
-                -220,
-                -212,
-                -204,
-                -196,
-                -188,
-                -180,
-                -172,
-                -164,
-                -156,
-                -148,
-                -140,
-                -132,
-                -124,
-                -116,
-                -108,
-                -100,
-                -92,
-                -84,
-                -76,
-                -68,
-                -60,
-                -52,
-                -44,
-                -36,
-                -28,
-                -20,
-                -12,
-                -4,
-                4,
-                12,
-                20,
-                28,
-                36,
-                44,
-                52,
-                60,
-                68,
-                76,
-                84,
-                92,
-                100,
-                108,
-                116,
-                124,
-                132,
-                140,
-                148,
-                156,
-                164,
-                172,
-                180,
-                188,
-                196,
-                204,
-                212,
-                220,
-                228,
-                236,
-                244,
-                252,
-                260,
-                268,
-                276,
-                284,
-                292,
-                300,
-                308,
-                316,
-                324,
-                332,
-                CachedPowersPowerMaxDecimalExponent,
-            ];
+                [
+                    CachedPowersMinDecimalExponent,
+                    -340,
+                    -332,
+                    -324,
+                    -316,
+                    -308,
+                    -300,
+                    -292,
+                    -284,
+                    -276,
+                    -268,
+                    -260,
+                    -252,
+                    -244,
+                    -236,
+                    -228,
+                    -220,
+                    -212,
+                    -204,
+                    -196,
+                    -188,
+                    -180,
+                    -172,
+                    -164,
+                    -156,
+                    -148,
+                    -140,
+                    -132,
+                    -124,
+                    -116,
+                    -108,
+                    -100,
+                    -92,
+                    -84,
+                    -76,
+                    -68,
+                    -60,
+                    -52,
+                    -44,
+                    -36,
+                    -28,
+                    -20,
+                    -12,
+                    -4,
+                    4,
+                    12,
+                    20,
+                    28,
+                    36,
+                    44,
+                    52,
+                    60,
+                    68,
+                    76,
+                    84,
+                    92,
+                    100,
+                    108,
+                    116,
+                    124,
+                    132,
+                    140,
+                    148,
+                    156,
+                    164,
+                    172,
+                    180,
+                    188,
+                    196,
+                    204,
+                    212,
+                    220,
+                    228,
+                    236,
+                    244,
+                    252,
+                    260,
+                    268,
+                    276,
+                    284,
+                    292,
+                    300,
+                    308,
+                    316,
+                    324,
+                    332,
+                    CachedPowersPowerMaxDecimalExponent,
+                ];
 
             private static ReadOnlySpan<ulong> CachedPowersSignificand =>
-            [
-                0xFA8FD5A0081C0288,
-                0xBAAEE17FA23EBF76,
-                0x8B16FB203055AC76,
-                0xCF42894A5DCE35EA,
-                0x9A6BB0AA55653B2D,
-                0xE61ACF033D1A45DF,
-                0xAB70FE17C79AC6CA,
-                0xFF77B1FCBEBCDC4F,
-                0xBE5691EF416BD60C,
-                0x8DD01FAD907FFC3C,
-                0xD3515C2831559A83,
-                0x9D71AC8FADA6C9B5,
-                0xEA9C227723EE8BCB,
-                0xAECC49914078536D,
-                0x823C12795DB6CE57,
-                0xC21094364DFB5637,
-                0x9096EA6F3848984F,
-                0xD77485CB25823AC7,
-                0xA086CFCD97BF97F4,
-                0xEF340A98172AACE5,
-                0xB23867FB2A35B28E,
-                0x84C8D4DFD2C63F3B,
-                0xC5DD44271AD3CDBA,
-                0x936B9FCEBB25C996,
-                0xDBAC6C247D62A584,
-                0xA3AB66580D5FDAF6,
-                0xF3E2F893DEC3F126,
-                0xB5B5ADA8AAFF80B8,
-                0x87625F056C7C4A8B,
-                0xC9BCFF6034C13053,
-                0x964E858C91BA2655,
-                0xDFF9772470297EBD,
-                0xA6DFBD9FB8E5B88F,
-                0xF8A95FCF88747D94,
-                0xB94470938FA89BCF,
-                0x8A08F0F8BF0F156B,
-                0xCDB02555653131B6,
-                0x993FE2C6D07B7FAC,
-                0xE45C10C42A2B3B06,
-                0xAA242499697392D3,
-                0xFD87B5F28300CA0E,
-                0xBCE5086492111AEB,
-                0x8CBCCC096F5088CC,
-                0xD1B71758E219652C,
-                0x9C40000000000000,
-                0xE8D4A51000000000,
-                0xAD78EBC5AC620000,
-                0x813F3978F8940984,
-                0xC097CE7BC90715B3,
-                0x8F7E32CE7BEA5C70,
-                0xD5D238A4ABE98068,
-                0x9F4F2726179A2245,
-                0xED63A231D4C4FB27,
-                0xB0DE65388CC8ADA8,
-                0x83C7088E1AAB65DB,
-                0xC45D1DF942711D9A,
-                0x924D692CA61BE758,
-                0xDA01EE641A708DEA,
-                0xA26DA3999AEF774A,
-                0xF209787BB47D6B85,
-                0xB454E4A179DD1877,
-                0x865B86925B9BC5C2,
-                0xC83553C5C8965D3D,
-                0x952AB45CFA97A0B3,
-                0xDE469FBD99A05FE3,
-                0xA59BC234DB398C25,
-                0xF6C69A72A3989F5C,
-                0xB7DCBF5354E9BECE,
-                0x88FCF317F22241E2,
-                0xCC20CE9BD35C78A5,
-                0x98165AF37B2153DF,
-                0xE2A0B5DC971F303A,
-                0xA8D9D1535CE3B396,
-                0xFB9B7CD9A4A7443C,
-                0xBB764C4CA7A44410,
-                0x8BAB8EEFB6409C1A,
-                0xD01FEF10A657842C,
-                0x9B10A4E5E9913129,
-                0xE7109BFBA19C0C9D,
-                0xAC2820D9623BF429,
-                0x80444B5E7AA7CF85,
-                0xBF21E44003ACDD2D,
-                0x8E679C2F5E44FF8F,
-                0xD433179D9C8CB841,
-                0x9E19DB92B4E31BA9,
-                0xEB96BF6EBADF77D9,
-                0xAF87023B9BF0EE6B,
-            ];
+                [
+                    0xFA8FD5A0081C0288,
+                    0xBAAEE17FA23EBF76,
+                    0x8B16FB203055AC76,
+                    0xCF42894A5DCE35EA,
+                    0x9A6BB0AA55653B2D,
+                    0xE61ACF033D1A45DF,
+                    0xAB70FE17C79AC6CA,
+                    0xFF77B1FCBEBCDC4F,
+                    0xBE5691EF416BD60C,
+                    0x8DD01FAD907FFC3C,
+                    0xD3515C2831559A83,
+                    0x9D71AC8FADA6C9B5,
+                    0xEA9C227723EE8BCB,
+                    0xAECC49914078536D,
+                    0x823C12795DB6CE57,
+                    0xC21094364DFB5637,
+                    0x9096EA6F3848984F,
+                    0xD77485CB25823AC7,
+                    0xA086CFCD97BF97F4,
+                    0xEF340A98172AACE5,
+                    0xB23867FB2A35B28E,
+                    0x84C8D4DFD2C63F3B,
+                    0xC5DD44271AD3CDBA,
+                    0x936B9FCEBB25C996,
+                    0xDBAC6C247D62A584,
+                    0xA3AB66580D5FDAF6,
+                    0xF3E2F893DEC3F126,
+                    0xB5B5ADA8AAFF80B8,
+                    0x87625F056C7C4A8B,
+                    0xC9BCFF6034C13053,
+                    0x964E858C91BA2655,
+                    0xDFF9772470297EBD,
+                    0xA6DFBD9FB8E5B88F,
+                    0xF8A95FCF88747D94,
+                    0xB94470938FA89BCF,
+                    0x8A08F0F8BF0F156B,
+                    0xCDB02555653131B6,
+                    0x993FE2C6D07B7FAC,
+                    0xE45C10C42A2B3B06,
+                    0xAA242499697392D3,
+                    0xFD87B5F28300CA0E,
+                    0xBCE5086492111AEB,
+                    0x8CBCCC096F5088CC,
+                    0xD1B71758E219652C,
+                    0x9C40000000000000,
+                    0xE8D4A51000000000,
+                    0xAD78EBC5AC620000,
+                    0x813F3978F8940984,
+                    0xC097CE7BC90715B3,
+                    0x8F7E32CE7BEA5C70,
+                    0xD5D238A4ABE98068,
+                    0x9F4F2726179A2245,
+                    0xED63A231D4C4FB27,
+                    0xB0DE65388CC8ADA8,
+                    0x83C7088E1AAB65DB,
+                    0xC45D1DF942711D9A,
+                    0x924D692CA61BE758,
+                    0xDA01EE641A708DEA,
+                    0xA26DA3999AEF774A,
+                    0xF209787BB47D6B85,
+                    0xB454E4A179DD1877,
+                    0x865B86925B9BC5C2,
+                    0xC83553C5C8965D3D,
+                    0x952AB45CFA97A0B3,
+                    0xDE469FBD99A05FE3,
+                    0xA59BC234DB398C25,
+                    0xF6C69A72A3989F5C,
+                    0xB7DCBF5354E9BECE,
+                    0x88FCF317F22241E2,
+                    0xCC20CE9BD35C78A5,
+                    0x98165AF37B2153DF,
+                    0xE2A0B5DC971F303A,
+                    0xA8D9D1535CE3B396,
+                    0xFB9B7CD9A4A7443C,
+                    0xBB764C4CA7A44410,
+                    0x8BAB8EEFB6409C1A,
+                    0xD01FEF10A657842C,
+                    0x9B10A4E5E9913129,
+                    0xE7109BFBA19C0C9D,
+                    0xAC2820D9623BF429,
+                    0x80444B5E7AA7CF85,
+                    0xBF21E44003ACDD2D,
+                    0x8E679C2F5E44FF8F,
+                    0xD433179D9C8CB841,
+                    0x9E19DB92B4E31BA9,
+                    0xEB96BF6EBADF77D9,
+                    0xAF87023B9BF0EE6B,
+                ];
 
             private static ReadOnlySpan<uint> SmallPowersOfTen =>
-            [
-                1,          // 10^0
-                10,         // 10^1
-                100,        // 10^2
-                1000,       // 10^3
-                10000,      // 10^4
-                100000,     // 10^5
-                1000000,    // 10^6
-                10000000,   // 10^7
-                100000000,  // 10^8
-                1000000000, // 10^9
-            ];
+                [
+                    1, // 10^0
+                    10, // 10^1
+                    100, // 10^2
+                    1000, // 10^3
+                    10000, // 10^4
+                    100000, // 10^5
+                    1000000, // 10^6
+                    10000000, // 10^7
+                    100000000, // 10^8
+                    1000000000, // 10^9
+                ];
 
-            public static bool TryRunDouble(double value, int requestedDigits, ref NumberBuffer number)
+            public static bool TryRunDouble(
+                double value,
+                int requestedDigits,
+                ref NumberBuffer number
+            )
             {
                 double v = double.IsNegative(value) ? -value : value;
 
@@ -334,13 +338,28 @@ namespace System
 
                 if (requestedDigits == -1)
                 {
-                    DiyFp w = DiyFp.CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus).Normalize();
-                    result = TryRunShortest(in boundaryMinus, in w, in boundaryPlus, number.Digits, out length, out decimalExponent);
+                    DiyFp w = DiyFp
+                        .CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus)
+                        .Normalize();
+                    result = TryRunShortest(
+                        in boundaryMinus,
+                        in w,
+                        in boundaryPlus,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
                 else
                 {
                     DiyFp w = new DiyFp(v).Normalize();
-                    result = TryRunCounted(in w, requestedDigits, number.Digits, out length, out decimalExponent);
+                    result = TryRunCounted(
+                        in w,
+                        requestedDigits,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
 
                 if (result)
@@ -368,13 +387,28 @@ namespace System
 
                 if (requestedDigits == -1)
                 {
-                    DiyFp w = DiyFp.CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus).Normalize();
-                    result = TryRunShortest(in boundaryMinus, in w, in boundaryPlus, number.Digits, out length, out decimalExponent);
+                    DiyFp w = DiyFp
+                        .CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus)
+                        .Normalize();
+                    result = TryRunShortest(
+                        in boundaryMinus,
+                        in w,
+                        in boundaryPlus,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
                 else
                 {
                     DiyFp w = new DiyFp(v).Normalize();
-                    result = TryRunCounted(in w, requestedDigits, number.Digits, out length, out decimalExponent);
+                    result = TryRunCounted(
+                        in w,
+                        requestedDigits,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
 
                 if (result)
@@ -389,7 +423,11 @@ namespace System
                 return result;
             }
 
-            public static bool TryRunSingle(float value, int requestedDigits, ref NumberBuffer number)
+            public static bool TryRunSingle(
+                float value,
+                int requestedDigits,
+                ref NumberBuffer number
+            )
             {
                 float v = float.IsNegative(value) ? -value : value;
 
@@ -402,13 +440,28 @@ namespace System
 
                 if (requestedDigits == -1)
                 {
-                    DiyFp w = DiyFp.CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus).Normalize();
-                    result = TryRunShortest(in boundaryMinus, in w, in boundaryPlus, number.Digits, out length, out decimalExponent);
+                    DiyFp w = DiyFp
+                        .CreateAndGetBoundaries(v, out DiyFp boundaryMinus, out DiyFp boundaryPlus)
+                        .Normalize();
+                    result = TryRunShortest(
+                        in boundaryMinus,
+                        in w,
+                        in boundaryPlus,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
                 else
                 {
                     DiyFp w = new DiyFp(v).Normalize();
-                    result = TryRunCounted(in w, requestedDigits, number.Digits, out length, out decimalExponent);
+                    result = TryRunCounted(
+                        in w,
+                        requestedDigits,
+                        number.Digits,
+                        out length,
+                        out decimalExponent
+                    );
                 }
 
                 if (result)
@@ -426,14 +479,26 @@ namespace System
             // The counted version of Grisu3 only generates requestedDigits number of digits.
             // This version does not generate the shortest representation, and with enough requested digits 0.1 will at some point print as 0.9999999...
             // Grisu3 is too imprecise for real halfway cases (1.5 will not work) and therefore the rounding strategy for halfway cases is irrelevant.
-            private static bool TryRunCounted(in DiyFp w, int requestedDigits, Span<byte> buffer, out int length, out int decimalExponent)
+            private static bool TryRunCounted(
+                in DiyFp w,
+                int requestedDigits,
+                Span<byte> buffer,
+                out int length,
+                out int decimalExponent
+            )
             {
                 Debug.Assert(requestedDigits > 0);
 
-                int tenMkMinimalBinaryExponent = MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
-                int tenMkMaximalBinaryExponent = MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMinimalBinaryExponent =
+                    MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMaximalBinaryExponent =
+                    MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
 
-                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(tenMkMinimalBinaryExponent, tenMkMaximalBinaryExponent, out int mk);
+                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(
+                    tenMkMinimalBinaryExponent,
+                    tenMkMaximalBinaryExponent,
+                    out int mk
+                );
 
                 Debug.Assert(MinimalTargetExponent <= (w.e + tenMk.e + DiyFp.SignificandSize));
                 Debug.Assert(MaximalTargetExponent >= (w.e + tenMk.e + DiyFp.SignificandSize));
@@ -457,7 +522,13 @@ namespace System
                 //
                 // It will not always be exactly the same since DigitGenCounted only produces a limited number of digits.
 
-                bool result = TryDigitGenCounted(in scaledW, requestedDigits, buffer, out length, out int kappa);
+                bool result = TryDigitGenCounted(
+                    in scaledW,
+                    requestedDigits,
+                    buffer,
+                    out length,
+                    out int kappa
+                );
                 decimalExponent = -mk + kappa;
                 return result;
             }
@@ -474,7 +545,14 @@ namespace System
             //
             // The last digit will be closest to the actual v.
             // That is, even if several digits might correctly yield 'v' when read again, the closest will be computed.
-            private static bool TryRunShortest(in DiyFp boundaryMinus, in DiyFp w, in DiyFp boundaryPlus, Span<byte> buffer, out int length, out int decimalExponent)
+            private static bool TryRunShortest(
+                in DiyFp boundaryMinus,
+                in DiyFp w,
+                in DiyFp boundaryPlus,
+                Span<byte> buffer,
+                out int length,
+                out int decimalExponent
+            )
             {
                 // boundaryMinus and boundaryPlus are the boundaries between v and its closest floating-point neighbors.
                 // Any number strictly between boundaryMinus and boundaryPlus will round to v when converted to a double.
@@ -482,10 +560,16 @@ namespace System
 
                 Debug.Assert(boundaryPlus.e == w.e);
 
-                int tenMkMinimalBinaryExponent = MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
-                int tenMkMaximalBinaryExponent = MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMinimalBinaryExponent =
+                    MinimalTargetExponent - (w.e + DiyFp.SignificandSize);
+                int tenMkMaximalBinaryExponent =
+                    MaximalTargetExponent - (w.e + DiyFp.SignificandSize);
 
-                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(tenMkMinimalBinaryExponent, tenMkMaximalBinaryExponent, out int mk);
+                DiyFp tenMk = GetCachedPowerForBinaryExponentRange(
+                    tenMkMinimalBinaryExponent,
+                    tenMkMaximalBinaryExponent,
+                    out int mk
+                );
 
                 Debug.Assert(MinimalTargetExponent <= (w.e + tenMk.e + DiyFp.SignificandSize));
                 Debug.Assert(MaximalTargetExponent >= (w.e + tenMk.e + DiyFp.SignificandSize));
@@ -516,7 +600,14 @@ namespace System
                 // Set decimalExponent == -mk and pass it to DigitGen and if scaledW is not an integer than it will be updated.
                 // For instance, if scaledW == 1.23 then the buffer will be filled with "123" and the decimalExponent will be decreased by 2.
 
-                bool result = TryDigitGenShortest(in scaledBoundaryMinus, in scaledW, in scaledBoundaryPlus, buffer, out length, out int kappa);
+                bool result = TryDigitGenShortest(
+                    in scaledBoundaryMinus,
+                    in scaledW,
+                    in scaledBoundaryPlus,
+                    buffer,
+                    out length,
+                    out int kappa
+                );
                 decimalExponent = -mk + kappa;
                 return result;
             }
@@ -531,7 +622,11 @@ namespace System
             //
             // Preconditions:
             //      number < (1 << (numberBits + 1))
-            private static uint BiggestPowerTen(uint number, int numberBits, out int exponentPlusOne)
+            private static uint BiggestPowerTen(
+                uint number,
+                int numberBits,
+                out int exponentPlusOne
+            )
             {
                 // Inspired by the method for finding an integer log base 10 from here:
                 // http://graphics.stanford.edu/~seander/bithacks.html#IntegerLog10
@@ -577,7 +672,13 @@ namespace System
             // This procedure takes into account the imprecision of its input numbers.
             // If the precision is not enough to guarantee all the postconditions, then false is returned.
             // This usually happens rarely, but the failure-rate increases with higher requestedDigits
-            private static bool TryDigitGenCounted(in DiyFp w, int requestedDigits, Span<byte> buffer, out int length, out int kappa)
+            private static bool TryDigitGenCounted(
+                in DiyFp w,
+                int requestedDigits,
+                Span<byte> buffer,
+                out int length,
+                out int kappa
+            )
             {
                 Debug.Assert(MinimalTargetExponent <= w.e);
                 Debug.Assert(w.e <= MaximalTargetExponent);
@@ -606,7 +707,13 @@ namespace System
                 //      If requestedDigits >= 11, integrals is not able to exhaust the count by itself since 10^(11 -1) > uint.MaxValue >= integrals.
                 //      If integrals < 10^(requestedDigits - 1), integrals cannot exhaust the count.
                 //      Otherwise, integrals might be able to exhaust the count and we need to execute the rest of the code.
-                if ((fractionals == 0) && ((requestedDigits >= 11) || (integrals < SmallPowersOfTen[requestedDigits - 1])))
+                if (
+                    (fractionals == 0)
+                    && (
+                        (requestedDigits >= 11)
+                        || (integrals < SmallPowersOfTen[requestedDigits - 1])
+                    )
+                )
                 {
                     Debug.Assert(buffer[0] == '\0');
                     length = 0;
@@ -614,7 +721,11 @@ namespace System
                     return false;
                 }
 
-                uint divisor = BiggestPowerTen(integrals, DiyFp.SignificandSize - (-one.e), out kappa);
+                uint divisor = BiggestPowerTen(
+                    integrals,
+                    DiyFp.SignificandSize - (-one.e),
+                    out kappa
+                );
                 length = 0;
 
                 // Loop invariant:
@@ -746,7 +857,14 @@ namespace System
             //
             // Everything inside the interval low - high represents w.
             // However we have to pay attention to low, high and w's imprecision.
-            private static bool TryDigitGenShortest(in DiyFp low, in DiyFp w, in DiyFp high, Span<byte> buffer, out int length, out int kappa)
+            private static bool TryDigitGenShortest(
+                in DiyFp low,
+                in DiyFp w,
+                in DiyFp high,
+                Span<byte> buffer,
+                out int length,
+                out int kappa
+            )
             {
                 Debug.Assert(low.e == w.e);
                 Debug.Assert(w.e == high.e);
@@ -793,7 +911,11 @@ namespace System
                 // Modulo by one is an and.
                 ulong fractionals = tooHigh.f & (one.f - 1);
 
-                uint divisor = BiggestPowerTen(integrals, DiyFp.SignificandSize - (-one.e), out kappa);
+                uint divisor = BiggestPowerTen(
+                    integrals,
+                    DiyFp.SignificandSize - (-one.e),
+                    out kappa
+                );
                 length = 0;
 
                 // Loop invariant:
@@ -882,13 +1004,18 @@ namespace System
             }
 
             // Returns a cached power-of-ten with a binary exponent in the range [minExponent; maxExponent] (boundaries included).
-            private static DiyFp GetCachedPowerForBinaryExponentRange(int minExponent, int maxExponent, out int decimalExponent)
+            private static DiyFp GetCachedPowerForBinaryExponentRange(
+                int minExponent,
+                int maxExponent,
+                out int decimalExponent
+            )
             {
                 Debug.Assert(CachedPowersSignificand.Length == CachedPowersBinaryExponent.Length);
                 Debug.Assert(CachedPowersSignificand.Length == CachedPowersDecimalExponent.Length);
 
                 double k = Math.Ceiling((minExponent + DiyFp.SignificandSize - 1) * D1Log210);
-                int index = ((CachedPowersOffset + (int)(k) - 1) / CachedPowersDecimalExponentDistance) + 1;
+                int index =
+                    ((CachedPowersOffset + (int)(k) - 1) / CachedPowersDecimalExponentDistance) + 1;
 
                 Debug.Assert((uint)(index) < CachedPowersSignificand.Length);
 
@@ -911,7 +1038,14 @@ namespace System
             //
             // Preconditions:
             //      rest < tenKappa
-            private static bool TryRoundWeedCounted(Span<byte> buffer, int length, ulong rest, ulong tenKappa, ulong unit, ref int kappa)
+            private static bool TryRoundWeedCounted(
+                Span<byte> buffer,
+                int length,
+                ulong rest,
+                ulong tenKappa,
+                ulong unit,
+                ref int kappa
+            )
             {
                 Debug.Assert(rest < tenKappa);
 
@@ -936,7 +1070,10 @@ namespace System
                 }
 
                 // If 2 * (rest - unit) >= 10^kappa, we can safely round up.
-                if ((rest > unit) && (tenKappa <= (rest - unit) || ((tenKappa - (rest - unit)) <= (rest - unit))))
+                if (
+                    (rest > unit)
+                    && (tenKappa <= (rest - unit) || ((tenKappa - (rest - unit)) <= (rest - unit)))
+                )
                 {
                     // Increment the last digit recursively until we find a non '9' digit.
                     buffer[length - 1]++;
@@ -984,7 +1121,15 @@ namespace System
             //      Returns true if the buffer is guaranteed to contain the closest representable number to the input.
             //
             // Modifies the generated digits in the buffer to approach (round towards) w.
-            private static bool TryRoundWeedShortest(Span<byte> buffer, int length, ulong distanceTooHighW, ulong unsafeInterval, ulong rest, ulong tenKappa, ulong unit)
+            private static bool TryRoundWeedShortest(
+                Span<byte> buffer,
+                int length,
+                ulong distanceTooHighW,
+                ulong unsafeInterval,
+                ulong rest,
+                ulong tenKappa,
+                ulong unit
+            )
             {
                 ulong smallDistance = distanceTooHighW - unit;
                 ulong bigDistance = distanceTooHighW + unit;
@@ -1061,7 +1206,14 @@ namespace System
 
                 Debug.Assert(rest <= unsafeInterval);
 
-                while ((rest < smallDistance) && ((unsafeInterval - rest) >= tenKappa) && (((rest + tenKappa) < smallDistance) || ((smallDistance - rest) >= (rest + tenKappa - smallDistance))))
+                while (
+                    (rest < smallDistance)
+                    && ((unsafeInterval - rest) >= tenKappa)
+                    && (
+                        ((rest + tenKappa) < smallDistance)
+                        || ((smallDistance - rest) >= (rest + tenKappa - smallDistance))
+                    )
+                )
                 {
                     buffer[length - 1]--;
                     rest += tenKappa;
@@ -1070,7 +1222,14 @@ namespace System
                 // We have approached w+ as much as possible.
                 // We now test if approaching w- would require changing the buffer.
                 // If yes, then we have two possible representations close to w, but we cannot decide which one is closer.
-                if ((rest < bigDistance) && ((unsafeInterval - rest) >= tenKappa) && (((rest + tenKappa) < bigDistance) || ((bigDistance - rest) > (rest + tenKappa - bigDistance))))
+                if (
+                    (rest < bigDistance)
+                    && ((unsafeInterval - rest) >= tenKappa)
+                    && (
+                        ((rest + tenKappa) < bigDistance)
+                        || ((bigDistance - rest) > (rest + tenKappa - bigDistance))
+                    )
+                )
                 {
                     return false;
                 }

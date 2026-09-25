@@ -39,17 +39,16 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             Text = text;
         }
 
-        public static implicit operator InputKey(char character)
-            => new(character);
+        public static implicit operator InputKey(char character) => new(character);
 
-        public static implicit operator InputKey(string text)
-            => new(text);
+        public static implicit operator InputKey(string text) => new(text);
 
-        public static implicit operator InputKey(VirtualKeyCode virtualKeyCode)
-            => new(virtualKeyCode, ImmutableArray<VirtualKeyCode>.Empty);
+        public static implicit operator InputKey(VirtualKeyCode virtualKeyCode) =>
+            new(virtualKeyCode, ImmutableArray<VirtualKeyCode>.Empty);
 
-        public static implicit operator InputKey((VirtualKeyCode virtualKeyCode, VirtualKeyCode modifier) modifiedKey)
-            => new(modifiedKey.virtualKeyCode, ImmutableArray.Create(modifiedKey.modifier));
+        public static implicit operator InputKey(
+            (VirtualKeyCode virtualKeyCode, VirtualKeyCode modifier) modifiedKey
+        ) => new(modifiedKey.virtualKeyCode, ImmutableArray.Create(modifiedKey.modifier));
 
         public void Apply(IInputSimulator simulator)
         {
@@ -69,7 +68,11 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 var offset = 0;
                 while (offset < Text.Length)
                 {
-                    if (Text[offset] == '\r' && offset < Text.Length - 1 && Text[offset + 1] == '\n')
+                    if (
+                        Text[offset] == '\r'
+                        && offset < Text.Length - 1
+                        && Text[offset + 1] == '\n'
+                    )
                     {
                         // Treat \r\n as a single RETURN character
                         offset++;

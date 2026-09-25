@@ -46,6 +46,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
         {
             public string FirstName { get; set; }
             public string LastName { get; set; }
+
             [JsonProperty(PropertyName = "UPN")]
             public string Upn { get; set; }
         }
@@ -59,22 +60,22 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 FirstName = "John",
                 LastName = "Smith",
-                Upn = "john.smith@acme.com"
+                Upn = "john.smith@acme.com",
             };
 
             DefaultContractResolver contractResolver = new DefaultContractResolver
             {
-                NamingStrategy = new CamelCaseNamingStrategy
-                {
-                    OverrideSpecifiedNames = false
-                }
+                NamingStrategy = new CamelCaseNamingStrategy { OverrideSpecifiedNames = false },
             };
 
-            string json = JsonConvert.SerializeObject(user, new JsonSerializerSettings
-            {
-                ContractResolver = contractResolver,
-                Formatting = Formatting.Indented
-            });
+            string json = JsonConvert.SerializeObject(
+                user,
+                new JsonSerializerSettings
+                {
+                    ContractResolver = contractResolver,
+                    Formatting = Formatting.Indented,
+                }
+            );
 
             Console.WriteLine(json);
             // {
@@ -84,11 +85,14 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""John"",
   ""lastName"": ""Smith"",
   ""UPN"": ""john.smith@acme.com""
-}", json);
+}",
+                json
+            );
         }
     }
 }

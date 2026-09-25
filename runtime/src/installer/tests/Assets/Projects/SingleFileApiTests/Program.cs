@@ -16,35 +16,50 @@ namespace SingleFileApiTests
                     case "appcontext":
                         var deps_files = (string)AppContext.GetData("APP_CONTEXT_DEPS_FILES");
                         Console.WriteLine("APP_CONTEXT_DEPS_FILES: " + deps_files);
-                        foreach (string deps_file_path in deps_files.Split(";", StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries))
+                        foreach (
+                            string deps_file_path in deps_files.Split(
+                                ";",
+                                StringSplitOptions.RemoveEmptyEntries
+                                    | StringSplitOptions.TrimEntries
+                            )
+                        )
                         {
                             if (!File.Exists(deps_file_path))
                             {
-                                Console.WriteLine($"APP_CONTEXT_DEPS_FILES contains path which doesn't exist: '{deps_file_path}'");
+                                Console.WriteLine(
+                                    $"APP_CONTEXT_DEPS_FILES contains path which doesn't exist: '{deps_file_path}'"
+                                );
                                 return -1;
                             }
                         }
                         break;
 
                     case "executing_assembly_location":
-                        Console.WriteLine("ExecutingAssembly.Location: " + Assembly.GetExecutingAssembly().Location);
+                        Console.WriteLine(
+                            "ExecutingAssembly.Location: "
+                                + Assembly.GetExecutingAssembly().Location
+                        );
                         break;
 
                     case "assembly_location":
                         string assemblyName = args[++i];
-                        Console.WriteLine(assemblyName + " location: " + Assembly.Load(assemblyName).Location);
+                        Console.WriteLine(
+                            assemblyName + " location: " + Assembly.Load(assemblyName).Location
+                        );
                         break;
 
                     case "cmdlineargs":
-                        Console.WriteLine("Command line args: " + Environment.GetCommandLineArgs()[0]);
+                        Console.WriteLine(
+                            "Command line args: " + Environment.GetCommandLineArgs()[0]
+                        );
                         break;
 
                     case "codebase":
                         try
                         {
-                            #pragma warning disable SYSLIB0012
+#pragma warning disable SYSLIB0012
                             var codeBase = typeof(Program).Assembly.CodeBase;
-                            #pragma warning restore SYSLIB0012
+#pragma warning restore SYSLIB0012
                             Console.WriteLine("CodeBase " + codeBase);
                         }
                         catch (NotSupportedException)
@@ -61,7 +76,11 @@ namespace SingleFileApiTests
 
                     case "trusted_platform_assemblies":
                         Console.WriteLine("TRUSTED_PLATFORM_ASSEMBLIES:");
-                        foreach (var assemblyPath in ((string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")).Split(Path.PathSeparator))
+                        foreach (
+                            var assemblyPath in (
+                                (string)AppContext.GetData("TRUSTED_PLATFORM_ASSEMBLIES")
+                            ).Split(Path.PathSeparator)
+                        )
                         {
                             Console.WriteLine(assemblyPath);
                         }
@@ -72,7 +91,9 @@ namespace SingleFileApiTests
                         break;
 
                     case "native_search_dirs":
-                        var native_search_dirs = AppContext.GetData("NATIVE_DLL_SEARCH_DIRECTORIES");
+                        var native_search_dirs = AppContext.GetData(
+                            "NATIVE_DLL_SEARCH_DIRECTORIES"
+                        );
                         Console.WriteLine("NATIVE_DLL_SEARCH_DIRECTORIES: " + native_search_dirs);
                         break;
 

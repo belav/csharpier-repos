@@ -25,13 +25,20 @@ namespace Microsoft.AspNet.Facebook.Test
             config.AppSecret = "3e29b24f825e737d97aed5eb62df5076";
             config.ClientProvider = new DefaultFacebookClientProvider(config);
             FacebookContextModelBinder contextBinder = new FacebookContextModelBinder(config);
-            ControllerContext controllerContext = MockHelpers.CreateControllerContext(new NameValueCollection
-            {
-                {"signed_request", "x1yDEgacN3N5iu23Ji8NLYp9LGO1-cUXKHTJQrMqzVQ.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImV4cGlyZXMiOjEzNTM5MTMyMDAsImlzc3VlZF9hdCI6MTM1MzkwNzQ5Miwib2F1dGhfdG9rZW4iOiJBQUFGUlJPcWtwZ01CQURBSjNQZk5vNldXMlJ5WkFSQ1hjU0daQlhpNTBLTG9wRzFwYmFwc2M2aThKY3h6WkFQN1pDSnlpcXVHYlc3WXlCam1aQjh0UWpyelZ2VTNrYm44b3N3WXR5czkzTWdaRFpEIiwidXNlciI6eyJjb3VudHJ5IjoidXMiLCJsb2NhbGUiOiJlbl9VUyIsImFnZSI6eyJtaW4iOjIxfX0sInVzZXJfaWQiOiIxNzgyNTkwMSJ9"}
-            });
+            ControllerContext controllerContext = MockHelpers.CreateControllerContext(
+                new NameValueCollection
+                {
+                    {
+                        "signed_request",
+                        "x1yDEgacN3N5iu23Ji8NLYp9LGO1-cUXKHTJQrMqzVQ.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImV4cGlyZXMiOjEzNTM5MTMyMDAsImlzc3VlZF9hdCI6MTM1MzkwNzQ5Miwib2F1dGhfdG9rZW4iOiJBQUFGUlJPcWtwZ01CQURBSjNQZk5vNldXMlJ5WkFSQ1hjU0daQlhpNTBLTG9wRzFwYmFwc2M2aThKY3h6WkFQN1pDSnlpcXVHYlc3WXlCam1aQjh0UWpyelZ2VTNrYm44b3N3WXR5czkzTWdaRFpEIiwidXNlciI6eyJjb3VudHJ5IjoidXMiLCJsb2NhbGUiOiJlbl9VUyIsImFnZSI6eyJtaW4iOjIxfX0sInVzZXJfaWQiOiIxNzgyNTkwMSJ9"
+                    },
+                }
+            );
             ModelBindingContext modelBindingContext = new ModelBindingContext();
 
-            FacebookContext context = Assert.IsType<FacebookContext>(contextBinder.BindModel(controllerContext, modelBindingContext));
+            FacebookContext context = Assert.IsType<FacebookContext>(
+                contextBinder.BindModel(controllerContext, modelBindingContext)
+            );
 
             Assert.NotNull((object)context.SignedRequest);
             Assert.NotNull(context.AccessToken);
@@ -49,10 +56,16 @@ namespace Microsoft.AspNet.Facebook.Test
                 null,
                 new NameValueCollection
                 {
-                    {"signed_request", "x1yDEgacN3N5iu23Ji8NLYp9LGO1-cUXKHTJQrMqzVQ.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImV4cGlyZXMiOjEzNTM5MTMyMDAsImlzc3VlZF9hdCI6MTM1MzkwNzQ5Miwib2F1dGhfdG9rZW4iOiJBQUFGUlJPcWtwZ01CQURBSjNQZk5vNldXMlJ5WkFSQ1hjU0daQlhpNTBLTG9wRzFwYmFwc2M2aThKY3h6WkFQN1pDSnlpcXVHYlc3WXlCam1aQjh0UWpyelZ2VTNrYm44b3N3WXR5czkzTWdaRFpEIiwidXNlciI6eyJjb3VudHJ5IjoidXMiLCJsb2NhbGUiOiJlbl9VUyIsImFnZSI6eyJtaW4iOjIxfX0sInVzZXJfaWQiOiIxNzgyNTkwMSJ9"}
-                });
+                    {
+                        "signed_request",
+                        "x1yDEgacN3N5iu23Ji8NLYp9LGO1-cUXKHTJQrMqzVQ.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsImV4cGlyZXMiOjEzNTM5MTMyMDAsImlzc3VlZF9hdCI6MTM1MzkwNzQ5Miwib2F1dGhfdG9rZW4iOiJBQUFGUlJPcWtwZ01CQURBSjNQZk5vNldXMlJ5WkFSQ1hjU0daQlhpNTBLTG9wRzFwYmFwc2M2aThKY3h6WkFQN1pDSnlpcXVHYlc3WXlCam1aQjh0UWpyelZ2VTNrYm44b3N3WXR5czkzTWdaRFpEIiwidXNlciI6eyJjb3VudHJ5IjoidXMiLCJsb2NhbGUiOiJlbl9VUyIsImFnZSI6eyJtaW4iOjIxfX0sInVzZXJfaWQiOiIxNzgyNTkwMSJ9"
+                    },
+                }
+            );
 
-            FacebookContext context = Assert.IsType<FacebookContext>(contextBinder.BindModel(controllerContext, new ModelBindingContext()));
+            FacebookContext context = Assert.IsType<FacebookContext>(
+                contextBinder.BindModel(controllerContext, new ModelBindingContext())
+            );
 
             Assert.NotNull((object)context.SignedRequest);
             Assert.NotNull(context.AccessToken);

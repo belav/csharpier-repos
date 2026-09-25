@@ -33,7 +33,6 @@ namespace System.Security.AccessControl.Tests
             byte[] ace1BinaryForm;
             byte[] ace2BinaryForm;
 
-
             if (null != ace1 && null != ace2)
             {
                 //check the BinaryLength
@@ -109,7 +108,6 @@ namespace System.Security.AccessControl.Tests
             int opaqueSize = 0;
             byte[] opaque = null;
 
-
             string[] parts = null;
             string[] subparts = null;
             char[] delimiter1 = new char[] { '#' };
@@ -131,7 +129,9 @@ namespace System.Security.AccessControl.Tests
                     aceFlags = (AceFlags)byte.Parse(subparts[0]);
                     aceQualifier = (AceQualifier)int.Parse(subparts[1]);
                     accessMask = int.Parse(subparts[2]);
-                    sid = new SecurityIdentifier(TranslateStringConstFormatSidToStandardFormatSid(subparts[3]));
+                    sid = new SecurityIdentifier(
+                        TranslateStringConstFormatSidToStandardFormatSid(subparts[3])
+                    );
                     isCallback = bool.Parse(subparts[4]);
                     if (!isCallback)
                         opaque = null;
@@ -140,7 +140,14 @@ namespace System.Security.AccessControl.Tests
                         opaqueSize = int.Parse(subparts[5]);
                         opaque = new byte[opaqueSize];
                     }
-                    cAce = new CommonAce(aceFlags, aceQualifier, accessMask, sid, isCallback, opaque);
+                    cAce = new CommonAce(
+                        aceFlags,
+                        aceQualifier,
+                        accessMask,
+                        sid,
+                        isCallback,
+                        opaque
+                    );
                     rawAcl.InsertAce(rawAcl.Count, cAce);
                 }
             }
@@ -156,22 +163,16 @@ namespace System.Security.AccessControl.Tests
                 stFormatSid = "S-1-5-32-551";
             else if (sidStringConst == "BG")
                 stFormatSid = "S-1-5-32-546";
-
             else if (sidStringConst == "AN")
                 stFormatSid = "S-1-5-7";
-
             else if (sidStringConst == "NO")
                 stFormatSid = "S-1-5-32-556";
-
             else if (sidStringConst == "SO")
                 stFormatSid = "S-1-5-32-549";
-
             else if (sidStringConst == "RD")
                 stFormatSid = "S-1-5-32-555";
-
             else if (sidStringConst == "SY")
                 stFormatSid = "S-1-5-18";
-
             else
                 stFormatSid = sidStringConst;
             return stFormatSid;
@@ -194,7 +195,10 @@ namespace System.Security.AccessControl.Tests
                 Console.WriteLine("BinaryForm: null");
         }
 
-        public static int ComputeBinaryLength(CommonSecurityDescriptor commonSecurityDescriptor, bool needCountDacl)
+        public static int ComputeBinaryLength(
+            CommonSecurityDescriptor commonSecurityDescriptor,
+            bool needCountDacl
+        )
         {
             int verifierBinaryLength = 0;
             if (commonSecurityDescriptor != null)
@@ -204,27 +208,44 @@ namespace System.Security.AccessControl.Tests
                     verifierBinaryLength += commonSecurityDescriptor.Owner.BinaryLength;
                 if (commonSecurityDescriptor.Group != null)
                     verifierBinaryLength += commonSecurityDescriptor.Group.BinaryLength;
-                if ((commonSecurityDescriptor.ControlFlags & ControlFlags.SystemAclPresent) != 0 && commonSecurityDescriptor.SystemAcl != null)
+                if (
+                    (commonSecurityDescriptor.ControlFlags & ControlFlags.SystemAclPresent) != 0
+                    && commonSecurityDescriptor.SystemAcl != null
+                )
                     verifierBinaryLength += commonSecurityDescriptor.SystemAcl.BinaryLength;
-                if ((commonSecurityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0 && commonSecurityDescriptor.DiscretionaryAcl != null && needCountDacl)
+                if (
+                    (commonSecurityDescriptor.ControlFlags & ControlFlags.DiscretionaryAclPresent)
+                        != 0
+                    && commonSecurityDescriptor.DiscretionaryAcl != null
+                    && needCountDacl
+                )
                     verifierBinaryLength += commonSecurityDescriptor.DiscretionaryAcl.BinaryLength;
             }
 
             return verifierBinaryLength;
         }
+
         //verify the dacl is crafted with one Allow Everyone Everything ACE
 
-        public static bool VerifyDaclWithCraftedAce(bool isContainer, bool isDS, DiscretionaryAcl dacl)
+        public static bool VerifyDaclWithCraftedAce(
+            bool isContainer,
+            bool isDS,
+            DiscretionaryAcl dacl
+        )
         {
             byte[] craftedBForm;
             byte[] binaryForm;
 
             DiscretionaryAcl craftedDacl = new DiscretionaryAcl(isContainer, isDS, 1);
-            craftedDacl.AddAccess(AccessControlType.Allow,
+            craftedDacl.AddAccess(
+                AccessControlType.Allow,
                 new SecurityIdentifier("S-1-1-0"),
                 -1,
-                isContainer ? InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit : InheritanceFlags.None,
-                PropagationFlags.None);
+                isContainer
+                    ? InheritanceFlags.ContainerInherit | InheritanceFlags.ObjectInherit
+                    : InheritanceFlags.None,
+                PropagationFlags.None
+            );
             craftedBForm = new byte[craftedDacl.BinaryLength];
             binaryForm = new byte[dacl.BinaryLength];
             Assert.False(craftedBForm == null || binaryForm == null);
@@ -232,7 +253,6 @@ namespace System.Security.AccessControl.Tests
             dacl.GetBinaryForm(binaryForm, 0);
 
             return Utils.IsBinaryFormEqual(craftedBForm, binaryForm);
-
         }
 
         public static RawAcl CopyRawACL(RawAcl rawAcl)
@@ -242,15 +262,30 @@ namespace System.Security.AccessControl.Tests
             return new RawAcl(binaryForm, 0);
         }
 
-        public static bool AclPartialEqual(GenericAcl acl1, GenericAcl acl2, int acl1StartAceIndex, int acl1EndAceIndex, int acl2StartAceIndex, int acl2EndAceIndex)
+        public static bool AclPartialEqual(
+            GenericAcl acl1,
+            GenericAcl acl2,
+            int acl1StartAceIndex,
+            int acl1EndAceIndex,
+            int acl2StartAceIndex,
+            int acl2EndAceIndex
+        )
         {
             int index1 = 0;
             int index2 = 0;
             bool result = true;
             if (null != acl1 && null != acl2)
             {
-                if (acl1StartAceIndex < 0 || acl1EndAceIndex < 0 || acl1StartAceIndex > acl1.Count - 1 || acl1EndAceIndex > acl1.Count - 1 ||
-                    acl2StartAceIndex < 0 || acl2EndAceIndex < 0 || acl2StartAceIndex > acl2.Count - 1 || acl2EndAceIndex > acl2.Count - 1)
+                if (
+                    acl1StartAceIndex < 0
+                    || acl1EndAceIndex < 0
+                    || acl1StartAceIndex > acl1.Count - 1
+                    || acl1EndAceIndex > acl1.Count - 1
+                    || acl2StartAceIndex < 0
+                    || acl2EndAceIndex < 0
+                    || acl2StartAceIndex > acl2.Count - 1
+                    || acl2EndAceIndex > acl2.Count - 1
+                )
                 {
                     //the caller has garenteeed the index calculation is correct so if any above condition hold,
                     //that means the range of the index is invalid
@@ -262,7 +297,11 @@ namespace System.Security.AccessControl.Tests
                 }
                 else
                 {
-                    for (index1 = acl1StartAceIndex, index2 = acl2StartAceIndex; index1 <= acl1EndAceIndex; index1++, index2++)
+                    for (
+                        index1 = acl1StartAceIndex, index2 = acl2StartAceIndex;
+                        index1 <= acl1EndAceIndex;
+                        index1++, index2++
+                    )
                     {
                         if (!Utils.IsAceEqual(acl1[index1], acl2[index2]))
                         {
@@ -272,9 +311,7 @@ namespace System.Security.AccessControl.Tests
                     }
                 }
             }
-            else if (null == acl1 && null == acl2)
-            {
-            }
+            else if (null == acl1 && null == acl2) { }
             else
                 result = false;
 
@@ -283,20 +320,20 @@ namespace System.Security.AccessControl.Tests
 
         public static bool TestGetEnumerator(IEnumerator enumerator, RawAcl rAcl, bool isExplicit)
         {
-            bool result = false;//assume failure
+            bool result = false; //assume failure
             GenericAce gAce = null;
             if (!(isExplicit ? enumerator.MoveNext() : ((AceEnumerator)enumerator).MoveNext()))
-            {//enumerator is created from empty RawAcl
+            { //enumerator is created from empty RawAcl
                 if (0 != rAcl.Count)
                     return false;
                 else
                     return true;
             }
             else if (0 == rAcl.Count)
-            {//rawAcl is empty but enumerator is still enumerable
+            { //rawAcl is empty but enumerator is still enumerable
                 return false;
             }
-            else//non-empty rAcl, non-empty enumerator
+            else //non-empty rAcl, non-empty enumerator
             {
                 //check all aces enumerated are in the RawAcl
                 if (isExplicit)
@@ -309,18 +346,20 @@ namespace System.Security.AccessControl.Tests
                 }
                 while (isExplicit ? enumerator.MoveNext() : ((AceEnumerator)enumerator).MoveNext())
                 {
-                    gAce = (GenericAce)(isExplicit ? enumerator.Current : ((AceEnumerator)enumerator).Current);
+                    gAce = (GenericAce)(
+                        isExplicit ? enumerator.Current : ((AceEnumerator)enumerator).Current
+                    );
                     //check this gAce exists in the RawAcl
                     for (int i = 0; i < rAcl.Count; i++)
                     {
                         if (GenericAce.ReferenceEquals(gAce, rAcl[i]))
-                        {//found
+                        { //found
                             result = true;
                             break;
                         }
                     }
                     if (!result)
-                    {//not exists in the RawAcl, failed
+                    { //not exists in the RawAcl, failed
                         return false;
                     }
                     //enumerate to next one
@@ -340,16 +379,27 @@ namespace System.Security.AccessControl.Tests
                         ((AceEnumerator)enumerator).Reset();
                     }
 
-                    while (isExplicit ? enumerator.MoveNext() : ((AceEnumerator)enumerator).MoveNext())
+                    while (
+                        isExplicit ? enumerator.MoveNext() : ((AceEnumerator)enumerator).MoveNext()
+                    )
                     {
-                        if (GenericAce.ReferenceEquals((GenericAce)(isExplicit ? enumerator.Current : ((AceEnumerator)enumerator).Current), gAce))
+                        if (
+                            GenericAce.ReferenceEquals(
+                                (GenericAce)(
+                                    isExplicit
+                                        ? enumerator.Current
+                                        : ((AceEnumerator)enumerator).Current
+                                ),
+                                gAce
+                            )
+                        )
                         {
                             result = true;
                             break;
                         }
                     }
                     if (!result)
-                    {//not enumerable
+                    { //not enumerable
                         return false;
                     }
                     //check next ace in the rAcl
@@ -363,34 +413,62 @@ namespace System.Security.AccessControl.Tests
         {
             internal const int ERROR_NOT_ENOUGH_MEMORY = 0x8;
             internal const int VER_PLATFORM_WIN32_NT = 2;
-            [DllImport("Advapi32.dll", EntryPoint = "InitializeAcl", CharSet = CharSet.Unicode, SetLastError = true)]
+
+            [DllImport(
+                "Advapi32.dll",
+                EntryPoint = "InitializeAcl",
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
             internal static extern int InitializeAclNative(
-            byte[] acl,
-            uint aclLength,
-            uint aclRevision);
-            [DllImport("Advapi32.dll", EntryPoint = "AddAccessAllowedAceEx", CharSet = CharSet.Unicode, SetLastError = true)]
+                byte[] acl,
+                uint aclLength,
+                uint aclRevision
+            );
+
+            [DllImport(
+                "Advapi32.dll",
+                EntryPoint = "AddAccessAllowedAceEx",
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
             internal static extern int AddAccessAllowedAceExNative(
-            byte[] acl,
-            uint aclRevision,
-            uint aceFlags,
-            uint accessMask,
-            byte[] sid);
-            [DllImport("Advapi32.dll", EntryPoint = "AddAccessDeniedAceEx", CharSet = CharSet.Unicode, SetLastError = true)]
+                byte[] acl,
+                uint aclRevision,
+                uint aceFlags,
+                uint accessMask,
+                byte[] sid
+            );
+
+            [DllImport(
+                "Advapi32.dll",
+                EntryPoint = "AddAccessDeniedAceEx",
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
             internal static extern int AddAccessDeniedAceExNative(
-            byte[] acl,
-            uint aclRevision,
-            uint aceFlags,
-            uint accessMask,
-            byte[] sid);
-            [DllImport("Advapi32.dll", EntryPoint = "AddAuditAccessAceEx", CharSet = CharSet.Unicode, SetLastError = true)]
+                byte[] acl,
+                uint aclRevision,
+                uint aceFlags,
+                uint accessMask,
+                byte[] sid
+            );
+
+            [DllImport(
+                "Advapi32.dll",
+                EntryPoint = "AddAuditAccessAceEx",
+                CharSet = CharSet.Unicode,
+                SetLastError = true
+            )]
             internal static extern int AddAuditAccessAceExNative(
-            byte[] acl,
-            uint aclRevision,
-            uint aceFlags,
-            uint accessMask,
-            byte[] sid,
-            uint bAuditSccess,
-            uint bAuditFailure);
+                byte[] acl,
+                uint aclRevision,
+                uint aceFlags,
+                uint accessMask,
+                byte[] sid,
+                uint bAuditSccess,
+                uint bAuditFailure
+            );
         }
     }
 }

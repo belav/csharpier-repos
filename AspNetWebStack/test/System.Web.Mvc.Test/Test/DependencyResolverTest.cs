@@ -18,16 +18,20 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => resolver.InnerSetResolver((IDependencyResolver)null),
-                "resolver");
+                "resolver"
+            );
             Assert.ThrowsArgumentNull(
                 () => resolver.InnerSetResolver((object)null),
-                "commonServiceLocator");
+                "commonServiceLocator"
+            );
             Assert.ThrowsArgumentNull(
                 () => resolver.InnerSetResolver(null, type => null),
-                "getService");
+                "getService"
+            );
             Assert.ThrowsArgumentNull(
                 () => resolver.InnerSetResolver(type => null, null),
-                "getServices");
+                "getServices"
+            );
         }
 
         [Fact]
@@ -166,23 +170,29 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<ArgumentException>(
                 () => resolver.InnerSetResolver(new MissingGetInstance()),
-                "The type System.Web.Mvc.Test.DependencyResolverTest+MissingGetInstance does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator." + Environment.NewLine
-              + "Parameter name: commonServiceLocator");
+                "The type System.Web.Mvc.Test.DependencyResolverTest+MissingGetInstance does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator."
+                    + Environment.NewLine
+                    + "Parameter name: commonServiceLocator"
+            );
             Assert.Throws<ArgumentException>(
                 () => resolver.InnerSetResolver(new MissingGetAllInstances()),
-                "The type System.Web.Mvc.Test.DependencyResolverTest+MissingGetAllInstances does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator." + Environment.NewLine
-              + "Parameter name: commonServiceLocator");
+                "The type System.Web.Mvc.Test.DependencyResolverTest+MissingGetAllInstances does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator."
+                    + Environment.NewLine
+                    + "Parameter name: commonServiceLocator"
+            );
             Assert.Throws<ArgumentException>(
                 () => resolver.InnerSetResolver(new GetInstanceHasWrongSignature()),
-                "The type System.Web.Mvc.Test.DependencyResolverTest+GetInstanceHasWrongSignature does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator." + Environment.NewLine
-              + "Parameter name: commonServiceLocator");
+                "The type System.Web.Mvc.Test.DependencyResolverTest+GetInstanceHasWrongSignature does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator."
+                    + Environment.NewLine
+                    + "Parameter name: commonServiceLocator"
+            );
             Assert.Throws<ArgumentException>(
                 () => resolver.InnerSetResolver(new GetAllInstancesHasWrongSignature()),
-                "The type System.Web.Mvc.Test.DependencyResolverTest+GetAllInstancesHasWrongSignature does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator." + Environment.NewLine
-              + "Parameter name: commonServiceLocator");
+                "The type System.Web.Mvc.Test.DependencyResolverTest+GetAllInstancesHasWrongSignature does not appear to implement Microsoft.Practices.ServiceLocation.IServiceLocator."
+                    + Environment.NewLine
+                    + "Parameter name: commonServiceLocator"
+            );
         }
-
-
 
         [Fact]
         public void DependencyResolverCache()
@@ -199,7 +209,6 @@ namespace System.Web.Mvc.Test
             object result1 = resolver.InnerCurrentCache.GetService(typeof(object)); // 1st call
             object otherResult = resolver.InnerCurrentCache.GetService(typeof(int)); // 2nd call
             object result2 = resolver.InnerCurrentCache.GetService(typeof(object)); // Cached result from 1st call
-
 
             resolverMock.Verify(r => r.GetService(typeof(object)), Times.Once());
             resolverMock.Verify(r => r.GetService(typeof(int)), Times.Once());
@@ -223,7 +232,6 @@ namespace System.Web.Mvc.Test
             object otherResult = resolver.InnerCurrentCache.GetService(typeof(int)); // 2nd call
             resolver.InnerSetResolver(resolverMock.Object); // This will clear the cache
             object result2 = resolver.InnerCurrentCache.GetService(typeof(object)); // 3rd call
-
 
             resolverMock.Verify(r => r.GetService(typeof(object)), Times.Exactly(2));
             resolverMock.Verify(r => r.GetService(typeof(int)), Times.Once());

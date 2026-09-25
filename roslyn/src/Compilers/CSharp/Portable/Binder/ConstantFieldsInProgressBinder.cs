@@ -23,10 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ConstantFieldsInProgress ConstantFieldsInProgress
         {
-            get
-            {
-                return _inProgress;
-            }
+            get { return _inProgress; }
         }
     }
 }

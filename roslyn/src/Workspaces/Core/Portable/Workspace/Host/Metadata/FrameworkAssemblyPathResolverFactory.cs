@@ -8,30 +8,33 @@ using Microsoft.CodeAnalysis.Host.Mef;
 
 namespace Microsoft.CodeAnalysis.Host
 {
-    [ExportWorkspaceServiceFactory(typeof(IFrameworkAssemblyPathResolver), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceServiceFactory(typeof(IFrameworkAssemblyPathResolver), ServiceLayer.Default),
+        Shared
+    ]
     internal sealed class FrameworkAssemblyPathResolverFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public FrameworkAssemblyPathResolverFactory()
-        {
-        }
+        public FrameworkAssemblyPathResolverFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new Service();
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new Service();
 
         private sealed class Service : IFrameworkAssemblyPathResolver
         {
-            public Service()
-            {
-            }
+            public Service() { }
 
             //public bool CanResolveType(ProjectId projectId, string assemblyName, string fullyQualifiedTypeName)
             //{
             //    return false;
             //}
 
-            public string? ResolveAssemblyPath(ProjectId projectId, string assemblyName, string? fullyQualifiedTypeName)
+            public string? ResolveAssemblyPath(
+                ProjectId projectId,
+                string assemblyName,
+                string? fullyQualifiedTypeName
+            )
             {
                 // Assembly path resolution not supported at the default workspace level.
                 return null;

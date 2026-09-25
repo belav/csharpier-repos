@@ -8,14 +8,19 @@ namespace System.Net.Http.Formatting
     public class StringComparisonHelperTest : EnumHelperTestBase<StringComparison>
     {
         public StringComparisonHelperTest()
-            : base(StringComparisonHelper.IsDefined, StringComparisonHelper.Validate, (StringComparison)999)
-        {
-        }
+            : base(
+                StringComparisonHelper.IsDefined,
+                StringComparisonHelper.Validate,
+                (StringComparison)999
+            ) { }
 
 #if Testing_NetStandard1_3 // InvariantCulture and InvariantCultureIgnoreCase case are not supported in netstandard1.3 project
         protected override bool ValueExistsForFramework(StringComparison value)
         {
-            return !(value == StringComparison.InvariantCulture || value == StringComparison.InvariantCultureIgnoreCase);
+            return !(
+                value == StringComparison.InvariantCulture
+                || value == StringComparison.InvariantCultureIgnoreCase
+            );
         }
 #endif
     }

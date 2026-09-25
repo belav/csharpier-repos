@@ -13,14 +13,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     {
         private sealed class CacheKey
         {
-            public CacheKey(int value) { this.Value = value; }
+            public CacheKey(int value)
+            {
+                this.Value = value;
+            }
+
             public readonly int Value;
-            public static int GetHashCode(CacheKey key) { return key.Value; }
+
+            public static int GetHashCode(CacheKey key)
+            {
+                return key.Value;
+            }
         }
 
         private sealed class CacheValue
         {
-            public CacheValue(int value) { this.Value = value; }
+            public CacheValue(int value)
+            {
+                this.Value = value;
+            }
+
             public readonly int Value;
         }
 
@@ -28,10 +40,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ZeroHash()
         {
-            var cache = new CachingFactory<CacheKey, CacheValue>(512,
+            var cache = new CachingFactory<CacheKey, CacheValue>(
+                512,
                 k => new CacheValue(k.Value + 1),
                 k => k.Value,
-                (k, v) => k.Value == v.Value);
+                (k, v) => k.Value == v.Value
+            );
 
             var key = new CacheKey(0);
             Assert.Equal(0, CacheKey.GetHashCode(key));

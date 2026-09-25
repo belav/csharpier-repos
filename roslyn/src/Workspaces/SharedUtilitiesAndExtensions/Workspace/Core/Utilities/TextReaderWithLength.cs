@@ -20,7 +20,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             var read = base.Read(chars, 0, Length);
 
             return new string(chars, 0, read);
-#endif                
+#endif
         }
     }
 }

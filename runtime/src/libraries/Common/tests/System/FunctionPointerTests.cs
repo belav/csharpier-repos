@@ -11,13 +11,22 @@ namespace System.Tests.Types
     // Also see ModifiedTypeTests which tests custom modifiers.
     public partial class FunctionPointerTests
     {
-        private const BindingFlags Bindings = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+        private const BindingFlags Bindings =
+            BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.DeclaredOnly;
 
         [Fact]
         public static unsafe void TypeMembers()
         {
             // Get an arbitrary function pointer
-            TypeInfo t = (TypeInfo)typeof(FunctionPointerHolder).Project().GetField(nameof(FunctionPointerHolder.ToString_1), Bindings).FieldType;
+            TypeInfo t = (TypeInfo)
+                typeof(FunctionPointerHolder)
+                    .Project()
+                    .GetField(nameof(FunctionPointerHolder.ToString_1), Bindings)
+                    .FieldType;
 
             // Function pointer relevant members:
             Assert.Equal("System.Void()", t.ToString());
@@ -117,9 +126,15 @@ namespace System.Tests.Types
         [Fact]
         public static unsafe void NonFunctionPointerThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => typeof(int).GetFunctionPointerCallingConventions());
-            Assert.Throws<InvalidOperationException>(() => typeof(int).GetFunctionPointerParameterTypes());
-            Assert.Throws<InvalidOperationException>(() => typeof(int).GetFunctionPointerReturnType());
+            Assert.Throws<InvalidOperationException>(() =>
+                typeof(int).GetFunctionPointerCallingConventions()
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                typeof(int).GetFunctionPointerParameterTypes()
+            );
+            Assert.Throws<InvalidOperationException>(() =>
+                typeof(int).GetFunctionPointerReturnType()
+            );
         }
 
         [Fact]
@@ -127,19 +142,21 @@ namespace System.Tests.Types
         {
             // Function pointer types are inline in metadata and can't be loaded independently so they do not support the
             // MetadataLoadContext Type.Project() test extension so we use fields and project on the owning class.
-            Assert.Equal("System.Void()", GetType(1).ToString());       // delegate*<void>
-            Assert.Equal("System.Void()", GetType(2).ToString());       // delegate*unmanaged<void>
-            Assert.Equal("System.Int32()", GetType(3).ToString());      // delegate*<int>
-            Assert.Equal("System.Int32()*", GetType(4).ToString());     // delegate*<int>*
-            Assert.Equal("System.Int32()[]", GetType(5).ToString());    // delegate*<int>[]
-            Assert.Equal("System.Int32()", GetType(6).
-                GetElementType().ToString());                           // delegate*<int>[] 
-            Assert.Equal("System.Int32()*[]", GetType(7).ToString());   // delegate*<int>*[]
-            Assert.Equal("System.Int32()()", GetType(8).ToString());    // delegate*<delegate*<int>>               
-            Assert.Equal("System.Boolean(System.String(System.Int32))",
-                GetType(9).ToString());                                 // delegate*<delegate*<int, string>, bool>
+            Assert.Equal("System.Void()", GetType(1).ToString()); // delegate*<void>
+            Assert.Equal("System.Void()", GetType(2).ToString()); // delegate*unmanaged<void>
+            Assert.Equal("System.Int32()", GetType(3).ToString()); // delegate*<int>
+            Assert.Equal("System.Int32()*", GetType(4).ToString()); // delegate*<int>*
+            Assert.Equal("System.Int32()[]", GetType(5).ToString()); // delegate*<int>[]
+            Assert.Equal("System.Int32()", GetType(6).GetElementType().ToString()); // delegate*<int>[]
+            Assert.Equal("System.Int32()*[]", GetType(7).ToString()); // delegate*<int>*[]
+            Assert.Equal("System.Int32()()", GetType(8).ToString()); // delegate*<delegate*<int>>
+            Assert.Equal("System.Boolean(System.String(System.Int32))", GetType(9).ToString()); // delegate*<delegate*<int, string>, bool>
 
-            Type GetType(int i) => typeof(FunctionPointerHolder).Project().GetField("ToString_" + i, Bindings).FieldType;
+            Type GetType(int i) =>
+                typeof(FunctionPointerHolder)
+                    .Project()
+                    .GetField("ToString_" + i, Bindings)
+                    .FieldType;
         }
 
         [Fact]
@@ -168,9 +185,15 @@ namespace System.Tests.Types
             Type[] parameters = fcnPtr1.GetFunctionPointerParameterTypes();
             Assert.Equal(2, parameters.Length);
             Assert.Equal(1, parameters[0].GetRequiredCustomModifiers().Length);
-            Assert.Equal(typeof(Runtime.InteropServices.InAttribute).Project(), parameters[0].GetRequiredCustomModifiers()[0]);
+            Assert.Equal(
+                typeof(Runtime.InteropServices.InAttribute).Project(),
+                parameters[0].GetRequiredCustomModifiers()[0]
+            );
             Assert.Equal(1, parameters[1].GetRequiredCustomModifiers().Length);
-            Assert.Equal(typeof(Runtime.InteropServices.OutAttribute).Project(), parameters[1].GetRequiredCustomModifiers()[0]);
+            Assert.Equal(
+                typeof(Runtime.InteropServices.OutAttribute).Project(),
+                parameters[1].GetRequiredCustomModifiers()[0]
+            );
         }
 
         [Fact]
@@ -190,21 +213,29 @@ namespace System.Tests.Types
         }
 
         [Theory]
-        [InlineData(nameof(FunctionPointerHolder.MethodReturnValue1),
+        [InlineData(
+            nameof(FunctionPointerHolder.MethodReturnValue1),
             "MethodReturnValue1()",
             "Int32",
-            "System.Int32()")]
-        [InlineData(nameof(FunctionPointerHolder.SeveralArguments),
+            "System.Int32()"
+        )]
+        [InlineData(
+            nameof(FunctionPointerHolder.SeveralArguments),
             "SeveralArguments()",
             "Double",
             "System.Double(System.String, System.Boolean*&, System.Tests.Types.FunctionPointerTests+FunctionPointerHolder+MyClass, System.Tests.Types.FunctionPointerTests+FunctionPointerHolder+MyStruct&)",
-            "String", "Boolean*&", "MyClass", "MyStruct&")]
+            "String",
+            "Boolean*&",
+            "MyClass",
+            "MyStruct&"
+        )]
         public static unsafe void MethodInfo(
             string methodName,
             string methodToStringPostfix,
             string expectedFcnPtrReturnName,
             string expectedFcnPtrFullName,
-            params string[] expectedArgNames)
+            params string[] expectedArgNames
+        )
         {
             Type t = typeof(FunctionPointerHolder).Project();
             MethodInfo m = t.GetMethod(methodName, Bindings);
@@ -219,13 +250,19 @@ namespace System.Tests.Types
 
             for (int i = 0; i < expectedArgNames.Length; i++)
             {
-                Assert.Equal(fnPtrType.GetFunctionPointerParameterTypes()[i].Name, expectedArgNames[i]);
+                Assert.Equal(
+                    fnPtrType.GetFunctionPointerParameterTypes()[i].Name,
+                    expectedArgNames[i]
+                );
             }
         }
 
         [Theory]
         [InlineData(nameof(FunctionPointerHolder.Prop_Int), "System.Int32()")]
-        [InlineData(nameof(FunctionPointerHolder.Prop_MyClass), "System.Tests.Types.FunctionPointerTests+FunctionPointerHolder+MyClass()")]
+        [InlineData(
+            nameof(FunctionPointerHolder.Prop_MyClass),
+            "System.Tests.Types.FunctionPointerTests+FunctionPointerHolder+MyClass()"
+        )]
         public static unsafe void Property(string name, string expectedToString)
         {
             Type t = typeof(FunctionPointerHolder).Project();
@@ -243,7 +280,10 @@ namespace System.Tests.Types
 
         [Theory]
         [InlineData(nameof(FunctionPointerHolder.Field_Int), "System.Int32()")]
-        [InlineData(nameof(FunctionPointerHolder.Field_MyClass), "System.Tests.Types.FunctionPointerTests+FunctionPointerHolder+MyClass()")]
+        [InlineData(
+            nameof(FunctionPointerHolder.Field_MyClass),
+            "System.Tests.Types.FunctionPointerTests+FunctionPointerHolder+MyClass()"
+        )]
         public static unsafe void Field(string name, string expectedToString)
         {
             Type t = typeof(FunctionPointerHolder).Project();
@@ -265,21 +305,24 @@ namespace System.Tests.Types
             Assert.Null(fnPtrType.AssemblyQualifiedName);
             Assert.Equal("", fnPtrType.Name);
             Assert.Equal<Type>(Type.EmptyTypes, fnPtrType.GetFunctionPointerCallingConventions());
-            Assert.Equal<Type>(Type.EmptyTypes, fnPtrType.GetFunctionPointerReturnType().GetRequiredCustomModifiers());
+            Assert.Equal<Type>(
+                Type.EmptyTypes,
+                fnPtrType.GetFunctionPointerReturnType().GetRequiredCustomModifiers()
+            );
         }
 
         private unsafe class FunctionPointerHolder
         {
 #pragma warning disable 0649
-            public delegate*<void> ToString_1;
-            public delegate*unmanaged<void> ToString_2;
-            public delegate*<int> ToString_3;
-            public delegate*<int>* ToString_4;
-            public delegate*<int>[] ToString_5;
-            public delegate*<int>[] ToString_6;
-            public delegate*<int>*[] ToString_7;
-            public delegate*<delegate*<int>> ToString_8;
-            public delegate*<delegate*<int, string>, bool> ToString_9;
+            public delegate* <void> ToString_1;
+            public delegate* unmanaged<void> ToString_2;
+            public delegate* <int> ToString_3;
+            public delegate* <int>* ToString_4;
+            public delegate* <int>[] ToString_5;
+            public delegate* <int>[] ToString_6;
+            public delegate* <int>*[] ToString_7;
+            public delegate* <delegate* <int>> ToString_8;
+            public delegate* <delegate* <int, string>, bool> ToString_9;
 
             public delegate* managed<int> Field_Int;
             public delegate* managed<MyClass> Field_MyClass;
@@ -289,15 +332,24 @@ namespace System.Tests.Types
             public delegate* managed<MyClass> Prop_MyClass { get; }
 
             public delegate* managed<int> MethodReturnValue1() => default;
+
             public delegate* managed<int> MethodReturnValue2() => default;
 
-            public delegate* unmanaged[Stdcall, MemberFunction]<string, ref bool*, MyClass, in MyStruct, double> SeveralArguments() => default;
-            public delegate*<in int, out int, void> RequiredModifiers() => default;
+            public delegate* unmanaged[Stdcall, MemberFunction]<
+                string,
+                ref bool*,
+                MyClass,
+                in MyStruct,
+                double> SeveralArguments() => default;
 
-            public delegate*<T> GenericReturnValue<T>() => default;
-            public bool GenericArgument<T>(int x, delegate*<T[], void> fptr) => default;
+            public delegate* <in int, out int, void> RequiredModifiers() => default;
+
+            public delegate* <T> GenericReturnValue<T>() => default;
+
+            public bool GenericArgument<T>(int x, delegate* <T[], void> fptr) => default;
 
             public class MyClass { }
+
             public struct MyStruct { }
         }
     }

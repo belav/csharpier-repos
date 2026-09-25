@@ -67,6 +67,9 @@ namespace Microsoft.CodeAnalysis.Options
 
         void AddOptionChangedHandler(object target, EventHandler<OptionChangedEventArgs> handler);
 
-        void RemoveOptionChangedHandler(object target, EventHandler<OptionChangedEventArgs> handler);
+        void RemoveOptionChangedHandler(
+            object target,
+            EventHandler<OptionChangedEventArgs> handler
+        );
     }
 }

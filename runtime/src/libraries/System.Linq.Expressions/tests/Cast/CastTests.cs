@@ -64,7 +64,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastCustom2ArrayTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastCustom2Array(array[i], useInterpreter);
@@ -74,7 +79,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIEnumerableOfCustomTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIEnumerableOfCustom(array[i], useInterpreter);
@@ -84,7 +94,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIEnumerableOfCustom2Test(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIEnumerableOfCustom2(array[i], useInterpreter);
@@ -94,7 +109,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIEnumerableOfInterfaceTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIEnumerableOfInterface(array[i], useInterpreter);
@@ -104,7 +124,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIEnumerableOfObjectTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIEnumerableOfObject(array[i], useInterpreter);
@@ -114,7 +139,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIListOfCustomTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIListOfCustom(array[i], useInterpreter);
@@ -124,7 +154,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIListOfCustom2Test(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIListOfCustom2(array[i], useInterpreter);
@@ -134,7 +169,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIListOfInterfaceTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIListOfInterface(array[i], useInterpreter);
@@ -144,7 +184,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastIListOfObjectTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastIListOfObject(array[i], useInterpreter);
@@ -154,7 +199,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustomArrayCastObjectArrayTest(bool useInterpreter)
         {
-            C[][] array = new C[][] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10] };
+            C[][] array = new C[][]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustomArrayCastObjectArray(array[i], useInterpreter);
@@ -214,7 +264,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckCustom2ArrayCastCustomArrayTest(bool useInterpreter)
         {
-            D[][] array = new D[][] { null, new D[] { null, new D(), new D(0), new D(5) }, new D[10] };
+            D[][] array = new D[][]
+            {
+                null,
+                new D[] { null, new D(), new D(0), new D(5) },
+                new D[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyCustom2ArrayCastCustomArray(array[i], useInterpreter);
@@ -224,7 +279,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckDelegateCastFuncOfObjectTest(bool useInterpreter)
         {
-            Delegate[] array = new Delegate[] { null, (Func<object>)delegate () { return null; }, (Func<int, int>)delegate (int i) { return i + 1; }, (Action<object>)delegate { } };
+            Delegate[] array = new Delegate[]
+            {
+                null,
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    },
+                (Func<int, int>)
+                    delegate(int i)
+                    {
+                        return i + 1;
+                    },
+                (Action<object>)delegate { },
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyDelegateCastFuncOfObject(array[i], useInterpreter);
@@ -234,7 +303,21 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckDelegateCastObjectTest(bool useInterpreter)
         {
-            Delegate[] array = new Delegate[] { null, (Func<object>)delegate () { return null; }, (Func<int, int>)delegate (int i) { return i + 1; }, (Action<object>)delegate { } };
+            Delegate[] array = new Delegate[]
+            {
+                null,
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    },
+                (Func<int, int>)
+                    delegate(int i)
+                    {
+                        return i + 1;
+                    },
+                (Action<object>)delegate { },
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyDelegateCastObject(array[i], useInterpreter);
@@ -264,7 +347,20 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckEnumTypeCastEnumTest(bool useInterpreter)
         {
-            Enum[] array = new Enum[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue };
+            Enum[] array = new Enum[]
+            {
+                null,
+                (E)0,
+                E.A,
+                E.B,
+                (E)int.MaxValue,
+                (E)int.MinValue,
+                (El)0,
+                El.A,
+                El.B,
+                (El)long.MaxValue,
+                (El)long.MinValue,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyEnumTypeCastEnum(array[i], useInterpreter);
@@ -295,14 +391,36 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckLongEnumCastEnum(bool useInterpreter)
         {
-            foreach (El value in new[] { El.A, El.B, (El)int.MaxValue, (El)long.MaxValue, (El)long.MinValue })
+            foreach (
+                El value in new[]
+                {
+                    El.A,
+                    El.B,
+                    (El)int.MaxValue,
+                    (El)long.MaxValue,
+                    (El)long.MinValue,
+                }
+            )
                 VerifyLongEnumCastEnum(value, useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckEnumTypeCastObjectTest(bool useInterpreter)
         {
-            Enum[] array = new Enum[] { null, (E)0, E.A, E.B, (E)int.MaxValue, (E)int.MinValue, (El)0, El.A, El.B, (El)long.MaxValue, (El)long.MinValue };
+            Enum[] array = new Enum[]
+            {
+                null,
+                (E)0,
+                E.A,
+                E.B,
+                (E)int.MaxValue,
+                (E)int.MinValue,
+                (El)0,
+                El.A,
+                El.B,
+                (El)long.MaxValue,
+                (El)long.MinValue,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyEnumTypeCastObject(array[i], useInterpreter);
@@ -312,7 +430,15 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckFuncOfObjectCastDelegateTest(bool useInterpreter)
         {
-            Func<object>[] array = new Func<object>[] { null, (Func<object>)delegate () { return null; } };
+            Func<object>[] array = new Func<object>[]
+            {
+                null,
+                (Func<object>)
+                    delegate()
+                    {
+                        return null;
+                    },
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyFuncOfObjectCastDelegate(array[i], useInterpreter);
@@ -352,7 +478,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfCustomCastCustomArrayTest(bool useInterpreter)
         {
-            IEnumerable<C>[] array = new IEnumerable<C>[] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10], new List<C>(), new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IEnumerable<C>[] array = new IEnumerable<C>[]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+                new List<C>(),
+                new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfCustomCastCustomArray(array[i], useInterpreter);
@@ -362,7 +495,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfCustomCastObjectArrayTest(bool useInterpreter)
         {
-            IEnumerable<C>[] array = new IEnumerable<C>[] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10], new List<C>(), new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IEnumerable<C>[] array = new IEnumerable<C>[]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+                new List<C>(),
+                new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfCustomCastObjectArray(array[i], useInterpreter);
@@ -372,7 +512,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfCustom2CastCustomArrayTest(bool useInterpreter)
         {
-            IEnumerable<D>[] array = new IEnumerable<D>[] { null, new D[] { null, new D(), new D(0), new D(5) }, new D[10], new List<D>(), new List<D>(new D[] { null, new D(), new D(0), new D(5) }) };
+            IEnumerable<D>[] array = new IEnumerable<D>[]
+            {
+                null,
+                new D[] { null, new D(), new D(0), new D(5) },
+                new D[10],
+                new List<D>(),
+                new List<D>(new D[] { null, new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfCustom2CastCustomArray(array[i], useInterpreter);
@@ -382,7 +529,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfInterfaceCastCustomArrayTest(bool useInterpreter)
         {
-            IEnumerable<I>[] array = new IEnumerable<I>[] { null, new I[] { null, new C(), new D(), new D(0), new D(5) }, new I[10], new List<I>(), new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IEnumerable<I>[] array = new IEnumerable<I>[]
+            {
+                null,
+                new I[] { null, new C(), new D(), new D(0), new D(5) },
+                new I[10],
+                new List<I>(),
+                new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfInterfaceCastCustomArray(array[i], useInterpreter);
@@ -392,7 +546,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfInterfaceCastObjectArrayTest(bool useInterpreter)
         {
-            IEnumerable<I>[] array = new IEnumerable<I>[] { null, new I[] { null, new C(), new D(), new D(0), new D(5) }, new I[10], new List<I>(), new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IEnumerable<I>[] array = new IEnumerable<I>[]
+            {
+                null,
+                new I[] { null, new C(), new D(), new D(0), new D(5) },
+                new I[10],
+                new List<I>(),
+                new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfInterfaceCastObjectArray(array[i], useInterpreter);
@@ -402,7 +563,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfObjectCastCustomArrayTest(bool useInterpreter)
         {
-            IEnumerable<object>[] array = new IEnumerable<object>[] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10], new List<object>(), new List<object>(new object[] { null, new object(), new C(), new D(3) }) };
+            IEnumerable<object>[] array = new IEnumerable<object>[]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+                new List<object>(),
+                new List<object>(new object[] { null, new object(), new C(), new D(3) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfObjectCastCustomArray(array[i], useInterpreter);
@@ -412,7 +580,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfObjectCastObjectArrayTest(bool useInterpreter)
         {
-            IEnumerable<object>[] array = new IEnumerable<object>[] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10], new List<object>(), new List<object>(new object[] { null, new object(), new C(), new D(3) }) };
+            IEnumerable<object>[] array = new IEnumerable<object>[]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+                new List<object>(),
+                new List<object>(new object[] { null, new object(), new C(), new D(3) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfObjectCastObjectArray(array[i], useInterpreter);
@@ -422,7 +597,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEnumerableOfStructCastStructArrayTest(bool useInterpreter)
         {
-            IEnumerable<S>[] array = new IEnumerable<S>[] { null, new S[] { default(S), new S() }, new S[10], new List<S>(), new List<S>(new S[] { default(S), new S() }) };
+            IEnumerable<S>[] array = new IEnumerable<S>[]
+            {
+                null,
+                new S[] { default(S), new S() },
+                new S[10],
+                new List<S>(),
+                new List<S>(new S[] { default(S), new S() }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEnumerableOfStructCastStructArray(array[i], useInterpreter);
@@ -432,7 +614,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEquatableOfCustomCastCustomTest(bool useInterpreter)
         {
-            IEquatable<C>[] array = new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) };
+            IEquatable<C>[] array = new IEquatable<C>[]
+            {
+                null,
+                new C(),
+                new D(),
+                new D(0),
+                new D(5),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEquatableOfCustomCastCustom(array[i], useInterpreter);
@@ -442,7 +631,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEquatableOfCustomCastCustom2Test(bool useInterpreter)
         {
-            IEquatable<C>[] array = new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) };
+            IEquatable<C>[] array = new IEquatable<C>[]
+            {
+                null,
+                new C(),
+                new D(),
+                new D(0),
+                new D(5),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEquatableOfCustomCastCustom2(array[i], useInterpreter);
@@ -452,7 +648,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIEquatableOfCustomCastObjectTest(bool useInterpreter)
         {
-            IEquatable<C>[] array = new IEquatable<C>[] { null, new C(), new D(), new D(0), new D(5) };
+            IEquatable<C>[] array = new IEquatable<C>[]
+            {
+                null,
+                new C(),
+                new D(),
+                new D(0),
+                new D(5),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIEquatableOfCustomCastObject(array[i], useInterpreter);
@@ -502,7 +705,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfCustomCastCustomArrayTest(bool useInterpreter)
         {
-            IList<C>[] array = new IList<C>[] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10], new List<C>(), new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IList<C>[] array = new IList<C>[]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+                new List<C>(),
+                new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfCustomCastCustomArray(array[i], useInterpreter);
@@ -512,7 +722,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfCustomCastObjectArrayTest(bool useInterpreter)
         {
-            IList<C>[] array = new IList<C>[] { null, new C[] { null, new C(), new D(), new D(0), new D(5) }, new C[10], new List<C>(), new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IList<C>[] array = new IList<C>[]
+            {
+                null,
+                new C[] { null, new C(), new D(), new D(0), new D(5) },
+                new C[10],
+                new List<C>(),
+                new List<C>(new C[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfCustomCastObjectArray(array[i], useInterpreter);
@@ -522,7 +739,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfCustom2CastCustomArrayTest(bool useInterpreter)
         {
-            IList<D>[] array = new IList<D>[] { null, new D[] { null, new D(), new D(0), new D(5) }, new D[10], new List<D>(), new List<D>(new D[] { null, new D(), new D(0), new D(5) }) };
+            IList<D>[] array = new IList<D>[]
+            {
+                null,
+                new D[] { null, new D(), new D(0), new D(5) },
+                new D[10],
+                new List<D>(),
+                new List<D>(new D[] { null, new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfCustom2CastCustomArray(array[i], useInterpreter);
@@ -532,7 +756,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfInterfaceCastCustomArrayTest(bool useInterpreter)
         {
-            IList<I>[] array = new IList<I>[] { null, new I[] { null, new C(), new D(), new D(0), new D(5) }, new I[10], new List<I>(), new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IList<I>[] array = new IList<I>[]
+            {
+                null,
+                new I[] { null, new C(), new D(), new D(0), new D(5) },
+                new I[10],
+                new List<I>(),
+                new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfInterfaceCastCustomArray(array[i], useInterpreter);
@@ -542,7 +773,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfInterfaceCastObjectArrayTest(bool useInterpreter)
         {
-            IList<I>[] array = new IList<I>[] { null, new I[] { null, new C(), new D(), new D(0), new D(5) }, new I[10], new List<I>(), new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }) };
+            IList<I>[] array = new IList<I>[]
+            {
+                null,
+                new I[] { null, new C(), new D(), new D(0), new D(5) },
+                new I[10],
+                new List<I>(),
+                new List<I>(new I[] { null, new C(), new D(), new D(0), new D(5) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfInterfaceCastObjectArray(array[i], useInterpreter);
@@ -552,7 +790,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfObjectCastCustomArrayTest(bool useInterpreter)
         {
-            IList<object>[] array = new IList<object>[] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10], new List<object>(), new List<object>(new object[] { null, new object(), new C(), new D(3) }) };
+            IList<object>[] array = new IList<object>[]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+                new List<object>(),
+                new List<object>(new object[] { null, new object(), new C(), new D(3) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfObjectCastCustomArray(array[i], useInterpreter);
@@ -562,7 +807,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfObjectCastObjectArrayTest(bool useInterpreter)
         {
-            IList<object>[] array = new IList<object>[] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10], new List<object>(), new List<object>(new object[] { null, new object(), new C(), new D(3) }) };
+            IList<object>[] array = new IList<object>[]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+                new List<object>(),
+                new List<object>(new object[] { null, new object(), new C(), new D(3) }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfObjectCastObjectArray(array[i], useInterpreter);
@@ -572,7 +824,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckIListOfStructCastStructArrayTest(bool useInterpreter)
         {
-            IList<S>[] array = new IList<S>[] { null, new S[] { default(S), new S() }, new S[10], new List<S>(), new List<S>(new S[] { default(S), new S() }) };
+            IList<S>[] array = new IList<S>[]
+            {
+                null,
+                new S[] { default(S), new S() },
+                new S[10],
+                new List<S>(),
+                new List<S>(new S[] { default(S), new S() }),
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyIListOfStructCastStructArray(array[i], useInterpreter);
@@ -712,7 +971,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckObjectArrayCastCustomArrayTest(bool useInterpreter)
         {
-            object[][] array = new object[][] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10] };
+            object[][] array = new object[][]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyObjectArrayCastCustomArray(array[i], useInterpreter);
@@ -722,7 +986,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckObjectArrayCastIEnumerableOfCustomTest(bool useInterpreter)
         {
-            object[][] array = new object[][] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10] };
+            object[][] array = new object[][]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyObjectArrayCastIEnumerableOfCustom(array[i], useInterpreter);
@@ -732,7 +1001,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckObjectArrayCastIEnumerableOfInterfaceTest(bool useInterpreter)
         {
-            object[][] array = new object[][] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10] };
+            object[][] array = new object[][]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyObjectArrayCastIEnumerableOfInterface(array[i], useInterpreter);
@@ -742,7 +1016,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckObjectArrayCastIEnumerableOfObjectTest(bool useInterpreter)
         {
-            object[][] array = new object[][] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10] };
+            object[][] array = new object[][]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyObjectArrayCastIEnumerableOfObject(array[i], useInterpreter);
@@ -752,7 +1031,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckObjectArrayCastIListOfCustomTest(bool useInterpreter)
         {
-            object[][] array = new object[][] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10] };
+            object[][] array = new object[][]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyObjectArrayCastIListOfCustom(array[i], useInterpreter);
@@ -762,7 +1046,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckObjectArrayCastIListOfInterfaceTest(bool useInterpreter)
         {
-            object[][] array = new object[][] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10] };
+            object[][] array = new object[][]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyObjectArrayCastIListOfInterface(array[i], useInterpreter);
@@ -772,7 +1061,12 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckObjectArrayCastIListOfObjectTest(bool useInterpreter)
         {
-            object[][] array = new object[][] { null, new object[] { null, new object(), new C(), new D(3) }, new object[10] };
+            object[][] array = new object[][]
+            {
+                null,
+                new object[] { null, new object(), new C(), new D(3) },
+                new object[10],
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyObjectArrayCastIListOfObject(array[i], useInterpreter);
@@ -832,7 +1126,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckValueTypeCastIntTest(bool useInterpreter)
         {
-            ValueType[] array = new ValueType[] { null, default(S), new Scs(null, new S()), E.A, El.B };
+            ValueType[] array = new ValueType[]
+            {
+                null,
+                default(S),
+                new Scs(null, new S()),
+                E.A,
+                El.B,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyValueTypeCastInt(array[i], useInterpreter);
@@ -842,7 +1143,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckValueTypeCastObjectTest(bool useInterpreter)
         {
-            ValueType[] array = new ValueType[] { null, default(S), new Scs(null, new S()), E.A, El.B };
+            ValueType[] array = new ValueType[]
+            {
+                null,
+                default(S),
+                new Scs(null, new S()),
+                E.A,
+                El.B,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyValueTypeCastObject(array[i], useInterpreter);
@@ -852,7 +1160,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckValueTypeCastStructTest(bool useInterpreter)
         {
-            ValueType[] array = new ValueType[] { null, default(S), new Scs(null, new S()), E.A, El.B };
+            ValueType[] array = new ValueType[]
+            {
+                null,
+                default(S),
+                new Scs(null, new S()),
+                E.A,
+                El.B,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyValueTypeCastStruct(array[i], useInterpreter);
@@ -908,13 +1223,17 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertObjectCastGenericWithStructRestrictionAsStruct(bool useInterpreter)
+        public static void ConvertObjectCastGenericWithStructRestrictionAsStruct(
+            bool useInterpreter
+        )
         {
             CheckObjectCastGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertObjectCastGenericWithStructRestrictionAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertObjectCastGenericWithStructRestrictionAsStructWithStringAndField(
+            bool useInterpreter
+        )
         {
             CheckObjectCastGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -968,49 +1287,65 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastObjectAsStruct(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionCastObjectHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastObjectAsStructWithStringAndField(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionCastObjectHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsEnum(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionCastValueTypeHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStruct(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionCastValueTypeHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsStructWithStringAndField(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionCastValueTypeHelper<Scs>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertGenericWithStructRestrictionCastValueTypeAsDateTime(bool useInterpreter)
+        public static void ConvertGenericWithStructRestrictionCastValueTypeAsDateTime(
+            bool useInterpreter
+        )
         {
             CheckGenericWithStructRestrictionCastValueTypeHelper<DateTime>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertValueTypeCastGenericWithStructRestrictionAsEnum(bool useInterpreter)
+        public static void ConvertValueTypeCastGenericWithStructRestrictionAsEnum(
+            bool useInterpreter
+        )
         {
             CheckValueTypeCastGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertValueTypeCastGenericWithStructRestrictionAsStruct(bool useInterpreter)
+        public static void ConvertValueTypeCastGenericWithStructRestrictionAsStruct(
+            bool useInterpreter
+        )
         {
             CheckValueTypeCastGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
@@ -1022,7 +1357,9 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void ConvertValueTypeCastGenericWithStructRestrictionAsStructWithStringAndField(bool useInterpreter)
+        public static void ConvertValueTypeCastGenericWithStructRestrictionAsStructWithStringAndField(
+            bool useInterpreter
+        )
         {
             CheckValueTypeCastGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -1040,7 +1377,10 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckObjectCastGenericWithClassRestrictionHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckObjectCastGenericWithClassRestrictionHelper<Tc>(
+            bool useInterpreter
+        )
+            where Tc : class
         {
             object[] array = new object[] { null, new object(), new C(), new D(3) };
             for (int i = 0; i < array.Length; i++)
@@ -1049,7 +1389,10 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckObjectCastGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckObjectCastGenericWithStructRestrictionHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
             object[] array = new object[] { null, new object(), new C(), new D(3) };
             for (int i = 0; i < array.Length; i++)
@@ -1067,7 +1410,10 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithClassRestrictionCastObjectHelper<Tc>(bool useInterpreter) where Tc : class
+        private static void CheckGenericWithClassRestrictionCastObjectHelper<Tc>(
+            bool useInterpreter
+        )
+            where Tc : class
         {
             Tc[] array = new Tc[] { null, default(Tc) };
             for (int i = 0; i < array.Length; i++)
@@ -1076,7 +1422,10 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithStructRestrictionCastObjectHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionCastObjectHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -1085,7 +1434,10 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckGenericWithStructRestrictionCastValueTypeHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckGenericWithStructRestrictionCastValueTypeHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
             Ts[] array = new Ts[] { default(Ts), new Ts() };
             for (int i = 0; i < array.Length; i++)
@@ -1094,9 +1446,19 @@ namespace System.Linq.Expressions.Tests
             }
         }
 
-        private static void CheckValueTypeCastGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckValueTypeCastGenericWithStructRestrictionHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            ValueType[] array = new ValueType[] { null, default(S), new Scs(null, new S()), E.A, El.B };
+            ValueType[] array = new ValueType[]
+            {
+                null,
+                default(S),
+                new Scs(null, new S()),
+                E.A,
+                El.B,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 VerifyValueTypeCastGenericWithStructRestriction<Ts>(array[i], useInterpreter);
@@ -1109,15 +1471,19 @@ namespace System.Linq.Expressions.Tests
 
         private static bool CanBeNull(Type type)
         {
-            return !type.IsValueType || (type.IsConstructedGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+            return !type.IsValueType
+                || (
+                    type.IsConstructedGenericType
+                    && type.GetGenericTypeDefinition() == typeof(Nullable<>)
+                );
         }
 
         private static void VerifyCustomCastCustom2(C value, bool useInterpreter)
         {
-            Expression<Func<D>> e =
-                Expression.Lambda<Func<D>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C)), typeof(D)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<D>> e = Expression.Lambda<Func<D>>(
+                Expression.Convert(Expression.Constant(value, typeof(C)), typeof(D)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<D> f = e.Compile(useInterpreter);
 
             if (value == null || value is D)
@@ -1128,10 +1494,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomCastInterface(C value, bool useInterpreter)
         {
-            Expression<Func<I>> e =
-                Expression.Lambda<Func<I>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C)), typeof(I)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<I>> e = Expression.Lambda<Func<I>>(
+                Expression.Convert(Expression.Constant(value, typeof(C)), typeof(I)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<I> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1139,10 +1505,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomCastIEquatableOfCustom(C value, bool useInterpreter)
         {
-            Expression<Func<IEquatable<C>>> e =
-                Expression.Lambda<Func<IEquatable<C>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C)), typeof(IEquatable<C>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEquatable<C>>> e = Expression.Lambda<Func<IEquatable<C>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C)), typeof(IEquatable<C>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEquatable<C>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1150,10 +1516,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomCastIEquatableOfCustom2(C value, bool useInterpreter)
         {
-            Expression<Func<IEquatable<D>>> e =
-                Expression.Lambda<Func<IEquatable<D>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C)), typeof(IEquatable<D>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEquatable<D>>> e = Expression.Lambda<Func<IEquatable<D>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C)), typeof(IEquatable<D>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEquatable<D>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IEquatable<D>)
@@ -1164,10 +1530,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomCastObject(C value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(C)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1175,10 +1541,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastCustom2Array(C[] value, bool useInterpreter)
         {
-            Expression<Func<D[]>> e =
-                Expression.Lambda<Func<D[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(D[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<D[]>> e = Expression.Lambda<Func<D[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(D[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<D[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is D[])
@@ -1189,21 +1555,24 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastIEnumerableOfCustom(C[] value, bool useInterpreter)
         {
-            Expression<Func<IEnumerable<C>>> e =
-                Expression.Lambda<Func<IEnumerable<C>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<C>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<C>>> e = Expression.Lambda<Func<IEnumerable<C>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<C>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<C>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyCustomArrayCastIEnumerableOfCustom2(C[] value, bool useInterpreter)
+        private static void VerifyCustomArrayCastIEnumerableOfCustom2(
+            C[] value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<IEnumerable<D>>> e =
-                Expression.Lambda<Func<IEnumerable<D>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<D>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<D>>> e = Expression.Lambda<Func<IEnumerable<D>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<D>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<D>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IEnumerable<D>)
@@ -1212,12 +1581,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyCustomArrayCastIEnumerableOfInterface(C[] value, bool useInterpreter)
+        private static void VerifyCustomArrayCastIEnumerableOfInterface(
+            C[] value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<IEnumerable<I>>> e =
-                Expression.Lambda<Func<IEnumerable<I>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<I>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<I>>> e = Expression.Lambda<Func<IEnumerable<I>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<I>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<I>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1225,10 +1597,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastIEnumerableOfObject(C[] value, bool useInterpreter)
         {
-            Expression<Func<IEnumerable<object>>> e =
-                Expression.Lambda<Func<IEnumerable<object>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IEnumerable<object>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<object>>> e = Expression.Lambda<Func<IEnumerable<object>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(C[])),
+                    typeof(IEnumerable<object>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<object>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1236,10 +1611,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastIListOfCustom(C[] value, bool useInterpreter)
         {
-            Expression<Func<IList<C>>> e =
-                Expression.Lambda<Func<IList<C>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<C>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<C>>> e = Expression.Lambda<Func<IList<C>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<C>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<C>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1247,10 +1622,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastIListOfCustom2(C[] value, bool useInterpreter)
         {
-            Expression<Func<IList<D>>> e =
-                Expression.Lambda<Func<IList<D>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<D>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<D>>> e = Expression.Lambda<Func<IList<D>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<D>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<D>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IList<D>)
@@ -1261,10 +1636,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastIListOfInterface(C[] value, bool useInterpreter)
         {
-            Expression<Func<IList<I>>> e =
-                Expression.Lambda<Func<IList<I>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<I>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<I>>> e = Expression.Lambda<Func<IList<I>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<I>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<I>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1272,10 +1647,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastIListOfObject(C[] value, bool useInterpreter)
         {
-            Expression<Func<IList<object>>> e =
-                Expression.Lambda<Func<IList<object>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<object>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<object>>> e = Expression.Lambda<Func<IList<object>>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(IList<object>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<object>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1283,10 +1658,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustomArrayCastObjectArray(C[] value, bool useInterpreter)
         {
-            Expression<Func<object[]>> e =
-                Expression.Lambda<Func<object[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(object[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(C[])), typeof(object[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object[]> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1294,10 +1669,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustom2CastCustom(D value, bool useInterpreter)
         {
-            Expression<Func<C>> e =
-                Expression.Lambda<Func<C>>(
-                    Expression.Convert(Expression.Constant(value, typeof(D)), typeof(C)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C>> e = Expression.Lambda<Func<C>>(
+                Expression.Convert(Expression.Constant(value, typeof(D)), typeof(C)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1305,10 +1680,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustom2CastInterface(D value, bool useInterpreter)
         {
-            Expression<Func<I>> e =
-                Expression.Lambda<Func<I>>(
-                    Expression.Convert(Expression.Constant(value, typeof(D)), typeof(I)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<I>> e = Expression.Lambda<Func<I>>(
+                Expression.Convert(Expression.Constant(value, typeof(D)), typeof(I)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<I> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1316,10 +1691,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustom2CastIEquatableOfCustom(D value, bool useInterpreter)
         {
-            Expression<Func<IEquatable<C>>> e =
-                Expression.Lambda<Func<IEquatable<C>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(D)), typeof(IEquatable<C>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEquatable<C>>> e = Expression.Lambda<Func<IEquatable<C>>>(
+                Expression.Convert(Expression.Constant(value, typeof(D)), typeof(IEquatable<C>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEquatable<C>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1327,10 +1702,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustom2CastIEquatableOfCustom2(D value, bool useInterpreter)
         {
-            Expression<Func<IEquatable<D>>> e =
-                Expression.Lambda<Func<IEquatable<D>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(D)), typeof(IEquatable<D>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEquatable<D>>> e = Expression.Lambda<Func<IEquatable<D>>>(
+                Expression.Convert(Expression.Constant(value, typeof(D)), typeof(IEquatable<D>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEquatable<D>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1338,10 +1713,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustom2CastObject(D value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(D)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(D)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1349,10 +1724,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyCustom2ArrayCastCustomArray(D[] value, bool useInterpreter)
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(D[])), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(D[])), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1363,10 +1738,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDelegateCastFuncOfObject(Delegate value, bool useInterpreter)
         {
-            Expression<Func<Func<object>>> e =
-                Expression.Lambda<Func<Func<object>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Delegate)), typeof(Func<object>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Func<object>>> e = Expression.Lambda<Func<Func<object>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(Delegate)),
+                    typeof(Func<object>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Func<object>> f = e.Compile(useInterpreter);
 
             if (value == null || value is Func<object>)
@@ -1377,10 +1755,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDelegateCastObject(Delegate value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Delegate)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(Delegate)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1388,10 +1766,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumCastEnumType(E value, bool useInterpreter)
         {
-            Expression<Func<Enum>> e =
-                Expression.Lambda<Func<Enum>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(Enum)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Enum>> e = Expression.Lambda<Func<Enum>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(Enum)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Enum> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1399,10 +1777,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumCastObject(E value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(E)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1410,10 +1788,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumTypeCastEnum(Enum value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Enum)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(Enum)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -1437,10 +1815,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyEnumTypeCastObject(Enum value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Enum)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(Enum)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1448,10 +1826,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFuncOfObjectCastDelegate(Func<object> value, bool useInterpreter)
         {
-            Expression<Func<Delegate>> e =
-                Expression.Lambda<Func<Delegate>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Func<object>)), typeof(Delegate)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Delegate>> e = Expression.Lambda<Func<Delegate>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(Func<object>)),
+                    typeof(Delegate)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Delegate> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1459,10 +1840,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyInterfaceCastCustom(I value, bool useInterpreter)
         {
-            Expression<Func<C>> e =
-                Expression.Lambda<Func<C>>(
-                    Expression.Convert(Expression.Constant(value, typeof(I)), typeof(C)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C>> e = Expression.Lambda<Func<C>>(
+                Expression.Convert(Expression.Constant(value, typeof(I)), typeof(C)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C> f = e.Compile(useInterpreter);
 
             if (value == null || value is C)
@@ -1473,10 +1854,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyInterfaceCastCustom2(I value, bool useInterpreter)
         {
-            Expression<Func<D>> e =
-                Expression.Lambda<Func<D>>(
-                    Expression.Convert(Expression.Constant(value, typeof(I)), typeof(D)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<D>> e = Expression.Lambda<Func<D>>(
+                Expression.Convert(Expression.Constant(value, typeof(I)), typeof(D)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<D> f = e.Compile(useInterpreter);
 
             if (value == null || value is D)
@@ -1487,21 +1868,24 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyInterfaceCastObject(I value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(I)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(I)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIEnumerableOfCustomCastCustomArray(IEnumerable<C> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfCustomCastCustomArray(
+            IEnumerable<C> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<C>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEnumerable<C>)), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1510,12 +1894,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEnumerableOfCustomCastObjectArray(IEnumerable<C> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfCustomCastObjectArray(
+            IEnumerable<C> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object[]>> e =
-                Expression.Lambda<Func<object[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<C>)), typeof(object[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(IEnumerable<C>)),
+                    typeof(object[])
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is object[])
@@ -1524,12 +1914,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEnumerableOfCustom2CastCustomArray(IEnumerable<D> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfCustom2CastCustomArray(
+            IEnumerable<D> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<D>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEnumerable<D>)), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1538,12 +1931,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEnumerableOfInterfaceCastCustomArray(IEnumerable<I> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfInterfaceCastCustomArray(
+            IEnumerable<I> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<I>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEnumerable<I>)), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1552,12 +1948,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEnumerableOfInterfaceCastObjectArray(IEnumerable<I> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfInterfaceCastObjectArray(
+            IEnumerable<I> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object[]>> e =
-                Expression.Lambda<Func<object[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<I>)), typeof(object[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(IEnumerable<I>)),
+                    typeof(object[])
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is object[])
@@ -1566,12 +1968,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEnumerableOfObjectCastCustomArray(IEnumerable<object> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfObjectCastCustomArray(
+            IEnumerable<object> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<object>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(IEnumerable<object>)),
+                    typeof(C[])
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1580,12 +1988,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEnumerableOfObjectCastObjectArray(IEnumerable<object> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfObjectCastObjectArray(
+            IEnumerable<object> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object[]>> e =
-                Expression.Lambda<Func<object[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<object>)), typeof(object[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(IEnumerable<object>)),
+                    typeof(object[])
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is object[])
@@ -1594,12 +2008,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEnumerableOfStructCastStructArray(IEnumerable<S> value, bool useInterpreter)
+        private static void VerifyIEnumerableOfStructCastStructArray(
+            IEnumerable<S> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<S[]>> e =
-                Expression.Lambda<Func<S[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEnumerable<S>)), typeof(S[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<S[]>> e = Expression.Lambda<Func<S[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEnumerable<S>)), typeof(S[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<S[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is S[])
@@ -1608,12 +2025,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEquatableOfCustomCastCustom(IEquatable<C> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustomCastCustom(
+            IEquatable<C> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C>> e =
-                Expression.Lambda<Func<C>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEquatable<C>)), typeof(C)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C>> e = Expression.Lambda<Func<C>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEquatable<C>)), typeof(C)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C> f = e.Compile(useInterpreter);
 
             if (value == null || value is C)
@@ -1622,12 +2042,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEquatableOfCustomCastCustom2(IEquatable<C> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustomCastCustom2(
+            IEquatable<C> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<D>> e =
-                Expression.Lambda<Func<D>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEquatable<C>)), typeof(D)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<D>> e = Expression.Lambda<Func<D>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEquatable<C>)), typeof(D)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<D> f = e.Compile(useInterpreter);
 
             if (value == null || value is D)
@@ -1636,23 +2059,32 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEquatableOfCustomCastObject(IEquatable<C> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustomCastObject(
+            IEquatable<C> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEquatable<C>)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(IEquatable<C>)),
+                    typeof(object)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIEquatableOfCustom2CastCustom(IEquatable<D> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustom2CastCustom(
+            IEquatable<D> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C>> e =
-                Expression.Lambda<Func<C>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEquatable<D>)), typeof(C)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C>> e = Expression.Lambda<Func<C>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEquatable<D>)), typeof(C)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C> f = e.Compile(useInterpreter);
 
             if (value == null || value is C)
@@ -1661,12 +2093,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEquatableOfCustom2CastCustom2(IEquatable<D> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustom2CastCustom2(
+            IEquatable<D> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<D>> e =
-                Expression.Lambda<Func<D>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEquatable<D>)), typeof(D)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<D>> e = Expression.Lambda<Func<D>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEquatable<D>)), typeof(D)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<D> f = e.Compile(useInterpreter);
 
             if (value == null || value is D)
@@ -1675,23 +2110,32 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIEquatableOfCustom2CastObject(IEquatable<D> value, bool useInterpreter)
+        private static void VerifyIEquatableOfCustom2CastObject(
+            IEquatable<D> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEquatable<D>)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(IEquatable<D>)),
+                    typeof(object)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyIEquatableOfStructCastStruct(IEquatable<S> value, bool useInterpreter)
+        private static void VerifyIEquatableOfStructCastStruct(
+            IEquatable<S> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<S>> e =
-                Expression.Lambda<Func<S>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IEquatable<S>)), typeof(S)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<S>> e = Expression.Lambda<Func<S>>(
+                Expression.Convert(Expression.Constant(value, typeof(IEquatable<S>)), typeof(S)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<S> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -1704,10 +2148,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIListOfCustomCastCustomArray(IList<C> value, bool useInterpreter)
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<C>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IList<C>)), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1718,10 +2162,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIListOfCustomCastObjectArray(IList<C> value, bool useInterpreter)
         {
-            Expression<Func<object[]>> e =
-                Expression.Lambda<Func<object[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<C>)), typeof(object[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IList<C>)), typeof(object[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is object[])
@@ -1732,10 +2176,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIListOfCustom2CastCustomArray(IList<D> value, bool useInterpreter)
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<D>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IList<D>)), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1744,12 +2188,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIListOfInterfaceCastCustomArray(IList<I> value, bool useInterpreter)
+        private static void VerifyIListOfInterfaceCastCustomArray(
+            IList<I> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<I>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IList<I>)), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1758,12 +2205,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIListOfInterfaceCastObjectArray(IList<I> value, bool useInterpreter)
+        private static void VerifyIListOfInterfaceCastObjectArray(
+            IList<I> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object[]>> e =
-                Expression.Lambda<Func<object[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<I>)), typeof(object[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IList<I>)), typeof(object[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is object[])
@@ -1772,12 +2222,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIListOfObjectCastCustomArray(IList<object> value, bool useInterpreter)
+        private static void VerifyIListOfObjectCastCustomArray(
+            IList<object> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<object>)), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IList<object>)), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -1786,12 +2239,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyIListOfObjectCastObjectArray(IList<object> value, bool useInterpreter)
+        private static void VerifyIListOfObjectCastObjectArray(
+            IList<object> value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<object[]>> e =
-                Expression.Lambda<Func<object[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<object>)), typeof(object[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object[]>> e = Expression.Lambda<Func<object[]>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(IList<object>)),
+                    typeof(object[])
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is Array)
@@ -1802,10 +2261,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIListOfStructCastStructArray(IList<S> value, bool useInterpreter)
         {
-            Expression<Func<S[]>> e =
-                Expression.Lambda<Func<S[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(IList<S>)), typeof(S[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<S[]>> e = Expression.Lambda<Func<S[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(IList<S>)), typeof(S[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<S[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is Array)
@@ -1816,10 +2275,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntCastObject(int value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1827,10 +2286,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntCastValueType(int value, bool useInterpreter)
         {
-            Expression<Func<ValueType>> e =
-                Expression.Lambda<Func<ValueType>>(
-                    Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ValueType)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ValueType>> e = Expression.Lambda<Func<ValueType>>(
+                Expression.Convert(Expression.Constant(value, typeof(int)), typeof(ValueType)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ValueType> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -1838,10 +2297,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastCustom(object value, bool useInterpreter)
         {
-            Expression<Func<C>> e =
-                Expression.Lambda<Func<C>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(C)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C>> e = Expression.Lambda<Func<C>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(C)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C> f = e.Compile(useInterpreter);
 
             if (value == null || value is C)
@@ -1852,10 +2311,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastCustom2(object value, bool useInterpreter)
         {
-            Expression<Func<D>> e =
-                Expression.Lambda<Func<D>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(D)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<D>> e = Expression.Lambda<Func<D>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(D)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<D> f = e.Compile(useInterpreter);
 
             if (value == null || value is D)
@@ -1866,10 +2325,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastDelegate(object value, bool useInterpreter)
         {
-            Expression<Func<Delegate>> e =
-                Expression.Lambda<Func<Delegate>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Delegate)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Delegate>> e = Expression.Lambda<Func<Delegate>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Delegate)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Delegate> f = e.Compile(useInterpreter);
 
             if (value == null || value is Delegate)
@@ -1880,10 +2339,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastEnum(object value, bool useInterpreter)
         {
-            Expression<Func<E>> e =
-                Expression.Lambda<Func<E>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(E)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E>> e = Expression.Lambda<Func<E>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(E)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -1907,10 +2366,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastEnumType(object value, bool useInterpreter)
         {
-            Expression<Func<Enum>> e =
-                Expression.Lambda<Func<Enum>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Enum)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Enum>> e = Expression.Lambda<Func<Enum>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Enum)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Enum> f = e.Compile(useInterpreter);
 
             if (value == null || value is Enum)
@@ -1921,10 +2380,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastInterface(object value, bool useInterpreter)
         {
-            Expression<Func<I>> e =
-                Expression.Lambda<Func<I>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(I)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<I>> e = Expression.Lambda<Func<I>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(I)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<I> f = e.Compile(useInterpreter);
 
             if (value == null || value is I)
@@ -1935,10 +2394,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastIEquatableOfCustom(object value, bool useInterpreter)
         {
-            Expression<Func<IEquatable<C>>> e =
-                Expression.Lambda<Func<IEquatable<C>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(IEquatable<C>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEquatable<C>>> e = Expression.Lambda<Func<IEquatable<C>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(object)),
+                    typeof(IEquatable<C>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEquatable<C>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IEquatable<C>)
@@ -1949,10 +2411,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastIEquatableOfCustom2(object value, bool useInterpreter)
         {
-            Expression<Func<IEquatable<D>>> e =
-                Expression.Lambda<Func<IEquatable<D>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(IEquatable<D>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEquatable<D>>> e = Expression.Lambda<Func<IEquatable<D>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(object)),
+                    typeof(IEquatable<D>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEquatable<D>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IEquatable<D>)
@@ -1963,10 +2428,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastInt(object value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -1979,10 +2444,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastStruct(object value, bool useInterpreter)
         {
-            Expression<Func<S>> e =
-                Expression.Lambda<Func<S>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(S)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<S>> e = Expression.Lambda<Func<S>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(S)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<S> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -1995,10 +2460,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastValueType(object value, bool useInterpreter)
         {
-            Expression<Func<ValueType>> e =
-                Expression.Lambda<Func<ValueType>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(ValueType)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ValueType>> e = Expression.Lambda<Func<ValueType>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(ValueType)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ValueType> f = e.Compile(useInterpreter);
 
             if (value == null || value is ValueType)
@@ -2009,10 +2474,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectArrayCastCustomArray(object[] value, bool useInterpreter)
         {
-            Expression<Func<C[]>> e =
-                Expression.Lambda<Func<C[]>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(C[])),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<C[]>> e = Expression.Lambda<Func<C[]>>(
+                Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(C[])),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<C[]> f = e.Compile(useInterpreter);
 
             if (value == null || value is C[])
@@ -2021,12 +2486,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyObjectArrayCastIEnumerableOfCustom(object[] value, bool useInterpreter)
+        private static void VerifyObjectArrayCastIEnumerableOfCustom(
+            object[] value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<IEnumerable<C>>> e =
-                Expression.Lambda<Func<IEnumerable<C>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IEnumerable<C>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<C>>> e = Expression.Lambda<Func<IEnumerable<C>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(object[])),
+                    typeof(IEnumerable<C>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<C>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IEnumerable<C>)
@@ -2035,12 +2506,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyObjectArrayCastIEnumerableOfInterface(object[] value, bool useInterpreter)
+        private static void VerifyObjectArrayCastIEnumerableOfInterface(
+            object[] value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<IEnumerable<I>>> e =
-                Expression.Lambda<Func<IEnumerable<I>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IEnumerable<I>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<I>>> e = Expression.Lambda<Func<IEnumerable<I>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(object[])),
+                    typeof(IEnumerable<I>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<I>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IEnumerable<I>)
@@ -2049,12 +2526,18 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyObjectArrayCastIEnumerableOfObject(object[] value, bool useInterpreter)
+        private static void VerifyObjectArrayCastIEnumerableOfObject(
+            object[] value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<IEnumerable<object>>> e =
-                Expression.Lambda<Func<IEnumerable<object>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IEnumerable<object>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<object>>> e = Expression.Lambda<Func<IEnumerable<object>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(object[])),
+                    typeof(IEnumerable<object>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<object>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2062,10 +2545,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectArrayCastIListOfCustom(object[] value, bool useInterpreter)
         {
-            Expression<Func<IList<C>>> e =
-                Expression.Lambda<Func<IList<C>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IList<C>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<C>>> e = Expression.Lambda<Func<IList<C>>>(
+                Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IList<C>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<C>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IList<C>)
@@ -2074,12 +2557,15 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyObjectArrayCastIListOfInterface(object[] value, bool useInterpreter)
+        private static void VerifyObjectArrayCastIListOfInterface(
+            object[] value,
+            bool useInterpreter
+        )
         {
-            Expression<Func<IList<I>>> e =
-                Expression.Lambda<Func<IList<I>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IList<I>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<I>>> e = Expression.Lambda<Func<IList<I>>>(
+                Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IList<I>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<I>> f = e.Compile(useInterpreter);
 
             if (value == null || value is IList<I>)
@@ -2090,10 +2576,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectArrayCastIListOfObject(object[] value, bool useInterpreter)
         {
-            Expression<Func<IList<object>>> e =
-                Expression.Lambda<Func<IList<object>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object[])), typeof(IList<object>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<object>>> e = Expression.Lambda<Func<IList<object>>>(
+                Expression.Convert(
+                    Expression.Constant(value, typeof(object[])),
+                    typeof(IList<object>)
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<object>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2101,10 +2590,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyStructCastIEquatableOfStruct(S value, bool useInterpreter)
         {
-            Expression<Func<IEquatable<S>>> e =
-                Expression.Lambda<Func<IEquatable<S>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(S)), typeof(IEquatable<S>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEquatable<S>>> e = Expression.Lambda<Func<IEquatable<S>>>(
+                Expression.Convert(Expression.Constant(value, typeof(S)), typeof(IEquatable<S>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEquatable<S>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2112,10 +2601,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyStructCastObject(S value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(S)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(S)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2123,10 +2612,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyStructCastValueType(S value, bool useInterpreter)
         {
-            Expression<Func<ValueType>> e =
-                Expression.Lambda<Func<ValueType>>(
-                    Expression.Convert(Expression.Constant(value, typeof(S)), typeof(ValueType)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ValueType>> e = Expression.Lambda<Func<ValueType>>(
+                Expression.Convert(Expression.Constant(value, typeof(S)), typeof(ValueType)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ValueType> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2134,10 +2623,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyStructArrayCastIEnumerableOfStruct(S[] value, bool useInterpreter)
         {
-            Expression<Func<IEnumerable<S>>> e =
-                Expression.Lambda<Func<IEnumerable<S>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(S[])), typeof(IEnumerable<S>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IEnumerable<S>>> e = Expression.Lambda<Func<IEnumerable<S>>>(
+                Expression.Convert(Expression.Constant(value, typeof(S[])), typeof(IEnumerable<S>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IEnumerable<S>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2145,10 +2634,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyStructArrayCastIListOfStruct(S[] value, bool useInterpreter)
         {
-            Expression<Func<IList<S>>> e =
-                Expression.Lambda<Func<IList<S>>>(
-                    Expression.Convert(Expression.Constant(value, typeof(S[])), typeof(IList<S>)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<IList<S>>> e = Expression.Lambda<Func<IList<S>>>(
+                Expression.Convert(Expression.Constant(value, typeof(S[])), typeof(IList<S>)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<IList<S>> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2156,10 +2645,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyValueTypeCastInt(ValueType value, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(int)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(int)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -2182,10 +2671,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyValueTypeCastObject(ValueType value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
@@ -2193,10 +2682,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyValueTypeCastStruct(ValueType value, bool useInterpreter)
         {
-            Expression<Func<S>> e =
-                Expression.Lambda<Func<S>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(S)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<S>> e = Expression.Lambda<Func<S>>(
+                Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(S)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<S> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -2209,10 +2698,10 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyObjectCastGeneric<T>(object value, bool useInterpreter)
         {
-            Expression<Func<T>> e =
-                Expression.Lambda<Func<T>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(T)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<T>> e = Expression.Lambda<Func<T>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(T)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<T> f = e.Compile(useInterpreter);
 
             if (value == null && !(CanBeNull(typeof(T))))
@@ -2226,7 +2715,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyLongEnumCastEnum(El value, bool useInterpreter)
         {
             Expression<Func<E>> e = Expression.Lambda<Func<E>>(
-                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(E)));
+                Expression.Convert(Expression.Constant(value, typeof(El)), typeof(E))
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -2235,7 +2725,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyEnumCastLongEnum(E value, bool useInterpreter)
         {
             Expression<Func<El>> e = Expression.Lambda<Func<El>>(
-                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(El)));
+                Expression.Convert(Expression.Constant(value, typeof(E)), typeof(El))
+            );
             Func<El> f = e.Compile(useInterpreter);
 
             Assert.Equal((El)value, f());
@@ -2244,7 +2735,8 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyUnsignedEnumCastEnum(Eu value, bool useInterpreter)
         {
             Expression<Func<E>> e = Expression.Lambda<Func<E>>(
-                Expression.Convert(Expression.Constant(value, typeof(Eu)), typeof(E)));
+                Expression.Convert(Expression.Constant(value, typeof(Eu)), typeof(E))
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Equal(unchecked((E)value), f());
@@ -2253,18 +2745,23 @@ namespace System.Linq.Expressions.Tests
         private static void VerifyUnsignedEnumInObjectCastEnum(Eu value, bool useInterpreter)
         {
             Expression<Func<E>> e = Expression.Lambda<Func<E>>(
-                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(E)));
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(E))
+            );
             Func<E> f = e.Compile(useInterpreter);
 
             Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyObjectCastGenericWithClassRestriction<Tc>(object value, bool useInterpreter) where Tc : class
+        private static void VerifyObjectCastGenericWithClassRestriction<Tc>(
+            object value,
+            bool useInterpreter
+        )
+            where Tc : class
         {
-            Expression<Func<Tc>> e =
-                Expression.Lambda<Func<Tc>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Tc)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Tc>> e = Expression.Lambda<Func<Tc>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Tc)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Tc> f = e.Compile(useInterpreter);
 
             if (value == null || value is Tc)
@@ -2273,12 +2770,16 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<InvalidCastException>(() => f());
         }
 
-        private static void VerifyObjectCastGenericWithStructRestriction<Ts>(object value, bool useInterpreter) where Ts : struct
+        private static void VerifyObjectCastGenericWithStructRestriction<Ts>(
+            object value,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<Ts>> e =
-                Expression.Lambda<Func<Ts>>(
-                    Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Ts)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Ts>> e = Expression.Lambda<Func<Ts>>(
+                Expression.Convert(Expression.Constant(value, typeof(object)), typeof(Ts)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Ts> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -2291,54 +2792,70 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyGenericCastObject<T>(T value, bool useInterpreter)
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(T)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(T)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithClassRestrictionCastObject<Tc>(Tc value, bool useInterpreter) where Tc : class
+        private static void VerifyGenericWithClassRestrictionCastObject<Tc>(
+            Tc value,
+            bool useInterpreter
+        )
+            where Tc : class
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Tc)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(Tc)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithStructRestrictionCastObject<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestrictionCastObject<Ts>(
+            Ts value,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<object>> e =
-                Expression.Lambda<Func<object>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Ts)), typeof(object)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<object>> e = Expression.Lambda<Func<object>>(
+                Expression.Convert(Expression.Constant(value, typeof(Ts)), typeof(object)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<object> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyGenericWithStructRestrictionCastValueType<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyGenericWithStructRestrictionCastValueType<Ts>(
+            Ts value,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<ValueType>> e =
-                Expression.Lambda<Func<ValueType>>(
-                    Expression.Convert(Expression.Constant(value, typeof(Ts)), typeof(ValueType)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ValueType>> e = Expression.Lambda<Func<ValueType>>(
+                Expression.Convert(Expression.Constant(value, typeof(Ts)), typeof(ValueType)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<ValueType> f = e.Compile(useInterpreter);
 
             Assert.Equal(value, f());
         }
 
-        private static void VerifyValueTypeCastGenericWithStructRestriction<Ts>(ValueType value, bool useInterpreter) where Ts : struct
+        private static void VerifyValueTypeCastGenericWithStructRestriction<Ts>(
+            ValueType value,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
-            Expression<Func<Ts>> e =
-                Expression.Lambda<Func<Ts>>(
-                    Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(Ts)),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Ts>> e = Expression.Lambda<Func<Ts>>(
+                Expression.Convert(Expression.Constant(value, typeof(ValueType)), typeof(Ts)),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Ts> f = e.Compile(useInterpreter);
 
             if (value == null)
@@ -2373,68 +2890,95 @@ namespace System.Linq.Expressions.Tests
             yield return typeof(Int64Enum);
             yield return typeof(UInt64Enum);
 
-            if (PlatformDetection.IsReflectionEmitSupported && PlatformDetection.IsRareEnumsSupported)
+            if (
+                PlatformDetection.IsReflectionEmitSupported
+                && PlatformDetection.IsRareEnumsSupported
+            )
             {
                 yield return NonCSharpTypes.CharEnumType;
             }
         }
 
-        public static IEnumerable<object[]> EnumerableTypeArgs() => EnumerableTypes().Select(t => new object[] { t });
+        public static IEnumerable<object[]> EnumerableTypeArgs() =>
+            EnumerableTypes().Select(t => new object[] { t });
 
-        public static IEnumerable<object[]> EnumerableTypesAndIncompatibleObjects()
-            => from value in EnumerableTypes().Select(Activator.CreateInstance)
-               from type in EnumerableTypes()
-               where type != value.GetType()
-               select new[] { type, value };
+        public static IEnumerable<object[]> EnumerableTypesAndIncompatibleObjects() =>
+            from value in EnumerableTypes().Select(Activator.CreateInstance)
+            from type in EnumerableTypes()
+            where type != value.GetType()
+            select new[] { type, value };
 
-        public static IEnumerable<object[]> EnumerableTypesAndIncompatibleUnderlyingObjects()
-            => from value in EnumerableTypes().Select(t => Activator.CreateInstance(Enum.GetUnderlyingType(t)))
-               from type in EnumerableTypes()
-               where Enum.GetUnderlyingType(type) != value.GetType()
-               select new[] { type, value };
+        public static IEnumerable<object[]> EnumerableTypesAndIncompatibleUnderlyingObjects() =>
+            from value in EnumerableTypes()
+                .Select(t => Activator.CreateInstance(Enum.GetUnderlyingType(t)))
+            from type in EnumerableTypes()
+            where Enum.GetUnderlyingType(type) != value.GetType()
+            select new[] { type, value };
 
         [Theory, PerCompilationType(nameof(EnumerableTypeArgs))]
-        public static void CanCastReferenceToUnderlyingTypeToEnumType(Type type, bool useInterpreter)
+        public static void CanCastReferenceToUnderlyingTypeToEnumType(
+            Type type,
+            bool useInterpreter
+        )
         {
             object value = Activator.CreateInstance(type);
             Expression<Func<bool>> exp = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Default(type),
-                    Expression.Convert(Expression.Constant(value, typeof(object)), type)));
+                    Expression.Convert(Expression.Constant(value, typeof(object)), type)
+                )
+            );
             Func<bool> func = exp.Compile(useInterpreter);
             Assert.True(func());
         }
 
         [Theory, PerCompilationType(nameof(EnumerableTypeArgs))]
-        public static void CanCastReferenceToUnderlyingTypeToEnumTypeChecked(Type type, bool useInterpreter)
+        public static void CanCastReferenceToUnderlyingTypeToEnumTypeChecked(
+            Type type,
+            bool useInterpreter
+        )
         {
             object value = Activator.CreateInstance(type);
             Expression<Func<bool>> exp = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Default(type),
-                    Expression.ConvertChecked(Expression.Constant(value, typeof(object)), type)));
+                    Expression.ConvertChecked(Expression.Constant(value, typeof(object)), type)
+                )
+            );
             Func<bool> func = exp.Compile(useInterpreter);
             Assert.True(func());
         }
 
         [Theory, PerCompilationType(nameof(EnumerableTypesAndIncompatibleObjects))]
-        public static void CannotCastReferenceToWrongUnderlyingTypeEnum(Type type, object value, bool useInterpreter)
+        public static void CannotCastReferenceToWrongUnderlyingTypeEnum(
+            Type type,
+            object value,
+            bool useInterpreter
+        )
         {
             Expression<Action> exp = Expression.Lambda<Action>(
                 Expression.Block(
                     Expression.Convert(Expression.Constant(value, typeof(object)), type),
-                    Expression.Empty()));
+                    Expression.Empty()
+                )
+            );
             Action act = exp.Compile(useInterpreter);
             Assert.Throws<InvalidCastException>(act);
         }
 
         [Theory, PerCompilationType(nameof(EnumerableTypesAndIncompatibleObjects))]
-        public static void CannotCastReferenceToWrongUnderlyingTypeEnumChecked(Type type, object value, bool useInterpreter)
+        public static void CannotCastReferenceToWrongUnderlyingTypeEnumChecked(
+            Type type,
+            object value,
+            bool useInterpreter
+        )
         {
             Expression<Action> exp = Expression.Lambda<Action>(
                 Expression.Block(
                     Expression.ConvertChecked(Expression.Constant(value, typeof(object)), type),
-                    Expression.Empty()));
+                    Expression.Empty()
+                )
+            );
             Action act = exp.Compile(useInterpreter);
             Assert.Throws<InvalidCastException>(act);
         }
@@ -2447,7 +2991,9 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<bool>> exp = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Default(type),
-                    Expression.Convert(Expression.Constant(value, underlying), type)));
+                    Expression.Convert(Expression.Constant(value, underlying), type)
+                )
+            );
             Func<bool> func = exp.Compile(useInterpreter);
             Assert.True(func());
         }
@@ -2460,7 +3006,9 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<bool>> exp = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Default(type),
-                    Expression.ConvertChecked(Expression.Constant(value, underlying), type)));
+                    Expression.ConvertChecked(Expression.Constant(value, underlying), type)
+                )
+            );
             Func<bool> func = exp.Compile(useInterpreter);
             Assert.True(func());
         }
@@ -2473,7 +3021,9 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<bool>> exp = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Default(underlying),
-                    Expression.Convert(Expression.Constant(value, type), underlying)));
+                    Expression.Convert(Expression.Constant(value, type), underlying)
+                )
+            );
             Func<bool> func = exp.Compile(useInterpreter);
             Assert.True(func());
         }
@@ -2486,44 +3036,59 @@ namespace System.Linq.Expressions.Tests
             Expression<Func<bool>> exp = Expression.Lambda<Func<bool>>(
                 Expression.Equal(
                     Expression.Default(underlying),
-                    Expression.ConvertChecked(Expression.Constant(value, type), underlying)));
+                    Expression.ConvertChecked(Expression.Constant(value, type), underlying)
+                )
+            );
             Func<bool> func = exp.Compile(useInterpreter);
             Assert.True(func());
         }
 
         [Theory, PerCompilationType(nameof(EnumerableTypesAndIncompatibleUnderlyingObjects))]
-        public static void CannotCastWrongUnderlyingTypeEnum(Type type, object value, bool useInterpreter)
+        public static void CannotCastWrongUnderlyingTypeEnum(
+            Type type,
+            object value,
+            bool useInterpreter
+        )
         {
             Expression<Action> exp = Expression.Lambda<Action>(
                 Expression.Block(
                     Expression.Convert(Expression.Constant(value, typeof(object)), type),
-                    Expression.Empty()));
+                    Expression.Empty()
+                )
+            );
             Action act = exp.Compile(useInterpreter);
             Assert.Throws<InvalidCastException>(act);
         }
 
         [Theory, PerCompilationType(nameof(EnumerableTypesAndIncompatibleUnderlyingObjects))]
-        public static void CannotCastWrongUnderlyingTypeEnumChecked(Type type, object value, bool useInterpreter)
+        public static void CannotCastWrongUnderlyingTypeEnumChecked(
+            Type type,
+            object value,
+            bool useInterpreter
+        )
         {
             Expression<Action> exp = Expression.Lambda<Action>(
                 Expression.Block(
                     Expression.ConvertChecked(Expression.Constant(value, typeof(object)), type),
-                    Expression.Empty()));
+                    Expression.Empty()
+                )
+            );
             Action act = exp.Compile(useInterpreter);
             Assert.Throws<InvalidCastException>(act);
         }
 
-        public static IEnumerable<object[]> GreaterThanOrEqualToOneArguments => new[]
-        {
-            new object[] { typeof(decimal?), 1m },
-            new object[] { typeof(decimal), 1m },
-            new object[] { typeof(int?), 1 },
-            new object[] { typeof(int), 1 },
-            new object[] { typeof(long?), 1L },
-            new object[] { typeof(long), 1L },
-            new object[] { typeof(double?), 1.0 },
-            new object[] { typeof(double), 1.0 }
-        };
+        public static IEnumerable<object[]> GreaterThanOrEqualToOneArguments =>
+            new[]
+            {
+                new object[] { typeof(decimal?), 1m },
+                new object[] { typeof(decimal), 1m },
+                new object[] { typeof(int?), 1 },
+                new object[] { typeof(int), 1 },
+                new object[] { typeof(long?), 1L },
+                new object[] { typeof(long), 1L },
+                new object[] { typeof(double?), 1.0 },
+                new object[] { typeof(double), 1.0 },
+            };
 
         [Theory]
         [MemberData(nameof(GreaterThanOrEqualToOneArguments))]

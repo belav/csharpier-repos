@@ -24,81 +24,110 @@
 
 using System.Drawing;
 using System.Windows.Forms.VisualStyles;
+
 namespace System.Windows.Forms.Theming.VisualStyles
 {
-	class CheckBoxPainter : Default.CheckBoxPainter
-	{
-		public override void DrawNormalCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
-		{
-			CheckBoxState check_box_state;
-			switch (state) {
-			case CheckState.Checked:
-				check_box_state = CheckBoxState.CheckedNormal;
-				break;
-			case CheckState.Indeterminate:
-				check_box_state = CheckBoxState.MixedNormal;
-				break;
-			default:
-				check_box_state = CheckBoxState.UncheckedNormal;
-				break;
-			}
-			DrawCheckBox (g, bounds, check_box_state);
-		}
-		public override void DrawHotCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
-		{
-			CheckBoxState check_box_state;
-			switch (state) {
-			case CheckState.Checked:
-				check_box_state = CheckBoxState.CheckedHot;
-				break;
-			case CheckState.Indeterminate:
-				check_box_state = CheckBoxState.MixedHot;
-				break;
-			default:
-				check_box_state = CheckBoxState.UncheckedHot;
-				break;
-			}
-			DrawCheckBox (g, bounds, check_box_state);
-		}
-		public override void DrawPressedCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
-		{
-			CheckBoxState check_box_state;
-			switch (state) {
-			case CheckState.Checked:
-				check_box_state = CheckBoxState.CheckedPressed;
-				break;
-			case CheckState.Indeterminate:
-				check_box_state = CheckBoxState.MixedPressed;
-				break;
-			default:
-				check_box_state = CheckBoxState.UncheckedPressed;
-				break;
-			}
-			DrawCheckBox (g, bounds, check_box_state);
-		}
-		public override void DrawDisabledCheckBox (Graphics g, Rectangle bounds, Color backColor, Color foreColor, CheckState state)
-		{
-			CheckBoxState check_box_state;
-			switch (state) {
-			case CheckState.Checked:
-				check_box_state = CheckBoxState.CheckedDisabled;
-				break;
-			case CheckState.Indeterminate:
-				check_box_state = CheckBoxState.MixedDisabled;
-				break;
-			default:
-				check_box_state = CheckBoxState.UncheckedDisabled;
-				break;
-			}
-			DrawCheckBox (g, bounds, check_box_state);
-		}
-		static void DrawCheckBox (Graphics g, Rectangle bounds, CheckBoxState state)
-		{
-			CheckBoxRenderer.DrawCheckBox (
-				g,
-				bounds.Location,
-				state
-			);
-		}
-	}
+    class CheckBoxPainter : Default.CheckBoxPainter
+    {
+        public override void DrawNormalCheckBox(
+            Graphics g,
+            Rectangle bounds,
+            Color backColor,
+            Color foreColor,
+            CheckState state
+        )
+        {
+            CheckBoxState check_box_state;
+            switch (state)
+            {
+                case CheckState.Checked:
+                    check_box_state = CheckBoxState.CheckedNormal;
+                    break;
+                case CheckState.Indeterminate:
+                    check_box_state = CheckBoxState.MixedNormal;
+                    break;
+                default:
+                    check_box_state = CheckBoxState.UncheckedNormal;
+                    break;
+            }
+            DrawCheckBox(g, bounds, check_box_state);
+        }
+
+        public override void DrawHotCheckBox(
+            Graphics g,
+            Rectangle bounds,
+            Color backColor,
+            Color foreColor,
+            CheckState state
+        )
+        {
+            CheckBoxState check_box_state;
+            switch (state)
+            {
+                case CheckState.Checked:
+                    check_box_state = CheckBoxState.CheckedHot;
+                    break;
+                case CheckState.Indeterminate:
+                    check_box_state = CheckBoxState.MixedHot;
+                    break;
+                default:
+                    check_box_state = CheckBoxState.UncheckedHot;
+                    break;
+            }
+            DrawCheckBox(g, bounds, check_box_state);
+        }
+
+        public override void DrawPressedCheckBox(
+            Graphics g,
+            Rectangle bounds,
+            Color backColor,
+            Color foreColor,
+            CheckState state
+        )
+        {
+            CheckBoxState check_box_state;
+            switch (state)
+            {
+                case CheckState.Checked:
+                    check_box_state = CheckBoxState.CheckedPressed;
+                    break;
+                case CheckState.Indeterminate:
+                    check_box_state = CheckBoxState.MixedPressed;
+                    break;
+                default:
+                    check_box_state = CheckBoxState.UncheckedPressed;
+                    break;
+            }
+            DrawCheckBox(g, bounds, check_box_state);
+        }
+
+        public override void DrawDisabledCheckBox(
+            Graphics g,
+            Rectangle bounds,
+            Color backColor,
+            Color foreColor,
+            CheckState state
+        )
+        {
+            CheckBoxState check_box_state;
+            switch (state)
+            {
+                case CheckState.Checked:
+                    check_box_state = CheckBoxState.CheckedDisabled;
+                    break;
+                case CheckState.Indeterminate:
+                    check_box_state = CheckBoxState.MixedDisabled;
+                    break;
+                default:
+                    check_box_state = CheckBoxState.UncheckedDisabled;
+                    break;
+            }
+            DrawCheckBox(g, bounds, check_box_state);
+        }
+
+        static void DrawCheckBox(Graphics g, Rectangle bounds, CheckBoxState state)
+        {
+            CheckBoxRenderer.DrawCheckBox(g, bounds.Location, state);
+        }
+    }
 }

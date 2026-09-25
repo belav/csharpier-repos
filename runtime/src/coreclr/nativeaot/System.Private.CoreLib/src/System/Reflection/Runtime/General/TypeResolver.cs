@@ -10,7 +10,10 @@ namespace System.Reflection.Runtime.General
         //
         // Main routine to resolve a typeDef/Ref/Spec.
         //
-        internal static RuntimeTypeInfo Resolve(this QTypeDefRefOrSpec typeDefOrRefOrSpec, TypeContext typeContext)
+        internal static RuntimeTypeInfo Resolve(
+            this QTypeDefRefOrSpec typeDefOrRefOrSpec,
+            TypeContext typeContext
+        )
         {
             Exception? exception = null;
             RuntimeTypeInfo runtimeType = typeDefOrRefOrSpec.TryResolve(typeContext, ref exception);
@@ -19,19 +22,35 @@ namespace System.Reflection.Runtime.General
             return runtimeType;
         }
 
-        internal static RuntimeTypeInfo TryResolve(this QTypeDefRefOrSpec typeDefOrRefOrSpec, TypeContext typeContext, ref Exception? exception)
+        internal static RuntimeTypeInfo TryResolve(
+            this QTypeDefRefOrSpec typeDefOrRefOrSpec,
+            TypeContext typeContext,
+            ref Exception? exception
+        )
         {
             if (typeDefOrRefOrSpec.IsNativeFormatMetadataBased)
             {
-                return global::Internal.Metadata.NativeFormat.Handle.FromIntToken(typeDefOrRefOrSpec.Handle).TryResolve((global::Internal.Metadata.NativeFormat.MetadataReader)typeDefOrRefOrSpec.Reader, typeContext, ref exception);
+                return global::Internal
+                    .Metadata.NativeFormat.Handle.FromIntToken(typeDefOrRefOrSpec.Handle)
+                    .TryResolve(
+                        (global::Internal.Metadata.NativeFormat.MetadataReader)
+                            typeDefOrRefOrSpec.Reader,
+                        typeContext,
+                        ref exception
+                    );
             }
 
 #if ECMA_METADATA_SUPPORT
-            if (typeDefOrRefOrSpec.Reader is global::System.Reflection.Metadata.MetadataReader ecmaReader)
-                return global::System.Reflection.Metadata.Ecma335.MetadataTokens.Handle(typeDefOrRefOrSpec.Handle).TryResolve(ecmaReader, typeContext, ref exception);
+            if (
+                typeDefOrRefOrSpec.Reader
+                is global::System.Reflection.Metadata.MetadataReader ecmaReader
+            )
+                return global::System
+                    .Reflection.Metadata.Ecma335.MetadataTokens.Handle(typeDefOrRefOrSpec.Handle)
+                    .TryResolve(ecmaReader, typeContext, ref exception);
 #endif
 
-            throw new BadImageFormatException();  // Expected TypeRef, Def or Spec with MetadataReader
+            throw new BadImageFormatException(); // Expected TypeRef, Def or Spec with MetadataReader
         }
 
         //
@@ -48,7 +67,7 @@ namespace System.Reflection.Runtime.General
             // TODO: implement
 #endif
 
-            throw new BadImageFormatException();  // Expected TypeRef, Def or Spec with MetadataReader
+            throw new BadImageFormatException(); // Expected TypeRef, Def or Spec with MetadataReader
         }
     }
 }

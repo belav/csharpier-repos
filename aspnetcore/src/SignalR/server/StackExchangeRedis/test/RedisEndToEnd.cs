@@ -304,17 +304,13 @@ public class RedisEndToEndTests : VerifiableLoggedTest
     {
         var hubConnectionBuilder = new HubConnectionBuilder()
             .WithLoggerFactory(loggerFactory)
-            .WithUrl(
-                url,
-                transportType,
-                httpConnectionOptions =>
+            .WithUrl(url, transportType, httpConnectionOptions =>
+            {
+                if (!string.IsNullOrEmpty(userName))
                 {
-                    if (!string.IsNullOrEmpty(userName))
-                    {
-                        httpConnectionOptions.Headers["UserName"] = userName;
-                    }
+                    httpConnectionOptions.Headers["UserName"] = userName;
                 }
-            );
+            });
 
         hubConnectionBuilder.Services.AddSingleton(protocol);
 

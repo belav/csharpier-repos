@@ -29,14 +29,36 @@ namespace Microsoft.CodeAnalysis.UnitTests.FindSymbols
             var reference2 = reference1.WithAliases(new[] { "Alias" });
 
             var info1 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference1, checksum: null, CancellationToken.None);
+                solution,
+                reference1,
+                checksum: null,
+                CancellationToken.None
+            );
 
             var info2 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference2, checksum: null, CancellationToken.None);
+                solution,
+                reference2,
+                checksum: null,
+                CancellationToken.None
+            );
 
             Assert.NotEqual(info1.Checksum, info2.Checksum);
-            Assert.Equal(info1.Checksum, SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference1, CancellationToken.None));
-            Assert.Equal(info2.Checksum, SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference2, CancellationToken.None));
+            Assert.Equal(
+                info1.Checksum,
+                SymbolTreeInfo.GetMetadataChecksum(
+                    solution.Services,
+                    reference1,
+                    CancellationToken.None
+                )
+            );
+            Assert.Equal(
+                info2.Checksum,
+                SymbolTreeInfo.GetMetadataChecksum(
+                    solution.Services,
+                    reference2,
+                    CancellationToken.None
+                )
+            );
         }
 
         [Fact]
@@ -49,13 +71,29 @@ namespace Microsoft.CodeAnalysis.UnitTests.FindSymbols
             var reference1 = (PortableExecutableReference)project.MetadataReferences.First();
             var reference2 = reference1.WithAliases(new[] { "Alias" });
 
-            var checksum1 = SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference1, CancellationToken.None);
+            var checksum1 = SymbolTreeInfo.GetMetadataChecksum(
+                solution.Services,
+                reference1,
+                CancellationToken.None
+            );
             var info1 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference1, checksum1, CancellationToken.None);
+                solution,
+                reference1,
+                checksum1,
+                CancellationToken.None
+            );
 
-            var checksum2 = SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference2, CancellationToken.None);
+            var checksum2 = SymbolTreeInfo.GetMetadataChecksum(
+                solution.Services,
+                reference2,
+                CancellationToken.None
+            );
             var info2 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference2, checksum2, CancellationToken.None);
+                solution,
+                reference2,
+                checksum2,
+                CancellationToken.None
+            );
 
             Assert.NotEqual(info1.Checksum, info2.Checksum);
             Assert.Equal(info1.Checksum, checksum1);
@@ -72,16 +110,35 @@ namespace Microsoft.CodeAnalysis.UnitTests.FindSymbols
             var reference1 = (PortableExecutableReference)project.MetadataReferences.First();
             var reference2 = reference1.WithAliases(new[] { "Alias" });
 
-            var checksum1 = SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference1, CancellationToken.None);
+            var checksum1 = SymbolTreeInfo.GetMetadataChecksum(
+                solution.Services,
+                reference1,
+                CancellationToken.None
+            );
             var info1 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference1, checksum1, CancellationToken.None);
+                solution,
+                reference1,
+                checksum1,
+                CancellationToken.None
+            );
 
             var info2 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference2, checksum: null, CancellationToken.None);
+                solution,
+                reference2,
+                checksum: null,
+                CancellationToken.None
+            );
 
             Assert.NotEqual(info1.Checksum, info2.Checksum);
             Assert.Equal(info1.Checksum, checksum1);
-            Assert.Equal(info2.Checksum, SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference2, CancellationToken.None));
+            Assert.Equal(
+                info2.Checksum,
+                SymbolTreeInfo.GetMetadataChecksum(
+                    solution.Services,
+                    reference2,
+                    CancellationToken.None
+                )
+            );
         }
 
         [Fact]
@@ -95,14 +152,33 @@ namespace Microsoft.CodeAnalysis.UnitTests.FindSymbols
             var reference2 = reference1.WithAliases(new[] { "Alias" });
 
             var info1 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference1, checksum: null, CancellationToken.None);
+                solution,
+                reference1,
+                checksum: null,
+                CancellationToken.None
+            );
 
-            var checksum2 = SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference2, CancellationToken.None);
+            var checksum2 = SymbolTreeInfo.GetMetadataChecksum(
+                solution.Services,
+                reference2,
+                CancellationToken.None
+            );
             var info2 = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                solution, reference2, checksum2, CancellationToken.None);
+                solution,
+                reference2,
+                checksum2,
+                CancellationToken.None
+            );
 
             Assert.NotEqual(info1.Checksum, info2.Checksum);
-            Assert.Equal(info1.Checksum, SymbolTreeInfo.GetMetadataChecksum(solution.Services, reference1, CancellationToken.None));
+            Assert.Equal(
+                info1.Checksum,
+                SymbolTreeInfo.GetMetadataChecksum(
+                    solution.Services,
+                    reference1,
+                    CancellationToken.None
+                )
+            );
             Assert.Equal(info2.Checksum, checksum2);
         }
     }

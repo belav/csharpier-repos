@@ -19,10 +19,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,476 +34,534 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
-using System.Runtime.Remoting;
-using System.Runtime.Remoting.Proxies;
-using System.Runtime.Remoting.Activation;
-using System.Runtime.Remoting.Messaging;
-using System.Runtime.Remoting.Lifetime;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Remoting;
+using System.Runtime.Remoting.Activation;
+using System.Runtime.Remoting.Lifetime;
+using System.Runtime.Remoting.Messaging;
+using System.Runtime.Remoting.Proxies;
+using System.Threading;
 
-
-namespace System.Runtime.Remoting.Contexts {
-
-	[System.Runtime.InteropServices.ComVisible (true)]
-	[StructLayout (LayoutKind.Sequential)]
-	public class Context 
-	{
+namespace System.Runtime.Remoting.Contexts
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    [StructLayout(LayoutKind.Sequential)]
+    public class Context
+    {
 #pragma warning disable 169, 414
-		#region Sync with domain-internals.h
-		int domain_id;
-		int context_id;
-		UIntPtr static_data; /* GC-tracked */
-		UIntPtr data;
-		#endregion
+        #region Sync with domain-internals.h
+        int domain_id;
+        int context_id;
+        UIntPtr static_data; /* GC-tracked */
+        UIntPtr data;
+        #endregion
 #pragma warning restore 169, 414
 
-		// Name is significant; used by the runtime.
-		[ContextStatic]
-		static object[] local_slots;
+        // Name is significant; used by the runtime.
+        [ContextStatic]
+        static object[] local_slots;
 
-		// Default server context sink chain
-		static IMessageSink default_server_context_sink;
+        // Default server context sink chain
+        static IMessageSink default_server_context_sink;
 
-		// The sink chain that has to be used by all calls entering the context
-		IMessageSink server_context_sink_chain = null;
+        // The sink chain that has to be used by all calls entering the context
+        IMessageSink server_context_sink_chain = null;
 
-		// The sink chain that has to be used by all calls exiting the context
-		IMessageSink client_context_sink_chain = null;
+        // The sink chain that has to be used by all calls exiting the context
+        IMessageSink client_context_sink_chain = null;
 
-		List<IContextProperty> context_properties;
-//		bool frozen;
-		
-		static int global_count;
+        List<IContextProperty> context_properties;
 
-		volatile LocalDataStoreHolder _localDataStore;
+        //		bool frozen;
 
-		static LocalDataStoreMgr _localDataStoreMgr = new LocalDataStoreMgr();
+        static int global_count;
 
-		static DynamicPropertyCollection global_dynamic_properties;
-		DynamicPropertyCollection context_dynamic_properties;
-		ContextCallbackObject callback_object = null;
+        volatile LocalDataStoreHolder _localDataStore;
 
-		[MethodImpl (MethodImplOptions.InternalCall)]
-		extern static void RegisterContext (Context ctx);
+        static LocalDataStoreMgr _localDataStoreMgr = new LocalDataStoreMgr();
 
-		[MethodImpl (MethodImplOptions.InternalCall)]
-		extern static void ReleaseContext (Context ctx);
-		
-		public Context ()
-		{
-			domain_id = Thread.GetDomainID();
-			context_id = Interlocked.Increment (ref global_count);
+        static DynamicPropertyCollection global_dynamic_properties;
+        DynamicPropertyCollection context_dynamic_properties;
+        ContextCallbackObject callback_object = null;
 
-			RegisterContext (this);
-		}
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        static extern void RegisterContext(Context ctx);
 
-		~Context ()
-		{
-			ReleaseContext (this);
-		}
+        [MethodImpl(MethodImplOptions.InternalCall)]
+        static extern void ReleaseContext(Context ctx);
 
-		public static Context DefaultContext {
-			get {
-				return AppDomain.InternalGetDefaultContext ();
-			}
-		}
+        public Context()
+        {
+            domain_id = Thread.GetDomainID();
+            context_id = Interlocked.Increment(ref global_count);
 
-		public virtual int ContextID {
-			get {
-				return context_id;
-			}
-		}
+            RegisterContext(this);
+        }
 
-		public virtual IContextProperty[] ContextProperties
-		{
-			get 
-			{
-				if (context_properties == null)
-					return new IContextProperty[0];
-				
-				return context_properties.ToArray ();
-			}
-		}
-		
-		internal bool IsDefaultContext
-		{
-			get { return context_id == 0; }
-		}
+        ~Context()
+        {
+            ReleaseContext(this);
+        }
 
-		internal bool NeedsContextSink
-		{
-			get {
-				return context_id != 0 || 
-					(global_dynamic_properties != null && global_dynamic_properties.HasProperties) || 
-					(context_dynamic_properties != null && context_dynamic_properties.HasProperties);
-			}
-		}
+        public static Context DefaultContext
+        {
+            get { return AppDomain.InternalGetDefaultContext(); }
+        }
 
-		public static bool RegisterDynamicProperty(IDynamicProperty prop, ContextBoundObject obj, Context ctx)
-		{
-			DynamicPropertyCollection col = GetDynamicPropertyCollection (obj, ctx);
-			return col.RegisterDynamicProperty (prop);
-		}
+        public virtual int ContextID
+        {
+            get { return context_id; }
+        }
 
-		public static bool UnregisterDynamicProperty(string name, ContextBoundObject obj, Context ctx)
-		{
-			DynamicPropertyCollection col = GetDynamicPropertyCollection (obj, ctx);
-			return col.UnregisterDynamicProperty (name);
-		}
-		
-		static DynamicPropertyCollection GetDynamicPropertyCollection(ContextBoundObject obj, Context ctx)
-		{
-			if (ctx == null && obj != null)
-			{
-				if (RemotingServices.IsTransparentProxy(obj))
-				{
-					RealProxy rp = RemotingServices.GetRealProxy (obj);
-					return rp.ObjectIdentity.ClientDynamicProperties;
-				}
-				else
-				{
+        public virtual IContextProperty[] ContextProperties
+        {
+            get
+            {
+                if (context_properties == null)
+                    return new IContextProperty[0];
+
+                return context_properties.ToArray();
+            }
+        }
+
+        internal bool IsDefaultContext
+        {
+            get { return context_id == 0; }
+        }
+
+        internal bool NeedsContextSink
+        {
+            get
+            {
+                return context_id != 0
+                    || (
+                        global_dynamic_properties != null && global_dynamic_properties.HasProperties
+                    )
+                    || (
+                        context_dynamic_properties != null
+                        && context_dynamic_properties.HasProperties
+                    );
+            }
+        }
+
+        public static bool RegisterDynamicProperty(
+            IDynamicProperty prop,
+            ContextBoundObject obj,
+            Context ctx
+        )
+        {
+            DynamicPropertyCollection col = GetDynamicPropertyCollection(obj, ctx);
+            return col.RegisterDynamicProperty(prop);
+        }
+
+        public static bool UnregisterDynamicProperty(
+            string name,
+            ContextBoundObject obj,
+            Context ctx
+        )
+        {
+            DynamicPropertyCollection col = GetDynamicPropertyCollection(obj, ctx);
+            return col.UnregisterDynamicProperty(name);
+        }
+
+        static DynamicPropertyCollection GetDynamicPropertyCollection(
+            ContextBoundObject obj,
+            Context ctx
+        )
+        {
+            if (ctx == null && obj != null)
+            {
+                if (RemotingServices.IsTransparentProxy(obj))
+                {
+                    RealProxy rp = RemotingServices.GetRealProxy(obj);
+                    return rp.ObjectIdentity.ClientDynamicProperties;
+                }
+                else
+                {
 #if FEATURE_REMOTING
-					return obj.ObjectIdentity.ServerDynamicProperties;
+                    return obj.ObjectIdentity.ServerDynamicProperties;
 #else
-					throw new NotSupportedException ();
-#endif					
-				}
-			}
-			else if (ctx != null && obj == null)
-			{
-				if (ctx.context_dynamic_properties == null) ctx.context_dynamic_properties = new DynamicPropertyCollection ();
-				return ctx.context_dynamic_properties;
-			}
-			else if (ctx == null && obj == null)
-			{
-				if (global_dynamic_properties == null) global_dynamic_properties = new DynamicPropertyCollection ();
-				return global_dynamic_properties;
-			}
-			else
-				throw new ArgumentException ("Either obj or ctx must be null");
-		}
-		
-		internal static void NotifyGlobalDynamicSinks  (bool start, IMessage req_msg, bool client_site, bool async)
-		{
-			if (global_dynamic_properties != null && global_dynamic_properties.HasProperties) 
-				global_dynamic_properties.NotifyMessage (start, req_msg, client_site, async);
-		}
+                    throw new NotSupportedException();
+#endif
+                }
+            }
+            else if (ctx != null && obj == null)
+            {
+                if (ctx.context_dynamic_properties == null)
+                    ctx.context_dynamic_properties = new DynamicPropertyCollection();
+                return ctx.context_dynamic_properties;
+            }
+            else if (ctx == null && obj == null)
+            {
+                if (global_dynamic_properties == null)
+                    global_dynamic_properties = new DynamicPropertyCollection();
+                return global_dynamic_properties;
+            }
+            else
+                throw new ArgumentException("Either obj or ctx must be null");
+        }
 
-		internal static bool HasGlobalDynamicSinks
-		{
-			get { return (global_dynamic_properties != null && global_dynamic_properties.HasProperties); }
-		}
+        internal static void NotifyGlobalDynamicSinks(
+            bool start,
+            IMessage req_msg,
+            bool client_site,
+            bool async
+        )
+        {
+            if (global_dynamic_properties != null && global_dynamic_properties.HasProperties)
+                global_dynamic_properties.NotifyMessage(start, req_msg, client_site, async);
+        }
 
-		internal void NotifyDynamicSinks  (bool start, IMessage req_msg, bool client_site, bool async)
-		{
-			if (context_dynamic_properties != null && context_dynamic_properties.HasProperties) 
-				context_dynamic_properties.NotifyMessage (start, req_msg, client_site, async);
-		}
+        internal static bool HasGlobalDynamicSinks
+        {
+            get
+            {
+                return (
+                    global_dynamic_properties != null && global_dynamic_properties.HasProperties
+                );
+            }
+        }
 
-		internal bool HasDynamicSinks
-		{
-			get { return (context_dynamic_properties != null && context_dynamic_properties.HasProperties); }
-		}
+        internal void NotifyDynamicSinks(bool start, IMessage req_msg, bool client_site, bool async)
+        {
+            if (context_dynamic_properties != null && context_dynamic_properties.HasProperties)
+                context_dynamic_properties.NotifyMessage(start, req_msg, client_site, async);
+        }
 
-		internal bool HasExitSinks
-		{
-			get
-			{
-				// Needs to go through the client context sink if there are custom
-				// client context or dynamic sinks.
+        internal bool HasDynamicSinks
+        {
+            get
+            {
+                return (
+                    context_dynamic_properties != null && context_dynamic_properties.HasProperties
+                );
+            }
+        }
 
-				return ( !(GetClientContextSinkChain() is ClientContextTerminatorSink) || HasDynamicSinks || HasGlobalDynamicSinks);
-			}
-		}
+        internal bool HasExitSinks
+        {
+            get
+            {
+                // Needs to go through the client context sink if there are custom
+                // client context or dynamic sinks.
 
-		public virtual IContextProperty GetProperty (string name)
-		{
-			if (context_properties == null)
-				return null;
+                return (
+                    !(GetClientContextSinkChain() is ClientContextTerminatorSink)
+                    || HasDynamicSinks
+                    || HasGlobalDynamicSinks
+                );
+            }
+        }
 
-			foreach (IContextProperty p in context_properties)
-				if (p.Name == name)
-					return p;
-			
-			return null;
-		}
+        public virtual IContextProperty GetProperty(string name)
+        {
+            if (context_properties == null)
+                return null;
 
-		public virtual void SetProperty (IContextProperty prop)
-		{
-			if (prop == null)
-				throw new ArgumentNullException ("IContextProperty");
-			if (this == DefaultContext)
-				throw new InvalidOperationException ("Can not add properties to " +
-								     "default context");
-//			if (frozen)
-//				throw new InvalidOperationException ("Context is Frozen");
-			
-			if (context_properties == null)
-				context_properties = new List<IContextProperty> ();
+            foreach (IContextProperty p in context_properties)
+                if (p.Name == name)
+                    return p;
 
-			context_properties.Add (prop);
-		}
+            return null;
+        }
 
-		public virtual void Freeze ()
-		{
-			if (context_properties != null)
-			{
-				foreach (IContextProperty prop in context_properties)
-					prop.Freeze (this);
-			}
-		}
+        public virtual void SetProperty(IContextProperty prop)
+        {
+            if (prop == null)
+                throw new ArgumentNullException("IContextProperty");
+            if (this == DefaultContext)
+                throw new InvalidOperationException(
+                    "Can not add properties to " + "default context"
+                );
+            //			if (frozen)
+            //				throw new InvalidOperationException ("Context is Frozen");
 
-		public override string ToString()
-		{
-			return "ContextID: " + context_id;
-		}
+            if (context_properties == null)
+                context_properties = new List<IContextProperty>();
 
-		internal IMessageSink GetServerContextSinkChain()
-		{
-			if (server_context_sink_chain == null)
-			{
-				if (default_server_context_sink == null)
-					default_server_context_sink = new ServerContextTerminatorSink();
+            context_properties.Add(prop);
+        }
 
-				server_context_sink_chain = default_server_context_sink;
+        public virtual void Freeze()
+        {
+            if (context_properties != null)
+            {
+                foreach (IContextProperty prop in context_properties)
+                    prop.Freeze(this);
+            }
+        }
 
-				if (context_properties != null) {
-					// Enumerate in reverse order
-					for (int n = context_properties.Count-1; n>=0; n--) {
-						IContributeServerContextSink contributor = context_properties[n] as IContributeServerContextSink;
-						if (contributor != null)
-							server_context_sink_chain = contributor.GetServerContextSink (server_context_sink_chain);
-					}
-				}
-			}
-			return server_context_sink_chain;
-		}
+        public override string ToString()
+        {
+            return "ContextID: " + context_id;
+        }
 
-		internal IMessageSink GetClientContextSinkChain()
-		{
-			if (client_context_sink_chain == null)
-			{
-				client_context_sink_chain = new ClientContextTerminatorSink (this);
+        internal IMessageSink GetServerContextSinkChain()
+        {
+            if (server_context_sink_chain == null)
+            {
+                if (default_server_context_sink == null)
+                    default_server_context_sink = new ServerContextTerminatorSink();
 
-				if (context_properties != null) {
-					foreach (IContextProperty prop in context_properties) {
-						IContributeClientContextSink contributor = prop as IContributeClientContextSink;
-						if (contributor != null)
-							client_context_sink_chain = contributor.GetClientContextSink (client_context_sink_chain);
-					}
-				}
-			}
-			return client_context_sink_chain;
-		}
+                server_context_sink_chain = default_server_context_sink;
 
-		internal IMessageSink CreateServerObjectSinkChain (MarshalByRefObject obj, bool forceInternalExecute)
-		{
-			IMessageSink objectSink = new StackBuilderSink (obj, forceInternalExecute);
-			objectSink = new ServerObjectTerminatorSink (objectSink);
-			objectSink = new Lifetime.LeaseSink (objectSink);
+                if (context_properties != null)
+                {
+                    // Enumerate in reverse order
+                    for (int n = context_properties.Count - 1; n >= 0; n--)
+                    {
+                        IContributeServerContextSink contributor =
+                            context_properties[n] as IContributeServerContextSink;
+                        if (contributor != null)
+                            server_context_sink_chain = contributor.GetServerContextSink(
+                                server_context_sink_chain
+                            );
+                    }
+                }
+            }
+            return server_context_sink_chain;
+        }
 
-			if (context_properties != null)
-			{
-				// Contribute object sinks in reverse order
-				for (int n = context_properties.Count-1; n >= 0; n--)
-				{
-					IContextProperty prop = (IContextProperty) context_properties[n];
-					IContributeObjectSink contributor = prop as IContributeObjectSink;
-					if (contributor != null)
-						objectSink = contributor.GetObjectSink (obj, objectSink);
-				}
-			}
-			return objectSink;
-		}
+        internal IMessageSink GetClientContextSinkChain()
+        {
+            if (client_context_sink_chain == null)
+            {
+                client_context_sink_chain = new ClientContextTerminatorSink(this);
 
-		internal IMessageSink CreateEnvoySink (MarshalByRefObject serverObject)
-		{
-			IMessageSink sink = EnvoyTerminatorSink.Instance;
-			if (context_properties != null)
-			{
-				foreach (IContextProperty prop in context_properties)
-				{
-					IContributeEnvoySink contributor = prop as IContributeEnvoySink;
-					if (contributor != null)
-						sink = contributor.GetEnvoySink (serverObject, sink);
-				}
-			}
-			return sink;
-		}
+                if (context_properties != null)
+                {
+                    foreach (IContextProperty prop in context_properties)
+                    {
+                        IContributeClientContextSink contributor =
+                            prop as IContributeClientContextSink;
+                        if (contributor != null)
+                            client_context_sink_chain = contributor.GetClientContextSink(
+                                client_context_sink_chain
+                            );
+                    }
+                }
+            }
+            return client_context_sink_chain;
+        }
 
-		internal static Context SwitchToContext (Context newContext)
-		{
-			return AppDomain.InternalSetContext (newContext);
-		}
+        internal IMessageSink CreateServerObjectSinkChain(
+            MarshalByRefObject obj,
+            bool forceInternalExecute
+        )
+        {
+            IMessageSink objectSink = new StackBuilderSink(obj, forceInternalExecute);
+            objectSink = new ServerObjectTerminatorSink(objectSink);
+            objectSink = new Lifetime.LeaseSink(objectSink);
 
-		internal static Context CreateNewContext (IConstructionCallMessage msg)
-		{
-			// Create the new context
+            if (context_properties != null)
+            {
+                // Contribute object sinks in reverse order
+                for (int n = context_properties.Count - 1; n >= 0; n--)
+                {
+                    IContextProperty prop = (IContextProperty)context_properties[n];
+                    IContributeObjectSink contributor = prop as IContributeObjectSink;
+                    if (contributor != null)
+                        objectSink = contributor.GetObjectSink(obj, objectSink);
+                }
+            }
+            return objectSink;
+        }
 
-			Context newContext = new Context();
+        internal IMessageSink CreateEnvoySink(MarshalByRefObject serverObject)
+        {
+            IMessageSink sink = EnvoyTerminatorSink.Instance;
+            if (context_properties != null)
+            {
+                foreach (IContextProperty prop in context_properties)
+                {
+                    IContributeEnvoySink contributor = prop as IContributeEnvoySink;
+                    if (contributor != null)
+                        sink = contributor.GetEnvoySink(serverObject, sink);
+                }
+            }
+            return sink;
+        }
 
-			foreach (IContextProperty prop in msg.ContextProperties)
-			{
-				if (newContext.GetProperty (prop.Name) == null)
-					newContext.SetProperty (prop);
-			}
-			newContext.Freeze();
+        internal static Context SwitchToContext(Context newContext)
+        {
+            return AppDomain.InternalSetContext(newContext);
+        }
 
+        internal static Context CreateNewContext(IConstructionCallMessage msg)
+        {
+            // Create the new context
 
-			// Ask each context property whether the new context is OK
+            Context newContext = new Context();
 
-			foreach (IContextProperty prop in msg.ContextProperties)
-				if (!prop.IsNewContextOK (newContext)) 
-					throw new RemotingException("A context property did not approve the candidate context for activating the object");
+            foreach (IContextProperty prop in msg.ContextProperties)
+            {
+                if (newContext.GetProperty(prop.Name) == null)
+                    newContext.SetProperty(prop);
+            }
+            newContext.Freeze();
 
-			return newContext;
-		}
-		
-		public void DoCallBack (CrossContextDelegate deleg)
-		{
-			lock (this)
-			{
-				if (callback_object == null) {
-					Context oldContext = Context.SwitchToContext (this);
-					callback_object = new ContextCallbackObject ();
-					Context.SwitchToContext (oldContext);
-				}
-			}
-			
-			callback_object.DoCallBack (deleg);
-		}
+            // Ask each context property whether the new context is OK
 
-		private LocalDataStore MyLocalStore 
-		{
-			get 
-			{ 
-				if (_localDataStore == null)
-				{
-					// It's OK to lock the manager here because it is going to lock
-					// itself anyway.
-					lock (_localDataStoreMgr)
-					{
-						if (_localDataStore == null)
-						{
-							// The local store has not yet been created for this thread.
-							_localDataStore = _localDataStoreMgr.CreateLocalDataStore();
-						}
-					}
-				}
-				return _localDataStore.Store;
-			}
-		}
+            foreach (IContextProperty prop in msg.ContextProperties)
+                if (!prop.IsNewContextOK(newContext))
+                    throw new RemotingException(
+                        "A context property did not approve the candidate context for activating the object"
+                    );
 
-		public static LocalDataStoreSlot AllocateDataSlot ()
-		{
-			return _localDataStoreMgr.AllocateDataSlot ();
-		}
+            return newContext;
+        }
 
-		public static LocalDataStoreSlot AllocateNamedDataSlot (string name)
-		{
-			return _localDataStoreMgr.AllocateNamedDataSlot (name);
-		}
+        public void DoCallBack(CrossContextDelegate deleg)
+        {
+            lock (this)
+            {
+                if (callback_object == null)
+                {
+                    Context oldContext = Context.SwitchToContext(this);
+                    callback_object = new ContextCallbackObject();
+                    Context.SwitchToContext(oldContext);
+                }
+            }
 
-		public static void FreeNamedDataSlot (string name)
-		{
-			_localDataStoreMgr.FreeNamedDataSlot (name);
-		}
+            callback_object.DoCallBack(deleg);
+        }
 
-		public static LocalDataStoreSlot GetNamedDataSlot (string name)
-		{
-			return _localDataStoreMgr.GetNamedDataSlot (name);
-		}
+        private LocalDataStore MyLocalStore
+        {
+            get
+            {
+                if (_localDataStore == null)
+                {
+                    // It's OK to lock the manager here because it is going to lock
+                    // itself anyway.
+                    lock (_localDataStoreMgr)
+                    {
+                        if (_localDataStore == null)
+                        {
+                            // The local store has not yet been created for this thread.
+                            _localDataStore = _localDataStoreMgr.CreateLocalDataStore();
+                        }
+                    }
+                }
+                return _localDataStore.Store;
+            }
+        }
 
-		public static object GetData (LocalDataStoreSlot slot)
-		{
-			return Thread.CurrentContext.MyLocalStore.GetData (slot);
-		}
+        public static LocalDataStoreSlot AllocateDataSlot()
+        {
+            return _localDataStoreMgr.AllocateDataSlot();
+        }
 
-		public static void SetData (LocalDataStoreSlot slot, object data)
-		{
-			Thread.CurrentContext.MyLocalStore.SetData (slot, data);
-		}
-	}
+        public static LocalDataStoreSlot AllocateNamedDataSlot(string name)
+        {
+            return _localDataStoreMgr.AllocateNamedDataSlot(name);
+        }
 
-	class DynamicPropertyCollection
-	{
-		ArrayList _properties = new ArrayList();
+        public static void FreeNamedDataSlot(string name)
+        {
+            _localDataStoreMgr.FreeNamedDataSlot(name);
+        }
 
-		class DynamicPropertyReg
-		{
-			public IDynamicProperty Property;
-			public IDynamicMessageSink Sink;
-		}
+        public static LocalDataStoreSlot GetNamedDataSlot(string name)
+        {
+            return _localDataStoreMgr.GetNamedDataSlot(name);
+        }
 
-		public bool HasProperties
-		{
-			get { return _properties.Count > 0; }
-		}
+        public static object GetData(LocalDataStoreSlot slot)
+        {
+            return Thread.CurrentContext.MyLocalStore.GetData(slot);
+        }
 
-		public bool RegisterDynamicProperty(IDynamicProperty prop)
-		{
-			lock (this)
-			{
-				if (FindProperty (prop.Name) != -1) 
-					throw new InvalidOperationException ("Another property by this name already exists");
+        public static void SetData(LocalDataStoreSlot slot, object data)
+        {
+            Thread.CurrentContext.MyLocalStore.SetData(slot, data);
+        }
+    }
 
-				// Make a copy, do not interfere with threads running dynamic sinks
-				ArrayList newProps = new ArrayList (_properties);
+    class DynamicPropertyCollection
+    {
+        ArrayList _properties = new ArrayList();
 
-				DynamicPropertyReg reg = new DynamicPropertyReg();
-				reg.Property = prop;
-				IContributeDynamicSink contributor = prop as IContributeDynamicSink;
-				if (contributor != null) reg.Sink = contributor.GetDynamicSink ();
-				newProps.Add (reg);
+        class DynamicPropertyReg
+        {
+            public IDynamicProperty Property;
+            public IDynamicMessageSink Sink;
+        }
 
-				_properties = newProps;
+        public bool HasProperties
+        {
+            get { return _properties.Count > 0; }
+        }
 
-				return true;	// When should be false?
-			}
-		}
+        public bool RegisterDynamicProperty(IDynamicProperty prop)
+        {
+            lock (this)
+            {
+                if (FindProperty(prop.Name) != -1)
+                    throw new InvalidOperationException(
+                        "Another property by this name already exists"
+                    );
 
-		public bool UnregisterDynamicProperty(string name)
-		{
-			lock (this)
-			{
-				int i = FindProperty (name);
-				if (i == -1) throw new RemotingException ("A property with the name " + name + " was not found");
+                // Make a copy, do not interfere with threads running dynamic sinks
+                ArrayList newProps = new ArrayList(_properties);
 
-				_properties.RemoveAt (i);
-				return true;	// When should be false?
-			}
-		}
+                DynamicPropertyReg reg = new DynamicPropertyReg();
+                reg.Property = prop;
+                IContributeDynamicSink contributor = prop as IContributeDynamicSink;
+                if (contributor != null)
+                    reg.Sink = contributor.GetDynamicSink();
+                newProps.Add(reg);
 
-		public void NotifyMessage (bool start, IMessage msg, bool client_site, bool async)
-		{
-			ArrayList props = _properties;
-			if (start)
-			{
-				foreach (DynamicPropertyReg reg in props)
-					if (reg.Sink != null) reg.Sink.ProcessMessageStart (msg, client_site, async);
-			}
-			else
-			{
-				foreach (DynamicPropertyReg reg in props)
-					if (reg.Sink != null) reg.Sink.ProcessMessageFinish (msg, client_site, async);
-			}
-		}
+                _properties = newProps;
 
-		int FindProperty (string name)
-		{
-			for (int n=0; n<_properties.Count; n++)
-				if (((DynamicPropertyReg)_properties[n]).Property.Name == name)
-					return n;
-			return -1;
-		}
-	}
-	
-	class ContextCallbackObject: ContextBoundObject
-	{
-		public void DoCallBack (CrossContextDelegate deleg)
-		{
-		}
-	}
+                return true; // When should be false?
+            }
+        }
+
+        public bool UnregisterDynamicProperty(string name)
+        {
+            lock (this)
+            {
+                int i = FindProperty(name);
+                if (i == -1)
+                    throw new RemotingException(
+                        "A property with the name " + name + " was not found"
+                    );
+
+                _properties.RemoveAt(i);
+                return true; // When should be false?
+            }
+        }
+
+        public void NotifyMessage(bool start, IMessage msg, bool client_site, bool async)
+        {
+            ArrayList props = _properties;
+            if (start)
+            {
+                foreach (DynamicPropertyReg reg in props)
+                    if (reg.Sink != null)
+                        reg.Sink.ProcessMessageStart(msg, client_site, async);
+            }
+            else
+            {
+                foreach (DynamicPropertyReg reg in props)
+                    if (reg.Sink != null)
+                        reg.Sink.ProcessMessageFinish(msg, client_site, async);
+            }
+        }
+
+        int FindProperty(string name)
+        {
+            for (int n = 0; n < _properties.Count; n++)
+                if (((DynamicPropertyReg)_properties[n]).Property.Name == name)
+                    return n;
+            return -1;
+        }
+    }
+
+    class ContextCallbackObject : ContextBoundObject
+    {
+        public void DoCallBack(CrossContextDelegate deleg) { }
+    }
 }

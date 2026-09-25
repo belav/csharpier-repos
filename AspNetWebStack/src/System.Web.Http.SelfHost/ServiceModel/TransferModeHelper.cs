@@ -9,10 +9,10 @@ namespace System.Web.Http.SelfHost.ServiceModel
     {
         public static bool IsDefined(TransferMode transferMode)
         {
-            return transferMode == TransferMode.Buffered ||
-                   transferMode == TransferMode.Streamed ||
-                   transferMode == TransferMode.StreamedRequest ||
-                   transferMode == TransferMode.StreamedResponse;
+            return transferMode == TransferMode.Buffered
+                || transferMode == TransferMode.Streamed
+                || transferMode == TransferMode.StreamedRequest
+                || transferMode == TransferMode.StreamedResponse;
         }
 
         public static void Validate(TransferMode value, string parameterValue)

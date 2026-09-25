@@ -11,7 +11,11 @@ namespace Newtonsoft.Json.Linq.JsonPath
             Indexes = indexes;
         }
 
-        public override IEnumerable<JToken> ExecuteFilter(JToken root, IEnumerable<JToken> current, JsonSelectSettings? settings)
+        public override IEnumerable<JToken> ExecuteFilter(
+            JToken root,
+            IEnumerable<JToken> current,
+            JsonSelectSettings? settings
+        )
         {
             foreach (JToken t in current)
             {

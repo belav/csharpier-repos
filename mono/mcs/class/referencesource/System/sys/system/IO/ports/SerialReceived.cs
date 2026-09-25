@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -18,24 +18,29 @@ using Microsoft.Win32;
 
 namespace System.IO.Ports
 {
-    public enum SerialData 
-	{
-	    Chars = NativeMethods.EV_RXCHAR,
-		Eof = NativeMethods.EV_RXFLAG,
-	}
-
-    public class SerialDataReceivedEventArgs : EventArgs 
+    public enum SerialData
     {
-        internal SerialData receiveType;
-    	internal SerialDataReceivedEventArgs (SerialData eventCode) {
-    	    receiveType = eventCode;
-    	}
-
-    	public SerialData EventType { 
-    	    get { return receiveType; }
-    	}
+        Chars = NativeMethods.EV_RXCHAR,
+        Eof = NativeMethods.EV_RXFLAG,
     }
 
-    public delegate void SerialDataReceivedEventHandler(object sender, SerialDataReceivedEventArgs e);
-}
+    public class SerialDataReceivedEventArgs : EventArgs
+    {
+        internal SerialData receiveType;
 
+        internal SerialDataReceivedEventArgs(SerialData eventCode)
+        {
+            receiveType = eventCode;
+        }
+
+        public SerialData EventType
+        {
+            get { return receiveType; }
+        }
+    }
+
+    public delegate void SerialDataReceivedEventHandler(
+        object sender,
+        SerialDataReceivedEventArgs e
+    );
+}

@@ -15,8 +15,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
     [Trait(Traits.Feature, Traits.Features.CodeActionsWrapping)]
     public class ChainedExpressionWrappingTests : AbstractWrappingTests
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpWrappingCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpWrappingCodeRefactoringProvider();
 
         [Fact]
         public async Task TestMissingWithSyntaxError()
@@ -28,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         [||]the.quick().brown.fox(,);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -41,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         [||]the.quick();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -70,7 +74,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                  .jumped();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -99,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                  .jumped<string, bool>();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -128,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                  .jumped[1][2][3];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -157,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -195,7 +203,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         the.quick.brown[1, 2, 3].fox.jumped[1][2][3];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -224,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                    .jumped[1][2][3];
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -253,7 +263,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                                  .jumped().over;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -267,8 +278,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     }
                 }
                 """,
-GetIndentionColumn(35),
-"""
+                GetIndentionColumn(35),
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -279,7 +290,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -290,7 +301,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -299,7 +310,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -308,7 +319,8 @@ class C {
                  .dog();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -322,8 +334,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(40),
-"""
+                GetIndentionColumn(40),
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -334,7 +346,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -345,7 +357,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -354,7 +366,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -362,7 +374,8 @@ class C {
                  .lazy().dog();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -376,8 +389,8 @@ class C {
                     }
                 }
                 """,
-GetIndentionColumn(60),
-"""
+                GetIndentionColumn(60),
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -388,7 +401,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox
@@ -399,7 +412,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox.jumped().over.the().lazy()
@@ -407,14 +420,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         the.quick.brown().fox.jumped().over.the().lazy()
                  .dog();
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -443,7 +457,8 @@ class C {
                                   .jumped();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -472,7 +487,8 @@ class C {
                                   .jumped();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -501,7 +517,8 @@ class C {
                                   .jumped();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -523,7 +540,8 @@ class C {
                             .jumped();
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

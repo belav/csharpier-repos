@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,42 +26,43 @@ using System;
 using System.Collections;
 using System.ComponentModel;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    internal class RelatedPropertyManager : PropertyManager
+    {
+        BindingManagerBase parent;
 
-	internal class RelatedPropertyManager : PropertyManager {
+        public RelatedPropertyManager(BindingManagerBase parent, string property_name)
+        {
+            this.parent = parent;
+            this.property_name = property_name;
 
-		BindingManagerBase parent;
+            if (parent.Position != -1)
+                SetDataSource(parent.Current);
+            parent.PositionChanged += new EventHandler(parent_PositionChanged);
+        }
 
-		public RelatedPropertyManager (BindingManagerBase parent, string property_name)
-		{
-			this.parent = parent;
-			this.property_name = property_name;
+        void parent_PositionChanged(object sender, EventArgs args)
+        {
+            if (parent.Position == -1)
+            {
+                SetDataSource(null);
+            }
+            else
+            {
+                SetDataSource(parent.Current);
+            }
 
-			if (parent.Position != -1)
-				SetDataSource (parent.Current);
-			parent.PositionChanged += new EventHandler (parent_PositionChanged);
-		}
+            OnCurrentChanged(EventArgs.Empty);
+        }
 
-		void parent_PositionChanged (object sender, EventArgs args)
-		{
-			if (parent.Position == -1) {
-				SetDataSource (null);
-			}
-			else {
-				SetDataSource (parent.Current);
-			}
+        public override PropertyDescriptorCollection GetItemProperties()
+        {
+            PropertyDescriptor property = parent.GetItemProperties().Find(property_name, true);
 
-			OnCurrentChanged (EventArgs.Empty);
-		}
-
-		public override PropertyDescriptorCollection GetItemProperties ()
-		{
-			PropertyDescriptor property = parent.GetItemProperties ().Find (property_name, true);
-
-			// We can't just pass property.PropertyType, since the actual object could implement
-			// more elements and not only those described in the property type
-			return TypeDescriptor.GetProperties (property.GetValue (parent.Current));
-		}
-	}
+            // We can't just pass property.PropertyType, since the actual object could implement
+            // more elements and not only those described in the property type
+            return TypeDescriptor.GetProperties(property.GetValue(parent.Current));
+        }
+    }
 }
-

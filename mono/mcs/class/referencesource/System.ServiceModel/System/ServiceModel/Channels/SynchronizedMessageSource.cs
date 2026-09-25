@@ -19,7 +19,11 @@ namespace System.ServiceModel.Channels
             this.sourceLock = new ThreadNeutralSemaphore(1);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new WaitForMessageAsyncResult(this, timeout, callback, state);
         }
@@ -35,8 +39,11 @@ namespace System.ServiceModel.Channels
             if (!this.sourceLock.TryEnter(timeoutHelper.RemainingTime()))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(SR.GetString(SR.WaitForMessageTimedOut, timeout),
-                    ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)));
+                    new TimeoutException(
+                        SR.GetString(SR.WaitForMessageTimedOut, timeout),
+                        ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
+                    )
+                );
             }
 
             try
@@ -65,8 +72,11 @@ namespace System.ServiceModel.Channels
             if (!this.sourceLock.TryEnter(timeoutHelper.RemainingTime()))
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new TimeoutException(SR.GetString(SR.ReceiveTimedOut2, timeout),
-                    ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)));
+                    new TimeoutException(
+                        SR.GetString(SR.ReceiveTimedOut2, timeout),
+                        ThreadNeutralSemaphore.CreateEnterTimedOutException(timeout)
+                    )
+                );
             }
 
             try
@@ -87,14 +97,24 @@ namespace System.ServiceModel.Channels
             static FastAsyncCallback onEnterComplete = new FastAsyncCallback(OnEnterComplete);
             TimeoutHelper timeoutHelper;
 
-            public SynchronizedAsyncResult(SynchronizedMessageSource syncSource, TimeSpan timeout,
-                AsyncCallback callback, object state)
+            public SynchronizedAsyncResult(
+                SynchronizedMessageSource syncSource,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.syncSource = syncSource;
                 this.timeoutHelper = new TimeoutHelper(timeout);
 
-                if (!syncSource.sourceLock.EnterAsync(this.timeoutHelper.RemainingTime(), onEnterComplete, this))
+                if (
+                    !syncSource.sourceLock.EnterAsync(
+                        this.timeoutHelper.RemainingTime(),
+                        onEnterComplete,
+                        this
+                    )
+                )
                 {
                     return;
                 }
@@ -154,7 +174,9 @@ namespace System.ServiceModel.Channels
 
             public static T End(IAsyncResult result)
             {
-                SynchronizedAsyncResult<T> thisPtr = AsyncResult.End<SynchronizedAsyncResult<T>>(result);
+                SynchronizedAsyncResult<T> thisPtr = AsyncResult.End<SynchronizedAsyncResult<T>>(
+                    result
+                );
                 return thisPtr.returnValue;
             }
 
@@ -174,7 +196,9 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         thisPtr.exitLock = true;
-                        completeSelf = thisPtr.PerformOperation(thisPtr.timeoutHelper.RemainingTime());
+                        completeSelf = thisPtr.PerformOperation(
+                            thisPtr.timeoutHelper.RemainingTime()
+                        );
                     }
 #pragma warning suppress 56500 // Microsoft, transferring exception to another thread
                     catch (Exception e)
@@ -200,15 +224,20 @@ namespace System.ServiceModel.Channels
         {
             static WaitCallback onReceiveComplete = new WaitCallback(OnReceiveComplete);
 
-            public ReceiveAsyncResult(SynchronizedMessageSource syncSource, TimeSpan timeout,
-                AsyncCallback callback, object state)
-                : base(syncSource, timeout, callback, state)
-            {
-            }
+            public ReceiveAsyncResult(
+                SynchronizedMessageSource syncSource,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
+                : base(syncSource, timeout, callback, state) { }
 
             protected override bool PerformOperation(TimeSpan timeout)
             {
-                if (Source.BeginReceive(timeout, onReceiveComplete, this) == AsyncReceiveResult.Completed)
+                if (
+                    Source.BeginReceive(timeout, onReceiveComplete, this)
+                    == AsyncReceiveResult.Completed
+                )
                 {
                     SetReturnValue(Source.EndReceive());
                     return true;
@@ -242,17 +271,24 @@ namespace System.ServiceModel.Channels
 
         class WaitForMessageAsyncResult : SynchronizedAsyncResult<bool>
         {
-            static WaitCallback onWaitForMessageComplete = new WaitCallback(OnWaitForMessageComplete);
+            static WaitCallback onWaitForMessageComplete = new WaitCallback(
+                OnWaitForMessageComplete
+            );
 
-            public WaitForMessageAsyncResult(SynchronizedMessageSource syncSource, TimeSpan timeout,
-                AsyncCallback callback, object state)
-                : base(syncSource, timeout, callback, state)
-            {
-            }
+            public WaitForMessageAsyncResult(
+                SynchronizedMessageSource syncSource,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
+                : base(syncSource, timeout, callback, state) { }
 
             protected override bool PerformOperation(TimeSpan timeout)
             {
-                if (Source.BeginWaitForMessage(timeout, onWaitForMessageComplete, this) == AsyncReceiveResult.Completed)
+                if (
+                    Source.BeginWaitForMessage(timeout, onWaitForMessageComplete, this)
+                    == AsyncReceiveResult.Completed
+                )
                 {
                     SetReturnValue(Source.EndWaitForMessage());
                     return true;

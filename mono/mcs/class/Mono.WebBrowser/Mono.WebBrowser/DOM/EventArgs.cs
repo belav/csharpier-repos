@@ -27,60 +27,63 @@ using System;
 
 namespace Mono.WebBrowser.DOM
 {
-	public class NodeEventArgs : EventArgs
-	{
-		private DOM.INode node;
+    public class NodeEventArgs : EventArgs
+    {
+        private DOM.INode node;
 
-		#region Public Constructors
-		public NodeEventArgs (DOM.INode node)
-			: base ()
-		{
-			this.node = node;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public NodeEventArgs(DOM.INode node)
+            : base()
+        {
+            this.node = node;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public INode Node
-		{
-			get { return this.node; }
-		}
+        #region Public Instance Properties
+        public INode Node
+        {
+            get { return this.node; }
+        }
 
-		public IElement Element {
-			get {
-				if (this.node is IElement)
-					return (IElement) node;
-				return null;
-			}
-		}
+        public IElement Element
+        {
+            get
+            {
+                if (this.node is IElement)
+                    return (IElement)node;
+                return null;
+            }
+        }
 
-		public IDocument Document {
-			get {
-				if (this.node is IDocument)
-					return (IDocument) node;
-				return null;
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
-	
-	public class WindowEventArgs : EventArgs
-	{
-		private DOM.IWindow window;
+        public IDocument Document
+        {
+            get
+            {
+                if (this.node is IDocument)
+                    return (IDocument)node;
+                return null;
+            }
+        }
+        #endregion	// Public Instance Properties
+    }
 
-		#region Public Constructors
-		public WindowEventArgs (DOM.IWindow window)
-			: base ()
-		{
-			this.window = window;
-		}
-		#endregion	// Public Constructors
+    public class WindowEventArgs : EventArgs
+    {
+        private DOM.IWindow window;
 
-		#region Public Instance Properties
-		public IWindow Window
-		{
-			get { return this.window; }
-		}
-		#endregion	// Public Instance Properties
-	}
-	
+        #region Public Constructors
+        public WindowEventArgs(DOM.IWindow window)
+            : base()
+        {
+            this.window = window;
+        }
+        #endregion	// Public Constructors
+
+        #region Public Instance Properties
+        public IWindow Window
+        {
+            get { return this.window; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

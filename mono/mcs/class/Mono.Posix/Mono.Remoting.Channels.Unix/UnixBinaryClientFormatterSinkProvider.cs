@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,48 +33,49 @@ using System.Runtime.Remoting.Channels;
 
 namespace Mono.Remoting.Channels.Unix
 {
-	internal class UnixBinaryClientFormatterSinkProvider: IClientFormatterSinkProvider, IClientChannelSinkProvider
-	{
-		IClientChannelSinkProvider next = null;
-		UnixBinaryCore _binaryCore;
-		static string[] allowedProperties = new string [] { "includeVersions", "strictBinding" };
+    internal class UnixBinaryClientFormatterSinkProvider
+        : IClientFormatterSinkProvider,
+            IClientChannelSinkProvider
+    {
+        IClientChannelSinkProvider next = null;
+        UnixBinaryCore _binaryCore;
+        static string[] allowedProperties = new string[] { "includeVersions", "strictBinding" };
 
-		public UnixBinaryClientFormatterSinkProvider ()
-		{
-			_binaryCore = UnixBinaryCore.DefaultInstance;
-		}
+        public UnixBinaryClientFormatterSinkProvider()
+        {
+            _binaryCore = UnixBinaryCore.DefaultInstance;
+        }
 
-		public UnixBinaryClientFormatterSinkProvider (IDictionary properties,
-							  ICollection providerData)
-		{
-			_binaryCore = new UnixBinaryCore (this, properties, allowedProperties);
-		}
+        public UnixBinaryClientFormatterSinkProvider(
+            IDictionary properties,
+            ICollection providerData
+        )
+        {
+            _binaryCore = new UnixBinaryCore(this, properties, allowedProperties);
+        }
 
-		public IClientChannelSinkProvider Next
-		{
-			get {
-				return next;
-			}
-			
-			set {
-				next = value;
-			}
-		}
+        public IClientChannelSinkProvider Next
+        {
+            get { return next; }
+            set { next = value; }
+        }
 
-		public IClientChannelSink CreateSink (IChannelSender channel,
-						      string url,
-						      object remoteChannelData)
-		{
-			IClientChannelSink next_sink = null;
-			UnixBinaryClientFormatterSink result;
-			
-			if (next != null)
-				next_sink = next.CreateSink (channel, url, remoteChannelData);
-			
-			result = new UnixBinaryClientFormatterSink (next_sink);
-			result.BinaryCore = _binaryCore;
+        public IClientChannelSink CreateSink(
+            IChannelSender channel,
+            string url,
+            object remoteChannelData
+        )
+        {
+            IClientChannelSink next_sink = null;
+            UnixBinaryClientFormatterSink result;
 
-			return result;
-		}		
-	}
+            if (next != null)
+                next_sink = next.CreateSink(channel, url, remoteChannelData);
+
+            result = new UnixBinaryClientFormatterSink(next_sink);
+            result.BinaryCore = _binaryCore;
+
+            return result;
+        }
+    }
 }

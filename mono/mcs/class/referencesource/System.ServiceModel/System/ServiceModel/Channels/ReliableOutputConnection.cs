@@ -7,9 +7,19 @@ namespace System.ServiceModel.Channels
     using System.Threading;
     using System.Xml;
 
-    delegate IAsyncResult BeginSendHandler(MessageAttemptInfo attemptInfo, TimeSpan timeout, bool maskUnhandledException, AsyncCallback asyncCallback, object state);
+    delegate IAsyncResult BeginSendHandler(
+        MessageAttemptInfo attemptInfo,
+        TimeSpan timeout,
+        bool maskUnhandledException,
+        AsyncCallback asyncCallback,
+        object state
+    );
     delegate void EndSendHandler(IAsyncResult result);
-    delegate void SendHandler(MessageAttemptInfo attemptInfo, TimeSpan timeout, bool maskUnhandledException);
+    delegate void SendHandler(
+        MessageAttemptInfo attemptInfo,
+        TimeSpan timeout,
+        bool maskUnhandledException
+    );
     delegate void ComponentFaultedHandler(Exception faultException, WsrmFault fault);
     delegate void ComponentExceptionHandler(Exception exception);
     delegate void RetryHandler(MessageAttemptInfo attemptInfo);
@@ -24,8 +34,12 @@ namespace System.ServiceModel.Channels
         UniqueId id;
         MessageVersion messageVersion;
         object mutex = new Object();
-        static AsyncCallback onSendRetriesComplete = Fx.ThunkCallback(new AsyncCallback(OnSendRetriesComplete));
-        static AsyncCallback onSendRetryComplete = Fx.ThunkCallback(new AsyncCallback(OnSendRetryComplete));
+        static AsyncCallback onSendRetriesComplete = Fx.ThunkCallback(
+            new AsyncCallback(OnSendRetriesComplete)
+        );
+        static AsyncCallback onSendRetryComplete = Fx.ThunkCallback(
+            new AsyncCallback(OnSendRetryComplete)
+        );
         ReliableMessagingVersion reliableMessagingVersion;
         Guard sendGuard = new Guard(Int32.MaxValue);
         SendHandler sendHandler;
@@ -36,20 +50,27 @@ namespace System.ServiceModel.Channels
         TransmissionStrategy strategy;
         bool terminated = false;
 
-        public ReliableOutputConnection(UniqueId id,
+        public ReliableOutputConnection(
+            UniqueId id,
             int maxTransferWindowSize,
             MessageVersion messageVersion,
             ReliableMessagingVersion reliableMessagingVersion,
             TimeSpan initialRtt,
             bool requestAcks,
-            TimeSpan sendTimeout)
+            TimeSpan sendTimeout
+        )
         {
             this.id = id;
             this.messageVersion = messageVersion;
             this.reliableMessagingVersion = reliableMessagingVersion;
             this.sendTimeout = sendTimeout;
-            this.strategy = new TransmissionStrategy(reliableMessagingVersion, initialRtt, maxTransferWindowSize,
-                requestAcks, id);
+            this.strategy = new TransmissionStrategy(
+                reliableMessagingVersion,
+                initialRtt,
+                maxTransferWindowSize,
+                requestAcks,
+                id
+            );
             this.strategy.RetryTimeoutElapsed = OnRetryTimeoutElapsed;
             this.strategy.OnException = RaiseOnException;
         }
@@ -59,82 +80,52 @@ namespace System.ServiceModel.Channels
 
         MessageVersion MessageVersion
         {
-            get
-            {
-                return this.messageVersion;
-            }
+            get { return this.messageVersion; }
         }
 
         public BeginSendHandler BeginSendHandler
         {
-            set
-            {
-                this.beginSendHandler = value;
-            }
+            set { this.beginSendHandler = value; }
         }
 
         public OperationWithTimeoutBeginCallback BeginSendAckRequestedHandler
         {
-            set
-            {
-                this.beginSendAckRequestedHandler = value;
-            }
+            set { this.beginSendAckRequestedHandler = value; }
         }
 
         public bool Closed
         {
-            get
-            {
-                return this.closed;
-            }
+            get { return this.closed; }
         }
 
         public EndSendHandler EndSendHandler
         {
-            set
-            {
-                this.endSendHandler = value;
-            }
+            set { this.endSendHandler = value; }
         }
 
         public OperationEndCallback EndSendAckRequestedHandler
         {
-            set
-            {
-                this.endSendAckRequestedHandler = value;
-            }
+            set { this.endSendAckRequestedHandler = value; }
         }
 
         public Int64 Last
         {
-            get
-            {
-                return this.strategy.Last;
-            }
+            get { return this.strategy.Last; }
         }
 
         public SendHandler SendHandler
         {
-            set
-            {
-                this.sendHandler = value;
-            }
+            set { this.sendHandler = value; }
         }
 
         public OperationWithTimeoutCallback SendAckRequestedHandler
         {
-            set
-            {
-                this.sendAckRequestedHandler = value;
-            }
+            set { this.sendAckRequestedHandler = value; }
         }
 
         public TransmissionStrategy Strategy
         {
-            get
-            {
-                return this.strategy;
-            }
+            get { return this.strategy; }
         }
 
         object ThisLock
@@ -151,15 +142,23 @@ namespace System.ServiceModel.Channels
 
         void CompleteTransfer(TimeSpan timeout)
         {
-            if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.reliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
-                Message message = Message.CreateMessage(this.MessageVersion, WsrmFeb2005Strings.LastMessageAction);
+                Message message = Message.CreateMessage(
+                    this.MessageVersion,
+                    WsrmFeb2005Strings.LastMessageAction
+                );
                 message.Properties.AllowOutputBatching = false;
 
                 // Return value ignored.
                 this.InternalAddMessage(message, timeout, null, true);
             }
-            else if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+            else if (
+                this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11
+            )
             {
                 if (this.strategy.SetLast())
                 {
@@ -181,7 +180,13 @@ namespace System.ServiceModel.Channels
             return this.InternalAddMessage(message, timeout, state, false);
         }
 
-        public IAsyncResult BeginAddMessage(Message message, TimeSpan timeout, object state, AsyncCallback callback, object asyncState)
+        public IAsyncResult BeginAddMessage(
+            Message message,
+            TimeSpan timeout,
+            object state,
+            AsyncCallback callback,
+            object asyncState
+        )
         {
             return new AddAsyncResult(message, false, timeout, state, this, callback, asyncState);
         }
@@ -193,13 +198,21 @@ namespace System.ServiceModel.Channels
 
         IAsyncResult BeginCompleteTransfer(TimeSpan timeout, AsyncCallback callback, object state)
         {
-            if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.reliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
-                Message message = Message.CreateMessage(this.MessageVersion, WsrmFeb2005Strings.LastMessageAction);
+                Message message = Message.CreateMessage(
+                    this.MessageVersion,
+                    WsrmFeb2005Strings.LastMessageAction
+                );
                 message.Properties.AllowOutputBatching = false;
                 return new AddAsyncResult(message, true, timeout, null, this, callback, state);
             }
-            else if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+            else if (
+                this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11
+            )
             {
                 if (this.strategy.SetLast())
                 {
@@ -219,13 +232,19 @@ namespace System.ServiceModel.Channels
 
         void EndCompleteTransfer(IAsyncResult result)
         {
-            if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessagingFebruary2005)
+            if (
+                this.reliableMessagingVersion
+                == ReliableMessagingVersion.WSReliableMessagingFebruary2005
+            )
             {
                 AddAsyncResult.End(result);
             }
-            else if (this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11)
+            else if (
+                this.reliableMessagingVersion == ReliableMessagingVersion.WSReliableMessaging11
+            )
             {
-                AlreadyCompletedTransferAsyncResult completedResult = result as AlreadyCompletedTransferAsyncResult;
+                AlreadyCompletedTransferAsyncResult completedResult =
+                    result as AlreadyCompletedTransferAsyncResult;
                 if (completedResult != null)
                 {
                     completedResult.End();
@@ -254,19 +273,31 @@ namespace System.ServiceModel.Channels
             OperationWithTimeoutBeginCallback[] beginCallbacks;
             OperationEndCallback[] endCallbacks;
 
-            beginCallbacks = new OperationWithTimeoutBeginCallback[] {
-                completeTransfer ? this.BeginCompleteTransfer : default(OperationWithTimeoutBeginCallback),
+            beginCallbacks = new OperationWithTimeoutBeginCallback[]
+            {
+                completeTransfer
+                    ? this.BeginCompleteTransfer
+                    : default(OperationWithTimeoutBeginCallback),
                 this.shutdownHandle.BeginWait,
                 this.sendGuard.BeginClose,
-                this.beginSendAckRequestedHandler };
+                this.beginSendAckRequestedHandler,
+            };
 
-            endCallbacks = new OperationEndCallback[] {
+            endCallbacks = new OperationEndCallback[]
+            {
                 completeTransfer ? this.EndCompleteTransfer : default(OperationEndCallback),
                 this.shutdownHandle.EndWait,
                 this.sendGuard.EndClose,
-                this.endSendAckRequestedHandler };
+                this.endSendAckRequestedHandler,
+            };
 
-            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout, beginCallbacks, endCallbacks, callback, state);
+            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                timeout,
+                beginCallbacks,
+                endCallbacks,
+                callback,
+                state
+            );
         }
 
         public bool CheckForTermination()
@@ -314,7 +345,13 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        result = this.beginSendHandler(attemptInfo, this.sendTimeout, true, onSendRetriesComplete, this);
+                        result = this.beginSendHandler(
+                            attemptInfo,
+                            this.sendTimeout,
+                            true,
+                            onSendRetriesComplete,
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                         {
                             return;
@@ -327,7 +364,7 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            // We are here if there are no more messages to retry.            
+            // We are here if there are no more messages to retry.
             this.sendGuard.Exit();
             this.OnTransferComplete();
         }
@@ -373,7 +410,9 @@ namespace System.ServiceModel.Channels
 
                     attemptInfo = this.strategy.AddLast(message, helper.RemainingTime(), null);
                 }
-                else if (!this.strategy.Add(message, helper.RemainingTime(), state, out attemptInfo))
+                else if (
+                    !this.strategy.Add(message, helper.RemainingTime(), state, out attemptInfo)
+                )
                 {
                     return false;
                 }
@@ -381,7 +420,14 @@ namespace System.ServiceModel.Channels
             catch (TimeoutException)
             {
                 if (isLast)
-                    this.RaiseFault(null, SequenceTerminatedFault.CreateCommunicationFault(this.id, SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut), null));
+                    this.RaiseFault(
+                        null,
+                        SequenceTerminatedFault.CreateCommunicationFault(
+                            this.id,
+                            SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut),
+                            null
+                        )
+                    );
                 // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
 
                 throw;
@@ -389,7 +435,14 @@ namespace System.ServiceModel.Channels
             catch (Exception e)
             {
                 if (!Fx.IsFatal(e))
-                    this.RaiseFault(null, SequenceTerminatedFault.CreateCommunicationFault(this.id, SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError), null));
+                    this.RaiseFault(
+                        null,
+                        SequenceTerminatedFault.CreateCommunicationFault(
+                            this.id,
+                            SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError),
+                            null
+                        )
+                    );
 
                 throw;
             }
@@ -402,7 +455,10 @@ namespace System.ServiceModel.Channels
                 }
                 catch (QuotaExceededException)
                 {
-                    this.RaiseFault(null, SequenceTerminatedFault.CreateQuotaExceededFault(this.id));
+                    this.RaiseFault(
+                        null,
+                        SequenceTerminatedFault.CreateQuotaExceededFault(this.id)
+                    );
                     throw;
                 }
                 finally
@@ -423,7 +479,13 @@ namespace System.ServiceModel.Channels
         {
             if (this.sendGuard.Enter())
             {
-                IAsyncResult result = this.beginSendHandler(attemptInfo, this.sendTimeout, true, onSendRetryComplete, this);
+                IAsyncResult result = this.beginSendHandler(
+                    attemptInfo,
+                    this.sendTimeout,
+                    true,
+                    onSendRetryComplete,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -436,7 +498,8 @@ namespace System.ServiceModel.Channels
         {
             if (!result.CompletedSynchronously)
             {
-                ReliableOutputConnection outputConnection = (ReliableOutputConnection)result.AsyncState;
+                ReliableOutputConnection outputConnection = (ReliableOutputConnection)
+                    result.AsyncState;
 
                 try
                 {
@@ -457,7 +520,8 @@ namespace System.ServiceModel.Channels
         {
             if (!result.CompletedSynchronously)
             {
-                ReliableOutputConnection outputConnection = (ReliableOutputConnection)result.AsyncState;
+                ReliableOutputConnection outputConnection = (ReliableOutputConnection)
+                    result.AsyncState;
 
                 try
                 {
@@ -482,11 +546,17 @@ namespace System.ServiceModel.Channels
                 Terminate();
         }
 
-        public void ProcessTransferred(Int64 transferred, SequenceRangeCollection ranges, int quotaRemaining)
+        public void ProcessTransferred(
+            Int64 transferred,
+            SequenceRangeCollection ranges,
+            int quotaRemaining
+        )
         {
             if (transferred < 0)
             {
-                throw Fx.AssertAndThrow("Argument transferred must be a valid sequence number or 0 for protocol messages.");
+                throw Fx.AssertAndThrow(
+                    "Argument transferred must be a valid sequence number or 0 for protocol messages."
+                );
             }
 
             bool invalidAck;
@@ -500,7 +570,10 @@ namespace System.ServiceModel.Channels
 
             if (!invalidAck)
             {
-                if ((transferred > 0) && this.strategy.ProcessTransferred(transferred, quotaRemaining))
+                if (
+                    (transferred > 0)
+                    && this.strategy.ProcessTransferred(transferred, quotaRemaining)
+                )
                 {
                     ActionItem.Schedule(sendRetries, this);
                 }
@@ -567,7 +640,13 @@ namespace System.ServiceModel.Channels
 
                 if (attemptInfo.Message != null)
                 {
-                    result = this.beginSendHandler(attemptInfo, this.sendTimeout, true, onSendRetriesComplete, this);
+                    result = this.beginSendHandler(
+                        attemptInfo,
+                        this.sendTimeout,
+                        true,
+                        onSendRetriesComplete,
+                        this
+                    );
                 }
 
                 if (result != null)
@@ -618,15 +697,26 @@ namespace System.ServiceModel.Channels
 
         sealed class AddAsyncResult : AsyncResult
         {
-            static AsyncCallback addCompleteStatic = Fx.ThunkCallback(new AsyncCallback(AddComplete));
+            static AsyncCallback addCompleteStatic = Fx.ThunkCallback(
+                new AsyncCallback(AddComplete)
+            );
             ReliableOutputConnection connection;
             bool isLast;
-            static AsyncCallback sendCompleteStatic = Fx.ThunkCallback(new AsyncCallback(SendComplete));
+            static AsyncCallback sendCompleteStatic = Fx.ThunkCallback(
+                new AsyncCallback(SendComplete)
+            );
             TimeoutHelper timeoutHelper;
             bool validAdd;
 
-            public AddAsyncResult(Message message, bool isLast, TimeSpan timeout, object state,
-                ReliableOutputConnection connection, AsyncCallback callback, object asyncState)
+            public AddAsyncResult(
+                Message message,
+                bool isLast,
+                TimeSpan timeout,
+                object state,
+                ReliableOutputConnection connection,
+                AsyncCallback callback,
+                object asyncState
+            )
                 : base(callback, asyncState)
             {
                 this.connection = connection;
@@ -645,17 +735,36 @@ namespace System.ServiceModel.Channels
                             throw Fx.AssertAndThrow("The isLast overload does not take a state.");
                         }
 
-                        result = this.connection.strategy.BeginAddLast(message, this.timeoutHelper.RemainingTime(), state, addCompleteStatic, this);
+                        result = this.connection.strategy.BeginAddLast(
+                            message,
+                            this.timeoutHelper.RemainingTime(),
+                            state,
+                            addCompleteStatic,
+                            this
+                        );
                     }
                     else
                     {
-                        result = this.connection.strategy.BeginAdd(message, this.timeoutHelper.RemainingTime(), state, addCompleteStatic, this);
+                        result = this.connection.strategy.BeginAdd(
+                            message,
+                            this.timeoutHelper.RemainingTime(),
+                            state,
+                            addCompleteStatic,
+                            this
+                        );
                     }
                 }
                 catch (TimeoutException)
                 {
                     if (isLast)
-                        this.connection.RaiseFault(null, SequenceTerminatedFault.CreateCommunicationFault(this.connection.id, SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut), null));
+                        this.connection.RaiseFault(
+                            null,
+                            SequenceTerminatedFault.CreateCommunicationFault(
+                                this.connection.id,
+                                SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut),
+                                null
+                            )
+                        );
                     // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
 
                     throw;
@@ -663,7 +772,14 @@ namespace System.ServiceModel.Channels
                 catch (Exception e)
                 {
                     if (!Fx.IsFatal(e))
-                        this.connection.RaiseFault(null, SequenceTerminatedFault.CreateCommunicationFault(this.connection.id, SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError), null));
+                        this.connection.RaiseFault(
+                            null,
+                            SequenceTerminatedFault.CreateCommunicationFault(
+                                this.connection.id,
+                                SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError),
+                                null
+                            )
+                        );
 
                     throw;
                 }
@@ -721,7 +837,14 @@ namespace System.ServiceModel.Channels
                 catch (TimeoutException)
                 {
                     if (this.isLast)
-                        this.connection.RaiseFault(null, SequenceTerminatedFault.CreateCommunicationFault(this.connection.id, SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut), null));
+                        this.connection.RaiseFault(
+                            null,
+                            SequenceTerminatedFault.CreateCommunicationFault(
+                                this.connection.id,
+                                SR.GetString(SR.SequenceTerminatedAddLastToWindowTimedOut),
+                                null
+                            )
+                        );
                     // else - RM does not fault the channel based on a timeout exception trying to add a sequenced message to the window.
 
                     throw;
@@ -729,7 +852,14 @@ namespace System.ServiceModel.Channels
                 catch (Exception e)
                 {
                     if (!Fx.IsFatal(e))
-                        this.connection.RaiseFault(null, SequenceTerminatedFault.CreateCommunicationFault(this.connection.id, SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError), null));
+                        this.connection.RaiseFault(
+                            null,
+                            SequenceTerminatedFault.CreateCommunicationFault(
+                                this.connection.id,
+                                SR.GetString(SR.SequenceTerminatedUnknownAddToWindowError),
+                                null
+                            )
+                        );
 
                     throw;
                 }
@@ -740,12 +870,21 @@ namespace System.ServiceModel.Channels
 
                     try
                     {
-                        result = this.connection.beginSendHandler(attemptInfo, this.timeoutHelper.RemainingTime(), false, sendCompleteStatic, this);
+                        result = this.connection.beginSendHandler(
+                            attemptInfo,
+                            this.timeoutHelper.RemainingTime(),
+                            false,
+                            sendCompleteStatic,
+                            this
+                        );
                         throwing = false;
                     }
                     catch (QuotaExceededException)
                     {
-                        this.connection.RaiseFault(null, SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id));
+                        this.connection.RaiseFault(
+                            null,
+                            SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id)
+                        );
                         throw;
                     }
                     finally
@@ -778,7 +917,10 @@ namespace System.ServiceModel.Channels
                 }
                 catch (QuotaExceededException)
                 {
-                    this.connection.RaiseFault(null, SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id));
+                    this.connection.RaiseFault(
+                        null,
+                        SequenceTerminatedFault.CreateQuotaExceededFault(this.connection.id)
+                    );
                     throw;
                 }
                 finally
@@ -821,9 +963,7 @@ namespace System.ServiceModel.Channels
         class AlreadyCompletedTransferAsyncResult : CompletedAsyncResult
         {
             public AlreadyCompletedTransferAsyncResult(AsyncCallback callback, object state)
-                : base(callback, state)
-            {
-            }
+                : base(callback, state) { }
 
             public void End()
             {

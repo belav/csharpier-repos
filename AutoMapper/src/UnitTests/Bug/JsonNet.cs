@@ -6,38 +6,41 @@ public class JsonNetDictionary : AutoMapperSpecBase
 {
     private Destination _destination;
 
-    class JObject : Dictionary<string, string>, IEnumerable, IEnumerable<KeyValuePair<string, string>>
+    class JObject
+        : Dictionary<string, string>,
+            IEnumerable,
+            IEnumerable<KeyValuePair<string, string>>
     {
-        public JObject(string json) : base(
-            (from pair in json.Split('&')
-            let items = pair.Split(',')
-            select new StringKeyValuePair(items[0], items[1]))
-            .ToDictionary(kvp => kvp.Key, kvp => kvp.Value))
-        {
-        }
+        public JObject(string json)
+            : base(
+                (
+                    from pair in json.Split('&')
+                    let items = pair.Split(',')
+                    select new StringKeyValuePair(items[0], items[1])
+                ).ToDictionary(kvp => kvp.Key, kvp => kvp.Value)
+            ) { }
     }
 
     class Source
     {
         public string JsonString { get; set; }
     }
+
     class Destination
     {
         public dynamic Json { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>()
-            .ForMember(d => d.Json, o => o.MapFrom(s => new JObject(s.JsonString)));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>()
+                .ForMember(d => d.Json, o => o.MapFrom(s => new JObject(s.JsonString)));
+        });
 
     protected override void Because_of()
     {
-        var source = new Source
-        {
-            JsonString = "1,one&2,two&3,three"
-        };
+        var source = new Source { JsonString = "1,one&2,two&3,three" };
         _destination = Mapper.Map<Source, Destination>(source);
     }
 
@@ -69,53 +72,32 @@ public class JObjectField : AutoMapperSpecBase
 
     class JObject : JContainer, IDictionary<string, string>
     {
-        public JObject()
-        {
-        }
+        public JObject() { }
 
         public string this[string key]
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public int Count
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public bool IsReadOnly
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public ICollection<string> Keys
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public ICollection<string> Values
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public void Add(StringKeyValuePair item)
@@ -179,10 +161,12 @@ public class JObjectField : AutoMapperSpecBase
         public JObject Json { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
+
     [Fact]
     public void Validate() => AssertConfigurationIsValid();
 }

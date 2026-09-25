@@ -55,12 +55,14 @@ namespace System.Text
         protected char[]? arrayBytesBestFit;
 
         internal BaseCodePageEncoding(int codepage)
-            : this(codepage, codepage)
-        {
-        }
+            : this(codepage, codepage) { }
 
         internal BaseCodePageEncoding(int codepage, int dataCodePage)
-            : base(codepage, new InternalEncoderBestFitFallback(null!), new InternalDecoderBestFitFallback(null!)) // pass in null but then immediately set values to this
+            : base(
+                codepage,
+                new InternalEncoderBestFitFallback(null!),
+                new InternalDecoderBestFitFallback(null!)
+            ) // pass in null but then immediately set values to this
         {
             ((InternalEncoderBestFitFallback)EncoderFallback).encoding = this;
             ((InternalDecoderBestFitFallback)DecoderFallback).encoding = this;
@@ -70,7 +72,12 @@ namespace System.Text
             LoadCodePageTables();
         }
 
-        internal BaseCodePageEncoding(int codepage, int dataCodePage, EncoderFallback enc, DecoderFallback dec)
+        internal BaseCodePageEncoding(
+            int codepage,
+            int dataCodePage,
+            EncoderFallback enc,
+            DecoderFallback dec
+        )
             : base(codepage, enc, dec)
         {
             // Remember number of code pages that we'll be using the table for.
@@ -91,18 +98,29 @@ namespace System.Text
         internal struct CodePageDataFileHeader
         {
             [FieldOffset(0)]
-            internal char TableName;            // WORD[16]
+            internal char TableName; // WORD[16]
+
             [FieldOffset(0x20)]
-            internal ushort Version;            // WORD[4]
+            internal ushort Version; // WORD[4]
+
             [FieldOffset(0x28)]
-            internal short CodePageCount;       // WORD
+            internal short CodePageCount; // WORD
+
             [FieldOffset(0x2A)]
-            internal short unused1;             // Add an unused WORD so that CodePages is aligned with DWORD boundary.
+            internal short unused1; // Add an unused WORD so that CodePages is aligned with DWORD boundary.
         }
+
         private const int CODEPAGE_DATA_FILE_HEADER_SIZE = 44;
-        private static unsafe void ReadCodePageDataFileHeader(Stream stream, byte[] codePageDataFileHeader)
+
+        private static unsafe void ReadCodePageDataFileHeader(
+            Stream stream,
+            byte[] codePageDataFileHeader
+        )
         {
-            Debug.Assert(stream is UnmanagedMemoryStream, "UnmanagedMemoryStream will read a full buffer on one call to Read.");
+            Debug.Assert(
+                stream is UnmanagedMemoryStream,
+                "UnmanagedMemoryStream will read a full buffer on one call to Read."
+            );
             int bytesRead = stream.Read(codePageDataFileHeader, 0, codePageDataFileHeader.Length);
             Debug.Assert(bytesRead == codePageDataFileHeader.Length);
 
@@ -111,15 +129,16 @@ namespace System.Text
                 fixed (byte* pBytes = &codePageDataFileHeader[0])
                 {
                     CodePageDataFileHeader* p = (CodePageDataFileHeader*)pBytes;
-                    char *pTableName = &p->TableName;
+                    char* pTableName = &p->TableName;
                     for (int i = 0; i < 16; i++)
                     {
-                            pTableName[i] = (char)BinaryPrimitives.ReverseEndianness((ushort)pTableName[i]);
+                        pTableName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pTableName[i]);
                     }
-                    ushort *pVersion = &p->Version;
+                    ushort* pVersion = &p->Version;
                     for (int i = 0; i < 4; i++)
                     {
-                            pVersion[i] = BinaryPrimitives.ReverseEndianness(pVersion[i]);
+                        pVersion[i] = BinaryPrimitives.ReverseEndianness(pVersion[i]);
                     }
                     p->CodePageCount = BinaryPrimitives.ReverseEndianness(p->CodePageCount);
                 }
@@ -130,17 +149,24 @@ namespace System.Text
         internal unsafe struct CodePageIndex
         {
             [FieldOffset(0)]
-            internal char CodePageName;     // WORD[16]
+            internal char CodePageName; // WORD[16]
+
             [FieldOffset(0x20)]
-            internal short CodePage;        // WORD
+            internal short CodePage; // WORD
+
             [FieldOffset(0x22)]
-            internal short ByteCount;       // WORD
+            internal short ByteCount; // WORD
+
             [FieldOffset(0x24)]
-            internal int Offset;            // DWORD
+            internal int Offset; // DWORD
         }
+
         private static unsafe void ReadCodePageIndex(Stream stream, byte[] codePageIndex)
         {
-            Debug.Assert(stream is UnmanagedMemoryStream, "UnmanagedMemoryStream will read a full buffer on one call to Read.");
+            Debug.Assert(
+                stream is UnmanagedMemoryStream,
+                "UnmanagedMemoryStream will read a full buffer on one call to Read."
+            );
             int bytesRead = stream.Read(codePageIndex, 0, codePageIndex.Length);
             Debug.Assert(bytesRead == codePageIndex.Length);
 
@@ -149,10 +175,11 @@ namespace System.Text
                 fixed (byte* pBytes = &codePageIndex[0])
                 {
                     CodePageIndex* p = (CodePageIndex*)pBytes;
-                    char *pCodePageName = &p->CodePageName;
+                    char* pCodePageName = &p->CodePageName;
                     for (int i = 0; i < 16; i++)
                     {
-                        pCodePageName[i] = (char)BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
+                        pCodePageName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
                     }
                     p->CodePage = BinaryPrimitives.ReverseEndianness(p->CodePage);
                     p->ByteCount = BinaryPrimitives.ReverseEndianness(p->ByteCount);
@@ -165,28 +192,41 @@ namespace System.Text
         internal unsafe struct CodePageHeader
         {
             [FieldOffset(0)]
-            internal char CodePageName;     // WORD[16]
+            internal char CodePageName; // WORD[16]
+
             [FieldOffset(0x20)]
-            internal ushort VersionMajor;   // WORD
+            internal ushort VersionMajor; // WORD
+
             [FieldOffset(0x22)]
-            internal ushort VersionMinor;   // WORD
+            internal ushort VersionMinor; // WORD
+
             [FieldOffset(0x24)]
             internal ushort VersionRevision; // WORD
+
             [FieldOffset(0x26)]
-            internal ushort VersionBuild;   // WORD
+            internal ushort VersionBuild; // WORD
+
             [FieldOffset(0x28)]
-            internal short CodePage;        // WORD
+            internal short CodePage; // WORD
+
             [FieldOffset(0x2a)]
-            internal short ByteCount;       // WORD     // 1 or 2 byte code page (SBCS or DBCS)
+            internal short ByteCount; // WORD     // 1 or 2 byte code page (SBCS or DBCS)
+
             [FieldOffset(0x2c)]
-            internal char UnicodeReplace;   // WORD     // default replacement unicode character
+            internal char UnicodeReplace; // WORD     // default replacement unicode character
+
             [FieldOffset(0x2e)]
-            internal ushort ByteReplace;    // WORD     // default replacement bytes
+            internal ushort ByteReplace; // WORD     // default replacement bytes
         }
+
         private const int CODEPAGE_HEADER_SIZE = 48;
+
         private static unsafe void ReadCodePageHeader(Stream stream, byte[] codePageHeader)
         {
-            Debug.Assert(stream is UnmanagedMemoryStream, "UnmanagedMemoryStream will read a full buffer on one call to Read.");
+            Debug.Assert(
+                stream is UnmanagedMemoryStream,
+                "UnmanagedMemoryStream will read a full buffer on one call to Read."
+            );
             int bytesRead = stream.Read(codePageHeader, 0, codePageHeader!.Length);
             Debug.Assert(bytesRead == codePageHeader.Length);
 
@@ -195,10 +235,11 @@ namespace System.Text
                 fixed (byte* pBytes = &codePageHeader[0])
                 {
                     CodePageHeader* p = (CodePageHeader*)pBytes;
-                    char *pCodePageName = &p->CodePageName;
+                    char* pCodePageName = &p->CodePageName;
                     for (int i = 0; i < 16; i++)
                     {
-                            pCodePageName[i] = (char)BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
+                        pCodePageName[i] = (char)
+                            BinaryPrimitives.ReverseEndianness((ushort)pCodePageName[i]);
                     }
                     p->VersionMajor = BinaryPrimitives.ReverseEndianness(p->VersionMajor);
                     p->VersionMinor = BinaryPrimitives.ReverseEndianness(p->VersionMinor);
@@ -206,15 +247,20 @@ namespace System.Text
                     p->VersionBuild = BinaryPrimitives.ReverseEndianness(p->VersionBuild);
                     p->CodePage = BinaryPrimitives.ReverseEndianness(p->CodePage);
                     p->ByteCount = BinaryPrimitives.ReverseEndianness(p->ByteCount);
-                    p->UnicodeReplace = (char)BinaryPrimitives.ReverseEndianness((ushort)p->UnicodeReplace);
+                    p->UnicodeReplace = (char)
+                        BinaryPrimitives.ReverseEndianness((ushort)p->UnicodeReplace);
                     p->ByteReplace = BinaryPrimitives.ReverseEndianness(p->ByteReplace);
                 }
             }
         }
 
         // Initialize our global stuff
-        private static readonly byte[] s_codePagesDataHeader = new byte[CODEPAGE_DATA_FILE_HEADER_SIZE];
-        protected static Stream s_codePagesEncodingDataStream = GetEncodingDataStream(CODE_PAGE_DATA_FILE_NAME);
+        private static readonly byte[] s_codePagesDataHeader = new byte[
+            CODEPAGE_DATA_FILE_HEADER_SIZE
+        ];
+        protected static Stream s_codePagesEncodingDataStream = GetEncodingDataStream(
+            CODE_PAGE_DATA_FILE_NAME
+        );
         protected static readonly object s_streamLock = new object(); // this lock used when reading from s_codePagesEncodingDataStream
 
         // Real variables
@@ -232,7 +278,9 @@ namespace System.Text
             // NOTE: We must reflect on a public type that is exposed in the contract here
             // (i.e. CodePagesEncodingProvider), otherwise we will not get a reference to
             // the right assembly.
-            Stream? stream = typeof(CodePagesEncodingProvider).Assembly.GetManifestResourceStream(tableName);
+            Stream? stream = typeof(CodePagesEncodingProvider).Assembly.GetManifestResourceStream(
+                tableName
+            );
 
             if (stream == null)
             {
@@ -252,18 +300,22 @@ namespace System.Text
             if (!FindCodePage(dataTableCodePage))
             {
                 // Didn't have one
-                throw new NotSupportedException(SR.Format(SR.NotSupported_NoCodepageData, CodePage));
+                throw new NotSupportedException(
+                    SR.Format(SR.NotSupported_NoCodepageData, CodePage)
+                );
             }
 
             // We had it, so load it
             LoadManagedCodePage();
         }
 
-
         // Look up the code page pointer
         private unsafe bool FindCodePage(int codePage)
         {
-            Debug.Assert(m_codePageHeader != null && m_codePageHeader.Length == CODEPAGE_HEADER_SIZE, "m_codePageHeader expected to match in size the struct CodePageHeader");
+            Debug.Assert(
+                m_codePageHeader != null && m_codePageHeader.Length == CODEPAGE_HEADER_SIZE,
+                "m_codePageHeader expected to match in size the struct CodePageHeader"
+            );
 
             // Loop through all of the m_pCodePageIndex[] items to find our code page
             byte[] codePageIndex = new byte[sizeof(CodePageIndex)];
@@ -271,7 +323,10 @@ namespace System.Text
             lock (s_streamLock)
             {
                 // seek to the first CodePageIndex entry
-                s_codePagesEncodingDataStream.Seek(CODEPAGE_DATA_FILE_HEADER_SIZE, SeekOrigin.Begin);
+                s_codePagesEncodingDataStream.Seek(
+                    CODEPAGE_DATA_FILE_HEADER_SIZE,
+                    SeekOrigin.Begin
+                );
 
                 int codePagesCount;
                 fixed (byte* pBytes = &s_codePagesDataHeader[0])
@@ -291,13 +346,20 @@ namespace System.Text
                         {
                             // Found it!
                             long position = s_codePagesEncodingDataStream.Position;
-                            s_codePagesEncodingDataStream.Seek((long)pCodePageIndex->Offset, SeekOrigin.Begin);
+                            s_codePagesEncodingDataStream.Seek(
+                                (long)pCodePageIndex->Offset,
+                                SeekOrigin.Begin
+                            );
                             ReadCodePageHeader(s_codePagesEncodingDataStream, m_codePageHeader);
                             m_firstDataWordOffset = (int)s_codePagesEncodingDataStream.Position; // stream now pointing to the codepage data
 
                             if (i == codePagesCount - 1) // last codepage
                             {
-                                m_dataSize = (int)(s_codePagesEncodingDataStream.Length - pCodePageIndex->Offset - m_codePageHeader.Length);
+                                m_dataSize = (int)(
+                                    s_codePagesEncodingDataStream.Length
+                                    - pCodePageIndex->Offset
+                                    - m_codePageHeader.Length
+                                );
                             }
                             else
                             {
@@ -305,7 +367,10 @@ namespace System.Text
                                 s_codePagesEncodingDataStream.Seek(position, SeekOrigin.Begin);
                                 int currentOffset = pCodePageIndex->Offset;
                                 ReadCodePageIndex(s_codePagesEncodingDataStream, codePageIndex);
-                                m_dataSize = pCodePageIndex->Offset - currentOffset - m_codePageHeader.Length;
+                                m_dataSize =
+                                    pCodePageIndex->Offset
+                                    - currentOffset
+                                    - m_codePageHeader.Length;
                             }
 
                             return true;
@@ -327,7 +392,10 @@ namespace System.Text
             lock (s_streamLock)
             {
                 // seek to the first CodePageIndex entry
-                s_codePagesEncodingDataStream.Seek(CODEPAGE_DATA_FILE_HEADER_SIZE, SeekOrigin.Begin);
+                s_codePagesEncodingDataStream.Seek(
+                    CODEPAGE_DATA_FILE_HEADER_SIZE,
+                    SeekOrigin.Begin
+                );
 
                 int codePagesCount;
                 fixed (byte* pBytes = &s_codePagesDataHeader[0])
@@ -345,8 +413,10 @@ namespace System.Text
 
                         if (pCodePageIndex->CodePage == codePage)
                         {
-                            Debug.Assert(pCodePageIndex->ByteCount == 1 || pCodePageIndex->ByteCount == 2,
-                                $"[BaseCodePageEncoding] Code page ({codePage}) has invalid byte size ({pCodePageIndex->ByteCount}) in table");
+                            Debug.Assert(
+                                pCodePageIndex->ByteCount == 1 || pCodePageIndex->ByteCount == 2,
+                                $"[BaseCodePageEncoding] Code page ({codePage}) has invalid byte size ({pCodePageIndex->ByteCount}) in table"
+                            );
                             // Return what it says for byte count
                             return pCodePageIndex->ByteCount;
                         }
@@ -380,9 +450,13 @@ namespace System.Text
         internal char[] GetBestFitUnicodeToBytesData()
         {
             // Read in our best fit table if necessary
-            if (arrayUnicodeBestFit == null) ReadBestFitTable();
+            if (arrayUnicodeBestFit == null)
+                ReadBestFitTable();
 
-            Debug.Assert(arrayUnicodeBestFit != null, "[BaseCodePageEncoding.GetBestFitUnicodeToBytesData]Expected non-null arrayUnicodeBestFit");
+            Debug.Assert(
+                arrayUnicodeBestFit != null,
+                "[BaseCodePageEncoding.GetBestFitUnicodeToBytesData]Expected non-null arrayUnicodeBestFit"
+            );
 
             // Normally we don't have any best fit data.
             return arrayUnicodeBestFit!;
@@ -391,9 +465,13 @@ namespace System.Text
         internal char[] GetBestFitBytesToUnicodeData()
         {
             // Read in our best fit table if necessary
-            if (arrayBytesBestFit == null) ReadBestFitTable();
+            if (arrayBytesBestFit == null)
+                ReadBestFitTable();
 
-            Debug.Assert(arrayBytesBestFit != null, "[BaseCodePageEncoding.GetBestFitBytesToUnicodeData]Expected non-null arrayBytesBestFit");
+            Debug.Assert(
+                arrayBytesBestFit != null,
+                "[BaseCodePageEncoding.GetBestFitBytesToUnicodeData]Expected non-null arrayBytesBestFit"
+            );
 
             // Normally we don't have any best fit data.
             return arrayBytesBestFit!;
@@ -405,7 +483,10 @@ namespace System.Text
         // the memory section pointer will get finalized one more time.
         internal unsafe void CheckMemorySection()
         {
-            if (safeNativeMemoryHandle != null && safeNativeMemoryHandle.DangerousGetHandle() == IntPtr.Zero)
+            if (
+                safeNativeMemoryHandle != null
+                && safeNativeMemoryHandle.DangerousGetHandle() == IntPtr.Zero
+            )
             {
                 LoadManagedCodePage();
             }

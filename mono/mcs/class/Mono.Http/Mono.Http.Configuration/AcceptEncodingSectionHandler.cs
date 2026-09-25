@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,83 +35,87 @@ using System.Xml;
 
 namespace Mono.Http.Configuration
 {
-	public class AcceptEncodingSectionHandler : IConfigurationSectionHandler
-	{
-		public object Create (object parent, object configContext, XmlNode section)
-		{
-			AcceptEncodingConfig cfg = new AcceptEncodingConfig (parent as AcceptEncodingConfig);
-			
-			if (section.Attributes != null && section.Attributes.Count != 0)
-				ThrowException ("Unrecognized attribute", section);
+    public class AcceptEncodingSectionHandler : IConfigurationSectionHandler
+    {
+        public object Create(object parent, object configContext, XmlNode section)
+        {
+            AcceptEncodingConfig cfg = new AcceptEncodingConfig(parent as AcceptEncodingConfig);
 
-			XmlNodeList nodes = section.ChildNodes;
-			foreach (XmlNode child in nodes) {
-				XmlNodeType ntype = child.NodeType;
-				if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
-					continue;
+            if (section.Attributes != null && section.Attributes.Count != 0)
+                ThrowException("Unrecognized attribute", section);
 
-				if (ntype != XmlNodeType.Element)
-					ThrowException ("Only elements allowed", child);
-				
-				string name = child.Name;
-				if (name == "clear") {
-					if (child.Attributes != null && child.Attributes.Count != 0)
-						ThrowException ("Unrecognized attribute", child);
+            XmlNodeList nodes = section.ChildNodes;
+            foreach (XmlNode child in nodes)
+            {
+                XmlNodeType ntype = child.NodeType;
+                if (ntype == XmlNodeType.Whitespace || ntype == XmlNodeType.Comment)
+                    continue;
 
-					cfg.Clear ();
-					continue;
-				}
-					
-				if (name != "add")
-					ThrowException ("Unexpected element", child);
+                if (ntype != XmlNodeType.Element)
+                    ThrowException("Only elements allowed", child);
 
-				string encoding = ExtractAttributeValue ("encoding", child, false);
-				string type = ExtractAttributeValue ("type", child, false);
-				string disabled = ExtractAttributeValue ("disabled", child, true);
-				if (disabled != null && disabled == "yes")
-					continue;
+                string name = child.Name;
+                if (name == "clear")
+                {
+                    if (child.Attributes != null && child.Attributes.Count != 0)
+                        ThrowException("Unrecognized attribute", child);
 
-				if (child.Attributes != null && child.Attributes.Count != 0)
-					ThrowException ("Unrecognized attribute", child);
+                    cfg.Clear();
+                    continue;
+                }
 
-				cfg.Add (encoding, type);
-			}
+                if (name != "add")
+                    ThrowException("Unexpected element", child);
 
-			return cfg;
-		}
+                string encoding = ExtractAttributeValue("encoding", child, false);
+                string type = ExtractAttributeValue("type", child, false);
+                string disabled = ExtractAttributeValue("disabled", child, true);
+                if (disabled != null && disabled == "yes")
+                    continue;
 
-		static void ThrowException (string msg, XmlNode node)
-		{
-			if (node != null && node.Name != String.Empty)
-				msg = msg + " (node name: " + node.Name + ") ";
+                if (child.Attributes != null && child.Attributes.Count != 0)
+                    ThrowException("Unrecognized attribute", child);
 
-			throw new ConfigurationException (msg, node);
-		}
+                cfg.Add(encoding, type);
+            }
 
-		static string ExtractAttributeValue (string attKey, XmlNode node, bool optional)
-		{
-			if (node.Attributes == null) {
-				if (optional)
-					return null;
+            return cfg;
+        }
 
-				ThrowException ("Required attribute not found: " + attKey, node);
-			}
+        static void ThrowException(string msg, XmlNode node)
+        {
+            if (node != null && node.Name != String.Empty)
+                msg = msg + " (node name: " + node.Name + ") ";
 
-			XmlNode att = node.Attributes.RemoveNamedItem (attKey);
-			if (att == null) {
-				if (optional)
-					return null;
-				ThrowException ("Required attribute not found: " + attKey, node);
-			}
+            throw new ConfigurationException(msg, node);
+        }
 
-			string value = att.Value;
-			if (value == String.Empty) {
-				string opt = optional ? "Optional" : "Required";
-				ThrowException (opt + " attribute is empty: " + attKey, node);
-			}
+        static string ExtractAttributeValue(string attKey, XmlNode node, bool optional)
+        {
+            if (node.Attributes == null)
+            {
+                if (optional)
+                    return null;
 
-			return value;
-		}
-	}
+                ThrowException("Required attribute not found: " + attKey, node);
+            }
+
+            XmlNode att = node.Attributes.RemoveNamedItem(attKey);
+            if (att == null)
+            {
+                if (optional)
+                    return null;
+                ThrowException("Required attribute not found: " + attKey, node);
+            }
+
+            string value = att.Value;
+            if (value == String.Empty)
+            {
+                string opt = optional ? "Optional" : "Required";
+                ThrowException(opt + " attribute is empty: " + attKey, node);
+            }
+
+            return value;
+        }
+    }
 }
-

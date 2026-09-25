@@ -18,7 +18,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         private ArrayList _ValidationErrors = new ArrayList();
 
         private void ValidationCallBack(object sender, ValidationEventArgs args)

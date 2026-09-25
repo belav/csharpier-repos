@@ -1,15 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="IHttpHandlerFactory.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  * Handler factory interface
  */
-namespace System.Web {
-    
+namespace System.Web
+{
     using System.Security.Permissions;
+
     /*
      * Handler factory -- gets Handler by requestType,path,file
      */
@@ -20,14 +21,19 @@ namespace System.Web {
     ///       create IHttpHandler instances.
     ///    </para>
     /// </devdoc>
-    public interface IHttpHandlerFactory {
-
+    public interface IHttpHandlerFactory
+    {
         /// <devdoc>
         ///    <para>
         ///       Returns an instance of an IHttpHandler class.
         ///    </para>
         /// </devdoc>
-        IHttpHandler GetHandler(HttpContext context, String requestType, String url, String pathTranslated);
+        IHttpHandler GetHandler(
+            HttpContext context,
+            String requestType,
+            String url,
+            String pathTranslated
+        );
 
         /// <devdoc>
         ///    <para>
@@ -38,14 +44,19 @@ namespace System.Web {
         void ReleaseHandler(IHttpHandler handler);
     }
 
-    internal interface IHttpHandlerFactory2 : IHttpHandlerFactory {
-
+    internal interface IHttpHandlerFactory2 : IHttpHandlerFactory
+    {
         /// <devdoc>
         ///    <para>
         ///       Returns an instance of an IHttpHandler class. Works directly with a VirtualPath object
         ///       to avoid unnecessary conversions and creations.
         ///    </para>
         /// </devdoc>
-        IHttpHandler GetHandler(HttpContext context, String requestType, VirtualPath virtualPath, String physicalPath);
+        IHttpHandler GetHandler(
+            HttpContext context,
+            String requestType,
+            VirtualPath virtualPath,
+            String physicalPath
+        );
     }
 }

@@ -68,7 +68,11 @@ namespace Tests.System.IO
         }
 
         [Theory]
-        [InlineData("", Interop.Errors.ERROR_ACCESS_DENIED, "UnauthorizedAccess_IODenied_NoPathName")]
+        [InlineData(
+            "",
+            Interop.Errors.ERROR_ACCESS_DENIED,
+            "UnauthorizedAccess_IODenied_NoPathName"
+        )]
         [InlineData("foo", Interop.Errors.ERROR_ACCESS_DENIED, "UnauthorizedAccess_IODenied_Path")]
         public void UnauthorizedAccessErrors(string path, int errorCode, string error)
         {

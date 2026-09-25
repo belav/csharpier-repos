@@ -137,9 +137,8 @@ internal sealed partial class WebAssemblyRenderer : WebRenderer
         }
         else
         {
-            WebAssemblyCallQueue.Schedule(
-                this,
-                static @this => @this.CallBaseProcessPendingRender()
+            WebAssemblyCallQueue.Schedule(this, static @this =>
+                @this.CallBaseProcessPendingRender()
             );
         }
     }

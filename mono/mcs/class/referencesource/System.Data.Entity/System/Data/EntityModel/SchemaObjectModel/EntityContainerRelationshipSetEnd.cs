@@ -25,14 +25,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// Constructs an EntityContainerRelationshipSetEnd
         /// </summary>
         /// <param name="parentElement">Reference to the schema element.</param>
-        public EntityContainerRelationshipSetEnd( EntityContainerRelationshipSet parentElement )
-            : base( parentElement )
-        {
-        }
-
+        public EntityContainerRelationshipSetEnd(EntityContainerRelationshipSet parentElement)
+            : base(parentElement) { }
 
         /// <summary>
-        /// the End in the parent’s Association that this element refers to
+        /// the End in the parentï¿½s Association that this element refers to
         /// </summary>
         public IRelationshipEnd RelationshipEnd
         {
@@ -79,7 +76,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// This is the method that is called when an EntitySet Attribute is encountered.
         /// </summary>
         /// <param name="reader">The XmlRead positned at the extent attribute.</param>
-        private void HandleEntitySetAttribute( XmlReader reader )
+        private void HandleEntitySetAttribute(XmlReader reader)
         {
             if (Schema.DataModel == SchemaDataModelOption.ProviderDataModel)
             {
@@ -89,7 +86,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             }
             else
             {
-                _unresolvedEntitySetName = HandleUndottedNameAttribute(reader, _unresolvedEntitySetName);
+                _unresolvedEntitySetName = HandleUndottedNameAttribute(
+                    reader,
+                    _unresolvedEntitySetName
+                );
             }
         }
 
@@ -100,13 +100,21 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             base.ResolveTopLevelNames();
 
-            if ( _entitySet == null )
+            if (_entitySet == null)
             {
-                _entitySet = this.ParentElement.ParentElement.FindEntitySet( _unresolvedEntitySetName );
-                if ( _entitySet == null )
+                _entitySet = this.ParentElement.ParentElement.FindEntitySet(
+                    _unresolvedEntitySetName
+                );
+                if (_entitySet == null)
                 {
-                    AddError( ErrorCode.InvalidEndEntitySet, EdmSchemaErrorSeverity.Error,
-                        System.Data.Entity.Strings.InvalidEntitySetNameReference(_unresolvedEntitySetName, Name ) );
+                    AddError(
+                        ErrorCode.InvalidEndEntitySet,
+                        EdmSchemaErrorSeverity.Error,
+                        System.Data.Entity.Strings.InvalidEntitySetNameReference(
+                            _unresolvedEntitySetName,
+                            Name
+                        )
+                    );
                 }
             }
         }
@@ -118,23 +126,30 @@ namespace System.Data.EntityModel.SchemaObjectModel
         {
             base.Validate();
 
-            if ( _relationshipEnd == null || _entitySet == null )
+            if (_relationshipEnd == null || _entitySet == null)
             {
                 return;
             }
 
             // We need to allow 2 kind of scenarios:
-            // 1> If you have a relationship type defined between Customer and Order, then you can have a association set in 
+            // 1> If you have a relationship type defined between Customer and Order, then you can have a association set in
             //    which the Customer end refers to a Entity Set of type GoodCustomer where GoodCustomer type derives from Customer
             // 2> If you have a relationship type defined between GoodCustomer and Order, then you can have a relationship
             //    set which GoodCustomer end refers to an entity set whose entity type is Customer (where GoodCustomer derives
             //    from Customer). This scenario enables us to support scenarios where you want specific types in an entity set
             //    to take part in a relationship.
-            if ( !_relationshipEnd.Type.IsOfType( _entitySet.EntityType ) &&
-                 !_entitySet.EntityType.IsOfType( _relationshipEnd.Type ))
+            if (
+                !_relationshipEnd.Type.IsOfType(_entitySet.EntityType)
+                && !_entitySet.EntityType.IsOfType(_relationshipEnd.Type)
+            )
             {
-                AddError( ErrorCode.InvalidEndEntitySet, EdmSchemaErrorSeverity.Error,
-                    System.Data.Entity.Strings.InvalidEndEntitySetTypeMismatch(_relationshipEnd.Name ) );
+                AddError(
+                    ErrorCode.InvalidEndEntitySet,
+                    EdmSchemaErrorSeverity.Error,
+                    System.Data.Entity.Strings.InvalidEndEntitySetTypeMismatch(
+                        _relationshipEnd.Name
+                    )
+                );
             }
         }
 
@@ -143,10 +158,7 @@ namespace System.Data.EntityModel.SchemaObjectModel
         /// </summary>
         internal new EntityContainerRelationshipSet ParentElement
         {
-            get
-            {
-                return (EntityContainerRelationshipSet)( base.ParentElement );
-            }
+            get { return (EntityContainerRelationshipSet)(base.ParentElement); }
         }
     }
 }

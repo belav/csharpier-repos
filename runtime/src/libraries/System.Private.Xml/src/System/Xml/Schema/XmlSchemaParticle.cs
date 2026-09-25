@@ -12,8 +12,9 @@ namespace System.Xml.Schema
         {
             None,
             Min,
-            Max
+            Max,
         };
+
         private decimal _minOccurs = decimal.One;
         private decimal _maxOccurs = decimal.One;
         private Occurs _flags = Occurs.None;
@@ -21,10 +22,7 @@ namespace System.Xml.Schema
         [XmlAttribute("minOccurs")]
         public string? MinOccursString
         {
-            get
-            {
-                return (_flags & Occurs.Min) == 0 ? null : XmlConvert.ToString(_minOccurs);
-            }
+            get { return (_flags & Occurs.Min) == 0 ? null : XmlConvert.ToString(_minOccurs); }
             set
             {
                 if (value == null)
@@ -49,7 +47,9 @@ namespace System.Xml.Schema
         {
             get
             {
-                return (_flags & Occurs.Max) == 0 ? null : (_maxOccurs == decimal.MaxValue) ? "unbounded" : XmlConvert.ToString(_maxOccurs);
+                return (_flags & Occurs.Max) == 0 ? null
+                    : (_maxOccurs == decimal.MaxValue) ? "unbounded"
+                    : XmlConvert.ToString(_maxOccurs);
             }
             set
             {
@@ -127,10 +127,7 @@ namespace System.Xml.Schema
 
         internal virtual string NameString
         {
-            get
-            {
-                return string.Empty;
-            }
+            get { return string.Empty; }
         }
 
         internal XmlQualifiedName GetQualifiedName()

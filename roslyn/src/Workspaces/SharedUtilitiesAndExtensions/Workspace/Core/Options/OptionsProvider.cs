@@ -10,5 +10,8 @@ namespace Microsoft.CodeAnalysis;
 
 internal interface OptionsProvider<TOptions>
 {
-    ValueTask<TOptions> GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken);
+    ValueTask<TOptions> GetOptionsAsync(
+        LanguageServices languageServices,
+        CancellationToken cancellationToken
+    );
 }

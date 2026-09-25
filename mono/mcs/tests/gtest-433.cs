@@ -4,9 +4,9 @@ using C1 = Blah.Class1;
 using C2 = Blah.Class2;
 using Cit = Blah.Class2.Citrus;
 
-public class M 
+public class M
 {
-    public static void Main() 
+    public static void Main()
     {
         // access an internal type
         C1 a = new C1();
@@ -16,6 +16,6 @@ public class M
         // access an internal member of a public type
         b.Test();
 
-        Cit.Lime.ToString ();
+        Cit.Lime.ToString();
     }
 }

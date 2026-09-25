@@ -8,7 +8,9 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 {
     internal static class ChannelBindingUtility
     {
-        private static ExtendedProtectionPolicy disabledPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
+        private static ExtendedProtectionPolicy disabledPolicy = new ExtendedProtectionPolicy(
+            PolicyEnforcement.Never
+        );
         private static ExtendedProtectionPolicy defaultPolicy = disabledPolicy;
 
         public static bool IsDefaultPolicy(ExtendedProtectionPolicy policy)

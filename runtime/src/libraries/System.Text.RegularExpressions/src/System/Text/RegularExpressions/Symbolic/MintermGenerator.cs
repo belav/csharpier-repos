@@ -15,7 +15,8 @@ namespace System.Text.RegularExpressions.Symbolic
     /// if the sets are [0-9] and [0-4], then there are three minterms: [0-4], [5-9] and [^0-9]. Notably, there is no
     /// minterm corresponding to "[0-9] and not [0-4]", since that is unsatisfiable (empty).
     /// </remarks>
-    internal static class MintermGenerator<TSet> where TSet : IComparable<TSet>
+    internal static class MintermGenerator<TSet>
+        where TSet : IComparable<TSet>
     {
         /// <summary>
         /// Given an array of sets {p_1, p_2, ..., p_n} where n>=0,

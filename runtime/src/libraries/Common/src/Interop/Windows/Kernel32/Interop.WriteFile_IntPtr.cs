@@ -3,6 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+
 internal static partial class Interop
 {
     internal static partial class Kernel32
@@ -13,6 +14,7 @@ internal static partial class Interop
             byte* bytes,
             int numBytesToWrite,
             out int numBytesWritten,
-            IntPtr mustBeZero);
+            IntPtr mustBeZero
+        );
     }
 }

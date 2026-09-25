@@ -55,7 +55,7 @@ namespace Newtonsoft.Json.Tests.Issues
             Assert.IsNotNull(actual);
             Assert.IsNull(actual.Values);
         }
-        
+
         public class A
         {
             public ImmutableArray<string>? Values { get; set; }

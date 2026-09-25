@@ -4,8 +4,8 @@
 
 namespace System.ServiceModel.Dispatcher
 {
-    using System.ServiceModel.Channels;
     using System.Diagnostics.CodeAnalysis;
+    using System.ServiceModel.Channels;
 
     abstract class DurableErrorHandler : IErrorHandler
     {
@@ -20,7 +20,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (OperationContext.Current == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.NoOperationContext));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR2.NoOperationContext)
+                );
             }
 
             DurableMessageDispatchInspector.SuppressContextOnReply(OperationContext.Current);
@@ -37,7 +39,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (fault == null && IsUserCodeException(error))
             {
-                FaultCode code = new FaultCode(FaultCodeConstants.Codes.InternalServiceFault, FaultCodeConstants.Namespaces.NetDispatch);
+                FaultCode code = new FaultCode(
+                    FaultCodeConstants.Codes.InternalServiceFault,
+                    FaultCodeConstants.Namespaces.NetDispatch
+                );
                 code = FaultCode.CreateReceiverFaultCode(code);
 
                 string action = FaultCodeConstants.Actions.NetDispatcher;
@@ -46,7 +51,11 @@ namespace System.ServiceModel.Dispatcher
                 if (this.debug)
                 {
                     Exception toTrace = GetExceptionToTrace(error);
-                    messageFault = MessageFault.CreateFault(code, new FaultReason(toTrace.Message), new ExceptionDetail(toTrace));
+                    messageFault = MessageFault.CreateFault(
+                        code,
+                        new FaultReason(toTrace.Message),
+                        new ExceptionDetail(toTrace)
+                    );
                 }
                 else
                 {

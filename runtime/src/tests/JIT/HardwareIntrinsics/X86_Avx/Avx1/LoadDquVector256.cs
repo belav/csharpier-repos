@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest.Avx1
@@ -20,7 +20,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
 
             if (Avx.IsSupported)
             {
-                using (TestTable<int> intTable = new TestTable<int>(new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 }, new int[8]))
+                using (
+                    TestTable<int> intTable = new TestTable<int>(
+                        new int[8] { 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new int[8]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((int*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -37,7 +42,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable<uint> intTable = new TestTable<uint>(new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 }, new uint[8]))
+                using (
+                    TestTable<uint> intTable = new TestTable<uint>(
+                        new uint[8] { 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new uint[8]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((uint*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -54,7 +64,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable<long> intTable = new TestTable<long>(new long[4] { 1, -5, 100, 0 }, new long[4]))
+                using (
+                    TestTable<long> intTable = new TestTable<long>(
+                        new long[4] { 1, -5, 100, 0 },
+                        new long[4]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((long*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -71,7 +86,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable<ulong> intTable = new TestTable<ulong>(new ulong[4] { 1, 5, 100, 0 }, new ulong[4]))
+                using (
+                    TestTable<ulong> intTable = new TestTable<ulong>(
+                        new ulong[4] { 1, 5, 100, 0 },
+                        new ulong[4]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((ulong*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -88,7 +108,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable<short> intTable = new TestTable<short>(new short[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new short[16]))
+                using (
+                    TestTable<short> intTable = new TestTable<short>(
+                        new short[16] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 },
+                        new short[16]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((short*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -105,7 +130,12 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable<ushort> intTable = new TestTable<ushort>(new ushort[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new ushort[16]))
+                using (
+                    TestTable<ushort> intTable = new TestTable<ushort>(
+                        new ushort[16] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 },
+                        new ushort[16]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((ushort*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -122,7 +152,46 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable<byte> intTable = new TestTable<byte>(new byte[32] { 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4, 1, 5, 100, 0, 1, 2, 3, 4 }, new byte[32]))
+                using (
+                    TestTable<byte> intTable = new TestTable<byte>(
+                        new byte[32]
+                        {
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new byte[32]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((byte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);
@@ -139,7 +208,46 @@ namespace IntelHardwareIntrinsicTest.Avx1
                     }
                 }
 
-                using (TestTable<sbyte> intTable = new TestTable<sbyte>(new sbyte[32] { 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4, 1, -5, 100, 0, 1, 2, 3, 4 }, new sbyte[32]))
+                using (
+                    TestTable<sbyte> intTable = new TestTable<sbyte>(
+                        new sbyte[32]
+                        {
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                            1,
+                            -5,
+                            100,
+                            0,
+                            1,
+                            2,
+                            3,
+                            4,
+                        },
+                        new sbyte[32]
+                    )
+                )
                 {
                     var vf = Avx.LoadDquVector256((sbyte*)(intTable.inArrayPtr));
                     Unsafe.Write(intTable.outArrayPtr, vf);

@@ -400,14 +400,11 @@ public class Http3ConnectionTests : Http3TestBase
         var incomingSettings = await inboundControlStream.ExpectSettingsAsync();
 
         var defaultLimits = new KestrelServerLimits();
-        Assert.Collection(
-            incomingSettings,
-            kvp =>
-            {
-                Assert.Equal((long)Http3SettingType.MaxFieldSectionSize, kvp.Key);
-                Assert.Equal(defaultLimits.MaxRequestHeadersTotalSize, kvp.Value);
-            }
-        );
+        Assert.Collection(incomingSettings, kvp =>
+        {
+            Assert.Equal((long)Http3SettingType.MaxFieldSectionSize, kvp.Key);
+            Assert.Equal(defaultLimits.MaxRequestHeadersTotalSize, kvp.Value);
+        });
 
         var outboundcontrolStream = await Http3Api.CreateControlStream();
         await outboundcontrolStream.SendSettingsAsync(

@@ -25,8 +25,12 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(double value, Span<byte> destination, out int bytesWritten, StandardFormat format = default) =>
-            FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
+        public static bool TryFormat(
+            double value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        ) => FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
 
         /// <summary>
         /// Formats a Single as a UTF-8 string.
@@ -48,7 +52,11 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryFormat(float value, Span<byte> destination, out int bytesWritten, StandardFormat format = default) =>
-            FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
+        public static bool TryFormat(
+            float value,
+            Span<byte> destination,
+            out int bytesWritten,
+            StandardFormat format = default
+        ) => FormattingHelpers.TryFormat(value, destination, out bytesWritten, format);
     }
 }

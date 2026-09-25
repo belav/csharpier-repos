@@ -376,9 +376,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             VerifyResolution(source, c => c.GetMember("N.C.E"));
         }
 
-        private static void VerifyResolution(string source, Func<Compilation, ISymbol> symbolToResolve)
+        private static void VerifyResolution(
+            string source,
+            Func<Compilation, ISymbol> symbolToResolve
+        )
         {
-            var sourceCompilation = (Compilation)CreateCompilation(source, options: new(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true));
+            var sourceCompilation = (Compilation)CreateCompilation(
+                source,
+                options: new(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: true)
+            );
             var symbol = symbolToResolve(sourceCompilation);
 
             Assert.NotNull(symbol);
@@ -392,10 +398,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.SymbolId
             //   System.Uri exists in System.Private.Uri.dll, but System.String exists in System.Private.CoreLib.dll
             //   and we want to allow a symbol for System.Uri.Create(System.String) to resolve correctly even when the
             //   System.Private.CoreLib reference is missing.
-            var emptyCompilation = CSharpCompilation.Create("empty", options: new(OutputKind.DynamicallyLinkedLibrary, concurrentBuild: false))
+            var emptyCompilation = CSharpCompilation
+                .Create(
+                    "empty",
+                    options: new(OutputKind.DynamicallyLinkedLibrary, concurrentBuild: false)
+                )
                 .AddReferences(sourceCompilation.EmitToImageReference());
 
-            var resolution = SymbolKey.ResolveString(symbolKey, emptyCompilation, ignoreAssemblyKey: true, out var failureReason, CancellationToken.None);
+            var resolution = SymbolKey.ResolveString(
+                symbolKey,
+                emptyCompilation,
+                ignoreAssemblyKey: true,
+                out var failureReason,
+                CancellationToken.None
+            );
 
             Assert.Null(failureReason);
             Assert.NotNull(resolution.Symbol);

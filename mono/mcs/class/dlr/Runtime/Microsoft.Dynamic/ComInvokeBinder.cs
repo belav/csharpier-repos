@@ -1,20 +1,19 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Microsoft Public License. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Microsoft Public License, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Microsoft Public License. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Microsoft Public License, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Microsoft Public License.
  *
  * You must not remove this notice, or any other, from this software.
  *
  *
  * ***************************************************************************/
-using System; using Microsoft;
-
-
+using System;
+using Microsoft;
 #if !SILVERLIGHT
 
 using System.Collections.Generic;
@@ -35,14 +34,17 @@ using Microsoft.Scripting.Utils;
 using ComTypes = System.Runtime.InteropServices.ComTypes;
 
 #if CODEPLEX_40
-namespace System.Dynamic {
+namespace System.Dynamic
+{
 #else
-namespace Microsoft.Scripting {
+namespace Microsoft.Scripting
+{
 #endif
-    internal sealed class ComInvokeBinder {
+    internal sealed class ComInvokeBinder
+    {
         private readonly ComMethodDesc _methodDesc;
-        private readonly Expression _method;        // ComMethodDesc to be called
-        private readonly Expression _dispatch;      // IDispatch
+        private readonly Expression _method; // ComMethodDesc to be called
+        private readonly Expression _dispatch; // IDispatch
 
         private readonly CallInfo _callInfo;
         private readonly DynamicMetaObject[] _args;
@@ -66,23 +68,29 @@ namespace Microsoft.Scripting {
         private ParameterExpression _propertyPutDispId;
 
         internal ComInvokeBinder(
-                CallInfo callInfo, 
-                DynamicMetaObject[] args,
-                bool[] isByRef,
-                BindingRestrictions restrictions, 
-                Expression method, 
-                Expression dispatch, 
-                ComMethodDesc methodDesc
-                ) {
-
+            CallInfo callInfo,
+            DynamicMetaObject[] args,
+            bool[] isByRef,
+            BindingRestrictions restrictions,
+            Expression method,
+            Expression dispatch,
+            ComMethodDesc methodDesc
+        )
+        {
             Debug.Assert(callInfo != null, "arguments");
             Debug.Assert(args != null, "args");
             Debug.Assert(isByRef != null, "isByRef");
             Debug.Assert(method != null, "method");
             Debug.Assert(dispatch != null, "dispatch");
 
-            Debug.Assert(TypeUtils.AreReferenceAssignable(typeof(ComMethodDesc), method.Type), "method");
-            Debug.Assert(TypeUtils.AreReferenceAssignable(typeof(IDispatch), dispatch.Type), "dispatch");
+            Debug.Assert(
+                TypeUtils.AreReferenceAssignable(typeof(ComMethodDesc), method.Type),
+                "method"
+            );
+            Debug.Assert(
+                TypeUtils.AreReferenceAssignable(typeof(IDispatch), dispatch.Type),
+                "dispatch"
+            );
 
             _method = method;
             _dispatch = dispatch;
@@ -97,62 +105,98 @@ namespace Microsoft.Scripting {
             _instance = dispatch;
         }
 
-        private ParameterExpression DispatchObjectVariable {
+        private ParameterExpression DispatchObjectVariable
+        {
             get { return EnsureVariable(ref _dispatchObject, typeof(IDispatch), "dispatchObject"); }
         }
 
-        private ParameterExpression DispatchPointerVariable {
+        private ParameterExpression DispatchPointerVariable
+        {
             get { return EnsureVariable(ref _dispatchPointer, typeof(IntPtr), "dispatchPointer"); }
         }
 
-        private ParameterExpression DispIdVariable {
+        private ParameterExpression DispIdVariable
+        {
             get { return EnsureVariable(ref _dispId, typeof(int), "dispId"); }
         }
 
-        private ParameterExpression DispParamsVariable {
-            get { return EnsureVariable(ref _dispParams, typeof(ComTypes.DISPPARAMS), "dispParams"); }
+        private ParameterExpression DispParamsVariable
+        {
+            get
+            {
+                return EnsureVariable(ref _dispParams, typeof(ComTypes.DISPPARAMS), "dispParams");
+            }
         }
 
-        private ParameterExpression InvokeResultVariable {
+        private ParameterExpression InvokeResultVariable
+        {
             get { return EnsureVariable(ref _invokeResult, typeof(Variant), "invokeResult"); }
         }
 
-        private ParameterExpression ReturnValueVariable {
+        private ParameterExpression ReturnValueVariable
+        {
             get { return EnsureVariable(ref _returnValue, typeof(object), "returnValue"); }
         }
 
-        private ParameterExpression DispIdsOfKeywordArgsPinnedVariable {
-            get { return EnsureVariable(ref _dispIdsOfKeywordArgsPinned, typeof(GCHandle), "dispIdsOfKeywordArgsPinned"); }
+        private ParameterExpression DispIdsOfKeywordArgsPinnedVariable
+        {
+            get
+            {
+                return EnsureVariable(
+                    ref _dispIdsOfKeywordArgsPinned,
+                    typeof(GCHandle),
+                    "dispIdsOfKeywordArgsPinned"
+                );
+            }
         }
 
-        private ParameterExpression PropertyPutDispIdVariable {
+        private ParameterExpression PropertyPutDispIdVariable
+        {
             get { return EnsureVariable(ref _propertyPutDispId, typeof(int), "propertyPutDispId"); }
         }
 
-        private ParameterExpression ParamVariantsVariable {
-            get {
-                if (_paramVariants == null) {
-                    _paramVariants = Expression.Variable(VariantArray.GetStructType(_args.Length), "paramVariants");
+        private ParameterExpression ParamVariantsVariable
+        {
+            get
+            {
+                if (_paramVariants == null)
+                {
+                    _paramVariants = Expression.Variable(
+                        VariantArray.GetStructType(_args.Length),
+                        "paramVariants"
+                    );
                 }
                 return _paramVariants;
             }
         }
 
-        private static ParameterExpression EnsureVariable(ref ParameterExpression var, Type type, string name) {
-            if (var != null) {
+        private static ParameterExpression EnsureVariable(
+            ref ParameterExpression var,
+            Type type,
+            string name
+        )
+        {
+            if (var != null)
+            {
                 return var;
             }
             return var = Expression.Variable(type, name);
         }
 
-        private static Type MarshalType(DynamicMetaObject mo, bool isByRef) {
-            Type marshalType = (mo.Value == null && mo.HasValue && !mo.LimitType.IsValueType) ? null : mo.LimitType;
+        private static Type MarshalType(DynamicMetaObject mo, bool isByRef)
+        {
+            Type marshalType =
+                (mo.Value == null && mo.HasValue && !mo.LimitType.IsValueType)
+                    ? null
+                    : mo.LimitType;
 
             // we are not checking that mo.Expression is writeable or whether evaluating it has no sideeffects
             // the assumption is that whoever matched it with ByRef arginfo took care of this.
-            if (isByRef) {
+            if (isByRef)
+            {
                 // Null just means that null was supplied.
-                if (marshalType == null) {
+                if (marshalType == null)
+                {
                     marshalType = mo.Expression.Type;
                 }
                 marshalType = marshalType.MakeByRefType();
@@ -160,16 +204,20 @@ namespace Microsoft.Scripting {
             return marshalType;
         }
 
-        internal DynamicMetaObject Invoke() {
+        internal DynamicMetaObject Invoke()
+        {
             _keywordArgNames = _callInfo.ArgumentNames.ToArray();
             _totalExplicitArgs = _args.Length;
-            
+
             Type[] marshalArgTypes = new Type[_args.Length];
 
             // We already tested the instance, so no need to test it again
-            for (int i = 0; i < _args.Length; i++) {
+            for (int i = 0; i < _args.Length; i++)
+            {
                 DynamicMetaObject curMo = _args[i];
-                _restrictions = _restrictions.Merge(ComBinderHelpers.GetTypeRestrictionForDynamicMetaObject(curMo));
+                _restrictions = _restrictions.Merge(
+                    ComBinderHelpers.GetTypeRestrictionForDynamicMetaObject(curMo)
+                );
                 marshalArgTypes[i] = MarshalType(curMo, _isByRef[i]);
             }
 
@@ -181,11 +229,14 @@ namespace Microsoft.Scripting {
             );
         }
 
-        private static void AddNotNull(List<ParameterExpression> list, ParameterExpression var) {
-            if (var != null) list.Add(var);
+        private static void AddNotNull(List<ParameterExpression> list, ParameterExpression var)
+        {
+            if (var != null)
+                list.Add(var);
         }
 
-        private Expression CreateScope(Expression expression) {
+        private Expression CreateScope(Expression expression)
+        {
             List<ParameterExpression> vars = new List<ParameterExpression>();
             AddNotNull(vars, _dispatchObject);
             AddNotNull(vars, _dispatchPointer);
@@ -199,7 +250,8 @@ namespace Microsoft.Scripting {
             return vars.Count > 0 ? Expression.Block(vars, expression) : expression;
         }
 
-        private Expression GenerateTryBlock() {
+        private Expression GenerateTryBlock()
+        {
             //
             // Declare variables
             //
@@ -210,7 +262,8 @@ namespace Microsoft.Scripting {
             List<Expression> tryStatements = new List<Expression>();
             Expression expr;
 
-            if (_keywordArgNames.Length > 0) {
+            if (_keywordArgNames.Length > 0)
+            {
                 string[] names = _keywordArgNames.AddFirst(_methodDesc.Name);
 
                 tryStatements.Add(
@@ -219,7 +272,8 @@ namespace Microsoft.Scripting {
                             DispParamsVariable,
                             typeof(ComTypes.DISPPARAMS).GetField("rgdispidNamedArgs")
                         ),
-                        Expression.Call(typeof(UnsafeMethods).GetMethod("GetIdsOfNamedParameters"),
+                        Expression.Call(
+                            typeof(UnsafeMethods).GetMethod("GetIdsOfNamedParameters"),
                             DispatchObjectVariable,
                             Expression.Constant(names),
                             DispIdVariable,
@@ -244,12 +298,16 @@ namespace Microsoft.Scripting {
 
             int reverseIndex = _varEnumSelector.VariantBuilders.Length - 1;
             int positionalArgs = _varEnumSelector.VariantBuilders.Length - _keywordArgNames.Length; // args passed by position order and not by name
-            for (int i = 0; i < _varEnumSelector.VariantBuilders.Length; i++, reverseIndex--) {
+            for (int i = 0; i < _varEnumSelector.VariantBuilders.Length; i++, reverseIndex--)
+            {
                 int variantIndex;
-                if (i >= positionalArgs) {
+                if (i >= positionalArgs)
+                {
                     // Named arguments are in order at the start of rgArgs
                     variantIndex = i - positionalArgs;
-                } else {
+                }
+                else
+                {
                     // Positial arguments are in reverse order at the tail of rgArgs
                     variantIndex = reverseIndex;
                 }
@@ -260,26 +318,33 @@ namespace Microsoft.Scripting {
                     parameters[i + 1]
                 );
 
-                if (marshal != null) {
+                if (marshal != null)
+                {
                     tryStatements.Add(marshal);
                 }
             }
-
 
             //
             // Call Invoke
             //
 
             ComTypes.INVOKEKIND invokeKind;
-            if (_methodDesc.IsPropertyPut) {
-                if (_methodDesc.IsPropertyPutRef) {
+            if (_methodDesc.IsPropertyPut)
+            {
+                if (_methodDesc.IsPropertyPutRef)
+                {
                     invokeKind = ComTypes.INVOKEKIND.INVOKE_PROPERTYPUTREF;
-                } else {
+                }
+                else
+                {
                     invokeKind = ComTypes.INVOKEKIND.INVOKE_PROPERTYPUT;
                 }
-            } else {
+            }
+            else
+            {
                 // INVOKE_PROPERTYGET should only be needed for COM objects without typeinfo, where we might have to treat properties as methods
-                invokeKind = ComTypes.INVOKEKIND.INVOKE_FUNC | ComTypes.INVOKEKIND.INVOKE_PROPERTYGET;
+                invokeKind =
+                    ComTypes.INVOKEKIND.INVOKE_FUNC | ComTypes.INVOKEKIND.INVOKE_PROPERTYGET;
             }
 
             MethodCallExpression invoke = Expression.Call(
@@ -311,19 +376,22 @@ namespace Microsoft.Scripting {
             //
             // _returnValue = (ReturnType)_invokeResult.ToObject();
             //
-            Expression invokeResultObject =
-                Expression.Call(
-                    InvokeResultVariable,
-                    typeof(Variant).GetMethod("ToObject"));
+            Expression invokeResultObject = Expression.Call(
+                InvokeResultVariable,
+                typeof(Variant).GetMethod("ToObject")
+            );
 
             VariantBuilder[] variants = _varEnumSelector.VariantBuilders;
 
             Expression[] parametersForUpdates = MakeArgumentExpressions();
             tryStatements.Add(Expression.Assign(ReturnValueVariable, invokeResultObject));
 
-            for (int i = 0, n = variants.Length; i < n; i++) {
-                Expression updateFromReturn = variants[i].UpdateFromReturn(parametersForUpdates[i + 1]);
-                if (updateFromReturn != null) {
+            for (int i = 0, n = variants.Length; i < n; i++)
+            {
+                Expression updateFromReturn = variants[i]
+                    .UpdateFromReturn(parametersForUpdates[i + 1]);
+                if (updateFromReturn != null)
+                {
                     tryStatements.Add(updateFromReturn);
                 }
             }
@@ -333,7 +401,8 @@ namespace Microsoft.Scripting {
             return Expression.Block(new[] { excepInfo, argErr, hresult }, tryStatements);
         }
 
-        private Expression GenerateFinallyBlock() {
+        private Expression GenerateFinallyBlock()
+        {
             List<Expression> finallyStatements = new List<Expression>();
 
             //
@@ -349,9 +418,11 @@ namespace Microsoft.Scripting {
             //
             // Clear memory allocated for marshalling
             //
-            for (int i = 0, n = _varEnumSelector.VariantBuilders.Length; i < n; i++) {
+            for (int i = 0, n = _varEnumSelector.VariantBuilders.Length; i < n; i++)
+            {
                 Expression clear = _varEnumSelector.VariantBuilders[i].Clear();
-                if (clear != null) {
+                if (clear != null)
+                {
                     finallyStatements.Add(clear);
                 }
             }
@@ -361,16 +432,14 @@ namespace Microsoft.Scripting {
             //
 
             finallyStatements.Add(
-                Expression.Call(
-                    InvokeResultVariable,
-                    typeof(Variant).GetMethod("Clear")
-                )
+                Expression.Call(InvokeResultVariable, typeof(Variant).GetMethod("Clear"))
             );
 
             //
             // _dispIdsOfKeywordArgsPinned.Free()
             //
-            if (_dispIdsOfKeywordArgsPinned != null) {
+            if (_dispIdsOfKeywordArgsPinned != null)
+            {
                 finallyStatements.Add(
                     Expression.Call(
                         DispIdsOfKeywordArgsPinnedVariable,
@@ -387,7 +456,8 @@ namespace Microsoft.Scripting {
         /// Create a stub for the target of the optimized lopop.
         /// </summary>
         /// <returns></returns>
-        private Expression MakeIDispatchInvokeTarget() {
+        private Expression MakeIDispatchInvokeTarget()
+        {
             Debug.Assert(_varEnumSelector.VariantBuilders.Length == _totalExplicitArgs);
 
             List<Expression> exprs = new List<Expression>();
@@ -405,7 +475,8 @@ namespace Microsoft.Scripting {
             //
             // _dispParams.rgvararg = RuntimeHelpers.UnsafeMethods.ConvertVariantByrefToPtr(ref _paramVariants._element0)
             //
-            if (_totalExplicitArgs != 0) {
+            if (_totalExplicitArgs != 0)
+            {
                 exprs.Add(
                     Expression.Assign(
                         Expression.Field(
@@ -433,7 +504,8 @@ namespace Microsoft.Scripting {
                 )
             );
 
-            if (_methodDesc.IsPropertyPut) {
+            if (_methodDesc.IsPropertyPut)
+            {
                 //
                 // dispParams.cNamedArgs = 1;
                 // dispParams.rgdispidNamedArgs = RuntimeHelpers.UnsafeMethods.GetNamedArgsForPropertyPut()
@@ -467,7 +539,9 @@ namespace Microsoft.Scripting {
                         )
                     )
                 );
-            } else {
+            }
+            else
+            {
                 //
                 // _dispParams.cNamedArgs = N;
                 //
@@ -506,8 +580,10 @@ namespace Microsoft.Scripting {
 
             exprs.Add(ReturnValueVariable);
             var vars = new List<ParameterExpression>();
-            foreach (var variant in _varEnumSelector.VariantBuilders) {
-                if (variant.TempVariable != null) {
+            foreach (var variant in _varEnumSelector.VariantBuilders)
+            {
+                if (variant.TempVariable != null)
+                {
                     vars.Add(variant.TempVariable);
                 }
             }
@@ -517,17 +593,22 @@ namespace Microsoft.Scripting {
         /// <summary>
         /// Gets expressions to access all the arguments. This includes the instance argument.
         /// </summary>
-        private Expression[] MakeArgumentExpressions() {
+        private Expression[] MakeArgumentExpressions()
+        {
             Expression[] res;
             int copy = 0;
-            if (_instance != null) {
+            if (_instance != null)
+            {
                 res = new Expression[_args.Length + 1];
                 res[copy++] = _instance;
-            } else {
+            }
+            else
+            {
                 res = new Expression[_args.Length];
             }
 
-            for (int i = 0; i < _args.Length; i++) {
+            for (int i = 0; i < _args.Length; i++)
+            {
                 res[copy++] = _args[i].Expression;
             }
             return res;

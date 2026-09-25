@@ -11,62 +11,78 @@ namespace System.Activities.Statements
     sealed class InternalConfirm : NativeActivity
     {
         public InternalConfirm()
-            : base()
-        {
-        }
+            : base() { }
 
-        public InArgument<CompensationToken> Target
-        {
-            get;
-            set;
-        }
+        public InArgument<CompensationToken> Target { get; set; }
 
         protected override bool CanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
-            RuntimeArgument targetArgument = new RuntimeArgument("Target", typeof(CompensationToken), ArgumentDirection.In);
+            RuntimeArgument targetArgument = new RuntimeArgument(
+                "Target",
+                typeof(CompensationToken),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.Target, targetArgument);
             metadata.SetArgumentsCollection(new Collection<RuntimeArgument> { targetArgument });
         }
 
         protected override void Execute(NativeActivityContext context)
         {
-            CompensationExtension compensationExtension = context.GetExtension<CompensationExtension>();
+            CompensationExtension compensationExtension =
+                context.GetExtension<CompensationExtension>();
             Fx.Assert(compensationExtension != null, "CompensationExtension must be valid");
 
             CompensationToken compensationToken = Target.Get(context);
             Fx.Assert(compensationToken != null, "compensationToken must be valid");
 
             // The compensationToken should be a valid one at this point. Ensure its validated in Confirm activity.
-            CompensationTokenData tokenData = compensationExtension.Get(compensationToken.CompensationId);
-            Fx.Assert(tokenData != null, "The compensationToken should be a valid one at this point. Ensure its validated in Confirm activity.");
+            CompensationTokenData tokenData = compensationExtension.Get(
+                compensationToken.CompensationId
+            );
+            Fx.Assert(
+                tokenData != null,
+                "The compensationToken should be a valid one at this point. Ensure its validated in Confirm activity."
+            );
 
-            Fx.Assert(tokenData.BookmarkTable[CompensationBookmarkName.Confirmed] == null, "Bookmark should not be already initialized in the bookmark table.");
-            tokenData.BookmarkTable[CompensationBookmarkName.Confirmed] = context.CreateBookmark(new BookmarkCallback(OnConfirmed));
+            Fx.Assert(
+                tokenData.BookmarkTable[CompensationBookmarkName.Confirmed] == null,
+                "Bookmark should not be already initialized in the bookmark table."
+            );
+            tokenData.BookmarkTable[CompensationBookmarkName.Confirmed] = context.CreateBookmark(
+                new BookmarkCallback(OnConfirmed)
+            );
 
             tokenData.CompensationState = CompensationState.Confirming;
-            compensationExtension.NotifyMessage(context, tokenData.CompensationId, CompensationBookmarkName.OnConfirmation);
+            compensationExtension.NotifyMessage(
+                context,
+                tokenData.CompensationId,
+                CompensationBookmarkName.OnConfirmation
+            );
         }
 
         // Successfully received Confirmed response.
         void OnConfirmed(NativeActivityContext context, Bookmark bookmark, object value)
         {
-            CompensationExtension compensationExtension = context.GetExtension<CompensationExtension>();
+            CompensationExtension compensationExtension =
+                context.GetExtension<CompensationExtension>();
             Fx.Assert(compensationExtension != null, "CompensationExtension must be valid");
 
             CompensationToken compensationToken = Target.Get(context);
             Fx.Assert(compensationToken != null, "compensationToken must be valid");
 
             // The compensationToken should be a valid one at this point. Ensure its validated in Confirm activity.
-            CompensationTokenData tokenData = compensationExtension.Get(compensationToken.CompensationId);
-            Fx.Assert(tokenData != null, "The compensationToken should be a valid one at this point. Ensure its validated in Confirm activity.");
+            CompensationTokenData tokenData = compensationExtension.Get(
+                compensationToken.CompensationId
+            );
+            Fx.Assert(
+                tokenData != null,
+                "The compensationToken should be a valid one at this point. Ensure its validated in Confirm activity."
+            );
 
             tokenData.CompensationState = CompensationState.Confirmed;
             if (TD.CompensationStateIsEnabled())
@@ -74,10 +90,12 @@ namespace System.Activities.Statements
                 TD.CompensationState(tokenData.DisplayName, tokenData.CompensationState.ToString());
             }
 
-            // Remove the token from the parent! 
+            // Remove the token from the parent!
             if (tokenData.ParentCompensationId != CompensationToken.RootCompensationId)
             {
-                CompensationTokenData parentToken = compensationExtension.Get(tokenData.ParentCompensationId);
+                CompensationTokenData parentToken = compensationExtension.Get(
+                    tokenData.ParentCompensationId
+                );
                 Fx.Assert(parentToken != null, "parentToken must be valid");
 
                 parentToken.ExecutionTracker.Remove(tokenData);
@@ -85,7 +103,9 @@ namespace System.Activities.Statements
             else
             {
                 // remove from workflow root...
-                CompensationTokenData parentToken = compensationExtension.Get(CompensationToken.RootCompensationId);
+                CompensationTokenData parentToken = compensationExtension.Get(
+                    CompensationToken.RootCompensationId
+                );
                 Fx.Assert(parentToken != null, "parentToken must be valid");
 
                 parentToken.ExecutionTracker.Remove(tokenData);
@@ -99,7 +119,7 @@ namespace System.Activities.Statements
 
         protected override void Cancel(NativeActivityContext context)
         {
-            // Suppress Cancel   
+            // Suppress Cancel
         }
     }
 }

@@ -20,7 +20,8 @@ namespace System.IO.Compression
         /// <summary>Initializes a new instance of the <see cref="System.IO.Compression.BrotliStream" /> class by using the specified stream and compression mode.</summary>
         /// <param name="stream">The stream to which compressed data is written or from which data to decompress is read.</param>
         /// <param name="mode">One of the enumeration values that indicates whether to compress data to the stream or decompress data from the stream.</param>
-        public BrotliStream(Stream stream, CompressionMode mode) : this(stream, mode, leaveOpen: false) { }
+        public BrotliStream(Stream stream, CompressionMode mode)
+            : this(stream, mode, leaveOpen: false) { }
 
         /// <summary>Initializes a new instance of the <see cref="System.IO.Compression.BrotliStream" /> class by using the specified stream and compression mode, and optionally leaves the stream open.</summary>
         /// <param name="stream">The stream to which compressed data is written or from which data to decompress is read.</param>
@@ -103,7 +104,12 @@ namespace System.IO.Compression
                 {
                     if (_mode == CompressionMode.Compress)
                     {
-                        await WriteAsyncMemoryCore(ReadOnlyMemory<byte>.Empty, CancellationToken.None, isFinalBlock: true).ConfigureAwait(false);
+                        await WriteAsyncMemoryCore(
+                                ReadOnlyMemory<byte>.Empty,
+                                CancellationToken.None,
+                                isFinalBlock: true
+                            )
+                            .ConfigureAwait(false);
                     }
 
                     if (!_leaveOpen)
@@ -139,25 +145,34 @@ namespace System.IO.Compression
         /// <value>A stream object that represents the underlying stream.</value>
         /// <exception cref="System.ObjectDisposedException">The underlying stream is closed.</exception>
         public Stream BaseStream => _stream;
+
         /// <summary>Gets a value indicating whether the stream supports reading while decompressing a file.</summary>
         /// <value><see langword="true" /> if the <see cref="System.IO.Compression.CompressionMode" /> value is <see langword="Decompress," /> and the underlying stream supports reading and is not closed; otherwise, <see langword="false" />.</value>
-        public override bool CanRead => _mode == CompressionMode.Decompress && _stream != null && _stream.CanRead;
+        public override bool CanRead =>
+            _mode == CompressionMode.Decompress && _stream != null && _stream.CanRead;
+
         /// <summary>Gets a value indicating whether the stream supports writing.</summary>
         /// <value><see langword="true" /> if the <see cref="System.IO.Compression.CompressionMode" /> value is <see langword="Compress" />, and the underlying stream supports writing and is not closed; otherwise, <see langword="false" />.</value>
-        public override bool CanWrite => _mode == CompressionMode.Compress && _stream != null && _stream.CanWrite;
+        public override bool CanWrite =>
+            _mode == CompressionMode.Compress && _stream != null && _stream.CanWrite;
+
         /// <summary>Gets a value indicating whether the stream supports seeking.</summary>
         /// <value><see langword="false" /> in all cases.</value>
         public override bool CanSeek => false;
+
         /// <summary>This property is not supported and always throws a <see cref="System.NotSupportedException" />.</summary>
         /// <param name="offset">The location in the stream.</param>
         /// <param name="origin">One of the <see cref="System.IO.SeekOrigin" /> values.</param>
         /// <returns>A long value.</returns>
         /// <exception cref="System.NotSupportedException">This property is not supported on this stream.</exception>
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
+
         /// <summary>This property is not supported and always throws a <see cref="System.NotSupportedException" />.</summary>
         /// <value>A long value.</value>
         /// <exception cref="System.NotSupportedException">This property is not supported on this stream.</exception>
         public override long Length => throw new NotSupportedException();
+
         /// <summary>This property is not supported and always throws a <see cref="System.NotSupportedException" />.</summary>
         /// <value>A long value.</value>
         /// <exception cref="System.NotSupportedException">This property is not supported on this stream.</exception>
@@ -166,6 +181,7 @@ namespace System.IO.Compression
             get => throw new NotSupportedException();
             set => throw new NotSupportedException();
         }
+
         /// <summary>This property is not supported and always throws a <see cref="System.NotSupportedException" />.</summary>
         /// <param name="value">The length of the stream.</param>
         public override void SetLength(long value) => throw new NotSupportedException();

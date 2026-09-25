@@ -48,10 +48,8 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData) :
-            this(callback, state, pinData, flowExecutionContext: true)
-        {
-        }
+        public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData)
+            : this(callback, state, pinData, flowExecutionContext: true) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PreAllocatedOverlapped"/> class, specifying
@@ -89,16 +87,33 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public static PreAllocatedOverlapped UnsafeCreate(IOCompletionCallback callback, object? state, object? pinData) =>
-            ThreadPool.UseWindowsThreadPool ? UnsafeCreateWindowsThreadPool(callback, state, pinData) : UnsafeCreatePortableCore(callback, state, pinData);
+        public static PreAllocatedOverlapped UnsafeCreate(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) =>
+            ThreadPool.UseWindowsThreadPool
+                ? UnsafeCreateWindowsThreadPool(callback, state, pinData)
+                : UnsafeCreatePortableCore(callback, state, pinData);
 
-        private unsafe PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData, bool flowExecutionContext)
+        private unsafe PreAllocatedOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            bool flowExecutionContext
+        )
         {
             if (ThreadPool.UseWindowsThreadPool)
             {
                 ArgumentNullException.ThrowIfNull(callback);
 
-                _overlappedWindowsThreadPool = Win32ThreadPoolNativeOverlapped.Allocate(callback, state, pinData, this, flowExecutionContext);
+                _overlappedWindowsThreadPool = Win32ThreadPoolNativeOverlapped.Allocate(
+                    callback,
+                    state,
+                    pinData,
+                    this,
+                    flowExecutionContext
+                );
             }
             else
             {
@@ -106,11 +121,18 @@ namespace System.Threading
                 // It has to either be duplicated or remove the 'readonly' part of _overlappedPortableCore
                 ArgumentNullException.ThrowIfNull(callback);
 
-                _overlappedPortableCore = new ThreadPoolBoundHandleOverlapped(callback, state, pinData, this, flowExecutionContext);
+                _overlappedPortableCore = new ThreadPoolBoundHandleOverlapped(
+                    callback,
+                    state,
+                    pinData,
+                    this,
+                    flowExecutionContext
+                );
             }
         }
 
-        internal bool AddRef() => ThreadPool.UseWindowsThreadPool ? AddRefWindowsThreadPool() : AddRefPortableCore();
+        internal bool AddRef() =>
+            ThreadPool.UseWindowsThreadPool ? AddRefWindowsThreadPool() : AddRefPortableCore();
 
         internal void Release()
         {

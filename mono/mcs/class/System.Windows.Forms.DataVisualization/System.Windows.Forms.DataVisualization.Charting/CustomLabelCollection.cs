@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,43 +24,75 @@
 //
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class CustomLabelCollection : ChartElementCollection<CustomLabel>
-	{
-		[MonoTODO]
-		public void Add (double labelsStep, DateTimeIntervalType intervalType)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public CustomLabel Add (double fromPosition, double toPosition, string text)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public void Add (double labelsStep, DateTimeIntervalType intervalType, string format)
-		{
-			throw new NotImplementedException ();
-		}
+    public class CustomLabelCollection : ChartElementCollection<CustomLabel>
+    {
+        [MonoTODO]
+        public void Add(double labelsStep, DateTimeIntervalType intervalType)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public CustomLabel Add (double fromPosition, double toPosition, string text, int rowIndex, LabelMarkStyle markStyle)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public void Add (double labelsStep, DateTimeIntervalType intervalType, string format, int rowIndex, LabelMarkStyle markStyle)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public CustomLabel Add (double fromPosition, double toPosition, string text, int rowIndex, LabelMarkStyle markStyle, GridTickTypes gridTick)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public void Add ( double labelsStep, DateTimeIntervalType intervalType, double min, double max, string format, int rowIndex, LabelMarkStyle markStyle)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public CustomLabel Add(double fromPosition, double toPosition, string text)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Add(double labelsStep, DateTimeIntervalType intervalType, string format)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public CustomLabel Add(
+            double fromPosition,
+            double toPosition,
+            string text,
+            int rowIndex,
+            LabelMarkStyle markStyle
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Add(
+            double labelsStep,
+            DateTimeIntervalType intervalType,
+            string format,
+            int rowIndex,
+            LabelMarkStyle markStyle
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public CustomLabel Add(
+            double fromPosition,
+            double toPosition,
+            string text,
+            int rowIndex,
+            LabelMarkStyle markStyle,
+            GridTickTypes gridTick
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Add(
+            double labelsStep,
+            DateTimeIntervalType intervalType,
+            double min,
+            double max,
+            string format,
+            int rowIndex,
+            LabelMarkStyle markStyle
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

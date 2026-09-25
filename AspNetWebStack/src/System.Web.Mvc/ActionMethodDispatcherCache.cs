@@ -5,16 +5,19 @@ using System.Reflection;
 
 namespace System.Web.Mvc
 {
-    internal sealed class ActionMethodDispatcherCache : ReaderWriterCache<MethodInfo, ActionMethodDispatcher>
+    internal sealed class ActionMethodDispatcherCache
+        : ReaderWriterCache<MethodInfo, ActionMethodDispatcher>
     {
-        public ActionMethodDispatcherCache()
-        {
-        }
+        public ActionMethodDispatcherCache() { }
 
         public ActionMethodDispatcher GetDispatcher(MethodInfo methodInfo)
         {
             // Frequently called, so ensure delegate remains static
-            return FetchOrCreateItem(methodInfo, (MethodInfo methodInfoInner) => new ActionMethodDispatcher(methodInfoInner), methodInfo);
+            return FetchOrCreateItem(
+                methodInfo,
+                (MethodInfo methodInfoInner) => new ActionMethodDispatcher(methodInfoInner),
+                methodInfo
+            );
         }
     }
 }

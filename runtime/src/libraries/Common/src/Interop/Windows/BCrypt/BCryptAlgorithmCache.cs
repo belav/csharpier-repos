@@ -11,19 +11,34 @@ internal static partial class Interop
     {
         internal static class BCryptAlgorithmCache
         {
-            private static readonly ConcurrentDictionary<(string HashAlgorithmId, BCryptOpenAlgorithmProviderFlags Flags), (SafeBCryptAlgorithmHandle Handle, int HashSizeInBytes)> s_handles = new();
-            private static readonly ConcurrentDictionary<(string HashAlgorithmId, BCryptOpenAlgorithmProviderFlags Flags), bool> s_supported = new();
+            private static readonly ConcurrentDictionary<
+                (string HashAlgorithmId, BCryptOpenAlgorithmProviderFlags Flags),
+                (SafeBCryptAlgorithmHandle Handle, int HashSizeInBytes)
+            > s_handles = new();
+            private static readonly ConcurrentDictionary<
+                (string HashAlgorithmId, BCryptOpenAlgorithmProviderFlags Flags),
+                bool
+            > s_supported = new();
 
             /// <summary>
             /// Returns a SafeBCryptAlgorithmHandle of the desired algorithm and flags. This is a shared handle so do not dispose it!
             /// </summary>
-            public static unsafe SafeBCryptAlgorithmHandle GetCachedBCryptAlgorithmHandle(string hashAlgorithmId, BCryptOpenAlgorithmProviderFlags flags, out int hashSizeInBytes)
+            public static unsafe SafeBCryptAlgorithmHandle GetCachedBCryptAlgorithmHandle(
+                string hashAlgorithmId,
+                BCryptOpenAlgorithmProviderFlags flags,
+                out int hashSizeInBytes
+            )
             {
                 var key = (hashAlgorithmId, flags);
 
                 while (true)
                 {
-                    if (s_handles.TryGetValue(key, out (SafeBCryptAlgorithmHandle Handle, int HashSizeInBytes) result))
+                    if (
+                        s_handles.TryGetValue(
+                            key,
+                            out (SafeBCryptAlgorithmHandle Handle, int HashSizeInBytes) result
+                        )
+                    )
                     {
                         hashSizeInBytes = result.HashSizeInBytes;
                         return result.Handle;
@@ -32,9 +47,13 @@ internal static partial class Interop
                     SafeBCryptAlgorithmHandle handle = BCryptOpenAlgorithmProvider(
                         key.hashAlgorithmId,
                         null,
-                        key.flags);
+                        key.flags
+                    );
 
-                    int hashSize = BCryptGetDWordProperty(handle, BCryptPropertyStrings.BCRYPT_HASH_LENGTH);
+                    int hashSize = BCryptGetDWordProperty(
+                        handle,
+                        BCryptPropertyStrings.BCRYPT_HASH_LENGTH
+                    );
                     Debug.Assert(hashSize > 0);
 
                     if (!s_handles.TryAdd(key, (handle, hashSize)))
@@ -44,7 +63,10 @@ internal static partial class Interop
                 }
             }
 
-            public static unsafe bool IsBCryptAlgorithmSupported(string hashAlgorithmId, BCryptOpenAlgorithmProviderFlags flags)
+            public static unsafe bool IsBCryptAlgorithmSupported(
+                string hashAlgorithmId,
+                BCryptOpenAlgorithmProviderFlags flags
+            )
             {
                 var key = (hashAlgorithmId, flags);
 
@@ -57,7 +79,8 @@ internal static partial class Interop
                     out SafeBCryptAlgorithmHandle handle,
                     key.hashAlgorithmId,
                     null,
-                    key.flags);
+                    key.flags
+                );
 
                 bool isSupported = status == NTSTATUS.STATUS_SUCCESS;
 
@@ -65,7 +88,10 @@ internal static partial class Interop
                 {
                     // It's a valid algorithm. Let's prime the handle cache while we are here. Presumably it's
                     // going to get used if we're asking if it's supported.
-                    int hashSize = BCryptGetDWordProperty(handle, BCryptPropertyStrings.BCRYPT_HASH_LENGTH);
+                    int hashSize = BCryptGetDWordProperty(
+                        handle,
+                        BCryptPropertyStrings.BCRYPT_HASH_LENGTH
+                    );
                     Debug.Assert(hashSize > 0);
 
                     if (s_handles.TryAdd(key, (handle, hashSize)))

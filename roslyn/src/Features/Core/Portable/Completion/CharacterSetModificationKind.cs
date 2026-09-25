@@ -22,6 +22,6 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// The rule replaces the existing set of characters.
         /// </summary>
-        Replace
+        Replace,
     }
 }

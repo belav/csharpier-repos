@@ -13,16 +13,19 @@ namespace System.Buffers
         /// The entire input buffer has been processed and the operation is complete.
         /// </summary>
         Done,
+
         /// <summary>
         /// The input is partially processed, up to what could fit into the destination buffer.
         /// The caller can enlarge the destination buffer, slice the buffers appropriately, and retry.
         /// </summary>
         DestinationTooSmall,
+
         /// <summary>
         /// The input is partially processed, up to the last valid chunk of the input that could be consumed.
         /// The caller can stitch the remaining unprocessed input with more data, slice the buffers appropriately, and retry.
         /// </summary>
         NeedMoreData,
+
         /// <summary>
         /// The input contained invalid bytes which could not be processed. If the input is partially processed,
         /// the destination contains the partial result. This guarantees that no additional data appended to the input

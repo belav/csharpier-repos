@@ -18,10 +18,18 @@ namespace System.Net.Mail.Tests
         private const string AuthGssapiOnly = "AUTH GSSAPI";
         private string[] _extensions;
 
-        private static readonly ISmtpAuthenticationModule s_loginModule = new SmtpLoginAuthenticationModule();
-        private static readonly ISmtpAuthenticationModule s_gssapiModule = new SmtpNegotiateAuthenticationModule();
-        private static readonly ISmtpAuthenticationModule s_ntlmModule = new SmtpNtlmAuthenticationModule();
-        private static readonly ISmtpAuthenticationModule[] s_authenticationModules = { s_loginModule, s_gssapiModule, s_ntlmModule };
+        private static readonly ISmtpAuthenticationModule s_loginModule =
+            new SmtpLoginAuthenticationModule();
+        private static readonly ISmtpAuthenticationModule s_gssapiModule =
+            new SmtpNegotiateAuthenticationModule();
+        private static readonly ISmtpAuthenticationModule s_ntlmModule =
+            new SmtpNtlmAuthenticationModule();
+        private static readonly ISmtpAuthenticationModule[] s_authenticationModules =
+        {
+            s_loginModule,
+            s_gssapiModule,
+            s_ntlmModule,
+        };
 
         public EhloParseExtensionsTest()
         {
@@ -67,7 +75,13 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void ParseExtensions_WithBothAuthAndAuthEqualsLogin_ShouldTakeSettingsFromAuth()
         {
-            _extensions = new string[] { AuthAllTypes, AuthEqualsLogin, AuthEqualsGssapi, AuthEqualsNtlm };
+            _extensions = new string[]
+            {
+                AuthAllTypes,
+                AuthEqualsLogin,
+                AuthEqualsGssapi,
+                AuthEqualsNtlm,
+            };
             _smtpConnection.ParseExtensions(_extensions);
 
             Assert.False(_smtpConnection.DSNEnabled);
@@ -81,7 +95,13 @@ namespace System.Net.Mail.Tests
         {
             // reverse the order that the strings occur in from the other test since we don't
             // know for sure which string will come first, although typically it's AUTH followed by AUTH=
-            _extensions = new string[] { AuthEqualsLogin, AuthEqualsNtlm, AuthEqualsGssapi, AuthAllTypes };
+            _extensions = new string[]
+            {
+                AuthEqualsLogin,
+                AuthEqualsNtlm,
+                AuthEqualsGssapi,
+                AuthAllTypes,
+            };
             _smtpConnection.ParseExtensions(_extensions);
 
             Assert.False(_smtpConnection.DSNEnabled);
@@ -94,7 +114,16 @@ namespace System.Net.Mail.Tests
         public void ParseExtensions_WithBothAuthTypes_AndExtraExtensions_AuthTypesShouldBeCorrect()
         {
             // add extra valid EHLO responses as noise- it should ignore them
-            _extensions = new string[] { AuthEqualsLogin, AuthEqualsGssapi, AuthEqualsNtlm, AuthAllTypes, "8BITMIME", "EXPN", "HELP" };
+            _extensions = new string[]
+            {
+                AuthEqualsLogin,
+                AuthEqualsGssapi,
+                AuthEqualsNtlm,
+                AuthAllTypes,
+                "8BITMIME",
+                "EXPN",
+                "HELP",
+            };
             _smtpConnection.ParseExtensions(_extensions);
 
             Assert.False(_smtpConnection.DSNEnabled);
@@ -122,8 +151,18 @@ namespace System.Net.Mail.Tests
         public void ParseExtensions_WithRandomGarbage_ShouldNotFail_AndShouldNotSupportAnyAuthTypes()
         {
             _extensions = new string[]
-            {"stuff", "cr", "", "asdfasoihd", "14239347", "AUTH=1234 4567",
-                "AUTH 3248 garbage", "AUTH  ", "AUTH= ", " ", };
+            {
+                "stuff",
+                "cr",
+                "",
+                "asdfasoihd",
+                "14239347",
+                "AUTH=1234 4567",
+                "AUTH 3248 garbage",
+                "AUTH  ",
+                "AUTH= ",
+                " ",
+            };
 
             _smtpConnection.ParseExtensions(_extensions);
 

@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-using  System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 namespace System.Security
 {
@@ -12,39 +12,41 @@ namespace System.Security
     //  Indicates that calling the target method requires space for a security
     //  object to be allocated on the callers stack. This attribute is only ever
     //  set on certain security methods defined within mscorlib.
-    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false )] 
-    sealed internal class DynamicSecurityMethodAttribute : System.Attribute
-    {
-    }
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
+    internal sealed class DynamicSecurityMethodAttribute : System.Attribute { }
 
     // SuppressUnmanagedCodeSecurityAttribute:
     //  Indicates that the target P/Invoke method(s) should skip the per-call
     //  security checked for unmanaged code permission.
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Delegate, AllowMultiple = true, Inherited = false )] 
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Class
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class SuppressUnmanagedCodeSecurityAttribute : System.Attribute
-    {
-    }
+    public sealed class SuppressUnmanagedCodeSecurityAttribute : System.Attribute { }
 
     // UnverifiableCodeAttribute:
     //  Indicates that the target module contains unverifiable code.
-    [AttributeUsage(AttributeTargets.Module, AllowMultiple = true, Inherited = false )] 
-[System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class UnverifiableCodeAttribute : System.Attribute
-    {
-    }
+    [AttributeUsage(AttributeTargets.Module, AllowMultiple = true, Inherited = false)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class UnverifiableCodeAttribute : System.Attribute { }
 
     // AllowPartiallyTrustedCallersAttribute:
     //  Indicates that the Assembly is secure and can be used by untrusted
     //  and semitrusted clients
-    //  For v.1, this is valid only on Assemblies, but could be expanded to 
+    //  For v.1, this is valid only on Assemblies, but could be expanded to
     //  include Module, Method, class
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false )] 
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
     [System.Runtime.InteropServices.ComVisible(true)]
-    sealed public class AllowPartiallyTrustedCallersAttribute : System.Attribute
+    public sealed class AllowPartiallyTrustedCallersAttribute : System.Attribute
     {
         private PartialTrustVisibilityLevel _visibilityLevel;
-        public AllowPartiallyTrustedCallersAttribute () { }
+
+        public AllowPartiallyTrustedCallersAttribute() { }
 
         public PartialTrustVisibilityLevel PartialTrustVisibilityLevel
         {
@@ -56,7 +58,7 @@ namespace System.Security
     public enum PartialTrustVisibilityLevel
     {
         VisibleToAllHosts = 0,
-        NotVisibleByDefault = 1
+        NotVisibleByDefault = 1,
     }
 
 #if !FEATURE_CORECLR
@@ -64,32 +66,35 @@ namespace System.Security
     public enum SecurityCriticalScope
     {
         Explicit = 0,
-        Everything = 0x1
+        Everything = 0x1,
     }
 #endif // FEATURE_CORECLR
 
     // SecurityCriticalAttribute
     //  Indicates that the decorated code or assembly performs security critical operations (e.g. Assert, "unsafe", LinkDemand, etc.)
     //  The attribute can be placed on most targets, except on arguments/return values.
-    [AttributeUsage(AttributeTargets.Assembly | 
-                    AttributeTargets.Class |
-                    AttributeTargets.Struct |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Method |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface  |
-                    AttributeTargets.Delegate,
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate,
         AllowMultiple = false,
-        Inherited = false )]
-    sealed public class SecurityCriticalAttribute     : System.Attribute
+        Inherited = false
+    )]
+    public sealed class SecurityCriticalAttribute : System.Attribute
     {
 #pragma warning disable 618    // We still use SecurityCriticalScope for v2 compat
 
 #if !FEATURE_CORECLR
-         private SecurityCriticalScope  _val;
+        private SecurityCriticalScope _val;
 #endif // FEATURE_CORECLR
-        public SecurityCriticalAttribute () {}
+
+        public SecurityCriticalAttribute() { }
 
 #if !FEATURE_CORECLR
         public SecurityCriticalAttribute(SecurityCriticalScope scope)
@@ -98,10 +103,9 @@ namespace System.Security
         }
 
         [Obsolete("SecurityCriticalScope is only used for .NET 2.0 transparency compatibility.")]
-        public SecurityCriticalScope Scope {
-            get {
-                return _val;
-            }
+        public SecurityCriticalScope Scope
+        {
+            get { return _val; }
         }
 #endif // FEATURE_CORECLR
 
@@ -116,24 +120,28 @@ namespace System.Security
     // At type-scope, all rule checks will be suppressed for members within the type and for calls made against the type.
     // At member level (e.g. field and method) the code will be treated as public - i.e. no rule checks for the members.
 
-    [AttributeUsage(AttributeTargets.Assembly |
-                    AttributeTargets.Class |
-                    AttributeTargets.Struct |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Method |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Delegate,
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate,
         AllowMultiple = false,
-        Inherited = false )]
-    [Obsolete("SecurityTreatAsSafe is only used for .NET 2.0 transparency compatibility.  Please use the SecuritySafeCriticalAttribute instead.")]
-    sealed public class SecurityTreatAsSafeAttribute : System.Attribute
+        Inherited = false
+    )]
+    [Obsolete(
+        "SecurityTreatAsSafe is only used for .NET 2.0 transparency compatibility.  Please use the SecuritySafeCriticalAttribute instead."
+    )]
+    public sealed class SecurityTreatAsSafeAttribute : System.Attribute
     {
-        public SecurityTreatAsSafeAttribute () { }
+        public SecurityTreatAsSafeAttribute() { }
     }
 
-    // SecuritySafeCriticalAttribute: 
+    // SecuritySafeCriticalAttribute:
     // Indicates that the code may contain violations to the security critical rules (e.g. transitions from
     //      critical to non-public transparent, transparent to non-public critical, etc.), has been audited for
     //      security concerns and is considered security clean. Also indicates that the code is considered SecurityCritical.
@@ -142,19 +150,21 @@ namespace System.Security
     // At type-scope, all rule checks will be suppressed for members within the type and for calls made against the type.
     // At member level (e.g. field and method) the code will be treated as public - i.e. no rule checks for the members.
 
-    [AttributeUsage(AttributeTargets.Class |
-                    AttributeTargets.Struct |
-                    AttributeTargets.Enum |
-                    AttributeTargets.Constructor |
-                    AttributeTargets.Method |
-                    AttributeTargets.Field |
-                    AttributeTargets.Interface |
-                    AttributeTargets.Delegate,
+    [AttributeUsage(
+        AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Enum
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Field
+            | AttributeTargets.Interface
+            | AttributeTargets.Delegate,
         AllowMultiple = false,
-        Inherited = false )]
-    sealed public class SecuritySafeCriticalAttribute : System.Attribute
+        Inherited = false
+    )]
+    public sealed class SecuritySafeCriticalAttribute : System.Attribute
     {
-        public SecuritySafeCriticalAttribute () { }
+        public SecuritySafeCriticalAttribute() { }
     }
 
     // SecurityTransparentAttribute:
@@ -163,18 +173,18 @@ namespace System.Security
     // Assert will be restricted, SuppressUnmanagedCode, LinkDemand, unsafe, and unverifiable code will be converted
     // into Full-Demands.
 
-    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false )] 
-    sealed public class SecurityTransparentAttribute : System.Attribute
+    [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
+    public sealed class SecurityTransparentAttribute : System.Attribute
     {
-        public SecurityTransparentAttribute () {}
+        public SecurityTransparentAttribute() { }
     }
 
 #if !FEATURE_CORECLR
     public enum SecurityRuleSet : byte
     {
-        None    = 0,
-        Level1  = 1,    // v2.0 transparency model
-        Level2  = 2,    // v4.0 transparency model
+        None = 0,
+        Level1 = 1, // v2.0 transparency model
+        Level2 = 2, // v4.0 transparency model
     }
 
     // SecurityRulesAttribute

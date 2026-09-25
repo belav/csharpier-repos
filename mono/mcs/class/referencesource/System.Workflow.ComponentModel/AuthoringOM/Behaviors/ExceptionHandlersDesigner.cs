@@ -1,15 +1,14 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Drawing.Drawing2D;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
     using System.Workflow.ComponentModel.Design;
-
 
     #region Class FaultHandlersDesigner
     [ActivityDesignerTheme(typeof(FaultHandlersActivityDesignerTheme))]
@@ -23,6 +22,7 @@ namespace System.Workflow.ComponentModel.Design
             HelpText = DR.GetString(DR.DropExceptionsHere);
             ShowPreview = false;
         }
+
         public override ReadOnlyCollection<DesignerView> Views
         {
             get
@@ -31,10 +31,7 @@ namespace System.Workflow.ComponentModel.Design
                 foreach (DesignerView view in base.Views)
                 {
                     // disable the fault handlers, cancellation handler and compensation handler
-                    if ((view.ViewId != 2) &&
-                            (view.ViewId != 3) &&
-                            (view.ViewId != 4)
-                        )
+                    if ((view.ViewId != 2) && (view.ViewId != 3) && (view.ViewId != 4))
                         views.Add(view);
                 }
                 return new ReadOnlyCollection<DesignerView>(views);
@@ -46,13 +43,13 @@ namespace System.Workflow.ComponentModel.Design
         #region Properties and Methods
         public override bool CanExpandCollapse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        public override bool CanInsertActivities(HitTestInfo insertLocation, ReadOnlyCollection<Activity> activitiesToInsert)
+        public override bool CanInsertActivities(
+            HitTestInfo insertLocation,
+            ReadOnlyCollection<Activity> activitiesToInsert
+        )
         {
             foreach (Activity activity in activitiesToInsert)
             {
@@ -72,7 +69,11 @@ namespace System.Workflow.ComponentModel.Design
                     if (PreviewedDesigner != null || ContainedDesigners.Count > 0)
                         return base.FirstSelectableObject;
                     else if (ContainedDesigners.Count == 0)
-                        return new ConnectorHitTestInfo(this, HitTestLocations.Designer, 0).SelectableObject;
+                        return new ConnectorHitTestInfo(
+                            this,
+                            HitTestLocations.Designer,
+                            0
+                        ).SelectableObject;
                 }
 
                 return null;
@@ -88,7 +89,11 @@ namespace System.Workflow.ComponentModel.Design
                     if (PreviewedDesigner != null || ContainedDesigners.Count > 0)
                         return base.LastSelectableObject;
                     else if (ContainedDesigners.Count == 0)
-                        return new ConnectorHitTestInfo(this, HitTestLocations.Designer, GetConnectors().GetLength(0) - 1).SelectableObject;
+                        return new ConnectorHitTestInfo(
+                            this,
+                            HitTestLocations.Designer,
+                            GetConnectors().GetLength(0) - 1
+                        ).SelectableObject;
                 }
 
                 return null;

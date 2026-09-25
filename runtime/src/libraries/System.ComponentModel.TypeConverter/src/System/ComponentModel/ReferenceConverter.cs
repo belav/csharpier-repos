@@ -43,7 +43,11 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given object to the reference type.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string text)
             {
@@ -81,7 +85,12 @@ namespace System.ComponentModel
         /// <summary>
         /// Converts the given value object to the reference type using the specified context and arguments.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {
@@ -153,7 +162,12 @@ namespace System.ComponentModel
                         ComponentCollection objs = cont.Components;
                         foreach (IComponent obj in objs)
                         {
-                            if (obj != null && _type != null && _type.IsInstanceOfType(obj) && IsValueAllowed(context, obj))
+                            if (
+                                obj != null
+                                && _type != null
+                                && _type.IsInstanceOfType(obj)
+                                && IsValueAllowed(context, obj)
+                            )
                             {
                                 components.Add(obj);
                             }

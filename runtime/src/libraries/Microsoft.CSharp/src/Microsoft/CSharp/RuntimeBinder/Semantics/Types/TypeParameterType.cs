@@ -59,9 +59,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         {
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
             get =>
-                (IsMethodTypeParameter
-                    ? ((MethodInfo)((MethodSymbol)OwningSymbol).AssociatedMemberInfo).GetGenericArguments()
-                    : ((AggregateSymbol)OwningSymbol).AssociatedSystemType.GetGenericArguments()
+                (
+                    IsMethodTypeParameter
+                        ? (
+                            (MethodInfo)((MethodSymbol)OwningSymbol).AssociatedMemberInfo
+                        ).GetGenericArguments()
+                        : ((AggregateSymbol)OwningSymbol).AssociatedSystemType.GetGenericArguments()
                 )[IndexInOwnParameters];
         }
 

@@ -11,14 +11,10 @@ namespace System.Activities.XamlIntegration
     public sealed class InArgumentConverter : TypeConverterBase
     {
         public InArgumentConverter()
-            : base(typeof(InArgument<>), typeof(InArgumentConverterHelper<>))
-        {
-        }
+            : base(typeof(InArgument<>), typeof(InArgumentConverterHelper<>)) { }
 
         public InArgumentConverter(Type type)
-            : base(type, typeof(InArgument<>), typeof(InArgumentConverterHelper<>))
-        {
-        }
+            : base(type, typeof(InArgument<>), typeof(InArgumentConverterHelper<>)) { }
 
         internal sealed class InArgumentConverterHelper<T> : TypeConverterHelper<InArgument<T>>
         {
@@ -26,15 +22,19 @@ namespace System.Activities.XamlIntegration
 
             public InArgumentConverterHelper()
             {
-                this.valueExpressionHelper = new ActivityWithResultConverter.ExpressionConverterHelper<T>(false);
+                this.valueExpressionHelper =
+                    new ActivityWithResultConverter.ExpressionConverterHelper<T>(false);
             }
 
-            public override InArgument<T> ConvertFromString(string text, ITypeDescriptorContext context)
+            public override InArgument<T> ConvertFromString(
+                string text,
+                ITypeDescriptorContext context
+            )
             {
                 return new InArgument<T>
-                    {
-                        Expression = this.valueExpressionHelper.ConvertFromString(text, context)
-                    };
+                {
+                    Expression = this.valueExpressionHelper.ConvertFromString(text, context),
+                };
             }
         }
     }

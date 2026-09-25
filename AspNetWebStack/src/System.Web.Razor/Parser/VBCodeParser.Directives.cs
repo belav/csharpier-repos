@@ -20,14 +20,24 @@ namespace System.Web.Razor.Parser
     {
         private void SetUpDirectives()
         {
-            MapDirective(SyntaxConstants.VB.CodeKeyword, EndTerminatedDirective(SyntaxConstants.VB.CodeKeyword,
-                                                                                BlockType.Statement,
-                                                                                new StatementCodeGenerator(),
-                                                                                allowMarkup: true));
-            MapDirective(SyntaxConstants.VB.FunctionsKeyword, EndTerminatedDirective(SyntaxConstants.VB.FunctionsKeyword,
-                                                                                     BlockType.Functions,
-                                                                                     new TypeMemberCodeGenerator(),
-                                                                                     allowMarkup: false));
+            MapDirective(
+                SyntaxConstants.VB.CodeKeyword,
+                EndTerminatedDirective(
+                    SyntaxConstants.VB.CodeKeyword,
+                    BlockType.Statement,
+                    new StatementCodeGenerator(),
+                    allowMarkup: true
+                )
+            );
+            MapDirective(
+                SyntaxConstants.VB.FunctionsKeyword,
+                EndTerminatedDirective(
+                    SyntaxConstants.VB.FunctionsKeyword,
+                    BlockType.Functions,
+                    new TypeMemberCodeGenerator(),
+                    allowMarkup: false
+                )
+            );
             MapDirective(SyntaxConstants.VB.SectionKeyword, SectionDirective);
             MapDirective(SyntaxConstants.VB.HelperKeyword, HelperDirective);
 
@@ -44,7 +54,10 @@ namespace System.Web.Razor.Parser
             // Accept spaces, but not newlines
             bool foundSomeWhitespace = At(VBSymbolType.WhiteSpace);
             AcceptWhile(VBSymbolType.WhiteSpace);
-            Output(SpanKind.MetaCode, foundSomeWhitespace ? AcceptedCharacters.None : AcceptedCharacters.Any);
+            Output(
+                SpanKind.MetaCode,
+                foundSomeWhitespace ? AcceptedCharacters.None : AcceptedCharacters.Any
+            );
 
             // First non-whitespace character starts the Layout Page, then newline ends it
             AcceptUntil(VBSymbolType.NewLine);
@@ -52,7 +65,10 @@ namespace System.Web.Razor.Parser
             Span.EditHandler.EditorHints = EditorHints.LayoutPage | EditorHints.VirtualPath;
             bool foundNewline = Optional(VBSymbolType.NewLine);
             AddMarkerSymbolIfNecessary();
-            Output(SpanKind.MetaCode, foundNewline ? AcceptedCharacters.None : AcceptedCharacters.Any);
+            Output(
+                SpanKind.MetaCode,
+                foundNewline ? AcceptedCharacters.None : AcceptedCharacters.Any
+            );
             return true;
         }
 
@@ -65,15 +81,24 @@ namespace System.Web.Razor.Parser
             // Accept spaces, but not newlines
             bool foundSomeWhitespace = At(VBSymbolType.WhiteSpace);
             AcceptWhile(VBSymbolType.WhiteSpace);
-            Output(SpanKind.MetaCode, foundSomeWhitespace ? AcceptedCharacters.None : AcceptedCharacters.Any);
+            Output(
+                SpanKind.MetaCode,
+                foundSomeWhitespace ? AcceptedCharacters.None : AcceptedCharacters.Any
+            );
 
             // First non-whitespace character starts the session state directive, then newline ends it
             AcceptUntil(VBSymbolType.NewLine);
             var value = String.Concat(Span.Symbols.Select(sym => sym.Content));
-            Span.CodeGenerator = new RazorDirectiveAttributeCodeGenerator(SyntaxConstants.VB.SessionStateKeyword, value);
+            Span.CodeGenerator = new RazorDirectiveAttributeCodeGenerator(
+                SyntaxConstants.VB.SessionStateKeyword,
+                value
+            );
             bool foundNewline = Optional(VBSymbolType.NewLine);
             AddMarkerSymbolIfNecessary();
-            Output(SpanKind.MetaCode, foundNewline ? AcceptedCharacters.None : AcceptedCharacters.Any);
+            Output(
+                SpanKind.MetaCode,
+                foundNewline ? AcceptedCharacters.None : AcceptedCharacters.Any
+            );
             return true;
         }
 
@@ -81,7 +106,10 @@ namespace System.Web.Razor.Parser
         {
             if (Context.IsWithin(BlockType.Helper))
             {
-                Context.OnError(CurrentLocation, RazorResources.ParseError_Helpers_Cannot_Be_Nested);
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_Helpers_Cannot_Be_Nested
+                );
             }
 
             Context.CurrentBlock.Type = BlockType.Helper;
@@ -106,7 +134,10 @@ namespace System.Web.Razor.Parser
             {
                 remainingWs = AcceptSingleWhiteSpaceCharacter();
             }
-            if (firstAfterKeyword == VBSymbolType.WhiteSpace || firstAfterKeyword == VBSymbolType.NewLine)
+            if (
+                firstAfterKeyword == VBSymbolType.WhiteSpace
+                || firstAfterKeyword == VBSymbolType.NewLine
+            )
             {
                 Span.EditHandler.AcceptedCharacters = AcceptedCharacters.None;
             }
@@ -124,13 +155,18 @@ namespace System.Web.Razor.Parser
                 }
                 else
                 {
-                    error = String.Format(CultureInfo.CurrentCulture, RazorResources.ErrorComponent_Character, CurrentSymbol.Content);
+                    error = String.Format(
+                        CultureInfo.CurrentCulture,
+                        RazorResources.ErrorComponent_Character,
+                        CurrentSymbol.Content
+                    );
                 }
 
                 Context.OnError(
                     CurrentLocation,
                     RazorResources.ParseError_Unexpected_Character_At_Helper_Name_Start,
-                    error);
+                    error
+                );
 
                 // Bail out.
                 PutCurrentBack();
@@ -143,7 +179,10 @@ namespace System.Web.Razor.Parser
                 Accept(remainingWs);
             }
 
-            bool errorReported = !Required(VBSymbolType.Identifier, RazorResources.ParseError_Unexpected_Character_At_Helper_Name_Start);
+            bool errorReported = !Required(
+                VBSymbolType.Identifier,
+                RazorResources.ParseError_Unexpected_Character_At_Helper_Name_Start
+            );
 
             AcceptWhile(VBSymbolType.WhiteSpace);
 
@@ -154,14 +193,26 @@ namespace System.Web.Razor.Parser
                 if (!errorReported)
                 {
                     errorReported = true;
-                    Context.OnError(CurrentLocation,
-                                    RazorResources.ParseError_MissingCharAfterHelperName,
-                                    VBSymbol.GetSample(VBSymbolType.LeftParenthesis));
+                    Context.OnError(
+                        CurrentLocation,
+                        RazorResources.ParseError_MissingCharAfterHelperName,
+                        VBSymbol.GetSample(VBSymbolType.LeftParenthesis)
+                    );
                 }
             }
-            else if (!Balance(BalancingModes.NoErrorOnFailure, VBSymbolType.LeftParenthesis, VBSymbolType.RightParenthesis, parensStart))
+            else if (
+                !Balance(
+                    BalancingModes.NoErrorOnFailure,
+                    VBSymbolType.LeftParenthesis,
+                    VBSymbolType.RightParenthesis,
+                    parensStart
+                )
+            )
             {
-                Context.OnError(parensStart, RazorResources.ParseError_UnterminatedHelperParameterList);
+                Context.OnError(
+                    parensStart,
+                    RazorResources.ParseError_UnterminatedHelperParameterList
+                );
             }
             else
             {
@@ -172,8 +223,11 @@ namespace System.Web.Razor.Parser
             AddMarkerSymbolIfNecessary();
             Context.CurrentBlock.CodeGenerator = new HelperCodeGenerator(
                 Span.GetContent(),
-                headerComplete);
-            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(Language.TokenizeString);
+                headerComplete
+            );
+            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(
+                Language.TokenizeString
+            );
             Span.EditHandler = editHandler;
             Output(SpanKind.Code);
 
@@ -183,18 +237,30 @@ namespace System.Web.Razor.Parser
                 IsNested = true;
                 using (Context.StartBlock(BlockType.Statement))
                 {
-                    using (PushSpanConfig(StatementBlockSpanConfiguration(new StatementCodeGenerator())))
+                    using (
+                        PushSpanConfig(
+                            StatementBlockSpanConfiguration(new StatementCodeGenerator())
+                        )
+                    )
                     {
                         try
                         {
-                            if (!EndTerminatedDirectiveBody(SyntaxConstants.VB.HelperKeyword, blockStart, allowAllTransitions: true))
+                            if (
+                                !EndTerminatedDirectiveBody(
+                                    SyntaxConstants.VB.HelperKeyword,
+                                    blockStart,
+                                    allowAllTransitions: true
+                                )
+                            )
                             {
                                 if (Context.LastAcceptedCharacters != AcceptedCharacters.Any)
                                 {
                                     AddMarkerSymbolIfNecessary();
                                 }
 
-                                editHandler.AutoCompleteString = SyntaxConstants.VB.EndHelperKeyword;
+                                editHandler.AutoCompleteString = SyntaxConstants
+                                    .VB
+                                    .EndHelperKeyword;
                                 return false;
                             }
                             else
@@ -226,7 +292,11 @@ namespace System.Web.Razor.Parser
 
             if (Context.IsWithin(BlockType.Section))
             {
-                Context.OnError(CurrentLocation, RazorResources.ParseError_Sections_Cannot_Be_Nested, RazorResources.SectionExample_VB);
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_Sections_Cannot_Be_Nested,
+                    RazorResources.SectionExample_VB
+                );
             }
 
             if (At(VBSymbolType.NewLine))
@@ -240,9 +310,11 @@ namespace System.Web.Razor.Parser
             string sectionName = null;
             if (!At(VBSymbolType.Identifier))
             {
-                Context.OnError(CurrentLocation,
-                                RazorResources.ParseError_Unexpected_Character_At_Section_Name_Start,
-                                GetCurrentSymbolDisplay());
+                Context.OnError(
+                    CurrentLocation,
+                    RazorResources.ParseError_Unexpected_Character_At_Section_Name_Start,
+                    GetCurrentSymbolDisplay()
+                );
             }
             else
             {
@@ -250,9 +322,13 @@ namespace System.Web.Razor.Parser
                 AcceptAndMoveNext();
             }
             Context.CurrentBlock.Type = BlockType.Section;
-            Context.CurrentBlock.CodeGenerator = new SectionCodeGenerator(sectionName ?? String.Empty);
+            Context.CurrentBlock.CodeGenerator = new SectionCodeGenerator(
+                sectionName ?? String.Empty
+            );
 
-            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(Language.TokenizeString);
+            AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(
+                Language.TokenizeString
+            );
             Span.EditHandler = editHandler;
 
             PutCurrentBack();
@@ -266,10 +342,12 @@ namespace System.Web.Razor.Parser
             bool complete = false;
             if (!At(VBKeyword.End))
             {
-                Context.OnError(start,
-                                RazorResources.ParseError_BlockNotTerminated,
-                                SyntaxConstants.VB.SectionKeyword,
-                                SyntaxConstants.VB.EndSectionKeyword);
+                Context.OnError(
+                    start,
+                    RazorResources.ParseError_BlockNotTerminated,
+                    SyntaxConstants.VB.SectionKeyword,
+                    SyntaxConstants.VB.EndSectionKeyword
+                );
                 editHandler.AutoCompleteString = SyntaxConstants.VB.EndSectionKeyword;
             }
             else
@@ -278,10 +356,12 @@ namespace System.Web.Razor.Parser
                 AcceptWhile(VBSymbolType.WhiteSpace);
                 if (!At(SyntaxConstants.VB.SectionKeyword))
                 {
-                    Context.OnError(start,
-                                    RazorResources.ParseError_BlockNotTerminated,
-                                    SyntaxConstants.VB.SectionKeyword,
-                                    SyntaxConstants.VB.EndSectionKeyword);
+                    Context.OnError(
+                        start,
+                        RazorResources.ParseError_BlockNotTerminated,
+                        SyntaxConstants.VB.SectionKeyword,
+                        SyntaxConstants.VB.EndSectionKeyword
+                    );
                 }
                 else
                 {
@@ -295,7 +375,12 @@ namespace System.Web.Razor.Parser
             return complete;
         }
 
-        protected virtual Func<bool> EndTerminatedDirective(string directive, BlockType blockType, SpanCodeGenerator codeGenerator, bool allowMarkup)
+        protected virtual Func<bool> EndTerminatedDirective(
+            string directive,
+            BlockType blockType,
+            SpanCodeGenerator codeGenerator,
+            bool allowMarkup
+        )
         {
             return () =>
             {
@@ -310,12 +395,18 @@ namespace System.Web.Razor.Parser
 
                 using (PushSpanConfig(StatementBlockSpanConfiguration(codeGenerator)))
                 {
-                    AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(Language.TokenizeString);
+                    AutoCompleteEditHandler editHandler = new AutoCompleteEditHandler(
+                        Language.TokenizeString
+                    );
                     Span.EditHandler = editHandler;
 
                     if (!EndTerminatedDirectiveBody(directive, blockStart, allowMarkup))
                     {
-                        editHandler.AutoCompleteString = String.Concat(SyntaxConstants.VB.EndKeyword, " ", directive);
+                        editHandler.AutoCompleteString = String.Concat(
+                            SyntaxConstants.VB.EndKeyword,
+                            " ",
+                            directive
+                        );
                         return false;
                     }
                     return true;
@@ -323,12 +414,21 @@ namespace System.Web.Razor.Parser
             };
         }
 
-        protected virtual bool EndTerminatedDirectiveBody(string directive, SourceLocation blockStart, bool allowAllTransitions)
+        protected virtual bool EndTerminatedDirectiveBody(
+            string directive,
+            SourceLocation blockStart,
+            bool allowAllTransitions
+        )
         {
             while (!EndOfFile)
             {
                 VBSymbol lastWhitespace = AcceptWhiteSpaceInLines();
-                if (IsAtEmbeddedTransition(allowTemplatesAndComments: allowAllTransitions, allowTransitions: allowAllTransitions))
+                if (
+                    IsAtEmbeddedTransition(
+                        allowTemplatesAndComments: allowAllTransitions,
+                        allowTransitions: allowAllTransitions
+                    )
+                )
                 {
                     HandleEmbeddedTransition(lastWhitespace);
                 }
@@ -371,21 +471,37 @@ namespace System.Web.Razor.Parser
             }
 
             // This is a language keyword, so it does not need to be localized
-            Context.OnError(blockStart, RazorResources.ParseError_BlockNotTerminated, directive, String.Concat(SyntaxConstants.VB.EndKeyword, " ", directive));
+            Context.OnError(
+                blockStart,
+                RazorResources.ParseError_BlockNotTerminated,
+                directive,
+                String.Concat(SyntaxConstants.VB.EndKeyword, " ", directive)
+            );
             return false;
         }
 
         protected bool At(string directive)
         {
-            return At(VBSymbolType.Identifier) && String.Equals(CurrentSymbol.Content, directive, StringComparison.OrdinalIgnoreCase);
+            return At(VBSymbolType.Identifier)
+                && String.Equals(
+                    CurrentSymbol.Content,
+                    directive,
+                    StringComparison.OrdinalIgnoreCase
+                );
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Justification = "'this' is used in DEBUG builds")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1822:MarkMembersAsStatic",
+            Justification = "'this' is used in DEBUG builds"
+        )]
         [Conditional("DEBUG")]
         protected void AssertDirective(string directive)
         {
             Assert(VBSymbolType.Identifier);
-            Debug.Assert(String.Equals(directive, CurrentSymbol.Content, StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                String.Equals(directive, CurrentSymbol.Content, StringComparison.OrdinalIgnoreCase)
+            );
         }
 
         private string GetCurrentSymbolDisplay()
@@ -404,7 +520,11 @@ namespace System.Web.Razor.Parser
             }
             else
             {
-                return String.Format(CultureInfo.CurrentCulture, RazorResources.ErrorComponent_Character, CurrentSymbol.Content);
+                return String.Format(
+                    CultureInfo.CurrentCulture,
+                    RazorResources.ErrorComponent_Character,
+                    CurrentSymbol.Content
+                );
             }
         }
     }

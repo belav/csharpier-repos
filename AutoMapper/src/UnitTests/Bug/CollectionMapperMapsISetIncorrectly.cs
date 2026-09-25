@@ -22,17 +22,21 @@ public class CollectionMapperMapsIEnumerableToISetIncorrectly
     {
         var config = new MapperConfiguration(cfg =>
             cfg.CreateMap<SourceWithIEnumerable, TargetWithISet>()
-                .ForMember(dest => dest.Stuff, opt => opt.MapFrom(src => src.Stuff.Select(s => s.Value))));
+                .ForMember(
+                    dest => dest.Stuff,
+                    opt => opt.MapFrom(src => src.Stuff.Select(s => s.Value))
+                )
+        );
 
         var source = new SourceWithIEnumerable
         {
             Stuff = new[]
-                        {
-                            new TypeWithStringProperty { Value = "Microphone" }, 
-                            new TypeWithStringProperty { Value = "Check" }, 
-                            new TypeWithStringProperty { Value = "1, 2" }, 
-                            new TypeWithStringProperty { Value = "What is this?" }
-                        }
+            {
+                new TypeWithStringProperty { Value = "Microphone" },
+                new TypeWithStringProperty { Value = "Check" },
+                new TypeWithStringProperty { Value = "1, 2" },
+                new TypeWithStringProperty { Value = "What is this?" },
+            },
         };
 
         var target = config.CreateMapper().Map<SourceWithIEnumerable, TargetWithISet>(source);

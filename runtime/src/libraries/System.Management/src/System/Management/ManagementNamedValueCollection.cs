@@ -34,10 +34,7 @@ namespace System.Management
         /// <para> Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class, which is empty. This is
         ///    the default constructor.</para>
         /// </summary>
-        public ManagementNamedValueCollection()
-        {
-        }
-
+        public ManagementNamedValueCollection() { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementNamedValueCollection'/> class that is serializable
@@ -47,7 +44,11 @@ namespace System.Management
         /// <param name='info'>The <see cref='System.Runtime.Serialization.SerializationInfo'/> to populate with data.</param>
         /// <param name='context'>The destination (see <see cref='System.Runtime.Serialization.StreamingContext'/> ) for this serialization.</param>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
         protected ManagementNamedValueCollection(SerializationInfo info, StreamingContext context)
@@ -185,11 +186,7 @@ namespace System.Management
         /// </value>
         public object this[string name]
         {
-            get
-            {
-                return base.BaseGet(name);
-            }
+            get { return base.BaseGet(name); }
         }
     }
-
 }

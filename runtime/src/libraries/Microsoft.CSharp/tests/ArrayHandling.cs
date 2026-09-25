@@ -10,8 +10,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 {
     public class ArrayHandling
     {
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void SingleRankNonSZArray()
         {
             dynamic d = Array.CreateInstance(typeof(int), new[] { 8 }, new[] { -2 });
@@ -22,7 +28,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void ArrayTypeNames()
         {
             dynamic d;
@@ -31,33 +40,51 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
                 d = Array.CreateInstance(typeof(int), new[] { 8 }, new[] { -2 });
-                ex = Assert.Throws<RuntimeBinderException>(() => { string s = d; });
+                ex = Assert.Throws<RuntimeBinderException>(() =>
+                {
+                    string s = d;
+                });
                 Assert.Contains("int[*]", ex.Message);
             }
 
             d = new int[3];
-            ex = Assert.Throws<RuntimeBinderException>(() => { string s = d; });
+            ex = Assert.Throws<RuntimeBinderException>(() =>
+            {
+                string s = d;
+            });
             Assert.Contains("int[]", ex.Message);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void MultiDimArrayTypeNames()
         {
             dynamic d = new int[3, 2, 1];
-            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() => { string s = d; });
+            RuntimeBinderException ex = Assert.Throws<RuntimeBinderException>(() =>
+            {
+                string s = d;
+            });
             Assert.Contains("int[,,]", ex.Message);
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
                 d = Array.CreateInstance(typeof(int), new[] { 3, 2, 1 }, new[] { -2, 2, -0 });
-                ex = Assert.Throws<RuntimeBinderException>(() => { string s = d; });
+                ex = Assert.Throws<RuntimeBinderException>(() =>
+                {
+                    string s = d;
+                });
                 Assert.Contains("int[,,]", ex.Message);
             }
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void IncorrectNumberOfIndices()
         {
             dynamic d = new int[2, 2, 2];
@@ -95,8 +122,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             d = new[]
             {
-                "A", "\"Hello,", "World!\"", "program", "is", "a", "computer", "program", "that", "outputs", "or",
-                "displays", "\"Hello,", "World!\"", "to", "the", "user."
+                "A",
+                "\"Hello,",
+                "World!\"",
+                "program",
+                "is",
+                "a",
+                "computer",
+                "program",
+                "that",
+                "outputs",
+                "or",
+                "displays",
+                "\"Hello,",
+                "World!\"",
+                "to",
+                "the",
+                "user.",
             };
             Assert.Equal(17, d.Length);
         }
@@ -109,16 +151,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
-                d = Array.CreateInstance(typeof(string), new[] {5, 6, 8}, new[] {-2, 4, 3});
+                d = Array.CreateInstance(typeof(string), new[] { 5, 6, 8 }, new[] { -2, 4, 3 });
                 Assert.Equal(5 * 6 * 8, d.Length);
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/26798", TargetFrameworkMonikers.NetFramework)]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/26798",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void NonSZ1RArrayLength()
         {
-            dynamic d = Array.CreateInstance(typeof(int), new[] {23}, new[] {-2});
+            dynamic d = Array.CreateInstance(typeof(int), new[] { 23 }, new[] { -2 });
             Assert.Equal(23, d.Length);
         }
     }

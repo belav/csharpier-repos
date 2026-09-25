@@ -20,7 +20,13 @@ namespace Microsoft.Extensions.Logging
         /// <param name="exception">The exception related to this entry.</param>
         /// <param name="formatter">Function to create a <see cref="string"/> message of the <paramref name="state"/> and <paramref name="exception"/>.</param>
         /// <typeparam name="TState">The type of the object to be written.</typeparam>
-        void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter);
+        void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        );
 
         /// <summary>
         /// Checks if the given <paramref name="logLevel"/> is enabled.
@@ -35,6 +41,7 @@ namespace Microsoft.Extensions.Logging
         /// <param name="state">The identifier for the scope.</param>
         /// <typeparam name="TState">The type of the state to begin scope for.</typeparam>
         /// <returns>An <see cref="IDisposable"/> that ends the logical operation scope on dispose.</returns>
-        IDisposable? BeginScope<TState>(TState state) where TState : notnull;
+        IDisposable? BeginScope<TState>(TState state)
+            where TState : notnull;
     }
 }

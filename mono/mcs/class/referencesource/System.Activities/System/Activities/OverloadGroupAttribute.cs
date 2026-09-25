@@ -8,16 +8,17 @@ namespace System.Activities
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
 
-    [SuppressMessage(FxCop.Category.Design, FxCop.Rule.DefineAccessorsForAttributeArguments,
-    Justification = "The setter is needed to enable XAML serialization of the attribute object.")]
+    [SuppressMessage(
+        FxCop.Category.Design,
+        FxCop.Rule.DefineAccessorsForAttributeArguments,
+        Justification = "The setter is needed to enable XAML serialization of the attribute object."
+    )]
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public sealed class OverloadGroupAttribute : Attribute
     {
         string groupName;
 
-        public OverloadGroupAttribute()
-        {
-        }
+        public OverloadGroupAttribute() { }
 
         public OverloadGroupAttribute(string groupName)
         {
@@ -31,12 +32,8 @@ namespace System.Activities
 
         public string GroupName
         {
-            get 
-            { 
-                return this.groupName; 
-            }
-
-            set 
+            get { return this.groupName; }
+            set
             {
                 if (string.IsNullOrEmpty(value))
                 {
@@ -48,10 +45,7 @@ namespace System.Activities
 
         public override object TypeId
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
     }
 }

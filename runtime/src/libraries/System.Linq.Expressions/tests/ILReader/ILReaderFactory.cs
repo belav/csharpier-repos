@@ -3,8 +3,8 @@
 
 // Code adapted from https://blogs.msdn.microsoft.com/haibo_luo/2010/04/19/ilvisualizer-2010-solution
 
-using System.Reflection.Emit;
 using System.Reflection;
+using System.Reflection.Emit;
 
 namespace System.Linq.Expressions.Tests
 {
@@ -14,10 +14,15 @@ namespace System.Linq.Expressions.Tests
         {
             if (obj is DynamicMethod dm)
             {
-                return new ILReader(new DynamicMethodILProvider(dm), new DynamicScopeTokenResolver(dm));
+                return new ILReader(
+                    new DynamicMethodILProvider(dm),
+                    new DynamicScopeTokenResolver(dm)
+                );
             }
 
-            throw new NotSupportedException($"Reading IL from type '{obj.GetType()}' is currently not supported.");
+            throw new NotSupportedException(
+                $"Reading IL from type '{obj.GetType()}' is currently not supported."
+            );
         }
     }
 }

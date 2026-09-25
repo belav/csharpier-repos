@@ -6,10 +6,11 @@ using System.Threading;
 
 namespace Microsoft.CodeAnalysis.Internal.Log
 {
-    internal class CountLogAggregator<TKey> : AbstractLogAggregator<TKey, CountLogAggregator<TKey>.Counter> where TKey : notnull
+    internal class CountLogAggregator<TKey>
+        : AbstractLogAggregator<TKey, CountLogAggregator<TKey>.Counter>
+        where TKey : notnull
     {
-        protected override Counter CreateCounter()
-            => new();
+        protected override Counter CreateCounter() => new();
 
         public void SetCount(TKey key, int count)
         {
@@ -43,8 +44,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         {
             private int _count;
 
-            public void SetCount(int count)
-                => _count = count;
+            public void SetCount(int count) => _count = count;
 
             public void IncreaseCount()
             {
@@ -60,8 +60,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
                 Interlocked.Add(ref _count, value);
             }
 
-            public int GetCount()
-                => _count;
+            public int GetCount() => _count;
         }
     }
 }

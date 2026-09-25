@@ -3,29 +3,30 @@
 // ---------------------------------------------------------------------------
 
 using System;
-using System.Diagnostics;
 using System.CodeDom;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Design.Serialization;
-using System.Collections.Generic;
-using System.Workflow.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Serialization;
 
 namespace System.Workflow.Activities.Rules
 {
     #region RuleConditionCollection Class
     [Serializable]
-    public sealed class RuleConditionCollection : KeyedCollection<string, RuleCondition>, IWorkflowChangeDiff
+    public sealed class RuleConditionCollection
+        : KeyedCollection<string, RuleCondition>,
+            IWorkflowChangeDiff
     {
         private bool _runtimeInitialized;
+
         [NonSerialized]
         private object _runtimeInitializationLock = new object();
 
-        public RuleConditionCollection()
-        {
-        }
+        public RuleConditionCollection() { }
 
         protected override string GetKeyForItem(RuleCondition item)
         {
@@ -57,7 +58,11 @@ namespace System.Workflow.Activities.Rules
 
             if (item.Name != null && item.Name.Length >= 0 && this.Contains(item.Name))
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.ConditionExists, item.Name);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.ConditionExists,
+                    item.Name
+                );
                 throw new ArgumentException(message);
             }
 
@@ -86,7 +91,7 @@ namespace System.Workflow.Activities.Rules
             get { return this._runtimeInitialized; }
         }
 
-        new public void Add(RuleCondition item)
+        public new void Add(RuleCondition item)
         {
             if (this._runtimeInitialized)
                 throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
@@ -98,7 +103,11 @@ namespace System.Workflow.Activities.Rules
 
             if (null == item.Name)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.InvalidConditionName, "item.Name");
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.InvalidConditionName,
+                    "item.Name"
+                );
                 throw new ArgumentException(message);
             }
 
@@ -109,7 +118,8 @@ namespace System.Workflow.Activities.Rules
         {
             List<WorkflowChangeAction> listChanges = new List<WorkflowChangeAction>();
 
-            RuleConditionCollection originalConditions = (RuleConditionCollection)originalDefinition;
+            RuleConditionCollection originalConditions =
+                (RuleConditionCollection)originalDefinition;
             RuleConditionCollection changedConditions = (RuleConditionCollection)changedDefinition;
 
             if (null != changedConditions)
@@ -160,4 +170,3 @@ namespace System.Workflow.Activities.Rules
     }
     #endregion
 }
-

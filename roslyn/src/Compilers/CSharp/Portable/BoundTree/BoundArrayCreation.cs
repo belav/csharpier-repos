@@ -8,14 +8,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         public new bool IsParamsArray
         {
-            get
-            {
-                return base.IsParamsArray;
-            }
-            init
-            {
-                base.IsParamsArray = value;
-            }
+            get { return base.IsParamsArray; }
+            init { base.IsParamsArray = value; }
         }
     }
 }

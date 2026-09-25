@@ -20,6 +20,7 @@ namespace Microsoft.CodeAnalysis.Simplification.Simplifiers
             TSimplifierOptions options,
             out TSimplifiedSyntax replacementNode,
             out TextSpan issueSpan,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

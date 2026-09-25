@@ -12,9 +12,6 @@ namespace System.Collections.Generic
         // call to MoveNext that returned false. Multiple calls to
         // GetCurrent with no intervening calls to MoveNext
         // will return the same object.
-        new T Current
-        {
-            get;
-        }
+        new T Current { get; }
     }
 }

@@ -15,6 +15,6 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
         Namespaces,
         Projects,
         References,
-        Types
+        Types,
     }
 }

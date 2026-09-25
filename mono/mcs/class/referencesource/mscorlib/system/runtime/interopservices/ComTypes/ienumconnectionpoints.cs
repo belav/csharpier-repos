@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -21,9 +21,14 @@ namespace System.Runtime.InteropServices.ComTypes
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [ComImport]
     public interface IEnumConnectionPoints
-    {       
+    {
         [PreserveSig]
-        int Next(int celt, [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] IConnectionPoint[] rgelt, IntPtr pceltFetched);
+        int Next(
+            int celt,
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 0), Out] IConnectionPoint[] rgelt,
+            IntPtr pceltFetched
+        );
+
         [PreserveSig]
         int Skip(int celt);
         void Reset();

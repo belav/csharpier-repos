@@ -52,9 +52,8 @@ public class RuntimeViewCompilerTest
         // Assert
         Assert.Same(result1, result2);
         Assert.Null(result1.Item);
-        Assert.Collection(
-            result1.ExpirationTokens,
-            token => Assert.Equal(fileProvider.GetChangeToken(path), token)
+        Assert.Collection(result1.ExpirationTokens, token =>
+            Assert.Equal(fileProvider.GetChangeToken(path), token)
         );
     }
 
@@ -382,9 +381,8 @@ public class RuntimeViewCompilerTest
         Assert.Same(precompiledView.Item, result.Item);
 
         // This view has checksums so it should also have tokens
-        Assert.Collection(
-            result.ExpirationTokens,
-            token => Assert.Same(fileProvider.GetChangeToken(path), token)
+        Assert.Collection(result.ExpirationTokens, token =>
+            Assert.Same(fileProvider.GetChangeToken(path), token)
         );
     }
 
@@ -785,16 +783,16 @@ public class RuntimeViewCompilerTest
         compiler.Compile = _ => throw exception;
 
         // Act and Assert - 1
-        var actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () => compiler.CompileAsync(path)
+        var actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+            compiler.CompileAsync(path)
         );
         Assert.Same(exception, actual);
 
         // Act and Assert - 2
         compiler.Compile = _ => throw new Exception("Shouldn't be called");
 
-        actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () => compiler.CompileAsync(path)
+        actual = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+            compiler.CompileAsync(path)
         );
         Assert.Same(exception, actual);
     }
@@ -845,8 +843,8 @@ this should fail";
         );
 
         // Act & Assert
-        var ex = Assert.Throws<CompilationFailedException>(
-            () => compiler.CompileAndEmit(codeDocument, content)
+        var ex = Assert.Throws<CompilationFailedException>(() =>
+            compiler.CompileAndEmit(codeDocument, content)
         );
 
         var compilationFailure = Assert.Single(ex.CompilationFailures);
@@ -868,8 +866,8 @@ this should fail";
         );
 
         // Act & Assert
-        var ex = Assert.Throws<CompilationFailedException>(
-            () => compiler.CompileAndEmit(codeDocument, content)
+        var ex = Assert.Throws<CompilationFailedException>(() =>
+            compiler.CompileAndEmit(codeDocument, content)
         );
 
         var compilationFailure = Assert.Single(ex.CompilationFailures);

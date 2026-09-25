@@ -165,13 +165,13 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
             result = await connection.Application.Output.FlushAsync();
             Assert.True(result.IsCompleted);
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await connection.Transport.Input.ReadAsync()
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await connection.Transport.Input.ReadAsync()
             );
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
 
-            exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await connection.Application.Input.ReadAsync()
+            exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await connection.Application.Input.ReadAsync()
             );
             Assert.Equal("Reading is not allowed after reader was completed.", exception.Message);
         }
@@ -393,13 +393,13 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
 
             tcs.TrySetException(new InvalidOperationException("Error"));
 
-            var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await firstTask.DefaultTimeout()
+            var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await firstTask.DefaultTimeout()
             );
             Assert.Equal("Error", exception.Message);
 
-            exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () => await secondTask.DefaultTimeout()
+            exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                await secondTask.DefaultTimeout()
             );
             Assert.Equal("Error", exception.Message);
         }
@@ -426,11 +426,11 @@ public class HttpConnectionManagerTests : VerifiableLoggedTest
 
             tcs.TrySetCanceled();
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await firstTask.DefaultTimeout()
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await firstTask.DefaultTimeout()
             );
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () => await secondTask.DefaultTimeout()
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                await secondTask.DefaultTimeout()
             );
         }
     }

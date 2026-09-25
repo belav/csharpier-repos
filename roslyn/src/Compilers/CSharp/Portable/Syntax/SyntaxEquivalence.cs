@@ -12,7 +12,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
     internal static class SyntaxEquivalence
     {
-        internal static bool AreEquivalent(SyntaxTree? before, SyntaxTree? after, Func<SyntaxKind, bool>? ignoreChildNode, bool topLevel)
+        internal static bool AreEquivalent(
+            SyntaxTree? before,
+            SyntaxTree? after,
+            Func<SyntaxKind, bool>? ignoreChildNode,
+            bool topLevel
+        )
         {
             if (before == after)
             {
@@ -27,7 +32,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return AreEquivalent(before.GetRoot(), after.GetRoot(), ignoreChildNode, topLevel);
         }
 
-        public static bool AreEquivalent(SyntaxNode? before, SyntaxNode? after, Func<SyntaxKind, bool>? ignoreChildNode, bool topLevel)
+        public static bool AreEquivalent(
+            SyntaxNode? before,
+            SyntaxNode? after,
+            Func<SyntaxKind, bool>? ignoreChildNode,
+            bool topLevel
+        )
         {
             Debug.Assert(!topLevel || ignoreChildNode == null);
 
@@ -36,20 +46,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 return before == after;
             }
 
-            return AreEquivalentRecursive(before.Green, after.Green, ignoreChildNode, topLevel: topLevel);
+            return AreEquivalentRecursive(
+                before.Green,
+                after.Green,
+                ignoreChildNode,
+                topLevel: topLevel
+            );
         }
 
         public static bool AreEquivalent(SyntaxTokenList before, SyntaxTokenList after)
         {
-            return AreEquivalentRecursive(before.Node, after.Node, ignoreChildNode: null, topLevel: false);
+            return AreEquivalentRecursive(
+                before.Node,
+                after.Node,
+                ignoreChildNode: null,
+                topLevel: false
+            );
         }
 
         public static bool AreEquivalent(SyntaxToken before, SyntaxToken after)
         {
-            return before.RawKind == after.RawKind && (before.Node == null || AreTokensEquivalent(before.Node, after.Node, ignoreChildNode: null));
+            return before.RawKind == after.RawKind
+                && (
+                    before.Node == null
+                    || AreTokensEquivalent(before.Node, after.Node, ignoreChildNode: null)
+                );
         }
 
-        private static bool AreTokensEquivalent(GreenNode? before, GreenNode? after, Func<SyntaxKind, bool>? ignoreChildNode)
+        private static bool AreTokensEquivalent(
+            GreenNode? before,
+            GreenNode? after,
+            Func<SyntaxKind, bool>? ignoreChildNode
+        )
         {
             if (before is null || after is null)
             {
@@ -58,7 +86,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
             // NOTE(cyrusn): Do we want to drill into trivia?  Can documentation ever affect the
             // global meaning of symbols?  This can happen in java with things like the "@obsolete"
-            // clause in doc comment.  However, i don't know if anything like that exists in C#. 
+            // clause in doc comment.  However, i don't know if anything like that exists in C#.
 
             // NOTE(cyrusn): I don't believe we need to examine skipped text.  It isn't relevant from
             // the perspective of global symbolic information.
@@ -73,7 +101,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             switch ((SyntaxKind)before.RawKind)
             {
                 case SyntaxKind.IdentifierToken:
-                    if (((Green.SyntaxToken)before).ValueText != ((Green.SyntaxToken)after).ValueText)
+                    if (
+                        ((Green.SyntaxToken)before).ValueText
+                        != ((Green.SyntaxToken)after).ValueText
+                    )
                     {
                         return false;
                     }
@@ -98,7 +129,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             return AreNullableDirectivesEquivalent(before, after, ignoreChildNode);
         }
 
-        private static bool AreEquivalentRecursive(GreenNode? before, GreenNode? after, Func<SyntaxKind, bool>? ignoreChildNode, bool topLevel)
+        private static bool AreEquivalentRecursive(
+            GreenNode? before,
+            GreenNode? after,
+            Func<SyntaxKind, bool>? ignoreChildNode,
+            bool topLevel
+        )
         {
             if (before == after)
             {
@@ -228,7 +264,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        private static bool AreNullableDirectivesEquivalent(GreenNode before, GreenNode after, Func<SyntaxKind, bool>? ignoreChildNode)
+        private static bool AreNullableDirectivesEquivalent(
+            GreenNode before,
+            GreenNode after,
+            Func<SyntaxKind, bool>? ignoreChildNode
+        )
         {
             // Fast path for when the caller does not care about nullable directives. This can happen in some IDE refactorings.
             if (ignoreChildNode is object && ignoreChildNode(SyntaxKind.NullableDirectiveTrivia))
@@ -236,24 +276,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 return true;
             }
 
-            using var beforeDirectivesEnumerator = ((Green.CSharpSyntaxNode)before).GetDirectives().GetEnumerator();
-            using var afterDirectivesEnumerator = ((Green.CSharpSyntaxNode)after).GetDirectives().GetEnumerator();
+            using var beforeDirectivesEnumerator = ((Green.CSharpSyntaxNode)before)
+                .GetDirectives()
+                .GetEnumerator();
+            using var afterDirectivesEnumerator = ((Green.CSharpSyntaxNode)after)
+                .GetDirectives()
+                .GetEnumerator();
             while (true)
             {
-                Green.DirectiveTriviaSyntax? beforeAnnotation = getNextNullableDirective(beforeDirectivesEnumerator);
-                Green.DirectiveTriviaSyntax? afterAnnotation = getNextNullableDirective(afterDirectivesEnumerator);
+                Green.DirectiveTriviaSyntax? beforeAnnotation = getNextNullableDirective(
+                    beforeDirectivesEnumerator
+                );
+                Green.DirectiveTriviaSyntax? afterAnnotation = getNextNullableDirective(
+                    afterDirectivesEnumerator
+                );
 
                 if (beforeAnnotation == null || afterAnnotation == null)
                 {
                     return beforeAnnotation == afterAnnotation;
                 }
 
-                if (!AreEquivalentRecursive(beforeAnnotation, afterAnnotation, ignoreChildNode, topLevel: false))
+                if (
+                    !AreEquivalentRecursive(
+                        beforeAnnotation,
+                        afterAnnotation,
+                        ignoreChildNode,
+                        topLevel: false
+                    )
+                )
                 {
                     return false;
                 }
 
-                static Green.DirectiveTriviaSyntax? getNextNullableDirective(IEnumerator<Green.DirectiveTriviaSyntax> enumerator)
+                static Green.DirectiveTriviaSyntax? getNextNullableDirective(
+                    IEnumerator<Green.DirectiveTriviaSyntax> enumerator
+                )
                 {
                     while (enumerator.MoveNext())
                     {

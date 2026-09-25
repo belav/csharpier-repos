@@ -20,7 +20,8 @@ namespace Internal.TypeSystem
     /// </summary>
     /// <typeparam name="TKey"></typeparam>
     /// <typeparam name="TValue"></typeparam>
-    public abstract class LockFreeReaderHashtable<TKey, TValue> where TValue : class
+    public abstract class LockFreeReaderHashtable<TKey, TValue>
+        where TValue : class
     {
         private const int _initialSize = 16;
         private const int _fillPercentageBeforeResize = 60;
@@ -109,15 +110,33 @@ namespace Internal.TypeSystem
                 int a = (int)0x9e3779b9 + key;
                 int b = (int)0x9e3779b9;
                 int c = 16777619;
-                a -= b; a -= c; a ^= (c >> 13);
-                b -= c; b -= a; b ^= (a << 8);
-                c -= a; c -= b; c ^= (b >> 13);
-                a -= b; a -= c; a ^= (c >> 12);
-                b -= c; b -= a; b ^= (a << 16);
-                c -= a; c -= b; c ^= (b >> 5);
-                a -= b; a -= c; a ^= (c >> 3);
-                b -= c; b -= a; b ^= (a << 10);
-                c -= a; c -= b; c ^= (b >> 15);
+                a -= b;
+                a -= c;
+                a ^= (c >> 13);
+                b -= c;
+                b -= a;
+                b ^= (a << 8);
+                c -= a;
+                c -= b;
+                c ^= (b >> 13);
+                a -= b;
+                a -= c;
+                a ^= (c >> 12);
+                b -= c;
+                b -= a;
+                b ^= (a << 16);
+                c -= a;
+                c -= b;
+                c ^= (b >> 5);
+                a -= b;
+                a -= c;
+                a ^= (c >> 3);
+                b -= c;
+                b -= a;
+                b ^= (a << 10);
+                c -= a;
+                c -= b;
+                c ^= (b >> 15);
                 return c;
             }
         }
@@ -148,7 +167,6 @@ namespace Internal.TypeSystem
         /// </summary>
         public LockFreeReaderHashtable()
         {
-
 #if DEBUG
             // Ensure the initial value is a power of 2
             bool foundAOne = false;
@@ -168,7 +186,10 @@ namespace Internal.TypeSystem
         /// <summary>
         /// The current count of elements in the hashtable
         /// </summary>
-        public int Count { get { return _count + (_entryInProcessOfWritingSentinel != null ? 1 : 0); } }
+        public int Count
+        {
+            get { return _count + (_entryInProcessOfWritingSentinel != null ? 1 : 0); }
+        }
 
         /// <summary>
         /// Gets the value associated with the specified key.
@@ -376,7 +397,10 @@ namespace Internal.TypeSystem
 
             if (_entryInProcessOfWritingSentinel == null)
             {
-                if (Interlocked.CompareExchange(ref _entryInProcessOfWritingSentinel, value, null) == null)
+                if (
+                    Interlocked.CompareExchange(ref _entryInProcessOfWritingSentinel, value, null)
+                    == null
+                )
                 {
                     // First value was added as the sentinel
                     addedValue = true;
@@ -514,7 +538,13 @@ namespace Internal.TypeSystem
             // Add to hash, use a volatile write to ensure that
             // the contents of the value are fully published to all
             // threads before adding to the hashtable
-            if (Interlocked.CompareExchange(ref hashTableLocal[tableIndex], _entryInProcessOfWritingSentinel, null) == null)
+            if (
+                Interlocked.CompareExchange(
+                    ref hashTableLocal[tableIndex],
+                    _entryInProcessOfWritingSentinel,
+                    null
+                ) == null
+            )
             {
                 return true;
             }
@@ -526,7 +556,11 @@ namespace Internal.TypeSystem
         /// Attempts to write a value into the table. Should never fail as the sentinel should be the only
         /// entry that can be in the table at this point
         /// </summary>
-        private static void WriteValueToLocation(TValue value, TValue[] hashTableLocal, int tableIndex)
+        private static void WriteValueToLocation(
+            TValue value,
+            TValue[] hashTableLocal,
+            int tableIndex
+        )
         {
             // Add to hash, use a volatile write to ensure that
             // the contents of the value are fully published to all
@@ -556,7 +590,10 @@ namespace Internal.TypeSystem
             Debug.Assert(CompareKeyToValue(key, newValue));
 
             TValue foundValue = AddOrGetExisting(newValue);
-            Debug.Assert(TryGetValue(key, out TValue testValue) && (Object.ReferenceEquals(testValue, foundValue)));
+            Debug.Assert(
+                TryGetValue(key, out TValue testValue)
+                    && (Object.ReferenceEquals(testValue, foundValue))
+            );
             return foundValue;
 #else
             return AddOrGetExisting(CreateValueFromKey(key));
@@ -693,7 +730,10 @@ namespace Internal.TypeSystem
                 {
                     for (; _index < _hashtableContentsToEnumerate.Length; _index++)
                     {
-                        if ((_hashtableContentsToEnumerate[_index] != null) && (_hashtableContentsToEnumerate[_index] != _sentinel))
+                        if (
+                            (_hashtableContentsToEnumerate[_index] != null)
+                            && (_hashtableContentsToEnumerate[_index] != _sentinel)
+                        )
                         {
                             _current = _hashtableContentsToEnumerate[_index];
                             _index++;
@@ -713,9 +753,7 @@ namespace Internal.TypeSystem
                 return false;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void Reset()
             {
@@ -724,18 +762,12 @@ namespace Internal.TypeSystem
 
             public TValue Current
             {
-                get
-                {
-                    return _current;
-                }
+                get { return _current; }
             }
 
             object IEnumerator.Current
             {
-                get
-                {
-                    throw new NotSupportedException();
-                }
+                get { throw new NotSupportedException(); }
             }
         }
 

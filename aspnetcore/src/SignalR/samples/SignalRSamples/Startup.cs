@@ -49,48 +49,42 @@ public class Startup
 
             endpoints.MapConnectionHandler<MessagesConnectionHandler>("/chat");
 
-            endpoints.MapGet(
-                "/deployment",
-                async context =>
+            endpoints.MapGet("/deployment", async context =>
+            {
+                var attributes = Assembly
+                    .GetAssembly(typeof(Startup))
+                    .GetCustomAttributes<AssemblyMetadataAttribute>();
+
+                context.Response.ContentType = "application/json";
+                await using (
+                    var writer = new Utf8JsonWriter(context.Response.BodyWriter, _jsonWriterOptions)
+                )
                 {
-                    var attributes = Assembly
-                        .GetAssembly(typeof(Startup))
-                        .GetCustomAttributes<AssemblyMetadataAttribute>();
+                    writer.WriteStartObject();
+                    var commitHash = string.Empty;
 
-                    context.Response.ContentType = "application/json";
-                    await using (
-                        var writer = new Utf8JsonWriter(
-                            context.Response.BodyWriter,
-                            _jsonWriterOptions
-                        )
-                    )
+                    foreach (var attribute in attributes)
                     {
-                        writer.WriteStartObject();
-                        var commitHash = string.Empty;
+                        writer.WriteString(attribute.Key, attribute.Value);
 
-                        foreach (var attribute in attributes)
+                        if (string.Equals(attribute.Key, "CommitHash"))
                         {
-                            writer.WriteString(attribute.Key, attribute.Value);
-
-                            if (string.Equals(attribute.Key, "CommitHash"))
-                            {
-                                commitHash = attribute.Value;
-                            }
+                            commitHash = attribute.Value;
                         }
-
-                        if (!string.IsNullOrEmpty(commitHash))
-                        {
-                            writer.WriteString(
-                                "GitHubUrl",
-                                $"https://github.com/aspnet/SignalR/commit/{commitHash}"
-                            );
-                        }
-
-                        writer.WriteEndObject();
-                        await writer.FlushAsync();
                     }
+
+                    if (!string.IsNullOrEmpty(commitHash))
+                    {
+                        writer.WriteString(
+                            "GitHubUrl",
+                            $"https://github.com/aspnet/SignalR/commit/{commitHash}"
+                        );
+                    }
+
+                    writer.WriteEndObject();
+                    await writer.FlushAsync();
                 }
-            );
+            });
         });
     }
 }

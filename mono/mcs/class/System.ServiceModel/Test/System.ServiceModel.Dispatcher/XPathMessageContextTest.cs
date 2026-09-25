@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,24 +36,24 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel.Dispatcher
 {
-	[TestFixture]
-	public class XPathMessageContextTest
-	{
-		XPathMessageContext ctx = new XPathMessageContext ();
+    [TestFixture]
+    public class XPathMessageContextTest
+    {
+        XPathMessageContext ctx = new XPathMessageContext();
 
-		[Test]
-		public void PredefinedNamespaces ()
-		{
-			Assert.AreEqual (Constants.Soap11, ctx.LookupNamespace ("s11"), "#1");
-			Assert.AreEqual (Constants.Soap12, ctx.LookupNamespace ("s12"), "#2");
-			// ... only them?
+        [Test]
+        public void PredefinedNamespaces()
+        {
+            Assert.AreEqual(Constants.Soap11, ctx.LookupNamespace("s11"), "#1");
+            Assert.AreEqual(Constants.Soap12, ctx.LookupNamespace("s12"), "#2");
+            // ... only them?
 
-			foreach (char c in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
-				Assert.IsNull (ctx.LookupNamespace (c + ""), "char:" + c);
+            foreach (char c in "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ")
+                Assert.IsNull(ctx.LookupNamespace(c + ""), "char:" + c);
 
-			Assert.IsNull (ctx.LookupNamespace ("wsa"), "#3");
-			Assert.IsNull (ctx.LookupNamespace ("wsu"), "#4");
-		}
-	}
+            Assert.IsNull(ctx.LookupNamespace("wsa"), "#3");
+            Assert.IsNull(ctx.LookupNamespace("wsu"), "#4");
+        }
+    }
 }
 #endif

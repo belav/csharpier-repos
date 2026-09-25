@@ -5,6 +5,5 @@
 
 namespace AssemblyToLoadDependency
 {
-    public class Program
-    { }
+    public class Program { }
 }

@@ -9,12 +9,15 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    [ConfigurationCollection(typeof(ChannelEndpointElement), AddItemName = ConfigurationStrings.Endpoint)]
-    public sealed class ChannelEndpointElementCollection : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>
+    [ConfigurationCollection(
+        typeof(ChannelEndpointElement),
+        AddItemName = ConfigurationStrings.Endpoint
+    )]
+    public sealed class ChannelEndpointElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<ChannelEndpointElement>
     {
         public ChannelEndpointElementCollection()
-            : base(ConfigurationStrings.Endpoint)
-        { }
+            : base(ConfigurationStrings.Endpoint) { }
 
         protected override Object GetElementKey(ConfigurationElement element)
         {
@@ -24,12 +27,12 @@ namespace System.ServiceModel.Configuration
             }
 
             ChannelEndpointElement configElementKey = (ChannelEndpointElement)element;
-            return string.Format(CultureInfo.InvariantCulture,
+            return string.Format(
+                CultureInfo.InvariantCulture,
                 "contractType:{0};name:{1}",
                 configElementKey.Contract,
-                configElementKey.Name);
+                configElementKey.Name
+            );
         }
     }
 }
-
-

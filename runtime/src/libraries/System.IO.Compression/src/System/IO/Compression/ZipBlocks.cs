@@ -18,6 +18,7 @@ namespace System.IO.Compression
         private byte[] _data;
 
         public ushort Tag => _tag;
+
         // returns size of data, not of the entire block
         public ushort Size => _size;
         public byte[] Data => _data;
@@ -32,7 +33,11 @@ namespace System.IO.Compression
 
         // shouldn't ever read the byte at position endExtraField
         // assumes we are positioned at the beginning of an extra field subfield
-        public static bool TryReadBlock(BinaryReader reader, long endExtraField, out ZipGenericExtraField field)
+        public static bool TryReadBlock(
+            BinaryReader reader,
+            long endExtraField,
+            out ZipGenericExtraField field
+        )
         {
             field = default;
 
@@ -103,27 +108,43 @@ namespace System.IO.Compression
         public long? UncompressedSize
         {
             get { return _uncompressedSize; }
-            set { _uncompressedSize = value; UpdateSize(); }
+            set
+            {
+                _uncompressedSize = value;
+                UpdateSize();
+            }
         }
         public long? CompressedSize
         {
             get { return _compressedSize; }
-            set { _compressedSize = value; UpdateSize(); }
+            set
+            {
+                _compressedSize = value;
+                UpdateSize();
+            }
         }
         public long? LocalHeaderOffset
         {
             get { return _localHeaderOffset; }
-            set { _localHeaderOffset = value; UpdateSize(); }
+            set
+            {
+                _localHeaderOffset = value;
+                UpdateSize();
+            }
         }
         public uint? StartDiskNumber => _startDiskNumber;
 
         private void UpdateSize()
         {
             _size = 0;
-            if (_uncompressedSize != null) _size += 8;
-            if (_compressedSize != null) _size += 8;
-            if (_localHeaderOffset != null) _size += 8;
-            if (_startDiskNumber != null) _size += 4;
+            if (_uncompressedSize != null)
+                _size += 8;
+            if (_compressedSize != null)
+                _size += 8;
+            if (_localHeaderOffset != null)
+                _size += 8;
+            if (_startDiskNumber != null)
+                _size += 4;
         }
 
         // There is a small chance that something very weird could happen here. The code calling into this function
@@ -139,18 +160,36 @@ namespace System.IO.Compression
         //
         // If there are more than one Zip64 extra fields, we take the first one that has the expected size
         //
-        public static Zip64ExtraField GetJustZip64Block(Stream extraFieldStream,
-            bool readUncompressedSize, bool readCompressedSize,
-            bool readLocalHeaderOffset, bool readStartDiskNumber)
+        public static Zip64ExtraField GetJustZip64Block(
+            Stream extraFieldStream,
+            bool readUncompressedSize,
+            bool readCompressedSize,
+            bool readLocalHeaderOffset,
+            bool readStartDiskNumber
+        )
         {
             Zip64ExtraField zip64Field;
             using (BinaryReader reader = new BinaryReader(extraFieldStream))
             {
                 ZipGenericExtraField currentExtraField;
-                while (ZipGenericExtraField.TryReadBlock(reader, extraFieldStream.Length, out currentExtraField))
+                while (
+                    ZipGenericExtraField.TryReadBlock(
+                        reader,
+                        extraFieldStream.Length,
+                        out currentExtraField
+                    )
+                )
                 {
-                    if (TryGetZip64BlockFromGenericExtraField(currentExtraField, readUncompressedSize,
-                                readCompressedSize, readLocalHeaderOffset, readStartDiskNumber, out zip64Field))
+                    if (
+                        TryGetZip64BlockFromGenericExtraField(
+                            currentExtraField,
+                            readUncompressedSize,
+                            readCompressedSize,
+                            readLocalHeaderOffset,
+                            readStartDiskNumber,
+                            out zip64Field
+                        )
+                    )
                     {
                         return zip64Field;
                     }
@@ -167,10 +206,14 @@ namespace System.IO.Compression
             return zip64Field;
         }
 
-        private static bool TryGetZip64BlockFromGenericExtraField(ZipGenericExtraField extraField,
-            bool readUncompressedSize, bool readCompressedSize,
-            bool readLocalHeaderOffset, bool readStartDiskNumber,
-            out Zip64ExtraField zip64Block)
+        private static bool TryGetZip64BlockFromGenericExtraField(
+            ZipGenericExtraField extraField,
+            bool readUncompressedSize,
+            bool readCompressedSize,
+            bool readLocalHeaderOffset,
+            bool readStartDiskNumber,
+            out Zip64ExtraField zip64Block
+        )
         {
             zip64Block = default;
 
@@ -202,7 +245,8 @@ namespace System.IO.Compression
                 // Advancing the stream (by reading from it) is possible only when:
                 // 1. There is an explicit ask to do that (valid files, corresponding boolean flag(s) set to true).
                 // 2. When the size indicates that all the information is available ("slightly invalid files").
-                bool readAllFields = extraField.Size >= sizeof(long) + sizeof(long) + sizeof(long) + sizeof(int);
+                bool readAllFields =
+                    extraField.Size >= sizeof(long) + sizeof(long) + sizeof(long) + sizeof(int);
 
                 if (readUncompressedSize)
                 {
@@ -250,17 +294,24 @@ namespace System.IO.Compression
                 }
 
                 // original values are unsigned, so implies value is too big to fit in signed integer
-                if (zip64Block._uncompressedSize < 0) throw new InvalidDataException(SR.FieldTooBigUncompressedSize);
-                if (zip64Block._compressedSize < 0) throw new InvalidDataException(SR.FieldTooBigCompressedSize);
-                if (zip64Block._localHeaderOffset < 0) throw new InvalidDataException(SR.FieldTooBigLocalHeaderOffset);
+                if (zip64Block._uncompressedSize < 0)
+                    throw new InvalidDataException(SR.FieldTooBigUncompressedSize);
+                if (zip64Block._compressedSize < 0)
+                    throw new InvalidDataException(SR.FieldTooBigCompressedSize);
+                if (zip64Block._localHeaderOffset < 0)
+                    throw new InvalidDataException(SR.FieldTooBigLocalHeaderOffset);
 
                 return true;
             }
         }
 
-        public static Zip64ExtraField GetAndRemoveZip64Block(List<ZipGenericExtraField> extraFields,
-            bool readUncompressedSize, bool readCompressedSize,
-            bool readLocalHeaderOffset, bool readStartDiskNumber)
+        public static Zip64ExtraField GetAndRemoveZip64Block(
+            List<ZipGenericExtraField> extraFields,
+            bool readUncompressedSize,
+            bool readCompressedSize,
+            bool readLocalHeaderOffset,
+            bool readStartDiskNumber
+        )
         {
             Zip64ExtraField zip64Field = default;
 
@@ -279,8 +330,16 @@ namespace System.IO.Compression
                     markedForDelete.Add(ef);
                     if (!zip64FieldFound)
                     {
-                        if (TryGetZip64BlockFromGenericExtraField(ef, readUncompressedSize, readCompressedSize,
-                                    readLocalHeaderOffset, readStartDiskNumber, out zip64Field))
+                        if (
+                            TryGetZip64BlockFromGenericExtraField(
+                                ef,
+                                readUncompressedSize,
+                                readCompressedSize,
+                                readLocalHeaderOffset,
+                                readStartDiskNumber,
+                                out zip64Field
+                            )
+                        )
                         {
                             zip64FieldFound = true;
                         }
@@ -310,10 +369,14 @@ namespace System.IO.Compression
             BinaryWriter writer = new BinaryWriter(stream);
             writer.Write(TagConstant);
             writer.Write(_size);
-            if (_uncompressedSize != null) writer.Write(_uncompressedSize.Value);
-            if (_compressedSize != null) writer.Write(_compressedSize.Value);
-            if (_localHeaderOffset != null) writer.Write(_localHeaderOffset.Value);
-            if (_startDiskNumber != null) writer.Write(_startDiskNumber.Value);
+            if (_uncompressedSize != null)
+                writer.Write(_uncompressedSize.Value);
+            if (_compressedSize != null)
+                writer.Write(_compressedSize.Value);
+            if (_localHeaderOffset != null)
+                writer.Write(_localHeaderOffset.Value);
+            if (_startDiskNumber != null)
+                writer.Write(_startDiskNumber.Value);
         }
     }
 
@@ -328,7 +391,10 @@ namespace System.IO.Compression
         public ulong OffsetOfZip64EOCD;
         public uint TotalNumberOfDisks;
 
-        public static bool TryReadBlock(BinaryReader reader, out Zip64EndOfCentralDirectoryLocator zip64EOCDLocator)
+        public static bool TryReadBlock(
+            BinaryReader reader,
+            out Zip64EndOfCentralDirectoryLocator zip64EOCDLocator
+        )
         {
             zip64EOCDLocator = default;
 
@@ -366,7 +432,10 @@ namespace System.IO.Compression
         public ulong SizeOfCentralDirectory;
         public ulong OffsetOfCentralDirectory;
 
-        public static bool TryReadBlock(BinaryReader reader, out Zip64EndOfCentralDirectoryRecord zip64EOCDRecord)
+        public static bool TryReadBlock(
+            BinaryReader reader,
+            out Zip64EndOfCentralDirectoryRecord zip64EOCDRecord
+        )
         {
             zip64EOCDRecord = default;
 
@@ -386,7 +455,12 @@ namespace System.IO.Compression
             return true;
         }
 
-        public static void WriteBlock(Stream stream, long numberOfEntries, long startOfCentralDirectory, long sizeOfCentralDirectory)
+        public static void WriteBlock(
+            Stream stream,
+            long numberOfEntries,
+            long startOfCentralDirectory,
+            long sizeOfCentralDirectory
+        )
         {
             BinaryWriter writer = new BinaryWriter(stream);
 
@@ -428,8 +502,13 @@ namespace System.IO.Compression
 
             reader.BaseStream.Seek(filenameLength, SeekOrigin.Current);
 
-
-            using (Stream str = new SubReadStream(reader.BaseStream, reader.BaseStream.Position, extraFieldLength))
+            using (
+                Stream str = new SubReadStream(
+                    reader.BaseStream,
+                    reader.BaseStream.Position,
+                    extraFieldLength
+                )
+            )
             {
                 result = ZipGenericExtraField.ParseExtraField(str);
             }
@@ -446,7 +525,6 @@ namespace System.IO.Compression
             if (reader.ReadUInt32() != SignatureConstant)
                 return false;
 
-
             if (reader.BaseStream.Length < reader.BaseStream.Position + OffsetToFilenameLength)
                 return false;
 
@@ -455,7 +533,10 @@ namespace System.IO.Compression
             ushort filenameLength = reader.ReadUInt16();
             ushort extraFieldLength = reader.ReadUInt16();
 
-            if (reader.BaseStream.Length < reader.BaseStream.Position + filenameLength + extraFieldLength)
+            if (
+                reader.BaseStream.Length
+                < reader.BaseStream.Position + filenameLength + extraFieldLength
+            )
                 return false;
 
             reader.BaseStream.Seek(filenameLength + extraFieldLength, SeekOrigin.Current);
@@ -490,7 +571,11 @@ namespace System.IO.Compression
 
         // if saveExtraFieldsAndComments is false, FileComment and ExtraFields will be null
         // in either case, the zip64 extra field info will be incorporated into other fields
-        public static bool TryReadBlock(BinaryReader reader, bool saveExtraFieldsAndComments, out ZipCentralDirectoryFileHeader header)
+        public static bool TryReadBlock(
+            BinaryReader reader,
+            bool saveExtraFieldsAndComments,
+            out ZipCentralDirectoryFileHeader header
+        )
         {
             header = default;
 
@@ -523,21 +608,35 @@ namespace System.IO.Compression
             Zip64ExtraField zip64;
 
             long endExtraFields = reader.BaseStream.Position + header.ExtraFieldLength;
-            using (Stream str = new SubReadStream(reader.BaseStream, reader.BaseStream.Position, header.ExtraFieldLength))
+            using (
+                Stream str = new SubReadStream(
+                    reader.BaseStream,
+                    reader.BaseStream.Position,
+                    header.ExtraFieldLength
+                )
+            )
             {
                 if (saveExtraFieldsAndComments)
                 {
                     header.ExtraFields = ZipGenericExtraField.ParseExtraField(str);
-                    zip64 = Zip64ExtraField.GetAndRemoveZip64Block(header.ExtraFields,
-                            uncompressedSizeInZip64, compressedSizeInZip64,
-                            relativeOffsetInZip64, diskNumberStartInZip64);
+                    zip64 = Zip64ExtraField.GetAndRemoveZip64Block(
+                        header.ExtraFields,
+                        uncompressedSizeInZip64,
+                        compressedSizeInZip64,
+                        relativeOffsetInZip64,
+                        diskNumberStartInZip64
+                    );
                 }
                 else
                 {
                     header.ExtraFields = null;
-                    zip64 = Zip64ExtraField.GetJustZip64Block(str,
-                            uncompressedSizeInZip64, compressedSizeInZip64,
-                            relativeOffsetInZip64, diskNumberStartInZip64);
+                    zip64 = Zip64ExtraField.GetJustZip64Block(
+                        str,
+                        uncompressedSizeInZip64,
+                        compressedSizeInZip64,
+                        relativeOffsetInZip64,
+                        diskNumberStartInZip64
+                    );
                 }
             }
 
@@ -547,18 +646,18 @@ namespace System.IO.Compression
 
             header.FileComment = reader.ReadBytes(header.FileCommentLength);
 
-            header.UncompressedSize = zip64.UncompressedSize == null
-                                                    ? uncompressedSizeSmall
-                                                    : zip64.UncompressedSize.Value;
-            header.CompressedSize = zip64.CompressedSize == null
-                                                    ? compressedSizeSmall
-                                                    : zip64.CompressedSize.Value;
-            header.RelativeOffsetOfLocalHeader = zip64.LocalHeaderOffset == null
-                                                    ? relativeOffsetOfLocalHeaderSmall
-                                                    : zip64.LocalHeaderOffset.Value;
-            header.DiskNumberStart = zip64.StartDiskNumber == null
-                                                    ? diskNumberStartSmall
-                                                    : zip64.StartDiskNumber.Value;
+            header.UncompressedSize =
+                zip64.UncompressedSize == null
+                    ? uncompressedSizeSmall
+                    : zip64.UncompressedSize.Value;
+            header.CompressedSize =
+                zip64.CompressedSize == null ? compressedSizeSmall : zip64.CompressedSize.Value;
+            header.RelativeOffsetOfLocalHeader =
+                zip64.LocalHeaderOffset == null
+                    ? relativeOffsetOfLocalHeaderSmall
+                    : zip64.LocalHeaderOffset.Value;
+            header.DiskNumberStart =
+                zip64.StartDiskNumber == null ? diskNumberStartSmall : zip64.StartDiskNumber.Value;
 
             return true;
         }
@@ -586,16 +685,26 @@ namespace System.IO.Compression
         public uint OffsetOfStartOfCentralDirectoryWithRespectToTheStartingDiskNumber;
         public byte[] ArchiveComment;
 
-        public static void WriteBlock(Stream stream, long numberOfEntries, long startOfCentralDirectory, long sizeOfCentralDirectory, byte[] archiveComment)
+        public static void WriteBlock(
+            Stream stream,
+            long numberOfEntries,
+            long startOfCentralDirectory,
+            long sizeOfCentralDirectory,
+            byte[] archiveComment
+        )
         {
             BinaryWriter writer = new BinaryWriter(stream);
 
-            ushort numberOfEntriesTruncated = numberOfEntries > ushort.MaxValue ?
-                                                        ZipHelper.Mask16Bit : (ushort)numberOfEntries;
-            uint startOfCentralDirectoryTruncated = startOfCentralDirectory > uint.MaxValue ?
-                                                        ZipHelper.Mask32Bit : (uint)startOfCentralDirectory;
-            uint sizeOfCentralDirectoryTruncated = sizeOfCentralDirectory > uint.MaxValue ?
-                                                        ZipHelper.Mask32Bit : (uint)sizeOfCentralDirectory;
+            ushort numberOfEntriesTruncated =
+                numberOfEntries > ushort.MaxValue ? ZipHelper.Mask16Bit : (ushort)numberOfEntries;
+            uint startOfCentralDirectoryTruncated =
+                startOfCentralDirectory > uint.MaxValue
+                    ? ZipHelper.Mask32Bit
+                    : (uint)startOfCentralDirectory;
+            uint sizeOfCentralDirectoryTruncated =
+                sizeOfCentralDirectory > uint.MaxValue
+                    ? ZipHelper.Mask32Bit
+                    : (uint)sizeOfCentralDirectory;
 
             writer.Write(SignatureConstant);
             writer.Write((ushort)0); // number of this disk
@@ -613,7 +722,10 @@ namespace System.IO.Compression
                 writer.Write(archiveComment);
         }
 
-        public static bool TryReadBlock(BinaryReader reader, out ZipEndOfCentralDirectoryBlock eocdBlock)
+        public static bool TryReadBlock(
+            BinaryReader reader,
+            out ZipEndOfCentralDirectoryBlock eocdBlock
+        )
         {
             eocdBlock = default;
             if (reader.ReadUInt32() != SignatureConstant)
@@ -625,7 +737,8 @@ namespace System.IO.Compression
             eocdBlock.NumberOfEntriesInTheCentralDirectoryOnThisDisk = reader.ReadUInt16();
             eocdBlock.NumberOfEntriesInTheCentralDirectory = reader.ReadUInt16();
             eocdBlock.SizeOfCentralDirectory = reader.ReadUInt32();
-            eocdBlock.OffsetOfStartOfCentralDirectoryWithRespectToTheStartingDiskNumber = reader.ReadUInt32();
+            eocdBlock.OffsetOfStartOfCentralDirectoryWithRespectToTheStartingDiskNumber =
+                reader.ReadUInt32();
 
             ushort commentLength = reader.ReadUInt16();
             eocdBlock.ArchiveComment = reader.ReadBytes(commentLength);

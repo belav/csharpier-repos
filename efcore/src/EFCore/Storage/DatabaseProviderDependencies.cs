@@ -45,7 +45,5 @@ public sealed record DatabaseProviderDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public DatabaseProviderDependencies()
-    {
-    }
+    public DatabaseProviderDependencies() { }
 }

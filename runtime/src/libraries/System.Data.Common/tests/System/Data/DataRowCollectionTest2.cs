@@ -23,9 +23,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using Xunit;
 using System.Collections;
-
+using Xunit;
 
 namespace System.Data.Tests
 {
@@ -54,7 +53,17 @@ namespace System.Data.Tests
             Assert.Equal(6, dt.Rows.Count);
             dt.Rows.Remove(dt.Rows[0]);
             Assert.Equal(5, dt.Rows.Count);
-            dt.Rows.Add(new object[] { 1, "1-String1", "1-String2", new DateTime(2005, 1, 1, 0, 0, 0, 0), 1.534, true });
+            dt.Rows.Add(
+                new object[]
+                {
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                    1.534,
+                    true,
+                }
+            );
             Assert.Equal(6, dt.Rows.Count);
         }
 
@@ -118,10 +127,10 @@ namespace System.Data.Tests
         public void DataRowCollection_Add_D2()
         {
             AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               DataTable dt = DataProvider.CreateParentDataTable();
-               dt.Rows.Add(dt.Rows[0]);
-           });
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.Rows.Add(dt.Rows[0]);
+            });
         }
 
         [Fact]
@@ -151,7 +160,17 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             dt.Rows.Clear();
-            dt.Rows.Add(new object[] { 1, "1-String1", "1-String2", new DateTime(2005, 1, 1, 0, 0, 0, 0), 1.534, true });
+            dt.Rows.Add(
+                new object[]
+                {
+                    1,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                    1.534,
+                    true,
+                }
+            );
             Assert.Equal(1, dt.Rows.Count);
             Assert.Equal(1, dt.Rows[0]["ParentId"]);
             Assert.Equal("1-String1", dt.Rows[0]["String1"]);
@@ -166,7 +185,16 @@ namespace System.Data.Tests
         {
             DataTable dt = DataProvider.CreateParentDataTable();
             int count = dt.Rows.Count;
-            dt.Rows.Add(new object[] { 8, "1-String1", "1-String2", new DateTime(2005, 1, 1, 0, 0, 0, 0), 1.534 });
+            dt.Rows.Add(
+                new object[]
+                {
+                    8,
+                    "1-String1",
+                    "1-String2",
+                    new DateTime(2005, 1, 1, 0, 0, 0, 0),
+                    1.534,
+                }
+            );
             Assert.Equal(count + 1, dt.Rows.Count);
         }
 
@@ -275,10 +303,10 @@ namespace System.Data.Tests
         public void DataRowCollection_Contains_O2()
         {
             Assert.Throws<MissingPrimaryKeyException>(() =>
-           {
-               DataTable dt = DataProvider.CreateParentDataTable();
-               Assert.False(dt.Rows.Contains(1));
-           });
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                Assert.False(dt.Rows.Contains(1));
+            });
         }
 
         [Fact]
@@ -303,16 +331,16 @@ namespace System.Data.Tests
         public void DataRowCollection_Contains_O4()
         {
             AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               DataTable dt = DataProvider.CreateParentDataTable();
-               dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
 
-               //Prepare values array
-               object[] arr = new object[1];
-               arr[0] = 1;
+                //Prepare values array
+                object[] arr = new object[1];
+                arr[0] = 1;
 
-               Assert.False(dt.Rows.Contains(arr));
-           });
+                Assert.False(dt.Rows.Contains(arr));
+            });
         }
 
         [Fact]
@@ -329,11 +357,11 @@ namespace System.Data.Tests
         public void DataRowCollection_Find_O2()
         {
             Assert.Throws<MissingPrimaryKeyException>(() =>
-           {
-               DataTable dt = DataProvider.CreateParentDataTable();
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
 
-               Assert.Null(dt.Rows.Find(1));
-           });
+                Assert.Null(dt.Rows.Find(1));
+            });
         }
 
         [Fact]
@@ -358,16 +386,16 @@ namespace System.Data.Tests
         public void DataRowCollection_Find_O4()
         {
             AssertExtensions.Throws<ArgumentException>(null, () =>
-           {
-               DataTable dt = DataProvider.CreateParentDataTable();
-               dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.PrimaryKey = new DataColumn[] { dt.Columns[0], dt.Columns[1] };
 
-               //Prepare values array
-               object[] arr = new object[1];
-               arr[0] = 1;
+                //Prepare values array
+                object[] arr = new object[1];
+                arr[0] = 1;
 
-               Assert.Null(dt.Rows.Find(arr));
-           });
+                Assert.Null(dt.Rows.Find(arr));
+            });
         }
 
         [Fact]
@@ -404,12 +432,12 @@ namespace System.Data.Tests
         public void DataRowCollection_InsertAt_DI4()
         {
             Assert.Throws<IndexOutOfRangeException>(() =>
-           {
-               DataTable dt = DataProvider.CreateParentDataTable();
-               DataRow dr = GetNewDataRow(dt);
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                DataRow dr = GetNewDataRow(dt);
 
-               dt.Rows.InsertAt(dr, -1);
-           });
+                dt.Rows.InsertAt(dr, -1);
+            });
         }
 
         private DataRow GetNewDataRow(DataTable dt)
@@ -441,11 +469,11 @@ namespace System.Data.Tests
         public void DataRowCollection_Item2()
         {
             Assert.Throws<IndexOutOfRangeException>(() =>
-           {
-               DataTable dt = DataProvider.CreateParentDataTable();
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
 
-               DataRow dr = dt.Rows[-1];
-           });
+                DataRow dr = dt.Rows[-1];
+            });
         }
     }
 }

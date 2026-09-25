@@ -21,7 +21,9 @@ namespace System.Text
         {
             if (!UnicodeUtility.IsHighSurrogateCodePoint(codePoint))
             {
-                Debug.Fail($"The value {ToHexString(codePoint)} is not a valid UTF-16 high surrogate code point.");
+                Debug.Fail(
+                    $"The value {ToHexString(codePoint)} is not a valid UTF-16 high surrogate code point."
+                );
             }
         }
 
@@ -30,7 +32,9 @@ namespace System.Text
         {
             if (!UnicodeUtility.IsLowSurrogateCodePoint(codePoint))
             {
-                Debug.Fail($"The value {ToHexString(codePoint)} is not a valid UTF-16 low surrogate code point.");
+                Debug.Fail(
+                    $"The value {ToHexString(codePoint)} is not a valid UTF-16 low surrogate code point."
+                );
             }
         }
 
@@ -39,7 +43,9 @@ namespace System.Text
         {
             if (!UnicodeUtility.IsValidCodePoint(codePoint))
             {
-                Debug.Fail($"The value {ToHexString(codePoint)} is not a valid Unicode code point.");
+                Debug.Fail(
+                    $"The value {ToHexString(codePoint)} is not a valid Unicode code point."
+                );
             }
         }
 
@@ -48,16 +54,23 @@ namespace System.Text
         {
             if (!UnicodeUtility.IsValidUnicodeScalar(scalarValue))
             {
-                Debug.Fail($"The value {ToHexString(scalarValue)} is not a valid Unicode scalar value.");
+                Debug.Fail(
+                    $"The value {ToHexString(scalarValue)} is not a valid Unicode scalar value."
+                );
             }
         }
 
         [Conditional("DEBUG")]
         internal static void AssertIsValidSupplementaryPlaneScalar(uint scalarValue)
         {
-            if (!UnicodeUtility.IsValidUnicodeScalar(scalarValue) || UnicodeUtility.IsBmpCodePoint(scalarValue))
+            if (
+                !UnicodeUtility.IsValidUnicodeScalar(scalarValue)
+                || UnicodeUtility.IsBmpCodePoint(scalarValue)
+            )
             {
-                Debug.Fail($"The value {ToHexString(scalarValue)} is not a valid supplementary plane Unicode scalar value.");
+                Debug.Fail(
+                    $"The value {ToHexString(scalarValue)} is not a valid supplementary plane Unicode scalar value."
+                );
             }
         }
 

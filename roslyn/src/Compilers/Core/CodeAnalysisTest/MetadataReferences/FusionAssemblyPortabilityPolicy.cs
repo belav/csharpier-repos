@@ -5,6 +5,8 @@
 #nullable disable
 
 using System;
+using System.Collections.Immutable;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -12,8 +14,6 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using Roslyn.Utilities;
-using System.Diagnostics;
-using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
@@ -28,14 +28,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
         private IntPtr _assemblyConfigCookie;
         private readonly ImmutableArray<byte> _fileHash;
 
-        private FusionAssemblyPortabilityPolicy(IntPtr asmConfigCookie, ImmutableArray<byte> fileHash)
+        private FusionAssemblyPortabilityPolicy(
+            IntPtr asmConfigCookie,
+            ImmutableArray<byte> fileHash
+        )
         {
             _assemblyConfigCookie = asmConfigCookie;
             _fileHash = fileHash;
         }
 
         /// <summary>
-        /// Loads the assembly portability policy from the given path using the CLR API. 
+        /// Loads the assembly portability policy from the given path using the CLR API.
         /// If any problems are encountered by the CLR, the errors are passed through via CLR exception.
         /// Can throw IO exceptions if any are encountered during file access.
         /// </summary>
@@ -58,10 +61,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
             get { return _assemblyConfigCookie; }
         }
 
-        [DllImport("clr", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, PreserveSig = false)]
-        private static extern void CreateAssemblyConfigCookie([MarshalAs(UnmanagedType.LPWStr)] string configPath, out IntPtr assemblyConfig);
+        [DllImport(
+            "clr",
+            CallingConvention = CallingConvention.StdCall,
+            CharSet = CharSet.Unicode,
+            PreserveSig = false
+        )]
+        private static extern void CreateAssemblyConfigCookie(
+            [MarshalAs(UnmanagedType.LPWStr)] string configPath,
+            out IntPtr assemblyConfig
+        );
 
-        [DllImport("clr", CallingConvention = CallingConvention.StdCall, CharSet = CharSet.Unicode, PreserveSig = true)]
+        [DllImport(
+            "clr",
+            CallingConvention = CallingConvention.StdCall,
+            CharSet = CharSet.Unicode,
+            PreserveSig = true
+        )]
         private static extern int DestroyAssemblyConfigCookie(IntPtr assemblyConfig);
 
         public void Dispose()
@@ -94,8 +110,7 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // This is not foolproof, but we just assume that if both assembly
             // policies have the same path and the same timestamp that they are the same.
             // We can't do any better because we don't have access to the config cookie internals.
-            return (object)other != null &&
-                   Enumerable.SequenceEqual(_fileHash, other._fileHash);
+            return (object)other != null && Enumerable.SequenceEqual(_fileHash, other._fileHash);
         }
 
         public override int GetHashCode()

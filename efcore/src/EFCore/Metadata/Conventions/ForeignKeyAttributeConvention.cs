@@ -19,14 +19,14 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///         See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 ///     </para>
 /// </remarks>
-public class ForeignKeyAttributeConvention :
-    IEntityTypeAddedConvention,
-    IForeignKeyAddedConvention,
-    INavigationAddedConvention,
-    ISkipNavigationForeignKeyChangedConvention,
-    IPropertyAddedConvention,
-    IComplexPropertyAddedConvention,
-    IModelFinalizingConvention
+public class ForeignKeyAttributeConvention
+    : IEntityTypeAddedConvention,
+        IForeignKeyAddedConvention,
+        INavigationAddedConvention,
+        ISkipNavigationForeignKeyChangedConvention,
+        IPropertyAddedConvention,
+        IComplexPropertyAddedConvention,
+        IModelFinalizingConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="ForeignKeyAttributeConvention" />.
@@ -45,14 +45,20 @@ public class ForeignKeyAttributeConvention :
     /// <inheritdoc />
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         // Configure self-ref navigations that would be ambiguous without the attributes
         var entityType = entityTypeBuilder.Metadata;
         var foreignKeyNavigations = new List<PropertyInfo>();
         var unconfiguredNavigations = new List<PropertyInfo>();
         var inverses = new List<string>();
-        foreach (var candidatePair in Dependencies.MemberClassifier.GetNavigationCandidates(entityType, useAttributes: true))
+        foreach (
+            var candidatePair in Dependencies.MemberClassifier.GetNavigationCandidates(
+                entityType,
+                useAttributes: true
+            )
+        )
         {
             var (targetType, shouldBeOwned) = candidatePair.Value;
             if (targetType != entityType.ClrType)
@@ -87,8 +93,12 @@ public class ForeignKeyAttributeConvention :
 
         foreach (var inverse in inverses)
         {
-            unconfiguredNavigations.RemoveAll(n => string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal));
-            foreignKeyNavigations.RemoveAll(n => string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal));
+            unconfiguredNavigations.RemoveAll(n =>
+                string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal)
+            );
+            foreignKeyNavigations.RemoveAll(n =>
+                string.Equals(n.GetSimpleMemberName(), inverse, StringComparison.Ordinal)
+            );
         }
 
         if (unconfiguredNavigations.Count == 1)
@@ -96,7 +106,11 @@ public class ForeignKeyAttributeConvention :
             if (foreignKeyNavigations.Count == 1)
             {
                 entityTypeBuilder.HasRelationship(
-                    entityType, foreignKeyNavigations[0], unconfiguredNavigations[0], fromDataAnnotation: true);
+                    entityType,
+                    foreignKeyNavigations[0],
+                    unconfiguredNavigations[0],
+                    fromDataAnnotation: true
+                );
             }
 
             return;
@@ -112,8 +126,11 @@ public class ForeignKeyAttributeConvention :
             entityTypeBuilder.HasRelationship(
                 entityType,
                 navigation,
-                setTargetAsPrincipal: navigation.GetMemberType().IsAssignableFrom(entityType.ClrType),
-                fromDataAnnotation: true);
+                setTargetAsPrincipal: navigation
+                    .GetMemberType()
+                    .IsAssignableFrom(entityType.ClrType),
+                fromDataAnnotation: true
+            );
         }
     }
 
@@ -124,7 +141,8 @@ public class ForeignKeyAttributeConvention :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessForeignKeyAdded(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<IConventionForeignKeyBuilder> context)
+        IConventionContext<IConventionForeignKeyBuilder> context
+    )
     {
         Check.NotNull(relationshipBuilder, nameof(relationshipBuilder));
 
@@ -142,12 +160,16 @@ public class ForeignKeyAttributeConvention :
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
-        IConventionContext<IConventionNavigationBuilder> context)
+        IConventionContext<IConventionNavigationBuilder> context
+    )
     {
         Check.NotNull(navigationBuilder, nameof(navigationBuilder));
 
         var onDependent = navigationBuilder.Metadata.IsOnDependent;
-        var newRelationshipBuilder = UpdateRelationshipBuilder(navigationBuilder.Metadata.ForeignKey.Builder, context);
+        var newRelationshipBuilder = UpdateRelationshipBuilder(
+            navigationBuilder.Metadata.ForeignKey.Builder,
+            context
+        );
         if (newRelationshipBuilder != null)
         {
             var newNavigationBuilder = onDependent
@@ -159,26 +181,29 @@ public class ForeignKeyAttributeConvention :
 
     private IConventionForeignKeyBuilder? UpdateRelationshipBuilder(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         var foreignKey = relationshipBuilder.Metadata;
 
-        var fkPropertyOnPrincipal
-            = FindForeignKeyAttributeOnProperty(
-                foreignKey.PrincipalEntityType, foreignKey.PrincipalToDependent?.GetIdentifyingMemberInfo());
+        var fkPropertyOnPrincipal = FindForeignKeyAttributeOnProperty(
+            foreignKey.PrincipalEntityType,
+            foreignKey.PrincipalToDependent?.GetIdentifyingMemberInfo()
+        );
 
-        var fkPropertyOnDependent
-            = FindForeignKeyAttributeOnProperty(
-                foreignKey.DeclaringEntityType, foreignKey.DependentToPrincipal?.GetIdentifyingMemberInfo());
+        var fkPropertyOnDependent = FindForeignKeyAttributeOnProperty(
+            foreignKey.DeclaringEntityType,
+            foreignKey.DependentToPrincipal?.GetIdentifyingMemberInfo()
+        );
 
-        if (fkPropertyOnDependent != null
-            && fkPropertyOnPrincipal != null)
+        if (fkPropertyOnDependent != null && fkPropertyOnPrincipal != null)
         {
             Dependencies.Logger.ForeignKeyAttributesOnBothPropertiesWarning(
                 foreignKey.PrincipalToDependent!,
                 foreignKey.DependentToPrincipal!,
                 fkPropertyOnPrincipal,
-                fkPropertyOnDependent);
+                fkPropertyOnDependent
+            );
 
             var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
             if (newBuilder is null)
@@ -191,17 +216,25 @@ public class ForeignKeyAttributeConvention :
             fkPropertyOnPrincipal = null;
         }
 
-        var fkPropertiesOnPrincipalToDependent
-            = FindCandidateDependentPropertiesThroughNavigation(relationshipBuilder, pointsToPrincipal: false);
+        var fkPropertiesOnPrincipalToDependent = FindCandidateDependentPropertiesThroughNavigation(
+            relationshipBuilder,
+            pointsToPrincipal: false
+        );
 
-        var fkPropertiesOnDependentToPrincipal
-            = FindCandidateDependentPropertiesThroughNavigation(relationshipBuilder, pointsToPrincipal: true);
+        var fkPropertiesOnDependentToPrincipal = FindCandidateDependentPropertiesThroughNavigation(
+            relationshipBuilder,
+            pointsToPrincipal: true
+        );
 
-        if (fkPropertiesOnDependentToPrincipal != null
-            && fkPropertiesOnPrincipalToDependent != null)
+        if (
+            fkPropertiesOnDependentToPrincipal != null
+            && fkPropertiesOnPrincipalToDependent != null
+        )
         {
             Dependencies.Logger.ForeignKeyAttributesOnBothNavigationsWarning(
-                relationshipBuilder.Metadata.DependentToPrincipal!, relationshipBuilder.Metadata.PrincipalToDependent!);
+                relationshipBuilder.Metadata.DependentToPrincipal!,
+                relationshipBuilder.Metadata.PrincipalToDependent!
+            );
 
             var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
             if (newBuilder is null)
@@ -214,24 +247,28 @@ public class ForeignKeyAttributeConvention :
             fkPropertiesOnPrincipalToDependent = null;
         }
 
-        var fkPropertiesOnNavigation = fkPropertiesOnDependentToPrincipal ?? fkPropertiesOnPrincipalToDependent;
-        var upgradePrincipalToDependentNavigationSource = fkPropertiesOnPrincipalToDependent != null;
-        var upgradeDependentToPrincipalNavigationSource = fkPropertiesOnDependentToPrincipal != null;
+        var fkPropertiesOnNavigation =
+            fkPropertiesOnDependentToPrincipal ?? fkPropertiesOnPrincipalToDependent;
+        var upgradePrincipalToDependentNavigationSource =
+            fkPropertiesOnPrincipalToDependent != null;
+        var upgradeDependentToPrincipalNavigationSource =
+            fkPropertiesOnDependentToPrincipal != null;
         var shouldInvert = false;
         IReadOnlyList<string> fkPropertiesToSet;
 
-        if (fkPropertiesOnNavigation == null
-            || fkPropertiesOnNavigation.Count == 0)
+        if (fkPropertiesOnNavigation == null || fkPropertiesOnNavigation.Count == 0)
         {
-            if (fkPropertyOnDependent == null
-                && fkPropertyOnPrincipal == null)
+            if (fkPropertyOnDependent == null && fkPropertyOnPrincipal == null)
             {
                 return null;
             }
 
             if (fkPropertyOnDependent != null)
             {
-                fkPropertiesToSet = new List<string> { fkPropertyOnDependent.GetSimpleMemberName() };
+                fkPropertiesToSet = new List<string>
+                {
+                    fkPropertyOnDependent.GetSimpleMemberName(),
+                };
                 upgradeDependentToPrincipalNavigationSource = true;
             }
             else
@@ -243,7 +280,10 @@ public class ForeignKeyAttributeConvention :
                 }
 
                 shouldInvert = true;
-                fkPropertiesToSet = new List<string> { fkPropertyOnPrincipal!.GetSimpleMemberName() };
+                fkPropertiesToSet = new List<string>
+                {
+                    fkPropertyOnPrincipal!.GetSimpleMemberName(),
+                };
                 upgradePrincipalToDependentNavigationSource = true;
             }
         }
@@ -251,11 +291,9 @@ public class ForeignKeyAttributeConvention :
         {
             fkPropertiesToSet = fkPropertiesOnNavigation;
 
-            if (fkPropertyOnDependent == null
-                && fkPropertyOnPrincipal == null)
+            if (fkPropertyOnDependent == null && fkPropertyOnPrincipal == null)
             {
-                if (fkPropertiesOnPrincipalToDependent != null
-                    && foreignKey.IsUnique)
+                if (fkPropertiesOnPrincipalToDependent != null && foreignKey.IsUnique)
                 {
                     shouldInvert = true;
                 }
@@ -263,14 +301,17 @@ public class ForeignKeyAttributeConvention :
             else
             {
                 var fkProperty = fkPropertyOnDependent ?? fkPropertyOnPrincipal;
-                if (fkPropertiesOnNavigation.Count != 1
-                    || !Equals(fkPropertiesOnNavigation.First(), fkProperty!.GetSimpleMemberName()))
+                if (
+                    fkPropertiesOnNavigation.Count != 1
+                    || !Equals(fkPropertiesOnNavigation.First(), fkProperty!.GetSimpleMemberName())
+                )
                 {
                     Dependencies.Logger.ConflictingForeignKeyAttributesOnNavigationAndPropertyWarning(
                         fkPropertiesOnDependentToPrincipal != null
                             ? relationshipBuilder.Metadata.DependentToPrincipal!
                             : relationshipBuilder.Metadata.PrincipalToDependent!,
-                        fkProperty!);
+                        fkProperty!
+                    );
 
                     var newBuilder = SplitNavigationsToSeparateRelationships(relationshipBuilder);
                     if (newBuilder is null)
@@ -282,12 +323,12 @@ public class ForeignKeyAttributeConvention :
                     relationshipBuilder = newBuilder;
                     upgradePrincipalToDependentNavigationSource = false;
 
-                    fkPropertiesToSet = fkPropertiesOnDependentToPrincipal
+                    fkPropertiesToSet =
+                        fkPropertiesOnDependentToPrincipal
                         ?? new List<string> { fkPropertyOnDependent!.GetSimpleMemberName() };
                 }
 
-                if (fkPropertyOnDependent != null
-                    || fkPropertiesOnDependentToPrincipal != null)
+                if (fkPropertyOnDependent != null || fkPropertiesOnDependentToPrincipal != null)
                 {
                     upgradeDependentToPrincipalNavigationSource = true;
                 }
@@ -303,38 +344,54 @@ public class ForeignKeyAttributeConvention :
         if (upgradeDependentToPrincipalNavigationSource)
         {
             newRelationshipBuilder = newRelationshipBuilder.HasNavigation(
-                newRelationshipBuilder.Metadata.DependentToPrincipal!.Name, pointsToPrincipal: true, fromDataAnnotation: true)!;
+                newRelationshipBuilder.Metadata.DependentToPrincipal!.Name,
+                pointsToPrincipal: true,
+                fromDataAnnotation: true
+            )!;
         }
 
         if (upgradePrincipalToDependentNavigationSource)
         {
             newRelationshipBuilder = newRelationshipBuilder.HasNavigation(
-                newRelationshipBuilder.Metadata.PrincipalToDependent!.Name, pointsToPrincipal: false, fromDataAnnotation: true)!;
+                newRelationshipBuilder.Metadata.PrincipalToDependent!.Name,
+                pointsToPrincipal: false,
+                fromDataAnnotation: true
+            )!;
         }
 
         if (shouldInvert)
         {
             newRelationshipBuilder = newRelationshipBuilder.HasEntityTypes(
-                foreignKey.DeclaringEntityType, foreignKey.PrincipalEntityType, fromDataAnnotation: true)!;
+                foreignKey.DeclaringEntityType,
+                foreignKey.PrincipalEntityType,
+                fromDataAnnotation: true
+            )!;
         }
         else
         {
-            var existingProperties = foreignKey.DeclaringEntityType.FindProperties(fkPropertiesToSet);
+            var existingProperties = foreignKey.DeclaringEntityType.FindProperties(
+                fkPropertiesToSet
+            );
             if (existingProperties != null)
             {
-                var conflictingFk = foreignKey.DeclaringEntityType.FindForeignKeys(existingProperties)
-                    .FirstOrDefault(
-                        fk => fk != foreignKey
-                            && fk.PrincipalEntityType == foreignKey.PrincipalEntityType
-                            && fk.GetConfigurationSource() == ConfigurationSource.DataAnnotation
-                            && fk.GetPropertiesConfigurationSource() == ConfigurationSource.DataAnnotation);
+                var conflictingFk = foreignKey
+                    .DeclaringEntityType.FindForeignKeys(existingProperties)
+                    .FirstOrDefault(fk =>
+                        fk != foreignKey
+                        && fk.PrincipalEntityType == foreignKey.PrincipalEntityType
+                        && fk.GetConfigurationSource() == ConfigurationSource.DataAnnotation
+                        && fk.GetPropertiesConfigurationSource()
+                            == ConfigurationSource.DataAnnotation
+                    );
                 if (conflictingFk != null)
                 {
                     throw new InvalidOperationException(
                         CoreStrings.ConflictingForeignKeyAttributes(
                             existingProperties.Format(),
                             foreignKey.DeclaringEntityType.DisplayName(),
-                            foreignKey.PrincipalEntityType.DisplayName()));
+                            foreignKey.PrincipalEntityType.DisplayName()
+                        )
+                    );
                 }
             }
         }
@@ -343,14 +400,17 @@ public class ForeignKeyAttributeConvention :
     }
 
     private static IConventionForeignKeyBuilder? SplitNavigationsToSeparateRelationships(
-        IConventionForeignKeyBuilder relationshipBuilder)
+        IConventionForeignKeyBuilder relationshipBuilder
+    )
     {
         var foreignKey = relationshipBuilder.Metadata;
         var dependentToPrincipalNavigationName = foreignKey.DependentToPrincipal!.Name;
         var principalToDependentNavigationName = foreignKey.PrincipalToDependent!.Name;
 
-        if (GetInversePropertyAttribute(foreignKey.PrincipalToDependent) != null
-            || GetInversePropertyAttribute(foreignKey.DependentToPrincipal) != null)
+        if (
+            GetInversePropertyAttribute(foreignKey.PrincipalToDependent) != null
+            || GetInversePropertyAttribute(foreignKey.DependentToPrincipal) != null
+        )
         {
             // Relationship is joined by InversePropertyAttribute
             throw new InvalidOperationException(
@@ -358,38 +418,47 @@ public class ForeignKeyAttributeConvention :
                     dependentToPrincipalNavigationName,
                     foreignKey.DeclaringEntityType.DisplayName(),
                     principalToDependentNavigationName,
-                    foreignKey.PrincipalEntityType.DisplayName()));
+                    foreignKey.PrincipalEntityType.DisplayName()
+                )
+            );
         }
 
-        return relationshipBuilder.HasNavigation((string?)null, pointsToPrincipal: false, fromDataAnnotation: true) is null
-            ? null
+        return relationshipBuilder.HasNavigation(
+                (string?)null,
+                pointsToPrincipal: false,
+                fromDataAnnotation: true
+            )
+                is null
+                ? null
             : foreignKey.PrincipalEntityType.Builder.HasRelationship(
                 foreignKey.DeclaringEntityType,
                 principalToDependentNavigationName,
                 null,
-                fromDataAnnotation: true)
-            == null
+                fromDataAnnotation: true
+            ) == null
                 ? null
-                : relationshipBuilder;
+            : relationshipBuilder;
     }
 
     private static ForeignKeyAttribute? GetForeignKeyAttribute(IConventionNavigationBase navigation)
     {
         var memberInfo = navigation.GetIdentifyingMemberInfo();
-        return memberInfo == null
-            ? null
-            : GetAttribute<ForeignKeyAttribute>(memberInfo);
+        return memberInfo == null ? null : GetAttribute<ForeignKeyAttribute>(memberInfo);
     }
 
-    private static InversePropertyAttribute? GetInversePropertyAttribute(IConventionNavigation navigation)
-        => GetAttribute<InversePropertyAttribute>(navigation.GetIdentifyingMemberInfo());
+    private static InversePropertyAttribute? GetInversePropertyAttribute(
+        IConventionNavigation navigation
+    ) => GetAttribute<InversePropertyAttribute>(navigation.GetIdentifyingMemberInfo());
 
     private static TAttribute? GetAttribute<TAttribute>(MemberInfo? memberInfo)
-        where TAttribute : Attribute
-        => memberInfo == null ? null : memberInfo.GetCustomAttribute<TAttribute>(inherit: true);
+        where TAttribute : Attribute =>
+        memberInfo == null ? null : memberInfo.GetCustomAttribute<TAttribute>(inherit: true);
 
     [ContractAnnotation("navigation:null => null")]
-    private MemberInfo? FindForeignKeyAttributeOnProperty(IConventionEntityType entityType, MemberInfo? navigation)
+    private MemberInfo? FindForeignKeyAttributeOnProperty(
+        IConventionEntityType entityType,
+        MemberInfo? navigation
+    )
     {
         if (navigation == null)
         {
@@ -400,19 +469,29 @@ public class ForeignKeyAttributeConvention :
 
         MemberInfo? candidateProperty = null;
 
-        foreach (var memberInfo in entityType.GetRuntimeProperties().Values.Cast<MemberInfo>()
-                     .Concat(entityType.GetRuntimeFields().Values))
+        foreach (
+            var memberInfo in entityType
+                .GetRuntimeProperties()
+                .Values.Cast<MemberInfo>()
+                .Concat(entityType.GetRuntimeFields().Values)
+        )
         {
-            if (!Attribute.IsDefined(memberInfo, typeof(ForeignKeyAttribute), inherit: true)
-                || !entityType.Builder.CanHaveProperty(memberInfo, fromDataAnnotation: true))
+            if (
+                !Attribute.IsDefined(memberInfo, typeof(ForeignKeyAttribute), inherit: true)
+                || !entityType.Builder.CanHaveProperty(memberInfo, fromDataAnnotation: true)
+            )
             {
                 continue;
             }
 
             var attribute = memberInfo.GetCustomAttribute<ForeignKeyAttribute>(inherit: true)!;
-            if (attribute.Name != navigationName
-                || (memberInfo is PropertyInfo propertyInfo
-                    && IsNavigationCandidate(propertyInfo, entityType)))
+            if (
+                attribute.Name != navigationName
+                || (
+                    memberInfo is PropertyInfo propertyInfo
+                    && IsNavigationCandidate(propertyInfo, entityType)
+                )
+            )
             {
                 continue;
             }
@@ -420,7 +499,8 @@ public class ForeignKeyAttributeConvention :
             if (candidateProperty != null)
             {
                 throw new InvalidOperationException(
-                    CoreStrings.CompositeFkOnProperty(navigationName, entityType.DisplayName()));
+                    CoreStrings.CompositeFkOnProperty(navigationName, entityType.DisplayName())
+                );
             }
 
             candidateProperty = memberInfo;
@@ -429,32 +509,42 @@ public class ForeignKeyAttributeConvention :
         if (candidateProperty != null)
         {
             var fkAttributeOnNavigation = GetAttribute<ForeignKeyAttribute>(navigation);
-            if (fkAttributeOnNavigation != null
-                && fkAttributeOnNavigation.Name != candidateProperty.GetSimpleMemberName())
+            if (
+                fkAttributeOnNavigation != null
+                && fkAttributeOnNavigation.Name != candidateProperty.GetSimpleMemberName()
+            )
             {
                 throw new InvalidOperationException(
                     CoreStrings.FkAttributeOnPropertyNavigationMismatch(
-                        candidateProperty.Name, navigationName, entityType.DisplayName()));
+                        candidateProperty.Name,
+                        navigationName,
+                        entityType.DisplayName()
+                    )
+                );
             }
         }
 
         return candidateProperty;
     }
 
-    private bool IsNavigationCandidate(PropertyInfo propertyInfo, IConventionEntityType entityType)
-        => Dependencies.MemberClassifier.GetNavigationCandidates(entityType, useAttributes: true).TryGetValue(propertyInfo, out _);
+    private bool IsNavigationCandidate(
+        PropertyInfo propertyInfo,
+        IConventionEntityType entityType
+    ) =>
+        Dependencies
+            .MemberClassifier.GetNavigationCandidates(entityType, useAttributes: true)
+            .TryGetValue(propertyInfo, out _);
 
     private static IReadOnlyList<string>? FindCandidateDependentPropertiesThroughNavigation(
         IConventionForeignKeyBuilder relationshipBuilder,
-        bool pointsToPrincipal)
+        bool pointsToPrincipal
+    )
     {
         var navigation = pointsToPrincipal
             ? relationshipBuilder.Metadata.DependentToPrincipal
             : relationshipBuilder.Metadata.PrincipalToDependent!;
 
-        var navigationFkAttribute = navigation != null
-            ? GetForeignKeyAttribute(navigation)
-            : null;
+        var navigationFkAttribute = navigation != null ? GetForeignKeyAttribute(navigation) : null;
 
         if (navigationFkAttribute == null)
         {
@@ -466,14 +556,23 @@ public class ForeignKeyAttributeConvention :
         {
             throw new InvalidOperationException(
                 CoreStrings.InvalidPropertyListOnNavigation(
-                    navigation!.Name, navigation.DeclaringEntityType.DisplayName(), navigationFkAttribute.Name));
+                    navigation!.Name,
+                    navigation.DeclaringEntityType.DisplayName(),
+                    navigationFkAttribute.Name
+                )
+            );
         }
 
-        var navigationPropertyTargetType =
-            navigation!.DeclaringEntityType.GetRuntimeProperties()[navigation.Name].PropertyType;
+        var navigationPropertyTargetType = navigation!
+            .DeclaringEntityType.GetRuntimeProperties()[navigation.Name]
+            .PropertyType;
 
-        var otherNavigations = navigation.DeclaringEntityType.GetRuntimeProperties().Values
-            .Where(p => p.PropertyType == navigationPropertyTargetType && p.GetSimpleMemberName() != navigation.Name)
+        var otherNavigations = navigation
+            .DeclaringEntityType.GetRuntimeProperties()
+            .Values.Where(p =>
+                p.PropertyType == navigationPropertyTargetType
+                && p.GetSimpleMemberName() != navigation.Name
+            )
             .OrderBy(p => p.GetSimpleMemberName());
 
         foreach (var propertyInfo in otherNavigations)
@@ -485,7 +584,9 @@ public class ForeignKeyAttributeConvention :
                     CoreStrings.MultipleNavigationsSameFk(
                         navigation.DeclaringEntityType.DisplayName(),
                         attribute.Name,
-                        $"'{navigation.Name}', '{propertyInfo.Name}'"));
+                        $"'{navigation.Name}', '{propertyInfo.Name}'"
+                    )
+                );
             }
         }
 
@@ -497,11 +598,14 @@ public class ForeignKeyAttributeConvention :
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionForeignKey? foreignKey,
         IConventionForeignKey? oldForeignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
         if (foreignKey is { IsInModel: true })
         {
-            var fkPropertiesToSet = FindCandidateDependentPropertiesThroughNavigation(skipNavigationBuilder.Metadata);
+            var fkPropertiesToSet = FindCandidateDependentPropertiesThroughNavigation(
+                skipNavigationBuilder.Metadata
+            );
             if (fkPropertiesToSet != null)
             {
                 foreignKey.Builder.HasForeignKey(fkPropertiesToSet, fromDataAnnotation: true);
@@ -510,7 +614,8 @@ public class ForeignKeyAttributeConvention :
     }
 
     private static IReadOnlyList<string>? FindCandidateDependentPropertiesThroughNavigation(
-        IConventionSkipNavigation skipNavigation)
+        IConventionSkipNavigation skipNavigation
+    )
     {
         var navigationFkAttribute = GetForeignKeyAttribute(skipNavigation);
         if (navigationFkAttribute == null)
@@ -523,7 +628,11 @@ public class ForeignKeyAttributeConvention :
         {
             throw new InvalidOperationException(
                 CoreStrings.InvalidPropertyListOnNavigation(
-                    skipNavigation.Name, skipNavigation.DeclaringEntityType.DisplayName(), navigationFkAttribute.Name));
+                    skipNavigation.Name,
+                    skipNavigation.DeclaringEntityType.DisplayName(),
+                    navigationFkAttribute.Name
+                )
+            );
         }
 
         return properties;
@@ -532,40 +641,55 @@ public class ForeignKeyAttributeConvention :
     /// <inheritdoc />
     public virtual void ProcessPropertyAdded(
         IConventionPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionPropertyBuilder> context)
+        IConventionContext<IConventionPropertyBuilder> context
+    )
     {
         var property = propertyBuilder.Metadata;
         var member = property.GetIdentifyingMemberInfo();
-        if (member != null
+        if (
+            member != null
             && Attribute.IsDefined(member, typeof(ForeignKeyAttribute), inherit: true)
-            && property.DeclaringType is IConventionComplexType)
+            && property.DeclaringType is IConventionComplexType
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.AttributeNotOnEntityTypeProperty(
-                    "ForeignKey", property.DeclaringType.DisplayName(), property.Name));
+                    "ForeignKey",
+                    property.DeclaringType.DisplayName(),
+                    property.Name
+                )
+            );
         }
     }
 
     /// <inheritdoc />
     public virtual void ProcessComplexPropertyAdded(
         IConventionComplexPropertyBuilder propertyBuilder,
-        IConventionContext<IConventionComplexPropertyBuilder> context)
+        IConventionContext<IConventionComplexPropertyBuilder> context
+    )
     {
         var property = propertyBuilder.Metadata;
         var member = property.GetIdentifyingMemberInfo();
-        if (member != null
-            && Attribute.IsDefined(member, typeof(ForeignKeyAttribute), inherit: true))
+        if (
+            member != null
+            && Attribute.IsDefined(member, typeof(ForeignKeyAttribute), inherit: true)
+        )
         {
             throw new InvalidOperationException(
                 CoreStrings.AttributeNotOnEntityTypeProperty(
-                    "ForeignKey", property.DeclaringType.DisplayName(), property.Name));
+                    "ForeignKey",
+                    property.DeclaringType.DisplayName(),
+                    property.Name
+                )
+            );
         }
     }
 
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
@@ -574,16 +698,19 @@ public class ForeignKeyAttributeConvention :
                 if (declaredNavigation.IsCollection)
                 {
                     var foreignKey = declaredNavigation.ForeignKey;
-                    var fkPropertyOnPrincipal
-                        = FindForeignKeyAttributeOnProperty(
-                            foreignKey.PrincipalEntityType, declaredNavigation.GetIdentifyingMemberInfo());
+                    var fkPropertyOnPrincipal = FindForeignKeyAttributeOnProperty(
+                        foreignKey.PrincipalEntityType,
+                        declaredNavigation.GetIdentifyingMemberInfo()
+                    );
                     if (fkPropertyOnPrincipal != null)
                     {
                         throw new InvalidOperationException(
                             CoreStrings.FkAttributeOnNonUniquePrincipal(
                                 declaredNavigation.Name,
                                 foreignKey.PrincipalEntityType.DisplayName(),
-                                foreignKey.DeclaringEntityType.DisplayName()));
+                                foreignKey.DeclaringEntityType.DisplayName()
+                            )
+                        );
                     }
                 }
             }

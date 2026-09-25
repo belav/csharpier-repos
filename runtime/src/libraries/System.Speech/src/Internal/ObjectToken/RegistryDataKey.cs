@@ -21,7 +21,10 @@ namespace System.Speech.Internal.ObjectTokens
             ISpRegDataKey regKey = (ISpRegDataKey)new SpDataKey();
             SAPIErrorCodes hresult = (SAPIErrorCodes)regKey.SetKey(regHandle, false);
             regHandle?.Close();
-            if ((hresult != SAPIErrorCodes.S_OK) && (hresult != SAPIErrorCodes.SPERR_ALREADY_INITIALIZED))
+            if (
+                (hresult != SAPIErrorCodes.S_OK)
+                && (hresult != SAPIErrorCodes.SPERR_ALREADY_INITIALIZED)
+            )
             {
                 throw new InvalidOperationException();
             }
@@ -31,10 +34,8 @@ namespace System.Speech.Internal.ObjectTokens
             _disposeSapiKey = true;
         }
 
-        protected RegistryDataKey(string fullPath, RegistryKey managedRegKey) :
-            this(fullPath, managedRegKey.Handle)
-        {
-        }
+        protected RegistryDataKey(string fullPath, RegistryKey managedRegKey)
+            : this(fullPath, managedRegKey.Handle) { }
 
         protected RegistryDataKey(string fullPath, RegistryDataKey copyKey)
         {
@@ -50,10 +51,8 @@ namespace System.Speech.Internal.ObjectTokens
             this._disposeSapiKey = shouldDispose;
         }
 
-        protected RegistryDataKey(ISpObjectToken sapiToken) :
-            this(GetTokenIdFromToken(sapiToken), sapiToken, false)
-        {
-        }
+        protected RegistryDataKey(ISpObjectToken sapiToken)
+            : this(GetTokenIdFromToken(sapiToken), sapiToken, false) { }
 
         internal static RegistryDataKey Open(string registryPath, bool fCreateIfNotExist)
         {
@@ -98,7 +97,11 @@ namespace System.Speech.Internal.ObjectTokens
             return new RegistryDataKey(keyId, hkey);
         }
 
-        private static RegistryDataKey OpenSubKey(RegistryDataKey baseKey, string registryPath, bool createIfNotExist)
+        private static RegistryDataKey OpenSubKey(
+            RegistryDataKey baseKey,
+            string registryPath,
+            bool createIfNotExist
+        )
         {
             if (string.IsNullOrEmpty(registryPath) || null == baseKey)
             {
@@ -107,7 +110,9 @@ namespace System.Speech.Internal.ObjectTokens
 
             string nextKeyPath = GetFirstKeyAndParseRemainder(ref registryPath);
 
-            RegistryDataKey nextKey = createIfNotExist ? baseKey.CreateKey(nextKeyPath) : baseKey.OpenKey(nextKeyPath);
+            RegistryDataKey nextKey = createIfNotExist
+                ? baseKey.CreateKey(nextKeyPath)
+                : baseKey.OpenKey(nextKeyPath);
 
             if (string.IsNullOrEmpty(registryPath))
             {
@@ -162,7 +167,8 @@ namespace System.Speech.Internal.ObjectTokens
         public int SetData(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.SysUInt)] uint cbData,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data)
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] byte[] data
+        )
         {
             return _sapiRegKey.SetData(valueName, cbData, data);
         }
@@ -174,7 +180,8 @@ namespace System.Speech.Internal.ObjectTokens
         public int GetData(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
             [MarshalAs(UnmanagedType.SysUInt)] ref uint pcbData,
-            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data)
+            [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1), Out] byte[] data
+        )
         {
             return _sapiRegKey.GetData(valueName, ref pcbData, data);
         }
@@ -186,7 +193,8 @@ namespace System.Speech.Internal.ObjectTokens
         [PreserveSig]
         public int SetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
-            [MarshalAs(UnmanagedType.LPWStr)] string value)
+            [MarshalAs(UnmanagedType.LPWStr)] string value
+        )
         {
             return _sapiRegKey.SetStringValue(valueName, value);
         }
@@ -198,7 +206,8 @@ namespace System.Speech.Internal.ObjectTokens
         [PreserveSig]
         public int GetStringValue(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
-            [MarshalAs(UnmanagedType.LPWStr)] out string value)
+            [MarshalAs(UnmanagedType.LPWStr)] out string value
+        )
         {
             return _sapiRegKey.GetStringValue(valueName, out value);
         }
@@ -209,7 +218,8 @@ namespace System.Speech.Internal.ObjectTokens
         [PreserveSig]
         public int SetDWORD(
             [MarshalAs(UnmanagedType.LPWStr)] string valueName,
-            [MarshalAs(UnmanagedType.SysUInt)] uint value)
+            [MarshalAs(UnmanagedType.SysUInt)] uint value
+        )
         {
             return _sapiRegKey.SetDWORD(valueName, value);
         }
@@ -228,7 +238,10 @@ namespace System.Speech.Internal.ObjectTokens
         /// for the specified sub-key.
         /// </summary>
         [PreserveSig]
-        public int OpenKey([MarshalAs(UnmanagedType.LPWStr)] string subKeyName, out ISpDataKey ppSubKey)
+        public int OpenKey(
+            [MarshalAs(UnmanagedType.LPWStr)] string subKeyName,
+            out ISpDataKey ppSubKey
+        )
         {
             return _sapiRegKey.OpenKey(subKeyName, out ppSubKey);
         }
@@ -238,7 +251,10 @@ namespace System.Speech.Internal.ObjectTokens
         /// for the specified sub-key.
         /// </summary>
         [PreserveSig]
-        public int CreateKey([MarshalAs(UnmanagedType.LPWStr)] string subKeyName, out ISpDataKey ppSubKey)
+        public int CreateKey(
+            [MarshalAs(UnmanagedType.LPWStr)] string subKeyName,
+            out ISpDataKey ppSubKey
+        )
         {
             return _sapiRegKey.CreateKey(subKeyName, out ppSubKey);
         }
@@ -286,10 +302,7 @@ namespace System.Speech.Internal.ObjectTokens
         /// </summary>
         internal string Id
         {
-            get
-            {
-                return _sKeyId;
-            }
+            get { return _sKeyId; }
         }
 
         /// <summary>
@@ -331,9 +344,10 @@ namespace System.Speech.Internal.ObjectTokens
             byte[] unusedBytes = Array.Empty<byte>();
 
             return (
-                0 == _sapiRegKey.GetStringValue(valueName, out unusedString) ||
-                0 == _sapiRegKey.GetDWORD(valueName, ref unusedUint) ||
-                0 == _sapiRegKey.GetData(valueName, ref unusedUint, unusedBytes));
+                0 == _sapiRegKey.GetStringValue(valueName, out unusedString)
+                || 0 == _sapiRegKey.GetDWORD(valueName, ref unusedUint)
+                || 0 == _sapiRegKey.GetData(valueName, ref unusedUint, unusedBytes)
+            );
         }
 
         /// <summary>
@@ -484,11 +498,12 @@ namespace System.Speech.Internal.ObjectTokens
 
         private static RegistryKey RegKeyFromRootPath(string rootPath)
         {
-            RegistryKey[] roots = new RegistryKey[] {
+            RegistryKey[] roots = new RegistryKey[]
+            {
                 Registry.ClassesRoot,
                 Registry.LocalMachine,
                 Registry.CurrentUser,
-                Registry.CurrentConfig
+                Registry.CurrentConfig,
             };
 
             foreach (RegistryKey key in roots)
@@ -508,30 +523,30 @@ namespace System.Speech.Internal.ObjectTokens
 
         internal enum SAPIErrorCodes
         {
-            STG_E_FILENOTFOUND = -2147287038,  // 0x80030002
+            STG_E_FILENOTFOUND = -2147287038, // 0x80030002
             SPERR_ALREADY_INITIALIZED = -2147201022, // 0x80045002
-            SPERR_UNSUPPORTED_FORMAT = -2147201021,  // 0x80045003
-            SPERR_DEVICE_BUSY = -2147201018,  // 0x80045006
-            SPERR_DEVICE_NOT_SUPPORTED = -2147201017,  // 0x80045007
-            SPERR_DEVICE_NOT_ENABLED = -2147201016,  // 0x80045008
-            SPERR_NO_DRIVER = -2147201015,  // 0x80045009
-            SPERR_TOO_MANY_GRAMMARS = -2147200990,  // 0x80045022
-            SPERR_INVALID_IMPORT = -2147200988,  // 0x80045024
-            SPERR_AUDIO_BUFFER_OVERFLOW = -2147200977,  // 0x8004502F
-            SPERR_NO_AUDIO_DATA = -2147200976,  // 0x80045030
-            SPERR_NO_MORE_ITEMS = -2147200967,  // 0x80045039
-            SPERR_NOT_FOUND = -2147200966,  // 0x8004503A
-            SPERR_GENERIC_MMSYS_ERROR = -2147200964,  // 0x8004503C
-            SPERR_NOT_TOPLEVEL_RULE = -2147200940,  // 0x80045054
-            SPERR_NOT_ACTIVE_SESSION = -2147200925,  // 0x80045063
-            SPERR_SML_GENERATION_FAIL = -2147200921,  // 0x80045067
-            SPERR_SHARED_ENGINE_DISABLED = -2147200906,  // 0x80045076
-            SPERR_RECOGNIZER_NOT_FOUND = -2147200905,  // 0x80045077
-            SPERR_AUDIO_NOT_FOUND = -2147200904,  // 0x80045078
-            S_OK = 0,            // 0x00000000
-            S_FALSE = 1,            // 0x00000001
+            SPERR_UNSUPPORTED_FORMAT = -2147201021, // 0x80045003
+            SPERR_DEVICE_BUSY = -2147201018, // 0x80045006
+            SPERR_DEVICE_NOT_SUPPORTED = -2147201017, // 0x80045007
+            SPERR_DEVICE_NOT_ENABLED = -2147201016, // 0x80045008
+            SPERR_NO_DRIVER = -2147201015, // 0x80045009
+            SPERR_TOO_MANY_GRAMMARS = -2147200990, // 0x80045022
+            SPERR_INVALID_IMPORT = -2147200988, // 0x80045024
+            SPERR_AUDIO_BUFFER_OVERFLOW = -2147200977, // 0x8004502F
+            SPERR_NO_AUDIO_DATA = -2147200976, // 0x80045030
+            SPERR_NO_MORE_ITEMS = -2147200967, // 0x80045039
+            SPERR_NOT_FOUND = -2147200966, // 0x8004503A
+            SPERR_GENERIC_MMSYS_ERROR = -2147200964, // 0x8004503C
+            SPERR_NOT_TOPLEVEL_RULE = -2147200940, // 0x80045054
+            SPERR_NOT_ACTIVE_SESSION = -2147200925, // 0x80045063
+            SPERR_SML_GENERATION_FAIL = -2147200921, // 0x80045067
+            SPERR_SHARED_ENGINE_DISABLED = -2147200906, // 0x80045076
+            SPERR_RECOGNIZER_NOT_FOUND = -2147200905, // 0x80045077
+            SPERR_AUDIO_NOT_FOUND = -2147200904, // 0x80045078
+            S_OK = 0, // 0x00000000
+            S_FALSE = 1, // 0x00000001
             E_INVALIDARG = -2147024809, // 0x80070057
-            SP_NO_RULES_TO_ACTIVATE = 282747,       // 0x0004507B
+            SP_NO_RULES_TO_ACTIVATE = 282747, // 0x0004507B
             ERROR_MORE_DATA = 0x50EA,
         }
 

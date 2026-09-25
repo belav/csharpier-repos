@@ -9,7 +9,6 @@ using System.Threading;
 
 namespace System.Runtime.CompilerServices
 {
-
     // EntryInfo is a union, so that we could put some extra info in the element #0 of the table.
     // the struct is not nested in GenericCache because generic types cannot have explicit layout.
     [StructLayout(LayoutKind.Explicit)]
@@ -34,6 +33,7 @@ namespace System.Runtime.CompilerServices
         // AuxData  (to store some data specific to the table in the element #0 )
         [FieldOffset(0)]
         internal byte hashShift;
+
         [FieldOffset(1)]
         internal byte victimCounter;
     }
@@ -41,7 +41,7 @@ namespace System.Runtime.CompilerServices
     // NOTE: It is ok if TKey contains references, but we want it to be a struct,
     //       so that equality is devirtualized.
     internal unsafe struct GenericCache<TKey, TValue>
-        where TKey: struct, IEquatable<TKey>
+        where TKey : struct, IEquatable<TKey>
     {
         private struct Entry
         {
@@ -72,8 +72,12 @@ namespace System.Runtime.CompilerServices
         // creates a new cache instance
         public GenericCache(int initialCacheSize, int maxCacheSize)
         {
-            Debug.Assert(BitOperations.PopCount((uint)initialCacheSize) == 1 && initialCacheSize > 1);
-            Debug.Assert(BitOperations.PopCount((uint)maxCacheSize) == 1 && maxCacheSize >= initialCacheSize);
+            Debug.Assert(
+                BitOperations.PopCount((uint)initialCacheSize) == 1 && initialCacheSize > 1
+            );
+            Debug.Assert(
+                BitOperations.PopCount((uint)maxCacheSize) == 1 && maxCacheSize >= initialCacheSize
+            );
 
             _initialCacheSize = initialCacheSize;
             _maxCacheSize = maxCacheSize;
@@ -85,10 +89,10 @@ namespace System.Runtime.CompilerServices
 
             _table =
 #if !DEBUG
-            // Initialize to the sentinel in DEBUG as if just flushed, to ensure the sentinel can be handled in Set.
-            CreateCacheTable(initialCacheSize) ??
+                // Initialize to the sentinel in DEBUG as if just flushed, to ensure the sentinel can be handled in Set.
+                CreateCacheTable(initialCacheSize) ??
 #endif
-            s_sentinelTable!;
+                s_sentinelTable!;
             _lastFlushSize = initialCacheSize;
         }
 
@@ -133,7 +137,10 @@ namespace System.Runtime.CompilerServices
         private static ref Entry Element(Entry[] table, int index)
         {
             // element 0 is used for embedded aux data, skip it
-            return ref Unsafe.Add(ref Unsafe.As<byte, Entry>(ref Unsafe.As<RawArrayData>(table).Data), index + 1);
+            return ref Unsafe.Add(
+                ref Unsafe.As<byte, Entry>(ref Unsafe.As<RawArrayData>(table).Data),
+                index + 1
+            );
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -143,7 +150,7 @@ namespace System.Runtime.CompilerServices
             Entry[] table = _table!;
             int hash = key!.GetHashCode();
             int index = HashToBucket(table, hash);
-            for (int i = 0; i < BUCKET_SIZE;)
+            for (int i = 0; i < BUCKET_SIZE; )
             {
                 ref Entry pEntry = ref Element(table, index);
 
@@ -206,9 +213,7 @@ namespace System.Runtime.CompilerServices
             {
                 table = new Entry[size + 1];
             }
-            catch (OutOfMemoryException) when (!throwOnFail)
-            {
-            }
+            catch (OutOfMemoryException) when (!throwOnFail) { }
 
             if (table == null)
             {
@@ -217,9 +222,7 @@ namespace System.Runtime.CompilerServices
                 {
                     table = new Entry[size + 1];
                 }
-                catch (OutOfMemoryException)
-                {
-                }
+                catch (OutOfMemoryException) { }
             }
 
             if (table == null)
@@ -258,7 +261,7 @@ namespace System.Runtime.CompilerServices
                 int index = bucket;
                 ref Entry pEntry = ref Element(table, index);
 
-                for (int i = 0; i < BUCKET_SIZE;)
+                for (int i = 0; i < BUCKET_SIZE; )
                 {
                     // claim the entry if unused or is more distant than us from its origin.
                     // Note - someone familiar with Robin Hood hashing will notice that
@@ -287,8 +290,13 @@ namespace System.Runtime.CompilerServices
 
                     if (version == 0 || (version >> VERSION_NUM_SIZE) > i)
                     {
-                        uint newVersion = ((uint)i << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1;
-                        uint versionOrig = Interlocked.CompareExchange(ref pEntry.Version, newVersion, version);
+                        uint newVersion =
+                            ((uint)i << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1;
+                        uint versionOrig = Interlocked.CompareExchange(
+                            ref pEntry.Version,
+                            newVersion,
+                            version
+                        );
                         if (versionOrig == version)
                         {
                             pEntry._key = key;
@@ -351,8 +359,14 @@ namespace System.Runtime.CompilerServices
                     return;
                 }
 
-                uint newVersion = (uint)((victimDistance << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1);
-                uint versionOrig = Interlocked.CompareExchange(ref pEntry.Version, newVersion, version);
+                uint newVersion = (uint)(
+                    (victimDistance << VERSION_NUM_SIZE) + (version & VERSION_NUM_MASK) + 1
+                );
+                uint versionOrig = Interlocked.CompareExchange(
+                    ref pEntry.Version,
+                    newVersion,
+                    version
+                );
 
                 if (versionOrig == version)
                 {

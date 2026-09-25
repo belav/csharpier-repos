@@ -1,31 +1,33 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlSchemaAny.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright> 
-// <owner current="true" primary="true">Microsoft</owner>                                                               
+// </copyright>
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     using System.ComponentModel;
-    using System.Xml.Serialization;
     using System.Text;
+    using System.Xml.Serialization;
 
     /// <include file='doc\XmlSchemaAny.uex' path='docs/doc[@for="XmlSchemaAny"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSchemaAny : XmlSchemaParticle {
+    public class XmlSchemaAny : XmlSchemaParticle
+    {
         string ns;
         XmlSchemaContentProcessing processContents = XmlSchemaContentProcessing.None;
         NamespaceList namespaceList;
-        
+
         /// <include file='doc\XmlSchemaAny.uex' path='docs/doc[@for="XmlSchemaAny.Namespaces"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("namespace")]
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
             set { ns = value; }
         }
@@ -35,20 +37,25 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("processContents"), DefaultValue(XmlSchemaContentProcessing.None)]
-        public XmlSchemaContentProcessing ProcessContents {
+        public XmlSchemaContentProcessing ProcessContents
+        {
             get { return processContents; }
             set { processContents = value; }
         }
 
         [XmlIgnore]
-        internal NamespaceList NamespaceList {
+        internal NamespaceList NamespaceList
+        {
             get { return namespaceList; }
         }
 
         [XmlIgnore]
-        internal string ResolvedNamespace {
-            get { 
-                if (ns == null || ns.Length == 0) {
+        internal string ResolvedNamespace
+        {
+            get
+            {
+                if (ns == null || ns.Length == 0)
+                {
                     return "##any";
                 }
                 return ns;
@@ -56,25 +63,36 @@ namespace System.Xml.Schema {
         }
 
         [XmlIgnore]
-        internal XmlSchemaContentProcessing ProcessContentsCorrect {
-            get { return processContents == XmlSchemaContentProcessing.None ? XmlSchemaContentProcessing.Strict : processContents; }
+        internal XmlSchemaContentProcessing ProcessContentsCorrect
+        {
+            get
+            {
+                return processContents == XmlSchemaContentProcessing.None
+                    ? XmlSchemaContentProcessing.Strict
+                    : processContents;
+            }
         }
-        
-        internal override string NameString {
-            get {
-                switch (namespaceList.Type) {
+
+        internal override string NameString
+        {
+            get
+            {
+                switch (namespaceList.Type)
+                {
                     case NamespaceList.ListType.Any:
                         return "##any:*";
-                    
+
                     case NamespaceList.ListType.Other:
                         return "##other:*";
 
                     case NamespaceList.ListType.Set:
                         StringBuilder sb = new StringBuilder();
                         int i = 1;
-                        foreach(string wildcardNS in namespaceList.Enumerate) {
+                        foreach (string wildcardNS in namespaceList.Enumerate)
+                        {
                             sb.Append(wildcardNS + ":*");
-                            if (i < namespaceList.Enumerate.Count) {
+                            if (i < namespaceList.Enumerate.Count)
+                            {
                                 sb.Append(" ");
                             }
                             i++;
@@ -87,28 +105,33 @@ namespace System.Xml.Schema {
             }
         }
 
-        internal void BuildNamespaceList(string targetNamespace) {
-            if (ns != null) { //If namespace="" default to namespace="##any"
+        internal void BuildNamespaceList(string targetNamespace)
+        {
+            if (ns != null)
+            { //If namespace="" default to namespace="##any"
                 namespaceList = new NamespaceList(ns, targetNamespace);
             }
-            else {
+            else
+            {
                 namespaceList = new NamespaceList();
             }
         }
 
-        internal void BuildNamespaceListV1Compat(string targetNamespace) {
-            if (ns != null) {
+        internal void BuildNamespaceListV1Compat(string targetNamespace)
+        {
+            if (ns != null)
+            {
                 namespaceList = new NamespaceListV1Compat(ns, targetNamespace);
             }
-            else {
+            else
+            {
                 namespaceList = new NamespaceList(); //This is only ##any, hence base class is sufficient
             }
         }
 
-        internal bool Allows(XmlQualifiedName qname) {
+        internal bool Allows(XmlQualifiedName qname)
+        {
             return namespaceList.Allows(qname.Namespace);
         }
-
     }
-
 }

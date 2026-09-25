@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,36 +31,36 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels.Security
 {
-	// See http://blogs.msdn.com/shawnfa/archive/2004/04/05/108098.aspx :)
-	class WSEncryptedXml : EncryptedXml
-	{
-		public WSEncryptedXml ()
-		{
-		}
+    // See http://blogs.msdn.com/shawnfa/archive/2004/04/05/108098.aspx :)
+    class WSEncryptedXml : EncryptedXml
+    {
+        public WSEncryptedXml() { }
 
-		public WSEncryptedXml (XmlDocument doc)
-			: base (doc)
-		{
-		}
+        public WSEncryptedXml(XmlDocument doc)
+            : base(doc) { }
 
-		public override XmlElement GetIdElement (XmlDocument doc, string id)
-		{
-			return SearchChildren (doc, id);
-		}
+        public override XmlElement GetIdElement(XmlDocument doc, string id)
+        {
+            return SearchChildren(doc, id);
+        }
 
-		XmlElement SearchChildren (XmlNode node, string id)
-		{
-			for (XmlNode n = node.FirstChild; n != null; n = n.NextSibling) {
-				XmlElement el = n as XmlElement;
-				if (el == null)
-					continue;
-				if (el.GetAttribute ("Id", Constants.WsuNamespace) == id || el.GetAttribute ("Id") == id)
-					return el;
-				XmlElement el2 = SearchChildren (el, id);
-				if (el2 != null)
-					return el2;
-			}
-			return null;
-		}
-	}
+        XmlElement SearchChildren(XmlNode node, string id)
+        {
+            for (XmlNode n = node.FirstChild; n != null; n = n.NextSibling)
+            {
+                XmlElement el = n as XmlElement;
+                if (el == null)
+                    continue;
+                if (
+                    el.GetAttribute("Id", Constants.WsuNamespace) == id
+                    || el.GetAttribute("Id") == id
+                )
+                    return el;
+                XmlElement el2 = SearchChildren(el, id);
+                if (el2 != null)
+                    return el2;
+            }
+            return null;
+        }
+    }
 }

@@ -6,11 +6,12 @@ namespace System.ServiceModel.Configuration
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
     using System.Configuration;
+    using System.Text;
 
     [ConfigurationCollection(typeof(BaseAddressPrefixFilterElement))]
-    public sealed class BaseAddressPrefixFilterElementCollection : ServiceModelConfigurationElementCollection<BaseAddressPrefixFilterElement>
+    public sealed class BaseAddressPrefixFilterElementCollection
+        : ServiceModelConfigurationElementCollection<BaseAddressPrefixFilterElement>
     {
         public BaseAddressPrefixFilterElementCollection()
             : base(ConfigurationElementCollectionType.AddRemoveClearMap, ConfigurationStrings.Add)
@@ -28,7 +29,8 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
-            BaseAddressPrefixFilterElement configElementKey = (BaseAddressPrefixFilterElement)element;
+            BaseAddressPrefixFilterElement configElementKey =
+                (BaseAddressPrefixFilterElement)element;
             return configElementKey.Prefix;
         }
 
@@ -36,6 +38,5 @@ namespace System.ServiceModel.Configuration
         {
             get { return true; }
         }
-
     }
 }

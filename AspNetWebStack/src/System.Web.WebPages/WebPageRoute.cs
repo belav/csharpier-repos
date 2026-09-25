@@ -10,7 +10,9 @@ namespace System.Web.WebPages
 {
     internal sealed class WebPageRoute
     {
-        private static readonly Lazy<bool> _isRootExplicitlyDisabled = new Lazy<bool>(() => WebPagesDeployment.IsExplicitlyDisabled("~/"));
+        private static readonly Lazy<bool> _isRootExplicitlyDisabled = new Lazy<bool>(() =>
+            WebPagesDeployment.IsExplicitlyDisabled("~/")
+        );
         private bool? _isExplicitlyDisabled;
 
         internal bool IsExplicitlyDisabled
@@ -28,11 +30,19 @@ namespace System.Web.WebPages
             }
 
             // Parse incoming URL (we trim off the first two chars since they're always "~/")
-            string requestPath = context.Request.AppRelativeCurrentExecutionFilePath.Substring(2) + context.Request.PathInfo;
+            string requestPath =
+                context.Request.AppRelativeCurrentExecutionFilePath.Substring(2)
+                + context.Request.PathInfo;
             string[] registeredExtensions = WebPageHttpHandler.SupportedExtensions;
 
             // Check if this request matches a file in the app
-            WebPageMatch webpageRouteMatch = MatchRequest(requestPath, registeredExtensions, VirtualPathFactoryManager.InstancePathExists, context, DisplayModeProvider.Instance);
+            WebPageMatch webpageRouteMatch = MatchRequest(
+                requestPath,
+                registeredExtensions,
+                VirtualPathFactoryManager.InstancePathExists,
+                context,
+                DisplayModeProvider.Instance
+            );
             if (webpageRouteMatch != null)
             {
                 // If it matches then save some data for the WebPage's UrlData
@@ -58,7 +68,13 @@ namespace System.Web.WebPages
                 string extension = PathUtil.GetExtension(requestPath);
                 foreach (string supportedExt in registeredExtensions)
                 {
-                    if (String.Equals("." + supportedExt, extension, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        String.Equals(
+                            "." + supportedExt,
+                            extension,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         throw new HttpException(404, null);
                     }
@@ -78,7 +94,13 @@ namespace System.Web.WebPages
             return webPageMatch;
         }
 
-        private static string GetRouteLevelMatch(string pathValue, string[] supportedExtensions, Func<string, bool> virtualPathExists, HttpContextBase context, DisplayModeProvider displayModeProvider)
+        private static string GetRouteLevelMatch(
+            string pathValue,
+            string[] supportedExtensions,
+            Func<string, bool> virtualPathExists,
+            HttpContextBase context,
+            DisplayModeProvider displayModeProvider
+        )
         {
             for (int i = 0; i < supportedExtensions.Length; i++)
             {
@@ -95,14 +117,26 @@ namespace System.Web.WebPages
                 {
                     virtualPath = "~/" + pathValue;
                 }
-                DisplayInfo virtualPathDisplayInfo = displayModeProvider.GetDisplayInfoForVirtualPath(virtualPath, context, virtualPathExists, currentDisplayMode: null);
+                DisplayInfo virtualPathDisplayInfo =
+                    displayModeProvider.GetDisplayInfoForVirtualPath(
+                        virtualPath,
+                        context,
+                        virtualPathExists,
+                        currentDisplayMode: null
+                    );
 
                 if (virtualPathDisplayInfo != null)
                 {
                     // If there's an exact match on disk, return it unless it starts with an underscore
-                    if (Path.GetFileName(virtualPathDisplayInfo.FilePath).StartsWith("_", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        Path.GetFileName(virtualPathDisplayInfo.FilePath)
+                            .StartsWith("_", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
-                        throw new HttpException(404, WebPageResources.WebPageRoute_UnderscoreBlocked);
+                        throw new HttpException(
+                            404,
+                            WebPageResources.WebPageRoute_UnderscoreBlocked
+                        );
                     }
 
                     string resolvedVirtualPath = virtualPathDisplayInfo.FilePath;
@@ -122,7 +156,13 @@ namespace System.Web.WebPages
             return null;
         }
 
-        internal static WebPageMatch MatchRequest(string pathValue, string[] supportedExtensions, Func<string, bool> virtualPathExists, HttpContextBase context, DisplayModeProvider displayModes)
+        internal static WebPageMatch MatchRequest(
+            string pathValue,
+            string[] supportedExtensions,
+            Func<string, bool> virtualPathExists,
+            HttpContextBase context,
+            DisplayModeProvider displayModes
+        )
         {
             string currentLevel = String.Empty;
             string currentPathInfo = pathValue;
@@ -158,7 +198,13 @@ namespace System.Web.WebPages
                 while (true)
                 {
                     // Does the current route level patch any supported extension?
-                    string routeLevelMatch = GetRouteLevelMatch(currentLevel, supportedExtensions, virtualPathExists, context, displayModes);
+                    string routeLevelMatch = GetRouteLevelMatch(
+                        currentLevel,
+                        supportedExtensions,
+                        virtualPathExists,
+                        context,
+                        displayModes
+                    );
                     if (routeLevelMatch != null)
                     {
                         return new WebPageMatch(routeLevelMatch, currentPathInfo);
@@ -182,10 +228,24 @@ namespace System.Web.WebPages
                 }
             }
 
-            return MatchDefaultFiles(pathValue, supportedExtensions, virtualPathExists, context, displayModes, currentLevel);
+            return MatchDefaultFiles(
+                pathValue,
+                supportedExtensions,
+                virtualPathExists,
+                context,
+                displayModes,
+                currentLevel
+            );
         }
 
-        private static WebPageMatch MatchDefaultFiles(string pathValue, string[] supportedExtensions, Func<string, bool> virtualPathExists, HttpContextBase context, DisplayModeProvider displayModes, string currentLevel)
+        private static WebPageMatch MatchDefaultFiles(
+            string pathValue,
+            string[] supportedExtensions,
+            Func<string, bool> virtualPathExists,
+            HttpContextBase context,
+            DisplayModeProvider displayModes,
+            string currentLevel
+        )
         {
             // If we haven't found anything yet, now try looking for default.* or index.* at the current url
             currentLevel = pathValue;
@@ -207,13 +267,25 @@ namespace System.Web.WebPages
             }
 
             // Does the current route level match any supported extension?
-            string defaultMatch = GetRouteLevelMatch(currentLevelDefault, supportedExtensions, virtualPathExists, context, displayModes);
+            string defaultMatch = GetRouteLevelMatch(
+                currentLevelDefault,
+                supportedExtensions,
+                virtualPathExists,
+                context,
+                displayModes
+            );
             if (defaultMatch != null)
             {
                 return new WebPageMatch(defaultMatch, String.Empty);
             }
 
-            string indexMatch = GetRouteLevelMatch(currentLevelIndex, supportedExtensions, virtualPathExists, context, displayModes);
+            string indexMatch = GetRouteLevelMatch(
+                currentLevelIndex,
+                supportedExtensions,
+                virtualPathExists,
+                context,
+                displayModes
+            );
             if (indexMatch != null)
             {
                 return new WebPageMatch(indexMatch, String.Empty);

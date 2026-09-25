@@ -26,16 +26,29 @@ public static class SqlServerNetTopologySuiteServiceCollectionExtensions
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
     [RequiresDynamicCode("NTS types are not supported with NativeAOT")]
     public static IServiceCollection AddEntityFrameworkSqlServerNetTopologySuite(
-        this IServiceCollection serviceCollection)
+        this IServiceCollection serviceCollection
+    )
     {
         serviceCollection.TryAddSingleton(NtsGeometryServices.Instance);
 
         new EntityFrameworkRelationalServicesBuilder(serviceCollection)
-            .TryAdd<IRelationalTypeMappingSourcePlugin, SqlServerNetTopologySuiteTypeMappingSourcePlugin>()
-            .TryAdd<IMethodCallTranslatorPlugin, SqlServerNetTopologySuiteMethodCallTranslatorPlugin>()
-            .TryAdd<IAggregateMethodCallTranslatorPlugin, SqlServerNetTopologySuiteAggregateMethodCallTranslatorPlugin>()
+            .TryAdd<
+                IRelationalTypeMappingSourcePlugin,
+                SqlServerNetTopologySuiteTypeMappingSourcePlugin
+            >()
+            .TryAdd<
+                IMethodCallTranslatorPlugin,
+                SqlServerNetTopologySuiteMethodCallTranslatorPlugin
+            >()
+            .TryAdd<
+                IAggregateMethodCallTranslatorPlugin,
+                SqlServerNetTopologySuiteAggregateMethodCallTranslatorPlugin
+            >()
             .TryAdd<IMemberTranslatorPlugin, SqlServerNetTopologySuiteMemberTranslatorPlugin>()
-            .TryAdd<IEvaluatableExpressionFilterPlugin, SqlServerNetTopologySuiteEvaluatableExpressionFilterPlugin>();
+            .TryAdd<
+                IEvaluatableExpressionFilterPlugin,
+                SqlServerNetTopologySuiteEvaluatableExpressionFilterPlugin
+            >();
 
         return serviceCollection;
     }

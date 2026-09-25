@@ -14,13 +14,17 @@ namespace Microsoft.CodeAnalysis.Rename
     public static class RenameOptions
     {
 #pragma warning disable RS0030 // Do not used banned APIs: Option<T>
-        public static Option<bool> RenameOverloads { get; } = new Option<bool>(nameof(RenameOptions), nameof(RenameOverloads), defaultValue: false);
+        public static Option<bool> RenameOverloads { get; } =
+            new Option<bool>(nameof(RenameOptions), nameof(RenameOverloads), defaultValue: false);
 
-        public static Option<bool> RenameInStrings { get; } = new Option<bool>(nameof(RenameOptions), nameof(RenameInStrings), defaultValue: false);
+        public static Option<bool> RenameInStrings { get; } =
+            new Option<bool>(nameof(RenameOptions), nameof(RenameInStrings), defaultValue: false);
 
-        public static Option<bool> RenameInComments { get; } = new Option<bool>(nameof(RenameOptions), nameof(RenameInComments), defaultValue: false);
+        public static Option<bool> RenameInComments { get; } =
+            new Option<bool>(nameof(RenameOptions), nameof(RenameInComments), defaultValue: false);
 
-        public static Option<bool> PreviewChanges { get; } = new Option<bool>(nameof(RenameOptions), nameof(PreviewChanges), defaultValue: false);
+        public static Option<bool> PreviewChanges { get; } =
+            new Option<bool>(nameof(RenameOptions), nameof(PreviewChanges), defaultValue: false);
 #pragma warning restore
     }
 
@@ -36,7 +40,8 @@ namespace Microsoft.CodeAnalysis.Rename
         [property: DataMember(Order = 0)] bool RenameOverloads = false,
         [property: DataMember(Order = 1)] bool RenameInStrings = false,
         [property: DataMember(Order = 2)] bool RenameInComments = false,
-        [property: DataMember(Order = 3)] bool RenameFile = false);
+        [property: DataMember(Order = 3)] bool RenameFile = false
+    );
 
     /// <summary>
     /// Options for renaming a document.
@@ -46,5 +51,6 @@ namespace Microsoft.CodeAnalysis.Rename
     [DataContract]
     public readonly record struct DocumentRenameOptions(
         [property: DataMember(Order = 0)] bool RenameMatchingTypeInStrings = false,
-        [property: DataMember(Order = 1)] bool RenameMatchingTypeInComments = false);
+        [property: DataMember(Order = 1)] bool RenameMatchingTypeInComments = false
+    );
 }

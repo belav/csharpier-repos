@@ -14,7 +14,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         public readonly object ProjectOrDocumentId;
         public readonly AnalysisKind Kind;
 
-        public LiveDiagnosticUpdateArgsId(DiagnosticAnalyzer analyzer, object projectOrDocumentId, AnalysisKind kind)
+        public LiveDiagnosticUpdateArgsId(
+            DiagnosticAnalyzer analyzer,
+            object projectOrDocumentId,
+            AnalysisKind kind
+        )
             : base(analyzer)
         {
             Contract.ThrowIfNull(projectOrDocumentId);
@@ -25,8 +29,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
 
         public override string BuildTool => _buildTool ??= ComputeBuildTool();
 
-        private string ComputeBuildTool()
-            => Analyzer.IsBuiltInAnalyzer() ? PredefinedBuildTools.Live : Analyzer.GetAnalyzerAssemblyName();
+        private string ComputeBuildTool() =>
+            Analyzer.IsBuiltInAnalyzer()
+                ? PredefinedBuildTools.Live
+                : Analyzer.GetAnalyzerAssemblyName();
 
         public override bool Equals(object? obj)
         {
@@ -35,10 +41,12 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return false;
             }
 
-            return Kind == other.Kind && Equals(ProjectOrDocumentId, other.ProjectOrDocumentId) && base.Equals(obj);
+            return Kind == other.Kind
+                && Equals(ProjectOrDocumentId, other.ProjectOrDocumentId)
+                && base.Equals(obj);
         }
 
-        public override int GetHashCode()
-            => Hash.Combine(ProjectOrDocumentId, Hash.Combine((int)Kind, base.GetHashCode()));
+        public override int GetHashCode() =>
+            Hash.Combine(ProjectOrDocumentId, Hash.Combine((int)Kind, base.GetHashCode()));
     }
 }

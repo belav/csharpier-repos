@@ -48,18 +48,17 @@ namespace System.ServiceModel.Channels
                 waiter.Set();
             }
         }
-
     }
 
     class PeerNodeConfig
     {
         int connectTimeout;
         MessageEncoder encoder;
-        PeerNodeAddress listenAddress;  // EPR + IP addresses
+        PeerNodeAddress listenAddress; // EPR + IP addresses
         IPAddress listenIPAddress;
         Uri listenUri;
         long maxReceivedMessageSize;
-        int minNeighbors;                                             //Neighbor parameters
+        int minNeighbors; //Neighbor parameters
         int idealNeighbors;
         int maxNeighbors;
         int maxReferrals;
@@ -81,13 +80,19 @@ namespace System.ServiceModel.Channels
         long maxBufferPoolSize;
         int maxSendQueueSize = 128;
 
-        public PeerNodeConfig(string meshId, ulong nodeId,
+        public PeerNodeConfig(
+            string meshId,
+            ulong nodeId,
             PeerResolver resolver,
             PeerMessagePropagationFilter messagePropagationFilter,
             MessageEncoder encoder,
-            Uri listenUri, IPAddress listenIPAddress, int port,
+            Uri listenUri,
+            IPAddress listenIPAddress,
+            int port,
             long maxReceivedMessageSize,
-            int minNeighbors, int idealNeighbors, int maxNeighbors,
+            int minNeighbors,
+            int idealNeighbors,
+            int maxNeighbors,
             int maxReferrals,
             int connectTimeout,
             int maintainerInterval,
@@ -95,7 +100,8 @@ namespace System.ServiceModel.Channels
             XmlDictionaryReaderQuotas readerQuotas,
             long maxBufferPool,
             int maxSendQueueSize,
-            int maxReceiveQueueSize)
+            int maxReceiveQueueSize
+        )
         {
             this.connectTimeout = connectTimeout;
             this.listenIPAddress = listenIPAddress;
@@ -114,7 +120,9 @@ namespace System.ServiceModel.Channels
             this.port = port;
             this.resolver = resolver;
             this.maintainerInterval = maintainerInterval;
-            this.maintainerRetryInterval = new TimeSpan(PeerTransportConstants.MaintainerRetryInterval * 10000);
+            this.maintainerRetryInterval = new TimeSpan(
+                PeerTransportConstants.MaintainerRetryInterval * 10000
+            );
             this.maintainerTimeout = new TimeSpan(PeerTransportConstants.MaintainerTimeout * 10000);
             this.unregisterTimeout = new TimeSpan(PeerTransportConstants.UnregisterTimeout * 10000);
             this.securityManager = securityManager;
@@ -259,12 +267,15 @@ namespace System.ServiceModel.Channels
         }
 
         // Returns the actual address that the node service is listening on.
-        // If retrieving the address in order to send it over the wire, maskScopeId should be true 
+        // If retrieving the address in order to send it over the wire, maskScopeId should be true
         // (scope IDs are not sent over the wire).
         public PeerNodeAddress GetListenAddress(bool maskScopeId)
         {
             PeerNodeAddress localAddress = this.listenAddress;
-            return new PeerNodeAddress(localAddress.EndpointAddress, PeerIPHelper.CloneAddresses(localAddress.IPAddresses, maskScopeId));
+            return new PeerNodeAddress(
+                localAddress.EndpointAddress,
+                PeerIPHelper.CloneAddresses(localAddress.IPAddresses, maskScopeId)
+            );
         }
 
         public void SetListenAddress(PeerNodeAddress address)
@@ -312,7 +323,11 @@ namespace System.ServiceModel.Channels
     static class PeerMessageHelpers
     {
         // delegates used to call the callback to process an incoming message
-        public delegate void CleanupCallback(IPeerNeighbor neighbor, PeerCloseReason reason, Exception exception);
+        public delegate void CleanupCallback(
+            IPeerNeighbor neighbor,
+            PeerCloseReason reason,
+            Exception exception
+        );
 
         public static string GetHeaderString(MessageHeaders headers, string name, string ns)
         {
@@ -366,7 +381,6 @@ namespace System.ServiceModel.Channels
             }
             return result;
         }
-
     }
 
     static class PeerStrings
@@ -420,8 +434,14 @@ namespace System.ServiceModel.Channels
             protocolActions.Add(PeerStrings.WelcomeAction, PeerOperationNames.Welcome);
             protocolActions.Add(PeerStrings.RefuseAction, PeerOperationNames.Refuse);
             protocolActions.Add(PeerStrings.DisconnectAction, PeerOperationNames.Disconnect);
-            protocolActions.Add(PeerStrings.RequestSecurityTokenAction, PeerOperationNames.ProcessRequestSecurityToken);
-            protocolActions.Add(PeerStrings.RequestSecurityTokenResponseAction, PeerOperationNames.RequestSecurityTokenResponse);
+            protocolActions.Add(
+                PeerStrings.RequestSecurityTokenAction,
+                PeerOperationNames.ProcessRequestSecurityToken
+            );
+            protocolActions.Add(
+                PeerStrings.RequestSecurityTokenResponseAction,
+                PeerOperationNames.RequestSecurityTokenResponse
+            );
             protocolActions.Add(PeerStrings.LinkUtilityAction, PeerOperationNames.LinkUtility);
             protocolActions.Add(Addressing10Strings.FaultAction, PeerOperationNames.Fault);
             protocolActions.Add(PeerStrings.PingAction, PeerOperationNames.Ping);
@@ -433,8 +453,6 @@ namespace System.ServiceModel.Channels
             protocolActions.TryGetValue(action, out result);
             return result;
         }
-
-
     }
 
     class PeerOperationNames
@@ -452,7 +470,6 @@ namespace System.ServiceModel.Channels
         public const string Fault = "Fault";
         public const string PeerTo = "PeerTo";
         public const string Ping = "Ping";
-
     }
 
     class PeerResolverStrings
@@ -468,26 +485,27 @@ namespace System.ServiceModel.Channels
         public const string RefreshAction = Namespace + "/Refresh";
         public const string RefreshResponseAction = Namespace + "/RefreshResponse";
         public const string GetServiceSettingsAction = Namespace + "/GetServiceSettings";
-        public const string GetServiceSettingsResponseAction = Namespace + "/GetServiceSettingsResponse";
+        public const string GetServiceSettingsResponseAction =
+            Namespace + "/GetServiceSettingsResponse";
     }
 
     // constants used by more than one component
     static class PeerTransportConstants
     {
-        public const int ConnectTimeout = 60 * 1000;            // 1 minute
+        public const int ConnectTimeout = 60 * 1000; // 1 minute
         public const ulong InvalidNodeId = 0;
         public const int MinNeighbors = 2;
         public const int IdealNeighbors = 3;
-        public const int MaxResolveAddresses = IdealNeighbors;  // We only to resolve Ideal connections
+        public const int MaxResolveAddresses = IdealNeighbors; // We only to resolve Ideal connections
 
         public const int MaxNeighbors = 7;
         public const int MaxReferrals = 10;
-        public const int MaxReferralCacheSize = 50;             // Cache no more than 50 referrals
+        public const int MaxReferralCacheSize = 50; // Cache no more than 50 referrals
 
-        public const int MaintainerInterval = 5 * 60 * 1000;    // 5 Minutes
-        public const int MaintainerRetryInterval = 10000;       // 10 seconds
-        public const int MaintainerTimeout = 2 * 60 * 1000;     // 2 Minutes
-        public const int UnregisterTimeout = 2 * 60 * 1000;     // 2 Minutes
+        public const int MaintainerInterval = 5 * 60 * 1000; // 5 Minutes
+        public const int MaintainerRetryInterval = 10000; // 10 seconds
+        public const int MaintainerTimeout = 2 * 60 * 1000; // 2 Minutes
+        public const int UnregisterTimeout = 2 * 60 * 1000; // 2 Minutes
 
         //how long do we want wait before sending each batch of acks?
         public const int AckTimeout = 30 * 1000;
@@ -515,16 +533,23 @@ namespace System.ServiceModel.Channels
                 return;
 
             // If an incorrect IP address is given throw.
-            if (address.Equals(IPAddress.Any) ||
-                address.Equals(IPAddress.IPv6Any) ||
-                address.Equals(IPAddress.IPv6None) ||
-                address.Equals(IPAddress.None) ||
-                address.Equals(IPAddress.Broadcast) ||
-                address.IsIPv6Multicast ||
-                IPAddress.IsLoopback(address))
+            if (
+                address.Equals(IPAddress.Any)
+                || address.Equals(IPAddress.IPv6Any)
+                || address.Equals(IPAddress.IPv6None)
+                || address.Equals(IPAddress.None)
+                || address.Equals(IPAddress.Broadcast)
+                || address.IsIPv6Multicast
+                || IPAddress.IsLoopback(address)
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentException(SR.GetString(SR.PeerListenIPAddressInvalid, address), "address", null));
+                    new ArgumentException(
+                        SR.GetString(SR.PeerListenIPAddressInvalid, address),
+                        "address",
+                        null
+                    )
+                );
             }
         }
 
@@ -532,8 +557,14 @@ namespace System.ServiceModel.Channels
         {
             if (value < PeerTransportConstants.MinMessageSize)
             {
-                string message = SR.GetString(SR.ArgumentOutOfRange, PeerTransportConstants.MinMessageSize, long.MaxValue);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
+                string message = SR.GetString(
+                    SR.ArgumentOutOfRange,
+                    PeerTransportConstants.MinMessageSize,
+                    long.MaxValue
+                );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("value", value, message)
+                );
             }
         }
 
@@ -541,20 +572,31 @@ namespace System.ServiceModel.Channels
         {
             if (value < PeerTransportConstants.MinPort || value > PeerTransportConstants.MaxPort)
             {
-                string message = SR.GetString(SR.ArgumentOutOfRange, PeerTransportConstants.MinPort, PeerTransportConstants.MaxPort);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value, message));
+                string message = SR.GetString(
+                    SR.ArgumentOutOfRange,
+                    PeerTransportConstants.MinPort,
+                    PeerTransportConstants.MaxPort
+                );
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException("value", value, message)
+                );
             }
         }
 
         public static bool ValidNodeAddress(PeerNodeAddress address)
         {
-            return (address != null
+            return (
+                address != null
                 && address.EndpointAddress != null
                 && address.EndpointAddress.Uri != null
                 && address.IPAddresses != null
                 && address.IPAddresses.Count > 0
-                && string.Compare(address.EndpointAddress.Uri.Scheme, Uri.UriSchemeNetTcp, StringComparison.OrdinalIgnoreCase) == 0
-                );
+                && string.Compare(
+                    address.EndpointAddress.Uri.Scheme,
+                    Uri.UriSchemeNetTcp,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            );
         }
 
         public static bool ValidReferralNodeAddress(PeerNodeAddress address)
@@ -585,7 +627,7 @@ namespace System.ServiceModel.Channels
     enum PeerCloseInitiator
     {
         LocalNode,
-        RemoteNode
+        RemoteNode,
     }
 
     // Reason for closing a neighbor
@@ -595,19 +637,19 @@ namespace System.ServiceModel.Channels
     // should be updated.
     enum PeerCloseReason
     {
-        None = 0,               // Reserved value - never serialized used internally.
-        InvalidNeighbor,        // used when protocol violations are detected
-        LeavingMesh,            // Closing because the node is leaving the mesh
-        NotUsefulNeighbor,      // Closing because the neighbor is not useful
-        DuplicateNeighbor,      // The node already has a neighbor session to this node
-        DuplicateNodeId,        // The neighbor has the same node ID as the local node
-        NodeBusy,               // The node has too many neighbor sessions to accept a new session
-        ConnectTimedOut,        // Connect processing timedout
-        Faulted,                // When neighbor faults
-        Closed,                 // When neighbor closes without Disconnect or Refuse
-        InternalFailure,        // Eg: an infrastructure msg send fails and requires closing the channel
-        AuthenticationFailure,  // Eg, when in secure mode, wrong credentials. 
-        NodeTooSlow,            //remote neighbor is too slow 
+        None = 0, // Reserved value - never serialized used internally.
+        InvalidNeighbor, // used when protocol violations are detected
+        LeavingMesh, // Closing because the node is leaving the mesh
+        NotUsefulNeighbor, // Closing because the neighbor is not useful
+        DuplicateNeighbor, // The node already has a neighbor session to this node
+        DuplicateNodeId, // The neighbor has the same node ID as the local node
+        NodeBusy, // The node has too many neighbor sessions to accept a new session
+        ConnectTimedOut, // Connect processing timedout
+        Faulted, // When neighbor faults
+        Closed, // When neighbor closes without Disconnect or Refuse
+        InternalFailure, // Eg: an infrastructure msg send fails and requires closing the channel
+        AuthenticationFailure, // Eg, when in secure mode, wrong credentials.
+        NodeTooSlow, //remote neighbor is too slow
     }
 
     // Neighbor event args
@@ -618,8 +660,11 @@ namespace System.ServiceModel.Channels
         Exception exception;
         PeerCloseReason reason;
 
-        public PeerNeighborCloseEventArgs(PeerCloseReason reason,
-            PeerCloseInitiator closeInitiator, Exception exception)
+        public PeerNeighborCloseEventArgs(
+            PeerCloseReason reason,
+            PeerCloseInitiator closeInitiator,
+            Exception exception
+        )
         {
             this.reason = reason;
             this.closeInitiator = closeInitiator;
@@ -644,98 +689,173 @@ namespace System.ServiceModel.Channels
 
     class PeerExceptionHelper
     {
-        static internal void ThrowInvalidOperation_InsufficientCryptoSupport(Exception innerException)
+        internal static void ThrowInvalidOperation_InsufficientCryptoSupport(
+            Exception innerException
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InsufficientCryptoSupport), innerException));
-        }
-        static internal void ThrowArgument_InsufficientCredentials(string property)
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InsufficientCredentials, property)));
-        }
-        static internal void ThrowArgumentOutOfRange_InvalidTransportCredentialType(int value)
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("CredentialType", value,
-                SR.GetString(SR.ValueMustBeInRange, PeerTransportCredentialType.Password, PeerTransportCredentialType.Certificate)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.InsufficientCryptoSupport),
+                    innerException
+                )
+            );
         }
 
-        static internal void ThrowArgumentOutOfRange_InvalidSecurityMode(int value)
+        internal static void ThrowArgument_InsufficientCredentials(string property)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("Mode", value,
-                SR.GetString(SR.ValueMustBeInRange, SecurityMode.None, SecurityMode.TransportWithMessageCredential)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentException(SR.GetString(SR.InsufficientCredentials, property))
+            );
         }
 
-        static internal void ThrowInvalidOperation_UnexpectedSecurityTokensDuringHandshake()
+        internal static void ThrowArgumentOutOfRange_InvalidTransportCredentialType(int value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnexpectedSecurityTokensDuringHandshake)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentOutOfRangeException(
+                    "CredentialType",
+                    value,
+                    SR.GetString(
+                        SR.ValueMustBeInRange,
+                        PeerTransportCredentialType.Password,
+                        PeerTransportCredentialType.Certificate
+                    )
+                )
+            );
         }
 
-        static internal void ThrowArgument_PnrpAddressesExceedLimit()
+        internal static void ThrowArgumentOutOfRange_InvalidSecurityMode(int value)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.PnrpAddressesExceedLimit)));
-        }
-        static internal void ThrowInvalidOperation_PnrpNoClouds()
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PnrpNoClouds)));
-        }
-        static internal void ThrowInvalidOperation_PnrpAddressesUnsupported()
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PnrpAddressesUnsupported)));
-        }
-        static internal void ThrowArgument_InsufficientResolverSettings()
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InsufficientResolverSettings)));
-        }
-        static internal void ThrowArgument_MustOverrideInitialize()
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MustOverrideInitialize)));
-        }
-        static internal void ThrowArgument_InvalidResolverMode(PeerResolverMode mode)
-        {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.InvalidResolverMode, mode)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentOutOfRangeException(
+                    "Mode",
+                    value,
+                    SR.GetString(
+                        SR.ValueMustBeInRange,
+                        SecurityMode.None,
+                        SecurityMode.TransportWithMessageCredential
+                    )
+                )
+            );
         }
 
-        static internal void ThrowInvalidOperation_NotValidWhenOpen(string operation)
+        internal static void ThrowInvalidOperation_UnexpectedSecurityTokensDuringHandshake()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NotValidWhenOpen, operation)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.UnexpectedSecurityTokensDuringHandshake)
+                )
+            );
         }
 
-        static internal void ThrowInvalidOperation_NotValidWhenClosed(string operation)
+        internal static void ThrowArgument_PnrpAddressesExceedLimit()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NotValidWhenClosed, operation)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentException(SR.GetString(SR.PnrpAddressesExceedLimit))
+            );
         }
 
-        static internal void ThrowInvalidOperation_DuplicatePeerRegistration(string servicepath)
+        internal static void ThrowInvalidOperation_PnrpNoClouds()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.DuplicatePeerRegistration, servicepath)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.PnrpNoClouds))
+            );
         }
-        static internal void ThrowPnrpError(int errorCode, string cloud)
+
+        internal static void ThrowInvalidOperation_PnrpAddressesUnsupported()
+        {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.PnrpAddressesUnsupported))
+            );
+        }
+
+        internal static void ThrowArgument_InsufficientResolverSettings()
+        {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentException(SR.GetString(SR.InsufficientResolverSettings))
+            );
+        }
+
+        internal static void ThrowArgument_MustOverrideInitialize()
+        {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentException(SR.GetString(SR.MustOverrideInitialize))
+            );
+        }
+
+        internal static void ThrowArgument_InvalidResolverMode(PeerResolverMode mode)
+        {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ArgumentException(SR.GetString(SR.InvalidResolverMode, mode))
+            );
+        }
+
+        internal static void ThrowInvalidOperation_NotValidWhenOpen(string operation)
+        {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.NotValidWhenOpen, operation))
+            );
+        }
+
+        internal static void ThrowInvalidOperation_NotValidWhenClosed(string operation)
+        {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.NotValidWhenClosed, operation))
+            );
+        }
+
+        internal static void ThrowInvalidOperation_DuplicatePeerRegistration(string servicepath)
+        {
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.DuplicatePeerRegistration, servicepath)
+                )
+            );
+        }
+
+        internal static void ThrowPnrpError(int errorCode, string cloud)
         {
             ThrowPnrpError(errorCode, cloud, true);
         }
-        static internal void ThrowPnrpError(int errorCode, string cloud, bool trace)
+
+        internal static void ThrowPnrpError(int errorCode, string cloud, bool trace)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new System.ServiceModel.Channels.PnrpPeerResolver.PnrpException(errorCode, cloud), trace ? TraceEventType.Error : TraceEventType.Information);
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                new System.ServiceModel.Channels.PnrpPeerResolver.PnrpException(errorCode, cloud),
+                trace ? TraceEventType.Error : TraceEventType.Information
+            );
         }
 
-        static internal void ThrowInvalidOperation_PeerConflictingPeerNodeSettings(string propertyName)
+        internal static void ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
+            string propertyName
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerConflictingPeerNodeSettings, propertyName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.PeerConflictingPeerNodeSettings, propertyName)
+                )
+            );
         }
 
-        static internal void ThrowInvalidOperation_PeerCertGenFailure(Exception innerException)
+        internal static void ThrowInvalidOperation_PeerCertGenFailure(Exception innerException)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerCertGenFailure), innerException));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.PeerCertGenFailure), innerException)
+            );
         }
-        static internal void ThrowInvalidOperation_ConflictingHeader(string headerName)
+
+        internal static void ThrowInvalidOperation_ConflictingHeader(string headerName)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PeerConflictingHeader, headerName, PeerStrings.Namespace)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(SR.PeerConflictingHeader, headerName, PeerStrings.Namespace)
+                )
+            );
         }
 
         public static Exception GetLastException()
         {
             return new Win32Exception(Marshal.GetLastWin32Error());
         }
-
     }
 
     class PeerBindingPropertyNames
@@ -753,15 +873,19 @@ namespace System.ServiceModel.Channels
         public static readonly string Certificate = "Certificate";
         public static readonly string MaxBufferPoolSize = "MaxBufferPoolSize";
         public static readonly string ReaderQuotasDotArrayLength = "ReaderQuotas.MaxArrayLength";
-        public static readonly string ReaderQuotasDotStringLength = "ReaderQuotas.MaxStringContentLength";
+        public static readonly string ReaderQuotasDotStringLength =
+            "ReaderQuotas.MaxStringContentLength";
         public static readonly string ReaderQuotasDotMaxDepth = "ReaderQuotas.MaxDepth";
-        public static readonly string ReaderQuotasDotMaxCharCount = "ReaderQuotas.MaxNameTableCharCount";
-        public static readonly string ReaderQuotasDotMaxBytesPerRead = "ReaderQuotas.MaxBytesPerRead";
+        public static readonly string ReaderQuotasDotMaxCharCount =
+            "ReaderQuotas.MaxNameTableCharCount";
+        public static readonly string ReaderQuotasDotMaxBytesPerRead =
+            "ReaderQuotas.MaxBytesPerRead";
     }
 
     class PeerPropertyNames
     {
-        public static readonly string MessageSenderAuthentication = "Credentials.Peer.MessageSenderAuthentication";
+        public static readonly string MessageSenderAuthentication =
+            "Credentials.Peer.MessageSenderAuthentication";
         public static readonly string Credentials = "SecurityCredentialsManager";
         public static readonly string Password = "Credentials.Peer.MeshPassword";
         public static readonly string Certificate = "Credentials.Peer.Certificate";
@@ -779,7 +903,10 @@ namespace System.ServiceModel.Channels
 
         public static void TurnOffSecurityHeader(Message message)
         {
-            int i = message.Headers.FindHeader(SecurityJan2004Strings.Security, SecurityJan2004Strings.Namespace);
+            int i = message.Headers.FindHeader(
+                SecurityJan2004Strings.Security,
+                SecurityJan2004Strings.Namespace
+            );
             if (i >= 0)
             {
                 message.Headers.AddUnderstood(i);
@@ -788,7 +915,6 @@ namespace System.ServiceModel.Channels
 
         public string SelectOperation(ref Message message)
         {
-
             string action = message.Headers.Action;
             string demux = null;
             byte[] id = PeerNodeImplementation.DefaultId;
@@ -802,9 +928,21 @@ namespace System.ServiceModel.Channels
                 return operation;
             try
             {
-                demux = PeerMessageHelpers.GetHeaderString(message.Headers, PeerOperationNames.Flood, PeerStrings.Namespace);
-                via = PeerMessageHelpers.GetHeaderUri(message.Headers, PeerStrings.Via, PeerStrings.Namespace);
-                to = PeerMessageHelpers.GetHeaderUri(message.Headers, PeerOperationNames.PeerTo, PeerStrings.Namespace);
+                demux = PeerMessageHelpers.GetHeaderString(
+                    message.Headers,
+                    PeerOperationNames.Flood,
+                    PeerStrings.Namespace
+                );
+                via = PeerMessageHelpers.GetHeaderUri(
+                    message.Headers,
+                    PeerStrings.Via,
+                    PeerStrings.Namespace
+                );
+                to = PeerMessageHelpers.GetHeaderUri(
+                    message.Headers,
+                    PeerOperationNames.PeerTo,
+                    PeerStrings.Namespace
+                );
             }
             catch (MessageHeaderException e)
             {
@@ -834,7 +972,13 @@ namespace System.ServiceModel.Channels
                         skipped = true;
                         TurnOffSecurityHeader(message);
                     }
-                    if (this.messageHandler.IsNotSeenBefore(message, out id, out peerProperty.CacheMiss))
+                    if (
+                        this.messageHandler.IsNotSeenBefore(
+                            message,
+                            out id,
+                            out peerProperty.CacheMiss
+                        )
+                    )
                     {
                         peerProperty.MessageVerified = true;
                     }
@@ -887,31 +1031,49 @@ namespace System.ServiceModel.Channels
             this.messageHandler = messageHandler;
         }
 
-        void IContractBehavior.AddBindingParameters(ContractDescription description, ServiceEndpoint endpoint, BindingParameterCollection parameters)
-        {
-        }
+        void IContractBehavior.AddBindingParameters(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IContractBehavior.Validate(ContractDescription description, ServiceEndpoint endpoint)
-        {
-        }
+        void IContractBehavior.Validate(
+            ContractDescription description,
+            ServiceEndpoint endpoint
+        ) { }
 
-        void IContractBehavior.ApplyDispatchBehavior(ContractDescription description, ServiceEndpoint endpoint, DispatchRuntime
-        dispatch)
+        void IContractBehavior.ApplyDispatchBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            DispatchRuntime dispatch
+        )
         {
             dispatch.OperationSelector = new OperationSelector(this.messageHandler);
 
             if (dispatch.ClientRuntime != null)
             {
-                dispatch.ClientRuntime.OperationSelector = new OperationSelectorBehavior.MethodInfoOperationSelector(description, MessageDirection.Output);
+                dispatch.ClientRuntime.OperationSelector =
+                    new OperationSelectorBehavior.MethodInfoOperationSelector(
+                        description,
+                        MessageDirection.Output
+                    );
             }
         }
 
-        void IContractBehavior.ApplyClientBehavior(ContractDescription description, ServiceEndpoint endpoint, ClientRuntime proxy)
+        void IContractBehavior.ApplyClientBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            ClientRuntime proxy
+        )
         {
-            proxy.OperationSelector = new OperationSelectorBehavior.MethodInfoOperationSelector(description, MessageDirection.Input);
-            proxy.CallbackDispatchRuntime.OperationSelector = new OperationSelector(this.messageHandler);
+            proxy.OperationSelector = new OperationSelectorBehavior.MethodInfoOperationSelector(
+                description,
+                MessageDirection.Input
+            );
+            proxy.CallbackDispatchRuntime.OperationSelector = new OperationSelector(
+                this.messageHandler
+            );
         }
-
     }
 
     class PeerDictionaryHeader : DictionaryHeader
@@ -919,7 +1081,6 @@ namespace System.ServiceModel.Channels
         string value;
         XmlDictionaryString name;
         XmlDictionaryString nameSpace;
-
 
         public override XmlDictionaryString DictionaryName
         {
@@ -931,56 +1092,84 @@ namespace System.ServiceModel.Channels
             get { return nameSpace; }
         }
 
-        public PeerDictionaryHeader(XmlDictionaryString name, XmlDictionaryString nameSpace, string value)
+        public PeerDictionaryHeader(
+            XmlDictionaryString name,
+            XmlDictionaryString nameSpace,
+            string value
+        )
         {
             this.name = name;
             this.nameSpace = nameSpace;
             this.value = value;
         }
 
-
-
-        public PeerDictionaryHeader(XmlDictionaryString name, XmlDictionaryString nameSpace, XmlDictionaryString value)
+        public PeerDictionaryHeader(
+            XmlDictionaryString name,
+            XmlDictionaryString nameSpace,
+            XmlDictionaryString value
+        )
         {
             this.name = name;
             this.nameSpace = nameSpace;
             this.value = value.Value;
         }
 
-        protected override void OnWriteHeaderContents(XmlDictionaryWriter writer, MessageVersion messageVersion)
+        protected override void OnWriteHeaderContents(
+            XmlDictionaryWriter writer,
+            MessageVersion messageVersion
+        )
         {
             writer.WriteString(this.value);
         }
 
-        static internal PeerDictionaryHeader CreateHopCountHeader(ulong hopcount)
+        internal static PeerDictionaryHeader CreateHopCountHeader(ulong hopcount)
         {
-            return new PeerDictionaryHeader(XD.PeerWireStringsDictionary.HopCount, XD.PeerWireStringsDictionary.HopCountNamespace, hopcount.ToString(CultureInfo.InvariantCulture));
+            return new PeerDictionaryHeader(
+                XD.PeerWireStringsDictionary.HopCount,
+                XD.PeerWireStringsDictionary.HopCountNamespace,
+                hopcount.ToString(CultureInfo.InvariantCulture)
+            );
         }
 
-        static internal PeerDictionaryHeader CreateViaHeader(Uri via)
+        internal static PeerDictionaryHeader CreateViaHeader(Uri via)
         {
-            return new PeerDictionaryHeader(XD.PeerWireStringsDictionary.PeerVia, XD.PeerWireStringsDictionary.Namespace, via.ToString());
+            return new PeerDictionaryHeader(
+                XD.PeerWireStringsDictionary.PeerVia,
+                XD.PeerWireStringsDictionary.Namespace,
+                via.ToString()
+            );
         }
 
-        static internal PeerDictionaryHeader CreateFloodRole()
+        internal static PeerDictionaryHeader CreateFloodRole()
         {
-            return new PeerDictionaryHeader(XD.PeerWireStringsDictionary.FloodAction, XD.PeerWireStringsDictionary.Namespace, XD.PeerWireStringsDictionary.Demuxer);
+            return new PeerDictionaryHeader(
+                XD.PeerWireStringsDictionary.FloodAction,
+                XD.PeerWireStringsDictionary.Namespace,
+                XD.PeerWireStringsDictionary.Demuxer
+            );
         }
 
-        static internal PeerDictionaryHeader CreateToHeader(Uri to)
+        internal static PeerDictionaryHeader CreateToHeader(Uri to)
         {
-            return new PeerDictionaryHeader(XD.PeerWireStringsDictionary.PeerTo, XD.PeerWireStringsDictionary.Namespace, to.ToString());
-        }
-        static internal PeerDictionaryHeader CreateMessageIdHeader(System.Xml.UniqueId messageId)
-        {
-            return new PeerDictionaryHeader(XD.AddressingDictionary.MessageId, XD.PeerWireStringsDictionary.Namespace, messageId.ToString());
+            return new PeerDictionaryHeader(
+                XD.PeerWireStringsDictionary.PeerTo,
+                XD.PeerWireStringsDictionary.Namespace,
+                to.ToString()
+            );
         }
 
+        internal static PeerDictionaryHeader CreateMessageIdHeader(System.Xml.UniqueId messageId)
+        {
+            return new PeerDictionaryHeader(
+                XD.AddressingDictionary.MessageId,
+                XD.PeerWireStringsDictionary.Namespace,
+                messageId.ToString()
+            );
+        }
     }
 
     class PeerMessageProperty
     {
-
         public bool MessageVerified;
         public bool SkipLocalChannels;
         public Uri PeerVia;
@@ -988,4 +1177,3 @@ namespace System.ServiceModel.Channels
         public int CacheMiss;
     }
 }
-

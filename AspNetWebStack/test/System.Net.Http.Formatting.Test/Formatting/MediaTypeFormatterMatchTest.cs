@@ -12,7 +12,16 @@ namespace System.Net.Http.Formatting
         [Fact]
         public void Ctor_ThrowsOnNullFormatter()
         {
-            Assert.ThrowsArgumentNull(() => new MediaTypeFormatterMatch(null, null, null, MediaTypeFormatterMatchRanking.None), "formatter");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    new MediaTypeFormatterMatch(
+                        null,
+                        null,
+                        null,
+                        MediaTypeFormatterMatchRanking.None
+                    ),
+                "formatter"
+            );
         }
 
         [Fact]
@@ -23,7 +32,12 @@ namespace System.Net.Http.Formatting
             MediaTypeHeaderValue mediaType = MediaTypeHeaderValue.Parse("text/test");
 
             // Act
-            MediaTypeFormatterMatch match = new MediaTypeFormatterMatch(formatter, mediaType, null, MediaTypeFormatterMatchRanking.MatchOnCanWriteType);
+            MediaTypeFormatterMatch match = new MediaTypeFormatterMatch(
+                formatter,
+                mediaType,
+                null,
+                MediaTypeFormatterMatchRanking.MatchOnCanWriteType
+            );
 
             // Assert
             Assert.Equal(mediaType, match.MediaType);
@@ -37,7 +51,12 @@ namespace System.Net.Http.Formatting
             MockMediaTypeFormatter formatter = new MockMediaTypeFormatter();
 
             // Act
-            MediaTypeFormatterMatch match = new MediaTypeFormatterMatch(formatter, null, null, MediaTypeFormatterMatchRanking.MatchOnCanWriteType);
+            MediaTypeFormatterMatch match = new MediaTypeFormatterMatch(
+                formatter,
+                null,
+                null,
+                MediaTypeFormatterMatchRanking.MatchOnCanWriteType
+            );
 
             // Assert
             Assert.Same(formatter, match.Formatter);

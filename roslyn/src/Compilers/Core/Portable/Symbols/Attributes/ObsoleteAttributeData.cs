@@ -21,13 +21,32 @@ namespace Microsoft.CodeAnalysis
     /// </summary>
     internal sealed class ObsoleteAttributeData
     {
-        public static readonly ObsoleteAttributeData Uninitialized = new ObsoleteAttributeData(ObsoleteAttributeKind.Uninitialized, message: null, isError: false, diagnosticId: null, urlFormat: null);
-        public static readonly ObsoleteAttributeData WindowsExperimental = new ObsoleteAttributeData(ObsoleteAttributeKind.WindowsExperimental, message: null, isError: false, diagnosticId: null, urlFormat: null);
+        public static readonly ObsoleteAttributeData Uninitialized = new ObsoleteAttributeData(
+            ObsoleteAttributeKind.Uninitialized,
+            message: null,
+            isError: false,
+            diagnosticId: null,
+            urlFormat: null
+        );
+        public static readonly ObsoleteAttributeData WindowsExperimental =
+            new ObsoleteAttributeData(
+                ObsoleteAttributeKind.WindowsExperimental,
+                message: null,
+                isError: false,
+                diagnosticId: null,
+                urlFormat: null
+            );
 
         public const string DiagnosticIdPropertyName = "DiagnosticId";
         public const string UrlFormatPropertyName = "UrlFormat";
 
-        public ObsoleteAttributeData(ObsoleteAttributeKind kind, string? message, bool isError, string? diagnosticId, string? urlFormat)
+        public ObsoleteAttributeData(
+            ObsoleteAttributeKind kind,
+            string? message,
+            bool isError,
+            string? diagnosticId,
+            string? urlFormat
+        )
         {
             Kind = kind;
             Message = message;
@@ -64,7 +83,7 @@ namespace Microsoft.CodeAnalysis
         /// When specified, the obsolete diagnostic's <see cref="DiagnosticDescriptor.HelpLinkUri"/> will be produced
         /// by formatting this string using the <see cref="DiagnosticId"/> as the single argument.
         /// </para>
-        /// 
+        ///
         /// <example>
         /// e.g. with a <see cref="DiagnosticId"/> value <c>"TEST1"</c>,
         /// and a <see cref="UrlFormat"/> value <a href="https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/{0}/"/>,<br/>

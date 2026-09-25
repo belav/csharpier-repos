@@ -46,8 +46,11 @@ namespace TernaryOperatorOptimization
             string o = SideEffectMethod() ? (string)null : (string)null;
             Console.WriteLine("o: " + o);
 
-            string o2 = ((int)(object)"this should always throw!") == 5 ? (string)null : (string)null;
-            Console.WriteLine("o2: Previous source line should have thrown an InvalidCastException!!!" + o2);
+            string o2 =
+                ((int)(object)"this should always throw!") == 5 ? (string)null : (string)null;
+            Console.WriteLine(
+                "o2: Previous source line should have thrown an InvalidCastException!!!" + o2
+            );
         }
 
         private static bool SideEffectMethod()
@@ -57,4 +60,3 @@ namespace TernaryOperatorOptimization
         }
     }
 }
-

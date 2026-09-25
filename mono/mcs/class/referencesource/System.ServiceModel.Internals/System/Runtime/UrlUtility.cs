@@ -80,7 +80,6 @@ namespace System.Runtime
             if (str == null)
                 return null;
             return UrlEncodeUnicodeStringToStringInternal(str, false);
-
         }
 
         private static string UrlEncodeUnicodeStringToStringInternal(string s, bool ignoreAscii)
@@ -93,7 +92,7 @@ namespace System.Runtime
                 char ch = s[i];
 
                 if ((ch & 0xff80) == 0)
-                {  // 7 bit?
+                { // 7 bit?
                     if (ignoreAscii || IsSafe(ch))
                     {
                         sb.Append(ch);
@@ -175,7 +174,12 @@ namespace System.Runtime
         }
 
         //  Implementation for encoding
-        static byte[] UrlEncodeBytesToBytesInternal(byte[] bytes, int offset, int count, bool alwaysCreateReturnValue)
+        static byte[] UrlEncodeBytesToBytesInternal(
+            byte[] bytes,
+            int offset,
+            int count,
+            bool alwaysCreateReturnValue
+        )
         {
             int cSpaces = 0;
             int cUnsafe = 0;
@@ -229,13 +233,17 @@ namespace System.Runtime
             return expandedBytes;
         }
 
-
         static bool IsNonAsciiByte(byte b)
         {
             return (b >= 0x7F || b < 0x20);
         }
 
-        static byte[] UrlEncodeBytesToBytesInternalNonAscii(byte[] bytes, int offset, int count, bool alwaysCreateReturnValue)
+        static byte[] UrlEncodeBytesToBytesInternalNonAscii(
+            byte[] bytes,
+            int offset,
+            int count,
+            bool alwaysCreateReturnValue
+        )
         {
             int cNonAscii = 0;
 
@@ -304,7 +312,7 @@ namespace System.Runtime
                         int h4 = HexToInt(s[pos + 5]);
 
                         if (h1 >= 0 && h2 >= 0 && h3 >= 0 && h4 >= 0)
-                        {   // valid 4 hex chars
+                        { // valid 4 hex chars
                             ch = (char)((h1 << 12) | (h2 << 8) | (h3 << 4) | h4);
                             pos += 5;
 
@@ -319,7 +327,7 @@ namespace System.Runtime
                         int h2 = HexToInt(s[pos + 2]);
 
                         if (h1 >= 0 && h2 >= 0)
-                        {     // valid 2 hex chars
+                        { // valid 2 hex chars
                             byte b = (byte)((h1 << 4) | h2);
                             pos += 2;
 
@@ -346,10 +354,10 @@ namespace System.Runtime
         // Private helpers for URL encoding/decoding
         static int HexToInt(char h)
         {
-            return (h >= '0' && h <= '9') ? h - '0' :
-            (h >= 'a' && h <= 'f') ? h - 'a' + 10 :
-            (h >= 'A' && h <= 'F') ? h - 'A' + 10 :
-            -1;
+            return (h >= '0' && h <= '9') ? h - '0'
+                : (h >= 'a' && h <= 'f') ? h - 'a' + 10
+                : (h >= 'A' && h <= 'F') ? h - 'A' + 10
+                : -1;
         }
 
         static char IntToHex(int n)
@@ -411,7 +419,13 @@ namespace System.Runtime
             {
                 if (_numBytes > 0)
                 {
-                    _numChars += _encoding.GetChars(_byteBuffer, 0, _numBytes, _charBuffer, _numChars);
+                    _numChars += _encoding.GetChars(
+                        _byteBuffer,
+                        0,
+                        _numBytes,
+                        _charBuffer,
+                        _numChars
+                    );
                     _numBytes = 0;
                 }
             }
@@ -488,9 +502,7 @@ namespace System.Runtime
             }
 
             protected HttpValueCollection(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
+                : base(info, context) { }
 
             internal void FillFromString(string s, bool urlencoded, Encoding encoding)
             {
@@ -541,8 +553,9 @@ namespace System.Runtime
                     if (urlencoded)
                     {
                         base.Add(
-                           UrlUtility.UrlDecode(name, encoding),
-                           UrlUtility.UrlDecode(value, encoding));
+                            UrlUtility.UrlDecode(name, encoding),
+                            UrlUtility.UrlDecode(value, encoding)
+                        );
                     }
                     else
                     {
@@ -572,7 +585,9 @@ namespace System.Runtime
                     return string.Empty;
 
                 StringBuilder s = new StringBuilder();
-                string key, keyPrefix, item;
+                string key,
+                    keyPrefix,
+                    item;
 
                 for (int i = 0; i < n; i++)
                 {

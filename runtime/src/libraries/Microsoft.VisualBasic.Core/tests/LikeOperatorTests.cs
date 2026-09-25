@@ -12,18 +12,40 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         [Theory]
         [MemberData(nameof(LikeObject_TestData))]
         [MemberData(nameof(LikeString_TestData))]
-        public void LikeObject(object source, object pattern, object expectedBinaryCompare, object expectedTextCompare)
+        public void LikeObject(
+            object source,
+            object pattern,
+            object expectedBinaryCompare,
+            object expectedTextCompare
+        )
         {
-            Assert.Equal(expectedBinaryCompare, LikeOperator.LikeObject(source, pattern, CompareMethod.Binary));
-            Assert.Equal(expectedTextCompare, LikeOperator.LikeObject(source, pattern, CompareMethod.Text));
+            Assert.Equal(
+                expectedBinaryCompare,
+                LikeOperator.LikeObject(source, pattern, CompareMethod.Binary)
+            );
+            Assert.Equal(
+                expectedTextCompare,
+                LikeOperator.LikeObject(source, pattern, CompareMethod.Text)
+            );
         }
 
         [Theory]
         [MemberData(nameof(LikeString_TestData))]
-        public void LikeString(string source, string pattern, bool expectedBinaryCompare, bool expectedTextCompare)
+        public void LikeString(
+            string source,
+            string pattern,
+            bool expectedBinaryCompare,
+            bool expectedTextCompare
+        )
         {
-            Assert.Equal(expectedBinaryCompare, LikeOperator.LikeString(source, pattern, CompareMethod.Binary));
-            Assert.Equal(expectedTextCompare, LikeOperator.LikeString(source, pattern, CompareMethod.Text));
+            Assert.Equal(
+                expectedBinaryCompare,
+                LikeOperator.LikeString(source, pattern, CompareMethod.Binary)
+            );
+            Assert.Equal(
+                expectedTextCompare,
+                LikeOperator.LikeString(source, pattern, CompareMethod.Text)
+            );
         }
 
         public static IEnumerable<object[]> LikeObject_TestData()

@@ -14,7 +14,9 @@ using Microsoft.Internal.Collections;
 
 namespace System.ComponentModel.Composition.Hosting
 {
-    public partial class FilteredCatalog : ComposablePartCatalog, INotifyComposablePartCatalogChanged
+    public partial class FilteredCatalog
+        : ComposablePartCatalog,
+            INotifyComposablePartCatalogChanged
     {
         private Func<ComposablePartDefinition, bool> _filter;
         private ComposablePartCatalog _innerCatalog;
@@ -27,12 +29,17 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         /// <param name="catalog">The catalog.</param>
         /// <param name="filter">The filter.</param>
-        public FilteredCatalog(ComposablePartCatalog catalog, Func<ComposablePartDefinition, bool> filter) : 
-            this(catalog, filter, null)
-        {
-        }
+        public FilteredCatalog(
+            ComposablePartCatalog catalog,
+            Func<ComposablePartDefinition, bool> filter
+        )
+            : this(catalog, filter, null) { }
 
-        internal FilteredCatalog(ComposablePartCatalog catalog, Func<ComposablePartDefinition, bool> filter, FilteredCatalog complement)
+        internal FilteredCatalog(
+            ComposablePartCatalog catalog,
+            Func<ComposablePartDefinition, bool> filter,
+            FilteredCatalog complement
+        )
         {
             Requires.NotNull(catalog, "catalog");
             Requires.NotNull(filter, "filter");
@@ -41,14 +48,14 @@ namespace System.ComponentModel.Composition.Hosting
             this._filter = (p) => filter.Invoke(p.GetGenericPartDefinition() ?? p);
             this._complement = complement;
 
-            INotifyComposablePartCatalogChanged notifyCatalog = this._innerCatalog as INotifyComposablePartCatalogChanged;
+            INotifyComposablePartCatalogChanged notifyCatalog =
+                this._innerCatalog as INotifyComposablePartCatalogChanged;
             if (notifyCatalog != null)
             {
                 notifyCatalog.Changed += this.OnChangedInternal;
                 notifyCatalog.Changing += this.OnChangingInternal;
             }
         }
-
 
         /// <summary>
         /// Releases unmanaged and - optionally - managed resources
@@ -60,7 +67,7 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 if (disposing)
                 {
-                    if(!this._isDisposed)
+                    if (!this._isDisposed)
                     {
                         INotifyComposablePartCatalogChanged notifyCatalog = null;
                         try
@@ -70,7 +77,8 @@ namespace System.ComponentModel.Composition.Hosting
                                 if (!this._isDisposed)
                                 {
                                     this._isDisposed = true;
-                                    notifyCatalog = this._innerCatalog as INotifyComposablePartCatalogChanged;
+                                    notifyCatalog =
+                                        this._innerCatalog as INotifyComposablePartCatalogChanged;
                                     this._innerCatalog = null;
                                 }
                             }
@@ -109,7 +117,11 @@ namespace System.ComponentModel.Composition.Hosting
 
                 if (this._complement == null)
                 {
-                    FilteredCatalog complement = new FilteredCatalog(this._innerCatalog, p => !this._filter(p), this);
+                    FilteredCatalog complement = new FilteredCatalog(
+                        this._innerCatalog,
+                        p => !this._filter(p),
+                        this
+                    );
                     lock (this._lock)
                     {
                         if (this._complement == null)
@@ -154,13 +166,15 @@ namespace System.ComponentModel.Composition.Hosting
         /// <paramref name="definition"/>, return an empty <see cref="IEnumerable{T}"/>.
         /// </note>
         /// </remarks>
-        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(ImportDefinition definition)
+        public override IEnumerable<Tuple<ComposablePartDefinition, ExportDefinition>> GetExports(
+            ImportDefinition definition
+        )
         {
             this.ThrowIfDisposed();
             Requires.NotNull(definition, "definition");
 
             var exports = new List<Tuple<ComposablePartDefinition, ExportDefinition>>();
-            foreach(var export in this._innerCatalog.GetExports(definition))
+            foreach (var export in this._innerCatalog.GetExports(definition))
             {
                 if (this._filter(export.Item1))
                 {
@@ -176,12 +190,10 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         public event EventHandler<ComposablePartCatalogChangeEventArgs> Changed;
 
-
         /// <summary>
         /// Notify when the contents of the Catalog is changing.
         /// </summary>
         public event EventHandler<ComposablePartCatalogChangeEventArgs> Changing;
-
 
         /// <summary>
         /// Raises the <see cref="E:Changed"/> event.
@@ -227,13 +239,16 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private ComposablePartCatalogChangeEventArgs ProcessEventArgs(ComposablePartCatalogChangeEventArgs e)
+        private ComposablePartCatalogChangeEventArgs ProcessEventArgs(
+            ComposablePartCatalogChangeEventArgs e
+        )
         {
             // the constructor for ComposablePartCatalogChangeEventArgs takes a snapshot of the arguments, so we don't have to
             var result = new ComposablePartCatalogChangeEventArgs(
                 e.AddedDefinitions.Where(this._filter),
                 e.RemovedDefinitions.Where(this._filter),
-                e.AtomicComposition);
+                e.AtomicComposition
+            );
 
             // Only fire if we need to
             if (result.AddedDefinitions.FastAny() || result.RemovedDefinitions.FastAny())
@@ -248,7 +263,11 @@ namespace System.ComponentModel.Composition.Hosting
 
         [DebuggerStepThrough]
         [ContractArgumentValidator]
-        [SuppressMessage("Microsoft.Contracts", "CC1053", Justification = "Suppressing warning because this validator has no public contract")]
+        [SuppressMessage(
+            "Microsoft.Contracts",
+            "CC1053",
+            Justification = "Suppressing warning because this validator has no public contract"
+        )]
         private void ThrowIfDisposed()
         {
             if (this._isDisposed)

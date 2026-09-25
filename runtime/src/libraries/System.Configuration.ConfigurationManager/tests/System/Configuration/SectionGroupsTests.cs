@@ -20,7 +20,7 @@ namespace System.ConfigurationTests
         }
 
         public static string EmptySectionGroupConfiguration =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <sectionGroup name='emptySectionGroup'>
@@ -34,7 +34,9 @@ namespace System.ConfigurationTests
             using (var temp = new TempConfig(EmptySectionGroupConfiguration))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                ConfigurationSectionGroup sectionGroup = config.GetSectionGroup("emptySectionGroup");
+                ConfigurationSectionGroup sectionGroup = config.GetSectionGroup(
+                    "emptySectionGroup"
+                );
                 Assert.NotNull(sectionGroup);
                 Assert.Empty(sectionGroup.Sections);
                 Assert.Empty(sectionGroup.SectionGroups);
@@ -42,7 +44,7 @@ namespace System.ConfigurationTests
         }
 
         public static string SimpleSectionGroupConfiguration =
-@"<?xml version='1.0' encoding='utf-8' ?>
+            @"<?xml version='1.0' encoding='utf-8' ?>
 <configuration>
     <configSections>
         <sectionGroup name='simpleSectionGroup'>
@@ -52,17 +54,25 @@ namespace System.ConfigurationTests
 </configuration>";
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21527", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21527",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void SimpleSectionGroup()
         {
             using (var temp = new TempConfig(SimpleSectionGroupConfiguration))
             {
                 var config = ConfigurationManager.OpenExeConfiguration(temp.ExePath);
-                ConfigurationSectionGroup sectionGroup = config.GetSectionGroup("simpleSectionGroup");
+                ConfigurationSectionGroup sectionGroup = config.GetSectionGroup(
+                    "simpleSectionGroup"
+                );
                 Assert.NotNull(sectionGroup);
                 Assert.Equal(1, sectionGroup.Sections.Count);
                 Assert.Equal("fooSection", sectionGroup.Sections[0].SectionInformation.Name);
-                Assert.Equal("System.Configuration.NameValueSectionHandler, System", sectionGroup.Sections[0].SectionInformation.Type);
+                Assert.Equal(
+                    "System.Configuration.NameValueSectionHandler, System",
+                    sectionGroup.Sections[0].SectionInformation.Type
+                );
             }
         }
     }

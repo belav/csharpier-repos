@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,12 +13,12 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
-   
+namespace System.Runtime.InteropServices
+{
     using System;
 
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class CurrencyWrapper
     {
         public CurrencyWrapper(Decimal obj)
@@ -27,18 +27,18 @@ namespace System.Runtime.InteropServices {
         }
 
         public CurrencyWrapper(Object obj)
-        {            
+        {
             if (!(obj is Decimal))
-                throw new ArgumentException(Environment.GetResourceString("Arg_MustBeDecimal"), "obj");
+                throw new ArgumentException(
+                    Environment.GetResourceString("Arg_MustBeDecimal"),
+                    "obj"
+                );
             m_WrappedObject = (Decimal)obj;
         }
 
-        public Decimal WrappedObject 
+        public Decimal WrappedObject
         {
-            get 
-            {
-                return m_WrappedObject;
-            }
+            get { return m_WrappedObject; }
         }
 
         private Decimal m_WrappedObject;

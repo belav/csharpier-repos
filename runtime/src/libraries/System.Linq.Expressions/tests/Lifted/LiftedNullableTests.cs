@@ -122,13 +122,14 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a & b;
@@ -141,13 +142,14 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.AndAlso(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.AndAlso(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a == false ? false : a & b;
@@ -160,13 +162,14 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a | b;
@@ -179,13 +182,14 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.OrElse(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.OrElse(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a == true ? true : a | b;
@@ -198,13 +202,14 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.And(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.And(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a & b;
@@ -212,18 +217,23 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolWithMethodAndAlso(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolWithMethodAndAlso(
+            bool? a,
+            bool? b,
+            bool useInterpreter
+        )
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.AndAlso(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.AndAlso(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a == false ? false : a & b;
@@ -236,13 +246,14 @@ namespace System.Linq.Expressions.Tests
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.Or(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.Or(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a | b;
@@ -250,18 +261,23 @@ namespace System.Linq.Expressions.Tests
             Assert.Equal(expected, f());
         }
 
-        private static void VerifyNullableBoolWithMethodOrElse(bool? a, bool? b, bool useInterpreter)
+        private static void VerifyNullableBoolWithMethodOrElse(
+            bool? a,
+            bool? b,
+            bool useInterpreter
+        )
         {
             ParameterExpression p0 = Expression.Parameter(typeof(bool), "p0");
             ParameterExpression p1 = Expression.Parameter(typeof(bool), "p1");
 
-            Expression<Func<bool?>> e =
-                Expression.Lambda<Func<bool?>>(
-                    Expression.OrElse(
-                        Expression.Constant(a, typeof(bool?)),
-                        Expression.Constant(b, typeof(bool?)),
-                        null),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<bool?>> e = Expression.Lambda<Func<bool?>>(
+                Expression.OrElse(
+                    Expression.Constant(a, typeof(bool?)),
+                    Expression.Constant(b, typeof(bool?)),
+                    null
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<bool?> f = e.Compile(useInterpreter);
 
             bool? expected = a == true ? true : a | b;

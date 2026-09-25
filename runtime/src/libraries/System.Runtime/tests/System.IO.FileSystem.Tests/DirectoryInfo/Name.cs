@@ -23,7 +23,10 @@ namespace System.IO.Tests
         [Fact]
         public void UNCShareName()
         {
-            var info = new DirectoryInfo(new string(Path.DirectorySeparatorChar, 2) + Path.Combine("contoso", "amusement", "device"));
+            var info = new DirectoryInfo(
+                new string(Path.DirectorySeparatorChar, 2)
+                    + Path.Combine("contoso", "amusement", "device")
+            );
             Assert.Equal("device", info.Name);
         }
 

@@ -11,9 +11,7 @@ namespace System.Web.Mvc
     {
         private IControllerFactory _controllerFactory;
 
-        public MvcRouteHandler()
-        {
-        }
+        public MvcRouteHandler() { }
 
         public MvcRouteHandler(IControllerFactory controllerFactory)
         {
@@ -22,19 +20,26 @@ namespace System.Web.Mvc
 
         protected virtual IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            requestContext.HttpContext.SetSessionStateBehavior(GetSessionStateBehavior(requestContext));
+            requestContext.HttpContext.SetSessionStateBehavior(
+                GetSessionStateBehavior(requestContext)
+            );
             return new MvcHandler(requestContext);
         }
 
-        protected virtual SessionStateBehavior GetSessionStateBehavior(RequestContext requestContext)
+        protected virtual SessionStateBehavior GetSessionStateBehavior(
+            RequestContext requestContext
+        )
         {
             string controllerName = (string)requestContext.RouteData.Values["controller"];
             if (String.IsNullOrWhiteSpace(controllerName))
             {
-                throw new InvalidOperationException(MvcResources.MvcRouteHandler_RouteValuesHasNoController);
+                throw new InvalidOperationException(
+                    MvcResources.MvcRouteHandler_RouteValuesHasNoController
+                );
             }
 
-            IControllerFactory controllerFactory = _controllerFactory ?? ControllerBuilder.Current.GetControllerFactory();
+            IControllerFactory controllerFactory =
+                _controllerFactory ?? ControllerBuilder.Current.GetControllerFactory();
             return controllerFactory.GetControllerSessionBehavior(requestContext, controllerName);
         }
 

@@ -3,10 +3,10 @@
 // -----------------------------------------------------------------------
 using System;
 using System.ComponentModel.Composition.Hosting;
-using System.Reflection;
-using Microsoft.Internal;
-using System.Threading;
 using System.ComponentModel.Composition.Primitives;
+using System.Reflection;
+using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -59,9 +59,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
 #if FEATURE_CAS_APTCA
         [System.Security.SecuritySafeCritical]
 #endif //FEATURE_CAS_APTCA
-        private static ExportedDelegate SafeCreateExportedDelegate(object instance, MethodInfo method)
+        private static ExportedDelegate SafeCreateExportedDelegate(
+            object instance,
+            MethodInfo method
+        )
         {
-            // We demand member access in place of the [SecurityCritical] 
+            // We demand member access in place of the [SecurityCritical]
             // attribute on ExportDelegate constructor
             ReflectionInvoke.DemandMemberAccessIfNeeded(method);
 

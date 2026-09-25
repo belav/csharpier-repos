@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using System.Runtime.Versioning;
 #endif
 
-
 namespace Microsoft.AspNetCore.Connections.Abstractions;
 
 /// <summary>

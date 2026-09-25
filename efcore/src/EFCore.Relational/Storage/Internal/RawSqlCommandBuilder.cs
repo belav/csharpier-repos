@@ -26,7 +26,8 @@ public class RawSqlCommandBuilder : IRawSqlCommandBuilder
         IRelationalCommandBuilderFactory relationalCommandBuilderFactory,
         ISqlGenerationHelper sqlGenerationHelper,
         IParameterNameGeneratorFactory parameterNameGeneratorFactory,
-        IRelationalTypeMappingSource typeMappingSource)
+        IRelationalTypeMappingSource typeMappingSource
+    )
     {
         _relationalCommandBuilderFactory = relationalCommandBuilderFactory;
         _sqlGenerationHelper = sqlGenerationHelper;
@@ -40,11 +41,8 @@ public class RawSqlCommandBuilder : IRawSqlCommandBuilder
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IRelationalCommand Build(string sql)
-        => _relationalCommandBuilderFactory
-            .Create()
-            .Append(sql)
-            .Build();
+    public virtual IRelationalCommand Build(string sql) =>
+        _relationalCommandBuilderFactory.Create().Append(sql).Build();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -68,10 +66,14 @@ public class RawSqlCommandBuilder : IRawSqlCommandBuilder
             {
                 if (string.IsNullOrEmpty(dbParameter.ParameterName))
                 {
-                    dbParameter.ParameterName = _sqlGenerationHelper.GenerateParameterName(parameterNameGenerator.GenerateNext());
+                    dbParameter.ParameterName = _sqlGenerationHelper.GenerateParameterName(
+                        parameterNameGenerator.GenerateNext()
+                    );
                 }
 
-                substitutions.Add(_sqlGenerationHelper.GenerateParameterName(dbParameter.ParameterName));
+                substitutions.Add(
+                    _sqlGenerationHelper.GenerateParameterName(dbParameter.ParameterName)
+                );
                 relationalCommandBuilder.AddRawParameter(dbParameter.ParameterName, dbParameter);
             }
             else
@@ -80,12 +82,18 @@ public class RawSqlCommandBuilder : IRawSqlCommandBuilder
                 var substitutedName = _sqlGenerationHelper.GenerateParameterName(parameterName);
 
                 substitutions.Add(substitutedName);
-                var typeMapping = parameter == null
-                    ? _typeMappingSource.GetMappingForValue(null)
-                    : _typeMappingSource.GetMapping(parameter.GetType());
+                var typeMapping =
+                    parameter == null
+                        ? _typeMappingSource.GetMappingForValue(null)
+                        : _typeMappingSource.GetMapping(parameter.GetType());
                 var nullable = parameter == null || parameter.GetType().IsNullableType();
 
-                relationalCommandBuilder.AddParameter(parameterName, substitutedName, typeMapping, nullable);
+                relationalCommandBuilder.AddParameter(
+                    parameterName,
+                    substitutedName,
+                    typeMapping,
+                    nullable
+                );
                 parameterValues.Add(parameterName, parameter);
             }
         }
@@ -93,8 +101,6 @@ public class RawSqlCommandBuilder : IRawSqlCommandBuilder
         // ReSharper disable once CoVariantArrayConversion
         sql = string.Format(sql, substitutions.ToArray());
 
-        return new RawSqlCommand(
-            relationalCommandBuilder.Append(sql).Build(),
-            parameterValues);
+        return new RawSqlCommand(relationalCommandBuilder.Append(sql).Build(), parameterValues);
     }
 }

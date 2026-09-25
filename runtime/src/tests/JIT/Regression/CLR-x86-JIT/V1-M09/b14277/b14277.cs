@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -19,7 +20,6 @@ namespace DefaultNamespace
                 Console.WriteLine("Test paSsed");
             else
                 Console.WriteLine("Test FAiLED");
-
         }
 
         [Fact]
@@ -30,5 +30,4 @@ namespace DefaultNamespace
         }
     }
     ///// EOF
-
 }

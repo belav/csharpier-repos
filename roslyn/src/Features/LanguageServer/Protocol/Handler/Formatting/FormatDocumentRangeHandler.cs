@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
     [ExportCSharpVisualBasicStatelessLspService(typeof(FormatDocumentRangeHandler)), Shared]
     [Method(Methods.TextDocumentRangeFormattingName)]
-    internal sealed class FormatDocumentRangeHandler : AbstractFormatDocumentHandlerBase<DocumentRangeFormattingParams, TextEdit[]?>
+    internal sealed class FormatDocumentRangeHandler
+        : AbstractFormatDocumentHandlerBase<DocumentRangeFormattingParams, TextEdit[]?>
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -25,12 +26,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             _globalOptions = globalOptions;
         }
 
-        public override TextDocumentIdentifier GetTextDocumentIdentifier(DocumentRangeFormattingParams request) => request.TextDocument;
+        public override TextDocumentIdentifier GetTextDocumentIdentifier(
+            DocumentRangeFormattingParams request
+        ) => request.TextDocument;
 
         public override Task<TextEdit[]?> HandleRequestAsync(
             DocumentRangeFormattingParams request,
             RequestContext context,
-            CancellationToken cancellationToken)
-            => GetTextEditsAsync(context, request.Options, _globalOptions, cancellationToken, range: request.Range);
+            CancellationToken cancellationToken
+        ) =>
+            GetTextEditsAsync(
+                context,
+                request.Options,
+                _globalOptions,
+                cancellationToken,
+                range: request.Range
+            );
     }
 }

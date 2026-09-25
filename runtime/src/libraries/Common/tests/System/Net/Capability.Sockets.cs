@@ -19,6 +19,7 @@ namespace System.Net.Test.Common
             internal uint dwMinorVersion;
             internal uint dwBuildNumber;
             internal uint dwPlatformId;
+
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 128)]
             internal char[] szCSDVersion;
         }

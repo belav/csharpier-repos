@@ -33,7 +33,6 @@ namespace System.Reflection.TypeLoading
                 Debug.Assert(position >= -1 && position < Parameters.Length);
                 return position == -1 ? Return : Parameters[position];
             }
-
             set
             {
                 Debug.Assert(position >= -1 && position < Parameters.Length);

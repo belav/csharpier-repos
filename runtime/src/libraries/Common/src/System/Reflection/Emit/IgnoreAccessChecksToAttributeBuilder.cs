@@ -18,21 +18,27 @@ namespace System.Reflection.Emit
         /// </summary>
         public static ConstructorInfo AddToModule(ModuleBuilder mb)
         {
-            TypeBuilder attributeTypeBuilder =
-                mb.DefineType("System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute",
-                               TypeAttributes.Public | TypeAttributes.Class,
-                               typeof(Attribute));
+            TypeBuilder attributeTypeBuilder = mb.DefineType(
+                "System.Runtime.CompilerServices.IgnoresAccessChecksToAttribute",
+                TypeAttributes.Public | TypeAttributes.Class,
+                typeof(Attribute)
+            );
 
             // Create backing field as:
             // private string assemblyName;
-            FieldBuilder assemblyNameField =
-                attributeTypeBuilder.DefineField("assemblyName", typeof(string), FieldAttributes.Private);
+            FieldBuilder assemblyNameField = attributeTypeBuilder.DefineField(
+                "assemblyName",
+                typeof(string),
+                FieldAttributes.Private
+            );
 
             // Create ctor as:
             // public IgnoresAccessChecksToAttribute(string)
-            ConstructorBuilder constructorBuilder = attributeTypeBuilder.DefineConstructor(MethodAttributes.Public,
-                                                         CallingConventions.HasThis,
-                                                         new Type[] { assemblyNameField.FieldType });
+            ConstructorBuilder constructorBuilder = attributeTypeBuilder.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                new Type[] { assemblyNameField.FieldType }
+            );
 
             ILGenerator il = constructorBuilder.GetILGenerator();
 
@@ -48,18 +54,20 @@ namespace System.Reflection.Emit
             // Define property as:
             // public string AssemblyName {get { return this.assemblyName; } }
             PropertyBuilder propertyBuilder = attributeTypeBuilder.DefineProperty(
-                    "AssemblyName",
-                    PropertyAttributes.None,
-                    CallingConventions.HasThis,
-                    returnType: typeof(string),
-                    parameterTypes: null);
+                "AssemblyName",
+                PropertyAttributes.None,
+                CallingConventions.HasThis,
+                returnType: typeof(string),
+                parameterTypes: null
+            );
 
             MethodBuilder getterMethodBuilder = attributeTypeBuilder.DefineMethod(
-                                                   "get_AssemblyName",
-                                                   MethodAttributes.Public,
-                                                   CallingConventions.HasThis,
-                                                   returnType: typeof(string),
-                                                   parameterTypes: null);
+                "get_AssemblyName",
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                returnType: typeof(string),
+                parameterTypes: null
+            );
             propertyBuilder.SetGetMethod(getterMethodBuilder);
 
             // Generate body:
@@ -75,21 +83,23 @@ namespace System.Reflection.Emit
 
             // Find the ctor that takes only AttributeTargets
             ConstructorInfo attributeUsageConstructorInfo =
-                attributeUsageTypeInfo.DeclaredConstructors
-                    .Single(c => c.GetParameters().Length == 1 &&
-                                 c.GetParameters()[0].ParameterType == typeof(AttributeTargets));
+                attributeUsageTypeInfo.DeclaredConstructors.Single(c =>
+                    c.GetParameters().Length == 1
+                    && c.GetParameters()[0].ParameterType == typeof(AttributeTargets)
+                );
 
             // Find the property to set AllowMultiple
-            PropertyInfo allowMultipleProperty =
-                attributeUsageTypeInfo.DeclaredProperties
-                    .Single(f => string.Equals(f.Name, "AllowMultiple"));
+            PropertyInfo allowMultipleProperty = attributeUsageTypeInfo.DeclaredProperties.Single(
+                f => string.Equals(f.Name, "AllowMultiple")
+            );
 
             // Create a builder to construct the instance via the ctor and property
-            CustomAttributeBuilder customAttributeBuilder =
-                new CustomAttributeBuilder(attributeUsageConstructorInfo,
-                                            new object[] { AttributeTargets.Assembly },
-                                            new PropertyInfo[] { allowMultipleProperty },
-                                            new object[] { true });
+            CustomAttributeBuilder customAttributeBuilder = new CustomAttributeBuilder(
+                attributeUsageConstructorInfo,
+                new object[] { AttributeTargets.Assembly },
+                new PropertyInfo[] { allowMultipleProperty },
+                new object[] { true }
+            );
 
             // Attach this attribute instance to the newly defined attribute type
             attributeTypeBuilder.SetCustomAttribute(customAttributeBuilder);

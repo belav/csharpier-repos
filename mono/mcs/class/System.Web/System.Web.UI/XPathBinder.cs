@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,89 +31,96 @@
 using System.Collections;
 using System.Collections.Specialized;
 using System.Text;
-using System.Xml.XPath;
 using System.Xml;
+using System.Xml.XPath;
 
-namespace System.Web.UI 
+namespace System.Web.UI
 {
-	public sealed class XPathBinder 
-	{
-		XPathBinder ()
-		{
-		}
+    public sealed class XPathBinder
+    {
+        XPathBinder() { }
 
-		public static object Eval (object container, string xPath)
-		{
-			return Eval (container, xPath, (IXmlNamespaceResolver)null);
-		}
+        public static object Eval(object container, string xPath)
+        {
+            return Eval(container, xPath, (IXmlNamespaceResolver)null);
+        }
 
-		public static object Eval (object container, string xPath, IXmlNamespaceResolver resolver) 
-		{
-			if (xPath == null || xPath.Length == 0)
-				throw new ArgumentNullException ("xPath");
+        public static object Eval(object container, string xPath, IXmlNamespaceResolver resolver)
+        {
+            if (xPath == null || xPath.Length == 0)
+                throw new ArgumentNullException("xPath");
 
-			IXPathNavigable factory = container as IXPathNavigable;
+            IXPathNavigable factory = container as IXPathNavigable;
 
-			if (factory == null)
-				throw new ArgumentException ("container");
+            if (factory == null)
+                throw new ArgumentException("container");
 
-			object result = factory.CreateNavigator ().Evaluate (xPath, resolver);
+            object result = factory.CreateNavigator().Evaluate(xPath, resolver);
 
-			XPathNodeIterator itr = result as XPathNodeIterator;
-			if (itr != null) {
-				if (itr.MoveNext ())
-					return itr.Current.Value;
-				else
-					return null;
-			}
+            XPathNodeIterator itr = result as XPathNodeIterator;
+            if (itr != null)
+            {
+                if (itr.MoveNext())
+                    return itr.Current.Value;
+                else
+                    return null;
+            }
 
-			return result;
-		}
+            return result;
+        }
 
-		public static string Eval (object container, string xPath, string format)
-		{
-			return Eval (container, xPath, format, null);
-		}
+        public static string Eval(object container, string xPath, string format)
+        {
+            return Eval(container, xPath, format, null);
+        }
 
-		public static string Eval (object container, string xPath, string format, IXmlNamespaceResolver resolver)
-		{
-			object result = Eval (container, xPath, resolver);
-			
-			if (result == null)
-				return String.Empty;
-			if (format == null || format.Length == 0)
-				return result.ToString ();
+        public static string Eval(
+            object container,
+            string xPath,
+            string format,
+            IXmlNamespaceResolver resolver
+        )
+        {
+            object result = Eval(container, xPath, resolver);
 
-			return String.Format (format, result);
-		}
+            if (result == null)
+                return String.Empty;
+            if (format == null || format.Length == 0)
+                return result.ToString();
 
-		public static IEnumerable Select (object container, string xPath)
-		{
-			return Select (container, xPath, null);
-		}
+            return String.Format(format, result);
+        }
 
-		public static IEnumerable Select (object container, string xPath, IXmlNamespaceResolver resolver)
-		{
-			if (xPath == null || xPath.Length == 0)
-				throw new ArgumentNullException ("xPath");
-			
-			IXPathNavigable factory = container as IXPathNavigable;
-			
-			if (factory == null)
-				throw new ArgumentException ("container");
-			
-			XPathNodeIterator itr = factory.CreateNavigator ().Select (xPath, resolver);
-			ArrayList ret = new ArrayList ();
-			
-			while (itr.MoveNext ()) {
-				IHasXmlNode nodeAccessor = itr.Current as IHasXmlNode;
-				if (nodeAccessor == null)
-					throw new InvalidOperationException ();
-				ret.Add (nodeAccessor.GetNode ());
-			}
-			return ret;
-		}
-		
-	}
+        public static IEnumerable Select(object container, string xPath)
+        {
+            return Select(container, xPath, null);
+        }
+
+        public static IEnumerable Select(
+            object container,
+            string xPath,
+            IXmlNamespaceResolver resolver
+        )
+        {
+            if (xPath == null || xPath.Length == 0)
+                throw new ArgumentNullException("xPath");
+
+            IXPathNavigable factory = container as IXPathNavigable;
+
+            if (factory == null)
+                throw new ArgumentException("container");
+
+            XPathNodeIterator itr = factory.CreateNavigator().Select(xPath, resolver);
+            ArrayList ret = new ArrayList();
+
+            while (itr.MoveNext())
+            {
+                IHasXmlNode nodeAccessor = itr.Current as IHasXmlNode;
+                if (nodeAccessor == null)
+                    throw new InvalidOperationException();
+                ret.Add(nodeAccessor.GetNode());
+            }
+            return ret;
+        }
+    }
 }
-

@@ -8,6 +8,9 @@ namespace System.Web.Http.Validation
 {
     public abstract class ModelValidatorProvider
     {
-        public abstract IEnumerable<ModelValidator> GetValidators(ModelMetadata metadata, IEnumerable<ModelValidatorProvider> validatorProviders);
+        public abstract IEnumerable<ModelValidator> GetValidators(
+            ModelMetadata metadata,
+            IEnumerable<ModelValidatorProvider> validatorProviders
+        );
     }
 }

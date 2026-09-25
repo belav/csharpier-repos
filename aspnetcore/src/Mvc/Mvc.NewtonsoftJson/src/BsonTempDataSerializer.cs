@@ -77,16 +77,13 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
                 var arrayType = jArrayValue[0].Type;
                 if (_tokenTypeLookup.TryGetValue(arrayType, out var returnType))
                 {
-                    var arrayConverter = _arrayConverters.GetOrAdd(
-                        returnType,
-                        type =>
-                        {
-                            return (Func<JArray, object>)
-                                _convertArrayMethodInfo
-                                    .MakeGenericMethod(type)
-                                    .CreateDelegate(typeof(Func<JArray, object>));
-                        }
-                    );
+                    var arrayConverter = _arrayConverters.GetOrAdd(returnType, type =>
+                    {
+                        return (Func<JArray, object>)
+                            _convertArrayMethodInfo
+                                .MakeGenericMethod(type)
+                                .CreateDelegate(typeof(Func<JArray, object>));
+                    });
                     var result = arrayConverter(jArrayValue);
 
                     convertedDictionary[item.Key] = result;
@@ -111,16 +108,13 @@ internal sealed class BsonTempDataSerializer : TempDataSerializer
                 var jTokenType = jObjectValue.Properties().First().Value.Type;
                 if (_tokenTypeLookup.TryGetValue(jTokenType, out var valueType))
                 {
-                    var dictionaryConverter = _dictionaryConverters.GetOrAdd(
-                        valueType,
-                        type =>
-                        {
-                            return (Func<JObject, object>)
-                                _convertDictionaryMethodInfo
-                                    .MakeGenericMethod(type)
-                                    .CreateDelegate(typeof(Func<JObject, object>));
-                        }
-                    );
+                    var dictionaryConverter = _dictionaryConverters.GetOrAdd(valueType, type =>
+                    {
+                        return (Func<JObject, object>)
+                            _convertDictionaryMethodInfo
+                                .MakeGenericMethod(type)
+                                .CreateDelegate(typeof(Func<JObject, object>));
+                    });
                     var result = dictionaryConverter(jObjectValue);
 
                     convertedDictionary[item.Key] = result;

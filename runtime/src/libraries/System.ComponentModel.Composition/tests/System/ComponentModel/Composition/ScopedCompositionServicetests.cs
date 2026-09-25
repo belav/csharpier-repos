@@ -60,12 +60,16 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void DontExportICompositionServiceFromRootRequiredImportShouldThrowCompositionException()
         {
-            var rootCatalog = new TypeCatalog(typeof(ClassRequiresICompositionService), typeof(ClassOptionallyImportsICompositionService));
+            var rootCatalog = new TypeCatalog(
+                typeof(ClassRequiresICompositionService),
+                typeof(ClassOptionallyImportsICompositionService)
+            );
             var container = new CompositionContainer(rootCatalog);
 
             Assert.Throws<ImportCardinalityMismatchException>(() =>
             {
-                ClassRequiresICompositionService service = container.GetExportedValue<ClassRequiresICompositionService>();
+                ClassRequiresICompositionService service =
+                    container.GetExportedValue<ClassRequiresICompositionService>();
                 Assert.Null(service.CompositionService);
             });
         }
@@ -73,30 +77,48 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void DontExportICompositionServiceFromRootOptionalImportShouldSucceed()
         {
-            var rootCatalog = new TypeCatalog(typeof(ClassRequiresICompositionService), typeof(ClassOptionallyImportsICompositionService));
+            var rootCatalog = new TypeCatalog(
+                typeof(ClassRequiresICompositionService),
+                typeof(ClassOptionallyImportsICompositionService)
+            );
             var container = new CompositionContainer(rootCatalog);
 
-            ClassOptionallyImportsICompositionService service = container.GetExportedValue<ClassOptionallyImportsICompositionService>();
+            ClassOptionallyImportsICompositionService service =
+                container.GetExportedValue<ClassOptionallyImportsICompositionService>();
             Assert.Null(service.CompositionService);
         }
 
         [Fact]
         public void ExportICompositionServiceFromRootRequiredImportShouldsucceed()
         {
-            var rootCatalog = new TypeCatalog(typeof(ClassRequiresICompositionService), typeof(ClassOptionallyImportsICompositionService));
-            var container = new CompositionContainer(rootCatalog, CompositionOptions.ExportCompositionService);
+            var rootCatalog = new TypeCatalog(
+                typeof(ClassRequiresICompositionService),
+                typeof(ClassOptionallyImportsICompositionService)
+            );
+            var container = new CompositionContainer(
+                rootCatalog,
+                CompositionOptions.ExportCompositionService
+            );
 
-            ClassRequiresICompositionService service = container.GetExportedValue<ClassRequiresICompositionService>();
+            ClassRequiresICompositionService service =
+                container.GetExportedValue<ClassRequiresICompositionService>();
             Assert.NotNull(service.CompositionService);
         }
 
         [Fact]
         public void ExportICompositionServiceFromRootOptionalImportShouldSucceed()
         {
-            var rootCatalog = new TypeCatalog(typeof(ClassRequiresICompositionService), typeof(ClassOptionallyImportsICompositionService));
-            var container = new CompositionContainer(rootCatalog, CompositionOptions.ExportCompositionService);
+            var rootCatalog = new TypeCatalog(
+                typeof(ClassRequiresICompositionService),
+                typeof(ClassOptionallyImportsICompositionService)
+            );
+            var container = new CompositionContainer(
+                rootCatalog,
+                CompositionOptions.ExportCompositionService
+            );
 
-            ClassOptionallyImportsICompositionService service = container.GetExportedValue<ClassOptionallyImportsICompositionService>();
+            ClassOptionallyImportsICompositionService service =
+                container.GetExportedValue<ClassOptionallyImportsICompositionService>();
             Assert.NotNull(service.CompositionService);
         }
 
@@ -104,7 +126,10 @@ namespace System.ComponentModel.Composition
         public void DontExportICompositionServiceFromChildImportShouldShouldThrowCompositionException()
         {
             var rootCatalog = new TypeCatalog(typeof(FromRoot));
-            var childCatalog = new TypeCatalog(typeof(ClassRequiresICompositionService), typeof(ClassOptionallyImportsICompositionService));
+            var childCatalog = new TypeCatalog(
+                typeof(ClassRequiresICompositionService),
+                typeof(ClassOptionallyImportsICompositionService)
+            );
             CompositionScopeDefinition scope = rootCatalog.AsScope(childCatalog.AsScope());
             var container = new CompositionContainer(scope);
 
@@ -118,17 +143,25 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void ExportICompositionServiceFromChildImportShouldShouldSucceed()
         {
-            var childCatalog = new TypeCatalog(typeof(ClassRequiresICompositionService), typeof(ClassOptionallyImportsICompositionService));
+            var childCatalog = new TypeCatalog(
+                typeof(ClassRequiresICompositionService),
+                typeof(ClassOptionallyImportsICompositionService)
+            );
             var rootCatalog = new TypeCatalog(typeof(FromRoot));
             CompositionScopeDefinition scope = rootCatalog.AsScope(childCatalog.AsScope());
-            var container = new CompositionContainer(scope, CompositionOptions.ExportCompositionService);
+            var container = new CompositionContainer(
+                scope,
+                CompositionOptions.ExportCompositionService
+            );
 
             FromRoot fromRoot = container.GetExportedValue<FromRoot>();
 
-            ExportLifetimeContext<ClassRequiresICompositionService> requiredService = fromRoot.Required.CreateExport();
+            ExportLifetimeContext<ClassRequiresICompositionService> requiredService =
+                fromRoot.Required.CreateExport();
             Assert.NotNull(requiredService.Value.CompositionService);
 
-            ExportLifetimeContext<ClassOptionallyImportsICompositionService> optionalService = fromRoot.Optional.CreateExport();
+            ExportLifetimeContext<ClassOptionallyImportsICompositionService> optionalService =
+                fromRoot.Optional.CreateExport();
             Assert.NotNull(optionalService.Value.CompositionService);
         }
 
@@ -138,7 +171,10 @@ namespace System.ComponentModel.Composition
             var c = new TypeCatalog(typeof(ClassRoot), typeof(ClassA));
             CompositionScopeDefinition sd = c.AsScope(c.AsScope());
 
-            var container = new CompositionContainer(sd, CompositionOptions.ExportCompositionService);
+            var container = new CompositionContainer(
+                sd,
+                CompositionOptions.ExportCompositionService
+            );
 
             ClassRoot fromRoot = container.GetExportedValue<ClassRoot>();
             ClassA a1 = fromRoot.classA.CreateExport().Value;
@@ -148,7 +184,9 @@ namespace System.ComponentModel.Composition
             a2.InstanceValue = 303;
 
             if (a1.InstanceValue == a2.InstanceValue)
-            { throw new Exception("Incorrect sharing, a1 is shared with a2"); }
+            {
+                throw new Exception("Incorrect sharing, a1 is shared with a2");
+            }
 
             var xroot = new ImportA();
             var x1 = new ImportA();
@@ -160,7 +198,6 @@ namespace System.ComponentModel.Composition
             Assert.Equal(xroot.classA.InstanceValue, fromRoot.localClassA.InstanceValue);
             Assert.Equal(x1.classA.InstanceValue, a1.InstanceValue);
             Assert.Equal(x2.classA.InstanceValue, a2.InstanceValue);
-
         }
 
         [Fact]
@@ -170,7 +207,10 @@ namespace System.ComponentModel.Composition
             var c2 = new TypeCatalog(typeof(ClassA));
             CompositionScopeDefinition sd = c1.AsScope(c2.AsScope());
 
-            var container = new CompositionContainer(sd, CompositionOptions.ExportCompositionService);
+            var container = new CompositionContainer(
+                sd,
+                CompositionOptions.ExportCompositionService
+            );
 
             ClassRoot fromRoot = container.GetExportedValue<ClassRoot>();
             ClassA a1 = fromRoot.classA.CreateExport().Value;
@@ -180,7 +220,9 @@ namespace System.ComponentModel.Composition
             a2.InstanceValue = 303;
 
             if (a1.InstanceValue == a2.InstanceValue)
-            { throw new Exception("Incorrect sharing, a1 is shared with a2"); }
+            {
+                throw new Exception("Incorrect sharing, a1 is shared with a2");
+            }
 
             var xroot = new ImportA();
             var x1 = new ImportA();

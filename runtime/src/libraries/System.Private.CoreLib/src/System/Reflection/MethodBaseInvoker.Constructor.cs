@@ -17,9 +17,11 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[] parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
-            bool wrapInTargetInvocationException = (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
+            bool wrapInTargetInvocationException =
+                (invokeAttr & BindingFlags.DoNotWrapExceptions) == 0;
             object? ret;
             int argCount = _argCount;
 
@@ -27,9 +29,17 @@ namespace System.Reflection
             IntPtr* pStorage = stackalloc IntPtr[2 * argCount];
             NativeMemory.Clear(pStorage, (nuint)(2 * argCount) * (nuint)sizeof(IntPtr));
             Span<object?> copyOfArgs = new(ref Unsafe.AsRef<object?>(pStorage), argCount);
-            GCFrameRegistration regArgStorage = new((void**)pStorage, (uint)argCount, areByRefs: false);
+            GCFrameRegistration regArgStorage = new(
+                (void**)pStorage,
+                (uint)argCount,
+                areByRefs: false
+            );
             IntPtr* pByRefStorage = pStorage + argCount;
-            GCFrameRegistration regByRefStorage = new((void**)pByRefStorage, (uint)argCount, areByRefs: true);
+            GCFrameRegistration regByRefStorage = new(
+                (void**)pByRefStorage,
+                (uint)argCount,
+                areByRefs: true
+            );
 
             try
             {
@@ -41,10 +51,12 @@ namespace System.Reflection
                 for (int i = 0; i < argCount; i++)
                 {
 #pragma warning disable CS8500
-                    *(ByReference*)(pByRefStorage + i) = (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0 ?
+                    *(ByReference*)(pByRefStorage + i) =
+                        (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0
+                            ?
 #pragma warning restore CS8500
-                        ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i).GetRawData()) :
-                        ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i));
+                            ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i).GetRawData())
+                            : ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i));
                 }
 
                 try
@@ -67,7 +79,10 @@ namespace System.Reflection
             }
         }
 
-        internal unsafe object? InvokeConstructorWithoutAlloc(object? obj, bool wrapInTargetInvocationException)
+        internal unsafe object? InvokeConstructorWithoutAlloc(
+            object? obj,
+            bool wrapInTargetInvocationException
+        )
         {
             try
             {

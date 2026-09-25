@@ -21,9 +21,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageService
 /// </summary>
 internal sealed class JsonLanguageDetector(
     EmbeddedLanguageInfo info,
-    ISet<INamedTypeSymbol> typesOfInterest)
-    : AbstractLanguageDetector<JsonOptions, JsonTree, JsonLanguageDetector, JsonLanguageDetector.JsonInfo>(
-        info, LanguageIdentifiers, CommentDetector)
+    ISet<INamedTypeSymbol> typesOfInterest
+)
+    : AbstractLanguageDetector<
+        JsonOptions,
+        JsonTree,
+        JsonLanguageDetector,
+        JsonLanguageDetector.JsonInfo
+    >(info, LanguageIdentifiers, CommentDetector)
 {
     internal readonly struct JsonInfo : ILanguageDetectorInfo<JsonLanguageDetector>
     {
@@ -31,7 +36,10 @@ internal sealed class JsonLanguageDetector(
 
         public JsonLanguageDetector Create(Compilation compilation, EmbeddedLanguageInfo info)
         {
-            var types = s_typeNamesOfInterest.Select(compilation.GetTypeByMetadataName).WhereNotNull().ToSet();
+            var types = s_typeNamesOfInterest
+                .Select(compilation.GetTypeByMetadataName)
+                .WhereNotNull()
+                .ToSet();
             return new JsonLanguageDetector(info, types);
         }
     }
@@ -53,11 +61,10 @@ internal sealed class JsonLanguageDetector(
     /// [StringSyntax(Json)] means we're targetting .net, which means we're strict by default if we don't see any
     /// options.
     /// </summary>
-    protected override JsonOptions GetStringSyntaxDefaultOptions()
-        => JsonOptions.Strict;
+    protected override JsonOptions GetStringSyntaxDefaultOptions() => JsonOptions.Strict;
 
-    protected override JsonTree? TryParse(VirtualCharSequence chars, JsonOptions options)
-        => JsonParser.TryParse(chars, options);
+    protected override JsonTree? TryParse(VirtualCharSequence chars, JsonOptions options) =>
+        JsonParser.TryParse(chars, options);
 
     /// <inheritdoc cref="TryParseString(SyntaxToken, SemanticModel, bool, CancellationToken)"/>
     /// <summary>
@@ -66,7 +73,12 @@ internal sealed class JsonLanguageDetector(
     /// automatically on code that is strongly believed to be JSON, but which is not passed to a known JSON api,
     /// and does not have a comment on it stating it is JSON.
     /// </summary>
-    public JsonTree? TryParseString(SyntaxToken token, SemanticModel semanticModel, bool includeProbableStrings, CancellationToken cancellationToken)
+    public JsonTree? TryParseString(
+        SyntaxToken token,
+        SemanticModel semanticModel,
+        bool includeProbableStrings,
+        CancellationToken cancellationToken
+    )
     {
         var result = TryParseString(token, semanticModel, cancellationToken);
         if (result != null)
@@ -120,26 +132,46 @@ internal sealed class JsonLanguageDetector(
         SyntaxNode argumentNode,
         SemanticModel semanticModel,
         CancellationToken cancellationToken,
-        out JsonOptions options)
+        out JsonOptions options
+    )
     {
         var syntaxFacts = Info.SyntaxFacts;
         var argumentList = argumentNode.GetRequiredParent();
         var invocationOrCreation = argumentList.Parent;
         if (syntaxFacts.IsInvocationExpression(invocationOrCreation))
         {
-            var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(invocationOrCreation);
+            var invokedExpression = syntaxFacts.GetExpressionOfInvocationExpression(
+                invocationOrCreation
+            );
             var name = GetNameOfInvokedExpression(invokedExpression);
             if (syntaxFacts.StringComparer.Equals(name, ParseMethodName))
             {
                 // Is a string argument to a method that looks like it could be a json-parsing
                 // method. Need to do deeper analysis
-                var symbol = semanticModel.GetSymbolInfo(invocationOrCreation, cancellationToken).GetAnySymbol();
-                if (symbol is IMethodSymbol { DeclaredAccessibility: Accessibility.Public, IsStatic: true } &&
-                    _typesOfInterest.Contains(symbol.ContainingType) &&
-                    IsArgumentToSuitableParameter(semanticModel, argumentNode, cancellationToken))
+                var symbol = semanticModel
+                    .GetSymbolInfo(invocationOrCreation, cancellationToken)
+                    .GetAnySymbol();
+                if (
+                    symbol
+                        is IMethodSymbol
+                        {
+                            DeclaredAccessibility: Accessibility.Public,
+                            IsStatic: true
+                        }
+                    && _typesOfInterest.Contains(symbol.ContainingType)
+                    && IsArgumentToSuitableParameter(semanticModel, argumentNode, cancellationToken)
+                )
                 {
-                    options = symbol.ContainingType.Name == nameof(JsonDocument) ? JsonOptions.Strict : default;
-                    options |= GetOptionsFromSiblingArgument(argumentNode, semanticModel, cancellationToken) ?? default;
+                    options =
+                        symbol.ContainingType.Name == nameof(JsonDocument)
+                            ? JsonOptions.Strict
+                            : default;
+                    options |=
+                        GetOptionsFromSiblingArgument(
+                            argumentNode,
+                            semanticModel,
+                            cancellationToken
+                        ) ?? default;
                     return true;
                 }
             }
@@ -150,7 +182,12 @@ internal sealed class JsonLanguageDetector(
     }
 
     protected override bool TryGetOptions(
-        SemanticModel semanticModel, ITypeSymbol exprType, SyntaxNode expr, CancellationToken cancellationToken, out JsonOptions options)
+        SemanticModel semanticModel,
+        ITypeSymbol exprType,
+        SyntaxNode expr,
+        CancellationToken cancellationToken,
+        out JsonOptions options
+    )
     {
         options = default;
 
@@ -163,26 +200,49 @@ internal sealed class JsonLanguageDetector(
         options = JsonOptions.Strict;
         var syntaxFacts = Info.SyntaxFacts;
         expr = syntaxFacts.WalkDownParentheses(expr);
-        if (syntaxFacts.IsObjectCreationExpression(expr) ||
-            syntaxFacts.IsImplicitObjectCreationExpression(expr))
+        if (
+            syntaxFacts.IsObjectCreationExpression(expr)
+            || syntaxFacts.IsImplicitObjectCreationExpression(expr)
+        )
         {
-            syntaxFacts.GetPartsOfBaseObjectCreationExpression(expr, out var argumentList, out var objectInitializer);
+            syntaxFacts.GetPartsOfBaseObjectCreationExpression(
+                expr,
+                out var argumentList,
+                out var objectInitializer
+            );
             if (syntaxFacts.IsObjectMemberInitializer(objectInitializer))
             {
-                var initializers = syntaxFacts.GetInitializersOfObjectMemberInitializer(objectInitializer);
+                var initializers = syntaxFacts.GetInitializersOfObjectMemberInitializer(
+                    objectInitializer
+                );
                 foreach (var initializer in initializers)
                 {
                     if (syntaxFacts.IsNamedMemberInitializer(initializer))
                     {
-                        syntaxFacts.GetPartsOfNamedMemberInitializer(initializer, out var name, out var initExpr);
+                        syntaxFacts.GetPartsOfNamedMemberInitializer(
+                            initializer,
+                            out var name,
+                            out var initExpr
+                        );
                         var propName = syntaxFacts.GetIdentifierOfIdentifierName(name).ValueText;
-                        if (syntaxFacts.StringComparer.Equals(propName, nameof(JsonDocumentOptions.AllowTrailingCommas)) &&
-                            semanticModel.GetConstantValue(initExpr).Value is true)
+                        if (
+                            syntaxFacts.StringComparer.Equals(
+                                propName,
+                                nameof(JsonDocumentOptions.AllowTrailingCommas)
+                            ) && semanticModel.GetConstantValue(initExpr).Value is true
+                        )
                         {
                             options |= JsonOptions.TrailingCommas;
                         }
-                        else if (syntaxFacts.StringComparer.Equals(propName, nameof(JsonDocumentOptions.CommentHandling)) &&
-                                 semanticModel.GetConstantValue(initExpr).Value is (byte)JsonCommentHandling.Allow or (byte)JsonCommentHandling.Skip)
+                        else if (
+                            syntaxFacts.StringComparer.Equals(
+                                propName,
+                                nameof(JsonDocumentOptions.CommentHandling)
+                            )
+                            && semanticModel.GetConstantValue(initExpr).Value
+                                is (byte)JsonCommentHandling.Allow
+                                    or (byte)JsonCommentHandling.Skip
+                        )
                         {
                             options |= JsonOptions.Comments;
                         }
@@ -195,9 +255,18 @@ internal sealed class JsonLanguageDetector(
     }
 
     private bool IsArgumentToSuitableParameter(
-        SemanticModel semanticModel, SyntaxNode argumentNode, CancellationToken cancellationToken)
+        SemanticModel semanticModel,
+        SyntaxNode argumentNode,
+        CancellationToken cancellationToken
+    )
     {
-        var parameter = Info.SemanticFacts.FindParameterForArgument(semanticModel, argumentNode, allowUncertainCandidates: true, allowParams: true, cancellationToken);
+        var parameter = Info.SemanticFacts.FindParameterForArgument(
+            semanticModel,
+            argumentNode,
+            allowUncertainCandidates: true,
+            allowParams: true,
+            cancellationToken
+        );
         return parameter?.Name == JsonParameterName;
     }
 }

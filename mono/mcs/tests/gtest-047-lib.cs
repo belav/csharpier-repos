@@ -2,14 +2,10 @@
 
 namespace Foo
 {
-	public class List
-	{
-	}
+    public class List { }
 }
 
 namespace Bar
 {
-	public class List<T>
-	{
-	}
+    public class List<T> { }
 }

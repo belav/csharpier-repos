@@ -18,7 +18,9 @@ namespace System.Linq.Parallel
     /// partitioning of the count space by implementing an interface that PLINQ recognizes.
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
-    internal sealed class RepeatEnumerable<TResult> : ParallelQuery<TResult>, IParallelPartitionable<TResult>
+    internal sealed class RepeatEnumerable<TResult>
+        : ParallelQuery<TResult>,
+            IParallelPartitionable<TResult>
     {
         private readonly TResult _element; // Element value to repeat.
         private readonly int _count; // Count of element values.
@@ -48,12 +50,19 @@ namespace System.Linq.Parallel
             // Now generate the actual enumerators. Each produces 'stride' elements, except
             // for the last partition which may produce fewer (if '_count' isn't evenly
             // divisible by 'partitionCount').
-            QueryOperatorEnumerator<TResult, int>[] partitions = new QueryOperatorEnumerator<TResult, int>[partitionCount];
+            QueryOperatorEnumerator<TResult, int>[] partitions = new QueryOperatorEnumerator<
+                TResult,
+                int
+            >[partitionCount];
             for (int i = 0, offset = 0; i < partitionCount; i++, offset += stride)
             {
                 if ((offset + stride) > _count)
                 {
-                    partitions[i] = new RepeatEnumerator(_element, offset < _count ? _count - offset : 0, offset);
+                    partitions[i] = new RepeatEnumerator(
+                        _element,
+                        offset < _count ? _count - offset : 0,
+                        offset
+                    );
                 }
                 else
                 {
@@ -99,7 +108,10 @@ namespace System.Linq.Parallel
             // Basic IEnumerator<T> methods. These produce the repeating sequence..
             //
 
-            internal override bool MoveNext([MaybeNullWhen(false), AllowNull] ref TResult currentElement, ref int currentKey)
+            internal override bool MoveNext(
+                [MaybeNullWhen(false), AllowNull] ref TResult currentElement,
+                ref int currentKey
+            )
             {
                 _currentIndex ??= new Shared<int>(-1);
 

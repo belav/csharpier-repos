@@ -1,28 +1,28 @@
 //------------------------------------------------------------------------------
 // <copyright file="WmlMobileTextWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
-using System.Web.Mobile;
-using System.Web.UI.MobileControls;
-using System.Text.RegularExpressions;
-using System.Diagnostics;
-using System.Web.Security;
 using System.Security.Permissions;
-
-using SR=System.Web.UI.MobileControls.Adapters.SR;
-
+using System.Text.RegularExpressions;
+using System.Web.Mobile;
+using System.Web.Security;
+using System.Web.UI.MobileControls;
+using SR = System.Web.UI.MobileControls.Adapters.SR;
 #if COMPILING_FOR_SHIPPED_SOURCE
-using Adapters=System.Web.UI.MobileControls.ShippedAdapterSource;
+using Adapters = System.Web.UI.MobileControls.ShippedAdapterSource;
+
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
-using Adapters=System.Web.UI.MobileControls.Adapters;
+using Adapters = System.Web.UI.MobileControls.Adapters;
+
 namespace System.Web.UI.MobileControls.Adapters
 #endif
 
@@ -34,48 +34,56 @@ namespace System.Web.UI.MobileControls.Adapters
      */
 
     /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class WmlMobileTextWriter : MobileTextWriter
     {
-        private TextWriter      _realInnerWriter;
+        private TextWriter _realInnerWriter;
         private EmptyTextWriter _analyzeWriter;
-        private bool            _analyzeMode = false;
-        private MobilePage      _page;
-        private Form            _currentForm;
-        private bool[]          _usingPostBackType   = new bool[] { false, false };
-        private bool[]          _writtenPostBackType = new bool[] { false, false };
-        private int             _numberOfPostBacks;
-        private bool            _postBackCardsEfficient = false;
-        private IDictionary     _formVariables = null;
-        private IDictionary     _controlShortNames = null;
-        private Stack           _layoutStack = new Stack();
-        private Stack           _formatStack = new Stack();
-        private WmlLayout       _currentWrittenLayout = null;
-        private WmlFormat       _currentWrittenFormat = null;
-        private bool            _pendingBreak = false;
-        private bool            _inAnchor = false;
-        private int             _numberOfSoftkeys;
-        private bool            _provideBackButton = false;
-        private bool            _writtenFormVariables = false;
-        private bool            _alwaysScrambleClientIDs = false;
+        private bool _analyzeMode = false;
+        private MobilePage _page;
+        private Form _currentForm;
+        private bool[] _usingPostBackType = new bool[] { false, false };
+        private bool[] _writtenPostBackType = new bool[] { false, false };
+        private int _numberOfPostBacks;
+        private bool _postBackCardsEfficient = false;
+        private IDictionary _formVariables = null;
+        private IDictionary _controlShortNames = null;
+        private Stack _layoutStack = new Stack();
+        private Stack _formatStack = new Stack();
+        private WmlLayout _currentWrittenLayout = null;
+        private WmlFormat _currentWrittenFormat = null;
+        private bool _pendingBreak = false;
+        private bool _inAnchor = false;
+        private int _numberOfSoftkeys;
+        private bool _provideBackButton = false;
+        private bool _writtenFormVariables = false;
+        private bool _alwaysScrambleClientIDs = false;
 
-        private const String    _largeTag  = "big";
-        private const String    _smallTag  = "small";
-        private const String    _boldTag   = "b";
-        private const String    _italicTag = "i";
-        internal const String   _postBackCardPrefix = "__pbc";
-        private const String    _postBackWithVarsCardId = "__pbc1";
-        private const String    _postBackWithoutVarsCardId = "__pbc2";
-        internal const String   _postBackEventTargetVarName = "mcsvt";
-        internal const String   _postBackEventArgumentVarName = "mcsva";
-        private const String    _shortNamePrefix = "mcsv";
-        private const int       _maxShortNameLength = 16;
-        private static Random   _random = new Random();
+        private const String _largeTag = "big";
+        private const String _smallTag = "small";
+        private const String _boldTag = "b";
+        private const String _italicTag = "i";
+        internal const String _postBackCardPrefix = "__pbc";
+        private const String _postBackWithVarsCardId = "__pbc1";
+        private const String _postBackWithoutVarsCardId = "__pbc2";
+        internal const String _postBackEventTargetVarName = "mcsvt";
+        internal const String _postBackEventArgumentVarName = "mcsva";
+        private const String _shortNamePrefix = "mcsv";
+        private const int _maxShortNameLength = 16;
+        private static Random _random = new Random();
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.WmlMobileTextWriter"]/*' />
-        public WmlMobileTextWriter(TextWriter writer, MobileCapabilities device, MobilePage page) 
+        public WmlMobileTextWriter(TextWriter writer, MobileCapabilities device, MobilePage page)
             : base(writer, device)
         {
             _realInnerWriter = writer;
@@ -93,8 +101,8 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 _numberOfSoftkeys = 1;
                 _provideBackButton = true;
-                _alwaysScrambleClientIDs = _provideBackButton && 
-                                                !device.CanRenderOneventAndPrevElementsTogether;
+                _alwaysScrambleClientIDs =
+                    _provideBackButton && !device.CanRenderOneventAndPrevElementsTogether;
             }
         }
 
@@ -103,10 +111,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.AnalyzeMode"]/*' />
         public bool AnalyzeMode
         {
-            get
-            {
-                return _analyzeMode;
-            }
+            get { return _analyzeMode; }
             set
             {
                 _analyzeMode = value;
@@ -124,10 +129,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal bool HasFormVariables
         {
-            get
-            {
-                return _writtenFormVariables;
-            }
+            get { return _writtenFormVariables; }
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.EnterLayout"]/*' />
@@ -221,7 +223,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        // Single parameter - used for rendering ordinary inline text 
+        // Single parameter - used for rendering ordinary inline text
         // (with encoding but without breaks).
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderText"]/*' />
         public void RenderText(String text)
@@ -271,8 +273,10 @@ namespace System.Web.UI.MobileControls.Adapters
             int ampPos = url.IndexOf(ampersand);
             while (ampPos != -1)
             {
-                if (url.Length - ampPos <= ampEscaped.Length ||
-                    url.Substring(ampPos + 1, ampEscaped.Length) != ampEscaped)
+                if (
+                    url.Length - ampPos <= ampEscaped.Length
+                    || url.Substring(ampPos + 1, ampEscaped.Length) != ampEscaped
+                )
                 {
                     url = url.Insert(ampPos + 1, ampEscaped);
                 }
@@ -283,11 +287,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderBeginHyperlink"]/*' />
-        public virtual void RenderBeginHyperlink(String targetUrl, 
-                                                 bool encodeUrl, 
-                                                 String softkeyLabel, 
-                                                 bool implicitSoftkeyLabel,
-                                                 bool mapToSoftkey)
+        public virtual void RenderBeginHyperlink(
+            String targetUrl,
+            bool encodeUrl,
+            String softkeyLabel,
+            bool implicitSoftkeyLabel,
+            bool mapToSoftkey
+        )
         {
             if (!AnalyzeMode)
             {
@@ -329,21 +335,23 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderTextBox"]/*' />
-        public virtual void RenderTextBox(String id, 
-                                          String value,
-                                          String format,
-                                          String title,
-                                          bool password, 
-                                          int size, 
-                                          int maxLength, 
-                                          bool generateRandomID,
-                                          bool breakAfter)
+        public virtual void RenderTextBox(
+            String id,
+            String value,
+            String format,
+            String title,
+            bool password,
+            int size,
+            int maxLength,
+            bool generateRandomID,
+            bool breakAfter
+        )
         {
             if (!AnalyzeMode)
             {
                 // Input tags cannot appear inside character formatting tags,
                 // so close any character formatting.
-                
+
                 CloseCharacterFormat();
 
                 // Certain devices always render a break before a <select>.  If
@@ -353,7 +361,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     PendingBreak = false;
                 }
-                
+
                 EnsureLayout();
                 WriteBeginTag("input");
                 // Map the client ID to a short name. See
@@ -379,9 +387,14 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     WriteAttribute("maxlength", maxLength.ToString(CultureInfo.InvariantCulture));
                 }
-                if ((!_writtenFormVariables || ((WmlPageAdapter) Page.Adapter).RequiresValueAttributeInInputTag()) &&
-                    value != null &&
-                    (value.Length > 0 || password))
+                if (
+                    (
+                        !_writtenFormVariables
+                        || ((WmlPageAdapter)Page.Adapter).RequiresValueAttributeInInputTag()
+                    )
+                    && value != null
+                    && (value.Length > 0 || password)
+                )
                 {
                     WriteTextEncodedAttribute("value", value);
                 }
@@ -394,22 +407,35 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderImage"]/*' />
-        public virtual void RenderImage(String source, 
-                                        String localSource, 
-                                        String alternateText, 
-                                        bool breakAfter)
+        public virtual void RenderImage(
+            String source,
+            String localSource,
+            String alternateText,
+            bool breakAfter
+        )
         {
             if (!AnalyzeMode)
             {
                 EnsureLayout();
 
                 WriteBeginTag("img");
-                WriteAttribute("src", source, true /*encode*/);
+                WriteAttribute(
+                    "src",
+                    source,
+                    true /*encode*/
+                );
                 if (localSource != null)
                 {
-                    WriteAttribute("localsrc", localSource, true /*encode*/);
+                    WriteAttribute(
+                        "localsrc",
+                        localSource,
+                        true /*encode*/
+                    );
                 }
-                WriteTextEncodedAttribute("alt", alternateText != null ? alternateText : String.Empty);
+                WriteTextEncodedAttribute(
+                    "alt",
+                    alternateText != null ? alternateText : String.Empty
+                );
                 Write(" />");
                 if (breakAfter)
                 {
@@ -419,9 +445,11 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderBeginPostBack"]/*' />
-        public virtual void RenderBeginPostBack(String softkeyLabel, 
-                                                bool implicitSoftkeyLabel, 
-                                                bool mapToSoftkey)
+        public virtual void RenderBeginPostBack(
+            String softkeyLabel,
+            bool implicitSoftkeyLabel,
+            bool mapToSoftkey
+        )
         {
             if (!AnalyzeMode)
             {
@@ -439,11 +467,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderEndPostBack"]/*' />
-        public virtual void RenderEndPostBack(String target, 
-                                              String argument, 
-                                              WmlPostFieldType postBackType, 
-                                              bool includeVariables, 
-                                              bool breakAfter)
+        public virtual void RenderEndPostBack(
+            String target,
+            String argument,
+            WmlPostFieldType postBackType,
+            bool includeVariables,
+            bool breakAfter
+        )
         {
             if (AnalyzeMode)
             {
@@ -455,7 +485,7 @@ namespace System.Web.UI.MobileControls.Adapters
             else
             {
                 RenderGoAction(target, argument, postBackType, includeVariables);
-    
+
                 WriteEndTag("anchor");
                 if (breakAfter)
                 {
@@ -466,11 +496,16 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderBeginSelect"]/*' />
-        public virtual void RenderBeginSelect(String name, String iname, String ivalue, String title, bool multiSelect)
+        public virtual void RenderBeginSelect(
+            String name,
+            String iname,
+            String ivalue,
+            String title,
+            bool multiSelect
+        )
         {
             if (!AnalyzeMode)
             {
-
                 // Select tags cannot appear inside character formatting tags,
                 // so close any character formatting.
                 CloseCharacterFormat();
@@ -482,14 +517,14 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     PendingBreak = false;
                 }
-                
+
                 EnsureLayout();
                 WriteBeginTag("select");
                 if (name != null && name.Length > 0)
                 {
                     // Map the client ID to a short name. See
                     // MapClientIDToShortName for details.
-                    WriteAttribute("name", MapClientIDToShortName(name,  false));
+                    WriteAttribute("name", MapClientIDToShortName(name, false));
                 }
                 if (iname != null && iname.Length > 0)
                 {
@@ -501,13 +536,13 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     WriteTextEncodedAttribute("ivalue", ivalue);
                 }
-                if (title != null && title.Length >0)
+                if (title != null && title.Length > 0)
                 {
                     WriteTextEncodedAttribute("title", title);
                 }
                 if (multiSelect)
                 {
-                    WriteAttribute("multiple", "true");               
+                    WriteAttribute("multiple", "true");
                 }
                 Write(">");
             }
@@ -545,7 +580,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 WriteBeginTag("option");
                 WriteAttribute("value", value, true);
                 Write(">");
-                WriteEncodedText(text);                    
+                WriteEncodedText(text);
                 WriteEndTag("option");
             }
         }
@@ -560,9 +595,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.EndCustomMarkup"]/*' />
-        public virtual void EndCustomMarkup()
-        {
-        }
+        public virtual void EndCustomMarkup() { }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.AddFormVariable"]/*' />
         public void AddFormVariable(String clientID, String value, bool generateRandomID)
@@ -604,25 +637,28 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.IsValidSoftkeyLabel"]/*' />
         public virtual bool IsValidSoftkeyLabel(String label)
         {
-            return label != null &&
-                   label.Length > 0 &&
-                   label.Length <= Device.MaximumSoftkeyLabelLength;
+            return label != null
+                && label.Length > 0
+                && label.Length <= Device.MaximumSoftkeyLabelLength;
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderGoAction"]/*' />
-        public virtual void RenderGoAction(String target, 
-                                           String argument, 
-                                           WmlPostFieldType postBackType, 
-                                           bool includeVariables)
+        public virtual void RenderGoAction(
+            String target,
+            String argument,
+            WmlPostFieldType postBackType,
+            bool includeVariables
+        )
         {
-
             WriteBeginTag("go");
             Write(" href=\"");
 
             IDictionary postBackVariables = null;
             if (includeVariables)
             {
-                postBackVariables = ((WmlFormAdapter)CurrentForm.Adapter).CalculatePostBackVariables();
+                postBackVariables = (
+                    (WmlFormAdapter)CurrentForm.Adapter
+                ).CalculatePostBackVariables();
                 if (postBackVariables == null || postBackVariables.Count == 0)
                 {
                     includeVariables = false;
@@ -691,17 +727,17 @@ namespace System.Web.UI.MobileControls.Adapters
                     Write(url);
                 }
 
-                if(externalSubmit && queryString != null && queryString.Length > 0) 
+                if (externalSubmit && queryString != null && queryString.Length > 0)
                 {
-                    if(Device.RequiresUniqueFilePathSuffix) 
+                    if (Device.RequiresUniqueFilePathSuffix)
                     {
                         int loc = queryString.IndexOf('&');
-                        if(loc != -1) 
+                        if (loc != -1)
                         {
                             queryString = queryString.Substring(0, loc);
                         }
                     }
-                    else 
+                    else
                     {
                         queryString = null;
                     }
@@ -710,22 +746,25 @@ namespace System.Web.UI.MobileControls.Adapters
                 // Add any query string.
                 if (queryString != null && queryString.Length > 0)
                 {
-                    if(externalSubmit && (url.IndexOf('?') != -1))
+                    if (externalSubmit && (url.IndexOf('?') != -1))
                     {
                         Write("&amp;");
                     }
-                    else 
+                    else
                     {
                         Write("?");
                     }
                     if (queryString.IndexOf('$') != -1)
                     {
                         queryString = queryString.Replace("$", "$$");
-                    }    
-                    if(Page.Adapter.PersistCookielessData && Device.CanRenderOneventAndPrevElementsTogether)
+                    }
+                    if (
+                        Page.Adapter.PersistCookielessData
+                        && Device.CanRenderOneventAndPrevElementsTogether
+                    )
                     {
                         queryString = ReplaceFormsCookieWithVariable(queryString);
-                    } 
+                    }
                     base.WriteEncodedText(queryString);
                 }
                 Write("\"");
@@ -736,7 +775,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     WriteAttribute("method", "post");
                 }
                 Write(">");
-    
+
                 // Write the view state as a postfield.
                 if (!externalSubmit)
                 {
@@ -745,12 +784,13 @@ namespace System.Web.UI.MobileControls.Adapters
                     {
                         if (Device.RequiresSpecialViewStateEncoding)
                         {
-                            pageState =
-                                ((WmlPageAdapter) Page.Adapter).EncodeSpecialViewState(pageState);
+                            pageState = ((WmlPageAdapter)Page.Adapter).EncodeSpecialViewState(
+                                pageState
+                            );
                         }
                         WritePostField(MobilePage.ViewStateID, pageState);
                     }
-    
+
                     // Write the event target.
                     if (target != null)
                     {
@@ -761,18 +801,25 @@ namespace System.Web.UI.MobileControls.Adapters
                         // Target is null when the action is generated from a postback
                         // card itself. In this case, set the event target to whatever
                         // the original event target was.
-    
-                        WritePostFieldVariable(MobilePage.HiddenPostEventSourceId, _postBackEventTargetVarName);
+
+                        WritePostFieldVariable(
+                            MobilePage.HiddenPostEventSourceId,
+                            _postBackEventTargetVarName
+                        );
                     }
 
                     // Write the event argument, if valid.
-    
+
                     if (argument != null)
                     {
-                        WritePostField(MobilePage.HiddenPostEventArgumentId, argument, postBackType);
+                        WritePostField(
+                            MobilePage.HiddenPostEventArgumentId,
+                            argument,
+                            postBackType
+                        );
                     }
                 }
-    
+
                 // Write postfields for form variables, if desired. Commands, for example,
                 // include form variables. Links do not.
 
@@ -790,9 +837,12 @@ namespace System.Web.UI.MobileControls.Adapters
                                 // Dynamic value.
                                 // Map the client ID to a short name. See
                                 // MapClientIDToShortName for details.
-                                // Note: Because this is called on the second pass, 
+                                // Note: Because this is called on the second pass,
                                 // we can just pass false as the second parameter
-                                WritePostFieldVariable(ctl.UniqueID, MapClientIDToShortName(ctl.ClientID, false));
+                                WritePostFieldVariable(
+                                    ctl.UniqueID,
+                                    MapClientIDToShortName(ctl.ClientID, false)
+                                );
                             }
                             else
                             {
@@ -802,9 +852,9 @@ namespace System.Web.UI.MobileControls.Adapters
                         }
                     }
                 }
-    
+
                 // Always include page hidden variables.
-    
+
                 if (Page.HasHiddenVariables())
                 {
                     String hiddenVariablePrefix = MobilePage.HiddenVariablePrefix;
@@ -812,7 +862,10 @@ namespace System.Web.UI.MobileControls.Adapters
                     {
                         if (entry.Value != null)
                         {
-                            WritePostField(hiddenVariablePrefix + (String)entry.Key, (String)entry.Value);
+                            WritePostField(
+                                hiddenVariablePrefix + (String)entry.Key,
+                                (String)entry.Value
+                            );
                         }
                     }
                 }
@@ -828,11 +881,10 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             // Use postback cards if the number of postbacks exceeds the number
             // of required postback cards.
-            // 
+            //
 
-
-            int numberOfCardsRequired = (_usingPostBackType[0] ? 1 : 0) +
-                                        (_usingPostBackType[1] ? 1 : 0);
+            int numberOfCardsRequired =
+                (_usingPostBackType[0] ? 1 : 0) + (_usingPostBackType[1] ? 1 : 0);
             if (_numberOfPostBacks > numberOfCardsRequired)
             {
                 _postBackCardsEfficient = true;
@@ -865,18 +917,25 @@ namespace System.Web.UI.MobileControls.Adapters
         internal String ReplaceFormsCookieWithVariable(String queryString)
         {
             String formsAuthCookieName = FormsAuthentication.FormsCookieName;
-            if(!String.IsNullOrEmpty(formsAuthCookieName))
+            if (!String.IsNullOrEmpty(formsAuthCookieName))
             {
-                int index = queryString.IndexOf(formsAuthCookieName + "=", StringComparison.Ordinal);
-                if(index != -1)
+                int index = queryString.IndexOf(
+                    formsAuthCookieName + "=",
+                    StringComparison.Ordinal
+                );
+                if (index != -1)
                 {
                     int valueStart = index + formsAuthCookieName.Length + 1;
                     int valueEnd = queryString.IndexOf('&', valueStart);
-                    if(valueStart < queryString.Length)
+                    if (valueStart < queryString.Length)
                     {
-                        int length = ((valueEnd != -1) ? valueEnd : queryString.Length) - valueStart;
+                        int length =
+                            ((valueEnd != -1) ? valueEnd : queryString.Length) - valueStart;
                         queryString = queryString.Remove(valueStart, length);
-                        queryString = queryString.Insert(valueStart, "$(" + MapClientIDToShortName("__facn", false) + ")");
+                        queryString = queryString.Insert(
+                            valueStart,
+                            "$(" + MapClientIDToShortName("__facn", false) + ")"
+                        );
                     }
                 }
             }
@@ -884,6 +943,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         private String _cachedFormQueryString;
+
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.CalculateFormQueryString"]/*' />
         protected virtual String CalculateFormQueryString()
         {
@@ -918,12 +978,12 @@ namespace System.Web.UI.MobileControls.Adapters
         internal virtual bool ShouldWriteFormID(Form form)
         {
             WmlPageAdapter pageAdapter = (WmlPageAdapter)CurrentForm.MobilePage.Adapter;
-            
+
             return (form.ID != null && pageAdapter.RendersMultipleForms());
         }
 
         // Renders the beginning of a form.
-        // 
+        //
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderBeginForm"]/*' />
         protected virtual void RenderBeginForm(Form form)
@@ -942,7 +1002,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 attributes.Add("title", title);
             }
 
-            // Let the form adapter render the tag. This bit of indirection is 
+            // Let the form adapter render the tag. This bit of indirection is
             // somewhat horky, but necessary so that people can subclass adapters
             // without worrying about the fact that much of the real work is done
             // in the writer.
@@ -951,9 +1011,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
             // Write form variables.
 
-            if ((_formVariables != null && _formVariables.Count > 0) &&
-                    (!_provideBackButton ||
-                 Device.CanRenderOneventAndPrevElementsTogether))
+            if (
+                (_formVariables != null && _formVariables.Count > 0)
+                && (!_provideBackButton || Device.CanRenderOneventAndPrevElementsTogether)
+            )
             {
                 _writtenFormVariables = true;
                 Write("<onevent type=\"onenterforward\"><refresh>");
@@ -965,7 +1026,6 @@ namespace System.Web.UI.MobileControls.Adapters
                     Write(" />");
                 }
                 WriteLine("</refresh></onevent>");
-
             }
 
             formAdapter.RenderExtraCardElements(this);
@@ -988,7 +1048,7 @@ namespace System.Web.UI.MobileControls.Adapters
             WriteLine();
         }
 
-        // Postback cards provide an alternate, space-efficient way of doing 
+        // Postback cards provide an alternate, space-efficient way of doing
         // postbacks, on forms that have a lot of postback links. Instead of
         // posting back directly, postback links switch to a postback card, setting
         // variables for event target and argument. The postback card has
@@ -1013,8 +1073,7 @@ namespace System.Web.UI.MobileControls.Adapters
             return b;
         }
 
-
-        // Renders postback cards. 
+        // Renders postback cards.
 
         private void RenderPostBackCards()
         {
@@ -1023,13 +1082,21 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (_writtenPostBackType[i])
                 {
                     WriteBeginTag("card");
-                    WriteAttribute("id", i == 0 ? _postBackWithVarsCardId : _postBackWithoutVarsCardId);
+                    WriteAttribute(
+                        "id",
+                        i == 0 ? _postBackWithVarsCardId : _postBackWithoutVarsCardId
+                    );
                     WriteLine(">");
-        
+
                     Write("<onevent type=\"onenterforward\">");
-                    RenderGoAction(null, _postBackEventArgumentVarName, WmlPostFieldType.Variable, i == 0);
+                    RenderGoAction(
+                        null,
+                        _postBackEventArgumentVarName,
+                        WmlPostFieldType.Variable,
+                        i == 0
+                    );
                     WriteLine("</onevent>");
-        
+
                     WriteLine("<onevent type=\"onenterbackward\"><prev /></onevent>");
                     WriteLine("</card>");
                 }
@@ -1037,13 +1104,25 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderFormDoEvent"]/*' />
-        protected void RenderFormDoEvent(String doType, String arg, WmlPostFieldType postBackType, String text)
+        protected void RenderFormDoEvent(
+            String doType,
+            String arg,
+            WmlPostFieldType postBackType,
+            String text
+        )
         {
             RenderDoEvent(doType, CurrentForm.UniqueID, arg, postBackType, text, true);
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.RenderDoEvent"]/*' />
-        protected void RenderDoEvent(String doType, String target, String arg, WmlPostFieldType postBackType, String text, bool includeVariables)
+        protected void RenderDoEvent(
+            String doType,
+            String target,
+            String arg,
+            WmlPostFieldType postBackType,
+            String text,
+            bool includeVariables
+        )
         {
             //EnsureLayout();
             WriteBeginTag("do");
@@ -1073,7 +1152,10 @@ namespace System.Web.UI.MobileControls.Adapters
                     // Avoid writing tags like </b> AFTER the <br/>, instead
                     // writing them before.
 
-                    if (_currentWrittenFormat != null && !CurrentFormat.Compare(_currentWrittenFormat))
+                    if (
+                        _currentWrittenFormat != null
+                        && !CurrentFormat.Compare(_currentWrittenFormat)
+                    )
                     {
                         CloseCharacterFormat();
                     }
@@ -1084,9 +1166,7 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 // Layout has changed. Close current layout, and open new one.
                 CloseParagraph();
-                OpenParagraph(layout, 
-                              layout.Align != Alignment.Left, 
-                              layout.Wrap != Wrapping.Wrap);
+                OpenParagraph(layout, layout.Align != Alignment.Left, layout.Wrap != Wrapping.Wrap);
             }
             PendingBreak = false;
         }
@@ -1102,18 +1182,24 @@ namespace System.Web.UI.MobileControls.Adapters
             if (_currentWrittenFormat == null || !format.Compare(_currentWrittenFormat))
             {
                 CloseCharacterFormat();
-                OpenCharacterFormat(format,
-                                    format.Bold,
-                                    format.Italic,
-                                    format.Size != FontSize.Normal);
+                OpenCharacterFormat(
+                    format,
+                    format.Bold,
+                    format.Italic,
+                    format.Size != FontSize.Normal
+                );
             }
         }
 
-        // Opens a paragraph with the given layout. Only the specified 
+        // Opens a paragraph with the given layout. Only the specified
         // attributes are used.
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.OpenParagraph"]/*' />
-        protected virtual void OpenParagraph(WmlLayout layout, bool writeAlignment, bool writeWrapping)
+        protected virtual void OpenParagraph(
+            WmlLayout layout,
+            bool writeAlignment,
+            bool writeWrapping
+        )
         {
             if (_currentWrittenLayout == null)
             {
@@ -1140,8 +1226,7 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 if (writeWrapping)
                 {
-                    WriteAttribute("mode",
-                                   layout.Wrap == Wrapping.NoWrap ? "nowrap" : "wrap");
+                    WriteAttribute("mode", layout.Wrap == Wrapping.NoWrap ? "nowrap" : "wrap");
                 }
                 Write(">");
                 _currentWrittenLayout = layout;
@@ -1161,11 +1246,16 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        // Renders tags to enter the given character format. Only the specified 
+        // Renders tags to enter the given character format. Only the specified
         // attributes are used.
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.OpenCharacterFormat"]/*' />
-        protected virtual void OpenCharacterFormat(WmlFormat format, bool writeBold, bool writeItalic, bool writeSize)
+        protected virtual void OpenCharacterFormat(
+            WmlFormat format,
+            bool writeBold,
+            bool writeItalic,
+            bool writeSize
+        )
         {
             if (_currentWrittenFormat == null)
             {
@@ -1197,7 +1287,9 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 if (_currentWrittenFormat.WrittenSize)
                 {
-                    WriteEndTag(_currentWrittenFormat.Size == FontSize.Large ? _largeTag : _smallTag);
+                    WriteEndTag(
+                        _currentWrittenFormat.Size == FontSize.Large ? _largeTag : _smallTag
+                    );
                 }
                 if (_currentWrittenFormat.WrittenItalic)
                 {
@@ -1211,7 +1303,14 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        private static readonly char[] _attributeCharacters = new char[] {'"', '&', '<', '>', '$'};
+        private static readonly char[] _attributeCharacters = new char[]
+        {
+            '"',
+            '&',
+            '<',
+            '>',
+            '$',
+        };
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.WriteAttribute"]/*' />
         public override void WriteAttribute(String attribute, String value, bool encode)
@@ -1231,12 +1330,12 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 encode = false;
             }
-            
+
             if (encode)
             {
-                // Unlike HTML encoding, we need to replace $ with $$, and <> with &lt; and &gt;. 
-                // We can't do this by piggybacking HtmlTextWriter.WriteAttribute, because it 
-                // would translate the & in &lt; or &gt; to &amp;. So we more or less copy the 
+                // Unlike HTML encoding, we need to replace $ with $$, and <> with &lt; and &gt;.
+                // We can't do this by piggybacking HtmlTextWriter.WriteAttribute, because it
+                // would translate the & in &lt; or &gt; to &amp;. So we more or less copy the
                 // ASP.NET code that does similar encoding.
 
                 Write(' ');
@@ -1245,7 +1344,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 int cb = value.Length;
                 int pos = value.IndexOfAny(_attributeCharacters);
-                if (pos == -1) 
+                if (pos == -1)
                 {
                     Write(value);
                 }
@@ -1253,15 +1352,15 @@ namespace System.Web.UI.MobileControls.Adapters
                 {
                     char[] s = value.ToCharArray();
                     int startPos = 0;
-                    while (pos < cb) 
+                    while (pos < cb)
                     {
-                        if (pos > startPos) 
+                        if (pos > startPos)
                         {
                             Write(s, startPos, pos - startPos);
                         }
 
                         char ch = s[pos];
-                        switch (ch) 
+                        switch (ch)
                         {
                             case '\"':
                                 Write("&quot;");
@@ -1282,7 +1381,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
                         startPos = pos + 1;
                         pos = value.IndexOfAny(_attributeCharacters, startPos);
-                        if (pos == -1) 
+                        if (pos == -1)
                         {
                             Write(s, startPos, cb - startPos);
                             break;
@@ -1307,28 +1406,19 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.CurrentForm"]/*' />
         protected Form CurrentForm
         {
-            get
-            {
-                return _currentForm;
-            }
+            get { return _currentForm; }
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.Page"]/*' />
         protected MobilePage Page
         {
-            get
-            {
-                return _page;
-            }
+            get { return _page; }
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.NumberOfSoftkeys"]/*' />
         protected int NumberOfSoftkeys
         {
-            get
-            {
-                return _numberOfSoftkeys;
-            }
+            get { return _numberOfSoftkeys; }
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.AnalyzePostBack"]/*' />
@@ -1462,10 +1552,10 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         // MapClientIDToShortName provides a unique map of control ClientID properties
-        // to shorter names. In cases where a control has a very long ClientID, a 
+        // to shorter names. In cases where a control has a very long ClientID, a
         // shorter unique name is used. All references to the client ID on the page
         // are mapped, resulting in the same postback regardless of mapping.
-        // MapClientIDToShortName also scrambles client IDs that need to be 
+        // MapClientIDToShortName also scrambles client IDs that need to be
         // scrambled for security reasons.
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.MapClientIDToShortName"]/*' />
@@ -1501,7 +1591,7 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 _controlShortNames = new ListDictionary();
             }
-            
+
             String shortName;
             if (generateRandomID)
             {
@@ -1512,7 +1602,11 @@ namespace System.Web.UI.MobileControls.Adapters
                 shortName = String.Empty;
             }
 
-            shortName = String.Concat(_shortNamePrefix, shortName, _controlShortNames.Count.ToString(CultureInfo.InvariantCulture));
+            shortName = String.Concat(
+                _shortNamePrefix,
+                shortName,
+                _controlShortNames.Count.ToString(CultureInfo.InvariantCulture)
+            );
             _controlShortNames[clientID] = shortName;
             return shortName;
         }
@@ -1520,16 +1614,25 @@ namespace System.Web.UI.MobileControls.Adapters
         // VSWhidbey 280485: We used to check '_' for default control id.  But
         // VSWhidbey 188477 removed the '_', so here it checks "ctl" with id
         // separator (for naming container case) instead.
-        private bool HasUnnamedControlId(string clientID) {
+        private bool HasUnnamedControlId(string clientID)
+        {
             const string unnamedIdPrefix = "ctl";
-            if (clientID.StartsWith(unnamedIdPrefix, StringComparison.Ordinal)) {
+            if (clientID.StartsWith(unnamedIdPrefix, StringComparison.Ordinal))
+            {
                 return true;
             }
 
             string unnamedIdPrefixWithIdSeparator = Page.IdSeparator + unnamedIdPrefix;
             int unnamedIdPrefixLength = unnamedIdPrefix.Length;
-            if (clientID.Length > unnamedIdPrefixLength &&
-                clientID.IndexOf(unnamedIdPrefixWithIdSeparator, unnamedIdPrefixLength, StringComparison.Ordinal) != -1) {
+            if (
+                clientID.Length > unnamedIdPrefixLength
+                && clientID.IndexOf(
+                    unnamedIdPrefixWithIdSeparator,
+                    unnamedIdPrefixLength,
+                    StringComparison.Ordinal
+                ) != -1
+            )
+            {
                 return true;
             }
             return false;
@@ -1556,26 +1659,29 @@ namespace System.Web.UI.MobileControls.Adapters
                 return false;
             }
 
-            Debug.Assert(_postBackEventTargetVarName.ToLower(CultureInfo.InvariantCulture) == _postBackEventTargetVarName &&
-                _postBackEventArgumentVarName.ToLower(CultureInfo.InvariantCulture) == _postBackEventArgumentVarName &&
-                _shortNamePrefix.ToLower(CultureInfo.InvariantCulture) == _shortNamePrefix);
-        
+            Debug.Assert(
+                _postBackEventTargetVarName.ToLower(CultureInfo.InvariantCulture)
+                    == _postBackEventTargetVarName
+                    && _postBackEventArgumentVarName.ToLower(CultureInfo.InvariantCulture)
+                        == _postBackEventArgumentVarName
+                    && _shortNamePrefix.ToLower(CultureInfo.InvariantCulture) == _shortNamePrefix
+            );
+
             name = name.ToLower(CultureInfo.InvariantCulture);
-            return name == _postBackEventTargetVarName ||
-                name == _postBackEventArgumentVarName || 
-                name.StartsWith(_shortNamePrefix, StringComparison.Ordinal);
+            return name == _postBackEventTargetVarName
+                || name == _postBackEventArgumentVarName
+                || name.StartsWith(_shortNamePrefix, StringComparison.Ordinal);
         }
 
-        private static readonly WmlLayout _defaultLayout = 
-                                    new WmlLayout(Alignment.Left, Wrapping.Wrap);
+        private static readonly WmlLayout _defaultLayout = new WmlLayout(
+            Alignment.Left,
+            Wrapping.Wrap
+        );
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.DefaultLayout"]/*' />
         protected virtual WmlLayout DefaultLayout
         {
-            get
-            {
-                return _defaultLayout;
-            }
+            get { return _defaultLayout; }
         }
 
         private WmlLayout CurrentLayout
@@ -1596,26 +1702,20 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.PendingBreak"]/*' />
         protected bool PendingBreak
         {
-            get
-            {
-                return _pendingBreak;
-            }
-            set
-            {
-                _pendingBreak = value;
-            }
+            get { return _pendingBreak; }
+            set { _pendingBreak = value; }
         }
 
-        private static readonly WmlFormat _defaultFormat = 
-                                    new WmlFormat(false, false, FontSize.Normal);
+        private static readonly WmlFormat _defaultFormat = new WmlFormat(
+            false,
+            false,
+            FontSize.Normal
+        );
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlMobileTextWriter.DefaultFormat"]/*' />
         protected virtual WmlFormat DefaultFormat
         {
-            get
-            {
-                return _defaultFormat;
-            }
+            get { return _defaultFormat; }
         }
 
         private WmlFormat CurrentFormat
@@ -1647,17 +1747,25 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
                 else
                 {
-                    _requiresNoSoftkeyLabels = Convert.ToBoolean(RequiresNoSoftkeyLabelsString, CultureInfo.InvariantCulture);
+                    _requiresNoSoftkeyLabels = Convert.ToBoolean(
+                        RequiresNoSoftkeyLabelsString,
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 _haveRequiresNoSoftkeyLabels = true;
             }
             return _requiresNoSoftkeyLabels;
         }
 
-
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlLayout"]/*' />
-        [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-        [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
+        [AspNetHostingPermission(
+            SecurityAction.LinkDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        [AspNetHostingPermission(
+            SecurityAction.InheritanceDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
         protected class WmlLayout
         {
             private Wrapping _wrap;
@@ -1668,7 +1776,7 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 Alignment align = (Alignment)style[Style.AlignmentKey, true];
                 Align = (align != Alignment.NotSet) ? align : currentLayout.Align;
-                Wrapping wrap = (Wrapping)style[Style.WrappingKey , true];
+                Wrapping wrap = (Wrapping)style[Style.WrappingKey, true];
                 Wrap = (wrap != Wrapping.NotSet) ? wrap : currentLayout.Wrap;
             }
 
@@ -1682,27 +1790,15 @@ namespace System.Web.UI.MobileControls.Adapters
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlLayout.Wrap"]/*' />
             public Wrapping Wrap
             {
-                get
-                {
-                    return _wrap;
-                }
-                set
-                {
-                    _wrap = value;
-                }
+                get { return _wrap; }
+                set { _wrap = value; }
             }
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlLayout.Align"]/*' />
             public Alignment Align
             {
-                get
-                {
-                    return _align;
-                }
-                set
-                {
-                    _align = value;
-                }
+                get { return _align; }
+                set { _align = value; }
             }
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlLayout.Compare"]/*' />
@@ -1713,8 +1809,14 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat"]/*' />
-        [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-        [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
+        [AspNetHostingPermission(
+            SecurityAction.LinkDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        [AspNetHostingPermission(
+            SecurityAction.InheritanceDemand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
         protected class WmlFormat
         {
             private bool _bold;
@@ -1728,10 +1830,16 @@ namespace System.Web.UI.MobileControls.Adapters
             public WmlFormat(Style style, WmlFormat currentFormat)
             {
                 BooleanOption bold = (BooleanOption)style[Style.BoldKey, true];
-                Bold = (bold != BooleanOption.NotSet) ? bold == BooleanOption.True : currentFormat.Bold;
+                Bold =
+                    (bold != BooleanOption.NotSet)
+                        ? bold == BooleanOption.True
+                        : currentFormat.Bold;
                 BooleanOption italic = (BooleanOption)style[Style.ItalicKey, true];
-                Italic = (italic != BooleanOption.NotSet) ? italic == BooleanOption.True : currentFormat.Italic;
-                FontSize fontSize  = (FontSize)style[Style.FontSizeKey, true];
+                Italic =
+                    (italic != BooleanOption.NotSet)
+                        ? italic == BooleanOption.True
+                        : currentFormat.Italic;
+                FontSize fontSize = (FontSize)style[Style.FontSizeKey, true];
                 Size = (fontSize != FontSize.NotSet) ? fontSize : currentFormat.Size;
             }
 
@@ -1746,92 +1854,50 @@ namespace System.Web.UI.MobileControls.Adapters
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat.Bold"]/*' />
             public bool Bold
             {
-                get
-                {
-                    return _bold;
-                }
-                set
-                {
-                    _bold = value;
-                }
+                get { return _bold; }
+                set { _bold = value; }
             }
-
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat.Italic"]/*' />
             public bool Italic
             {
-                get
-                {
-                    return _italic;
-                }
-                set
-                {
-                    _italic = value;
-                }
+                get { return _italic; }
+                set { _italic = value; }
             }
-
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat.Size"]/*' />
             public FontSize Size
             {
-                get
-                {
-                    return _size;
-                }
-                set
-                {
-                    _size = value;
-                }
+                get { return _size; }
+                set { _size = value; }
             }
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat.WrittenBold"]/*' />
             public bool WrittenBold
             {
-                get
-                {
-                    return _writtenBold;
-                }
-                set
-                {
-                    _writtenBold = value;
-                }
+                get { return _writtenBold; }
+                set { _writtenBold = value; }
             }
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat.WrittenItalic"]/*' />
             public bool WrittenItalic
             {
-                get
-                {
-                    return _writtenItalic;
-                }
-                set
-                {
-                    _writtenItalic = value;
-                }
+                get { return _writtenItalic; }
+                set { _writtenItalic = value; }
             }
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat.WrittenSize"]/*' />
             public bool WrittenSize
             {
-                get
-                {
-                    return _writtenSize;
-                }
-                set
-                {
-                    _writtenSize = value;
-                }
+                get { return _writtenSize; }
+                set { _writtenSize = value; }
             }
 
             /// <include file='doc\WmlMobileTextWriter.uex' path='docs/doc[@for="WmlFormat.Compare"]/*' />
             public virtual bool Compare(WmlFormat format)
             {
-                return Bold == format.Bold &&
-                       Italic == format.Italic &&
-                       Size == format.Size;
+                return Bold == format.Bold && Italic == format.Italic && Size == format.Size;
             }
         }
     }
 }
-
-

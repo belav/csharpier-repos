@@ -1,21 +1,20 @@
 //------------------------------------------------------------------------------
 // <copyright file="AdRotator.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing.Design;
+using System.Security.Permissions;
 using System.Web.Mobile;
 using System.Web.UI.WebControls;
 using System.Web.Util;
 using WebCntrls = System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile AdRotator class.
      * The AdRotator control is for rotating advertisement links every time the
@@ -41,13 +40,23 @@ namespace System.Web.UI.MobileControls
         DefaultEvent("AdCreated"),
         DefaultProperty("AdvertisementFile"),
         Designer(typeof(System.Web.UI.Design.MobileControls.AdRotatorDesigner)),
-        DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerAdRotatorAdapter)),
+        DesignerAdapter(
+            typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerAdRotatorAdapter)
+        ),
         ToolboxData("<{0}:AdRotator runat=\"server\"></{0}:AdRotator>"),
         ToolboxItem(typeof(System.Web.UI.Design.WebControlToolboxItem))
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class AdRotator : MobileControl
     {
         private WebCntrls.AdRotator _webAdRotator;
@@ -58,7 +67,8 @@ namespace System.Web.UI.MobileControls
         private const String NavigateUrlKeyDefault = "NavigateUrl";
 
         /// <include file='doc\AdRotator.uex' path='docs/doc[@for="AdRotator.AdRotator"]/*' />
-        public AdRotator() : base()
+        public AdRotator()
+            : base()
         {
             _webAdRotator = CreateWebAdRotator();
 
@@ -81,8 +91,7 @@ namespace System.Web.UI.MobileControls
             // to capture the raised event from the aggregated control and
             // apply the event argument to the event handlers subscribed to
             // this class.
-            AdCreatedEventHandler adCreatedEventHandler =
-                new AdCreatedEventHandler(WebAdCreated);
+            AdCreatedEventHandler adCreatedEventHandler = new AdCreatedEventHandler(WebAdCreated);
 
             _webAdRotator.AdCreated += adCreatedEventHandler;
         }
@@ -119,14 +128,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String AdvertisementFile
         {
-            get
-            {
-                return _webAdRotator.AdvertisementFile;
-            }
-            set
-            {
-                _webAdRotator.AdvertisementFile = value;
-            }
+            get { return _webAdRotator.AdvertisementFile; }
+            set { _webAdRotator.AdvertisementFile = value; }
         }
 
         /// <include file='doc\AdRotator.uex' path='docs/doc[@for="AdRotator.KeywordFilter"]/*' />
@@ -159,14 +162,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String KeywordFilter
         {
-            get
-            {
-                return _webAdRotator.KeywordFilter;
-            }
-            set
-            {
-                _webAdRotator.KeywordFilter = value;
-            }
+            get { return _webAdRotator.KeywordFilter; }
+            set { _webAdRotator.KeywordFilter = value; }
         }
 
         /// <include file='doc\AdRotator.uex' path='docs/doc[@for="AdRotator.ImageKey"]/*' />
@@ -180,13 +177,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["ImageKey"];
-                return((s != null) ? s : ImageKeyDefault);
+                String s = (String)ViewState["ImageKey"];
+                return ((s != null) ? s : ImageKeyDefault);
             }
-            set
-            {
-                ViewState["ImageKey"] = value;
-            }
+            set { ViewState["ImageKey"] = value; }
         }
 
         /// <include file='doc\AdRotator.uex' path='docs/doc[@for="AdRotator.NavigateUrlKey"]/*' />
@@ -200,30 +194,18 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["NavigateUrlKey"];
-                return((s != null) ? s : NavigateUrlKeyDefault);
+                String s = (String)ViewState["NavigateUrlKey"];
+                return ((s != null) ? s : NavigateUrlKeyDefault);
             }
-            set
-            {
-                ViewState["NavigateUrlKey"] = value;
-            }
+            set { ViewState["NavigateUrlKey"] = value; }
         }
 
         /// <include file='doc\AdRotator.uex' path='docs/doc[@for="AdRotator.AdCreated"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.AdRotator_AdCreated)
-        ]
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.AdRotator_AdCreated)]
         public event AdCreatedEventHandler AdCreated
         {
-            add
-            {
-                Events.AddHandler(EventAdCreated, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventAdCreated, value);
-            }
+            add { Events.AddHandler(EventAdCreated, value); }
+            remove { Events.RemoveHandler(EventAdCreated, value); }
         }
 
         // protected method (which can be overridden by subclasses) for
@@ -244,7 +226,7 @@ namespace System.Web.UI.MobileControls
             const String accesskeyName = "accesskey";
 
             // Delegate specific custom attribute to the child Image control
-            String accesskey = ((IAttributeAccessor) this).GetAttribute(accesskeyName);
+            String accesskey = ((IAttributeAccessor)this).GetAttribute(accesskeyName);
             if (!String.IsNullOrEmpty(accesskey))
             {
                 _image.CustomAttributes[accesskeyName] = accesskey;
@@ -262,8 +244,8 @@ namespace System.Web.UI.MobileControls
             // correctly.
             if (e.AdProperties != null)
             {
-                e.ImageUrl = (String) e.AdProperties[ImageKey];
-                e.NavigateUrl = (String) e.AdProperties[NavigateUrlKey];
+                e.ImageUrl = (String)e.AdProperties[ImageKey];
+                e.NavigateUrl = (String)e.AdProperties[NavigateUrlKey];
             }
 
             // Then invoke user events for further manipulation specified by
@@ -286,8 +268,10 @@ namespace System.Web.UI.MobileControls
             }
 
             // check if it is already absolute, or points to another form
-            if (!UrlPath.IsRelativeUrl(relativeUrl) ||
-                relativeUrl.StartsWith(Constants.FormIDPrefix, StringComparison.Ordinal))
+            if (
+                !UrlPath.IsRelativeUrl(relativeUrl)
+                || relativeUrl.StartsWith(Constants.FormIDPrefix, StringComparison.Ordinal)
+            )
             {
                 return relativeUrl;
             }
@@ -298,8 +282,7 @@ namespace System.Web.UI.MobileControls
             // For the AdRotator, use the AdvertisementFile directory as the
             // base, and fall back to the page/user control location as the
             // base.
-            String absoluteFile = UrlPath.Combine(tplSourceDir,
-                                                  AdvertisementFile);
+            String absoluteFile = UrlPath.Combine(tplSourceDir, AdvertisementFile);
             String fileDirectory = UrlPath.GetDirectory(absoluteFile);
 
             String baseUrl = String.Empty;

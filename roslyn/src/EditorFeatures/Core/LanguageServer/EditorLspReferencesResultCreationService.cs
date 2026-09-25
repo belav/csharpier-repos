@@ -15,16 +15,21 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    [ExportWorkspaceService(typeof(ILspReferencesResultCreationService), ServiceLayer.Editor), Shared]
-    internal sealed class EditorLspReferencesResultCreationService : ILspReferencesResultCreationService
+    [
+        ExportWorkspaceService(typeof(ILspReferencesResultCreationService), ServiceLayer.Editor),
+        Shared
+    ]
+    internal sealed class EditorLspReferencesResultCreationService
+        : ILspReferencesResultCreationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditorLspReferencesResultCreationService()
-        {
-        }
+        public EditorLspReferencesResultCreationService() { }
 
-        public SumType<VSInternalReferenceItem, VisualStudio.LanguageServer.Protocol.Location>? CreateReference(
+        public SumType<
+            VSInternalReferenceItem,
+            VisualStudio.LanguageServer.Protocol.Location
+        >? CreateReference(
             int definitionId,
             int id,
             ClassifiedTextElement text,
@@ -33,18 +38,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             ClassifiedTextElement? definitionText,
             Glyph definitionGlyph,
             SymbolUsageInfo? symbolUsageInfo,
-            VisualStudio.LanguageServer.Protocol.Location? location)
+            VisualStudio.LanguageServer.Protocol.Location? location
+        )
         {
             // TO-DO: The Origin property should be added once Rich-Nav is completed.
             // https://github.com/dotnet/roslyn/issues/42847
             var result = new VSInternalReferenceItem
             {
                 DefinitionId = definitionId,
-                DefinitionText = definitionText,    // Only definitions should have a non-null DefinitionText
+                DefinitionText = definitionText, // Only definitions should have a non-null DefinitionText
                 DefinitionIcon = new ImageElement(definitionGlyph.GetImageId()),
                 DisplayPath = location?.Uri.LocalPath,
                 Id = id,
-                Kind = symbolUsageInfo.HasValue ? ProtocolConversions.SymbolUsageInfoToReferenceKinds(symbolUsageInfo.Value) : Array.Empty<VSInternalReferenceKind>(),
+                Kind = symbolUsageInfo.HasValue
+                    ? ProtocolConversions.SymbolUsageInfoToReferenceKinds(symbolUsageInfo.Value)
+                    : Array.Empty<VSInternalReferenceKind>(),
                 ResolutionStatus = VSInternalResolutionStatusKind.ConfirmedAsReference,
                 Text = text,
             };
@@ -59,10 +67,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer
                 result.ProjectName = documentSpan.Value.Document.Project.Name;
             }
 
-            if (properties.TryGetValue(AbstractReferenceFinder.ContainingMemberInfoPropertyName, out var referenceContainingMember))
+            if (
+                properties.TryGetValue(
+                    AbstractReferenceFinder.ContainingMemberInfoPropertyName,
+                    out var referenceContainingMember
+                )
+            )
                 result.ContainingMember = referenceContainingMember;
 
-            if (properties.TryGetValue(AbstractReferenceFinder.ContainingTypeInfoPropertyName, out var referenceContainingType))
+            if (
+                properties.TryGetValue(
+                    AbstractReferenceFinder.ContainingTypeInfoPropertyName,
+                    out var referenceContainingType
+                )
+            )
                 result.ContainingType = referenceContainingType;
 
             return result;

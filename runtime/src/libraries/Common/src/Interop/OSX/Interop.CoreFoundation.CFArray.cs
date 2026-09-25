@@ -3,11 +3,9 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
-
 // Declared as signed long, which has sizeof(void*) on OSX.
-using CFIndex=System.IntPtr;
+using CFIndex = System.IntPtr;
 
 internal static partial class Interop
 {
@@ -19,7 +17,10 @@ internal static partial class Interop
         // Follows the "Get" version of the "Create" rule, so needs to return an IntPtr to
         // prevent CFRelease from being called on the SafeHandle close.
         [LibraryImport(Libraries.CoreFoundationLibrary, EntryPoint = "CFArrayGetValueAtIndex")]
-        private static partial IntPtr CFArrayGetValueAtIndex(SafeCFArrayHandle cfArray, CFIndex index);
+        private static partial IntPtr CFArrayGetValueAtIndex(
+            SafeCFArrayHandle cfArray,
+            CFIndex index
+        );
 
         internal static long CFArrayGetCount(SafeCFArrayHandle cfArray)
         {
@@ -38,14 +39,10 @@ namespace Microsoft.Win32.SafeHandles
     internal sealed class SafeCFArrayHandle : SafeHandle
     {
         public SafeCFArrayHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         internal SafeCFArrayHandle(IntPtr handle, bool ownsHandle)
-            : base(handle, ownsHandle)
-        {
-        }
+            : base(handle, ownsHandle) { }
 
         protected override bool ReleaseHandle()
         {

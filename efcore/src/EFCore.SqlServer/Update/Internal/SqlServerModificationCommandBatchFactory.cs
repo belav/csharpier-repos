@@ -25,18 +25,23 @@ public class SqlServerModificationCommandBatchFactory : IModificationCommandBatc
     /// </summary>
     public SqlServerModificationCommandBatchFactory(
         ModificationCommandBatchFactoryDependencies dependencies,
-        IDbContextOptions options)
+        IDbContextOptions options
+    )
     {
         Dependencies = dependencies;
 
         _maxBatchSize = Math.Min(
-            options.Extensions.OfType<SqlServerOptionsExtension>().FirstOrDefault()?.MaxBatchSize ?? DefaultMaxBatchSize,
-            MaxMaxBatchSize);
+            options.Extensions.OfType<SqlServerOptionsExtension>().FirstOrDefault()?.MaxBatchSize
+                ?? DefaultMaxBatchSize,
+            MaxMaxBatchSize
+        );
 
         if (_maxBatchSize <= 0)
         {
             throw new ArgumentOutOfRangeException(
-                nameof(RelationalOptionsExtension.MaxBatchSize), RelationalStrings.InvalidMaxBatchSize(_maxBatchSize));
+                nameof(RelationalOptionsExtension.MaxBatchSize),
+                RelationalStrings.InvalidMaxBatchSize(_maxBatchSize)
+            );
         }
     }
 
@@ -51,6 +56,6 @@ public class SqlServerModificationCommandBatchFactory : IModificationCommandBatc
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ModificationCommandBatch Create()
-        => new SqlServerModificationCommandBatch(Dependencies, _maxBatchSize);
+    public virtual ModificationCommandBatch Create() =>
+        new SqlServerModificationCommandBatch(Dependencies, _maxBatchSize);
 }

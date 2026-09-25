@@ -15,9 +15,7 @@ public class RuntimeTrigger : RuntimeAnnotatableBase, ITrigger
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public RuntimeTrigger(
-        RuntimeEntityType entityType,
-        string modelName)
+    public RuntimeTrigger(RuntimeEntityType entityType, string modelName)
     {
         EntityType = entityType;
         ModelName = modelName;
@@ -30,8 +28,8 @@ public class RuntimeTrigger : RuntimeAnnotatableBase, ITrigger
     public virtual IEntityType EntityType { get; }
 
     /// <inheritdoc />
-    public override string ToString()
-        => ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -40,12 +38,12 @@ public class RuntimeTrigger : RuntimeAnnotatableBase, ITrigger
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((ITrigger)this).ToDebugString(),
-            () => ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((ITrigger)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <inheritdoc />
-    IReadOnlyEntityType IReadOnlyTrigger.EntityType
-        => EntityType;
+    IReadOnlyEntityType IReadOnlyTrigger.EntityType => EntityType;
 }

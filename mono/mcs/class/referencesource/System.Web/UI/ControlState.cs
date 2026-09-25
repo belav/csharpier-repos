@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="ControlState.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
@@ -9,9 +9,10 @@
  *
  * Copyright (c) 1999 Microsoft Corporation
  */
-namespace System.Web.UI {
-
-    internal enum ControlState {
+namespace System.Web.UI
+{
+    internal enum ControlState
+    {
         Constructed = 0,
         FrameworkInitialized = 1,
         ChildrenInitialized = 2,

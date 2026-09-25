@@ -32,36 +32,24 @@ public class AuthenticationMiddlewareTests
                     .ConfigureServices(services =>
                         services.AddAuthentication(o =>
                         {
-                            o.AddScheme(
-                                "Skip",
-                                s =>
-                                {
-                                    s.HandlerType = typeof(SkipHandler);
-                                }
-                            );
+                            o.AddScheme("Skip", s =>
+                            {
+                                s.HandlerType = typeof(SkipHandler);
+                            });
                             // Won't get hit since CanHandleRequests is false
-                            o.AddScheme(
-                                "throws",
-                                s =>
-                                {
-                                    s.HandlerType = typeof(ThrowsHandler);
-                                }
-                            );
-                            o.AddScheme(
-                                "607",
-                                s =>
-                                {
-                                    s.HandlerType = typeof(SixOhSevenHandler);
-                                }
-                            );
+                            o.AddScheme("throws", s =>
+                            {
+                                s.HandlerType = typeof(ThrowsHandler);
+                            });
+                            o.AddScheme("607", s =>
+                            {
+                                s.HandlerType = typeof(SixOhSevenHandler);
+                            });
                             // Won't get run since 607 will finish
-                            o.AddScheme(
-                                "305",
-                                s =>
-                                {
-                                    s.HandlerType = typeof(ThreeOhFiveHandler);
-                                }
-                            );
+                            o.AddScheme("305", s =>
+                            {
+                                s.HandlerType = typeof(ThreeOhFiveHandler);
+                            });
                         })
                     )
             )

@@ -27,7 +27,13 @@ namespace System.Web.Http.Metadata
         private IEnumerable<ModelMetadata> _properties;
         private Type _realModelType;
 
-        public ModelMetadata(ModelMetadataProvider provider, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
+        public ModelMetadata(
+            ModelMetadataProvider provider,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName
+        )
         {
             if (provider == null)
             {
@@ -46,7 +52,14 @@ namespace System.Web.Http.Metadata
             _propertyName = propertyName;
         }
 
-        internal ModelMetadata(ModelMetadataProvider provider, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName, EfficientTypePropertyKey<Type, string> cacheKey)
+        internal ModelMetadata(
+            ModelMetadataProvider provider,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName,
+            EfficientTypePropertyKey<Type, string> cacheKey
+        )
             : this(provider, containerType, modelAccessor, modelType, propertyName)
         {
             if (cacheKey == null)
@@ -63,7 +76,9 @@ namespace System.Web.Http.Metadata
             {
                 if (_additionalValues == null)
                 {
-                    _additionalValues = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
+                    _additionalValues = new Dictionary<string, object>(
+                        StringComparer.OrdinalIgnoreCase
+                    );
                 }
 
                 return _additionalValues;
@@ -172,27 +187,42 @@ namespace System.Web.Http.Metadata
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1024:UsePropertiesWhereAppropriate", Justification = "The method is a delegating helper to choose among multiple property values")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1024:UsePropertiesWhereAppropriate",
+            Justification = "The method is a delegating helper to choose among multiple property values"
+        )]
         public virtual string GetDisplayName()
         {
             return PropertyName ?? ModelType.Name;
         }
 
-        public virtual IEnumerable<ModelValidator> GetValidators(IEnumerable<ModelValidatorProvider> validatorProviders)
+        public virtual IEnumerable<ModelValidator> GetValidators(
+            IEnumerable<ModelValidatorProvider> validatorProviders
+        )
         {
             if (validatorProviders == null)
             {
                 throw Error.ArgumentNull("validatorProviders");
             }
 
-            return validatorProviders.SelectMany(provider => provider.GetValidators(this, validatorProviders));
+            return validatorProviders.SelectMany(provider =>
+                provider.GetValidators(this, validatorProviders)
+            );
         }
 
-        private static EfficientTypePropertyKey<Type, string> CreateCacheKey(Type containerType, Type modelType, string propertyName)
+        private static EfficientTypePropertyKey<Type, string> CreateCacheKey(
+            Type containerType,
+            Type modelType,
+            string propertyName
+        )
         {
             // If metadata is for a property then containerType != null && propertyName != null
             // If metadata is for a type then containerType == null && propertyName == null, so we have to use modelType for the cache key.
-            return new EfficientTypePropertyKey<Type, string>(containerType ?? modelType, propertyName);
+            return new EfficientTypePropertyKey<Type, string>(
+                containerType ?? modelType,
+                propertyName
+            );
         }
     }
 }

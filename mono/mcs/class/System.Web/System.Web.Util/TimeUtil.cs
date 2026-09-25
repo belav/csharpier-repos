@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,16 +31,15 @@
 using System;
 using System.Globalization;
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
+    internal sealed class TimeUtil
+    {
+        TimeUtil() { }
 
-	internal sealed class TimeUtil 
-	{
-		TimeUtil () { }
-		
-		internal static string ToUtcTimeString (DateTime dt)
-		{
-			return dt.ToUniversalTime ().ToString ("R", DateTimeFormatInfo.InvariantInfo);
-		}
-	}
+        internal static string ToUtcTimeString(DateTime dt)
+        {
+            return dt.ToUniversalTime().ToString("R", DateTimeFormatInfo.InvariantInfo);
+        }
+    }
 }
-

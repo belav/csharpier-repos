@@ -43,9 +43,15 @@ namespace System.Web.Mvc.Test
         [Fact]
         public void GetBindersFromAttributes_ReadsModelBinderAttributeFromBuddyClass()
         {
-            Action<Type> errorAction = (Type t) => { throw new InvalidOperationException(); };
+            Action<Type> errorAction = (Type t) =>
+            {
+                throw new InvalidOperationException();
+            };
             // Act
-            IModelBinder binder = ModelBinders.GetBinderFromAttributes(typeof(SampleModel), errorAction);
+            IModelBinder binder = ModelBinders.GetBinderFromAttributes(
+                typeof(SampleModel),
+                errorAction
+            );
 
             // Assert
             Assert.IsType<SampleModelBinder>(binder);
@@ -57,11 +63,19 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new Mock<ICustomAttributeProvider>(MockBehavior.Strict);
             bool inherit = true;
-            provider.Setup(p => p.GetCustomAttributes(typeof(CustomModelBinderAttribute), inherit)).Returns((object[])null);
-            Action<ICustomAttributeProvider> errorAction = (ICustomAttributeProvider t) => { throw new InvalidOperationException(); };
+            provider
+                .Setup(p => p.GetCustomAttributes(typeof(CustomModelBinderAttribute), inherit))
+                .Returns((object[])null);
+            Action<ICustomAttributeProvider> errorAction = (ICustomAttributeProvider t) =>
+            {
+                throw new InvalidOperationException();
+            };
 
             // Act
-            IModelBinder binder = ModelBinders.GetBinderFromAttributes(provider.Object, errorAction);
+            IModelBinder binder = ModelBinders.GetBinderFromAttributes(
+                provider.Object,
+                errorAction
+            );
 
             // Assert
             Assert.Null(binder);
@@ -71,14 +85,15 @@ namespace System.Web.Mvc.Test
         private class SampleModel
         {
             [ModelBinder(typeof(SampleModelBinder))]
-            private class SampleModel_Buddy
-            {
-            }
+            private class SampleModel_Buddy { }
         }
 
         private class SampleModelBinder : IModelBinder
         {
-            public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
+            public object BindModel(
+                ControllerContext controllerContext,
+                ModelBindingContext bindingContext
+            )
             {
                 throw new NotImplementedException();
             }

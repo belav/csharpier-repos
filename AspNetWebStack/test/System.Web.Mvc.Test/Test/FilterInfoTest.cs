@@ -49,8 +49,14 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Same(expectedActionFilter, filterInfo.ActionFilters.SingleOrDefault());
-            Assert.Same(expectedAuthorizationFilter, filterInfo.AuthorizationFilters.SingleOrDefault());
-            Assert.Same(expectedAuthenticationFilter, filterInfo.AuthenticationFilters.SingleOrDefault());
+            Assert.Same(
+                expectedAuthorizationFilter,
+                filterInfo.AuthorizationFilters.SingleOrDefault()
+            );
+            Assert.Same(
+                expectedAuthenticationFilter,
+                filterInfo.AuthenticationFilters.SingleOrDefault()
+            );
             Assert.Same(expectedExceptionFilter, filterInfo.ExceptionFilters.SingleOrDefault());
             Assert.Same(expectedResultFilter, filterInfo.ResultFilters.SingleOrDefault());
         }
@@ -78,14 +84,27 @@ namespace System.Web.Mvc.Test
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             Filter globalFilter = CreateFilter(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            Filter controllerFilter = CreateFilter(expectedControllerFilter, FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             Filter actionFilter = CreateFilter(expectedActionFilter, FilterScope.Action);
             IActionFilter expectedLastFilter = CreateDummyActionFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IActionFilter)), FilterScope.First);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.First
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -109,14 +128,27 @@ namespace System.Web.Mvc.Test
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             Filter globalFilter = CreateFilter(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            Filter controllerFilter = CreateFilter(expectedControllerFilter, FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             Filter actionFilter = CreateFilter(expectedActionFilter, FilterScope.Action);
             IActionFilter expectedLastFilter = CreateDummyActionFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IActionFilter)), FilterScope.Global);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.Global
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -138,14 +170,27 @@ namespace System.Web.Mvc.Test
             Filter firstFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.First);
             Filter globalFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            Filter controllerFilter = CreateFilter(expectedControllerFilter, FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             Filter actionFilter = CreateFilter(expectedActionFilter, FilterScope.Action);
             IActionFilter expectedLastFilter = CreateDummyActionFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IActionFilter)), FilterScope.Controller);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.Controller
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -165,14 +210,27 @@ namespace System.Web.Mvc.Test
             // Arrange
             Filter firstFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.First);
             Filter globalFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.Global);
-            Filter controllerFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                CreateDummyActionFilter(),
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             Filter actionFilter = CreateFilter(expectedActionFilter, FilterScope.Action);
             IActionFilter expectedLastFilter = CreateDummyActionFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IActionFilter)), FilterScope.Action);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.Action
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -191,13 +249,26 @@ namespace System.Web.Mvc.Test
             // Arrange
             Filter firstFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.First);
             Filter globalFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.Global);
-            Filter controllerFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                CreateDummyActionFilter(),
+                FilterScope.Controller
+            );
             Filter actionFilter = CreateFilter(CreateDummyActionFilter(), FilterScope.Action);
             IActionFilter expectedLastFilter = CreateDummyActionFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IActionFilter)), FilterScope.Last);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IActionFilter)),
+                FilterScope.Last
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -218,14 +289,27 @@ namespace System.Web.Mvc.Test
             IActionFilter expectedGlobalFilter = CreateDummyActionFilter();
             Filter globalFilter = CreateFilter(expectedGlobalFilter, FilterScope.Global);
             IActionFilter expectedControllerFilter = CreateDummyActionFilter();
-            Filter controllerFilter = CreateFilter(expectedControllerFilter, FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                expectedControllerFilter,
+                FilterScope.Controller
+            );
             IActionFilter expectedActionFilter = CreateDummyActionFilter();
             Filter actionFilter = CreateFilter(expectedActionFilter, FilterScope.Action);
             IActionFilter expectedLastFilter = CreateDummyActionFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(object)), FilterScope.Action);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(object)),
+                FilterScope.Action
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -246,14 +330,33 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Filter firstFilter = CreateFilter(CreateDummyAuthorizationFilter(), FilterScope.First);
-            Filter globalFilter = CreateFilter(CreateDummyAuthorizationFilter(), FilterScope.Global);
-            Filter controllerFilter = CreateFilter(CreateDummyAuthorizationFilter(), FilterScope.Controller);
-            Filter actionFilter = CreateFilter(CreateDummyAuthorizationFilter(), FilterScope.Action);
+            Filter globalFilter = CreateFilter(
+                CreateDummyAuthorizationFilter(),
+                FilterScope.Global
+            );
+            Filter controllerFilter = CreateFilter(
+                CreateDummyAuthorizationFilter(),
+                FilterScope.Controller
+            );
+            Filter actionFilter = CreateFilter(
+                CreateDummyAuthorizationFilter(),
+                FilterScope.Action
+            );
             IAuthorizationFilter expectedLastFilter = CreateDummyAuthorizationFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IAuthorizationFilter)), FilterScope.Last);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IAuthorizationFilter)),
+                FilterScope.Last
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -270,14 +373,33 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             Filter firstFilter = CreateFilter(CreateDummyAuthenticationFilter(), FilterScope.First);
-            Filter globalFilter = CreateFilter(CreateDummyAuthenticationFilter(), FilterScope.Global);
-            Filter controllerFilter = CreateFilter(CreateDummyAuthenticationFilter(), FilterScope.Controller);
-            Filter actionFilter = CreateFilter(CreateDummyAuthenticationFilter(), FilterScope.Action);
+            Filter globalFilter = CreateFilter(
+                CreateDummyAuthenticationFilter(),
+                FilterScope.Global
+            );
+            Filter controllerFilter = CreateFilter(
+                CreateDummyAuthenticationFilter(),
+                FilterScope.Controller
+            );
+            Filter actionFilter = CreateFilter(
+                CreateDummyAuthenticationFilter(),
+                FilterScope.Action
+            );
             IAuthenticationFilter expectedLastFilter = CreateDummyAuthenticationFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IAuthenticationFilter)), FilterScope.Last);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IAuthenticationFilter)),
+                FilterScope.Last
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -295,13 +417,26 @@ namespace System.Web.Mvc.Test
             // Arrange
             Filter firstFilter = CreateFilter(CreateDummyExceptionFilter(), FilterScope.First);
             Filter globalFilter = CreateFilter(CreateDummyExceptionFilter(), FilterScope.Global);
-            Filter controllerFilter = CreateFilter(CreateDummyExceptionFilter(), FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                CreateDummyExceptionFilter(),
+                FilterScope.Controller
+            );
             Filter actionFilter = CreateFilter(CreateDummyExceptionFilter(), FilterScope.Action);
             IExceptionFilter expectedLastFilter = CreateDummyExceptionFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IExceptionFilter)), FilterScope.Last);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IExceptionFilter)),
+                FilterScope.Last
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -319,13 +454,26 @@ namespace System.Web.Mvc.Test
             // Arrange
             Filter firstFilter = CreateFilter(CreateDummyResultFilter(), FilterScope.First);
             Filter globalFilter = CreateFilter(CreateDummyResultFilter(), FilterScope.Global);
-            Filter controllerFilter = CreateFilter(CreateDummyResultFilter(), FilterScope.Controller);
+            Filter controllerFilter = CreateFilter(
+                CreateDummyResultFilter(),
+                FilterScope.Controller
+            );
             Filter actionFilter = CreateFilter(CreateDummyResultFilter(), FilterScope.Action);
             IResultFilter expectedLastFilter = CreateDummyResultFilter();
             Filter lastFilter = CreateFilter(expectedLastFilter, FilterScope.Last);
-            Filter overrideFilter = CreateFilter(CreateOverride(typeof(IResultFilter)), FilterScope.Last);
-            IEnumerable<Filter> filters = new Filter[] { firstFilter, globalFilter, controllerFilter, actionFilter,
-                lastFilter, overrideFilter };
+            Filter overrideFilter = CreateFilter(
+                CreateOverride(typeof(IResultFilter)),
+                FilterScope.Last
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                firstFilter,
+                globalFilter,
+                controllerFilter,
+                actionFilter,
+                lastFilter,
+                overrideFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act
@@ -343,9 +491,15 @@ namespace System.Web.Mvc.Test
             // Arrange
             object expectedInstance = new ActionAndExceptionFilter();
             Filter actionAndExceptionFilter = CreateFilter(expectedInstance, FilterScope.Global);
-            Filter overrideExceptionFilter = CreateFilter(CreateOverride(typeof(IExceptionFilter)),
-                FilterScope.Action);
-            IEnumerable<Filter> filters = new Filter[] { actionAndExceptionFilter, overrideExceptionFilter };
+            Filter overrideExceptionFilter = CreateFilter(
+                CreateOverride(typeof(IExceptionFilter)),
+                FilterScope.Action
+            );
+            IEnumerable<Filter> filters = new Filter[]
+            {
+                actionAndExceptionFilter,
+                overrideExceptionFilter,
+            };
             FilterInfo product = CreateProductUnderTest(filters);
 
             // Act

@@ -22,13 +22,12 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
-namespace System.Windows.Forms {
-
-	public enum TabAppearance {
-		Normal,
-		Buttons,
-		FlatButtons
-	}
+namespace System.Windows.Forms
+{
+    public enum TabAppearance
+    {
+        Normal,
+        Buttons,
+        FlatButtons,
+    }
 }
-

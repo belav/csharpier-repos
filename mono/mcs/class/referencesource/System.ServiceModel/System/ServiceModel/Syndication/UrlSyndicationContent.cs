@@ -4,17 +4,20 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Xml;
     using System.Runtime.CompilerServices;
+    using System.Xml;
 
     // NOTE: This class implements Clone so if you add any members, please update the copy ctor
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class UrlSyndicationContent : SyndicationContent
     {
         string mediaType;
         Uri url;
 
-        public UrlSyndicationContent(Uri url, string mediaType) : base()
+        public UrlSyndicationContent(Uri url, string mediaType)
+            : base()
         {
             if (url == null)
             {
@@ -52,7 +55,11 @@ namespace System.ServiceModel.Syndication
 
         protected override void WriteContentsTo(XmlWriter writer)
         {
-            writer.WriteAttributeString(Atom10Constants.SourceTag, string.Empty, FeedUtils.GetUriString(this.url));
+            writer.WriteAttributeString(
+                Atom10Constants.SourceTag,
+                string.Empty,
+                FeedUtils.GetUriString(this.url)
+            );
         }
     }
 }

@@ -20,7 +20,6 @@ using Microsoft.Win32;
 namespace System.Security.AccessControl
 {
     [Flags]
-
     public enum ControlFlags
     {
         None = 0x0000,
@@ -93,18 +92,18 @@ namespace System.Security.AccessControl
         internal static int UnmarshalInt(byte[] binaryForm, int offset)
         {
             return (int)(
-                (binaryForm[offset + 0] << 0) +
-                (binaryForm[offset + 1] << 8) +
-                (binaryForm[offset + 2] << 16) +
-                (binaryForm[offset + 3] << 24));
+                (binaryForm[offset + 0] << 0)
+                + (binaryForm[offset + 1] << 8)
+                + (binaryForm[offset + 2] << 16)
+                + (binaryForm[offset + 3] << 24)
+            );
         }
 
         #endregion
 
         #region Constructors
 
-        internal GenericSecurityDescriptor()
-        { }
+        internal GenericSecurityDescriptor() { }
 
         #endregion
 
@@ -178,14 +177,16 @@ namespace System.Security.AccessControl
                     result += Group.BinaryLength;
                 }
 
-                if ((ControlFlags & ControlFlags.SystemAclPresent) != 0 &&
-                    GenericSacl != null)
+                if ((ControlFlags & ControlFlags.SystemAclPresent) != 0 && GenericSacl != null)
                 {
                     result += GenericSacl.BinaryLength;
                 }
 
-                if ((ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0 &&
-                    GenericDacl != null && !IsCraftedAefaDacl)
+                if (
+                    (ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0
+                    && GenericDacl != null
+                    && !IsCraftedAefaDacl
+                )
                 {
                     result += GenericDacl.BinaryLength;
                 }
@@ -234,8 +235,10 @@ namespace System.Security.AccessControl
 
             error = Win32.ConvertSdToSddl(binaryForm, 1, flags, out resultSddl);
 
-            if (error == Interop.Errors.ERROR_INVALID_PARAMETER ||
-                error == Interop.Errors.ERROR_UNKNOWN_REVISION)
+            if (
+                error == Interop.Errors.ERROR_INVALID_PARAMETER
+                || error == Interop.Errors.ERROR_UNKNOWN_REVISION
+            )
             {
                 //
                 // Indicates that the marshaling logic in GetBinaryForm is busted
@@ -267,7 +270,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(binaryForm),
-                    SR.ArgumentOutOfRange_ArrayTooSmall);
+                    SR.ArgumentOutOfRange_ArrayTooSmall
+                );
             }
 
             //
@@ -283,14 +287,21 @@ namespace System.Security.AccessControl
             //
 
             byte rmControl =
-                ((this is RawSecurityDescriptor rsd) &&
-                 ((ControlFlags & ControlFlags.RMControlValid) != 0)) ? (rsd.ResourceManagerControl) : (byte)0;
+                (
+                    (this is RawSecurityDescriptor rsd)
+                    && ((ControlFlags & ControlFlags.RMControlValid) != 0)
+                )
+                    ? (rsd.ResourceManagerControl)
+                    : (byte)0;
 
             // if the DACL is our internally crafted NULL replacement, then let us turn off this control
             int materializedControlFlags = (int)ControlFlags;
             if (IsCraftedAefaDacl)
             {
-                unchecked { materializedControlFlags &= ~((int)ControlFlags.DiscretionaryAclPresent); }
+                unchecked
+                {
+                    materializedControlFlags &= ~((int)ControlFlags.DiscretionaryAclPresent);
+                }
             }
 
             binaryForm[offset + 0] = Revision;
@@ -302,7 +313,10 @@ namespace System.Security.AccessControl
             // Compute offsets at which owner, group, SACL and DACL are stored
             //
 
-            int ownerOffset, groupOffset, saclOffset, daclOffset;
+            int ownerOffset,
+                groupOffset,
+                saclOffset,
+                daclOffset;
 
             ownerOffset = offset + OwnerFoundAt;
             groupOffset = offset + GroupFoundAt;
@@ -353,8 +367,7 @@ namespace System.Security.AccessControl
             // Marshal the SACL into place, if present
             //
 
-            if ((ControlFlags & ControlFlags.SystemAclPresent) != 0 &&
-                GenericSacl != null)
+            if ((ControlFlags & ControlFlags.SystemAclPresent) != 0 && GenericSacl != null)
             {
                 MarshalInt(binaryForm, saclOffset, offset - originalOffset);
                 GenericSacl.GetBinaryForm(binaryForm, offset);
@@ -373,8 +386,11 @@ namespace System.Security.AccessControl
             // Marshal the DACL into place, if present
             //
 
-            if ((ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0 &&
-                GenericDacl != null && !IsCraftedAefaDacl)
+            if (
+                (ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0
+                && GenericDacl != null
+                && !IsCraftedAefaDacl
+            )
             {
                 MarshalInt(binaryForm, daclOffset, offset - originalOffset);
                 GenericDacl.GetBinaryForm(binaryForm, offset);
@@ -391,7 +407,6 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public sealed class RawSecurityDescriptor : GenericSecurityDescriptor
     {
         #region Private Members
@@ -402,7 +417,6 @@ namespace System.Security.AccessControl
         private RawAcl? _sacl;
         private RawAcl? _dacl;
         private byte _rmControl; // the not-so-reserved SBZ1 field
-
         #endregion
 
         #region Protected Properties
@@ -421,7 +435,13 @@ namespace System.Security.AccessControl
 
         #region Private methods
 
-        private void CreateFromParts(ControlFlags flags, SecurityIdentifier? owner, SecurityIdentifier? group, RawAcl? systemAcl, RawAcl? discretionaryAcl)
+        private void CreateFromParts(
+            ControlFlags flags,
+            SecurityIdentifier? owner,
+            SecurityIdentifier? group,
+            RawAcl? systemAcl,
+            RawAcl? discretionaryAcl
+        )
         {
             SetFlags(flags);
             Owner = owner;
@@ -439,7 +459,13 @@ namespace System.Security.AccessControl
         // Creates a security descriptor explicitly
         //
 
-        public RawSecurityDescriptor(ControlFlags flags, SecurityIdentifier? owner, SecurityIdentifier? group, RawAcl? systemAcl, RawAcl? discretionaryAcl)
+        public RawSecurityDescriptor(
+            ControlFlags flags,
+            SecurityIdentifier? owner,
+            SecurityIdentifier? group,
+            RawAcl? systemAcl,
+            RawAcl? discretionaryAcl
+        )
             : base()
         {
             CreateFromParts(flags, owner, group, systemAcl, discretionaryAcl);
@@ -450,9 +476,7 @@ namespace System.Security.AccessControl
         //
 
         public RawSecurityDescriptor(string sddlForm)
-            : this(BinaryFormFromSddlForm(sddlForm), 0)
-        {
-        }
+            : this(BinaryFormFromSddlForm(sddlForm), 0) { }
 
         //
         // Creates a security descriptor from its binary representation
@@ -478,7 +502,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(binaryForm),
-                    SR.ArgumentOutOfRange_ArrayTooSmall);
+                    SR.ArgumentOutOfRange_ArrayTooSmall
+                );
             }
 
             //
@@ -487,14 +512,17 @@ namespace System.Security.AccessControl
 
             if (binaryForm[offset + 0] != Revision)
             {
-                throw new ArgumentOutOfRangeException(nameof(binaryForm),
-                     SR.AccessControl_InvalidSecurityDescriptorRevision);
+                throw new ArgumentOutOfRangeException(
+                    nameof(binaryForm),
+                    SR.AccessControl_InvalidSecurityDescriptorRevision
+                );
             }
 
-
             ControlFlags flags;
-            SecurityIdentifier? owner, group;
-            RawAcl? sacl, dacl;
+            SecurityIdentifier? owner,
+                group;
+            RawAcl? sacl,
+                dacl;
             byte rmControl;
 
             //
@@ -517,7 +545,8 @@ namespace System.Security.AccessControl
             {
                 throw new ArgumentException(
                     SR.AccessControl_InvalidSecurityDescriptorSelfRelativeForm,
-                    nameof(binaryForm));
+                    nameof(binaryForm)
+                );
             }
 
             //
@@ -556,8 +585,7 @@ namespace System.Security.AccessControl
 
             int saclOffset = UnmarshalInt(binaryForm, offset + SaclFoundAt);
 
-            if (((flags & ControlFlags.SystemAclPresent) != 0) &&
-                saclOffset != 0)
+            if (((flags & ControlFlags.SystemAclPresent) != 0) && saclOffset != 0)
             {
                 sacl = new RawAcl(binaryForm, offset + saclOffset);
             }
@@ -572,8 +600,7 @@ namespace System.Security.AccessControl
 
             int daclOffset = UnmarshalInt(binaryForm, offset + DaclFoundAt);
 
-            if (((flags & ControlFlags.DiscretionaryAclPresent) != 0) &&
-                daclOffset != 0)
+            if (((flags & ControlFlags.DiscretionaryAclPresent) != 0) && daclOffset != 0)
             {
                 dacl = new RawAcl(binaryForm, offset + daclOffset);
             }
@@ -614,22 +641,28 @@ namespace System.Security.AccessControl
 
             try
             {
-                if (!Interop.Advapi32.ConvertStringSdToSd(
+                if (
+                    !Interop.Advapi32.ConvertStringSdToSd(
                         sddlForm,
                         GenericSecurityDescriptor.Revision,
                         out byteArray,
-                        ref byteArraySize))
+                        ref byteArraySize
+                    )
+                )
                 {
                     error = Marshal.GetLastPInvokeError();
 
-                    if (error == Interop.Errors.ERROR_INVALID_PARAMETER ||
-                        error == Interop.Errors.ERROR_INVALID_ACL ||
-                        error == Interop.Errors.ERROR_INVALID_SECURITY_DESCR ||
-                        error == Interop.Errors.ERROR_UNKNOWN_REVISION)
+                    if (
+                        error == Interop.Errors.ERROR_INVALID_PARAMETER
+                        || error == Interop.Errors.ERROR_INVALID_ACL
+                        || error == Interop.Errors.ERROR_INVALID_SECURITY_DESCR
+                        || error == Interop.Errors.ERROR_UNKNOWN_REVISION
+                    )
                     {
                         throw new ArgumentException(
                             SR.ArgumentException_InvalidSDSddlForm,
-                            nameof(sddlForm));
+                            nameof(sddlForm)
+                        );
                     }
                     else if (error == Interop.Errors.ERROR_NOT_ENOUGH_MEMORY)
                     {
@@ -639,12 +672,16 @@ namespace System.Security.AccessControl
                     {
                         throw new ArgumentException(
                             SR.AccessControl_InvalidSidInSDDLString,
-                            nameof(sddlForm));
+                            nameof(sddlForm)
+                        );
                     }
                     else if (error != Interop.Errors.ERROR_SUCCESS)
                     {
                         Debug.Fail($"Unexpected error out of Win32.ConvertStringSdToSd: {error}");
-                        throw new Win32Exception(error, SR.Format(SR.AccessControl_UnexpectedError, error));
+                        throw new Win32Exception(
+                            error,
+                            SR.Format(SR.AccessControl_UnexpectedError, error)
+                        );
                     }
                 }
 
@@ -683,10 +720,7 @@ namespace System.Security.AccessControl
 
         public override ControlFlags ControlFlags
         {
-            get
-            {
-                return _flags;
-            }
+            get { return _flags; }
         }
 
         //
@@ -695,15 +729,8 @@ namespace System.Security.AccessControl
 
         public override SecurityIdentifier? Owner
         {
-            get
-            {
-                return _owner;
-            }
-
-            set
-            {
-                _owner = value;
-            }
+            get { return _owner; }
+            set { _owner = value; }
         }
 
         //
@@ -712,15 +739,8 @@ namespace System.Security.AccessControl
 
         public override SecurityIdentifier? Group
         {
-            get
-            {
-                return _group;
-            }
-
-            set
-            {
-                _group = value;
-            }
+            get { return _group; }
+            set { _group = value; }
         }
 
         //
@@ -729,15 +749,8 @@ namespace System.Security.AccessControl
 
         public RawAcl? SystemAcl
         {
-            get
-            {
-                return _sacl;
-            }
-
-            set
-            {
-                _sacl = value;
-            }
+            get { return _sacl; }
+            set { _sacl = value; }
         }
 
         //
@@ -746,15 +759,8 @@ namespace System.Security.AccessControl
 
         public RawAcl? DiscretionaryAcl
         {
-            get
-            {
-                return _dacl;
-            }
-
-            set
-            {
-                _dacl = value;
-            }
+            get { return _dacl; }
+            set { _dacl = value; }
         }
 
         //
@@ -766,17 +772,9 @@ namespace System.Security.AccessControl
 
         public byte ResourceManagerControl
         {
-            get
-            {
-                return _rmControl;
-            }
-
-            set
-            {
-                _rmControl = value;
-            }
+            get { return _rmControl; }
+            set { _rmControl = value; }
         }
-
 
         #endregion
 
@@ -794,7 +792,6 @@ namespace System.Security.AccessControl
         #endregion
     }
 
-
     public sealed class CommonSecurityDescriptor : GenericSecurityDescriptor
     {
         #region Private Members
@@ -805,53 +802,60 @@ namespace System.Security.AccessControl
         private SystemAcl? _sacl;
         private DiscretionaryAcl? _dacl;
 
-
         #endregion
 
         #region Private Methods
         [MemberNotNull(nameof(_rawSd))]
-        private void CreateFromParts(bool isContainer, bool isDS, ControlFlags flags, SecurityIdentifier? owner, SecurityIdentifier? group, SystemAcl? systemAcl, DiscretionaryAcl? discretionaryAcl)
+        private void CreateFromParts(
+            bool isContainer,
+            bool isDS,
+            ControlFlags flags,
+            SecurityIdentifier? owner,
+            SecurityIdentifier? group,
+            SystemAcl? systemAcl,
+            DiscretionaryAcl? discretionaryAcl
+        )
         {
-            if (systemAcl != null &&
-                systemAcl.IsContainer != isContainer)
+            if (systemAcl != null && systemAcl.IsContainer != isContainer)
             {
                 throw new ArgumentException(
-                    isContainer ?
-                        SR.AccessControl_MustSpecifyContainerAcl :
-                        SR.AccessControl_MustSpecifyLeafObjectAcl,
-                    nameof(systemAcl));
+                    isContainer
+                        ? SR.AccessControl_MustSpecifyContainerAcl
+                        : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                    nameof(systemAcl)
+                );
             }
 
-            if (discretionaryAcl != null &&
-                discretionaryAcl.IsContainer != isContainer)
+            if (discretionaryAcl != null && discretionaryAcl.IsContainer != isContainer)
             {
                 throw new ArgumentException(
-                    isContainer ?
-                        SR.AccessControl_MustSpecifyContainerAcl :
-                        SR.AccessControl_MustSpecifyLeafObjectAcl,
-                    nameof(discretionaryAcl));
+                    isContainer
+                        ? SR.AccessControl_MustSpecifyContainerAcl
+                        : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                    nameof(discretionaryAcl)
+                );
             }
 
             _isContainer = isContainer;
 
-            if (systemAcl != null &&
-                systemAcl.IsDS != isDS)
+            if (systemAcl != null && systemAcl.IsDS != isDS)
             {
                 throw new ArgumentException(
-                    isDS ?
-                        SR.AccessControl_MustSpecifyDirectoryObjectAcl :
-                        SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
-                    nameof(systemAcl));
+                    isDS
+                        ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                        : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                    nameof(systemAcl)
+                );
             }
 
-            if (discretionaryAcl != null &&
-                discretionaryAcl.IsDS != isDS)
+            if (discretionaryAcl != null && discretionaryAcl.IsDS != isDS)
             {
                 throw new ArgumentException(
-                    isDS ?
-                        SR.AccessControl_MustSpecifyDirectoryObjectAcl :
-                        SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
-                    nameof(discretionaryAcl));
+                    isDS
+                        ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                        : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                    nameof(discretionaryAcl)
+                );
             }
 
             _isDS = isDS;
@@ -866,7 +870,10 @@ namespace System.Security.AccessControl
             // to conform to native behavior, we will add allow everyone ace for DACL
             //
 
-            discretionaryAcl ??= DiscretionaryAcl.CreateAllowEveryoneFullAccess(_isDS, _isContainer);
+            discretionaryAcl ??= DiscretionaryAcl.CreateAllowEveryoneFullAccess(
+                _isDS,
+                _isContainer
+            );
 
             _dacl = discretionaryAcl;
 
@@ -882,14 +889,23 @@ namespace System.Security.AccessControl
 
             if (systemAcl == null)
             {
-                unchecked { actualFlags &= ~(ControlFlags.SystemAclPresent); }
+                unchecked
+                {
+                    actualFlags &= ~(ControlFlags.SystemAclPresent);
+                }
             }
             else
             {
                 actualFlags |= (ControlFlags.SystemAclPresent);
             }
 
-            _rawSd = new RawSecurityDescriptor(actualFlags, owner, group, systemAcl?.RawAcl, discretionaryAcl.RawAcl);
+            _rawSd = new RawSecurityDescriptor(
+                actualFlags,
+                owner,
+                group,
+                systemAcl?.RawAcl,
+                discretionaryAcl.RawAcl
+            );
         }
 
         #endregion
@@ -900,22 +916,53 @@ namespace System.Security.AccessControl
         // Creates a security descriptor explicitly
         //
 
-        public CommonSecurityDescriptor(bool isContainer, bool isDS, ControlFlags flags, SecurityIdentifier? owner, SecurityIdentifier? group, SystemAcl? systemAcl, DiscretionaryAcl? discretionaryAcl)
+        public CommonSecurityDescriptor(
+            bool isContainer,
+            bool isDS,
+            ControlFlags flags,
+            SecurityIdentifier? owner,
+            SecurityIdentifier? group,
+            SystemAcl? systemAcl,
+            DiscretionaryAcl? discretionaryAcl
+        )
         {
             CreateFromParts(isContainer, isDS, flags, owner, group, systemAcl, discretionaryAcl);
         }
 
-        private CommonSecurityDescriptor(bool isContainer, bool isDS, ControlFlags flags, SecurityIdentifier? owner, SecurityIdentifier? group, RawAcl? systemAcl, RawAcl? discretionaryAcl)
-            : this(isContainer, isDS, flags, owner, group, systemAcl == null ? null : new SystemAcl(isContainer, isDS, systemAcl), discretionaryAcl == null ? null : new DiscretionaryAcl(isContainer, isDS, discretionaryAcl))
-        {
-        }
+        private CommonSecurityDescriptor(
+            bool isContainer,
+            bool isDS,
+            ControlFlags flags,
+            SecurityIdentifier? owner,
+            SecurityIdentifier? group,
+            RawAcl? systemAcl,
+            RawAcl? discretionaryAcl
+        )
+            : this(
+                isContainer,
+                isDS,
+                flags,
+                owner,
+                group,
+                systemAcl == null ? null : new SystemAcl(isContainer, isDS, systemAcl),
+                discretionaryAcl == null
+                    ? null
+                    : new DiscretionaryAcl(isContainer, isDS, discretionaryAcl)
+            ) { }
 
-        public CommonSecurityDescriptor(bool isContainer, bool isDS, RawSecurityDescriptor rawSecurityDescriptor)
-            : this(isContainer, isDS, rawSecurityDescriptor, false)
-        {
-        }
+        public CommonSecurityDescriptor(
+            bool isContainer,
+            bool isDS,
+            RawSecurityDescriptor rawSecurityDescriptor
+        )
+            : this(isContainer, isDS, rawSecurityDescriptor, false) { }
 
-        internal CommonSecurityDescriptor(bool isContainer, bool isDS, RawSecurityDescriptor rawSecurityDescriptor, bool trusted)
+        internal CommonSecurityDescriptor(
+            bool isContainer,
+            bool isDS,
+            RawSecurityDescriptor rawSecurityDescriptor,
+            bool trusted
+        )
         {
             ArgumentNullException.ThrowIfNull(rawSecurityDescriptor);
 
@@ -925,8 +972,18 @@ namespace System.Security.AccessControl
                 rawSecurityDescriptor.ControlFlags,
                 rawSecurityDescriptor.Owner,
                 rawSecurityDescriptor.Group,
-                rawSecurityDescriptor.SystemAcl == null ? null : new SystemAcl(isContainer, isDS, rawSecurityDescriptor.SystemAcl, trusted),
-                rawSecurityDescriptor.DiscretionaryAcl == null ? null : new DiscretionaryAcl(isContainer, isDS, rawSecurityDescriptor.DiscretionaryAcl, trusted));
+                rawSecurityDescriptor.SystemAcl == null
+                    ? null
+                    : new SystemAcl(isContainer, isDS, rawSecurityDescriptor.SystemAcl, trusted),
+                rawSecurityDescriptor.DiscretionaryAcl == null
+                    ? null
+                    : new DiscretionaryAcl(
+                        isContainer,
+                        isDS,
+                        rawSecurityDescriptor.DiscretionaryAcl,
+                        trusted
+                    )
+            );
         }
 
         //
@@ -934,18 +991,14 @@ namespace System.Security.AccessControl
         //
 
         public CommonSecurityDescriptor(bool isContainer, bool isDS, string sddlForm)
-            : this(isContainer, isDS, new RawSecurityDescriptor(sddlForm), true)
-        {
-        }
+            : this(isContainer, isDS, new RawSecurityDescriptor(sddlForm), true) { }
 
         //
         // Create a security descriptor from its binary representation
         //
 
         public CommonSecurityDescriptor(bool isContainer, bool isDS, byte[] binaryForm, int offset)
-            : this(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset), true)
-        {
-        }
+            : this(isContainer, isDS, new RawSecurityDescriptor(binaryForm, offset), true) { }
 
         #endregion
 
@@ -975,17 +1028,13 @@ namespace System.Security.AccessControl
             get { return _isDS; }
         }
 
-
         //
         // Allows retrieving the control bits for this security descriptor
         //
 
         public override ControlFlags ControlFlags
         {
-            get
-            {
-                return _rawSd.ControlFlags;
-            }
+            get { return _rawSd.ControlFlags; }
         }
 
         //
@@ -994,15 +1043,8 @@ namespace System.Security.AccessControl
 
         public override SecurityIdentifier? Owner
         {
-            get
-            {
-                return _rawSd.Owner;
-            }
-
-            set
-            {
-                _rawSd.Owner = value;
-            }
+            get { return _rawSd.Owner; }
+            set { _rawSd.Owner = value; }
         }
 
         //
@@ -1011,25 +1053,13 @@ namespace System.Security.AccessControl
 
         public override SecurityIdentifier? Group
         {
-            get
-            {
-                return _rawSd.Group;
-            }
-
-            set
-            {
-                _rawSd.Group = value;
-            }
+            get { return _rawSd.Group; }
+            set { _rawSd.Group = value; }
         }
-
 
         public SystemAcl? SystemAcl
         {
-            get
-            {
-                return _sacl;
-            }
-
+            get { return _sacl; }
             set
             {
                 if (value != null)
@@ -1037,19 +1067,21 @@ namespace System.Security.AccessControl
                     if (value.IsContainer != this.IsContainer)
                     {
                         throw new ArgumentException(
-                            this.IsContainer ?
-                                SR.AccessControl_MustSpecifyContainerAcl :
-                                SR.AccessControl_MustSpecifyLeafObjectAcl,
-                            nameof(value));
+                            this.IsContainer
+                                ? SR.AccessControl_MustSpecifyContainerAcl
+                                : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                            nameof(value)
+                        );
                     }
 
                     if (value.IsDS != this.IsDS)
                     {
                         throw new ArgumentException(
-                            this.IsDS ?
-                                SR.AccessControl_MustSpecifyDirectoryObjectAcl :
-                                SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
-                            nameof(value));
+                            this.IsDS
+                                ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                                : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                            nameof(value)
+                        );
                     }
                 }
 
@@ -1074,11 +1106,7 @@ namespace System.Security.AccessControl
 
         public DiscretionaryAcl? DiscretionaryAcl
         {
-            get
-            {
-                return _dacl;
-            }
-
+            get { return _dacl; }
             set
             {
                 if (value != null)
@@ -1086,19 +1114,21 @@ namespace System.Security.AccessControl
                     if (value.IsContainer != this.IsContainer)
                     {
                         throw new ArgumentException(
-                            this.IsContainer ?
-                                SR.AccessControl_MustSpecifyContainerAcl :
-                                SR.AccessControl_MustSpecifyLeafObjectAcl,
-                            nameof(value));
+                            this.IsContainer
+                                ? SR.AccessControl_MustSpecifyContainerAcl
+                                : SR.AccessControl_MustSpecifyLeafObjectAcl,
+                            nameof(value)
+                        );
                     }
 
                     if (value.IsDS != this.IsDS)
                     {
                         throw new ArgumentException(
-                            this.IsDS ?
-                                SR.AccessControl_MustSpecifyDirectoryObjectAcl :
-                                SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
-                            nameof(value));
+                            this.IsDS
+                                ? SR.AccessControl_MustSpecifyDirectoryObjectAcl
+                                : SR.AccessControl_MustSpecifyNonDirectoryObjectAcl,
+                            nameof(value)
+                        );
                     }
                 }
 
@@ -1188,7 +1218,12 @@ namespace System.Security.AccessControl
 
         public void AddDiscretionaryAcl(byte revision, int trusted)
         {
-            this.DiscretionaryAcl = new DiscretionaryAcl(this.IsContainer, this.IsDS, revision, trusted);
+            this.DiscretionaryAcl = new DiscretionaryAcl(
+                this.IsContainer,
+                this.IsDS,
+                revision,
+                trusted
+            );
             this.AddControlFlags(ControlFlags.DiscretionaryAclPresent);
         }
 
@@ -1228,18 +1263,12 @@ namespace System.Security.AccessControl
 
         internal bool IsSystemAclPresent
         {
-            get
-            {
-                return (_rawSd.ControlFlags & ControlFlags.SystemAclPresent) != 0;
-            }
+            get { return (_rawSd.ControlFlags & ControlFlags.SystemAclPresent) != 0; }
         }
 
         internal bool IsDiscretionaryAclPresent
         {
-            get
-            {
-                return (_rawSd.ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0;
-            }
+            get { return (_rawSd.ControlFlags & ControlFlags.DiscretionaryAclPresent) != 0; }
         }
         #endregion
     }

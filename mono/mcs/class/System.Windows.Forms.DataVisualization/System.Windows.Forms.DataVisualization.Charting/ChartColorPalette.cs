@@ -2,7 +2,7 @@
 // Authors:
 // Jonathan Pobst (monkey@jpobst.com)
 //
-// Copyright (C) 2009 Novell, Inc (http://www.novell.com) 
+// Copyright (C) 2009 Novell, Inc (http://www.novell.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the
@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,20 +27,20 @@ using System;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public enum ChartColorPalette
-	{
-		None = 0,
-		Bright = 1,
-		Grayscale = 2,
-		Excel = 3,
-		Light = 4,
-		Pastel = 5,
-		EarthTones = 6,
-		SemiTransparent = 7,
-		Berry = 8,
-		Chocolate = 9,
-		Fire = 10,
-		SeaGreen = 11,
-		BrightPastel = 12
-	}
+    public enum ChartColorPalette
+    {
+        None = 0,
+        Bright = 1,
+        Grayscale = 2,
+        Excel = 3,
+        Light = 4,
+        Pastel = 5,
+        EarthTones = 6,
+        SemiTransparent = 7,
+        Berry = 8,
+        Chocolate = 9,
+        Fire = 10,
+        SeaGreen = 11,
+        BrightPastel = 12,
+    }
 }

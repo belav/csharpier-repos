@@ -48,11 +48,15 @@ namespace System.Speech.Recognition
             string audioFormats;
             if (token.Attributes.TryGetString("AudioFormats", out audioFormats))
             {
-                _supportedAudioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(SapiAttributeParser.GetAudioFormatsFromString(audioFormats));
+                _supportedAudioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(
+                    SapiAttributeParser.GetAudioFormatsFromString(audioFormats)
+                );
             }
             else
             {
-                _supportedAudioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(new List<SpeechAudioFormatInfo>());
+                _supportedAudioFormats = new ReadOnlyCollection<SpeechAudioFormatInfo>(
+                    new List<SpeechAudioFormatInfo>()
+                );
             }
 
             _objectToken = token;

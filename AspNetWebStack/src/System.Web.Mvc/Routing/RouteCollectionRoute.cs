@@ -10,7 +10,7 @@ using System.Web.Routing;
 namespace System.Web.Mvc.Routing
 {
     /// <summary>
-    /// A single route that is the composite of multiple "sub routes".  
+    /// A single route that is the composite of multiple "sub routes".
     /// </summary>
     /// <remarks>
     /// Corresponds to the Web API implementation of attribute routing in System.Web.Http.Routing.RouteCollectionRoute.
@@ -44,7 +44,10 @@ namespace System.Web.Mvc.Routing
             return CreateDirectRouteMatch(this, matches);
         }
 
-        public override VirtualPathData GetVirtualPath(RequestContext requestContext, RouteValueDictionary values)
+        public override VirtualPathData GetVirtualPath(
+            RequestContext requestContext,
+            RouteValueDictionary values
+        )
         {
             // Link generation is not supported via the RouteCollectionRoute - see LinkGenerationRoute.
             return null;
@@ -84,10 +87,12 @@ namespace System.Web.Mvc.Routing
                 //
                 // Inside the DefaultControllerFactory we'll double check the route data and throw if we have
                 // multiple controller matches, but for now let's just use the controller of the first match.
-                ControllerDescriptor controllerDescriptor = matches[0].GetTargetControllerDescriptor();
+                ControllerDescriptor controllerDescriptor = matches[0]
+                    .GetTargetControllerDescriptor();
                 if (controllerDescriptor != null)
                 {
-                    routeData.Values[RouteDataTokenKeys.Controller] = controllerDescriptor.ControllerName;
+                    routeData.Values[RouteDataTokenKeys.Controller] =
+                        controllerDescriptor.ControllerName;
                 }
 
                 return routeData;

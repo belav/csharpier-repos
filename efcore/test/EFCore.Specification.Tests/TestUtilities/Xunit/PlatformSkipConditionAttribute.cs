@@ -15,8 +15,7 @@ public sealed class PlatformSkipConditionAttribute : Attribute, ITestCondition
         _excludedPlatforms = excludedPlatforms;
     }
 
-    public ValueTask<bool> IsMetAsync()
-        => new(CanRunOnThisPlatform(_excludedPlatforms));
+    public ValueTask<bool> IsMetAsync() => new(CanRunOnThisPlatform(_excludedPlatforms));
 
     public string SkipReason { get; set; } = "Test cannot run on this platform.";
 
@@ -27,14 +26,18 @@ public sealed class PlatformSkipConditionAttribute : Attribute, ITestCondition
             return true;
         }
 
-        if (excludedFrameworks.HasFlag(TestPlatform.Windows)
-            && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+        if (
+            excludedFrameworks.HasFlag(TestPlatform.Windows)
+            && RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+        )
         {
             return false;
         }
 
-        if (excludedFrameworks.HasFlag(TestPlatform.Linux)
-            && RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+        if (
+            excludedFrameworks.HasFlag(TestPlatform.Linux)
+            && RuntimeInformation.IsOSPlatform(OSPlatform.Linux)
+        )
         {
             return false;
         }

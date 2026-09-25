@@ -8,13 +8,15 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Reflection;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.Security;
     using System.ServiceModel;
     using System.ServiceModel.Description;
     using System.Xml;
-    using System.Runtime.Diagnostics;
 
-    public sealed partial class StandardEndpointsSection : ConfigurationSection, IConfigurationContextProviderInternal
+    public sealed partial class StandardEndpointsSection
+        : ConfigurationSection,
+            IConfigurationContextProviderInternal
     {
         static Configuration configuration;
         ConfigurationPropertyCollection properties;
@@ -25,7 +27,8 @@ namespace System.ServiceModel.Configuration
         {
             get
             {
-                Dictionary<string, EndpointCollectionElement> endpointCollectionElements = new Dictionary<string, EndpointCollectionElement>();
+                Dictionary<string, EndpointCollectionElement> endpointCollectionElements =
+                    new Dictionary<string, EndpointCollectionElement>();
 
                 foreach (ConfigurationProperty property in this.Properties)
                 {
@@ -36,12 +39,9 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        new public EndpointCollectionElement this[string endpoint]
+        public new EndpointCollectionElement this[string endpoint]
         {
-            get
-            {
-                return (EndpointCollectionElement)base[endpoint];
-            }
+            get { return (EndpointCollectionElement)base[endpoint]; }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -58,10 +58,17 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MexStandardEndpointCollectionElementName, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MexStandardEndpointCollectionElementName,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public ServiceMetadataEndpointCollectionElement MexEndpoint
         {
-            get { return (ServiceMetadataEndpointCollectionElement)base[ConfigurationStrings.MexStandardEndpointCollectionElementName]; }
+            get
+            {
+                return (ServiceMetadataEndpointCollectionElement)
+                    base[ConfigurationStrings.MexStandardEndpointCollectionElementName];
+            }
         }
 
         // This property should only be called/set from EndpointsSectionGroup TryAdd
@@ -78,14 +85,16 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("config");
             }
 
-            return (StandardEndpointsSection)config.GetSection(ConfigurationStrings.StandardEndpointsSectionPath);
+            return (StandardEndpointsSection)
+                config.GetSection(ConfigurationStrings.StandardEndpointsSectionPath);
         }
 
         public List<EndpointCollectionElement> EndpointCollections
         {
             get
             {
-                List<EndpointCollectionElement> endpointCollections = new List<EndpointCollectionElement>();
+                List<EndpointCollectionElement> endpointCollections =
+                    new List<EndpointCollectionElement>();
                 foreach (ConfigurationProperty property in this.Properties)
                 {
                     endpointCollections.Add(this[property.Name]);
@@ -95,7 +104,12 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        internal static bool TryAdd(string name, ServiceEndpoint endpoint, Configuration config, out string endpointSectionName)
+        internal static bool TryAdd(
+            string name,
+            ServiceEndpoint endpoint,
+            Configuration config,
+            out string endpointSectionName
+        )
         {
             bool retval = false;
             StandardEndpointsSection.Configuration = config;
@@ -110,14 +124,26 @@ namespace System.ServiceModel.Configuration
             return retval;
         }
 
-        protected override bool OnDeserializeUnrecognizedElement(string elementName, XmlReader reader)
+        protected override bool OnDeserializeUnrecognizedElement(
+            string elementName,
+            XmlReader reader
+        )
         {
             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ConfigurationErrorsException(SR.GetString(SR.ConfigEndpointExtensionNotFound,
-                        ConfigurationHelpers.GetEndpointsSectionPath(elementName))));
+                new ConfigurationErrorsException(
+                    SR.GetString(
+                        SR.ConfigEndpointExtensionNotFound,
+                        ConfigurationHelpers.GetEndpointsSectionPath(elementName)
+                    )
+                )
+            );
         }
 
-        internal static bool TryAdd(string name, ServiceEndpoint endpoint, out string endpointSectionName)
+        internal static bool TryAdd(
+            string name,
+            ServiceEndpoint endpoint,
+            out string endpointSectionName
+        )
         {
             // TryAdd built on assumption that StandardEndpointsSectionGroup.Configuration is valid.
             // This should be protected at the callers site.  If assumption is invalid, then
@@ -125,22 +151,35 @@ namespace System.ServiceModel.Configuration
             // user code can not capture.
             if (null == StandardEndpointsSection.Configuration)
             {
-                Fx.Assert("The TryAdd(string name, ServiceEndpoint endpoint, Configuration config, out string endpointSectionName) variant of this function should always be called first. The Configuration object is not set.");
-                DiagnosticUtility.FailFast("The TryAdd(string name, ServiceEndpoint endpoint, Configuration config, out string endpointSectionName) variant of this function should always be called first. The Configuration object is not set.");
+                Fx.Assert(
+                    "The TryAdd(string name, ServiceEndpoint endpoint, Configuration config, out string endpointSectionName) variant of this function should always be called first. The Configuration object is not set."
+                );
+                DiagnosticUtility.FailFast(
+                    "The TryAdd(string name, ServiceEndpoint endpoint, Configuration config, out string endpointSectionName) variant of this function should always be called first. The Configuration object is not set."
+                );
             }
 
             bool retval = false;
             string outEndpointSectionName = null;
-            StandardEndpointsSection sectionGroup = StandardEndpointsSection.GetSection(StandardEndpointsSection.Configuration);
+            StandardEndpointsSection sectionGroup = StandardEndpointsSection.GetSection(
+                StandardEndpointsSection.Configuration
+            );
             sectionGroup.UpdateEndpointSections();
             foreach (string sectionName in sectionGroup.EndpointCollectionElements.Keys)
             {
-                EndpointCollectionElement endpointCollectionElement = sectionGroup.EndpointCollectionElements[sectionName];
+                EndpointCollectionElement endpointCollectionElement =
+                    sectionGroup.EndpointCollectionElements[sectionName];
 
-                MethodInfo tryAddMethod = endpointCollectionElement.GetType().GetMethod("TryAdd", BindingFlags.Instance | BindingFlags.NonPublic);
+                MethodInfo tryAddMethod = endpointCollectionElement
+                    .GetType()
+                    .GetMethod("TryAdd", BindingFlags.Instance | BindingFlags.NonPublic);
                 if (tryAddMethod != null)
                 {
-                    retval = (bool)tryAddMethod.Invoke(endpointCollectionElement, new object[] { name, endpoint, StandardEndpointsSection.Configuration });
+                    retval = (bool)
+                        tryAddMethod.Invoke(
+                            endpointCollectionElement,
+                            new object[] { name, endpoint, StandardEndpointsSection.Configuration }
+                        );
                     if (retval)
                     {
                         outEndpointSectionName = sectionName;
@@ -160,16 +199,22 @@ namespace System.ServiceModel.Configuration
             UpdateEndpointSections(ConfigurationHelpers.GetEvaluationContext(this));
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical methods UnsafeLookupCollection which elevates in order to load config.",
-            Safe = "Does not leak any config objects.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical methods UnsafeLookupCollection which elevates in order to load config.",
+            Safe = "Does not leak any config objects."
+        )]
         [SecuritySafeCritical]
         internal void UpdateEndpointSections(ContextInformation evaluationContext)
         {
-            ExtensionElementCollection endpointExtensions = ExtensionsSection.UnsafeLookupCollection(ConfigurationStrings.EndpointExtensions, evaluationContext);
+            ExtensionElementCollection endpointExtensions =
+                ExtensionsSection.UnsafeLookupCollection(
+                    ConfigurationStrings.EndpointExtensions,
+                    evaluationContext
+                );
 
             // Extension collections are additive only (BasicMap) and do not allow for <clear>
             // or <remove> tags, nor do they allow for overriding an entry.  This allows us
-            // to optimize this to only walk the binding extension collection if the counts 
+            // to optimize this to only walk the binding extension collection if the counts
             // mismatch.
             if (endpointExtensions.Count != this.properties.Count)
             {
@@ -186,10 +231,12 @@ namespace System.ServiceModel.Configuration
                             }
                             else
                             {
-                                ConfigurationProperty property = new ConfigurationProperty(endpointExtension.Name,
+                                ConfigurationProperty property = new ConfigurationProperty(
+                                    endpointExtension.Name,
                                     extensionType,
                                     null,
-                                    ConfigurationPropertyOptions.None);
+                                    ConfigurationPropertyOptions.None
+                                );
 
                                 this.properties.Add(property);
                             }
@@ -199,10 +246,17 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical methods UnsafeGetAssociatedBindingCollectionElement which elevates in order to load config.",
-            Safe = "Does not leak any config objects.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical methods UnsafeGetAssociatedBindingCollectionElement which elevates in order to load config.",
+            Safe = "Does not leak any config objects."
+        )]
         [SecuritySafeCritical]
-        internal static void ValidateEndpointReference(string endpoint, string endpointConfiguration, ContextInformation evaluationContext, ConfigurationElement configurationElement)
+        internal static void ValidateEndpointReference(
+            string endpoint,
+            string endpointConfiguration,
+            ContextInformation evaluationContext,
+            ConfigurationElement configurationElement
+        )
         {
             // ValidateEndpointReference built on assumption that evaluationContext is valid.
             // This should be protected at the callers site.  If assumption is invalid, then
@@ -210,8 +264,12 @@ namespace System.ServiceModel.Configuration
             // user code can not capture.
             if (null == evaluationContext)
             {
-                Fx.Assert("ValidateEndpointReference() should only called with valid ContextInformation");
-                DiagnosticUtility.FailFast("ValidateEndpointReference() should only called with valid ContextInformation");
+                Fx.Assert(
+                    "ValidateEndpointReference() should only called with valid ContextInformation"
+                );
+                DiagnosticUtility.FailFast(
+                    "ValidateEndpointReference() should only called with valid ContextInformation"
+                );
             }
 
             if (!String.IsNullOrEmpty(endpoint))
@@ -220,31 +278,48 @@ namespace System.ServiceModel.Configuration
 
                 if (null != evaluationContext)
                 {
-                    endpointCollectionElement = ConfigurationHelpers.UnsafeGetAssociatedEndpointCollectionElement(evaluationContext, endpoint);
+                    endpointCollectionElement =
+                        ConfigurationHelpers.UnsafeGetAssociatedEndpointCollectionElement(
+                            evaluationContext,
+                            endpoint
+                        );
                 }
                 else
                 {
-                    endpointCollectionElement = ConfigurationHelpers.UnsafeGetEndpointCollectionElement(endpoint);
+                    endpointCollectionElement =
+                        ConfigurationHelpers.UnsafeGetEndpointCollectionElement(endpoint);
                 }
 
                 if (endpointCollectionElement == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidSection,
-                        ConfigurationHelpers.GetEndpointsSectionPath(endpoint)),
-                        configurationElement.ElementInformation.Source,
-                        configurationElement.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigInvalidSection,
+                                ConfigurationHelpers.GetEndpointsSectionPath(endpoint)
+                            ),
+                            configurationElement.ElementInformation.Source,
+                            configurationElement.ElementInformation.LineNumber
+                        )
+                    );
                 }
 
                 if (!String.IsNullOrEmpty(endpointConfiguration))
                 {
                     if (!endpointCollectionElement.ContainsKey(endpointConfiguration))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigInvalidEndpointName,
-                            endpointConfiguration,
-                            ConfigurationHelpers.GetEndpointsSectionPath(endpoint),
-                            ConfigurationStrings.EndpointConfiguration),
-                            configurationElement.ElementInformation.Source,
-                            configurationElement.ElementInformation.LineNumber));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigInvalidEndpointName,
+                                    endpointConfiguration,
+                                    ConfigurationHelpers.GetEndpointsSectionPath(endpoint),
+                                    ConfigurationStrings.EndpointConfiguration
+                                ),
+                                configurationElement.ElementInformation.Source,
+                                configurationElement.ElementInformation.LineNumber
+                            )
+                        );
                     }
                 }
             }
@@ -255,10 +330,14 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition."
+        )]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {
-            Fx.Assert("Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext");
+            Fx.Assert(
+                "Not implemented: IConfigurationContextProviderInternal.GetOriginalEvaluationContext"
+            );
             return null;
         }
     }

@@ -9,7 +9,7 @@ namespace System.IO.Compression
         ExplicitDirectory = 20,
         Deflate = 20,
         Deflate64 = 21,
-        Zip64 = 45
+        Zip64 = 45,
     }
 
     /// <summary>
@@ -24,6 +24,6 @@ namespace System.IO.Compression
     internal enum ZipVersionMadeByPlatform : byte
     {
         Windows = 0,
-        Unix = 3
+        Unix = 3,
     }
 }

@@ -13,18 +13,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 {
     internal static partial class TypeSyntaxExtensions
     {
-        public static bool IsPotentialTypeName([NotNullWhen(true)] this TypeSyntax? typeSyntax, SemanticModel? semanticModelOpt, CancellationToken cancellationToken)
+        public static bool IsPotentialTypeName(
+            [NotNullWhen(true)] this TypeSyntax? typeSyntax,
+            SemanticModel? semanticModelOpt,
+            CancellationToken cancellationToken
+        )
         {
             if (typeSyntax == null)
             {
                 return false;
             }
 
-            if (typeSyntax is PredefinedTypeSyntax or
-                ArrayTypeSyntax or
-                GenericNameSyntax or
-                PointerTypeSyntax or
-                NullableTypeSyntax)
+            if (
+                typeSyntax
+                is PredefinedTypeSyntax
+                    or ArrayTypeSyntax
+                    or GenericNameSyntax
+                    or PointerTypeSyntax
+                    or NullableTypeSyntax
+            )
             {
                 return true;
             }
@@ -44,12 +51,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             var symbols = semanticModelOpt.LookupName(nameToken, cancellationToken);
             var firstSymbol = symbols.FirstOrDefault();
 
-            var typeSymbol = firstSymbol != null && firstSymbol.Kind == SymbolKind.Alias
-                ? ((IAliasSymbol)firstSymbol).Target
-                : firstSymbol as ITypeSymbol;
+            var typeSymbol =
+                firstSymbol != null && firstSymbol.Kind == SymbolKind.Alias
+                    ? ((IAliasSymbol)firstSymbol).Target
+                    : firstSymbol as ITypeSymbol;
 
-            return typeSymbol != null
-                && !typeSymbol.IsErrorType();
+            return typeSymbol != null && !typeSymbol.IsErrorType();
         }
 
         public static TypeSyntax GenerateReturnTypeSyntax(this IMethodSymbol method)

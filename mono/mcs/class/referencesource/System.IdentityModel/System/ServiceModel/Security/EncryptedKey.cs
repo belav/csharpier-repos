@@ -8,12 +8,17 @@ namespace System.ServiceModel.Security
     using System.Runtime.CompilerServices;
     using System.Xml;
 
-    [TypeForwardedFrom("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     sealed class EncryptedKey : EncryptedType
     {
-        internal static readonly XmlDictionaryString CarriedKeyElementName = XD.XmlEncryptionDictionary.CarriedKeyName;
-        internal static readonly XmlDictionaryString ElementName = XD.XmlEncryptionDictionary.EncryptedKey;
-        internal static readonly XmlDictionaryString RecipientAttribute = XD.XmlEncryptionDictionary.Recipient;
+        internal static readonly XmlDictionaryString CarriedKeyElementName =
+            XD.XmlEncryptionDictionary.CarriedKeyName;
+        internal static readonly XmlDictionaryString ElementName =
+            XD.XmlEncryptionDictionary.EncryptedKey;
+        internal static readonly XmlDictionaryString RecipientAttribute =
+            XD.XmlEncryptionDictionary.Recipient;
 
         string carriedKeyName;
         string recipient;
@@ -52,7 +57,9 @@ namespace System.ServiceModel.Security
         {
             if (this.State == EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BadEncryptionState)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.BadEncryptionState))
+                );
             }
             return this.wrappedKey;
         }
@@ -61,7 +68,9 @@ namespace System.ServiceModel.Security
         {
             if (this.State != EncryptionState.New)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BadEncryptionState)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.BadEncryptionState))
+                );
             }
             if (wrappedKey == null)
             {
@@ -101,7 +110,10 @@ namespace System.ServiceModel.Security
             this.wrappedKey = SecurityUtils.ReadContentAsBase64(reader, maxBufferSize);
         }
 
-        protected override void WriteAdditionalAttributes(XmlDictionaryWriter writer, DictionaryManager dictionaryManager)
+        protected override void WriteAdditionalAttributes(
+            XmlDictionaryWriter writer,
+            DictionaryManager dictionaryManager
+        )
         {
             if (this.recipient != null)
             {
@@ -109,7 +121,10 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected override void WriteAdditionalElements(XmlDictionaryWriter writer, DictionaryManager dictionaryManager)
+        protected override void WriteAdditionalElements(
+            XmlDictionaryWriter writer,
+            DictionaryManager dictionaryManager
+        )
         {
             if (this.carriedKeyName != null)
             {

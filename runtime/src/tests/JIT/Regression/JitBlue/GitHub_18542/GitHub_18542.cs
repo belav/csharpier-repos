@@ -8,9 +8,7 @@ using Xunit;
 public class C
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public void M()
-    {
-    }
+    public void M() { }
 }
 
 public struct S1
@@ -18,6 +16,7 @@ public struct S1
     private C _c;
 
     public S1(C c) => _c = c;
+
     public void M() => _c.M();
 }
 
@@ -26,6 +25,7 @@ public struct S2
     private S1 _s;
 
     public S2(S1 s) => _s = s;
+
     public void M() => _s.M();
 }
 
@@ -34,6 +34,7 @@ public struct S3
     private S2 _s;
 
     public S3(S2 s) => _s = s;
+
     public void M() => _s.M();
 }
 
@@ -42,6 +43,7 @@ public struct S4
     private S3 _s;
 
     public S4(S3 s) => _s = s;
+
     public void M() => _s.M();
 }
 
@@ -50,6 +52,7 @@ public struct S5
     private S4 _s;
 
     public S5(S4 s) => _s = s;
+
     public void M() => _s.M();
 }
 

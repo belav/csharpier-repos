@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 #if REGISTRY_ASSEMBLY
 using Microsoft.Win32.SafeHandles;
 #else
@@ -14,10 +13,15 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Libraries.Advapi32, EntryPoint = "RegConnectRegistryW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Advapi32,
+            EntryPoint = "RegConnectRegistryW",
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int RegConnectRegistry(
             string machineName,
             IntPtr key,
-            out SafeRegistryHandle result);
+            out SafeRegistryHandle result
+        );
     }
 }

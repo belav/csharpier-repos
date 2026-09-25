@@ -16,10 +16,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests
         }
 
         protected AbstractWebApplicationTest(string solutionName)
-            : base(solutionName,
-                  projectTemplate: WellKnownProjectTemplates.Blazor,
-                  templateGroupId: GroupIds.Server)
-        {
-        }
+            : base(
+                solutionName,
+                projectTemplate: WellKnownProjectTemplates.Blazor,
+                templateGroupId: GroupIds.Server
+            ) { }
     }
 }

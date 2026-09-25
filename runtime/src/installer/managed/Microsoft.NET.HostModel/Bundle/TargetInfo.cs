@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.NET.HostModel.AppHost;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using Microsoft.NET.HostModel.AppHost;
 
 namespace Microsoft.NET.HostModel.Bundle
 {
@@ -19,7 +19,6 @@ namespace Microsoft.NET.HostModel.Bundle
     ///   - the default options for this target
     ///   - the assembly alignment for this target
     /// </summary>
-
     public class TargetInfo
     {
         public readonly OSPlatform OS;
@@ -52,7 +51,9 @@ namespace Microsoft.NET.HostModel.Bundle
             }
             else
             {
-                throw new ArgumentException($"Invalid input: Unsupported Target Framework Version {targetFrameworkVersion}");
+                throw new ArgumentException(
+                    $"Invalid input: Unsupported Target Framework Version {targetFrameworkVersion}"
+                );
             }
 
             if (IsWindows)
@@ -77,7 +78,9 @@ namespace Microsoft.NET.HostModel.Bundle
 
         public bool IsNativeBinary(string filePath)
         {
-            return IsWindows ? PEUtils.IsPEImage(filePath) : IsOSX ? MachOUtils.IsMachOImage(filePath) : ElfUtils.IsElfImage(filePath);
+            return IsWindows ? PEUtils.IsPEImage(filePath)
+                : IsOSX ? MachOUtils.IsMachOImage(filePath)
+                : ElfUtils.IsElfImage(filePath);
         }
 
         public string GetAssemblyName(string hostName)
@@ -96,15 +99,19 @@ namespace Microsoft.NET.HostModel.Bundle
 
         private static readonly OSPlatform s_freebsdOSPlatform = OSPlatform.Create("FREEBSD");
 
-        private static OSPlatform HostOS => RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? OSPlatform.Linux :
-                                    RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? OSPlatform.OSX : RuntimeInformation.IsOSPlatform(s_freebsdOSPlatform) ? s_freebsdOSPlatform : OSPlatform.Windows;
+        private static OSPlatform HostOS =>
+            RuntimeInformation.IsOSPlatform(OSPlatform.Linux) ? OSPlatform.Linux
+            : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? OSPlatform.OSX
+            : RuntimeInformation.IsOSPlatform(s_freebsdOSPlatform) ? s_freebsdOSPlatform
+            : OSPlatform.Windows;
 
         public bool IsOSX => OS.Equals(OSPlatform.OSX);
         public bool IsWindows => OS.Equals(OSPlatform.Windows);
 
         // The .net core 3 apphost doesn't care about semantics of FileType -- all files are extracted at startup.
         // However, the apphost checks that the FileType value is within expected bounds, so set it to the first enumeration.
-        public FileType TargetSpecificFileType(FileType fileType) => (BundleMajorVersion == 1) ? FileType.Unknown : fileType;
+        public FileType TargetSpecificFileType(FileType fileType) =>
+            (BundleMajorVersion == 1) ? FileType.Unknown : fileType;
 
         // In .net core 3.x, bundle processing happens within the AppHost.
         // Therefore HostFxr and HostPolicy can be bundled within the single-file app.
@@ -113,9 +120,16 @@ namespace Microsoft.NET.HostModel.Bundle
         // This problem is mitigated by statically linking these host components with the AppHost.
         // https://github.com/dotnet/runtime/issues/32823
         public bool ShouldExclude(string relativePath) =>
-            (FrameworkVersion.Major != 3) && (relativePath.Equals(HostFxr) || relativePath.Equals(HostPolicy));
+            (FrameworkVersion.Major != 3)
+            && (relativePath.Equals(HostFxr) || relativePath.Equals(HostPolicy));
 
-        private string HostFxr => IsWindows ? "hostfxr.dll" : IsOSX ? "libhostfxr.dylib" : "libhostfxr.so";
-        private string HostPolicy => IsWindows ? "hostpolicy.dll" : IsOSX ? "libhostpolicy.dylib" : "libhostpolicy.so";
+        private string HostFxr =>
+            IsWindows ? "hostfxr.dll"
+            : IsOSX ? "libhostfxr.dylib"
+            : "libhostfxr.so";
+        private string HostPolicy =>
+            IsWindows ? "hostpolicy.dll"
+            : IsOSX ? "libhostpolicy.dylib"
+            : "libhostpolicy.so";
     }
 }

@@ -4,15 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI {
-
+namespace System.Web.UI
+{
     using System;
     using System.Diagnostics.CodeAnalysis;
 
-
     [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase")]
-    public enum ClientIDMode {
-
+    public enum ClientIDMode
+    {
         Inherit = 0,
 
         [SuppressMessage("Microsoft.Naming", "CA1706:ShortAcronymsShouldBeUppercase")]

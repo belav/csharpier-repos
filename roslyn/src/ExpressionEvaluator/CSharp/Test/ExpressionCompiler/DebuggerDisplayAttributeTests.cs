@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator.UnitTests
         public void FieldsAndProperties()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerDisplay(""{F}, {G}, {P}, {Q}"")]
 class C
 {
@@ -41,41 +41,45 @@ class C
                 // Static field.
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     CompileExpression(context, "F"),
-    @"{
+                    @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  ldsfld     ""object C.F""
   IL_0005:  ret
-}");
+}"
+                );
                 // Instance field.
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     CompileExpression(context, "G"),
-    @"{
+                    @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  ldfld      ""int C.G""
   IL_0006:  ret
-}");
+}"
+                );
                 // Static property.
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     CompileExpression(context, "P"),
-    @"{
+                    @"{
   // Code size        6 (0x6)
   .maxstack  1
   IL_0000:  call       ""int C.P.get""
   IL_0005:  ret
-}");
+}"
+                );
                 // Instance property.
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     CompileExpression(context, "Q"),
-    @"{
+                    @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  callvirt   ""object C.Q.get""
   IL_0006:  ret
-}");
+}"
+                );
             });
         }
 
@@ -83,27 +87,32 @@ class C
         public void Constants()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerDisplay(""{F[G]}"")]
 class C
 {
     const string F = ""str"";
     const int G = 2;
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "C");
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     CompileExpression(context, "F[G]"),
-    @"{
+                    @"{
   // Code size       12 (0xc)
   .maxstack  2
   IL_0000:  ldstr      ""str""
   IL_0005:  ldc.i4.2
   IL_0006:  call       ""char string.this[int].get""
   IL_000b:  ret
-}");
+}"
+                );
             });
         }
 
@@ -111,7 +120,7 @@ class C
         public void This()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerDisplay(""{F(this)}"")]
 class C
 {
@@ -120,19 +129,24 @@ class C
         return c;
     }
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "C");
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     CompileExpression(context, "F(this)"),
-    @"{
+                    @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""object C.F(C)""
   IL_0006:  ret
-}");
+}"
+                );
             });
         }
 
@@ -140,7 +154,7 @@ class C
         public void Base()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 class A
 {
     internal object F()
@@ -156,19 +170,24 @@ class B : A
         return 2;
     }
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "B");
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     CompileExpression(context, "base.F()"),
-    @"{
+                    @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0
   IL_0001:  call       ""object A.F()""
   IL_0006:  ret
-}");
+}"
+                );
             });
         }
 
@@ -176,7 +195,7 @@ class B : A
         public void GenericType()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 class A<T> where T : class
 {
     [DebuggerDisplay(""{F(default(T), default(U))}"")]
@@ -188,17 +207,25 @@ class A<T> where T : class
         }
     }
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "A.B");
                 string error;
                 var testData = new CompilationTestData();
-                var result = context.CompileExpression("F(default(T), default(U))", out error, testData);
+                var result = context.CompileExpression(
+                    "F(default(T), default(U))",
+                    out error,
+                    testData
+                );
                 string actualIL = testData.GetMethodData("<>x<T, U>.<>m0").GetMethodIL();
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     actualIL,
-    @"{
+                    @"{
   // Code size       24 (0x18)
   .maxstack  2
   .locals init (T V_0,
@@ -211,9 +238,14 @@ class A<T> where T : class
   IL_0011:  ldloc.1
   IL_0012:  call       ""object A<T>.B<U>.F<T, U>(T, U)""
   IL_0017:  ret
-}");
+}"
+                );
                 // Verify generated type is generic, but method is not.
-                using (var metadata = ModuleMetadata.CreateFromImage(ImmutableArray.CreateRange(result.Assembly)))
+                using (
+                    var metadata = ModuleMetadata.CreateFromImage(
+                        ImmutableArray.CreateRange(result.Assembly)
+                    )
+                )
                 {
                     var reader = metadata.MetadataReader;
                     var typeDef = reader.GetTypeDef(result.TypeName);
@@ -228,7 +260,7 @@ class A<T> where T : class
         public void Usings()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 using A = N;
 using B = N.C;
 namespace N
@@ -241,18 +273,26 @@ namespace N
         }
     }
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "N.C");
                 string error;
                 var testData = new CompilationTestData();
                 // Expression compilation should succeed without imports.
-                var result = context.CompileExpression("typeof(N.C) ?? typeof(C)", out error, testData);
+                var result = context.CompileExpression(
+                    "typeof(N.C) ?? typeof(C)",
+                    out error,
+                    testData
+                );
                 Assert.Null(error);
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
                     testData.GetMethodData("<>x.<>m0").GetMethodIL(),
-    @"{
+                    @"{
   // Code size       25 (0x19)
   .maxstack  2
   IL_0000:  ldtoken    ""N.C""
@@ -263,15 +303,26 @@ namespace N
   IL_000e:  ldtoken    ""N.C""
   IL_0013:  call       ""System.Type System.Type.GetTypeFromHandle(System.RuntimeTypeHandle)""
   IL_0018:  ret
-}");
+}"
+                );
                 // Expression compilation should fail using imports since there are no symbols.
                 context = CreateTypeContext(runtime, "N.C");
                 testData = new CompilationTestData();
-                result = context.CompileExpression("typeof(A.C) ?? typeof(B) ?? typeof(C)", out error, testData);
-                Assert.Equal("error CS0246: The type or namespace name 'A' could not be found (are you missing a using directive or an assembly reference?)", error);
+                result = context.CompileExpression(
+                    "typeof(A.C) ?? typeof(B) ?? typeof(C)",
+                    out error,
+                    testData
+                );
+                Assert.Equal(
+                    "error CS0246: The type or namespace name 'A' could not be found (are you missing a using directive or an assembly reference?)",
+                    error
+                );
                 testData = new CompilationTestData();
                 result = context.CompileExpression("typeof(B) ?? typeof(C)", out error, testData);
-                Assert.Equal("error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)", error);
+                Assert.Equal(
+                    "error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)",
+                    error
+                );
             });
         }
 
@@ -279,7 +330,7 @@ namespace N
         public void Usings2()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 using A = int;
 using B = (int, int);
 using C = int[];
@@ -293,31 +344,56 @@ namespace N
         }
     }
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             compilation0.VerifyDiagnostics(
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using A = int;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A = int;").WithLocation(2, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A = int;")
+                    .WithLocation(2, 1),
                 // (3,1): hidden CS8019: Unnecessary using directive.
                 // using B = (int, int);
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using B = (int, int);").WithLocation(3, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using B = (int, int);")
+                    .WithLocation(3, 1),
                 // (4,1): hidden CS8019: Unnecessary using directive.
                 // using C = int[];
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using C = int[];").WithLocation(4, 1));
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using C = int[];")
+                    .WithLocation(4, 1)
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "N.D");
                 string error;
                 var testData = new CompilationTestData();
                 // Expression compilation should fail using imports since there are no symbols.
-                var result = context.CompileExpression("typeof(A) ?? typeof(B)", out error, testData);
-                Assert.Equal("error CS0246: The type or namespace name 'A' could not be found (are you missing a using directive or an assembly reference?)", error);
+                var result = context.CompileExpression(
+                    "typeof(A) ?? typeof(B)",
+                    out error,
+                    testData
+                );
+                Assert.Equal(
+                    "error CS0246: The type or namespace name 'A' could not be found (are you missing a using directive or an assembly reference?)",
+                    error
+                );
                 testData = new CompilationTestData();
-                result = context.CompileExpression("typeof(A) ?? typeof(B) ?? typeof(C)", out error, testData);
-                Assert.Equal("error CS0246: The type or namespace name 'A' could not be found (are you missing a using directive or an assembly reference?)", error);
+                result = context.CompileExpression(
+                    "typeof(A) ?? typeof(B) ?? typeof(C)",
+                    out error,
+                    testData
+                );
+                Assert.Equal(
+                    "error CS0246: The type or namespace name 'A' could not be found (are you missing a using directive or an assembly reference?)",
+                    error
+                );
                 testData = new CompilationTestData();
                 result = context.CompileExpression("typeof(B) ?? typeof(C)", out error, testData);
-                Assert.Equal("error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)", error);
+                Assert.Equal(
+                    "error CS0246: The type or namespace name 'B' could not be found (are you missing a using directive or an assembly reference?)",
+                    error
+                );
             });
         }
 
@@ -325,19 +401,26 @@ namespace N
         public void PseudoVariable()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerDisplay(""{$ReturnValue}"")]
 class C
 {
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "C");
                 string error;
                 var testData = new CompilationTestData();
                 var result = context.CompileExpression("$ReturnValue", out error, testData);
-                Assert.Equal("error CS0103: The name '$ReturnValue' does not exist in the current context", error);
+                Assert.Equal(
+                    "error CS0103: The name '$ReturnValue' does not exist in the current context",
+                    error
+                );
             });
         }
 
@@ -345,7 +428,7 @@ class C
         public void LambdaClosedOverThis()
         {
             var source =
-@"class C
+                @"class C
 {
     object o;
     static object F(System.Func<object> f)
@@ -353,12 +436,16 @@ class C
         return f();
     }
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "C");
                 AssertEx.AssertEqualToleratingWhitespaceDifferences(
-    @"{
+                    @"{
   // Code size       29 (0x1d)
   .maxstack  3
   IL_0000:  newobj     ""<>x.<>c__DisplayClass0_0..ctor()""
@@ -370,7 +457,8 @@ class C
   IL_0017:  call       ""object C.F(System.Func<object>)""
   IL_001c:  ret
 }",
-                CompileExpression(context, "F(() => this.o)"));
+                    CompileExpression(context, "F(() => this.o)")
+                );
             });
         }
 
@@ -378,13 +466,17 @@ class C
         public void FormatSpecifiers()
         {
             var source =
-@"using System.Diagnostics;
+                @"using System.Diagnostics;
 [DebuggerDisplay(""{F, nq}, {F}"")]
 class C
 {
     object F = ""f"";
 }";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "C");
@@ -405,7 +497,8 @@ class C
         [Fact]
         public void VirtualMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Diagnostics;
 
 [DebuggerDisplay(""{GetDebuggerDisplay()}"")]
@@ -425,7 +518,11 @@ public class Derived : Base
     }
 }
 ";
-            var compilation0 = CreateCompilation(source, options: TestOptions.DebugDll, assemblyName: ExpressionCompilerUtilities.GenerateUniqueName());
+            var compilation0 = CreateCompilation(
+                source,
+                options: TestOptions.DebugDll,
+                assemblyName: ExpressionCompilerUtilities.GenerateUniqueName()
+            );
             WithRuntimeInstance(compilation0, runtime =>
             {
                 var context = CreateTypeContext(runtime, "Derived");
@@ -435,7 +532,7 @@ public class Derived : Base
                 Assert.Null(error);
                 var actualIL = testData.GetMethodData("<>x.<>m0").GetMethodIL();
                 var expectedIL =
-    @"{
+                    @"{
   // Code size        7 (0x7)
   .maxstack  1
   IL_0000:  ldarg.0

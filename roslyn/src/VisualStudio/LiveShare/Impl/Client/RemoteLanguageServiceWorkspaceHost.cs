@@ -28,18 +28,24 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
     /// Remote language service workspace host
     /// </summary>
     [Export(typeof(RemoteLanguageServiceWorkspaceHost))]
-    [ExportCollaborationService(typeof(RemoteLanguageServiceSession),
-                                Scope = SessionScope.Guest,
-                                Role = ServiceRole.LocalService,
-                                Features = "LspServices",
-                                CreationPriority = (int)ServiceRole.LocalService + 2100)]
-
+    [ExportCollaborationService(
+        typeof(RemoteLanguageServiceSession),
+        Scope = SessionScope.Guest,
+        Role = ServiceRole.LocalService,
+        Features = "LspServices",
+        CreationPriority = (int)ServiceRole.LocalService + 2100
+    )]
     internal sealed class RemoteLanguageServiceWorkspaceHost : ICollaborationServiceFactory
     {
         // A collection of loaded Roslyn Project IDs, indexed by project path.
-        private ImmutableDictionary<string, ProjectId> _loadedProjects = ImmutableDictionary.Create<string, ProjectId>(StringComparer.OrdinalIgnoreCase);
-        private ImmutableDictionary<string, ProjectInfo> _loadedProjectInfo = ImmutableDictionary.Create<string, ProjectInfo>(StringComparer.OrdinalIgnoreCase);
-        private TaskCompletionSource<bool> _projectsLoadedTaskCompletionSource = new TaskCompletionSource<bool>();
+        private ImmutableDictionary<string, ProjectId> _loadedProjects = ImmutableDictionary.Create<
+            string,
+            ProjectId
+        >(StringComparer.OrdinalIgnoreCase);
+        private ImmutableDictionary<string, ProjectInfo> _loadedProjectInfo =
+            ImmutableDictionary.Create<string, ProjectInfo>(StringComparer.OrdinalIgnoreCase);
+        private TaskCompletionSource<bool> _projectsLoadedTaskCompletionSource =
+            new TaskCompletionSource<bool>();
         private readonly RemoteLanguageServiceWorkspace _remoteLanguageServiceWorkspace;
         private readonly RemoteProjectInfoProvider _remoteProjectInfoProvider;
 
@@ -54,22 +60,36 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         /// <param name="remoteLanguageServiceWorkspace">The workspace</param>
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteLanguageServiceWorkspaceHost(RemoteLanguageServiceWorkspace remoteLanguageServiceWorkspace,
-                                                  RemoteProjectInfoProvider remoteProjectInfoProvider,
-                                                  SVsServiceProvider serviceProvider,
-                                                  IThreadingContext threadingContext)
+        public RemoteLanguageServiceWorkspaceHost(
+            RemoteLanguageServiceWorkspace remoteLanguageServiceWorkspace,
+            RemoteProjectInfoProvider remoteProjectInfoProvider,
+            SVsServiceProvider serviceProvider,
+            IThreadingContext threadingContext
+        )
         {
-            _remoteLanguageServiceWorkspace = Requires.NotNull(remoteLanguageServiceWorkspace, nameof(remoteLanguageServiceWorkspace));
-            _remoteProjectInfoProvider = Requires.NotNull(remoteProjectInfoProvider, nameof(remoteProjectInfoProvider));
-            _serviceProvider = serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
+            _remoteLanguageServiceWorkspace = Requires.NotNull(
+                remoteLanguageServiceWorkspace,
+                nameof(remoteLanguageServiceWorkspace)
+            );
+            _remoteProjectInfoProvider = Requires.NotNull(
+                remoteProjectInfoProvider,
+                nameof(remoteProjectInfoProvider)
+            );
+            _serviceProvider =
+                serviceProvider ?? throw new ArgumentNullException(nameof(serviceProvider));
             _threadingContext = Requires.NotNull(threadingContext, nameof(threadingContext));
         }
 
-        public async Task<ICollaborationService> CreateServiceAsync(CollaborationSession collaborationSession, CancellationToken cancellationToken)
+        public async Task<ICollaborationService> CreateServiceAsync(
+            CollaborationSession collaborationSession,
+            CancellationToken cancellationToken
+        )
         {
             await LoadRoslynPackageAsync(cancellationToken).ConfigureAwait(false);
 
-            await _remoteLanguageServiceWorkspace.SetSessionAsync(collaborationSession).ConfigureAwait(false);
+            await _remoteLanguageServiceWorkspace
+                .SetSessionAsync(collaborationSession)
+                .ConfigureAwait(false);
 
             // Kick off loading the projects in the background.
             // Clients can call EnsureProjectsLoadedAsync to await completion.
@@ -92,10 +112,12 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         /// </summary>
         public async Task EnsureProjectsLoadedAsync(CancellationToken cancellationToken)
         {
-            using (var token = cancellationToken.Register(() =>
-            {
-                _projectsLoadedTaskCompletionSource.SetCanceled();
-            }))
+            using (
+                var token = cancellationToken.Register(() =>
+                {
+                    _projectsLoadedTaskCompletionSource.SetCanceled();
+                })
+            )
             {
                 await _projectsLoadedTaskCompletionSource.Task.ConfigureAwait(false);
             }
@@ -119,7 +141,9 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         {
             try
             {
-                var projectInfos = await _remoteProjectInfoProvider.GetRemoteProjectInfosAsync(cancellationToken).ConfigureAwait(false);
+                var projectInfos = await _remoteProjectInfoProvider
+                    .GetRemoteProjectInfosAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 foreach (var projectInfo in projectInfos)
                 {
                     var projectName = projectInfo.Name;
@@ -168,8 +192,7 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client
         {
             public event EventHandler Disposed;
 
-            public void Dispose()
-                => Disposed?.Invoke(this, null);
+            public void Dispose() => Disposed?.Invoke(this, null);
         }
     }
 }

@@ -1,7 +1,7 @@
 #region Using Directives
 using System;
-using System.Resources;
 using System.Drawing;
+using System.Resources;
 using System.Workflow.ComponentModel.Design;
 #endregion
 
@@ -12,7 +12,10 @@ namespace System.Workflow.Activities
     {
         internal static Color TransparentColor = Color.FromArgb(255, 0, 255);
         internal const string ResourceSet = "System.Workflow.Activities.ActivityDesignerResources";
-        private static ResourceManager resourceManager = new ResourceManager(ResourceSet, System.Reflection.Assembly.GetExecutingAssembly());
+        private static ResourceManager resourceManager = new ResourceManager(
+            ResourceSet,
+            System.Reflection.Assembly.GetExecutingAssembly()
+        );
 
         internal const string DropActivityHere = "DropActivityHere";
         internal const string MoveLeftDesc = "MoveLeftDesc";

@@ -15,21 +15,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
     internal class StaticMemberSelectionViewModel : AbstractNotifyPropertyChanged
     {
         private readonly IUIThreadOperationExecutor _uiThreadOperationExecutor;
-        private readonly ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> _symbolToDependentsMap;
-        private readonly ImmutableDictionary<ISymbol, SymbolViewModel<ISymbol>> _symbolToMemberViewMap;
+        private readonly ImmutableDictionary<
+            ISymbol,
+            Task<ImmutableArray<ISymbol>>
+        > _symbolToDependentsMap;
+        private readonly ImmutableDictionary<
+            ISymbol,
+            SymbolViewModel<ISymbol>
+        > _symbolToMemberViewMap;
 
         public StaticMemberSelectionViewModel(
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             ImmutableArray<SymbolViewModel<ISymbol>> members,
-            ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> dependentsMap)
+            ImmutableDictionary<ISymbol, Task<ImmutableArray<ISymbol>>> dependentsMap
+        )
         {
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
             _members = members;
             _symbolToDependentsMap = dependentsMap;
-            _symbolToMemberViewMap = members.ToImmutableDictionary(memberViewModel => memberViewModel.Symbol);
+            _symbolToMemberViewMap = members.ToImmutableDictionary(memberViewModel =>
+                memberViewModel.Symbol
+            );
         }
 
-        public ImmutableArray<SymbolViewModel<ISymbol>> CheckedMembers => Members.WhereAsArray(m => m.IsChecked);
+        public ImmutableArray<SymbolViewModel<ISymbol>> CheckedMembers =>
+            Members.WhereAsArray(m => m.IsChecked);
 
         private ImmutableArray<SymbolViewModel<ISymbol>> _members;
         public ImmutableArray<SymbolViewModel<ISymbol>> Members
@@ -38,16 +48,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             set => SetProperty(ref _members, value);
         }
 
-        public void SelectAll()
-            => SelectMembers(Members);
+        public void SelectAll() => SelectMembers(Members);
 
-        internal void DeselectAll()
-            => SelectMembers(Members, isChecked: false);
+        internal void DeselectAll() => SelectMembers(Members, isChecked: false);
 
         public void SelectDependents()
         {
-            var checkedMembers = Members
-                .WhereAsArray(member => member.IsChecked);
+            var checkedMembers = Members.WhereAsArray(member => member.IsChecked);
 
             var result = _uiThreadOperationExecutor.Execute(
                 title: ServicesVSResources.Move_static_members_to_another_type_colon,
@@ -60,19 +67,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
                     {
                         _symbolToDependentsMap[member.Symbol].Wait(context.UserCancellationToken);
                     }
-                });
+                }
+            );
 
             if (result == UIThreadOperationStatus.Completed)
             {
                 foreach (var member in checkedMembers)
                 {
-                    var membersToSelected = FindDependents(member.Symbol).SelectAsArray(symbol => _symbolToMemberViewMap[symbol]);
+                    var membersToSelected = FindDependents(member.Symbol)
+                        .SelectAsArray(symbol => _symbolToMemberViewMap[symbol]);
                     SelectMembers(membersToSelected);
                 }
             }
         }
 
-        private static void SelectMembers(ImmutableArray<SymbolViewModel<ISymbol>> members, bool isChecked = true)
+        private static void SelectMembers(
+            ImmutableArray<SymbolViewModel<ISymbol>> members,
+            bool isChecked = true
+        )
         {
             foreach (var member in members)
             {
@@ -83,7 +95,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
         private ImmutableHashSet<ISymbol> FindDependents(ISymbol member)
         {
             var queue = new Queue<ISymbol>();
-            // Under situation like two methods call each other, this hashset is used to 
+            // Under situation like two methods call each other, this hashset is used to
             // prevent the infinity loop.
             var visited = new HashSet<ISymbol>();
             var result = new HashSet<ISymbol>();

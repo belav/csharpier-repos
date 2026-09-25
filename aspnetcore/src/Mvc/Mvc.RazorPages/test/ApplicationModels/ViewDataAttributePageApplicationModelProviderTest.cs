@@ -38,13 +38,11 @@ public class ViewDataAttributePageApplicationModelProviderTest
         // Assert
         var filter = Assert.Single(context.PageApplicationModel.Filters);
         var viewDataFilter = Assert.IsType<PageViewDataAttributeFilterFactory>(filter);
-        Assert.Collection(
-            viewDataFilter.Properties,
-            property =>
-                Assert.Equal(
-                    nameof(TestPageModel_ViewDataProperties.DateTime),
-                    property.PropertyInfo.Name
-                )
+        Assert.Collection(viewDataFilter.Properties, property =>
+            Assert.Equal(
+                nameof(TestPageModel_ViewDataProperties.DateTime),
+                property.PropertyInfo.Name
+            )
         );
     }
 

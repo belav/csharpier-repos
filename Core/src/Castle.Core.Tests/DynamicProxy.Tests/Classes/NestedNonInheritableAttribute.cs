@@ -14,16 +14,14 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public partial class Nested
-	{
+    public partial class Nested
+    {
 #if FEATURE_SERIALIZATION
-			[Serializable]
+        [Serializable]
 #endif
-			[AttributeUsage(AttributeTargets.All, Inherited = false)]
-			public class NonInheritableAttribute : Attribute
-			{
-			}
-	}
+        [AttributeUsage(AttributeTargets.All, Inherited = false)]
+        public class NonInheritableAttribute : Attribute { }
+    }
 }

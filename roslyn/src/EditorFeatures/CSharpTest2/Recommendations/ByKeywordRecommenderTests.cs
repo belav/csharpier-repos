@@ -14,18 +14,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestNotAtRoot()
         {
-            await VerifyAbsenceAsync(
-@"$$", options: CSharp9ParseOptions);
+            await VerifyAbsenceAsync(@"$$", options: CSharp9ParseOptions);
         }
 
         [Fact]
         public async Task TestNotAfterClass_Interactive()
         {
-            await VerifyAbsenceAsync(SourceCodeKind.Script,
+            await VerifyAbsenceAsync(
+                SourceCodeKind.Script,
                 """
                 class C { }
                 $$
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -35,7 +36,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 System.Console.WriteLine();
                 $$
-                """, options: CSharp9ParseOptions);
+                """,
+                options: CSharp9ParseOptions
+            );
         }
 
         [Fact]
@@ -45,62 +48,79 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                 """
                 int i = 0;
                 $$
-                """, options: CSharp9ParseOptions);
+                """,
+                options: CSharp9ParseOptions
+            );
         }
 
         [Fact]
         public async Task TestNotInUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"using Goo = $$");
+            await VerifyAbsenceAsync(@"using Goo = $$");
         }
 
         [Fact]
         public async Task TestNotInGlobalUsingAlias()
         {
-            await VerifyAbsenceAsync(
-@"global using Goo = $$");
+            await VerifyAbsenceAsync(@"global using Goo = $$");
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotInEmptyStatement(bool topLevelStatement)
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"$$", topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyAbsenceAsync(
+                AddInsideMethod(@"$$", topLevelStatement: topLevelStatement),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestAfterGroupExpr(bool topLevelStatement)
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-                """
-                var q = from x in y
-                          group a $$
-                """, topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyKeywordAsync(
+                AddInsideMethod(
+                    """
+                    var q = from x in y
+                              group a $$
+                    """,
+                    topLevelStatement: topLevelStatement
+                ),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotAfterGroup(bool topLevelStatement)
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var q = from x in y
-                          group $$
-                """, topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                    var q = from x in y
+                              group $$
+                    """,
+                    topLevelStatement: topLevelStatement
+                ),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Theory]
         [CombinatorialData]
         public async Task TestNotAfterBy(bool topLevelStatement)
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-                """
-                var q = from x in y
-                          group a by $$
-                """, topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyAbsenceAsync(
+                AddInsideMethod(
+                    """
+                    var q = from x in y
+                              group a by $$
+                    """,
+                    topLevelStatement: topLevelStatement
+                ),
+                options: CSharp9ParseOptions
+            );
         }
     }
 }

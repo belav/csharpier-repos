@@ -23,11 +23,11 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Globalization;
+using System.Reflection;
+using Newtonsoft.Json.Serialization;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
@@ -77,7 +77,11 @@ namespace Newtonsoft.Json.Utilities
             return Create(t, null, memberNames);
         }
 
-        public static ReflectionObject Create(Type t, MethodBase? creator, params string[] memberNames)
+        public static ReflectionObject Create(
+            Type t,
+            MethodBase? creator,
+            params string[] memberNames
+        )
         {
             ReflectionDelegateFactory delegateFactory = JsonTypeReflector.ReflectionDelegateFactory;
 
@@ -100,10 +104,18 @@ namespace Newtonsoft.Json.Utilities
 
             foreach (string memberName in memberNames)
             {
-                MemberInfo[] members = t.GetMember(memberName, BindingFlags.Instance | BindingFlags.Public);
+                MemberInfo[] members = t.GetMember(
+                    memberName,
+                    BindingFlags.Instance | BindingFlags.Public
+                );
                 if (members.Length != 1)
                 {
-                    throw new ArgumentException("Expected a single member with the name '{0}'.".FormatWith(CultureInfo.InvariantCulture, memberName));
+                    throw new ArgumentException(
+                        "Expected a single member with the name '{0}'.".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            memberName
+                        )
+                    );
                 }
 
                 MemberInfo member = members.Single();
@@ -131,18 +143,26 @@ namespace Newtonsoft.Json.Utilities
                             ParameterInfo[] parameters = method.GetParameters();
                             if (parameters.Length == 0 && method.ReturnType != typeof(void))
                             {
-                                MethodCall<object, object?> call = delegateFactory.CreateMethodCall<object>(method);
+                                MethodCall<object, object?> call =
+                                    delegateFactory.CreateMethodCall<object>(method);
                                 reflectionMember.Getter = target => call(target);
                             }
                             else if (parameters.Length == 1 && method.ReturnType == typeof(void))
                             {
-                                MethodCall<object, object?> call = delegateFactory.CreateMethodCall<object>(method);
+                                MethodCall<object, object?> call =
+                                    delegateFactory.CreateMethodCall<object>(method);
                                 reflectionMember.Setter = (target, arg) => call(target, arg);
                             }
                         }
                         break;
                     default:
-                        throw new ArgumentException("Unexpected member type '{0}' for member '{1}'.".FormatWith(CultureInfo.InvariantCulture, member.MemberType(), member.Name));
+                        throw new ArgumentException(
+                            "Unexpected member type '{0}' for member '{1}'.".FormatWith(
+                                CultureInfo.InvariantCulture,
+                                member.MemberType(),
+                                member.Name
+                            )
+                        );
                 }
 
                 reflectionMember.MemberType = ReflectionUtils.GetMemberUnderlyingType(member);

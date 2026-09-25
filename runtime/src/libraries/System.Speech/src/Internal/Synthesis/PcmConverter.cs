@@ -23,7 +23,16 @@ namespace System.Speech.Internal.Synthesis
         {
             bool convert = true;
             // Check if we can deal with the format
-            if (!(inWavFormat.nSamplesPerSec > 0 && inWavFormat.nChannels <= 2 && inWavFormat.nChannels > 0 && outWavFormat.nChannels > 0 && outWavFormat.nSamplesPerSec > 0 && outWavFormat.nChannels <= 2))
+            if (
+                !(
+                    inWavFormat.nSamplesPerSec > 0
+                    && inWavFormat.nChannels <= 2
+                    && inWavFormat.nChannels > 0
+                    && outWavFormat.nChannels > 0
+                    && outWavFormat.nSamplesPerSec > 0
+                    && outWavFormat.nChannels <= 2
+                )
+            )
             {
                 throw new FormatException();
             }
@@ -36,7 +45,11 @@ namespace System.Speech.Internal.Synthesis
             }
 
             // Check if Format in == Format out
-            if (outWavFormat.nSamplesPerSec == inWavFormat.nSamplesPerSec && _iOutFormatType == _iInFormatType && outWavFormat.nChannels == inWavFormat.nChannels)
+            if (
+                outWavFormat.nSamplesPerSec == inWavFormat.nSamplesPerSec
+                && _iOutFormatType == _iInFormatType
+                && outWavFormat.nChannels == inWavFormat.nChannels
+            )
             {
                 convert = false;
             }
@@ -72,14 +85,17 @@ namespace System.Speech.Internal.Synthesis
             short[] pnBuff = null;
 
             //--- Convert samples to VAPI_PCM16
-            short[] inSamples = AudioFormatConverter.Convert(pvInSamples, _iInFormatType, AudioCodec.PCM16);
+            short[] inSamples = AudioFormatConverter.Convert(
+                pvInSamples,
+                _iInFormatType,
+                AudioCodec.PCM16
+            );
 
             //--- case 1
             if (_inWavFormat.nChannels == 2 && _outWavFormat.nChannels == 1)
             {
                 pnBuff = Resample(_inWavFormat, _outWavFormat, Stereo2Mono(inSamples), _leftMemory);
             }
-
             //--- case 2
             else if (_inWavFormat.nChannels == 1 && _outWavFormat.nChannels == 2)
             {
@@ -95,7 +111,10 @@ namespace System.Speech.Internal.Synthesis
                     short[] leftChannel;
                     short[] rightChannel;
                     SplitStereo(inSamples, out leftChannel, out rightChannel);
-                    pnBuff = MergeStereo(Resample(_inWavFormat, _outWavFormat, leftChannel, _leftMemory), Resample(_inWavFormat, _outWavFormat, rightChannel, _rightMemory));
+                    pnBuff = MergeStereo(
+                        Resample(_inWavFormat, _outWavFormat, leftChannel, _leftMemory),
+                        Resample(_inWavFormat, _outWavFormat, rightChannel, _rightMemory)
+                    );
                 }
                 else
                 {
@@ -121,7 +140,12 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// Convert the data from one sample rate to an another
         /// </summary>
-        private short[] Resample(WAVEFORMATEX inWavFormat, WAVEFORMATEX outWavFormat, short[] pnBuff, float[] memory)
+        private short[] Resample(
+            WAVEFORMATEX inWavFormat,
+            WAVEFORMATEX outWavFormat,
+            short[] pnBuff,
+            float[] memory
+        )
         {
             if (inWavFormat.nSamplesPerSec != outWavFormat.nSamplesPerSec)
             {
@@ -231,7 +255,11 @@ namespace System.Speech.Internal.Synthesis
         /// <summary>
         /// split stereo signals into 2 channel mono signals
         /// </summary>
-        private static void SplitStereo(short[] inSamples, out short[] leftSamples, out short[] rightSamples)
+        private static void SplitStereo(
+            short[] inSamples,
+            out short[] leftSamples,
+            out short[] rightSamples
+        )
         {
             int length = inSamples.Length / 2;
 
@@ -378,7 +406,8 @@ namespace System.Speech.Internal.Synthesis
                         }
                         else if (n + j < 0)
                         {
-                            dAcum += pdMemory[_iBuffLen + n + j] * _filterCoeff[_iUpFactor * j - iPhase];
+                            dAcum +=
+                                pdMemory[_iBuffLen + n + j] * _filterCoeff[_iUpFactor * j - iPhase];
                         }
                     }
                 }
@@ -413,7 +442,8 @@ namespace System.Speech.Internal.Synthesis
         private static float[] Blackman(int iLength, bool bSymmetric)
         {
             float[] pdWindow = new float[iLength];
-            double dArg, dArg2;
+            double dArg,
+                dArg2;
 
             dArg = 2.0 * Math.PI;
             if (bSymmetric)
@@ -429,7 +459,9 @@ namespace System.Speech.Internal.Synthesis
 
             for (int i = 0; i < iLength; i++)
             {
-                pdWindow[i] = (float)(0.42 - (0.5 * Math.Cos(dArg * i)) + (0.08 * Math.Cos(dArg2 * i)));
+                pdWindow[i] = (float)(
+                    0.42 - (0.5 * Math.Cos(dArg * i)) + (0.08 * Math.Cos(dArg2 * i))
+                );
             }
 
             return pdWindow;
@@ -443,7 +475,7 @@ namespace System.Speech.Internal.Synthesis
         {
             First,
             Middle,
-            Last
+            Last,
         };
 
         private WAVEFORMATEX _inWavFormat;
@@ -464,7 +496,21 @@ namespace System.Speech.Internal.Synthesis
 
         private const float _dHalfFilterLen = 0.0005f;
 
-        private static readonly int[] s_piPrimes = new int[] { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37 };
+        private static readonly int[] s_piPrimes = new int[]
+        {
+            2,
+            3,
+            5,
+            7,
+            11,
+            13,
+            17,
+            19,
+            23,
+            29,
+            31,
+            37,
+        };
 
         #endregion
     }

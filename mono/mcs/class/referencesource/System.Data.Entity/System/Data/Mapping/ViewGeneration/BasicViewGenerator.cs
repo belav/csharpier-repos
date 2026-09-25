@@ -27,12 +27,18 @@ namespace System.Data.Mapping.ViewGeneration
     // LOJ, FOJs
     internal class BasicViewGenerator : InternalBase
     {
-
         #region Constructor
         // effects: Creates a view generator object that can be used to generate views
         // based on usedCells (projectedSlotMap are useful for deciphering the fields)
-        internal BasicViewGenerator(MemberProjectionIndex projectedSlotMap, List<LeftCellWrapper> usedCells, FragmentQuery activeDomain,
-                                    ViewgenContext context, MemberDomainMap domainMap, ErrorLog errorLog, ConfigViewGenerator config)
+        internal BasicViewGenerator(
+            MemberProjectionIndex projectedSlotMap,
+            List<LeftCellWrapper> usedCells,
+            FragmentQuery activeDomain,
+            ViewgenContext context,
+            MemberDomainMap domainMap,
+            ErrorLog errorLog,
+            ConfigViewGenerator config
+        )
         {
             Debug.Assert(usedCells.Count > 0, "No used cells");
             m_projectedSlotMap = projectedSlotMap;
@@ -48,8 +54,10 @@ namespace System.Data.Mapping.ViewGeneration
         #region Fields
         private MemberProjectionIndex m_projectedSlotMap;
         private List<LeftCellWrapper> m_usedCells;
+
         // Active domain comprises all multiconstants that need to be reconstructed
         private FragmentQuery m_activeDomain;
+
         // these two are temporarily needed for checking containment
         private ViewgenContext m_viewgenContext;
         private ErrorLog m_errorLog;
@@ -85,7 +93,7 @@ namespace System.Data.Mapping.ViewGeneration
             // generating the view for the left extent) so that cells of the
             // same extent are in the same subtree
             CellTreeNode rootNode = GroupByRightExtent(fojNode);
-            
+
             // Change some of the FOJs to Unions, IJs and LOJs
             rootNode = IsolateUnions(rootNode);
 
@@ -110,7 +118,7 @@ namespace System.Data.Mapping.ViewGeneration
         // requires: The tree rooted at cellTreeNode is an FOJ tree of
         // LeafCellTreeNodes only, i.e., there is an FOJ node with the
         // children being LeafCellTreeNodes
-        // 
+        //
         // effects: Given a tree rooted at rootNode, ensures that cells
         // of the same right extent are placed in their own subtree below
         // cellTreeNode. That is, if there are 3 cells of extent A and 2 of
@@ -121,8 +129,10 @@ namespace System.Data.Mapping.ViewGeneration
         {
             // A dictionary that maps an extent to the nodes are from that extent
             // We want a ref comparer here
-            KeyToListMap<EntitySetBase, LeafCellTreeNode> extentMap =
-                new KeyToListMap<EntitySetBase, LeafCellTreeNode>(EqualityComparer<EntitySetBase>.Default);
+            KeyToListMap<EntitySetBase, LeafCellTreeNode> extentMap = new KeyToListMap<
+                EntitySetBase,
+                LeafCellTreeNode
+            >(EqualityComparer<EntitySetBase>.Default);
 
             // CR_Meek_Low: method can be simplified (Map<Extent, OpCellTreeNode>, populate as you go)
             // (becomes self-documenting)
@@ -145,7 +155,10 @@ namespace System.Data.Mapping.ViewGeneration
 
             foreach (EntitySetBase extent in extentMap.Keys)
             {
-                OpCellTreeNode extentFojNode = new OpCellTreeNode(m_viewgenContext, CellTreeOpType.FOJ);
+                OpCellTreeNode extentFojNode = new OpCellTreeNode(
+                    m_viewgenContext,
+                    CellTreeOpType.FOJ
+                );
                 foreach (LeafCellTreeNode childNode in extentMap.ListForKey(extent))
                 {
                     extentFojNode.Add(childNode);
@@ -192,7 +205,8 @@ namespace System.Data.Mapping.ViewGeneration
             OpCellTreeNode unionNode = new OpCellTreeNode(m_viewgenContext, CellTreeOpType.Union);
 
             // childrenSet keeps track of the children that need to be procesed/partitioned
-            ModifiableIteratorCollection<CellTreeNode> childrenSet = new ModifiableIteratorCollection<CellTreeNode>(rootNode.Children);
+            ModifiableIteratorCollection<CellTreeNode> childrenSet =
+                new ModifiableIteratorCollection<CellTreeNode>(rootNode.Children);
 
             while (false == childrenSet.IsEmpty)
             {
@@ -204,12 +218,12 @@ namespace System.Data.Mapping.ViewGeneration
                 CellTreeNode someChild = childrenSet.RemoveOneElement();
                 fojNode.Add(someChild);
 
-                // We now want a transitive closure of the overlap between the 
+                // We now want a transitive closure of the overlap between the
                 // the children node. We keep checking each child with the
                 // fojNode and add it as a child of fojNode if there is an
                 // overlap. Note that when a node is added to the fojNode,
                 // its constants are propagated to the fojNode -- so we do
-                // get transitive closure in terms of intersection 
+                // get transitive closure in terms of intersection
                 foreach (CellTreeNode child in childrenSet.Elements())
                 {
                     if (!IsDisjoint(fojNode, child))
@@ -240,9 +254,9 @@ namespace System.Data.Mapping.ViewGeneration
         ///     3. As a special case we also look into LOJ driving node (left most child in LOJ) and if it is an IJ,
         ///        then we consider attaching LOJ children to nodes inside IJ based on the same principle as above.
         ///        Example: LOJ(IJ(A, B, C), D, E, F) -> LOJ(IJ(LOJ(A, D), B, LOJ(C, E)), F) iff D has FK to A and E has FK to C.
-        ///        
+        ///
         /// This normalization enables FK-based join elimination in plan compiler, so for a query such as
-        /// "select e.ID from ABCDSet" we want plan compiler to produce "select a.ID from A" instead of 
+        /// "select e.ID from ABCDSet" we want plan compiler to produce "select a.ID from A" instead of
         /// "select a.ID from A LOJ B LOJ C LOJ D".
         /// </summary>
         private CellTreeNode ConvertUnionsToNormalizedLOJs(CellTreeNode rootNode)
@@ -288,7 +302,7 @@ namespace System.Data.Mapping.ViewGeneration
                 result.Add(rootNode.Children[0]);
             }
 
-            // Flatten unions in non-driving nodes: (V0 LOJ (V1 Union V2 Union V3)) -> (V0 LOJ V1 LOJ V2 LOJ V3) 
+            // Flatten unions in non-driving nodes: (V0 LOJ (V1 Union V2 Union V3)) -> (V0 LOJ V1 LOJ V2 LOJ V3)
             foreach (var child in rootNode.Children.Skip(1))
             {
                 var opNode = child as OpCellTreeNode;
@@ -304,7 +318,9 @@ namespace System.Data.Mapping.ViewGeneration
 
             // A dictionary that maps an extent to the nodes that are from that extent.
             // We want a ref comparer here.
-            var extentMap = new KeyToListMap<EntitySet, LeafCellTreeNode>(EqualityComparer<EntitySet>.Default);
+            var extentMap = new KeyToListMap<EntitySet, LeafCellTreeNode>(
+                EqualityComparer<EntitySet>.Default
+            );
             // Note that we skip non-leaf nodes (non-leaf nodes don't have FKs) and attach them directly to the result.
             foreach (var child in children)
             {
@@ -329,7 +345,7 @@ namespace System.Data.Mapping.ViewGeneration
                     }
                 }
             }
-            
+
             // We only deal with simple cases - one node per extent, remove the rest from children and attach directly to result.
             var nonTrivial = extentMap.KeyValuePairs.Where(m => m.Value.Count > 1).ToArray();
             foreach (var m in nonTrivial)
@@ -347,10 +363,13 @@ namespace System.Data.Mapping.ViewGeneration
                     }
                 }
             }
-            Debug.Assert(extentMap.KeyValuePairs.All(m => m.Value.Count == 1), "extentMap must map to single nodes only.");
+            Debug.Assert(
+                extentMap.KeyValuePairs.All(m => m.Value.Count == 1),
+                "extentMap must map to single nodes only."
+            );
 
             // Walk the extents in extentMap and for each extent build PK -> FK1(PK1), FK2(PK2), ... map
-            // where PK is the primary key of the left extent, and FKn(PKn) is an FK of a right extent that 
+            // where PK is the primary key of the left extent, and FKn(PKn) is an FK of a right extent that
             // points to the PK of the left extent and is based on the PK columns of the right extent.
             // Example:
             //           table tBaseType(Id int, c1 int), PK = (tBaseType.Id)
@@ -358,10 +377,14 @@ namespace System.Data.Mapping.ViewGeneration
             //           table tDerivedType2(Id int, c3 int), PK2 = (tDerivedType2.Id), FK2 = (tDerivedType2.Id -> tBaseType.Id)
             // Will produce:
             //           (tBaseType) -> (tDerivedType1, tDerivedType2)
-            var pkFkMap = new KeyToListMap<EntitySet, EntitySet>(EqualityComparer<EntitySet>.Default);
+            var pkFkMap = new KeyToListMap<EntitySet, EntitySet>(
+                EqualityComparer<EntitySet>.Default
+            );
             // Also for each extent in extentMap, build another map (extent) -> (LOJ node).
             // It will be used to construct the nesting in the next step.
-            var extentLOJs = new Dictionary<EntitySet, OpCellTreeNode>(EqualityComparer<EntitySet>.Default);
+            var extentLOJs = new Dictionary<EntitySet, OpCellTreeNode>(
+                EqualityComparer<EntitySet>.Default
+            );
             foreach (var extentInfo in extentMap.KeyValuePairs)
             {
                 var principalExtent = extentInfo.Key;
@@ -372,7 +395,10 @@ namespace System.Data.Mapping.ViewGeneration
                     if (extentMap.TryGetListForKey(fkExtent, out nodes))
                     {
                         // Make sure that we are not adding resultIJDriverChildren as FK dependents - we do not want them to get nested.
-                        if (resultIJDriverChildren == null || !resultIJDriverChildren.Contains(nodes.Single()))
+                        if (
+                            resultIJDriverChildren == null
+                            || !resultIJDriverChildren.Contains(nodes.Single())
+                        )
                         {
                             pkFkMap.Add(principalExtent, fkExtent);
                         }
@@ -390,7 +416,7 @@ namespace System.Data.Mapping.ViewGeneration
             //      tBaseType -> LOJ(BaseTypeNode)
             //      tDerivedType1 -> LOJ(DerivedType1Node)*
             //      tDerivedType2 -> LOJ(DerivedType2Node)**
-            // Note that * and ** represent object references. So each time something is nested, 
+            // Note that * and ** represent object references. So each time something is nested,
             // we don't clone, but nest the original LOJ. When we get to processing the extent of that LOJ,
             // we might add other children to that nested LOJ.
             // As we walk pkFkMap, we end up with this:
@@ -398,16 +424,22 @@ namespace System.Data.Mapping.ViewGeneration
             //      tDerivedType1 -> LOJ(DerivedType1Node)*
             //      tDerivedType2 -> LOJ(DerivedType2Node)**
             // nestedExtens = (tDerivedType1, tDerivedType2)
-            var nestedExtents = new Dictionary<EntitySet, EntitySet>(EqualityComparer<EntitySet>.Default);
+            var nestedExtents = new Dictionary<EntitySet, EntitySet>(
+                EqualityComparer<EntitySet>.Default
+            );
             foreach (var m in pkFkMap.KeyValuePairs)
             {
                 var principalExtent = m.Key;
                 foreach (var fkExtent in m.Value)
                 {
                     OpCellTreeNode fkExtentLOJ;
-                    if (extentLOJs.TryGetValue(fkExtent, out fkExtentLOJ) &&
+                    if (
+                        extentLOJs.TryGetValue(fkExtent, out fkExtentLOJ)
+                        &&
                         // make sure we don't nest twice and we don't create a cycle.
-                        !nestedExtents.ContainsKey(fkExtent) && !CheckLOJCycle(fkExtent, principalExtent, nestedExtents))
+                        !nestedExtents.ContainsKey(fkExtent)
+                        && !CheckLOJCycle(fkExtent, principalExtent, nestedExtents)
+                    )
                     {
                         extentLOJs[m.Key].Add(fkExtentLOJ);
                         nestedExtents.Add(fkExtent, principalExtent);
@@ -424,7 +456,10 @@ namespace System.Data.Mapping.ViewGeneration
                 {
                     // extentLOJ represents (Vx LOJ Vy LOJ(Vm LOJ Vn)) where Vx is the original node from rootNode.Children or resultIJDriverChildren.
                     var extentLOJ = m.Value;
-                    if (resultIJDriverChildren != null && resultIJDriverChildren.Contains(extentLOJ.Children[0]))
+                    if (
+                        resultIJDriverChildren != null
+                        && resultIJDriverChildren.Contains(extentLOJ.Children[0])
+                    )
                     {
                         resultIJDriver.Add(extentLOJ);
                     }
@@ -450,10 +485,16 @@ namespace System.Data.Mapping.ViewGeneration
                 {
                     // Compare PK to FK columns, order is important (otherwise it's not an FK over PK).
                     int i = 0;
-                    for (; i < pkColumns.Count && pkColumns[i].EdmEquals(fkColumns[i]); ++i);
+                    for (; i < pkColumns.Count && pkColumns[i].EdmEquals(fkColumns[i]); ++i)
+                        ;
                     if (i == pkColumns.Count)
                     {
-                        yield return pkFkInfo.Item1.AssociationSetEnds.Where(ase => ase.Name == pkFkInfo.Item2.ToRole.Name).Single().EntitySet;
+                        yield return pkFkInfo
+                            .Item1.AssociationSetEnds.Where(ase =>
+                                ase.Name == pkFkInfo.Item2.ToRole.Name
+                            )
+                            .Single()
+                            .EntitySet;
                     }
                 }
             }
@@ -464,7 +505,11 @@ namespace System.Data.Mapping.ViewGeneration
             return leaf.LeftCellWrapper.RightCellQuery.Extent as EntitySet;
         }
 
-        private static bool CheckLOJCycle(EntitySet child, EntitySet parent, Dictionary<EntitySet, EntitySet> nestedExtents)
+        private static bool CheckLOJCycle(
+            EntitySet child,
+            EntitySet parent,
+            Dictionary<EntitySet, EntitySet> nestedExtents
+        )
         {
             do
             {
@@ -472,8 +517,7 @@ namespace System.Data.Mapping.ViewGeneration
                 {
                     return true;
                 }
-            }
-            while (nestedExtents.TryGetValue(parent, out parent));
+            } while (nestedExtents.TryGetValue(parent, out parent));
             return false;
         }
 
@@ -482,11 +526,17 @@ namespace System.Data.Mapping.ViewGeneration
         // are any FOJs that can be replaced by opTypeToIsolate. If so,
         // does that and a returns a new tree with the replaced operators
         // Note: Method may modify rootNode's contents and children
-        internal CellTreeNode IsolateByOperator(CellTreeNode rootNode, CellTreeOpType opTypeToIsolate)
+        internal CellTreeNode IsolateByOperator(
+            CellTreeNode rootNode,
+            CellTreeOpType opTypeToIsolate
+        )
         {
-            Debug.Assert(opTypeToIsolate == CellTreeOpType.IJ || opTypeToIsolate == CellTreeOpType.LOJ
-                         || opTypeToIsolate == CellTreeOpType.Union,
-                         "IsolateJoins can only be called for IJs, LOJs, and Unions");
+            Debug.Assert(
+                opTypeToIsolate == CellTreeOpType.IJ
+                    || opTypeToIsolate == CellTreeOpType.LOJ
+                    || opTypeToIsolate == CellTreeOpType.Union,
+                "IsolateJoins can only be called for IJs, LOJs, and Unions"
+            );
 
             List<CellTreeNode> children = rootNode.Children;
             if (children.Count <= 1)
@@ -504,8 +554,10 @@ namespace System.Data.Mapping.ViewGeneration
             // Only FOJs and LOJs can be coverted (to IJs, Unions, LOJs) --
             // so if the node is not that, we can ignore it (or if the node is already of
             // the same type that we want)
-            if (rootNode.OpType != CellTreeOpType.FOJ && rootNode.OpType != CellTreeOpType.LOJ ||
-                rootNode.OpType == opTypeToIsolate)
+            if (
+                rootNode.OpType != CellTreeOpType.FOJ && rootNode.OpType != CellTreeOpType.LOJ
+                || rootNode.OpType == opTypeToIsolate
+            )
             {
                 return rootNode;
             }
@@ -519,12 +571,13 @@ namespace System.Data.Mapping.ViewGeneration
             // same group as X.
 
             // childrenSet keeps track of the children that need to be procesed/partitioned
-            ModifiableIteratorCollection<CellTreeNode> childrenSet = new ModifiableIteratorCollection<CellTreeNode>(children);
+            ModifiableIteratorCollection<CellTreeNode> childrenSet =
+                new ModifiableIteratorCollection<CellTreeNode>(children);
 
             // Find groups with same or subsumed constants and create a join
             // or union node for them. We do this so that some of the FOJs
             // can be replaced by union and join nodes
-            // 
+            //
             while (false == childrenSet.IsEmpty)
             {
                 // Start a new "group" with some child  node (for the opTypeToIsolate node type)
@@ -555,7 +608,7 @@ namespace System.Data.Mapping.ViewGeneration
                         // so there is no need to reconsider previously skipped children.
                         //
                         // For Union, adding a child to groupNode increases the range of the groupNode,
-                        // hence previously skipped (because they weren't disjoint with groupNode) children will continue 
+                        // hence previously skipped (because they weren't disjoint with groupNode) children will continue
                         // being ignored because they would still have an overlap with one of the nodes inside groupNode.
 
                         if (opTypeToIsolate == CellTreeOpType.LOJ)
@@ -577,8 +630,11 @@ namespace System.Data.Mapping.ViewGeneration
         // the same selection condition
         // Modifies groupNode to contain groupNode at the appropriate
         // position (for LOJs, the child could be added to the beginning)
-        private bool TryAddChildToGroup(CellTreeOpType opTypeToIsolate, CellTreeNode childNode,
-                                        OpCellTreeNode groupNode)
+        private bool TryAddChildToGroup(
+            CellTreeOpType opTypeToIsolate,
+            CellTreeNode childNode,
+            OpCellTreeNode groupNode
+        )
         {
             switch (opTypeToIsolate)
             {
@@ -638,33 +694,50 @@ namespace System.Data.Mapping.ViewGeneration
             CellTreeNode n = new OpCellTreeNode(m_viewgenContext, CellTreeOpType.IJ, n1, n2);
             bool isDisjointRight = n.IsEmptyRightFragmentQuery;
 
-            if (m_viewgenContext.ViewTarget == ViewTarget.UpdateView &&
-                isDisjointLeft && !isDisjointRight)
+            if (
+                m_viewgenContext.ViewTarget == ViewTarget.UpdateView
+                && isDisjointLeft
+                && !isDisjointRight
+            )
             {
-
-                if (ErrorPatternMatcher.FindMappingErrors(m_viewgenContext, m_domainMap, m_errorLog))
+                if (
+                    ErrorPatternMatcher.FindMappingErrors(m_viewgenContext, m_domainMap, m_errorLog)
+                )
                 {
                     return false;
                 }
 
-
-                StringBuilder builder = new StringBuilder(Strings.Viewgen_RightSideNotDisjoint(m_viewgenContext.Extent.ToString()));
+                StringBuilder builder = new StringBuilder(
+                    Strings.Viewgen_RightSideNotDisjoint(m_viewgenContext.Extent.ToString())
+                );
                 builder.AppendLine();
 
                 //Retrieve the offending state
-                FragmentQuery intersection = LeftQP.Intersect(n1.RightFragmentQuery, n2.RightFragmentQuery);
+                FragmentQuery intersection = LeftQP.Intersect(
+                    n1.RightFragmentQuery,
+                    n2.RightFragmentQuery
+                );
                 if (LeftQP.IsSatisfiable(intersection))
                 {
                     intersection.Condition.ExpensiveSimplify();
-                    RewritingValidator.EntityConfigurationToUserString(intersection.Condition, builder);
+                    RewritingValidator.EntityConfigurationToUserString(
+                        intersection.Condition,
+                        builder
+                    );
                 }
 
                 //Add Error
-                m_errorLog.AddEntry(new ErrorLog.Record(true, ViewGenErrorCode.DisjointConstraintViolation,
-                        builder.ToString(), m_viewgenContext.AllWrappersForExtent, String.Empty));
+                m_errorLog.AddEntry(
+                    new ErrorLog.Record(
+                        true,
+                        ViewGenErrorCode.DisjointConstraintViolation,
+                        builder.ToString(),
+                        m_viewgenContext.AllWrappersForExtent,
+                        String.Empty
+                    )
+                );
 
                 ExceptionHelpers.ThrowMappingException(m_errorLog, m_config);
-
 
                 return false;
             }

@@ -11,13 +11,14 @@ namespace System.Linq.Expressions.Tests
         internal readonly PropertyInfo DefaultIndexer = typeof(List<int>).GetProperty("Item");
         internal readonly ConstantExpression[] DefaultArguments = { Expression.Constant(0) };
 
-        internal MemberExpression DefaultPropertyExpression => Expression.Property(Expression.Constant(this),
-            typeof(SampleClassWithProperties).GetProperty(nameof(DefaultProperty)));
+        internal MemberExpression DefaultPropertyExpression =>
+            Expression.Property(
+                Expression.Constant(this),
+                typeof(SampleClassWithProperties).GetProperty(nameof(DefaultProperty))
+            );
 
-        internal IndexExpression DefaultIndexExpression => Expression.MakeIndex(
-            DefaultPropertyExpression,
-            DefaultIndexer,
-            DefaultArguments);
+        internal IndexExpression DefaultIndexExpression =>
+            Expression.MakeIndex(DefaultPropertyExpression, DefaultIndexer, DefaultArguments);
 
         public List<int> DefaultProperty { get; set; }
 

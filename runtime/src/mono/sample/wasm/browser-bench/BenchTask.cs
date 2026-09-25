@@ -14,7 +14,11 @@ public abstract class BenchTask
 
     public virtual bool BrowserOnly => false;
 
-    public async Task<string> RunBatch(List<Result> results, int measurementIdx, int milliseconds = -1)
+    public async Task<string> RunBatch(
+        List<Result> results,
+        int measurementIdx,
+        int milliseconds = -1
+    )
     {
         var measurement = Measurements[measurementIdx];
         if (milliseconds == -1)
@@ -38,7 +42,8 @@ public abstract class BenchTask
         public string taskName;
         public string measurementName;
 
-        public override string ToString() => $"{taskName}, {measurementName} count: {steps}, per call: {span.TotalMilliseconds / steps}ms, total: {span.TotalSeconds}s";
+        public override string ToString() =>
+            $"{taskName}, {measurementName} count: {steps}, per call: {span.TotalMilliseconds / steps}ms, total: {span.TotalSeconds}s";
     }
 
     public abstract class Measurement
@@ -49,14 +54,25 @@ public abstract class BenchTask
         public virtual int InitialSamples => 10;
         public virtual int NumberOfRuns => 5;
         public virtual int RunLength => 5000;
+
         public virtual Task<bool> IsEnabled() => Task.FromResult(true);
 
-        public virtual Task BeforeBatch() { return Task.CompletedTask; }
+        public virtual Task BeforeBatch()
+        {
+            return Task.CompletedTask;
+        }
 
-        public virtual Task AfterBatch() { return Task.CompletedTask; }
+        public virtual Task AfterBatch()
+        {
+            return Task.CompletedTask;
+        }
 
         public virtual void RunStep() { }
-        public virtual async Task RunStepAsync() { await Task.CompletedTask; }
+
+        public virtual async Task RunStepAsync()
+        {
+            await Task.CompletedTask;
+        }
 
         public virtual bool HasRunStepAsync => false;
 
@@ -90,10 +106,14 @@ public abstract class BenchTask
                 // try to limit initial samples to 1s
                 var oneTs = end - start;
                 var maxInitMs = 1000;
-                if (oneTs.TotalMilliseconds > 0 && oneTs.TotalMilliseconds*InitialSamples > maxInitMs)
-                    initialSamples = (int)(maxInitMs/oneTs.TotalMilliseconds);
+                if (
+                    oneTs.TotalMilliseconds > 0
+                    && oneTs.TotalMilliseconds * InitialSamples > maxInitMs
+                )
+                    initialSamples = (int)(maxInitMs / oneTs.TotalMilliseconds);
 
-                if (initialSamples > 1) {
+                if (initialSamples > 1)
+                {
                     GC.Collect();
 
                     start = DateTime.Now;
@@ -103,7 +123,9 @@ public abstract class BenchTask
                         else
                             RunStep();
                     end = DateTime.Now;
-                } else {
+                }
+                else
+                {
                     // we already have the 1st measurement
                     initialSamples = 1;
                 }
@@ -123,14 +145,26 @@ public abstract class BenchTask
 
                 var ts = end - start;
 
-                return new Result { span = ts + initTs, steps = steps + initialSamples, taskName = task.Name, measurementName = Name };
+                return new Result
+                {
+                    span = ts + initTs,
+                    steps = steps + initialSamples,
+                    taskName = task.Name,
+                    measurementName = Name,
+                };
             }
             catch (Exception ex)
             {
                 end = DateTime.Now;
                 var ts = end - start;
                 Console.WriteLine(ex);
-                return new Result { span = ts, steps = currentStep + initialSamples, taskName = task.Name, measurementName = Name + " " + ex.Message };
+                return new Result
+                {
+                    span = ts,
+                    steps = currentStep + initialSamples,
+                    taskName = task.Name,
+                    measurementName = Name + " " + ex.Message,
+                };
             }
         }
     }

@@ -25,23 +25,17 @@ public class MvcAreaRouteBuilderExtensionsTest
 
         Assert.Null(route.Name);
         Assert.Equal("site/Admin/", route.RouteTemplate);
-        Assert.Collection(
-            route.Constraints.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("area", kvp.Key);
-                Assert.IsType<StringRouteConstraint>(kvp.Value);
-            }
-        );
+        Assert.Collection(route.Constraints.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("area", kvp.Key);
+            Assert.IsType<StringRouteConstraint>(kvp.Value);
+        });
         Assert.Empty(route.DataTokens);
-        Assert.Collection(
-            route.Defaults.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("area", kvp.Key);
-                Assert.Equal("admin", kvp.Value);
-            }
-        );
+        Assert.Collection(route.Defaults.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("area", kvp.Key);
+            Assert.Equal("admin", kvp.Value);
+        });
     }
 
     [Fact]
@@ -63,14 +57,11 @@ public class MvcAreaRouteBuilderExtensionsTest
 
         Assert.Equal("admin_area", route.Name);
         Assert.Equal("site/Admin/", route.RouteTemplate);
-        Assert.Collection(
-            route.Constraints.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("area", kvp.Key);
-                Assert.IsType<StringRouteConstraint>(kvp.Value);
-            }
-        );
+        Assert.Collection(route.Constraints.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("area", kvp.Key);
+            Assert.IsType<StringRouteConstraint>(kvp.Value);
+        });
         Assert.Empty(route.DataTokens);
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
@@ -170,14 +161,11 @@ public class MvcAreaRouteBuilderExtensionsTest
                 Assert.IsType<IntRouteConstraint>(kvp.Value);
             }
         );
-        Assert.Collection(
-            route.DataTokens.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("some_token", kvp.Key);
-                Assert.Equal("hello", kvp.Value);
-            }
-        );
+        Assert.Collection(route.DataTokens.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("some_token", kvp.Key);
+            Assert.Equal("hello", kvp.Value);
+        });
         Assert.Collection(
             route.Defaults.OrderBy(kvp => kvp.Key),
             kvp =>
@@ -214,30 +202,21 @@ public class MvcAreaRouteBuilderExtensionsTest
 
         Assert.Equal("admin_area", route.Name);
         Assert.Equal("site/Admin/", route.RouteTemplate);
-        Assert.Collection(
-            route.Constraints.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("area", kvp.Key);
-                Assert.IsType<IntRouteConstraint>(kvp.Value);
-            }
-        );
-        Assert.Collection(
-            route.DataTokens.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("some_token", kvp.Key);
-                Assert.Equal("hello", kvp.Value);
-            }
-        );
-        Assert.Collection(
-            route.Defaults.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("area", kvp.Key);
-                Assert.Equal("Home", kvp.Value);
-            }
-        );
+        Assert.Collection(route.Constraints.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("area", kvp.Key);
+            Assert.IsType<IntRouteConstraint>(kvp.Value);
+        });
+        Assert.Collection(route.DataTokens.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("some_token", kvp.Key);
+            Assert.Equal("hello", kvp.Value);
+        });
+        Assert.Collection(route.Defaults.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("area", kvp.Key);
+            Assert.Equal("Home", kvp.Value);
+        });
     }
 
     [Fact]
@@ -255,34 +234,28 @@ public class MvcAreaRouteBuilderExtensionsTest
 
         Assert.Null(route.Name);
         Assert.Equal("site/Admin/", route.RouteTemplate);
-        Assert.Collection(
-            route.Constraints.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("area", kvp.Key);
-                Assert.IsType<StringRouteConstraint>(kvp.Value);
+        Assert.Collection(route.Constraints.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("area", kvp.Key);
+            Assert.IsType<StringRouteConstraint>(kvp.Value);
 
-                var values = new RouteValueDictionary(new { area = areaName });
-                var match = kvp.Value.Match(
-                    new DefaultHttpContext(),
-                    route: new Mock<IRouter>().Object,
-                    routeKey: kvp.Key,
-                    values: values,
-                    routeDirection: RouteDirection.UrlGeneration
-                );
+            var values = new RouteValueDictionary(new { area = areaName });
+            var match = kvp.Value.Match(
+                new DefaultHttpContext(),
+                route: new Mock<IRouter>().Object,
+                routeKey: kvp.Key,
+                values: values,
+                routeDirection: RouteDirection.UrlGeneration
+            );
 
-                Assert.True(match);
-            }
-        );
+            Assert.True(match);
+        });
         Assert.Empty(route.DataTokens);
-        Assert.Collection(
-            route.Defaults.OrderBy(kvp => kvp.Key),
-            kvp =>
-            {
-                Assert.Equal("area", kvp.Key);
-                Assert.Equal(kvp.Value, areaName);
-            }
-        );
+        Assert.Collection(route.Defaults.OrderBy(kvp => kvp.Key), kvp =>
+        {
+            Assert.Equal("area", kvp.Key);
+            Assert.Equal(kvp.Value, areaName);
+        });
     }
 
     private IServiceProvider CreateServices()

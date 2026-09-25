@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,30 +26,29 @@ using System.Drawing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class AxisScrollBar : IDisposable
-	{
-		public Axis Axis { get; private set; }
-		public Color BackColor { get; set; }
-		public Color ButtonColor { get; set; }
-		public ScrollBarButtonStyles ButtonStyle { get; set; }
-		public ChartArea ChartArea { get; private set; } 
-		public bool Enabled { get; set; }
-		public bool IsPositionedInside { get; set; }
-		public bool IsVisible { get; private set; } 
-		public Color LineColor { get; set; }
-		public double Size { get; set; }
+    public class AxisScrollBar : IDisposable
+    {
+        public Axis Axis { get; private set; }
+        public Color BackColor { get; set; }
+        public Color ButtonColor { get; set; }
+        public ScrollBarButtonStyles ButtonStyle { get; set; }
+        public ChartArea ChartArea { get; private set; }
+        public bool Enabled { get; set; }
+        public bool IsPositionedInside { get; set; }
+        public bool IsVisible { get; private set; }
+        public Color LineColor { get; set; }
+        public double Size { get; set; }
 
-		[MonoTODO]
-		public void Dispose ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		protected virtual void Dispose (bool disposing )
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        protected virtual void Dispose(bool disposing)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

@@ -17,9 +17,8 @@ namespace System.ComponentModel
         /// </summary>
         public static readonly DescriptionAttribute Default = new DescriptionAttribute();
 
-        public DescriptionAttribute() : this(string.Empty)
-        {
-        }
+        public DescriptionAttribute()
+            : this(string.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.DescriptionAttribute'/> class.

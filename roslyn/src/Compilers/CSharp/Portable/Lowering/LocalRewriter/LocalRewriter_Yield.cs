@@ -15,10 +15,18 @@ namespace Microsoft.CodeAnalysis.CSharp
             var result = (BoundStatement)base.VisitYieldBreakStatement(node)!;
 
             // We also add sequence points for the implicit "yield break" statement at the end of the method body
-            // (added by FlowAnalysisPass.AppendImplicitReturn). Implicitly added "yield break" for async method 
+            // (added by FlowAnalysisPass.AppendImplicitReturn). Implicitly added "yield break" for async method
             // does not need sequence points added here since it would be done later (presumably during Async rewrite).
-            if (this.Instrument &&
-                (!node.WasCompilerGenerated || (node.Syntax.Kind() == SyntaxKind.Block && _factory.CurrentFunction?.IsAsync == false)))
+            if (
+                this.Instrument
+                && (
+                    !node.WasCompilerGenerated
+                    || (
+                        node.Syntax.Kind() == SyntaxKind.Block
+                        && _factory.CurrentFunction?.IsAsync == false
+                    )
+                )
+            )
             {
                 result = Instrumenter.InstrumentYieldBreakStatement(node, result);
             }

@@ -57,21 +57,23 @@ namespace System.Threading.Tests
         [Fact]
         public void MultiWaitWithAllIndexesSetTest()
         {
-            var es =
-                new AutoResetEvent[]
-                {
-                    new AutoResetEvent(true),
-                    new AutoResetEvent(true),
-                    new AutoResetEvent(true),
-                    new AutoResetEvent(true)
-                };
+            var es = new AutoResetEvent[]
+            {
+                new AutoResetEvent(true),
+                new AutoResetEvent(true),
+                new AutoResetEvent(true),
+                new AutoResetEvent(true),
+            };
             Assert.Equal(0, WaitHandle.WaitAny(es, 0));
             for (int i = 0; i < es.Length; ++i)
             {
                 Assert.Equal(i > 0, es[i].WaitOne(0));
                 es[i].Set();
             }
-            Assert.Equal(0, WaitHandle.WaitAny(es, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+            Assert.Equal(
+                0,
+                WaitHandle.WaitAny(es, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+            );
             for (int i = 0; i < es.Length; ++i)
             {
                 Assert.Equal(i > 0, es[i].WaitOne(0));
@@ -105,14 +107,13 @@ namespace System.Threading.Tests
         [Fact]
         public void MultiWaitWithInnerIndexesSetTest()
         {
-            var es =
-                new AutoResetEvent[]
-                {
-                    new AutoResetEvent(false),
-                    new AutoResetEvent(true),
-                    new AutoResetEvent(true),
-                    new AutoResetEvent(false)
-                };
+            var es = new AutoResetEvent[]
+            {
+                new AutoResetEvent(false),
+                new AutoResetEvent(true),
+                new AutoResetEvent(true),
+                new AutoResetEvent(false),
+            };
             Assert.Equal(1, WaitHandle.WaitAny(es, 0));
             for (int i = 0; i < es.Length; ++i)
             {
@@ -120,7 +121,10 @@ namespace System.Threading.Tests
             }
             es[1].Set();
             es[2].Set();
-            Assert.Equal(1, WaitHandle.WaitAny(es, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+            Assert.Equal(
+                1,
+                WaitHandle.WaitAny(es, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+            );
             for (int i = 0; i < es.Length; ++i)
             {
                 Assert.Equal(i == 2, es[i].WaitOne(0));
@@ -138,16 +142,18 @@ namespace System.Threading.Tests
         [Fact]
         public void MultiWaitWithAllIndexesResetTest()
         {
-            var es =
-                new AutoResetEvent[]
-                {
-                    new AutoResetEvent(false),
-                    new AutoResetEvent(false),
-                    new AutoResetEvent(false),
-                    new AutoResetEvent(false)
-                };
+            var es = new AutoResetEvent[]
+            {
+                new AutoResetEvent(false),
+                new AutoResetEvent(false),
+                new AutoResetEvent(false),
+                new AutoResetEvent(false),
+            };
             Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(es, 0));
-            Assert.Equal(WaitHandle.WaitTimeout, WaitHandle.WaitAny(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
+            Assert.Equal(
+                WaitHandle.WaitTimeout,
+                WaitHandle.WaitAny(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+            );
             Assert.False(WaitHandle.WaitAll(es, 0));
             Assert.False(WaitHandle.WaitAll(es, ThreadTestHelpers.ExpectedTimeoutMilliseconds));
             for (int i = 0; i < es.Length; ++i)
@@ -179,7 +185,9 @@ namespace System.Threading.Tests
             for (int i = 0; i < handles.Length; i++)
                 handles[i] = new AutoResetEvent(false);
 
-            Task<bool> t = Task.Run(() => WaitHandle.WaitAll(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+            Task<bool> t = Task.Run(() =>
+                WaitHandle.WaitAll(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+            );
             for (int i = 0; i < handles.Length; i++)
             {
                 Assert.False(t.IsCompleted);
@@ -197,7 +205,9 @@ namespace System.Threading.Tests
             for (int i = 0; i < handles.Length; i++)
                 handles[i] = new AutoResetEvent(false);
 
-            Task<int> t = Task.Run(() => WaitHandle.WaitAny(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds));
+            Task<int> t = Task.Run(() =>
+                WaitHandle.WaitAny(handles, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+            );
             handles[5].Set();
             Assert.Equal(5, t.Result);
 
@@ -207,26 +217,40 @@ namespace System.Threading.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void PingPong()
         {
-            using (AutoResetEvent are1 = new AutoResetEvent(true), are2 = new AutoResetEvent(false))
+            using (
+                AutoResetEvent are1 = new AutoResetEvent(true),
+                    are2 = new AutoResetEvent(false)
+            )
             {
                 const int Iters = 10;
                 Task.WaitAll(
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < Iters; i++)
+                    Task.Factory.StartNew(
+                        () =>
                         {
-                            are1.CheckedWait();
-                            are2.Set();
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default),
-                    Task.Factory.StartNew(() =>
-                    {
-                        for (int i = 0; i < Iters; i++)
+                            for (int i = 0; i < Iters; i++)
+                            {
+                                are1.CheckedWait();
+                                are2.Set();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    ),
+                    Task.Factory.StartNew(
+                        () =>
                         {
-                            are2.CheckedWait();
-                            are1.Set();
-                        }
-                    }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
+                            for (int i = 0; i < Iters; i++)
+                            {
+                                are2.CheckedWait();
+                                are1.Set();
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                );
             }
         }
     }

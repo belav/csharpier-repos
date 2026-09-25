@@ -18,13 +18,17 @@ public struct AA
 {
     public A m_a;
     public B m_b;
+
     public AA(int a, int b)
     {
         m_a.m_aval = a;
         m_b.m_bval = b;
     }
 
-    public unsafe static B* get_pb(AA* px) { return &px->m_b; }
+    public static unsafe B* get_pb(AA* px)
+    {
+        return &px->m_b;
+    }
 }
 
 public class TestApp
@@ -33,6 +37,7 @@ public class TestApp
     {
         return AA.get_pb(px)->m_bval;
     }
+
     [Fact]
     public static unsafe void TestEntryPoint()
     {

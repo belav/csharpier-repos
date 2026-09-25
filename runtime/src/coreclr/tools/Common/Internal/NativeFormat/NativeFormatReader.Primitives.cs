@@ -56,10 +56,14 @@ namespace Internal.NativeFormat
 
         public static uint GetUnsignedEncodingSize(uint value)
         {
-            if (value < 128) return 1;
-            if (value < 128 * 128) return 2;
-            if (value < 128 * 128 * 128) return 3;
-            if (value < 128 * 128 * 128 * 128) return 4;
+            if (value < 128)
+                return 1;
+            if (value < 128 * 128)
+                return 2;
+            if (value < 128 * 128 * 128)
+                return 3;
+            if (value < 128 * 128 * 128 * 128)
+                return 4;
             return 5;
         }
 
@@ -75,23 +79,21 @@ namespace Internal.NativeFormat
             }
             else if ((val & 2) == 0)
             {
-                value = (val >> 2) |
-                      (((uint)*(stream + 1)) << 6);
+                value = (val >> 2) | (((uint)*(stream + 1)) << 6);
                 stream += 2;
             }
             else if ((val & 4) == 0)
             {
-                value = (val >> 3) |
-                      (((uint)*(stream + 1)) << 5) |
-                      (((uint)*(stream + 2)) << 13);
+                value = (val >> 3) | (((uint)*(stream + 1)) << 5) | (((uint)*(stream + 2)) << 13);
                 stream += 3;
             }
             else if ((val & 8) == 0)
             {
-                value = (val >> 4) |
-                      (((uint)*(stream + 1)) << 4) |
-                      (((uint)*(stream + 2)) << 12) |
-                      (((uint)*(stream + 3)) << 20);
+                value =
+                    (val >> 4)
+                    | (((uint)*(stream + 1)) << 4)
+                    | (((uint)*(stream + 2)) << 12)
+                    | (((uint)*(stream + 3)) << 20);
                 stream += 4;
             }
             else if ((val & 16) == 0)
@@ -120,23 +122,22 @@ namespace Internal.NativeFormat
             }
             else if ((val & 2) == 0)
             {
-                value = (val >> 2) |
-                      (((int)*(sbyte*)(stream + 1)) << 6);
+                value = (val >> 2) | (((int)*(sbyte*)(stream + 1)) << 6);
                 stream += 2;
             }
             else if ((val & 4) == 0)
             {
-                value = (val >> 3) |
-                      (((int)*(stream + 1)) << 5) |
-                      (((int)*(sbyte*)(stream + 2)) << 13);
+                value =
+                    (val >> 3) | (((int)*(stream + 1)) << 5) | (((int)*(sbyte*)(stream + 2)) << 13);
                 stream += 3;
             }
             else if ((val & 8) == 0)
             {
-                value = (val >> 4) |
-                      (((int)*(stream + 1)) << 4) |
-                      (((int)*(stream + 2)) << 12) |
-                      (((int)*(sbyte*)(stream + 3)) << 20);
+                value =
+                    (val >> 4)
+                    | (((int)*(stream + 1)) << 4)
+                    | (((int)*(stream + 2)) << 12)
+                    | (((int)*(sbyte*)(stream + 3)) << 20);
                 stream += 4;
             }
             else if ((val & 16) == 0)

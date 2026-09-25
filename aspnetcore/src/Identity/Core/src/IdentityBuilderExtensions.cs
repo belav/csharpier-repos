@@ -122,9 +122,8 @@ public static class IdentityBuilderExtensions
         }
         if (managerType != customType)
         {
-            builder.Services.AddScoped(
-                typeof(TSignInManager),
-                services => services.GetRequiredService(managerType)
+            builder.Services.AddScoped(typeof(TSignInManager), services =>
+                services.GetRequiredService(managerType)
             );
         }
         builder.Services.AddScoped(managerType, typeof(TSignInManager));

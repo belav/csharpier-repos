@@ -56,13 +56,23 @@ namespace System.Formats.Cbor
 
         private void WriteStartArrayIndefiniteLength()
         {
-            if (!ConvertIndefiniteLengthEncodings && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode))
+            if (
+                !ConvertIndefiniteLengthEncodings
+                && CborConformanceModeHelpers.RequiresDefiniteLengthItems(ConformanceMode)
+            )
             {
-                throw new InvalidOperationException(SR.Format(SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported, ConformanceMode));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.Cbor_ConformanceMode_IndefiniteLengthItemsNotSupported,
+                        ConformanceMode
+                    )
+                );
             }
 
             EnsureWriteCapacity(1);
-            WriteInitialByte(new CborInitialByte(CborMajorType.Array, CborAdditionalInfo.IndefiniteLength));
+            WriteInitialByte(
+                new CborInitialByte(CborMajorType.Array, CborAdditionalInfo.IndefiniteLength)
+            );
             PushDataItem(CborMajorType.Array, definiteLength: null);
         }
 
@@ -79,8 +89,14 @@ namespace System.Formats.Cbor
                 // length encoding requires more than 1 byte, need to shift encoded elements to the right
                 EnsureWriteCapacity(bytesToShift);
 
-                ReadOnlySpan<byte> elementEncoding = _buffer.AsSpan(_frameOffset, currentOffset - _frameOffset);
-                Span<byte> target = _buffer.AsSpan(_frameOffset + bytesToShift, currentOffset - _frameOffset);
+                ReadOnlySpan<byte> elementEncoding = _buffer.AsSpan(
+                    _frameOffset,
+                    currentOffset - _frameOffset
+                );
+                Span<byte> target = _buffer.AsSpan(
+                    _frameOffset + bytesToShift,
+                    currentOffset - _frameOffset
+                );
                 elementEncoding.CopyTo(target);
             }
 

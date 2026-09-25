@@ -21,15 +21,12 @@ public class Runtime_88950
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public Example(object? value, int offset, int length)
         {
-            var inner = new ExampleInner
-            {
-                Offset = offset,
-                Length = length
-            };
+            var inner = new ExampleInner { Offset = offset, Length = length };
 
             Value = value;
             Inner = Unsafe.As<ExampleInner, ulong>(ref inner);
         }
+
         public int Offset
         {
             [MethodImpl(MethodImplOptions.AggressiveOptimization | MethodImplOptions.NoInlining)]

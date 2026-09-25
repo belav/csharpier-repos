@@ -8,10 +8,20 @@ namespace System.IO
 {
     internal static partial class FileSystem
     {
-        static partial void TryCloneFile(string sourceFullPath, string destFullPath, bool overwrite, ref bool cloned)
+        static partial void TryCloneFile(
+            string sourceFullPath,
+            string destFullPath,
+            bool overwrite,
+            ref bool cloned
+        )
         {
             // This helper function calls out to clonefile, and returns the error.
-            static bool TryCloneFile(string sourceFullPath, string destFullPath, int flags, out Interop.Error error)
+            static bool TryCloneFile(
+                string sourceFullPath,
+                string destFullPath,
+                int flags,
+                out Interop.Error error
+            )
             {
                 if (Interop.@libc.clonefile(sourceFullPath, destFullPath, flags) == 0)
                 {
@@ -53,8 +63,16 @@ namespace System.IO
                 // it's locked by something else, and then delete it. It should also fail if destination == source since it's already locked.
                 try
                 {
-                    using SafeFileHandle? dstHandle = SafeFileHandle.OpenNoFollowSymlink(destFullPath, FileMode.Open, FileAccess.ReadWrite,
-                        FileShare.None, FileOptions.None, preallocationSize: 0, out bool wasSymlink, createOpenException: CreateOpenExceptionForCopyFile);
+                    using SafeFileHandle? dstHandle = SafeFileHandle.OpenNoFollowSymlink(
+                        destFullPath,
+                        FileMode.Open,
+                        FileAccess.ReadWrite,
+                        FileShare.None,
+                        FileOptions.None,
+                        preallocationSize: 0,
+                        out bool wasSymlink,
+                        createOpenException: CreateOpenExceptionForCopyFile
+                    );
                     if (wasSymlink)
                     {
                         // Don't try if it's a symlink.
@@ -62,8 +80,10 @@ namespace System.IO
                     }
                     else
                     {
-                        if (Interop.Sys.Unlink(destFullPath) < 0 &&
-                            Interop.Sys.GetLastError() != Interop.Error.ENOENT)
+                        if (
+                            Interop.Sys.Unlink(destFullPath) < 0
+                            && Interop.Sys.GetLastError() != Interop.Error.ENOENT
+                        )
                         {
                             // Fall back to standard copy as an unexpected error has occurred.
                             return;
@@ -83,9 +103,12 @@ namespace System.IO
                 }
             }
 
-            if (error is Interop.Error.ENOTSUP // Check if it's not supported,
-                      or Interop.Error.EXDEV   // if files are on different filesystems,
-                      or Interop.Error.EEXIST) // or if the destination file still exists.
+            if (
+                error
+                is Interop.Error.ENOTSUP // Check if it's not supported,
+                    or Interop.Error.EXDEV // if files are on different filesystems,
+                    or Interop.Error.EEXIST
+            ) // or if the destination file still exists.
             {
                 // Fall back to normal copy.
                 return;

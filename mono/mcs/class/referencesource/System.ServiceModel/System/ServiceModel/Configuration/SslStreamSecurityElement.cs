@@ -11,19 +11,22 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class SslStreamSecurityElement : BindingElementExtensionElement
     {
-        public SslStreamSecurityElement()
-        {
-        }
+        public SslStreamSecurityElement() { }
 
         [ConfigurationProperty(
-            ConfigurationStrings.RequireClientCertificate, DefaultValue = TransportDefaults.RequireClientCertificate)]
+            ConfigurationStrings.RequireClientCertificate,
+            DefaultValue = TransportDefaults.RequireClientCertificate
+        )]
         public bool RequireClientCertificate
         {
             get { return (bool)base[ConfigurationStrings.RequireClientCertificate]; }
             set { base[ConfigurationStrings.RequireClientCertificate] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.SslProtocols, DefaultValue = TransportDefaults.OldDefaultSslProtocols)]
+        [ConfigurationProperty(
+            ConfigurationStrings.SslProtocols,
+            DefaultValue = TransportDefaults.OldDefaultSslProtocols
+        )]
         [ServiceModelEnumValidator(typeof(SslProtocolsHelper))]
         public SslProtocols SslProtocols
         {
@@ -31,11 +34,10 @@ namespace System.ServiceModel.Configuration
             private set { base[ConfigurationStrings.SslProtocols] = value; }
         }
 
-
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
             base.ApplyConfiguration(bindingElement);
-            SslStreamSecurityBindingElement sslBindingElement = 
+            SslStreamSecurityBindingElement sslBindingElement =
                 (SslStreamSecurityBindingElement)bindingElement;
             sslBindingElement.RequireClientCertificate = this.RequireClientCertificate;
             sslBindingElement.SslProtocols = this.SslProtocols;
@@ -43,8 +45,8 @@ namespace System.ServiceModel.Configuration
 
         protected internal override BindingElement CreateBindingElement()
         {
-            SslStreamSecurityBindingElement sslBindingElement 
-                = new SslStreamSecurityBindingElement();
+            SslStreamSecurityBindingElement sslBindingElement =
+                new SslStreamSecurityBindingElement();
 
             this.ApplyConfiguration(sslBindingElement);
             return sslBindingElement;
@@ -68,13 +70,16 @@ namespace System.ServiceModel.Configuration
         protected internal override void InitializeFrom(BindingElement bindingElement)
         {
             base.InitializeFrom(bindingElement);
-            SslStreamSecurityBindingElement sslBindingElement 
-                = (SslStreamSecurityBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireClientCertificate, sslBindingElement.RequireClientCertificate);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.SslProtocols, sslBindingElement.SslProtocols);
+            SslStreamSecurityBindingElement sslBindingElement =
+                (SslStreamSecurityBindingElement)bindingElement;
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.RequireClientCertificate,
+                sslBindingElement.RequireClientCertificate
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.SslProtocols,
+                sslBindingElement.SslProtocols
+            );
         }
     }
 }
-
-
-

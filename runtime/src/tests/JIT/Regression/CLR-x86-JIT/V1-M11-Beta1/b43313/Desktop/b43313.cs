@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace Test
 {
     using System;
 
-    class OtherException : Exception
-    {
-    }
+    class OtherException : Exception { }
 
     public struct AA
     {
@@ -48,6 +47,7 @@ namespace Test
             }
             catch (OtherException) { }
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

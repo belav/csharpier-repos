@@ -15,7 +15,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             internal readonly int Position;
             internal readonly GreenNode PrevTokenTrailingTrivia;
 
-            internal ResetPoint(int resetCount, LexerMode mode, int position, GreenNode prevTokenTrailingTrivia)
+            internal ResetPoint(
+                int resetCount,
+                LexerMode mode,
+                int position,
+                GreenNode prevTokenTrailingTrivia
+            )
             {
                 this.ResetCount = resetCount;
                 this.Mode = mode;

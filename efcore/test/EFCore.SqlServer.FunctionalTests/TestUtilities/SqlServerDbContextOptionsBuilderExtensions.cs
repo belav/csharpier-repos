@@ -5,9 +5,13 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public static class SqlServerDbContextOptionsBuilderExtensions
 {
-    public static SqlServerDbContextOptionsBuilder ApplyConfiguration(this SqlServerDbContextOptionsBuilder optionsBuilder)
+    public static SqlServerDbContextOptionsBuilder ApplyConfiguration(
+        this SqlServerDbContextOptionsBuilder optionsBuilder
+    )
     {
-        var maxBatch = TestEnvironment.GetInt(nameof(SqlServerDbContextOptionsBuilder.MaxBatchSize));
+        var maxBatch = TestEnvironment.GetInt(
+            nameof(SqlServerDbContextOptionsBuilder.MaxBatchSize)
+        );
         if (maxBatch.HasValue)
         {
             optionsBuilder.MaxBatchSize(maxBatch.Value);

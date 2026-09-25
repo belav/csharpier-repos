@@ -18,8 +18,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             Document document,
             int position,
             CompletionCapabilityHelper capabilityHelper,
-            CompletionList list, bool isIncomplete, long resultId,
-            CancellationToken cancellationToken);
+            CompletionList list,
+            bool isIncomplete,
+            long resultId,
+            CancellationToken cancellationToken
+        );
 
         Task<LSP.CompletionItem> ResolveAsync(
             LSP.CompletionItem lspItem,
@@ -30,6 +33,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Completion
             CompletionService completionService,
             CompletionOptions completionOptions,
             SymbolDescriptionOptions symbolDescriptionOptions,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

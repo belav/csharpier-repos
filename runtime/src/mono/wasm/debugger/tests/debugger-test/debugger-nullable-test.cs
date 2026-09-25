@@ -16,7 +16,10 @@ namespace DebuggerTests
             DateTime? n_dt = new DateTime(2310, 1, 2, 3, 4, 5);
             DateTime? n_dt_null = null;
 
-            ValueTypesTest.GenericStruct<int>? n_gs = new ValueTypesTest.GenericStruct<int> { StringField = "n_gs#StringField" };
+            ValueTypesTest.GenericStruct<int>? n_gs = new ValueTypesTest.GenericStruct<int>
+            {
+                StringField = "n_gs#StringField",
+            };
             ValueTypesTest.GenericStruct<int>? n_gs_null = null;
 
             Console.WriteLine($"break here");
@@ -30,7 +33,10 @@ namespace DebuggerTests
             DateTime? n_dt = new DateTime(2310, 1, 2, 3, 4, 5);
             DateTime? n_dt_null = null;
 
-            ValueTypesTest.GenericStruct<int>? n_gs = new ValueTypesTest.GenericStruct<int> { StringField = "n_gs#StringField" };
+            ValueTypesTest.GenericStruct<int>? n_gs = new ValueTypesTest.GenericStruct<int>
+            {
+                StringField = "n_gs#StringField",
+            };
             ValueTypesTest.GenericStruct<int>? n_gs_null = null;
 
             Console.WriteLine($"break here");

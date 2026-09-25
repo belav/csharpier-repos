@@ -6,7 +6,6 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-
 using EditorBrowsableAttribute = System.ComponentModel.EditorBrowsableAttribute;
 using EditorBrowsableState = System.ComponentModel.EditorBrowsableState;
 
@@ -98,10 +97,12 @@ namespace System
             // No validation performed in release builds; caller must provide any necessary validation.
 
             // 'obj is T[]' below also handles things like int[] <-> uint[] being convertible
-            Debug.Assert((obj == null)
-                || (typeof(T) == typeof(char) && obj is string)
-                || (obj is T[])
-                || (obj is MemoryManager<T>));
+            Debug.Assert(
+                (obj == null)
+                    || (typeof(T) == typeof(char) && obj is string)
+                    || (obj is T[])
+                    || (obj is MemoryManager<T>)
+            );
 
             _object = obj;
             _index = start;
@@ -111,12 +112,14 @@ namespace System
         /// <summary>
         /// Defines an implicit conversion of an array to a <see cref="ReadOnlyMemory{T}"/>
         /// </summary>
-        public static implicit operator ReadOnlyMemory<T>(T[]? array) => new ReadOnlyMemory<T>(array);
+        public static implicit operator ReadOnlyMemory<T>(T[]? array) =>
+            new ReadOnlyMemory<T>(array);
 
         /// <summary>
         /// Defines an implicit conversion of a <see cref="ArraySegment{T}"/> to a <see cref="ReadOnlyMemory{T}"/>
         /// </summary>
-        public static implicit operator ReadOnlyMemory<T>(ArraySegment<T> segment) => new ReadOnlyMemory<T>(segment.Array, segment.Offset, segment.Count);
+        public static implicit operator ReadOnlyMemory<T>(ArraySegment<T> segment) =>
+            new ReadOnlyMemory<T>(segment.Array, segment.Offset, segment.Count);
 
         /// <summary>
         /// Returns an empty <see cref="ReadOnlyMemory{T}"/>
@@ -209,7 +212,9 @@ namespace System
                     {
                         // Special-case string since it's the most common for ROM<char>.
 
-                        refToReturn = ref Unsafe.As<char, T>(ref Unsafe.As<string>(tmpObject).GetRawStringData());
+                        refToReturn = ref Unsafe.As<char, T>(
+                            ref Unsafe.As<string>(tmpObject).GetRawStringData()
+                        );
                         lengthOfUnderlyingSpan = Unsafe.As<string>(tmpObject).Length;
                     }
                     else if (RuntimeHelpers.ObjectHasComponentSize(tmpObject))
@@ -226,7 +231,9 @@ namespace System
                         // 'tmpObject is T[]' below also handles things like int[] <-> uint[] being convertible
                         Debug.Assert(tmpObject is T[]);
 
-                        refToReturn = ref MemoryMarshal.GetArrayDataReference(Unsafe.As<T[]>(tmpObject));
+                        refToReturn = ref MemoryMarshal.GetArrayDataReference(
+                            Unsafe.As<T[]>(tmpObject)
+                        );
                         lengthOfUnderlyingSpan = Unsafe.As<T[]>(tmpObject).Length;
                     }
                     else
@@ -238,7 +245,9 @@ namespace System
                         // constructor or other public API which would allow such a conversion.
 
                         Debug.Assert(tmpObject is MemoryManager<T>);
-                        Span<T> memoryManagerSpan = Unsafe.As<MemoryManager<T>>(tmpObject).GetSpan();
+                        Span<T> memoryManagerSpan = Unsafe
+                            .As<MemoryManager<T>>(tmpObject)
+                            .GetSpan();
                         refToReturn = ref MemoryMarshal.GetReference(memoryManagerSpan);
                         lengthOfUnderlyingSpan = memoryManagerSpan.Length;
                     }
@@ -254,12 +263,19 @@ namespace System
 
 #if TARGET_64BIT
                     // See comment in Span<T>.Slice for how this works.
-                    if ((ulong)desiredStartIndex + (ulong)(uint)desiredLength > (ulong)(uint)lengthOfUnderlyingSpan)
+                    if (
+                        (ulong)desiredStartIndex + (ulong)(uint)desiredLength
+                        > (ulong)(uint)lengthOfUnderlyingSpan
+                    )
                     {
                         ThrowHelper.ThrowArgumentOutOfRangeException();
                     }
 #else
-                    if ((uint)desiredStartIndex > (uint)lengthOfUnderlyingSpan || (uint)desiredLength > (uint)lengthOfUnderlyingSpan - (uint)desiredStartIndex)
+                    if (
+                        (uint)desiredStartIndex > (uint)lengthOfUnderlyingSpan
+                        || (uint)desiredLength
+                            > (uint)lengthOfUnderlyingSpan - (uint)desiredStartIndex
+                    )
                     {
                         ThrowHelper.ThrowArgumentOutOfRangeException();
                     }
@@ -325,13 +341,23 @@ namespace System
                     // Array is already pre-pinned
                     if (_index < 0)
                     {
-                        void* pointer = Unsafe.Add<T>(Unsafe.AsPointer(ref MemoryMarshal.GetArrayDataReference(Unsafe.As<T[]>(tmpObject))), _index & RemoveFlagsBitMask);
+                        void* pointer = Unsafe.Add<T>(
+                            Unsafe.AsPointer(
+                                ref MemoryMarshal.GetArrayDataReference(Unsafe.As<T[]>(tmpObject))
+                            ),
+                            _index & RemoveFlagsBitMask
+                        );
                         return new MemoryHandle(pointer);
                     }
                     else
                     {
                         GCHandle handle = GCHandle.Alloc(tmpObject, GCHandleType.Pinned);
-                        void* pointer = Unsafe.Add<T>(Unsafe.AsPointer(ref MemoryMarshal.GetArrayDataReference(Unsafe.As<T[]>(tmpObject))), _index);
+                        void* pointer = Unsafe.Add<T>(
+                            Unsafe.AsPointer(
+                                ref MemoryMarshal.GetArrayDataReference(Unsafe.As<T[]>(tmpObject))
+                            ),
+                            _index
+                        );
                         return new MemoryHandle(pointer, handle);
                     }
                 }
@@ -376,10 +402,7 @@ namespace System
         /// </summary>
         public bool Equals(ReadOnlyMemory<T> other)
         {
-            return
-                _object == other._object &&
-                _index == other._index &&
-                _length == other._length;
+            return _object == other._object && _index == other._index && _length == other._length;
         }
 
         /// <summary>Returns the hash code for this <see cref="ReadOnlyMemory{T}"/></summary>
@@ -388,7 +411,9 @@ namespace System
         {
             // We use RuntimeHelpers.GetHashCode instead of Object.GetHashCode because the hash
             // code is based on object identity and referential equality, not deep equality (as common with string).
-            return (_object != null) ? HashCode.Combine(RuntimeHelpers.GetHashCode(_object), _index, _length) : 0;
+            return (_object != null)
+                ? HashCode.Combine(RuntimeHelpers.GetHashCode(_object), _index, _length)
+                : 0;
         }
 
         /// <summary>Gets the state of the memory as individual fields.</summary>

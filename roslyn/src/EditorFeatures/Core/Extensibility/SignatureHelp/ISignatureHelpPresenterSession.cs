@@ -13,7 +13,12 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     internal interface ISignatureHelpPresenterSession : IIntelliSensePresenterSession
     {
-        void PresentItems(ITrackingSpan triggerSpan, IList<SignatureHelpItem> items, SignatureHelpItem selectedItem, int? selectedParameter);
+        void PresentItems(
+            ITrackingSpan triggerSpan,
+            IList<SignatureHelpItem> items,
+            SignatureHelpItem selectedItem,
+            int? selectedParameter
+        );
         void SelectPreviousItem();
         void SelectNextItem();
 

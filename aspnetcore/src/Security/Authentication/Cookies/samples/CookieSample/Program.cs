@@ -45,46 +45,40 @@ var app = builder.Build();
 
 app.UseAuthentication();
 
-app.MapGet(
-    "/",
-    async context =>
+app.MapGet("/", async context =>
+{
+    if (!context.User.Identities.Any(identity => identity.IsAuthenticated))
     {
-        if (!context.User.Identities.Any(identity => identity.IsAuthenticated))
-        {
-            var user = new ClaimsPrincipal(
-                new ClaimsIdentity(
-                    new[] { new Claim(ClaimTypes.Name, "bob") },
-                    CookieAuthenticationDefaults.AuthenticationScheme
-                )
-            );
-            await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, user);
-
-            context.Response.ContentType = "text/plain";
-            await context.Response.WriteAsync("Hello First timer");
-            return;
-        }
+        var user = new ClaimsPrincipal(
+            new ClaimsIdentity(
+                new[] { new Claim(ClaimTypes.Name, "bob") },
+                CookieAuthenticationDefaults.AuthenticationScheme
+            )
+        );
+        await context.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, user);
 
         context.Response.ContentType = "text/plain";
-        await context.Response.WriteAsync("Hello old timer");
+        await context.Response.WriteAsync("Hello First timer");
+        return;
     }
-);
 
-app.MapGet(
-    "/ticket",
-    async context =>
+    context.Response.ContentType = "text/plain";
+    await context.Response.WriteAsync("Hello old timer");
+});
+
+app.MapGet("/ticket", async context =>
+{
+    var ticket = await context.AuthenticateAsync();
+    if (!ticket.Succeeded)
     {
-        var ticket = await context.AuthenticateAsync();
-        if (!ticket.Succeeded)
-        {
-            await context.Response.WriteAsync($"Signed Out");
-            return;
-        }
-
-        foreach (var (key, value) in ticket.Properties.Items)
-        {
-            await context.Response.WriteAsync($"{key}: {value}\r\n");
-        }
+        await context.Response.WriteAsync($"Signed Out");
+        return;
     }
-);
+
+    foreach (var (key, value) in ticket.Properties.Items)
+    {
+        await context.Response.WriteAsync($"{key}: {value}\r\n");
+    }
+});
 
 app.Run();

@@ -5,8 +5,8 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.ServiceModel;
     using System.Globalization;
+    using System.ServiceModel;
 
     class TransactionChannelFaultConverter<TChannel> : FaultConverter
         where TChannel : class, IChannel
@@ -18,20 +18,39 @@ namespace System.ServiceModel.Channels
             this.channel = channel;
         }
 
-        protected override bool OnTryCreateException(Message message, MessageFault fault, out Exception exception)
+        protected override bool OnTryCreateException(
+            Message message,
+            MessageFault fault,
+            out Exception exception
+        )
         {
             if (message.Headers.Action == FaultCodeConstants.Actions.Transactions)
             {
-                exception = new ProtocolException(fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text);
+                exception = new ProtocolException(
+                    fault.Reason.GetMatchingTranslation(CultureInfo.CurrentCulture).Text
+                );
                 return true;
             }
 
             if (fault.IsMustUnderstandFault)
             {
                 MessageHeader header = this.channel.Formatter.EmptyTransactionHeader;
-                if (MessageFault.WasHeaderNotUnderstood(message.Headers, header.Name, header.Namespace))
+                if (
+                    MessageFault.WasHeaderNotUnderstood(
+                        message.Headers,
+                        header.Name,
+                        header.Namespace
+                    )
+                )
                 {
-                    exception = new ProtocolException(SR.GetString(SR.SFxTransactionHeaderNotUnderstood, header.Name, header.Namespace, this.channel.Protocol));
+                    exception = new ProtocolException(
+                        SR.GetString(
+                            SR.SFxTransactionHeaderNotUnderstood,
+                            header.Name,
+                            header.Namespace,
+                            this.channel.Protocol
+                        )
+                    );
                     return true;
                 }
             }

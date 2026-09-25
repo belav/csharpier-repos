@@ -15,10 +15,7 @@ namespace System.IO.Pipelines.Tests
             return new Owner(minBufferSize == -1 ? 4096 : minBufferSize);
         }
 
-        protected override void Dispose(bool disposing)
-        {
-
-        }
+        protected override void Dispose(bool disposing) { }
 
         private class Owner : IMemoryOwner<byte>
         {
@@ -29,10 +26,7 @@ namespace System.IO.Pipelines.Tests
 
             public Memory<byte> Memory { get; }
 
-            public void Dispose()
-            {
-
-            }
+            public void Dispose() { }
         }
     }
 }

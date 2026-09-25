@@ -18,20 +18,18 @@ namespace System.Net.Configuration
             this.properties.Add(this.address);
         }
 
-        public BypassElement(string address) : this()
+        public BypassElement(string address)
+            : this()
         {
             this.Address = address;
         }
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Address, IsRequired=true, IsKey = true)]
+        [ConfigurationProperty(ConfigurationStrings.Address, IsRequired = true, IsKey = true)]
         public string Address
         {
             get { return (string)this[this.address]; }
@@ -45,10 +43,11 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty address =
-            new ConfigurationProperty(ConfigurationStrings.Address, typeof(string), null,
-                    ConfigurationPropertyOptions.IsKey);
-
+        readonly ConfigurationProperty address = new ConfigurationProperty(
+            ConfigurationStrings.Address,
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.IsKey
+        );
     }
 }
-

@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,6 +11,7 @@ namespace Test
     public class AA
     {
         static uint[] m_au = new uint[2];
+
         static void Main1()
         {
             int D = 18;
@@ -19,6 +21,7 @@ namespace Test
             } while (D == 0);
             throw new Exception();
         }
+
         [Fact]
         public static int TestEntryPoint()
         {
@@ -26,7 +29,10 @@ namespace Test
             {
                 Main1();
             }
-            catch (Exception) { return 100; }
+            catch (Exception)
+            {
+                return 100;
+            }
             return -1;
         }
     }

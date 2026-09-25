@@ -3,22 +3,19 @@ using System;
 // Without namespace, this error does not happen.
 namespace MyTest
 {
-        public class Test
+    public class Test
+    {
+        public interface Inner
         {
-                public interface Inner
-                {
-                        void Foo ();
-                }
+            void Foo();
         }
+    }
 
-        public class Test2 : MarshalByRefObject, Test.Inner
-        {
-                // This is OK: public void Foo ()
-                void Test.Inner.Foo ()
-                {
-                }
+    public class Test2 : MarshalByRefObject, Test.Inner
+    {
+        // This is OK: public void Foo ()
+        void Test.Inner.Foo() { }
 
-		public static void Main ()
-		{ }
-        }
+        public static void Main() { }
+    }
 }

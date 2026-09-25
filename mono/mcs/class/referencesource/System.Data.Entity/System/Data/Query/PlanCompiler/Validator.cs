@@ -9,14 +9,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-
-using md = System.Data.Metadata.Edm;
 using System.Data.Query.InternalTrees;
 using System.Data.Query.PlanCompiler;
 using System.Data.Query.ResultAssembly;
 using System.Diagnostics;
+using System.Globalization;
 using System.Text;
+using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.PlanCompiler
 {
@@ -50,19 +49,24 @@ namespace System.Data.Query.PlanCompiler
 
         private static BitVec InitializeOpTypes()
         {
-            BitVec validOpTypes = new BitVec(((int)OpType.MaxMarker + 1) * ((int)PlanCompilerPhase.MaxMarker + 1));
+            BitVec validOpTypes = new BitVec(
+                ((int)OpType.MaxMarker + 1) * ((int)PlanCompilerPhase.MaxMarker + 1)
+            );
 
             AddAllEntry(validOpTypes, OpType.Aggregate);
             AddAllEntry(validOpTypes, OpType.And);
             AddAllEntry(validOpTypes, OpType.Case);
             AddAllEntry(validOpTypes, OpType.Cast);
-            AddEntry(validOpTypes, OpType.Collect,
+            AddEntry(
+                validOpTypes,
+                OpType.Collect,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
                 PlanCompilerPhase.NTE,
                 PlanCompilerPhase.ProjectionPruning,
-                PlanCompilerPhase.NestPullup);
+                PlanCompilerPhase.NestPullup
+            );
             AddAllEntry(validOpTypes, OpType.Constant);
             AddAllEntry(validOpTypes, OpType.ConstantPredicate);
             AddAllEntry(validOpTypes, OpType.ConstrainedSort);
@@ -71,13 +75,16 @@ namespace System.Data.Query.PlanCompiler
             AddEntry(validOpTypes, OpType.Deref, PlanCompilerPhase.PreProcessor);
             AddAllEntry(validOpTypes, OpType.Distinct);
             AddAllEntry(validOpTypes, OpType.Divide);
-            AddEntry(validOpTypes, OpType.Element,
+            AddEntry(
+                validOpTypes,
+                OpType.Element,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.Transformations,
                 PlanCompilerPhase.JoinElimination,
                 PlanCompilerPhase.ProjectionPruning,
                 PlanCompilerPhase.CodeGen,
-                PlanCompilerPhase.PostCodeGen);
+                PlanCompilerPhase.PostCodeGen
+            );
             AddAllEntry(validOpTypes, OpType.EQ);
             AddAllEntry(validOpTypes, OpType.Except);
             AddAllEntry(validOpTypes, OpType.Exists);
@@ -85,34 +92,46 @@ namespace System.Data.Query.PlanCompiler
             AddAllEntry(validOpTypes, OpType.FullOuterJoin);
             AddAllEntry(validOpTypes, OpType.Function);
             AddAllEntry(validOpTypes, OpType.GE);
-            AddEntry(validOpTypes, OpType.GetEntityRef,
+            AddEntry(
+                validOpTypes,
+                OpType.GetEntityRef,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
-            AddEntry(validOpTypes, OpType.GetRefKey,
+                PlanCompilerPhase.NTE
+            );
+            AddEntry(
+                validOpTypes,
+                OpType.GetRefKey,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
+                PlanCompilerPhase.NTE
+            );
             AddAllEntry(validOpTypes, OpType.GroupBy);
-            AddEntry(validOpTypes, OpType.GroupByInto,
+            AddEntry(
+                validOpTypes,
+                OpType.GroupByInto,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
                 PlanCompilerPhase.NTE,
                 PlanCompilerPhase.ProjectionPruning,
-                PlanCompilerPhase.NestPullup);
+                PlanCompilerPhase.NestPullup
+            );
             AddAllEntry(validOpTypes, OpType.GT);
             AddAllEntry(validOpTypes, OpType.InnerJoin);
             AddAllEntry(validOpTypes, OpType.InternalConstant);
             AddAllEntry(validOpTypes, OpType.Intersect);
             AddAllEntry(validOpTypes, OpType.IsNull);
-            AddEntry(validOpTypes, OpType.IsOf,
+            AddEntry(
+                validOpTypes,
+                OpType.IsOf,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
+                PlanCompilerPhase.NTE
+            );
             AddAllEntry(validOpTypes, OpType.LE);
             AddAllEntry(validOpTypes, OpType.LeftOuterJoin);
             AddAllEntry(validOpTypes, OpType.Like);
@@ -122,27 +141,39 @@ namespace System.Data.Query.PlanCompiler
             AddAllEntry(validOpTypes, OpType.Multiply);
             AddEntry(validOpTypes, OpType.Navigate, PlanCompilerPhase.PreProcessor);
             AddAllEntry(validOpTypes, OpType.NE);
-            AddEntry(validOpTypes, OpType.NewEntity,
+            AddEntry(
+                validOpTypes,
+                OpType.NewEntity,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
-            AddEntry(validOpTypes, OpType.NewInstance,
+                PlanCompilerPhase.NTE
+            );
+            AddEntry(
+                validOpTypes,
+                OpType.NewInstance,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
-            AddEntry(validOpTypes, OpType.DiscriminatedNewEntity,
+                PlanCompilerPhase.NTE
+            );
+            AddEntry(
+                validOpTypes,
+                OpType.DiscriminatedNewEntity,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
+                PlanCompilerPhase.NTE
+            );
             AddEntry(validOpTypes, OpType.NewMultiset, PlanCompilerPhase.PreProcessor);
-            AddEntry(validOpTypes, OpType.NewRecord,
+            AddEntry(
+                validOpTypes,
+                OpType.NewRecord,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
+                PlanCompilerPhase.NTE
+            );
             AddAllEntry(validOpTypes, OpType.Not);
             AddAllEntry(validOpTypes, OpType.Null);
             AddAllEntry(validOpTypes, OpType.NullSentinel);
@@ -152,36 +183,51 @@ namespace System.Data.Query.PlanCompiler
             AddAllEntry(validOpTypes, OpType.Plus);
             AddAllEntry(validOpTypes, OpType.Project);
             // Since, we don't support UDTs anymore - we shouldn't see PropertyOp after this
-            AddEntry(validOpTypes, OpType.Property,
+            AddEntry(
+                validOpTypes,
+                OpType.Property,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
-            AddEntry(validOpTypes, OpType.Ref,
+                PlanCompilerPhase.NTE
+            );
+            AddEntry(
+                validOpTypes,
+                OpType.Ref,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
-            AddEntry(validOpTypes, OpType.RelProperty,
+                PlanCompilerPhase.NTE
+            );
+            AddEntry(
+                validOpTypes,
+                OpType.RelProperty,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
+                PlanCompilerPhase.NTE
+            );
             AddAllEntry(validOpTypes, OpType.ScanTable);
-            AddEntry(validOpTypes, OpType.ScanView,
+            AddEntry(
+                validOpTypes,
+                OpType.ScanView,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
+                PlanCompilerPhase.NTE
+            );
             AddAllEntry(validOpTypes, OpType.SingleRow);
             AddAllEntry(validOpTypes, OpType.SingleRowTable);
             AddAllEntry(validOpTypes, OpType.SoftCast);
             AddAllEntry(validOpTypes, OpType.Sort);
-            AddEntry(validOpTypes, OpType.Treat,
+            AddEntry(
+                validOpTypes,
+                OpType.Treat,
                 PlanCompilerPhase.PreProcessor,
                 PlanCompilerPhase.AggregatePushdown,
                 PlanCompilerPhase.Normalization,
-                PlanCompilerPhase.NTE);
+                PlanCompilerPhase.NTE
+            );
             AddAllEntry(validOpTypes, OpType.UnaryMinus);
             AddAllEntry(validOpTypes, OpType.UnionAll);
             AddAllEntry(validOpTypes, OpType.Unnest);
@@ -210,13 +256,18 @@ namespace System.Data.Query.PlanCompiler
             opVector.Set(hash);
         }
 
-        private static void AddEntry(BitVec opVector, OpType opType, params PlanCompilerPhase[] phases)
+        private static void AddEntry(
+            BitVec opVector,
+            OpType opType,
+            params PlanCompilerPhase[] phases
+        )
         {
             foreach (PlanCompilerPhase phase in phases)
             {
                 AddSingleEntry(opVector, opType, phase);
             }
         }
+
         private static void AddAllEntry(BitVec opVector, OpType opType)
         {
             foreach (PlanCompilerPhase phase in s_PlanCompilerPhases)
@@ -224,6 +275,7 @@ namespace System.Data.Query.PlanCompiler
                 AddSingleEntry(opVector, opType, phase);
             }
         }
+
         private static bool CheckEntry(OpType opType, PlanCompilerPhase phase)
         {
             int hash = ComputeHash(opType, phase);
@@ -236,17 +288,28 @@ namespace System.Data.Query.PlanCompiler
         protected override void VisitDefault(Node n)
         {
             base.VisitDefault(n);
-            Assert(CheckEntry(n.Op.OpType, m_compilerState.Phase),
-                   "Unxpected Op {0} in Phase {1}", n.Op.OpType, m_compilerState.Phase);
+            Assert(
+                CheckEntry(n.Op.OpType, m_compilerState.Phase),
+                "Unxpected Op {0} in Phase {1}",
+                n.Op.OpType,
+                m_compilerState.Phase
+            );
         }
 
         #region ScalarOps
         public override void Visit(NewEntityOp op, Node n)
         {
             base.Visit(op, n);
-            if (m_compilerState.Phase > PlanCompilerPhase.PreProcessor && op.Type.EdmType.BuiltInTypeKind == md.BuiltInTypeKind.EntityType)
+            if (
+                m_compilerState.Phase > PlanCompilerPhase.PreProcessor
+                && op.Type.EdmType.BuiltInTypeKind == md.BuiltInTypeKind.EntityType
+            )
             {
-                Assert(op.Scoped, "NewEntityOp for an entity type {0} is not scoped. All entity type constructors must be scoped after PreProcessor phase.", op.Type.EdmType.FullName);
+                Assert(
+                    op.Scoped,
+                    "NewEntityOp for an entity type {0} is not scoped. All entity type constructors must be scoped after PreProcessor phase.",
+                    op.Type.EdmType.FullName
+                );
             }
         }
         #endregion
@@ -266,16 +329,19 @@ namespace System.Data.Query.PlanCompiler
         #region private state
         private PlanCompiler m_compilerState;
 
-        private static PlanCompilerPhase[] s_PlanCompilerPhases = { PlanCompilerPhase.PreProcessor          ,
-                                                                    PlanCompilerPhase.AggregatePushdown     ,
-                                                                    PlanCompilerPhase.Normalization         ,
-                                                                    PlanCompilerPhase.NTE                   ,
-                                                                    PlanCompilerPhase.ProjectionPruning     ,
-                                                                    PlanCompilerPhase.NestPullup            ,
-                                                                    PlanCompilerPhase.Transformations       ,
-                                                                    PlanCompilerPhase.JoinElimination       ,
-                                                                    PlanCompilerPhase.CodeGen               ,
-                                                                    PlanCompilerPhase.PostCodeGen           };
+        private static PlanCompilerPhase[] s_PlanCompilerPhases =
+        {
+            PlanCompilerPhase.PreProcessor,
+            PlanCompilerPhase.AggregatePushdown,
+            PlanCompilerPhase.Normalization,
+            PlanCompilerPhase.NTE,
+            PlanCompilerPhase.ProjectionPruning,
+            PlanCompilerPhase.NestPullup,
+            PlanCompilerPhase.Transformations,
+            PlanCompilerPhase.JoinElimination,
+            PlanCompilerPhase.CodeGen,
+            PlanCompilerPhase.PostCodeGen,
+        };
 
         private static BitVec s_ValidOpTypes = InitializeOpTypes();
         #endregion
@@ -292,25 +358,36 @@ namespace System.Data.Query.PlanCompiler
             private readonly int[] m_array;
             private readonly int m_length;
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode"
+            )]
             internal BitVec(int length)
             {
                 Debug.Assert(0 < length, "zero length");
                 m_array = new int[(length + 31) / 32];
                 m_length = length;
             }
+
             internal int Count
             {
                 get { return m_length; }
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode"
+            )]
             internal void Set(int index)
             {
                 Debug.Assert(unchecked((uint)index < (uint)m_length), "index out of range");
                 m_array[index / 32] |= (1 << (index % 32));
             }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode"
+            )]
             internal void ClearAll()
             {
                 for (int i = 0; i < m_array.Length; i++)
@@ -318,7 +395,11 @@ namespace System.Data.Query.PlanCompiler
                     m_array[i] = 0;
                 }
             }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode"
+            )]
             internal bool IsEmpty()
             {
                 for (int i = 0; i < m_array.Length; i++)
@@ -330,12 +411,17 @@ namespace System.Data.Query.PlanCompiler
                 }
                 return true;
             }
+
             internal bool IsSet(int index)
             {
                 Debug.Assert(unchecked((uint)index < (uint)m_length), "index out of range");
                 return (m_array[index / 32] & (1 << (index % 32))) != 0;
             }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode"
+            )]
             internal void Or(BitVec value)
             {
                 Debug.Assert(m_length == value.m_length, "unequal sized bitvec");
@@ -344,7 +430,11 @@ namespace System.Data.Query.PlanCompiler
                     m_array[i] |= value.m_array[i];
                 }
             }
-            [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
+
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode"
+            )]
             internal void Minus(BitVec value)
             {
                 Debug.Assert(m_length == value.m_length, "unequal sized bitvec");
@@ -353,6 +443,7 @@ namespace System.Data.Query.PlanCompiler
                     m_array[i] &= ~value.m_array[i];
                 }
             }
+
             public override string ToString()
             {
                 StringBuilder sb = new StringBuilder(3 * Count);

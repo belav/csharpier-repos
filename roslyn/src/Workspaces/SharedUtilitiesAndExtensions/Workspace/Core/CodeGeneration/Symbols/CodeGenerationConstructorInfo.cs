@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal class CodeGenerationConstructorInfo
     {
-        private static readonly ConditionalWeakTable<IMethodSymbol, CodeGenerationConstructorInfo> s_constructorToInfoMap = new();
+        private static readonly ConditionalWeakTable<
+            IMethodSymbol,
+            CodeGenerationConstructorInfo
+        > s_constructorToInfoMap = new();
 
         private readonly bool _isPrimaryConstructor;
         private readonly bool _isUnsafe;
@@ -24,7 +27,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string typeName,
             ImmutableArray<SyntaxNode> statements,
             ImmutableArray<SyntaxNode> baseConstructorArguments,
-            ImmutableArray<SyntaxNode> thisConstructorArguments)
+            ImmutableArray<SyntaxNode> thisConstructorArguments
+        )
         {
             _isPrimaryConstructor = isPrimaryConstructor;
             _isUnsafe = isUnsafe;
@@ -41,9 +45,17 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             string typeName,
             ImmutableArray<SyntaxNode> statements,
             ImmutableArray<SyntaxNode> baseConstructorArguments,
-            ImmutableArray<SyntaxNode> thisConstructorArguments)
+            ImmutableArray<SyntaxNode> thisConstructorArguments
+        )
         {
-            var info = new CodeGenerationConstructorInfo(isPrimaryConstructor, isUnsafe, typeName, statements, baseConstructorArguments, thisConstructorArguments);
+            var info = new CodeGenerationConstructorInfo(
+                isPrimaryConstructor,
+                isUnsafe,
+                typeName,
+                statements,
+                baseConstructorArguments,
+                thisConstructorArguments
+            );
             s_constructorToInfoMap.Add(constructor, info);
         }
 
@@ -53,40 +65,47 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
             return info;
         }
 
-        public static ImmutableArray<SyntaxNode> GetThisConstructorArgumentsOpt(IMethodSymbol constructor)
-            => GetThisConstructorArgumentsOpt(GetInfo(constructor));
+        public static ImmutableArray<SyntaxNode> GetThisConstructorArgumentsOpt(
+            IMethodSymbol constructor
+        ) => GetThisConstructorArgumentsOpt(GetInfo(constructor));
 
-        public static ImmutableArray<SyntaxNode> GetBaseConstructorArgumentsOpt(IMethodSymbol constructor)
-            => GetBaseConstructorArgumentsOpt(GetInfo(constructor));
+        public static ImmutableArray<SyntaxNode> GetBaseConstructorArgumentsOpt(
+            IMethodSymbol constructor
+        ) => GetBaseConstructorArgumentsOpt(GetInfo(constructor));
 
-        public static ImmutableArray<SyntaxNode> GetStatements(IMethodSymbol constructor)
-            => GetStatements(GetInfo(constructor));
+        public static ImmutableArray<SyntaxNode> GetStatements(IMethodSymbol constructor) =>
+            GetStatements(GetInfo(constructor));
 
-        public static string GetTypeName(IMethodSymbol constructor)
-            => GetTypeName(GetInfo(constructor), constructor);
+        public static string GetTypeName(IMethodSymbol constructor) =>
+            GetTypeName(GetInfo(constructor), constructor);
 
-        public static bool GetIsUnsafe(IMethodSymbol constructor)
-            => GetIsUnsafe(GetInfo(constructor));
+        public static bool GetIsUnsafe(IMethodSymbol constructor) =>
+            GetIsUnsafe(GetInfo(constructor));
 
-        public static bool GetIsPrimaryConstructor(IMethodSymbol constructor)
-            => GetIsPrimaryConstructor(GetInfo(constructor));
+        public static bool GetIsPrimaryConstructor(IMethodSymbol constructor) =>
+            GetIsPrimaryConstructor(GetInfo(constructor));
 
-        private static ImmutableArray<SyntaxNode> GetThisConstructorArgumentsOpt(CodeGenerationConstructorInfo? info)
-            => info?._thisConstructorArguments ?? default;
+        private static ImmutableArray<SyntaxNode> GetThisConstructorArgumentsOpt(
+            CodeGenerationConstructorInfo? info
+        ) => info?._thisConstructorArguments ?? default;
 
-        private static ImmutableArray<SyntaxNode> GetBaseConstructorArgumentsOpt(CodeGenerationConstructorInfo? info)
-            => info?._baseConstructorArguments ?? default;
+        private static ImmutableArray<SyntaxNode> GetBaseConstructorArgumentsOpt(
+            CodeGenerationConstructorInfo? info
+        ) => info?._baseConstructorArguments ?? default;
 
-        private static ImmutableArray<SyntaxNode> GetStatements(CodeGenerationConstructorInfo? info)
-            => info?._statements ?? default;
+        private static ImmutableArray<SyntaxNode> GetStatements(
+            CodeGenerationConstructorInfo? info
+        ) => info?._statements ?? default;
 
-        private static string GetTypeName(CodeGenerationConstructorInfo? info, IMethodSymbol constructor)
-            => info == null ? constructor.ContainingType.Name : info._typeName;
+        private static string GetTypeName(
+            CodeGenerationConstructorInfo? info,
+            IMethodSymbol constructor
+        ) => info == null ? constructor.ContainingType.Name : info._typeName;
 
-        private static bool GetIsUnsafe(CodeGenerationConstructorInfo? info)
-            => info?._isUnsafe ?? false;
+        private static bool GetIsUnsafe(CodeGenerationConstructorInfo? info) =>
+            info?._isUnsafe ?? false;
 
-        private static bool GetIsPrimaryConstructor(CodeGenerationConstructorInfo? info)
-            => info?._isPrimaryConstructor ?? false;
+        private static bool GetIsPrimaryConstructor(CodeGenerationConstructorInfo? info) =>
+            info?._isPrimaryConstructor ?? false;
     }
 }

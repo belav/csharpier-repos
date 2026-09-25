@@ -42,7 +42,10 @@ namespace System.Xml.Xsl.Runtime
             {
                 // The nodes are guaranteed to be added in document order with possible duplicates.
                 // Add node to the existing sequence if it differs from the last one.
-                Debug.Assert(navigator.ComparePosition(seq[seq.Count - 1]) >= 0, "Index nodes must be added in document order");
+                Debug.Assert(
+                    navigator.ComparePosition(seq[seq.Count - 1]) >= 0,
+                    "Index nodes must be added in document order"
+                );
                 if (!navigator.IsSamePosition(seq[seq.Count - 1]))
                 {
                     seq.AddClone(navigator);

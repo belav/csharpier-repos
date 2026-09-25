@@ -64,7 +64,11 @@ namespace System.Linq.Expressions
         /// <param name="continueLabel">The <see cref="ContinueLabel"/> property of the result.</param>
         /// <param name="body">The <see cref="Body"/> property of the result.</param>
         /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-        public LoopExpression Update(LabelTarget? breakLabel, LabelTarget? continueLabel, Expression body)
+        public LoopExpression Update(
+            LabelTarget? breakLabel,
+            LabelTarget? continueLabel,
+            Expression body
+        )
         {
             if (breakLabel == BreakLabel && continueLabel == ContinueLabel && body == Body)
             {
@@ -104,10 +108,15 @@ namespace System.Linq.Expressions
         /// <param name="break">The break target used by the loop body.</param>
         /// <param name="continue">The continue target used by the loop body.</param>
         /// <returns>The created <see cref="LoopExpression"/>.</returns>
-        public static LoopExpression Loop(Expression body, LabelTarget? @break, LabelTarget? @continue)
+        public static LoopExpression Loop(
+            Expression body,
+            LabelTarget? @break,
+            LabelTarget? @continue
+        )
         {
             ExpressionUtils.RequiresCanRead(body, nameof(body));
-            if (@continue != null && @continue.Type != typeof(void)) throw Error.LabelTypeMustBeVoid(nameof(@continue));
+            if (@continue != null && @continue.Type != typeof(void))
+                throw Error.LabelTypeMustBeVoid(nameof(@continue));
             return new LoopExpression(body, @break, @continue);
         }
     }

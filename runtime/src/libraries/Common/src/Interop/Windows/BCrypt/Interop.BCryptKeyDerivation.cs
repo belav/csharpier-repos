@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 using Microsoft.Win32.SafeHandles;
 
 internal static partial class Interop
@@ -18,6 +17,7 @@ internal static partial class Interop
             byte* pbDerivedKey,
             int cbDerivedKey,
             out uint pcbResult,
-            int dwFlags);
+            int dwFlags
+        );
     }
 }

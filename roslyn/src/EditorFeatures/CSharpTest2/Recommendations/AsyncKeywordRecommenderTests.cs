@@ -15,56 +15,66 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestMethodDeclaration1()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMethodDeclaration2()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     public $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMethodDeclaration3()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     $$ public void goo() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMethodDeclarationAsyncAfterCursor()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     public $$ async void goo() { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestInsideInterface()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 interface C
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -84,7 +94,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [Fact]
         public async Task TestExpressionContext()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class C
                 {
                     void goo()
@@ -92,26 +103,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         goo($$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotInParameter()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                     void goo($$)
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestBeforeLambda()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -119,13 +134,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z =  $$ () => 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestBeforeStaticLambda()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -133,13 +150,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z =  $$ static () => 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterStaticInLambda()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -147,13 +166,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z =  static $$ () => 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterStaticInExpression()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -161,13 +182,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z = static $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterDuplicateStaticInExpression()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -175,13 +198,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z = static static $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterStaticAsyncInExpression()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -189,13 +214,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z = static async $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestAfterAsyncStaticInExpression()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -203,13 +230,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z = async static $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestInAttribute()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                     [$$
@@ -217,13 +246,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestInAttributeArgument()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class C
                 {
                     [Attr($$
@@ -231,13 +262,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestBeforeStaticInExpression()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -245,13 +278,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z = $$ static
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNotIfAlreadyAsyncInLambda()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class Program
                 {
                     static void Main(string[] args)
@@ -259,75 +294,88 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         var z = async $$ () => 2;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/60340")]
         public async Task TestNotIfAlreadyAsyncBeforeOtherMember()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class Program
                 {
                     async $$    
 
                     public void M() {}
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/60340")]
         public async Task TestNotIfAlreadyAsyncAsLastMember()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class Program
                 {
                     async $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578061")]
         public async Task TestNotInNamespace()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 namespace Goo
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578069")]
         public async Task TestNotAfterPartialInNamespace()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 namespace Goo
                 {
                     partial $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578750")]
         public async Task TestNotAfterPartialInClass()
         {
-            await VerifyAbsenceAsync("""
+            await VerifyAbsenceAsync(
+                """
                 class Goo
                 {
                     partial $$
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/578750")]
         public async Task TestAfterAttribute()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Goo
                 {
                     [Attr] $$
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -336,8 +384,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task TestLocalFunction(bool topLevelStatement)
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$", topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"$$", topLevelStatement: topLevelStatement),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Theory]
@@ -346,8 +396,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task TestLocalFunction2(bool topLevelStatement)
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"unsafe $$", topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"unsafe $$", topLevelStatement: topLevelStatement),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Theory]
@@ -356,8 +408,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task TestLocalFunction3(bool topLevelStatement)
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"unsafe $$ void L() { }", topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"unsafe $$ void L() { }", topLevelStatement: topLevelStatement),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Theory]
@@ -366,15 +420,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task TestLocalFunction4(bool topLevelStatement)
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"$$ void L() { }", topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"$$ void L() { }", topLevelStatement: topLevelStatement),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/8616")]
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task TestLocalFunction5()
         {
-            await VerifyKeywordAsync("""
+            await VerifyKeywordAsync(
+                """
                 class Goo
                 {
                     public void M(Action<int> a)
@@ -385,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
                         });
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -394,8 +452,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task TestLocalFunction6(bool topLevelStatement)
         {
-            await VerifyAbsenceAsync(AddInsideMethod(
-@"int $$", topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyAbsenceAsync(
+                AddInsideMethod(@"int $$", topLevelStatement: topLevelStatement),
+                options: CSharp9ParseOptions
+            );
         }
 
         [Theory]
@@ -404,8 +464,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Recommendations
         [CompilerTrait(CompilerFeature.LocalFunctions)]
         public async Task TestLocalFunction7(bool topLevelStatement)
         {
-            await VerifyKeywordAsync(AddInsideMethod(
-@"static $$", topLevelStatement: topLevelStatement), options: CSharp9ParseOptions);
+            await VerifyKeywordAsync(
+                AddInsideMethod(@"static $$", topLevelStatement: topLevelStatement),
+                options: CSharp9ParseOptions
+            );
         }
     }
 }

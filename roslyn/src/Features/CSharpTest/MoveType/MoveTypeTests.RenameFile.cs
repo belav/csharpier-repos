@@ -17,8 +17,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         [WpfFact]
         public async Task SingleClassInFile_RenameFile()
         {
-            var code =
-@"[||]class Class1 { }";
+            var code = @"[||]class Class1 { }";
 
             var expectedDocumentName = "Class1.cs";
 
@@ -29,7 +28,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoreThanOneTypeInFile_RenameFile()
         {
             var code =
-@"[||]class Class1
+                @"[||]class Class1
 { 
     class Inner { }
 }";
@@ -44,7 +43,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task MoreThanOneTypeInFile_RenameFile_InnerType()
         {
             var code =
-@"class Class1
+                @"class Class1
 { 
     [||]class Inner { }
 }";
@@ -58,7 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task TestRenameFileWithFolders()
         {
             var code =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document Folders=""A\B""> 
@@ -72,17 +71,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
 
             var expectedDocumentName = "Class1.cs";
 
-            await TestRenameFileToMatchTypeAsync(code, expectedDocumentName,
-                destinationDocumentContainers: new[] { "A", "B" });
+            await TestRenameFileToMatchTypeAsync(
+                code,
+                expectedDocumentName,
+                destinationDocumentContainers: new[] { "A", "B" }
+            );
         }
 
         [WpfFact]
         public async Task TestMissing_TypeNameMatchesFileName_RenameFile()
         {
-            // testworkspace creates files like test1.cs, test2.cs and so on.. 
+            // testworkspace creates files like test1.cs, test2.cs and so on..
             // so type name matches filename here and rename file action should not be offered.
-            var code =
-@"[||]class test1 { }";
+            var code = @"[||]class test1 { }";
 
             await TestRenameFileToMatchTypeAsync(code, expectedCodeAction: false);
         }
@@ -91,7 +92,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.MoveType
         public async Task TestMissing_MultipleTopLevelTypesInFileAndAtleastOneMatchesFileName_RenameFile()
         {
             var code =
-@"[||]class Class1 { }
+                @"[||]class Class1 { }
 class test1 { }";
 
             await TestRenameFileToMatchTypeAsync(code, expectedCodeAction: false);
@@ -101,7 +102,7 @@ class test1 { }";
         public async Task MultipleTopLevelTypesInFileAndNoneMatchFileName_RenameFile()
         {
             var code =
-@"[||]class Class1 { }
+                @"[||]class Class1 { }
 class Class2 { }";
 
             var expectedDocumentName = "Class1.cs";
@@ -113,7 +114,7 @@ class Class2 { }";
         public async Task MultipleTopLevelTypesInFileAndNoneMatchFileName2_RenameFile()
         {
             var code =
-@"class Class1 { }
+                @"class Class1 { }
 [||]class Class2 { }";
 
             var expectedDocumentName = "Class2.cs";
@@ -125,7 +126,7 @@ class Class2 { }";
         public async Task NestedFile_Simple_RenameFile()
         {
             var code =
-@"class OuterType
+                @"class OuterType
 {
     [||]class InnerType { }
 }";
@@ -139,7 +140,7 @@ class Class2 { }";
         public async Task NestedFile_DottedName_RenameFile()
         {
             var code =
-@"class OuterType
+                @"class OuterType
 {
     [||]class InnerType { }
 }";

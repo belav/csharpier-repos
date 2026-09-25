@@ -24,13 +24,14 @@ namespace System.ServiceModel.Security
 
         public Binding Binding
         {
-            get
-            {
-                return binding;
-            }
+            get { return binding; }
         }
 
-        public virtual IAsyncResult BeginDisplayInitializationUI(IClientChannel channel, AsyncCallback callback, object state)
+        public virtual IAsyncResult BeginDisplayInitializationUI(
+            IClientChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new GetTokenUIAsyncResult(binding, channel, this.credentials, callback, state);
         }
@@ -39,38 +40,37 @@ namespace System.ServiceModel.Security
         {
             GetTokenUIAsyncResult.End(result);
         }
-
     }
 
     internal class GetTokenUIAsyncResult : AsyncResult
     {
-
         IClientChannel proxy;
         ClientCredentials credentials;
         Uri relyingPartyIssuer;
         bool requiresInfoCard;
         Binding binding;
 
+        static AsyncCallback callback = Fx.ThunkCallback(
+            new AsyncCallback(GetTokenUIAsyncResult.Callback)
+        );
 
-        static AsyncCallback callback = Fx.ThunkCallback(new AsyncCallback(GetTokenUIAsyncResult.Callback));
-
-        internal GetTokenUIAsyncResult(Binding binding,
-                                        IClientChannel channel,
-                                        ClientCredentials credentials,
-                                        AsyncCallback callback,
-                                        object state)
+        internal GetTokenUIAsyncResult(
+            Binding binding,
+            IClientChannel channel,
+            ClientCredentials credentials,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.credentials = credentials;
             this.proxy = channel;
             this.binding = binding;
             this.CallBegin(true);
-
         }
 
         void CallBegin(bool completedSynchronously)
         {
-
             IAsyncResult result = null;
             Exception exception = null;
 
@@ -78,11 +78,27 @@ namespace System.ServiceModel.Security
             {
                 CardSpacePolicyElement[] chain;
                 SecurityTokenManager tokenManager = credentials.CreateSecurityTokenManager();
-                requiresInfoCard = InfoCardHelper.IsInfocardRequired(binding, credentials, tokenManager, proxy.RemoteAddress, out chain, out relyingPartyIssuer);
-                MessageSecurityVersion bindingSecurityVersion = InfoCardHelper.GetBindingSecurityVersionOrDefault(binding);
-                WSSecurityTokenSerializer tokenSerializer = WSSecurityTokenSerializer.DefaultInstance;
-                result = credentials.GetInfoCardTokenCallback.BeginInvoke(requiresInfoCard, chain, tokenManager.CreateSecurityTokenSerializer(bindingSecurityVersion.SecurityTokenVersion), callback, this);
-
+                requiresInfoCard = InfoCardHelper.IsInfocardRequired(
+                    binding,
+                    credentials,
+                    tokenManager,
+                    proxy.RemoteAddress,
+                    out chain,
+                    out relyingPartyIssuer
+                );
+                MessageSecurityVersion bindingSecurityVersion =
+                    InfoCardHelper.GetBindingSecurityVersionOrDefault(binding);
+                WSSecurityTokenSerializer tokenSerializer =
+                    WSSecurityTokenSerializer.DefaultInstance;
+                result = credentials.GetInfoCardTokenCallback.BeginInvoke(
+                    requiresInfoCard,
+                    chain,
+                    tokenManager.CreateSecurityTokenSerializer(
+                        bindingSecurityVersion.SecurityTokenVersion
+                    ),
+                    callback,
+                    this
+                );
             }
             catch (Exception e)
             {
@@ -107,7 +123,6 @@ namespace System.ServiceModel.Security
                 return;
             }
 
-
             this.CallComplete(completedSynchronously, null);
         }
 
@@ -123,7 +138,6 @@ namespace System.ServiceModel.Security
 
             outer.CallEnd(result, out exception);
             outer.CallComplete(false, exception);
-
         }
 
         void CallEnd(IAsyncResult result, out Exception exception)
@@ -133,11 +147,13 @@ namespace System.ServiceModel.Security
                 SecurityToken token = credentials.GetInfoCardTokenCallback.EndInvoke(result);
 
                 ChannelParameterCollection channelParameters =
-                           proxy.GetProperty<ChannelParameterCollection>();
+                    proxy.GetProperty<ChannelParameterCollection>();
 
                 if (null != channelParameters)
                 {
-                    channelParameters.Add(new InfoCardChannelParameter(token, relyingPartyIssuer, requiresInfoCard));
+                    channelParameters.Add(
+                        new InfoCardChannelParameter(token, relyingPartyIssuer, requiresInfoCard)
+                    );
                 }
                 exception = null;
             }
@@ -162,5 +178,3 @@ namespace System.ServiceModel.Security
         }
     }
 }
-
-

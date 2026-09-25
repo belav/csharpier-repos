@@ -43,7 +43,10 @@ namespace System.Json
 
             if (jsonString.Length == 0)
             {
-                throw new ArgumentException(Properties.Resources.JsonStringCannotBeEmpty, "jsonString");
+                throw new ArgumentException(
+                    Properties.Resources.JsonStringCannotBeEmpty,
+                    "jsonString"
+                );
             }
 
             byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonString);
@@ -96,15 +99,36 @@ namespace System.Json
                         case StringAttributeValue:
                         case NumberAttributeValue:
                             JsonPrimitive jsonPrimitive = ReadPrimitive(nodeType, jsonReader);
-                            InsertJsonValue(jsonStack, ref parent, ref currentName, jsonPrimitive, true);
+                            InsertJsonValue(
+                                jsonStack,
+                                ref parent,
+                                ref currentName,
+                                jsonPrimitive,
+                                true
+                            );
                             break;
                         case ArrayAttributeValue:
                             JsonArray jsonArray = CreateJsonArray(jsonReader, ref isEmptyElement);
-                            InsertJsonValue(jsonStack, ref parent, ref currentName, jsonArray, isEmptyElement);
+                            InsertJsonValue(
+                                jsonStack,
+                                ref parent,
+                                ref currentName,
+                                jsonArray,
+                                isEmptyElement
+                            );
                             break;
                         case ObjectAttributeValue:
-                            JsonObject jsonObject = CreateObjectWithTypeHint(jsonReader, ref isEmptyElement);
-                            InsertJsonValue(jsonStack, ref parent, ref currentName, jsonObject, isEmptyElement);
+                            JsonObject jsonObject = CreateObjectWithTypeHint(
+                                jsonReader,
+                                ref isEmptyElement
+                            );
+                            InsertJsonValue(
+                                jsonStack,
+                                ref parent,
+                                ref currentName,
+                                jsonObject,
+                                isEmptyElement
+                            );
                             break;
                         default:
                             throw new FormatException(Properties.Resources.IncorrectJsonFormat);
@@ -139,10 +163,18 @@ namespace System.Json
         {
             try
             {
-                using (XmlDictionaryReader jsonReader =
-                    jsonStream != null
-                        ? JsonReaderWriterFactory.CreateJsonReader(jsonStream, XmlDictionaryReaderQuotas.Max)
-                        : JsonReaderWriterFactory.CreateJsonReader(jsonBytes, XmlDictionaryReaderQuotas.Max))
+                using (
+                    XmlDictionaryReader jsonReader =
+                        jsonStream != null
+                            ? JsonReaderWriterFactory.CreateJsonReader(
+                                jsonStream,
+                                XmlDictionaryReaderQuotas.Max
+                            )
+                            : JsonReaderWriterFactory.CreateJsonReader(
+                                jsonBytes,
+                                XmlDictionaryReaderQuotas.Max
+                            )
+                )
                 {
                     return JXMLToJsonValue(jsonReader);
                 }
@@ -153,7 +185,13 @@ namespace System.Json
             }
         }
 
-        private static void InsertJsonValue(Stack<JsonValue> jsonStack, ref JsonValue parent, ref string currentName, JsonValue jsonValue, bool isEmptyElement)
+        private static void InsertJsonValue(
+            Stack<JsonValue> jsonStack,
+            ref JsonValue parent,
+            ref string currentName,
+            JsonValue jsonValue,
+            bool isEmptyElement
+        )
         {
             if (parent is JsonArray)
             {
@@ -178,7 +216,10 @@ namespace System.Json
         private static string GetMemberName(XmlDictionaryReader jsonReader)
         {
             string name;
-            if (jsonReader.NamespaceURI == ItemElementName && jsonReader.LocalName == ItemElementName)
+            if (
+                jsonReader.NamespaceURI == ItemElementName
+                && jsonReader.LocalName == ItemElementName
+            )
             {
                 // JXML special case for names which aren't valid XML names
                 name = jsonReader.GetAttribute(ItemElementName);
@@ -196,7 +237,10 @@ namespace System.Json
             return name;
         }
 
-        private static JsonObject CreateObjectWithTypeHint(XmlDictionaryReader jsonReader, ref bool isEmptyElement)
+        private static JsonObject CreateObjectWithTypeHint(
+            XmlDictionaryReader jsonReader,
+            ref bool isEmptyElement
+        )
         {
             JsonObject jsonObject = new JsonObject();
             string typeHintAttribute = jsonReader.GetAttribute(TypeHintAttributeName);
@@ -212,7 +256,10 @@ namespace System.Json
             return jsonObject;
         }
 
-        private static JsonArray CreateJsonArray(XmlDictionaryReader jsonReader, ref bool isEmptyElement)
+        private static JsonArray CreateJsonArray(
+            XmlDictionaryReader jsonReader,
+            ref bool isEmptyElement
+        )
         {
             JsonArray jsonArray = new JsonArray();
             isEmptyElement = jsonReader.IsEmptyElement;
@@ -223,14 +270,24 @@ namespace System.Json
 
         private static void MoveToRootNode(XmlDictionaryReader jsonReader)
         {
-            while (!jsonReader.EOF && (jsonReader.NodeType == XmlNodeType.None || jsonReader.NodeType == XmlNodeType.XmlDeclaration))
+            while (
+                !jsonReader.EOF
+                && (
+                    jsonReader.NodeType == XmlNodeType.None
+                    || jsonReader.NodeType == XmlNodeType.XmlDeclaration
+                )
+            )
             {
                 // read into <root> node
                 jsonReader.Read();
                 SkipWhitespace(jsonReader);
             }
 
-            if (jsonReader.NodeType != XmlNodeType.Element || !String.IsNullOrEmpty(jsonReader.NamespaceURI) || jsonReader.Name != RootElementName)
+            if (
+                jsonReader.NodeType != XmlNodeType.Element
+                || !String.IsNullOrEmpty(jsonReader.NamespaceURI)
+                || jsonReader.Name != RootElementName
+            )
             {
                 throw new FormatException(Properties.Resources.IncorrectJsonFormat);
             }
@@ -263,7 +320,13 @@ namespace System.Json
 
         private static void SkipWhitespace(XmlDictionaryReader reader)
         {
-            while (!reader.EOF && (reader.NodeType == XmlNodeType.Whitespace || reader.NodeType == XmlNodeType.SignificantWhitespace))
+            while (
+                !reader.EOF
+                && (
+                    reader.NodeType == XmlNodeType.Whitespace
+                    || reader.NodeType == XmlNodeType.SignificantWhitespace
+                )
+            )
             {
                 reader.Read();
             }
@@ -274,31 +337,63 @@ namespace System.Json
             if (value.IndexOfAny(_floatingPointChars) < 0)
             {
                 int intVal;
-                if (Int32.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out intVal))
+                if (
+                    Int32.TryParse(
+                        value,
+                        NumberStyles.Float,
+                        CultureInfo.InvariantCulture,
+                        out intVal
+                    )
+                )
                 {
                     return intVal;
                 }
 
                 long longVal;
-                if (Int64.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out longVal))
+                if (
+                    Int64.TryParse(
+                        value,
+                        NumberStyles.Float,
+                        CultureInfo.InvariantCulture,
+                        out longVal
+                    )
+                )
                 {
                     return longVal;
                 }
             }
 
             decimal decValue;
-            if (Decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out decValue) && decValue != 0)
+            if (
+                Decimal.TryParse(
+                    value,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out decValue
+                )
+                && decValue != 0
+            )
             {
                 return decValue;
             }
 
             double dblValue;
-            if (Double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out dblValue))
+            if (
+                Double.TryParse(
+                    value,
+                    NumberStyles.Float,
+                    CultureInfo.InvariantCulture,
+                    out dblValue
+                )
+            )
             {
                 return dblValue;
             }
 
-            throw new ArgumentException(RS.Format(Properties.Resources.InvalidJsonPrimitive, value.ToString()), "value");
+            throw new ArgumentException(
+                RS.Format(Properties.Resources.InvalidJsonPrimitive, value.ToString()),
+                "value"
+            );
         }
     }
 }

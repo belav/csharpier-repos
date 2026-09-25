@@ -15,7 +15,10 @@ namespace Roslyn.Test.Utilities
 {
     internal static class CommonCompilerExtensions
     {
-        internal static (int Result, string Output) Run(this CommonCompiler compiler, CancellationToken cancellationToken = default)
+        internal static (int Result, string Output) Run(
+            this CommonCompiler compiler,
+            CancellationToken cancellationToken = default
+        )
         {
             using var writer = new StringWriter();
             var result = compiler.Run(writer, cancellationToken);

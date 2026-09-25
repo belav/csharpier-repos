@@ -141,7 +141,9 @@ namespace System.Net.Http.Internal
             mockStream.Dispose();
 
             // Assert
-            mockInnerStream.Protected().Verify("Dispose", Times.Once(), exactParameterMatch: true, args: true);
+            mockInnerStream
+                .Protected()
+                .Verify("Dispose", Times.Once(), exactParameterMatch: true, args: true);
             mockInnerStream.Verify(s => s.Close(), Times.Once());
         }
 
@@ -156,7 +158,9 @@ namespace System.Net.Http.Internal
             mockStream.Close();
 
             // Assert
-            mockInnerStream.Protected().Verify("Dispose", Times.Once(), exactParameterMatch: true, args: true);
+            mockInnerStream
+                .Protected()
+                .Verify("Dispose", Times.Once(), exactParameterMatch: true, args: true);
             mockInnerStream.Verify(s => s.Close(), Times.Once());
         }
 
@@ -210,7 +214,10 @@ namespace System.Net.Http.Internal
             mockStream.BeginRead(buffer, offset, count, callback, state);
 
             // Assert
-            mockInnerStream.Verify(s => s.BeginRead(buffer, offset, count, callback, state), Times.Once());
+            mockInnerStream.Verify(
+                s => s.BeginRead(buffer, offset, count, callback, state),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -243,7 +250,10 @@ namespace System.Net.Http.Internal
             mockStream.ReadAsync(buffer, offset, count, CancellationToken.None);
 
             // Assert
-            mockInnerStream.Verify(s => s.ReadAsync(buffer, offset, count, CancellationToken.None), Times.Once());
+            mockInnerStream.Verify(
+                s => s.ReadAsync(buffer, offset, count, CancellationToken.None),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -322,7 +332,10 @@ namespace System.Net.Http.Internal
             mockStream.BeginWrite(buffer, offset, count, callback, state);
 
             // Assert
-            mockInnerStream.Verify(s => s.BeginWrite(buffer, offset, count, callback, state), Times.Once());
+            mockInnerStream.Verify(
+                s => s.BeginWrite(buffer, offset, count, callback, state),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -355,7 +368,10 @@ namespace System.Net.Http.Internal
             mockStream.WriteAsync(buffer, offset, count, CancellationToken.None);
 
             // Assert
-            mockInnerStream.Verify(s => s.WriteAsync(buffer, offset, count, CancellationToken.None), Times.Once());
+            mockInnerStream.Verify(
+                s => s.WriteAsync(buffer, offset, count, CancellationToken.None),
+                Times.Once()
+            );
         }
 
         [Fact]

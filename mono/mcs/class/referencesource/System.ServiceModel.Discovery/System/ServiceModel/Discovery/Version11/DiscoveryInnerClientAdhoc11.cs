@@ -13,7 +13,10 @@ namespace System.ServiceModel.Discovery.Version11
         IDiscoveryInnerClientResponse responseReceiver;
         DuplexClient11 duplexInnerClient;
 
-        public DiscoveryInnerClientAdhoc11(DiscoveryEndpoint discoveryEndpoint, IDiscoveryInnerClientResponse responseReceiver)
+        public DiscoveryInnerClientAdhoc11(
+            DiscoveryEndpoint discoveryEndpoint,
+            IDiscoveryInnerClientResponse responseReceiver
+        )
         {
             Fx.Assert(discoveryEndpoint != null, "The discoveryEndpoint parameter cannot be null");
             Fx.Assert(responseReceiver != null, "The responseReceiver parameter cannot be null");
@@ -29,60 +32,50 @@ namespace System.ServiceModel.Discovery.Version11
 
         public ClientCredentials ClientCredentials
         {
-            get
-            {
-                return this.duplexInnerClient.ClientCredentials;
-            }
+            get { return this.duplexInnerClient.ClientCredentials; }
         }
 
         public ChannelFactory ChannelFactory
         {
-            get
-            {
-                return this.duplexInnerClient.ChannelFactory;
-            }
+            get { return this.duplexInnerClient.ChannelFactory; }
         }
 
         public IClientChannel InnerChannel
         {
-            get
-            {
-                return this.duplexInnerClient.InnerChannel;
-            }
+            get { return this.duplexInnerClient.InnerChannel; }
         }
 
         public ServiceEndpoint Endpoint
         {
-            get
-            {
-                return this.duplexInnerClient.Endpoint;
-            }
+            get { return this.duplexInnerClient.Endpoint; }
         }
 
         public ICommunicationObject InnerCommunicationObject
         {
-            get
-            {
-                return this.duplexInnerClient as ICommunicationObject;
-            }
+            get { return this.duplexInnerClient as ICommunicationObject; }
         }
 
         public bool IsRequestResponse
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
-        public IAsyncResult BeginProbeOperation(FindCriteria findCriteria, AsyncCallback callback, object state)
+        public IAsyncResult BeginProbeOperation(
+            FindCriteria findCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             ProbeMessage11 request = new ProbeMessage11();
             request.Probe = FindCriteria11.FromFindCriteria(findCriteria);
             return this.duplexInnerClient.BeginProbeOperation(request, callback, state);
         }
 
-        public IAsyncResult BeginResolveOperation(ResolveCriteria resolveCriteria, AsyncCallback callback, object state)
+        public IAsyncResult BeginResolveOperation(
+            ResolveCriteria resolveCriteria,
+            AsyncCallback callback,
+            object state
+        )
         {
             ResolveMessage11 request = new ResolveMessage11();
             request.Resolve = ResolveCriteria11.FromResolveCriteria(resolveCriteria);
@@ -113,7 +106,11 @@ namespace System.ServiceModel.Discovery.Version11
             this.duplexInnerClient.ResolveOperation(request);
         }
 
-        public IAsyncResult BeginProbeMatchOperation(ProbeMatchesMessage11 response, AsyncCallback callback, object state)
+        public IAsyncResult BeginProbeMatchOperation(
+            ProbeMatchesMessage11 response,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(response != null, "The response message cannot be null.");
             if ((response.MessageSequence != null) && (response.ProbeMatches != null))
@@ -122,15 +119,20 @@ namespace System.ServiceModel.Discovery.Version11
                     OperationContext.Current.IncomingMessageHeaders.RelatesTo,
                     response.MessageSequence.ToDiscoveryMessageSequence(),
                     DiscoveryUtility.ToEndpointDiscoveryMetadataCollection(response.ProbeMatches),
-                    false);
+                    false
+                );
             }
             else
             {
-                if (TD.DiscoveryMessageWithNullMessageSequenceIsEnabled() && response.MessageSequence == null)
+                if (
+                    TD.DiscoveryMessageWithNullMessageSequenceIsEnabled()
+                    && response.MessageSequence == null
+                )
                 {
                     TD.DiscoveryMessageWithNullMessageSequence(
                         ProtocolStrings.TracingStrings.ProbeMatches,
-                        OperationContext.Current.IncomingMessageHeaders.MessageId.ToString());
+                        OperationContext.Current.IncomingMessageHeaders.MessageId.ToString()
+                    );
                 }
             }
 
@@ -142,23 +144,36 @@ namespace System.ServiceModel.Discovery.Version11
             CompletedAsyncResult.End(result);
         }
 
-        public IAsyncResult BeginResolveMatchOperation(ResolveMatchesMessage11 response, AsyncCallback callback, object state)
+        public IAsyncResult BeginResolveMatchOperation(
+            ResolveMatchesMessage11 response,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(response != null, "The response message cannot be null.");
-            if ((response.MessageSequence != null) && (response.ResolveMatches != null) && (response.ResolveMatches.ResolveMatch != null))
+            if (
+                (response.MessageSequence != null)
+                && (response.ResolveMatches != null)
+                && (response.ResolveMatches.ResolveMatch != null)
+            )
             {
                 this.responseReceiver.ResolveMatchOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo, 
-                    response.MessageSequence.ToDiscoveryMessageSequence(), 
-                    response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata());
+                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                    response.MessageSequence.ToDiscoveryMessageSequence(),
+                    response.ResolveMatches.ResolveMatch.ToEndpointDiscoveryMetadata()
+                );
             }
             else
             {
-                if (TD.DiscoveryMessageWithNullMessageSequenceIsEnabled() && response.MessageSequence == null)
+                if (
+                    TD.DiscoveryMessageWithNullMessageSequenceIsEnabled()
+                    && response.MessageSequence == null
+                )
                 {
                     TD.DiscoveryMessageWithNullMessageSequence(
                         ProtocolStrings.TracingStrings.ResolveMatches,
-                        OperationContext.Current.IncomingMessageHeaders.MessageId.ToString());
+                        OperationContext.Current.IncomingMessageHeaders.MessageId.ToString()
+                    );
                 }
             }
 
@@ -170,23 +185,32 @@ namespace System.ServiceModel.Discovery.Version11
             CompletedAsyncResult.End(result);
         }
 
-        public IAsyncResult BeginHelloOperation(HelloMessage11 message, AsyncCallback callback, object state)
+        public IAsyncResult BeginHelloOperation(
+            HelloMessage11 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             Fx.Assert(message != null, "The message cannot be null.");
             if ((message.MessageSequence != null) && (message.Hello != null))
             {
                 this.responseReceiver.HelloOperation(
-                    OperationContext.Current.IncomingMessageHeaders.RelatesTo, 
-                    message.MessageSequence.ToDiscoveryMessageSequence(), 
-                    message.Hello.ToEndpointDiscoveryMetadata());
+                    OperationContext.Current.IncomingMessageHeaders.RelatesTo,
+                    message.MessageSequence.ToDiscoveryMessageSequence(),
+                    message.Hello.ToEndpointDiscoveryMetadata()
+                );
             }
             else
             {
-                if (TD.DiscoveryMessageWithNullMessageSequenceIsEnabled() && message.MessageSequence == null)
+                if (
+                    TD.DiscoveryMessageWithNullMessageSequenceIsEnabled()
+                    && message.MessageSequence == null
+                )
                 {
                     TD.DiscoveryMessageWithNullMessageSequence(
                         ProtocolStrings.TracingStrings.Hello,
-                        OperationContext.Current.IncomingMessageHeaders.MessageId.ToString());
+                        OperationContext.Current.IncomingMessageHeaders.MessageId.ToString()
+                    );
                 }
             }
 
@@ -201,9 +225,7 @@ namespace System.ServiceModel.Discovery.Version11
         class DuplexClient11 : DuplexClientBase<IDiscoveryContractAdhoc11>
         {
             public DuplexClient11(object callbackInstance, DiscoveryEndpoint discoveryEndpoint)
-                : base(callbackInstance, discoveryEndpoint)
-            {
-            }
+                : base(callbackInstance, discoveryEndpoint) { }
 
             public void ProbeOperation(ProbeMessage11 request)
             {
@@ -215,12 +237,20 @@ namespace System.ServiceModel.Discovery.Version11
                 base.Channel.ResolveOperation(request);
             }
 
-            public IAsyncResult BeginProbeOperation(ProbeMessage11 request, AsyncCallback callback, object state)
+            public IAsyncResult BeginProbeOperation(
+                ProbeMessage11 request,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return base.Channel.BeginProbeOperation(request, callback, state);
             }
 
-            public IAsyncResult BeginResolveOperation(ResolveMessage11 request, AsyncCallback callback, object state)
+            public IAsyncResult BeginResolveOperation(
+                ResolveMessage11 request,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return base.Channel.BeginResolveOperation(request, callback, state);
             }

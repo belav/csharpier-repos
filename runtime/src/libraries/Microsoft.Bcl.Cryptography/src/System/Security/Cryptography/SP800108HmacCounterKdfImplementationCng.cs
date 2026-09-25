@@ -7,7 +7,10 @@ namespace System.Security.Cryptography
 {
     internal sealed partial class SP800108HmacCounterKdfImplementationCng
     {
-        internal unsafe SP800108HmacCounterKdfImplementationCng(ReadOnlySpan<byte> key, HashAlgorithmName hashAlgorithm)
+        internal unsafe SP800108HmacCounterKdfImplementationCng(
+            ReadOnlySpan<byte> key,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
 
@@ -46,7 +49,10 @@ namespace System.Security.Cryptography
             {
                 fixed (byte* pSymmetricKeyMaterial = symmetricKeyMaterial)
                 {
-                    _keyHandle = CreateSymmetricKey(pSymmetricKeyMaterial, symmetricKeyMaterialLength);
+                    _keyHandle = CreateSymmetricKey(
+                        pSymmetricKeyMaterial,
+                        symmetricKeyMaterialLength
+                    );
                 }
             }
             finally
@@ -59,7 +65,10 @@ namespace System.Security.Cryptography
 
         // For .NET Standard / .NET Framework, provide a byte overload so that we don't go from array->span->array
         // when we need to adjust keys that are too large.
-        internal unsafe SP800108HmacCounterKdfImplementationCng(byte[] key, HashAlgorithmName hashAlgorithm)
+        internal unsafe SP800108HmacCounterKdfImplementationCng(
+            byte[] key,
+            HashAlgorithmName hashAlgorithm
+        )
         {
             Debug.Assert(hashAlgorithm.Name is not null);
 
@@ -90,7 +99,10 @@ namespace System.Security.Cryptography
             {
                 fixed (byte* pSymmetricKeyMaterial = symmetricKeyMaterial)
                 {
-                    _keyHandle = CreateSymmetricKey(pSymmetricKeyMaterial, symmetricKeyMaterialLength);
+                    _keyHandle = CreateSymmetricKey(
+                        pSymmetricKeyMaterial,
+                        symmetricKeyMaterialLength
+                    );
                 }
             }
             finally
@@ -109,7 +121,11 @@ namespace System.Security.Cryptography
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "Weak algorithms are used as instructed by the caller")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Security",
+            "CA5350",
+            Justification = "Weak algorithms are used as instructed by the caller"
+        )]
         private static HashAlgorithm CreateHash(HashAlgorithmName hashAlgorithm)
         {
             switch (hashAlgorithm.Name)
@@ -124,7 +140,9 @@ namespace System.Security.Cryptography
                     return SHA512.Create();
                 default:
                     Debug.Fail($"Unexpected hash algorithm '{hashAlgorithm.Name}'.");
-                    throw new CryptographicException(SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+                    );
             }
         }
     }

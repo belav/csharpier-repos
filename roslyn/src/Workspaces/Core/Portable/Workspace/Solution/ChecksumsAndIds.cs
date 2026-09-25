@@ -58,23 +58,19 @@ internal readonly struct ChecksumsAndIds<TId>
 
     public static ChecksumsAndIds<TId> ReadFrom(ObjectReader reader)
     {
-        return new(
-            ChecksumCollection.ReadFrom(reader),
-            reader.ReadArray(s_readId));
+        return new(ChecksumCollection.ReadFrom(reader), reader.ReadArray(s_readId));
     }
 
-    public Enumerator GetEnumerator()
-        => new(this);
+    public Enumerator GetEnumerator() => new(this);
 
     public struct Enumerator(ChecksumsAndIds<TId> checksumsAndIds)
     {
         private readonly ChecksumsAndIds<TId> _checksumsAndIds = checksumsAndIds;
         private int _index = -1;
 
-        public bool MoveNext()
-            => ++_index < _checksumsAndIds.Length;
+        public bool MoveNext() => ++_index < _checksumsAndIds.Length;
 
-        public (Checksum checksum, TId id) Current
-            => (_checksumsAndIds.Checksums.Children[_index], _checksumsAndIds.Ids[_index]);
+        public (Checksum checksum, TId id) Current =>
+            (_checksumsAndIds.Checksums.Children[_index], _checksumsAndIds.Ids[_index]);
     }
 }

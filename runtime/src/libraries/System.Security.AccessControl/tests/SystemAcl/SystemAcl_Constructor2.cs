@@ -9,16 +9,16 @@ namespace System.Security.AccessControl.Tests
 {
     public partial class SystemAcl_Constructor2
     {
-       public static IEnumerable<object[]> SystemAcl_Constructor2_TestData()
-       {
-           yield return new object[] { false, false, 0, 0 };
-           yield return new object[] { false, true, 127, 0 };
-           yield return new object[] { true, false, 255, 0 };
-           yield return new object[] { true, true, 0, 0 };
-           yield return new object[] { false, false, 127, 1 };
-           yield return new object[] { false, true, 255, 1 };
-           yield return new object[] { true, false, 0, 1 };
-           yield return new object[] { true, true, 255, 1 };
+        public static IEnumerable<object[]> SystemAcl_Constructor2_TestData()
+        {
+            yield return new object[] { false, false, 0, 0 };
+            yield return new object[] { false, true, 127, 0 };
+            yield return new object[] { true, false, 255, 0 };
+            yield return new object[] { true, true, 0, 0 };
+            yield return new object[] { false, false, 127, 1 };
+            yield return new object[] { false, true, 255, 1 };
+            yield return new object[] { true, false, 0, 1 };
+            yield return new object[] { true, true, 255, 1 };
         }
 
         [Fact]
@@ -41,12 +41,14 @@ namespace System.Security.AccessControl.Tests
             systemAcl = new SystemAcl(isContainer, isDS, revision, capacity);
             rawAcl = new RawAcl(revision, capacity);
 
-            if (isContainer == systemAcl.IsContainer &&
-                isDS == systemAcl.IsDS &&
-                revision == systemAcl.Revision &&
-                0 == systemAcl.Count &&
-                8 == systemAcl.BinaryLength &&
-                true == systemAcl.IsCanonical)
+            if (
+                isContainer == systemAcl.IsContainer
+                && isDS == systemAcl.IsDS
+                && revision == systemAcl.Revision
+                && 0 == systemAcl.Count
+                && 8 == systemAcl.BinaryLength
+                && true == systemAcl.IsCanonical
+            )
             {
                 sAclBinaryForm = new byte[systemAcl.BinaryLength];
                 rAclBinaryForm = new byte[rawAcl.BinaryLength];
@@ -64,7 +66,6 @@ namespace System.Security.AccessControl.Tests
                         break;
                     }
                 }
-
             }
             else
             {

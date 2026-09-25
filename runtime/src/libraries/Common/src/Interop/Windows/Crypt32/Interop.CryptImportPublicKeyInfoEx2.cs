@@ -15,6 +15,7 @@ internal static partial class Interop
             CERT_PUBLIC_KEY_INFO* pInfo,
             CryptImportPublicKeyInfoFlags dwFlags,
             void* pvAuxInfo,
-            out SafeBCryptKeyHandle phKey);
+            out SafeBCryptKeyHandle phKey
+        );
     }
 }

@@ -8,10 +8,10 @@ namespace System.Activities.XamlIntegration
     using System.Activities;
     using System.Activities.Expressions;
     using System.Activities.Runtime;
+    using System.Collections.Generic;
+    using System.Reflection;
     using System.Runtime;
     using System.Runtime.Serialization;
-    using System.Reflection;
-    using System.Collections.Generic;
 
     [DataContract(Name = XD.CompiledLocation.Name, Namespace = XD.Runtime.Namespace)]
     internal class CompiledLocation<T> : Location<T>
@@ -37,12 +37,22 @@ namespace System.Activities.XamlIntegration
 
         bool forImplementation;
 
-        public CompiledLocation(Func<T> getMethod, Action<T> setMethod, IList<LocationReference> locationReferences, IList<Location> locations, int expressionId, Activity compiledRootActivity, ActivityContext currentActivityContext)
+        public CompiledLocation(
+            Func<T> getMethod,
+            Action<T> setMethod,
+            IList<LocationReference> locationReferences,
+            IList<Location> locations,
+            int expressionId,
+            Activity compiledRootActivity,
+            ActivityContext currentActivityContext
+        )
         {
             this.getMethod = getMethod;
             this.setMethod = setMethod;
 
-            this.forImplementation = currentActivityContext.Activity.MemberOf != currentActivityContext.Activity.RootActivity.MemberOf;
+            this.forImplementation =
+                currentActivityContext.Activity.MemberOf
+                != currentActivityContext.Activity.RootActivity.MemberOf;
             this.locationReferences = locationReferences;
             this.locations = locations;
             this.expressionId = expressionId;
@@ -108,12 +118,9 @@ namespace System.Activities.XamlIntegration
 
                 return this.compiledRootActivityQualifiedId;
             }
-            set
-            {
-                this.compiledRootActivityQualifiedId = value;
-            }
+            set { this.compiledRootActivityQualifiedId = value; }
         }
-        
+
         [DataMember(EmitDefaultValue = false)]
         public byte[] ExpressionActivityQualifiedId
         {
@@ -126,10 +133,7 @@ namespace System.Activities.XamlIntegration
 
                 return this.expressionActivityQualifiedId;
             }
-            set
-            {
-                this.expressionActivityQualifiedId = value;
-            }
+            set { this.expressionActivityQualifiedId = value; }
         }
 
         [DataMember(EmitDefaultValue = false)]
@@ -142,7 +146,9 @@ namespace System.Activities.XamlIntegration
                     return null;
                 }
 
-                List<Tuple<string, Type>> durableCache = new List<Tuple<string, Type>>(this.locationReferences.Count);
+                List<Tuple<string, Type>> durableCache = new List<Tuple<string, Type>>(
+                    this.locationReferences.Count
+                );
 
                 foreach (LocationReference reference in locationReferences)
                 {
@@ -162,7 +168,9 @@ namespace System.Activities.XamlIntegration
                 this.locationReferences = new List<LocationReference>(value.Count);
                 foreach (Tuple<string, Type> reference in value)
                 {
-                    this.locationReferences.Add(new CompiledLocationReference(reference.Item1, reference.Item2));
+                    this.locationReferences.Add(
+                        new CompiledLocationReference(reference.Item1, reference.Item2)
+                    );
                 }
             }
         }
@@ -206,10 +214,12 @@ namespace System.Activities.XamlIntegration
         {
             //
             // If we've gotten here is means that we have a location that has roundtripped through persistence
-            // CompiledDataContext & ICER don't round trip so we need to get them back from the current tree 
+            // CompiledDataContext & ICER don't round trip so we need to get them back from the current tree
             // and get new pointers to the get/set methods for this expression
             ICompiledExpressionRoot compiledRoot = GetCompiledExpressionRoot();
-            CompiledLocation<T> tempLocation = (CompiledLocation<T>)compiledRoot.InvokeExpression(this.expressionId, this.locations);
+            CompiledLocation<T> tempLocation =
+                (CompiledLocation<T>)
+                    compiledRoot.InvokeExpression(this.expressionId, this.locations);
             this.getMethod = tempLocation.getMethod;
             this.setMethod = tempLocation.setMethod;
         }
@@ -223,15 +233,39 @@ namespace System.Activities.XamlIntegration
 
                 Activity compiledRootActivity = null;
                 Activity expressionActivity = null;
-                
-                if (QualifiedId.TryGetElementFromRoot(rootActivity, this.compiledRootActivityQualifiedId, out compiledRootActivity) &&
-                    QualifiedId.TryGetElementFromRoot(rootActivity, this.expressionActivityQualifiedId, out expressionActivity))
+
+                if (
+                    QualifiedId.TryGetElementFromRoot(
+                        rootActivity,
+                        this.compiledRootActivityQualifiedId,
+                        out compiledRootActivity
+                    )
+                    && QualifiedId.TryGetElementFromRoot(
+                        rootActivity,
+                        this.expressionActivityQualifiedId,
+                        out expressionActivity
+                    )
+                )
                 {
-                    if (CompiledExpressionInvoker.TryGetCompiledExpressionRoot(expressionActivity, compiledRootActivity, out compiledExpressionRoot))
+                    if (
+                        CompiledExpressionInvoker.TryGetCompiledExpressionRoot(
+                            expressionActivity,
+                            compiledRootActivity,
+                            out compiledExpressionRoot
+                        )
+                    )
                     {
                         //
                         // Revalidate to make sure we didn't hit an ID shift
-                        if (compiledExpressionRoot.CanExecuteExpression(this.expressionText, true /* this is always a reference */, this.locationReferences, out this.expressionId))
+                        if (
+                            compiledExpressionRoot.CanExecuteExpression(
+                                this.expressionText,
+                                true /* this is always a reference */
+                                ,
+                                this.locationReferences,
+                                out this.expressionId
+                            )
+                        )
                         {
                             return compiledExpressionRoot;
                         }
@@ -245,20 +279,43 @@ namespace System.Activities.XamlIntegration
                     return compiledExpressionRoot;
                 }
             }
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.UnableToLocateCompiledLocationContext(this.expressionText)));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(
+                    SR.UnableToLocateCompiledLocationContext(this.expressionText)
+                )
+            );
         }
 
-        bool FindCompiledExpressionRoot(Activity activity, out ICompiledExpressionRoot compiledExpressionRoot)
+        bool FindCompiledExpressionRoot(
+            Activity activity,
+            out ICompiledExpressionRoot compiledExpressionRoot
+        )
         {
-            if (CompiledExpressionInvoker.TryGetCompiledExpressionRoot(activity, this.forImplementation, out compiledExpressionRoot))
+            if (
+                CompiledExpressionInvoker.TryGetCompiledExpressionRoot(
+                    activity,
+                    this.forImplementation,
+                    out compiledExpressionRoot
+                )
+            )
             {
-                if (compiledExpressionRoot.CanExecuteExpression(this.expressionText, true /* this is always a reference */, this.locationReferences, out this.expressionId))
+                if (
+                    compiledExpressionRoot.CanExecuteExpression(
+                        this.expressionText,
+                        true /* this is always a reference */
+                        ,
+                        this.locationReferences,
+                        out this.expressionId
+                    )
+                )
                 {
                     return true;
                 }
             }
 
-            foreach (Activity containedActivity in WorkflowInspectionServices.GetActivities(activity))
+            foreach (
+                Activity containedActivity in WorkflowInspectionServices.GetActivities(activity)
+            )
             {
                 if (FindCompiledExpressionRoot(containedActivity, out compiledExpressionRoot))
                 {
@@ -283,18 +340,12 @@ namespace System.Activities.XamlIntegration
 
             protected override string NameCore
             {
-                get 
-                {
-                    return name;
-                }
+                get { return name; }
             }
 
             protected override Type TypeCore
             {
-                get 
-                {
-                    return type;
-                }
+                get { return type; }
             }
 
             public override Location GetLocation(ActivityContext context)
@@ -303,7 +354,9 @@ namespace System.Activities.XamlIntegration
                 // We should never hit this, these references are strictly for preserving location names/types
                 // through persistence to allow for revalidation on the other side
                 // Actual execution occurs through the locations that were stored separately
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CompiledLocationReferenceGetLocation));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CompiledLocationReferenceGetLocation)
+                );
             }
         }
     }

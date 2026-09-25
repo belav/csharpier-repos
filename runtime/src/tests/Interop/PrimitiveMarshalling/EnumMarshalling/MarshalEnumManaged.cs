@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using System.Text;
 using TestLibrary;
-using System.Runtime.InteropServices;
 using Xunit;
 
 namespace EnumRoundtrip
@@ -14,7 +14,7 @@ namespace EnumRoundtrip
         {
             None = 0x01,
             OK = 0x02,
-            Cancel = 0x03
+            Cancel = 0x03,
         }
 
         #region pinvoke declarations
@@ -26,7 +26,6 @@ namespace EnumRoundtrip
         [DllImport("MarshalEnumNative", EntryPoint = "GetFptr")]
         [return: MarshalAs(UnmanagedType.FunctionPtr)]
         public static extern CdeclEnumDelegate GetFptrCdeclEnum();
-
 
         #endregion
 
@@ -50,7 +49,10 @@ namespace EnumRoundtrip
             r = CdeclEnum(DialogResult.None | DialogResult.OK, ref result);
             if ((!result) || (r != 3))
             {
-                TestFramework.LogError("02", "Main : Returned value of enum doesn't match with the value passed in to pinvoke call");
+                TestFramework.LogError(
+                    "02",
+                    "Main : Returned value of enum doesn't match with the value passed in to pinvoke call"
+                );
                 return 101;
             }
 
@@ -60,10 +62,13 @@ namespace EnumRoundtrip
             r = cdecdel(DialogResult.None | DialogResult.OK, ref result);
             if ((!result) || (r != 3))
             {
-                TestFramework.LogError("04", "Main : Returned value of enum doesn't match with the value passed in to pinvoke call");
+                TestFramework.LogError(
+                    "04",
+                    "Main : Returned value of enum doesn't match with the value passed in to pinvoke call"
+                );
                 return 101;
             }
-            
+
             return 100;
         }
     }

@@ -22,12 +22,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool IsEffectivelySealed(MethodDesc method)
         {
-            return _compilationModuleGroup.VersionsWithMethodBody(method) && base.IsEffectivelySealed(method);
+            return _compilationModuleGroup.VersionsWithMethodBody(method)
+                && base.IsEffectivelySealed(method);
         }
 
-        protected override MethodDesc ResolveVirtualMethod(MethodDesc declMethod, DefType implType, out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail)
+        protected override MethodDesc ResolveVirtualMethod(
+            MethodDesc declMethod,
+            DefType implType,
+            out CORINFO_DEVIRTUALIZATION_DETAIL devirtualizationDetail
+        )
         {
-            devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN;
+            devirtualizationDetail =
+                CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_UNKNOWN;
 
             // Versioning resiliency rules here are complex
             // Decl method checking
@@ -51,10 +57,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             //    From implType to the owning type of resolved result method also version with the code.
 
             bool declMethodCheckFailed;
-            var firstTypeInImplTypeHierarchyNotInVersionBubble = FindVersionBubbleEdge(_compilationModuleGroup, implType, out TypeDesc lastTypeInHierarchyInVersionBubble);
+            var firstTypeInImplTypeHierarchyNotInVersionBubble = FindVersionBubbleEdge(
+                _compilationModuleGroup,
+                implType,
+                out TypeDesc lastTypeInHierarchyInVersionBubble
+            );
             if (!declMethod.OwningType.IsInterface)
             {
-                if (_compilationModuleGroup.VersionsWithType(declMethod.OwningType.GetTypeDefinition()))
+                if (
+                    _compilationModuleGroup.VersionsWithType(
+                        declMethod.OwningType.GetTypeDefinition()
+                    )
+                )
                 {
                     declMethodCheckFailed = false;
                 }
@@ -62,7 +76,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 {
                     if (firstTypeInImplTypeHierarchyNotInVersionBubble != declMethod.OwningType)
                     {
-                        devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_CLASS_DECL;
+                        devirtualizationDetail =
+                            CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_CLASS_DECL;
                         declMethodCheckFailed = true;
                     }
                     else
@@ -73,17 +88,26 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             }
             else
             {
-                if (_compilationModuleGroup.VersionsWithType(declMethod.OwningType.GetTypeDefinition()))
+                if (
+                    _compilationModuleGroup.VersionsWithType(
+                        declMethod.OwningType.GetTypeDefinition()
+                    )
+                )
                 {
                     declMethodCheckFailed = false;
                 }
                 else
                 {
-                    if (firstTypeInImplTypeHierarchyNotInVersionBubble == null || implType.IsValueType || firstTypeInImplTypeHierarchyNotInVersionBubble.IsObject)
+                    if (
+                        firstTypeInImplTypeHierarchyNotInVersionBubble == null
+                        || implType.IsValueType
+                        || firstTypeInImplTypeHierarchyNotInVersionBubble.IsObject
+                    )
                         declMethodCheckFailed = false;
                     else
                     {
-                        devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_INTERFACE_DECL;
+                        devirtualizationDetail =
+                            CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_INTERFACE_DECL;
                         declMethodCheckFailed = true;
                     }
                 }
@@ -95,13 +119,15 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             // Impl type check
             if (!_compilationModuleGroup.VersionsWithType(implType.GetTypeDefinition()))
             {
-                devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL;
+                devirtualizationDetail =
+                    CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL;
                 return null;
             }
 
             if (!_compilationModuleGroup.VersionsWithTypeReference(implType))
             {
-                devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL_NOT_REFERENCEABLE;
+                devirtualizationDetail =
+                    CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE_IMPL_NOT_REFERENCEABLE;
                 return null;
             }
 
@@ -127,13 +153,13 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         if (implTypeRuntimeInterfaces[i] == implTypeRuntimeInterfaces[j])
                         {
-                            devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DUPLICATE_INTERFACE;
+                            devirtualizationDetail =
+                                CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_DUPLICATE_INTERFACE;
                             return null;
                         }
                     }
                 }
             }
-
 
             if (declMethod.OwningType.IsInterface)
             {
@@ -143,7 +169,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 if (!implType.IsObject)
                 {
                     TypeDesc typeThatDerivesFromObject = implType;
-                    while(!typeThatDerivesFromObject.BaseType.IsObject)
+                    while (!typeThatDerivesFromObject.BaseType.IsObject)
                     {
                         typeThatDerivesFromObject = typeThatDerivesFromObject.BaseType;
                     }
@@ -152,14 +178,19 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     {
                         if ((ecmaType.Attributes & System.Reflection.TypeAttributes.Import) != 0)
                         {
-                            devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_COM;
+                            devirtualizationDetail =
+                                CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_COM;
                             return null;
                         }
                     }
                 }
             }
 
-            MethodDesc resolvedVirtualMethod = base.ResolveVirtualMethod(declMethod, implType, out devirtualizationDetail);
+            MethodDesc resolvedVirtualMethod = base.ResolveVirtualMethod(
+                declMethod,
+                implType,
+                out devirtualizationDetail
+            );
 
             if (resolvedVirtualMethod != null)
             {
@@ -176,21 +207,29 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                     return resolvedVirtualMethod;
                 }
 
-                if (declMethod == resolvedVirtualMethod && firstTypeInImplTypeHierarchyNotInVersionBubble == declMethod.OwningType)
+                if (
+                    declMethod == resolvedVirtualMethod
+                    && firstTypeInImplTypeHierarchyNotInVersionBubble == declMethod.OwningType
+                )
                 {
                     // Exact match for use of decl method check
                     return resolvedVirtualMethod;
                 }
 
                 // Ensure that declMethod is implemented on a type within the type hierarchy that is within the version bubble
-                for (TypeDesc typeExamine = resolvedVirtualMethod.OwningType; typeExamine != null; typeExamine = typeExamine.BaseType)
+                for (
+                    TypeDesc typeExamine = resolvedVirtualMethod.OwningType;
+                    typeExamine != null;
+                    typeExamine = typeExamine.BaseType
+                )
                 {
                     if (typeExamine == lastTypeInHierarchyInVersionBubble)
                     {
                         return resolvedVirtualMethod;
                     }
                 }
-                devirtualizationDetail = CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE;
+                devirtualizationDetail =
+                    CORINFO_DEVIRTUALIZATION_DETAIL.CORINFO_DEVIRTUALIZATION_FAILED_BUBBLE;
             }
 
             // Cannot devirtualize, as we can't resolve to a target.
@@ -198,7 +237,11 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             // This function returns the type where the metadata is not in the version bubble of the application, and has an out parameter
             // which is the last type examined before that is found via a base type walk.
-            static TypeDesc FindVersionBubbleEdge(CompilationModuleGroup compilationModuleGroup, TypeDesc type, out TypeDesc lastTypeInVersionBubble)
+            static TypeDesc FindVersionBubbleEdge(
+                CompilationModuleGroup compilationModuleGroup,
+                TypeDesc type,
+                out TypeDesc lastTypeInVersionBubble
+            )
             {
                 lastTypeInVersionBubble = null;
                 while (compilationModuleGroup.VersionsWithType(type.GetTypeDefinition()))

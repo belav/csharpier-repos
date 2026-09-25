@@ -21,19 +21,44 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Runtime.CompilerServices.AsyncMethodBuilderAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<>))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<>))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Runtime.CompilerServices.ValueTaskAwaiter))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Runtime.CompilerServices.ValueTaskAwaiter<>))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Runtime.CompilerServices.AsyncMethodBuilderAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Runtime.CompilerServices.AsyncValueTaskMethodBuilder<>)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Runtime.CompilerServices.ConfiguredValueTaskAwaitable<>)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Runtime.CompilerServices.ValueTaskAwaiter)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Runtime.CompilerServices.ValueTaskAwaiter<>)
+)]
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Threading.Tasks.ValueTask))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Threading.Tasks.ValueTask<>))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Threading.Tasks.ValueTask)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Threading.Tasks.ValueTask<>)
+)]
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Threading.Tasks.Sources.IValueTaskSource))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Threading.Tasks.Sources.IValueTaskSource<>))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Threading.Tasks.Sources.ValueTaskSourceStatus))]
-
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Threading.Tasks.Sources.IValueTaskSource)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Threading.Tasks.Sources.IValueTaskSource<>)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Threading.Tasks.Sources.ValueTaskSourceStatus)
+)]

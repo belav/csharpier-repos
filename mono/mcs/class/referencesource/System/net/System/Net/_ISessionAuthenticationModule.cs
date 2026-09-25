@@ -4,18 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-
-namespace System.Net {
-
-    internal interface ISessionAuthenticationModule : IAuthenticationModule {
-
+namespace System.Net
+{
+    internal interface ISessionAuthenticationModule : IAuthenticationModule
+    {
         bool Update(string challenge, WebRequest webRequest);
 
         void ClearSession(WebRequest webRequest);
 
         bool CanUseDefaultCredentials { get; }
-
     } // interface ISessionAuthenticationModule
-
-
 } // namespace System.Net

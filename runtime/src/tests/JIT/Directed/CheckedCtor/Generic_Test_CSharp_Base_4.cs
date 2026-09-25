@@ -27,7 +27,11 @@ namespace Test
     public class BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public BaseClass(int arg) { Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg); return; }
+        public BaseClass(int arg)
+        {
+            Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg);
+            return;
+        }
     }
 
     public class DerivedClass<T> : BaseClass
@@ -35,19 +39,25 @@ namespace Test
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         private static readonly Random Generator = new Random(Seed);
-        private static string GetString() { return "Text"; }
+
+        private static string GetString()
+        {
+            return "Text";
+        }
+
         public int Field1 = ((Generator.Next(5, 8) == 10) ? 10 : 20);
         public string Field2 = (GetString() ?? "NeededToFallBack");
         public Func<int> Field3 = () => Generator.Next(5, 8);
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public DerivedClass(int selector) : base(selector) { }
+        public DerivedClass(int selector)
+            : base(selector) { }
     }
 }
-

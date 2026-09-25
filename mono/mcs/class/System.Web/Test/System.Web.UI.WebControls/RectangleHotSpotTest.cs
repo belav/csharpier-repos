@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,22 +26,21 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using MonoTests.stand_alone.WebHarness;
 using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
     [TestFixture]
     public class RectangleHotSpotTest
     {
-
         [Test]
         public void RectangleHotSpot_DefaultProperties()
         {
@@ -68,7 +67,7 @@ namespace MonoTests.System.Web.UI.WebControls
 
         [Test]
         public void RectangleHotSpot_GetCoordinates()
-         {
+        {
             RectangleHotSpot rect = new RectangleHotSpot();
             rect.Bottom = 10;
             rect.Top = 20;
@@ -89,5 +88,3 @@ namespace MonoTests.System.Web.UI.WebControls
         }
     }
 }
-
-

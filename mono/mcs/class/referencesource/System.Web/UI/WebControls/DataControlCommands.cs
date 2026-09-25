@@ -1,14 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataControlCommands.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
-namespace System.Web.UI.WebControls {
-
-    public sealed class DataControlCommands {
-        
-        private DataControlCommands() {}
-        
+namespace System.Web.UI.WebControls
+{
+    public sealed class DataControlCommands
+    {
+        private DataControlCommands() { }
 
         /// <devdoc>
         /// <para> Specifies the <see langword='Sort'/> command. This field is constant.</para>
@@ -74,6 +73,5 @@ namespace System.Web.UI.WebControls {
         /// <para> Specifies the <see langword='New'/> command. This field is constant.</para>
         /// </devdoc>
         public const string NewCommandName = "New";
-
     }
 }

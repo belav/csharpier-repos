@@ -22,7 +22,12 @@ namespace System
         {
             Fx.Assert(s == s.ToUpperInvariant(), "non-canonicalized");
         }
-        public static bool CanMatchQueryInterestingly(UriTemplate ut, NameValueCollection query, bool mustBeEspeciallyInteresting)
+
+        public static bool CanMatchQueryInterestingly(
+            UriTemplate ut,
+            NameValueCollection query,
+            bool mustBeEspeciallyInteresting
+        )
         {
             if (ut.queries.Count == 0)
             {
@@ -56,7 +61,10 @@ namespace System
                     }
                     else
                     {
-                        if (((UriTemplateLiteralQueryValue)(kvp.Value)).AsRawUnescapedString() != query[queryKeyName])
+                        if (
+                            ((UriTemplateLiteralQueryValue)(kvp.Value)).AsRawUnescapedString()
+                            != query[queryKeyName]
+                        )
                         {
                             return false;
                         }
@@ -78,7 +86,12 @@ namespace System
             return (ut.queries.Count == 0);
         }
 
-        public static void DisambiguateSamePath(UriTemplate[] array, int a, int b, bool allowDuplicateEquivalentUriTemplates)
+        public static void DisambiguateSamePath(
+            UriTemplate[] array,
+            int a,
+            int b,
+            bool allowDuplicateEquivalentUriTemplates
+        )
         {
             // [a,b) all have same path
             // ensure queries make them unambiguous
@@ -98,8 +111,15 @@ namespace System
                 }
                 if (array[a].queries.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                        SR.UTTDuplicate, array[a].ToString(), array[a - 1].ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.UTTDuplicate,
+                                array[a].ToString(),
+                                array[a - 1].ToString()
+                            )
+                        )
+                    );
                 }
                 if (b - a == 1)
                 {
@@ -108,7 +128,7 @@ namespace System
             }
             else
             {
-                while (a < b && array[a].queries.Count == 0)  // all equivalent
+                while (a < b && array[a].queries.Count == 0) // all equivalent
                 {
                     a++;
                 }
@@ -134,8 +154,12 @@ namespace System
 
         public static string GetUriPath(Uri uri)
         {
-            return uri.GetComponents(UriComponents.Path | UriComponents.KeepDelimiter, UriFormat.Unescaped);
+            return uri.GetComponents(
+                UriComponents.Path | UriComponents.KeepDelimiter,
+                UriFormat.Unescaped
+            );
         }
+
         public static bool HasQueryLiteralRequirements(UriTemplate ut)
         {
             foreach (UriTemplateQueryValue utqv in ut.queries.Values)
@@ -152,14 +176,14 @@ namespace System
         {
             // Identifying the nature of a string - Literal|Compound|Variable
             // Algorithem is based on the following steps:
-            // - Finding the position of the first open curlly brace ('{') and close curlly brace ('}') 
+            // - Finding the position of the first open curlly brace ('{') and close curlly brace ('}')
             //    in the string
             // - If we don't find any this is a Literal
-            // - otherwise, we validate that position of the close brace is at least two characters from 
+            // - otherwise, we validate that position of the close brace is at least two characters from
             //    the position of the open brace
             // - Then we identify if we are dealing with a compound string or a single variable string
             //    + var name is not at the string start --> Compound
-            //    + var name is shorter then the entire string (End < Length-2 or End==Length-2 
+            //    + var name is shorter then the entire string (End < Length-2 or End==Length-2
             //       and string ends with '/') --> Compound
             //    + otherwise --> Variable
             int varStartIndex = part.IndexOf("{", StringComparison.Ordinal);
@@ -168,8 +192,11 @@ namespace System
             {
                 if (varEndIndex != -1)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(
-                        SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
+                        )
+                    );
                 }
                 return UriTemplatePartType.Literal;
             }
@@ -177,15 +204,23 @@ namespace System
             {
                 if (varEndIndex < varStartIndex + 2)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(
-                        SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(
+                            SR.GetString(SR.UTInvalidFormatSegmentOrQueryPart, part)
+                        )
+                    );
                 }
                 if (varStartIndex > 0)
                 {
                     return UriTemplatePartType.Compound;
                 }
-                else if ((varEndIndex < part.Length - 2) ||
-                    ((varEndIndex == part.Length - 2) && !part.EndsWith("/", StringComparison.Ordinal)))
+                else if (
+                    (varEndIndex < part.Length - 2)
+                    || (
+                        (varEndIndex == part.Length - 2)
+                        && !part.EndsWith("/", StringComparison.Ordinal)
+                    )
+                )
                 {
                     return UriTemplatePartType.Compound;
                 }
@@ -195,6 +230,7 @@ namespace System
                 }
             }
         }
+
         public static bool IsWildcardPath(string path)
         {
             if (path.IndexOf('/') != -1)
@@ -205,28 +241,38 @@ namespace System
             return IsWildcardSegment(path, out partType);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", Justification = "This is internal method that needs to return multiple things")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            Justification = "This is internal method that needs to return multiple things"
+        )]
         public static bool IsWildcardSegment(string segment, out UriTemplatePartType type)
         {
             type = IdentifyPartType(segment);
             switch (type)
             {
                 case UriTemplatePartType.Literal:
-                    return (string.Compare(segment, UriTemplate.WildcardPath, StringComparison.Ordinal) == 0);
+                    return (
+                        string.Compare(segment, UriTemplate.WildcardPath, StringComparison.Ordinal)
+                        == 0
+                    );
 
                 case UriTemplatePartType.Compound:
                     return false;
 
                 case UriTemplatePartType.Variable:
-                    return ((segment.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) == 1) &&
-                        !segment.EndsWith("/", StringComparison.Ordinal) &&
-                        (segment.Length > UriTemplate.WildcardPath.Length + 2));
+                    return (
+                        (segment.IndexOf(UriTemplate.WildcardPath, StringComparison.Ordinal) == 1)
+                        && !segment.EndsWith("/", StringComparison.Ordinal)
+                        && (segment.Length > UriTemplate.WildcardPath.Length + 2)
+                    );
 
                 default:
                     Fx.Assert("Bad part type identification !");
                     return false;
             }
         }
+
         public static NameValueCollection ParseQueryString(string query)
         {
             // We are adjusting the parsing of UrlUtility.ParseQueryString, which identify
@@ -244,6 +290,7 @@ namespace System
             }
             return result;
         }
+
         static bool AllTemplatesAreEquivalent(IList<UriTemplate> array, int a, int b)
         {
             for (int i = a; i < b - 1; ++i)
@@ -256,9 +303,16 @@ namespace System
             return true;
         }
 
-        static void EnsureQueriesAreDistinct(UriTemplate[] array, int a, int b, bool allowDuplicateEquivalentUriTemplates)
+        static void EnsureQueriesAreDistinct(
+            UriTemplate[] array,
+            int a,
+            int b,
+            bool allowDuplicateEquivalentUriTemplates
+        )
         {
-            Dictionary<string, byte> queryVarNamesWithLiteralVals = new Dictionary<string, byte>(StringComparer.OrdinalIgnoreCase);
+            Dictionary<string, byte> queryVarNamesWithLiteralVals = new Dictionary<string, byte>(
+                StringComparer.OrdinalIgnoreCase
+            );
             for (int i = a; i < b; ++i)
             {
                 foreach (KeyValuePair<string, UriTemplateQueryValue> kvp in array[i].queries)
@@ -274,12 +328,17 @@ namespace System
             }
             // now we have set of possibilities:
             // further refine to only those for whom all templates have literals
-            Dictionary<string, byte> queryVarNamesAllLiterals = new Dictionary<string, byte>(queryVarNamesWithLiteralVals);
+            Dictionary<string, byte> queryVarNamesAllLiterals = new Dictionary<string, byte>(
+                queryVarNamesWithLiteralVals
+            );
             for (int i = a; i < b; ++i)
             {
                 foreach (string s in queryVarNamesWithLiteralVals.Keys)
                 {
-                    if (!array[i].queries.ContainsKey(s) || (array[i].queries[s].Nature != UriTemplatePartType.Literal))
+                    if (
+                        !array[i].queries.ContainsKey(s)
+                        || (array[i].queries[s].Nature != UriTemplatePartType.Literal)
+                    )
                     {
                         queryVarNamesAllLiterals.Remove(s);
                     }
@@ -295,8 +354,11 @@ namespace System
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                        SR.UTTOtherAmbiguousQueries, array[a].ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UTTOtherAmbiguousQueries, array[a].ToString())
+                        )
+                    );
                 }
             }
             // now just ensure that each template has a unique tuple of values for the names
@@ -313,20 +375,35 @@ namespace System
                     {
                         if (!array[i + a].IsEquivalentTo(array[j + a]))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                                SR.UTTAmbiguousQueries, array[a + i].ToString(), array[j + a].ToString())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.UTTAmbiguousQueries,
+                                        array[a + i].ToString(),
+                                        array[j + a].ToString()
+                                    )
+                                )
+                            );
                         }
                         Fx.Assert(array[i + a].IsEquivalentTo(array[j + a]), "bad equiv logic");
                         if (!allowDuplicateEquivalentUriTemplates)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(
-                                SR.UTTDuplicate, array[a + i].ToString(), array[j + a].ToString())));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException(
+                                    SR.GetString(
+                                        SR.UTTDuplicate,
+                                        array[a + i].ToString(),
+                                        array[j + a].ToString()
+                                    )
+                                )
+                            );
                         }
                     }
                 }
             }
             // we're good.  whew!
         }
+
         static string[] GetQueryLiterals(UriTemplate up, Dictionary<string, byte> queryVarNames)
         {
             string[] queryLitVals = new string[queryVarNames.Count];
@@ -335,7 +412,10 @@ namespace System
             {
                 Fx.Assert(up.queries.ContainsKey(queryVarName), "query doesn't have name");
                 UriTemplateQueryValue utqv = up.queries[queryVarName];
-                Fx.Assert(utqv.Nature == UriTemplatePartType.Literal, "query for name is not literal");
+                Fx.Assert(
+                    utqv.Nature == UriTemplatePartType.Literal,
+                    "query for name is not literal"
+                );
                 if (utqv == UriTemplateQueryValue.Empty)
                 {
                     queryLitVals[i] = null;
@@ -348,6 +428,7 @@ namespace System
             }
             return queryLitVals;
         }
+
         static bool Same(string[] a, string[] b)
         {
             Fx.Assert(a.Length == b.Length, "arrays not same length");
@@ -369,12 +450,14 @@ namespace System
                 return Comparer<int>.Default.Compare(x.queries.Count, y.queries.Count);
             }
         }
+
         class UriTemplateQueryKeyComparer : IEqualityComparer<string>
         {
             public bool Equals(string x, string y)
             {
                 return (string.Compare(x, y, StringComparison.OrdinalIgnoreCase) == 0);
             }
+
             public int GetHashCode(string obj)
             {
                 if (obj == null)

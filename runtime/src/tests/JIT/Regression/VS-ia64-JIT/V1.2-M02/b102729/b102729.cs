@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 struct Foo
 {
 #pragma warning disable 0414

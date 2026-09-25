@@ -9,7 +9,9 @@ namespace System.Net.Test.Common
 {
     public static class QPackTestDecoder
     {
-        public static (int bytesConsumed, int requiredInsertCount, int deltaBase) DecodePrefix(ReadOnlySpan<byte> buffer)
+        public static (int bytesConsumed, int requiredInsertCount, int deltaBase) DecodePrefix(
+            ReadOnlySpan<byte> buffer
+        )
         {
             if (buffer[0] != 0x00 && buffer[1] != 0x00)
             {
@@ -25,34 +27,54 @@ namespace System.Net.Test.Common
             {
                 case 0: // Indexed Header Field
                 {
-                    if ((buffer[0] & 0b0100_0000) == 0) throw new Exception("QPack dynamic table is not yet supported.");
+                    if ((buffer[0] & 0b0100_0000) == 0)
+                        throw new Exception("QPack dynamic table is not yet supported.");
 
                     (int bytesConsumed, int staticIndex) = DecodeInteger(buffer, 0b0011_1111);
 
                     var staticHeader = s_staticTable[staticIndex];
-                    var header = new HttpHeaderData(staticHeader.Name, staticHeader.Value, raw: buffer.Slice(0, bytesConsumed).ToArray());
+                    var header = new HttpHeaderData(
+                        staticHeader.Name,
+                        staticHeader.Value,
+                        raw: buffer.Slice(0, bytesConsumed).ToArray()
+                    );
 
                     return (bytesConsumed, header);
                 }
                 case 1: // Literal Header Field With Name Reference
                 {
-                    if ((buffer[0] & 0b0001_0000) == 0) throw new Exception("QPack dynamic table is not yet supported.");
+                    if ((buffer[0] & 0b0001_0000) == 0)
+                        throw new Exception("QPack dynamic table is not yet supported.");
 
                     (int nameLength, int staticIndex) = DecodeInteger(buffer, 0b0000_1111);
-                    (int valueLength, string value) = DecodeString(buffer.Slice(nameLength), 0b0111_1111);
+                    (int valueLength, string value) = DecodeString(
+                        buffer.Slice(nameLength),
+                        0b0111_1111
+                    );
 
                     int headerLength = nameLength + valueLength;
-                    var header = new HttpHeaderData(s_staticTable[staticIndex].Name, value, raw: buffer.Slice(0, headerLength).ToArray());
+                    var header = new HttpHeaderData(
+                        s_staticTable[staticIndex].Name,
+                        value,
+                        raw: buffer.Slice(0, headerLength).ToArray()
+                    );
 
                     return (headerLength, header);
                 }
                 case 2: // Literal Header Field Without Name Reference
                 {
                     (int nameLength, string name) = DecodeString(buffer, 0b0000_0111);
-                    (int valueLength, string value) = DecodeString(buffer.Slice(nameLength), 0b0111_1111);
+                    (int valueLength, string value) = DecodeString(
+                        buffer.Slice(nameLength),
+                        0b0111_1111
+                    );
 
                     int headerLength = nameLength + valueLength;
-                    var header = new HttpHeaderData(name, value, raw: buffer.Slice(0, headerLength).ToArray());
+                    var header = new HttpHeaderData(
+                        name,
+                        value,
+                        raw: buffer.Slice(0, headerLength).ToArray()
+                    );
 
                     return (headerLength, header);
                 }
@@ -62,7 +84,10 @@ namespace System.Net.Test.Common
             }
         }
 
-        private static (int bytesConsumed, string value) DecodeString(ReadOnlySpan<byte> buffer, byte prefixMask)
+        private static (int bytesConsumed, string value) DecodeString(
+            ReadOnlySpan<byte> buffer,
+            byte prefixMask
+        )
         {
             bool huffman = (buffer[0] & (1 << BitOperations.TrailingZeroCount(~prefixMask))) != 0;
 
@@ -82,7 +107,10 @@ namespace System.Net.Test.Common
             return (varIntLength + stringLength, value);
         }
 
-        public static (int bytesConsumed, int value) DecodeInteger(ReadOnlySpan<byte> headerBlock, byte prefixMask)
+        public static (int bytesConsumed, int value) DecodeInteger(
+            ReadOnlySpan<byte> headerBlock,
+            byte prefixMask
+        )
         {
             int value = headerBlock[0] & prefixMask;
             if (value != prefixMask)
@@ -101,8 +129,7 @@ namespace System.Net.Test.Common
                 // Every 7-bits of the next byte is shifted by (7 * index) and added to the result.
                 b = (ulong)headerBlock[length++];
                 extra = checked(b << (7 * (length - 2))) | extra;
-            }
-            while ((b & 0b10000000) != 0);
+            } while ((b & 0b10000000) != 0);
 
             value = checked((int)(prefixMask + extra));
 
@@ -169,7 +196,10 @@ namespace System.Net.Test.Common
             new HttpHeaderData("range", "bytes=0-"),
             new HttpHeaderData("strict-transport-security", "max-age=31536000"),
             new HttpHeaderData("strict-transport-security", "max-age=31536000;includesubdomains"), // TODO confirm spaces here don't matter?
-            new HttpHeaderData("strict-transport-security", "max-age=31536000;includesubdomains; preload"),
+            new HttpHeaderData(
+                "strict-transport-security",
+                "max-age=31536000;includesubdomains; preload"
+            ),
             new HttpHeaderData("vary", "accept-encoding"),
             new HttpHeaderData("vary", "origin"), // 60
             new HttpHeaderData("x-content-type-options", "nosniff"),
@@ -196,7 +226,10 @@ namespace System.Net.Test.Common
             new HttpHeaderData("access-control-request-method", "post"),
             new HttpHeaderData("alt-svc", "clear"),
             new HttpHeaderData("authorization", ""),
-            new HttpHeaderData("content-security-policy", "script-src 'none'; object-src 'none'; base-uri 'none'"),
+            new HttpHeaderData(
+                "content-security-policy",
+                "script-src 'none'; object-src 'none'; base-uri 'none'"
+            ),
             new HttpHeaderData("early-data", "1"),
             new HttpHeaderData("expect-ct", ""),
             new HttpHeaderData("forwarded", ""),

@@ -31,26 +31,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
         public VisualStudioWorkspaceTelemetryService(
             VisualStudioWorkspace workspace,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider asyncListenerProvider)
+            IAsynchronousOperationListenerProvider asyncListenerProvider
+        )
         {
             _workspace = workspace;
             _globalOptions = globalOptions;
             _asyncListenerProvider = asyncListenerProvider;
         }
 
-        protected override ILogger CreateLogger(TelemetrySession telemetrySession, bool logDelta)
-            => AggregateLogger.Create(
+        protected override ILogger CreateLogger(TelemetrySession telemetrySession, bool logDelta) =>
+            AggregateLogger.Create(
                 CodeMarkerLogger.Instance,
                 new EtwLogger(FunctionIdOptions.CreateFunctionIsEnabledPredicate(_globalOptions)),
                 TelemetryLogger.Create(telemetrySession, logDelta, _asyncListenerProvider),
                 new FileLogger(_globalOptions),
-                Logger.GetLogger());
+                Logger.GetLogger()
+            );
 
         protected override void TelemetrySessionInitialized()
         {
             _ = Task.Run(async () =>
             {
-                var client = await RemoteHostClient.TryGetClientAsync(_workspace, CancellationToken.None).ConfigureAwait(false);
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(_workspace, CancellationToken.None)
+                    .ConfigureAwait(false);
                 if (client == null)
                 {
                     return;
@@ -60,12 +64,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
                 Contract.ThrowIfNull(settings);
 
                 // Only log "delta" property for block end events if feature flag is enabled.
-                var logDelta = _globalOptions.GetOption(DiagnosticOptionsStorage.LogTelemetryForBackgroundAnalyzerExecution);
+                var logDelta = _globalOptions.GetOption(
+                    DiagnosticOptionsStorage.LogTelemetryForBackgroundAnalyzerExecution
+                );
 
                 // initialize session in the remote service
-                _ = await client.TryInvokeAsync<IRemoteProcessTelemetryService>(
-                    (service, cancellationToken) => service.InitializeTelemetrySessionAsync(Process.GetCurrentProcess().Id, settings, logDelta, cancellationToken),
-                    CancellationToken.None).ConfigureAwait(false);
+                _ = await client
+                    .TryInvokeAsync<IRemoteProcessTelemetryService>(
+                        (service, cancellationToken) =>
+                            service.InitializeTelemetrySessionAsync(
+                                Process.GetCurrentProcess().Id,
+                                settings,
+                                logDelta,
+                                cancellationToken
+                            ),
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false);
             });
         }
     }

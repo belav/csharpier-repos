@@ -4,36 +4,34 @@
 
 namespace System.Activities.Core.Presentation
 {
-
-    // This class is holding names of the used property names, so access to model item's 
+    // This class is holding names of the used property names, so access to model item's
     // properties collection is somehow "strongly typed"
     internal static class PropertyNames
     {
-        public readonly static string ObjectInitializationAction = "InitializationAction";
-        public readonly static string Action = "Action";
-        public readonly static string ActionArgument = "Argument";
-        public readonly static string ActionArgument1 = "Argument1";
-        public readonly static string ActionArgument2 = "Argument2";
-        public readonly static string ActionHandler = "Handler";
-        public readonly static string AssignSequence = "Activities";
-        public readonly static string VarDataReader = "dbDataReader";
-        public readonly static string VarRecord = "resultObject";
-        public readonly static string NameProperty = "Name";
-        public readonly static string AssignTo = "To";
-        public readonly static string AssignValue = "Value";
-        public readonly static string DisplayName = "DisplayName";
-        public readonly static string Parameters = "Parameters";
-        public readonly static string ArgumentName = "DynamicParameterName";
-        public readonly static string Expression = "Expression";
-        public readonly static string VBExpressionText = "ExpressionText";
-        public readonly static string ConnectionContext = "ConnectionContext";
-        public readonly static string ResultsCollection = "Results";
-        public readonly static string RowsAffected = "RowsAffected";
-        public readonly static string ParameterDirection = "Direction";
-        public readonly static string ArgumentType = "ArgumentType";
-        public readonly static string Body = "Body";
-        public readonly static string ExceptionType = "ExceptionType";
-        public readonly static string ResultProperty = "Result";
-
+        public static readonly string ObjectInitializationAction = "InitializationAction";
+        public static readonly string Action = "Action";
+        public static readonly string ActionArgument = "Argument";
+        public static readonly string ActionArgument1 = "Argument1";
+        public static readonly string ActionArgument2 = "Argument2";
+        public static readonly string ActionHandler = "Handler";
+        public static readonly string AssignSequence = "Activities";
+        public static readonly string VarDataReader = "dbDataReader";
+        public static readonly string VarRecord = "resultObject";
+        public static readonly string NameProperty = "Name";
+        public static readonly string AssignTo = "To";
+        public static readonly string AssignValue = "Value";
+        public static readonly string DisplayName = "DisplayName";
+        public static readonly string Parameters = "Parameters";
+        public static readonly string ArgumentName = "DynamicParameterName";
+        public static readonly string Expression = "Expression";
+        public static readonly string VBExpressionText = "ExpressionText";
+        public static readonly string ConnectionContext = "ConnectionContext";
+        public static readonly string ResultsCollection = "Results";
+        public static readonly string RowsAffected = "RowsAffected";
+        public static readonly string ParameterDirection = "Direction";
+        public static readonly string ArgumentType = "ArgumentType";
+        public static readonly string Body = "Body";
+        public static readonly string ExceptionType = "ExceptionType";
+        public static readonly string ResultProperty = "Result";
     }
 }

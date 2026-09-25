@@ -342,7 +342,8 @@ public static class HttpRequestJsonExtensions
         // Attempt to resolve options from DI then fallback to default options
         return httpContext
                 .RequestServices?.GetService<IOptions<JsonOptions>>()
-                ?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
+                ?.Value?.SerializerOptions
+            ?? JsonOptions.DefaultSerializerOptions;
     }
 
     [DoesNotReturn]

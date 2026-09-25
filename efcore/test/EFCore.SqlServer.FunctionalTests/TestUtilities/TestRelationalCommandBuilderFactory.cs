@@ -5,23 +5,21 @@ namespace Microsoft.EntityFrameworkCore.TestUtilities;
 
 public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFactory
 {
-    public TestRelationalCommandBuilderFactory(
-        RelationalCommandBuilderDependencies dependencies)
+    public TestRelationalCommandBuilderFactory(RelationalCommandBuilderDependencies dependencies)
     {
         Dependencies = dependencies;
     }
 
     public RelationalCommandBuilderDependencies Dependencies { get; }
 
-    public virtual IRelationalCommandBuilder Create()
-        => new TestRelationalCommandBuilder(Dependencies);
+    public virtual IRelationalCommandBuilder Create() =>
+        new TestRelationalCommandBuilder(Dependencies);
 
     private class TestRelationalCommandBuilder : IRelationalCommandBuilder
     {
         private readonly List<IRelationalParameter> _parameters = new();
 
-        public TestRelationalCommandBuilder(
-            RelationalCommandBuilderDependencies dependencies)
+        public TestRelationalCommandBuilder(RelationalCommandBuilderDependencies dependencies)
         {
             Dependencies = dependencies;
         }
@@ -30,8 +28,7 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
 
         public RelationalCommandBuilderDependencies Dependencies { get; }
 
-        public IReadOnlyList<IRelationalParameter> Parameters
-            => _parameters;
+        public IReadOnlyList<IRelationalParameter> Parameters => _parameters;
 
         public IRelationalCommandBuilder AddParameter(IRelationalParameter parameter)
         {
@@ -47,15 +44,13 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
             return this;
         }
 
-        [Obsolete("Code trying to add parameter should add type mapped parameter using TypeMappingSource directly.")]
-        public IRelationalTypeMappingSource TypeMappingSource
-            => Dependencies.TypeMappingSource;
+        [Obsolete(
+            "Code trying to add parameter should add type mapped parameter using TypeMappingSource directly."
+        )]
+        public IRelationalTypeMappingSource TypeMappingSource => Dependencies.TypeMappingSource;
 
-        public IRelationalCommand Build()
-            => new TestRelationalCommand(
-                Dependencies,
-                Instance.ToString(),
-                Parameters);
+        public IRelationalCommand Build() =>
+            new TestRelationalCommand(Dependencies, Instance.ToString(), Parameters);
 
         public IRelationalCommandBuilder Append(string value)
         {
@@ -85,8 +80,7 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
             return this;
         }
 
-        public int CommandTextLength
-            => Instance.Length;
+        public int CommandTextLength => Instance.Length;
     }
 
     private class TestRelationalCommand : IRelationalCommand
@@ -96,16 +90,15 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
         public TestRelationalCommand(
             RelationalCommandBuilderDependencies dependencies,
             string commandText,
-            IReadOnlyList<IRelationalParameter> parameters)
+            IReadOnlyList<IRelationalParameter> parameters
+        )
         {
             _realRelationalCommand = new RelationalCommand(dependencies, commandText, parameters);
         }
 
-        public string CommandText
-            => _realRelationalCommand.CommandText;
+        public string CommandText => _realRelationalCommand.CommandText;
 
-        public IReadOnlyList<IRelationalParameter> Parameters
-            => _realRelationalCommand.Parameters;
+        public IReadOnlyList<IRelationalParameter> Parameters => _realRelationalCommand.Parameters;
 
         public int ExecuteNonQuery(RelationalCommandParameterObject parameterObject)
         {
@@ -124,12 +117,16 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
 
         public Task<int> ExecuteNonQueryAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var connection = parameterObject.Connection;
             var errorNumber = PreExecution(connection);
 
-            var result = _realRelationalCommand.ExecuteNonQueryAsync(parameterObject, cancellationToken);
+            var result = _realRelationalCommand.ExecuteNonQueryAsync(
+                parameterObject,
+                cancellationToken
+            );
             if (errorNumber.HasValue)
             {
                 connection.DbConnection.Close();
@@ -156,12 +153,16 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
 
         public async Task<object> ExecuteScalarAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var connection = parameterObject.Connection;
             var errorNumber = PreExecution(connection);
 
-            var result = await _realRelationalCommand.ExecuteScalarAsync(parameterObject, cancellationToken);
+            var result = await _realRelationalCommand.ExecuteScalarAsync(
+                parameterObject,
+                cancellationToken
+            );
             if (errorNumber.HasValue)
             {
                 connection.DbConnection.Close();
@@ -189,7 +190,8 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
 
         public async Task<RelationalDataReader> ExecuteReaderAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var connection = parameterObject.Connection;
             var errorNumber = PreExecution(connection);
@@ -208,11 +210,11 @@ public class TestRelationalCommandBuilderFactory : IRelationalCommandBuilderFact
         public DbCommand CreateDbCommand(
             RelationalCommandParameterObject parameterObject,
             Guid commandId,
-            DbCommandMethod commandMethod)
-            => _realRelationalCommand.CreateDbCommand(parameterObject, commandId, commandMethod);
+            DbCommandMethod commandMethod
+        ) => _realRelationalCommand.CreateDbCommand(parameterObject, commandId, commandMethod);
 
-        public void PopulateFrom(IRelationalCommandTemplate commandTemplate)
-            => _realRelationalCommand.PopulateFrom(commandTemplate);
+        public void PopulateFrom(IRelationalCommandTemplate commandTemplate) =>
+            _realRelationalCommand.PopulateFrom(commandTemplate);
 
         private int? PreExecution(IRelationalConnection connection)
         {

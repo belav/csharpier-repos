@@ -6,128 +6,135 @@ using System;
 using System.IO;
 using System.Text;
 
-namespace Mono.Profiler.Log {
+namespace Mono.Profiler.Log
+{
+    sealed class LogReader : IDisposable
+    {
+        static readonly Encoding _encoding = Encoding.UTF8;
 
-	sealed class LogReader : IDisposable {
+        readonly BinaryReader _reader;
 
-		static readonly Encoding _encoding = Encoding.UTF8;
+        byte[] _stringBuffer = new byte[1024];
 
-		readonly BinaryReader _reader;
+        public LogReader(Stream stream, bool leaveOpen)
+        {
+            _reader = new BinaryReader(stream, _encoding, leaveOpen);
+        }
 
-		byte[] _stringBuffer = new byte [1024];
+        public void Dispose()
+        {
+            _reader.Dispose();
+        }
 
-		public LogReader (Stream stream, bool leaveOpen)
-		{
-			_reader = new BinaryReader (stream, _encoding, leaveOpen);
-		}
+        public byte[] ReadBytes(int count)
+        {
+            var bytes = new byte[count];
 
-		public void Dispose ()
-		{
-			_reader.Dispose ();
-		}
+            // BinaryReader.ReadBytes doesn't necessarily read the specified
+            // amount of bytes, so just do it this way.
+            for (var i = 0; i < bytes.Length; i++)
+                bytes[i] = ReadByte();
 
-		public byte[] ReadBytes (int count)
-		{
-			var bytes = new byte [count];
+            return bytes;
+        }
 
-			// BinaryReader.ReadBytes doesn't necessarily read the specified
-			// amount of bytes, so just do it this way.
-			for (var i = 0; i < bytes.Length; i++)
-				bytes [i] = ReadByte ();
+        public byte ReadByte()
+        {
+            return _reader.ReadByte();
+        }
 
-			return bytes;
-		}
+        public ushort ReadUInt16()
+        {
+            return _reader.ReadUInt16();
+        }
 
-		public byte ReadByte ()
-		{
-			return _reader.ReadByte ();
-		}
+        public int ReadInt32()
+        {
+            return _reader.ReadInt32();
+        }
 
-		public ushort ReadUInt16 ()
-		{
-			return _reader.ReadUInt16 ();
-		}
+        public long ReadInt64()
+        {
+            return _reader.ReadInt64();
+        }
 
-		public int ReadInt32 ()
-		{
-			return _reader.ReadInt32 ();
-		}
+        public ulong ReadUInt64()
+        {
+            return _reader.ReadUInt64();
+        }
 
-		public long ReadInt64 ()
-		{
-			return _reader.ReadInt64 ();
-		}
+        public double ReadDouble()
+        {
+            return _reader.ReadDouble();
+        }
 
-		public ulong ReadUInt64 ()
-		{
-			return _reader.ReadUInt64 ();
-		}
+        public string ReadHeaderString()
+        {
+            return _encoding.GetString(ReadBytes(ReadInt32()));
+        }
 
-		public double ReadDouble ()
-		{
-			return _reader.ReadDouble ();
-		}
+        public string ReadCString()
+        {
+            var pos = 0;
 
-		public string ReadHeaderString ()
-		{
-			return _encoding.GetString (ReadBytes (ReadInt32 ()));
-		}
+            byte val;
 
-		public string ReadCString ()
-		{
-			var pos = 0;
+            while ((val = ReadByte()) != 0)
+            {
+                if (pos == _stringBuffer.Length)
+                    Array.Resize(
+                        ref _stringBuffer,
+                        System.Math.Max(_stringBuffer.Length * 2, pos + 1)
+                    );
 
-			byte val;
+                _stringBuffer[pos++] = val;
+            }
 
-			while ((val = ReadByte ()) != 0) {
-				if (pos == _stringBuffer.Length)
-					Array.Resize (ref _stringBuffer, System.Math.Max (_stringBuffer.Length * 2, pos + 1));
+            return _encoding.GetString(_stringBuffer, 0, pos);
+        }
 
-				_stringBuffer [pos++] = val;
-			}
+        public long ReadSLeb128()
+        {
+            long result = 0;
+            var shift = 0;
 
-			return _encoding.GetString (_stringBuffer, 0, pos);
-		}
+            while (true)
+            {
+                var b = ReadByte();
 
-		public long ReadSLeb128 ()
-		{
-			long result = 0;
-			var shift = 0;
+                result |= (long)(b & 0x7f) << shift;
+                shift += 7;
 
-			while (true) {
-				var b = ReadByte ();
+                if ((b & 0x80) != 0x80)
+                {
+                    if (shift < sizeof(long) * 8 && (b & 0x40) == 0x40)
+                        result |= -(1L << shift);
 
-				result |= (long) (b & 0x7f) << shift;
-				shift += 7;
+                    break;
+                }
+            }
 
-				if ((b & 0x80) != 0x80) {
-					if (shift < sizeof (long) * 8 && (b & 0x40) == 0x40)
-						result |= -(1L << shift);
+            return result;
+        }
 
-					break;
-				}
-			}
+        public ulong ReadULeb128()
+        {
+            ulong result = 0;
+            var shift = 0;
 
-			return result;
-		}
+            while (true)
+            {
+                var b = ReadByte();
 
-		public ulong ReadULeb128 ()
-		{
-			ulong result = 0;
-			var shift = 0;
+                result |= (ulong)(b & 0x7f) << shift;
 
-			while (true) {
-				var b = ReadByte ();
+                if ((b & 0x80) != 0x80)
+                    break;
 
-				result |= (ulong) (b & 0x7f) << shift;
+                shift += 7;
+            }
 
-				if ((b & 0x80) != 0x80)
-					break;
-
-				shift += 7;
-			}
-
-			return result;
-		}
-	}
+            return result;
+        }
+    }
 }

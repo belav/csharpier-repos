@@ -1,5 +1,5 @@
 //
-// UserControlControlBuilderCas.cs 
+// UserControlControlBuilderCas.cs
 //	- CAS unit tests for System.Web.UI.UserControlControlBuilder
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,54 +27,59 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class UserControlControlBuilderCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            UserControlControlBuilder uccb = new UserControlControlBuilder();
+            try
+            {
+                Assert.IsFalse(uccb.NeedsTagInnerText(), "NeedsTagInnerText");
+            }
+            catch (NullReferenceException)
+            {
+                // ms 1.1
+            }
+            uccb.SetTagInnerText("mono");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class UserControlControlBuilderCas : AspNetHostingMinimal {
+        [Test]
+        [AspNetHostingPermission(SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
+        [ExpectedException(typeof(SecurityException))]
+        public void BuildObject_Deny_Minimal()
+        {
+            new UserControlControlBuilder().BuildObject();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			UserControlControlBuilder uccb = new UserControlControlBuilder ();
-			try {
-				Assert.IsFalse (uccb.NeedsTagInnerText (), "NeedsTagInnerText");
-			}
-			catch (NullReferenceException) {
-				// ms 1.1
-			}
-			uccb.SetTagInnerText ("mono");
-		}
+        [Test]
+        [AspNetHostingPermission(
+            SecurityAction.PermitOnly,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void BuildObject_PermitOnly_Minimal()
+        {
+            new UserControlControlBuilder().BuildObject();
+        }
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.Deny, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (SecurityException))]
-		public void BuildObject_Deny_Minimal ()
-		{
-			new UserControlControlBuilder ().BuildObject ();
-		}
+        // LinkDemand
 
-		[Test]
-		[AspNetHostingPermission (SecurityAction.PermitOnly, Level = AspNetHostingPermissionLevel.Minimal)]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void BuildObject_PermitOnly_Minimal ()
-		{
-			new UserControlControlBuilder ().BuildObject ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (UserControlControlBuilder); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(UserControlControlBuilder); }
+        }
+    }
 }

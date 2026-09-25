@@ -11,9 +11,8 @@ namespace TestResources.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp, LanguageNames.VisualBasic)]
 public sealed class DoNothingSuppressor : DiagnosticSuppressor
 {
-    public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions => ImmutableArray<SuppressionDescriptor>.Empty;
+    public override ImmutableArray<SuppressionDescriptor> SupportedSuppressions =>
+        ImmutableArray<SuppressionDescriptor>.Empty;
 
-    public override void ReportSuppressions(SuppressionAnalysisContext context)
-    {
-    }
+    public override void ReportSuppressions(SuppressionAnalysisContext context) { }
 }

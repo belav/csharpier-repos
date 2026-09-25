@@ -10,18 +10,20 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Metadata.Edm;
+using System.Data.Query.InternalTrees;
 //using System.Diagnostics; // Please use PlanCompiler.Assert instead of Debug.Assert in this class...
 
 // It is fine to use Debug.Assert in cases where you assert an obvious thing that is supposed
-// to prevent from simple mistakes during development (e.g. method argument validation 
-// in cases where it was you who created the variables or the variables had already been validated or 
-// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default 
-// "else" block is chosen why the new condition should be treated separately). This kind of asserts are 
-// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in 
-// the shipped product. 
-// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions 
+// to prevent from simple mistakes during development (e.g. method argument validation
+// in cases where it was you who created the variables or the variables had already been validated or
+// in "else" clauses where due to code changes (e.g. adding a new value to an enum type) the default
+// "else" block is chosen why the new condition should be treated separately). This kind of asserts are
+// (can be) helpful when developing new code to avoid simple mistakes but have no or little value in
+// the shipped product.
+// PlanCompiler.Assert *MUST* be used to verify conditions in the trees. These would be assumptions
 // about how the tree was built etc. - in these cases we probably want to throw an exception (this is
-// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct 
+// what PlanCompiler.Assert does when the condition is not met) if either the assumption is not correct
 // or the tree was built/rewritten not the way we thought it was.
 // Use your judgment - if you rather remove an assert than ship it use Debug.Assert otherwise use
 // PlanCompiler.Assert.
@@ -29,16 +31,13 @@ using System.Data.Common;
 using System.Globalization;
 using System.Text;
 
-using System.Data.Metadata.Edm;
-using System.Data.Query.InternalTrees;
-
 namespace System.Data.Query.PlanCompiler
 {
     internal delegate bool TryGetValue(Node key, out Node value);
 
     #region Helper Classes
     /// <summary>
-    /// Helper class to track the aggregate nodes that are candidates to be 
+    /// Helper class to track the aggregate nodes that are candidates to be
     /// pushed into the definingGroupByNode.
     /// </summary>
     internal class GroupAggregateVarInfo
@@ -64,8 +63,8 @@ namespace System.Data.Query.PlanCompiler
 
         #region 'Public' Properties
         /// <summary>
-        /// Each key value pair represents a candidate aggregate. 
-        /// The key is the function aggregate subtree and the value is a 'template' of translation of the 
+        /// Each key value pair represents a candidate aggregate.
+        /// The key is the function aggregate subtree and the value is a 'template' of translation of the
         /// function aggregate's argument over the var representing the group aggregate.
         /// A valid candidate has an argument that does not have any external references
         /// except for the group aggregate corresponding to the DefiningGroupNode.
@@ -111,7 +110,7 @@ namespace System.Data.Query.PlanCompiler
     /// <summary>
     /// Helper class to track usage of GroupAggregateVarInfo
     /// It represents the usage of a single GroupAggregateVar.
-    /// The usage is defined by the computation, it should be a subree whose only 
+    /// The usage is defined by the computation, it should be a subree whose only
     /// external reference is the group var represented by the GroupAggregateVarInfo.
     /// </summary>
     internal class GroupAggregateVarRefInfo
@@ -128,7 +127,11 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         /// <param name="groupAggregateVarInfo"></param>
         /// <param name="computation"></param>
-        internal GroupAggregateVarRefInfo(GroupAggregateVarInfo groupAggregateVarInfo, Node computation, bool isUnnested)
+        internal GroupAggregateVarRefInfo(
+            GroupAggregateVarInfo groupAggregateVarInfo,
+            Node computation,
+            bool isUnnested
+        )
         {
             this._groupAggregateVarInfo = groupAggregateVarInfo;
             this._computation = computation;
@@ -139,7 +142,7 @@ namespace System.Data.Query.PlanCompiler
 
         #region 'Public' Properties
         /// <summary>
-        /// Subtree whose only external reference is 
+        /// Subtree whose only external reference is
         /// the group var represented by the GroupAggregateVarInfo
         /// </summary>
         internal Node Computation
@@ -171,9 +174,16 @@ namespace System.Data.Query.PlanCompiler
     internal class GroupAggregateVarInfoManager
     {
         #region Private state
-        private readonly Dictionary<Var, GroupAggregateVarRefInfo> _groupAggregateVarRelatedVarToInfo = new Dictionary<Var, GroupAggregateVarRefInfo>();
-        private Dictionary<Var, Dictionary<EdmMember, GroupAggregateVarRefInfo>> _groupAggregateVarRelatedVarPropertyToInfo;
-        private HashSet<GroupAggregateVarInfo> _groupAggregateVarInfos = new HashSet<GroupAggregateVarInfo>();
+        private readonly Dictionary<
+            Var,
+            GroupAggregateVarRefInfo
+        > _groupAggregateVarRelatedVarToInfo = new Dictionary<Var, GroupAggregateVarRefInfo>();
+        private Dictionary<
+            Var,
+            Dictionary<EdmMember, GroupAggregateVarRefInfo>
+        > _groupAggregateVarRelatedVarPropertyToInfo;
+        private HashSet<GroupAggregateVarInfo> _groupAggregateVarInfos =
+            new HashSet<GroupAggregateVarInfo>();
         #endregion
 
         #region Public Surface
@@ -182,10 +192,7 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         internal IEnumerable<GroupAggregateVarInfo> GroupAggregateVarInfos
         {
-            get
-            {
-                return _groupAggregateVarInfos;
-            }
+            get { return _groupAggregateVarInfos; }
         }
 
         /// <summary>
@@ -196,22 +203,36 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="groupAggregateVarInfo"></param>
         /// <param name="computationTemplate"></param>
         /// <param name="isUnnested"></param>
-        internal void Add(Var var, GroupAggregateVarInfo groupAggregateVarInfo, Node computationTemplate, bool isUnnested)
+        internal void Add(
+            Var var,
+            GroupAggregateVarInfo groupAggregateVarInfo,
+            Node computationTemplate,
+            bool isUnnested
+        )
         {
-            this._groupAggregateVarRelatedVarToInfo.Add(var, new GroupAggregateVarRefInfo(groupAggregateVarInfo, computationTemplate, isUnnested));
+            this._groupAggregateVarRelatedVarToInfo.Add(
+                var,
+                new GroupAggregateVarRefInfo(groupAggregateVarInfo, computationTemplate, isUnnested)
+            );
             _groupAggregateVarInfos.Add(groupAggregateVarInfo);
         }
 
         /// <summary>
-        /// Add an entry that the given property of the given var is a computation represented 
-        /// by the computationTemplate over the var represented by the given groupAggregateVarInfo        
+        /// Add an entry that the given property of the given var is a computation represented
+        /// by the computationTemplate over the var represented by the given groupAggregateVarInfo
         /// </summary>
         /// <param name="var"></param>
         /// <param name="groupAggregateVarInfo"></param>
         /// <param name="computationTemplate"></param>
         /// <param name="isUnnested"></param>
         /// <param name="property"></param>
-        internal void Add(Var var, GroupAggregateVarInfo groupAggregateVarInfo, Node computationTemplate, bool isUnnested, EdmMember property)
+        internal void Add(
+            Var var,
+            GroupAggregateVarInfo groupAggregateVarInfo,
+            Node computationTemplate,
+            bool isUnnested,
+            EdmMember property
+        )
         {
             if (property == null)
             {
@@ -220,42 +241,65 @@ namespace System.Data.Query.PlanCompiler
             }
             if (this._groupAggregateVarRelatedVarPropertyToInfo == null)
             {
-                this._groupAggregateVarRelatedVarPropertyToInfo = new Dictionary<Var, Dictionary<System.Data.Metadata.Edm.EdmMember, GroupAggregateVarRefInfo>>();
+                this._groupAggregateVarRelatedVarPropertyToInfo =
+                    new Dictionary<
+                        Var,
+                        Dictionary<System.Data.Metadata.Edm.EdmMember, GroupAggregateVarRefInfo>
+                    >();
             }
             Dictionary<EdmMember, GroupAggregateVarRefInfo> varPropertyDictionary;
-            if (!_groupAggregateVarRelatedVarPropertyToInfo.TryGetValue(var, out varPropertyDictionary))
+            if (
+                !_groupAggregateVarRelatedVarPropertyToInfo.TryGetValue(
+                    var,
+                    out varPropertyDictionary
+                )
+            )
             {
-                varPropertyDictionary = new Dictionary<System.Data.Metadata.Edm.EdmMember, GroupAggregateVarRefInfo>();
+                varPropertyDictionary =
+                    new Dictionary<System.Data.Metadata.Edm.EdmMember, GroupAggregateVarRefInfo>();
                 _groupAggregateVarRelatedVarPropertyToInfo.Add(var, varPropertyDictionary);
             }
-            varPropertyDictionary.Add(property, new GroupAggregateVarRefInfo(groupAggregateVarInfo, computationTemplate, isUnnested));
+            varPropertyDictionary.Add(
+                property,
+                new GroupAggregateVarRefInfo(groupAggregateVarInfo, computationTemplate, isUnnested)
+            );
 
-            // Note: The following line is not necessary with the current usage pattern, this method is 
+            // Note: The following line is not necessary with the current usage pattern, this method is
             // never called with a new groupAggregateVarInfo thus it is a no-op.
             _groupAggregateVarInfos.Add(groupAggregateVarInfo);
         }
 
         /// <summary>
-        /// Gets the groupAggregateVarRefInfo representing the definition of the given var over 
+        /// Gets the groupAggregateVarRefInfo representing the definition of the given var over
         /// a group aggregate var if any.
         /// </summary>
         /// <param name="var"></param>
         /// <param name="groupAggregateVarRefInfo"></param>
         /// <returns></returns>
-        internal bool TryGetReferencedGroupAggregateVarInfo(Var var, out GroupAggregateVarRefInfo groupAggregateVarRefInfo)
+        internal bool TryGetReferencedGroupAggregateVarInfo(
+            Var var,
+            out GroupAggregateVarRefInfo groupAggregateVarRefInfo
+        )
         {
-            return this._groupAggregateVarRelatedVarToInfo.TryGetValue(var, out groupAggregateVarRefInfo);
+            return this._groupAggregateVarRelatedVarToInfo.TryGetValue(
+                var,
+                out groupAggregateVarRefInfo
+            );
         }
 
         /// <summary>
         /// Gets the groupAggregateVarRefInfo representing the definition of the given property of the given
-        /// var over a group aggregate var if any.        
+        /// var over a group aggregate var if any.
         /// </summary>
         /// <param name="var"></param>
         /// <param name="property"></param>
         /// <param name="groupAggregateVarRefInfo"></param>
         /// <returns></returns>
-        internal bool TryGetReferencedGroupAggregateVarInfo(Var var, EdmMember property, out GroupAggregateVarRefInfo groupAggregateVarRefInfo)
+        internal bool TryGetReferencedGroupAggregateVarInfo(
+            Var var,
+            EdmMember property,
+            out GroupAggregateVarRefInfo groupAggregateVarRefInfo
+        )
         {
             if (property == null)
             {
@@ -263,7 +307,13 @@ namespace System.Data.Query.PlanCompiler
             }
 
             Dictionary<EdmMember, GroupAggregateVarRefInfo> varPropertyDictionary;
-            if (_groupAggregateVarRelatedVarPropertyToInfo == null || !_groupAggregateVarRelatedVarPropertyToInfo.TryGetValue(var, out varPropertyDictionary))
+            if (
+                _groupAggregateVarRelatedVarPropertyToInfo == null
+                || !_groupAggregateVarRelatedVarPropertyToInfo.TryGetValue(
+                    var,
+                    out varPropertyDictionary
+                )
+            )
             {
                 groupAggregateVarRefInfo = null;
                 return false;
@@ -275,7 +325,7 @@ namespace System.Data.Query.PlanCompiler
     #endregion
 
     /// <summary>
-    /// Utility class that tries to produce an equivalent tree to the input tree over 
+    /// Utility class that tries to produce an equivalent tree to the input tree over
     /// a single group aggregate variable and no other external references
     /// </summary>
     internal class GroupAggregateVarComputationTranslator : BasicOpVisitorOfNode
@@ -289,13 +339,14 @@ namespace System.Data.Query.PlanCompiler
 
         #region Constructor
         /// <summary>
-        /// Private constructor 
+        /// Private constructor
         /// </summary>
         /// <param name="command"></param>
         /// <param name="groupAggregateVarInfoManager"></param>
         private GroupAggregateVarComputationTranslator(
             Command command,
-            GroupAggregateVarInfoManager groupAggregateVarInfoManager)
+            GroupAggregateVarInfoManager groupAggregateVarInfoManager
+        )
         {
             this._command = command;
             this._groupAggregateVarInfoManager = groupAggregateVarInfoManager;
@@ -305,8 +356,8 @@ namespace System.Data.Query.PlanCompiler
         #region 'Public' Surface
         /// <summary>
         /// Try to produce an equivalent tree to the input subtree, over a single group aggregate variable.
-        /// Such translation can only be produced if all external references of the input subtree are to a 
-        /// single group aggregate var, or to vars that are can be translated over that single group 
+        /// Such translation can only be produced if all external references of the input subtree are to a
+        /// single group aggregate var, or to vars that are can be translated over that single group
         /// aggregate var
         /// </summary>
         /// <param name="subtree">The input subtree</param>
@@ -325,9 +376,11 @@ namespace System.Data.Query.PlanCompiler
             GroupAggregateVarInfoManager groupAggregateVarInfoManager,
             out GroupAggregateVarInfo groupAggregateVarInfo,
             out Node templateNode,
-            out bool isUnnested)
+            out bool isUnnested
+        )
         {
-            GroupAggregateVarComputationTranslator handler = new GroupAggregateVarComputationTranslator(command, groupAggregateVarInfoManager);
+            GroupAggregateVarComputationTranslator handler =
+                new GroupAggregateVarComputationTranslator(command, groupAggregateVarInfoManager);
 
             Node inputNode = subtree;
             SoftCastOp softCastOp = null;
@@ -359,16 +412,25 @@ namespace System.Data.Query.PlanCompiler
             if (softCastOp != null)
             {
                 SoftCastOp newSoftCastOp;
-                // 
+                //
                 // The type needs to be fixed only if the unnesting happened during this translation.
-                // That can be recognized by these two cases: 
-                //      1) if the input node was a collect, or 
-                //      2) if the input did not represent a var definition, but a function aggregate argument and 
+                // That can be recognized by these two cases:
+                //      1) if the input node was a collect, or
+                //      2) if the input did not represent a var definition, but a function aggregate argument and
                 //              the template is VarRef of a group aggregate var.
                 //
-                if (isCollect || !isVarDefinition && AggregatePushdownUtil.IsVarRefOverGivenVar(templateNode, handler._targetGroupAggregateVarInfo.GroupAggregateVar))
+                if (
+                    isCollect
+                    || !isVarDefinition
+                        && AggregatePushdownUtil.IsVarRefOverGivenVar(
+                            templateNode,
+                            handler._targetGroupAggregateVarInfo.GroupAggregateVar
+                        )
+                )
                 {
-                    newSoftCastOp = command.CreateSoftCastOp(TypeHelpers.GetEdmType<CollectionType>(softCastOp.Type).TypeUsage);
+                    newSoftCastOp = command.CreateSoftCastOp(
+                        TypeHelpers.GetEdmType<CollectionType>(softCastOp.Type).TypeUsage
+                    );
                 }
                 else
                 {
@@ -393,8 +455,8 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// If the child is VarRef check if the subtree PropertyOp(VarRef) is reference to a 
-        /// group aggregate var. 
+        /// If the child is VarRef check if the subtree PropertyOp(VarRef) is reference to a
+        /// group aggregate var.
         /// Otherwise do default processing
         /// </summary>
         /// <param name="op"></param>
@@ -412,15 +474,15 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// If the Subtree rooted at the collect is of the following structure:
-        /// 
+        ///
         /// PhysicalProject(outputVar)
         /// |
         /// Project(s)
         /// |
         /// Unnest
-        /// 
+        ///
         /// where the unnest is over the group aggregate var and the output var
-        /// is either a reference to the group aggregate var or to a constant, it returns the 
+        /// is either a reference to the group aggregate var or to a constant, it returns the
         /// translation of the ouput var.
         /// </summary>
         /// <param name="n"></param>
@@ -442,7 +504,10 @@ namespace System.Data.Query.PlanCompiler
                 {
                     if (IsConstant(definitionNode.Child0))
                     {
-                        constantDefinitions.Add(((VarDefOp)definitionNode.Op).Var, definitionNode.Child0);
+                        constantDefinitions.Add(
+                            ((VarDefOp)definitionNode.Op).Var,
+                            definitionNode.Child0
+                        );
                     }
                 }
             }
@@ -455,13 +520,20 @@ namespace System.Data.Query.PlanCompiler
             // Handle the unnest
             UnnestOp unnestOp = (UnnestOp)currentNode.Child0.Op;
             GroupAggregateVarRefInfo groupAggregateVarRefInfo;
-            if (_groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(unnestOp.Var, out groupAggregateVarRefInfo))
+            if (
+                _groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(
+                    unnestOp.Var,
+                    out groupAggregateVarRefInfo
+                )
+            )
             {
                 if (_targetGroupAggregateVarInfo == null)
                 {
                     _targetGroupAggregateVarInfo = groupAggregateVarRefInfo.GroupAggregateVarInfo;
                 }
-                else if (_targetGroupAggregateVarInfo != groupAggregateVarRefInfo.GroupAggregateVarInfo)
+                else if (
+                    _targetGroupAggregateVarInfo != groupAggregateVarRefInfo.GroupAggregateVarInfo
+                )
                 {
                     return null;
                 }
@@ -476,7 +548,10 @@ namespace System.Data.Query.PlanCompiler
             }
 
             PhysicalProjectOp physicalProjectOp = (PhysicalProjectOp)n.Child0.Op;
-            PlanCompiler.Assert(physicalProjectOp.Outputs.Count == 1, "PhysicalProject should only have one output at this stage");
+            PlanCompiler.Assert(
+                physicalProjectOp.Outputs.Count == 1,
+                "PhysicalProject should only have one output at this stage"
+            );
             Var outputVar = physicalProjectOp.Outputs[0];
 
             Node computationTemplate = TranslateOverGroupAggregateVar(outputVar, null);
@@ -513,10 +588,10 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// (1) If the given var or the given property of the given var are defined over a group aggregate var, 
+        /// (1) If the given var or the given property of the given var are defined over a group aggregate var,
         /// (2) and if that group aggregate var matches the var represented by represented by _targetGroupAggregateVarInfo
         /// if any
-        /// 
+        ///
         /// it returns the corresponding translation over the group aggregate var. Also, if _targetGroupAggregateVarInfo
         /// is not set, it sets it to the group aggregate var representing the referenced var.
         /// </summary>
@@ -527,11 +602,22 @@ namespace System.Data.Query.PlanCompiler
         {
             GroupAggregateVarRefInfo groupAggregateVarRefInfo;
             EdmMember localProperty;
-            if (_groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(var, out groupAggregateVarRefInfo))
+            if (
+                _groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(
+                    var,
+                    out groupAggregateVarRefInfo
+                )
+            )
             {
                 localProperty = property;
             }
-            else if (_groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(var, property, out  groupAggregateVarRefInfo))
+            else if (
+                _groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(
+                    var,
+                    property,
+                    out groupAggregateVarRefInfo
+                )
+            )
             {
                 localProperty = null;
             }
@@ -545,7 +631,10 @@ namespace System.Data.Query.PlanCompiler
                 _targetGroupAggregateVarInfo = groupAggregateVarRefInfo.GroupAggregateVarInfo;
                 _isUnnested = groupAggregateVarRefInfo.IsUnnested;
             }
-            else if (_targetGroupAggregateVarInfo != groupAggregateVarRefInfo.GroupAggregateVarInfo || _isUnnested != groupAggregateVarRefInfo.IsUnnested)
+            else if (
+                _targetGroupAggregateVarInfo != groupAggregateVarRefInfo.GroupAggregateVarInfo
+                || _isUnnested != groupAggregateVarRefInfo.IsUnnested
+            )
             {
                 return null;
             }
@@ -553,14 +642,17 @@ namespace System.Data.Query.PlanCompiler
             Node computationTemplate = groupAggregateVarRefInfo.Computation;
             if (localProperty != null)
             {
-                computationTemplate = this._command.CreateNode(this._command.CreatePropertyOp(localProperty), computationTemplate);
+                computationTemplate = this._command.CreateNode(
+                    this._command.CreatePropertyOp(localProperty),
+                    computationTemplate
+                );
             }
             return computationTemplate;
         }
 
         /// <summary>
-        /// Default processing for nodes. 
-        /// Visits the children and if any child has changed it creates a new node 
+        /// Default processing for nodes.
+        /// Visits the children and if any child has changed it creates a new node
         /// for the parent.
         /// If the reference of the child node did not change, the child node did not change either,
         /// this is because a node can only be reused "as is" when building a template.
@@ -623,7 +715,7 @@ namespace System.Data.Query.PlanCompiler
     }
 
     /// <summary>
-    /// A visitor that collects all group aggregates and the corresponding function aggregates 
+    /// A visitor that collects all group aggregates and the corresponding function aggregates
     /// that are defined over them, referred to as 'candidate aggregates'. The candidate aggregates are aggregates
     /// that have an argument that has the corresponding group aggregate as the only external reference
     /// </summary>
@@ -631,21 +723,26 @@ namespace System.Data.Query.PlanCompiler
     {
         #region private state
         private readonly Command _command;
-        private readonly GroupAggregateVarInfoManager _groupAggregateVarInfoManager = new GroupAggregateVarInfoManager();
+        private readonly GroupAggregateVarInfoManager _groupAggregateVarInfoManager =
+            new GroupAggregateVarInfoManager();
         private readonly Dictionary<Node, Node> _childToParent = new Dictionary<Node, Node>();
         #endregion
 
         #region 'Public'
         /// <summary>
-        /// Produces a list of all GroupAggregateVarInfos, each of which represents a single group aggregate 
+        /// Produces a list of all GroupAggregateVarInfos, each of which represents a single group aggregate
         /// and it candidate function aggregates. It also produces a delegate that given a child node returns the parent node
         /// </summary>
         /// <param name="itree"></param>
         /// <param name="tryGetParent"></param>
         /// <returns></returns>
-        internal static IEnumerable<GroupAggregateVarInfo> Process(Command itree, out TryGetValue tryGetParent)
+        internal static IEnumerable<GroupAggregateVarInfo> Process(
+            Command itree,
+            out TryGetValue tryGetParent
+        )
         {
-            GroupAggregateRefComputingVisitor groupRefComputingVisitor = new GroupAggregateRefComputingVisitor(itree);
+            GroupAggregateRefComputingVisitor groupRefComputingVisitor =
+                new GroupAggregateRefComputingVisitor(itree);
             groupRefComputingVisitor.VisitNode(itree.Root);
             tryGetParent = groupRefComputingVisitor._childToParent.TryGetValue;
 
@@ -668,7 +765,7 @@ namespace System.Data.Query.PlanCompiler
 
         #region AncillaryOps
         /// <summary>
-        /// Determines whether the var or a property of the var (if the var is defined as a NewRecord) 
+        /// Determines whether the var or a property of the var (if the var is defined as a NewRecord)
         /// is defined exclusively over a single group aggregate. If so, it registers it as such with the
         /// group aggregate var info manager.
         /// </summary>
@@ -684,9 +781,24 @@ namespace System.Data.Query.PlanCompiler
             GroupAggregateVarInfo referencedVarInfo;
             Node templateNode;
             bool isUnnested;
-            if (GroupAggregateVarComputationTranslator.TryTranslateOverGroupAggregateVar(definingNode, true, this._command, this._groupAggregateVarInfoManager, out  referencedVarInfo, out templateNode, out isUnnested))
+            if (
+                GroupAggregateVarComputationTranslator.TryTranslateOverGroupAggregateVar(
+                    definingNode,
+                    true,
+                    this._command,
+                    this._groupAggregateVarInfoManager,
+                    out referencedVarInfo,
+                    out templateNode,
+                    out isUnnested
+                )
+            )
             {
-                _groupAggregateVarInfoManager.Add(op.Var, referencedVarInfo, templateNode, isUnnested);
+                _groupAggregateVarInfoManager.Add(
+                    op.Var,
+                    referencedVarInfo,
+                    templateNode,
+                    isUnnested
+                );
             }
             else if (definingNodeOp.OpType == OpType.NewRecord)
             {
@@ -694,9 +806,25 @@ namespace System.Data.Query.PlanCompiler
                 for (int i = 0; i < definingNode.Children.Count; i++)
                 {
                     Node argumentNode = definingNode.Children[i];
-                    if (GroupAggregateVarComputationTranslator.TryTranslateOverGroupAggregateVar(argumentNode, true, this._command, this._groupAggregateVarInfoManager, out referencedVarInfo, out templateNode, out isUnnested))
+                    if (
+                        GroupAggregateVarComputationTranslator.TryTranslateOverGroupAggregateVar(
+                            argumentNode,
+                            true,
+                            this._command,
+                            this._groupAggregateVarInfoManager,
+                            out referencedVarInfo,
+                            out templateNode,
+                            out isUnnested
+                        )
+                    )
                     {
-                        _groupAggregateVarInfoManager.Add(op.Var, referencedVarInfo, templateNode, isUnnested, newRecordOp.Properties[i]);
+                        _groupAggregateVarInfoManager.Add(
+                            op.Var,
+                            referencedVarInfo,
+                            templateNode,
+                            isUnnested,
+                            newRecordOp.Properties[i]
+                        );
                     }
                 }
             }
@@ -718,11 +846,21 @@ namespace System.Data.Query.PlanCompiler
                 Var groupAggregateVar = ((VarDefOp)child.Op).Var;
                 GroupAggregateVarRefInfo groupAggregateVarRefInfo;
                 // If the group by is over a group, it may be already tracked as referencing a group var
-                // An optimization would be to separately track this groupAggregateVar too, for the cases when the aggregate can 
+                // An optimization would be to separately track this groupAggregateVar too, for the cases when the aggregate can
                 // not be pushed to the group by node over which this one is defined but can be propagated to this group by node.
-                if (!_groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(groupAggregateVar, out groupAggregateVarRefInfo))
+                if (
+                    !_groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(
+                        groupAggregateVar,
+                        out groupAggregateVarRefInfo
+                    )
+                )
                 {
-                    _groupAggregateVarInfoManager.Add(groupAggregateVar, new GroupAggregateVarInfo(n, groupAggregateVar), this._command.CreateNode(this._command.CreateVarRefOp(groupAggregateVar)), false);
+                    _groupAggregateVarInfoManager.Add(
+                        groupAggregateVar,
+                        new GroupAggregateVarInfo(n, groupAggregateVar),
+                        this._command.CreateNode(this._command.CreateVarRefOp(groupAggregateVar)),
+                        false
+                    );
                 }
             }
         }
@@ -738,10 +876,20 @@ namespace System.Data.Query.PlanCompiler
         {
             VisitDefault(n);
             GroupAggregateVarRefInfo groupAggregateVarRefInfo;
-            if (_groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(op.Var, out groupAggregateVarRefInfo))
+            if (
+                _groupAggregateVarInfoManager.TryGetReferencedGroupAggregateVarInfo(
+                    op.Var,
+                    out groupAggregateVarRefInfo
+                )
+            )
             {
                 PlanCompiler.Assert(op.Table.Columns.Count == 1, "Expected one column before NTE");
-                _groupAggregateVarInfoManager.Add(op.Table.Columns[0], groupAggregateVarRefInfo.GroupAggregateVarInfo, groupAggregateVarRefInfo.Computation, true);
+                _groupAggregateVarInfoManager.Add(
+                    op.Table.Columns[0],
+                    groupAggregateVarRefInfo.GroupAggregateVarInfo,
+                    groupAggregateVarRefInfo.Computation,
+                    true
+                );
             }
         }
 
@@ -749,8 +897,8 @@ namespace System.Data.Query.PlanCompiler
 
         #region ScalarOps Visitors
         /// <summary>
-        /// If the op is a collection aggregate function it checks whether its arguement can be translated over 
-        /// a single group aggregate var. If so, it is tracked as a candidate to be pushed into that 
+        /// If the op is a collection aggregate function it checks whether its arguement can be translated over
+        /// a single group aggregate var. If so, it is tracked as a candidate to be pushed into that
         /// group by into node.
         /// </summary>
         /// <param name="op"></param>
@@ -769,10 +917,28 @@ namespace System.Data.Query.PlanCompiler
             GroupAggregateVarInfo referencedGroupAggregateVarInfo;
             Node templateNode;
             bool isUnnested;
-            if (GroupAggregateVarComputationTranslator.TryTranslateOverGroupAggregateVar(n.Child0, false, _command, _groupAggregateVarInfoManager, out referencedGroupAggregateVarInfo, out templateNode, out isUnnested)
-                && (isUnnested || AggregatePushdownUtil.IsVarRefOverGivenVar(templateNode, referencedGroupAggregateVarInfo.GroupAggregateVar)))
+            if (
+                GroupAggregateVarComputationTranslator.TryTranslateOverGroupAggregateVar(
+                    n.Child0,
+                    false,
+                    _command,
+                    _groupAggregateVarInfoManager,
+                    out referencedGroupAggregateVarInfo,
+                    out templateNode,
+                    out isUnnested
+                )
+                && (
+                    isUnnested
+                    || AggregatePushdownUtil.IsVarRefOverGivenVar(
+                        templateNode,
+                        referencedGroupAggregateVarInfo.GroupAggregateVar
+                    )
+                )
+            )
             {
-                referencedGroupAggregateVarInfo.CandidateAggregateNodes.Add(new KeyValuePair<Node, Node>(n, templateNode));
+                referencedGroupAggregateVarInfo.CandidateAggregateNodes.Add(
+                    new KeyValuePair<Node, Node>(n, templateNode)
+                );
             }
         }
 
@@ -796,7 +962,6 @@ namespace System.Data.Query.PlanCompiler
             }
         }
         #endregion
-
     }
 
     /// <summary>
@@ -822,7 +987,7 @@ namespace System.Data.Query.PlanCompiler
 
     /// <summary>
     /// The Aggregate Pushdown feature tries to identify function aggregates defined over a
-    /// group aggregate and push their definitions in the group by into node corresponding to 
+    /// group aggregate and push their definitions in the group by into node corresponding to
     /// the group aggregate.
     /// </summary>
     internal class AggregatePushdown
@@ -858,12 +1023,18 @@ namespace System.Data.Query.PlanCompiler
         /// </summary>
         private void Process()
         {
-            IEnumerable<GroupAggregateVarInfo> groupAggregateVarInfos = GroupAggregateRefComputingVisitor.Process(m_command, out m_tryGetParent);
+            IEnumerable<GroupAggregateVarInfo> groupAggregateVarInfos =
+                GroupAggregateRefComputingVisitor.Process(m_command, out m_tryGetParent);
             foreach (GroupAggregateVarInfo groupAggregateVarInfo in groupAggregateVarInfos)
             {
                 if (groupAggregateVarInfo.HasCandidateAggregateNodes)
                 {
-                    foreach (KeyValuePair<Node, Node> candidate in groupAggregateVarInfo.CandidateAggregateNodes)
+                    foreach (
+                        KeyValuePair<
+                            Node,
+                            Node
+                        > candidate in groupAggregateVarInfo.CandidateAggregateNodes
+                    )
                     {
                         TryProcessCandidate(candidate, groupAggregateVarInfo);
                     }
@@ -873,11 +1044,11 @@ namespace System.Data.Query.PlanCompiler
 
         /// <summary>
         /// Try to push the given function aggregate candidate to the corresponding group into node.
-        /// The candidate can be pushed if all ancestors of the group into node up to the least common 
-        /// ancestor between the group into node and the function aggregate have one of the following node op types:  
+        /// The candidate can be pushed if all ancestors of the group into node up to the least common
+        /// ancestor between the group into node and the function aggregate have one of the following node op types:
         ///     Project
         ///     Filter
-        ///     ConstraintSortOp    
+        ///     ConstraintSortOp
         /// </summary>
         /// <param name="command"></param>
         /// <param name="candidate"></param>
@@ -885,12 +1056,18 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="m_childToParent"></param>
         private void TryProcessCandidate(
             KeyValuePair<Node, Node> candidate,
-            GroupAggregateVarInfo groupAggregateVarInfo)
+            GroupAggregateVarInfo groupAggregateVarInfo
+        )
         {
             IList<Node> functionAncestors;
             IList<Node> groupByAncestors;
             Node definingGroupNode = groupAggregateVarInfo.DefiningGroupNode;
-            FindPathsToLeastCommonAncestor(candidate.Key, definingGroupNode, out functionAncestors, out groupByAncestors);
+            FindPathsToLeastCommonAncestor(
+                candidate.Key,
+                definingGroupNode,
+                out functionAncestors,
+                out groupByAncestors
+            );
 
             //Check whether all ancestors of the GroupByInto node are of type that we support propagating through
             if (!AreAllNodesSupportedForPropagation(groupByAncestors))
@@ -900,7 +1077,10 @@ namespace System.Data.Query.PlanCompiler
 
             //Add the function to the group by node
             GroupByIntoOp definingGroupOp = (GroupByIntoOp)definingGroupNode.Op;
-            PlanCompiler.Assert(definingGroupOp.Inputs.Count == 1, "There should be one input var to GroupByInto at this stage");
+            PlanCompiler.Assert(
+                definingGroupOp.Inputs.Count == 1,
+                "There should be one input var to GroupByInto at this stage"
+            );
             Var inputVar = definingGroupOp.Inputs.First;
             FunctionOp functionOp = (FunctionOp)candidate.Key.Op;
 
@@ -916,10 +1096,14 @@ namespace System.Data.Query.PlanCompiler
 
             Node newFunctionDefiningNode = m_command.CreateNode(
                 m_command.CreateAggregateOp(functionOp.Function, false),
-                argumentNode);
+                argumentNode
+            );
 
             Var newFunctionVar;
-            Node varDefNode = m_command.CreateVarDefNode(newFunctionDefiningNode, out newFunctionVar);
+            Node varDefNode = m_command.CreateVarDefNode(
+                newFunctionDefiningNode,
+                out newFunctionVar
+            );
 
             // Add the new aggregate to the list of aggregates
             definingGroupNode.Child2.Children.Add(varDefNode);
@@ -943,7 +1127,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Check whether all nodes in the given list of nodes are of types 
+        /// Check whether all nodes in the given list of nodes are of types
         /// that we know how to propagate an aggregate through
         /// </summary>
         /// <param name="nodes"></param>
@@ -952,10 +1136,11 @@ namespace System.Data.Query.PlanCompiler
         {
             foreach (Node node in nodes)
             {
-                if (node.Op.OpType != OpType.Project
+                if (
+                    node.Op.OpType != OpType.Project
                     && node.Op.OpType != OpType.Filter
                     && node.Op.OpType != OpType.ConstrainedSort
-                    )
+                )
                 {
                     return false;
                 }
@@ -970,7 +1155,12 @@ namespace System.Data.Query.PlanCompiler
         /// <param name="node2"></param>
         /// <param name="ancestors1"></param>
         /// <param name="ancestors2"></param>
-        private void FindPathsToLeastCommonAncestor(Node node1, Node node2, out IList<Node> ancestors1, out IList<Node> ancestors2)
+        private void FindPathsToLeastCommonAncestor(
+            Node node1,
+            Node node2,
+            out IList<Node> ancestors1,
+            out IList<Node> ancestors2
+        )
         {
             ancestors1 = FindAncestors(node1);
             ancestors2 = FindAncestors(node2);
@@ -994,7 +1184,7 @@ namespace System.Data.Query.PlanCompiler
         }
 
         /// <summary>
-        /// Finds all ancestors of the given node. 
+        /// Finds all ancestors of the given node.
         /// </summary>
         /// <param name="node"></param>
         /// <returns>An ordered list of the all the ancestors of the given node starting from the immediate parent

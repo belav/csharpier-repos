@@ -103,92 +103,75 @@ public class Startup
                                 }
                             });
 
-                            options.Listen(
-                                IPAddress.Loopback,
-                                basePort,
-                                listenOptions =>
-                                {
-                                    // Uncomment the following to enable Nagle's algorithm for this endpoint.
-                                    //listenOptions.NoDelay = false;
+                            options.Listen(IPAddress.Loopback, basePort, listenOptions =>
+                            {
+                                // Uncomment the following to enable Nagle's algorithm for this endpoint.
+                                //listenOptions.NoDelay = false;
 
-                                    listenOptions.UseConnectionLogging();
-                                }
-                            );
+                                listenOptions.UseConnectionLogging();
+                            });
 
-                            options.Listen(
-                                IPAddress.Loopback,
-                                basePort + 1,
-                                listenOptions =>
-                                {
-                                    listenOptions.Protocols = Microsoft
-                                        .AspNetCore
-                                        .Server
-                                        .Kestrel
-                                        .Core
-                                        .HttpProtocols
-                                        .Http1;
-                                    listenOptions.UseHttps();
-                                    listenOptions.UseConnectionLogging();
-                                }
-                            );
+                            options.Listen(IPAddress.Loopback, basePort + 1, listenOptions =>
+                            {
+                                listenOptions.Protocols = Microsoft
+                                    .AspNetCore
+                                    .Server
+                                    .Kestrel
+                                    .Core
+                                    .HttpProtocols
+                                    .Http1;
+                                listenOptions.UseHttps();
+                                listenOptions.UseConnectionLogging();
+                            });
 
-                            options.ListenLocalhost(
-                                basePort + 2,
-                                listenOptions =>
-                                {
-                                    // Use default dev cert
-                                    listenOptions.UseHttps();
-                                }
-                            );
+                            options.ListenLocalhost(basePort + 2, listenOptions =>
+                            {
+                                // Use default dev cert
+                                listenOptions.UseHttps();
+                            });
 
                             options.ListenAnyIP(basePort + 3);
 
-                            options.ListenAnyIP(
-                                basePort + 4,
-                                listenOptions =>
-                                {
-                                    listenOptions.UseHttps(
-                                        StoreName.My,
-                                        "localhost",
-                                        allowInvalid: true
-                                    );
-                                }
-                            );
+                            options.ListenAnyIP(basePort + 4, listenOptions =>
+                            {
+                                listenOptions.UseHttps(
+                                    StoreName.My,
+                                    "localhost",
+                                    allowInvalid: true
+                                );
+                            });
 
-                            options.ListenAnyIP(
-                                basePort + 5,
-                                listenOptions =>
-                                {
-                                    var localhostCert = CertificateLoader.LoadFromStoreCert(
-                                        "localhost",
-                                        "My",
-                                        StoreLocation.CurrentUser,
-                                        allowInvalid: true
-                                    );
+                            options.ListenAnyIP(basePort + 5, listenOptions =>
+                            {
+                                var localhostCert = CertificateLoader.LoadFromStoreCert(
+                                    "localhost",
+                                    "My",
+                                    StoreLocation.CurrentUser,
+                                    allowInvalid: true
+                                );
 
-                                    listenOptions.UseHttps(
-                                        (stream, clientHelloInfo, state, cancellationToken) =>
+                                listenOptions.UseHttps(
+                                    (stream, clientHelloInfo, state, cancellationToken) =>
+                                    {
+                                        // Here you would check the name, select an appropriate cert, and provide a fallback or fail for null names.
+                                        var serverName = clientHelloInfo.ServerName;
+                                        if (serverName != null && serverName != "localhost")
                                         {
-                                            // Here you would check the name, select an appropriate cert, and provide a fallback or fail for null names.
-                                            var serverName = clientHelloInfo.ServerName;
-                                            if (serverName != null && serverName != "localhost")
-                                            {
-                                                throw new AuthenticationException(
-                                                    $"The endpoint is not configured for server name '{clientHelloInfo.ServerName}'."
-                                                );
-                                            }
-
-                                            return new ValueTask<SslServerAuthenticationOptions>(
-                                                new SslServerAuthenticationOptions
-                                                {
-                                                    ServerCertificate = localhostCert,
-                                                }
+                                            throw new AuthenticationException(
+                                                $"The endpoint is not configured for server name '{clientHelloInfo.ServerName}'."
                                             );
-                                        },
-                                        state: null
-                                    );
-                                }
-                            );
+                                        }
+
+                                        return new ValueTask<SslServerAuthenticationOptions>(
+                                            new SslServerAuthenticationOptions
+                                            {
+                                                ServerCertificate = localhostCert,
+                                            }
+                                        );
+                                    },
+                                    state: null
+                                );
+                            });
 
                             options
                                 .Configure()
@@ -203,13 +186,10 @@ public class Startup
                                     reloadOnChange: true
                                 )
                                 .Endpoint("NamedEndpoint", opt => { })
-                                .Endpoint(
-                                    "NamedHttpsEndpoint",
-                                    opt =>
-                                    {
-                                        opt.HttpsOptions.SslProtocols = SslProtocols.Tls12;
-                                    }
-                                );
+                                .Endpoint("NamedHttpsEndpoint", opt =>
+                                {
+                                    opt.HttpsOptions.SslProtocols = SslProtocols.Tls12;
+                                });
 
                             options.UseSystemd();
 

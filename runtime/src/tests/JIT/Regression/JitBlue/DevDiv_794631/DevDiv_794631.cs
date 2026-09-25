@@ -11,7 +11,7 @@ public class Repro
     public static int TestEntryPoint()
     {
         //This testcase ensures that we correctly generate one ReadUInt16() call
-        //instead of two due to a bug in fgmorph which transformed a call result 
+        //instead of two due to a bug in fgmorph which transformed a call result
         //as an index of an array incorrectly resulting in an unexpected index
 
         U1[] u1 = new U1[1];
@@ -43,5 +43,6 @@ public class Repro
     }
 
     class U1 { }
+
     class U2 { }
 }

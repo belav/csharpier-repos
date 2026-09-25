@@ -9,9 +9,7 @@ namespace System.ServiceModel.Configuration
 
     public partial class HttpsTransportElement : HttpTransportElement
     {
-        public HttpsTransportElement() 
-        {
-        }
+        public HttpsTransportElement() { }
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
@@ -43,18 +41,20 @@ namespace System.ServiceModel.Configuration
         {
             base.InitializeFrom(bindingElement);
             HttpsTransportBindingElement binding = (HttpsTransportBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.RequireClientCertificate, binding.RequireClientCertificate);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.RequireClientCertificate,
+                binding.RequireClientCertificate
+            );
         }
 
-        [ConfigurationProperty(ConfigurationStrings.RequireClientCertificate, DefaultValue = TransportDefaults.RequireClientCertificate)]
+        [ConfigurationProperty(
+            ConfigurationStrings.RequireClientCertificate,
+            DefaultValue = TransportDefaults.RequireClientCertificate
+        )]
         public bool RequireClientCertificate
         {
             get { return (bool)base[ConfigurationStrings.RequireClientCertificate]; }
             set { base[ConfigurationStrings.RequireClientCertificate] = value; }
         }
-
     }
 }
-
-
-

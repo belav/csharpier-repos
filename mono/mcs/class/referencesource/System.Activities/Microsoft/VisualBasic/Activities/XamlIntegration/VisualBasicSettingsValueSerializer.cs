@@ -10,21 +10,21 @@ namespace Microsoft.VisualBasic.Activities.XamlIntegration
 
     // this value serializer always returns false for CanConvertToString, but
     // needs to add namespace declarations to the context
-    // 
+    //
     public sealed class VisualBasicSettingsValueSerializer : ValueSerializer
     {
-        internal const string VisualBasicSettingsValue = "Assembly references and imported namespaces serialized as XML namespaces";
-        internal const string ImplementationVisualBasicSettingsValue = "Assembly references and imported namespaces for internal implementation";
+        internal const string VisualBasicSettingsValue =
+            "Assembly references and imported namespaces serialized as XML namespaces";
+        internal const string ImplementationVisualBasicSettingsValue =
+            "Assembly references and imported namespaces for internal implementation";
 
         public VisualBasicSettingsValueSerializer()
-            : base()
-        {
-        }
+            : base() { }
 
         public override bool CanConvertToString(object value, IValueSerializerContext context)
         {
             VisualBasicSettings settings = value as VisualBasicSettings;
-            
+
             // promote settings to xmlns declarations
             if (settings != null)
             {

@@ -11,7 +11,7 @@ namespace System.ServiceModel.Discovery
     interface IDiscoveryVersionImplementation
     {
         string WsaNamespace { get; }
-        Uri DiscoveryAddress { get; }        
+        Uri DiscoveryAddress { get; }
         MessageVersion MessageVersion { get; }
         DiscoveryVersion.SchemaQualifiedNames QualifiedNames { get; }
         DataContractSerializer EprSerializer { get; }
@@ -19,8 +19,13 @@ namespace System.ServiceModel.Discovery
         ContractDescription GetDiscoveryContract(ServiceDiscoveryMode discoveryMode);
         ContractDescription GetAnnouncementContract();
 
-        IDiscoveryInnerClient CreateDiscoveryInnerClient(DiscoveryEndpoint discoveryEndpoint, IDiscoveryInnerClientResponse responseReceiver);
-        IAnnouncementInnerClient CreateAnnouncementInnerClient(AnnouncementEndpoint announcementEndpoint);
+        IDiscoveryInnerClient CreateDiscoveryInnerClient(
+            DiscoveryEndpoint discoveryEndpoint,
+            IDiscoveryInnerClientResponse responseReceiver
+        );
+        IAnnouncementInnerClient CreateAnnouncementInnerClient(
+            AnnouncementEndpoint announcementEndpoint
+        );
 
         Uri ToVersionIndependentScopeMatchBy(Uri versionDependentScopeMatchBy);
         Uri ToVersionDependentScopeMatchBy(Uri versionIndependentScopeMatchBy);

@@ -21,9 +21,10 @@ Revision History:
 
 
 --*/
-namespace System {
-    using System.Net;
+namespace System
+{
     using System.Globalization;
+    using System.Net;
     using System.Security.Permissions;
 
     //
@@ -32,22 +33,19 @@ namespace System {
     //
     // A developer must implement at least internal default .ctor to participate in the Uri extensibility game.
     //
-    public abstract partial class UriParser {
-
+    public abstract partial class UriParser
+    {
         internal string SchemeName
         {
-            get
-            {
-                return m_Scheme;
-            }
+            get { return m_Scheme; }
         }
-        internal int DefaultPort {
-            get {
-                return m_Port;
-            }
+        internal int DefaultPort
+        {
+            get { return m_Port; }
         }
 
         private const UriSyntaxFlags SchemeOnlyFlags = UriSyntaxFlags.MayHavePath;
+
         // This is a "scheme-only" base parser, everything after the scheme is
         // returned as the path component.
         // The user parser will need to do the majority of the work itself.
@@ -55,7 +53,8 @@ namespace System {
         // However when the ctor is called from OnCreateUri context the calling parser
         // settings will later override the result on the base class
         //
-        protected UriParser(): this (SchemeOnlyFlags) { }
+        protected UriParser()
+            : this(SchemeOnlyFlags) { }
 
         //
         // Is called on each Uri ctor for every non-simple parser i.e. the one that does have
@@ -65,14 +64,13 @@ namespace System {
         {
             return this;
         }
+
         //
         // Is called whenever a parser gets registered with some scheme
         // The base implementaion is a nop.
         //
-        protected virtual void OnRegister(string schemeName, int defaultPort)
-        {
+        protected virtual void OnRegister(string schemeName, int defaultPort) { }
 
-        }
         //
         // Parses and validates a Uri object, is called at the Uri ctor time.
         //
@@ -82,6 +80,7 @@ namespace System {
         {
             parsingError = uri.ParseMinimal();
         }
+
         //
         // Resolves a relative Uri object into new AbsoluteUri.
         //
@@ -91,18 +90,29 @@ namespace System {
         // This method returns:
         // The result Uri value used to represent a new Uri
         //
-        protected virtual string Resolve(Uri baseUri, Uri relativeUri, out UriFormatException parsingError)
+        protected virtual string Resolve(
+            Uri baseUri,
+            Uri relativeUri,
+            out UriFormatException parsingError
+        )
         {
             if (baseUri.UserDrivenParsing)
-                throw new InvalidOperationException(SR.GetString(SR.net_uri_UserDrivenParsing, this.GetType().FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.net_uri_UserDrivenParsing, this.GetType().FullName)
+                );
 
             if (!baseUri.IsAbsoluteUri)
                 throw new InvalidOperationException(SR.GetString(SR.net_uri_NotAbsolute));
 
-
             string newUriString = null;
             bool userEscaped = false;
-            Uri result = Uri.ResolveHelper(baseUri, relativeUri, ref newUriString, ref userEscaped, out parsingError);
+            Uri result = Uri.ResolveHelper(
+                baseUri,
+                relativeUri,
+                ref newUriString,
+                ref userEscaped,
+                out parsingError
+            );
 
             if (parsingError != null)
                 return null;
@@ -116,7 +126,7 @@ namespace System {
         //
         //
         //
-        protected virtual  bool IsBaseOf(Uri baseUri, Uri relativeUri)
+        protected virtual bool IsBaseOf(Uri baseUri, Uri relativeUri)
         {
             return baseUri.IsBaseOfHelper(relativeUri);
         }
@@ -135,14 +145,23 @@ namespace System {
         //
         protected virtual string GetComponents(Uri uri, UriComponents components, UriFormat format)
         {
-            if (((components & UriComponents.SerializationInfoString) != 0) && components != UriComponents.SerializationInfoString)
-                throw new ArgumentOutOfRangeException("components", components, SR.GetString(SR.net_uri_NotJustSerialization));
+            if (
+                ((components & UriComponents.SerializationInfoString) != 0)
+                && components != UriComponents.SerializationInfoString
+            )
+                throw new ArgumentOutOfRangeException(
+                    "components",
+                    components,
+                    SR.GetString(SR.net_uri_NotJustSerialization)
+                );
 
             if ((format & ~UriFormat.SafeUnescaped) != 0)
                 throw new ArgumentOutOfRangeException("format");
 
             if (uri.UserDrivenParsing)
-                throw new InvalidOperationException(SR.GetString(SR.net_uri_UserDrivenParsing, this.GetType().FullName));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.net_uri_UserDrivenParsing, this.GetType().FullName)
+                );
 
             if (!uri.IsAbsoluteUri)
                 throw new InvalidOperationException(SR.GetString(SR.net_uri_NotAbsolute));
@@ -187,6 +206,7 @@ namespace System {
             schemeName = schemeName.ToLower(CultureInfo.InvariantCulture);
             FetchSyntax(uriParser, schemeName, defaultPort);
         }
+
         //
         // Is a Uri scheme known to System.Uri?
         //
@@ -198,7 +218,9 @@ namespace System {
             if (!Uri.CheckSchemeName(schemeName))
                 throw new ArgumentOutOfRangeException("schemeName");
 
-            UriParser syntax = UriParser.GetSyntax(schemeName.ToLower(CultureInfo.InvariantCulture));
+            UriParser syntax = UriParser.GetSyntax(
+                schemeName.ToLower(CultureInfo.InvariantCulture)
+            );
             return syntax != null && syntax.NotAny(UriSyntaxFlags.V1_UnknownUri);
         }
     }

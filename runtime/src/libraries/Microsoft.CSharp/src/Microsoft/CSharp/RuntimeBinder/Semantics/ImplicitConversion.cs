@@ -15,7 +15,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
         private sealed class ImplicitConversion
         {
-            public ImplicitConversion(ExpressionBinder binder, Expr exprSrc, CType typeSrc, CType typeDest, bool needsExprDest, CONVERTTYPE flags)
+            public ImplicitConversion(
+                ExpressionBinder binder,
+                Expr exprSrc,
+                CType typeSrc,
+                CType typeDest,
+                bool needsExprDest,
+                CONVERTTYPE flags
+            )
             {
                 _binder = binder;
                 _exprSrc = exprSrc;
@@ -25,7 +32,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 _flags = flags;
                 _exprDest = null;
             }
-            public Expr ExprDest { get { return _exprDest; } }
+
+            public Expr ExprDest
+            {
+                get { return _exprDest; }
+            }
             private Expr _exprDest;
             private readonly ExpressionBinder _binder;
             private readonly Expr _exprSrc;
@@ -84,9 +95,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     return false;
                 }
 
-                Debug.Assert(_typeSrc != null && _typeDest != null);            // types must be supplied.
-                Debug.Assert(_exprSrc == null || _typeSrc == _exprSrc.Type);    // type of source should be correct if source supplied
-                Debug.Assert(!_needsExprDest || _exprSrc != null);           // need source expr to create dest expr
+                Debug.Assert(_typeSrc != null && _typeDest != null); // types must be supplied.
+                Debug.Assert(_exprSrc == null || _typeSrc == _exprSrc.Type); // type of source should be correct if source supplied
+                Debug.Assert(!_needsExprDest || _exprSrc != null); // need source expr to create dest expr
 
                 switch (_typeDest.TypeKind)
                 {
@@ -114,8 +125,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // An identity conversion converts from any type to the same type. This conversion exists only
                 // such that an entity that already has a required type can be said to be convertible to that type.
 
-                if (_typeSrc == _typeDest &&
-                    ((_flags & CONVERTTYPE.ISEXPLICIT) == 0 || (!_typeSrc.IsPredefType(PredefinedType.PT_FLOAT) && !_typeSrc.IsPredefType(PredefinedType.PT_DOUBLE))))
+                if (
+                    _typeSrc == _typeDest
+                    && (
+                        (_flags & CONVERTTYPE.ISEXPLICIT) == 0
+                        || (
+                            !_typeSrc.IsPredefType(PredefinedType.PT_FLOAT)
+                            && !_typeSrc.IsPredefType(PredefinedType.PT_DOUBLE)
+                        )
+                    )
+                )
                 {
                     if (_needsExprDest)
                     {
@@ -190,13 +209,23 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // Every incoming dynamic operand should be implicitly convertible
                 // to any type that it is an instance of.
                 object srcRuntimeObject = _exprSrc?.RuntimeObject;
-                if (srcRuntimeObject != null
+                if (
+                    srcRuntimeObject != null
                     && _typeDest.AssociatedSystemType.IsInstanceOfType(srcRuntimeObject)
-                    && CSemanticChecker.CheckTypeAccess(_typeDest, _binder.Context.ContextForMemberLookup))
+                    && CSemanticChecker.CheckTypeAccess(
+                        _typeDest,
+                        _binder.Context.ContextForMemberLookup
+                    )
+                )
                 {
                     if (_needsExprDest)
                     {
-                        _binder.bindSimpleCast(_exprSrc, _typeDest, out _exprDest, _exprSrc.Flags & EXPRFLAG.EXF_CANTBENULL);
+                        _binder.bindSimpleCast(
+                            _exprSrc,
+                            _typeDest,
+                            out _exprDest,
+                            _exprSrc.Flags & EXPRFLAG.EXF_CANTBENULL
+                        );
                     }
                     return true;
                 }
@@ -214,14 +243,20 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 if (0 == (_flags & CONVERTTYPE.NOUDC))
                 {
-                    return _binder.bindUserDefinedConversion(_exprSrc, _typeSrc, _typeDest, _needsExprDest, out _exprDest, true);
+                    return _binder.bindUserDefinedConversion(
+                        _exprSrc,
+                        _typeSrc,
+                        _typeDest,
+                        _needsExprDest,
+                        out _exprDest,
+                        true
+                    );
                 }
 
                 // No conversion was found.
 
                 return false;
             }
-
 
             /***************************************************************************************************
                 Called by BindImplicitConversion when the destination type is Nullable<T>. The following
@@ -272,7 +307,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 AggregateType atsDst = nubDst.GetAts();
 
                 // Check for the unboxing conversion. This takes precedence over the wrapping conversions.
-                if (SymbolLoader.HasBaseConversion(nubDst.UnderlyingType, _typeSrc) && !CConversions.FWrappingConv(_typeSrc, nubDst))
+                if (
+                    SymbolLoader.HasBaseConversion(nubDst.UnderlyingType, _typeSrc)
+                    && !CConversions.FWrappingConv(_typeSrc, nubDst)
+                )
                 {
                     // These should be different! Fix the caller if typeSrc is an AggregateType of Nullable.
                     Debug.Assert(atsDst != _typeSrc);
@@ -286,7 +324,12 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                     if (_needsExprDest)
                     {
-                        _binder.bindSimpleCast(_exprSrc, _typeDest, out _exprDest, EXPRFLAG.EXF_UNBOX);
+                        _binder.bindSimpleCast(
+                            _exprSrc,
+                            _typeDest,
+                            out _exprDest,
+                            EXPRFLAG.EXF_UNBOX
+                        );
                     }
                     return true;
                 }
@@ -295,9 +338,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 bool srcWasNullable;
                 CType typeDstBase = nubDst.StripNubs(out dstWasNullable);
                 CType typeSrcBase = _typeSrc.StripNubs(out srcWasNullable);
-                ConversionFunc pfn = (_flags & CONVERTTYPE.ISEXPLICIT) != 0 ?
-                    (ConversionFunc)_binder.BindExplicitConversion :
-                    (ConversionFunc)_binder.BindImplicitConversion;
+                ConversionFunc pfn =
+                    (_flags & CONVERTTYPE.ISEXPLICIT) != 0
+                        ? (ConversionFunc)_binder.BindExplicitConversion
+                        : (ConversionFunc)_binder.BindImplicitConversion;
 
                 if (!srcWasNullable)
                 {
@@ -311,9 +355,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                         // keep it in its expression form and transform it in the nullable rewrite pass.
                         if (_needsExprDest)
                         {
-                            _exprDest = _exprSrc is ExprConstant
-                                ? ExprFactory.CreateZeroInit(nubDst)
-                                : ExprFactory.CreateCast(_typeDest, _exprSrc);
+                            _exprDest =
+                                _exprSrc is ExprConstant
+                                    ? ExprFactory.CreateZeroInit(nubDst)
+                                    : ExprFactory.CreateCast(_typeDest, _exprSrc);
                         }
                         return true;
                     }
@@ -321,11 +366,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     Expr exprTmp = _exprSrc;
 
                     // If there is an implicit/explicit S => T then there is an implicit/explicit S => T?
-                    if (_typeSrc == typeDstBase || pfn(_exprSrc, _typeSrc, typeDstBase, _needsExprDest, out exprTmp, _flags | CONVERTTYPE.NOUDC))
+                    if (
+                        _typeSrc == typeDstBase
+                        || pfn(
+                            _exprSrc,
+                            _typeSrc,
+                            typeDstBase,
+                            _needsExprDest,
+                            out exprTmp,
+                            _flags | CONVERTTYPE.NOUDC
+                        )
+                    )
                     {
                         if (_needsExprDest)
                         {
-                            ExprUserDefinedConversion exprUDC = exprTmp as ExprUserDefinedConversion;
+                            ExprUserDefinedConversion exprUDC =
+                                exprTmp as ExprUserDefinedConversion;
                             if (exprUDC != null)
                             {
                                 exprTmp = exprUDC.UserDefinedCall;
@@ -335,7 +391,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                             {
                                 ExprCall call = BindNubNew(exprTmp);
                                 exprTmp = call;
-                                call.NullableCallLiftKind = NullableCallLiftKind.NullableConversionConstructor;
+                                call.NullableCallLiftKind =
+                                    NullableCallLiftKind.NullableConversionConstructor;
                             }
 
                             if (exprUDC != null)
@@ -351,15 +408,41 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     }
 
                     // No builtin conversion. Maybe there is a user defined conversion....
-                    return 0 == (_flags & CONVERTTYPE.NOUDC) && _binder.bindUserDefinedConversion(_exprSrc, _typeSrc, nubDst, _needsExprDest, out _exprDest, 0 == (_flags & CONVERTTYPE.ISEXPLICIT));
+                    return 0 == (_flags & CONVERTTYPE.NOUDC)
+                        && _binder.bindUserDefinedConversion(
+                            _exprSrc,
+                            _typeSrc,
+                            nubDst,
+                            _needsExprDest,
+                            out _exprDest,
+                            0 == (_flags & CONVERTTYPE.ISEXPLICIT)
+                        );
                 }
 
                 // Both are Nullable so there is only a conversion if there is a conversion between the base types.
                 // That is, if there is an implicit/explicit S => T then there is an implicit/explicit S?+ => T?+.
-                if (typeSrcBase != typeDstBase && !pfn(null, typeSrcBase, typeDstBase, false, out _exprDest, _flags | CONVERTTYPE.NOUDC))
+                if (
+                    typeSrcBase != typeDstBase
+                    && !pfn(
+                        null,
+                        typeSrcBase,
+                        typeDstBase,
+                        false,
+                        out _exprDest,
+                        _flags | CONVERTTYPE.NOUDC
+                    )
+                )
                 {
                     // No builtin conversion. Maybe there is a user defined conversion....
-                    return 0 == (_flags & CONVERTTYPE.NOUDC) && _binder.bindUserDefinedConversion(_exprSrc, _typeSrc, nubDst, _needsExprDest, out _exprDest, 0 == (_flags & CONVERTTYPE.ISEXPLICIT));
+                    return 0 == (_flags & CONVERTTYPE.NOUDC)
+                        && _binder.bindUserDefinedConversion(
+                            _exprSrc,
+                            _typeSrc,
+                            nubDst,
+                            _needsExprDest,
+                            out _exprDest,
+                            0 == (_flags & CONVERTTYPE.ISEXPLICIT)
+                        );
                 }
 
                 if (_needsExprDest)
@@ -371,11 +454,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // Here we want to first check whether or not the conversions work on the base types.
 
                     Expr arg1 = _binder.mustCast(_exprSrc, typeSrcBase);
-                    bool convertible = (_flags & CONVERTTYPE.ISEXPLICIT) != 0
-                        ? _binder.BindExplicitConversion(
-                            arg1, arg1.Type, typeDstBase, out arg1, _flags | CONVERTTYPE.NOUDC)
-                        : _binder.BindImplicitConversion(
-                            arg1, arg1.Type, typeDstBase, out arg1, _flags | CONVERTTYPE.NOUDC);
+                    bool convertible =
+                        (_flags & CONVERTTYPE.ISEXPLICIT) != 0
+                            ? _binder.BindExplicitConversion(
+                                arg1,
+                                arg1.Type,
+                                typeDstBase,
+                                out arg1,
+                                _flags | CONVERTTYPE.NOUDC
+                            )
+                            : _binder.BindImplicitConversion(
+                                arg1,
+                                arg1.Type,
+                                typeDstBase,
+                                out arg1,
+                                _flags | CONVERTTYPE.NOUDC
+                            );
 
                     if (!convertible)
                     {
@@ -399,9 +493,13 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // variable with reference-type constraint.
 
                 FUNDTYPE ftDest = _typeDest.FundamentalType;
-                if (ftDest != FUNDTYPE.FT_REF && ftDest != FUNDTYPE.FT_PTR &&
+                if (
+                    ftDest != FUNDTYPE.FT_REF
+                    && ftDest != FUNDTYPE.FT_PTR
+                    &&
                     // null is convertible to System.Nullable<T>.
-                    !_typeDest.IsPredefType(PredefinedType.PT_G_OPTIONAL))
+                    !_typeDest.IsPredefType(PredefinedType.PT_G_OPTIONAL)
+                )
                 {
                     return false;
                 }
@@ -410,9 +508,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // If the conversion argument is a constant null then return a ZEROINIT.
                     // Otherwise, bind this as a cast to the destination type. In a later
                     // rewrite pass we will rewrite the cast as SEQ(side effects, ZEROINIT).
-                    _exprDest = _exprSrc is ExprConstant
-                        ? ExprFactory.CreateZeroInit(_typeDest)
-                        : ExprFactory.CreateCast(_typeDest, _exprSrc);
+                    _exprDest =
+                        _exprSrc is ExprConstant
+                            ? ExprFactory.CreateZeroInit(_typeDest)
+                            : ExprFactory.CreateCast(_typeDest, _exprSrc);
                 }
                 return true;
             }
@@ -444,22 +543,43 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     }
                     return true;
                 }
-                if (SymbolLoader.HasBaseConversion(nubSrc.UnderlyingType, _typeDest) && !CConversions.FUnwrappingConv(nubSrc, _typeDest))
+                if (
+                    SymbolLoader.HasBaseConversion(nubSrc.UnderlyingType, _typeDest)
+                    && !CConversions.FUnwrappingConv(nubSrc, _typeDest)
+                )
                 {
                     if (_needsExprDest)
                     {
-                        _binder.bindSimpleCast(_exprSrc, _typeDest, out _exprDest, EXPRFLAG.EXF_BOX);
+                        _binder.bindSimpleCast(
+                            _exprSrc,
+                            _typeDest,
+                            out _exprDest,
+                            EXPRFLAG.EXF_BOX
+                        );
                         if (!_typeDest.IsPredefType(PredefinedType.PT_OBJECT))
                         {
                             // The base type of a nullable is always a non-nullable value type,
                             // therefore so is typeDest unless typeDest is PT_OBJECT. In this case the conversion
                             // needs to be unboxed. We only need this if we actually will use the result.
-                            _binder.bindSimpleCast(_exprDest, _typeDest, out _exprDest, EXPRFLAG.EXF_FORCE_UNBOX);
+                            _binder.bindSimpleCast(
+                                _exprDest,
+                                _typeDest,
+                                out _exprDest,
+                                EXPRFLAG.EXF_FORCE_UNBOX
+                            );
                         }
                     }
                     return true;
                 }
-                return 0 == (_flags & CONVERTTYPE.NOUDC) && _binder.bindUserDefinedConversion(_exprSrc, nubSrc, _typeDest, _needsExprDest, out _exprDest, true);
+                return 0 == (_flags & CONVERTTYPE.NOUDC)
+                    && _binder.bindUserDefinedConversion(
+                        _exprSrc,
+                        nubSrc,
+                        _typeDest,
+                        _needsExprDest,
+                        out _exprDest,
+                        true
+                    );
             }
 
             [RequiresUnreferencedCode(Binder.TrimmerWarning)]
@@ -490,15 +610,25 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // including IList<T>, ICollection<T>, IEnumerable<T>, IReadOnlyList<T>, IReadOnlyCollection<T>
                 // and the non-generic versions.
 
-                if ((_typeDest is ArrayType ||
-                     (_typeDest is AggregateType aggDest && aggDest.IsInterfaceType &&
-                      aggDest.TypeArgsAll.Count == 1 &&
-                      (aggDest.TypeArgsAll[0] != ((ArrayType)_typeSrc).ElementType ||
-                       0 != (_flags & CONVERTTYPE.FORCECAST))))
-                    &&
-                    (0 != (_flags & CONVERTTYPE.FORCECAST) ||
-                     TypeManager.TypeContainsTyVars(_typeSrc, null) ||
-                     TypeManager.TypeContainsTyVars(_typeDest, null)))
+                if (
+                    (
+                        _typeDest is ArrayType
+                        || (
+                            _typeDest is AggregateType aggDest
+                            && aggDest.IsInterfaceType
+                            && aggDest.TypeArgsAll.Count == 1
+                            && (
+                                aggDest.TypeArgsAll[0] != ((ArrayType)_typeSrc).ElementType
+                                || 0 != (_flags & CONVERTTYPE.FORCECAST)
+                            )
+                        )
+                    )
+                    && (
+                        0 != (_flags & CONVERTTYPE.FORCECAST)
+                        || TypeManager.TypeContainsTyVars(_typeSrc, null)
+                        || TypeManager.TypeContainsTyVars(_typeDest, null)
+                    )
+                )
                 {
                     grfex = EXPRFLAG.EXF_REFCHECK;
                 }
@@ -579,12 +709,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // *   From any delegate-type to System.Delegate.
                 // *   From any delegate-type to System.ICloneable.
 
-                if (!(_typeDest is AggregateType) || !SymbolLoader.HasBaseConversion(pSource, _typeDest))
+                if (
+                    !(_typeDest is AggregateType)
+                    || !SymbolLoader.HasBaseConversion(pSource, _typeDest)
+                )
                 {
                     return false;
                 }
                 EXPRFLAG flags = 0x00;
-                if (pSource.OwningAggregate.IsStruct() && _typeDest.FundamentalType == FUNDTYPE.FT_REF)
+                if (
+                    pSource.OwningAggregate.IsStruct()
+                    && _typeDest.FundamentalType == FUNDTYPE.FT_REF
+                )
                 {
                     flags = EXPRFLAG.EXF_BOX | EXPRFLAG.EXF_CANTBENULL;
                 }
@@ -610,10 +746,18 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // base class for all enums (21.4). A struct or enum can be boxed to the type System.ValueType,
                 // since that is the direct base class for all structs (18.3.2) and a base class for all enums.
 
-                if (_typeDest is AggregateType aggDest && SymbolLoader.HasBaseConversion(aggTypeSrc, aggDest))
+                if (
+                    _typeDest is AggregateType aggDest
+                    && SymbolLoader.HasBaseConversion(aggTypeSrc, aggDest)
+                )
                 {
                     if (_needsExprDest)
-                        _binder.bindSimpleCast(_exprSrc, _typeDest, out _exprDest, EXPRFLAG.EXF_BOX | EXPRFLAG.EXF_CANTBENULL);
+                        _binder.bindSimpleCast(
+                            _exprSrc,
+                            _typeDest,
+                            out _exprDest,
+                            EXPRFLAG.EXF_BOX | EXPRFLAG.EXF_CANTBENULL
+                        );
                     return true;
                 }
                 return false;
@@ -643,12 +787,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
                 // Note: Don't use GetConst here since the conversion only applies to bona-fide compile time constants.
                 if (
-                    aggTypeSrc.OwningAggregate.GetPredefType() != PredefinedType.PT_BOOL &&
-                    _exprSrc != null &&
-                    _exprSrc.IsZero() &&
-                    _exprSrc.Type.IsNumericType &&
+                    aggTypeSrc.OwningAggregate.GetPredefType() != PredefinedType.PT_BOOL
+                    && _exprSrc != null
+                    && _exprSrc.IsZero()
+                    && _exprSrc.Type.IsNumericType
+                    &&
                     /*(exprSrc.flags & EXF_LITERALCONST) &&*/
-                    0 == (_flags & CONVERTTYPE.STANDARD))
+                    0 == (_flags & CONVERTTYPE.STANDARD)
+                )
                 {
                     // NOTE: This allows conversions from uint, long, ulong, float, double, and hexadecimal int
                     // NOTE: This is for backwards compatibility with Everett
@@ -657,7 +803,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // into a constant here - we should move this to a later pass.
                     if (_needsExprDest)
                     {
-                        _exprDest = ExprFactory.CreateConstant(_typeDest, ConstVal.GetDefaultValue(_typeDest.ConstValKind));
+                        _exprDest = ExprFactory.CreateConstant(
+                            _typeDest,
+                            ConstVal.GetDefaultValue(_typeDest.ConstValKind)
+                        );
                     }
                     return true;
                 }
@@ -687,10 +836,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 // *   A constant-expression of type long can be converted to type ulong, provided the value of
                 //     the constant-expression is not negative.
                 // Note: Don't use GetConst here since the conversion only applies to bona-fide compile time constants.
-                if (_exprSrc is ExprConstant constant &&
-                    ((ptSrc == PredefinedType.PT_INT && ptDest != PredefinedType.PT_BOOL && ptDest != PredefinedType.PT_CHAR) ||
-                    (ptSrc == PredefinedType.PT_LONG && ptDest == PredefinedType.PT_ULONG)) &&
-                    isConstantInRange(constant, _typeDest))
+                if (
+                    _exprSrc is ExprConstant constant
+                    && (
+                        (
+                            ptSrc == PredefinedType.PT_INT
+                            && ptDest != PredefinedType.PT_BOOL
+                            && ptDest != PredefinedType.PT_CHAR
+                        ) || (ptSrc == PredefinedType.PT_LONG && ptDest == PredefinedType.PT_ULONG)
+                    )
+                    && isConstantInRange(constant, _typeDest)
+                )
                 {
                     // Special case (CLR 6.1.6): if integral constant is in range, the conversion is a legal implicit conversion.
                     convertKind = ConvKind.Implicit;
@@ -698,7 +854,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 else if (ptSrc == ptDest)
                 {
                     // Special case: precision limiting casts to float or double
-                    Debug.Assert(ptSrc == PredefinedType.PT_FLOAT || ptSrc == PredefinedType.PT_DOUBLE);
+                    Debug.Assert(
+                        ptSrc == PredefinedType.PT_FLOAT || ptSrc == PredefinedType.PT_DOUBLE
+                    );
                     Debug.Assert(0 != (_flags & CONVERTTYPE.ISEXPLICIT));
                     convertKind = ConvKind.Implicit;
                 }
@@ -718,10 +876,16 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                 if (_exprSrc.GetConst() != null)
                 {
                     // Fold the constant cast if possible.
-                    ConstCastResult result = _binder.bindConstantCast(_exprSrc, _typeDest, _needsExprDest, out _exprDest, false);
+                    ConstCastResult result = _binder.bindConstantCast(
+                        _exprSrc,
+                        _typeDest,
+                        _needsExprDest,
+                        out _exprDest,
+                        false
+                    );
                     if (result == ConstCastResult.Success)
                     {
-                        return true;  // else, don't fold and use a regular cast, below.
+                        return true; // else, don't fold and use a regular cast, below.
                     }
                 }
 
@@ -734,7 +898,14 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
                     // According the language, this is a standard conversion, but it is implemented
                     // through a user-defined conversion. Because it's a standard conversion, we don't
                     // test the NOUDC flag here.
-                    return _binder.bindUserDefinedConversion(_exprSrc, aggTypeSrc, _typeDest, _needsExprDest, out _exprDest, true);
+                    return _binder.bindUserDefinedConversion(
+                        _exprSrc,
+                        aggTypeSrc,
+                        _typeDest,
+                        _needsExprDest,
+                        out _exprDest,
+                        true
+                    );
                 }
                 if (_needsExprDest)
                     _binder.bindSimpleCast(_exprSrc, _typeDest, out _exprDest);

@@ -6,10 +6,11 @@ using System.Globalization;
 using System.Linq;
 using System.Web.Resources;
 using System.Web.UI;
-using System.Web.UI.WebControls.Expressions;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.Expressions;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     /// <summary>
     /// A templated control that automatically generates a collection of filters for a table associated with a given data source.
     /// It is designed to work with the QueryExtender architecture and it will not render anything unless it's referenced by a
@@ -17,17 +18,17 @@ namespace System.Web.DynamicData {
     /// </summary>
     [ParseChildren(true)]
     [PersistChildren(false)]
-    public class QueryableFilterRepeater : Control, IFilterExpressionProvider {
+    public class QueryableFilterRepeater : Control, IFilterExpressionProvider
+    {
         private HttpContextBase _context;
         private IQueryableDataSource _dataSource;
         private List<DynamicFilter> _filters = new List<DynamicFilter>();
         private bool _initialized = false;
 
         // for unit testing
-        private new HttpContextBase Context {
-            get {
-                return _context ?? new HttpContextWrapper(HttpContext.Current);
-            }
+        private new HttpContextBase Context
+        {
+            get { return _context ?? new HttpContextWrapper(HttpContext.Current); }
         }
 
         /// <summary>
@@ -35,20 +36,20 @@ namespace System.Web.DynamicData {
         /// The default value is "DynamicFilter"
         /// </summary>
         [
-        Category("Behavior"),
-        DefaultValue("DynamicFilter"),
-        Themeable(false),
-        IDReferenceProperty(typeof(QueryableFilterUserControl)),
-        ResourceDescription("DynamicFilterRepeater_DynamicFilterContainerId")
+            Category("Behavior"),
+            DefaultValue("DynamicFilter"),
+            Themeable(false),
+            IDReferenceProperty(typeof(QueryableFilterUserControl)),
+            ResourceDescription("DynamicFilterRepeater_DynamicFilterContainerId")
         ]
-        public string DynamicFilterContainerId {
-            get {
+        public string DynamicFilterContainerId
+        {
+            get
+            {
                 string id = ViewState["__FilterContainerId"] as string;
                 return String.IsNullOrEmpty(id) ? "DynamicFilter" : id;
             }
-            set {
-                ViewState["__FilterContainerId"] = value;
-            }
+            set { ViewState["__FilterContainerId"] = value; }
         }
 
         /// <summary>
@@ -60,18 +61,24 @@ namespace System.Web.DynamicData {
         [TemplateContainer(typeof(INamingContainer))]
         public virtual ITemplate ItemTemplate { get; set; }
 
-        public QueryableFilterRepeater() {
-        }
+        public QueryableFilterRepeater() { }
 
         // for unit testing
         internal QueryableFilterRepeater(HttpContextBase context)
-            : this() {
+            : this()
+        {
             _context = context;
         }
 
-        [SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
-        protected override void OnPreRender(EventArgs e) {
-            if (_filters.Count == 0) {
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2109:ReviewVisibleEventHandlers",
+            MessageId = "0#"
+        )]
+        protected override void OnPreRender(EventArgs e)
+        {
+            if (_filters.Count == 0)
+            {
                 this.Visible = false;
             }
             base.OnPreRender(e);
@@ -79,12 +86,15 @@ namespace System.Web.DynamicData {
 
         #region IFilterExpressionProvider Members
 
-        void IFilterExpressionProvider.Initialize(IQueryableDataSource dataSource) {
-            if (dataSource == null) {
+        void IFilterExpressionProvider.Initialize(IQueryableDataSource dataSource)
+        {
+            if (dataSource == null)
+            {
                 throw new ArgumentNullException("dataSource");
             }
 
-            if (ItemTemplate == null) {
+            if (ItemTemplate == null)
+            {
                 return;
             }
 
@@ -92,8 +102,10 @@ namespace System.Web.DynamicData {
             Page.InitComplete += new EventHandler(Page_InitComplete);
         }
 
-        internal void Page_InitComplete(object sender, EventArgs e) {
-            if (_initialized) {
+        internal void Page_InitComplete(object sender, EventArgs e)
+        {
+            if (_initialized)
+            {
                 return;
             }
 
@@ -101,20 +113,29 @@ namespace System.Web.DynamicData {
 
             MetaTable table = DynamicDataExtensions.GetMetaTable(_dataSource, Context);
             int itemIndex = 0;
-            foreach (MetaColumn column in table.GetFilteredColumns()) {
-                FilterRepeaterItem item = new FilterRepeaterItem() { DataItemIndex = itemIndex, DisplayIndex = itemIndex };
+            foreach (MetaColumn column in table.GetFilteredColumns())
+            {
+                FilterRepeaterItem item = new FilterRepeaterItem()
+                {
+                    DataItemIndex = itemIndex,
+                    DisplayIndex = itemIndex,
+                };
                 itemIndex++;
                 ItemTemplate.InstantiateIn(item);
                 Controls.Add(item);
 
                 DynamicFilter filter = item.FindControl(DynamicFilterContainerId) as DynamicFilter;
-                if (filter == null) {
+                if (filter == null)
+                {
                     throw new InvalidOperationException(
-                        String.Format(CultureInfo.CurrentCulture,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
                             DynamicDataResources.FilterRepeater_CouldNotFindControlInTemplate,
                             ID,
                             typeof(QueryableFilterUserControl).FullName,
-                            DynamicFilterContainerId));
+                            DynamicFilterContainerId
+                        )
+                    );
                 }
                 filter.Context = Context; // needed for unit testing
                 filter.DataField = column.Name;
@@ -131,8 +152,10 @@ namespace System.Web.DynamicData {
             _initialized = true;
         }
 
-        IQueryable IFilterExpressionProvider.GetQueryable(IQueryable source) {
-            foreach (DynamicFilter filter in _filters) {
+        IQueryable IFilterExpressionProvider.GetQueryable(IQueryable source)
+        {
+            foreach (DynamicFilter filter in _filters)
+            {
                 source = ((IFilterExpressionProvider)filter).GetQueryable(source);
             }
             return source;
@@ -140,7 +163,8 @@ namespace System.Web.DynamicData {
 
         #endregion
 
-        private class FilterRepeaterItem : Control, IDataItemContainer {
+        private class FilterRepeaterItem : Control, IDataItemContainer
+        {
             public object DataItem { get; internal set; }
 
             public int DataItemIndex { get; internal set; }

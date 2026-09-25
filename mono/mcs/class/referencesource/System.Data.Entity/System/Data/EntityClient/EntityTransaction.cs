@@ -7,10 +7,10 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 using System.Collections.Generic;
-using System.Text;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
+using System.Text;
 
 namespace System.Data.EntityClient
 {
@@ -44,7 +44,7 @@ namespace System.Data.EntityClient
         public new EntityConnection Connection
         {
             get
-            {   // follow the store transaction behavior
+            { // follow the store transaction behavior
                 return ((null != _storeTransaction.Connection) ? _connection : null);
             }
         }
@@ -55,7 +55,7 @@ namespace System.Data.EntityClient
         protected override DbConnection DbConnection
         {
             get
-            {   // follow the store transaction behavior
+            { // follow the store transaction behavior
                 return ((null != _storeTransaction.Connection) ? _connection : null);
             }
         }
@@ -65,10 +65,7 @@ namespace System.Data.EntityClient
         /// </summary>
         public override IsolationLevel IsolationLevel
         {
-            get
-            {
-                return this._storeTransaction.IsolationLevel;
-            }
+            get { return this._storeTransaction.IsolationLevel; }
         }
 
         /// <summary>
@@ -76,10 +73,7 @@ namespace System.Data.EntityClient
         /// </summary>
         internal DbTransaction StoreTransaction
         {
-            get
-            {
-                return this._storeTransaction;
-            }
+            get { return this._storeTransaction; }
         }
 
         /// <summary>

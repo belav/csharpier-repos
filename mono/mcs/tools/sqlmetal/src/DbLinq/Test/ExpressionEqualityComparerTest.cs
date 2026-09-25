@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Reflection;
 using DbLinq.Util;
-using System.Linq.Expressions;
 using NUnit.Framework;
 
 namespace DbLinqTest
@@ -13,7 +13,8 @@ namespace DbLinqTest
     [TestFixture]
     public class ExpressionEqualityComparerTest
     {
-        private readonly IEqualityComparer<Expression> equalityComparer = new ExpressionEqualityComparer();
+        private readonly IEqualityComparer<Expression> equalityComparer =
+            new ExpressionEqualityComparer();
 
         private void CheckEquality(Expression a, Expression b)
         {
@@ -29,22 +30,36 @@ namespace DbLinqTest
         [Test]
         public void Equality1Test()
         {
-            CheckEquality(Expression.Add(Expression.Constant(1), Expression.Constant(2)),
-                          Expression.Add(Expression.Constant(1), Expression.Constant(2)));
+            CheckEquality(
+                Expression.Add(Expression.Constant(1), Expression.Constant(2)),
+                Expression.Add(Expression.Constant(1), Expression.Constant(2))
+            );
         }
 
         [Test]
         public void Inequality1Test()
         {
-            CheckInequality(Expression.Add(Expression.Constant(1), Expression.Constant(2)),
-                            Expression.Add(Expression.Constant(1), Expression.Constant(3)));
+            CheckInequality(
+                Expression.Add(Expression.Constant(1), Expression.Constant(2)),
+                Expression.Add(Expression.Constant(1), Expression.Constant(3))
+            );
         }
 
         [Test]
         public void Equality2Test()
         {
-            CheckEquality(Expression.Condition(Expression.Constant(true), Expression.Constant(1), Expression.Constant(2)),
-                          Expression.Condition(Expression.Constant(true), Expression.Constant(1), Expression.Constant(2)));
+            CheckEquality(
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(1),
+                    Expression.Constant(2)
+                ),
+                Expression.Condition(
+                    Expression.Constant(true),
+                    Expression.Constant(1),
+                    Expression.Constant(2)
+                )
+            );
         }
 
         [Test]
@@ -64,21 +79,25 @@ namespace DbLinqTest
         {
             CheckInequality(Expression.Constant(1), Expression.Constant("1"));
         }
+
         [Test]
         public void Inequality5Test()
         {
             CheckInequality(Expression.Constant(1), null);
         }
+
         [Test]
         public void Inequality6Test()
         {
             CheckInequality(null, Expression.Constant("1"));
         }
+
         [Test]
         public void Inequality7Test()
         {
             CheckInequality(Expression.Constant(1), Expression.Negate(Expression.Constant(1)));
         }
+
         static int F()
         {
             return 1;
@@ -110,18 +129,26 @@ namespace DbLinqTest
         public void Equality9Test()
         {
             CheckEquality(
-                Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static)),
-                Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static))
-                );
+                Expression.Call(
+                    GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static)
+                ),
+                Expression.Call(
+                    GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static)
+                )
+            );
         }
 
         [Test]
         public void Inequality9Test()
         {
             CheckInequality(
-                Expression.Call(GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static)),
-                Expression.Call(GetType().GetMethod("G", BindingFlags.NonPublic | BindingFlags.Static))
-                );
+                Expression.Call(
+                    GetType().GetMethod("F", BindingFlags.NonPublic | BindingFlags.Static)
+                ),
+                Expression.Call(
+                    GetType().GetMethod("G", BindingFlags.NonPublic | BindingFlags.Static)
+                )
+            );
         }
 
         // TODO: finish tests, lazy boy

@@ -13,9 +13,7 @@ namespace System.Net.Mail
         internal bool disposed;
         private readonly MimePart _part = new MimePart();
 
-        internal AttachmentBase()
-        {
-        }
+        internal AttachmentBase() { }
 
         protected AttachmentBase(string fileName)
         {
@@ -70,7 +68,12 @@ namespace System.Net.Mail
         {
             ArgumentException.ThrowIfNullOrEmpty(fileName);
 
-            Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Stream stream = new FileStream(
+                fileName,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
             _part.SetContent(stream, contentType);
         }
 
@@ -78,7 +81,12 @@ namespace System.Net.Mail
         {
             ArgumentException.ThrowIfNullOrEmpty(fileName);
 
-            Stream stream = new FileStream(fileName, FileMode.Open, FileAccess.Read, FileShare.Read);
+            Stream stream = new FileStream(
+                fileName,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.Read
+            );
             _part.SetContent(stream, null, mediaType);
         }
 
@@ -147,7 +155,6 @@ namespace System.Net.Mail
                 throw new ArgumentException(SR.MediaTypeInvalid, nameof(mediaType));
             }
 
-
             ContentType contentType = new ContentType(mediaType);
 
             if (encoding == null)
@@ -175,7 +182,6 @@ namespace System.Net.Mail
                 _part.TransferEncoding = TransferEncoding.QuotedPrintable;
             }
         }
-
 
         internal virtual void PrepareForSending(bool allowUnicode)
         {
@@ -210,7 +216,6 @@ namespace System.Net.Mail
                 }
                 return cid;
             }
-
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -231,27 +236,14 @@ namespace System.Net.Mail
 
         public ContentType ContentType
         {
-            get
-            {
-                return _part.ContentType;
-            }
-
-            set
-            {
-                _part.ContentType = value;
-            }
+            get { return _part.ContentType; }
+            set { _part.ContentType = value; }
         }
 
         public TransferEncoding TransferEncoding
         {
-            get
-            {
-                return _part.TransferEncoding;
-            }
-            set
-            {
-                _part.TransferEncoding = value;
-            }
+            get { return _part.TransferEncoding; }
+            set { _part.TransferEncoding = value; }
         }
 
         internal Uri? ContentLocation
@@ -265,19 +257,18 @@ namespace System.Net.Mail
                 }
                 return uri;
             }
-
             set
             {
-                _part.ContentLocation = value == null ? null : value.IsAbsoluteUri ? value.AbsoluteUri : value.OriginalString;
+                _part.ContentLocation =
+                    value == null ? null
+                    : value.IsAbsoluteUri ? value.AbsoluteUri
+                    : value.OriginalString;
             }
         }
 
         internal MimePart MimePart
         {
-            get
-            {
-                return _part;
-            }
+            get { return _part; }
         }
     }
 
@@ -291,21 +282,22 @@ namespace System.Net.Mail
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(string fileName) : base(fileName)
+        public Attachment(string fileName)
+            : base(fileName)
         {
             Name = Path.GetFileName(fileName);
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(string fileName, string? mediaType) :
-            base(fileName, mediaType)
+        public Attachment(string fileName, string? mediaType)
+            : base(fileName, mediaType)
         {
             Name = Path.GetFileName(fileName);
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(string fileName, ContentType contentType) :
-            base(fileName, contentType)
+        public Attachment(string fileName, ContentType contentType)
+            : base(fileName, contentType)
         {
             if (string.IsNullOrEmpty(contentType.Name))
             {
@@ -318,22 +310,22 @@ namespace System.Net.Mail
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(Stream contentStream, string? name) :
-            base(contentStream, null, null)
+        public Attachment(Stream contentStream, string? name)
+            : base(contentStream, null, null)
         {
             Name = name;
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(Stream contentStream, string? name, string? mediaType) :
-            base(contentStream, null, mediaType)
+        public Attachment(Stream contentStream, string? name, string? mediaType)
+            : base(contentStream, null, mediaType)
         {
             Name = name;
             MimePart.ContentDisposition = new ContentDisposition();
         }
 
-        public Attachment(Stream contentStream, ContentType contentType) :
-            base(contentStream, contentType)
+        public Attachment(Stream contentStream, ContentType contentType)
+            : base(contentStream, contentType)
         {
             Name = contentType.Name;
             MimePart.ContentDisposition = new ContentDisposition();
@@ -341,10 +333,19 @@ namespace System.Net.Mail
 
         internal void SetContentTypeName(bool allowUnicode)
         {
-            if (!allowUnicode && !string.IsNullOrEmpty(_name) && !MimeBasePart.IsAscii(_name, false))
+            if (
+                !allowUnicode
+                && !string.IsNullOrEmpty(_name)
+                && !MimeBasePart.IsAscii(_name, false)
+            )
             {
-                Encoding encoding = NameEncoding ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
-                MimePart.ContentType.Name = MimeBasePart.EncodeHeaderValue(_name, encoding, MimeBasePart.ShouldUseBase64Encoding(encoding));
+                Encoding encoding =
+                    NameEncoding ?? Encoding.GetEncoding(MimeBasePart.DefaultCharSet);
+                MimePart.ContentType.Name = MimeBasePart.EncodeHeaderValue(
+                    _name,
+                    encoding,
+                    MimeBasePart.ShouldUseBase64Encoding(encoding)
+                );
             }
             else
             {
@@ -354,10 +355,7 @@ namespace System.Net.Mail
 
         public string? Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
             set
             {
                 Encoding? nameEncoding = MimeBasePart.DecodeEncoding(value);
@@ -379,10 +377,7 @@ namespace System.Net.Mail
 
         public Encoding? NameEncoding
         {
-            get
-            {
-                return _nameEncoding;
-            }
+            get { return _nameEncoding; }
             set
             {
                 _nameEncoding = value;
@@ -395,10 +390,7 @@ namespace System.Net.Mail
 
         public ContentDisposition? ContentDisposition
         {
-            get
-            {
-                return MimePart.ContentDisposition;
-            }
+            get { return MimePart.ContentDisposition; }
         }
 
         internal override void PrepareForSending(bool allowUnicode)
@@ -418,7 +410,12 @@ namespace System.Net.Mail
             return a;
         }
 
-        public static Attachment CreateAttachmentFromString(string content, string? name, Encoding? contentEncoding, string? mediaType)
+        public static Attachment CreateAttachmentFromString(
+            string content,
+            string? name,
+            Encoding? contentEncoding,
+            string? mediaType
+        )
         {
             Attachment a = new Attachment();
             a.SetContentFromString(content, contentEncoding, mediaType);

@@ -13,7 +13,6 @@ namespace System.Diagnostics.Metrics
 
     internal partial struct StringSequence1 : IEquatable<StringSequence1>, IStringSequence
     {
-
         public Span<string> AsSpan()
         {
             return MemoryMarshal.CreateSpan(ref Value1, 1);

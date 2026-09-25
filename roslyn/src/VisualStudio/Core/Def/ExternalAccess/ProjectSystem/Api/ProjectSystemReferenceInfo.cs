@@ -24,7 +24,11 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.ProjectSystem.A
         /// </summary>
         public bool TreatAsUsed { get; }
 
-        public ProjectSystemReferenceInfo(ProjectSystemReferenceType referenceType, string itemSpecification, bool treatAsUsed)
+        public ProjectSystemReferenceInfo(
+            ProjectSystemReferenceType referenceType,
+            string itemSpecification,
+            bool treatAsUsed
+        )
         {
             ReferenceType = referenceType;
             ItemSpecification = itemSpecification;

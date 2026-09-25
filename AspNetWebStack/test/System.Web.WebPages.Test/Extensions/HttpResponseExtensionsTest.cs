@@ -26,8 +26,12 @@ namespace Microsoft.WebPages.Test.Helpers
             Mock<HttpResponseBase> mockResponse = new Mock<HttpResponseBase>();
             mockResponse.SetupProperty(response => response.StatusCode);
             mockResponse.SetupProperty(response => response.ContentType);
-            mockResponse.Setup(response => response.Redirect(It.IsAny<string>())).Callback((string url) => _redirectUrl = url);
-            mockResponse.Setup(response => response.Write(It.IsAny<string>())).Callback((string str) => _output.Append(str));
+            mockResponse
+                .Setup(response => response.Redirect(It.IsAny<string>()))
+                .Callback((string url) => _redirectUrl = url);
+            mockResponse
+                .Setup(response => response.Write(It.IsAny<string>()))
+                .Callback((string str) => _output.Append(str));
             mockResponse.Setup(response => response.OutputStream).Returns(_outputStream);
             mockResponse.Setup(response => response.OutputStream).Returns(_outputStream);
             mockResponse.Setup(response => response.Output).Returns(new StringWriter(_output));
@@ -84,15 +88,32 @@ namespace Microsoft.WebPages.Test.Helpers
             var response = new Mock<HttpResponseBase>().Object;
 
             var cache = new Mock<HttpCachePolicyBase>();
-            cache.Setup(c => c.SetCacheability(It.Is<HttpCacheability>(p => p == HttpCacheability.Public))).Verifiable();
-            cache.Setup(c => c.SetExpires(It.Is<DateTime>(p => p == timestamp.AddSeconds(20)))).Verifiable();
-            cache.Setup(c => c.SetMaxAge(It.Is<TimeSpan>(p => p == TimeSpan.FromSeconds(20)))).Verifiable();
+            cache
+                .Setup(c =>
+                    c.SetCacheability(It.Is<HttpCacheability>(p => p == HttpCacheability.Public))
+                )
+                .Verifiable();
+            cache
+                .Setup(c => c.SetExpires(It.Is<DateTime>(p => p == timestamp.AddSeconds(20))))
+                .Verifiable();
+            cache
+                .Setup(c => c.SetMaxAge(It.Is<TimeSpan>(p => p == TimeSpan.FromSeconds(20))))
+                .Verifiable();
             cache.Setup(c => c.SetValidUntilExpires(It.Is<bool>(p => p == true))).Verifiable();
             cache.Setup(c => c.SetLastModified(It.Is<DateTime>(p => p == timestamp))).Verifiable();
             cache.Setup(c => c.SetSlidingExpiration(It.Is<bool>(p => p == false))).Verifiable();
 
             // Act
-            ResponseExtensions.OutputCache(context.Object, cache.Object, 20, false, null, null, null, HttpCacheability.Public);
+            ResponseExtensions.OutputCache(
+                context.Object,
+                cache.Object,
+                20,
+                false,
+                null,
+                null,
+                null,
+                HttpCacheability.Public
+            );
 
             // Assert
             cache.VerifyAll();
@@ -117,8 +138,16 @@ namespace Microsoft.WebPages.Test.Helpers
             cache.SetupGet(c => c.VaryByContentEncodings).Returns(varyByContentEncoding);
 
             // Act
-            ResponseExtensions.OutputCache(context.Object, cache.Object, 20, false, new[] { "foo" }, new[] { "bar", "bar2" },
-                                           new[] { "baz", "baz2" }, HttpCacheability.Public);
+            ResponseExtensions.OutputCache(
+                context.Object,
+                cache.Object,
+                20,
+                false,
+                new[] { "foo" },
+                new[] { "bar", "bar2" },
+                new[] { "baz", "baz2" },
+                HttpCacheability.Public
+            );
 
             // Assert
             Assert.True(varyByParams["foo"]);

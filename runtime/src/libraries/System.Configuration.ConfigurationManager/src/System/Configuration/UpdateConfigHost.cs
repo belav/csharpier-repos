@@ -26,15 +26,21 @@ namespace System.Configuration
         //  alwaysIntercept -   If true, then don't check whether the old stream and the new stream are the same.
         //                      SaveAs() will set this to true if oldStreamname is actually referring to a stream
         //                      on a remote machine.
-        internal void AddStreamname(string oldStreamname, string newStreamname, bool alwaysIntercept)
+        internal void AddStreamname(
+            string oldStreamname,
+            string newStreamname,
+            bool alwaysIntercept
+        )
         {
             // After reviewing all the code paths, oldStreamname shouldn't be Null or Empty.
             // It actually doesn't make much sense if we're asked to intercept an null or empty stream.
             Debug.Assert(!string.IsNullOrEmpty(oldStreamname));
 
-            if (string.IsNullOrEmpty(oldStreamname)) return;
+            if (string.IsNullOrEmpty(oldStreamname))
+                return;
 
-            if (!alwaysIntercept && StringUtil.EqualsIgnoreCase(oldStreamname, newStreamname)) return;
+            if (!alwaysIntercept && StringUtil.EqualsIgnoreCase(oldStreamname, newStreamname))
+                return;
 
             _streams ??= new HybridDictionary(true);
 
@@ -60,7 +66,8 @@ namespace System.Configuration
                 return null;
 
             StreamUpdate streamUpdate = (StreamUpdate)_streams[oldStreamname];
-            if ((streamUpdate != null) && !alwaysIntercept && !streamUpdate.WriteCompleted) streamUpdate = null;
+            if ((streamUpdate != null) && !alwaysIntercept && !streamUpdate.WriteCompleted)
+                streamUpdate = null;
 
             return streamUpdate;
         }
@@ -81,14 +88,21 @@ namespace System.Configuration
                 : Host.OpenStreamForRead(streamName);
         }
 
-        public override Stream OpenStreamForWrite(string streamName, string templateStreamName, ref object writeContext)
+        public override Stream OpenStreamForWrite(
+            string streamName,
+            string templateStreamName,
+            ref object writeContext
+        )
         {
             // Always attempt to write to the new stream name if it exists.
             StreamUpdate streamUpdate = GetStreamUpdate(streamName, true);
             if (streamUpdate != null)
             {
                 return InternalConfigHost.StaticOpenStreamForWrite(
-                    streamUpdate.NewStreamname, templateStreamName, ref writeContext);
+                    streamUpdate.NewStreamname,
+                    templateStreamName,
+                    ref writeContext
+                );
             }
             return Host.OpenStreamForWrite(streamName, templateStreamName, ref writeContext);
         }
@@ -98,11 +112,16 @@ namespace System.Configuration
             StreamUpdate streamUpdate = GetStreamUpdate(streamName, true);
             if (streamUpdate != null)
             {
-                InternalConfigHost.StaticWriteCompleted(streamUpdate.NewStreamname, success, writeContext);
+                InternalConfigHost.StaticWriteCompleted(
+                    streamUpdate.NewStreamname,
+                    success,
+                    writeContext
+                );
 
                 // Mark the write as having successfully completed, so that subsequent calls
                 // to Read() will use the new stream name.
-                if (success) streamUpdate.WriteCompleted = true;
+                if (success)
+                    streamUpdate.WriteCompleted = true;
             }
             else
             {
@@ -118,8 +137,10 @@ namespace System.Configuration
         public override void DeleteStream(string streamName)
         {
             StreamUpdate streamUpdate = GetStreamUpdate(streamName, false);
-            if (streamUpdate != null) InternalConfigHost.StaticDeleteStream(streamUpdate.NewStreamname);
-            else Host.DeleteStream(streamName);
+            if (streamUpdate != null)
+                InternalConfigHost.StaticDeleteStream(streamUpdate.NewStreamname);
+            else
+                Host.DeleteStream(streamName);
         }
 
         public override bool IsFile(string streamName)

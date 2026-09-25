@@ -42,7 +42,8 @@ namespace System.Security.Cryptography
         /// <value>
         /// <see langword="true" /> if the algorithm is supported; otherwise, <see langword="false" />.
         /// </value>
-        public static bool IsSupported { get; } = HashProviderDispenser.HashSupported(HashAlgorithmNames.SHA3_384);
+        public static bool IsSupported { get; } =
+            HashProviderDispenser.HashSupported(HashAlgorithmNames.SHA3_384);
 
         /// <summary>
         /// Creates an instance of the default implementation of <see cref="SHA3_384" />.
@@ -116,7 +117,6 @@ namespace System.Security.Cryptography
             return bytesWritten;
         }
 
-
         /// <summary>
         /// Attempts to compute the hash of data using the SHA3-384 algorithm.
         /// </summary>
@@ -132,7 +132,11 @@ namespace System.Security.Cryptography
         /// <exception cref="PlatformNotSupportedException">
         /// The platform does not support SHA3-384.
         /// </exception>
-        public static bool TryHashData(ReadOnlySpan<byte> source, Span<byte> destination, out int bytesWritten)
+        public static bool TryHashData(
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             CheckSha3Support();
 
@@ -142,7 +146,11 @@ namespace System.Security.Cryptography
                 return false;
             }
 
-            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(HashAlgorithmNames.SHA3_384, source, destination);
+            bytesWritten = HashProviderDispenser.OneShotHashProvider.HashData(
+                HashAlgorithmNames.SHA3_384,
+                source,
+                destination
+            );
             Debug.Assert(bytesWritten == HashSizeInBytes);
 
             return true;
@@ -206,7 +214,11 @@ namespace System.Security.Cryptography
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
             CheckSha3Support();
-            return LiteHashProvider.HashStream(HashAlgorithmNames.SHA3_384, HashSizeInBytes, source);
+            return LiteHashProvider.HashStream(
+                HashAlgorithmNames.SHA3_384,
+                HashSizeInBytes,
+                source
+            );
         }
 
         /// <summary>
@@ -227,7 +239,10 @@ namespace System.Security.Cryptography
         /// <exception cref="PlatformNotSupportedException">
         /// The platform does not support SHA3-384.
         /// </exception>
-        public static ValueTask<byte[]> HashDataAsync(Stream source, CancellationToken cancellationToken = default)
+        public static ValueTask<byte[]> HashDataAsync(
+            Stream source,
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -235,7 +250,11 @@ namespace System.Security.Cryptography
                 throw new ArgumentException(SR.Argument_StreamNotReadable, nameof(source));
 
             CheckSha3Support();
-            return LiteHashProvider.HashStreamAsync(HashAlgorithmNames.SHA3_384, source, cancellationToken);
+            return LiteHashProvider.HashStreamAsync(
+                HashAlgorithmNames.SHA3_384,
+                source,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -267,7 +286,8 @@ namespace System.Security.Cryptography
         public static ValueTask<int> HashDataAsync(
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             ArgumentNullException.ThrowIfNull(source);
 
@@ -282,7 +302,8 @@ namespace System.Security.Cryptography
                 HashAlgorithmNames.SHA3_384,
                 source,
                 destination,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         private static void CheckSha3Support()
@@ -297,7 +318,9 @@ namespace System.Security.Cryptography
 
             public Implementation()
             {
-                _hashProvider = HashProviderDispenser.CreateHashProvider(HashAlgorithmNames.SHA3_384);
+                _hashProvider = HashProviderDispenser.CreateHashProvider(
+                    HashAlgorithmNames.SHA3_384
+                );
                 HashSizeValue = _hashProvider.HashSizeInBytes * 8;
             }
 
@@ -307,11 +330,12 @@ namespace System.Security.Cryptography
             protected sealed override void HashCore(ReadOnlySpan<byte> source) =>
                 _hashProvider.AppendHashData(source);
 
-            protected sealed override byte[] HashFinal() =>
-                _hashProvider.FinalizeHashAndReset();
+            protected sealed override byte[] HashFinal() => _hashProvider.FinalizeHashAndReset();
 
-            protected sealed override bool TryHashFinal(Span<byte> destination, out int bytesWritten) =>
-                _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
+            protected sealed override bool TryHashFinal(
+                Span<byte> destination,
+                out int bytesWritten
+            ) => _hashProvider.TryFinalizeHashAndReset(destination, out bytesWritten);
 
             public sealed override void Initialize() => _hashProvider.Reset();
 

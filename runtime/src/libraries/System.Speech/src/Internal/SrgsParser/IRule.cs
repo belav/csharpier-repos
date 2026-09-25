@@ -16,14 +16,14 @@ namespace System.Speech.Internal.SrgsParser
     {
         True,
         False,
-        NotSet
+        NotSet,
     };
 
     internal enum RulePublic
     {
         True,
         False,
-        NotSet
+        NotSet,
     };
 
     #endregion

@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,42 +14,38 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	using System;
+    using System;
 
-	public class ClassWithConstructors
-	{
-		private readonly string name;
-		private readonly int x;
+    public class ClassWithConstructors
+    {
+        private readonly string name;
+        private readonly int x;
 
-		public ClassWithConstructors(string name)
-		{
-			this.name = name;
-		}
+        public ClassWithConstructors(string name)
+        {
+            this.name = name;
+        }
 
-		public ClassWithConstructors(string name, int x)
-		{
-			this.name = name;
-			this.x = x;
-		}
+        public ClassWithConstructors(string name, int x)
+        {
+            this.name = name;
+            this.x = x;
+        }
 
-		protected ClassWithConstructors(double name)
-			: this(name.ToString())
-		{
-		}
+        protected ClassWithConstructors(double name)
+            : this(name.ToString()) { }
 
-		protected internal ClassWithConstructors(double name, double x)
-			: this(name.ToString(), (int) x)
-		{
-		}
+        protected internal ClassWithConstructors(double name, double x)
+            : this(name.ToString(), (int)x) { }
 
-		public string Name
-		{
-			get { return name; }
-		}
+        public string Name
+        {
+            get { return name; }
+        }
 
-		public int X
-		{
-			get { return x; }
-		}
-	}
+        public int X
+        {
+            get { return x; }
+        }
+    }
 }

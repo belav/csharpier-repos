@@ -9,7 +9,10 @@ namespace System.CodeDom
 
         public CodeObjectCreateExpression() { }
 
-        public CodeObjectCreateExpression(CodeTypeReference createType, params CodeExpression[] parameters)
+        public CodeObjectCreateExpression(
+            CodeTypeReference createType,
+            params CodeExpression[] parameters
+        )
         {
             CreateType = createType;
             Parameters.AddRange(parameters);

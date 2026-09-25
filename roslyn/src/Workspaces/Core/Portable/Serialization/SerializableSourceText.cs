@@ -45,14 +45,10 @@ namespace Microsoft.CodeAnalysis.Serialization
         private readonly WeakReference<SourceText?> _computedText = new(target: null);
 
         public SerializableSourceText(ITemporaryTextStorageWithName storage)
-            : this(storage, text: null)
-        {
-        }
+            : this(storage, text: null) { }
 
         public SerializableSourceText(SourceText text)
-            : this(storage: null, text)
-        {
-        }
+            : this(storage: null, text) { }
 
         private SerializableSourceText(ITemporaryTextStorageWithName? storage, SourceText? text)
         {
@@ -67,8 +63,7 @@ namespace Microsoft.CodeAnalysis.Serialization
         /// it's still being held there.
         /// </summary>
         /// <returns></returns>
-        private SourceText? TryGetText()
-            => _text ?? _computedText.GetTarget();
+        private SourceText? TryGetText() => _text ?? _computedText.GetTarget();
 
         public ImmutableArray<byte> GetContentHash()
         {
@@ -99,7 +94,10 @@ namespace Microsoft.CodeAnalysis.Serialization
             return text;
         }
 
-        public static ValueTask<SerializableSourceText> FromTextDocumentStateAsync(TextDocumentState state, CancellationToken cancellationToken)
+        public static ValueTask<SerializableSourceText> FromTextDocumentStateAsync(
+            TextDocumentState state,
+            CancellationToken cancellationToken
+        )
         {
             if (state.Storage is ITemporaryTextStorageWithName storage)
             {
@@ -111,11 +109,16 @@ namespace Microsoft.CodeAnalysis.Serialization
                     static (state, cancellationToken) => state.GetTextAsync(cancellationToken),
                     static (text, _) => new SerializableSourceText(text),
                     state,
-                    cancellationToken);
+                    cancellationToken
+                );
             }
         }
 
-        public void Serialize(ObjectWriter writer, SolutionReplicationContext context, CancellationToken cancellationToken)
+        public void Serialize(
+            ObjectWriter writer,
+            SolutionReplicationContext context,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             if (_storage is not null)
@@ -145,7 +148,8 @@ namespace Microsoft.CodeAnalysis.Serialization
             ObjectReader reader,
             ITemporaryStorageServiceInternal storageService,
             ITextFactoryService textService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -161,7 +165,13 @@ namespace Microsoft.CodeAnalysis.Serialization
                 var offset = reader.ReadInt64();
                 var size = reader.ReadInt64();
 
-                var storage = storage2.AttachTemporaryTextStorage(name, offset, size, checksumAlgorithm, encoding);
+                var storage = storage2.AttachTemporaryTextStorage(
+                    name,
+                    offset,
+                    size,
+                    checksumAlgorithm,
+                    encoding
+                );
                 if (storage is ITemporaryTextStorageWithName storageWithName)
                 {
                     return new SerializableSourceText(storageWithName);
@@ -173,7 +183,15 @@ namespace Microsoft.CodeAnalysis.Serialization
             }
 
             Contract.ThrowIfFalse(kind == SerializationKinds.Bits);
-            return new SerializableSourceText(SourceTextExtensions.ReadFrom(textService, reader, encoding, checksumAlgorithm, cancellationToken));
+            return new SerializableSourceText(
+                SourceTextExtensions.ReadFrom(
+                    textService,
+                    reader,
+                    encoding,
+                    checksumAlgorithm,
+                    cancellationToken
+                )
+            );
         }
     }
 }

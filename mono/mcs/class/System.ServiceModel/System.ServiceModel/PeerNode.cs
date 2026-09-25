@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,74 +34,80 @@ using System.ServiceModel.Channels;
 
 namespace System.ServiceModel
 {
-	public abstract class PeerNode : IOnlineStatus
-	{
-		internal PeerNode (string meshId, int port)
-		{
-			MeshId = meshId;
-			Port = port;
-		}
+    public abstract class PeerNode : IOnlineStatus
+    {
+        internal PeerNode(string meshId, int port)
+        {
+            MeshId = meshId;
+            Port = port;
+        }
 
-		public event EventHandler Offline;
-		public event EventHandler Online;
+        public event EventHandler Offline;
+        public event EventHandler Online;
 
-		public bool IsOnline { get; internal set; }
+        public bool IsOnline { get; internal set; }
 
-		internal string MeshId { get; private set; }
+        internal string MeshId { get; private set; }
 
-		internal ulong NodeId { get; set; }
+        internal ulong NodeId { get; set; }
 
-		internal bool IsOpen {
-			get { return RegisteredId != null; }
-		}
+        internal bool IsOpen
+        {
+            get { return RegisteredId != null; }
+        }
 
-		internal object RegisteredId { get; set; }
+        internal object RegisteredId { get; set; }
 
-		public int Port { get; private set; }
+        public int Port { get; private set; }
 
-		public abstract PeerMessagePropagationFilter MessagePropagationFilter { get; set; }
+        public abstract PeerMessagePropagationFilter MessagePropagationFilter { get; set; }
 
-		public void RefreshConnection ()
-		{
-		}
+        public void RefreshConnection() { }
 
-		public override string ToString ()
-		{
-			return String.Format ("MeshId: {0}, Node ID: {1}, Online: {2}, Opened:{3}, Port: {4}", MeshId, NodeId, IsOnline, IsOpen, Port);
-		}
+        public override string ToString()
+        {
+            return String.Format(
+                "MeshId: {0}, Node ID: {1}, Online: {2}, Opened:{3}, Port: {4}",
+                MeshId,
+                NodeId,
+                IsOnline,
+                IsOpen,
+                Port
+            );
+        }
 
-		internal void SetOnline ()
-		{
-			IsOnline = true;
-			if (Online != null)
-				Online (this, EventArgs.Empty);
-		}
+        internal void SetOnline()
+        {
+            IsOnline = true;
+            if (Online != null)
+                Online(this, EventArgs.Empty);
+        }
 
-		internal void SetOffline ()
-		{
-			IsOnline = false;
-			if (Offline != null)
-				Offline (this, EventArgs.Empty);
-		}
-	}
+        internal void SetOffline()
+        {
+            IsOnline = false;
+            if (Offline != null)
+                Offline(this, EventArgs.Empty);
+        }
+    }
 
-	internal class PeerNodeImpl : PeerNode
-	{
-		class NodeInfo
-		{
-			public int Id { get; set; }
-			public PeerNodeAddress Address { get; set; }
-		}
+    internal class PeerNodeImpl : PeerNode
+    {
+        class NodeInfo
+        {
+            public int Id { get; set; }
+            public PeerNodeAddress Address { get; set; }
+        }
 
-		internal PeerNodeImpl (string meshId, IPAddress fixedListenAddress, int port)
-			: base (meshId, port)
-		{
-			this.listen_address = fixedListenAddress ?? IPAddress.Any;
-		}
+        internal PeerNodeImpl(string meshId, IPAddress fixedListenAddress, int port)
+            : base(meshId, port)
+        {
+            this.listen_address = fixedListenAddress ?? IPAddress.Any;
+        }
 
-		IPAddress listen_address;
+        IPAddress listen_address;
 
-		// FIXME: implement
-		public override PeerMessagePropagationFilter MessagePropagationFilter { get; set; }
-	}
+        // FIXME: implement
+        public override PeerMessagePropagationFilter MessagePropagationFilter { get; set; }
+    }
 }

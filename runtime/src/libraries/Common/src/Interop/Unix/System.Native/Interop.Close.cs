@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_Close", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_Close",
+            SetLastError = true
+        )]
         internal static partial int Close(IntPtr fd);
     }
 }

@@ -25,56 +25,87 @@ namespace Microsoft.CodeAnalysis.CSharp.BraceCompletion
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public BracketBraceCompletionService()
-        {
-        }
+        public BracketBraceCompletionService() { }
 
         protected override char OpeningBrace => Bracket.OpenCharacter;
 
         protected override char ClosingBrace => Bracket.CloseCharacter;
 
-        public override bool AllowOverType(BraceCompletionContext context, CancellationToken cancellationToken)
-            => AllowOverTypeInUserCodeWithValidClosingToken(context, cancellationToken);
+        public override bool AllowOverType(
+            BraceCompletionContext context,
+            CancellationToken cancellationToken
+        ) => AllowOverTypeInUserCodeWithValidClosingToken(context, cancellationToken);
 
-        protected override bool IsValidOpeningBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.OpenBracketToken);
+        protected override bool IsValidOpeningBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.OpenBracketToken);
 
-        protected override bool IsValidClosingBraceToken(SyntaxToken token) => token.IsKind(SyntaxKind.CloseBracketToken);
+        protected override bool IsValidClosingBraceToken(SyntaxToken token) =>
+            token.IsKind(SyntaxKind.CloseBracketToken);
 
-        protected override int AdjustFormattingEndPoint(ParsedDocument document, int startPoint, int endPoint)
-            => endPoint;
+        protected override int AdjustFormattingEndPoint(
+            ParsedDocument document,
+            int startPoint,
+            int endPoint
+        ) => endPoint;
 
-        protected override ImmutableArray<AbstractFormattingRule> GetBraceFormattingIndentationRulesAfterReturn(IndentationOptions options)
+        protected override ImmutableArray<AbstractFormattingRule> GetBraceFormattingIndentationRulesAfterReturn(
+            IndentationOptions options
+        )
         {
             return ImmutableArray.Create(BracketCompletionFormattingRule.Instance);
         }
 
         private sealed class BracketCompletionFormattingRule : BaseFormattingRule
         {
-            public static readonly AbstractFormattingRule Instance = new BracketCompletionFormattingRule();
+            public static readonly AbstractFormattingRule Instance =
+                new BracketCompletionFormattingRule();
 
-            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(in SyntaxToken previousToken, in SyntaxToken currentToken, in NextGetAdjustNewLinesOperation nextOperation)
+            public override AdjustNewLinesOperation? GetAdjustNewLinesOperation(
+                in SyntaxToken previousToken,
+                in SyntaxToken currentToken,
+                in NextGetAdjustNewLinesOperation nextOperation
+            )
             {
-                if (currentToken.IsKind(SyntaxKind.OpenBracketToken) && currentToken.Parent.IsKind(SyntaxKind.ListPattern))
+                if (
+                    currentToken.IsKind(SyntaxKind.OpenBracketToken)
+                    && currentToken.Parent.IsKind(SyntaxKind.ListPattern)
+                )
                 {
                     // For list patterns we format brackets as though they are a block, so when formatting after Return
                     // we add a newline
                     return CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.PreserveLines);
                 }
 
-                return base.GetAdjustNewLinesOperation(in previousToken, in currentToken, in nextOperation);
+                return base.GetAdjustNewLinesOperation(
+                    in previousToken,
+                    in currentToken,
+                    in nextOperation
+                );
             }
 
-            public override void AddAlignTokensOperations(List<AlignTokensOperation> list, SyntaxNode node, in NextAlignTokensOperationAction nextOperation)
+            public override void AddAlignTokensOperations(
+                List<AlignTokensOperation> list,
+                SyntaxNode node,
+                in NextAlignTokensOperationAction nextOperation
+            )
             {
                 base.AddAlignTokensOperations(list, node, in nextOperation);
 
                 var bracketPair = node.GetBracketPair();
-                if (bracketPair.IsValidBracketOrBracePair() && node is ListPatternSyntax or CollectionExpressionSyntax)
+                if (
+                    bracketPair.IsValidBracketOrBracePair()
+                    && node is ListPatternSyntax or CollectionExpressionSyntax
+                )
                 {
                     // For list patterns we format brackets as though they are a block, so ensure the close bracket
                     // is aligned with the open bracket
-                    AddAlignIndentationOfTokensToBaseTokenOperation(list, node, bracketPair.openBracket,
-                        SpecializedCollections.SingletonEnumerable(bracketPair.closeBracket), AlignTokensOption.AlignIndentationOfTokensToFirstTokenOfBaseTokenLine);
+                    AddAlignIndentationOfTokensToBaseTokenOperation(
+                        list,
+                        node,
+                        bracketPair.openBracket,
+                        SpecializedCollections.SingletonEnumerable(bracketPair.closeBracket),
+                        AlignTokensOption.AlignIndentationOfTokensToFirstTokenOfBaseTokenLine
+                    );
                 }
             }
         }

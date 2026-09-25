@@ -14,93 +14,96 @@ using System.Threading;
 
 namespace System.Transactions
 {
-	[Serializable]
-	public sealed class CommittableTransaction : Transaction,
-		ISerializable, IDisposable, System.IAsyncResult
-	{
-		TransactionOptions options;
+    [Serializable]
+    public sealed class CommittableTransaction
+        : Transaction,
+            ISerializable,
+            IDisposable,
+            System.IAsyncResult
+    {
+        TransactionOptions options;
 
-		AsyncCallback callback;
-		object user_defined_state;
+        AsyncCallback callback;
+        object user_defined_state;
 
-		IAsyncResult asyncResult;
+        IAsyncResult asyncResult;
 
-		public CommittableTransaction ()
-			: this (new TransactionOptions ())
-		{
-		}
+        public CommittableTransaction()
+            : this(new TransactionOptions()) { }
 
-		public CommittableTransaction (TimeSpan timeout)
-			: base (IsolationLevel.Serializable)
-		{
-			options = new TransactionOptions ();
-			options.Timeout = timeout;
-		}
+        public CommittableTransaction(TimeSpan timeout)
+            : base(IsolationLevel.Serializable)
+        {
+            options = new TransactionOptions();
+            options.Timeout = timeout;
+        }
 
-		public CommittableTransaction (TransactionOptions options)
-			: base (options.IsolationLevel)
-		{
-			this.options = options;
-		}
+        public CommittableTransaction(TransactionOptions options)
+            : base(options.IsolationLevel)
+        {
+            this.options = options;
+        }
 
-		public IAsyncResult BeginCommit (AsyncCallback asyncCallback,
-			object asyncState)
-		{
-			this.callback = asyncCallback;
-			this.user_defined_state = asyncState;
+        public IAsyncResult BeginCommit(AsyncCallback asyncCallback, object asyncState)
+        {
+            this.callback = asyncCallback;
+            this.user_defined_state = asyncState;
 
-			AsyncCallback cb = null;
-			if (asyncCallback != null)
-				cb = new AsyncCallback (CommitCallback);
+            AsyncCallback cb = null;
+            if (asyncCallback != null)
+                cb = new AsyncCallback(CommitCallback);
 
-			asyncResult = BeginCommitInternal (cb);
-			return this;
-		}
-		
-		public void EndCommit (IAsyncResult asyncResult)
-		{
-			if (asyncResult != this)
-				throw new ArgumentException ("The IAsyncResult parameter must be the same parameter as returned by BeginCommit.", "asyncResult");
+            asyncResult = BeginCommitInternal(cb);
+            return this;
+        }
 
-			EndCommitInternal (this.asyncResult);
-		}
+        public void EndCommit(IAsyncResult asyncResult)
+        {
+            if (asyncResult != this)
+                throw new ArgumentException(
+                    "The IAsyncResult parameter must be the same parameter as returned by BeginCommit.",
+                    "asyncResult"
+                );
 
-		private void CommitCallback (IAsyncResult ar)
-		{
-			if (asyncResult == null && ar.CompletedSynchronously)
-				asyncResult = ar;
-			callback (this);
-		}
+            EndCommitInternal(this.asyncResult);
+        }
 
-		public void Commit ()
-		{
-			CommitInternal ();
-		}
-		
-		[MonoTODO ("Not implemented")]
-		void ISerializable.GetObjectData (SerializationInfo info,
-			StreamingContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        private void CommitCallback(IAsyncResult ar)
+        {
+            if (asyncResult == null && ar.CompletedSynchronously)
+                asyncResult = ar;
+            callback(this);
+        }
 
-		object IAsyncResult.AsyncState {
-			get { return user_defined_state; }
-		}
+        public void Commit()
+        {
+            CommitInternal();
+        }
 
-		WaitHandle IAsyncResult.AsyncWaitHandle {
-			get { return asyncResult.AsyncWaitHandle; }
-		}
+        [MonoTODO("Not implemented")]
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
 
-		bool IAsyncResult.CompletedSynchronously {
-			get { return asyncResult.CompletedSynchronously; }
-		}
+        object IAsyncResult.AsyncState
+        {
+            get { return user_defined_state; }
+        }
 
-		bool IAsyncResult.IsCompleted {
-			get { return asyncResult.IsCompleted; }
-		}
+        WaitHandle IAsyncResult.AsyncWaitHandle
+        {
+            get { return asyncResult.AsyncWaitHandle; }
+        }
 
+        bool IAsyncResult.CompletedSynchronously
+        {
+            get { return asyncResult.CompletedSynchronously; }
+        }
 
-	}
+        bool IAsyncResult.IsCompleted
+        {
+            get { return asyncResult.IsCompleted; }
+        }
+    }
 }
-

@@ -17,7 +17,7 @@ namespace System.Reflection.Metadata.Ecma335
         RedirectedToClrAttribute = 6,
 
         MarkAbstractFlag = 0x10,
-        MarkInternalFlag = 0x20
+        MarkInternalFlag = 0x20,
     }
 
     internal enum TypeRefTreatment : byte

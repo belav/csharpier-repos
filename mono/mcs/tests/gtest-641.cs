@@ -4,8 +4,8 @@ using System;
 
 class SomeClass
 {
-	public static void Main ()
-	{
-		IEquatable<Foo<int>.Bar.FooBar> a = new Foo<int>.Bar.FooBar ();
-	}
+    public static void Main()
+    {
+        IEquatable<Foo<int>.Bar.FooBar> a = new Foo<int>.Bar.FooBar();
+    }
 }

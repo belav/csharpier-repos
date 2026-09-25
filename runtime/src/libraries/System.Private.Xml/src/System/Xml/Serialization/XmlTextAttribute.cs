@@ -9,7 +9,12 @@ namespace System.Xml.Serialization
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Parameter | AttributeTargets.ReturnValue)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Parameter
+            | AttributeTargets.ReturnValue
+    )]
     public class XmlTextAttribute : System.Attribute
     {
         private Type? _type;
@@ -18,9 +23,7 @@ namespace System.Xml.Serialization
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlTextAttribute()
-        {
-        }
+        public XmlTextAttribute() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>

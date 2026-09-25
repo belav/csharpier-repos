@@ -57,7 +57,7 @@ namespace System.Runtime.CompilerServices
 
             return obj;
 
-        slowPath:
+            slowPath:
             // fall through to the slow helper
             return IsInstanceOfAny_NoCacheLookup(toTypeHnd, obj);
         }
@@ -85,10 +85,12 @@ namespace System.Runtime.CompilerServices
 
                     do
                     {
-                        if (interfaceMap[0] == toTypeHnd ||
-                            interfaceMap[1] == toTypeHnd ||
-                            interfaceMap[2] == toTypeHnd ||
-                            interfaceMap[3] == toTypeHnd)
+                        if (
+                            interfaceMap[0] == toTypeHnd
+                            || interfaceMap[1] == toTypeHnd
+                            || interfaceMap[2] == toTypeHnd
+                            || interfaceMap[3] == toTypeHnd
+                        )
                         {
                             goto done;
                         }
@@ -103,7 +105,7 @@ namespace System.Runtime.CompilerServices
                         goto extra;
                     }
 
-                few:
+                    few:
                     do
                     {
                         if (interfaceMap[0] == toTypeHnd)
@@ -117,7 +119,7 @@ namespace System.Runtime.CompilerServices
                     } while (interfaceCount > 0);
                 }
 
-            extra:
+                extra:
                 if (mt->NonTrivialInterfaceCast)
                 {
                     goto slowPath;
@@ -126,10 +128,10 @@ namespace System.Runtime.CompilerServices
                 obj = null;
             }
 
-        done:
+            done:
             return obj;
 
-        slowPath:
+            slowPath:
             return IsInstance_Helper(toTypeHnd, obj);
         }
 
@@ -179,7 +181,7 @@ namespace System.Runtime.CompilerServices
 
             obj = null;
 
-        done:
+            done:
             return obj;
         }
 
@@ -189,7 +191,11 @@ namespace System.Runtime.CompilerServices
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static object? IsInstance_Helper(void* toTypeHnd, object obj)
         {
-            CastResult result = CastCache.TryGet(s_table!, (nuint)RuntimeHelpers.GetMethodTable(obj), (nuint)toTypeHnd);
+            CastResult result = CastCache.TryGet(
+                s_table!,
+                (nuint)RuntimeHelpers.GetMethodTable(obj),
+                (nuint)toTypeHnd
+            );
             if (result == CastResult.CanCast)
             {
                 return obj;
@@ -228,7 +234,7 @@ namespace System.Runtime.CompilerServices
 
             return obj;
 
-        slowPath:
+            slowPath:
             // fall through to the slow helper
             object objRet = ChkCastAny_NoCacheLookup(toTypeHnd, obj);
             // Make sure that the fast helper have not lied
@@ -242,7 +248,11 @@ namespace System.Runtime.CompilerServices
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static object? ChkCast_Helper(void* toTypeHnd, object obj)
         {
-            CastResult result = CastCache.TryGet(s_table!, (nuint)RuntimeHelpers.GetMethodTable(obj), (nuint)toTypeHnd);
+            CastResult result = CastCache.TryGet(
+                s_table!,
+                (nuint)RuntimeHelpers.GetMethodTable(obj),
+                (nuint)toTypeHnd
+            );
             if (result == CastResult.CanCast)
             {
                 return obj;
@@ -278,10 +288,12 @@ namespace System.Runtime.CompilerServices
 
                 do
                 {
-                    if (interfaceMap[0] == toTypeHnd ||
-                        interfaceMap[1] == toTypeHnd ||
-                        interfaceMap[2] == toTypeHnd ||
-                        interfaceMap[3] == toTypeHnd)
+                    if (
+                        interfaceMap[0] == toTypeHnd
+                        || interfaceMap[1] == toTypeHnd
+                        || interfaceMap[2] == toTypeHnd
+                        || interfaceMap[3] == toTypeHnd
+                    )
                     {
                         goto done;
                     }
@@ -297,7 +309,7 @@ namespace System.Runtime.CompilerServices
                     goto slowPath;
                 }
 
-            few:
+                few:
                 do
                 {
                     if (interfaceMap[0] == toTypeHnd)
@@ -313,10 +325,10 @@ namespace System.Runtime.CompilerServices
                 goto slowPath;
             }
 
-        done:
+            done:
             return obj;
 
-        slowPath:
+            slowPath:
             return ChkCast_Helper(toTypeHnd, obj);
         }
 
@@ -341,7 +353,10 @@ namespace System.Runtime.CompilerServices
         private static object? ChkCastClassSpecial(void* toTypeHnd, object obj)
         {
             MethodTable* mt = RuntimeHelpers.GetMethodTable(obj);
-            Debug.Assert(mt != toTypeHnd, "The check for the trivial cases should be inlined by the JIT");
+            Debug.Assert(
+                mt != toTypeHnd,
+                "The check for the trivial cases should be inlined by the JIT"
+            );
 
             for (; ; )
             {
@@ -376,10 +391,10 @@ namespace System.Runtime.CompilerServices
 
             goto slowPath;
 
-        done:
+            done:
             return obj;
 
-        slowPath:
+            slowPath:
             return ChkCast_Helper(toTypeHnd, obj);
         }
 
@@ -439,16 +454,16 @@ namespace System.Runtime.CompilerServices
                 goto notExactMatch;
 
             doWrite:
-                WriteBarrier(ref element, obj);
-                return;
+            WriteBarrier(ref element, obj);
+            return;
 
             assigningNull:
-                element = null;
-                return;
+            element = null;
+            return;
 
             notExactMatch:
-                if (array.GetType() == typeof(object[]))
-                    goto doWrite;
+            if (array.GetType() == typeof(object[]))
+                goto doWrite;
 
             StelemRef_Helper(ref element, elementType, obj);
         }
@@ -459,7 +474,11 @@ namespace System.Runtime.CompilerServices
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void StelemRef_Helper(ref object? element, void* elementType, object obj)
         {
-            CastResult result = CastCache.TryGet(s_table!, (nuint)RuntimeHelpers.GetMethodTable(obj), (nuint)elementType);
+            CastResult result = CastCache.TryGet(
+                s_table!,
+                (nuint)RuntimeHelpers.GetMethodTable(obj),
+                (nuint)elementType
+            );
             if (result == CastResult.CanCast)
             {
                 WriteBarrier(ref element, obj);
@@ -472,7 +491,11 @@ namespace System.Runtime.CompilerServices
         [DebuggerHidden]
         [StackTraceHidden]
         [DebuggerStepThrough]
-        private static void StelemRef_Helper_NoCacheLookup(ref object? element, void* elementType, object obj)
+        private static void StelemRef_Helper_NoCacheLookup(
+            ref object? element,
+            void* elementType,
+            object obj
+        )
         {
             Debug.Assert(obj != null);
 

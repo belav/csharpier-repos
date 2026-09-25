@@ -29,7 +29,12 @@ internal sealed class BuildHost
     private readonly object _gate = new object();
     private ProjectBuildManager? _buildManager;
 
-    public BuildHost(ILoggerFactory loggerFactory, ImmutableDictionary<string, string> globalMSBuildProperties, string? binaryLogPath, RpcServer server)
+    public BuildHost(
+        ILoggerFactory loggerFactory,
+        ImmutableDictionary<string, string> globalMSBuildProperties,
+        string? binaryLogPath,
+        RpcServer server
+    )
     {
         _logger = loggerFactory.CreateLogger<BuildHost>();
         _globalMSBuildProperties = globalMSBuildProperties;
@@ -49,7 +54,6 @@ internal sealed class BuildHost
 
             if (!PlatformInformation.IsRunningOnMono)
             {
-
                 VisualStudioInstance? instance;
 
 #if NETFRAMEWORK
@@ -58,13 +62,20 @@ internal sealed class BuildHost
                 // MSBuild features. Since we don't have something like a global.json we can't really know what the minimum version is.
 
                 // TODO: we should also check that the managed tools are actually installed
-                instance = MSBuildLocator.QueryVisualStudioInstances().OrderByDescending(vs => vs.Version).FirstOrDefault();
+                instance = MSBuildLocator
+                    .QueryVisualStudioInstances()
+                    .OrderByDescending(vs => vs.Version)
+                    .FirstOrDefault();
 
 #else
 
                 // Locate the right SDK for this particular project; MSBuildLocator ensures in this case the first one is the preferred one.
                 // TODO: we should pick the appropriate instance back in the main process and just use the one chosen here.
-                var options = new VisualStudioInstanceQueryOptions { DiscoveryTypes = DiscoveryType.DotNetSdk, WorkingDirectory = Path.GetDirectoryName(projectOrSolutionFilePath) };
+                var options = new VisualStudioInstanceQueryOptions
+                {
+                    DiscoveryTypes = DiscoveryType.DotNetSdk,
+                    WorkingDirectory = Path.GetDirectoryName(projectOrSolutionFilePath),
+                };
                 instance = MSBuildLocator.QueryVisualStudioInstances(options).FirstOrDefault();
 
 #endif
@@ -72,7 +83,9 @@ internal sealed class BuildHost
                 if (instance != null)
                 {
                     MSBuildLocator.RegisterInstance(instance);
-                    _logger.LogInformation($"Registered MSBuild instance at {instance.MSBuildPath}");
+                    _logger.LogInformation(
+                        $"Registered MSBuild instance at {instance.MSBuildPath}"
+                    );
                 }
                 else
                 {
@@ -89,15 +102,21 @@ internal sealed class BuildHost
                 if (monoMSBuildDirectory != null)
                 {
                     MSBuildLocator.RegisterMSBuildPath(monoMSBuildDirectory);
-                    _logger.LogInformation($"Registered MSBuild instance at {monoMSBuildDirectory}");
+                    _logger.LogInformation(
+                        $"Registered MSBuild instance at {monoMSBuildDirectory}"
+                    );
                 }
                 else
                 {
-                    _logger.LogCritical("No Mono MSBuild installation could be found; see https://www.mono-project.com/ for installation instructions.");
+                    _logger.LogCritical(
+                        "No Mono MSBuild installation could be found; see https://www.mono-project.com/ for installation instructions."
+                    );
                 }
 
 #else
-                _logger.LogCritical("Trying to run the .NET Core BuildHost on Mono is unsupported.");
+                _logger.LogCritical(
+                    "Trying to run the .NET Core BuildHost on Mono is unsupported."
+                );
 #endif
             }
 
@@ -134,17 +153,25 @@ internal sealed class BuildHost
 
     private void EnsureMSBuildLoaded(string projectFilePath)
     {
-        Contract.ThrowIfFalse(TryEnsureMSBuildLoaded(projectFilePath), $"We don't have an MSBuild to use; {nameof(HasUsableMSBuild)} should have been called first to check.");
+        Contract.ThrowIfFalse(
+            TryEnsureMSBuildLoaded(projectFilePath),
+            $"We don't have an MSBuild to use; {nameof(HasUsableMSBuild)} should have been called first to check."
+        );
     }
 
-    public ImmutableArray<(string ProjectPath, string ProjectGuid)> GetProjectsInSolution(string solutionFilePath)
+    public ImmutableArray<(string ProjectPath, string ProjectGuid)> GetProjectsInSolution(
+        string solutionFilePath
+    )
     {
         EnsureMSBuildLoaded(solutionFilePath);
         return GetProjectsInSolutionCore(solutionFilePath);
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)] // Do not inline this, since this uses MSBuild types which are being loaded by the caller
-    private static ImmutableArray<(string ProjectPath, string ProjectGuid)> GetProjectsInSolutionCore(string solutionFilePath)
+    private static ImmutableArray<(
+        string ProjectPath,
+        string ProjectGuid
+    )> GetProjectsInSolutionCore(string solutionFilePath)
     {
         // WARNING: do not use a lambda in this function, as it internally will be put in a class that contains other lambdas used in
         // TryEnsureMSBuildLoaded; on Mono this causes type load errors.
@@ -165,7 +192,11 @@ internal sealed class BuildHost
     /// <summary>
     /// Returns the target ID of the <see cref="ProjectFile"/> object created for this.
     /// </summary>
-    public async Task<int> LoadProjectFileAsync(string projectFilePath, string languageName, CancellationToken cancellationToken)
+    public async Task<int> LoadProjectFileAsync(
+        string projectFilePath,
+        string languageName,
+        CancellationToken cancellationToken
+    )
     {
         EnsureMSBuildLoaded(projectFilePath);
         CreateBuildManager();
@@ -174,15 +205,20 @@ internal sealed class BuildHost
         {
             LanguageNames.CSharp => new CSharp.CSharpProjectFileLoader(),
             LanguageNames.VisualBasic => new VisualBasic.VisualBasicProjectFileLoader(),
-            _ => throw ExceptionUtilities.UnexpectedValue(languageName)
+            _ => throw ExceptionUtilities.UnexpectedValue(languageName),
         };
 
         _logger.LogInformation($"Loading {projectFilePath}");
-        var projectFile = await projectLoader.LoadProjectFileAsync(projectFilePath, _buildManager, cancellationToken).ConfigureAwait(false);
+        var projectFile = await projectLoader
+            .LoadProjectFileAsync(projectFilePath, _buildManager, cancellationToken)
+            .ConfigureAwait(false);
         return _server.AddTarget(projectFile);
     }
 
-    public Task<string?> TryGetProjectOutputPathAsync(string projectFilePath, CancellationToken cancellationToken)
+    public Task<string?> TryGetProjectOutputPathAsync(
+        string projectFilePath,
+        CancellationToken cancellationToken
+    )
     {
         EnsureMSBuildLoaded(projectFilePath);
         CreateBuildManager();

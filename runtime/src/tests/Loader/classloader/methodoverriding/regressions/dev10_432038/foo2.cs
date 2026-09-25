@@ -3,12 +3,20 @@
 
 using System;
 
-public class Foo2: Foo1
+public class Foo2 : Foo1
 {
-    public virtual new int A() { Console.WriteLine("\nin Foo2::A()"); return 2; }
+    public new virtual int A()
+    {
+        Console.WriteLine("\nin Foo2::A()");
+        return 2;
+    }
 }
 
 public class Bar2<T> : Bar1<T>
 {
-    public virtual new int A<U>() { Console.WriteLine("\nin Foo2::A() with T=" + typeof(T) + " and U=" + typeof(U)); return 2; }
+    public new virtual int A<U>()
+    {
+        Console.WriteLine("\nin Foo2::A() with T=" + typeof(T) + " and U=" + typeof(U));
+        return 2;
+    }
 }

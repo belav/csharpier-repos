@@ -68,7 +68,11 @@ namespace ILCompiler.Reflection.ReadyToRun
 
     public abstract class BaseGcSlot
     {
-        public abstract GcSlotFlags WriteTo(StringBuilder sb, Machine machine, GcSlotFlags prevFlags);
+        public abstract GcSlotFlags WriteTo(
+            StringBuilder sb,
+            Machine machine,
+            GcSlotFlags prevFlags
+        );
     }
 
     public abstract class BaseGcInfo
@@ -148,7 +152,10 @@ namespace ILCompiler.Reflection.ReadyToRun
             {
                 if (_ehInfo == null)
                 {
-                    _readyToRunReader.RuntimeFunctionToEHInfo.TryGetValue(StartAddress, out _ehInfo);
+                    _readyToRunReader.RuntimeFunctionToEHInfo.TryGetValue(
+                        StartAddress,
+                        out _ehInfo
+                    );
                 }
                 return _ehInfo;
             }
@@ -172,10 +179,7 @@ namespace ILCompiler.Reflection.ReadyToRun
 
         internal ReadyToRunReader ReadyToRunReader
         {
-            get
-            {
-                return _readyToRunReader;
-            }
+            get { return _readyToRunReader; }
         }
 
         public RuntimeFunction(
@@ -186,7 +190,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             int unwindRva,
             int codeOffset,
             ReadyToRunMethod method,
-            BaseUnwindInfo unwindInfo)
+            BaseUnwindInfo unwindInfo
+        )
         {
             _readyToRunReader = readyToRunReader;
 
@@ -375,7 +380,8 @@ namespace ILCompiler.Reflection.ReadyToRun
             string owningType,
             string constrainedType,
             string[] instanceArgs,
-            int? fixupOffset)
+            int? fixupOffset
+        )
         {
             InstanceArgs = (string[])instanceArgs?.Clone();
             _readyToRunReader = readyToRunReader;
@@ -386,9 +392,13 @@ namespace ILCompiler.Reflection.ReadyToRun
             ComponentReader = componentReader;
 
             EntityHandle owningTypeHandle;
-            GenericParameterHandleCollection genericParams = default(GenericParameterHandleCollection);
+            GenericParameterHandleCollection genericParams =
+                default(GenericParameterHandleCollection);
 
-            DisassemblingGenericContext genericContext = new DisassemblingGenericContext(typeParameters: Array.Empty<string>(), methodParameters: instanceArgs);
+            DisassemblingGenericContext genericContext = new DisassemblingGenericContext(
+                typeParameters: Array.Empty<string>(),
+                methodParameters: instanceArgs
+            );
             DisassemblingTypeProvider typeProvider = new DisassemblingTypeProvider();
 
             // get the method signature from the method handle
@@ -396,18 +406,32 @@ namespace ILCompiler.Reflection.ReadyToRun
             {
                 case HandleKind.MethodDefinition:
                     {
-                        MethodDefinition methodDef = ComponentReader.MetadataReader.GetMethodDefinition((MethodDefinitionHandle)MethodHandle);
+                        MethodDefinition methodDef =
+                            ComponentReader.MetadataReader.GetMethodDefinition(
+                                (MethodDefinitionHandle)MethodHandle
+                            );
                         if (methodDef.RelativeVirtualAddress != 0)
                         {
-                            MethodBodyBlock mbb = ComponentReader.ImageReader.GetMethodBody(methodDef.RelativeVirtualAddress);
+                            MethodBodyBlock mbb = ComponentReader.ImageReader.GetMethodBody(
+                                methodDef.RelativeVirtualAddress
+                            );
                             if (!mbb.LocalSignature.IsNil)
                             {
-                                StandaloneSignature ss = ComponentReader.MetadataReader.GetStandaloneSignature(mbb.LocalSignature);
-                                LocalSignature = ss.DecodeLocalSignature(typeProvider, genericContext);
+                                StandaloneSignature ss =
+                                    ComponentReader.MetadataReader.GetStandaloneSignature(
+                                        mbb.LocalSignature
+                                    );
+                                LocalSignature = ss.DecodeLocalSignature(
+                                    typeProvider,
+                                    genericContext
+                                );
                             }
                         }
                         Name = ComponentReader.MetadataReader.GetString(methodDef.Name);
-                        Signature = methodDef.DecodeSignature<string, DisassemblingGenericContext>(typeProvider, genericContext);
+                        Signature = methodDef.DecodeSignature<string, DisassemblingGenericContext>(
+                            typeProvider,
+                            genericContext
+                        );
                         owningTypeHandle = methodDef.GetDeclaringType();
                         genericParams = methodDef.GetGenericParameters();
                     }
@@ -415,9 +439,15 @@ namespace ILCompiler.Reflection.ReadyToRun
 
                 case HandleKind.MemberReference:
                     {
-                        MemberReference memberRef = ComponentReader.MetadataReader.GetMemberReference((MemberReferenceHandle)MethodHandle);
+                        MemberReference memberRef =
+                            ComponentReader.MetadataReader.GetMemberReference(
+                                (MemberReferenceHandle)MethodHandle
+                            );
                         Name = ComponentReader.MetadataReader.GetString(memberRef.Name);
-                        Signature = memberRef.DecodeMethodSignature<string, DisassemblingGenericContext>(typeProvider, genericContext);
+                        Signature = memberRef.DecodeMethodSignature<
+                            string,
+                            DisassemblingGenericContext
+                        >(typeProvider, genericContext);
                         owningTypeHandle = memberRef.Parent;
                     }
                     break;
@@ -432,7 +462,10 @@ namespace ILCompiler.Reflection.ReadyToRun
             }
             else
             {
-                DeclaringType = MetadataNameFormatter.FormatHandle(ComponentReader.MetadataReader, owningTypeHandle);
+                DeclaringType = MetadataNameFormatter.FormatHandle(
+                    ComponentReader.MetadataReader,
+                    owningTypeHandle
+                );
             }
 
             StringBuilder sb = new StringBuilder();
@@ -488,12 +521,22 @@ namespace ILCompiler.Reflection.ReadyToRun
                     int gcInfoOffset = _readyToRunReader.CompositeReader.GetOffset(GcInfoRva);
                     if (_readyToRunReader.Machine == Machine.I386)
                     {
-                        _gcInfo = new x86.GcInfo(_readyToRunReader.Image, gcInfoOffset, _readyToRunReader.Machine, _readyToRunReader.ReadyToRunHeader.MajorVersion);
+                        _gcInfo = new x86.GcInfo(
+                            _readyToRunReader.Image,
+                            gcInfoOffset,
+                            _readyToRunReader.Machine,
+                            _readyToRunReader.ReadyToRunHeader.MajorVersion
+                        );
                     }
                     else
                     {
                         // Arm, Arm64 and LoongArch64 use the same GcInfo format as Amd64
-                        _gcInfo = new Amd64.GcInfo(_readyToRunReader.Image, gcInfoOffset, _readyToRunReader.Machine, _readyToRunReader.ReadyToRunHeader.MajorVersion);
+                        _gcInfo = new Amd64.GcInfo(
+                            _readyToRunReader.Image,
+                            gcInfoOffset,
+                            _readyToRunReader.Machine,
+                            _readyToRunReader.ReadyToRunHeader.MajorVersion
+                        );
                     }
                 }
             }
@@ -530,9 +573,15 @@ namespace ILCompiler.Reflection.ReadyToRun
 
                 while (true)
                 {
-                    ReadyToRunImportSection importSection = _readyToRunReader.ImportSections[(int)curTableIndex];
-                    ReadyToRunImportSection.ImportSectionEntry entry = importSection.Entries[(int)fixupIndex];
-                    _fixupCells.Add(new FixupCell(_fixupCells.Count, curTableIndex, fixupIndex, entry.Signature));
+                    ReadyToRunImportSection importSection = _readyToRunReader.ImportSections[
+                        (int)curTableIndex
+                    ];
+                    ReadyToRunImportSection.ImportSectionEntry entry = importSection.Entries[
+                        (int)fixupIndex
+                    ];
+                    _fixupCells.Add(
+                        new FixupCell(_fixupCells.Count, curTableIndex, fixupIndex, entry.Signature)
+                    );
 
                     uint delta = reader.ReadUInt();
 
@@ -549,7 +598,6 @@ namespace ILCompiler.Reflection.ReadyToRun
                     break;
 
                 curTableIndex = curTableIndex + tableIndex;
-
             } // Done with all entries in this table
         }
 
@@ -562,7 +610,12 @@ namespace ILCompiler.Reflection.ReadyToRun
             int runtimeFunctionId = EntryPointRuntimeFunctionId;
             int coldRuntimeFunctionId = ColdRuntimeFunctionId;
             int runtimeFunctionSize = _readyToRunReader.CalculateRuntimeFunctionSize();
-            int runtimeFunctionOffset = _readyToRunReader.CompositeReader.GetOffset(_readyToRunReader.ReadyToRunHeader.Sections[ReadyToRunSectionType.RuntimeFunctions].RelativeVirtualAddress);
+            int runtimeFunctionOffset = _readyToRunReader.CompositeReader.GetOffset(
+                _readyToRunReader
+                    .ReadyToRunHeader
+                    .Sections[ReadyToRunSectionType.RuntimeFunctions]
+                    .RelativeVirtualAddress
+            );
             int curOffset = runtimeFunctionOffset + runtimeFunctionId * runtimeFunctionSize;
             int coldOffset = runtimeFunctionOffset + coldRuntimeFunctionId * runtimeFunctionSize;
             int codeOffset = 0;
@@ -638,7 +691,8 @@ namespace ILCompiler.Reflection.ReadyToRun
                     unwindRva,
                     codeOffset,
                     this,
-                    unwindInfo);
+                    unwindInfo
+                );
 
                 _runtimeFunctions.Add(rtf);
                 runtimeFunctionId++;

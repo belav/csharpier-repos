@@ -86,12 +86,19 @@ namespace System.Runtime.Caching
                 long ticksSinceTrim = utcNow.Subtract(lastTrimTime).Ticks;
                 if (ticksSinceTrim > 0)
                 {
-                    percent = Math.Min(50, (int)((lastTrimPercent * TargetTotalMemoryTrimIntervalTicks) / ticksSinceTrim));
+                    percent = Math.Min(
+                        50,
+                        (int)(
+                            (lastTrimPercent * TargetTotalMemoryTrimIntervalTicks) / ticksSinceTrim
+                        )
+                    );
                     percent = Math.Max(MinTotalMemoryTrimPercent, percent);
                 }
 
 #if PERF
-                Debug.WriteLine($"PhysicalMemoryMonitor.GetPercentToTrim: percent={percent:N}, lastTrimPercent={lastTrimPercent:N}, secondsSinceTrim={ticksSinceTrim/TimeSpan.TicksPerSecond:N}{Environment.NewLine}");
+                Debug.WriteLine(
+                    $"PhysicalMemoryMonitor.GetPercentToTrim: percent={percent:N}, lastTrimPercent={lastTrimPercent:N}, secondsSinceTrim={ticksSinceTrim / TimeSpan.TicksPerSecond:N}{Environment.NewLine}"
+                );
 #endif
             }
 
@@ -107,7 +114,10 @@ namespace System.Runtime.Caching
             }
             _pressureHigh = Math.Max(3, physicalMemoryLimitPercentage);
             _pressureLow = Math.Max(1, _pressureHigh - 9);
-            Dbg.Trace("MemoryCacheStats", $"PhysicalMemoryMonitor.SetLimit: _pressureHigh={_pressureHigh}, _pressureLow={_pressureLow}");
+            Dbg.Trace(
+                "MemoryCacheStats",
+                $"PhysicalMemoryMonitor.SetLimit: _pressureHigh={_pressureHigh}, _pressureLow={_pressureLow}"
+            );
         }
     }
 }

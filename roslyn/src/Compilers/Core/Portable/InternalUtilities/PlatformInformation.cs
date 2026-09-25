@@ -36,6 +36,7 @@ namespace Roslyn.Utilities
                 }
             }
         }
+
         /// <summary>
         /// Are we running on .NET 5 or later using the Mono runtime?
         /// Will also return true when running on Mono itself; if necessary

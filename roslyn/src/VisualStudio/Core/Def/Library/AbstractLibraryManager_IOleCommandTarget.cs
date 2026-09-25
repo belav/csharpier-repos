@@ -12,13 +12,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
 {
     internal partial class AbstractLibraryManager : IOleCommandTarget
     {
-        protected virtual bool TryQueryStatus(Guid commandGroup, uint commandId, ref OLECMDF commandFlags)
-            => false;
+        protected virtual bool TryQueryStatus(
+            Guid commandGroup,
+            uint commandId,
+            ref OLECMDF commandFlags
+        ) => false;
 
-        protected virtual bool TryExec(Guid commandGroup, uint commandId)
-            => false;
+        protected virtual bool TryExec(Guid commandGroup, uint commandId) => false;
 
-        int IOleCommandTarget.Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
+        int IOleCommandTarget.Exec(
+            ref Guid pguidCmdGroup,
+            uint nCmdID,
+            uint nCmdexecopt,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             if (TryExec(pguidCmdGroup, nCmdID))
             {
@@ -28,7 +36,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             return (int)Constants.OLECMDERR_E_NOTSUPPORTED;
         }
 
-        int IOleCommandTarget.QueryStatus(ref Guid pguidCmdGroup, uint cCmds, OLECMD[] prgCmds, IntPtr pCmdText)
+        int IOleCommandTarget.QueryStatus(
+            ref Guid pguidCmdGroup,
+            uint cCmds,
+            OLECMD[] prgCmds,
+            IntPtr pCmdText
+        )
         {
             if (cCmds != 1)
             {

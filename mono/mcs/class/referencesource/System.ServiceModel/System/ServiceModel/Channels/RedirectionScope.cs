@@ -40,7 +40,9 @@ namespace System.ServiceModel.Channels
                     this.Value = RedirectionConstants.Scope.Endpoint;
                     break;
                 default:
-                    Fx.Assert("This constructor doesn't support the following enum value: " + scope);
+                    Fx.Assert(
+                        "This constructor doesn't support the following enum value: " + scope
+                    );
                     break;
             }
         }
@@ -60,10 +62,20 @@ namespace System.ServiceModel.Channels
             Session,
             Endpoint,
         }
-        public static RedirectionScope Endpoint { get { return endpoint; } }
 
-        public static RedirectionScope Message { get { return message; } }
-        public static RedirectionScope Session { get { return session; } }
+        public static RedirectionScope Endpoint
+        {
+            get { return endpoint; }
+        }
+
+        public static RedirectionScope Message
+        {
+            get { return message; }
+        }
+        public static RedirectionScope Session
+        {
+            get { return session; }
+        }
         public string Namespace { get; private set; }
         public string Value { get; private set; }
 
@@ -101,8 +113,12 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    result = RedirectionUtility.IsNamespaceAndValueMatch(left.Value,
-                        left.Namespace, right.Value, right.Namespace);
+                    result = RedirectionUtility.IsNamespaceAndValueMatch(
+                        left.Value,
+                        left.Namespace,
+                        right.Value,
+                        right.Namespace
+                    );
                 }
             }
 
@@ -117,8 +133,10 @@ namespace System.ServiceModel.Channels
             }
             else if (scope.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("scope",
-                    SR.GetString(SR.ParameterCannotBeEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "scope",
+                    SR.GetString(SR.ParameterCannotBeEmpty)
+                );
             }
 
             return new RedirectionScope(scope, ns);
@@ -152,31 +170,56 @@ namespace System.ServiceModel.Channels
             {
                 if (this.Namespace != null)
                 {
-                    this.toString = SR.GetString(SR.RedirectionInfoStringFormatWithNamespace, this.Value, this.Namespace);
+                    this.toString = SR.GetString(
+                        SR.RedirectionInfoStringFormatWithNamespace,
+                        this.Value,
+                        this.Namespace
+                    );
                 }
                 else
                 {
-                    this.toString = SR.GetString(SR.RedirectionInfoStringFormatNoNamespace, this.Value);
+                    this.toString = SR.GetString(
+                        SR.RedirectionInfoStringFormatNoNamespace,
+                        this.Value
+                    );
                 }
             }
             return this.toString;
         }
 
         //When Create(...) is used, we delay finding the enum value
-        //until the enum value is needed, avoiding the string comparisons if possible 
+        //until the enum value is needed, avoiding the string comparisons if possible
         void DetectScope()
         {
             if (RedirectionUtility.IsNamespaceMatch(this.Namespace, RedirectionConstants.Namespace))
             {
-                if (string.Equals(this.Value, RedirectionConstants.Scope.Message, StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Scope.Message,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalScope = InternalRedirectionScope.Message;
                 }
-                else if (string.Equals(this.Value, RedirectionConstants.Scope.Session, StringComparison.Ordinal))
+                else if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Scope.Session,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalScope = InternalRedirectionScope.Session;
                 }
-                else if (string.Equals(this.Value, RedirectionConstants.Scope.Endpoint, StringComparison.Ordinal))
+                else if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Scope.Endpoint,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalScope = InternalRedirectionScope.Endpoint;
                 }
@@ -190,7 +233,10 @@ namespace System.ServiceModel.Channels
                 this.internalScope = InternalRedirectionScope.Custom;
             }
 
-            Fx.Assert(this.internalScope != InternalRedirectionScope.Unknown, "Failed to correctly detect internal redirection scope");
+            Fx.Assert(
+                this.internalScope != InternalRedirectionScope.Unknown,
+                "Failed to correctly detect internal redirection scope"
+            );
         }
     }
 }

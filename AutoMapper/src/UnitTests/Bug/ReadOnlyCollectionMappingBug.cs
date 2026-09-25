@@ -4,8 +4,15 @@
 // https://github.com/AutoMapper/AutoMapper/issues/511
 public class ReadOnlyCollectionMappingBug
 {
-    class Source { public int X { get; set; } }
-    class Target { public int X { get; set; } }
+    class Source
+    {
+        public int X { get; set; }
+    }
+
+    class Target
+    {
+        public int X { get; set; }
+    }
 
     [Fact]
     public void Example()

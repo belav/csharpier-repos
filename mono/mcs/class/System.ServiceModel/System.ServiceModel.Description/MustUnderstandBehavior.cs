@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,40 +29,42 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public class MustUnderstandBehavior : IEndpointBehavior
-	{
-		bool validate;
+    public class MustUnderstandBehavior : IEndpointBehavior
+    {
+        bool validate;
 
-		public MustUnderstandBehavior (bool validate)
-		{
-			this.validate = validate;
-		}
+        public MustUnderstandBehavior(bool validate)
+        {
+            this.validate = validate;
+        }
 
-		public bool ValidateMustUnderstand {
-			get { return validate; }
-			set { validate = value; }
-		}
+        public bool ValidateMustUnderstand
+        {
+            get { return validate; }
+            set { validate = value; }
+        }
 
-		void IEndpointBehavior.AddBindingParameters (ServiceEndpoint endpoint,
-			BindingParameterCollection parameters)
-		{
-			throw new NotImplementedException ();
-		}
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		void IEndpointBehavior.ApplyDispatchBehavior (ServiceEndpoint endpoint,
-			EndpointDispatcher dispatcher)
-		{
-			dispatcher.DispatchRuntime.ValidateMustUnderstand = validate;
-		}
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher dispatcher
+        )
+        {
+            dispatcher.DispatchRuntime.ValidateMustUnderstand = validate;
+        }
 
-		void IEndpointBehavior.ApplyClientBehavior (ServiceEndpoint endpoint,
-			ClientRuntime proxy)
-		{
-			proxy.ValidateMustUnderstand = validate;
-		}
+        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime proxy)
+        {
+            proxy.ValidateMustUnderstand = validate;
+        }
 
-		void IEndpointBehavior.Validate (ServiceEndpoint endpoint)
-		{
-		}
-	}
+        void IEndpointBehavior.Validate(ServiceEndpoint endpoint) { }
+    }
 }

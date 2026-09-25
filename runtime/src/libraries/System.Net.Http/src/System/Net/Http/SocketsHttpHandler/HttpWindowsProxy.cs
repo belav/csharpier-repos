@@ -17,11 +17,11 @@ namespace System.Net.Http
 {
     internal sealed class HttpWindowsProxy : IMultiWebProxy, IDisposable
     {
-        private readonly MultiProxy _insecureProxy;    // URI of the http system proxy if set
-        private readonly MultiProxy _secureProxy;      // URI of the https system proxy if set
+        private readonly MultiProxy _insecureProxy; // URI of the http system proxy if set
+        private readonly MultiProxy _secureProxy; // URI of the https system proxy if set
         private readonly FailedProxyCache _failedProxies = new FailedProxyCache();
-        private readonly List<string>? _bypass;         // list of domains not to proxy
-        private readonly bool _bypassLocal;    // we should bypass domain considered local
+        private readonly List<string>? _bypass; // list of domains not to proxy
+        private readonly bool _bypassLocal; // we should bypass domain considered local
         private readonly List<IPAddress>? _localIp;
         private ICredentials? _credentials;
         private readonly WinInetProxyHelper _proxyHelper;
@@ -43,18 +43,27 @@ namespace System.Net.Http
 
             if (proxyHelper.AutoSettingsUsed)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(proxyHelper, $"AutoSettingsUsed, calling {nameof(Interop.WinHttp.WinHttpOpen)}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        proxyHelper,
+                        $"AutoSettingsUsed, calling {nameof(Interop.WinHttp.WinHttpOpen)}"
+                    );
                 sessionHandle = Interop.WinHttp.WinHttpOpen(
                     IntPtr.Zero,
                     Interop.WinHttp.WINHTTP_ACCESS_TYPE_NO_PROXY,
                     Interop.WinHttp.WINHTTP_NO_PROXY_NAME,
                     Interop.WinHttp.WINHTTP_NO_PROXY_BYPASS,
-                    (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC);
+                    (int)Interop.WinHttp.WINHTTP_FLAG_ASYNC
+                );
 
                 if (sessionHandle.IsInvalid)
                 {
                     // Proxy failures are currently ignored by managed handler.
-                    if (NetEventSource.Log.IsEnabled()) NetEventSource.Error(proxyHelper, $"{nameof(Interop.WinHttp.WinHttpOpen)} returned invalid handle");
+                    if (NetEventSource.Log.IsEnabled())
+                        NetEventSource.Error(
+                            proxyHelper,
+                            $"{nameof(Interop.WinHttp.WinHttpOpen)} returned invalid handle"
+                        );
                     sessionHandle.Dispose();
                     return false;
                 }
@@ -71,7 +80,8 @@ namespace System.Net.Http
 
             if (proxyHelper.ManualSettingsUsed)
             {
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(proxyHelper, $"ManualSettingsUsed, {proxyHelper.Proxy}");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(proxyHelper, $"ManualSettingsUsed, {proxyHelper.Proxy}");
 
                 _secureProxy = MultiProxy.Parse(_failedProxies, proxyHelper.Proxy, true);
                 _insecureProxy = MultiProxy.Parse(_failedProxies, proxyHelper.Proxy, false);
@@ -88,31 +98,77 @@ namespace System.Net.Http
                     while (idx < proxyHelper.ProxyBypass.Length)
                     {
                         // Strip leading spaces and scheme if any.
-                        while (idx < proxyHelper.ProxyBypass.Length && proxyHelper.ProxyBypass[idx] == ' ') { idx += 1; };
-                        if (string.Compare(proxyHelper.ProxyBypass, idx, "http://", 0, 7, StringComparison.OrdinalIgnoreCase) == 0)
+                        while (
+                            idx < proxyHelper.ProxyBypass.Length
+                            && proxyHelper.ProxyBypass[idx] == ' '
+                        )
+                        {
+                            idx += 1;
+                        }
+                        ;
+                        if (
+                            string.Compare(
+                                proxyHelper.ProxyBypass,
+                                idx,
+                                "http://",
+                                0,
+                                7,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             idx += 7;
                         }
-                        else if (string.Compare(proxyHelper.ProxyBypass, idx, "https://", 0, 8, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            string.Compare(
+                                proxyHelper.ProxyBypass,
+                                idx,
+                                "https://",
+                                0,
+                                8,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             idx += 8;
                         }
 
-                        if (idx < proxyHelper.ProxyBypass.Length && proxyHelper.ProxyBypass[idx] == '[')
+                        if (
+                            idx < proxyHelper.ProxyBypass.Length
+                            && proxyHelper.ProxyBypass[idx] == '['
+                        )
                         {
                             // Strip [] from IPv6 so we can use IdnHost laster for matching.
                             idx += 1;
                         }
 
                         int start = idx;
-                        while (idx < proxyHelper.ProxyBypass.Length && proxyHelper.ProxyBypass[idx] != ' ' && proxyHelper.ProxyBypass[idx] != ';' && proxyHelper.ProxyBypass[idx] != ']') { idx += 1; };
+                        while (
+                            idx < proxyHelper.ProxyBypass.Length
+                            && proxyHelper.ProxyBypass[idx] != ' '
+                            && proxyHelper.ProxyBypass[idx] != ';'
+                            && proxyHelper.ProxyBypass[idx] != ']'
+                        )
+                        {
+                            idx += 1;
+                        }
+                        ;
 
                         if (idx == start)
                         {
                             // Empty string.
                             tmp = null;
                         }
-                        else if (string.Compare(proxyHelper.ProxyBypass, start, "<local>", 0, 7, StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (
+                            string.Compare(
+                                proxyHelper.ProxyBypass,
+                                start,
+                                "<local>",
+                                0,
+                                7,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
                         {
                             _bypassLocal = true;
                             tmp = null;
@@ -123,12 +179,25 @@ namespace System.Net.Http
                         }
 
                         // Skip trailing characters if any.
-                        if (idx < proxyHelper.ProxyBypass.Length && proxyHelper.ProxyBypass[idx] != ';')
+                        if (
+                            idx < proxyHelper.ProxyBypass.Length
+                            && proxyHelper.ProxyBypass[idx] != ';'
+                        )
                         {
                             // Got stopped at space or ']'. Strip until next ';' or end.
-                            while (idx < proxyHelper.ProxyBypass.Length && proxyHelper.ProxyBypass[idx] != ';') { idx += 1; };
+                            while (
+                                idx < proxyHelper.ProxyBypass.Length
+                                && proxyHelper.ProxyBypass[idx] != ';'
+                            )
+                            {
+                                idx += 1;
+                            }
+                            ;
                         }
-                        if (idx < proxyHelper.ProxyBypass.Length && proxyHelper.ProxyBypass[idx] == ';')
+                        if (
+                            idx < proxyHelper.ProxyBypass.Length
+                            && proxyHelper.ProxyBypass[idx] == ';'
+                        )
                         {
                             idx++;
                         }
@@ -149,7 +218,9 @@ namespace System.Net.Http
                 if (_bypassLocal)
                 {
                     _localIp = new List<IPAddress>();
-                    foreach (NetworkInterface netInterface in NetworkInterface.GetAllNetworkInterfaces())
+                    foreach (
+                        NetworkInterface netInterface in NetworkInterface.GetAllNetworkInterfaces()
+                    )
                     {
                         IPInterfaceProperties ipProps = netInterface.GetIPProperties();
                         foreach (UnicastIPAddressInformation addr in ipProps.UnicastAddresses)
@@ -211,7 +282,11 @@ namespace System.Net.Http
                             {
                                 string proxyStr = Marshal.PtrToStringUni(proxyInfo.Proxy)!;
 
-                                return MultiProxy.CreateLazy(_failedProxies, proxyStr, IsSecureUri(uri));
+                                return MultiProxy.CreateLazy(
+                                    _failedProxies,
+                                    proxyStr,
+                                    IsSecureUri(uri)
+                                );
                             }
                             else
                             {
@@ -252,7 +327,10 @@ namespace System.Net.Http
                     }
 
                     // Pre-Check if host may be IP address to avoid parsing.
-                    if (uri.HostNameType == UriHostNameType.IPv6 || uri.HostNameType == UriHostNameType.IPv4)
+                    if (
+                        uri.HostNameType == UriHostNameType.IPv6
+                        || uri.HostNameType == UriHostNameType.IPv4
+                    )
                     {
                         // RFC1123 allows labels to start with number.
                         // Leading number may or may not be IP address.
@@ -319,14 +397,8 @@ namespace System.Net.Http
 
         public ICredentials? Credentials
         {
-            get
-            {
-                return _credentials;
-            }
-            set
-            {
-                _credentials = value;
-            }
+            get { return _credentials; }
+            set { _credentials = value; }
         }
 
         // Access function for unit tests.

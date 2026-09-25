@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Shared.Extensions;
 using System;
 using System.Threading;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -16,17 +16,24 @@ namespace Microsoft.CodeAnalysis.CSharp
         public static ITypeSymbol DetermineParameterType(
             this ArgumentSyntax argument,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return DetermineParameterType(argument.Expression, semanticModel, cancellationToken);
         }
 
-        public static ITypeSymbol DetermineParameterType(ExpressionSyntax expression, SemanticModel semanticModel, CancellationToken cancellationToken)
+        public static ITypeSymbol DetermineParameterType(
+            ExpressionSyntax expression,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             if (expression is DeclarationExpressionSyntax decl)
             {
                 var typeInfo = semanticModel.GetTypeInfo(decl.Type, cancellationToken);
-                return typeInfo.Type?.IsErrorType() == false ? typeInfo.Type : semanticModel.Compilation.ObjectType;
+                return typeInfo.Type?.IsErrorType() == false
+                    ? typeInfo.Type
+                    : semanticModel.Compilation.ObjectType;
             }
             else
             {

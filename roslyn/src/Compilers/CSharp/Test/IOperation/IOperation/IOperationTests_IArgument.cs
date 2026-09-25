@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NoArgument()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -32,7 +33,8 @@ class P
     static void M2() { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2()) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     null
@@ -40,14 +42,19 @@ IInvocationOperation (void P.M2()) (OperationKind.Invocation, Type: System.Void)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void PositionalArgument()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -58,7 +65,8 @@ class P
     static void M2(int x, double y) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2(System.Int32 x, System.Double y)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1, 2.0)')
   Instance Receiver: 
     null
@@ -74,14 +82,19 @@ IInvocationOperation (void P.M2(System.Int32 x, System.Double y)) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void PositionalArgumentWithDefaultValue()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -92,7 +105,8 @@ class P
     static void M2(int x, double y = 0.0) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2(System.Int32 x, [System.Double y = 0])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1)')
   Instance Receiver: 
     null
@@ -108,14 +122,19 @@ IInvocationOperation (void P.M2(System.Int32 x, [System.Double y = 0])) (Operati
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentListedInParameterOrder()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -126,7 +145,8 @@ class P
     static void M2(int x, double y = 0.0) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2(System.Int32 x, [System.Double y = 0])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(x: 1, y: 9.9)')
   Instance Receiver: 
     null
@@ -142,14 +162,19 @@ IInvocationOperation (void P.M2(System.Int32 x, [System.Double y = 0])) (Operati
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentListedOutOfParameterOrder()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -160,7 +185,8 @@ class P
     static void M2(int x, double y = 0.0) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2(System.Int32 x, [System.Double y = 0])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(y: 9.9, x: 1)')
   Instance Receiver: 
     null
@@ -176,14 +202,19 @@ IInvocationOperation (void P.M2(System.Int32 x, [System.Double y = 0])) (Operati
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentInParameterOrderWithDefaultValue()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -194,7 +225,8 @@ class P
     static void M2(int x = 1, int y = 2, int z = 3) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2([System.Int32 x = 1], [System.Int32 y = 2], [System.Int32 z = 3])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(y: 0, z: 2)')
   Instance Receiver: 
     null
@@ -214,14 +246,19 @@ IInvocationOperation (void P.M2([System.Int32 x = 1], [System.Int32 y = 2], [Sys
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentOutOfParameterOrderWithDefaultValue()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -232,7 +269,8 @@ class P
     static void M2(int x = 1, int y = 2, int z = 3) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2([System.Int32 x = 1], [System.Int32 y = 2], [System.Int32 z = 3])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(z: 2, x: 9)')
   Instance Receiver: 
     null
@@ -252,14 +290,19 @@ IInvocationOperation (void P.M2([System.Int32 x = 1], [System.Int32 y = 2], [Sys
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedAndPositionalArgumentsWithDefaultValue()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -270,7 +313,8 @@ class P
     static void M2(int x = 1, int y = 2, int z = 3) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'M2(9, z: 10);')
   Expression: 
     IInvocationOperation (void P.M2([System.Int32 x = 1], [System.Int32 y = 2], [System.Int32 z = 3])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(9, z: 10)')
@@ -292,14 +336,19 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void PositionalRefAndOutArguments()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -312,7 +361,8 @@ class P
     void M2(ref int x, out int y) { y = 10; }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2(ref System.Int32 x, out System.Int32 y)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(ref a, out b)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -328,14 +378,19 @@ IInvocationOperation ( void P.M2(ref System.Int32 x, out System.Int32 y)) (Opera
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedRefAndOutArgumentsInParameterOrder()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -348,7 +403,8 @@ class P
     void M2(ref int x, out int y) { y = 10; }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2(ref System.Int32 x, out System.Int32 y)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(x: ref a, y: out b)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -364,14 +420,19 @@ IInvocationOperation ( void P.M2(ref System.Int32 x, out System.Int32 y)) (Opera
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedRefAndOutArgumentsOutOfParameterOrder()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -384,7 +445,8 @@ class P
     void M2(ref int x, out int y) { y = 10; }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2(ref System.Int32 x, out System.Int32 y)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(y: out b, x: ref a)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -400,14 +462,19 @@ IInvocationOperation ( void P.M2(ref System.Int32 x, out System.Int32 y)) (Opera
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueOfNewStruct()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -420,7 +487,8 @@ class P
 
 struct S { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([S sobj = default(S)])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -432,14 +500,19 @@ IInvocationOperation ( void P.M2([S sobj = default(S)])) (OperationKind.Invocati
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueOfDefaultStruct()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -452,7 +525,8 @@ class P
 
 struct S { }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([S sobj = default(S)])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -464,14 +538,19 @@ IInvocationOperation ( void P.M2([S sobj = default(S)])) (OperationKind.Invocati
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueOfConstant()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     const double Pi = 3.14;
@@ -483,7 +562,8 @@ class P
     void M2(double s = Pi) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.Double s = 3.14])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -495,14 +575,19 @@ IInvocationOperation ( void P.M2([System.Double s = 3.14])) (OperationKind.Invoc
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void PositionalArgumentForExtensionMethod()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -517,7 +602,8 @@ static class Extensions
     { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void Extensions.E1(this P p, [System.Int32 x = 0], [System.Int32 y = 0])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'this.E1(1, 2)')
   Instance Receiver: 
     null
@@ -537,14 +623,19 @@ IInvocationOperation (void Extensions.E1(this P p, [System.Int32 x = 0], [System
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentOutOfParameterOrderForExtensionMethod()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -559,7 +650,8 @@ static class Extensions
     { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'this.E1(y: 1, x: 2);')
   Expression: 
     IInvocationOperation (void Extensions.E1(this P p, [System.Int32 x = 0], [System.Int32 y = 0])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'this.E1(y: 1, x: 2)')
@@ -581,14 +673,19 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentWithDefaultValueForExtensionMethod()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -603,7 +700,8 @@ static class Extensions
     { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void Extensions.E1(this P p, [System.Int32 x = 0], [System.Int32 y = 0])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'this.E1(y: 1)')
   Instance Receiver: 
     null
@@ -623,14 +721,19 @@ IInvocationOperation (void Extensions.E1(this P p, [System.Int32 x = 0], [System
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ParamsArrayArgumentInNormalForm()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -642,7 +745,8 @@ class P
     void M2(int x, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2(System.Int32 x, params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1, a)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -658,14 +762,19 @@ IInvocationOperation ( void P.M2(System.Int32 x, params System.Double[] array)) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ParamsArrayArgumentInExpandedForm()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -676,7 +785,8 @@ class P
     void M2(int x, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2(System.Int32 x, params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1, 0.1, 0.2)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -699,14 +809,19 @@ IInvocationOperation ( void P.M2(System.Int32 x, params System.Double[] array)) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ParamsArrayArgumentInExpandedFormWithNoArgument()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -717,7 +832,8 @@ class P
     void M2(int x, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2(System.Int32 x, params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -738,14 +854,19 @@ IInvocationOperation ( void P.M2(System.Int32 x, params System.Double[] array)) 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueAndParamsArrayArgumentInExpandedFormWithNoArgument()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -757,7 +878,8 @@ class P
     void M2(int x = 0, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -778,14 +900,19 @@ IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] ar
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueAndNamedParamsArrayArgumentInNormalForm()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -797,7 +924,8 @@ class P
     void M2(int x = 0, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(array: a)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -813,14 +941,19 @@ IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] ar
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueAndNamedParamsArrayArgumentInExpandedForm()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -831,7 +964,8 @@ class P
     void M2(int x = 0, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(array: 1)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -856,14 +990,19 @@ IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] ar
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void PositionalArgumentAndNamedParamsArrayArgumentInNormalForm()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -875,7 +1014,8 @@ class P
     void M2(int x = 0, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1, array: a)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -891,14 +1031,19 @@ IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] ar
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void PositionalArgumentAndNamedParamsArrayArgumentInExpandedForm()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -909,7 +1054,8 @@ class P
     void M2(int x = 0, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1, array: 1)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -934,14 +1080,19 @@ IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] ar
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentAndNamedParamsArrayArgumentInNormalFormOutOfParameterOrder()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -953,7 +1104,8 @@ class P
     void M2(int x = 0, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'M2(array: a, x: 1);')
   Expression: 
     IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(array: a, x: 1)')
@@ -971,14 +1123,19 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NamedArgumentAndNamedParamsArrayArgumentInExpandedFormOutOfParameterOrder()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -989,7 +1146,8 @@ class P
     void M2(int x = 0, params double[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(array: 1, x: 10)')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -1014,14 +1172,19 @@ IInvocationOperation ( void P.M2([System.Int32 x = 0], params System.Double[] ar
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void CallerInfoAttributesInvokedInMethod()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class P
@@ -1038,7 +1201,8 @@ class P
     { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M2([System.String memberName = null], [System.String sourceFilePath = null], [System.Int32 sourceLineNumber = 0])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -1058,14 +1222,20 @@ IInvocationOperation ( void P.M2([System.String memberName = null], [System.Stri
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>((source, "file.cs"), expectedOperationTree, TargetFramework.Mscorlib46, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                (source, "file.cs"),
+                expectedOperationTree,
+                TargetFramework.Mscorlib46,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void CallerInfoAttributesInvokedInProperty()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class P
@@ -1081,7 +1251,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( System.Boolean P.M2([System.String memberName = null], [System.String sourceFilePath = null], [System.Int32 sourceLineNumber = 0])) (OperationKind.Invocation, Type: System.Boolean) (Syntax: 'M2()')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsImplicit) (Syntax: 'M2')
@@ -1101,14 +1272,20 @@ IInvocationOperation ( System.Boolean P.M2([System.String memberName = null], [S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>((source, "file.cs"), expectedOperationTree, TargetFramework.Mscorlib46, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                (source, "file.cs"),
+                expectedOperationTree,
+                TargetFramework.Mscorlib46,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void CallerInfoAttributesInvokedInFieldInitializer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class P
@@ -1124,7 +1301,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (System.Boolean P.M2([System.String memberName = null], [System.String sourceFilePath = null], [System.Int32 sourceLineNumber = 0])) (OperationKind.Invocation, Type: System.Boolean) (Syntax: 'M2()')
   Instance Receiver: 
     null
@@ -1144,14 +1322,20 @@ IInvocationOperation (System.Boolean P.M2([System.String memberName = null], [Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>((source, "file.cs"), expectedOperationTree, TargetFramework.Mscorlib46, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                (source, "file.cs"),
+                expectedOperationTree,
+                TargetFramework.Mscorlib46,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void CallerInfoAttributesInvokedInEventMethods()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 
@@ -1179,7 +1363,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (System.Boolean P.M2([System.String memberName = null], [System.String sourceFilePath = null], [System.Int32 sourceLineNumber = 0])) (OperationKind.Invocation, Type: System.Boolean) (Syntax: 'M2()')
   Instance Receiver: 
     null
@@ -1199,13 +1384,19 @@ IInvocationOperation (System.Boolean P.M2([System.String memberName = null], [Sy
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>((source, "file.cs"), expectedOperationTree, TargetFramework.Mscorlib46, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                (source, "file.cs"),
+                expectedOperationTree,
+                TargetFramework.Mscorlib46,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DefaultArgument_CallerInfo_BadParameterType()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Runtime.CompilerServices;
 
 public class C0
@@ -1214,7 +1405,8 @@ public class C0
 }
 ";
 
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static void M1()
@@ -1223,7 +1415,8 @@ public class C1
     }
 }
 ";
-            var expectedOperationTree = @"
+            var expectedOperationTree =
+                @"
 IInvocationOperation (void C0.M0([System.String s = ""hello""])) (OperationKind.Invocation, Type: System.Void, IsInvalid) (Syntax: 'C0.M0()')
   Instance Receiver: 
     null
@@ -1240,31 +1433,47 @@ IInvocationOperation (void C0.M0([System.String s = ""hello""])) (OperationKind.
             {
                 // (6,28): error CS4017: CallerLineNumberAttribute cannot be applied because there are no standard conversions from type 'int' to type 'string'
                 //     public static void M0([CallerLineNumber] string s = "hello") { } // 1
-                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber").WithArguments("int", "string").WithLocation(6, 28),
+                Diagnostic(ErrorCode.ERR_NoConversionForCallerLineNumberParam, "CallerLineNumber")
+                    .WithArguments("int", "string")
+                    .WithLocation(6, 28),
                 // (6,19): error CS0029: Cannot implicitly convert type 'int' to 'string'
                 //         /*<bind>*/C0.M0()/*</bind>*/; // 2
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "C0.M0()").WithArguments("int", "string").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "C0.M0()")
+                    .WithArguments("int", "string")
+                    .WithLocation(6, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(CreateCompilation(new[] { source1, source0 }), expectedOperationTree, expectedDiagnostics0And1);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                CreateCompilation(new[] { source1, source0 }),
+                expectedOperationTree,
+                expectedDiagnostics0And1
+            );
 
             var expectedDiagnostics1 = new[]
             {
                 // (6,19): error CS0029: Cannot implicitly convert type 'int' to 'string'
                 //         /*<bind>*/C0.M0()/*</bind>*/; // 2
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "C0.M0()").WithArguments("int", "string").WithLocation(6, 19)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "C0.M0()")
+                    .WithArguments("int", "string")
+                    .WithLocation(6, 19),
             };
             var lib0 = CreateCompilation(source0).ToMetadataReference();
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(CreateCompilation(new[] { source1 }, references: new[] { lib0 }), expectedOperationTree, expectedDiagnostics1);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                CreateCompilation(new[] { source1 }, references: new[] { lib0 }),
+                expectedOperationTree,
+                expectedDiagnostics1
+            );
 
-            CreateCompilation(new[] { source1 }, references: new[] { lib0 }).VerifyEmitDiagnostics(expectedDiagnostics1);
+            CreateCompilation(new[] { source1 }, references: new[] { lib0 })
+                .VerifyEmitDiagnostics(expectedDiagnostics1);
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ExtraArgument()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -1276,26 +1485,35 @@ class P
     { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax: 'M2(1, 2)')
   Children(2):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS1501: No overload for method 'M2' takes 2 arguments
                 //         /*<bind>*/M2(1, 2)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadArgCount, "M2").WithArguments("M2", "2").WithLocation(6, 19)
+                Diagnostic(ErrorCode.ERR_BadArgCount, "M2")
+                    .WithArguments("M2", "2")
+                    .WithLocation(6, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void TestOmittedArgument()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -1307,27 +1525,36 @@ class P
     { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax: 'M2(1,)')
   Children(2):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
       IInvalidOperation (OperationKind.Invalid, Type: null, IsInvalid) (Syntax: '')
         Children(0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,24): error CS1525: Invalid expression term ')'
                 //         /*<bind>*/M2(1,)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(6, 24)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
+                    .WithArguments(")")
+                    .WithLocation(6, 24),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void WrongArgumentType()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -1339,7 +1566,8 @@ class P
     { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax: 'M2(1)')
   Children(1):
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1, IsInvalid) (Syntax: '1')
@@ -1348,17 +1576,24 @@ IInvalidOperation (OperationKind.Invalid, Type: System.Void, IsInvalid) (Syntax:
             {
                 // file.cs(6,22): error CS1503: Argument 1: cannot convert from 'int' to 'string'
                 //         /*<bind>*/M2(1)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadArgType, "1").WithArguments("1", "int", "string").WithLocation(6, 22)
+                Diagnostic(ErrorCode.ERR_BadArgType, "1")
+                    .WithArguments("1", "int", "string")
+                    .WithLocation(6, 22),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void VarArgsCall()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 public class P
@@ -1369,7 +1604,8 @@ public class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void System.Console.Write(System.String format, System.Object arg0, System.Object arg1, System.Object arg2, System.Object arg3, __arglist)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'Console.Wri ... arglist(5))')
   Instance Receiver: 
     null
@@ -1415,7 +1651,12 @@ IInvocationOperation (void System.Console.Write(System.String format, System.Obj
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, TargetFramework.Mscorlib45, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                TargetFramework.Mscorlib45,
+                expectedDiagnostics
+            );
         }
 
         /// <summary>
@@ -1425,13 +1666,15 @@ IInvocationOperation (void System.Console.Write(System.String format, System.Obj
         [Fact]
         public void InvalidConversionForDefaultArgument_InSource()
         {
-            var source0 = @"
+            var source0 =
+                @"
 public class C0
 {
     public static void M0(int x = ""string"") { } // 1
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static void M1()
@@ -1446,7 +1689,8 @@ public class C1
 
             // On the other hand, if `void M2(int)` came from metadata (i.e. hand-written malformed IL), we would produce a string ConstantValue for it,
             // and the operation tree would contain a bad conversion to int with an operand of type string. We also produce a compilation error for the bad conversion.
-            var expectedOperationTree0And1 = @"
+            var expectedOperationTree0And1 =
+                @"
 IInvocationOperation (void C0.M0([System.Int32 x = default(System.Int32)])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'C0.M0()')
   Instance Receiver: 
     null
@@ -1460,18 +1704,31 @@ IInvocationOperation (void C0.M0([System.Int32 x = default(System.Int32)])) (Ope
             {
                 // (4,31): error CS1750: A value of type 'string' cannot be used as a default parameter because there are no standard conversions to type 'int'
                 //     public static void M0(int x = "string") { } // 1
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x").WithArguments("string", "int").WithLocation(4, 31)
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "x")
+                    .WithArguments("string", "int")
+                    .WithLocation(4, 31),
             };
 
             var comp = CreateCompilation(new[] { source1, source0 });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp, expectedOperationTree0And1, expectedDiagnostics0);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp,
+                expectedOperationTree0And1,
+                expectedDiagnostics0
+            );
             comp.VerifyEmitDiagnostics(expectedDiagnostics0);
 
             var comp0 = CreateCompilation(source0);
             comp0.VerifyEmitDiagnostics(expectedDiagnostics0);
 
-            var comp1 = CreateCompilation(source1, references: new[] { comp0.ToMetadataReference() });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp1, expectedOperationTree0And1, DiagnosticDescription.None);
+            var comp1 = CreateCompilation(
+                source1,
+                references: new[] { comp0.ToMetadataReference() }
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp1,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp1.VerifyEmitDiagnostics(DiagnosticDescription.None);
         }
 
@@ -1479,7 +1736,8 @@ IInvocationOperation (void C0.M0([System.Int32 x = default(System.Int32)])) (Ope
         [Fact]
         public void ValidConversionForDefaultArgument_DateTime()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -1489,7 +1747,8 @@ public class C0
     public static void M0([Optional, DateTimeConstant(634953547672667479L)] DateTime x) { } 
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static void M1()
@@ -1498,7 +1757,8 @@ public class C1
     }
 }
 ";
-            var expectedOperationTree0And1 = @"
+            var expectedOperationTree0And1 =
+                @"
 IInvocationOperation (void C0.M0([System.DateTime x])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'C0.M0()')
   Instance Receiver: 
     null
@@ -1510,14 +1770,25 @@ IInvocationOperation (void C0.M0([System.DateTime x])) (OperationKind.Invocation
 ";
 
             var comp = CreateCompilation(new[] { source1, source0 });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp, expectedOperationTree0And1, DiagnosticDescription.None);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp.VerifyEmitDiagnostics();
 
             var comp0 = CreateCompilation(source0);
             comp0.VerifyEmitDiagnostics();
 
-            var comp1 = CreateCompilation(source1, references: new[] { comp0.ToMetadataReference() });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp1, expectedOperationTree0And1, DiagnosticDescription.None);
+            var comp1 = CreateCompilation(
+                source1,
+                references: new[] { comp0.ToMetadataReference() }
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp1,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp1.VerifyEmitDiagnostics(DiagnosticDescription.None);
         }
 
@@ -1525,7 +1796,8 @@ IInvocationOperation (void C0.M0([System.DateTime x])) (OperationKind.Invocation
         [Fact]
         public void InvalidConversionForDefaultArgument_DateTime()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -1534,7 +1806,8 @@ public class C0
     public static void M0([Optional, DateTimeConstant(634953547672667479L)] string x) { } 
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static void M1()
@@ -1544,7 +1817,8 @@ public class C1
 }
 ";
             // Note that DateTime constants which fail to convert to the parameter type are silently replaced with default(T).
-            var expectedOperationTree0And1 = @"
+            var expectedOperationTree0And1 =
+                @"
 IInvocationOperation (void C0.M0([System.String x])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'C0.M0()')
   Instance Receiver: 
     null
@@ -1556,14 +1830,25 @@ IInvocationOperation (void C0.M0([System.String x])) (OperationKind.Invocation, 
 ";
 
             var comp = CreateCompilation(new[] { source1, source0 });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp, expectedOperationTree0And1, DiagnosticDescription.None);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp.VerifyEmitDiagnostics();
 
             var comp0 = CreateCompilation(source0);
             comp0.VerifyEmitDiagnostics();
 
-            var comp1 = CreateCompilation(source1, references: new[] { comp0.ToMetadataReference() });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp1, expectedOperationTree0And1, DiagnosticDescription.None);
+            var comp1 = CreateCompilation(
+                source1,
+                references: new[] { comp0.ToMetadataReference() }
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp1,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp1.VerifyEmitDiagnostics(DiagnosticDescription.None);
         }
 
@@ -1571,7 +1856,8 @@ IInvocationOperation (void C0.M0([System.String x])) (OperationKind.Invocation, 
         [Fact]
         public void ValidConversionForDefaultArgument_Decimal()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -1580,7 +1866,8 @@ public class C0
     public static void M0([Optional, DecimalConstant(0, 0, 0, 0, 50)] decimal x) { } 
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static void M1()
@@ -1589,7 +1876,8 @@ public class C1
     }
 }
 ";
-            var expectedOperationTree0And1 = @"
+            var expectedOperationTree0And1 =
+                @"
 IInvocationOperation (void C0.M0([System.Decimal x = 50])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'C0.M0()')
   Instance Receiver: 
     null
@@ -1601,14 +1889,25 @@ IInvocationOperation (void C0.M0([System.Decimal x = 50])) (OperationKind.Invoca
 ";
 
             var comp = CreateCompilation(new[] { source1, source0 });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp, expectedOperationTree0And1, DiagnosticDescription.None);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp.VerifyEmitDiagnostics();
 
             var comp0 = CreateCompilation(source0);
             comp0.VerifyEmitDiagnostics();
 
-            var comp1 = CreateCompilation(source1, references: new[] { comp0.ToMetadataReference() });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp1, expectedOperationTree0And1, DiagnosticDescription.None);
+            var comp1 = CreateCompilation(
+                source1,
+                references: new[] { comp0.ToMetadataReference() }
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp1,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp1.VerifyEmitDiagnostics(DiagnosticDescription.None);
         }
 
@@ -1616,7 +1915,8 @@ IInvocationOperation (void C0.M0([System.Decimal x = 50])) (OperationKind.Invoca
         [Fact]
         public void InvalidConversionForDefaultArgument_Decimal()
         {
-            var source0 = @"
+            var source0 =
+                @"
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -1625,7 +1925,8 @@ public class C0
     public static void M0([Optional, DecimalConstant(0, 0, 0, 0, 50)] string x) { } 
 }
 ";
-            var source1 = @"
+            var source1 =
+                @"
 public class C1
 {
     public static void M1()
@@ -1635,7 +1936,8 @@ public class C1
 }
 ";
             // Note that decimal constants which fail to convert to the parameter type are silently replaced with default(T).
-            var expectedOperationTree0And1 = @"
+            var expectedOperationTree0And1 =
+                @"
 IInvocationOperation (void C0.M0([System.String x = 50])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'C0.M0()')
   Instance Receiver: 
     null
@@ -1647,14 +1949,25 @@ IInvocationOperation (void C0.M0([System.String x = 50])) (OperationKind.Invocat
 ";
 
             var comp = CreateCompilation(new[] { source1, source0 });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp, expectedOperationTree0And1, DiagnosticDescription.None);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp.VerifyEmitDiagnostics();
 
             var comp0 = CreateCompilation(source0);
             comp0.VerifyEmitDiagnostics();
 
-            var comp1 = CreateCompilation(source1, references: new[] { comp0.ToMetadataReference() });
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(comp1, expectedOperationTree0And1, DiagnosticDescription.None);
+            var comp1 = CreateCompilation(
+                source1,
+                references: new[] { comp0.ToMetadataReference() }
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                comp1,
+                expectedOperationTree0And1,
+                DiagnosticDescription.None
+            );
             comp1.VerifyEmitDiagnostics(DiagnosticDescription.None);
         }
 
@@ -1662,7 +1975,8 @@ IInvocationOperation (void C0.M0([System.String x = 50])) (OperationKind.Invocat
         [Fact]
         public void AssigningToIndexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -1678,7 +1992,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[10]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -1690,14 +2005,20 @@ IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { get; set;
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ReadingFromIndexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -1713,7 +2034,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[10]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -1725,14 +2047,20 @@ IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { get; set;
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultArgumentForIndexerGetter()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -1748,7 +2076,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 1], [System.Int32 j = 2]] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[j:10]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -1765,14 +2094,20 @@ IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 1], [System.I
 
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void ReadingFromWriteOnlyIndexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -1787,7 +2122,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { set; } (OperationKind.PropertyReference, Type: System.Int32, IsInvalid) (Syntax: 'this[10]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsInvalid) (Syntax: 'this')
@@ -1797,20 +2133,29 @@ IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { set; } (O
         InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(12,27): error CS0154: The property or indexer 'P.this[int]' cannot be used in this context because it lacks the get accessor
                 //         var x = /*<bind>*/this[10]/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "this[10]").WithArguments("P.this[int]").WithLocation(12, 27)
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "this[10]")
+                    .WithArguments("P.this[int]")
+                    .WithLocation(12, 27),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AssigningToReadOnlyIndexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -1825,7 +2170,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { get; } (OperationKind.PropertyReference, Type: System.Int32, IsInvalid) (Syntax: 'this[10]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P, IsInvalid) (Syntax: 'this')
@@ -1836,20 +2182,29 @@ IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index] { get; } (O
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(12,19): error CS0200: Property or indexer 'P.this[int]' cannot be assigned to -- it is read only
                 //         /*<bind>*/this[10]/*</bind>*/ = 9;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "this[10]").WithArguments("P.this[int]").WithLocation(12, 19)
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "this[10]")
+                    .WithArguments("P.this[int]")
+                    .WithLocation(12, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void OverridingIndexerWithDefaultArgument()
         {
-            string source = @"
+            string source =
+                @"
 class Base
 {
     public virtual int this[int x = 0, int y = 1]
@@ -1876,7 +2231,8 @@ internal class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 Derived.this[[System.Int32 x = 8], [System.Int32 y = 9]] { set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'd[0]')
   Instance Receiver: 
     ILocalReferenceOperation: d (OperationKind.LocalReference, Type: Derived) (Syntax: 'd')
@@ -1894,7 +2250,12 @@ IPropertyReferenceOperation: System.Int32 Derived.this[[System.Int32 x = 8], [Sy
 
             string expectedOutput = @"1";
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
 
             CompileAndVerify(new[] { source }, expectedOutput: expectedOutput);
         }
@@ -1903,7 +2264,8 @@ IPropertyReferenceOperation: System.Int32 Derived.this[[System.Int32 x = 8], [Sy
         [Fact]
         public void OmittedParamArrayArgumentInIndexerAccess()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     public int this[int x, params int[] y]
@@ -1918,7 +2280,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[System.Int32 x, params System.Int32[] y] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[0]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -1939,14 +2302,20 @@ IPropertyReferenceOperation: System.Int32 P.this[System.Int32 x, params System.I
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AssigningToReturnsByRefIndexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     ref int this[int x]
@@ -1960,7 +2329,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: ref System.Int32 P.this[System.Int32 x] { get; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[0]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -1972,14 +2342,20 @@ IPropertyReferenceOperation: ref System.Int32 P.this[System.Int32 x] { get; } (O
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void AssigningToIndexer_UsingDefaultArgumentFromSetter()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit P
        extends [mscorlib]System.Object
 {
@@ -2060,7 +2436,8 @@ IPropertyReferenceOperation: ref System.Int32 P.this[System.Int32 x] { get; } (O
 } // end of class P
 ";
 
-            var csharp = @"
+            var csharp =
+                @"
 class C
 {
     public static void Main(string[] args)
@@ -2070,7 +2447,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.Int32 j = 4]] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'p[10]')
   Instance Receiver: 
     ILocalReferenceOperation: p (OperationKind.LocalReference, Type: P) (Syntax: 'p')
@@ -2085,19 +2463,32 @@ IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.I
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
-            var expectedOutput = @"10 4
+            var expectedOutput =
+                @"10 4
 ";
 
-            var ilReference = VerifyOperationTreeAndDiagnosticsForTestWithIL<ElementAccessExpressionSyntax>(csharp, il, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            var ilReference =
+                VerifyOperationTreeAndDiagnosticsForTestWithIL<ElementAccessExpressionSyntax>(
+                    csharp,
+                    il,
+                    expectedOperationTree,
+                    expectedDiagnostics,
+                    additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+                );
 
-            CompileAndVerify(new[] { csharp }, new[] { ilReference }, expectedOutput: expectedOutput);
+            CompileAndVerify(
+                new[] { csharp },
+                new[] { ilReference },
+                expectedOutput: expectedOutput
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void ReadFromIndexer_UsingDefaultArgumentFromGetter()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit P
        extends [mscorlib]System.Object
 {
@@ -2178,7 +2569,8 @@ IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.I
 } // end of class P
 ";
 
-            var csharp = @"
+            var csharp =
+                @"
 class C
 {
     public static void Main(string[] args)
@@ -2188,7 +2580,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.Int32 j = 4]] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'p[10]')
   Instance Receiver: 
     ILocalReferenceOperation: p (OperationKind.LocalReference, Type: P) (Syntax: 'p')
@@ -2204,19 +2597,32 @@ IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.I
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedOutput = @"10 2
+            var expectedOutput =
+                @"10 2
 ";
 
-            var ilReference = VerifyOperationTreeAndDiagnosticsForTestWithIL<ElementAccessExpressionSyntax>(csharp, il, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            var ilReference =
+                VerifyOperationTreeAndDiagnosticsForTestWithIL<ElementAccessExpressionSyntax>(
+                    csharp,
+                    il,
+                    expectedOperationTree,
+                    expectedDiagnostics,
+                    additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+                );
 
-            CompileAndVerify(new[] { csharp }, new[] { ilReference }, expectedOutput: expectedOutput);
+            CompileAndVerify(
+                new[] { csharp },
+                new[] { ilReference },
+                expectedOutput: expectedOutput
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void IndexerAccess_LHSOfCompoundAssignment()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit P
        extends [mscorlib]System.Object
 {
@@ -2297,7 +2703,8 @@ IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.I
 } // end of class P
 ";
 
-            var csharp = @"
+            var csharp =
+                @"
 class C
 {
     public static void Main(string[] args)
@@ -2307,7 +2714,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.Int32 j = 4]] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'p[10]')
   Instance Receiver: 
     ILocalReferenceOperation: p (OperationKind.LocalReference, Type: P) (Syntax: 'p')
@@ -2323,20 +2731,33 @@ IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.I
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            var expectedOutput = @"10 2
+            var expectedOutput =
+                @"10 2
 10 2
 ";
 
-            var ilReference = VerifyOperationTreeAndDiagnosticsForTestWithIL<ElementAccessExpressionSyntax>(csharp, il, expectedOperationTree, expectedDiagnostics, additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify);
+            var ilReference =
+                VerifyOperationTreeAndDiagnosticsForTestWithIL<ElementAccessExpressionSyntax>(
+                    csharp,
+                    il,
+                    expectedOperationTree,
+                    expectedDiagnostics,
+                    additionalOperationTreeVerifier: IndexerAccessArgumentVerifier.Verify
+                );
 
-            CompileAndVerify(new[] { csharp }, new[] { ilReference }, expectedOutput: expectedOutput);
+            CompileAndVerify(
+                new[] { csharp },
+                new[] { ilReference },
+                expectedOutput: expectedOutput
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]
         public void InvalidConversionForDefaultArgument_InIL()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi beforefieldinit P
        extends [mscorlib]System.Object
 {
@@ -2362,7 +2783,8 @@ IPropertyReferenceOperation: System.Int32 P.this[[System.Int32 i = 3], [System.I
 } // end of class P
 ";
 
-            var csharp = @"
+            var csharp =
+                @"
 class C
 {
     public void M2()
@@ -2372,7 +2794,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation ( void P.M1([System.Int32 s = ""abc""])) (OperationKind.Invocation, Type: System.Void, IsInvalid) (Syntax: 'p.M1()')
   Instance Receiver: 
     ILocalReferenceOperation: p (OperationKind.LocalReference, Type: P, IsInvalid) (Syntax: 'p')
@@ -2389,17 +2812,25 @@ IInvocationOperation ( void P.M1([System.Int32 s = ""abc""])) (OperationKind.Inv
             {
                 // file.cs(7,20): error CS0029: Cannot implicitly convert type 'string' to 'int'
                 //          /*<bind>*/p.M1()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "p.M1()").WithArguments("string", "int").WithLocation(7, 20)
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "p.M1()")
+                    .WithArguments("string", "int")
+                    .WithLocation(7, 20),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTestWithIL<InvocationExpressionSyntax>(csharp, il, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTestWithIL<InvocationExpressionSyntax>(
+                csharp,
+                il,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(20330, "https://github.com/dotnet/roslyn/issues/20330")]
         public void DefaultValueNonNullForNullableParameterTypeWithMissingNullableReference_Call()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -2412,7 +2843,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2([System.Boolean[missing]? x = true])) (OperationKind.Invocation, Type: System.Void[missing], IsInvalid) (Syntax: 'M2()')
   Instance Receiver: 
     null
@@ -2426,42 +2858,67 @@ IInvocationOperation (void P.M2([System.Boolean[missing]? x = true])) (Operation
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (4,12): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     static void M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void").WithArguments("System.Void").WithLocation(4, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void")
+                    .WithArguments("System.Void")
+                    .WithLocation(4, 12),
                 // (9,20): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 //     static void M2(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool").WithArguments("System.Boolean").WithLocation(9, 20),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(9, 20),
                 // (9,20): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     static void M2(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?").WithArguments("System.Nullable`1").WithLocation(9, 20),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(9, 20),
                 // (9,12): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     static void M2(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void").WithArguments("System.Void").WithLocation(9, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void")
+                    .WithArguments("System.Void")
+                    .WithLocation(9, 12),
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(2, 7),
                 // (9,30): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 //     static void M2(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "true").WithArguments("System.Boolean").WithLocation(9, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "true")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(9, 30),
                 // (6,19): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //         /*<bind>*/M2()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "M2").WithArguments("System.Object").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "M2")
+                    .WithArguments("System.Object")
+                    .WithLocation(6, 19),
                 // (2,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 // class P
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(2, 7),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(20330, "https://github.com/dotnet/roslyn/issues/20330")]
         public void DefaultValueNonNullForNullableParameterTypeWithMissingNullableReference_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static P M1()
@@ -2474,7 +2931,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: P..ctor([System.Boolean[missing]? x = true])) (OperationKind.ObjectCreation, Type: P, IsInvalid) (Syntax: 'new P()')
   Arguments(1):
       IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: x) (OperationKind.Argument, Type: null, IsInvalid, IsImplicit) (Syntax: 'new P()')
@@ -2488,44 +2946,72 @@ IObjectCreationOperation (Constructor: P..ctor([System.Boolean[missing]? x = tru
     null
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (4,12): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //     static P M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(4, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(4, 12),
                 // (9,7): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 //     P(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool").WithArguments("System.Boolean").WithLocation(9, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(9, 7),
                 // (9,7): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     P(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?").WithArguments("System.Nullable`1").WithLocation(9, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(9, 7),
                 // (9,5): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     P(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"P(bool? x = true)
+                Diagnostic(
+                        ErrorCode.ERR_PredefinedTypeNotFound,
+                        @"P(bool? x = true)
     {
-    }").WithArguments("System.Void").WithLocation(9, 5),
+    }"
+                    )
+                    .WithArguments("System.Void")
+                    .WithLocation(9, 5),
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(2, 7),
                 // (9,17): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 //     P(bool? x = true)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "true").WithArguments("System.Boolean").WithLocation(9, 17),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "true")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(9, 17),
                 // (6,30): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //         return /*<bind>*/new P()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(6, 30),
                 // (9,5): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 //     P(bool? x = true)
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(9, 5)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(9, 5),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(20330, "https://github.com/dotnet/roslyn/issues/20330")]
         public void DefaultValueNonNullForNullableParameterTypeWithMissingNullableReference_Indexer()
         {
-            string source = @"
+            string source =
+                @"
 
 class P
 {
@@ -2542,7 +3028,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32[missing] P.this[System.Int32[missing] x, [System.Int32[missing]? y = 5]] { get; set; } (OperationKind.PropertyReference, Type: System.Int32[missing], IsInvalid) (Syntax: 'this[0]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -2560,57 +3047,92 @@ IPropertyReferenceOperation: System.Int32[missing] P.this[System.Int32[missing] 
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (5,13): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 13),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 13),
                 // (6,12): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 5]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(6, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(6, 12),
                 // (6,21): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 5]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(6, 21),
                 // (6,28): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 5]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(6, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(6, 28),
                 // (6,28): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     public int this[int x, int? y = 5]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?").WithArguments("System.Nullable`1").WithLocation(6, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(6, 28),
                 // (9,9): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //         set { _number = value; }
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }").WithArguments("System.Void").WithLocation(9, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }")
+                    .WithArguments("System.Void")
+                    .WithLocation(9, 9),
                 // (12,5): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     void M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void").WithArguments("System.Void").WithLocation(12, 5),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void")
+                    .WithArguments("System.Void")
+                    .WithLocation(12, 5),
                 // (3,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(3, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(3, 7),
                 // (6,37): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 5]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "5").WithArguments("System.Int32").WithLocation(6, 37),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "5")
+                    .WithArguments("System.Int32")
+                    .WithLocation(6, 37),
                 // (5,27): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(5, 27),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 27),
                 // (14,24): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         /*<bind>*/this[0]/*</bind>*/ = 9;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(14, 24),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(14, 24),
                 // (14,40): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         /*<bind>*/this[0]/*</bind>*/ = 9;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "9").WithArguments("System.Int32").WithLocation(14, 40),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "9")
+                    .WithArguments("System.Int32")
+                    .WithLocation(14, 40),
                 // (3,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 // class P
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(3, 7)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(3, 7),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(20330, "https://github.com/dotnet/roslyn/issues/20330")]
         public void DefaultValueNullForNullableParameterTypeWithMissingNullableReference_Call()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -2623,7 +3145,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2([System.Boolean[missing]? x = null])) (OperationKind.Invocation, Type: System.Void[missing], IsInvalid) (Syntax: 'M2()')
   Instance Receiver: 
     null
@@ -2634,39 +3157,62 @@ IInvocationOperation (void P.M2([System.Boolean[missing]? x = null])) (Operation
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (4,12): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     static void M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void").WithArguments("System.Void").WithLocation(4, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void")
+                    .WithArguments("System.Void")
+                    .WithLocation(4, 12),
                 // (9,20): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 //     static void M2(bool? x = null)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool").WithArguments("System.Boolean").WithLocation(9, 20),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(9, 20),
                 // (9,20): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     static void M2(bool? x = null)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?").WithArguments("System.Nullable`1").WithLocation(9, 20),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(9, 20),
                 // (9,12): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     static void M2(bool? x = null)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void").WithArguments("System.Void").WithLocation(9, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void")
+                    .WithArguments("System.Void")
+                    .WithLocation(9, 12),
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(2, 7),
                 // (6,19): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //         /*<bind>*/M2()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "M2").WithArguments("System.Object").WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "M2")
+                    .WithArguments("System.Object")
+                    .WithLocation(6, 19),
                 // (2,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 // class P
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(2, 7),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(20330, "https://github.com/dotnet/roslyn/issues/20330")]
         public void DefaultValueNullForNullableParameterTypeWithMissingNullableReference_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static P M1()
@@ -2679,7 +3225,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: P..ctor([System.Boolean[missing]? x = null])) (OperationKind.ObjectCreation, Type: P, IsInvalid) (Syntax: 'new P()')
   Arguments(1):
       IArgumentOperation (ArgumentKind.DefaultValue, Matching Parameter: x) (OperationKind.Argument, Type: null, IsInvalid, IsImplicit) (Syntax: 'new P()')
@@ -2690,41 +3237,67 @@ IObjectCreationOperation (Constructor: P..ctor([System.Boolean[missing]? x = nul
     null
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(2, 7),
                 // (4,12): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //     static P M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(4, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(4, 12),
                 // (9,7): error CS0518: Predefined type 'System.Boolean' is not defined or imported
                 //     P(bool? x = null)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool").WithArguments("System.Boolean").WithLocation(9, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool")
+                    .WithArguments("System.Boolean")
+                    .WithLocation(9, 7),
                 // (9,7): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     P(bool? x = null)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?").WithArguments("System.Nullable`1").WithLocation(9, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "bool?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(9, 7),
                 // (9,5): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     P(bool? x = null)
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, @"P(bool? x = null)
+                Diagnostic(
+                        ErrorCode.ERR_PredefinedTypeNotFound,
+                        @"P(bool? x = null)
     {
-    }").WithArguments("System.Void").WithLocation(9, 5),
+    }"
+                    )
+                    .WithArguments("System.Void")
+                    .WithLocation(9, 5),
                 // (6,30): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //         return /*<bind>*/new P()/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(6, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(6, 30),
                 // (9,5): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 //     P(bool? x = null)
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(9, 5)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(9, 5),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(20330, "https://github.com/dotnet/roslyn/issues/20330")]
         public void DefaultValueNullForNullableParameterTypeWithMissingNullableReference_Indexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -2741,7 +3314,8 @@ class P
 }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32[missing] P.this[System.Int32[missing] x, [System.Int32[missing]? y = null]] { get; set; } (OperationKind.PropertyReference, Type: System.Int32[missing], IsInvalid) (Syntax: 'this[0]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -2756,57 +3330,90 @@ IPropertyReferenceOperation: System.Int32[missing] P.this[System.Int32[missing] 
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (16,1): error CS1022: Type or namespace definition, or end-of-file expected
                 // }
                 Diagnostic(ErrorCode.ERR_EOFExpected, "}").WithLocation(16, 1),
                 // (4,13): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(4, 13),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(4, 13),
                 // (5,12): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 12),
                 // (5,21): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 21),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 21),
                 // (5,28): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 28),
                 // (5,28): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?").WithArguments("System.Nullable`1").WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(5, 28),
                 // (8,9): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //         set { _number = value; }
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }").WithArguments("System.Void").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }")
+                    .WithArguments("System.Void")
+                    .WithLocation(8, 9),
                 // (11,5): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //     void M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void").WithArguments("System.Void").WithLocation(11, 5),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "void")
+                    .WithArguments("System.Void")
+                    .WithLocation(11, 5),
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(2, 7),
                 // (4,27): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(4, 27),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(4, 27),
                 // (13,24): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         /*<bind>*/this[0]/*</bind>*/ = 9;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(13, 24),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(13, 24),
                 // (13,40): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         /*<bind>*/this[0]/*</bind>*/ = 9;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "9").WithArguments("System.Int32").WithLocation(13, 40),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "9")
+                    .WithArguments("System.Int32")
+                    .WithLocation(13, 40),
                 // (2,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 // class P
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(2, 7),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact, WorkItem(20330, "https://github.com/dotnet/roslyn/issues/20330")]
         public void DefaultValueWithParameterErrorType_Call()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -2819,7 +3426,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2(System.Int32 x, [S s = null])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1)')
   Instance Receiver: 
     null
@@ -2834,13 +3442,18 @@ IInvocationOperation (void P.M2(System.Int32 x, [S s = null])) (OperationKind.In
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
-                      // file.cs(9,27): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
-                      //     static void M2(int x, S s = 0)
-                      Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S").WithArguments("S").WithLocation(9, 27),
-                      // file.cs(9,29): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'S'
-                      //     static void M2(int x, S s = 0)
-                      Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s").WithArguments("int", "S").WithLocation(9, 29)
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
+                // file.cs(9,27): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
+                //     static void M2(int x, S s = 0)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S")
+                    .WithArguments("S")
+                    .WithLocation(9, 27),
+                // file.cs(9,29): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'S'
+                //     static void M2(int x, S s = 0)
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s")
+                    .WithArguments("int", "S")
+                    .WithLocation(9, 29),
             };
 
             var comp = CreateCompilation(source);
@@ -2852,7 +3465,8 @@ IInvocationOperation (void P.M2(System.Int32 x, [S s = null])) (OperationKind.In
         [Fact]
         public void DefaultValueWithParameterErrorType_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static P M1()
@@ -2865,7 +3479,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: P..ctor(System.Int32 x, [S s = null])) (OperationKind.ObjectCreation, Type: P) (Syntax: 'new P(1)')
   Arguments(2):
       IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: x) (OperationKind.Argument, Type: null) (Syntax: '1')
@@ -2880,13 +3495,18 @@ IObjectCreationOperation (Constructor: P..ctor(System.Int32 x, [S s = null])) (O
     null
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(9,14): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
                 //     P(int x, S s = 0)
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S").WithArguments("S").WithLocation(9, 14),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S")
+                    .WithArguments("S")
+                    .WithLocation(9, 14),
                 // file.cs(9,16): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'S'
                 //     P(int x, S s = 0)
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s").WithArguments("int", "S").WithLocation(9, 16)
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s")
+                    .WithArguments("int", "S")
+                    .WithLocation(9, 16),
             };
 
             var comp = CreateCompilation(source);
@@ -2898,7 +3518,8 @@ IObjectCreationOperation (Constructor: P..ctor(System.Int32 x, [S s = null])) (O
         [Fact]
         public void DefaultValueWithParameterErrorType_Indexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -2914,7 +3535,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index, [S s = null]] { get; set; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[0]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -2929,13 +3551,18 @@ IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index, [S s = null
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(5,32): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
                 //     public int this[int index, S s = 0]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S").WithArguments("S").WithLocation(5, 32),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S")
+                    .WithArguments("S")
+                    .WithLocation(5, 32),
                 // file.cs(5,34): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'S'
                 //     public int this[int index, S s = 0]
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s").WithArguments("int", "S").WithLocation(5, 34)
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s")
+                    .WithArguments("int", "S")
+                    .WithLocation(5, 34),
             };
 
             var comp = CreateCompilation(source);
@@ -2950,7 +3577,8 @@ IPropertyReferenceOperation: System.Int32 P.this[System.Int32 index, [S s = null
         {
             // TODO: https://github.com/dotnet/roslyn/issues/18722
             //       This should be treated as invalid invocation.
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -2967,7 +3595,8 @@ class G<T>
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2(System.Int32 x, [G<S> s = null])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1)')
   Instance Receiver: 
     null
@@ -2982,13 +3611,20 @@ IInvocationOperation (void P.M2(System.Int32 x, [G<S> s = null])) (OperationKind
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
-                      // file.cs(9,29): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
-                      //     static void M2(int x, G<S> s = null)
-                      Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S").WithArguments("S").WithLocation(9, 29)
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
+                // file.cs(9,29): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
+                //     static void M2(int x, G<S> s = null)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S")
+                    .WithArguments("S")
+                    .WithLocation(9, 29),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -2998,7 +3634,8 @@ IInvocationOperation (void P.M2(System.Int32 x, [G<S> s = null])) (OperationKind
         {
             // TODO: https://github.com/dotnet/roslyn/issues/18722
             //       This should be treated as invalid invocation.
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3015,7 +3652,8 @@ struct G<T>
 {
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2(System.Int32 x, [G<S>? s = null])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1)')
   Instance Receiver: 
     null
@@ -3030,20 +3668,28 @@ IInvocationOperation (void P.M2(System.Int32 x, [G<S>? s = null])) (OperationKin
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
-                      // file.cs(9,29): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
-                      //     static void M2(int x, G<S> s = null)
-                      Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S").WithArguments("S").WithLocation(9, 29)
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
+                // file.cs(9,29): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
+                //     static void M2(int x, G<S> s = null)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S")
+                    .WithArguments("S")
+                    .WithLocation(9, 29),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void GettingInOutConversionFromCSharpArgumentShouldThrowException()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3057,7 +3703,9 @@ class P
 }
 ";
             var compilation = CreateCompilation(source);
-            var (operation, syntaxNode) = GetOperationAndSyntaxForTest<InvocationExpressionSyntax>(compilation);
+            var (operation, syntaxNode) = GetOperationAndSyntaxForTest<InvocationExpressionSyntax>(
+                compilation
+            );
 
             var invocation = (IInvocationOperation)operation;
             var argument = invocation.Arguments[0];
@@ -3070,7 +3718,8 @@ class P
         [Fact]
         public void DirectlyBindArgument_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3080,7 +3729,8 @@ class P
     static void M2(int i) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: '1')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3088,13 +3738,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindRefArgument_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3105,7 +3760,8 @@ class P
     static void M2(ref int i) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: 'ref i')
   ILocalReferenceOperation: i (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'i')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3113,13 +3769,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindInArgument_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3131,7 +3792,8 @@ class P
     static void M2(in int i) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: 'refI')
   ILocalReferenceOperation: refI (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'refI')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3139,13 +3801,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindOutArgument_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3156,25 +3823,34 @@ class P
     static void M2(out int i) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: 'out i')
   ILocalReferenceOperation: i (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'i')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0177: The out parameter 'i' must be assigned to before control leaves the current method
                 //     static void M2(out int i) { }
-                Diagnostic(ErrorCode.ERR_ParamUnassigned, "M2").WithArguments("i").WithLocation(9, 17)
+                Diagnostic(ErrorCode.ERR_ParamUnassigned, "M2")
+                    .WithArguments("i")
+                    .WithLocation(9, 17),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindParamsArgument1_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3184,7 +3860,8 @@ class P
     static void M2(params int[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'M2(1);')
   Expression: 
     IInvocationOperation (void P.M2(params System.Int32[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(1)')
@@ -3204,13 +3881,18 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindParamsArgument2_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3220,7 +3902,8 @@ class P
     static void M2(params int[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'M2(0, 1);')
   Expression: 
     IInvocationOperation (void P.M2(params System.Int32[] array)) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2(0, 1)')
@@ -3241,13 +3924,18 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindNamedArgument1_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3257,7 +3945,8 @@ class P
     static void M2(int i, int j) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: j) (OperationKind.Argument, Type: null) (Syntax: 'j: 1')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3265,13 +3954,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: j) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindNamedArgument2_InvocationExpression()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3281,7 +3975,8 @@ class P
     static void M2(int i, int j) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: 'i: 1')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3289,13 +3984,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindArgument_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3305,7 +4005,8 @@ class P
     public P(int i) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: '1')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3313,13 +4014,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindRefArgument_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3330,7 +4036,8 @@ class P
     public P(ref int i) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: 'ref i')
   ILocalReferenceOperation: i (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'i')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3338,13 +4045,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindOutArgument_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3355,25 +4067,34 @@ class P
     public P(out int i) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: 'out i')
   ILocalReferenceOperation: i (OperationKind.LocalReference, Type: System.Int32) (Syntax: 'i')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
   OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0177: The out parameter 'i' must be assigned to before control leaves the current method
                 //     public P(out int i) { }
-                Diagnostic(ErrorCode.ERR_ParamUnassigned, "P").WithArguments("i").WithLocation(9, 12)
+                Diagnostic(ErrorCode.ERR_ParamUnassigned, "P")
+                    .WithArguments("i")
+                    .WithLocation(9, 12),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindParamsArgument1_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3383,7 +4104,8 @@ class P
     public P(params int[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'new P(1);')
   Expression: 
     IObjectCreationOperation (Constructor: P..ctor(params System.Int32[] array)) (OperationKind.ObjectCreation, Type: P) (Syntax: 'new P(1)')
@@ -3403,13 +4125,18 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindParamsArgument2_ObjectCreation()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3419,7 +4146,8 @@ class P
     public P(params int[] array) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'new P(0, 1);')
   Expression: 
     IObjectCreationOperation (Constructor: P..ctor(params System.Int32[] array)) (OperationKind.ObjectCreation, Type: P) (Syntax: 'new P(0, 1)')
@@ -3440,13 +4168,18 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindArgument_Indexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -3456,7 +4189,8 @@ class P
     public int this[int i] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind.Argument, Type: null) (Syntax: '1')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3464,13 +4198,18 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i) (OperationKind
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindParamsArgument1_Indexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -3480,7 +4219,8 @@ class P
     public int this[params int[] array] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[params System.Int32[] array] { get; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[1]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -3498,13 +4238,18 @@ IPropertyReferenceOperation: System.Int32 P.this[params System.Int32[] array] { 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindParamsArgument2_Indexer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1()
@@ -3514,7 +4259,8 @@ class P
     public int this[params int[] array] => 0;
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IPropertyReferenceOperation: System.Int32 P.this[params System.Int32[] array] { get; } (OperationKind.PropertyReference, Type: System.Int32) (Syntax: 'this[0, 1]')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: P) (Syntax: 'this')
@@ -3533,16 +4279,22 @@ IPropertyReferenceOperation: System.Int32 P.this[params System.Int32[] array] { 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ElementAccessExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindArgument_Attribute()
         {
-            string source = @"
+            string source =
+                @"
 [assembly: /*<bind>*/System.CLSCompliant(isCompliant: true)/*</bind>*/]
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IAttributeOperation (OperationKind.Attribute, Type: null) (Syntax: 'System.CLSC ... iant: true)')
   IObjectCreationOperation (Constructor: System.CLSCompliantAttribute..ctor(System.Boolean isCompliant)) (OperationKind.ObjectCreation, Type: System.CLSCompliantAttribute, IsImplicit) (Syntax: 'System.CLSC ... iant: true)')
     Arguments(1):
@@ -3555,13 +4307,18 @@ IAttributeOperation (OperationKind.Attribute, Type: null) (Syntax: 'System.CLSC 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AttributeSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AttributeSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindArgument2_Attribute()
         {
-            string source = @"
+            string source =
+                @"
 [assembly: MyA(/*<bind>*/Prop = ""test""/*</bind>*/)]
 
 class MyA : System.Attribute
@@ -3569,7 +4326,8 @@ class MyA : System.Attribute
     public string Prop {get;set;}
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.String) (Syntax: 'Prop = ""test""')
   Left: 
     IPropertyReferenceOperation: System.String MyA.Prop { get; set; } (OperationKind.PropertyReference, Type: System.String) (Syntax: 'Prop')
@@ -3580,13 +4338,18 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.String)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<AttributeArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AttributeArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DirectlyBindArgument_NonTrailingNamedArgument()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1(int i, int i2)
@@ -3595,7 +4358,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i2) (OperationKind.Argument, Type: null) (Syntax: '2')
   ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
   InConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
@@ -3603,14 +4367,19 @@ IArgumentOperation (ArgumentKind.Explicit, Matching Parameter: i2) (OperationKin
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ArgumentSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void NonNullDefaultValueForNullableParameterType()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -3620,7 +4389,8 @@ class P
     static void M2(int? x = 10) { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2([System.Int32? x = 10])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     null
@@ -3634,7 +4404,12 @@ IInvocationOperation (void P.M2([System.Int32? x = 10])) (OperationKind.Invocati
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -3644,17 +4419,21 @@ IInvocationOperation (void P.M2([System.Int32? x = 10])) (OperationKind.Invocati
         [InlineData("default(int?)")]
         public void NullDefaultValueForNullableParameterType(string defaultValue)
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
     {
         /*<bind>*/M2()/*</bind>*/;
     }
-    static void M2(int? x = " + defaultValue + @") { }
+    static void M2(int? x = "
+                + defaultValue
+                + @") { }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvocationOperation (void P.M2([System.Int32? x = null])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M2()')
   Instance Receiver: 
     null
@@ -3665,14 +4444,20 @@ IInvocationOperation (void P.M2([System.Int32? x = null])) (OperationKind.Invoca
         OutConversion: CommonConversion (Exists: True, IsIdentity: True, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AssigningToReadOnlyIndexerInObjectCreationInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -3687,7 +4472,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: P..ctor()) (OperationKind.ObjectCreation, Type: P, IsInvalid) (Syntax: 'new P() { [0] = 1 }')
   Arguments(0)
   Initializer: 
@@ -3702,20 +4488,28 @@ IObjectCreationOperation (Constructor: P..ctor()) (OperationKind.ObjectCreation,
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(12,36): error CS0200: Property or indexer 'P.this[int]' cannot be assigned to -- it is read only
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "[0]").WithArguments("P.this[int]").WithLocation(12, 36)
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "[0]")
+                    .WithArguments("P.this[int]")
+                    .WithLocation(12, 36),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void WrongSignatureIndexerInObjectCreationInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -3731,7 +4525,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: P..ctor()) (OperationKind.ObjectCreation, Type: P, IsInvalid) (Syntax: 'new P() { [0] = 1 }')
   Arguments(0)
   Initializer: 
@@ -3746,20 +4541,28 @@ IObjectCreationOperation (Constructor: P..ctor()) (OperationKind.ObjectCreation,
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(13,37): error CS1503: Argument 1: cannot convert from 'int' to 'string'
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_BadArgType, "0").WithArguments("1", "int", "string").WithLocation(13, 37)
+                Diagnostic(ErrorCode.ERR_BadArgType, "0")
+                    .WithArguments("1", "int", "string")
+                    .WithLocation(13, 37),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueNonNullForNullableParameterTypeWithMissingNullableReference_IndexerInObjectCreationInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -3775,7 +4578,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: P, IsInvalid) (Syntax: 'new P() { [0] = 1 }')
   Children(1):
       IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: P, IsInvalid) (Syntax: '{ [0] = 1 }')
@@ -3801,63 +4605,102 @@ IInvalidOperation (OperationKind.Invalid, Type: P, IsInvalid) (Syntax: 'new P() 
                 ILiteralOperation (OperationKind.Literal, Type: System.Int32[missing], Constant: 1, IsInvalid) (Syntax: '1')
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (4,13): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(4, 13),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(4, 13),
                 // (5,12): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 0]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 12),
                 // (5,21): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 0]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 21),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 21),
                 // (5,28): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 0]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 28),
                 // (5,28): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     public int this[int x, int? y = 0]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?").WithArguments("System.Nullable`1").WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(5, 28),
                 // (8,9): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //         set { _number = value; }
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }").WithArguments("System.Void").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }")
+                    .WithArguments("System.Void")
+                    .WithLocation(8, 9),
                 // (11,5): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //     P M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(11, 5),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(11, 5),
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(2, 7),
                 // (5,37): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = 0]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(5, 37),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 37),
                 // (4,27): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(4, 27),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(4, 27),
                 // (13,30): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(13, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(13, 30),
                 // (13,37): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(13, 37),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(13, 37),
                 // (13,42): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1").WithArguments("System.Int32").WithLocation(13, 42),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1")
+                    .WithArguments("System.Int32")
+                    .WithLocation(13, 42),
                 // (13,30): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Void").WithLocation(13, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Void")
+                    .WithLocation(13, 30),
                 // (2,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 // class P
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(2, 7),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueNullForNullableParameterTypeWithMissingNullableReference_IndexerInObjectCreationInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -3873,7 +4716,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: P, IsInvalid) (Syntax: 'new P() { [0] = 1 }')
   Children(1):
       IObjectOrCollectionInitializerOperation (OperationKind.ObjectOrCollectionInitializer, Type: P, IsInvalid) (Syntax: '{ [0] = 1 }')
@@ -3896,60 +4740,97 @@ IInvalidOperation (OperationKind.Invalid, Type: P, IsInvalid) (Syntax: 'new P() 
                 ILiteralOperation (OperationKind.Literal, Type: System.Int32[missing], Constant: 1, IsInvalid) (Syntax: '1')
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // (4,13): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(4, 13),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(4, 13),
                 // (5,12): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 12),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 12),
                 // (5,21): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 21),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 21),
                 // (5,28): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int").WithArguments("System.Int32").WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int")
+                    .WithArguments("System.Int32")
+                    .WithLocation(5, 28),
                 // (5,28): error CS0518: Predefined type 'System.Nullable`1' is not defined or imported
                 //     public int this[int x, int? y = null]
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?").WithArguments("System.Nullable`1").WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "int?")
+                    .WithArguments("System.Nullable`1")
+                    .WithLocation(5, 28),
                 // (8,9): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //         set { _number = value; }
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }").WithArguments("System.Void").WithLocation(8, 9),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "set { _number = value; }")
+                    .WithArguments("System.Void")
+                    .WithLocation(8, 9),
                 // (11,5): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //     P M1()
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(11, 5),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(11, 5),
                 // (2,7): error CS0518: Predefined type 'System.Object' is not defined or imported
                 // class P
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(2, 7),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(2, 7),
                 // (4,27): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //     private int _number = 0;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(4, 27),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(4, 27),
                 // (13,30): error CS0518: Predefined type 'System.Object' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Object").WithLocation(13, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Object")
+                    .WithLocation(13, 30),
                 // (13,37): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0").WithArguments("System.Int32").WithLocation(13, 37),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "0")
+                    .WithArguments("System.Int32")
+                    .WithLocation(13, 37),
                 // (13,42): error CS0518: Predefined type 'System.Int32' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1").WithArguments("System.Int32").WithLocation(13, 42),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "1")
+                    .WithArguments("System.Int32")
+                    .WithLocation(13, 42),
                 // (13,30): error CS0518: Predefined type 'System.Void' is not defined or imported
                 //         return /*<bind>*/new P() { [0] = 1 }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P").WithArguments("System.Void").WithLocation(13, 30),
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "P")
+                    .WithArguments("System.Void")
+                    .WithLocation(13, 30),
                 // (2,7): error CS1729: 'object' does not contain a constructor that takes 0 arguments
                 // class P
-                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P").WithArguments("object", "0").WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_BadCtorArgCount, "P")
+                    .WithArguments("object", "0")
+                    .WithLocation(2, 7),
             };
 
-            var compilation = CreateEmptyCompilation(source, options: Test.Utilities.TestOptions.ReleaseDll);
-            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(compilation, expectedOperationTree, expectedDiagnostics);
+            var compilation = CreateEmptyCompilation(
+                source,
+                options: Test.Utilities.TestOptions.ReleaseDll
+            );
+            VerifyOperationTreeAndDiagnosticsForTest<ObjectCreationExpressionSyntax>(
+                compilation,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void DefaultValueWithParameterErrorType_IndexerInObjectCreationInitializer()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     private int _number = 0;
@@ -3965,7 +4846,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IObjectCreationOperation (Constructor: P..ctor()) (OperationKind.ObjectCreation, Type: P) (Syntax: 'new P() { [0] = 1 }')
   Arguments(0)
   Initializer: 
@@ -3989,13 +4871,18 @@ IObjectCreationOperation (Constructor: P..ctor()) (OperationKind.ObjectCreation,
               ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
 ";
 
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(5,28): error CS0246: The type or namespace name 'S' could not be found (are you missing a using directive or an assembly reference?)
                 //     public int this[int x, S s = 0]
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S").WithArguments("S").WithLocation(5, 28),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "S")
+                    .WithArguments("S")
+                    .WithLocation(5, 28),
                 // file.cs(5,30): error CS1750: A value of type 'int' cannot be used as a default parameter because there are no standard conversions to type 'S'
                 //     public int this[int x, S s = 0]
-                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s").WithArguments("int", "S").WithLocation(5, 30)
+                Diagnostic(ErrorCode.ERR_NoConversionForDefaultParam, "s")
+                    .WithArguments("int", "S")
+                    .WithLocation(5, 30),
             };
 
             var comp = CreateCompilation(source);
@@ -4008,7 +4895,8 @@ IObjectCreationOperation (Constructor: P..ctor()) (OperationKind.ObjectCreation,
         [WorkItem(39868, "https://github.com/dotnet/roslyn/issues/39868")]
         public void BadNullableDefaultArgument()
         {
-            string source = @"
+            string source =
+                @"
 public struct MyStruct
 {
     static void M1(MyStruct? s = default(MyStruct)) { } // 1
@@ -4016,7 +4904,8 @@ public struct MyStruct
 }
 ";
             // Note that we fall back to a literal 'null' argument here because it's our general handling for bad default parameter values in source.
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'M1();')
   Expression: 
     IInvocationOperation (void MyStruct.M1([MyStruct? s = null])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M1()')
@@ -4033,7 +4922,9 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
             {
                 // (4,30): error CS1770: A value of type 'MyStruct' cannot be used as default parameter for nullable parameter 's' because 'MyStruct' is not a simple type
                 //     static void M1(MyStruct? s = default(MyStruct)) { } // 1
-                Diagnostic(ErrorCode.ERR_NoConversionForNubDefaultParam, "s").WithArguments("MyStruct", "s").WithLocation(4, 30)
+                Diagnostic(ErrorCode.ERR_NoConversionForNubDefaultParam, "s")
+                    .WithArguments("MyStruct", "s")
+                    .WithLocation(4, 30),
             };
 
             var comp = CreateCompilation(source);
@@ -4046,7 +4937,8 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
         [WorkItem(39868, "https://github.com/dotnet/roslyn/issues/39868")]
         public void NullableEnumDefaultArgument_NonZeroValue()
         {
-            string source = @"
+            string source =
+                @"
 #nullable enable
 
 public enum E { E1 = 1 }
@@ -4061,7 +4953,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: 'M0();')
   Expression: 
     IInvocationOperation ( void C.M0([E? e = E.E1])) (OperationKind.Invocation, Type: System.Void) (Syntax: 'M0()')
@@ -4080,7 +4973,10 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
             var comp = CreateCompilation(source);
             comp.VerifyEmitDiagnostics();
 
-            var operation = VerifyOperationTreeForTest<StatementSyntax>(comp, expectedOperationTree);
+            var operation = VerifyOperationTreeForTest<StatementSyntax>(
+                comp,
+                expectedOperationTree
+            );
             var conversion = operation.Descendants().OfType<IConversionOperation>().Single();
 
             // Note that IConversionOperation.IsImplicit refers to whether the code is implicitly generated by the compiler
@@ -4093,7 +4989,8 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
         [Fact]
         public void UndefinedMethod()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     static void M1()
@@ -4102,7 +4999,8 @@ class P
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'M2(1, 2)')
   Children(3):
       IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'M2')
@@ -4110,13 +5008,21 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'M2(1, 2)
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 1) (Syntax: '1')
       ILiteralOperation (OperationKind.Literal, Type: System.Int32, Constant: 2) (Syntax: '2')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(6,19): error CS0103: The name 'M2' does not exist in the current context
                 //         /*<bind>*/M2(1, 2)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "M2").WithArguments("M2").WithLocation(6, 19)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "M2")
+                    .WithArguments("M2")
+                    .WithLocation(6, 19),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: TargetFramework.Mscorlib46Extended);
+            VerifyOperationTreeAndDiagnosticsForTest<InvocationExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: TargetFramework.Mscorlib46Extended
+            );
         }
 
         private class IndexerAccessArgumentVerifier : OperationWalker
@@ -4128,7 +5034,11 @@ IInvalidOperation (OperationKind.Invalid, Type: ?, IsInvalid) (Syntax: 'M2(1, 2)
                 _compilation = compilation;
             }
 
-            public static void Verify(IOperation operation, Compilation compilation, SyntaxNode syntaxNode)
+            public static void Verify(
+                IOperation operation,
+                Compilation compilation,
+                SyntaxNode syntaxNode
+            )
             {
                 new IndexerAccessArgumentVerifier(compilation).Visit(operation);
             }

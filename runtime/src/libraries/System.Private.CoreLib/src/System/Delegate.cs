@@ -36,22 +36,45 @@ namespace System
         }
 
         // V2 api: Creates open or closed delegates to static or instance methods - relaxed signature checking allowed.
-        public static Delegate CreateDelegate(Type type, object? firstArgument, MethodInfo method) => CreateDelegate(type, firstArgument, method, throwOnBindFailure: true)!;
+        public static Delegate CreateDelegate(
+            Type type,
+            object? firstArgument,
+            MethodInfo method
+        ) => CreateDelegate(type, firstArgument, method, throwOnBindFailure: true)!;
 
         // V1 api: Creates open delegates to static or instance methods - relaxed signature checking allowed.
-        public static Delegate CreateDelegate(Type type, MethodInfo method) => CreateDelegate(type, method, throwOnBindFailure: true)!;
+        public static Delegate CreateDelegate(Type type, MethodInfo method) =>
+            CreateDelegate(type, method, throwOnBindFailure: true)!;
 
         // V1 api: Creates closed delegates to instance methods only, relaxed signature checking disallowed.
         [RequiresUnreferencedCode("The target method might be removed")]
-        public static Delegate CreateDelegate(Type type, object target, string method) => CreateDelegate(type, target, method, ignoreCase: false, throwOnBindFailure: true)!;
+        public static Delegate CreateDelegate(Type type, object target, string method) =>
+            CreateDelegate(type, target, method, ignoreCase: false, throwOnBindFailure: true)!;
+
         [RequiresUnreferencedCode("The target method might be removed")]
-        public static Delegate CreateDelegate(Type type, object target, string method, bool ignoreCase) => CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure: true)!;
+        public static Delegate CreateDelegate(
+            Type type,
+            object target,
+            string method,
+            bool ignoreCase
+        ) => CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure: true)!;
 
         // V1 api: Creates open delegates to static methods only, relaxed signature checking disallowed.
-        public static Delegate CreateDelegate(Type type, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method) => CreateDelegate(type, target, method, ignoreCase: false, throwOnBindFailure: true)!;
-        public static Delegate CreateDelegate(Type type, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method, bool ignoreCase) => CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure: true)!;
+        public static Delegate CreateDelegate(
+            Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method
+        ) => CreateDelegate(type, target, method, ignoreCase: false, throwOnBindFailure: true)!;
 
-        protected virtual Delegate CombineImpl(Delegate? d) => throw new MulticastNotSupportedException(SR.Multicast_Combine);
+        public static Delegate CreateDelegate(
+            Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method,
+            bool ignoreCase
+        ) => CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure: true)!;
+
+        protected virtual Delegate CombineImpl(Delegate? d) =>
+            throw new MulticastNotSupportedException(SR.Multicast_Combine);
 
         protected virtual Delegate? RemoveImpl(Delegate d) => d.Equals(this) ? null : this;
 
@@ -62,9 +85,14 @@ namespace System
             return DynamicInvokeImpl(args);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) => throw new PlatformNotSupportedException();
+        public virtual void GetObjectData(SerializationInfo info, StreamingContext context) =>
+            throw new PlatformNotSupportedException();
 
         public MethodInfo Method => GetMethodImpl();
 
@@ -90,8 +118,7 @@ namespace System
             {
                 newDelegate = source;
                 source = Remove(source, value);
-            }
-            while (newDelegate != source);
+            } while (newDelegate != source);
 
             return newDelegate;
         }

@@ -10,7 +10,5 @@ namespace System.ComponentModel.DataAnnotations.Schema
     ///     Complex types do not have keys and cannot be managed by the Entity Framework apart from the parent object.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
-    public class ComplexTypeAttribute : Attribute
-    {
-    }
+    public class ComplexTypeAttribute : Attribute { }
 }

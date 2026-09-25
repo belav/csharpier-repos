@@ -6,5 +6,9 @@ namespace System.Activities
 {
     using System;
 
-    public delegate void FaultCallback(NativeActivityFaultContext faultContext, Exception propagatedException, ActivityInstance propagatedFrom);
+    public delegate void FaultCallback(
+        NativeActivityFaultContext faultContext,
+        Exception propagatedException,
+        ActivityInstance propagatedFrom
+    );
 }

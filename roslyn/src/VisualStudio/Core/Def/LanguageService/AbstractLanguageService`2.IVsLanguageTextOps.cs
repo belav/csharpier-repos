@@ -21,27 +21,36 @@ using TextSpan = Microsoft.VisualStudio.TextManager.Interop.TextSpan;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 {
-    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService> : IVsLanguageTextOps
+    internal abstract partial class AbstractLanguageService<TPackage, TLanguageService>
+        : IVsLanguageTextOps
         where TPackage : AbstractPackage<TPackage, TLanguageService>
         where TLanguageService : AbstractLanguageService<TPackage, TLanguageService>
     {
         public int Format(IVsTextLayer textLayer, TextSpan[] selections)
         {
             var result = VSConstants.S_OK;
-            var uiThreadOperationExecutor = this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>();
+            var uiThreadOperationExecutor =
+                this.Package.ComponentModel.GetService<IUIThreadOperationExecutor>();
             uiThreadOperationExecutor.Execute(
                 "Intellisense",
                 defaultDescription: "",
                 allowCancellation: true,
                 showProgress: false,
-                action: c => result = FormatWorker(textLayer, selections, c.UserCancellationToken));
+                action: c => result = FormatWorker(textLayer, selections, c.UserCancellationToken)
+            );
 
             return result;
         }
 
-        private int FormatWorker(IVsTextLayer textLayer, TextSpan[] selections, CancellationToken cancellationToken)
+        private int FormatWorker(
+            IVsTextLayer textLayer,
+            TextSpan[] selections,
+            CancellationToken cancellationToken
+        )
         {
-            var textBuffer = this.EditorAdaptersFactoryService.GetDataBuffer((IVsTextBuffer)textLayer);
+            var textBuffer = this.EditorAdaptersFactoryService.GetDataBuffer(
+                (IVsTextBuffer)textLayer
+            );
             if (textBuffer == null)
             {
                 return VSConstants.E_UNEXPECTED;
@@ -56,7 +65,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             var documentSyntax = ParsedDocument.CreateSynchronously(document, cancellationToken);
             var text = documentSyntax.Text;
             var root = documentSyntax.Root;
-            var formattingOptions = textBuffer.GetSyntaxFormattingOptions(EditorOptionsService, document.Project.Services, explicitFormat: true);
+            var formattingOptions = textBuffer.GetSyntaxFormattingOptions(
+                EditorOptionsService,
+                document.Project.Services,
+                explicitFormat: true
+            );
 
             var ts = selections.Single();
             var start = text.Lines[ts.iStartLine].Start + ts.iStartIndex;
@@ -65,16 +78,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
 
             // Since we know we are on the UI thread, lets get the base indentation now, so that there is less
             // cleanup work to do later in Venus.
-            var ruleFactory = Workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
-            var rules = ruleFactory.CreateRule(documentSyntax, start).Concat(Formatter.GetDefaultFormattingRules(document.Project.Services));
+            var ruleFactory =
+                Workspace.Services.GetService<IHostDependentFormattingRuleFactoryService>();
+            var rules = ruleFactory
+                .CreateRule(documentSyntax, start)
+                .Concat(Formatter.GetDefaultFormattingRules(document.Project.Services));
 
             // use formatting that return text changes rather than tree rewrite which is more expensive
             var formatter = document.GetRequiredLanguageService<ISyntaxFormattingService>();
-            var originalChanges = formatter.GetFormattingResult(root, SpecializedCollections.SingletonEnumerable(adjustedSpan), formattingOptions, rules, cancellationToken)
+            var originalChanges = formatter
+                .GetFormattingResult(
+                    root,
+                    SpecializedCollections.SingletonEnumerable(adjustedSpan),
+                    formattingOptions,
+                    rules,
+                    cancellationToken
+                )
                 .GetTextChanges(cancellationToken);
 
             var originalSpan = RoslynTextSpan.FromBounds(start, end);
-            var formattedChanges = ruleFactory.FilterFormattedChanges(document.Id, originalSpan, originalChanges);
+            var formattedChanges = ruleFactory.FilterFormattedChanges(
+                document.Id,
+                originalSpan,
+                originalChanges
+            );
             if (formattedChanges.IsEmpty())
             {
                 return VSConstants.S_OK;
@@ -105,16 +132,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageService
             return RoslynTextSpan.FromBounds(start, end);
         }
 
-        public int GetDataTip(IVsTextLayer textLayer, TextSpan[] selection, TextSpan[] tipSpan, out string text)
+        public int GetDataTip(
+            IVsTextLayer textLayer,
+            TextSpan[] selection,
+            TextSpan[] tipSpan,
+            out string text
+        )
         {
             text = null;
             return VSConstants.E_NOTIMPL;
         }
 
-        public int GetPairExtent(IVsTextLayer textLayer, TextAddress ta, TextSpan[] textSpan)
-            => VSConstants.E_NOTIMPL;
+        public int GetPairExtent(IVsTextLayer textLayer, TextAddress ta, TextSpan[] textSpan) =>
+            VSConstants.E_NOTIMPL;
 
-        public int GetWordExtent(IVsTextLayer textLayer, TextAddress ta, WORDEXTFLAGS flags, TextSpan[] textSpan)
-            => VSConstants.E_NOTIMPL;
+        public int GetWordExtent(
+            IVsTextLayer textLayer,
+            TextAddress ta,
+            WORDEXTFLAGS flags,
+            TextSpan[] textSpan
+        ) => VSConstants.E_NOTIMPL;
     }
 }

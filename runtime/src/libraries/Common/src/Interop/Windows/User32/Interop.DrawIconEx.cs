@@ -17,14 +17,21 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hDC, int x, int y,
+            HandleRef hDC,
+            int x,
+            int y,
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hIcon, int width, int height, int iStepIfAniCursor,
+            HandleRef hIcon,
+            int width,
+            int height,
+            int iStepIfAniCursor,
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hBrushFlickerFree, int diFlags);
+            HandleRef hBrushFlickerFree,
+            int diFlags
+        );
     }
 }

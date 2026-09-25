@@ -25,7 +25,12 @@ namespace Roslyn.Test.Utilities.Desktop
 {
     internal static class SerializationInfoExtensions
     {
-        public static void AddArray<T>(this SerializationInfo info, string name, ImmutableArray<T> value) where T : class
+        public static void AddArray<T>(
+            this SerializationInfo info,
+            string name,
+            ImmutableArray<T> value
+        )
+            where T : class
         {
             // we will copy the content into an array and serialize the copy
             // we could serialize element-wise, but that would require serializing
@@ -33,13 +38,18 @@ namespace Roslyn.Test.Utilities.Desktop
             info.AddValue(name, value.IsDefault ? null : value.ToArray(), typeof(T[]));
         }
 
-        public static ImmutableArray<T> GetArray<T>(this SerializationInfo info, string name) where T : class
+        public static ImmutableArray<T> GetArray<T>(this SerializationInfo info, string name)
+            where T : class
         {
             var arr = (T[])info.GetValue(name, typeof(T[]));
             return ImmutableArray.Create<T>(arr);
         }
 
-        public static void AddByteArray(this SerializationInfo info, string name, ImmutableArray<byte> value)
+        public static void AddByteArray(
+            this SerializationInfo info,
+            string name,
+            ImmutableArray<byte> value
+        )
         {
             // we will copy the content into an array and serialize the copy
             // we could serialize element-wise, but that would require serializing

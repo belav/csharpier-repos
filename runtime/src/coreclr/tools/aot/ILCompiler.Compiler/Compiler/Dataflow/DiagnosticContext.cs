@@ -27,7 +27,13 @@ namespace ILLink.Shared.TrimAnalysis
             _logger = logger;
         }
 
-        public DiagnosticContext(in MessageOrigin origin, bool suppressTrimmerDiagnostics, bool suppressAotDiagnostics, bool suppressSingleFileDiagnostics, Logger logger)
+        public DiagnosticContext(
+            in MessageOrigin origin,
+            bool suppressTrimmerDiagnostics,
+            bool suppressAotDiagnostics,
+            bool suppressSingleFileDiagnostics,
+            Logger logger
+        )
         {
             Origin = origin;
             _diagnosticsEnabled = true;
@@ -54,7 +60,12 @@ namespace ILLink.Shared.TrimAnalysis
         }
 
 #pragma warning disable IDE0060, CA1822 // The details provided here are not used by illink, but they are used for example by the analyzer
-        public partial void AddDiagnostic(DiagnosticId id, ValueWithDynamicallyAccessedMembers actualValue, ValueWithDynamicallyAccessedMembers expectedAnnotationsValue, params string[] args)
+        public partial void AddDiagnostic(
+            DiagnosticId id,
+            ValueWithDynamicallyAccessedMembers actualValue,
+            ValueWithDynamicallyAccessedMembers expectedAnnotationsValue,
+            params string[] args
+        )
         {
             AddDiagnostic(id, args);
         }

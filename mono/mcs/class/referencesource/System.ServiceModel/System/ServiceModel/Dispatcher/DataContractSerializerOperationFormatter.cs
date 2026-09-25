@@ -6,13 +6,13 @@ namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Runtime;
     using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.Xml;
-    using System.Linq;
 
     static class DataContractSerializerDefaults
     {
@@ -24,23 +24,40 @@ namespace System.ServiceModel.Dispatcher
             return CreateSerializer(type, null, maxItems);
         }
 
-        internal static DataContractSerializer CreateSerializer(Type type, IList<Type> knownTypes, int maxItems)
+        internal static DataContractSerializer CreateSerializer(
+            Type type,
+            IList<Type> knownTypes,
+            int maxItems
+        )
         {
             return new DataContractSerializer(
                 type,
                 knownTypes,
                 maxItems,
                 DataContractSerializerDefaults.IgnoreExtensionDataObject,
-                false/*preserveObjectReferences*/,
-                null/*dataContractSurrage*/);
+                false /*preserveObjectReferences*/
+                ,
+                null /*dataContractSurrage*/
+            );
         }
 
-        internal static DataContractSerializer CreateSerializer(Type type, string rootName, string rootNs, int maxItems)
+        internal static DataContractSerializer CreateSerializer(
+            Type type,
+            string rootName,
+            string rootNs,
+            int maxItems
+        )
         {
             return CreateSerializer(type, null, rootName, rootNs, maxItems);
         }
 
-        internal static DataContractSerializer CreateSerializer(Type type, IList<Type> knownTypes, string rootName, string rootNs, int maxItems)
+        internal static DataContractSerializer CreateSerializer(
+            Type type,
+            IList<Type> knownTypes,
+            string rootName,
+            string rootNs,
+            int maxItems
+        )
         {
             return new DataContractSerializer(
                 type,
@@ -49,15 +66,29 @@ namespace System.ServiceModel.Dispatcher
                 knownTypes,
                 maxItems,
                 DataContractSerializerDefaults.IgnoreExtensionDataObject,
-                false/*preserveObjectReferences*/,
-                null/*dataContractSurrage*/);
+                false /*preserveObjectReferences*/
+                ,
+                null /*dataContractSurrage*/
+            );
         }
-        internal static DataContractSerializer CreateSerializer(Type type, XmlDictionaryString rootName, XmlDictionaryString rootNs, int maxItems)
+
+        internal static DataContractSerializer CreateSerializer(
+            Type type,
+            XmlDictionaryString rootName,
+            XmlDictionaryString rootNs,
+            int maxItems
+        )
         {
             return CreateSerializer(type, null, rootName, rootNs, maxItems);
         }
 
-        internal static DataContractSerializer CreateSerializer(Type type, IList<Type> knownTypes, XmlDictionaryString rootName, XmlDictionaryString rootNs, int maxItems)
+        internal static DataContractSerializer CreateSerializer(
+            Type type,
+            IList<Type> knownTypes,
+            XmlDictionaryString rootName,
+            XmlDictionaryString rootNs,
+            int maxItems
+        )
         {
             return new DataContractSerializer(
                 type,
@@ -66,8 +97,10 @@ namespace System.ServiceModel.Dispatcher
                 knownTypes,
                 maxItems,
                 DataContractSerializerDefaults.IgnoreExtensionDataObject,
-                false/*preserveObjectReferences*/,
-                null/*dataContractSurrage*/);
+                false /*preserveObjectReferences*/
+                ,
+                null /*dataContractSurrage*/
+            );
         }
     }
 
@@ -84,30 +117,53 @@ namespace System.ServiceModel.Dispatcher
         XsdDataContractExporter dataContractExporter;
         DataContractSerializerOperationBehavior serializerFactory;
 
-        public DataContractSerializerOperationFormatter(OperationDescription description, DataContractFormatAttribute dataContractFormatAttribute,
-            DataContractSerializerOperationBehavior serializerFactory)
-            : base(description, dataContractFormatAttribute.Style == OperationFormatStyle.Rpc, false/*isEncoded*/)
+        public DataContractSerializerOperationFormatter(
+            OperationDescription description,
+            DataContractFormatAttribute dataContractFormatAttribute,
+            DataContractSerializerOperationBehavior serializerFactory
+        )
+            : base(
+                description,
+                dataContractFormatAttribute.Style == OperationFormatStyle.Rpc,
+                false /*isEncoded*/
+            )
         {
             if (description == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("description");
 
-            this.serializerFactory = serializerFactory ?? new DataContractSerializerOperationBehavior(description);
+            this.serializerFactory =
+                serializerFactory ?? new DataContractSerializerOperationBehavior(description);
             foreach (Type type in description.KnownTypes)
             {
                 if (knownTypes == null)
                     knownTypes = new List<Type>();
                 if (type == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxKnownTypeNull, description.Name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SFxKnownTypeNull, description.Name)
+                        )
+                    );
                 ValidateDataContractType(type);
                 knownTypes.Add(type);
             }
-            requestMessageInfo = CreateMessageInfo(dataContractFormatAttribute, RequestDescription, this.serializerFactory);
+            requestMessageInfo = CreateMessageInfo(
+                dataContractFormatAttribute,
+                RequestDescription,
+                this.serializerFactory
+            );
             if (ReplyDescription != null)
-                replyMessageInfo = CreateMessageInfo(dataContractFormatAttribute, ReplyDescription, this.serializerFactory);
+                replyMessageInfo = CreateMessageInfo(
+                    dataContractFormatAttribute,
+                    ReplyDescription,
+                    this.serializerFactory
+                );
         }
 
-        MessageInfo CreateMessageInfo(DataContractFormatAttribute dataContractFormatAttribute,
-            MessageDescription messageDescription, DataContractSerializerOperationBehavior serializerFactory)
+        MessageInfo CreateMessageInfo(
+            DataContractFormatAttribute dataContractFormatAttribute,
+            MessageDescription messageDescription,
+            DataContractSerializerOperationBehavior serializerFactory
+        )
         {
             if (messageDescription.IsUntypedMessage)
                 return null;
@@ -122,9 +178,17 @@ namespace System.ServiceModel.Dispatcher
             MessagePartDescriptionCollection parts = body.Parts;
             messageInfo.BodyParts = new PartInfo[parts.Count];
             for (int i = 0; i < parts.Count; i++)
-                messageInfo.BodyParts[i] = CreatePartInfo(parts[i], dataContractFormatAttribute.Style, serializerFactory);
+                messageInfo.BodyParts[i] = CreatePartInfo(
+                    parts[i],
+                    dataContractFormatAttribute.Style,
+                    serializerFactory
+                );
             if (IsValidReturnValue(messageDescription.Body.ReturnValue))
-                messageInfo.ReturnPart = CreatePartInfo(messageDescription.Body.ReturnValue, dataContractFormatAttribute.Style, serializerFactory);
+                messageInfo.ReturnPart = CreatePartInfo(
+                    messageDescription.Body.ReturnValue,
+                    dataContractFormatAttribute.Style,
+                    serializerFactory
+                );
             messageInfo.HeaderDescriptionTable = new MessageHeaderDescriptionTable();
             messageInfo.HeaderParts = new PartInfo[messageDescription.Headers.Count];
             for (int i = 0; i < messageDescription.Headers.Count; i++)
@@ -135,11 +199,21 @@ namespace System.ServiceModel.Dispatcher
                 else
                 {
                     ValidateDataContractType(headerDescription.Type);
-                    messageInfo.HeaderDescriptionTable.Add(headerDescription.Name, headerDescription.Namespace, headerDescription);
+                    messageInfo.HeaderDescriptionTable.Add(
+                        headerDescription.Name,
+                        headerDescription.Namespace,
+                        headerDescription
+                    );
                 }
-                messageInfo.HeaderParts[i] = CreatePartInfo(headerDescription, OperationFormatStyle.Document, serializerFactory);
+                messageInfo.HeaderParts[i] = CreatePartInfo(
+                    headerDescription,
+                    OperationFormatStyle.Document,
+                    serializerFactory
+                );
             }
-            messageInfo.AnyHeaders = messageInfo.UnknownHeaderDescription != null || messageInfo.HeaderDescriptionTable.Count > 0;
+            messageInfo.AnyHeaders =
+                messageInfo.UnknownHeaderDescription != null
+                || messageInfo.HeaderDescriptionTable.Count > 0;
             return messageInfo;
         }
 
@@ -158,15 +232,33 @@ namespace System.ServiceModel.Dispatcher
             dataContractExporter.GetSchemaTypeName(type); //Throws if the type is not a valid data contract
         }
 
-        PartInfo CreatePartInfo(MessagePartDescription part, OperationFormatStyle style, DataContractSerializerOperationBehavior serializerFactory)
+        PartInfo CreatePartInfo(
+            MessagePartDescription part,
+            OperationFormatStyle style,
+            DataContractSerializerOperationBehavior serializerFactory
+        )
         {
-            string ns = (style == OperationFormatStyle.Rpc || part.Namespace == null) ? string.Empty : part.Namespace;
-            PartInfo partInfo = new PartInfo(part, AddToDictionary(part.Name), AddToDictionary(ns), knownTypes, serializerFactory);
+            string ns =
+                (style == OperationFormatStyle.Rpc || part.Namespace == null)
+                    ? string.Empty
+                    : part.Namespace;
+            PartInfo partInfo = new PartInfo(
+                part,
+                AddToDictionary(part.Name),
+                AddToDictionary(ns),
+                knownTypes,
+                serializerFactory
+            );
             ValidateDataContractType(partInfo.ContractType);
             return partInfo;
         }
 
-        protected override void AddHeadersToMessage(Message message, MessageDescription messageDescription, object[] parameters, bool isRequest)
+        protected override void AddHeadersToMessage(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters,
+            bool isRequest
+        )
         {
             MessageInfo messageInfo = isRequest ? requestMessageInfo : replyMessageInfo;
             PartInfo[] headerParts = messageInfo.HeaderParts;
@@ -176,7 +268,8 @@ namespace System.ServiceModel.Dispatcher
             for (int i = 0; i < headerParts.Length; i++)
             {
                 PartInfo headerPart = headerParts[i];
-                MessageHeaderDescription headerDescription = (MessageHeaderDescription)headerPart.Description;
+                MessageHeaderDescription headerDescription = (MessageHeaderDescription)
+                    headerPart.Description;
                 object headerValue = parameters[headerDescription.Index];
 
                 if (headerDescription.Multiple)
@@ -185,37 +278,95 @@ namespace System.ServiceModel.Dispatcher
                     {
                         bool isXmlElement = headerDescription.Type == typeof(XmlElement);
                         foreach (object headerItemValue in (IEnumerable)headerValue)
-                            AddMessageHeaderForParameter(headers, headerPart, message.Version, headerItemValue, isXmlElement);
+                            AddMessageHeaderForParameter(
+                                headers,
+                                headerPart,
+                                message.Version,
+                                headerItemValue,
+                                isXmlElement
+                            );
                     }
                 }
                 else
-                    AddMessageHeaderForParameter(headers, headerPart, message.Version, headerValue, false/*isXmlElement*/);
+                    AddMessageHeaderForParameter(
+                        headers,
+                        headerPart,
+                        message.Version,
+                        headerValue,
+                        false /*isXmlElement*/
+                    );
             }
         }
 
-        void AddMessageHeaderForParameter(MessageHeaders headers, PartInfo headerPart, MessageVersion messageVersion, object parameterValue, bool isXmlElement)
+        void AddMessageHeaderForParameter(
+            MessageHeaders headers,
+            PartInfo headerPart,
+            MessageVersion messageVersion,
+            object parameterValue,
+            bool isXmlElement
+        )
         {
             string actor;
             bool mustUnderstand;
             bool relay;
-            MessageHeaderDescription headerDescription = (MessageHeaderDescription)headerPart.Description;
-            object valueToSerialize = GetContentOfMessageHeaderOfT(headerDescription, parameterValue, out mustUnderstand, out relay, out actor);
+            MessageHeaderDescription headerDescription = (MessageHeaderDescription)
+                headerPart.Description;
+            object valueToSerialize = GetContentOfMessageHeaderOfT(
+                headerDescription,
+                parameterValue,
+                out mustUnderstand,
+                out relay,
+                out actor
+            );
 
             if (isXmlElement)
             {
                 if (valueToSerialize == null)
                     return;
                 XmlElement xmlElement = (XmlElement)valueToSerialize;
-                headers.Add(new XmlElementMessageHeader(this, messageVersion, xmlElement.LocalName, xmlElement.NamespaceURI, mustUnderstand, actor, relay, xmlElement));
+                headers.Add(
+                    new XmlElementMessageHeader(
+                        this,
+                        messageVersion,
+                        xmlElement.LocalName,
+                        xmlElement.NamespaceURI,
+                        mustUnderstand,
+                        actor,
+                        relay,
+                        xmlElement
+                    )
+                );
                 return;
             }
-            headers.Add(new DataContractSerializerMessageHeader(headerPart, valueToSerialize, mustUnderstand, actor, relay));
+            headers.Add(
+                new DataContractSerializerMessageHeader(
+                    headerPart,
+                    valueToSerialize,
+                    mustUnderstand,
+                    actor,
+                    relay
+                )
+            );
         }
 
-        protected override void SerializeBody(XmlDictionaryWriter writer, MessageVersion version, string action, MessageDescription messageDescription, object returnValue, object[] parameters, bool isRequest)
+        protected override void SerializeBody(
+            XmlDictionaryWriter writer,
+            MessageVersion version,
+            string action,
+            MessageDescription messageDescription,
+            object returnValue,
+            object[] parameters,
+            bool isRequest
+        )
         {
-            if (writer == null) throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("writer"));
-            if (parameters == null) throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parameters"));
+            if (writer == null)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("writer")
+                );
+            if (parameters == null)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parameters")
+                );
 
             MessageInfo messageInfo;
             if (isRequest)
@@ -263,12 +414,26 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (SerializationException sx)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(
-                    SR.GetString(SR.SFxInvalidMessageBodyErrorSerializingParameter, part.Description.Namespace, part.Description.Name, sx.Message), sx));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(
+                        SR.GetString(
+                            SR.SFxInvalidMessageBodyErrorSerializingParameter,
+                            part.Description.Namespace,
+                            part.Description.Name,
+                            sx.Message
+                        ),
+                        sx
+                    )
+                );
             }
         }
 
-        protected override void GetHeadersFromMessage(Message message, MessageDescription messageDescription, object[] parameters, bool isRequest)
+        protected override void GetHeadersFromMessage(
+            Message message,
+            MessageDescription messageDescription,
+            object[] parameters,
+            bool isRequest
+        )
         {
             MessageInfo messageInfo = isRequest ? requestMessageInfo : replyMessageInfo;
             if (!messageInfo.AnyHeaders)
@@ -282,7 +447,10 @@ namespace System.ServiceModel.Dispatcher
             for (int i = 0; i < headers.Count; i++)
             {
                 MessageHeaderInfo header = headers[i];
-                MessageHeaderDescription headerDescription = messageInfo.HeaderDescriptionTable.Get(header.Name, header.Namespace);
+                MessageHeaderDescription headerDescription = messageInfo.HeaderDescriptionTable.Get(
+                    header.Name,
+                    header.Namespace
+                );
                 if (headerDescription != null)
                 {
                     if (header.MustUnderstand)
@@ -292,9 +460,19 @@ namespace System.ServiceModel.Dispatcher
                     XmlDictionaryReader headerReader = headers.GetReaderAtHeader(i);
                     try
                     {
-                        object dataValue = DeserializeHeaderContents(headerReader, messageDescription, headerDescription);
+                        object dataValue = DeserializeHeaderContents(
+                            headerReader,
+                            messageDescription,
+                            headerDescription
+                        );
                         if (headerDescription.TypedHeader)
-                            item = TypedHeaderManager.Create(headerDescription.Type, dataValue, headers[i].MustUnderstand, headers[i].Relay, headers[i].Actor);
+                            item = TypedHeaderManager.Create(
+                                headerDescription.Type,
+                                dataValue,
+                                headers[i].MustUnderstand,
+                                headers[i].Relay,
+                                headers[i].Actor
+                            );
                         else
                             item = dataValue;
                     }
@@ -306,10 +484,22 @@ namespace System.ServiceModel.Dispatcher
                     if (headerDescription.Multiple)
                     {
                         if (multipleHeaderValues == null)
-                            multipleHeaderValues = new KeyValuePair<Type, ArrayList>[parameters.Length];
+                            multipleHeaderValues = new KeyValuePair<Type, ArrayList>[
+                                parameters.Length
+                            ];
                         if (multipleHeaderValues[headerDescription.Index].Key == null)
                         {
-                            multipleHeaderValues[headerDescription.Index] = new KeyValuePair<System.Type, System.Collections.ArrayList>(headerDescription.TypedHeader ? TypedHeaderManager.GetMessageHeaderType(headerDescription.Type) : headerDescription.Type, new ArrayList());
+                            multipleHeaderValues[headerDescription.Index] = new KeyValuePair<
+                                System.Type,
+                                System.Collections.ArrayList
+                            >(
+                                headerDescription.TypedHeader
+                                    ? TypedHeaderManager.GetMessageHeaderType(
+                                        headerDescription.Type
+                                    )
+                                    : headerDescription.Type,
+                                new ArrayList()
+                            );
                         }
                         multipleHeaderValues[headerDescription.Index].Value.Add(item);
                     }
@@ -318,14 +508,21 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else if (messageInfo.UnknownHeaderDescription != null)
                 {
-                    MessageHeaderDescription unknownHeaderDescription = messageInfo.UnknownHeaderDescription;
+                    MessageHeaderDescription unknownHeaderDescription =
+                        messageInfo.UnknownHeaderDescription;
                     XmlDictionaryReader headerReader = headers.GetReaderAtHeader(i);
                     try
                     {
                         XmlDocument doc = new XmlDocument();
                         object dataValue = doc.ReadNode(headerReader);
                         if (dataValue != null && unknownHeaderDescription.TypedHeader)
-                            dataValue = TypedHeaderManager.Create(unknownHeaderDescription.Type, dataValue, headers[i].MustUnderstand, headers[i].Relay, headers[i].Actor);
+                            dataValue = TypedHeaderManager.Create(
+                                unknownHeaderDescription.Type,
+                                dataValue,
+                                headers[i].MustUnderstand,
+                                headers[i].Relay,
+                                headers[i].Actor
+                            );
                         elementList.Add(dataValue);
                     }
                     finally
@@ -339,18 +536,36 @@ namespace System.ServiceModel.Dispatcher
                 for (int i = 0; i < parameters.Length; i++)
                 {
                     if (multipleHeaderValues[i].Key != null)
-                        parameters[i] = multipleHeaderValues[i].Value.ToArray(multipleHeaderValues[i].Key);
+                        parameters[i] = multipleHeaderValues[i]
+                            .Value.ToArray(multipleHeaderValues[i].Key);
                 }
             }
             if (messageInfo.UnknownHeaderDescription != null)
-                parameters[messageInfo.UnknownHeaderDescription.Index] = elementList.ToArray(messageInfo.UnknownHeaderDescription.TypedHeader ? typeof(MessageHeader<XmlElement>) : typeof(XmlElement));
+                parameters[messageInfo.UnknownHeaderDescription.Index] = elementList.ToArray(
+                    messageInfo.UnknownHeaderDescription.TypedHeader
+                        ? typeof(MessageHeader<XmlElement>)
+                        : typeof(XmlElement)
+                );
         }
 
-        object DeserializeHeaderContents(XmlDictionaryReader reader, MessageDescription messageDescription, MessageHeaderDescription headerDescription)
+        object DeserializeHeaderContents(
+            XmlDictionaryReader reader,
+            MessageDescription messageDescription,
+            MessageHeaderDescription headerDescription
+        )
         {
             bool isQueryable;
-            Type dataContractType = DataContractSerializerOperationFormatter.GetSubstituteDataContractType(headerDescription.Type, out isQueryable);
-            XmlObjectSerializer serializerLocal = serializerFactory.CreateSerializer(dataContractType, headerDescription.Name, headerDescription.Namespace, this.knownTypes);
+            Type dataContractType =
+                DataContractSerializerOperationFormatter.GetSubstituteDataContractType(
+                    headerDescription.Type,
+                    out isQueryable
+                );
+            XmlObjectSerializer serializerLocal = serializerFactory.CreateSerializer(
+                dataContractType,
+                headerDescription.Name,
+                headerDescription.Namespace,
+                this.knownTypes
+            );
             object val = serializerLocal.ReadObject(reader);
             if (isQueryable && val != null)
             {
@@ -359,10 +574,23 @@ namespace System.ServiceModel.Dispatcher
             return val;
         }
 
-        protected override object DeserializeBody(XmlDictionaryReader reader, MessageVersion version, string action, MessageDescription messageDescription, object[] parameters, bool isRequest)
+        protected override object DeserializeBody(
+            XmlDictionaryReader reader,
+            MessageVersion version,
+            string action,
+            MessageDescription messageDescription,
+            object[] parameters,
+            bool isRequest
+        )
         {
-            if (reader == null) throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("reader"));
-            if (parameters == null) throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("parameters"));
+            if (reader == null)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("reader")
+                );
+            if (parameters == null)
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("parameters")
+                );
 
             MessageInfo messageInfo;
             if (isRequest)
@@ -373,7 +601,18 @@ namespace System.ServiceModel.Dispatcher
             if (messageInfo.WrapperName != null)
             {
                 if (!reader.IsStartElement(messageInfo.WrapperName, messageInfo.WrapperNamespace))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR.GetString(SR.SFxInvalidMessageBody, messageInfo.WrapperName, messageInfo.WrapperNamespace, reader.NodeType, reader.Name, reader.NamespaceURI)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SerializationException(
+                            SR.GetString(
+                                SR.SFxInvalidMessageBody,
+                                messageInfo.WrapperName,
+                                messageInfo.WrapperNamespace,
+                                reader.NodeType,
+                                reader.Name,
+                                reader.NamespaceURI
+                            )
+                        )
+                    );
                 bool isEmptyElement = reader.IsEmptyElement;
                 reader.Read();
                 if (isEmptyElement)
@@ -401,7 +640,12 @@ namespace System.ServiceModel.Dispatcher
             return returnValue;
         }
 
-        void DeserializeParameters(XmlDictionaryReader reader, PartInfo[] parts, object[] parameters, bool isRequest)
+        void DeserializeParameters(
+            XmlDictionaryReader reader,
+            PartInfo[] parts,
+            object[] parameters,
+            bool isRequest
+        )
         {
             int nextPartIndex = 0;
             while (reader.IsStartElement())
@@ -445,29 +689,57 @@ namespace System.ServiceModel.Dispatcher
             }
             catch (System.InvalidOperationException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                    SR.GetString(SR.SFxInvalidMessageBodyErrorDeserializingParameter, part.Description.Namespace, part.Description.Name), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxInvalidMessageBodyErrorDeserializingParameter,
+                            part.Description.Namespace,
+                            part.Description.Name
+                        ),
+                        e
+                    )
+                );
             }
             catch (System.Runtime.Serialization.InvalidDataContractException e)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidDataContractException(
-                    SR.GetString(SR.SFxInvalidMessageBodyErrorDeserializingParameter, part.Description.Namespace, part.Description.Name), e));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidDataContractException(
+                        SR.GetString(
+                            SR.SFxInvalidMessageBodyErrorDeserializingParameter,
+                            part.Description.Namespace,
+                            part.Description.Name
+                        ),
+                        e
+                    )
+                );
             }
             catch (System.FormatException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                                     part.Description.Namespace, part.Description.Name, e.Message), 
-                                     e));
+                        SR.GetString(
+                            SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                            part.Description.Namespace,
+                            part.Description.Name,
+                            e.Message
+                        ),
+                        e
+                    )
+                );
             }
             catch (System.Runtime.Serialization.SerializationException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     OperationFormatter.CreateDeserializationFailedFault(
-                        SR.GetString(SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
-                                     part.Description.Namespace, part.Description.Name, e.Message), 
-                                     e));
+                        SR.GetString(
+                            SR.SFxInvalidMessageBodyErrorDeserializingParameterMore,
+                            part.Description.Namespace,
+                            part.Description.Name,
+                            e.Message
+                        ),
+                        e
+                    )
+                );
             }
 
             return val;
@@ -481,8 +753,7 @@ namespace System.ServiceModel.Dispatcher
                 return typeOfIEnumerable;
             }
 
-            if (type.IsGenericType &&
-                type.GetGenericTypeDefinition() == typeOfIQueryableGeneric)
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeOfIQueryableGeneric)
             {
                 isQueryable = true;
                 return typeOfIEnumerableGeneric.MakeGenericType(type.GetGenericArguments());
@@ -492,26 +763,46 @@ namespace System.ServiceModel.Dispatcher
             return type;
         }
 
-
         class DataContractSerializerMessageHeader : XmlObjectSerializerHeader
         {
             PartInfo headerPart;
 
-            public DataContractSerializerMessageHeader(PartInfo headerPart, object headerValue, bool mustUnderstand, string actor, bool relay)
-                : base(headerPart.DictionaryName.Value, headerPart.DictionaryNamespace.Value, headerValue, headerPart.Serializer, mustUnderstand, actor ?? string.Empty, relay)
+            public DataContractSerializerMessageHeader(
+                PartInfo headerPart,
+                object headerValue,
+                bool mustUnderstand,
+                string actor,
+                bool relay
+            )
+                : base(
+                    headerPart.DictionaryName.Value,
+                    headerPart.DictionaryNamespace.Value,
+                    headerValue,
+                    headerPart.Serializer,
+                    mustUnderstand,
+                    actor ?? string.Empty,
+                    relay
+                )
             {
                 this.headerPart = headerPart;
             }
 
-            protected override void OnWriteStartHeader(XmlDictionaryWriter writer, MessageVersion messageVersion)
+            protected override void OnWriteStartHeader(
+                XmlDictionaryWriter writer,
+                MessageVersion messageVersion
+            )
             {
                 //Prefix needed since there may be xsi:type attribute at toplevel with qname value where ns = ""
-                string prefix = (this.Namespace == null || this.Namespace.Length == 0) ? string.Empty : "h";
-                writer.WriteStartElement(prefix, headerPart.DictionaryName, headerPart.DictionaryNamespace);
+                string prefix =
+                    (this.Namespace == null || this.Namespace.Length == 0) ? string.Empty : "h";
+                writer.WriteStartElement(
+                    prefix,
+                    headerPart.DictionaryName,
+                    headerPart.DictionaryNamespace
+                );
                 WriteHeaderAttributes(writer, messageVersion);
             }
         }
-
 
         protected class MessageInfo
         {
@@ -536,8 +827,13 @@ namespace System.ServiceModel.Dispatcher
             Type contractType;
             bool isQueryable;
 
-            public PartInfo(MessagePartDescription description, XmlDictionaryString dictionaryName, XmlDictionaryString dictionaryNamespace,
-                IList<Type> knownTypes, DataContractSerializerOperationBehavior behavior)
+            public PartInfo(
+                MessagePartDescription description,
+                XmlDictionaryString dictionaryName,
+                XmlDictionaryString dictionaryNamespace,
+                IList<Type> knownTypes,
+                DataContractSerializerOperationBehavior behavior
+            )
             {
                 this.dictionaryName = dictionaryName;
                 this.dictionaryNamespace = dictionaryNamespace;
@@ -545,7 +841,11 @@ namespace System.ServiceModel.Dispatcher
                 this.knownTypes = knownTypes;
                 this.serializerFactory = behavior;
 
-                this.contractType = DataContractSerializerOperationFormatter.GetSubstituteDataContractType(description.Type, out this.isQueryable);
+                this.contractType =
+                    DataContractSerializerOperationFormatter.GetSubstituteDataContractType(
+                        description.Type,
+                        out this.isQueryable
+                    );
             }
 
             public Type ContractType
@@ -574,7 +874,12 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (serializer == null)
                     {
-                        serializer = serializerFactory.CreateSerializer(contractType, DictionaryName, DictionaryNamespace, knownTypes);
+                        serializer = serializerFactory.CreateSerializer(
+                            contractType,
+                            DictionaryName,
+                            DictionaryNamespace,
+                            knownTypes
+                        );
                     }
                     return serializer;
                 }
@@ -587,7 +892,10 @@ namespace System.ServiceModel.Dispatcher
 
             public object ReadObject(XmlDictionaryReader reader, XmlObjectSerializer serializer)
             {
-                object val = this.serializer.ReadObject(reader, false /* verifyObjectName */);
+                object val = this.serializer.ReadObject(
+                    reader,
+                    false /* verifyObjectName */
+                );
                 if (this.isQueryable && val != null)
                 {
                     return Queryable.AsQueryable((IEnumerable)val);

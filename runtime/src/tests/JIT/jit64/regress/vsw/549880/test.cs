@@ -19,7 +19,10 @@ namespace RNG
             int[] x = new int[100];
             int[] y = new int[100];
             int length = 1;
-            int i, j, k, l = 0;
+            int i,
+                j,
+                k,
+                l = 0;
             k = 0;
 
             do
@@ -29,8 +32,7 @@ namespace RNG
                 {
                     y[l] = 5;
                     l++;
-                }
-                while (l < b);
+                } while (l < b);
                 e++;
                 k++;
             } while (k < a);

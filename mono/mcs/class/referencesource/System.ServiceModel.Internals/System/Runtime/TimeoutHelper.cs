@@ -76,7 +76,9 @@ namespace System.Runtime
 
         public static TimeSpan Add(TimeSpan timeout1, TimeSpan timeout2)
         {
-            return Ticks.ToTimeSpan(Ticks.Add(Ticks.FromTimeSpan(timeout1), Ticks.FromTimeSpan(timeout2)));
+            return Ticks.ToTimeSpan(
+                Ticks.Add(Ticks.FromTimeSpan(timeout1), Ticks.FromTimeSpan(timeout2))
+            );
         }
 
         public static DateTime Add(DateTime time, TimeSpan timeout)
@@ -153,7 +155,11 @@ namespace System.Runtime
         {
             if (timeout < TimeSpan.Zero)
             {
-                throw Fx.Exception.ArgumentOutOfRange(argumentName, timeout, InternalSR.TimeoutMustBeNonNegative(argumentName, timeout));
+                throw Fx.Exception.ArgumentOutOfRange(
+                    argumentName,
+                    timeout,
+                    InternalSR.TimeoutMustBeNonNegative(argumentName, timeout)
+                );
             }
         }
 
@@ -166,7 +172,11 @@ namespace System.Runtime
         {
             if (timeout <= TimeSpan.Zero)
             {
-                throw Fx.Exception.ArgumentOutOfRange(argumentName, timeout, InternalSR.TimeoutMustBePositive(argumentName, timeout));
+                throw Fx.Exception.ArgumentOutOfRange(
+                    argumentName,
+                    timeout,
+                    InternalSR.TimeoutMustBePositive(argumentName, timeout)
+                );
             }
         }
 

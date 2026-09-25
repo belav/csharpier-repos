@@ -22,12 +22,23 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
 {
     public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
     {
-        var diagnosticAnalyzerService = workspaceServices.SolutionServices.ExportProvider.GetExports<IDiagnosticAnalyzerService>().Single().Value;
-        var diagnosticsRefresher = workspaceServices.SolutionServices.ExportProvider.GetExports<IDiagnosticsRefresher>().Single().Value;
-        return new CodeAnalysisDiagnosticAnalyzerService(diagnosticAnalyzerService, diagnosticsRefresher, workspaceServices.Workspace);
+        var diagnosticAnalyzerService = workspaceServices
+            .SolutionServices.ExportProvider.GetExports<IDiagnosticAnalyzerService>()
+            .Single()
+            .Value;
+        var diagnosticsRefresher = workspaceServices
+            .SolutionServices.ExportProvider.GetExports<IDiagnosticsRefresher>()
+            .Single()
+            .Value;
+        return new CodeAnalysisDiagnosticAnalyzerService(
+            diagnosticAnalyzerService,
+            diagnosticsRefresher,
+            workspaceServices.Workspace
+        );
     }
 
-    private sealed class CodeAnalysisDiagnosticAnalyzerService : ICodeAnalysisDiagnosticAnalyzerService
+    private sealed class CodeAnalysisDiagnosticAnalyzerService
+        : ICodeAnalysisDiagnosticAnalyzerService
     {
         private readonly IDiagnosticAnalyzerService _diagnosticAnalyzerService;
         private readonly IDiagnosticsRefresher _diagnosticsRefresher;
@@ -52,7 +63,8 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
         public CodeAnalysisDiagnosticAnalyzerService(
             IDiagnosticAnalyzerService diagnosticAnalyzerService,
             IDiagnosticsRefresher diagnosticsRefresher,
-            Workspace workspace)
+            Workspace workspace
+        )
         {
             _diagnosticAnalyzerService = diagnosticAnalyzerService;
             _diagnosticsRefresher = diagnosticsRefresher;
@@ -88,9 +100,15 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
             _diagnosticsRefresher.RequestWorkspaceRefresh();
         }
 
-        public bool HasProjectBeenAnalyzed(ProjectId projectId) => _analyzedProjectIds.Contains(projectId);
+        public bool HasProjectBeenAnalyzed(ProjectId projectId) =>
+            _analyzedProjectIds.Contains(projectId);
 
-        public async Task RunAnalysisAsync(Solution solution, ProjectId? projectId, Action<Project> onAfterProjectAnalyzed, CancellationToken cancellationToken)
+        public async Task RunAnalysisAsync(
+            Solution solution,
+            ProjectId? projectId,
+            Action<Project> onAfterProjectAnalyzed,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(solution.Workspace == _workspace);
 
@@ -99,24 +117,48 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
                 var project = solution.GetProject(projectId);
                 if (project != null)
                 {
-                    await AnalyzeProjectCoreAsync(project, onAfterProjectAnalyzed, cancellationToken).ConfigureAwait(false);
+                    await AnalyzeProjectCoreAsync(
+                            project,
+                            onAfterProjectAnalyzed,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
             else
             {
                 // We run analysis for all the projects concurrently as this is a user invoked operation.
-                using var _ = ArrayBuilder<Task>.GetInstance(solution.ProjectIds.Count, out var tasks);
+                using var _ = ArrayBuilder<Task>.GetInstance(
+                    solution.ProjectIds.Count,
+                    out var tasks
+                );
                 foreach (var project in solution.Projects)
-                    tasks.Add(Task.Run(() => AnalyzeProjectCoreAsync(project, onAfterProjectAnalyzed, cancellationToken), cancellationToken));
+                    tasks.Add(
+                        Task.Run(
+                            () =>
+                                AnalyzeProjectCoreAsync(
+                                    project,
+                                    onAfterProjectAnalyzed,
+                                    cancellationToken
+                                ),
+                            cancellationToken
+                        )
+                    );
 
                 await Task.WhenAll(tasks).ConfigureAwait(false);
             }
         }
 
-        private async Task AnalyzeProjectCoreAsync(Project project, Action<Project> onAfterProjectAnalyzed, CancellationToken cancellationToken)
+        private async Task AnalyzeProjectCoreAsync(
+            Project project,
+            Action<Project> onAfterProjectAnalyzed,
+            CancellationToken cancellationToken
+        )
         {
             // Execute force analysis for the project.
-            await _diagnosticAnalyzerService.ForceAnalyzeProjectAsync(project, cancellationToken).ConfigureAwait(false);
+            await _diagnosticAnalyzerService
+                .ForceAnalyzeProjectAsync(project, cancellationToken)
+                .ConfigureAwait(false);
 
             // Add the given project to the analyzed projects list **after** analysis has completed.
             // We need this ordering to ensure that 'HasProjectBeenAnalyzed' call above functions correctly.
@@ -138,22 +180,40 @@ internal sealed class CodeAnalysisDiagnosticAnalyzerServiceFactory() : IWorkspac
         /// Running code analysis on the project force computes and caches the diagnostics on the DiagnosticAnalyzerService.
         /// We return these cached document diagnostics here, including both local and non-local document diagnostics.
         /// </summary>
-        public Task<ImmutableArray<DiagnosticData>> GetLastComputedDocumentDiagnosticsAsync(DocumentId documentId, CancellationToken cancellationToken)
-            => _clearedProjectIds.Contains(documentId.ProjectId)
+        public Task<ImmutableArray<DiagnosticData>> GetLastComputedDocumentDiagnosticsAsync(
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        ) =>
+            _clearedProjectIds.Contains(documentId.ProjectId)
                 ? SpecializedTasks.EmptyImmutableArray<DiagnosticData>()
-                : _diagnosticAnalyzerService.GetCachedDiagnosticsAsync(_workspace, documentId.ProjectId,
-                    documentId, includeSuppressedDiagnostics: false, includeLocalDocumentDiagnostics: true,
-                    includeNonLocalDocumentDiagnostics: true, cancellationToken);
+                : _diagnosticAnalyzerService.GetCachedDiagnosticsAsync(
+                    _workspace,
+                    documentId.ProjectId,
+                    documentId,
+                    includeSuppressedDiagnostics: false,
+                    includeLocalDocumentDiagnostics: true,
+                    includeNonLocalDocumentDiagnostics: true,
+                    cancellationToken
+                );
 
         /// <summary>
         /// Running code analysis on the project force computes and caches the diagnostics on the DiagnosticAnalyzerService.
         /// We return these cached project diagnostics here, i.e. diagnostics with no location, by excluding all local and non-local document diagnostics.
         /// </summary>
-        public Task<ImmutableArray<DiagnosticData>> GetLastComputedProjectDiagnosticsAsync(ProjectId projectId, CancellationToken cancellationToken)
-            => _clearedProjectIds.Contains(projectId)
+        public Task<ImmutableArray<DiagnosticData>> GetLastComputedProjectDiagnosticsAsync(
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        ) =>
+            _clearedProjectIds.Contains(projectId)
                 ? SpecializedTasks.EmptyImmutableArray<DiagnosticData>()
-                : _diagnosticAnalyzerService.GetCachedDiagnosticsAsync(_workspace, projectId, documentId: null,
-                    includeSuppressedDiagnostics: false, includeLocalDocumentDiagnostics: false,
-                    includeNonLocalDocumentDiagnostics: false, cancellationToken);
+                : _diagnosticAnalyzerService.GetCachedDiagnosticsAsync(
+                    _workspace,
+                    projectId,
+                    documentId: null,
+                    includeSuppressedDiagnostics: false,
+                    includeLocalDocumentDiagnostics: false,
+                    includeNonLocalDocumentDiagnostics: false,
+                    cancellationToken
+                );
     }
 }

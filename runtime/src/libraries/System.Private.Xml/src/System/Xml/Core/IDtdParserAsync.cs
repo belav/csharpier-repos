@@ -11,6 +11,13 @@ namespace System.Xml
     {
         Task<IDtdInfo> ParseInternalDtdAsync(IDtdParserAdapter adapter, bool saveInternalSubset);
 
-        Task<IDtdInfo> ParseFreeFloatingDtdAsync(string baseUri, string docTypeName, string publicId, string systemId, string internalSubset, IDtdParserAdapter adapter);
+        Task<IDtdInfo> ParseFreeFloatingDtdAsync(
+            string baseUri,
+            string docTypeName,
+            string publicId,
+            string systemId,
+            string internalSubset,
+            IDtdParserAdapter adapter
+        );
     }
 }

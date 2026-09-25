@@ -40,7 +40,8 @@ public sealed record CSharpSnapshotGeneratorDependencies
     public CSharpSnapshotGeneratorDependencies(
         ICSharpHelper csharpHelper,
         IRelationalTypeMappingSource relationalTypeMappingSource,
-        IAnnotationCodeGenerator annotationCodeGenerator)
+        IAnnotationCodeGenerator annotationCodeGenerator
+    )
     {
         CSharpHelper = csharpHelper;
         RelationalTypeMappingSource = relationalTypeMappingSource;

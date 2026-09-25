@@ -27,17 +27,16 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-namespace System.Web.Caching {
-
-	public enum CacheItemPriority {
-		Low = 1,
-		BelowNormal,
-		Normal,
-		Default = Normal,
-		AboveNormal,
-		High,
-		NotRemovable
-	}
+namespace System.Web.Caching
+{
+    public enum CacheItemPriority
+    {
+        Low = 1,
+        BelowNormal,
+        Normal,
+        Default = Normal,
+        AboveNormal,
+        High,
+        NotRemovable,
+    }
 }
-

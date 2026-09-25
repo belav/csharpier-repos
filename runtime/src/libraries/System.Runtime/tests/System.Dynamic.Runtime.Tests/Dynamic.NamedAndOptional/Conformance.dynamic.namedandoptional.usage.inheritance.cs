@@ -44,8 +44,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit02a.explicit02a
 {
     // <Area>Use of Named parameters</Area>
@@ -89,8 +87,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit02b.explicit02b
 {
     // <Area>Use of Named parameters</Area>
@@ -131,8 +127,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit02c.explicit02c
 {
@@ -177,8 +171,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit03.explicit03
 {
     // <Area>Use of Named parameters</Area>
@@ -220,7 +212,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Derived", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Derived",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -230,8 +227,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit03c.explicit03c
 {
@@ -276,7 +271,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Derived", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Derived",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -286,8 +286,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit04.explicit04
 {
@@ -330,7 +328,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Derived", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Derived",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -340,8 +343,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit04c.explicit04c
 {
@@ -386,7 +387,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Derived", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Derived",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -396,8 +402,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit05.explicit05
 {
@@ -440,7 +444,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Derived", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Derived",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -450,8 +459,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit05a.explicit05a
 {
@@ -496,8 +503,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit05b.explicit05b
 {
     // <Area>Use of Named parameters</Area>
@@ -538,8 +543,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.explicit05c.explicit05c
 {
@@ -584,7 +587,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NoSuchMember, e.Message, "Derived", "Foo");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NoSuchMember,
+                    e.Message,
+                    "Derived",
+                    "Foo"
+                );
                 if (ret)
                     return 0;
             }
@@ -594,8 +602,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit01.inherit01
 {
@@ -640,8 +646,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit01a.inherit01a
 {
@@ -689,8 +693,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit01b.inherit01b
 {
     // <Area>Use of Named parameters</Area>
@@ -732,8 +734,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit01c.inherit01c
 {
@@ -780,8 +780,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit01d.inherit01d
 {
@@ -834,8 +832,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit02.inherit02
 {
     // <Area>Use of Named parameters</Area>
@@ -880,7 +876,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -890,8 +891,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit02c.inherit02c
 {
@@ -939,7 +938,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -949,8 +953,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit03.inherit03
 {
@@ -996,7 +998,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -1006,8 +1013,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit03a.inherit03a
 {
@@ -1055,8 +1060,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit03c.inherit03c
 {
     // <Area>Use of Named parameters</Area>
@@ -1103,7 +1106,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -1113,8 +1121,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit03d.inherit03d
 {
@@ -1167,8 +1173,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit04.inherit04
 {
     // <Area>Use of Named parameters</Area>
@@ -1212,8 +1216,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit04c.inherit04c
 {
@@ -1260,8 +1262,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit04d.inherit04d
 {
@@ -1314,8 +1314,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit05.inherit05
 {
     // <Area>Use of Named parameters</Area>
@@ -1360,8 +1358,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit05b.inherit05b
 {
     // <Area>Use of Named parameters</Area>
@@ -1403,8 +1399,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit05c.inherit05c
 {
@@ -1451,8 +1445,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit05d.inherit05d
 {
@@ -1505,8 +1497,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit06.inherit06
 {
     // <Area>Use of Named parameters</Area>
@@ -1550,8 +1540,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit06a.inherit06a
 {
@@ -1599,8 +1587,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit06c.inherit06c
 {
     // <Area>Use of Named parameters</Area>
@@ -1646,8 +1632,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit06d.inherit06d
 {
@@ -1703,8 +1687,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit07.inherit07
 {
     // <Area>Use of Named parameters</Area>
@@ -1748,8 +1730,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit07a.inherit07a
 {
@@ -1797,8 +1777,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit07b.inherit07b
 {
     // <Area>Use of Named parameters</Area>
@@ -1842,8 +1820,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit07c.inherit07c
 {
@@ -1890,8 +1866,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit07d.inherit07d
 {
@@ -1947,8 +1921,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit08.inherit08
 {
     // <Area>Use of Named parameters</Area>
@@ -1992,8 +1964,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit08a.inherit08a
 {
@@ -2041,8 +2011,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit08b.inherit08b
 {
     // <Area>Use of Named parameters</Area>
@@ -2086,8 +2054,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit08c.inherit08c
 {
@@ -2134,8 +2100,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit08d.inherit08d
 {
@@ -2188,8 +2152,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit09.inherit09
 {
     // <Area>Use of Named parameters</Area>
@@ -2234,7 +2196,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "y");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "y"
+                );
                 if (ret)
                     return 0;
             }
@@ -2244,8 +2211,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit09c.inherit09c
 {
@@ -2293,7 +2258,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "y");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "y"
+                );
                 if (ret)
                     return 0;
             }
@@ -2303,8 +2273,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit11.inherit11
 {
@@ -2349,8 +2317,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit11a.inherit11a
 {
@@ -2398,8 +2364,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit11b.inherit11b
 {
     // <Area>Use of Named parameters</Area>
@@ -2443,8 +2407,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit11c.inherit11c
 {
@@ -2492,8 +2454,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit13.inherit13
 {
     // <Area>Use of Named parameters</Area>
@@ -2537,8 +2497,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit13a.inherit13a
 {
@@ -2586,8 +2544,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit13b.inherit13b
 {
     // <Area>Use of Named parameters</Area>
@@ -2631,8 +2587,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit13c.inherit13c
 {
@@ -2680,8 +2634,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit14.inherit14
 {
     // <Area>Use of Named parameters</Area>
@@ -2725,8 +2677,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit14a.inherit14a
 {
@@ -2774,8 +2724,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit14b.inherit14b
 {
     // <Area>Use of Named parameters</Area>
@@ -2819,8 +2767,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit14c.inherit14c
 {
@@ -2868,8 +2814,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit15.inherit15
 {
     // <Area>Use of Named parameters</Area>
@@ -2913,8 +2857,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit15a.inherit15a
 {
@@ -2962,8 +2904,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit15b.inherit15b
 {
     // <Area>Use of Named parameters</Area>
@@ -3007,8 +2947,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit15c.inherit15c
 {
@@ -3056,8 +2994,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit16.inherit16
 {
     // <Area>Use of Named parameters</Area>
@@ -3101,8 +3037,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit16a.inherit16a
 {
@@ -3150,8 +3084,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit16b.inherit16b
 {
     // <Area>Use of Named parameters</Area>
@@ -3195,8 +3127,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit16c.inherit16c
 {
@@ -3244,8 +3174,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit19.inherit19
 {
     // <Area>Use of Named parameters</Area>
@@ -3289,8 +3217,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit19a.inherit19a
 {
@@ -3338,8 +3264,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit19b.inherit19b
 {
     // <Area>Use of Named parameters</Area>
@@ -3383,8 +3307,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit19c.inherit19c
 {
@@ -3432,8 +3354,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit21.inherit21
 {
     // <Area>Use of Named parameters</Area>
@@ -3477,8 +3397,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit21a.inherit21a
 {
@@ -3526,8 +3444,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit21b.inherit21b
 {
     // <Area>Use of Named parameters</Area>
@@ -3571,8 +3487,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.inherit21c.inherit21c
 {
@@ -3620,8 +3534,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi01.multi01
 {
     // <Area>Use of Named parameters</Area>
@@ -3665,8 +3577,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi01a.multi01a
 {
@@ -3714,8 +3624,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi01b.multi01b
 {
     // <Area>Use of Named parameters</Area>
@@ -3759,8 +3667,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi01c.multi01c
 {
@@ -3808,8 +3714,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi02.multi02
 {
     // <Area>Use of Named parameters</Area>
@@ -3854,7 +3758,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -3864,8 +3773,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi02c.multi02c
 {
@@ -3913,7 +3820,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -3923,8 +3835,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi03.multi03
 {
@@ -3970,7 +3880,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x2");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x2"
+                );
                 if (ret)
                     return 0;
             }
@@ -3980,8 +3895,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.multi03c.multi03c
 {
@@ -4029,7 +3942,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.BadNamedArgument, e.Message, "Foo", "x2");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.BadNamedArgument,
+                    e.Message,
+                    "Foo",
+                    "x2"
+                );
                 if (ret)
                     return 0;
             }
@@ -4039,8 +3957,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.inheritance.integeregererface01.integeregererface01
 {
@@ -4062,7 +3978,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             return x;
         }
 
-        private static int Bar<T>(T x) where T : A, IA
+        private static int Bar<T>(T x)
+            where T : A, IA
         {
             return x.Foo();
         }

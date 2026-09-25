@@ -23,6 +23,6 @@ namespace System.Web.Mvc.Ajax
         /// <summary>
         /// Replace the entire element.
         /// </summary>
-        ReplaceWith = 3
+        ReplaceWith = 3,
     }
 }

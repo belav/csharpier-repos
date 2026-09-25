@@ -15,9 +15,9 @@ namespace System.ComponentModel.Composition.Hosting
             ComposablePartDefinition part = null;
             string contractName = "Contract1";
             Assert.Throws<ArgumentNullException>("part", () =>
-                {
-                    part.Exports(contractName);
-                });
+            {
+                part.Exports(contractName);
+            });
         }
 
         [Fact]
@@ -83,8 +83,10 @@ namespace System.ComponentModel.Composition.Hosting
         public void Imports_CardinalityIgnored_WhenNotSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple =
+                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Optional =
+                typeof(PartImportingContract1Optionally).AsPart();
 
             Assert.True(part1.Imports("Contract1"));
             Assert.True(part1Optional.Imports("Contract1"));
@@ -95,8 +97,10 @@ namespace System.ComponentModel.Composition.Hosting
         public void Imports_CardinalityNotIgnored_WhenSpecified()
         {
             ComposablePartDefinition part1 = typeof(PartImportingContract1).AsPart();
-            ComposablePartDefinition part1Multiple = typeof(PartImportingContract1Multiple).AsPart();
-            ComposablePartDefinition part1Optional = typeof(PartImportingContract1Optionally).AsPart();
+            ComposablePartDefinition part1Multiple =
+                typeof(PartImportingContract1Multiple).AsPart();
+            ComposablePartDefinition part1Optional =
+                typeof(PartImportingContract1Optionally).AsPart();
 
             Assert.True(part1.Imports("Contract1", ImportCardinality.ExactlyOne));
             Assert.False(part1.Imports("Contract1", ImportCardinality.ZeroOrMore));
@@ -109,7 +113,6 @@ namespace System.ComponentModel.Composition.Hosting
             Assert.False(part1Optional.Imports("Contract1", ImportCardinality.ExactlyOne));
             Assert.False(part1Optional.Imports("Contract1", ImportCardinality.ZeroOrMore));
             Assert.True(part1Optional.Imports("Contract1", ImportCardinality.ZeroOrOne));
-
         }
 
         [Fact]
@@ -185,14 +188,10 @@ namespace System.ComponentModel.Composition.Hosting
         }
 
         [Export("Contract1")]
-        public class PartExportingContract1
-        {
-        }
+        public class PartExportingContract1 { }
 
         [Export("Contract2")]
-        public class PartExportingContract2
-        {
-        }
+        public class PartExportingContract2 { }
 
         public class PartImportingContract1
         {
@@ -222,8 +221,6 @@ namespace System.ComponentModel.Composition.Hosting
         [PartMetadata("Spores", 3)]
         [PartMetadata("Adds", null)]
         [Export("Contract1")]
-        public class PartWithMetadada
-        {
-        }
+        public class PartWithMetadada { }
     }
 }

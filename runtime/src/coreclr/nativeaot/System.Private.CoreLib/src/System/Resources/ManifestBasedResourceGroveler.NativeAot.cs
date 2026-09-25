@@ -7,7 +7,6 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
-
 using Internal.Reflection.Augments;
 
 namespace System.Resources
@@ -15,9 +14,11 @@ namespace System.Resources
     internal partial class ManifestBasedResourceGroveler
     {
         // Internal version of GetSatelliteAssembly that avoids throwing FileNotFoundException
-        private static Assembly? InternalGetSatelliteAssembly(Assembly mainAssembly,
-                                                             CultureInfo culture,
-                                                             Version? version)
+        private static Assembly? InternalGetSatelliteAssembly(
+            Assembly mainAssembly,
+            CultureInfo culture,
+            Version? version
+        )
         {
             AssemblyName mainAssemblyAn = mainAssembly.GetName();
             AssemblyName an = new AssemblyName();

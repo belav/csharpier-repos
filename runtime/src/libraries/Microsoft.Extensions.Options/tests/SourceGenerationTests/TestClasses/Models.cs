@@ -118,7 +118,10 @@ namespace TestClasses.OptionsValidation
     {
         public static ValidationResult? TestMethod(CustomType val, ValidationContext _)
         {
-            if (val.Val1.Equals("Pass", StringComparison.Ordinal) && val.Val2.Equals("Pass", StringComparison.Ordinal))
+            if (
+                val.Val1.Equals("Pass", StringComparison.Ordinal)
+                && val.Val2.Equals("Pass", StringComparison.Ordinal)
+            )
             {
                 return ValidationResult.Success;
             }
@@ -132,7 +135,12 @@ namespace TestClasses.OptionsValidation
         [Range(1, 3, ErrorMessage = "ErrorMessage")]
         public int Val1 { get; set; }
 
-        [Range(1, 3, ErrorMessageResourceType = typeof(SR), ErrorMessageResourceName = "ErrorMessageResourceName")]
+        [Range(
+            1,
+            3,
+            ErrorMessageResourceType = typeof(SR),
+            ErrorMessageResourceName = "ErrorMessageResourceName"
+        )]
         public int Val2 { get; set; }
     }
 
@@ -195,77 +203,58 @@ namespace TestClasses.OptionsValidation
     }
 
     [OptionsValidator]
-    public partial class RequiredAttributeModelValidator : IValidateOptions<RequiredAttributeModel>
-    {
-    }
+    public partial class RequiredAttributeModelValidator
+        : IValidateOptions<RequiredAttributeModel> { }
 
     [OptionsValidator]
-    public partial class RegularExpressionAttributeModelValidator : IValidateOptions<RegularExpressionAttributeModel>
-    {
-    }
+    public partial class RegularExpressionAttributeModelValidator
+        : IValidateOptions<RegularExpressionAttributeModel> { }
 
     [OptionsValidator]
-    public partial class EmailAttributeModelValidator : IValidateOptions<EmailAttributeModel>
-    {
-    }
+    public partial class EmailAttributeModelValidator : IValidateOptions<EmailAttributeModel> { }
 
     [OptionsValidator]
-    public partial class CustomValidationAttributeModelValidator : IValidateOptions<CustomValidationAttributeModel>
-    {
-    }
+    public partial class CustomValidationAttributeModelValidator
+        : IValidateOptions<CustomValidationAttributeModel> { }
 
     [OptionsValidator]
-    public partial class DataTypeAttributeModelValidator : IValidateOptions<DataTypeAttributeModel>
-    {
-    }
+    public partial class DataTypeAttributeModelValidator
+        : IValidateOptions<DataTypeAttributeModel> { }
 
     [OptionsValidator]
-    public partial class RangeAttributeModelIntValidator : IValidateOptions<RangeAttributeModelInt>
-    {
-    }
+    public partial class RangeAttributeModelIntValidator
+        : IValidateOptions<RangeAttributeModelInt> { }
 
     [OptionsValidator]
-    public partial class RangeAttributeModelDoubleValidator : IValidateOptions<RangeAttributeModelDouble>
-    {
-    }
+    public partial class RangeAttributeModelDoubleValidator
+        : IValidateOptions<RangeAttributeModelDouble> { }
 
     [OptionsValidator]
-    public partial class RangeAttributeModelDateValidator : IValidateOptions<RangeAttributeModelDate>
-    {
-    }
+    public partial class RangeAttributeModelDateValidator
+        : IValidateOptions<RangeAttributeModelDate> { }
 
     [OptionsValidator]
-    public partial class MultipleAttributeModelValidator : IValidateOptions<MultipleAttributeModel>
-    {
-    }
+    public partial class MultipleAttributeModelValidator
+        : IValidateOptions<MultipleAttributeModel> { }
 
     [OptionsValidator]
-    public partial class CustomTypeCustomValidationAttributeModelValidator : IValidateOptions<CustomTypeCustomValidationAttributeModel>
-    {
-    }
+    public partial class CustomTypeCustomValidationAttributeModelValidator
+        : IValidateOptions<CustomTypeCustomValidationAttributeModel> { }
 
     [OptionsValidator]
-    public partial class AttributePropertyModelValidator : IValidateOptions<AttributePropertyModel>
-    {
-    }
+    public partial class AttributePropertyModelValidator
+        : IValidateOptions<AttributePropertyModel> { }
 
     [OptionsValidator]
-    public partial class DerivedModelValidator : IValidateOptions<DerivedModel>
-    {
-    }
+    public partial class DerivedModelValidator : IValidateOptions<DerivedModel> { }
 
     [OptionsValidator]
-    public partial class LeafModelValidator : IValidateOptions<LeafModel>
-    {
-    }
+    public partial class LeafModelValidator : IValidateOptions<LeafModel> { }
 
     [OptionsValidator]
-    internal sealed partial class ComplexModelValidator : IValidateOptions<ComplexModel>
-    {
-    }
+    internal sealed partial class ComplexModelValidator : IValidateOptions<ComplexModel> { }
 
     [OptionsValidator]
-    internal sealed partial class OptionsUsingRangeWithTimeSpanValidator : IValidateOptions<OptionsUsingRangeWithTimeSpan>
-    {
-    }
+    internal sealed partial class OptionsUsingRangeWithTimeSpanValidator
+        : IValidateOptions<OptionsUsingRangeWithTimeSpan> { }
 }

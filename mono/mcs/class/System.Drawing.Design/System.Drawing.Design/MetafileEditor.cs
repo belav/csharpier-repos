@@ -1,13 +1,13 @@
 //
 // System.Drawing.Design.MetafileEditor.cs
-// 
+//
 // Authors:
 //   Martin Willemoes Hansen (mwh@sysrq.dk)
 //   Andreas Nahr (ClassDevelopment@A-SoftTech.com)
-// 
+//
 // (C) 2003 Martin Willemoes Hansen
 // (C) 2003 Andreas Nahr
-// 
+//
 
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,31 +31,28 @@
 //
 
 using System;
-using System.IO;
 using System.Drawing.Imaging;
+using System.IO;
 
 namespace System.Drawing.Design
 {
-	public class MetafileEditor : ImageEditor
-	{
+    public class MetafileEditor : ImageEditor
+    {
+        public MetafileEditor() { }
 
-		public MetafileEditor()
-		{
-		}
+        protected override string[] GetExtensions()
+        {
+            return new string[] { "*.emf", "*.wmf" };
+        }
 
-		protected override string[] GetExtensions()
-		{
-			return new string[] {"*.emf", "*.wmf"};
-		}
+        protected override string GetFileDialogDescription()
+        {
+            return Locale.GetText("All metafile files");
+        }
 
-		protected override string GetFileDialogDescription()
-		{
-			return Locale.GetText ("All metafile files");
-		}
-
-		protected override Image LoadFromStream (Stream stream)
-		{
-			return new Metafile (stream);
-		}
-	}
+        protected override Image LoadFromStream(Stream stream)
+        {
+            return new Metafile(stream);
+        }
+    }
 }

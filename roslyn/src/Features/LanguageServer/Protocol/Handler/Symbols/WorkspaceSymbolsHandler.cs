@@ -21,29 +21,29 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     [ExportCSharpVisualBasicStatelessLspService(typeof(WorkspaceSymbolsHandler)), Shared]
     [Method(Methods.WorkspaceSymbolName)]
-    internal sealed class WorkspaceSymbolsHandler : ILspServiceRequestHandler<WorkspaceSymbolParams, SymbolInformation[]?>
+    internal sealed class WorkspaceSymbolsHandler
+        : ILspServiceRequestHandler<WorkspaceSymbolParams, SymbolInformation[]?>
     {
-        private static readonly IImmutableSet<string> s_supportedKinds =
-            ImmutableHashSet.Create(
-                NavigateToItemKind.Class,
-                NavigateToItemKind.Constant,
-                NavigateToItemKind.Delegate,
-                NavigateToItemKind.Enum,
-                NavigateToItemKind.EnumItem,
-                NavigateToItemKind.Event,
-                NavigateToItemKind.Field,
-                NavigateToItemKind.Interface,
-                NavigateToItemKind.Method,
-                NavigateToItemKind.Module,
-                NavigateToItemKind.Property,
-                NavigateToItemKind.Structure);
+        private static readonly IImmutableSet<string> s_supportedKinds = ImmutableHashSet.Create(
+            NavigateToItemKind.Class,
+            NavigateToItemKind.Constant,
+            NavigateToItemKind.Delegate,
+            NavigateToItemKind.Enum,
+            NavigateToItemKind.EnumItem,
+            NavigateToItemKind.Event,
+            NavigateToItemKind.Field,
+            NavigateToItemKind.Interface,
+            NavigateToItemKind.Method,
+            NavigateToItemKind.Module,
+            NavigateToItemKind.Property,
+            NavigateToItemKind.Structure
+        );
 
         private readonly IAsynchronousOperationListener _asyncListener;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public WorkspaceSymbolsHandler(
-            IAsynchronousOperationListenerProvider listenerProvider)
+        public WorkspaceSymbolsHandler(IAsynchronousOperationListenerProvider listenerProvider)
         {
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigateTo);
         }
@@ -51,7 +51,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public async Task<SymbolInformation[]?> HandleRequestAsync(WorkspaceSymbolParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<SymbolInformation[]?> HandleRequestAsync(
+            WorkspaceSymbolParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -64,9 +68,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 new LSPNavigateToCallback(context, progress),
                 request.Query,
                 s_supportedKinds,
-                cancellationToken);
+                cancellationToken
+            );
 
-            await searcher.SearchAsync(searchCurrentDocument: false, cancellationToken).ConfigureAwait(false);
+            await searcher
+                .SearchAsync(searchCurrentDocument: false, cancellationToken)
+                .ConfigureAwait(false);
             return progress.GetFlattenedValues();
         }
 
@@ -77,24 +84,47 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             public LSPNavigateToCallback(
                 RequestContext context,
-                BufferedProgress<SymbolInformation[]> progress)
+                BufferedProgress<SymbolInformation[]> progress
+            )
             {
                 _context = context;
                 _progress = progress;
             }
 
-            public async Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+            public async Task AddItemAsync(
+                Project project,
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            )
             {
-                var document = await result.NavigableItem.Document.GetRequiredDocumentAsync(project.Solution, cancellationToken).ConfigureAwait(false);
+                var document = await result
+                    .NavigableItem.Document.GetRequiredDocumentAsync(
+                        project.Solution,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
-                var location = await ProtocolConversions.TextSpanToLocationAsync(
-                    document, result.NavigableItem.SourceSpan, result.NavigableItem.IsStale, _context, cancellationToken).ConfigureAwait(false);
+                var location = await ProtocolConversions
+                    .TextSpanToLocationAsync(
+                        document,
+                        result.NavigableItem.SourceSpan,
+                        result.NavigableItem.IsStale,
+                        _context,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (location == null)
                     return;
 
-                var service = project.Solution.Services.GetRequiredService<ILspSymbolInformationCreationService>();
+                var service =
+                    project.Solution.Services.GetRequiredService<ILspSymbolInformationCreationService>();
                 var symbolInfo = service.Create(
-                    result.Name, result.AdditionalInformation, ProtocolConversions.NavigateToKindToSymbolKind(result.Kind), location, result.NavigableItem.Glyph);
+                    result.Name,
+                    result.AdditionalInformation,
+                    ProtocolConversions.NavigateToKindToSymbolKind(result.Kind),
+                    location,
+                    result.NavigableItem.Glyph
+                );
 
                 _progress.Report(symbolInfo);
             }
@@ -111,9 +141,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 // used by non-LSP editor API.
             }
 
-            public void ReportIncomplete()
-            {
-            }
+            public void ReportIncomplete() { }
         }
     }
 }

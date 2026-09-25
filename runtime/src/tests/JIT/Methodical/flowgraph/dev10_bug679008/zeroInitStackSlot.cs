@@ -2,7 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 /*
- * The JIT was removing a zero-init, but then emitting an untracked lifetime. 
+ * The JIT was removing a zero-init, but then emitting an untracked lifetime.
  * Please run under GCSTRESS = 0x4
  */
 
@@ -12,60 +12,59 @@ using Xunit;
 
 namespace Test_zeroInitStackSlot_cs
 {
-internal struct SqlBinary
-{
-    private byte[] _value;
-}
-
-internal class WarehouseResultDatabase : IDisposable
-{
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    public WarehouseResultDatabase()
+    internal struct SqlBinary
     {
+        private byte[] _value;
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    void IDisposable.Dispose()
+    internal class WarehouseResultDatabase : IDisposable
     {
-    }
-}
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        public WarehouseResultDatabase() { }
 
-internal delegate bool WarehouseRowVersionQueryDelegate(WarehouseResultDatabase database, SqlBinary waterMark);
-
-public class Repro
-{
-    [Fact]
-    public static void TestEntryPoint()
-    {
-        new Repro().ProcessResults(Query);
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        void IDisposable.Dispose() { }
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private void GetProcessingParameters(out SqlBinary binary)
-    {
-        binary = new SqlBinary();
-    }
+    internal delegate bool WarehouseRowVersionQueryDelegate(
+        WarehouseResultDatabase database,
+        SqlBinary waterMark
+    );
 
-    private static bool Query(WarehouseResultDatabase database, SqlBinary waterMark)
+    public class Repro
     {
-        return false;
-    }
-
-    private void ProcessResults(WarehouseRowVersionQueryDelegate query)
-    {
-        SqlBinary binary;
-        bool moreDataAvailable = true;
-        this.GetProcessingParameters(out binary);
-        SqlBinary waterMark = binary;
-        while (moreDataAvailable)
+        [Fact]
+        public static void TestEntryPoint()
         {
-            bool result = false;
-            using (WarehouseResultDatabase database = new WarehouseResultDatabase())
+            new Repro().ProcessResults(Query);
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private void GetProcessingParameters(out SqlBinary binary)
+        {
+            binary = new SqlBinary();
+        }
+
+        private static bool Query(WarehouseResultDatabase database, SqlBinary waterMark)
+        {
+            return false;
+        }
+
+        private void ProcessResults(WarehouseRowVersionQueryDelegate query)
+        {
+            SqlBinary binary;
+            bool moreDataAvailable = true;
+            this.GetProcessingParameters(out binary);
+            SqlBinary waterMark = binary;
+            while (moreDataAvailable)
             {
-                result = query(database, waterMark);
+                bool result = false;
+                using (WarehouseResultDatabase database = new WarehouseResultDatabase())
+                {
+                    result = query(database, waterMark);
+                }
+                moreDataAvailable = result;
             }
-            moreDataAvailable = result;
         }
     }
-}
 }

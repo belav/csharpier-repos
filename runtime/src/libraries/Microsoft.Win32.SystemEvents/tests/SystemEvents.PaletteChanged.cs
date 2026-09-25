@@ -12,14 +12,8 @@ namespace Microsoft.Win32.SystemEventsTests
 
         protected override event EventHandler Event
         {
-            add
-            {
-                SystemEvents.PaletteChanged += value;
-            }
-            remove
-            {
-                SystemEvents.PaletteChanged -= value;
-            }
+            add { SystemEvents.PaletteChanged += value; }
+            remove { SystemEvents.PaletteChanged -= value; }
         }
     }
 }

@@ -5,25 +5,21 @@ using System.Collections;
 
 public class Test
 {
-	internal object TestMethod (TestCollection t)
-	{
-		foreach (object x in t)
-		{
-			return x;
-		}
-		return null;
-	}
+    internal object TestMethod(TestCollection t)
+    {
+        foreach (object x in t)
+        {
+            return x;
+        }
+        return null;
+    }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }
 
 interface ITestCollection : IEnumerable
 {
-	new IEnumerator GetEnumerator ();
+    new IEnumerator GetEnumerator();
 }
 
-interface TestCollection : ITestCollection
-{
-}
+interface TestCollection : ITestCollection { }

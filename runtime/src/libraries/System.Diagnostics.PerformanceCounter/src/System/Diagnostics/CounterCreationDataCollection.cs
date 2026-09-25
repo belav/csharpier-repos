@@ -8,9 +8,7 @@ namespace System.Diagnostics
 {
     public class CounterCreationDataCollection : CollectionBase
     {
-        public CounterCreationDataCollection()
-        {
-        }
+        public CounterCreationDataCollection() { }
 
         public CounterCreationDataCollection(CounterCreationDataCollection value)
         {
@@ -24,14 +22,8 @@ namespace System.Diagnostics
 
         public CounterCreationData this[int index]
         {
-            get
-            {
-                return ((CounterCreationData)(List[index]));
-            }
-            set
-            {
-                List[index] = value;
-            }
+            get { return ((CounterCreationData)(List[index])); }
+            set { List[index] = value; }
         }
 
         public int Add(CounterCreationData value)
@@ -92,6 +84,5 @@ namespace System.Diagnostics
             if (!(value is CounterCreationData))
                 throw new ArgumentException(SR.MustAddCounterCreationData);
         }
-
     }
 }

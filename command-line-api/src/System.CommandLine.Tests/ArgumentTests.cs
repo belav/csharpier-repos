@@ -1,8 +1,8 @@
 // Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using FluentAssertions;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests;
@@ -32,13 +32,12 @@ public class ArgumentTests
     {
         var argument = new CliArgument<string>("the-arg");
 
-        argument.Invoking(a => a.GetDefaultValue())
-                .Should()
-                .Throw<InvalidOperationException>()
-                .Which
-                .Message
-                .Should()
-                .Be("Argument \"the-arg\" does not have a default value");
+        argument
+            .Invoking(a => a.GetDefaultValue())
+            .Should()
+            .Throw<InvalidOperationException>()
+            .Which.Message.Should()
+            .Be("Argument \"the-arg\" does not have a default value");
     }
 
     [Fact]
@@ -47,16 +46,15 @@ public class ArgumentTests
         var argument = new CliArgument<ConsoleColor>("color");
         argument.AcceptOnlyFromAmong(ConsoleColor.Red.ToString(), ConsoleColor.Green.ToString());
 
-        CliCommand command = new("set-color")
-        {
-            argument
-        };
+        CliCommand command = new("set-color") { argument };
 
         var result = command.Parse("set-color Fuschia");
 
-        result.Errors
-              .Select(e => e.Message)
-              .Should()
-              .BeEquivalentTo(new[] { $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'" });
+        result
+            .Errors.Select(e => e.Message)
+            .Should()
+            .BeEquivalentTo(
+                new[] { $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'" }
+            );
     }
 }

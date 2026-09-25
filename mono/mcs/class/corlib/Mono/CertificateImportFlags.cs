@@ -27,11 +27,11 @@ using System;
 
 namespace Mono
 {
-	[Flags]
-	enum CertificateImportFlags
-	{
-		None = 0,
-		DisableNativeBackend = 1,
-		DisableAutomaticFallback = 2
-	}
+    [Flags]
+    enum CertificateImportFlags
+    {
+        None = 0,
+        DisableNativeBackend = 1,
+        DisableAutomaticFallback = 2,
+    }
 }

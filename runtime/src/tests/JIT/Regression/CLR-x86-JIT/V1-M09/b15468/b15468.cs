@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace DefaultNamespace
 {
     //@BEGINRENAME; Verify this renames
@@ -21,14 +22,16 @@ namespace DefaultNamespace
 
             testUI = Int16.Parse("32535");
             Console.WriteLine(testUI);
-            if (testUI < 0) Console.WriteLine("Fail (testUI < 0)");
-            if (testUI < (Int16)0) Console.WriteLine("Fail (testUI < (ushort)0)");
-            else Console.WriteLine("cast to unsigned short worked");
+            if (testUI < 0)
+                Console.WriteLine("Fail (testUI < 0)");
+            if (testUI < (Int16)0)
+                Console.WriteLine("Fail (testUI < (ushort)0)");
+            else
+                Console.WriteLine("cast to unsigned short worked");
 
             testUI = Int16.Parse((-1).ToString("d"));
             Console.WriteLine(testUI);
             return testUI + 101;
-
         }
     }
 }

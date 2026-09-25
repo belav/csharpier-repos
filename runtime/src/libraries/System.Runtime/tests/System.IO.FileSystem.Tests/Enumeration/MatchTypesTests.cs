@@ -8,7 +8,11 @@ namespace System.IO.Tests.Enumeration
 {
     public abstract class MatchTypesTests : FileSystemTest
     {
-        protected abstract string[] GetPaths(string directory, string pattern, EnumerationOptions options);
+        protected abstract string[] GetPaths(
+            string directory,
+            string pattern,
+            EnumerationOptions options
+        );
 
         [Fact]
         public void QuestionMarkBehavior()
@@ -23,17 +27,39 @@ namespace System.IO.Tests.Enumeration
             fileThree.Create().Dispose();
 
             // Question marks collapse to periods in Win32
-            string[] paths = GetPaths(testDirectory.FullName, "a??.*", new EnumerationOptions { MatchType = MatchType.Win32 });
-            FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName, fileThree.FullName }, paths);
+            string[] paths = GetPaths(
+                testDirectory.FullName,
+                "a??.*",
+                new EnumerationOptions { MatchType = MatchType.Win32 }
+            );
+            FSAssert.EqualWhenOrdered(
+                new string[] { fileOne.FullName, fileTwo.FullName, fileThree.FullName },
+                paths
+            );
 
-            paths = GetPaths(testDirectory.FullName, "*.?????", new EnumerationOptions { MatchType = MatchType.Win32 });
-            FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileTwo.FullName, fileThree.FullName }, paths);
+            paths = GetPaths(
+                testDirectory.FullName,
+                "*.?????",
+                new EnumerationOptions { MatchType = MatchType.Win32 }
+            );
+            FSAssert.EqualWhenOrdered(
+                new string[] { fileOne.FullName, fileTwo.FullName, fileThree.FullName },
+                paths
+            );
 
             // Simple, one question mark is one character
-            paths = GetPaths(testDirectory.FullName, "a??.*", new EnumerationOptions { MatchType = MatchType.Simple });
+            paths = GetPaths(
+                testDirectory.FullName,
+                "a??.*",
+                new EnumerationOptions { MatchType = MatchType.Simple }
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileThree.FullName }, paths);
 
-            paths = GetPaths(testDirectory.FullName, "*.?????", new EnumerationOptions { MatchType = MatchType.Simple });
+            paths = GetPaths(
+                testDirectory.FullName,
+                "*.?????",
+                new EnumerationOptions { MatchType = MatchType.Simple }
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileThree.FullName }, paths);
         }
 
@@ -52,18 +78,30 @@ namespace System.IO.Tests.Enumeration
             File.Create(PlatformDetection.IsWindows ? @"\\?\" + fileThree : fileThree).Dispose();
 
             // *. means any file without an extension
-            string[] paths = GetPaths(testDirectory.FullName, "*.", new EnumerationOptions { MatchType = MatchType.Win32 });
+            string[] paths = GetPaths(
+                testDirectory.FullName,
+                "*.",
+                new EnumerationOptions { MatchType = MatchType.Win32 }
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileOne.FullName, fileThree }, paths);
 
             // Simple, anything with a trailing period
-            paths = GetPaths(testDirectory.FullName, "*.", new EnumerationOptions { MatchType = MatchType.Simple });
+            paths = GetPaths(
+                testDirectory.FullName,
+                "*.",
+                new EnumerationOptions { MatchType = MatchType.Simple }
+            );
             FSAssert.EqualWhenOrdered(new string[] { fileThree }, paths);
         }
     }
 
     public class MatchTypesTests_Directory_GetFiles : MatchTypesTests
     {
-        protected override string[] GetPaths(string directory, string pattern, EnumerationOptions options)
+        protected override string[] GetPaths(
+            string directory,
+            string pattern,
+            EnumerationOptions options
+        )
         {
             return Directory.GetFiles(directory, pattern, options);
         }
@@ -71,9 +109,16 @@ namespace System.IO.Tests.Enumeration
 
     public class MatchTypesTests_DirectoryInfo_GetFiles : MatchTypesTests
     {
-        protected override string[] GetPaths(string directory, string pattern, EnumerationOptions options)
+        protected override string[] GetPaths(
+            string directory,
+            string pattern,
+            EnumerationOptions options
+        )
         {
-            return new DirectoryInfo(directory).GetFiles(pattern, options).Select(i => i.FullName).ToArray();
+            return new DirectoryInfo(directory)
+                .GetFiles(pattern, options)
+                .Select(i => i.FullName)
+                .ToArray();
         }
     }
 }

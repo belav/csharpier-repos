@@ -19,17 +19,18 @@ namespace System.DirectoryServices.AccountManagement
         {
             get
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ValueCollectionEnumerator", "Entering Current");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ValueCollectionEnumerator",
+                    "Entering Current"
+                );
                 return _inner.Current;
             }
         }
 
         object IEnumerator.Current
         {
-            get
-            {
-                return Current;
-            }
+            get { return Current; }
         }
 
         //
@@ -38,7 +39,11 @@ namespace System.DirectoryServices.AccountManagement
 
         public bool MoveNext()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ValueCollectionEnumerator", "Entering MoveNext");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ValueCollectionEnumerator",
+                "Entering MoveNext"
+            );
             return _inner.MoveNext();
         }
 
@@ -49,7 +54,11 @@ namespace System.DirectoryServices.AccountManagement
 
         public void Reset()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ValueCollectionEnumerator", "Entering Reset");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ValueCollectionEnumerator",
+                "Entering Reset"
+            );
             _inner.Reset();
         }
 
@@ -60,17 +69,28 @@ namespace System.DirectoryServices.AccountManagement
 
         public void Dispose()
         {
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ValueCollectionEnumerator", "Entering Dispose");
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ValueCollectionEnumerator",
+                "Entering Dispose"
+            );
             _inner.Dispose();
         }
 
         //
         // Internal constructors
         //
-        internal ValueCollectionEnumerator(TrackedCollection<T> trackingList, List<TrackedCollection<T>.ValueEl> combinedValues)
+        internal ValueCollectionEnumerator(
+            TrackedCollection<T> trackingList,
+            List<TrackedCollection<T>.ValueEl> combinedValues
+        )
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "ValueCollectionEnumerator", "Ctor");
-            _inner = new TrackedCollectionEnumerator<T>("ValueCollectionEnumerator", trackingList, combinedValues);
+            _inner = new TrackedCollectionEnumerator<T>(
+                "ValueCollectionEnumerator",
+                trackingList,
+                combinedValues
+            );
         }
 
         //

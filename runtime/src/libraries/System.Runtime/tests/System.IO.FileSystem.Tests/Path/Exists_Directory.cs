@@ -16,20 +16,28 @@ namespace System.IO.Tests
             File.Create(path).Dispose();
 
             Assert.True(Exists(IOServices.RemoveTrailingSlash(path)));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path))));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path))));
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path)))
+            );
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path)))
+            );
         }
 
         [ConditionalFact(nameof(UsingNewNormalization))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // Extended path already exists as file
+        [PlatformSpecific(TestPlatforms.Windows)] // Extended path already exists as file
         public void ExtendedPathAlreadyExistsAsFile()
         {
             string path = IOInputs.ExtendedPrefix + GetTestFilePath();
             File.Create(path).Dispose();
 
             Assert.True(Exists(IOServices.RemoveTrailingSlash(path)));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path))));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path))));
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path)))
+            );
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path)))
+            );
         }
     }
 }

@@ -14,10 +14,11 @@
 
 namespace Castle.DynamicProxy.Tests.GenInterfaces
 {
-	using System;
+    using System;
 
-	public interface IHaveGenericMethodWithEnumConstraint
-	{
-		void Method<TEnum>(out TEnum result) where TEnum : Enum;
-	}
+    public interface IHaveGenericMethodWithEnumConstraint
+    {
+        void Method<TEnum>(out TEnum result)
+            where TEnum : Enum;
+    }
 }

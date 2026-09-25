@@ -10,9 +10,7 @@ namespace Microsoft.Extensions.Logging
     /// </summary>
     internal sealed class NullExternalScopeProvider : IExternalScopeProvider
     {
-        private NullExternalScopeProvider()
-        {
-        }
+        private NullExternalScopeProvider() { }
 
         /// <summary>
         /// Returns a cached instance of <see cref="NullExternalScopeProvider"/>.
@@ -20,9 +18,10 @@ namespace Microsoft.Extensions.Logging
         public static IExternalScopeProvider Instance { get; } = new NullExternalScopeProvider();
 
         /// <inheritdoc />
-        void IExternalScopeProvider.ForEachScope<TState>(Action<object?, TState> callback, TState state)
-        {
-        }
+        void IExternalScopeProvider.ForEachScope<TState>(
+            Action<object?, TState> callback,
+            TState state
+        ) { }
 
         /// <inheritdoc />
         IDisposable IExternalScopeProvider.Push(object? state)

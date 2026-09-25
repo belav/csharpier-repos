@@ -12,14 +12,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// <summary>
     /// Represents a compiler generated backing field for a primary constructor parameter.
     /// </summary>
-    internal sealed class SynthesizedPrimaryConstructorParameterBackingFieldSymbol : SynthesizedBackingFieldSymbolBase
+    internal sealed class SynthesizedPrimaryConstructorParameterBackingFieldSymbol
+        : SynthesizedBackingFieldSymbolBase
     {
         public readonly ParameterSymbol ParameterSymbol;
 
         public SynthesizedPrimaryConstructorParameterBackingFieldSymbol(
             ParameterSymbol parameterSymbol,
             string name,
-            bool isReadOnly)
+            bool isReadOnly
+        )
             : base(name, isReadOnly, isStatic: false)
         {
             ParameterSymbol = parameterSymbol;
@@ -27,27 +29,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override bool HasInitializer => true;
 
-        protected override IAttributeTargetSymbol AttributeOwner
-            => this;
+        protected override IAttributeTargetSymbol AttributeOwner => this;
 
-        internal override Location ErrorLocation
-            => ParameterSymbol.TryGetFirstLocation() ?? NoLocation.Singleton;
+        internal override Location ErrorLocation =>
+            ParameterSymbol.TryGetFirstLocation() ?? NoLocation.Singleton;
 
-        protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList
-            => default;
+        protected override SyntaxList<AttributeListSyntax> AttributeDeclarationSyntaxList =>
+            default;
 
-        public override Symbol? AssociatedSymbol
-            => null;
+        public override Symbol? AssociatedSymbol => null;
 
-        public override ImmutableArray<Location> Locations
-            => ParameterSymbol.Locations;
+        public override ImmutableArray<Location> Locations => ParameterSymbol.Locations;
 
         public override RefKind RefKind => RefKind.None;
 
-        public override ImmutableArray<CustomModifier> RefCustomModifiers => ImmutableArray<CustomModifier>.Empty;
+        public override ImmutableArray<CustomModifier> RefCustomModifiers =>
+            ImmutableArray<CustomModifier>.Empty;
 
-        internal override TypeWithAnnotations GetFieldType(ConsList<FieldSymbol> fieldsBeingBound)
-            => ParameterSymbol.TypeWithAnnotations;
+        internal override TypeWithAnnotations GetFieldType(
+            ConsList<FieldSymbol> fieldsBeingBound
+        ) => ParameterSymbol.TypeWithAnnotations;
 
         // Some implementations (like in SourceFieldSymbolWithSyntaxReference)
         // try to detect this fact from syntax. It looks like the motivation
@@ -56,13 +57,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // possible. Also, while figuring out whether parameter is getting captured, we are likely
         // to bind arbitrary type references. It feels like the additional complexity (detecting
         // the fact from syntax) is not warranted.
-        internal override bool HasPointerType
-            => base.HasPointerType;
+        internal override bool HasPointerType => base.HasPointerType;
 
-        public override Symbol ContainingSymbol
-            => ParameterSymbol.ContainingSymbol.ContainingSymbol;
+        public override Symbol ContainingSymbol =>
+            ParameterSymbol.ContainingSymbol.ContainingSymbol;
 
-        public override NamedTypeSymbol ContainingType
-            => ParameterSymbol.ContainingSymbol.ContainingType;
+        public override NamedTypeSymbol ContainingType =>
+            ParameterSymbol.ContainingSymbol.ContainingType;
     }
 }

@@ -26,7 +26,12 @@ namespace System.Diagnostics.Eventing.Reader
             _syncObject = new object();
         }
 
-        internal EventLogLink(string channelName, bool isImported, string displayName, uint channelId)
+        internal EventLogLink(
+            string channelName,
+            bool isImported,
+            string displayName,
+            uint channelId
+        )
         {
             _channelName = channelName;
             _isImported = isImported;

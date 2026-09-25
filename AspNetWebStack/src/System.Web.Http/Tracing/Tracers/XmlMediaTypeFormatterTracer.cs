@@ -16,15 +16,22 @@ using System.Xml.Serialization;
 namespace System.Web.Http.Tracing.Tracers
 {
     /// <summary>
-    /// Tracer for <see cref="XmlMediaTypeFormatter"/>.  
+    /// Tracer for <see cref="XmlMediaTypeFormatter"/>.
     /// It is required because users can select formatters by this type.
     /// </summary>
-    internal class XmlMediaTypeFormatterTracer : XmlMediaTypeFormatter, IFormatterTracer, IDecorator<XmlMediaTypeFormatter>
+    internal class XmlMediaTypeFormatterTracer
+        : XmlMediaTypeFormatter,
+            IFormatterTracer,
+            IDecorator<XmlMediaTypeFormatter>
     {
         private readonly XmlMediaTypeFormatter _inner;
         private readonly MediaTypeFormatterTracer _innerTracer;
 
-        public XmlMediaTypeFormatterTracer(XmlMediaTypeFormatter innerFormatter, ITraceWriter traceWriter, HttpRequestMessage request)
+        public XmlMediaTypeFormatterTracer(
+            XmlMediaTypeFormatter innerFormatter,
+            ITraceWriter traceWriter,
+            HttpRequestMessage request
+        )
             : base(innerFormatter)
         {
             _inner = innerFormatter;
@@ -48,14 +55,8 @@ namespace System.Web.Http.Tracing.Tracers
 
         public override IRequiredMemberSelector RequiredMemberSelector
         {
-            get
-            {
-                return _innerTracer.RequiredMemberSelector;
-            }
-            set
-            {
-                _innerTracer.RequiredMemberSelector = value;
-            }
+            get { return _innerTracer.RequiredMemberSelector; }
+            set { _innerTracer.RequiredMemberSelector = value; }
         }
 
         public override bool CanReadType(Type type)
@@ -68,34 +69,83 @@ namespace System.Web.Http.Tracing.Tracers
             return _innerTracer.CanWriteType(type);
         }
 
-        public override MediaTypeFormatter GetPerRequestFormatterInstance(Type type, HttpRequestMessage request, MediaTypeHeaderValue mediaType)
+        public override MediaTypeFormatter GetPerRequestFormatterInstance(
+            Type type,
+            HttpRequestMessage request,
+            MediaTypeHeaderValue mediaType
+        )
         {
             return _innerTracer.GetPerRequestFormatterInstance(type, request, mediaType);
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content,
-            IFormatterLogger formatterLogger, CancellationToken cancellationToken)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger,
+            CancellationToken cancellationToken
+        )
         {
-            return _innerTracer.ReadFromStreamAsync(type, readStream, content, formatterLogger, cancellationToken);
+            return _innerTracer.ReadFromStreamAsync(
+                type,
+                readStream,
+                content,
+                formatterLogger,
+                cancellationToken
+            );
         }
 
-        public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+        public override Task<object> ReadFromStreamAsync(
+            Type type,
+            Stream readStream,
+            HttpContent content,
+            IFormatterLogger formatterLogger
+        )
         {
             return _innerTracer.ReadFromStreamAsync(type, readStream, content, formatterLogger);
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content,
-            TransportContext transportContext, CancellationToken cancellationToken)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext,
+            CancellationToken cancellationToken
+        )
         {
-            return _innerTracer.WriteToStreamAsync(type, value, writeStream, content, transportContext, cancellationToken);
+            return _innerTracer.WriteToStreamAsync(
+                type,
+                value,
+                writeStream,
+                content,
+                transportContext,
+                cancellationToken
+            );
         }
 
-        public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
+        public override Task WriteToStreamAsync(
+            Type type,
+            object value,
+            Stream writeStream,
+            HttpContent content,
+            TransportContext transportContext
+        )
         {
-            return _innerTracer.WriteToStreamAsync(type, value, writeStream, content, transportContext);
+            return _innerTracer.WriteToStreamAsync(
+                type,
+                value,
+                writeStream,
+                content,
+                transportContext
+            );
         }
 
-        public override void SetDefaultContentHeaders(Type type, HttpContentHeaders headers, MediaTypeHeaderValue mediaType)
+        public override void SetDefaultContentHeaders(
+            Type type,
+            HttpContentHeaders headers,
+            MediaTypeHeaderValue mediaType
+        )
         {
             _innerTracer.SetDefaultContentHeaders(type, headers, mediaType);
         }

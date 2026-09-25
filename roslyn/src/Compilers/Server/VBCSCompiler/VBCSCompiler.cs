@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.CommandLine;
 using System;
 using System.Collections.Specialized;
 using System.IO;
+using Microsoft.CodeAnalysis.CommandLine;
 
 namespace Microsoft.CodeAnalysis.CompilerServer
 {
@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.CompilerServer
             }
             catch (Exception ex)
             {
-                // It is possible for AppSettings to throw when the application or machine configuration 
+                // It is possible for AppSettings to throw when the application or machine configuration
                 // is corrupted.  This should not prevent the server from starting, but instead just revert
                 // to the default configuration.
                 appSettings = new NameValueCollection();

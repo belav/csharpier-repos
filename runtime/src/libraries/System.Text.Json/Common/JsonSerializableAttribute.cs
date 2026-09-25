@@ -12,7 +12,6 @@ namespace System.Text.Json.Serialization
     /// when serializing and deserializing instances of the specified type and types in its object graph.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-
 #if BUILDING_SOURCE_GENERATOR
     internal
 #else

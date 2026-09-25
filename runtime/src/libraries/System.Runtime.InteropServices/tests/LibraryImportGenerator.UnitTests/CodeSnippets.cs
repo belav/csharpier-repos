@@ -10,41 +10,68 @@ namespace LibraryImportGenerator.UnitTests
     internal class CodeSnippets : ICustomMarshallingSignatureTestProvider
     {
         public CodeSnippets() { }
-        string ICustomMarshallingSignatureTestProvider.BasicParameterByValue(string type, string preDeclaration)
-            => BasicParameterByValue(type, preDeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.BasicParameterWithByRefModifier(string byRefModifier, string type, string preDeclaration)
-            => BasicParameterWithByRefModifier(byRefModifier, type, preDeclaration);
+        string ICustomMarshallingSignatureTestProvider.BasicParameterByValue(
+            string type,
+            string preDeclaration
+        ) => BasicParameterByValue(type, preDeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.BasicReturnType(string type, string preDeclaration)
-            => BasicReturnType(type, preDeclaration);
+        string ICustomMarshallingSignatureTestProvider.BasicParameterWithByRefModifier(
+            string byRefModifier,
+            string type,
+            string preDeclaration
+        ) => BasicParameterWithByRefModifier(byRefModifier, type, preDeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.BasicParametersAndModifiers(string typeName, string preDeclaration)
-            => BasicParametersAndModifiers(typeName, preDeclaration);
+        string ICustomMarshallingSignatureTestProvider.BasicReturnType(
+            string type,
+            string preDeclaration
+        ) => BasicReturnType(type, preDeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.BasicParametersAndModifiersNoRef(string typeName, string preDeclaration)
-            => BasicParametersAndModifiersNoRef(typeName, preDeclaration);
+        string ICustomMarshallingSignatureTestProvider.BasicParametersAndModifiers(
+            string typeName,
+            string preDeclaration
+        ) => BasicParametersAndModifiers(typeName, preDeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.MarshalUsingParametersAndModifiers(string type, string marshallerType, string preDeclaration)
-            => MarshalUsingParametersAndModifiers(type, marshallerType, preDeclaration);
+        string ICustomMarshallingSignatureTestProvider.BasicParametersAndModifiersNoRef(
+            string typeName,
+            string preDeclaration
+        ) => BasicParametersAndModifiersNoRef(typeName, preDeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionCountInfoParametersAndModifiers(string collectionType)
-            => MarshalUsingCollectionCountInfoParametersAndModifiers(collectionType);
+        string ICustomMarshallingSignatureTestProvider.MarshalUsingParametersAndModifiers(
+            string type,
+            string marshallerType,
+            string preDeclaration
+        ) => MarshalUsingParametersAndModifiers(type, marshallerType, preDeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionParametersAndModifiers(string type, string marshallerType)
-            => MarshalUsingCollectionParametersAndModifiers(type, marshallerType);
+        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionCountInfoParametersAndModifiers(
+            string collectionType
+        ) => MarshalUsingCollectionCountInfoParametersAndModifiers(collectionType);
 
-        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionOutConstantLength(string type, string predeclaration)
-            => MarshalUsingCollectionOutConstantLength(type, predeclaration);
+        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionParametersAndModifiers(
+            string type,
+            string marshallerType
+        ) => MarshalUsingCollectionParametersAndModifiers(type, marshallerType);
 
-        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionReturnConstantLength(string type, string predeclaration)
-            => MarshalUsingCollectionReturnConstantLength(type, predeclaration);
+        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionOutConstantLength(
+            string type,
+            string predeclaration
+        ) => MarshalUsingCollectionOutConstantLength(type, predeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionReturnValueLength(string type, string marshallerType)
-            => MarshalUsingCollectionReturnValueLength(type, marshallerType);
+        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionReturnConstantLength(
+            string type,
+            string predeclaration
+        ) => MarshalUsingCollectionReturnConstantLength(type, predeclaration);
 
-        string ICustomMarshallingSignatureTestProvider.CustomElementMarshalling(string type, string marshallerType, string preDeclaration)
-            => CustomElementMarshalling(type, marshallerType, preDeclaration);
+        string ICustomMarshallingSignatureTestProvider.MarshalUsingCollectionReturnValueLength(
+            string type,
+            string marshallerType
+        ) => MarshalUsingCollectionReturnValueLength(type, marshallerType);
+
+        string ICustomMarshallingSignatureTestProvider.CustomElementMarshalling(
+            string type,
+            string marshallerType,
+            string preDeclaration
+        ) => CustomElementMarshalling(type, marshallerType, preDeclaration);
 
         /// <summary>
         /// Partially define attribute for pre-.NET 7.0
@@ -88,6 +115,7 @@ namespace LibraryImportGenerator.UnitTests
                 public static partial void Method4();
             }
             """;
+
         /// <summary>
         /// Trivial declaration of LibraryImport usage
         /// </summary>
@@ -218,6 +246,7 @@ namespace LibraryImportGenerator.UnitTests
                 public static partial int* Method2();
             }
             """;
+
         /// <summary>
         /// Declaration with user defined EntryPoint.
         /// </summary>
@@ -375,366 +404,464 @@ namespace LibraryImportGenerator.UnitTests
             """;
 
         public static string LibraryImportInRefStruct = """
-            using System;
-            using System.Runtime.InteropServices;
+                using System;
+                using System.Runtime.InteropServices;
 
-            public static partial class MyClass
-            {
-                public ref partial struct RSPublic
+                public static partial class MyClass
                 {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method();
+                    public ref partial struct RSPublic
+                    {
+                        [LibraryImport("DoesNotExist")]
+                        public static partial int Method();
+                    }
+
+                    internal ref partial struct RSInternal
+                    {
+                        [LibraryImport("DoesNotExist")]
+                        public static partial int Method();
+                    }
+
+                    private ref partial struct RSPrivate
+                    {
+                        [LibraryImport("DoesNotExist")]
+                        public static partial int Method();
+                    }
                 }
 
-                internal ref partial struct RSInternal
+                public ref partial struct RSContainer
                 {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method();
+                    public ref partial struct RSPublic
+                    {
+                        [LibraryImport("DoesNotExist")]
+                        public static partial int Method();
+                    }
+
+                    internal ref partial struct RSInternal
+                    {
+                        [LibraryImport("DoesNotExist")]
+                        public static partial int Method();
+                    }
+
+                    private ref partial struct RSPrivate
+                    {
+                        [LibraryImport("DoesNotExist")]
+                        public static partial int Method();
+                    }
                 }
 
-                private ref partial struct RSPrivate
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method();
-                }
-            }
+            """;
 
-            public ref partial struct RSContainer
-            {
-                public ref partial struct RSPublic
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method();
-                }
+        public static readonly string DisableRuntimeMarshalling =
+            "[assembly:System.Runtime.CompilerServices.DisableRuntimeMarshalling]";
 
-                internal ref partial struct RSInternal
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method();
-                }
-
-                private ref partial struct RSPrivate
-                {
-                    [LibraryImport("DoesNotExist")]
-                    public static partial int Method();
-                }
-            }
-
-        """;
-
-        public static readonly string DisableRuntimeMarshalling = "[assembly:System.Runtime.CompilerServices.DisableRuntimeMarshalling]";
-
-        public static readonly string UsingSystemRuntimeInteropServicesMarshalling = "using System.Runtime.InteropServices.Marshalling;";
+        public static readonly string UsingSystemRuntimeInteropServicesMarshalling =
+            "using System.Runtime.InteropServices.Marshalling;";
 
         /// <summary>
         /// Declaration with parameters with <see cref="StringMarshalling"/> set.
         /// </summary>
-        public static string BasicParametersAndModifiersWithStringMarshalling(string typename, StringMarshalling value, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [{|#0:LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.{{value}})|}]
-                public static partial {{typename}} {|#1:Method|}(
-                    {{typename}} {|#2:p|},
-                    in {{typename}} {|#3:pIn|},
-                    ref {{typename}} {|#4:pRef|},
-                    out {{typename}} {|#5:pOut|});
-            }
-            """;
+        public static string BasicParametersAndModifiersWithStringMarshalling(
+            string typename,
+            StringMarshalling value,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [{|#0:LibraryImport("DoesNotExist", StringMarshalling = StringMarshalling.{{value}})|}]
+                    public static partial {{typename}} {|#1:Method|}(
+                        {{typename}} {|#2:p|},
+                        in {{typename}} {|#3:pIn|},
+                        ref {{typename}} {|#4:pRef|},
+                        out {{typename}} {|#5:pOut|});
+                }
+                """;
 
-        public static string BasicParametersAndModifiersWithStringMarshalling<T>(StringMarshalling value, string preDeclaration = "") =>
-            BasicParametersAndModifiersWithStringMarshalling(typeof(T).ToString(), value, preDeclaration);
+        public static string BasicParametersAndModifiersWithStringMarshalling<T>(
+            StringMarshalling value,
+            string preDeclaration = ""
+        ) =>
+            BasicParametersAndModifiersWithStringMarshalling(
+                typeof(T).ToString(),
+                value,
+                preDeclaration
+            );
 
         /// <summary>
         /// Declaration with parameters with <see cref="StringMarshallingCustomType"/> set.
         /// </summary>
-        public static string BasicParametersAndModifiersWithStringMarshallingCustomType(string typeName, string stringMarshallingCustomTypeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist", StringMarshallingCustomType = typeof({{stringMarshallingCustomTypeName}}))]
-                public static partial {{typeName}} {|#0:Method|}(
-                    {{typeName}} {|#1:p|},
-                    in {{typeName}} {|#2:pIn|},
-                    ref {{typeName}} {|#3:pRef|},
-                    out {{typeName}} {|#4:pOut|});
-            }
-            """;
+        public static string BasicParametersAndModifiersWithStringMarshallingCustomType(
+            string typeName,
+            string stringMarshallingCustomTypeName,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist", StringMarshallingCustomType = typeof({{stringMarshallingCustomTypeName}}))]
+                    public static partial {{typeName}} {|#0:Method|}(
+                        {{typeName}} {|#1:p|},
+                        in {{typeName}} {|#2:pIn|},
+                        ref {{typeName}} {|#3:pRef|},
+                        out {{typeName}} {|#4:pOut|});
+                }
+                """;
 
-        public static string BasicParametersAndModifiersWithStringMarshallingCustomType<T>(string stringMarshallingCustomTypeName, string preDeclaration = "") =>
-            BasicParametersAndModifiersWithStringMarshallingCustomType(typeof(T).ToString(), stringMarshallingCustomTypeName, preDeclaration);
+        public static string BasicParametersAndModifiersWithStringMarshallingCustomType<T>(
+            string stringMarshallingCustomTypeName,
+            string preDeclaration = ""
+        ) =>
+            BasicParametersAndModifiersWithStringMarshallingCustomType(
+                typeof(T).ToString(),
+                stringMarshallingCustomTypeName,
+                preDeclaration
+            );
 
         public static string CustomStringMarshallingParametersAndModifiers<T>()
         {
             string typeName = typeof(T).ToString();
-            return BasicParametersAndModifiersWithStringMarshallingCustomType(typeName, "Marshaller", DisableRuntimeMarshalling) + $$"""
-                [CustomMarshaller(typeof({{typeName}}), MarshalMode.Default, typeof(Marshaller))]
-                static class Marshaller
-                {
-                    public static nint ConvertToUnmanaged({{typeName}} s) => default;
+            return BasicParametersAndModifiersWithStringMarshallingCustomType(
+                    typeName,
+                    "Marshaller",
+                    DisableRuntimeMarshalling
+                )
+                + $$"""
+                    [CustomMarshaller(typeof({{typeName}}), MarshalMode.Default, typeof(Marshaller))]
+                    static class Marshaller
+                    {
+                        public static nint ConvertToUnmanaged({{typeName}} s) => default;
 
-                    public static {{typeName}} ConvertToManaged(nint i) => default;
-                }
-                """;
+                        public static {{typeName}} ConvertToManaged(nint i) => default;
+                    }
+                    """;
         }
 
         /// <summary>
         /// Declaration with parameters.
         /// </summary>
-        public static string BasicParametersAndModifiers(string typeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial {{typeName}} {|#0:Method|}(
-                    {{typeName}} {|#1:p|},
-                    in {{typeName}} {|#2:pIn|},
-                    ref {{typeName}} {|#3:pRef|},
-                    out {{typeName}} {|#4:pOut|});
-            }
-            """;
+        public static string BasicParametersAndModifiers(
+            string typeName,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial {{typeName}} {|#0:Method|}(
+                        {{typeName}} {|#1:p|},
+                        in {{typeName}} {|#2:pIn|},
+                        ref {{typeName}} {|#3:pRef|},
+                        out {{typeName}} {|#4:pOut|});
+                }
+                """;
 
         /// <summary>
         /// Declaration with parameters.
         /// </summary>
-        public static string BasicParametersAndModifiersNoRef(string typeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial {{typeName}} {|#0:Method|}(
-                    {{typeName}} {|#1:p|},
-                    in {{typeName}} {|#2:pIn|},
-                    out {{typeName}} {|#4:pOut|});
-            }
-            """;
+        public static string BasicParametersAndModifiersNoRef(
+            string typeName,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial {{typeName}} {|#0:Method|}(
+                        {{typeName}} {|#1:p|},
+                        in {{typeName}} {|#2:pIn|},
+                        out {{typeName}} {|#4:pOut|});
+                }
+                """;
 
         /// <summary>
         /// Declaration with parameters and unsafe.
         /// </summary>
-        public static string BasicParametersAndModifiersUnsafe(string typeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static unsafe partial {{typeName}} {|#0:Method|}(
-                    {{typeName}} {|#1:p|},
-                    in {{typeName}} {|#2:pIn|},
-                    ref {{typeName}} {|#3:pRef|},
-                    out {{typeName}} {|#4:pOut|});
-            }
-            """;
+        public static string BasicParametersAndModifiersUnsafe(
+            string typeName,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static unsafe partial {{typeName}} {|#0:Method|}(
+                        {{typeName}} {|#1:p|},
+                        in {{typeName}} {|#2:pIn|},
+                        ref {{typeName}} {|#3:pRef|},
+                        out {{typeName}} {|#4:pOut|});
+                }
+                """;
 
-        public static string BasicParametersAndModifiers<T>(string preDeclaration = "") => BasicParametersAndModifiers(typeof(T).ToString(), preDeclaration);
+        public static string BasicParametersAndModifiers<T>(string preDeclaration = "") =>
+            BasicParametersAndModifiers(typeof(T).ToString(), preDeclaration);
 
         /// <summary>
         /// Declaration with [In, Out] style attributes on a by-value parameter.
         /// </summary>
-        public static string ByValueParameterWithModifier(string typeName, string attributeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [{{attributeName}}] {{typeName}} {|#0:p|});
-            }
-            """;
+        public static string ByValueParameterWithModifier(
+            string typeName,
+            string attributeName,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [{{attributeName}}] {{typeName}} {|#0:p|});
+                }
+                """;
 
-        public static string ByValueParameterWithModifier<T>(string attributeName, string preDeclaration = "") => ByValueParameterWithModifier(typeof(T).ToString(), attributeName, preDeclaration);
+        public static string ByValueParameterWithModifier<T>(
+            string attributeName,
+            string preDeclaration = ""
+        ) => ByValueParameterWithModifier(typeof(T).ToString(), attributeName, preDeclaration);
 
         /// <summary>
         /// Declaration with one parameter with custom modifiers.
         /// </summary>
-        public static string SingleParameterWithModifier(string typeName, string modifiers, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    {{modifiers}} {{typeName}} {|#0:p|});
-            }
-            """;
+        public static string SingleParameterWithModifier(
+            string typeName,
+            string modifiers,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        {{modifiers}} {{typeName}} {|#0:p|});
+                }
+                """;
 
         /// <summary>
         /// Declaration with by-value parameter with custom name.
         /// </summary>
-        public static string ByValueParameterWithName(string methodName, string paramName) => $$"""
-            using System.Runtime.InteropServices;
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void {{methodName}}(
-                    int {{paramName}});
-            }
-            """;
+        public static string ByValueParameterWithName(string methodName, string paramName) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void {{methodName}}(
+                        int {{paramName}});
+                }
+                """;
 
         /// <summary>
         /// Declaration with parameters with MarshalAs.
         /// </summary>
-        public static string MarshalAsParametersAndModifiers(string typeName, UnmanagedType unmanagedType) => $$"""
-            using System.Runtime.InteropServices;
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return: {|#10:MarshalAs(UnmanagedType.{{unmanagedType}})|}]
-                public static partial {{typeName}} {|#0:Method|}(
-                    [{|#11:MarshalAs(UnmanagedType.{{unmanagedType}})|}] {{typeName}} {|#1:p|},
-                    [{|#12:MarshalAs(UnmanagedType.{{unmanagedType}})|}] in {{typeName}} {|#2:pIn|},
-                    [{|#13:MarshalAs(UnmanagedType.{{unmanagedType}})|}] ref {{typeName}} {|#3:pRef|},
-                    [{|#14:MarshalAs(UnmanagedType.{{unmanagedType}})|}] out {{typeName}} {|#4:pOut|});
-            }
-            """;
+        public static string MarshalAsParametersAndModifiers(
+            string typeName,
+            UnmanagedType unmanagedType
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return: {|#10:MarshalAs(UnmanagedType.{{unmanagedType}})|}]
+                    public static partial {{typeName}} {|#0:Method|}(
+                        [{|#11:MarshalAs(UnmanagedType.{{unmanagedType}})|}] {{typeName}} {|#1:p|},
+                        [{|#12:MarshalAs(UnmanagedType.{{unmanagedType}})|}] in {{typeName}} {|#2:pIn|},
+                        [{|#13:MarshalAs(UnmanagedType.{{unmanagedType}})|}] ref {{typeName}} {|#3:pRef|},
+                        [{|#14:MarshalAs(UnmanagedType.{{unmanagedType}})|}] out {{typeName}} {|#4:pOut|});
+                }
+                """;
 
         /// <summary>
         /// Declaration with parameters with MarshalAs.
         /// </summary>
-        public static string MarshalAsParametersAndModifiersUnsafe(string typeName, UnmanagedType unmanagedType) => $$"""
-            using System.Runtime.InteropServices;
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return: MarshalAs(UnmanagedType.{{unmanagedType}})]
-                public static unsafe partial {{typeName}} {|#0:Method|}(
-                    [MarshalAs(UnmanagedType.{{unmanagedType}})] {{typeName}} {|#1:p|},
-                    [MarshalAs(UnmanagedType.{{unmanagedType}})] in {{typeName}} {|#2:pIn|},
-                    [MarshalAs(UnmanagedType.{{unmanagedType}})] ref {{typeName}} {|#3:pRef|},
-                    [MarshalAs(UnmanagedType.{{unmanagedType}})] out {{typeName}} {|#4:pOut|});
-            }
-            """;
+        public static string MarshalAsParametersAndModifiersUnsafe(
+            string typeName,
+            UnmanagedType unmanagedType
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return: MarshalAs(UnmanagedType.{{unmanagedType}})]
+                    public static unsafe partial {{typeName}} {|#0:Method|}(
+                        [MarshalAs(UnmanagedType.{{unmanagedType}})] {{typeName}} {|#1:p|},
+                        [MarshalAs(UnmanagedType.{{unmanagedType}})] in {{typeName}} {|#2:pIn|},
+                        [MarshalAs(UnmanagedType.{{unmanagedType}})] ref {{typeName}} {|#3:pRef|},
+                        [MarshalAs(UnmanagedType.{{unmanagedType}})] out {{typeName}} {|#4:pOut|});
+                }
+                """;
 
-        public static string MarshalAsParametersAndModifiers<T>(UnmanagedType unmanagedType) => MarshalAsParametersAndModifiers(typeof(T).ToString(), unmanagedType);
+        public static string MarshalAsParametersAndModifiers<T>(UnmanagedType unmanagedType) =>
+            MarshalAsParametersAndModifiers(typeof(T).ToString(), unmanagedType);
 
         /// <summary>
         /// Declaration with enum parameters.
         /// </summary>
-        public static string EnumParameters => """
-            using System.Runtime.InteropServices;
-            using NS;
+        public static string EnumParameters =>
+            """
+                using System.Runtime.InteropServices;
+                using NS;
 
-            namespace NS
-            {
-                enum MyEnum { A, B, C }
-            }
+                namespace NS
+                {
+                    enum MyEnum { A, B, C }
+                }
 
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial MyEnum Method(
-                    MyEnum p,
-                    in MyEnum pIn,
-                    ref MyEnum pRef,
-                    out MyEnum pOut);
-            }
-            """;
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial MyEnum Method(
+                        MyEnum p,
+                        in MyEnum pIn,
+                        ref MyEnum pRef,
+                        out MyEnum pOut);
+                }
+                """;
 
         /// <summary>
         /// Declaration with pointer parameters.
         /// </summary>
-        public static string PointerParameters<T>() => BasicParametersAndModifiersUnsafe($"{typeof(T)}*");
+        public static string PointerParameters<T>() =>
+            BasicParametersAndModifiersUnsafe($"{typeof(T)}*");
 
         /// <summary>
         /// Declaration with PreserveSig = false.
         /// </summary>
-        public static string SetLastErrorTrue(string typeName) => $$"""
-            using System.Runtime.InteropServices;
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist", SetLastError = true)]
-                public static partial {{typeName}} Method({{typeName}} p);
-            }
-            """;
+        public static string SetLastErrorTrue(string typeName) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist", SetLastError = true)]
+                    public static partial {{typeName}} Method({{typeName}} p);
+                }
+                """;
 
         public static string SetLastErrorTrue<T>() => SetLastErrorTrue(typeof(T).ToString());
 
-        public static string DelegateParametersAndModifiers = BasicParametersAndModifiers("MyDelegate") + """
-            delegate int MyDelegate(int a);
-            """;
-        public static string DelegateMarshalAsParametersAndModifiers = MarshalAsParametersAndModifiers("MyDelegate", UnmanagedType.FunctionPtr) + """
-            delegate int MyDelegate(int a);
-            """;
+        public static string DelegateParametersAndModifiers =
+            BasicParametersAndModifiers("MyDelegate")
+            + """
+                delegate int MyDelegate(int a);
+                """;
+        public static string DelegateMarshalAsParametersAndModifiers =
+            MarshalAsParametersAndModifiers("MyDelegate", UnmanagedType.FunctionPtr)
+            + """
+                delegate int MyDelegate(int a);
+                """;
 
-        private static string BlittableMyStruct(string modifier = "") => $$$"""
-            #pragma warning disable CS0169
-            {{{modifier}}} unsafe struct MyStruct
-            {
-                private int i;
-                private short s;
-                private long l;
-                private double d;
-                private int* iptr;
-                private short* sptr;
-                private long* lptr;
-                private double* dptr;
-                private void* vptr;
-            }
-            """;
+        private static string BlittableMyStruct(string modifier = "") =>
+            $$$"""
+                #pragma warning disable CS0169
+                {{{modifier}}} unsafe struct MyStruct
+                {
+                    private int i;
+                    private short s;
+                    private long l;
+                    private double d;
+                    private int* iptr;
+                    private short* sptr;
+                    private long* lptr;
+                    private double* dptr;
+                    private void* vptr;
+                }
+                """;
 
-        public static string BlittableStructParametersAndModifiers(string attr) => $$"""
-            {{BasicParametersAndModifiers("MyStruct", attr)}}
-            {{BlittableMyStruct()}}
-            """;
+        public static string BlittableStructParametersAndModifiers(string attr) =>
+            $$"""
+                {{BasicParametersAndModifiers("MyStruct", attr)}}
+                {{BlittableMyStruct()}}
+                """;
 
-        public static string MarshalAsArrayParametersAndModifiers(string elementType, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return:MarshalAs(UnmanagedType.LPArray, SizeConst=10)]
-                public static partial {{elementType}}[] {|#0:Method|}(
-                    {{elementType}}[] {|#1:p|},
-                    in {{elementType}}[] {|#2:pIn|},
-                    int {|#3:pRefSize|},
-                    [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)] ref {{elementType}}[] {|#4:pRef|},
-                    [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=5, SizeConst=4)] out {{elementType}}[] {|#5:pOut|},
-                    out int {|#6:pOutSize|}
-                    );
-            }
-            """;
+        public static string MarshalAsArrayParametersAndModifiers(
+            string elementType,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return:MarshalAs(UnmanagedType.LPArray, SizeConst=10)]
+                    public static partial {{elementType}}[] {|#0:Method|}(
+                        {{elementType}}[] {|#1:p|},
+                        in {{elementType}}[] {|#2:pIn|},
+                        int {|#3:pRefSize|},
+                        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=2)] ref {{elementType}}[] {|#4:pRef|},
+                        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=5, SizeConst=4)] out {{elementType}}[] {|#5:pOut|},
+                        out int {|#6:pOutSize|}
+                        );
+                }
+                """;
 
-        public static string MarshalAsArrayParametersAndModifiers<T>(string preDeclaration = "") => MarshalAsArrayParametersAndModifiers(typeof(T).ToString(), preDeclaration);
+        public static string MarshalAsArrayParametersAndModifiers<T>(string preDeclaration = "") =>
+            MarshalAsArrayParametersAndModifiers(typeof(T).ToString(), preDeclaration);
 
-        public static string MarshalAsArrayParameterWithSizeParam(string sizeParamType, bool isByRef) => $$"""
-            using System.Runtime.InteropServices;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    {{(isByRef ? "ref" : "")}} {{sizeParamType}} {|#0:pRefSize|},
-                    [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] ref int[] {|#1:pRef|}
-                    );
-            }
-            """;
+        public static string MarshalAsArrayParameterWithSizeParam(
+            string sizeParamType,
+            bool isByRef
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        {{(isByRef ? "ref" : "")}} {{sizeParamType}} {|#0:pRefSize|},
+                        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)] ref int[] {|#1:pRef|}
+                        );
+                }
+                """;
 
-        public static string MarshalAsArrayParameterWithSizeParam<T>(bool isByRef) => MarshalAsArrayParameterWithSizeParam(typeof(T).ToString(), isByRef);
+        public static string MarshalAsArrayParameterWithSizeParam<T>(bool isByRef) =>
+            MarshalAsArrayParameterWithSizeParam(typeof(T).ToString(), isByRef);
 
+        public static string MarshalAsArrayParameterWithNestedMarshalInfo(
+            string elementType,
+            UnmanagedType nestedMarshalInfo,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.{{nestedMarshalInfo}})] {{elementType}}[] pRef
+                        );
+                }
+                """;
 
-        public static string MarshalAsArrayParameterWithNestedMarshalInfo(string elementType, UnmanagedType nestedMarshalInfo, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [MarshalAs(UnmanagedType.LPArray, ArraySubType=UnmanagedType.{{nestedMarshalInfo}})] {{elementType}}[] pRef
-                    );
-            }
-            """;
-
-        public static string MarshalAsArrayParameterWithNestedMarshalInfo<T>(UnmanagedType nestedMarshalType, string preDeclaration = "") => MarshalAsArrayParameterWithNestedMarshalInfo(typeof(T).ToString(), nestedMarshalType, preDeclaration);
+        public static string MarshalAsArrayParameterWithNestedMarshalInfo<T>(
+            UnmanagedType nestedMarshalType,
+            string preDeclaration = ""
+        ) =>
+            MarshalAsArrayParameterWithNestedMarshalInfo(
+                typeof(T).ToString(),
+                nestedMarshalType,
+                preDeclaration
+            );
 
         /// <summary>
         /// Declaration with parameters with MarshalAs.
@@ -754,287 +881,353 @@ namespace LibraryImportGenerator.UnitTests
         //            [MarshalUsing(typeof({{nativeTypeName}}))] out {{typeName}} pOut);
         //    }
         //    """;
-        public static string MarshalUsingParametersAndModifiers(string typeName, string nativeTypeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return: MarshalUsing(typeof({{nativeTypeName}}))]
-                public static partial {{typeName}} {|#0:Method|}(
-                    [MarshalUsing(typeof({{nativeTypeName}}))] {{typeName}} {|#1:p|},
-                    [MarshalUsing(typeof({{nativeTypeName}}))] in {{typeName}} {|#2:pIn|},
-                    [MarshalUsing(typeof({{nativeTypeName}}))] ref {{typeName}} {|#3:pRef|},
-                    [MarshalUsing(typeof({{nativeTypeName}}))] out {{typeName}} {|#4:pOut|});
-            }
-            """;
-        public static string BasicParameterWithByRefModifier(string byRefKind, string typeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    {{byRefKind}} {{typeName}} {|#0:p|});
-            }
-            """;
+        public static string MarshalUsingParametersAndModifiers(
+            string typeName,
+            string nativeTypeName,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return: MarshalUsing(typeof({{nativeTypeName}}))]
+                    public static partial {{typeName}} {|#0:Method|}(
+                        [MarshalUsing(typeof({{nativeTypeName}}))] {{typeName}} {|#1:p|},
+                        [MarshalUsing(typeof({{nativeTypeName}}))] in {{typeName}} {|#2:pIn|},
+                        [MarshalUsing(typeof({{nativeTypeName}}))] ref {{typeName}} {|#3:pRef|},
+                        [MarshalUsing(typeof({{nativeTypeName}}))] out {{typeName}} {|#4:pOut|});
+                }
+                """;
 
-        public static string BasicParameterByValue(string typeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    {{typeName}} {|#0:p|});
-            }
-            """;
+        public static string BasicParameterWithByRefModifier(
+            string byRefKind,
+            string typeName,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        {{byRefKind}} {{typeName}} {|#0:p|});
+                }
+                """;
 
-        public static string BasicReturnType(string typeName, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial {{typeName}} {|#0:Method|}();
-            }
-            """;
+        public static string BasicParameterByValue(string typeName, string preDeclaration = "") =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        {{typeName}} {|#0:p|});
+                }
+                """;
 
-        public static string BasicReturnAndParameterByValue(string returnType, string parameterType, string preDeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            {{preDeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial {{returnType}} Method({{parameterType}} p);
-            }
-            """;
+        public static string BasicReturnType(string typeName, string preDeclaration = "") =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial {{typeName}} {|#0:Method|}();
+                }
+                """;
 
-        public static string SafeHandleWithCustomDefaultConstructorAccessibility(bool privateCtor) => BasicParametersAndModifiers("MySafeHandle") + $$"""
-            class MySafeHandle : SafeHandle
-            {
-                {{(privateCtor ? "private" : "public")}} MySafeHandle() : base(System.IntPtr.Zero, true) { }
+        public static string BasicReturnAndParameterByValue(
+            string returnType,
+            string parameterType,
+            string preDeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                {{preDeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial {{returnType}} Method({{parameterType}} p);
+                }
+                """;
 
-                public override bool IsInvalid => handle == System.IntPtr.Zero;
+        public static string SafeHandleWithCustomDefaultConstructorAccessibility(
+            bool privateCtor
+        ) =>
+            BasicParametersAndModifiers("MySafeHandle")
+            + $$"""
+                class MySafeHandle : SafeHandle
+                {
+                    {{(
+                    privateCtor ? "private" : "public"
+                )}} MySafeHandle() : base(System.IntPtr.Zero, true) { }
 
-                protected override bool ReleaseHandle() => true;
-            }
-            """;
+                    public override bool IsInvalid => handle == System.IntPtr.Zero;
 
-        public static string GeneratedComInterface => BasicParametersAndModifiers("MyInterfaceType", "using System.Runtime.InteropServices.Marshalling;") + """
-            [GeneratedComInterface]
-            interface MyInterfaceType
-            {
-                void Method();
-            }
-            """;
+                    protected override bool ReleaseHandle() => true;
+                }
+                """;
+
+        public static string GeneratedComInterface =>
+            BasicParametersAndModifiers(
+                "MyInterfaceType",
+                "using System.Runtime.InteropServices.Marshalling;"
+            )
+            + """
+                [GeneratedComInterface]
+                interface MyInterfaceType
+                {
+                    void Method();
+                }
+                """;
 
         public static string PreprocessorIfAroundFullFunctionDefinition(string define) =>
             $$"""
-            partial class Test
-            {
-            #if {{define}}
-                [System.Runtime.InteropServices.LibraryImport("DoesNotExist")]
-                public static partial int Method(
-                    int p,
-                    in int pIn,
-                    out int pOut);
-            #endif
-            }
-            """;
+                partial class Test
+                {
+                #if {{define}}
+                    [System.Runtime.InteropServices.LibraryImport("DoesNotExist")]
+                    public static partial int Method(
+                        int p,
+                        in int pIn,
+                        out int pOut);
+                #endif
+                }
+                """;
 
-        public static string PreprocessorIfAroundFullFunctionDefinitionWithFollowingFunction(string define) =>
+        public static string PreprocessorIfAroundFullFunctionDefinitionWithFollowingFunction(
+            string define
+        ) =>
             $$"""
-            using System.Runtime.InteropServices;
-            partial class Test
-            {
-            #if {{define}}
-                [LibraryImport("DoesNotExist")]
-                public static partial int Method(
-                    int p,
-                    in int pIn,
-                    out int pOut);
-            #endif
-                public static int Method2(
-                    SafeHandle p) => throw null;
-            }
-            """;
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                #if {{define}}
+                    [LibraryImport("DoesNotExist")]
+                    public static partial int Method(
+                        int p,
+                        in int pIn,
+                        out int pOut);
+                #endif
+                    public static int Method2(
+                        SafeHandle p) => throw null;
+                }
+                """;
 
         public static string PreprocessorIfAfterAttributeAroundFunction(string define) =>
             $$"""
-            using System.Runtime.InteropServices;
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-            #if {{define}}
-                public static partial int Method(
-                    int p,
-                    in int pIn,
-                    out int pOut);
-            #else
-                public static partial int Method2(
-                    int p,
-                    in int pIn,
-                    out int pOut);
-            #endif
-            }
-            """;
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                #if {{define}}
+                    public static partial int Method(
+                        int p,
+                        in int pIn,
+                        out int pOut);
+                #else
+                    public static partial int Method2(
+                        int p,
+                        in int pIn,
+                        out int pOut);
+                #endif
+                }
+                """;
 
-        public static string PreprocessorIfAfterAttributeAroundFunctionAdditionalFunctionAfter(string define) =>
+        public static string PreprocessorIfAfterAttributeAroundFunctionAdditionalFunctionAfter(
+            string define
+        ) =>
             $$"""
-            using System.Runtime.InteropServices;
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-            #if {{define}}
-                public static partial int Method(
-                    int p,
-                    in int pIn,
-                    out int pOut);
-            #else
-                public static partial int Method2(
-                    int p,
-                    in int pIn,
-                    out int pOut);
-            #endif
-                public static int Foo() => throw null;
-            }
-            """;
+                using System.Runtime.InteropServices;
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                #if {{define}}
+                    public static partial int Method(
+                        int p,
+                        in int pIn,
+                        out int pOut);
+                #else
+                    public static partial int Method2(
+                        int p,
+                        in int pIn,
+                        out int pOut);
+                #endif
+                    public static int Foo() => throw null;
+                }
+                """;
 
-        public static string MaybeBlittableGenericTypeParametersAndModifiers(string typeArgument) => BasicParametersAndModifiers($"Generic<{typeArgument}>", DisableRuntimeMarshalling) + """
-            struct Generic<T>
-            {
-            #pragma warning disable CS0649
-                public T field;
-            }
-            """;
+        public static string MaybeBlittableGenericTypeParametersAndModifiers(string typeArgument) =>
+            BasicParametersAndModifiers($"Generic<{typeArgument}>", DisableRuntimeMarshalling)
+            + """
+                struct Generic<T>
+                {
+                #pragma warning disable CS0649
+                    public T field;
+                }
+                """;
 
         public static string MaybeBlittableGenericTypeParametersAndModifiers<T>() =>
             MaybeBlittableGenericTypeParametersAndModifiers(typeof(T).ToString());
 
-        public static string RecursiveImplicitlyBlittableStruct => BasicParametersAndModifiers("RecursiveStruct", DisableRuntimeMarshalling) + """
-            struct RecursiveStruct
-            {
-                RecursiveStruct {|CS0523:s|};
-                int i;
-            }
-            """;
-        public static string MutuallyRecursiveImplicitlyBlittableStruct => BasicParametersAndModifiers("RecursiveStruct1", DisableRuntimeMarshalling) + """
-            struct RecursiveStruct1
-            {
-                RecursiveStruct2 {|CS0523:s|};
-                int i;
-            }
+        public static string RecursiveImplicitlyBlittableStruct =>
+            BasicParametersAndModifiers("RecursiveStruct", DisableRuntimeMarshalling)
+            + """
+                struct RecursiveStruct
+                {
+                    RecursiveStruct {|CS0523:s|};
+                    int i;
+                }
+                """;
+        public static string MutuallyRecursiveImplicitlyBlittableStruct =>
+            BasicParametersAndModifiers("RecursiveStruct1", DisableRuntimeMarshalling)
+            + """
+                struct RecursiveStruct1
+                {
+                    RecursiveStruct2 {|CS0523:s|};
+                    int i;
+                }
 
-            struct RecursiveStruct2
-            {
-                RecursiveStruct1 {|CS0523:s|};
-                int i;
-            }
-            """;
+                struct RecursiveStruct2
+                {
+                    RecursiveStruct1 {|CS0523:s|};
+                    int i;
+                }
+                """;
 
-        public static string MarshalUsingCollectionCountInfoParametersAndModifiers(string collectionType) => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return:MarshalUsing(ConstantElementCount=10)]
-                public static partial {{collectionType}} Method(
-                    {{collectionType}} p,
-                    in {{collectionType}} pIn,
-                    int pRefSize,
-                    [MarshalUsing(CountElementName = "pRefSize")] ref {{collectionType}} pRef,
-                    [MarshalUsing(CountElementName = "pOutSize")] out {{collectionType}} pOut,
-                    out int pOutSize
-                    );
-            }
-            """;
+        public static string MarshalUsingCollectionCountInfoParametersAndModifiers(
+            string collectionType
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return:MarshalUsing(ConstantElementCount=10)]
+                    public static partial {{collectionType}} Method(
+                        {{collectionType}} p,
+                        in {{collectionType}} pIn,
+                        int pRefSize,
+                        [MarshalUsing(CountElementName = "pRefSize")] ref {{collectionType}} pRef,
+                        [MarshalUsing(CountElementName = "pOutSize")] out {{collectionType}} pOut,
+                        out int pOutSize
+                        );
+                }
+                """;
 
-        public static string MarshalUsingCollectionCountInfoParametersAndModifiers<T>() => MarshalUsingCollectionCountInfoParametersAndModifiers(typeof(T).ToString());
+        public static string MarshalUsingCollectionCountInfoParametersAndModifiers<T>() =>
+            MarshalUsingCollectionCountInfoParametersAndModifiers(typeof(T).ToString());
 
-        public static string MarshalUsingCollectionParametersAndModifiers(string collectionType, string marshallerType) => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return:MarshalUsing(typeof({{marshallerType}}), ConstantElementCount=10)]
-                public static partial {{collectionType}} Method(
-                    [MarshalUsing(typeof({{marshallerType}}))] {{collectionType}} p,
-                    [MarshalUsing(typeof({{marshallerType}}))] in {{collectionType}} pIn,
-                    int pRefSize,
-                    [MarshalUsing(typeof({{marshallerType}}), CountElementName = "pRefSize")] ref {{collectionType}} pRef,
-                    [MarshalUsing(typeof({{marshallerType}}), CountElementName = "pOutSize")] out {{collectionType}} pOut,
-                    out int pOutSize
-                    );
-            }
-            """;
+        public static string MarshalUsingCollectionParametersAndModifiers(
+            string collectionType,
+            string marshallerType
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return:MarshalUsing(typeof({{marshallerType}}), ConstantElementCount=10)]
+                    public static partial {{collectionType}} Method(
+                        [MarshalUsing(typeof({{marshallerType}}))] {{collectionType}} p,
+                        [MarshalUsing(typeof({{marshallerType}}))] in {{collectionType}} pIn,
+                        int pRefSize,
+                        [MarshalUsing(typeof({{marshallerType}}), CountElementName = "pRefSize")] ref {{collectionType}} pRef,
+                        [MarshalUsing(typeof({{marshallerType}}), CountElementName = "pOutSize")] out {{collectionType}} pOut,
+                        out int pOutSize
+                        );
+                }
+                """;
 
-        public static string MarshalUsingCollectionReturnValueLength(string collectionType, string marshallerType) => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial int Method(
-                    [MarshalUsing(typeof({{marshallerType}}), CountElementName = MarshalUsingAttribute.ReturnsCountValue)] out {{collectionType}} pOut
-                    );
-            }
-            """;
+        public static string MarshalUsingCollectionReturnValueLength(
+            string collectionType,
+            string marshallerType
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial int Method(
+                        [MarshalUsing(typeof({{marshallerType}}), CountElementName = MarshalUsingAttribute.ReturnsCountValue)] out {{collectionType}} pOut
+                        );
+                }
+                """;
 
-        public static string MarshalUsingCollectionOutConstantLength(string collectionType, string predeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{predeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial int Method(
-                    [MarshalUsing(ConstantElementCount = 10)] out {{collectionType}} pOut);
-            }
-            """;
+        public static string MarshalUsingCollectionOutConstantLength(
+            string collectionType,
+            string predeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{predeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial int Method(
+                        [MarshalUsing(ConstantElementCount = 10)] out {{collectionType}} pOut);
+                }
+                """;
 
-        public static string MarshalUsingCollectionReturnConstantLength(string collectionType, string predeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{predeclaration}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return:MarshalUsing(ConstantElementCount = 10)]
-                public static partial {{collectionType}} Method();
-            }
-            """;
-        public static string CustomElementMarshalling(string collectionType, string elementMarshaller, string predeclaration = "") => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{predeclaration}}
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return:MarshalUsing(ConstantElementCount=10)]
-                [return:MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)]
-                public static partial {{collectionType}} Method(
-                    [MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] {{collectionType}} p,
-                    [MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] in {{collectionType}} pIn,
-                    int pRefSize,
-                    [MarshalUsing(CountElementName = "pRefSize"), MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] ref {{collectionType}} pRef,
-                    [MarshalUsing(CountElementName = "pOutSize")][MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] out {{collectionType}} pOut,
-                    out int pOutSize
-                    );
-            }
-            """;
+        public static string MarshalUsingCollectionReturnConstantLength(
+            string collectionType,
+            string predeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{predeclaration}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return:MarshalUsing(ConstantElementCount = 10)]
+                    public static partial {{collectionType}} Method();
+                }
+                """;
 
-        public const string IntClassAndMarshaller = IntClassDefinition + IntClassMarshallerDefinition;
+        public static string CustomElementMarshalling(
+            string collectionType,
+            string elementMarshaller,
+            string predeclaration = ""
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{predeclaration}}
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return:MarshalUsing(ConstantElementCount=10)]
+                    [return:MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)]
+                    public static partial {{collectionType}} Method(
+                        [MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] {{collectionType}} p,
+                        [MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] in {{collectionType}} pIn,
+                        int pRefSize,
+                        [MarshalUsing(CountElementName = "pRefSize"), MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] ref {{collectionType}} pRef,
+                        [MarshalUsing(CountElementName = "pOutSize")][MarshalUsing(typeof({{elementMarshaller}}), ElementIndirectionDepth = 1)] out {{collectionType}} pOut,
+                        out int pOutSize
+                        );
+                }
+                """;
+
+        public const string IntClassAndMarshaller =
+            IntClassDefinition + IntClassMarshallerDefinition;
         public const string IntClassDefinition = """
             internal struct IntClass
             {
@@ -1050,7 +1243,8 @@ namespace LibraryImportGenerator.UnitTests
             }
             """;
 
-        public const string IntStructAndMarshaller = IntStructDefinition + IntStructMarshallerDefinition;
+        public const string IntStructAndMarshaller =
+            IntStructDefinition + IntStructMarshallerDefinition;
         public const string IntStructDefinition = """
             internal struct IntStruct
             {
@@ -1068,22 +1262,37 @@ namespace LibraryImportGenerator.UnitTests
 
         public string CollectionMarshallingWithCountRefKinds(
             (string parameterType, string parameterModifiers, string[] countNames) returnType,
-            params (string parameterType, string parameterModifiers, string parameterName, string[] countNames)[] parameters)
+            params (
+                string parameterType,
+                string parameterModifiers,
+                string parameterName,
+                string[] countNames
+            )[] parameters
+        )
         {
             List<string> parameterSources = new();
             int i = 1;
-            foreach (var (parameterType, parameterModifiers, parameterName, countNames) in parameters)
+            foreach (
+                var (parameterType, parameterModifiers, parameterName, countNames) in parameters
+            )
             {
                 List<string> marshalUsings = new();
                 int j = 0;
                 foreach (var countName in countNames)
                 {
-                    marshalUsings.Add($"[MarshalUsing(CountElementName = {countName}, ElementIndirectionDepth = {j})]");
+                    marshalUsings.Add(
+                        $"[MarshalUsing(CountElementName = {countName}, ElementIndirectionDepth = {j})]"
+                    );
                     j++;
                 }
-                parameterSources.Add($$"""
-                    {{string.Join(' ', marshalUsings)}} {{parameterModifiers}} {{parameterType}} {|#{{i}}:{{parameterName}}|}
-                    """);
+                parameterSources.Add(
+                    $$"""
+                    {{string.Join(
+                        ' ',
+                        marshalUsings
+                    )}} {{parameterModifiers}} {{parameterType}} {|#{{i}}:{{parameterName}}|}
+                    """
+                );
                 i++;
             }
             string returnTypeSource;
@@ -1093,7 +1302,9 @@ namespace LibraryImportGenerator.UnitTests
                 var (parameterType, parameterModifiers, countNames) = returnType;
                 foreach (var countName in countNames)
                 {
-                    marshalUsings.Add($"[return: MarshalUsing(CountElementName = nameof({countName}))]");
+                    marshalUsings.Add(
+                        $"[return: MarshalUsing(CountElementName = nameof({countName}))]"
+                    );
                 }
                 returnAttributes = string.Join(' ', marshalUsings);
                 returnTypeSource = $"{parameterModifiers} {parameterType}";
@@ -1114,287 +1325,307 @@ namespace LibraryImportGenerator.UnitTests
                 """;
         }
 
-        public static string MarshalUsingArrayParameterWithSizeParam(string sizeParamType, bool isByRef) => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    {{(isByRef ? "ref" : "")}} {{sizeParamType}} pRefSize,
-                    [MarshalUsing(CountElementName = "pRefSize")] ref int[] pRef
-                    );
-            }
-            """;
+        public static string MarshalUsingArrayParameterWithSizeParam(
+            string sizeParamType,
+            bool isByRef
+        ) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        {{(isByRef ? "ref" : "")}} {{sizeParamType}} pRefSize,
+                        [MarshalUsing(CountElementName = "pRefSize")] ref int[] pRef
+                        );
+                }
+                """;
 
-        public static string MarshalUsingArrayParameterWithSizeParam<T>(bool isByRef) => MarshalUsingArrayParameterWithSizeParam(typeof(T).ToString(), isByRef);
+        public static string MarshalUsingArrayParameterWithSizeParam<T>(bool isByRef) =>
+            MarshalUsingArrayParameterWithSizeParam(typeof(T).ToString(), isByRef);
 
-        public static string MarshalUsingCollectionWithConstantAndElementCount => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    int pRefSize,
-                    [{|#0:MarshalUsing(ConstantElementCount = 10, CountElementName = "pRefSize")|}] ref int[] {|#1:pRef|}
-                    );
-            }
-            """;
+        public static string MarshalUsingCollectionWithConstantAndElementCount =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        int pRefSize,
+                        [{|#0:MarshalUsing(ConstantElementCount = 10, CountElementName = "pRefSize")|}] ref int[] {|#1:pRef|}
+                        );
+                }
+                """;
 
-        public static string MarshalUsingCollectionWithNullElementName => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    int pRefSize,
-                    [{|#0:MarshalUsing(CountElementName = null)|}] ref int[] {|#1:pRef|}
-                    );
-            }
-            """;
+        public static string MarshalUsingCollectionWithNullElementName =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        int pRefSize,
+                        [{|#0:MarshalUsing(CountElementName = null)|}] ref int[] {|#1:pRef|}
+                        );
+                }
+                """;
 
-        public static string MarshalAsAndMarshalUsingOnReturnValue => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return:MarshalUsing(ConstantElementCount=10)]
-                [return:{|#0:MarshalAs(UnmanagedType.LPArray, SizeConst=10)|}]
-                public static partial int[] Method();
-            }
-            """;
-        public static string CustomElementMarshallingDuplicateElementIndirectionDepth => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [MarshalUsing(typeof(CustomIntMarshaller), ElementIndirectionDepth = 1)] [{|#0:MarshalUsing(typeof(CustomIntMarshaller), ElementIndirectionDepth = 1)|}] TestCollection<int> p);
-            }
-            """
-                    + CustomCollectionMarshallingCodeSnippets.TestCollection()
-                    + CustomCollectionMarshallingCodeSnippets.StatelessSnippets.In
-                    + CustomCollectionMarshallingCodeSnippets.CustomIntMarshaller;
-
-        public static string CustomElementMarshallingUnusedElementIndirectionDepth => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [{|#0:MarshalUsing(typeof(CustomIntMarshaller), ElementIndirectionDepth = 2)|}] TestCollection<int> p);
-            }
-            """
+        public static string MarshalAsAndMarshalUsingOnReturnValue =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    [return:MarshalUsing(ConstantElementCount=10)]
+                    [return:{|#0:MarshalAs(UnmanagedType.LPArray, SizeConst=10)|}]
+                    public static partial int[] Method();
+                }
+                """;
+        public static string CustomElementMarshallingDuplicateElementIndirectionDepth =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [MarshalUsing(typeof(CustomIntMarshaller), ElementIndirectionDepth = 1)] [{|#0:MarshalUsing(typeof(CustomIntMarshaller), ElementIndirectionDepth = 1)|}] TestCollection<int> p);
+                }
+                """
             + CustomCollectionMarshallingCodeSnippets.TestCollection()
             + CustomCollectionMarshallingCodeSnippets.StatelessSnippets.In
             + CustomCollectionMarshallingCodeSnippets.CustomIntMarshaller;
 
-        public static string RecursiveCountElementNameOnReturnValue => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                [return:{|#0:MarshalUsing(CountElementName=MarshalUsingAttribute.ReturnsCountValue)|}]
-                public static partial int[] {|#1:Method|}();
-            }
-            """;
-
-        public static string RecursiveCountElementNameOnParameter => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [{|#0:MarshalUsing(CountElementName="arr")|}] ref int[] {|#1:arr|}
-                );
-            }
-            """;
-        public static string MutuallyRecursiveCountElementNameOnParameter => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [{|#0:MarshalUsing(CountElementName="arr2")|}] ref int[] {|#1:arr|},
-                    [{|#2:MarshalUsing(CountElementName="arr")|}] ref int[] {|#3:arr2|}
-                );
-            }
-            """;
-        public static string MutuallyRecursiveSizeParamIndexOnParameter => $$"""
-            using System.Runtime.InteropServices;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [{|#0:MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)|}] ref int[] {|#1:arr|},
-                    [{|#2:MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)|}] ref int[] {|#3:arr2|}
-                );
-            }
-            """;
-
-        public static string CollectionsOfCollectionsStress => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
-                    [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
-                    [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
-                    [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
-                    [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]
-                    [MarshalUsing(CountElementName="arr8", ElementIndirectionDepth = 8)]
-                    [MarshalUsing(CountElementName="arr9", ElementIndirectionDepth = 9)]
-                    [MarshalUsing(CountElementName="arr10", ElementIndirectionDepth = 10)]ref int[][][][][][][][][][][] arr11,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
-                    [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
-                    [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
-                    [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
-                    [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]
-                    [MarshalUsing(CountElementName="arr8", ElementIndirectionDepth = 8)]
-                    [MarshalUsing(CountElementName="arr9", ElementIndirectionDepth = 9)]ref int[][][][][][][][][][] arr10,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
-                    [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
-                    [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
-                    [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
-                    [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]
-                    [MarshalUsing(CountElementName="arr8", ElementIndirectionDepth = 8)]ref int[][][][][][][][][] arr9,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
-                    [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
-                    [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
-                    [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
-                    [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]ref int[][][][][][][][] arr8,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
-                    [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
-                    [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
-                    [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]ref int[][][][][][][] arr7,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
-                    [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
-                    [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]ref int[][][][][][] arr6,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
-                    [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]ref int[][][][][] arr5,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
-                    [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]ref int[][][][] arr4,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
-                    [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]ref int[][][] arr3,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
-                    [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]ref int[][] arr2,
-                    [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]ref int[] arr1,
-                    ref int arr0
-                );
-            }
-            """;
-
-        public static string GenericsStress => $$"""
-            using System.Runtime.InteropServices;
-            using System.Runtime.InteropServices.Marshalling;
-            {{DisableRuntimeMarshalling}}
-            partial class Test
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial void Method(S<int>.N<bool> v);
-            }
-
-            class S<T>
-            {
-                [NativeMarshalling(typeof(Container<,>.NestedMarshallerType))]
-                public struct N<U>
+        public static string CustomElementMarshallingUnusedElementIndirectionDepth =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
                 {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [{|#0:MarshalUsing(typeof(CustomIntMarshaller), ElementIndirectionDepth = 2)|}] TestCollection<int> p);
                 }
-            }
+                """
+            + CustomCollectionMarshallingCodeSnippets.TestCollection()
+            + CustomCollectionMarshallingCodeSnippets.StatelessSnippets.In
+            + CustomCollectionMarshallingCodeSnippets.CustomIntMarshaller;
 
-            class Container<T, U>
-            {
-                [CustomMarshaller(typeof(S<>.N<>), MarshalMode.ManagedToUnmanagedIn, typeof(Container<,>.NestedMarshallerType))]
-                public static class NestedMarshallerType
+        public static string RecursiveCountElementNameOnReturnValue =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
                 {
-                    public static int ConvertToUnmanaged(S<T>.N<U> managed) => 0;
+                    [LibraryImport("DoesNotExist")]
+                    [return:{|#0:MarshalUsing(CountElementName=MarshalUsingAttribute.ReturnsCountValue)|}]
+                    public static partial int[] {|#1:Method|}();
                 }
-            }
-            """;
+                """;
 
-        public static string RefReturn(string typeName) => $$"""
-            using System.Runtime.InteropServices;
-            partial struct Basic
-            {
-                [LibraryImport("DoesNotExist")]
-                public static partial ref {{typeName}} {|#0:RefReturn|}();
-                [LibraryImport("DoesNotExist")]
-                public static partial ref readonly {{typeName}} {|#1:RefReadonlyReturn|}();
-            }
-            """;
+        public static string RecursiveCountElementNameOnParameter =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [{|#0:MarshalUsing(CountElementName="arr")|}] ref int[] {|#1:arr|}
+                    );
+                }
+                """;
+        public static string MutuallyRecursiveCountElementNameOnParameter =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [{|#0:MarshalUsing(CountElementName="arr2")|}] ref int[] {|#1:arr|},
+                        [{|#2:MarshalUsing(CountElementName="arr")|}] ref int[] {|#3:arr2|}
+                    );
+                }
+                """;
+        public static string MutuallyRecursiveSizeParamIndexOnParameter =>
+            $$"""
+                using System.Runtime.InteropServices;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [{|#0:MarshalAs(UnmanagedType.LPArray, SizeParamIndex=1)|}] ref int[] {|#1:arr|},
+                        [{|#2:MarshalAs(UnmanagedType.LPArray, SizeParamIndex=0)|}] ref int[] {|#3:arr2|}
+                    );
+                }
+                """;
 
-        public static string PartialPropertyName => """
-            using System.Runtime.InteropServices;
+        public static string CollectionsOfCollectionsStress =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
+                        [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
+                        [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
+                        [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
+                        [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]
+                        [MarshalUsing(CountElementName="arr8", ElementIndirectionDepth = 8)]
+                        [MarshalUsing(CountElementName="arr9", ElementIndirectionDepth = 9)]
+                        [MarshalUsing(CountElementName="arr10", ElementIndirectionDepth = 10)]ref int[][][][][][][][][][][] arr11,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
+                        [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
+                        [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
+                        [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
+                        [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]
+                        [MarshalUsing(CountElementName="arr8", ElementIndirectionDepth = 8)]
+                        [MarshalUsing(CountElementName="arr9", ElementIndirectionDepth = 9)]ref int[][][][][][][][][][] arr10,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
+                        [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
+                        [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
+                        [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
+                        [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]
+                        [MarshalUsing(CountElementName="arr8", ElementIndirectionDepth = 8)]ref int[][][][][][][][][] arr9,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
+                        [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
+                        [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
+                        [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]
+                        [MarshalUsing(CountElementName="arr7", ElementIndirectionDepth = 7)]ref int[][][][][][][][] arr8,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
+                        [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
+                        [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]
+                        [MarshalUsing(CountElementName="arr6", ElementIndirectionDepth = 6)]ref int[][][][][][][] arr7,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
+                        [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]
+                        [MarshalUsing(CountElementName="arr5", ElementIndirectionDepth = 5)]ref int[][][][][][] arr6,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]
+                        [MarshalUsing(CountElementName="arr4", ElementIndirectionDepth = 4)]ref int[][][][][] arr5,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]
+                        [MarshalUsing(CountElementName="arr3", ElementIndirectionDepth = 3)]ref int[][][][] arr4,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]
+                        [MarshalUsing(CountElementName="arr2", ElementIndirectionDepth = 2)]ref int[][][] arr3,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]
+                        [MarshalUsing(CountElementName="arr1", ElementIndirectionDepth = 1)]ref int[][] arr2,
+                        [MarshalUsing(CountElementName="arr0", ElementIndirectionDepth = 0)]ref int[] arr1,
+                        ref int arr0
+                    );
+                }
+                """;
 
-            partial struct Basic
-            {
-                [{|CS1729:LibraryImport("DoesNotExist", {|CS0103:SetLa|})|}]
-                public static partial void Method();
-            }
-            """;
-        public static string InvalidConstantForModuleName => """
-            using System.Runtime.InteropServices;
+        public static string GenericsStress =>
+            $$"""
+                using System.Runtime.InteropServices;
+                using System.Runtime.InteropServices.Marshalling;
+                {{DisableRuntimeMarshalling}}
+                partial class Test
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial void Method(S<int>.N<bool> v);
+                }
 
-            partial struct Basic
-            {
-                [LibraryImport({|CS0103:DoesNotExist|})]
-                public static partial void Method();
-            }
-            """;
-        public static string IncorrectAttributeFieldType => """
-            using System.Runtime.InteropServices;
+                class S<T>
+                {
+                    [NativeMarshalling(typeof(Container<,>.NestedMarshallerType))]
+                    public struct N<U>
+                    {
+                    }
+                }
 
-            partial struct Basic
-            {
-                [LibraryImport("DoesNotExist", SetLastError = {|CS0029:"Foo"|})]
-                public static partial void Method();
-            }
-            """;
+                class Container<T, U>
+                {
+                    [CustomMarshaller(typeof(S<>.N<>), MarshalMode.ManagedToUnmanagedIn, typeof(Container<,>.NestedMarshallerType))]
+                    public static class NestedMarshallerType
+                    {
+                        public static int ConvertToUnmanaged(S<T>.N<U> managed) => 0;
+                    }
+                }
+                """;
+
+        public static string RefReturn(string typeName) =>
+            $$"""
+                using System.Runtime.InteropServices;
+                partial struct Basic
+                {
+                    [LibraryImport("DoesNotExist")]
+                    public static partial ref {{typeName}} {|#0:RefReturn|}();
+                    [LibraryImport("DoesNotExist")]
+                    public static partial ref readonly {{typeName}} {|#1:RefReadonlyReturn|}();
+                }
+                """;
+
+        public static string PartialPropertyName =>
+            """
+                using System.Runtime.InteropServices;
+
+                partial struct Basic
+                {
+                    [{|CS1729:LibraryImport("DoesNotExist", {|CS0103:SetLa|})|}]
+                    public static partial void Method();
+                }
+                """;
+        public static string InvalidConstantForModuleName =>
+            """
+                using System.Runtime.InteropServices;
+
+                partial struct Basic
+                {
+                    [LibraryImport({|CS0103:DoesNotExist|})]
+                    public static partial void Method();
+                }
+                """;
+        public static string IncorrectAttributeFieldType =>
+            """
+                using System.Runtime.InteropServices;
+
+                partial struct Basic
+                {
+                    [LibraryImport("DoesNotExist", SetLastError = {|CS0029:"Foo"|})]
+                    public static partial void Method();
+                }
+                """;
 
         public static class ValidateDisableRuntimeMarshalling
         {
@@ -1424,7 +1655,8 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            public static string TypeUsage(string attr) => MarshalUsingParametersAndModifiers("S", "Marshaller", attr);
+            public static string TypeUsage(string attr) =>
+                MarshalUsingParametersAndModifiers("S", "Marshaller", attr);
         }
     }
 }

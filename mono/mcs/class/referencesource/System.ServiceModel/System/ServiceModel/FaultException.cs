@@ -20,7 +20,8 @@ namespace System.ServiceModel
     [KnownType(typeof(FaultException.FaultReasonData[]))]
     public class FaultException : CommunicationException
     {
-        internal const string Namespace = "http://schemas.xmlsoap.org/Microsoft/WindowsCommunicationFoundation/2005/08/Faults/";
+        internal const string Namespace =
+            "http://schemas.xmlsoap.org/Microsoft/WindowsCommunicationFoundation/2005/08/Faults/";
 
         string action;
         FaultCode code;
@@ -70,7 +71,12 @@ namespace System.ServiceModel
             this.action = action;
         }
 
-        internal FaultException(string reason, FaultCode code, string action, Exception innerException)
+        internal FaultException(
+            string reason,
+            FaultCode code,
+            string action,
+            Exception innerException
+        )
             : base(reason, innerException)
         {
             this.code = FaultException.EnsureCode(code);
@@ -86,7 +92,12 @@ namespace System.ServiceModel
             this.action = action;
         }
 
-        internal FaultException(FaultReason reason, FaultCode code, string action, Exception innerException)
+        internal FaultException(
+            FaultReason reason,
+            FaultCode code,
+            string action,
+            Exception innerException
+        )
             : base(FaultException.GetSafeReasonText(reason), innerException)
         {
             this.code = FaultException.EnsureCode(code);
@@ -166,7 +177,11 @@ namespace System.ServiceModel
             info.AddValue(key, FaultCodeData.GetObjectData(code));
         }
 
-        internal void AddFaultReasonObjectData(SerializationInfo info, string key, FaultReason reason)
+        internal void AddFaultReasonObjectData(
+            SerializationInfo info,
+            string key,
+            FaultReason reason
+        )
         {
             info.AddValue(key, FaultReasonData.GetObjectData(reason));
         }
@@ -176,12 +191,19 @@ namespace System.ServiceModel
             return (code != null) ? new FaultCode(code) : DefaultCode;
         }
 
-        public static FaultException CreateFault(MessageFault messageFault, params Type[] faultDetailTypes)
+        public static FaultException CreateFault(
+            MessageFault messageFault,
+            params Type[] faultDetailTypes
+        )
         {
             return CreateFault(messageFault, null, faultDetailTypes);
         }
 
-        public static FaultException CreateFault(MessageFault messageFault, string action, params Type[] faultDetailTypes)
+        public static FaultException CreateFault(
+            MessageFault messageFault,
+            string action,
+            params Type[] faultDetailTypes
+        )
         {
             if (messageFault == null)
             {
@@ -190,9 +212,12 @@ namespace System.ServiceModel
 
             if (faultDetailTypes == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("faultDetailTypes");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "faultDetailTypes"
+                );
             }
-            DataContractSerializerFaultFormatter faultFormatter = new DataContractSerializerFaultFormatter(faultDetailTypes);
+            DataContractSerializerFaultFormatter faultFormatter =
+                new DataContractSerializerFaultFormatter(faultDetailTypes);
             return faultFormatter.Deserialize(messageFault, action);
         }
 
@@ -214,8 +239,10 @@ namespace System.ServiceModel
         }
 
 #pragma warning disable 688 // This is a Level1 assembly: a Level2 [SecurityCrital] on public members are turned into [SecuritySafeCritical] + LinkDemand
-        [Fx.Tag.SecurityNote(Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method.",
-            Safe = "Replicates the LinkDemand.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method.",
+            Safe = "Replicates the LinkDemand."
+        )]
         [SecurityCritical]
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -252,7 +279,9 @@ namespace System.ServiceModel
 
             try
             {
-                return reason.GetMatchingTranslation(System.Globalization.CultureInfo.CurrentCulture).Text;
+                return reason
+                    .GetMatchingTranslation(System.Globalization.CultureInfo.CurrentCulture)
+                    .Text;
             }
             catch (ArgumentException)
             {
@@ -262,7 +291,10 @@ namespace System.ServiceModel
                 }
                 else
                 {
-                    return SR.GetString(SR.SFxUnknownFaultNoMatchingTranslation1, reason.Translations[0].Text);
+                    return SR.GetString(
+                        SR.SFxUnknownFaultNoMatchingTranslation1,
+                        reason.Translations[0].Text
+                    );
                 }
             }
         }
@@ -285,7 +317,8 @@ namespace System.ServiceModel
 
         internal FaultReason ReconstructFaultReason(SerializationInfo info, string key)
         {
-            FaultReasonData[] data = (FaultReasonData[])info.GetValue(key, typeof(FaultReasonData[]));
+            FaultReasonData[] data = (FaultReasonData[])
+                info.GetValue(key, typeof(FaultReasonData[]));
             return FaultReasonData.Construct(data);
         }
 
@@ -439,8 +472,10 @@ namespace System.ServiceModel
         }
 
 #pragma warning disable 688 // This is a Level1 assembly: a Level2 [SecurityCrital] on public members are turned into [SecuritySafeCritical] + LinkDemand
-        [Fx.Tag.SecurityNote(Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method.",
-            Safe = "Replicates the LinkDemand.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method.",
+            Safe = "Replicates the LinkDemand."
+        )]
         [SecurityCritical]
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -452,7 +487,12 @@ namespace System.ServiceModel
 
         public override string ToString()
         {
-            return SR.GetString(SR.SFxFaultExceptionToString3, this.GetType(), this.Message, this.detail != null ? this.detail.ToString() : String.Empty);
+            return SR.GetString(
+                SR.SFxFaultExceptionToString3,
+                this.GetType(),
+                this.Message,
+                this.detail != null ? this.detail.ToString() : String.Empty
+            );
         }
     }
 }

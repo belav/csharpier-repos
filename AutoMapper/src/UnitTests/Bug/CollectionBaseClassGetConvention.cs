@@ -13,19 +13,18 @@ public class CollectionBaseClassGetConvention : AutoMapperSpecBase
         }
     }
 
-    public class Source : SourceBase
-    {
-    }
+    public class Source : SourceBase { }
 
     public class Destination
     {
         public IEnumerable<int> Items { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {

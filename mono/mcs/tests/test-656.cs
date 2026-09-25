@@ -4,8 +4,8 @@
 
 class Goo
 {
-	public static void Main ()
-	{
-		string s = new Foo () ["foo"];
-	}
+    public static void Main()
+    {
+        string s = new Foo()["foo"];
+    }
 }

@@ -20,7 +20,13 @@ namespace System.Security.Claims
         [Fact]
         public void BinaryWriteReadTest_Success()
         {
-            var claim = new Claim(ClaimTypes.Actor, "value", ClaimValueTypes.String, "issuer", "originalIssuer");
+            var claim = new Claim(
+                ClaimTypes.Actor,
+                "value",
+                ClaimValueTypes.String,
+                "issuer",
+                "originalIssuer"
+            );
             claim.Properties.Add("key1", "val1");
             claim.Properties.Add("key2", "val2");
 

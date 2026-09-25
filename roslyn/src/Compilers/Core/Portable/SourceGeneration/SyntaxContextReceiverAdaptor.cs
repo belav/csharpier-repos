@@ -18,17 +18,19 @@ namespace Microsoft.CodeAnalysis
 
         public ISyntaxReceiver Receiver { get; }
 
-        public void OnVisitSyntaxNode(GeneratorSyntaxContext context) => Receiver.OnVisitSyntaxNode(context.Node);
+        public void OnVisitSyntaxNode(GeneratorSyntaxContext context) =>
+            Receiver.OnVisitSyntaxNode(context.Node);
 
-        public static SyntaxContextReceiverCreator Create(SyntaxReceiverCreator creator) => () =>
-        {
-            var rx = creator();
-            if (rx is object)
+        public static SyntaxContextReceiverCreator Create(SyntaxReceiverCreator creator) =>
+            () =>
             {
-                return new SyntaxContextReceiverAdaptor(rx);
-            }
-            // in the case that the creator function returns null, we'll also return a null adaptor
-            return null;
-        };
+                var rx = creator();
+                if (rx is object)
+                {
+                    return new SyntaxContextReceiverAdaptor(rx);
+                }
+                // in the case that the creator function returns null, we'll also return a null adaptor
+                return null;
+            };
     }
 }

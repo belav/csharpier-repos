@@ -13,13 +13,19 @@ namespace Roslyn.Utilities
     /// the value is evicted. Values can also be explicitly evicted at any time. In that case, any new calls to <see cref="GetOrCreate"/>
     /// will return a new value, and the existing holders of the evicted value will still dispose it once they're done with it.
     /// </summary>
-    internal sealed class ReferenceCountedDisposableCache<TKey, TValue> where TValue : class, IDisposable
+    internal sealed class ReferenceCountedDisposableCache<TKey, TValue>
+        where TValue : class, IDisposable
         where TKey : notnull
     {
-        private readonly Dictionary<TKey, ReferenceCountedDisposable<Entry>.WeakReference> _cache = new();
+        private readonly Dictionary<TKey, ReferenceCountedDisposable<Entry>.WeakReference> _cache =
+            new();
         private readonly object _gate = new();
 
-        public IReferenceCountedDisposable<ICacheEntry<TKey, TValue>> GetOrCreate<TArg>(TKey key, Func<TKey, TArg, TValue> valueCreator, TArg arg)
+        public IReferenceCountedDisposable<ICacheEntry<TKey, TValue>> GetOrCreate<TArg>(
+            TKey key,
+            Func<TKey, TArg, TValue> valueCreator,
+            TArg arg
+        )
         {
             lock (_gate)
             {
@@ -41,7 +47,9 @@ namespace Roslyn.Utilities
                     //    because the disposal isn't processed under this lock.
 
                     // In either case, we'll create a new entry and add it to the map
-                    disposable = new ReferenceCountedDisposable<Entry>(new Entry(this, key, valueCreator(key, arg)));
+                    disposable = new ReferenceCountedDisposable<Entry>(
+                        new Entry(this, key, valueCreator(key, arg))
+                    );
                     _cache[key] = new ReferenceCountedDisposable<Entry>.WeakReference(disposable);
                 }
 
@@ -57,9 +65,12 @@ namespace Roslyn.Utilities
             }
         }
 
-        private sealed class Entry(ReferenceCountedDisposableCache<TKey, TValue> cache, TKey key, TValue value) : IDisposable, ICacheEntry<TKey, TValue>
+        private sealed class Entry(
+            ReferenceCountedDisposableCache<TKey, TValue> cache,
+            TKey key,
+            TValue value
+        ) : IDisposable, ICacheEntry<TKey, TValue>
         {
-
             public TKey Key { get; } = key;
             public TValue Value { get; } = value;
 

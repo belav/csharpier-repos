@@ -75,10 +75,8 @@ public class ConfigureOptionsTests
         contextMock.SetupGet(c => c.SiteName).Returns("Name");
 
         var options = new AzureBlobLoggerOptions();
-        new BlobLoggerConfigureOptions(
-            configuration,
-            contextMock.Object,
-            options => options.FileNameFormat = _ => "FilenameFormat"
+        new BlobLoggerConfigureOptions(configuration, contextMock.Object, options =>
+            options.FileNameFormat = _ => "FilenameFormat"
         ).Configure(options);
 
         Assert.Equal("http://container/url", options.ContainerUrl);

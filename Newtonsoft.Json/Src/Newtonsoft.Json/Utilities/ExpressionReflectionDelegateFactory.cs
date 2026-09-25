@@ -37,7 +37,8 @@ namespace Newtonsoft.Json.Utilities
 {
     internal class ExpressionReflectionDelegateFactory : ReflectionDelegateFactory
     {
-        private static readonly ExpressionReflectionDelegateFactory _instance = new ExpressionReflectionDelegateFactory();
+        private static readonly ExpressionReflectionDelegateFactory _instance =
+            new ExpressionReflectionDelegateFactory();
 
         internal static ReflectionDelegateFactory Instance => _instance;
 
@@ -47,13 +48,26 @@ namespace Newtonsoft.Json.Utilities
 
             Type type = typeof(object);
 
-            ParameterExpression argsParameterExpression = Expression.Parameter(typeof(object[]), "args");
+            ParameterExpression argsParameterExpression = Expression.Parameter(
+                typeof(object[]),
+                "args"
+            );
 
-            Expression callExpression = BuildMethodCall(method, type, null, argsParameterExpression);
+            Expression callExpression = BuildMethodCall(
+                method,
+                type,
+                null,
+                argsParameterExpression
+            );
 
-            LambdaExpression lambdaExpression = Expression.Lambda(typeof(ObjectConstructor<object>), callExpression, argsParameterExpression);
+            LambdaExpression lambdaExpression = Expression.Lambda(
+                typeof(ObjectConstructor<object>),
+                callExpression,
+                argsParameterExpression
+            );
 
-            ObjectConstructor<object> compiled = (ObjectConstructor<object>)lambdaExpression.Compile();
+            ObjectConstructor<object> compiled =
+                (ObjectConstructor<object>)lambdaExpression.Compile();
             return compiled;
         }
 
@@ -64,11 +78,24 @@ namespace Newtonsoft.Json.Utilities
             Type type = typeof(object);
 
             ParameterExpression targetParameterExpression = Expression.Parameter(type, "target");
-            ParameterExpression argsParameterExpression = Expression.Parameter(typeof(object[]), "args");
+            ParameterExpression argsParameterExpression = Expression.Parameter(
+                typeof(object[]),
+                "args"
+            );
 
-            Expression callExpression = BuildMethodCall(method, type, targetParameterExpression, argsParameterExpression);
+            Expression callExpression = BuildMethodCall(
+                method,
+                type,
+                targetParameterExpression,
+                argsParameterExpression
+            );
 
-            LambdaExpression lambdaExpression = Expression.Lambda(typeof(MethodCall<T, object>), callExpression, targetParameterExpression, argsParameterExpression);
+            LambdaExpression lambdaExpression = Expression.Lambda(
+                typeof(MethodCall<T, object>),
+                callExpression,
+                targetParameterExpression,
+                argsParameterExpression
+            );
 
             MethodCall<T, object?> compiled = (MethodCall<T, object?>)lambdaExpression.Compile();
             return compiled;
@@ -88,7 +115,12 @@ namespace Newtonsoft.Json.Utilities
             }
         }
 
-        private Expression BuildMethodCall(MethodBase method, Type type, ParameterExpression? targetParameterExpression, ParameterExpression argsParameterExpression)
+        private Expression BuildMethodCall(
+            MethodBase method,
+            Type type,
+            ParameterExpression? targetParameterExpression,
+            ParameterExpression argsParameterExpression
+        )
         {
             ParameterInfo[] parametersInfo = method.GetParameters();
 
@@ -117,14 +149,23 @@ namespace Newtonsoft.Json.Utilities
 
                     Expression indexExpression = Expression.Constant(i);
 
-                    Expression paramAccessorExpression = Expression.ArrayIndex(argsParameterExpression, indexExpression);
+                    Expression paramAccessorExpression = Expression.ArrayIndex(
+                        argsParameterExpression,
+                        indexExpression
+                    );
 
-                    Expression argExpression = EnsureCastExpression(paramAccessorExpression, parameterType, !isByRef);
+                    Expression argExpression = EnsureCastExpression(
+                        paramAccessorExpression,
+                        parameterType,
+                        !isByRef
+                    );
 
                     if (isByRef)
                     {
                         ParameterExpression variable = Expression.Variable(parameterType);
-                        refParameterMap.Add(new ByRefParameter(argExpression, variable, parameter.IsOut));
+                        refParameterMap.Add(
+                            new ByRefParameter(argExpression, variable, parameter.IsOut)
+                        );
 
                         argExpression = variable;
                     }
@@ -144,7 +185,10 @@ namespace Newtonsoft.Json.Utilities
             }
             else
             {
-                Expression readParameter = EnsureCastExpression(targetParameterExpression!, method.DeclaringType!);
+                Expression readParameter = EnsureCastExpression(
+                    targetParameterExpression!,
+                    method.DeclaringType!
+                );
 
                 callExpression = Expression.Call(readParameter, (MethodInfo)method, argsExpression);
             }
@@ -225,7 +269,10 @@ namespace Newtonsoft.Json.Utilities
             Type instanceType = typeof(T);
             Type resultType = typeof(object);
 
-            ParameterExpression parameterExpression = Expression.Parameter(instanceType, "instance");
+            ParameterExpression parameterExpression = Expression.Parameter(
+                instanceType,
+                "instance"
+            );
             Expression resultExpression;
 
             MethodInfo? getMethod = propertyInfo.GetGetMethod(true);
@@ -240,14 +287,21 @@ namespace Newtonsoft.Json.Utilities
             }
             else
             {
-                Expression readParameter = EnsureCastExpression(parameterExpression, propertyInfo.DeclaringType!);
+                Expression readParameter = EnsureCastExpression(
+                    parameterExpression,
+                    propertyInfo.DeclaringType!
+                );
 
                 resultExpression = Expression.MakeMemberAccess(readParameter, propertyInfo);
             }
 
             resultExpression = EnsureCastExpression(resultExpression, resultType);
 
-            LambdaExpression lambdaExpression = Expression.Lambda(typeof(Func<T, object>), resultExpression, parameterExpression);
+            LambdaExpression lambdaExpression = Expression.Lambda(
+                typeof(Func<T, object>),
+                resultExpression,
+                parameterExpression
+            );
 
             Func<T, object?> compiled = (Func<T, object?>)lambdaExpression.Compile();
             return compiled;
@@ -266,14 +320,19 @@ namespace Newtonsoft.Json.Utilities
             }
             else
             {
-                Expression sourceExpression = EnsureCastExpression(sourceParameter, fieldInfo.DeclaringType!);
+                Expression sourceExpression = EnsureCastExpression(
+                    sourceParameter,
+                    fieldInfo.DeclaringType!
+                );
 
                 fieldExpression = Expression.Field(sourceExpression, fieldInfo);
             }
 
             fieldExpression = EnsureCastExpression(fieldExpression, typeof(object));
 
-            Func<T, object?> compiled = Expression.Lambda<Func<T, object?>>(fieldExpression, sourceParameter).Compile();
+            Func<T, object?> compiled = Expression
+                .Lambda<Func<T, object?>>(fieldExpression, sourceParameter)
+                .Compile();
             return compiled;
         }
 
@@ -288,8 +347,14 @@ namespace Newtonsoft.Json.Utilities
                 return LateBoundReflectionDelegateFactory.Instance.CreateSet<T>(fieldInfo);
             }
 
-            ParameterExpression sourceParameterExpression = Expression.Parameter(typeof(T), "source");
-            ParameterExpression valueParameterExpression = Expression.Parameter(typeof(object), "value");
+            ParameterExpression sourceParameterExpression = Expression.Parameter(
+                typeof(T),
+                "source"
+            );
+            ParameterExpression valueParameterExpression = Expression.Parameter(
+                typeof(object),
+                "value"
+            );
 
             Expression fieldExpression;
             if (fieldInfo.IsStatic)
@@ -298,16 +363,27 @@ namespace Newtonsoft.Json.Utilities
             }
             else
             {
-                Expression sourceExpression = EnsureCastExpression(sourceParameterExpression, fieldInfo.DeclaringType!);
+                Expression sourceExpression = EnsureCastExpression(
+                    sourceParameterExpression,
+                    fieldInfo.DeclaringType!
+                );
 
                 fieldExpression = Expression.Field(sourceExpression, fieldInfo);
             }
 
-            Expression valueExpression = EnsureCastExpression(valueParameterExpression, fieldExpression.Type);
+            Expression valueExpression = EnsureCastExpression(
+                valueParameterExpression,
+                fieldExpression.Type
+            );
 
             BinaryExpression assignExpression = Expression.Assign(fieldExpression, valueExpression);
 
-            LambdaExpression lambdaExpression = Expression.Lambda(typeof(Action<T, object>), assignExpression, sourceParameterExpression, valueParameterExpression);
+            LambdaExpression lambdaExpression = Expression.Lambda(
+                typeof(Action<T, object>),
+                assignExpression,
+                sourceParameterExpression,
+                valueParameterExpression
+            );
 
             Action<T, object?> compiled = (Action<T, object?>)lambdaExpression.Compile();
             return compiled;
@@ -330,7 +406,10 @@ namespace Newtonsoft.Json.Utilities
             ParameterExpression instanceParameter = Expression.Parameter(instanceType, "instance");
 
             ParameterExpression valueParameter = Expression.Parameter(valueType, "value");
-            Expression readValueParameter = EnsureCastExpression(valueParameter, propertyInfo.PropertyType);
+            Expression readValueParameter = EnsureCastExpression(
+                valueParameter,
+                propertyInfo.PropertyType
+            );
 
             MethodInfo? setMethod = propertyInfo.GetSetMethod(true);
             if (setMethod == null)
@@ -345,23 +424,42 @@ namespace Newtonsoft.Json.Utilities
             }
             else
             {
-                Expression readInstanceParameter = EnsureCastExpression(instanceParameter, propertyInfo.DeclaringType!);
+                Expression readInstanceParameter = EnsureCastExpression(
+                    instanceParameter,
+                    propertyInfo.DeclaringType!
+                );
 
-                setExpression = Expression.Call(readInstanceParameter, setMethod, readValueParameter);
+                setExpression = Expression.Call(
+                    readInstanceParameter,
+                    setMethod,
+                    readValueParameter
+                );
             }
 
-            LambdaExpression lambdaExpression = Expression.Lambda(typeof(Action<T, object?>), setExpression, instanceParameter, valueParameter);
+            LambdaExpression lambdaExpression = Expression.Lambda(
+                typeof(Action<T, object?>),
+                setExpression,
+                instanceParameter,
+                valueParameter
+            );
 
             Action<T, object?> compiled = (Action<T, object?>)lambdaExpression.Compile();
             return compiled;
         }
-        
-        private Expression EnsureCastExpression(Expression expression, Type targetType, bool allowWidening = false)
+
+        private Expression EnsureCastExpression(
+            Expression expression,
+            Type targetType,
+            bool allowWidening = false
+        )
         {
             Type expressionType = expression.Type;
-            
+
             // check if a cast or conversion is required
-            if (expressionType == targetType || (!expressionType.IsValueType() && targetType.IsAssignableFrom(expressionType)))
+            if (
+                expressionType == targetType
+                || (!expressionType.IsValueType() && targetType.IsAssignableFrom(expressionType))
+            )
             {
                 return expression;
             }
@@ -372,22 +470,26 @@ namespace Newtonsoft.Json.Utilities
 
                 if (allowWidening && targetType.IsPrimitive())
                 {
-                    MethodInfo? toTargetTypeMethod = typeof(Convert)
-                        .GetMethod("To" + targetType.Name, new[] { typeof(object) });
+                    MethodInfo? toTargetTypeMethod = typeof(Convert).GetMethod(
+                        "To" + targetType.Name,
+                        new[] { typeof(object) }
+                    );
 
                     if (toTargetTypeMethod != null)
                     {
                         convert = Expression.Condition(
                             Expression.TypeIs(expression, targetType),
                             convert,
-                            Expression.Call(toTargetTypeMethod, expression));
+                            Expression.Call(toTargetTypeMethod, expression)
+                        );
                     }
                 }
-                
+
                 return Expression.Condition(
                     Expression.Equal(expression, Expression.Constant(null, typeof(object))),
-                    Expression.Default(targetType), 
-                    convert);
+                    Expression.Default(targetType),
+                    convert
+                );
             }
 
             return Expression.Convert(expression, targetType);

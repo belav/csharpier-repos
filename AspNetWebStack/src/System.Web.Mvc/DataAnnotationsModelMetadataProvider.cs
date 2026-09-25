@@ -10,14 +10,31 @@ namespace System.Web.Mvc
 {
     public class DataAnnotationsModelMetadataProvider : AssociatedMetadataProvider
     {
-        protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType, Func<object> modelAccessor, Type modelType, string propertyName)
+        protected override ModelMetadata CreateMetadata(
+            IEnumerable<Attribute> attributes,
+            Type containerType,
+            Func<object> modelAccessor,
+            Type modelType,
+            string propertyName
+        )
         {
             List<Attribute> attributeList = new List<Attribute>(attributes);
-            DisplayColumnAttribute displayColumnAttribute = attributeList.OfType<DisplayColumnAttribute>().FirstOrDefault();
-            DataAnnotationsModelMetadata result = new DataAnnotationsModelMetadata(this, containerType, modelAccessor, modelType, propertyName, displayColumnAttribute);
+            DisplayColumnAttribute displayColumnAttribute = attributeList
+                .OfType<DisplayColumnAttribute>()
+                .FirstOrDefault();
+            DataAnnotationsModelMetadata result = new DataAnnotationsModelMetadata(
+                this,
+                containerType,
+                modelAccessor,
+                modelType,
+                propertyName,
+                displayColumnAttribute
+            );
 
             // Do [HiddenInput] before [UIHint], so you can override the template hint
-            HiddenInputAttribute hiddenInputAttribute = attributeList.OfType<HiddenInputAttribute>().FirstOrDefault();
+            HiddenInputAttribute hiddenInputAttribute = attributeList
+                .OfType<HiddenInputAttribute>()
+                .FirstOrDefault();
             if (hiddenInputAttribute != null)
             {
                 result.TemplateHint = "HiddenInput";
@@ -26,8 +43,11 @@ namespace System.Web.Mvc
 
             // We prefer [UIHint("...", PresentationLayer = "MVC")] but will fall back to [UIHint("...")]
             IEnumerable<UIHintAttribute> uiHintAttributes = attributeList.OfType<UIHintAttribute>();
-            UIHintAttribute uiHintAttribute = uiHintAttributes.FirstOrDefault(a => String.Equals(a.PresentationLayer, "MVC", StringComparison.OrdinalIgnoreCase))
-                                              ?? uiHintAttributes.FirstOrDefault(a => String.IsNullOrEmpty(a.PresentationLayer));
+            UIHintAttribute uiHintAttribute =
+                uiHintAttributes.FirstOrDefault(a =>
+                    String.Equals(a.PresentationLayer, "MVC", StringComparison.OrdinalIgnoreCase)
+                )
+                ?? uiHintAttributes.FirstOrDefault(a => String.IsNullOrEmpty(a.PresentationLayer));
             if (uiHintAttribute != null)
             {
                 result.TemplateHint = uiHintAttribute.UIHint;
@@ -40,18 +60,26 @@ namespace System.Web.Mvc
             }
             else
             {
-                ReadOnlyAttribute readOnlyAttribute = attributeList.OfType<ReadOnlyAttribute>().FirstOrDefault();
+                ReadOnlyAttribute readOnlyAttribute = attributeList
+                    .OfType<ReadOnlyAttribute>()
+                    .FirstOrDefault();
                 if (readOnlyAttribute != null)
                 {
                     result.IsReadOnly = readOnlyAttribute.IsReadOnly;
                 }
             }
 
-            DataTypeAttribute dataTypeAttribute = attributeList.OfType<DataTypeAttribute>().FirstOrDefault();
-            DisplayFormatAttribute displayFormatAttribute = attributeList.OfType<DisplayFormatAttribute>().FirstOrDefault();
+            DataTypeAttribute dataTypeAttribute = attributeList
+                .OfType<DataTypeAttribute>()
+                .FirstOrDefault();
+            DisplayFormatAttribute displayFormatAttribute = attributeList
+                .OfType<DisplayFormatAttribute>()
+                .FirstOrDefault();
             SetFromDataTypeAndDisplayAttributes(result, dataTypeAttribute, displayFormatAttribute);
 
-            ScaffoldColumnAttribute scaffoldColumnAttribute = attributeList.OfType<ScaffoldColumnAttribute>().FirstOrDefault();
+            ScaffoldColumnAttribute scaffoldColumnAttribute = attributeList
+                .OfType<ScaffoldColumnAttribute>()
+                .FirstOrDefault();
             if (scaffoldColumnAttribute != null)
             {
                 result.ShowForDisplay = result.ShowForEdit = scaffoldColumnAttribute.Scaffold;
@@ -75,14 +103,18 @@ namespace System.Web.Mvc
             }
             else
             {
-                DisplayNameAttribute displayNameAttribute = attributeList.OfType<DisplayNameAttribute>().FirstOrDefault();
+                DisplayNameAttribute displayNameAttribute = attributeList
+                    .OfType<DisplayNameAttribute>()
+                    .FirstOrDefault();
                 if (displayNameAttribute != null)
                 {
                     result.DisplayName = displayNameAttribute.DisplayName;
                 }
             }
 
-            RequiredAttribute requiredAttribute = attributeList.OfType<RequiredAttribute>().FirstOrDefault();
+            RequiredAttribute requiredAttribute = attributeList
+                .OfType<RequiredAttribute>()
+                .FirstOrDefault();
             if (requiredAttribute != null)
             {
                 result.IsRequired = true;
@@ -91,8 +123,11 @@ namespace System.Web.Mvc
             return result;
         }
 
-        private static void SetFromDataTypeAndDisplayAttributes(DataAnnotationsModelMetadata result,
-            DataTypeAttribute dataTypeAttribute, DisplayFormatAttribute displayFormatAttribute)
+        private static void SetFromDataTypeAndDisplayAttributes(
+            DataAnnotationsModelMetadata result,
+            DataTypeAttribute dataTypeAttribute,
+            DisplayFormatAttribute displayFormatAttribute
+        )
         {
             if (dataTypeAttribute != null)
             {
@@ -107,7 +142,10 @@ namespace System.Web.Mvc
                 // constructor used the protected DisplayFormat setter to override its default. Note deriving from
                 // [DataType] but preserving DataFormatString and ApplyFormatInEditMode results in
                 // HasNonDefaultEditFormat==true.
-                if (displayFormatAttribute != null && dataTypeAttribute.GetType() != typeof(DataTypeAttribute))
+                if (
+                    displayFormatAttribute != null
+                    && dataTypeAttribute.GetType() != typeof(DataTypeAttribute)
+                )
                 {
                     result.HasNonDefaultEditFormat = true;
                 }
@@ -129,7 +167,10 @@ namespace System.Web.Mvc
                     result.EditFormatString = displayFormatAttribute.DataFormatString;
                 }
 
-                if (!displayFormatAttribute.HtmlEncode && String.IsNullOrWhiteSpace(result.DataTypeName))
+                if (
+                    !displayFormatAttribute.HtmlEncode
+                    && String.IsNullOrWhiteSpace(result.DataTypeName)
+                )
                 {
                     result.DataTypeName = DataTypeUtil.HtmlTypeName;
                 }

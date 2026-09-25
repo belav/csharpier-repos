@@ -38,7 +38,10 @@ namespace System.Configuration
             }
         }
 
-        public int LineNumber { get { return ((IConfigErrorInfo)this).LineNumber; } }
+        public int LineNumber
+        {
+            get { return ((IConfigErrorInfo)this).LineNumber; }
+        }
 
         public string Filename
         {
@@ -90,14 +93,36 @@ namespace System.Configuration
             }
         }
 
-        public override XmlAttribute CreateAttribute(string prefix, string localName, string namespaceUri)
+        public override XmlAttribute CreateAttribute(
+            string prefix,
+            string localName,
+            string namespaceUri
+        )
         {
-            return new ConfigXmlAttribute(_filename, LineNumber, prefix, localName, namespaceUri, this);
+            return new ConfigXmlAttribute(
+                _filename,
+                LineNumber,
+                prefix,
+                localName,
+                namespaceUri,
+                this
+            );
         }
 
-        public override XmlElement CreateElement(string prefix, string localName, string namespaceUri)
+        public override XmlElement CreateElement(
+            string prefix,
+            string localName,
+            string namespaceUri
+        )
         {
-            return new ConfigXmlElement(_filename, LineNumber, prefix, localName, namespaceUri, this);
+            return new ConfigXmlElement(
+                _filename,
+                LineNumber,
+                prefix,
+                localName,
+                namespaceUri,
+                this
+            );
         }
 
         public override XmlText CreateTextNode(string text)

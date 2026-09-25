@@ -11,20 +11,19 @@ public class TextCompletionContext : CompletionContext
     private TextCompletionContext(
         ParseResult parseResult,
         string commandLineText,
-        int cursorPosition) : base(parseResult, GetWordToComplete(parseResult, cursorPosition))
+        int cursorPosition
+    )
+        : base(parseResult, GetWordToComplete(parseResult, cursorPosition))
     {
         CommandLineText = commandLineText;
         CursorPosition = cursorPosition;
     }
 
-    internal TextCompletionContext(
-        ParseResult parseResult, 
-        string commandLineText) : this(parseResult, commandLineText, commandLineText.Length)
-    {
-    }
+    internal TextCompletionContext(ParseResult parseResult, string commandLineText)
+        : this(parseResult, commandLineText, commandLineText.Length) { }
 
     /// <summary>
-    /// The position of the cursor within the command line. 
+    /// The position of the cursor within the command line.
     /// </summary>
     public int CursorPosition { get; }
 

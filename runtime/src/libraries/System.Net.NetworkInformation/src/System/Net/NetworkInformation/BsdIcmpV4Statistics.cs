@@ -42,8 +42,10 @@ namespace System.Net.NetworkInformation
             _addressMaskRepliesSent = (long)statistics.AddressMaskRepliesSent;
             _addressMaskRequestsReceived = (long)statistics.AddressMaskRequestsReceived;
             _addressMaskRequestsSent = (long)statistics.AddressMaskRequestsSent;
-            _destinationUnreachableMessagesReceived = (long)statistics.DestinationUnreachableMessagesReceived;
-            _destinationUnreachableMessagesSent = (long)statistics.DestinationUnreachableMessagesSent;
+            _destinationUnreachableMessagesReceived = (long)
+                statistics.DestinationUnreachableMessagesReceived;
+            _destinationUnreachableMessagesSent = (long)
+                statistics.DestinationUnreachableMessagesSent;
             _echoRepliesReceived = (long)statistics.EchoRepliesReceived;
             _echoRepliesSent = (long)statistics.EchoRepliesSent;
             _echoRequestsReceived = (long)statistics.EchoRequestsReceived;
@@ -62,72 +64,150 @@ namespace System.Net.NetworkInformation
             _timestampRequestsSent = (long)statistics.TimestampRequestsSent;
         }
 
-        public override long AddressMaskRepliesReceived { get { return _addressMaskRepliesReceived; } }
+        public override long AddressMaskRepliesReceived
+        {
+            get { return _addressMaskRepliesReceived; }
+        }
 
-        public override long AddressMaskRepliesSent { get { return _addressMaskRepliesSent; } }
+        public override long AddressMaskRepliesSent
+        {
+            get { return _addressMaskRepliesSent; }
+        }
 
-        public override long AddressMaskRequestsReceived { get { return _addressMaskRequestsReceived; } }
+        public override long AddressMaskRequestsReceived
+        {
+            get { return _addressMaskRequestsReceived; }
+        }
 
-        public override long AddressMaskRequestsSent { get { return _addressMaskRequestsSent; } }
+        public override long AddressMaskRequestsSent
+        {
+            get { return _addressMaskRequestsSent; }
+        }
 
-        public override long DestinationUnreachableMessagesReceived { get { return _destinationUnreachableMessagesReceived; } }
+        public override long DestinationUnreachableMessagesReceived
+        {
+            get { return _destinationUnreachableMessagesReceived; }
+        }
 
-        public override long DestinationUnreachableMessagesSent { get { return _destinationUnreachableMessagesSent; } }
+        public override long DestinationUnreachableMessagesSent
+        {
+            get { return _destinationUnreachableMessagesSent; }
+        }
 
-        public override long EchoRepliesReceived { get { return _echoRepliesReceived; } }
+        public override long EchoRepliesReceived
+        {
+            get { return _echoRepliesReceived; }
+        }
 
-        public override long EchoRepliesSent { get { return _echoRepliesSent; } }
+        public override long EchoRepliesSent
+        {
+            get { return _echoRepliesSent; }
+        }
 
-        public override long EchoRequestsReceived { get { return _echoRequestsReceived; } }
+        public override long EchoRequestsReceived
+        {
+            get { return _echoRequestsReceived; }
+        }
 
-        public override long EchoRequestsSent { get { return _echoRequestsSent; } }
+        public override long EchoRequestsSent
+        {
+            get { return _echoRequestsSent; }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long ErrorsReceived { get { throw new PlatformNotSupportedException(); } }
+        public override long ErrorsReceived
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long ErrorsSent { get { throw new PlatformNotSupportedException(); } }
+        public override long ErrorsSent
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long MessagesReceived { get { throw new PlatformNotSupportedException(); } }
+        public override long MessagesReceived
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long MessagesSent { get { throw new PlatformNotSupportedException(); } }
+        public override long MessagesSent
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-        public override long ParameterProblemsReceived { get { return _parameterProblemsReceived; } }
+        public override long ParameterProblemsReceived
+        {
+            get { return _parameterProblemsReceived; }
+        }
 
-        public override long ParameterProblemsSent { get { return _parameterProblemsSent; } }
+        public override long ParameterProblemsSent
+        {
+            get { return _parameterProblemsSent; }
+        }
 
-        public override long RedirectsReceived { get { return _redirectsReceived; } }
+        public override long RedirectsReceived
+        {
+            get { return _redirectsReceived; }
+        }
 
-        public override long RedirectsSent { get { return _redirectsSent; } }
+        public override long RedirectsSent
+        {
+            get { return _redirectsSent; }
+        }
 
-        public override long SourceQuenchesReceived { get { return _sourceQuenchesReceived; } }
+        public override long SourceQuenchesReceived
+        {
+            get { return _sourceQuenchesReceived; }
+        }
 
-        public override long SourceQuenchesSent { get { return _sourceQuenchesSent; } }
+        public override long SourceQuenchesSent
+        {
+            get { return _sourceQuenchesSent; }
+        }
 
-        public override long TimeExceededMessagesReceived { get { return _timeExceededMessagesReceived; } }
+        public override long TimeExceededMessagesReceived
+        {
+            get { return _timeExceededMessagesReceived; }
+        }
 
-        public override long TimeExceededMessagesSent { get { return _timeExceededMessagesSent; } }
+        public override long TimeExceededMessagesSent
+        {
+            get { return _timeExceededMessagesSent; }
+        }
 
-        public override long TimestampRepliesReceived { get { return _timestampRepliesReceived; } }
+        public override long TimestampRepliesReceived
+        {
+            get { return _timestampRepliesReceived; }
+        }
 
-        public override long TimestampRepliesSent { get { return _timestampRepliesSent; } }
+        public override long TimestampRepliesSent
+        {
+            get { return _timestampRepliesSent; }
+        }
 
-        public override long TimestampRequestsReceived { get { return _timestampRequestsReceived; } }
+        public override long TimestampRequestsReceived
+        {
+            get { return _timestampRequestsReceived; }
+        }
 
-        public override long TimestampRequestsSent { get { return _timestampRequestsSent; } }
+        public override long TimestampRequestsSent
+        {
+            get { return _timestampRequestsSent; }
+        }
     }
 }

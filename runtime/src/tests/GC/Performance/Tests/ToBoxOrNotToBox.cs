@@ -5,10 +5,8 @@ using System;
 
 namespace ToBoxOrNotToBox
 {
-    public interface IObjectId
-    {
-    }
-  
+    public interface IObjectId { }
+
     internal class ClassObjectId : IObjectId
     {
         private int m_TypeId;
@@ -72,30 +70,28 @@ namespace ToBoxOrNotToBox
     class Program
     {
         static void PerfTest2(int count, int length)
-        {            
+        {
             for (int i = 0; i < count; i++)
             {
                 ClassObjectId[] internalIds = new ClassObjectId[length];
                 for (int k = 0; k < length; k++)
                 {
-                    internalIds[k] = new ClassObjectId(10, k + 1);                   
+                    internalIds[k] = new ClassObjectId(10, k + 1);
                 }
 
                 IObjectId[] publicIds = new IObjectId[length];
                 Array.Copy(internalIds, publicIds, length);
             }
-
         }
 
         static void PerfTest1(int count, int length)
         {
-            
             for (int i = 0; i < count; i++)
             {
                 InternalObjectId[] internalIds = new InternalObjectId[length];
                 for (int k = 0; k < length; k++)
                 {
-                    internalIds[k] = new InternalObjectId(10, k + 1);                    
+                    internalIds[k] = new InternalObjectId(10, k + 1);
                 }
 
                 ObjectId[] publicIds = new ObjectId[length];
@@ -104,20 +100,17 @@ namespace ToBoxOrNotToBox
                     publicIds[k] = new ObjectId(internalIds[k]);
                 }
             }
-
         }
-        
+
         static void Main()
         {
-
             const int baseCount = 2000000;
-            for (int i = 1; i <= 1000000; i+=10000)
+            for (int i = 1; i <= 1000000; i += 10000)
             {
                 int count = baseCount / i;
-                PerfTest1(count, i);                
+                PerfTest1(count, i);
                 PerfTest2(count, i);
             }
-
         }
     }
 }

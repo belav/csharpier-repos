@@ -22,25 +22,29 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
 using System;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    public class StatusBarPanelClickEventArgs : MouseEventArgs
+    {
+        private StatusBarPanel panel;
 
-	public class StatusBarPanelClickEventArgs : MouseEventArgs {
+        public StatusBarPanelClickEventArgs(
+            StatusBarPanel statusBarPanel,
+            MouseButtons button,
+            int clicks,
+            int x,
+            int y
+        )
+            : base(button, clicks, x, y, 0)
+        {
+            this.panel = statusBarPanel;
+        }
 
-		private StatusBarPanel panel;
-
-		public StatusBarPanelClickEventArgs (StatusBarPanel statusBarPanel,
-				MouseButtons button, int clicks, int x, int y) :
-			base (button, clicks, x, y, 0)
-		{
-			this.panel = statusBarPanel;
-		}
-
-		public StatusBarPanel StatusBarPanel {
-			get { return panel; }
-		}
-	}
+        public StatusBarPanel StatusBarPanel
+        {
+            get { return panel; }
+        }
+    }
 }
-

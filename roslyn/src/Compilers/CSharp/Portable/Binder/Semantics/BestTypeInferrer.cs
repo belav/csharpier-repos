@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class BestTypeInferrer
     {
-        public static NullableAnnotation GetNullableAnnotation(ArrayBuilder<TypeWithAnnotations> types)
+        public static NullableAnnotation GetNullableAnnotation(
+            ArrayBuilder<TypeWithAnnotations> types
+        )
         {
 #if DEBUG
             var example = types.FirstOrDefault(t => t.HasType);
@@ -23,7 +25,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             foreach (var type in types)
             {
 #if DEBUG
-                Debug.Assert(!type.HasType || type.Equals(example, TypeCompareKind.AllIgnoreOptions));
+                Debug.Assert(
+                    !type.HasType || type.Equals(example, TypeCompareKind.AllIgnoreOptions)
+                );
 #endif
 
                 // This uses the covariant merging rules.
@@ -52,20 +56,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             ImmutableArray<BoundExpression> exprs,
             ConversionsBase conversions,
             ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo,
-            out bool inferredFromFunctionType)
+            out bool inferredFromFunctionType
+        )
         {
             // SPEC:    7.5.2.14 Finding the best common type of a set of expressions
             // SPEC:    In some cases, a common type needs to be inferred for a set of expressions. In particular, the element types of implicitly typed arrays and
             // SPEC:    the return types of anonymous functions with block bodies are found in this way.
             // SPEC:    Intuitively, given a set of expressions E1…Em this inference should be equivalent to calling a method:
             // SPEC:        T M<X>(X x1 … X xm)
-            // SPEC:    with the Ei as arguments. 
+            // SPEC:    with the Ei as arguments.
             // SPEC:    More precisely, the inference starts out with an unfixed type variable X. Output type inferences are then made from each Ei to X.
             // SPEC:    Finally, X is fixed and, if successful, the resulting type S is the resulting best common type for the expressions.
             // SPEC:    If no such S exists, the expressions have no best common type.
 
             // All non-null types are candidates for best type inference.
-            IEqualityComparer<TypeSymbol> comparer = conversions.IncludeNullability ? Symbols.SymbolEqualityComparer.ConsiderEverything : Symbols.SymbolEqualityComparer.IgnoringNullable;
+            IEqualityComparer<TypeSymbol> comparer = conversions.IncludeNullability
+                ? Symbols.SymbolEqualityComparer.ConsiderEverything
+                : Symbols.SymbolEqualityComparer.IgnoringNullable;
             HashSet<TypeSymbol> candidateTypes = new HashSet<TypeSymbol>(comparer);
             foreach (BoundExpression expr in exprs)
             {
@@ -117,9 +124,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression expr2,
             Conversions conversions,
             out bool hadMultipleCandidates,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            // SPEC:    The second and third operands, x and y, of the ?: operator control the type of the conditional expression. 
+            // SPEC:    The second and third operands, x and y, of the ?: operator control the type of the conditional expression.
             // SPEC:    •	If x has type X and y has type Y then
             // SPEC:        o	If an implicit conversion (§6.1) exists from X to Y, but not from Y to X, then Y is the type of the conditional expression.
             // SPEC:        o	If an implicit conversion (§6.1) exists from Y to X, but not from X to Y, then X is the type of the conditional expression.
@@ -142,7 +150,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return type1;
                     }
 
-                    if (conversionsWithoutNullability.ClassifyImplicitConversionFromExpression(expr2, type1, ref useSiteInfo).Exists)
+                    if (
+                        conversionsWithoutNullability
+                            .ClassifyImplicitConversionFromExpression(expr2, type1, ref useSiteInfo)
+                            .Exists
+                    )
                     {
                         candidateTypes.Add(type1);
                     }
@@ -158,7 +170,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return type2;
                     }
 
-                    if (conversionsWithoutNullability.ClassifyImplicitConversionFromExpression(expr1, type2, ref useSiteInfo).Exists)
+                    if (
+                        conversionsWithoutNullability
+                            .ClassifyImplicitConversionFromExpression(expr1, type2, ref useSiteInfo)
+                            .Exists
+                    )
                     {
                         candidateTypes.Add(type2);
                     }
@@ -177,12 +193,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         internal static TypeSymbol? GetBestType(
             ArrayBuilder<TypeSymbol> types,
             ConversionsBase conversions,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            // This code assumes that the types in the list are unique. 
+            // This code assumes that the types in the list are unique.
 
-            // This code answers the famous Mike Montwill interview question: Can you find the 
-            // unique best member of a set in O(n) time if the pairwise betterness algorithm 
+            // This code answers the famous Mike Montwill interview question: Can you find the
+            // unique best member of a set in O(n) time if the pairwise betterness algorithm
             // might be intransitive?
 
             // Short-circuit some common cases.
@@ -248,9 +265,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return best;
 
             static TypeSymbol? checkType(TypeSymbol type) =>
-                type is FunctionTypeSymbol functionType && functionType.GetInternalDelegateType() is null ?
-                null :
-                type;
+                type is FunctionTypeSymbol functionType
+                && functionType.GetInternalDelegateType() is null
+                    ? null
+                    : type;
         }
 
         /// <summary>
@@ -260,7 +278,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             TypeSymbol type1,
             TypeSymbol? type2,
             ConversionsBase conversions,
-            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             // Anything is better than an error sym.
             if (type1.IsErrorType())
@@ -287,12 +306,30 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             var conversionsWithoutNullability = conversions.WithNullability(false);
-            var t1tot2 = conversionsWithoutNullability.ClassifyImplicitConversionFromTypeWhenNeitherOrBothFunctionTypes(type1, type2, ref useSiteInfo).Exists;
-            var t2tot1 = conversionsWithoutNullability.ClassifyImplicitConversionFromTypeWhenNeitherOrBothFunctionTypes(type2, type1, ref useSiteInfo).Exists;
+            var t1tot2 = conversionsWithoutNullability
+                .ClassifyImplicitConversionFromTypeWhenNeitherOrBothFunctionTypes(
+                    type1,
+                    type2,
+                    ref useSiteInfo
+                )
+                .Exists;
+            var t2tot1 = conversionsWithoutNullability
+                .ClassifyImplicitConversionFromTypeWhenNeitherOrBothFunctionTypes(
+                    type2,
+                    type1,
+                    ref useSiteInfo
+                )
+                .Exists;
 
             if (t1tot2 && t2tot1)
             {
-                if (type1.Equals(type2, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes))
+                if (
+                    type1.Equals(
+                        type2,
+                        TypeCompareKind.IgnoreDynamicAndTupleNames
+                            | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                    )
+                )
                 {
                     return type1.MergeEquivalentTypes(type2, VarianceKind.Out);
                 }

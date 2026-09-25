@@ -16,11 +16,12 @@ namespace Microsoft.CodeAnalysis.Interactive
             public string[] MetadataReferencePaths = null!;
             public string[] Imports = null!;
 
-            public RemoteInitializationResult Deserialize()
-                => new RemoteInitializationResult(
+            public RemoteInitializationResult Deserialize() =>
+                new RemoteInitializationResult(
                     ScriptPath,
                     ImmutableArray.Create(MetadataReferencePaths),
-                    ImmutableArray.Create(Imports));
+                    ImmutableArray.Create(Imports)
+                );
         }
 
         /// <summary>
@@ -32,15 +33,19 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         public readonly ImmutableArray<string> Imports;
 
-        public RemoteInitializationResult(string? initializationScript, ImmutableArray<string> metadataReferencePaths, ImmutableArray<string> imports)
+        public RemoteInitializationResult(
+            string? initializationScript,
+            ImmutableArray<string> metadataReferencePaths,
+            ImmutableArray<string> imports
+        )
         {
             ScriptPath = initializationScript;
             MetadataReferencePaths = metadataReferencePaths;
             Imports = imports;
         }
 
-        public Data Serialize()
-            => new Data()
+        public Data Serialize() =>
+            new Data()
             {
                 ScriptPath = ScriptPath,
                 MetadataReferencePaths = MetadataReferencePaths.ToArray(),

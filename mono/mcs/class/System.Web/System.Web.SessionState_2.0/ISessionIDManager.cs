@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,21 +28,29 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Web;
 
-namespace System.Web.SessionState {
-	public interface ISessionIDManager
-	{
-		///methods
-		string CreateSessionID (HttpContext context);
-		string GetSessionID (HttpContext context);
-		void Initialize ();
-		bool InitializeRequest (HttpContext context, bool suppressAutoDetectRedirect, out bool supportSessionIDReissue);
-		void RemoveSessionID (HttpContext context);
-		void SaveSessionID (HttpContext context, string id, out bool redirected, out bool cookieAdded);
-		bool Validate (string id);
-	}
+namespace System.Web.SessionState
+{
+    public interface ISessionIDManager
+    {
+        ///methods
+        string CreateSessionID(HttpContext context);
+        string GetSessionID(HttpContext context);
+        void Initialize();
+        bool InitializeRequest(
+            HttpContext context,
+            bool suppressAutoDetectRedirect,
+            out bool supportSessionIDReissue
+        );
+        void RemoveSessionID(HttpContext context);
+        void SaveSessionID(
+            HttpContext context,
+            string id,
+            out bool redirected,
+            out bool cookieAdded
+        );
+        bool Validate(string id);
+    }
 }
-

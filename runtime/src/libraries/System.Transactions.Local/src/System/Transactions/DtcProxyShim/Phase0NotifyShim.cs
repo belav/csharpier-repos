@@ -11,9 +11,7 @@ namespace System.Transactions.DtcProxyShim;
 internal sealed partial class Phase0NotifyShim : NotificationShimBase, ITransactionPhase0NotifyAsync
 {
     internal Phase0NotifyShim(DtcProxyShimFactory shimFactory, object enlistmentIdentifier)
-        : base(shimFactory, enlistmentIdentifier)
-    {
-    }
+        : base(shimFactory, enlistmentIdentifier) { }
 
     public void Phase0Request(bool fAbortHint)
     {

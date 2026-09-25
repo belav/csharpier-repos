@@ -13,16 +13,15 @@ namespace System.ServiceModel.Configuration
     public partial class BasicHttpsBindingElement : HttpBindingBaseElement
     {
         public BasicHttpsBindingElement(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public BasicHttpsBindingElement()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
-        [ConfigurationProperty(ConfigurationStrings.MessageEncoding, DefaultValue = BasicHttpBindingDefaults.MessageEncoding)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MessageEncoding,
+            DefaultValue = BasicHttpBindingDefaults.MessageEncoding
+        )]
         [ServiceModelEnumValidator(typeof(WSMessageEncodingHelper))]
         public WSMessageEncoding MessageEncoding
         {
@@ -46,7 +45,10 @@ namespace System.ServiceModel.Configuration
             base.InitializeFrom(binding);
             BasicHttpsBinding bpBinding = (BasicHttpsBinding)binding;
 
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MessageEncoding, bpBinding.MessageEncoding);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MessageEncoding,
+                bpBinding.MessageEncoding
+            );
             this.Security.InitializeFrom(bpBinding.Security);
         }
 

@@ -46,9 +46,15 @@ namespace Newtonsoft.Json.Tests.TestObjects
         /// </summary>
         public AnswerFilterModel()
         {
-            answerValues = (from answer in Enum.GetNames(typeof(Antworten))
-                select new SelectListItem { Text = answer, Value = answer, Selected = false })
-                .ToList();
+            answerValues = (
+                from answer in Enum.GetNames(typeof(Antworten))
+                select new SelectListItem
+                {
+                    Text = answer,
+                    Value = answer,
+                    Selected = false,
+                }
+            ).ToList();
         }
 
         /// <summary>

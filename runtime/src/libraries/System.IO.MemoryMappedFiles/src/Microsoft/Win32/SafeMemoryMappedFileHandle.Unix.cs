@@ -36,12 +36,19 @@ namespace Microsoft.Win32.SafeHandles
         /// <param name="options">The options for the memory-mapped file.</param>
         /// <param name="capacity">The capacity of the memory-mapped file.</param>
         internal SafeMemoryMappedFileHandle(
-            SafeFileHandle? fileHandle, bool ownsFileHandle, HandleInheritability inheritability,
-            MemoryMappedFileAccess access, MemoryMappedFileOptions options,
-            long capacity)
+            SafeFileHandle? fileHandle,
+            bool ownsFileHandle,
+            HandleInheritability inheritability,
+            MemoryMappedFileAccess access,
+            MemoryMappedFileOptions options,
+            long capacity
+        )
             : base(ownsHandle: true)
         {
-            Debug.Assert(!ownsFileHandle || fileHandle != null, "We can only own a FileStream we're actually given.");
+            Debug.Assert(
+                !ownsFileHandle || fileHandle != null,
+                "We can only own a FileStream we're actually given."
+            );
 
             // Store the arguments.  We'll actually open the map when the view is created.
             _ownsFileHandle = ownsFileHandle;
@@ -71,7 +78,7 @@ namespace Microsoft.Win32.SafeHandles
         {
             if (_fileStreamHandle != null)
             {
-                SetHandle((IntPtr) (-1));
+                SetHandle((IntPtr)(-1));
 
                 if (_ownsFileHandle)
                 {

@@ -22,9 +22,10 @@ namespace Microsoft.CodeAnalysis.CodeLens
 {
     internal sealed class CodeLensReferencesService : ICodeLensReferencesService
     {
-        private static readonly SymbolDisplayFormat MethodDisplayFormat =
-            new(typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
-                memberOptions: SymbolDisplayMemberOptions.IncludeContainingType);
+        private static readonly SymbolDisplayFormat MethodDisplayFormat = new(
+            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
+            memberOptions: SymbolDisplayMemberOptions.IncludeContainingType
+        );
 
         /// <summary>
         /// Set ourselves as an implicit invocation of FindReferences.  This will cause the finding operation to operate
@@ -37,20 +38,31 @@ namespace Microsoft.CodeAnalysis.CodeLens
             FindReferencesSearchOptions.Default with
             {
                 Explicit = false,
-                UnidirectionalHierarchyCascade = true
+                UnidirectionalHierarchyCascade = true,
             };
 
-        private static async Task<T?> FindAsync<T>(Solution solution, DocumentId documentId, SyntaxNode syntaxNode,
-            Func<CodeLensFindReferencesProgress, Task<T>> onResults, Func<CodeLensFindReferencesProgress, Task<T>> onCapped,
-            int searchCap, CancellationToken cancellationToken) where T : struct
+        private static async Task<T?> FindAsync<T>(
+            Solution solution,
+            DocumentId documentId,
+            SyntaxNode syntaxNode,
+            Func<CodeLensFindReferencesProgress, Task<T>> onResults,
+            Func<CodeLensFindReferencesProgress, Task<T>> onCapped,
+            int searchCap,
+            CancellationToken cancellationToken
+        )
+            where T : struct
         {
-            var document = await solution.GetDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken).ConfigureAwait(false);
+            var document = await solution
+                .GetDocumentAsync(documentId, includeSourceGenerated: true, cancellationToken)
+                .ConfigureAwait(false);
             if (document == null)
             {
                 return null;
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -60,11 +72,24 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 return null;
             }
 
-            using var progress = new CodeLensFindReferencesProgress(symbol, syntaxNode, searchCap, cancellationToken);
+            using var progress = new CodeLensFindReferencesProgress(
+                symbol,
+                syntaxNode,
+                searchCap,
+                cancellationToken
+            );
             try
             {
-                await SymbolFinder.FindReferencesAsync(
-                    symbol, solution, progress, documents: null, s_nonParallelSearch, progress.CancellationToken).ConfigureAwait(false);
+                await SymbolFinder
+                    .FindReferencesAsync(
+                        symbol,
+                        solution,
+                        progress,
+                        documents: null,
+                        s_nonParallelSearch,
+                        progress.CancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 return await onResults(progress).ConfigureAwait(false);
             }
@@ -82,24 +107,65 @@ namespace Microsoft.CodeAnalysis.CodeLens
             }
         }
 
-        public async ValueTask<VersionStamp> GetProjectCodeLensVersionAsync(Solution solution, ProjectId projectId, CancellationToken cancellationToken)
+        public async ValueTask<VersionStamp> GetProjectCodeLensVersionAsync(
+            Solution solution,
+            ProjectId projectId,
+            CancellationToken cancellationToken
+        )
         {
-            return await solution.GetRequiredProject(projectId).GetDependentVersionAsync(cancellationToken).ConfigureAwait(false);
+            return await solution
+                .GetRequiredProject(projectId)
+                .GetDependentVersionAsync(cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        public async Task<ReferenceCount?> GetReferenceCountAsync(Solution solution, DocumentId documentId, SyntaxNode syntaxNode, int maxSearchResults, CancellationToken cancellationToken)
+        public async Task<ReferenceCount?> GetReferenceCountAsync(
+            Solution solution,
+            DocumentId documentId,
+            SyntaxNode syntaxNode,
+            int maxSearchResults,
+            CancellationToken cancellationToken
+        )
         {
-            var projectVersion = await GetProjectCodeLensVersionAsync(solution, documentId.ProjectId, cancellationToken).ConfigureAwait(false);
-            return await FindAsync(solution, documentId, syntaxNode,
-                progress => Task.FromResult(new ReferenceCount(
-                    progress.SearchCap > 0
-                        ? Math.Min(progress.ReferencesCount, progress.SearchCap)
-                        : progress.ReferencesCount, progress.SearchCapReached, projectVersion.ToString())),
-                progress => Task.FromResult(new ReferenceCount(progress.SearchCap, IsCapped: true, projectVersion.ToString())),
-                maxSearchResults, cancellationToken).ConfigureAwait(false);
+            var projectVersion = await GetProjectCodeLensVersionAsync(
+                    solution,
+                    documentId.ProjectId,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return await FindAsync(
+                    solution,
+                    documentId,
+                    syntaxNode,
+                    progress =>
+                        Task.FromResult(
+                            new ReferenceCount(
+                                progress.SearchCap > 0
+                                    ? Math.Min(progress.ReferencesCount, progress.SearchCap)
+                                    : progress.ReferencesCount,
+                                progress.SearchCapReached,
+                                projectVersion.ToString()
+                            )
+                        ),
+                    progress =>
+                        Task.FromResult(
+                            new ReferenceCount(
+                                progress.SearchCap,
+                                IsCapped: true,
+                                projectVersion.ToString()
+                            )
+                        ),
+                    maxSearchResults,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private static async Task<ReferenceLocationDescriptor> GetDescriptorOfEnclosingSymbolAsync(Solution solution, Location location, CancellationToken cancellationToken)
+        private static async Task<ReferenceLocationDescriptor> GetDescriptorOfEnclosingSymbolAsync(
+            Solution solution,
+            Location location,
+            CancellationToken cancellationToken
+        )
         {
             var document = solution.GetDocument(location.SourceTree);
 
@@ -108,17 +174,33 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 return null;
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var langServices = document.GetLanguageService<ICodeLensDisplayInfoService>();
             if (langServices == null)
             {
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Unsupported language '{0}'", semanticModel.Language), nameof(semanticModel));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        "Unsupported language '{0}'",
+                        semanticModel.Language
+                    ),
+                    nameof(semanticModel)
+                );
             }
 
             var position = location.SourceSpan.Start;
-            var token = (await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)).FindToken(position, true);
-            var node = GetEnclosingCodeElementNode(document, token, langServices, cancellationToken);
+            var token = (
+                await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false)
+            ).FindToken(position, true);
+            var node = GetEnclosingCodeElementNode(
+                document,
+                token,
+                langServices,
+                cancellationToken
+            );
             var longName = langServices.GetDisplayName(semanticModel, node);
 
             // get the full line of source text on the line that contains this position
@@ -131,16 +213,22 @@ namespace Microsoft.CodeAnalysis.CodeLens
             var spanStart = token.Span.Start - textLine.Span.Start;
             var line = textLine.ToString();
 
-            var beforeLine1 = textLine.LineNumber > 0 ? text.Lines[textLine.LineNumber - 1].ToString() : string.Empty;
-            var beforeLine2 = textLine.LineNumber - 1 > 0
-                ? text.Lines[textLine.LineNumber - 2].ToString()
-                : string.Empty;
-            var afterLine1 = textLine.LineNumber < text.Lines.Count - 1
-                ? text.Lines[textLine.LineNumber + 1].ToString()
-                : string.Empty;
-            var afterLine2 = textLine.LineNumber + 1 < text.Lines.Count - 1
-                ? text.Lines[textLine.LineNumber + 2].ToString()
-                : string.Empty;
+            var beforeLine1 =
+                textLine.LineNumber > 0
+                    ? text.Lines[textLine.LineNumber - 1].ToString()
+                    : string.Empty;
+            var beforeLine2 =
+                textLine.LineNumber - 1 > 0
+                    ? text.Lines[textLine.LineNumber - 2].ToString()
+                    : string.Empty;
+            var afterLine1 =
+                textLine.LineNumber < text.Lines.Count - 1
+                    ? text.Lines[textLine.LineNumber + 1].ToString()
+                    : string.Empty;
+            var afterLine2 =
+                textLine.LineNumber + 1 < text.Lines.Count - 1
+                    ? text.Lines[textLine.LineNumber + 2].ToString()
+                    : string.Empty;
             var referenceSpan = new TextSpan(spanStart, token.Span.Length);
 
             var symbol = semanticModel.GetDeclaredSymbol(node, cancellationToken);
@@ -165,10 +253,16 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 beforeLine1.TrimEnd(),
                 beforeLine2.TrimEnd(),
                 afterLine1.TrimEnd(),
-                afterLine2.TrimEnd());
+                afterLine2.TrimEnd()
+            );
         }
 
-        private static SyntaxNode GetEnclosingCodeElementNode(Document document, SyntaxToken token, ICodeLensDisplayInfoService langServices, CancellationToken cancellationToken)
+        private static SyntaxNode GetEnclosingCodeElementNode(
+            Document document,
+            SyntaxToken token,
+            ICodeLensDisplayInfoService langServices,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFactsService = document.GetLanguageService<ISyntaxFactsService>();
 
@@ -183,9 +277,11 @@ namespace Microsoft.CodeAnalysis.CodeLens
                     var parentTrivia = structuredTriviaSyntax.ParentTrivia;
                     node = parentTrivia.Token.Parent;
                 }
-                else if (syntaxFactsService.IsDeclaration(node) ||
-                         syntaxFactsService.IsUsingOrExternOrImport(node) ||
-                         syntaxFactsService.IsGlobalAssemblyAttribute(node))
+                else if (
+                    syntaxFactsService.IsDeclaration(node)
+                    || syntaxFactsService.IsUsingOrExternOrImport(node)
+                    || syntaxFactsService.IsGlobalAssemblyAttribute(node)
+                )
                 {
                     break;
                 }
@@ -200,24 +296,50 @@ namespace Microsoft.CodeAnalysis.CodeLens
             return langServices.GetDisplayNode(node);
         }
 
-        public async Task<ImmutableArray<ReferenceLocationDescriptor>?> FindReferenceLocationsAsync(Solution solution, DocumentId documentId, SyntaxNode syntaxNode, CancellationToken cancellationToken)
+        public async Task<ImmutableArray<ReferenceLocationDescriptor>?> FindReferenceLocationsAsync(
+            Solution solution,
+            DocumentId documentId,
+            SyntaxNode syntaxNode,
+            CancellationToken cancellationToken
+        )
         {
-            return await FindAsync(solution, documentId, syntaxNode,
-                async progress =>
-                {
-                    var referenceTasks = progress.Locations
-                        .Select(location => GetDescriptorOfEnclosingSymbolAsync(solution, location, cancellationToken))
-                        .ToArray();
+            return await FindAsync(
+                    solution,
+                    documentId,
+                    syntaxNode,
+                    async progress =>
+                    {
+                        var referenceTasks = progress
+                            .Locations.Select(location =>
+                                GetDescriptorOfEnclosingSymbolAsync(
+                                    solution,
+                                    location,
+                                    cancellationToken
+                                )
+                            )
+                            .ToArray();
 
-                    var result = await Task.WhenAll(referenceTasks).ConfigureAwait(false);
+                        var result = await Task.WhenAll(referenceTasks).ConfigureAwait(false);
 
-                    return result.ToImmutableArray();
-                }, onCapped: null, searchCap: 0, cancellationToken: cancellationToken).ConfigureAwait(false);
+                        return result.ToImmutableArray();
+                    },
+                    onCapped: null,
+                    searchCap: 0,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
-        private static ISymbol GetEnclosingMethod(SemanticModel semanticModel, Location location, CancellationToken cancellationToken)
+        private static ISymbol GetEnclosingMethod(
+            SemanticModel semanticModel,
+            Location location,
+            CancellationToken cancellationToken
+        )
         {
-            var enclosingSymbol = semanticModel.GetEnclosingSymbol(location.SourceSpan.Start, cancellationToken);
+            var enclosingSymbol = semanticModel.GetEnclosingSymbol(
+                location.SourceSpan.Start,
+                cancellationToken
+            );
 
             for (var current = enclosingSymbol; current != null; current = current.ContainingSymbol)
             {
@@ -243,7 +365,11 @@ namespace Microsoft.CodeAnalysis.CodeLens
             return null;
         }
 
-        private static async Task<ReferenceMethodDescriptor> TryGetMethodDescriptorAsync(Location commonLocation, Solution solution, CancellationToken cancellationToken)
+        private static async Task<ReferenceMethodDescriptor> TryGetMethodDescriptorAsync(
+            Location commonLocation,
+            Solution solution,
+            CancellationToken cancellationToken
+        )
         {
             var document = solution.GetDocument(commonLocation.SourceTree);
             if (document == null)
@@ -251,34 +377,62 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 return null;
             }
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
-            var fullName = GetEnclosingMethod(semanticModel, commonLocation, cancellationToken)?.ToDisplayString(MethodDisplayFormat);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var fullName = GetEnclosingMethod(semanticModel, commonLocation, cancellationToken)
+                ?.ToDisplayString(MethodDisplayFormat);
 
-            return !string.IsNullOrEmpty(fullName) ? new ReferenceMethodDescriptor(fullName, document.FilePath, document.Project.OutputFilePath) : null;
+            return !string.IsNullOrEmpty(fullName)
+                ? new ReferenceMethodDescriptor(
+                    fullName,
+                    document.FilePath,
+                    document.Project.OutputFilePath
+                )
+                : null;
         }
 
-        public Task<ImmutableArray<ReferenceMethodDescriptor>?> FindReferenceMethodsAsync(Solution solution, DocumentId documentId, SyntaxNode syntaxNode, CancellationToken cancellationToken)
+        public Task<ImmutableArray<ReferenceMethodDescriptor>?> FindReferenceMethodsAsync(
+            Solution solution,
+            DocumentId documentId,
+            SyntaxNode syntaxNode,
+            CancellationToken cancellationToken
+        )
         {
-            return FindAsync(solution, documentId, syntaxNode,
+            return FindAsync(
+                solution,
+                documentId,
+                syntaxNode,
                 async progress =>
                 {
-                    var descriptorTasks =
-                        progress.Locations
-                        .Select(location => TryGetMethodDescriptorAsync(location, solution, cancellationToken))
+                    var descriptorTasks = progress
+                        .Locations.Select(location =>
+                            TryGetMethodDescriptorAsync(location, solution, cancellationToken)
+                        )
                         .ToArray();
 
                     var result = await Task.WhenAll(descriptorTasks).ConfigureAwait(false);
 
                     return result.OfType<ReferenceMethodDescriptor>().ToImmutableArray();
-                }, onCapped: null, searchCap: 0, cancellationToken: cancellationToken);
+                },
+                onCapped: null,
+                searchCap: 0,
+                cancellationToken: cancellationToken
+            );
         }
 
-        public async Task<string> GetFullyQualifiedNameAsync(Solution solution, DocumentId documentId, SyntaxNode syntaxNode,
-            CancellationToken cancellationToken)
+        public async Task<string> GetFullyQualifiedNameAsync(
+            Solution solution,
+            DocumentId documentId,
+            SyntaxNode syntaxNode,
+            CancellationToken cancellationToken
+        )
         {
             var document = solution.GetDocument(syntaxNode.GetLocation().SourceTree);
 
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             var declaredSymbol = semanticModel.GetDeclaredSymbol(syntaxNode, cancellationToken);
 
             if (declaredSymbol == null)
@@ -297,9 +451,11 @@ namespace Microsoft.CodeAnalysis.CodeLens
                 for (var index = 0; index < parts.Length; index++)
                 {
                     var part = parts[index];
-                    if (previousWasClass &&
-                        part.Kind == SymbolDisplayPartKind.Punctuation &&
-                        index < parts.Length - 1)
+                    if (
+                        previousWasClass
+                        && part.Kind == SymbolDisplayPartKind.Punctuation
+                        && index < parts.Length - 1
+                    )
                     {
                         switch (parts[index + 1].Kind)
                         {
@@ -324,11 +480,13 @@ namespace Microsoft.CodeAnalysis.CodeLens
                         actualBuilder.Append(part);
                     }
 
-                    previousWasClass = part.Kind is SymbolDisplayPartKind.ClassName or
-                                       SymbolDisplayPartKind.RecordClassName or
-                                       SymbolDisplayPartKind.InterfaceName or
-                                       SymbolDisplayPartKind.StructName or
-                                       SymbolDisplayPartKind.RecordStructName;
+                    previousWasClass =
+                        part.Kind
+                            is SymbolDisplayPartKind.ClassName
+                                or SymbolDisplayPartKind.RecordClassName
+                                or SymbolDisplayPartKind.InterfaceName
+                                or SymbolDisplayPartKind.StructName
+                                or SymbolDisplayPartKind.RecordStructName;
                 }
 
                 return actualBuilder.ToString();

@@ -20,24 +20,30 @@ namespace Microsoft.CodeAnalysis.StackTraceExplorer
             StackFrameSimpleNameNode methodNode,
             StackFrameParameterList methodArguments,
             StackFrameTypeArgumentList? methodTypeArguments,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (methodNode is not StackFrameLocalMethodNameNode localMethodNameNode)
             {
                 return null;
             }
 
-            var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (compilation is null)
             {
                 return null;
             }
 
-            var containingMethodName = localMethodNameNode.EncapsulatingMethod.Identifier.ToString();
+            var containingMethodName =
+                localMethodNameNode.EncapsulatingMethod.Identifier.ToString();
             var semanticFacts = project.GetRequiredLanguageService<ISemanticFactsService>();
             var candidateFunctions = type.GetMembers()
                 .Where(member => member.Name == containingMethodName)
-                .SelectMany(member => semanticFacts.GetLocalFunctionSymbols(compilation, member, cancellationToken))
+                .SelectMany(member =>
+                    semanticFacts.GetLocalFunctionSymbols(compilation, member, cancellationToken)
+                )
                 .ToImmutableArray();
 
             return TryGetBestMatch(candidateFunctions, methodTypeArguments, methodArguments);

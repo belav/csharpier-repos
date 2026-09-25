@@ -14,7 +14,11 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             int rows = 20;
-            var dataSource = new PreComputedGridDataSource(new WebGrid(GetContext()), values: Enumerable.Range(0, 10).Cast<dynamic>(), totalRows: rows);
+            var dataSource = new PreComputedGridDataSource(
+                new WebGrid(GetContext()),
+                values: Enumerable.Range(0, 10).Cast<dynamic>(),
+                totalRows: rows
+            );
 
             // Act and Assert
             Assert.Equal(rows, dataSource.TotalRowCount);
@@ -25,7 +29,11 @@ namespace System.Web.Helpers.Test
         {
             // Arrange
             var grid = new WebGrid(GetContext());
-            var dataSource = new PreComputedGridDataSource(grid: grid, values: Enumerable.Range(0, 10).Cast<dynamic>(), totalRows: 10);
+            var dataSource = new PreComputedGridDataSource(
+                grid: grid,
+                values: Enumerable.Range(0, 10).Cast<dynamic>(),
+                totalRows: 10
+            );
 
             // Act
             var rows = dataSource.GetRows(new SortInfo { SortColumn = String.Empty }, 0);

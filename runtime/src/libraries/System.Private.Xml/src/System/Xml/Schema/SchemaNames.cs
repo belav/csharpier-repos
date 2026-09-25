@@ -80,6 +80,7 @@ namespace System.Xml.Schema
         public XmlQualifiedName QnDtMin;
         public XmlQualifiedName QnDtMinExclusive;
         public XmlQualifiedName QnDtMaxExclusive;
+
         // For XSD Schema
         public XmlQualifiedName QnTargetNamespace;
         public XmlQualifiedName QnVersion;
@@ -173,7 +174,6 @@ namespace System.Xml.Schema
             XsiNoNamespaceSchemaLocation = nameTable.Add("noNamespaceSchemaLocation");
             XsdSchema = nameTable.Add("schema");
             XdrSchema = nameTable.Add("Schema");
-
 
             QnPCData = new XmlQualifiedName(nameTable.Add("#PCDATA"));
             QnXml = new XmlQualifiedName(nameTable.Add("xml"));
@@ -593,7 +593,7 @@ namespace System.Xml.Schema
             SchemaItemType,
             SchemaMemberTypes,
             SchemaXPath,
-            XmlLang
+            XmlLang,
         };
     };
 }

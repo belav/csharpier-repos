@@ -16,15 +16,15 @@ namespace System.IO.Compression
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
         internal struct ZStream
         {
-            internal IntPtr nextIn;  //Bytef    *next_in;  /* next input byte */
+            internal IntPtr nextIn; //Bytef    *next_in;  /* next input byte */
             internal IntPtr nextOut; //Bytef    *next_out; /* next output byte should be put there */
 
-            internal IntPtr msg;     //char     *msg;      /* last error message, NULL if no error */
+            internal IntPtr msg; //char     *msg;      /* last error message, NULL if no error */
 
-            private readonly IntPtr internalState;    //internal state that is not visible to managed code
+            private readonly IntPtr internalState; //internal state that is not visible to managed code
 
-            internal uint availIn;   //uInt     avail_in;  /* number of bytes available at next_in */
-            internal uint availOut;  //uInt     avail_out; /* remaining free space at next_out */
+            internal uint availIn; //uInt     avail_in;  /* number of bytes available at next_in */
+            internal uint availOut; //uInt     avail_out; /* remaining free space at next_out */
         }
     }
 }

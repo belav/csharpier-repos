@@ -5,53 +5,86 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class ComplexNavigationsQuerySqliteTest : ComplexNavigationsQueryRelationalTestBase<ComplexNavigationsQuerySqliteFixture>
+public class ComplexNavigationsQuerySqliteTest
+    : ComplexNavigationsQueryRelationalTestBase<ComplexNavigationsQuerySqliteFixture>
 {
     public ComplexNavigationsQuerySqliteTest(ComplexNavigationsQuerySqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public override async Task Let_let_contains_from_outer_let(bool async)
-        => Assert.Equal(
+    public override async Task Let_let_contains_from_outer_let(bool async) =>
+        Assert.Equal(
             SqliteStrings.ApplyNotSupported,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Let_let_contains_from_outer_let(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Let_let_contains_from_outer_let(async)
+                )
+            ).Message
+        );
 
-    public override async Task Prune_does_not_throw_null_ref(bool async)
-        => Assert.Equal(
+    public override async Task Prune_does_not_throw_null_ref(bool async) =>
+        Assert.Equal(
             SqliteStrings.ApplyNotSupported,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Prune_does_not_throw_null_ref(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Prune_does_not_throw_null_ref(async)
+                )
+            ).Message
+        );
 
-    public override async Task Join_with_result_selector_returning_queryable_throws_validation_error(bool async)
-        => Assert.Equal(
+    public override async Task Join_with_result_selector_returning_queryable_throws_validation_error(
+        bool async
+    ) =>
+        Assert.Equal(
             SqliteStrings.ApplyNotSupported,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Join_with_result_selector_returning_queryable_throws_validation_error(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Join_with_result_selector_returning_queryable_throws_validation_error(
+                        async
+                    )
+                )
+            ).Message
+        );
 
-    public override async Task Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(bool async)
-        => Assert.Equal(
+    public override async Task Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
+        bool async
+    ) =>
+        Assert.Equal(
             SqliteStrings.ApplyNotSupported,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.Nested_SelectMany_correlated_with_join_table_correctly_translated_to_apply(
+                        async
+                    )
+                )
+            ).Message
+        );
 
-    public override Task GroupJoin_client_method_in_OrderBy(bool async)
-        => AssertTranslationFailedWithDetails(
+    public override Task GroupJoin_client_method_in_OrderBy(bool async) =>
+        AssertTranslationFailedWithDetails(
             () => base.GroupJoin_client_method_in_OrderBy(async),
             CoreStrings.QueryUnableToTranslateMethod(
                 "Microsoft.EntityFrameworkCore.Query.ComplexNavigationsQueryTestBase<Microsoft.EntityFrameworkCore.Query.ComplexNavigationsQuerySqliteFixture>",
-                "ClientMethodNullableInt"));
+                "ClientMethodNullableInt"
+            )
+        );
 
-    public override async Task GroupJoin_with_subquery_on_inner(bool async)
-        => Assert.Equal(
+    public override async Task GroupJoin_with_subquery_on_inner(bool async) =>
+        Assert.Equal(
             SqliteStrings.ApplyNotSupported,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.GroupJoin_with_subquery_on_inner(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.GroupJoin_with_subquery_on_inner(async)
+                )
+            ).Message
+        );
 
-    public override async Task GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(bool async)
-        => Assert.Equal(
+    public override async Task GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(bool async) =>
+        Assert.Equal(
             SqliteStrings.ApplyNotSupported,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    base.GroupJoin_with_subquery_on_inner_and_no_DefaultIfEmpty(async)
+                )
+            ).Message
+        );
 }

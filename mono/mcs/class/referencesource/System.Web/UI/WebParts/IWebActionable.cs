@@ -4,12 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
 
-    public interface IWebActionable {
-
+    public interface IWebActionable
+    {
         WebPartVerbCollection Verbs { get; }
     }
 }

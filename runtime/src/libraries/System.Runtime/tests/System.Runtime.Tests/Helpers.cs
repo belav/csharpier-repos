@@ -30,10 +30,18 @@ namespace System.Tests
             if (s_refEmitType == null)
             {
                 AssemblyName assemblyName = new AssemblyName("AssemblyName");
-                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
-                ModuleBuilder mboduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyName.Name);
+                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                    assemblyName,
+                    AssemblyBuilderAccess.Run
+                );
+                ModuleBuilder mboduleBuilder = assemblyBuilder.DefineDynamicModule(
+                    assemblyName.Name
+                );
 
-                TypeBuilder typeBuilder = mboduleBuilder.DefineType("TestType", TypeAttributes.Public);
+                TypeBuilder typeBuilder = mboduleBuilder.DefineType(
+                    "TestType",
+                    TypeAttributes.Public
+                );
 
                 GenericTypeParameterBuilder[] typeParams = typeBuilder.DefineGenericParameters("T");
                 s_refEmitType = typeParams[0].UnderlyingSystemType;

@@ -8,14 +8,18 @@ namespace System.Diagnostics.CodeAnalysis
     /// enclosed methods and properties from code coverage collection.
     /// </summary>
     [AttributeUsage(
-        AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Constructor | AttributeTargets.Event | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Struct,
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Constructor
+            | AttributeTargets.Event
+            | AttributeTargets.Method
+            | AttributeTargets.Property
+            | AttributeTargets.Struct,
         Inherited = false,
         AllowMultiple = false
     )]
     public sealed class ExcludeFromCodeCoverageAttribute : Attribute
     {
-        public ExcludeFromCodeCoverageAttribute()
-        {
-        }
+        public ExcludeFromCodeCoverageAttribute() { }
     }
 }

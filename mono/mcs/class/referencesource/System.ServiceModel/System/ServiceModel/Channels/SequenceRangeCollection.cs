@@ -6,8 +6,8 @@ namespace System.ServiceModel.Channels
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.Serialization;
-    using System.Text;
     using System.ServiceModel;
+    using System.Text;
 
     abstract class SequenceRangeCollection
     {
@@ -20,10 +20,7 @@ namespace System.ServiceModel.Channels
 
         public static SequenceRangeCollection Empty
         {
-            get
-            {
-                return empty;
-            }
+            get { return empty; }
         }
 
         public abstract bool Contains(Int64 number);
@@ -47,7 +44,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static SequenceRangeCollection GeneralMerge(SequenceRange[] sortedRanges, SequenceRange range)
+        static SequenceRangeCollection GeneralMerge(
+            SequenceRange[] sortedRanges,
+            SequenceRange range
+        )
         {
             if (sortedRanges.Length == 0)
             {
@@ -74,7 +74,11 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                lowerBound = Array.BinarySearch(sortedRanges, new SequenceRange(range.Lower), upperComparer);
+                lowerBound = Array.BinarySearch(
+                    sortedRanges,
+                    new SequenceRange(range.Lower),
+                    upperComparer
+                );
             }
 
             if (lowerBound < 0)
@@ -115,7 +119,11 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                upperBound = Array.BinarySearch(sortedRanges, new SequenceRange(range.Upper), lowerComparer);
+                upperBound = Array.BinarySearch(
+                    sortedRanges,
+                    new SequenceRange(range.Upper),
+                    lowerComparer
+                );
             }
 
             if (upperBound < 0)
@@ -124,7 +132,10 @@ namespace System.ServiceModel.Channels
 
                 if (upperBound > 0)
                 {
-                    if ((upperBound == sortedRanges.Length) || (sortedRanges[upperBound].Lower != range.Upper + 1))
+                    if (
+                        (upperBound == sortedRanges.Length)
+                        || (sortedRanges[upperBound].Lower != range.Upper + 1)
+                    )
                     {
                         upperBound--;
                     }
@@ -138,8 +149,14 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            Int64 newLower = (range.Lower < sortedRanges[lowerBound].Lower) ? range.Lower : sortedRanges[lowerBound].Lower;
-            Int64 newUpper = (range.Upper > sortedRanges[upperBound].Upper) ? range.Upper : sortedRanges[upperBound].Upper;
+            Int64 newLower =
+                (range.Lower < sortedRanges[lowerBound].Lower)
+                    ? range.Lower
+                    : sortedRanges[lowerBound].Lower;
+            Int64 newUpper =
+                (range.Upper > sortedRanges[upperBound].Upper)
+                    ? range.Upper
+                    : sortedRanges[upperBound].Upper;
 
             int rangesRemoved = upperBound - lowerBound + 1;
             int rangesRemaining = sortedRanges.Length - rangesRemoved + 1;
@@ -152,7 +169,13 @@ namespace System.ServiceModel.Channels
                 SequenceRange[] returnedRanges = new SequenceRange[rangesRemaining];
                 Array.Copy(sortedRanges, returnedRanges, lowerBound);
                 returnedRanges[lowerBound] = new SequenceRange(newLower, newUpper);
-                Array.Copy(sortedRanges, upperBound + 1, returnedRanges, lowerBound + 1, sortedRanges.Length - upperBound - 1);
+                Array.Copy(
+                    sortedRanges,
+                    upperBound + 1,
+                    returnedRanges,
+                    lowerBound + 1,
+                    sortedRanges.Length - upperBound - 1
+                );
                 return GeneralCreate(returnedRanges);
             }
         }
@@ -180,16 +203,15 @@ namespace System.ServiceModel.Channels
             {
                 get
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("index")
+                    );
                 }
             }
 
             public override int Count
             {
-                get
-                {
-                    return 0;
-                }
+                get { return 0; }
             }
 
             public override bool Contains(Int64 number)
@@ -222,18 +244,20 @@ namespace System.ServiceModel.Channels
                 get
                 {
                     if (index < 0 || index >= ranges.Length)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index", index,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, ranges.Length - 1)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException(
+                                "index",
+                                index,
+                                SR.GetString(SR.ValueMustBeInRange, 0, ranges.Length - 1)
+                            )
+                        );
                     return this.ranges[index];
                 }
             }
 
             public override int Count
             {
-                get
-                {
-                    return this.ranges.Length;
-                }
+                get { return this.ranges.Length; }
             }
 
             public override bool Contains(Int64 number)
@@ -295,17 +319,16 @@ namespace System.ServiceModel.Channels
                 get
                 {
                     if (index != 0)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("index")
+                        );
                     return this.range;
                 }
             }
 
             public override int Count
             {
-                get
-                {
-                    return 1;
-                }
+                get { return 1; }
             }
 
             public override bool Contains(Int64 number)

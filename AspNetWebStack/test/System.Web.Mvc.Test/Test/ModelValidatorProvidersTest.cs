@@ -16,11 +16,13 @@ namespace System.Web.Mvc.Test
             {
                 typeof(DataAnnotationsModelValidatorProvider),
                 typeof(DataErrorInfoModelValidatorProvider),
-                typeof(ClientDataTypeModelValidatorProvider)
+                typeof(ClientDataTypeModelValidatorProvider),
             };
 
             // Act
-            Type[] actualTypes = ModelValidatorProviders.Providers.Select(p => p.GetType()).ToArray();
+            Type[] actualTypes = ModelValidatorProviders
+                .Providers.Select(p => p.GetType())
+                .ToArray();
 
             // Assert
             Assert.Equal(expectedTypes, actualTypes);

@@ -29,12 +29,26 @@ namespace Roslyn.Test.Utilities
     {
         public static void Equal(string expected, string actual)
         {
-            Equal(XElement.Parse(expected), XElement.Parse(actual), message: null, expectedValueSourcePath: null, expectedValueSourceLine: 0, expectedIsXmlLiteral: true);
+            Equal(
+                XElement.Parse(expected),
+                XElement.Parse(actual),
+                message: null,
+                expectedValueSourcePath: null,
+                expectedValueSourceLine: 0,
+                expectedIsXmlLiteral: true
+            );
         }
 
         public static void Equal(XElement expected, XElement actual)
         {
-            Equal(expected, actual, message: null, expectedValueSourcePath: null, expectedValueSourceLine: 0, expectedIsXmlLiteral: false);
+            Equal(
+                expected,
+                actual,
+                message: null,
+                expectedValueSourcePath: null,
+                expectedValueSourceLine: 0,
+                expectedIsXmlLiteral: false
+            );
         }
 
         /// <summary>
@@ -46,19 +60,31 @@ namespace Roslyn.Test.Utilities
             string message,
             string expectedValueSourcePath,
             int expectedValueSourceLine,
-            bool expectedIsXmlLiteral)
+            bool expectedIsXmlLiteral
+        )
         {
-            if (!CheckEqual(expectedRoot, actualRoot, ShallowElementComparer.Instance, out var firstMismatch))
+            if (
+                !CheckEqual(
+                    expectedRoot,
+                    actualRoot,
+                    ShallowElementComparer.Instance,
+                    out var firstMismatch
+                )
+            )
             {
-                Assert.True(false, message +
-                    GetAssertText(
-                        GetXmlString(expectedRoot, expectedIsXmlLiteral),
-                        GetXmlString(actualRoot, expectedIsXmlLiteral),
-                        expectedRoot,
-                        firstMismatch,
-                        expectedValueSourcePath,
-                        expectedValueSourceLine,
-                        expectedIsXmlLiteral));
+                Assert.True(
+                    false,
+                    message
+                        + GetAssertText(
+                            GetXmlString(expectedRoot, expectedIsXmlLiteral),
+                            GetXmlString(actualRoot, expectedIsXmlLiteral),
+                            expectedRoot,
+                            firstMismatch,
+                            expectedValueSourcePath,
+                            expectedValueSourceLine,
+                            expectedIsXmlLiteral
+                        )
+                );
             }
         }
 
@@ -70,7 +96,7 @@ namespace Roslyn.Test.Utilities
                 {
                     IndentChars = expectedIsXmlLiteral ? "    " : "  ",
                     OmitXmlDeclaration = true,
-                    Indent = true
+                    Indent = true,
                 };
 
                 using (var w = XmlWriter.Create(sw, ws))
@@ -92,14 +118,27 @@ namespace Roslyn.Test.Utilities
             Tuple<XElement, XElement> firstMismatch,
             string expectedValueSourcePath,
             int expectedValueSourceLine,
-            bool expectedIsXmlLiteral)
+            bool expectedIsXmlLiteral
+        )
         {
             StringBuilder assertText = new StringBuilder();
 
-            string actualString = expectedIsXmlLiteral ? actual.Replace(" />\r\n", "/>\r\n") : string.Format("@\"{0}\"", actual.Replace("\"", "\"\""));
-            string expectedString = expectedIsXmlLiteral ? expected.Replace(" />\r\n", "/>\r\n") : string.Format("@\"{0}\"", expected.Replace("\"", "\"\""));
+            string actualString = expectedIsXmlLiteral
+                ? actual.Replace(" />\r\n", "/>\r\n")
+                : string.Format("@\"{0}\"", actual.Replace("\"", "\"\""));
+            string expectedString = expectedIsXmlLiteral
+                ? expected.Replace(" />\r\n", "/>\r\n")
+                : string.Format("@\"{0}\"", expected.Replace("\"", "\"\""));
 
-            if (AssertEx.TryGenerateExpectedSourceFileAndGetDiffLink(actualString, expectedString.Count(c => c == '\n') + 1, expectedValueSourcePath, expectedValueSourceLine, out var link))
+            if (
+                AssertEx.TryGenerateExpectedSourceFileAndGetDiffLink(
+                    actualString,
+                    expectedString.Count(c => c == '\n') + 1,
+                    expectedValueSourcePath,
+                    expectedValueSourceLine,
+                    out var link
+                )
+            )
             {
                 assertText.AppendLine(link);
             }
@@ -137,13 +176,21 @@ namespace Roslyn.Test.Utilities
         /// Compare the root elements and, if they are equal, match up children by shallow equality, recursing on each pair.
         /// </summary>
         /// <returns>True if the elements are equal, false otherwise (in which case, firstMismatch will try to indicate a point of disagreement).</returns>
-        private static bool CheckEqual(XElement expectedRoot, XElement actualRoot, IEqualityComparer<XElement> shallowComparer, out Tuple<XElement, XElement> firstMismatch)
+        private static bool CheckEqual(
+            XElement expectedRoot,
+            XElement actualRoot,
+            IEqualityComparer<XElement> shallowComparer,
+            out Tuple<XElement, XElement> firstMismatch
+        )
         {
             Assert.NotNull(expectedRoot);
             Assert.NotNull(actualRoot);
             Assert.NotNull(shallowComparer);
 
-            Tuple<XElement, XElement> rootPair = new Tuple<XElement, XElement>(expectedRoot, actualRoot);
+            Tuple<XElement, XElement> rootPair = new Tuple<XElement, XElement>(
+                expectedRoot,
+                actualRoot
+            );
 
             if (!shallowComparer.Equals(expectedRoot, actualRoot))
             {
@@ -161,7 +208,10 @@ namespace Roslyn.Test.Utilities
                 Debug.Assert(shallowComparer.Equals(pair.Item1, pair.Item2)); // Shouldn't have been pushed otherwise.
 
                 XElement[] children1 = pair.Item1.Elements().ToArray();
-                MultiDictionary<XElement, XElement> children2Dict = new MultiDictionary<XElement, XElement>(shallowComparer);
+                MultiDictionary<XElement, XElement> children2Dict = new MultiDictionary<
+                    XElement,
+                    XElement
+                >(shallowComparer);
 
                 int children2Count = 0;
                 foreach (XElement child in pair.Item2.Elements())
@@ -175,7 +225,9 @@ namespace Roslyn.Test.Utilities
                     return false;
                 }
 
-                HashSet<XElement> children2Used = new HashSet<XElement>(ReferenceEqualityComparer.Instance);
+                HashSet<XElement> children2Used = new HashSet<XElement>(
+                    ReferenceEqualityComparer.Instance
+                );
                 foreach (XElement child1 in children1)
                 {
                     XElement child2 = null;
@@ -211,7 +263,8 @@ namespace Roslyn.Test.Utilities
 
         private class ShallowElementComparer : IEqualityComparer<XElement>
         {
-            public static readonly IEqualityComparer<XElement> Instance = new ShallowElementComparer();
+            public static readonly IEqualityComparer<XElement> Instance =
+                new ShallowElementComparer();
 
             private ShallowElementComparer() { }
 
@@ -236,7 +289,8 @@ namespace Roslyn.Test.Utilities
         /// </summary>
         private class NameAndAttributeComparer : IEqualityComparer<XElement>
         {
-            public static readonly IEqualityComparer<XElement> Instance = new NameAndAttributeComparer();
+            public static readonly IEqualityComparer<XElement> Instance =
+                new NameAndAttributeComparer();
 
             private NameAndAttributeComparer() { }
 
@@ -250,8 +304,12 @@ namespace Roslyn.Test.Utilities
                     return false;
                 }
 
-                IEnumerable<Tuple<XName, string>> attributes1 = element1.Attributes().Select(MakeAttributeTuple);
-                IEnumerable<Tuple<XName, string>> attributes2 = element2.Attributes().Select(MakeAttributeTuple);
+                IEnumerable<Tuple<XName, string>> attributes1 = element1
+                    .Attributes()
+                    .Select(MakeAttributeTuple);
+                IEnumerable<Tuple<XName, string>> attributes2 = element2
+                    .Attributes()
+                    .Select(MakeAttributeTuple);
 
                 return attributes1.SetEquals(attributes2);
             }

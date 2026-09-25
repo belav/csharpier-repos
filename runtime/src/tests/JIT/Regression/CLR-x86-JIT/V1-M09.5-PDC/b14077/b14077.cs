@@ -7,7 +7,7 @@ using Xunit;
 public class Test
 {
     [Fact]
-    static public int TestEntryPoint()
+    public static int TestEntryPoint()
     {
         bool b1 = Double.IsPositiveInfinity(Math.Exp(Double.PositiveInfinity));
         bool b2 = 0 == Math.Exp(Double.NegativeInfinity);

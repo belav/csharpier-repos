@@ -7,7 +7,7 @@ namespace System.ServiceModel.Diagnostics
     using System;
     using System.Runtime.Diagnostics;
     using System.Xml;
- 
+
     class HttpErrorTraceRecord : TraceRecord
     {
         string html;

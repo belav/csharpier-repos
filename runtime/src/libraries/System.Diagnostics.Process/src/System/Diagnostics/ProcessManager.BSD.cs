@@ -19,7 +19,9 @@ namespace System.Diagnostics
 
             // Iterate through all process IDs to load information about each process
             int[] pids = GetProcessIds(machineName);
-            var processes = new ArrayBuilder<ProcessInfo>(processNameFilter is null ? pids.Length : 0);
+            var processes = new ArrayBuilder<ProcessInfo>(
+                processNameFilter is null ? pids.Length : 0
+            );
             foreach (int pid in pids)
             {
                 ProcessInfo? pi = CreateProcessInfo(pid, processNameFilter);
@@ -48,7 +50,7 @@ namespace System.Diagnostics
                 {
                     return new ProcessModuleCollection(1)
                     {
-                        new ProcessModule(exePath, Path.GetFileName(exePath))
+                        new ProcessModule(exePath, Path.GetFileName(exePath)),
                     };
                 }
             }

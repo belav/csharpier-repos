@@ -15,12 +15,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     {
         internal static readonly FileContentLoadAnalyzer Instance = new();
 
-        private FileContentLoadAnalyzer()
-        {
-        }
+        private FileContentLoadAnalyzer() { }
 
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
-            => ImmutableArray.Create(WorkspaceDiagnosticDescriptors.ErrorReadingFileContent);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(WorkspaceDiagnosticDescriptors.ErrorReadingFileContent);
 
 #pragma warning disable RS1026 // Enable concurrent execution
 #pragma warning disable RS1025 // Configure generated code analysis

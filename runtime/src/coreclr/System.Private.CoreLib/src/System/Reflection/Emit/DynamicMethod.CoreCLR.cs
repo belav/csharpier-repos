@@ -51,11 +51,16 @@ namespace System.Reflection.Emit
                 // Compile the method since accessibility checks are done as part of compilation
                 GetMethodDescriptor();
                 IRuntimeMethodInfo? methodHandle = _methodHandle;
-                CompileMethod(methodHandle != null ? methodHandle.Value : RuntimeMethodHandleInternal.EmptyHandle);
+                CompileMethod(
+                    methodHandle != null
+                        ? methodHandle.Value
+                        : RuntimeMethodHandleInternal.EmptyHandle
+                );
                 GC.KeepAlive(methodHandle);
             }
 
-            MulticastDelegate d = (MulticastDelegate)Delegate.CreateDelegateNoSecurityCheck(delegateType, target, GetMethodDescriptor());
+            MulticastDelegate d = (MulticastDelegate)
+                Delegate.CreateDelegateNoSecurityCheck(delegateType, target, GetMethodDescriptor());
             // stash this MethodInfo by brute force.
             d.StoreDynamicMethod(this);
             return d;
@@ -75,7 +80,9 @@ namespace System.Reflection.Emit
                         else
                         {
                             if (_ilGenerator == null || _ilGenerator.ILOffset == 0)
-                                throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name));
+                                throw new InvalidOperationException(
+                                    SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name)
+                                );
 
                             _ilGenerator.GetCallableMethod((RuntimeModule)_module, this);
                         }
@@ -88,10 +95,7 @@ namespace System.Reflection.Emit
         private MethodBaseInvoker Invoker
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get
-            {
-                return _invoker ??= new MethodBaseInvoker(this, Signature);
-            }
+            get { return _invoker ??= new MethodBaseInvoker(this, Signature); }
         }
 
         internal Signature Signature
@@ -105,7 +109,12 @@ namespace System.Reflection.Emit
                     Debug.Assert(_methodHandle != null);
                     Debug.Assert(_parameterTypes != null);
 
-                    Signature newSig = new Signature(_methodHandle, _parameterTypes, _returnType, CallingConvention);
+                    Signature newSig = new Signature(
+                        _methodHandle,
+                        _parameterTypes,
+                        _returnType,
+                        CallingConvention
+                    );
                     Volatile.Write(ref _signature, newSig);
                     return newSig;
                 }
@@ -114,7 +123,13 @@ namespace System.Reflection.Emit
             }
         }
 
-        public override object? Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object? Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             if ((CallingConvention & CallingConventions.VarArgs) == CallingConventions.VarArgs)
                 throw new NotSupportedException(SR.NotSupported_CallToVarArg);
@@ -140,15 +155,33 @@ namespace System.Reflection.Emit
                     retValue = Invoker.InvokeWithNoArgs(obj, invokeAttr);
                     break;
                 case 1:
-                    retValue = Invoker.InvokeWithOneArg(obj, invokeAttr, binder, parameters!, culture);
+                    retValue = Invoker.InvokeWithOneArg(
+                        obj,
+                        invokeAttr,
+                        binder,
+                        parameters!,
+                        culture
+                    );
                     break;
                 case 2:
                 case 3:
                 case 4:
-                    retValue = Invoker.InvokeWithFewArgs(obj, invokeAttr, binder, parameters!, culture);
+                    retValue = Invoker.InvokeWithFewArgs(
+                        obj,
+                        invokeAttr,
+                        binder,
+                        parameters!,
+                        culture
+                    );
                     break;
                 default:
-                    retValue = Invoker.InvokeWithManyArgs(obj, invokeAttr, binder, parameters!, culture);
+                    retValue = Invoker.InvokeWithManyArgs(
+                        obj,
+                        invokeAttr,
+                        binder,
+                        parameters!,
+                        culture
+                    );
                     break;
             }
 
@@ -160,8 +193,18 @@ namespace System.Reflection.Emit
         {
             if (_dynamicILInfo == null)
             {
-                byte[] methodSignature = SignatureHelper.GetMethodSigHelper(
-                        null, CallingConvention, ReturnType, null, null, _parameterTypes, null, null).GetSignature(true);
+                byte[] methodSignature = SignatureHelper
+                    .GetMethodSigHelper(
+                        null,
+                        CallingConvention,
+                        ReturnType,
+                        null,
+                        null,
+                        _parameterTypes,
+                        null,
+                        null
+                    )
+                    .GetSignature(true);
                 _dynamicILInfo = new DynamicILInfo(this, methodSignature);
             }
             return _dynamicILInfo;
@@ -171,8 +214,18 @@ namespace System.Reflection.Emit
         {
             if (_ilGenerator == null)
             {
-                byte[] methodSignature = SignatureHelper.GetMethodSigHelper(
-                    null, CallingConvention, ReturnType, null, null, _parameterTypes, null, null).GetSignature(true);
+                byte[] methodSignature = SignatureHelper
+                    .GetMethodSigHelper(
+                        null,
+                        CallingConvention,
+                        ReturnType,
+                        null,
+                        null,
+                        _parameterTypes,
+                        null,
+                        null
+                    )
+                    .GetSignature(true);
                 _ilGenerator = new DynamicILGenerator(this, methodSignature, streamSize);
             }
             return _ilGenerator;

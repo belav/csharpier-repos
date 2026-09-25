@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Description
 {
     using System;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
 
     public class ServiceContractGenerationContext
     {
@@ -16,7 +16,8 @@ namespace System.ServiceModel.Description
         readonly ContractDescription contract;
         readonly CodeTypeDeclaration contractType;
         readonly CodeTypeDeclaration duplexCallbackType;
-        readonly Collection<OperationContractGenerationContext> operations = new Collection<OperationContractGenerationContext>();
+        readonly Collection<OperationContractGenerationContext> operations =
+            new Collection<OperationContractGenerationContext>();
 
         CodeNamespace codeNamespace;
         CodeTypeDeclaration channelType;
@@ -28,21 +29,36 @@ namespace System.ServiceModel.Description
 
         ServiceContractGenerator.CodeTypeFactory typeFactory;
 
-        public ServiceContractGenerationContext(ServiceContractGenerator serviceContractGenerator, ContractDescription contract, CodeTypeDeclaration contractType)
+        public ServiceContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ContractDescription contract,
+            CodeTypeDeclaration contractType
+        )
         {
             if (serviceContractGenerator == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("serviceContractGenerator"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("serviceContractGenerator")
+                );
             if (contract == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("contract"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("contract")
+                );
             if (contractType == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("contractType"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("contractType")
+                );
 
             this.serviceContractGenerator = serviceContractGenerator;
             this.contract = contract;
             this.contractType = contractType;
         }
 
-        public ServiceContractGenerationContext(ServiceContractGenerator serviceContractGenerator, ContractDescription contract, CodeTypeDeclaration contractType, CodeTypeDeclaration duplexCallbackType)
+        public ServiceContractGenerationContext(
+            ServiceContractGenerator serviceContractGenerator,
+            ContractDescription contract,
+            CodeTypeDeclaration contractType,
+            CodeTypeDeclaration duplexCallbackType
+        )
             : this(serviceContractGenerator, contract, contractType)
         {
             this.duplexCallbackType = duplexCallbackType;
@@ -120,7 +136,5 @@ namespace System.ServiceModel.Description
             get { return this.typeFactory; }
             set { this.typeFactory = value; }
         }
-
     }
-
 }

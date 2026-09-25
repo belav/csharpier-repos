@@ -22,6 +22,6 @@ namespace System.Net.WebSockets
         /// <summary>
         /// Disables compression for the message if compression has been enabled for the <see cref="WebSocket"/> instance.
         /// </summary>
-        DisableCompression = 2
+        DisableCompression = 2,
     }
 }

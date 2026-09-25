@@ -40,7 +40,10 @@ namespace System.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void UserDomainName_MatchesEnvironment_Windows()
         {
-            Assert.Equal(Environment.GetEnvironmentVariable("USERDOMAIN"), Environment.UserDomainName);
+            Assert.Equal(
+                Environment.GetEnvironmentVariable("USERDOMAIN"),
+                Environment.UserDomainName
+            );
         }
     }
 }

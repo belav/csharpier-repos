@@ -19,9 +19,14 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
 {
     public class ThirdPartyAnalyzerFormatterTests : CSharpFormatterTests, IAsyncLifetime
     {
-        private static readonly string s_analyzerProjectFilePath = Path.Combine("for_analyzer_formatter", "analyzer_project", "analyzer_project.csproj");
+        private static readonly string s_analyzerProjectFilePath = Path.Combine(
+            "for_analyzer_formatter",
+            "analyzer_project",
+            "analyzer_project.csproj"
+        );
 
-        private protected override ICodeFormatter Formatter => AnalyzerFormatter.ThirdPartyFormatter;
+        private protected override ICodeFormatter Formatter =>
+            AnalyzerFormatter.ThirdPartyFormatter;
 
         private Project _analyzerReferencesProject;
 
@@ -37,14 +42,27 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
             try
             {
                 // Restore the Analyzer packages that have been added to `for_analyzer_formatter/analyzer_project/analyzer_project.csproj`
-                var exitCode = await DotNetHelper.PerformRestoreAsync(s_analyzerProjectFilePath, TestOutputHelper);
+                var exitCode = await DotNetHelper.PerformRestoreAsync(
+                    s_analyzerProjectFilePath,
+                    TestOutputHelper
+                );
                 Assert.Equal(0, exitCode);
 
                 // Load the analyzer_project into a MSBuildWorkspace.
-                var workspacePath = Path.Combine(TestProjectsPathHelper.GetProjectsDirectory(), s_analyzerProjectFilePath);
+                var workspacePath = Path.Combine(
+                    TestProjectsPathHelper.GetProjectsDirectory(),
+                    s_analyzerProjectFilePath
+                );
 
                 MSBuildRegistrar.RegisterInstance();
-                var analyzerWorkspace = await MSBuildWorkspaceLoader.LoadAsync(workspacePath, WorkspaceType.Project, binaryLogPath: null, logWorkspaceWarnings: true, logger, CancellationToken.None);
+                var analyzerWorkspace = await MSBuildWorkspaceLoader.LoadAsync(
+                    workspacePath,
+                    WorkspaceType.Project,
+                    binaryLogPath: null,
+                    logWorkspaceWarnings: true,
+                    logger,
+                    CancellationToken.None
+                );
 
                 TestOutputHelper.WriteLine(logger.GetLog());
 
@@ -65,15 +83,18 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.Analyzers
             return Task.CompletedTask;
         }
 
-        private IEnumerable<AnalyzerReference> GetAnalyzerReferences(string prefix)
-            => _analyzerReferencesProject.AnalyzerReferences.Where(reference => reference.Display.StartsWith(prefix));
+        private IEnumerable<AnalyzerReference> GetAnalyzerReferences(string prefix) =>
+            _analyzerReferencesProject.AnalyzerReferences.Where(reference =>
+                reference.Display.StartsWith(prefix)
+            );
 
         [MSBuildFact]
         public async Task TestStyleCopBlankLineFixer_RemovesUnnecessaryBlankLines()
         {
             var analyzerReferences = GetAnalyzerReferences("StyleCop");
 
-            var testCode = @"
+            var testCode =
+                @"
 class C
 {
 
@@ -91,7 +112,8 @@ class C
 }
 ";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     void M()
@@ -119,7 +141,13 @@ class C
                 ["dotnet_diagnostic.SA1508.severity"] = "error",
             };
 
-            await AssertCodeChangedAsync(testCode, expectedCode, editorConfig, fixCategory: FixCategory.Analyzers, analyzerReferences: analyzerReferences);
+            await AssertCodeChangedAsync(
+                testCode,
+                expectedCode,
+                editorConfig,
+                fixCategory: FixCategory.Analyzers,
+                analyzerReferences: analyzerReferences
+            );
         }
 
         [MSBuildFact]
@@ -127,7 +155,8 @@ class C
         {
             var analyzerReferences = GetAnalyzerReferences("IDisposable");
 
-            var testCode = @"
+            var testCode =
+                @"
 using System.IO;
 
 class C
@@ -141,7 +170,8 @@ class C
 }
 ";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 using System.IO;
 
 class C
@@ -165,7 +195,13 @@ class C
                 ["dotnet_diagnostic.IDISP017.severity"] = "error",
             };
 
-            await AssertCodeChangedAsync(testCode, expectedCode, editorConfig, fixCategory: FixCategory.Analyzers, analyzerReferences: analyzerReferences);
+            await AssertCodeChangedAsync(
+                testCode,
+                expectedCode,
+                editorConfig,
+                fixCategory: FixCategory.Analyzers,
+                analyzerReferences: analyzerReferences
+            );
         }
 
         [MSBuildFact]
@@ -174,7 +210,8 @@ class C
             // Loads all analyzer references.
             var analyzerReferences = _analyzerReferencesProject.AnalyzerReferences;
 
-            var testCode = @"
+            var testCode =
+                @"
 using System.IO;
 
 class C
@@ -188,7 +225,8 @@ class C
 }
 ";
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 using System.IO;
 
 class C
@@ -212,7 +250,13 @@ class C
                 ["dotnet_diagnostic.IDISP017.severity"] = "error",
             };
 
-            await AssertCodeChangedAsync(testCode, expectedCode, editorConfig, fixCategory: FixCategory.Analyzers, analyzerReferences: analyzerReferences);
+            await AssertCodeChangedAsync(
+                testCode,
+                expectedCode,
+                editorConfig,
+                fixCategory: FixCategory.Analyzers,
+                analyzerReferences: analyzerReferences
+            );
         }
     }
 }

@@ -11,7 +11,8 @@ namespace System.Xml
 {
     internal abstract class BaseRegionIterator : BaseTreeIterator
     {
-        internal BaseRegionIterator(DataSetMapper mapper) : base(mapper) { }
+        internal BaseRegionIterator(DataSetMapper mapper)
+            : base(mapper) { }
     }
 
     // Iterates over non-attribute nodes
@@ -20,7 +21,8 @@ namespace System.Xml
         private readonly XmlBoundElement _rowElement;
         private XmlNode _currentNode;
 
-        internal RegionIterator(XmlBoundElement rowElement) : base(((XmlDataDocument)(rowElement.OwnerDocument)).Mapper)
+        internal RegionIterator(XmlBoundElement rowElement)
+            : base(((XmlDataDocument)(rowElement.OwnerDocument)).Mapper)
         {
             Debug.Assert(rowElement != null && rowElement.Row != null);
             _rowElement = rowElement;
@@ -47,7 +49,11 @@ namespace System.Xml
                 _currentNode = nextNode;
                 Debug.Assert(CurrentNode != null);
                 // If we have been defoliated, we should have stayed that way
-                Debug.Assert((oldState == ElementState.Defoliated) ? (_rowElement.ElementState == ElementState.Defoliated) : true);
+                Debug.Assert(
+                    (oldState == ElementState.Defoliated)
+                        ? (_rowElement.ElementState == ElementState.Defoliated)
+                        : true
+                );
                 // Rollback foliation
                 _rowElement.ElementState = oldState;
                 return true;
@@ -77,7 +83,11 @@ namespace System.Xml
             {
                 _currentNode = nextNode;
                 // If we have been defoliated, we should have stayed that way
-                Debug.Assert((oldState == ElementState.Defoliated) ? (_rowElement.ElementState == ElementState.Defoliated) : true);
+                Debug.Assert(
+                    (oldState == ElementState.Defoliated)
+                        ? (_rowElement.ElementState == ElementState.Defoliated)
+                        : true
+                );
                 // Rollback foliation
                 _rowElement.ElementState = oldState;
                 Debug.Assert(CurrentNode != null);
@@ -95,7 +105,11 @@ namespace System.Xml
             {
                 _currentNode = null!;
                 // If we have been defoliated, we should have stayed that way
-                Debug.Assert((oldState == ElementState.Defoliated) ? (_rowElement.ElementState == ElementState.Defoliated) : true);
+                Debug.Assert(
+                    (oldState == ElementState.Defoliated)
+                        ? (_rowElement.ElementState == ElementState.Defoliated)
+                        : true
+                );
 
                 // Rollback foliation
                 _rowElement.ElementState = oldState;
@@ -106,7 +120,11 @@ namespace System.Xml
             _currentNode = nextNode.NextSibling;
 
             // If we have been defoliated, we should have stayed that way
-            Debug.Assert((oldState == ElementState.Defoliated) ? (_rowElement.ElementState == ElementState.Defoliated) : true);
+            Debug.Assert(
+                (oldState == ElementState.Defoliated)
+                    ? (_rowElement.ElementState == ElementState.Defoliated)
+                    : true
+            );
 
             // Rollback foliation
             _rowElement.ElementState = oldState;
@@ -123,7 +141,10 @@ namespace System.Xml
             Debug.Assert(CurrentNode.NodeType == XmlNodeType.Element);
 #if DEBUG
             // It's not OK to try to read the initial text value for sub-regions, because we do not know how to revert their initial state
-            if (CurrentNode.NodeType == XmlNodeType.Element && DataSetMapper.GetTableSchemaForElement((XmlElement)(CurrentNode)) != null)
+            if (
+                CurrentNode.NodeType == XmlNodeType.Element
+                && DataSetMapper.GetTableSchemaForElement((XmlElement)(CurrentNode)) != null
+            )
             {
                 if (CurrentNode != _rowElement)
                 {
@@ -142,7 +163,11 @@ namespace System.Xml
             if (n == null)
             {
                 // If we have been defoliated, we should have stayed that way
-                Debug.Assert((oldState == ElementState.Defoliated) ? (_rowElement.ElementState == ElementState.Defoliated) : true);
+                Debug.Assert(
+                    (oldState == ElementState.Defoliated)
+                        ? (_rowElement.ElementState == ElementState.Defoliated)
+                        : true
+                );
 
                 // Rollback eventual foliation
                 _rowElement.ElementState = oldState;
@@ -152,7 +177,11 @@ namespace System.Xml
             _currentNode = n;
 
             // If we have been defoliated, we should have stayed that way
-            Debug.Assert((oldState == ElementState.Defoliated) ? (_rowElement.ElementState == ElementState.Defoliated) : true);
+            Debug.Assert(
+                (oldState == ElementState.Defoliated)
+                    ? (_rowElement.ElementState == ElementState.Defoliated)
+                    : true
+            );
 
             // Rollback eventual foliation
             _rowElement.ElementState = oldState;
@@ -175,7 +204,10 @@ namespace System.Xml
                     }
                 }
 
-                if (XmlDataDocument.IsTextLikeNode(n) && (n.NextSibling == null || !XmlDataDocument.IsTextLikeNode(n.NextSibling)))
+                if (
+                    XmlDataDocument.IsTextLikeNode(n)
+                    && (n.NextSibling == null || !XmlDataDocument.IsTextLikeNode(n.NextSibling))
+                )
                 {
                     // don't use string builder if only one text node exists
                     value = n.Value;

@@ -28,37 +28,40 @@
 using System;
 using System.Xml;
 using Microsoft.Build.BuildEngine;
+using MonoTests.Helpers;
 using NUnit.Framework;
 
-using MonoTests.Helpers;
+namespace MonoTests.Microsoft.Build.BuildEngine.Various
+{
+    [TestFixture]
+    public class EvaluationOrder
+    {
+        string GetItems(Project proj, string name)
+        {
+            BuildItemGroup big = proj.GetEvaluatedItemsByName(name);
+            string str = String.Empty;
+            if (big == null)
+                return str;
 
-namespace MonoTests.Microsoft.Build.BuildEngine.Various {
-	[TestFixture]
-	public class EvaluationOrder {
-		string GetItems (Project proj, string name)
-		{
-			BuildItemGroup big = proj.GetEvaluatedItemsByName (name);
-			string str = String.Empty;
-			if (big == null)
-				return str;
-			
-			foreach (BuildItem bi in big) {
-				if (str == String.Empty)
-					str = bi.FinalItemSpec;
-				else 
-					str += ";" + bi.FinalItemSpec;
-			}
-			
-			return str;
-		}
+            foreach (BuildItem bi in big)
+            {
+                if (str == String.Empty)
+                    str = bi.FinalItemSpec;
+                else
+                    str += ";" + bi.FinalItemSpec;
+            }
 
-		[Test]
-		public void TestOrder0 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+            return str;
+        }
 
-			string documentString = @"
+        [Test]
+        public void TestOrder0()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
+
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Item Include='A' />
@@ -71,20 +74,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("@(Item)A", proj.EvaluatedProperties ["Property"].FinalValue, "A1");
-			Assert.AreEqual ("@(Item)$(A)$(B)", proj.EvaluatedProperties ["Property"].Value, "A2");
-			Assert.AreEqual ("A", GetItems (proj, "Item"), "A3");
-		}
+            Assert.AreEqual("@(Item)A", proj.EvaluatedProperties["Property"].FinalValue, "A1");
+            Assert.AreEqual("@(Item)$(A)$(B)", proj.EvaluatedProperties["Property"].Value, "A2");
+            Assert.AreEqual("A", GetItems(proj, "Item"), "A3");
+        }
 
-		[Test]
-		public void TestOrder1 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestOrder1()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Item Include='A' />
@@ -96,20 +100,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property"].FinalValue, "A1");
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property"].Value, "A2");
-			Assert.AreEqual ("A", GetItems (proj, "Item"), "A3");
-		}
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property"].FinalValue, "A1");
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property"].Value, "A2");
+            Assert.AreEqual("A", GetItems(proj, "Item"), "A3");
+        }
 
-		[Test]
-		public void TestOrder2 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestOrder2()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Property>@(Item)</Property>
@@ -121,20 +126,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property"].FinalValue, "A1");
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property"].Value, "A2");
-			Assert.AreEqual ("A", GetItems (proj, "Item"), "A3");
-		}
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property"].FinalValue, "A1");
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property"].Value, "A2");
+            Assert.AreEqual("A", GetItems(proj, "Item"), "A3");
+        }
 
-		[Test]
-		public void TestOrder3 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestOrder3()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<Property>A</Property>
@@ -146,20 +152,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("A", proj.EvaluatedProperties ["Property"].FinalValue, "A1");
-			Assert.AreEqual ("A", proj.EvaluatedProperties ["Property"].Value, "A2");
-			Assert.AreEqual ("A", GetItems (proj, "Item"), "A3");
-		}
+            Assert.AreEqual("A", proj.EvaluatedProperties["Property"].FinalValue, "A1");
+            Assert.AreEqual("A", proj.EvaluatedProperties["Property"].Value, "A2");
+            Assert.AreEqual("A", GetItems(proj, "Item"), "A3");
+        }
 
-		[Test]
-		public void TestOrder4 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestOrder4()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Item Include='$(Property)' />
@@ -171,20 +178,21 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("A", proj.EvaluatedProperties ["Property"].FinalValue, "A1");
-			Assert.AreEqual ("A", proj.EvaluatedProperties ["Property"].Value, "A2");
-			Assert.AreEqual ("A", GetItems (proj, "Item"), "A3");
-		}
+            Assert.AreEqual("A", proj.EvaluatedProperties["Property"].FinalValue, "A1");
+            Assert.AreEqual("A", proj.EvaluatedProperties["Property"].Value, "A2");
+            Assert.AreEqual("A", GetItems(proj, "Item"), "A3");
+        }
 
-		[Test]
-		public void TestOrder5 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestOrder5()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Item Include='$(Property)' />
@@ -197,23 +205,24 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("A", proj.EvaluatedProperties ["Property"].FinalValue, "A1");
-			Assert.AreEqual ("A", proj.EvaluatedProperties ["Property"].Value, "A2");
-			Assert.AreEqual ("A", GetItems (proj, "Item"), "A3");
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property2"].FinalValue, "A4");
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property2"].Value, "A5");
-		}
+            Assert.AreEqual("A", proj.EvaluatedProperties["Property"].FinalValue, "A1");
+            Assert.AreEqual("A", proj.EvaluatedProperties["Property"].Value, "A2");
+            Assert.AreEqual("A", GetItems(proj, "Item"), "A3");
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property2"].FinalValue, "A4");
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property2"].Value, "A5");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void TestOrder6 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotWorking")]
+        public void TestOrder6()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Item Include='A' />
@@ -226,142 +235,160 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property"].FinalValue, "A1");
-			Assert.AreEqual ("@(Item)", proj.EvaluatedProperties ["Property"].Value, "A2");
-			Assert.AreEqual ("A", GetItems (proj, "Item"), "A3");
-			Assert.AreEqual ("A", GetItems (proj, "Item2"), "A4");
-		}
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property"].FinalValue, "A1");
+            Assert.AreEqual("@(Item)", proj.EvaluatedProperties["Property"].Value, "A2");
+            Assert.AreEqual("A", GetItems(proj, "Item"), "A3");
+            Assert.AreEqual("A", GetItems(proj, "Item2"), "A4");
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestImportOrder1 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotDotNet")]
+        public void TestImportOrder1()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
-						<Property>" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"</Property>
+						<Property>"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"</Property>
 					</PropertyGroup>
 
 					<Import Project='$(Property)'/>
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].FinalValue, "A1");
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].Value, "A2");
-		}
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].FinalValue, "A1");
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].Value, "A2");
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestImportOrder2 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotDotNet")]
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestImportOrder2()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<Import Project='$(Property)'/>
 
 					<PropertyGroup>
-						<Property>" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"</Property>
+						<Property>"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"</Property>
 					</PropertyGroup>
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].FinalValue, "A1");
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].Value, "A2");
-		}
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].FinalValue, "A1");
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].Value, "A2");
+        }
 
-		[Test]
-		// NOTE: It will try to import "@(Item)" instead of Test/...
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestImportOrder3 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        // NOTE: It will try to import "@(Item)" instead of Test/...
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestImportOrder3()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
-						<Item Include='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"' />
+						<Item Include='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"' />
 					</ItemGroup>
 
 					<Import Project='@(Item)'/>
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].FinalValue, "A1");
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].Value, "A2");
-		}
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].FinalValue, "A1");
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].Value, "A2");
+        }
 
-		[Test]
-		// NOTE: It will try to import "@(Item)" instead of Test/...
-		[ExpectedException (typeof (InvalidProjectFileException))]
-		public void TestImportOrder4 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        // NOTE: It will try to import "@(Item)" instead of Test/...
+        [ExpectedException(typeof(InvalidProjectFileException))]
+        public void TestImportOrder4()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<Import Project='@(Item)'/>
 
 					<ItemGroup>
-						<Item Include='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"' />
+						<Item Include='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"' />
 					</ItemGroup>
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].FinalValue, "A1");
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].Value, "A2");
-		}
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].FinalValue, "A1");
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].Value, "A2");
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestImportOrder5 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotDotNet")]
+        public void TestImportOrder5()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
 						<ImportedProperty>AnotherValue</ImportedProperty>
 					</PropertyGroup>
 
-					<Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+					<Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].FinalValue, "A1");
-			Assert.AreEqual ("Value", proj.EvaluatedProperties ["ImportedProperty"].Value, "A2");
-		}
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].FinalValue, "A1");
+            Assert.AreEqual("Value", proj.EvaluatedProperties["ImportedProperty"].Value, "A2");
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestImportOrder6 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotDotNet")]
+        public void TestImportOrder6()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-					<Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+					<Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
 
 					<PropertyGroup>
 						<ImportedProperty>AnotherValue</ImportedProperty>
@@ -369,22 +396,33 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("AnotherValue", proj.EvaluatedProperties ["ImportedProperty"].FinalValue, "A1");
-			Assert.AreEqual ("AnotherValue", proj.EvaluatedProperties ["ImportedProperty"].Value, "A2");
-		}
+            Assert.AreEqual(
+                "AnotherValue",
+                proj.EvaluatedProperties["ImportedProperty"].FinalValue,
+                "A1"
+            );
+            Assert.AreEqual(
+                "AnotherValue",
+                proj.EvaluatedProperties["ImportedProperty"].Value,
+                "A2"
+            );
+        }
 
-		[Test]
-		[Category ("NotDotNet")]
-		public void TestImportOrder7 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        [Category("NotDotNet")]
+        public void TestImportOrder7()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
-					<Import Project='" + TestResourceHelper.GetFullPathOfResource ("Test/resources/Import.csproj") + @"'/>
+					<Import Project='"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/Import.csproj")
+                + @"'/>
 
 					<PropertyGroup>
 						<ImportedProperty>Another$(ImportedProperty)</ImportedProperty>
@@ -392,34 +430,45 @@ namespace MonoTests.Microsoft.Build.BuildEngine.Various {
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			Assert.AreEqual ("AnotherValue", proj.EvaluatedProperties ["ImportedProperty"].FinalValue, "A1");
-			Assert.AreEqual ("Another$(ImportedProperty)", proj.EvaluatedProperties ["ImportedProperty"].Value, "A2");
-		}
+            Assert.AreEqual(
+                "AnotherValue",
+                proj.EvaluatedProperties["ImportedProperty"].FinalValue,
+                "A1"
+            );
+            Assert.AreEqual(
+                "Another$(ImportedProperty)",
+                proj.EvaluatedProperties["ImportedProperty"].Value,
+                "A2"
+            );
+        }
 
-		[Test]
-		public void TestUsingTaskOrder1 ()
-		{
-			Engine engine = new Engine (Consts.BinPath);
-			Project proj = engine.CreateNewProject ();
+        [Test]
+        public void TestUsingTaskOrder1()
+        {
+            Engine engine = new Engine(Consts.BinPath);
+            Project proj = engine.CreateNewProject();
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
-						<Property>" + TestResourceHelper.GetFullPathOfResource ("Test/resources/TestTasks.dll") + @"</Property>
+						<Property>"
+                + TestResourceHelper.GetFullPathOfResource("Test/resources/TestTasks.dll")
+                + @"</Property>
 					</PropertyGroup>
 
 					<UsingTask AssemblyFile='$(Property)' TaskName='TrueTestTask' />
 				</Project>
 			";
 
-			proj.LoadXml (documentString);
+            proj.LoadXml(documentString);
 
-			UsingTask [] ut = new UsingTask [1];
-			proj.UsingTasks.CopyTo (ut, 0);
+            UsingTask[] ut = new UsingTask[1];
+            proj.UsingTasks.CopyTo(ut, 0);
 
-			Assert.AreEqual ("$(Property)", ut [0].AssemblyFile, "A1");
-		}
-	}
+            Assert.AreEqual("$(Property)", ut[0].AssemblyFile, "A1");
+        }
+    }
 }

@@ -2,9 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public enum NodeType
 {
-    True, False, Not, Other
+    True,
+    False,
+    Not,
+    Other,
 }
 
 public class Node
@@ -13,8 +17,12 @@ public class Node
     public Node Child;
     public string name;
 
-    public Node(string s) { name = s; }
+    public Node(string s)
+    {
+        name = s;
+    }
 }
+
 public class NodeFactory
 {
     public Node Conditional(Node condition, Node trueBranch, Node falseBranch)
@@ -26,9 +34,9 @@ public class NodeFactory
             case NodeType.False:
                 return falseBranch;
             case NodeType.Not:
-                return this.Conditional(condition.Child, falseBranch, trueBranch);  // <-- tail recursion
+                return this.Conditional(condition.Child, falseBranch, trueBranch); // <-- tail recursion
         }
-        return falseBranch;  //<- should return the original trueBranch
+        return falseBranch; //<- should return the original trueBranch
     }
 
     public class Test_simple_repro

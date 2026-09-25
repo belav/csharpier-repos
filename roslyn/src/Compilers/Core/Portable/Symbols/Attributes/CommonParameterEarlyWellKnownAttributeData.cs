@@ -18,10 +18,7 @@ namespace Microsoft.CodeAnalysis
 
         public ConstantValue DefaultParameterValue
         {
-            get
-            {
-                return _defaultParameterValue;
-            }
+            get { return _defaultParameterValue; }
             set
             {
                 VerifySealed(expected: false);

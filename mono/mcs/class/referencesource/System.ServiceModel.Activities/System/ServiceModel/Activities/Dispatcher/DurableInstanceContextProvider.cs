@@ -26,17 +26,21 @@ namespace System.ServiceModel.Activities.Dispatcher
             return new InstanceContext(this.serviceHostBase);
         }
 
-        public void InitializeInstanceContext(InstanceContext instanceContext, Message message, IContextChannel channel)
-        {
-
-        }
+        public void InitializeInstanceContext(
+            InstanceContext instanceContext,
+            Message message,
+            IContextChannel channel
+        ) { }
 
         public bool IsIdle(InstanceContext instanceContext)
         {
             return true;
         }
 
-        public void NotifyIdle(InstanceContextIdleCallback callback, InstanceContext instanceContext)
+        public void NotifyIdle(
+            InstanceContextIdleCallback callback,
+            InstanceContext instanceContext
+        )
         {
             //Empty
         }

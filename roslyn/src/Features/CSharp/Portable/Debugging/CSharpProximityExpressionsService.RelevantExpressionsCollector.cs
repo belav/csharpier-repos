@@ -12,40 +12,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 {
     internal partial class CSharpProximityExpressionsService
     {
-        private class RelevantExpressionsCollector(bool includeDeclarations, IList<string> expressions) : CSharpSyntaxVisitor
+        private class RelevantExpressionsCollector(
+            bool includeDeclarations,
+            IList<string> expressions
+        ) : CSharpSyntaxVisitor
         {
             private readonly bool _includeDeclarations = includeDeclarations;
             private readonly IList<string> _expressions = expressions;
 
-            public override void VisitLabeledStatement(LabeledStatementSyntax node)
-                => AddRelevantExpressions(node.Statement, _expressions, _includeDeclarations);
+            public override void VisitLabeledStatement(LabeledStatementSyntax node) =>
+                AddRelevantExpressions(node.Statement, _expressions, _includeDeclarations);
 
-            public override void VisitExpressionStatement(ExpressionStatementSyntax node)
-                => AddExpressionTerms(node.Expression, _expressions);
+            public override void VisitExpressionStatement(ExpressionStatementSyntax node) =>
+                AddExpressionTerms(node.Expression, _expressions);
 
-            public override void VisitReturnStatement(ReturnStatementSyntax node)
-                => AddExpressionTerms(node.Expression, _expressions);
+            public override void VisitReturnStatement(ReturnStatementSyntax node) =>
+                AddExpressionTerms(node.Expression, _expressions);
 
-            public override void VisitThrowStatement(ThrowStatementSyntax node)
-                => AddExpressionTerms(node.Expression, _expressions);
+            public override void VisitThrowStatement(ThrowStatementSyntax node) =>
+                AddExpressionTerms(node.Expression, _expressions);
 
-            public override void VisitLocalDeclarationStatement(LocalDeclarationStatementSyntax node)
+            public override void VisitLocalDeclarationStatement(
+                LocalDeclarationStatementSyntax node
+            )
             {
                 // Here, we collect expression expressions from any/all initialization expressions
                 AddVariableExpressions(node.Declaration.Variables, _expressions);
             }
 
-            public override void VisitDoStatement(DoStatementSyntax node)
-                => AddExpressionTerms(node.Condition, _expressions);
+            public override void VisitDoStatement(DoStatementSyntax node) =>
+                AddExpressionTerms(node.Condition, _expressions);
 
-            public override void VisitLockStatement(LockStatementSyntax node)
-                => AddExpressionTerms(node.Expression, _expressions);
+            public override void VisitLockStatement(LockStatementSyntax node) =>
+                AddExpressionTerms(node.Expression, _expressions);
 
-            public override void VisitWhileStatement(WhileStatementSyntax node)
-                => AddExpressionTerms(node.Condition, _expressions);
+            public override void VisitWhileStatement(WhileStatementSyntax node) =>
+                AddExpressionTerms(node.Condition, _expressions);
 
-            public override void VisitIfStatement(IfStatementSyntax node)
-                => AddExpressionTerms(node.Condition, _expressions);
+            public override void VisitIfStatement(IfStatementSyntax node) =>
+                AddExpressionTerms(node.Condition, _expressions);
 
             public override void VisitForStatement(ForStatementSyntax node)
             {
@@ -81,12 +86,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 AddExpressionTerms(node.Expression, _expressions);
             }
 
-            public override void VisitSwitchStatement(SwitchStatementSyntax node)
-                => AddExpressionTerms(node.Expression, _expressions);
+            public override void VisitSwitchStatement(SwitchStatementSyntax node) =>
+                AddExpressionTerms(node.Expression, _expressions);
 
             private void AddVariableExpressions(
                 SeparatedSyntaxList<VariableDeclaratorSyntax> declarators,
-                IList<string> expressions)
+                IList<string> expressions
+            )
             {
                 foreach (var declarator in declarators)
                 {
@@ -104,7 +110,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
             private void AddVariableExpressions(
                 ExpressionSyntax component,
-                IList<string> expressions)
+                IList<string> expressions
+            )
             {
                 if (!_includeDeclarations)
                     return;
@@ -112,27 +119,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 switch (component.Kind())
                 {
                     case SyntaxKind.TupleExpression:
+                    {
+                        var t = (TupleExpressionSyntax)component;
+                        foreach (var a in t.Arguments)
                         {
-                            var t = (TupleExpressionSyntax)component;
-                            foreach (var a in t.Arguments)
-                            {
-                                AddVariableExpressions(a.Expression, expressions);
-                            }
+                            AddVariableExpressions(a.Expression, expressions);
+                        }
 
-                            break;
-                        }
+                        break;
+                    }
                     case SyntaxKind.DeclarationExpression:
-                        {
-                            var t = (DeclarationExpressionSyntax)component;
-                            AddVariableExpressions(t.Designation, expressions);
-                            break;
-                        }
+                    {
+                        var t = (DeclarationExpressionSyntax)component;
+                        AddVariableExpressions(t.Designation, expressions);
+                        break;
+                    }
                 }
             }
 
             private void AddVariableExpressions(
                 VariableDesignationSyntax component,
-                IList<string> expressions)
+                IList<string> expressions
+            )
             {
                 if (!_includeDeclarations)
                     return;
@@ -140,18 +148,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 switch (component.Kind())
                 {
                     case SyntaxKind.ParenthesizedVariableDesignation:
-                        {
-                            var t = (ParenthesizedVariableDesignationSyntax)component;
-                            foreach (var v in t.Variables)
-                                AddVariableExpressions(v, expressions);
-                            break;
-                        }
+                    {
+                        var t = (ParenthesizedVariableDesignationSyntax)component;
+                        foreach (var v in t.Variables)
+                            AddVariableExpressions(v, expressions);
+                        break;
+                    }
                     case SyntaxKind.SingleVariableDesignation:
-                        {
-                            var t = (SingleVariableDesignationSyntax)component;
-                            expressions.Add(t.Identifier.ValueText);
-                            break;
-                        }
+                    {
+                        var t = (SingleVariableDesignationSyntax)component;
+                        expressions.Add(t.Identifier.ValueText);
+                        break;
+                    }
                 }
             }
         }

@@ -11,8 +11,19 @@ namespace System.Reflection.Emit.Tests
         public void GetValue_ThrowsNotSupportedException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            PropertyBuilder property = type.DefineProperty("TestProperty", PropertyAttributes.None, typeof(int), null);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public, CallingConventions.HasThis, typeof(int), null);
+            PropertyBuilder property = type.DefineProperty(
+                "TestProperty",
+                PropertyAttributes.None,
+                typeof(int),
+                null
+            );
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public,
+                CallingConventions.HasThis,
+                typeof(int),
+                null
+            );
 
             ILGenerator methodILGenerator = method.GetILGenerator();
             methodILGenerator.Emit(OpCodes.Ldarg_0);

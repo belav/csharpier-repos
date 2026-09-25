@@ -7,12 +7,11 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class F1RelationalFixture<TRowVersion> : F1FixtureBase<TRowVersion>
 {
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
-        => base.AddOptions(builder).ConfigureWarnings(
-            w => w.Ignore(RelationalEventId.BatchSmallerThanMinBatchSize));
+    public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
+        base.AddOptions(builder)
+            .ConfigureWarnings(w => w.Ignore(RelationalEventId.BatchSmallerThanMinBatchSize));
 
     protected override void BuildModelExternal(ModelBuilder modelBuilder)
     {
@@ -29,58 +28,50 @@ public abstract class F1RelationalFixture<TRowVersion> : F1FixtureBase<TRowVersi
         modelBuilder.Entity<FanTpt>().UseTptMappingStrategy();
         modelBuilder.Entity<FanTpc>().UseTpcMappingStrategy();
 
-        modelBuilder.Entity<Circuit>(
-            b =>
-            {
-                b.ToTable("Circuits");
-                b.Property(e => e.Name).HasColumnName("Name");
-            });
+        modelBuilder.Entity<Circuit>(b =>
+        {
+            b.ToTable("Circuits");
+            b.Property(e => e.Name).HasColumnName("Name");
+        });
 
-        modelBuilder.Entity<City>(
-            b =>
-            {
-                b.ToTable("Circuits");
-                b.Property(e => e.Name).HasColumnName("Name");
-            });
+        modelBuilder.Entity<City>(b =>
+        {
+            b.ToTable("Circuits");
+            b.Property(e => e.Name).HasColumnName("Name");
+        });
 
-        modelBuilder.Entity<CircuitTpt>(
-            b =>
-            {
-                b.UseTptMappingStrategy();
-                b.Property(e => e.Name).HasColumnName("Name");
-            });
+        modelBuilder.Entity<CircuitTpt>(b =>
+        {
+            b.UseTptMappingStrategy();
+            b.Property(e => e.Name).HasColumnName("Name");
+        });
 
-        modelBuilder.Entity<StreetCircuitTpt>(
-            b =>
-            {
-                b.ToTable("StreetCircuitsTpt");
-            });
+        modelBuilder.Entity<StreetCircuitTpt>(b =>
+        {
+            b.ToTable("StreetCircuitsTpt");
+        });
 
-        modelBuilder.Entity<CityTpt>(
-            b =>
-            {
-                b.ToTable("StreetCircuitsTpt");
-                b.Property(e => e.Name).HasColumnName("Name");
-            });
+        modelBuilder.Entity<CityTpt>(b =>
+        {
+            b.ToTable("StreetCircuitsTpt");
+            b.Property(e => e.Name).HasColumnName("Name");
+        });
 
-        modelBuilder.Entity<CircuitTpc>(
-            b =>
-            {
-                b.UseTpcMappingStrategy();
-                b.Property(e => e.Name).HasColumnName("Name");
-            });
+        modelBuilder.Entity<CircuitTpc>(b =>
+        {
+            b.UseTpcMappingStrategy();
+            b.Property(e => e.Name).HasColumnName("Name");
+        });
 
-        modelBuilder.Entity<StreetCircuitTpc>(
-            b =>
-            {
-                b.ToTable("StreetCircuitsTpc");
-            });
+        modelBuilder.Entity<StreetCircuitTpc>(b =>
+        {
+            b.ToTable("StreetCircuitsTpc");
+        });
 
-        modelBuilder.Entity<CityTpc>(
-            b =>
-            {
-                b.ToTable("StreetCircuitsTpc");
-                b.Property(e => e.Name).HasColumnName("Name");
-            });
+        modelBuilder.Entity<CityTpc>(b =>
+        {
+            b.ToTable("StreetCircuitsTpc");
+            b.Property(e => e.Name).HasColumnName("Name");
+        });
     }
 }

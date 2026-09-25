@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestBreakStatement()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -36,7 +37,8 @@ class C {
         }
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -56,7 +58,8 @@ class C {
         [Fact]
         public void TestContinueStatement()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -70,7 +73,8 @@ class C {
         }
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -89,7 +93,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantBooleanFalse()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -100,7 +105,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -119,7 +125,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantBooleanTrue()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -130,7 +137,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -149,7 +157,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantBooleanXor()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -160,7 +169,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -179,7 +189,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantBooleanNew()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -189,7 +200,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -209,7 +221,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantBooleanChecked()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -219,7 +232,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -238,7 +252,8 @@ class C {
         [Fact]
         public void TestLoopWithAssignmentInCondition()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -248,7 +263,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -267,7 +283,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantEnumEquality()
         {
-            var analysisResults = CompileAndAnalyzeControlFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlFlowStatements(
+                @"
 using System;
 class C {
     static void Goo()
@@ -277,14 +294,16 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.False(analysisResults.EndPointIsReachable);
         }
 
         [Fact]
         public void TestLoopWithConstantNaNComparison()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -294,7 +313,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -313,7 +333,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantNaNComparison2()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -323,7 +344,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -342,7 +364,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantStringEquality()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -352,7 +375,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -371,7 +395,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantStringEqualityWithUnicodeEscapes()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -381,7 +406,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -400,7 +426,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantVerbatimStringEquality()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -410,7 +437,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -429,7 +457,8 @@ class C {
         [Fact]
         public void TestLoopWithEmptyBlockAfterIt()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Goo()
     {
@@ -439,7 +468,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -458,7 +488,8 @@ class C {
         [Fact]
         public void TestLoopWithUnreachableBreakStatement()
         {
-            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(@"
+            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -467,7 +498,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ExitPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ReturnStatements.Count());
@@ -477,7 +509,8 @@ class C {
         [Fact]
         public void TestLoopWithReachableBreakStatement()
         {
-            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(@"
+            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -486,7 +519,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ExitPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ReturnStatements.Count());
@@ -496,7 +530,8 @@ class C {
         [Fact]
         public void TestLoopWithContinueStatement()
         {
-            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(@"
+            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -505,7 +540,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ExitPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ReturnStatements.Count());
@@ -515,7 +551,8 @@ class C {
         [Fact]
         public void TestLoopWithContinueAndUnreachableBreakStatement()
         {
-            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(@"
+            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -524,7 +561,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ExitPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ReturnStatements.Count());
@@ -534,7 +572,8 @@ class C {
         [Fact]
         public void TestLoopWithConstantTernaryOperator()
         {
-            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(@"
+            var controlFlowAnalysisResults = CompileAndAnalyzeControlFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -543,7 +582,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ExitPoints.Count());
             Assert.Equal(0, controlFlowAnalysisResults.ReturnStatements.Count());
@@ -553,7 +593,8 @@ class C {
         [Fact]
         public void TestLoopWithShortCircuitingOr()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -563,7 +604,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -584,14 +626,16 @@ class C {
         [Fact]
         public void ControlledStatement01()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C
 {
     static void Main()
     {
         while (true) /*<bind>*/Main();/*</bind>*/
     }
-}");
+}"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             //var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.True(controlFlowAnalysisResults.EndPointIsReachable);
@@ -601,14 +645,16 @@ class C
         [Fact]
         public void ControlledStatement02()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C
 {
     static void Main()
     {
         /*<bind>*/while (true) Main();/*</bind>*/
     }
-}");
+}"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             //var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.False(controlFlowAnalysisResults.EndPointIsReachable);
@@ -621,7 +667,8 @@ class C
         [Fact]
         public void TestVariablesDeclaredInForLoop()
         {
-            var analysis = CompileAndAnalyzeDataFlowStatements(@"
+            var analysis = CompileAndAnalyzeDataFlowStatements(
+                @"
 class C {
     public void F(int x)
     {
@@ -631,7 +678,8 @@ class C {
 /*</bind>*/
         int c;
     }
-}");
+}"
+            );
             Assert.Equal("i, j", GetSymbolNamesJoined(analysis.VariablesDeclared));
             Assert.Equal("i, j", GetSymbolNamesJoined(analysis.WrittenInside));
             Assert.Equal("i", GetSymbolNamesJoined(analysis.ReadInside));
@@ -641,7 +689,8 @@ class C {
         [Fact]
         public void TestForIncrement()
         {
-            var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(@"
+            var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(
+                @"
 class C
 {
     static void M()
@@ -651,7 +700,8 @@ class C
         }
     }
 }
-");
+"
+            );
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));
@@ -664,7 +714,8 @@ class C
         [Fact]
         public void TestNestedForLoops()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C
 {
     static void M()
@@ -682,7 +733,8 @@ class C
         }
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -702,7 +754,8 @@ class C
         [Fact]
         public void ContinueInForStatement()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 using System;
 
 class Program
@@ -716,7 +769,8 @@ class Program
         }/*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             //var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -729,7 +783,8 @@ class Program
         [Fact]
         public void TestVariablesDeclaredInForeachLoop01()
         {
-            var analysis = CompileAndAnalyzeDataFlowStatements(@"
+            var analysis = CompileAndAnalyzeDataFlowStatements(
+                @"
 class C {
     public void F(int x)
     {
@@ -739,7 +794,8 @@ class C {
 /*</bind>*/
         int b;
     }
-}");
+}"
+            );
             Assert.Equal("c", GetSymbolNamesJoined(analysis.VariablesDeclared));
             Assert.Equal("c", GetSymbolNamesJoined(analysis.WrittenInside));
             Assert.Null(GetSymbolNamesJoined(analysis.ReadInside));
@@ -749,7 +805,8 @@ class C {
         [Fact]
         public void TestVariablesDeclaredInForeachLoop02()
         {
-            var analysis = CompileAndAnalyzeDataFlowStatements(@"
+            var analysis = CompileAndAnalyzeDataFlowStatements(
+                @"
 class C {
     public void F(int x)
     {
@@ -759,7 +816,8 @@ class C {
 /*</bind>*/
         int b;
     }
-}");
+}"
+            );
             Assert.Equal("v", GetSymbolNamesJoined(analysis.VariablesDeclared));
             Assert.Equal("v", GetSymbolNamesJoined(analysis.WrittenInside));
             Assert.Equal("x", GetSymbolNamesJoined(analysis.ReadInside));
@@ -770,7 +828,8 @@ class C {
         [Fact]
         public void TestLocalsInForeachLoop()
         {
-            var analysis = CompileAndAnalyzeDataFlowStatements(@"
+            var analysis = CompileAndAnalyzeDataFlowStatements(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -788,7 +847,8 @@ class Test
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.Equal("v, x", GetSymbolNamesJoined(analysis.VariablesDeclared));
             Assert.Null(GetSymbolNamesJoined(analysis.AlwaysAssigned));
             Assert.Equal("ary, a", GetSymbolNamesJoined(analysis.DataFlowsIn));
@@ -802,7 +862,8 @@ class Test
         [Fact]
         public void TestLocalsInForeachLoop02()
         {
-            var analysis = CompileAndAnalyzeDataFlowStatements(@"
+            var analysis = CompileAndAnalyzeDataFlowStatements(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -820,7 +881,8 @@ class Test
 /*</bind>*/
     }
 }
-");
+"
+            );
             Assert.Equal("x", GetSymbolNamesJoined(analysis.VariablesDeclared));
             Assert.Equal("x", GetSymbolNamesJoined(analysis.AlwaysAssigned));
             Assert.Equal("a, v", GetSymbolNamesJoined(analysis.DataFlowsIn));
@@ -834,7 +896,8 @@ class Test
         [Fact]
         public void TestLocalsInForeachLoop03()
         {
-            var analysis = CompileAndAnalyzeDataFlowStatements(@"
+            var analysis = CompileAndAnalyzeDataFlowStatements(
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -852,7 +915,8 @@ class Test
         }
     }
 }
-");
+"
+            );
             Assert.Equal("x", GetSymbolNamesJoined(analysis.VariablesDeclared));
             Assert.Equal("x", GetSymbolNamesJoined(analysis.AlwaysAssigned));
             Assert.Equal("a, v", GetSymbolNamesJoined(analysis.DataFlowsIn));
@@ -867,7 +931,8 @@ class Test
         [Fact]
         public void ForEachVariableShouldNotInVariableDeclaredTest()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -878,7 +943,8 @@ class C {
         /*<bind>*/return;/*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -897,7 +963,8 @@ class C {
         [Fact]
         public void ForEachVariablesDeclared()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 public class Program
 {
     public static void Main()
@@ -908,10 +975,14 @@ public class Program
             integer[] b = new integer[]{args.Length};
         }
     }
-}");
+}"
+            );
             var comp = CreateCompilation(new[] { tree });
             var semanticModel = comp.GetSemanticModel(tree);
-            var foreachNode = tree.GetCompilationUnitRoot().DescendantNodes().OfType<ForEachStatementSyntax>().Single();
+            var foreachNode = tree.GetCompilationUnitRoot()
+                .DescendantNodes()
+                .OfType<ForEachStatementSyntax>()
+                .Single();
             var flow = semanticModel.AnalyzeDataFlow(foreachNode);
             Assert.Equal(2, flow.VariablesDeclared.Count());
             Assert.True(flow.VariablesDeclared.Any((s) => s.Name == "b"));
@@ -925,7 +996,8 @@ public class Program
         [Fact]
         public void TestReturnStatements01()
         {
-            var analysis = CompileAndAnalyzeControlFlowStatements(@"
+            var analysis = CompileAndAnalyzeControlFlowStatements(
+                @"
 class C {
     public void F(int x)
     {
@@ -933,7 +1005,8 @@ class C {
         return;
 /*</bind>*/
     }
-}");
+}"
+            );
             Assert.False(analysis.EndPointIsReachable);
             Assert.Equal(1, analysis.ExitPoints.Count());
         }
@@ -941,7 +1014,8 @@ class C {
         [Fact]
         public void TestReturnStatements02()
         {
-            var analysis = CompileAndAnalyzeControlFlowStatements(@"
+            var analysis = CompileAndAnalyzeControlFlowStatements(
+                @"
 class C {
     public void F(int x)
     {
@@ -951,14 +1025,16 @@ class C {
 /*</bind>*/
         if (x == 2) return;
     }
-}");
+}"
+            );
             Assert.Equal(1, analysis.ExitPoints.Count());
         }
 
         [Fact]
         public void TestReturnStatement()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -969,7 +1045,8 @@ class C {
         int z = (y) + 1;
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -987,7 +1064,8 @@ class C {
         [Fact]
         public void TestReturnStatementWithExpression()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static int Goo()
     {
@@ -997,7 +1075,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -1015,7 +1094,8 @@ class C {
         [Fact]
         public void TestReturnStatementWithAssignmentExpressions()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static int? Goo()
     {
@@ -1025,7 +1105,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -1043,7 +1124,8 @@ class C {
         [Fact]
         public void TestReturnStatementWithAssignmentExpressions2()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static int Goo()
     {
@@ -1053,7 +1135,8 @@ class C {
 /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Equal(0, controlFlowAnalysisResults.EntryPoints.Count());
@@ -1072,7 +1155,8 @@ class C {
         [Fact]
         public void InaccessibleVariables()
         {
-            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(@"
+            var analysisResults = CompileAndAnalyzeControlAndDataFlowStatements(
+                @"
 class C {
     static void Main()
     {
@@ -1096,7 +1180,8 @@ class C {
         /*<bind>*/ return; /*</bind>*/
     }
 }
-");
+"
+            );
             var controlFlowAnalysisResults = analysisResults.Item1;
             var dataFlowAnalysisResults = analysisResults.Item2;
             Assert.Empty(controlFlowAnalysisResults.EntryPoints);
@@ -1109,7 +1194,10 @@ class C {
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.ReadInside));
             Assert.Equal("i1, x", GetSymbolNamesJoined(dataFlowAnalysisResults.ReadOutside));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenInside));
-            Assert.Equal("i1, i2, i3, i4, i5, f1, x", GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside));
+            Assert.Equal(
+                "i1, i2, i3, i4, i5, f1, x",
+                GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside)
+            );
         }
 
         #endregion
@@ -1120,7 +1208,8 @@ class C {
         [Fact]
         public void TestYieldStatements01()
         {
-            var analysis = CompileAndAnalyzeControlAndDataFlowMultipleStatements(@"
+            var analysis = CompileAndAnalyzeControlAndDataFlowMultipleStatements(
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1151,7 +1240,8 @@ class Test
        /*<bind3>*/  yield break; /*</bind3>*/
     }
 }
-");
+"
+            );
             var ctrlFlowAnalysis = analysis.Item1;
 
             var reachable = new bool[] { false, true, true, false };
@@ -1175,7 +1265,8 @@ class Test
         [Fact]
         public void TestYieldStatements02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1246,7 +1337,8 @@ class Test
         public void TestYieldStatements03()
         {
             #region "source"
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1339,7 +1431,8 @@ class Test
         [Fact]
         public void YieldReturnStatement()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 public class Test 

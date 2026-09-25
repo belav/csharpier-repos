@@ -52,14 +52,14 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all child elements with a matching name.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public struct ElementContentIterator
     {
-        private string _localName, _ns;
+        private string _localName,
+            _ns;
         private XPathNavigator _navCurrent;
         private bool _needFirst;
 
@@ -97,7 +97,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all child content nodes with a matching node kind.
     /// </summary>
@@ -113,7 +112,9 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public void Create(XPathNavigator context, XPathNodeType nodeType)
         {
-            Debug.Assert(nodeType != XPathNodeType.Attribute && nodeType != XPathNodeType.Namespace);
+            Debug.Assert(
+                nodeType != XPathNodeType.Attribute && nodeType != XPathNodeType.Namespace
+            );
             _navCurrent = XmlQueryRuntime.SyncToNavigator(_navCurrent, context);
             _nodeType = nodeType;
             _needFirst = true;
@@ -141,7 +142,6 @@ namespace System.Xml.Xsl.Runtime
             get { return _navCurrent; }
         }
     }
-
 
     /// <summary>
     /// Iterate over all attributes.
@@ -184,7 +184,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over all namespace nodes.
     /// </summary>
@@ -209,8 +208,7 @@ namespace System.Xml.Xsl.Runtime
                     // Don't return the default namespace undeclaration
                     if (context.LocalName.Length != 0 || context.Value.Length != 0)
                         _navStack.Push(context.Clone());
-                }
-                while (context.MoveToNextNamespace(XPathNamespaceScope.All));
+                } while (context.MoveToNextNamespace(XPathNamespaceScope.All));
 
                 context.MoveToParent();
             }
@@ -236,7 +234,6 @@ namespace System.Xml.Xsl.Runtime
             get { return _navCurrent; }
         }
     }
-
 
     /// <summary>
     /// Iterate over all attribute and child content nodes.
@@ -279,7 +276,6 @@ namespace System.Xml.Xsl.Runtime
         }
     }
 
-
     /// <summary>
     /// Iterate over child content nodes or following-sibling nodes.  Maintain document order by using a stack.  Input
     /// nodes are assumed to be in document order, but can contain one another (ContentIterator doesn't allow this).
@@ -302,7 +298,8 @@ namespace System.Xml.Xsl.Runtime
     public struct ContentMergeIterator
     {
         private XmlNavigatorFilter _filter;
-        private XPathNavigator? _navCurrent, _navNext;
+        private XPathNavigator? _navCurrent,
+            _navNext;
         private XmlNavigatorStack _navStack;
         private IteratorState _state;
 
@@ -354,8 +351,11 @@ namespace System.Xml.Xsl.Runtime
                     _navCurrent = XmlQueryRuntime.SyncToNavigator(_navCurrent, input);
 
                     // If matching child or sibling is found, then we have a current node
-                    if (isContent ? _filter.MoveToContent(_navCurrent) :
-                                    _filter.MoveToFollowingSibling(_navCurrent))
+                    if (
+                        isContent
+                            ? _filter.MoveToContent(_navCurrent)
+                            : _filter.MoveToFollowingSibling(_navCurrent)
+                    )
                         _state = IteratorState.HaveCurrentNeedNext;
 
                     return IteratorResult.NeedInputNode;
@@ -372,8 +372,11 @@ namespace System.Xml.Xsl.Runtime
                     _navNext = XmlQueryRuntime.SyncToNavigator(_navNext, input);
 
                     // If matching child or sibling is found,
-                    if (isContent ? _filter.MoveToContent(_navNext) :
-                                    _filter.MoveToFollowingSibling(_navNext))
+                    if (
+                        isContent
+                            ? _filter.MoveToContent(_navNext)
+                            : _filter.MoveToFollowingSibling(_navNext)
+                    )
                     {
                         // Then compare position of current and next nodes
                         _state = IteratorState.HaveCurrentHaveNext;
@@ -386,8 +389,11 @@ namespace System.Xml.Xsl.Runtime
                 case IteratorState.HaveCurrentNoNext:
                 case IteratorState.HaveCurrentHaveNext:
                     // If the current node has no more matching siblings,
-                    if (isContent ? !_filter.MoveToNextContent(_navCurrent!) :
-                                    !_filter.MoveToFollowingSibling(_navCurrent!))
+                    if (
+                        isContent
+                            ? !_filter.MoveToNextContent(_navCurrent!)
+                            : !_filter.MoveToFollowingSibling(_navCurrent!)
+                    )
                     {
                         if (_navStack.IsEmpty)
                         {

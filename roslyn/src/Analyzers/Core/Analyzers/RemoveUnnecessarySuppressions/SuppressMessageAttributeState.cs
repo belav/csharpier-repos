@@ -13,19 +13,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class SuppressMessageAttributeState(Compilation compilation, INamedTypeSymbol suppressMessageAttributeType)
+    internal partial class SuppressMessageAttributeState(
+        Compilation compilation,
+        INamedTypeSymbol suppressMessageAttributeType
+    )
     {
         internal const string SuppressMessageScope = "Scope";
         internal const string SuppressMessageTarget = "Target";
 
-        private static readonly ImmutableDictionary<string, TargetScope> s_targetScopesMap = CreateTargetScopesMap();
+        private static readonly ImmutableDictionary<string, TargetScope> s_targetScopesMap =
+            CreateTargetScopesMap();
 
         private readonly Compilation _compilation = compilation;
-        private readonly INamedTypeSymbol _suppressMessageAttributeType = suppressMessageAttributeType;
+        private readonly INamedTypeSymbol _suppressMessageAttributeType =
+            suppressMessageAttributeType;
 
         private static ImmutableDictionary<string, TargetScope> CreateTargetScopesMap()
         {
-            var builder = ImmutableDictionary.CreateBuilder<string, TargetScope>(StringComparer.OrdinalIgnoreCase);
+            var builder = ImmutableDictionary.CreateBuilder<string, TargetScope>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
 #pragma warning disable CS8605 // Unboxing a possibly null value.
             foreach (TargetScope targetScope in Enum.GetValues(typeof(TargetScope)))
@@ -46,21 +53,30 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             SyntaxNode attributeSyntax,
             SemanticModel model,
             CancellationToken cancellationToken,
-            out ImmutableArray<(string name, IOperation value)> namedAttributeArguments)
+            out ImmutableArray<(string name, IOperation value)> namedAttributeArguments
+        )
         {
-            var operation = (model.GetOperation(attributeSyntax, cancellationToken) as IAttributeOperation)?.Operation;
+            var operation = (
+                model.GetOperation(attributeSyntax, cancellationToken) as IAttributeOperation
+            )?.Operation;
             if (operation is not IObjectCreationOperation { Initializer: { } initializerOperation })
             {
                 namedAttributeArguments = ImmutableArray<(string name, IOperation value)>.Empty;
                 return false;
             }
 
-            using var _ = ArrayBuilder<(string name, IOperation value)>.GetInstance(out var builder);
+            using var _ = ArrayBuilder<(string name, IOperation value)>.GetInstance(
+                out var builder
+            );
             foreach (var initializer in initializerOperation.Initializers)
             {
                 var simpleAssignment = (ISimpleAssignmentOperation)initializer;
-                if (simpleAssignment.Target is IPropertyReferenceOperation propertyReference &&
-                    _suppressMessageAttributeType.Equals(propertyReference.Property.ContainingType))
+                if (
+                    simpleAssignment.Target is IPropertyReferenceOperation propertyReference
+                    && _suppressMessageAttributeType.Equals(
+                        propertyReference.Property.ContainingType
+                    )
+                )
                 {
                     builder.Add((propertyReference.Property.Name, simpleAssignment.Value));
                 }
@@ -70,10 +86,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             return namedAttributeArguments.Length > 0;
         }
 
-        public static bool HasValidScope(ImmutableArray<(string name, IOperation value)> namedAttributeArguments, out TargetScope targetScope)
+        public static bool HasValidScope(
+            ImmutableArray<(string name, IOperation value)> namedAttributeArguments,
+            out TargetScope targetScope
+        )
         {
-            if (!TryGetNamedArgument(namedAttributeArguments, SuppressMessageScope, out var scopeString, out _) ||
-                RoslynString.IsNullOrEmpty(scopeString))
+            if (
+                !TryGetNamedArgument(
+                    namedAttributeArguments,
+                    SuppressMessageScope,
+                    out var scopeString,
+                    out _
+                ) || RoslynString.IsNullOrEmpty(scopeString)
+            )
             {
                 // Missing/Null/Empty scope values are treated equivalent to a compilation wide suppression.
                 targetScope = TargetScope.Module;
@@ -93,7 +118,8 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             out bool targetHasDocCommentIdFormat,
             out string? targetSymbolString,
             out IOperation? targetValueOperation,
-            out ImmutableArray<ISymbol> resolvedSymbols)
+            out ImmutableArray<ISymbol> resolvedSymbols
+        )
         {
             targetHasDocCommentIdFormat = false;
             targetSymbolString = null;
@@ -106,7 +132,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 return true;
             }
 
-            if (!TryGetNamedArgument(namedAttributeArguments, SuppressMessageTarget, out targetSymbolString, out targetValueOperation))
+            if (
+                !TryGetNamedArgument(
+                    namedAttributeArguments,
+                    SuppressMessageTarget,
+                    out targetSymbolString,
+                    out targetValueOperation
+                )
+            )
             {
                 targetSymbolString = null;
             }
@@ -131,13 +164,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             ImmutableArray<(string name, IOperation value)> namedAttributeArguments,
             string argumentName,
             out string? argumentValue,
-            [NotNullWhen(returnValue: true)] out IOperation? argumentValueOperation)
+            [NotNullWhen(returnValue: true)] out IOperation? argumentValueOperation
+        )
         {
             foreach (var (name, value) in namedAttributeArguments)
             {
-                if (name == argumentName &&
-                    value.ConstantValue.HasValue &&
-                    value.ConstantValue.Value is string stringValue)
+                if (
+                    name == argumentName
+                    && value.ConstantValue.HasValue
+                    && value.ConstantValue.Value is string stringValue
+                )
                 {
                     argumentValue = stringValue;
                     argumentValueOperation = value;

@@ -8,7 +8,8 @@ namespace System.ConfigurationTests
 {
     public class ConfigPathUtilityTests
     {
-        [Theory,
+        [
+            Theory,
             InlineData(null, false),
             InlineData(@"", false),
             InlineData(@"\", false),
@@ -28,35 +29,35 @@ namespace System.ConfigurationTests
             InlineData(@"a/b../c", true),
             InlineData(@"a/../c", false),
             InlineData(@"a/./c", false)
-            ]
+        ]
         public void IsValid(string configPath, bool expected)
         {
             Assert.Equal(expected, ConfigPathUtility.IsValid(configPath));
         }
 
-        [Theory,
-            InlineData(@"a", @"b", @"a/b")
-            ]
+        [Theory, InlineData(@"a", @"b", @"a/b")]
         public void Combine(string parentConfigPath, string childConfigPath, string expected)
         {
             Assert.Equal(expected, ConfigPathUtility.Combine(parentConfigPath, childConfigPath));
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(@"a", new string[] { "a" }),
             InlineData(@"a/b", new string[] { "a", "b" })
-            ]
+        ]
         public void GetParts(string configPath, string[] expected)
         {
             Assert.Equal(expected, ConfigPathUtility.GetParts(configPath));
         }
 
-        [Theory,
+        [
+            Theory,
             InlineData(@"a", @"a"),
             InlineData(@"ab", @"ab"),
             InlineData(@"a/b", @"b"),
             InlineData(@"a/b/c", @"c")
-            ]
+        ]
         public void GetName(string configPath, string expected)
         {
             Assert.Equal(expected, ConfigPathUtility.GetName(configPath));

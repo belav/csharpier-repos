@@ -21,20 +21,29 @@ public class MigrationTests
     public void Migration_and_snapshot_generate_with_typed_array()
     {
         using var db = new TypedArraySeedContext();
-        ValidateMigrationAndSnapshotCode(db, db.GetExpectedMigrationCode, db.GetExpectedSnapshotCode);
+        ValidateMigrationAndSnapshotCode(
+            db,
+            db.GetExpectedMigrationCode,
+            db.GetExpectedSnapshotCode
+        );
     }
 
     [ConditionalFact]
     public void Migration_and_snapshot_generate_with_anonymous_array()
     {
         using var db = new AnonymousArraySeedContext();
-        ValidateMigrationAndSnapshotCode(db, db.GetExpectedMigrationCode, db.GetExpectedSnapshotCode);
+        ValidateMigrationAndSnapshotCode(
+            db,
+            db.GetExpectedMigrationCode,
+            db.GetExpectedSnapshotCode
+        );
     }
 
     private static void ValidateMigrationAndSnapshotCode(
         DbContext context,
         MigrationCodeGetter migrationCodeGetter,
-        SnapshotCodeGetter snapshotCodeGetter)
+        SnapshotCodeGetter snapshotCodeGetter
+    )
     {
         const string migrationName = "MyMigration";
         const string rootNamespace = "MyApp.Data";
@@ -47,14 +56,21 @@ public class MigrationTests
                 m => Console.WriteLine($"  error: {m}"),
                 m => Console.WriteLine($"   warn: {m}"),
                 m => Console.WriteLine($"   info: {m}"),
-                m => Console.WriteLine($"verbose: {m}")));
+                m => Console.WriteLine($"verbose: {m}")
+            )
+        );
 
         var assembly = Assembly.GetExecutingAssembly();
 
         //this works because we have placed the DesignTimeServicesReferenceAttribute
         //in the test project's properties, which simulates
         //the nuget package's build target
-        var migration = new DesignTimeServicesBuilder(assembly, assembly, reporter, Array.Empty<string>())
+        var migration = new DesignTimeServicesBuilder(
+            assembly,
+            assembly,
+            reporter,
+            Array.Empty<string>()
+        )
             .Build(context)
             .GetRequiredService<IMigrationsScaffolder>()
             .ScaffoldMigration(migrationName, rootNamespace);

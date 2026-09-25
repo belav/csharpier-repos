@@ -4,6 +4,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-[assembly:ReferenceAssembly]
+[assembly: ReferenceAssembly]
 
-public static class TypeInUnloadableAssembly {}
+public static class TypeInUnloadableAssembly { }

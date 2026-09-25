@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System.IO;
     using System.Runtime.InteropServices;
-    using System.Threading;
     using System.Security.Permissions;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <devdoc>
@@ -16,47 +17,51 @@ namespace System.Net.Sockets {
     ///       Provides the underlying stream of data for network access.
     ///    </para>
     /// </devdoc>
-    public class NetworkStream : Stream {
+    public class NetworkStream : Stream
+    {
         /// <devdoc>
         ///    <para>
         ///       Used by the class to hold the underlying socket the stream uses.
         ///    </para>
         /// </devdoc>
-        private Socket    m_StreamSocket;
+        private Socket m_StreamSocket;
 
         /// <devdoc>
         ///    <para>
         ///       Used by the class to indicate that the stream is m_Readable.
         ///    </para>
         /// </devdoc>
-        private bool      m_Readable;
+        private bool m_Readable;
 
         /// <devdoc>
         ///    <para>
         ///       Used by the class to indicate that the stream is writable.
         ///    </para>
         /// </devdoc>
-        private bool      m_Writeable;
+        private bool m_Writeable;
 
-        private bool      m_OwnsSocket;
+        private bool m_OwnsSocket;
 
         /// <devdoc>
         /// <para>Creates a new instance of the <see cref='System.Net.Sockets.NetworkStream'/> without initalization.</para>
         /// </devdoc>
-        internal NetworkStream() {
+        internal NetworkStream()
+        {
             m_OwnsSocket = true;
         }
-
 
         // Can be constructed directly out of a socket
         /// <devdoc>
         /// <para>Creates a new instance of the <see cref='System.Net.Sockets.NetworkStream'/> class for the specified <see cref='System.Net.Sockets.Socket'/>.</para>
         /// </devdoc>
-        public NetworkStream(Socket socket) {
+        public NetworkStream(Socket socket)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            if (socket == null) {
+            if (socket == null)
+            {
                 throw new ArgumentNullException("socket");
             }
             InitNetworkStream(socket, FileAccess.ReadWrite);
@@ -67,11 +72,14 @@ namespace System.Net.Sockets {
 
         //UEUE (see FileStream)
         // ownsHandle: true if the file handle will be owned by this NetworkStream instance; otherwise, false.
-        public NetworkStream(Socket socket, bool ownsSocket) {
+        public NetworkStream(Socket socket, bool ownsSocket)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            if (socket == null) {
+            if (socket == null)
+            {
                 throw new ArgumentNullException("socket");
             }
             InitNetworkStream(socket, FileAccess.ReadWrite);
@@ -81,9 +89,11 @@ namespace System.Net.Sockets {
 #endif
         }
 
-        internal NetworkStream(NetworkStream networkStream, bool ownsSocket) {
+        internal NetworkStream(NetworkStream networkStream, bool ownsSocket)
+        {
             Socket socket = networkStream.Socket;
-            if (socket == null) {
+            if (socket == null)
+            {
                 throw new ArgumentNullException("networkStream");
             }
             InitNetworkStream(socket, FileAccess.ReadWrite);
@@ -94,11 +104,14 @@ namespace System.Net.Sockets {
         /// <devdoc>
         /// <para>Creates a new instance of the <see cref='System.Net.Sockets.NetworkStream'/> class for the specified <see cref='System.Net.Sockets.Socket'/> with the specified access rights.</para>
         /// </devdoc>
-        public NetworkStream(Socket socket, FileAccess access) {
+        public NetworkStream(Socket socket, FileAccess access)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            if (socket == null) {
+            if (socket == null)
+            {
                 throw new ArgumentNullException("socket");
             }
             InitNetworkStream(socket, access);
@@ -106,11 +119,15 @@ namespace System.Net.Sockets {
             }
 #endif
         }
-        public NetworkStream(Socket socket, FileAccess access, bool ownsSocket) {
+
+        public NetworkStream(Socket socket, FileAccess access, bool ownsSocket)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            if (socket == null) {
+            if (socket == null)
+            {
                 throw new ArgumentNullException("socket");
             }
             InitNetworkStream(socket, access);
@@ -123,16 +140,18 @@ namespace System.Net.Sockets {
         //
         // Socket - provides access to socket for stream closing
         //
-        protected Socket Socket {
-            get {
-                return m_StreamSocket;
-            }
+        protected Socket Socket
+        {
+            get { return m_StreamSocket; }
         }
 
-        internal Socket InternalSocket {
-            get {
+        internal Socket InternalSocket
+        {
+            get
+            {
                 Socket chkSocket = m_StreamSocket;
-                if (m_CleanedUp || chkSocket == null) {
+                if (m_CleanedUp || chkSocket == null)
+                {
                     throw new ObjectDisposedException(this.GetType().FullName);
                 }
 
@@ -140,7 +159,7 @@ namespace System.Net.Sockets {
             }
         }
 
-        internal void InternalAbortSocket() 
+        internal void InternalAbortSocket()
         {
             if (!m_OwnsSocket)
             {
@@ -157,12 +176,11 @@ namespace System.Net.Sockets {
             {
                 chkSocket.Close(0);
             }
-            catch (ObjectDisposedException)
-            {
-            }
+            catch (ObjectDisposedException) { }
         }
 
-        internal void ConvertToNotSocketOwner() {
+        internal void ConvertToNotSocketOwner()
+        {
             m_OwnsSocket = false;
             // Suppress for finialization still allow proceed the requests
             GC.SuppressFinalize(this);
@@ -173,13 +191,10 @@ namespace System.Net.Sockets {
         ///       Used by the class to indicate that the stream is m_Readable.
         ///    </para>
         /// </devdoc>
-        protected bool Readable {
-            get {
-                return m_Readable;
-            }
-            set {
-                m_Readable = value;
-            }
+        protected bool Readable
+        {
+            get { return m_Readable; }
+            set { m_Readable = value; }
         }
 
         /// <devdoc>
@@ -187,15 +202,11 @@ namespace System.Net.Sockets {
         ///       Used by the class to indicate that the stream is writable.
         ///    </para>
         /// </devdoc>
-        protected bool Writeable {
-            get {
-                return m_Writeable;
-            }
-            set {
-                m_Writeable = value;
-            }
+        protected bool Writeable
+        {
+            get { return m_Writeable; }
+            set { m_Writeable = value; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -203,12 +214,10 @@ namespace System.Net.Sockets {
         ///         We return the readability of this stream. This is a read only property.
         ///    </para>
         /// </devdoc>
-        public override bool CanRead {
-            get {
-                return m_Readable;
-            }
+        public override bool CanRead
+        {
+            get { return m_Readable; }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -217,46 +226,51 @@ namespace System.Net.Sockets {
         ///       .
         ///    </para>
         /// </devdoc>
-        public override bool CanSeek {
-            get {
-                return false;
-            }
+        public override bool CanSeek
+        {
+            get { return false; }
         }
-
 
         /// <devdoc>
         ///    <para>
         ///       Indicates that data can be written to the stream.
         ///    </para>
         /// </devdoc>
-        public override bool CanWrite {
-            get {
-                return m_Writeable;
-            }
+        public override bool CanWrite
+        {
+            get { return m_Writeable; }
         }
-
 
         /// <devdoc>
         ///    <para>Indicates whether we can timeout</para>
         /// </devdoc>
-        public override bool CanTimeout { 
-            get {
+        public override bool CanTimeout
+        {
+            get
+            {
                 return true; // should we check for Connected state?
             }
         }
-
 
         /// <devdoc>
         ///    <para>Set/Get ReadTimeout, note of a strange behavior, 0 timeout == infinite for sockets,
         ///         so we map this to -1, and if you set 0, we cannot support it</para>
         /// </devdoc>
-        public override int ReadTimeout { 
-            get {
+        public override int ReadTimeout
+        {
+            get
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                int timeout = (int)m_StreamSocket.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout);
-                if (timeout == 0) {
+                int timeout = (int)
+                    m_StreamSocket.GetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ReceiveTimeout
+                    );
+                if (timeout == 0)
+                {
                     return -1;
                 }
                 return timeout;
@@ -264,12 +278,18 @@ namespace System.Net.Sockets {
                 }
 #endif
             }
-            set {
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                if (value<=0 && value!=System.Threading.Timeout.Infinite) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_gt_zero));
+                if (value <= 0 && value != System.Threading.Timeout.Infinite)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.net_io_timeout_use_gt_zero)
+                    );
                 }
                 SetSocketTimeoutOption(SocketShutdown.Receive, value, false);
 #if DEBUG
@@ -282,13 +302,21 @@ namespace System.Net.Sockets {
         ///    <para>Set/Get WriteTimeout, note of a strange behavior, 0 timeout == infinite for sockets,
         ///         so we map this to -1, and if you set 0, we cannot support it</para>
         /// </devdoc>
-	    public override int WriteTimeout { 
-            get {
+        public override int WriteTimeout
+        {
+            get
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                int timeout = (int)m_StreamSocket.GetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout);
-                if (timeout == 0) {
+                int timeout = (int)
+                    m_StreamSocket.GetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.SendTimeout
+                    );
+                if (timeout == 0)
+                {
                     return -1;
                 }
                 return timeout;
@@ -296,38 +324,54 @@ namespace System.Net.Sockets {
                 }
 #endif
             }
-            set {
+            set
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                if (value <= 0 && value != System.Threading.Timeout.Infinite) {
-                    throw new ArgumentOutOfRangeException("value", SR.GetString(SR.net_io_timeout_use_gt_zero));
+                if (value <= 0 && value != System.Threading.Timeout.Infinite)
+                {
+                    throw new ArgumentOutOfRangeException(
+                        "value",
+                        SR.GetString(SR.net_io_timeout_use_gt_zero)
+                    );
                 }
                 SetSocketTimeoutOption(SocketShutdown.Send, value, false);
 #if DEBUG
                 }
 #endif
             }
-        }        
+        }
 
         /// <devdoc>
         ///    <para>
         ///       Indicates data is available on the stream to be read.
-        ///         This property checks to see if at least one byte of data is currently available            
+        ///         This property checks to see if at least one byte of data is currently available
         ///    </para>
         /// </devdoc>
-        public virtual bool DataAvailable {
-            get {
+        public virtual bool DataAvailable
+        {
+            get
+            {
 #if DEBUG
-                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+                using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+                {
 #endif
-                if (m_CleanedUp){
+                if (m_CleanedUp)
+                {
                     throw new ObjectDisposedException(this.GetType().FullName);
                 }
 
                 Socket chkStreamSocket = m_StreamSocket;
-                if(chkStreamSocket == null) {
-                    throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+                if (chkStreamSocket == null)
+                {
+                    throw new IOException(
+                        SR.GetString(
+                            SR.net_io_readfailure,
+                            SR.GetString(SR.net_io_connectionclosed)
+                        )
+                    );
                 }
 
                 // Ask the socket how many bytes are available. If it's
@@ -340,16 +384,14 @@ namespace System.Net.Sockets {
             }
         }
 
-
         /// <devdoc>
         ///    <para>
         ///       The length of data available on the stream. Always throws <see cref='NotSupportedException'/>.
         ///    </para>
         /// </devdoc>
-        public override long Length {
-            get {
-                throw new NotSupportedException(SR.GetString(SR.net_noseek));
-            }
+        public override long Length
+        {
+            get { throw new NotSupportedException(SR.GetString(SR.net_noseek)); }
         }
 
         /// <devdoc>
@@ -357,16 +399,11 @@ namespace System.Net.Sockets {
         ///       Gets or sets the position in the stream. Always throws <see cref='NotSupportedException'/>.
         ///    </para>
         /// </devdoc>
-        public override long Position {
-            get {
-                throw new NotSupportedException(SR.GetString(SR.net_noseek));
-            }
-
-            set {
-                throw new NotSupportedException(SR.GetString(SR.net_noseek));
-            }
+        public override long Position
+        {
+            get { throw new NotSupportedException(SR.GetString(SR.net_noseek)); }
+            set { throw new NotSupportedException(SR.GetString(SR.net_noseek)); }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -374,10 +411,10 @@ namespace System.Net.Sockets {
         ///    <see cref='NetworkStream'/> class.
         ///    </para>
         /// </devdoc>
-        public override long Seek(long offset, SeekOrigin origin) {
+        public override long Seek(long offset, SeekOrigin origin)
+        {
             throw new NotSupportedException(SR.GetString(SR.net_noseek));
         }
-
 
         /*++
 
@@ -398,23 +435,28 @@ namespace System.Net.Sockets {
                 Nothing, but may throw an exception.
         --*/
 
-        internal void InitNetworkStream(Socket socket, FileAccess Access) {
+        internal void InitNetworkStream(Socket socket, FileAccess Access)
+        {
             //
             // parameter validation
             //
-            if (!socket.Blocking) {
+            if (!socket.Blocking)
+            {
                 throw new IOException(SR.GetString(SR.net_sockets_blocking));
             }
-            if (!socket.Connected) {
+            if (!socket.Connected)
+            {
                 throw new IOException(SR.GetString(SR.net_notconnected));
             }
-            if (socket.SocketType != SocketType.Stream) {
+            if (socket.SocketType != SocketType.Stream)
+            {
                 throw new IOException(SR.GetString(SR.net_notstream));
             }
 
             m_StreamSocket = socket;
 
-            switch (Access) {
+            switch (Access)
+            {
                 case FileAccess.Read:
                     m_Readable = true;
                     break;
@@ -427,33 +469,39 @@ namespace System.Net.Sockets {
                     m_Writeable = true;
                     break;
             }
-
         }
 
-        internal bool PollRead() {
-            if (m_CleanedUp) {
+        internal bool PollRead()
+        {
+            if (m_CleanedUp)
+            {
                 return false;
             }
             Socket chkStreamSocket = m_StreamSocket;
-            if (chkStreamSocket == null) {
+            if (chkStreamSocket == null)
+            {
                 return false;
             }
             return chkStreamSocket.Poll(0, SelectMode.SelectRead);
         }
 
-        internal bool Poll(int microSeconds, SelectMode mode) {
-            if (m_CleanedUp){
+        internal bool Poll(int microSeconds, SelectMode mode)
+        {
+            if (m_CleanedUp)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if (chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
             return chkStreamSocket.Poll(microSeconds, mode);
         }
-
 
         /*++
             Read - provide core Read functionality.
@@ -479,50 +527,69 @@ namespace System.Net.Sockets {
         ///    </para>
         /// </devdoc>
         //UEUE
-        public override int Read([In, Out] byte[] buffer, int offset, int size) {
+        public override int Read([In, Out] byte[] buffer, int offset, int size)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync))
+            {
 #endif
-            bool canRead = CanRead;  // Prevent ---- with Dispose.
-            if (m_CleanedUp){
+            bool canRead = CanRead; // Prevent ---- with Dispose.
+            if (m_CleanedUp)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
-            if (!canRead) {    
+            if (!canRead)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.net_writeonlystream));
             }
             //
             // parameter validation
             //
-            if (buffer==null) {
+            if (buffer == null)
+            {
                 throw new ArgumentNullException("buffer");
             }
-            if (offset<0 || offset>buffer.Length) {
+            if (offset < 0 || offset > buffer.Length)
+            {
                 throw new ArgumentOutOfRangeException("offset");
             }
-            if (size<0 || size>buffer.Length-offset) {
+            if (size < 0 || size > buffer.Length - offset)
+            {
                 throw new ArgumentOutOfRangeException("size");
             }
 
-
             Socket chkStreamSocket = m_StreamSocket;
-            if (chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
+            try
+            {
                 int bytesTransferred = chkStreamSocket.Receive(buffer, offset, size, 0);
                 return bytesTransferred;
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_readfailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
@@ -553,53 +620,72 @@ namespace System.Net.Sockets {
         ///       Writes data to the stream..
         ///    </para>
         /// </devdoc>
-        public override void Write(byte[] buffer, int offset, int size) {
+        public override void Write(byte[] buffer, int offset, int size)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync))
+            {
 #endif
             bool canWrite = CanWrite; // Prevent ---- with Dispose.
-            if (m_CleanedUp){
+            if (m_CleanedUp)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
-            if (!canWrite) {    
+            if (!canWrite)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.net_readonlystream));
             }
             //
             // parameter validation
             //
-            if (buffer==null) {
+            if (buffer == null)
+            {
                 throw new ArgumentNullException("buffer");
             }
-            if (offset<0 || offset>buffer.Length) {
+            if (offset < 0 || offset > buffer.Length)
+            {
                 throw new ArgumentOutOfRangeException("offset");
             }
-            if (size<0 || size>buffer.Length-offset) {
+            if (size < 0 || size > buffer.Length - offset)
+            {
                 throw new ArgumentOutOfRangeException("size");
             }
 
-
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
+            try
+            {
                 //
                 // since the socket is in blocking mode this will always complete
                 // after ALL the requested number of bytes was transferred
                 //
                 chkStreamSocket.Send(buffer, offset, size, SocketFlags.None);
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
@@ -608,11 +694,14 @@ namespace System.Net.Sockets {
 
         private int m_CloseTimeout = Socket.DefaultCloseTimeout; // 1 ms; -1 = respect linger options
 
-        public void Close(int timeout) {
+        public void Close(int timeout)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Sync))
+            {
 #endif
-            if (timeout < -1) {
+            if (timeout < -1)
+            {
                 throw new ArgumentOutOfRangeException("timeout");
             }
             m_CloseTimeout = timeout;
@@ -623,24 +712,30 @@ namespace System.Net.Sockets {
         }
 
         private volatile bool m_CleanedUp = false;
-        protected override void Dispose(bool disposing) {
+
+        protected override void Dispose(bool disposing)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
             // Mark this as disposed before changing anything else.
             bool cleanedUp = m_CleanedUp;
-            m_CleanedUp = true; 
-            if (!cleanedUp && disposing) {
+            m_CleanedUp = true;
+            if (!cleanedUp && disposing)
+            {
                 //
                 // only resource we need to free is the network stream, since this
                 // is based on the client socket, closing the stream will cause us
                 // to flush the data to the network, close the stream and (in the
                 // NetoworkStream code) close the socket as well.
                 //
-                if (m_StreamSocket!=null) {
+                if (m_StreamSocket != null)
+                {
                     m_Readable = false;
                     m_Writeable = false;
-                    if (m_OwnsSocket) {
+                    if (m_OwnsSocket)
+                    {
                         //
                         // if we own the Socket (false by default), close it
                         // ignoring possible exceptions (eg: the user told us
@@ -648,7 +743,8 @@ namespace System.Net.Sockets {
                         // here we would get an ObjectDisposedException)
                         //
                         Socket chkStreamSocket = m_StreamSocket;
-                        if (chkStreamSocket!=null) {
+                        if (chkStreamSocket != null)
+                        {
                             chkStreamSocket.InternalShutdown(SocketShutdown.Both);
                             chkStreamSocket.Close(m_CloseTimeout);
                         }
@@ -661,14 +757,15 @@ namespace System.Net.Sockets {
             base.Dispose(disposing);
         }
 
-        ~NetworkStream() {
+        ~NetworkStream()
+        {
 #if DEBUG
             GlobalLog.SetThreadSource(ThreadKinds.Finalization);
-           // using (GlobalLog.SetThreadKind(ThreadKinds.System | ThreadKinds.Async)) {
+            // using (GlobalLog.SetThreadKind(ThreadKinds.System | ThreadKinds.Async)) {
 #endif
             Dispose(false);
 #if DEBUG
-           // }
+            // }
 #endif
         }
 
@@ -677,17 +774,21 @@ namespace System.Net.Sockets {
         ///       Indicates whether the stream is still connected
         ///    </para>
         /// </devdoc>
-        internal bool Connected {
-            get {
+        internal bool Connected
+        {
+            get
+            {
                 Socket socket = m_StreamSocket;
-                if (!m_CleanedUp && socket !=null && socket.Connected) {
+                if (!m_CleanedUp && socket != null && socket.Connected)
+                {
                     return true;
-                } else {
+                }
+                else
+                {
                     return false;
                 }
             }
         }
-
 
         /*++
             BeginRead - provide async read functionality.
@@ -712,65 +813,97 @@ namespace System.Net.Sockets {
         ///       Begins an asychronous read from a stream.
         ///    </para>
         /// </devdoc>
-        [HostProtection(ExternalThreading=true)]
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int size, AsyncCallback callback, Object state) {
+        [HostProtection(ExternalThreading = true)]
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback callback,
+            Object state
+        )
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+            {
 #endif
             bool canRead = CanRead; // Prevent ---- with Dispose.
-            if (m_CleanedUp){
+            if (m_CleanedUp)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
-            if (!canRead) {    
+            if (!canRead)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.net_writeonlystream));
             }
             //
             // parameter validation
             //
-            if (buffer==null) {
+            if (buffer == null)
+            {
                 throw new ArgumentNullException("buffer");
             }
-            if (offset<0 || offset>buffer.Length) {
+            if (offset < 0 || offset > buffer.Length)
+            {
                 throw new ArgumentOutOfRangeException("offset");
             }
-            if (size<0 || size>buffer.Length-offset) {
+            if (size < 0 || size > buffer.Length - offset)
+            {
                 throw new ArgumentOutOfRangeException("size");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
-                IAsyncResult asyncResult =
-                    chkStreamSocket.BeginReceive(
-                        buffer,
-                        offset,
-                        size,
-                        SocketFlags.None,
-                        callback,
-                        state);
+            try
+            {
+                IAsyncResult asyncResult = chkStreamSocket.BeginReceive(
+                    buffer,
+                    offset,
+                    size,
+                    SocketFlags.None,
+                    callback,
+                    state
+                );
 
                 return asyncResult;
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_readfailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
 #endif
         }
 
-        internal virtual IAsyncResult UnsafeBeginRead(byte[] buffer, int offset, int size, AsyncCallback callback, Object state)
+        internal virtual IAsyncResult UnsafeBeginRead(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback callback,
+            Object state
+        )
         {
             bool canRead = CanRead; // Prevent ---- with Dispose.
             if (m_CleanedUp)
@@ -785,7 +918,9 @@ namespace System.Net.Sockets {
             Socket chkStreamSocket = m_StreamSocket;
             if (chkStreamSocket == null)
             {
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
             try
@@ -796,19 +931,24 @@ namespace System.Net.Sockets {
                     size,
                     SocketFlags.None,
                     callback,
-                    state);
+                    state
+                );
 
                 return asyncResult;
             }
             catch (Exception exception)
             {
-                if (NclUtilities.IsFatal(exception)) throw;
+                if (NclUtilities.IsFatal(exception))
+                    throw;
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_readfailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, exception.Message),
+                    exception
+                );
             }
         }
 
@@ -834,40 +974,57 @@ namespace System.Net.Sockets {
         ///       Handle the end of an asynchronous read.
         ///    </para>
         /// </devdoc>
-        public override int EndRead(IAsyncResult asyncResult) {
+        public override int EndRead(IAsyncResult asyncResult)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            if (m_CleanedUp){
+            if (m_CleanedUp)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
             //
             // parameter validation
             //
-            if (asyncResult==null) {
+            if (asyncResult == null)
+            {
                 throw new ArgumentNullException("asyncResult");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
+            try
+            {
                 int bytesTransferred = chkStreamSocket.EndReceive(asyncResult);
                 return bytesTransferred;
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_readfailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_readfailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
@@ -897,119 +1054,164 @@ namespace System.Net.Sockets {
         ///       Begins an asynchronous write to a stream.
         ///    </para>
         /// </devdoc>
-        [HostProtection(ExternalThreading=true)]
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, AsyncCallback callback, Object state) {
+        [HostProtection(ExternalThreading = true)]
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback callback,
+            Object state
+        )
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+            {
 #endif
             bool canWrite = CanWrite; // Prevent ---- with Dispose.
-            if (m_CleanedUp){
+            if (m_CleanedUp)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
-            if (!canWrite) {    
+            if (!canWrite)
+            {
                 throw new InvalidOperationException(SR.GetString(SR.net_readonlystream));
             }
             //
             // parameter validation
             //
-            if (buffer==null) {
+            if (buffer == null)
+            {
                 throw new ArgumentNullException("buffer");
             }
-            if (offset<0 || offset>buffer.Length) {
+            if (offset < 0 || offset > buffer.Length)
+            {
                 throw new ArgumentOutOfRangeException("offset");
             }
-            if (size<0 || size>buffer.Length-offset) {
+            if (size < 0 || size > buffer.Length - offset)
+            {
                 throw new ArgumentOutOfRangeException("size");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
+            try
+            {
                 //
                 // call BeginSend on the Socket.
                 //
-                IAsyncResult asyncResult =
-                    chkStreamSocket.BeginSend(
-                        buffer,
-                        offset,
-                        size,
-                        SocketFlags.None,
-                        callback,
-                        state);
+                IAsyncResult asyncResult = chkStreamSocket.BeginSend(
+                    buffer,
+                    offset,
+                    size,
+                    SocketFlags.None,
+                    callback,
+                    state
+                );
 
                 return asyncResult;
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
 #endif
         }
 
-               
-
-        internal virtual IAsyncResult UnsafeBeginWrite(byte[] buffer, int offset, int size, AsyncCallback callback, Object state) {
+        internal virtual IAsyncResult UnsafeBeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback callback,
+            Object state
+        )
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User | ThreadKinds.Async))
+            {
 #endif
-                bool canWrite = CanWrite; // Prevent ---- with Dispose.
-                if (m_CleanedUp){
-                    throw new ObjectDisposedException(this.GetType().FullName);
+            bool canWrite = CanWrite; // Prevent ---- with Dispose.
+            if (m_CleanedUp)
+            {
+                throw new ObjectDisposedException(this.GetType().FullName);
+            }
+
+            if (!canWrite)
+            {
+                throw new InvalidOperationException(SR.GetString(SR.net_readonlystream));
+            }
+
+            Socket chkStreamSocket = m_StreamSocket;
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
+            }
+
+            try
+            {
+                //
+                // call BeginSend on the Socket.
+                //
+                IAsyncResult asyncResult = chkStreamSocket.UnsafeBeginSend(
+                    buffer,
+                    offset,
+                    size,
+                    SocketFlags.None,
+                    callback,
+                    state
+                );
+
+                return asyncResult;
+            }
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
+                    throw;
                 }
-                
-                if (!canWrite) {    
-                    throw new InvalidOperationException(SR.GetString(SR.net_readonlystream));
-                }
-    
-                Socket chkStreamSocket = m_StreamSocket;
-                if(chkStreamSocket == null) {
-                    throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
-                }
-    
-                try {
-                    //
-                    // call BeginSend on the Socket.
-                    //
-                    IAsyncResult asyncResult =
-                        chkStreamSocket.UnsafeBeginSend(
-                            buffer,
-                            offset,
-                            size,
-                            SocketFlags.None,
-                            callback,
-                            state);
-    
-                    return asyncResult;
-                }
-                catch (Exception exception) {
-                    if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
-                        throw;
-    	            }
-    
-                    //
-                    // some sort of error occured on the socket call,
-                    // set the SocketException as InnerException and throw
-                    //
-                    throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
-                }
+
+                //
+                // some sort of error occured on the socket call,
+                // set the SocketException as InnerException and throw
+                //
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
+            }
 #if DEBUG
             }
 #endif
         }
-
-
 
         /// <devdoc>
         ///    <para>
@@ -1019,45 +1221,61 @@ namespace System.Net.Sockets {
         ///       Returns:  The number of bytes read. May throw an exception.
         ///    </para>
         /// </devdoc>
-        public override void EndWrite(IAsyncResult asyncResult) {
+        public override void EndWrite(IAsyncResult asyncResult)
+        {
 #if DEBUG
-            using (GlobalLog.SetThreadKind(ThreadKinds.User)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.User))
+            {
 #endif
-            if (m_CleanedUp){
+            if (m_CleanedUp)
+            {
                 throw new ObjectDisposedException(this.GetType().FullName);
             }
 
             //
             // parameter validation
             //
-            if (asyncResult==null) {
+            if (asyncResult == null)
+            {
                 throw new ArgumentNullException("asyncResult");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
+            try
+            {
                 chkStreamSocket.EndSend(asyncResult);
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
 #endif
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -1066,40 +1284,52 @@ namespace System.Net.Sockets {
         /// </devdoc>
         internal virtual void MultipleWrite(BufferOffsetSize[] buffers)
         {
-            GlobalLog.ThreadContract(ThreadKinds.Sync, "NetworkStream#" + ValidationHelper.HashString(this) + "::MultipleWrite");
+            GlobalLog.ThreadContract(
+                ThreadKinds.Sync,
+                "NetworkStream#" + ValidationHelper.HashString(this) + "::MultipleWrite"
+            );
 
             //
             // parameter validation
             //
-            if (buffers == null) {
+            if (buffers == null)
+            {
                 throw new ArgumentNullException("buffers");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
-
-                chkStreamSocket.MultipleSend(
-                    buffers,
-                    SocketFlags.None);
-
+            try
+            {
+                chkStreamSocket.MultipleSend(buffers, SocketFlags.None);
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
             }
         }
-
 
         /// <devdoc>
         ///    <para>
@@ -1109,139 +1339,189 @@ namespace System.Net.Sockets {
         internal virtual IAsyncResult BeginMultipleWrite(
             BufferOffsetSize[] buffers,
             AsyncCallback callback,
-            Object state)
+            Object state
+        )
         {
 #if DEBUG
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "NetworkStream#" + ValidationHelper.HashString(this) + "::BeginMultipleWrite");
-            using (GlobalLog.SetThreadKind(ThreadKinds.Async)) {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "NetworkStream#" + ValidationHelper.HashString(this) + "::BeginMultipleWrite"
+            );
+            using (GlobalLog.SetThreadKind(ThreadKinds.Async))
+            {
 #endif
 
             //
             // parameter validation
             //
-            if (buffers == null) {
+            if (buffers == null)
+            {
                 throw new ArgumentNullException("buffers");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
-
+            try
+            {
                 //
                 // call BeginMultipleSend on the Socket.
                 //
-                IAsyncResult asyncResult =
-                    chkStreamSocket.BeginMultipleSend(
-                        buffers,
-                        SocketFlags.None,
-                        callback,
-                        state);
+                IAsyncResult asyncResult = chkStreamSocket.BeginMultipleSend(
+                    buffers,
+                    SocketFlags.None,
+                    callback,
+                    state
+                );
 
                 return asyncResult;
             }
-            catch (Exception exception) {
-
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
 #endif
         }
-
 
         internal virtual IAsyncResult UnsafeBeginMultipleWrite(
             BufferOffsetSize[] buffers,
             AsyncCallback callback,
-            Object state)
+            Object state
+        )
         {
 #if DEBUG
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "NetworkStream#" + ValidationHelper.HashString(this) + "::BeginMultipleWrite");
-            using (GlobalLog.SetThreadKind(ThreadKinds.Async)) {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "NetworkStream#" + ValidationHelper.HashString(this) + "::BeginMultipleWrite"
+            );
+            using (GlobalLog.SetThreadKind(ThreadKinds.Async))
+            {
 #endif
 
             //
             // parameter validation
             //
-            if (buffers == null) {
+            if (buffers == null)
+            {
                 throw new ArgumentNullException("buffers");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
-
+            try
+            {
                 //
                 // call BeginMultipleSend on the Socket.
                 //
-                IAsyncResult asyncResult =
-                    chkStreamSocket.UnsafeBeginMultipleSend(
-                        buffers,
-                        SocketFlags.None,
-                        callback,
-                        state);
+                IAsyncResult asyncResult = chkStreamSocket.UnsafeBeginMultipleSend(
+                    buffers,
+                    SocketFlags.None,
+                    callback,
+                    state
+                );
 
                 return asyncResult;
             }
-            catch (Exception exception) {
-
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
             }
 #if DEBUG
             }
 #endif
         }
 
-
-        internal virtual void EndMultipleWrite(IAsyncResult asyncResult) {
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "NetworkStream#" + ValidationHelper.HashString(this) + "::EndMultipleWrite");
+        internal virtual void EndMultipleWrite(IAsyncResult asyncResult)
+        {
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "NetworkStream#" + ValidationHelper.HashString(this) + "::EndMultipleWrite"
+            );
 
             //
             // parameter validation
             //
-            if (asyncResult == null) {
+            if (asyncResult == null)
+            {
                 throw new ArgumentNullException("asyncResult");
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if(chkStreamSocket == null) {
-                throw new IOException(SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed)));
+            if (chkStreamSocket == null)
+            {
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, SR.GetString(SR.net_io_connectionclosed))
+                );
             }
 
-            try {
+            try
+            {
                 chkStreamSocket.EndMultipleSend(asyncResult);
             }
-            catch (Exception exception) {
-                if (exception is ThreadAbortException || exception is StackOverflowException || exception is OutOfMemoryException) {                                       
+            catch (Exception exception)
+            {
+                if (
+                    exception is ThreadAbortException
+                    || exception is StackOverflowException
+                    || exception is OutOfMemoryException
+                )
+                {
                     throw;
-	            }
+                }
 
                 //
                 // some sort of error occured on the socket call,
                 // set the SocketException as InnerException and throw
                 //
-                throw new IOException(SR.GetString(SR.net_io_writefailure, exception.Message), exception);
+                throw new IOException(
+                    SR.GetString(SR.net_io_writefailure, exception.Message),
+                    exception
+                );
             }
         }
 
@@ -1250,8 +1530,7 @@ namespace System.Net.Sockets {
         ///       Flushes data from the stream.  This is meaningless for us, so it does nothing.
         ///    </para>
         /// </devdoc>
-        public override void Flush() {
-        }
+        public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
@@ -1263,33 +1542,68 @@ namespace System.Net.Sockets {
         ///       Sets the length of the stream. Always throws <see cref='NotSupportedException'/>
         ///    </para>
         /// </devdoc>
-        public override void SetLength(long value) {
+        public override void SetLength(long value)
+        {
             throw new NotSupportedException(SR.GetString(SR.net_noseek));
         }
 
         int m_CurrentReadTimeout = -1;
         int m_CurrentWriteTimeout = -1;
-        internal void SetSocketTimeoutOption(SocketShutdown mode, int timeout, bool silent) {
-            GlobalLog.Print("NetworkStream#" + ValidationHelper.HashString(this) + "::SetSocketTimeoutOption() mode:" + mode + " silent:" + silent + " timeout:" + timeout + " m_CurrentReadTimeout:" + m_CurrentReadTimeout + " m_CurrentWriteTimeout:" + m_CurrentWriteTimeout);
-            GlobalLog.ThreadContract(ThreadKinds.Unknown, "NetworkStream#" + ValidationHelper.HashString(this) + "::SetSocketTimeoutOption");
 
-            if (timeout < 0) {
+        internal void SetSocketTimeoutOption(SocketShutdown mode, int timeout, bool silent)
+        {
+            GlobalLog.Print(
+                "NetworkStream#"
+                    + ValidationHelper.HashString(this)
+                    + "::SetSocketTimeoutOption() mode:"
+                    + mode
+                    + " silent:"
+                    + silent
+                    + " timeout:"
+                    + timeout
+                    + " m_CurrentReadTimeout:"
+                    + m_CurrentReadTimeout
+                    + " m_CurrentWriteTimeout:"
+                    + m_CurrentWriteTimeout
+            );
+            GlobalLog.ThreadContract(
+                ThreadKinds.Unknown,
+                "NetworkStream#" + ValidationHelper.HashString(this) + "::SetSocketTimeoutOption"
+            );
+
+            if (timeout < 0)
+            {
                 timeout = 0; // -1 becomes 0 for the winsock stack
             }
 
             Socket chkStreamSocket = m_StreamSocket;
-            if (chkStreamSocket==null) {
+            if (chkStreamSocket == null)
+            {
                 return;
             }
-            if (mode==SocketShutdown.Send || mode==SocketShutdown.Both) {
-                if (timeout!=m_CurrentWriteTimeout) {
-                    chkStreamSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendTimeout, timeout, silent);
+            if (mode == SocketShutdown.Send || mode == SocketShutdown.Both)
+            {
+                if (timeout != m_CurrentWriteTimeout)
+                {
+                    chkStreamSocket.SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.SendTimeout,
+                        timeout,
+                        silent
+                    );
                     m_CurrentWriteTimeout = timeout;
                 }
             }
-            if (mode==SocketShutdown.Receive || mode==SocketShutdown.Both) {
-                if (timeout!=m_CurrentReadTimeout) {
-                    chkStreamSocket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveTimeout, timeout, silent);
+            if (mode == SocketShutdown.Receive || mode == SocketShutdown.Both)
+            {
+                if (timeout != m_CurrentReadTimeout)
+                {
+                    chkStreamSocket.SetSocketOption(
+                        SocketOptionLevel.Socket,
+                        SocketOptionName.ReceiveTimeout,
+                        timeout,
+                        silent
+                    );
                     m_CurrentReadTimeout = timeout;
                 }
             }
@@ -1297,8 +1611,10 @@ namespace System.Net.Sockets {
 
 #if TRAVE
         [System.Diagnostics.Conditional("TRAVE")]
-        internal void DebugMembers() {
-            if (m_StreamSocket != null) {
+        internal void DebugMembers()
+        {
+            if (m_StreamSocket != null)
+            {
                 GlobalLog.Print("m_StreamSocket:");
                 m_StreamSocket.DebugMembers();
             }

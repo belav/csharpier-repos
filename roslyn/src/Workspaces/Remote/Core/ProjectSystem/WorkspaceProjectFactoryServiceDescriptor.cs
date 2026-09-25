@@ -7,6 +7,12 @@ namespace Microsoft.CodeAnalysis.Remote.ProjectSystem
     internal static class WorkspaceProjectFactoryServiceDescriptor
     {
         public const string ServiceName = "WorkspaceProjectFactoryService";
-        public static readonly ServiceDescriptor ServiceDescriptor = ServiceDescriptor.CreateInProcServiceDescriptor(ServiceDescriptors.ComponentName, ServiceName, suffix: "", ServiceDescriptors.GetFeatureDisplayName);
+        public static readonly ServiceDescriptor ServiceDescriptor =
+            ServiceDescriptor.CreateInProcServiceDescriptor(
+                ServiceDescriptors.ComponentName,
+                ServiceName,
+                suffix: "",
+                ServiceDescriptors.GetFeatureDisplayName
+            );
     }
 }

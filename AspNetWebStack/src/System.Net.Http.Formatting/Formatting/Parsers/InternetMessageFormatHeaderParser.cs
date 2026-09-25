@@ -31,9 +31,7 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="headers">Concrete <see cref="HttpHeaders"/> instance where header fields are added as they are parsed.</param>
         /// <param name="maxHeaderSize">Maximum length of complete header containing all the individual header fields.</param>
         public InternetMessageFormatHeaderParser(HttpHeaders headers, int maxHeaderSize)
-            : this(headers, maxHeaderSize, ignoreHeaderValidation: false)
-        {
-        }
+            : this(headers, maxHeaderSize, ignoreHeaderValidation: false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InternetMessageFormatHeaderParser"/> class.
@@ -47,12 +45,20 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="ignoreHeaderValidation">
         /// Will validate content and names of headers if set to <c>false</c>.
         /// </param>
-        public InternetMessageFormatHeaderParser(HttpHeaders headers, int maxHeaderSize, bool ignoreHeaderValidation)
+        public InternetMessageFormatHeaderParser(
+            HttpHeaders headers,
+            int maxHeaderSize,
+            bool ignoreHeaderValidation
+        )
         {
             // The minimum length which would be an empty header terminated by CRLF
             if (maxHeaderSize < InternetMessageFormatHeaderParser.MinHeaderSize)
             {
-                throw Error.ArgumentMustBeGreaterThanOrEqualTo("maxHeaderSize", maxHeaderSize, MinHeaderSize);
+                throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                    "maxHeaderSize",
+                    maxHeaderSize,
+                    MinHeaderSize
+                );
             }
 
             if (headers == null)
@@ -71,7 +77,7 @@ namespace System.Net.Http.Formatting.Parsers
             Name = 0,
             Value,
             AfterCarriageReturn,
-            FoldingLine
+            FoldingLine,
         }
 
         /// <summary>
@@ -83,11 +89,12 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="bytesReady">Size of request buffer</param>
         /// <param name="bytesConsumed">Offset into request buffer</param>
         /// <returns>State of the parser. Call this method with new data until it reaches a final state.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is translated to parse state.")]
-        public ParserState ParseBuffer(
-            byte[] buffer,
-            int bytesReady,
-            ref int bytesConsumed)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is translated to parse state."
+        )]
+        public ParserState ParseBuffer(byte[] buffer, int bytesReady, ref int bytesConsumed)
         {
             if (buffer == null)
             {
@@ -113,7 +120,8 @@ namespace System.Net.Http.Formatting.Parsers
                     ref _totalBytesConsumed,
                     _currentHeader,
                     _headers,
-                    _ignoreHeaderValidation);
+                    _ignoreHeaderValidation
+                );
             }
             catch (Exception)
             {
@@ -123,7 +131,11 @@ namespace System.Net.Http.Formatting.Parsers
             return parseStatus;
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "This is a parser which cannot be split up for performance reasons.")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "This is a parser which cannot be split up for performance reasons."
+        )]
         private static ParserState ParseHeaderFields(
             byte[] buffer,
             int bytesReady,
@@ -133,10 +145,17 @@ namespace System.Net.Http.Formatting.Parsers
             ref int totalBytesConsumed,
             CurrentHeaderFieldStore currentField,
             HttpHeaders headers,
-            bool ignoreHeaderValidation)
+            bool ignoreHeaderValidation
+        )
         {
-            Contract.Assert((bytesReady - bytesConsumed) >= 0, "ParseHeaderFields()|(inputBufferLength - bytesParsed) < 0");
-            Contract.Assert(maximumHeaderLength <= 0 || totalBytesConsumed <= maximumHeaderLength, "ParseHeaderFields()|Headers already read exceeds limit.");
+            Contract.Assert(
+                (bytesReady - bytesConsumed) >= 0,
+                "ParseHeaderFields()|(inputBufferLength - bytesParsed) < 0"
+            );
+            Contract.Assert(
+                maximumHeaderLength <= 0 || totalBytesConsumed <= maximumHeaderLength,
+                "ParseHeaderFields()|Headers already read exceeds limit."
+            );
 
             // Remember where we started.
             int initialBytesParsed = bytesConsumed;
@@ -144,14 +163,20 @@ namespace System.Net.Http.Formatting.Parsers
 
             // Set up parsing status with what will happen if we exceed the buffer.
             ParserState parseStatus = ParserState.DataTooBig;
-            int effectiveMax = maximumHeaderLength <= 0 ? Int32.MaxValue : maximumHeaderLength - totalBytesConsumed + initialBytesParsed;
+            int effectiveMax =
+                maximumHeaderLength <= 0
+                    ? Int32.MaxValue
+                    : maximumHeaderLength - totalBytesConsumed + initialBytesParsed;
             if (bytesReady < effectiveMax)
             {
                 parseStatus = ParserState.NeedMoreData;
                 effectiveMax = bytesReady;
             }
 
-            Contract.Assert(bytesConsumed < effectiveMax, "We have already consumed more than the max header length.");
+            Contract.Assert(
+                bytesConsumed < effectiveMax,
+                "We have already consumed more than the max header length."
+            );
 
             switch (requestHeaderState)
             {
@@ -181,7 +206,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string headerFieldName = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string headerFieldName = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentField.Name.Append(headerFieldName);
                             goto quit;
                         }
@@ -189,7 +218,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string headerFieldName = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string headerFieldName = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentField.Name.Append(headerFieldName);
                     }
 
@@ -208,7 +241,11 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            string headerFieldValue = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                            string headerFieldValue = Encoding.UTF8.GetString(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            );
                             currentField.Value.Append(headerFieldValue);
                             goto quit;
                         }
@@ -216,7 +253,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        string headerFieldValue = Encoding.UTF8.GetString(buffer, segmentStart, bytesConsumed - segmentStart);
+                        string headerFieldValue = Encoding.UTF8.GetString(
+                            buffer,
+                            segmentStart,
+                            bytesConsumed - segmentStart
+                        );
                         currentField.Value.Append(headerFieldValue);
                     }
 
@@ -277,7 +318,7 @@ namespace System.Net.Http.Formatting.Parsers
                     goto case HeaderFieldState.Value;
             }
 
-        quit:
+            quit:
             totalBytesConsumed += bytesConsumed - initialBytesParsed;
             return parseStatus;
         }
@@ -292,8 +333,12 @@ namespace System.Net.Http.Formatting.Parsers
 
             private static readonly char[] _linearWhiteSpace = new char[] { ' ', '\t' };
 
-            private readonly StringBuilder _name = new StringBuilder(CurrentHeaderFieldStore.DefaultFieldNameAllocation);
-            private readonly StringBuilder _value = new StringBuilder(CurrentHeaderFieldStore.DefaultFieldValueAllocation);
+            private readonly StringBuilder _name = new StringBuilder(
+                CurrentHeaderFieldStore.DefaultFieldNameAllocation
+            );
+            private readonly StringBuilder _value = new StringBuilder(
+                CurrentHeaderFieldStore.DefaultFieldValueAllocation
+            );
 
             /// <summary>
             /// Gets the header field name.

@@ -26,29 +26,21 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Public Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         public TextElement(SchemaElement parentElement)
-        : base(parentElement)
-        {
-        }
+            : base(parentElement) { }
         #endregion
 
         #region Public Properties
         /// <summary>
-        /// 
+        ///
         /// </summary>
         public string Value
         {
-            get
-            {
-                return _value;
-            }
-            private set
-            {
-                _value = value;
-            }
+            get { return _value; }
+            private set { _value = value; }
         }
         #endregion
 
@@ -62,16 +54,16 @@ namespace System.Data.EntityModel.SchemaObjectModel
 
         #region Private Methods
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="reader"></param>
         private void TextElementTextHandler(XmlReader reader)
         {
             string text = reader.Value;
-            if ( string.IsNullOrEmpty(text) )
+            if (string.IsNullOrEmpty(text))
                 return;
 
-            if ( string.IsNullOrEmpty(Value) )
+            if (string.IsNullOrEmpty(Value))
                 Value = text;
             else
                 Value += text;

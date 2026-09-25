@@ -17,17 +17,23 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpGoToBase()
-            : base(nameof(CSharpGoToBase))
-        {
-        }
+            : base(nameof(CSharpGoToBase)) { }
 
         [IdeFact]
         public async Task GoToBaseFromMetadataAsSource()
         {
-            await TestServices.SolutionExplorer.AddFileAsync(ProjectName, "C.cs", cancellationToken: HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.OpenFileAsync(ProjectName, "C.cs", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.AddFileAsync(
+                ProjectName,
+                "C.cs",
+                cancellationToken: HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                ProjectName,
+                "C.cs",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.SetTextAsync(
-@"using System;
+                @"using System;
 
 class C
 {
@@ -35,12 +41,26 @@ class C
     {
         return ""C"";
     }
-}", HangMitigatingCancellationToken);
-            await TestServices.Editor.PlaceCaretAsync("ToString", charsOffset: -1, HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Editor.PlaceCaretAsync(
+                "ToString",
+                charsOffset: -1,
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.GoToBaseAsync(HangMitigatingCancellationToken);
-            Assert.Equal("Object [decompiled] [Read Only]", await TestServices.Shell.GetActiveWindowCaptionAsync(HangMitigatingCancellationToken));
+            Assert.Equal(
+                "Object [decompiled] [Read Only]",
+                await TestServices.Shell.GetActiveWindowCaptionAsync(
+                    HangMitigatingCancellationToken
+                )
+            );
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"public virtual string ToString$$()", assertCaretPosition: true);
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"public virtual string ToString$$()",
+                assertCaretPosition: true
+            );
         }
     }
 }

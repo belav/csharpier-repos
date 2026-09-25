@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.HttpWebClientProtocol.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,218 +29,234 @@
 //
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Web.Services;
-using System.Collections;
 
-namespace System.Web.Services.Protocols {
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public abstract class HttpWebClientProtocol : WebClientProtocol {
+namespace System.Web.Services.Protocols
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public abstract class HttpWebClientProtocol : WebClientProtocol
+    {
+        #region Fields
 
-		#region Fields
+        bool allowAutoRedirect,
+            enableDecompression;
+        X509CertificateCollection clientCertificates;
+        CookieContainer cookieContainer;
+        IWebProxy proxy;
+        string userAgent;
 
-		bool allowAutoRedirect, enableDecompression;
-		X509CertificateCollection clientCertificates;
-		CookieContainer cookieContainer;
-		IWebProxy proxy;
-		string userAgent;
-		
-		bool _unsafeAuthenticated;
-		#endregion
+        bool _unsafeAuthenticated;
+        #endregion
 
-		#region Constructors
+        #region Constructors
 
-		protected HttpWebClientProtocol () 
-		{
-			allowAutoRedirect = false;
-			clientCertificates = null;
-			cookieContainer = null;
-			proxy = null; // FIXME
-			userAgent = String.Format ("Mono Web Services Client Protocol {0}", Environment.Version);
-		}
-		
-		#endregion // Constructors
+        protected HttpWebClientProtocol()
+        {
+            allowAutoRedirect = false;
+            clientCertificates = null;
+            cookieContainer = null;
+            proxy = null; // FIXME
+            userAgent = String.Format("Mono Web Services Client Protocol {0}", Environment.Version);
+        }
 
-		#region Properties
+        #endregion // Constructors
 
-		[DefaultValue (false)]
-		[WebServicesDescription ("Enable automatic handling of server redirects.")]
-		public bool AllowAutoRedirect {
-			get { return allowAutoRedirect; }
-			set { allowAutoRedirect = value; }
-		}
+        #region Properties
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebServicesDescription ("The client certificates that will be sent to the server, if the server requests them.")]
-		public X509CertificateCollection ClientCertificates {
-			get {
-				if (clientCertificates == null)
-					clientCertificates = new X509CertificateCollection ();
-				return clientCertificates;
-			}
-		}
+        [DefaultValue(false)]
+        [WebServicesDescription("Enable automatic handling of server redirects.")]
+        public bool AllowAutoRedirect
+        {
+            get { return allowAutoRedirect; }
+            set { allowAutoRedirect = value; }
+        }
 
-		[DefaultValue (null)]
-		[WebServicesDescription ("A container for all cookies received from servers in the current session.")]
-		public CookieContainer CookieContainer {
-			get { return cookieContainer; }
-			set { cookieContainer = value; }
-		}
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebServicesDescription(
+            "The client certificates that will be sent to the server, if the server requests them."
+        )]
+        public X509CertificateCollection ClientCertificates
+        {
+            get
+            {
+                if (clientCertificates == null)
+                    clientCertificates = new X509CertificateCollection();
+                return clientCertificates;
+            }
+        }
 
-		[DefaultValue (false)]
-		public bool EnableDecompression {
-			get { return enableDecompression; }
-			set { enableDecompression = value; }
-		}
+        [DefaultValue(null)]
+        [WebServicesDescription(
+            "A container for all cookies received from servers in the current session."
+        )]
+        public CookieContainer CookieContainer
+        {
+            get { return cookieContainer; }
+            set { cookieContainer = value; }
+        }
 
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public IWebProxy Proxy {
-			get { return proxy; }
-			set { proxy = value; }
-		}
+        [DefaultValue(false)]
+        public bool EnableDecompression
+        {
+            get { return enableDecompression; }
+            set { enableDecompression = value; }
+        }
 
-		[WebServicesDescription ("Sets the user agent http header for the request.")]
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public string UserAgent {
-			get { return userAgent; }
-			set { userAgent = value; }
-		}
-		
-		[Browsable (false)]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public bool UnsafeAuthenticatedConnectionSharing
-		{
-			get { return _unsafeAuthenticated; }
-			set { _unsafeAuthenticated = value; }
-		}
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public IWebProxy Proxy
+        {
+            get { return proxy; }
+            set { proxy = value; }
+        }
 
-		#endregion // Properties
+        [WebServicesDescription("Sets the user agent http header for the request.")]
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public string UserAgent
+        {
+            get { return userAgent; }
+            set { userAgent = value; }
+        }
 
-		#region Methods
+        [Browsable(false)]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public bool UnsafeAuthenticatedConnectionSharing
+        {
+            get { return _unsafeAuthenticated; }
+            set { _unsafeAuthenticated = value; }
+        }
 
-		internal virtual void CheckForCookies (HttpWebResponse response)
-		{
-			CookieCollection cookies = response.Cookies;
-			if (cookieContainer == null || cookies.Count == 0)
-				return;
+        #endregion // Properties
 
-			CookieCollection coll = cookieContainer.GetCookies (uri);
-			foreach (Cookie c in cookies) {
-				bool add = true;
-				foreach (Cookie prev in coll) {
-					if (c.Equals (prev)) {
-						add = false;
-						break;
-					}
-				}
-				if (add)
-					cookieContainer.Add (c);
-			}
-		}
-		
-		protected override WebRequest GetWebRequest (Uri uri)
-		{
-			WebRequest req = base.GetWebRequest (uri);
-			HttpWebRequest request = req as HttpWebRequest;
-			if (request == null)
-				return req;
-			if (enableDecompression)
-				request.AutomaticDecompression = DecompressionMethods.GZip;
+        #region Methods
 
-			request.AllowAutoRedirect = allowAutoRedirect;
-			if (clientCertificates != null)
-				request.ClientCertificates.AddRange (clientCertificates);
+        internal virtual void CheckForCookies(HttpWebResponse response)
+        {
+            CookieCollection cookies = response.Cookies;
+            if (cookieContainer == null || cookies.Count == 0)
+                return;
 
-			request.CookieContainer = cookieContainer;
-			if (proxy != null)
-				request.Proxy = proxy;
+            CookieCollection coll = cookieContainer.GetCookies(uri);
+            foreach (Cookie c in cookies)
+            {
+                bool add = true;
+                foreach (Cookie prev in coll)
+                {
+                    if (c.Equals(prev))
+                    {
+                        add = false;
+                        break;
+                    }
+                }
+                if (add)
+                    cookieContainer.Add(c);
+            }
+        }
 
-			request.UserAgent = userAgent;
+        protected override WebRequest GetWebRequest(Uri uri)
+        {
+            WebRequest req = base.GetWebRequest(uri);
+            HttpWebRequest request = req as HttpWebRequest;
+            if (request == null)
+                return req;
+            if (enableDecompression)
+                request.AutomaticDecompression = DecompressionMethods.GZip;
 
-			return request;
-		}
+            request.AllowAutoRedirect = allowAutoRedirect;
+            if (clientCertificates != null)
+                request.ClientCertificates.AddRange(clientCertificates);
 
-		protected override WebResponse GetWebResponse (WebRequest request)
-		{
-			WebResponse response = base.GetWebResponse (request);
-			HttpWebResponse wr = response as HttpWebResponse;
-			if (wr != null)
-				CheckForCookies (wr);
-				
-			return response;
-		}
+            request.CookieContainer = cookieContainer;
+            if (proxy != null)
+                request.Proxy = proxy;
 
-		protected override WebResponse GetWebResponse (WebRequest request, IAsyncResult result)
-		{
-			WebResponse response = base.GetWebResponse (request, result);
-			HttpWebResponse wr = response as HttpWebResponse;
-			if (wr != null)
-				CheckForCookies (wr);
-				
-			return response;
-		}
-		
-		Hashtable mappings = new Hashtable ();
-		
-		internal void RegisterMapping (object userState, WebClientAsyncResult result)
-		{
-			if (userState == null)
-				userState = typeof (string);
-			
-			mappings [userState] = result;
-		}
+            request.UserAgent = userAgent;
 
-		internal void UnregisterMapping (object userState)
-		{
-			if (userState == null)
-				userState = typeof (string);
-			
-			mappings.Remove (userState);
-		}
-		
-		protected void CancelAsync (object userState)
-		{
-			WebClientAsyncResult result = (WebClientAsyncResult) mappings [userState];
+            return request;
+        }
 
-			if (result == null)
-				return;
-			
-			mappings.Remove (userState);
-			result.Abort ();
-		}
+        protected override WebResponse GetWebResponse(WebRequest request)
+        {
+            WebResponse response = base.GetWebResponse(request);
+            HttpWebResponse wr = response as HttpWebResponse;
+            if (wr != null)
+                CheckForCookies(wr);
 
-		[MonoTODO]
-		public static bool GenerateXmlMappings (Type type, ArrayList mapping)
-		{
-			throw new NotImplementedException ();
-		}
+            return response;
+        }
 
-		[MonoTODO]
-		public static Hashtable GenerateXmlMappings (Type[] types, ArrayList mapping)
-		{
-			throw new NotImplementedException ();
-		}
+        protected override WebResponse GetWebResponse(WebRequest request, IAsyncResult result)
+        {
+            WebResponse response = base.GetWebResponse(request, result);
+            HttpWebResponse wr = response as HttpWebResponse;
+            if (wr != null)
+                CheckForCookies(wr);
 
-		#endregion // Methods
-	}
-	
-	internal class InvokeAsyncInfo
-	{
-		public SynchronizationContext Context;
-		public object UserState;
-		public SendOrPostCallback Callback;
-		
-		public InvokeAsyncInfo (SendOrPostCallback callback, object userState)
-		{
-			Callback = callback;
-			UserState = userState;
-			Context = SynchronizationContext.Current;
-		}
-	}
+            return response;
+        }
+
+        Hashtable mappings = new Hashtable();
+
+        internal void RegisterMapping(object userState, WebClientAsyncResult result)
+        {
+            if (userState == null)
+                userState = typeof(string);
+
+            mappings[userState] = result;
+        }
+
+        internal void UnregisterMapping(object userState)
+        {
+            if (userState == null)
+                userState = typeof(string);
+
+            mappings.Remove(userState);
+        }
+
+        protected void CancelAsync(object userState)
+        {
+            WebClientAsyncResult result = (WebClientAsyncResult)mappings[userState];
+
+            if (result == null)
+                return;
+
+            mappings.Remove(userState);
+            result.Abort();
+        }
+
+        [MonoTODO]
+        public static bool GenerateXmlMappings(Type type, ArrayList mapping)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static Hashtable GenerateXmlMappings(Type[] types, ArrayList mapping)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion // Methods
+    }
+
+    internal class InvokeAsyncInfo
+    {
+        public SynchronizationContext Context;
+        public object UserState;
+        public SendOrPostCallback Callback;
+
+        public InvokeAsyncInfo(SendOrPostCallback callback, object userState)
+        {
+            Callback = callback;
+            UserState = userState;
+            Context = SynchronizationContext.Current;
+        }
+    }
 }

@@ -38,7 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
         public MemberMenuItemViewModel(
             string displayContent,
             ImageMoniker imageMoniker,
-            ImmutableArray<MenuItemViewModel> targets) : base(displayContent, imageMoniker)
+            ImmutableArray<MenuItemViewModel> targets
+        )
+            : base(displayContent, imageMoniker)
         {
             Targets = targets;
         }

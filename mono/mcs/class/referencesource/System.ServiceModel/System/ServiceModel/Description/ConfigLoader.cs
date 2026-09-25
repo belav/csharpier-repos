@@ -13,6 +13,7 @@ namespace System.ServiceModel.Description
     using System.IdentityModel.Selectors;
     using System.Reflection;
     using System.Runtime;
+    using System.Runtime.CompilerServices;
     using System.Runtime.Diagnostics;
     using System.Security;
     using System.Security.Cryptography.X509Certificates;
@@ -22,7 +23,6 @@ namespace System.ServiceModel.Description
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
     using System.Text;
-    using System.Runtime.CompilerServices;
 
     class ConfigLoader
     {
@@ -44,9 +44,7 @@ namespace System.ServiceModel.Description
         ContextInformation configurationContext;
 
         public ConfigLoader()
-            : this((IContractResolver)null)
-        {
-        }
+            : this((IContractResolver)null) { }
 
         public ConfigLoader(ContextInformation configurationContext)
             : this((IContractResolver)null)
@@ -60,58 +58,91 @@ namespace System.ServiceModel.Description
             this.bindingTable = new Dictionary<string, Binding>();
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
         internal static EndpointIdentity LoadIdentity(IdentityElement element)
         {
             EndpointIdentity identity = null;
 
             PropertyInformationCollection properties = element.ElementInformation.Properties;
-            if (properties[ConfigurationStrings.UserPrincipalName].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                properties[ConfigurationStrings.UserPrincipalName].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 identity = EndpointIdentity.CreateUpnIdentity(element.UserPrincipalName.Value);
             }
-            else if (properties[ConfigurationStrings.ServicePrincipalName].ValueOrigin != PropertyValueOrigin.Default)
+            else if (
+                properties[ConfigurationStrings.ServicePrincipalName].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 identity = EndpointIdentity.CreateSpnIdentity(element.ServicePrincipalName.Value);
             }
-            else if (properties[ConfigurationStrings.Dns].ValueOrigin != PropertyValueOrigin.Default)
+            else if (
+                properties[ConfigurationStrings.Dns].ValueOrigin != PropertyValueOrigin.Default
+            )
             {
                 identity = EndpointIdentity.CreateDnsIdentity(element.Dns.Value);
             }
-            else if (properties[ConfigurationStrings.Rsa].ValueOrigin != PropertyValueOrigin.Default)
+            else if (
+                properties[ConfigurationStrings.Rsa].ValueOrigin != PropertyValueOrigin.Default
+            )
             {
                 identity = EndpointIdentity.CreateRsaIdentity(element.Rsa.Value);
             }
-            else if (properties[ConfigurationStrings.Certificate].ValueOrigin != PropertyValueOrigin.Default)
+            else if (
+                properties[ConfigurationStrings.Certificate].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
                 X509Certificate2Collection collection = new X509Certificate2Collection();
                 collection.Import(Convert.FromBase64String(element.Certificate.EncodedValue));
 
                 if (collection.Count == 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnableToLoadCertificateIdentity)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnableToLoadCertificateIdentity)
+                        )
+                    );
                 }
 
-                // We assume the first certificate in the list is the primary 
+                // We assume the first certificate in the list is the primary
                 // certificate.
                 X509Certificate2 primaryCert = collection[0];
                 collection.RemoveAt(0);
                 identity = EndpointIdentity.CreateX509CertificateIdentity(primaryCert, collection);
             }
-            else if (properties[ConfigurationStrings.CertificateReference].ValueOrigin != PropertyValueOrigin.Default)
+            else if (
+                properties[ConfigurationStrings.CertificateReference].ValueOrigin
+                != PropertyValueOrigin.Default
+            )
             {
-                X509CertificateStore store = new X509CertificateStore(element.CertificateReference.StoreName, element.CertificateReference.StoreLocation);
+                X509CertificateStore store = new X509CertificateStore(
+                    element.CertificateReference.StoreName,
+                    element.CertificateReference.StoreLocation
+                );
                 X509Certificate2Collection collection = null;
                 try
                 {
                     store.Open(OpenFlags.ReadOnly);
-                    collection = store.Find(element.CertificateReference.X509FindType, element.CertificateReference.FindValue, false);
+                    collection = store.Find(
+                        element.CertificateReference.X509FindType,
+                        element.CertificateReference.FindValue,
+                        false
+                    );
 
                     if (collection.Count == 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnableToLoadCertificateIdentity)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.UnableToLoadCertificateIdentity)
+                            )
+                        );
                     }
 
                     // Just select the first certificate.
@@ -140,65 +171,132 @@ namespace System.ServiceModel.Description
             return identity;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal void LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, string configurationName)
+        internal void LoadChannelBehaviors(
+            ServiceEndpoint serviceEndpoint,
+            string configurationName
+        )
         {
             ServiceEndpoint standardEndpoint;
             bool wildcard = IsWildcardMatch(configurationName);
-            ChannelEndpointElement channelElement = LookupChannel(this.configurationContext, configurationName, serviceEndpoint.Contract, null, wildcard, false, out standardEndpoint);
+            ChannelEndpointElement channelElement = LookupChannel(
+                this.configurationContext,
+                configurationName,
+                serviceEndpoint.Contract,
+                null,
+                wildcard,
+                false,
+                out standardEndpoint
+            );
             if (channelElement == null)
             {
                 if (wildcard)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxConfigContractNotFound, serviceEndpoint.Contract.ConfigurationName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxConfigContractNotFound,
+                                serviceEndpoint.Contract.ConfigurationName
+                            )
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxConfigChannelConfigurationNotFound, configurationName, serviceEndpoint.Contract.ConfigurationName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxConfigChannelConfigurationNotFound,
+                                configurationName,
+                                serviceEndpoint.Contract.ConfigurationName
+                            )
+                        )
+                    );
                 }
             }
             if (serviceEndpoint.Binding == null && !string.IsNullOrEmpty(channelElement.Binding))
             {
-                serviceEndpoint.Binding = ConfigLoader.LookupBinding(channelElement.Binding, channelElement.BindingConfiguration, ConfigurationHelpers.GetEvaluationContext(channelElement));
+                serviceEndpoint.Binding = ConfigLoader.LookupBinding(
+                    channelElement.Binding,
+                    channelElement.BindingConfiguration,
+                    ConfigurationHelpers.GetEvaluationContext(channelElement)
+                );
             }
 
-            if (serviceEndpoint.Address == null && channelElement.Address != null && channelElement.Address.OriginalString.Length > 0)
+            if (
+                serviceEndpoint.Address == null
+                && channelElement.Address != null
+                && channelElement.Address.OriginalString.Length > 0
+            )
             {
-                serviceEndpoint.Address = new EndpointAddress(channelElement.Address, LoadIdentity(channelElement.Identity), channelElement.Headers.Headers);
+                serviceEndpoint.Address = new EndpointAddress(
+                    channelElement.Address,
+                    LoadIdentity(channelElement.Identity),
+                    channelElement.Headers.Headers
+                );
             }
 
-            CommonBehaviorsSection commonBehaviors = ConfigLoader.LookupCommonBehaviors(ConfigurationHelpers.GetEvaluationContext(channelElement));
+            CommonBehaviorsSection commonBehaviors = ConfigLoader.LookupCommonBehaviors(
+                ConfigurationHelpers.GetEvaluationContext(channelElement)
+            );
             if (commonBehaviors != null && commonBehaviors.EndpointBehaviors != null)
             {
-                LoadBehaviors<IEndpointBehavior>(commonBehaviors.EndpointBehaviors, serviceEndpoint.Behaviors, true/*commonBehaviors*/);
+                LoadBehaviors<IEndpointBehavior>(
+                    commonBehaviors.EndpointBehaviors,
+                    serviceEndpoint.Behaviors,
+                    true /*commonBehaviors*/
+                );
             }
 
-            EndpointBehaviorElement behaviorElement = ConfigLoader.LookupEndpointBehaviors(channelElement.BehaviorConfiguration, ConfigurationHelpers.GetEvaluationContext(channelElement));
+            EndpointBehaviorElement behaviorElement = ConfigLoader.LookupEndpointBehaviors(
+                channelElement.BehaviorConfiguration,
+                ConfigurationHelpers.GetEvaluationContext(channelElement)
+            );
             if (behaviorElement != null)
             {
-                LoadBehaviors<IEndpointBehavior>(behaviorElement, serviceEndpoint.Behaviors, false/*commonBehaviors*/);
+                LoadBehaviors<IEndpointBehavior>(
+                    behaviorElement,
+                    serviceEndpoint.Behaviors,
+                    false /*commonBehaviors*/
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
         internal void LoadCommonClientBehaviors(ServiceEndpoint serviceEndpoint)
         {
             // just load commonBehaviors
-            CommonBehaviorsSection commonBehaviors = ConfigLoader.LookupCommonBehaviors(this.configurationContext);
+            CommonBehaviorsSection commonBehaviors = ConfigLoader.LookupCommonBehaviors(
+                this.configurationContext
+            );
             if (commonBehaviors != null && commonBehaviors.EndpointBehaviors != null)
             {
-                LoadBehaviors<IEndpointBehavior>(commonBehaviors.EndpointBehaviors, serviceEndpoint.Behaviors, true/*commonBehaviors*/);
+                LoadBehaviors<IEndpointBehavior>(
+                    commonBehaviors.EndpointBehaviors,
+                    serviceEndpoint.Behaviors,
+                    true /*commonBehaviors*/
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        static void LoadBehaviors<T>(ServiceModelExtensionCollectionElement<BehaviorExtensionElement> behaviorElement, KeyedByTypeCollection<T> behaviors, bool commonBehaviors)
+        static void LoadBehaviors<T>(
+            ServiceModelExtensionCollectionElement<BehaviorExtensionElement> behaviorElement,
+            KeyedByTypeCollection<T> behaviors,
+            bool commonBehaviors
+        )
         {
             Nullable<bool> isPT = new Nullable<bool>();
 
@@ -216,7 +314,13 @@ namespace System.ServiceModel.Description
                 Type type = behaviorObject.GetType();
                 if (!typeof(T).IsAssignableFrom(type))
                 {
-                    TraceBehaviorWarning(behaviorExtension, TraceCode.SkipBehavior, SR.GetString(SR.TraceCodeSkipBehavior), type, typeof(T));
+                    TraceBehaviorWarning(
+                        behaviorExtension,
+                        TraceCode.SkipBehavior,
+                        SR.GetString(SR.TraceCodeSkipBehavior),
+                        type,
+                        typeof(T)
+                    );
                     continue;
                 }
 
@@ -224,7 +328,13 @@ namespace System.ServiceModel.Description
                 {
                     if (ShouldSkipCommonBehavior(type, ref isPT))
                     {
-                        TraceBehaviorWarning(behaviorExtension, TraceCode.SkipBehavior, SR.GetString(SR.TraceCodeSkipBehavior), type, typeof(T));
+                        TraceBehaviorWarning(
+                            behaviorExtension,
+                            TraceCode.SkipBehavior,
+                            SR.GetString(SR.TraceCodeSkipBehavior),
+                            type,
+                            typeof(T)
+                        );
                         continue;
                     }
                 }
@@ -234,7 +344,13 @@ namespace System.ServiceModel.Description
                 // but if the same type of behavior was present from an old scope, just remove the old one
                 if (behaviors.Contains(type))
                 {
-                    TraceBehaviorWarning(behaviorExtension, TraceCode.RemoveBehavior, SR.GetString(SR.TraceCodeRemoveBehavior), type, typeof(T));
+                    TraceBehaviorWarning(
+                        behaviorExtension,
+                        TraceCode.RemoveBehavior,
+                        SR.GetString(SR.TraceCodeRemoveBehavior),
+                        type,
+                        typeof(T)
+                    );
                     behaviors.Remove(type);
                 }
                 behaviors.Add((T)behaviorObject);
@@ -246,7 +362,9 @@ namespace System.ServiceModel.Description
         //   1. the behavior type (returned from the config element) is in a signed, non-APTCA assembly
         //   2. the caller stack does not have ConfigurationPermission(Unrestricted)
         // .. exclude the behavior from the collection and trace a warning
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical helpers, makes a security decision.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical helpers, makes a security decision."
+        )]
         [SecurityCritical]
         static bool ShouldSkipCommonBehavior(Type behaviorType, ref Nullable<bool> isPT)
         {
@@ -268,10 +386,18 @@ namespace System.ServiceModel.Description
             return skip;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        static void TraceBehaviorWarning(BehaviorExtensionElement behaviorExtension, int traceCode, string traceDescription, Type type, Type behaviorType)
+        static void TraceBehaviorWarning(
+            BehaviorExtensionElement behaviorExtension,
+            int traceCode,
+            string traceDescription,
+            Type type,
+            Type behaviorType
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
             {
@@ -279,40 +405,62 @@ namespace System.ServiceModel.Description
                 {
                     { "ConfigurationElementName", behaviorExtension.ConfigurationElementName },
                     { "ConfigurationType", type.AssemblyQualifiedName },
-                    { "BehaviorType", behaviorType.AssemblyQualifiedName }
+                    { "BehaviorType", behaviorType.AssemblyQualifiedName },
                 };
-                TraceUtility.TraceEvent(TraceEventType.Warning, traceCode, traceDescription,
-                    new DictionaryTraceRecord(h), null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    traceCode,
+                    traceDescription,
+                    new DictionaryTraceRecord(h),
+                    null,
+                    null
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        static void LoadChannelBehaviors(EndpointBehaviorElement behaviorElement, KeyedByTypeCollection<IEndpointBehavior> channelBehaviors)
+        static void LoadChannelBehaviors(
+            EndpointBehaviorElement behaviorElement,
+            KeyedByTypeCollection<IEndpointBehavior> channelBehaviors
+        )
         {
             if (behaviorElement != null)
             {
-                LoadBehaviors<IEndpointBehavior>(behaviorElement, channelBehaviors, false/*commonBehaviors*/
-                                                                                                                               );
+                LoadBehaviors<IEndpointBehavior>(
+                    behaviorElement,
+                    channelBehaviors,
+                    false /*commonBehaviors*/
+                );
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal static void LoadChannelBehaviors(string behaviorName, ContextInformation context, KeyedByTypeCollection<IEndpointBehavior> channelBehaviors)
+        internal static void LoadChannelBehaviors(
+            string behaviorName,
+            ContextInformation context,
+            KeyedByTypeCollection<IEndpointBehavior> channelBehaviors
+        )
         {
-            LoadChannelBehaviors(
-                LookupEndpointBehaviors(behaviorName, context),
-                channelBehaviors
-            );
+            LoadChannelBehaviors(LookupEndpointBehaviors(behaviorName, context), channelBehaviors);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal static Collection<IWsdlImportExtension> LoadWsdlImporters(WsdlImporterElementCollection wsdlImporterElements, ContextInformation context)
+        internal static Collection<IWsdlImportExtension> LoadWsdlImporters(
+            WsdlImporterElementCollection wsdlImporterElements,
+            ContextInformation context
+        )
         {
             Collection<IWsdlImportExtension> wsdlImporters = new Collection<IWsdlImportExtension>();
 
@@ -322,14 +470,28 @@ namespace System.ServiceModel.Description
                 Type wsdlImporterType = Type.GetType(wsdlImporterElement.Type, true, true);
                 if (!typeof(IWsdlImportExtension).IsAssignableFrom(wsdlImporterType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InvalidWsdlExtensionTypeInConfig, wsdlImporterType.AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.InvalidWsdlExtensionTypeInConfig,
+                                wsdlImporterType.AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
 
                 // Verify that the type has a default constructor
                 ConstructorInfo constructorInfo = wsdlImporterType.GetConstructor(emptyTypeArray);
                 if (constructorInfo == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.WsdlExtensionTypeRequiresDefaultConstructor, wsdlImporterType.AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.WsdlExtensionTypeRequiresDefaultConstructor,
+                                wsdlImporterType.AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
 
                 wsdlImporters.Add((IWsdlImportExtension)constructorInfo.Invoke(emptyObjectArray));
@@ -338,12 +500,18 @@ namespace System.ServiceModel.Description
             return wsdlImporters;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal static Collection<IPolicyImportExtension> LoadPolicyImporters(PolicyImporterElementCollection policyImporterElements, ContextInformation context)
+        internal static Collection<IPolicyImportExtension> LoadPolicyImporters(
+            PolicyImporterElementCollection policyImporterElements,
+            ContextInformation context
+        )
         {
-            Collection<IPolicyImportExtension> policyImporters = new Collection<IPolicyImportExtension>();
+            Collection<IPolicyImportExtension> policyImporters =
+                new Collection<IPolicyImportExtension>();
 
             foreach (PolicyImporterElement policyImporterElement in policyImporterElements)
             {
@@ -351,34 +519,62 @@ namespace System.ServiceModel.Description
                 Type policyImporterType = Type.GetType(policyImporterElement.Type, true, true);
                 if (!typeof(IPolicyImportExtension).IsAssignableFrom(policyImporterType))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.InvalidPolicyExtensionTypeInConfig, policyImporterType.AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.InvalidPolicyExtensionTypeInConfig,
+                                policyImporterType.AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
 
                 // Verify that the type has a default constructor
                 ConstructorInfo constructorInfo = policyImporterType.GetConstructor(emptyTypeArray);
                 if (constructorInfo == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.PolicyExtensionTypeRequiresDefaultConstructor, policyImporterType.AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.PolicyExtensionTypeRequiresDefaultConstructor,
+                                policyImporterType.AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
 
-                policyImporters.Add((IPolicyImportExtension)constructorInfo.Invoke(emptyObjectArray));
+                policyImporters.Add(
+                    (IPolicyImportExtension)constructorInfo.Invoke(emptyObjectArray)
+                );
             }
 
             return policyImporters;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
         internal static EndpointAddress LoadEndpointAddress(EndpointAddressElementBase element)
         {
-            return new EndpointAddress(element.Address, LoadIdentity(element.Identity), element.Headers.Headers);
+            return new EndpointAddress(
+                element.Address,
+                LoadIdentity(element.Identity),
+                element.Headers.Headers
+            );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        public void LoadHostConfig(ServiceElement serviceElement, ServiceHostBase host, System.Action<Uri> addBaseAddress)
+        public void LoadHostConfig(
+            ServiceElement serviceElement,
+            ServiceHostBase host,
+            System.Action<Uri> addBaseAddress
+        )
         {
             HostElement hostElement = serviceElement.Host;
             if (hostElement != null)
@@ -392,9 +588,11 @@ namespace System.ServiceModel.Description
                         int colonIndex = rawAddress.IndexOf(':');
                         if (colonIndex != -1 && rawAddress.Length >= colonIndex + 4)
                         {
-                            if (rawAddress[colonIndex + 1] == '/' &&
-                                rawAddress[colonIndex + 2] == '/' &&
-                                rawAddress[colonIndex + 3] == '*')
+                            if (
+                                rawAddress[colonIndex + 1] == '/'
+                                && rawAddress[colonIndex + 2] == '/'
+                                && rawAddress[colonIndex + 3] == '*'
+                            )
                             {
                                 string beforeAsterisk = rawAddress.Substring(0, colonIndex + 3);
                                 string rest = rawAddress.Substring(colonIndex + 4);
@@ -411,7 +609,9 @@ namespace System.ServiceModel.Description
                         Uri uri;
                         if (!Uri.TryCreate(cookedAddress, UriKind.Absolute, out uri))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.BaseAddressMustBeAbsolute)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new ArgumentException(SR.GetString(SR.BaseAddressMustBeAbsolute))
+                            );
                         }
                         addBaseAddress(uri);
                     }
@@ -431,16 +631,31 @@ namespace System.ServiceModel.Description
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        public void LoadServiceDescription(ServiceHostBase host, ServiceDescription description, ServiceElement serviceElement, System.Action<Uri> addBaseAddress, bool skipHost = false)
+        public void LoadServiceDescription(
+            ServiceHostBase host,
+            ServiceDescription description,
+            ServiceElement serviceElement,
+            System.Action<Uri> addBaseAddress,
+            bool skipHost = false
+        )
         {
             CommonBehaviorsSection commonBehaviors = ConfigLoader.LookupCommonBehaviors(
-                serviceElement == null ? null : ConfigurationHelpers.GetEvaluationContext(serviceElement));
+                serviceElement == null
+                    ? null
+                    : ConfigurationHelpers.GetEvaluationContext(serviceElement)
+            );
             if (commonBehaviors != null && commonBehaviors.ServiceBehaviors != null)
             {
-                LoadBehaviors<IServiceBehavior>(commonBehaviors.ServiceBehaviors, description.Behaviors, true/*commonBehaviors*/);
+                LoadBehaviors<IServiceBehavior>(
+                    commonBehaviors.ServiceBehaviors,
+                    description.Behaviors,
+                    true /*commonBehaviors*/
+                );
             }
 
             string behaviorConfigurationName = ConfigurationStrings.DefaultName;
@@ -452,13 +667,21 @@ namespace System.ServiceModel.Description
                 }
                 behaviorConfigurationName = serviceElement.BehaviorConfiguration;
             }
-            ServiceBehaviorElement behaviorElement = ConfigLoader.LookupServiceBehaviors(behaviorConfigurationName, ConfigurationHelpers.GetEvaluationContext(serviceElement));
+            ServiceBehaviorElement behaviorElement = ConfigLoader.LookupServiceBehaviors(
+                behaviorConfigurationName,
+                ConfigurationHelpers.GetEvaluationContext(serviceElement)
+            );
             if (behaviorElement != null)
             {
-                LoadBehaviors<IServiceBehavior>(behaviorElement, description.Behaviors, false/*commonBehaviors*/);
+                LoadBehaviors<IServiceBehavior>(
+                    behaviorElement,
+                    description.Behaviors,
+                    false /*commonBehaviors*/
+                );
             }
 
-            ServiceHostBase.ServiceAndBehaviorsContractResolver resolver = this.contractResolver as ServiceHostBase.ServiceAndBehaviorsContractResolver;
+            ServiceHostBase.ServiceAndBehaviorsContractResolver resolver =
+                this.contractResolver as ServiceHostBase.ServiceAndBehaviorsContractResolver;
             if (resolver != null)
             {
                 resolver.AddBehaviorContractsToResolver(description.Behaviors);
@@ -470,14 +693,22 @@ namespace System.ServiceModel.Description
                 {
                     if (String.IsNullOrEmpty(endpointElement.Kind))
                     {
-                        ContractDescription contract = LookupContract(endpointElement.Contract, description.Name);
+                        ContractDescription contract = LookupContract(
+                            endpointElement.Contract,
+                            description.Name
+                        );
 
                         // binding
                         Binding binding;
-                        string bindingKey = endpointElement.Binding + ":" + endpointElement.BindingConfiguration;
+                        string bindingKey =
+                            endpointElement.Binding + ":" + endpointElement.BindingConfiguration;
                         if (bindingTable.TryGetValue(bindingKey, out binding) == false)
                         {
-                            binding = ConfigLoader.LookupBinding(endpointElement.Binding, endpointElement.BindingConfiguration, ConfigurationHelpers.GetEvaluationContext(serviceElement));
+                            binding = ConfigLoader.LookupBinding(
+                                endpointElement.Binding,
+                                endpointElement.BindingConfiguration,
+                                ConfigurationHelpers.GetEvaluationContext(serviceElement)
+                            );
                             bindingTable.Add(bindingKey, binding);
                         }
 
@@ -501,13 +732,29 @@ namespace System.ServiceModel.Description
                         }
                         else
                         {
-                            Uri via = ServiceHost.MakeAbsoluteUri(address, binding, host.InternalBaseAddresses);
-                            serviceEndpoint = new ServiceEndpoint(contract, binding, new EndpointAddress(via, LoadIdentity(endpointElement.Identity), endpointElement.Headers.Headers));
+                            Uri via = ServiceHost.MakeAbsoluteUri(
+                                address,
+                                binding,
+                                host.InternalBaseAddresses
+                            );
+                            serviceEndpoint = new ServiceEndpoint(
+                                contract,
+                                binding,
+                                new EndpointAddress(
+                                    via,
+                                    LoadIdentity(endpointElement.Identity),
+                                    endpointElement.Headers.Headers
+                                )
+                            );
                             serviceEndpoint.UnresolvedAddress = endpointElement.Address;
                         }
                         if (endpointElement.ListenUri != null)
                         {
-                            serviceEndpoint.ListenUri = ServiceHost.MakeAbsoluteUri(endpointElement.ListenUri, binding, host.InternalBaseAddresses);
+                            serviceEndpoint.ListenUri = ServiceHost.MakeAbsoluteUri(
+                                endpointElement.ListenUri,
+                                binding,
+                                host.InternalBaseAddresses
+                            );
                             serviceEndpoint.UnresolvedListenUri = endpointElement.ListenUri;
                         }
                         serviceEndpoint.ListenUriMode = endpointElement.ListenUriMode;
@@ -517,15 +764,29 @@ namespace System.ServiceModel.Description
                             serviceEndpoint.Name = endpointElement.Name;
                         }
 
-                        KeyedByTypeCollection<IEndpointBehavior> behaviors = serviceEndpoint.Behaviors;
+                        KeyedByTypeCollection<IEndpointBehavior> behaviors =
+                            serviceEndpoint.Behaviors;
 
-                        EndpointBehaviorElement behaviorEndpointElement = ConfigLoader.LookupEndpointBehaviors(endpointElement.BehaviorConfiguration, ConfigurationHelpers.GetEvaluationContext(endpointElement));
+                        EndpointBehaviorElement behaviorEndpointElement =
+                            ConfigLoader.LookupEndpointBehaviors(
+                                endpointElement.BehaviorConfiguration,
+                                ConfigurationHelpers.GetEvaluationContext(endpointElement)
+                            );
                         if (behaviorEndpointElement != null)
                         {
-                            LoadBehaviors<IEndpointBehavior>(behaviorEndpointElement, behaviors, false/*commonBehaviors*/);
+                            LoadBehaviors<IEndpointBehavior>(
+                                behaviorEndpointElement,
+                                behaviors,
+                                false /*commonBehaviors*/
+                            );
                         }
 
-                        if (endpointElement.ElementInformation.Properties[ConfigurationStrings.IsSystemEndpoint].ValueOrigin != PropertyValueOrigin.Default)
+                        if (
+                            endpointElement
+                                .ElementInformation
+                                .Properties[ConfigurationStrings.IsSystemEndpoint]
+                                .ValueOrigin != PropertyValueOrigin.Default
+                        )
                         {
                             serviceEndpoint.IsSystemEndpoint = endpointElement.IsSystemEndpoint;
                         }
@@ -534,102 +795,178 @@ namespace System.ServiceModel.Description
                     }
                     else
                     {
-                        ServiceEndpoint endpoint = LookupEndpoint(endpointElement, ConfigurationHelpers.GetEvaluationContext(serviceElement), host, description);
+                        ServiceEndpoint endpoint = LookupEndpoint(
+                            endpointElement,
+                            ConfigurationHelpers.GetEvaluationContext(serviceElement),
+                            host,
+                            description
+                        );
                         description.Endpoints.Add(endpoint);
                     }
                 }
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
         public static void LoadDefaultEndpointBehaviors(ServiceEndpoint endpoint)
         {
-            EndpointBehaviorElement behaviorEndpointElement = ConfigLoader.LookupEndpointBehaviors(ConfigurationStrings.DefaultName, ConfigurationHelpers.GetEvaluationContext(null));
+            EndpointBehaviorElement behaviorEndpointElement = ConfigLoader.LookupEndpointBehaviors(
+                ConfigurationStrings.DefaultName,
+                ConfigurationHelpers.GetEvaluationContext(null)
+            );
             if (behaviorEndpointElement != null)
             {
-                LoadBehaviors<IEndpointBehavior>(behaviorEndpointElement, endpoint.Behaviors, false);
+                LoadBehaviors<IEndpointBehavior>(
+                    behaviorEndpointElement,
+                    endpoint.Behaviors,
+                    false
+                );
             }
         }
 
         [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.")]
         [SecurityCritical]
-        static EndpointCollectionElement LookupEndpointCollectionElement(string endpointSectionName, ContextInformation context)
+        static EndpointCollectionElement LookupEndpointCollectionElement(
+            string endpointSectionName,
+            ContextInformation context
+        )
         {
             if (string.IsNullOrEmpty(endpointSectionName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigEndpointTypeCannotBeNullOrEmpty)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigEndpointTypeCannotBeNullOrEmpty)
+                    )
+                );
             }
             EndpointCollectionElement endpointCollectionElement = null;
             if (context == null)
             {
-                // If no context is passed in, assume that the caller can consume the AppDomain's 
+                // If no context is passed in, assume that the caller can consume the AppDomain's
                 // current configuration file.
-                endpointCollectionElement = (EndpointCollectionElement)ConfigurationHelpers.UnsafeGetEndpointCollectionElement(endpointSectionName);
+                endpointCollectionElement = (EndpointCollectionElement)
+                    ConfigurationHelpers.UnsafeGetEndpointCollectionElement(endpointSectionName);
             }
             else
             {
                 // Use the configuration file associated with the passed in context.
                 // This may or may not be the same as the file for the current AppDomain.
-                endpointCollectionElement = (EndpointCollectionElement)ConfigurationHelpers.UnsafeGetAssociatedEndpointCollectionElement(context, endpointSectionName);
+                endpointCollectionElement = (EndpointCollectionElement)
+                    ConfigurationHelpers.UnsafeGetAssociatedEndpointCollectionElement(
+                        context,
+                        endpointSectionName
+                    );
             }
 
             return endpointCollectionElement;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal static ServiceEndpoint LookupEndpoint(string configurationName, EndpointAddress address, ContractDescription contract)
+        internal static ServiceEndpoint LookupEndpoint(
+            string configurationName,
+            EndpointAddress address,
+            ContractDescription contract
+        )
         {
             return LookupEndpoint(configurationName, address, contract, null);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal static ServiceEndpoint LookupEndpoint(string configurationName, EndpointAddress address, ContractDescription contract, ContextInformation configurationContext)
+        internal static ServiceEndpoint LookupEndpoint(
+            string configurationName,
+            EndpointAddress address,
+            ContractDescription contract,
+            ContextInformation configurationContext
+        )
         {
             bool wildcard = IsWildcardMatch(configurationName);
             ServiceEndpoint serviceEndpoint;
-            LookupChannel(configurationContext, configurationName, contract, address, wildcard, true, out serviceEndpoint);
+            LookupChannel(
+                configurationContext,
+                configurationName,
+                contract,
+                address,
+                wildcard,
+                true,
+                out serviceEndpoint
+            );
             return serviceEndpoint;
         }
 
-        internal static ServiceEndpoint LookupEndpoint(ChannelEndpointElement channelEndpointElement, ContextInformation context)
+        internal static ServiceEndpoint LookupEndpoint(
+            ChannelEndpointElement channelEndpointElement,
+            ContextInformation context
+        )
         {
-            return LookupEndpoint(channelEndpointElement, context, null /*address*/, null /*contractDescription*/);
+            return LookupEndpoint(
+                channelEndpointElement,
+                context,
+                null /*address*/
+                ,
+                null /*contractDescription*/
+            );
         }
 
-        // This method should only return null when endpointConfiguration is specified on the ChannelEndpointElement and no ChannelEndpointElement matching the 
+        // This method should only return null when endpointConfiguration is specified on the ChannelEndpointElement and no ChannelEndpointElement matching the
         // endpointConfiguration name is found.  All other error conditions should throw.
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        static ServiceEndpoint LookupEndpoint(ChannelEndpointElement channelEndpointElement, ContextInformation context, EndpointAddress address, ContractDescription contract)
+        static ServiceEndpoint LookupEndpoint(
+            ChannelEndpointElement channelEndpointElement,
+            ContextInformation context,
+            EndpointAddress address,
+            ContractDescription contract
+        )
         {
-            EndpointCollectionElement endpointCollectionElement = LookupEndpointCollectionElement(channelEndpointElement.Kind, context);
+            EndpointCollectionElement endpointCollectionElement = LookupEndpointCollectionElement(
+                channelEndpointElement.Kind,
+                context
+            );
             ServiceEndpoint retval = null;
 
-            string endpointConfiguration = channelEndpointElement.EndpointConfiguration ?? String.Empty;
+            string endpointConfiguration =
+                channelEndpointElement.EndpointConfiguration ?? String.Empty;
 
-            // We are looking for a specific instance, not the default. 
+            // We are looking for a specific instance, not the default.
             bool configuredEndpointFound = false;
             // The Endpoints property is always public
-            foreach (StandardEndpointElement standardEndpointElement in endpointCollectionElement.ConfiguredEndpoints)
+            foreach (
+                StandardEndpointElement standardEndpointElement in endpointCollectionElement.ConfiguredEndpoints
+            )
             {
-                if (standardEndpointElement.Name.Equals(endpointConfiguration, StringComparison.Ordinal))
+                if (
+                    standardEndpointElement.Name.Equals(
+                        endpointConfiguration,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     if (null == ConfigLoader.resolvedEndpoints)
                     {
                         ConfigLoader.resolvedEndpoints = new List<string>();
                     }
 
-                    string resolvedEndpointID = channelEndpointElement.Kind + "/" + endpointConfiguration;
+                    string resolvedEndpointID =
+                        channelEndpointElement.Kind + "/" + endpointConfiguration;
                     if (ConfigLoader.resolvedEndpoints.Contains(resolvedEndpointID))
                     {
-                        ConfigurationElement configErrorElement = (ConfigurationElement)standardEndpointElement;
+                        ConfigurationElement configErrorElement =
+                            (ConfigurationElement)standardEndpointElement;
                         System.Text.StringBuilder detectedCycle = new System.Text.StringBuilder();
                         foreach (string resolvedEndpoint in ConfigLoader.resolvedEndpoints)
                         {
@@ -642,16 +979,32 @@ namespace System.ServiceModel.Description
                         // by not starting up channel, etc...
                         ConfigLoader.resolvedEndpoints = null;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigEndpointReferenceCycleDetected, detectedCycle.ToString()),
-                            configErrorElement.ElementInformation.Source,
-                            configErrorElement.ElementInformation.LineNumber));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigEndpointReferenceCycleDetected,
+                                    detectedCycle.ToString()
+                                ),
+                                configErrorElement.ElementInformation.Source,
+                                configErrorElement.ElementInformation.LineNumber
+                            )
+                        );
                     }
 
                     try
                     {
-                        CheckAccess(standardEndpointElement as IConfigurationContextProviderInternal);
+                        CheckAccess(
+                            standardEndpointElement as IConfigurationContextProviderInternal
+                        );
                         ConfigLoader.resolvedEndpoints.Add(resolvedEndpointID);
-                        ConfigureEndpoint(standardEndpointElement, channelEndpointElement, address, context, contract, out retval);
+                        ConfigureEndpoint(
+                            standardEndpointElement,
+                            channelEndpointElement,
+                            address,
+                            context,
+                            contract,
+                            out retval
+                        );
                         ConfigLoader.resolvedEndpoints.Remove(resolvedEndpointID);
                     }
                     catch
@@ -665,8 +1018,10 @@ namespace System.ServiceModel.Description
                         throw;
                     }
 
-                    if (null != ConfigLoader.resolvedEndpoints &&
-                        0 == ConfigLoader.resolvedEndpoints.Count)
+                    if (
+                        null != ConfigLoader.resolvedEndpoints
+                        && 0 == ConfigLoader.resolvedEndpoints.Count
+                    )
                     {
                         ConfigLoader.resolvedEndpoints = null;
                     }
@@ -677,16 +1032,23 @@ namespace System.ServiceModel.Description
             if (!configuredEndpointFound)
             {
                 // We expected to find an instance, but didn't.
-                // Return null. 
+                // Return null.
                 retval = null;
             }
 
             if (retval == null && String.IsNullOrEmpty(endpointConfiguration))
             {
-                StandardEndpointElement standardEndpointElement = endpointCollectionElement.GetDefaultStandardEndpointElement();
-                ConfigureEndpoint(standardEndpointElement, channelEndpointElement, address, context, contract, out retval);
+                StandardEndpointElement standardEndpointElement =
+                    endpointCollectionElement.GetDefaultStandardEndpointElement();
+                ConfigureEndpoint(
+                    standardEndpointElement,
+                    channelEndpointElement,
+                    address,
+                    context,
+                    contract,
+                    out retval
+                );
             }
-
 
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
@@ -707,8 +1069,14 @@ namespace System.ServiceModel.Description
                     values["Name"] = endpointConfiguration;
                 }
                 values["Endpoint"] = channelEndpointElement.Kind;
-                TraceUtility.TraceEvent(TraceEventType.Verbose, traceCode, traceDescription,
-                    new DictionaryTraceRecord(values), null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    traceCode,
+                    traceDescription,
+                    new DictionaryTraceRecord(values),
+                    null,
+                    null
+                );
             }
 
             if (retval != null)
@@ -718,11 +1086,19 @@ namespace System.ServiceModel.Description
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        static void ConfigureEndpoint(StandardEndpointElement standardEndpointElement, ChannelEndpointElement channelEndpointElement,
-            EndpointAddress address, ContextInformation context, ContractDescription contract, out ServiceEndpoint endpoint)
+        static void ConfigureEndpoint(
+            StandardEndpointElement standardEndpointElement,
+            ChannelEndpointElement channelEndpointElement,
+            EndpointAddress address,
+            ContextInformation context,
+            ContractDescription contract,
+            out ServiceEndpoint endpoint
+        )
         {
             // copy channelEndpointElement so that it can potentially be modified by the StandardEndpointElement
             // the properties collection of the instance seviceEndpointElement created by System.Configuration is read-only.
@@ -734,14 +1110,27 @@ namespace System.ServiceModel.Description
             endpoint = standardEndpointElement.CreateServiceEndpoint(contract);
             if (endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ConfigNoEndpointCreated, standardEndpointElement.GetType().AssemblyQualifiedName,
-                    (standardEndpointElement.EndpointType == null) ? string.Empty : standardEndpointElement.EndpointType.AssemblyQualifiedName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ConfigNoEndpointCreated,
+                            standardEndpointElement.GetType().AssemblyQualifiedName,
+                            (standardEndpointElement.EndpointType == null)
+                                ? string.Empty
+                                : standardEndpointElement.EndpointType.AssemblyQualifiedName
+                        )
+                    )
+                );
             }
 
             //binding
             if (!string.IsNullOrEmpty(channelEndpointElementCopy.Binding))
             {
-                endpoint.Binding = ConfigLoader.LookupBinding(channelEndpointElementCopy.Binding, channelEndpointElementCopy.BindingConfiguration, ConfigurationHelpers.GetEvaluationContext(channelEndpointElement));
+                endpoint.Binding = ConfigLoader.LookupBinding(
+                    channelEndpointElementCopy.Binding,
+                    channelEndpointElementCopy.BindingConfiguration,
+                    ConfigurationHelpers.GetEvaluationContext(channelEndpointElement)
+                );
             }
 
             //name
@@ -755,54 +1144,95 @@ namespace System.ServiceModel.Description
             {
                 endpoint.Address = address;
             }
-            if (endpoint.Address == null && channelEndpointElementCopy.Address != null && channelEndpointElementCopy.Address.OriginalString.Length > 0)
+            if (
+                endpoint.Address == null
+                && channelEndpointElementCopy.Address != null
+                && channelEndpointElementCopy.Address.OriginalString.Length > 0
+            )
             {
-                endpoint.Address = new EndpointAddress(channelEndpointElementCopy.Address, LoadIdentity(channelEndpointElementCopy.Identity), channelEndpointElementCopy.Headers.Headers);
+                endpoint.Address = new EndpointAddress(
+                    channelEndpointElementCopy.Address,
+                    LoadIdentity(channelEndpointElementCopy.Identity),
+                    channelEndpointElementCopy.Headers.Headers
+                );
             }
 
             //behaviors
-            CommonBehaviorsSection commonBehaviors = ConfigLoader.LookupCommonBehaviors(ConfigurationHelpers.GetEvaluationContext(channelEndpointElement));
+            CommonBehaviorsSection commonBehaviors = ConfigLoader.LookupCommonBehaviors(
+                ConfigurationHelpers.GetEvaluationContext(channelEndpointElement)
+            );
             if (commonBehaviors != null && commonBehaviors.EndpointBehaviors != null)
             {
-                LoadBehaviors<IEndpointBehavior>(commonBehaviors.EndpointBehaviors, endpoint.Behaviors, true/*commonBehaviors*/);
+                LoadBehaviors<IEndpointBehavior>(
+                    commonBehaviors.EndpointBehaviors,
+                    endpoint.Behaviors,
+                    true /*commonBehaviors*/
+                );
             }
 
-            EndpointBehaviorElement behaviorElement = ConfigLoader.LookupEndpointBehaviors(channelEndpointElementCopy.BehaviorConfiguration, ConfigurationHelpers.GetEvaluationContext(channelEndpointElement));
+            EndpointBehaviorElement behaviorElement = ConfigLoader.LookupEndpointBehaviors(
+                channelEndpointElementCopy.BehaviorConfiguration,
+                ConfigurationHelpers.GetEvaluationContext(channelEndpointElement)
+            );
             if (behaviorElement != null)
             {
-                LoadBehaviors<IEndpointBehavior>(behaviorElement, endpoint.Behaviors, false/*commonBehaviors*/);
+                LoadBehaviors<IEndpointBehavior>(
+                    behaviorElement,
+                    endpoint.Behaviors,
+                    false /*commonBehaviors*/
+                );
             }
 
             standardEndpointElement.ApplyConfiguration(endpoint, channelEndpointElementCopy);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal ServiceEndpoint LookupEndpoint(ServiceEndpointElement serviceEndpointElement, ContextInformation context,
-            ServiceHostBase host, ServiceDescription description, bool omitSettingEndpointAddress = false)
+        internal ServiceEndpoint LookupEndpoint(
+            ServiceEndpointElement serviceEndpointElement,
+            ContextInformation context,
+            ServiceHostBase host,
+            ServiceDescription description,
+            bool omitSettingEndpointAddress = false
+        )
         {
-            EndpointCollectionElement endpointCollectionElement = LookupEndpointCollectionElement(serviceEndpointElement.Kind, context);
+            EndpointCollectionElement endpointCollectionElement = LookupEndpointCollectionElement(
+                serviceEndpointElement.Kind,
+                context
+            );
             ServiceEndpoint retval = null;
 
-            string endpointConfiguration = serviceEndpointElement.EndpointConfiguration ?? String.Empty;
+            string endpointConfiguration =
+                serviceEndpointElement.EndpointConfiguration ?? String.Empty;
 
-            // We are looking for a specific instance, not the default. 
+            // We are looking for a specific instance, not the default.
             bool configuredEndpointFound = false;
             // The Endpoints property is always public
-            foreach (StandardEndpointElement standardEndpointElement in endpointCollectionElement.ConfiguredEndpoints)
+            foreach (
+                StandardEndpointElement standardEndpointElement in endpointCollectionElement.ConfiguredEndpoints
+            )
             {
-                if (standardEndpointElement.Name.Equals(endpointConfiguration, StringComparison.Ordinal))
+                if (
+                    standardEndpointElement.Name.Equals(
+                        endpointConfiguration,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     if (null == ConfigLoader.resolvedEndpoints)
                     {
                         ConfigLoader.resolvedEndpoints = new List<string>();
                     }
 
-                    string resolvedEndpointID = serviceEndpointElement.Kind + "/" + endpointConfiguration;
+                    string resolvedEndpointID =
+                        serviceEndpointElement.Kind + "/" + endpointConfiguration;
                     if (ConfigLoader.resolvedEndpoints.Contains(resolvedEndpointID))
                     {
-                        ConfigurationElement configErrorElement = (ConfigurationElement)standardEndpointElement;
+                        ConfigurationElement configErrorElement =
+                            (ConfigurationElement)standardEndpointElement;
                         System.Text.StringBuilder detectedCycle = new System.Text.StringBuilder();
                         foreach (string resolvedEndpoint in ConfigLoader.resolvedEndpoints)
                         {
@@ -815,16 +1245,32 @@ namespace System.ServiceModel.Description
                         // by not starting up channel, etc...
                         ConfigLoader.resolvedEndpoints = null;
 
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigEndpointReferenceCycleDetected, detectedCycle.ToString()),
-                            configErrorElement.ElementInformation.Source,
-                            configErrorElement.ElementInformation.LineNumber));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.ConfigEndpointReferenceCycleDetected,
+                                    detectedCycle.ToString()
+                                ),
+                                configErrorElement.ElementInformation.Source,
+                                configErrorElement.ElementInformation.LineNumber
+                            )
+                        );
                     }
 
                     try
                     {
-                        CheckAccess(standardEndpointElement as IConfigurationContextProviderInternal);
+                        CheckAccess(
+                            standardEndpointElement as IConfigurationContextProviderInternal
+                        );
                         ConfigLoader.resolvedEndpoints.Add(resolvedEndpointID);
-                        ConfigureEndpoint(standardEndpointElement, serviceEndpointElement, context, host, description, out retval);
+                        ConfigureEndpoint(
+                            standardEndpointElement,
+                            serviceEndpointElement,
+                            context,
+                            host,
+                            description,
+                            out retval
+                        );
                         ConfigLoader.resolvedEndpoints.Remove(resolvedEndpointID);
                     }
                     catch
@@ -838,8 +1284,10 @@ namespace System.ServiceModel.Description
                         throw;
                     }
 
-                    if (null != ConfigLoader.resolvedEndpoints &&
-                        0 == ConfigLoader.resolvedEndpoints.Count)
+                    if (
+                        null != ConfigLoader.resolvedEndpoints
+                        && 0 == ConfigLoader.resolvedEndpoints.Count
+                    )
                     {
                         ConfigLoader.resolvedEndpoints = null;
                     }
@@ -850,14 +1298,23 @@ namespace System.ServiceModel.Description
             if (!configuredEndpointFound)
             {
                 // We expected to find an instance, but didn't.
-                // Return null. 
+                // Return null.
                 retval = null;
             }
 
             if (retval == null && String.IsNullOrEmpty(endpointConfiguration))
             {
-                StandardEndpointElement standardEndpointElement = endpointCollectionElement.GetDefaultStandardEndpointElement();
-                ConfigureEndpoint(standardEndpointElement, serviceEndpointElement, context, host, description, out retval, omitSettingEndpointAddress);
+                StandardEndpointElement standardEndpointElement =
+                    endpointCollectionElement.GetDefaultStandardEndpointElement();
+                ConfigureEndpoint(
+                    standardEndpointElement,
+                    serviceEndpointElement,
+                    context,
+                    host,
+                    description,
+                    out retval,
+                    omitSettingEndpointAddress
+                );
             }
 
             if (DiagnosticUtility.ShouldTraceVerbose)
@@ -879,18 +1336,33 @@ namespace System.ServiceModel.Description
                     values["Name"] = endpointConfiguration;
                 }
                 values["Endpoint"] = serviceEndpointElement.Kind;
-                TraceUtility.TraceEvent(TraceEventType.Verbose, traceCode, traceDescription,
-                    new DictionaryTraceRecord(values), null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    traceCode,
+                    traceDescription,
+                    new DictionaryTraceRecord(values),
+                    null,
+                    null
+                );
             }
 
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        void ConfigureEndpoint(StandardEndpointElement standardEndpointElement, ServiceEndpointElement serviceEndpointElement,
-            ContextInformation context, ServiceHostBase host, ServiceDescription description, out ServiceEndpoint endpoint, bool omitSettingEndpointAddress = false)
+        void ConfigureEndpoint(
+            StandardEndpointElement standardEndpointElement,
+            ServiceEndpointElement serviceEndpointElement,
+            ContextInformation context,
+            ServiceHostBase host,
+            ServiceDescription description,
+            out ServiceEndpoint endpoint,
+            bool omitSettingEndpointAddress = false
+        )
         {
             // copy serviceEndpointElement so that it can potentially be modified by the StandardEndpointElement
             // the properties collection of the instance seviceEndpointElement created by System.Configuration is read-only.
@@ -904,24 +1376,43 @@ namespace System.ServiceModel.Description
             ContractDescription contract = null;
             if (!string.IsNullOrEmpty(serviceEndpointElementCopy.Contract))
             {
-                contract = LookupContractForStandardEndpoint(serviceEndpointElementCopy.Contract, description.Name);
+                contract = LookupContractForStandardEndpoint(
+                    serviceEndpointElementCopy.Contract,
+                    description.Name
+                );
             }
 
             endpoint = standardEndpointElement.CreateServiceEndpoint(contract);
             if (endpoint == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ConfigNoEndpointCreated, standardEndpointElement.GetType().AssemblyQualifiedName,
-                    (standardEndpointElement.EndpointType == null) ? string.Empty : standardEndpointElement.EndpointType.AssemblyQualifiedName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.ConfigNoEndpointCreated,
+                            standardEndpointElement.GetType().AssemblyQualifiedName,
+                            (standardEndpointElement.EndpointType == null)
+                                ? string.Empty
+                                : standardEndpointElement.EndpointType.AssemblyQualifiedName
+                        )
+                    )
+                );
             }
 
             //binding
             Binding binding = null;
             if (!string.IsNullOrEmpty(serviceEndpointElementCopy.Binding))
             {
-                string bindingKey = serviceEndpointElementCopy.Binding + ":" + serviceEndpointElementCopy.BindingConfiguration;
+                string bindingKey =
+                    serviceEndpointElementCopy.Binding
+                    + ":"
+                    + serviceEndpointElementCopy.BindingConfiguration;
                 if (bindingTable.TryGetValue(bindingKey, out binding) == false)
                 {
-                    binding = ConfigLoader.LookupBinding(serviceEndpointElementCopy.Binding, serviceEndpointElementCopy.BindingConfiguration, context);
+                    binding = ConfigLoader.LookupBinding(
+                        serviceEndpointElementCopy.Binding,
+                        serviceEndpointElementCopy.BindingConfiguration,
+                        context
+                    );
                     bindingTable.Add(bindingKey, binding);
                 }
             }
@@ -961,14 +1452,26 @@ namespace System.ServiceModel.Description
             //behaviors
             KeyedByTypeCollection<IEndpointBehavior> behaviors = endpoint.Behaviors;
 
-            EndpointBehaviorElement behaviorEndpointElement = ConfigLoader.LookupEndpointBehaviors(serviceEndpointElementCopy.BehaviorConfiguration, ConfigurationHelpers.GetEvaluationContext(serviceEndpointElement));
+            EndpointBehaviorElement behaviorEndpointElement = ConfigLoader.LookupEndpointBehaviors(
+                serviceEndpointElementCopy.BehaviorConfiguration,
+                ConfigurationHelpers.GetEvaluationContext(serviceEndpointElement)
+            );
             if (behaviorEndpointElement != null)
             {
-                LoadBehaviors<IEndpointBehavior>(behaviorEndpointElement, behaviors, false/*commonBehaviors*/);
+                LoadBehaviors<IEndpointBehavior>(
+                    behaviorEndpointElement,
+                    behaviors,
+                    false /*commonBehaviors*/
+                );
             }
 
             //isSystemEndpoint
-            if (serviceEndpointElementCopy.ElementInformation.Properties[ConfigurationStrings.IsSystemEndpoint].ValueOrigin != PropertyValueOrigin.Default)
+            if (
+                serviceEndpointElementCopy
+                    .ElementInformation
+                    .Properties[ConfigurationStrings.IsSystemEndpoint]
+                    .ValueOrigin != PropertyValueOrigin.Default
+            )
             {
                 endpoint.IsSystemEndpoint = serviceEndpointElementCopy.IsSystemEndpoint;
             }
@@ -976,23 +1479,43 @@ namespace System.ServiceModel.Description
             standardEndpointElement.ApplyConfiguration(endpoint, serviceEndpointElementCopy);
         }
 
-        internal static void ConfigureEndpointAddress(ServiceEndpointElement serviceEndpointElement, ServiceHostBase host, ServiceEndpoint endpoint)
+        internal static void ConfigureEndpointAddress(
+            ServiceEndpointElement serviceEndpointElement,
+            ServiceHostBase host,
+            ServiceEndpoint endpoint
+        )
         {
             Fx.Assert(endpoint.Binding != null, "The endpoint must be set by the caller.");
             if (serviceEndpointElement.Address != null)
             {
-                Uri via = ServiceHost.MakeAbsoluteUri(serviceEndpointElement.Address, endpoint.Binding, host.InternalBaseAddresses);
-                endpoint.Address = new EndpointAddress(via, LoadIdentity(serviceEndpointElement.Identity), serviceEndpointElement.Headers.Headers);
+                Uri via = ServiceHost.MakeAbsoluteUri(
+                    serviceEndpointElement.Address,
+                    endpoint.Binding,
+                    host.InternalBaseAddresses
+                );
+                endpoint.Address = new EndpointAddress(
+                    via,
+                    LoadIdentity(serviceEndpointElement.Identity),
+                    serviceEndpointElement.Headers.Headers
+                );
                 endpoint.UnresolvedAddress = serviceEndpointElement.Address;
             }
         }
 
-        internal static void ConfigureEndpointListenUri(ServiceEndpointElement serviceEndpointElement, ServiceHostBase host, ServiceEndpoint endpoint)
+        internal static void ConfigureEndpointListenUri(
+            ServiceEndpointElement serviceEndpointElement,
+            ServiceHostBase host,
+            ServiceEndpoint endpoint
+        )
         {
             Fx.Assert(endpoint.Binding != null, "The endpoint must be set by the caller.");
             if (serviceEndpointElement.ListenUri != null)
             {
-                endpoint.ListenUri = ServiceHost.MakeAbsoluteUri(serviceEndpointElement.ListenUri, endpoint.Binding, host.InternalBaseAddresses);
+                endpoint.ListenUri = ServiceHost.MakeAbsoluteUri(
+                    serviceEndpointElement.ListenUri,
+                    endpoint.Binding,
+                    host.InternalBaseAddresses
+                );
                 endpoint.UnresolvedListenUri = serviceEndpointElement.ListenUri;
             }
         }
@@ -1004,7 +1527,8 @@ namespace System.ServiceModel.Description
 
         internal static ComContractElement LookupComContract(Guid contractIID)
         {
-            ComContractsSection comContracts = (ComContractsSection)ConfigurationHelpers.GetSection(ConfigurationStrings.ComContractsSectionPath);
+            ComContractsSection comContracts = (ComContractsSection)
+                ConfigurationHelpers.GetSection(ConfigurationStrings.ComContractsSectionPath);
             foreach (ComContractElement contract in comContracts.ComContracts)
             {
                 Guid interfaceID;
@@ -1026,7 +1550,10 @@ namespace System.ServiceModel.Description
         [SecuritySafeCritical]
         internal static ProtocolMappingItem LookupProtocolMapping(String scheme)
         {
-            ProtocolMappingSection protocolMapping = (ProtocolMappingSection)ConfigurationHelpers.UnsafeGetSection(ConfigurationStrings.ProtocolMappingSectionPath);
+            ProtocolMappingSection protocolMapping = (ProtocolMappingSection)
+                ConfigurationHelpers.UnsafeGetSection(
+                    ConfigurationStrings.ProtocolMappingSectionPath
+                );
             foreach (ProtocolMappingElement pm in protocolMapping.ProtocolMappingCollection)
             {
                 if (pm.Scheme == scheme)
@@ -1037,36 +1564,59 @@ namespace System.ServiceModel.Description
             return null;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Leaks config objects, caller must ensure that these don't leak to user code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Leaks config objects, caller must ensure that these don't leak to user code."
+        )]
         [SecurityCritical]
-        static BindingCollectionElement GetBindingCollectionElement(string bindingSectionName, ContextInformation context)
+        static BindingCollectionElement GetBindingCollectionElement(
+            string bindingSectionName,
+            ContextInformation context
+        )
         {
             if (string.IsNullOrEmpty(bindingSectionName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigBindingTypeCannotBeNullOrEmpty)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(SR.ConfigBindingTypeCannotBeNullOrEmpty)
+                    )
+                );
             }
             if (context == null)
             {
-                // If no context is passed in, assume that the caller can consume the AppDomain's 
+                // If no context is passed in, assume that the caller can consume the AppDomain's
                 // current configuration file.
-                return (BindingCollectionElement)ConfigurationHelpers.UnsafeGetBindingCollectionElement(bindingSectionName);
+                return (BindingCollectionElement)
+                    ConfigurationHelpers.UnsafeGetBindingCollectionElement(bindingSectionName);
             }
             else
             {
                 // Use the configuration file associated with the passed in context.
                 // This may or may not be the same as the file for the current AppDomain.
-                return (BindingCollectionElement)ConfigurationHelpers.UnsafeGetAssociatedBindingCollectionElement(context, bindingSectionName);
+                return (BindingCollectionElement)
+                    ConfigurationHelpers.UnsafeGetAssociatedBindingCollectionElement(
+                        context,
+                        bindingSectionName
+                    );
             }
         }
 
-        // This method should only return null when bindingConfiguration is specified on the BindingElement and no BindingElement matching the 
-        // bindingConfiguration name is found.  All other error conditions should throw.        
-        [Fx.Tag.SecurityNote(Critical = "Handles config objects, which should not be leaked.",
-            Safe = "Doesn't leak config objects out of SecurityCritical code.")]
+        // This method should only return null when bindingConfiguration is specified on the BindingElement and no BindingElement matching the
+        // bindingConfiguration name is found.  All other error conditions should throw.
+        [Fx.Tag.SecurityNote(
+            Critical = "Handles config objects, which should not be leaked.",
+            Safe = "Doesn't leak config objects out of SecurityCritical code."
+        )]
         [SecuritySafeCritical]
-        internal static Binding LookupBinding(string bindingSectionName, string configurationName, ContextInformation context)
+        internal static Binding LookupBinding(
+            string bindingSectionName,
+            string configurationName,
+            ContextInformation context
+        )
         {
-            BindingCollectionElement bindingCollectionElement = GetBindingCollectionElement(bindingSectionName, context);
+            BindingCollectionElement bindingCollectionElement = GetBindingCollectionElement(
+                bindingSectionName,
+                context
+            );
             Binding retval;
             if (configurationName == null)
             {
@@ -1075,7 +1625,12 @@ namespace System.ServiceModel.Description
             else
             {
                 Binding defaultBinding = bindingCollectionElement.GetDefault();
-                retval = LookupBinding(bindingSectionName, configurationName, bindingCollectionElement, defaultBinding);
+                retval = LookupBinding(
+                    bindingSectionName,
+                    configurationName,
+                    bindingCollectionElement,
+                    defaultBinding
+                );
                 if (retval == null && configurationName == ConfigurationStrings.DefaultName)
                 {
                     retval = defaultBinding;
@@ -1098,28 +1653,41 @@ namespace System.ServiceModel.Description
                 {
                     traceCode = TraceCode.GetConfiguredBinding;
                     traceDescription = SR.GetString(SR.TraceCodeGetConfiguredBinding);
-                    values["Name"] = string.IsNullOrEmpty(configurationName) ?
-                        SR.GetString(SR.Default) : configurationName;
+                    values["Name"] = string.IsNullOrEmpty(configurationName)
+                        ? SR.GetString(SR.Default)
+                        : configurationName;
                 }
                 values["Binding"] = bindingSectionName;
-                TraceUtility.TraceEvent(TraceEventType.Verbose, traceCode, traceDescription,
-                    new DictionaryTraceRecord(values), null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    traceCode,
+                    traceDescription,
+                    new DictionaryTraceRecord(values),
+                    null,
+                    null
+                );
             }
             return retval;
         }
 
-        static Binding LookupBinding(string bindingSectionName, string configurationName, BindingCollectionElement bindingCollectionElement, Binding defaultBinding)
+        static Binding LookupBinding(
+            string bindingSectionName,
+            string configurationName,
+            BindingCollectionElement bindingCollectionElement,
+            Binding defaultBinding
+        )
         {
             Binding retval = defaultBinding;
             if (configurationName != null)
             {
-                // We are looking for a specific instance, not the default. 
+                // We are looking for a specific instance, not the default.
                 bool configuredBindingFound = false;
 
                 // The Bindings property is always public
                 foreach (object configElement in bindingCollectionElement.ConfiguredBindings)
                 {
-                    IBindingConfigurationElement bindingElement = configElement as IBindingConfigurationElement;
+                    IBindingConfigurationElement bindingElement =
+                        configElement as IBindingConfigurationElement;
                     if (bindingElement != null)
                     {
                         if (bindingElement.Name.Equals(configurationName, StringComparison.Ordinal))
@@ -1131,11 +1699,16 @@ namespace System.ServiceModel.Description
                             string resolvedBindingID = bindingSectionName + "/" + configurationName;
                             if (ConfigLoader.resolvedBindings.Contains(resolvedBindingID))
                             {
-                                ConfigurationElement configErrorElement = (ConfigurationElement)configElement;
-                                System.Text.StringBuilder detectedCycle = new System.Text.StringBuilder();
+                                ConfigurationElement configErrorElement =
+                                    (ConfigurationElement)configElement;
+                                System.Text.StringBuilder detectedCycle =
+                                    new System.Text.StringBuilder();
                                 foreach (string resolvedBinding in ConfigLoader.resolvedBindings)
                                 {
-                                    detectedCycle = detectedCycle.AppendFormat("{0}, ", resolvedBinding);
+                                    detectedCycle = detectedCycle.AppendFormat(
+                                        "{0}, ",
+                                        resolvedBinding
+                                    );
                                 }
 
                                 detectedCycle = detectedCycle.Append(resolvedBindingID);
@@ -1144,9 +1717,16 @@ namespace System.ServiceModel.Description
                                 // by not starting up channel, etc...
                                 ConfigLoader.resolvedBindings = null;
 
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigBindingReferenceCycleDetected, detectedCycle.ToString()),
-                                    configErrorElement.ElementInformation.Source,
-                                    configErrorElement.ElementInformation.LineNumber));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new ConfigurationErrorsException(
+                                        SR.GetString(
+                                            SR.ConfigBindingReferenceCycleDetected,
+                                            detectedCycle.ToString()
+                                        ),
+                                        configErrorElement.ElementInformation.Source,
+                                        configErrorElement.ElementInformation.LineNumber
+                                    )
+                                );
                             }
 
                             try
@@ -1168,8 +1748,10 @@ namespace System.ServiceModel.Description
                                 throw;
                             }
 
-                            if (null != ConfigLoader.resolvedBindings &&
-                                0 == ConfigLoader.resolvedBindings.Count)
+                            if (
+                                null != ConfigLoader.resolvedBindings
+                                && 0 == ConfigLoader.resolvedBindings.Count
+                            )
                             {
                                 ConfigLoader.resolvedBindings = null;
                             }
@@ -1180,7 +1762,7 @@ namespace System.ServiceModel.Description
                 if (!configuredBindingFound)
                 {
                     // We expected to find an instance, but didn't.
-                    // Return null. 
+                    // Return null.
                     retval = null;
                 }
             }
@@ -1188,18 +1770,28 @@ namespace System.ServiceModel.Description
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Leaks config objects, caller must ensure that these don't leak to user code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Leaks config objects, caller must ensure that these don't leak to user code."
+        )]
         [SecurityCritical]
-        static EndpointBehaviorElement LookupEndpointBehaviors(string behaviorName, ContextInformation context)
+        static EndpointBehaviorElement LookupEndpointBehaviors(
+            string behaviorName,
+            ContextInformation context
+        )
         {
             EndpointBehaviorElement retval = null;
             if (behaviorName != null)
             {
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.GetBehaviorElement,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.GetBehaviorElement,
                         SR.GetString(SR.TraceCodeGetBehaviorElement),
-                        new StringTraceRecord("BehaviorName", behaviorName), null, null);
+                        new StringTraceRecord("BehaviorName", behaviorName),
+                        null,
+                        null
+                    );
                 }
                 BehaviorsSection behaviors = null;
                 if (context == null)
@@ -1222,18 +1814,28 @@ namespace System.ServiceModel.Description
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Leaks config objects, caller must ensure that these don't leak to user code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Leaks config objects, caller must ensure that these don't leak to user code."
+        )]
         [SecurityCritical]
-        static ServiceBehaviorElement LookupServiceBehaviors(string behaviorName, ContextInformation context)
+        static ServiceBehaviorElement LookupServiceBehaviors(
+            string behaviorName,
+            ContextInformation context
+        )
         {
             ServiceBehaviorElement retval = null;
             if (behaviorName != null)
             {
                 if (DiagnosticUtility.ShouldTraceVerbose)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.GetBehaviorElement,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Verbose,
+                        TraceCode.GetBehaviorElement,
                         SR.GetString(SR.TraceCodeGetBehaviorElement),
-                        new StringTraceRecord("BehaviorName", behaviorName), null, null);
+                        new StringTraceRecord("BehaviorName", behaviorName),
+                        null,
+                        null
+                    );
                 }
                 BehaviorsSection behaviors = null;
                 if (context == null)
@@ -1256,21 +1858,33 @@ namespace System.ServiceModel.Description
             return retval;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Leaks config objects, caller must ensure that these don't leak to user code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Leaks config objects, caller must ensure that these don't leak to user code."
+        )]
         [SecurityCritical]
         static CommonBehaviorsSection LookupCommonBehaviors(ContextInformation context)
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
             {
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.GetCommonBehaviors,
-                    SR.GetString(SR.TraceCodeGetCommonBehaviors), (object)null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.GetCommonBehaviors,
+                    SR.GetString(SR.TraceCodeGetCommonBehaviors),
+                    (object)null
+                );
             }
             return context == null
                 ? CommonBehaviorsSection.UnsafeGetSection()
                 : CommonBehaviorsSection.UnsafeGetAssociatedSection(context);
         }
 
-        static bool IsChannelElementMatch(ChannelEndpointElement channelElement, ContractDescription contract, EndpointAddress address, bool useChannelElementKind, out ServiceEndpoint serviceEndpoint)
+        static bool IsChannelElementMatch(
+            ChannelEndpointElement channelElement,
+            ContractDescription contract,
+            EndpointAddress address,
+            bool useChannelElementKind,
+            out ServiceEndpoint serviceEndpoint
+        )
         {
             serviceEndpoint = null;
             if (string.IsNullOrEmpty(channelElement.Kind))
@@ -1283,8 +1897,13 @@ namespace System.ServiceModel.Description
                 serviceEndpoint = LookupEndpoint(channelElement, null, address, contract);
                 if (serviceEndpoint != null)
                 {
-                    if (serviceEndpoint.Contract.ConfigurationName == contract.ConfigurationName &&
-                        (string.IsNullOrEmpty(channelElement.Contract) || contract.ConfigurationName == channelElement.Contract))
+                    if (
+                        serviceEndpoint.Contract.ConfigurationName == contract.ConfigurationName
+                        && (
+                            string.IsNullOrEmpty(channelElement.Contract)
+                            || contract.ConfigurationName == channelElement.Contract
+                        )
+                    )
                     {
                         return true;
                     }
@@ -1296,34 +1915,55 @@ namespace System.ServiceModel.Description
                 }
                 else
                 {
-                    return false;  // this should not happen with a valid client section since serviceEndpoint will never be null.
+                    return false; // this should not happen with a valid client section since serviceEndpoint will never be null.
                 }
             }
             else
             {
                 // A standard endpoint should not be returned in the case of useChannelElementKind = false.
-                // This is because useChannelElementKind = false only when this method is called by 
+                // This is because useChannelElementKind = false only when this method is called by
                 // LoadChannelBehaviors (the overload that takes a ServiceEndpoint and a string(configurationName)).
                 // LoadChannelBehaviors is called for the purposes of applying channel behaviors to a newly created service endpoint.
-                // In the case of standard endpoints, the service endpoints are already fully configured.  
+                // In the case of standard endpoints, the service endpoints are already fully configured.
                 // Reapplying behaviors would not only be redundant but may cause exceptions to be thrown.
 
                 return false;
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Leaks config objects, caller must ensure that these don't leak to user code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Leaks config objects, caller must ensure that these don't leak to user code."
+        )]
         [SecurityCritical]
-        static ChannelEndpointElement LookupChannel(ContextInformation configurationContext, string configurationName, ContractDescription contract,
-            EndpointAddress address, bool wildcard, bool useChannelElementKind, out ServiceEndpoint serviceEndpoint)
+        static ChannelEndpointElement LookupChannel(
+            ContextInformation configurationContext,
+            string configurationName,
+            ContractDescription contract,
+            EndpointAddress address,
+            bool wildcard,
+            bool useChannelElementKind,
+            out ServiceEndpoint serviceEndpoint
+        )
         {
             serviceEndpoint = null;
-            ClientSection clientSection = (configurationContext == null ? ClientSection.UnsafeGetSection() : ClientSection.UnsafeGetSection(configurationContext));
+            ClientSection clientSection = (
+                configurationContext == null
+                    ? ClientSection.UnsafeGetSection()
+                    : ClientSection.UnsafeGetSection(configurationContext)
+            );
             ChannelEndpointElement retval = null;
             ServiceEndpoint standardEndpoint;
             foreach (ChannelEndpointElement channelElement in clientSection.Endpoints)
             {
-                if (IsChannelElementMatch(channelElement, contract, address, useChannelElementKind, out standardEndpoint))
+                if (
+                    IsChannelElementMatch(
+                        channelElement,
+                        contract,
+                        address,
+                        useChannelElementKind,
+                        out standardEndpoint
+                    )
+                )
                 {
                     if (channelElement.Name == configurationName || wildcard) // match name (or wildcard)
                     {
@@ -1331,11 +1971,26 @@ namespace System.ServiceModel.Description
                         {
                             if (wildcard)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxConfigLoaderMultipleEndpointMatchesWildcard1, contract.ConfigurationName)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxConfigLoaderMultipleEndpointMatchesWildcard1,
+                                            contract.ConfigurationName
+                                        )
+                                    )
+                                );
                             }
                             else
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxConfigLoaderMultipleEndpointMatchesSpecified2, contract.ConfigurationName, configurationName)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new InvalidOperationException(
+                                        SR.GetString(
+                                            SR.SFxConfigLoaderMultipleEndpointMatchesSpecified2,
+                                            contract.ConfigurationName,
+                                            configurationName
+                                        )
+                                    )
+                                );
                             }
                         }
                         retval = channelElement;
@@ -1373,14 +2028,20 @@ namespace System.ServiceModel.Description
                     if (!string.IsNullOrEmpty(retval.ElementInformation.Source))
                     {
                         values["ConfigurationFileSource"] = retval.ElementInformation.Source;
-                        values["ConfigurationFileLineNumber"] = retval.ElementInformation.LineNumber;
+                        values["ConfigurationFileLineNumber"] = retval
+                            .ElementInformation
+                            .LineNumber;
                     }
                 }
 
-                TraceUtility.TraceEvent(TraceEventType.Information,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
                     TraceCode.GetChannelEndpointElement,
                     SR.GetString(SR.TraceCodeGetChannelEndpointElement),
-                    new DictionaryTraceRecord(values), null, null);
+                    new DictionaryTraceRecord(values),
+                    null,
+                    null
+                );
             }
 
             return retval;
@@ -1388,36 +2049,63 @@ namespace System.ServiceModel.Description
 
         internal ContractDescription LookupContract(string contractName, string serviceName)
         {
-            ContractDescription contract = LookupContractForStandardEndpoint(contractName, serviceName);
+            ContractDescription contract = LookupContractForStandardEndpoint(
+                contractName,
+                serviceName
+            );
             if (contract == null)
             {
                 if (contractName == String.Empty)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxReflectedContractKeyNotFoundEmpty, serviceName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.SfxReflectedContractKeyNotFoundEmpty, serviceName)
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxReflectedContractKeyNotFound2, contractName, serviceName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxReflectedContractKeyNotFound2,
+                                contractName,
+                                serviceName
+                            )
+                        )
+                    );
                 }
             }
 
             return contract;
         }
 
-        internal ContractDescription LookupContractForStandardEndpoint(string contractName, string serviceName)
+        internal ContractDescription LookupContractForStandardEndpoint(
+            string contractName,
+            string serviceName
+        )
         {
             ContractDescription contract = contractResolver.ResolveContract(contractName);
             if (contract == null)
             {
                 if (contractName == ServiceMetadataBehavior.MexContractName)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SfxReflectedContractKeyNotFoundIMetadataExchange, serviceName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SfxReflectedContractKeyNotFoundIMetadataExchange,
+                                serviceName
+                            )
+                        )
+                    );
                 }
             }
             return contract;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Leaks config objects, caller must ensure that these don't leak to user code.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Leaks config objects, caller must ensure that these don't leak to user code."
+        )]
         [SecurityCritical]
         public ServiceElement LookupService(string serviceConfigurationName)
         {
@@ -1425,7 +2113,10 @@ namespace System.ServiceModel.Description
             return LookupService(serviceConfigurationName, servicesSection);
         }
 
-        public ServiceElement LookupService(string serviceConfigurationName, ServicesSection servicesSection)
+        public ServiceElement LookupService(
+            string serviceConfigurationName,
+            ServicesSection servicesSection
+        )
         {
             ServiceElement retval = null;
 
@@ -1446,10 +2137,14 @@ namespace System.ServiceModel.Description
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
                     TraceCode.GetServiceElement,
                     SR.GetString(SR.TraceCodeGetServiceElement),
-                    new ServiceConfigurationTraceRecord(retval), null, null);
+                    new ServiceConfigurationTraceRecord(retval),
+                    null,
+                    null
+                );
             }
             return retval;
         }
@@ -1487,13 +2182,17 @@ namespace System.ServiceModel.Description
         [MethodImpl(MethodImplOptions.NoInlining)]
         static bool IsWebConfigAboveApplication(ContextInformation contextInformation)
         {
-            return AspNetEnvironment.Current.IsWebConfigAboveApplication(contextInformation.HostingContext);
+            return AspNetEnvironment.Current.IsWebConfigAboveApplication(
+                contextInformation.HostingContext
+            );
         }
 
         [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - enforces a security decision.")]
         static void CheckAccess(IConfigurationContextProviderInternal element)
         {
-            if (IsConfigAboveApplication(ConfigurationHelpers.GetOriginalEvaluationContext(element)))
+            if (
+                IsConfigAboveApplication(ConfigurationHelpers.GetOriginalEvaluationContext(element))
+            )
             {
                 ConfigurationPermission.Demand();
             }
@@ -1505,14 +2204,18 @@ namespace System.ServiceModel.Description
 
         static ConfigurationPermission ConfigurationPermission
         {
-            [Fx.Tag.SecurityNote(Critical = "Inits the configurationPermission field.",
-                Safe = "Safe for readonly access.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Inits the configurationPermission field.",
+                Safe = "Safe for readonly access."
+            )]
             [SecuritySafeCritical]
             get
             {
                 if (configurationPermission == null)
                 {
-                    configurationPermission = new ConfigurationPermission(System.Security.Permissions.PermissionState.Unrestricted);
+                    configurationPermission = new ConfigurationPermission(
+                        System.Security.Permissions.PermissionState.Unrestricted
+                    );
                 }
                 return configurationPermission;
             }

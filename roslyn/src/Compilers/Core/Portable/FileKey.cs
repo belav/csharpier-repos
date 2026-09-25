@@ -44,7 +44,8 @@ namespace Roslyn.Utilities
         {
             return Hash.Combine(
                 StringComparer.OrdinalIgnoreCase.GetHashCode(this.FullPath),
-                this.Timestamp.GetHashCode());
+                this.Timestamp.GetHashCode()
+            );
         }
 
         public override bool Equals(object? obj)
@@ -59,9 +60,8 @@ namespace Roslyn.Utilities
 
         public bool Equals(FileKey other)
         {
-            return
-                this.Timestamp == other.Timestamp &&
-                string.Equals(this.FullPath, other.FullPath, StringComparison.OrdinalIgnoreCase);
+            return this.Timestamp == other.Timestamp
+                && string.Equals(this.FullPath, other.FullPath, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

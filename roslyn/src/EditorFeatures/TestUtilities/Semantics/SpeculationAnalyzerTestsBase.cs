@@ -23,20 +23,38 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Semantics
             MscorlibRef,
             SystemRef,
             SystemCoreRef,
-            MsvbRef
+            MsvbRef,
         ];
 
-        protected void Test(string code, string replacementExpression, bool semanticChanges, string expressionToAnalyze = null, bool isBrokenCode = false)
+        protected void Test(
+            string code,
+            string replacementExpression,
+            bool semanticChanges,
+            string expressionToAnalyze = null,
+            bool isBrokenCode = false
+        )
         {
             var initialMatch = UnderTestRegex.Match(code);
             Assert.True(initialMatch.Success);
             var initialExpression = initialMatch.Groups["content"].Value;
 
             var initialTree = Parse(UnderTestRegex.Replace(code, m => m.Groups["content"].Value));
-            var initialNode = initialTree.GetRoot().DescendantNodes().First(n => IsExpressionNode(n) && n.ToString() == (expressionToAnalyze ?? initialExpression));
+            var initialNode = initialTree
+                .GetRoot()
+                .DescendantNodes()
+                .First(n =>
+                    IsExpressionNode(n)
+                    && n.ToString() == (expressionToAnalyze ?? initialExpression)
+                );
 
             var replacementTree = Parse(UnderTestRegex.Replace(code, replacementExpression));
-            var replacementNode = replacementTree.GetRoot().DescendantNodes().First(n => IsExpressionNode(n) && n.ToString() == (expressionToAnalyze ?? replacementExpression));
+            var replacementNode = replacementTree
+                .GetRoot()
+                .DescendantNodes()
+                .First(n =>
+                    IsExpressionNode(n)
+                    && n.ToString() == (expressionToAnalyze ?? replacementExpression)
+                );
 
             var initialCompilation = CreateCompilation(initialTree);
             var initialModel = initialCompilation.GetSemanticModel(initialTree);
@@ -47,7 +65,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Semantics
                 CheckCompilation(CreateCompilation(replacementTree));
             }
 
-            Assert.Equal(semanticChanges, ReplacementChangesSemantics(initialNode, replacementNode, initialModel));
+            Assert.Equal(
+                semanticChanges,
+                ReplacementChangesSemantics(initialNode, replacementNode, initialModel)
+            );
         }
 
         private void CheckCompilation(Compilation compilation)
@@ -64,8 +85,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Semantics
 
         protected abstract Compilation CreateCompilation(SyntaxTree tree);
 
-        protected abstract bool CompilationSucceeded(Compilation compilation, Stream temporaryStream);
+        protected abstract bool CompilationSucceeded(
+            Compilation compilation,
+            Stream temporaryStream
+        );
 
-        protected abstract bool ReplacementChangesSemantics(SyntaxNode initialNode, SyntaxNode replacementNode, SemanticModel initialModel);
+        protected abstract bool ReplacementChangesSemantics(
+            SyntaxNode initialNode,
+            SyntaxNode replacementNode,
+            SemanticModel initialModel
+        );
     }
 }

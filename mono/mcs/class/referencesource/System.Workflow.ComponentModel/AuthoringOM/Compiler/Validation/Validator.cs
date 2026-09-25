@@ -1,12 +1,14 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Reflection;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Reflection;
 
     #region Class Validator
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class Validator
     {
         public virtual ValidationErrorCollection Validate(ValidationManager manager, object obj)
@@ -19,7 +21,10 @@ namespace System.Workflow.ComponentModel.Compiler
             return new ValidationErrorCollection();
         }
 
-        public virtual ValidationError ValidateActivityChange(Activity activity, ActivityChangeAction action)
+        public virtual ValidationError ValidateActivityChange(
+            Activity activity,
+            ActivityChangeAction action
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -29,7 +34,10 @@ namespace System.Workflow.ComponentModel.Compiler
             return null;
         }
 
-        public virtual ValidationErrorCollection ValidateProperties(ValidationManager manager, object obj)
+        public virtual ValidationErrorCollection ValidateProperties(
+            ValidationManager manager,
+            object obj
+        )
         {
             if (manager == null)
                 throw new ArgumentNullException("manager");
@@ -51,14 +59,33 @@ namespace System.Workflow.ComponentModel.Compiler
                 // list, but we don't need to validate these items.
                 if (args.CurrentProperty != null)
                 {
-                    DependencyProperty dependencyProperty = DependencyProperty.FromName(args.CurrentProperty.Name, args.CurrentProperty.DeclaringType);
+                    DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                        args.CurrentProperty.Name,
+                        args.CurrentProperty.DeclaringType
+                    );
                     if (dependencyProperty == null)
                     {
-                        object[] validationVisibilityAtrributes = args.CurrentProperty.GetCustomAttributes(typeof(ValidationOptionAttribute), true);
-                        ValidationOption validationVisibility = (validationVisibilityAtrributes.Length > 0) ? ((ValidationOptionAttribute)validationVisibilityAtrributes[0]).ValidationOption : ValidationOption.Optional;
+                        object[] validationVisibilityAtrributes =
+                            args.CurrentProperty.GetCustomAttributes(
+                                typeof(ValidationOptionAttribute),
+                                true
+                            );
+                        ValidationOption validationVisibility =
+                            (validationVisibilityAtrributes.Length > 0)
+                                ? (
+                                    (ValidationOptionAttribute)validationVisibilityAtrributes[0]
+                                ).ValidationOption
+                                : ValidationOption.Optional;
                         if (validationVisibility != ValidationOption.None)
                         {
-                            errors.AddRange(ValidateProperty(args.CurrentProperty, args.CurrentPropertyOwner, args.CurrentValue, manager));
+                            errors.AddRange(
+                                ValidateProperty(
+                                    args.CurrentProperty,
+                                    args.CurrentPropertyOwner,
+                                    args.CurrentValue,
+                                    manager
+                                )
+                            );
                             // don't probe into subproperties as validate object inside the ValidateProperties call does it for us
                             args.Action = WalkerAction.Skip;
                         }
@@ -84,9 +111,10 @@ namespace System.Workflow.ComponentModel.Compiler
             {
                 if (manager.Context[iterator] is PropertyValidationContext)
                 {
-                    PropertyValidationContext propertyValidationContext = manager.Context[iterator] as PropertyValidationContext;
+                    PropertyValidationContext propertyValidationContext =
+                        manager.Context[iterator] as PropertyValidationContext;
                     if (propertyValidationContext.PropertyName == string.Empty)
-                        fullName = string.Empty;  // property chain broke... dicard properties after break
+                        fullName = string.Empty; // property chain broke... dicard properties after break
                     else if (fullName == string.Empty)
                         fullName = propertyValidationContext.PropertyName;
                     else
@@ -98,13 +126,30 @@ namespace System.Workflow.ComponentModel.Compiler
             return fullName;
         }
 
-        internal protected ValidationErrorCollection ValidateProperty(PropertyInfo propertyInfo, object propertyOwner, object propertyValue, ValidationManager manager)
+        protected internal ValidationErrorCollection ValidateProperty(
+            PropertyInfo propertyInfo,
+            object propertyOwner,
+            object propertyValue,
+            ValidationManager manager
+        )
         {
             ValidationErrorCollection errors = new ValidationErrorCollection();
 
-            object[] validationVisibilityAtrributes = propertyInfo.GetCustomAttributes(typeof(ValidationOptionAttribute), true);
-            ValidationOption validationVisibility = (validationVisibilityAtrributes.Length > 0) ? ((ValidationOptionAttribute)validationVisibilityAtrributes[0]).ValidationOption : ValidationOption.Optional;
-            PropertyValidationContext propertyValidationContext = new PropertyValidationContext(propertyOwner, propertyInfo, propertyInfo.Name);
+            object[] validationVisibilityAtrributes = propertyInfo.GetCustomAttributes(
+                typeof(ValidationOptionAttribute),
+                true
+            );
+            ValidationOption validationVisibility =
+                (validationVisibilityAtrributes.Length > 0)
+                    ? (
+                        (ValidationOptionAttribute)validationVisibilityAtrributes[0]
+                    ).ValidationOption
+                    : ValidationOption.Optional;
+            PropertyValidationContext propertyValidationContext = new PropertyValidationContext(
+                propertyOwner,
+                propertyInfo,
+                propertyInfo.Name
+            );
             manager.Context.Push(propertyValidationContext);
 
             try
@@ -114,7 +159,11 @@ namespace System.Workflow.ComponentModel.Compiler
                     errors.AddRange(ValidationHelpers.ValidateObject(manager, propertyValue));
                     if (propertyValue is IList)
                     {
-                        PropertyValidationContext childContext = new PropertyValidationContext(propertyValue, null, "");
+                        PropertyValidationContext childContext = new PropertyValidationContext(
+                            propertyValue,
+                            null,
+                            ""
+                        );
                         manager.Context.Push(childContext);
 
                         try
@@ -124,7 +173,10 @@ namespace System.Workflow.ComponentModel.Compiler
                         }
                         finally
                         {
-                            System.Diagnostics.Debug.Assert(manager.Context.Current == childContext, "Unwinding contextStack: the item that is about to be popped is not the one we pushed.");
+                            System.Diagnostics.Debug.Assert(
+                                manager.Context.Current == childContext,
+                                "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
+                            );
                             manager.Context.Pop();
                         }
                     }
@@ -132,7 +184,10 @@ namespace System.Workflow.ComponentModel.Compiler
             }
             finally
             {
-                System.Diagnostics.Debug.Assert(manager.Context.Current == propertyValidationContext, "Unwinding contextStack: the item that is about to be popped is not the one we pushed.");
+                System.Diagnostics.Debug.Assert(
+                    manager.Context.Current == propertyValidationContext,
+                    "Unwinding contextStack: the item that is about to be popped is not the one we pushed."
+                );
                 manager.Context.Pop();
             }
 

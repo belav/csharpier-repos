@@ -10,11 +10,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class DescendingKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public DescendingKeywordRecommender()
-            : base(SyntaxKind.DescendingKeyword)
-        {
-        }
+            : base(SyntaxKind.DescendingKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
-            => context.TargetToken.IsOrderByDirectionContext();
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        ) => context.TargetToken.IsOrderByDirectionContext();
     }
 }

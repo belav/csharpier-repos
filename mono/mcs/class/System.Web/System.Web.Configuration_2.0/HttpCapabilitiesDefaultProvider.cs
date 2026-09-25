@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,48 +26,44 @@
 using System;
 using System.Collections;
 
-
 namespace System.Web.Configuration
 {
-	public class HttpCapabilitiesDefaultProvider : HttpCapabilitiesProvider
-	{
-		public TimeSpan CacheTime { get; set; }
-		public Type ResultType { get; set; }
-		public int UserAgentCacheKeyLength { get; set; }
-		
-		
-		public HttpCapabilitiesDefaultProvider()
-		{
-			UserAgentCacheKeyLength = 64;
-		}
-		
-		
-		public HttpCapabilitiesDefaultProvider(HttpCapabilitiesDefaultProvider parent)
-		{
-			CacheTime = parent.CacheTime;
-			ResultType = parent.ResultType;
-			UserAgentCacheKeyLength = parent.UserAgentCacheKeyLength;
-		}
-		
-		
-		public void AddDependency(string variable)
-		{
-			throw new NotImplementedException();
-		}
-		
-		
-		public virtual void AddRuleList(ArrayList ruleList)
-		{
-			throw new NotImplementedException();
-		}
-		
-		
-		public override HttpBrowserCapabilities GetBrowserCapabilities(HttpRequest request)
-		{
-			HttpBrowserCapabilities bcap = new HttpBrowserCapabilities();
-			bcap.capabilities = HttpCapabilitiesBase.GetConfigCapabilities(null, request).Capabilities;
+    public class HttpCapabilitiesDefaultProvider : HttpCapabilitiesProvider
+    {
+        public TimeSpan CacheTime { get; set; }
+        public Type ResultType { get; set; }
+        public int UserAgentCacheKeyLength { get; set; }
 
-			return bcap;
-		}
-	}
+        public HttpCapabilitiesDefaultProvider()
+        {
+            UserAgentCacheKeyLength = 64;
+        }
+
+        public HttpCapabilitiesDefaultProvider(HttpCapabilitiesDefaultProvider parent)
+        {
+            CacheTime = parent.CacheTime;
+            ResultType = parent.ResultType;
+            UserAgentCacheKeyLength = parent.UserAgentCacheKeyLength;
+        }
+
+        public void AddDependency(string variable)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void AddRuleList(ArrayList ruleList)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override HttpBrowserCapabilities GetBrowserCapabilities(HttpRequest request)
+        {
+            HttpBrowserCapabilities bcap = new HttpBrowserCapabilities();
+            bcap.capabilities = HttpCapabilitiesBase
+                .GetConfigCapabilities(null, request)
+                .Capabilities;
+
+            return bcap;
+        }
+    }
 }

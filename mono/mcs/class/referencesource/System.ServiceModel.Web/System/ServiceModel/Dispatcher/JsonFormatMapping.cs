@@ -13,14 +13,14 @@ namespace System.ServiceModel.Dispatcher
     class JsonFormatMapping : MultiplexingFormatMapping
     {
         public static readonly WebContentFormat WebContentFormat = WebContentFormat.Json;
-        
+
         static readonly string defaultMediaType = JsonGlobals.applicationJsonMediaType;
-        static Dictionary<Encoding, MessageEncoder> encoders = new Dictionary<Encoding, MessageEncoder>();
+        static Dictionary<Encoding, MessageEncoder> encoders =
+            new Dictionary<Encoding, MessageEncoder>();
         static object thisLock = new object();
 
-        public JsonFormatMapping(Encoding writeEncoding, WebContentTypeMapper contentTypeMapper) 
-            : base(writeEncoding, contentTypeMapper)
-        { }
+        public JsonFormatMapping(Encoding writeEncoding, WebContentTypeMapper contentTypeMapper)
+            : base(writeEncoding, contentTypeMapper) { }
 
         public override WebContentFormat ContentFormat
         {
@@ -39,13 +39,20 @@ namespace System.ServiceModel.Dispatcher
 
         protected override MessageEncoder Encoder
         {
-            get 
+            get
             {
                 lock (thisLock)
                 {
                     if (!JsonFormatMapping.encoders.ContainsKey(this.writeEncoding))
                     {
-                        JsonFormatMapping.encoders[this.writeEncoding] = new JsonMessageEncoderFactory(this.writeEncoding, 0, 0, new XmlDictionaryReaderQuotas(), false).Encoder;
+                        JsonFormatMapping.encoders[this.writeEncoding] =
+                            new JsonMessageEncoderFactory(
+                                this.writeEncoding,
+                                0,
+                                0,
+                                new XmlDictionaryReaderQuotas(),
+                                false
+                            ).Encoder;
                     }
                 }
                 return JsonFormatMapping.encoders[this.writeEncoding];

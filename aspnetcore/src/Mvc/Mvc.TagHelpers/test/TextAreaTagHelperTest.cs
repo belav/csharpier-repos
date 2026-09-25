@@ -198,10 +198,8 @@ public class TextAreaTagHelperTest
             new Dictionary<object, object>(),
             "test"
         );
-        var output = new TagHelperOutput(
-            expectedTagName,
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        var output = new TagHelperOutput(expectedTagName, new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
         // Act & Assert
@@ -240,10 +238,8 @@ public class TextAreaTagHelperTest
         var attributes = new TagHelperAttributeList { { "name", expectedAttributeValue } };
 
         var context = new TagHelperContext(attributes, new Dictionary<object, object>(), "test");
-        var output = new TagHelperOutput(
-            expectedTagName,
-            new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        var output = new TagHelperOutput(expectedTagName, new TagHelperAttributeList(), (_, __) =>
+            Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
         );
 
         // Act

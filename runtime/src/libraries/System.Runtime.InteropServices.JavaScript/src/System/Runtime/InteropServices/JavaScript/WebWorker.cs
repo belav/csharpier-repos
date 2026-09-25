@@ -36,17 +36,19 @@ namespace System.Runtime.InteropServices.JavaScript
                     Task<T> res = body();
                     // This code is exiting thread main() before all promises are resolved.
                     // the continuation is executed by setTimeout() callback of the thread.
-                    res.ContinueWith(t =>
-                    {
-                        SendWhenDone(parentContext, tcs, res);
-                        JSHostImplementation.UninstallWebWorkerInterop();
-                    }, childScheduler);
+                    res.ContinueWith(
+                        t =>
+                        {
+                            SendWhenDone(parentContext, tcs, res);
+                            JSHostImplementation.UninstallWebWorkerInterop();
+                        },
+                        childScheduler
+                    );
                 }
                 catch (Exception ex)
                 {
                     SendWhenException(parentContext, tcs, ex);
                 }
-
             });
             JSHostImplementation.SetHasExternalEventLoop(t);
             t.Start();
@@ -73,17 +75,19 @@ namespace System.Runtime.InteropServices.JavaScript
                     Task res = body();
                     // This code is exiting thread main() before all promises are resolved.
                     // the continuation is executed by setTimeout() callback of the thread.
-                    res.ContinueWith(t =>
-                    {
-                        SendWhenDone(parentContext, tcs, res);
-                        JSHostImplementation.UninstallWebWorkerInterop();
-                    }, childScheduler);
+                    res.ContinueWith(
+                        t =>
+                        {
+                            SendWhenDone(parentContext, tcs, res);
+                            JSHostImplementation.UninstallWebWorkerInterop();
+                        },
+                        childScheduler
+                    );
                 }
                 catch (Exception ex)
                 {
                     SendWhenException(parentContext, tcs, ex);
                 }
-
             });
             JSHostImplementation.SetHasExternalEventLoop(t);
             t.Start();
@@ -121,7 +125,6 @@ namespace System.Runtime.InteropServices.JavaScript
                 {
                     SendWhenException(parentContext, tcs, ex);
                 }
-
             });
             JSHostImplementation.SetHasExternalEventLoop(t);
             t.Start();
@@ -130,7 +133,10 @@ namespace System.Runtime.InteropServices.JavaScript
 
         #region posting result to the original thread when handling exception
 
-        private static void PostWhenCancellation(SynchronizationContext ctx, TaskCompletionSource tcs)
+        private static void PostWhenCancellation(
+            SynchronizationContext ctx,
+            TaskCompletionSource tcs
+        )
         {
             try
             {
@@ -142,7 +148,10 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        private static void PostWhenCancellation<T>(SynchronizationContext ctx, TaskCompletionSource<T> tcs)
+        private static void PostWhenCancellation<T>(
+            SynchronizationContext ctx,
+            TaskCompletionSource<T> tcs
+        )
         {
             try
             {
@@ -154,14 +163,21 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        private static void SendWhenDone(SynchronizationContext ctx, TaskCompletionSource tcs, Task done)
+        private static void SendWhenDone(
+            SynchronizationContext ctx,
+            TaskCompletionSource tcs,
+            Task done
+        )
         {
             try
             {
-                ctx.Send((_) =>
-                {
-                    PropagateCompletion(tcs, done);
-                }, null);
+                ctx.Send(
+                    (_) =>
+                    {
+                        PropagateCompletion(tcs, done);
+                    },
+                    null
+                );
             }
             catch (Exception e)
             {
@@ -181,7 +197,11 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        private static void SendWhenException(SynchronizationContext ctx, TaskCompletionSource tcs, Exception ex)
+        private static void SendWhenException(
+            SynchronizationContext ctx,
+            TaskCompletionSource tcs,
+            Exception ex
+        )
         {
             try
             {
@@ -193,7 +213,11 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        private static void SendWhenException<T>(SynchronizationContext ctx, TaskCompletionSource<T> tcs, Exception ex)
+        private static void SendWhenException<T>(
+            SynchronizationContext ctx,
+            TaskCompletionSource<T> tcs,
+            Exception ex
+        )
         {
             try
             {
@@ -205,14 +229,21 @@ namespace System.Runtime.InteropServices.JavaScript
             }
         }
 
-        private static void SendWhenDone<T>(SynchronizationContext ctx, TaskCompletionSource<T> tcs, Task<T> done)
+        private static void SendWhenDone<T>(
+            SynchronizationContext ctx,
+            TaskCompletionSource<T> tcs,
+            Task<T> done
+        )
         {
             try
             {
-                ctx.Send((_) =>
-                {
-                    PropagateCompletion(tcs, done);
-                }, null);
+                ctx.Send(
+                    (_) =>
+                    {
+                        PropagateCompletion(tcs, done);
+                    },
+                    null
+                );
             }
             catch (Exception e)
             {
@@ -224,7 +255,7 @@ namespace System.Runtime.InteropServices.JavaScript
         {
             if (done.IsFaulted)
             {
-                if(done.Exception is AggregateException ag && ag.InnerException!=null)
+                if (done.Exception is AggregateException ag && ag.InnerException != null)
                 {
                     tcs.SetException(ag.InnerException);
                 }
@@ -259,7 +290,6 @@ namespace System.Runtime.InteropServices.JavaScript
         }
 
         #endregion
-
     }
 }
 

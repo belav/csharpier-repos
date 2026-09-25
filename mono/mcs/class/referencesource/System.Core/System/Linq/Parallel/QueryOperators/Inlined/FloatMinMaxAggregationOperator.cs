@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -23,11 +23,12 @@ namespace System.Linq.Parallel
     //     Note that normally float.NaN &lt; anything is false, as is anything &lt; NaN.  This would
     //     lead to some strangeness in Min and Max, e.g. Min({ NaN, 5.0 } == NaN, yet
     //     Min({ 5.0, NaN }) == 5.0!  We impose a total ordering so that NaN is smaller than
-    //     everything, including -infinity, which is consistent with Comparer<T>. 
+    //     everything, including -infinity, which is consistent with Comparer<T>.
     /// <summary>
     /// An inlined min/max aggregation and its enumerator, for floats.
     /// </summary>
-    internal sealed class FloatMinMaxAggregationOperator : InlinedAggregationOperator<float, float, float>
+    internal sealed class FloatMinMaxAggregationOperator
+        : InlinedAggregationOperator<float, float, float>
     {
         private readonly int m_sign; // The sign (-1 for min, 1 for max).
 
@@ -35,7 +36,8 @@ namespace System.Linq.Parallel
         // Constructs a new instance of a min/max associative operator.
         //
 
-        internal FloatMinMaxAggregationOperator(IEnumerable<float> child, int sign) : base(child)
+        internal FloatMinMaxAggregationOperator(IEnumerable<float> child, int sign)
+            : base(child)
         {
             Contract.Assert(sign == -1 || sign == 1, "invalid sign");
             m_sign = sign;
@@ -51,16 +53,23 @@ namespace System.Linq.Parallel
 
         protected override float InternalAggregate(ref Exception singularExceptionToThrow)
         {
-            // Because the final reduction is typically much cheaper than the intermediate 
+            // Because the final reduction is typically much cheaper than the intermediate
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<float> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<float> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // Throw an error for empty results.
                 if (!enumerator.MoveNext())
                 {
-                    singularExceptionToThrow = new InvalidOperationException(SR.GetString(SR.NoElements));
+                    singularExceptionToThrow = new InvalidOperationException(
+                        SR.GetString(SR.NoElements)
+                    );
                     return default(float);
                 }
 
@@ -99,9 +108,19 @@ namespace System.Linq.Parallel
         //
 
         protected override QueryOperatorEnumerator<float, int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<float, TKey> source, object sharedData, CancellationToken cancellationToken)
+            int index,
+            int count,
+            QueryOperatorEnumerator<float, TKey> source,
+            object sharedData,
+            CancellationToken cancellationToken
+        )
         {
-            return new FloatMinMaxAggregationOperatorEnumerator<TKey>(source, index, m_sign, cancellationToken);
+            return new FloatMinMaxAggregationOperatorEnumerator<TKey>(
+                source,
+                index,
+                m_sign,
+                cancellationToken
+            );
         }
 
         //---------------------------------------------------------------------------------------
@@ -109,7 +128,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private class FloatMinMaxAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<float>
+        private class FloatMinMaxAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<float>
         {
             private QueryOperatorEnumerator<float, TKey> m_source; // The source data.
             private int m_sign; // The sign for comparisons (-1 means min, 1 means max).
@@ -118,9 +138,13 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal FloatMinMaxAggregationOperatorEnumerator(QueryOperatorEnumerator<float, TKey> source, int partitionIndex, int sign,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal FloatMinMaxAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<float, TKey> source,
+                int partitionIndex,
+                int sign,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Contract.Assert(source != null);
                 m_source = source;

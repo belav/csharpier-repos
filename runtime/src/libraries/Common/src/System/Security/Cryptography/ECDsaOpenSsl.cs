@@ -43,9 +43,7 @@ namespace System.Security.Cryptography
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("windows")]
         public ECDsaOpenSsl()
-            : this(521)
-        {
-        }
+            : this(521) { }
 
         /// <summary>
         ///     Creates a new ECDsaOpenSsl object that will use a randomly generated key of the specified size.
@@ -92,24 +90,33 @@ namespace System.Security.Cryptography
             Span<byte> signDestination = stackalloc byte[SignatureStackBufSize];
             ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, signatureLength, key);
 
-            byte[] converted = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(derSignature, KeySize);
+            byte[] converted = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
+                derSignature,
+                KeySize
+            );
             return converted;
         }
 
-        public override bool TrySignHash(ReadOnlySpan<byte> hash, Span<byte> destination, out int bytesWritten)
+        public override bool TrySignHash(
+            ReadOnlySpan<byte> hash,
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             return TrySignHashCore(
                 hash,
                 destination,
                 DSASignatureFormat.IeeeP1363FixedFieldConcatenation,
-                out bytesWritten);
+                out bytesWritten
+            );
         }
 
         protected override bool TrySignHashCore(
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             DSASignatureFormat signatureFormat,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             ThrowIfDisposed();
             SafeEcKeyHandle key = _key.Value;
@@ -127,8 +134,17 @@ namespace System.Security.Cryptography
                     return false;
                 }
 
-                ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, signatureLength, key);
-                bytesWritten = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(derSignature, KeySize, destination);
+                ReadOnlySpan<byte> derSignature = SignHash(
+                    hash,
+                    signDestination,
+                    signatureLength,
+                    key
+                );
+                bytesWritten = AsymmetricAlgorithmHelpers.ConvertDerToIeee1363(
+                    derSignature,
+                    KeySize,
+                    destination
+                );
                 Debug.Assert(bytesWritten == encodedSize);
                 return true;
             }
@@ -140,12 +156,19 @@ namespace System.Security.Cryptography
                 }
                 else if (signatureLength > signDestination.Length)
                 {
-                    Debug.Fail($"Stack-based signDestination is insufficient ({signatureLength} needed)");
+                    Debug.Fail(
+                        $"Stack-based signDestination is insufficient ({signatureLength} needed)"
+                    );
                     bytesWritten = 0;
                     return false;
                 }
 
-                ReadOnlySpan<byte> derSignature = SignHash(hash, signDestination, signatureLength, key);
+                ReadOnlySpan<byte> derSignature = SignHash(
+                    hash,
+                    signDestination,
+                    signatureLength,
+                    key
+                );
 
                 if (destination == signDestination)
                 {
@@ -165,11 +188,14 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> hash,
             Span<byte> destination,
             int signatureLength,
-            SafeEcKeyHandle key)
+            SafeEcKeyHandle key
+        )
         {
             if (signatureLength > destination.Length)
             {
-                Debug.Fail($"Stack-based signDestination is insufficient ({signatureLength} needed)");
+                Debug.Fail(
+                    $"Stack-based signDestination is insufficient ({signatureLength} needed)"
+                );
                 destination = new byte[signatureLength];
             }
 
@@ -183,7 +209,8 @@ namespace System.Security.Cryptography
                 "ECDSA_sign reported an unexpected signature size",
                 "ECDSA_sign reported signatureSize was {0}, when <= {1} was expected",
                 actualLength,
-                signatureLength);
+                signatureLength
+            );
 
             return destination.Slice(0, actualLength);
         }
@@ -202,7 +229,8 @@ namespace System.Security.Cryptography
         protected override bool VerifyHashCore(
             ReadOnlySpan<byte> hash,
             ReadOnlySpan<byte> signature,
-            DSASignatureFormat signatureFormat)
+            DSASignatureFormat signatureFormat
+        )
         {
             ThrowIfDisposed();
 
@@ -221,7 +249,13 @@ namespace System.Security.Cryptography
                     return false;
                 }
 
-                if (AsymmetricAlgorithmHelpers.TryConvertIeee1363ToDer(signature, derSignature, out int derSize))
+                if (
+                    AsymmetricAlgorithmHelpers.TryConvertIeee1363ToDer(
+                        signature,
+                        derSignature,
+                        out int derSize
+                    )
+                )
                 {
                     toVerify = derSignature.Slice(0, derSize);
                 }
@@ -236,10 +270,13 @@ namespace System.Security.Cryptography
             }
             else
             {
-                Debug.Fail($"Missing internal implementation handler for signature format {signatureFormat}");
+                Debug.Fail(
+                    $"Missing internal implementation handler for signature format {signatureFormat}"
+                );
                 throw new CryptographicException(
                     SR.Cryptography_UnknownSignatureFormat,
-                    signatureFormat.ToString());
+                    signatureFormat.ToString()
+                );
             }
 
             SafeEcKeyHandle key = _key.Value;
@@ -260,10 +297,7 @@ namespace System.Security.Cryptography
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
+            get { return base.KeySize; }
             set
             {
                 if (KeySize == value)
@@ -310,7 +344,8 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<byte> passwordBytes,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(passwordBytes, source, out bytesRead);
@@ -319,7 +354,8 @@ namespace System.Security.Cryptography
         public override void ImportEncryptedPkcs8PrivateKey(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> source,
-            out int bytesRead)
+            out int bytesRead
+        )
         {
             ThrowIfDisposed();
             base.ImportEncryptedPkcs8PrivateKey(password, source, out bytesRead);

@@ -45,7 +45,7 @@ namespace System.Web.Http.Owin
                 return false;
             }
 
-            // Content length is null or -1 (meaning not known).  
+            // Content length is null or -1 (meaning not known).
             // Buffer any HttpContent except StreamContent and PushStreamContent
             if (content is StreamContent || content is PushStreamContent)
             {

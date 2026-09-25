@@ -18,7 +18,7 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     public class SecurityTokenHandlerConfiguration
     {
-        // 
+        //
 
 #pragma warning disable 1591
         /// <summary>
@@ -29,12 +29,17 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Gets the default issuer name registry.
         /// </summary>
-        public static readonly IssuerNameRegistry DefaultIssuerNameRegistry = new ConfigurationBasedIssuerNameRegistry();
+        public static readonly IssuerNameRegistry DefaultIssuerNameRegistry =
+            new ConfigurationBasedIssuerNameRegistry();
 
         /// <summary>
         /// Gets the default issuer token resolver.
         /// </summary>
-        public static readonly SecurityTokenResolver DefaultIssuerTokenResolver = System.IdentityModel.Tokens.IssuerTokenResolver.DefaultInstance;
+        public static readonly SecurityTokenResolver DefaultIssuerTokenResolver = System
+            .IdentityModel
+            .Tokens
+            .IssuerTokenResolver
+            .DefaultInstance;
 
         /// <summary>
         /// Gets the default maximum clock skew.
@@ -56,17 +61,20 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Gets the default X.509 certificate validation mode.
         /// </summary>
-        public static readonly X509CertificateValidationMode DefaultCertificateValidationMode = IdentityConfiguration.DefaultCertificateValidationMode;
+        public static readonly X509CertificateValidationMode DefaultCertificateValidationMode =
+            IdentityConfiguration.DefaultCertificateValidationMode;
 
         /// <summary>
         /// Gets the default X.509 certificate revocation validation mode.
         /// </summary>
-        public static readonly X509RevocationMode DefaultRevocationMode = IdentityConfiguration.DefaultRevocationMode;
+        public static readonly X509RevocationMode DefaultRevocationMode =
+            IdentityConfiguration.DefaultRevocationMode;
 
         /// <summary>
         /// Gets the default X.509 certificate trusted store location.
         /// </summary>
-        public static readonly StoreLocation DefaultTrustedStoreLocation = IdentityConfiguration.DefaultTrustedStoreLocation;
+        public static readonly StoreLocation DefaultTrustedStoreLocation =
+            IdentityConfiguration.DefaultTrustedStoreLocation;
 
         StoreLocation trustedStoreLocation = DefaultTrustedStoreLocation;
         X509RevocationMode revocationMode = DefaultRevocationMode;
@@ -75,7 +83,12 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Gets the default X.509 certificate validator instance.
         /// </summary>
-        public static readonly X509CertificateValidator DefaultCertificateValidator = X509Util.CreateCertificateValidator(DefaultCertificateValidationMode, DefaultRevocationMode, DefaultTrustedStoreLocation);
+        public static readonly X509CertificateValidator DefaultCertificateValidator =
+            X509Util.CreateCertificateValidator(
+                DefaultCertificateValidationMode,
+                DefaultRevocationMode,
+                DefaultTrustedStoreLocation
+            );
 #pragma warning restore 1591
 
         private AudienceRestriction audienceRestriction = new AudienceRestriction();
@@ -88,24 +101,18 @@ namespace System.IdentityModel.Tokens
         private SecurityTokenResolver serviceTokenResolver = EmptySecurityTokenResolver.Instance;
         private TimeSpan tokenReplayCacheExpirationPeriod = DefaultTokenReplayCacheExpirationPeriod;
         private IdentityModelCaches caches = new IdentityModelCaches();
-                
+
         /// <summary>
         /// Creates an instance of <see cref="SecurityTokenHandlerConfiguration"/>
         /// </summary>
-        public SecurityTokenHandlerConfiguration()
-        {
-        }
+        public SecurityTokenHandlerConfiguration() { }
 
         /// <summary>
         /// Gets or sets the AudienceRestriction.
         /// </summary>
         public AudienceRestriction AudienceRestriction
         {
-            get
-            {
-                return this.audienceRestriction;
-            }
-
+            get { return this.audienceRestriction; }
             set
             {
                 if (value == null)
@@ -122,11 +129,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public X509CertificateValidator CertificateValidator
         {
-            get
-            {
-                return this.certificateValidator;
-            }
-
+            get { return this.certificateValidator; }
             set
             {
                 if (value == null)
@@ -161,7 +164,7 @@ namespace System.IdentityModel.Tokens
             get { return certificateValidationMode; }
             set { certificateValidationMode = value; }
         }
-        
+
         /// <summary>
         /// Gets or sets a value indicating whether to detect replaying of tokens by handlers in this configuration.
         /// </summary>
@@ -176,11 +179,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public IssuerNameRegistry IssuerNameRegistry
         {
-            get 
-            {
-                return this.issuerNameRegistry; 
-            }
-
+            get { return this.issuerNameRegistry; }
             set
             {
                 if (value == null)
@@ -197,11 +196,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public SecurityTokenResolver IssuerTokenResolver
         {
-            get 
-            {
-                return this.issuerTokenResolver; 
-            }
-
+            get { return this.issuerTokenResolver; }
             set
             {
                 if (value == null)
@@ -218,16 +213,16 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public TimeSpan MaxClockSkew
         {
-            get 
-            {
-                return this.maxClockSkew; 
-            }
-
+            get { return this.maxClockSkew; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", value, SR.GetString(SR.ID2070));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.GetString(SR.ID2070)
+                    );
                 }
 
                 this.maxClockSkew = value;
@@ -248,11 +243,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public SecurityTokenResolver ServiceTokenResolver
         {
-            get 
-            {
-                return this.serviceTokenResolver; 
-            }
-
+            get { return this.serviceTokenResolver; }
             set
             {
                 if (value == null)
@@ -269,11 +260,7 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public IdentityModelCaches Caches
         {
-            get 
-            {
-                return this.caches; 
-            }
-
+            get { return this.caches; }
             set
             {
                 if (value == null)
@@ -290,16 +277,16 @@ namespace System.IdentityModel.Tokens
         /// </summary>
         public TimeSpan TokenReplayCacheExpirationPeriod
         {
-            get 
-            {
-                return this.tokenReplayCacheExpirationPeriod; 
-            }
-
+            get { return this.tokenReplayCacheExpirationPeriod; }
             set
             {
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange("value", value, SR.GetString(SR.ID0016));
+                    throw DiagnosticUtility.ThrowHelperArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR.GetString(SR.ID0016)
+                    );
                 }
 
                 this.tokenReplayCacheExpirationPeriod = value;

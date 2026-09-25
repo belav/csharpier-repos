@@ -4,13 +4,13 @@
 
 namespace System.ServiceModel.Channels
 {
+    using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
     using System.ServiceModel;
-    using System.Transactions;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Runtime;
+    using System.Transactions;
 
     class MsmqReceiveContextSettings : IReceiveContextSettings
     {
@@ -25,17 +25,9 @@ namespace System.ServiceModel.Channels
             ValidityDuration = toBeCloned.ValidityDuration;
         }
 
-        public TimeSpan ValidityDuration
-        {
-            get;
-            private set;
-        }
+        public TimeSpan ValidityDuration { get; private set; }
 
-        public bool Enabled
-        {
-            get;
-            set;
-        }
+        public bool Enabled { get; set; }
 
         internal void SetValidityDuration(TimeSpan validityDuration)
         {
@@ -49,7 +41,11 @@ namespace System.ServiceModel.Channels
         DateTime expiryTime;
         MsmqReceiveContextLockManager manager;
 
-        public MsmqReceiveContext(long lookupId, DateTime expiryTime, MsmqReceiveContextLockManager manager)
+        public MsmqReceiveContext(
+            long lookupId,
+            DateTime expiryTime,
+            MsmqReceiveContextLockManager manager
+        )
             : base()
         {
             this.manager = manager;
@@ -59,26 +55,17 @@ namespace System.ServiceModel.Channels
 
         public long LookupId
         {
-            get
-            {
-                return this.lookupId;
-            }
+            get { return this.lookupId; }
         }
 
         public DateTime ExpiryTime
         {
-            get
-            {
-                return this.expiryTime;
-            }
+            get { return this.expiryTime; }
         }
 
         public MsmqReceiveContextLockManager Manager
         {
-            get
-            {
-                return this.manager;
-            }
+            get { return this.manager; }
         }
 
         public void MarkContextExpired()
@@ -96,7 +83,11 @@ namespace System.ServiceModel.Channels
             this.manager.UnlockMessage(this, timeout);
         }
 
-        protected override IAsyncResult OnBeginComplete(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginComplete(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ReceiveContextAsyncResult.CreateComplete(this, timeout, callback, state);
         }
@@ -106,7 +97,11 @@ namespace System.ServiceModel.Channels
             ReceiveContextAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginAbandon(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginAbandon(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ReceiveContextAsyncResult.CreateAbandon(this, timeout, callback, state);
         }
@@ -124,7 +119,13 @@ namespace System.ServiceModel.Channels
             static Action<object> onAbandon;
             Transaction associatedTransaction;
 
-            ReceiveContextAsyncResult(MsmqReceiveContext receiver, TimeSpan timeout, AsyncCallback callback, object state, Action<object> target)
+            ReceiveContextAsyncResult(
+                MsmqReceiveContext receiver,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state,
+                Action<object> target
+            )
                 : base(callback, state)
             {
                 this.timeoutHelper = new TimeoutHelper(timeout);
@@ -138,16 +139,32 @@ namespace System.ServiceModel.Channels
                 ActionItem.Schedule(target, this);
             }
 
-            public static IAsyncResult CreateComplete(MsmqReceiveContext receiver, TimeSpan timeout, AsyncCallback callback, object state)
+            public static IAsyncResult CreateComplete(
+                MsmqReceiveContext receiver,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (onComplete == null)
                 {
                     onComplete = new Action<object>(OnComplete);
                 }
-                return new ReceiveContextAsyncResult(receiver, timeout, callback, state, onComplete);
+                return new ReceiveContextAsyncResult(
+                    receiver,
+                    timeout,
+                    callback,
+                    state,
+                    onComplete
+                );
             }
 
-            public static IAsyncResult CreateAbandon(MsmqReceiveContext receiver, TimeSpan timeout, AsyncCallback callback, object state)
+            public static IAsyncResult CreateAbandon(
+                MsmqReceiveContext receiver,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 if (onAbandon == null)
                 {
@@ -165,7 +182,7 @@ namespace System.ServiceModel.Channels
                 {
                     // set the current transaction object for this worker thread as this operation could
                     // have been scheduled by another worker thread. We do not want to complete in
-                    // worker threads ambient transaction. associatedTransaction can be null. 
+                    // worker threads ambient transaction. associatedTransaction can be null.
                     savedTransaction = Transaction.Current;
                     Transaction.Current = result.associatedTransaction;
                     result.receiver.OnComplete(result.timeoutHelper.RemainingTime());
