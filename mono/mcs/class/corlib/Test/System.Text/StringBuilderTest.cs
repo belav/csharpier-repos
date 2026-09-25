@@ -493,9 +493,7 @@ namespace MonoTests.System.Text
             // max capacity. This makes sure that before throwing an exception
             // we first attempt to go for a smaller size.
             //
-            new StringBuilder(4, 7)
-                .Append("foo")
-                .Append("bar");
+            new StringBuilder(4, 7).Append("foo").Append("bar");
             new StringBuilder(4, 6).Append("foo").Append("bar");
             // this throws ArgumentOutOfRangeException on MS 1.1 SP1
         }

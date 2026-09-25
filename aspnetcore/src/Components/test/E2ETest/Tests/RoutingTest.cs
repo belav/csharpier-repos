@@ -181,10 +181,7 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         finally
         {
             // Leaving the ctrl key up
-            new Actions(Browser)
-                .KeyUp(key)
-                .Build()
-                .Perform();
+            new Actions(Browser).KeyUp(key).Build().Perform();
 
             // Closing newly opened windows if a new one was opened
             while (Browser.WindowHandles.Count > 1)

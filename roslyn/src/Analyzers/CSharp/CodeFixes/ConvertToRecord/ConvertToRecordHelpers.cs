@@ -904,21 +904,23 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRecord
                 // We see an or here, but we're in a context where this being true will return false
                 // for example: return !(expr || expr)
                 // or: if (expr || expr) return false;
-                (false, IBinaryOperation { OperatorKind: BinaryOperatorKind.ConditionalOr } orOp) =>
-                    TryAddEqualizedFieldsForCondition(
-                        orOp.LeftOperand,
+                (
+                    false,
+                    IBinaryOperation { OperatorKind: BinaryOperatorKind.ConditionalOr } orOp
+                ) => TryAddEqualizedFieldsForCondition(
+                    orOp.LeftOperand,
+                    successRequirement,
+                    currentObject,
+                    otherObject,
+                    builder
+                )
+                    && TryAddEqualizedFieldsForCondition(
+                        orOp.RightOperand,
                         successRequirement,
                         currentObject,
                         otherObject,
                         builder
-                    )
-                        && TryAddEqualizedFieldsForCondition(
-                            orOp.RightOperand,
-                            successRequirement,
-                            currentObject,
-                            otherObject,
-                            builder
-                        ),
+                    ),
                 // we are actually comparing two values that are potentially members,
                 // e.g: return A == other.A;
                 (

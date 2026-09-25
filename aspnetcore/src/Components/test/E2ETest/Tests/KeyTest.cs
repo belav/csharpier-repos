@@ -248,9 +248,7 @@ public class KeyTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
             expectedTextTyped += nextChar;
 
             // Send keys to whatever has focus
-            new Actions(Browser)
-                .SendKeys(nextChar)
-                .Perform();
+            new Actions(Browser).SendKeys(nextChar).Perform();
             Browser.Equal(expectedTextTyped, () => textboxFinder().GetAttribute("value"));
 
             // We delay between typings to ensure the events aren't all collapsed into one.

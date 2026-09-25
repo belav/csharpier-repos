@@ -12,9 +12,7 @@ namespace AppDomainUnloadAsmLoad
         static void Main(string[] args)
         {
             // Need some threads in play
-            new Program()
-                .Run()
-                .Wait();
+            new Program().Run().Wait();
         }
 
         private async Task Run()

@@ -3536,8 +3536,7 @@ public partial class RequestDelegateFactoryTests : LoggedTest
     public void Create_DoesNotAddDelegateAttributes_AsMetadata()
     {
         // Arrange
-        var @delegate = [Attribute1, Attribute2]
-        () => { };
+        var @delegate = [Attribute1, Attribute2] () => { };
 
         // Act
         var result = RequestDelegateFactory.Create(@delegate);

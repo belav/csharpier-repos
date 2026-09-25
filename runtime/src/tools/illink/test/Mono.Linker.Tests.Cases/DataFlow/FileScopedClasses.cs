@@ -70,8 +70,7 @@ namespace Mono.Linker.Tests.Cases.DataFlow
             // state and the dataflow analysis. Dataflow analysis always sees the lambdas, but the
             // compiler-generated state handling treated file-scoped classes like compiler-generated
             // classes, and would not build a type cache of this class.
-            var l = [Kept]
-            static () => "hello";
+            var l = [Kept] static () => "hello";
             l();
         }
 

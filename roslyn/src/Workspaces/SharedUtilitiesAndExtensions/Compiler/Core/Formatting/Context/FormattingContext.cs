@@ -263,9 +263,12 @@ namespace Microsoft.CodeAnalysis.Formatting
                 };
 
                 // baseIndentation is calculated for the adjusted token if option is RelativeToFirstTokenOnBaseTokenLine
-                Func<FormattingContext, SyntaxToken, int> relativeIndentationBaseIndentationGetter =
-                    static (self, effectiveBaseToken) =>
-                        self._tokenStream.GetCurrentColumn(effectiveBaseToken);
+                Func<
+                    FormattingContext,
+                    SyntaxToken,
+                    int
+                > relativeIndentationBaseIndentationGetter = static (self, effectiveBaseToken) =>
+                    self._tokenStream.GetCurrentColumn(effectiveBaseToken);
 
                 // set new indentation
                 var inseparableRegionStartingPosition = effectiveBaseTokenGetter(

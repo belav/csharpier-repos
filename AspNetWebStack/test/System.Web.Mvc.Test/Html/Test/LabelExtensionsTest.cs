@@ -631,10 +631,8 @@ namespace System.Web.Mvc.Html.Test
         public void LabelForWithArrayExpression()
         { // Dev10 Bug #905780
             // Arrange
-            HtmlHelper<Cart> html = new HtmlHelper<Cart>(
-                viewContext.Object,
-                viewDataContainer.Object
-            );
+            HtmlHelper<Cart> html =
+                new HtmlHelper<Cart>(viewContext.Object, viewDataContainer.Object);
 
             // Act
             MvcHtmlString result = html.LabelFor(

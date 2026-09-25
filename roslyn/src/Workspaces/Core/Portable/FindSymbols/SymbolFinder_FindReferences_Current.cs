@@ -128,10 +128,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // For finding in a document, we only support unidirectional cascading.  This allows us to not have to look
             // beyond these documents (and the symbols we find in it) to know if those symbols have an appropriate
             // inheritance relationship with the starting symbol.
-            options = options with
-            {
-                UnidirectionalHierarchyCascade = true,
-            };
+            options = options with { UnidirectionalHierarchyCascade = true };
 
             var finders = ReferenceFinders.DefaultReferenceFinders;
             var engine = new FindReferencesSearchEngine(
