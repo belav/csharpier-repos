@@ -1014,10 +1014,7 @@ namespace System.Web.UI.MobileControls
         /////////////////////////////////////////////////////////////////////////
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.ItemDataBind"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.ObjectList_OnItemDataBind)
-        ]
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.ObjectList_OnItemDataBind)]
         public event ObjectListDataBindEventHandler ItemDataBind
         {
             add { Events.AddHandler(EventItemDataBind, value); }
@@ -1085,10 +1082,7 @@ namespace System.Web.UI.MobileControls
         }
 
         /// <include file='doc\ObjectList.uex' path='docs/doc[@for="ObjectList.ShowItemCommands"]/*' />
-        [
-            MobileCategory(SR.Category_Action),
-            MobileSysDescription(SR.ObjectList_OnShowItemCommands)
-        ]
+        [MobileCategory(SR.Category_Action), MobileSysDescription(SR.ObjectList_OnShowItemCommands)]
         public event ObjectListShowCommandsEventHandler ShowItemCommands
         {
             add { Events.AddHandler(EventShowItemCommands, value); }

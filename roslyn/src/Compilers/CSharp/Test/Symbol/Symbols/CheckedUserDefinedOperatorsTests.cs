@@ -562,9 +562,7 @@ class C
                 .Verify(
                     // (4,38): error CS1535: Overloaded unary operator '--' takes one parameter
                     //     public static C operator checked --() => default;
-                    Diagnostic(ErrorCode.ERR_BadUnOpArgs, op)
-                        .WithArguments(op)
-                        .WithLocation(4, 38)
+                    Diagnostic(ErrorCode.ERR_BadUnOpArgs, op).WithArguments(op).WithLocation(4, 38)
                 );
 
             var c = compilation1.SourceModule.GlobalNamespace.GetTypeMember("C");
@@ -2394,9 +2392,7 @@ class C
                 .Verify(
                     // (4,38): error CS1534: Overloaded binary operator '*' takes two parameters
                     //     public static C operator checked *() => default;
-                    Diagnostic(ErrorCode.ERR_BadBinOpArgs, op)
-                        .WithArguments(op)
-                        .WithLocation(4, 38)
+                    Diagnostic(ErrorCode.ERR_BadBinOpArgs, op).WithArguments(op).WithLocation(4, 38)
                 );
 
             var c = compilation1.SourceModule.GlobalNamespace.GetTypeMember("C");

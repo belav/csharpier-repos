@@ -1878,8 +1878,7 @@ class C
                         .WithLocation(9, 12),
                     // (10,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                     //         (o ??= null) = null;
-                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o ??= null")
-                        .WithLocation(10, 10)
+                    Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "o ??= null").WithLocation(10, 10)
                 );
         }
 

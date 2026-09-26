@@ -3917,8 +3917,7 @@ class C
                     Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[A]").WithLocation(6, 9),
                     // (6,12): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         [A](int i) => { };
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "(int i) => { }")
-                        .WithLocation(6, 12)
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "(int i) => { }").WithLocation(6, 12)
                 );
         }
 
@@ -4181,8 +4180,7 @@ class C
                     Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[A]").WithLocation(6, 9),
                     // (6,12): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         [A]new int[] { };
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new int[] { }")
-                        .WithLocation(6, 12)
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "new int[] { }").WithLocation(6, 12)
                 );
         }
 
@@ -6705,8 +6703,7 @@ class C
                     Diagnostic(ErrorCode.ERR_AttributesNotAllowed, "[A]").WithLocation(6, 9),
                     // (6,12): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         [A]a switch { };
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "a switch { }")
-                        .WithLocation(6, 12),
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "a switch { }").WithLocation(6, 12),
                     // (6,14): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern '_' is not covered.
                     //         [A]a switch { };
                     Diagnostic(ErrorCode.WRN_SwitchExpressionNotExhaustive, "switch")

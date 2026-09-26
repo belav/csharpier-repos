@@ -237,8 +237,7 @@ class C
                     .WithLocation(38, 23),
                 // (52,28): error CS8030: Anonymous function converted to a void returning delegate cannot return a value
                 //         Action q11 = ()=>{ return 1; };
-                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return")
-                    .WithLocation(52, 28),
+                Diagnostic(ErrorCode.ERR_RetNoObjectRequiredLambda, "return").WithLocation(52, 28),
                 // (54,26): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         Action q12 = ()=>1;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "1").WithLocation(54, 26),
@@ -4850,8 +4849,7 @@ class Program
             comp.VerifyDiagnostics(
                 // (8,22): error CS0601: The DllImport attribute must be specified on a method marked 'static' and 'extern'
                 //         Action a1 = [DllImport("MyModule.dll")] static () => { };
-                Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport")
-                    .WithLocation(8, 22)
+                Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport").WithLocation(8, 22)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -8685,8 +8683,7 @@ class Program
                     .WithLocation(5, 19),
                 // (5,37): error CS0748: Inconsistent lambda parameter usage; parameter types must be all explicit or all implicit
                 //         var lam = (string s = null, x = 7, double d = 3.14) => { };
-                Diagnostic(ErrorCode.ERR_InconsistentLambdaParameterUsage, "x")
-                    .WithLocation(5, 37),
+                Diagnostic(ErrorCode.ERR_InconsistentLambdaParameterUsage, "x").WithLocation(5, 37),
                 // (5,37): error CS9098: Implicitly typed lambda parameter 'x' cannot have a default value.
                 //         var lam = (string s = null, x = 7, double d = 3.14) => { };
                 Diagnostic(ErrorCode.ERR_ImplicitlyTypedDefaultParameter, "x")

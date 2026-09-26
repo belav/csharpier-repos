@@ -4289,8 +4289,7 @@ class B
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "(IntPtr)1").WithLocation(8, 4),
                 // (9,4): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 // [A(new IntPtr[0])]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new IntPtr[0]")
-                    .WithLocation(9, 4),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "new IntPtr[0]").WithLocation(9, 4),
                 // (10,12): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 // [A(Value = (IntPtr)3)]
                 Diagnostic(ErrorCode.ERR_BadAttributeArgument, "(IntPtr)3").WithLocation(10, 12),

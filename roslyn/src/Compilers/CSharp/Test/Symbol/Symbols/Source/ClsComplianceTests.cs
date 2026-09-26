@@ -443,8 +443,7 @@ public class Generic<T>
                     Diagnostic(ErrorCode.WRN_CLS_BadBase, "A").WithArguments("A", "Bad"),
                     // (10,14): warning CS3009: 'B': base type 'Generic<int*[]>' is not CLS-compliant
                     // public class B : Generic<int*[]>
-                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B")
-                        .WithArguments("B", "Generic<int*[]>")
+                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B").WithArguments("B", "Generic<int*[]>")
                 );
 
             CreateCompilation(
@@ -502,8 +501,7 @@ public class Generic<T>
                     Diagnostic(ErrorCode.WRN_CLS_BadBase, "A").WithArguments("A", "Bad"),
                     // (10,14): warning CS3009: 'B': base type 'Generic<int*[]>' is not CLS-compliant
                     // public class B : Generic<int*[]>
-                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B")
-                        .WithArguments("B", "Generic<int*[]>")
+                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B").WithArguments("B", "Generic<int*[]>")
                 );
         }
 
@@ -596,8 +594,7 @@ public class Generic<T> { }
                         .WithArguments("B1", "Generic<int*[]>"),
                     // (11,14): warning CS3009: 'B2': base type 'Generic<Bad2>' is not CLS-compliant
                     // public class B2 : Generic<Bad2> { }
-                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B2")
-                        .WithArguments("B2", "Generic<Bad2>")
+                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B2").WithArguments("B2", "Generic<Bad2>")
                 );
         }
 
@@ -685,8 +682,7 @@ public class Generic<T> { }
                         .WithArguments("B1", "Generic<int*[]>"),
                     // (11,14): warning CS3009: 'B2': base type 'Generic<Bad2>' is not CLS-compliant
                     // public class B2 : Generic<Bad2> { }
-                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B2")
-                        .WithArguments("B2", "Generic<Bad2>")
+                    Diagnostic(ErrorCode.WRN_CLS_BadBase, "B2").WithArguments("B2", "Generic<Bad2>")
                 );
 
             lib1 = CreateCompilation(libSource1, assemblyName: "lib1").EmitToImageReference();
@@ -1072,20 +1068,17 @@ public interface Bad { }
                 .VerifyDiagnostics(
                     // (11,10): warning CS3010: 'A.M2()': CLS-compliant interfaces must have only CLS-compliant members
                     //     void M2();
-                    Diagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, "M2")
-                        .WithArguments("A.M2()"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, "M2").WithArguments("A.M2()"),
                     // (16,32): warning CS3010: 'Kinds.M()': CLS-compliant interfaces must have only CLS-compliant members
                     //     [CLSCompliant(false)] void M();
                     Diagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, "M")
                         .WithArguments("Kinds.M()"),
                     // (17,31): warning CS3010: 'Kinds.P': CLS-compliant interfaces must have only CLS-compliant members
                     //     [CLSCompliant(false)] int P { get; set; }
-                    Diagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, "P")
-                        .WithArguments("Kinds.P"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, "P").WithArguments("Kinds.P"),
                     // (18,40): warning CS3010: 'Kinds.E': CLS-compliant interfaces must have only CLS-compliant members
                     //     [CLSCompliant(false)] event Action E;
-                    Diagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, "E")
-                        .WithArguments("Kinds.E"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadInterfaceMember, "E").WithArguments("Kinds.E"),
                     // (8,9): warning CS3002: Return type of 'A.M1()' is not CLS-compliant
                     //     Bad M1();
                     Diagnostic(ErrorCode.WRN_CLS_BadReturnType, "M1").WithArguments("A.M1()")
@@ -1130,8 +1123,7 @@ public interface Bad { }
                     Diagnostic(ErrorCode.WRN_CLS_NoAbstractMembers, "M2").WithArguments("A.M2()"),
                     // (17,48): warning CS3011: 'Kinds.M()': only CLS-compliant members can be abstract
                     //     [CLSCompliant(false)] public abstract void M();
-                    Diagnostic(ErrorCode.WRN_CLS_NoAbstractMembers, "M")
-                        .WithArguments("Kinds.M()"),
+                    Diagnostic(ErrorCode.WRN_CLS_NoAbstractMembers, "M").WithArguments("Kinds.M()"),
                     // (18,47): warning CS3011: 'Kinds.P': only CLS-compliant members can be abstract
                     //     [CLSCompliant(false)] public abstract int P { get; set; }
                     Diagnostic(ErrorCode.WRN_CLS_NoAbstractMembers, "P").WithArguments("Kinds.P"),
@@ -1338,12 +1330,10 @@ public delegate void BadD();
                     Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "F").WithArguments("Kinds1.F"),
                     // (10,23): warning CS3003: Type of 'Kinds1.E1' is not CLS-compliant
                     //     public event BadD E1;
-                    Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "E1")
-                        .WithArguments("Kinds1.E1"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "E1").WithArguments("Kinds1.E1"),
                     // (11,23): warning CS3003: Type of 'Kinds1.E2' is not CLS-compliant
                     //     public event BadD E2 { add { } remove { } }
-                    Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "E2")
-                        .WithArguments("Kinds1.E2"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "E2").WithArguments("Kinds1.E2"),
                     // (10,23): warning CS0067: The event 'Kinds1.E1' is never used
                     //     public event BadD E1;
                     Diagnostic(ErrorCode.WRN_UnreferencedEvent, "E1").WithArguments("Kinds1.E1"),
@@ -2588,12 +2578,10 @@ public class C
                     Diagnostic(ErrorCode.WRN_CLS_BadIdentifierCase, "p").WithArguments("C.p"),
                     // (9,20): warning CS3005: Identifier 'C.p.get' differing only in case is not CLS-compliant
                     //     public int p { get; set; }
-                    Diagnostic(ErrorCode.WRN_CLS_BadIdentifierCase, "get")
-                        .WithArguments("C.p.get"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadIdentifierCase, "get").WithArguments("C.p.get"),
                     // (9,25): warning CS3005: Identifier 'C.p.set' differing only in case is not CLS-compliant
                     //     public int p { get; set; }
-                    Diagnostic(ErrorCode.WRN_CLS_BadIdentifierCase, "set")
-                        .WithArguments("C.p.set")
+                    Diagnostic(ErrorCode.WRN_CLS_BadIdentifierCase, "set").WithArguments("C.p.set")
                 );
         }
 
@@ -4197,12 +4185,10 @@ namespace N{0}
                     .WithArguments("N2.Compliant", "N2.NonCompliant"),
                 // (17,29): warning CS3003: Type of 'N1.Compliant.F' is not CLS-compliant
                 //         public NonCompliant F;
-                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "F")
-                    .WithArguments("N1.Compliant.F"),
+                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "F").WithArguments("N1.Compliant.F"),
                 // (17,29): warning CS3003: Type of 'N2.Compliant.F' is not CLS-compliant
                 //         public NonCompliant F;
-                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "F")
-                    .WithArguments("N2.Compliant.F"),
+                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "F").WithArguments("N2.Compliant.F"),
                 // (16,29): warning CS3002: Return type of 'N1.Compliant.M<T>(N1.NonCompliant)' is not CLS-compliant
                 //         public NonCompliant M<T>(NonCompliant n) where T : NonCompliant { throw null; }
                 Diagnostic(ErrorCode.WRN_CLS_BadReturnType, "M")
@@ -4225,12 +4211,10 @@ namespace N{0}
                 Diagnostic(ErrorCode.WRN_CLS_BadArgType, "n").WithArguments("N2.NonCompliant"),
                 // (18,29): warning CS3003: Type of 'N2.Compliant.P' is not CLS-compliant
                 //         public NonCompliant P { get; set; }
-                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "P")
-                    .WithArguments("N2.Compliant.P"),
+                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "P").WithArguments("N2.Compliant.P"),
                 // (18,29): warning CS3003: Type of 'N1.Compliant.P' is not CLS-compliant
                 //         public NonCompliant P { get; set; }
-                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "P")
-                    .WithArguments("N1.Compliant.P"),
+                Diagnostic(ErrorCode.WRN_CLS_BadFieldPropType, "P").WithArguments("N1.Compliant.P"),
                 // (22,18): warning CS3015: 'N1.MyAttribute' has no accessible constructors which use only CLS-compliant types
                 //     public class MyAttribute : Attribute
                 Diagnostic(ErrorCode.WRN_CLS_BadAttributeType, "MyAttribute")
@@ -4276,12 +4260,10 @@ namespace N{0}
                         .WithArguments("N1.Compliant.M<T>(N1.NonCompliant)"),
                     // a.cs(16,47): warning CS3001: Argument type 'N1.NonCompliant' is not CLS-compliant
                     //         public NonCompliant M<T>(NonCompliant n) where T : NonCompliant { throw null; }
-                    Diagnostic(ErrorCode.WRN_CLS_BadArgType, "n")
-                        .WithArguments("N1.NonCompliant"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadArgType, "n").WithArguments("N1.NonCompliant"),
                     // a.cs(16,31): warning CS3024: Constraint type 'N1.NonCompliant' is not CLS-compliant
                     //         public NonCompliant M<T>(NonCompliant n) where T : NonCompliant { throw null; }
-                    Diagnostic(ErrorCode.WRN_CLS_BadTypeVar, "T")
-                        .WithArguments("N1.NonCompliant"),
+                    Diagnostic(ErrorCode.WRN_CLS_BadTypeVar, "T").WithArguments("N1.NonCompliant"),
                     // a.cs(22,18): warning CS3015: 'N1.MyAttribute' has no accessible constructors which use only CLS-compliant types
                     //     public class MyAttribute : Attribute
                     Diagnostic(ErrorCode.WRN_CLS_BadAttributeType, "MyAttribute")
@@ -4328,8 +4310,7 @@ public class C
                 );
 
             // Assembly-level true: suppress all warnings.
-            CreateCompilation("[assembly:System.CLSCompliant(false)]" + source)
-                .VerifyDiagnostics();
+            CreateCompilation("[assembly:System.CLSCompliant(false)]" + source).VerifyDiagnostics();
         }
 
         [ClrOnlyFact(ClrOnlyReason.Ilasm)]

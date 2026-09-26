@@ -170,9 +170,7 @@ class C
                     .WithLocation(8, 18),
                 // (8,22): error CS1003: Syntax error, ',' expected
                 //             case (() => 0):
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(8, 22),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(8, 22),
                 // (8,25): error CS1003: Syntax error, ',' expected
                 //             case (() => 0):
                 Diagnostic(ErrorCode.ERR_SyntaxError, "0").WithArguments(",").WithLocation(8, 25),
@@ -1832,9 +1830,7 @@ class _
                     .WithLocation(10, 22),
                 // (10,25): error CS1003: Syntax error, ',' expected
                 //             if (e is (_ x, _))
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x")
-                    .WithArguments(",")
-                    .WithLocation(10, 25),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments(",").WithLocation(10, 25),
                 // (10,25): error CS0103: The name 'x' does not exist in the current context
                 //             if (e is (_ x, _))
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x")
@@ -4081,9 +4077,7 @@ public class A
                     .WithLocation(9, 28),
                 // (10,25): error CS1003: Syntax error, ':' expected
                 //         if (o is A[]? b5) { }         // error 4 (missing :)
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                    .WithArguments(":")
-                    .WithLocation(10, 25),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(":").WithLocation(10, 25),
                 // (10,25): error CS1525: Invalid expression term ')'
                 //         if (o is A[]? b5) { }         // error 4 (missing :)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
@@ -4091,9 +4085,7 @@ public class A
                     .WithLocation(10, 25),
                 // (11,30): error CS1003: Syntax error, ':' expected
                 //         if (o is A[]? b6 && c) { }    // error 5 (missing :)
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                    .WithArguments(":")
-                    .WithLocation(11, 30),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(":").WithLocation(11, 30),
                 // (11,30): error CS1525: Invalid expression term ')'
                 //         if (o is A[]? b6 && c) { }    // error 5 (missing :)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
@@ -4101,9 +4093,7 @@ public class A
                     .WithLocation(11, 30),
                 // (12,27): error CS1003: Syntax error, ':' expected
                 //         if (o is A[][]? b7) { }       // error 6 (missing :)
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                    .WithArguments(":")
-                    .WithLocation(12, 27),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(":").WithLocation(12, 27),
                 // (12,27): error CS1525: Invalid expression term ')'
                 //         if (o is A[][]? b7) { }       // error 6 (missing :)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
@@ -4111,9 +4101,7 @@ public class A
                     .WithLocation(12, 27),
                 // (13,32): error CS1003: Syntax error, ':' expected
                 //         if (o is A[][]? b8 && c) { }  // error 7 (missing :)
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                    .WithArguments(":")
-                    .WithLocation(13, 32),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(":").WithLocation(13, 32),
                 // (13,32): error CS1525: Invalid expression term ')'
                 //         if (o is A[][]? b8 && c) { }  // error 7 (missing :)
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")

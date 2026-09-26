@@ -1043,8 +1043,7 @@ public class Test
                     // Diagnostic(ErrorCode.WRN_AlwaysNull, "null & true").WithArguments("bool?"),
                     // Diagnostic(ErrorCode.WRN_AlwaysNull, "null | false").WithArguments("bool?"),
                     // Diagnostic(ErrorCode.WRN_AlwaysNull, "false | null").WithArguments("bool?"),
-                    Diagnostic(ErrorCode.WRN_AlwaysNull, "ct & null ^ null")
-                        .WithArguments("bool?") //,
+                    Diagnostic(ErrorCode.WRN_AlwaysNull, "ct & null ^ null").WithArguments("bool?") //,
                 // Diagnostic(ErrorCode.WRN_AlwaysNull, "null | cf").WithArguments("bool?")
                 );
         }

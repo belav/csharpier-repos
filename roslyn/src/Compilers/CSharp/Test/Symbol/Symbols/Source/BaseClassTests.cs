@@ -2171,8 +2171,7 @@ class D
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using D;").WithLocation(2, 1),
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using A<int>.B;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A<int>.B;")
-                    .WithLocation(1, 1)
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A<int>.B;").WithLocation(1, 1)
             );
         }
 

@@ -4206,8 +4206,7 @@ public class C
                 .VerifyDiagnostics(
                     // (10,25): error CS4015: 'MethodImplOptions.Synchronized' cannot be applied to an async method
                     //         async Task<int> local()
-                    Diagnostic(ErrorCode.ERR_SynchronizedAsyncMethod, "local")
-                        .WithLocation(10, 25),
+                    Diagnostic(ErrorCode.ERR_SynchronizedAsyncMethod, "local").WithLocation(10, 25),
                     // (10,25): warning CS8321: The local function 'local' is declared but never used
                     //         async Task<int> local()
                     Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local")
@@ -4624,8 +4623,7 @@ public class C : I
             comp.VerifyDiagnostics(
                 // (7,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
                 // c.M(); // 1
-                Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.M()")
-                    .WithLocation(7, 1),
+                Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.M()").WithLocation(7, 1),
                 // (8,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
                 // c.MAsync(); // 2
                 Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.MAsync()")
@@ -4755,8 +4753,7 @@ public class C : I
             comp.VerifyDiagnostics(
                 // (5,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
                 // c.M(); // 1
-                Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.M()")
-                    .WithLocation(5, 1),
+                Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.M()").WithLocation(5, 1),
                 // (6,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
                 // c.MAsync(); // 2
                 Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.MAsync()")
@@ -4829,8 +4826,7 @@ public class C : I
             comp.VerifyDiagnostics(
                 // (5,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
                 // c.M(); // 1
-                Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.M()")
-                    .WithLocation(5, 1),
+                Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.M()").WithLocation(5, 1),
                 // (6,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call.
                 // c.MAsync(); // 2
                 Diagnostic(ErrorCode.WRN_UnobservedAwaitableExpression, "c.MAsync()")

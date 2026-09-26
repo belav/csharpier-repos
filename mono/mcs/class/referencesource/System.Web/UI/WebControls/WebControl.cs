@@ -76,11 +76,7 @@ namespace System.Web.UI.WebControls
         ///    <para>Gets or sets the keyboard shortcut key (AccessKey) for setting focus to the
         ///       Web control.</para>
         /// </devdoc>
-        [
-            DefaultValue(""),
-            WebCategory("Accessibility"),
-            WebSysDescription(SR.WebControl_AccessKey)
-        ]
+        [DefaultValue(""), WebCategory("Accessibility"), WebSysDescription(SR.WebControl_AccessKey)]
         public virtual string AccessKey
         {
             get

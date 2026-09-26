@@ -39,11 +39,7 @@ namespace System.Web.UI.WebControls
         ///  CellPadding property.
         ///  The padding between each item.
         /// </devdoc>
-        [
-            WebCategory("Layout"),
-            DefaultValue(-1),
-            WebSysDescription(SR.RadioButtonList_CellPadding)
-        ]
+        [WebCategory("Layout"), DefaultValue(-1), WebSysDescription(SR.RadioButtonList_CellPadding)]
         public virtual int CellPadding
         {
             get
@@ -61,11 +57,7 @@ namespace System.Web.UI.WebControls
         ///  CellSpacing property.
         ///  The spacing between each item.
         /// </devdoc>
-        [
-            WebCategory("Layout"),
-            DefaultValue(-1),
-            WebSysDescription(SR.RadioButtonList_CellSpacing)
-        ]
+        [WebCategory("Layout"), DefaultValue(-1), WebSysDescription(SR.RadioButtonList_CellSpacing)]
         public virtual int CellSpacing
         {
             get

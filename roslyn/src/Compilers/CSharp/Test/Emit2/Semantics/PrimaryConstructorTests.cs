@@ -4554,9 +4554,7 @@ enum E();
                     .WithLocation(9, 7),
                 // (9,8): error CS1525: Invalid expression term ')'
                 // enum E();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                    .WithArguments(")")
-                    .WithLocation(9, 8)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(9, 8)
             );
 
             var e = (SourceNamedTypeSymbol)comp.GetTypeByMetadataName("E");
@@ -12818,9 +12816,7 @@ class MyAttribute : System.Attribute
                     .WithLocation(4, 22),
                 // (4,29): error CS1003: Syntax error, ',' expected
                 //     [MyAttribute(out string p1, p1++)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "p1")
-                    .WithArguments(",")
-                    .WithLocation(4, 29),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "p1").WithArguments(",").WithLocation(4, 29),
                 // (4,29): error CS9105: Cannot use primary constructor parameter 'int p1' in this context.
                 //     [MyAttribute(out string p1, p1++)]
                 Diagnostic(ErrorCode.ERR_InvalidPrimaryConstructorParameterReference, "p1")
@@ -27206,8 +27202,7 @@ class C1(string p1)
             comp.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(1, 1),
                 // (3,2): warning CS0657: 'method' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'type'. All attributes in this block will be ignored.
                 // [method: Obsolete("")]
                 Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "method")
@@ -27259,8 +27254,7 @@ class C1(string p1)
             comp.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using System;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using System;").WithLocation(1, 1),
                 // (8,2): warning CS0657: 'method' is not a valid attribute location for this declaration. Valid attribute locations for this declaration are 'type'. All attributes in this block will be ignored.
                 // [method: Obsolete("")]
                 Diagnostic(ErrorCode.WRN_AttributeLocationOnBadDeclaration, "method")

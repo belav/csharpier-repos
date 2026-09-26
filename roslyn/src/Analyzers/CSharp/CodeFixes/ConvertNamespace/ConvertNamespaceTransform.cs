@@ -193,10 +193,8 @@ internal static class ConvertNamespaceTransform
             .LineNumber;
 
         // Cache what we compute so we don't have to recompute it for every line of a raw string literal.
-        (
-            SyntaxToken stringLiteral,
-            int closeTerminatorIndentationLength
-        ) lastRawStringLiteralData = default;
+        (SyntaxToken stringLiteral, int closeTerminatorIndentationLength) lastRawStringLiteralData =
+            default;
 
         using var _ = ArrayBuilder<TextChange>.GetInstance(out var changes);
         for (var line = semicolonLine + 1; line < text.Lines.Count; line++)

@@ -53,9 +53,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 options: null,
                 // (1,8): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 // private
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
-                    .WithArguments("")
-                    .WithLocation(1, 8)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(1, 8)
             );
             N(SyntaxKind.IncompleteMember);
             {
@@ -2044,9 +2042,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 options: parseOptions,
                 // (1,9): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 // required
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
-                    .WithArguments("")
-                    .WithLocation(1, 9)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(1, 9)
             );
             N(SyntaxKind.IncompleteMember);
             {
@@ -2066,9 +2062,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 options: RequiredMembersOptions,
                 // (1,9): error CS1519: Invalid token '' in class, record, struct, or interface member declaration
                 // required
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "")
-                    .WithArguments("")
-                    .WithLocation(1, 9)
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "").WithArguments("").WithLocation(1, 9)
             );
             N(SyntaxKind.IncompleteMember);
             {
@@ -2769,8 +2763,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(1, 16),
                 // (1,16): error CS1019: Overloadable unary operator expected
                 // public int N.I.implicit (int x) => x;
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit")
-                    .WithLocation(1, 16),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit").WithLocation(1, 16),
             };
 
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
@@ -2931,8 +2924,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(1, 16),
                 // (1,16): error CS1019: Overloadable unary operator expected
                 // public int N.I.explicit (int x) => x;
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit")
-                    .WithLocation(1, 16),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit").WithLocation(1, 16),
             };
 
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
@@ -3821,8 +3813,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(1, 16),
                 // (1,16): error CS1019: Overloadable unary operator expected
                 // public int N.I.implicit (int x) => x;
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit")
-                    .WithLocation(1, 16),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "implicit").WithLocation(1, 16),
             };
 
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
@@ -3987,8 +3978,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(1, 16),
                 // (1,16): error CS1019: Overloadable unary operator expected
                 // public int N.I.explicit (int x) => x;
-                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit")
-                    .WithLocation(1, 16),
+                Diagnostic(ErrorCode.ERR_OvlUnaryOperatorExpected, "explicit").WithLocation(1, 16),
             };
 
             foreach (var options in new[] { TestOptions.Script, TestOptions.Regular })
@@ -8154,9 +8144,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 // (1,14): error CS1003: Syntax error, '.' expected
                 // implicit N.I int(int x) => x;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(".")
-                    .WithLocation(1, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(".").WithLocation(1, 14),
                 // (1,14): error CS1003: Syntax error, 'operator' expected
                 // implicit N.I int(int x) => x;
                 Diagnostic(ErrorCode.ERR_SyntaxError, "int")
@@ -11219,8 +11207,7 @@ class C<T> where T : Type, /*comment*/ delegate /*comment*/ { }
                 expectedErrors:
                 // (1,12): error CS9027: Unexpected keyword 'unchecked'
                 // C operator unchecked op(C x) => x;
-                Diagnostic(ErrorCode.ERR_MisplacedUnchecked, "unchecked")
-                    .WithLocation(1, 12)
+                Diagnostic(ErrorCode.ERR_MisplacedUnchecked, "unchecked").WithLocation(1, 12)
             );
 
             N(SyntaxKind.OperatorDeclaration);
@@ -11346,8 +11333,7 @@ class C<T> where T : Type, /*comment*/ delegate /*comment*/ { }
                 expectedErrors:
                 // (1,19): error CS9027: Unexpected keyword 'unchecked'
                 // implicit operator unchecked op(C x) => x;
-                Diagnostic(ErrorCode.ERR_MisplacedUnchecked, "unchecked")
-                    .WithLocation(1, 19)
+                Diagnostic(ErrorCode.ERR_MisplacedUnchecked, "unchecked").WithLocation(1, 19)
             );
 
             N(SyntaxKind.ConversionOperatorDeclaration);

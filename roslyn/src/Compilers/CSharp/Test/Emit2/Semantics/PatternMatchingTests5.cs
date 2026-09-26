@@ -336,8 +336,7 @@ class C
             compilation.VerifyDiagnostics(
                 // (6,26): error CS8918: Identifier or a simple member access expected.
                 //         _ = new C() is { Prop1<int>.Prop2: {} };
-                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1<int>")
-                    .WithLocation(6, 26),
+                Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1<int>").WithLocation(6, 26),
                 // (7,26): error CS8918: Identifier or a simple member access expected.
                 //         _ = new C() is { Prop1->Prop2: {} };
                 Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "Prop1->Prop2")
@@ -364,14 +363,10 @@ class C
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[0]").WithLocation(10, 31),
                 // (10,34): error CS1003: Syntax error, ',' expected
                 //         _ = new C() is { Prop1[0]: {} };
-                Diagnostic(ErrorCode.ERR_SyntaxError, ":")
-                    .WithArguments(",")
-                    .WithLocation(10, 34),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(10, 34),
                 // (10,36): error CS1003: Syntax error, ',' expected
                 //         _ = new C() is { Prop1[0]: {} };
-                Diagnostic(ErrorCode.ERR_SyntaxError, "{")
-                    .WithArguments(",")
-                    .WithLocation(10, 36),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "{").WithArguments(",").WithLocation(10, 36),
                 // (11,26): error CS8918: Identifier or a simple member access expected.
                 //         _ = new C() is { 1: {} };
                 Diagnostic(ErrorCode.ERR_InvalidNameInSubpattern, "1").WithLocation(11, 26)
@@ -1185,8 +1180,7 @@ public class ContainerType
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "Type!").WithLocation(14, 22),
                 // (15,22): error CS8598: The suppression operator is not allowed in this context
                 //             if (o is ContainerType!.Type) {}     // a6
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType")
-                    .WithLocation(15, 22),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType").WithLocation(15, 22),
                 // (16,22): error CS8598: The suppression operator is not allowed in this context
                 //             if (o is ContainerType.Type!) {}     // a7
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!")
@@ -1211,8 +1205,7 @@ public class ContainerType
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "Type!").WithLocation(25, 22),
                 // (26,22): error CS8598: The suppression operator is not allowed in this context
                 //                 case ContainerType!.Type: break; // b6
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType")
-                    .WithLocation(26, 22),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType").WithLocation(26, 22),
                 // (27,22): error CS8598: The suppression operator is not allowed in this context
                 //                 case ContainerType.Type!: break; // b7
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!")
@@ -1237,8 +1230,7 @@ public class ContainerType
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "Type!").WithLocation(37, 17),
                 // (38,17): error CS8598: The suppression operator is not allowed in this context
                 //                 ContainerType!.Type => 0,        // c6
-                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType")
-                    .WithLocation(38, 17),
+                Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType").WithLocation(38, 17),
                 // (39,17): error CS8598: The suppression operator is not allowed in this context
                 //                 ContainerType.Type! => 0,        // c7
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "ContainerType.Type!")
@@ -2392,9 +2384,7 @@ _ = x is { Length.Error: > 0 };
                     .WithLocation(11, 9),
                 // (11,9): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
-                    .WithArguments("T")
-                    .WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("T").WithLocation(11, 9),
                 // (13,9): error CS8121: An expression of type 'T' cannot be handled by a pattern of type 'string'.
                 //         "" => 6, // 4
                 Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
@@ -2455,9 +2445,7 @@ _ = x is { Length.Error: > 0 };
                     .WithLocation(11, 9),
                 // (11,9): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
-                    .WithArguments("T")
-                    .WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("T").WithLocation(11, 9),
                 // (13,9): error CS8121: An expression of type 'T' cannot be handled by a pattern of type 'string'.
                 //         "" => 6, // 4
                 Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
@@ -2519,9 +2507,7 @@ _ = x is { Length.Error: > 0 };
                     .WithLocation(11, 9),
                 // (11,9): error CS0021: Cannot apply indexing with [] to an expression of type 'T'
                 //         [] => 4, // 3
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
-                    .WithArguments("T")
-                    .WithLocation(11, 9),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("T").WithLocation(11, 9),
                 // (13,9): error CS8121: An expression of type 'T' cannot be handled by a pattern of type 'string'.
                 //         "" => 6, // 4
                 Diagnostic(ErrorCode.ERR_PatternWrongType, @"""""")
@@ -2593,9 +2579,7 @@ _ = x is { Length.Error: > 0 };
                     .WithLocation(10, 5),
                 // (10,5): error CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
-                    .WithArguments("C")
-                    .WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("C").WithLocation(10, 5),
                 // (12,5): error CS0029: Cannot implicitly convert type 'string' to 'C'
                 //     "" => 6, // 5
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
@@ -2673,9 +2657,7 @@ _ = x is { Length.Error: > 0 };
                     .WithLocation(10, 5),
                 // (10,5): error CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
-                    .WithArguments("C")
-                    .WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("C").WithLocation(10, 5),
                 // (12,5): error CS0029: Cannot implicitly convert type 'string' to 'C'
                 //     "" => 6, // 5
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")
@@ -2762,9 +2744,7 @@ _ = x is { Length.Error: > 0 };
                     .WithLocation(10, 5),
                 // (10,5): error CS0021: Cannot apply indexing with [] to an expression of type 'C'
                 //     [] => 4, // 4
-                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]")
-                    .WithArguments("C")
-                    .WithLocation(10, 5),
+                Diagnostic(ErrorCode.ERR_BadIndexLHS, "[]").WithArguments("C").WithLocation(10, 5),
                 // (12,5): error CS0029: Cannot implicitly convert type 'string' to 'C'
                 //     "" => 6, // 5
                 Diagnostic(ErrorCode.ERR_NoImplicitConv, @"""""")

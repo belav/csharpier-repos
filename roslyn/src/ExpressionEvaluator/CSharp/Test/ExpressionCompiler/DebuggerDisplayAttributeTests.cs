@@ -352,8 +352,7 @@ namespace N
             compilation0.VerifyDiagnostics(
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using A = int;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A = int;")
-                    .WithLocation(2, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A = int;").WithLocation(2, 1),
                 // (3,1): hidden CS8019: Unnecessary using directive.
                 // using B = (int, int);
                 Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using B = (int, int);")

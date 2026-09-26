@@ -1096,8 +1096,7 @@ partial struct S
                         .WithArguments("S.x", "0"),
                     // (9,23): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
                     //     public static int y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y")
-                        .WithArguments("S.y", "0")
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
                 );
         }
 
@@ -1217,8 +1216,7 @@ class Program
                     Diagnostic(ErrorCode.ERR_UseDefViolation, "s").WithArguments("s"),
                     // (4,19): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
                     //     public int x, y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y")
-                        .WithArguments("S.y", "0")
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
                 );
         }
 
@@ -1248,8 +1246,7 @@ class Program
                 .VerifyDiagnostics(
                     // (4,19): warning CS0649: Field 'S.y' is never assigned to, and will always have its default value 0
                     //     public int x, y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y")
-                        .WithArguments("S.y", "0")
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "y").WithArguments("S.y", "0")
                 );
         }
 
@@ -2269,8 +2266,7 @@ struct S<T>
                         .WithArguments("S.X", "0"),
                     // (4,18): warning CS0649: Field 'S.Y' is never assigned to, and will always have its default value 0
                     //     public float Y;
-                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y")
-                        .WithArguments("S.Y", "0")
+                    Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Y").WithArguments("S.Y", "0")
                 );
         }
 

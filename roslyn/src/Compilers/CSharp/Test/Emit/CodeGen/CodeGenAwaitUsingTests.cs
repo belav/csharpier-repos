@@ -73,8 +73,7 @@ class C : System.IAsyncDisposable
             comp.VerifyDiagnostics(
                 // (6,9): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
                 //         await using (var x = new C())
-                Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await")
-                    .WithLocation(6, 9)
+                Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await").WithLocation(6, 9)
             );
         }
 
@@ -2262,8 +2261,7 @@ public class C
             comp.VerifyDiagnostics(
                 // (6,22): error CS4008: Cannot await 'void'
                 //         await using (var x = new C())
-                Diagnostic(ErrorCode.ERR_BadAwaitArgVoidCall, "var x = new C()")
-                    .WithLocation(6, 22)
+                Diagnostic(ErrorCode.ERR_BadAwaitArgVoidCall, "var x = new C()").WithLocation(6, 22)
             );
         }
 

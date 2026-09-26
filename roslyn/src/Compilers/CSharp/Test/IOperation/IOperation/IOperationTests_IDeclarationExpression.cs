@@ -41,9 +41,7 @@ class C
                     .WithLocation(6, 16),
                 // CS1003: Syntax error, ':' expected
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(":")
-                    .WithLocation(6, 16),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(":").WithLocation(6, 16),
                 // CS1525: Invalid expression term 'out'
                 //         M2(b ? out var i1 : out var i2);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
@@ -51,17 +49,13 @@ class C
                     .WithLocation(6, 16),
                 // CS1003: Syntax error, ',' expected
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(6, 16),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(6, 16),
                 // CS1003: Syntax error, ',' expected
                 //         M2(b ? out var i1 : out var i2);
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(6, 27),
                 // CS1003: Syntax error, ',' expected
                 //         M2(b ? out var i1 : out var i2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(6, 29),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(6, 29),
             };
 
             string expectedFlowGraph =

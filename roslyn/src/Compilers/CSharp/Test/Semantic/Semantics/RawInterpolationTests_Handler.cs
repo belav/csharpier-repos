@@ -2943,9 +2943,7 @@ ref struct S
         comp.VerifyDiagnostics(
             // (5,21): error CS0306: The type 'S' may not be used as a type argument
             // Console.WriteLine($"{s}");
-            Diagnostic(ErrorCode.ERR_BadTypeArgument, "{s}")
-                .WithArguments("S")
-                .WithLocation(5, 23)
+            Diagnostic(ErrorCode.ERR_BadTypeArgument, "{s}").WithArguments("S").WithLocation(5, 23)
         );
     }
 
@@ -13586,9 +13584,7 @@ string M(out object o)
                     .WithLocation(7, 5),
                 // (8,5): error CS0165: Use of unassigned local variable 's'
                 // _ = s.ToString();
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "s")
-                    .WithArguments("s")
-                    .WithLocation(8, 5)
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "s").WithArguments("s").WithLocation(8, 5)
             );
         }
         else if (useBoolReturns)
@@ -13601,9 +13597,7 @@ string M(out object o)
                     .WithLocation(7, 5),
                 // (8,5): error CS0165: Use of unassigned local variable 's'
                 // _ = s.ToString();
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "s")
-                    .WithArguments("s")
-                    .WithLocation(8, 5)
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "s").WithArguments("s").WithLocation(8, 5)
             );
         }
         else
@@ -14747,9 +14741,7 @@ public ref struct S1
                 .WithLocation(15, 9),
             // (15,25): error CS8352: Cannot use variable 's2' in this context because it may expose referenced variables outside of their declaration scope
             //         M2(ref s1, $"""{s2}""");
-            Diagnostic(ErrorCode.ERR_EscapeVariable, "s2")
-                .WithArguments("s2")
-                .WithLocation(15, 25)
+            Diagnostic(ErrorCode.ERR_EscapeVariable, "s2").WithArguments("s2").WithLocation(15, 25)
         );
     }
 
@@ -15334,9 +15326,7 @@ o3.ToString();
         comp.VerifyDiagnostics(
             // (7,1): error CS0165: Use of unassigned local variable 'o2'
             // o2.ToString();
-            Diagnostic(ErrorCode.ERR_UseDefViolation, "o2")
-                .WithArguments("o2")
-                .WithLocation(7, 1),
+            Diagnostic(ErrorCode.ERR_UseDefViolation, "o2").WithArguments("o2").WithLocation(7, 1),
             // (8,1): error CS0165: Use of unassigned local variable 'o3'
             // o3.ToString();
             Diagnostic(ErrorCode.ERR_UseDefViolation, "o3").WithArguments("o3").WithLocation(8, 1)

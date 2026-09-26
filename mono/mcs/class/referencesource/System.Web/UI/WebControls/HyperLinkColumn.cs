@@ -83,11 +83,7 @@ namespace System.Web.UI.WebControls
         /// <para>Gets or sets the field in the DataSource that will be used as the source of
         ///    data for the <see cref='System.Web.UI.WebControls.HyperLinkColumn.Text'/> property.</para>
         /// </devdoc>
-        [
-            WebCategory("Data"),
-            DefaultValue(""),
-            WebSysDescription(SR.HyperLinkColumn_DataTextField)
-        ]
+        [WebCategory("Data"), DefaultValue(""), WebSysDescription(SR.HyperLinkColumn_DataTextField)]
         public virtual string DataTextField
         {
             get

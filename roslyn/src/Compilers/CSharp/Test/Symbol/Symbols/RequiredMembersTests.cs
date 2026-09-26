@@ -8003,9 +8003,7 @@ public class Derived : Base
                 .WithLocation(12, 19),
             // (12,23): error CS0117: 'C' does not contain a definition for 'T'
             //         C c = new C { T = 42 };
-            Diagnostic(ErrorCode.ERR_NoSuchMember, "T")
-                .WithArguments("C", "T")
-                .WithLocation(12, 23)
+            Diagnostic(ErrorCode.ERR_NoSuchMember, "T").WithArguments("C", "T").WithLocation(12, 23)
         );
     }
 
@@ -8064,9 +8062,7 @@ public class Derived : Base
                 .WithLocation(12, 19),
             // (12,23): error CS0117: 'C' does not contain a definition for 'T'
             //         C c = new C { T = 42 };
-            Diagnostic(ErrorCode.ERR_NoSuchMember, "T")
-                .WithArguments("C", "T")
-                .WithLocation(12, 23)
+            Diagnostic(ErrorCode.ERR_NoSuchMember, "T").WithArguments("C", "T").WithLocation(12, 23)
         );
     }
 
@@ -8557,8 +8553,7 @@ public class Derived : Base
             comp.VerifyDiagnostics(
                 // 0.cs(2,14): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 // var t1 = new (int, int)(1, 2);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(2, 14),
                 // 0.cs(4,14): error CS9035: Required member '(int, int).Item2' must be set in the object initializer or attribute constructor.
                 // var t3 = new System.ValueTuple<int, int>();
                 Diagnostic(ErrorCode.ERR_RequiredMemberMustBeSet, "System.ValueTuple<int, int>")
@@ -8586,8 +8581,7 @@ public class Derived : Base
             comp.VerifyDiagnostics(
                 // 0.cs(2,14): error CS8181: 'new' cannot be used with tuple type. Use a tuple literal expression instead.
                 // var t1 = new (int, int)(1, 2);
-                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)")
-                    .WithLocation(2, 14),
+                Diagnostic(ErrorCode.ERR_NewWithTupleTypeSyntax, "(int, int)").WithLocation(2, 14),
                 // 0.cs(3,14): error CS9035: Required member '(int, int).Item2' must be set in the object initializer or attribute constructor.
                 // var t2 = new System.ValueTuple<int, int>(3, 4);
                 Diagnostic(ErrorCode.ERR_RequiredMemberMustBeSet, "System.ValueTuple<int, int>")

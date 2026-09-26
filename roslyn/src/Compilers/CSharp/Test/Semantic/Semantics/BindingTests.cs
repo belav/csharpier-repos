@@ -2550,8 +2550,7 @@ class Program
             compilation.VerifyDiagnostics(
                 // (9,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             label: c = false;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "label: c = false;")
-                    .WithLocation(9, 13),
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "label: c = false;").WithLocation(9, 13),
                 // (9,13): warning CS0164: This label has not been referenced
                 //             label: c = false;
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "label").WithLocation(9, 13),

@@ -344,10 +344,7 @@ namespace Mono.Linker.Dataflow
             // code or its referenced nested functions. There is no reliable way to determine from
             // IL which user code an unused nested function belongs to.
 
-            Dictionary<
-                MethodDefinition,
-                List<IMemberDefinition>
-            >? compilerGeneratedCallees = null;
+            Dictionary<MethodDefinition, List<IMemberDefinition>>? compilerGeneratedCallees = null;
             foreach (var userDefinedMethod in userDefinedMethods)
             {
                 var callees = callGraph.GetReachableMembers(userDefinedMethod);

@@ -932,9 +932,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
                 Diagnostic(ErrorCode.ERR_ByRefParameterInExpressionTree, "p").WithLocation(6, 38),
                 // (6,48): warning CS9195: Argument 1 should be passed with the 'in' keyword
                 // Expression<D> e3 = (ref readonly int p) => C.M(p);
-                Diagnostic(ErrorCode.WRN_ArgExpectedIn, "p")
-                    .WithArguments("1")
-                    .WithLocation(6, 48),
+                Diagnostic(ErrorCode.WRN_ArgExpectedIn, "p").WithArguments("1").WithLocation(6, 48),
                 // (7,25): error CS1676: Parameter 1 must be declared with the 'ref readonly' keyword
                 // Expression<D> e4 = (int p) => C.M(in p);
                 Diagnostic(ErrorCode.ERR_BadParamRef, "p")
@@ -1299,14 +1297,10 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
         comp.VerifyDiagnostics(
             // 0.cs(6,13): error CS1620: Argument 1 must be passed with the 'ref' keyword
             //         c.D(x);
-            Diagnostic(ErrorCode.ERR_BadArgRef, "x")
-                .WithArguments("1", "ref")
-                .WithLocation(6, 13),
+            Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref").WithLocation(6, 13),
             // 0.cs(8,16): error CS1620: Argument 1 must be passed with the 'ref' keyword
             //         c.D(in x);
-            Diagnostic(ErrorCode.ERR_BadArgRef, "x")
-                .WithArguments("1", "ref")
-                .WithLocation(8, 16),
+            Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref").WithLocation(8, 16),
             // 0.cs(10,34): error CS0266: Cannot implicitly convert type 'delegate*<ref int, void>' to 'delegate*<int, void>'. An explicit conversion exists (are you missing a cast?)
             //         delegate*<int, void> v = c.D;
             Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "c.D")
@@ -1455,9 +1449,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
                     .WithLocation(6, 9),
                 // (6,11): error CS0570: 'C.D' is not supported by the language
                 //         c.D(ref x);
-                Diagnostic(ErrorCode.ERR_BindToBogus, "D")
-                    .WithArguments("C.D")
-                    .WithLocation(6, 11)
+                Diagnostic(ErrorCode.ERR_BindToBogus, "D").WithArguments("C.D").WithLocation(6, 11)
             );
 
         var ptr = (FunctionPointerTypeSymbol)
@@ -2209,8 +2201,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
             .VerifyDiagnostics(
                 // (3,12): error CS9190: 'readonly' modifier must be specified after 'ref'.
                 //     void M(readonly ref readonly int p) { }
-                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
-                    .WithLocation(3, 12),
+                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly").WithLocation(3, 12),
                 // (3,25): error CS9058: Feature 'ref readonly parameters' is not available in C# 11.0. Please use language version 12.0 or greater.
                 //     void M(readonly ref readonly int p) { }
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion11, "readonly")
@@ -2883,9 +2874,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
         verifier.VerifyDiagnostics(
             // (7,11): warning CS9192: Argument 1 should be passed with 'ref' or 'in' keyword
             //         M(x);
-            Diagnostic(ErrorCode.WRN_ArgExpectedRefOrIn, "x")
-                .WithArguments("1")
-                .WithLocation(7, 11)
+            Diagnostic(ErrorCode.WRN_ArgExpectedRefOrIn, "x").WithArguments("1").WithLocation(7, 11)
         );
         verifier.VerifyIL(
             "C.Main",
@@ -3838,9 +3827,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
         verifier.VerifyDiagnostics(
             // (7,11): warning CS9192: Argument 1 should be passed with 'ref' or 'in' keyword
             //         M(x, __arglist(x));
-            Diagnostic(ErrorCode.WRN_ArgExpectedRefOrIn, "x")
-                .WithArguments("1")
-                .WithLocation(7, 11)
+            Diagnostic(ErrorCode.WRN_ArgExpectedRefOrIn, "x").WithArguments("1").WithLocation(7, 11)
         );
     }
 
@@ -4070,9 +4057,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
         verifier.VerifyDiagnostics(
             // (8,11): warning CS9192: Argument 1 should be passed with 'ref' or 'in' keyword
             //         f(x);
-            Diagnostic(ErrorCode.WRN_ArgExpectedRefOrIn, "x")
-                .WithArguments("1")
-                .WithLocation(8, 11)
+            Diagnostic(ErrorCode.WRN_ArgExpectedRefOrIn, "x").WithArguments("1").WithLocation(8, 11)
         );
     }
 
@@ -5075,24 +5060,16 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
         {
             // 1.cs(2,42): error CS1620: Argument 2 must be passed with the 'ref' keyword
             // System.Console.Write(new C().M1(in i, in i));
-            Diagnostic(ErrorCode.ERR_BadArgRef, "i")
-                .WithArguments("2", "ref")
-                .WithLocation(2, 42),
+            Diagnostic(ErrorCode.ERR_BadArgRef, "i").WithArguments("2", "ref").WithLocation(2, 42),
             // 1.cs(3,39): error CS1620: Argument 2 must be passed with the 'ref' keyword
             // System.Console.Write(new C().M1(in i, i));
-            Diagnostic(ErrorCode.ERR_BadArgRef, "i")
-                .WithArguments("2", "ref")
-                .WithLocation(3, 39),
+            Diagnostic(ErrorCode.ERR_BadArgRef, "i").WithArguments("2", "ref").WithLocation(3, 39),
             // 1.cs(4,39): error CS1620: Argument 2 must be passed with the 'ref' keyword
             // System.Console.Write(new C().M1(i, in i));
-            Diagnostic(ErrorCode.ERR_BadArgRef, "i")
-                .WithArguments("2", "ref")
-                .WithLocation(4, 39),
+            Diagnostic(ErrorCode.ERR_BadArgRef, "i").WithArguments("2", "ref").WithLocation(4, 39),
             // 1.cs(5,36): error CS1620: Argument 2 must be passed with the 'ref' keyword
             // System.Console.Write(new C().M1(i, i));
-            Diagnostic(ErrorCode.ERR_BadArgRef, "i")
-                .WithArguments("2", "ref")
-                .WithLocation(5, 36),
+            Diagnostic(ErrorCode.ERR_BadArgRef, "i").WithArguments("2", "ref").WithLocation(5, 36),
         };
 
         CreateCompilation(new[] { source1, source2 }, parseOptions: TestOptions.Regular11)
@@ -6550,9 +6527,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
             .VerifyDiagnostics(
                 // (8,14): warning CS9195: Argument 1 should be passed with the 'in' keyword
                 //         x.M1(x);
-                Diagnostic(ErrorCode.WRN_ArgExpectedIn, "x")
-                    .WithArguments("1")
-                    .WithLocation(8, 14),
+                Diagnostic(ErrorCode.WRN_ArgExpectedIn, "x").WithArguments("1").WithLocation(8, 14),
                 // (10,15): warning CS9195: Argument 2 should be passed with the 'in' keyword
                 //         M1(x, x);
                 Diagnostic(ErrorCode.WRN_ArgExpectedIn, "x")
@@ -6580,9 +6555,7 @@ public partial class RefReadonlyParameterTests : CSharpTestBase
                     .WithLocation(14, 15),
                 // (16,18): warning CS9195: Argument 2 should be passed with the 'in' keyword
                 //         M2(in x, x);
-                Diagnostic(ErrorCode.WRN_ArgExpectedIn, "x")
-                    .WithArguments("2")
-                    .WithLocation(16, 18)
+                Diagnostic(ErrorCode.WRN_ArgExpectedIn, "x").WithArguments("2").WithLocation(16, 18)
             );
     }
 

@@ -2707,8 +2707,7 @@ public class Test
             comp.VerifyDiagnostics(
                 // (7,13): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
                 //     [field: FieldOffset(4)]
-                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset")
-                    .WithLocation(7, 13)
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset").WithLocation(7, 13)
             );
         }
 
@@ -2729,8 +2728,7 @@ public struct Test
             comp.VerifyDiagnostics(
                 // (6,13): error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
                 //     [field: FieldOffset(4)]
-                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset")
-                    .WithLocation(6, 13)
+                Diagnostic(ErrorCode.ERR_StructOffsetOnBadStruct, "FieldOffset").WithLocation(6, 13)
             );
         }
 
@@ -7460,10 +7458,8 @@ class A
             );
             compilation.VerifyDiagnostics( // (21,4): error CS0246: The type or namespace name 'NotFound' could not be found (are you missing a using directive or an assembly reference?)
                 // [X(NotFound = null)]
-                Diagnostic(
-                        ErrorCode.ERR_SingleTypeNameNotFound,
-                        "NotFound"
-                    ).WithArguments("NotFound"),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NotFound")
+                    .WithArguments("NotFound"),
                 // (22,4): error CS0617: 'F1' is not a valid named attribute argument. Named attribute arguments must be fields which are not readonly, static, or const, or read-write properties which are public and not static.
                 // [X(F1 = null)]
                 Diagnostic(ErrorCode.ERR_BadNamedAttributeArgument, "F1").WithArguments("F1"),
@@ -9201,8 +9197,7 @@ class C<T, U> { public enum E {} }";
                         .WithLocation(7, 19),
                     // (7,31): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                     // [A(new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)")
-                        .WithLocation(7, 31)
+                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 31)
                 );
         }
 
@@ -9235,8 +9230,7 @@ class C<T, U> { public enum E {} }";
                         .WithLocation(7, 60),
                     // (7,72): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                     // [A(new object[] { default(E), default(E) }, new object[] { default(E), default(E) })]
-                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)")
-                        .WithLocation(7, 72)
+                    Diagnostic(ErrorCode.ERR_BadAttributeArgument, "default(E)").WithLocation(7, 72)
                 );
         }
 
@@ -10786,8 +10780,7 @@ public class IA
                 // (5,11): error CS1061: 'object' does not contain a definition for 'M' and no extension method 'M' accepting a
                 // first argument of type 'object' could be found (are you missing a using directive or an assembly reference?)
                 //         o.M();
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M")
-                    .WithArguments("object", "M")
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M").WithArguments("object", "M")
             );
 
             var assembly = compilation.Assembly;
@@ -10988,8 +10981,7 @@ public class C<T, U> : Attribute // 20
                     .WithLocation(11, 2),
                 // (12,2): error CS7003: Unexpected use of an unbound generic name
                 // [C<,>] // 15, 16
-                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "C<,>")
-                    .WithLocation(12, 2),
+                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "C<,>").WithLocation(12, 2),
                 // (12,2): error CS8936: Feature 'generic attributes' is not available in C# 10.0. Please use language version 11.0 or greater.
                 // [C<,>] // 15, 16
                 Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion10, "C<,>")
@@ -11059,8 +11051,7 @@ public class C<T, U> : Attribute // 20
                     .WithLocation(11, 2),
                 // (12,2): error CS7003: Unexpected use of an unbound generic name
                 // [C<,>] // 15, 16
-                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "C<,>")
-                    .WithLocation(12, 2),
+                Diagnostic(ErrorCode.ERR_UnexpectedUnboundGenericName, "C<,>").WithLocation(12, 2),
                 // (13,2): error CS0579: Duplicate 'C<,>' attribute
                 // [C<int, int>] // 17, 18
                 Diagnostic(ErrorCode.ERR_DuplicateAttribute, "C<int, int>")

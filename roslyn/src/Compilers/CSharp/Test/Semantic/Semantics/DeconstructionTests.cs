@@ -1294,8 +1294,7 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/(x, x) = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
-                    .WithLocation(7, 28),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(7, 28),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -3020,8 +3019,7 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/(int x1, int x2) = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
-                    .WithLocation(6, 38),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(6, 38),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
@@ -3062,8 +3060,7 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/var (x1, x2) = null/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
-                    .WithLocation(6, 34),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(6, 34),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x1'.
                 //         /*<bind>*/var (x1, x2) = null/*</bind>*/;
                 Diagnostic(
@@ -3261,8 +3258,7 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
             {
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         /*<bind>*/((string x1, byte x2, var x3), int x4) = (null, 4)/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
-                    .WithLocation(6, 61),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(6, 61),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'x3'.
                 //         /*<bind>*/((string x1, byte x2, var x3), int x4) = (null, 4)/*</bind>*/;
                 Diagnostic(
@@ -3440,8 +3436,7 @@ IDeconstructionAssignmentOperation (OperationKind.DeconstructionAssignment, Type
                     .WithLocation(6, 19),
                 // CS8131: Deconstruct assignment requires an expression with a type on the right-hand-side.
                 //         (string x2, var y2) = (null, "hello", null);
-                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null")
-                    .WithLocation(7, 47),
+                Diagnostic(ErrorCode.ERR_DeconstructRequiresExpression, "null").WithLocation(7, 47),
                 // CS8130: Cannot infer the type of implicitly-typed deconstruction variable 'y2'.
                 //         (string x2, var y2) = (null, "hello", null);
                 Diagnostic(
@@ -4056,14 +4051,10 @@ ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: ?, IsInvalid) 
                     .WithLocation(6, 13),
                 // CS1003: Syntax error, ',' expected
                 //         var(int x1, x2) = (1, 2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x1")
-                    .WithArguments(",")
-                    .WithLocation(6, 17),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x1").WithArguments(",").WithLocation(6, 17),
                 // CS1003: Syntax error, ',' expected
                 //         var(var x3, x4) = (1, 2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x3")
-                    .WithArguments(",")
-                    .WithLocation(7, 17),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x3").WithArguments(",").WithLocation(7, 17),
                 // CS8199: The syntax 'var (...)' as an lvalue is reserved.
                 //         var(int x1, x2) = (1, 2);
                 Diagnostic(ErrorCode.ERR_VarInvocationLvalueReserved, "var(int x1, x2)")
@@ -7995,9 +7986,7 @@ Console.Write($""{1 switch { _ => 1 }}"");
                 .VerifyDiagnostics(
                     // (2,8): error CS1003: Syntax error, '(' expected
                     // foreach
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "")
-                        .WithArguments("(")
-                        .WithLocation(2, 8),
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("(").WithLocation(2, 8),
                     // (3,40): error CS1515: 'in' expected
                     // Console.Write($"{1 switch { _ => 1 }}");
                     Diagnostic(ErrorCode.ERR_InExpected, ";").WithLocation(3, 40),

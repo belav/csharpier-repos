@@ -227,16 +227,7 @@ namespace System.Xml.Xsl
         private static readonly XmlQueryCardinality[,] s_cardinalityProduct =
         {
             //   None  Zero  One         ZeroOrOne   More    NotOne  OneOrMore   ZeroOrMore
-            /* None       */{
-                None,
-                Zero,
-                None,
-                Zero,
-                None,
-                Zero,
-                None,
-                Zero,
-            },
+            /* None       */{ None, Zero, None, Zero, None, Zero, None, Zero },
             /* Zero       */{ Zero, Zero, Zero, Zero, Zero, Zero, Zero, Zero },
             /* One        */{ None, Zero, One, ZeroOrOne, More, NotOne, OneOrMore, ZeroOrMore },
             /* ZeroOrOne  */{ Zero, Zero, ZeroOrOne, ZeroOrOne, NotOne, NotOne, ZeroOrMore, ZeroOrMore },
@@ -252,16 +243,7 @@ namespace System.Xml.Xsl
         private static readonly XmlQueryCardinality[,] s_cardinalitySum =
         {
             //   None        Zero        One        ZeroOrOne   More  NotOne      OneOrMore  ZeroOrMore
-            /* None       */{
-                None,
-                Zero,
-                One,
-                ZeroOrOne,
-                More,
-                NotOne,
-                OneOrMore,
-                ZeroOrMore,
-            },
+            /* None       */{ None, Zero, One, ZeroOrOne, More, NotOne, OneOrMore, ZeroOrMore },
             /* Zero       */{ Zero, Zero, One, ZeroOrOne, More, NotOne, OneOrMore, ZeroOrMore },
             /* One        */{ One, One, More, OneOrMore, More, OneOrMore, More, OneOrMore },
             /* ZeroOrOne  */{

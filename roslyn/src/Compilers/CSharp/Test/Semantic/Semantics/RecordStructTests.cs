@@ -9332,9 +9332,7 @@ unsafe class C
             comp.VerifyEmitDiagnostics(
                 // (6,16): error CS8858: The receiver type 'int*' is not a valid record type and is not a struct type.
                 //         return i with { };
-                Diagnostic(ErrorCode.ERR_CannotClone, "i")
-                    .WithArguments("int*")
-                    .WithLocation(6, 16)
+                Diagnostic(ErrorCode.ERR_CannotClone, "i").WithArguments("int*").WithLocation(6, 16)
             );
         }
 

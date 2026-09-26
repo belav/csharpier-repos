@@ -2789,48 +2789,37 @@ public static class GenExtensions<X> where X : struct
                 .Verify(
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
-                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions")
-                        .WithLocation(3, 21),
+                    Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21),
                     // (3,21): error CS1106: Extension method must be defined in a non-generic static class
                     // public static class GenExtensions<X> where X : struct
                     Diagnostic(ErrorCode.ERR_BadExtensionAgg, "GenExtensions").WithLocation(3, 21)

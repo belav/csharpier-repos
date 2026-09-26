@@ -2690,8 +2690,7 @@ class C
             comp.VerifyDiagnostics(
                 // (4,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M();
-                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M")
-                    .WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(4, 18),
                 // (5,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M() {}
                 Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M").WithLocation(5, 18)

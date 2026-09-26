@@ -338,8 +338,7 @@ class Program { }
                     .WithArguments("Identifier expected", "1001"),
                 // (6,20): warning CS1584: XML comment has syntactically incorrect cref attribute '&#58;&#58;Gibberish'
                 // /// See <see cref="&#58;&#58;Gibberish"/> - first character is colon.
-                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "&")
-                    .WithArguments("&#58;&#58;Gibberish"),
+                Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "&").WithArguments("&#58;&#58;Gibberish"),
                 // (6,20): warning CS1658: Identifier expected. See also error CS1001.
                 // /// See <see cref="&#58;&#58;Gibberish"/> - first character is colon.
                 Diagnostic(ErrorCode.WRN_ErrorOverride, "&#58;&#58;")
@@ -2233,8 +2232,7 @@ class Other
             compilation.VerifyDiagnostics(
                 // (4,26): warning CS0649: Field 'Base.F' is never assigned to, and will always have its default value 0
                 //     protected static int F;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
-                    .WithArguments("Base.F", "0")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F").WithArguments("Base.F", "0")
             );
 
             var crefSyntax = GetCrefSyntaxes(compilation).First();
@@ -2273,8 +2271,7 @@ class Other
             compilation.VerifyDiagnostics(
                 // (4,26): warning CS0649: Field 'Base.F' is never assigned to, and will always have its default value 0
                 //     protected static int F;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F")
-                    .WithArguments("Base.F", "0")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "F").WithArguments("Base.F", "0")
             );
 
             var crefSyntax = GetCrefSyntaxes(compilation).First();
@@ -4080,8 +4077,7 @@ class G<T>
                 .VerifyDiagnostics(
                     // (3,22): warning CS1584: XML comment has syntactically incorrect cref attribute 'G&lt;3&gt;'
                     // /// Error <see cref="G&lt;3&gt;"/>
-                    Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G&lt;")
-                        .WithArguments("G&lt;3&gt;"),
+                    Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G&lt;").WithArguments("G&lt;3&gt;"),
                     // (3,27): warning CS1658: Identifier expected. See also error CS1001.
                     // /// Error <see cref="G&lt;3&gt;"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "3")
@@ -4172,8 +4168,7 @@ class A
                         ),
                     // (5,22): warning CS1584: XML comment has syntactically incorrect cref attribute 'G{G{T}}}'
                     // /// Error <see cref="G{G{T}}}"/>
-                    Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{G{T}}")
-                        .WithArguments("G{G{T}}}"),
+                    Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "G{G{T}}").WithArguments("G{G{T}}}"),
                     // (5,24): warning CS1658: Type parameter declaration must be an identifier not a type. See also error CS0081.
                     // /// Error <see cref="G{G{T}}}"/>
                     Diagnostic(ErrorCode.WRN_ErrorOverride, "G{T}")
@@ -4959,8 +4954,7 @@ partial class P<T>
                         .WithLocation(29, 18),
                     // (2,25): warning CS1735: XML comment on 'C' has a typeparamref tag for 'T', but there is no type parameter by that name
                     // /// <typeparamref name="T"/> -- warning
-                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "T")
-                        .WithArguments("T", "C"),
+                    Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "T").WithArguments("T", "C"),
                     // (5,29): warning CS1735: XML comment on 'C.M()' has a typeparamref tag for 'T', but there is no type parameter by that name
                     //     /// <typeparamref name="T"/> -- warning
                     Diagnostic(ErrorCode.WRN_UnmatchedTypeParamRefTag, "T")
@@ -5080,12 +5074,10 @@ public class A
                 .VerifyDiagnostics(
                     // (11,25): warning CS1591: Missing XML comment for publicly visible type or member 'A.B1.C.M1()'
                     //             public void M1() { }
-                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "M1")
-                        .WithArguments("A.B1.C.M1()"),
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "M1").WithArguments("A.B1.C.M1()"),
                     // (21,25): warning CS1591: Missing XML comment for publicly visible type or member 'A.B2.C.M2()'
                     //             public void M2() { }
-                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "M2")
-                        .WithArguments("A.B2.C.M2()"),
+                    Diagnostic(ErrorCode.WRN_MissingXMLComment, "M2").WithArguments("A.B2.C.M2()"),
                     // (31,25): warning CS1591: Missing XML comment for publicly visible type or member 'A.B3.C.M3()'
                     //             public void M3() { }
                     Diagnostic(ErrorCode.WRN_MissingXMLComment, "M3").WithArguments("A.B3.C.M3()")
@@ -5272,8 +5264,7 @@ class C
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "M(Q[])").WithArguments("M(Q[])"),
                     // (5,16): warning CS1580: Invalid type for parameter 'Q*' in XML comment cref attribute: 'M(Q*)'
                     // /// <see cref="M(Q*)"/>
-                    Diagnostic(ErrorCode.WRN_BadXMLRefParamType, "Q*")
-                        .WithArguments("Q*", "M(Q*)"),
+                    Diagnostic(ErrorCode.WRN_BadXMLRefParamType, "Q*").WithArguments("Q*", "M(Q*)"),
                     // (5,16): warning CS1574: XML comment has cref attribute 'M(Q*)' that could not be resolved
                     // /// <see cref="M(Q*)"/>
                     Diagnostic(ErrorCode.WRN_BadXMLRef, "M(Q*)").WithArguments("M(Q*)")
@@ -8172,8 +8163,7 @@ class Test
             {
                 // (3,12): error CS9190: 'readonly' modifier must be specified after 'ref'.
                 //     void M(readonly ref int x)
-                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
-                    .WithLocation(3, 12),
+                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly").WithLocation(3, 12),
                 // (8,20): warning CS1584: XML comment has syntactically incorrect cref attribute 'M(readonly ref int)'
                 //     /// <see cref="M(readonly ref int)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRefSyntax, "M(")
@@ -8272,8 +8262,7 @@ class Test
             {
                 // (3,12): error CS9190: 'readonly' modifier must be specified after 'ref'.
                 //     void M(readonly ref int x)
-                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly")
-                    .WithLocation(3, 12),
+                Diagnostic(ErrorCode.ERR_RefReadOnlyWrongOrdering, "readonly").WithLocation(3, 12),
                 // (8,20): warning CS1574: XML comment has cref attribute 'M(ref readonly int)' that could not be resolved
                 //     /// <see cref="M(ref readonly int)"/>
                 Diagnostic(ErrorCode.WRN_BadXMLRef, "M(ref readonly int)")

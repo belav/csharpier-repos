@@ -2188,8 +2188,7 @@ interface B
                         .WithLocation(7, 18),
                     // (19,9): error CS0668: Two indexers have different names; the IndexerName attribute must be used with the same name on every indexer within a type
                     //     int this[long x] { get; }
-                    Diagnostic(ErrorCode.ERR_InconsistentIndexerNames, "this")
-                        .WithLocation(19, 9),
+                    Diagnostic(ErrorCode.ERR_InconsistentIndexerNames, "this").WithLocation(19, 9),
                     // (12,18): error CS8652: The feature 'default interface implementation' is not available in C# 7.0. Please use language version 8.0 or greater.
                     //     const string Constant1 = "X";
                     Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion7, "Constant1")

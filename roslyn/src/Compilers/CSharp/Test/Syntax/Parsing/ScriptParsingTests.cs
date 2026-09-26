@@ -6348,9 +6348,7 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":").WithLocation(1, 8),
                 // (1,8): error CS1525: Invalid expression term ';'
                 // T ? m();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
-                    .WithArguments(";")
-                    .WithLocation(1, 8)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(1, 8)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -6402,9 +6400,7 @@ fixed int x[10];
                 Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(":").WithLocation(1, 9),
                 // (1,9): error CS1525: Invalid expression term ';'
                 // T ? m(a);
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";")
-                    .WithArguments(";")
-                    .WithLocation(1, 9)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ";").WithArguments(";").WithLocation(1, 9)
             );
             N(SyntaxKind.CompilationUnit);
             {
@@ -7132,9 +7128,7 @@ fixed int x[10];
                     .WithLocation(1, 11),
                 // (1,11): error CS1003: Syntax error, ',' expected
                 // T ? m(ref out
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(1, 11),
                 // (1,14): error CS1733: Expected expression
                 // T ? m(ref out
                 Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 14),
@@ -7217,9 +7211,7 @@ fixed int x[10];
                     .WithLocation(1, 11),
                 // (1,11): error CS1003: Syntax error, ',' expected
                 // T ? m(ref out c
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(1, 11),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(1, 11),
                 // (1,16): error CS1026: ) expected
                 // T ? m(ref out c
                 Diagnostic(ErrorCode.ERR_CloseParenExpected, "").WithLocation(1, 16),

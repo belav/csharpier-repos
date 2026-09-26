@@ -4450,8 +4450,7 @@ public static class Extensions
             comp.VerifyDiagnostics(
                 // (7,9): error CS4033: The 'await' operator can only be used within an async method. Consider marking this method with the 'async' modifier and changing its return type to 'Task'.
                 //         await foreach (var (i, j) in new C())
-                Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_BadAwaitWithoutVoidAsyncMethod, "await").WithLocation(7, 9)
             );
         }
 
@@ -9207,8 +9206,7 @@ namespace N3
                 .VerifyDiagnostics(
                     // (5,1): hidden CS8019: Unnecessary using directive.
                     // using N2;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N2;")
-                        .WithLocation(5, 1),
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N2;").WithLocation(5, 1),
                     // (14,37): error CS0117: 'int' does not contain a definition for 'Current'
                     //             await foreach (var i in new C())
                     Diagnostic(ErrorCode.ERR_NoSuchMember, "new C()")

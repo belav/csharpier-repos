@@ -82,12 +82,10 @@ class C : Base
                 .VerifyDiagnostics(
                     // (12,25): error CS8080: "Auto-implemented properties must override all accessors of the overridden property."
                     //     public override int P { get; }
-                    Diagnostic(ErrorCode.ERR_AutoPropertyMustOverrideSet, "P")
-                        .WithLocation(12, 25),
+                    Diagnostic(ErrorCode.ERR_AutoPropertyMustOverrideSet, "P").WithLocation(12, 25),
                     // (13,25): error CS8080: "Auto-implemented properties must override all accessors of the overridden property."
                     //     public override int P1 { get; }
-                    Diagnostic(ErrorCode.ERR_AutoPropertyMustOverrideSet, "P1")
-                        .WithLocation(13, 25)
+                    Diagnostic(ErrorCode.ERR_AutoPropertyMustOverrideSet, "P1").WithLocation(13, 25)
                 );
         }
 
@@ -359,8 +357,7 @@ struct S
                     .WithLocation(4, 20),
                 // (5,20): error CS8051: Auto-implemented properties must have get accessors.
                 //     public int R { set; }
-                Diagnostic(ErrorCode.ERR_AutoPropertyMustHaveGetAccessor, "set")
-                    .WithLocation(5, 20)
+                Diagnostic(ErrorCode.ERR_AutoPropertyMustHaveGetAccessor, "set").WithLocation(5, 20)
             );
         }
 
@@ -377,8 +374,7 @@ struct S
             comp.VerifyDiagnostics(
                 // (3,20): error CS8080: Auto-implemented properties cannot return by reference
                 //     public ref int P { get; }
-                Diagnostic(ErrorCode.ERR_AutoPropertyCannotBeRefReturning, "P")
-                    .WithLocation(3, 20)
+                Diagnostic(ErrorCode.ERR_AutoPropertyCannotBeRefReturning, "P").WithLocation(3, 20)
             );
         }
 

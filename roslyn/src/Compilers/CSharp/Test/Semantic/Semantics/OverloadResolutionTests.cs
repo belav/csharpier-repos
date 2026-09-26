@@ -331,8 +331,7 @@ class P
                     Diagnostic(ErrorCode.ERR_BadArgType, "ni").WithArguments("1", "int?", "int"),
                     // (17,8): error CS1503: Argument 1: cannot convert from 'short?' to 'int'
                     //     M1(ns);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "ns")
-                        .WithArguments("1", "short?", "int"),
+                    Diagnostic(ErrorCode.ERR_BadArgType, "ns").WithArguments("1", "short?", "int"),
                     // (19,8): error CS1503: Argument 1: cannot convert from 'uint?' to 'int?'
                     //     M2(nu);
                     Diagnostic(ErrorCode.ERR_BadArgType, "nu").WithArguments("1", "uint?", "int?")
@@ -471,8 +470,7 @@ class P
                 .VerifyDiagnostics(
                     // (36,5): error CS0121: The call is ambiguous between the following methods or properties: 'P.M1(CA)' and 'P.M1(CB)'
                     //     M1(i);
-                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1")
-                        .WithArguments("P.M1(CA)", "P.M1(CB)")
+                    Diagnostic(ErrorCode.ERR_AmbigCall, "M1").WithArguments("P.M1(CA)", "P.M1(CB)")
                 );
         }
 
@@ -3418,8 +3416,7 @@ class J : I
                     Diagnostic(ErrorCode.ERR_DllImportOnInvalidMethod, "DllImport"),
                     // (20,19): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
                     //         new F().M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x")
-                        .WithArguments("1", "short", "sbyte"),
+                    Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
                     // (36,24): warning CS0626: Method, operator, or accessor 'H.M(ref short)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //     extern public void M(ref short p);
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
@@ -3429,8 +3426,7 @@ class J : I
                     Diagnostic(ErrorCode.ERR_BadArgRef, "x").WithArguments("1", "ref"),
                     // (46,13): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
                     //         g.M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x")
-                        .WithArguments("1", "short", "sbyte"),
+                    Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
                     // (58,24): warning CS0626: Method, operator, or accessor 'J.M(sbyte)' is marked external and has no attributes on it. Consider adding a DllImport attribute to specify the external implementation.
                     //     extern public void M(sbyte p);
                     Diagnostic(ErrorCode.WRN_ExternMethodNoImplementation, "M")
@@ -3441,8 +3437,7 @@ class J : I
                         .WithArguments("J.M(ref short)"),
                     // (66,19): error CS1503: Argument 1: cannot convert from 'short' to 'sbyte'
                     //         new J().M(x);
-                    Diagnostic(ErrorCode.ERR_BadArgType, "x")
-                        .WithArguments("1", "short", "sbyte"),
+                    Diagnostic(ErrorCode.ERR_BadArgType, "x").WithArguments("1", "short", "sbyte"),
                     // (69,11): error CS1061: 'I' does not contain a definition for 'M' and no extension method 'M' accepting a first argument of type 'I' could be found (are you missing a using directive or an assembly reference?)
                     //         i.M(x);
                     Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "M").WithArguments("I", "M")
@@ -4116,8 +4111,7 @@ class Test
                     Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
                     // (97,16): error CS1503: Argument 1: cannot convert from 'long' to 'char'
                     //        ref1.M3(10L);      // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L")
-                        .WithArguments("1", "long", "char"),
+                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
                     // (98,16): error CS1503: Argument 1: cannot convert from 'long' to 'char'
                     //        ref1.M3(l);        // CS1503
                     Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
@@ -5564,12 +5558,10 @@ class Test
                     Diagnostic(ErrorCode.ERR_BadArgExtraRef, "c").WithArguments("1", "ref"),
                     // (35,21): error CS1503: Argument 1: cannot convert from 'long' to 'char'
                     //        value = a.P3[10L];         // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L")
-                        .WithArguments("1", "long", "char"),
+                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
                     // (36,13): error CS1503: Argument 1: cannot convert from 'long' to 'char'
                     //        a.P3[10L] = value;         // CS1503
-                    Diagnostic(ErrorCode.ERR_BadArgType, "10L")
-                        .WithArguments("1", "long", "char"),
+                    Diagnostic(ErrorCode.ERR_BadArgType, "10L").WithArguments("1", "long", "char"),
                     // (37,21): error CS1503: Argument 1: cannot convert from 'long' to 'char'
                     //        value = a.P3[l];           // CS1503
                     Diagnostic(ErrorCode.ERR_BadArgType, "l").WithArguments("1", "long", "char"),
@@ -10557,9 +10549,7 @@ public static class Program
                 .VerifyDiagnostics(
                     // (8,15): warning CS9191: The 'ref' modifier for argument 1 corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
                     //         M(ref x);
-                    Diagnostic(ErrorCode.WRN_BadArgRef, "x")
-                        .WithArguments("1")
-                        .WithLocation(8, 15)
+                    Diagnostic(ErrorCode.WRN_BadArgRef, "x").WithArguments("1").WithLocation(8, 15)
                 );
             var comp1Ref = comp1.ToMetadataReference();
 
@@ -10809,9 +10799,7 @@ public static class Program
                         .WithLocation(13, 28),
                     // (15,18): warning CS9191: The 'ref' modifier for argument 1 corresponding to 'in' parameter is equivalent to 'in'. Consider using 'in' instead.
                     //         M(a: ref x, ref y); // 4
-                    Diagnostic(ErrorCode.WRN_BadArgRef, "x")
-                        .WithArguments("1")
-                        .WithLocation(15, 18)
+                    Diagnostic(ErrorCode.WRN_BadArgRef, "x").WithArguments("1").WithLocation(15, 18)
                 );
         }
 
@@ -12721,8 +12709,7 @@ class Program
                         .WithLocation(20, 19),
                     // (22,19): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                     //         Method(in (y, x));
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "(y, x)")
-                        .WithLocation(22, 19)
+                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "(y, x)").WithLocation(22, 19)
                 );
         }
 

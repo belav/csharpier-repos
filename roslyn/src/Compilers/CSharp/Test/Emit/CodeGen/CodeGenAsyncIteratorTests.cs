@@ -2535,8 +2535,7 @@ class C
             comp.VerifyEmitDiagnostics(
                 // (4,60): error CS8419: The body of an async-iterator method must contain a 'yield' statement.
                 //     async System.Collections.Generic.IAsyncEnumerator<int> M()
-                Diagnostic(ErrorCode.ERR_PossibleAsyncIteratorWithoutYield, "M")
-                    .WithLocation(4, 60)
+                Diagnostic(ErrorCode.ERR_PossibleAsyncIteratorWithoutYield, "M").WithLocation(4, 60)
             );
         }
 

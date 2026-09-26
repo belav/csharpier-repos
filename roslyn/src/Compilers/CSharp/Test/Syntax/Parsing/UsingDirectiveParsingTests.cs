@@ -633,8 +633,7 @@ struct A { }";
             .VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using x = A*;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = A*;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = A*;").WithLocation(1, 1),
                 // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // using x = A*;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
@@ -915,8 +914,7 @@ struct A { }";
             .VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using x = int;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;").WithLocation(1, 1),
                 // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // using x = int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
@@ -962,8 +960,7 @@ struct A { }";
             .VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using x = int;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;").WithLocation(1, 1),
                 // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // using x = int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
@@ -1004,8 +1001,7 @@ struct A { }";
             .VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using x = int;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using x = int;").WithLocation(1, 1),
                 // (1,7): warning CS8981: The type name 'x' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // using x = int;
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "x")
@@ -1482,8 +1478,7 @@ namespace N
             .VerifyDiagnostics(
                 // (6,5): hidden CS8019: Unnecessary using directive.
                 //     using Y = X[];
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = X[];")
-                    .WithLocation(6, 5),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = X[];").WithLocation(6, 5),
                 // (6,15): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //     using Y = X[];
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "X").WithLocation(6, 15)
@@ -2086,8 +2081,7 @@ namespace N
             .VerifyDiagnostics(
                 // (4,5): hidden CS8019: Unnecessary using directive.
                 //     using Y = X?;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = X?;")
-                    .WithLocation(4, 5),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = X?;").WithLocation(4, 5),
                 // (4,16): warning CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
                 //     using Y = X?;
                 Diagnostic(ErrorCode.WRN_MissingNonNullTypesContextForAnnotation, "?")
@@ -2169,8 +2163,7 @@ namespace N
             .VerifyDiagnostics(
                 // (5,5): hidden CS8019: Unnecessary using directive.
                 //     using Y = X?;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = X?;")
-                    .WithLocation(5, 5),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using Y = X?;").WithLocation(5, 5),
                 // (5,16): error CS9107: Using alias cannot be a nullable reference type.
                 //     using Y = X?;
                 Diagnostic(ErrorCode.ERR_BadNullableReferenceTypeInUsingAlias, "?")
@@ -2723,8 +2716,7 @@ using dynamic;";
             .VerifyDiagnostics(
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using dynamic;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using dynamic;")
-                    .WithLocation(2, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using dynamic;").WithLocation(2, 1),
                 // (2,7): error CS0246: The type or namespace name 'dynamic' could not be found (are you missing a using directive or an assembly reference?)
                 // using dynamic;
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "dynamic")
@@ -3346,9 +3338,7 @@ class C
                     .WithLocation(2, 1),
                 // (2,7): error CS1537: The using alias 'X' appeared previously in this namespace
                 // using X = System;
-                Diagnostic(ErrorCode.ERR_DuplicateAlias, "X")
-                    .WithArguments("X")
-                    .WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_DuplicateAlias, "X").WithArguments("X").WithLocation(2, 7)
             );
 
         N(SyntaxKind.CompilationUnit);
@@ -3412,13 +3402,10 @@ class C
                     .WithLocation(1, 1),
                 // (2,1): hidden CS8019: Unnecessary using directive.
                 // using X = int;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = int;")
-                    .WithLocation(2, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = int;").WithLocation(2, 1),
                 // (2,7): error CS1537: The using alias 'X' appeared previously in this namespace
                 // using X = int;
-                Diagnostic(ErrorCode.ERR_DuplicateAlias, "X")
-                    .WithArguments("X")
-                    .WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_DuplicateAlias, "X").WithArguments("X").WithLocation(2, 7)
             );
 
         N(SyntaxKind.CompilationUnit);
@@ -3486,9 +3473,7 @@ class C
                     .WithLocation(2, 1),
                 // (2,7): error CS1537: The using alias 'X' appeared previously in this namespace
                 // using X = System.Int32;
-                Diagnostic(ErrorCode.ERR_DuplicateAlias, "X")
-                    .WithArguments("X")
-                    .WithLocation(2, 7)
+                Diagnostic(ErrorCode.ERR_DuplicateAlias, "X").WithArguments("X").WithLocation(2, 7)
             );
 
         N(SyntaxKind.CompilationUnit);
@@ -3561,8 +3546,7 @@ class C
                     .WithLocation(1, 1),
                 // (3,1): hidden CS8019: Unnecessary using directive.
                 // using X = int;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = int;")
-                    .WithLocation(3, 1)
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = int;").WithLocation(3, 1)
             );
 
         N(SyntaxKind.CompilationUnit);

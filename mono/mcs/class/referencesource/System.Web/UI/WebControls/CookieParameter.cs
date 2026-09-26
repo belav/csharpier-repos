@@ -118,11 +118,7 @@ namespace System.Web.UI.WebControls
         /// <summary>
         /// Determines whether the parameter's value is being validated or not.
         /// </summary>
-        [
-            WebCategory("Behavior"),
-            WebSysDescription(SR.Parameter_ValidateInput),
-            DefaultValue(true)
-        ]
+        [WebCategory("Behavior"), WebSysDescription(SR.Parameter_ValidateInput), DefaultValue(true)]
         public bool ValidateInput
         {
             get

@@ -569,8 +569,7 @@ class Test
                 .VerifyDiagnostics(
                     // (6,17): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     //         var x = stackalloc int[10];
-                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[10]")
-                        .WithLocation(6, 17)
+                    Diagnostic(ErrorCode.ERR_UnsafeNeeded, "stackalloc int[10]").WithLocation(6, 17)
                 );
         }
 

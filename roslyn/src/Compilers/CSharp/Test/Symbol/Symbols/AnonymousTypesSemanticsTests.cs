@@ -2196,8 +2196,7 @@ IAnonymousObjectCreationOperation (OperationKind.AnonymousObjectCreation, Type: 
                     .WithLocation(6, 46),
                 // file.cs(6,59): error CS8716: There is no target type for the default literal.
                 //         var obj = /*<bind>*/new { f1 = null, f2 = M, f3 = default }/*</bind>*/;
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 59),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 59),
             };
 
             VerifyOperationTreeAndDiagnosticsForTest<AnonymousObjectCreationExpressionSyntax>(

@@ -306,8 +306,7 @@ class UsePia
             {
                 // (10,16): error CS1754: Type 'Test21.Test22' cannot be embedded because it is a nested type. Consider setting the 'Embed Interop Types' property to false.
                 //         Test21.Test22 y = x.M22();
-                Diagnostic(ErrorCode.ERR_NoPIANestedType, "Test22")
-                    .WithArguments("Test21.Test22"),
+                Diagnostic(ErrorCode.ERR_NoPIANestedType, "Test22").WithArguments("Test21.Test22"),
                 // (16,13): error CS1754: Type 'Test21.Test22' cannot be embedded because it is a nested type. Consider setting the 'Embed Interop Types' property to false.
                 //         var y = x.M22();
                 Diagnostic(ErrorCode.ERR_NoPIANestedType, "y = x.M22()")
@@ -453,8 +452,7 @@ class UsePia
             {
                 // (8,28): error CS1754: Type 'Test21.Test22' cannot be embedded because it is a nested type. Consider setting the 'Embed Interop Types' property to false.
                 //     public void M14(Test21.Test22 x)
-                Diagnostic(ErrorCode.ERR_NoPIANestedType, "Test22")
-                    .WithArguments("Test21.Test22"),
+                Diagnostic(ErrorCode.ERR_NoPIANestedType, "Test22").WithArguments("Test21.Test22"),
             };
 
             var compilation = CreateCompilation(

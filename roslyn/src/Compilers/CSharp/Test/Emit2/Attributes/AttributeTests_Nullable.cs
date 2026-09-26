@@ -6607,8 +6607,7 @@ public class B<T> :
                     .WithLocation(8, 9),
                 // (10,9): warning CS8602: Dereference of a possibly null reference.
                 //         b.Property._9.ToString(); // 3
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.Property._9")
-                    .WithLocation(10, 9)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "b.Property._9").WithLocation(10, 9)
             );
 
             var type = comp2.GetMember<NamedTypeSymbol>("B");

@@ -6236,8 +6236,7 @@ public class MyAttribute : Attribute
                 .VerifyDiagnostics(
                     // (7,54): error CS0103: The name 'Missing' does not exist in the current context
                     // 	public const AttributeTargets badAttributeTargets = Missing;
-                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing")
-                        .WithArguments("Missing"),
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "Missing").WithArguments("Missing"),
                     // (4,17): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                     // [AttributeUsage(badAttributeTargets)]
                     Diagnostic(ErrorCode.ERR_BadAttributeArgument, "badAttributeTargets")
@@ -7997,8 +7996,7 @@ public class Base
                 .VerifyDiagnostics(
                     // (23,15): warning CS0612: 'SomeType' is obsolete
                     //     [Obsolete(SomeType.Message)]
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SomeType")
-                        .WithArguments("SomeType")
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "SomeType").WithArguments("SomeType")
                 );
         }
 
@@ -8547,8 +8545,7 @@ class Program
                     Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C").WithArguments("A.B.C"),
                     // (50,18): warning CS0612: 'A.B.C.D' is obsolete
                     //         var x1 = A.B.C.D.Field2;
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.D")
-                        .WithArguments("A.B.C.D"),
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.D").WithArguments("A.B.C.D"),
                     // (50,18): warning CS0612: 'A.B.C.D.Field2' is obsolete
                     //         var x1 = A.B.C.D.Field2;
                     Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "A.B.C.D.Field2")
@@ -9148,16 +9145,13 @@ class Test
                         .WithArguments("B.M()", "A<int>.M()"),
                     // (24,9): warning CS0612: 'A<int>.M()' is obsolete
                     //         a.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.M()")
-                        .WithArguments("A<int>.M()"),
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "a.M()").WithArguments("A<int>.M()"),
                     // (25,9): warning CS0612: 'A<int>.M()' is obsolete
                     //         b.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M()")
-                        .WithArguments("A<int>.M()"),
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "b.M()").WithArguments("A<int>.M()"),
                     // (26,9): warning CS0612: 'A<char>.M()' is obsolete
                     //         c.M();
-                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.M()")
-                        .WithArguments("A<char>.M()")
+                    Diagnostic(ErrorCode.WRN_DeprecatedSymbol, "c.M()").WithArguments("A<char>.M()")
                 );
         }
 
@@ -10084,9 +10078,7 @@ class C
             diags.Verify(
                 // (12,9): warning TEST1: 'C.M1()' is obsolete: 'don't use'
                 //         M1(); // 1
-                Diagnostic("TEST1", "M1()")
-                    .WithArguments("C.M1()", "don't use")
-                    .WithLocation(12, 9)
+                Diagnostic("TEST1", "M1()").WithArguments("C.M1()", "don't use").WithLocation(12, 9)
             );
         }
 
@@ -10189,9 +10181,7 @@ class C
                     .WithLocation(20, 9),
                 // (24,9): warning TEST1: 'C.M1()' is obsolete: 'don't use'
                 //         M1(); // 4
-                Diagnostic("TEST1", "M1()")
-                    .WithArguments("C.M1()", "don't use")
-                    .WithLocation(24, 9)
+                Diagnostic("TEST1", "M1()").WithArguments("C.M1()", "don't use").WithLocation(24, 9)
             );
         }
 

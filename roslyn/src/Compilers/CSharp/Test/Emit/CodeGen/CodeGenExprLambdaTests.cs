@@ -3888,8 +3888,7 @@ namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B 
                 .VerifyDiagnostics(
                     // (2,11): error CS7000: Unexpected use of an aliased name
                     // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::")
-                        .WithLocation(2, 11),
+                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::").WithLocation(2, 11),
                     // (2,19): error CS1001: Identifier expected
                     // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
                     Diagnostic(ErrorCode.ERR_IdentifierExpected, "(").WithLocation(2, 19),
@@ -3976,8 +3975,7 @@ namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B 
                     Diagnostic(ErrorCode.ERR_EOFExpected, "{").WithLocation(2, 95),
                     // (2,11): error CS7000: Unexpected use of an aliased name
                     // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
-                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::")
-                        .WithLocation(2, 11),
+                    Diagnostic(ErrorCode.ERR_UnexpectedAliasedName, "global::").WithLocation(2, 11),
                     // (2,84): error CS1520: Method must have a return type
                     // namespace global::((System.Linq.Expressions.Expression<System.Func<B>>)(() => B )).Compile()(){}
                     Diagnostic(ErrorCode.ERR_MemberNeedsType, "Compile").WithLocation(2, 84),

@@ -136,10 +136,7 @@ namespace System.Web.UI
         /// <para>Gets the <see langword='Application'/> object provided by
         ///    the HTTP Runtime.</para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public HttpApplicationState Application
         {
             get { return Page.Application; }
@@ -155,10 +152,7 @@ namespace System.Web.UI
         ///    For trace data to be visible in a rendered page, you must turn tracing on for
         ///    that page. This property is read-only.</para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public TraceContext Trace
         {
             get { return Page.Trace; }
@@ -204,10 +198,7 @@ namespace System.Web.UI
         /// object in which to store the user control's data for
         /// subsequent requests. This property is read-only.</para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Cache Cache
         {
             get { return Page.Cache; }

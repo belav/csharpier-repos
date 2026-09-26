@@ -23,25 +23,7 @@ namespace Microsoft.SqlServer.Server
             // Getters as columns (abreviated from XetterTypeCode names)
             // SqlDbTypes as rows
             //   bool, byte, bytes, chars, strng, int16, int32, int64, singl, doubl, sqldec, date,  guid, varmd, Xetr, time, dtost
-            /*BigInt*/{
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                X,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-            },
+            /*BigInt*/{ _, _, _, _, _, _, _, X, _, _, _, _, _, _, _, _, _ },
             /*Binary*/{ _, _, X, _, _, _, _, _, _, _, _, _, _, _, _, _, _ },
             /*Bit*/{ X, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ },
             /*Char*/{ _, _, X, X, X, _, _, _, _, _, _, _, _, _, _, _, _ },
@@ -85,25 +67,7 @@ namespace Microsoft.SqlServer.Server
             //      Current difference between setters and getters is that character setters do
             //      not need to support SetBytes
             //   bool, byte, bytes, chars, strng, int16, int32, int64, singl, doubl, sqldec, date,  guid, varmd, Xetr, time, dtost
-            /*BigInt*/{
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                X,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-                _,
-            },
+            /*BigInt*/{ _, _, _, _, _, _, _, X, _, _, _, _, _, _, _, _, _ },
             /*Binary*/{ _, _, X, _, _, _, _, _, _, _, _, _, _, _, _, _, _ },
             /*Bit*/{ X, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _, _ },
             /*Char*/{ _, _, _, X, X, _, _, _, _, _, _, _, _, _, _, _, _ },

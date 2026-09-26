@@ -1733,8 +1733,7 @@ d
             ScriptingTestHelpers.AssertCompilationError(
                 () => CSharpScript.EvaluateAsync("1", options),
                 // error CS7088: Invalid 'Usings' value: '.abc'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
-                    .WithArguments("Usings", "a\0bc")
+                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("Usings", "a\0bc")
             );
         }
 

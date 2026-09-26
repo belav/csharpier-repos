@@ -4868,8 +4868,7 @@ class nint { }
             comp.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using A=nint;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A=nint;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A=nint;").WithLocation(1, 1),
                 // (2,7): warning CS8981: The type name 'nint' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // class nint { }
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "nint")
@@ -4881,8 +4880,7 @@ class nint { }
             comp.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using A=nint;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A=nint;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A=nint;").WithLocation(1, 1),
                 // (2,7): warning CS8981: The type name 'nint' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // class nint { }
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "nint")
@@ -4894,8 +4892,7 @@ class nint { }
             comp.VerifyDiagnostics(
                 // (1,1): hidden CS8019: Unnecessary using directive.
                 // using A=nint;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A=nint;")
-                    .WithLocation(1, 1),
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using A=nint;").WithLocation(1, 1),
                 // (2,7): warning CS8981: The type name 'nint' only contains lower-cased ascii characters. Such names may become reserved for the language.
                 // class nint { }
                 Diagnostic(ErrorCode.WRN_LowerCaseTypeName, "nint")

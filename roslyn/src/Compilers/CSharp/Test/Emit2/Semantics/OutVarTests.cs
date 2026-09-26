@@ -3124,9 +3124,7 @@ class Test : System.Attribute
                     .WithLocation(4, 11),
                 // (4,19): error CS1003: Syntax error, ',' expected
                 //     [Test(out var x3)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x3")
-                    .WithArguments(",")
-                    .WithLocation(4, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x3").WithArguments(",").WithLocation(4, 19),
                 // (5,11): error CS1041: Identifier expected; 'out' is a keyword
                 //     [Test(out int x4)]
                 Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "out")
@@ -3139,9 +3137,7 @@ class Test : System.Attribute
                     .WithLocation(5, 15),
                 // (5,19): error CS1003: Syntax error, ',' expected
                 //     [Test(out int x4)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x4")
-                    .WithArguments(",")
-                    .WithLocation(5, 19),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x4").WithArguments(",").WithLocation(5, 19),
                 // (6,14): error CS1525: Invalid expression term 'out'
                 //     [Test(p: out var x5)]
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
@@ -3149,19 +3145,13 @@ class Test : System.Attribute
                     .WithLocation(6, 14),
                 // (6,14): error CS1003: Syntax error, ',' expected
                 //     [Test(p: out var x5)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(6, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(6, 14),
                 // (6,18): error CS1003: Syntax error, ',' expected
                 //     [Test(p: out var x5)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "var")
-                    .WithArguments(",")
-                    .WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "var").WithArguments(",").WithLocation(6, 18),
                 // (6,22): error CS1003: Syntax error, ',' expected
                 //     [Test(p: out var x5)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x5")
-                    .WithArguments(",")
-                    .WithLocation(6, 22),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x5").WithArguments(",").WithLocation(6, 22),
                 // (7,14): error CS1525: Invalid expression term 'out'
                 //     [Test(p: out int x6)]
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "out")
@@ -3169,14 +3159,10 @@ class Test : System.Attribute
                     .WithLocation(7, 14),
                 // (7,14): error CS1003: Syntax error, ',' expected
                 //     [Test(p: out int x6)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(7, 14),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(7, 14),
                 // (7,18): error CS1003: Syntax error, ',' expected
                 //     [Test(p: out int x6)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "int")
-                    .WithArguments(",")
-                    .WithLocation(7, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "int").WithArguments(",").WithLocation(7, 18),
                 // (7,18): error CS1525: Invalid expression term 'int'
                 //     [Test(p: out int x6)]
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -3184,9 +3170,7 @@ class Test : System.Attribute
                     .WithLocation(7, 18),
                 // (7,22): error CS1003: Syntax error, ',' expected
                 //     [Test(p: out int x6)]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x6")
-                    .WithArguments(",")
-                    .WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x6").WithArguments(",").WithLocation(7, 22),
                 // (4,15): error CS0103: The name 'var' does not exist in the current context
                 //     [Test(out var x3)]
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "var")
@@ -20841,9 +20825,7 @@ public class Cls
                     .WithLocation(6, 14),
                 // (6,18): error CS1003: Syntax error, ',' expected
                 //         Test(int x1);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x1")
-                    .WithArguments(",")
-                    .WithLocation(6, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x1").WithArguments(",").WithLocation(6, 18),
                 // (7,18): error CS1525: Invalid expression term 'int'
                 //         Test(ref int x2);
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, "int")
@@ -20851,9 +20833,7 @@ public class Cls
                     .WithLocation(7, 18),
                 // (7,22): error CS1003: Syntax error, ',' expected
                 //         Test(ref int x2);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x2")
-                    .WithArguments(",")
-                    .WithLocation(7, 22),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x2").WithArguments(",").WithLocation(7, 22),
                 // (6,18): error CS0103: The name 'x1' does not exist in the current context
                 //         Test(int x1);
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
@@ -24211,14 +24191,10 @@ public class Cls
             compilation.VerifyDiagnostics(
                 // (6,13): error CS1003: Syntax error, ',' expected
                 //         int[out var x1] a = null; // fatal syntax error - 'out' is skipped
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(6, 13),
                 // (6,21): error CS1003: Syntax error, ',' expected
                 //         int[out var x1] a = null; // fatal syntax error - 'out' is skipped
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x1")
-                    .WithArguments(",")
-                    .WithLocation(6, 21),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x1").WithArguments(",").WithLocation(6, 21),
                 // (7,27): error CS1002: ; expected
                 //         int b(out var x2) = null; // parsed as a local function with syntax error
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "=").WithLocation(7, 27),
@@ -24232,17 +24208,13 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_CStyleArray, "[out var x3]").WithLocation(8, 14),
                 // (8,15): error CS1003: Syntax error, ',' expected
                 //         int c[out var x3] = null; // fatal syntax error - 'out' is skipped
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(8, 15),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(8, 15),
                 // (8,19): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         int c[out var x3] = null; // fatal syntax error - 'out' is skipped
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "var").WithLocation(8, 19),
                 // (8,23): error CS1003: Syntax error, ',' expected
                 //         int c[out var x3] = null; // fatal syntax error - 'out' is skipped
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x3")
-                    .WithArguments(",")
-                    .WithLocation(8, 23),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x3").WithArguments(",").WithLocation(8, 23),
                 // (8,23): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         int c[out var x3] = null; // fatal syntax error - 'out' is skipped
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "x3").WithLocation(8, 23),
@@ -24251,14 +24223,10 @@ public class Cls
                 Diagnostic(ErrorCode.ERR_BadVarDecl, "(out var x4").WithLocation(10, 17),
                 // (10,17): error CS1003: Syntax error, '[' expected
                 //         int d, e(out var x4); // parsed as a broken bracketed argument list on the declarator
-                Diagnostic(ErrorCode.ERR_SyntaxError, "(")
-                    .WithArguments("[")
-                    .WithLocation(10, 17),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(10, 17),
                 // (10,28): error CS1003: Syntax error, ']' expected
                 //         int d, e(out var x4); // parsed as a broken bracketed argument list on the declarator
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                    .WithArguments("]")
-                    .WithLocation(10, 28),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(10, 28),
                 // (6,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
                 //         int[out var x1] a = null; // fatal syntax error - 'out' is skipped
                 Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[out var x1]")
@@ -24431,14 +24399,10 @@ unsafe struct S
             compilation.VerifyDiagnostics(
                 // (4,18): error CS1003: Syntax error, ',' expected
                 //     fixed int F1[out var x1, x1];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(4, 18),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(4, 18),
                 // (4,26): error CS1003: Syntax error, ',' expected
                 //     fixed int F1[out var x1, x1];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x1")
-                    .WithArguments(",")
-                    .WithLocation(4, 26),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x1").WithArguments(",").WithLocation(4, 26),
                 // (4,17): error CS7092: A fixed buffer may only have one dimension.
                 //     fixed int F1[out var x1, x1];
                 Diagnostic(ErrorCode.ERR_FixedBufferTooManyDimensions, "[out var x1, x1]")
@@ -25719,8 +25683,7 @@ public class X
                 .Verify(
                     // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //             var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(87, 13),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
                     // (29,57): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //         using (var d,e(Dummy(TakeOutParam(true, out var x4), x4)))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
@@ -26188,8 +26151,7 @@ public unsafe class X
                 .Verify(
                     // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //             var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(87, 13),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
                     // (29,58): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                     //         fixed (int* p,e(Dummy(TakeOutParam(true, out var x4) && x4)))
                     Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
@@ -26956,14 +26918,10 @@ public unsafe struct X
             compilation.VerifyDiagnostics(
                 // (8,22): error CS1003: Syntax error, ',' expected
                 //     fixed bool Test3[out var x3];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "out")
-                    .WithArguments(",")
-                    .WithLocation(8, 22),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "out").WithArguments(",").WithLocation(8, 22),
                 // (8,30): error CS1003: Syntax error, ',' expected
                 //     fixed bool Test3[out var x3];
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x3")
-                    .WithArguments(",")
-                    .WithLocation(8, 30),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x3").WithArguments(",").WithLocation(8, 30),
                 // (8,21): error CS7092: A fixed buffer may only have one dimension.
                 //     fixed bool Test3[out var x3];
                 Diagnostic(ErrorCode.ERR_FixedBufferTooManyDimensions, "[out var x3]")
@@ -27645,8 +27603,7 @@ static bool TakeOutParam(object y, out bool x)
                 compilation.VerifyDiagnostics(
                     // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(74, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
                     // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
                     //         Dummy(x6 && TakeOutParam(true, out var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -27766,8 +27723,7 @@ static bool TakeOutParam(object y, out bool x)
                         .WithLocation(20, 42),
                     // (74,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(74, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(74, 5),
                     // (25,15): error CS0841: Cannot use local variable 'x6' before it is declared
                     //         Dummy(x6 && TakeOutParam(true, out var x6))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -28033,8 +27989,7 @@ static class Helpers
                 compilation.VerifyDiagnostics(
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
                     // foreach (var i in Dummy(x6 && TakeOutParam(true, out var x6)))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -28162,8 +28117,7 @@ static class Helpers
                         .WithLocation(15, 52),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (18,25): error CS0841: Cannot use local variable 'x6' before it is declared
                     // foreach (var i in Dummy(x6 && TakeOutParam(true, out var x6)))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -29565,8 +29519,7 @@ static bool TakeOutParam<T>(T y, out T x)
                 compilation.VerifyDiagnostics(
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (18,14): error CS0841: Cannot use local variable 'x6' before it is declared
                     // using (Dummy(x6 && TakeOutParam(true, out var x6)))
                     Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
@@ -29717,8 +29670,7 @@ static bool TakeOutParam<T>(T y, out T x)
                         .WithLocation(51, 27),
                     // (52,5): error CS1023: Embedded statement cannot be a declaration or labeled statement
                     //     var y12 = 12;
-                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
-                        .WithLocation(52, 5),
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(52, 5),
                     // (52,9): warning CS0219: The variable 'y12' is assigned but its value is never used
                     //     var y12 = 12;
                     Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
@@ -30780,8 +30732,7 @@ class H
                     Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
                     // (11,1): error CS7020: Cannot use 'yield' in top-level script code
                     // yield return H.Dummy(H.TakeOutParam(41, out int x4),
-                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
-                        .WithLocation(11, 1),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
                     // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
                     //     H.Dummy(x1, x2, x3, x4);
                     Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
@@ -30958,8 +30909,7 @@ class H
                     Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(8, 1),
                     // (11,1): error CS7020: Cannot use 'yield' in top-level script code
                     // yield return H.Dummy(H.TakeOutParam(41, out var x4),
-                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield")
-                        .WithLocation(11, 1),
+                    Diagnostic(ErrorCode.ERR_YieldNotAllowedInScript, "yield").WithLocation(11, 1),
                     // (16,17): error CS0229: Ambiguity between 'x2' and 'x2'
                     //     H.Dummy(x1, x2, x3, x4);
                     Diagnostic(ErrorCode.ERR_AmbigMember, "x2")
@@ -41274,8 +41224,7 @@ class C
                     .WithLocation(6, 83),
                 // (6,39): error CS8081: Expression does not have a name.
                 //         void Local2(bool b = M(nameof(M(out int z1)), z1), int s2 = z1) { var t = z1; }
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)")
-                    .WithLocation(6, 39),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)").WithLocation(6, 39),
                 // (6,30): error CS1736: Default parameter value for 'b' must be a compile-time constant
                 //         void Local2(bool b = M(nameof(M(out int z1)), z1), int s2 = z1) { var t = z1; }
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "M(nameof(M(out int z1)), z1)")
@@ -41293,8 +41242,7 @@ class C
                     .WithLocation(7, 83),
                 // (7,39): error CS8081: Expression does not have a name.
                 //         void Local5(bool b = M(nameof(M(out var z2)), z2), int s2 = z2) { var t = z2; }
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)")
-                    .WithLocation(7, 39),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)").WithLocation(7, 39),
                 // (7,30): error CS1736: Default parameter value for 'b' must be a compile-time constant
                 //         void Local5(bool b = M(nameof(M(out var z2)), z2), int s2 = z2) { var t = z2; }
                 Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "M(nameof(M(out var z2)), z2)")
@@ -41498,16 +41446,14 @@ class C
             compilation.VerifyDiagnostics(
                 // (8,28): error CS8081: Expression does not have a name.
                 //             case !M(nameof(M(out int z1)), z1):
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)")
-                    .WithLocation(8, 28),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)").WithLocation(8, 28),
                 // (8,18): error CS0150: A constant value is expected
                 //             case !M(nameof(M(out int z1)), z1):
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "!M(nameof(M(out int z1)), z1)")
                     .WithLocation(8, 18),
                 // (11,28): error CS8081: Expression does not have a name.
                 //             case !M(nameof(M(out var z2)), z2):
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)")
-                    .WithLocation(11, 28),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)").WithLocation(11, 28),
                 // (11,18): error CS0150: A constant value is expected
                 //             case !M(nameof(M(out var z2)), z2):
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "!M(nameof(M(out var z2)), z2)")
@@ -41557,8 +41503,7 @@ class C
             compilation.VerifyDiagnostics(
                 // (5,29): error CS8081: Expression does not have a name.
                 //     const bool b = M(nameof(M(out var z2)), z2);
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)")
-                    .WithLocation(5, 29),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)").WithLocation(5, 29),
                 // (5,20): error CS0133: The expression being assigned to 'C.b' must be constant
                 //     const bool b = M(nameof(M(out var z2)), z2);
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "M(nameof(M(out var z2)), z2)")
@@ -41576,8 +41521,7 @@ class C
                     .WithLocation(6, 26),
                 // (4,29): error CS8081: Expression does not have a name.
                 //     const bool a = M(nameof(M(out int z1)), z1);
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)")
-                    .WithLocation(4, 29),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)").WithLocation(4, 29),
                 // (4,20): error CS0133: The expression being assigned to 'C.a' must be constant
                 //     const bool a = M(nameof(M(out int z1)), z1);
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "M(nameof(M(out int z1)), z1)")
@@ -41622,8 +41566,7 @@ class C
             compilation.VerifyDiagnostics(
                 // (6,33): error CS8081: Expression does not have a name.
                 //         const bool a = M(nameof(M(out int z1)), z1);
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)")
-                    .WithLocation(6, 33),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out int z1)").WithLocation(6, 33),
                 // (6,24): error CS0133: The expression being assigned to 'a' must be constant
                 //         const bool a = M(nameof(M(out int z1)), z1);
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "M(nameof(M(out int z1)), z1)")
@@ -41631,8 +41574,7 @@ class C
                     .WithLocation(6, 24),
                 // (7,33): error CS8081: Expression does not have a name.
                 //         const bool b = M(nameof(M(out var z2)), z2);
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)")
-                    .WithLocation(7, 33),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(out var z2)").WithLocation(7, 33),
                 // (7,24): error CS0133: The expression being assigned to 'b' must be constant
                 //         const bool b = M(nameof(M(out var z2)), z2);
                 Diagnostic(ErrorCode.ERR_NotConstantExpression, "M(nameof(M(out var z2)), z2)")
@@ -42458,8 +42400,7 @@ public class C
                 Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "int y").WithLocation(6, 23),
                 // (6,9): error CS0226: An __arglist expression may only appear inside of a call or new expression
                 //         __arglist(out int y);
-                Diagnostic(ErrorCode.ERR_IllegalArglist, "__arglist(out int y)")
-                    .WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_IllegalArglist, "__arglist(out int y)").WithLocation(6, 9),
                 // (7,27): error CS8197: Cannot infer the type of implicitly-typed out variable 'z'.
                 //         __arglist(out var z);
                 Diagnostic(ErrorCode.ERR_TypeInferenceFailedForImplicitlyTypedOutVariable, "z")
@@ -42470,8 +42411,7 @@ public class C
                 Diagnostic(ErrorCode.ERR_CantUseInOrOutInArglist, "var z").WithLocation(7, 23),
                 // (7,9): error CS0226: An __arglist expression may only appear inside of a call or new expression
                 //         __arglist(out var z);
-                Diagnostic(ErrorCode.ERR_IllegalArglist, "__arglist(out var z)")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_IllegalArglist, "__arglist(out var z)").WithLocation(7, 9)
             );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -43110,8 +43050,7 @@ public class MyAttribute : System.Attribute
             comp.VerifyDiagnostics(
                 // (6,13): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //         [My(M2(out var x))]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "M2(out var x)")
-                    .WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "M2(out var x)").WithLocation(6, 13),
                 // (7,14): warning CS8321: The local function 'local' is declared but never used
                 //         void local(int parameter) { }
                 Diagnostic(ErrorCode.WRN_UnreferencedLocalFunction, "local")

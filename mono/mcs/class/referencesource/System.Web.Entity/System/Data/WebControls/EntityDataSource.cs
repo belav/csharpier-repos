@@ -963,10 +963,7 @@ namespace System.Web.UI.WebControls
         /// An event fired just prior to the ObjectContext being disposed.
         /// It is cancellable in case the user needs to hold onto a reference to the Context.
         /// </summary>
-        [
-            Category("Data"),
-            ResourceDescription(WebControlsRes.PropertyDescription_ContextDisposing)
-        ]
+        [Category("Data"), ResourceDescription(WebControlsRes.PropertyDescription_ContextDisposing)]
         public event EventHandler<EntityDataSourceContextDisposingEventArgs> ContextDisposing
         {
             add { View.ContextDisposing += value; }

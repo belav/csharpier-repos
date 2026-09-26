@@ -163,8 +163,7 @@ interface I1
                     Diagnostic(ErrorCode.ERR_FieldlikeEventsInRoStruct, "e").WithLocation(7, 32),
                     // (10,25): error CS8342: Field-like events are not allowed in readonly structs.
                     //     public event Action ei1;
-                    Diagnostic(ErrorCode.ERR_FieldlikeEventsInRoStruct, "ei1")
-                        .WithLocation(10, 25),
+                    Diagnostic(ErrorCode.ERR_FieldlikeEventsInRoStruct, "ei1").WithLocation(10, 25),
                     // (43,9): error CS1604: Cannot assign to 'e' because it is read-only
                     //         e = () => { };
                     Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "e")
@@ -467,8 +466,7 @@ public partial struct S
             comp.VerifyDiagnostics(
                 // (10,27): error CS8662: Both partial method declarations must be readonly or neither may be readonly
                 //     readonly partial void M()
-                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M")
-                    .WithLocation(10, 27),
+                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M").WithLocation(10, 27),
                 // (12,9): error CS1604: Cannot assign to 'i' because it is read-only
                 //         i++;
                 Diagnostic(ErrorCode.ERR_AssgReadonlyLocal, "i")
@@ -505,8 +503,7 @@ public partial struct S
             comp.VerifyDiagnostics(
                 // (10,18): error CS8662: Both partial method declarations must be readonly or neither may be readonly
                 //     partial void M()
-                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M")
-                    .WithLocation(10, 18)
+                Diagnostic(ErrorCode.ERR_PartialMethodReadOnlyDifference, "M").WithLocation(10, 18)
             );
 
             var method = comp.GetMember<NamedTypeSymbol>("S").GetMethod("M");
@@ -2393,8 +2390,7 @@ public struct S
                     .WithLocation(4, 15),
                 // (4,15): error CS0575: Only class types can contain destructors
                 //     readonly ~S() { }
-                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "S")
-                    .WithLocation(4, 15)
+                Diagnostic(ErrorCode.ERR_OnlyClassesCanContainDestructors, "S").WithLocation(4, 15)
             );
         }
 
@@ -2518,9 +2514,7 @@ public struct S
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "=>").WithLocation(6, 24),
                 // (6,24): error CS1003: Syntax error, ',' expected
                 //         M2(readonly () => 42);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(6, 24),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(6, 24),
                 // (6,27): error CS1002: ; expected
                 //         M2(readonly () => 42);
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "42").WithLocation(6, 27),

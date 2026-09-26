@@ -547,8 +547,7 @@ public static class E
                 // (4,16): warning CS0402: 'C.Main<T>()': an entry point cannot be generic or in a generic type
                 Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("C.Main<T>()"),
                 // (8,20): warning CS0402: 'C.CC<T>.Main()': an entry point cannot be generic or in a generic type
-                Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main")
-                    .WithArguments("C.CC<T>.Main()"),
+                Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("C.CC<T>.Main()"),
                 // (14,16): warning CS0402: 'D<T>.Main()': an entry point cannot be generic or in a generic type
                 Diagnostic(ErrorCode.WRN_MainCantBeGeneric, "Main").WithArguments("D<T>.Main()"),
                 // (18,20): warning CS0402: 'D<T>.DD.Main()': an entry point cannot be generic or in a generic type
@@ -1005,9 +1004,7 @@ interface I { }
             compilation.VerifyDiagnostics(
                 // (4,11): error CS1558: 'I' does not have a suitable static Main method
                 // interface I { }
-                Diagnostic(ErrorCode.ERR_NoMainInClass, "I")
-                    .WithArguments("I")
-                    .WithLocation(4, 11)
+                Diagnostic(ErrorCode.ERR_NoMainInClass, "I").WithArguments("I").WithLocation(4, 11)
             );
         }
 

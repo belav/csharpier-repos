@@ -3028,8 +3028,7 @@ class C
                         .WithArguments("M", "System.Action<string>"),
                     // (18,33): error CS1503: Argument 1: cannot convert from '<null>' to 'int'
                     //         var i2 = new Indexers()[null];
-                    Diagnostic(ErrorCode.ERR_BadArgType, "null")
-                        .WithArguments("1", "<null>", "int")
+                    Diagnostic(ErrorCode.ERR_BadArgType, "null").WithArguments("1", "<null>", "int")
                 );
         }
 
@@ -3585,9 +3584,7 @@ class C
                     .WithLocation(6, 19),
                 // (6,19): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         var ptr = &s2;
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s2")
-                    .WithArguments("S2")
-                    .WithLocation(6, 19)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s2").WithArguments("S2").WithLocation(6, 19)
             );
 
             comp = CreateCompilation(
@@ -3670,9 +3667,7 @@ class C
                     .WithLocation(4, 23),
                 // (4,23): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //     unsafe void M(S2* ptr)
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "ptr")
-                    .WithArguments("S2")
-                    .WithLocation(4, 23)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "ptr").WithArguments("S2").WithLocation(4, 23)
             );
 
             comp = CreateCompilation(
@@ -3714,9 +3709,7 @@ class C
                     .WithLocation(6, 9),
                 // (6,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         S2* span = stackalloc S2[16];
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
-                    .WithArguments("S2")
-                    .WithLocation(6, 9),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*").WithArguments("S2").WithLocation(6, 9),
                 // (6,31): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         S2* span = stackalloc S2[16];
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "S2")
@@ -3727,9 +3720,7 @@ class C
                     .WithLocation(6, 31),
                 // (6,31): error CS0208: Cannot take the address of, get the size of, or declare a pointer to a managed type ('S2')
                 //         S2* span = stackalloc S2[16];
-                Diagnostic(ErrorCode.ERR_ManagedAddr, "S2")
-                    .WithArguments("S2")
-                    .WithLocation(6, 31),
+                Diagnostic(ErrorCode.ERR_ManagedAddr, "S2").WithArguments("S2").WithLocation(6, 31),
                 // (7,9): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         S2* span2 = stackalloc [] { default(S2) };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "S2*")
@@ -3740,9 +3731,7 @@ class C
                     .WithLocation(7, 9),
                 // (7,9): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         S2* span2 = stackalloc [] { default(S2) };
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*")
-                    .WithArguments("S2")
-                    .WithLocation(7, 9),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "S2*").WithArguments("S2").WithLocation(7, 9),
                 // (7,21): error CS0012: The type 'S1' is defined in an assembly that is not referenced. You must add a reference to assembly 'libS1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'.
                 //         S2* span2 = stackalloc [] { default(S2) };
                 Diagnostic(ErrorCode.ERR_NoTypeDef, "stackalloc [] { default(S2) }")
@@ -3825,9 +3814,7 @@ class C
                     .WithLocation(7, 26),
                 // (7,26): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('S2')
                 //         fixed (S2* ptr = &s2)
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s2")
-                    .WithArguments("S2")
-                    .WithLocation(7, 26)
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "&s2").WithArguments("S2").WithLocation(7, 26)
             );
 
             comp = CreateCompilation(

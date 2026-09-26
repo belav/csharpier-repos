@@ -166,20 +166,7 @@ namespace System.Xml.Schema
             /*ValidatorState.Text/      /*ValidatorState.WS/*       /*ValidatorState.EndElement*/
             /*ValidatorState.SkipToEndElement*/
             /*ValidatorState.Finish*/
-            /*ValidatorState.None*/{
-                true,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-                false,
-            },
+            /*ValidatorState.None*/{ true, true, false, false, false, false, false, false, false, false, false, false },
             /*ValidatorState.Start*/{ false, true, true, true, true, false, false, false, false, false, false, true },
             /*ValidatorState.TopLevelAttribute*/{ false, false, false, false, false, false, false, false, false, false, false, true },
             /*ValidatorState.TopLevelTextOrWS*/{ false, false, false, true, true, false, false, false, false, false, false, true },

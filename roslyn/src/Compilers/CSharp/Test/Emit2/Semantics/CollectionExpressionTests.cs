@@ -220,8 +220,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(6, 21),
                 // (7,17): error CS9176: There is no target type for the collection expression.
                 //         var z = [];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
-                    .WithLocation(7, 17)
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 17)
             );
 
             var tree = comp.SyntaxTrees[0];
@@ -737,8 +736,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(13, 18),
                 // (13,21): error CS8506: No best type was found for the switch expression.
                 //         var y2 = [i switch { _ => default }];
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
-                    .WithLocation(13, 21),
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(13, 21),
                 // (14,18): error CS9176: There is no target type for the collection expression.
                 //         var z2 = [i == 0 ? null : default];
                 Diagnostic(
@@ -4502,16 +4500,13 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,9): error CS9176: There is no target type for the collection expression.
                 //         [].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
-                    .WithLocation(5, 9),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(5, 9),
                 // (6,9): error CS9176: There is no target type for the collection expression.
                 //         []?.GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
-                    .WithLocation(6, 9),
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(6, 9),
                 // (7,9): error CS9176: There is no target type for the collection expression.
                 //         [][0].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 9)
             );
         }
 
@@ -4541,8 +4536,7 @@ static class Program
                     .WithLocation(6, 9),
                 // (7,9): error CS9176: There is no target type for the collection expression.
                 //         [3][0].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]")
-                    .WithLocation(7, 9)
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[3]").WithLocation(7, 9)
             );
         }
 
@@ -4572,8 +4566,7 @@ static class Program
                     .WithLocation(6, 13),
                 // (7,13): error CS9176: There is no target type for the collection expression.
                 //         _ = [][0].GetHashCode();
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
-                    .WithLocation(7, 13)
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(7, 13)
             );
         }
 
@@ -7475,9 +7468,7 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (8,45): error CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
                 //     static T Create1<T>() where T : IAdd => [1]; // 1
-                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[1]")
-                    .WithArguments("T")
-                    .WithLocation(8, 45),
+                Diagnostic(ErrorCode.ERR_NoNewTyvar, "[1]").WithArguments("T").WithLocation(8, 45),
                 // (9,52): error CS0304: Cannot create an instance of the variable type 'T' because it does not have the new() constraint
                 //     static T Create2<T>() where T : class, IAdd => [2]; // 2
                 Diagnostic(ErrorCode.ERR_NoNewTyvar, "[2]").WithArguments("T").WithLocation(9, 52)
@@ -8212,8 +8203,7 @@ static class Program
             comp.VerifyEmitDiagnostics(
                 // (5,26): error CS9176: There is no target type for the collection expression.
                 //         var a = [1, 2, ..[]];
-                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]")
-                    .WithLocation(5, 26)
+                Diagnostic(ErrorCode.ERR_CollectionExpressionNoTargetType, "[]").WithLocation(5, 26)
             );
         }
 
@@ -25226,8 +25216,7 @@ partial class Program
                         .WithLocation(7, 9),
                     // (7,9): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                     //         [] as List<int>;
-                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[] as List<int>")
-                        .WithLocation(7, 9)
+                    Diagnostic(ErrorCode.ERR_IllegalStatement, "[] as List<int>").WithLocation(7, 9)
                 );
         }
 

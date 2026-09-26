@@ -764,9 +764,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
                     Handle,
                     out _,
                     // Filter out [IsUnmanagedAttribute]
-                    HasUnmanagedTypeConstraint
-                        ? AttributeDescription.IsUnmanagedAttribute
-                        : default
+                    HasUnmanagedTypeConstraint ? AttributeDescription.IsUnmanagedAttribute : default
                 );
 
                 ImmutableInterlocked.InterlockedInitialize(

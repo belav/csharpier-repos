@@ -4222,8 +4222,7 @@ public interface I1
                 compilation1.VerifyEmitDiagnostics(
                     // (4,25): error CS8050: Only auto-implemented properties can have initializers.
                     //     static abstract int P1 {get; set;} = 0;
-                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "P1")
-                        .WithLocation(4, 25)
+                    Diagnostic(ErrorCode.ERR_InitializerOnNonAutoProperty, "P1").WithLocation(4, 25)
                 );
 
                 var p1 = compilation1.GetMember<PropertySymbol>("I1.P1");
@@ -9186,8 +9185,7 @@ class Test1 : I1
                     Diagnostic(ErrorCode.ERR_AddOrRemoveExpected, "set").WithLocation(7, 9),
                     // (4,25): error CS0065: 'I1.E1': event property must have both add and remove accessors
                     //     event System.Action E1
-                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1")
-                        .WithArguments("I1.E1"),
+                    Diagnostic(ErrorCode.ERR_EventNeedsBothAccessors, "E1").WithArguments("I1.E1"),
                 },
                 haveAdd: false,
                 haveRemove: false,
@@ -15271,8 +15269,7 @@ interface I2
                 Diagnostic(ErrorCode.ERR_PartialMethodNotExplicit, "M7").WithLocation(19, 21),
                 // (25,18): error CS0751: A partial method must be declared within a partial type
                 //     partial void M8();
-                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M8")
-                    .WithLocation(25, 18)
+                Diagnostic(ErrorCode.ERR_PartialMethodOnlyInPartialClass, "M8").WithLocation(25, 18)
             );
         }
 
@@ -19936,9 +19933,7 @@ class Test1 : I1
                 TargetFramework.Standard,
                 // (9,12): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     int I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
-                    .WithArguments("I1.P1")
-                    .WithLocation(9, 12)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 12)
             );
         }
 
@@ -26984,9 +26979,7 @@ class Test1 : I1
                 TargetFramework.NetCoreApp,
                 // (9,12): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     int I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
-                    .WithArguments("I1.P1")
-                    .WithLocation(9, 12)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 12)
             );
         }
 
@@ -36275,9 +36268,7 @@ class Test1 : I1
                 TargetFramework.Standard,
                 // (9,28): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     event System.Action I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
-                    .WithArguments("I1.P1")
-                    .WithLocation(9, 28)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 28)
             );
         }
 
@@ -39169,9 +39160,7 @@ class Test2
                     .WithLocation(8, 12),
                 // (9,12): error CS0122: 'I1.P2' is inaccessible due to its protection level
                 //         I1.P2 -= null;
-                Diagnostic(ErrorCode.ERR_BadAccess, "P2")
-                    .WithArguments("I1.P2")
-                    .WithLocation(9, 12)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P2").WithArguments("I1.P2").WithLocation(9, 12)
             );
         }
 
@@ -39821,9 +39810,7 @@ class Test1 : I1
                 TargetFramework.NetCoreApp,
                 // (9,28): error CS0122: 'I1.P1' is inaccessible due to its protection level
                 //     event System.Action I1.P1
-                Diagnostic(ErrorCode.ERR_BadAccess, "P1")
-                    .WithArguments("I1.P1")
-                    .WithLocation(9, 28)
+                Diagnostic(ErrorCode.ERR_BadAccess, "P1").WithArguments("I1.P1").WithLocation(9, 28)
             );
         }
 
@@ -86137,8 +86124,7 @@ interface IC
                     .WithLocation(9, 30),
                 // (14,20): error CS8146: Properties which return by reference must have a get accessor
                 //     static ref int PC { set;}
-                Diagnostic(ErrorCode.ERR_RefPropertyMustHaveGetAccessor, "PC")
-                    .WithLocation(14, 20)
+                Diagnostic(ErrorCode.ERR_RefPropertyMustHaveGetAccessor, "PC").WithLocation(14, 20)
             );
         }
 
@@ -86175,8 +86161,7 @@ interface IC
                     .WithLocation(9, 23),
                 // (14,13): error CS8146: Properties which return by reference must have a get accessor
                 //     ref int PC { set;}
-                Diagnostic(ErrorCode.ERR_RefPropertyMustHaveGetAccessor, "PC")
-                    .WithLocation(14, 13)
+                Diagnostic(ErrorCode.ERR_RefPropertyMustHaveGetAccessor, "PC").WithLocation(14, 13)
             );
         }
 
@@ -86228,8 +86213,7 @@ interface IC
                     .WithLocation(9, 30),
                 // (14,20): error CS8146: Properties which return by reference must have a get accessor
                 //     sealed ref int PC { set;}
-                Diagnostic(ErrorCode.ERR_RefPropertyMustHaveGetAccessor, "PC")
-                    .WithLocation(14, 20),
+                Diagnostic(ErrorCode.ERR_RefPropertyMustHaveGetAccessor, "PC").WithLocation(14, 20),
                 // (14,25): error CS0501: 'IC.PC.set' must declare a body because it is not marked abstract, extern, or partial
                 //     sealed ref int PC { set;}
                 Diagnostic(ErrorCode.ERR_ConcreteMissingBody, "set")

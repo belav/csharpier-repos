@@ -482,9 +482,7 @@ namespace System.Text.RegularExpressions
                     // {One/Notone/Set}loops can be upgraded to {One/Notone/Set}loopatomic nodes, e.g. [abc]* => (?>[abc]*).
                     // And {One/Notone/Set}lazys can similarly be upgraded to be atomic, which really makes them into repeaters
                     // or even empty nodes.
-                    case RegexNodeKind.Oneloop
-                    or RegexNodeKind.Notoneloop
-                    or RegexNodeKind.Setloop:
+                    case RegexNodeKind.Oneloop or RegexNodeKind.Notoneloop or RegexNodeKind.Setloop:
                     case RegexNodeKind.Onelazy or RegexNodeKind.Notonelazy or RegexNodeKind.Setlazy:
                         node.MakeLoopAtomic();
                         break;

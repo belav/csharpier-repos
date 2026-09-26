@@ -2198,8 +2198,7 @@ class Outer
                 .VerifyDiagnostics(
                     // (16,17): error CS0079: The event 'Outer.Goo.Q' can only appear on the left hand side of += or -=
                     //                 Q();
-                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "Q")
-                        .WithArguments("Outer.Goo.Q")
+                    Diagnostic(ErrorCode.ERR_BadEventUsageNoField, "Q").WithArguments("Outer.Goo.Q")
                 );
         }
 

@@ -446,8 +446,7 @@ public class Point
                 Diagnostic(ErrorCode.ERR_IllegalSuppression, "(default)!").WithLocation(22, 21),
                 // (22,22): error CS8715: Duplicate null suppression operator ('!')
                 //         if (i is < ((default)!!)) {} // error 15
-                Diagnostic(ErrorCode.ERR_DuplicateNullSuppression, "default")
-                    .WithLocation(22, 22),
+                Diagnostic(ErrorCode.ERR_DuplicateNullSuppression, "default").WithLocation(22, 22),
                 // (22,22): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
                 //         if (i is < ((default)!!)) {} // error 15
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(22, 22),
@@ -478,9 +477,7 @@ public class Point
                 Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(26, 20),
                 // (26,28): error CS1003: Syntax error, ',' expected
                 //         if (i is ((default)!)) {} // error 17
-                Diagnostic(ErrorCode.ERR_SyntaxError, "!")
-                    .WithArguments(",")
-                    .WithLocation(26, 28),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "!").WithArguments(",").WithLocation(26, 28),
                 // (26,29): error CS1525: Invalid expression term ')'
                 //         if (i is ((default)!)) {} // error 17
                 Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")

@@ -41,8 +41,7 @@ public unsafe class C
                 )
                 .VerifyDiagnostics(
                     // (7,20): error CS0029: Cannot implicitly convert type 'dynamic' to 'void*'
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "d")
-                        .WithArguments("dynamic", "void*"),
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "d").WithArguments("dynamic", "void*"),
                     // (8,19): error CS0030: Cannot convert type 'dynamic' to 'int*'
                     Diagnostic(ErrorCode.ERR_NoExplicitConv, "(int*)d")
                         .WithArguments("dynamic", "int*")
@@ -311,8 +310,7 @@ class B : A
                     Diagnostic(ErrorCode.WRN_NewRequired, "I")
                         .WithArguments("B.I(ref object)", "A.I(ref dynamic)"),
                     // (12,20): warning CS0108: 'B.F(int)' hides inherited member 'A.F(int)'. Use the new keyword if hiding was intended.
-                    Diagnostic(ErrorCode.WRN_NewRequired, "F")
-                        .WithArguments("B.F(int)", "A.F(int)")
+                    Diagnostic(ErrorCode.WRN_NewRequired, "F").WithArguments("B.F(int)", "A.F(int)")
                 );
         }
 
@@ -3400,8 +3398,7 @@ class C : List<int>
                         .WithLocation(43, 55),
                     // (46,59): error CS8382: Invalid object creation
                     //         Expression<Func<dynamic, dynamic>> e21 = x => new dynamic();
-                    Diagnostic(ErrorCode.ERR_InvalidObjectCreation, "dynamic")
-                        .WithLocation(46, 59),
+                    Diagnostic(ErrorCode.ERR_InvalidObjectCreation, "dynamic").WithLocation(46, 59),
                     // (25,52): error CS1963: An expression tree may not contain a dynamic operation
                     //         Expression<Func<C>> e0 = () => new C { P = d };
                     Diagnostic(ErrorCode.ERR_ExpressionTreeContainsDynamicOperation, "d")

@@ -1497,8 +1497,7 @@ public class InterceptorsTests : CSharpTestBase
         compilation.VerifyEmitDiagnostics(
             // Program.cs(7,13): error CS9160: A nameof operator cannot be intercepted.
             //         _ = nameof(Main);
-            Diagnostic(ErrorCode.ERR_InterceptorCannotInterceptNameof, "nameof")
-                .WithLocation(7, 13)
+            Diagnostic(ErrorCode.ERR_InterceptorCannotInterceptNameof, "nameof").WithLocation(7, 13)
         );
     }
 

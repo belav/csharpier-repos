@@ -3773,9 +3773,7 @@ class C
             comp.VerifyDiagnostics(
                 // (8,34): error CS0110: The evaluation of the constant value for 'F' involves a circular definition
                 //         const int F = c.Sum(o => F);
-                Diagnostic(ErrorCode.ERR_CircConstValue, "F")
-                    .WithArguments("F")
-                    .WithLocation(8, 34)
+                Diagnostic(ErrorCode.ERR_CircConstValue, "F").WithArguments("F").WithLocation(8, 34)
             );
         }
 

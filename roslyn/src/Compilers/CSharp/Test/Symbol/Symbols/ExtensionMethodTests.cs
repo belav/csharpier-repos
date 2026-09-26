@@ -1576,9 +1576,7 @@ class B
                     .WithLocation(15, 20),
                 // (15,27): error CS0122: 'A.G()' is inaccessible due to its protection level
                 //         M(a.E(), A.F(), a.G());
-                Diagnostic(ErrorCode.ERR_BadAccess, "G")
-                    .WithArguments("A.G()")
-                    .WithLocation(15, 27)
+                Diagnostic(ErrorCode.ERR_BadAccess, "G").WithArguments("A.G()").WithLocation(15, 27)
             );
         }
 
@@ -4196,8 +4194,7 @@ namespace N
                     .WithLocation(9, 15),
                 // (4,5): hidden CS8019: Unnecessary using directive.
                 //     using X = N.S;
-                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = N.S;")
-                    .WithLocation(4, 5)
+                Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using X = N.S;").WithLocation(4, 5)
             );
         }
 

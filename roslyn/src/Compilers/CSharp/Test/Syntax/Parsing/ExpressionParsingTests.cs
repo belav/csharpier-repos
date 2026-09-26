@@ -1796,9 +1796,7 @@ class C
                 Diagnostic(ErrorCode.ERR_NamespaceUnexpected, keyword).WithLocation(1, 5),
                 // (2,2): error CS1525: Invalid expression term ')'
                 // ();
-                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")")
-                    .WithArguments(")")
-                    .WithLocation(2, 2)
+                Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")").WithLocation(2, 2)
             );
 
             N(SyntaxKind.CompilationUnit);

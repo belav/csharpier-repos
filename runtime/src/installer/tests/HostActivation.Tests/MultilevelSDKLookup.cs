@@ -99,10 +99,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: empty
             // Expected: no compatible version
-            RunTest()
-                .Should()
-                .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+            RunTest().Should().Fail().And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.4.1", "9999.3.4-dummy");
@@ -112,10 +109,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy
             // Reg: empty
             // Expected: no compatible version
-            RunTest()
-                .Should()
-                .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+            RunTest().Should().Fail().And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.3");
@@ -125,10 +119,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.4.1, 9999.3.4-dummy
             // Reg: 9999.3.3
             // Expected: no compatible version
-            RunTest()
-                .Should()
-                .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+            RunTest().Should().Fail().And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.4");
@@ -220,10 +211,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: empty
             // Expected: no compatible version
-            RunTest()
-                .Should()
-                .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+            RunTest().Should().Fail().And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.57", "9999.3.4-dummy");
@@ -233,10 +221,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: empty
             // Reg: 9999.3.57, 9999.3.4-dummy
             // Expected: no compatible version
-            RunTest()
-                .Should()
-                .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+            RunTest().Should().Fail().And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.300", "9999.7.304-global-dummy");
@@ -246,10 +231,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.3.300, 9999.7.304-global-dummy
             // Reg: 9999.3.57, 9999.3.4-dummy
             // Expected: no compatible version
-            RunTest()
-                .Should()
-                .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+            RunTest().Should().Fail().And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_regSdkBaseDir, "9999.3.304");
@@ -259,10 +241,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
             // Exe: 9999.3.300, 9999.7.304-global-dummy
             // Reg: 9999.3.57, 9999.3.4-dummy, 9999.3.304
             // Expected: no compatible version
-            RunTest()
-                .Should()
-                .Fail()
-                .And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
+            RunTest().Should().Fail().And.NotFindCompatibleSdk(globalJsonPath, requestedVersion);
 
             // Add SDK versions
             AddAvailableSdkVersions(_exeSdkBaseDir, "9999.3.399", "9999.3.399-dummy", "9999.3.400");
@@ -559,10 +538,7 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation
 
             // !!IMPORTANT!!: This test verifies the exact match of the entire output of the command (not a substring!)
             // This is important as the output of --list-sdks is considered machine readable and thus must not change even in a minor way (unintentionally)
-            RunTest("--list-sdks", multiLevelLookup)
-                .Should()
-                .Pass()
-                .And.HaveStdOut(expectedOutput);
+            RunTest("--list-sdks", multiLevelLookup).Should().Pass().And.HaveStdOut(expectedOutput);
         }
 
         [Theory]

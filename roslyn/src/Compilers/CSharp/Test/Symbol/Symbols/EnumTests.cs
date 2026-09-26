@@ -152,8 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols
                     Diagnostic(ErrorCode.ERR_BindToBogus, "E.B").WithArguments("E.B"),
                     // (10,13): error CS0019: Operator '+' cannot be applied to operands of type 'E' and 'int'
                     //         e = e + 1; // Dev10: operator '+' cannot be applied to operands of type 'E' and 'int'
-                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "e + 1")
-                        .WithArguments("+", "E", "int"),
+                    Diagnostic(ErrorCode.ERR_BadBinaryOps, "e + 1").WithArguments("+", "E", "int"),
                     // (11,13): error CS0023: Operator '~' cannot be applied to operand of type 'E'
                     //         e = ~e; // Dev10: operator '~' cannot be applied to operand of type 'E'
                     Diagnostic(ErrorCode.ERR_BadUnaryOp, "~e").WithArguments("~", "E")

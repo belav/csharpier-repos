@@ -3189,9 +3189,7 @@ public class MyAttribute : System.Attribute
                 Diagnostic(ErrorCode.ERR_RbraceExpected, ")").WithLocation(9, 27),
                 // (11,33): error CS1003: Syntax error, ',' expected
                 //             int sum1 = Sum(1, 2));
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")")
-                    .WithArguments(",")
-                    .WithLocation(11, 33),
+                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(",").WithLocation(11, 33),
                 // (12,33): error CS1003: Syntax error, ',' expected
                 //             int sum2 = Sum(1, 3));
                 Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments(",").WithLocation(12, 33)

@@ -1227,8 +1227,7 @@ public sealed class MyClass
                     .WithLocation(14, 13),
                 // file.cs(12,17): warning CS1717: Assignment made to same variable; did you mean to assign something else?
                 //                 result = result;
-                Diagnostic(ErrorCode.WRN_AssignmentToSelf, "result = result")
-                    .WithLocation(12, 17),
+                Diagnostic(ErrorCode.WRN_AssignmentToSelf, "result = result").WithLocation(12, 17),
             };
 
             string expectedFlowGraph =
@@ -1780,8 +1779,7 @@ public sealed class MyClass
             {
                 // file.cs(6,13): error CS8716: There is no target type for the default literal.
                 //             default:
-                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default")
-                    .WithLocation(6, 13),
+                Diagnostic(ErrorCode.ERR_DefaultLiteralNoTargetType, "default").WithLocation(6, 13),
                 // file.cs(6,20): error CS1002: ; expected
                 //             default:
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, ":").WithLocation(6, 20),
@@ -3661,8 +3659,7 @@ class Program
                     .WithLocation(6, 19),
                 // file.cs(6,19): error CS8506: No best type was found for the switch expression.
                 //         var r = 1 switch { };
-                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch")
-                    .WithLocation(6, 19),
+                Diagnostic(ErrorCode.ERR_SwitchExpressionNoBestType, "switch").WithLocation(6, 19),
             };
 
             string expectedFlowGraph =

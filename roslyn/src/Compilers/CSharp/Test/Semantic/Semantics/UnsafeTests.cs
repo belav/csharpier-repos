@@ -221,8 +221,7 @@ unsafe struct OuterStruct
                 .VerifyDiagnostics(
                     // (9,18): error CS1663: Fixed size buffer type must be one of the following: bool, byte, short, int, long, char, sbyte, ushort, uint, ulong, float or double
                     //     public fixed MyStruct<int> buf[16];
-                    Diagnostic(ErrorCode.ERR_IllegalFixedType, "MyStruct<int>")
-                        .WithLocation(9, 18)
+                    Diagnostic(ErrorCode.ERR_IllegalFixedType, "MyStruct<int>").WithLocation(9, 18)
                 );
         }
 
@@ -1009,8 +1008,7 @@ unsafe class C<T>
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "Unsafe()"),
                 // (4,25): error CS1736: Default parameter value for 'p' must be a compile-time constant
                 //      void Test(int* p = Unsafe()) //CS0214 * 2
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "Unsafe()")
-                    .WithArguments("p"),
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "Unsafe()").WithArguments("p"),
                 // (6,34): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         System.Action a1 = () => Unsafe(); //CS0214
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "Unsafe()"),
@@ -1026,8 +1024,7 @@ unsafe class C<T>
             {
                 // (4,25): error CS1736: Default parameter value for 'p' must be a compile-time constant
                 //      void Test(int* p = Unsafe()) //CS0214 * 2
-                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "Unsafe()")
-                    .WithArguments("p"),
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "Unsafe()").WithArguments("p"),
             };
 
             CompareUnsafeDiagnostics(template, expectedWithoutUnsafe, expectedWithUnsafe);
@@ -1863,8 +1860,7 @@ class Container<T> {{ }}
                     // CONSIDER: this differs slightly from dev10, but is clearer.
                     // (2,2): error CS0181: Attribute constructor parameter 'p' has type 'int*', which is not a valid attribute parameter type
                     // [A]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
-                        .WithArguments("p", "int*"),
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A").WithArguments("p", "int*"),
                     // (5,8): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                     //      A(int* p = null) { }
                     Diagnostic(ErrorCode.ERR_UnsafeNeeded, "int*"),
@@ -1874,8 +1870,7 @@ class Container<T> {{ }}
                     // CONSIDER: this differs slightly from dev10, but is clearer.
                     // (2,2): error CS0181: Attribute constructor parameter 'p' has type 'int*', which is not a valid attribute parameter type
                     // [A]
-                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A")
-                        .WithArguments("p", "int*"),
+                    Diagnostic(ErrorCode.ERR_BadAttributeParamType, "A").WithArguments("p", "int*"),
                 }
             );
         }
@@ -5034,8 +5029,7 @@ enum Color
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "func()").WithLocation(30, 14),
                     // (31,15): error CS0211: Cannot take the address of the given expression
                     //         p = &(local += local); //CS0211
-                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "local += local")
-                        .WithLocation(31, 15),
+                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "local += local").WithLocation(31, 15),
                     // (32,15): error CS0211: Cannot take the address of the given expression
                     //         p = &(local == 0 ? local : param); //CS0211
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "local == 0 ? local : param")
@@ -5098,8 +5092,7 @@ enum Color
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "new int[1]").WithLocation(52, 19),
                     // (53,19): error CS0211: Cannot take the address of the given expression
                     //         var s = &(array as object); //CS0208, CS0211 (managed)
-                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "array as object")
-                        .WithLocation(53, 19),
+                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "array as object").WithLocation(53, 19),
                     // (54,17): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('Action')
                     //         var t = &E; //CS0208
                     Diagnostic(ErrorCode.WRN_ManagedAddr, "&E")
@@ -5121,12 +5114,10 @@ enum Color
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "F += null").WithLocation(57, 19),
                     // (58,19): error CS0211: Cannot take the address of the given expression
                     //         var x = &(array is object); //CS0211
-                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "array is object")
-                        .WithLocation(58, 19),
+                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "array is object").WithLocation(58, 19),
                     // (59,19): error CS0211: Cannot take the address of the given expression
                     //         var y = &(array ?? array); //CS0208, CS0211 (managed)
-                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "array ?? array")
-                        .WithLocation(59, 19),
+                    Diagnostic(ErrorCode.ERR_InvalidAddrOp, "array ?? array").WithLocation(59, 19),
                     // (60,19): error CS0211: Cannot take the address of the given expression
                     //         var aa = &this; //CS0208
                     Diagnostic(ErrorCode.ERR_InvalidAddrOp, "this").WithLocation(60, 19),
@@ -5448,8 +5439,7 @@ unsafe struct S
                 .VerifyDiagnostics(
                     // (9,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
                     //         int* p = &s.x; //before capture
-                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
-                        .WithArguments("s")
+                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x").WithArguments("s")
                 );
         }
 
@@ -5475,8 +5465,7 @@ unsafe struct S
                 .VerifyDiagnostics(
                     // (11,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
                     //         int* p = &s.x; //after capture
-                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
-                        .WithArguments("s")
+                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x").WithArguments("s")
                 );
         }
 
@@ -5500,8 +5489,7 @@ unsafe struct S
                 .VerifyDiagnostics(
                     // (9,28): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
                     //         M(() => { int* p = &s.x; }); // in lambda
-                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
-                        .WithArguments("s")
+                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x").WithArguments("s")
                 );
         }
 
@@ -5527,8 +5515,7 @@ unsafe struct S
                 .VerifyDiagnostics(
                     // (9,18): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
                     //         int* p = &s.x; //only report the first
-                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
-                        .WithArguments("s")
+                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x").WithArguments("s")
                 );
         }
 
@@ -5558,8 +5545,7 @@ unsafe struct S
                     Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&x").WithArguments("x"),
                     // (11,23): error CS1686: Local 's' or its members cannot have their address taken and be used inside an anonymous method or lambda expression
                     //             int* p2 = &s.x;
-                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x")
-                        .WithArguments("s")
+                    Diagnostic(ErrorCode.ERR_LocalCantBeFixedAndHoisted, "&s.x").WithArguments("s")
                 );
         }
 
@@ -5768,8 +5754,7 @@ unsafe struct S
             compilation.VerifyDiagnostics(
                 // (4,19): warning CS0649: Field 'S.o' is never assigned to, and will always have its default value null
                 //     public object o;
-                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "o")
-                    .WithArguments("S.o", "null")
+                Diagnostic(ErrorCode.WRN_UnassignedInternalField, "o").WithArguments("S.o", "null")
             );
         }
 
@@ -8870,8 +8855,7 @@ class Program
                 .VerifyDiagnostics(
                     // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion exists (are you missing a cast?)
                     //         fixed (int* p = s) //can't convert char* to int*
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "s")
-                        .WithArguments("char*", "int*")
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "s").WithArguments("char*", "int*")
                 );
         }
 
@@ -8999,8 +8983,7 @@ class Program
                 .VerifyDiagnostics(
                     // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion exists (are you missing a cast?)
                     //         fixed (int* p = a) //can't convert char* to int*
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a")
-                        .WithArguments("char*", "int*")
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a").WithArguments("char*", "int*")
                 );
         }
 
@@ -9033,8 +9016,7 @@ class Program
                 .VerifyDiagnostics(
                     // (16,25): error CS0266: Cannot implicitly convert type 'char*' to 'int*'. An explicit conversion exists (are you missing a cast?)
                     //         fixed (int* p = a) //can't convert char* to int*
-                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a")
-                        .WithArguments("char*", "int*")
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "a").WithArguments("char*", "int*")
                 );
         }
 
@@ -10658,9 +10640,7 @@ class C<T> : A
             {
                 // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
                 //     private static C<T*[]> c;
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
-                    .WithArguments("T")
-                    .WithLocation(17, 28),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "c").WithArguments("T").WithLocation(17, 28),
                 // (14,24): warning CS0169: The field 'C<T>.b2' is never used
                 //     private static A.B b2;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "b2")
@@ -10702,9 +10682,7 @@ class C<T> : A
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "T*").WithLocation(10, 22),
                 // (17,28): warning CS8500: This takes the address of, gets the size of, or declares a pointer to a managed type ('T')
                 //     private static C<T*[]> c;
-                Diagnostic(ErrorCode.WRN_ManagedAddr, "c")
-                    .WithArguments("T")
-                    .WithLocation(17, 28),
+                Diagnostic(ErrorCode.WRN_ManagedAddr, "c").WithArguments("T").WithLocation(17, 28),
                 // (17,28): warning CS0169: The field 'C<T>.c' is never used
                 //     private static C<T*[]> c;
                 Diagnostic(ErrorCode.WRN_UnreferencedField, "c")

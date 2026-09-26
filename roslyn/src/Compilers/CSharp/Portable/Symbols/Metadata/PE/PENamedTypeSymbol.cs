@@ -1513,10 +1513,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE
 
                     // Create a dictionary of method symbols indexed by metadata handle
                     // (to allow efficient lookup when matching property accessors).
-                    PooledDictionary<
-                        MethodDefinitionHandle,
-                        PEMethodSymbol
-                    > methodHandleToSymbol = this.CreateMethods(nonFieldMembers);
+                    PooledDictionary<MethodDefinitionHandle, PEMethodSymbol> methodHandleToSymbol =
+                        this.CreateMethods(nonFieldMembers);
 
                     if (this.TypeKind == TypeKind.Struct)
                     {

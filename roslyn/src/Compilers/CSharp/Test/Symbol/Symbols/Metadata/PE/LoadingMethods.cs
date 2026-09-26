@@ -1662,17 +1662,13 @@ public class D
             comp.VerifyDiagnostics(
                 // (6,15): error CS0122: 'C.M()' is inaccessible due to its protection level
                 //       new C().M();
-                Diagnostic(ErrorCode.ERR_BadAccess, "M")
-                    .WithArguments("C.M()")
-                    .WithLocation(6, 15),
+                Diagnostic(ErrorCode.ERR_BadAccess, "M").WithArguments("C.M()").WithLocation(6, 15),
                 // (7,40): error CS0122: 'C.F' is inaccessible due to its protection level
                 //       System.Console.WriteLine(new C().F);
                 Diagnostic(ErrorCode.ERR_BadAccess, "F").WithArguments("C.F").WithLocation(7, 40),
                 // (8,13): error CS0122: 'C.C2' is inaccessible due to its protection level
                 //       new C.C2().M2();
-                Diagnostic(ErrorCode.ERR_BadAccess, "C2")
-                    .WithArguments("C.C2")
-                    .WithLocation(8, 13)
+                Diagnostic(ErrorCode.ERR_BadAccess, "C2").WithArguments("C.C2").WithLocation(8, 13)
             );
         }
     }

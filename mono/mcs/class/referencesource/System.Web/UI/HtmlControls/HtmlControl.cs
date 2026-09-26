@@ -67,10 +67,7 @@ namespace System.Web.UI.HtmlControls
         ///       server control tag within a selected ASP.NET page.
         ///    </para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public AttributeCollection Attributes
         {
             get
@@ -95,10 +92,7 @@ namespace System.Web.UI.HtmlControls
         ///       file.
         ///    </para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public CssStyleCollection Style
         {
             get { return Attributes.CssStyle; }

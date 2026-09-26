@@ -3520,10 +3520,7 @@ namespace System.Web.UI
         /// <devdoc>
         /// <para>Indicates whether the <see cref='System.Web.UI.StateBag'/> object is case-insensitive.</para>
         /// </devdoc>
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
-        ]
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         protected virtual bool ViewStateIgnoresCase
         {
             get { return false; }

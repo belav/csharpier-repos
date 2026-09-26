@@ -572,11 +572,7 @@ namespace System.IO.Ports
         }
 
         // timeout for all write operations.  May be set to SerialPort.InfiniteTimeout or any positive value
-        [
-            Browsable(true),
-            DefaultValue(defaultWriteTimeout),
-            MonitoringDescription(SR.WriteTimeout)
-        ]
+        [Browsable(true), DefaultValue(defaultWriteTimeout), MonitoringDescription(SR.WriteTimeout)]
         public int WriteTimeout
         {
             get { return writeTimeout; }

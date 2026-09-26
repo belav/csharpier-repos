@@ -2041,8 +2041,7 @@ class Derived : Base
                         .WithArguments("Base.field", "0"),
                     // (11,27): warning CS0067: The event 'Base.Event' is never used
                     //     public event Delegate Event;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
-                        .WithArguments("Base.Event")
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event").WithArguments("Base.Event")
                 );
         }
 
@@ -6302,8 +6301,7 @@ class Derived : Base
                         .WithArguments("Derived.Event"),
                     // (21,27): warning CS0067: The event 'Base.Event' is never used
                     //     public event Delegate Event;
-                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event")
-                        .WithArguments("Base.Event")
+                    Diagnostic(ErrorCode.WRN_UnreferencedEvent, "Event").WithArguments("Base.Event")
                 );
         }
 
@@ -6430,8 +6428,7 @@ class Derived : Base
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "this").WithArguments("S.this[int]"),
                     // (39,21): warning CS0109: The member 'D.Method()' does not hide an accessible member. The new keyword is not required.
                     //     public new void Method() { }
-                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Method")
-                        .WithArguments("D.Method()"),
+                    Diagnostic(ErrorCode.WRN_NewNotRequired, "Method").WithArguments("D.Method()"),
                     // (40,20): warning CS0109: The member 'D.Property' does not hide an accessible member. The new keyword is not required.
                     //     public new int Property { get { return 0; } }
                     Diagnostic(ErrorCode.WRN_NewNotRequired, "Property")
@@ -13337,8 +13334,7 @@ class Derived : Base
                 .VerifyDiagnostics(
                     // (10,52): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     public override void Goo<T>(T value) where T : class? { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "class?")
-                        .WithLocation(10, 52)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "class?").WithLocation(10, 52)
                 );
         }
 
@@ -13362,8 +13358,7 @@ class C : I
                 .VerifyDiagnostics(
                     // (10,38): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     void I.Goo<T>(T value) where T : class? { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "class?")
-                        .WithLocation(10, 38)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "class?").WithLocation(10, 38)
                 );
         }
 
@@ -13387,8 +13382,7 @@ class Derived : Base
                 .VerifyDiagnostics(
                     // (10,52): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     public override void Goo<T>(T value) where T : Stream { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream")
-                        .WithLocation(10, 52)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream").WithLocation(10, 52)
                 );
         }
 
@@ -13412,8 +13406,7 @@ class Derived : Base
                 .VerifyDiagnostics(
                     // (10,59): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     public override void Goo<T>(T value) where T : class, Stream { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream")
-                        .WithLocation(10, 59)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream").WithLocation(10, 59)
                 );
         }
 
@@ -13437,8 +13430,7 @@ class Derived : Base
                 .VerifyDiagnostics(
                     // (10,71): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     public override void Goo<T, U>(T value) where T : class where U Stream { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream")
-                        .WithLocation(10, 71)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream").WithLocation(10, 71)
                 );
         }
 
@@ -13462,8 +13454,7 @@ class C : I
                 .VerifyDiagnostics(
                     // (10,38): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     void I.Goo<T>(T value) where T : Stream { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream")
-                        .WithLocation(10, 38)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream").WithLocation(10, 38)
                 );
         }
 
@@ -13487,8 +13478,7 @@ class C : I
                 .VerifyDiagnostics(
                     // (10,45): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     void I.Goo<T>(T value) where T : class, Stream { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream")
-                        .WithLocation(10, 45)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream").WithLocation(10, 45)
                 );
         }
 
@@ -13512,8 +13502,7 @@ class C : I
                 .VerifyDiagnostics(
                     // (10,57): error CS0460: Constraints for override and explicit interface implementation methods are inherited from the base method, so they cannot be specified directly, except for either a 'class', or a 'struct' constraint.
                     //     void I.Goo<T, U>(T value) where T : class where U : Stream { }
-                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream")
-                        .WithLocation(10, 57)
+                    Diagnostic(ErrorCode.ERR_OverrideWithConstraints, "Stream").WithLocation(10, 57)
                 );
         }
 

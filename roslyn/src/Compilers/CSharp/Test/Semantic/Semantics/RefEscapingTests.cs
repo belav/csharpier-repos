@@ -933,8 +933,7 @@ class Program
                 .VerifyDiagnostics(
                     // (12,36): error CS8156: An expression cannot be used in this context because it may not be returned by reference
                     //         return ref ReturnsRef1(out var _);
-                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "var _")
-                        .WithLocation(12, 36),
+                    Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, "var _").WithLocation(12, 36),
                     // (12,20): error CS8347: Cannot use a result of 'Program.ReturnsRef1(out int)' in this context because it may expose variables referenced by parameter 'x' outside of their declaration scope
                     //         return ref ReturnsRef1(out var _);
                     Diagnostic(ErrorCode.ERR_EscapeCall, "ReturnsRef1(out var _)")

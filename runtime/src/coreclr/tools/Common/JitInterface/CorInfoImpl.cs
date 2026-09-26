@@ -2399,8 +2399,7 @@ namespace Internal.JitInterface
             if (buffer != null && result != 0)
             {
                 // Copy str's content to buffer
-                str.AsSpan(startIndex, Math.Min(size, result))
-                    .CopyTo(new Span<char>(buffer, size));
+                str.AsSpan(startIndex, Math.Min(size, result)).CopyTo(new Span<char>(buffer, size));
             }
             return result;
         }

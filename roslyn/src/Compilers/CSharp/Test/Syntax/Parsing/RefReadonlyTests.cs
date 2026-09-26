@@ -1149,9 +1149,7 @@ class Test
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "ref").WithLocation(1, 24),
                 // (1,24): error CS1003: Syntax error, ',' expected
                 // void M(readonly scoped ref int p);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "ref")
-                    .WithArguments(",")
-                    .WithLocation(1, 24),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "ref").WithArguments(",").WithLocation(1, 24),
             };
 
             UsingDeclaration(source, TestOptions.Regular11, expectedDiagnostics);

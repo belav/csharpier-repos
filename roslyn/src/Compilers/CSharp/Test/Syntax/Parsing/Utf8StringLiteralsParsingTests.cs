@@ -359,9 +359,7 @@ hello
                 @"1 L",
                 // (1,1): error CS1073: Unexpected token 'L'
                 // 1 L
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "1")
-                    .WithArguments("L")
-                    .WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "1").WithArguments("L").WithLocation(1, 1)
             );
 
             N(SyntaxKind.NumericLiteralExpression);

@@ -3385,8 +3385,7 @@ class Program
             compilation.VerifyDiagnostics(
                 // (17,11): warning CS0169: The field 'Program.Color' is never used
                 //     Color Color;
-                Diagnostic(ErrorCode.WRN_UnreferencedField, "Color")
-                    .WithArguments("Program.Color"),
+                Diagnostic(ErrorCode.WRN_UnreferencedField, "Color").WithArguments("Program.Color"),
                 // (18,19): warning CS0649: Field 'Program.Flavor' is never assigned to, and will always have its default value null
                 //     static Flavor Flavor;
                 Diagnostic(ErrorCode.WRN_UnassignedInternalField, "Flavor")

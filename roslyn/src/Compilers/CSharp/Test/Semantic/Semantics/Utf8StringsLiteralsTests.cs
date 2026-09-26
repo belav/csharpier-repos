@@ -5018,8 +5018,7 @@ class C
                     .WithLocation(7, 20),
                 // (7,26): error CS8156: An expression cannot be used in this context because it may not be passed or returned by reference
                 //         return ref Test3("cat"u8);
-                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, @"""cat""u8")
-                    .WithLocation(7, 26)
+                Diagnostic(ErrorCode.ERR_RefReturnLvalueExpected, @"""cat""u8").WithLocation(7, 26)
             );
         }
 

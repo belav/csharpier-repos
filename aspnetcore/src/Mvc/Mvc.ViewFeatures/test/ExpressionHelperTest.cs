@@ -173,10 +173,7 @@ public class ExpressionHelperTest
                 // ExpressionHelper treats static properties like other member accesses. Similarly to
                 // RazorPage.Model, name "Model" is ignored at LHS of these expressions. This is a rare case because
                 // static properties are the only leftmost member accesses that can reach beyond the current class.
-                {
-                    (Expression<Func<TestModel, string>>)(m => Model.Constants.Model.Name),
-                    "Name"
-                },
+                { (Expression<Func<TestModel, string>>)(m => Model.Constants.Model.Name), "Name" },
                 { (Expression<Func<TestModel, string>>)(m => AStaticClass.Model), string.Empty },
                 { (Expression<Func<TestModel, string>>)(m => AStaticClass.Test), "Test" },
                 {

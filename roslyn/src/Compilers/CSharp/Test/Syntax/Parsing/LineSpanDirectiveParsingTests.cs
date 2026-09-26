@@ -1525,8 +1525,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 options: null,
                 // (1,11): error CS8938: The #line directive value is missing or out of range
                 // #line (1, true) - (3, 4) "file.cs"
-                Diagnostic(ErrorCode.ERR_LineSpanDirectiveInvalidValue, "true")
-                    .WithLocation(1, 11)
+                Diagnostic(ErrorCode.ERR_LineSpanDirectiveInvalidValue, "true").WithLocation(1, 11)
             );
 
             N(SyntaxKind.LineSpanDirectiveTrivia);
@@ -1870,8 +1869,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                     .WithLocation(1, 38),
                 // (1,45): error CS8938: The #line directive value is missing or out of range
                 // #line (16707566, 65537) - (16707566, 65537) 65537 "file.cs"
-                Diagnostic(ErrorCode.ERR_LineSpanDirectiveInvalidValue, "65537")
-                    .WithLocation(1, 45)
+                Diagnostic(ErrorCode.ERR_LineSpanDirectiveInvalidValue, "65537").WithLocation(1, 45)
             );
 
             N(SyntaxKind.LineSpanDirectiveTrivia);

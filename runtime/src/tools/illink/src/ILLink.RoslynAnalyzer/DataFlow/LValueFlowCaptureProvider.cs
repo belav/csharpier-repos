@@ -61,10 +61,8 @@ namespace ILLink.RoslynAnalyzer.DataFlow
             // the flow graph. Specifically, for an ICoalesceOperation a flow capture acts
             // as both an r-value and l-value flow capture.
 
-            ImmutableDictionary<
-                CaptureId,
-                FlowCaptureKind
-            >.Builder? lvalueFlowCaptureIdBuilder = null;
+            ImmutableDictionary<CaptureId, FlowCaptureKind>.Builder? lvalueFlowCaptureIdBuilder =
+                null;
             var rvalueFlowCaptureIds = new HashSet<CaptureId>();
 
             foreach (

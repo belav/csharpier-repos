@@ -288,8 +288,7 @@ class Derived : Base
             compilation.VerifyDiagnostics(
                 // (2,17): error CS0731: The type forwarder for type 'Base' in assembly 'pe2' causes a cycle
                 // class Derived : Base
-                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
-                    .WithArguments("Base", "pe2"),
+                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base").WithArguments("Base", "pe2"),
                 // (2,17): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe2, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
                 // class Derived : Base
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
@@ -377,8 +376,7 @@ class Test
             compilation.VerifyDiagnostics(
                 // (6,9): error CS0731: The type forwarder for type 'Base' in assembly 'pe3' causes a cycle
                 //         Base b = new Base();
-                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
-                    .WithArguments("Base", "pe3"),
+                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base").WithArguments("Base", "pe3"),
                 // (6,9): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
@@ -388,8 +386,7 @@ class Test
                     ),
                 // (6,22): error CS0731: The type forwarder for type 'Base' in assembly 'pe3' causes a cycle
                 //         Base b = new Base();
-                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base")
-                    .WithArguments("Base", "pe3"),
+                Diagnostic(ErrorCode.ERR_CycleInTypeForwarder, "Base").WithArguments("Base", "pe3"),
                 // (6,22): error CS1070: The type name 'Base' could not be found. This type has been forwarded to assembly 'pe3, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null'. Consider adding a reference to that assembly.
                 //         Base b = new Base();
                 Diagnostic(ErrorCode.ERR_SingleTypeNameNotFoundFwd, "Base")
@@ -999,8 +996,7 @@ class Test
                         .WithArguments("LOWER"),
                     // (7,5): error CS0246: The type or namespace name 'lOwEr' could not be found (are you missing a using directive or an assembly reference?)
                     //     lOwEr.MIXED P4 { get; set; }
-                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "lOwEr")
-                        .WithArguments("lOwEr")
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "lOwEr").WithArguments("lOwEr")
                 );
         }
 

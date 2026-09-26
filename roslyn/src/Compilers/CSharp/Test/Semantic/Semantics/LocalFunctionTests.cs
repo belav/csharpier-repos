@@ -197,8 +197,7 @@ class C
             comp.VerifyDiagnostics(
                 // (16,21): error CS1996: Cannot await in the body of a lock statement
                 //                     await Task.Yield();
-                Diagnostic(ErrorCode.ERR_BadAwaitInLock, "await Task.Yield()")
-                    .WithLocation(16, 21)
+                Diagnostic(ErrorCode.ERR_BadAwaitInLock, "await Task.Yield()").WithLocation(16, 21)
             );
         }
 
@@ -735,8 +734,7 @@ class C
             comp.VerifyDiagnostics(
                 // (13,12): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //         [A(42 is int i)] // 1
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "42 is int i")
-                    .WithLocation(13, 12),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "42 is int i").WithLocation(13, 12),
                 // (16,17): error CS0103: The name 'i' does not exist in the current context
                 //             _ = i.ToString(); // 2
                 Diagnostic(ErrorCode.ERR_NameNotInContext, "i")
@@ -1447,8 +1445,7 @@ class C
                     .WithLocation(39, 18),
                 // (40,18): error CS7042: The DllImport attribute cannot be applied to a method that is generic or contained in a generic method or type.
                 //                 [DllImport("a")] extern static void local2<T2>(); // 8
-                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport")
-                    .WithLocation(40, 18)
+                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport").WithLocation(40, 18)
             );
         }
 
@@ -1558,8 +1555,7 @@ class C{classTypeParams}
                     .WithLocation(41, 22),
                 // (42,22): error CS7042: The DllImport attribute cannot be applied to a method that is generic or contained in a generic method or type.
                 //                     [DllImport("a")] extern static void local2<T2>(); // 12
-                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport")
-                    .WithLocation(42, 22)
+                Diagnostic(ErrorCode.ERR_DllImportOnGenericMethod, "DllImport").WithLocation(42, 22)
             );
         }
 
@@ -3824,9 +3820,7 @@ class Program
                 source,
                 // (8,14): error CS0159: No such label 'A' within the scope of the goto statement
                 //         goto A;
-                Diagnostic(ErrorCode.ERR_LabelNotFound, "A")
-                    .WithArguments("A")
-                    .WithLocation(8, 14),
+                Diagnostic(ErrorCode.ERR_LabelNotFound, "A").WithArguments("A").WithLocation(8, 14),
                 // (11,9): warning CS0164: This label has not been referenced
                 //         A:  Console.Write(2);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "A").WithLocation(11, 9)
@@ -4633,9 +4627,7 @@ class Program
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(8, 16),
                 // (13,17): error CS1003: Syntax error, ',' expected
                 //         int Bar => 2;
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>")
-                    .WithArguments(",")
-                    .WithLocation(13, 17),
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(13, 17),
                 // (13,20): error CS1002: ; expected
                 //         int Bar => 2;
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "2").WithLocation(13, 20),
@@ -7170,8 +7162,7 @@ class C
             comp.VerifyDiagnostics(
                 // (10,13): warning CS8602: Dereference of a possibly null reference.
                 //         _ = local1(null).ToString(); // 1
-                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "local1(null)")
-                    .WithLocation(10, 13)
+                Diagnostic(ErrorCode.WRN_NullReferenceReceiver, "local1(null)").WithLocation(10, 13)
             );
         }
 

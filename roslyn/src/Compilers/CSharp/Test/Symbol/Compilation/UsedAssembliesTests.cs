@@ -2807,8 +2807,7 @@ public class C2
 ",
                 // (2,1): hidden CS8020: Unused extern alias.
                 // extern alias N1C1;
-                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
-                    .WithLocation(2, 1)
+                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
             );
 
             verify1(
@@ -2881,8 +2880,7 @@ public class C2
 }",
                 // (2,1): hidden CS8020: Unused extern alias.
                 // extern alias N1C1;
-                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;")
-                    .WithLocation(2, 1)
+                Diagnostic(ErrorCode.HDN_UnusedExternAlias, "extern alias N1C1;").WithLocation(2, 1)
             );
 
             verify2(
@@ -4276,8 +4274,7 @@ public class C2
                 Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C1<S<C0>*[]>.E1.F1").WithLocation(6, 13),
                 // (6,13): error CS0214: Pointers and fixed size buffers may only be used in an unsafe context
                 //         _ = C1<S<C0>*[]>.E1.F1 + 1;
-                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C1<S<C0>*[]>.E1.F1 + 1")
-                    .WithLocation(6, 13)
+                Diagnostic(ErrorCode.ERR_UnsafeNeeded, "C1<S<C0>*[]>.E1.F1 + 1").WithLocation(6, 13)
             );
 
             verifyDiagnostics(

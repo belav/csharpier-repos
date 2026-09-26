@@ -5572,8 +5572,7 @@ namespace N3
                 .VerifyDiagnostics(
                     // (4,1): hidden CS8019: Unnecessary using directive.
                     // using N2;
-                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N2;")
-                        .WithLocation(4, 1),
+                    Diagnostic(ErrorCode.HDN_UnusedUsingDirective, "using N2;").WithLocation(4, 1),
                     // (13,31): error CS0117: 'int' does not contain a definition for 'Current'
                     //             foreach (var i in new C())
                     Diagnostic(ErrorCode.ERR_NoSuchMember, "new C()")

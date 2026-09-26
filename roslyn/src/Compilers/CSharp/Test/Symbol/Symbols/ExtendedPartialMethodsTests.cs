@@ -3323,8 +3323,7 @@ partial class C
             comp.VerifyDiagnostics(
                 // (5,25): error CS8817: Both partial method declarations must have the same return type.
                 //     public partial long M() => 42; // 1
-                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M")
-                    .WithLocation(5, 25)
+                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M").WithLocation(5, 25)
             );
 
             comp = CreateCompilation(
@@ -3335,8 +3334,7 @@ partial class C
             comp.VerifyDiagnostics(
                 // (5,25): error CS8817: Both partial method declarations must have the same return type.
                 //     public partial long M() => 42; // 1
-                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M")
-                    .WithLocation(5, 25)
+                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M").WithLocation(5, 25)
             );
         }
 
@@ -3357,8 +3355,7 @@ partial class C
             comp.VerifyDiagnostics(
                 // (5,24): error CS8817: Both partial method declarations must have the same return type.
                 //     public partial int M() => 42; // 1
-                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M")
-                    .WithLocation(5, 24)
+                Diagnostic(ErrorCode.ERR_PartialMethodReturnTypeDifference, "M").WithLocation(5, 24)
             );
         }
 
@@ -4081,8 +4078,7 @@ partial class C
                     .WithLocation(4, 27),
                 // (4,27): error CS8818: Partial method declarations must have matching ref return values.
                 //     public partial string F1() => null;
-                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "F1")
-                    .WithLocation(4, 27)
+                Diagnostic(ErrorCode.ERR_PartialMethodRefReturnDifference, "F1").WithLocation(4, 27)
             );
         }
 
